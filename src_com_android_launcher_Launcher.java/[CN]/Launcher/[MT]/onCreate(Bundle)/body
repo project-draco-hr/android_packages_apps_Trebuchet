@@ -1,0 +1,28 @@
+{
+  dalvik.system.VMRuntime.getRuntime().setMinimumHeapSize(4 * 1024 * 1024);
+  super.onCreate(savedInstanceState);
+  mInflater=getLayoutInflater();
+  if (PROFILE_STARTUP) {
+    android.os.Debug.startMethodTracing("/sdcard/launcher");
+  }
+  setWallpaperDimension();
+  enableSensors();
+  enableOpenGL();
+  if (sModel == null) {
+    sModel=new LauncherModel();
+  }
+  setContentView(R.layout.launcher);
+  setupViews();
+  registerIntentReceivers();
+  registerContentObservers();
+  mSavedState=savedInstanceState;
+  restoreState(mSavedState);
+  if (PROFILE_STARTUP) {
+    android.os.Debug.stopMethodTracing();
+  }
+  if (!mRestoring) {
+    startLoaders();
+  }
+  mDefaultKeySsb=new SpannableStringBuilder();
+  Selection.setSelection(mDefaultKeySsb,0);
+}

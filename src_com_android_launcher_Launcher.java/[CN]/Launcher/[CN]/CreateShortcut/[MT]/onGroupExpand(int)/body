@@ -1,0 +1,5 @@
+{
+  long packged=ExpandableListView.getPackedPositionForGroup(groupPosition);
+  int position=mList.getFlatListPosition(packged);
+  mList.setSelectionFromTop(position,0);
+}

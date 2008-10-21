@@ -1,0 +1,3 @@
+{
+  mList.get(childPosition).bindView(view);
+}

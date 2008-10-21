@@ -1,0 +1,7 @@
+{
+  if (REMOVE_SHORTCUT_ON_PACKAGE_REMOVE && Intent.ACTION_PACKAGE_REMOVED.equals(intent.getAction())) {
+    removeShortcutsForPackage(intent.getData().getSchemeSpecificPart());
+  }
+  removeDialog(DIALOG_CREATE_SHORTCUT);
+  sModel.loadApplications(false,Launcher.this);
+}

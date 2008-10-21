@@ -1,0 +1,19 @@
+{
+  super.onAddToDatabase(values);
+  String titleStr=title != null ? title.toString() : null;
+  values.put(Settings.Favorites.TITLE,titleStr);
+  String uri=intent != null ? intent.toURI() : null;
+  values.put(Settings.Favorites.INTENT,uri);
+  if (customIcon) {
+    values.put(Settings.Favorites.ICON_TYPE,Settings.Favorites.ICON_TYPE_BITMAP);
+    Bitmap bitmap=((BitmapDrawable)icon).getBitmap();
+    writeBitmap(values,bitmap);
+  }
+ else {
+    values.put(Settings.Favorites.ICON_TYPE,Settings.Favorites.ICON_TYPE_RESOURCE);
+    if (iconResource != null) {
+      values.put(Settings.Favorites.ICON_PACKAGE,iconResource.packageName);
+      values.put(Settings.Favorites.ICON_RESOURCE,iconResource.resourceName);
+    }
+  }
+}

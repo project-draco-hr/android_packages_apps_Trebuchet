@@ -1,0 +1,36 @@
+{
+  boolean handled=super.onKeyDown(keyCode,event);
+  if (!handled && keyCode != KeyEvent.KEYCODE_ENTER) {
+    boolean gotKey=TextKeyListener.getInstance().onKeyDown(mWorkspace,mDefaultKeySsb,keyCode,event);
+    if (gotKey && mDefaultKeySsb != null && mDefaultKeySsb.length() > 0) {
+      final String str=mDefaultKeySsb.toString();
+      boolean isDialable=true;
+      final int count=str.length();
+      for (int i=0; i < count; i++) {
+        if (!PhoneNumberUtils.isReallyDialable(str.charAt(i))) {
+          isDialable=false;
+          break;
+        }
+      }
+      Intent intent;
+      if (isDialable) {
+        intent=new Intent(Intent.ACTION_DIAL,Uri.fromParts("tel",str,null));
+      }
+ else {
+        intent=new Intent(Contacts.Intents.UI.FILTER_CONTACTS_ACTION);
+        intent.putExtra(Contacts.Intents.UI.FILTER_TEXT_EXTRA_KEY,str);
+      }
+      intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+      try {
+        startActivity(intent);
+      }
+ catch (      android.content.ActivityNotFoundException ex) {
+      }
+      mDefaultKeySsb.clear();
+      mDefaultKeySsb.clearSpans();
+      Selection.setSelection(mDefaultKeySsb,0);
+      return true;
+    }
+  }
+  return handled;
+}

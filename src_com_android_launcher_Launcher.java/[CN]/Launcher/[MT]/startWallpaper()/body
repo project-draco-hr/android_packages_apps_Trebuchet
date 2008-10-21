@@ -1,0 +1,4 @@
+{
+  final Intent pickWallpaper=new Intent(Intent.ACTION_SET_WALLPAPER);
+  startActivity(Intent.createChooser(pickWallpaper,getString(R.string.chooser_wallpaper)));
+}

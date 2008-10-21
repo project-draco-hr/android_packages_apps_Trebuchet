@@ -1,0 +1,7 @@
+{
+  boolean handled=super.onKeyUp(keyCode,event);
+  if (keyCode == KeyEvent.KEYCODE_SEARCH) {
+    handled=mWorkspace.snapToSearch();
+  }
+  return handled;
+}

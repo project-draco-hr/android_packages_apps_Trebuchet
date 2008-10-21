@@ -1,0 +1,4 @@
+{
+  final Widget info=Widget.makeClock();
+  addWidget(info);
+}

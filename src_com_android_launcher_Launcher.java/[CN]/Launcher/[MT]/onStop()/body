@@ -1,0 +1,6 @@
+{
+  if (mSensorManager != null) {
+    mSensorManager.unregisterListener(mSensorHandler);
+  }
+  super.onStop();
+}

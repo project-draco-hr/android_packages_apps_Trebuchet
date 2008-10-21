@@ -1,0 +1,4 @@
+{
+  requestFocusFromTouch();
+  return super.onInterceptTouchEvent(ev);
+}

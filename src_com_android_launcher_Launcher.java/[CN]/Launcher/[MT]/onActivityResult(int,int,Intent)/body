@@ -1,0 +1,16 @@
+{
+  if (resultCode == RESULT_OK && mAddItemCellInfo != null) {
+switch (requestCode) {
+case REQUEST_CREATE_SHORTCUT:
+      completeAddShortcut(data,mAddItemCellInfo,!mDesktopLocked);
+    break;
+case REQUEST_CHOOSE_PHOTO:
+  completeAddPhotoFrame(data,mAddItemCellInfo);
+break;
+case REQUEST_UPDATE_PHOTO:
+completeUpdatePhotoFrame(data,mAddItemCellInfo);
+break;
+}
+}
+mWaitingForResult=false;
+}

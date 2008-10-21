@@ -1,0 +1,5 @@
+{
+  mFolderInfo=info;
+  mWaitingForResult=true;
+  showDialog(DIALOG_RENAME_FOLDER);
+}

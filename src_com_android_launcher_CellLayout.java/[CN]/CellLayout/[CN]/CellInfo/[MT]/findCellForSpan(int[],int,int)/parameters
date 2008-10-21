@@ -1,0 +1,3 @@
+int[] cellXY
+int spanX
+int spanY

@@ -1,0 +1,14 @@
+{
+  super.onFinishInflate();
+  mSearchText=(AutoCompleteTextView)findViewById(R.id.input);
+  mSearchText.setOnKeyListener(this);
+  mSearchText.addTextChangedListener(this);
+  mGoButton=(Button)findViewById(R.id.go);
+  mGoButton.setOnClickListener(this);
+  mGoButton.setOnKeyListener(this);
+  mSearchText.setOnLongClickListener(this);
+  mGoButton.setOnLongClickListener(this);
+  mGoButton.setEnabled(false);
+  mGoButton.setFocusable(false);
+  configureSuggestions();
+}

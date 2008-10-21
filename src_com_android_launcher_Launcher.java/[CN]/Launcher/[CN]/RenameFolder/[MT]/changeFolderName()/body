@@ -1,0 +1,25 @@
+{
+  final String name=mInput.getText().toString();
+  if (!TextUtils.isEmpty(name)) {
+    mFolderInfo=sModel.findFolderById(mFolderInfo.id);
+    mFolderInfo.title=name;
+    LauncherModel.updateItemInDatabase(Launcher.this,mFolderInfo);
+    if (mDesktopLocked) {
+      mDrawer.lock();
+      sModel.loadUserItems(false,Launcher.this);
+    }
+ else {
+      final FolderIcon folderIcon=(FolderIcon)mWorkspace.getViewForTag(mFolderInfo);
+      if (folderIcon != null) {
+        folderIcon.setText(name);
+        getWorkspace().requestLayout();
+      }
+ else {
+        mDesktopLocked=true;
+        mDrawer.lock();
+        sModel.loadUserItems(false,Launcher.this);
+      }
+    }
+  }
+  cleanup();
+}

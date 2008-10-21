@@ -1,0 +1,3 @@
+{
+  return THUMB_IDS.length;
+}

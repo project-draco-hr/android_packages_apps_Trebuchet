@@ -1,0 +1,9 @@
+{
+  final Layout layout=getLayout();
+  final RectF rect=mRect;
+  final int left=getCompoundPaddingLeft();
+  final int top=getExtendedPaddingTop();
+  rect.set(left + layout.getLineLeft(0) - PADDING_H,top + layout.getLineTop(0) - PADDING_V,left + layout.getLineRight(0) + PADDING_H,top + layout.getLineBottom(0) + PADDING_V);
+  canvas.drawRoundRect(rect,CORNER_RADIUS,CORNER_RADIUS,mPaint);
+  super.onDraw(canvas);
+}

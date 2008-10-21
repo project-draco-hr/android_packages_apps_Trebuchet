@@ -1,0 +1,5 @@
+{
+  mAdapter.performAction(groupPosition,childPosition);
+  cleanup();
+  return true;
+}

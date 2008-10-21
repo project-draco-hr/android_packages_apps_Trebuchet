@@ -1,0 +1,3 @@
+{
+  return "VacantCell[x=" + cellX + ", y="+ cellY+ ", spanX="+ spanX+ ", spanY="+ spanY+ "]";
+}

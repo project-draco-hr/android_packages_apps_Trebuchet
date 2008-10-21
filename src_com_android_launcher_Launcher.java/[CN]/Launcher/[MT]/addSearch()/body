@@ -1,0 +1,4 @@
+{
+  final Widget info=Widget.makeSearch();
+  addWidget(info);
+}

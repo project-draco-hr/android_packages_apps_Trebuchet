@@ -1,0 +1,30 @@
+{
+  Intent intent=data.getParcelableExtra(Intent.EXTRA_SHORTCUT_INTENT);
+  String name=data.getStringExtra(Intent.EXTRA_SHORTCUT_NAME);
+  boolean duplicate=data.getBooleanExtra(Launcher.EXTRA_SHORTCUT_DUPLICATE,true);
+  if (intent != null && name != null) {
+    final ContentResolver cr=context.getContentResolver();
+    Cursor c=cr.query(Settings.Favorites.CONTENT_URI,new String[]{"_id","intent"},"title=?",new String[]{name},null);
+    final int intentIndex=c.getColumnIndexOrThrow(Settings.Favorites.INTENT);
+    final int idIndex=c.getColumnIndexOrThrow(Settings.Favorites._ID);
+    try {
+      while (c.moveToNext()) {
+        try {
+          if (intent.filterEquals(Intent.getIntent(c.getString(intentIndex)))) {
+            final long id=c.getLong(idIndex);
+            cr.delete(Settings.Favorites.getContentUri(id,false),null,null);
+            if (!duplicate) {
+              break;
+            }
+          }
+        }
+ catch (        URISyntaxException e) {
+        }
+      }
+    }
+  finally {
+      c.close();
+    }
+    cr.notifyChange(Settings.Favorites.CONTENT_URI,null);
+  }
+}

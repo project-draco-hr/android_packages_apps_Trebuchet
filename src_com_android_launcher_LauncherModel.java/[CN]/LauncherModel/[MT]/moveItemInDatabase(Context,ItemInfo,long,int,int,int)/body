@@ -1,0 +1,13 @@
+{
+  item.container=container;
+  item.screen=screen;
+  item.cellX=cellX;
+  item.cellY=cellY;
+  final ContentValues values=new ContentValues();
+  final ContentResolver cr=context.getContentResolver();
+  values.put(Settings.Favorites.CONTAINER,item.container);
+  values.put(Settings.Favorites.CELLX,item.cellX);
+  values.put(Settings.Favorites.CELLY,item.cellY);
+  values.put(Settings.Favorites.SCREEN,item.screen);
+  cr.update(Settings.Favorites.getContentUri(item.id,false),values,null,null);
+}

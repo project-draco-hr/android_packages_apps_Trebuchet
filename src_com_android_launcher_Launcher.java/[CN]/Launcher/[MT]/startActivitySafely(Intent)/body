@@ -1,0 +1,9 @@
+{
+  intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+  try {
+    startActivity(intent);
+  }
+ catch (  ActivityNotFoundException e) {
+    Toast.makeText(this,R.string.activity_not_found,Toast.LENGTH_SHORT).show();
+  }
+}

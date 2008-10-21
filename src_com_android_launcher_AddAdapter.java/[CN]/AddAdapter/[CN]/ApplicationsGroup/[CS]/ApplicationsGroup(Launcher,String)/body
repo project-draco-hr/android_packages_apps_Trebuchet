@@ -1,0 +1,5 @@
+{
+  super(name);
+  mLauncher=launcher;
+  mApplications=Launcher.getModel().getApplications();
+}

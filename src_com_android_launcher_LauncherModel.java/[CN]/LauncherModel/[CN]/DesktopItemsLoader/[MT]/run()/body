@@ -1,0 +1,142 @@
+{
+  mRunning=true;
+  final Launcher launcher=mLauncher.get();
+  mDesktopItems=new ArrayList<ItemInfo>();
+  mUserFolders=new HashMap<Long,UserFolderInfo>();
+  final ArrayList<ItemInfo> desktopItems=mDesktopItems;
+  final Cursor c=launcher.getContentResolver().query(Settings.Favorites.CONTENT_URI,null,null,null,null);
+  try {
+    final int idIndex=c.getColumnIndexOrThrow(Settings.Favorites.ID);
+    final int intentIndex=c.getColumnIndexOrThrow(Settings.Favorites.INTENT);
+    final int titleIndex=c.getColumnIndexOrThrow(Settings.Favorites.TITLE);
+    final int iconTypeIndex=c.getColumnIndexOrThrow(Settings.Favorites.ICON_TYPE);
+    final int iconIndex=c.getColumnIndexOrThrow(Settings.Favorites.ICON);
+    final int iconPackageIndex=c.getColumnIndexOrThrow(Settings.Favorites.ICON_PACKAGE);
+    final int iconResourceIndex=c.getColumnIndexOrThrow(Settings.Favorites.ICON_RESOURCE);
+    final int containerIndex=c.getColumnIndexOrThrow(Settings.Favorites.CONTAINER);
+    final int itemTypeIndex=c.getColumnIndexOrThrow(Settings.Favorites.ITEM_TYPE);
+    final int screenIndex=c.getColumnIndexOrThrow(Settings.Favorites.SCREEN);
+    final int cellXIndex=c.getColumnIndexOrThrow(Settings.Favorites.CELLX);
+    final int cellYIndex=c.getColumnIndexOrThrow(Settings.Favorites.CELLY);
+    final PackageManager manager=launcher.getPackageManager();
+    ApplicationInfo info;
+    String intentDescription;
+    Widget widgetInfo=null;
+    int container;
+    final HashMap<Long,UserFolderInfo> userFolders=mUserFolders;
+    while (!mStopped && c.moveToNext()) {
+      try {
+        int itemType=c.getInt(itemTypeIndex);
+switch (itemType) {
+case Settings.Favorites.ITEM_TYPE_APPLICATION:
+case Settings.Favorites.ITEM_TYPE_SHORTCUT:
+          intentDescription=c.getString(intentIndex);
+        Intent intent;
+      try {
+        intent=Intent.getIntent(intentDescription);
+      }
+ catch (      java.net.URISyntaxException e) {
+        continue;
+      }
+    if (itemType == Settings.Favorites.ITEM_TYPE_APPLICATION) {
+      info=getApplicationInfo(manager,intent);
+    }
+ else {
+      info=getApplicationInfoShortcut(c,launcher,iconTypeIndex,iconPackageIndex,iconResourceIndex,iconIndex);
+    }
+  if (info == null) {
+    info=new ApplicationInfo();
+    info.icon=manager.getDefaultActivityIcon();
+  }
+if (info != null) {
+  info.title=c.getString(titleIndex);
+  info.intent=intent;
+  info.id=c.getLong(idIndex);
+  container=c.getInt(containerIndex);
+  info.container=container;
+  info.screen=c.getInt(screenIndex);
+  info.cellX=c.getInt(cellXIndex);
+  info.cellY=c.getInt(cellYIndex);
+switch (container) {
+case Settings.Favorites.CONTAINER_DESKTOP:
+    desktopItems.add(info);
+  break;
+default :
+UserFolderInfo folderInfo=findOrMakeFolder(userFolders,container);
+folderInfo.add(info);
+break;
+}
+}
+break;
+case Settings.Favorites.ITEM_TYPE_USER_FOLDER:
+long id=c.getLong(idIndex);
+UserFolderInfo folderInfo=findOrMakeFolder(userFolders,id);
+folderInfo.title=c.getString(titleIndex);
+folderInfo.id=id;
+container=c.getInt(containerIndex);
+folderInfo.container=container;
+folderInfo.screen=c.getInt(screenIndex);
+folderInfo.cellX=c.getInt(cellXIndex);
+folderInfo.cellY=c.getInt(cellYIndex);
+switch (container) {
+case Settings.Favorites.CONTAINER_DESKTOP:
+desktopItems.add(folderInfo);
+break;
+default :
+}
+break;
+case Settings.Favorites.ITEM_TYPE_WIDGET_CLOCK:
+case Settings.Favorites.ITEM_TYPE_WIDGET_SEARCH:
+case Settings.Favorites.ITEM_TYPE_WIDGET_PHOTO_FRAME:
+switch (itemType) {
+case Settings.Favorites.ITEM_TYPE_WIDGET_CLOCK:
+widgetInfo=Widget.makeClock();
+break;
+case Settings.Favorites.ITEM_TYPE_WIDGET_SEARCH:
+widgetInfo=Widget.makeSearch();
+break;
+case Settings.Favorites.ITEM_TYPE_WIDGET_PHOTO_FRAME:
+widgetInfo=Widget.makePhotoFrame();
+byte[] data=c.getBlob(iconIndex);
+if (data != null) {
+widgetInfo.photo=BitmapFactory.decodeByteArray(data,0,data.length);
+}
+break;
+}
+if (widgetInfo != null) {
+container=c.getInt(containerIndex);
+if (container != Settings.Favorites.CONTAINER_DESKTOP) {
+Log.e(Launcher.LOG_TAG,"Widget found where container " + "!= CONTAINER_DESKTOP -- ignoring!");
+continue;
+}
+widgetInfo.id=c.getLong(idIndex);
+widgetInfo.screen=c.getInt(screenIndex);
+widgetInfo.container=container;
+widgetInfo.cellX=c.getInt(cellXIndex);
+widgetInfo.cellY=c.getInt(cellYIndex);
+desktopItems.add(widgetInfo);
+}
+break;
+}
+}
+ catch (Exception e) {
+Log.w(Launcher.LOG_TAG,"Desktop items loading interrupted:",e);
+}
+}
+}
+  finally {
+c.close();
+}
+if (!mStopped) {
+launcher.runOnUiThread(new Runnable(){
+public void run(){
+launcher.onDesktopItemsLoaded();
+}
+}
+);
+}
+if (!mStopped) {
+mDesktopItemsLoaded=true;
+}
+mRunning=false;
+}

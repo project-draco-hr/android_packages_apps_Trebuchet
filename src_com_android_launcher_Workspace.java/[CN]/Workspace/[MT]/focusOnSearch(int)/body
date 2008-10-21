@@ -1,0 +1,15 @@
+{
+  CellLayout currentScreen=(CellLayout)getChildAt(screen);
+  Search searchWidget=(Search)findSearchWidget(currentScreen);
+  if (searchWidget != null) {
+    if (isInTouchMode()) {
+      searchWidget.requestFocusFromTouch();
+    }
+ else {
+      searchWidget.requestFocus();
+    }
+    searchWidget.clearQuery();
+    return true;
+  }
+  return false;
+}

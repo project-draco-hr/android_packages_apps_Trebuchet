@@ -1,0 +1,15 @@
+{
+  if (ca != null) {
+    Cursor c=ca.getCursor();
+    if ((c != null) && c.moveToPosition(position)) {
+      setupSuggestionIntent(c,mSearchable);
+      SearchableInfo si=mSearchable;
+      String suggestionAction=mSuggestionAction;
+      Uri suggestionData=mSuggestionData;
+      String suggestionQuery=mSuggestionQuery;
+      sendLaunchIntent(suggestionAction,suggestionData,suggestionQuery,null,KeyEvent.KEYCODE_UNKNOWN,null,si);
+      return true;
+    }
+  }
+  return false;
+}

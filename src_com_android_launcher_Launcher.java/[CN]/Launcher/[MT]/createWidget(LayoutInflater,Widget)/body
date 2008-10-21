@@ -1,0 +1,9 @@
+{
+  final Workspace workspace=mWorkspace;
+  final int screen=workspace.getCurrentScreen();
+  View v=inflater.inflate(widget.layoutResource,(ViewGroup)workspace.getChildAt(screen),false);
+  if (widget.itemType == Settings.Favorites.ITEM_TYPE_WIDGET_PHOTO_FRAME) {
+    ((ImageView)v).setImageBitmap(widget.photo);
+  }
+  return v;
+}

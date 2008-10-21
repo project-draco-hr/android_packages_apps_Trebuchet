@@ -1,0 +1,9 @@
+{
+  super.onResume();
+  if (mRestoring) {
+    startLoaders();
+  }
+  if (mSensorManager != null) {
+    mSensorManager.registerListener(mSensorHandler,SensorManager.SENSOR_ACCELEROMETER);
+  }
+}

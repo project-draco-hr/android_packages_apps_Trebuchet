@@ -1,0 +1,10 @@
+{
+  UserFolder openFolder=UserFolder.fromXml(this);
+  openFolder.setDragger(mDragLayer);
+  openFolder.setLauncher(this);
+  UserFolderInfo folderInfo=(UserFolderInfo)tag;
+  openFolder.bind(folderInfo);
+  folderInfo.opened=true;
+  mWorkspace.addInScreen(openFolder,folderInfo.screen,0,0,4,4);
+  openFolder.onOpen();
+}

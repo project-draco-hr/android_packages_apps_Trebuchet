@@ -1,0 +1,5 @@
+{
+  LayoutParams lp=(LayoutParams)child.getLayoutParams();
+  lp.isDragging=true;
+  mDragRect.setEmpty();
+}

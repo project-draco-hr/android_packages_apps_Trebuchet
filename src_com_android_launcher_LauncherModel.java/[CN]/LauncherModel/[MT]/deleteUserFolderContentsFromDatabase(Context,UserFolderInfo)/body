@@ -1,0 +1,5 @@
+{
+  final ContentResolver cr=context.getContentResolver();
+  cr.delete(Settings.Favorites.getContentUri(info.id,false),null,null);
+  cr.delete(Settings.Favorites.CONTENT_URI,Settings.Favorites.CONTAINER + "=" + info.id,null);
+}

@@ -1,0 +1,5 @@
+int cellX
+int cellY
+int cellHSpan
+int cellVSpan
+View ignoreCell

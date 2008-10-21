@@ -1,0 +1,3 @@
+{
+  ((Launcher)mContext).updatePhotoFrame((Widget)getTag());
+}

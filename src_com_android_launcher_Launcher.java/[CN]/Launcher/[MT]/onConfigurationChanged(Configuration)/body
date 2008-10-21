@@ -1,0 +1,4 @@
+{
+  super.onConfigurationChanged(newConfig);
+  sModel.loadApplications(false,Launcher.this);
+}

@@ -1,0 +1,9 @@
+{
+  if (USE_SENSORS || "true".equals(SystemProperties.get(PROPERTY_USE_SENSORS,"false"))) {
+    if (Config.LOGD) {
+      Log.d(LOG_TAG,"Launcher activating sensors");
+    }
+    mSensorManager=(SensorManager)getSystemService(SENSOR_SERVICE);
+    mSensorHandler=new SensorHandler();
+  }
+}

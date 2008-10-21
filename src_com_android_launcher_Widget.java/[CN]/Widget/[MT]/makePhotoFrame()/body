@@ -1,0 +1,8 @@
+{
+  Widget w=new Widget();
+  w.itemType=Settings.Favorites.ITEM_TYPE_WIDGET_PHOTO_FRAME;
+  w.spanX=2;
+  w.spanY=2;
+  w.layoutResource=R.layout.widget_photo_frame;
+  return w;
+}

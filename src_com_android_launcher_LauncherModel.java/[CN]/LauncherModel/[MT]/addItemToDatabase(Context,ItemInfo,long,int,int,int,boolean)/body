@@ -1,0 +1,13 @@
+{
+  item.container=container;
+  item.screen=screen;
+  item.cellX=cellX;
+  item.cellY=cellY;
+  final ContentValues values=new ContentValues();
+  final ContentResolver cr=context.getContentResolver();
+  item.onAddToDatabase(values);
+  Uri result=cr.insert(notify ? Settings.Favorites.CONTENT_URI : Settings.Favorites.CONTENT_URI_NO_NOTIFICATION,values);
+  if (result != null) {
+    item.id=Integer.parseInt(result.getPathSegments().get(1));
+  }
+}

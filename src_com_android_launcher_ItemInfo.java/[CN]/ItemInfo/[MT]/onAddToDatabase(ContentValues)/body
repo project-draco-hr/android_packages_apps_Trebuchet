@@ -1,0 +1,9 @@
+{
+  values.put(Settings.Favorites.ITEM_TYPE,itemType);
+  values.put(Settings.Favorites.CONTAINER,container);
+  values.put(Settings.Favorites.SCREEN,screen);
+  values.put(Settings.Favorites.CELLX,cellX);
+  values.put(Settings.Favorites.CELLY,cellY);
+  values.put(Settings.Favorites.SPANX,spanX);
+  values.put(Settings.Favorites.SPANY,spanY);
+}

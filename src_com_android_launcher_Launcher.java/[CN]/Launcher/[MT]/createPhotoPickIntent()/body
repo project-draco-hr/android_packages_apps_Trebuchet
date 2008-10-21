@@ -1,0 +1,12 @@
+{
+  Intent intent=new Intent(Intent.ACTION_GET_CONTENT,null);
+  intent.setType("image/*");
+  intent.putExtra("crop","true");
+  intent.putExtra("aspectX",1);
+  intent.putExtra("aspectY",1);
+  intent.putExtra("outputX",192);
+  intent.putExtra("outputY",192);
+  intent.putExtra("noFaceDetection",true);
+  intent.putExtra("return-data",true);
+  return intent;
+}

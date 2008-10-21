@@ -1,0 +1,27 @@
+{
+  super.onNewIntent(intent);
+  if (Intent.ACTION_MAIN.equals(intent.getAction())) {
+    getWindow().closeAllPanels();
+    try {
+      dismissDialog(DIALOG_CREATE_SHORTCUT);
+      mWorkspace.unlock();
+    }
+ catch (    Exception e) {
+    }
+    try {
+      dismissDialog(DIALOG_RENAME_FOLDER);
+      mWorkspace.unlock();
+    }
+ catch (    Exception e) {
+    }
+    if ((intent.getFlags() & Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT) != Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT) {
+      if (!mWorkspace.isDefaultScreenShowing()) {
+        mWorkspace.moveToDefaultScreen();
+      }
+      closeDrawer();
+    }
+ else {
+      closeDrawer(false);
+    }
+  }
+}

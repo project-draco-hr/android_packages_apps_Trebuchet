@@ -1,0 +1,3 @@
+{
+  mLayoutInflater=context.getLayoutInflater();
+}

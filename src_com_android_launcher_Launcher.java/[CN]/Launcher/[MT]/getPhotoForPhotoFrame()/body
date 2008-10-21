@@ -1,0 +1,3 @@
+{
+  startActivityForResult(createPhotoPickIntent(),REQUEST_CHOOSE_PHOTO);
+}

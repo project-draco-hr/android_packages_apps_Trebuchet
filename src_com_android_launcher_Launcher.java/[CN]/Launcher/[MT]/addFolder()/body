@@ -1,0 +1,11 @@
+{
+  UserFolderInfo folderInfo=new UserFolderInfo();
+  folderInfo.title=getText(R.string.folder_name);
+  int cellX=mAddItemCellInfo.cellX;
+  int cellY=mAddItemCellInfo.cellY;
+  LauncherModel.addItemToDatabase(this,folderInfo,Settings.Favorites.CONTAINER_DESKTOP,mWorkspace.getCurrentScreen(),cellX,cellY,false);
+  sModel.addDesktopItem(folderInfo);
+  sModel.addUserFolder(folderInfo);
+  FolderIcon newFolder=FolderIcon.fromXml(R.layout.folder_icon,this,(ViewGroup)mWorkspace.getChildAt(mWorkspace.getCurrentScreen()),folderInfo);
+  mWorkspace.addInCurrentScreen(newFolder,cellX,cellY,1,1);
+}

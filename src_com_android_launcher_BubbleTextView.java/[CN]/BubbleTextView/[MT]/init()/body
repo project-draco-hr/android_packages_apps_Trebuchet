@@ -1,0 +1,5 @@
+{
+  setFocusable(true);
+  mPaint=new Paint(Paint.ANTI_ALIAS_FLAG);
+  mPaint.setColor(getContext().getResources().getColor(R.color.bubble_dark_background));
+}

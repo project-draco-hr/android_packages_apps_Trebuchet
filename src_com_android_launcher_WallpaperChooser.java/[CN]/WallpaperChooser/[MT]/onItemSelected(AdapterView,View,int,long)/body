@@ -1,0 +1,12 @@
+{
+  final ImageView view=mImageView;
+  Bitmap b=BitmapFactory.decodeResource(getResources(),IMAGE_IDS[position],mOptions);
+  view.setImageBitmap(b);
+  if (mBitmap != null) {
+    mBitmap.recycle();
+  }
+  mBitmap=b;
+  final Drawable drawable=view.getDrawable();
+  drawable.setFilterBitmap(true);
+  drawable.setDither(true);
+}

@@ -1,0 +1,6 @@
+View child
+int x
+int y
+int spanX
+int spanY
+boolean insert

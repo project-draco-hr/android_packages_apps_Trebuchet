@@ -1,0 +1,12 @@
+{
+  cellInfo.screen=mWorkspace.getCurrentScreen();
+  final ApplicationInfo info=addShortcut(this,data,cellInfo,false);
+  if (!mRestoring) {
+    sModel.addDesktopItem(info);
+    final View view=createShortcut(info);
+    mWorkspace.addInCurrentScreen(view,cellInfo.cellX,cellInfo.cellY,1,1,insertAtFirst);
+  }
+ else   if (sModel.isDesktopLoaded()) {
+    sModel.addDesktopItem(info);
+  }
+}

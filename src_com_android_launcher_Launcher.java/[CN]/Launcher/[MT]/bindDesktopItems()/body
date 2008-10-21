@@ -1,0 +1,32 @@
+{
+  final ArrayList<ItemInfo> shortcuts=sModel.getDesktopItems();
+  if (shortcuts == null) {
+    return;
+  }
+  final Workspace workspace=mWorkspace;
+  int count=workspace.getChildCount();
+  for (int i=0; i < count; i++) {
+    ((ViewGroup)workspace.getChildAt(i)).removeAllViewsInLayout();
+  }
+  count=shortcuts.size();
+  for (int i=0; i < count; i++) {
+    final ItemInfo item=shortcuts.get(i);
+switch (item.itemType) {
+case Settings.Favorites.ITEM_TYPE_APPLICATION:
+case Settings.Favorites.ITEM_TYPE_SHORTCUT:
+      final View shortcut=createShortcut((ApplicationInfo)item);
+    workspace.addInScreen(shortcut,item.screen,item.cellX,item.cellY,1,1,!mDesktopLocked);
+  break;
+case Settings.Favorites.ITEM_TYPE_USER_FOLDER:
+final FolderIcon newFolder=FolderIcon.fromXml(R.layout.folder_icon,this,(ViewGroup)mWorkspace.getChildAt(mWorkspace.getCurrentScreen()),((UserFolderInfo)item));
+workspace.addInScreen(newFolder,item.screen,item.cellX,item.cellY,1,1,!mDesktopLocked);
+break;
+default :
+final Widget widget=(Widget)item;
+final View view=createWidget(mInflater,widget);
+view.setTag(widget);
+workspace.addWidget(view,widget,!mDesktopLocked);
+}
+}
+workspace.requestLayout();
+}

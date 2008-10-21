@@ -1,0 +1,57 @@
+{
+  int widthSpecMode=MeasureSpec.getMode(widthMeasureSpec);
+  int widthSpecSize=MeasureSpec.getSize(widthMeasureSpec);
+  int heightSpecMode=MeasureSpec.getMode(heightMeasureSpec);
+  int heightSpecSize=MeasureSpec.getSize(heightMeasureSpec);
+  if (widthSpecMode == MeasureSpec.UNSPECIFIED || heightSpecMode == MeasureSpec.UNSPECIFIED) {
+    throw new RuntimeException("CellLayout cannot have UNSPECIFIED dimensions");
+  }
+  final int shortAxisCells=mShortAxisCells;
+  final int longAxisCells=mLongAxisCells;
+  final int longAxisStartPadding=mLongAxisStartPadding;
+  final int longAxisEndPadding=mLongAxisEndPadding;
+  final int shortAxisStartPadding=mShortAxisStartPadding;
+  final int shortAxisEndPadding=mShortAxisEndPadding;
+  final int cellWidth=mCellWidth;
+  final int cellHeight=mCellHeight;
+  mPortrait=heightSpecSize > widthSpecSize;
+  int numShortGaps=shortAxisCells - 1;
+  int numLongGaps=longAxisCells - 1;
+  if (mPortrait) {
+    int vSpaceLeft=heightSpecSize - longAxisStartPadding - longAxisEndPadding- (cellHeight * longAxisCells);
+    mHeightGap=vSpaceLeft / numLongGaps;
+    int hSpaceLeft=widthSpecSize - shortAxisStartPadding - shortAxisEndPadding- (cellWidth * shortAxisCells);
+    if (numShortGaps > 0) {
+      mWidthGap=hSpaceLeft / numShortGaps;
+    }
+ else {
+      mWidthGap=0;
+    }
+  }
+ else {
+    int hSpaceLeft=widthSpecSize - longAxisStartPadding - longAxisEndPadding- (cellWidth * longAxisCells);
+    mWidthGap=hSpaceLeft / numLongGaps;
+    int vSpaceLeft=heightSpecSize - shortAxisStartPadding - shortAxisEndPadding- (cellHeight * shortAxisCells);
+    if (numShortGaps > 0) {
+      mHeightGap=vSpaceLeft / numShortGaps;
+    }
+ else {
+      mHeightGap=0;
+    }
+  }
+  int count=getChildCount();
+  for (int i=0; i < count; i++) {
+    View child=getChildAt(i);
+    LayoutParams lp=(LayoutParams)child.getLayoutParams();
+    if (mPortrait) {
+      lp.setup(cellWidth,cellHeight,mWidthGap,mHeightGap,shortAxisStartPadding,longAxisStartPadding);
+    }
+ else {
+      lp.setup(cellWidth,cellHeight,mWidthGap,mHeightGap,longAxisStartPadding,shortAxisStartPadding);
+    }
+    int childWidthMeasureSpec=MeasureSpec.makeMeasureSpec(lp.width,MeasureSpec.EXACTLY);
+    int childheightMeasureSpec=MeasureSpec.makeMeasureSpec(lp.height,MeasureSpec.EXACTLY);
+    child.measure(childWidthMeasureSpec,childheightMeasureSpec);
+  }
+  setMeasuredDimension(widthSpecSize,heightSpecSize);
+}

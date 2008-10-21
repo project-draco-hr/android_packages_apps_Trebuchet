@@ -1,0 +1,25 @@
+{
+  final ContentResolver cr=context.getContentResolver();
+  Cursor c=cr.query(Settings.Favorites.CONTENT_URI,null,"_id=? and itemType=?",new String[]{String.valueOf(id),String.valueOf(Settings.Favorites.ITEM_TYPE_USER_FOLDER)},null);
+  try {
+    if (c.moveToFirst()) {
+      final int titleIndex=c.getColumnIndexOrThrow(Settings.Favorites.TITLE);
+      final int containerIndex=c.getColumnIndexOrThrow(Settings.Favorites.CONTAINER);
+      final int screenIndex=c.getColumnIndexOrThrow(Settings.Favorites.SCREEN);
+      final int cellXIndex=c.getColumnIndexOrThrow(Settings.Favorites.CELLX);
+      final int cellYIndex=c.getColumnIndexOrThrow(Settings.Favorites.CELLY);
+      UserFolderInfo folderInfo=findOrMakeFolder(mUserFolders,id);
+      folderInfo.title=c.getString(titleIndex);
+      folderInfo.id=id;
+      folderInfo.container=c.getInt(containerIndex);
+      folderInfo.screen=c.getInt(screenIndex);
+      folderInfo.cellX=c.getInt(cellXIndex);
+      folderInfo.cellY=c.getInt(cellYIndex);
+      return folderInfo;
+    }
+  }
+  finally {
+    c.close();
+  }
+  return null;
+}

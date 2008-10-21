@@ -1,0 +1,5 @@
+{
+  TextView text=(TextView)view;
+  text.setText(R.string.add_folder);
+  text.setCompoundDrawablesWithIntrinsicBounds(getIcon(R.drawable.ic_launcher_folder),null,null,null);
+}

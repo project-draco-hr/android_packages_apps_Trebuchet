@@ -1,0 +1,4 @@
+ViewGroup container
+int x
+int y
+int[] dropCoordinates

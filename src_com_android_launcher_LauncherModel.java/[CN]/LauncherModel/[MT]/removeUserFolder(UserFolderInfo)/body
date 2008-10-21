@@ -1,0 +1,3 @@
+{
+  mUserFolders.remove(userFolderInfo.id);
+}

@@ -1,0 +1,4 @@
+{
+  final ItemInfo item=(ItemInfo)dragInfo;
+  return item.container != ItemInfo.NO_ID;
+}

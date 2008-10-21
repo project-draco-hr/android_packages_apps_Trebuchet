@@ -1,0 +1,12 @@
+{
+  cellInfo.maxVacantSpanX=Integer.MIN_VALUE;
+  cellInfo.maxVacantSpanXSpanY=Integer.MIN_VALUE;
+  cellInfo.maxVacantSpanY=Integer.MIN_VALUE;
+  cellInfo.maxVacantSpanYSpanX=Integer.MIN_VALUE;
+  cellInfo.vacantCells=new ArrayList<CellInfo.VacantCell>();
+  if (occupied[x][y]) {
+    return;
+  }
+  Rect current=new Rect(x,y,x,y);
+  findVacantCell(current,xCount,yCount,occupied,cellInfo);
+}

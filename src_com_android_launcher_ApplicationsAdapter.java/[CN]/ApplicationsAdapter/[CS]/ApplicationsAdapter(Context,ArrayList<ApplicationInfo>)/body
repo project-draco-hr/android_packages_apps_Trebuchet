@@ -1,0 +1,4 @@
+{
+  super(context,0,apps);
+  mInflater=LayoutInflater.from(context);
+}

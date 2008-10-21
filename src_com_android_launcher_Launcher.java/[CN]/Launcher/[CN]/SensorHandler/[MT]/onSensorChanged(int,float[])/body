@@ -1,0 +1,20 @@
+{
+  if (sensor == SensorManager.SENSOR_ACCELEROMETER) {
+    float shake=values[0];
+    if (shake <= -SensorManager.STANDARD_GRAVITY) {
+      mLastNegativeShake=SystemClock.uptimeMillis();
+    }
+ else     if (shake >= SensorManager.STANDARD_GRAVITY) {
+      mLastPositiveShake=SystemClock.uptimeMillis();
+    }
+    final long difference=mLastPositiveShake - mLastNegativeShake;
+    if (difference <= -80 && difference >= -180) {
+      mWorkspace.scrollLeft();
+      mLastNegativeShake=mLastPositiveShake=0;
+    }
+ else     if (difference >= 80 && difference <= 180) {
+      mWorkspace.scrollRight();
+      mLastNegativeShake=mLastPositiveShake=0;
+    }
+  }
+}

@@ -1,0 +1,5 @@
+{
+  sModel.loadApplications(true,this);
+  sModel.loadUserItems(true,this);
+  mRestoring=false;
+}

@@ -1,0 +1,13 @@
+{
+  if (desktopItems != null) {
+    final int count=desktopItems.size();
+    for (int i=0; i < count; i++) {
+      ItemInfo item=desktopItems.get(i);
+switch (item.itemType) {
+case Settings.Favorites.ITEM_TYPE_APPLICATION:
+case Settings.Favorites.ITEM_TYPE_SHORTCUT:
+        ((ApplicationInfo)item).icon.setCallback(null);
+    }
+  }
+}
+}

@@ -1,0 +1,11 @@
+{
+  View view;
+  if (convertView == null) {
+    view=mInflater.inflate(R.layout.create_shortcut_group_item,parent,false);
+  }
+ else {
+    view=convertView;
+  }
+  ((TextView)view).setText(mGroups[groupPosition].getName());
+  return view;
+}

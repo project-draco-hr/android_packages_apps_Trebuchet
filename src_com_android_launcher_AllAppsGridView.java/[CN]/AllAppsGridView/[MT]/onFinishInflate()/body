@@ -1,0 +1,4 @@
+{
+  setOnItemClickListener(this);
+  setOnItemLongClickListener(this);
+}

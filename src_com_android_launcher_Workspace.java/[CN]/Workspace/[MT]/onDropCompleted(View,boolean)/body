@@ -1,0 +1,17 @@
+{
+  if (success) {
+    if (target != this && mDragInfo != null) {
+      final CellLayout cellLayout=(CellLayout)getChildAt(mDragInfo.screen);
+      cellLayout.removeView(mDragInfo.cell);
+      final Object tag=mDragInfo.cell.getTag();
+      Launcher.getModel().removeDesktopItem((ItemInfo)tag);
+    }
+  }
+ else {
+    if (mDragInfo != null) {
+      final CellLayout cellLayout=(CellLayout)getChildAt(mDragInfo.screen);
+      cellLayout.onDropAborted(mDragInfo.cell);
+    }
+  }
+  mDragInfo=null;
+}

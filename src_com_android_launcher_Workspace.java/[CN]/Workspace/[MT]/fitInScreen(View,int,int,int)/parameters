@@ -1,0 +1,4 @@
+View child
+int screen
+int spanX
+int spanY

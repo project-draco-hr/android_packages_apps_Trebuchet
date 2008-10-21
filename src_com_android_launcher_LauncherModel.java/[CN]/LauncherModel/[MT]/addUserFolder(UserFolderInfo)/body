@@ -1,0 +1,3 @@
+{
+  mUserFolders.put(info.id,info);
+}

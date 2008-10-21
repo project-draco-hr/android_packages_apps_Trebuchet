@@ -1,0 +1,20 @@
+{
+  final CellLayout cellLayout=(CellLayout)getChildAt(mCurrentScreen);
+  if (source != this) {
+    onDropExternal(x - xOffset,y - yOffset,dragInfo,cellLayout);
+  }
+ else {
+    if (mDragInfo != null) {
+      final View cell=mDragInfo.cell;
+      if (mCurrentScreen != mDragInfo.screen) {
+        final CellLayout originalCellLayout=(CellLayout)getChildAt(mDragInfo.screen);
+        originalCellLayout.removeView(cell);
+        cellLayout.addView(cell);
+      }
+      cellLayout.onDropChild(cell,x - xOffset,y - yOffset);
+      final ItemInfo info=(ItemInfo)cell.getTag();
+      CellLayout.LayoutParams lp=(CellLayout.LayoutParams)cell.getLayoutParams();
+      LauncherModel.moveItemInDatabase(mLauncher,info,Settings.Favorites.CONTAINER_DESKTOP,mCurrentScreen,lp.cellX,lp.cellY);
+    }
+  }
+}

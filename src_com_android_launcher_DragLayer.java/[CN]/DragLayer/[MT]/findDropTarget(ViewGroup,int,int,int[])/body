@@ -1,0 +1,32 @@
+{
+  final Rect r=mDragRect;
+  final int count=container.getChildCount();
+  final int scrolledX=x + container.getScrollX();
+  final int scrolledY=y + container.getScrollY();
+  final View ignoredDropTarget=mIgnoredDropTarget;
+  for (int i=count - 1; i >= 0; i--) {
+    final View child=container.getChildAt(i);
+    if (child.getVisibility() == VISIBLE && child != ignoredDropTarget) {
+      child.getHitRect(r);
+      if (r.contains(scrolledX,scrolledY)) {
+        DropTarget target=null;
+        if (child instanceof ViewGroup) {
+          x=scrolledX - child.getLeft();
+          y=scrolledY - child.getTop();
+          target=findDropTarget((ViewGroup)child,x,y,dropCoordinates);
+        }
+        if (target == null) {
+          if (child instanceof DropTarget) {
+            dropCoordinates[0]=x;
+            dropCoordinates[1]=y;
+            return (DropTarget)child;
+          }
+        }
+ else {
+          return target;
+        }
+      }
+    }
+  }
+  return null;
+}

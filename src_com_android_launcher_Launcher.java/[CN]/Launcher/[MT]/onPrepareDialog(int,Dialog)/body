@@ -1,0 +1,14 @@
+{
+switch (id) {
+case DIALOG_CREATE_SHORTCUT:
+    mWorkspace.lock();
+  break;
+case DIALOG_RENAME_FOLDER:
+mWorkspace.lock();
+EditText input=(EditText)dialog.findViewById(R.id.folder_name);
+final CharSequence text=mFolderInfo.title;
+input.setText(text);
+input.setSelection(0,text.length());
+break;
+}
+}

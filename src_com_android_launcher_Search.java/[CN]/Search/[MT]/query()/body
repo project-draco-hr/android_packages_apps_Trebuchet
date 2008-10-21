@@ -1,0 +1,7 @@
+{
+  String query=mSearchText.getText().toString();
+  if (TextUtils.getTrimmedLength(mSearchText.getText()) == 0) {
+    return;
+  }
+  sendLaunchIntent(Intent.ACTION_SEARCH,null,query,null,0,null,mSearchable);
+}

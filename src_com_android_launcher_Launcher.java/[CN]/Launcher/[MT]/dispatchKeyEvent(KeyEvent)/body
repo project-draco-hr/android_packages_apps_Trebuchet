@@ -1,0 +1,14 @@
+{
+  if (event.getAction() == KeyEvent.ACTION_DOWN) {
+switch (event.getKeyCode()) {
+case KeyEvent.KEYCODE_BACK:
+      mWorkspace.dispatchKeyEvent(event);
+    closeFolder();
+  closeDrawer();
+return true;
+case KeyEvent.KEYCODE_HOME:
+return true;
+}
+}
+return super.dispatchKeyEvent(event);
+}

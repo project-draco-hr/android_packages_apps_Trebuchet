@@ -1,0 +1,32 @@
+{
+  if (mDestroyed)   return;
+  bindDesktopItems();
+  mAllAppsGrid.setAdapter(Launcher.getModel().getApplicationsAdapter());
+  if (mSavedState != null) {
+    mWorkspace.getChildAt(mWorkspace.getCurrentScreen()).requestFocus();
+    final long[] userFolders=mSavedState.getLongArray(RUNTIME_STATE_USER_FOLDERS);
+    if (userFolders != null) {
+      for (      long folderId : userFolders) {
+        final UserFolderInfo info=sModel.findFolderById(folderId);
+        if (info != null) {
+          openUserFolder(info);
+        }
+      }
+      final Folder openFolder=mWorkspace.getOpenFolder();
+      if (openFolder != null) {
+        openFolder.requestFocus();
+      }
+ else {
+        mWorkspace.getChildAt(mWorkspace.getCurrentScreen()).requestFocus();
+      }
+    }
+    final boolean allApps=mSavedState.getBoolean(RUNTIME_STATE_ALL_APPS_FOLDER,false);
+    if (allApps) {
+      mDrawer.open();
+      mDrawer.requestFocus();
+    }
+    mSavedState=null;
+  }
+  mDesktopLocked=false;
+  mDrawer.unlock();
+}

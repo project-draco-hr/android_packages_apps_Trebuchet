@@ -1,0 +1,11 @@
+{
+  View view;
+  if (convertView == null) {
+    view=mInflater.inflate(R.layout.create_shortcut_list_item,parent,false);
+  }
+ else {
+    view=convertView;
+  }
+  mGroups[groupPosition].bindView(childPosition,view);
+  return view;
+}
