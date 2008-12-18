@@ -6,7 +6,7 @@
     info.photo=photo;
     final int[] xy=mCellCoordinates;
     if (!findSlot(cellInfo,xy,info.spanX,info.spanY))     return;
-    LauncherModel.addItemToDatabase(this,info,Settings.Favorites.CONTAINER_DESKTOP,mWorkspace.getCurrentScreen(),xy[0],xy[1],false);
+    LauncherModel.addItemToDatabase(this,info,LauncherSettings.Favorites.CONTAINER_DESKTOP,mWorkspace.getCurrentScreen(),xy[0],xy[1],false);
     if (!mRestoring) {
       sModel.addDesktopItem(info);
       final PhotoFrame view=(PhotoFrame)mInflater.inflate(info.layoutResource,null);

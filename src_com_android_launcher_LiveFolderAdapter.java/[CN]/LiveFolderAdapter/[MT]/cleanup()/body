@@ -1,0 +1,19 @@
+{
+  for (  Drawable icon : mIcons.values()) {
+    icon.setCallback(null);
+  }
+  mIcons.clear();
+  for (  SoftReference<Drawable> icon : mCustomIcons.values()) {
+    final Drawable drawable=icon.get();
+    if (drawable != null) {
+      drawable.setCallback(null);
+    }
+  }
+  mCustomIcons.clear();
+  try {
+    getCursor().close();
+  }
+  finally {
+    mLauncher.stopManagingCursor(getCursor());
+  }
+}

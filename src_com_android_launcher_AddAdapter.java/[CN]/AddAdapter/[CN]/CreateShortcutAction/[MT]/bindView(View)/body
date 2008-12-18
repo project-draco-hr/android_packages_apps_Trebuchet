@@ -9,7 +9,7 @@
     }
   }
   if (mIcon == null) {
-    mIcon=info.loadIcon(pm);
+    mIcon=Utilities.createIconThumbnail(info.loadIcon(pm),mContext);
   }
   text.setText(mLabel);
   text.setCompoundDrawablesWithIntrinsicBounds(mIcon,null,null,null);

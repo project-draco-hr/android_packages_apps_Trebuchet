@@ -8,7 +8,8 @@
   mAllAppsGrid=(AllAppsGridView)drawer.getContent();
   final AllAppsGridView grid=mAllAppsGrid;
   final DeleteZone deleteZone=(DeleteZone)dragLayer.findViewById(R.id.delete_zone);
-  final ImageView handleIcon=(ImageView)drawer.findViewById(R.id.all_apps);
+  final HandleView handleIcon=(HandleView)drawer.findViewById(R.id.all_apps);
+  handleIcon.setLauncher(this);
   mHandleIcon=(TransitionDrawable)handleIcon.getDrawable();
   mHandleIcon.setCrossFadeEnabled(true);
   drawer.lock();

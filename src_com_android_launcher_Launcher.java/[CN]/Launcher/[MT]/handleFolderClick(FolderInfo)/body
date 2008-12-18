@@ -1,7 +1,7 @@
 {
   if (!folderInfo.opened) {
     closeFolder();
-    openUserFolder(folderInfo);
+    openFolder(folderInfo);
   }
  else {
     Folder openFolder=mWorkspace.getFolderForTag(folderInfo);
@@ -11,7 +11,7 @@
       closeFolder(openFolder);
       if (folderScreen != mWorkspace.getCurrentScreen()) {
         closeFolder();
-        openUserFolder(folderInfo);
+        openFolder(folderInfo);
       }
     }
   }

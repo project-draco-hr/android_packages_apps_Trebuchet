@@ -1,5 +1,0 @@
-{
-  mLauncher.closeFolder(this);
-  mLauncher.showRenameDialog((UserFolderInfo)mInfo);
-  return true;
-}

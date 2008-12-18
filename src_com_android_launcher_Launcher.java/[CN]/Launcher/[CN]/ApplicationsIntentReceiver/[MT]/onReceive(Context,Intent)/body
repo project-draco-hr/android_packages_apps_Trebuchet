@@ -3,5 +3,5 @@
     removeShortcutsForPackage(intent.getData().getSchemeSpecificPart());
   }
   removeDialog(DIALOG_CREATE_SHORTCUT);
-  sModel.loadApplications(false,Launcher.this);
+  sModel.loadApplications(false,Launcher.this,false);
 }

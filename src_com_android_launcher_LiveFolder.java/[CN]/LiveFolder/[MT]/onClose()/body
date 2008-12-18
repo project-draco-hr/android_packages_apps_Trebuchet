@@ -1,0 +1,4 @@
+{
+  super.onClose();
+  ((LiveFolderAdapter)mContent.getAdapter()).cleanup();
+}

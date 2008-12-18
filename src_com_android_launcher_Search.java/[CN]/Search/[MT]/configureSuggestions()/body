@@ -14,6 +14,6 @@
   mSearchable=searchable;
   mSearchText.setOnItemClickListener(this);
   mSearchText.setOnItemSelectedListener(this);
-  mSuggestionsAdapter=new SuggestionsAdapter(mContext,com.android.internal.R.layout.search_dropdown_item_1line,null,SuggestionsAdapter.ONE_LINE_FROM,SuggestionsAdapter.ONE_LINE_TO,mSearchable);
+  mSuggestionsAdapter=new SuggestionsAdapter(mContext,com.android.internal.R.layout.search_dropdown_item_2line,null,SuggestionsAdapter.TWO_LINE_FROM,SuggestionsAdapter.TWO_LINE_TO,mSearchable);
   mSearchText.setAdapter(mSuggestionsAdapter);
 }

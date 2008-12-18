@@ -14,7 +14,7 @@
       cellLayout.onDropChild(cell,x - xOffset,y - yOffset);
       final ItemInfo info=(ItemInfo)cell.getTag();
       CellLayout.LayoutParams lp=(CellLayout.LayoutParams)cell.getLayoutParams();
-      LauncherModel.moveItemInDatabase(mLauncher,info,Settings.Favorites.CONTAINER_DESKTOP,mCurrentScreen,lp.cellX,lp.cellY);
+      LauncherModel.moveItemInDatabase(mLauncher,info,LauncherSettings.Favorites.CONTAINER_DESKTOP,mCurrentScreen,lp.cellX,lp.cellY);
     }
   }
 }

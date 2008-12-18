@@ -1,6 +1,6 @@
 {
   super.onFinishInflate();
-  mContent=(GridView)findViewById(R.id.content);
+  mContent=(AbsListView)findViewById(R.id.content);
   mContent.setOnItemClickListener(this);
   mContent.setOnItemLongClickListener(this);
   mCloseButton=(Button)findViewById(R.id.close);

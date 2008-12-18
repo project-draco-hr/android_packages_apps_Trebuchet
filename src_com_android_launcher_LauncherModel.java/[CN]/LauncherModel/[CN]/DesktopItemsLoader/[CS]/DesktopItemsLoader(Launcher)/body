@@ -1,3 +1,0 @@
-{
-  mLauncher=new WeakReference<Launcher>(launcher);
-}

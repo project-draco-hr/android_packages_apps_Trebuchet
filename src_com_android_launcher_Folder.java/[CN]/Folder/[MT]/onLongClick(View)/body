@@ -1,3 +1,5 @@
 {
-  return false;
+  mLauncher.closeFolder(this);
+  mLauncher.showRenameDialog(mInfo);
+  return true;
 }

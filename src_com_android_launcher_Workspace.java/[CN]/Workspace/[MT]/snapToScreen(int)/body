@@ -1,5 +1,6 @@
 {
   enableChildrenCache();
+  whichScreen=Math.max(0,Math.min(whichScreen,getChildCount() - 1));
   boolean changingScreens=whichScreen != mCurrentScreen;
   mNextScreen=whichScreen;
   View focusedChild=getFocusedChild();

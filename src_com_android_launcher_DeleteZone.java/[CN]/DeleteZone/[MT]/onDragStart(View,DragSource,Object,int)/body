@@ -1,6 +1,6 @@
 {
   final ItemInfo item=(ItemInfo)info;
-  if (item != null && item.container != ItemInfo.NO_ID) {
+  if (item != null) {
     mTrashMode=true;
     createAnimations();
     final int[] location=mLocation;

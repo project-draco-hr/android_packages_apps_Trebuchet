@@ -1,9 +1,9 @@
 {
-  values.put(Settings.Favorites.ITEM_TYPE,itemType);
-  values.put(Settings.Favorites.CONTAINER,container);
-  values.put(Settings.Favorites.SCREEN,screen);
-  values.put(Settings.Favorites.CELLX,cellX);
-  values.put(Settings.Favorites.CELLY,cellY);
-  values.put(Settings.Favorites.SPANX,spanX);
-  values.put(Settings.Favorites.SPANY,spanY);
+  values.put(LauncherSettings.Favorites.ITEM_TYPE,itemType);
+  values.put(LauncherSettings.Favorites.CONTAINER,container);
+  values.put(LauncherSettings.Favorites.SCREEN,screen);
+  values.put(LauncherSettings.Favorites.CELLX,cellX);
+  values.put(LauncherSettings.Favorites.CELLY,cellY);
+  values.put(LauncherSettings.Favorites.SPANX,spanX);
+  values.put(LauncherSettings.Favorites.SPANY,spanY);
 }

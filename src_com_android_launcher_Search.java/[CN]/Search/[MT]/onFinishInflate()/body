@@ -3,7 +3,7 @@
   mSearchText=(AutoCompleteTextView)findViewById(R.id.input);
   mSearchText.setOnKeyListener(this);
   mSearchText.addTextChangedListener(this);
-  mGoButton=(Button)findViewById(R.id.go);
+  mGoButton=(ImageButton)findViewById(R.id.search_go_btn);
   mGoButton.setOnClickListener(this);
   mGoButton.setOnKeyListener(this);
   mSearchText.setOnLongClickListener(this);

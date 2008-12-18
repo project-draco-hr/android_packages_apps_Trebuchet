@@ -1,4 +1,4 @@
 {
   final ContentResolver cr=context.getContentResolver();
-  cr.delete(Settings.Favorites.getContentUri(item.id,false),null,null);
+  cr.delete(LauncherSettings.Favorites.getContentUri(item.id,false),null,null);
 }

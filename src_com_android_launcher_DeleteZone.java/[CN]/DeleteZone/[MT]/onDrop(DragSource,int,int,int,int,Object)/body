@@ -1,7 +1,8 @@
 {
   final ItemInfo item=(ItemInfo)dragInfo;
+  if (item.container == -1)   return;
   final LauncherModel model=Launcher.getModel();
-  if (item.container == Settings.Favorites.CONTAINER_DESKTOP) {
+  if (item.container == LauncherSettings.Favorites.CONTAINER_DESKTOP) {
     model.removeDesktopItem(item);
   }
  else {

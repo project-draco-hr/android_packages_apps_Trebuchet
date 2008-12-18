@@ -4,7 +4,7 @@
     final Intent intent=((ApplicationInfo)tag).intent;
     startActivitySafely(intent);
   }
- else   if (tag instanceof UserFolderInfo) {
-    handleFolderClick((UserFolderInfo)tag);
+ else   if (tag instanceof FolderInfo) {
+    handleFolderClick((FolderInfo)tag);
   }
 }

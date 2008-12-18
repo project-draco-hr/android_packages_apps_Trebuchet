@@ -1,0 +1,6 @@
+{
+  String notify=uri.getQueryParameter(PARAMETER_NOTIFY);
+  if (notify == null || "true".equals(notify)) {
+    getContext().getContentResolver().notifyChange(uri,null);
+  }
+}

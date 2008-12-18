@@ -1,13 +1,11 @@
 {
-  dalvik.system.VMRuntime.getRuntime().setMinimumHeapSize(4 * 1024 * 1024);
   super.onCreate(savedInstanceState);
   mInflater=getLayoutInflater();
   if (PROFILE_STARTUP) {
     android.os.Debug.startMethodTracing("/sdcard/launcher");
   }
+  checkForLocaleChange();
   setWallpaperDimension();
-  enableSensors();
-  enableOpenGL();
   if (sModel == null) {
     sModel=new LauncherModel();
   }

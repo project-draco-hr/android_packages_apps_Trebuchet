@@ -1,6 +1,6 @@
 {
   TextView text=(TextView)view;
   text.setText(R.string.add_photo_frame);
-  Drawable icon=getIcon(R.drawable.ic_launcher_gallery);
-  text.setCompoundDrawablesWithIntrinsicBounds(icon,null,null,null);
+  if (mIcon == null)   mIcon=getIcon(R.drawable.ic_launcher_gallery);
+  text.setCompoundDrawablesWithIntrinsicBounds(mIcon,null,null,null);
 }

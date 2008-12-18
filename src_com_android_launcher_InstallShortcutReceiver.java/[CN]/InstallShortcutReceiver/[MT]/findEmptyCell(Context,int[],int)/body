@@ -3,11 +3,11 @@
   final int yCount=Launcher.NUMBER_CELLS_Y;
   boolean[][] occupied=new boolean[xCount][yCount];
   final ContentResolver cr=context.getContentResolver();
-  Cursor c=cr.query(Settings.Favorites.CONTENT_URI,new String[]{"cellX","cellY","spanX","spanY"},"screen=?",new String[]{String.valueOf(screen)},null);
-  final int cellXIndex=c.getColumnIndexOrThrow(Settings.Favorites.CELLX);
-  final int cellYIndex=c.getColumnIndexOrThrow(Settings.Favorites.CELLY);
-  final int spanXIndex=c.getColumnIndexOrThrow(Settings.Favorites.SPANX);
-  final int spanYIndex=c.getColumnIndexOrThrow(Settings.Favorites.SPANY);
+  Cursor c=cr.query(LauncherSettings.Favorites.CONTENT_URI,new String[]{LauncherSettings.Favorites.CELLX,LauncherSettings.Favorites.CELLY,LauncherSettings.Favorites.SPANX,LauncherSettings.Favorites.SPANY},LauncherSettings.Favorites.SCREEN + "=?",new String[]{String.valueOf(screen)},null);
+  final int cellXIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.CELLX);
+  final int cellYIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.CELLY);
+  final int spanXIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.SPANX);
+  final int spanYIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.SPANY);
   try {
     while (c.moveToNext()) {
       int cellX=c.getInt(cellXIndex);

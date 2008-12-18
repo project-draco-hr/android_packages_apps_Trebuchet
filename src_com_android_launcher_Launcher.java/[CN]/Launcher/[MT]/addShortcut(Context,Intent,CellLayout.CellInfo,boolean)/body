@@ -7,7 +7,7 @@
   boolean customIcon=false;
   Intent.ShortcutIconResource iconResource=null;
   if (bitmap != null) {
-    icon=new BitmapDrawable(Utilities.createBitmapThumbnail(bitmap,context));
+    icon=new FastBitmapDrawable(Utilities.createBitmapThumbnail(bitmap,context));
     filtered=true;
     customIcon=true;
   }
@@ -36,6 +36,6 @@
   info.intent=intent;
   info.customIcon=customIcon;
   info.iconResource=iconResource;
-  LauncherModel.addItemToDatabase(context,info,Settings.Favorites.CONTAINER_DESKTOP,cellInfo.screen,cellInfo.cellX,cellInfo.cellY,notify);
+  LauncherModel.addItemToDatabase(context,info,LauncherSettings.Favorites.CONTAINER_DESKTOP,cellInfo.screen,cellInfo.cellX,cellInfo.cellY,notify);
   return info;
 }

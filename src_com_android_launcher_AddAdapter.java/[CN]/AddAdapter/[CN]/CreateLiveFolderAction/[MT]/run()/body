@@ -1,0 +1,6 @@
+{
+  Intent intent=new Intent(mCreateLiveFolderIntent);
+  ActivityInfo activityInfo=mInfo.activityInfo;
+  intent.setComponent(new ComponentName(activityInfo.applicationInfo.packageName,activityInfo.name));
+  mLauncher.addLiveFolder(intent);
+}

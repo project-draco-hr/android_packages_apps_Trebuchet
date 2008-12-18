@@ -1,0 +1,4 @@
+{
+  mInfo=info;
+  mCloseButton.setText(info.title);
+}

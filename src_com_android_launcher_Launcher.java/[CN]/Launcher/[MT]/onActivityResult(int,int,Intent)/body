@@ -10,6 +10,9 @@ break;
 case REQUEST_UPDATE_PHOTO:
 completeUpdatePhotoFrame(data,mAddItemCellInfo);
 break;
+case REQUEST_CREATE_LIVE_FOLDER:
+completeAddLiveFolder(data,mAddItemCellInfo,!mDesktopLocked);
+break;
 }
 }
 mWaitingForResult=false;

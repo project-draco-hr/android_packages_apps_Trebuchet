@@ -1,5 +1,5 @@
 {
   mDesktopLocked=true;
   mDrawer.lock();
-  sModel.loadUserItems(false,this);
+  sModel.loadUserItems(false,this,false);
 }

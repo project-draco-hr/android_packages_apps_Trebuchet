@@ -12,6 +12,6 @@
   if (info.title == null) {
     info.title="";
   }
-  info.itemType=Settings.Favorites.ITEM_TYPE_APPLICATION;
+  info.itemType=LauncherSettings.Favorites.ITEM_TYPE_APPLICATION;
   return info;
 }

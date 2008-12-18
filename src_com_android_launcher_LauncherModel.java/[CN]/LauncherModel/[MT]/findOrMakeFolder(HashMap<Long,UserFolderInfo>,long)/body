@@ -1,9 +1,0 @@
-{
-  UserFolderInfo folderInfo;
-  folderInfo=userFolders.get(id);
-  if (folderInfo == null) {
-    folderInfo=new UserFolderInfo();
-    userFolders.put(id,folderInfo);
-  }
-  return folderInfo;
-}

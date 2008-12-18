@@ -1,5 +1,0 @@
-{
-  mInfo=info;
-  setContentAdapter(new ApplicationsAdapter(mContext,info.contents));
-  mCloseButton.setText(info.title);
-}

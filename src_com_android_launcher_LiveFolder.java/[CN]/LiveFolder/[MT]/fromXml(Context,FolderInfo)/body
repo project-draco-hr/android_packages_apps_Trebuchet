@@ -1,0 +1,4 @@
+{
+  final int layout=isDisplayModeList(folderInfo) ? R.layout.live_folder_list : R.layout.live_folder_grid;
+  return (LiveFolder)LayoutInflater.from(context).inflate(layout,null);
+}

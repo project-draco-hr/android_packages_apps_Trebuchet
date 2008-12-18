@@ -23,7 +23,7 @@
     }
     action.sort(new Comparator<ApplicationInfo>(){
       public final int compare(      ApplicationInfo a,      ApplicationInfo b){
-        return sCollator.compare(a.title,b.title);
+        return sCollator.compare(a.title.toString(),b.title.toString());
       }
     }
 );

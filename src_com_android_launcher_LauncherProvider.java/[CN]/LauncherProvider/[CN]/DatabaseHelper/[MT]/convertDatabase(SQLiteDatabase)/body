@@ -1,0 +1,23 @@
+{
+  boolean converted=false;
+  final Uri uri=Uri.parse("content://" + Settings.AUTHORITY + "/favorites?notify=true");
+  final ContentResolver resolver=mContext.getContentResolver();
+  Cursor cursor=null;
+  try {
+    cursor=resolver.query(uri,null,null,null,null);
+  }
+ catch (  Exception e) {
+  }
+  if (cursor != null && cursor.getCount() > 0) {
+    try {
+      converted=copyFromCursor(db,cursor) > 0;
+    }
+  finally {
+      cursor.close();
+    }
+    if (converted) {
+      resolver.delete(uri,null,null);
+    }
+  }
+  return converted;
+}

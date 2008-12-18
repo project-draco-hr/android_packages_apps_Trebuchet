@@ -1,14 +1,17 @@
 {
   mCreateShortcutIntent=new Intent(Intent.ACTION_CREATE_SHORTCUT);
   mCreateShortcutIntent.setComponent(null);
+  mCreateLiveFolderIntent=new Intent(LiveFolders.ACTION_CREATE_LIVE_FOLDER);
+  mCreateLiveFolderIntent.setComponent(null);
   mSetWallpaperIntent=new Intent(Intent.ACTION_SET_WALLPAPER);
   mSetWallpaperIntent.setComponent(null);
   mLauncher=launcher;
   mInflater=(LayoutInflater)launcher.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-  mGroups=new Group[forFolder ? 2 : 4];
+  mGroups=new Group[forFolder ? 2 : 5];
   final Group[] groups=mGroups;
   groups[GROUP_APPLICATIONS]=new ApplicationsGroup(mLauncher,mLauncher.getString(R.string.group_applications));
   groups[GROUP_SHORTCUTS]=new Group(mLauncher.getString(R.string.group_shortcuts));
+  groups[GROUP_LIVE_FOLDERS]=new Group(mLauncher.getString(R.string.group_live_folders));
   if (!forFolder) {
     groups[GROUP_WALLPAPERS]=new Group(mLauncher.getString(R.string.group_wallpapers));
     groups[GROUP_SHORTCUTS].add(new CreateFolderAction(launcher));
@@ -26,6 +29,15 @@
     for (int i=0; i < count; i++) {
       ResolveInfo resolveInfo=list.get(i);
       shortcuts.add(new CreateShortcutAction(launcher,resolveInfo));
+    }
+  }
+  list=findTargetsForIntent(mCreateLiveFolderIntent,packageManager);
+  if (list != null && list.size() > 0) {
+    int count=list.size();
+    final Group shortcuts=groups[GROUP_LIVE_FOLDERS];
+    for (int i=0; i < count; i++) {
+      ResolveInfo resolveInfo=list.get(i);
+      shortcuts.add(new CreateLiveFolderAction(launcher,resolveInfo));
     }
   }
   list=findTargetsForIntent(mSetWallpaperIntent,packageManager);
