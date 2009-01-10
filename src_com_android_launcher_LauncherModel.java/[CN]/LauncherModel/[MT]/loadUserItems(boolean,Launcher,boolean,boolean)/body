@@ -1,5 +1,6 @@
 {
   if (isLaunching && mDesktopItems != null && mDesktopItemsLoaded) {
+    if (loadApplications)     startApplicationsLoader(launcher);
     launcher.onDesktopItemsLoaded();
     return;
   }
@@ -12,7 +13,7 @@
     }
   }
   mDesktopItemsLoaded=false;
-  mDesktopItemsLoader=new DesktopItemsLoader(launcher,localeChanged);
+  mDesktopItemsLoader=new DesktopItemsLoader(launcher,localeChanged,loadApplications);
   mDesktopLoader=new Thread(mDesktopItemsLoader,"Desktop Items Loader");
   mDesktopLoader.start();
 }

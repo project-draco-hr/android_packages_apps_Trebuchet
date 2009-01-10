@@ -1,5 +1,5 @@
 {
   sModel.loadApplications(true,this,mLocaleChanged);
-  sModel.loadUserItems(!mLocaleChanged,this,mLocaleChanged);
+  sModel.loadUserItems(!mLocaleChanged,this,mLocaleChanged,true);
   mRestoring=false;
 }

@@ -1,0 +1,4 @@
+Launcher.DesktopItemsBinder binder
+ArrayList<ItemInfo> shortcuts
+int start
+int count

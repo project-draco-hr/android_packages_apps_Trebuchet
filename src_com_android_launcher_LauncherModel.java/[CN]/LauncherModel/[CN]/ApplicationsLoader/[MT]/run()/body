@@ -1,5 +1,6 @@
 {
   mRunning=true;
+  android.os.Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);
   Intent mainIntent=new Intent(Intent.ACTION_MAIN,null);
   mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
   final Launcher launcher=mLauncher.get();
