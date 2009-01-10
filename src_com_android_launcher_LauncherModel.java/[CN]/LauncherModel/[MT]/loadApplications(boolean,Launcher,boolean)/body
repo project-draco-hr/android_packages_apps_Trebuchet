@@ -15,7 +15,7 @@
     }
   }
   mApplicationsLoaded=false;
-  mApplicationsLoader=new ApplicationsLoader(launcher);
-  mLoader=new Thread(mApplicationsLoader,"Applications Loader");
-  mLoader.start();
+  if (!isLaunching) {
+    startApplicationsLoader(launcher);
+  }
 }

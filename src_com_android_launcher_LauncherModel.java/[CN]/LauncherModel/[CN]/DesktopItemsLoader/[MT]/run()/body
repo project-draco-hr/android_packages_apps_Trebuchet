@@ -169,6 +169,7 @@ launcher.onDesktopItemsLoaded();
 }
 }
 );
+if (mLoadApplications) startApplicationsLoader(launcher);
 }
 if (!mStopped) {
 mDesktopItemsLoaded=true;

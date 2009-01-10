@@ -1,0 +1,8 @@
+{
+switch (msg.what) {
+case MESSAGE_BIND_ITEMS:
+    Launcher launcher=mLauncher.get();
+  if (launcher != null)   launcher.bindItems(this,mShortcuts,msg.arg1,msg.arg2);
+break;
+}
+}
