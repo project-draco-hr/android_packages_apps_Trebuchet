@@ -6,4 +6,5 @@
   Bundle appData=new Bundle();
   appData.putString(SearchManager.SOURCE,"launcher-widget");
   sendLaunchIntent(Intent.ACTION_SEARCH,null,query,appData,0,null,mSearchable);
+  clearQuery();
 }

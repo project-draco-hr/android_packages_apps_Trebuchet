@@ -8,6 +8,7 @@
       Uri suggestionData=mSuggestionData;
       String suggestionQuery=mSuggestionQuery;
       sendLaunchIntent(suggestionAction,suggestionData,suggestionQuery,null,KeyEvent.KEYCODE_UNKNOWN,null,si);
+      clearQuery();
       return true;
     }
   }
