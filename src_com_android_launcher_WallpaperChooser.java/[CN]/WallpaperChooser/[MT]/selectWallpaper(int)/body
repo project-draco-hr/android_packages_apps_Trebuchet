@@ -4,7 +4,7 @@
   }
   mIsWallpaperSet=true;
   try {
-    InputStream stream=getResources().openRawResource(IMAGE_IDS[position]);
+    InputStream stream=getResources().openRawResource(mImages.get(position));
     setWallpaper(stream);
     setResult(RESULT_OK);
     finish();

@@ -1,3 +1,3 @@
 {
-  return THUMB_IDS.length;
+  return mThumbs.size();
 }

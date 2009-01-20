@@ -1,6 +1,7 @@
 {
   super.onCreate(icicle);
   requestWindowFeature(Window.FEATURE_NO_TITLE);
+  findWallpapers();
   setContentView(R.layout.wallpaper_chooser);
   mOptions=new BitmapFactory.Options();
   mOptions.inDither=false;
