@@ -1,4 +1,0 @@
-{
-  mAddItemCellInfo.screen=mWorkspace.getCurrentScreen();
-  mWorkspace.addApplicationShortcut(info,mAddItemCellInfo);
-}

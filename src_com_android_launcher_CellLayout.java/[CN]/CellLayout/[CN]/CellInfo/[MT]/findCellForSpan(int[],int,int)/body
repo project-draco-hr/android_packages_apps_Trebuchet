@@ -1,20 +1,19 @@
 {
-  if (vacantCells == null) {
-    return false;
-  }
+  final ArrayList<VacantCell> list=vacantCells;
+  final int count=list.size();
+  boolean found=false;
   if (this.spanX >= spanX && this.spanY >= spanY) {
     cellXY[0]=cellX;
     cellXY[1]=cellY;
-    return true;
+    found=true;
   }
-  final ArrayList<VacantCell> list=vacantCells;
-  final int count=list.size();
   for (int i=0; i < count; i++) {
     VacantCell cell=list.get(i);
     if (cell.spanX == spanX && cell.spanY == spanY) {
       cellXY[0]=cell.cellX;
       cellXY[1]=cell.cellY;
-      return true;
+      found=true;
+      break;
     }
   }
   for (int i=0; i < count; i++) {
@@ -22,8 +21,10 @@
     if (cell.spanX >= spanX && cell.spanY >= spanY) {
       cellXY[0]=cell.cellX;
       cellXY[1]=cell.cellY;
-      return true;
+      found=true;
+      break;
     }
   }
-  return false;
+  clearVacantCells();
+  return found;
 }

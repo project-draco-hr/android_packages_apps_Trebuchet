@@ -1,6 +1,0 @@
-{
-  TextView text=(TextView)view;
-  text.setText(R.string.add_search);
-  if (mIcon == null)   mIcon=getIcon(R.drawable.ic_search_gadget);
-  text.setCompoundDrawablesWithIntrinsicBounds(mIcon,null,null,null);
-}

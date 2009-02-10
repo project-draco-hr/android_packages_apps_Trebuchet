@@ -1,0 +1,11 @@
+{
+  ListItem item=(ListItem)getItem(position);
+  if (convertView == null) {
+    convertView=mInflater.inflate(R.layout.add_list_item,parent,false);
+  }
+  TextView textView=(TextView)convertView;
+  textView.setTag(item);
+  textView.setText(item.text);
+  textView.setCompoundDrawablesWithIntrinsicBounds(item.image,null,null,null);
+  return convertView;
+}

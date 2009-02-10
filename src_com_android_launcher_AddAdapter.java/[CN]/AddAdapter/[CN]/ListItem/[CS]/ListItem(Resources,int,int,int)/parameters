@@ -1,0 +1,4 @@
+Resources res
+int textResourceId
+int imageResourceId
+int actionTag

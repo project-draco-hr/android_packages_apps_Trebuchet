@@ -1,6 +1,0 @@
-{
-  Intent intent=new Intent(mSetWallpaperIntent);
-  ActivityInfo activityInfo=mInfo.activityInfo;
-  intent.setComponent(new ComponentName(activityInfo.applicationInfo.packageName,activityInfo.name));
-  mLauncher.startActivity(intent);
-}

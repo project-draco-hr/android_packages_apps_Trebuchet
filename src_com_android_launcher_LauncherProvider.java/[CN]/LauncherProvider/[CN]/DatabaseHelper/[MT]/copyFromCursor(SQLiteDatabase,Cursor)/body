@@ -26,6 +26,7 @@
     values.put(LauncherSettings.Favorites.ICON_RESOURCE,c.getString(iconResourceIndex));
     values.put(LauncherSettings.Favorites.CONTAINER,c.getInt(containerIndex));
     values.put(LauncherSettings.Favorites.ITEM_TYPE,c.getInt(itemTypeIndex));
+    values.put(LauncherSettings.Favorites.GADGET_ID,-1);
     values.put(LauncherSettings.Favorites.SCREEN,c.getInt(screenIndex));
     values.put(LauncherSettings.Favorites.CELLX,c.getInt(cellXIndex));
     values.put(LauncherSettings.Favorites.CELLY,c.getInt(cellYIndex));

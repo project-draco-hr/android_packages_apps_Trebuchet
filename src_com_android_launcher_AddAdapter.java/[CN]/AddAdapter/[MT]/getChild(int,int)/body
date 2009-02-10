@@ -1,3 +1,0 @@
-{
-  return mGroups[groupPosition].get(childPosition);
-}

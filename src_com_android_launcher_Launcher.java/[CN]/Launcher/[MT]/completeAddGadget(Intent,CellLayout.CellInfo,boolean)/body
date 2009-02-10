@@ -1,0 +1,31 @@
+{
+  Bundle extras=data.getExtras();
+  int gadgetId=extras.getInt(GadgetManager.EXTRA_GADGET_ID,-1);
+  Log.d(LOG_TAG,"dumping extras content=" + extras.toString());
+  GadgetInfo gadgetInfo=mGadgetManager.getGadgetInfo(gadgetId);
+  CellLayout layout=(CellLayout)mWorkspace.getChildAt(cellInfo.screen);
+  layout.rectToCell(gadgetInfo.minWidth,gadgetInfo.minHeight,cellInfo);
+  final int[] xy=mCellCoordinates;
+  if (!findSlot(cellInfo,xy,cellInfo.spanX,cellInfo.spanY))   return;
+  LauncherGadgetInfo launcherInfo=new LauncherGadgetInfo(gadgetId);
+  launcherInfo.spanX=cellInfo.spanX;
+  launcherInfo.spanY=cellInfo.spanY;
+  LauncherModel.addItemToDatabase(this,launcherInfo,LauncherSettings.Favorites.CONTAINER_DESKTOP,mWorkspace.getCurrentScreen(),xy[0],xy[1],false);
+  if (!mRestoring) {
+    sModel.addDesktopItem(launcherInfo);
+    launcherInfo.hostView=mGadgetHost.createView(this,gadgetId,gadgetInfo);
+    launcherInfo.hostView.setGadget(gadgetId,gadgetInfo);
+    launcherInfo.hostView.setTag(launcherInfo);
+    mWorkspace.addInCurrentScreen(launcherInfo.hostView,xy[0],xy[1],launcherInfo.spanX,launcherInfo.spanY,insertAtFirst);
+  }
+ else   if (sModel.isDesktopLoaded()) {
+    sModel.addDesktopItem(launcherInfo);
+  }
+  if (!extras.containsKey(SKIP_CONFIG) || true) {
+    Log.d(LOG_TAG,"requesting new gadget update because we had a config step");
+    Intent intent=new Intent(GadgetManager.GADGET_UPDATE_ACTION);
+    intent.putExtra(GadgetManager.EXTRA_GADGET_IDS,new int[]{gadgetId});
+    intent.setComponent(gadgetInfo.provider);
+    sendBroadcast(intent);
+  }
+}

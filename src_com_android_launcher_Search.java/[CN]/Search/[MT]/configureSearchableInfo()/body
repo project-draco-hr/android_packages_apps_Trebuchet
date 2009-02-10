@@ -1,0 +1,15 @@
+{
+  ISearchManager sms;
+  SearchableInfo searchable;
+  sms=ISearchManager.Stub.asInterface(ServiceManager.getService(Context.SEARCH_SERVICE));
+  try {
+    searchable=sms.getSearchableInfo(null,true);
+  }
+ catch (  RemoteException e) {
+    searchable=null;
+  }
+  if (searchable == null) {
+    return;
+  }
+  mSearchable=searchable;
+}

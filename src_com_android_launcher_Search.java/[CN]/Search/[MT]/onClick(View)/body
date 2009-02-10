@@ -2,4 +2,12 @@
   if (v == mGoButton) {
     query();
   }
+ else   if (v == mVoiceButton) {
+    try {
+      getContext().startActivity(mVoiceSearchIntent);
+    }
+ catch (    ActivityNotFoundException ex) {
+      Log.w(TAG,"Could not find voice search activity");
+    }
+  }
 }

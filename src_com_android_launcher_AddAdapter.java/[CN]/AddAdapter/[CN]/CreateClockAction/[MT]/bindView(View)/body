@@ -1,6 +1,0 @@
-{
-  TextView text=(TextView)view;
-  text.setText(R.string.add_clock);
-  Drawable icon=getIcon(R.drawable.ic_launcher_alarmclock);
-  text.setCompoundDrawablesWithIntrinsicBounds(icon,null,null,null);
-}

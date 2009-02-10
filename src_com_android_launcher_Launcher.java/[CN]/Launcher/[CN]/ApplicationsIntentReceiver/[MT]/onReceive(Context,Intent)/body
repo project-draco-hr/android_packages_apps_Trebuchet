@@ -1,7 +1,18 @@
 {
-  if (REMOVE_SHORTCUT_ON_PACKAGE_REMOVE && Intent.ACTION_PACKAGE_REMOVED.equals(intent.getAction())) {
-    removeShortcutsForPackage(intent.getData().getSchemeSpecificPart());
+  boolean reloadWorkspace=false;
+  if (Intent.ACTION_PACKAGE_REMOVED.equals(intent.getAction())) {
+    if (!intent.getBooleanExtra(Intent.EXTRA_REPLACING,false)) {
+      removeShortcutsForPackage(intent.getData().getSchemeSpecificPart());
+    }
+ else {
+      reloadWorkspace=true;
+    }
   }
   removeDialog(DIALOG_CREATE_SHORTCUT);
-  sModel.loadApplications(false,Launcher.this,false);
+  if (!reloadWorkspace) {
+    sModel.loadApplications(false,Launcher.this,false);
+  }
+ else {
+    sModel.loadUserItems(false,Launcher.this,false,true);
+  }
 }

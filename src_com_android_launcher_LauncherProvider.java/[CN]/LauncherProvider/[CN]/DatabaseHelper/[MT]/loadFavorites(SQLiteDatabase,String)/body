@@ -56,15 +56,6 @@ catch (  IOException e) {
   }
   values.clear();
   values.put(LauncherSettings.Favorites.CONTAINER,LauncherSettings.Favorites.CONTAINER_DESKTOP);
-  values.put(LauncherSettings.Favorites.ITEM_TYPE,LauncherSettings.Favorites.ITEM_TYPE_WIDGET_CLOCK);
-  values.put(LauncherSettings.Favorites.SCREEN,1);
-  values.put(LauncherSettings.Favorites.CELLX,1);
-  values.put(LauncherSettings.Favorites.CELLY,0);
-  values.put(LauncherSettings.Favorites.SPANX,2);
-  values.put(LauncherSettings.Favorites.SPANY,2);
-  db.insert(TABLE_FAVORITES,null,values);
-  values.clear();
-  values.put(LauncherSettings.Favorites.CONTAINER,LauncherSettings.Favorites.CONTAINER_DESKTOP);
   values.put(LauncherSettings.Favorites.ITEM_TYPE,LauncherSettings.Favorites.ITEM_TYPE_WIDGET_SEARCH);
   values.put(LauncherSettings.Favorites.SCREEN,2);
   values.put(LauncherSettings.Favorites.CELLX,0);

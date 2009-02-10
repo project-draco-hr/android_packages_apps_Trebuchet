@@ -1,0 +1,7 @@
+{
+  super(context);
+  mInflater=(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+  setAnimateFirstView(true);
+  setInAnimation(context,android.R.anim.fade_in);
+  setOutAnimation(context,android.R.anim.fade_out);
+}

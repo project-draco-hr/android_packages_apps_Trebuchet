@@ -1,6 +1,6 @@
 {
   boolean converted=false;
-  final Uri uri=Uri.parse("content://" + Settings.AUTHORITY + "/favorites?notify=true");
+  final Uri uri=Uri.parse("content://" + Settings.AUTHORITY + "/old_favorites?notify=true");
   final ContentResolver resolver=mContext.getContentResolver();
   Cursor cursor=null;
   try {

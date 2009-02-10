@@ -1,3 +1,0 @@
-{
-  return mContext.getResources().getDrawable(resource);
-}
