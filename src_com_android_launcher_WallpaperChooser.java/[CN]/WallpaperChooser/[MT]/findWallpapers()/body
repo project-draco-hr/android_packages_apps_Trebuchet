@@ -11,7 +11,7 @@
     if (res != 0) {
       final int thumbRes=resources.getIdentifier(extra + "_small","drawable",packageName);
       if (thumbRes != 0) {
-        mThumbs.add(res);
+        mThumbs.add(thumbRes);
         mImages.add(res);
       }
     }

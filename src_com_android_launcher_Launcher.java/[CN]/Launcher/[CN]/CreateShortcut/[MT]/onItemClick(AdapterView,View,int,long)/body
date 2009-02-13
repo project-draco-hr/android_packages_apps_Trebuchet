@@ -30,8 +30,7 @@ case AddAdapter.ITEM_SEARCH:
 case AddAdapter.ITEM_GADGET:
 {
   int gadgetId=Launcher.this.mGadgetHost.allocateGadgetId();
-  Intent pickIntent=new Intent(GadgetManager.GADGET_PICK_ACTION);
-  pickIntent.putExtra(GadgetManager.EXTRA_HOST_ID,GADGET_HOST_ID);
+  Intent pickIntent=new Intent(GadgetManager.ACTION_GADGET_PICK);
   pickIntent.putExtra(GadgetManager.EXTRA_GADGET_ID,gadgetId);
   startActivityForResult(pickIntent,REQUEST_PICK_GADGET);
   break;
@@ -47,7 +46,7 @@ break;
 }
 case AddAdapter.ITEM_FOLDER:
 {
-addFolder();
+addFolder(!mDesktopLocked);
 dismissDialog(DIALOG_CREATE_SHORTCUT);
 break;
 }

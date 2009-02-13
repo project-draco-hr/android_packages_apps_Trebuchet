@@ -1,5 +1,6 @@
 {
   cellInfo.screen=mWorkspace.getCurrentScreen();
+  if (!findSingleSlot(cellInfo))   return;
   final ApplicationInfo info=addShortcut(this,data,cellInfo,false);
   if (!mRestoring) {
     sModel.addDesktopItem(info);

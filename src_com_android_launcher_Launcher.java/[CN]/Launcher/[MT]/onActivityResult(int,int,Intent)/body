@@ -2,7 +2,7 @@
   if (resultCode == RESULT_OK && mAddItemCellInfo != null) {
 switch (requestCode) {
 case REQUEST_PICK_APPLICATION:
-      completeAddApplication(this,data,mAddItemCellInfo);
+      completeAddApplication(this,data,mAddItemCellInfo,!mDesktopLocked);
     break;
 case REQUEST_PICK_SHORTCUT:
   addShortcut(data);

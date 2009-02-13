@@ -22,20 +22,12 @@ break;
 case LauncherSettings.Favorites.ITEM_TYPE_GADGET:
 final LauncherGadgetInfo launcherInfo=(LauncherGadgetInfo)item;
 final int gadgetId=launcherInfo.gadgetId;
-GadgetInfo gadgetInfo=mGadgetManager.getGadgetInfo(gadgetId);
+GadgetProviderInfo gadgetInfo=mGadgetManager.getGadgetInfo(gadgetId);
 launcherInfo.hostView=mGadgetHost.createView(this,gadgetId,gadgetInfo);
-Log.d(LOG_TAG,"about to setGadget during desktop bind");
+Log.d(LOG_TAG,"about to setGadget for id=" + gadgetId + ", info="+ gadgetInfo);
 launcherInfo.hostView.setGadget(gadgetId,gadgetInfo);
 launcherInfo.hostView.setTag(launcherInfo);
 workspace.addInScreen(launcherInfo.hostView,item.screen,item.cellX,item.cellY,item.spanX,item.spanY,!desktopLocked);
-if (gadgetInfo != null) {
-if (gadgetInfo.provider != null) {
-Intent intent=new Intent(GadgetManager.GADGET_UPDATE_ACTION);
-intent.putExtra(GadgetManager.EXTRA_GADGET_IDS,new int[]{gadgetId});
-intent.setComponent(gadgetInfo.provider);
-sendBroadcast(intent);
-}
-}
 break;
 case LauncherSettings.Favorites.ITEM_TYPE_WIDGET_SEARCH:
 final int screen=workspace.getCurrentScreen();

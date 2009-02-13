@@ -34,14 +34,5 @@
     }
   }
   cellInfo.valid=cellInfo.vacantCells.size() > 0;
-  if (cellInfo.valid) {
-    int[] xy=new int[2];
-    if (cellInfo.findCellForSpan(xy,1,1)) {
-      cellInfo.cellX=xy[0];
-      cellInfo.cellY=xy[1];
-      cellInfo.spanY=1;
-      cellInfo.spanX=1;
-    }
-  }
   return cellInfo;
 }

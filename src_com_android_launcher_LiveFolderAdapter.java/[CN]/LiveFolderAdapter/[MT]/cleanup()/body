@@ -10,10 +10,13 @@
     }
   }
   mCustomIcons.clear();
-  try {
-    getCursor().close();
-  }
+  final Cursor cursor=getCursor();
+  if (cursor != null) {
+    try {
+      cursor.close();
+    }
   finally {
-    mLauncher.stopManagingCursor(getCursor());
+      mLauncher.stopManagingCursor(cursor);
+    }
   }
 }

@@ -1,16 +1,13 @@
 {
   int gadgetId=data.getIntExtra(GadgetManager.EXTRA_GADGET_ID,-1);
-  GadgetInfo gadget=mGadgetManager.getGadgetInfo(gadgetId);
+  GadgetProviderInfo gadget=mGadgetManager.getGadgetInfo(gadgetId);
   if (gadget.configure != null) {
-    Intent intent=new Intent(GadgetManager.GADGET_CONFIGURE_ACTION);
+    Intent intent=new Intent(GadgetManager.ACTION_GADGET_CONFIGURE);
     intent.setComponent(gadget.configure);
     intent.putExtra(GadgetManager.EXTRA_GADGET_ID,gadgetId);
     startActivityForResult(intent,REQUEST_CREATE_GADGET);
   }
  else {
-    Log.d(LOG_TAG,"dumping extras content=" + data.getExtras().toString());
-    data.putExtra(SKIP_CONFIG,true);
-    Log.d(LOG_TAG,"dumping extras content=" + data.getExtras().toString());
     onActivityResult(REQUEST_CREATE_GADGET,Activity.RESULT_OK,data);
   }
 }

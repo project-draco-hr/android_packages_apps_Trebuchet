@@ -1,6 +1,7 @@
 {
   mDestroyed=true;
   super.onDestroy();
+  mGadgetHost.stopListening();
   TextKeyListener.getInstance().release();
   mAllAppsGrid.clearTextFilter();
   mAllAppsGrid.setAdapter(null);
