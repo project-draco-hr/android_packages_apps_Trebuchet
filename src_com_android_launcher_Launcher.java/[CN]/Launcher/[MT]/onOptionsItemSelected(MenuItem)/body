@@ -7,7 +7,10 @@ case MENU_WALLPAPER_SETTINGS:
 startWallpaper();
 return true;
 case MENU_SEARCH:
-if (!mWorkspace.snapToSearch()) {
+if (mWorkspace.snapToSearch()) {
+closeDrawer(true);
+}
+ else {
 onSearchRequested();
 }
 return true;
