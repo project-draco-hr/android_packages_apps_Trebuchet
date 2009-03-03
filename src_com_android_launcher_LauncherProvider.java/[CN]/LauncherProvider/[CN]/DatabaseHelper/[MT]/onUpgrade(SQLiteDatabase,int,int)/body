@@ -1,4 +1,5 @@
 {
+  if (LOGD)   Log.d(LOG_TAG,"onUpgrade triggered");
   int version=oldVersion;
   if (version == 1) {
     db.beginTransaction();
@@ -12,6 +13,9 @@
     }
  finally {
       db.endTransaction();
+    }
+    if (version == 2) {
+      convertWidgets(db);
     }
   }
   if (version != DATABASE_VERSION) {

@@ -1,5 +1,5 @@
 {
-  if (isLaunching && mDesktopItems != null && mDesktopItemsLoaded) {
+  if (isLaunching && isDesktopLoaded()) {
     if (loadApplications)     startApplicationsLoader(launcher);
     launcher.onDesktopItemsLoaded();
     return;

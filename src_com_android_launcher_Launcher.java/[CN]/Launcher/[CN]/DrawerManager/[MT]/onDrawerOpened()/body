@@ -1,6 +1,13 @@
 {
   if (!mOpen) {
     mHandleIcon.reverseTransition(150);
+    final Rect bounds=mWorkspace.mDrawerBounds;
+    View view=mAllAppsGrid;
+    view.getDrawingRect(bounds);
+    while (view != mDragLayer) {
+      bounds.offset(view.getLeft(),view.getTop());
+      view=(View)view.getParent();
+    }
     mOpen=true;
   }
 }

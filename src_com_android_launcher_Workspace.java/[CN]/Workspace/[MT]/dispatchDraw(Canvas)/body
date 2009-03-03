@@ -1,4 +1,12 @@
 {
+  if (mLauncher.isDrawerUp()) {
+    final Rect clipBounds=mClipBounds;
+    canvas.getClipBounds(clipBounds);
+    clipBounds.offset(-mScrollX,-mScrollY);
+    if (mDrawerBounds.contains(clipBounds)) {
+      return;
+    }
+  }
   float x=mScrollX * mWallpaperOffset;
   if (x + mWallpaperWidth < mRight - mLeft) {
     x=mRight - mLeft - mWallpaperWidth;

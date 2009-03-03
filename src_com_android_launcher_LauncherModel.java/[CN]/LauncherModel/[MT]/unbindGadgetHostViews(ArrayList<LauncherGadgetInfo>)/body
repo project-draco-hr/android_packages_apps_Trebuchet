@@ -1,0 +1,9 @@
+{
+  if (gadgets != null) {
+    final int count=gadgets.size();
+    for (int i=0; i < count; i++) {
+      LauncherGadgetInfo launcherInfo=gadgets.get(i);
+      launcherInfo.hostView=null;
+    }
+  }
+}

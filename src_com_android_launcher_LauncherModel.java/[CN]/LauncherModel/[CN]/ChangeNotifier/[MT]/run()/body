@@ -2,6 +2,7 @@
   final ArrayList<ApplicationInfo> buffer=mBuffer;
   final ApplicationsAdapter applicationList=mApplicationList;
   final int count=buffer.size();
+  applicationList.setNotifyOnChange(false);
   applicationList.clear();
   for (int i=0; i < count; i++) {
     applicationList.setNotifyOnChange(false);

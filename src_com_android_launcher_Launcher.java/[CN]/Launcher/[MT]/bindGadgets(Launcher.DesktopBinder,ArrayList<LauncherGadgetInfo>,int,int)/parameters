@@ -1,0 +1,4 @@
+Launcher.DesktopBinder binder
+ArrayList<LauncherGadgetInfo> gadgets
+int start
+int count

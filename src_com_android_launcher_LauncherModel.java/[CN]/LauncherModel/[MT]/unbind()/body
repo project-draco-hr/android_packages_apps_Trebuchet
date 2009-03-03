@@ -2,4 +2,5 @@
   mApplicationsAdapter=null;
   unbindAppDrawables(mApplications);
   unbindDrawables(mDesktopItems);
+  unbindGadgetHostViews(mDesktopGadgets);
 }

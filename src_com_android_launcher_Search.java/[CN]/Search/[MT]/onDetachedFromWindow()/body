@@ -1,0 +1,6 @@
+{
+  if (mSuggestionsAdapter != null) {
+    mSuggestionsAdapter.changeCursor(null);
+    mSuggestionsAdapter=null;
+  }
+}
