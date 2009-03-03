@@ -1,3 +1,0 @@
-{
-  mFolder=new WeakReference<LiveFolder>(folder);
-}

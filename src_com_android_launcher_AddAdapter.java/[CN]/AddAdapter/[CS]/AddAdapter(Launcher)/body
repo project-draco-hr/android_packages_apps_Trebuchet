@@ -6,7 +6,7 @@
   mItems.add(new ListItem(res,R.string.group_applications,R.drawable.ic_launcher_application,ITEM_APPLICATION));
   mItems.add(new ListItem(res,R.string.group_shortcuts,R.drawable.ic_launcher_empty,ITEM_SHORTCUT));
   mItems.add(new ListItem(res,R.string.group_search,R.drawable.ic_search_gadget,ITEM_SEARCH));
-  mItems.add(new ListItem(res,R.string.group_widgets,R.drawable.ic_launcher_gadget,ITEM_GADGET));
+  mItems.add(new ListItem(res,R.string.group_gadgets,R.drawable.ic_launcher_gadget,ITEM_GADGET));
   mItems.add(new ListItem(res,R.string.group_live_folders,R.drawable.ic_launcher_empty,ITEM_LIVE_FOLDER));
   mItems.add(new ListItem(res,R.string.group_folder,R.drawable.ic_launcher_folder,ITEM_FOLDER));
   mItems.add(new ListItem(res,R.string.group_wallpapers,R.drawable.ic_launcher_gallery,ITEM_WALLPAPER));

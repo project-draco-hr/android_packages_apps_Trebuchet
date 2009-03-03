@@ -1,5 +1,5 @@
 {
   if (mDestroyed)   return;
-  mAllAppsGrid.setAdapter(Launcher.getModel().getApplicationsAdapter());
   bindDesktopItems();
+  mAllAppsGrid.setAdapter(Launcher.getModel().getApplicationsAdapter());
 }

@@ -1,5 +1,4 @@
 {
-  if (LOGD)   Log.d(LOG_TAG,"converting database from an older format, but not onUpgrade");
   boolean converted=false;
   final Uri uri=Uri.parse("content://" + Settings.AUTHORITY + "/old_favorites?notify=true");
   final ContentResolver resolver=mContext.getContentResolver();
@@ -19,10 +18,6 @@
     if (converted) {
       resolver.delete(uri,null,null);
     }
-  }
-  if (converted) {
-    if (LOGD)     Log.d(LOG_TAG,"converted and now triggering widget upgrade");
-    convertWidgets(db);
   }
   return converted;
 }

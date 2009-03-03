@@ -1,8 +1,0 @@
-{
-  final LiveFolder folder=mFolder.get();
-  if (folder != null) {
-    mInfo=params[0];
-    return LiveFolderAdapter.query(folder.mLauncher,mInfo);
-  }
-  return null;
-}

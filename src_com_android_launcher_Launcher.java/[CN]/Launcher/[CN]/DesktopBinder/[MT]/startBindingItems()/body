@@ -1,3 +1,0 @@
-{
-  obtainMessage(MESSAGE_BIND_ITEMS,0,mShortcuts.size()).sendToTarget();
-}

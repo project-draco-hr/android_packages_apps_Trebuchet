@@ -7,10 +7,8 @@
     updateShortcutLabels(contentResolver,manager);
   }
   mDesktopItems=new ArrayList<ItemInfo>();
-  mDesktopGadgets=new ArrayList<LauncherGadgetInfo>();
   mFolders=new HashMap<Long,FolderInfo>();
   final ArrayList<ItemInfo> desktopItems=mDesktopItems;
-  final ArrayList<LauncherGadgetInfo> desktopGadgets=mDesktopGadgets;
   final Cursor c=contentResolver.query(LauncherSettings.Favorites.CONTENT_URI,null,null,null,null);
   try {
     final int idIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.ID);
@@ -32,8 +30,8 @@
     final int displayModeIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.DISPLAY_MODE);
     ApplicationInfo info;
     String intentDescription;
-    Widget widgetInfo;
-    LauncherGadgetInfo gadgetInfo;
+    Widget widgetInfo=null;
+    LauncherGadgetInfo gadgetInfo=null;
     int container;
     long id;
     Intent intent;
@@ -155,7 +153,7 @@ Log.e(Launcher.LOG_TAG,"Gadget found where container " + "!= CONTAINER_DESKTOP -
 continue;
 }
 gadgetInfo.container=c.getInt(containerIndex);
-desktopGadgets.add(gadgetInfo);
+desktopItems.add(gadgetInfo);
 break;
 }
 }

@@ -3,12 +3,7 @@
   if (item.container == -1)   return;
   final LauncherModel model=Launcher.getModel();
   if (item.container == LauncherSettings.Favorites.CONTAINER_DESKTOP) {
-    if (item instanceof LauncherGadgetInfo) {
-      model.removeDesktopGadget((LauncherGadgetInfo)item);
-    }
- else {
-      model.removeDesktopItem(item);
-    }
+    model.removeDesktopItem(item);
   }
  else {
     if (source instanceof UserFolder) {

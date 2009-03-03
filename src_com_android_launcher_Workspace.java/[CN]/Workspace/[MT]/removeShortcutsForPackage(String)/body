@@ -11,9 +11,7 @@
       Object tag=view.getTag();
       if (tag instanceof ApplicationInfo) {
         ApplicationInfo info=(ApplicationInfo)tag;
-        final Intent intent=info.intent;
-        final ComponentName name=intent.getComponent();
-        if (Intent.ACTION_MAIN.equals(intent.getAction()) && name != null && packageName.equals(name.getPackageName())) {
+        if (packageName.equals(info.intent.getComponent().getPackageName())) {
           model.removeDesktopItem(info);
           LauncherModel.deleteItemFromDatabase(mLauncher,info);
           childrenToRemove.add(view);

@@ -2,10 +2,6 @@
   if (PROFILE_DRAWING_DURING_DRAG) {
     android.os.Debug.startMethodTracing("Launcher");
   }
-  if (mInputMethodManager == null) {
-    mInputMethodManager=(InputMethodManager)getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-  }
-  mInputMethodManager.hideSoftInputFromWindow(getWindowToken(),0);
   if (mListener != null) {
     mListener.onDragStart(v,source,dragInfo,dragAction);
   }

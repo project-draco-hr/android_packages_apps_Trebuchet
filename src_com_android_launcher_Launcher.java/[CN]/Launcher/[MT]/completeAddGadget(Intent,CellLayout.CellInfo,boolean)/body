@@ -12,13 +12,13 @@
   launcherInfo.spanY=spans[1];
   LauncherModel.addItemToDatabase(this,launcherInfo,LauncherSettings.Favorites.CONTAINER_DESKTOP,mWorkspace.getCurrentScreen(),xy[0],xy[1],false);
   if (!mRestoring) {
-    sModel.addDesktopGadget(launcherInfo);
+    sModel.addDesktopItem(launcherInfo);
     launcherInfo.hostView=mGadgetHost.createView(this,gadgetId,gadgetInfo);
     launcherInfo.hostView.setGadget(gadgetId,gadgetInfo);
     launcherInfo.hostView.setTag(launcherInfo);
     mWorkspace.addInCurrentScreen(launcherInfo.hostView,xy[0],xy[1],launcherInfo.spanX,launcherInfo.spanY,insertAtFirst);
   }
  else   if (sModel.isDesktopLoaded()) {
-    sModel.addDesktopGadget(launcherInfo);
+    sModel.addDesktopItem(launcherInfo);
   }
 }

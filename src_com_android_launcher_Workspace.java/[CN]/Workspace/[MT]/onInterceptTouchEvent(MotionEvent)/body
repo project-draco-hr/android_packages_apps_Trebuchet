@@ -37,7 +37,6 @@ case MotionEvent.ACTION_CANCEL:
 case MotionEvent.ACTION_UP:
 clearChildrenCache();
 mTouchState=TOUCH_STATE_REST;
-mAllowLongPress=false;
 break;
 }
 return mTouchState != TOUCH_STATE_REST;

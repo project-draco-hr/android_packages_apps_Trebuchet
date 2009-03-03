@@ -1,5 +1,0 @@
-{
-  mLauncher=new WeakReference<Launcher>(launcher);
-  mShortcuts=shortcuts;
-  mGadgets=gadgets;
-}

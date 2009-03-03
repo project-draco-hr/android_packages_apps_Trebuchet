@@ -10,12 +10,13 @@ case MotionEvent.ACTION_DOWN:
       break;
     }
 case MotionEvent.ACTION_UP:
-case MotionEvent.ACTION_CANCEL:
-  mHasPerformedLongPress=false;
-if (mPendingCheckForLongPress != null) {
-  removeCallbacks(mPendingCheckForLongPress);
-}
-break;
+{
+    mHasPerformedLongPress=false;
+    if (mPendingCheckForLongPress != null) {
+      removeCallbacks(mPendingCheckForLongPress);
+    }
+    break;
+  }
 }
 return false;
 }
