@@ -1,0 +1,3 @@
+{
+  onDropExternal(x,y,dragInfo,cellLayout,false);
+}

@@ -1,0 +1,14 @@
+{
+  if (mDragging) {
+    mDragging=false;
+    if (mDragBitmap != null) {
+      mDragBitmap.recycle();
+    }
+    if (mOriginator != null) {
+      mOriginator.setVisibility(VISIBLE);
+    }
+    if (mListener != null) {
+      mListener.onDragEnd();
+    }
+  }
+}

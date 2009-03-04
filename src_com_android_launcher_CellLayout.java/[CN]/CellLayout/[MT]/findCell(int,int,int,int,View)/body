@@ -1,0 +1,17 @@
+{
+  if (cellX < 0 || cellX + cellHSpan > (mPortrait ? mShortAxisCells : mLongAxisCells) || cellY < 0 || cellY + cellVSpan > (mPortrait ? mLongAxisCells : mShortAxisCells)) {
+    return this;
+  }
+  final int count=getChildCount();
+  for (int i=0; i < count; i++) {
+    final View view=getChildAt(i);
+    if (view == ignoreCell) {
+      continue;
+    }
+    final LayoutParams lp=(LayoutParams)view.getLayoutParams();
+    if (cellX < lp.cellX + lp.cellHSpan && lp.cellX < cellX + cellHSpan && cellY < lp.cellY + lp.cellVSpan && lp.cellY < cellY + cellVSpan) {
+      return view;
+    }
+  }
+  return null;
+}

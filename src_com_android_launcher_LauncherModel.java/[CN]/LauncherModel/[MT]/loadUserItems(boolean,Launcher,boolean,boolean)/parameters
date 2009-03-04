@@ -1,0 +1,4 @@
+boolean isLaunching
+Launcher launcher
+boolean localeChanged
+boolean loadApplications

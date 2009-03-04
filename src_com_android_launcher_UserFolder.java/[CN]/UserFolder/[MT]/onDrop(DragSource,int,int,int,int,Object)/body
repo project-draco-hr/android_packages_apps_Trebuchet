@@ -1,0 +1,5 @@
+{
+  final ApplicationInfo item=(ApplicationInfo)dragInfo;
+  ((ArrayAdapter<ApplicationInfo>)mContent.getAdapter()).add((ApplicationInfo)dragInfo);
+  LauncherModel.addOrMoveItemInDatabase(mLauncher,item,mInfo.id,0,0,0);
+}

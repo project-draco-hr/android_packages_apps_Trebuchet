@@ -1,0 +1,18 @@
+{
+  invalidate();
+  final int[] coordinates=mDropCoordinates;
+  DropTarget dropTarget=findDropTarget((int)x,(int)y,coordinates);
+  if (dropTarget != null) {
+    dropTarget.onDragExit(mDragSource,coordinates[0],coordinates[1],(int)mTouchOffsetX,(int)mTouchOffsetY,mDragInfo);
+    if (dropTarget.acceptDrop(mDragSource,coordinates[0],coordinates[1],(int)mTouchOffsetX,(int)mTouchOffsetY,mDragInfo)) {
+      dropTarget.onDrop(mDragSource,coordinates[0],coordinates[1],(int)mTouchOffsetX,(int)mTouchOffsetY,mDragInfo);
+      mDragSource.onDropCompleted((View)dropTarget,true);
+      return true;
+    }
+ else {
+      mDragSource.onDropCompleted((View)dropTarget,false);
+      return true;
+    }
+  }
+  return false;
+}

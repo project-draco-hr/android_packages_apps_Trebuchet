@@ -1,0 +1,11 @@
+{
+  if (mDragScroller != null) {
+    if (mDirection == SCROLL_LEFT) {
+      mDragScroller.scrollLeft();
+    }
+ else {
+      mDragScroller.scrollRight();
+    }
+    mScrollState=SCROLL_OUTSIDE_ZONE;
+  }
+}

@@ -1,0 +1,6 @@
+{
+  if (!(child instanceof CellLayout)) {
+    throw new IllegalArgumentException("A Workspace can only have CellLayout children.");
+  }
+  super.addView(child,params);
+}

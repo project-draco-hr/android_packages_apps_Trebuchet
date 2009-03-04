@@ -1,0 +1,6 @@
+Launcher launcher
+Cursor c
+int iconTypeIndex
+int iconPackageIndex
+int iconResourceIndex
+LiveFolderInfo liveFolderInfo

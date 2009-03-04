@@ -1,0 +1,37 @@
+{
+  final ViewHolder holder=(ViewHolder)view.getTag();
+  holder.id=cursor.getLong(holder.idIndex);
+  final Drawable icon=loadIcon(context,cursor,holder);
+  holder.name.setText(cursor.getString(holder.nameIndex));
+  if (!mIsList) {
+    holder.name.setCompoundDrawablesWithIntrinsicBounds(null,icon,null,null);
+  }
+ else {
+    final boolean hasIcon=icon != null;
+    holder.icon.setVisibility(hasIcon ? View.VISIBLE : View.GONE);
+    if (hasIcon)     holder.icon.setImageDrawable(icon);
+    if (holder.descriptionIndex != -1) {
+      final String description=cursor.getString(holder.descriptionIndex);
+      if (description != null) {
+        holder.description.setText(description);
+        holder.description.setVisibility(View.VISIBLE);
+      }
+ else {
+        holder.description.setVisibility(View.GONE);
+      }
+    }
+ else {
+      holder.description.setVisibility(View.GONE);
+    }
+  }
+  if (holder.intentIndex != -1) {
+    try {
+      holder.intent=Intent.getIntent(cursor.getString(holder.intentIndex));
+    }
+ catch (    URISyntaxException e) {
+    }
+  }
+ else {
+    holder.useBaseIntent=true;
+  }
+}

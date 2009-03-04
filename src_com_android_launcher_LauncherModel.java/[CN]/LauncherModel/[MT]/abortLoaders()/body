@@ -1,0 +1,10 @@
+{
+  if (mApplicationsLoader != null && mApplicationsLoader.isRunning()) {
+    mApplicationsLoader.stop();
+    mApplicationsLoaded=false;
+  }
+  if (mDesktopItemsLoader != null && mDesktopItemsLoader.isRunning()) {
+    mDesktopItemsLoader.stop();
+    mDesktopItemsLoaded=false;
+  }
+}

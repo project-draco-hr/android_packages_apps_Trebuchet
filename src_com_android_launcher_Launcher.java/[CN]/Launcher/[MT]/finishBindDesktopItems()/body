@@ -1,0 +1,34 @@
+{
+  if (mSavedState != null) {
+    if (!mWorkspace.hasFocus()) {
+      mWorkspace.getChildAt(mWorkspace.getCurrentScreen()).requestFocus();
+    }
+    final long[] userFolders=mSavedState.getLongArray(RUNTIME_STATE_USER_FOLDERS);
+    if (userFolders != null) {
+      for (      long folderId : userFolders) {
+        final FolderInfo info=sModel.findFolderById(folderId);
+        if (info != null) {
+          openFolder(info);
+        }
+      }
+      final Folder openFolder=mWorkspace.getOpenFolder();
+      if (openFolder != null) {
+        openFolder.requestFocus();
+      }
+    }
+    final boolean allApps=mSavedState.getBoolean(RUNTIME_STATE_ALL_APPS_FOLDER,false);
+    if (allApps) {
+      mDrawer.open();
+    }
+    mSavedState=null;
+  }
+  if (mSavedInstanceState != null) {
+    super.onRestoreInstanceState(mSavedInstanceState);
+    mSavedInstanceState=null;
+  }
+  if (mDrawer.isOpened() && !mDrawer.hasFocus()) {
+    mDrawer.requestFocus();
+  }
+  mDesktopLocked=false;
+  mDrawer.unlock();
+}

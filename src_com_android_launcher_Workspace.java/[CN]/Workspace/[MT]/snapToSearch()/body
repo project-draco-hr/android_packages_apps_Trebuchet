@@ -1,0 +1,30 @@
+{
+  int current=mCurrentScreen;
+  int first=current;
+  int last=current;
+  boolean next=false;
+  boolean hitFirst;
+  boolean hitLast;
+  final int count=getChildCount();
+  while (true) {
+    if (focusOnSearch(current)) {
+      return true;
+    }
+    hitLast=last == count - 1;
+    hitFirst=first == 0;
+    if (hitLast && hitFirst) {
+      break;
+    }
+    if (hitFirst || (next && !hitLast)) {
+      last++;
+      current=last;
+      next=false;
+    }
+ else {
+      first--;
+      current=first;
+      next=true;
+    }
+  }
+  return false;
+}

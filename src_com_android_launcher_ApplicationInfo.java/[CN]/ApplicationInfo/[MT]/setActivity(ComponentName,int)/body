@@ -1,0 +1,7 @@
+{
+  intent=new Intent(Intent.ACTION_MAIN);
+  intent.addCategory(Intent.CATEGORY_LAUNCHER);
+  intent.setComponent(className);
+  intent.setFlags(launchFlags);
+  itemType=LauncherSettings.Favorites.ITEM_TYPE_APPLICATION;
+}

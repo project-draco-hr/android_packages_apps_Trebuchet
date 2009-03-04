@@ -1,0 +1,9 @@
+{
+  if (mOpen) {
+    mHandleIcon.reverseTransition(150);
+    mWorkspace.mDrawerBounds.setEmpty();
+    mOpen=false;
+  }
+  mAllAppsGrid.setSelection(0);
+  mAllAppsGrid.clearTextFilter();
+}

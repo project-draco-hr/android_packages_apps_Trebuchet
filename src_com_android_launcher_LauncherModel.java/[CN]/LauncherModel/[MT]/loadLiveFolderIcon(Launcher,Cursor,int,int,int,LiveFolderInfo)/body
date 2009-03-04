@@ -1,0 +1,23 @@
+{
+  int iconType=c.getInt(iconTypeIndex);
+switch (iconType) {
+case LauncherSettings.Favorites.ICON_TYPE_RESOURCE:
+    String packageName=c.getString(iconPackageIndex);
+  String resourceName=c.getString(iconResourceIndex);
+PackageManager packageManager=launcher.getPackageManager();
+try {
+Resources resources=packageManager.getResourcesForApplication(packageName);
+final int id=resources.getIdentifier(resourceName,null,null);
+liveFolderInfo.icon=resources.getDrawable(id);
+}
+ catch (Exception e) {
+liveFolderInfo.icon=launcher.getResources().getDrawable(R.drawable.ic_launcher_folder);
+}
+liveFolderInfo.iconResource=new Intent.ShortcutIconResource();
+liveFolderInfo.iconResource.packageName=packageName;
+liveFolderInfo.iconResource.resourceName=resourceName;
+break;
+default :
+liveFolderInfo.icon=launcher.getResources().getDrawable(R.drawable.ic_launcher_folder);
+}
+}

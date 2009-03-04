@@ -1,0 +1,13 @@
+{
+  if (mDrawer.isOpened()) {
+    if (animated) {
+      mDrawer.animateClose();
+    }
+ else {
+      mDrawer.close();
+    }
+    if (mDrawer.hasFocus()) {
+      mWorkspace.getChildAt(mWorkspace.getCurrentScreen()).requestFocus();
+    }
+  }
+}

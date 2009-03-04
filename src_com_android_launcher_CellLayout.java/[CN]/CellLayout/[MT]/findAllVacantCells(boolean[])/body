@@ -1,0 +1,38 @@
+{
+  final boolean portrait=mPortrait;
+  final int xCount=portrait ? mShortAxisCells : mLongAxisCells;
+  final int yCount=portrait ? mLongAxisCells : mShortAxisCells;
+  boolean[][] occupied=mOccupied;
+  if (occupiedCells != null) {
+    for (int y=0; y < yCount; y++) {
+      for (int x=0; x < xCount; x++) {
+        occupied[x][y]=occupiedCells[y * xCount + x];
+      }
+    }
+  }
+ else {
+    findOccupiedCells(xCount,yCount,occupied);
+  }
+  CellInfo cellInfo=new CellInfo();
+  cellInfo.cellX=-1;
+  cellInfo.cellY=-1;
+  cellInfo.spanY=0;
+  cellInfo.spanX=0;
+  cellInfo.maxVacantSpanX=Integer.MIN_VALUE;
+  cellInfo.maxVacantSpanXSpanY=Integer.MIN_VALUE;
+  cellInfo.maxVacantSpanY=Integer.MIN_VALUE;
+  cellInfo.maxVacantSpanYSpanX=Integer.MIN_VALUE;
+  cellInfo.screen=mCellInfo.screen;
+  Rect current=cellInfo.current;
+  for (int x=0; x < xCount; x++) {
+    for (int y=0; y < yCount; y++) {
+      if (!occupied[x][y]) {
+        current.set(x,y,x,y);
+        findVacantCell(current,xCount,yCount,occupied,cellInfo);
+        occupied[x][y]=true;
+      }
+    }
+  }
+  cellInfo.valid=cellInfo.vacantCells.size() > 0;
+  return cellInfo;
+}

@@ -1,0 +1,28 @@
+{
+  super.onMeasure(widthMeasureSpec,heightMeasureSpec);
+  final int width=MeasureSpec.getSize(widthMeasureSpec);
+  final int widthMode=MeasureSpec.getMode(widthMeasureSpec);
+  if (widthMode != MeasureSpec.EXACTLY) {
+    throw new IllegalStateException("Workspace can only be used in EXACTLY mode.");
+  }
+  final int heightMode=MeasureSpec.getMode(heightMeasureSpec);
+  if (heightMode != MeasureSpec.EXACTLY) {
+    throw new IllegalStateException("Workspace can only be used in EXACTLY mode.");
+  }
+  final int count=getChildCount();
+  for (int i=0; i < count; i++) {
+    getChildAt(i).measure(widthMeasureSpec,heightMeasureSpec);
+  }
+  if (mWallpaperLoaded) {
+    mWallpaperLoaded=false;
+    mWallpaper=Utilities.centerToFit(mWallpaper,width,MeasureSpec.getSize(heightMeasureSpec),getContext());
+    mWallpaperWidth=mWallpaper.getWidth();
+    mWallpaperHeight=mWallpaper.getHeight();
+  }
+  final int wallpaperWidth=mWallpaperWidth;
+  mWallpaperOffset=wallpaperWidth > width ? (count * width - wallpaperWidth) / ((count - 1) * (float)width) : 1.0f;
+  if (mFirstLayout) {
+    scrollTo(mCurrentScreen * width,0);
+    mFirstLayout=false;
+  }
+}

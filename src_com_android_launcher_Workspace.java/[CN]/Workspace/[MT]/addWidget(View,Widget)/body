@@ -1,0 +1,3 @@
+{
+  addInScreen(view,widget.screen,widget.cellX,widget.cellY,widget.spanX,widget.spanY,false);
+}

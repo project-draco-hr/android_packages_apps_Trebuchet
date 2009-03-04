@@ -1,0 +1,10 @@
+{
+  String query=mSearchText.getText().toString();
+  if (TextUtils.getTrimmedLength(mSearchText.getText()) == 0) {
+    return;
+  }
+  Bundle appData=new Bundle();
+  appData.putString(SearchManager.SOURCE,"launcher-widget");
+  sendLaunchIntent(Intent.ACTION_SEARCH,null,query,appData,0,null,mSearchable);
+  clearQuery();
+}

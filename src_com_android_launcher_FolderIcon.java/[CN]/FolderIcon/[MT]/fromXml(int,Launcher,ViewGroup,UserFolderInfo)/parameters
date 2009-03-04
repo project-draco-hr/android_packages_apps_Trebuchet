@@ -1,0 +1,4 @@
+int resId
+Launcher launcher
+ViewGroup group
+UserFolderInfo folderInfo

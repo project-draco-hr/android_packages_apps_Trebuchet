@@ -1,0 +1,4 @@
+{
+  super.onAddToDatabase(values);
+  values.put(LauncherSettings.Favorites.GADGET_ID,gadgetId);
+}

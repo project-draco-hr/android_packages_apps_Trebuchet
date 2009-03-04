@@ -1,0 +1,10 @@
+{
+  String label=activityInfo.loadLabel(manager).toString();
+  if (label == null) {
+    label=manager.getApplicationLabel(activityInfo.applicationInfo).toString();
+    if (label == null) {
+      label=activityInfo.name;
+    }
+  }
+  return label;
+}

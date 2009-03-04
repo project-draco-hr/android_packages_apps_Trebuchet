@@ -1,0 +1,8 @@
+{
+  mScroller=new Scroller(getContext());
+  mCurrentScreen=mDefaultScreen;
+  Launcher.setScreen(mCurrentScreen);
+  mPaint=new Paint();
+  mPaint.setDither(false);
+  mTouchSlop=ViewConfiguration.get(getContext()).getScaledTouchSlop();
+}

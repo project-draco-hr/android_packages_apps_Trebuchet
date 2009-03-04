@@ -1,0 +1,15 @@
+{
+  if (mIsWallpaperSet) {
+    return;
+  }
+  mIsWallpaperSet=true;
+  try {
+    InputStream stream=getResources().openRawResource(mImages.get(position));
+    setWallpaper(stream);
+    setResult(RESULT_OK);
+    finish();
+  }
+ catch (  IOException e) {
+    Log.e(Launcher.LOG_TAG,"Failed to set wallpaper: " + e);
+  }
+}

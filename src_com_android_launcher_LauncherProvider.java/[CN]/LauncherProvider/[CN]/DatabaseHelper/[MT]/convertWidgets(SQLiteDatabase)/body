@@ -1,0 +1,45 @@
+{
+  final int[] bindSources=new int[]{Favorites.ITEM_TYPE_WIDGET_CLOCK,Favorites.ITEM_TYPE_WIDGET_PHOTO_FRAME};
+  final ArrayList<ComponentName> bindTargets=new ArrayList<ComponentName>();
+  bindTargets.add(new ComponentName("com.android.alarmclock","com.android.alarmclock.AnalogGadgetProvider"));
+  bindTargets.add(new ComponentName("com.android.camera","com.android.camera.PhotoGadgetProvider"));
+  final String selectWhere=buildOrWhereString(Favorites.ITEM_TYPE,bindSources);
+  Cursor c=null;
+  boolean allocatedGadgets=false;
+  db.beginTransaction();
+  try {
+    c=db.query(TABLE_FAVORITES,new String[]{Favorites._ID},selectWhere,null,null,null,null);
+    if (LOGD)     Log.d(LOG_TAG,"found upgrade cursor count=" + c.getCount());
+    final ContentValues values=new ContentValues();
+    while (c != null && c.moveToNext()) {
+      long favoriteId=c.getLong(0);
+      try {
+        int gadgetId=mGadgetHost.allocateGadgetId();
+        if (LOGD)         Log.d(LOG_TAG,"allocated gadgetId=" + gadgetId + " for favoriteId="+ favoriteId);
+        values.clear();
+        values.put(LauncherSettings.Favorites.GADGET_ID,gadgetId);
+        values.put(LauncherSettings.Favorites.SPANX,2);
+        values.put(LauncherSettings.Favorites.SPANY,2);
+        String updateWhere=Favorites._ID + "=" + favoriteId;
+        db.update(TABLE_FAVORITES,values,updateWhere,null);
+        allocatedGadgets=true;
+      }
+ catch (      RuntimeException ex) {
+        Log.e(LOG_TAG,"Problem allocating gadgetId",ex);
+      }
+    }
+    db.setTransactionSuccessful();
+  }
+ catch (  SQLException ex) {
+    Log.w(LOG_TAG,"Problem while allocating gadgetIds for existing widgets",ex);
+  }
+ finally {
+    db.endTransaction();
+    if (c != null) {
+      c.close();
+    }
+  }
+  if (allocatedGadgets) {
+    launchGadgetBinder(bindSources,bindTargets);
+  }
+}

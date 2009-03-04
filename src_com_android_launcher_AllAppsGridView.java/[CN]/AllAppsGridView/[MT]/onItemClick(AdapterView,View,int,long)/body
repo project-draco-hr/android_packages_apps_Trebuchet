@@ -1,0 +1,4 @@
+{
+  ApplicationInfo app=(ApplicationInfo)parent.getItemAtPosition(position);
+  mLauncher.startActivitySafely(app.intent);
+}

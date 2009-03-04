@@ -1,0 +1,13 @@
+{
+  if (mScroller.computeScrollOffset()) {
+    mScrollX=mScroller.getCurrX();
+    mScrollY=mScroller.getCurrY();
+    postInvalidate();
+  }
+ else   if (mNextScreen != INVALID_SCREEN) {
+    mCurrentScreen=Math.max(0,Math.min(mNextScreen,getChildCount() - 1));
+    Launcher.setScreen(mCurrentScreen);
+    mNextScreen=INVALID_SCREEN;
+    clearChildrenCache();
+  }
+}

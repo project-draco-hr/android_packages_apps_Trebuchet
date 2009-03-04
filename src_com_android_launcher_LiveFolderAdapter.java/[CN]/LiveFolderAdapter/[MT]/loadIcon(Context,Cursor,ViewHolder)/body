@@ -1,0 +1,34 @@
+{
+  Drawable icon=null;
+  byte[] data=null;
+  if (holder.iconBitmapIndex != -1) {
+    data=cursor.getBlob(holder.iconBitmapIndex);
+  }
+  if (data != null) {
+    final SoftReference<Drawable> reference=mCustomIcons.get(holder.id);
+    if (reference != null) {
+      icon=reference.get();
+    }
+    if (icon == null) {
+      final Bitmap bitmap=BitmapFactory.decodeByteArray(data,0,data.length);
+      icon=new FastBitmapDrawable(Utilities.createBitmapThumbnail(bitmap,mContext));
+      mCustomIcons.put(holder.id,new SoftReference<Drawable>(icon));
+    }
+  }
+ else   if (holder.iconResourceIndex != -1 && holder.iconPackageIndex != -1) {
+    final String resource=cursor.getString(holder.iconResourceIndex);
+    icon=mIcons.get(resource);
+    if (icon == null) {
+      try {
+        final PackageManager packageManager=context.getPackageManager();
+        Resources resources=packageManager.getResourcesForApplication(cursor.getString(holder.iconPackageIndex));
+        final int id=resources.getIdentifier(resource,null,null);
+        icon=Utilities.createIconThumbnail(resources.getDrawable(id),mContext);
+        mIcons.put(resource,icon);
+      }
+ catch (      Exception e) {
+      }
+    }
+  }
+  return icon;
+}

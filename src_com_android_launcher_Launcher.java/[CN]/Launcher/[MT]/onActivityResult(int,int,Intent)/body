@@ -1,0 +1,34 @@
+{
+  if (resultCode == RESULT_OK && mAddItemCellInfo != null) {
+switch (requestCode) {
+case REQUEST_PICK_APPLICATION:
+      completeAddApplication(this,data,mAddItemCellInfo,!mDesktopLocked);
+    break;
+case REQUEST_PICK_SHORTCUT:
+  addShortcut(data);
+break;
+case REQUEST_CREATE_SHORTCUT:
+completeAddShortcut(data,mAddItemCellInfo,!mDesktopLocked);
+break;
+case REQUEST_PICK_LIVE_FOLDER:
+addLiveFolder(data);
+break;
+case REQUEST_CREATE_LIVE_FOLDER:
+completeAddLiveFolder(data,mAddItemCellInfo,!mDesktopLocked);
+break;
+case REQUEST_PICK_GADGET:
+addGadget(data);
+break;
+case REQUEST_CREATE_GADGET:
+completeAddGadget(data,mAddItemCellInfo,!mDesktopLocked);
+break;
+}
+}
+ else if (requestCode == REQUEST_PICK_GADGET && resultCode == RESULT_CANCELED && data != null) {
+int gadgetId=data.getIntExtra(GadgetManager.EXTRA_GADGET_ID,-1);
+if (gadgetId != -1) {
+mGadgetHost.deleteGadgetId(gadgetId);
+}
+}
+mWaitingForResult=false;
+}

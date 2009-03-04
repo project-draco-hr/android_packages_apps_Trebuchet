@@ -1,0 +1,5 @@
+{
+  mAddItemCellInfo=cellInfo;
+  mWaitingForResult=true;
+  showDialog(DIALOG_CREATE_SHORTCUT);
+}

@@ -1,0 +1,91 @@
+{
+  FileReader favReader;
+  final File favFile=new File(Environment.getRootDirectory(),subPath);
+  try {
+    favReader=new FileReader(favFile);
+  }
+ catch (  FileNotFoundException e) {
+    Log.e(LOG_TAG,"Couldn't find or open favorites file " + favFile);
+    return 0;
+  }
+  Intent intent=new Intent(Intent.ACTION_MAIN,null);
+  intent.addCategory(Intent.CATEGORY_LAUNCHER);
+  ContentValues values=new ContentValues();
+  PackageManager packageManager=mContext.getPackageManager();
+  ActivityInfo info;
+  int i=0;
+  try {
+    XmlPullParser parser=Xml.newPullParser();
+    parser.setInput(favReader);
+    XmlUtils.beginDocument(parser,TAG_FAVORITES);
+    while (true) {
+      XmlUtils.nextElement(parser);
+      String name=parser.getName();
+      if (!TAG_FAVORITE.equals(name)) {
+        break;
+      }
+      String pkg=parser.getAttributeValue(null,TAG_PACKAGE);
+      String cls=parser.getAttributeValue(null,TAG_CLASS);
+      try {
+        ComponentName cn=new ComponentName(pkg,cls);
+        info=packageManager.getActivityInfo(cn,0);
+        intent.setComponent(cn);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        values.put(LauncherSettings.Favorites.INTENT,intent.toURI());
+        values.put(LauncherSettings.Favorites.TITLE,info.loadLabel(packageManager).toString());
+        values.put(LauncherSettings.Favorites.CONTAINER,LauncherSettings.Favorites.CONTAINER_DESKTOP);
+        values.put(LauncherSettings.Favorites.ITEM_TYPE,LauncherSettings.Favorites.ITEM_TYPE_APPLICATION);
+        values.put(LauncherSettings.Favorites.SCREEN,parser.getAttributeValue(null,ATTRIBUTE_SCREEN));
+        values.put(LauncherSettings.Favorites.CELLX,parser.getAttributeValue(null,ATTRIBUTE_X));
+        values.put(LauncherSettings.Favorites.CELLY,parser.getAttributeValue(null,ATTRIBUTE_Y));
+        values.put(LauncherSettings.Favorites.SPANX,1);
+        values.put(LauncherSettings.Favorites.SPANY,1);
+        db.insert(TABLE_FAVORITES,null,values);
+        i++;
+      }
+ catch (      PackageManager.NameNotFoundException e) {
+        Log.w(LOG_TAG,"Unable to add favorite: " + pkg + "/"+ cls,e);
+      }
+    }
+  }
+ catch (  XmlPullParserException e) {
+    Log.w(LOG_TAG,"Got exception parsing favorites.",e);
+  }
+catch (  IOException e) {
+    Log.w(LOG_TAG,"Got exception parsing favorites.",e);
+  }
+  values.clear();
+  values.put(LauncherSettings.Favorites.CONTAINER,LauncherSettings.Favorites.CONTAINER_DESKTOP);
+  values.put(LauncherSettings.Favorites.ITEM_TYPE,LauncherSettings.Favorites.ITEM_TYPE_WIDGET_SEARCH);
+  values.put(LauncherSettings.Favorites.SCREEN,2);
+  values.put(LauncherSettings.Favorites.CELLX,0);
+  values.put(LauncherSettings.Favorites.CELLY,0);
+  values.put(LauncherSettings.Favorites.SPANX,4);
+  values.put(LauncherSettings.Favorites.SPANY,1);
+  db.insert(TABLE_FAVORITES,null,values);
+  final int[] bindSources=new int[]{Favorites.ITEM_TYPE_WIDGET_CLOCK};
+  final ArrayList<ComponentName> bindTargets=new ArrayList<ComponentName>();
+  bindTargets.add(new ComponentName("com.android.alarmclock","com.android.alarmclock.AnalogGadgetProvider"));
+  boolean allocatedGadgets=false;
+  try {
+    int gadgetId=mGadgetHost.allocateGadgetId();
+    values.clear();
+    values.put(LauncherSettings.Favorites.CONTAINER,LauncherSettings.Favorites.CONTAINER_DESKTOP);
+    values.put(LauncherSettings.Favorites.ITEM_TYPE,LauncherSettings.Favorites.ITEM_TYPE_WIDGET_CLOCK);
+    values.put(LauncherSettings.Favorites.SCREEN,1);
+    values.put(LauncherSettings.Favorites.CELLX,1);
+    values.put(LauncherSettings.Favorites.CELLY,0);
+    values.put(LauncherSettings.Favorites.SPANX,2);
+    values.put(LauncherSettings.Favorites.SPANY,2);
+    values.put(LauncherSettings.Favorites.GADGET_ID,gadgetId);
+    db.insert(TABLE_FAVORITES,null,values);
+    allocatedGadgets=true;
+  }
+ catch (  RuntimeException ex) {
+    Log.e(LOG_TAG,"Problem allocating gadgetId",ex);
+  }
+  if (allocatedGadgets) {
+    launchGadgetBinder(bindSources,bindTargets);
+  }
+  return i;
+}

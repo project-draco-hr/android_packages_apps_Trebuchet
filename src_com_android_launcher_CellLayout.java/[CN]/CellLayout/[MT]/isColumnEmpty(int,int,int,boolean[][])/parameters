@@ -1,0 +1,4 @@
+int x
+int top
+int bottom
+boolean[][] occupied

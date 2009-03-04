@@ -1,0 +1,15 @@
+{
+  if (cellX < 0 || cellY < 0) {
+    maxVacantSpanX=maxVacantSpanXSpanY=Integer.MIN_VALUE;
+    maxVacantSpanY=maxVacantSpanYSpanX=Integer.MIN_VALUE;
+    clearVacantCells();
+    return;
+  }
+  final boolean[][] unflattened=new boolean[xCount][yCount];
+  for (int y=0; y < yCount; y++) {
+    for (int x=0; x < xCount; x++) {
+      unflattened[x][y]=occupied[y * xCount + x];
+    }
+  }
+  CellLayout.findIntersectingVacantCells(this,cellX,cellY,xCount,yCount,unflattened);
+}

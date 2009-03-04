@@ -1,0 +1,3 @@
+{
+  return mDesktopItems != null && mDesktopGadgets != null && mDesktopItemsLoaded;
+}

@@ -1,0 +1,25 @@
+{
+  if (mDesktopLocked) {
+    return false;
+  }
+  if (!(v instanceof CellLayout)) {
+    v=(View)v.getParent();
+  }
+  CellLayout.CellInfo cellInfo=(CellLayout.CellInfo)v.getTag();
+  if (cellInfo == null) {
+    return true;
+  }
+  if (mWorkspace.allowLongPress()) {
+    if (cellInfo.cell == null) {
+      if (cellInfo.valid) {
+        showAddDialog(cellInfo);
+      }
+    }
+ else {
+      if (!(cellInfo.cell instanceof Folder)) {
+        mWorkspace.startDrag(cellInfo);
+      }
+    }
+  }
+  return true;
+}

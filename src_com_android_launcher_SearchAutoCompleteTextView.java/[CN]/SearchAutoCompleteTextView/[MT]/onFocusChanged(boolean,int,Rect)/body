@@ -1,0 +1,20 @@
+{
+  super.onFocusChanged(gainFocus,direction,previouslyFocusedRect);
+  final WindowManager.LayoutParams lp=((Activity)getContext()).getWindow().getAttributes();
+  if (gainFocus) {
+    lp.softInputMode=(lp.softInputMode & ~WindowManager.LayoutParams.SOFT_INPUT_MASK_STATE) | WindowManager.LayoutParams.SOFT_INPUT_STATE_UNCHANGED;
+  }
+ else {
+    lp.softInputMode=(lp.softInputMode & ~WindowManager.LayoutParams.SOFT_INPUT_MASK_STATE) | WindowManager.LayoutParams.SOFT_INPUT_STATE_UNSPECIFIED;
+    InputMethodManager.peekInstance().hideSoftInputFromWindow(getWindowToken(),0);
+  }
+  final WindowManager manager=(WindowManager)getContext().getSystemService(Context.WINDOW_SERVICE);
+  manager.updateViewLayout(getRootView(),lp);
+  if (mShowKeyboard) {
+    if (getContext().getResources().getConfiguration().hardKeyboardHidden == Configuration.HARDKEYBOARDHIDDEN_YES) {
+      InputMethodManager inputManager=(InputMethodManager)getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+      inputManager.showSoftInput(this,0);
+    }
+    mShowKeyboard=false;
+  }
+}

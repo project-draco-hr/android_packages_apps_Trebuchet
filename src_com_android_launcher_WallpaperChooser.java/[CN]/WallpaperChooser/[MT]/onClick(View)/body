@@ -1,0 +1,3 @@
+{
+  selectWallpaper(mGallery.getSelectedItemPosition());
+}

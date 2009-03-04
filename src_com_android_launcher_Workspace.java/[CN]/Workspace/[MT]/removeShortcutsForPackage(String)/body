@@ -1,0 +1,32 @@
+{
+  final ArrayList<View> childrenToRemove=new ArrayList<View>();
+  final LauncherModel model=Launcher.getModel();
+  final int count=getChildCount();
+  for (int i=0; i < count; i++) {
+    final CellLayout layout=(CellLayout)getChildAt(i);
+    int childCount=layout.getChildCount();
+    childrenToRemove.clear();
+    for (int j=0; j < childCount; j++) {
+      final View view=layout.getChildAt(j);
+      Object tag=view.getTag();
+      if (tag instanceof ApplicationInfo) {
+        ApplicationInfo info=(ApplicationInfo)tag;
+        final Intent intent=info.intent;
+        final ComponentName name=intent.getComponent();
+        if (Intent.ACTION_MAIN.equals(intent.getAction()) && name != null && packageName.equals(name.getPackageName())) {
+          model.removeDesktopItem(info);
+          LauncherModel.deleteItemFromDatabase(mLauncher,info);
+          childrenToRemove.add(view);
+        }
+      }
+    }
+    childCount=childrenToRemove.size();
+    for (int j=0; j < childCount; j++) {
+      layout.removeViewInLayout(childrenToRemove.get(j));
+    }
+    if (childCount > 0) {
+      layout.requestLayout();
+      layout.invalidate();
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  if (mLauncher.isDrawerDown()) {
+    final Folder openFolder=getOpenFolder();
+    if (openFolder == null) {
+      getChildAt(mCurrentScreen).addFocusables(views,direction);
+      if (direction == View.FOCUS_LEFT) {
+        if (mCurrentScreen > 0) {
+          getChildAt(mCurrentScreen - 1).addFocusables(views,direction);
+        }
+      }
+ else       if (direction == View.FOCUS_RIGHT) {
+        if (mCurrentScreen < getChildCount() - 1) {
+          getChildAt(mCurrentScreen + 1).addFocusables(views,direction);
+        }
+      }
+    }
+ else {
+      openFolder.addFocusables(views,direction);
+    }
+  }
+}

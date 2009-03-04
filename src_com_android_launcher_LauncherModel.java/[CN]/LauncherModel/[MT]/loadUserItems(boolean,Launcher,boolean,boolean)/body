@@ -1,0 +1,19 @@
+{
+  if (isLaunching && isDesktopLoaded()) {
+    if (loadApplications)     startApplicationsLoader(launcher);
+    launcher.onDesktopItemsLoaded();
+    return;
+  }
+  if (mDesktopItemsLoader != null && mDesktopItemsLoader.isRunning()) {
+    mDesktopItemsLoader.stop();
+    try {
+      mDesktopLoader.join(APPLICATION_NOT_RESPONDING_TIMEOUT);
+    }
+ catch (    InterruptedException e) {
+    }
+  }
+  mDesktopItemsLoaded=false;
+  mDesktopItemsLoader=new DesktopItemsLoader(launcher,localeChanged,loadApplications);
+  mDesktopLoader=new Thread(mDesktopItemsLoader,"Desktop Items Loader");
+  mDesktopLoader.start();
+}

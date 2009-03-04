@@ -1,0 +1,12 @@
+{
+  TextView favorite=(TextView)mInflater.inflate(layoutResId,parent,false);
+  if (!info.filtered) {
+    info.icon=Utilities.createIconThumbnail(info.icon,this);
+    info.filtered=true;
+  }
+  favorite.setCompoundDrawablesWithIntrinsicBounds(null,info.icon,null,null);
+  favorite.setText(info.title);
+  favorite.setTag(info);
+  favorite.setOnClickListener(this);
+  return favorite;
+}

@@ -1,0 +1,7 @@
+{
+  super.onClose();
+  if (mLoadingTask != null && mLoadingTask.getStatus() == AsyncTask.Status.RUNNING) {
+    mLoadingTask.cancel(true);
+  }
+  ((LiveFolderAdapter)mContent.getAdapter()).cleanup();
+}

@@ -1,0 +1,3 @@
+{
+  return mInflater.inflate(R.layout.gadget_error,this,false);
+}

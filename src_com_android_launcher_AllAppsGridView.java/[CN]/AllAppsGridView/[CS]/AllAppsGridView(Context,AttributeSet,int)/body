@@ -1,0 +1,13 @@
+{
+  super(context,attrs,defStyle);
+  TypedArray a=context.obtainStyledAttributes(attrs,R.styleable.AllAppsGridView,defStyle,0);
+  final int textureId=a.getResourceId(R.styleable.AllAppsGridView_texture,0);
+  if (textureId != 0) {
+    mTexture=BitmapFactory.decodeResource(getResources(),textureId);
+    mTextureWidth=mTexture.getWidth();
+    mTextureHeight=mTexture.getHeight();
+    mPaint=new Paint();
+    mPaint.setDither(false);
+  }
+  a.recycle();
+}

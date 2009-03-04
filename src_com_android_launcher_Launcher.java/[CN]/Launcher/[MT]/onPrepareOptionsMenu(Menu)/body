@@ -1,0 +1,6 @@
+{
+  super.onPrepareOptionsMenu(menu);
+  mMenuAddInfo=mWorkspace.findAllVacantCells(null);
+  menu.setGroupEnabled(MENU_GROUP_ADD,mMenuAddInfo != null && mMenuAddInfo.valid);
+  return true;
+}

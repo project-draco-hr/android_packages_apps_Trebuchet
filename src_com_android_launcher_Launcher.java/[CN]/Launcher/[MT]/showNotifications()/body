@@ -1,0 +1,6 @@
+{
+  final StatusBarManager statusBar=(StatusBarManager)getSystemService(STATUS_BAR_SERVICE);
+  if (statusBar != null) {
+    statusBar.expand();
+  }
+}

@@ -1,0 +1,7 @@
+{
+  int[] cellXY=mCellXY;
+  pointToCellRounded(cellX,cellY,cellXY);
+  LayoutParams lp=(LayoutParams)child.getLayoutParams();
+  cellToRect(cellXY[0],cellXY[1],lp.cellHSpan,lp.cellVSpan,mDragRect);
+  invalidate();
+}

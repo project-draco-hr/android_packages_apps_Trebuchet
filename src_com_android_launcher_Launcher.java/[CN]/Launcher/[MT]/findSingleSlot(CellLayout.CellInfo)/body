@@ -1,0 +1,9 @@
+{
+  final int[] xy=new int[2];
+  if (findSlot(cellInfo,xy,1,1)) {
+    cellInfo.cellX=xy[0];
+    cellInfo.cellY=xy[1];
+    return true;
+  }
+  return false;
+}

@@ -1,0 +1,9 @@
+{
+  if (mTrashMode) {
+    mTrashMode=false;
+    mDragLayer.setDeleteRegion(null);
+    startAnimation(mOutAnimation);
+    mHandle.startAnimation(mHandleInAnimation);
+    setVisibility(GONE);
+  }
+}
