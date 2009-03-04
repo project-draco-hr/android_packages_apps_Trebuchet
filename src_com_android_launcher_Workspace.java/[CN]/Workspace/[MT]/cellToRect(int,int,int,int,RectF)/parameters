@@ -1,5 +1,0 @@
-int cellX
-int cellY
-int cellHSpan
-int cellVSpan
-RectF rect

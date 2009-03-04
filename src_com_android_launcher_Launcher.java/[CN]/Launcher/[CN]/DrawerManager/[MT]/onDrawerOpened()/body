@@ -1,6 +1,0 @@
-{
-  if (!mOpen) {
-    mHandleIcon.reverseTransition(150);
-    mOpen=true;
-  }
-}

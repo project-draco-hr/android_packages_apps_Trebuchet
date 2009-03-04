@@ -1,3 +1,0 @@
-{
-  return Uri.parse("content://" + LauncherProvider.AUTHORITY + "/"+ LauncherProvider.TABLE_FAVORITES+ "/"+ id+ "?"+ LauncherProvider.PARAMETER_NOTIFY+ "="+ notify);
-}

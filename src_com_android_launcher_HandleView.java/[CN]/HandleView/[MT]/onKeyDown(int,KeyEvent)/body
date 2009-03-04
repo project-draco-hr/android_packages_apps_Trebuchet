@@ -1,7 +1,0 @@
-{
-  final boolean handled=super.onKeyDown(keyCode,event);
-  if (!handled && !mLauncher.isDrawerDown() && !isDirectionKey(keyCode)) {
-    return mLauncher.getApplicationsGrid().onKeyDown(keyCode,event);
-  }
-  return handled;
-}

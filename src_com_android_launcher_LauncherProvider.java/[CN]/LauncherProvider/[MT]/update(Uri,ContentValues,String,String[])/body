@@ -1,7 +1,0 @@
-{
-  SqlArguments args=new SqlArguments(uri,selection,selectionArgs);
-  SQLiteDatabase db=mOpenHelper.getWritableDatabase();
-  int count=db.update(args.table,values,args.where,args.args);
-  if (count > 0)   sendNotify(uri);
-  return count;
-}

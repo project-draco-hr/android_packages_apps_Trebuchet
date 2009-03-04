@@ -1,3 +1,0 @@
-{
-  return mDragging || super.dispatchKeyEvent(event);
-}

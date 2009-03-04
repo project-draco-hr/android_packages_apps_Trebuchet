@@ -1,8 +1,0 @@
-{
-  if (item.container == ItemInfo.NO_ID) {
-    addItemToDatabase(context,item,container,screen,cellX,cellY,false);
-  }
- else {
-    moveItemInDatabase(context,item,container,screen,cellX,cellY);
-  }
-}

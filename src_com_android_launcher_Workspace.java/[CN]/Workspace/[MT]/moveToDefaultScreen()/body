@@ -1,4 +1,0 @@
-{
-  snapToScreen(mDefaultScreen);
-  getChildAt(mDefaultScreen).requestFocus();
-}

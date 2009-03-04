@@ -1,5 +1,0 @@
-{
-  final LayoutParams cellParams=(LayoutParams)params;
-  child.setId(((getId() & 0xFF) << 16) | (cellParams.cellX & 0xFF) << 8 | (cellParams.cellY & 0xFF));
-  super.addView(child,index,params);
-}

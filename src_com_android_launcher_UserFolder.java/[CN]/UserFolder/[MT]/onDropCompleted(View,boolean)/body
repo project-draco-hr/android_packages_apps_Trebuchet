@@ -1,6 +1,0 @@
-{
-  if (success) {
-    ArrayAdapter<ApplicationInfo> adapter=(ArrayAdapter<ApplicationInfo>)mContent.getAdapter();
-    adapter.remove(mDragItem);
-  }
-}

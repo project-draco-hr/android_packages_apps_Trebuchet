@@ -1,8 +1,0 @@
-{
-  int actualWidth=mCellWidth + mWidthGap;
-  int actualHeight=mCellHeight + mHeightGap;
-  int smallerSize=Math.min(actualWidth,actualHeight);
-  int spanX=(width + smallerSize) / smallerSize;
-  int spanY=(height + smallerSize) / smallerSize;
-  return new int[]{spanX,spanY};
-}

@@ -1,9 +1,0 @@
-{
-  if (mOpen) {
-    mHandleIcon.reverseTransition(150);
-    mOpen=false;
-  }
-  mAllAppsGrid.setSelection(0);
-  mAllAppsGrid.clearTextFilter();
-  mWorkspace.clearChildrenCache();
-}

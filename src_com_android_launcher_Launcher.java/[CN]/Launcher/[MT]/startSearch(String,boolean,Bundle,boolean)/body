@@ -1,7 +1,0 @@
-{
-  if (appSearchData == null) {
-    appSearchData=new Bundle();
-    appSearchData.putString(SearchManager.SOURCE,"launcher-search");
-  }
-  super.startSearch(initialQuery,selectInitialQuery,appSearchData,globalSearch);
-}

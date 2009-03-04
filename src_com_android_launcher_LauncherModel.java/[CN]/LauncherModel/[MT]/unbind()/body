@@ -1,5 +1,0 @@
-{
-  mApplicationsAdapter=null;
-  unbindAppDrawables(mApplications);
-  unbindDrawables(mDesktopItems);
-}

@@ -1,4 +1,0 @@
-{
-  ContentResolver resolver=getContentResolver();
-  resolver.registerContentObserver(LauncherSettings.Favorites.CONTENT_URI,true,mObserver);
-}

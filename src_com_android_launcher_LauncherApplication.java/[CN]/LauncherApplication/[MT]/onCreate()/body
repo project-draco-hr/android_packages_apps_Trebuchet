@@ -1,4 +1,0 @@
-{
-  VMRuntime.getRuntime().setMinimumHeapSize(4 * 1024 * 1024);
-  super.onCreate();
-}

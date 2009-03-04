@@ -1,7 +1,0 @@
-{
-  if (child != null) {
-    ((LayoutParams)child.getLayoutParams()).isDragging=false;
-    invalidate();
-  }
-  mDragRect.setEmpty();
-}

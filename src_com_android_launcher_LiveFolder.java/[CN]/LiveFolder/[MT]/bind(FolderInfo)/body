@@ -1,4 +1,0 @@
-{
-  super.bind(info);
-  setContentAdapter(new LiveFolderAdapter(mLauncher,(LiveFolderInfo)info));
-}

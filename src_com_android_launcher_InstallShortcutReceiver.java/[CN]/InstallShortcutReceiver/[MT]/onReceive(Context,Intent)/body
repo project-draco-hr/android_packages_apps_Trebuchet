@@ -1,8 +1,0 @@
-{
-  int screen=Launcher.getScreen();
-  if (!installShortcut(context,data,screen)) {
-    for (int i=0; i < Launcher.SCREEN_COUNT; i++) {
-      if (i != screen && installShortcut(context,data,i))       break;
-    }
-  }
-}

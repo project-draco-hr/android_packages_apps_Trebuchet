@@ -1,5 +1,0 @@
-int x
-int y
-Object dragInfo
-CellLayout cellLayout
-boolean insertAtFirst

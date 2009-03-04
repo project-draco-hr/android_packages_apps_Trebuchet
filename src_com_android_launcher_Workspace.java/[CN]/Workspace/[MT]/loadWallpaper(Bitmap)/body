@@ -1,6 +1,0 @@
-{
-  mWallpaper=bitmap;
-  mWallpaperLoaded=true;
-  requestLayout();
-  invalidate();
-}

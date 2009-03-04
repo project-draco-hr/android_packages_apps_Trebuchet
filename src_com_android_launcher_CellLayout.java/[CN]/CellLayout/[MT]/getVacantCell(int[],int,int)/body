@@ -1,8 +1,0 @@
-{
-  final boolean portrait=mPortrait;
-  final int xCount=portrait ? mShortAxisCells : mLongAxisCells;
-  final int yCount=portrait ? mLongAxisCells : mShortAxisCells;
-  final boolean[][] occupied=mOccupied;
-  findOccupiedCells(xCount,yCount,occupied);
-  return findVacantCell(vacant,spanX,spanY,xCount,yCount,occupied);
-}

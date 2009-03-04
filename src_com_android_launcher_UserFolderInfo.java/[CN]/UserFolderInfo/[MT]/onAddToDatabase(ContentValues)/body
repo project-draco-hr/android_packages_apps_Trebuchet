@@ -1,4 +1,0 @@
-{
-  super.onAddToDatabase(values);
-  values.put(LauncherSettings.Favorites.TITLE,title.toString());
-}

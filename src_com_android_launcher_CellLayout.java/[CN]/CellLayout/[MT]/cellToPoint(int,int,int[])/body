@@ -1,7 +1,0 @@
-{
-  final boolean portrait=mPortrait;
-  final int hStartPadding=portrait ? mShortAxisStartPadding : mLongAxisStartPadding;
-  final int vStartPadding=portrait ? mLongAxisStartPadding : mShortAxisStartPadding;
-  result[0]=hStartPadding + cellX * (mCellWidth + mWidthGap);
-  result[1]=vStartPadding + cellY * (mCellHeight + mHeightGap);
-}

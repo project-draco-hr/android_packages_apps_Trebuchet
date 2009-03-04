@@ -1,8 +1,0 @@
-{
-  if (applications != null) {
-    final int count=applications.size();
-    for (int i=0; i < count; i++) {
-      applications.get(i).icon.setCallback(null);
-    }
-  }
-}

@@ -1,9 +1,0 @@
-{
-  SqlArguments args=new SqlArguments(uri);
-  SQLiteDatabase db=mOpenHelper.getWritableDatabase();
-  final long rowId=db.insert(args.table,null,initialValues);
-  if (rowId <= 0)   return null;
-  uri=ContentUris.withAppendedId(uri,rowId);
-  sendNotify(uri);
-  return uri;
-}

@@ -1,4 +1,0 @@
-{
-  super.bind(info);
-  setContentAdapter(new ApplicationsAdapter(mContext,((UserFolderInfo)info).contents));
-}

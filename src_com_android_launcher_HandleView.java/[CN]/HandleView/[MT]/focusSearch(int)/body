@@ -1,9 +1,0 @@
-{
-  View newFocus=super.focusSearch(direction);
-  if (newFocus == null && mLauncher.isDrawerDown()) {
-    final Workspace workspace=mLauncher.getWorkspace();
-    workspace.dispatchUnhandledMove(null,direction);
-    return (mOrientation == ORIENTATION_HORIZONTAL && direction == FOCUS_DOWN) ? this : workspace;
-  }
-  return newFocus;
-}

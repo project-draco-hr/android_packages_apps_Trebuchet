@@ -1,3 +1,0 @@
-{
-  return mPortrait ? mShortAxisCells : mLongAxisCells;
-}

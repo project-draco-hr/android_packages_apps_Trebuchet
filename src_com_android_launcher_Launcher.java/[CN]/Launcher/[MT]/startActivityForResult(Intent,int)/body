@@ -1,4 +1,0 @@
-{
-  mWaitingForResult=true;
-  super.startActivityForResult(intent,requestCode);
-}

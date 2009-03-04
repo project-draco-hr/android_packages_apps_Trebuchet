@@ -1,3 +1,0 @@
-{
-  pointToCellExact(x + (mCellWidth / 2),y + (mCellHeight / 2),result);
-}

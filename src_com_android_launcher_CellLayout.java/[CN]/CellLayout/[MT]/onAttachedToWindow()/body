@@ -1,4 +1,0 @@
-{
-  super.onAttachedToWindow();
-  mCellInfo.screen=((ViewGroup)getParent()).indexOfChild(this);
-}

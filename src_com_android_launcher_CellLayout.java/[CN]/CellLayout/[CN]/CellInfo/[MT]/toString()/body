@@ -1,3 +1,0 @@
-{
-  return "Cell[view=" + (cell == null ? "null" : cell.getClass()) + ", x="+ cellX+ ", y="+ cellY+ "]";
-}

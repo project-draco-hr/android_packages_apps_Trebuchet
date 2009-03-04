@@ -1,8 +1,0 @@
-{
-  super.requestChildFocus(child,focused);
-  if (child != null) {
-    Rect r=new Rect();
-    child.getDrawingRect(r);
-    requestRectangleOnScreen(r);
-  }
-}

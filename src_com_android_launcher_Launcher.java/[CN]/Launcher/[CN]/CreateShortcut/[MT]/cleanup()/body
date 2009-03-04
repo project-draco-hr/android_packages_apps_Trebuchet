@@ -1,4 +1,0 @@
-{
-  mWorkspace.unlock();
-  dismissDialog(DIALOG_CREATE_SHORTCUT);
-}
