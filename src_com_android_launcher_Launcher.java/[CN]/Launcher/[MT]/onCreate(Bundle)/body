@@ -9,9 +9,6 @@
   }
   checkForLocaleChange();
   setWallpaperDimension();
-  if (sModel == null) {
-    sModel=new LauncherModel();
-  }
   setContentView(R.layout.launcher);
   setupViews();
   registerIntentReceivers();

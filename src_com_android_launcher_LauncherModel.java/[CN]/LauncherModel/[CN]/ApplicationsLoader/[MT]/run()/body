@@ -11,15 +11,23 @@
     final ApplicationsAdapter applicationList=mApplicationsAdapter;
     ChangeNotifier action=new ChangeNotifier(applicationList);
     for (int i=0; i < count && !mStopped; i++) {
-      ApplicationInfo application=new ApplicationInfo();
       ResolveInfo info=apps.get(i);
-      application.title=info.loadLabel(manager);
-      if (application.title == null) {
-        application.title=info.activityInfo.name;
+      ComponentName componentName=new ComponentName(info.activityInfo.applicationInfo.packageName,info.activityInfo.name);
+      ApplicationInfo application=mAppInfoCache.get(componentName);
+      if (application == null) {
+        application=new ApplicationInfo();
+        application.title=info.loadLabel(manager);
+        if (application.title == null) {
+          application.title=info.activityInfo.name;
+        }
+        application.setActivity(componentName,Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
+        application.container=ItemInfo.NO_ID;
+        application.icon=info.activityInfo.loadIcon(manager);
+        if (DEBUG) {
+          Log.d(Launcher.LOG_TAG,"Loaded ApplicationInfo for " + componentName);
+        }
+        mAppInfoCache.put(componentName,application);
       }
-      application.setActivity(new ComponentName(info.activityInfo.applicationInfo.packageName,info.activityInfo.name),Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
-      application.icon=info.activityInfo.loadIcon(manager);
-      application.container=ItemInfo.NO_ID;
       action.add(application);
     }
     action.sort(new Comparator<ApplicationInfo>(){

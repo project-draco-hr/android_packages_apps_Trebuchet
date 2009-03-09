@@ -9,6 +9,7 @@
     }
   }
   removeDialog(DIALOG_CREATE_SHORTCUT);
+  sModel.dropApplicationCache();
   if (!reloadWorkspace) {
     sModel.loadApplications(false,Launcher.this,false);
   }

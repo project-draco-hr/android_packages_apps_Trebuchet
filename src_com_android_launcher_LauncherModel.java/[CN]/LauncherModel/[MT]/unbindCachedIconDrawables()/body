@@ -1,0 +1,5 @@
+{
+  for (  ApplicationInfo appInfo : mAppInfoCache.values()) {
+    appInfo.icon.setCallback(null);
+  }
+}

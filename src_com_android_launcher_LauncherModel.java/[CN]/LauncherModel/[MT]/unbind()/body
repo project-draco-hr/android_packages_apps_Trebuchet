@@ -3,4 +3,5 @@
   unbindAppDrawables(mApplications);
   unbindDrawables(mDesktopItems);
   unbindGadgetHostViews(mDesktopGadgets);
+  unbindCachedIconDrawables();
 }

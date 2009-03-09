@@ -1,10 +1,14 @@
 {
+  if (localeChanged) {
+    dropApplicationCache();
+  }
   if (isLaunching && mApplicationsLoaded && !localeChanged) {
     mApplicationsAdapter=new ApplicationsAdapter(launcher,mApplications);
     return;
   }
   if (mApplicationsAdapter == null || isLaunching || localeChanged) {
-    mApplicationsAdapter=new ApplicationsAdapter(launcher,mApplications=new ArrayList<ApplicationInfo>(DEFAULT_APPLICATIONS_NUMBER));
+    mApplications=new ArrayList<ApplicationInfo>(DEFAULT_APPLICATIONS_NUMBER);
+    mApplicationsAdapter=new ApplicationsAdapter(launcher,mApplications);
   }
   if (mApplicationsLoader != null && mApplicationsLoader.isRunning()) {
     mApplicationsLoader.stop();
