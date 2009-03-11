@@ -1,0 +1,23 @@
+{
+  final Workspace workspace=mWorkspace;
+  final boolean desktopLocked=mDesktopLocked;
+  final int end=Math.min(start + DesktopBinder.APPWIDGETS_COUNT,count);
+  int i=start;
+  for (; i < end; i++) {
+    final LauncherAppWidgetInfo item=appWidgets.get(i);
+    final int appWidgetId=item.appWidgetId;
+    final AppWidgetProviderInfo appWidgetInfo=mAppWidgetManager.getAppWidgetInfo(appWidgetId);
+    item.hostView=mAppWidgetHost.createView(this,appWidgetId,appWidgetInfo);
+    if (LOGD)     Log.d(LOG_TAG,String.format("about to setAppWidget for id=%d, info=%s",appWidgetId,appWidgetInfo));
+    item.hostView.setAppWidget(appWidgetId,appWidgetInfo);
+    item.hostView.setTag(item);
+    workspace.addInScreen(item.hostView,item.screen,item.cellX,item.cellY,item.spanX,item.spanY,!desktopLocked);
+  }
+  workspace.requestLayout();
+  if (end >= count) {
+    finishBindDesktopAppWidgets();
+  }
+ else {
+    binder.obtainMessage(DesktopBinder.MESSAGE_BIND_APPWIDGETS,i,count).sendToTarget();
+  }
+}

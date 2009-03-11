@@ -9,9 +9,9 @@ case MESSAGE_BIND_ITEMS:
       launcher.bindItems(this,mShortcuts,msg.arg1,msg.arg2);
       break;
     }
-case MESSAGE_BIND_GADGETS:
+case MESSAGE_BIND_APPWIDGETS:
 {
-    launcher.bindGadgets(this,mGadgets,msg.arg1,msg.arg2);
+    launcher.bindAppWidgets(this,mAppWidgets,msg.arg1,msg.arg2);
     break;
   }
 }

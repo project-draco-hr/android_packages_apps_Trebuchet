@@ -1,0 +1,24 @@
+{
+  Bundle extras=data.getExtras();
+  int appWidgetId=extras.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID,-1);
+  Log.d(LOG_TAG,"dumping extras content=" + extras.toString());
+  AppWidgetProviderInfo appWidgetInfo=mAppWidgetManager.getAppWidgetInfo(appWidgetId);
+  CellLayout layout=(CellLayout)mWorkspace.getChildAt(cellInfo.screen);
+  int[] spans=layout.rectToCell(appWidgetInfo.minWidth,appWidgetInfo.minHeight);
+  final int[] xy=mCellCoordinates;
+  if (!findSlot(cellInfo,xy,spans[0],spans[1]))   return;
+  LauncherAppWidgetInfo launcherInfo=new LauncherAppWidgetInfo(appWidgetId);
+  launcherInfo.spanX=spans[0];
+  launcherInfo.spanY=spans[1];
+  LauncherModel.addItemToDatabase(this,launcherInfo,LauncherSettings.Favorites.CONTAINER_DESKTOP,mWorkspace.getCurrentScreen(),xy[0],xy[1],false);
+  if (!mRestoring) {
+    sModel.addDesktopAppWidget(launcherInfo);
+    launcherInfo.hostView=mAppWidgetHost.createView(this,appWidgetId,appWidgetInfo);
+    launcherInfo.hostView.setAppWidget(appWidgetId,appWidgetInfo);
+    launcherInfo.hostView.setTag(launcherInfo);
+    mWorkspace.addInCurrentScreen(launcherInfo.hostView,xy[0],xy[1],launcherInfo.spanX,launcherInfo.spanY,insertAtFirst);
+  }
+ else   if (sModel.isDesktopLoaded()) {
+    sModel.addDesktopAppWidget(launcherInfo);
+  }
+}

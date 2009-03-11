@@ -8,9 +8,9 @@
   mAllAppsGrid=(AllAppsGridView)drawer.getContent();
   final AllAppsGridView grid=mAllAppsGrid;
   final DeleteZone deleteZone=(DeleteZone)dragLayer.findViewById(R.id.delete_zone);
-  final HandleView handleIcon=(HandleView)drawer.findViewById(R.id.all_apps);
-  handleIcon.setLauncher(this);
-  mHandleIcon=(TransitionDrawable)handleIcon.getDrawable();
+  mHandleView=(HandleView)drawer.findViewById(R.id.all_apps);
+  mHandleView.setLauncher(this);
+  mHandleIcon=(TransitionDrawable)mHandleView.getDrawable();
   mHandleIcon.setCrossFadeEnabled(true);
   drawer.lock();
   final DrawerManager drawerManager=new DrawerManager();
@@ -26,7 +26,7 @@
   loadWallpaper();
   deleteZone.setLauncher(this);
   deleteZone.setDragController(dragLayer);
-  deleteZone.setHandle(handleIcon);
+  deleteZone.setHandle(mHandleView);
   dragLayer.setIgnoredDropTarget(grid);
   dragLayer.setDragScoller(workspace);
   dragLayer.setDragListener(deleteZone);

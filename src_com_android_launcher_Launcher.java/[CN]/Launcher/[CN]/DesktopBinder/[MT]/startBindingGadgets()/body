@@ -1,3 +1,0 @@
-{
-  obtainMessage(MESSAGE_BIND_GADGETS,0,mGadgets.size()).sendToTarget();
-}

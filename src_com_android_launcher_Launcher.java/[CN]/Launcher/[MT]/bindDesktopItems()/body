@@ -1,7 +1,7 @@
 {
   final ArrayList<ItemInfo> shortcuts=sModel.getDesktopItems();
-  final ArrayList<LauncherGadgetInfo> gadgets=sModel.getDesktopGadgets();
-  if (shortcuts == null || gadgets == null) {
+  final ArrayList<LauncherAppWidgetInfo> appWidgets=sModel.getDesktopAppWidgets();
+  if (shortcuts == null || appWidgets == null) {
     return;
   }
   final Workspace workspace=mWorkspace;
@@ -20,6 +20,6 @@
     }
 );
   }
-  final DesktopBinder binder=new DesktopBinder(this,shortcuts,gadgets);
+  final DesktopBinder binder=new DesktopBinder(this,shortcuts,appWidgets);
   binder.startBindingItems();
 }

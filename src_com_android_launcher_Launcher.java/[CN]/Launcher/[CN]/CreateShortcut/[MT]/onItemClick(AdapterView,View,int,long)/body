@@ -27,12 +27,12 @@ case AddAdapter.ITEM_SEARCH:
     addSearch();
     break;
   }
-case AddAdapter.ITEM_GADGET:
+case AddAdapter.ITEM_APPWIDGET:
 {
-  int gadgetId=Launcher.this.mGadgetHost.allocateGadgetId();
-  Intent pickIntent=new Intent(GadgetManager.ACTION_GADGET_PICK);
-  pickIntent.putExtra(GadgetManager.EXTRA_GADGET_ID,gadgetId);
-  startActivityForResult(pickIntent,REQUEST_PICK_GADGET);
+  int appWidgetId=Launcher.this.mAppWidgetHost.allocateAppWidgetId();
+  Intent pickIntent=new Intent(AppWidgetManager.ACTION_APPWIDGET_PICK);
+  pickIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,appWidgetId);
+  startActivityForResult(pickIntent,REQUEST_PICK_APPWIDGET);
   break;
 }
 case AddAdapter.ITEM_LIVE_FOLDER:

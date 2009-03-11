@@ -1,0 +1,7 @@
+{
+  view.getDrawingRect(bounds);
+  while (view != mDragLayer) {
+    bounds.offset(view.getLeft(),view.getTop());
+    view=(View)view.getParent();
+  }
+}

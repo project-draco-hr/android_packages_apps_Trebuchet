@@ -1,13 +1,19 @@
 {
-  final ArrayList<ApplicationInfo> buffer=mBuffer;
   final ApplicationsAdapter applicationList=mApplicationList;
-  final int count=buffer.size();
-  applicationList.setNotifyOnChange(false);
-  applicationList.clear();
-  for (int i=0; i < count; i++) {
+  if (mFirst) {
     applicationList.setNotifyOnChange(false);
-    applicationList.add(buffer.get(i));
+    applicationList.clear();
+    mFirst=false;
   }
+synchronized (mLock) {
+    final ArrayList<ApplicationInfo> buffer=mBuffer;
+    final int count=buffer.size();
+    for (int i=0; i < count; i++) {
+      applicationList.setNotifyOnChange(false);
+      applicationList.add(buffer.get(i));
+    }
+    buffer.clear();
+  }
+  applicationList.sort(this);
   applicationList.notifyDataSetChanged();
-  buffer.clear();
 }

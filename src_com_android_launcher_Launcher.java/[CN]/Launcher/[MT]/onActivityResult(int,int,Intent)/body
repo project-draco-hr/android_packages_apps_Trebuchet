@@ -16,18 +16,18 @@ break;
 case REQUEST_CREATE_LIVE_FOLDER:
 completeAddLiveFolder(data,mAddItemCellInfo,!mDesktopLocked);
 break;
-case REQUEST_PICK_GADGET:
-addGadget(data);
+case REQUEST_PICK_APPWIDGET:
+addAppWidget(data);
 break;
-case REQUEST_CREATE_GADGET:
-completeAddGadget(data,mAddItemCellInfo,!mDesktopLocked);
+case REQUEST_CREATE_APPWIDGET:
+completeAddAppWidget(data,mAddItemCellInfo,!mDesktopLocked);
 break;
 }
 }
- else if (requestCode == REQUEST_PICK_GADGET && resultCode == RESULT_CANCELED && data != null) {
-int gadgetId=data.getIntExtra(GadgetManager.EXTRA_GADGET_ID,-1);
-if (gadgetId != -1) {
-mGadgetHost.deleteGadgetId(gadgetId);
+ else if (requestCode == REQUEST_PICK_APPWIDGET && resultCode == RESULT_CANCELED && data != null) {
+int appWidgetId=data.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,-1);
+if (appWidgetId != -1) {
+mAppWidgetHost.deleteAppWidgetId(appWidgetId);
 }
 }
 mWaitingForResult=false;

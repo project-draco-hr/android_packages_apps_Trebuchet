@@ -1,0 +1,5 @@
+{
+  mApplicationList=applicationList;
+  mLauncher=launcher;
+  mBuffer=new ArrayList<ApplicationInfo>(UI_NOTIFICATION_RATE);
+}

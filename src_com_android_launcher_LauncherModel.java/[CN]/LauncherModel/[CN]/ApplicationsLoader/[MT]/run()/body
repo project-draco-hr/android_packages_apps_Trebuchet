@@ -9,11 +9,12 @@
   if (apps != null && !mStopped) {
     final int count=apps.size();
     final ApplicationsAdapter applicationList=mApplicationsAdapter;
-    ChangeNotifier action=new ChangeNotifier(applicationList);
+    final ChangeNotifier action=new ChangeNotifier(applicationList,launcher);
+    final HashMap<ComponentName,ApplicationInfo> appInfoCache=mAppInfoCache;
     for (int i=0; i < count && !mStopped; i++) {
       ResolveInfo info=apps.get(i);
       ComponentName componentName=new ComponentName(info.activityInfo.applicationInfo.packageName,info.activityInfo.name);
-      ApplicationInfo application=mAppInfoCache.get(componentName);
+      ApplicationInfo application=appInfoCache.get(componentName);
       if (application == null) {
         application=new ApplicationInfo();
         application.title=info.loadLabel(manager);
@@ -26,18 +27,9 @@
         if (DEBUG) {
           Log.d(Launcher.LOG_TAG,"Loaded ApplicationInfo for " + componentName);
         }
-        mAppInfoCache.put(componentName,application);
+        appInfoCache.put(componentName,application);
       }
       action.add(application);
-    }
-    action.sort(new Comparator<ApplicationInfo>(){
-      public final int compare(      ApplicationInfo a,      ApplicationInfo b){
-        return sCollator.compare(a.title.toString(),b.title.toString());
-      }
-    }
-);
-    if (!mStopped) {
-      launcher.runOnUiThread(action);
     }
   }
   if (!mStopped) {

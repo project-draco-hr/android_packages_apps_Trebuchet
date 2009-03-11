@@ -1,0 +1,4 @@
+Launcher.DesktopBinder binder
+ArrayList<LauncherAppWidgetInfo> appWidgets
+int start
+int count

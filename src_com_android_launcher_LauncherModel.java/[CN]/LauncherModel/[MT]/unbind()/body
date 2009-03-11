@@ -2,6 +2,6 @@
   mApplicationsAdapter=null;
   unbindAppDrawables(mApplications);
   unbindDrawables(mDesktopItems);
-  unbindGadgetHostViews(mDesktopGadgets);
+  unbindAppWidgetHostViews(mDesktopAppWidgets);
   unbindCachedIconDrawables();
 }
