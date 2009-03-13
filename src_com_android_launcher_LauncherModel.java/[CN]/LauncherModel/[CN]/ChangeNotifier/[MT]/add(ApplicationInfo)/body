@@ -1,9 +1,5 @@
 {
-synchronized (mLock) {
-    final ArrayList<ApplicationInfo> buffer=mBuffer;
-    buffer.add(application);
-    if (buffer.size() >= UI_NOTIFICATION_RATE) {
-      mLauncher.runOnUiThread(this);
-    }
-  }
+  final ArrayList<ApplicationInfo> buffer=mBuffer;
+  buffer.add(application);
+  return buffer.size() >= UI_NOTIFICATION_RATE;
 }

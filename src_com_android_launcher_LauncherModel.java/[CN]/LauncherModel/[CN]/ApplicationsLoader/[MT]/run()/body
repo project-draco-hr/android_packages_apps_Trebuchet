@@ -9,7 +9,7 @@
   if (apps != null && !mStopped) {
     final int count=apps.size();
     final ApplicationsAdapter applicationList=mApplicationsAdapter;
-    final ChangeNotifier action=new ChangeNotifier(applicationList,launcher);
+    ChangeNotifier action=new ChangeNotifier(applicationList,true);
     final HashMap<ComponentName,ApplicationInfo> appInfoCache=mAppInfoCache;
     for (int i=0; i < count && !mStopped; i++) {
       ResolveInfo info=apps.get(i);
@@ -29,8 +29,12 @@
         }
         appInfoCache.put(componentName,application);
       }
-      action.add(application);
+      if (action.add(application)) {
+        launcher.runOnUiThread(action);
+        action=new ChangeNotifier(applicationList,false);
+      }
     }
+    launcher.runOnUiThread(action);
   }
   if (!mStopped) {
     mApplicationsLoaded=true;

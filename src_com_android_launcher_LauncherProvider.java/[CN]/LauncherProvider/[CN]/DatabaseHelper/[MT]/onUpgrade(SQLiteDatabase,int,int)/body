@@ -1,12 +1,12 @@
 {
   if (LOGD)   Log.d(LOG_TAG,"onUpgrade triggered");
   int version=oldVersion;
-  if (version == 1) {
+  if (version < 3) {
     db.beginTransaction();
     try {
-      db.execSQL("ALTER TABLE favorites " + "ADD COLUMN gadgetId INTEGER NOT NULL DEFAULT -1;");
+      db.execSQL("ALTER TABLE favorites " + "ADD COLUMN appWidgetId INTEGER NOT NULL DEFAULT -1;");
       db.setTransactionSuccessful();
-      version=2;
+      version=3;
     }
  catch (    SQLException ex) {
       Log.e(LOG_TAG,ex.getMessage(),ex);
@@ -14,7 +14,7 @@
  finally {
       db.endTransaction();
     }
-    if (version == 2) {
+    if (version == 3) {
       convertWidgets(db);
     }
   }

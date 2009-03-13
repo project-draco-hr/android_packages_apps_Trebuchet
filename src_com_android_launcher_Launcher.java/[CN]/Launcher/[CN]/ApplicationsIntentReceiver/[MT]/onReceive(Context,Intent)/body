@@ -1,5 +1,7 @@
 {
   boolean reloadWorkspace=false;
+  android.util.Log.d("Home","application intent received: " + intent.getAction());
+  android.util.Log.d("Home","  --> " + intent.getData());
   if (Intent.ACTION_PACKAGE_REMOVED.equals(intent.getAction())) {
     if (!intent.getBooleanExtra(Intent.EXTRA_REPLACING,false)) {
       removeShortcutsForPackage(intent.getData().getSchemeSpecificPart());
@@ -9,11 +11,12 @@
     }
   }
   removeDialog(DIALOG_CREATE_SHORTCUT);
-  sModel.dropApplicationCache();
   if (!reloadWorkspace) {
+    android.util.Log.d("Home","  --> loading apps");
     sModel.loadApplications(false,Launcher.this,false);
   }
  else {
+    android.util.Log.d("Home","  --> loading workspace");
     sModel.loadUserItems(false,Launcher.this,false,true);
   }
 }

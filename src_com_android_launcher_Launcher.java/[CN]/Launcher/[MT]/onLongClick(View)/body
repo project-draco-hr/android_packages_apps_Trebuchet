@@ -12,6 +12,7 @@
   if (mWorkspace.allowLongPress()) {
     if (cellInfo.cell == null) {
       if (cellInfo.valid) {
+        mWorkspace.setAllowLongPress(false);
         showAddDialog(cellInfo);
       }
     }
