@@ -1,6 +1,5 @@
 {
   if (packageName != null && packageName.length() > 0) {
-    android.util.Log.d(LOG_TAG,packageName);
     mWorkspace.removeShortcutsForPackage(packageName);
   }
 }

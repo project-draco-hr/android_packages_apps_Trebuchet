@@ -16,7 +16,7 @@
       }
     }
   }
- else   if (v == mGoButton) {
+ else   if (v == mGoButton || v == mVoiceButton) {
     boolean handled=false;
     if (!event.isSystem() && (keyCode != KeyEvent.KEYCODE_DPAD_UP) && (keyCode != KeyEvent.KEYCODE_DPAD_DOWN)&& (keyCode != KeyEvent.KEYCODE_DPAD_LEFT)&& (keyCode != KeyEvent.KEYCODE_DPAD_RIGHT)&& (keyCode != KeyEvent.KEYCODE_DPAD_CENTER)) {
       if (mSearchText.requestFocus()) {

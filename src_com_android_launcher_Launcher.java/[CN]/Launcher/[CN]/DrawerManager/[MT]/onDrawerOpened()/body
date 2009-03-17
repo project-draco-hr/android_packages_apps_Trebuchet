@@ -1,6 +1,8 @@
 {
   if (!mOpen) {
     mHandleIcon.reverseTransition(150);
+    final Rect bounds=mWorkspace.mDrawerBounds;
+    offsetBoundsToDragLayer(bounds,mAllAppsGrid);
     mOpen=true;
   }
 }

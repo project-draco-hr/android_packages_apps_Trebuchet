@@ -1,5 +1,6 @@
 {
   cellInfo.screen=mWorkspace.getCurrentScreen();
+  if (!findSingleSlot(cellInfo))   return;
   final LiveFolderInfo info=addLiveFolder(this,data,cellInfo,false);
   if (!mRestoring) {
     sModel.addDesktopItem(info);

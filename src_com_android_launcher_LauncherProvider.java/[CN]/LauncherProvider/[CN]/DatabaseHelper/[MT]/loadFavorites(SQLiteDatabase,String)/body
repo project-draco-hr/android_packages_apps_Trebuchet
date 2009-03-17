@@ -56,15 +56,6 @@ catch (  IOException e) {
   }
   values.clear();
   values.put(LauncherSettings.Favorites.CONTAINER,LauncherSettings.Favorites.CONTAINER_DESKTOP);
-  values.put(LauncherSettings.Favorites.ITEM_TYPE,LauncherSettings.Favorites.ITEM_TYPE_WIDGET_CLOCK);
-  values.put(LauncherSettings.Favorites.SCREEN,1);
-  values.put(LauncherSettings.Favorites.CELLX,1);
-  values.put(LauncherSettings.Favorites.CELLY,0);
-  values.put(LauncherSettings.Favorites.SPANX,2);
-  values.put(LauncherSettings.Favorites.SPANY,2);
-  db.insert(TABLE_FAVORITES,null,values);
-  values.clear();
-  values.put(LauncherSettings.Favorites.CONTAINER,LauncherSettings.Favorites.CONTAINER_DESKTOP);
   values.put(LauncherSettings.Favorites.ITEM_TYPE,LauncherSettings.Favorites.ITEM_TYPE_WIDGET_SEARCH);
   values.put(LauncherSettings.Favorites.SCREEN,2);
   values.put(LauncherSettings.Favorites.CELLX,0);
@@ -72,5 +63,29 @@ catch (  IOException e) {
   values.put(LauncherSettings.Favorites.SPANX,4);
   values.put(LauncherSettings.Favorites.SPANY,1);
   db.insert(TABLE_FAVORITES,null,values);
+  final int[] bindSources=new int[]{Favorites.ITEM_TYPE_WIDGET_CLOCK};
+  final ArrayList<ComponentName> bindTargets=new ArrayList<ComponentName>();
+  bindTargets.add(new ComponentName("com.android.alarmclock","com.android.alarmclock.AnalogAppWidgetProvider"));
+  boolean allocatedAppWidgets=false;
+  try {
+    int appWidgetId=mAppWidgetHost.allocateAppWidgetId();
+    values.clear();
+    values.put(LauncherSettings.Favorites.CONTAINER,LauncherSettings.Favorites.CONTAINER_DESKTOP);
+    values.put(LauncherSettings.Favorites.ITEM_TYPE,LauncherSettings.Favorites.ITEM_TYPE_WIDGET_CLOCK);
+    values.put(LauncherSettings.Favorites.SCREEN,1);
+    values.put(LauncherSettings.Favorites.CELLX,1);
+    values.put(LauncherSettings.Favorites.CELLY,0);
+    values.put(LauncherSettings.Favorites.SPANX,2);
+    values.put(LauncherSettings.Favorites.SPANY,2);
+    values.put(LauncherSettings.Favorites.APPWIDGET_ID,appWidgetId);
+    db.insert(TABLE_FAVORITES,null,values);
+    allocatedAppWidgets=true;
+  }
+ catch (  RuntimeException ex) {
+    Log.e(LOG_TAG,"Problem allocating appWidgetId",ex);
+  }
+  if (allocatedAppWidgets) {
+    launchAppWidgetBinder(bindSources,bindTargets);
+  }
   return i;
 }

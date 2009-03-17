@@ -1,3 +1,0 @@
-{
-  return mApplications == null ? 0 : mApplications.size();
-}

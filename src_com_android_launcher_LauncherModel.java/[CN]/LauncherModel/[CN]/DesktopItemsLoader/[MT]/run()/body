@@ -7,8 +7,10 @@
     updateShortcutLabels(contentResolver,manager);
   }
   mDesktopItems=new ArrayList<ItemInfo>();
+  mDesktopAppWidgets=new ArrayList<LauncherAppWidgetInfo>();
   mFolders=new HashMap<Long,FolderInfo>();
   final ArrayList<ItemInfo> desktopItems=mDesktopItems;
+  final ArrayList<LauncherAppWidgetInfo> desktopAppWidgets=mDesktopAppWidgets;
   final Cursor c=contentResolver.query(LauncherSettings.Favorites.CONTENT_URI,null,null,null,null);
   try {
     final int idIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.ID);
@@ -20,14 +22,18 @@
     final int iconResourceIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.ICON_RESOURCE);
     final int containerIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.CONTAINER);
     final int itemTypeIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.ITEM_TYPE);
+    final int appWidgetIdIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.APPWIDGET_ID);
     final int screenIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.SCREEN);
     final int cellXIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.CELLX);
     final int cellYIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.CELLY);
+    final int spanXIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.SPANX);
+    final int spanYIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.SPANY);
     final int uriIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.URI);
     final int displayModeIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.DISPLAY_MODE);
     ApplicationInfo info;
     String intentDescription;
-    Widget widgetInfo=null;
+    Widget widgetInfo;
+    LauncherAppWidgetInfo appWidgetInfo;
     int container;
     long id;
     Intent intent;
@@ -120,28 +126,11 @@ desktopItems.add(liveFolderInfo);
 break;
 }
 break;
-case LauncherSettings.Favorites.ITEM_TYPE_WIDGET_CLOCK:
-case LauncherSettings.Favorites.ITEM_TYPE_WIDGET_SEARCH:
-case LauncherSettings.Favorites.ITEM_TYPE_WIDGET_PHOTO_FRAME:
-switch (itemType) {
-case LauncherSettings.Favorites.ITEM_TYPE_WIDGET_CLOCK:
-widgetInfo=Widget.makeClock();
-break;
 case LauncherSettings.Favorites.ITEM_TYPE_WIDGET_SEARCH:
 widgetInfo=Widget.makeSearch();
-break;
-case LauncherSettings.Favorites.ITEM_TYPE_WIDGET_PHOTO_FRAME:
-widgetInfo=Widget.makePhotoFrame();
-byte[] data=c.getBlob(iconIndex);
-if (data != null) {
-widgetInfo.photo=BitmapFactory.decodeByteArray(data,0,data.length);
-}
-break;
-}
-if (widgetInfo != null) {
 container=c.getInt(containerIndex);
 if (container != LauncherSettings.Favorites.CONTAINER_DESKTOP) {
-Log.e(Launcher.LOG_TAG,"Widget found where container " + "!= CONTAINER_DESKTOP -- ignoring!");
+Log.e(Launcher.LOG_TAG,"Widget found where container " + "!= CONTAINER_DESKTOP  ignoring!");
 continue;
 }
 widgetInfo.id=c.getLong(idIndex);
@@ -150,7 +139,23 @@ widgetInfo.container=container;
 widgetInfo.cellX=c.getInt(cellXIndex);
 widgetInfo.cellY=c.getInt(cellYIndex);
 desktopItems.add(widgetInfo);
+break;
+case LauncherSettings.Favorites.ITEM_TYPE_APPWIDGET:
+int appWidgetId=c.getInt(appWidgetIdIndex);
+appWidgetInfo=new LauncherAppWidgetInfo(appWidgetId);
+appWidgetInfo.id=c.getLong(idIndex);
+appWidgetInfo.screen=c.getInt(screenIndex);
+appWidgetInfo.cellX=c.getInt(cellXIndex);
+appWidgetInfo.cellY=c.getInt(cellYIndex);
+appWidgetInfo.spanX=c.getInt(spanXIndex);
+appWidgetInfo.spanY=c.getInt(spanYIndex);
+container=c.getInt(containerIndex);
+if (container != LauncherSettings.Favorites.CONTAINER_DESKTOP) {
+Log.e(Launcher.LOG_TAG,"Widget found where container " + "!= CONTAINER_DESKTOP -- ignoring!");
+continue;
 }
+appWidgetInfo.container=c.getInt(containerIndex);
+desktopAppWidgets.add(appWidgetInfo);
 break;
 }
 }

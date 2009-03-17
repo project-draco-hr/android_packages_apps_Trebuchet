@@ -1,0 +1,5 @@
+{
+  mApplicationList=applicationList;
+  mFirst=first;
+  mBuffer=new ArrayList<ApplicationInfo>(UI_NOTIFICATION_RATE);
+}

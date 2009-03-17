@@ -1,4 +1,0 @@
-{
-  final ApplicationInfo info=mApplications.get(position);
-  mLauncher.addApplicationShortcut(info);
-}

@@ -1,0 +1,3 @@
+{
+  obtainMessage(MESSAGE_BIND_APPWIDGETS,0,mAppWidgets.size()).sendToTarget();
+}

@@ -1,3 +1,0 @@
-{
-  mGroups[groupPosition].run(childPosition);
-}

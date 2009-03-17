@@ -4,11 +4,17 @@
   mSearchText.setOnKeyListener(this);
   mSearchText.addTextChangedListener(this);
   mGoButton=(ImageButton)findViewById(R.id.search_go_btn);
+  mVoiceButton=(ImageButton)findViewById(R.id.search_voice_btn);
   mGoButton.setOnClickListener(this);
+  mVoiceButton.setOnClickListener(this);
   mGoButton.setOnKeyListener(this);
+  mVoiceButton.setOnKeyListener(this);
   mSearchText.setOnLongClickListener(this);
   mGoButton.setOnLongClickListener(this);
+  mVoiceButton.setOnLongClickListener(this);
   mGoButton.setEnabled(false);
   mGoButton.setFocusable(false);
+  configureSearchableInfo();
   configureSuggestions();
+  configureVoiceSearchButton();
 }

@@ -1,4 +1,7 @@
 {
   super.bind(info);
-  setContentAdapter(new LiveFolderAdapter(mLauncher,(LiveFolderInfo)info));
+  if (mLoadingTask != null && mLoadingTask.getStatus() == AsyncTask.Status.RUNNING) {
+    mLoadingTask.cancel(true);
+  }
+  mLoadingTask=new FolderLoadingTask(this).execute((LiveFolderInfo)info);
 }

@@ -1,21 +1,22 @@
 {
+  android.util.Log.d("Home","load applications");
   if (isLaunching && mApplicationsLoaded && !localeChanged) {
     mApplicationsAdapter=new ApplicationsAdapter(launcher,mApplications);
-    return;
+    android.util.Log.d("Home","  --> applications loaded, return");
+    return false;
+  }
+  waitForApplicationsLoader();
+  if (localeChanged) {
+    dropApplicationCache();
   }
   if (mApplicationsAdapter == null || isLaunching || localeChanged) {
-    mApplicationsAdapter=new ApplicationsAdapter(launcher,mApplications=new ArrayList<ApplicationInfo>(DEFAULT_APPLICATIONS_NUMBER));
-  }
-  if (mApplicationsLoader != null && mApplicationsLoader.isRunning()) {
-    mApplicationsLoader.stop();
-    try {
-      mLoader.join(APPLICATION_NOT_RESPONDING_TIMEOUT);
-    }
- catch (    InterruptedException e) {
-    }
+    mApplications=new ArrayList<ApplicationInfo>(DEFAULT_APPLICATIONS_NUMBER);
+    mApplicationsAdapter=new ApplicationsAdapter(launcher,mApplications);
   }
   mApplicationsLoaded=false;
   if (!isLaunching) {
     startApplicationsLoader(launcher);
+    return false;
   }
+  return true;
 }

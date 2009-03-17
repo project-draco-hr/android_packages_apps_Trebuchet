@@ -1,5 +1,5 @@
 {
-  CellInfo.VacantCell cell=new CellInfo.VacantCell();
+  CellInfo.VacantCell cell=CellInfo.VacantCell.acquire();
   cell.cellX=current.left;
   cell.cellY=current.top;
   cell.spanX=current.right - current.left + 1;

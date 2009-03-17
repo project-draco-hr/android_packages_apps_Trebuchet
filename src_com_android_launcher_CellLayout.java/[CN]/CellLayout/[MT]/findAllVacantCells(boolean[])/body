@@ -22,9 +22,8 @@
   cellInfo.maxVacantSpanXSpanY=Integer.MIN_VALUE;
   cellInfo.maxVacantSpanY=Integer.MIN_VALUE;
   cellInfo.maxVacantSpanYSpanX=Integer.MIN_VALUE;
-  cellInfo.vacantCells=new ArrayList<CellInfo.VacantCell>();
   cellInfo.screen=mCellInfo.screen;
-  Rect current=new Rect();
+  Rect current=cellInfo.current;
   for (int x=0; x < xCount; x++) {
     for (int y=0; y < yCount; y++) {
       if (!occupied[x][y]) {
@@ -35,14 +34,5 @@
     }
   }
   cellInfo.valid=cellInfo.vacantCells.size() > 0;
-  if (cellInfo.valid) {
-    int[] xy=new int[2];
-    if (cellInfo.findCellForSpan(xy,1,1)) {
-      cellInfo.cellX=xy[0];
-      cellInfo.cellY=xy[1];
-      cellInfo.spanY=1;
-      cellInfo.spanX=1;
-    }
-  }
   return cellInfo;
 }

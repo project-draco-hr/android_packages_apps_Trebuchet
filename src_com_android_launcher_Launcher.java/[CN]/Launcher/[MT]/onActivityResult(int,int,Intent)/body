@@ -1,18 +1,33 @@
 {
   if (resultCode == RESULT_OK && mAddItemCellInfo != null) {
 switch (requestCode) {
-case REQUEST_CREATE_SHORTCUT:
-      completeAddShortcut(data,mAddItemCellInfo,!mDesktopLocked);
+case REQUEST_PICK_APPLICATION:
+      completeAddApplication(this,data,mAddItemCellInfo,!mDesktopLocked);
     break;
-case REQUEST_CHOOSE_PHOTO:
-  completeAddPhotoFrame(data,mAddItemCellInfo);
+case REQUEST_PICK_SHORTCUT:
+  addShortcut(data);
 break;
-case REQUEST_UPDATE_PHOTO:
-completeUpdatePhotoFrame(data,mAddItemCellInfo);
+case REQUEST_CREATE_SHORTCUT:
+completeAddShortcut(data,mAddItemCellInfo,!mDesktopLocked);
+break;
+case REQUEST_PICK_LIVE_FOLDER:
+addLiveFolder(data);
 break;
 case REQUEST_CREATE_LIVE_FOLDER:
 completeAddLiveFolder(data,mAddItemCellInfo,!mDesktopLocked);
 break;
+case REQUEST_PICK_APPWIDGET:
+addAppWidget(data);
+break;
+case REQUEST_CREATE_APPWIDGET:
+completeAddAppWidget(data,mAddItemCellInfo,!mDesktopLocked);
+break;
+}
+}
+ else if (requestCode == REQUEST_PICK_APPWIDGET && resultCode == RESULT_CANCELED && data != null) {
+int appWidgetId=data.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,-1);
+if (appWidgetId != -1) {
+mAppWidgetHost.deleteAppWidgetId(appWidgetId);
 }
 }
 mWaitingForResult=false;

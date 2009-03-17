@@ -20,6 +20,7 @@
           cellInfo.spanY=lp.cellVSpan;
           cellInfo.valid=true;
           found=true;
+          mDirtyTag=false;
           break;
         }
       }
@@ -38,9 +39,7 @@
       cellInfo.spanX=1;
       cellInfo.spanY=1;
       cellInfo.valid=cellXY[0] >= 0 && cellXY[1] >= 0 && cellXY[0] < xCount && cellXY[1] < yCount && !occupied[cellXY[0]][cellXY[1]];
-      if (cellInfo.valid) {
-        findIntersectingVacantCells(cellInfo,cellXY[0],cellXY[1],xCount,yCount,occupied);
-      }
+      mDirtyTag=true;
     }
     setTag(cellInfo);
   }
@@ -51,6 +50,7 @@
     cellInfo.spanX=0;
     cellInfo.spanY=0;
     cellInfo.valid=false;
+    mDirtyTag=false;
     setTag(cellInfo);
   }
   return false;

@@ -1,4 +1,0 @@
-{
-  mName=name;
-  mList=new ArrayList<AddAction>();
-}

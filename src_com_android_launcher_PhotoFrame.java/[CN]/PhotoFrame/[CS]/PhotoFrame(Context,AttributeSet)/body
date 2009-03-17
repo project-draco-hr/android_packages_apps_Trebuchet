@@ -1,6 +1,0 @@
-{
-  super(context,attrs);
-  setClickable(true);
-  setOnClickListener(this);
-  setWillNotCacheDrawing(true);
-}

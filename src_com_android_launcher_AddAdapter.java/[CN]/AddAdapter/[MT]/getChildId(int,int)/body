@@ -1,3 +1,0 @@
-{
-  return (groupPosition << 16) | childPosition;
-}

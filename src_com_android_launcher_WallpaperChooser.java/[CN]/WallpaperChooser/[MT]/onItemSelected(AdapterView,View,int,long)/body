@@ -1,6 +1,6 @@
 {
   final ImageView view=mImageView;
-  Bitmap b=BitmapFactory.decodeResource(getResources(),IMAGE_IDS[position],mOptions);
+  Bitmap b=BitmapFactory.decodeResource(getResources(),mImages.get(position),mOptions);
   view.setImageBitmap(b);
   if (mBitmap != null) {
     mBitmap.recycle();

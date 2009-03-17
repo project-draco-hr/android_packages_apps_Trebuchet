@@ -2,7 +2,7 @@
   if (cellX < 0 || cellY < 0) {
     maxVacantSpanX=maxVacantSpanXSpanY=Integer.MIN_VALUE;
     maxVacantSpanY=maxVacantSpanYSpanX=Integer.MIN_VALUE;
-    vacantCells=new ArrayList<VacantCell>();
+    clearVacantCells();
     return;
   }
   final boolean[][] unflattened=new boolean[xCount][yCount];

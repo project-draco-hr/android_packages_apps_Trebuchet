@@ -1,6 +1,3 @@
 {
-  final CellLayout layout=(CellLayout)getChildAt(cellInfo.screen);
-  final int[] result=new int[2];
-  layout.cellToPoint(cellInfo.cellX,cellInfo.cellY,result);
-  onDropExternal(result[0],result[1],info,layout);
+  addApplicationShortcut(info,cellInfo,false);
 }

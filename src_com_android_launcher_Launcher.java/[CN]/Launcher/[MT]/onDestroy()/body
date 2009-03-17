@@ -1,6 +1,12 @@
 {
   mDestroyed=true;
   super.onDestroy();
+  try {
+    mAppWidgetHost.stopListening();
+  }
+ catch (  NullPointerException ex) {
+    Log.w(LOG_TAG,"problem while stopping AppWidgetHost during Launcher destruction",ex);
+  }
   TextKeyListener.getInstance().release();
   mAllAppsGrid.clearTextFilter();
   mAllAppsGrid.setAdapter(null);

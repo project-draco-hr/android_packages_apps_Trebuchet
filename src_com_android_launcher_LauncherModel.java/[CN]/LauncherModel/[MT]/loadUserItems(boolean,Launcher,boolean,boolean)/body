@@ -1,5 +1,7 @@
 {
-  if (isLaunching && mDesktopItems != null && mDesktopItemsLoaded) {
+  android.util.Log.d("Home","loading user items");
+  if (isLaunching && isDesktopLoaded()) {
+    android.util.Log.d("Home","  --> items loaded, return");
     if (loadApplications)     startApplicationsLoader(launcher);
     launcher.onDesktopItemsLoaded();
     return;
@@ -7,13 +9,14 @@
   if (mDesktopItemsLoader != null && mDesktopItemsLoader.isRunning()) {
     mDesktopItemsLoader.stop();
     try {
-      mDesktopLoader.join(APPLICATION_NOT_RESPONDING_TIMEOUT);
+      mDesktopLoaderThread.join(APPLICATION_NOT_RESPONDING_TIMEOUT);
     }
  catch (    InterruptedException e) {
     }
   }
+  android.util.Log.d("Home","  --> starting workspace loader");
   mDesktopItemsLoaded=false;
   mDesktopItemsLoader=new DesktopItemsLoader(launcher,localeChanged,loadApplications);
-  mDesktopLoader=new Thread(mDesktopItemsLoader,"Desktop Items Loader");
-  mDesktopLoader.start();
+  mDesktopLoaderThread=new Thread(mDesktopItemsLoader,"Desktop Items Loader");
+  mDesktopLoaderThread.start();
 }

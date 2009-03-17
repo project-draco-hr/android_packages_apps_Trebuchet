@@ -20,7 +20,7 @@
   final RectF rect=mRect;
   final int left=getCompoundPaddingLeft();
   final int top=getExtendedPaddingTop();
-  rect.set(left + layout.getLineLeft(0) - PADDING_H,top + layout.getLineTop(0) - PADDING_V,Math.min(left + layout.getLineRight(0) + PADDING_H,mScrollX + mRight - mLeft),top + layout.getLineBottom(0) + PADDING_V);
-  canvas.drawRoundRect(rect,CORNER_RADIUS,CORNER_RADIUS,mPaint);
+  rect.set(left + layout.getLineLeft(0) - mPaddingH,top + layout.getLineTop(0) - mPaddingV,Math.min(left + layout.getLineRight(0) + mPaddingH,mScrollX + mRight - mLeft),top + layout.getLineBottom(0) + mPaddingV);
+  canvas.drawRoundRect(rect,mCornerRadius,mCornerRadius,mPaint);
   super.draw(canvas);
 }

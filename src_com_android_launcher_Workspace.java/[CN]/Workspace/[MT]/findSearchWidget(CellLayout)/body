@@ -3,7 +3,7 @@
   for (int i=0; i < count; i++) {
     View v=screen.getChildAt(i);
     if (v instanceof Search) {
-      return v;
+      return (Search)v;
     }
   }
   return null;

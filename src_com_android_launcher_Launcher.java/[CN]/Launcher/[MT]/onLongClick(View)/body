@@ -7,11 +7,12 @@
   }
   CellLayout.CellInfo cellInfo=(CellLayout.CellInfo)v.getTag();
   if (cellInfo == null) {
-    return false;
+    return true;
   }
   if (mWorkspace.allowLongPress()) {
     if (cellInfo.cell == null) {
       if (cellInfo.valid) {
+        mWorkspace.setAllowLongPress(false);
         showAddDialog(cellInfo);
       }
     }

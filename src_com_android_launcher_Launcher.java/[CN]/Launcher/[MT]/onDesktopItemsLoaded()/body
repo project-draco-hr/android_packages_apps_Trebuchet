@@ -1,5 +1,6 @@
 {
   if (mDestroyed)   return;
+  android.util.Log.d("Home","setting grid adapter");
+  mAllAppsGrid.setAdapter(sModel.getApplicationsAdapter());
   bindDesktopItems();
-  mAllAppsGrid.setAdapter(Launcher.getModel().getApplicationsAdapter());
 }

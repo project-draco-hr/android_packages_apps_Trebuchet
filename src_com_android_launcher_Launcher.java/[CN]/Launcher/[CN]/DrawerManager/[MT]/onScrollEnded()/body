@@ -1,2 +1,5 @@
 {
+  if (PROFILE_DRAWER) {
+    android.os.Debug.stopMethodTracing();
+  }
 }

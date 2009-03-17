@@ -18,12 +18,6 @@ if ((x < SCROLL_ZONE) || (x > getWidth() - SCROLL_ZONE)) {
 }
 break;
 case MotionEvent.ACTION_MOVE:
-if (Launcher.sOpenGlEnabled) {
-mLastMotionX=x;
-mLastMotionY=y;
-invalidate();
-}
- else {
 final int scrollX=mScrollX;
 final int scrollY=mScrollY;
 final float touchX=mTouchOffsetX;
@@ -43,7 +37,6 @@ left=(int)(scrollX + x - touchX - offsetX);
 top=(int)(scrollY + y - touchY - offsetY);
 rect.union(left - 1,top - 1,left + width + 1,top + height + 1);
 invalidate(rect);
-}
 final int[] coordinates=mDropCoordinates;
 DropTarget dropTarget=findDropTarget((int)x,(int)y,coordinates);
 if (dropTarget != null) {

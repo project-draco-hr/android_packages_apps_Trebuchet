@@ -1,6 +1,6 @@
 {
   boolean handled=super.onKeyDown(keyCode,event);
-  if (!handled && keyCode != KeyEvent.KEYCODE_ENTER) {
+  if (!handled && acceptFilter() && keyCode != KeyEvent.KEYCODE_ENTER) {
     boolean gotKey=TextKeyListener.getInstance().onKeyDown(mWorkspace,mDefaultKeySsb,keyCode,event);
     if (gotKey && mDefaultKeySsb != null && mDefaultKeySsb.length() > 0) {
       final String str=mDefaultKeySsb.toString();
