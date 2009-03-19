@@ -1,0 +1,22 @@
+{
+  final List<ApplicationInfo> toAdd=new ArrayList<ApplicationInfo>();
+  final int count=matches.size();
+  boolean changed=false;
+  for (int i=0; i < count; i++) {
+    final ResolveInfo info=matches.get(i);
+    final ApplicationInfo applicationInfo=findIntent(adapter,info.activityInfo.applicationInfo.packageName,info.activityInfo.name);
+    if (applicationInfo == null) {
+      toAdd.add(makeAndCacheApplicationInfo(launcher.getPackageManager(),mAppInfoCache,info));
+      changed=true;
+    }
+ else {
+      updateAndCacheApplicationInfo(launcher.getPackageManager(),info,applicationInfo);
+      changed=true;
+    }
+  }
+  for (  ApplicationInfo info : toAdd) {
+    adapter.setNotifyOnChange(false);
+    adapter.add(info);
+  }
+  return changed;
+}

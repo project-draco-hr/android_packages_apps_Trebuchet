@@ -14,7 +14,7 @@
       icon=resources.getDrawable(id);
     }
  catch (    Exception e) {
-      Log.w(LOG_TAG,"Could not load live folder icon: " + extra);
+      w(LOG_TAG,"Could not load live folder icon: " + extra);
     }
   }
   if (icon == null) {

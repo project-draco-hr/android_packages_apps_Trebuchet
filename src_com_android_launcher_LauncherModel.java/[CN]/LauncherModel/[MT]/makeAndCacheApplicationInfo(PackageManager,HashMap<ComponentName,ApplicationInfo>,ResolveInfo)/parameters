@@ -1,0 +1,3 @@
+PackageManager manager
+HashMap<ComponentName,ApplicationInfo> appInfoCache
+ResolveInfo info

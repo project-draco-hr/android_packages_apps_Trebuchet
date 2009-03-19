@@ -1,7 +1,7 @@
 {
   mRunning=true;
   android.os.Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);
-  Intent mainIntent=new Intent(Intent.ACTION_MAIN,null);
+  final Intent mainIntent=new Intent(Intent.ACTION_MAIN,null);
   mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
   final Launcher launcher=mLauncher.get();
   final PackageManager manager=launcher.getPackageManager();
@@ -13,23 +13,8 @@
     final HashMap<ComponentName,ApplicationInfo> appInfoCache=mAppInfoCache;
     for (int i=0; i < count && !mStopped; i++) {
       ResolveInfo info=apps.get(i);
-      ComponentName componentName=new ComponentName(info.activityInfo.applicationInfo.packageName,info.activityInfo.name);
-      ApplicationInfo application=appInfoCache.get(componentName);
-      if (application == null) {
-        application=new ApplicationInfo();
-        application.title=info.loadLabel(manager);
-        if (application.title == null) {
-          application.title=info.activityInfo.name;
-        }
-        application.setActivity(componentName,Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
-        application.container=ItemInfo.NO_ID;
-        application.icon=info.activityInfo.loadIcon(manager);
-        if (DEBUG) {
-          Log.d(Launcher.LOG_TAG,"Loaded ApplicationInfo for " + componentName);
-        }
-        appInfoCache.put(componentName,application);
-      }
-      if (action.add(application)) {
+      ApplicationInfo application=makeAndCacheApplicationInfo(manager,appInfoCache,info);
+      if (action.add(application) && !mStopped) {
         launcher.runOnUiThread(action);
         action=new ChangeNotifier(applicationList,false);
       }

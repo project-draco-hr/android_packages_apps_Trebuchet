@@ -5,7 +5,7 @@
     mAppWidgetHost.stopListening();
   }
  catch (  NullPointerException ex) {
-    Log.w(LOG_TAG,"problem while stopping AppWidgetHost during Launcher destruction",ex);
+    w(LOG_TAG,"problem while stopping AppWidgetHost during Launcher destruction",ex);
   }
   TextKeyListener.getInstance().release();
   mAllAppsGrid.clearTextFilter();

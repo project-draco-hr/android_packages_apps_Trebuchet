@@ -22,7 +22,7 @@
         icon=resources.getDrawable(id);
       }
  catch (      Exception e) {
-        Log.w(LOG_TAG,"Could not load shortcut icon: " + extra);
+        w(LOG_TAG,"Could not load shortcut icon: " + extra);
       }
     }
   }

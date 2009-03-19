@@ -1,13 +1,20 @@
 {
   int appWidgetId=data.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,-1);
-  AppWidgetProviderInfo appWidget=mAppWidgetManager.getAppWidgetInfo(appWidgetId);
-  if (appWidget.configure != null) {
-    Intent intent=new Intent(AppWidgetManager.ACTION_APPWIDGET_CONFIGURE);
-    intent.setComponent(appWidget.configure);
-    intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,appWidgetId);
-    startActivityForResult(intent,REQUEST_CREATE_APPWIDGET);
+  String customWidget=data.getStringExtra(EXTRA_CUSTOM_WIDGET);
+  if (SEARCH_WIDGET.equals(customWidget)) {
+    mAppWidgetHost.deleteAppWidgetId(appWidgetId);
+    addSearch();
   }
  else {
-    onActivityResult(REQUEST_CREATE_APPWIDGET,Activity.RESULT_OK,data);
+    AppWidgetProviderInfo appWidget=mAppWidgetManager.getAppWidgetInfo(appWidgetId);
+    if (appWidget.configure != null) {
+      Intent intent=new Intent(AppWidgetManager.ACTION_APPWIDGET_CONFIGURE);
+      intent.setComponent(appWidget.configure);
+      intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,appWidgetId);
+      startActivityForResult(intent,REQUEST_CREATE_APPWIDGET);
+    }
+ else {
+      onActivityResult(REQUEST_CREATE_APPWIDGET,Activity.RESULT_OK,data);
+    }
   }
 }

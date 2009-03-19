@@ -1,6 +1,6 @@
 {
-  android.util.Log.d("Home","  --> starting applications loader");
-  waitForApplicationsLoader();
+  if (DEBUG_LOADERS)   d(LOG_TAG,"  --> starting applications loader");
+  stopAndWaitForApplicationsLoader();
   mApplicationsLoader=new ApplicationsLoader(launcher);
   mApplicationsLoaderThread=new Thread(mApplicationsLoader,"Applications Loader");
   mApplicationsLoaderThread.start();
