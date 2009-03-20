@@ -1,6 +1,4 @@
 {
   if (mDestroyed)   return;
-  d("Home","setting grid adapter");
-  mAllAppsGrid.setAdapter(sModel.getApplicationsAdapter());
   bindDesktopItems();
 }
