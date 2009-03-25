@@ -1,0 +1,4 @@
+{
+  startBindingItems();
+  return false;
+}

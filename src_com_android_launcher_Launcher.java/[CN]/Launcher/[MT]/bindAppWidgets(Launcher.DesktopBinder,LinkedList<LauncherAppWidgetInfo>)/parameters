@@ -1,0 +1,2 @@
+Launcher.DesktopBinder binder
+LinkedList<LauncherAppWidgetInfo> appWidgets

@@ -1,6 +1,6 @@
 {
   Launcher launcher=mLauncher.get();
-  if (launcher == null) {
+  if (launcher == null || mTerminate) {
     return;
   }
 switch (msg.what) {
@@ -9,10 +9,15 @@ case MESSAGE_BIND_ITEMS:
       launcher.bindItems(this,mShortcuts,msg.arg1,msg.arg2);
       break;
     }
-case MESSAGE_BIND_APPWIDGETS:
+case MESSAGE_BIND_DRAWER:
 {
-    launcher.bindAppWidgets(this,mAppWidgets,msg.arg1,msg.arg2);
+    launcher.bindDrawer(this,mDrawerAdapter);
     break;
   }
+case MESSAGE_BIND_APPWIDGETS:
+{
+  launcher.bindAppWidgets(this,mAppWidgets);
+  break;
+}
 }
 }
