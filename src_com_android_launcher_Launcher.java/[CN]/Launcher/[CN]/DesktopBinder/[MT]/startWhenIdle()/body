@@ -1,0 +1,4 @@
+{
+  final MessageQueue messageQueue=Looper.myQueue();
+  messageQueue.addIdleHandler(this);
+}

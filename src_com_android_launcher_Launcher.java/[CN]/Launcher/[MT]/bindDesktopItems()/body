@@ -1,7 +1,8 @@
 {
   final ArrayList<ItemInfo> shortcuts=sModel.getDesktopItems();
   final ArrayList<LauncherAppWidgetInfo> appWidgets=sModel.getDesktopAppWidgets();
-  if (shortcuts == null || appWidgets == null) {
+  final ApplicationsAdapter drawerAdapter=sModel.getApplicationsAdapter();
+  if (shortcuts == null || appWidgets == null || drawerAdapter == null) {
     return;
   }
   final Workspace workspace=mWorkspace;
@@ -20,6 +21,9 @@
     }
 );
   }
-  final DesktopBinder binder=new DesktopBinder(this,shortcuts,appWidgets);
-  binder.startBindingItems();
+  if (mBinder != null) {
+    mBinder.mTerminate=true;
+  }
+  mBinder=new DesktopBinder(this,shortcuts,appWidgets,drawerAdapter);
+  mBinder.startWhenIdle();
 }
