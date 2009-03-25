@@ -1,5 +1,4 @@
 {
-  Resources res=getResources();
   if (resultCode == RESULT_OK && mAddItemCellInfo != null) {
 switch (requestCode) {
 case REQUEST_PICK_APPLICATION:
