@@ -25,5 +25,5 @@
     mBinder.mTerminate=true;
   }
   mBinder=new DesktopBinder(this,shortcuts,appWidgets,drawerAdapter);
-  mBinder.startWhenIdle();
+  mBinder.startBindingItems();
 }
