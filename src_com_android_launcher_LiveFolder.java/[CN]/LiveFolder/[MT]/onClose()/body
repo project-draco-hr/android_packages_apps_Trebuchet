@@ -3,5 +3,8 @@
   if (mLoadingTask != null && mLoadingTask.getStatus() == AsyncTask.Status.RUNNING) {
     mLoadingTask.cancel(true);
   }
-  ((LiveFolderAdapter)mContent.getAdapter()).cleanup();
+  final LiveFolderAdapter adapter=(LiveFolderAdapter)mContent.getAdapter();
+  if (adapter != null) {
+    adapter.cleanup();
+  }
 }
