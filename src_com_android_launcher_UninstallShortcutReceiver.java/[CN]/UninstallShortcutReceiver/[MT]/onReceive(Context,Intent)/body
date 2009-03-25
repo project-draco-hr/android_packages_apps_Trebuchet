@@ -28,6 +28,9 @@
   finally {
       c.close();
     }
-    if (changed)     cr.notifyChange(LauncherSettings.Favorites.CONTENT_URI,null);
+    if (changed) {
+      cr.notifyChange(LauncherSettings.Favorites.CONTENT_URI,null);
+      Toast.makeText(context,context.getString(R.string.shortcut_uninstalled,name),Toast.LENGTH_SHORT).show();
+    }
   }
 }
