@@ -3,16 +3,10 @@
   mAdapter=new AddAdapter(Launcher.this);
   final AlertDialog.Builder builder=new AlertDialog.Builder(Launcher.this);
   builder.setTitle(getString(R.string.menu_item_add_item));
-  builder.setIcon(0);
-  mList=(ListView)View.inflate(Launcher.this,R.layout.create_shortcut_list,null);
-  mList.setAdapter(mAdapter);
-  mList.setOnItemClickListener(this);
+  builder.setAdapter(mAdapter,this);
   builder.setView(mList);
   builder.setInverseBackgroundForced(true);
   AlertDialog dialog=builder.create();
   dialog.setOnCancelListener(this);
-  WindowManager.LayoutParams attributes=dialog.getWindow().getAttributes();
-  attributes.gravity=Gravity.TOP;
-  dialog.onWindowAttributesChanged(attributes);
   return dialog;
 }
