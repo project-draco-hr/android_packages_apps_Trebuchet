@@ -1,4 +1,0 @@
-{
-  mAllAppsGrid.setAdapter(drawerAdapter);
-  binder.startBindingAppWidgetsWhenIdle();
-}
