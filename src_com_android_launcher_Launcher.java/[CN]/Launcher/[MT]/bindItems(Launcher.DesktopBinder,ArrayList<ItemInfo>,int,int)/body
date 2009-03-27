@@ -31,7 +31,7 @@ break;
 workspace.requestLayout();
 if (end >= count) {
 finishBindDesktopItems();
-binder.startBindingDrawer();
+binder.startBindingAppWidgetsWhenIdle();
 }
  else {
 binder.obtainMessage(DesktopBinder.MESSAGE_BIND_ITEMS,i,count).sendToTarget();
