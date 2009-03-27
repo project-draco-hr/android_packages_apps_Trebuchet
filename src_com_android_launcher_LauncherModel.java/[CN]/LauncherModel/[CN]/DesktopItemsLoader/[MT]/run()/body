@@ -130,7 +130,7 @@ case LauncherSettings.Favorites.ITEM_TYPE_WIDGET_SEARCH:
 widgetInfo=Widget.makeSearch();
 container=c.getInt(containerIndex);
 if (container != LauncherSettings.Favorites.CONTAINER_DESKTOP) {
-Log.e(Launcher.LOG_TAG,"Widget found where container " + "!= CONTAINER_DESKTOP  ignoring!");
+e(Launcher.LOG_TAG,"Widget found where container " + "!= CONTAINER_DESKTOP  ignoring!");
 continue;
 }
 widgetInfo.id=c.getLong(idIndex);
@@ -151,7 +151,7 @@ appWidgetInfo.spanX=c.getInt(spanXIndex);
 appWidgetInfo.spanY=c.getInt(spanYIndex);
 container=c.getInt(containerIndex);
 if (container != LauncherSettings.Favorites.CONTAINER_DESKTOP) {
-Log.e(Launcher.LOG_TAG,"Widget found where container " + "!= CONTAINER_DESKTOP -- ignoring!");
+e(Launcher.LOG_TAG,"Widget found where container " + "!= CONTAINER_DESKTOP -- ignoring!");
 continue;
 }
 appWidgetInfo.container=c.getInt(containerIndex);
@@ -160,7 +160,7 @@ break;
 }
 }
  catch (Exception e) {
-Log.w(Launcher.LOG_TAG,"Desktop items loading interrupted:",e);
+w(Launcher.LOG_TAG,"Desktop items loading interrupted:",e);
 }
 }
 }

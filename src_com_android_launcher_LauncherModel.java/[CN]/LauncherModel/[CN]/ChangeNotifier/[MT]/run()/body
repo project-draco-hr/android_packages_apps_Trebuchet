@@ -1,5 +1,6 @@
 {
   final ApplicationsAdapter applicationList=mApplicationList;
+  if (applicationList == null)   return;
   if (mFirst) {
     applicationList.setNotifyOnChange(false);
     applicationList.clear();
@@ -12,6 +13,6 @@
     applicationList.add(buffer.get(i));
   }
   buffer.clear();
-  applicationList.sort(this);
+  applicationList.sort(new ApplicationInfoComparator());
   applicationList.notifyDataSetChanged();
 }

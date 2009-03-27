@@ -5,6 +5,6 @@
     mAppWidgetHost.deleteHost();
   }
   if (!convertDatabase(db)) {
-    loadFavorites(db,DEFAULT_FAVORITES_PATH);
+    loadFavorites(db);
   }
 }

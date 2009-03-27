@@ -1,7 +1,7 @@
 {
-  android.util.Log.d("Home","loading user items");
+  if (DEBUG_LOADERS)   d(LOG_TAG,"loading user items");
   if (isLaunching && isDesktopLoaded()) {
-    android.util.Log.d("Home","  --> items loaded, return");
+    if (DEBUG_LOADERS)     d(LOG_TAG,"  --> items loaded, return");
     if (loadApplications)     startApplicationsLoader(launcher);
     launcher.onDesktopItemsLoaded();
     return;
@@ -14,7 +14,7 @@
  catch (    InterruptedException e) {
     }
   }
-  android.util.Log.d("Home","  --> starting workspace loader");
+  if (DEBUG_LOADERS)   d(LOG_TAG,"  --> starting workspace loader");
   mDesktopItemsLoaded=false;
   mDesktopItemsLoader=new DesktopItemsLoader(launcher,localeChanged,loadApplications);
   mDesktopLoaderThread=new Thread(mDesktopItemsLoader,"Desktop Items Loader");

@@ -3,9 +3,13 @@
 switch (event.getKeyCode()) {
 case KeyEvent.KEYCODE_BACK:
       mWorkspace.dispatchKeyEvent(event);
-    closeFolder();
-  closeDrawer();
-return true;
+    if (mDrawer.isOpened()) {
+      closeDrawer();
+    }
+ else {
+      closeFolder();
+    }
+  return true;
 case KeyEvent.KEYCODE_HOME:
 return true;
 }

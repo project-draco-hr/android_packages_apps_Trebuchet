@@ -1,13 +1,9 @@
 {
   super();
-  mLauncher=launcher;
-  mInflater=(LayoutInflater)mLauncher.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+  mInflater=(LayoutInflater)launcher.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
   Resources res=launcher.getResources();
-  mItems.add(new ListItem(res,R.string.group_applications,R.drawable.ic_launcher_application,ITEM_APPLICATION));
-  mItems.add(new ListItem(res,R.string.group_shortcuts,R.drawable.ic_launcher_empty,ITEM_SHORTCUT));
-  mItems.add(new ListItem(res,R.string.group_search,R.drawable.ic_search_widget,ITEM_SEARCH));
+  mItems.add(new ListItem(res,R.string.group_shortcuts,R.drawable.ic_launcher_shortcut,ITEM_SHORTCUT));
   mItems.add(new ListItem(res,R.string.group_widgets,R.drawable.ic_launcher_appwidget,ITEM_APPWIDGET));
-  mItems.add(new ListItem(res,R.string.group_live_folders,R.drawable.ic_launcher_empty,ITEM_LIVE_FOLDER));
-  mItems.add(new ListItem(res,R.string.group_folder,R.drawable.ic_launcher_folder,ITEM_FOLDER));
+  mItems.add(new ListItem(res,R.string.group_live_folders,R.drawable.ic_launcher_folder_live,ITEM_LIVE_FOLDER));
   mItems.add(new ListItem(res,R.string.group_wallpapers,R.drawable.ic_launcher_gallery,ITEM_WALLPAPER));
 }

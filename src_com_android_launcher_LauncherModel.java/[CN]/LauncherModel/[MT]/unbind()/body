@@ -1,4 +1,5 @@
 {
+  stopAndWaitForApplicationsLoader();
   mApplicationsAdapter=null;
   unbindAppDrawables(mApplications);
   unbindDrawables(mDesktopItems);
