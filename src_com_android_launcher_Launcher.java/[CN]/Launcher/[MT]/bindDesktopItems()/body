@@ -5,6 +5,7 @@
   if (shortcuts == null || appWidgets == null || drawerAdapter == null) {
     return;
   }
+  mAllAppsGrid.setAdapter(drawerAdapter);
   final Workspace workspace=mWorkspace;
   int count=workspace.getChildCount();
   for (int i=0; i < count; i++) {
@@ -24,6 +25,6 @@
   if (mBinder != null) {
     mBinder.mTerminate=true;
   }
-  mBinder=new DesktopBinder(this,shortcuts,appWidgets,drawerAdapter);
+  mBinder=new DesktopBinder(this,shortcuts,appWidgets);
   mBinder.startBindingItems();
 }
