@@ -7,12 +7,14 @@
     return;
   }
   if (mDesktopItemsLoader != null && mDesktopItemsLoader.isRunning()) {
+    if (DEBUG_LOADERS)     d(LOG_TAG,"  --> stopping workspace loader");
     mDesktopItemsLoader.stop();
     try {
       mDesktopLoaderThread.join(APPLICATION_NOT_RESPONDING_TIMEOUT);
     }
  catch (    InterruptedException e) {
     }
+    loadApplications=mDesktopItemsLoader.mLoadApplications;
   }
   if (DEBUG_LOADERS)   d(LOG_TAG,"  --> starting workspace loader");
   mDesktopItemsLoaded=false;
