@@ -1,4 +1,5 @@
 {
   ContentResolver resolver=getContentResolver();
   resolver.registerContentObserver(LauncherSettings.Favorites.CONTENT_URI,true,mObserver);
+  resolver.registerContentObserver(LauncherProvider.CONTENT_APPWIDGET_RESET_URI,true,mAppWidgetResetObserver);
 }
