@@ -13,5 +13,6 @@
   sModel.unbind();
   sModel.abortLoaders();
   getContentResolver().unregisterContentObserver(mObserver);
+  getContentResolver().unregisterContentObserver(mAppWidgetResetObserver);
   unregisterReceiver(mApplicationsReceiver);
 }
