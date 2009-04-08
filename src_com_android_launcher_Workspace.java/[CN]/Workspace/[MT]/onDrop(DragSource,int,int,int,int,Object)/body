@@ -1,5 +1,5 @@
 {
-  final CellLayout cellLayout=(CellLayout)getChildAt(mCurrentScreen);
+  final CellLayout cellLayout=getCurrentDropLayout();
   if (source != this) {
     onDropExternal(x - xOffset,y - yOffset,dragInfo,cellLayout);
   }
@@ -11,7 +11,8 @@
         originalCellLayout.removeView(cell);
         cellLayout.addView(cell);
       }
-      cellLayout.onDropChild(cell,x - xOffset,y - yOffset);
+      mTargetCell=estimateDropCell(source,x - xOffset,y - yOffset,mDragInfo.spanX,mDragInfo.spanY,cell,cellLayout,mTargetCell);
+      cellLayout.onDropChild(cell,mTargetCell);
       final ItemInfo info=(ItemInfo)cell.getTag();
       CellLayout.LayoutParams lp=(CellLayout.LayoutParams)cell.getLayoutParams();
       LauncherModel.moveItemInDatabase(mLauncher,info,LauncherSettings.Favorites.CONTAINER_DESKTOP,mCurrentScreen,lp.cellX,lp.cellY);

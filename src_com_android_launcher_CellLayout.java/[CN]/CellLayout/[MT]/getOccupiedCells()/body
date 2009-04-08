@@ -3,7 +3,7 @@
   final int xCount=portrait ? mShortAxisCells : mLongAxisCells;
   final int yCount=portrait ? mLongAxisCells : mShortAxisCells;
   final boolean[][] occupied=mOccupied;
-  findOccupiedCells(xCount,yCount,occupied);
+  findOccupiedCells(xCount,yCount,occupied,null);
   final boolean[] flat=new boolean[xCount * yCount];
   for (int y=0; y < yCount; y++) {
     for (int x=0; x < xCount; x++) {
