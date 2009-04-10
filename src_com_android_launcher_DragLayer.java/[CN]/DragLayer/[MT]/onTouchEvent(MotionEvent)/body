@@ -36,7 +36,11 @@ mLastMotionY=y;
 left=(int)(scrollX + x - touchX - offsetX);
 top=(int)(scrollY + y - touchY - offsetY);
 rect.union(left - 1,top - 1,left + width + 1,top + height + 1);
-invalidate(rect);
+mDragCenter[0]=rect.centerX();
+mDragCenter[1]=rect.centerY();
+if (DRAW_TARGET_SNAG && mDrawEstimated) {
+rect.union(mEstimatedRect);
+}
 final int[] coordinates=mDropCoordinates;
 DropTarget dropTarget=findDropTarget((int)x,(int)y,coordinates);
 if (dropTarget != null) {
@@ -55,6 +59,23 @@ if (mLastDropTarget != null) {
 mLastDropTarget.onDragExit(mDragSource,coordinates[0],coordinates[1],(int)mTouchOffsetX,(int)mTouchOffsetY,mDragInfo);
 }
 }
+mDrawEstimated=false;
+if (DRAW_TARGET_SNAG && dropTarget != null) {
+Rect foundEstimate=dropTarget.estimateDropLocation(mDragSource,(int)(scrollX + mLastMotionX),(int)(scrollY + mLastMotionY),(int)mTouchOffsetX,(int)mTouchOffsetY,mDragInfo,mEstimatedRect);
+if (foundEstimate != null) {
+mEstimatedCenter[0]=foundEstimate.centerX();
+mEstimatedCenter[1]=foundEstimate.centerY();
+int deltaX=(int)Math.abs(mEstimatedCenter[0] - mDragCenter[0]);
+int deltaY=(int)Math.abs(mEstimatedCenter[1] - mDragCenter[1]);
+if (deltaX > mTriggerWidth || deltaY > mTriggerHeight) {
+mDrawEstimated=true;
+}
+}
+}
+if (DRAW_TARGET_SNAG && mDrawEstimated) {
+rect.union(mEstimatedRect);
+}
+invalidate(rect);
 mLastDropTarget=dropTarget;
 boolean inDragRegion=false;
 if (mDragRegion != null) {

@@ -11,7 +11,7 @@
     }
   }
  else {
-    findOccupiedCells(xCount,yCount,occupied);
+    findOccupiedCells(xCount,yCount,occupied,ignoreView);
   }
   CellInfo cellInfo=new CellInfo();
   cellInfo.cellX=-1;

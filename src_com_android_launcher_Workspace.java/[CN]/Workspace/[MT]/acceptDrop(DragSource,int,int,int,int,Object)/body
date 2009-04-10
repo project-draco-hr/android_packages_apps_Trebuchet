@@ -1,6 +1,3 @@
 {
-  final CellLayout.CellInfo cellInfo=mDragInfo;
-  int cellHSpan=cellInfo == null ? 1 : cellInfo.spanX;
-  int cellVSpan=cellInfo == null ? 1 : cellInfo.spanY;
-  return ((CellLayout)getChildAt(mCurrentScreen)).acceptChildDrop(x - xOffset,y - yOffset,cellHSpan,cellVSpan,cellInfo == null ? null : cellInfo.cell);
+  return true;
 }

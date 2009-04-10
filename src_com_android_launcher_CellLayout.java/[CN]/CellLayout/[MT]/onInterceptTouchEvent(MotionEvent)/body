@@ -32,7 +32,7 @@
       final int xCount=portrait ? mShortAxisCells : mLongAxisCells;
       final int yCount=portrait ? mLongAxisCells : mShortAxisCells;
       final boolean[][] occupied=mOccupied;
-      findOccupiedCells(xCount,yCount,occupied);
+      findOccupiedCells(xCount,yCount,occupied,null);
       cellInfo.cell=null;
       cellInfo.cellX=cellXY[0];
       cellInfo.cellY=cellXY[1];
