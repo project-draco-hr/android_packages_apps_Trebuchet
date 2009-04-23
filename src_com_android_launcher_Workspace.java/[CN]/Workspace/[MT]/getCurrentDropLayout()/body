@@ -1,0 +1,4 @@
+{
+  int index=mScroller.isFinished() ? mCurrentScreen : mNextScreen;
+  return (CellLayout)getChildAt(index);
+}

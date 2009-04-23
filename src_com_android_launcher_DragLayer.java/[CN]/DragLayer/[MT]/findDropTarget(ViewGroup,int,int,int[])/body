@@ -17,9 +17,15 @@
         }
         if (target == null) {
           if (child instanceof DropTarget) {
-            dropCoordinates[0]=x;
-            dropCoordinates[1]=y;
-            return (DropTarget)child;
+            DropTarget childTarget=(DropTarget)child;
+            if (childTarget.acceptDrop(mDragSource,x,y,0,0,mDragInfo)) {
+              dropCoordinates[0]=x;
+              dropCoordinates[1]=y;
+              return (DropTarget)child;
+            }
+ else {
+              return null;
+            }
           }
         }
  else {

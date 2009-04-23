@@ -22,6 +22,8 @@
   Bitmap viewBitmap=v.getDrawingCache();
   int width=viewBitmap.getWidth();
   int height=viewBitmap.getHeight();
+  mTriggerWidth=width * 2 / 3;
+  mTriggerHeight=height * 2 / 3;
   Matrix scale=new Matrix();
   float scaleFactor=v.getWidth();
   scaleFactor=(scaleFactor + DRAG_SCALE) / scaleFactor;
