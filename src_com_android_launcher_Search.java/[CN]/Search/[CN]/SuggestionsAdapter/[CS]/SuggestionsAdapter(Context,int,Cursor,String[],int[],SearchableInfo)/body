@@ -1,8 +1,0 @@
-{
-  super(context,layout,c,from,to);
-  mFromStrings=from;
-  mSearchable=searchable;
-  Context activityContext=mSearchable.getActivityContext(mContext);
-  Context providerContext=mSearchable.getProviderContext(mContext,activityContext);
-  mProviderResources=providerContext.getResources();
-}

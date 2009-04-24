@@ -3,4 +3,5 @@
   if (mRestoring) {
     startLoaders();
   }
+  stopSearch(false);
 }
