@@ -1,29 +1,13 @@
 {
-  if (v == mSearchText) {
-    boolean searchTrigger=(keyCode == KeyEvent.KEYCODE_ENTER || keyCode == KeyEvent.KEYCODE_SEARCH || keyCode == KeyEvent.KEYCODE_DPAD_CENTER);
-    if (event.getAction() == KeyEvent.ACTION_UP) {
-      if (!mSearchText.isPopupShowing()) {
-        if (searchTrigger) {
-          query();
-          return true;
-        }
-      }
-    }
- else {
-      if (searchTrigger && mItemSelected < 0) {
-        query();
-        return true;
-      }
-    }
-  }
- else   if (v == mGoButton || v == mVoiceButton) {
-    boolean handled=false;
-    if (!event.isSystem() && (keyCode != KeyEvent.KEYCODE_DPAD_UP) && (keyCode != KeyEvent.KEYCODE_DPAD_DOWN)&& (keyCode != KeyEvent.KEYCODE_DPAD_LEFT)&& (keyCode != KeyEvent.KEYCODE_DPAD_RIGHT)&& (keyCode != KeyEvent.KEYCODE_DPAD_CENTER)) {
-      if (mSearchText.requestFocus()) {
-        handled=mSearchText.dispatchKeyEvent(event);
-      }
-    }
-    return handled;
-  }
-  return false;
+  if (!event.isSystem() && (keyCode != KeyEvent.KEYCODE_DPAD_UP) && (keyCode != KeyEvent.KEYCODE_DPAD_DOWN)&& (keyCode != KeyEvent.KEYCODE_DPAD_LEFT)&& (keyCode != KeyEvent.KEYCODE_DPAD_RIGHT)&& (keyCode != KeyEvent.KEYCODE_DPAD_CENTER)) {
+switch (event.getAction()) {
+case KeyEvent.ACTION_DOWN:
+      return mLauncher.onKeyDown(keyCode,event);
+case KeyEvent.ACTION_MULTIPLE:
+    return mLauncher.onKeyMultiple(keyCode,event.getRepeatCount(),event);
+case KeyEvent.ACTION_UP:
+  return mLauncher.onKeyUp(keyCode,event);
+}
+}
+return false;
 }

@@ -1,9 +1,4 @@
 {
-  if (mWorkspace.snapToSearch()) {
-    closeDrawer(true);
-    return true;
-  }
- else {
-    return super.onSearchRequested();
-  }
+  startSearch(null,false,null,true);
+  return true;
 }

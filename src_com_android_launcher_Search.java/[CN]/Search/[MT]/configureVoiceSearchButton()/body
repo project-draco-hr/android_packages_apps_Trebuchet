@@ -1,9 +1,6 @@
 {
-  boolean voiceSearchVisible=false;
-  if (mSearchable.getVoiceSearchEnabled() && mSearchable.getVoiceSearchLaunchWebSearch()) {
-    PackageManager pm=getContext().getPackageManager();
-    ResolveInfo ri=pm.resolveActivity(mVoiceSearchIntent,PackageManager.MATCH_DEFAULT_ONLY);
-    voiceSearchVisible=ri != null;
-  }
+  PackageManager pm=getContext().getPackageManager();
+  ResolveInfo ri=pm.resolveActivity(mVoiceSearchIntent,PackageManager.MATCH_DEFAULT_ONLY);
+  boolean voiceSearchVisible=ri != null;
   mVoiceButton.setVisibility(voiceSearchVisible ? View.VISIBLE : View.GONE);
 }

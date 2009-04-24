@@ -1,4 +1,0 @@
-{
-  super.setOnLongClickListener(l);
-  mLongClickListener=l;
-}
