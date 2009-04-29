@@ -1,6 +1,3 @@
 {
-  if (mLongClickListener != null) {
-    return mLongClickListener.onLongClick(this);
-  }
-  return false;
+  return performLongClick();
 }

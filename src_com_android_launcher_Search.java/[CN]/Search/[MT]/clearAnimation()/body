@@ -1,0 +1,12 @@
+{
+  Animation animation=getAnimation();
+  if (animation != null) {
+    super.clearAnimation();
+    if (animation.hasEnded() && animation.getFillAfter() && animation.willChangeBounds()) {
+      ((View)getParent()).invalidate();
+    }
+ else {
+      invalidate();
+    }
+  }
+}

@@ -1,20 +1,12 @@
 {
   super.onFinishInflate();
-  mSearchText=(AutoCompleteTextView)findViewById(R.id.input);
-  mSearchText.setOnKeyListener(this);
-  mSearchText.addTextChangedListener(this);
-  mGoButton=(ImageButton)findViewById(R.id.search_go_btn);
+  mSearchText=(TextView)findViewById(R.id.search_src_text);
   mVoiceButton=(ImageButton)findViewById(R.id.search_voice_btn);
-  mGoButton.setOnClickListener(this);
+  mSearchText.setOnKeyListener(this);
+  mSearchText.setOnClickListener(this);
   mVoiceButton.setOnClickListener(this);
-  mGoButton.setOnKeyListener(this);
-  mVoiceButton.setOnKeyListener(this);
+  setOnClickListener(this);
   mSearchText.setOnLongClickListener(this);
-  mGoButton.setOnLongClickListener(this);
   mVoiceButton.setOnLongClickListener(this);
-  mGoButton.setEnabled(false);
-  mGoButton.setFocusable(false);
-  configureSearchableInfo();
-  configureSuggestions();
   configureVoiceSearchButton();
 }

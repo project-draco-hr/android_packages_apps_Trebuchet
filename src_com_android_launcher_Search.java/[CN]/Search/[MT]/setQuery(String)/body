@@ -1,0 +1,3 @@
+{
+  mSearchText.setText(query,TextView.BufferType.NORMAL);
+}

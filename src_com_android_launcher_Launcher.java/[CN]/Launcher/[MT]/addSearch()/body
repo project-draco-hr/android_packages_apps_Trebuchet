@@ -9,5 +9,7 @@
   LauncherModel.addItemToDatabase(this,info,LauncherSettings.Favorites.CONTAINER_DESKTOP,mWorkspace.getCurrentScreen(),xy[0],xy[1],false);
   final View view=mInflater.inflate(info.layoutResource,null);
   view.setTag(info);
+  Search search=(Search)view.findViewById(R.id.widget_search);
+  search.setLauncher(this);
   mWorkspace.addInCurrentScreen(view,xy[0],xy[1],info.spanX,spanY);
 }

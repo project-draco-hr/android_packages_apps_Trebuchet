@@ -22,6 +22,8 @@ break;
 case LauncherSettings.Favorites.ITEM_TYPE_WIDGET_SEARCH:
 final int screen=workspace.getCurrentScreen();
 final View view=mInflater.inflate(R.layout.widget_search,(ViewGroup)workspace.getChildAt(screen),false);
+Search search=(Search)view.findViewById(R.id.widget_search);
+search.setLauncher(this);
 final Widget widget=(Widget)item;
 view.setTag(widget);
 workspace.addWidget(view,widget,!desktopLocked);
@@ -31,7 +33,7 @@ break;
 workspace.requestLayout();
 if (end >= count) {
 finishBindDesktopItems();
-binder.startBindingAppWidgetsWhenIdle();
+binder.startBindingDrawer();
 }
  else {
 binder.obtainMessage(DesktopBinder.MESSAGE_BIND_ITEMS,i,count).sendToTarget();

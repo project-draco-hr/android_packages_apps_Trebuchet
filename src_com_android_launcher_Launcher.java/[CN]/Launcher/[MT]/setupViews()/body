@@ -17,7 +17,7 @@
   drawer.setOnDrawerOpenListener(drawerManager);
   drawer.setOnDrawerCloseListener(drawerManager);
   drawer.setOnDrawerScrollListener(drawerManager);
-  grid.setTextFilterEnabled(true);
+  grid.setTextFilterEnabled(false);
   grid.setDragger(dragLayer);
   grid.setLauncher(this);
   workspace.setOnLongClickListener(this);

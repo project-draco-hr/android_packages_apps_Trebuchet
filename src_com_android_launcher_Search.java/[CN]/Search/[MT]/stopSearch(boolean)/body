@@ -1,0 +1,13 @@
+{
+  setQuery("");
+  mSearchText.setFocusable(true);
+  if (getAnimation() == mMorphAnimation) {
+    if (animate && !isAtTop()) {
+      mUnmorphAnimation.setDuration(getAnimationDuration());
+      startAnimation(mUnmorphAnimation);
+    }
+ else {
+      clearAnimation();
+    }
+  }
+}

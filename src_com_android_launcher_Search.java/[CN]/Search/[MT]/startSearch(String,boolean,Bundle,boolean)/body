@@ -1,0 +1,20 @@
+{
+  mInitialQuery=initialQuery;
+  mSelectInitialQuery=selectInitialQuery;
+  mAppSearchData=appSearchData;
+  mGlobalSearch=globalSearch;
+  if (getContext().getResources().getConfiguration().hardKeyboardHidden == Configuration.HARDKEYBOARDHIDDEN_YES) {
+    mSearchText.setFocusable(false);
+    InputMethodManager inputManager=(InputMethodManager)getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+    inputManager.showSoftInputUnchecked(0,null);
+  }
+  if (isAtTop()) {
+    showSearchDialog();
+  }
+ else {
+    if (getAnimation() != mMorphAnimation) {
+      mMorphAnimation.setDuration(getAnimationDuration());
+      startAnimation(mMorphAnimation);
+    }
+  }
+}
