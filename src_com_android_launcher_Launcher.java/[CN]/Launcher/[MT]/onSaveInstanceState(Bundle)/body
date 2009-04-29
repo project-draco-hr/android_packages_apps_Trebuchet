@@ -13,7 +13,7 @@
  else {
     super.onSaveInstanceState(outState);
   }
-  if (mDrawer.isOpened()) {
+  if (mDrawer.isOpened() && getChangingConfigurations() != 0) {
     outState.putBoolean(RUNTIME_STATE_ALL_APPS_FOLDER,true);
   }
   if (mAddItemCellInfo != null && mAddItemCellInfo.valid && mWaitingForResult) {

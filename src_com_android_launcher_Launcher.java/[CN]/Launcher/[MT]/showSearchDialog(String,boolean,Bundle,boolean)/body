@@ -13,7 +13,7 @@
     searchManager.setOnCancelListener(new SearchManager.OnCancelListener(){
       public void onCancel(){
         searchManager.setOnCancelListener(null);
-        stopSearch(true);
+        stopSearch();
       }
     }
 );
