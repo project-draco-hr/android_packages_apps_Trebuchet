@@ -5,7 +5,7 @@
   final int spanY=cellInfo == null ? 1 : cellInfo.spanY;
   final View ignoreView=cellInfo == null ? null : cellInfo.cell;
   final Rect location=recycle != null ? recycle : new Rect();
-  int[] dropCell=estimateDropCell(source,x - xOffset,y - yOffset,spanX,spanY,ignoreView,layout,mTempCell);
+  int[] dropCell=estimateDropCell(x - xOffset,y - yOffset,spanX,spanY,ignoreView,layout,mTempCell);
   if (dropCell == null) {
     return null;
   }
