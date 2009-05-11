@@ -11,7 +11,7 @@
         originalCellLayout.removeView(cell);
         cellLayout.addView(cell);
       }
-      mTargetCell=estimateDropCell(x - xOffset,y - yOffset,mDragInfo.spanX,mDragInfo.spanY,cell,cellLayout,mTargetCell);
+      mTargetCell=estimateDropCell(source,x - xOffset,y - yOffset,mDragInfo.spanX,mDragInfo.spanY,cell,cellLayout,mTargetCell);
       cellLayout.onDropChild(cell,mTargetCell);
       final ItemInfo info=(ItemInfo)cell.getTag();
       CellLayout.LayoutParams lp=(CellLayout.LayoutParams)cell.getLayoutParams();

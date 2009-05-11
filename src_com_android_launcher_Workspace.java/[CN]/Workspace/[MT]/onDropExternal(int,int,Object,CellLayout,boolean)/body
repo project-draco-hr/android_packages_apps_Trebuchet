@@ -17,7 +17,7 @@ throw new IllegalStateException("Unknown item type: " + info.itemType);
 }
 cellLayout.addView(view,insertAtFirst ? 0 : -1);
 view.setOnLongClickListener(mLongClickListener);
-mTargetCell=estimateDropCell(x,y,1,1,view,cellLayout,mTargetCell);
+mTargetCell=estimateDropCell(null,x,y,1,1,view,cellLayout,mTargetCell);
 cellLayout.onDropChild(view,mTargetCell);
 CellLayout.LayoutParams lp=(CellLayout.LayoutParams)view.getLayoutParams();
 final LauncherModel model=Launcher.getModel();
