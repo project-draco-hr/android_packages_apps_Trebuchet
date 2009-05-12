@@ -1,0 +1,3 @@
+{
+  return !mWallpaper.hasAlpha();
+}
