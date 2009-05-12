@@ -1,0 +1,7 @@
+{
+  super.cancelLongPress();
+  mHasPerformedLongPress=false;
+  if (mPendingCheckForLongPress != null) {
+    removeCallbacks(mPendingCheckForLongPress);
+  }
+}
