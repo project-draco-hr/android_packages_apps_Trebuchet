@@ -6,11 +6,11 @@
     final ResolveInfo info=matches.get(i);
     final ApplicationInfo applicationInfo=findIntent(adapter,info.activityInfo.applicationInfo.packageName,info.activityInfo.name);
     if (applicationInfo == null) {
-      toAdd.add(makeAndCacheApplicationInfo(launcher.getPackageManager(),mAppInfoCache,info));
+      toAdd.add(makeAndCacheApplicationInfo(launcher.getPackageManager(),mAppInfoCache,info,launcher));
       changed=true;
     }
  else {
-      updateAndCacheApplicationInfo(launcher.getPackageManager(),info,applicationInfo);
+      updateAndCacheApplicationInfo(launcher.getPackageManager(),info,applicationInfo,launcher);
       changed=true;
     }
   }

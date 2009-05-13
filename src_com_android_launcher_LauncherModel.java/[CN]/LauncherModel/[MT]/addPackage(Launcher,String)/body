@@ -11,7 +11,7 @@
       final HashMap<ComponentName,ApplicationInfo> cache=mAppInfoCache;
       for (      ResolveInfo info : matches) {
         adapter.setNotifyOnChange(false);
-        adapter.add(makeAndCacheApplicationInfo(packageManager,cache,info));
+        adapter.add(makeAndCacheApplicationInfo(packageManager,cache,info,launcher));
       }
       adapter.sort(new ApplicationInfoComparator());
       adapter.notifyDataSetChanged();

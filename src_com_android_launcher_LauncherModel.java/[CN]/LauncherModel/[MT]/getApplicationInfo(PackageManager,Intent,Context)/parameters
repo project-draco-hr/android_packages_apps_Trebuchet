@@ -1,2 +1,3 @@
 PackageManager manager
 Intent intent
+Context context

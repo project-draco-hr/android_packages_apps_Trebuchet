@@ -13,7 +13,7 @@
       final ResolveInfo info=matches.get(i);
       final ApplicationInfo applicationInfo=findIntent(adapter,info.activityInfo.applicationInfo.packageName,info.activityInfo.name);
       if (applicationInfo != null) {
-        updateAndCacheApplicationInfo(packageManager,info,applicationInfo);
+        updateAndCacheApplicationInfo(packageManager,info,applicationInfo,launcher);
         changed=true;
       }
     }

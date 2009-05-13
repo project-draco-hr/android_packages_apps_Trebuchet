@@ -4,7 +4,7 @@
   if (application == null) {
     application=new ApplicationInfo();
     application.container=ItemInfo.NO_ID;
-    updateApplicationInfoTitleAndIcon(manager,info,application);
+    updateApplicationInfoTitleAndIcon(manager,info,application,context);
     application.setActivity(componentName,Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
     appInfoCache.put(componentName,application);
   }

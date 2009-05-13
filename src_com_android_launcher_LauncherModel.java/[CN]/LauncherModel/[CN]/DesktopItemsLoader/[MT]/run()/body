@@ -52,7 +52,7 @@ case LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT:
           continue;
         }
       if (itemType == LauncherSettings.Favorites.ITEM_TYPE_APPLICATION) {
-        info=getApplicationInfo(manager,intent);
+        info=getApplicationInfo(manager,intent,launcher);
       }
  else {
         info=getApplicationInfoShortcut(c,launcher,iconTypeIndex,iconPackageIndex,iconResourceIndex,iconIndex);
