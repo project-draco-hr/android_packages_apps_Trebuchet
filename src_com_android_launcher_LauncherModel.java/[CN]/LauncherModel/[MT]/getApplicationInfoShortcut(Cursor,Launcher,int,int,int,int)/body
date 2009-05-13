@@ -10,7 +10,7 @@ PackageManager packageManager=launcher.getPackageManager();
 try {
 Resources resources=packageManager.getResourcesForApplication(packageName);
 final int id=resources.getIdentifier(resourceName,null,null);
-info.icon=resources.getDrawable(id);
+info.icon=Utilities.createIconThumbnail(resources.getDrawable(id),launcher);
 }
  catch (Exception e) {
 info.icon=packageManager.getDefaultActivityIcon();

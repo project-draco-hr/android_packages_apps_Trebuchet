@@ -3,6 +3,6 @@
   if (application.title == null) {
     application.title=info.activityInfo.name;
   }
-  application.icon=info.activityInfo.loadIcon(manager);
+  application.icon=Utilities.createIconThumbnail(info.activityInfo.loadIcon(manager),context);
   application.filtered=false;
 }

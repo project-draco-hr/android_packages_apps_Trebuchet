@@ -13,7 +13,7 @@
     final HashMap<ComponentName,ApplicationInfo> appInfoCache=mAppInfoCache;
     for (int i=0; i < count && !mStopped; i++) {
       ResolveInfo info=apps.get(i);
-      ApplicationInfo application=makeAndCacheApplicationInfo(manager,appInfoCache,info);
+      ApplicationInfo application=makeAndCacheApplicationInfo(manager,appInfoCache,info,launcher);
       if (action.add(application) && !mStopped) {
         launcher.runOnUiThread(action);
         action=new ChangeNotifier(applicationList,false);
