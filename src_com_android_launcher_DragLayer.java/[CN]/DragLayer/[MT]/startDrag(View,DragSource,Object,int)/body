@@ -18,6 +18,8 @@
   v.setPressed(false);
   boolean willNotCache=v.willNotCacheDrawing();
   v.setWillNotCacheDrawing(false);
+  int color=v.getDrawingCacheBackgroundColor();
+  v.setDrawingCacheBackgroundColor(0);
   v.buildDrawingCache();
   Bitmap viewBitmap=v.getDrawingCache();
   int width=viewBitmap.getWidth();
@@ -36,6 +38,7 @@
   mDragBitmap=Bitmap.createBitmap(viewBitmap,0,0,width,height,scale,true);
   v.destroyDrawingCache();
   v.setWillNotCacheDrawing(willNotCache);
+  v.setDrawingCacheBackgroundColor(color);
   final Bitmap dragBitmap=mDragBitmap;
   mBitmapOffsetX=(dragBitmap.getWidth() - width) / 2;
   mBitmapOffsetY=(dragBitmap.getHeight() - height) / 2;
