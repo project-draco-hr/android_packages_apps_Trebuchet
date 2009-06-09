@@ -7,5 +7,6 @@
   builder.setInverseBackgroundForced(true);
   AlertDialog dialog=builder.create();
   dialog.setOnCancelListener(this);
+  dialog.setOnDismissListener(this);
   return dialog;
 }
