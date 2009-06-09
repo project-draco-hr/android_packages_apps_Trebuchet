@@ -1,0 +1,6 @@
+{
+  if (id == DIALOG_RENAME_GESTURE) {
+    return createRenameDialog();
+  }
+  return super.onCreateDialog(id);
+}

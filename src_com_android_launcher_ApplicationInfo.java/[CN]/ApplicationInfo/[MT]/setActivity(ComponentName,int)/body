@@ -3,5 +3,5 @@
   intent.addCategory(Intent.CATEGORY_LAUNCHER);
   intent.setComponent(className);
   intent.setFlags(launchFlags);
-  itemType=LauncherSettings.Favorites.ITEM_TYPE_APPLICATION;
+  itemType=LauncherSettings.BaseLauncherColumns.ITEM_TYPE_APPLICATION;
 }

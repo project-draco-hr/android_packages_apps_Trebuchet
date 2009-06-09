@@ -25,4 +25,5 @@
     mFolderInfo=sModel.getFolderById(this,id);
     mRestoring=true;
   }
+  mCurrentGesture=(Gesture)savedState.get(RUNTIME_STATE_PENDING_GESTURE);
 }

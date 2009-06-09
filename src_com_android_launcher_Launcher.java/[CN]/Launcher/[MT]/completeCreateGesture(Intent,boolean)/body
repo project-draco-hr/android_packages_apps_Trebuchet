@@ -1,0 +1,23 @@
+{
+  ApplicationInfo info;
+  if (isShortcut) {
+    info=infoFromShortcutIntent(this,data);
+  }
+ else {
+    info=infoFromApplicationIntent(this,data);
+  }
+  boolean success=false;
+  if (info != null) {
+    info.isGesture=true;
+    if (LauncherModel.addGestureToDatabase(this,info,false)) {
+      mGesturesProcessor.addGesture(String.valueOf(info.id),mCurrentGesture);
+      mGesturesProcessor.update(info,mCurrentGesture);
+      Toast.makeText(this,getString(R.string.gestures_created,info.title),Toast.LENGTH_SHORT).show();
+      success=true;
+    }
+  }
+  if (!success) {
+    Toast.makeText(this,getString(R.string.gestures_failed),Toast.LENGTH_SHORT).show();
+  }
+  mCurrentGesture=null;
+}
