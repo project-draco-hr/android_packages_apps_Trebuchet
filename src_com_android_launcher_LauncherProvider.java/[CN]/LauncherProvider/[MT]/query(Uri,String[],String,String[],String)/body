@@ -2,7 +2,7 @@
   SqlArguments args=new SqlArguments(uri,selection,selectionArgs);
   SQLiteQueryBuilder qb=new SQLiteQueryBuilder();
   qb.setTables(args.table);
-  SQLiteDatabase db=mOpenHelper.getReadableDatabase();
+  SQLiteDatabase db=mOpenHelper.getWritableDatabase();
   Cursor result=qb.query(db,projection,args.where,args.args,null,null,sortOrder);
   result.setNotificationUri(getContext().getContentResolver(),uri);
   return result;

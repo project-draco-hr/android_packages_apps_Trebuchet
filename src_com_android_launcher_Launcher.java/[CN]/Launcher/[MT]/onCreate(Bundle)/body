@@ -1,6 +1,9 @@
 {
   super.onCreate(savedInstanceState);
   mInflater=getLayoutInflater();
+  if (sLibrary == null) {
+    sLibrary=GestureLibraries.fromPrivateFile(Launcher.this,GesturesConstants.STORE_NAME);
+  }
   mAppWidgetManager=AppWidgetManager.getInstance(this);
   mAppWidgetHost=new LauncherAppWidgetHost(this,APPWIDGET_HOST_ID);
   mAppWidgetHost.startListening();

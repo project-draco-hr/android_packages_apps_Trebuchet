@@ -1,0 +1,4 @@
+{
+  sLibrary.addGesture(name,gesture);
+  sLibrary.save();
+}

@@ -1,19 +1,19 @@
 {
   super.onAddToDatabase(values);
   String titleStr=title != null ? title.toString() : null;
-  values.put(LauncherSettings.Favorites.TITLE,titleStr);
+  values.put(LauncherSettings.BaseLauncherColumns.TITLE,titleStr);
   String uri=intent != null ? intent.toURI() : null;
-  values.put(LauncherSettings.Favorites.INTENT,uri);
+  values.put(LauncherSettings.BaseLauncherColumns.INTENT,uri);
   if (customIcon) {
-    values.put(LauncherSettings.Favorites.ICON_TYPE,LauncherSettings.Favorites.ICON_TYPE_BITMAP);
+    values.put(LauncherSettings.BaseLauncherColumns.ICON_TYPE,LauncherSettings.BaseLauncherColumns.ICON_TYPE_BITMAP);
     Bitmap bitmap=((FastBitmapDrawable)icon).getBitmap();
     writeBitmap(values,bitmap);
   }
  else {
-    values.put(LauncherSettings.Favorites.ICON_TYPE,LauncherSettings.Favorites.ICON_TYPE_RESOURCE);
+    values.put(LauncherSettings.BaseLauncherColumns.ICON_TYPE,LauncherSettings.BaseLauncherColumns.ICON_TYPE_RESOURCE);
     if (iconResource != null) {
-      values.put(LauncherSettings.Favorites.ICON_PACKAGE,iconResource.packageName);
-      values.put(LauncherSettings.Favorites.ICON_RESOURCE,iconResource.resourceName);
+      values.put(LauncherSettings.BaseLauncherColumns.ICON_PACKAGE,iconResource.packageName);
+      values.put(LauncherSettings.BaseLauncherColumns.ICON_RESOURCE,iconResource.resourceName);
     }
   }
 }

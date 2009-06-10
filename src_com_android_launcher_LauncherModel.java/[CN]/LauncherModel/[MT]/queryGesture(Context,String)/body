@@ -1,0 +1,54 @@
+{
+  final ContentResolver contentResolver=context.getContentResolver();
+  final PackageManager manager=context.getPackageManager();
+  final Cursor c=contentResolver.query(LauncherSettings.Gestures.CONTENT_URI,null,LauncherSettings.Gestures._ID + "=?",new String[]{id},null);
+  ApplicationInfo info=null;
+  try {
+    final int idIndex=c.getColumnIndexOrThrow(LauncherSettings.Gestures._ID);
+    final int intentIndex=c.getColumnIndexOrThrow(LauncherSettings.Gestures.INTENT);
+    final int titleIndex=c.getColumnIndexOrThrow(LauncherSettings.Gestures.TITLE);
+    final int iconTypeIndex=c.getColumnIndexOrThrow(LauncherSettings.Gestures.ICON_TYPE);
+    final int iconIndex=c.getColumnIndexOrThrow(LauncherSettings.Gestures.ICON);
+    final int iconPackageIndex=c.getColumnIndexOrThrow(LauncherSettings.Gestures.ICON_PACKAGE);
+    final int iconResourceIndex=c.getColumnIndexOrThrow(LauncherSettings.Gestures.ICON_RESOURCE);
+    final int itemTypeIndex=c.getColumnIndexOrThrow(LauncherSettings.Gestures.ITEM_TYPE);
+    String intentDescription;
+    Intent intent;
+    if (c.moveToNext()) {
+      int itemType=c.getInt(itemTypeIndex);
+switch (itemType) {
+case LauncherSettings.Favorites.ITEM_TYPE_APPLICATION:
+case LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT:
+        intentDescription=c.getString(intentIndex);
+      try {
+        intent=Intent.getIntent(intentDescription);
+      }
+ catch (      java.net.URISyntaxException e) {
+        return null;
+      }
+    if (itemType == LauncherSettings.Favorites.ITEM_TYPE_APPLICATION) {
+      info=getApplicationInfo(manager,intent,context);
+    }
+ else {
+      info=getApplicationInfoShortcut(c,context,iconTypeIndex,iconPackageIndex,iconResourceIndex,iconIndex);
+    }
+  if (info == null) {
+    info=new ApplicationInfo();
+    info.icon=manager.getDefaultActivityIcon();
+  }
+info.isGesture=true;
+info.title=c.getString(titleIndex);
+info.intent=intent;
+info.id=c.getLong(idIndex);
+break;
+}
+}
+}
+ catch (Exception e) {
+w(LOG_TAG,"Could not load gesture with name " + id);
+}
+ finally {
+c.close();
+}
+return info;
+}

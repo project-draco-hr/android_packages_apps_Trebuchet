@@ -1,0 +1,6 @@
+{
+  super.onPrepareDialog(id,dialog);
+  if (id == DIALOG_RENAME_GESTURE) {
+    mInput.setText(mCurrentRenameInfo.title);
+  }
+}

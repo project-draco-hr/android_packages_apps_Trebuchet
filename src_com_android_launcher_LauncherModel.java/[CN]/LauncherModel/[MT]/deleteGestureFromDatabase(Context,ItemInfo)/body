@@ -1,0 +1,4 @@
+{
+  final ContentResolver cr=context.getContentResolver();
+  cr.delete(LauncherSettings.Gestures.getContentUri(item.id,false),null,null);
+}

@@ -1,0 +1,42 @@
+{
+  final ApplicationInfo info=new ApplicationInfo();
+  info.itemType=LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT;
+  int iconType=c.getInt(iconTypeIndex);
+switch (iconType) {
+case LauncherSettings.Favorites.ICON_TYPE_RESOURCE:
+    String packageName=c.getString(iconPackageIndex);
+  String resourceName=c.getString(iconResourceIndex);
+PackageManager packageManager=context.getPackageManager();
+try {
+Resources resources=packageManager.getResourcesForApplication(packageName);
+final int id=resources.getIdentifier(resourceName,null,null);
+info.icon=Utilities.createIconThumbnail(resources.getDrawable(id),context);
+}
+ catch (Exception e) {
+info.icon=packageManager.getDefaultActivityIcon();
+}
+info.iconResource=new Intent.ShortcutIconResource();
+info.iconResource.packageName=packageName;
+info.iconResource.resourceName=resourceName;
+info.customIcon=false;
+break;
+case LauncherSettings.Favorites.ICON_TYPE_BITMAP:
+byte[] data=c.getBlob(iconIndex);
+try {
+Bitmap bitmap=BitmapFactory.decodeByteArray(data,0,data.length);
+info.icon=new FastBitmapDrawable(Utilities.createBitmapThumbnail(bitmap,context));
+}
+ catch (Exception e) {
+packageManager=context.getPackageManager();
+info.icon=packageManager.getDefaultActivityIcon();
+}
+info.filtered=true;
+info.customIcon=true;
+break;
+default :
+info.icon=context.getPackageManager().getDefaultActivityIcon();
+info.customIcon=false;
+break;
+}
+return info;
+}

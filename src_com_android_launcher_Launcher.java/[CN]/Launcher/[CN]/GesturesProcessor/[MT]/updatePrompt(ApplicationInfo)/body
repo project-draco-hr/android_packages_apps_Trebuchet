@@ -1,0 +1,4 @@
+{
+  setGesturesNextPrompt(info.icon,info.title);
+  mGesturesAction.intent=info.intent;
+}

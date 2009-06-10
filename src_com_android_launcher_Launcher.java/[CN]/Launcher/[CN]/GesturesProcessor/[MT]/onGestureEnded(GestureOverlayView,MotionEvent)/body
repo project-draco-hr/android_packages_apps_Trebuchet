@@ -1,0 +1,10 @@
+{
+  overlay.removeCallbacks(mMatcher);
+  mMatcher.gesture=overlay.getGesture();
+  if (mMatcher.gesture.getLength() < GesturesConstants.LENGTH_THRESHOLD) {
+    overlay.clear(false);
+  }
+ else {
+    overlay.postDelayed(mMatcher,GesturesConstants.MATCH_DELAY);
+  }
+}

@@ -1,11 +1,11 @@
 {
-  if (resultCode == RESULT_OK && mAddItemCellInfo != null) {
+  if (resultCode == RESULT_OK && (mAddItemCellInfo != null || ((requestCode == REQUEST_PICK_GESTURE_ACTION || requestCode == REQUEST_CREATE_GESTURE_ACTION || requestCode == REQUEST_CREATE_GESTURE_APPLICATION_ACTION) && mCurrentGesture != null))) {
 switch (requestCode) {
 case REQUEST_PICK_APPLICATION:
       completeAddApplication(this,data,mAddItemCellInfo,!mDesktopLocked);
     break;
 case REQUEST_PICK_SHORTCUT:
-  addShortcut(data);
+  processShortcut(data,REQUEST_PICK_APPLICATION,REQUEST_CREATE_SHORTCUT);
 break;
 case REQUEST_CREATE_SHORTCUT:
 completeAddShortcut(data,mAddItemCellInfo,!mDesktopLocked);
@@ -21,6 +21,15 @@ addAppWidget(data);
 break;
 case REQUEST_CREATE_APPWIDGET:
 completeAddAppWidget(data,mAddItemCellInfo,!mDesktopLocked);
+break;
+case REQUEST_PICK_GESTURE_ACTION:
+processShortcut(data,REQUEST_CREATE_GESTURE_APPLICATION_ACTION,REQUEST_CREATE_GESTURE_ACTION);
+break;
+case REQUEST_CREATE_GESTURE_ACTION:
+completeCreateGesture(data,true);
+break;
+case REQUEST_CREATE_GESTURE_APPLICATION_ACTION:
+completeCreateGesture(data,false);
 break;
 }
 }

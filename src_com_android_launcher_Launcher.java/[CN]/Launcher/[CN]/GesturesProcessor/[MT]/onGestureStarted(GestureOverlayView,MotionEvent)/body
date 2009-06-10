@@ -1,0 +1,6 @@
+{
+  overlay.removeCallbacks(mMatcher);
+  resetGesturesNextPrompt();
+  mGesturesAdd.setAlpha(128);
+  mGesturesAdd.setEnabled(false);
+}

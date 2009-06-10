@@ -13,7 +13,7 @@
   final ArrayList<LauncherAppWidgetInfo> desktopAppWidgets=mDesktopAppWidgets;
   final Cursor c=contentResolver.query(LauncherSettings.Favorites.CONTENT_URI,null,null,null,null);
   try {
-    final int idIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.ID);
+    final int idIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites._ID);
     final int intentIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.INTENT);
     final int titleIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.TITLE);
     final int iconTypeIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.ICON_TYPE);

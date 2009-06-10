@@ -1,0 +1,7 @@
+{
+  final String name=mInput.getText().toString();
+  if (!TextUtils.isEmpty(name)) {
+    mCurrentRenameInfo.title=mInput.getText();
+    LauncherModel.updateGestureInDatabase(this,mCurrentRenameInfo);
+  }
+}

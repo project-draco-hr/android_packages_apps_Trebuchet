@@ -1,0 +1,10 @@
+{
+  super.onCreate(savedInstanceState);
+  setContentView(R.layout.gestures_settings);
+  mAdapter=new GesturesAdapter(this);
+  setListAdapter(mAdapter);
+  mStore=Launcher.getGestureLibrary();
+  mEmpty=(TextView)findViewById(android.R.id.empty);
+  mTask=(GesturesLoadTask)new GesturesLoadTask().execute();
+  registerForContextMenu(getListView());
+}

@@ -4,7 +4,7 @@
   boolean duplicate=data.getBooleanExtra(Launcher.EXTRA_SHORTCUT_DUPLICATE,true);
   if (intent != null && name != null) {
     final ContentResolver cr=context.getContentResolver();
-    Cursor c=cr.query(LauncherSettings.Favorites.CONTENT_URI,new String[]{LauncherSettings.Favorites.ID,LauncherSettings.Favorites.INTENT},LauncherSettings.Favorites.TITLE + "=?",new String[]{name},null);
+    Cursor c=cr.query(LauncherSettings.Favorites.CONTENT_URI,new String[]{LauncherSettings.Favorites._ID,LauncherSettings.Favorites.INTENT},LauncherSettings.Favorites.TITLE + "=?",new String[]{name},null);
     final int intentIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.INTENT);
     final int idIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites._ID);
     boolean changed=false;

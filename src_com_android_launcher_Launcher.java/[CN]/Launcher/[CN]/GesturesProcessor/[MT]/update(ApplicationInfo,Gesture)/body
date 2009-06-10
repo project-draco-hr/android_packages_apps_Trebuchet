@@ -1,0 +1,4 @@
+{
+  mGesturesOverlay.setGesture(gesture);
+  updatePrompt(info);
+}

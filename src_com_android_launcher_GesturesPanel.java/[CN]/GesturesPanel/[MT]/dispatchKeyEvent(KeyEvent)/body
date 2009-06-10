@@ -1,0 +1,7 @@
+{
+  if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
+    ((Launcher)mContext).hideGesturesPanel();
+    return true;
+  }
+  return super.dispatchKeyEvent(event);
+}
