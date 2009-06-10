@@ -1,4 +1,5 @@
 {
+  mWaitingForResult=false;
   if (resultCode == RESULT_OK && (mAddItemCellInfo != null || ((requestCode == REQUEST_PICK_GESTURE_ACTION || requestCode == REQUEST_CREATE_GESTURE_ACTION || requestCode == REQUEST_CREATE_GESTURE_APPLICATION_ACTION) && mCurrentGesture != null))) {
 switch (requestCode) {
 case REQUEST_PICK_APPLICATION:
@@ -39,5 +40,4 @@ if (appWidgetId != -1) {
 mAppWidgetHost.deleteAppWidgetId(appWidgetId);
 }
 }
-mWaitingForResult=false;
 }

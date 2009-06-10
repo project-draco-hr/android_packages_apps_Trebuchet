@@ -1,4 +1,7 @@
 {
   super.onStop();
-  hideGesturesPanel();
+  if (mHideGesturesPanel) {
+    mHideGesturesPanel=false;
+    hideGesturesPanel();
+  }
 }
