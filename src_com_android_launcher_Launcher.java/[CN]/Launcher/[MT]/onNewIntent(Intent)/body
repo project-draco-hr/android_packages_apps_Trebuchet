@@ -16,7 +16,10 @@
     }
     if ((intent.getFlags() & Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT) != Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT) {
       if (mGesturesPanel != null && mDragLayer.getWindowVisibility() == View.VISIBLE) {
-        onHomeKeyPressed();
+        SearchManager searchManager=(SearchManager)getSystemService(Context.SEARCH_SERVICE);
+        if (!searchManager.isVisible()) {
+          onHomeKeyPressed();
+        }
       }
       closeDrawer();
       final View v=getWindow().peekDecorView();
