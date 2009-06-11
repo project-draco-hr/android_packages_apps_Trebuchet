@@ -4,6 +4,7 @@
   if (store.load()) {
     final LauncherModel model=Launcher.getModel();
     for (    String name : store.getGestureEntries()) {
+      if (isCancelled())       break;
       final Gesture gesture=store.getGestures(name).get(0);
       final Bitmap bitmap=gesture.toBitmap(mThumbnailSize,mThumbnailSize,mThumbnailInset,mPathColor);
       final ApplicationInfo info=model.queryGesture(GesturesActivity.this,name);
