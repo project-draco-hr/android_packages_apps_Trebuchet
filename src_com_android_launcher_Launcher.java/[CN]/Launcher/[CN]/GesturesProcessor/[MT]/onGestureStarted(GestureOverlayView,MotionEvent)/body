@@ -1,6 +1,8 @@
 {
-  overlay.removeCallbacks(mMatcher);
-  resetGesturesNextPrompt();
+  if (!CONFIG_GESTURES_IMMEDIATE_MODE) {
+    overlay.removeCallbacks(mMatcher);
+    resetGesturesNextPrompt();
+  }
   mGesturesAdd.setAlpha(128);
   mGesturesAdd.setEnabled(false);
 }

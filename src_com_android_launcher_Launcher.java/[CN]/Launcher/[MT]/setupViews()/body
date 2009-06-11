@@ -49,7 +49,6 @@
   mGesturesOverlay=(GestureOverlayView)gesturesPanel.findViewById(R.id.gestures_overlay);
   mGesturesProcessor=new GesturesProcessor();
   final GestureOverlayView overlay=mGesturesOverlay;
-  overlay.setFadeOffset(GesturesConstants.MATCH_DELAY);
   overlay.addOnGestureListener(mGesturesProcessor);
   overlay.getGesturePaint().setXfermode(new PorterDuffXfermode(PorterDuff.Mode.MULTIPLY));
 }

@@ -1,10 +1,21 @@
 {
-  overlay.removeCallbacks(mMatcher);
-  mMatcher.gesture=overlay.getGesture();
-  if (mMatcher.gesture.getLength() < GesturesConstants.LENGTH_THRESHOLD) {
-    overlay.clear(false);
+  if (CONFIG_GESTURES_IMMEDIATE_MODE) {
+    mMatcher.gesture=overlay.getGesture();
+    if (mMatcher.gesture.getLength() < GesturesConstants.LENGTH_THRESHOLD) {
+      overlay.clear(false);
+    }
+ else {
+      mMatcher.run();
+    }
   }
  else {
-    overlay.postDelayed(mMatcher,GesturesConstants.MATCH_DELAY);
+    overlay.removeCallbacks(mMatcher);
+    mMatcher.gesture=overlay.getGesture();
+    if (mMatcher.gesture.getLength() < GesturesConstants.LENGTH_THRESHOLD) {
+      overlay.clear(false);
+    }
+ else {
+      overlay.postDelayed(mMatcher,GesturesConstants.MATCH_DELAY);
+    }
   }
 }
