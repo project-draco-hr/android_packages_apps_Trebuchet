@@ -15,7 +15,7 @@
   }
   mApplicationsLoaded=false;
   if (!isLaunching) {
-    startApplicationsLoader(launcher);
+    startApplicationsLoader(launcher,false);
     return false;
   }
   return true;

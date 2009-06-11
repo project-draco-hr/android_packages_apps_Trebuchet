@@ -1,5 +1,6 @@
 {
   mRunning=true;
+  android.os.Process.setThreadPriority(Process.THREAD_PRIORITY_DEFAULT);
   final Launcher launcher=mLauncher.get();
   final ContentResolver contentResolver=launcher.getContentResolver();
   final PackageManager manager=launcher.getPackageManager();
@@ -174,7 +175,7 @@ launcher.onDesktopItemsLoaded();
 }
 }
 );
-if (mLoadApplications) startApplicationsLoader(launcher);
+if (mLoadApplications) startApplicationsLoader(launcher,mIsLaunching);
 }
 if (!mStopped) {
 mDesktopItemsLoaded=true;
