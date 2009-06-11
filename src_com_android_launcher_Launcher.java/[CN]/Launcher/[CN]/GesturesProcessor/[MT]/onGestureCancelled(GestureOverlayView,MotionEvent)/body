@@ -1,3 +1,5 @@
 {
-  overlay.removeCallbacks(mMatcher);
+  if (!CONFIG_GESTURES_IMMEDIATE_MODE) {
+    overlay.removeCallbacks(mMatcher);
+  }
 }
