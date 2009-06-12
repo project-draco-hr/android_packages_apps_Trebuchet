@@ -1,6 +1,6 @@
 {
   if (mApplicationsLoader != null && mApplicationsLoader.isRunning()) {
-    startApplicationsLoader(launcher);
+    startApplicationsLoader(launcher,false);
     return;
   }
   if (packageName != null && packageName.length() > 0) {

@@ -2,7 +2,7 @@
   if (DEBUG_LOADERS)   d(LOG_TAG,"loading user items");
   if (isLaunching && isDesktopLoaded()) {
     if (DEBUG_LOADERS)     d(LOG_TAG,"  --> items loaded, return");
-    if (loadApplications)     startApplicationsLoader(launcher);
+    if (loadApplications)     startApplicationsLoader(launcher,true);
     launcher.onDesktopItemsLoaded();
     return;
   }
@@ -18,7 +18,7 @@
   }
   if (DEBUG_LOADERS)   d(LOG_TAG,"  --> starting workspace loader");
   mDesktopItemsLoaded=false;
-  mDesktopItemsLoader=new DesktopItemsLoader(launcher,localeChanged,loadApplications);
+  mDesktopItemsLoader=new DesktopItemsLoader(launcher,localeChanged,loadApplications,isLaunching);
   mDesktopLoaderThread=new Thread(mDesktopItemsLoader,"Desktop Items Loader");
   mDesktopLoaderThread.start();
 }
