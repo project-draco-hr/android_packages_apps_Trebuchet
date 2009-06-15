@@ -20,6 +20,9 @@
   v.setWillNotCacheDrawing(false);
   int color=v.getDrawingCacheBackgroundColor();
   v.setDrawingCacheBackgroundColor(0);
+  if (color != 0) {
+    v.destroyDrawingCache();
+  }
   v.buildDrawingCache();
   Bitmap viewBitmap=v.getDrawingCache();
   int width=viewBitmap.getWidth();
