@@ -1,0 +1,7 @@
+{
+  super.onRestoreInstanceState(state);
+  long id=state.getLong(GESTURES_INFO_ID,-1);
+  if (id != -1) {
+    mCurrentRenameInfo=Launcher.getModel().queryGesture(this,String.valueOf(id));
+  }
+}
