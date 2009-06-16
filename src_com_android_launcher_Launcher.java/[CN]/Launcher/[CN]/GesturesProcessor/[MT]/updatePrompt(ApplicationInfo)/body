@@ -1,7 +1,3 @@
 {
-  if (mGesturesAction.intent != null && info.intent.toURI().equals(mGesturesAction.intent.toURI()) && info.title.equals(((TextView)mGesturesPrompt.getCurrentView()).getText())) {
-    return;
-  }
-  setGesturesNextPrompt(info.icon,info.title);
-  mGesturesAction.intent=info.intent;
+  updatePrompt(info,true);
 }

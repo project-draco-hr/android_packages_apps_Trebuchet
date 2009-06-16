@@ -1,7 +1,3 @@
 {
-  if (mGesturesWindow != null) {
-    mGesturesWindow.setAnimationStyle(com.android.internal.R.style.Animation_SlidingCard);
-    mGesturesWindow.update();
-    mGesturesWindow.dismiss();
-  }
+  hideGesturesPanel(true);
 }

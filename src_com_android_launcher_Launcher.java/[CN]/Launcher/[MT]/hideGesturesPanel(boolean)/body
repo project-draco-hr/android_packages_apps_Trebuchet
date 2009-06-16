@@ -1,0 +1,8 @@
+{
+  if (mGesturesWindow != null) {
+    final PopupWindow popupWindow=mGesturesWindow;
+    popupWindow.setAnimationStyle(animate ? com.android.internal.R.style.Animation_SlidingCard : 0);
+    popupWindow.update();
+    popupWindow.dismiss();
+  }
+}

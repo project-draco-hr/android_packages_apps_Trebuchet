@@ -1,0 +1,12 @@
+{
+  if (mGesturesAction.intent != null && info.intent.toURI().equals(mGesturesAction.intent.toURI()) && info.title.equals(((TextView)mGesturesPrompt.getCurrentView()).getText())) {
+    return;
+  }
+  if (animate) {
+    setGesturesNextPrompt(info.icon,info.title);
+  }
+ else {
+    setGesturesPrompt(info.icon,info.title);
+  }
+  mGesturesAction.intent=info.intent;
+}
