@@ -2,6 +2,6 @@
   if (mRenameDialog != null) {
     mRenameDialog.dismiss();
     mRenameDialog=null;
-    mInput=null;
   }
+  mCurrentRenameInfo=null;
 }

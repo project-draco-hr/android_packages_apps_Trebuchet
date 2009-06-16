@@ -1,0 +1,6 @@
+{
+  super.onSaveInstanceState(outState);
+  if (mCurrentRenameInfo != null) {
+    outState.putLong(GESTURES_INFO_ID,mCurrentRenameInfo.id);
+  }
+}
