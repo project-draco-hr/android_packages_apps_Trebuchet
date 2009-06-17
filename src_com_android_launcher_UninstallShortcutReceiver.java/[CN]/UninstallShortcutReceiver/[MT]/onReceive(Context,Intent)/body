@@ -1,4 +1,7 @@
 {
+  if (!ACTION_UNINSTALL_SHORTCUT.equals(data.getAction())) {
+    return;
+  }
   Intent intent=data.getParcelableExtra(Intent.EXTRA_SHORTCUT_INTENT);
   String name=data.getStringExtra(Intent.EXTRA_SHORTCUT_NAME);
   boolean duplicate=data.getBooleanExtra(Launcher.EXTRA_SHORTCUT_DUPLICATE,true);
