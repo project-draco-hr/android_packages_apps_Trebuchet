@@ -13,7 +13,8 @@
  else {
     super.onSaveInstanceState(outState);
   }
-  if (mDrawer.isOpened() && getChangingConfigurations() != 0) {
+  final boolean isConfigurationChange=getChangingConfigurations() != 0;
+  if (mDrawer.isOpened() && isConfigurationChange) {
     outState.putBoolean(RUNTIME_STATE_ALL_APPS_FOLDER,true);
   }
   if (mAddItemCellInfo != null && mAddItemCellInfo.valid && mWaitingForResult) {
@@ -34,5 +35,12 @@
   }
   if (mCurrentGesture != null && mWaitingForResult) {
     outState.putParcelable(RUNTIME_STATE_PENDING_GESTURE,mCurrentGesture);
+  }
+  if (mGesturesWindow != null && mGesturesWindow.isShowing() && isConfigurationChange) {
+    outState.putBoolean(RUNTIME_STATE_GESTURES_PANEL,true);
+    final Gesture gesture=mGesturesOverlay.getGesture();
+    if (gesture != null) {
+      outState.putParcelable(RUNTIME_STATE_GESTURES_PANEL_GESTURE,gesture);
+    }
   }
 }

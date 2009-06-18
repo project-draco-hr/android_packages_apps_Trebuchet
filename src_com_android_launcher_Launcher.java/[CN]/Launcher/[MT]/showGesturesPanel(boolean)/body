@@ -1,0 +1,25 @@
+{
+  resetGesturesPrompt();
+  mGesturesAdd.setEnabled(false);
+  mGesturesAdd.setAlpha(128);
+  mGesturesOverlay.clear(false);
+  PopupWindow window;
+  if (mGesturesWindow == null) {
+    mGesturesWindow=new PopupWindow(this);
+    window=mGesturesWindow;
+    window.setFocusable(true);
+    window.setTouchable(true);
+    window.setBackgroundDrawable(null);
+    window.setContentView(mGesturesPanel);
+  }
+ else {
+    window=mGesturesWindow;
+  }
+  window.setAnimationStyle(animate ? com.android.internal.R.style.Animation_SlidingCard : 0);
+  final int[] xy=new int[2];
+  final DragLayer dragLayer=mDragLayer;
+  dragLayer.getLocationOnScreen(xy);
+  window.setWidth(dragLayer.getWidth());
+  window.setHeight(dragLayer.getHeight() - 1);
+  window.showAtLocation(dragLayer,Gravity.TOP | Gravity.LEFT,xy[0],xy[1] + 1);
+}

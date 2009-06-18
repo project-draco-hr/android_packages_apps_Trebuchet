@@ -25,5 +25,24 @@
     mFolderInfo=sModel.getFolderById(this,id);
     mRestoring=true;
   }
+  boolean gesturesShowing=savedState.getBoolean(RUNTIME_STATE_GESTURES_PANEL,false);
+  if (gesturesShowing) {
+    final Gesture gesture=(Gesture)savedState.get(RUNTIME_STATE_GESTURES_PANEL_GESTURE);
+    mWorkspace.post(new Runnable(){
+      public void run(){
+        showGesturesPanel(false);
+        mGesturesProcessor.matchGesture(gesture,false);
+        mWorkspace.post(new Runnable(){
+          public void run(){
+            if (gesture != null) {
+              mGesturesOverlay.setGesture(gesture);
+            }
+          }
+        }
+);
+      }
+    }
+);
+  }
   mCurrentGesture=(Gesture)savedState.get(RUNTIME_STATE_PENDING_GESTURE);
 }
