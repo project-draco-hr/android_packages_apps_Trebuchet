@@ -4,16 +4,10 @@
     return;
   }
   if (packageName != null && packageName.length() > 0) {
-    final PackageManager packageManager=launcher.getPackageManager();
-    final List<ResolveInfo> matches=findActivitiesForPackage(packageManager,packageName);
-    if (matches.size() > 0) {
+    if (syncLocked(launcher,packageName)) {
       final ApplicationsAdapter adapter=mApplicationsAdapter;
-      boolean removed=removeDisabledActivities(packageName,matches,adapter);
-      boolean added=addEnabledAndUpdateActivities(matches,adapter,launcher);
-      if (added || removed) {
-        adapter.sort(new ApplicationInfoComparator());
-        adapter.notifyDataSetChanged();
-      }
+      adapter.sort(new ApplicationInfoComparator());
+      adapter.notifyDataSetChanged();
     }
   }
 }
