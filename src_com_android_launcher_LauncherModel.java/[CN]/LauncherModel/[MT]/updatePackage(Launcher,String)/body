@@ -17,6 +17,7 @@
         changed=true;
       }
     }
+    if (syncLocked(launcher,packageName))     changed=true;
     if (changed) {
       adapter.sort(new ApplicationInfoComparator());
       adapter.notifyDataSetChanged();
