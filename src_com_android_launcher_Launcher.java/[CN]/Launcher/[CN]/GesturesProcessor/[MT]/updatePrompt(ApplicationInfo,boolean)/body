@@ -1,5 +1,5 @@
 {
-  if (mGesturesAction.intent != null && info.intent.toURI().equals(mGesturesAction.intent.toURI()) && info.title.equals(((TextView)mGesturesPrompt.getCurrentView()).getText())) {
+  if (mGesturesAction.intent != null && info.intent.toUri(0).equals(mGesturesAction.intent.toUri(0)) && info.title.equals(((TextView)mGesturesPrompt.getCurrentView()).getText())) {
     return;
   }
   if (animate) {

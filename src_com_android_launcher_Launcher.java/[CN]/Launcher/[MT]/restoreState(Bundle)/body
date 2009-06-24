@@ -25,6 +25,7 @@
     mFolderInfo=sModel.getFolderById(this,id);
     mRestoring=true;
   }
+  mCurrentGesture=(Gesture)savedState.get(RUNTIME_STATE_PENDING_GESTURE);
   boolean gesturesShowing=savedState.getBoolean(RUNTIME_STATE_GESTURES_PANEL,false);
   if (gesturesShowing) {
     final Gesture gesture=(Gesture)savedState.get(RUNTIME_STATE_GESTURES_PANEL_GESTURE);
@@ -44,5 +45,4 @@
     }
 );
   }
-  mCurrentGesture=(Gesture)savedState.get(RUNTIME_STATE_PENDING_GESTURE);
 }

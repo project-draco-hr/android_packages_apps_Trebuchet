@@ -36,11 +36,13 @@
   if (mCurrentGesture != null && mWaitingForResult) {
     outState.putParcelable(RUNTIME_STATE_PENDING_GESTURE,mCurrentGesture);
   }
-  if (mGesturesWindow != null && mGesturesWindow.isShowing() && isConfigurationChange) {
+  if (mGesturesWindow != null && mGesturesWindow.isShowing()) {
     outState.putBoolean(RUNTIME_STATE_GESTURES_PANEL,true);
-    final Gesture gesture=mGesturesOverlay.getGesture();
-    if (gesture != null) {
-      outState.putParcelable(RUNTIME_STATE_GESTURES_PANEL_GESTURE,gesture);
+    if (mCurrentGesture == null || !mWaitingForResult) {
+      final Gesture gesture=mGesturesOverlay.getGesture();
+      if (gesture != null) {
+        outState.putParcelable(RUNTIME_STATE_GESTURES_PANEL_GESTURE,gesture);
+      }
     }
   }
 }
