@@ -20,6 +20,7 @@
       }
     }
     if (!match) {
+      mGesturesAction.intent=null;
       if (animate) {
         setGesturesNextPrompt(null,getString(R.string.gestures_unknown));
       }

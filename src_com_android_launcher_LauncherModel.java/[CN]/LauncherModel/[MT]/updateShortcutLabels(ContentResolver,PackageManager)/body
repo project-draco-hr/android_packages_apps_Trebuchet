@@ -12,7 +12,7 @@
         }
         final String intentUri=c.getString(intentIndex);
         if (intentUri != null) {
-          final Intent shortcut=Intent.getIntent(intentUri);
+          final Intent shortcut=Intent.parseUri(intentUri,0);
           if (Intent.ACTION_MAIN.equals(shortcut.getAction())) {
             final ComponentName name=shortcut.getComponent();
             if (name != null) {
