@@ -1,18 +1,18 @@
 {
-  final SharedPreferences preferences=getSharedPreferences(PREFERENCES,MODE_PRIVATE);
+  final LocaleConfiguration localeConfiguration=new LocaleConfiguration();
+  readConfiguration(this,localeConfiguration);
   final Configuration configuration=getResources().getConfiguration();
-  final String previousLocale=preferences.getString(KEY_LOCALE,null);
+  final String previousLocale=localeConfiguration.locale;
   final String locale=configuration.locale.toString();
-  final int previousMcc=preferences.getInt(KEY_MCC,-1);
+  final int previousMcc=localeConfiguration.mcc;
   final int mcc=configuration.mcc;
-  final int previousMnc=preferences.getInt(KEY_MNC,-1);
+  final int previousMnc=localeConfiguration.mnc;
   final int mnc=configuration.mnc;
   mLocaleChanged=!locale.equals(previousLocale) || mcc != previousMcc || mnc != previousMnc;
   if (mLocaleChanged) {
-    final SharedPreferences.Editor editor=preferences.edit();
-    editor.putString(KEY_LOCALE,locale);
-    editor.putInt(KEY_MCC,mcc);
-    editor.putInt(KEY_MNC,mnc);
-    editor.commit();
+    localeConfiguration.locale=locale;
+    localeConfiguration.mcc=mcc;
+    localeConfiguration.mnc=mnc;
+    writeConfiguration(this,localeConfiguration);
   }
 }
