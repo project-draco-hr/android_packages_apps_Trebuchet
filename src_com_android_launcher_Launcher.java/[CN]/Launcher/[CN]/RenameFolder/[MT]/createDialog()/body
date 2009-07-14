@@ -25,5 +25,12 @@
   }
 );
   builder.setView(layout);
-  return builder.create();
+  final AlertDialog dialog=builder.create();
+  dialog.setOnShowListener(new DialogInterface.OnShowListener(){
+    public void onShow(    DialogInterface dialog){
+      mWorkspace.lock();
+    }
+  }
+);
+  return dialog;
 }
