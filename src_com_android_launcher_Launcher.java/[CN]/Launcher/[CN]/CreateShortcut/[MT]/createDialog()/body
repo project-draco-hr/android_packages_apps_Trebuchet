@@ -8,5 +8,6 @@
   AlertDialog dialog=builder.create();
   dialog.setOnCancelListener(this);
   dialog.setOnDismissListener(this);
+  dialog.setOnShowListener(this);
   return dialog;
 }
