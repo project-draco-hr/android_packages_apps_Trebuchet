@@ -2,9 +2,11 @@
   super.onCreate(savedInstanceState);
   setContentView(R.layout.gestures_settings);
   mAdapter=new GesturesAdapter(this);
-  setListAdapter(mAdapter);
+  setListAdapter(new GesturesSettingsAdapter(mAdapter));
+  getListView().setOnItemClickListener(this);
   mStore=Launcher.getGestureLibrary();
   mEmpty=(TextView)findViewById(android.R.id.empty);
   mTask=(GesturesLoadTask)new GesturesLoadTask().execute();
   registerForContextMenu(getListView());
+  mPreferences=getSharedPreferences(PREFERENCES_NAME,MODE_PRIVATE);
 }

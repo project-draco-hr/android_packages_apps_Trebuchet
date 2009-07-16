@@ -1,3 +1,26 @@
 {
-  matchGesture(gesture,true);
+  mGesturesAdd.setVisibility(View.VISIBLE);
+  if (gesture != null) {
+    final ArrayList<Prediction> predictions=sLibrary.recognize(gesture);
+    if (DEBUG_GESTURES) {
+      for (      Prediction p : predictions) {
+        d(LOG_TAG,String.format("name=%s, score=%f",p.name,p.score));
+      }
+    }
+    boolean match=false;
+    if (predictions.size() > 0) {
+      final Prediction prediction=predictions.get(0);
+      if (prediction.score > GesturesConstants.PREDICTION_THRESHOLD) {
+        match=true;
+        ApplicationInfo info=sModel.queryGesture(Launcher.this,prediction.name);
+        if (info != null) {
+          updatePrompt(info);
+        }
+      }
+    }
+    if (!match) {
+      mGesturesAction.intent=null;
+      setGestureUnknown();
+    }
+  }
 }

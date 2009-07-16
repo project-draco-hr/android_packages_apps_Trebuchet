@@ -32,17 +32,21 @@
   dragLayer.setDragListener(deleteZone);
   mGesturesPanel=mInflater.inflate(R.layout.gestures,mDragLayer,false);
   final View gesturesPanel=mGesturesPanel;
-  mGesturesPrompt=(ViewSwitcher)gesturesPanel.findViewById(R.id.gestures_actions);
   mGesturesAction=new GesturesAction();
-  mGesturesPrompt.getChildAt(0).setOnClickListener(mGesturesAction);
-  mGesturesPrompt.getChildAt(1).setOnClickListener(mGesturesAction);
+  mGesturesPrompt=(TextView)gesturesPanel.findViewById(R.id.gestures_prompt);
+  mGesturesSend=(Button)gesturesPanel.findViewById(R.id.gestures_action);
+  mGesturesSend.setOnClickListener(mGesturesAction);
   mGesturesAdd=(ImageView)gesturesPanel.findViewById(R.id.gestures_add);
   final ImageView gesturesAdd=mGesturesAdd;
-  gesturesAdd.setAlpha(128);
-  gesturesAdd.setEnabled(false);
   gesturesAdd.setOnClickListener(new View.OnClickListener(){
     public void onClick(    View v){
       createGesture();
+    }
+  }
+);
+  gesturesPanel.findViewById(R.id.gestures_list).setOnClickListener(new View.OnClickListener(){
+    public void onClick(    View v){
+      startActivity(new Intent(Launcher.this,GesturesActivity.class));
     }
   }
 );

@@ -1,0 +1,3 @@
+{
+  return FIXED_CHILDREN_COUNT + mAdapter.getCount();
+}

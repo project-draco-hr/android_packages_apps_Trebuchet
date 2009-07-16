@@ -5,7 +5,7 @@
       overlay.clear(false);
       if (mGesturesAction.intent != null) {
         mGesturesAction.intent=null;
-        setGesturesNextPrompt(null,getString(R.string.gestures_unknown));
+        setGestureAction(null,getString(R.string.gestures_unknown));
       }
     }
  else {
@@ -19,7 +19,7 @@
       overlay.clear(false);
       if (mGesturesAction.intent != null) {
         mGesturesAction.intent=null;
-        setGesturesNextPrompt(null,getString(R.string.gestures_unknown));
+        setGestureAction(null,getString(R.string.gestures_unknown));
       }
     }
  else {
