@@ -4,7 +4,7 @@
   mAdapter=new GesturesAdapter(this);
   setListAdapter(new GesturesSettingsAdapter(mAdapter));
   getListView().setOnItemClickListener(this);
-  mStore=Launcher.getGestureLibrary();
+  mStore=Launcher.getGestureLibrary(this);
   mTask=(GesturesLoadTask)new GesturesLoadTask().execute();
   registerForContextMenu(getListView());
   mPreferences=getSharedPreferences(GesturesConstants.PREFERENCES_NAME,MODE_PRIVATE);
