@@ -54,5 +54,4 @@
   mGesturesProcessor=new GesturesProcessor();
   final GestureOverlayView overlay=mGesturesOverlay;
   overlay.addOnGestureListener(mGesturesProcessor);
-  overlay.getGesturePaint().setXfermode(new PorterDuffXfermode(PorterDuff.Mode.MULTIPLY));
 }
