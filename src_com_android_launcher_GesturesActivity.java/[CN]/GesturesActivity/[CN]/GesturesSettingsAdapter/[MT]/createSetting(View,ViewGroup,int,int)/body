@@ -4,6 +4,6 @@
   }
   ((TextView)convertView.findViewById(R.id.title)).setText(title);
   ((TextView)convertView.findViewById(R.id.summary)).setText(summary);
-  ((CheckBox)convertView.findViewById(R.id.checkbox)).setChecked(mPreferences.getBoolean(PREFERENCES_HOME_KEY,false));
+  ((CheckBox)convertView.findViewById(R.id.checkbox)).setChecked(mPreferences.getBoolean(GesturesConstants.PREFERENCES_HOME_KEY,false));
   return convertView;
 }

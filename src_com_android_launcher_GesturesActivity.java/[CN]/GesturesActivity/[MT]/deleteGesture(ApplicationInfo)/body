@@ -5,7 +5,6 @@
   adapter.setNotifyOnChange(false);
   adapter.remove(info);
   adapter.sort(mSorter);
-  checkForEmpty();
   adapter.notifyDataSetChanged();
   LauncherModel.deleteGestureFromDatabase(this,info);
   Toast.makeText(this,R.string.gestures_delete_success,Toast.LENGTH_SHORT).show();
