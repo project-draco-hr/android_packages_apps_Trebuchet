@@ -5,8 +5,7 @@
   setListAdapter(new GesturesSettingsAdapter(mAdapter));
   getListView().setOnItemClickListener(this);
   mStore=Launcher.getGestureLibrary();
-  mEmpty=(TextView)findViewById(android.R.id.empty);
   mTask=(GesturesLoadTask)new GesturesLoadTask().execute();
   registerForContextMenu(getListView());
-  mPreferences=getSharedPreferences(PREFERENCES_NAME,MODE_PRIVATE);
+  mPreferences=getSharedPreferences(GesturesConstants.PREFERENCES_NAME,MODE_PRIVATE);
 }

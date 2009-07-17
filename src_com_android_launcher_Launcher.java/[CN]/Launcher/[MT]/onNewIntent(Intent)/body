@@ -16,8 +16,8 @@
  catch (    Exception e) {
     }
     if ((intent.getFlags() & Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT) != Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT) {
-      final SharedPreferences preferences=getSharedPreferences(GesturesActivity.PREFERENCES_NAME,MODE_PRIVATE);
-      final boolean homeKey=preferences.getBoolean(GesturesActivity.PREFERENCES_HOME_KEY,false);
+      final SharedPreferences preferences=getSharedPreferences(GesturesConstants.PREFERENCES_NAME,MODE_PRIVATE);
+      final boolean homeKey=preferences.getBoolean(GesturesConstants.PREFERENCES_HOME_KEY,false);
       if (!homeKey) {
         if (!mWorkspace.isDefaultScreenShowing()) {
           mWorkspace.moveToDefaultScreen();

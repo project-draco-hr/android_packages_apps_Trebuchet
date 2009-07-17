@@ -1,5 +1,0 @@
-{
-  if (mAdapter.getCount() == 0) {
-    mEmpty.setText(R.string.gestures_empty);
-  }
-}
