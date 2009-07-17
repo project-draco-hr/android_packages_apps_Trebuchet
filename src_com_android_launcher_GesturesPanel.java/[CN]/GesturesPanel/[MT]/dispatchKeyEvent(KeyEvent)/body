@@ -16,9 +16,14 @@ case KeyEvent.KEYCODE_CALL:
 case KeyEvent.KEYCODE_SEARCH:
     return ((Launcher)mContext).getWorkspace().getRootView().dispatchKeyEvent(event);
 }
-if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
-  ((Launcher)mContext).hideGesturesPanel();
-  return true;
+if (keyCode == KeyEvent.KEYCODE_BACK) {
+  if (event.getAction() == KeyEvent.ACTION_DOWN) {
+    ((Launcher)mContext).hideGesturesPanel();
+    return true;
+  }
 }
-return super.dispatchKeyEvent(event);
+ else {
+  return super.dispatchKeyEvent(event);
+}
+return false;
 }
