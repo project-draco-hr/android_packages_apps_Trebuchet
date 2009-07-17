@@ -1,0 +1,13 @@
+{
+  mAdapter=adapter;
+  mInflater=adapter.mInflater;
+  adapter.registerDataSetObserver(new DataSetObserver(){
+    @Override public void onChanged(){
+      notifyDataSetChanged();
+    }
+    @Override public void onInvalidated(){
+      notifyDataSetInvalidated();
+    }
+  }
+);
+}

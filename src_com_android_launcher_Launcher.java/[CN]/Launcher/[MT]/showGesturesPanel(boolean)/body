@@ -1,7 +1,6 @@
 {
   resetGesturesPrompt();
-  mGesturesAdd.setEnabled(false);
-  mGesturesAdd.setAlpha(128);
+  mGesturesAdd.setVisibility(View.GONE);
   mGesturesOverlay.clear(false);
   PopupWindow window;
   if (mGesturesWindow == null) {
@@ -9,13 +8,13 @@
     window=mGesturesWindow;
     window.setFocusable(true);
     window.setTouchable(true);
-    window.setBackgroundDrawable(null);
+    window.setBackgroundDrawable(getResources().getDrawable(android.R.drawable.screen_background_dark));
     window.setContentView(mGesturesPanel);
   }
  else {
     window=mGesturesWindow;
   }
-  window.setAnimationStyle(animate ? com.android.internal.R.style.Animation_SlidingCard : 0);
+  window.setAnimationStyle(animate ? com.android.internal.R.style.Animation_Toast : 0);
   final int[] xy=new int[2];
   final DragLayer dragLayer=mDragLayer;
   dragLayer.getLocationOnScreen(xy);

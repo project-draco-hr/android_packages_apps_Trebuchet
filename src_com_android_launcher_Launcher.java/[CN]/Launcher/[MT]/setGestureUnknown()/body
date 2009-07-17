@@ -1,6 +1,6 @@
 {
   mGesturesAction.intent=null;
-  mGesturesPrompt.setText(R.string.gestures_instructions);
+  mGesturesPrompt.setText(R.string.gestures_unknown);
   mGesturesPrompt.setVisibility(View.VISIBLE);
   mGesturesSend.setVisibility(View.GONE);
 }

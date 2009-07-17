@@ -1,0 +1,6 @@
+{
+  mGesturesPrompt.setVisibility(View.GONE);
+  mGesturesSend.setVisibility(View.VISIBLE);
+  mGesturesSend.setText(title);
+  mGesturesSend.setCompoundDrawablesWithIntrinsicBounds(icon,null,null,null);
+}

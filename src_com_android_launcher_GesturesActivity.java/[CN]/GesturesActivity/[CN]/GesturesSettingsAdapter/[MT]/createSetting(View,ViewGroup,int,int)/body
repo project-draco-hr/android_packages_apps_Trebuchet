@@ -1,0 +1,9 @@
+{
+  if (convertView == null) {
+    convertView=mInflater.inflate(R.layout.list_checkbox_2lines,parent,false);
+  }
+  ((TextView)convertView.findViewById(R.id.title)).setText(title);
+  ((TextView)convertView.findViewById(R.id.summary)).setText(summary);
+  ((CheckBox)convertView.findViewById(R.id.checkbox)).setChecked(mPreferences.getBoolean(PREFERENCES_HOME_KEY,false));
+  return convertView;
+}

@@ -16,10 +16,22 @@
  catch (    Exception e) {
     }
     if ((intent.getFlags() & Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT) != Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT) {
-      if (mGesturesPanel != null && mDragLayer.getWindowVisibility() == View.VISIBLE && (mDragLayer.hasWindowFocus() || (mGesturesWindow != null && mGesturesWindow.isShowing()))) {
-        SearchManager searchManager=(SearchManager)getSystemService(Context.SEARCH_SERVICE);
-        if (!searchManager.isVisible()) {
-          onHomeKeyPressed();
+      final SharedPreferences preferences=getSharedPreferences(GesturesActivity.PREFERENCES_NAME,MODE_PRIVATE);
+      final boolean homeKey=preferences.getBoolean(GesturesActivity.PREFERENCES_HOME_KEY,false);
+      if (!homeKey) {
+        if (!mWorkspace.isDefaultScreenShowing()) {
+          mWorkspace.moveToDefaultScreen();
+        }
+        if (mGesturesWindow == null || mGesturesWindow.isShowing()) {
+          hideGesturesPanel();
+        }
+      }
+ else {
+        if (mGesturesPanel != null && mDragLayer.getWindowVisibility() == View.VISIBLE && (mDragLayer.hasWindowFocus() || (mGesturesWindow != null && mGesturesWindow.isShowing()))) {
+          SearchManager searchManager=(SearchManager)getSystemService(Context.SEARCH_SERVICE);
+          if (!searchManager.isVisible()) {
+            onHomeKeyPressed();
+          }
         }
       }
       closeDrawer();
