@@ -1,0 +1,6 @@
+{
+  if (sLibrary == null) {
+    sLibrary=GestureLibraries.fromPrivateFile(context,GesturesConstants.STORE_NAME);
+  }
+  return sLibrary;
+}
