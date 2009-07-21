@@ -1,7 +1,0 @@
-{
-  if (!CONFIG_GESTURES_IMMEDIATE_MODE) {
-    overlay.removeCallbacks(mMatcher);
-    resetGesturesPrompt();
-  }
-  mGesturesAdd.setVisibility(View.GONE);
-}

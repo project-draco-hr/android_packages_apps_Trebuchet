@@ -1,7 +1,0 @@
-{
-  if (mGesturesAction.intent != null && info.intent.toUri(0).equals(mGesturesAction.intent.toUri(0)) && info.title.equals(mGesturesSend.getText())) {
-    return;
-  }
-  setGestureAction(info.icon,info.title);
-  mGesturesAction.intent=info.intent;
-}

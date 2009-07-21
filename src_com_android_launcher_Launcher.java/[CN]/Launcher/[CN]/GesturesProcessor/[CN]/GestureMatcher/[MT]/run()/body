@@ -1,5 +1,0 @@
-{
-  if (gesture != null) {
-    matchGesture(gesture);
-  }
-}

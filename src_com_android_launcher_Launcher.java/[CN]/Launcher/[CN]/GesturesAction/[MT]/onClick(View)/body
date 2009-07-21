@@ -1,5 +1,0 @@
-{
-  if (intent != null) {
-    startActivitySafely(intent);
-  }
-}

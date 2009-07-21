@@ -1,7 +1,0 @@
-{
-  if (!mWaitingForResult) {
-    mCurrentGesture=mGesturesOverlay.getGesture();
-    mWaitingForResult=true;
-    pickShortcut(REQUEST_PICK_GESTURE_ACTION,R.string.title_select_shortcut);
-  }
-}

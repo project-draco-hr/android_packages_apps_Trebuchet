@@ -1,9 +1,0 @@
-{
-  super.onCreateContextMenu(menu,v,menuInfo);
-  AdapterView.AdapterContextMenuInfo info=(AdapterView.AdapterContextMenuInfo)menuInfo;
-  if (info.position > 2) {
-    menu.setHeaderTitle(((TextView)info.targetView).getText());
-    menu.add(0,MENU_ID_RENAME,0,R.string.gestures_rename);
-    menu.add(0,MENU_ID_REMOVE,0,R.string.gestures_delete);
-  }
-}

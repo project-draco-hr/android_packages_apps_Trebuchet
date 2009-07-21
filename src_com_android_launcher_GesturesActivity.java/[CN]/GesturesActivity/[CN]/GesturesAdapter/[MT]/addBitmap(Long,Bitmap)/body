@@ -1,3 +1,0 @@
-{
-  mThumbnails.put(id,new BitmapDrawable(bitmap));
-}

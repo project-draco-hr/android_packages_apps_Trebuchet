@@ -1,8 +1,0 @@
-{
-  super.onDestroy();
-  if (mTask != null && mTask.getStatus() != GesturesLoadTask.Status.FINISHED) {
-    mTask.cancel(true);
-    mTask=null;
-  }
-  cleanupRenameDialog();
-}
