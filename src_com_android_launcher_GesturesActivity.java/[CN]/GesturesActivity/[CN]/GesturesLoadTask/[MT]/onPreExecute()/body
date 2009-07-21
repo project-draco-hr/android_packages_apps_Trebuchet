@@ -1,7 +1,0 @@
-{
-  super.onPreExecute();
-  final Resources resources=getResources();
-  mPathColor=resources.getColor(R.color.gesture_color);
-  mThumbnailInset=(int)resources.getDimension(R.dimen.gesture_thumbnail_inset);
-  mThumbnailSize=(int)resources.getDimension(R.dimen.gesture_thumbnail_size);
-}

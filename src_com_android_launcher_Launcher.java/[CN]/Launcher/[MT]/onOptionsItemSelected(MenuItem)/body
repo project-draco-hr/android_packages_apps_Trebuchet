@@ -12,9 +12,6 @@ return true;
 case MENU_NOTIFICATIONS:
 showNotifications();
 return true;
-case MENU_GESTURES:
-showGesturesPanel();
-return true;
 }
 return super.onOptionsItemSelected(item);
 }

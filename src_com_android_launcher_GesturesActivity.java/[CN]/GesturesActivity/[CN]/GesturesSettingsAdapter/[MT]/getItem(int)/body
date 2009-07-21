@@ -1,6 +1,0 @@
-{
-  if (position < FIXED_CHILDREN_COUNT) {
-    return String.valueOf(position);
-  }
-  return mAdapter.getItem(position - FIXED_CHILDREN_COUNT);
-}
