@@ -1,7 +1,0 @@
-{
-  if (position == 1) {
-    final CheckBox checkBox=(CheckBox)view.findViewById(R.id.checkbox);
-    checkBox.toggle();
-    mPreferences.edit().putBoolean(GesturesConstants.PREFERENCES_HOME_KEY,checkBox.isChecked()).commit();
-  }
-}

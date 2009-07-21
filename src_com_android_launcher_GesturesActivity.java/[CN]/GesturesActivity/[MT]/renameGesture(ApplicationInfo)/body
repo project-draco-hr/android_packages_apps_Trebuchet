@@ -1,4 +1,0 @@
-{
-  mCurrentRenameInfo=info;
-  showDialog(DIALOG_RENAME_GESTURE);
-}

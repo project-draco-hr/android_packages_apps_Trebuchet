@@ -1,8 +1,4 @@
 {
   super.onPause();
-  if (mGesturesWindow != null) {
-    mGesturesWindow.setAnimationStyle(0);
-    mGesturesWindow.update();
-  }
   closeDrawer(false);
 }

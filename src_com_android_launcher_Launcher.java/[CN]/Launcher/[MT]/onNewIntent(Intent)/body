@@ -16,23 +16,8 @@
  catch (    Exception e) {
     }
     if ((intent.getFlags() & Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT) != Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT) {
-      final SharedPreferences preferences=getSharedPreferences(GesturesConstants.PREFERENCES_NAME,MODE_PRIVATE);
-      final boolean homeKey=preferences.getBoolean(GesturesConstants.PREFERENCES_HOME_KEY,false);
-      if (!homeKey) {
-        if (!mWorkspace.isDefaultScreenShowing()) {
-          mWorkspace.moveToDefaultScreen();
-        }
-        if (mGesturesWindow == null || mGesturesWindow.isShowing()) {
-          hideGesturesPanel();
-        }
-      }
- else {
-        if (mGesturesPanel != null && mDragLayer.getWindowVisibility() == View.VISIBLE && (mDragLayer.hasWindowFocus() || (mGesturesWindow != null && mGesturesWindow.isShowing()))) {
-          SearchManager searchManager=(SearchManager)getSystemService(Context.SEARCH_SERVICE);
-          if (!searchManager.isVisible()) {
-            onHomeKeyPressed();
-          }
-        }
+      if (!mWorkspace.isDefaultScreenShowing()) {
+        mWorkspace.moveToDefaultScreen();
       }
       closeDrawer();
       final View v=getWindow().peekDecorView();

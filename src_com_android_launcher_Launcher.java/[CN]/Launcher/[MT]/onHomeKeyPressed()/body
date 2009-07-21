@@ -1,8 +1,0 @@
-{
-  if (mGesturesWindow == null || !mGesturesWindow.isShowing()) {
-    showGesturesPanel();
-  }
- else {
-    hideGesturesPanel();
-  }
-}

@@ -30,28 +30,4 @@
   dragLayer.setIgnoredDropTarget(grid);
   dragLayer.setDragScoller(workspace);
   dragLayer.setDragListener(deleteZone);
-  mGesturesPanel=mInflater.inflate(R.layout.gestures,mDragLayer,false);
-  final View gesturesPanel=mGesturesPanel;
-  mGesturesAction=new GesturesAction();
-  mGesturesPrompt=(TextView)gesturesPanel.findViewById(R.id.gestures_prompt);
-  mGesturesSend=(Button)gesturesPanel.findViewById(R.id.gestures_action);
-  mGesturesSend.setOnClickListener(mGesturesAction);
-  mGesturesAdd=(ImageView)gesturesPanel.findViewById(R.id.gestures_add);
-  final ImageView gesturesAdd=mGesturesAdd;
-  gesturesAdd.setOnClickListener(new View.OnClickListener(){
-    public void onClick(    View v){
-      createGesture();
-    }
-  }
-);
-  gesturesPanel.findViewById(R.id.gestures_list).setOnClickListener(new View.OnClickListener(){
-    public void onClick(    View v){
-      startActivity(new Intent(Launcher.this,GesturesActivity.class));
-    }
-  }
-);
-  mGesturesOverlay=(GestureOverlayView)gesturesPanel.findViewById(R.id.gestures_overlay);
-  mGesturesProcessor=new GesturesProcessor();
-  final GestureOverlayView overlay=mGesturesOverlay;
-  overlay.addOnGestureListener(mGesturesProcessor);
 }

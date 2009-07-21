@@ -1,7 +1,0 @@
-{
-  if (convertView == null) {
-    convertView=mInflater.inflate(R.layout.list_category,parent,false);
-  }
-  ((TextView)convertView).setText(text);
-  return convertView;
-}
