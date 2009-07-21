@@ -1,0 +1,14 @@
+{
+  boolean showGooglePlaceholder=false;
+  SearchableInfo webSearchSearchable=mSearchManager.getDefaultSearchableForWebSearch();
+  if (webSearchSearchable != null) {
+    ComponentName webSearchComponent=webSearchSearchable.getSearchActivity();
+    if (webSearchComponent != null) {
+      String componentString=webSearchComponent.flattenToShortString();
+      if (Searchables.ENHANCED_GOOGLE_SEARCH_COMPONENT_NAME.equals(componentString) || Searchables.GOOGLE_SEARCH_COMPONENT_NAME.equals(componentString)) {
+        showGooglePlaceholder=true;
+      }
+    }
+  }
+  mSearchText.setCompoundDrawablesWithIntrinsicBounds(showGooglePlaceholder ? mGooglePlaceholder : null,null,null,null);
+}
