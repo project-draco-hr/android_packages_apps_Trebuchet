@@ -38,4 +38,5 @@
 );
   mVoiceSearchIntent=new Intent(android.speech.RecognizerIntent.ACTION_WEB_SEARCH);
   mVoiceSearchIntent.putExtra(android.speech.RecognizerIntent.EXTRA_LANGUAGE_MODEL,android.speech.RecognizerIntent.LANGUAGE_MODEL_WEB_SEARCH);
+  mSearchManager=(SearchManager)getContext().getSystemService(Context.SEARCH_SERVICE);
 }
