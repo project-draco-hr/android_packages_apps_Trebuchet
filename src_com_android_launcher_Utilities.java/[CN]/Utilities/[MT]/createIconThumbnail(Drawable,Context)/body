@@ -12,14 +12,10 @@
     painter.setIntrinsicHeight(height);
   }
  else   if (icon instanceof BitmapDrawable) {
-    float displayDensity=context.getResources().getDisplayMetrics().density;
     BitmapDrawable bitmapDrawable=(BitmapDrawable)icon;
     Bitmap bitmap=bitmapDrawable.getBitmap();
-    float iconDensity=bitmap.getDensityScale();
-    scale=displayDensity / iconDensity;
-    if (scale != 1.0f) {
-      icon=bitmapDrawable=new BitmapDrawable(bitmap);
-      bitmapDrawable.setDensityScale(scale);
+    if (bitmap.getDensity() == Bitmap.DENSITY_NONE) {
+      bitmapDrawable.setTargetDensity(context.getResources().getDisplayMetrics());
     }
   }
   int iconWidth=icon.getIntrinsicWidth();
