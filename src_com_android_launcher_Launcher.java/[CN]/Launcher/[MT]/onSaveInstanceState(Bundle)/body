@@ -13,7 +13,8 @@
  else {
     super.onSaveInstanceState(outState);
   }
-  if (mDrawer.isOpened()) {
+  final boolean isConfigurationChange=getChangingConfigurations() != 0;
+  if (mDrawer.isOpened() && isConfigurationChange) {
     outState.putBoolean(RUNTIME_STATE_ALL_APPS_FOLDER,true);
   }
   if (mAddItemCellInfo != null && mAddItemCellInfo.valid && mWaitingForResult) {
@@ -31,5 +32,17 @@
   if (mFolderInfo != null && mWaitingForResult) {
     outState.putBoolean(RUNTIME_STATE_PENDING_FOLDER_RENAME,true);
     outState.putLong(RUNTIME_STATE_PENDING_FOLDER_RENAME_ID,mFolderInfo.id);
+  }
+  if (mCurrentGesture != null && mWaitingForResult) {
+    outState.putParcelable(RUNTIME_STATE_PENDING_GESTURE,mCurrentGesture);
+  }
+  if (mGesturesWindow != null && mGesturesWindow.isShowing()) {
+    outState.putBoolean(RUNTIME_STATE_GESTURES_PANEL,true);
+    if (mCurrentGesture == null || !mWaitingForResult) {
+      final Gesture gesture=mGesturesOverlay.getGesture();
+      if (gesture != null) {
+        outState.putParcelable(RUNTIME_STATE_GESTURES_PANEL_GESTURE,gesture);
+      }
+    }
   }
 }

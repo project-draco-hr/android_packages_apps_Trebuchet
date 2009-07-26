@@ -1,0 +1,5 @@
+{
+  mGesturesAction.intent=null;
+  setGesturesNextPrompt(null,getString(R.string.gestures_instructions));
+  mGesturesPrompt.getNextView().setClickable(false);
+}

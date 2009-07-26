@@ -1,6 +1,6 @@
 {
   if (mApplicationsLoader != null && mApplicationsLoader.isRunning()) {
-    startApplicationsLoader(launcher);
+    startApplicationsLoader(launcher,false);
     return;
   }
   if (packageName != null && packageName.length() > 0) {
@@ -11,7 +11,7 @@
       final HashMap<ComponentName,ApplicationInfo> cache=mAppInfoCache;
       for (      ResolveInfo info : matches) {
         adapter.setNotifyOnChange(false);
-        adapter.add(makeAndCacheApplicationInfo(packageManager,cache,info));
+        adapter.add(makeAndCacheApplicationInfo(packageManager,cache,info,launcher));
       }
       adapter.sort(new ApplicationInfoComparator());
       adapter.notifyDataSetChanged();

@@ -18,9 +18,24 @@
       convertWidgets(db);
     }
   }
+  if (version < 4) {
+    db.beginTransaction();
+    try {
+      db.execSQL("CREATE TABLE gestures (" + "_id INTEGER PRIMARY KEY," + "title TEXT,"+ "intent TEXT,"+ "itemType INTEGER,"+ "iconType INTEGER,"+ "iconPackage TEXT,"+ "iconResource TEXT,"+ "icon BLOB"+ ");");
+      db.setTransactionSuccessful();
+      version=4;
+    }
+ catch (    SQLException ex) {
+      Log.e(LOG_TAG,ex.getMessage(),ex);
+    }
+ finally {
+      db.endTransaction();
+    }
+  }
   if (version != DATABASE_VERSION) {
     Log.w(LOG_TAG,"Destroying all old data.");
     db.execSQL("DROP TABLE IF EXISTS " + TABLE_FAVORITES);
+    db.execSQL("DROP TABLE IF EXISTS " + TABLE_GESTURES);
     onCreate(db);
   }
 }

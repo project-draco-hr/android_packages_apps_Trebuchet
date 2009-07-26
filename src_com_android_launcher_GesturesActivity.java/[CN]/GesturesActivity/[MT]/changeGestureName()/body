@@ -1,0 +1,18 @@
+{
+  final String name=mInput.getText().toString();
+  if (!TextUtils.isEmpty(name)) {
+    final ApplicationInfo renameInfo=mCurrentRenameInfo;
+    final GesturesActivity.GesturesAdapter adapter=mAdapter;
+    final int count=adapter.getCount();
+    for (int i=0; i < count; i++) {
+      final ApplicationInfo info=adapter.getItem(i);
+      if (info.id == renameInfo.id) {
+        info.title=mInput.getText();
+        LauncherModel.updateGestureInDatabase(this,info);
+        break;
+      }
+    }
+    adapter.notifyDataSetChanged();
+  }
+  mCurrentRenameInfo=null;
+}

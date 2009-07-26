@@ -1,6 +1,11 @@
 {
+  final CellLayout layout=getCurrentDropLayout();
   final CellLayout.CellInfo cellInfo=mDragInfo;
-  int cellHSpan=cellInfo == null ? 1 : cellInfo.spanX;
-  int cellVSpan=cellInfo == null ? 1 : cellInfo.spanY;
-  return ((CellLayout)getChildAt(mCurrentScreen)).acceptChildDrop(x - xOffset,y - yOffset,cellHSpan,cellVSpan,cellInfo == null ? null : cellInfo.cell);
+  final int spanX=cellInfo == null ? 1 : cellInfo.spanX;
+  final int spanY=cellInfo == null ? 1 : cellInfo.spanY;
+  if (mVacantCache == null) {
+    final View ignoreView=cellInfo == null ? null : cellInfo.cell;
+    mVacantCache=layout.findAllVacantCells(null,ignoreView);
+  }
+  return mVacantCache.findCellForSpan(mTempEstimate,spanX,spanY,false);
 }

@@ -1,5 +1,6 @@
 {
   mRunning=true;
+  android.os.Process.setThreadPriority(Process.THREAD_PRIORITY_DEFAULT);
   final Launcher launcher=mLauncher.get();
   final ContentResolver contentResolver=launcher.getContentResolver();
   final PackageManager manager=launcher.getPackageManager();
@@ -13,7 +14,7 @@
   final ArrayList<LauncherAppWidgetInfo> desktopAppWidgets=mDesktopAppWidgets;
   final Cursor c=contentResolver.query(LauncherSettings.Favorites.CONTENT_URI,null,null,null,null);
   try {
-    final int idIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.ID);
+    final int idIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites._ID);
     final int intentIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.INTENT);
     final int titleIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.TITLE);
     final int iconTypeIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.ICON_TYPE);
@@ -46,13 +47,13 @@ case LauncherSettings.Favorites.ITEM_TYPE_APPLICATION:
 case LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT:
           intentDescription=c.getString(intentIndex);
         try {
-          intent=Intent.getIntent(intentDescription);
+          intent=Intent.parseUri(intentDescription,0);
         }
  catch (        java.net.URISyntaxException e) {
           continue;
         }
       if (itemType == LauncherSettings.Favorites.ITEM_TYPE_APPLICATION) {
-        info=getApplicationInfo(manager,intent);
+        info=getApplicationInfo(manager,intent,launcher);
       }
  else {
         info=getApplicationInfoShortcut(c,launcher,iconTypeIndex,iconPackageIndex,iconResourceIndex,iconIndex);
@@ -104,7 +105,7 @@ intentDescription=c.getString(intentIndex);
 intent=null;
 if (intentDescription != null) {
 try {
-intent=Intent.getIntent(intentDescription);
+intent=Intent.parseUri(intentDescription,0);
 }
  catch (java.net.URISyntaxException e) {
 }
@@ -174,7 +175,7 @@ launcher.onDesktopItemsLoaded();
 }
 }
 );
-if (mLoadApplications) startApplicationsLoader(launcher);
+if (mLoadApplications) startApplicationsLoader(launcher,mIsLaunching);
 }
 if (!mStopped) {
 mDesktopItemsLoaded=true;

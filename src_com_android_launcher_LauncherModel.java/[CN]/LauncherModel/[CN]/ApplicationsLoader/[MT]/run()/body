@@ -1,6 +1,6 @@
 {
   mRunning=true;
-  android.os.Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);
+  android.os.Process.setThreadPriority(mIsLaunching ? Process.THREAD_PRIORITY_DEFAULT : Process.THREAD_PRIORITY_BACKGROUND);
   final Intent mainIntent=new Intent(Intent.ACTION_MAIN,null);
   mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
   final Launcher launcher=mLauncher.get();
@@ -13,7 +13,7 @@
     final HashMap<ComponentName,ApplicationInfo> appInfoCache=mAppInfoCache;
     for (int i=0; i < count && !mStopped; i++) {
       ResolveInfo info=apps.get(i);
-      ApplicationInfo application=makeAndCacheApplicationInfo(manager,appInfoCache,info);
+      ApplicationInfo application=makeAndCacheApplicationInfo(manager,appInfoCache,info,launcher);
       if (action.add(application) && !mStopped) {
         launcher.runOnUiThread(action);
         action=new ChangeNotifier(applicationList,false);

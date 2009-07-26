@@ -1,8 +1,0 @@
-{
-  application.title=info.loadLabel(manager);
-  if (application.title == null) {
-    application.title=info.activityInfo.name;
-  }
-  application.icon=info.activityInfo.loadIcon(manager);
-  application.filtered=false;
-}

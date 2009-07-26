@@ -18,10 +18,17 @@
   v.setPressed(false);
   boolean willNotCache=v.willNotCacheDrawing();
   v.setWillNotCacheDrawing(false);
+  int color=v.getDrawingCacheBackgroundColor();
+  v.setDrawingCacheBackgroundColor(0);
+  if (color != 0) {
+    v.destroyDrawingCache();
+  }
   v.buildDrawingCache();
   Bitmap viewBitmap=v.getDrawingCache();
   int width=viewBitmap.getWidth();
   int height=viewBitmap.getHeight();
+  mTriggerWidth=width * 2 / 3;
+  mTriggerHeight=height * 2 / 3;
   Matrix scale=new Matrix();
   float scaleFactor=v.getWidth();
   scaleFactor=(scaleFactor + DRAG_SCALE) / scaleFactor;
@@ -34,6 +41,7 @@
   mDragBitmap=Bitmap.createBitmap(viewBitmap,0,0,width,height,scale,true);
   v.destroyDrawingCache();
   v.setWillNotCacheDrawing(willNotCache);
+  v.setDrawingCacheBackgroundColor(color);
   final Bitmap dragBitmap=mDragBitmap;
   mBitmapOffsetX=(dragBitmap.getWidth() - width) / 2;
   mBitmapOffsetY=(dragBitmap.getHeight() - height) / 2;

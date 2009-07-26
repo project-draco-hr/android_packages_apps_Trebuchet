@@ -1,0 +1,5 @@
+{
+  updateApplicationInfoTitleAndIcon(packageManager,info,applicationInfo,context);
+  ComponentName componentName=new ComponentName(info.activityInfo.applicationInfo.packageName,info.activityInfo.name);
+  mAppInfoCache.put(componentName,applicationInfo);
+}

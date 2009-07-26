@@ -1,6 +1,6 @@
 {
   if (mApplicationsLoader != null && mApplicationsLoader.isRunning()) {
-    startApplicationsLoader(launcher);
+    startApplicationsLoader(launcher,false);
     return;
   }
   if (packageName != null && packageName.length() > 0) {
@@ -13,10 +13,11 @@
       final ResolveInfo info=matches.get(i);
       final ApplicationInfo applicationInfo=findIntent(adapter,info.activityInfo.applicationInfo.packageName,info.activityInfo.name);
       if (applicationInfo != null) {
-        updateAndCacheApplicationInfo(packageManager,info,applicationInfo);
+        updateAndCacheApplicationInfo(packageManager,info,applicationInfo,launcher);
         changed=true;
       }
     }
+    if (syncLocked(launcher,packageName))     changed=true;
     if (changed) {
       adapter.sort(new ApplicationInfoComparator());
       adapter.notifyDataSetChanged();

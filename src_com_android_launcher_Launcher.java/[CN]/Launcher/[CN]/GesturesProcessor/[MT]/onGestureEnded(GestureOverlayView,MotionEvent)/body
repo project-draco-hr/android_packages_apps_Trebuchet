@@ -1,0 +1,29 @@
+{
+  if (CONFIG_GESTURES_IMMEDIATE_MODE) {
+    mMatcher.gesture=overlay.getGesture();
+    if (mMatcher.gesture.getLength() < GesturesConstants.LENGTH_THRESHOLD) {
+      overlay.clear(false);
+      if (mGesturesAction.intent != null) {
+        mGesturesAction.intent=null;
+        setGesturesNextPrompt(null,getString(R.string.gestures_unknown));
+      }
+    }
+ else {
+      mMatcher.run();
+    }
+  }
+ else {
+    overlay.removeCallbacks(mMatcher);
+    mMatcher.gesture=overlay.getGesture();
+    if (mMatcher.gesture.getLength() < GesturesConstants.LENGTH_THRESHOLD) {
+      overlay.clear(false);
+      if (mGesturesAction.intent != null) {
+        mGesturesAction.intent=null;
+        setGesturesNextPrompt(null,getString(R.string.gestures_unknown));
+      }
+    }
+ else {
+      overlay.postDelayed(mMatcher,GesturesConstants.MATCH_DELAY);
+    }
+  }
+}

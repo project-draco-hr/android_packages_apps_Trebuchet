@@ -1,5 +1,5 @@
 {
-  final int idIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.ID);
+  final int idIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites._ID);
   final int intentIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.INTENT);
   final int titleIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.TITLE);
   final int iconTypeIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.ICON_TYPE);
@@ -17,7 +17,7 @@
   int i=0;
   while (c.moveToNext()) {
     ContentValues values=new ContentValues(c.getColumnCount());
-    values.put(LauncherSettings.Favorites.ID,c.getLong(idIndex));
+    values.put(LauncherSettings.Favorites._ID,c.getLong(idIndex));
     values.put(LauncherSettings.Favorites.INTENT,c.getString(intentIndex));
     values.put(LauncherSettings.Favorites.TITLE,c.getString(titleIndex));
     values.put(LauncherSettings.Favorites.ICON_TYPE,c.getInt(iconTypeIndex));

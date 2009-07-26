@@ -25,6 +25,10 @@ break;
 }
 }
  else {
+if (DRAW_TARGET_SNAG && mDrawEstimated) {
+canvas.drawLine(mDragCenter[0],mDragCenter[1],mEstimatedCenter[0],mEstimatedCenter[1],mEstimatedPaint);
+canvas.drawCircle(mEstimatedCenter[0],mEstimatedCenter[1],8,mEstimatedPaint);
+}
 canvas.drawBitmap(mDragBitmap,mScrollX + mLastMotionX - mTouchOffsetX - mBitmapOffsetX,mScrollY + mLastMotionY - mTouchOffsetY - mBitmapOffsetY,mDragPaint);
 }
 }

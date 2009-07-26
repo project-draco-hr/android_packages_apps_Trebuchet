@@ -1,0 +1,12 @@
+{
+  ComponentName componentName=new ComponentName(info.activityInfo.applicationInfo.packageName,info.activityInfo.name);
+  ApplicationInfo application=appInfoCache.get(componentName);
+  if (application == null) {
+    application=new ApplicationInfo();
+    application.container=ItemInfo.NO_ID;
+    updateApplicationInfoTitleAndIcon(manager,info,application,context);
+    application.setActivity(componentName,Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
+    appInfoCache.put(componentName,application);
+  }
+  return application;
+}

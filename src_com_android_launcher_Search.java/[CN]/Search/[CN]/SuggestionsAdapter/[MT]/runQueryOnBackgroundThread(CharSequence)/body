@@ -1,4 +1,0 @@
-{
-  String query=(constraint == null) ? "" : constraint.toString();
-  return getSuggestions(mSearchable,query);
-}

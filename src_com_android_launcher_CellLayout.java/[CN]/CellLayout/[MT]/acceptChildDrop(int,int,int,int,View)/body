@@ -1,7 +1,0 @@
-{
-  int[] cellXY=mCellXY;
-  pointToCellRounded(x,y,cellXY);
-  int cellX=cellXY[0];
-  int cellY=cellXY[1];
-  return findCell(cellX,cellY,cellHSpan,cellVSpan,cell) == null;
-}

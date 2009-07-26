@@ -1,3 +1,0 @@
-int xCount
-int yCount
-boolean[][] occupied

@@ -1,0 +1,6 @@
+{
+  final TextView prompt=(TextView)mGesturesPrompt.getCurrentView();
+  prompt.setText(title);
+  prompt.setCompoundDrawablesWithIntrinsicBounds(icon,null,null,null);
+  prompt.setClickable(true);
+}

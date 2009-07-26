@@ -8,11 +8,11 @@
     w(LOG_TAG,"problem while stopping AppWidgetHost during Launcher destruction",ex);
   }
   TextKeyListener.getInstance().release();
+  hideGesturesPanel(false);
   mAllAppsGrid.clearTextFilter();
   mAllAppsGrid.setAdapter(null);
   sModel.unbind();
   sModel.abortLoaders();
   getContentResolver().unregisterContentObserver(mObserver);
-  getContentResolver().unregisterContentObserver(mAppWidgetResetObserver);
   unregisterReceiver(mApplicationsReceiver);
 }

@@ -17,7 +17,7 @@
   drawer.setOnDrawerOpenListener(drawerManager);
   drawer.setOnDrawerCloseListener(drawerManager);
   drawer.setOnDrawerScrollListener(drawerManager);
-  grid.setTextFilterEnabled(true);
+  grid.setTextFilterEnabled(false);
   grid.setDragger(dragLayer);
   grid.setLauncher(this);
   workspace.setOnLongClickListener(this);
@@ -30,4 +30,25 @@
   dragLayer.setIgnoredDropTarget(grid);
   dragLayer.setDragScoller(workspace);
   dragLayer.setDragListener(deleteZone);
+  mGesturesPanel=mInflater.inflate(R.layout.gestures,mDragLayer,false);
+  final View gesturesPanel=mGesturesPanel;
+  mGesturesPrompt=(ViewSwitcher)gesturesPanel.findViewById(R.id.gestures_actions);
+  mGesturesAction=new GesturesAction();
+  mGesturesPrompt.getChildAt(0).setOnClickListener(mGesturesAction);
+  mGesturesPrompt.getChildAt(1).setOnClickListener(mGesturesAction);
+  mGesturesAdd=(ImageView)gesturesPanel.findViewById(R.id.gestures_add);
+  final ImageView gesturesAdd=mGesturesAdd;
+  gesturesAdd.setAlpha(128);
+  gesturesAdd.setEnabled(false);
+  gesturesAdd.setOnClickListener(new View.OnClickListener(){
+    public void onClick(    View v){
+      createGesture();
+    }
+  }
+);
+  mGesturesOverlay=(GestureOverlayView)gesturesPanel.findViewById(R.id.gestures_overlay);
+  mGesturesProcessor=new GesturesProcessor();
+  final GestureOverlayView overlay=mGesturesOverlay;
+  overlay.addOnGestureListener(mGesturesProcessor);
+  overlay.getGesturePaint().setXfermode(new PorterDuffXfermode(PorterDuff.Mode.MULTIPLY));
 }

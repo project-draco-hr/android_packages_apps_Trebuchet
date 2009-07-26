@@ -1,0 +1,12 @@
+{
+  mStore.removeEntry(String.valueOf(info.id));
+  mStore.save();
+  final GesturesActivity.GesturesAdapter adapter=mAdapter;
+  adapter.setNotifyOnChange(false);
+  adapter.remove(info);
+  adapter.sort(mSorter);
+  checkForEmpty();
+  adapter.notifyDataSetChanged();
+  LauncherModel.deleteGestureFromDatabase(this,info);
+  Toast.makeText(this,R.string.gestures_delete_success,Toast.LENGTH_SHORT).show();
+}
