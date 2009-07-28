@@ -8,7 +8,6 @@
   }
  else {
     if (getContext().getResources().getConfiguration().hardKeyboardHidden == Configuration.HARDKEYBOARDHIDDEN_YES) {
-      mSearchText.setFocusable(false);
       InputMethodManager inputManager=(InputMethodManager)getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
       inputManager.showSoftInputUnchecked(0,null);
     }
