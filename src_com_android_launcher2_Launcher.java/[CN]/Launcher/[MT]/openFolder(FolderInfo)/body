@@ -4,7 +4,7 @@
     openFolder=UserFolder.fromXml(this);
   }
  else   if (folderInfo instanceof LiveFolderInfo) {
-    openFolder=com.android.launcher.LiveFolder.fromXml(this,folderInfo);
+    openFolder=com.android.launcher2.LiveFolder.fromXml(this,folderInfo);
   }
  else {
     return;
