@@ -1,12 +1,12 @@
 {
-  if (mDrawer.isOpened()) {
+  if (mAllAppsDialog.isOpen) {
     if (animated) {
-      mDrawer.animateClose();
+      mAllAppsDialog.dismiss();
     }
  else {
-      mDrawer.close();
+      mAllAppsDialog.dismiss();
     }
-    if (mDrawer.hasFocus()) {
+    if (false) {
       mWorkspace.getChildAt(mWorkspace.getCurrentScreen()).requestFocus();
     }
   }

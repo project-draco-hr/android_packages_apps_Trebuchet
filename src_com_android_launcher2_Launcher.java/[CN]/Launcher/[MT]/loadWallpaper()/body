@@ -1,6 +1,12 @@
 {
   if (sWallpaper == null) {
-    final Drawable drawable=getWallpaper();
+    final Drawable drawable;
+    if (false) {
+      drawable=getWallpaper();
+    }
+ else {
+      drawable=getResources().getDrawable(R.drawable.wallpaper_path);
+    }
     if (drawable instanceof BitmapDrawable) {
       sWallpaper=((BitmapDrawable)drawable).getBitmap();
     }

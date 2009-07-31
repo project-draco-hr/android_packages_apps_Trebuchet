@@ -3,23 +3,12 @@
   final DragLayer dragLayer=mDragLayer;
   mWorkspace=(Workspace)dragLayer.findViewById(R.id.workspace);
   final Workspace workspace=mWorkspace;
-  mDrawer=(SlidingDrawer)dragLayer.findViewById(R.id.drawer);
-  final SlidingDrawer drawer=mDrawer;
-  mAllAppsGrid=(AllAppsGridView)drawer.getContent();
-  final AllAppsGridView grid=mAllAppsGrid;
   final DeleteZone deleteZone=(DeleteZone)dragLayer.findViewById(R.id.delete_zone);
-  mHandleView=(HandleView)drawer.findViewById(R.id.all_apps);
+  mHandleView=(HandleView)findViewById(R.id.all_apps);
   mHandleView.setLauncher(this);
+  mHandleView.setOnClickListener(this);
   mHandleIcon=(TransitionDrawable)mHandleView.getDrawable();
   mHandleIcon.setCrossFadeEnabled(true);
-  drawer.lock();
-  final DrawerManager drawerManager=new DrawerManager();
-  drawer.setOnDrawerOpenListener(drawerManager);
-  drawer.setOnDrawerCloseListener(drawerManager);
-  drawer.setOnDrawerScrollListener(drawerManager);
-  grid.setTextFilterEnabled(false);
-  grid.setDragger(dragLayer);
-  grid.setLauncher(this);
   workspace.setOnLongClickListener(this);
   workspace.setDragger(dragLayer);
   workspace.setLauncher(this);
@@ -27,7 +16,6 @@
   deleteZone.setLauncher(this);
   deleteZone.setDragController(dragLayer);
   deleteZone.setHandle(mHandleView);
-  dragLayer.setIgnoredDropTarget(grid);
   dragLayer.setDragScoller(workspace);
   dragLayer.setDragListener(deleteZone);
 }

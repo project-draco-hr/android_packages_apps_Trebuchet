@@ -1,7 +1,0 @@
-{
-  if (PROFILE_DRAWER) {
-    android.os.Debug.startMethodTracing("/sdcard/launcher-drawer");
-  }
-  mWorkspace.mDrawerContentWidth=mAllAppsGrid.getWidth();
-  mWorkspace.mDrawerContentHeight=mAllAppsGrid.getHeight();
-}

@@ -14,7 +14,7 @@
     super.onSaveInstanceState(outState);
   }
   final boolean isConfigurationChange=getChangingConfigurations() != 0;
-  if (mDrawer.isOpened() && isConfigurationChange) {
+  if (mAllAppsDialog.isOpen && isConfigurationChange) {
     outState.putBoolean(RUNTIME_STATE_ALL_APPS_FOLDER,true);
   }
   if (mAddItemCellInfo != null && mAddItemCellInfo.valid && mWaitingForResult) {

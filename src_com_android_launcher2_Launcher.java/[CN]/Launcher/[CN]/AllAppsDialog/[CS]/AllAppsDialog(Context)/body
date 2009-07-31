@@ -1,0 +1,10 @@
+{
+  super(context,android.R.style.Theme_Translucent_NoTitleBar);
+  setOnCancelListener(this);
+  setOnDismissListener(this);
+  setOnShowListener(this);
+  setContentView(R.layout.all_apps);
+  AllAppsGridView grid=mAllAppsGrid=(AllAppsGridView)findViewById(R.id.all_apps);
+  grid.setTextFilterEnabled(false);
+  grid.setLauncher(Launcher.this);
+}
