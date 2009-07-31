@@ -14,5 +14,5 @@
       throw new IllegalStateException("The wallpaper must be a BitmapDrawable.");
     }
   }
-  mWorkspace.loadWallpaper(sWallpaper);
+  mWallpaperView.loadWallpaper(sWallpaper);
 }

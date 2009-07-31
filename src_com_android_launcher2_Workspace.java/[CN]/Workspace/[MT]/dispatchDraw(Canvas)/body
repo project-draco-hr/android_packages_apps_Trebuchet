@@ -1,25 +1,5 @@
 {
   boolean restore=false;
-  if (mLauncher.isDrawerUp()) {
-    final Rect clipBounds=mClipBounds;
-    canvas.getClipBounds(clipBounds);
-    clipBounds.offset(-mScrollX,-mScrollY);
-    if (mDrawerBounds.contains(clipBounds)) {
-      return;
-    }
-  }
- else   if (mLauncher.isDrawerMoving()) {
-    restore=true;
-    canvas.save(Canvas.CLIP_SAVE_FLAG);
-    final View view=mLauncher.getDrawerHandle();
-    final int top=view.getTop() + view.getHeight();
-    canvas.clipRect(mScrollX,top,mScrollX + mDrawerContentWidth,top + mDrawerContentHeight,Region.Op.DIFFERENCE);
-  }
-  float x=mScrollX * mWallpaperOffset;
-  if (x + mWallpaperWidth < mRight - mLeft) {
-    x=mRight - mLeft - mWallpaperWidth;
-  }
-  canvas.drawBitmap(mWallpaper,x,(mBottom - mTop - mWallpaperHeight) / 2,mPaint);
   boolean fastDraw=mTouchState != TOUCH_STATE_SCROLLING && mNextScreen == INVALID_SCREEN;
   if (fastDraw) {
     drawChild(canvas,getChildAt(mCurrentScreen),getDrawingTime());

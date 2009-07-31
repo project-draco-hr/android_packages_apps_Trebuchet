@@ -1,0 +1,4 @@
+{
+  mPaint=new Paint();
+  mPaint.setDither(false);
+}

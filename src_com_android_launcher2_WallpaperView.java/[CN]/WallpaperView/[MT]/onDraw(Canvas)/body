@@ -1,0 +1,8 @@
+{
+  boolean restore=false;
+  float x=mScrollX * mWallpaperOffset;
+  if (x + mWallpaperWidth < mRight - mLeft) {
+    x=mRight - mLeft - mWallpaperWidth;
+  }
+  canvas.drawBitmap(mWallpaper,x,(mBottom - mTop - mWallpaperHeight) / 2,mPaint);
+}

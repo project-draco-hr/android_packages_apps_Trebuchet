@@ -22,12 +22,14 @@ mLastMotionX=x;
 if (deltaX < 0) {
   if (mScrollX > 0) {
     scrollBy(Math.max(-mScrollX,deltaX),0);
+    mWallpaper.scrollTo(mScrollX,mScrollY);
   }
 }
  else if (deltaX > 0) {
   final int availableToScroll=getChildAt(getChildCount() - 1).getRight() - mScrollX - getWidth();
   if (availableToScroll > 0) {
     scrollBy(Math.min(availableToScroll,deltaX),0);
+    mWallpaper.scrollTo(mScrollX,mScrollY);
   }
 }
 }

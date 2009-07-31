@@ -1,6 +1,8 @@
 {
   mDragLayer=(DragLayer)findViewById(R.id.drag_layer);
   final DragLayer dragLayer=mDragLayer;
+  mWallpaperView=(WallpaperView)dragLayer.findViewById(R.id.wallpaper);
+  final WallpaperView wallpaper=mWallpaperView;
   mWorkspace=(Workspace)dragLayer.findViewById(R.id.workspace);
   final Workspace workspace=mWorkspace;
   final DeleteZone deleteZone=(DeleteZone)dragLayer.findViewById(R.id.delete_zone);
@@ -12,7 +14,9 @@
   workspace.setOnLongClickListener(this);
   workspace.setDragger(dragLayer);
   workspace.setLauncher(this);
+  workspace.setWallpaper(wallpaper);
   loadWallpaper();
+  wallpaper.setScreenCount(workspace.getScreenCount());
   deleteZone.setLauncher(this);
   deleteZone.setDragController(dragLayer);
   deleteZone.setHandle(mHandleView);
