@@ -11,7 +11,7 @@
     if (mAllAppsDialog.isOpen) {
     }
  else {
-      showDialog(DIALOG_ALL_APPS);
+      showAllAppsDialog();
     }
   }
 }
