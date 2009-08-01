@@ -5,4 +5,5 @@
   final ViewConfiguration configuration=ViewConfiguration.get(getContext());
   mTouchSlop=configuration.getScaledTouchSlop();
   mMaximumVelocity=configuration.getScaledMaximumFlingVelocity();
+  mTween=new SymmetricalLinearTween(true,250,this);
 }

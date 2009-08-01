@@ -1,0 +1,9 @@
+{
+switch (keyCode) {
+case KeyEvent.KEYCODE_BACK:
+    closeAllAppsDialog(true);
+  return true;
+default :
+return super.onKeyDown(keyCode,event);
+}
+}

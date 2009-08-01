@@ -19,7 +19,7 @@
       if (!mWorkspace.isDefaultScreenShowing()) {
         mWorkspace.moveToDefaultScreen();
       }
-      closeDrawer();
+      closeAllAppsDialog(true);
       final View v=getWindow().peekDecorView();
       if (v != null && v.getWindowToken() != null) {
         InputMethodManager imm=(InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
@@ -27,7 +27,7 @@
       }
     }
  else {
-      closeDrawer(false);
+      closeAllAppsDialog(false);
     }
   }
 }

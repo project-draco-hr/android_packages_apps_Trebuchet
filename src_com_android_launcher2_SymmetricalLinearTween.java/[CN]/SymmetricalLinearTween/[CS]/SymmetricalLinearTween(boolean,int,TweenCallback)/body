@@ -1,0 +1,7 @@
+{
+  mValue=initial ? 1.0f : 0.0f;
+  mDirection=initial;
+  mDuration=duration;
+  mCallback=callback;
+  mHandler=new Handler();
+}

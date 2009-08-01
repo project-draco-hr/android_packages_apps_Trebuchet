@@ -1,4 +1,5 @@
 {
   mAllAppsDialog.isOpen=true;
   showDialog(DIALOG_ALL_APPS);
+  mWorkspace.hide();
 }

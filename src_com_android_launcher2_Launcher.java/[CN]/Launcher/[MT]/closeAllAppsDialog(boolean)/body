@@ -6,8 +6,8 @@
  else {
       mAllAppsDialog.dismiss();
     }
-    if (false) {
-      mWorkspace.getChildAt(mWorkspace.getCurrentScreen()).requestFocus();
-    }
+    mAllAppsDialog.isOpen=false;
+    mWorkspace.getChildAt(mWorkspace.getCurrentScreen()).requestFocus();
+    mWorkspace.show();
   }
 }
