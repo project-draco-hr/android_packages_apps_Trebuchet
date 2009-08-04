@@ -1,0 +1,6 @@
+{
+  WindowManager.LayoutParams lp=mLayoutParams;
+  lp.x=touchX - mRegistrationX;
+  lp.y=touchY - mRegistrationY;
+  mWindowManager.updateViewLayout(this,lp);
+}

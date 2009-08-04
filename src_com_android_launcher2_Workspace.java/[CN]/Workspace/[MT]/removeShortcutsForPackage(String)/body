@@ -44,7 +44,11 @@
     }
     childCount=childrenToRemove.size();
     for (int j=0; j < childCount; j++) {
-      layout.removeViewInLayout(childrenToRemove.get(j));
+      View child=childrenToRemove.get(j);
+      layout.removeViewInLayout(child);
+      if (child instanceof DropTarget) {
+        mDragController.removeDropTarget((DropTarget)child);
+      }
     }
     if (childCount > 0) {
       layout.requestLayout();

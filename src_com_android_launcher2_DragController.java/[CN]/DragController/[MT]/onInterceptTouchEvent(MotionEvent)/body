@@ -1,0 +1,22 @@
+{
+  final int action=ev.getAction();
+  final float screenX=ev.getRawX();
+  final float screenY=ev.getRawY();
+switch (action) {
+case MotionEvent.ACTION_MOVE:
+    break;
+case MotionEvent.ACTION_DOWN:
+  mMotionDownX=screenX;
+mMotionDownY=screenY;
+mLastDropTarget=null;
+break;
+case MotionEvent.ACTION_CANCEL:
+case MotionEvent.ACTION_UP:
+if (mDragging) {
+drop(screenX,screenY);
+}
+endDrag();
+break;
+}
+return mDragging;
+}

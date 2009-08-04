@@ -1,0 +1,79 @@
+{
+  View scrollView=mScrollView;
+  if (!mDragging) {
+    return false;
+  }
+  final int action=ev.getAction();
+  final float x=ev.getRawX();
+  final float y=ev.getRawY();
+switch (action) {
+case MotionEvent.ACTION_DOWN:
+    mMotionDownX=x;
+  mMotionDownY=y;
+if ((x < SCROLL_ZONE) || (x > scrollView.getWidth() - SCROLL_ZONE)) {
+  mScrollState=SCROLL_WAITING_IN_ZONE;
+  mHandler.postDelayed(mScrollRunnable,SCROLL_DELAY);
+}
+ else {
+  mScrollState=SCROLL_OUTSIDE_ZONE;
+}
+break;
+case MotionEvent.ACTION_MOVE:
+mDragView.move((int)ev.getRawX(),(int)ev.getRawY());
+final int[] coordinates=mCoordinatesTemp;
+DropTarget dropTarget=findDropTarget((int)x,(int)y,coordinates);
+if (dropTarget != null) {
+if (mLastDropTarget == dropTarget) {
+dropTarget.onDragOver(mDragSource,coordinates[0],coordinates[1],(int)mTouchOffsetX,(int)mTouchOffsetY,mDragView,mDragInfo);
+}
+ else {
+if (mLastDropTarget != null) {
+mLastDropTarget.onDragExit(mDragSource,coordinates[0],coordinates[1],(int)mTouchOffsetX,(int)mTouchOffsetY,mDragView,mDragInfo);
+}
+dropTarget.onDragEnter(mDragSource,coordinates[0],coordinates[1],(int)mTouchOffsetX,(int)mTouchOffsetY,mDragView,mDragInfo);
+}
+}
+ else {
+if (mLastDropTarget != null) {
+mLastDropTarget.onDragExit(mDragSource,coordinates[0],coordinates[1],(int)mTouchOffsetX,(int)mTouchOffsetY,mDragView,mDragInfo);
+}
+}
+mLastDropTarget=dropTarget;
+boolean inDeleteRegion=false;
+if (mDeleteRegion != null) {
+inDeleteRegion=mDeleteRegion.contains(ev.getRawX(),ev.getRawY());
+}
+if (!inDeleteRegion && x < SCROLL_ZONE) {
+if (mScrollState == SCROLL_OUTSIDE_ZONE) {
+mScrollState=SCROLL_WAITING_IN_ZONE;
+mScrollRunnable.setDirection(SCROLL_LEFT);
+mHandler.postDelayed(mScrollRunnable,SCROLL_DELAY);
+}
+}
+ else if (!inDeleteRegion && x > scrollView.getWidth() - SCROLL_ZONE) {
+if (mScrollState == SCROLL_OUTSIDE_ZONE) {
+mScrollState=SCROLL_WAITING_IN_ZONE;
+mScrollRunnable.setDirection(SCROLL_RIGHT);
+mHandler.postDelayed(mScrollRunnable,SCROLL_DELAY);
+}
+}
+ else {
+if (mScrollState == SCROLL_WAITING_IN_ZONE) {
+mScrollState=SCROLL_OUTSIDE_ZONE;
+mScrollRunnable.setDirection(SCROLL_RIGHT);
+mHandler.removeCallbacks(mScrollRunnable);
+}
+}
+break;
+case MotionEvent.ACTION_UP:
+mHandler.removeCallbacks(mScrollRunnable);
+if (mDragging) {
+drop(x,y);
+}
+endDrag();
+break;
+case MotionEvent.ACTION_CANCEL:
+endDrag();
+}
+return true;
+}

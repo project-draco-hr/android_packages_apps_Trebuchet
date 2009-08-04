@@ -10,5 +10,8 @@
     if (!(child instanceof Folder)) {
       child.setOnLongClickListener(mLongClickListener);
     }
+    if (child instanceof DropTarget) {
+      mDragController.addDropTarget((DropTarget)child);
+    }
   }
 }

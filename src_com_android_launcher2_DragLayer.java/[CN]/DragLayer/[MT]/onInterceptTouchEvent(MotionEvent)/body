@@ -1,22 +1,3 @@
 {
-  final int action=ev.getAction();
-  final float x=ev.getX();
-  final float y=ev.getY();
-switch (action) {
-case MotionEvent.ACTION_MOVE:
-    break;
-case MotionEvent.ACTION_DOWN:
-  mLastMotionX=x;
-mLastMotionY=y;
-mLastDropTarget=null;
-break;
-case MotionEvent.ACTION_CANCEL:
-case MotionEvent.ACTION_UP:
-if (mShouldDrop && drop(x,y)) {
-mShouldDrop=false;
-}
-endDrag();
-break;
-}
-return mDragging;
+  return mDragController.onInterceptTouchEvent(ev);
 }

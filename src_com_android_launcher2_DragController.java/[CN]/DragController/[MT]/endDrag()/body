@@ -1,0 +1,19 @@
+{
+  if (mDragging) {
+    mDragging=false;
+    if (mOriginator != null) {
+      mOriginator.setVisibility(View.VISIBLE);
+    }
+    if (mListener != null) {
+      mListener.onDragEnd();
+    }
+    if (mDragView != null) {
+      mDragView.remove();
+      mDragView=null;
+    }
+    if (mDragBitmap != null) {
+      mDragBitmap.recycle();
+      mDragBitmap=null;
+    }
+  }
+}

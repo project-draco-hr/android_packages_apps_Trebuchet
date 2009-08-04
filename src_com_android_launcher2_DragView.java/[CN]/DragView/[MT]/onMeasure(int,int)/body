@@ -1,0 +1,5 @@
+{
+  int widthSize=resolveSize(mBitmap.getWidth(),widthMeasureSpec);
+  int heightSize=resolveSize(mBitmap.getHeight(),heightMeasureSpec);
+  setMeasuredDimension(widthSize,heightSize);
+}

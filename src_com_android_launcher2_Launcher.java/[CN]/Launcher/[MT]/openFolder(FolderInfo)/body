@@ -9,7 +9,7 @@
  else {
     return;
   }
-  openFolder.setDragger(mDragLayer);
+  openFolder.setDragController(mDragController);
   openFolder.setLauncher(this);
   openFolder.bind(folderInfo);
   folderInfo.opened=true;

@@ -1,9 +1,3 @@
 {
   super(context,attrs);
-  final int srcColor=context.getResources().getColor(R.color.delete_color_filter);
-  mTrashPaint.setColorFilter(new PorterDuffColorFilter(srcColor,PorterDuff.Mode.SRC_ATOP));
-  int snagColor=context.getResources().getColor(R.color.snag_callout_color);
-  mEstimatedPaint.setColor(snagColor);
-  mEstimatedPaint.setStrokeWidth(3);
-  mEstimatedPaint.setAntiAlias(true);
 }

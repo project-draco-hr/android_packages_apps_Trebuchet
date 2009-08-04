@@ -1,7 +1,7 @@
 {
   if (mTrashMode) {
     mTrashMode=false;
-    mDragLayer.setDeleteRegion(null);
+    mDragController.setDeleteRegion(null);
     startAnimation(mOutAnimation);
     mHandle.startAnimation(mHandleInAnimation);
     setVisibility(GONE);

@@ -3,6 +3,9 @@
     if (target != this && mDragInfo != null) {
       final CellLayout cellLayout=(CellLayout)getChildAt(mDragInfo.screen);
       cellLayout.removeView(mDragInfo.cell);
+      if (mDragInfo.cell instanceof DropTarget) {
+        mDragController.removeDropTarget((DropTarget)mDragInfo.cell);
+      }
       final Object tag=mDragInfo.cell.getTag();
       Launcher.getModel().removeDesktopItem((ItemInfo)tag);
     }

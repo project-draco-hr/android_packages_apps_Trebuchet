@@ -1,0 +1,4 @@
+{
+  mAnimationScale=(1.0f + ((mScale - 1.0f) * value)) / mScale;
+  invalidate();
+}

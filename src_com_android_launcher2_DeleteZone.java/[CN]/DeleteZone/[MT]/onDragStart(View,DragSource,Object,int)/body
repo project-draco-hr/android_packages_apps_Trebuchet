@@ -6,7 +6,7 @@
     final int[] location=mLocation;
     getLocationOnScreen(location);
     mRegion.set(location[0],location[1],location[0] + mRight - mLeft,location[1] + mBottom - mTop);
-    mDragLayer.setDeleteRegion(mRegion);
+    mDragController.setDeleteRegion(mRegion);
     mTransition.resetTransition();
     startAnimation(mInAnimation);
     mHandle.startAnimation(mHandleOutAnimation);
