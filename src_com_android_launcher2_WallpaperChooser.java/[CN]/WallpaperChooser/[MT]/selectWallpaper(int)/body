@@ -4,8 +4,8 @@
   }
   mIsWallpaperSet=true;
   try {
-    InputStream stream=getResources().openRawResource(mImages.get(position));
-    setWallpaper(stream,mNames.get(position));
+    WallpaperManager wpm=(WallpaperManager)getSystemService(WALLPAPER_SERVICE);
+    wpm.set(mImages.get(position));
     setResult(RESULT_OK);
     finish();
   }

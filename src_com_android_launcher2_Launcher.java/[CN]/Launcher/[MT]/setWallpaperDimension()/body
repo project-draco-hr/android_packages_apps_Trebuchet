@@ -1,13 +1,8 @@
 {
-  IBinder binder=ServiceManager.getService(WALLPAPER_SERVICE);
-  IWallpaperService wallpaperService=IWallpaperService.Stub.asInterface(binder);
+  WallpaperManager wpm=(WallpaperManager)getSystemService(WALLPAPER_SERVICE);
   Display display=getWindowManager().getDefaultDisplay();
   boolean isPortrait=display.getWidth() < display.getHeight();
   final int width=isPortrait ? display.getWidth() : display.getHeight();
   final int height=isPortrait ? display.getHeight() : display.getWidth();
-  try {
-    wallpaperService.setDimensionHints(width * WALLPAPER_SCREENS_SPAN,height);
-  }
- catch (  RemoteException e) {
-  }
+  wpm.setDimensionHints(width * WALLPAPER_SCREENS_SPAN,height);
 }
