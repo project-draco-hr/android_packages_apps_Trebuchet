@@ -47,25 +47,4 @@
   mAllocScratch=Allocation.createSized(mRS,Element.USER_I32,mAllocScratchBuf.length);
   mAllocScratch.data(mAllocScratchBuf);
   Log.e("rs","Done loading named");
-{
-    mIcons=new Allocation[29];
-    mAllocIconIDBuf=new int[mIcons.length];
-    mAllocIconID=Allocation.createSized(mRS,Element.USER_I32,mAllocIconIDBuf.length);
-    mLabels=new Allocation[29];
-    mAllocLabelIDBuf=new int[mLabels.length];
-    mAllocLabelID=Allocation.createSized(mRS,Element.USER_I32,mLabels.length);
-    Element ie8888=Element.RGBA_8888;
-    for (int i=0; i < mIcons.length; i++) {
-      mIcons[i]=Allocation.createFromBitmapResource(mRS,mRes,R.raw.maps,ie8888,true);
-      mLabels[i]=makeTextBitmap("Maps");
-    }
-    for (int ct=0; ct < mIcons.length; ct++) {
-      mIcons[ct].uploadToTexture(0);
-      mLabels[ct].uploadToTexture(0);
-      mAllocIconIDBuf[ct]=mIcons[ct].getID();
-      mAllocLabelIDBuf[ct]=mLabels[ct].getID();
-    }
-    mAllocIconID.data(mAllocIconIDBuf);
-    mAllocLabelID.data(mAllocLabelIDBuf);
-  }
 }

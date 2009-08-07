@@ -1,0 +1,6 @@
+{
+  Bitmap b=bubble.createTextBitmap(label);
+  Allocation a=Allocation.createFromBitmap(mRS,b,Element.RGBA_8888,true);
+  b.recycle();
+  return a;
+}

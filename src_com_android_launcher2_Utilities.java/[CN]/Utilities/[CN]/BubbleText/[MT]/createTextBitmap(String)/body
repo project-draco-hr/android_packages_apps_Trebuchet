@@ -1,0 +1,21 @@
+{
+  Bitmap b=Bitmap.createBitmap(mBitmapWidth,mBitmapHeight,Bitmap.Config.ARGB_8888);
+  Canvas c=new Canvas(b);
+  StaticLayout layout=new StaticLayout(text,mTextPaint,(int)mTextWidth,Alignment.ALIGN_CENTER,1,0,true);
+  int lineCount=layout.getLineCount();
+  if (lineCount > MAX_LINES) {
+    lineCount=MAX_LINES;
+  }
+  if (lineCount > 0) {
+    RectF bubbleRect=mBubbleRect;
+    bubbleRect.bottom=(int)((lineCount * mLineHeight) + mLeading + mLeading+ 0.0f);
+    c.drawRoundRect(bubbleRect,mCornerRadius,mCornerRadius,mRectPaint);
+    Log.d(Launcher.LOG_TAG,"bubbleRect=" + bubbleRect);
+  }
+  for (int i=0; i < lineCount; i++) {
+    int x=(int)((mBubbleRect.width() - layout.getLineMax(i)) / 2.0f);
+    int y=mFirstLineY + (i * mLineHeight);
+    c.drawText(text.substring(layout.getLineStart(i),layout.getLineEnd(i)),x,y,mTextPaint);
+  }
+  return b;
+}

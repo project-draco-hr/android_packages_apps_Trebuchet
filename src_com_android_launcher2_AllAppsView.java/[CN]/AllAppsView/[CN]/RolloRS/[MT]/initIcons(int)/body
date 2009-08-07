@@ -1,0 +1,23 @@
+{
+  mIcons=new Allocation[count];
+  mAllocIconIDBuf=new int[count];
+  mAllocIconID=Allocation.createSized(mRS,Element.USER_I32,mAllocIconIDBuf.length);
+  mLabels=new Allocation[count];
+  mAllocLabelIDBuf=new int[mLabels.length];
+  mAllocLabelID=Allocation.createSized(mRS,Element.USER_I32,mLabels.length);
+  Element ie8888=Element.RGBA_8888;
+  final Utilities.BubbleText bubble=new Utilities.BubbleText(getContext());
+  for (int i=0; i < count; i++) {
+    mIcons[i]=Allocation.createFromBitmapResource(mRS,mRes,R.raw.maps,ie8888,true);
+    mLabels[i]=makeTextBitmap(bubble,i % 9 == 0 ? "Google Maps" : "Maps");
+  }
+  for (int ct=0; ct < count; ct++) {
+    mIcons[ct].uploadToTexture(0);
+    mLabels[ct].uploadToTexture(0);
+    mAllocIconIDBuf[ct]=mIcons[ct].getID();
+    mAllocLabelIDBuf[ct]=mLabels[ct].getID();
+  }
+  mAllocIconID.data(mAllocIconIDBuf);
+  mAllocLabelID.data(mAllocLabelIDBuf);
+  Log.e("rs","Done loading icons");
+}

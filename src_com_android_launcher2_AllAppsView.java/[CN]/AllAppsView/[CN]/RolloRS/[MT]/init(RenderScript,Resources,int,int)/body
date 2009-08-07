@@ -4,5 +4,6 @@
   mWidth=width;
   mHeight=height;
   initNamed();
+  initIcons(29);
   initRS();
 }
