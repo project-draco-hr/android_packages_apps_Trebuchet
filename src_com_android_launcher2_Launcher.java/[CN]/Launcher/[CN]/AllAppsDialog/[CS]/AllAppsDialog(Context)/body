@@ -4,10 +4,7 @@
   setOnDismissListener(this);
   setOnShowListener(this);
   setContentView(R.layout.all_apps);
-  AllAppsGridView grid=mAllAppsGrid=(AllAppsGridView)findViewById(R.id.all_apps);
+  AllAppsView grid=mAllAppsGrid=(AllAppsView)findViewById(R.id.all_apps);
   DragLayer dragLayer=(DragLayer)findViewById(R.id.drag_layer);
   dragLayer.setDragController(mDragController);
-  grid.setTextFilterEnabled(false);
-  grid.setDragController(mDragController);
-  grid.setLauncher(Launcher.this);
 }

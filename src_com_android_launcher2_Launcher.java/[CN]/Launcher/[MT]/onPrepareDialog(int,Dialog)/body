@@ -1,16 +1,15 @@
 {
 switch (id) {
 case DIALOG_ALL_APPS:
-    mAllAppsGrid.onPrepareDialog();
-  break;
+    break;
 case DIALOG_CREATE_SHORTCUT:
-break;
+  break;
 case DIALOG_RENAME_FOLDER:
 if (mFolderInfo != null) {
-EditText input=(EditText)dialog.findViewById(R.id.folder_name);
-final CharSequence text=mFolderInfo.title;
-input.setText(text);
-input.setSelection(0,text.length());
+  EditText input=(EditText)dialog.findViewById(R.id.folder_name);
+  final CharSequence text=mFolderInfo.title;
+  input.setText(text);
+  input.setSelection(0,text.length());
 }
 break;
 }
