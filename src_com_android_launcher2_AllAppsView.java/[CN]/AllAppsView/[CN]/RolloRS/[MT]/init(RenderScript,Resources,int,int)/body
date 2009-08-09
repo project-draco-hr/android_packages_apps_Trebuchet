@@ -1,9 +1,0 @@
-{
-  mRS=rs;
-  mRes=res;
-  mWidth=width;
-  mHeight=height;
-  initNamed();
-  initIcons(29);
-  initRS();
-}
