@@ -1,0 +1,8 @@
+{
+  mRes=res;
+  mWidth=width;
+  mHeight=height;
+  initGl();
+  initData();
+  initRs();
+}

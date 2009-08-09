@@ -1,4 +1,3 @@
-RenderScript rs
 Resources res
 int width
 int height
