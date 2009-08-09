@@ -1,0 +1,30 @@
+{
+  Field[] fields=this.getClass().getFields();
+  if (mBuffer == null) {
+    int maxIndex=0;
+    for (    Field f : fields) {
+      AllocationIndex index=f.getAnnotation(AllocationIndex.class);
+      if (index != null) {
+        int value=index.value();
+        if (value > maxIndex) {
+          maxIndex=value;
+        }
+      }
+    }
+    mBuffer=new int[maxIndex + 1];
+    mAlloc=Allocation.createSized(mRS,Element.USER_I32,mBuffer.length);
+  }
+  int[] buf=mBuffer;
+  for (  Field f : fields) {
+    AllocationIndex index=f.getAnnotation(AllocationIndex.class);
+    if (index != null) {
+      try {
+        buf[index.value()]=f.getInt(this);
+      }
+ catch (      IllegalAccessException ex) {
+        throw new RuntimeException(ex);
+      }
+    }
+  }
+  mAlloc.data(buf);
+}

@@ -8,6 +8,9 @@
   sb.setMin(Sampler.Value.NEAREST);
   sb.setMag(Sampler.Value.NEAREST);
   mSamplerText=sb.create();
+  ProgramFragment.Builder dbg=new ProgramFragment.Builder(mRS,null,null);
+  mPFDebug=dbg.create();
+  mPFDebug.setName("PFDebug");
   ProgramFragment.Builder bf=new ProgramFragment.Builder(mRS,null,null);
   bf.setTexEnable(true,0);
   bf.setTexEnvMode(ProgramFragment.EnvMode.MODULATE,0);

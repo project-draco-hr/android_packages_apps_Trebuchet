@@ -1,4 +1,5 @@
 {
+  mParams=new Params(mRS);
   mIcons=new Allocation[count];
   mAllocIconIDBuf=new int[count];
   mAllocIconID=Allocation.createSized(mRS,Element.USER_I32,mAllocIconIDBuf.length);
@@ -7,6 +8,11 @@
   mAllocLabelID=Allocation.createSized(mRS,Element.USER_I32,mLabels.length);
   Element ie8888=Element.RGBA_8888;
   final Utilities.BubbleText bubble=new Utilities.BubbleText(getContext());
+  mParams.bubbleWidth=bubble.getBubbleWidth();
+  mParams.bubbleHeight=bubble.getMaxBubbleHeight();
+  mParams.bubbleBitmapWidth=bubble.getBitmapWidth();
+  mParams.bubbleBitmapHeight=bubble.getBitmapHeight();
+  mParams.save();
   for (int i=0; i < count; i++) {
     mIcons[i]=Allocation.createFromBitmapResource(mRS,mRes,R.raw.maps,ie8888,true);
     mLabels[i]=makeTextBitmap(bubble,i % 9 == 0 ? "Google Maps" : "Maps");

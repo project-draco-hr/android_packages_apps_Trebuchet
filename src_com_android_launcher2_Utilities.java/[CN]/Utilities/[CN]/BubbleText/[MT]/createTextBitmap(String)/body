@@ -8,9 +8,8 @@
   }
   if (lineCount > 0) {
     RectF bubbleRect=mBubbleRect;
-    bubbleRect.bottom=(int)((lineCount * mLineHeight) + mLeading + mLeading+ 0.0f);
+    bubbleRect.bottom=height(lineCount);
     c.drawRoundRect(bubbleRect,mCornerRadius,mCornerRadius,mRectPaint);
-    Log.d(Launcher.LOG_TAG,"bubbleRect=" + bubbleRect);
   }
   for (int i=0; i < lineCount; i++) {
     int x=(int)((mBubbleRect.width() - layout.getLineMax(i)) / 2.0f);
