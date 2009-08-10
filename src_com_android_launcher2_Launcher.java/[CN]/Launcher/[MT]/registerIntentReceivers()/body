@@ -1,13 +1,4 @@
 {
-  if (sWallpaperReceiver == null) {
-    final Application application=getApplication();
-    sWallpaperReceiver=new WallpaperIntentReceiver(application,this);
-    IntentFilter filter=new IntentFilter(Intent.ACTION_WALLPAPER_CHANGED);
-    application.registerReceiver(sWallpaperReceiver,filter);
-  }
- else {
-    sWallpaperReceiver.setLauncher(this);
-  }
   IntentFilter filter=new IntentFilter(Intent.ACTION_PACKAGE_ADDED);
   filter.addAction(Intent.ACTION_PACKAGE_REMOVED);
   filter.addAction(Intent.ACTION_PACKAGE_CHANGED);

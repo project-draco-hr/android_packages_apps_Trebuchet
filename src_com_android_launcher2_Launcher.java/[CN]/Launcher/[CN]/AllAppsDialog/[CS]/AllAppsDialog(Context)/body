@@ -4,7 +4,7 @@
   setOnDismissListener(this);
   setOnShowListener(this);
   setContentView(R.layout.all_apps);
-  AllAppsView grid=mAllAppsGrid=(AllAppsView)findViewById(R.id.all_apps);
+  mAllAppsGrid=(AllAppsView)findViewById(R.id.all_apps);
   DragLayer dragLayer=(DragLayer)findViewById(R.id.drag_layer);
   dragLayer.setDragController(mDragController);
 }

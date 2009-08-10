@@ -1,4 +1,0 @@
-{
-  mApplication=application;
-  setLauncher(launcher);
-}

@@ -1,25 +1,19 @@
 {
   mDragController=new DragController(this);
   DragController dragController=mDragController;
-  mDragLayer=(DragLayer)findViewById(R.id.drag_layer);
-  final DragLayer dragLayer=mDragLayer;
+  DragLayer dragLayer=(DragLayer)findViewById(R.id.drag_layer);
   dragLayer.setDragController(dragController);
-  mWallpaperView=(WallpaperView)findViewById(R.id.wallpaper);
-  final WallpaperView wallpaper=mWallpaperView;
   mWorkspace=(Workspace)dragLayer.findViewById(R.id.workspace);
   final Workspace workspace=mWorkspace;
   final DeleteZone deleteZone=(DeleteZone)dragLayer.findViewById(R.id.delete_zone);
   mHandleView=(HandleView)findViewById(R.id.all_apps);
   mHandleView.setLauncher(this);
   mHandleView.setOnClickListener(this);
-  mHandleIcon=(TransitionDrawable)mHandleView.getDrawable();
-  mHandleIcon.setCrossFadeEnabled(true);
+  TransitionDrawable handleIcon=(TransitionDrawable)mHandleView.getDrawable();
+  handleIcon.setCrossFadeEnabled(true);
   workspace.setOnLongClickListener(this);
   workspace.setDragController(dragController);
   workspace.setLauncher(this);
-  workspace.setWallpaper(wallpaper);
-  loadWallpaper();
-  wallpaper.setScreenCount(workspace.getScreenCount());
   deleteZone.setLauncher(this);
   deleteZone.setDragController(dragController);
   deleteZone.setHandle(mHandleView);
