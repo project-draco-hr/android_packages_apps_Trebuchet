@@ -2,6 +2,7 @@
   if (mScroller.computeScrollOffset()) {
     mScrollX=mScroller.getCurrX();
     mScrollY=mScroller.getCurrY();
+    updateWallpaperOffset();
     postInvalidate();
   }
  else   if (mNextScreen != INVALID_SCREEN) {
