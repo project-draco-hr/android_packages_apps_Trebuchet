@@ -15,6 +15,7 @@
   }
   if (mFirstLayout) {
     scrollTo(mCurrentScreen * width,0);
+    updateWallpaperOffset(width * (getChildCount() - 1));
     mFirstLayout=false;
   }
 }

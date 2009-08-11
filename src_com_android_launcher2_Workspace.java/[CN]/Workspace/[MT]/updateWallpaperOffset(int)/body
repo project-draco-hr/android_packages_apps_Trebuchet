@@ -1,0 +1,3 @@
+{
+  mWallpaperManager.setWallpaperOffsets(getWindowToken(),mScrollX / (float)scrollRange,0);
+}

@@ -1,4 +1,3 @@
 {
-  int scrollRange=getChildAt(getChildCount() - 1).getRight() - getWidth();
-  mWallpaperManager.setWallpaperOffsets(getWindowToken(),mScrollX / (float)scrollRange,0);
+  updateWallpaperOffset(getChildAt(getChildCount() - 1).getRight() - (mRight - mLeft));
 }
