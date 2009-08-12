@@ -1,4 +1,0 @@
-{
-  super.onCreate(surfaceHolder);
-  surfaceHolder.setType(SurfaceHolder.SURFACE_TYPE_GPU);
-}

@@ -1,8 +1,0 @@
-{
-  super.onSurfaceCreated(holder);
-  Surface surface=null;
-  while (surface == null) {
-    surface=holder.getSurface();
-  }
-  mRs=new RenderScript(surface);
-}

@@ -1,4 +1,0 @@
-{
-  super.onSurfaceDestroyed(holder);
-  mRenderer.destroy();
-}
