@@ -1,0 +1,27 @@
+{
+  Sampler.Builder bs=new Sampler.Builder(mRS);
+  bs.setMin(LINEAR);
+  bs.setMag(LINEAR);
+  bs.setWrapS(CLAMP);
+  bs.setWrapT(CLAMP);
+  mSampler=bs.create();
+  ProgramFragment.Builder b;
+  b=new ProgramFragment.Builder(mRS,null,null);
+  b.setTexEnable(true,0);
+  b.setTexEnvMode(REPLACE,0);
+  mPfBackground=b.create();
+  mPfBackground.setName("PFBackground");
+  mPfBackground.bindSampler(mSampler,0);
+  bs=new Sampler.Builder(mRS);
+  bs.setMin(LINEAR);
+  bs.setMag(LINEAR);
+  bs.setWrapS(WRAP);
+  bs.setWrapT(WRAP);
+  mNightSampler=bs.create();
+  b=new ProgramFragment.Builder(mRS,null,null);
+  b.setTexEnable(true,0);
+  b.setTexEnvMode(REPLACE,0);
+  mPfNight=b.create();
+  mPfNight.setName("PFNight");
+  mPfNight.bindSampler(mNightSampler,0);
+}
