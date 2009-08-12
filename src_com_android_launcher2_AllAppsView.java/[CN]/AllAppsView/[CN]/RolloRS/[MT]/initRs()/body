@@ -2,12 +2,13 @@
   ScriptC.Builder sb=new ScriptC.Builder(mRS);
   sb.setScript(mRes,R.raw.rollo);
   sb.setRoot(true);
+  sb.addDefines(Defines.class);
   mScript=sb.create();
   mScript.setClearColor(0.0f,0.0f,0.0f,0.0f);
-  mScript.bindAllocation(mParams.getAllocation(),ALLOC_PARAMS);
-  mScript.bindAllocation(mState.getAllocation(),ALLOC_STATE);
-  mScript.bindAllocation(mAllocIconID,ALLOC_ICON_IDS);
-  mScript.bindAllocation(mAllocScratch,ALLOC_SCRATCH);
-  mScript.bindAllocation(mAllocLabelID,ALLOC_LABEL_IDS);
+  mScript.bindAllocation(mParams.getAllocation(),Defines.ALLOC_PARAMS);
+  mScript.bindAllocation(mState.getAllocation(),Defines.ALLOC_STATE);
+  mScript.bindAllocation(mAllocIconID,Defines.ALLOC_ICON_IDS);
+  mScript.bindAllocation(mAllocScratch,Defines.ALLOC_SCRATCH);
+  mScript.bindAllocation(mAllocLabelID,Defines.ALLOC_LABEL_IDS);
   mRS.contextBindRootScript(mScript);
 }

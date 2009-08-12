@@ -1,5 +1,5 @@
 {
-  final int count=29;
+  final int count=100;
   mParams=new Params(mRS);
   mState=new State(mRS);
   mIcons=new Allocation[count];
