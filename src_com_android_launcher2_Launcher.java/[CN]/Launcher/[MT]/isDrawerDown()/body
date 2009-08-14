@@ -1,3 +1,3 @@
 {
-  return !mAllAppsDialog.isOpen;
+  return !mAllAppsVisible;
 }

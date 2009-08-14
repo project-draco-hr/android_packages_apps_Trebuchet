@@ -1,3 +1,4 @@
 {
   mTween.start(true);
+  setVisibility(VISIBLE);
 }

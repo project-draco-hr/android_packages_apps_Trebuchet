@@ -27,5 +27,5 @@
     mSavedInstanceState=null;
   }
   mDesktopLocked=false;
-  mAllAppsDialog.unlock();
+  unlockAllApps();
 }

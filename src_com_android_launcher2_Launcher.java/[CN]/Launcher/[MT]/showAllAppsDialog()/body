@@ -1,5 +1,7 @@
 {
-  mAllAppsDialog.isOpen=true;
-  showDialog(DIALOG_ALL_APPS);
+  mAllAppsVisible=true;
+  mAllAppsGrid.setVisibility(View.VISIBLE);
   mWorkspace.hide();
+  mDeleteZone.setVisibility(View.GONE);
+  mHandleView.setVisibility(View.GONE);
 }

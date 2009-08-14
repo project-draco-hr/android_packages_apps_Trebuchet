@@ -1,4 +1,5 @@
 {
+  Log.d(Launcher.LOG_TAG,"DragController.onInterceptTouchEvent " + ev + " mDragging="+ mDragging);
   final int action=ev.getAction();
   final float screenX=ev.getRawX();
   final float screenY=ev.getRawY();

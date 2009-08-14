@@ -1,13 +1,16 @@
 {
-  if (mAllAppsDialog.isOpen) {
+  if (mAllAppsVisible) {
+    Log.d(LOG_TAG,"closing all apps");
     if (animated) {
-      mAllAppsDialog.dismiss();
+      mAllAppsGrid.setVisibility(View.GONE);
     }
  else {
-      mAllAppsDialog.dismiss();
+      mAllAppsGrid.setVisibility(View.GONE);
     }
-    mAllAppsDialog.isOpen=false;
+    mAllAppsVisible=false;
     mWorkspace.getChildAt(mWorkspace.getCurrentScreen()).requestFocus();
     mWorkspace.show();
+    mDeleteZone.setVisibility(View.VISIBLE);
+    mHandleView.setVisibility(View.VISIBLE);
   }
 }

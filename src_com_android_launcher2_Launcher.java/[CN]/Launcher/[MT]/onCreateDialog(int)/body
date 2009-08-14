@@ -1,11 +1,9 @@
 {
 switch (id) {
-case DIALOG_ALL_APPS:
-    return mAllAppsDialog;
 case DIALOG_CREATE_SHORTCUT:
-  return new CreateShortcut().createDialog();
+    return new CreateShortcut().createDialog();
 case DIALOG_RENAME_FOLDER:
-return new RenameFolder().createDialog();
+  return new RenameFolder().createDialog();
 }
 return super.onCreateDialog(id);
 }

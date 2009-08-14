@@ -1,3 +1,6 @@
 {
   clearChildrenCache();
+  if (mAlpha == 0) {
+    setVisibility(GONE);
+  }
 }

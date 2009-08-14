@@ -5,7 +5,7 @@
   ApplicationInfo app=(ApplicationInfo)parent.getItemAtPosition(position);
   app=new ApplicationInfo(app);
   mDragController.startDrag(view,this,app,DragController.DRAG_ACTION_COPY);
-  mLauncher.showWorkspace();
+  mLauncher.closeAllAppsDialog(true);
   mDraw=false;
   invalidate();
   return true;

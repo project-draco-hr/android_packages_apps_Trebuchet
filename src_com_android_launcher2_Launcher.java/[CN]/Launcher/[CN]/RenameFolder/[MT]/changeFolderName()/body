@@ -5,7 +5,7 @@
     mFolderInfo.title=name;
     LauncherModel.updateItemInDatabase(Launcher.this,mFolderInfo);
     if (mDesktopLocked) {
-      mAllAppsDialog.lock();
+      lockAllApps();
       sModel.loadUserItems(false,Launcher.this,false,false);
     }
  else {
@@ -16,7 +16,7 @@
       }
  else {
         mDesktopLocked=true;
-        mAllAppsDialog.lock();
+        lockAllApps();
         sModel.loadUserItems(false,Launcher.this,false,false);
       }
     }

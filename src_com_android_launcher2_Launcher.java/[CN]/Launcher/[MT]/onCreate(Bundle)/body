@@ -11,8 +11,7 @@
   setWallpaperDimension();
   setContentView(R.layout.launcher);
   setupViews();
-  mAllAppsDialog=new AllAppsDialog(this);
-  mAllAppsDialog.lock();
+  lockAllApps();
   registerIntentReceivers();
   registerContentObservers();
   mSavedState=savedInstanceState;

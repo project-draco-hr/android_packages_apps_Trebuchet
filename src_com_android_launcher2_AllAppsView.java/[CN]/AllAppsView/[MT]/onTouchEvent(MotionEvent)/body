@@ -1,4 +1,5 @@
 {
+  Log.d(Launcher.LOG_TAG,"onTouchEvent " + ev);
   int x=(int)ev.getX();
   int deltaX;
 switch (ev.getAction()) {

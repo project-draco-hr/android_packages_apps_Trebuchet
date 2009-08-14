@@ -8,7 +8,7 @@
     handleFolderClick((FolderInfo)tag);
   }
  else   if (v == mHandleView) {
-    if (mAllAppsDialog.isOpen) {
+    if (mAllAppsVisible) {
     }
  else {
       showAllAppsDialog();
