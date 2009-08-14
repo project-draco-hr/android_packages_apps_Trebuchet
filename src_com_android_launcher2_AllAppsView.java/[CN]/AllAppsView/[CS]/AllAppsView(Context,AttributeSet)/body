@@ -1,3 +1,6 @@
 {
-  this(context);
+  super(context,attrs);
+  setFocusable(true);
+  getHolder().setFormat(PixelFormat.TRANSLUCENT);
+  mConfig=ViewConfiguration.get(context);
 }

@@ -1,6 +1,7 @@
 {
+  Log.d(Launcher.LOG_TAG,"Workspace onTouchEvent " + ev);
   if (mLocked || !mLauncher.isDrawerDown()) {
-    return true;
+    return false;
   }
   if (mVelocityTracker == null) {
     mVelocityTracker=VelocityTracker.obtain();

@@ -3,10 +3,12 @@
   DragController dragController=mDragController;
   DragLayer dragLayer=(DragLayer)findViewById(R.id.drag_layer);
   dragLayer.setDragController(dragController);
+  mAllAppsGrid=(AllAppsView)dragLayer.findViewById(R.id.all_apps_view);
   mWorkspace=(Workspace)dragLayer.findViewById(R.id.workspace);
   final Workspace workspace=mWorkspace;
-  final DeleteZone deleteZone=(DeleteZone)dragLayer.findViewById(R.id.delete_zone);
-  mHandleView=(HandleView)findViewById(R.id.all_apps);
+  DeleteZone deleteZone=(DeleteZone)dragLayer.findViewById(R.id.delete_zone);
+  mDeleteZone=deleteZone;
+  mHandleView=(HandleView)findViewById(R.id.all_apps_button);
   mHandleView.setLauncher(this);
   mHandleView.setOnClickListener(this);
   TransitionDrawable handleIcon=(TransitionDrawable)mHandleView.getDrawable();

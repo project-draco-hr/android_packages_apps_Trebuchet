@@ -1,6 +1,8 @@
 {
+  Log.d(Launcher.LOG_TAG,"Workspace onIntercept " + ev + " mLocked="+ mLocked+ " mLauncher.isDrawerDown()="+ mLauncher.isDrawerDown());
   if (mLocked || !mLauncher.isDrawerDown()) {
-    return true;
+    Log.d(Launcher.LOG_TAG,"returning false");
+    return false;
   }
   final int action=ev.getAction();
   if ((action == MotionEvent.ACTION_MOVE) && (mTouchState != TOUCH_STATE_REST)) {
