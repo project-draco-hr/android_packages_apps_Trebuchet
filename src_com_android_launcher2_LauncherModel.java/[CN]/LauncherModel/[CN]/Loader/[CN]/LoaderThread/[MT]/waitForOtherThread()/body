@@ -1,0 +1,13 @@
+{
+  if (mWaitThread != null) {
+    boolean done=false;
+    while (!done) {
+      try {
+        mWaitThread.join();
+      }
+ catch (      InterruptedException ex) {
+      }
+    }
+    mWaitThread=null;
+  }
+}

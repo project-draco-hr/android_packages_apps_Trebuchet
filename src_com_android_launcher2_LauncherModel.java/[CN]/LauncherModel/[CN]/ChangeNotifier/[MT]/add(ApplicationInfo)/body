@@ -1,5 +1,0 @@
-{
-  final ArrayList<ApplicationInfo> buffer=mBuffer;
-  buffer.add(application);
-  return buffer.size() >= UI_NOTIFICATION_RATE;
-}

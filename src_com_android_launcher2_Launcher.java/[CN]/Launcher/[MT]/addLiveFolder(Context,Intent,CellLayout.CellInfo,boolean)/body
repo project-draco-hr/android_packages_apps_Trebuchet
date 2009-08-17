@@ -29,6 +29,6 @@
   info.baseIntent=baseIntent;
   info.displayMode=data.getIntExtra(LiveFolders.EXTRA_LIVE_FOLDER_DISPLAY_MODE,LiveFolders.DISPLAY_MODE_GRID);
   LauncherModel.addItemToDatabase(context,info,LauncherSettings.Favorites.CONTAINER_DESKTOP,cellInfo.screen,cellInfo.cellX,cellInfo.cellY,notify);
-  sModel.addFolder(info);
+  mFolders.put(info.id,info);
   return info;
 }

@@ -1,3 +1,0 @@
-{
-  return mFolders.get(id);
-}

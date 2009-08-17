@@ -1,0 +1,6 @@
+{
+  mAllAppsList=list;
+  if (mRollo != null) {
+    mRollo.setApps(list);
+  }
+}

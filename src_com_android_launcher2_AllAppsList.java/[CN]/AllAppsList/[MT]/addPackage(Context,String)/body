@@ -1,0 +1,11 @@
+{
+  final List<ResolveInfo> matches=findActivitiesForPackage(context,packageName);
+  if (matches.size() > 0) {
+    Utilities.BubbleText bubble=new Utilities.BubbleText(context);
+    for (    ResolveInfo info : matches) {
+      ApplicationInfo item=AppInfoCache.cache(info,context,bubble);
+      data.add(item);
+      added.add(item);
+    }
+  }
+}

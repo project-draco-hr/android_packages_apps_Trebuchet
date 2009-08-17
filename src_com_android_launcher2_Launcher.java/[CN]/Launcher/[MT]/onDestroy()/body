@@ -1,5 +1,4 @@
 {
-  mDestroyed=true;
   super.onDestroy();
   try {
     mAppWidgetHost.stopListening();
@@ -9,8 +8,7 @@
   }
   TextKeyListener.getInstance().release();
   mAllAppsGrid.setAdapter(null);
-  sModel.unbind();
-  sModel.abortLoaders();
-  getContentResolver().unregisterContentObserver(mObserver);
-  unregisterReceiver(mApplicationsReceiver);
+  mModel.stopLoader();
+  unbindDesktopItems();
+  AppInfoCache.unbindDrawables();
 }

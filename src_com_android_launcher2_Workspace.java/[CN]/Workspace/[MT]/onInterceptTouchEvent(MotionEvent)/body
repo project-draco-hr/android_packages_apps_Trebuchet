@@ -1,7 +1,5 @@
 {
-  Log.d(Launcher.LOG_TAG,"Workspace onIntercept " + ev + " mLocked="+ mLocked+ " mLauncher.isDrawerDown()="+ mLauncher.isDrawerDown());
-  if (mLocked || !mLauncher.isDrawerDown()) {
-    Log.d(Launcher.LOG_TAG,"returning false");
+  if (mLauncher.isWorkspaceLocked() || !mLauncher.isDrawerDown()) {
     return false;
   }
   final int action=ev.getAction();

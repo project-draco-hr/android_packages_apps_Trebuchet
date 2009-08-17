@@ -1,0 +1,4 @@
+{
+  sModel.initialize(launcher);
+  return sModel;
+}

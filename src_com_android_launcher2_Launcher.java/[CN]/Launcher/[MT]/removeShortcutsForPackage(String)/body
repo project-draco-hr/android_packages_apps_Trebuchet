@@ -1,5 +1,0 @@
-{
-  if (packageName != null && packageName.length() > 0) {
-    mWorkspace.removeShortcutsForPackage(packageName);
-  }
-}

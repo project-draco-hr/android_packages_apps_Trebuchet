@@ -1,0 +1,3 @@
+{
+  mFolders.putAll(folders);
+}

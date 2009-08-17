@@ -1,5 +1,5 @@
 {
-  if (mDesktopLocked) {
+  if (isWorkspaceLocked()) {
     return false;
   }
   if (!(v instanceof CellLayout)) {

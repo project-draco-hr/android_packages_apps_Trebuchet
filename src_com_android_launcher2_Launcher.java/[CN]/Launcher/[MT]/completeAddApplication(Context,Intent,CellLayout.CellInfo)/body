@@ -1,0 +1,8 @@
+{
+  cellInfo.screen=mWorkspace.getCurrentScreen();
+  if (!findSingleSlot(cellInfo))   return;
+  final ApplicationInfo info=infoFromApplicationIntent(context,data);
+  if (info != null) {
+    mWorkspace.addApplicationShortcut(info,cellInfo,isWorkspaceLocked());
+  }
+}

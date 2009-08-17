@@ -1,0 +1,11 @@
+{
+  if (mQueue.size() > 0) {
+    Runnable peek=mQueue.getFirst();
+    if (peek instanceof IdleRunnable) {
+      mMessageQueue.addIdleHandler(mHandler);
+    }
+ else {
+      mHandler.sendEmptyMessage(1);
+    }
+  }
+}

@@ -1,4 +1,11 @@
 {
   VMRuntime.getRuntime().setMinimumHeapSize(4 * 1024 * 1024);
   super.onCreate();
+  IntentFilter filter=new IntentFilter(Intent.ACTION_PACKAGE_ADDED);
+  filter.addAction(Intent.ACTION_PACKAGE_REMOVED);
+  filter.addAction(Intent.ACTION_PACKAGE_CHANGED);
+  filter.addDataScheme("package");
+  registerReceiver(mApplicationsReceiver,filter);
+  ContentResolver resolver=getContentResolver();
+  resolver.registerContentObserver(LauncherSettings.Favorites.CONTENT_URI,true,mFavoritesObserver);
 }

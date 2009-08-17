@@ -1,0 +1,4 @@
+{
+  removeDialog(DIALOG_CREATE_SHORTCUT);
+  mWorkspace.updateShortcutsForPackage(packageName);
+}

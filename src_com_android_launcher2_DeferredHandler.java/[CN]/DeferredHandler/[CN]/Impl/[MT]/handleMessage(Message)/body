@@ -1,0 +1,10 @@
+{
+  Runnable r;
+synchronized (mQueue) {
+    r=mQueue.removeFirst();
+  }
+  r.run();
+synchronized (mQueue) {
+    scheduleNextLocked();
+  }
+}

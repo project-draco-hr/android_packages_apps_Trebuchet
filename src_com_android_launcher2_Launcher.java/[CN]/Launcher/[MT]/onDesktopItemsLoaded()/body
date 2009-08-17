@@ -1,4 +1,0 @@
-{
-  if (mDestroyed)   return;
-  bindDesktopItems();
-}

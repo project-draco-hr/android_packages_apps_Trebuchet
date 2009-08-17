@@ -1,4 +1,0 @@
-PackageManager packageManager
-ResolveInfo info
-ApplicationInfo applicationInfo
-Context context
