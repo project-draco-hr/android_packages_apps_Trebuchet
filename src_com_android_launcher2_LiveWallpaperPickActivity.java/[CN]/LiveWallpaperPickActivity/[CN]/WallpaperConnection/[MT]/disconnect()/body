@@ -1,0 +1,15 @@
+{
+synchronized (this) {
+    mConnected=false;
+    if (mEngine != null) {
+      try {
+        mEngine.destroy();
+      }
+ catch (      RemoteException e) {
+      }
+      mEngine=null;
+    }
+    unbindService(this);
+    mService=null;
+  }
+}

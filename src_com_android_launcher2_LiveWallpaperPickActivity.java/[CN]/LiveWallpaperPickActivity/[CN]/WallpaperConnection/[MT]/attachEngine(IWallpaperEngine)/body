@@ -1,0 +1,14 @@
+{
+synchronized (this) {
+    if (mConnected) {
+      mEngine=engine;
+    }
+ else {
+      try {
+        engine.destroy();
+      }
+ catch (      RemoteException e) {
+      }
+    }
+  }
+}

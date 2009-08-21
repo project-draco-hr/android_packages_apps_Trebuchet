@@ -1,0 +1,14 @@
+{
+  if (mSelectedIntent != null) {
+    try {
+      mWallpaperManager.getIWallpaperManager().setWallpaperComponent(mSelectedIntent.getComponent());
+      this.setResult(RESULT_OK);
+    }
+ catch (    RemoteException e) {
+    }
+catch (    RuntimeException e) {
+      Log.w(TAG,"Failure setting wallpaper",e);
+    }
+    finish();
+  }
+}

@@ -1,0 +1,12 @@
+{
+  if (mWallpaperConnection == this) {
+    mService=IWallpaperService.Stub.asInterface(service);
+    try {
+      View button=findViewById(R.id.set);
+      mService.attach(this,button.getWindowToken(),WindowManager.LayoutParams.TYPE_APPLICATION_MEDIA,true,button.getRootView().getWidth(),button.getRootView().getHeight());
+    }
+ catch (    RemoteException e) {
+      Log.w(TAG,"Failed attaching wallpaper; clearing",e);
+    }
+  }
+}

@@ -1,0 +1,3 @@
+{
+  setContentView(R.layout.live_wallpaper_content);
+}
