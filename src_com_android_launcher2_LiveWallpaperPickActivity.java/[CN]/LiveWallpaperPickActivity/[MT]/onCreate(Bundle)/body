@@ -2,5 +2,8 @@
   mPackageManager=getPackageManager();
   mWallpaperManager=WallpaperManager.getInstance(this);
   super.onCreate(icicle);
+  View button=findViewById(R.id.set);
+  button.setEnabled(false);
+  button.setOnClickListener(this);
   setResult(RESULT_CANCELED);
 }

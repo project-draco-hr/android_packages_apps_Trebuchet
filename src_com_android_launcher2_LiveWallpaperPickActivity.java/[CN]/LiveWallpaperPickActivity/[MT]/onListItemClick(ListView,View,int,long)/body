@@ -1,0 +1,11 @@
+{
+  mSelectedIntent=intentForPosition(position);
+  findViewById(R.id.set).setEnabled(true);
+  WallpaperConnection conn=new WallpaperConnection(mSelectedIntent);
+  if (conn.connect()) {
+    if (mWallpaperConnection != null) {
+      mWallpaperConnection.disconnect();
+    }
+    mWallpaperConnection=conn;
+  }
+}
