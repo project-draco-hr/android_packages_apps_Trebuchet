@@ -4,7 +4,7 @@
     convertView=mInflater.inflate(R.layout.application_boxed,parent,false);
   }
   if (!info.filtered) {
-    info.icon=Utilities.createIconThumbnail(info.icon,getContext());
+    info.icon=Utilities.createIconThumbnail(info.icon,getContext(),false);
     info.filtered=true;
   }
   final TextView textView=(TextView)convertView;

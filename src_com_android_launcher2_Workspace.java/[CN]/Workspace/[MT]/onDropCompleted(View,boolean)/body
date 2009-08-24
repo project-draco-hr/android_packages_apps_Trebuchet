@@ -7,7 +7,6 @@
         mDragController.removeDropTarget((DropTarget)mDragInfo.cell);
       }
       final Object tag=mDragInfo.cell.getTag();
-      Launcher.getModel().removeDesktopItem((ItemInfo)tag);
     }
   }
  else {

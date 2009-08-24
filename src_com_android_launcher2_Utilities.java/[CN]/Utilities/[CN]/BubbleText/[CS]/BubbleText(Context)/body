@@ -26,7 +26,6 @@
   mLeading=(int)(leading + 0.5f);
   mFirstLineY=(int)(leading + ascent + 0.5f);
   mLineHeight=(int)(leading + ascent + descent+ 0.5f);
-  roundToPow2(64);
   mBitmapWidth=roundToPow2((int)(mBubbleRect.width() + 0.5f));
   mBitmapHeight=roundToPow2((int)((MAX_LINES * mLineHeight) + leading + 0.5f));
   Log.d(Launcher.LOG_TAG,"mBitmapWidth=" + mBitmapWidth + " mBitmapHeight="+ mBitmapHeight+ " w="+ ((int)(mBubbleRect.width() + 0.5f))+ " h="+ ((int)((MAX_LINES * mLineHeight) + leading + 0.5f)));

@@ -1,0 +1,11 @@
+{
+  final PackageManager packageManager=context.getPackageManager();
+  application.title=info.loadLabel(packageManager);
+  if (application.title == null) {
+    application.title=info.activityInfo.name;
+  }
+  Drawable icon=Utilities.createIconThumbnail(info.activityInfo.loadIcon(packageManager),context,true);
+  application.iconBitmap=((FastBitmapDrawable)icon).getBitmap();
+  application.filtered=true;
+  application.titleBitmap=bubble.createTextBitmap(application.title.toString());
+}

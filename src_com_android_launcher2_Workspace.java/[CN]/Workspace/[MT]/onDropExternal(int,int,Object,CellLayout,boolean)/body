@@ -23,7 +23,5 @@ mDragController.addDropTarget((DropTarget)view);
 mTargetCell=estimateDropCell(x,y,1,1,view,cellLayout,mTargetCell);
 cellLayout.onDropChild(view,mTargetCell);
 CellLayout.LayoutParams lp=(CellLayout.LayoutParams)view.getLayoutParams();
-final LauncherModel model=Launcher.getModel();
-model.addDesktopItem(info);
 LauncherModel.addOrMoveItemInDatabase(mLauncher,info,LauncherSettings.Favorites.CONTAINER_DESKTOP,mCurrentScreen,lp.cellX,lp.cellY);
 }

@@ -1,5 +1,0 @@
-{
-  mDesktopLocked=true;
-  lockAllApps();
-  sModel.loadUserItems(false,this,false,false);
-}

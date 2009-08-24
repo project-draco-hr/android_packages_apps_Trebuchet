@@ -1,5 +1,6 @@
 {
   super.onCreate(savedInstanceState);
+  mModel=((LauncherApplication)getApplication()).setLauncher(this);
   mInflater=getLayoutInflater();
   mAppWidgetManager=AppWidgetManager.getInstance(this);
   mAppWidgetHost=new LauncherAppWidgetHost(this,APPWIDGET_HOST_ID);
@@ -12,15 +13,13 @@
   setContentView(R.layout.launcher);
   setupViews();
   lockAllApps();
-  registerIntentReceivers();
-  registerContentObservers();
   mSavedState=savedInstanceState;
   restoreState(mSavedState);
   if (PROFILE_STARTUP) {
     android.os.Debug.stopMethodTracing();
   }
   if (!mRestoring) {
-    startLoaders();
+    mModel.startLoader(this,true);
   }
   mDefaultKeySsb=new SpannableStringBuilder();
   Selection.setSelection(mDefaultKeySsb,0);

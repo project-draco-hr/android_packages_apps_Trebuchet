@@ -5,13 +5,11 @@
     mIsNewIntent=true;
     try {
       dismissDialog(DIALOG_CREATE_SHORTCUT);
-      mWorkspace.unlock();
     }
  catch (    Exception e) {
     }
     try {
       dismissDialog(DIALOG_RENAME_FOLDER);
-      mWorkspace.unlock();
     }
  catch (    Exception e) {
     }

@@ -1,32 +1,12 @@
 {
-  final int count=100;
   mParams=new Params(mRS);
   mState=new State(mRS);
-  mIcons=new Allocation[count];
-  mAllocIconIDBuf=new int[count];
-  mAllocIconID=Allocation.createSized(mRS,Element.USER_I32,mAllocIconIDBuf.length);
-  mLabels=new Allocation[count];
-  mAllocLabelIDBuf=new int[mLabels.length];
-  mAllocLabelID=Allocation.createSized(mRS,Element.USER_I32,mLabels.length);
-  Element ie8888=Element.RGBA_8888;
   final Utilities.BubbleText bubble=new Utilities.BubbleText(getContext());
   mParams.bubbleWidth=bubble.getBubbleWidth();
   mParams.bubbleHeight=bubble.getMaxBubbleHeight();
   mParams.bubbleBitmapWidth=bubble.getBitmapWidth();
   mParams.bubbleBitmapHeight=bubble.getBitmapHeight();
-  for (int i=0; i < count; i++) {
-    mIcons[i]=Allocation.createFromBitmapResource(mRS,mRes,R.raw.maps,ie8888,true);
-    mLabels[i]=makeTextBitmap(bubble,i % 9 == 0 ? "Google Maps" : "Maps");
-  }
-  for (int i=0; i < count; i++) {
-    mIcons[i].uploadToTexture(0);
-    mLabels[i].uploadToTexture(0);
-    mAllocIconIDBuf[i]=mIcons[i].getID();
-    mAllocLabelIDBuf[i]=mLabels[i].getID();
-  }
-  mAllocIconID.data(mAllocIconIDBuf);
-  mAllocLabelID.data(mAllocLabelIDBuf);
-  mState.iconCount=count;
   mParams.save();
   mState.save();
+  setApps(null);
 }

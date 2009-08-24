@@ -3,4 +3,7 @@
   mRS=createRenderScript();
   mRollo=new RolloRS();
   mRollo.init(getResources(),w,h);
+  if (mAllAppsList != null) {
+    mRollo.setApps(mAllAppsList);
+  }
 }

@@ -1,7 +1,5 @@
 {
-  if (mBinder != null) {
-    mBinder.mTerminate=true;
-  }
+  mModel.stopLoader();
   if (PROFILE_ROTATE) {
     android.os.Debug.startMethodTracing("/sdcard/launcher-rotate");
   }

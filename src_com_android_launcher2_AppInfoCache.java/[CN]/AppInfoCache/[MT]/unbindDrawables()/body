@@ -1,0 +1,7 @@
+{
+synchronized (sCache) {
+    for (    ApplicationInfo appInfo : sCache.values()) {
+      appInfo.icon.setCallback(null);
+    }
+  }
+}

@@ -1,3 +1,0 @@
-{
-  return sCollator.compare(a.title.toString(),b.title.toString());
-}

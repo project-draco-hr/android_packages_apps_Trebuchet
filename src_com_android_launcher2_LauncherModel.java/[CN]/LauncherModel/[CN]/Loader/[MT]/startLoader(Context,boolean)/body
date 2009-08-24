@@ -1,0 +1,16 @@
+{
+synchronized (mLock) {
+    Log.d(TAG,"startLoader isLaunching=" + isLaunching);
+    if (mCallbacks.get() != null) {
+      LoaderThread oldThread=mLoaderThread;
+      if (oldThread != null) {
+        if (oldThread.isLaunching()) {
+          isLaunching=true;
+        }
+        oldThread.stopLocked();
+      }
+      mLoaderThread=new LoaderThread(context,oldThread,isLaunching);
+      mLoaderThread.start();
+    }
+  }
+}

@@ -1,7 +1,10 @@
 {
   super.onResume();
+  Log.d(TAG,"onResume mRestoring=" + mRestoring);
   if (mRestoring) {
-    startLoaders();
+    mWorkspaceLoading=true;
+    mModel.startLoader(this,true);
+    mRestoring=false;
   }
   if (mIsNewIntent) {
     mWorkspace.post(new Runnable(){

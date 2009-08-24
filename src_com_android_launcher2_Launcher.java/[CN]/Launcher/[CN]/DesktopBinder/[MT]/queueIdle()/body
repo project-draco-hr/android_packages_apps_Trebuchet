@@ -1,4 +1,0 @@
-{
-  startBindingAppWidgets();
-  return false;
-}

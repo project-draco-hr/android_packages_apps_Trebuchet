@@ -1,3 +1,0 @@
-{
-  obtainMessage(MESSAGE_BIND_APPWIDGETS).sendToTarget();
-}

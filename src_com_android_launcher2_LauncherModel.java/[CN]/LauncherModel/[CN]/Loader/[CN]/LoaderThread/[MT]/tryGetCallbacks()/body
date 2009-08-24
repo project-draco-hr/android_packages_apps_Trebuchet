@@ -1,0 +1,13 @@
+{
+synchronized (mLock) {
+    if (mStopped) {
+      return null;
+    }
+    final Callbacks callbacks=mCallbacks.get();
+    if (callbacks == null) {
+      Log.w(TAG,"no mCallbacks");
+      return null;
+    }
+    return callbacks;
+  }
+}

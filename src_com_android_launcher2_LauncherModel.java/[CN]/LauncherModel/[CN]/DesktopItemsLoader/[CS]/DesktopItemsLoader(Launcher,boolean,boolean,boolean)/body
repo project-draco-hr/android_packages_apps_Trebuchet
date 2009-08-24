@@ -1,6 +1,0 @@
-{
-  mLoadApplications=loadApplications;
-  mIsLaunching=isLaunching;
-  mLauncher=new WeakReference<Launcher>(launcher);
-  mLocaleChanged=localeChanged;
-}

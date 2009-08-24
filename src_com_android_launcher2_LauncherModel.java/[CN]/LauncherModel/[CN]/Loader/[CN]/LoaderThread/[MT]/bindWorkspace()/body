@@ -1,0 +1,86 @@
+{
+  final long t=SystemClock.uptimeMillis();
+  Callbacks callbacks=mCallbacks.get();
+  if (callbacks == null) {
+    Log.w(TAG,"LoaderThread running with no launcher");
+    return;
+  }
+  int N;
+  mHandler.post(new Runnable(){
+    public void run(){
+      Callbacks callbacks=tryGetCallbacks();
+      if (callbacks != null) {
+        callbacks.startBinding();
+      }
+    }
+  }
+);
+  N=mItems.size();
+  for (int i=0; i < N; i+=ITEMS_CHUNK) {
+    final int start=i;
+    final int chunkSize=(i + ITEMS_CHUNK <= N) ? ITEMS_CHUNK : (N - i);
+    mHandler.post(new Runnable(){
+      public void run(){
+        Callbacks callbacks=tryGetCallbacks();
+        if (callbacks != null) {
+          callbacks.bindItems(mItems,start,start + chunkSize);
+        }
+      }
+    }
+);
+  }
+  mHandler.postIdle(new Runnable(){
+    public void run(){
+      Log.d(TAG,"Going to start binding widgets soon.");
+    }
+  }
+);
+  final int currentScreen=callbacks.getCurrentWorkspaceScreen();
+  N=mAppWidgets.size();
+  for (int i=0; i < N; i++) {
+    final LauncherAppWidgetInfo widget=mAppWidgets.get(i);
+    if (widget.screen == currentScreen) {
+      mHandler.post(new Runnable(){
+        public void run(){
+          Callbacks callbacks=tryGetCallbacks();
+          if (callbacks != null) {
+            callbacks.bindAppWidget(widget);
+          }
+        }
+      }
+);
+    }
+  }
+  for (int i=0; i < N; i++) {
+    final LauncherAppWidgetInfo widget=mAppWidgets.get(i);
+    if (widget.screen != currentScreen) {
+      mHandler.post(new Runnable(){
+        public void run(){
+          Callbacks callbacks=tryGetCallbacks();
+          if (callbacks != null) {
+            callbacks.bindAppWidget(widget);
+          }
+        }
+      }
+);
+    }
+  }
+  mHandler.post(new Runnable(){
+    public void run(){
+      Callbacks callbacks=tryGetCallbacks();
+      if (callbacks != null) {
+        callbacks.finishBindingItems();
+      }
+    }
+  }
+);
+  mHandler.post(new Runnable(){
+    public void run(){
+      Log.d(TAG,"bound workspace in " + (SystemClock.uptimeMillis() - t) + "ms");
+      if (Launcher.PROFILE_ROTATE) {
+        android.os.Debug.stopMethodTracing();
+      }
+    }
+  }
+);
+}

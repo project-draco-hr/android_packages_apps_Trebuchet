@@ -14,5 +14,6 @@
     localeConfiguration.mcc=mcc;
     localeConfiguration.mnc=mnc;
     writeConfiguration(this,localeConfiguration);
+    AppInfoCache.flush();
   }
 }
