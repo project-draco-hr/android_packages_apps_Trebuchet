@@ -4,6 +4,7 @@
     while (!done) {
       try {
         mWaitThread.join();
+        done=true;
       }
  catch (      InterruptedException ex) {
       }
