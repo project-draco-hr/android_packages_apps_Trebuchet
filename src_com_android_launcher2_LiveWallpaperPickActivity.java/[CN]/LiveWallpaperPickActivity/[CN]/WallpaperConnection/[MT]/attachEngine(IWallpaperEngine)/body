@@ -2,6 +2,11 @@
 synchronized (this) {
     if (mConnected) {
       mEngine=engine;
+      try {
+        engine.setVisibility(true);
+      }
+ catch (      RemoteException e) {
+      }
     }
  else {
       try {
