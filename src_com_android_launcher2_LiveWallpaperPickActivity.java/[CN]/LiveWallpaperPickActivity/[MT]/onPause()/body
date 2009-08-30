@@ -1,0 +1,10 @@
+{
+  super.onPause();
+  if (mWallpaperConnection != null && mWallpaperConnection.mEngine != null) {
+    try {
+      mWallpaperConnection.mEngine.setVisibility(false);
+    }
+ catch (    RemoteException e) {
+    }
+  }
+}
