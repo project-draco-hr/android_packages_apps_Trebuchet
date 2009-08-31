@@ -1,37 +1,4 @@
 {
-  int x=(int)ev.getX();
-  int deltaX;
-switch (ev.getAction()) {
-case MotionEvent.ACTION_DOWN:
-    mLastMotionX=x;
-  mRollo.mState.read();
-mRollo.mState.scrollX=mLastScrollX=mRollo.mState.currentScrollX;
-mRollo.mState.flingVelocityX=0;
-mRollo.mState.adjustedDeceleration=0;
-mRollo.mState.save();
-mVelocity=VelocityTracker.obtain();
-mVelocity.addMovement(ev);
-break;
-case MotionEvent.ACTION_MOVE:
-case MotionEvent.ACTION_OUTSIDE:
-deltaX=x - mLastMotionX;
-mVelocity.addMovement(ev);
-mRollo.mState.currentScrollX=mLastScrollX;
-mLastScrollX+=deltaX;
-mRollo.mState.scrollX=mLastScrollX;
-mRollo.mState.save();
-mLastMotionX=x;
-break;
-case MotionEvent.ACTION_UP:
-case MotionEvent.ACTION_CANCEL:
-mVelocity.computeCurrentVelocity(1000,mConfig.getScaledMaximumFlingVelocity());
-mRollo.mState.flingTimeMs=(int)SystemClock.uptimeMillis();
-mRollo.mState.flingVelocityX=(int)mVelocity.getXVelocity();
-mRollo.mState.save();
-mLastMotionX=-10000;
-mVelocity.recycle();
-mVelocity=null;
-break;
-}
-return true;
+  mTouchHandler=mFlingHandler;
+  return mTouchHandler.onTouchEvent(ev);
 }

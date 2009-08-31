@@ -11,8 +11,6 @@
   mHandleView=(HandleView)findViewById(R.id.all_apps_button);
   mHandleView.setLauncher(this);
   mHandleView.setOnClickListener(this);
-  TransitionDrawable handleIcon=(TransitionDrawable)mHandleView.getDrawable();
-  handleIcon.setCrossFadeEnabled(true);
   workspace.setOnLongClickListener(this);
   workspace.setDragController(dragController);
   workspace.setLauncher(this);
