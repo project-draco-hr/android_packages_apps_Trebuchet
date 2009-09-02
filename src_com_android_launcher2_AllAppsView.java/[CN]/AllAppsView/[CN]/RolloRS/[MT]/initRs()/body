@@ -8,7 +8,8 @@
   mScript.bindAllocation(mParams.getAllocation(),Defines.ALLOC_PARAMS);
   mScript.bindAllocation(mState.getAllocation(),Defines.ALLOC_STATE);
   mScript.bindAllocation(mAllocIconID,Defines.ALLOC_ICON_IDS);
-  mScript.bindAllocation(mAllocScratch,Defines.ALLOC_SCRATCH);
   mScript.bindAllocation(mAllocLabelID,Defines.ALLOC_LABEL_IDS);
+  mScript.bindAllocation(mAllocTouchXBorders,Defines.ALLOC_X_BORDERS);
+  mScript.bindAllocation(mAllocTouchYBorders,Defines.ALLOC_Y_BORDERS);
   mRS.contextBindRootScript(mScript);
 }

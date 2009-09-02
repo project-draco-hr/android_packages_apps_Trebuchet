@@ -1,24 +1,24 @@
 {
   final int count=list != null ? list.size() : 0;
   mIcons=new Allocation[count];
-  mAllocIconIDBuf=new int[count];
+  mIconIds=new int[count];
   mAllocIconID=Allocation.createSized(mRS,Element.USER_I32,count);
   mLabels=new Allocation[count];
-  mAllocLabelIDBuf=new int[count];
+  mLabelIds=new int[count];
   mAllocLabelID=Allocation.createSized(mRS,Element.USER_I32,count);
   Element ie8888=Element.RGBA_8888;
   Utilities.BubbleText bubble=new Utilities.BubbleText(getContext());
   for (int i=0; i < count; i++) {
     final ApplicationInfo item=list.get(i);
-    mIcons[i]=Allocation.createFromBitmap(mRS,item.iconBitmap,Element.RGBA_8888,true);
-    mLabels[i]=Allocation.createFromBitmap(mRS,item.titleBitmap,Element.RGBA_8888,true);
+    mIcons[i]=Allocation.createFromBitmap(mRS,item.iconBitmap,Element.RGBA_8888,false);
+    mLabels[i]=Allocation.createFromBitmap(mRS,item.titleBitmap,Element.RGBA_8888,false);
     mIcons[i].uploadToTexture(0);
     mLabels[i].uploadToTexture(0);
-    mAllocIconIDBuf[i]=mIcons[i].getID();
-    mAllocLabelIDBuf[i]=mLabels[i].getID();
+    mIconIds[i]=mIcons[i].getID();
+    mLabelIds[i]=mLabels[i].getID();
   }
-  mAllocIconID.data(mAllocIconIDBuf);
-  mAllocLabelID.data(mAllocLabelIDBuf);
+  mAllocIconID.data(mIconIds);
+  mAllocLabelID.data(mLabelIds);
   mState.iconCount=count;
   Log.d("AllAppsView","mScript=" + mScript + " mAllocIconID="+ mAllocIconID);
   if (mScript != null) {

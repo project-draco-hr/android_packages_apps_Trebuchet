@@ -1,12 +1,16 @@
 {
   super.surfaceChanged(holder,format,w,h);
+  long startTime=SystemClock.uptimeMillis();
   mRS=createRenderScript(true);
   mRollo=new RolloRS();
   mRollo.init(getResources(),w,h);
   if (mAllAppsList != null) {
     mRollo.setApps(mAllAppsList);
+    Log.d(TAG,"surfaceChanged... calling mRollo.setApps");
   }
   Resources res=getContext().getResources();
   int barHeight=(int)res.getDimension(R.dimen.button_bar_height);
   mScrollHandleTop=h - barHeight;
+  long endTime=SystemClock.uptimeMillis();
+  Log.d(TAG,"surfaceChanged took " + (endTime - startTime) + "ms");
 }

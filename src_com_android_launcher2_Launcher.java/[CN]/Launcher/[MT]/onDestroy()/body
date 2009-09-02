@@ -7,7 +7,6 @@
     w(LOG_TAG,"problem while stopping AppWidgetHost during Launcher destruction",ex);
   }
   TextKeyListener.getInstance().release();
-  mAllAppsGrid.setAdapter(null);
   mModel.stopLoader();
   unbindDesktopItems();
   AppInfoCache.unbindDrawables();

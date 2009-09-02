@@ -4,5 +4,6 @@
   mHeight=height;
   initGl();
   initData();
+  initTouchState();
   initRs();
 }

@@ -6,14 +6,23 @@
   mParams.bubbleHeight=bubble.getMaxBubbleHeight();
   mParams.bubbleBitmapWidth=bubble.getBitmapWidth();
   mParams.bubbleBitmapHeight=bubble.getBitmapHeight();
-  mScrollHandle=Allocation.createFromBitmapResource(mRS,mRes,R.drawable.all_apps_button_pow2,Element.RGBA_8888,true);
+  mScrollHandle=Allocation.createFromBitmapResource(mRS,mRes,R.drawable.all_apps_button_pow2,Element.RGBA_8888,false);
   mScrollHandle.uploadToTexture(0);
   mParams.scrollHandleId=mScrollHandle.getID();
   Log.d(TAG,"mParams.scrollHandleId=" + mParams.scrollHandleId);
   mParams.scrollHandleTextureWidth=128;
   mParams.scrollHandleTextureHeight=128;
-  mState.scrollHandlePos=0;
   mParams.save();
   mState.save();
+  mSelectionBitmap=Bitmap.createBitmap(Defines.ICON_WIDTH_PX,Defines.ICON_HEIGHT_PX,Bitmap.Config.ARGB_8888);
+  Bitmap selectionBitmap=mSelectionBitmap;
+  Paint paint=new Paint();
+  float radius=12 * getContext().getResources().getDisplayMetrics().density;
+  Canvas canvas=new Canvas(selectionBitmap);
+  canvas.drawColor(0xffff0000);
+  mSelectedIcon=Allocation.createFromBitmap(mRS,selectionBitmap,Element.RGBA_8888,false);
+  mSelectedIcon.uploadToTexture(0);
+  mState.selectedIconTexture=mSelectedIcon.getID();
+  Log.d(TAG,"initData calling mRollo.setApps");
   setApps(null);
 }
