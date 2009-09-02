@@ -3,4 +3,6 @@
   setFocusable(true);
   getHolder().setFormat(PixelFormat.TRANSLUCENT);
   mConfig=ViewConfiguration.get(context);
+  setOnClickListener(this);
+  setOnLongClickListener(this);
 }

@@ -18,7 +18,7 @@
   mPFImages.setName("PF");
   mPFImages.bindSampler(mSampler,0);
   bf.setTexEnvMode(ProgramFragment.EnvMode.MODULATE,0);
-  mPFText=bf.create();
+  mPFText=(new ProgramFragment.Builder(mRS,null,null)).create();
   mPFText.setName("PFText");
   mPFText.bindSampler(mSamplerText,0);
   ProgramStore.Builder bs=new ProgramStore.Builder(mRS,null,null);
@@ -46,8 +46,11 @@
   mPVOrtho.setName("PVOrtho");
   mPVOrtho.bindAllocation(mPVOrthoAlloc);
   mRS.contextBindProgramVertex(mPV);
-  mAllocScratchBuf=new int[32];
-  mAllocScratch=Allocation.createSized(mRS,Element.USER_I32,mAllocScratchBuf.length);
-  mAllocScratch.data(mAllocScratchBuf);
+  mTouchXBorders=new int[Defines.COLUMNS_PER_PAGE + 1];
+  mAllocTouchXBorders=Allocation.createSized(mRS,Element.USER_I32,mTouchXBorders.length);
+  mAllocTouchXBorders.data(mTouchXBorders);
+  mTouchYBorders=new int[Defines.ROWS_PER_PAGE + 1];
+  mAllocTouchYBorders=Allocation.createSized(mRS,Element.USER_I32,mTouchYBorders.length);
+  mAllocTouchYBorders.data(mTouchYBorders);
   Log.e("rs","Done loading named");
 }

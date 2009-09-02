@@ -1,9 +1,7 @@
 {
 synchronized (sCanvas) {
     if (sIconWidth == -1) {
-      final Resources resources=context.getResources();
-      sIconWidth=(int)resources.getDimension(android.R.dimen.app_icon_size);
-      sIconHeight=sIconWidth;
+      initStatics(context);
     }
     int width=sIconWidth;
     int height=sIconHeight;
@@ -56,19 +54,6 @@ synchronized (sCanvas) {
         icon.setBounds(sOldBounds);
         icon=new FastBitmapDrawable(thumb);
       }
-    }
-    if (forceBitmap) {
-      int w=sIconWidth;
-      int h=sIconHeight;
-      final Bitmap.Config c=Bitmap.Config.ARGB_8888;
-      final Bitmap thumb=Bitmap.createBitmap(roundToPow2(w),roundToPow2(h),c);
-      final Canvas canvas=sCanvas;
-      canvas.setBitmap(thumb);
-      sOldBounds.set(icon.getBounds());
-      icon.setBounds(0,0,w,h);
-      icon.draw(canvas);
-      icon.setBounds(sOldBounds);
-      icon=new FastBitmapDrawable(thumb);
     }
     return icon;
   }

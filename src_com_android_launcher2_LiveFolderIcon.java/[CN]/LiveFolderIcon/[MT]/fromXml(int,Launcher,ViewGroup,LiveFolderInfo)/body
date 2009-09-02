@@ -3,7 +3,7 @@
   final Resources resources=launcher.getResources();
   Drawable d=folderInfo.icon;
   if (d == null) {
-    d=Utilities.createIconThumbnail(resources.getDrawable(R.drawable.ic_launcher_folder),launcher,false);
+    d=Utilities.createIconThumbnail(resources.getDrawable(R.drawable.ic_launcher_folder),launcher);
     folderInfo.filtered=true;
   }
   icon.setCompoundDrawablesWithIntrinsicBounds(null,d,null,null);

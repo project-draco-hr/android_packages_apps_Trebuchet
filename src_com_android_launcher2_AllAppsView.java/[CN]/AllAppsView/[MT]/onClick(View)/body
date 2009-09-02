@@ -1,0 +1,7 @@
+{
+  int index=mRollo.mState.selectedIconIndex;
+  if (mRollo.mState.flingVelocityX == 0 && index >= 0 && index < mAllAppsList.size()) {
+    ApplicationInfo app=mAllAppsList.get(index);
+    mLauncher.startActivitySafely(app.intent);
+  }
+}

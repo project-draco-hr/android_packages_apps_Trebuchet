@@ -1,4 +1,6 @@
 {
+  super.onTouchEvent(ev);
   mTouchHandler=mFlingHandler;
-  return mTouchHandler.onTouchEvent(ev);
+  mTouchHandler.onTouchEvent(ev);
+  return true;
 }

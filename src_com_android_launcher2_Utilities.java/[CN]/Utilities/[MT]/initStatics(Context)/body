@@ -1,0 +1,5 @@
+{
+  final Resources resources=context.getResources();
+  sIconWidth=sIconHeight=(int)resources.getDimension(android.R.dimen.app_icon_size);
+  sIconTextureWidth=sIconTextureHeight=roundToPow2(sIconWidth);
+}

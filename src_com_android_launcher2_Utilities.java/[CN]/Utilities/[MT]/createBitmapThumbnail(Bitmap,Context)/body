@@ -1,8 +1,7 @@
 {
 synchronized (sCanvas) {
     if (sIconWidth == -1) {
-      final Resources resources=context.getResources();
-      sIconWidth=sIconHeight=(int)resources.getDimension(android.R.dimen.app_icon_size);
+      initStatics(context);
     }
     int width=sIconWidth;
     int height=sIconHeight;
