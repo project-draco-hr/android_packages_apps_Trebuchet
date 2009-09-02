@@ -1,0 +1,8 @@
+{
+  int iconsPerPage=Defines.COLUMNS_PER_PAGE * Defines.ROWS_PER_PAGE;
+  int pages=iconCount / iconsPerPage;
+  if (pages * iconsPerPage != iconCount) {
+    pages++;
+  }
+  return pages;
+}

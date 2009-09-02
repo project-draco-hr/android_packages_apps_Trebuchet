@@ -6,4 +6,7 @@
   if (mAllAppsList != null) {
     mRollo.setApps(mAllAppsList);
   }
+  Resources res=getContext().getResources();
+  int barHeight=(int)res.getDimension(R.dimen.button_bar_height);
+  mScrollHandleTop=h - barHeight;
 }
