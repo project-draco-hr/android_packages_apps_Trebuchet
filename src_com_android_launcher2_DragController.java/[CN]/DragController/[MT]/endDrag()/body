@@ -11,9 +11,5 @@
       mDragView.remove();
       mDragView=null;
     }
-    if (mDragBitmap != null) {
-      mDragBitmap.recycle();
-      mDragBitmap=null;
-    }
   }
 }
