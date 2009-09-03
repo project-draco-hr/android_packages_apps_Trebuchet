@@ -1,12 +1,7 @@
 {
   if (mAllAppsVisible) {
     Log.d(LOG_TAG,"closing all apps");
-    if (animated) {
-      mAllAppsGrid.setVisibility(View.GONE);
-    }
- else {
-      mAllAppsGrid.setVisibility(View.GONE);
-    }
+    mAllAppsGrid.hide(animated);
     mAllAppsVisible=false;
     mWorkspace.getChildAt(mWorkspace.getCurrentScreen()).requestFocus();
     mWorkspace.show();

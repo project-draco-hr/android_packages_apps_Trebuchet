@@ -1,6 +1,6 @@
 {
   mAllAppsVisible=true;
-  mAllAppsGrid.setVisibility(View.VISIBLE);
+  mAllAppsGrid.show();
   mWorkspace.hide();
   mDeleteZone.setVisibility(View.GONE);
   mHandleView.setVisibility(View.GONE);

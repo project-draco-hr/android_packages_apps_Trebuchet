@@ -1,0 +1,5 @@
+{
+  mRollo.mState.read();
+  mRollo.mState.visible=1;
+  mRollo.mState.save();
+}
