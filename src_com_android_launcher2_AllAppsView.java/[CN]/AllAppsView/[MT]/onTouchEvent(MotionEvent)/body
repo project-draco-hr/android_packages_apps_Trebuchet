@@ -1,5 +1,8 @@
 {
   super.onTouchEvent(ev);
+  if (mRollo.mState.visible == 0) {
+    return false;
+  }
   mTouchHandler=mFlingHandler;
   mTouchHandler.onTouchEvent(ev);
   return true;
