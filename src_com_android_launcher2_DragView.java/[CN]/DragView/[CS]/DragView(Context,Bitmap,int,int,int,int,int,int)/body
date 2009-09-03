@@ -2,13 +2,11 @@
   super(context);
   mWindowManager=WindowManagerImpl.getDefault();
   mTween=new SymmetricalLinearTween(false,110,this);
-  int width=bitmap.getWidth();
-  int height=bitmap.getHeight();
   Matrix scale=new Matrix();
   float scaleFactor=width;
   scaleFactor=mScale=(scaleFactor + DRAG_SCALE) / scaleFactor;
   scale.setScale(scaleFactor,scaleFactor);
-  mBitmap=Bitmap.createBitmap(bitmap,0,0,width,height,scale,true);
+  mBitmap=Bitmap.createBitmap(bitmap,left,top,width,height,scale,true);
   mRegistrationX=registrationX + (DRAG_SCALE / 2);
   mRegistrationY=registrationY + (DRAG_SCALE / 2);
 }

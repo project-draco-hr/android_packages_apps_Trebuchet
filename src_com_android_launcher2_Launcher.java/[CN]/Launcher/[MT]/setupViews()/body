@@ -5,6 +5,7 @@
   dragLayer.setDragController(dragController);
   mAllAppsGrid=(AllAppsView)dragLayer.findViewById(R.id.all_apps_view);
   mAllAppsGrid.setLauncher(this);
+  mAllAppsGrid.setDragController(dragController);
   mWorkspace=(Workspace)dragLayer.findViewById(R.id.workspace);
   final Workspace workspace=mWorkspace;
   DeleteZone deleteZone=(DeleteZone)dragLayer.findViewById(R.id.delete_zone);
