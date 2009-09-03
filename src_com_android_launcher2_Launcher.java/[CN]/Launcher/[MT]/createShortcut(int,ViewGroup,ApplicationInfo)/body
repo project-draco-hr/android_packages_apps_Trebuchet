@@ -1,5 +1,8 @@
 {
   TextView favorite=(TextView)mInflater.inflate(layoutResId,parent,false);
+  if (info.icon == null) {
+    info.icon=AppInfoCache.getIconDrawable(getPackageManager(),info);
+  }
   if (!info.filtered) {
     info.icon=Utilities.createIconThumbnail(info.icon,this);
     info.filtered=true;
