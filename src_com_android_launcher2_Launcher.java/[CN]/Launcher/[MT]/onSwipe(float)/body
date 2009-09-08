@@ -1,0 +1,10 @@
+{
+switch (mMode) {
+case MODE_WORKSPACE:
+    setWorkspaceAndAllAppsScale(-amount);
+  break;
+case MODE_ALL_APPS:
+setWorkspaceAndAllAppsScale(1 - amount);
+break;
+}
+}
