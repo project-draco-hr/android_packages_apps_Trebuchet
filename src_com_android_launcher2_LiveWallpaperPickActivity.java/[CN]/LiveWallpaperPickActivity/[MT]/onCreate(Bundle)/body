@@ -1,9 +1,14 @@
 {
+  super.onCreate(icicle);
   mPackageManager=getPackageManager();
   mWallpaperManager=WallpaperManager.getInstance(this);
-  super.onCreate(icicle);
+  findLiveWallpapers();
+  setContentView(R.layout.live_wallpaper_content);
+  mGallery=(Gallery)findViewById(R.id.gallery);
+  mGallery.setAdapter(new ImageAdapter(this));
+  mGallery.setOnItemSelectedListener(this);
+  mGallery.setCallbackDuringFling(false);
   View button=findViewById(R.id.set);
-  button.setEnabled(false);
   button.setOnClickListener(this);
   setResult(RESULT_CANCELED);
 }

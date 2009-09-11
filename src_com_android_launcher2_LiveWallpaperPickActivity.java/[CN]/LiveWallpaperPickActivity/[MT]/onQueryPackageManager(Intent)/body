@@ -1,3 +1,0 @@
-{
-  return mPackageManager.queryIntentServices(queryIntent,0);
-}
