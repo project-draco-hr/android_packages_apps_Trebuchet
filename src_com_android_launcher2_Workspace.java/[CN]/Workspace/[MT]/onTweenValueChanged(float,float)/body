@@ -1,4 +1,0 @@
-{
-  mAlpha=(int)(255 * value);
-  invalidate();
-}

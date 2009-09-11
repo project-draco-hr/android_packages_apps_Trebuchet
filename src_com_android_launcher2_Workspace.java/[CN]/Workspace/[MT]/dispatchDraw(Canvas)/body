@@ -1,13 +1,22 @@
 {
   boolean restore=false;
   int restoreCount=0;
-  int alpha=mAlpha;
-  if (alpha < 255) {
+  float scale=mScale;
+  if (scale < 0.999f) {
     int sx=mScrollX;
+    int alpha=(scale < 0.5f) ? (int)(255 * 2 * scale) : 255;
     restoreCount=canvas.saveLayerAlpha(sx,0,sx + getWidth(),getHeight(),alpha,Canvas.HAS_ALPHA_LAYER_SAVE_FLAG | Canvas.CLIP_TO_LAYER_SAVE_FLAG);
     restore=true;
+    if (scale < 0.999f) {
+      int w=getWidth();
+      w+=2 * mCurrentScreen * w;
+      int h=getHeight();
+      canvas.translate(w / 2,h / 2);
+      canvas.scale(scale,scale);
+      canvas.translate(-w / 2,-h / 2);
+    }
   }
-  boolean fastDraw=mTouchState != TOUCH_STATE_SCROLLING && mNextScreen == INVALID_SCREEN;
+  boolean fastDraw=mTouchState != TOUCH_STATE_SCROLLING && mNextScreen == INVALID_SCREEN && scale > 0.999f;
   if (fastDraw) {
     drawChild(canvas,getChildAt(mCurrentScreen),getDrawingTime());
   }

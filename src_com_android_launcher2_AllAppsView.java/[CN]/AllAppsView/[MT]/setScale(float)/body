@@ -1,0 +1,12 @@
+{
+  mRollo.mState.read();
+  if (amount > 0.001f) {
+    mRollo.mState.visible=1;
+    mRollo.mState.zoom=(int)(SCALE_SCALE * amount);
+  }
+ else {
+    mRollo.mState.visible=0;
+    mRollo.mState.zoom=0;
+  }
+  mRollo.mState.save();
+}

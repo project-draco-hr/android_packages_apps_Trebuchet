@@ -1,3 +1,16 @@
 {
-  return mDragController.onTouchEvent(ev);
+  boolean result=false;
+  if ((mAllowed & DRAG) != 0) {
+    result=mDragController.onTouchEvent(ev);
+    if (result) {
+      mAllowed=DRAG;
+    }
+  }
+  if ((mAllowed & SWIPE) != 0) {
+    result=mSwipeController.onTouchEvent(ev);
+    if (result) {
+      mAllowed=SWIPE;
+    }
+  }
+  return result;
 }
