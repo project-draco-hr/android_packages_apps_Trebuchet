@@ -6,7 +6,10 @@
  else {
     image=(ImageView)convertView;
   }
-  image.setImageBitmap(mThumbBitmaps.get(position));
+  image.setImageDrawable(mThumbnails.get(position));
   image.getDrawable().setDither(true);
+  image.setAdjustViewBounds(true);
+  image.setScaleType(ImageView.ScaleType.FIT_CENTER);
+  image.setLayoutParams(new Gallery.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.FILL_PARENT));
   return image;
 }

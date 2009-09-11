@@ -1,10 +1,11 @@
 {
-  mThumbBitmaps=new ArrayList<Bitmap>(24);
+  mThumbnails=new ArrayList<Drawable>(24);
   List<ResolveInfo> list=mPackageManager.queryIntentServices(getTargetIntent(),PackageManager.GET_META_DATA);
   mWallpaperIntents=new ArrayList<Intent>(list.size());
   mWallpaperInfos=new ArrayList<WallpaperInfo>(list.size());
   int listSize=list.size();
-  Log.d(TAG,String.format("findLiveWallpapers: found %d wallpaper services",listSize));
+  DisplayMetrics metrics=new DisplayMetrics();
+  getWindowManager().getDefaultDisplay().getMetrics(metrics);
   for (int i=0; i < listSize; i++) {
     ResolveInfo resolveInfo=list.get(i);
     ComponentInfo ci=resolveInfo.serviceInfo;
@@ -20,23 +21,26 @@ catch (    IOException e) {
       Log.w(TAG,"Skipping wallpaper " + ci,e);
       continue;
     }
-    String packageName=ci.applicationInfo.packageName;
-    String className=ci.name;
-    Log.d(TAG,String.format("findLiveWallpapers: [%d] pkg=%s cls=%s",i,packageName,className));
+    String packageName=winfo.getPackageName();
+    String className=winfo.getServiceName();
     Intent intent=new Intent(getTargetIntent());
     intent.setClassName(packageName,className);
     mWallpaperIntents.add(intent);
     mWallpaperInfos.add(winfo);
-    Bitmap thumb=Bitmap.createBitmap(240,160,Bitmap.Config.ARGB_8888);
-    android.graphics.Canvas can=new android.graphics.Canvas(thumb);
-    android.graphics.Paint pt=new android.graphics.Paint(android.graphics.Paint.ANTI_ALIAS_FLAG | android.graphics.Paint.DITHER_FLAG);
-    pt.setARGB(255,0,0,255);
-    can.drawPaint(pt);
-    pt.setARGB(255,255,255,255);
-    pt.setTextSize(12);
-    can.drawText(className,16,150,pt);
-    pt.setTextSize(80);
-    can.drawText(String.format("%d",i),100,100,pt);
-    mThumbBitmaps.add(thumb);
+    Drawable thumb=winfo.loadThumbnail(mPackageManager);
+    if (null == thumb) {
+      Bitmap thumbBit=Bitmap.createBitmap((int)(240 * metrics.density),(int)(240 * metrics.density),Bitmap.Config.ARGB_8888);
+      android.graphics.Canvas can=new android.graphics.Canvas(thumbBit);
+      android.graphics.Paint pt=new android.graphics.Paint(android.graphics.Paint.ANTI_ALIAS_FLAG | android.graphics.Paint.DITHER_FLAG);
+      pt.setARGB(255,0,0,255);
+      can.drawPaint(pt);
+      pt.setARGB(255,255,255,255);
+      pt.setTextSize(12 * metrics.density);
+      can.drawText(className,(int)(12 * metrics.density),(int)(thumbBit.getHeight() - 12 * metrics.density),pt);
+      pt.setTextSize(100 * metrics.density);
+      can.drawText(String.format("#%d",i),(int)(thumbBit.getWidth() * 0.3),(int)(thumbBit.getHeight() * 0.5),pt);
+      thumb=new BitmapDrawable(thumbBit);
+    }
+    mThumbnails.add(thumb);
   }
 }
