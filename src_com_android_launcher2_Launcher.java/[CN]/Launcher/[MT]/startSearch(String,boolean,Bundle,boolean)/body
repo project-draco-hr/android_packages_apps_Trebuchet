@@ -1,5 +1,5 @@
 {
-  closeAllAppsDialog(false);
+  closeAllApps(false);
   Search searchWidget=mWorkspace.findSearchWidgetOnCurrentScreen();
   if (searchWidget == null) {
     showSearchDialog(initialQuery,selectInitialQuery,appSearchData,globalSearch);

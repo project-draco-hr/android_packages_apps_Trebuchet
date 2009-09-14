@@ -1,0 +1,12 @@
+{
+  if (mAllAppsGrid.isVisible()) {
+    mSwipeController.setRange(0,1);
+    if (animated) {
+      mSwipeController.animate(1);
+    }
+ else {
+      mSwipeController.setImmediate(1);
+    }
+    mWorkspace.getChildAt(mWorkspace.getCurrentScreen()).requestFocus();
+  }
+}

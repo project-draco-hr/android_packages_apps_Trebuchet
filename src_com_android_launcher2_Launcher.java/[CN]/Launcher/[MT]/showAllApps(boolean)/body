@@ -1,0 +1,14 @@
+{
+  if (mMode == MODE_ALL_APPS) {
+    return;
+  }
+  mSwipeController.setRange(-1,0);
+  if (animated) {
+    mSwipeController.animate(-1);
+  }
+ else {
+    mSwipeController.setImmediate(-1);
+  }
+  mWorkspace.hide();
+  mDeleteZone.setVisibility(View.GONE);
+}

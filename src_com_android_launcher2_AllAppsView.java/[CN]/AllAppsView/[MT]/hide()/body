@@ -1,6 +1,0 @@
-{
-  mRollo.mState.read();
-  mRollo.mState.visible=0;
-  mRollo.mState.zoom=0;
-  mRollo.mState.save();
-}

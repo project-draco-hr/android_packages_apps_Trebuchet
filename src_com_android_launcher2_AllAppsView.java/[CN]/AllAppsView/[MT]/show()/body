@@ -1,6 +1,0 @@
-{
-  mRollo.mState.read();
-  mRollo.mState.visible=1;
-  mRollo.mState.zoom=SCALE_SCALE;
-  mRollo.mState.save();
-}

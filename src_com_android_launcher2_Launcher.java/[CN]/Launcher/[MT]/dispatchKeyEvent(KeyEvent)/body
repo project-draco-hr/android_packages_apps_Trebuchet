@@ -14,8 +14,8 @@ switch (event.getKeyCode()) {
 case KeyEvent.KEYCODE_BACK:
 if (!event.isCanceled()) {
 mWorkspace.dispatchKeyEvent(event);
-if (mAllAppsVisible) {
-  closeAllAppsDialog(true);
+if (isAllAppsVisible()) {
+  closeAllApps(true);
 }
  else {
   closeFolder();

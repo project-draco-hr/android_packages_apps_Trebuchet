@@ -1,0 +1,11 @@
+{
+  mListener.onStartSwipe();
+  dest=clamp(dest);
+  mDirection=dest > amount ? 1 : -1;
+  mVelocity=mDirection * 0.002f;
+  mAmount=amount;
+  mDest=dest;
+  mFlingTime=SystemClock.uptimeMillis();
+  mLastTime=0;
+  scheduleAnim();
+}

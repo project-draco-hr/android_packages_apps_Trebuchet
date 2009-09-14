@@ -1,6 +1,7 @@
 {
   mVelocityTracker.computeCurrentVelocity(1);
   mVelocity=mVelocityTracker.getYVelocity() / mSwipeDistance;
+  Log.d(TAG,"mVelocity=" + mVelocity);
   mDirection=mVelocity >= 0.0f ? 1 : -1;
   mAmount=clamp((screenY - mDownY) / mSwipeDistance);
   if (mAmount < 0) {

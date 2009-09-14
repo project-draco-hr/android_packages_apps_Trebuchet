@@ -1,7 +1,0 @@
-{
-  mAllAppsVisible=true;
-  mAllAppsGrid.show();
-  mWorkspace.hide();
-  mDeleteZone.setVisibility(View.GONE);
-  mHandleView.setVisibility(View.GONE);
-}
