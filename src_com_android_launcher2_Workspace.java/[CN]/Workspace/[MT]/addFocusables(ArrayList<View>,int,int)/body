@@ -1,5 +1,5 @@
 {
-  if (mLauncher.isAllAppsVisible()) {
+  if (!mLauncher.isAllAppsVisible()) {
     final Folder openFolder=getOpenFolder();
     if (openFolder == null) {
       getChildAt(mCurrentScreen).addFocusables(views,direction);
