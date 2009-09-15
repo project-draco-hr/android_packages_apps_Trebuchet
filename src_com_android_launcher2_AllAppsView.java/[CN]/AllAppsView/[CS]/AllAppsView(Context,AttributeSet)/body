@@ -5,4 +5,5 @@
   mConfig=ViewConfiguration.get(context);
   setOnClickListener(this);
   setOnLongClickListener(this);
+  setOnTop(true);
 }
