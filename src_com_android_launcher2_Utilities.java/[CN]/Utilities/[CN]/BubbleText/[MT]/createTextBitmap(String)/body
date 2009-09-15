@@ -6,7 +6,7 @@
   if (lineCount > MAX_LINES) {
     lineCount=MAX_LINES;
   }
-  if (lineCount > 0) {
+  if (!TEXT_BURN && lineCount > 0) {
     RectF bubbleRect=mBubbleRect;
     bubbleRect.bottom=height(lineCount);
     c.drawRoundRect(bubbleRect,mCornerRadius,mCornerRadius,mRectPaint);
