@@ -1,11 +1,4 @@
 {
-  int iconCount=mAllAppsList.size();
   int index=chooseTappedIcon(x,y,scrollX,currentPage);
-  if (index < 0 || index >= iconCount) {
-    mState.selectedIconIndex=-1;
-    return;
-  }
- else {
-    mState.selectedIconIndex=index;
-  }
+  selectIcon(index);
 }

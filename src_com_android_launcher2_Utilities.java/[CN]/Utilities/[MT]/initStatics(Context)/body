@@ -1,5 +1,9 @@
 {
   final Resources resources=context.getResources();
+  final DisplayMetrics metrics=resources.getDisplayMetrics();
+  final float density=metrics.density;
   sIconWidth=sIconHeight=(int)resources.getDimension(android.R.dimen.app_icon_size);
   sIconTextureWidth=sIconTextureHeight=roundToPow2(sIconWidth);
+  sBlurPaint.setMaskFilter(new BlurMaskFilter(7 * density,BlurMaskFilter.Blur.NORMAL));
+  sGlowColorPaint.setColor(0xffff9000);
 }
