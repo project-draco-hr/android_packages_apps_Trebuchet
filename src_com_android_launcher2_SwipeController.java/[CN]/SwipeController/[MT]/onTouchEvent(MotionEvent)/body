@@ -1,0 +1,42 @@
+{
+  if (mVelocityTracker == null) {
+    mVelocityTracker=VelocityTracker.obtain();
+  }
+  mVelocityTracker.addMovement(ev);
+  final int screenX=(int)ev.getRawX();
+  final int screenY=(int)ev.getRawY();
+  final int deltaX=screenX - mDownX;
+  final int deltaY=screenY - mDownY;
+  final int action=ev.getAction();
+switch (action) {
+case MotionEvent.ACTION_DOWN:
+    mCanceled=false;
+  mTracking=false;
+mDownX=screenX;
+mDownY=screenY;
+break;
+case MotionEvent.ACTION_MOVE:
+if (!mCanceled && !mTracking) {
+if (Math.abs(deltaX) > mSlop) {
+mCanceled=true;
+mTracking=false;
+}
+if (Math.abs(deltaY) > mSlop) {
+mTracking=true;
+}
+}
+if (mTracking && !mCanceled) {
+track(screenY);
+}
+break;
+case MotionEvent.ACTION_CANCEL:
+case MotionEvent.ACTION_UP:
+if (mTracking && !mCanceled) {
+fling(screenY);
+}
+mVelocityTracker.recycle();
+mVelocityTracker=null;
+break;
+}
+return mTracking || mCanceled;
+}

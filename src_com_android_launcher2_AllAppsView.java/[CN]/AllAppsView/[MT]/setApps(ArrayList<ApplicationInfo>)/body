@@ -5,4 +5,5 @@
   }
   mPageCount=countPages(list.size());
   Log.d(TAG,"setApps mRollo=" + mRollo + " list="+ list);
+  mLocked=false;
 }

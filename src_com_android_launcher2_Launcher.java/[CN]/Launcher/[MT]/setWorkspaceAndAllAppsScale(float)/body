@@ -1,0 +1,14 @@
+{
+  if (amount < 0.001f) {
+    amount=0.0f;
+  }
+  if (amount > 0.999f) {
+    amount=1.0f;
+    mWorkspace.setVisibility(View.INVISIBLE);
+  }
+ else {
+    mWorkspace.setVisibility(View.VISIBLE);
+  }
+  mWorkspace.setScale(1 - amount);
+  mAllAppsGrid.setScale(amount);
+}

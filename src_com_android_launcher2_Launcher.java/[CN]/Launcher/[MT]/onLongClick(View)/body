@@ -10,6 +10,7 @@
     return true;
   }
   if (mWorkspace.allowLongPress()) {
+    mSwipeController.cancelSwipe();
     if (cellInfo.cell == null) {
       if (cellInfo.valid) {
         mWorkspace.setAllowLongPress(false);

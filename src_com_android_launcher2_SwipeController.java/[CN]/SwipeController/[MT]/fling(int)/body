@@ -1,0 +1,15 @@
+{
+  mVelocityTracker.computeCurrentVelocity(1);
+  mVelocity=mVelocityTracker.getYVelocity() / mSwipeDistance;
+  mDirection=mVelocity >= 0.0f ? 1 : -1;
+  mAmount=clamp((screenY - mDownY) / mSwipeDistance);
+  if (mAmount < 0) {
+    mDest=clamp(mVelocity < 0 ? -1.0f : 0.0f);
+  }
+ else {
+    mDest=clamp(mVelocity < 0 ? 0.0f : 1.0f);
+  }
+  mFlingTime=SystemClock.uptimeMillis();
+  mLastTime=0;
+  scheduleAnim();
+}

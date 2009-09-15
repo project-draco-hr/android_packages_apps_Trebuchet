@@ -1,0 +1,11 @@
+{
+  if (v < mMinDest) {
+    return mMinDest;
+  }
+ else   if (v > mMaxDest) {
+    return mMaxDest;
+  }
+ else {
+    return v;
+  }
+}
