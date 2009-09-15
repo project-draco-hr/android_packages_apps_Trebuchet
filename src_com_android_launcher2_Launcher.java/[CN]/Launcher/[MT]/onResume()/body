@@ -1,6 +1,5 @@
 {
   super.onResume();
-  Log.d(TAG,"onResume mRestoring=" + mRestoring);
   if (mRestoring) {
     mWorkspaceLoading=true;
     mModel.startLoader(this,true);
