@@ -1,5 +1,6 @@
 {
-  mSelectedIntent=intentForPosition(position);
+  Log.d(TAG,String.format("onItemSelected: position=%d",position));
+  mSelectedIntent=mWallpaperIntents.get(position);
   findViewById(R.id.set).setEnabled(true);
   WallpaperConnection conn=new WallpaperConnection(mSelectedIntent);
   if (conn.connect()) {

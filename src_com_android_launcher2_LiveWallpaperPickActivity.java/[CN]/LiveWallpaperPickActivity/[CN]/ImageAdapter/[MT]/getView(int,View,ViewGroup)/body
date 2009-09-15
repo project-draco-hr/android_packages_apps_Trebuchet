@@ -1,0 +1,12 @@
+{
+  ImageView image;
+  if (convertView == null) {
+    image=(ImageView)mLayoutInflater.inflate(R.layout.wallpaper_item,parent,false);
+  }
+ else {
+    image=(ImageView)convertView;
+  }
+  image.setImageBitmap(mThumbBitmaps.get(position));
+  image.getDrawable().setDither(true);
+  return image;
+}
