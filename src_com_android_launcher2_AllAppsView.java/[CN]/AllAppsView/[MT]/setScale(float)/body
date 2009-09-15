@@ -4,7 +4,7 @@
   mRollo.clearSelectedIcon();
   if (amount > 0.001f) {
     mRollo.mState.visible=1;
-    mRollo.mState.zoom=(int)(SCALE_SCALE * amount);
+    mRollo.mState.zoom=amount;
   }
  else {
     mRollo.mState.visible=0;
