@@ -1,18 +1,32 @@
 {
   mThumbBitmaps=new ArrayList<Bitmap>(24);
-  List<ResolveInfo> list=mPackageManager.queryIntentServices(getTargetIntent(),0);
+  List<ResolveInfo> list=mPackageManager.queryIntentServices(getTargetIntent(),PackageManager.GET_META_DATA);
   mWallpaperIntents=new ArrayList<Intent>(list.size());
+  mWallpaperInfos=new ArrayList<WallpaperInfo>(list.size());
   int listSize=list.size();
   Log.d(TAG,String.format("findLiveWallpapers: found %d wallpaper services",listSize));
   for (int i=0; i < listSize; i++) {
     ResolveInfo resolveInfo=list.get(i);
     ComponentInfo ci=resolveInfo.serviceInfo;
+    WallpaperInfo winfo;
+    try {
+      winfo=new WallpaperInfo(this,resolveInfo);
+    }
+ catch (    XmlPullParserException e) {
+      Log.w(TAG,"Skipping wallpaper " + ci,e);
+      continue;
+    }
+catch (    IOException e) {
+      Log.w(TAG,"Skipping wallpaper " + ci,e);
+      continue;
+    }
     String packageName=ci.applicationInfo.packageName;
     String className=ci.name;
     Log.d(TAG,String.format("findLiveWallpapers: [%d] pkg=%s cls=%s",i,packageName,className));
     Intent intent=new Intent(getTargetIntent());
     intent.setClassName(packageName,className);
     mWallpaperIntents.add(intent);
+    mWallpaperInfos.add(winfo);
     Bitmap thumb=Bitmap.createBitmap(240,160,Bitmap.Config.ARGB_8888);
     android.graphics.Canvas can=new android.graphics.Canvas(thumb);
     android.graphics.Paint pt=new android.graphics.Paint(android.graphics.Paint.ANTI_ALIAS_FLAG | android.graphics.Paint.DITHER_FLAG);

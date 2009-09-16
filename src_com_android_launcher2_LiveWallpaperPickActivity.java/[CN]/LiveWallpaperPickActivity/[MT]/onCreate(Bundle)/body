@@ -10,5 +10,8 @@
   mGallery.setCallbackDuringFling(false);
   View button=findViewById(R.id.set);
   button.setOnClickListener(this);
+  mConfigureButton=(Button)findViewById(R.id.configure);
+  mConfigureButton.setEnabled(false);
+  mConfigureButton.setOnClickListener(this);
   setResult(RESULT_CANCELED);
 }
