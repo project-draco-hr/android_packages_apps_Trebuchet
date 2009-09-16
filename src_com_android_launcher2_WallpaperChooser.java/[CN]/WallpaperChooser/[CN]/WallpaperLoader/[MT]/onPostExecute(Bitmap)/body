@@ -1,6 +1,6 @@
 {
   if (b == null)   return;
-  if (!isCancelled()) {
+  if (!isCancelled() && !mOptions.mCancel) {
     if (mBitmap != null) {
       mBitmap.recycle();
     }

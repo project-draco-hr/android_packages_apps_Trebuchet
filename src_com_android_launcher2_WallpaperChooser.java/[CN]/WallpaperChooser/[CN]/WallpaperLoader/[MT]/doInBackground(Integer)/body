@@ -1,4 +1,9 @@
 {
   if (isCancelled())   return null;
-  return BitmapFactory.decodeResource(getResources(),mImages.get(params[0]),null);
+  try {
+    return BitmapFactory.decodeResource(getResources(),mImages.get(params[0]),mOptions);
+  }
+ catch (  OutOfMemoryError e) {
+    return null;
+  }
 }
