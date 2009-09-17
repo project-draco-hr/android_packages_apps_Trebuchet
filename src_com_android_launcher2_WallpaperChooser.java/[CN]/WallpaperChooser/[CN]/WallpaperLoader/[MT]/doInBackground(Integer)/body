@@ -1,0 +1,4 @@
+{
+  if (isCancelled())   return null;
+  return BitmapFactory.decodeResource(getResources(),mImages.get(params[0]),null);
+}
