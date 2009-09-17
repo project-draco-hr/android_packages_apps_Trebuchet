@@ -21,6 +21,9 @@
   textPaint.setTextSize(13 * scale);
   textPaint.setColor(0xffffffff);
   textPaint.setAntiAlias(true);
+  if (TEXT_BURN) {
+    textPaint.setShadowLayer(8,0,0,0xff000000);
+  }
   float ascent=-textPaint.ascent();
   float descent=textPaint.descent();
   float leading=0.0f;
