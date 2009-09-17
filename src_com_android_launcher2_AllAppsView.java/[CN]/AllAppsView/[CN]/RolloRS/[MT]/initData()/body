@@ -1,6 +1,6 @@
 {
-  mParams=new Params(mRS);
-  mState=new State(mRS);
+  mParams=new Params();
+  mState=new State();
   final Utilities.BubbleText bubble=new Utilities.BubbleText(getContext());
   mParams.bubbleWidth=bubble.getBubbleWidth();
   mParams.bubbleHeight=bubble.getMaxBubbleHeight();

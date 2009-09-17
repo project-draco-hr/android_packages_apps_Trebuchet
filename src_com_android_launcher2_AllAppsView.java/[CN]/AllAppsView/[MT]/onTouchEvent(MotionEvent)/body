@@ -22,7 +22,6 @@ mRollo.clearSelectedIcon();
 mRollo.selectIcon(x,(int)ev.getY(),mRollo.mState.startScrollX,(-mRollo.mState.startScrollX / Defines.SCREEN_WIDTH_PX));
 }
 mRollo.mState.flingVelocityX=0;
-mRollo.mState.adjustedDeceleration=0;
 mRollo.mState.save();
 mVelocity=VelocityTracker.obtain();
 mVelocity.addMovement(ev);
