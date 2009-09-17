@@ -14,15 +14,8 @@
   mParams.scrollHandleTextureHeight=128;
   mParams.save();
   mState.save();
-  mSelectionBitmap=Bitmap.createBitmap(Defines.ICON_WIDTH_PX,Defines.ICON_HEIGHT_PX,Bitmap.Config.ARGB_8888);
-  Bitmap selectionBitmap=mSelectionBitmap;
-  Paint paint=new Paint();
-  float radius=12 * getContext().getResources().getDisplayMetrics().density;
-  Canvas canvas=new Canvas(selectionBitmap);
-  canvas.drawColor(0xffff0000);
-  mSelectedIcon=Allocation.createFromBitmap(mRS,selectionBitmap,Element.RGBA_8888,false);
-  mSelectedIcon.uploadToTexture(0);
-  mState.selectedIconTexture=mSelectedIcon.getID();
+  mSelectionBitmap=Bitmap.createBitmap(Defines.ICON_TEXTURE_WIDTH_PX,Defines.ICON_TEXTURE_HEIGHT_PX,Bitmap.Config.ARGB_8888);
+  mSelectionCanvas=new Canvas(mSelectionBitmap);
   Log.d(TAG,"initData calling mRollo.setApps");
   setApps(null);
 }

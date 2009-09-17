@@ -25,5 +25,8 @@
     mScript.bindAllocation(mAllocIconID,Defines.ALLOC_ICON_IDS);
     mScript.bindAllocation(mAllocLabelID,Defines.ALLOC_LABEL_IDS);
   }
+  if (mAllAppsList != null) {
+    selectIcon(0);
+  }
   mState.save();
 }
