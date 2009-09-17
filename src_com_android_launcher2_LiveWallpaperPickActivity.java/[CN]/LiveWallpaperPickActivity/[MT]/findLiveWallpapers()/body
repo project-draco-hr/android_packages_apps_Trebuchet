@@ -1,0 +1,28 @@
+{
+  mThumbBitmaps=new ArrayList<Bitmap>(24);
+  List<ResolveInfo> list=mPackageManager.queryIntentServices(getTargetIntent(),0);
+  mWallpaperIntents=new ArrayList<Intent>(list.size());
+  int listSize=list.size();
+  Log.d(TAG,String.format("findLiveWallpapers: found %d wallpaper services",listSize));
+  for (int i=0; i < listSize; i++) {
+    ResolveInfo resolveInfo=list.get(i);
+    ComponentInfo ci=resolveInfo.serviceInfo;
+    String packageName=ci.applicationInfo.packageName;
+    String className=ci.name;
+    Log.d(TAG,String.format("findLiveWallpapers: [%d] pkg=%s cls=%s",i,packageName,className));
+    Intent intent=new Intent(getTargetIntent());
+    intent.setClassName(packageName,className);
+    mWallpaperIntents.add(intent);
+    Bitmap thumb=Bitmap.createBitmap(240,160,Bitmap.Config.ARGB_8888);
+    android.graphics.Canvas can=new android.graphics.Canvas(thumb);
+    android.graphics.Paint pt=new android.graphics.Paint(android.graphics.Paint.ANTI_ALIAS_FLAG | android.graphics.Paint.DITHER_FLAG);
+    pt.setARGB(255,0,0,255);
+    can.drawPaint(pt);
+    pt.setARGB(255,255,255,255);
+    pt.setTextSize(12);
+    can.drawText(className,16,150,pt);
+    pt.setTextSize(80);
+    can.drawText(String.format("%d",i),100,100,pt);
+    mThumbBitmaps.add(thumb);
+  }
+}

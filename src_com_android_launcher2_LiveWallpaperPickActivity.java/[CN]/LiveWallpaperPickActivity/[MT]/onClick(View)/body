@@ -1,4 +1,5 @@
 {
+  Log.d(TAG,"Set clicked");
   if (mSelectedIntent != null) {
     try {
       mWallpaperManager.getIWallpaperManager().setWallpaperComponent(mSelectedIntent.getComponent());
