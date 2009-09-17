@@ -11,5 +11,9 @@
     drawable.setFilterBitmap(true);
     drawable.setDither(true);
     view.postInvalidate();
+    mLoader=null;
+  }
+ else {
+    b.recycle();
   }
 }
