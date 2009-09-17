@@ -8,10 +8,12 @@
     handleFolderClick((FolderInfo)tag);
   }
  else   if (v == mHandleView) {
-    if (mAllAppsVisible) {
+    Log.d(TAG,"onClick");
+    if (isAllAppsVisible()) {
+      closeAllApps(true);
     }
  else {
-      showAllAppsDialog();
+      showAllApps(true);
     }
   }
 }

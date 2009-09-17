@@ -1,4 +1,7 @@
 {
+  if (mLocks != 0) {
+    return true;
+  }
   int index=mRollo.mState.selectedIconIndex;
   Log.d(TAG,"long click! velocity=" + mRollo.mState.flingVelocityX + " index="+ index);
   if (mRollo.mState.flingVelocityX == 0 && index >= 0 && index < mAllAppsList.size()) {
@@ -8,7 +11,7 @@
     int left=(Defines.ICON_TEXTURE_WIDTH_PX - Defines.ICON_WIDTH_PX) / 2;
     int top=(Defines.ICON_TEXTURE_HEIGHT_PX - Defines.ICON_HEIGHT_PX) / 2;
     mDragController.startDrag(app.iconBitmap,screenX,screenY,left,top,Defines.ICON_WIDTH_PX,Defines.ICON_HEIGHT_PX,this,app,DragController.DRAG_ACTION_COPY);
-    mLauncher.closeAllAppsDialog(true);
+    mLauncher.closeAllApps(true);
   }
   return true;
 }

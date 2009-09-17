@@ -2,6 +2,7 @@
 switch (mMode) {
 case MODE_WORKSPACE:
     if (amount == -1) {
+      setWorkspaceAndAllAppsScale(-amount);
       mWorkspace.clearChildrenCache();
       mMode=MODE_ALL_APPS;
       mSwipeController.setRange(0,1);
@@ -9,6 +10,7 @@ case MODE_WORKSPACE:
   break;
 case MODE_ALL_APPS:
 if (amount == 1) {
+  setWorkspaceAndAllAppsScale(1 - amount);
   mWorkspace.clearChildrenCache();
   mMode=MODE_WORKSPACE;
   mSwipeController.setRange(-1,0);
