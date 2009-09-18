@@ -1,4 +1,5 @@
 {
+  int currentPage=(int)page;
   int col=-1;
   int row=-1;
   for (int i=0; i < Defines.COLUMNS_PER_PAGE; i++) {

@@ -14,15 +14,16 @@ case MotionEvent.ACTION_DOWN:
   mMotionDownRawY=(int)ev.getRawY();
 mLastMotionX=x;
 mRollo.mState.read();
-mRollo.mState.startScrollX=mRollo.mState.scrollX=mLastScrollX=mRollo.mState.currentScrollX;
-if (mRollo.mState.flingVelocityX != 0) {
+mRollo.mState.newPositionX=ev.getRawX() / Defines.SCREEN_WIDTH_PX;
+mRollo.mState.newTouchDown=1;
+if (mRollo.mState.readVel != 0) {
 mRollo.clearSelectedIcon();
 }
  else {
-mRollo.selectIcon(x,(int)ev.getY(),mRollo.mState.startScrollX,(-mRollo.mState.startScrollX / Defines.SCREEN_WIDTH_PX));
+mRollo.selectIcon(x,(int)ev.getY(),mRollo.mState.readPosX);
 }
-mRollo.mState.flingVelocityX=0;
 mRollo.mState.save();
+mRollo.mInvokeMove.execute();
 mVelocity=VelocityTracker.obtain();
 mVelocity.addMovement(ev);
 mStartedScrolling=false;
@@ -33,24 +34,26 @@ int slop=Math.abs(x - mLastMotionX);
 if (!mStartedScrolling && slop < mConfig.getScaledTouchSlop()) {
 }
  else {
+mRollo.mState.newPositionX=ev.getRawX() / Defines.SCREEN_WIDTH_PX;
+mRollo.mState.newTouchDown=1;
+mRollo.mInvokeMove.execute();
 mStartedScrolling=true;
 mRollo.clearSelectedIcon();
 deltaX=x - mLastMotionX;
 mVelocity.addMovement(ev);
-mRollo.mState.currentScrollX=mLastScrollX;
-mLastScrollX+=deltaX;
-mRollo.mState.scrollX=mLastScrollX;
 mRollo.mState.save();
 mLastMotionX=x;
 }
 break;
 case MotionEvent.ACTION_UP:
 case MotionEvent.ACTION_CANCEL:
+mRollo.mState.newPositionX=ev.getRawX() / Defines.SCREEN_WIDTH_PX;
+mRollo.mState.newTouchDown=0;
 mVelocity.computeCurrentVelocity(1000,mConfig.getScaledMaximumFlingVelocity());
-mRollo.mState.flingTimeMs=(int)SystemClock.uptimeMillis();
-mRollo.mState.flingVelocityX=(int)mVelocity.getXVelocity();
+mRollo.mState.flingVelocityX=mVelocity.getXVelocity() / Defines.SCREEN_WIDTH_PX;
 mRollo.clearSelectedIcon();
 mRollo.mState.save();
+mRollo.mInvokeFling.execute();
 mLastMotionX=-10000;
 mVelocity.recycle();
 mVelocity=null;
