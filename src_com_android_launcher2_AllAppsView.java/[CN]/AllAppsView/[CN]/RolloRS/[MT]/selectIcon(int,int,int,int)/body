@@ -1,4 +1,0 @@
-{
-  int index=chooseTappedIcon(x,y,scrollX,currentPage);
-  selectIcon(index);
-}

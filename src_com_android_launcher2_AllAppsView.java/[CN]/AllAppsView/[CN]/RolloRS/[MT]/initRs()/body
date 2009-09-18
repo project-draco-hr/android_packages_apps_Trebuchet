@@ -5,6 +5,8 @@
   sb.addDefines(Defines.class);
   sb.setType(mParams.mType,"params",Defines.ALLOC_PARAMS);
   sb.setType(mState.mType,"state",Defines.ALLOC_STATE);
+  mInvokeMove=sb.addInvokable("move");
+  mInvokeFling=sb.addInvokable("fling");
   mScript=sb.create();
   mScript.setClearColor(0.0f,0.0f,0.0f,0.0f);
   mScript.bindAllocation(mParams.mAlloc,Defines.ALLOC_PARAMS);
