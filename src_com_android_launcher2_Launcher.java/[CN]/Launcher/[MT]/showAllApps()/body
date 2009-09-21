@@ -3,12 +3,7 @@
     return;
   }
   mSwipeController.setRange(-1,0);
-  if (animated) {
-    mSwipeController.animate(-1);
-  }
- else {
-    mSwipeController.setImmediate(-1);
-  }
+  mSwipeController.setImmediate(-1);
   mWorkspace.hide();
   mDeleteZone.setVisibility(View.GONE);
 }

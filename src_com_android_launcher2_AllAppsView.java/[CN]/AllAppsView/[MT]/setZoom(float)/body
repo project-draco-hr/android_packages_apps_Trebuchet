@@ -1,0 +1,5 @@
+{
+  mRollo.mState.zoom=v;
+  mRollo.mState.save();
+  mRollo.mInvokeZoom.execute();
+}

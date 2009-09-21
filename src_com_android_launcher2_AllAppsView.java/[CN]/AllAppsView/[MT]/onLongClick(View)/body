@@ -11,7 +11,7 @@
     int left=(Defines.ICON_TEXTURE_WIDTH_PX - Defines.ICON_WIDTH_PX) / 2;
     int top=(Defines.ICON_TEXTURE_HEIGHT_PX - Defines.ICON_HEIGHT_PX) / 2;
     mDragController.startDrag(app.iconBitmap,screenX,screenY,left,top,Defines.ICON_WIDTH_PX,Defines.ICON_HEIGHT_PX,this,app,DragController.DRAG_ACTION_COPY);
-    mLauncher.closeAllApps(true);
+    mLauncher.closeAllApps();
   }
   return true;
 }

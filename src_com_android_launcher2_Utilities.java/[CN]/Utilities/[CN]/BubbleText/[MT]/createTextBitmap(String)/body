@@ -6,11 +6,6 @@
   if (lineCount > MAX_LINES) {
     lineCount=MAX_LINES;
   }
-  if (!TEXT_BURN && lineCount > 0) {
-    RectF bubbleRect=mBubbleRect;
-    bubbleRect.bottom=height(lineCount);
-    c.drawRoundRect(bubbleRect,mCornerRadius,mCornerRadius,mRectPaint);
-  }
   for (int i=0; i < lineCount; i++) {
     int x=(int)((mBubbleRect.width() - layout.getLineMax(i)) / 2.0f);
     int y=mFirstLineY + (i * mLineHeight);
