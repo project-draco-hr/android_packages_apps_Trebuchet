@@ -1,4 +1,3 @@
 {
   super.onDetachedFromWindow();
-  if (mBroadcastReceiver != null)   getContext().unregisterReceiver(mBroadcastReceiver);
 }
