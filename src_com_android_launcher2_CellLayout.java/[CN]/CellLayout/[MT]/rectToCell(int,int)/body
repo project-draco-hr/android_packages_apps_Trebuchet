@@ -1,6 +1,7 @@
 {
-  int actualWidth=mCellWidth + mWidthGap;
-  int actualHeight=mCellHeight + mHeightGap;
+  final Resources resources=getResources();
+  int actualWidth=resources.getDimensionPixelSize(R.dimen.workspace_cell_width);
+  int actualHeight=resources.getDimensionPixelSize(R.dimen.workspace_cell_height);
   int smallerSize=Math.min(actualWidth,actualHeight);
   int spanX=(width + smallerSize) / smallerSize;
   int spanY=(height + smallerSize) / smallerSize;
