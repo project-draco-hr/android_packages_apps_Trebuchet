@@ -6,4 +6,5 @@
   setOnClickListener(this);
   setOnLongClickListener(this);
   setOnTop(true);
+  getHolder().setFormat(PixelFormat.TRANSLUCENT);
 }

@@ -9,6 +9,5 @@
  else {
     mWorkspace.setVisibility(View.VISIBLE);
   }
-  mWorkspace.setScale(1 - amount);
   mAllAppsGrid.setScale(amount);
 }

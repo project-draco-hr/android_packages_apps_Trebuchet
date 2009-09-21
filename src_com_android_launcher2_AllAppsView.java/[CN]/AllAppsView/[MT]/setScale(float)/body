@@ -17,4 +17,5 @@
     mLocks&=~LOCK_ZOOMING;
   }
   mRollo.mState.save();
+  mRollo.mInvokeZoom.execute();
 }
