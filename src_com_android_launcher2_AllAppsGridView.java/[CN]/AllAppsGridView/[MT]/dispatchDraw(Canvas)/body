@@ -1,5 +1,0 @@
-{
-  if (mDraw) {
-    super.dispatchDraw(canvas);
-  }
-}
