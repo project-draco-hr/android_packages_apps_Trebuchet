@@ -1,7 +1,4 @@
 {
   onTouchEvent(ev);
-  if (mTracking) {
-    mListener.onStartSwipe();
-  }
   return mTracking;
 }

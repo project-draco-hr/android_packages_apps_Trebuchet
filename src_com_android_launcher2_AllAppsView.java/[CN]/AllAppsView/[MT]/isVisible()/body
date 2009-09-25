@@ -1,3 +1,7 @@
 {
-  return mRollo != null && mRollo.mState.visible != 0;
+  if (mRollo == null) {
+    return false;
+  }
+  mRollo.mReadback.read();
+  return mRollo.mReadback.zoom > 0.001f;
 }

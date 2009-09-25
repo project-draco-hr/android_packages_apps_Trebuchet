@@ -1,4 +1,4 @@
 {
-  mAmount=clamp((screenY - mDownY) / mSwipeDistance);
-  mListener.onSwipe(mAmount);
+  mAmount=dist(screenY);
+  mAllAppsView.setZoom(mAmount);
 }

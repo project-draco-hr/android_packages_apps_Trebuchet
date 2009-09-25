@@ -1,0 +1,3 @@
+{
+  return clamp(mMode - ((screenY - mDownY) / mSwipeDistance));
+}

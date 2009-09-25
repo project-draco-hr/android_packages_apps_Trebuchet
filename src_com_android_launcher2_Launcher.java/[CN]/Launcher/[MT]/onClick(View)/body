@@ -10,7 +10,7 @@
  else   if (v == mHandleView) {
     Log.d(TAG,"onClick");
     if (isAllAppsVisible()) {
-      closeAllApps();
+      closeAllApps(true);
     }
  else {
       showAllApps();
