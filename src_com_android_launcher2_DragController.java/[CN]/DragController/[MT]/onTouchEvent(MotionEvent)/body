@@ -4,24 +4,25 @@
     return false;
   }
   final int action=ev.getAction();
-  final float x=ev.getRawX();
-  final float y=ev.getRawY();
+  final int screenX=clamp((int)ev.getRawX(),0,mDisplayMetrics.widthPixels);
+  final int screenY=clamp((int)ev.getRawY(),0,mDisplayMetrics.heightPixels);
 switch (action) {
 case MotionEvent.ACTION_DOWN:
-    mMotionDownX=x;
-  mMotionDownY=y;
-if ((x < SCROLL_ZONE) || (x > scrollView.getWidth() - SCROLL_ZONE)) {
-  mScrollState=SCROLL_WAITING_IN_ZONE;
-  mHandler.postDelayed(mScrollRunnable,SCROLL_DELAY);
+    mMotionDownX=screenX;
+  mMotionDownY=screenY;
+recordScreenSize();
+if ((screenX < SCROLL_ZONE) || (screenX > scrollView.getWidth() - SCROLL_ZONE)) {
+mScrollState=SCROLL_WAITING_IN_ZONE;
+mHandler.postDelayed(mScrollRunnable,SCROLL_DELAY);
 }
  else {
-  mScrollState=SCROLL_OUTSIDE_ZONE;
+mScrollState=SCROLL_OUTSIDE_ZONE;
 }
 break;
 case MotionEvent.ACTION_MOVE:
 mDragView.move((int)ev.getRawX(),(int)ev.getRawY());
 final int[] coordinates=mCoordinatesTemp;
-DropTarget dropTarget=findDropTarget((int)x,(int)y,coordinates);
+DropTarget dropTarget=findDropTarget((int)screenX,(int)screenY,coordinates);
 if (dropTarget != null) {
 if (mLastDropTarget == dropTarget) {
 dropTarget.onDragOver(mDragSource,coordinates[0],coordinates[1],(int)mTouchOffsetX,(int)mTouchOffsetY,mDragView,mDragInfo);
@@ -41,16 +42,16 @@ mLastDropTarget.onDragExit(mDragSource,coordinates[0],coordinates[1],(int)mTouch
 mLastDropTarget=dropTarget;
 boolean inDeleteRegion=false;
 if (mDeleteRegion != null) {
-inDeleteRegion=mDeleteRegion.contains(ev.getRawX(),ev.getRawY());
+inDeleteRegion=mDeleteRegion.contains(screenX,screenY);
 }
-if (!inDeleteRegion && x < SCROLL_ZONE) {
+if (!inDeleteRegion && screenX < SCROLL_ZONE) {
 if (mScrollState == SCROLL_OUTSIDE_ZONE) {
 mScrollState=SCROLL_WAITING_IN_ZONE;
 mScrollRunnable.setDirection(SCROLL_LEFT);
 mHandler.postDelayed(mScrollRunnable,SCROLL_DELAY);
 }
 }
- else if (!inDeleteRegion && x > scrollView.getWidth() - SCROLL_ZONE) {
+ else if (!inDeleteRegion && screenX > scrollView.getWidth() - SCROLL_ZONE) {
 if (mScrollState == SCROLL_OUTSIDE_ZONE) {
 mScrollState=SCROLL_WAITING_IN_ZONE;
 mScrollRunnable.setDirection(SCROLL_RIGHT);
@@ -68,7 +69,7 @@ break;
 case MotionEvent.ACTION_UP:
 mHandler.removeCallbacks(mScrollRunnable);
 if (mDragging) {
-drop(x,y);
+drop(screenX,screenY);
 }
 endDrag();
 break;

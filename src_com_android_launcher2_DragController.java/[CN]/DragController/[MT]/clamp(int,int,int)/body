@@ -1,0 +1,11 @@
+{
+  if (val < min) {
+    return min;
+  }
+ else   if (val >= max) {
+    return max - 1;
+  }
+ else {
+    return val;
+  }
+}
