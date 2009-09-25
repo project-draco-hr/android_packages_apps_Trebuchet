@@ -1,0 +1,28 @@
+{
+  if (mRollo == null) {
+    return;
+  }
+  cancelLongPress();
+  mRollo.clearSelectedIcon();
+  if (amount > 0.001f) {
+    mRollo.mState.zoomTarget=amount;
+    if (!animate) {
+      mRollo.mReadback.zoom=mRollo.mState.zoom=amount;
+      mRollo.mReadback.save();
+    }
+  }
+ else {
+    mRollo.mState.zoomTarget=0;
+    if (!animate) {
+      mRollo.mReadback.zoom=mRollo.mState.zoom=0;
+      mRollo.mReadback.save();
+    }
+  }
+  mRollo.mState.save();
+  if (!animate) {
+    mRollo.mInvokeSetZoom.execute();
+  }
+ else {
+    mRollo.mInvokeSetZoomTarget.execute();
+  }
+}

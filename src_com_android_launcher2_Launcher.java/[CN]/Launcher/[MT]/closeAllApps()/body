@@ -1,7 +1,0 @@
-{
-  if (mAllAppsGrid.isVisible()) {
-    mSwipeController.setRange(0,1);
-    mSwipeController.setImmediate(1);
-    mWorkspace.getChildAt(mWorkspace.getCurrentScreen()).requestFocus();
-  }
-}

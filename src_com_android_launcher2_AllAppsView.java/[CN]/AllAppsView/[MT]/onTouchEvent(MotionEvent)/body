@@ -1,5 +1,5 @@
 {
-  if (mRollo.mState.visible == 0) {
+  if (!isVisible()) {
     return true;
   }
   if (mLocks != 0) {
@@ -13,14 +13,14 @@ case MotionEvent.ACTION_DOWN:
     mMotionDownRawX=(int)ev.getRawX();
   mMotionDownRawY=(int)ev.getRawY();
 mLastMotionX=x;
-mRollo.mState.read();
+mRollo.mReadback.read();
 mRollo.mState.newPositionX=ev.getRawX() / Defines.SCREEN_WIDTH_PX;
 mRollo.mState.newTouchDown=1;
-if (mRollo.mState.readVel != 0) {
+if (mRollo.mReadback.velocity != 0) {
 mRollo.clearSelectedIcon();
 }
  else {
-mRollo.selectIcon(x,(int)ev.getY(),mRollo.mState.readPosX);
+mRollo.selectIcon(x,(int)ev.getY(),mRollo.mReadback.posX);
 }
 mRollo.mState.save();
 mRollo.mInvokeMove.execute();

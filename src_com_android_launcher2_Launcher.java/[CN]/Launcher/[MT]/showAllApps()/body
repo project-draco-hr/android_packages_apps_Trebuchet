@@ -1,9 +1,4 @@
 {
-  if (mMode == MODE_ALL_APPS) {
-    return;
-  }
-  mSwipeController.setRange(-1,0);
-  mSwipeController.setImmediate(-1);
-  mWorkspace.hide();
+  mSwipeController.setMode(SwipeController.MODE_ALL_APPS,true);
   mDeleteZone.setVisibility(View.GONE);
 }

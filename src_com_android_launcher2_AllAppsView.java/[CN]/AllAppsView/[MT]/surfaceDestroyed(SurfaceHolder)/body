@@ -1,0 +1,6 @@
+{
+  super.surfaceDestroyed(holder);
+  destroyRenderScript();
+  mRS=null;
+  mRollo=null;
+}

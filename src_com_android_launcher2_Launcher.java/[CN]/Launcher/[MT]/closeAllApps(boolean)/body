@@ -1,0 +1,6 @@
+{
+  if (mAllAppsGrid.isVisible()) {
+    mSwipeController.setMode(SwipeController.MODE_WORKSPACE,animated);
+    mWorkspace.getChildAt(mWorkspace.getCurrentScreen()).requestFocus();
+  }
+}

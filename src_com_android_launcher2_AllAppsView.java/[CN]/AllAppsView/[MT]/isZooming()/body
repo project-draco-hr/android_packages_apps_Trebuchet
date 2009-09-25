@@ -1,3 +1,0 @@
-{
-  return (mLocks & LOCK_ZOOMING) != 0;
-}

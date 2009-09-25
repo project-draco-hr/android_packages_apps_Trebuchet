@@ -5,13 +5,16 @@
   sb.addDefines(Defines.class);
   sb.setType(mParams.mType,"params",Defines.ALLOC_PARAMS);
   sb.setType(mState.mType,"state",Defines.ALLOC_STATE);
+  sb.setType(mReadback.mType,"readback",Defines.ALLOC_READBACK);
   mInvokeMove=sb.addInvokable("move");
   mInvokeFling=sb.addInvokable("fling");
-  mInvokeZoom=sb.addInvokable("setZoomTarget");
+  mInvokeSetZoomTarget=sb.addInvokable("setZoomTarget");
+  mInvokeSetZoom=sb.addInvokable("setZoom");
   mScript=sb.create();
   mScript.setClearColor(0.0f,0.0f,0.0f,0.0f);
   mScript.bindAllocation(mParams.mAlloc,Defines.ALLOC_PARAMS);
   mScript.bindAllocation(mState.mAlloc,Defines.ALLOC_STATE);
+  mScript.bindAllocation(mReadback.mAlloc,Defines.ALLOC_READBACK);
   mScript.bindAllocation(mAllocIconID,Defines.ALLOC_ICON_IDS);
   mScript.bindAllocation(mAllocLabelID,Defines.ALLOC_LABEL_IDS);
   mScript.bindAllocation(mAllocTouchXBorders,Defines.ALLOC_X_BORDERS);
