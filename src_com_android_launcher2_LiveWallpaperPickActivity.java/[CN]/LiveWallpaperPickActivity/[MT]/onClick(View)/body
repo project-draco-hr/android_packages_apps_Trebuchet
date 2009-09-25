@@ -1,5 +1,4 @@
 {
-  Log.d(TAG,"Set clicked");
   if (v.getId() == R.id.set) {
     if (mSelectedIntent != null) {
       try {
