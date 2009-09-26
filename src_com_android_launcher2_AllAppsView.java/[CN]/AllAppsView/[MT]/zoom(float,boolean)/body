@@ -25,4 +25,6 @@
  else {
     mRollo.mInvokeSetZoomTarget.execute();
   }
+  mReadZoom.removeMessages(1);
+  mReadZoom.sendEmptyMessageDelayed(1,1000);
 }
