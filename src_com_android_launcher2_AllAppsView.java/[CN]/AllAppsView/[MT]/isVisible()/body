@@ -2,6 +2,5 @@
   if (mRollo == null) {
     return false;
   }
-  mRollo.mReadback.read();
   return mRollo.mReadback.zoom > 0.001f;
 }
