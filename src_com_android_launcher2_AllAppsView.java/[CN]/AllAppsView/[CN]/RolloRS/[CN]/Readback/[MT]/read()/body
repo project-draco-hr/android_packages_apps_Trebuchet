@@ -1,3 +1,5 @@
 {
-  mAlloc.read(this);
+  if (mAlloc != null) {
+    mAlloc.read(this);
+  }
 }

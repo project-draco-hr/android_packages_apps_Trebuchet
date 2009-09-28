@@ -9,7 +9,7 @@
     mState.selectedIconIndex=index;
     Bitmap selectionBitmap=mSelectionBitmap;
     Utilities.drawSelectedAllAppsBitmap(mSelectionCanvas,selectionBitmap.getWidth(),selectionBitmap.getHeight(),mAllAppsList.get(index).iconBitmap);
-    mSelectedIcon=Allocation.createFromBitmap(mRS,selectionBitmap,Element.RGBA_8888,false);
+    mSelectedIcon=Allocation.createFromBitmap(mRS,selectionBitmap,Element.RGBA_8888(mRS),false);
     mSelectedIcon.uploadToTexture(0);
     mState.selectedIconTexture=mSelectedIcon.getID();
   }

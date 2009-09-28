@@ -47,10 +47,9 @@
   mPVOrtho.bindAllocation(mPVOrthoAlloc);
   mRS.contextBindProgramVertex(mPV);
   mTouchXBorders=new int[Defines.COLUMNS_PER_PAGE + 1];
-  mAllocTouchXBorders=Allocation.createSized(mRS,Element.USER_I32,mTouchXBorders.length);
+  mAllocTouchXBorders=Allocation.createSized(mRS,Element.USER_I32(mRS),mTouchXBorders.length);
   mAllocTouchXBorders.data(mTouchXBorders);
   mTouchYBorders=new int[Defines.ROWS_PER_PAGE + 1];
-  mAllocTouchYBorders=Allocation.createSized(mRS,Element.USER_I32,mTouchYBorders.length);
+  mAllocTouchYBorders=Allocation.createSized(mRS,Element.USER_I32(mRS),mTouchYBorders.length);
   mAllocTouchYBorders.data(mTouchYBorders);
-  Log.e("rs","Done loading named");
 }
