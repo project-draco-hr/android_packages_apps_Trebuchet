@@ -5,7 +5,6 @@ synchronized (sCanvas) {
     }
     int width=sIconWidth;
     int height=sIconHeight;
-    float scale=1.0f;
     if (icon instanceof PaintDrawable) {
       PaintDrawable painter=(PaintDrawable)icon;
       painter.setIntrinsicWidth(width);
@@ -21,7 +20,7 @@ synchronized (sCanvas) {
     int sourceWidth=icon.getIntrinsicWidth();
     int sourceHeight=icon.getIntrinsicHeight();
     if (sourceWidth > 0 && sourceWidth > 0) {
-      if (width < sourceWidth || height < sourceHeight || scale != 1.0f) {
+      if (width < sourceWidth || height < sourceHeight) {
         final float ratio=(float)sourceWidth / sourceHeight;
         if (sourceWidth > sourceHeight) {
           height=(int)(width / ratio);
@@ -32,7 +31,7 @@ synchronized (sCanvas) {
       }
  else       if (sourceWidth < width && sourceHeight < height) {
         width=sourceWidth;
-        height=sourceWidth;
+        height=sourceHeight;
       }
     }
     int textureWidth=sIconTextureWidth;

@@ -10,9 +10,8 @@
   bubbleRect.left=0;
   bubbleRect.top=0;
   bubbleRect.right=(int)(bubbleWidth + 0.5f);
-  mCornerRadius=BubbleTextView.CORNER_RADIUS * scale;
   mTextWidth=bubbleWidth - mBubblePadding - mBubblePadding;
-  Paint rectPaint=mRectPaint=new Paint();
+  Paint rectPaint=new Paint();
   rectPaint.setColor(0xff000000);
   rectPaint.setAntiAlias(true);
   Log.d(TAG,"scale=" + scale + " textSize="+ (13 * scale));
