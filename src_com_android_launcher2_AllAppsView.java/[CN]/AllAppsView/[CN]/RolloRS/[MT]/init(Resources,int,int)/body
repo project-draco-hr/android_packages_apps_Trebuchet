@@ -2,6 +2,9 @@
   mRes=res;
   mWidth=width;
   mHeight=height;
+  initProgramVertex();
+  initProgramFragment();
+  initProgramStore();
   initGl();
   initData();
   initTouchState();
