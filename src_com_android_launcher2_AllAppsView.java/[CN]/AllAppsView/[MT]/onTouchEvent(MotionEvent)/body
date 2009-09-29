@@ -47,6 +47,7 @@ mLastMotionX=x;
 break;
 case MotionEvent.ACTION_UP:
 case MotionEvent.ACTION_CANCEL:
+if (!mZoomSwipeInProgress) {
 mRollo.mState.newPositionX=ev.getRawX() / Defines.SCREEN_WIDTH_PX;
 mRollo.mState.newTouchDown=0;
 mVelocity.computeCurrentVelocity(1000,mConfig.getScaledMaximumFlingVelocity());
@@ -54,6 +55,7 @@ mRollo.mState.flingVelocityX=mVelocity.getXVelocity() / Defines.SCREEN_WIDTH_PX;
 mRollo.clearSelectedIcon();
 mRollo.mState.save();
 mRollo.mInvokeFling.execute();
+}
 mLastMotionX=-10000;
 mVelocity.recycle();
 mVelocity=null;

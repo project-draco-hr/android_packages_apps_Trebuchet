@@ -1,0 +1,8 @@
+{
+  mZoomSwipeInProgress=swiping;
+  if (!touchStillDown) {
+    mRollo.mState.newTouchDown=0;
+    mRollo.mState.save();
+    mRollo.mInvokeTouchUp.execute();
+  }
+}
