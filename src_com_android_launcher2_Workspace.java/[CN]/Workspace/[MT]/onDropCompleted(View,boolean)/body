@@ -1,4 +1,5 @@
 {
+  clearVacantCache();
   if (success) {
     if (target != this && mDragInfo != null) {
       final CellLayout cellLayout=(CellLayout)getChildAt(mDragInfo.screen);
@@ -6,7 +7,6 @@
       if (mDragInfo.cell instanceof DropTarget) {
         mDragController.removeDropTarget((DropTarget)mDragInfo.cell);
       }
-      final Object tag=mDragInfo.cell.getTag();
     }
   }
  else {
