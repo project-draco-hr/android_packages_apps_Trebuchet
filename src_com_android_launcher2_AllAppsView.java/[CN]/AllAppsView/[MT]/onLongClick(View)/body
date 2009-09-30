@@ -3,8 +3,8 @@
     return true;
   }
   int index=mRollo.mState.selectedIconIndex;
-  Log.d(TAG,"long click! velocity=" + mRollo.mState.flingVelocityX + " index="+ index);
-  if (mRollo.mState.flingVelocityX == 0 && index >= 0 && index < mAllAppsList.size()) {
+  Log.d(TAG,"long click! velocity=" + mRollo.mReadback.velocity + " index="+ index);
+  if (mRollo.checkClickOK() && index >= 0 && index < mAllAppsList.size()) {
     ApplicationInfo app=mAllAppsList.get(index);
     int screenX=mMotionDownRawX - (Defines.ICON_WIDTH_PX / 2);
     int screenY=mMotionDownRawY - Defines.ICON_HEIGHT_PX;

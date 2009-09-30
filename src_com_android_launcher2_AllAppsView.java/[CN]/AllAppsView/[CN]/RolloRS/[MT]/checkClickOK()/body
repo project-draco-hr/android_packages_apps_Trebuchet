@@ -1,0 +1,3 @@
+{
+  return (Math.abs(mReadback.velocity) < 0.1f) && (Math.abs(mReadback.posX - Math.round(mReadback.posX)) < 0.1f);
+}
