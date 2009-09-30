@@ -16,7 +16,7 @@ mLastMotionX=x;
 mRollo.mReadback.read();
 mRollo.mState.newPositionX=ev.getRawX() / Defines.SCREEN_WIDTH_PX;
 mRollo.mState.newTouchDown=1;
-if (mRollo.mReadback.velocity != 0) {
+if (!mRollo.checkClickOK()) {
 mRollo.clearSelectedIcon();
 }
  else {
@@ -47,14 +47,18 @@ mLastMotionX=x;
 break;
 case MotionEvent.ACTION_UP:
 case MotionEvent.ACTION_CANCEL:
-if (!mZoomSwipeInProgress) {
-mRollo.mState.newPositionX=ev.getRawX() / Defines.SCREEN_WIDTH_PX;
 mRollo.mState.newTouchDown=0;
+mRollo.mState.newPositionX=ev.getRawX() / Defines.SCREEN_WIDTH_PX;
+if (!mZoomSwipeInProgress) {
 mVelocity.computeCurrentVelocity(1000,mConfig.getScaledMaximumFlingVelocity());
 mRollo.mState.flingVelocityX=mVelocity.getXVelocity() / Defines.SCREEN_WIDTH_PX;
 mRollo.clearSelectedIcon();
 mRollo.mState.save();
 mRollo.mInvokeFling.execute();
+}
+ else {
+mRollo.mState.save();
+mRollo.mInvokeMove.execute();
 }
 mLastMotionX=-10000;
 mVelocity.recycle();

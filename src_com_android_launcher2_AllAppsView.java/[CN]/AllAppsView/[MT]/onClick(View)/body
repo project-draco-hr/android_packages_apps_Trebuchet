@@ -3,7 +3,7 @@
     return;
   }
   int index=mRollo.mState.selectedIconIndex;
-  if (mRollo.mReadback.velocity < 1 && index >= 0 && index < mAllAppsList.size()) {
+  if (mRollo.checkClickOK() && index >= 0 && index < mAllAppsList.size()) {
     ApplicationInfo app=mAllAppsList.get(index);
     mLauncher.startActivitySafely(app.intent);
   }
