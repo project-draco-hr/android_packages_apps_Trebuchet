@@ -1,6 +1,7 @@
 {
   ViewConfiguration config=ViewConfiguration.get(context);
-  mSlop=config.getScaledTouchSlop();
+  mSlopX=config.getScaledTouchSlop();
+  mSlopY=3 * mSlopX / 2;
   DisplayMetrics display=context.getResources().getDisplayMetrics();
   mSwipeDistance=display.heightPixels / 2;
   setMode(MODE_WORKSPACE,false);

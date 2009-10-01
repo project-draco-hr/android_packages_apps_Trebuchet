@@ -30,8 +30,8 @@ mStartedScrolling=false;
 break;
 case MotionEvent.ACTION_MOVE:
 case MotionEvent.ACTION_OUTSIDE:
-int slop=Math.abs(x - mLastMotionX);
-if (!mStartedScrolling && slop < mConfig.getScaledTouchSlop()) {
+int slopX=Math.abs(x - mLastMotionX);
+if (!mStartedScrolling && slopX < mSlopX) {
 }
  else {
 mRollo.mState.newPositionX=ev.getRawX() / Defines.SCREEN_WIDTH_PX;
@@ -50,7 +50,7 @@ case MotionEvent.ACTION_CANCEL:
 mRollo.mState.newTouchDown=0;
 mRollo.mState.newPositionX=ev.getRawX() / Defines.SCREEN_WIDTH_PX;
 if (!mZoomSwipeInProgress) {
-mVelocity.computeCurrentVelocity(1000,mConfig.getScaledMaximumFlingVelocity());
+mVelocity.computeCurrentVelocity(1000,mMaxFlingVelocity);
 mRollo.mState.flingVelocityX=mVelocity.getXVelocity() / Defines.SCREEN_WIDTH_PX;
 mRollo.clearSelectedIcon();
 mRollo.mState.save();

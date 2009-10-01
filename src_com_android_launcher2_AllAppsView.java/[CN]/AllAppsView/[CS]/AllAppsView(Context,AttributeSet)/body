@@ -2,7 +2,9 @@
   super(context,attrs);
   setFocusable(true);
   getHolder().setFormat(PixelFormat.TRANSLUCENT);
-  mConfig=ViewConfiguration.get(context);
+  final ViewConfiguration config=ViewConfiguration.get(context);
+  mSlopX=config.getScaledTouchSlop();
+  mMaxFlingVelocity=config.getScaledMaximumFlingVelocity();
   setOnClickListener(this);
   setOnLongClickListener(this);
   setZOrderOnTop(true);
