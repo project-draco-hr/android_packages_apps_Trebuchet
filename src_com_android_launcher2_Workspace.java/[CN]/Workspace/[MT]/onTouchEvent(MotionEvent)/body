@@ -1,5 +1,12 @@
 {
-  if (mLauncher.isWorkspaceLocked() || mLauncher.isAllAppsVisible()) {
+  if (mLauncher.isWorkspaceLocked()) {
+    return false;
+  }
+  if (mLauncher.isAllAppsVisible()) {
+    if (!mScroller.isFinished()) {
+      mScroller.abortAnimation();
+    }
+    snapToScreen(mCurrentScreen);
     return false;
   }
   if (mVelocityTracker == null) {
