@@ -1,0 +1,8 @@
+{
+  ProgramStore.Builder bs=new ProgramStore.Builder(mRS,null,null);
+  bs.setDepthFunc(ProgramStore.DepthFunc.ALWAYS);
+  bs.setDitherEnable(true);
+  bs.setBlendFunc(ProgramStore.BlendSrcFunc.SRC_ALPHA,ProgramStore.BlendDstFunc.ONE_MINUS_SRC_ALPHA);
+  mPSIcons=bs.create();
+  mPSIcons.setName("PSIcons");
+}
