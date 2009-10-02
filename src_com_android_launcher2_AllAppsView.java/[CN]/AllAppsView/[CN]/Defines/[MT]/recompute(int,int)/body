@@ -1,0 +1,5 @@
+{
+  SCREEN_WIDTH_PX=480;
+  SCREEN_HEIGHT_PX=800;
+  FAR_ICON_SIZE=farSize(2 * ICON_WIDTH_PX / (float)w);
+}
