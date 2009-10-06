@@ -1,7 +1,6 @@
 {
   mParams=new Params();
   mState=new State();
-  mReadback=new Readback();
   final Utilities.BubbleText bubble=new Utilities.BubbleText(getContext());
   mParams.bubbleWidth=bubble.getBubbleWidth();
   mParams.bubbleHeight=bubble.getMaxBubbleHeight();
@@ -16,7 +15,6 @@
   mParams.homeButtonTextureHeight=128;
   mParams.save();
   mState.save();
-  mReadback.save();
   mSelectionBitmap=Bitmap.createBitmap(Defines.ICON_TEXTURE_WIDTH_PX,Defines.ICON_TEXTURE_HEIGHT_PX,Bitmap.Config.ARGB_8888);
   mSelectionCanvas=new Canvas(mSelectionBitmap);
   Log.d(TAG,"initData calling mRollo.setApps");

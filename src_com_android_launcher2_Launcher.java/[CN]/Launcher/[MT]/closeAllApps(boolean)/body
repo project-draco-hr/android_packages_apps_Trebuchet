@@ -1,6 +1,6 @@
 {
   if (mAllAppsGrid.isVisible()) {
-    mAllAppsGrid.zoom(0.0f,animated);
+    mAllAppsGrid.zoom(0.0f);
     mWorkspace.getChildAt(mWorkspace.getCurrentScreen()).requestFocus();
   }
 }
