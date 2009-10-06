@@ -1,4 +1,4 @@
 {
-  mSwipeController.setMode(SwipeController.MODE_ALL_APPS,true);
+  mAllAppsGrid.zoom(1.0f,true);
   mDeleteZone.setVisibility(View.GONE);
 }
