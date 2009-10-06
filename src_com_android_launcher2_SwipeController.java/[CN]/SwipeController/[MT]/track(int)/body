@@ -1,4 +1,0 @@
-{
-  mAmount=dist(screenY);
-  mAllAppsView.setZoom(mAmount);
-}
