@@ -1,0 +1,5 @@
+{
+  mPosX=((float)mData[0]) / (1 << 16);
+  mVelocity=((float)mData[1]) / (1 << 16);
+  mZoom=((float)mData[2]) / (1 << 16);
+}

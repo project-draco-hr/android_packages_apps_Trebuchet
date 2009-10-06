@@ -1,5 +1,0 @@
-{
-  mType=Type.createFromClass(mRS,Readback.class,1,"ReadbackClass");
-  mAlloc=Allocation.createTyped(mRS,mType);
-  save();
-}

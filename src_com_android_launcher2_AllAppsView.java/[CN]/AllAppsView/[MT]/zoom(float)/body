@@ -1,0 +1,14 @@
+{
+  if (mRollo == null) {
+    return;
+  }
+  cancelLongPress();
+  mRollo.clearSelectedIcon();
+  if (amount > 0.001f) {
+    mRollo.mState.zoomTarget=amount;
+  }
+ else {
+    mRollo.mState.zoomTarget=0;
+  }
+  mRollo.mState.save();
+}
