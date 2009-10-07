@@ -4,6 +4,5 @@
     mRollo.setApps(list);
   }
   mPageCount=countPages(list.size());
-  Log.d(TAG,"setApps mRollo=" + mRollo + " list="+ list);
   mLocks&=~LOCK_ICONS_PENDING;
 }
