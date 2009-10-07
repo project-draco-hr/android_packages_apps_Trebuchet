@@ -1,4 +1,7 @@
 {
   super.onPause();
-  closeAllApps(false);
+  if (mExitingBecauseOfLaunch) {
+    mExitingBecauseOfLaunch=false;
+    closeAllApps(false);
+  }
 }
