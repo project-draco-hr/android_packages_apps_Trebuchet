@@ -1,6 +1,6 @@
 {
   if (mAllAppsGrid.isVisible()) {
-    mSwipeController.setMode(SwipeController.MODE_WORKSPACE,animated);
+    mAllAppsGrid.zoom(0.0f,animated);
     mWorkspace.getChildAt(mWorkspace.getCurrentScreen()).requestFocus();
   }
 }

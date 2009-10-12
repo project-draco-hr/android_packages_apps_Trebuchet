@@ -1,16 +1,12 @@
 {
   mDragController=new DragController(this);
   DragController dragController=mDragController;
-  mSwipeController=new SwipeController(this);
-  SwipeController swipeController=mSwipeController;
   DragLayer dragLayer=(DragLayer)findViewById(R.id.drag_layer);
   dragLayer.setDragController(dragController);
-  dragLayer.setSwipeController(swipeController);
   mAllAppsGrid=(AllAppsView)dragLayer.findViewById(R.id.all_apps_view);
   mAllAppsGrid.setLauncher(this);
   mAllAppsGrid.setDragController(dragController);
   mAllAppsGrid.setWillNotDraw(false);
-  swipeController.setAllAppsView(mAllAppsGrid);
   mWorkspace=(Workspace)dragLayer.findViewById(R.id.workspace);
   final Workspace workspace=mWorkspace;
   DeleteZone deleteZone=(DeleteZone)dragLayer.findViewById(R.id.delete_zone);

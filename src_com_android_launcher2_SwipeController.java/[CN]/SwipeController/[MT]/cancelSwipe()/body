@@ -1,4 +1,0 @@
-{
-  mCanceled=true;
-  mAllAppsView.setZoomTarget(mMode);
-}

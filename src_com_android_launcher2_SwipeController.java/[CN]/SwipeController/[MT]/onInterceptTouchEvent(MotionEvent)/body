@@ -1,4 +1,0 @@
-{
-  onTouchEvent(ev);
-  return mTracking;
-}
