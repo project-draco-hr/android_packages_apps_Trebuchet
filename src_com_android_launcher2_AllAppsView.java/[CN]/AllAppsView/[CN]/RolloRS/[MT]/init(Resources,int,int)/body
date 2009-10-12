@@ -2,6 +2,7 @@
   mRes=res;
   mWidth=width;
   mHeight=height;
+  mDefines.recompute(width,height);
   initProgramVertex();
   initProgramFragment();
   initProgramStore();
