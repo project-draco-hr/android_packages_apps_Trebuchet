@@ -5,9 +5,9 @@
   cancelLongPress();
   mRollo.clearSelectedIcon();
   if (amount > 0.001f) {
-    mRollo.mState.zoomTarget=amount;
+    mRollo.mReadback.zoom=mRollo.mState.zoomTarget=amount;
     if (!animate) {
-      mRollo.mReadback.zoom=mRollo.mState.zoom=amount;
+      mRollo.mState.zoom=amount;
       mRollo.mReadback.save();
     }
   }
