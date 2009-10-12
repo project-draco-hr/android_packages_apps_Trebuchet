@@ -49,6 +49,10 @@
  else {
       lp.setup(cellWidth,cellHeight,mWidthGap,mHeightGap,longAxisStartPadding,shortAxisStartPadding);
     }
+    if (lp.regenerateId) {
+      child.setId(((getId() & 0xFF) << 16) | (lp.cellX & 0xFF) << 8 | (lp.cellY & 0xFF));
+      lp.regenerateId=false;
+    }
     int childWidthMeasureSpec=MeasureSpec.makeMeasureSpec(lp.width,MeasureSpec.EXACTLY);
     int childheightMeasureSpec=MeasureSpec.makeMeasureSpec(lp.height,MeasureSpec.EXACTLY);
     child.measure(childWidthMeasureSpec,childheightMeasureSpec);
