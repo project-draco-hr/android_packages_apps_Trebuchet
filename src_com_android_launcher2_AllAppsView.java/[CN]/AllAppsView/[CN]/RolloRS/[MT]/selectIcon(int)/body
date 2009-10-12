@@ -1,5 +1,4 @@
 {
-  Log.d(TAG,"selectIcon index=" + index);
   int iconCount=mAllAppsList.size();
   if (index < 0 || index >= iconCount) {
     mState.selectedIconIndex=-1;

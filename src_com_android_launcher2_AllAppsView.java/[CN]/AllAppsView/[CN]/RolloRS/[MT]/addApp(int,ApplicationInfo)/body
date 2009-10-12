@@ -1,0 +1,9 @@
+{
+  final int count=mState.iconCount - index;
+  final int dest=index + 1;
+  System.arraycopy(mIcons,index,mIcons,dest,count);
+  System.arraycopy(mIconIds,index,mIconIds,dest,count);
+  System.arraycopy(mLabels,index,mLabels,dest,count);
+  System.arraycopy(mLabelIds,index,mLabelIds,dest,count);
+  uploadAppIcon(index,item);
+}

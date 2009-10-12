@@ -17,6 +17,5 @@
   mState.save();
   mSelectionBitmap=Bitmap.createBitmap(Defines.ICON_TEXTURE_WIDTH_PX,Defines.ICON_TEXTURE_HEIGHT_PX,Bitmap.Config.ARGB_8888);
   mSelectionCanvas=new Canvas(mSelectionBitmap);
-  Log.d(TAG,"initData calling mRollo.setApps");
   setApps(null);
 }

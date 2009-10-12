@@ -12,8 +12,8 @@
   mScript.setClearColor(0.0f,0.0f,0.0f,0.0f);
   mScript.bindAllocation(mParams.mAlloc,Defines.ALLOC_PARAMS);
   mScript.bindAllocation(mState.mAlloc,Defines.ALLOC_STATE);
-  mScript.bindAllocation(mAllocIconID,Defines.ALLOC_ICON_IDS);
-  mScript.bindAllocation(mAllocLabelID,Defines.ALLOC_LABEL_IDS);
+  mScript.bindAllocation(mAllocIconIds,Defines.ALLOC_ICON_IDS);
+  mScript.bindAllocation(mAllocLabelIds,Defines.ALLOC_LABEL_IDS);
   mScript.bindAllocation(mAllocTouchXBorders,Defines.ALLOC_X_BORDERS);
   mScript.bindAllocation(mAllocTouchYBorders,Defines.ALLOC_Y_BORDERS);
   mMessageProc=new AAMessage();

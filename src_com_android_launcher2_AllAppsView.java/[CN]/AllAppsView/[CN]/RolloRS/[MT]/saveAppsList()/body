@@ -1,0 +1,11 @@
+{
+  mRS.contextBindRootScript(null);
+  mAllocIconIds.data(mIconIds);
+  mAllocLabelIds.data(mLabelIds);
+  if (mScript != null) {
+    mScript.bindAllocation(mAllocIconIds,Defines.ALLOC_ICON_IDS);
+    mScript.bindAllocation(mAllocLabelIds,Defines.ALLOC_LABEL_IDS);
+  }
+  mState.save();
+  mRS.contextBindRootScript(mScript);
+}

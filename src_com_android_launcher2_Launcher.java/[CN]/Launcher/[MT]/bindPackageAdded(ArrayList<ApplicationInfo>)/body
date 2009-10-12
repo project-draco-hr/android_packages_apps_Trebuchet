@@ -1,3 +1,4 @@
 {
   removeDialog(DIALOG_CREATE_SHORTCUT);
+  mAllAppsGrid.addApps(apps);
 }

@@ -1,0 +1,4 @@
+{
+  removeApps(list);
+  addApps(list);
+}
