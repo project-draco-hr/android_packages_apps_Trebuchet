@@ -18,12 +18,12 @@ mAllAppsView.setZoomSwipeInProgress(true,true);
 break;
 case MotionEvent.ACTION_MOVE:
 if (!mCanceled && !mTracking) {
-if (Math.abs(deltaX) > mSlop) {
+if (Math.abs(deltaX) > mSlopX) {
 mCanceled=true;
 mTracking=false;
 mAllAppsView.setZoomSwipeInProgress(false,true);
 }
-if (Math.abs(deltaY) > mSlop) {
+ else if (Math.abs(deltaY) > mSlopY) {
 mTracking=true;
 }
 }
