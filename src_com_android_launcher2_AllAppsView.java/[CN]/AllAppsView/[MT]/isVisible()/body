@@ -2,5 +2,5 @@
   if (mRollo == null) {
     return false;
   }
-  return mRollo.mReadback.zoom > 0.001f;
+  return mRollo.mMessageProc.mZoom > 0.001f;
 }

@@ -3,7 +3,7 @@
     return true;
   }
   int index=mRollo.mState.selectedIconIndex;
-  Log.d(TAG,"long click! velocity=" + mRollo.mReadback.velocity + " index="+ index);
+  Log.d(TAG,"long click! velocity=" + mRollo.mMessageProc.mVelocity + " index="+ index);
   if (mRollo.checkClickOK() && index >= 0 && index < mAllAppsList.size()) {
     ApplicationInfo app=mAllAppsList.get(index);
     int screenX=mMotionDownRawX - (mDefines.ICON_WIDTH_PX / 2);

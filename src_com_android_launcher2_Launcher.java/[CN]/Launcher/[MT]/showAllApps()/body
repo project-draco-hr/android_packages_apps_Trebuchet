@@ -1,4 +1,4 @@
 {
-  mAllAppsGrid.zoom(1.0f,true);
+  mAllAppsGrid.zoom(1.0f);
   mDeleteZone.setVisibility(View.GONE);
 }
