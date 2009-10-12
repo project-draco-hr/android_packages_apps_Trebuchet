@@ -81,8 +81,10 @@ mRollo.mState.save();
 mRollo.mInvokeMove.execute();
 }
 mLastMotionX=-10000;
+if (mVelocity != null) {
 mVelocity.recycle();
 mVelocity=null;
+}
 break;
 }
 }
