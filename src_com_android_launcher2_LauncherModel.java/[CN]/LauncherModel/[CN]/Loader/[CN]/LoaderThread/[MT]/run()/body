@@ -59,7 +59,9 @@ synchronized (mLock) {
       mLastAllAppsSeq=mAllAppsSeq;
     }
   }
-  bindAllApps();
+  if (allAppsDirty) {
+    bindAllApps();
+  }
   mContext=null;
 synchronized (mLock) {
     mLoaderThread=null;
