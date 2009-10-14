@@ -1,0 +1,5 @@
+{
+  mViewMode=v;
+  mRS.contextBindRootScript(mScript[mViewMode]);
+  return (v == 0);
+}
