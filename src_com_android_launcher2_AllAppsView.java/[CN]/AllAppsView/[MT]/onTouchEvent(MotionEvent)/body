@@ -12,7 +12,6 @@
 switch (action) {
 case MotionEvent.ACTION_DOWN:
     if (x < 60 && y > 700) {
-      mRotateMove=mRollo.setView((++mRSMode) & 3);
     }
   if (y > mRollo.mTouchYBorders[mRollo.mTouchYBorders.length - 1]) {
     mTouchTracking=TRACKING_HOME;
