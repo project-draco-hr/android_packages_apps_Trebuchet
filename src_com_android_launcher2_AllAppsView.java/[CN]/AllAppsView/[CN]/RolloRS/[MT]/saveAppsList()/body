@@ -9,5 +9,8 @@
     }
   }
   mState.save();
+  if (mInvokeResetWAR != null && mInvokeResetWAR[mViewMode] != null) {
+    mInvokeResetWAR[mViewMode].execute();
+  }
   mRS.contextBindRootScript(mScript[mViewMode]);
 }
