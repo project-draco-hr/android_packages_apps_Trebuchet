@@ -8,52 +8,71 @@
   super.onTouchEvent(ev);
   int x=(int)ev.getX();
   int y=(int)ev.getY();
-  int deltaX;
   int action=ev.getAction();
 switch (action) {
 case MotionEvent.ACTION_DOWN:
-    if (y > mRollo.mTouchYBorders[mRollo.mTouchYBorders.length - 1]) {
-      mTouchTracking=TRACKING_HOME;
+    if (x < 60 && y > 700) {
+      mRotateMove=mRollo.setView((++mRSMode) & 3);
+    }
+  if (y > mRollo.mTouchYBorders[mRollo.mTouchYBorders.length - 1]) {
+    mTouchTracking=TRACKING_HOME;
+  }
+ else {
+    mTouchTracking=TRACKING_FLING;
+    mMotionDownRawX=(int)ev.getRawX();
+    mMotionDownRawY=(int)ev.getRawY();
+    mLastMotionX=x;
+    mLastMotionY=y;
+    if (mRotateMove) {
+      mRollo.mState.newPositionX=ev.getRawY() / mDefines.SCREEN_WIDTH_PX;
     }
  else {
-      mTouchTracking=TRACKING_FLING;
-      mMotionDownRawX=(int)ev.getRawX();
-      mMotionDownRawY=(int)ev.getRawY();
-      mLastMotionX=x;
       mRollo.mState.newPositionX=ev.getRawX() / mDefines.SCREEN_WIDTH_PX;
-      mRollo.mState.newTouchDown=1;
-      if (!mRollo.checkClickOK()) {
-        mRollo.clearSelectedIcon();
-      }
- else {
-        mRollo.selectIcon(x,y,mRollo.mMessageProc.mPosX);
-      }
-      mRollo.mState.save();
-      mRollo.mInvokeMove.execute();
-      mVelocity=VelocityTracker.obtain();
-      mVelocity.addMovement(ev);
-      mStartedScrolling=false;
     }
-  break;
+    mRollo.mState.newTouchDown=1;
+    if (!mRollo.checkClickOK()) {
+      mRollo.clearSelectedIcon();
+    }
+ else {
+      mRollo.selectIcon(x,y,mRollo.mMessageProc.mPosX);
+    }
+    mRollo.mState.save();
+    mRollo.move();
+    mVelocity=VelocityTracker.obtain();
+    mVelocity.addMovement(ev);
+    mStartedScrolling=false;
+  }
+break;
 case MotionEvent.ACTION_MOVE:
 case MotionEvent.ACTION_OUTSIDE:
 if (mTouchTracking == TRACKING_HOME) {
 }
  else {
-  int slopX=Math.abs(x - mLastMotionX);
-  if (!mStartedScrolling && slopX < mSlopX) {
+int slopX;
+if (mRotateMove) {
+  slopX=Math.abs(y - mLastMotionY);
+}
+ else {
+  slopX=Math.abs(x - mLastMotionX);
+}
+if (!mStartedScrolling && slopX < mSlopX) {
+}
+ else {
+  if (mRotateMove) {
+    mRollo.mState.newPositionX=ev.getRawY() / mDefines.SCREEN_WIDTH_PX;
   }
  else {
     mRollo.mState.newPositionX=ev.getRawX() / mDefines.SCREEN_WIDTH_PX;
-    mRollo.mState.newTouchDown=1;
-    mRollo.mInvokeMove.execute();
-    mStartedScrolling=true;
-    mRollo.clearSelectedIcon();
-    deltaX=x - mLastMotionX;
-    mVelocity.addMovement(ev);
-    mRollo.mState.save();
-    mLastMotionX=x;
   }
+  mRollo.mState.newTouchDown=1;
+  mRollo.move();
+  mStartedScrolling=true;
+  mRollo.clearSelectedIcon();
+  mVelocity.addMovement(ev);
+  mRollo.mState.save();
+  mLastMotionX=x;
+  mLastMotionY=y;
+}
 }
 break;
 case MotionEvent.ACTION_UP:
@@ -61,18 +80,28 @@ case MotionEvent.ACTION_CANCEL:
 if (mTouchTracking == TRACKING_HOME) {
 if (action == MotionEvent.ACTION_UP) {
 if (y > mRollo.mTouchYBorders[mRollo.mTouchYBorders.length - 1]) {
-  mLauncher.closeAllApps(true);
+mLauncher.closeAllApps(true);
 }
 }
 }
  else {
 mRollo.mState.newTouchDown=0;
+if (mRotateMove) {
+mRollo.mState.newPositionX=ev.getRawY() / mDefines.SCREEN_WIDTH_PX;
+}
+ else {
 mRollo.mState.newPositionX=ev.getRawX() / mDefines.SCREEN_WIDTH_PX;
+}
 mVelocity.computeCurrentVelocity(1000,mMaxFlingVelocity);
+if (mRotateMove) {
+mRollo.mState.flingVelocityX=mVelocity.getYVelocity() / mDefines.SCREEN_WIDTH_PX;
+}
+ else {
 mRollo.mState.flingVelocityX=mVelocity.getXVelocity() / mDefines.SCREEN_WIDTH_PX;
+}
 mRollo.clearSelectedIcon();
 mRollo.mState.save();
-mRollo.mInvokeFling.execute();
+mRollo.fling();
 mLastMotionX=-10000;
 if (mVelocity != null) {
 mVelocity.recycle();
