@@ -18,6 +18,8 @@
   if (PROFILE_STARTUP) {
     android.os.Debug.stopMethodTracing();
   }
+  mModel.setAllAppsDirty();
+  mModel.setWorkspaceDirty();
   if (!mRestoring) {
     mModel.startLoader(this,true);
   }
