@@ -1,7 +1,0 @@
-{
-  mService=null;
-  mEngine=null;
-  if (mWallpaperConnection == this) {
-    Log.w(TAG,"Wallpaper service gone: " + name);
-  }
-}
