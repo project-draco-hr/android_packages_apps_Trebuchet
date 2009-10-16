@@ -1,10 +1,5 @@
 {
-  int index;
-  if (mViewMode != 0) {
-    index=chooseTappedIconHorz(x,y,pos);
-  }
- else {
-    index=chooseTappedIconVert(x,y,pos);
-  }
+  final int index=chooseTappedIcon(x,y,pos);
   selectIcon(index);
+  return index;
 }
