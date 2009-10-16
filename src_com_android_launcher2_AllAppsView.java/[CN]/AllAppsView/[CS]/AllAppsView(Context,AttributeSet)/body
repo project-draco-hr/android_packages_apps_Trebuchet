@@ -3,7 +3,7 @@
   setFocusable(true);
   getHolder().setFormat(PixelFormat.TRANSLUCENT);
   final ViewConfiguration config=ViewConfiguration.get(context);
-  mSlopX=config.getScaledTouchSlop();
+  mSlop=config.getScaledTouchSlop();
   mMaxFlingVelocity=config.getScaledMaximumFlingVelocity();
   setOnClickListener(this);
   setOnLongClickListener(this);

@@ -20,8 +20,6 @@ case MotionEvent.ACTION_DOWN:
     mTouchTracking=TRACKING_FLING;
     mMotionDownRawX=(int)ev.getRawX();
     mMotionDownRawY=(int)ev.getRawY();
-    mLastMotionX=x;
-    mLastMotionY=y;
     if (mRotateMove) {
       mRollo.mState.newPositionX=ev.getRawY() / mDefines.SCREEN_WIDTH_PX;
     }
@@ -33,7 +31,10 @@ case MotionEvent.ACTION_DOWN:
       mRollo.clearSelectedIcon();
     }
  else {
-      mRollo.selectIcon(x,y,mRollo.mMessageProc.mPosX);
+      mDownIconIndex=mCurrentIconIndex=mRollo.selectIcon(x,y,mRollo.mMessageProc.mPosX);
+      if (mDownIconIndex < 0) {
+        cancelLongPress();
+      }
     }
     mRollo.mState.save();
     mRollo.move();
@@ -47,16 +48,27 @@ case MotionEvent.ACTION_OUTSIDE:
 if (mTouchTracking == TRACKING_HOME) {
 }
  else {
-int slopX;
+int rawX=(int)ev.getRawX();
+int rawY=(int)ev.getRawY();
+int slop;
 if (mRotateMove) {
-  slopX=Math.abs(y - mLastMotionY);
+  slop=Math.abs(rawY - mMotionDownRawY);
 }
  else {
-  slopX=Math.abs(x - mLastMotionX);
+  slop=Math.abs(rawX - mMotionDownRawX);
 }
-if (!mStartedScrolling && slopX < mSlopX) {
+if (!mStartedScrolling && slop < mSlop) {
+  mCurrentIconIndex=mRollo.chooseTappedIcon(x,y,mRollo.mMessageProc.mPosX);
+  if (mDownIconIndex != mCurrentIconIndex) {
+    cancelLongPress();
+    mCurrentIconIndex=-1;
+  }
 }
  else {
+  if (!mStartedScrolling) {
+    cancelLongPress();
+    mCurrentIconIndex=-1;
+  }
   if (mRotateMove) {
     mRollo.mState.newPositionX=ev.getRawY() / mDefines.SCREEN_WIDTH_PX;
   }
@@ -69,8 +81,6 @@ if (!mStartedScrolling && slopX < mSlopX) {
   mRollo.clearSelectedIcon();
   mVelocity.addMovement(ev);
   mRollo.mState.save();
-  mLastMotionX=x;
-  mLastMotionY=y;
 }
 }
 break;
@@ -101,7 +111,6 @@ mRollo.mState.flingVelocityX=mVelocity.getXVelocity() / mDefines.SCREEN_WIDTH_PX
 mRollo.clearSelectedIcon();
 mRollo.mState.save();
 mRollo.fling();
-mLastMotionX=-10000;
 if (mVelocity != null) {
 mVelocity.recycle();
 mVelocity=null;

@@ -2,9 +2,8 @@
   if (mLocks != 0 || !isVisible()) {
     return;
   }
-  int index=mRollo.mState.selectedIconIndex;
-  if (mRollo.checkClickOK() && index >= 0 && index < mAllAppsList.size()) {
-    ApplicationInfo app=mAllAppsList.get(index);
+  if (mRollo.checkClickOK() && mCurrentIconIndex == mDownIconIndex && mCurrentIconIndex >= 0 && mCurrentIconIndex < mAllAppsList.size()) {
+    ApplicationInfo app=mAllAppsList.get(mCurrentIconIndex);
     mLauncher.startActivitySafely(app.intent);
   }
 }
