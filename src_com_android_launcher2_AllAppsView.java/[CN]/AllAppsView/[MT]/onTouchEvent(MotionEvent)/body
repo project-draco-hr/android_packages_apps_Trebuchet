@@ -47,7 +47,7 @@ case MotionEvent.ACTION_MOVE:
 case MotionEvent.ACTION_OUTSIDE:
 if (mTouchTracking == TRACKING_HOME) {
 }
- else {
+ else if (mTouchTracking == TRACKING_FLING) {
 int rawX=(int)ev.getRawX();
 int rawY=(int)ev.getRawY();
 int slop;
@@ -93,7 +93,7 @@ mLauncher.closeAllApps(true);
 }
 }
 }
- else {
+ else if (mTouchTracking == TRACKING_FLING) {
 mRollo.mState.newTouchDown=0;
 if (mRotateMove) {
 mRollo.mState.newPositionX=ev.getRawY() / mDefines.SCREEN_WIDTH_PX;
@@ -115,8 +115,9 @@ if (mVelocity != null) {
 mVelocity.recycle();
 mVelocity=null;
 }
-break;
 }
+mTouchTracking=TRACKING_NONE;
+break;
 }
 return true;
 }
