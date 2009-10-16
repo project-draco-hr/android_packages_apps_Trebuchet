@@ -1,9 +1,0 @@
-{
-synchronized (this) {
-    if (!bindService(mIntent,this,Context.BIND_AUTO_CREATE)) {
-      return false;
-    }
-    mConnected=true;
-    return true;
-  }
-}
