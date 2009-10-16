@@ -4,6 +4,7 @@
   }
   cancelLongPress();
   mRollo.clearSelectedIcon();
+  mRollo.setHomeSelected(false);
   if (amount > 0.001f) {
     mRollo.mState.zoomTarget=amount;
   }
