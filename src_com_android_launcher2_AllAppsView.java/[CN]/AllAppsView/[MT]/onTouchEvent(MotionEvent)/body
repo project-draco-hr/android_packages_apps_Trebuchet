@@ -15,6 +15,8 @@ case MotionEvent.ACTION_DOWN:
     }
   if (y > mRollo.mTouchYBorders[mRollo.mTouchYBorders.length - 1]) {
     mTouchTracking=TRACKING_HOME;
+    mRollo.setHomeSelected(true);
+    mRollo.mState.save();
   }
  else {
     mTouchTracking=TRACKING_FLING;
@@ -46,6 +48,8 @@ break;
 case MotionEvent.ACTION_MOVE:
 case MotionEvent.ACTION_OUTSIDE:
 if (mTouchTracking == TRACKING_HOME) {
+mRollo.setHomeSelected(y > mRollo.mTouchYBorders[mRollo.mTouchYBorders.length - 1]);
+mRollo.mState.save();
 }
  else if (mTouchTracking == TRACKING_FLING) {
 int rawX=(int)ev.getRawX();
@@ -91,6 +95,8 @@ if (action == MotionEvent.ACTION_UP) {
 if (y > mRollo.mTouchYBorders[mRollo.mTouchYBorders.length - 1]) {
 mLauncher.closeAllApps(true);
 }
+mRollo.setHomeSelected(false);
+mRollo.mState.save();
 }
 }
  else if (mTouchTracking == TRACKING_FLING) {
