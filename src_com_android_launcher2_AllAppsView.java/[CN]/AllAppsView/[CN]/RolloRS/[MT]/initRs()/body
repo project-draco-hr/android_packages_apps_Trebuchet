@@ -7,6 +7,7 @@
   sb.setType(mState.mType,"state",Defines.ALLOC_STATE);
   mInvokeMove=sb.addInvokable("move");
   mInvokeFling=sb.addInvokable("fling");
+  mInvokeMoveTo=sb.addInvokable("moveTo");
   mInvokeResetWAR=sb.addInvokable("resetHWWar");
   mScript=sb.create();
   mScript.setClearColor(0.0f,0.0f,0.0f,0.0f);
