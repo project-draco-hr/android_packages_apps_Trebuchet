@@ -6,11 +6,5 @@
   mPV=pvb.create();
   mPV.setName("PV");
   mPV.bindAllocation(pva);
-  pva=new ProgramVertex.MatrixAllocation(mRS);
-  pva.setupOrthoWindow(mWidth,mHeight);
-  pvb.setTextureMatrixEnable(true);
-  mPVOrtho=pvb.create();
-  mPVOrtho.setName("PVOrtho");
-  mPVOrtho.bindAllocation(pva);
   mRS.contextBindProgramVertex(mPV);
 }

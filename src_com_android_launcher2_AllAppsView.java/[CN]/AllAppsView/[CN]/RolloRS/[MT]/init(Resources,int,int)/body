@@ -7,7 +7,6 @@
   initProgramFragment();
   initProgramStore();
   initMesh();
-  initMesh2();
   initGl();
   initData();
   initTouchState();
