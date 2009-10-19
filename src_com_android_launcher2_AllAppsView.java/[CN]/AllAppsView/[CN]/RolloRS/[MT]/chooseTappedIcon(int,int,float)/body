@@ -1,14 +1,21 @@
 {
-  int index;
-  if (mViewMode != 0) {
-    index=chooseTappedIconHorz(x,y,pos);
+  y+=(pos - ((int)pos)) * (mTouchYBorders[1] - mTouchYBorders[0]);
+  int col=-1;
+  int row=-1;
+  for (int i=0; i < Defines.COLUMNS_PER_PAGE; i++) {
+    if (x >= mTouchXBorders[i] && x < mTouchXBorders[i + 1]) {
+      col=i;
+      break;
+    }
   }
- else {
-    index=chooseTappedIconVert(x,y,pos);
+  for (int i=0; i < Defines.ROWS_PER_PAGE; i++) {
+    if (y >= mTouchYBorders[i] && y < mTouchYBorders[i + 1]) {
+      row=i;
+      break;
+    }
   }
-  final int iconCount=mAllAppsList.size();
-  if (index >= iconCount) {
-    index=-1;
+  if (row < 0 || col < 0) {
+    return -1;
   }
-  return index;
+  return (((int)pos) * Defines.COLUMNS_PER_PAGE) + (row * Defines.ROWS_PER_PAGE) + col;
 }

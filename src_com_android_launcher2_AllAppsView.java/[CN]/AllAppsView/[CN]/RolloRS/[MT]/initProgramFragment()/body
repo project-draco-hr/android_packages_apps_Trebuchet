@@ -9,14 +9,9 @@
   sb.setMag(Sampler.Value.NEAREST);
   Sampler nearest=sb.create();
   ProgramFragment.Builder bf=new ProgramFragment.Builder(mRS,null,null);
-  mPFColor=bf.create();
-  mPFColor.setName("PFColor");
   bf.setTexEnable(true,0);
   bf.setTexEnvMode(ProgramFragment.EnvMode.MODULATE,0);
   mPFTexLinear=bf.create();
   mPFTexLinear.setName("PFTexLinear");
   mPFTexLinear.bindSampler(linear,0);
-  mPFTexNearest=bf.create();
-  mPFTexNearest.setName("PFTexNearest");
-  mPFTexNearest.bindSampler(nearest,0);
 }

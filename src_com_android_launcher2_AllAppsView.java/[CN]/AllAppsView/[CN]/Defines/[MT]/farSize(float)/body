@@ -1,3 +1,0 @@
-{
-  return sizeAt0 * (Defines.RADIUS - Defines.CAMERA_Z) / -Defines.CAMERA_Z;
-}
