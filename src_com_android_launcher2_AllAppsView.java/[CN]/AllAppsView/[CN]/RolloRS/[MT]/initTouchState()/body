@@ -1,28 +1,18 @@
 {
   int width=getWidth();
   int height=getHeight();
-  int iconsSize;
-  if (width < height) {
-    iconsSize=width;
-  }
- else {
-    iconsSize=height;
-  }
-  int cellHeight=iconsSize / Defines.ROWS_PER_PAGE;
-  int cellWidth=iconsSize / Defines.COLUMNS_PER_PAGE;
-  int centerY=(height / 2) - (int)(cellHeight * 0.2f);
-  mTouchYBorders[0]=centerY - (int)(2.8f * cellHeight);
-  mTouchYBorders[1]=centerY - (int)(1.25f * cellHeight);
+  int cellHeight=145;
+  int cellWidth=width / Defines.COLUMNS_PER_PAGE;
+  int centerY=(height / 2);
+  mTouchYBorders[0]=centerY - (cellHeight * 2);
+  mTouchYBorders[1]=centerY - cellHeight;
   mTouchYBorders[2]=centerY;
-  mTouchYBorders[3]=centerY + (int)(1.25f * cellHeight);
-  ;
-  mTouchYBorders[4]=centerY + (int)(2.6f * cellHeight);
-  mAllocTouchYBorders.data(mTouchYBorders);
+  mTouchYBorders[3]=centerY + cellHeight;
+  mTouchYBorders[4]=centerY + (cellHeight * 2);
   int centerX=(width / 2);
-  mTouchXBorders[0]=centerX - (2 * cellWidth);
-  mTouchXBorders[1]=centerX - (int)(0.85f * cellWidth);
+  mTouchXBorders[0]=0;
+  mTouchXBorders[1]=centerX - (width / 4);
   mTouchXBorders[2]=centerX;
-  mTouchXBorders[3]=centerX + (int)(0.85f * cellWidth);
-  mTouchXBorders[4]=centerX + (2 * cellWidth);
-  mAllocTouchXBorders.data(mTouchXBorders);
+  mTouchXBorders[3]=centerX + (width / 4);
+  mTouchXBorders[4]=width;
 }
