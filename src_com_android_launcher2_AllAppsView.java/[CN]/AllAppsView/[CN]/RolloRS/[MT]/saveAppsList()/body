@@ -2,15 +2,13 @@
   mRS.contextBindRootScript(null);
   mAllocIconIds.data(mIconIds);
   mAllocLabelIds.data(mLabelIds);
-  if (mScript[0] != null) {
-    for (int ct=0; ct < 4; ct++) {
-      mScript[ct].bindAllocation(mAllocIconIds,Defines.ALLOC_ICON_IDS);
-      mScript[ct].bindAllocation(mAllocLabelIds,Defines.ALLOC_LABEL_IDS);
-    }
+  if (mScript != null) {
+    mScript.bindAllocation(mAllocIconIds,Defines.ALLOC_ICON_IDS);
+    mScript.bindAllocation(mAllocLabelIds,Defines.ALLOC_LABEL_IDS);
   }
   mState.save();
-  if (mInvokeResetWAR != null && mInvokeResetWAR[mViewMode] != null) {
-    mInvokeResetWAR[mViewMode].execute();
+  if (mInvokeResetWAR != null) {
+    mInvokeResetWAR.execute();
   }
-  mRS.contextBindRootScript(mScript[mViewMode]);
+  mRS.contextBindRootScript(mScript);
 }
