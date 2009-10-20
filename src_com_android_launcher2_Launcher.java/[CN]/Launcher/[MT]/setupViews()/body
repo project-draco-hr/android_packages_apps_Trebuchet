@@ -7,6 +7,7 @@
   mAllAppsGrid.setLauncher(this);
   mAllAppsGrid.setDragController(dragController);
   mAllAppsGrid.setWillNotDraw(false);
+  mAllAppsGrid.setFocusable(false);
   mWorkspace=(Workspace)dragLayer.findViewById(R.id.workspace);
   final Workspace workspace=mWorkspace;
   DeleteZone deleteZone=(DeleteZone)dragLayer.findViewById(R.id.delete_zone);
