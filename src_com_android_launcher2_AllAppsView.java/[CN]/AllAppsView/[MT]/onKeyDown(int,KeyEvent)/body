@@ -1,3 +1,56 @@
 {
-  return super.onKeyDown(keyCode,event);
+  if (keyCode == KeyEvent.KEYCODE_DPAD_CENTER || keyCode == KeyEvent.KEYCODE_ENTER) {
+    if (mArrowNavigation) {
+      int whichApp=mRollo.mState.selectedIconIndex;
+      if (whichApp >= 0) {
+        ApplicationInfo app=mAllAppsList.get(whichApp);
+        mLauncher.startActivitySafely(app.intent);
+      }
+    }
+  }
+  if (mArrowNavigation && mRollo.mState.iconCount > 0) {
+    mArrowNavigation=true;
+    int currentSelection=mRollo.mState.selectedIconIndex;
+    int currentTopRow=(int)mRollo.mMessageProc.mPosX;
+    int currentPageCol=currentSelection % Defines.COLUMNS_PER_PAGE;
+    int currentPageRow=(currentSelection - (currentTopRow * Defines.COLUMNS_PER_PAGE)) / Defines.ROWS_PER_PAGE;
+    int newSelection=currentSelection;
+switch (keyCode) {
+case KeyEvent.KEYCODE_DPAD_UP:
+      if (currentPageRow > 0) {
+        newSelection=currentSelection - Defines.COLUMNS_PER_PAGE;
+      }
+ else       if (currentTopRow > 0) {
+        mRollo.moveTo(currentTopRow - 1);
+        newSelection=currentSelection - Defines.COLUMNS_PER_PAGE;
+      }
+    break;
+case KeyEvent.KEYCODE_DPAD_DOWN:
+  if (currentSelection < mRollo.mState.iconCount - Defines.COLUMNS_PER_PAGE) {
+    if (currentPageRow < Defines.ROWS_PER_PAGE - 1) {
+      newSelection=currentSelection + Defines.COLUMNS_PER_PAGE;
+    }
+ else {
+      mRollo.moveTo(currentTopRow + 1);
+      newSelection=currentSelection + Defines.COLUMNS_PER_PAGE;
+    }
+  }
+break;
+case KeyEvent.KEYCODE_DPAD_LEFT:
+if (currentPageCol > 0) {
+newSelection=currentSelection - 1;
+}
+break;
+case KeyEvent.KEYCODE_DPAD_RIGHT:
+if ((currentPageCol < Defines.COLUMNS_PER_PAGE - 1) && (currentSelection < mRollo.mState.iconCount - 1)) {
+newSelection=currentSelection + 1;
+}
+break;
+}
+if (newSelection != currentSelection) {
+mRollo.selectIcon(newSelection);
+mRollo.mState.save();
+}
+}
+return true;
 }
