@@ -23,6 +23,8 @@ break;
 case REQUEST_CREATE_APPWIDGET:
 completeAddAppWidget(data,mAddItemCellInfo);
 break;
+case REQUEST_PICK_WALLPAPER:
+break;
 }
 }
  else if (requestCode == REQUEST_PICK_APPWIDGET && resultCode == RESULT_CANCELED && data != null) {
