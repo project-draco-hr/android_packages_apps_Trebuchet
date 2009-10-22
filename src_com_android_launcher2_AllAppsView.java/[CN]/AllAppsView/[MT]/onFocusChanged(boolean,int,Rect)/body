@@ -1,0 +1,17 @@
+{
+  super.onFocusChanged(gainFocus,direction,previouslyFocusedRect);
+  if (gainFocus) {
+    if (!mArrowNavigation && mRollo.mState.iconCount > 0) {
+      mArrowNavigation=true;
+      mRollo.selectIcon(Math.round(mRollo.mMessageProc.mPosX) * Defines.COLUMNS_PER_PAGE);
+      mRollo.mState.save();
+    }
+  }
+ else {
+    if (mArrowNavigation) {
+      mRollo.clearSelectedIcon();
+      mRollo.mState.save();
+      mArrowNavigation=false;
+    }
+  }
+}
