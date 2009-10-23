@@ -35,6 +35,12 @@ mTouchState=mScroller.isFinished() ? TOUCH_STATE_REST : TOUCH_STATE_SCROLLING;
 break;
 case MotionEvent.ACTION_CANCEL:
 case MotionEvent.ACTION_UP:
+if (mTouchState != TOUCH_STATE_SCROLLING) {
+final CellLayout currentScreen=(CellLayout)getChildAt(mCurrentScreen);
+if (!currentScreen.lastDownOnOccupiedCell()) {
+mWallpaperManager.sendWallpaperCommand(getWindowToken(),"android.wallpaper.tap",(int)ev.getX(),(int)ev.getY(),0,null);
+}
+}
 clearChildrenCache();
 mTouchState=TOUCH_STATE_REST;
 mAllowLongPress=false;
