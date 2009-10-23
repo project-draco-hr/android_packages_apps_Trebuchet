@@ -8,5 +8,5 @@
     li.setClassName(wi.getPackageName(),wi.getSettingsActivity());
     chooser.putExtra(Intent.EXTRA_INITIAL_INTENTS,new Intent[]{li});
   }
-  startActivity(chooser);
+  startActivityForResult(chooser,REQUEST_PICK_WALLPAPER);
 }
