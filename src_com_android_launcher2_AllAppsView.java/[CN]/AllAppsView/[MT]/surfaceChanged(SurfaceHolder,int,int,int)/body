@@ -1,6 +1,11 @@
 {
   super.surfaceChanged(holder,format,w,h);
   long startTime=SystemClock.uptimeMillis();
+  if (mRS != null) {
+    destroyRenderScript();
+    mRS=null;
+    mRollo=null;
+  }
   mRS=createRenderScript(true);
   mRollo=new RolloRS();
   mRollo.init(getResources(),w,h);
