@@ -78,6 +78,7 @@ case MotionEvent.ACTION_CANCEL:
 if (mTouchTracking == TRACKING_HOME) {
 if (action == MotionEvent.ACTION_UP) {
 if (y > mRollo.mTouchYBorders[mRollo.mTouchYBorders.length - 1]) {
+  reallyPlaySoundEffect(SoundEffectConstants.CLICK);
   mLauncher.closeAllApps(true);
 }
 mRollo.setHomeSelected(false);
