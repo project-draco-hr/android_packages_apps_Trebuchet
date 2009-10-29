@@ -1,5 +1,8 @@
 {
   super.onFocusChanged(gainFocus,direction,previouslyFocusedRect);
+  if (!isVisible()) {
+    return;
+  }
   if (gainFocus) {
     if (!mArrowNavigation && mRollo.mState.iconCount > 0) {
       mArrowNavigation=true;
