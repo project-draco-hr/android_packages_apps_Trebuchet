@@ -17,5 +17,11 @@
   if (row < 0 || col < 0) {
     return -1;
   }
-  return (((int)pos) * Defines.COLUMNS_PER_PAGE) + (row * Defines.ROWS_PER_PAGE) + col;
+  int index=(((int)pos) * Defines.COLUMNS_PER_PAGE) + (row * Defines.ROWS_PER_PAGE) + col;
+  if (index >= mState.iconCount) {
+    return -1;
+  }
+ else {
+    return index;
+  }
 }
