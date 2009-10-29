@@ -1,0 +1,6 @@
+{
+  boolean old=isSoundEffectsEnabled();
+  setSoundEffectsEnabled(true);
+  playSoundEffect(sound);
+  setSoundEffectsEnabled(old);
+}
