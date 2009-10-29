@@ -1,6 +1,7 @@
 {
   super(context,attrs);
   setFocusable(true);
+  setSoundEffectsEnabled(false);
   getHolder().setFormat(PixelFormat.TRANSLUCENT);
   final ViewConfiguration config=ViewConfiguration.get(context);
   mSlop=config.getScaledTouchSlop();
