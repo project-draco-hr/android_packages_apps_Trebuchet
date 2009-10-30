@@ -11,7 +11,7 @@
       angle=maxAngle * (ct - 7) * 0.2f;
       angle=Math.min(angle,maxAngle);
     }
-    l=Math.max(0.3f,l);
+    l=Math.max(0.4f,l);
     l=Math.min(1.0f,l);
     y+=0.1f * Math.cos(angle);
     z+=0.1f * Math.sin(angle);

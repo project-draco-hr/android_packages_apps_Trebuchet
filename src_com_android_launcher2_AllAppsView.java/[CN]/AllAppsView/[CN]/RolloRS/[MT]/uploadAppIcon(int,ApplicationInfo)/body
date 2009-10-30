@@ -1,6 +1,8 @@
 {
-  mIcons[index]=Allocation.createFromBitmap(mRS,item.iconBitmap,Element.RGBA_8888(mRS),false);
-  mLabels[index]=Allocation.createFromBitmap(mRS,item.titleBitmap,Element.RGBA_8888(mRS),false);
+  mIcons[index]=Allocation.createFromBitmap(mRS,item.iconBitmap,Element.RGBA_8888(mRS),true);
+  frameBitmapAllocMips(mIcons[index],item.iconBitmap.getWidth(),item.iconBitmap.getHeight());
+  mLabels[index]=Allocation.createFromBitmap(mRS,item.titleBitmap,Element.RGBA_8888(mRS),true);
+  frameBitmapAllocMips(mLabels[index],item.titleBitmap.getWidth(),item.titleBitmap.getHeight());
   mIcons[index].uploadToTexture(0);
   mLabels[index].uploadToTexture(0);
   mIconIds[index]=mIcons[index].getID();
