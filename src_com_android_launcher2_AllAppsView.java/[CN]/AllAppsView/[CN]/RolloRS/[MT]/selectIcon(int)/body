@@ -1,5 +1,5 @@
 {
-  if (index < 0) {
+  if (index < 0 || index >= mAllAppsList.size()) {
     mState.selectedIconIndex=-1;
   }
  else {
