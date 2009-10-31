@@ -1,0 +1,3 @@
+SQLiteDatabase db
+ContentValues values
+TypedArray a

@@ -23,13 +23,19 @@
       values.put(LauncherSettings.Favorites.CELLX,a.getString(R.styleable.Favorite_x));
       values.put(LauncherSettings.Favorites.CELLY,a.getString(R.styleable.Favorite_y));
       if (TAG_FAVORITE.equals(name)) {
-        added=addShortcut(db,values,a,packageManager,intent);
+        added=addAppShortcut(db,values,a,packageManager,intent);
       }
  else       if (TAG_SEARCH.equals(name)) {
         added=addSearchWidget(db,values);
       }
  else       if (TAG_CLOCK.equals(name)) {
         added=addClockWidget(db,values);
+      }
+ else       if (TAG_APPWIDGET.equals(name)) {
+        added=addAppWidget(db,values,a);
+      }
+ else       if (TAG_SHORTCUT.equals(name)) {
+        added=addUriShortcut(db,values,a);
       }
       if (added)       i++;
       a.recycle();
