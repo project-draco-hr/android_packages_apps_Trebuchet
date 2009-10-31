@@ -1,0 +1,3 @@
+{
+  mModel=new LauncherModel(this);
+}
