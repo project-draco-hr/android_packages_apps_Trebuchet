@@ -1,4 +1,5 @@
 {
+  context=mApp;
   final String packageName=intent.getData().getSchemeSpecificPart();
   ArrayList<ApplicationInfo> added=null;
   ArrayList<ApplicationInfo> removed=null;
@@ -6,6 +7,9 @@
   boolean update=false;
   boolean remove=false;
 synchronized (mLock) {
+    if (mBeforeFirstLoad) {
+      return;
+    }
     final String action=intent.getAction();
     final boolean replacing=intent.getBooleanExtra(Intent.EXTRA_REPLACING,false);
     if (packageName == null || packageName.length() == 0) {

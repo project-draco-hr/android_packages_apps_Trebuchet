@@ -1,4 +1,4 @@
 {
-  sModel.initialize(launcher);
-  return sModel;
+  mModel.initialize(launcher);
+  return mModel;
 }

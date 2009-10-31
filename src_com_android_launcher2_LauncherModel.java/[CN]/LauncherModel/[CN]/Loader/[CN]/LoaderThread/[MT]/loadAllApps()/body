@@ -9,6 +9,7 @@
   final PackageManager packageManager=context.getPackageManager();
   final List<ResolveInfo> apps=packageManager.queryIntentActivities(mainIntent,0);
 synchronized (mLock) {
+    mBeforeFirstLoad=false;
     mAllAppsList.clear();
     if (apps != null) {
       long t=SystemClock.uptimeMillis();
