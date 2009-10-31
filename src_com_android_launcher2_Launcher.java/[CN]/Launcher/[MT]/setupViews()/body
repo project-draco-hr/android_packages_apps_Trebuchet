@@ -1,5 +1,4 @@
 {
-  mDragController=new DragController(this);
   DragController dragController=mDragController;
   DragLayer dragLayer=(DragLayer)findViewById(R.id.drag_layer);
   dragLayer.setDragController(dragController);
