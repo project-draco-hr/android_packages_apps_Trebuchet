@@ -3,6 +3,7 @@
   final Context context=mContext;
   final ContentResolver contentResolver=context.getContentResolver();
   final PackageManager manager=context.getPackageManager();
+  mItems.clear();
   final Cursor c=contentResolver.query(LauncherSettings.Favorites.CONTENT_URI,null,null,null,null);
   try {
     final int idIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites._ID);
