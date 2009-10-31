@@ -2,7 +2,7 @@
   final int N=list.size();
   for (int i=0; i < N; i++) {
     final ApplicationInfo item=list.get(i);
-    int index=Collections.binarySearch(mAllAppsList,item,mAppIntentComp);
+    int index=findAppByComponent(mAllAppsList,item);
     if (index >= 0) {
       mAllAppsList.remove(index);
       if (mRollo != null) {
