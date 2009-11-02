@@ -1,4 +1,5 @@
 {
+  lastStartTime=SystemClock.uptimeMillis();
   super.onCreate(savedInstanceState);
   mModel=((LauncherApplication)getApplication()).setLauncher(this);
   mDragController=new DragController(this);
