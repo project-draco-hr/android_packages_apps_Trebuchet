@@ -22,7 +22,7 @@ synchronized (mLock) {
   }
   bindWorkspace();
 synchronized (LoaderThread.this) {
-    mHandler.post(new Runnable(){
+    mHandler.postIdle(new Runnable(){
       public void run(){
 synchronized (LoaderThread.this) {
           mWorkspaceDoneBinding=true;
