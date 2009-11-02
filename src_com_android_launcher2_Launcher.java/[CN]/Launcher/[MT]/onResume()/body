@@ -1,4 +1,7 @@
 {
+  if (lastStartTime == 0) {
+    lastStartTime=SystemClock.uptimeMillis();
+  }
   super.onResume();
   if (mRestoring) {
     mWorkspaceLoading=true;
