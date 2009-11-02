@@ -1,6 +1,7 @@
 {
   super.onCreate(savedInstanceState);
   mModel=((LauncherApplication)getApplication()).setLauncher(this);
+  mDragController=new DragController(this);
   mInflater=getLayoutInflater();
   mAppWidgetManager=AppWidgetManager.getInstance(this);
   mAppWidgetHost=new LauncherAppWidgetHost(this,APPWIDGET_HOST_ID);
