@@ -2,6 +2,7 @@
   if (!isVisible()) {
     return false;
   }
+  final int iconCount=mRollo.mState.iconCount;
   if (keyCode == KeyEvent.KEYCODE_DPAD_CENTER || keyCode == KeyEvent.KEYCODE_ENTER) {
     if (mArrowNavigation) {
       int whichApp=mRollo.mState.selectedIconIndex;
@@ -11,12 +12,12 @@
       }
     }
   }
-  if (mArrowNavigation && mRollo.mState.iconCount > 0) {
+  if (mArrowNavigation && iconCount > 0) {
     mArrowNavigation=true;
-    int currentSelection=mRollo.mState.selectedIconIndex;
-    int currentTopRow=(int)mRollo.mMessageProc.mPosX;
-    int currentPageCol=currentSelection % Defines.COLUMNS_PER_PAGE;
-    int currentPageRow=(currentSelection - (currentTopRow * Defines.COLUMNS_PER_PAGE)) / Defines.ROWS_PER_PAGE;
+    final int currentSelection=mRollo.mState.selectedIconIndex;
+    final int currentTopRow=(int)mRollo.mMessageProc.mPosX;
+    final int currentPageCol=currentSelection % Defines.COLUMNS_PER_PAGE;
+    final int currentPageRow=(currentSelection - (currentTopRow * Defines.COLUMNS_PER_PAGE)) / Defines.ROWS_PER_PAGE;
     int newSelection=currentSelection;
 switch (keyCode) {
 case KeyEvent.KEYCODE_DPAD_UP:
@@ -29,23 +30,27 @@ case KeyEvent.KEYCODE_DPAD_UP:
       }
     break;
 case KeyEvent.KEYCODE_DPAD_DOWN:
-  if (currentSelection < mRollo.mState.iconCount - Defines.COLUMNS_PER_PAGE) {
-    if (currentPageRow < Defines.ROWS_PER_PAGE - 1) {
+{
+    final int rowCount=iconCount / Defines.COLUMNS_PER_PAGE + (iconCount % Defines.COLUMNS_PER_PAGE == 0 ? 0 : 1);
+    final int currentRow=currentSelection / Defines.COLUMNS_PER_PAGE;
+    if (currentRow < rowCount - 1) {
       newSelection=currentSelection + Defines.COLUMNS_PER_PAGE;
+      if (newSelection >= iconCount) {
+        newSelection=iconCount - 1;
+      }
+      if (currentPageRow >= Defines.ROWS_PER_PAGE - 1) {
+        mRollo.moveTo(currentTopRow + 1);
+      }
     }
- else {
-      mRollo.moveTo(currentTopRow + 1);
-      newSelection=currentSelection + Defines.COLUMNS_PER_PAGE;
-    }
+    break;
   }
-break;
 case KeyEvent.KEYCODE_DPAD_LEFT:
 if (currentPageCol > 0) {
-newSelection=currentSelection - 1;
+  newSelection=currentSelection - 1;
 }
 break;
 case KeyEvent.KEYCODE_DPAD_RIGHT:
-if ((currentPageCol < Defines.COLUMNS_PER_PAGE - 1) && (currentSelection < mRollo.mState.iconCount - 1)) {
+if ((currentPageCol < Defines.COLUMNS_PER_PAGE - 1) && (currentSelection < iconCount - 1)) {
 newSelection=currentSelection + 1;
 }
 break;
