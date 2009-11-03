@@ -1,0 +1,21 @@
+{
+  super.onWindowFocusChanged(hasWindowFocus);
+  if (mArrowNavigation) {
+    if (!hasWindowFocus) {
+      mLastSelectedIcon=mRollo.mState.selectedIconIndex;
+      mRollo.clearSelectedIcon();
+      mRollo.mState.save();
+    }
+ else     if (hasWindowFocus) {
+      if (mRollo.mState.iconCount > 0) {
+        int selection=mLastSelectedIcon;
+        final int firstIcon=Math.round(mRollo.mMessageProc.mPosX) * Defines.COLUMNS_PER_PAGE;
+        if (selection < 0 || selection < firstIcon || selection >= mRollo.mState.iconCount || selection >= firstIcon + (Defines.COLUMNS_PER_PAGE * Defines.ROWS_PER_PAGE)) {
+          selection=firstIcon;
+        }
+        mRollo.selectIcon(selection);
+        mRollo.mState.save();
+      }
+    }
+  }
+}

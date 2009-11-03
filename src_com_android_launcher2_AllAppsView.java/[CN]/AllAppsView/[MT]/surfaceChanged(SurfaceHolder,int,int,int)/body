@@ -16,7 +16,6 @@
   }
   Resources res=getContext().getResources();
   int barHeight=(int)res.getDimension(R.dimen.button_bar_height);
-  mHomeButtonTop=h - barHeight;
   long endTime=SystemClock.uptimeMillis();
   Log.d(TAG,"surfaceChanged took " + (endTime - startTime) + "ms");
 }
