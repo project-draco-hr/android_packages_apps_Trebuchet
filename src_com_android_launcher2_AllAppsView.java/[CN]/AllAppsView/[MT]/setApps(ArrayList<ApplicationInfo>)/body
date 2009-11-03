@@ -3,6 +3,5 @@
   if (mRollo != null) {
     mRollo.setApps(list);
   }
-  mPageCount=countPages(list.size());
   mLocks&=~LOCK_ICONS_PENDING;
 }
