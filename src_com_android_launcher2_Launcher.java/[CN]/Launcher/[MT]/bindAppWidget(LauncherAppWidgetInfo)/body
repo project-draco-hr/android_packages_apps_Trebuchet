@@ -3,9 +3,6 @@
   final int appWidgetId=item.appWidgetId;
   final AppWidgetProviderInfo appWidgetInfo=mAppWidgetManager.getAppWidgetInfo(appWidgetId);
   item.hostView=mAppWidgetHost.createView(this,appWidgetId,appWidgetInfo);
-  if (true) {
-    Log.d(LOG_TAG,String.format("about to setAppWidget for id=%d, info=%s",appWidgetId,appWidgetInfo));
-  }
   item.hostView.setAppWidget(appWidgetId,appWidgetInfo);
   item.hostView.setTag(item);
   workspace.addInScreen(item.hostView,item.screen,item.cellX,item.cellY,item.spanX,item.spanY,false);
