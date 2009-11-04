@@ -65,6 +65,5 @@ synchronized (mLock) {
   mContext=null;
 synchronized (mLock) {
     mLoaderThread=null;
-    return;
   }
 }
