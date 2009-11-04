@@ -1,4 +1,3 @@
 {
-  mAllAppsList=apps;
-  mAllAppsGrid.setApps(mAllAppsList);
+  mAllAppsGrid.setApps(apps);
 }

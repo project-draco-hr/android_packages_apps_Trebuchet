@@ -8,8 +8,8 @@
   final int mcc=configuration.mcc;
   final int previousMnc=localeConfiguration.mnc;
   final int mnc=configuration.mnc;
-  mLocaleChanged=!locale.equals(previousLocale) || mcc != previousMcc || mnc != previousMnc;
-  if (mLocaleChanged) {
+  boolean localeChanged=!locale.equals(previousLocale) || mcc != previousMcc || mnc != previousMnc;
+  if (localeChanged) {
     localeConfiguration.locale=locale;
     localeConfiguration.mcc=mcc;
     localeConfiguration.mnc=mnc;

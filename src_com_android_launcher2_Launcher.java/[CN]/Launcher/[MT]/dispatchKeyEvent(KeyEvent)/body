@@ -2,29 +2,25 @@
   if (event.getAction() == KeyEvent.ACTION_DOWN) {
 switch (event.getKeyCode()) {
 case KeyEvent.KEYCODE_BACK:
-      mBackDown=true;
-    return true;
+      return true;
 case KeyEvent.KEYCODE_HOME:
-  mHomeDown=true;
-return true;
+    return true;
 }
 }
  else if (event.getAction() == KeyEvent.ACTION_UP) {
 switch (event.getKeyCode()) {
 case KeyEvent.KEYCODE_BACK:
-if (!event.isCanceled()) {
-mWorkspace.dispatchKeyEvent(event);
-if (isAllAppsVisible()) {
-  closeAllApps(true);
-}
+  if (!event.isCanceled()) {
+    mWorkspace.dispatchKeyEvent(event);
+    if (isAllAppsVisible()) {
+      closeAllApps(true);
+    }
  else {
-  closeFolder();
-}
-}
-mBackDown=false;
+      closeFolder();
+    }
+  }
 return true;
 case KeyEvent.KEYCODE_HOME:
-mHomeDown=false;
 return true;
 }
 }
