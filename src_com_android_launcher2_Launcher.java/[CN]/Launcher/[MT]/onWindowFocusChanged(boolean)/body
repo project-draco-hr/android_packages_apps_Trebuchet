@@ -1,6 +1,0 @@
-{
-  super.onWindowFocusChanged(hasFocus);
-  if (!hasFocus) {
-    mBackDown=mHomeDown=false;
-  }
-}

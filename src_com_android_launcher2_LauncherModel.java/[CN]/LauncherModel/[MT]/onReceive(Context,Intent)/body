@@ -36,18 +36,18 @@ synchronized (mLock) {
     }
     if (mAllAppsList.added.size() > 0) {
       added=mAllAppsList.added;
-      mAllAppsList.added=new ArrayList();
+      mAllAppsList.added=new ArrayList<ApplicationInfo>();
     }
     if (mAllAppsList.removed.size() > 0) {
       removed=mAllAppsList.removed;
-      mAllAppsList.removed=new ArrayList();
+      mAllAppsList.removed=new ArrayList<ApplicationInfo>();
       for (      ApplicationInfo info : removed) {
         AppInfoCache.remove(info.intent.getComponent());
       }
     }
     if (mAllAppsList.modified.size() > 0) {
       modified=mAllAppsList.modified;
-      mAllAppsList.modified=new ArrayList();
+      mAllAppsList.modified=new ArrayList<ApplicationInfo>();
     }
     final Callbacks callbacks=mCallbacks != null ? mCallbacks.get() : null;
     if (callbacks == null) {
