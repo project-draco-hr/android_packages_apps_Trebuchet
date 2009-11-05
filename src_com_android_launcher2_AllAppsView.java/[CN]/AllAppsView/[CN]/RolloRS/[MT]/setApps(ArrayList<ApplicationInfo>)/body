@@ -12,9 +12,7 @@
   mAllocLabelIds=Allocation.createSized(mRS,Element.USER_I32(mRS),allocCount);
   Element ie8888=Element.RGBA_8888(mRS);
   Utilities.BubbleText bubble=new Utilities.BubbleText(getContext());
-  for (int i=0; i < count; i++) {
-    uploadAppIcon(i,list.get(i));
-  }
   mState.iconCount=count;
+  uploadApps(list);
   saveAppsList();
 }
