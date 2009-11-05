@@ -5,11 +5,16 @@
   if (mRS == null) {
     mRS=createRenderScript(true);
     mRollo=new RolloRS();
+    mRollo.mHasSurface=true;
     mRollo.init(getResources(),w,h);
     if (mAllAppsList != null) {
       mRollo.setApps(mAllAppsList);
       Log.d(TAG,"surfaceChanged... calling mRollo.setApps");
     }
+  }
+ else {
+    mRollo.mHasSurface=true;
+    mRollo.dirtyCheck();
   }
   Resources res=getContext().getResources();
   int barHeight=(int)res.getDimension(R.dimen.button_bar_height);
