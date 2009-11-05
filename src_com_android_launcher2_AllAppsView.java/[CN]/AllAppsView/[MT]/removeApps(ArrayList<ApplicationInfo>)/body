@@ -1,4 +1,7 @@
 {
+  if (mAllAppsList == null) {
+    return;
+  }
   final int N=list.size();
   for (int i=0; i < N; i++) {
     final ApplicationInfo item=list.get(i);
