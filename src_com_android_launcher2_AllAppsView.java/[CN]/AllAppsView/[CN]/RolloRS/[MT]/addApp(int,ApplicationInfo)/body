@@ -5,5 +5,10 @@
   System.arraycopy(mIconIds,index,mIconIds,dest,count);
   System.arraycopy(mLabels,index,mLabels,dest,count);
   System.arraycopy(mLabelIds,index,mLabelIds,dest,count);
-  uploadAppIcon(index,item);
+  if (mHasSurface) {
+    uploadAppIcon(index,item);
+  }
+ else {
+    mAppsDirty=true;
+  }
 }

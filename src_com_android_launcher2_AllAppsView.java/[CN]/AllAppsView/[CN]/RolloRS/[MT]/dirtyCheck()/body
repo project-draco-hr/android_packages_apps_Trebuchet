@@ -1,0 +1,7 @@
+{
+  if (mAppsDirty && mHasSurface) {
+    uploadApps(mAllAppsList);
+    saveAppsList();
+    mAppsDirty=false;
+  }
+}

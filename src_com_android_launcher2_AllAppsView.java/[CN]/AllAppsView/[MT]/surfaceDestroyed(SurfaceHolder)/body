@@ -1,3 +1,4 @@
 {
   super.surfaceDestroyed(holder);
+  mRollo.mHasSurface=false;
 }
