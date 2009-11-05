@@ -1,4 +1,5 @@
 {
+  Log.d(TAG,"onReceive intent=" + intent);
   context=mApp;
   final String packageName=intent.getData().getSchemeSpecificPart();
   ArrayList<ApplicationInfo> added=null;
@@ -51,6 +52,7 @@ synchronized (mLock) {
     }
     final Callbacks callbacks=mCallbacks != null ? mCallbacks.get() : null;
     if (callbacks == null) {
+      Log.d(TAG,"nobody to tell about the new app");
       return;
     }
     if (added != null) {
