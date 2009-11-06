@@ -18,7 +18,7 @@ boolean yMoved=yDiff > touchSlop;
 if (xMoved || yMoved) {
 if (xMoved) {
 mTouchState=TOUCH_STATE_SCROLLING;
-enableChildrenCache();
+enableChildrenCache(mCurrentScreen - 1,mCurrentScreen + 1);
 }
 if (mAllowLongPress) {
 mAllowLongPress=false;

@@ -14,7 +14,9 @@
     getChildAt(i).measure(widthMeasureSpec,heightMeasureSpec);
   }
   if (mFirstLayout) {
+    setHorizontalScrollBarEnabled(false);
     scrollTo(mCurrentScreen * width,0);
+    setHorizontalScrollBarEnabled(true);
     updateWallpaperOffset(width * (getChildCount() - 1));
     mFirstLayout=false;
   }

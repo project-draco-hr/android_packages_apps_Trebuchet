@@ -39,6 +39,9 @@ if (deltaX < 0) {
     updateWallpaperOffset();
   }
 }
+ else {
+  awakenScrollBars();
+}
 }
 break;
 case MotionEvent.ACTION_UP:

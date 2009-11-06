@@ -54,4 +54,5 @@
   if (restore) {
     canvas.restoreToCount(restoreCount);
   }
+  onDrawScrollBars(canvas);
 }
