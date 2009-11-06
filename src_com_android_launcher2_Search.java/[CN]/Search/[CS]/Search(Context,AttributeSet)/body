@@ -1,5 +1,7 @@
 {
   super(context,attrs);
+  final float scale=context.getResources().getDisplayMetrics().density;
+  mWidgetTopOffset=Math.round(WIDGET_TOP_OFFSET * scale);
   Interpolator interpolator=new AccelerateDecelerateInterpolator();
   mMorphAnimation=new ToParentOriginAnimation();
   mMorphAnimation.setFillBefore(false);
