@@ -67,7 +67,7 @@ case LauncherSettings.Favorites.CONTAINER_DESKTOP:
       mItems.add(info);
     break;
 default :
-  UserFolderInfo folderInfo=findOrMakeUserFolder(folders,container);
+  UserFolderInfo folderInfo=findOrMakeUserFolder(mFolders,container);
 folderInfo.add(info);
 break;
 }
@@ -75,7 +75,7 @@ break;
 break;
 case LauncherSettings.Favorites.ITEM_TYPE_USER_FOLDER:
 id=c.getLong(idIndex);
-UserFolderInfo folderInfo=findOrMakeUserFolder(folders,id);
+UserFolderInfo folderInfo=findOrMakeUserFolder(mFolders,id);
 folderInfo.title=c.getString(titleIndex);
 folderInfo.id=id;
 container=c.getInt(containerIndex);
@@ -88,10 +88,11 @@ case LauncherSettings.Favorites.CONTAINER_DESKTOP:
 mItems.add(folderInfo);
 break;
 }
+mFolders.put(folderInfo.id,folderInfo);
 break;
 case LauncherSettings.Favorites.ITEM_TYPE_LIVE_FOLDER:
 id=c.getLong(idIndex);
-LiveFolderInfo liveFolderInfo=findOrMakeLiveFolder(folders,id);
+LiveFolderInfo liveFolderInfo=findOrMakeLiveFolder(mFolders,id);
 intentDescription=c.getString(intentIndex);
 intent=null;
 if (intentDescription != null) {
@@ -117,6 +118,7 @@ case LauncherSettings.Favorites.CONTAINER_DESKTOP:
 mItems.add(liveFolderInfo);
 break;
 }
+mFolders.put(liveFolderInfo.id,liveFolderInfo);
 break;
 case LauncherSettings.Favorites.ITEM_TYPE_WIDGET_SEARCH:
 widgetInfo=Widget.makeSearch();
