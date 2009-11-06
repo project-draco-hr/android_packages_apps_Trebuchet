@@ -29,6 +29,15 @@
     }
 );
   }
+  mHandler.post(new Runnable(){
+    public void run(){
+      Callbacks callbacks=tryGetCallbacks();
+      if (callbacks != null) {
+        callbacks.bindFolders(mFolders);
+      }
+    }
+  }
+);
   mHandler.postIdle(new Runnable(){
     public void run(){
       Log.d(TAG,"Going to start binding widgets soon.");
