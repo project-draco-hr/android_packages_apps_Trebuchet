@@ -27,7 +27,7 @@ case REQUEST_PICK_WALLPAPER:
 break;
 }
 }
- else if (requestCode == REQUEST_PICK_APPWIDGET && resultCode == RESULT_CANCELED && data != null) {
+ else if ((requestCode == REQUEST_PICK_APPWIDGET || requestCode == REQUEST_CREATE_APPWIDGET) && resultCode == RESULT_CANCELED && data != null) {
 int appWidgetId=data.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,-1);
 if (appWidgetId != -1) {
 mAppWidgetHost.deleteAppWidgetId(appWidgetId);
