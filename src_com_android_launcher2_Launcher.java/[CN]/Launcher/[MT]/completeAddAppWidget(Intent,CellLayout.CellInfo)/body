@@ -1,12 +1,15 @@
 {
   Bundle extras=data.getExtras();
   int appWidgetId=extras.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID,-1);
-  d(LOG_TAG,"dumping extras content=" + extras.toString());
+  if (LOGD)   d(LOG_TAG,"dumping extras content=" + extras.toString());
   AppWidgetProviderInfo appWidgetInfo=mAppWidgetManager.getAppWidgetInfo(appWidgetId);
   CellLayout layout=(CellLayout)mWorkspace.getChildAt(cellInfo.screen);
   int[] spans=layout.rectToCell(appWidgetInfo.minWidth,appWidgetInfo.minHeight);
   final int[] xy=mCellCoordinates;
-  if (!findSlot(cellInfo,xy,spans[0],spans[1]))   return;
+  if (!findSlot(cellInfo,xy,spans[0],spans[1])) {
+    if (appWidgetId != -1)     mAppWidgetHost.deleteAppWidgetId(appWidgetId);
+    return;
+  }
   LauncherAppWidgetInfo launcherInfo=new LauncherAppWidgetInfo(appWidgetId);
   launcherInfo.spanX=spans[0];
   launcherInfo.spanY=spans[1];
