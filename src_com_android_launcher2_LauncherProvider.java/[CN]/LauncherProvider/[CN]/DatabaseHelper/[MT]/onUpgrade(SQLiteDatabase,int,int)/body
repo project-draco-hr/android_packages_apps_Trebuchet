@@ -32,6 +32,20 @@
       db.endTransaction();
     }
   }
+  if (version < 5) {
+    db.beginTransaction();
+    try {
+      db.execSQL("UPDATE favorites SET screen=(screen + 1);");
+      db.setTransactionSuccessful();
+      version=5;
+    }
+ catch (    SQLException ex) {
+      Log.e(LOG_TAG,ex.getMessage(),ex);
+    }
+ finally {
+      db.endTransaction();
+    }
+  }
   if (version != DATABASE_VERSION) {
     Log.w(LOG_TAG,"Destroying all old data.");
     db.execSQL("DROP TABLE IF EXISTS " + TABLE_FAVORITES);
