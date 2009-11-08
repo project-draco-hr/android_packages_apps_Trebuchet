@@ -5,8 +5,8 @@
   sIconWidth=sIconHeight=(int)resources.getDimension(android.R.dimen.app_icon_size);
   sIconTextureWidth=sIconTextureHeight=roundToPow2(sIconWidth);
   sBlurPaint.setMaskFilter(new BlurMaskFilter(5 * density,BlurMaskFilter.Blur.NORMAL));
-  sGlowColorSelectedPaint.setColor(0xffffc300);
-  sGlowColorSelectedPaint.setMaskFilter(TableMaskFilter.CreateClipTable(0,30));
+  sGlowColorPressedPaint.setColor(0xffffc300);
+  sGlowColorPressedPaint.setMaskFilter(TableMaskFilter.CreateClipTable(0,30));
   sGlowColorFocusedPaint.setColor(0xffff8e00);
   sGlowColorFocusedPaint.setMaskFilter(TableMaskFilter.CreateClipTable(0,30));
 }

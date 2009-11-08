@@ -8,6 +8,8 @@
   mParams.bubbleBitmapHeight=bubble.getBitmapHeight();
   mHomeButtonNormal=Allocation.createFromBitmapResource(mRS,mRes,R.drawable.home_button_normal,Element.RGBA_8888(mRS),false);
   mHomeButtonNormal.uploadToTexture(0);
+  mHomeButtonFocused=Allocation.createFromBitmapResource(mRS,mRes,R.drawable.home_button_focused,Element.RGBA_8888(mRS),false);
+  mHomeButtonFocused.uploadToTexture(0);
   mHomeButtonPressed=Allocation.createFromBitmapResource(mRS,mRes,R.drawable.home_button_pressed,Element.RGBA_8888(mRS),false);
   mHomeButtonPressed.uploadToTexture(0);
   mParams.homeButtonWidth=76;

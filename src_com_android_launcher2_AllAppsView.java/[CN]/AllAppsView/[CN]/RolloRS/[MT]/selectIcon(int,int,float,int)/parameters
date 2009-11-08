@@ -1,4 +1,4 @@
 int x
 int y
 float pos
-boolean selected
+int pressed

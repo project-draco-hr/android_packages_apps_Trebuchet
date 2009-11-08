@@ -3,18 +3,25 @@
   if (mArrowNavigation) {
     if (!hasWindowFocus) {
       mLastSelectedIcon=mRollo.mState.selectedIconIndex;
+      mRollo.setHomeSelected(SELECTED_NONE);
       mRollo.clearSelectedIcon();
       mRollo.mState.save();
     }
  else     if (hasWindowFocus) {
       if (mRollo.mState.iconCount > 0) {
-        int selection=mLastSelectedIcon;
-        final int firstIcon=Math.round(mRollo.mMessageProc.mPosX) * Defines.COLUMNS_PER_PAGE;
-        if (selection < 0 || selection < firstIcon || selection >= mRollo.mState.iconCount || selection >= firstIcon + (Defines.COLUMNS_PER_PAGE * Defines.ROWS_PER_PAGE)) {
-          selection=firstIcon;
+        if (mLastSelection == SELECTION_ICONS) {
+          int selection=mLastSelectedIcon;
+          final int firstIcon=Math.round(mRollo.mMessageProc.mPosX) * Defines.COLUMNS_PER_PAGE;
+          if (selection < 0 || selection < firstIcon || selection >= mRollo.mState.iconCount || selection >= firstIcon + (Defines.COLUMNS_PER_PAGE * Defines.ROWS_PER_PAGE)) {
+            selection=firstIcon;
+          }
+          mRollo.selectIcon(selection,SELECTED_FOCUSED);
+          mRollo.mState.save();
         }
-        mRollo.selectIcon(selection,false);
-        mRollo.mState.save();
+ else         if (mLastSelection == SELECTION_HOME) {
+          mRollo.setHomeSelected(SELECTED_FOCUSED);
+          mRollo.mState.save();
+        }
       }
     }
   }
