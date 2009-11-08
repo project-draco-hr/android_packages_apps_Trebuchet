@@ -28,7 +28,7 @@ case MotionEvent.ACTION_DOWN:
         mRollo.clearSelectedIcon();
       }
  else {
-        mDownIconIndex=mCurrentIconIndex=mRollo.selectIcon(x,y,mRollo.mMessageProc.mPosX);
+        mDownIconIndex=mCurrentIconIndex=mRollo.selectIcon(x,y,mRollo.mMessageProc.mPosX,true);
         if (mDownIconIndex < 0) {
           cancelLongPress();
         }
