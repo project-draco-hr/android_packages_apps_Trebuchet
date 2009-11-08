@@ -1,3 +1,4 @@
 {
+  closeAllApps(true);
   showAddDialog(mMenuAddInfo);
 }
