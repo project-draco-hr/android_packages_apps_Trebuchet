@@ -6,7 +6,7 @@
   if (gainFocus) {
     if (!mArrowNavigation && mRollo.mState.iconCount > 0) {
       mArrowNavigation=true;
-      mRollo.selectIcon(Math.round(mRollo.mMessageProc.mPosX) * Defines.COLUMNS_PER_PAGE);
+      mRollo.selectIcon(Math.round(mRollo.mMessageProc.mPosX) * Defines.COLUMNS_PER_PAGE,false);
       mRollo.mState.save();
     }
   }

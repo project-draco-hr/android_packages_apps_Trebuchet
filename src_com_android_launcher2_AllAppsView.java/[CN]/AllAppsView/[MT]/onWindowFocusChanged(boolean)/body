@@ -13,7 +13,7 @@
         if (selection < 0 || selection < firstIcon || selection >= mRollo.mState.iconCount || selection >= firstIcon + (Defines.COLUMNS_PER_PAGE * Defines.ROWS_PER_PAGE)) {
           selection=firstIcon;
         }
-        mRollo.selectIcon(selection);
+        mRollo.selectIcon(selection,false);
         mRollo.mState.save();
       }
     }

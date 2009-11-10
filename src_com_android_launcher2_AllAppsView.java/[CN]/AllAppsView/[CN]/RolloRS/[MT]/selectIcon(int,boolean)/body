@@ -5,7 +5,7 @@
  else {
     mState.selectedIconIndex=index;
     Bitmap selectionBitmap=mSelectionBitmap;
-    Utilities.drawSelectedAllAppsBitmap(mSelectionCanvas,selectionBitmap.getWidth(),selectionBitmap.getHeight(),mAllAppsList.get(index).iconBitmap);
+    Utilities.drawSelectedAllAppsBitmap(mSelectionCanvas,selectionBitmap.getWidth(),selectionBitmap.getHeight(),selected,mAllAppsList.get(index).iconBitmap);
     mSelectedIcon=Allocation.createFromBitmap(mRS,selectionBitmap,Element.RGBA_8888(mRS),false);
     mSelectedIcon.uploadToTexture(0);
     mState.selectedIconTexture=mSelectedIcon.getID();
