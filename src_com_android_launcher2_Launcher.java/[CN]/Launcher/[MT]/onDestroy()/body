@@ -10,4 +10,5 @@
   mModel.stopLoader();
   unbindDesktopItems();
   AppInfoCache.unbindDrawables();
+  getContentResolver().unregisterContentObserver(mWidgetObserver);
 }
