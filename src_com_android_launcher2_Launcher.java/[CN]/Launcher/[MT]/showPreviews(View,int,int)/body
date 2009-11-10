@@ -1,14 +1,12 @@
 {
-  ImageView preview=new ImageView(this);
-  preview.requestFocus();
   Drawable d=getResources().getDrawable(R.drawable.preview_popup);
-  Rect r=new Rect();
-  d.getPadding(r);
-  int extraW=r.left + r.right;
-  int extraH=r.top + r.bottom;
   Workspace workspace=mWorkspace;
   CellLayout cell=((CellLayout)workspace.getChildAt(start));
   float max=workspace.getChildCount() - 1;
+  Rect r=new Rect();
+  d.getPadding(r);
+  int extraW=(int)((r.left + r.right) * max);
+  int extraH=r.top + r.bottom;
   int aW=cell.getWidth() - extraW;
   float w=aW / max;
   int width=cell.getWidth();
@@ -21,31 +19,40 @@
   int count=end - start;
   final float sWidth=width * scale;
   float sHeight=height * scale;
-  Bitmap bitmap=Bitmap.createBitmap((int)(sWidth * count),(int)sHeight,Bitmap.Config.ARGB_8888);
-  PopupWindow p=new PopupWindow(this);
-  p.setContentView(preview);
-  p.setWidth(bitmap.getWidth() + extraW);
-  p.setHeight(bitmap.getHeight() + extraH);
-  p.setAnimationStyle(R.style.AnimationPreview);
-  p.setOutsideTouchable(true);
-  p.setBackgroundDrawable(d);
-  p.showAsDropDown(anchor,0,0);
-  Canvas c=new Canvas(bitmap);
+  LinearLayout preview=new LinearLayout(this);
+  preview.setFocusable(true);
+  PreviewTouchHandler handler=new PreviewTouchHandler(anchor);
+  ArrayList<Bitmap> bitmaps=new ArrayList<Bitmap>(count);
   for (int i=start; i < end; i++) {
+    ImageView image=new ImageView(this);
     cell=(CellLayout)workspace.getChildAt(i);
-    c.save();
+    Bitmap bitmap=Bitmap.createBitmap((int)sWidth,(int)sHeight,Bitmap.Config.ARGB_8888);
+    Canvas c=new Canvas(bitmap);
     c.scale(scale,scale);
     c.translate(-cell.getLeftPadding(),-cell.getTopPadding());
     cell.dispatchDraw(c);
-    c.restore();
-    c.translate(sWidth,0.0f);
+    image.setBackgroundDrawable(d);
+    image.setImageBitmap(bitmap);
+    image.setTag(i);
+    image.setOnClickListener(handler);
+    bitmaps.add(bitmap);
+    preview.addView(image,ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
   }
-  preview.setImageBitmap(bitmap);
-  PreviewTouchHandler handler=new PreviewTouchHandler(anchor,sWidth);
-  preview.setOnClickListener(handler);
-  preview.setOnTouchListener(handler);
-  p.setOnDismissListener(handler);
+  PopupWindow p=new PopupWindow(this);
+  p.setContentView(preview);
+  p.setWidth((int)(sWidth * count + extraW));
+  p.setHeight((int)(sHeight + extraH));
+  p.setAnimationStyle(R.style.AnimationPreview);
+  p.setOutsideTouchable(true);
+  p.setBackgroundDrawable(null);
+  p.showAsDropDown(anchor,0,0);
+  p.setOnDismissListener(new PopupWindow.OnDismissListener(){
+    public void onDismiss(){
+      dismissPreview(anchor);
+    }
+  }
+);
   anchor.setTag(p);
   anchor.setTag(R.id.workspace,preview);
-  anchor.setTag(R.id.icon,bitmap);
+  anchor.setTag(R.id.icon,bitmaps);
 }
