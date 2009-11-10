@@ -1,5 +1,5 @@
 Canvas dest
 int destWidth
 int destHeight
-boolean selected
+boolean pressed
 Bitmap src

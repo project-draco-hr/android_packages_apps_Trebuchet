@@ -1,8 +1,0 @@
-{
-  if (pressed) {
-    mState.homeButtonId=mHomeButtonPressed.getID();
-  }
- else {
-    mState.homeButtonId=mHomeButtonNormal.getID();
-  }
-}

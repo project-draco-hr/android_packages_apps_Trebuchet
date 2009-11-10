@@ -14,7 +14,7 @@ switch (action) {
 case MotionEvent.ACTION_DOWN:
     if (y > mRollo.mTouchYBorders[mRollo.mTouchYBorders.length - 1]) {
       mTouchTracking=TRACKING_HOME;
-      mRollo.setHomeSelected(true);
+      mRollo.setHomeSelected(SELECTED_PRESSED);
       mRollo.mState.save();
       mCurrentIconIndex=-1;
     }
@@ -28,7 +28,7 @@ case MotionEvent.ACTION_DOWN:
         mRollo.clearSelectedIcon();
       }
  else {
-        mDownIconIndex=mCurrentIconIndex=mRollo.selectIcon(x,y,mRollo.mMessageProc.mPosX,true);
+        mDownIconIndex=mCurrentIconIndex=mRollo.selectIcon(x,y,mRollo.mMessageProc.mPosX,SELECTED_PRESSED);
         if (mDownIconIndex < 0) {
           cancelLongPress();
         }
@@ -43,7 +43,7 @@ case MotionEvent.ACTION_DOWN:
 case MotionEvent.ACTION_MOVE:
 case MotionEvent.ACTION_OUTSIDE:
 if (mTouchTracking == TRACKING_HOME) {
-  mRollo.setHomeSelected(y > mRollo.mTouchYBorders[mRollo.mTouchYBorders.length - 1]);
+  mRollo.setHomeSelected(y > mRollo.mTouchYBorders[mRollo.mTouchYBorders.length - 1] ? SELECTED_PRESSED : SELECTED_NONE);
   mRollo.mState.save();
 }
  else if (mTouchTracking == TRACKING_FLING) {
@@ -81,7 +81,7 @@ if (y > mRollo.mTouchYBorders[mRollo.mTouchYBorders.length - 1]) {
   reallyPlaySoundEffect(SoundEffectConstants.CLICK);
   mLauncher.closeAllApps(true);
 }
-mRollo.setHomeSelected(false);
+mRollo.setHomeSelected(SELECTED_NONE);
 mRollo.mState.save();
 }
 mCurrentIconIndex=-1;
