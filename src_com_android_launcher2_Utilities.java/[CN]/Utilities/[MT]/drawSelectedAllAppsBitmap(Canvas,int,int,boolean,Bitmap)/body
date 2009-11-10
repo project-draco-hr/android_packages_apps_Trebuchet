@@ -8,7 +8,7 @@ synchronized (sCanvas) {
     Bitmap mask=src.extractAlpha(sBlurPaint,xy);
     float px=(destWidth - src.getWidth()) / 2;
     float py=(destHeight - src.getHeight()) / 2;
-    dest.drawBitmap(mask,px + xy[0],py + xy[1],selected ? sGlowColorSelectedPaint : sGlowColorFocusedPaint);
+    dest.drawBitmap(mask,px + xy[0],py + xy[1],pressed ? sGlowColorPressedPaint : sGlowColorFocusedPaint);
     mask.recycle();
   }
 }
