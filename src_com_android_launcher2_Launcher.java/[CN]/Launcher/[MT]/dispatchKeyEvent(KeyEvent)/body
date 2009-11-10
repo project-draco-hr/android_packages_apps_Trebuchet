@@ -18,6 +18,8 @@ case KeyEvent.KEYCODE_BACK:
  else {
       closeFolder();
     }
+    dismissPreview(mPreviousView);
+    dismissPreview(mNextView);
   }
 return true;
 case KeyEvent.KEYCODE_HOME:

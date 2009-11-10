@@ -1,6 +1,0 @@
-{
-  if (event.getAction() == KeyEvent.ACTION_UP) {
-    dismissPreview(v);
-  }
-  return false;
-}
