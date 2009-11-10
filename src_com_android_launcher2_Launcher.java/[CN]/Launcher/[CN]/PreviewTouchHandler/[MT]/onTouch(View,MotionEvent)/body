@@ -1,6 +1,0 @@
-{
-  if (event.getAction() == MotionEvent.ACTION_UP) {
-    mTouchX=event.getX();
-  }
-  return false;
-}

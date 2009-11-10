@@ -1,11 +1,4 @@
 {
-  int screen=0;
-  if (mAnchor == mNextView) {
-    screen=mWorkspace.getCurrentScreen() + (int)(mTouchX / mWidth) + 1;
-  }
- else   if (mAnchor == mPreviousView) {
-    screen=(int)(mTouchX / mWidth);
-  }
-  mWorkspace.snapToScreen(screen);
+  mWorkspace.snapToScreen((Integer)v.getTag());
   dismissPreview(mAnchor);
 }
