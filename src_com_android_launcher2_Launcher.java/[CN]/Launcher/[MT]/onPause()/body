@@ -4,4 +4,6 @@
     mExitingBecauseOfLaunch=false;
     closeAllApps(false);
   }
+  dismissPreview(mPreviousView);
+  dismissPreview(mNextView);
 }
