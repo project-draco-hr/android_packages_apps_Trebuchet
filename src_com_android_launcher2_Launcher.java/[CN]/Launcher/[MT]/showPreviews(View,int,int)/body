@@ -1,0 +1,51 @@
+{
+  ImageView preview=new ImageView(this);
+  preview.requestFocus();
+  Drawable d=getResources().getDrawable(R.drawable.preview_popup);
+  Rect r=new Rect();
+  d.getPadding(r);
+  int extraW=r.left + r.right;
+  int extraH=r.top + r.bottom;
+  Workspace workspace=mWorkspace;
+  CellLayout cell=((CellLayout)workspace.getChildAt(start));
+  float max=workspace.getChildCount() - 1;
+  int aW=cell.getWidth() - extraW;
+  float w=aW / max;
+  int width=cell.getWidth();
+  int height=cell.getHeight();
+  int x=cell.getLeftPadding();
+  int y=cell.getTopPadding();
+  width-=(x + cell.getRightPadding());
+  height-=(y + cell.getBottomPadding());
+  float scale=w / width;
+  int count=end - start;
+  final float sWidth=width * scale;
+  float sHeight=height * scale;
+  Bitmap bitmap=Bitmap.createBitmap((int)(sWidth * count),(int)sHeight,Bitmap.Config.ARGB_8888);
+  PopupWindow p=new PopupWindow(this);
+  p.setContentView(preview);
+  p.setWidth(bitmap.getWidth() + extraW);
+  p.setHeight(bitmap.getHeight() + extraH);
+  p.setAnimationStyle(R.style.AnimationPreview);
+  p.setOutsideTouchable(true);
+  p.setBackgroundDrawable(d);
+  p.showAsDropDown(anchor,0,0);
+  Canvas c=new Canvas(bitmap);
+  for (int i=start; i < end; i++) {
+    cell=(CellLayout)workspace.getChildAt(i);
+    c.save();
+    c.scale(scale,scale);
+    c.translate(-cell.getLeftPadding(),-cell.getTopPadding());
+    cell.dispatchDraw(c);
+    c.restore();
+    c.translate(sWidth,0.0f);
+  }
+  preview.setImageBitmap(bitmap);
+  PreviewTouchHandler handler=new PreviewTouchHandler(anchor,sWidth);
+  preview.setOnClickListener(handler);
+  preview.setOnTouchListener(handler);
+  p.setOnDismissListener(handler);
+  anchor.setTag(p);
+  anchor.setTag(R.id.workspace,preview);
+  anchor.setTag(R.id.icon,bitmap);
+}

@@ -1,6 +1,7 @@
 {
   PopupWindow window=(PopupWindow)v.getTag();
   if (window != null) {
+    window.setOnDismissListener(null);
     window.dismiss();
     ((ImageView)v.getTag(R.id.workspace)).setImageBitmap(null);
     ((Bitmap)v.getTag(R.id.icon)).recycle();
