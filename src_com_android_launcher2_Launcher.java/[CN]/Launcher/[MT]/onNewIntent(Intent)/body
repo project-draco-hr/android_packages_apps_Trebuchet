@@ -1,19 +1,9 @@
 {
   super.onNewIntent(intent);
   if (Intent.ACTION_MAIN.equals(intent.getAction())) {
-    getWindow().closeAllPanels();
+    closeSystemDialogs();
     mWaitingForResult=false;
     mIsNewIntent=true;
-    try {
-      dismissDialog(DIALOG_CREATE_SHORTCUT);
-    }
- catch (    Exception e) {
-    }
-    try {
-      dismissDialog(DIALOG_RENAME_FOLDER);
-    }
- catch (    Exception e) {
-    }
     if ((intent.getFlags() & Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT) != Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT) {
       if (!mWorkspace.isDefaultScreenShowing()) {
         mWorkspace.moveToDefaultScreen();
