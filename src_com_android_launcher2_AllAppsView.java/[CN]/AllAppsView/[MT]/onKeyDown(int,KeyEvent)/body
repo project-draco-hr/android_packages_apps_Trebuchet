@@ -62,7 +62,7 @@ handled=true;
 break;
 }
 if (newSelection != currentSelection) {
-mRollo.selectIcon(newSelection);
+mRollo.selectIcon(newSelection,false);
 mRollo.mState.save();
 }
 }
