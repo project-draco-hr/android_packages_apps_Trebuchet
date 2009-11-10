@@ -9,6 +9,7 @@
   mInvokeFling=sb.addInvokable("fling");
   mInvokeMoveTo=sb.addInvokable("moveTo");
   mInvokeResetWAR=sb.addInvokable("resetHWWar");
+  mInvokeSetZoom=sb.addInvokable("setZoom");
   mScript=sb.create();
   mScript.setClearColor(0.0f,0.0f,0.0f,0.0f);
   mScript.bindAllocation(mParams.mAlloc,Defines.ALLOC_PARAMS);

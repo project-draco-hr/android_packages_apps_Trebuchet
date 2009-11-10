@@ -4,19 +4,14 @@
     closeSystemDialogs();
     mWaitingForResult=false;
     mIsNewIntent=true;
-    if ((intent.getFlags() & Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT) != Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT) {
-      if (!mWorkspace.isDefaultScreenShowing()) {
-        mWorkspace.moveToDefaultScreen();
-      }
-      closeAllApps(true);
-      final View v=getWindow().peekDecorView();
-      if (v != null && v.getWindowToken() != null) {
-        InputMethodManager imm=(InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(v.getWindowToken(),0);
-      }
+    if (!mWorkspace.isDefaultScreenShowing()) {
+      mWorkspace.moveToDefaultScreen();
     }
- else {
-      closeAllApps(false);
+    closeAllApps(false);
+    final View v=getWindow().peekDecorView();
+    if (v != null && v.getWindowToken() != null) {
+      InputMethodManager imm=(InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+      imm.hideSoftInputFromWindow(v.getWindowToken(),0);
     }
   }
 }

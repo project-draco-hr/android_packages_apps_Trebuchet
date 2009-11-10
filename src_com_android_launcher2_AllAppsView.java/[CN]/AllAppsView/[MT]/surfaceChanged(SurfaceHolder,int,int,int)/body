@@ -15,6 +15,7 @@
       gainFocus();
       mShouldGainFocus=false;
     }
+    mRollo.dirtyCheck();
   }
  else {
     mRollo.mHasSurface=true;
