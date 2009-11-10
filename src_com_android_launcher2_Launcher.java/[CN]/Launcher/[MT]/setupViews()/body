@@ -14,6 +14,9 @@
   mHandleView=(HandleView)findViewById(R.id.all_apps_button);
   mHandleView.setLauncher(this);
   mHandleView.setOnClickListener(this);
+  Drawable previous=((ImageView)dragLayer.findViewById(R.id.previous_screen)).getDrawable();
+  Drawable next=((ImageView)dragLayer.findViewById(R.id.next_screen)).getDrawable();
+  mWorkspace.setIndicators(previous,next);
   workspace.setOnLongClickListener(this);
   workspace.setDragController(dragController);
   workspace.setLauncher(this);
