@@ -11,6 +11,10 @@
       mRollo.setApps(mAllAppsList);
       Log.d(TAG,"surfaceChanged... calling mRollo.setApps");
     }
+    if (mShouldGainFocus) {
+      gainFocus();
+      mShouldGainFocus=false;
+    }
   }
  else {
     mRollo.mHasSurface=true;
