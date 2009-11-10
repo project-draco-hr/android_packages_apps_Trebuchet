@@ -20,7 +20,6 @@
   final float sWidth=width * scale;
   float sHeight=height * scale;
   LinearLayout preview=new LinearLayout(this);
-  preview.setFocusable(true);
   PreviewTouchHandler handler=new PreviewTouchHandler(anchor);
   ArrayList<Bitmap> bitmaps=new ArrayList<Bitmap>(count);
   for (int i=start; i < end; i++) {
@@ -44,7 +43,7 @@
   p.setHeight((int)(sHeight + extraH));
   p.setAnimationStyle(R.style.AnimationPreview);
   p.setOutsideTouchable(true);
-  p.setBackgroundDrawable(null);
+  p.setBackgroundDrawable(new ColorDrawable(0));
   p.showAsDropDown(anchor,0,0);
   p.setOnDismissListener(new PopupWindow.OnDismissListener(){
     public void onDismiss(){
