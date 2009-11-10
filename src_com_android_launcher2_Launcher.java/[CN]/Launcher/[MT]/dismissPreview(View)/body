@@ -3,8 +3,13 @@
   if (window != null) {
     window.setOnDismissListener(null);
     window.dismiss();
-    ((ImageView)v.getTag(R.id.workspace)).setImageBitmap(null);
-    ((Bitmap)v.getTag(R.id.icon)).recycle();
+    ViewGroup group=(ViewGroup)v.getTag(R.id.workspace);
+    int count=group.getChildCount();
+    for (int i=0; i < count; i++) {
+      ((ImageView)group.getChildAt(i)).setImageDrawable(null);
+    }
+    ArrayList<Bitmap> bitmaps=(ArrayList<Bitmap>)v.getTag(R.id.icon);
+    for (    Bitmap bitmap : bitmaps)     bitmap.recycle();
     v.setTag(R.id.workspace,null);
     v.setTag(R.id.icon,null);
   }
