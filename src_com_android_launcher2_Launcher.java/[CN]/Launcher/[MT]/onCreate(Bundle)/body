@@ -14,6 +14,7 @@
   setWallpaperDimension();
   setContentView(R.layout.launcher);
   setupViews();
+  registerContentObservers();
   lockAllApps();
   mSavedState=savedInstanceState;
   restoreState(mSavedState);
