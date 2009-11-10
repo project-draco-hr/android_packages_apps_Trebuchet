@@ -1,6 +1,5 @@
 {
   if (fromScreen > toScreen) {
-    int temp=fromScreen;
     fromScreen=toScreen;
     toScreen=fromScreen;
   }
