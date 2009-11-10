@@ -1,4 +1,5 @@
 Canvas dest
 int destWidth
 int destHeight
+boolean selected
 Bitmap src
