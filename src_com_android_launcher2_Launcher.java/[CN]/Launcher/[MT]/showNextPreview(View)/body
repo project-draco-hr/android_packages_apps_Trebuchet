@@ -1,0 +1,6 @@
+{
+  int current=mWorkspace.getCurrentScreen();
+  if (current >= mWorkspace.getChildCount() - 1)   return;
+  View next=mWorkspace.getChildAt(current + 1);
+  showPreview(anchor,next);
+}

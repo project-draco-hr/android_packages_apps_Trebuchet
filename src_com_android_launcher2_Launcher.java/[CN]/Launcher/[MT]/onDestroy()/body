@@ -11,4 +11,6 @@
   unbindDesktopItems();
   AppInfoCache.unbindDrawables();
   getContentResolver().unregisterContentObserver(mWidgetObserver);
+  dismissPreview(mPreviousView);
+  dismissPreview(mNextView);
 }

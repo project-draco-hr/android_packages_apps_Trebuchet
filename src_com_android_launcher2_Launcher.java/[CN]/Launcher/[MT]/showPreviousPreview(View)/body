@@ -1,0 +1,6 @@
+{
+  int current=mWorkspace.getCurrentScreen();
+  if (current <= 0)   return;
+  View previous=mWorkspace.getChildAt(current - 1);
+  showPreview(anchor,previous);
+}
