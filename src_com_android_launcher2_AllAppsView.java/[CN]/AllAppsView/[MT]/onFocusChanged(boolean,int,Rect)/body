@@ -4,18 +4,24 @@
     return;
   }
   if (gainFocus) {
-    if (!mArrowNavigation && mRollo.mState.iconCount > 0) {
-      mArrowNavigation=true;
-      mRollo.selectIcon(Math.round(mRollo.mMessageProc.mPosX) * Defines.COLUMNS_PER_PAGE,SELECTED_FOCUSED);
-      mRollo.mState.save();
+    if (mRollo != null) {
+      gainFocus();
+    }
+ else {
+      mShouldGainFocus=true;
     }
   }
  else {
-    if (mArrowNavigation) {
-      mRollo.clearSelectedIcon();
-      mRollo.setHomeSelected(SELECTED_NONE);
-      mRollo.mState.save();
-      mArrowNavigation=false;
+    if (mRollo != null) {
+      if (mArrowNavigation) {
+        mRollo.clearSelectedIcon();
+        mRollo.setHomeSelected(SELECTED_NONE);
+        mRollo.mState.save();
+        mArrowNavigation=false;
+      }
+    }
+ else {
+      mShouldGainFocus=false;
     }
   }
 }
