@@ -1,6 +1,6 @@
 {
   if (event.getAction() == MotionEvent.ACTION_UP) {
-    dismissPreview(v);
+    mTouchX=event.getX();
   }
   return false;
 }

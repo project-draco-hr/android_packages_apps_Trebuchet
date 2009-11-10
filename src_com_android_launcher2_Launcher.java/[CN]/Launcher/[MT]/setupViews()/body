@@ -20,11 +20,7 @@
   Drawable next=mNextView.getDrawable();
   mWorkspace.setIndicators(previous,next);
   mPreviousView.setOnLongClickListener(this);
-  mPreviousView.setOnTouchListener(this);
-  mPreviousView.setOnKeyListener(this);
   mNextView.setOnLongClickListener(this);
-  mNextView.setOnTouchListener(this);
-  mNextView.setOnKeyListener(this);
   workspace.setOnLongClickListener(this);
   workspace.setDragController(dragController);
   workspace.setLauncher(this);
