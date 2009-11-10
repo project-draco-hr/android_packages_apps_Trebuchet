@@ -1,26 +1,34 @@
 {
-  if (isWorkspaceLocked()) {
-    return false;
-  }
-  if (!(v instanceof CellLayout)) {
-    v=(View)v.getParent();
-  }
-  CellLayout.CellInfo cellInfo=(CellLayout.CellInfo)v.getTag();
-  if (cellInfo == null) {
-    return true;
-  }
-  if (mWorkspace.allowLongPress()) {
-    if (cellInfo.cell == null) {
-      if (cellInfo.valid) {
-        mWorkspace.setAllowLongPress(false);
-        showAddDialog(cellInfo);
-      }
-    }
- else {
-      if (!(cellInfo.cell instanceof Folder)) {
-        mWorkspace.startDrag(cellInfo);
-      }
-    }
-  }
+switch (v.getId()) {
+case R.id.previous_screen:
+    showPreviousPreview(v);
   return true;
+case R.id.next_screen:
+showNextPreview(v);
+return true;
+}
+if (isWorkspaceLocked()) {
+return false;
+}
+if (!(v instanceof CellLayout)) {
+v=(View)v.getParent();
+}
+CellLayout.CellInfo cellInfo=(CellLayout.CellInfo)v.getTag();
+if (cellInfo == null) {
+return true;
+}
+if (mWorkspace.allowLongPress()) {
+if (cellInfo.cell == null) {
+if (cellInfo.valid) {
+mWorkspace.setAllowLongPress(false);
+showAddDialog(cellInfo);
+}
+}
+ else {
+if (!(cellInfo.cell instanceof Folder)) {
+mWorkspace.startDrag(cellInfo);
+}
+}
+}
+return true;
 }
