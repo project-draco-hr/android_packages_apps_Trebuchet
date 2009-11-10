@@ -10,13 +10,12 @@ switch (action) {
 case MotionEvent.ACTION_DOWN:
     mMotionDownX=screenX;
   mMotionDownY=screenY;
-recordScreenSize();
 if ((screenX < SCROLL_ZONE) || (screenX > scrollView.getWidth() - SCROLL_ZONE)) {
-mScrollState=SCROLL_WAITING_IN_ZONE;
-mHandler.postDelayed(mScrollRunnable,SCROLL_DELAY);
+  mScrollState=SCROLL_WAITING_IN_ZONE;
+  mHandler.postDelayed(mScrollRunnable,SCROLL_DELAY);
 }
  else {
-mScrollState=SCROLL_OUTSIDE_ZONE;
+  mScrollState=SCROLL_OUTSIDE_ZONE;
 }
 break;
 case MotionEvent.ACTION_MOVE:
