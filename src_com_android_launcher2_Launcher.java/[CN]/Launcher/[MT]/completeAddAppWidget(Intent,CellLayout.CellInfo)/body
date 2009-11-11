@@ -1,7 +1,7 @@
 {
   Bundle extras=data.getExtras();
   int appWidgetId=extras.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID,-1);
-  if (LOGD)   d(LOG_TAG,"dumping extras content=" + extras.toString());
+  if (LOGD)   Log.d(TAG,"dumping extras content=" + extras.toString());
   AppWidgetProviderInfo appWidgetInfo=mAppWidgetManager.getAppWidgetInfo(appWidgetId);
   CellLayout layout=(CellLayout)mWorkspace.getChildAt(cellInfo.screen);
   int[] spans=layout.rectToCell(appWidgetInfo.minWidth,appWidgetInfo.minHeight);

@@ -15,7 +15,7 @@
     db.insert(TABLE_FAVORITES,null,values);
   }
  catch (  PackageManager.NameNotFoundException e) {
-    Log.w(LOG_TAG,"Unable to add favorite: " + packageName + "/"+ className,e);
+    Log.w(TAG,"Unable to add favorite: " + packageName + "/"+ className,e);
     return false;
   }
   return true;
