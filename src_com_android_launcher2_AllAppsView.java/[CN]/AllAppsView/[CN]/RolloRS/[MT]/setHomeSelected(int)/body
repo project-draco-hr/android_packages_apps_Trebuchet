@@ -1,4 +1,5 @@
 {
+  final int prev=mLastSelection;
 switch (mode) {
 case SELECTED_NONE:
     mState.homeButtonId=mHomeButtonNormal.getID();
@@ -6,6 +7,10 @@ case SELECTED_NONE:
 case SELECTED_FOCUSED:
 mLastSelection=SELECTION_HOME;
 mState.homeButtonId=mHomeButtonFocused.getID();
+if (prev != SELECTION_HOME) {
+Log.d(TAG,"sendAccessibilityEvent SELECTION_HOME");
+sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_SELECTED);
+}
 break;
 case SELECTED_PRESSED:
 mState.homeButtonId=mHomeButtonPressed.getID();
