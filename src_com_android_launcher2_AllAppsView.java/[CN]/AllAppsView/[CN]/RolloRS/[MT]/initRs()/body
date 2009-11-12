@@ -16,7 +16,5 @@
   mScript.bindAllocation(mState.mAlloc,Defines.ALLOC_STATE);
   mScript.bindAllocation(mAllocIconIds,Defines.ALLOC_ICON_IDS);
   mScript.bindAllocation(mAllocLabelIds,Defines.ALLOC_LABEL_IDS);
-  mMessageProc=new AAMessage();
-  mRS.mMessageCallback=mMessageProc;
   mRS.contextBindRootScript(mScript);
 }
