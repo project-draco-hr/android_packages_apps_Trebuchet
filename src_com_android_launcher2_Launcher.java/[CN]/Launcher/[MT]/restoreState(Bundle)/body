@@ -2,6 +2,10 @@
   if (savedState == null) {
     return;
   }
+  final boolean allApps=savedState.getBoolean(RUNTIME_STATE_ALL_APPS_FOLDER,false);
+  if (allApps) {
+    showAllApps(false);
+  }
   final int currentScreen=savedState.getInt(RUNTIME_STATE_CURRENT_SCREEN,-1);
   if (currentScreen > -1) {
     mWorkspace.setCurrentScreen(currentScreen);

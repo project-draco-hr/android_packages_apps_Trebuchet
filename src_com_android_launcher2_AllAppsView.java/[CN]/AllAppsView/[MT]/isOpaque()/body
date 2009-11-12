@@ -1,13 +1,13 @@
 {
   if (mZoomDirty) {
-    return mNextZoom > 0.001f;
+    return mNextZoom > 0.999f;
   }
  else {
     if (mRollo == null) {
       return false;
     }
  else {
-      return mRollo.mMessageProc.mZoom > 0.001f;
+      return mRollo.mMessageProc.mZoom > 0.999f;
     }
   }
 }
