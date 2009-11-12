@@ -1,7 +1,0 @@
-{
-  super.onWindowFocusChanged(hasFocus);
-  if (!hasFocus) {
-    dismissPreview(mPreviousView);
-    dismissPreview(mNextView);
-  }
-}

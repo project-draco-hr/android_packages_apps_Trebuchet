@@ -13,7 +13,6 @@
  else {
     super.onSaveInstanceState(outState);
   }
-  final boolean isConfigurationChange=getChangingConfigurations() != 0;
   if (isAllAppsVisible()) {
     outState.putBoolean(RUNTIME_STATE_ALL_APPS_FOLDER,true);
   }
