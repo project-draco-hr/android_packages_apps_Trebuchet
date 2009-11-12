@@ -3,11 +3,11 @@
     return mNextZoom > 0.001f;
   }
  else {
-    if (mRollo == null) {
+    if (mMessageProc == null) {
       return false;
     }
  else {
-      return mRollo.mMessageProc.mZoom > 0.001f;
+      return mMessageProc.mZoom > 0.001f;
     }
   }
 }
