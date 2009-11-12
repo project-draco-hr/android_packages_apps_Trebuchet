@@ -1,10 +1,11 @@
 {
-  if (!mScroller.isFinished())   return;
   whichScreen=Math.max(0,Math.min(whichScreen,getChildCount() - 1));
   clearVacantCache();
   enableChildrenCache(mCurrentScreen,whichScreen);
   final int screenDelta=Math.abs(whichScreen - mCurrentScreen);
   mNextScreen=whichScreen;
+  mPreviousIndicator.setLevel(mNextScreen);
+  mNextIndicator.setLevel(mNextScreen);
   View focusedChild=getFocusedChild();
   if (focusedChild != null && screenDelta != 0 && focusedChild == getChildAt(mCurrentScreen)) {
     focusedChild.clearFocus();
