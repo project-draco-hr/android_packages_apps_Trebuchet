@@ -13,4 +13,5 @@
   getContentResolver().unregisterContentObserver(mWidgetObserver);
   dismissPreview(mPreviousView);
   dismissPreview(mNextView);
+  unregisterReceiver(mCloseSystemDialogsReceiver);
 }

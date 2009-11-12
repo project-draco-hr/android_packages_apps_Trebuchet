@@ -4,6 +4,8 @@
   mModel=((LauncherApplication)getApplication()).setLauncher(this);
   mDragController=new DragController(this);
   mInflater=getLayoutInflater();
+  IntentFilter filter=new IntentFilter(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
+  registerReceiver(mCloseSystemDialogsReceiver,filter);
   mAppWidgetManager=AppWidgetManager.getInstance(this);
   mAppWidgetHost=new LauncherAppWidgetHost(this,APPWIDGET_HOST_ID);
   mAppWidgetHost.startListening();
