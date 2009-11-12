@@ -1,4 +1,4 @@
 {
   mWorkspace.snapToScreen((Integer)v.getTag());
-  dismissPreview(mAnchor);
+  v.post(this);
 }

@@ -1,10 +1,10 @@
 {
-  Drawable d=getResources().getDrawable(R.drawable.preview_popup);
+  Resources resources=getResources();
   Workspace workspace=mWorkspace;
   CellLayout cell=((CellLayout)workspace.getChildAt(start));
-  float max=workspace.getChildCount() - 1;
+  float max=workspace.getChildCount();
   Rect r=new Rect();
-  d.getPadding(r);
+  resources.getDrawable(R.drawable.preview_background).getPadding(r);
   int extraW=(int)((r.left + r.right) * max);
   int extraH=r.top + r.bottom;
   int aW=cell.getWidth() - extraW;
@@ -30,12 +30,15 @@
     c.scale(scale,scale);
     c.translate(-cell.getLeftPadding(),-cell.getTopPadding());
     cell.dispatchDraw(c);
-    image.setBackgroundDrawable(d);
+    image.setBackgroundDrawable(resources.getDrawable(R.drawable.preview_background));
     image.setImageBitmap(bitmap);
     image.setTag(i);
     image.setOnClickListener(handler);
+    image.setOnFocusChangeListener(handler);
+    image.setFocusable(true);
+    if (i == mWorkspace.getCurrentScreen())     image.requestFocus();
+    preview.addView(image,LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
     bitmaps.add(bitmap);
-    preview.addView(image,ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
   }
   PopupWindow p=new PopupWindow(this);
   p.setContentView(preview);
@@ -43,6 +46,7 @@
   p.setHeight((int)(sHeight + extraH));
   p.setAnimationStyle(R.style.AnimationPreview);
   p.setOutsideTouchable(true);
+  p.setFocusable(true);
   p.setBackgroundDrawable(new ColorDrawable(0));
   p.showAsDropDown(anchor,0,0);
   p.setOnDismissListener(new PopupWindow.OnDismissListener(){
