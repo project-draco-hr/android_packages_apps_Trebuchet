@@ -1,5 +1,5 @@
 {
   int current=mWorkspace.getCurrentScreen();
   if (current <= 0)   return;
-  showPreviews(anchor,0,current);
+  showPreviews(anchor,0,mWorkspace.getChildCount());
 }

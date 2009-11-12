@@ -1,17 +1,22 @@
 {
-  PopupWindow window=(PopupWindow)v.getTag();
+  final PopupWindow window=(PopupWindow)v.getTag();
   if (window != null) {
-    window.setOnDismissListener(null);
-    window.dismiss();
-    ViewGroup group=(ViewGroup)v.getTag(R.id.workspace);
-    int count=group.getChildCount();
-    for (int i=0; i < count; i++) {
-      ((ImageView)group.getChildAt(i)).setImageDrawable(null);
+    window.setOnDismissListener(new PopupWindow.OnDismissListener(){
+      public void onDismiss(){
+        ViewGroup group=(ViewGroup)v.getTag(R.id.workspace);
+        int count=group.getChildCount();
+        for (int i=0; i < count; i++) {
+          ((ImageView)group.getChildAt(i)).setImageDrawable(null);
+        }
+        ArrayList<Bitmap> bitmaps=(ArrayList<Bitmap>)v.getTag(R.id.icon);
+        for (        Bitmap bitmap : bitmaps)         bitmap.recycle();
+        v.setTag(R.id.workspace,null);
+        v.setTag(R.id.icon,null);
+        window.setOnDismissListener(null);
+      }
     }
-    ArrayList<Bitmap> bitmaps=(ArrayList<Bitmap>)v.getTag(R.id.icon);
-    for (    Bitmap bitmap : bitmaps)     bitmap.recycle();
-    v.setTag(R.id.workspace,null);
-    v.setTag(R.id.icon,null);
+);
+    window.dismiss();
   }
   v.setTag(null);
 }
