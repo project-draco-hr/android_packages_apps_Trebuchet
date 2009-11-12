@@ -55,7 +55,9 @@ case LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT:
       info.icon=manager.getDefaultActivityIcon();
     }
   if (info != null) {
-    info.title=c.getString(titleIndex);
+    if (itemType != LauncherSettings.Favorites.ITEM_TYPE_APPLICATION) {
+      info.title=c.getString(titleIndex);
+    }
     info.intent=intent;
     info.id=c.getLong(idIndex);
     container=c.getInt(containerIndex);
