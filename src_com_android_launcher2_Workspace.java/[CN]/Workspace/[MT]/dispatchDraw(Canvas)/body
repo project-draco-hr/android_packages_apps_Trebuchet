@@ -1,4 +1,15 @@
 {
+  final boolean allAppsOpaque=mLauncher.isAllAppsOpaque();
+  if (mFading == allAppsOpaque) {
+    invalidate();
+  }
+ else {
+    mFading=!allAppsOpaque;
+  }
+  if (allAppsOpaque) {
+    canvas.drawARGB(0xff,0,0,0);
+    return;
+  }
   if (Launcher.lastStartTime != 0) {
     int itemCount=0;
     for (int i=0; i < getChildCount(); i++) {

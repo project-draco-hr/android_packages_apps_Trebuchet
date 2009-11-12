@@ -1,9 +1,5 @@
 {
   super.onPause();
-  if (mExitingBecauseOfLaunch) {
-    mExitingBecauseOfLaunch=false;
-    closeAllApps(false);
-  }
   dismissPreview(mPreviousView);
   dismissPreview(mNextView);
 }
