@@ -1,6 +1,6 @@
 {
   if (false) {
-    Log.d(Launcher.LOG_TAG,"DragController.onInterceptTouchEvent " + ev + " mDragging="+ mDragging);
+    Log.d(Launcher.TAG,"DragController.onInterceptTouchEvent " + ev + " mDragging="+ mDragging);
   }
   final int action=ev.getAction();
   if (action == MotionEvent.ACTION_DOWN) {

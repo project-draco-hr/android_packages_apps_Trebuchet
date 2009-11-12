@@ -20,7 +20,9 @@ synchronized (mLock) {
       }
       Collections.sort(mAllAppsList.data,sComparator);
       Collections.sort(mAllAppsList.added,sComparator);
-      Log.d(TAG,"cached app icons in " + (SystemClock.uptimeMillis() - t) + "ms");
+      if (DEBUG_LOADERS) {
+        Log.d(TAG,"cached app icons in " + (SystemClock.uptimeMillis() - t) + "ms");
+      }
     }
   }
 }

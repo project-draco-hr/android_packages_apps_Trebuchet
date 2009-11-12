@@ -14,7 +14,7 @@
       }
     }
  else {
-      Log.e(TAG,"couldn't find a match for item \"" + item + "\"");
+      Log.w(TAG,"couldn't find a match for item \"" + item + "\"");
     }
   }
   if (mRollo != null) {

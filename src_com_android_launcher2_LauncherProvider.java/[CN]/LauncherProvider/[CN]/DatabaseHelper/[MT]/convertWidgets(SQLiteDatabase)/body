@@ -9,13 +9,15 @@
   db.beginTransaction();
   try {
     c=db.query(TABLE_FAVORITES,new String[]{Favorites._ID},selectWhere,null,null,null,null);
-    if (LOGD)     Log.d(LOG_TAG,"found upgrade cursor count=" + c.getCount());
+    if (LOGD)     Log.d(TAG,"found upgrade cursor count=" + c.getCount());
     final ContentValues values=new ContentValues();
     while (c != null && c.moveToNext()) {
       long favoriteId=c.getLong(0);
       try {
         int appWidgetId=mAppWidgetHost.allocateAppWidgetId();
-        if (LOGD)         Log.d(LOG_TAG,"allocated appWidgetId=" + appWidgetId + " for favoriteId="+ favoriteId);
+        if (LOGD) {
+          Log.d(TAG,"allocated appWidgetId=" + appWidgetId + " for favoriteId="+ favoriteId);
+        }
         values.clear();
         values.put(LauncherSettings.Favorites.APPWIDGET_ID,appWidgetId);
         values.put(LauncherSettings.Favorites.SPANX,2);
@@ -25,13 +27,13 @@
         allocatedAppWidgets=true;
       }
  catch (      RuntimeException ex) {
-        Log.e(LOG_TAG,"Problem allocating appWidgetId",ex);
+        Log.e(TAG,"Problem allocating appWidgetId",ex);
       }
     }
     db.setTransactionSuccessful();
   }
  catch (  SQLException ex) {
-    Log.w(LOG_TAG,"Problem while allocating appWidgetIds for existing widgets",ex);
+    Log.w(TAG,"Problem while allocating appWidgetIds for existing widgets",ex);
   }
  finally {
     db.endTransaction();

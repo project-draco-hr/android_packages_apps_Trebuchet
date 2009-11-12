@@ -1,6 +1,4 @@
 {
-  Log.d(TAG,"starting surfaceChanged");
-  long startTime=SystemClock.uptimeMillis();
   super.surfaceChanged(holder,format,w,h);
   if (mRS == null) {
     mRS=createRenderScript(true);
@@ -9,7 +7,6 @@
     mRollo.init(getResources(),w,h);
     if (mAllAppsList != null) {
       mRollo.setApps(mAllAppsList);
-      Log.d(TAG,"surfaceChanged... calling mRollo.setApps");
     }
     if (mShouldGainFocus) {
       gainFocus();
@@ -23,6 +20,4 @@
   }
   Resources res=getContext().getResources();
   int barHeight=(int)res.getDimension(R.dimen.button_bar_height);
-  long endTime=SystemClock.uptimeMillis();
-  Log.d(TAG,"surfaceChanged took " + (endTime - startTime) + "ms");
 }

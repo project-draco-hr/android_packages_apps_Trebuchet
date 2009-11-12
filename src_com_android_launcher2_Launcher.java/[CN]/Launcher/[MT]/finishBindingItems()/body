@@ -22,6 +22,5 @@
     super.onRestoreInstanceState(mSavedInstanceState);
     mSavedInstanceState=null;
   }
-  Log.d(TAG,"finishBindingItems done");
   mWorkspaceLoading=false;
 }
