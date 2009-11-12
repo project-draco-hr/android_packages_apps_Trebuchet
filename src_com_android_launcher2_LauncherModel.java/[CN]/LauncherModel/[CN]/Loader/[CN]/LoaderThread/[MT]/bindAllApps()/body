@@ -10,7 +10,9 @@ synchronized (mLock) {
         if (callbacks != null) {
           callbacks.bindAllApplications(results);
         }
-        Log.d(TAG,"bound app " + count + " icons in "+ (SystemClock.uptimeMillis() - t)+ "ms");
+        if (DEBUG_LOADERS) {
+          Log.d(TAG,"bound app " + count + " icons in "+ (SystemClock.uptimeMillis() - t)+ "ms");
+        }
       }
     }
 );

@@ -1,5 +1,4 @@
 {
-  Log.d(TAG,"onReceive intent=" + intent);
   context=mApp;
   final String packageName=intent.getData().getSchemeSpecificPart();
   ArrayList<ApplicationInfo> added=null;
@@ -52,7 +51,7 @@ synchronized (mLock) {
     }
     final Callbacks callbacks=mCallbacks != null ? mCallbacks.get() : null;
     if (callbacks == null) {
-      Log.d(TAG,"nobody to tell about the new app");
+      Log.w(TAG,"Nobody to tell about the new app.  Launcher is probably loading.");
       return;
     }
     if (added != null) {

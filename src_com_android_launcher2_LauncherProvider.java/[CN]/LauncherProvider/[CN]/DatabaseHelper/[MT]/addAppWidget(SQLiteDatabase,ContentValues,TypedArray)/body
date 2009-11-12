@@ -21,7 +21,7 @@
     appWidgetManager.bindAppWidgetId(appWidgetId,cn);
   }
  catch (  RuntimeException ex) {
-    Log.e(LOG_TAG,"Problem allocating appWidgetId",ex);
+    Log.e(TAG,"Problem allocating appWidgetId",ex);
   }
   return allocatedAppWidgets;
 }

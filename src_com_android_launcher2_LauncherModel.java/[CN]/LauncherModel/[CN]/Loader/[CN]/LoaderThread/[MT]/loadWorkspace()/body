@@ -164,5 +164,7 @@ Log.w(TAG,"Desktop items loading interrupted:",e);
   finally {
 c.close();
 }
+if (DEBUG_LOADERS) {
 Log.d(TAG,"loaded workspace in " + (SystemClock.uptimeMillis() - t) + "ms");
+}
 }

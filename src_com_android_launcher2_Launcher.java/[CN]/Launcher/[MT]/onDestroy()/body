@@ -4,7 +4,7 @@
     mAppWidgetHost.stopListening();
   }
  catch (  NullPointerException ex) {
-    w(LOG_TAG,"problem while stopping AppWidgetHost during Launcher destruction",ex);
+    Log.w(TAG,"problem while stopping AppWidgetHost during Launcher destruction",ex);
   }
   TextKeyListener.getInstance().release();
   mModel.stopLoader();
