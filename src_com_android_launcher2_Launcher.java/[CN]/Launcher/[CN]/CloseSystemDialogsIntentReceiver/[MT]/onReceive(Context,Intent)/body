@@ -1,0 +1,4 @@
+{
+  Log.d(TAG,"CloseSystemDialogsIntentReceiver.onReceiver intent=" + intent);
+  closeSystemDialogs();
+}
