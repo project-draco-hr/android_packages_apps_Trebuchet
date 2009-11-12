@@ -1,7 +1,13 @@
 {
-  if (mAppsDirty && mHasSurface) {
-    uploadApps(mAllAppsList);
-    saveAppsList();
-    mAppsDirty=false;
+  if (mHasSurface) {
+    if (mAppsDirty) {
+      uploadApps(mAllAppsList);
+      saveAppsList();
+      mAppsDirty=false;
+    }
+    if (mZoomDirty) {
+      setZoom(mNextZoom,mNextAnimate);
+      mZoomDirty=false;
+    }
   }
 }
