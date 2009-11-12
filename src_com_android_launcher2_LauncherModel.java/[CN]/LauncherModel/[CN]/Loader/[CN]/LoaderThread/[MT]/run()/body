@@ -26,13 +26,17 @@ synchronized (LoaderThread.this) {
       public void run(){
 synchronized (LoaderThread.this) {
           mWorkspaceDoneBinding=true;
-          Log.d(TAG,"done with workspace");
+          if (DEBUG_LOADERS) {
+            Log.d(TAG,"done with workspace");
+          }
           LoaderThread.this.notify();
         }
       }
     }
 );
-    Log.d(TAG,"waiting to be done with workspace");
+    if (DEBUG_LOADERS) {
+      Log.d(TAG,"waiting to be done with workspace");
+    }
     while (!mStopped && !mWorkspaceDoneBinding) {
       try {
         this.wait();
@@ -40,13 +44,18 @@ synchronized (LoaderThread.this) {
  catch (      InterruptedException ex) {
       }
     }
-    Log.d(TAG,"done waiting to be done with workspace");
+    if (DEBUG_LOADERS) {
+      Log.d(TAG,"done waiting to be done with workspace");
+    }
   }
   int allAppsSeq;
   boolean allAppsDirty;
 synchronized (mLock) {
     allAppsSeq=mAllAppsSeq;
     allAppsDirty=mAllAppsSeq != mLastAllAppsSeq;
+    if (DEBUG_LOADERS) {
+      Log.d(TAG,"mAllAppsSeq=" + mAllAppsSeq + " mLastAllAppsSeq="+ mLastAllAppsSeq+ " allAppsDirty");
+    }
   }
   if (allAppsDirty) {
     loadAllApps();

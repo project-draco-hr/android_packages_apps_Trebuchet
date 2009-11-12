@@ -9,11 +9,11 @@
     intent=Intent.parseUri(uri,0);
   }
  catch (  URISyntaxException e) {
-    Log.w(LauncherModel.TAG,"Shortcut has malformed uri: " + uri);
+    Log.w(TAG,"Shortcut has malformed uri: " + uri);
     return false;
   }
   if (iconResId == 0 || titleResId == 0) {
-    Log.w(LauncherModel.TAG,"Shortcut is missing title or icon resource ID");
+    Log.w(TAG,"Shortcut is missing title or icon resource ID");
     return false;
   }
   intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

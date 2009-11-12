@@ -42,10 +42,10 @@
     }
   }
  catch (  XmlPullParserException e) {
-    Log.w(LOG_TAG,"Got exception parsing favorites.",e);
+    Log.w(TAG,"Got exception parsing favorites.",e);
   }
 catch (  IOException e) {
-    Log.w(LOG_TAG,"Got exception parsing favorites.",e);
+    Log.w(TAG,"Got exception parsing favorites.",e);
   }
   return i;
 }

@@ -40,7 +40,9 @@
 );
   mHandler.postIdle(new Runnable(){
     public void run(){
-      Log.d(TAG,"Going to start binding widgets soon.");
+      if (DEBUG_LOADERS) {
+        Log.d(TAG,"Going to start binding widgets soon.");
+      }
     }
   }
 );
@@ -85,7 +87,9 @@
 );
   mHandler.post(new Runnable(){
     public void run(){
-      Log.d(TAG,"bound workspace in " + (SystemClock.uptimeMillis() - t) + "ms");
+      if (DEBUG_LOADERS) {
+        Log.d(TAG,"bound workspace in " + (SystemClock.uptimeMillis() - t) + "ms");
+      }
       if (Launcher.PROFILE_ROTATE) {
         android.os.Debug.stopMethodTracing();
       }

@@ -10,6 +10,6 @@
     finish();
   }
  catch (  IOException e) {
-    Log.e(Launcher.LOG_TAG,"Failed to set wallpaper: " + e);
+    Log.e(TAG,"Failed to set wallpaper: " + e);
   }
 }

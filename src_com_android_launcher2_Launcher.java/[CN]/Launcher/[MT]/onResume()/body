@@ -1,7 +1,4 @@
 {
-  if (lastStartTime == 0) {
-    lastStartTime=SystemClock.uptimeMillis();
-  }
   super.onResume();
   if (mRestoring) {
     mWorkspaceLoading=true;
@@ -16,7 +13,7 @@
           searchManagerService.stopSearch();
         }
  catch (        RemoteException e) {
-          e(LOG_TAG,"error stopping search",e);
+          Log.e(TAG,"error stopping search",e);
         }
       }
     }

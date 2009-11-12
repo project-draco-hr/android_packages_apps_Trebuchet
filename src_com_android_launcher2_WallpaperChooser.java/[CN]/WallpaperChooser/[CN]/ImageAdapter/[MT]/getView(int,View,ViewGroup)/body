@@ -13,7 +13,7 @@
     thumbDrawable.setDither(true);
   }
  else {
-    Log.e(Launcher.LOG_TAG,String.format("Error decoding thumbnail resId=%d for wallpaper #%d",thumbRes,position));
+    Log.e(TAG,"Error decoding thumbnail resId=" + thumbRes + " for wallpaper #"+ position);
   }
   return image;
 }

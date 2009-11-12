@@ -6,7 +6,7 @@
     activityInfo=packageManager.getActivityInfo(component,0);
   }
  catch (  NameNotFoundException e) {
-    e(LOG_TAG,"Couldn't find ActivityInfo for selected application",e);
+    Log.e(TAG,"Couldn't find ActivityInfo for selected application",e);
   }
   if (activityInfo != null) {
     ApplicationInfo itemInfo=new ApplicationInfo();
