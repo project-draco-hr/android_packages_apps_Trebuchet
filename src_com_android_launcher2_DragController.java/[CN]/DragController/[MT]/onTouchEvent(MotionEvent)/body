@@ -73,7 +73,7 @@ drop(screenX,screenY);
 endDrag();
 break;
 case MotionEvent.ACTION_CANCEL:
-endDrag();
+cancelDrag();
 }
 return true;
 }
