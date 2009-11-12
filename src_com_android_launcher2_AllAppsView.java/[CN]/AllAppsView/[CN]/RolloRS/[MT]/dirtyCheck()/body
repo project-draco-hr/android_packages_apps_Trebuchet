@@ -6,7 +6,7 @@
       mAppsDirty=false;
     }
     if (mZoomDirty) {
-      setZoom(mNextZoom,mNextAnimate);
+      setZoom(mZoom,mAnimateNextZoom);
     }
   }
 }
