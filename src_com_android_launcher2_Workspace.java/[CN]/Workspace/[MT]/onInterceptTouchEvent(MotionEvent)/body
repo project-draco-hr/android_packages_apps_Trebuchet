@@ -1,5 +1,8 @@
 {
-  if (mLauncher.isWorkspaceLocked() || mLauncher.isAllAppsVisible()) {
+  final boolean workspaceLocked=mLauncher.isWorkspaceLocked();
+  final boolean allAppsVisible=mLauncher.isAllAppsVisible();
+  Log.d(TAG,"workspaceLocked=" + workspaceLocked + " allAppsVisible="+ allAppsVisible);
+  if (workspaceLocked || allAppsVisible) {
     return false;
   }
   final int action=ev.getAction();

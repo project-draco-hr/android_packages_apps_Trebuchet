@@ -1,13 +1,4 @@
 {
-  if (mZoomDirty) {
-    return mNextZoom > 0.001f;
-  }
- else {
-    if (mMessageProc == null) {
-      return false;
-    }
- else {
-      return mMessageProc.mZoom > 0.001f;
-    }
-  }
+  Log.d(TAG,"isVisible mZoomDirty=" + mZoomDirty + " mMessageProc="+ (mMessageProc == null ? "null" : mZoom));
+  return mZoom > 0.001f;
 }

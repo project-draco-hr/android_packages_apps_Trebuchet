@@ -23,7 +23,7 @@
   if (mArrowNavigation && iconCount > 0) {
     mArrowNavigation=true;
     int currentSelection=mRollo.mState.selectedIconIndex;
-    int currentTopRow=Math.round(mMessageProc.mPosX);
+    int currentTopRow=Math.round(mPosX);
     final int currentPageCol=currentSelection % Defines.COLUMNS_PER_PAGE;
     final int currentPageRow=(currentSelection - (currentTopRow * Defines.COLUMNS_PER_PAGE)) / Defines.ROWS_PER_PAGE;
     int newSelection=currentSelection;
