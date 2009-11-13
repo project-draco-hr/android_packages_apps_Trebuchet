@@ -1,7 +1,6 @@
 {
   super.surfaceChanged(holder,format,w,h);
-  if (mRS == null) {
-    mRS=createRenderScript(true);
+  if (mRollo == null) {
     mRollo=new RolloRS();
     mRollo.mHasSurface=true;
     mRollo.init(getResources(),w,h);
@@ -12,12 +11,12 @@
       gainFocus();
       mShouldGainFocus=false;
     }
-    mRollo.dirtyCheck();
   }
  else {
     mRollo.mHasSurface=true;
-    mRollo.dirtyCheck();
   }
+  mRollo.dirtyCheck();
+  mRS.mMessageCallback=mMessageProc=new AAMessage();
   mRS.mMessageCallback=mMessageProc=new AAMessage();
   Resources res=getContext().getResources();
   int barHeight=(int)res.getDimension(R.dimen.button_bar_height);
