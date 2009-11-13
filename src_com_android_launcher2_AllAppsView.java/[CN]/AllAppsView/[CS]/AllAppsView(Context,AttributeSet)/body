@@ -10,4 +10,5 @@
   setOnLongClickListener(this);
   setZOrderOnTop(true);
   getHolder().setFormat(PixelFormat.TRANSLUCENT);
+  mRS=createRenderScript(true);
 }
