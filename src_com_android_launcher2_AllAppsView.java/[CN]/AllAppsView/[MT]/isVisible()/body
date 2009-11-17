@@ -1,4 +1,3 @@
 {
-  Log.d(TAG,"isVisible mZoomDirty=" + mZoomDirty + " mMessageProc="+ (mMessageProc == null ? "null" : mZoom));
   return mZoom > 0.001f;
 }
