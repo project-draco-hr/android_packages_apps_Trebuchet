@@ -19,7 +19,9 @@
   Drawable previous=mPreviousView.getDrawable();
   Drawable next=mNextView.getDrawable();
   mWorkspace.setIndicators(previous,next);
+  mPreviousView.setHapticFeedbackEnabled(false);
   mPreviousView.setOnLongClickListener(this);
+  mNextView.setHapticFeedbackEnabled(false);
   mNextView.setOnLongClickListener(this);
   workspace.setOnLongClickListener(this);
   workspace.setDragController(dragController);
