@@ -20,7 +20,7 @@
       }
     }
   }
-  if (mArrowNavigation && iconCount > 0) {
+  if (iconCount > 0) {
     mArrowNavigation=true;
     int currentSelection=mRollo.mState.selectedIconIndex;
     int currentTopRow=Math.round(mPosX);
@@ -55,6 +55,9 @@ case KeyEvent.KEYCODE_DPAD_UP:
           newSelection=currentSelection - Defines.COLUMNS_PER_PAGE;
           mRollo.moveTo(newSelection / Defines.COLUMNS_PER_PAGE);
         }
+ else {
+          newSelection=Defines.COLUMNS_PER_PAGE * (Defines.ROWS_PER_PAGE - 1);
+        }
       }
     handled=true;
   break;
@@ -65,7 +68,12 @@ case KeyEvent.KEYCODE_DPAD_DOWN:
   if (mLastSelection != SELECTION_HOME) {
     if (currentRow < rowCount - 1) {
       mRollo.setHomeSelected(SELECTED_NONE);
-      newSelection=currentSelection + Defines.COLUMNS_PER_PAGE;
+      if (currentSelection < 0) {
+        newSelection=0;
+      }
+ else {
+        newSelection=currentSelection + Defines.COLUMNS_PER_PAGE;
+      }
       if (newSelection >= iconCount) {
         newSelection=iconCount - 1;
       }
