@@ -16,6 +16,7 @@
   }
   group.addView(child,insert ? 0 : -1,lp);
   if (!(child instanceof Folder)) {
+    child.setHapticFeedbackEnabled(false);
     child.setOnLongClickListener(mLongClickListener);
   }
   if (child instanceof DropTarget) {
