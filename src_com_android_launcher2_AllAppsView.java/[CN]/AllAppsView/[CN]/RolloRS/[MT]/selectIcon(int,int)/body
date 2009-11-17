@@ -19,7 +19,6 @@
     mState.selectedIconTexture=mSelectedIcon.getID();
     if (prev != index) {
       if (info.title != null && info.title.length() > 0) {
-        Log.d(TAG,"sendAccessibilityEvent SELECTION_ICONS " + info.title);
         sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_SELECTED);
       }
     }
