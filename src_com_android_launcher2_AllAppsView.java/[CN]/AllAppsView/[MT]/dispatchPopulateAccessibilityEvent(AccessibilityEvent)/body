@@ -24,7 +24,6 @@ pos=count;
 break;
 }
 if (text != null) {
-Log.d(TAG,"dispatchPopulateAccessibilityEvent setting text=" + text);
 event.setEnabled(true);
 event.getText().add(text);
 event.setItemCount(count);
