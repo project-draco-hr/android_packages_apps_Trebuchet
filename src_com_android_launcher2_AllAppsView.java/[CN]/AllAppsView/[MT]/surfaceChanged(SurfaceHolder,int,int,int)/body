@@ -16,6 +16,7 @@
     mRollo.mHasSurface=true;
   }
   mRollo.dirtyCheck();
+  mRollo.resize(w,h);
   mRS.mMessageCallback=mMessageProc=new AAMessage();
   mRS.mMessageCallback=mMessageProc=new AAMessage();
   Resources res=getContext().getResources();
