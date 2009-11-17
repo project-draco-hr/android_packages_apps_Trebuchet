@@ -1,10 +1,10 @@
 {
-  ProgramVertex.MatrixAllocation pva=new ProgramVertex.MatrixAllocation(mRS);
-  pva.setupProjectionNormalized(mWidth,mHeight);
+  mPVA=new ProgramVertex.MatrixAllocation(mRS);
+  resize(mWidth,mHeight);
   ProgramVertex.Builder pvb=new ProgramVertex.Builder(mRS,null,null);
   pvb.setTextureMatrixEnable(true);
   mPV=pvb.create();
   mPV.setName("PV");
-  mPV.bindAllocation(pva);
+  mPV.bindAllocation(mPVA);
   mRS.contextBindProgramVertex(mPV);
 }

@@ -1,0 +1,5 @@
+{
+  mPVA.setupProjectionNormalized(w,h);
+  mWidth=w;
+  mHeight=h;
+}
