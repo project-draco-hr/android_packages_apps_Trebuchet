@@ -8,7 +8,6 @@ case SELECTED_FOCUSED:
 mLastSelection=SELECTION_HOME;
 mState.homeButtonId=mHomeButtonFocused.getID();
 if (prev != SELECTION_HOME) {
-Log.d(TAG,"sendAccessibilityEvent SELECTION_HOME");
 sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_SELECTED);
 }
 break;

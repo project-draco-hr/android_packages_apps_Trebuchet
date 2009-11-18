@@ -16,6 +16,7 @@ default :
 throw new IllegalStateException("Unknown item type: " + info.itemType);
 }
 cellLayout.addView(view,insertAtFirst ? 0 : -1);
+view.setHapticFeedbackEnabled(false);
 view.setOnLongClickListener(mLongClickListener);
 if (view instanceof DropTarget) {
 mDragController.addDropTarget((DropTarget)view);
