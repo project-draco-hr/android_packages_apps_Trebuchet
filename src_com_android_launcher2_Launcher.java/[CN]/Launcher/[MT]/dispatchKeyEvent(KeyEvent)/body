@@ -5,22 +5,28 @@ case KeyEvent.KEYCODE_BACK:
       return true;
 case KeyEvent.KEYCODE_HOME:
     return true;
+case KeyEvent.KEYCODE_VOLUME_DOWN:
+  if (SystemProperties.getInt("launcher2.dumpstate",0) != 0) {
+    dumpState();
+    return true;
+  }
+break;
 }
 }
  else if (event.getAction() == KeyEvent.ACTION_UP) {
 switch (event.getKeyCode()) {
 case KeyEvent.KEYCODE_BACK:
-  if (!event.isCanceled()) {
-    mWorkspace.dispatchKeyEvent(event);
-    if (isAllAppsVisible()) {
-      closeAllApps(true);
-    }
+if (!event.isCanceled()) {
+mWorkspace.dispatchKeyEvent(event);
+if (isAllAppsVisible()) {
+  closeAllApps(true);
+}
  else {
-      closeFolder();
-    }
-    dismissPreview(mPreviousView);
-    dismissPreview(mNextView);
-  }
+  closeFolder();
+}
+dismissPreview(mPreviousView);
+dismissPreview(mNextView);
+}
 return true;
 case KeyEvent.KEYCODE_HOME:
 return true;
