@@ -1,0 +1,6 @@
+{
+  Log.d(TAG,"BEGIN launcher2 dump state for launcher " + this);
+  mModel.dumpState();
+  mAllAppsGrid.dumpState();
+  Log.d(TAG,"END launcher2 dump state");
+}

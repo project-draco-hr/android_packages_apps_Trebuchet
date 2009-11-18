@@ -1,0 +1,9 @@
+{
+  Log.d(TAG,"mBeforeFirstLoad=" + mBeforeFirstLoad);
+  Log.d(TAG,"mCallbacks=" + mCallbacks);
+  ApplicationInfo.dumpApplicationInfoList(TAG,"mAllAppsList.data",mAllAppsList.data);
+  ApplicationInfo.dumpApplicationInfoList(TAG,"mAllAppsList.added",mAllAppsList.added);
+  ApplicationInfo.dumpApplicationInfoList(TAG,"mAllAppsList.removed",mAllAppsList.removed);
+  ApplicationInfo.dumpApplicationInfoList(TAG,"mAllAppsList.modified",mAllAppsList.modified);
+  mLoader.dumpState();
+}
