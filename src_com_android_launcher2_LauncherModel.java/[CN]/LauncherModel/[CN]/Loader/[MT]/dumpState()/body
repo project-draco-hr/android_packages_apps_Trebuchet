@@ -1,0 +1,13 @@
+{
+  Log.d(TAG,"mLoader.mLastWorkspaceSeq=" + mLoader.mLastWorkspaceSeq);
+  Log.d(TAG,"mLoader.mWorkspaceSeq=" + mLoader.mWorkspaceSeq);
+  Log.d(TAG,"mLoader.mLastAllAppsSeq=" + mLoader.mLastAllAppsSeq);
+  Log.d(TAG,"mLoader.mAllAppsSeq=" + mLoader.mAllAppsSeq);
+  Log.d(TAG,"mLoader.mItems size=" + mLoader.mItems.size());
+  if (mLoaderThread != null) {
+    mLoaderThread.dumpState();
+  }
+ else {
+    Log.d(TAG,"mLoader.mLoaderThread=null");
+  }
+}
