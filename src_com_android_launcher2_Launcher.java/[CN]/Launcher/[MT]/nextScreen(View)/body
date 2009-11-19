@@ -1,3 +1,5 @@
 {
-  mWorkspace.scrollRight();
+  if (!isAllAppsVisible()) {
+    mWorkspace.scrollRight();
+  }
 }
