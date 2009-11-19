@@ -1,6 +1,6 @@
 {
 synchronized (mLock) {
-    final ArrayList<ApplicationInfo> results=mAllAppsList.added;
+    final ArrayList<ApplicationInfo> results=(ArrayList<ApplicationInfo>)mAllAppsList.data.clone();
     mAllAppsList.added=new ArrayList<ApplicationInfo>();
     mHandler.post(new Runnable(){
       public void run(){
