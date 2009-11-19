@@ -1,5 +1,5 @@
 {
-  closeAllApps(false);
+  closeAllApps(true);
   getWindow().closeAllPanels();
   try {
     dismissDialog(DIALOG_CREATE_SHORTCUT);

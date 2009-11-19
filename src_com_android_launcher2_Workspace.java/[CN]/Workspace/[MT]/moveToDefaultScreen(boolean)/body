@@ -1,4 +1,4 @@
 {
-  snapToScreen(mDefaultScreen);
+  snapToScreen(mDefaultScreen,animate);
   getChildAt(mDefaultScreen).requestFocus();
 }
