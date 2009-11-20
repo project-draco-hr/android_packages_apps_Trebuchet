@@ -1,0 +1,10 @@
+{
+  if (isAllAppsVisible()) {
+    closeAllApps(true);
+  }
+ else {
+    closeFolder();
+  }
+  dismissPreview(mPreviousView);
+  dismissPreview(mNextView);
+}
