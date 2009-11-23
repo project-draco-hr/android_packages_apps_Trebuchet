@@ -3,7 +3,8 @@
   if (animation != null) {
     super.clearAnimation();
     if (animation.hasEnded() && animation.getFillAfter() && animation.willChangeBounds()) {
-      ((View)getParent()).invalidate();
+      View parent=(View)getParent();
+      if (parent != null)       parent.invalidate();
     }
  else {
       invalidate();
