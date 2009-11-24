@@ -1,3 +1,8 @@
 {
   closeSystemDialogs();
+  String reason=intent.getStringExtra("reason");
+  if (!"homekey".equals(reason)) {
+    boolean animate=true;
+    closeAllApps(animate);
+  }
 }
