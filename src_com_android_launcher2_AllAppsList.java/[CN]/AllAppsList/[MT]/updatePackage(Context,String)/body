@@ -23,7 +23,7 @@
         added.add(applicationInfo);
       }
  else {
-        AppInfoCache.update(info,applicationInfo,context);
+        AppInfoCache.update(info,applicationInfo,context,bubble);
         modified.add(applicationInfo);
       }
     }
