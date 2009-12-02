@@ -8,7 +8,7 @@
   }
   for (int i=0; i < N; i++) {
     final ApplicationInfo item=list.get(i);
-    int index=Collections.binarySearch(mAllAppsList,item,mAppNameComp);
+    int index=Collections.binarySearch(mAllAppsList,item,LauncherModel.APP_NAME_COMPARATOR);
     if (index < 0) {
       index=-(index + 1);
     }
