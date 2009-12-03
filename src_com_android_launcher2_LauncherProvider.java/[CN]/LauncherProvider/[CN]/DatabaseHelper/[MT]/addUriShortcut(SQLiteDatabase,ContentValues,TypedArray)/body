@@ -2,7 +2,7 @@
   Resources r=mContext.getResources();
   final int iconResId=a.getResourceId(R.styleable.Favorite_icon,0);
   final int titleResId=a.getResourceId(R.styleable.Favorite_title,0);
-  Intent intent=null;
+  Intent intent;
   String uri=null;
   try {
     uri=a.getString(R.styleable.Favorite_uri);

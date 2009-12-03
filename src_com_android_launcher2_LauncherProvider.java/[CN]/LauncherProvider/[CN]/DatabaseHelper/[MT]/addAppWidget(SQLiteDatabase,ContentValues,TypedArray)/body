@@ -1,13 +1,10 @@
 {
-  final int[] bindSources=new int[]{Favorites.ITEM_TYPE_APPWIDGET};
   String packageName=a.getString(R.styleable.Favorite_packageName);
   String className=a.getString(R.styleable.Favorite_className);
   if (packageName == null || className == null) {
     return false;
   }
   ComponentName cn=new ComponentName(packageName,className);
-  final ArrayList<ComponentName> bindTargets=new ArrayList<ComponentName>();
-  bindTargets.add(cn);
   boolean allocatedAppWidgets=false;
   final AppWidgetManager appWidgetManager=AppWidgetManager.getInstance(mContext);
   try {
