@@ -1,4 +1,0 @@
-{
-  mScale=scale;
-  invalidate();
-}
