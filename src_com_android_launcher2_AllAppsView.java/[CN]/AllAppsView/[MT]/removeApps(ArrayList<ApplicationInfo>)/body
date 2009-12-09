@@ -7,17 +7,17 @@
     final ApplicationInfo item=list.get(i);
     int index=findAppByComponent(mAllAppsList,item);
     if (index >= 0) {
+      int ic=mRollo != null ? mRollo.mState.iconCount : 666;
       mAllAppsList.remove(index);
-      if (mRollo != null) {
+      if (mRollo != null && mRollo.mHasSurface) {
         mRollo.removeApp(index);
-        mRollo.mState.iconCount--;
       }
     }
  else {
       Log.w(TAG,"couldn't find a match for item \"" + item + "\"");
     }
   }
-  if (mRollo != null) {
+  if (mRollo != null && mRollo.mHasSurface) {
     mRollo.saveAppsList();
   }
 }
