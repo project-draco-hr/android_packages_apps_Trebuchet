@@ -1,7 +1,12 @@
 {
   mAllAppsList=list;
   if (mRollo != null) {
-    mRollo.setApps(list);
+    if (mRollo.mHasSurface) {
+      mRollo.setApps(list);
+    }
+ else {
+      mRollo.mAppsDirty=true;
+    }
   }
   mLocks&=~LOCK_ICONS_PENDING;
 }
