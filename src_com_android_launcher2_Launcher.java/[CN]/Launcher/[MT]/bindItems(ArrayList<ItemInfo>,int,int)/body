@@ -17,15 +17,6 @@ case LauncherSettings.Favorites.ITEM_TYPE_LIVE_FOLDER:
 final FolderIcon newLiveFolder=LiveFolderIcon.fromXml(R.layout.live_folder_icon,this,(ViewGroup)workspace.getChildAt(workspace.getCurrentScreen()),(LiveFolderInfo)item);
 workspace.addInScreen(newLiveFolder,item.screen,item.cellX,item.cellY,1,1,false);
 break;
-case LauncherSettings.Favorites.ITEM_TYPE_WIDGET_SEARCH:
-final int screen=workspace.getCurrentScreen();
-final View view=mInflater.inflate(R.layout.widget_search,(ViewGroup)workspace.getChildAt(screen),false);
-Search search=(Search)view.findViewById(R.id.widget_search);
-search.setLauncher(this);
-final Widget widget=(Widget)item;
-view.setTag(widget);
-workspace.addWidget(view,widget,false);
-break;
 }
 }
 workspace.requestLayout();

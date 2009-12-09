@@ -1,6 +1,0 @@
-{
-  PackageManager pm=getContext().getPackageManager();
-  ResolveInfo ri=pm.resolveActivity(mVoiceSearchIntent,PackageManager.MATCH_DEFAULT_ONLY);
-  boolean voiceSearchVisible=ri != null;
-  mVoiceButton.setVisibility(voiceSearchVisible ? View.VISIBLE : View.GONE);
-}

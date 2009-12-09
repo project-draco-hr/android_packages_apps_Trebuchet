@@ -1,5 +1,0 @@
-{
-  float dx=-getLeft() * (1.0f - interpolatedTime);
-  float dy=-getWidgetTop() * (1.0f - interpolatedTime);
-  t.getMatrix().setTranslate(dx,dy);
-}

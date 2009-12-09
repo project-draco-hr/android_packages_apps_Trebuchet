@@ -1,8 +1,0 @@
-{
-  SearchManager searchManager=(SearchManager)getSystemService(Context.SEARCH_SERVICE);
-  searchManager.stopSearch();
-  Search searchWidget=mWorkspace.findSearchWidgetOnCurrentScreen();
-  if (searchWidget != null) {
-    searchWidget.stopSearch(false);
-  }
-}

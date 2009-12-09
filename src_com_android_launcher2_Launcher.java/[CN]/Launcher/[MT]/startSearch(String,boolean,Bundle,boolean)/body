@@ -1,11 +1,13 @@
 {
   closeAllApps(true);
-  Search searchWidget=mWorkspace.findSearchWidgetOnCurrentScreen();
-  if (searchWidget == null) {
-    showSearchDialog(initialQuery,selectInitialQuery,appSearchData,globalSearch);
+  if (initialQuery == null) {
+    initialQuery=getTypedText();
+    clearTypedText();
   }
- else {
-    searchWidget.startSearch(initialQuery,selectInitialQuery,appSearchData,globalSearch);
-    searchWidget.setQuery(getTypedText());
+  if (appSearchData == null) {
+    appSearchData=new Bundle();
+    appSearchData.putString(SearchManager.SOURCE,"launcher-search");
   }
+  final SearchManager searchManager=(SearchManager)getSystemService(Context.SEARCH_SERVICE);
+  searchManager.startSearch(initialQuery,selectInitialQuery,getComponentName(),appSearchData,globalSearch);
 }

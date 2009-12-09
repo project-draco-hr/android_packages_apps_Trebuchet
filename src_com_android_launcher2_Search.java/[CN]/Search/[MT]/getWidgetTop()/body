@@ -1,3 +1,0 @@
-{
-  return getTop() + getChildAt(0).getTop() + mWidgetTopOffset;
-}

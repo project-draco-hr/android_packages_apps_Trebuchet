@@ -1,7 +1,4 @@
 {
-  values.put(Favorites.ITEM_TYPE,Favorites.ITEM_TYPE_WIDGET_SEARCH);
-  values.put(Favorites.SPANX,4);
-  values.put(Favorites.SPANY,1);
-  db.insert(TABLE_FAVORITES,null,values);
-  return true;
+  ComponentName cn=new ComponentName("com.android.quicksearchbox","com.android.quicksearchbox.SearchWidgetProvider");
+  return addAppWidget(db,values,cn,4,1);
 }
