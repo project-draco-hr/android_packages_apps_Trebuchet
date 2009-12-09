@@ -14,6 +14,7 @@
   final int delta=newX - mScrollX;
   final int duration=screenDelta * 300;
   awakenScrollBars(duration);
+  if (!mScroller.isFinished())   mScroller.abortAnimation();
   mScroller.startScroll(mScrollX,0,delta,0,animate ? duration : 1);
   invalidate();
 }
