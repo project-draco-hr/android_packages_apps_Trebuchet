@@ -1,5 +1,0 @@
-{
-  for (int i=0; i < mState.iconCount; i++) {
-    uploadAppIcon(i,list.get(i));
-  }
-}

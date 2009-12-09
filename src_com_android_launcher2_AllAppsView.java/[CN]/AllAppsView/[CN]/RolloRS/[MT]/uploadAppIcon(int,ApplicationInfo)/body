@@ -1,10 +1,7 @@
 {
-  mIcons[index]=Allocation.createFromBitmap(mRS,item.iconBitmap,Element.RGBA_8888(mRS),true);
-  frameBitmapAllocMips(mIcons[index],item.iconBitmap.getWidth(),item.iconBitmap.getHeight());
-  mLabels[index]=Allocation.createFromBitmap(mRS,item.titleBitmap,Element.RGBA_8888(mRS),true);
-  frameBitmapAllocMips(mLabels[index],item.titleBitmap.getWidth(),item.titleBitmap.getHeight());
+  if (mIconIds[index] != mIcons[index].getID()) {
+    throw new IllegalStateException("uploadAppIcon index=" + index + " mIcons[index].getID="+ mIcons[index].getID()+ " mIconsIds[index]="+ mIconIds[index]+ " item="+ item);
+  }
   mIcons[index].uploadToTexture(0);
   mLabels[index].uploadToTexture(0);
-  mIconIds[index]=mIcons[index].getID();
-  mLabelIds[index]=mLabels[index].getID();
 }
