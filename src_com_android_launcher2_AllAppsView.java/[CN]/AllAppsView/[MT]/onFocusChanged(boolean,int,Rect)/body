@@ -12,7 +12,7 @@
     }
   }
  else {
-    if (mRollo != null && mRollo.mHasSurface) {
+    if (mRollo != null) {
       if (mArrowNavigation) {
         mRollo.clearSelectedIcon();
         mRollo.setHomeSelected(SELECTED_NONE);
