@@ -1,3 +1,0 @@
-{
-  fitInScreen(child,mCurrentScreen,spanX,spanY);
-}

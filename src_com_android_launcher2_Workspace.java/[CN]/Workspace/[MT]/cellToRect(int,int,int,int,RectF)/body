@@ -1,3 +1,0 @@
-{
-  ((CellLayout)getChildAt(mCurrentScreen)).cellToRect(cellX,cellY,cellHSpan,cellVSpan,rect);
-}
