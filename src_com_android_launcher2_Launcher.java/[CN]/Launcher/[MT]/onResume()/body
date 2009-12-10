@@ -7,13 +7,4 @@
     mModel.startLoader(this,true);
     mRestoring=false;
   }
-  if (mIsNewIntent) {
-    mWorkspace.post(new Runnable(){
-      public void run(){
-        stopSearch();
-      }
-    }
-);
-  }
-  mIsNewIntent=false;
 }

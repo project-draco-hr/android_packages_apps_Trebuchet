@@ -1,6 +1,6 @@
 {
   View child=cellInfo.cell;
-  if (!child.isInTouchMode() && !(child instanceof Search)) {
+  if (!child.isInTouchMode()) {
     return;
   }
   mDragInfo=cellInfo;

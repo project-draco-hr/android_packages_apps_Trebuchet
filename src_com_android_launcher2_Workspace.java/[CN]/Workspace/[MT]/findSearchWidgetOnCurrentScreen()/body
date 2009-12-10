@@ -1,4 +1,0 @@
-{
-  CellLayout currentScreen=(CellLayout)getChildAt(mCurrentScreen);
-  return findSearchWidget(currentScreen);
-}
