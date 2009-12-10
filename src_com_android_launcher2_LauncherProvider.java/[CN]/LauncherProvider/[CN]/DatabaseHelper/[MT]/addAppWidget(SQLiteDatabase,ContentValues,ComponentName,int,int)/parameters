@@ -1,0 +1,5 @@
+SQLiteDatabase db
+ContentValues values
+ComponentName cn
+int spanX
+int spanY

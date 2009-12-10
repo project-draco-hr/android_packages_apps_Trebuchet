@@ -1,8 +1,0 @@
-{
-  if (v == mVoiceButton) {
-    startVoiceSearch();
-  }
- else {
-    mLauncher.onSearchRequested();
-  }
-}

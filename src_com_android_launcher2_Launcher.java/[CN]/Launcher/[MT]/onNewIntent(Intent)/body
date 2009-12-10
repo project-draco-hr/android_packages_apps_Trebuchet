@@ -2,7 +2,6 @@
   super.onNewIntent(intent);
   if (Intent.ACTION_MAIN.equals(intent.getAction())) {
     closeSystemDialogs();
-    mIsNewIntent=true;
     boolean alreadyOnHome=((intent.getFlags() & Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT) != Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
     boolean allAppsVisible=isAllAppsVisible();
     if (!mWorkspace.isDefaultScreenShowing()) {

@@ -1,7 +1,6 @@
 {
   Log.d(TAG,"BEGIN launcher2 dump state for launcher " + this);
   Log.d(TAG,"mSavedState=" + mSavedState);
-  Log.d(TAG,"mIsNewIntent=" + mIsNewIntent);
   Log.d(TAG,"mWorkspaceLoading=" + mWorkspaceLoading);
   Log.d(TAG,"mRestoring=" + mRestoring);
   Log.d(TAG,"mWaitingForResult=" + mWaitingForResult);
