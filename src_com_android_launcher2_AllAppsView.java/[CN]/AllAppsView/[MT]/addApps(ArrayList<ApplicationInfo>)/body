@@ -3,7 +3,7 @@
     return;
   }
   final int N=list.size();
-  if (mRollo != null) {
+  if (mRollo != null && mRollo.mHasSurface) {
     mRollo.reallocAppsList(mRollo.mState.iconCount + N);
   }
   for (int i=0; i < N; i++) {
@@ -13,12 +13,12 @@
       index=-(index + 1);
     }
     mAllAppsList.add(index,item);
-    if (mRollo != null) {
+    if (mRollo != null && mRollo.mHasSurface) {
       mRollo.addApp(index,item);
       mRollo.mState.iconCount++;
     }
   }
-  if (mRollo != null) {
+  if (mRollo != null && mRollo.mHasSurface) {
     mRollo.saveAppsList();
   }
 }
