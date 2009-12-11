@@ -9,7 +9,7 @@
     if (index >= 0) {
       int ic=mRollo != null ? mRollo.mState.iconCount : 666;
       mAllAppsList.remove(index);
-      if (mRollo != null && mRollo.mHasSurface) {
+      if (mRollo != null) {
         mRollo.removeApp(index);
       }
     }
@@ -17,7 +17,7 @@
       Log.w(TAG,"couldn't find a match for item \"" + item + "\"");
     }
   }
-  if (mRollo != null && mRollo.mHasSurface) {
+  if (mRollo != null) {
     mRollo.saveAppsList();
   }
 }

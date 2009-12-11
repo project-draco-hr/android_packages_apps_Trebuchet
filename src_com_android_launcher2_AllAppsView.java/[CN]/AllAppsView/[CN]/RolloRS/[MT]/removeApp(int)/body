@@ -6,7 +6,7 @@
   System.arraycopy(mLabels,src,mLabels,index,count);
   System.arraycopy(mLabelIds,src,mLabelIds,index,count);
   mRollo.mState.iconCount--;
-  final int last=mState.iconCount - 1;
+  final int last=mState.iconCount;
   mIcons[last]=null;
   mIconIds[last]=0;
   mLabels[last]=null;
