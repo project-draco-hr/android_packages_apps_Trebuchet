@@ -2,7 +2,6 @@
   super.surfaceChanged(holder,format,w,h);
   if (mRollo == null) {
     mRollo=new RolloRS();
-    mRollo.mHasSurface=true;
     mRollo.init(getResources(),w,h);
     if (mAllAppsList != null) {
       mRollo.setApps(mAllAppsList);
@@ -11,9 +10,6 @@
       gainFocus();
       mShouldGainFocus=false;
     }
-  }
- else {
-    mRollo.mHasSurface=true;
   }
   mRollo.dirtyCheck();
   mRollo.resize(w,h);

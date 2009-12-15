@@ -1,6 +1,6 @@
 {
   cancelLongPress();
-  if (mRollo == null || !mRollo.mHasSurface) {
+  if (mRollo == null) {
     mZoomDirty=true;
     mZoom=zoom;
     mAnimateNextZoom=animate;

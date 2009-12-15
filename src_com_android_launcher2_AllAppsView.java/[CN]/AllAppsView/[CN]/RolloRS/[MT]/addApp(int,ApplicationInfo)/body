@@ -6,11 +6,6 @@
   System.arraycopy(mLabels,index,mLabels,dest,count);
   System.arraycopy(mLabelIds,index,mLabelIds,dest,count);
   createAppIconAllocations(index,item);
-  if (mHasSurface) {
-    uploadAppIcon(index,item);
-  }
- else {
-    mAppsDirty=true;
-  }
+  uploadAppIcon(index,item);
   mRollo.mState.iconCount++;
 }
