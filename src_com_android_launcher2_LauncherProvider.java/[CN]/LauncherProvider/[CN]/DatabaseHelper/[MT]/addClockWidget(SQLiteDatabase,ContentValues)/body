@@ -1,22 +1,4 @@
 {
-  final int[] bindSources=new int[]{Favorites.ITEM_TYPE_WIDGET_CLOCK};
-  final ArrayList<ComponentName> bindTargets=new ArrayList<ComponentName>();
-  bindTargets.add(new ComponentName("com.android.alarmclock","com.android.alarmclock.AnalogAppWidgetProvider"));
-  boolean allocatedAppWidgets=false;
-  try {
-    int appWidgetId=mAppWidgetHost.allocateAppWidgetId();
-    values.put(Favorites.ITEM_TYPE,Favorites.ITEM_TYPE_WIDGET_CLOCK);
-    values.put(Favorites.SPANX,2);
-    values.put(Favorites.SPANY,2);
-    values.put(Favorites.APPWIDGET_ID,appWidgetId);
-    db.insert(TABLE_FAVORITES,null,values);
-    allocatedAppWidgets=true;
-  }
- catch (  RuntimeException ex) {
-    Log.e(TAG,"Problem allocating appWidgetId",ex);
-  }
-  if (allocatedAppWidgets) {
-    launchAppWidgetBinder(bindSources,bindTargets);
-  }
-  return allocatedAppWidgets;
+  ComponentName cn=new ComponentName("com.android.alarmclock","com.android.alarmclock.AnalogAppWidgetProvider");
+  return addAppWidget(db,values,cn,2,2);
 }

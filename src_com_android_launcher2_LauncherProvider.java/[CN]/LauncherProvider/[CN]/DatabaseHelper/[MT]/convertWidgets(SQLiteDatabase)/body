@@ -1,12 +1,8 @@
 {
+  final AppWidgetManager appWidgetManager=AppWidgetManager.getInstance(mContext);
   final int[] bindSources=new int[]{Favorites.ITEM_TYPE_WIDGET_CLOCK,Favorites.ITEM_TYPE_WIDGET_PHOTO_FRAME,Favorites.ITEM_TYPE_WIDGET_SEARCH};
-  final ArrayList<ComponentName> bindTargets=new ArrayList<ComponentName>();
-  bindTargets.add(new ComponentName("com.android.alarmclock","com.android.alarmclock.AnalogAppWidgetProvider"));
-  bindTargets.add(new ComponentName("com.android.camera","com.android.camera.PhotoAppWidgetProvider"));
-  bindTargets.add(new ComponentName("com.android.quicksearchbox","com.android.quicksearchbox.SearchWidgetProvider"));
   final String selectWhere=buildOrWhereString(Favorites.ITEM_TYPE,bindSources);
   Cursor c=null;
-  boolean allocatedAppWidgets=false;
   db.beginTransaction();
   try {
     c=db.query(TABLE_FAVORITES,new String[]{Favorites._ID,Favorites.ITEM_TYPE},selectWhere,null,null,null,null);
@@ -33,7 +29,16 @@
         }
         String updateWhere=Favorites._ID + "=" + favoriteId;
         db.update(TABLE_FAVORITES,values,updateWhere,null);
-        allocatedAppWidgets=true;
+        ComponentName cn=null;
+        if (favoriteType == Favorites.ITEM_TYPE_WIDGET_CLOCK) {
+          appWidgetManager.bindAppWidgetId(appWidgetId,new ComponentName("com.android.alarmclock","com.android.alarmclock.AnalogAppWidgetProvider"));
+        }
+ else         if (favoriteType == Favorites.ITEM_TYPE_WIDGET_PHOTO_FRAME) {
+          appWidgetManager.bindAppWidgetId(appWidgetId,new ComponentName("com.android.camera","com.android.camera.PhotoAppWidgetProvider"));
+        }
+ else         if (favoriteType == Favorites.ITEM_TYPE_WIDGET_SEARCH) {
+          appWidgetManager.bindAppWidgetId(appWidgetId,new ComponentName("com.android.quicksearchbox","com.android.quicksearchbox.SearchWidgetProvider"));
+        }
       }
  catch (      RuntimeException ex) {
         Log.e(TAG,"Problem allocating appWidgetId",ex);
@@ -49,8 +54,5 @@
     if (c != null) {
       c.close();
     }
-  }
-  if (allocatedAppWidgets) {
-    launchAppWidgetBinder(bindSources,bindTargets);
   }
 }
