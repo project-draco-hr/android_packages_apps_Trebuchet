@@ -3,5 +3,4 @@
   dismissPreview(mPreviousView);
   dismissPreview(mNextView);
   mDragController.cancelDrag();
-  unregisterReceiver(mCloseSystemDialogsReceiver);
 }

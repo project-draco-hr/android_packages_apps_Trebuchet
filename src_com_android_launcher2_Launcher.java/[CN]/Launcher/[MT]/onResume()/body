@@ -1,7 +1,6 @@
 {
   super.onResume();
-  IntentFilter filter=new IntentFilter(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
-  registerReceiver(mCloseSystemDialogsReceiver,filter);
+  mPaused=false;
   if (mRestoring) {
     mWorkspaceLoading=true;
     mModel.startLoader(this,true);

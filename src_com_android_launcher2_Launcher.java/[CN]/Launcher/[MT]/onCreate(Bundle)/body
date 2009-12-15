@@ -27,4 +27,6 @@
   }
   mDefaultKeySsb=new SpannableStringBuilder();
   Selection.setSelection(mDefaultKeySsb,0);
+  IntentFilter filter=new IntentFilter(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
+  registerReceiver(mCloseSystemDialogsReceiver,filter);
 }

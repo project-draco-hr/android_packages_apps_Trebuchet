@@ -3,6 +3,9 @@
   String reason=intent.getStringExtra("reason");
   if (!"homekey".equals(reason)) {
     boolean animate=true;
+    if (mPaused || "lock".equals(reason)) {
+      animate=false;
+    }
     closeAllApps(animate);
   }
 }
