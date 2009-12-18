@@ -15,13 +15,8 @@
   for (int i=0; i < mState.iconCount; i++) {
     createAppIconAllocations(i,list.get(i));
   }
-  if (mHasSurface) {
-    for (int i=0; i < mState.iconCount; i++) {
-      uploadAppIcon(i,list.get(i));
-    }
-  }
- else {
-    mRollo.mAppsDirty=true;
+  for (int i=0; i < mState.iconCount; i++) {
+    uploadAppIcon(i,list.get(i));
   }
   saveAppsList();
 }
