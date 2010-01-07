@@ -1,5 +1,6 @@
 {
   super.surfaceChanged(holder,format,w,h);
+  mHaveSurface=true;
   if (mRollo == null) {
     mRollo=new RolloRS();
     mRollo.init(getResources(),w,h);
