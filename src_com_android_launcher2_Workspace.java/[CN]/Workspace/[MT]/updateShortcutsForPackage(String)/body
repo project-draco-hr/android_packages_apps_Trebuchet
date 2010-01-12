@@ -1,0 +1,26 @@
+{
+  final PackageManager pm=mLauncher.getPackageManager();
+  final int count=getChildCount();
+  for (int i=0; i < count; i++) {
+    final CellLayout layout=(CellLayout)getChildAt(i);
+    int childCount=layout.getChildCount();
+    for (int j=0; j < childCount; j++) {
+      final View view=layout.getChildAt(j);
+      Object tag=view.getTag();
+      if (tag instanceof ApplicationInfo) {
+        ApplicationInfo info=(ApplicationInfo)tag;
+        final Intent intent=info.intent;
+        final ComponentName name=intent.getComponent();
+        if (info.itemType == LauncherSettings.Favorites.ITEM_TYPE_APPLICATION && Intent.ACTION_MAIN.equals(intent.getAction()) && name != null && packageName.equals(name.getPackageName())) {
+          final Drawable icon=AppInfoCache.getIconDrawable(pm,info);
+          if (icon != null && icon != info.icon) {
+            info.icon.setCallback(null);
+            info.icon=Utilities.createIconThumbnail(icon,mContext);
+            info.filtered=true;
+            ((TextView)view).setCompoundDrawablesWithIntrinsicBounds(null,info.icon,null,null);
+          }
+        }
+      }
+    }
+  }
+}

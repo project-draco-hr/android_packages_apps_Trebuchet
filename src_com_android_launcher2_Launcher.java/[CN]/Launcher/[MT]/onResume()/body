@@ -1,0 +1,18 @@
+{
+  super.onResume();
+  mPaused=false;
+  if (mRestoring) {
+    mWorkspaceLoading=true;
+    mModel.startLoader(this,true);
+    mRestoring=false;
+  }
+  if (mIsNewIntent) {
+    mWorkspace.post(new Runnable(){
+      public void run(){
+        stopSearch();
+      }
+    }
+);
+  }
+  mIsNewIntent=false;
+}

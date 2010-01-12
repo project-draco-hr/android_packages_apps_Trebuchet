@@ -1,0 +1,11 @@
+{
+  folder.getInfo().opened=false;
+  ViewGroup parent=(ViewGroup)folder.getParent();
+  if (parent != null) {
+    parent.removeView(folder);
+    if (folder instanceof DropTarget) {
+      mDragController.removeDropTarget((DropTarget)folder);
+    }
+  }
+  folder.onClose();
+}

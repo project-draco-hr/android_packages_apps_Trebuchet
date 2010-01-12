@@ -1,0 +1,10 @@
+{
+  String folderName=getResources().getString(R.string.group_folder);
+  String shortcutName=intent.getStringExtra(Intent.EXTRA_SHORTCUT_NAME);
+  if (folderName != null && folderName.equals(shortcutName)) {
+    addFolder();
+  }
+ else {
+    startActivityForResult(intent,REQUEST_CREATE_LIVE_FOLDER);
+  }
+}

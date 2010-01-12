@@ -1,0 +1,12 @@
+{
+  cancelLongPress();
+  if (mRollo == null || !mRollo.mHasSurface) {
+    mZoomDirty=true;
+    mZoom=zoom;
+    mAnimateNextZoom=animate;
+    return;
+  }
+ else {
+    mRollo.setZoom(zoom,animate);
+  }
+}

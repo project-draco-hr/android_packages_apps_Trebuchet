@@ -1,0 +1,5 @@
+{
+  if (!isAllAppsVisible()) {
+    mWorkspace.scrollLeft();
+  }
+}

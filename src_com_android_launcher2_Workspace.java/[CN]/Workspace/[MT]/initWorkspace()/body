@@ -1,0 +1,8 @@
+{
+  mScroller=new Scroller(getContext());
+  mCurrentScreen=mDefaultScreen;
+  Launcher.setScreen(mCurrentScreen);
+  final ViewConfiguration configuration=ViewConfiguration.get(getContext());
+  mTouchSlop=configuration.getScaledTouchSlop();
+  mMaximumVelocity=configuration.getScaledMaximumFlingVelocity();
+}

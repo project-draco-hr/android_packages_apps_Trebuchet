@@ -1,0 +1,6 @@
+CellInfo cellInfo
+int x
+int y
+int xCount
+int yCount
+boolean[][] occupied

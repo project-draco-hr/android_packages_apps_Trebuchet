@@ -1,0 +1,4 @@
+Bitmap bitmap
+int width
+int height
+Context context

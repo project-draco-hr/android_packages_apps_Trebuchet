@@ -1,0 +1,18 @@
+{
+  super.onNewIntent(intent);
+  if (Intent.ACTION_MAIN.equals(intent.getAction())) {
+    closeSystemDialogs();
+    mIsNewIntent=true;
+    boolean alreadyOnHome=((intent.getFlags() & Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT) != Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
+    boolean allAppsVisible=isAllAppsVisible();
+    if (!mWorkspace.isDefaultScreenShowing()) {
+      mWorkspace.moveToDefaultScreen(alreadyOnHome && !allAppsVisible);
+    }
+    closeAllApps(alreadyOnHome && allAppsVisible);
+    final View v=getWindow().peekDecorView();
+    if (v != null && v.getWindowToken() != null) {
+      InputMethodManager imm=(InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+      imm.hideSoftInputFromWindow(v.getWindowToken(),0);
+    }
+  }
+}

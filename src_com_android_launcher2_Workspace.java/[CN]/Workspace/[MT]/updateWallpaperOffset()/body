@@ -1,0 +1,3 @@
+{
+  updateWallpaperOffset(getChildAt(getChildCount() - 1).getRight() - (mRight - mLeft));
+}

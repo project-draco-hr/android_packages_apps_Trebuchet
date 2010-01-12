@@ -1,0 +1,11 @@
+{
+  values.put(LauncherSettings.BaseLauncherColumns.ITEM_TYPE,itemType);
+  if (!isGesture) {
+    values.put(LauncherSettings.Favorites.CONTAINER,container);
+    values.put(LauncherSettings.Favorites.SCREEN,screen);
+    values.put(LauncherSettings.Favorites.CELLX,cellX);
+    values.put(LauncherSettings.Favorites.CELLY,cellY);
+    values.put(LauncherSettings.Favorites.SPANX,spanX);
+    values.put(LauncherSettings.Favorites.SPANY,spanY);
+  }
+}

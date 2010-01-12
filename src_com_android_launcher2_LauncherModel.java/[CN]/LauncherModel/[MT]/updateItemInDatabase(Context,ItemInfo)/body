@@ -1,0 +1,6 @@
+{
+  final ContentValues values=new ContentValues();
+  final ContentResolver cr=context.getContentResolver();
+  item.onAddToDatabase(values);
+  cr.update(LauncherSettings.Favorites.getContentUri(item.id,false),values,null,null);
+}

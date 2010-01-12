@@ -1,0 +1,4 @@
+CellLayout.CellInfo cellInfo
+int[] xy
+int spanX
+int spanY

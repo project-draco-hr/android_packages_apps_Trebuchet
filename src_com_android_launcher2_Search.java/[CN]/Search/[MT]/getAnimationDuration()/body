@@ -1,0 +1,3 @@
+{
+  return (int)(getWidgetTop() / ANIMATION_VELOCITY);
+}

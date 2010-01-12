@@ -1,0 +1,5 @@
+{
+  final ApplicationInfo info=infoFromShortcutIntent(context,data);
+  LauncherModel.addItemToDatabase(context,info,LauncherSettings.Favorites.CONTAINER_DESKTOP,cellInfo.screen,cellInfo.cellX,cellInfo.cellY,notify);
+  return info;
+}

@@ -1,0 +1,32 @@
+{
+  super.onCreate(savedInstanceState);
+  mModel=((LauncherApplication)getApplication()).setLauncher(this);
+  mDragController=new DragController(this);
+  mInflater=getLayoutInflater();
+  mAppWidgetManager=AppWidgetManager.getInstance(this);
+  mAppWidgetHost=new LauncherAppWidgetHost(this,APPWIDGET_HOST_ID);
+  mAppWidgetHost.startListening();
+  if (PROFILE_STARTUP) {
+    android.os.Debug.startMethodTracing("/sdcard/launcher");
+  }
+  checkForLocaleChange();
+  setWallpaperDimension();
+  setContentView(R.layout.launcher);
+  setupViews();
+  registerContentObservers();
+  lockAllApps();
+  mSavedState=savedInstanceState;
+  restoreState(mSavedState);
+  if (PROFILE_STARTUP) {
+    android.os.Debug.stopMethodTracing();
+  }
+  mModel.setAllAppsDirty();
+  mModel.setWorkspaceDirty();
+  if (!mRestoring) {
+    mModel.startLoader(this,true);
+  }
+  mDefaultKeySsb=new SpannableStringBuilder();
+  Selection.setSelection(mDefaultKeySsb,0);
+  IntentFilter filter=new IntentFilter(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
+  registerReceiver(mCloseSystemDialogsReceiver,filter);
+}

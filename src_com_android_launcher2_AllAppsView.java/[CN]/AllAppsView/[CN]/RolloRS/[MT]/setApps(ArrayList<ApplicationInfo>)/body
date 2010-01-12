@@ -1,0 +1,27 @@
+{
+  final int count=list != null ? list.size() : 0;
+  int allocCount=count;
+  if (allocCount < 1) {
+    allocCount=1;
+  }
+  mIcons=new Allocation[count];
+  mIconIds=new int[allocCount];
+  mAllocIconIds=Allocation.createSized(mRS,Element.USER_I32(mRS),allocCount);
+  mLabels=new Allocation[count];
+  mLabelIds=new int[allocCount];
+  mAllocLabelIds=Allocation.createSized(mRS,Element.USER_I32(mRS),allocCount);
+  Element ie8888=Element.RGBA_8888(mRS);
+  mState.iconCount=count;
+  for (int i=0; i < mState.iconCount; i++) {
+    createAppIconAllocations(i,list.get(i));
+  }
+  if (mHasSurface) {
+    for (int i=0; i < mState.iconCount; i++) {
+      uploadAppIcon(i,list.get(i));
+    }
+  }
+ else {
+    mRollo.mAppsDirty=true;
+  }
+  saveAppsList();
+}

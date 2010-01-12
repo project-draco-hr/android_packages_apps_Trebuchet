@@ -1,0 +1,5 @@
+{
+  for (  ItemInfo item : mDesktopItems) {
+    item.unbind();
+  }
+}

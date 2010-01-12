@@ -1,0 +1,3 @@
+{
+  setCompoundDrawablesWithIntrinsicBounds(null,mOpenIcon,null,null);
+}

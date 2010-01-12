@@ -1,0 +1,14 @@
+{
+  mRollo.clearSelectedIcon();
+  mRollo.setHomeSelected(SELECTED_NONE);
+  if (zoom > 0.001f) {
+    mRollo.mState.zoomTarget=zoom;
+  }
+ else {
+    mRollo.mState.zoomTarget=0;
+  }
+  mRollo.mState.save();
+  if (!animate) {
+    mRollo.mInvokeSetZoom.execute();
+  }
+}

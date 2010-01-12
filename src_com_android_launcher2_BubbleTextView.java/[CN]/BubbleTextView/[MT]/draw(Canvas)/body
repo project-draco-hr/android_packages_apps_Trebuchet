@@ -1,0 +1,26 @@
+{
+  final Drawable background=mBackground;
+  if (background != null) {
+    final int scrollX=mScrollX;
+    final int scrollY=mScrollY;
+    if (mBackgroundSizeChanged) {
+      background.setBounds(0,0,mRight - mLeft,mBottom - mTop);
+      mBackgroundSizeChanged=false;
+    }
+    if ((scrollX | scrollY) == 0) {
+      background.draw(canvas);
+    }
+ else {
+      canvas.translate(scrollX,scrollY);
+      background.draw(canvas);
+      canvas.translate(-scrollX,-scrollY);
+    }
+  }
+  final Layout layout=getLayout();
+  final RectF rect=mRect;
+  final int left=getCompoundPaddingLeft();
+  final int top=getExtendedPaddingTop();
+  rect.set(left + layout.getLineLeft(0) - mPaddingH,top + layout.getLineTop(0) - mPaddingV,Math.min(left + layout.getLineRight(0) + mPaddingH,mScrollX + mRight - mLeft),top + layout.getLineBottom(0) + mPaddingV);
+  canvas.drawRoundRect(rect,mCornerRadius,mCornerRadius,mPaint);
+  super.draw(canvas);
+}

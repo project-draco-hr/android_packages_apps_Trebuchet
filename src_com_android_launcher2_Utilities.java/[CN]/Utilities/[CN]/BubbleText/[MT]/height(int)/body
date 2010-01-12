@@ -1,0 +1,3 @@
+{
+  return (int)((lineCount * mLineHeight) + mLeading + mLeading+ 0.0f);
+}

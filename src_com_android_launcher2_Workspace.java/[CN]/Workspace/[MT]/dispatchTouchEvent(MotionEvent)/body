@@ -1,0 +1,8 @@
+{
+  if (ev.getAction() == MotionEvent.ACTION_DOWN) {
+    if (mLauncher.isWorkspaceLocked() || mLauncher.isAllAppsVisible()) {
+      return false;
+    }
+  }
+  return super.dispatchTouchEvent(ev);
+}

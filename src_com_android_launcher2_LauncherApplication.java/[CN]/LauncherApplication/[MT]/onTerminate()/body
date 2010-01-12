@@ -1,0 +1,6 @@
+{
+  super.onTerminate();
+  unregisterReceiver(mModel);
+  ContentResolver resolver=getContentResolver();
+  resolver.unregisterContentObserver(mFavoritesObserver);
+}

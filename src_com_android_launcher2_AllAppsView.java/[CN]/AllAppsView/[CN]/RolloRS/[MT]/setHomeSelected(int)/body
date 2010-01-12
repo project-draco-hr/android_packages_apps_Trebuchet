@@ -1,0 +1,18 @@
+{
+  final int prev=mLastSelection;
+switch (mode) {
+case SELECTED_NONE:
+    mState.homeButtonId=mHomeButtonNormal.getID();
+  break;
+case SELECTED_FOCUSED:
+mLastSelection=SELECTION_HOME;
+mState.homeButtonId=mHomeButtonFocused.getID();
+if (prev != SELECTION_HOME) {
+sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_SELECTED);
+}
+break;
+case SELECTED_PRESSED:
+mState.homeButtonId=mHomeButtonPressed.getID();
+break;
+}
+}

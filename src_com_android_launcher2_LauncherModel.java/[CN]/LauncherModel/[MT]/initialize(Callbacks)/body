@@ -1,0 +1,5 @@
+{
+synchronized (mLock) {
+    mCallbacks=new WeakReference<Callbacks>(callbacks);
+  }
+}

@@ -1,0 +1,23 @@
+{
+  ComponentName component=data.getComponent();
+  PackageManager packageManager=context.getPackageManager();
+  ActivityInfo activityInfo=null;
+  try {
+    activityInfo=packageManager.getActivityInfo(component,0);
+  }
+ catch (  NameNotFoundException e) {
+    Log.e(TAG,"Couldn't find ActivityInfo for selected application",e);
+  }
+  if (activityInfo != null) {
+    ApplicationInfo itemInfo=new ApplicationInfo();
+    itemInfo.title=activityInfo.loadLabel(packageManager);
+    if (itemInfo.title == null) {
+      itemInfo.title=activityInfo.name;
+    }
+    itemInfo.setActivity(component,Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
+    itemInfo.icon=activityInfo.loadIcon(packageManager);
+    itemInfo.container=ItemInfo.NO_ID;
+    return itemInfo;
+  }
+  return null;
+}

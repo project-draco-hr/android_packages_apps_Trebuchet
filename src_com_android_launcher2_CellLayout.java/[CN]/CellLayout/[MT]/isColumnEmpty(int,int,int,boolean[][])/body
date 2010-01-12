@@ -1,0 +1,8 @@
+{
+  for (int y=top; y <= bottom; y++) {
+    if (occupied[x][y]) {
+      return false;
+    }
+  }
+  return true;
+}

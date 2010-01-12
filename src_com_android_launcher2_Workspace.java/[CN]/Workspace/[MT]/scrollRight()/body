@@ -1,0 +1,6 @@
+{
+  clearVacantCache();
+  if (mNextScreen == INVALID_SCREEN && mCurrentScreen < getChildCount() - 1 && mScroller.isFinished()) {
+    snapToScreen(mCurrentScreen + 1);
+  }
+}

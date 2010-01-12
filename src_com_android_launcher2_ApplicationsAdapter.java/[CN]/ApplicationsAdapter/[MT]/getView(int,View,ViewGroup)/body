@@ -1,0 +1,17 @@
+{
+  final ApplicationInfo info=getItem(position);
+  if (convertView == null) {
+    convertView=mInflater.inflate(R.layout.application_boxed,parent,false);
+  }
+  if (info.icon == null) {
+    info.icon=AppInfoCache.getIconDrawable(mPackageManager,info);
+  }
+  if (!info.filtered) {
+    info.icon=Utilities.createIconThumbnail(info.icon,getContext());
+    info.filtered=true;
+  }
+  final TextView textView=(TextView)convertView;
+  textView.setCompoundDrawablesWithIntrinsicBounds(null,info.icon,null,null);
+  textView.setText(info.title);
+  return convertView;
+}

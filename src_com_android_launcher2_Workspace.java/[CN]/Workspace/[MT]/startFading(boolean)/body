@@ -1,0 +1,4 @@
+{
+  mFading=dest;
+  invalidate();
+}

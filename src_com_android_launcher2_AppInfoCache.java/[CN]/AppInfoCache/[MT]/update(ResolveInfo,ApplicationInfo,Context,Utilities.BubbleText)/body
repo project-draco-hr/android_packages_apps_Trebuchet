@@ -1,0 +1,7 @@
+{
+synchronized (sCache) {
+    updateTitleAndIcon(info,applicationInfo,context,bubble);
+    ComponentName componentName=new ComponentName(info.activityInfo.applicationInfo.packageName,info.activityInfo.name);
+    sCache.put(componentName,applicationInfo);
+  }
+}

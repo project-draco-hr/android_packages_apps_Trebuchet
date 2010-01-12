@@ -1,0 +1,11 @@
+{
+  if (!cellInfo.findCellForSpan(xy,spanX,spanY)) {
+    boolean[] occupied=mSavedState != null ? mSavedState.getBooleanArray(RUNTIME_STATE_PENDING_ADD_OCCUPIED_CELLS) : null;
+    cellInfo=mWorkspace.findAllVacantCells(occupied);
+    if (!cellInfo.findCellForSpan(xy,spanX,spanY)) {
+      Toast.makeText(this,getString(R.string.out_of_space),Toast.LENGTH_SHORT).show();
+      return false;
+    }
+  }
+  return true;
+}

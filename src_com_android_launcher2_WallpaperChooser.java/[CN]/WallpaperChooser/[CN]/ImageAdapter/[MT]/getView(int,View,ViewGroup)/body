@@ -1,0 +1,19 @@
+{
+  ImageView image;
+  if (convertView == null) {
+    image=(ImageView)mLayoutInflater.inflate(R.layout.wallpaper_item,parent,false);
+  }
+ else {
+    image=(ImageView)convertView;
+  }
+  int thumbRes=mThumbs.get(position);
+  image.setImageResource(thumbRes);
+  Drawable thumbDrawable=image.getDrawable();
+  if (thumbDrawable != null) {
+    thumbDrawable.setDither(true);
+  }
+ else {
+    Log.e(TAG,"Error decoding thumbnail resId=" + thumbRes + " for wallpaper #"+ position);
+  }
+  return image;
+}

@@ -1,0 +1,5 @@
+{
+  final LayoutParams cellParams=(LayoutParams)params;
+  cellParams.regenerateId=true;
+  super.addView(child,index,params);
+}

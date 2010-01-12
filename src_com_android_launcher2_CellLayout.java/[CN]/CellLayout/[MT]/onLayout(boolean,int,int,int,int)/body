@@ -1,0 +1,16 @@
+{
+  int count=getChildCount();
+  for (int i=0; i < count; i++) {
+    View child=getChildAt(i);
+    if (child.getVisibility() != GONE) {
+      CellLayout.LayoutParams lp=(CellLayout.LayoutParams)child.getLayoutParams();
+      int childLeft=lp.x;
+      int childTop=lp.y;
+      child.layout(childLeft,childTop,childLeft + lp.width,childTop + lp.height);
+      if (lp.dropped) {
+        lp.dropped=false;
+        mWallpaperManager.sendWallpaperCommand(getWindowToken(),"android.home.drop",childLeft + lp.width / 2,childTop + lp.height / 2,0,null);
+      }
+    }
+  }
+}

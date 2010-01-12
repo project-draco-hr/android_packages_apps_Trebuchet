@@ -1,0 +1,12 @@
+{
+  final ContentResolver cr=context.getContentResolver();
+  Cursor c=cr.query(LauncherSettings.Favorites.CONTENT_URI,new String[]{"title","intent"},"title=? and intent=?",new String[]{title,intent.toUri(0)},null);
+  boolean result=false;
+  try {
+    result=c.moveToFirst();
+  }
+  finally {
+    c.close();
+  }
+  return result;
+}

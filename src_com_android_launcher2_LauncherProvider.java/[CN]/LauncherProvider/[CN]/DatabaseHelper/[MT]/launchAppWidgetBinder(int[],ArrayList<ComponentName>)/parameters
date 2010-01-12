@@ -1,0 +1,2 @@
+int[] bindSources
+ArrayList<ComponentName> bindTargets

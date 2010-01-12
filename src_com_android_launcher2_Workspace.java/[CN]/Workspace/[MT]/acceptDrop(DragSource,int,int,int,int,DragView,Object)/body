@@ -1,0 +1,11 @@
+{
+  final CellLayout layout=getCurrentDropLayout();
+  final CellLayout.CellInfo cellInfo=mDragInfo;
+  final int spanX=cellInfo == null ? 1 : cellInfo.spanX;
+  final int spanY=cellInfo == null ? 1 : cellInfo.spanY;
+  if (mVacantCache == null) {
+    final View ignoreView=cellInfo == null ? null : cellInfo.cell;
+    mVacantCache=layout.findAllVacantCells(null,ignoreView);
+  }
+  return mVacantCache.findCellForSpan(mTempEstimate,spanX,spanY,false);
+}

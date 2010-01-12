@@ -1,0 +1,41 @@
+{
+  boolean restore=false;
+  int restoreCount=0;
+  float scale=mScale;
+  if (scale < 0.999f) {
+    int sx=mScrollX;
+    int alpha=(scale < 0.5f) ? (int)(255 * 2 * scale) : 255;
+    restoreCount=canvas.saveLayerAlpha(sx,0,sx + getWidth(),getHeight(),alpha,Canvas.HAS_ALPHA_LAYER_SAVE_FLAG | Canvas.CLIP_TO_LAYER_SAVE_FLAG);
+    restore=true;
+    if (scale < 0.999f) {
+      int w=getWidth();
+      w+=2 * mCurrentScreen * w;
+      int dx=w / 2;
+      int h=getHeight();
+      int dy=(h / 2) - (h / 4);
+      canvas.translate(dx,dy);
+      canvas.scale(scale,scale);
+      canvas.translate(-dx,-dy);
+    }
+  }
+  boolean fastDraw=mTouchState != TOUCH_STATE_SCROLLING && mNextScreen == INVALID_SCREEN && scale > 0.999f;
+  if (fastDraw) {
+    drawChild(canvas,getChildAt(mCurrentScreen),getDrawingTime());
+  }
+ else {
+    final long drawingTime=getDrawingTime();
+    if (mNextScreen >= 0 && mNextScreen < getChildCount() && Math.abs(mCurrentScreen - mNextScreen) == 1) {
+      drawChild(canvas,getChildAt(mCurrentScreen),drawingTime);
+      drawChild(canvas,getChildAt(mNextScreen),drawingTime);
+    }
+ else {
+      final int count=getChildCount();
+      for (int i=0; i < count; i++) {
+        drawChild(canvas,getChildAt(i),drawingTime);
+      }
+    }
+  }
+  if (restore) {
+    canvas.restoreToCount(restoreCount);
+  }
+}

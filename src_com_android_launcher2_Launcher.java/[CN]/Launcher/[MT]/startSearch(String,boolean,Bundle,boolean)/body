@@ -1,0 +1,11 @@
+{
+  closeAllApps(true);
+  Search searchWidget=mWorkspace.findSearchWidgetOnCurrentScreen();
+  if (searchWidget == null) {
+    showSearchDialog(initialQuery,selectInitialQuery,appSearchData,globalSearch);
+  }
+ else {
+    searchWidget.startSearch(initialQuery,selectInitialQuery,appSearchData,globalSearch);
+    searchWidget.setQuery(getTypedText());
+  }
+}

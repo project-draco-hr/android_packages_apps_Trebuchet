@@ -1,0 +1,15 @@
+{
+  if (mIsWallpaperSet) {
+    return;
+  }
+  mIsWallpaperSet=true;
+  try {
+    WallpaperManager wpm=(WallpaperManager)getSystemService(WALLPAPER_SERVICE);
+    wpm.setResource(mImages.get(position));
+    setResult(RESULT_OK);
+    finish();
+  }
+ catch (  IOException e) {
+    Log.e(TAG,"Failed to set wallpaper: " + e);
+  }
+}

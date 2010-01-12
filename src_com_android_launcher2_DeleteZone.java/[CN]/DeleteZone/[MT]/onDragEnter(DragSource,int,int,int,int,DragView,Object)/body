@@ -1,0 +1,4 @@
+{
+  mTransition.reverseTransition(TRANSITION_DURATION);
+  dragView.setPaint(mTrashPaint);
+}

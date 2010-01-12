@@ -1,0 +1,7 @@
+{
+  CellLayout group=(CellLayout)getChildAt(mCurrentScreen);
+  if (group != null) {
+    return group.findAllVacantCells(occupied,null);
+  }
+  return null;
+}

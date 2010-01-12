@@ -1,0 +1,3 @@
+{
+  mAllAppsGrid.setApps(apps);
+}

@@ -1,0 +1,4 @@
+{
+  mOptions.requestCancelDecode();
+  super.cancel(true);
+}

@@ -1,0 +1,4 @@
+int y
+int left
+int right
+boolean[][] occupied

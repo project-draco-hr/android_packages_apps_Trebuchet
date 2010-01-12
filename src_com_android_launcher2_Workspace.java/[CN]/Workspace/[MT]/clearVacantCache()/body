@@ -1,0 +1,6 @@
+{
+  if (mVacantCache != null) {
+    mVacantCache.clearVacantCells();
+    mVacantCache=null;
+  }
+}

@@ -1,0 +1,5 @@
+{
+  dismissDialog(DIALOG_RENAME_FOLDER);
+  mWaitingForResult=false;
+  mFolderInfo=null;
+}

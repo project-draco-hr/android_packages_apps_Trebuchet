@@ -1,0 +1,5 @@
+Rect current
+int xCount
+int yCount
+boolean[][] occupied
+CellInfo cellInfo

@@ -1,0 +1,24 @@
+{
+  String packageName=a.getString(R.styleable.Favorite_packageName);
+  String className=a.getString(R.styleable.Favorite_className);
+  if (packageName == null || className == null) {
+    return false;
+  }
+  ComponentName cn=new ComponentName(packageName,className);
+  boolean allocatedAppWidgets=false;
+  final AppWidgetManager appWidgetManager=AppWidgetManager.getInstance(mContext);
+  try {
+    int appWidgetId=mAppWidgetHost.allocateAppWidgetId();
+    values.put(Favorites.ITEM_TYPE,Favorites.ITEM_TYPE_APPWIDGET);
+    values.put(Favorites.SPANX,a.getString(R.styleable.Favorite_spanX));
+    values.put(Favorites.SPANY,a.getString(R.styleable.Favorite_spanY));
+    values.put(Favorites.APPWIDGET_ID,appWidgetId);
+    db.insert(TABLE_FAVORITES,null,values);
+    allocatedAppWidgets=true;
+    appWidgetManager.bindAppWidgetId(appWidgetId,cn);
+  }
+ catch (  RuntimeException ex) {
+    Log.e(TAG,"Problem allocating appWidgetId",ex);
+  }
+  return allocatedAppWidgets;
+}

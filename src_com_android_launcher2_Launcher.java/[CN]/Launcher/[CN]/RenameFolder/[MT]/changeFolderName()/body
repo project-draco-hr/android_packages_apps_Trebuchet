@@ -1,0 +1,27 @@
+{
+  final String name=mInput.getText().toString();
+  if (!TextUtils.isEmpty(name)) {
+    mFolderInfo=mFolders.get(mFolderInfo.id);
+    mFolderInfo.title=name;
+    LauncherModel.updateItemInDatabase(Launcher.this,mFolderInfo);
+    if (mWorkspaceLoading) {
+      lockAllApps();
+      mModel.setWorkspaceDirty();
+      mModel.startLoader(Launcher.this,false);
+    }
+ else {
+      final FolderIcon folderIcon=(FolderIcon)mWorkspace.getViewForTag(mFolderInfo);
+      if (folderIcon != null) {
+        folderIcon.setText(name);
+        getWorkspace().requestLayout();
+      }
+ else {
+        lockAllApps();
+        mModel.setWorkspaceDirty();
+        mWorkspaceLoading=true;
+        mModel.startLoader(Launcher.this,false);
+      }
+    }
+  }
+  cleanup();
+}

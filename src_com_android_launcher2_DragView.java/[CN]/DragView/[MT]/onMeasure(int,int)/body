@@ -1,0 +1,3 @@
+{
+  setMeasuredDimension(mBitmap.getWidth(),mBitmap.getHeight());
+}

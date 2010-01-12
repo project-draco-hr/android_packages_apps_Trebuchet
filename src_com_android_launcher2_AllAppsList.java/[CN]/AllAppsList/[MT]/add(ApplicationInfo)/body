@@ -1,0 +1,4 @@
+{
+  data.add(info);
+  added.add(info);
+}

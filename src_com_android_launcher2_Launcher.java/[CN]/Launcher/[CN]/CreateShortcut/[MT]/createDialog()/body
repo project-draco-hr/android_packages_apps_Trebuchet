@@ -1,0 +1,13 @@
+{
+  mWaitingForResult=true;
+  mAdapter=new AddAdapter(Launcher.this);
+  final AlertDialog.Builder builder=new AlertDialog.Builder(Launcher.this);
+  builder.setTitle(getString(R.string.menu_item_add_item));
+  builder.setAdapter(mAdapter,this);
+  builder.setInverseBackgroundForced(true);
+  AlertDialog dialog=builder.create();
+  dialog.setOnCancelListener(this);
+  dialog.setOnDismissListener(this);
+  dialog.setOnShowListener(this);
+  return dialog;
+}

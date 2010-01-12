@@ -1,0 +1,29 @@
+{
+  final ItemInfo item=(ItemInfo)dragInfo;
+  if (item.container == -1)   return;
+  if (item.container == LauncherSettings.Favorites.CONTAINER_DESKTOP) {
+    if (item instanceof LauncherAppWidgetInfo) {
+      mLauncher.removeAppWidget((LauncherAppWidgetInfo)item);
+    }
+  }
+ else {
+    if (source instanceof UserFolder) {
+      final UserFolder userFolder=(UserFolder)source;
+      final UserFolderInfo userFolderInfo=(UserFolderInfo)userFolder.getInfo();
+      userFolderInfo.remove((ApplicationInfo)item);
+    }
+  }
+  if (item instanceof UserFolderInfo) {
+    final UserFolderInfo userFolderInfo=(UserFolderInfo)item;
+    LauncherModel.deleteUserFolderContentsFromDatabase(mLauncher,userFolderInfo);
+    mLauncher.removeFolder(userFolderInfo);
+  }
+ else   if (item instanceof LauncherAppWidgetInfo) {
+    final LauncherAppWidgetInfo launcherAppWidgetInfo=(LauncherAppWidgetInfo)item;
+    final LauncherAppWidgetHost appWidgetHost=mLauncher.getAppWidgetHost();
+    if (appWidgetHost != null) {
+      appWidgetHost.deleteAppWidgetId(launcherAppWidgetInfo.appWidgetId);
+    }
+  }
+  LauncherModel.deleteItemFromDatabase(mLauncher,item);
+}

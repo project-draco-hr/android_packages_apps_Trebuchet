@@ -1,0 +1,32 @@
+{
+  if (savedState == null) {
+    return;
+  }
+  final boolean allApps=savedState.getBoolean(RUNTIME_STATE_ALL_APPS_FOLDER,false);
+  if (allApps) {
+    showAllApps(false);
+  }
+  final int currentScreen=savedState.getInt(RUNTIME_STATE_CURRENT_SCREEN,-1);
+  if (currentScreen > -1) {
+    mWorkspace.setCurrentScreen(currentScreen);
+  }
+  final int addScreen=savedState.getInt(RUNTIME_STATE_PENDING_ADD_SCREEN,-1);
+  if (addScreen > -1) {
+    mAddItemCellInfo=new CellLayout.CellInfo();
+    final CellLayout.CellInfo addItemCellInfo=mAddItemCellInfo;
+    addItemCellInfo.valid=true;
+    addItemCellInfo.screen=addScreen;
+    addItemCellInfo.cellX=savedState.getInt(RUNTIME_STATE_PENDING_ADD_CELL_X);
+    addItemCellInfo.cellY=savedState.getInt(RUNTIME_STATE_PENDING_ADD_CELL_Y);
+    addItemCellInfo.spanX=savedState.getInt(RUNTIME_STATE_PENDING_ADD_SPAN_X);
+    addItemCellInfo.spanY=savedState.getInt(RUNTIME_STATE_PENDING_ADD_SPAN_Y);
+    addItemCellInfo.findVacantCellsFromOccupied(savedState.getBooleanArray(RUNTIME_STATE_PENDING_ADD_OCCUPIED_CELLS),savedState.getInt(RUNTIME_STATE_PENDING_ADD_COUNT_X),savedState.getInt(RUNTIME_STATE_PENDING_ADD_COUNT_Y));
+    mRestoring=true;
+  }
+  boolean renameFolder=savedState.getBoolean(RUNTIME_STATE_PENDING_FOLDER_RENAME,false);
+  if (renameFolder) {
+    long id=savedState.getLong(RUNTIME_STATE_PENDING_FOLDER_RENAME_ID);
+    mFolderInfo=mModel.getFolderById(this,mFolders,id);
+    mRestoring=true;
+  }
+}

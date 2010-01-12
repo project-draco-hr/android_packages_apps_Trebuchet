@@ -1,0 +1,4 @@
+{
+  mDesktopItems.remove(launcherInfo);
+  launcherInfo.hostView=null;
+}

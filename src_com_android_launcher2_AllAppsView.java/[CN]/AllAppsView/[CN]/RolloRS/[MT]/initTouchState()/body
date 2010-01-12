@@ -1,0 +1,18 @@
+{
+  int width=getWidth();
+  int height=getHeight();
+  int cellHeight=145;
+  int cellWidth=width / Defines.COLUMNS_PER_PAGE;
+  int centerY=(height / 2);
+  mTouchYBorders[0]=centerY - (cellHeight * 2);
+  mTouchYBorders[1]=centerY - cellHeight;
+  mTouchYBorders[2]=centerY;
+  mTouchYBorders[3]=centerY + cellHeight;
+  mTouchYBorders[4]=centerY + (cellHeight * 2);
+  int centerX=(width / 2);
+  mTouchXBorders[0]=0;
+  mTouchXBorders[1]=centerX - (width / 4);
+  mTouchXBorders[2]=centerX;
+  mTouchXBorders[3]=centerX + (width / 4);
+  mTouchXBorders[4]=width;
+}

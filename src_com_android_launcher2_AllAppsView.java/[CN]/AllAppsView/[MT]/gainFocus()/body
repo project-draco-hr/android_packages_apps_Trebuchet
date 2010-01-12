@@ -1,0 +1,7 @@
+{
+  if (!mArrowNavigation && mRollo.mState.iconCount > 0) {
+    mArrowNavigation=true;
+    mRollo.selectIcon(Math.round(mPosX) * Defines.COLUMNS_PER_PAGE,SELECTED_FOCUSED);
+    mRollo.mState.save();
+  }
+}

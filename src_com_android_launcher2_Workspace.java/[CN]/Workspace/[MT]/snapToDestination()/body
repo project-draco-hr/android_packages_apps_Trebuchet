@@ -1,0 +1,5 @@
+{
+  final int screenWidth=getWidth();
+  final int whichScreen=(mScrollX + (screenWidth / 2)) / screenWidth;
+  snapToScreen(whichScreen);
+}

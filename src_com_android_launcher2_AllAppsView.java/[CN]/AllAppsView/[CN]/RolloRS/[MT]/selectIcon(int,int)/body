@@ -1,0 +1,26 @@
+{
+  if (mAllAppsList == null || index < 0 || index >= mAllAppsList.size()) {
+    mState.selectedIconIndex=-1;
+    if (mLastSelection == SELECTION_ICONS) {
+      mLastSelection=SELECTION_NONE;
+    }
+  }
+ else {
+    if (pressed == SELECTED_FOCUSED) {
+      mLastSelection=SELECTION_ICONS;
+    }
+    int prev=mState.selectedIconIndex;
+    mState.selectedIconIndex=index;
+    ApplicationInfo info=mAllAppsList.get(index);
+    Bitmap selectionBitmap=mSelectionBitmap;
+    Utilities.drawSelectedAllAppsBitmap(mSelectionCanvas,selectionBitmap.getWidth(),selectionBitmap.getHeight(),pressed == SELECTED_PRESSED,info.iconBitmap);
+    mSelectedIcon=Allocation.createFromBitmap(mRS,selectionBitmap,Element.RGBA_8888(mRS),false);
+    mSelectedIcon.uploadToTexture(0);
+    mState.selectedIconTexture=mSelectedIcon.getID();
+    if (prev != index) {
+      if (info.title != null && info.title.length() > 0) {
+        sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_SELECTED);
+      }
+    }
+  }
+}

@@ -1,0 +1,3 @@
+{
+  addInScreen(child,mCurrentScreen,x,y,spanX,spanY,false);
+}

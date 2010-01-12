@@ -1,0 +1,27 @@
+{
+  super.onFocusChanged(gainFocus,direction,previouslyFocusedRect);
+  if (!isVisible()) {
+    return;
+  }
+  if (gainFocus) {
+    if (mRollo != null && mRollo.mHasSurface) {
+      gainFocus();
+    }
+ else {
+      mShouldGainFocus=true;
+    }
+  }
+ else {
+    if (mRollo != null) {
+      if (mArrowNavigation) {
+        mRollo.clearSelectedIcon();
+        mRollo.setHomeSelected(SELECTED_NONE);
+        mRollo.mState.save();
+        mArrowNavigation=false;
+      }
+    }
+ else {
+      mShouldGainFocus=false;
+    }
+  }
+}

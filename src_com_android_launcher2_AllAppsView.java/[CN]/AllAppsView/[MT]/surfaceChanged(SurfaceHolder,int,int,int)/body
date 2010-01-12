@@ -1,0 +1,24 @@
+{
+  super.surfaceChanged(holder,format,w,h);
+  if (mRollo == null) {
+    mRollo=new RolloRS();
+    mRollo.mHasSurface=true;
+    mRollo.init(getResources(),w,h);
+    if (mAllAppsList != null) {
+      mRollo.setApps(mAllAppsList);
+    }
+    if (mShouldGainFocus) {
+      gainFocus();
+      mShouldGainFocus=false;
+    }
+  }
+ else {
+    mRollo.mHasSurface=true;
+  }
+  mRollo.dirtyCheck();
+  mRollo.resize(w,h);
+  mRS.mMessageCallback=mMessageProc=new AAMessage();
+  mRS.mMessageCallback=mMessageProc=new AAMessage();
+  Resources res=getContext().getResources();
+  int barHeight=(int)res.getDimension(R.dimen.button_bar_height);
+}

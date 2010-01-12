@@ -1,0 +1,28 @@
+{
+  if (false) {
+    Log.d(Launcher.TAG,"DragController.onInterceptTouchEvent " + ev + " mDragging="+ mDragging);
+  }
+  final int action=ev.getAction();
+  if (action == MotionEvent.ACTION_DOWN) {
+    recordScreenSize();
+  }
+  final int screenX=clamp((int)ev.getRawX(),0,mDisplayMetrics.widthPixels);
+  final int screenY=clamp((int)ev.getRawY(),0,mDisplayMetrics.heightPixels);
+switch (action) {
+case MotionEvent.ACTION_MOVE:
+    break;
+case MotionEvent.ACTION_DOWN:
+  mMotionDownX=screenX;
+mMotionDownY=screenY;
+mLastDropTarget=null;
+break;
+case MotionEvent.ACTION_CANCEL:
+case MotionEvent.ACTION_UP:
+if (mDragging) {
+drop(screenX,screenY);
+}
+endDrag();
+break;
+}
+return mDragging;
+}

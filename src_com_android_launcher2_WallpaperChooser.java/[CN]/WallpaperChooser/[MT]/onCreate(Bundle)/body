@@ -1,0 +1,12 @@
+{
+  super.onCreate(icicle);
+  requestWindowFeature(Window.FEATURE_NO_TITLE);
+  findWallpapers();
+  setContentView(R.layout.wallpaper_chooser);
+  mGallery=(Gallery)findViewById(R.id.gallery);
+  mGallery.setAdapter(new ImageAdapter(this));
+  mGallery.setOnItemSelectedListener(this);
+  mGallery.setCallbackDuringFling(false);
+  findViewById(R.id.set).setOnClickListener(this);
+  mImageView=(ImageView)findViewById(R.id.wallpaper);
+}

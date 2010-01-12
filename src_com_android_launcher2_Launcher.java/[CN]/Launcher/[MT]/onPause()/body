@@ -1,0 +1,6 @@
+{
+  super.onPause();
+  dismissPreview(mPreviousView);
+  dismissPreview(mNextView);
+  mDragController.cancelDrag();
+}

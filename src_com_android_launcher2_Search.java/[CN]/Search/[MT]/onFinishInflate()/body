@@ -1,0 +1,14 @@
+{
+  super.onFinishInflate();
+  mSearchText=(TextView)findViewById(R.id.search_src_text);
+  mVoiceButton=(ImageButton)findViewById(R.id.search_voice_btn);
+  mSearchText.setOnKeyListener(this);
+  mSearchText.setOnClickListener(this);
+  mVoiceButton.setOnClickListener(this);
+  setOnClickListener(this);
+  mSearchText.setOnLongClickListener(this);
+  mVoiceButton.setOnLongClickListener(this);
+  Drawable googlePlaceholder=getContext().getResources().getDrawable(R.drawable.placeholder_google);
+  mSearchText.setCompoundDrawablesWithIntrinsicBounds(googlePlaceholder,null,null,null);
+  configureVoiceSearchButton();
+}

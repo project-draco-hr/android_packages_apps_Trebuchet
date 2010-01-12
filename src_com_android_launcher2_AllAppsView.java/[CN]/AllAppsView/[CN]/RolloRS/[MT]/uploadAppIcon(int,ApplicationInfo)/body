@@ -1,0 +1,7 @@
+{
+  if (mIconIds[index] != mIcons[index].getID()) {
+    throw new IllegalStateException("uploadAppIcon index=" + index + " mIcons[index].getID="+ mIcons[index].getID()+ " mIconsIds[index]="+ mIconIds[index]+ " item="+ item);
+  }
+  mIcons[index].uploadToTexture(0);
+  mLabels[index].uploadToTexture(0);
+}

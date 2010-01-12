@@ -1,0 +1,17 @@
+{
+  final Rect r=mRectTemp;
+  final ArrayList<DropTarget> dropTargets=mDropTargets;
+  final int count=dropTargets.size();
+  for (int i=count - 1; i >= 0; i--) {
+    final DropTarget target=dropTargets.get(i);
+    target.getHitRect(r);
+    target.getLocationOnScreen(dropCoordinates);
+    r.offset(dropCoordinates[0] - target.getLeft(),dropCoordinates[1] - target.getTop());
+    if (r.contains(x,y)) {
+      dropCoordinates[0]=x - dropCoordinates[0];
+      dropCoordinates[1]=y - dropCoordinates[1];
+      return target;
+    }
+  }
+  return null;
+}

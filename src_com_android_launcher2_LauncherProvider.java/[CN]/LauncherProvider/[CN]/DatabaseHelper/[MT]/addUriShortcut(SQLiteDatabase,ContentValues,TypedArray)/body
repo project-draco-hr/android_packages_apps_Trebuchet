@@ -1,0 +1,30 @@
+{
+  Resources r=mContext.getResources();
+  final int iconResId=a.getResourceId(R.styleable.Favorite_icon,0);
+  final int titleResId=a.getResourceId(R.styleable.Favorite_title,0);
+  Intent intent;
+  String uri=null;
+  try {
+    uri=a.getString(R.styleable.Favorite_uri);
+    intent=Intent.parseUri(uri,0);
+  }
+ catch (  URISyntaxException e) {
+    Log.w(TAG,"Shortcut has malformed uri: " + uri);
+    return false;
+  }
+  if (iconResId == 0 || titleResId == 0) {
+    Log.w(TAG,"Shortcut is missing title or icon resource ID");
+    return false;
+  }
+  intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+  values.put(Favorites.INTENT,intent.toUri(0));
+  values.put(Favorites.TITLE,r.getString(titleResId));
+  values.put(Favorites.ITEM_TYPE,Favorites.ITEM_TYPE_SHORTCUT);
+  values.put(Favorites.SPANX,1);
+  values.put(Favorites.SPANY,1);
+  values.put(Favorites.ICON_TYPE,Favorites.ICON_TYPE_RESOURCE);
+  values.put(Favorites.ICON_PACKAGE,mContext.getPackageName());
+  values.put(Favorites.ICON_RESOURCE,r.getResourceName(iconResId));
+  db.insert(TABLE_FAVORITES,null,values);
+  return true;
+}

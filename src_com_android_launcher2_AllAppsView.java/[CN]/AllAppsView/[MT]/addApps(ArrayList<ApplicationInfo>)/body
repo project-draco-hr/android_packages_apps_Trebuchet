@@ -1,0 +1,23 @@
+{
+  if (mAllAppsList == null) {
+    return;
+  }
+  final int N=list.size();
+  if (mRollo != null) {
+    mRollo.reallocAppsList(mRollo.mState.iconCount + N);
+  }
+  for (int i=0; i < N; i++) {
+    final ApplicationInfo item=list.get(i);
+    int index=Collections.binarySearch(mAllAppsList,item,LauncherModel.APP_NAME_COMPARATOR);
+    if (index < 0) {
+      index=-(index + 1);
+    }
+    mAllAppsList.add(index,item);
+    if (mRollo != null) {
+      mRollo.addApp(index,item);
+    }
+  }
+  if (mRollo != null) {
+    mRollo.saveAppsList();
+  }
+}

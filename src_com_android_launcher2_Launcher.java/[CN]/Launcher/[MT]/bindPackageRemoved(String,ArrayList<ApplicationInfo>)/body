@@ -1,0 +1,5 @@
+{
+  removeDialog(DIALOG_CREATE_SHORTCUT);
+  mWorkspace.removeShortcutsForPackage(packageName);
+  mAllAppsGrid.removeApps(apps);
+}

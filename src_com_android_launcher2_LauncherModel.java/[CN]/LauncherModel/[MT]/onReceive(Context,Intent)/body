@@ -1,0 +1,80 @@
+{
+  context=mApp;
+  final String packageName=intent.getData().getSchemeSpecificPart();
+  ArrayList<ApplicationInfo> added=null;
+  ArrayList<ApplicationInfo> removed=null;
+  ArrayList<ApplicationInfo> modified=null;
+synchronized (mLock) {
+    if (mBeforeFirstLoad) {
+      return;
+    }
+    final String action=intent.getAction();
+    final boolean replacing=intent.getBooleanExtra(Intent.EXTRA_REPLACING,false);
+    if (packageName == null || packageName.length() == 0) {
+      return;
+    }
+    if (Intent.ACTION_PACKAGE_CHANGED.equals(action)) {
+      mAllAppsList.updatePackage(context,packageName);
+    }
+ else     if (Intent.ACTION_PACKAGE_REMOVED.equals(action)) {
+      if (!replacing) {
+        mAllAppsList.removePackage(packageName);
+      }
+    }
+ else {
+      if (!replacing) {
+        mAllAppsList.addPackage(context,packageName);
+      }
+ else {
+        mAllAppsList.updatePackage(context,packageName);
+      }
+    }
+    if (mAllAppsList.added.size() > 0) {
+      added=mAllAppsList.added;
+      mAllAppsList.added=new ArrayList<ApplicationInfo>();
+    }
+    if (mAllAppsList.removed.size() > 0) {
+      removed=mAllAppsList.removed;
+      mAllAppsList.removed=new ArrayList<ApplicationInfo>();
+      for (      ApplicationInfo info : removed) {
+        AppInfoCache.remove(info.intent.getComponent());
+      }
+    }
+    if (mAllAppsList.modified.size() > 0) {
+      modified=mAllAppsList.modified;
+      mAllAppsList.modified=new ArrayList<ApplicationInfo>();
+    }
+    final Callbacks callbacks=mCallbacks != null ? mCallbacks.get() : null;
+    if (callbacks == null) {
+      Log.w(TAG,"Nobody to tell about the new app.  Launcher is probably loading.");
+      return;
+    }
+    if (added != null) {
+      final ArrayList<ApplicationInfo> addedFinal=added;
+      mHandler.post(new Runnable(){
+        public void run(){
+          callbacks.bindPackageAdded(addedFinal);
+        }
+      }
+);
+    }
+    if (modified != null) {
+      final ArrayList<ApplicationInfo> modifiedFinal=modified;
+      mHandler.post(new Runnable(){
+        public void run(){
+          callbacks.bindPackageUpdated(packageName,modifiedFinal);
+        }
+      }
+);
+    }
+    if (removed != null) {
+      final ArrayList<ApplicationInfo> removedFinal=removed;
+      mHandler.post(new Runnable(){
+        public void run(){
+          callbacks.bindPackageRemoved(packageName,removedFinal);
+        }
+      }
+);
+    }
+  }
+}

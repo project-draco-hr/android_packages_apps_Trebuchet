@@ -1,0 +1,3 @@
+{
+  addApplicationShortcut(info,cellInfo,false);
+}

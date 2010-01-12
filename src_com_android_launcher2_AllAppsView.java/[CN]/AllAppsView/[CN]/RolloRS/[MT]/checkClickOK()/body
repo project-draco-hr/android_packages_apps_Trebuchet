@@ -1,0 +1,3 @@
+{
+  return (Math.abs(mVelocity) < 0.4f) && (Math.abs(mPosX - Math.round(mPosX)) < 0.4f);
+}

@@ -1,0 +1,78 @@
+{
+  waitForOtherThread();
+synchronized (mLock) {
+    android.os.Process.setThreadPriority(mIsLaunching ? Process.THREAD_PRIORITY_DEFAULT : Process.THREAD_PRIORITY_BACKGROUND);
+  }
+  int workspaceSeq;
+  boolean workspaceDirty;
+synchronized (mLock) {
+    workspaceSeq=mWorkspaceSeq;
+    workspaceDirty=mWorkspaceSeq != mLastWorkspaceSeq;
+  }
+  if (workspaceDirty) {
+    loadWorkspace();
+  }
+synchronized (mLock) {
+    if (mStopped) {
+      return;
+    }
+    if (workspaceSeq == mWorkspaceSeq) {
+      mLastWorkspaceSeq=mWorkspaceSeq;
+    }
+  }
+  bindWorkspace();
+synchronized (LoaderThread.this) {
+    mHandler.postIdle(new Runnable(){
+      public void run(){
+synchronized (LoaderThread.this) {
+          mWorkspaceDoneBinding=true;
+          if (DEBUG_LOADERS) {
+            Log.d(TAG,"done with workspace");
+          }
+          LoaderThread.this.notify();
+        }
+      }
+    }
+);
+    if (DEBUG_LOADERS) {
+      Log.d(TAG,"waiting to be done with workspace");
+    }
+    while (!mStopped && !mWorkspaceDoneBinding) {
+      try {
+        this.wait();
+      }
+ catch (      InterruptedException ex) {
+      }
+    }
+    if (DEBUG_LOADERS) {
+      Log.d(TAG,"done waiting to be done with workspace");
+    }
+  }
+  int allAppsSeq;
+  boolean allAppsDirty;
+synchronized (mLock) {
+    allAppsSeq=mAllAppsSeq;
+    allAppsDirty=mAllAppsSeq != mLastAllAppsSeq;
+    if (DEBUG_LOADERS) {
+      Log.d(TAG,"mAllAppsSeq=" + mAllAppsSeq + " mLastAllAppsSeq="+ mLastAllAppsSeq+ " allAppsDirty");
+    }
+  }
+  if (allAppsDirty) {
+    loadAllApps();
+  }
+synchronized (mLock) {
+    if (mStopped) {
+      return;
+    }
+    if (allAppsSeq == mAllAppsSeq) {
+      mLastAllAppsSeq=mAllAppsSeq;
+    }
+  }
+  if (allAppsDirty) {
+    bindAllApps();
+  }
+  mContext=null;
+synchronized (mLock) {
+    mLoaderThread=null;
+  }
+}
