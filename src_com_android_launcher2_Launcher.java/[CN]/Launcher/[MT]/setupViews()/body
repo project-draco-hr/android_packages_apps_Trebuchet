@@ -33,6 +33,7 @@
   dragController.setDragScoller(workspace);
   dragController.setDragListener(deleteZone);
   dragController.setScrollView(dragLayer);
+  dragController.setMoveTarget(workspace);
   dragController.addDropTarget(workspace);
   dragController.addDropTarget(deleteZone);
 }
