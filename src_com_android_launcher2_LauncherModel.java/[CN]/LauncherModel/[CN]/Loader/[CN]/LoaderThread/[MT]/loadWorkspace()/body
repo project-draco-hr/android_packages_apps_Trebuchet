@@ -3,6 +3,7 @@
   final Context context=mContext;
   final ContentResolver contentResolver=context.getContentResolver();
   final PackageManager manager=context.getPackageManager();
+  final AppWidgetManager widgets=AppWidgetManager.getInstance(context);
   final boolean isSafeMode=manager.isSafeMode();
   mItems.clear();
   mAppWidgets.clear();
@@ -134,8 +135,14 @@ mFolders.put(liveFolderInfo.id,liveFolderInfo);
 break;
 case LauncherSettings.Favorites.ITEM_TYPE_APPWIDGET:
 int appWidgetId=c.getInt(appWidgetIdIndex);
+id=c.getLong(idIndex);
+final AppWidgetProviderInfo provider=widgets.getAppWidgetInfo(appWidgetId);
+if (!isSafeMode && (provider == null || provider.provider == null || provider.provider.getPackageName() == null)) {
+itemsToRemove.add(id);
+}
+ else {
 appWidgetInfo=new LauncherAppWidgetInfo(appWidgetId);
-appWidgetInfo.id=c.getLong(idIndex);
+appWidgetInfo.id=id;
 appWidgetInfo.screen=c.getInt(screenIndex);
 appWidgetInfo.cellX=c.getInt(cellXIndex);
 appWidgetInfo.cellY=c.getInt(cellYIndex);
@@ -148,6 +155,7 @@ continue;
 }
 appWidgetInfo.container=c.getInt(containerIndex);
 mAppWidgets.add(appWidgetInfo);
+}
 break;
 }
 }
