@@ -3,9 +3,11 @@
   final Context context=mContext;
   final ContentResolver contentResolver=context.getContentResolver();
   final PackageManager manager=context.getPackageManager();
+  final boolean isSafeMode=manager.isSafeMode();
   mItems.clear();
   mAppWidgets.clear();
   mFolders.clear();
+  final ArrayList<Long> itemsToRemove=new ArrayList<Long>();
   final Cursor c=contentResolver.query(LauncherSettings.Favorites.CONTENT_URI,null,null,null,null);
   try {
     final int idIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites._ID);
@@ -95,6 +97,12 @@ mFolders.put(folderInfo.id,folderInfo);
 break;
 case LauncherSettings.Favorites.ITEM_TYPE_LIVE_FOLDER:
 id=c.getLong(idIndex);
+Uri uri=Uri.parse(c.getString(uriIndex));
+final ProviderInfo providerInfo=context.getPackageManager().resolveContentProvider(uri.getAuthority(),0);
+if (providerInfo == null && !isSafeMode) {
+itemsToRemove.add(id);
+}
+ else {
 LiveFolderInfo liveFolderInfo=findOrMakeLiveFolder(mFolders,id);
 intentDescription=c.getString(intentIndex);
 intent=null;
@@ -107,12 +115,12 @@ intent=Intent.parseUri(intentDescription,0);
 }
 liveFolderInfo.title=c.getString(titleIndex);
 liveFolderInfo.id=id;
+liveFolderInfo.uri=uri;
 container=c.getInt(containerIndex);
 liveFolderInfo.container=container;
 liveFolderInfo.screen=c.getInt(screenIndex);
 liveFolderInfo.cellX=c.getInt(cellXIndex);
 liveFolderInfo.cellY=c.getInt(cellYIndex);
-liveFolderInfo.uri=Uri.parse(c.getString(uriIndex));
 liveFolderInfo.baseIntent=intent;
 liveFolderInfo.displayMode=c.getInt(displayModeIndex);
 loadLiveFolderIcon(context,c,iconTypeIndex,iconPackageIndex,iconResourceIndex,liveFolderInfo);
@@ -122,6 +130,7 @@ mItems.add(liveFolderInfo);
 break;
 }
 mFolders.put(liveFolderInfo.id,liveFolderInfo);
+}
 break;
 case LauncherSettings.Favorites.ITEM_TYPE_APPWIDGET:
 int appWidgetId=c.getInt(appWidgetIdIndex);
@@ -149,6 +158,20 @@ Log.w(TAG,"Desktop items loading interrupted:",e);
 }
   finally {
 c.close();
+}
+if (itemsToRemove.size() > 0) {
+ContentProviderClient client=contentResolver.acquireContentProviderClient(LauncherSettings.Favorites.CONTENT_URI);
+for (long id : itemsToRemove) {
+if (DEBUG_LOADERS) {
+Log.d(TAG,"Removed id = " + id);
+}
+try {
+client.delete(LauncherSettings.Favorites.getContentUri(id,false),null,null);
+}
+ catch (RemoteException e) {
+Log.w(TAG,"Could not remove id = " + id);
+}
+}
 }
 if (DEBUG_LOADERS) {
 Log.d(TAG,"loaded workspace in " + (SystemClock.uptimeMillis() - t) + "ms");
