@@ -37,7 +37,7 @@
           appWidgetManager.bindAppWidgetId(appWidgetId,new ComponentName("com.android.camera","com.android.camera.PhotoAppWidgetProvider"));
         }
  else         if (favoriteType == Favorites.ITEM_TYPE_WIDGET_SEARCH) {
-          appWidgetManager.bindAppWidgetId(appWidgetId,new ComponentName("com.android.quicksearchbox","com.android.quicksearchbox.SearchWidgetProvider"));
+          appWidgetManager.bindAppWidgetId(appWidgetId,getSearchWidgetProvider());
         }
       }
  catch (      RuntimeException ex) {

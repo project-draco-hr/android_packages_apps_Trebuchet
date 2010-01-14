@@ -1,4 +1,4 @@
 {
-  ComponentName cn=new ComponentName("com.android.quicksearchbox","com.android.quicksearchbox.SearchWidgetProvider");
+  ComponentName cn=getSearchWidgetProvider();
   return addAppWidget(db,values,cn,4,1);
 }
