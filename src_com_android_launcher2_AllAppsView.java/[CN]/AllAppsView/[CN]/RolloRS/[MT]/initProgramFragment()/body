@@ -9,6 +9,8 @@
   sb.setMag(Sampler.Value.NEAREST);
   Sampler nearest=sb.create();
   ProgramFragment.Builder bf=new ProgramFragment.Builder(mRS,null,null);
+  mPFColor=bf.create();
+  mPFColor.setName("PFColor");
   bf.setTexEnable(true,0);
   bf.setTexEnvMode(ProgramFragment.EnvMode.MODULATE,0);
   mPFTexMip=bf.create();

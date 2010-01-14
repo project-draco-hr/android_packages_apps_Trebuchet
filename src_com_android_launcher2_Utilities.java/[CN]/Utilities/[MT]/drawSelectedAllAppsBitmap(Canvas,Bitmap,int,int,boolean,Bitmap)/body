@@ -4,10 +4,12 @@ synchronized (sCanvas) {
       throw new RuntimeException("Assertion failed: Utilities not initialized");
     }
     dest.drawColor(0,PorterDuff.Mode.CLEAR);
+    dest.drawBitmap(src,sIconTextureRect,sIconTextureRect,sEmptyPaint);
     int[] xy=new int[2];
-    Bitmap mask=src.extractAlpha(sBlurPaint,xy);
+    Bitmap mask=destBitmap.extractAlpha(sBlurPaint,xy);
     float px=(destWidth - src.getWidth()) / 2;
     float py=(destHeight - src.getHeight()) / 2;
+    dest.drawColor(0,PorterDuff.Mode.CLEAR);
     dest.drawBitmap(mask,px + xy[0],py + xy[1],pressed ? sGlowColorPressedPaint : sGlowColorFocusedPaint);
     mask.recycle();
   }

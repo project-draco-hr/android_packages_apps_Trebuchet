@@ -4,6 +4,5 @@
   if (application.title == null) {
     application.title=info.activityInfo.name;
   }
-  application.iconBitmap=Utilities.createAllAppsBitmap(info.activityInfo.loadIcon(packageManager),context);
-  application.titleBitmap=bubble.createTextBitmap(application.title.toString());
+  application.iconBitmap=Utilities.createAllAppsBitmap(info.activityInfo.loadIcon(packageManager),application.title.toString(),bubble,context);
 }

@@ -3,8 +3,6 @@
   final int dest=index + 1;
   System.arraycopy(mIcons,index,mIcons,dest,count);
   System.arraycopy(mIconIds,index,mIconIds,dest,count);
-  System.arraycopy(mLabels,index,mLabels,dest,count);
-  System.arraycopy(mLabelIds,index,mLabelIds,dest,count);
   createAppIconAllocations(index,item);
   if (mHasSurface) {
     uploadAppIcon(index,item);

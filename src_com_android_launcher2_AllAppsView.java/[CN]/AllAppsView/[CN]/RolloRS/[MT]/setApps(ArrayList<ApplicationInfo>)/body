@@ -7,14 +7,13 @@
   mIcons=new Allocation[count];
   mIconIds=new int[allocCount];
   mAllocIconIds=Allocation.createSized(mRS,Element.USER_I32(mRS),allocCount);
-  mLabels=new Allocation[count];
-  mLabelIds=new int[allocCount];
-  mAllocLabelIds=Allocation.createSized(mRS,Element.USER_I32(mRS),allocCount);
   Element ie8888=Element.RGBA_8888(mRS);
   mState.iconCount=count;
+  long before=SystemClock.uptimeMillis();
   for (int i=0; i < mState.iconCount; i++) {
     createAppIconAllocations(i,list.get(i));
   }
+  long after=SystemClock.uptimeMillis();
   if (mHasSurface) {
     for (int i=0; i < mState.iconCount; i++) {
       uploadAppIcon(i,list.get(i));

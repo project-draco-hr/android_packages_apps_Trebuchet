@@ -34,13 +34,13 @@ synchronized (sCanvas) {
         height=sourceHeight;
       }
     }
-    int textureWidth=sIconTextureWidth;
-    int textureHeight=sIconTextureHeight;
+    final int textureWidth=sIconTextureWidth;
+    final int textureHeight=sIconTextureHeight;
     final Bitmap bitmap=Bitmap.createBitmap(textureWidth,textureHeight,Bitmap.Config.ARGB_8888);
     final Canvas canvas=sCanvas;
     canvas.setBitmap(bitmap);
     final int left=(textureWidth - width) / 2;
-    final int top=(textureHeight - height) / 2;
+    final int top=sIconTextureRect.top;
     if (false) {
       canvas.drawColor(sColors[sColorIndex]);
       if (++sColorIndex >= sColors.length)       sColorIndex=0;
@@ -52,6 +52,9 @@ synchronized (sCanvas) {
     icon.setBounds(left,top,left + width,top + height);
     icon.draw(canvas);
     icon.setBounds(sOldBounds);
+    if (title != null) {
+      bubble.drawText(canvas,title);
+    }
     return bitmap;
   }
 }
