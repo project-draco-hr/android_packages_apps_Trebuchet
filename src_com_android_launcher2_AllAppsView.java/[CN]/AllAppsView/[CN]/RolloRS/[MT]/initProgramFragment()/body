@@ -16,4 +16,8 @@
   mPFTexNearest=bf.create();
   mPFTexNearest.setName("PFTexNearest");
   mPFTexNearest.bindSampler(nearest,0);
+  bf.setTexture(ProgramFragment.Builder.EnvMode.MODULATE,ProgramFragment.Builder.Format.ALPHA,0);
+  mPFTexMipAlpha=bf.create();
+  mPFTexMipAlpha.setName("PFTexMipAlpha");
+  mPFTexMipAlpha.bindSampler(linear,0);
 }
