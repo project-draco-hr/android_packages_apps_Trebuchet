@@ -6,5 +6,22 @@
   mPV=pvb.create();
   mPV.setName("PV");
   mPV.bindAllocation(mPVA);
+  Element.Builder eb=new Element.Builder(mRS);
+  eb.add(Element.createVector(mRS,Element.DataType.FLOAT_32,2),"ImgSize");
+  eb.add(Element.createVector(mRS,Element.DataType.FLOAT_32,4),"Position");
+  Element e=eb.create();
+  mUniformAlloc=Allocation.createSized(mRS,e,1);
+  initMesh2();
+  ProgramVertex.ShaderBuilder sb=new ProgramVertex.ShaderBuilder(mRS);
+  String t=new String("void main() {\n" + "  float ani = UNI_Position.z;\n" + "  float scale = (2.0 / 480.0);\n"+ "  float x = UNI_Position.x + UNI_ImgSize.x * (1.0 - ani) * (ATTRIB_position.x - 0.5);\n"+ "  float ys= UNI_Position.y + UNI_ImgSize.y * (1.0 - ani) * ATTRIB_position.y;\n"+ "  float y = 0.0;\n"+ "  float z = 0.0;\n"+ "  float lum = 1.0;\n"+ "  float cv = min(ys, 50.0) - 50.0;\n"+ "  y += cv * 0.681;\n"+ "  z += -cv * 0.731;\n"+ "  cv = clamp(ys, 50.0, 120.0) - 120.0;\n"+ "  y += cv * cos(cv * 0.4 / (180.0 / 3.14));\n"+ "  z += cv * sin(cv * 0.4 / (180.0 / 3.14));\n"+ "  cv = max(ys, 750.0) - 750.0;\n"+ "  y += cv * 0.681;\n"+ "  z += cv * 0.731;\n"+ "  cv = clamp(ys, 680.0, 750.0) - 680.0;\n"+ "  y += cv * cos(cv * 0.4 / (180.0 / 3.14));\n"+ "  z += cv * sin(cv * 0.4 / (180.0 / 3.14));\n"+ "  y += clamp(ys, 120.0, 680.0);\n"+ "  lum += (clamp(ys, 60.0, 115.0) - 115.0) / 100.0;\n"+ "  lum -= (clamp(ys, 685.0, 740.0) - 685.0) / 100.0;\n"+ "  vec4 pos;\n"+ "  pos.x = x * scale - 1.0;\n"+ "  pos.y = y * scale - 1.66;\n"+ "  pos.z = z * scale;\n"+ "  pos.w = 1.0;\n"+ "  pos.x *= 1.0 + ani * 4.0;\n"+ "  pos.y *= 1.0 + ani * 4.0;\n"+ "  pos.z -= ani * 1.5;\n"+ "  lum *= 1.0 - ani;\n"+ "  gl_Position = UNI_MVP * pos;\n"+ "  varColor.rgba = vec4(lum, lum, lum, 1.0);\n"+ "  varTex0.xy = ATTRIB_position;\n"+ "  varTex0.y = 1.0 - varTex0.y;\n"+ "  varTex0.zw = vec2(0.0, 0.0);\n"+ "}\n");
+  sb.setShader(t);
+  sb.addConstant(mUniformAlloc.getType());
+  sb.addInput(mMesh.getVertexType(0).getElement());
+  mPVCurve=sb.create();
+  mPVCurve.setName("PVCurve");
+  mPVCurve.bindAllocation(mPVA);
+  mPVCurve.bindConstants(mUniformAlloc,1);
+  float tf[]=new float[]{72.f,72.f,0.f,0.f,120.f,120.f,0.f,0.f};
+  mUniformAlloc.data(tf);
   mRS.contextBindProgramVertex(mPV);
 }

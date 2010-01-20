@@ -3,7 +3,7 @@
   final DisplayMetrics metrics=resources.getDisplayMetrics();
   final float density=metrics.density;
   sIconWidth=sIconHeight=(int)resources.getDimension(android.R.dimen.app_icon_size);
-  sIconTextureWidth=sIconTextureHeight=roundToPow2(sIconWidth);
+  sIconTextureWidth=sIconTextureHeight=sIconWidth + 2;
   sBlurPaint.setMaskFilter(new BlurMaskFilter(5 * density,BlurMaskFilter.Blur.NORMAL));
   sGlowColorPressedPaint.setColor(0xffffc300);
   sGlowColorPressedPaint.setMaskFilter(TableMaskFilter.CreateClipTable(0,30));

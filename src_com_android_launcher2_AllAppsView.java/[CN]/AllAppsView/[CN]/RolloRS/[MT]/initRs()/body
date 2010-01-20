@@ -5,6 +5,7 @@
   sb.addDefines(mDefines);
   sb.setType(mParams.mType,"params",Defines.ALLOC_PARAMS);
   sb.setType(mState.mType,"state",Defines.ALLOC_STATE);
+  sb.setType(mUniformAlloc.getType(),"vpConstants",Defines.ALLOC_VP_CONSTANTS);
   mInvokeMove=sb.addInvokable("move");
   mInvokeFling=sb.addInvokable("fling");
   mInvokeMoveTo=sb.addInvokable("moveTo");
@@ -16,5 +17,6 @@
   mScript.bindAllocation(mState.mAlloc,Defines.ALLOC_STATE);
   mScript.bindAllocation(mAllocIconIds,Defines.ALLOC_ICON_IDS);
   mScript.bindAllocation(mAllocLabelIds,Defines.ALLOC_LABEL_IDS);
+  mScript.bindAllocation(mUniformAlloc,Defines.ALLOC_VP_CONSTANTS);
   mRS.contextBindRootScript(mScript);
 }

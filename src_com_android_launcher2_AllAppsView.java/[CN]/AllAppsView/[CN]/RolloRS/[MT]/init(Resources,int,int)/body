@@ -6,7 +6,6 @@
   initProgramVertex();
   initProgramFragment();
   initProgramStore();
-  initMesh();
   initGl();
   initData();
   initTouchState();
