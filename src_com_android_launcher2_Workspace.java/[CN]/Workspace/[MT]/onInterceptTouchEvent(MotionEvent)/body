@@ -40,7 +40,8 @@ case MotionEvent.ACTION_UP:
 if (mTouchState != TOUCH_STATE_SCROLLING) {
 final CellLayout currentScreen=(CellLayout)getChildAt(mCurrentScreen);
 if (!currentScreen.lastDownOnOccupiedCell()) {
-mWallpaperManager.sendWallpaperCommand(getWindowToken(),"android.wallpaper.tap",(int)ev.getX(),(int)ev.getY(),0,null);
+getLocationOnScreen(mTempCell);
+mWallpaperManager.sendWallpaperCommand(getWindowToken(),"android.wallpaper.tap",mTempCell[0] + (int)ev.getX(),mTempCell[1] + (int)ev.getY(),0,null);
 }
 }
 clearChildrenCache();
