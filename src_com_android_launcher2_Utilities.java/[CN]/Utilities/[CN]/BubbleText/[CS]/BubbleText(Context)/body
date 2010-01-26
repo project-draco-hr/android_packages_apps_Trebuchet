@@ -1,6 +1,8 @@
 {
   final Resources resources=context.getResources();
-  final float scale=resources.getDisplayMetrics().density;
+  final DisplayMetrics metrics=resources.getDisplayMetrics();
+  final float scale=metrics.density;
+  mDensity=metrics.densityDpi;
   final float paddingLeft=5.0f * scale;
   final float paddingRight=5.0f * scale;
   final float cellWidth=resources.getDimension(R.dimen.workspace_cell_width);
@@ -11,9 +13,6 @@
   bubbleRect.top=0;
   bubbleRect.right=(int)(bubbleWidth + 0.5f);
   mTextWidth=bubbleWidth - mBubblePadding - mBubblePadding;
-  Paint rectPaint=new Paint();
-  rectPaint.setColor(0xff000000);
-  rectPaint.setAntiAlias(true);
   TextPaint textPaint=mTextPaint=new TextPaint();
   textPaint.setTypeface(Typeface.DEFAULT);
   textPaint.setTextSize(13 * scale);

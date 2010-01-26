@@ -1,5 +1,6 @@
 {
   Bitmap b=Bitmap.createBitmap(mBitmapWidth,mBitmapHeight,Bitmap.Config.ALPHA_8);
+  b.setDensity(mDensity);
   Canvas c=new Canvas(b);
   StaticLayout layout=new StaticLayout(text,mTextPaint,(int)mTextWidth,Alignment.ALIGN_CENTER,1,0,true);
   int lineCount=layout.getLineCount();
@@ -7,9 +8,10 @@
     lineCount=MAX_LINES;
   }
   for (int i=0; i < lineCount; i++) {
-    int x=(int)(mBubbleRect.left + ((mBubbleRect.width() - layout.getLineMax(i)) / 2.0f));
+    final String lineText=text.substring(layout.getLineStart(i),layout.getLineEnd(i));
+    int x=(int)(mBubbleRect.left + ((mBubbleRect.width() - mTextPaint.measureText(lineText)) * 0.5f));
     int y=mFirstLineY + (i * mLineHeight);
-    c.drawText(text.substring(layout.getLineStart(i),layout.getLineEnd(i)),x,y,mTextPaint);
+    c.drawText(lineText,x,y,mTextPaint);
   }
   return b;
 }
