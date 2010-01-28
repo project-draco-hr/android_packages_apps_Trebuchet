@@ -6,5 +6,8 @@
       return onSearchRequested();
     }
   }
+  if (keyCode == KeyEvent.KEYCODE_MENU && event.isLongPress()) {
+    return true;
+  }
   return handled;
 }
