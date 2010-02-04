@@ -10,5 +10,7 @@
   if (mInvokeResetWAR != null) {
     mInvokeResetWAR.execute();
   }
-  mRS.contextBindRootScript(mScript);
+  if (mScript != null) {
+    mRS.contextBindRootScript(mScript);
+  }
 }
