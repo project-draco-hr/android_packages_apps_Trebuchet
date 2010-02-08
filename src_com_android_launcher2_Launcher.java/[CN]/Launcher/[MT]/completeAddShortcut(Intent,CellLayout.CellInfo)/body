@@ -1,7 +1,7 @@
 {
   cellInfo.screen=mWorkspace.getCurrentScreen();
   if (!findSingleSlot(cellInfo))   return;
-  final ApplicationInfo info=addShortcut(this,data,cellInfo,false);
+  final ShortcutInfo info=mModel.addShortcut(this,data,cellInfo,false);
   if (!mRestoring) {
     final View view=createShortcut(info);
     mWorkspace.addInCurrentScreen(view,cellInfo.cellX,cellInfo.cellY,1,1,isWorkspaceLocked());

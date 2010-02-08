@@ -7,23 +7,23 @@
       if (packageName.equals(component.getPackageName())) {
         if (!findActivity(matches,component)) {
           removed.add(applicationInfo);
-          AppInfoCache.remove(component);
+          mIconCache.remove(component);
           data.remove(i);
         }
       }
     }
-    Utilities.BubbleText bubble=new Utilities.BubbleText(context);
     int count=matches.size();
     for (int i=0; i < count; i++) {
       final ResolveInfo info=matches.get(i);
       ApplicationInfo applicationInfo=findApplicationInfoLocked(info.activityInfo.applicationInfo.packageName,info.activityInfo.name);
       if (applicationInfo == null) {
-        applicationInfo=AppInfoCache.cache(info,context,bubble);
+        applicationInfo=new ApplicationInfo(info,mIconCache);
         data.add(applicationInfo);
         added.add(applicationInfo);
       }
  else {
-        AppInfoCache.update(info,applicationInfo,context,bubble);
+        mIconCache.remove(applicationInfo.componentName);
+        mIconCache.getTitleAndIcon(applicationInfo,info);
         modified.add(applicationInfo);
       }
     }

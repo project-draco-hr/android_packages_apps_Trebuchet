@@ -37,7 +37,7 @@ synchronized (mLock) {
       removed=mAllAppsList.removed;
       mAllAppsList.removed=new ArrayList<ApplicationInfo>();
       for (      ApplicationInfo info : removed) {
-        AppInfoCache.remove(info.intent.getComponent());
+        mIconCache.remove(info.intent.getComponent());
       }
     }
     if (mAllAppsList.modified.size() > 0) {

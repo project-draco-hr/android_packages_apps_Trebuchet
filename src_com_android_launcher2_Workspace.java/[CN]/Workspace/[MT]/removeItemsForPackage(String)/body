@@ -12,8 +12,8 @@
         for (int j=0; j < childCount; j++) {
           final View view=layout.getChildAt(j);
           Object tag=view.getTag();
-          if (tag instanceof ApplicationInfo) {
-            final ApplicationInfo info=(ApplicationInfo)tag;
+          if (tag instanceof ShortcutInfo) {
+            final ShortcutInfo info=(ShortcutInfo)tag;
             final Intent intent=info.intent;
             final ComponentName name=intent.getComponent();
             if (Intent.ACTION_MAIN.equals(intent.getAction()) && name != null && packageName.equals(name.getPackageName())) {
@@ -23,12 +23,12 @@
           }
  else           if (tag instanceof UserFolderInfo) {
             final UserFolderInfo info=(UserFolderInfo)tag;
-            final ArrayList<ApplicationInfo> contents=info.contents;
-            final ArrayList<ApplicationInfo> toRemove=new ArrayList<ApplicationInfo>(1);
+            final ArrayList<ShortcutInfo> contents=info.contents;
+            final ArrayList<ShortcutInfo> toRemove=new ArrayList<ShortcutInfo>(1);
             final int contentsCount=contents.size();
             boolean removedFromFolder=false;
             for (int k=0; k < contentsCount; k++) {
-              final ApplicationInfo appInfo=contents.get(k);
+              final ShortcutInfo appInfo=contents.get(k);
               final Intent intent=appInfo.intent;
               final ComponentName name=intent.getComponent();
               if (Intent.ACTION_MAIN.equals(intent.getAction()) && name != null && packageName.equals(name.getPackageName())) {

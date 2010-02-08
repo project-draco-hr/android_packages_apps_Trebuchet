@@ -8,16 +8,16 @@ PackageManager packageManager=context.getPackageManager();
 try {
 Resources resources=packageManager.getResourcesForApplication(packageName);
 final int id=resources.getIdentifier(resourceName,null,null);
-liveFolderInfo.icon=resources.getDrawable(id);
+liveFolderInfo.icon=Utilities.createIconBitmap(resources.getDrawable(id),context);
 }
  catch (Exception e) {
-liveFolderInfo.icon=context.getResources().getDrawable(R.drawable.ic_launcher_folder);
+liveFolderInfo.icon=Utilities.createIconBitmap(context.getResources().getDrawable(R.drawable.ic_launcher_folder),context);
 }
 liveFolderInfo.iconResource=new Intent.ShortcutIconResource();
 liveFolderInfo.iconResource.packageName=packageName;
 liveFolderInfo.iconResource.resourceName=resourceName;
 break;
 default :
-liveFolderInfo.icon=context.getResources().getDrawable(R.drawable.ic_launcher_folder);
+liveFolderInfo.icon=Utilities.createIconBitmap(context.getResources().getDrawable(R.drawable.ic_launcher_folder),context);
 }
 }

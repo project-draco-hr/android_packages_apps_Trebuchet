@@ -1,0 +1,8 @@
+{
+synchronized (mCache) {
+    CacheEntry entry=cacheLocked(application.componentName,info);
+    application.title=entry.title;
+    application.titleBitmap=entry.titleBitmap;
+    application.iconBitmap=entry.icon;
+  }
+}
