@@ -1,4 +1,7 @@
 {
+  if (mUtsTestMode) {
+    return handleUtsTestModeKeyDown(keyCode,event);
+  }
   boolean handled=super.onKeyDown(keyCode,event);
   if (!handled && acceptFilter() && keyCode != KeyEvent.KEYCODE_ENTER) {
     boolean gotKey=TextKeyListener.getInstance().onKeyDown(mWorkspace,mDefaultKeySsb,keyCode,event);
