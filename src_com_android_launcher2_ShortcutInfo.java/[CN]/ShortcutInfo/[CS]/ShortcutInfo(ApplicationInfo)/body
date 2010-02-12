@@ -1,0 +1,6 @@
+{
+  super(info);
+  title=info.title.toString();
+  intent=new Intent(info.intent);
+  customIcon=false;
+}

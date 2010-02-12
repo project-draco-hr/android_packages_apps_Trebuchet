@@ -28,7 +28,7 @@
     final int spanYIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.SPANY);
     final int uriIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.URI);
     final int displayModeIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.DISPLAY_MODE);
-    ApplicationInfo info;
+    ShortcutInfo info;
     String intentDescription;
     LauncherAppWidgetInfo appWidgetInfo;
     int container;
@@ -48,14 +48,14 @@ case LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT:
           continue;
         }
       if (itemType == LauncherSettings.Favorites.ITEM_TYPE_APPLICATION) {
-        info=getApplicationInfo(manager,intent,context);
+        info=getShortcutInfo(manager,intent,context);
       }
  else {
-        info=getApplicationInfoShortcut(c,context,iconTypeIndex,iconPackageIndex,iconResourceIndex,iconIndex);
+        info=getShortcutInfo(c,context,iconTypeIndex,iconPackageIndex,iconResourceIndex,iconIndex);
       }
     if (info == null) {
-      info=new ApplicationInfo();
-      info.icon=manager.getDefaultActivityIcon();
+      info=new ShortcutInfo();
+      info.setIcon(getDefaultIcon());
     }
   if (info != null) {
     if (itemType != LauncherSettings.Favorites.ITEM_TYPE_APPLICATION) {

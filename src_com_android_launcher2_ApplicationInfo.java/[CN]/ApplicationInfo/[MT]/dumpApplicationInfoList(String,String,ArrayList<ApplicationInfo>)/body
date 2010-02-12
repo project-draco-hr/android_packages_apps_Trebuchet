@@ -1,6 +1,6 @@
 {
   Log.d(tag,label + " size=" + list.size());
   for (  ApplicationInfo info : list) {
-    Log.d(tag,"   title=\"" + info.title + "\" titleBitmap="+ info.titleBitmap+ " icon="+ info.icon+ " iconBitmap="+ info.iconBitmap+ " filtered="+ info.filtered+ " customIcon="+ info.customIcon);
+    Log.d(tag,"   title=\"" + info.title + "\" titleBitmap="+ info.titleBitmap+ " iconBitmap="+ info.iconBitmap);
   }
 }

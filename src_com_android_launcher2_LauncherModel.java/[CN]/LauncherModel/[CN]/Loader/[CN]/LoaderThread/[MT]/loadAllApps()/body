@@ -5,8 +5,7 @@
   if (callbacks == null) {
     return;
   }
-  final Context context=mContext;
-  final PackageManager packageManager=context.getPackageManager();
+  final PackageManager packageManager=mContext.getPackageManager();
   final List<ResolveInfo> apps=packageManager.queryIntentActivities(mainIntent,0);
 synchronized (mLock) {
     mBeforeFirstLoad=false;
@@ -14,9 +13,8 @@ synchronized (mLock) {
     if (apps != null) {
       long t=SystemClock.uptimeMillis();
       int N=apps.size();
-      Utilities.BubbleText bubble=new Utilities.BubbleText(context);
       for (int i=0; i < N && !mStopped; i++) {
-        mAllAppsList.add(AppInfoCache.cache(apps.get(i),context,bubble));
+        mAllAppsList.add(new ApplicationInfo(apps.get(i),mIconCache));
       }
       Collections.sort(mAllAppsList.data,APP_NAME_COMPARATOR);
       Collections.sort(mAllAppsList.added,APP_NAME_COMPARATOR);

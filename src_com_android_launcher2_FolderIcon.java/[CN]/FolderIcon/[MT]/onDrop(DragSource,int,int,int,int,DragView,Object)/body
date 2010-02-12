@@ -1,5 +1,11 @@
 {
-  final ApplicationInfo item=(ApplicationInfo)dragInfo;
+  ShortcutInfo item;
+  if (dragInfo instanceof ApplicationInfo) {
+    item=((ApplicationInfo)dragInfo).makeShortcut();
+  }
+ else {
+    item=(ShortcutInfo)dragInfo;
+  }
   mInfo.add(item);
   LauncherModel.addOrMoveItemInDatabase(mLauncher,item,mInfo.id,0,0,0);
 }

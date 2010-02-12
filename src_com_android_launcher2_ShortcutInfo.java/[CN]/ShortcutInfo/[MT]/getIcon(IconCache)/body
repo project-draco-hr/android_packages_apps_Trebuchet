@@ -1,0 +1,6 @@
+{
+  if (mIcon == null) {
+    mIcon=iconCache.getIcon(this.intent);
+  }
+  return mIcon;
+}

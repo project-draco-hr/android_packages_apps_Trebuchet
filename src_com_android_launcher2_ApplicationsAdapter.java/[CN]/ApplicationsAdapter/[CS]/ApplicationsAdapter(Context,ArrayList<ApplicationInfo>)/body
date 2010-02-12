@@ -1,5 +1,0 @@
-{
-  super(context,0,apps);
-  mPackageManager=context.getPackageManager();
-  mInflater=LayoutInflater.from(context);
-}

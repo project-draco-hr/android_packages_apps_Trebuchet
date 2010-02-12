@@ -2,9 +2,9 @@
   if (!view.isInTouchMode()) {
     return false;
   }
-  ApplicationInfo app=(ApplicationInfo)parent.getItemAtPosition(position);
+  ShortcutInfo app=(ShortcutInfo)parent.getItemAtPosition(position);
   if (mCloneInfo) {
-    app=new ApplicationInfo(app);
+    app=new ShortcutInfo(app);
   }
   mDragController.startDrag(view,this,app,DragController.DRAG_ACTION_COPY);
   mLauncher.closeFolder(this);

@@ -9,7 +9,6 @@
   TextKeyListener.getInstance().release();
   mModel.stopLoader();
   unbindDesktopItems();
-  AppInfoCache.unbindDrawables();
   getContentResolver().unregisterContentObserver(mWidgetObserver);
   dismissPreview(mPreviousView);
   dismissPreview(mNextView);

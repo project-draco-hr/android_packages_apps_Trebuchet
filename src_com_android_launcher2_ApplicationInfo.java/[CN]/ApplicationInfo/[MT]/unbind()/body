@@ -1,4 +1,0 @@
-{
-  super.unbind();
-  icon.setCallback(null);
-}

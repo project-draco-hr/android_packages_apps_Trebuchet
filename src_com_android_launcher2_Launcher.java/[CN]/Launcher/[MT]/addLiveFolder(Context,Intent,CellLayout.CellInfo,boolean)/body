@@ -2,7 +2,6 @@
   Intent baseIntent=data.getParcelableExtra(LiveFolders.EXTRA_LIVE_FOLDER_BASE_INTENT);
   String name=data.getStringExtra(LiveFolders.EXTRA_LIVE_FOLDER_NAME);
   Drawable icon=null;
-  boolean filtered=false;
   Intent.ShortcutIconResource iconResource=null;
   Parcelable extra=data.getParcelableExtra(LiveFolders.EXTRA_LIVE_FOLDER_ICON);
   if (extra != null && extra instanceof Intent.ShortcutIconResource) {
@@ -21,8 +20,7 @@
     icon=context.getResources().getDrawable(R.drawable.ic_launcher_folder);
   }
   final LiveFolderInfo info=new LiveFolderInfo();
-  info.icon=icon;
-  info.filtered=filtered;
+  info.icon=Utilities.createIconBitmap(icon,context);
   info.title=name;
   info.iconResource=iconResource;
   info.uri=data.getData();
