@@ -1,6 +1,7 @@
 {
   super.onResume();
   mPaused=false;
+  mUtsTestMode=SystemProperties.getInt("persist.sys.uts-test-mode",0) == 1;
   if (mRestoring) {
     mWorkspaceLoading=true;
     mModel.startLoader(this,true);
