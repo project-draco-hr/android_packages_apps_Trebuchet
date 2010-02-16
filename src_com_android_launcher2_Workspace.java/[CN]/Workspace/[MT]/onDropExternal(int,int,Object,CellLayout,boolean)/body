@@ -5,7 +5,7 @@ switch (info.itemType) {
 case LauncherSettings.Favorites.ITEM_TYPE_APPLICATION:
 case LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT:
     if (info.container == NO_ID) {
-      info=new ShortcutInfo((ShortcutInfo)info);
+      info=new ShortcutInfo((ApplicationInfo)info);
     }
   view=mLauncher.createShortcut(R.layout.application,cellLayout,(ShortcutInfo)info);
 break;
