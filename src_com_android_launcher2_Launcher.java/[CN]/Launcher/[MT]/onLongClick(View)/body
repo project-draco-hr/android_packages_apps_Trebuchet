@@ -33,6 +33,7 @@ if (mWorkspace.allowLongPress()) {
 if (cellInfo.cell == null) {
 if (cellInfo.valid) {
 mWorkspace.setAllowLongPress(false);
+mWorkspace.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS,HapticFeedbackConstants.FLAG_IGNORE_VIEW_SETTING);
 showAddDialog(cellInfo);
 }
 }
