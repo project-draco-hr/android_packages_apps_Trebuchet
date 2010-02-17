@@ -14,7 +14,9 @@
   }
   mRollo.dirtyCheck();
   mRollo.resize(w,h);
-  mRS.mMessageCallback=mMessageProc=new AAMessage();
+  if (mRS != null) {
+    mRS.mMessageCallback=mMessageProc=new AAMessage();
+  }
   Resources res=getContext().getResources();
   int barHeight=(int)res.getDimension(R.dimen.button_bar_height);
   if (mRollo.mUniformAlloc != null) {
