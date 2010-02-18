@@ -9,7 +9,9 @@
       child.layout(childLeft,childTop,childLeft + lp.width,childTop + lp.height);
       if (lp.dropped) {
         lp.dropped=false;
-        mWallpaperManager.sendWallpaperCommand(getWindowToken(),"android.home.drop",childLeft + lp.width / 2,childTop + lp.height / 2,0,null);
+        final int[] cellXY=mCellXY;
+        getLocationOnScreen(cellXY);
+        mWallpaperManager.sendWallpaperCommand(getWindowToken(),"android.home.drop",cellXY[0] + childLeft + lp.width / 2,cellXY[1] + childTop + lp.height / 2,0,null);
       }
     }
   }

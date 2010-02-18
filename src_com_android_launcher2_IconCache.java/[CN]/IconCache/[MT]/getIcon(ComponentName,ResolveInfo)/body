@@ -1,0 +1,7 @@
+{
+  if (resolveInfo == null || component == null) {
+    return null;
+  }
+  CacheEntry entry=cacheLocked(component,resolveInfo);
+  return entry.icon;
+}

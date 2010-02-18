@@ -1,8 +1,13 @@
 {
   cellInfo.screen=mWorkspace.getCurrentScreen();
   if (!findSingleSlot(cellInfo))   return;
-  final ApplicationInfo info=infoFromApplicationIntent(context,data);
+  final ShortcutInfo info=mModel.getShortcutInfo(context.getPackageManager(),data,context);
   if (info != null) {
+    info.setActivity(data.getComponent(),Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
+    info.container=ItemInfo.NO_ID;
     mWorkspace.addApplicationShortcut(info,cellInfo,isWorkspaceLocked());
+  }
+ else {
+    Log.e(TAG,"Couldn't find ActivityInfo for selected application: " + data);
   }
 }

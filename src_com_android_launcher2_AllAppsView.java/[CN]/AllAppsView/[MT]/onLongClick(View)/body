@@ -4,13 +4,14 @@
   }
   if (mRollo.checkClickOK() && mCurrentIconIndex == mDownIconIndex && mCurrentIconIndex >= 0 && mCurrentIconIndex < mAllAppsList.size()) {
     ApplicationInfo app=mAllAppsList.get(mCurrentIconIndex);
-    Bitmap bmp=Utilities.extractIconFromTexture(app.iconBitmap,getContext());
+    Bitmap bmp=app.iconBitmap;
     final int w=bmp.getWidth();
     final int h=bmp.getHeight();
     int screenX=mMotionDownRawX - (w / 2);
     int screenY=mMotionDownRawY - h;
+    int left=(mDefines.ICON_TEXTURE_WIDTH_PX - mDefines.ICON_WIDTH_PX) / 2;
+    int top=(mDefines.ICON_TEXTURE_HEIGHT_PX - mDefines.ICON_HEIGHT_PX) / 2;
     mDragController.startDrag(bmp,screenX,screenY,0,0,w,h,this,app,DragController.DRAG_ACTION_COPY);
-    bmp.recycle();
     mLauncher.closeAllApps(true);
   }
   return true;

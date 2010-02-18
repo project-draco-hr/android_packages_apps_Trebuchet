@@ -1,6 +1,8 @@
 {
   VMRuntime.getRuntime().setMinimumHeapSize(4 * 1024 * 1024);
   super.onCreate();
+  mIconCache=new IconCache(this);
+  mModel=new LauncherModel(this,mIconCache);
   IntentFilter filter=new IntentFilter(Intent.ACTION_PACKAGE_ADDED);
   filter.addAction(Intent.ACTION_PACKAGE_REMOVED);
   filter.addAction(Intent.ACTION_PACKAGE_CHANGED);

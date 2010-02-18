@@ -9,10 +9,12 @@
     Log.d(TAG,"mRollo.mIconIds.length=" + mIconIds.length);
   }
   Log.d(TAG,"mRollo.mIconIds=" + Arrays.toString(mIconIds));
+  if (mLabelIds != null) {
+    Log.d(TAG,"mRollo.mLabelIds.length=" + mLabelIds.length);
+  }
+  Log.d(TAG,"mRollo.mLabelIds=" + Arrays.toString(mLabelIds));
   Log.d(TAG,"mRollo.mTouchXBorders=" + Arrays.toString(mTouchXBorders));
   Log.d(TAG,"mRollo.mTouchYBorders=" + Arrays.toString(mTouchYBorders));
-  Log.d(TAG,"mRollo.mHasSurface=" + mHasSurface);
-  Log.d(TAG,"mRollo.mAppsDirty=" + mAppsDirty);
   Log.d(TAG,"mRollo.mState.newPositionX=" + mState.newPositionX);
   Log.d(TAG,"mRollo.mState.newTouchDown=" + mState.newTouchDown);
   Log.d(TAG,"mRollo.mState.flingVelocity=" + mState.flingVelocity);

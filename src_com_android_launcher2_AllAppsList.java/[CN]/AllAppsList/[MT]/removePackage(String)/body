@@ -8,5 +8,5 @@
       data.remove(i);
     }
   }
-  AppInfoCache.flush();
+  mIconCache.flush();
 }

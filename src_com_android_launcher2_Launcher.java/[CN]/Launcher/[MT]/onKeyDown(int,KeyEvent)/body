@@ -1,13 +1,13 @@
 {
-  if (mUtsTestMode) {
-    return handleUtsTestModeKeyDown(keyCode,event);
-  }
   boolean handled=super.onKeyDown(keyCode,event);
   if (!handled && acceptFilter() && keyCode != KeyEvent.KEYCODE_ENTER) {
     boolean gotKey=TextKeyListener.getInstance().onKeyDown(mWorkspace,mDefaultKeySsb,keyCode,event);
     if (gotKey && mDefaultKeySsb != null && mDefaultKeySsb.length() > 0) {
       return onSearchRequested();
     }
+  }
+  if (keyCode == KeyEvent.KEYCODE_MENU && event.isLongPress()) {
+    return true;
   }
   return handled;
 }

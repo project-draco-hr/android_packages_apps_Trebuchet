@@ -1,5 +1,0 @@
-{
-synchronized (sCache) {
-    sCache.remove(componentName);
-  }
-}

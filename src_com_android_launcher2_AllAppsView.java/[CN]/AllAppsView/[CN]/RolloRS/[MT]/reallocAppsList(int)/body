@@ -2,9 +2,16 @@
   Allocation[] icons=new Allocation[count];
   int[] iconIds=new int[count];
   mAllocIconIds=Allocation.createSized(mRS,Element.USER_I32(mRS),count);
+  Allocation[] labels=new Allocation[count];
+  int[] labelIds=new int[count];
+  mAllocLabelIds=Allocation.createSized(mRS,Element.USER_I32(mRS),count);
   final int oldCount=mRollo.mState.iconCount;
   System.arraycopy(mIcons,0,icons,0,oldCount);
   System.arraycopy(mIconIds,0,iconIds,0,oldCount);
+  System.arraycopy(mLabels,0,labels,0,oldCount);
+  System.arraycopy(mLabelIds,0,labelIds,0,oldCount);
   mIcons=icons;
   mIconIds=iconIds;
+  mLabels=labels;
+  mLabelIds=labelIds;
 }

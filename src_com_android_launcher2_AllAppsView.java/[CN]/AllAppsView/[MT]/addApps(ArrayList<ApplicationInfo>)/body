@@ -2,6 +2,9 @@
   if (mAllAppsList == null) {
     return;
   }
+  if (mRS == null) {
+    return;
+  }
   final int N=list.size();
   if (mRollo != null) {
     mRollo.reallocAppsList(mRollo.mState.iconCount + N);
