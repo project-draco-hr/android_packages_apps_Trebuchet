@@ -1,5 +1,6 @@
 {
   Log.d(TAG,"normalizing icons");
+  db.beginTransaction();
   Cursor c=null;
   try {
     boolean logged=false;
