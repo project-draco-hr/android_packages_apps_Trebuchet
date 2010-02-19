@@ -6,7 +6,7 @@ case REQUEST_PICK_APPLICATION:
       completeAddApplication(this,data,mAddItemCellInfo);
     break;
 case REQUEST_PICK_SHORTCUT:
-  processShortcut(data,REQUEST_PICK_APPLICATION,REQUEST_CREATE_SHORTCUT);
+  processShortcut(data);
 break;
 case REQUEST_CREATE_SHORTCUT:
 completeAddShortcut(data,mAddItemCellInfo);

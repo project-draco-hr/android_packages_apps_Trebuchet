@@ -4,7 +4,7 @@
 switch (which) {
 case AddAdapter.ITEM_SHORTCUT:
 {
-      pickShortcut(REQUEST_PICK_SHORTCUT,R.string.title_select_shortcut);
+      pickShortcut();
       break;
     }
 case AddAdapter.ITEM_APPWIDGET:
