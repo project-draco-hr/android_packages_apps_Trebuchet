@@ -1,5 +1,0 @@
-{
-  mCanvas.setDrawFilter(new PaintFlagsDrawFilter(Paint.DITHER_FLAG,Paint.FILTER_BITMAP_FLAG));
-  mResources=context.getResources();
-  mIconWidth=mIconHeight=(int)mResources.getDimension(android.R.dimen.app_icon_size);
-}

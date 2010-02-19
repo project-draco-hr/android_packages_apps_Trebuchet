@@ -1,6 +1,6 @@
 {
   if (success) {
-    ArrayAdapter<ApplicationInfo> adapter=(ArrayAdapter<ApplicationInfo>)mContent.getAdapter();
+    ShortcutsAdapter adapter=(ShortcutsAdapter)mContent.getAdapter();
     adapter.remove(mDragItem);
   }
 }

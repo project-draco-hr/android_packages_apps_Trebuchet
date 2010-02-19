@@ -3,9 +3,12 @@
   final Context context=mContext;
   final ContentResolver contentResolver=context.getContentResolver();
   final PackageManager manager=context.getPackageManager();
+  final AppWidgetManager widgets=AppWidgetManager.getInstance(context);
+  final boolean isSafeMode=manager.isSafeMode();
   mItems.clear();
   mAppWidgets.clear();
   mFolders.clear();
+  final ArrayList<Long> itemsToRemove=new ArrayList<Long>();
   final Cursor c=contentResolver.query(LauncherSettings.Favorites.CONTENT_URI,null,null,null,null);
   try {
     final int idIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites._ID);
@@ -25,7 +28,7 @@
     final int spanYIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.SPANY);
     final int uriIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.URI);
     final int displayModeIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.DISPLAY_MODE);
-    ApplicationInfo info;
+    ShortcutInfo info;
     String intentDescription;
     Widget widgetInfo;
     LauncherAppWidgetInfo appWidgetInfo;
@@ -46,14 +49,14 @@ case LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT:
           continue;
         }
       if (itemType == LauncherSettings.Favorites.ITEM_TYPE_APPLICATION) {
-        info=getApplicationInfo(manager,intent,context);
+        info=getShortcutInfo(manager,intent,context);
       }
  else {
-        info=getApplicationInfoShortcut(c,context,iconTypeIndex,iconPackageIndex,iconResourceIndex,iconIndex);
+        info=getShortcutInfo(c,context,iconTypeIndex,iconPackageIndex,iconResourceIndex,iconIndex);
       }
     if (info == null) {
-      info=new ApplicationInfo();
-      info.icon=manager.getDefaultActivityIcon();
+      info=new ShortcutInfo();
+      info.setIcon(getDefaultIcon());
     }
   if (info != null) {
     if (itemType != LauncherSettings.Favorites.ITEM_TYPE_APPLICATION) {
@@ -96,6 +99,12 @@ mFolders.put(folderInfo.id,folderInfo);
 break;
 case LauncherSettings.Favorites.ITEM_TYPE_LIVE_FOLDER:
 id=c.getLong(idIndex);
+Uri uri=Uri.parse(c.getString(uriIndex));
+final ProviderInfo providerInfo=context.getPackageManager().resolveContentProvider(uri.getAuthority(),0);
+if (providerInfo == null && !isSafeMode) {
+itemsToRemove.add(id);
+}
+ else {
 LiveFolderInfo liveFolderInfo=findOrMakeLiveFolder(mFolders,id);
 intentDescription=c.getString(intentIndex);
 intent=null;
@@ -108,12 +117,12 @@ intent=Intent.parseUri(intentDescription,0);
 }
 liveFolderInfo.title=c.getString(titleIndex);
 liveFolderInfo.id=id;
+liveFolderInfo.uri=uri;
 container=c.getInt(containerIndex);
 liveFolderInfo.container=container;
 liveFolderInfo.screen=c.getInt(screenIndex);
 liveFolderInfo.cellX=c.getInt(cellXIndex);
 liveFolderInfo.cellY=c.getInt(cellYIndex);
-liveFolderInfo.uri=Uri.parse(c.getString(uriIndex));
 liveFolderInfo.baseIntent=intent;
 liveFolderInfo.displayMode=c.getInt(displayModeIndex);
 loadLiveFolderIcon(context,c,iconTypeIndex,iconPackageIndex,iconResourceIndex,liveFolderInfo);
@@ -123,6 +132,7 @@ mItems.add(liveFolderInfo);
 break;
 }
 mFolders.put(liveFolderInfo.id,liveFolderInfo);
+}
 break;
 case LauncherSettings.Favorites.ITEM_TYPE_WIDGET_SEARCH:
 widgetInfo=Widget.makeSearch();
@@ -140,8 +150,14 @@ mItems.add(widgetInfo);
 break;
 case LauncherSettings.Favorites.ITEM_TYPE_APPWIDGET:
 int appWidgetId=c.getInt(appWidgetIdIndex);
+id=c.getLong(idIndex);
+final AppWidgetProviderInfo provider=widgets.getAppWidgetInfo(appWidgetId);
+if (!isSafeMode && (provider == null || provider.provider == null || provider.provider.getPackageName() == null)) {
+itemsToRemove.add(id);
+}
+ else {
 appWidgetInfo=new LauncherAppWidgetInfo(appWidgetId);
-appWidgetInfo.id=c.getLong(idIndex);
+appWidgetInfo.id=id;
 appWidgetInfo.screen=c.getInt(screenIndex);
 appWidgetInfo.cellX=c.getInt(cellXIndex);
 appWidgetInfo.cellY=c.getInt(cellYIndex);
@@ -154,6 +170,7 @@ continue;
 }
 appWidgetInfo.container=c.getInt(containerIndex);
 mAppWidgets.add(appWidgetInfo);
+}
 break;
 }
 }
@@ -164,6 +181,20 @@ Log.w(TAG,"Desktop items loading interrupted:",e);
 }
   finally {
 c.close();
+}
+if (itemsToRemove.size() > 0) {
+ContentProviderClient client=contentResolver.acquireContentProviderClient(LauncherSettings.Favorites.CONTENT_URI);
+for (long id : itemsToRemove) {
+if (DEBUG_LOADERS) {
+Log.d(TAG,"Removed id = " + id);
+}
+try {
+client.delete(LauncherSettings.Favorites.getContentUri(id,false),null,null);
+}
+ catch (RemoteException e) {
+Log.w(TAG,"Could not remove id = " + id);
+}
+}
 }
 if (DEBUG_LOADERS) {
 Log.d(TAG,"loaded workspace in " + (SystemClock.uptimeMillis() - t) + "ms");

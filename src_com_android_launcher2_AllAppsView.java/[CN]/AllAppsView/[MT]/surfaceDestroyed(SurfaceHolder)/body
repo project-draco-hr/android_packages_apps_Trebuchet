@@ -1,5 +1,6 @@
 {
   super.surfaceDestroyed(holder);
-  mRollo.mHasSurface=false;
   mRS.mMessageCallback=null;
+  mZoomDirty=true;
+  mHaveSurface=false;
 }

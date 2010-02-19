@@ -1,3 +1,5 @@
 {
   destroyRenderScript();
+  mRS.mMessageCallback=null;
+  mRS=null;
 }

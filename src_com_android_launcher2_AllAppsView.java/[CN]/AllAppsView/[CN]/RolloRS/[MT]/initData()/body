@@ -19,7 +19,7 @@
   mState.homeButtonId=mHomeButtonNormal.getID();
   mParams.save();
   mState.save();
-  mSelectionBitmap=Bitmap.createBitmap(Defines.ICON_TEXTURE_WIDTH_PX,Defines.ICON_TEXTURE_HEIGHT_PX,Bitmap.Config.ARGB_8888);
+  mSelectionBitmap=Bitmap.createBitmap(Defines.SELECTION_TEXTURE_WIDTH_PX,Defines.SELECTION_TEXTURE_HEIGHT_PX,Bitmap.Config.ARGB_8888);
   mSelectionCanvas=new Canvas(mSelectionBitmap);
   setApps(null);
 }

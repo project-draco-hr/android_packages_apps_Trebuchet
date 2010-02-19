@@ -1,7 +1,7 @@
 {
   Sampler.Builder sb=new Sampler.Builder(mRS);
   sb.setMin(Sampler.Value.LINEAR_MIP_LINEAR);
-  sb.setMag(Sampler.Value.LINEAR);
+  sb.setMag(Sampler.Value.NEAREST);
   sb.setWrapS(Sampler.Value.CLAMP);
   sb.setWrapT(Sampler.Value.CLAMP);
   Sampler linear=sb.create();
@@ -9,8 +9,6 @@
   sb.setMag(Sampler.Value.NEAREST);
   Sampler nearest=sb.create();
   ProgramFragment.Builder bf=new ProgramFragment.Builder(mRS);
-  mPFColor=bf.create();
-  mPFColor.setName("PFColor");
   bf.setTexture(ProgramFragment.Builder.EnvMode.MODULATE,ProgramFragment.Builder.Format.RGBA,0);
   mPFTexMip=bf.create();
   mPFTexMip.setName("PFTexMip");
@@ -18,4 +16,8 @@
   mPFTexNearest=bf.create();
   mPFTexNearest.setName("PFTexNearest");
   mPFTexNearest.bindSampler(nearest,0);
+  bf.setTexture(ProgramFragment.Builder.EnvMode.MODULATE,ProgramFragment.Builder.Format.ALPHA,0);
+  mPFTexMipAlpha=bf.create();
+  mPFTexMipAlpha.setName("PFTexMipAlpha");
+  mPFTexMipAlpha.bindSampler(linear,0);
 }

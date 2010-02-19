@@ -1,6 +1,14 @@
 {
   super.onPrepareOptionsMenu(menu);
-  mMenuAddInfo=mWorkspace.findAllVacantCells(null);
-  menu.setGroupEnabled(MENU_GROUP_ADD,mMenuAddInfo != null && mMenuAddInfo.valid);
+  if (mAllAppsGrid.isVisible() && !mAllAppsGrid.isOpaque()) {
+    return false;
+  }
+  boolean visible=!mAllAppsGrid.isOpaque();
+  menu.setGroupVisible(MENU_GROUP_ADD,visible);
+  menu.setGroupVisible(MENU_GROUP_WALLPAPER,visible);
+  if (visible) {
+    mMenuAddInfo=mWorkspace.findAllVacantCells(null);
+    menu.setGroupEnabled(MENU_GROUP_ADD,mMenuAddInfo != null && mMenuAddInfo.valid);
+  }
   return true;
 }

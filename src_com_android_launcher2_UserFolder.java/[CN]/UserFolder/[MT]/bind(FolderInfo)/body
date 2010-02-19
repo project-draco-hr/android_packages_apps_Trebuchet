@@ -1,4 +1,4 @@
 {
   super.bind(info);
-  setContentAdapter(new ApplicationsAdapter(mContext,((UserFolderInfo)info).contents));
+  setContentAdapter(new ShortcutsAdapter(mContext,((UserFolderInfo)info).contents));
 }

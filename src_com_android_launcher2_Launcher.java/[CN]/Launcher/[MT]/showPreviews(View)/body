@@ -1,0 +1,3 @@
+{
+  showPreviews(anchor,0,mWorkspace.getChildCount());
+}

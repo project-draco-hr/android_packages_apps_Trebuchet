@@ -5,9 +5,9 @@ switch (info.itemType) {
 case LauncherSettings.Favorites.ITEM_TYPE_APPLICATION:
 case LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT:
     if (info.container == NO_ID) {
-      info=new ApplicationInfo((ApplicationInfo)info);
+      info=new ShortcutInfo((ApplicationInfo)info);
     }
-  view=mLauncher.createShortcut(R.layout.application,cellLayout,(ApplicationInfo)info);
+  view=mLauncher.createShortcut(R.layout.application,cellLayout,(ShortcutInfo)info);
 break;
 case LauncherSettings.Favorites.ITEM_TYPE_USER_FOLDER:
 view=FolderIcon.fromXml(R.layout.folder_icon,mLauncher,(ViewGroup)getChildAt(mCurrentScreen),((UserFolderInfo)info));
