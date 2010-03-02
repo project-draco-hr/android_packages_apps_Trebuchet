@@ -1,5 +1,5 @@
 {
-  if (mScript != null) {
+  if (mScript != null && mAllocIconIds != null) {
     mRS.contextBindRootScript(null);
     mAllocIconIds.data(mIconIds);
     mAllocLabelIds.data(mLabelIds);
