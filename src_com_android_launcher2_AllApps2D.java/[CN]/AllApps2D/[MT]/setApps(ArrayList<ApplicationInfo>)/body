@@ -1,0 +1,4 @@
+{
+  mAllAppsList.clear();
+  addApps(list);
+}

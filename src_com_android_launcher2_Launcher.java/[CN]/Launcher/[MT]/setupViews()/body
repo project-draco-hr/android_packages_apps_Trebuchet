@@ -5,8 +5,8 @@
   mAllAppsGrid=(AllAppsView)dragLayer.findViewById(R.id.all_apps_view);
   mAllAppsGrid.setLauncher(this);
   mAllAppsGrid.setDragController(dragController);
-  mAllAppsGrid.setWillNotDraw(false);
-  mAllAppsGrid.setFocusable(false);
+  ((View)mAllAppsGrid).setWillNotDraw(false);
+  ((View)mAllAppsGrid).setFocusable(false);
   mWorkspace=(Workspace)dragLayer.findViewById(R.id.workspace);
   final Workspace workspace=mWorkspace;
   workspace.setHapticFeedbackEnabled(false);

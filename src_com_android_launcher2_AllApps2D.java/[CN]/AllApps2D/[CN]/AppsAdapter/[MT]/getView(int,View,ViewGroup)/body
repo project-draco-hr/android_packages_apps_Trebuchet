@@ -1,0 +1,10 @@
+{
+  final ApplicationInfo info=getItem(position);
+  if (convertView == null) {
+    convertView=mInflater.inflate(R.layout.application_boxed,parent,false);
+  }
+  final TextView textView=(TextView)convertView;
+  textView.setCompoundDrawablesWithIntrinsicBounds(null,new BitmapDrawable(info.iconBitmap),null,null);
+  textView.setText(info.title);
+  return convertView;
+}

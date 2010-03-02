@@ -1,6 +1,6 @@
 {
   mAllAppsGrid.zoom(1.0f,animated);
-  mAllAppsGrid.setFocusable(true);
-  mAllAppsGrid.requestFocus();
+  ((View)mAllAppsGrid).setFocusable(true);
+  ((View)mAllAppsGrid).requestFocus();
   mDeleteZone.setVisibility(View.GONE);
 }

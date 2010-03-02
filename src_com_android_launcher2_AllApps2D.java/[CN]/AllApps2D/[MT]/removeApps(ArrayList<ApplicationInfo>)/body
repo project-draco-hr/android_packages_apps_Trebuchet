@@ -1,0 +1,14 @@
+{
+  final int N=list.size();
+  for (int i=0; i < N; i++) {
+    final ApplicationInfo item=list.get(i);
+    int index=findAppByComponent(mAllAppsList,item);
+    if (index >= 0) {
+      mAllAppsList.remove(index);
+    }
+ else {
+      Log.w(TAG,"couldn't find a match for item \"" + item + "\"");
+    }
+  }
+  mAppsAdapter.notifyDataSetChanged();
+}

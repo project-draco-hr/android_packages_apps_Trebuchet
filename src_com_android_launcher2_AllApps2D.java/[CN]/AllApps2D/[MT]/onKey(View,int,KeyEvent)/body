@@ -1,0 +1,11 @@
+{
+  if (!isVisible())   return false;
+switch (keyCode) {
+case KeyEvent.KEYCODE_BACK:
+    mLauncher.closeAllApps(true);
+  break;
+default :
+return false;
+}
+return true;
+}

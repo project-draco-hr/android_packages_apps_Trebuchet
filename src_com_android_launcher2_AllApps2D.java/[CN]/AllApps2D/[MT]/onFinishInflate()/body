@@ -1,0 +1,14 @@
+{
+  setBackgroundColor(0xFF000000);
+  mGrid=(GridView)findViewById(R.id.all_apps_2d_grid);
+  mGrid.setOnItemClickListener(this);
+  mGrid.setOnItemLongClickListener(this);
+  setOnKeyListener(this);
+  ImageButton homeButton=(ImageButton)findViewById(R.id.all_apps_2d_home);
+  homeButton.setOnClickListener(new View.OnClickListener(){
+    public void onClick(    View v){
+      mLauncher.closeAllApps(true);
+    }
+  }
+);
+}
