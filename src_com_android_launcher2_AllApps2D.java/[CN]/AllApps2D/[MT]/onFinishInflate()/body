@@ -1,14 +1,21 @@
 {
   setBackgroundColor(0xFF000000);
-  mGrid=(GridView)findViewById(R.id.all_apps_2d_grid);
-  mGrid.setOnItemClickListener(this);
-  mGrid.setOnItemLongClickListener(this);
-  setOnKeyListener(this);
-  ImageButton homeButton=(ImageButton)findViewById(R.id.all_apps_2d_home);
-  homeButton.setOnClickListener(new View.OnClickListener(){
-    public void onClick(    View v){
-      mLauncher.closeAllApps(true);
+  try {
+    mGrid=(GridView)findViewWithTag("all_apps_2d_grid");
+    if (mGrid == null)     throw new Resources.NotFoundException();
+    mGrid.setOnItemClickListener(this);
+    mGrid.setOnItemLongClickListener(this);
+    ImageButton homeButton=(ImageButton)findViewWithTag("all_apps_2d_home");
+    if (homeButton == null)     throw new Resources.NotFoundException();
+    homeButton.setOnClickListener(new View.OnClickListener(){
+      public void onClick(      View v){
+        mLauncher.closeAllApps(true);
+      }
     }
-  }
 );
+  }
+ catch (  Resources.NotFoundException e) {
+    Log.e(TAG,"Can't find necessary layout elements for AllApps2D");
+  }
+  setOnKeyListener(this);
 }

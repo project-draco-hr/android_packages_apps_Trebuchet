@@ -7,4 +7,5 @@
  else {
     mZoom=1.0f;
   }
+  mLauncher.zoomed(mZoom);
 }
