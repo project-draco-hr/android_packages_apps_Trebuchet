@@ -4,8 +4,6 @@
   Cursor c=null;
   try {
     boolean logged=false;
-    final ContentValues values=new ContentValues();
-    final ContentResolver cr=mContext.getContentResolver();
     final SQLiteStatement update=db.compileStatement("UPDATE favorites " + "SET icon=? WHERE _id=?");
     c=db.rawQuery("SELECT _id, icon FROM favorites WHERE iconType=" + Favorites.ICON_TYPE_BITMAP,null);
     final int idIndex=c.getColumnIndexOrThrow(Favorites._ID);

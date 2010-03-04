@@ -29,7 +29,6 @@
         }
         String updateWhere=Favorites._ID + "=" + favoriteId;
         db.update(TABLE_FAVORITES,values,updateWhere,null);
-        ComponentName cn=null;
         if (favoriteType == Favorites.ITEM_TYPE_WIDGET_CLOCK) {
           appWidgetManager.bindAppWidgetId(appWidgetId,new ComponentName("com.android.alarmclock","com.android.alarmclock.AnalogAppWidgetProvider"));
         }
