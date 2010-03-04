@@ -47,7 +47,6 @@ if (mTouchTracking == TRACKING_HOME) {
   mRollo.mState.save();
 }
  else if (mTouchTracking == TRACKING_FLING) {
-  int rawX=(int)ev.getRawX();
   int rawY=(int)ev.getRawY();
   int slop;
   slop=Math.abs(rawY - mMotionDownRawY);

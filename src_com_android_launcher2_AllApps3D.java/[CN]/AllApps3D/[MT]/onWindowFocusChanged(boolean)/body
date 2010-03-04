@@ -7,12 +7,12 @@
       mRollo.clearSelectedIcon();
       mRollo.mState.save();
     }
- else     if (hasWindowFocus) {
+ else {
       if (mRollo.mState.iconCount > 0) {
         if (mLastSelection == SELECTION_ICONS) {
           int selection=mLastSelectedIcon;
-          final int firstIcon=Math.round(mPosX) * Defines.COLUMNS_PER_PAGE;
-          if (selection < 0 || selection < firstIcon || selection >= mRollo.mState.iconCount || selection >= firstIcon + (Defines.COLUMNS_PER_PAGE * Defines.ROWS_PER_PAGE)) {
+          final int firstIcon=Math.round(mPosX) * mColumnsPerPage;
+          if (selection < 0 || selection < firstIcon || selection >= mRollo.mState.iconCount || selection >= firstIcon + (mColumnsPerPage * mRowsPerPage)) {
             selection=firstIcon;
           }
           mRollo.selectIcon(selection,SELECTED_FOCUSED);

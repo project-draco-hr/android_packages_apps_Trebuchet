@@ -17,8 +17,6 @@
   if (mRS != null) {
     mRS.mMessageCallback=mMessageProc=new AAMessage();
   }
-  Resources res=getContext().getResources();
-  int barHeight=(int)res.getDimension(R.dimen.button_bar_height);
   if (mRollo.mUniformAlloc != null) {
     float tf[]=new float[]{72.f,72.f,120.f,120.f,0.f,0.f,120.f,680.f,(2.f / 480.f),0,-((float)w / 2) - 0.25f,-380.25f};
     if (w > h) {

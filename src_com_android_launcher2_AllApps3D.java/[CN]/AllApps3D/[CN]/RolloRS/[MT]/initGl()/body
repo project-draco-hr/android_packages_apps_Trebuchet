@@ -1,4 +1,4 @@
 {
-  mTouchXBorders=new int[Defines.COLUMNS_PER_PAGE + 1];
-  mTouchYBorders=new int[Defines.ROWS_PER_PAGE + 1];
+  mTouchXBorders=new int[mColumnsPerPage + 1];
+  mTouchYBorders=new int[mRowsPerPage + 1];
 }

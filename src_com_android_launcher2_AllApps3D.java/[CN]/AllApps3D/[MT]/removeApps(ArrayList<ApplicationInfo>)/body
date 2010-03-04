@@ -7,7 +7,6 @@
     final ApplicationInfo item=list.get(i);
     int index=findAppByComponent(mAllAppsList,item);
     if (index >= 0) {
-      int ic=mRollo != null ? mRollo.mState.iconCount : 666;
       mAllAppsList.remove(index);
       if (mRollo != null) {
         mRollo.removeApp(index);

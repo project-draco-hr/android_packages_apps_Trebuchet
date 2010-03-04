@@ -24,22 +24,22 @@
     mArrowNavigation=true;
     int currentSelection=mRollo.mState.selectedIconIndex;
     int currentTopRow=Math.round(mPosX);
-    final int currentPageCol=currentSelection % Defines.COLUMNS_PER_PAGE;
-    final int currentPageRow=(currentSelection - (currentTopRow * Defines.COLUMNS_PER_PAGE)) / Defines.ROWS_PER_PAGE;
+    final int currentPageCol=currentSelection % mColumnsPerPage;
+    final int currentPageRow=(currentSelection - (currentTopRow * mColumnsPerPage)) / mRowsPerPage;
     int newSelection=currentSelection;
 switch (keyCode) {
 case KeyEvent.KEYCODE_DPAD_UP:
       if (mLastSelection == SELECTION_HOME) {
         mRollo.setHomeSelected(SELECTED_NONE);
-        int lastRowCount=iconCount % Defines.COLUMNS_PER_PAGE;
+        int lastRowCount=iconCount % mColumnsPerPage;
         if (lastRowCount == 0) {
-          lastRowCount=Defines.COLUMNS_PER_PAGE;
+          lastRowCount=mColumnsPerPage;
         }
-        newSelection=iconCount - lastRowCount + (Defines.COLUMNS_PER_PAGE / 2);
+        newSelection=iconCount - lastRowCount + (mColumnsPerPage / 2);
         if (newSelection >= iconCount) {
           newSelection=iconCount - 1;
         }
-        int target=(newSelection / Defines.COLUMNS_PER_PAGE) - (Defines.ROWS_PER_PAGE - 1);
+        int target=(newSelection / mColumnsPerPage) - (mRowsPerPage - 1);
         if (target < 0) {
           target=0;
         }
@@ -49,22 +49,22 @@ case KeyEvent.KEYCODE_DPAD_UP:
       }
  else {
         if (currentPageRow > 0) {
-          newSelection=currentSelection - Defines.COLUMNS_PER_PAGE;
+          newSelection=currentSelection - mColumnsPerPage;
         }
  else         if (currentTopRow > 0) {
-          newSelection=currentSelection - Defines.COLUMNS_PER_PAGE;
-          mRollo.moveTo(newSelection / Defines.COLUMNS_PER_PAGE);
+          newSelection=currentSelection - mColumnsPerPage;
+          mRollo.moveTo(newSelection / mColumnsPerPage);
         }
  else         if (currentPageRow != 0) {
-          newSelection=currentTopRow * Defines.ROWS_PER_PAGE;
+          newSelection=currentTopRow * mRowsPerPage;
         }
       }
     handled=true;
   break;
 case KeyEvent.KEYCODE_DPAD_DOWN:
 {
-  final int rowCount=iconCount / Defines.COLUMNS_PER_PAGE + (iconCount % Defines.COLUMNS_PER_PAGE == 0 ? 0 : 1);
-  final int currentRow=currentSelection / Defines.COLUMNS_PER_PAGE;
+  final int rowCount=iconCount / mColumnsPerPage + (iconCount % mColumnsPerPage == 0 ? 0 : 1);
+  final int currentRow=currentSelection / mColumnsPerPage;
   if (mLastSelection != SELECTION_HOME) {
     if (currentRow < rowCount - 1) {
       mRollo.setHomeSelected(SELECTED_NONE);
@@ -72,13 +72,13 @@ case KeyEvent.KEYCODE_DPAD_DOWN:
         newSelection=0;
       }
  else {
-        newSelection=currentSelection + Defines.COLUMNS_PER_PAGE;
+        newSelection=currentSelection + mColumnsPerPage;
       }
       if (newSelection >= iconCount) {
         newSelection=iconCount - 1;
       }
-      if (currentPageRow >= Defines.ROWS_PER_PAGE - 1) {
-        mRollo.moveTo((newSelection / Defines.COLUMNS_PER_PAGE) - Defines.ROWS_PER_PAGE + 1);
+      if (currentPageRow >= mRowsPerPage - 1) {
+        mRollo.moveTo((newSelection / mColumnsPerPage) - mRowsPerPage + 1);
       }
     }
  else {
@@ -99,7 +99,7 @@ handled=true;
 break;
 case KeyEvent.KEYCODE_DPAD_RIGHT:
 if (mLastSelection != SELECTION_HOME) {
-if ((currentPageCol < Defines.COLUMNS_PER_PAGE - 1) && (currentSelection < iconCount - 1)) {
+if ((currentPageCol < mColumnsPerPage - 1) && (currentSelection < iconCount - 1)) {
 newSelection=currentSelection + 1;
 }
 }

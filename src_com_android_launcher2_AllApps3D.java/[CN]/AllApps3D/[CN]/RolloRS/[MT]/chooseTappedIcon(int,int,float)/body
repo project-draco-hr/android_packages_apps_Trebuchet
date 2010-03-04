@@ -2,13 +2,15 @@
   y+=(pos - ((int)pos)) * (mTouchYBorders[1] - mTouchYBorders[0]);
   int col=-1;
   int row=-1;
-  for (int i=0; i < Defines.COLUMNS_PER_PAGE; i++) {
+  final int columnsCount=mColumnsPerPage;
+  for (int i=0; i < columnsCount; i++) {
     if (x >= mTouchXBorders[i] && x < mTouchXBorders[i + 1]) {
       col=i;
       break;
     }
   }
-  for (int i=0; i < Defines.ROWS_PER_PAGE; i++) {
+  final int rowsCount=mRowsPerPage;
+  for (int i=0; i < rowsCount; i++) {
     if (y >= mTouchYBorders[i] && y < mTouchYBorders[i + 1]) {
       row=i;
       break;
@@ -17,7 +19,7 @@
   if (row < 0 || col < 0) {
     return -1;
   }
-  int index=(((int)pos) * Defines.COLUMNS_PER_PAGE) + (row * Defines.ROWS_PER_PAGE) + col;
+  int index=(((int)pos) * columnsCount) + (row * columnsCount) + col;
   if (index >= mState.iconCount) {
     return -1;
   }

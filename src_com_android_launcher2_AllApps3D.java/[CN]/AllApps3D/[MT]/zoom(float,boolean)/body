@@ -5,7 +5,6 @@
   if (mRollo == null || !mHaveSurface) {
     mZoomDirty=true;
     mZoom=zoom;
-    return;
   }
  else {
     mRollo.setZoom(zoom,animate);

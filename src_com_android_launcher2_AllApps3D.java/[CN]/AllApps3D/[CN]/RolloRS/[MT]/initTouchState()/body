@@ -1,18 +1,18 @@
 {
-  int width=getWidth();
-  int height=getHeight();
+  boolean isPortrait=getWidth() < getHeight();
   int cellHeight=145;
-  int cellWidth=width / Defines.COLUMNS_PER_PAGE;
-  int centerY=(height / 2);
-  mTouchYBorders[0]=centerY - (cellHeight * 2);
-  mTouchYBorders[1]=centerY - cellHeight;
-  mTouchYBorders[2]=centerY;
-  mTouchYBorders[3]=centerY + cellHeight;
-  mTouchYBorders[4]=centerY + (cellHeight * 2);
-  int centerX=(width / 2);
-  mTouchXBorders[0]=0;
-  mTouchXBorders[1]=centerX - (width / 4);
-  mTouchXBorders[2]=centerX;
-  mTouchXBorders[3]=centerX + (width / 4);
-  mTouchXBorders[4]=width;
+  if (!isPortrait)   cellHeight-=12;
+  int centerY=(int)(getHeight() * (isPortrait ? 0.5f : 0.47f));
+  if (!isPortrait)   centerY+=cellHeight / 2;
+  int half=(int)Math.floor((mRowsPerPage + 1) / 2);
+  int end=mTouchYBorders.length - (half + 1);
+  for (int i=-half; i <= end; i++) {
+    mTouchYBorders[i + half]=centerY + i * cellHeight;
+  }
+  int x=0;
+  int columnWidth=120;
+  for (int i=0; i < mColumnsPerPage + 1; i++) {
+    mTouchXBorders[i]=x;
+    x+=columnWidth;
+  }
 }
