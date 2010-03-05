@@ -1,6 +1,6 @@
 {
+  Log.d(TAG,"onReceive intent=" + intent);
   context=mApp;
-  final String packageName=intent.getData().getSchemeSpecificPart();
   ArrayList<ApplicationInfo> added=null;
   ArrayList<ApplicationInfo> removed=null;
   ArrayList<ApplicationInfo> modified=null;
@@ -9,24 +9,43 @@ synchronized (mLock) {
       return;
     }
     final String action=intent.getAction();
-    final boolean replacing=intent.getBooleanExtra(Intent.EXTRA_REPLACING,false);
-    if (packageName == null || packageName.length() == 0) {
-      return;
-    }
-    if (Intent.ACTION_PACKAGE_CHANGED.equals(action)) {
-      mAllAppsList.updatePackage(context,packageName);
-    }
- else     if (Intent.ACTION_PACKAGE_REMOVED.equals(action)) {
-      if (!replacing) {
-        mAllAppsList.removePackage(packageName);
+    if (Intent.ACTION_PACKAGE_CHANGED.equals(action) || Intent.ACTION_PACKAGE_REMOVED.equals(action) || Intent.ACTION_PACKAGE_ADDED.equals(action)) {
+      final String packageName=intent.getData().getSchemeSpecificPart();
+      final boolean replacing=intent.getBooleanExtra(Intent.EXTRA_REPLACING,false);
+      if (packageName == null || packageName.length() == 0) {
+        return;
       }
-    }
- else {
-      if (!replacing) {
-        mAllAppsList.addPackage(context,packageName);
-      }
- else {
+      if (Intent.ACTION_PACKAGE_CHANGED.equals(action)) {
         mAllAppsList.updatePackage(context,packageName);
+      }
+ else       if (Intent.ACTION_PACKAGE_REMOVED.equals(action)) {
+        if (!replacing) {
+          mAllAppsList.removePackage(packageName);
+        }
+      }
+ else       if (Intent.ACTION_PACKAGE_ADDED.equals(action)) {
+        if (!replacing) {
+          mAllAppsList.addPackage(context,packageName);
+        }
+ else {
+          mAllAppsList.updatePackage(context,packageName);
+        }
+      }
+    }
+ else {
+      if (Intent.ACTION_EXTERNAL_APPLICATIONS_AVAILABLE.equals(action)) {
+        String packages[]=intent.getStringArrayExtra(Intent.EXTRA_CHANGED_PACKAGE_LIST);
+        if (packages == null || packages.length == 0) {
+          return;
+        }
+        Log.d(TAG,"they're back! " + packages);
+      }
+ else       if (Intent.ACTION_EXTERNAL_APPLICATIONS_UNAVAILABLE.equals(action)) {
+        String packages[]=intent.getStringArrayExtra(Intent.EXTRA_CHANGED_PACKAGE_LIST);
+        if (packages == null || packages.length == 0) {
+          return;
+        }
+        Log.d(TAG,"they're gone! " + packages);
       }
     }
     if (mAllAppsList.added.size() > 0) {
@@ -53,7 +72,7 @@ synchronized (mLock) {
       final ArrayList<ApplicationInfo> addedFinal=added;
       mHandler.post(new Runnable(){
         public void run(){
-          callbacks.bindPackageAdded(addedFinal);
+          callbacks.bindAppsAdded(addedFinal);
         }
       }
 );
@@ -62,7 +81,7 @@ synchronized (mLock) {
       final ArrayList<ApplicationInfo> modifiedFinal=modified;
       mHandler.post(new Runnable(){
         public void run(){
-          callbacks.bindPackageUpdated(packageName,modifiedFinal);
+          callbacks.bindAppsUpdated(modifiedFinal);
         }
       }
 );
@@ -71,7 +90,7 @@ synchronized (mLock) {
       final ArrayList<ApplicationInfo> removedFinal=removed;
       mHandler.post(new Runnable(){
         public void run(){
-          callbacks.bindPackageRemoved(packageName,removedFinal);
+          callbacks.bindAppsRemoved(removedFinal);
         }
       }
 );

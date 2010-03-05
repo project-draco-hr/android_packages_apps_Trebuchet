@@ -11,9 +11,15 @@
         ShortcutInfo info=(ShortcutInfo)tag;
         final Intent intent=info.intent;
         final ComponentName name=intent.getComponent();
-        if (info.itemType == LauncherSettings.Favorites.ITEM_TYPE_APPLICATION && Intent.ACTION_MAIN.equals(intent.getAction()) && name != null && packageName.equals(name.getPackageName())) {
-          info.setIcon(mIconCache.getIcon(info.intent));
-          ((TextView)view).setCompoundDrawablesWithIntrinsicBounds(null,new FastBitmapDrawable(info.getIcon(mIconCache)),null,null);
+        if (info.itemType == LauncherSettings.Favorites.ITEM_TYPE_APPLICATION && Intent.ACTION_MAIN.equals(intent.getAction()) && name != null) {
+          final int appCount=apps.size();
+          for (int k=0; k < appCount; k++) {
+            ApplicationInfo app=apps.get(k);
+            if (app.componentName.equals(name)) {
+              info.setIcon(mIconCache.getIcon(info.intent));
+              ((TextView)view).setCompoundDrawablesWithIntrinsicBounds(null,new FastBitmapDrawable(info.getIcon(mIconCache)),null,null);
+            }
+          }
         }
       }
     }

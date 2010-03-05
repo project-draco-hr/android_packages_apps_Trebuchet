@@ -2,6 +2,11 @@
   final int count=getChildCount();
   final PackageManager manager=getContext().getPackageManager();
   final AppWidgetManager widgets=AppWidgetManager.getInstance(getContext());
+  final HashSet<String> packageNames=new HashSet<String>();
+  final int appCount=apps.size();
+  for (int i=0; i < appCount; i++) {
+    packageNames.add(apps.get(i).componentName.getPackageName());
+  }
   for (int i=0; i < count; i++) {
     final CellLayout layout=(CellLayout)getChildAt(i);
     post(new Runnable(){
@@ -16,9 +21,13 @@
             final ShortcutInfo info=(ShortcutInfo)tag;
             final Intent intent=info.intent;
             final ComponentName name=intent.getComponent();
-            if (Intent.ACTION_MAIN.equals(intent.getAction()) && name != null && packageName.equals(name.getPackageName())) {
-              LauncherModel.deleteItemFromDatabase(mLauncher,info);
-              childrenToRemove.add(view);
+            if (Intent.ACTION_MAIN.equals(intent.getAction()) && name != null) {
+              for (              String packageName : packageNames) {
+                if (packageName.equals(name.getPackageName())) {
+                  LauncherModel.deleteItemFromDatabase(mLauncher,info);
+                  childrenToRemove.add(view);
+                }
+              }
             }
           }
  else           if (tag instanceof UserFolderInfo) {
@@ -31,10 +40,14 @@
               final ShortcutInfo appInfo=contents.get(k);
               final Intent intent=appInfo.intent;
               final ComponentName name=intent.getComponent();
-              if (Intent.ACTION_MAIN.equals(intent.getAction()) && name != null && packageName.equals(name.getPackageName())) {
-                toRemove.add(appInfo);
-                LauncherModel.deleteItemFromDatabase(mLauncher,appInfo);
-                removedFromFolder=true;
+              if (Intent.ACTION_MAIN.equals(intent.getAction()) && name != null) {
+                for (                String packageName : packageNames) {
+                  if (packageName.equals(name.getPackageName())) {
+                    toRemove.add(appInfo);
+                    LauncherModel.deleteItemFromDatabase(mLauncher,appInfo);
+                    removedFromFolder=true;
+                  }
+                }
               }
             }
             contents.removeAll(toRemove);
@@ -47,17 +60,25 @@
             final LiveFolderInfo info=(LiveFolderInfo)tag;
             final Uri uri=info.uri;
             final ProviderInfo providerInfo=manager.resolveContentProvider(uri.getAuthority(),0);
-            if (providerInfo == null || packageName.equals(providerInfo.packageName)) {
-              LauncherModel.deleteItemFromDatabase(mLauncher,info);
-              childrenToRemove.add(view);
+            if (providerInfo == null) {
+              for (              String packageName : packageNames) {
+                if (packageName.equals(providerInfo.packageName)) {
+                  LauncherModel.deleteItemFromDatabase(mLauncher,info);
+                  childrenToRemove.add(view);
+                }
+              }
             }
           }
  else           if (tag instanceof LauncherAppWidgetInfo) {
             final LauncherAppWidgetInfo info=(LauncherAppWidgetInfo)tag;
             final AppWidgetProviderInfo provider=widgets.getAppWidgetInfo(info.appWidgetId);
-            if (provider == null || packageName.equals(provider.provider.getPackageName())) {
-              LauncherModel.deleteItemFromDatabase(mLauncher,info);
-              childrenToRemove.add(view);
+            if (provider == null) {
+              for (              String packageName : packageNames) {
+                if (packageName.equals(provider.provider.getPackageName())) {
+                  LauncherModel.deleteItemFromDatabase(mLauncher,info);
+                  childrenToRemove.add(view);
+                }
+              }
             }
           }
         }
