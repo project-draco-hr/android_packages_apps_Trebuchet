@@ -9,4 +9,8 @@
   sGlowColorPressedPaint.setMaskFilter(TableMaskFilter.CreateClipTable(0,30));
   sGlowColorFocusedPaint.setColor(0xffff8e00);
   sGlowColorFocusedPaint.setMaskFilter(TableMaskFilter.CreateClipTable(0,30));
+  ColorMatrix cm=new ColorMatrix();
+  cm.setSaturation(0.2f);
+  sDisabledPaint.setColorFilter(new ColorMatrixColorFilter(cm));
+  sDisabledPaint.setAlpha(0x88);
 }

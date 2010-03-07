@@ -4,3 +4,4 @@ int iconTypeIndex
 int iconPackageIndex
 int iconResourceIndex
 int iconIndex
+int titleIndex

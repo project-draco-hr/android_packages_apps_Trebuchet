@@ -1,38 +1,47 @@
 {
+  Bitmap icon=null;
   final ShortcutInfo info=new ShortcutInfo();
   info.itemType=LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT;
+  info.title=c.getString(titleIndex);
   int iconType=c.getInt(iconTypeIndex);
 switch (iconType) {
 case LauncherSettings.Favorites.ICON_TYPE_RESOURCE:
     String packageName=c.getString(iconPackageIndex);
   String resourceName=c.getString(iconResourceIndex);
 PackageManager packageManager=context.getPackageManager();
+info.customIcon=false;
 try {
 Resources resources=packageManager.getResourcesForApplication(packageName);
+if (resources != null) {
 final int id=resources.getIdentifier(resourceName,null,null);
-info.setIcon(Utilities.createIconBitmap(resources.getDrawable(id),context));
+icon=Utilities.createIconBitmap(resources.getDrawable(id),context);
+}
 }
  catch (Exception e) {
-info.setIcon(getDefaultIcon());
 }
-info.iconResource=new Intent.ShortcutIconResource();
-info.iconResource.packageName=packageName;
-info.iconResource.resourceName=resourceName;
-info.customIcon=false;
+if (icon == null) {
+icon=getIconFromCursor(c,iconIndex);
+}
+if (icon == null) {
+icon=getFallbackIcon();
+info.usingFallbackIcon=true;
+}
 break;
 case LauncherSettings.Favorites.ICON_TYPE_BITMAP:
-byte[] data=c.getBlob(iconIndex);
-try {
-Bitmap bitmap=BitmapFactory.decodeByteArray(data,0,data.length);
-info.setIcon(bitmap);
+icon=getIconFromCursor(c,iconIndex);
+if (icon == null) {
+icon=getFallbackIcon();
+info.customIcon=false;
+info.usingFallbackIcon=true;
 }
- catch (Exception e) {
-info.setIcon(getDefaultIcon());
-}
+ else {
 info.customIcon=true;
+}
+info.setIcon(icon);
 break;
 default :
-info.setIcon(getDefaultIcon());
+info.setIcon(getFallbackIcon());
+info.usingFallbackIcon=true;
 info.customIcon=false;
 break;
 }

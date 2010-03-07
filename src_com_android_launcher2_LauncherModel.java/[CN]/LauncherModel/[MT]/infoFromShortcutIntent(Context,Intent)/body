@@ -26,10 +26,11 @@
       }
     }
   }
-  if (icon == null) {
-    icon=getDefaultIcon();
-  }
   final ShortcutInfo info=new ShortcutInfo();
+  if (icon == null) {
+    icon=getFallbackIcon();
+    info.usingFallbackIcon=true;
+  }
   info.setIcon(icon);
   info.title=name;
   info.intent=intent;

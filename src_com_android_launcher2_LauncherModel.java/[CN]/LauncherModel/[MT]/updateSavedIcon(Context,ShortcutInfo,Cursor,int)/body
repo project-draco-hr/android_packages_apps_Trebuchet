@@ -1,0 +1,23 @@
+{
+  if (info.onExternalStorage && !info.customIcon && !info.usingFallbackIcon) {
+    boolean needSave;
+    byte[] data=c.getBlob(iconIndex);
+    try {
+      if (data != null) {
+        Bitmap saved=BitmapFactory.decodeByteArray(data,0,data.length);
+        Bitmap loaded=info.getIcon(mIconCache);
+        needSave=!saved.sameAs(loaded);
+      }
+ else {
+        needSave=true;
+      }
+    }
+ catch (    Exception e) {
+      needSave=true;
+    }
+    if (needSave) {
+      Log.d(TAG,"going to save icon bitmap for info=" + info);
+      updateItemInDatabase(context,info);
+    }
+  }
+}

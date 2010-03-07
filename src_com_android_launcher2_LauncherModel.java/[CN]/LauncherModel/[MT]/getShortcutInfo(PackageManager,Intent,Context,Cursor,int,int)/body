@@ -1,0 +1,35 @@
+{
+  Bitmap icon=null;
+  final ShortcutInfo info=new ShortcutInfo();
+  ComponentName componentName=intent.getComponent();
+  if (componentName == null) {
+    return null;
+  }
+  final ResolveInfo resolveInfo=manager.resolveActivity(intent,0);
+  if (resolveInfo != null) {
+    icon=mIconCache.getIcon(componentName,resolveInfo);
+  }
+  if (icon == null) {
+    if (c != null) {
+      icon=getIconFromCursor(c,iconIndex);
+    }
+  }
+  if (icon == null) {
+    icon=getFallbackIcon();
+    info.usingFallbackIcon=true;
+  }
+  info.setIcon(icon);
+  if (resolveInfo != null) {
+    info.title=resolveInfo.activityInfo.loadLabel(manager);
+  }
+  if (info.title == null) {
+    if (c != null) {
+      info.title=c.getString(titleIndex);
+    }
+  }
+  if (info.title == null) {
+    info.title=componentName.getClassName();
+  }
+  info.itemType=LauncherSettings.Favorites.ITEM_TYPE_APPLICATION;
+  return info;
+}

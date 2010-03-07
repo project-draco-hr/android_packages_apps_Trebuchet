@@ -1,0 +1,4 @@
+Context context
+ShortcutInfo info
+Cursor c
+int iconIndex

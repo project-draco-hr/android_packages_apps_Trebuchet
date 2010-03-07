@@ -1,17 +1,3 @@
 {
-  final ResolveInfo resolveInfo=manager.resolveActivity(intent,0);
-  if (resolveInfo == null) {
-    return null;
-  }
-  final ShortcutInfo info=new ShortcutInfo();
-  final ActivityInfo activityInfo=resolveInfo.activityInfo;
-  info.setIcon(mIconCache.getIcon(intent.getComponent(),resolveInfo));
-  if (info.title == null || info.title.length() == 0) {
-    info.title=activityInfo.loadLabel(manager);
-  }
-  if (info.title == null) {
-    info.title=activityInfo.name;
-  }
-  info.itemType=LauncherSettings.Favorites.ITEM_TYPE_APPLICATION;
-  return info;
+  return getShortcutInfo(manager,intent,context);
 }

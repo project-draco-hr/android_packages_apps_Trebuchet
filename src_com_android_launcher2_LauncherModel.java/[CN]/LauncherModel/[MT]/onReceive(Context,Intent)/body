@@ -1,5 +1,4 @@
 {
-  Log.d(TAG,"onReceive intent=" + intent);
   context=mApp;
   ArrayList<ApplicationInfo> added=null;
   ArrayList<ApplicationInfo> removed=null;
@@ -31,6 +30,53 @@ synchronized (mLock) {
           mAllAppsList.updatePackage(context,packageName);
         }
       }
+      if (mAllAppsList.added.size() > 0) {
+        added=mAllAppsList.added;
+        mAllAppsList.added=new ArrayList<ApplicationInfo>();
+      }
+      if (mAllAppsList.removed.size() > 0) {
+        removed=mAllAppsList.removed;
+        mAllAppsList.removed=new ArrayList<ApplicationInfo>();
+        for (        ApplicationInfo info : removed) {
+          mIconCache.remove(info.intent.getComponent());
+        }
+      }
+      if (mAllAppsList.modified.size() > 0) {
+        modified=mAllAppsList.modified;
+        mAllAppsList.modified=new ArrayList<ApplicationInfo>();
+      }
+      final Callbacks callbacks=mCallbacks != null ? mCallbacks.get() : null;
+      if (callbacks == null) {
+        Log.w(TAG,"Nobody to tell about the new app.  Launcher is probably loading.");
+        return;
+      }
+      if (added != null) {
+        final ArrayList<ApplicationInfo> addedFinal=added;
+        mHandler.post(new Runnable(){
+          public void run(){
+            callbacks.bindAppsAdded(addedFinal);
+          }
+        }
+);
+      }
+      if (modified != null) {
+        final ArrayList<ApplicationInfo> modifiedFinal=modified;
+        mHandler.post(new Runnable(){
+          public void run(){
+            callbacks.bindAppsUpdated(modifiedFinal);
+          }
+        }
+);
+      }
+      if (removed != null) {
+        final ArrayList<ApplicationInfo> removedFinal=removed;
+        mHandler.post(new Runnable(){
+          public void run(){
+            callbacks.bindAppsRemoved(removedFinal);
+          }
+        }
+);
+      }
     }
  else {
       if (Intent.ACTION_EXTERNAL_APPLICATIONS_AVAILABLE.equals(action)) {
@@ -38,62 +84,19 @@ synchronized (mLock) {
         if (packages == null || packages.length == 0) {
           return;
         }
-        Log.d(TAG,"they're back! " + packages);
+        setAllAppsDirty();
+        setWorkspaceDirty();
+        startLoader(context,false);
       }
  else       if (Intent.ACTION_EXTERNAL_APPLICATIONS_UNAVAILABLE.equals(action)) {
         String packages[]=intent.getStringArrayExtra(Intent.EXTRA_CHANGED_PACKAGE_LIST);
         if (packages == null || packages.length == 0) {
           return;
         }
-        Log.d(TAG,"they're gone! " + packages);
+        setAllAppsDirty();
+        setWorkspaceDirty();
+        startLoader(context,false);
       }
-    }
-    if (mAllAppsList.added.size() > 0) {
-      added=mAllAppsList.added;
-      mAllAppsList.added=new ArrayList<ApplicationInfo>();
-    }
-    if (mAllAppsList.removed.size() > 0) {
-      removed=mAllAppsList.removed;
-      mAllAppsList.removed=new ArrayList<ApplicationInfo>();
-      for (      ApplicationInfo info : removed) {
-        mIconCache.remove(info.intent.getComponent());
-      }
-    }
-    if (mAllAppsList.modified.size() > 0) {
-      modified=mAllAppsList.modified;
-      mAllAppsList.modified=new ArrayList<ApplicationInfo>();
-    }
-    final Callbacks callbacks=mCallbacks != null ? mCallbacks.get() : null;
-    if (callbacks == null) {
-      Log.w(TAG,"Nobody to tell about the new app.  Launcher is probably loading.");
-      return;
-    }
-    if (added != null) {
-      final ArrayList<ApplicationInfo> addedFinal=added;
-      mHandler.post(new Runnable(){
-        public void run(){
-          callbacks.bindAppsAdded(addedFinal);
-        }
-      }
-);
-    }
-    if (modified != null) {
-      final ArrayList<ApplicationInfo> modifiedFinal=modified;
-      mHandler.post(new Runnable(){
-        public void run(){
-          callbacks.bindAppsUpdated(modifiedFinal);
-        }
-      }
-);
-    }
-    if (removed != null) {
-      final ArrayList<ApplicationInfo> removedFinal=removed;
-      mHandler.post(new Runnable(){
-        public void run(){
-          callbacks.bindAppsRemoved(removedFinal);
-        }
-      }
-);
     }
   }
 }

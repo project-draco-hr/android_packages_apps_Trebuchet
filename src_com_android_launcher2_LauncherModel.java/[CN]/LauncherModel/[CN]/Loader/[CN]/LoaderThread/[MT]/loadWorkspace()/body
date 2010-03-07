@@ -48,35 +48,34 @@ case LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT:
           continue;
         }
       if (itemType == LauncherSettings.Favorites.ITEM_TYPE_APPLICATION) {
-        info=getShortcutInfo(manager,intent,context);
+        info=getShortcutInfo(manager,intent,context,c,iconIndex,titleIndex);
       }
  else {
-        info=getShortcutInfo(c,context,iconTypeIndex,iconPackageIndex,iconResourceIndex,iconIndex);
+        info=getShortcutInfo(c,context,iconTypeIndex,iconPackageIndex,iconResourceIndex,iconIndex,titleIndex);
       }
-    if (info == null) {
-      info=new ShortcutInfo();
-      info.setIcon(getDefaultIcon());
-    }
-  if (info != null) {
-    if (itemType != LauncherSettings.Favorites.ITEM_TYPE_APPLICATION) {
-      info.title=c.getString(titleIndex);
-    }
-    info.intent=intent;
-    info.id=c.getLong(idIndex);
-    container=c.getInt(containerIndex);
-    info.container=container;
-    info.screen=c.getInt(screenIndex);
-    info.cellX=c.getInt(cellXIndex);
-    info.cellY=c.getInt(cellYIndex);
+    if (info != null) {
+      updateSavedIcon(context,info,c,iconIndex);
+      info.intent=intent;
+      info.id=c.getLong(idIndex);
+      container=c.getInt(containerIndex);
+      info.container=container;
+      info.screen=c.getInt(screenIndex);
+      info.cellX=c.getInt(cellXIndex);
+      info.cellY=c.getInt(cellYIndex);
 switch (container) {
 case LauncherSettings.Favorites.CONTAINER_DESKTOP:
-      mItems.add(info);
-    break;
+        mItems.add(info);
+      break;
 default :
-  UserFolderInfo folderInfo=findOrMakeUserFolder(mFolders,container);
-folderInfo.add(info);
+    UserFolderInfo folderInfo=findOrMakeUserFolder(mFolders,container);
+  folderInfo.add(info);
 break;
 }
+}
+ else {
+id=c.getLong(idIndex);
+Log.e(TAG,"Error loading shortcut " + id + ", removing it");
+contentResolver.delete(LauncherSettings.Favorites.getContentUri(id,false),null,null);
 }
 break;
 case LauncherSettings.Favorites.ITEM_TYPE_USER_FOLDER:
