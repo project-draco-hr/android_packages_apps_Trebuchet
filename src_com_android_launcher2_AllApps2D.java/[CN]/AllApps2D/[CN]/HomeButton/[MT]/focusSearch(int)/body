@@ -1,0 +1,4 @@
+{
+  if (direction == FOCUS_UP)   return super.focusSearch(direction);
+  return null;
+}

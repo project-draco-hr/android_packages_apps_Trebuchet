@@ -1,0 +1,3 @@
+boolean gainFocus
+int direction
+android.graphics.Rect prev
