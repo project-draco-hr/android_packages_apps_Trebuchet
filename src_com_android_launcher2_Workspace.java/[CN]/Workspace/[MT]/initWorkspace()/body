@@ -7,5 +7,6 @@
   mIconCache=app.getIconCache();
   final ViewConfiguration configuration=ViewConfiguration.get(getContext());
   mTouchSlop=configuration.getScaledTouchSlop();
+  mPagingTouchSlop=configuration.getScaledPagingTouchSlop();
   mMaximumVelocity=configuration.getScaledMaximumFlingVelocity();
 }
