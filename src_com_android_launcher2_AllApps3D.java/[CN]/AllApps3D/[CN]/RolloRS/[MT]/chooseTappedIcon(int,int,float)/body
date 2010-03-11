@@ -2,14 +2,14 @@
   y+=(pos - ((int)pos)) * (mTouchYBorders[1] - mTouchYBorders[0]);
   int col=-1;
   int row=-1;
-  final int columnsCount=mColumnsPerPage;
+  final int columnsCount=mAllApps.mColumnsPerPage;
   for (int i=0; i < columnsCount; i++) {
     if (x >= mTouchXBorders[i] && x < mTouchXBorders[i + 1]) {
       col=i;
       break;
     }
   }
-  final int rowsCount=mRowsPerPage;
+  final int rowsCount=mAllApps.mRowsPerPage;
   for (int i=0; i < rowsCount; i++) {
     if (y >= mTouchYBorders[i] && y < mTouchYBorders[i + 1]) {
       row=i;

@@ -1,5 +1,6 @@
 {
   super.onWindowFocusChanged(hasWindowFocus);
+  if (mSurrendered)   return;
   if (mArrowNavigation) {
     if (!hasWindowFocus) {
       mLastSelectedIcon=mRollo.mState.selectedIconIndex;

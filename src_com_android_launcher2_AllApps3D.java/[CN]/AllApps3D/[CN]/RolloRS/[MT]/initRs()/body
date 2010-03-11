@@ -2,7 +2,7 @@
   ScriptC.Builder sb=new ScriptC.Builder(mRS);
   sb.setScript(mRes,R.raw.allapps);
   sb.setRoot(true);
-  sb.addDefines(mDefines);
+  sb.addDefines(mAllApps.mDefines);
   sb.setType(mParams.mType,"params",Defines.ALLOC_PARAMS);
   sb.setType(mState.mType,"state",Defines.ALLOC_STATE);
   sb.setType(mUniformAlloc.getType(),"vpConstants",Defines.ALLOC_VP_CONSTANTS);

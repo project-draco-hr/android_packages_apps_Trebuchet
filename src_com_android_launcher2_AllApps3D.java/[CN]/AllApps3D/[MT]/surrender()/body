@@ -1,0 +1,5 @@
+{
+  mRS.contextSetSurface(0,0,null);
+  mRS.mMessageCallback=null;
+  mSurrendered=true;
+}

@@ -1,7 +1,7 @@
 {
   mParams=new Params();
   mState=new State();
-  final Utilities.BubbleText bubble=new Utilities.BubbleText(getContext());
+  final Utilities.BubbleText bubble=new Utilities.BubbleText(mAllApps.getContext());
   mParams.bubbleWidth=bubble.getBubbleWidth();
   mParams.bubbleHeight=bubble.getMaxBubbleHeight();
   mParams.bubbleBitmapWidth=bubble.getBitmapWidth();

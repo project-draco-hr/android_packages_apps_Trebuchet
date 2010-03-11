@@ -10,9 +10,19 @@
   setOnLongClickListener(this);
   setZOrderOnTop(true);
   getHolder().setFormat(PixelFormat.TRANSLUCENT);
-  mRS=createRenderScript(true);
+  if (mRS == null) {
+    mRS=createRenderScript(true);
+  }
+ else {
+    createRenderScript(mRS);
+  }
   final DisplayMetrics metrics=getResources().getDisplayMetrics();
   final boolean isPortrait=metrics.widthPixels < metrics.heightPixels;
   mColumnsPerPage=isPortrait ? Defines.COLUMNS_PER_PAGE_PORTRAIT : Defines.COLUMNS_PER_PAGE_LANDSCAPE;
   mRowsPerPage=isPortrait ? Defines.ROWS_PER_PAGE_PORTRAIT : Defines.ROWS_PER_PAGE_LANDSCAPE;
+  if (mRollo != null) {
+    mRollo.mAllApps=this;
+    mRollo.mRes=getResources();
+    mRollo.mInitialize=true;
+  }
 }

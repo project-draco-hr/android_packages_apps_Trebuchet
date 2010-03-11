@@ -1,6 +1,6 @@
 {
   super.onFocusChanged(gainFocus,direction,previouslyFocusedRect);
-  if (!isVisible()) {
+  if (!isVisible() || mSurrendered) {
     return;
   }
   if (gainFocus) {

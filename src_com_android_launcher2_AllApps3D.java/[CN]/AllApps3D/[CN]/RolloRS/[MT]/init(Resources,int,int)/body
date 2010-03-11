@@ -7,6 +7,6 @@
   initProgramStore();
   initGl();
   initData();
-  initTouchState();
+  initTouchState(width,height);
   initRs();
 }

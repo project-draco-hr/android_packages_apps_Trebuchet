@@ -1,5 +1,7 @@
 {
-  destroyRenderScript();
   mRS.mMessageCallback=null;
-  mRS=null;
+  if (!mSurrendered) {
+    destroyRenderScript();
+    mRS=null;
+  }
 }

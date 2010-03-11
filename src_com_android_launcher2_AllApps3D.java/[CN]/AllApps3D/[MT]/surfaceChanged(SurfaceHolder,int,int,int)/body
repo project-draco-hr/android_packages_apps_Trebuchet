@@ -1,8 +1,9 @@
 {
   super.surfaceChanged(holder,format,w,h);
+  if (mSurrendered)   return;
   mHaveSurface=true;
   if (mRollo == null) {
-    mRollo=new RolloRS();
+    mRollo=new RolloRS(this);
     mRollo.init(getResources(),w,h);
     if (mAllAppsList != null) {
       mRollo.setApps(mAllAppsList);
@@ -11,6 +12,11 @@
       gainFocus();
       mShouldGainFocus=false;
     }
+  }
+ else   if (mRollo.mInitialize) {
+    mRollo.initGl();
+    mRollo.initTouchState(w,h);
+    mRollo.mInitialize=false;
   }
   mRollo.dirtyCheck();
   mRollo.resize(w,h);
