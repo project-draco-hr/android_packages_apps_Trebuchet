@@ -2,6 +2,9 @@
   if (mAllAppsList == null) {
     return;
   }
+  if (mRollo != null) {
+    mRollo.pause();
+  }
   final int N=list.size();
   for (int i=0; i < N; i++) {
     final ApplicationInfo item=list.get(i);
@@ -18,5 +21,6 @@
   }
   if (mRollo != null) {
     mRollo.saveAppsList();
+    mRollo.resume();
   }
 }
