@@ -2,11 +2,12 @@
 synchronized (mLock) {
     final ArrayList<ApplicationInfo> results=(ArrayList<ApplicationInfo>)mAllAppsList.data.clone();
     mAllAppsList.added=new ArrayList<ApplicationInfo>();
+    final Callbacks old=mCallbacks.get();
     mHandler.post(new Runnable(){
       public void run(){
         final long t=SystemClock.uptimeMillis();
         final int count=results.size();
-        Callbacks callbacks=tryGetCallbacks();
+        Callbacks callbacks=tryGetCallbacks(old);
         if (callbacks != null) {
           callbacks.bindAllApplications(results);
         }

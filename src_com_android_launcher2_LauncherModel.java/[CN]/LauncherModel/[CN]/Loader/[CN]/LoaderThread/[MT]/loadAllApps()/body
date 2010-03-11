@@ -1,7 +1,7 @@
 {
   final Intent mainIntent=new Intent(Intent.ACTION_MAIN,null);
   mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
-  final Callbacks callbacks=tryGetCallbacks();
+  final Callbacks callbacks=mCallbacks.get();
   if (callbacks == null) {
     return;
   }
