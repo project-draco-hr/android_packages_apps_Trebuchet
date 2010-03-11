@@ -1,6 +1,5 @@
 {
   if (mScript != null && mAllocIconIds != null) {
-    mRS.contextBindRootScript(null);
     mAllocIconIds.data(mIconIds);
     mAllocLabelIds.data(mLabelIds);
     mScript.bindAllocation(mAllocIconIds,Defines.ALLOC_ICON_IDS);
@@ -9,6 +8,5 @@
     if (mInvokeResetWAR != null) {
       mInvokeResetWAR.execute();
     }
-    mRS.contextBindRootScript(mScript);
   }
 }

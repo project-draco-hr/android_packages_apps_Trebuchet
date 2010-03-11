@@ -1,4 +1,5 @@
 {
+  mRollo.pause();
   final int count=list != null ? list.size() : 0;
   int allocCount=count;
   if (allocCount < 1) {
@@ -18,4 +19,5 @@
     uploadAppIcon(i,list.get(i));
   }
   saveAppsList();
+  mRollo.resume();
 }
