@@ -1,6 +1,8 @@
 {
-  mRollo.clearSelectedIcon();
-  mRollo.setHomeSelected(SELECTED_NONE);
+  if (animate) {
+    mRollo.clearSelectedIcon();
+    mRollo.setHomeSelected(SELECTED_NONE);
+  }
   if (zoom > 0.001f) {
     mRollo.mState.zoomTarget=zoom;
   }

@@ -1,6 +1,9 @@
 {
   final ArrayList<ApplicationInfo> appsList=mAllApps.mAllAppsList;
   if (appsList == null || index < 0 || index >= appsList.size()) {
+    if (mAllApps != null) {
+      mAllApps.mRestoreFocusIndex=index;
+    }
     mState.selectedIconIndex=-1;
     if (mAllApps.mLastSelection == SELECTION_ICONS) {
       mAllApps.mLastSelection=SELECTION_NONE;
