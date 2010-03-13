@@ -12,7 +12,7 @@
       if (mRollo.mState.iconCount > 0) {
         if (mLastSelection == SELECTION_ICONS) {
           int selection=mLastSelectedIcon;
-          final int firstIcon=Math.round(mPosX) * mColumnsPerPage;
+          final int firstIcon=Math.round(mRollo.mScrollPos) * mColumnsPerPage;
           if (selection < 0 || selection < firstIcon || selection >= mRollo.mState.iconCount || selection >= firstIcon + (mColumnsPerPage * mRowsPerPage)) {
             selection=firstIcon;
           }

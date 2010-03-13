@@ -29,7 +29,7 @@ case MotionEvent.ACTION_DOWN:
         mRollo.clearSelectedIcon();
       }
  else {
-        mDownIconIndex=mCurrentIconIndex=mRollo.selectIcon(x,y,mPosX,SELECTED_PRESSED);
+        mDownIconIndex=mCurrentIconIndex=mRollo.selectIcon(x,y,SELECTED_PRESSED);
         if (mDownIconIndex < 0) {
           cancelLongPress();
         }
@@ -52,7 +52,7 @@ if (mTouchTracking == TRACKING_HOME) {
   int slop;
   slop=Math.abs(rawY - mMotionDownRawY);
   if (!mStartedScrolling && slop < mSlop) {
-    mCurrentIconIndex=mRollo.chooseTappedIcon(x,y,mPosX);
+    mCurrentIconIndex=mRollo.chooseTappedIcon(x,y);
     if (mDownIconIndex != mCurrentIconIndex) {
       cancelLongPress();
       mCurrentIconIndex=-1;
