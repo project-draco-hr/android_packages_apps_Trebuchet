@@ -1,3 +1,3 @@
 {
-  return (Math.abs(mAllApps.mVelocity) < 0.4f) && (Math.abs(mAllApps.mPosX - Math.round(mAllApps.mPosX)) < 0.4f);
+  return (Math.abs(mAllApps.mVelocity) < 0.4f) && (Math.abs(mScrollPos - Math.round(mScrollPos)) < 0.4f);
 }

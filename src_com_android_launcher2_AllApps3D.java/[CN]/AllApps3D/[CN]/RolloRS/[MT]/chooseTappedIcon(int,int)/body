@@ -1,4 +1,5 @@
 {
+  float pos=mScrollPos;
   y+=(pos - ((int)pos)) * (mTouchYBorders[1] - mTouchYBorders[0]);
   int col=-1;
   int row=-1;
