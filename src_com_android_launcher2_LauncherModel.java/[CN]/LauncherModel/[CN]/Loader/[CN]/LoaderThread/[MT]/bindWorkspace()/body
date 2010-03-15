@@ -1,14 +1,14 @@
 {
   final long t=SystemClock.uptimeMillis();
-  Callbacks callbacks=mCallbacks.get();
-  if (callbacks == null) {
+  final Callbacks oldCallbacks=mCallbacks.get();
+  if (oldCallbacks == null) {
     Log.w(TAG,"LoaderThread running with no launcher");
     return;
   }
   int N;
   mHandler.post(new Runnable(){
     public void run(){
-      Callbacks callbacks=tryGetCallbacks();
+      Callbacks callbacks=tryGetCallbacks(oldCallbacks);
       if (callbacks != null) {
         callbacks.startBinding();
       }
@@ -21,7 +21,7 @@
     final int chunkSize=(i + ITEMS_CHUNK <= N) ? ITEMS_CHUNK : (N - i);
     mHandler.post(new Runnable(){
       public void run(){
-        Callbacks callbacks=tryGetCallbacks();
+        Callbacks callbacks=tryGetCallbacks(oldCallbacks);
         if (callbacks != null) {
           callbacks.bindItems(mItems,start,start + chunkSize);
         }
@@ -31,7 +31,7 @@
   }
   mHandler.post(new Runnable(){
     public void run(){
-      Callbacks callbacks=tryGetCallbacks();
+      Callbacks callbacks=tryGetCallbacks(oldCallbacks);
       if (callbacks != null) {
         callbacks.bindFolders(mFolders);
       }
@@ -46,14 +46,14 @@
     }
   }
 );
-  final int currentScreen=callbacks.getCurrentWorkspaceScreen();
+  final int currentScreen=oldCallbacks.getCurrentWorkspaceScreen();
   N=mAppWidgets.size();
   for (int i=0; i < N; i++) {
     final LauncherAppWidgetInfo widget=mAppWidgets.get(i);
     if (widget.screen == currentScreen) {
       mHandler.post(new Runnable(){
         public void run(){
-          Callbacks callbacks=tryGetCallbacks();
+          Callbacks callbacks=tryGetCallbacks(oldCallbacks);
           if (callbacks != null) {
             callbacks.bindAppWidget(widget);
           }
@@ -67,7 +67,7 @@
     if (widget.screen != currentScreen) {
       mHandler.post(new Runnable(){
         public void run(){
-          Callbacks callbacks=tryGetCallbacks();
+          Callbacks callbacks=tryGetCallbacks(oldCallbacks);
           if (callbacks != null) {
             callbacks.bindAppWidget(widget);
           }
@@ -78,7 +78,7 @@
   }
   mHandler.post(new Runnable(){
     public void run(){
-      Callbacks callbacks=tryGetCallbacks();
+      Callbacks callbacks=tryGetCallbacks(oldCallbacks);
       if (callbacks != null) {
         callbacks.finishBindingItems();
       }
