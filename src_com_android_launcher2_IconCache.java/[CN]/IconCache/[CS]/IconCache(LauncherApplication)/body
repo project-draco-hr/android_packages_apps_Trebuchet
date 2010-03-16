@@ -2,4 +2,5 @@
   mContext=context;
   mPackageManager=context.getPackageManager();
   mBubble=new Utilities.BubbleText(context);
+  mDefaultIcon=makeDefaultIcon();
 }

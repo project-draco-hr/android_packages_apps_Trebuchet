@@ -1,3 +1,10 @@
 {
   mBitmap=b;
+  if (b != null) {
+    mWidth=mBitmap.getWidth();
+    mHeight=mBitmap.getHeight();
+  }
+ else {
+    mWidth=mHeight=0;
+  }
 }
