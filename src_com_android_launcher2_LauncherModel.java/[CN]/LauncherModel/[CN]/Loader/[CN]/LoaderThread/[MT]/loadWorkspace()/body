@@ -137,6 +137,7 @@ int appWidgetId=c.getInt(appWidgetIdIndex);
 id=c.getLong(idIndex);
 final AppWidgetProviderInfo provider=widgets.getAppWidgetInfo(appWidgetId);
 if (!isSafeMode && (provider == null || provider.provider == null || provider.provider.getPackageName() == null)) {
+Log.e(TAG,"Deleting widget that isn't installed anymore: id=" + id + " appWidgetId="+ appWidgetId);
 itemsToRemove.add(id);
 }
  else {
