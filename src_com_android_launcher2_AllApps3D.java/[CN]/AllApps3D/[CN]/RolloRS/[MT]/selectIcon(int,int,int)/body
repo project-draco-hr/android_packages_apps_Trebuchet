@@ -1,5 +1,10 @@
 {
-  final int index=chooseTappedIcon(x,y);
-  selectIcon(index,pressed);
-  return index;
+  if (mAllApps != null) {
+    final int index=mAllApps.chooseTappedIcon(x,y);
+    selectIcon(index,pressed);
+    return index;
+  }
+ else {
+    return -1;
+  }
 }

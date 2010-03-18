@@ -1,16 +1,17 @@
 {
-  float pos=mScrollPos;
+  float pos=sRollo != null ? sRollo.mScrollPos : 0;
+  int oldY=y;
   y+=(pos - ((int)pos)) * (mTouchYBorders[1] - mTouchYBorders[0]);
   int col=-1;
   int row=-1;
-  final int columnsCount=mAllApps.mColumnsPerPage;
+  final int columnsCount=mColumnsPerPage;
   for (int i=0; i < columnsCount; i++) {
     if (x >= mTouchXBorders[i] && x < mTouchXBorders[i + 1]) {
       col=i;
       break;
     }
   }
-  final int rowsCount=mAllApps.mRowsPerPage;
+  final int rowsCount=mRowsPerPage;
   for (int i=0; i < rowsCount; i++) {
     if (y >= mTouchYBorders[i] && y < mTouchYBorders[i + 1]) {
       row=i;
@@ -21,7 +22,7 @@
     return -1;
   }
   int index=(((int)pos) * columnsCount) + (row * columnsCount) + col;
-  if (index >= mState.iconCount) {
+  if (index >= mAllAppsList.size()) {
     return -1;
   }
  else {

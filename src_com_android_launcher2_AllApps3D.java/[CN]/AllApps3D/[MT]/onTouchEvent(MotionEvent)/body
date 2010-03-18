@@ -13,7 +13,7 @@
   int action=ev.getAction();
 switch (action) {
 case MotionEvent.ACTION_DOWN:
-    if ((isPortrait && y > sRollo.mTouchYBorders[sRollo.mTouchYBorders.length - 1]) || (!isPortrait && x > sRollo.mTouchXBorders[sRollo.mTouchXBorders.length - 1])) {
+    if ((isPortrait && y > mTouchYBorders[mTouchYBorders.length - 1]) || (!isPortrait && x > mTouchXBorders[mTouchXBorders.length - 1])) {
       mTouchTracking=TRACKING_HOME;
       sRollo.setHomeSelected(SELECTED_PRESSED);
       sRollo.mState.save();
@@ -44,7 +44,7 @@ case MotionEvent.ACTION_DOWN:
 case MotionEvent.ACTION_MOVE:
 case MotionEvent.ACTION_OUTSIDE:
 if (mTouchTracking == TRACKING_HOME) {
-  sRollo.setHomeSelected((isPortrait && y > sRollo.mTouchYBorders[sRollo.mTouchYBorders.length - 1]) || (!isPortrait && x > sRollo.mTouchXBorders[sRollo.mTouchXBorders.length - 1]) ? SELECTED_PRESSED : SELECTED_NONE);
+  sRollo.setHomeSelected((isPortrait && y > mTouchYBorders[mTouchYBorders.length - 1]) || (!isPortrait && x > mTouchXBorders[mTouchXBorders.length - 1]) ? SELECTED_PRESSED : SELECTED_NONE);
   sRollo.mState.save();
 }
  else if (mTouchTracking == TRACKING_FLING) {
@@ -52,7 +52,7 @@ if (mTouchTracking == TRACKING_HOME) {
   int slop;
   slop=Math.abs(rawY - mMotionDownRawY);
   if (!mStartedScrolling && slop < mSlop) {
-    mCurrentIconIndex=sRollo.chooseTappedIcon(x,y);
+    mCurrentIconIndex=chooseTappedIcon(x,y);
     if (mDownIconIndex != mCurrentIconIndex) {
       cancelLongPress();
       mCurrentIconIndex=-1;
@@ -77,7 +77,7 @@ case MotionEvent.ACTION_UP:
 case MotionEvent.ACTION_CANCEL:
 if (mTouchTracking == TRACKING_HOME) {
 if (action == MotionEvent.ACTION_UP) {
-if ((isPortrait && y > sRollo.mTouchYBorders[sRollo.mTouchYBorders.length - 1]) || (!isPortrait && x > sRollo.mTouchXBorders[sRollo.mTouchXBorders.length - 1])) {
+if ((isPortrait && y > mTouchYBorders[mTouchYBorders.length - 1]) || (!isPortrait && x > mTouchXBorders[mTouchXBorders.length - 1])) {
   reallyPlaySoundEffect(SoundEffectConstants.CLICK);
   mLauncher.closeAllApps(true);
 }

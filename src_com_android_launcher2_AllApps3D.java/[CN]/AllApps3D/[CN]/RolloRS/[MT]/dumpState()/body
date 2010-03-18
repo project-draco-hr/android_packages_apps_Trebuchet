@@ -13,8 +13,6 @@
     Log.d(TAG,"sRollo.mLabelIds.length=" + mLabelIds.length);
   }
   Log.d(TAG,"sRollo.mLabelIds=" + Arrays.toString(mLabelIds));
-  Log.d(TAG,"sRollo.mTouchXBorders=" + Arrays.toString(mTouchXBorders));
-  Log.d(TAG,"sRollo.mTouchYBorders=" + Arrays.toString(mTouchYBorders));
   Log.d(TAG,"sRollo.mState.newPositionX=" + mState.newPositionX);
   Log.d(TAG,"sRollo.mState.newTouchDown=" + mState.newTouchDown);
   Log.d(TAG,"sRollo.mState.flingVelocity=" + mState.flingVelocity);
