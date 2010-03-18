@@ -1,4 +1,2 @@
 {
-  mTouchXBorders=new int[mAllApps.mColumnsPerPage + 1];
-  mTouchYBorders=new int[mAllApps.mRowsPerPage + 1];
 }

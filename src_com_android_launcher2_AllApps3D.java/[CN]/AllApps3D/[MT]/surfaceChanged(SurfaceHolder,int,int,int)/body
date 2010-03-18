@@ -15,9 +15,9 @@
   }
  else   if (sRollo.mInitialize) {
     sRollo.initGl();
-    sRollo.initTouchState(w,h);
     sRollo.mInitialize=false;
   }
+  initTouchState(w,h);
   sRollo.dirtyCheck();
   sRollo.resize(w,h);
   if (sRS != null) {
