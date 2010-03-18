@@ -13,29 +13,29 @@
   int action=ev.getAction();
 switch (action) {
 case MotionEvent.ACTION_DOWN:
-    if ((isPortrait && y > mRollo.mTouchYBorders[mRollo.mTouchYBorders.length - 1]) || (!isPortrait && x > mRollo.mTouchXBorders[mRollo.mTouchXBorders.length - 1])) {
+    if ((isPortrait && y > sRollo.mTouchYBorders[sRollo.mTouchYBorders.length - 1]) || (!isPortrait && x > sRollo.mTouchXBorders[sRollo.mTouchXBorders.length - 1])) {
       mTouchTracking=TRACKING_HOME;
-      mRollo.setHomeSelected(SELECTED_PRESSED);
-      mRollo.mState.save();
+      sRollo.setHomeSelected(SELECTED_PRESSED);
+      sRollo.mState.save();
       mCurrentIconIndex=-1;
     }
  else {
       mTouchTracking=TRACKING_FLING;
       mMotionDownRawX=(int)ev.getRawX();
       mMotionDownRawY=(int)ev.getRawY();
-      mRollo.mState.newPositionX=ev.getRawY() / getHeight();
-      mRollo.mState.newTouchDown=1;
-      if (!mRollo.checkClickOK()) {
-        mRollo.clearSelectedIcon();
+      sRollo.mState.newPositionX=ev.getRawY() / getHeight();
+      sRollo.mState.newTouchDown=1;
+      if (!sRollo.checkClickOK()) {
+        sRollo.clearSelectedIcon();
       }
  else {
-        mDownIconIndex=mCurrentIconIndex=mRollo.selectIcon(x,y,SELECTED_PRESSED);
+        mDownIconIndex=mCurrentIconIndex=sRollo.selectIcon(x,y,SELECTED_PRESSED);
         if (mDownIconIndex < 0) {
           cancelLongPress();
         }
       }
-      mRollo.mState.save();
-      mRollo.move();
+      sRollo.mState.save();
+      sRollo.move();
       mVelocityTracker=VelocityTracker.obtain();
       mVelocityTracker.addMovement(ev);
       mStartedScrolling=false;
@@ -44,15 +44,15 @@ case MotionEvent.ACTION_DOWN:
 case MotionEvent.ACTION_MOVE:
 case MotionEvent.ACTION_OUTSIDE:
 if (mTouchTracking == TRACKING_HOME) {
-  mRollo.setHomeSelected((isPortrait && y > mRollo.mTouchYBorders[mRollo.mTouchYBorders.length - 1]) || (!isPortrait && x > mRollo.mTouchXBorders[mRollo.mTouchXBorders.length - 1]) ? SELECTED_PRESSED : SELECTED_NONE);
-  mRollo.mState.save();
+  sRollo.setHomeSelected((isPortrait && y > sRollo.mTouchYBorders[sRollo.mTouchYBorders.length - 1]) || (!isPortrait && x > sRollo.mTouchXBorders[sRollo.mTouchXBorders.length - 1]) ? SELECTED_PRESSED : SELECTED_NONE);
+  sRollo.mState.save();
 }
  else if (mTouchTracking == TRACKING_FLING) {
   int rawY=(int)ev.getRawY();
   int slop;
   slop=Math.abs(rawY - mMotionDownRawY);
   if (!mStartedScrolling && slop < mSlop) {
-    mCurrentIconIndex=mRollo.chooseTappedIcon(x,y);
+    mCurrentIconIndex=sRollo.chooseTappedIcon(x,y);
     if (mDownIconIndex != mCurrentIconIndex) {
       cancelLongPress();
       mCurrentIconIndex=-1;
@@ -63,13 +63,13 @@ if (mTouchTracking == TRACKING_HOME) {
       cancelLongPress();
       mCurrentIconIndex=-1;
     }
-    mRollo.mState.newPositionX=ev.getRawY() / getHeight();
-    mRollo.mState.newTouchDown=1;
-    mRollo.move();
+    sRollo.mState.newPositionX=ev.getRawY() / getHeight();
+    sRollo.mState.newTouchDown=1;
+    sRollo.move();
     mStartedScrolling=true;
-    mRollo.clearSelectedIcon();
+    sRollo.clearSelectedIcon();
     mVelocityTracker.addMovement(ev);
-    mRollo.mState.save();
+    sRollo.mState.save();
   }
 }
 break;
@@ -77,23 +77,23 @@ case MotionEvent.ACTION_UP:
 case MotionEvent.ACTION_CANCEL:
 if (mTouchTracking == TRACKING_HOME) {
 if (action == MotionEvent.ACTION_UP) {
-if ((isPortrait && y > mRollo.mTouchYBorders[mRollo.mTouchYBorders.length - 1]) || (!isPortrait && x > mRollo.mTouchXBorders[mRollo.mTouchXBorders.length - 1])) {
+if ((isPortrait && y > sRollo.mTouchYBorders[sRollo.mTouchYBorders.length - 1]) || (!isPortrait && x > sRollo.mTouchXBorders[sRollo.mTouchXBorders.length - 1])) {
   reallyPlaySoundEffect(SoundEffectConstants.CLICK);
   mLauncher.closeAllApps(true);
 }
-mRollo.setHomeSelected(SELECTED_NONE);
-mRollo.mState.save();
+sRollo.setHomeSelected(SELECTED_NONE);
+sRollo.mState.save();
 }
 mCurrentIconIndex=-1;
 }
  else if (mTouchTracking == TRACKING_FLING) {
-mRollo.mState.newTouchDown=0;
-mRollo.mState.newPositionX=ev.getRawY() / getHeight();
+sRollo.mState.newTouchDown=0;
+sRollo.mState.newPositionX=ev.getRawY() / getHeight();
 mVelocityTracker.computeCurrentVelocity(1000,mMaxFlingVelocity);
-mRollo.mState.flingVelocity=mVelocityTracker.getYVelocity() / getHeight();
-mRollo.clearSelectedIcon();
-mRollo.mState.save();
-mRollo.fling();
+sRollo.mState.flingVelocity=mVelocityTracker.getYVelocity() / getHeight();
+sRollo.clearSelectedIcon();
+sRollo.mState.save();
+sRollo.fling();
 if (mVelocityTracker != null) {
 mVelocityTracker.recycle();
 mVelocityTracker=null;

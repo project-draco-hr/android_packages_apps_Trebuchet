@@ -18,7 +18,7 @@
     ApplicationInfo info=appsList.get(index);
     Bitmap selectionBitmap=mSelectionBitmap;
     Utilities.drawSelectedAllAppsBitmap(mSelectionCanvas,selectionBitmap.getWidth(),selectionBitmap.getHeight(),pressed == SELECTED_PRESSED,info.iconBitmap);
-    mSelectedIcon=Allocation.createFromBitmap(mRS,selectionBitmap,Element.RGBA_8888(mRS),false);
+    mSelectedIcon=Allocation.createFromBitmap(sRS,selectionBitmap,Element.RGBA_8888(sRS),false);
     mSelectedIcon.uploadToTexture(0);
     mState.selectedIconTexture=mSelectedIcon.getID();
     if (prev != index) {

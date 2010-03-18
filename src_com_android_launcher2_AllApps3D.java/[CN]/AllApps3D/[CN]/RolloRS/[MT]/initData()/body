@@ -6,11 +6,11 @@
   mParams.bubbleHeight=bubble.getMaxBubbleHeight();
   mParams.bubbleBitmapWidth=bubble.getBitmapWidth();
   mParams.bubbleBitmapHeight=bubble.getBitmapHeight();
-  mHomeButtonNormal=Allocation.createFromBitmapResource(mRS,mRes,R.drawable.home_button_normal,Element.RGBA_8888(mRS),false);
+  mHomeButtonNormal=Allocation.createFromBitmapResource(sRS,mRes,R.drawable.home_button_normal,Element.RGBA_8888(sRS),false);
   mHomeButtonNormal.uploadToTexture(0);
-  mHomeButtonFocused=Allocation.createFromBitmapResource(mRS,mRes,R.drawable.home_button_focused,Element.RGBA_8888(mRS),false);
+  mHomeButtonFocused=Allocation.createFromBitmapResource(sRS,mRes,R.drawable.home_button_focused,Element.RGBA_8888(sRS),false);
   mHomeButtonFocused.uploadToTexture(0);
-  mHomeButtonPressed=Allocation.createFromBitmapResource(mRS,mRes,R.drawable.home_button_pressed,Element.RGBA_8888(mRS),false);
+  mHomeButtonPressed=Allocation.createFromBitmapResource(sRS,mRes,R.drawable.home_button_pressed,Element.RGBA_8888(sRS),false);
   mHomeButtonPressed.uploadToTexture(0);
   mParams.homeButtonWidth=76;
   mParams.homeButtonHeight=68;

@@ -7,5 +7,5 @@
   System.arraycopy(mLabelIds,index,mLabelIds,dest,count);
   createAppIconAllocations(index,item);
   uploadAppIcon(index,item);
-  mRollo.mState.iconCount++;
+  sRollo.mState.iconCount++;
 }

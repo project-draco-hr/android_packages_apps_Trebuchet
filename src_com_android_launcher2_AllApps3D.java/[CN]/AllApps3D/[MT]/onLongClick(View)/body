@@ -2,7 +2,7 @@
   if (mLocks != 0 || !isVisible()) {
     return true;
   }
-  if (mRollo.checkClickOK() && mCurrentIconIndex == mDownIconIndex && mCurrentIconIndex >= 0 && mCurrentIconIndex < mAllAppsList.size()) {
+  if (sRollo.checkClickOK() && mCurrentIconIndex == mDownIconIndex && mCurrentIconIndex >= 0 && mCurrentIconIndex < mAllAppsList.size()) {
     ApplicationInfo app=mAllAppsList.get(mCurrentIconIndex);
     Bitmap bmp=app.iconBitmap;
     final int w=bmp.getWidth();

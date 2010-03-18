@@ -1,5 +1,5 @@
 {
-  ScriptC.Builder sb=new ScriptC.Builder(mRS);
+  ScriptC.Builder sb=new ScriptC.Builder(sRS);
   sb.setScript(mRes,R.raw.allapps);
   sb.setRoot(true);
   sb.addDefines(mAllApps.mDefines);
@@ -18,5 +18,5 @@
   mScript.bindAllocation(mAllocIconIds,Defines.ALLOC_ICON_IDS);
   mScript.bindAllocation(mAllocLabelIds,Defines.ALLOC_LABEL_IDS);
   mScript.bindAllocation(mUniformAlloc,Defines.ALLOC_VP_CONSTANTS);
-  mRS.contextBindRootScript(mScript);
+  sRS.contextBindRootScript(mScript);
 }

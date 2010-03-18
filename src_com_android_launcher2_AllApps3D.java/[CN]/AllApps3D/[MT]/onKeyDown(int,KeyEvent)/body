@@ -3,7 +3,7 @@
   if (!isVisible()) {
     return false;
   }
-  final int iconCount=mRollo.mState.iconCount;
+  final int iconCount=sRollo.mState.iconCount;
   if (keyCode == KeyEvent.KEYCODE_DPAD_CENTER || keyCode == KeyEvent.KEYCODE_ENTER) {
     if (mArrowNavigation) {
       if (mLastSelection == SELECTION_HOME) {
@@ -11,7 +11,7 @@
         mLauncher.closeAllApps(true);
       }
  else {
-        int whichApp=mRollo.mState.selectedIconIndex;
+        int whichApp=sRollo.mState.selectedIconIndex;
         if (whichApp >= 0) {
           ApplicationInfo app=mAllAppsList.get(whichApp);
           mLauncher.startActivitySafely(app.intent);
@@ -23,8 +23,8 @@
   if (iconCount > 0) {
     final boolean isPortrait=getWidth() < getHeight();
     mArrowNavigation=true;
-    int currentSelection=mRollo.mState.selectedIconIndex;
-    int currentTopRow=Math.round(mRollo.mScrollPos);
+    int currentSelection=sRollo.mState.selectedIconIndex;
+    int currentTopRow=Math.round(sRollo.mScrollPos);
     final int currentPageCol=currentSelection % mColumnsPerPage;
     final int currentPageRow=(currentSelection - (currentTopRow * mColumnsPerPage)) / mRowsPerPage;
     int newSelection=currentSelection;
@@ -32,7 +32,7 @@ switch (keyCode) {
 case KeyEvent.KEYCODE_DPAD_UP:
       if (mLastSelection == SELECTION_HOME) {
         if (isPortrait) {
-          mRollo.setHomeSelected(SELECTED_NONE);
+          sRollo.setHomeSelected(SELECTED_NONE);
           int lastRowCount=iconCount % mColumnsPerPage;
           if (lastRowCount == 0) {
             lastRowCount=mColumnsPerPage;
@@ -46,7 +46,7 @@ case KeyEvent.KEYCODE_DPAD_UP:
             target=0;
           }
           if (currentTopRow != target) {
-            mRollo.moveTo(target);
+            sRollo.moveTo(target);
           }
         }
       }
@@ -54,12 +54,12 @@ case KeyEvent.KEYCODE_DPAD_UP:
         if (currentPageRow > 0) {
           newSelection=currentSelection - mColumnsPerPage;
           if (currentTopRow > newSelection / mColumnsPerPage) {
-            mRollo.moveTo(newSelection / mColumnsPerPage);
+            sRollo.moveTo(newSelection / mColumnsPerPage);
           }
         }
  else         if (currentTopRow > 0) {
           newSelection=currentSelection - mColumnsPerPage;
-          mRollo.moveTo(newSelection / mColumnsPerPage);
+          sRollo.moveTo(newSelection / mColumnsPerPage);
         }
  else         if (currentPageRow != 0) {
           newSelection=currentTopRow * mRowsPerPage;
@@ -73,7 +73,7 @@ case KeyEvent.KEYCODE_DPAD_DOWN:
   final int currentRow=currentSelection / mColumnsPerPage;
   if (mLastSelection != SELECTION_HOME) {
     if (currentRow < rowCount - 1) {
-      mRollo.setHomeSelected(SELECTED_NONE);
+      sRollo.setHomeSelected(SELECTED_NONE);
       if (currentSelection < 0) {
         newSelection=0;
       }
@@ -84,12 +84,12 @@ case KeyEvent.KEYCODE_DPAD_DOWN:
         newSelection=iconCount - 1;
       }
       if (currentPageRow >= mRowsPerPage - 1) {
-        mRollo.moveTo((newSelection / mColumnsPerPage) - mRowsPerPage + 1);
+        sRollo.moveTo((newSelection / mColumnsPerPage) - mRowsPerPage + 1);
       }
     }
  else     if (isPortrait) {
       newSelection=-1;
-      mRollo.setHomeSelected(SELECTED_FOCUSED);
+      sRollo.setHomeSelected(SELECTED_FOCUSED);
     }
   }
   handled=true;
@@ -102,8 +102,8 @@ if (currentPageCol > 0) {
 }
 }
  else if (!isPortrait) {
-newSelection=((int)(mRollo.mScrollPos) * mColumnsPerPage) + (mRowsPerPage / 2 * mColumnsPerPage) + mColumnsPerPage - 1;
-mRollo.setHomeSelected(SELECTED_NONE);
+newSelection=((int)(sRollo.mScrollPos) * mColumnsPerPage) + (mRowsPerPage / 2 * mColumnsPerPage) + mColumnsPerPage - 1;
+sRollo.setHomeSelected(SELECTED_NONE);
 }
 handled=true;
 break;
@@ -111,7 +111,7 @@ case KeyEvent.KEYCODE_DPAD_RIGHT:
 if (mLastSelection != SELECTION_HOME) {
 if (!isPortrait && (currentPageCol == mColumnsPerPage - 1 || currentSelection == iconCount - 1)) {
 newSelection=-1;
-mRollo.setHomeSelected(SELECTED_FOCUSED);
+sRollo.setHomeSelected(SELECTED_FOCUSED);
 }
  else if ((currentPageCol < mColumnsPerPage - 1) && (currentSelection < iconCount - 1)) {
 newSelection=currentSelection + 1;
@@ -121,8 +121,8 @@ handled=true;
 break;
 }
 if (newSelection != currentSelection) {
-mRollo.selectIcon(newSelection,SELECTED_FOCUSED);
-mRollo.mState.save();
+sRollo.selectIcon(newSelection,SELECTED_FOCUSED);
+sRollo.mState.save();
 }
 }
 return handled;

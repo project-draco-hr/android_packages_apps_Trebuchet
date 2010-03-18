@@ -1,5 +1,5 @@
 {
-  if (mRS == null) {
+  if (sRS == null) {
     return;
   }
   boolean reload=false;
@@ -19,12 +19,12 @@
     }
   }
   mAllAppsList=list;
-  if (mRollo != null && reload) {
-    mRollo.setApps(list);
+  if (sRollo != null && reload) {
+    sRollo.setApps(list);
   }
   if (hasFocus() && mRestoreFocusIndex != -1) {
-    mRollo.selectIcon(mRestoreFocusIndex,SELECTED_FOCUSED);
-    mRollo.mState.save();
+    sRollo.selectIcon(mRestoreFocusIndex,SELECTED_FOCUSED);
+    sRollo.mState.save();
     mRestoreFocusIndex=-1;
   }
   mLocks&=~LOCK_ICONS_PENDING;

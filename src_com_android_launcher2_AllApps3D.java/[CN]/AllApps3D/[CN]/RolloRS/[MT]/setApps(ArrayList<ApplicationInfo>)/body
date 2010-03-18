@@ -1,5 +1,5 @@
 {
-  mRollo.pause();
+  sRollo.pause();
   final int count=list != null ? list.size() : 0;
   int allocCount=count;
   if (allocCount < 1) {
@@ -7,10 +7,10 @@
   }
   mIcons=new Allocation[count];
   mIconIds=new int[allocCount];
-  mAllocIconIds=Allocation.createSized(mRS,Element.USER_I32(mRS),allocCount);
+  mAllocIconIds=Allocation.createSized(sRS,Element.USER_I32(sRS),allocCount);
   mLabels=new Allocation[count];
   mLabelIds=new int[allocCount];
-  mAllocLabelIds=Allocation.createSized(mRS,Element.USER_I32(mRS),allocCount);
+  mAllocLabelIds=Allocation.createSized(sRS,Element.USER_I32(sRS),allocCount);
   mState.iconCount=count;
   for (int i=0; i < mState.iconCount; i++) {
     createAppIconAllocations(i,list.get(i));
@@ -19,5 +19,5 @@
     uploadAppIcon(i,list.get(i));
   }
   saveAppsList();
-  mRollo.resume();
+  sRollo.resume();
 }
