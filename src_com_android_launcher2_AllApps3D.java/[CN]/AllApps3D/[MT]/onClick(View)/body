@@ -2,7 +2,7 @@
   if (mLocks != 0 || !isVisible()) {
     return;
   }
-  if (mRollo.checkClickOK() && mCurrentIconIndex == mDownIconIndex && mCurrentIconIndex >= 0 && mCurrentIconIndex < mAllAppsList.size()) {
+  if (sRollo.checkClickOK() && mCurrentIconIndex == mDownIconIndex && mCurrentIconIndex >= 0 && mCurrentIconIndex < mAllAppsList.size()) {
     reallyPlaySoundEffect(SoundEffectConstants.CLICK);
     ApplicationInfo app=mAllAppsList.get(mCurrentIconIndex);
     mLauncher.startActivitySafely(app.intent);

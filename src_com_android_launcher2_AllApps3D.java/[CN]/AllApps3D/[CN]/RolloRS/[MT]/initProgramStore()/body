@@ -1,5 +1,5 @@
 {
-  ProgramStore.Builder bs=new ProgramStore.Builder(mRS,null,null);
+  ProgramStore.Builder bs=new ProgramStore.Builder(sRS,null,null);
   bs.setDepthFunc(ProgramStore.DepthFunc.ALWAYS);
   bs.setColorMask(true,true,true,false);
   bs.setDitherEnable(true);

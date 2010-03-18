@@ -2,11 +2,11 @@
   cancelLongPress();
   mNextZoom=zoom;
   mAnimateNextZoom=animate;
-  if (mRollo == null || !mHaveSurface) {
+  if (sRollo == null || !mHaveSurface) {
     mZoomDirty=true;
     mZoom=zoom;
   }
  else {
-    mRollo.setZoom(zoom,animate);
+    sRollo.setZoom(zoom,animate);
   }
 }

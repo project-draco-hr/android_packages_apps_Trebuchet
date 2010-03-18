@@ -2,13 +2,13 @@
   if (mAllAppsList == null) {
     return;
   }
-  if (mRS == null) {
+  if (sRS == null) {
     return;
   }
   final int N=list.size();
-  if (mRollo != null) {
-    mRollo.pause();
-    mRollo.reallocAppsList(mRollo.mState.iconCount + N);
+  if (sRollo != null) {
+    sRollo.pause();
+    sRollo.reallocAppsList(sRollo.mState.iconCount + N);
   }
   for (int i=0; i < N; i++) {
     final ApplicationInfo item=list.get(i);
@@ -17,12 +17,12 @@
       index=-(index + 1);
     }
     mAllAppsList.add(index,item);
-    if (mRollo != null) {
-      mRollo.addApp(index,item);
+    if (sRollo != null) {
+      sRollo.addApp(index,item);
     }
   }
-  if (mRollo != null) {
-    mRollo.saveAppsList();
-    mRollo.resume();
+  if (sRollo != null) {
+    sRollo.saveAppsList();
+    sRollo.resume();
   }
 }

@@ -1,9 +1,9 @@
 {
-  mRS.mMessageCallback=null;
+  sRS.mMessageCallback=null;
   if (!mSurrendered) {
     Log.i(TAG,"onDetachedFromWindow");
     destroyRenderScript();
-    mRS=null;
-    mRollo=null;
+    sRS=null;
+    sRollo=null;
   }
 }

@@ -1,6 +1,6 @@
 {
-  mIcons[index]=Allocation.createFromBitmap(mRS,item.iconBitmap,Element.RGBA_8888(mRS),false);
-  mLabels[index]=Allocation.createFromBitmap(mRS,item.titleBitmap,Element.A_8(mRS),false);
+  mIcons[index]=Allocation.createFromBitmap(sRS,item.iconBitmap,Element.RGBA_8888(sRS),false);
+  mLabels[index]=Allocation.createFromBitmap(sRS,item.titleBitmap,Element.A_8(sRS),false);
   mIconIds[index]=mIcons[index].getID();
   mLabelIds[index]=mLabels[index].getID();
 }

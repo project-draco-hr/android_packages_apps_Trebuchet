@@ -2,8 +2,8 @@
   if (mAllAppsList == null) {
     return;
   }
-  if (mRollo != null) {
-    mRollo.pause();
+  if (sRollo != null) {
+    sRollo.pause();
   }
   final int N=list.size();
   for (int i=0; i < N; i++) {
@@ -11,16 +11,16 @@
     int index=findAppByComponent(mAllAppsList,item);
     if (index >= 0) {
       mAllAppsList.remove(index);
-      if (mRollo != null) {
-        mRollo.removeApp(index);
+      if (sRollo != null) {
+        sRollo.removeApp(index);
       }
     }
  else {
       Log.w(TAG,"couldn't find a match for item \"" + item + "\"");
     }
   }
-  if (mRollo != null) {
-    mRollo.saveAppsList();
-    mRollo.resume();
+  if (sRollo != null) {
+    sRollo.saveAppsList();
+    sRollo.resume();
   }
 }

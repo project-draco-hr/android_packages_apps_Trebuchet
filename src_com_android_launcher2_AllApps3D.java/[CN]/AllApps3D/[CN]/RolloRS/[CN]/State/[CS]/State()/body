@@ -1,5 +1,5 @@
 {
-  mType=Type.createFromClass(mRS,State.class,1,"StateClass");
-  mAlloc=Allocation.createTyped(mRS,mType);
+  mType=Type.createFromClass(sRS,State.class,1,"StateClass");
+  mAlloc=Allocation.createTyped(sRS,mType);
   save();
 }
