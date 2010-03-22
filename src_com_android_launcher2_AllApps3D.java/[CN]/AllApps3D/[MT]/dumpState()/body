@@ -2,6 +2,8 @@
   Log.d(TAG,"sRS=" + sRS);
   Log.d(TAG,"sRollo=" + sRollo);
   ApplicationInfo.dumpApplicationInfoList(TAG,"mAllAppsList",mAllAppsList);
+  Log.d(TAG,"mTouchXBorders=" + Arrays.toString(mTouchXBorders));
+  Log.d(TAG,"mTouchYBorders=" + Arrays.toString(mTouchYBorders));
   Log.d(TAG,"mArrowNavigation=" + mArrowNavigation);
   Log.d(TAG,"mStartedScrolling=" + mStartedScrolling);
   Log.d(TAG,"mLastSelection=" + mLastSelection);
