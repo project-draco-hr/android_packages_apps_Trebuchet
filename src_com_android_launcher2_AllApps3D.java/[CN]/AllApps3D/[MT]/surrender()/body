@@ -1,5 +1,7 @@
 {
-  sRS.contextSetSurface(0,0,null);
-  sRS.mMessageCallback=null;
+  if (sRS != null) {
+    sRS.contextSetSurface(0,0,null);
+    sRS.mMessageCallback=null;
+  }
   mSurrendered=true;
 }
