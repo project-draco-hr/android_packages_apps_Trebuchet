@@ -32,7 +32,7 @@
         added=addClockWidget(db,values);
       }
  else       if (TAG_APPWIDGET.equals(name)) {
-        added=addAppWidget(db,values,a);
+        added=addAppWidget(db,values,a,packageManager);
       }
  else       if (TAG_SHORTCUT.equals(name)) {
         added=addUriShortcut(db,values,a);

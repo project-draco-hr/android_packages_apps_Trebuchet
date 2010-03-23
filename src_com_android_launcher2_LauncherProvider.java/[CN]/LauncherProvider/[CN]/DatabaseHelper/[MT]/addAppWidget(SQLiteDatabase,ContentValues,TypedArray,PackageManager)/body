@@ -1,0 +1,28 @@
+{
+  String packageName=a.getString(R.styleable.Favorite_packageName);
+  String className=a.getString(R.styleable.Favorite_className);
+  if (packageName == null || className == null) {
+    return false;
+  }
+  boolean hasPackage=true;
+  ComponentName cn=new ComponentName(packageName,className);
+  try {
+    packageManager.getReceiverInfo(cn,0);
+  }
+ catch (  Exception e) {
+    String[] packages=packageManager.currentToCanonicalPackageNames(new String[]{packageName});
+    cn=new ComponentName(packages[0],className);
+    try {
+      packageManager.getReceiverInfo(cn,0);
+    }
+ catch (    Exception e1) {
+      hasPackage=false;
+    }
+  }
+  if (hasPackage) {
+    int spanX=a.getInt(R.styleable.Favorite_spanX,0);
+    int spanY=a.getInt(R.styleable.Favorite_spanY,0);
+    return addAppWidget(db,values,cn,spanX,spanY);
+  }
+  return false;
+}
