@@ -2,9 +2,10 @@
   Log.d(TAG,"normalizing icons");
   db.beginTransaction();
   Cursor c=null;
+  SQLiteStatement update=null;
   try {
     boolean logged=false;
-    final SQLiteStatement update=db.compileStatement("UPDATE favorites " + "SET icon=? WHERE _id=?");
+    update=db.compileStatement("UPDATE favorites " + "SET icon=? WHERE _id=?");
     c=db.rawQuery("SELECT _id, icon FROM favorites WHERE iconType=" + Favorites.ICON_TYPE_BITMAP,null);
     final int idIndex=c.getColumnIndexOrThrow(Favorites._ID);
     final int iconIndex=c.getColumnIndexOrThrow(Favorites.ICON);
@@ -21,7 +22,6 @@
             update.execute();
           }
           bitmap.recycle();
-          bitmap=null;
         }
       }
  catch (      Exception e) {
@@ -41,6 +41,9 @@
   }
  finally {
     db.endTransaction();
+    if (update != null) {
+      update.close();
+    }
     if (c != null) {
       c.close();
     }
