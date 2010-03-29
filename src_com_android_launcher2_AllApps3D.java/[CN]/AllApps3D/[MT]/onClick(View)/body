@@ -5,6 +5,6 @@
   if (sRollo.checkClickOK() && mCurrentIconIndex == mDownIconIndex && mCurrentIconIndex >= 0 && mCurrentIconIndex < mAllAppsList.size()) {
     reallyPlaySoundEffect(SoundEffectConstants.CLICK);
     ApplicationInfo app=mAllAppsList.get(mCurrentIconIndex);
-    mLauncher.startActivitySafely(app.intent);
+    mLauncher.startActivitySafely(app.intent,app);
   }
 }
