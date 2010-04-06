@@ -1,0 +1,4 @@
+{
+  final int zone=mZone;
+  return !(zone != 0 && (zone > 0 && event.getX() >= zone) || (zone < 0 && event.getX() < getWidth() + zone)) && super.onTouchEvent(event);
+}
