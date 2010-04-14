@@ -1,5 +1,4 @@
 {
-  mWaitingForResult=true;
   final View layout=View.inflate(Launcher.this,R.layout.rename_folder,null);
   mInput=(EditText)layout.findViewById(R.id.folder_name);
   AlertDialog.Builder builder=new AlertDialog.Builder(Launcher.this);
@@ -28,6 +27,7 @@
   final AlertDialog dialog=builder.create();
   dialog.setOnShowListener(new DialogInterface.OnShowListener(){
     public void onShow(    DialogInterface dialog){
+      mWaitingForResult=true;
       mInput.requestFocus();
       InputMethodManager inputManager=(InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
       inputManager.showSoftInput(mInput,0);
