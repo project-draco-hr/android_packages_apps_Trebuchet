@@ -3,6 +3,9 @@ synchronized (mLock) {
     if (mStopped) {
       return null;
     }
+    if (mCallbacks == null) {
+      return null;
+    }
     final Callbacks callbacks=mCallbacks.get();
     if (callbacks != oldCallbacks) {
       return null;
