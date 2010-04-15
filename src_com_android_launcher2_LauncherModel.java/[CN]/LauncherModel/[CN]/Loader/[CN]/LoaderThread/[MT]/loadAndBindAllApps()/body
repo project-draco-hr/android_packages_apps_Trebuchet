@@ -1,0 +1,46 @@
+{
+  final long t=DEBUG_LOADERS ? SystemClock.uptimeMillis() : 0;
+  final Intent mainIntent=new Intent(Intent.ACTION_MAIN,null);
+  mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
+  final Callbacks callbacks=mCallbacks.get();
+  if (callbacks == null) {
+    return;
+  }
+  final PackageManager packageManager=mContext.getPackageManager();
+  final List<ResolveInfo> apps=packageManager.queryIntentActivities(mainIntent,0);
+  int N;
+  int batchSize=callbacks.getAppBatchSize();
+synchronized (mLock) {
+    mBeforeFirstLoad=false;
+    mAllAppsList.clear();
+    if (apps == null)     return;
+    N=apps.size();
+    if (batchSize <= 0)     batchSize=N;
+  }
+  int i=0;
+  while (i < N && !mStopped) {
+synchronized (mLock) {
+      final long t2=DEBUG_LOADERS ? SystemClock.uptimeMillis() : 0;
+      for (int j=0; i < N && j < batchSize; j++) {
+        mAllAppsList.add(new ApplicationInfo(apps.get(i),mIconCache));
+        i++;
+      }
+      Collections.sort(mAllAppsList.data,APP_NAME_COMPARATOR);
+      Collections.sort(mAllAppsList.added,APP_NAME_COMPARATOR);
+      if (DEBUG_LOADERS) {
+        Log.d(TAG,"batch of " + batchSize + " icons processed in "+ (SystemClock.uptimeMillis() - t2)+ "ms");
+      }
+    }
+    mHandler.post(bindAllAppsTask);
+    if (ALL_APPS_LOAD_DELAY > 0) {
+      try {
+        Thread.sleep(ALL_APPS_LOAD_DELAY);
+      }
+ catch (      InterruptedException exc) {
+      }
+    }
+  }
+  if (DEBUG_LOADERS) {
+    Log.d(TAG,"cached all " + N + " apps in "+ (SystemClock.uptimeMillis() - t)+ "ms");
+  }
+}
