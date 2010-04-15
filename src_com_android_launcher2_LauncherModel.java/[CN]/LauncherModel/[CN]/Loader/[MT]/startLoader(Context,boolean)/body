@@ -3,7 +3,7 @@ synchronized (mLock) {
     if (DEBUG_LOADERS) {
       Log.d(TAG,"startLoader isLaunching=" + isLaunching);
     }
-    if (mCallbacks.get() != null) {
+    if (mCallbacks != null && mCallbacks.get() != null) {
       LoaderThread oldThread=mLoaderThread;
       if (oldThread != null) {
         if (oldThread.isLaunching()) {
