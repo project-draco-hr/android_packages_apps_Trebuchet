@@ -1,4 +1,8 @@
 {
-  data.add(info);
-  added.add(info);
+  int pos=Collections.binarySearch(data,info,LauncherModel.APP_NAME_COMPARATOR);
+  if (pos < 0)   pos=-1 - pos;
+  data.add(pos,info);
+  pos=Collections.binarySearch(added,info,LauncherModel.APP_NAME_COMPARATOR);
+  if (pos < 0)   pos=-1 - pos;
+  added.add(pos,info);
 }

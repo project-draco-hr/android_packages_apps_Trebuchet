@@ -48,6 +48,11 @@ synchronized (LoaderThread.this) {
       Log.d(TAG,"done waiting to be done with workspace");
     }
   }
+synchronized (mLock) {
+    if (mIsLaunching) {
+      android.os.Process.setThreadPriority(Process.THREAD_PRIORITY_DEFAULT);
+    }
+  }
   int allAppsSeq;
   boolean allAppsDirty;
 synchronized (mLock) {
@@ -58,7 +63,7 @@ synchronized (mLock) {
     }
   }
   if (allAppsDirty) {
-    loadAllApps();
+    loadAndBindAllApps();
   }
 synchronized (mLock) {
     if (mStopped) {
@@ -67,9 +72,6 @@ synchronized (mLock) {
     if (allAppsSeq == mAllAppsSeq) {
       mLastAllAppsSeq=mAllAppsSeq;
     }
-  }
-  if (allAppsDirty) {
-    bindAllApps();
   }
   mContext=null;
 synchronized (mLock) {
