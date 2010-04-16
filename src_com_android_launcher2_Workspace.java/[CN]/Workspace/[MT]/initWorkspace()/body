@@ -1,6 +1,6 @@
 {
   Context context=getContext();
-  mScroller=new Scroller(context);
+  mScroller=new Scroller(context,new OvershootInterpolator());
   mCurrentScreen=mDefaultScreen;
   Launcher.setScreen(mCurrentScreen);
   LauncherApplication app=(LauncherApplication)context.getApplicationContext();
