@@ -2,6 +2,6 @@
   IBinder token=getWindowToken();
   if (token != null) {
     mWallpaperManager.setWallpaperOffsetSteps(1.0f / (getChildCount() - 1),0);
-    mWallpaperManager.setWallpaperOffsets(getWindowToken(),mScrollX / (float)scrollRange,0);
+    mWallpaperManager.setWallpaperOffsets(getWindowToken(),Math.max(0.f,Math.min(mScrollX / (float)scrollRange,1.f)),0);
   }
 }
