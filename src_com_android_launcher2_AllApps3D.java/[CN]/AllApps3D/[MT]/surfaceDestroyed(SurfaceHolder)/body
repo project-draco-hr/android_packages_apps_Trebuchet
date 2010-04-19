@@ -3,6 +3,6 @@
   if (!mSurrendered) {
     sRS.mMessageCallback=null;
   }
-  mZoomDirty=true;
+  sZoomDirty=true;
   mHaveSurface=false;
 }

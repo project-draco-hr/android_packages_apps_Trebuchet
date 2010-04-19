@@ -11,8 +11,8 @@
   Log.d(TAG,"mVelocityTracker=" + mVelocityTracker);
   Log.d(TAG,"mTouchTracking=" + mTouchTracking);
   Log.d(TAG,"mShouldGainFocus=" + mShouldGainFocus);
-  Log.d(TAG,"mZoomDirty=" + mZoomDirty);
-  Log.d(TAG,"mAnimateNextZoom=" + mAnimateNextZoom);
+  Log.d(TAG,"sZoomDirty=" + sZoomDirty);
+  Log.d(TAG,"sAnimateNextZoom=" + sAnimateNextZoom);
   Log.d(TAG,"mZoom=" + mZoom);
   Log.d(TAG,"mScrollPos=" + sRollo.mScrollPos);
   Log.d(TAG,"mVelocity=" + mVelocity);

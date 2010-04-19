@@ -1,9 +1,9 @@
 {
   cancelLongPress();
-  mNextZoom=zoom;
-  mAnimateNextZoom=animate;
+  sNextZoom=zoom;
+  sAnimateNextZoom=animate;
   if (sRollo == null || !mHaveSurface) {
-    mZoomDirty=true;
+    sZoomDirty=true;
     mZoom=zoom;
   }
  else {
