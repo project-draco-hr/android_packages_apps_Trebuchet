@@ -1,37 +1,84 @@
 {
   final long t=DEBUG_LOADERS ? SystemClock.uptimeMillis() : 0;
-  final Intent mainIntent=new Intent(Intent.ACTION_MAIN,null);
-  mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
-  final Callbacks callbacks=mCallbacks.get();
-  if (callbacks == null) {
+  final Callbacks oldCallbacks=mCallbacks.get();
+  if (oldCallbacks == null) {
+    Log.w(TAG,"LoaderThread running with no launcher (loadAndBindAllApps)");
     return;
   }
+  final Intent mainIntent=new Intent(Intent.ACTION_MAIN,null);
+  mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
   final PackageManager packageManager=mContext.getPackageManager();
-  final List<ResolveInfo> apps=packageManager.queryIntentActivities(mainIntent,0);
-  int N;
-  int batchSize=callbacks.getAppBatchSize();
-synchronized (mLock) {
-    mBeforeFirstLoad=false;
-    mAllAppsList.clear();
-    if (apps == null)     return;
-    N=apps.size();
-    if (batchSize <= 0)     batchSize=N;
-  }
+  List<ResolveInfo> apps=null;
+  int N=Integer.MAX_VALUE;
+  int startIndex;
   int i=0;
+  int batchSize=-1;
   while (i < N && !mStopped) {
 synchronized (mLock) {
+      if (i == 0) {
+        mAllAppsList.clear();
+        final long qiaTime=DEBUG_LOADERS ? SystemClock.uptimeMillis() : 0;
+        apps=packageManager.queryIntentActivities(mainIntent,0);
+        if (DEBUG_LOADERS) {
+          Log.d(TAG,"queryIntentActivities took " + (SystemClock.uptimeMillis() - qiaTime) + "ms");
+        }
+        if (apps == null) {
+          return;
+        }
+        N=apps.size();
+        if (DEBUG_LOADERS) {
+          Log.d(TAG,"queryIntentActivities got " + N + " apps");
+        }
+        if (N == 0) {
+          return;
+        }
+        if (mBatchSize == 0) {
+          batchSize=N;
+        }
+ else {
+          batchSize=mBatchSize;
+        }
+        final long sortTime=DEBUG_LOADERS ? SystemClock.uptimeMillis() : 0;
+        Collections.sort(apps,new ResolveInfo.DisplayNameComparator(packageManager));
+        if (DEBUG_LOADERS) {
+          Log.d(TAG,"sort took " + (SystemClock.uptimeMillis() - qiaTime) + "ms");
+        }
+      }
       final long t2=DEBUG_LOADERS ? SystemClock.uptimeMillis() : 0;
+      startIndex=i;
       for (int j=0; i < N && j < batchSize; j++) {
         mAllAppsList.add(new ApplicationInfo(apps.get(i),mIconCache));
         i++;
       }
+      final boolean first=i <= batchSize;
+      final ArrayList<ApplicationInfo> added=mAllAppsList.added;
+      mAllAppsList.added=new ArrayList<ApplicationInfo>();
+      mHandler.post(new Runnable(){
+        public void run(){
+          final long t=SystemClock.uptimeMillis();
+          final Callbacks callbacks=tryGetCallbacks(oldCallbacks);
+          if (first) {
+            mBeforeFirstLoad=false;
+            callbacks.bindAllApplications(added);
+          }
+ else {
+            callbacks.bindAppsAdded(added);
+          }
+          if (DEBUG_LOADERS) {
+            Log.d(TAG,"bound " + added.size() + " apps in "+ (SystemClock.uptimeMillis() - t)+ "ms");
+          }
+        }
+      }
+);
       if (DEBUG_LOADERS) {
-        Log.d(TAG,"batch of " + batchSize + " icons processed in "+ (SystemClock.uptimeMillis() - t2)+ "ms");
+        Log.d(TAG,"batch of " + (i - startIndex) + " icons processed in "+ (SystemClock.uptimeMillis() - t2)+ "ms");
       }
     }
-    mHandler.post(bindAllAppsTask);
     if (mAllAppsLoadDelay > 0 && i < N) {
       try {
+        if (DEBUG_LOADERS) {
+          Log.d(TAG,"sleeping for " + mAllAppsLoadDelay + "ms");
+        }
         Thread.sleep(mAllAppsLoadDelay);
       }
  catch (      InterruptedException exc) {

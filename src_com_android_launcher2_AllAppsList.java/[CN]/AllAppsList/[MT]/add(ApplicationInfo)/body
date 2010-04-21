@@ -1,4 +1,7 @@
 {
+  if (findActivity(data,info.componentName)) {
+    return;
+  }
   data.add(info);
   added.add(info);
 }

@@ -1,0 +1,10 @@
+{
+  final int N=apps.size();
+  for (int i=0; i < N; i++) {
+    final ApplicationInfo info=apps.get(i);
+    if (info.componentName.equals(component)) {
+      return true;
+    }
+  }
+  return false;
+}
