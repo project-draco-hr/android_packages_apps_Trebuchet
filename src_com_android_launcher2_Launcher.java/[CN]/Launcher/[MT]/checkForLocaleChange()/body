@@ -15,5 +15,6 @@
     localeConfiguration.mnc=mnc;
     writeConfiguration(this,localeConfiguration);
     mIconCache.flush();
+    loadHotseats();
   }
 }

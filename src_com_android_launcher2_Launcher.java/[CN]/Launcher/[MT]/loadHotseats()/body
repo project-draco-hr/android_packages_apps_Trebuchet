@@ -1,0 +1,24 @@
+{
+  PackageManager pm=getPackageManager();
+  for (int i=0; i < mHotseats.length; i++) {
+    Intent intent=mHotseats[i];
+    if (LOGD) {
+      Log.d(TAG,"loadHotseats: hotseat " + i + " initial intent=["+ intent.toUri(Intent.URI_INTENT_SCHEME)+ "]");
+    }
+    if (intent.getAction().equals(Intent.ACTION_WEB_SEARCH) && intent.getData().equals(Uri.EMPTY)) {
+      intent=new Intent(Intent.ACTION_VIEW,Uri.parse("http://www.google.com/"));
+    }
+    ComponentName com=intent.resolveActivity(pm);
+    mHotseats[i]=new Intent(Intent.ACTION_MAIN).setComponent(com);
+    try {
+      ActivityInfo ai=pm.getActivityInfo(com,0);
+      mHotseatLabels[i]=ai.loadLabel(pm);
+    }
+ catch (    PackageManager.NameNotFoundException ex) {
+      mHotseatLabels[i]="";
+    }
+    if (LOGD) {
+      Log.d(TAG,"loadHotseats: hotseat " + i + " intent=["+ mHotseats[i].toUri(Intent.URI_INTENT_SCHEME)+ "] label=["+ mHotseatLabels[i]+ "]");
+    }
+  }
+}
