@@ -5,7 +5,7 @@
   }
  catch (  ActivityNotFoundException e) {
     Toast.makeText(this,R.string.activity_not_found,Toast.LENGTH_SHORT).show();
-    Log.e(TAG,"Unable to launch. tag=" + tag + " intent="+ intent);
+    Log.e(TAG,"Unable to launch. tag=" + tag + " intent="+ intent,e);
   }
 catch (  SecurityException e) {
     Toast.makeText(this,R.string.activity_not_found,Toast.LENGTH_SHORT).show();
