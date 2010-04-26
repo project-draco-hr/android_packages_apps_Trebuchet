@@ -12,9 +12,10 @@
   }
   final int newX=whichScreen * getWidth();
   final int delta=newX - mScrollX;
-  final int duration=screenDelta != 0 ? screenDelta * 300 : 300;
+  final int duration=screenDelta != 0 ? 200 + screenDelta * 100 : 300;
   awakenScrollBars(duration);
   if (!mScroller.isFinished())   mScroller.abortAnimation();
+  mScrollInterpolator.setDistance(screenDelta);
   mScroller.startScroll(mScrollX,0,delta,0,duration);
   invalidate();
 }
