@@ -1,21 +1,3 @@
 {
-  whichScreen=Math.max(0,Math.min(whichScreen,getChildCount() - 1));
-  clearVacantCache();
-  enableChildrenCache(mCurrentScreen,whichScreen);
-  final int screenDelta=Math.abs(whichScreen - mCurrentScreen);
-  mNextScreen=whichScreen;
-  mPreviousIndicator.setLevel(mNextScreen);
-  mNextIndicator.setLevel(mNextScreen);
-  View focusedChild=getFocusedChild();
-  if (focusedChild != null && screenDelta != 0 && focusedChild == getChildAt(mCurrentScreen)) {
-    focusedChild.clearFocus();
-  }
-  final int newX=whichScreen * getWidth();
-  final int delta=newX - mScrollX;
-  final int duration=screenDelta != 0 ? 200 + screenDelta * 100 : 300;
-  awakenScrollBars(duration);
-  if (!mScroller.isFinished())   mScroller.abortAnimation();
-  mScrollInterpolator.setDistance(screenDelta);
-  mScroller.startScroll(mScrollX,0,delta,0,duration);
-  invalidate();
+  snapToScreen(whichScreen,0,false);
 }

@@ -7,15 +7,14 @@
   }
  else {
     final long drawingTime=getDrawingTime();
-    if (mNextScreen >= 0 && mNextScreen < getChildCount() && Math.abs(mCurrentScreen - mNextScreen) == 1) {
-      drawChild(canvas,getChildAt(mCurrentScreen),drawingTime);
-      drawChild(canvas,getChildAt(mNextScreen),drawingTime);
+    final float scrollPos=(float)mScrollX / getWidth();
+    final int leftScreen=(int)scrollPos;
+    final int rightScreen=leftScreen + 1;
+    if (leftScreen >= 0) {
+      drawChild(canvas,getChildAt(leftScreen),drawingTime);
     }
- else {
-      final int count=getChildCount();
-      for (int i=0; i < count; i++) {
-        drawChild(canvas,getChildAt(i),drawingTime);
-      }
+    if (scrollPos != leftScreen && rightScreen < getChildCount()) {
+      drawChild(canvas,getChildAt(rightScreen),drawingTime);
     }
   }
   if (restore) {
