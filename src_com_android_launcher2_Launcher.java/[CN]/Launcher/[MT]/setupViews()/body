@@ -16,8 +16,12 @@
   mHandleView.setLauncher(this);
   mHandleView.setOnClickListener(this);
   mHandleView.setOnLongClickListener(this);
-  findViewById(R.id.hotseat_left).setContentDescription(mHotseatLabels[0]);
-  findViewById(R.id.hotseat_right).setContentDescription(mHotseatLabels[1]);
+  ImageView hotseatLeft=(ImageView)findViewById(R.id.hotseat_left);
+  hotseatLeft.setContentDescription(mHotseatLabels[0]);
+  hotseatLeft.setImageDrawable(mHotseatIcons[0]);
+  ImageView hotseatRight=(ImageView)findViewById(R.id.hotseat_right);
+  hotseatRight.setContentDescription(mHotseatLabels[1]);
+  hotseatRight.setImageDrawable(mHotseatIcons[1]);
   mPreviousView=(ImageView)dragLayer.findViewById(R.id.previous_screen);
   mNextView=(ImageView)dragLayer.findViewById(R.id.next_screen);
   Drawable previous=mPreviousView.getDrawable();
