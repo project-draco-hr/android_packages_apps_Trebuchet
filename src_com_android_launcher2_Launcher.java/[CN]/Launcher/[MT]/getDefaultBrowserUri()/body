@@ -1,0 +1,7 @@
+{
+  String url=getString(R.string.default_browser_url);
+  if (url.indexOf("{CID}") != -1) {
+    url=url.replace("{CID}","android-google");
+  }
+  return Uri.parse(url);
+}
