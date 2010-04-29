@@ -1,11 +1,8 @@
 {
   if (fromScreen > toScreen) {
     final int temp=fromScreen;
-    fromScreen=toScreen - 1;
+    fromScreen=toScreen;
     toScreen=temp;
-  }
- else {
-    toScreen++;
   }
   final int count=getChildCount();
   fromScreen=Math.max(fromScreen,0);
