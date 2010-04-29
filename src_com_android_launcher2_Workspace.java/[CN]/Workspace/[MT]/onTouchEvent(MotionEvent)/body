@@ -25,19 +25,19 @@ break;
 case MotionEvent.ACTION_MOVE:
 if (mTouchState == TOUCH_STATE_SCROLLING) {
 final int pointerIndex=ev.findPointerIndex(mActivePointerId);
-final float x=ev.getX(pointerIndex);
-final int deltaX=(int)(mLastMotionX - x);
+final float x=filterX(ev.getX(pointerIndex));
+final float deltaX=mLastMotionX - x;
 mLastMotionX=x;
 if (deltaX < 0) {
 if (mScrollX > 0) {
-  scrollBy(Math.max(-mScrollX,deltaX),0);
+  scrollBy(Math.round(Math.max(-mScrollX,deltaX)),0);
   updateWallpaperOffset();
 }
 }
  else if (deltaX > 0) {
 final int availableToScroll=getChildAt(getChildCount() - 1).getRight() - mScrollX - getWidth();
 if (availableToScroll > 0) {
-  scrollBy(Math.min(availableToScroll,deltaX),0);
+  scrollBy(Math.round(Math.min(availableToScroll,deltaX)),0);
   updateWallpaperOffset();
 }
 }
@@ -69,6 +69,7 @@ if (mVelocityTracker != null) {
 mVelocityTracker.recycle();
 mVelocityTracker=null;
 }
+resetFilter();
 }
 mTouchState=TOUCH_STATE_REST;
 mActivePointerId=INVALID_POINTER;
@@ -76,6 +77,7 @@ break;
 case MotionEvent.ACTION_CANCEL:
 mTouchState=TOUCH_STATE_REST;
 mActivePointerId=INVALID_POINTER;
+resetFilter();
 break;
 case MotionEvent.ACTION_POINTER_UP:
 onSecondaryPointerUp(ev);
