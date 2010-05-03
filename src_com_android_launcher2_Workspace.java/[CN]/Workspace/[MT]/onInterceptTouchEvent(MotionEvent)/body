@@ -28,7 +28,7 @@ case MotionEvent.ACTION_MOVE:
         if (xPaged) {
           mTouchState=TOUCH_STATE_SCROLLING;
           mLastMotionX=x;
-          enableChildrenCache(0,getChildCount());
+          enableChildrenCache(mCurrentScreen - 1,mCurrentScreen + 1);
         }
         if (mAllowLongPress) {
           mAllowLongPress=false;
