@@ -3,7 +3,7 @@
   ArrayList<ApplicationInfo> added=null;
   ArrayList<ApplicationInfo> removed=null;
   ArrayList<ApplicationInfo> modified=null;
-synchronized (mLock) {
+synchronized (mAllAppsListLock) {
     if (mBeforeFirstLoad) {
       return;
     }
