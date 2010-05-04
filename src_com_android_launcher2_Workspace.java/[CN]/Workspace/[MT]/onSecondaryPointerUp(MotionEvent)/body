@@ -9,6 +9,5 @@
     if (mVelocityTracker != null) {
       mVelocityTracker.clear();
     }
-    resetFilter();
   }
 }
