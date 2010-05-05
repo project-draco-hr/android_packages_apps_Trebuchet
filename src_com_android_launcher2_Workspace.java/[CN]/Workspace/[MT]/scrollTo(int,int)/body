@@ -1,0 +1,5 @@
+{
+  super.scrollTo(x,y);
+  mTouchX=x;
+  mSmoothingTime=System.nanoTime() / NANOTIME_DIV;
+}
