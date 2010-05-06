@@ -1,6 +1,7 @@
 {
   if (mScroller.computeScrollOffset()) {
-    mScrollX=mScroller.getCurrX();
+    mTouchX=mScrollX=mScroller.getCurrX();
+    mSmoothingTime=System.nanoTime() / NANOTIME_DIV;
     mScrollY=mScroller.getCurrY();
     updateWallpaperOffset();
     postInvalidate();
@@ -12,5 +13,16 @@
     Launcher.setScreen(mCurrentScreen);
     mNextScreen=INVALID_SCREEN;
     clearChildrenCache();
+  }
+ else   if (mTouchState == TOUCH_STATE_SCROLLING) {
+    final float now=System.nanoTime() / NANOTIME_DIV;
+    final float e=(float)Math.exp((now - mSmoothingTime) / SMOOTHING_CONSTANT);
+    final float dx=mTouchX - mScrollX;
+    mScrollX+=dx * e;
+    mSmoothingTime=now;
+    if (dx > 1.f || dx < -1.f) {
+      updateWallpaperOffset();
+      postInvalidate();
+    }
   }
 }
