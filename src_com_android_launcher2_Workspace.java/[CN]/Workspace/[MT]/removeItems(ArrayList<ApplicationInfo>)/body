@@ -72,7 +72,7 @@
  else           if (tag instanceof LauncherAppWidgetInfo) {
             final LauncherAppWidgetInfo info=(LauncherAppWidgetInfo)tag;
             final AppWidgetProviderInfo provider=widgets.getAppWidgetInfo(info.appWidgetId);
-            if (provider == null) {
+            if (provider != null) {
               for (              String packageName : packageNames) {
                 if (packageName.equals(provider.provider.getPackageName())) {
                   LauncherModel.deleteItemFromDatabase(mLauncher,info);
