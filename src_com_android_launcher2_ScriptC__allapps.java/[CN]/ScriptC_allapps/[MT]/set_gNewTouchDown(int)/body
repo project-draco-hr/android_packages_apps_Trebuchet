@@ -1,0 +1,4 @@
+{
+  mField_gNewTouchDown=v;
+  setVar(5,v);
+}

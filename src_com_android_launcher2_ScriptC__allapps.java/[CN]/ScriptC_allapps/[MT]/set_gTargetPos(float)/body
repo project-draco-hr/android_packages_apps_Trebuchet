@@ -1,0 +1,4 @@
+{
+  mField_gTargetPos=v;
+  setVar(12,v);
+}

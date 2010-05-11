@@ -16,7 +16,6 @@
       if (mArrowNavigation) {
         sRollo.clearSelectedIcon();
         sRollo.setHomeSelected(SELECTED_NONE);
-        sRollo.mState.save();
         mArrowNavigation=false;
       }
     }

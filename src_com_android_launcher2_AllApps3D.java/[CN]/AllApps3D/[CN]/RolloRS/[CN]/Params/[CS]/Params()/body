@@ -1,5 +1,0 @@
-{
-  mType=Type.createFromClass(sRS,Params.class,1,"ParamsClass");
-  mAlloc=Allocation.createTyped(sRS,mType);
-  save();
-}

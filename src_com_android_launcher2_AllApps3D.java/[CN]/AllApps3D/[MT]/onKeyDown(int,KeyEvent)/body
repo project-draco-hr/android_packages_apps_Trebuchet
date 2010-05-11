@@ -3,7 +3,7 @@
   if (!isVisible()) {
     return false;
   }
-  final int iconCount=sRollo.mState.iconCount;
+  final int iconCount=sRollo.mScript.get_gIconCount();
   if (keyCode == KeyEvent.KEYCODE_DPAD_CENTER || keyCode == KeyEvent.KEYCODE_ENTER) {
     if (mArrowNavigation) {
       if (mLastSelection == SELECTION_HOME) {
@@ -11,7 +11,7 @@
         mLauncher.closeAllApps(true);
       }
  else {
-        int whichApp=sRollo.mState.selectedIconIndex;
+        int whichApp=sRollo.mScript.get_gSelectedIconIndex();
         if (whichApp >= 0) {
           ApplicationInfo app=mAllAppsList.get(whichApp);
           mLauncher.startActivitySafely(app.intent,app);
@@ -23,7 +23,7 @@
   if (iconCount > 0) {
     final boolean isPortrait=getWidth() < getHeight();
     mArrowNavigation=true;
-    int currentSelection=sRollo.mState.selectedIconIndex;
+    int currentSelection=sRollo.mScript.get_gSelectedIconIndex();
     int currentTopRow=Math.round(sRollo.mScrollPos);
     final int currentPageCol=currentSelection % mColumnsPerPage;
     final int currentPageRow=(currentSelection - (currentTopRow * mColumnsPerPage)) / mRowsPerPage;
@@ -122,7 +122,6 @@ break;
 }
 if (newSelection != currentSelection) {
 sRollo.selectIcon(newSelection,SELECTED_FOCUSED);
-sRollo.mState.save();
 }
 }
 return handled;

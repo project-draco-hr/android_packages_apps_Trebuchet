@@ -2,17 +2,17 @@
   final int prev=mAllApps.mLastSelection;
 switch (mode) {
 case SELECTED_NONE:
-    mState.homeButtonId=mHomeButtonNormal.getID();
+    mScript.set_gHomeButton(mHomeButtonNormal);
   break;
 case SELECTED_FOCUSED:
 mAllApps.mLastSelection=SELECTION_HOME;
-mState.homeButtonId=mHomeButtonFocused.getID();
+mScript.set_gHomeButton(mHomeButtonFocused);
 if (prev != SELECTION_HOME) {
 mAllApps.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_SELECTED);
 }
 break;
 case SELECTED_PRESSED:
-mState.homeButtonId=mHomeButtonPressed.getID();
+mScript.set_gHomeButton(mHomeButtonPressed);
 break;
 }
 }

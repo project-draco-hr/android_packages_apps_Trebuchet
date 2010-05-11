@@ -1,0 +1,6 @@
+{
+  Position=new Float4();
+  ScaleOffset=new Float4();
+  BendPos=new Float2();
+  ImgSize=new Float2();
+}

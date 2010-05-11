@@ -1,0 +1,4 @@
+{
+  mField_gSelectedIconTexture=v;
+  setVar(9,v.getID());
+}

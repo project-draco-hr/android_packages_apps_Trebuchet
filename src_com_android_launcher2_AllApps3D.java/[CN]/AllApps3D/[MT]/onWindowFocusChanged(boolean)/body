@@ -3,25 +3,22 @@
   if (mSurrendered)   return;
   if (mArrowNavigation) {
     if (!hasWindowFocus) {
-      mLastSelectedIcon=sRollo.mState.selectedIconIndex;
+      mLastSelectedIcon=sRollo.mScript.get_gSelectedIconIndex();
       sRollo.setHomeSelected(SELECTED_NONE);
       sRollo.clearSelectedIcon();
-      sRollo.mState.save();
     }
  else {
-      if (sRollo.mState.iconCount > 0) {
+      if (sRollo.mScript.get_gIconCount() > 0) {
         if (mLastSelection == SELECTION_ICONS) {
           int selection=mLastSelectedIcon;
           final int firstIcon=Math.round(sRollo.mScrollPos) * mColumnsPerPage;
-          if (selection < 0 || selection < firstIcon || selection >= sRollo.mState.iconCount || selection >= firstIcon + (mColumnsPerPage * mRowsPerPage)) {
+          if (selection < 0 || selection < firstIcon || selection >= sRollo.mScript.get_gIconCount() || selection >= firstIcon + (mColumnsPerPage * mRowsPerPage)) {
             selection=firstIcon;
           }
           sRollo.selectIcon(selection,SELECTED_FOCUSED);
-          sRollo.mState.save();
         }
  else         if (mLastSelection == SELECTION_HOME) {
           sRollo.setHomeSelected(SELECTED_FOCUSED);
-          sRollo.mState.save();
         }
       }
     }

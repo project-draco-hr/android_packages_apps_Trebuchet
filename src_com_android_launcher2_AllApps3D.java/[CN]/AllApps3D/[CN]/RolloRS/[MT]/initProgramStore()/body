@@ -4,6 +4,5 @@
   bs.setColorMask(true,true,true,false);
   bs.setDitherEnable(true);
   bs.setBlendFunc(ProgramStore.BlendSrcFunc.SRC_ALPHA,ProgramStore.BlendDstFunc.ONE_MINUS_SRC_ALPHA);
-  mPSIcons=bs.create();
-  mPSIcons.setName("PSIcons");
+  mScript.set_gPS(bs.create());
 }

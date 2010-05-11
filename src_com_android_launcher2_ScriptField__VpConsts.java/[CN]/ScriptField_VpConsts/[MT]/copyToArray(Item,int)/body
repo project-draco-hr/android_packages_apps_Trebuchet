@@ -1,0 +1,7 @@
+{
+  mIOBuffer.reset(index * Item.sizeof);
+  mIOBuffer.addF32(i.Position);
+  mIOBuffer.addF32(i.ScaleOffset);
+  mIOBuffer.addF32(i.BendPos);
+  mIOBuffer.addF32(i.ImgSize);
+}

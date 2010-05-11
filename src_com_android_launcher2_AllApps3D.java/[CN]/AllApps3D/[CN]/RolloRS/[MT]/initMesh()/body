@@ -10,5 +10,5 @@
     tm.addTriangle(ct + 1,ct + 3,ct + 2);
   }
   mMesh=tm.create();
-  mMesh.setName("SMCell");
+  mScript.set_gSMCell(mMesh);
 }

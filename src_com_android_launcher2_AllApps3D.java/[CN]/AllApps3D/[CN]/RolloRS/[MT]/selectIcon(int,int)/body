@@ -4,7 +4,7 @@
     if (mAllApps != null) {
       mAllApps.mRestoreFocusIndex=index;
     }
-    mState.selectedIconIndex=-1;
+    mScript.set_gSelectedIconIndex(-1);
     if (mAllApps.mLastSelection == SELECTION_ICONS) {
       mAllApps.mLastSelection=SELECTION_NONE;
     }
@@ -13,14 +13,14 @@
     if (pressed == SELECTED_FOCUSED) {
       mAllApps.mLastSelection=SELECTION_ICONS;
     }
-    int prev=mState.selectedIconIndex;
-    mState.selectedIconIndex=index;
+    int prev=mScript.get_gSelectedIconIndex();
+    mScript.set_gSelectedIconIndex(index);
     ApplicationInfo info=appsList.get(index);
     Bitmap selectionBitmap=mSelectionBitmap;
     Utilities.drawSelectedAllAppsBitmap(mSelectionCanvas,selectionBitmap.getWidth(),selectionBitmap.getHeight(),pressed == SELECTED_PRESSED,info.iconBitmap);
     mSelectedIcon=Allocation.createFromBitmap(sRS,selectionBitmap,Element.RGBA_8888(sRS),false);
     mSelectedIcon.uploadToTexture(0);
-    mState.selectedIconTexture=mSelectedIcon.getID();
+    mScript.set_gSelectedIconTexture(mSelectedIcon);
     if (prev != index) {
       if (info.title != null && info.title.length() > 0) {
         mAllApps.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_SELECTED);

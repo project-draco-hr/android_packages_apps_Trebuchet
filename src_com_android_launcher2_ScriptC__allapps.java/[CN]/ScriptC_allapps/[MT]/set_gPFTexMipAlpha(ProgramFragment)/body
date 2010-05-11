@@ -1,0 +1,4 @@
+{
+  mField_gPFTexMipAlpha=v;
+  setVar(15,v.getID());
+}

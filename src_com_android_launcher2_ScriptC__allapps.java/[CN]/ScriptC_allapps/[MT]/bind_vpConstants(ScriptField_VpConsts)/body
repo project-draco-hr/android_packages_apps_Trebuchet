@@ -1,0 +1,10 @@
+{
+  android.util.Log.e("rs","bind_vpConstants " + f);
+  mField_vpConstants=f;
+  if (f == null) {
+    bindAllocation(null,21);
+  }
+ else {
+    bindAllocation(f.getAllocation(),21);
+  }
+}

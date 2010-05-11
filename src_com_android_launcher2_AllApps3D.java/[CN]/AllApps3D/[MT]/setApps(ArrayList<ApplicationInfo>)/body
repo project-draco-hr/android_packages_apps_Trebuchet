@@ -27,7 +27,6 @@
   }
   if (hasFocus() && mRestoreFocusIndex != -1) {
     sRollo.selectIcon(mRestoreFocusIndex,SELECTED_FOCUSED);
-    sRollo.mState.save();
     mRestoreFocusIndex=-1;
   }
   mLocks&=~LOCK_ICONS_PENDING;

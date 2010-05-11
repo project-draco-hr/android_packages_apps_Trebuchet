@@ -20,11 +20,12 @@
   initTouchState(w,h);
   sRollo.dirtyCheck();
   sRollo.resize(w,h);
+  Log.d(TAG,"sc " + sRS);
   if (sRS != null) {
     sRS.mMessageCallback=mMessageProc=new AAMessage();
   }
   if (sRollo.mUniformAlloc != null) {
-    float tf[]=new float[]{72.f,72.f,120.f,120.f,0.f,0.f,120.f,680.f,(2.f / 480.f),0,-((float)w / 2) - 0.25f,-380.25f};
+    float tf[]=new float[]{120.f,120.f,0.f,0.f,(2.f / 480.f),0,-((float)w / 2) - 0.25f,-380.25f,120.f,680.f,72.f,72.f};
     if (w > h) {
       tf[6]=40.f;
       tf[7]=h - 40.f;
@@ -32,6 +33,6 @@
       tf[10]=-((float)w / 2) - 0.25f;
       tf[11]=-((float)h / 2) - 0.25f;
     }
-    sRollo.mUniformAlloc.data(tf);
+    sRollo.mUniformAlloc.getAllocation().data(tf);
   }
 }

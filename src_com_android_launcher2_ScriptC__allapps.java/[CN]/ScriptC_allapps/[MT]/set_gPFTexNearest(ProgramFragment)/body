@@ -1,0 +1,4 @@
+{
+  mField_gPFTexNearest=v;
+  setVar(13,v.getID());
+}

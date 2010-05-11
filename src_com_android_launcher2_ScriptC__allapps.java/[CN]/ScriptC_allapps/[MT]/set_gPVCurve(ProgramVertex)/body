@@ -1,0 +1,4 @@
+{
+  mField_gPVCurve=v;
+  setVar(16,v.getID());
+}

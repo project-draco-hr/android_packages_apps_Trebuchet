@@ -1,5 +1,4 @@
 {
-  mState.targetPos=row;
-  mState.save();
-  mInvokeMoveTo.execute();
+  mScript.set_gTargetPos(row);
+  mScript.invokable_MoveTo();
 }

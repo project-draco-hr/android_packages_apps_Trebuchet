@@ -4,13 +4,12 @@
     sRollo.setHomeSelected(SELECTED_NONE);
   }
   if (zoom > 0.001f) {
-    sRollo.mState.zoomTarget=zoom;
+    sRollo.mScript.set_gZoomTarget(zoom);
   }
  else {
-    sRollo.mState.zoomTarget=0;
+    sRollo.mScript.set_gZoomTarget(0);
   }
-  sRollo.mState.save();
   if (!animate) {
-    sRollo.mInvokeSetZoom.execute();
+    sRollo.mScript.invokable_SetZoom();
   }
 }

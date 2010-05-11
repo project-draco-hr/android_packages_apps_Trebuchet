@@ -9,7 +9,7 @@
     int pos=-1;
 switch (mLastSelection) {
 case SELECTION_ICONS:
-      index=sRollo.mState.selectedIconIndex;
+      index=sRollo.mScript.get_gSelectedIconIndex();
     if (index >= 0) {
       ApplicationInfo info=mAllAppsList.get(index);
       if (info.title != null) {
