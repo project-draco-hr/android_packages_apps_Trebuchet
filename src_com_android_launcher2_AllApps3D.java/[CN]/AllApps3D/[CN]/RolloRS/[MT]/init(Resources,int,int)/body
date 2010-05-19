@@ -3,7 +3,6 @@
   mWidth=width;
   mHeight=height;
   mScript=new ScriptC_allapps(sRS,mRes,R.raw.allapps_bc,true);
-  mScript.setClearColor(0.0f,0.0f,0.0f,0.0f);
   initProgramVertex();
   initProgramFragment();
   initProgramStore();
