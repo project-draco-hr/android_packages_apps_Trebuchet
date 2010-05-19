@@ -77,4 +77,10 @@ synchronized (mLock) {
 synchronized (mLock) {
     mLoaderThread=null;
   }
+  mHandler.post(new Runnable(){
+    public void run(){
+      System.gc();
+    }
+  }
+);
 }
