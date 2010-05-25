@@ -1,6 +1,7 @@
 {
   if (screen < 0 || screen >= getChildCount()) {
-    throw new IllegalStateException("The screen must be >= 0 and < " + getChildCount());
+    Log.e(TAG,"The screen must be >= 0 and < " + getChildCount() + " (was "+ screen+ "); skipping child");
+    return;
   }
   clearVacantCache();
   final CellLayout group=(CellLayout)getChildAt(screen);
