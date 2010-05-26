@@ -1,4 +1,5 @@
 {
+  if (isAllAppsVisible())   return;
   int index=-1;
   if (v.getId() == R.id.hotseat_left) {
     index=0;
