@@ -1,0 +1,16 @@
+{
+  for (int x=item.cellX; x < (item.cellX + item.spanX); x++) {
+    for (int y=item.cellY; y < (item.cellY + item.spanY); y++) {
+      if (occupied[item.screen][x][y] != null) {
+        Log.e(TAG,"Error loading shortcut " + item + " into cell ("+ item.screen+ ":"+ x+ ","+ y+ ") occupied by "+ occupied[item.screen][x][y]);
+        return false;
+      }
+    }
+  }
+  for (int x=item.cellX; x < (item.cellX + item.spanX); x++) {
+    for (int y=item.cellY; y < (item.cellY + item.spanY); y++) {
+      occupied[item.screen][x][y]=item;
+    }
+  }
+  return true;
+}
