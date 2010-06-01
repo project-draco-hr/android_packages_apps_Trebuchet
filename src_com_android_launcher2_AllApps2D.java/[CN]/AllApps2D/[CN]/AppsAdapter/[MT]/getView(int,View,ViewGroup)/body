@@ -4,7 +4,12 @@
     convertView=mInflater.inflate(R.layout.application_boxed,parent,false);
   }
   final TextView textView=(TextView)convertView;
+  if (DEBUG) {
+    Log.d(TAG,"icon bitmap = " + info.iconBitmap + " density = "+ info.iconBitmap.getDensity());
+  }
+  info.iconBitmap.setDensity(Bitmap.DENSITY_NONE);
   textView.setCompoundDrawablesWithIntrinsicBounds(null,new BitmapDrawable(info.iconBitmap),null,null);
+  textView.setBackgroundColor(Color.BLACK);
   textView.setText(info.title);
   return convertView;
 }
