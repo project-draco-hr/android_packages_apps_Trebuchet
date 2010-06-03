@@ -1,10 +1,12 @@
 {
-  setBackgroundColor(0xFF000000);
+  setBackgroundColor(Color.BLACK);
   try {
     mGrid=(GridView)findViewWithTag("all_apps_2d_grid");
     if (mGrid == null)     throw new Resources.NotFoundException();
     mGrid.setOnItemClickListener(this);
     mGrid.setOnItemLongClickListener(this);
+    mGrid.setBackgroundColor(Color.BLACK);
+    mGrid.setCacheColorHint(Color.BLACK);
     ImageButton homeButton=(ImageButton)findViewWithTag("all_apps_2d_home");
     if (homeButton == null)     throw new Resources.NotFoundException();
     homeButton.setOnClickListener(new View.OnClickListener(){
