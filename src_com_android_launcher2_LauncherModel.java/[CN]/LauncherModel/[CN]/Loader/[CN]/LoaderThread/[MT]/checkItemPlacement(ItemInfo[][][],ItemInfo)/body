@@ -1,4 +1,7 @@
 {
+  if (item.container != LauncherSettings.Favorites.CONTAINER_DESKTOP) {
+    return true;
+  }
   for (int x=item.cellX; x < (item.cellX + item.spanX); x++) {
     for (int y=item.cellY; y < (item.cellY + item.spanY); y++) {
       if (occupied[item.screen][x][y] != null) {
