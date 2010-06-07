@@ -1,0 +1,23 @@
+{
+  int workspaceSeq;
+  boolean workspaceDirty;
+synchronized (mLock) {
+    workspaceSeq=mWorkspaceSeq;
+    workspaceDirty=mWorkspaceSeq != mLastWorkspaceSeq;
+  }
+  if (workspaceDirty) {
+    loadWorkspace();
+  }
+synchronized (mLock) {
+    if (mStopped) {
+      if (PROFILE_LOADERS) {
+        android.os.Debug.stopMethodTracing();
+      }
+      return;
+    }
+    if (workspaceSeq == mWorkspaceSeq) {
+      mLastWorkspaceSeq=mWorkspaceSeq;
+    }
+  }
+  bindWorkspace();
+}
