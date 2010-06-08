@@ -1,5 +1,5 @@
 {
-  long t=SystemClock.uptimeMillis();
+  final long t=DEBUG_LOADERS ? SystemClock.uptimeMillis() : 0;
   final Context context=mContext;
   final ContentResolver contentResolver=context.getContentResolver();
   final PackageManager manager=context.getPackageManager();

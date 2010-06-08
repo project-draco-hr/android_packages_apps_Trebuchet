@@ -1,0 +1,27 @@
+{
+synchronized (LoaderThread.this) {
+    final long workspaceWaitTime=DEBUG_LOADERS ? SystemClock.uptimeMillis() : 0;
+    mHandler.postIdle(new Runnable(){
+      public void run(){
+synchronized (LoaderThread.this) {
+          mLoadAndBindStepFinished=true;
+          if (DEBUG_LOADERS) {
+            Log.d(TAG,"done with previous binding step");
+          }
+          LoaderThread.this.notify();
+        }
+      }
+    }
+);
+    while (!mStopped && !mLoadAndBindStepFinished) {
+      try {
+        this.wait();
+      }
+ catch (      InterruptedException ex) {
+      }
+    }
+    if (DEBUG_LOADERS) {
+      Log.d(TAG,"waited " + (SystemClock.uptimeMillis() - workspaceWaitTime) + "ms for previous step to finish binding");
+    }
+  }
+}
