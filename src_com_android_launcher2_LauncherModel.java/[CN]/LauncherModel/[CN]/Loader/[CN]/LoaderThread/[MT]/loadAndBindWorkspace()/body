@@ -1,22 +1,15 @@
 {
-  int workspaceSeq;
-  boolean workspaceDirty;
-synchronized (mLock) {
-    workspaceSeq=mWorkspaceSeq;
-    workspaceDirty=mWorkspaceSeq != mLastWorkspaceSeq;
+  boolean loaded;
+synchronized (this) {
+    loaded=mWorkspaceLoaded;
+    mWorkspaceLoaded=true;
   }
-  if (workspaceDirty) {
+  if (DEBUG_LOADERS)   Log.d(TAG,"loadAndBindWorkspace loaded=" + loaded);
+  if (true || !loaded) {
     loadWorkspace();
-  }
-synchronized (mLock) {
     if (mStopped) {
-      if (PROFILE_LOADERS) {
-        android.os.Debug.stopMethodTracing();
-      }
+      mWorkspaceLoaded=false;
       return;
-    }
-    if (workspaceSeq == mWorkspaceSeq) {
-      mLastWorkspaceSeq=mWorkspaceSeq;
     }
   }
   bindWorkspace();

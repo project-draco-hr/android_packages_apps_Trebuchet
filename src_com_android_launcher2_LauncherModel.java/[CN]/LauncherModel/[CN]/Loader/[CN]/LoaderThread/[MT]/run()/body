@@ -14,7 +14,7 @@ synchronized (mLock) {
   }
  else {
     if (DEBUG_LOADERS)     Log.d(TAG,"step 1: special: loading all apps");
-    loadAndBindAllAppsIfDirty();
+    loadAndBindAllApps();
   }
 synchronized (mLock) {
     if (mIsLaunching) {
@@ -23,7 +23,7 @@ synchronized (mLock) {
   }
   if (loadWorkspaceFirst) {
     if (DEBUG_LOADERS)     Log.d(TAG,"step 2: loading all apps");
-    loadAndBindAllAppsIfDirty();
+    loadAndBindAllApps();
   }
  else {
     if (DEBUG_LOADERS)     Log.d(TAG,"step 2: special: loading workspace");
