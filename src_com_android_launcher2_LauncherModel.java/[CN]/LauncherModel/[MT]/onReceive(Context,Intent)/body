@@ -84,8 +84,9 @@ synchronized (mAllAppsListLock) {
         if (packages == null || packages.length == 0) {
           return;
         }
-        setAllAppsDirty();
-        setWorkspaceDirty();
+synchronized (this) {
+          mAllAppsLoaded=mWorkspaceLoaded=false;
+        }
         startLoader(context,false);
       }
  else       if (Intent.ACTION_EXTERNAL_APPLICATIONS_UNAVAILABLE.equals(action)) {
@@ -93,8 +94,9 @@ synchronized (mAllAppsListLock) {
         if (packages == null || packages.length == 0) {
           return;
         }
-        setAllAppsDirty();
-        setWorkspaceDirty();
+synchronized (this) {
+          mAllAppsLoaded=mWorkspaceLoaded=false;
+        }
         startLoader(context,false);
       }
     }
