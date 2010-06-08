@@ -6,7 +6,6 @@
     LauncherModel.updateItemInDatabase(Launcher.this,mFolderInfo);
     if (mWorkspaceLoading) {
       lockAllApps();
-      mModel.setWorkspaceDirty();
       mModel.startLoader(Launcher.this,false);
     }
  else {
@@ -17,7 +16,6 @@
       }
  else {
         lockAllApps();
-        mModel.setWorkspaceDirty();
         mWorkspaceLoading=true;
         mModel.startLoader(Launcher.this,false);
       }
