@@ -1,0 +1,14 @@
+{
+  if (ev.getAction() == MotionEvent.ACTION_DOWN && mLauncher.isAllAppsVisible()) {
+    return false;
+  }
+  super.onTouchEvent(ev);
+  int x=(int)ev.getX();
+  int y=(int)ev.getY();
+switch (ev.getAction()) {
+case MotionEvent.ACTION_DOWN:
+    mMotionDownRawX=(int)ev.getRawX();
+  mMotionDownRawY=(int)ev.getRawY();
+}
+return true;
+}

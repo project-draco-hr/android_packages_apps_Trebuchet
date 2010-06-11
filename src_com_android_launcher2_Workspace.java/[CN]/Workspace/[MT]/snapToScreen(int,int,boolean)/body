@@ -3,8 +3,10 @@
   clearVacantCache();
   enableChildrenCache(mCurrentScreen,whichScreen);
   mNextScreen=whichScreen;
-  mPreviousIndicator.setLevel(mNextScreen);
-  mNextIndicator.setLevel(mNextScreen);
+  if (mPreviousIndicator != null) {
+    mPreviousIndicator.setLevel(mNextScreen);
+    mNextIndicator.setLevel(mNextScreen);
+  }
   View focusedChild=getFocusedChild();
   if (focusedChild != null && whichScreen != mCurrentScreen && focusedChild == getChildAt(mCurrentScreen)) {
     focusedChild.clearFocus();

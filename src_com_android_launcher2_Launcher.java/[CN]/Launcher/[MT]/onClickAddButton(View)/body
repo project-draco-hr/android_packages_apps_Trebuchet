@@ -1,0 +1,5 @@
+{
+  View widgetChooser=findViewById(R.id.widget_chooser);
+  widgetChooser.setVisibility(View.VISIBLE);
+  widgetChooser.startAnimation(AnimationUtils.loadAnimation(this,R.anim.widget_chooser_slide_up));
+}

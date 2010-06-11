@@ -1,0 +1,9 @@
+{
+  super(context,attrs);
+  setLongClickable(true);
+  setOnItemLongClickListener(this);
+  mContext=context;
+  setCallbackDuringFling(false);
+  mWidgetGalleryAdapter=new WidgetGalleryAdapter(context);
+  setAdapter(mWidgetGalleryAdapter);
+}

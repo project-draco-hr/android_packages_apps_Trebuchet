@@ -18,10 +18,12 @@ case REQUEST_CREATE_LIVE_FOLDER:
 completeAddLiveFolder(data,mAddItemCellInfo);
 break;
 case REQUEST_PICK_APPWIDGET:
-addAppWidget(data);
+addAppWidgetFromPick(data);
 break;
 case REQUEST_CREATE_APPWIDGET:
-completeAddAppWidget(data,mAddItemCellInfo);
+int appWidgetId=data.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,-1);
+if (LOGD) Log.d(TAG,"dumping extras content=" + data.getExtras());
+completeAddAppWidget(appWidgetId,mAddItemCellInfo);
 break;
 case REQUEST_PICK_WALLPAPER:
 break;

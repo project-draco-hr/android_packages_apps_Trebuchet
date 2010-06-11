@@ -1,6 +1,6 @@
 {
   ItemInfo info=(ItemInfo)dragInfo;
-  View view;
+  View view=null;
 switch (info.itemType) {
 case LauncherSettings.Favorites.ITEM_TYPE_APPLICATION:
 case LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT:
@@ -12,9 +12,14 @@ break;
 case LauncherSettings.Favorites.ITEM_TYPE_USER_FOLDER:
 view=FolderIcon.fromXml(R.layout.folder_icon,mLauncher,(ViewGroup)getChildAt(mCurrentScreen),((UserFolderInfo)info));
 break;
+case LauncherSettings.Favorites.ITEM_TYPE_APPWIDGET:
+cellLayout.setTagToCellInfoForPoint(x,y);
+mLauncher.addAppWidgetFromDrop(((LauncherAppWidgetInfo)dragInfo).providerName,cellLayout.getTag());
+break;
 default :
 throw new IllegalStateException("Unknown item type: " + info.itemType);
 }
+if (info.itemType != LauncherSettings.Favorites.ITEM_TYPE_APPWIDGET) {
 cellLayout.addView(view,insertAtFirst ? 0 : -1);
 view.setHapticFeedbackEnabled(false);
 view.setOnLongClickListener(mLongClickListener);
@@ -25,4 +30,5 @@ mTargetCell=estimateDropCell(x,y,1,1,view,cellLayout,mTargetCell);
 cellLayout.onDropChild(view,mTargetCell);
 CellLayout.LayoutParams lp=(CellLayout.LayoutParams)view.getLayoutParams();
 LauncherModel.addOrMoveItemInDatabase(mLauncher,info,LauncherSettings.Favorites.CONTAINER_DESKTOP,mCurrentScreen,lp.cellX,lp.cellY);
+}
 }

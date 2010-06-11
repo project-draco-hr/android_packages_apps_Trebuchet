@@ -1,0 +1,6 @@
+{
+  mLayoutInflater=(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+  AppWidgetManager widgetManager=AppWidgetManager.getInstance(context);
+  mWidgets=widgetManager.getInstalledProviders();
+  mPackageManager=context.getPackageManager();
+}

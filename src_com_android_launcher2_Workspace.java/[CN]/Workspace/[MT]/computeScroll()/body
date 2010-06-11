@@ -8,8 +8,10 @@
   }
  else   if (mNextScreen != INVALID_SCREEN) {
     mCurrentScreen=Math.max(0,Math.min(mNextScreen,getChildCount() - 1));
-    mPreviousIndicator.setLevel(mCurrentScreen);
-    mNextIndicator.setLevel(mCurrentScreen);
+    if (mPreviousIndicator != null) {
+      mPreviousIndicator.setLevel(mCurrentScreen);
+      mNextIndicator.setLevel(mCurrentScreen);
+    }
     Launcher.setScreen(mCurrentScreen);
     mNextScreen=INVALID_SCREEN;
     clearChildrenCache();

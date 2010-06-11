@@ -1,0 +1,13 @@
+{
+  ImageView imageView;
+  if (convertView == null) {
+    imageView=(ImageView)mLayoutInflater.inflate(R.layout.widget_item,parent,false);
+  }
+ else {
+    imageView=(ImageView)convertView;
+  }
+  AppWidgetProviderInfo info=mWidgets.get(position);
+  Drawable drawable=mPackageManager.getDrawable(info.provider.getPackageName(),info.icon,null);
+  imageView.setImageDrawable(drawable);
+  return imageView;
+}
