@@ -20,14 +20,9 @@ default :
 throw new IllegalStateException("Unknown item type: " + info.itemType);
 }
 if (info.itemType != LauncherSettings.Favorites.ITEM_TYPE_APPWIDGET) {
-cellLayout.addView(view,insertAtFirst ? 0 : -1);
-view.setHapticFeedbackEnabled(false);
-view.setOnLongClickListener(mLongClickListener);
-if (view instanceof DropTarget) {
-mDragController.addDropTarget((DropTarget)view);
-}
 mTargetCell=estimateDropCell(x,y,1,1,view,cellLayout,mTargetCell);
-cellLayout.onDropChild(view,mTargetCell);
+addInScreen(view,indexOfChild(cellLayout),mTargetCell[0],mTargetCell[1],info.spanX,info.spanY,insertAtFirst);
+cellLayout.onDropChild(view);
 CellLayout.LayoutParams lp=(CellLayout.LayoutParams)view.getLayoutParams();
 LauncherModel.addOrMoveItemInDatabase(mLauncher,info,LauncherSettings.Favorites.CONTAINER_DESKTOP,mCurrentScreen,lp.cellX,lp.cellY);
 }

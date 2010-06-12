@@ -9,4 +9,7 @@
       childLeft+=childWidth;
     }
   }
+  if (LauncherApplication.isInPlaceRotationEnabled()) {
+    setCurrentScreen(getCurrentScreen());
+  }
 }

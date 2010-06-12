@@ -1,0 +1,11 @@
+{
+  final LayoutParams lp=params;
+  if (lp.cellX >= 0 && lp.cellX <= getCountX() - 1 && lp.cellY >= 0 && lp.cellY <= getCountY() - 1) {
+    if (lp.cellHSpan < 0)     lp.cellHSpan=getCountX();
+    if (lp.cellVSpan < 0)     lp.cellVSpan=getCountY();
+    child.setId(childId);
+    addView(child,index,lp);
+    return true;
+  }
+  return false;
+}

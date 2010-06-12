@@ -1,0 +1,32 @@
+{
+  ArrayList<ItemInfo> items=new ArrayList<ItemInfo>();
+  final ContentResolver cr=context.getContentResolver();
+  Cursor c=cr.query(LauncherSettings.Favorites.CONTENT_URI,new String[]{LauncherSettings.Favorites.ITEM_TYPE,LauncherSettings.Favorites.CONTAINER,LauncherSettings.Favorites.SCREEN,LauncherSettings.Favorites.CELLX,LauncherSettings.Favorites.CELLY,LauncherSettings.Favorites.SPANX,LauncherSettings.Favorites.SPANY},null,null,null);
+  final int itemTypeIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.ITEM_TYPE);
+  final int containerIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.CONTAINER);
+  final int screenIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.SCREEN);
+  final int cellXIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.CELLX);
+  final int cellYIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.CELLY);
+  final int spanXIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.SPANX);
+  final int spanYIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.SPANY);
+  try {
+    while (c.moveToNext()) {
+      ItemInfo item=new ItemInfo();
+      item.cellX=c.getInt(cellXIndex);
+      item.cellY=c.getInt(cellYIndex);
+      item.spanX=c.getInt(spanXIndex);
+      item.spanY=c.getInt(spanYIndex);
+      item.container=c.getInt(containerIndex);
+      item.itemType=c.getInt(itemTypeIndex);
+      item.screen=c.getInt(screenIndex);
+      items.add(item);
+    }
+  }
+ catch (  Exception e) {
+    items.clear();
+  }
+ finally {
+    c.close();
+  }
+  return items;
+}

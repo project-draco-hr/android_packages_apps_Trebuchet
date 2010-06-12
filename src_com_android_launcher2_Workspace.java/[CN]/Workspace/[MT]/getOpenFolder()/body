@@ -3,9 +3,9 @@
   int count=currentScreen.getChildCount();
   for (int i=0; i < count; i++) {
     View child=currentScreen.getChildAt(i);
-    CellLayout.LayoutParams lp=(CellLayout.LayoutParams)child.getLayoutParams();
-    if (lp.cellHSpan == 4 && lp.cellVSpan == 4 && child instanceof Folder) {
-      return (Folder)child;
+    if (child instanceof Folder) {
+      Folder folder=(Folder)child;
+      if (folder.getInfo().opened)       return folder;
     }
   }
   return null;

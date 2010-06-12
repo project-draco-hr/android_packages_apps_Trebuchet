@@ -43,7 +43,7 @@
   workspace.setLauncher(this);
   deleteZone.setLauncher(this);
   deleteZone.setDragController(dragController);
-  int deleteZoneHandleId=isScreenXLarge() ? R.id.add_button : R.id.all_apps_button_cluster;
+  int deleteZoneHandleId=LauncherApplication.isScreenXLarge() ? R.id.add_button : R.id.all_apps_button_cluster;
   deleteZone.setHandle(findViewById(deleteZoneHandleId));
   dragController.setDragScoller(workspace);
   dragController.setDragListener(deleteZone);

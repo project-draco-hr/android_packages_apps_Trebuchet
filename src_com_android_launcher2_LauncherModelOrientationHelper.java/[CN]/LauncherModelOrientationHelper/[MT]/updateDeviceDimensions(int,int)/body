@@ -1,0 +1,5 @@
+{
+  mCanonicalDeviceWidth=deviceWidth;
+  mCanonicalDeviceHeight=deviceHeight;
+  updateLocalDeviceDimensions();
+}

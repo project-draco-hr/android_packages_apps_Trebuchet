@@ -1,0 +1,8 @@
+{
+  super.onConfigurationChanged(newConfig);
+  if (LauncherApplication.isInPlaceRotationEnabled()) {
+    mModel.updateOrientation();
+    mWorkspace.refreshWorkspaceChildren();
+    mWorkspace.rotateCurrentScreensChildren();
+  }
+}

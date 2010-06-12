@@ -1,0 +1,20 @@
+{
+  final int count=getChildCount();
+  View child;
+  CellLayout.LayoutParams lp;
+  int widthMeasureSpec=MeasureSpec.makeMeasureSpec(LauncherModel.getLocalDeviceWidth(),MeasureSpec.EXACTLY);
+  int heightMeasureSpec=MeasureSpec.makeMeasureSpec(LauncherModel.getLocalDeviceHeight(),MeasureSpec.EXACTLY);
+  clearVacantCache();
+  for (int i=0; i < count; i++) {
+    final CellLayout layout=(CellLayout)getChildAt(i);
+    int numChildren=layout.getChildCount();
+    for (int j=0; j < numChildren; j++) {
+      child=layout.getChildAt(j);
+      lp=(CellLayout.LayoutParams)child.getLayoutParams();
+      LauncherModelOrientationHelper.Coordinates localCoord=LauncherModel.getLocalCoordinatesFromPreviousLocalCoordinates(lp);
+      lp.cellX=localCoord.x;
+      lp.cellY=localCoord.y;
+    }
+    layout.measure(widthMeasureSpec,heightMeasureSpec);
+  }
+}

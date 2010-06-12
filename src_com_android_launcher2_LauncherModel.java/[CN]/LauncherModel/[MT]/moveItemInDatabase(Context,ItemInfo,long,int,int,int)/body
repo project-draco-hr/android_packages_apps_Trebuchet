@@ -5,9 +5,10 @@
   item.cellY=cellY;
   final ContentValues values=new ContentValues();
   final ContentResolver cr=context.getContentResolver();
+  final LauncherModelOrientationHelper.Coordinates coord=mModelOrientationHelper.getCanonicalCoordinates(item);
   values.put(LauncherSettings.Favorites.CONTAINER,item.container);
-  values.put(LauncherSettings.Favorites.CELLX,item.cellX);
-  values.put(LauncherSettings.Favorites.CELLY,item.cellY);
+  values.put(LauncherSettings.Favorites.CELLX,coord.x);
+  values.put(LauncherSettings.Favorites.CELLY,coord.y);
   values.put(LauncherSettings.Favorites.SCREEN,item.screen);
   cr.update(LauncherSettings.Favorites.getContentUri(item.id,false),values,null,null);
 }

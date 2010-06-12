@@ -10,12 +10,14 @@
       if (index != mDragInfo.screen) {
         final CellLayout originalCellLayout=(CellLayout)getChildAt(mDragInfo.screen);
         originalCellLayout.removeView(cell);
-        cellLayout.addView(cell);
+        addInScreen(cell,index,mDragInfo.cellX,mDragInfo.cellY,mDragInfo.spanX,mDragInfo.spanY);
       }
       mTargetCell=estimateDropCell(x - xOffset,y - yOffset,mDragInfo.spanX,mDragInfo.spanY,cell,cellLayout,mTargetCell);
-      cellLayout.onDropChild(cell,mTargetCell);
+      cellLayout.onDropChild(cell);
       final ItemInfo info=(ItemInfo)cell.getTag();
       CellLayout.LayoutParams lp=(CellLayout.LayoutParams)cell.getLayoutParams();
+      lp.cellX=mTargetCell[0];
+      lp.cellY=mTargetCell[1];
       LauncherModel.moveItemInDatabase(mLauncher,info,LauncherSettings.Favorites.CONTAINER_DESKTOP,index,lp.cellX,lp.cellY);
     }
   }

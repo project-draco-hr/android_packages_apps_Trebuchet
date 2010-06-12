@@ -1,0 +1,12 @@
+{
+  mPreviousLocalDeviceHeight=mLocalDeviceHeight;
+  mPreviousLocalDeviceWidth=mLocalDeviceWidth;
+  if (mOrientation % 180 != 0) {
+    mLocalDeviceWidth=mCanonicalDeviceHeight;
+    mLocalDeviceHeight=mCanonicalDeviceWidth;
+  }
+ else {
+    mLocalDeviceWidth=mCanonicalDeviceWidth;
+    mLocalDeviceHeight=mCanonicalDeviceHeight;
+  }
+}

@@ -1,0 +1,3 @@
+{
+  mModelOrientationHelper.updateDeviceDimensions(shortAxisCellCount,longAxisCellCount);
+}

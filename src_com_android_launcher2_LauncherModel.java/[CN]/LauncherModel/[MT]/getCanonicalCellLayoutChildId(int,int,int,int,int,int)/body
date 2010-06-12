@@ -1,0 +1,9 @@
+{
+  if (LauncherApplication.isInPlaceRotationEnabled()) {
+    LauncherModelOrientationHelper.Coordinates coord=mModelOrientationHelper.getCanonicalCoordinates(localCellX,localCellY,spanX,spanY);
+    return ((screen & 0xFF) << 16) | (coord.x & 0xFF) << 8 | (coord.y & 0xFF);
+  }
+ else {
+    return ((cellId & 0xFF) << 16) | (localCellX & 0xFF) << 8 | (localCellY & 0xFF);
+  }
+}

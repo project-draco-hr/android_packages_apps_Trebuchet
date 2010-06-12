@@ -1,5 +1,9 @@
 {
   super.onCreate(savedInstanceState);
+  if (LauncherApplication.isInPlaceRotationEnabled()) {
+    getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+    this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
+  }
   LauncherApplication app=((LauncherApplication)getApplication());
   mModel=app.setLauncher(this);
   mIconCache=app.getIconCache();

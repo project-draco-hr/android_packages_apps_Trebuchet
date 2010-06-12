@@ -13,6 +13,6 @@
   openFolder.setLauncher(this);
   openFolder.bind(folderInfo);
   folderInfo.opened=true;
-  mWorkspace.addInScreen(openFolder,folderInfo.screen,0,0,4,4);
+  mWorkspace.addInFullScreen(openFolder,folderInfo.screen);
   openFolder.onOpen();
 }

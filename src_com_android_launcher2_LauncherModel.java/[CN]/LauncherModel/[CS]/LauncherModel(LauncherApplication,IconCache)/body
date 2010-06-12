@@ -2,6 +2,7 @@
   mApp=app;
   mAllAppsList=new AllAppsList(iconCache);
   mIconCache=iconCache;
+  mModelOrientationHelper=new LauncherModelOrientationHelper(mApp);
   mDefaultIcon=Utilities.createIconBitmap(app.getPackageManager().getDefaultActivityIcon(),app);
   mAllAppsLoadDelay=app.getResources().getInteger(R.integer.config_allAppsBatchLoadDelay);
   mBatchSize=app.getResources().getInteger(R.integer.config_allAppsBatchSize);

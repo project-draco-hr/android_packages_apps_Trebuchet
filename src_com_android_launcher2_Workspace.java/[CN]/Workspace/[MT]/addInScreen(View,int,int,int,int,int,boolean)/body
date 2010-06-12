@@ -15,7 +15,10 @@
     lp.cellHSpan=spanX;
     lp.cellVSpan=spanY;
   }
-  group.addView(child,insert ? 0 : -1,lp);
+  int childId=LauncherModel.getCanonicalCellLayoutChildId(child.getId(),screen,x,y,spanX,spanY);
+  if (!group.addViewToCellLayout(child,insert ? 0 : -1,childId,lp)) {
+    Log.w(TAG,"Failed to add to item at (" + lp.cellX + ","+ lp.cellY+ ") to CellLayout");
+  }
   if (!(child instanceof Folder)) {
     child.setHapticFeedbackEnabled(false);
     child.setOnLongClickListener(mLongClickListener);

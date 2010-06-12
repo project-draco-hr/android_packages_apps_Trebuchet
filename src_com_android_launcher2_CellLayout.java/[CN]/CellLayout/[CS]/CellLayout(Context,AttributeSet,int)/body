@@ -11,13 +11,5 @@
   mLongAxisCells=a.getInt(R.styleable.CellLayout_longAxisCells,4);
   a.recycle();
   setAlwaysDrawnWithCacheEnabled(false);
-  if (mOccupied == null) {
-    if (mPortrait) {
-      mOccupied=new boolean[mShortAxisCells][mLongAxisCells];
-    }
- else {
-      mOccupied=new boolean[mLongAxisCells][mShortAxisCells];
-    }
-  }
   mWallpaperManager=WallpaperManager.getInstance(getContext());
 }

@@ -25,6 +25,8 @@
       break;
     }
   }
-  if (clear)   clearVacantCells();
+  if (clear) {
+    clearVacantCells();
+  }
   return found;
 }

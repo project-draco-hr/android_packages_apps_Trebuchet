@@ -8,47 +8,69 @@
   }
   final int shortAxisCells=mShortAxisCells;
   final int longAxisCells=mLongAxisCells;
-  final int longAxisStartPadding=mLongAxisStartPadding;
-  final int longAxisEndPadding=mLongAxisEndPadding;
-  final int shortAxisStartPadding=mShortAxisStartPadding;
-  final int shortAxisEndPadding=mShortAxisEndPadding;
   final int cellWidth=mCellWidth;
   final int cellHeight=mCellHeight;
-  mPortrait=heightSpecSize > widthSpecSize;
+  boolean portrait=heightSpecSize > widthSpecSize;
+  if (portrait != mPortrait || mOccupied == null) {
+    if (portrait) {
+      mOccupied=new boolean[mShortAxisCells][mLongAxisCells];
+    }
+ else {
+      mOccupied=new boolean[mLongAxisCells][mShortAxisCells];
+    }
+  }
+  mPortrait=portrait;
   int numShortGaps=shortAxisCells - 1;
   int numLongGaps=longAxisCells - 1;
   if (mPortrait) {
-    int vSpaceLeft=heightSpecSize - longAxisStartPadding - longAxisEndPadding- (cellHeight * longAxisCells);
+    int vSpaceLeft=heightSpecSize - mLongAxisStartPadding - mLongAxisEndPadding- (cellHeight * longAxisCells);
     mHeightGap=vSpaceLeft / numLongGaps;
-    int hSpaceLeft=widthSpecSize - shortAxisStartPadding - shortAxisEndPadding- (cellWidth * shortAxisCells);
+    int hSpaceLeft=widthSpecSize - mShortAxisStartPadding - mShortAxisEndPadding- (cellWidth * shortAxisCells);
     if (numShortGaps > 0) {
       mWidthGap=hSpaceLeft / numShortGaps;
     }
  else {
       mWidthGap=0;
     }
+    if (LauncherApplication.isInPlaceRotationEnabled()) {
+      mWidthGap=mHeightGap=Math.min(mHeightGap,mWidthGap);
+      mLeftPadding=mRightPadding=(widthSpecSize - cellWidth * shortAxisCells - (shortAxisCells - 1) * mWidthGap) / 2;
+      mTopPadding=mBottomPadding=(heightSpecSize - cellHeight * longAxisCells - (longAxisCells - 1) * mHeightGap) / 2;
+    }
+ else {
+      mLeftPadding=mShortAxisStartPadding;
+      mRightPadding=mShortAxisEndPadding;
+      mTopPadding=mLongAxisStartPadding;
+      mBottomPadding=mLongAxisEndPadding;
+    }
   }
  else {
-    int hSpaceLeft=widthSpecSize - longAxisStartPadding - longAxisEndPadding- (cellWidth * longAxisCells);
+    int hSpaceLeft=widthSpecSize - mLongAxisStartPadding - mLongAxisEndPadding- (cellWidth * longAxisCells);
     mWidthGap=hSpaceLeft / numLongGaps;
-    int vSpaceLeft=heightSpecSize - shortAxisStartPadding - shortAxisEndPadding- (cellHeight * shortAxisCells);
+    int vSpaceLeft=heightSpecSize - mShortAxisStartPadding - mShortAxisEndPadding- (cellHeight * shortAxisCells);
     if (numShortGaps > 0) {
       mHeightGap=vSpaceLeft / numShortGaps;
     }
  else {
       mHeightGap=0;
     }
+    if (LauncherApplication.isScreenXLarge()) {
+      mWidthGap=mHeightGap=Math.min(mHeightGap,mWidthGap);
+      mLeftPadding=mRightPadding=(widthSpecSize - cellWidth * longAxisCells - (longAxisCells - 1) * mWidthGap) / 2;
+      mTopPadding=mBottomPadding=(heightSpecSize - cellHeight * shortAxisCells - (shortAxisCells - 1) * mHeightGap) / 2;
+    }
+ else {
+      mLeftPadding=mLongAxisStartPadding;
+      mRightPadding=mLongAxisEndPadding;
+      mTopPadding=mShortAxisStartPadding;
+      mBottomPadding=mShortAxisEndPadding;
+    }
   }
   int count=getChildCount();
   for (int i=0; i < count; i++) {
     View child=getChildAt(i);
     LayoutParams lp=(LayoutParams)child.getLayoutParams();
-    if (mPortrait) {
-      lp.setup(cellWidth,cellHeight,mWidthGap,mHeightGap,shortAxisStartPadding,longAxisStartPadding);
-    }
- else {
-      lp.setup(cellWidth,cellHeight,mWidthGap,mHeightGap,longAxisStartPadding,shortAxisStartPadding);
-    }
+    lp.setup(cellWidth,cellHeight,mWidthGap,mHeightGap,mLeftPadding,mTopPadding);
     int childWidthMeasureSpec=MeasureSpec.makeMeasureSpec(lp.width,MeasureSpec.EXACTLY);
     int childheightMeasureSpec=MeasureSpec.makeMeasureSpec(lp.height,MeasureSpec.EXACTLY);
     child.measure(childWidthMeasureSpec,childheightMeasureSpec);
