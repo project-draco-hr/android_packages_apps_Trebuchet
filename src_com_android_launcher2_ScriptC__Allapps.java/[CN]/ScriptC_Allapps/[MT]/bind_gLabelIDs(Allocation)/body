@@ -1,0 +1,5 @@
+{
+  mExportVar_gLabelIDs=v;
+  if (v == null)   bindAllocation(null,mExportVarIdx_gLabelIDs);
+ else   bindAllocation(v,mExportVarIdx_gLabelIDs);
+}

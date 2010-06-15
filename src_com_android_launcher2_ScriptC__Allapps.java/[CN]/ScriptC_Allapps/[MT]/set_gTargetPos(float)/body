@@ -1,0 +1,4 @@
+{
+  mExportVar_gTargetPos=v;
+  setVar(mExportVarIdx_gTargetPos,v);
+}

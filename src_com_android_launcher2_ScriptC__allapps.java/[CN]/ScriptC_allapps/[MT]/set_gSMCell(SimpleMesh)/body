@@ -1,4 +1,0 @@
-{
-  mField_gSMCell=v;
-  setVar(18,v.getID());
-}

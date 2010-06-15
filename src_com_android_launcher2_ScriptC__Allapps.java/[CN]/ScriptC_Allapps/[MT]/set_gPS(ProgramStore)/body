@@ -1,0 +1,4 @@
+{
+  mExportVar_gPS=v;
+  setVar(mExportVarIdx_gPS,(v == null) ? 0 : v.getID());
+}

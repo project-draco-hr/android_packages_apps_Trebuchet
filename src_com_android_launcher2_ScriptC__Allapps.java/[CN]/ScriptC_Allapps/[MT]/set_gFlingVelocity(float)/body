@@ -1,0 +1,4 @@
+{
+  mExportVar_gFlingVelocity=v;
+  setVar(mExportVarIdx_gFlingVelocity,v);
+}

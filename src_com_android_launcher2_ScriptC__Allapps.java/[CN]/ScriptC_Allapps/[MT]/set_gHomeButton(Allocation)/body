@@ -1,0 +1,4 @@
+{
+  mExportVar_gHomeButton=v;
+  setVar(mExportVarIdx_gHomeButton,(v == null) ? 0 : v.getID());
+}

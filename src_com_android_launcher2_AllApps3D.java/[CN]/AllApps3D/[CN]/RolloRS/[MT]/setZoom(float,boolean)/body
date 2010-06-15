@@ -10,6 +10,6 @@
     sRollo.mScript.set_gZoomTarget(0);
   }
   if (!animate) {
-    sRollo.mScript.invokable_SetZoom();
+    sRollo.mScript.invoke_setZoom();
   }
 }

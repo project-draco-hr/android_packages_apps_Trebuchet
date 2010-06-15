@@ -1,4 +1,4 @@
 {
   mScript.set_gTargetPos(row);
-  mScript.invokable_MoveTo();
+  mScript.invoke_moveTo();
 }

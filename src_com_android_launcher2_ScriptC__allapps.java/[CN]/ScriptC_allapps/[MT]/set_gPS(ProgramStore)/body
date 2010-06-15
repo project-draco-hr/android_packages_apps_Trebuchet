@@ -1,4 +1,0 @@
-{
-  mField_gPS=v;
-  setVar(17,v.getID());
-}

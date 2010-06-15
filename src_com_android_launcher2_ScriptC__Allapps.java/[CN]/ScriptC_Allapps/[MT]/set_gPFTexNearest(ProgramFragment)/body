@@ -1,0 +1,4 @@
+{
+  mExportVar_gPFTexNearest=v;
+  setVar(mExportVarIdx_gPFTexNearest,(v == null) ? 0 : v.getID());
+}

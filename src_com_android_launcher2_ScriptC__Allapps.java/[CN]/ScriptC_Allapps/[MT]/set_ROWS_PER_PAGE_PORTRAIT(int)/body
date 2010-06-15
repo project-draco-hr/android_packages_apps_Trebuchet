@@ -1,0 +1,4 @@
+{
+  mExportVar_ROWS_PER_PAGE_PORTRAIT=v;
+  setVar(mExportVarIdx_ROWS_PER_PAGE_PORTRAIT,v);
+}

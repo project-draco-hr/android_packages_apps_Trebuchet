@@ -1,0 +1,4 @@
+{
+  mExportVar_gSelectedIconTexture=v;
+  setVar(mExportVarIdx_gSelectedIconTexture,(v == null) ? 0 : v.getID());
+}

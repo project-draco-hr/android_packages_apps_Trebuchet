@@ -1,0 +1,4 @@
+{
+  mExportVar_gNewTouchDown=v;
+  setVar(mExportVarIdx_gNewTouchDown,v);
+}

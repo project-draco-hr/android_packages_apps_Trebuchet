@@ -1,4 +1,0 @@
-{
-  mField_gHomeButton=v;
-  setVar(11,v.getID());
-}

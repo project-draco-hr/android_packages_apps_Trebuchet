@@ -1,0 +1,4 @@
+{
+  mExportVar_gSelectedIconIndex=v;
+  setVar(mExportVarIdx_gSelectedIconIndex,v);
+}

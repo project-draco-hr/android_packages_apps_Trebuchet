@@ -1,0 +1,5 @@
+{
+  mExportVar_vpConstants=v;
+  if (v == null)   bindAllocation(null,mExportVarIdx_vpConstants);
+ else   bindAllocation(v.getAllocation(),mExportVarIdx_vpConstants);
+}

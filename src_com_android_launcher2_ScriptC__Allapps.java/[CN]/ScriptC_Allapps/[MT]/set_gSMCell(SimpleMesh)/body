@@ -1,0 +1,4 @@
+{
+  mExportVar_gSMCell=v;
+  setVar(mExportVarIdx_gSMCell,(v == null) ? 0 : v.getID());
+}

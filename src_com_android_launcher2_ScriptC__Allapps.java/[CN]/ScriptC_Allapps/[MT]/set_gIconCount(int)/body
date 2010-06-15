@@ -1,0 +1,4 @@
+{
+  mExportVar_gIconCount=v;
+  setVar(mExportVarIdx_gIconCount,v);
+}

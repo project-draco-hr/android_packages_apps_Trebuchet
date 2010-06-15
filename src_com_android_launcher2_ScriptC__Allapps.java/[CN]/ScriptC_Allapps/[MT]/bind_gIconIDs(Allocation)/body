@@ -1,0 +1,5 @@
+{
+  mExportVar_gIconIDs=v;
+  if (v == null)   bindAllocation(null,mExportVarIdx_gIconIDs);
+ else   bindAllocation(v,mExportVarIdx_gIconIDs);
+}
