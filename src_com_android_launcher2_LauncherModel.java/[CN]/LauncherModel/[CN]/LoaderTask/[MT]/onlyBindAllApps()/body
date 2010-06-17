@@ -1,0 +1,21 @@
+{
+  final Callbacks oldCallbacks=mCallbacks.get();
+  if (oldCallbacks == null) {
+    Log.w(TAG,"LoaderTask running with no launcher (onlyBindAllApps)");
+    return;
+  }
+  final ArrayList<ApplicationInfo> list=(ArrayList<ApplicationInfo>)mAllAppsList.data.clone();
+  mHandler.post(new Runnable(){
+    public void run(){
+      final long t=SystemClock.uptimeMillis();
+      final Callbacks callbacks=tryGetCallbacks(oldCallbacks);
+      if (callbacks != null) {
+        callbacks.bindAllApplications(list);
+      }
+      if (DEBUG_LOADERS) {
+        Log.d(TAG,"bound all " + list.size() + " apps from cache in "+ (SystemClock.uptimeMillis() - t)+ "ms");
+      }
+    }
+  }
+);
+}

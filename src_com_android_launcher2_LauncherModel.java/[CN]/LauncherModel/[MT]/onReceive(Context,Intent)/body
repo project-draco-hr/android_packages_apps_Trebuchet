@@ -1,104 +1,39 @@
 {
-  context=mApp;
-  ArrayList<ApplicationInfo> added=null;
-  ArrayList<ApplicationInfo> removed=null;
-  ArrayList<ApplicationInfo> modified=null;
-  if (mBeforeFirstLoad) {
-    return;
+  if (DEBUG_LOADERS)   Log.d(TAG,"onReceive intent=" + intent);
+  final String action=intent.getAction();
+  if (Intent.ACTION_PACKAGE_CHANGED.equals(action) || Intent.ACTION_PACKAGE_REMOVED.equals(action) || Intent.ACTION_PACKAGE_ADDED.equals(action)) {
+    final String packageName=intent.getData().getSchemeSpecificPart();
+    final boolean replacing=intent.getBooleanExtra(Intent.EXTRA_REPLACING,false);
+    int op=PackageUpdatedTask.OP_NONE;
+    if (packageName == null || packageName.length() == 0) {
+      return;
+    }
+    if (Intent.ACTION_PACKAGE_CHANGED.equals(action)) {
+      op=PackageUpdatedTask.OP_UPDATE;
+    }
+ else     if (Intent.ACTION_PACKAGE_REMOVED.equals(action)) {
+      if (!replacing) {
+        op=PackageUpdatedTask.OP_REMOVE;
+      }
+    }
+ else     if (Intent.ACTION_PACKAGE_ADDED.equals(action)) {
+      if (!replacing) {
+        op=PackageUpdatedTask.OP_ADD;
+      }
+ else {
+        op=PackageUpdatedTask.OP_UPDATE;
+      }
+    }
+    if (op != PackageUpdatedTask.OP_NONE) {
+      enqueuePackageUpdated(new PackageUpdatedTask(op,new String[]{packageName}));
+    }
   }
-synchronized (mAllAppsListLock) {
-    final String action=intent.getAction();
-    if (Intent.ACTION_PACKAGE_CHANGED.equals(action) || Intent.ACTION_PACKAGE_REMOVED.equals(action) || Intent.ACTION_PACKAGE_ADDED.equals(action)) {
-      final String packageName=intent.getData().getSchemeSpecificPart();
-      final boolean replacing=intent.getBooleanExtra(Intent.EXTRA_REPLACING,false);
-      if (packageName == null || packageName.length() == 0) {
-        return;
-      }
-      if (Intent.ACTION_PACKAGE_CHANGED.equals(action)) {
-        mAllAppsList.updatePackage(context,packageName);
-      }
- else       if (Intent.ACTION_PACKAGE_REMOVED.equals(action)) {
-        if (!replacing) {
-          mAllAppsList.removePackage(packageName);
-        }
-      }
- else       if (Intent.ACTION_PACKAGE_ADDED.equals(action)) {
-        if (!replacing) {
-          mAllAppsList.addPackage(context,packageName);
-        }
- else {
-          mAllAppsList.updatePackage(context,packageName);
-        }
-      }
-      if (mAllAppsList.added.size() > 0) {
-        added=mAllAppsList.added;
-        mAllAppsList.added=new ArrayList<ApplicationInfo>();
-      }
-      if (mAllAppsList.removed.size() > 0) {
-        removed=mAllAppsList.removed;
-        mAllAppsList.removed=new ArrayList<ApplicationInfo>();
-        for (        ApplicationInfo info : removed) {
-          mIconCache.remove(info.intent.getComponent());
-        }
-      }
-      if (mAllAppsList.modified.size() > 0) {
-        modified=mAllAppsList.modified;
-        mAllAppsList.modified=new ArrayList<ApplicationInfo>();
-      }
-      final Callbacks callbacks=mCallbacks != null ? mCallbacks.get() : null;
-      if (callbacks == null) {
-        Log.w(TAG,"Nobody to tell about the new app.  Launcher is probably loading.");
-        return;
-      }
-      if (added != null) {
-        final ArrayList<ApplicationInfo> addedFinal=added;
-        mHandler.post(new Runnable(){
-          public void run(){
-            callbacks.bindAppsAdded(addedFinal);
-          }
-        }
-);
-      }
-      if (modified != null) {
-        final ArrayList<ApplicationInfo> modifiedFinal=modified;
-        mHandler.post(new Runnable(){
-          public void run(){
-            callbacks.bindAppsUpdated(modifiedFinal);
-          }
-        }
-);
-      }
-      if (removed != null) {
-        final ArrayList<ApplicationInfo> removedFinal=removed;
-        mHandler.post(new Runnable(){
-          public void run(){
-            callbacks.bindAppsRemoved(removedFinal);
-          }
-        }
-);
-      }
-    }
- else {
-      if (Intent.ACTION_EXTERNAL_APPLICATIONS_AVAILABLE.equals(action)) {
-        String packages[]=intent.getStringArrayExtra(Intent.EXTRA_CHANGED_PACKAGE_LIST);
-        if (packages == null || packages.length == 0) {
-          return;
-        }
-synchronized (this) {
-          mAllAppsLoaded=mWorkspaceLoaded=false;
-        }
-        startLoader(context,false);
-      }
- else       if (Intent.ACTION_EXTERNAL_APPLICATIONS_UNAVAILABLE.equals(action)) {
-        String packages[]=intent.getStringArrayExtra(Intent.EXTRA_CHANGED_PACKAGE_LIST);
-        if (packages == null || packages.length == 0) {
-          return;
-        }
-synchronized (this) {
-          mAllAppsLoaded=mWorkspaceLoaded=false;
-        }
-        startLoader(context,false);
-      }
-    }
+ else   if (Intent.ACTION_EXTERNAL_APPLICATIONS_AVAILABLE.equals(action)) {
+    String[] packages=intent.getStringArrayExtra(Intent.EXTRA_CHANGED_PACKAGE_LIST);
+    enqueuePackageUpdated(new PackageUpdatedTask(PackageUpdatedTask.OP_ADD,packages));
+  }
+ else   if (Intent.ACTION_EXTERNAL_APPLICATIONS_UNAVAILABLE.equals(action)) {
+    String[] packages=intent.getStringArrayExtra(Intent.EXTRA_CHANGED_PACKAGE_LIST);
+    enqueuePackageUpdated(new PackageUpdatedTask(PackageUpdatedTask.OP_UNAVAILABLE,packages));
   }
 }

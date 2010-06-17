@@ -1,5 +1,0 @@
-{
-  removeDialog(DIALOG_CREATE_SHORTCUT);
-  mWorkspace.removeItems(apps);
-  mAllAppsGrid.removeApps(apps);
-}

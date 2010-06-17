@@ -1,5 +1,0 @@
-{
-  mContext=context;
-  mWaitThread=waitThread;
-  mIsLaunching=isLaunching;
-}
