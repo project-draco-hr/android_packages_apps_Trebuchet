@@ -1,4 +1,0 @@
-{
-  mExportVar_gZoomTarget=v;
-  setVar(mExportVarIdx_gZoomTarget,v);
-}

@@ -25,14 +25,18 @@
     sRS.mMessageCallback=mMessageProc=new AAMessage();
   }
   if (sRollo.mUniformAlloc != null) {
-    float tf[]=new float[]{120.f,120.f,0.f,0.f,(2.f / 480.f),0,-((float)w / 2) - 0.25f,-380.25f,120.f,680.f,72.f,72.f};
+    ScriptField_VpConsts.Item i=new ScriptField_VpConsts.Item();
+    i.ScaleOffset.x=(2.f / 480.f);
+    i.ScaleOffset.y=0;
+    i.ScaleOffset.z=-((float)w / 2) - 0.25f;
+    i.ScaleOffset.w=-380.25f;
+    i.BendPos.x=120.f;
+    i.BendPos.y=680.f;
     if (w > h) {
-      tf[6]=40.f;
-      tf[7]=h - 40.f;
-      tf[9]=1.f;
-      tf[10]=-((float)w / 2) - 0.25f;
-      tf[11]=-((float)h / 2) - 0.25f;
+      i.ScaleOffset.z=40.f;
+      i.ScaleOffset.w=h - 40.f;
+      i.BendPos.y=1.f;
     }
-    sRollo.mUniformAlloc.getAllocation().data(tf);
+    sRollo.mUniformAlloc.set(i,0,true);
   }
 }

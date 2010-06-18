@@ -1,0 +1,6 @@
+{
+  FieldPacker setZoom_fp=new FieldPacker(8);
+  setZoom_fp.addF32(z);
+  setZoom_fp.addI32(animate);
+  invoke(mExportFuncIdx_setZoom,setZoom_fp);
+}

@@ -10,14 +10,14 @@
   Sampler nearest=sb.create();
   ProgramFragment.Builder bf=new ProgramFragment.Builder(sRS);
   bf.setTexture(ProgramFragment.Builder.EnvMode.MODULATE,ProgramFragment.Builder.Format.RGBA,0);
-  mPFTexMip=bf.create();
-  mPFTexMip.bindSampler(linear,0);
-  mPFTexNearest=bf.create();
-  mPFTexNearest.bindSampler(nearest,0);
+  ProgramFragment pfTexMip=bf.create();
+  pfTexMip.bindSampler(linear,0);
+  ProgramFragment pfTexNearest=bf.create();
+  pfTexNearest.bindSampler(nearest,0);
   bf.setTexture(ProgramFragment.Builder.EnvMode.MODULATE,ProgramFragment.Builder.Format.ALPHA,0);
-  mPFTexMipAlpha=bf.create();
-  mPFTexMipAlpha.bindSampler(linear,0);
-  mScript.set_gPFTexNearest(mPFTexNearest);
-  mScript.set_gPFTexMip(mPFTexMip);
-  mScript.set_gPFTexMipAlpha(mPFTexMipAlpha);
+  ProgramFragment pfTexMipAlpha=bf.create();
+  pfTexMipAlpha.bindSampler(linear,0);
+  mScript.set_gPFTexNearest(pfTexNearest);
+  mScript.set_gPFTexMip(pfTexMip);
+  mScript.set_gPFTexMipAlpha(pfTexMipAlpha);
 }

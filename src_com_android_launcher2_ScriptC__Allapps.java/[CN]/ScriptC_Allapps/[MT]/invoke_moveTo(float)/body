@@ -1,0 +1,5 @@
+{
+  FieldPacker moveTo_fp=new FieldPacker(4);
+  moveTo_fp.addF32(targetPos);
+  invoke(mExportFuncIdx_moveTo,moveTo_fp);
+}
