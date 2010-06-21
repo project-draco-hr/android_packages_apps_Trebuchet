@@ -1,3 +1,7 @@
 {
-  mLoader.stopLoader();
+synchronized (mLock) {
+    if (mLoaderTask != null) {
+      mLoaderTask.stopLocked();
+    }
+  }
 }

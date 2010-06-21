@@ -1,3 +1,18 @@
 {
-  mLoader.startLoader(context,isLaunching);
+synchronized (mLock) {
+    if (DEBUG_LOADERS) {
+      Log.d(TAG,"startLoader isLaunching=" + isLaunching);
+    }
+    if (mCallbacks != null && mCallbacks.get() != null) {
+      LoaderTask oldTask=mLoaderTask;
+      if (oldTask != null) {
+        if (oldTask.isLaunching()) {
+          isLaunching=true;
+        }
+        oldTask.stopLocked();
+      }
+      mLoaderTask=new LoaderTask(context,isLaunching);
+      mWorker.post(mLoaderTask);
+    }
+  }
 }

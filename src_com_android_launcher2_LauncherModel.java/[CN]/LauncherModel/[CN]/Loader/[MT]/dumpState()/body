@@ -1,9 +1,0 @@
-{
-  Log.d(TAG,"mLoader.mItems size=" + mLoader.mItems.size());
-  if (mLoaderThread != null) {
-    mLoaderThread.dumpState();
-  }
- else {
-    Log.d(TAG,"mLoader.mLoaderThread=null");
-  }
-}

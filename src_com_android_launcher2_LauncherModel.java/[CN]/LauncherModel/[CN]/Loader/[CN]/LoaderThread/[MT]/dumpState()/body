@@ -1,7 +1,0 @@
-{
-  Log.d(TAG,"mLoader.mLoaderThread.mContext=" + mContext);
-  Log.d(TAG,"mLoader.mLoaderThread.mWaitThread=" + mWaitThread);
-  Log.d(TAG,"mLoader.mLoaderThread.mIsLaunching=" + mIsLaunching);
-  Log.d(TAG,"mLoader.mLoaderThread.mStopped=" + mStopped);
-  Log.d(TAG,"mLoader.mLoaderThread.mLoadAndBindStepFinished=" + mLoadAndBindStepFinished);
-}

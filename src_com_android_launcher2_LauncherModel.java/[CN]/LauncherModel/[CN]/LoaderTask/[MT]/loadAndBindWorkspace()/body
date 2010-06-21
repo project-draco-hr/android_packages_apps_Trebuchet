@@ -1,0 +1,13 @@
+{
+  if (DEBUG_LOADERS) {
+    Log.d(TAG,"loadAndBindWorkspace mWorkspaceLoaded=" + mWorkspaceLoaded);
+  }
+  if (true || !mWorkspaceLoaded) {
+    loadWorkspace();
+    if (mStopped) {
+      return;
+    }
+    mWorkspaceLoaded=true;
+  }
+  bindWorkspace();
+}

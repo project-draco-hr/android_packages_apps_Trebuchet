@@ -1,0 +1,56 @@
+{
+  final Callbacks cbk=mCallbacks.get();
+  final boolean loadWorkspaceFirst=cbk != null ? (!cbk.isAllAppsVisible()) : true;
+  keep_running: {
+synchronized (mLock) {
+      android.os.Process.setThreadPriority(mIsLaunching ? Process.THREAD_PRIORITY_DEFAULT : Process.THREAD_PRIORITY_BACKGROUND);
+    }
+    if (loadWorkspaceFirst) {
+      if (DEBUG_LOADERS)       Log.d(TAG,"step 1: loading workspace");
+      loadAndBindWorkspace();
+    }
+ else {
+      if (DEBUG_LOADERS)       Log.d(TAG,"step 1: special: loading all apps");
+      loadAndBindAllApps();
+    }
+    if (mStopped) {
+      break keep_running;
+    }
+synchronized (mLock) {
+      if (mIsLaunching) {
+        android.os.Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);
+      }
+    }
+    waitForIdle();
+    if (loadWorkspaceFirst) {
+      if (DEBUG_LOADERS)       Log.d(TAG,"step 2: loading all apps");
+      loadAndBindAllApps();
+    }
+ else {
+      if (DEBUG_LOADERS)       Log.d(TAG,"step 2: special: loading workspace");
+      loadAndBindWorkspace();
+    }
+  }
+  mContext=null;
+synchronized (mLock) {
+    if (mLoaderTask == this) {
+      mLoaderTask=null;
+    }
+  }
+  if (mStopped) {
+    mHandler.post(new Runnable(){
+      public void run(){
+        System.gc();
+      }
+    }
+);
+  }
+ else {
+    mHandler.postIdle(new Runnable(){
+      public void run(){
+        System.gc();
+      }
+    }
+);
+  }
+}

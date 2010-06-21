@@ -1,0 +1,83 @@
+{
+  final Context context=mApp;
+  final String[] packages=mPackages;
+  final int N=packages.length;
+switch (mOp) {
+case OP_ADD:
+    for (int i=0; i < N; i++) {
+      if (DEBUG_LOADERS)       Log.d(TAG,"mAllAppsList.addPackage " + packages[i]);
+      mAllAppsList.addPackage(context,packages[i]);
+    }
+  break;
+case OP_UPDATE:
+for (int i=0; i < N; i++) {
+  if (DEBUG_LOADERS)   Log.d(TAG,"mAllAppsList.updatePackage " + packages[i]);
+  mAllAppsList.updatePackage(context,packages[i]);
+}
+break;
+case OP_REMOVE:
+case OP_UNAVAILABLE:
+for (int i=0; i < N; i++) {
+if (DEBUG_LOADERS) Log.d(TAG,"mAllAppsList.removePackage " + packages[i]);
+mAllAppsList.removePackage(packages[i]);
+}
+break;
+}
+ArrayList<ApplicationInfo> added=null;
+ArrayList<ApplicationInfo> removed=null;
+ArrayList<ApplicationInfo> modified=null;
+if (mAllAppsList.added.size() > 0) {
+added=mAllAppsList.added;
+mAllAppsList.added=new ArrayList<ApplicationInfo>();
+}
+if (mAllAppsList.removed.size() > 0) {
+removed=mAllAppsList.removed;
+mAllAppsList.removed=new ArrayList<ApplicationInfo>();
+for (ApplicationInfo info : removed) {
+mIconCache.remove(info.intent.getComponent());
+}
+}
+if (mAllAppsList.modified.size() > 0) {
+modified=mAllAppsList.modified;
+mAllAppsList.modified=new ArrayList<ApplicationInfo>();
+}
+final Callbacks callbacks=mCallbacks != null ? mCallbacks.get() : null;
+if (callbacks == null) {
+Log.w(TAG,"Nobody to tell about the new app.  Launcher is probably loading.");
+return;
+}
+if (added != null) {
+final ArrayList<ApplicationInfo> addedFinal=added;
+mHandler.post(new Runnable(){
+public void run(){
+if (callbacks == mCallbacks.get()) {
+callbacks.bindAppsAdded(addedFinal);
+}
+}
+}
+);
+}
+if (modified != null) {
+final ArrayList<ApplicationInfo> modifiedFinal=modified;
+mHandler.post(new Runnable(){
+public void run(){
+if (callbacks == mCallbacks.get()) {
+callbacks.bindAppsUpdated(modifiedFinal);
+}
+}
+}
+);
+}
+if (removed != null) {
+final boolean permanent=mOp != OP_UNAVAILABLE;
+final ArrayList<ApplicationInfo> removedFinal=removed;
+mHandler.post(new Runnable(){
+public void run(){
+if (callbacks == mCallbacks.get()) {
+callbacks.bindAppsRemoved(removedFinal,permanent);
+}
+}
+}
+);
+}
+}
