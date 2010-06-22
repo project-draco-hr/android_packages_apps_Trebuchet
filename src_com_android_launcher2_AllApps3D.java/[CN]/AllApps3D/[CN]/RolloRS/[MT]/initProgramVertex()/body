@@ -3,8 +3,9 @@
   resize(mWidth,mHeight);
   ProgramVertex.Builder pvb=new ProgramVertex.Builder(sRS,null,null);
   pvb.setTextureMatrixEnable(true);
-  mPV=pvb.create();
-  mPV.bindAllocation(mPVA);
+  ProgramVertex pv=pvb.create();
+  pv.bindAllocation(mPVA);
+  sRS.contextBindProgramVertex(pv);
   mUniformAlloc=new ScriptField_VpConsts(sRS,1);
   mScript.bind_vpConstants(mUniformAlloc);
   initMesh();
@@ -13,9 +14,8 @@
   sb.setShader(t);
   sb.addConstant(mUniformAlloc.getType());
   sb.addInput(mMesh.getVertexType(0).getElement());
-  mPVCurve=sb.create();
-  mPVCurve.bindAllocation(mPVA);
-  mPVCurve.bindConstants(mUniformAlloc.getAllocation(),1);
-  sRS.contextBindProgramVertex(mPV);
-  mScript.set_gPVCurve(mPVCurve);
+  ProgramVertex pvc=sb.create();
+  pvc.bindAllocation(mPVA);
+  pvc.bindConstants(mUniformAlloc.getAllocation(),1);
+  mScript.set_gPVCurve(pvc);
 }

@@ -1,4 +1,0 @@
-{
-  mExportVar_gNewPositionX=v;
-  setVar(mExportVarIdx_gNewPositionX,v);
-}
