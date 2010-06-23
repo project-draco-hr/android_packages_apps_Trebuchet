@@ -5,4 +5,7 @@
   mDefaultIcon=Utilities.createIconBitmap(app.getPackageManager().getDefaultActivityIcon(),app);
   mAllAppsLoadDelay=app.getResources().getInteger(R.integer.config_allAppsBatchLoadDelay);
   mBatchSize=app.getResources().getInteger(R.integer.config_allAppsBatchSize);
+  mWorkerThread=new HandlerThread("launcher-loader");
+  mWorkerThread.start();
+  mWorker=new Handler(mWorkerThread.getLooper());
 }

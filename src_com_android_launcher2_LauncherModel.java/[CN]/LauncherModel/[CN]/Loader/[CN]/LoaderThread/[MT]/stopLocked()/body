@@ -1,6 +1,0 @@
-{
-synchronized (LoaderThread.this) {
-    mStopped=true;
-    this.notify();
-  }
-}

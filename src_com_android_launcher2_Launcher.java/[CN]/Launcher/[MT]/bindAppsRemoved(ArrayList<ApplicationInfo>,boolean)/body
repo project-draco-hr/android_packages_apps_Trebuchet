@@ -1,0 +1,7 @@
+{
+  removeDialog(DIALOG_CREATE_SHORTCUT);
+  if (permanent) {
+    mWorkspace.removeItems(apps);
+  }
+  mAllAppsGrid.removeApps(apps);
+}
