@@ -19,6 +19,16 @@
   checkForLocaleChange();
   setWallpaperDimension();
   setContentView(R.layout.launcher);
+  mHomeCustomizationDrawer=getTabHost();
+  String widgetsLabel=getString(R.string.widgets_tab_label);
+  mHomeCustomizationDrawer.addTab(mHomeCustomizationDrawer.newTabSpec("widgets").setIndicator(widgetsLabel).setContent(R.id.widget_chooser));
+  String foldersLabel=getString(R.string.folders_tab_label);
+  mHomeCustomizationDrawer.addTab(mHomeCustomizationDrawer.newTabSpec("folders").setIndicator(foldersLabel).setContent(R.id.folder_chooser));
+  String shortcutsLabel=getString(R.string.shortcuts_tab_label);
+  mHomeCustomizationDrawer.addTab(mHomeCustomizationDrawer.newTabSpec("shortcuts").setIndicator(shortcutsLabel).setContent(R.id.shortcut_chooser));
+  String wallpapersLabel=getString(R.string.wallpapers_tab_label);
+  mHomeCustomizationDrawer.addTab(mHomeCustomizationDrawer.newTabSpec("wallpapers").setIndicator(wallpapersLabel).setContent(R.id.wallpaperstab));
+  mHomeCustomizationDrawer.setCurrentTab(0);
   setupViews();
   registerContentObservers();
   lockAllApps();

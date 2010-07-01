@@ -1,10 +1,10 @@
 {
-  ImageView imageView;
+  TextView textView;
   if (convertView == null) {
-    imageView=(ImageView)mLayoutInflater.inflate(R.layout.widget_item,parent,false);
+    textView=(TextView)mLayoutInflater.inflate(R.layout.home_customization_drawer_item,parent,false);
   }
  else {
-    imageView=(ImageView)convertView;
+    textView=(TextView)convertView;
   }
   AppWidgetProviderInfo info=mWidgets.get(position);
   Drawable image=null;
@@ -17,6 +17,8 @@
   if (image == null) {
     image=mPackageManager.getDrawable(info.provider.getPackageName(),info.icon,null);
   }
-  imageView.setImageDrawable(image);
-  return imageView;
+  image.setBounds(0,0,image.getIntrinsicWidth(),image.getIntrinsicHeight());
+  textView.setCompoundDrawables(null,image,null,null);
+  textView.setText(info.label);
+  return textView;
 }

@@ -1,0 +1,8 @@
+{
+  if (mHomeCustomizationDrawer.getVisibility() == View.VISIBLE) {
+    Animation slideDownAnimation=AnimationUtils.loadAnimation(this,R.anim.home_customization_drawer_slide_down);
+    slideDownAnimation.setAnimationListener(new SlideDownFinishedListener(mHomeCustomizationDrawer));
+    mHomeCustomizationDrawer.startAnimation(slideDownAnimation);
+  }
+  return false;
+}

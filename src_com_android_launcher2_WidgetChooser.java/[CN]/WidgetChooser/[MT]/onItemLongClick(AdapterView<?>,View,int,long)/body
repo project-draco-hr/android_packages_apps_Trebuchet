@@ -1,5 +1,5 @@
 {
-  AppWidgetProviderInfo info=(AppWidgetProviderInfo)mWidgetGalleryAdapter.getItem(position);
+  AppWidgetProviderInfo info=(AppWidgetProviderInfo)getAdapter().getItem(position);
   try {
     Resources r=mContext.getPackageManager().getResourcesForApplication(info.provider.getPackageName());
     Bitmap bmp=BitmapFactory.decodeResource(r,info.icon);

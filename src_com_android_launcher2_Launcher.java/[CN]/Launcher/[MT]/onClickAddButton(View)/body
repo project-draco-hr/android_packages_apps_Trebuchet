@@ -1,5 +1,6 @@
 {
-  View widgetChooser=findViewById(R.id.widget_chooser);
-  widgetChooser.setVisibility(View.VISIBLE);
-  widgetChooser.startAnimation(AnimationUtils.loadAnimation(this,R.anim.widget_chooser_slide_up));
+  if (mHomeCustomizationDrawer.getVisibility() == View.GONE) {
+    mHomeCustomizationDrawer.setVisibility(View.VISIBLE);
+    mHomeCustomizationDrawer.startAnimation(AnimationUtils.loadAnimation(this,R.anim.home_customization_drawer_slide_up));
+  }
 }

@@ -1,0 +1,3 @@
+{
+  mHomeCustomizationDrawer.setVisibility(View.GONE);
+}

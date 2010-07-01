@@ -1,4 +1,7 @@
 {
+  if (mInterceptTouchListener != null && mInterceptTouchListener.onTouch(this,ev)) {
+    return true;
+  }
   final boolean workspaceLocked=mLauncher.isWorkspaceLocked();
   final boolean allAppsVisible=mLauncher.isAllAppsVisible();
   if (workspaceLocked || allAppsVisible) {

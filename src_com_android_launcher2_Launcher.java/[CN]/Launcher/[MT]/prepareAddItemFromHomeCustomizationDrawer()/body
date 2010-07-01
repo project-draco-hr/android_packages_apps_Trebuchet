@@ -1,0 +1,4 @@
+{
+  mMenuAddInfo=mWorkspace.findAllVacantCells(null);
+  mAddItemCellInfo=mMenuAddInfo;
+}
