@@ -1,3 +1,9 @@
 {
   mSavedInstanceState=savedInstanceState;
+  if (mHomeCustomizationDrawer != null) {
+    String cur=savedInstanceState.getString("currentTab");
+    if (cur != null) {
+      mHomeCustomizationDrawer.setCurrentTabByTag(cur);
+    }
+  }
 }

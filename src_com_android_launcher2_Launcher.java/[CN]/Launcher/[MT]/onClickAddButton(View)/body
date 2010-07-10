@@ -1,5 +1,5 @@
 {
-  if (mHomeCustomizationDrawer.getVisibility() == View.GONE) {
+  if (mHomeCustomizationDrawer != null && mHomeCustomizationDrawer.getVisibility() == View.GONE) {
     mHomeCustomizationDrawer.setVisibility(View.VISIBLE);
     mHomeCustomizationDrawer.startAnimation(AnimationUtils.loadAnimation(this,R.anim.home_customization_drawer_slide_up));
   }
