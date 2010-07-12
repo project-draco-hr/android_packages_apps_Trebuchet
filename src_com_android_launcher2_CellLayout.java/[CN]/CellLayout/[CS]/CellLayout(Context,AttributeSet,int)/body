@@ -1,5 +1,8 @@
 {
   super(context,attrs,defStyle);
+  setWillNotDraw(false);
+  mVacantDrawable=getResources().getDrawable(R.drawable.rounded_rect_green);
+  mOccupiedDrawable=getResources().getDrawable(R.drawable.rounded_rect_red);
   TypedArray a=context.obtainStyledAttributes(attrs,R.styleable.CellLayout,defStyle,0);
   mCellWidth=a.getDimensionPixelSize(R.styleable.CellLayout_cellWidth,10);
   mCellHeight=a.getDimensionPixelSize(R.styleable.CellLayout_cellHeight,10);

@@ -25,13 +25,13 @@
   }
   mLastDownOnOccupiedCell=found;
   if (!found) {
-    int cellXY[]=mCellXY;
+    final int cellXY[]=mTmpCellXY;
     pointToCellExact(x,y,cellXY);
     final boolean portrait=mPortrait;
     final int xCount=portrait ? mShortAxisCells : mLongAxisCells;
     final int yCount=portrait ? mLongAxisCells : mShortAxisCells;
     final boolean[][] occupied=mOccupied;
-    findOccupiedCells(xCount,yCount,occupied,null);
+    findOccupiedCells(xCount,yCount,occupied,null,true);
     cellInfo.cell=null;
     cellInfo.cellX=cellXY[0];
     cellInfo.cellY=cellXY[1];

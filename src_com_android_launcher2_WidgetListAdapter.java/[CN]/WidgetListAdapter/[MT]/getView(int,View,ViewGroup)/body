@@ -20,5 +20,6 @@
   image.setBounds(0,0,image.getIntrinsicWidth(),image.getIntrinsicHeight());
   textView.setCompoundDrawables(null,image,null,null);
   textView.setText(info.label);
+  textView.setTag(info);
   return textView;
 }

@@ -5,6 +5,6 @@
     lp.dropped=true;
     mDragRect.setEmpty();
     child.requestLayout();
-    invalidate();
   }
+  onDragComplete();
 }

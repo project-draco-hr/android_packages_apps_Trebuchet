@@ -26,7 +26,7 @@
     outState.putInt(RUNTIME_STATE_PENDING_ADD_SPAN_Y,addItemCellInfo.spanY);
     outState.putInt(RUNTIME_STATE_PENDING_ADD_COUNT_X,layout.getCountX());
     outState.putInt(RUNTIME_STATE_PENDING_ADD_COUNT_Y,layout.getCountY());
-    outState.putBooleanArray(RUNTIME_STATE_PENDING_ADD_OCCUPIED_CELLS,layout.getOccupiedCells());
+    outState.putBooleanArray(RUNTIME_STATE_PENDING_ADD_OCCUPIED_CELLS,layout.getOccupiedCellsFlattened());
   }
   if (mFolderInfo != null && mWaitingForResult) {
     outState.putBoolean(RUNTIME_STATE_PENDING_FOLDER_RENAME,true);

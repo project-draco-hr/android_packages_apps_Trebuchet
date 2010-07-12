@@ -1,2 +1,22 @@
 {
+  ItemInfo item=(ItemInfo)dragInfo;
+  CellLayout currentLayout=getCurrentDropLayout();
+  if (dragInfo instanceof LauncherAppWidgetInfo) {
+    LauncherAppWidgetInfo widgetInfo=(LauncherAppWidgetInfo)dragInfo;
+    if (widgetInfo.spanX == -1) {
+      int[] spans=currentLayout.rectToCell(widgetInfo.minWidth,widgetInfo.minHeight);
+      item.spanX=spans[0];
+      item.spanY=spans[1];
+    }
+  }
+  if (currentLayout != mDragTargetLayout) {
+    if (mDragTargetLayout != null) {
+      mDragTargetLayout.onDragComplete();
+    }
+    mDragTargetLayout=currentLayout;
+  }
+  int originX=x - xOffset;
+  int originY=y - yOffset;
+  final View child=(mDragInfo == null) ? null : mDragInfo.cell;
+  currentLayout.visualizeDropLocation(child,originX,originY,item.spanX,item.spanY);
 }

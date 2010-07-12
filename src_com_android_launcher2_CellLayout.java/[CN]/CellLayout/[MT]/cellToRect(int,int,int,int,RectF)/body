@@ -1,4 +1,5 @@
 {
+  final boolean portrait=mPortrait;
   final int cellWidth=mCellWidth;
   final int cellHeight=mCellHeight;
   final int widthGap=mWidthGap;
@@ -9,5 +10,5 @@
   int height=cellVSpan * cellHeight + ((cellVSpan - 1) * heightGap);
   int x=hStartPadding + cellX * (cellWidth + widthGap);
   int y=vStartPadding + cellY * (cellHeight + heightGap);
-  dragRect.set(x,y,x + width,y + height);
+  resultRect.set(x,y,x + width,y + height);
 }

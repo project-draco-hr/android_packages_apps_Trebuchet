@@ -1,0 +1,6 @@
+{
+  if (!mDragRect.isEmpty()) {
+    mDragRectDrawable.setBounds((int)mDragRect.left,(int)mDragRect.top,(int)mDragRect.right,(int)mDragRect.bottom);
+    mDragRectDrawable.draw(canvas);
+  }
+}

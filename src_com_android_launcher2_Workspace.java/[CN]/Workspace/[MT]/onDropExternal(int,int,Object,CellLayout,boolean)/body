@@ -19,7 +19,10 @@ break;
 default :
 throw new IllegalStateException("Unknown item type: " + info.itemType);
 }
-if (info.itemType != LauncherSettings.Favorites.ITEM_TYPE_APPWIDGET) {
+if (view == null) {
+cellLayout.onDragComplete();
+}
+ else {
 mTargetCell=estimateDropCell(x,y,1,1,view,cellLayout,mTargetCell);
 addInScreen(view,indexOfChild(cellLayout),mTargetCell[0],mTargetCell[1],info.spanX,info.spanY,insertAtFirst);
 cellLayout.onDropChild(view);
