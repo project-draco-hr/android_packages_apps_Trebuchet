@@ -1,0 +1,23 @@
+{
+  ItemInfo item=(ItemInfo)dragInfo;
+  CellLayout currentLayout=getCurrentDropLayout();
+  int dragPointX, dragPointY;
+  if (item.spanX == 1 && item.spanY == 1) {
+    dragPointX=x - xOffset;
+    dragPointY=y - yOffset;
+  }
+ else {
+    dragPointX=x;
+    dragPointY=y;
+  }
+  final int[] cellXY=mTempCell;
+  currentLayout.estimateDropCell(dragPointX,dragPointY,item.spanX,item.spanY,cellXY);
+  View child=currentLayout.getChildAt(cellXY[0],cellXY[1]);
+  if (child instanceof DropTarget) {
+    DropTarget target=(DropTarget)child;
+    if (target.acceptDrop(source,x,y,xOffset,yOffset,dragView,dragInfo)) {
+      return target;
+    }
+  }
+  return null;
+}
