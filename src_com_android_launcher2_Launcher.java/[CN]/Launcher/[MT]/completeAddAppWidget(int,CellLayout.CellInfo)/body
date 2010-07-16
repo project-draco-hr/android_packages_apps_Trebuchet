@@ -1,7 +1,7 @@
 {
   AppWidgetProviderInfo appWidgetInfo=mAppWidgetManager.getAppWidgetInfo(appWidgetId);
   CellLayout layout=(CellLayout)mWorkspace.getChildAt(cellInfo.screen);
-  int[] spans=layout.rectToCell(appWidgetInfo.minWidth,appWidgetInfo.minHeight);
+  int[] spans=layout.rectToCell(appWidgetInfo.minWidth,appWidgetInfo.minHeight,null);
   final int[] xy=mCellCoordinates;
   if (!findSlot(cellInfo,xy,spans[0],spans[1])) {
     if (appWidgetId != -1)     mAppWidgetHost.deleteAppWidgetId(appWidgetId);

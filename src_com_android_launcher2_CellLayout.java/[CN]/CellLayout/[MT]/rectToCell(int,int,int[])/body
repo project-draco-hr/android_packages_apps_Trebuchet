@@ -5,5 +5,10 @@
   int smallerSize=Math.min(actualWidth,actualHeight);
   int spanX=(width + smallerSize) / smallerSize;
   int spanY=(height + smallerSize) / smallerSize;
-  return new int[]{spanX,spanY};
+  if (result == null) {
+    return new int[]{spanX,spanY};
+  }
+  result[0]=spanX;
+  result[1]=spanY;
+  return result;
 }

@@ -4,7 +4,7 @@
   if (dragInfo instanceof LauncherAppWidgetInfo) {
     LauncherAppWidgetInfo widgetInfo=(LauncherAppWidgetInfo)dragInfo;
     if (widgetInfo.spanX == -1) {
-      int[] spans=currentLayout.rectToCell(widgetInfo.minWidth,widgetInfo.minHeight);
+      int[] spans=currentLayout.rectToCell(widgetInfo.minWidth,widgetInfo.minHeight,null);
       item.spanX=spans[0];
       item.spanY=spans[1];
     }

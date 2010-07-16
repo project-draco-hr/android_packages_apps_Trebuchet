@@ -1,0 +1,3 @@
+int minWidth
+int minHeight
+int[] result

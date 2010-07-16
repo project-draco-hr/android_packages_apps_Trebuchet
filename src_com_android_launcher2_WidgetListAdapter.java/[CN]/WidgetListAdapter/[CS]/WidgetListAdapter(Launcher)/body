@@ -1,0 +1,4 @@
+{
+  mLauncher=launcher;
+  mWidgets=AppWidgetManager.getInstance(launcher).getInstalledProviders();
+}

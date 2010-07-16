@@ -1,0 +1,3 @@
+{
+  ((CellLayout)getChildAt(mCurrentScreen)).estimateChildSize(minWidth,minHeight,result);
+}
