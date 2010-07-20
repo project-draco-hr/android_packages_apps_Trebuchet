@@ -1,4 +1,0 @@
-{
-  mExportVar_gPVCurve=v;
-  setVar(mExportVarIdx_gPVCurve,(v == null) ? 0 : v.getID());
-}

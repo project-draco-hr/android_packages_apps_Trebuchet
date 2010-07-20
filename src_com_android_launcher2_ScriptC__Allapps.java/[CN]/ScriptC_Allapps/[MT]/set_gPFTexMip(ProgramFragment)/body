@@ -1,4 +1,0 @@
-{
-  mExportVar_gPFTexMip=v;
-  setVar(mExportVarIdx_gPFTexMip,(v == null) ? 0 : v.getID());
-}

@@ -1,4 +1,0 @@
-{
-  mExportVar_ROWS_PER_PAGE_LANDSCAPE=v;
-  setVar(mExportVarIdx_ROWS_PER_PAGE_LANDSCAPE,v);
-}

@@ -1,6 +1,0 @@
-{
-  FieldPacker fling_fp=new FieldPacker(8);
-  fling_fp.addF32(newPos);
-  fling_fp.addF32(vel);
-  invoke(mExportFuncIdx_fling,fling_fp);
-}
