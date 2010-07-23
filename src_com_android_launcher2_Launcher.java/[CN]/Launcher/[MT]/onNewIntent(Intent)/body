@@ -8,6 +8,7 @@
       mWorkspace.moveToDefaultScreen(alreadyOnHome && !allAppsVisible);
     }
     closeAllApps(alreadyOnHome && allAppsVisible);
+    hideCustomizationDrawer();
     final View v=getWindow().peekDecorView();
     if (v != null && v.getWindowToken() != null) {
       InputMethodManager imm=(InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);

@@ -1,0 +1,3 @@
+{
+  return mHomeCustomizationDrawer != null && mHomeCustomizationDrawer.getVisibility() == View.VISIBLE;
+}

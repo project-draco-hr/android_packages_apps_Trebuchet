@@ -1,0 +1,22 @@
+{
+  try {
+    mAllApps2D=(AllAppsView)findViewById(R.id.all_apps_2d);
+    if (mAllApps2D == null)     throw new Resources.NotFoundException();
+  }
+ catch (  Resources.NotFoundException e) {
+    Log.e(TAG,"Can't find necessary layout elements for AllAppsTabbed");
+  }
+  setup();
+  TabContentFactory contentFactory=new TabContentFactory(){
+    public View createTabContent(    String tag){
+      return (View)mAllApps2D;
+    }
+  }
+;
+  addTab(newTabSpec("apps").setIndicator("All").setContent(contentFactory));
+  addTab(newTabSpec("apps").setIndicator("Apps").setContent(contentFactory));
+  addTab(newTabSpec("apps").setIndicator("Games").setContent(contentFactory));
+  addTab(newTabSpec("apps").setIndicator("Downloaded").setContent(contentFactory));
+  setCurrentTab(0);
+  setVisibility(GONE);
+}

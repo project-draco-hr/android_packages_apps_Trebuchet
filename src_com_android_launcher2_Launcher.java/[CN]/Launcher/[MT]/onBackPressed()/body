@@ -2,6 +2,9 @@
   if (isAllAppsVisible()) {
     closeAllApps(true);
   }
+ else   if (isCustomizationDrawerVisible()) {
+    hideCustomizationDrawer();
+  }
  else {
     closeFolder();
   }

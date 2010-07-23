@@ -1,4 +1,11 @@
 {
   closeAllApps(true);
-  showAddDialog(mMenuAddInfo);
+  if (LauncherApplication.isScreenXLarge()) {
+    if (!isCustomizationDrawerVisible()) {
+      showCustomizationDrawer();
+    }
+  }
+ else {
+    showAddDialog(mMenuAddInfo);
+  }
 }

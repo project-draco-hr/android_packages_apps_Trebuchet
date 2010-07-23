@@ -1,5 +1,13 @@
 {
-  mAllAppsGrid.zoom(1.0f,animated);
+  hideCustomizationDrawer();
+  if (LauncherApplication.isScreenXLarge() && animated) {
+    mAllAppsGrid.zoom(1.0f,false);
+    Animation anim=AnimationUtils.loadAnimation(this,R.anim.all_apps_zoom_in);
+    ((View)mAllAppsGrid).startAnimation(anim);
+  }
+ else {
+    mAllAppsGrid.zoom(1.0f,animated);
+  }
   ((View)mAllAppsGrid).setFocusable(true);
   ((View)mAllAppsGrid).requestFocus();
   mDeleteZone.setVisibility(View.GONE);

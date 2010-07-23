@@ -1,7 +1,23 @@
 {
   if (mAllAppsGrid.isVisible()) {
     mWorkspace.setVisibility(View.VISIBLE);
-    mAllAppsGrid.zoom(0.0f,animated);
+    if (LauncherApplication.isScreenXLarge() && animated) {
+      Animation anim=AnimationUtils.loadAnimation(this,R.anim.all_apps_zoom_out);
+      anim.setAnimationListener(new AnimationListener(){
+        public void onAnimationStart(        Animation animation){
+        }
+        public void onAnimationRepeat(        Animation animation){
+        }
+        public void onAnimationEnd(        Animation animation){
+          mAllAppsGrid.zoom(0.0f,false);
+        }
+      }
+);
+      ((View)mAllAppsGrid).startAnimation(anim);
+    }
+ else {
+      mAllAppsGrid.zoom(0.0f,animated);
+    }
     ((View)mAllAppsGrid).setFocusable(false);
     mWorkspace.getChildAt(mWorkspace.getCurrentScreen()).requestFocus();
   }
