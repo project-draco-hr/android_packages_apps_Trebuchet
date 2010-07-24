@@ -26,4 +26,15 @@
       }
     }
   }
+ else {
+    for (int i=data.size() - 1; i >= 0; i--) {
+      final ApplicationInfo applicationInfo=data.get(i);
+      final ComponentName component=applicationInfo.intent.getComponent();
+      if (packageName.equals(component.getPackageName())) {
+        removed.add(applicationInfo);
+        mIconCache.remove(component);
+        data.remove(i);
+      }
+    }
+  }
 }
