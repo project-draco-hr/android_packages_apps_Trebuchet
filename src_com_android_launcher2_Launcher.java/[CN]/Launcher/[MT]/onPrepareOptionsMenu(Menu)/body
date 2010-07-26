@@ -1,9 +1,9 @@
 {
   super.onPrepareOptionsMenu(menu);
-  if (mAllAppsGrid.isVisible() && !mAllAppsGrid.isOpaque()) {
+  if (mAllAppsGrid.isAnimating()) {
     return false;
   }
-  boolean visible=!mAllAppsGrid.isOpaque();
+  boolean visible=!mAllAppsGrid.isVisible();
   menu.setGroupVisible(MENU_GROUP_ADD,visible);
   menu.setGroupVisible(MENU_GROUP_WALLPAPER,visible);
   if (visible) {

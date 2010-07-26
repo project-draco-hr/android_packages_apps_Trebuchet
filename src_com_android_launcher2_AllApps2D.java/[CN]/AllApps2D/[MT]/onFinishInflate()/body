@@ -1,5 +1,4 @@
 {
-  mIsViewOpaque=super.isOpaque();
   try {
     mGrid=(GridView)findViewWithTag("all_apps_2d_grid");
     if (mGrid == null)     throw new Resources.NotFoundException();
