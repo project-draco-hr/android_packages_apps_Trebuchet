@@ -10,7 +10,11 @@
   mModel.stopLoader();
   unbindDesktopItems();
   getContentResolver().unregisterContentObserver(mWidgetObserver);
-  dismissPreview(mPreviousView);
-  dismissPreview(mNextView);
+  if (mPreviousView != null) {
+    dismissPreview(mPreviousView);
+  }
+  if (mNextView != null) {
+    dismissPreview(mNextView);
+  }
   unregisterReceiver(mCloseSystemDialogsReceiver);
 }
