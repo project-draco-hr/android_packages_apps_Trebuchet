@@ -4,7 +4,9 @@
     if (lp.cellHSpan < 0)     lp.cellHSpan=getCountX();
     if (lp.cellVSpan < 0)     lp.cellVSpan=getCountY();
     child.setId(childId);
+    child.setAlpha(1.0f - mDimmedBitmapAlpha);
     addView(child,index,lp);
+    mDimmedBitmapDirty=true;
     return true;
   }
   return false;

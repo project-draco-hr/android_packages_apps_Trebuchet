@@ -10,7 +10,6 @@
   mWorkspace=(Workspace)dragLayer.findViewById(R.id.workspace);
   final Workspace workspace=mWorkspace;
   workspace.setHapticFeedbackEnabled(false);
-  if (mHomeCustomizationDrawer != null)   workspace.setOnInterceptTouchListener(this);
   DeleteZone deleteZone=(DeleteZone)dragLayer.findViewById(R.id.delete_zone);
   mDeleteZone=deleteZone;
   mHandleView=(HandleView)findViewById(R.id.all_apps_button);

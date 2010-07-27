@@ -1,4 +1,7 @@
 {
+  if (mInterceptTouchListener != null && mInterceptTouchListener.onTouch(this,ev)) {
+    return true;
+  }
   final int action=ev.getAction();
   final CellInfo cellInfo=mCellInfo;
   if (action == MotionEvent.ACTION_DOWN) {

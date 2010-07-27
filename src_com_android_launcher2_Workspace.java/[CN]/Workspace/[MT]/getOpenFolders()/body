@@ -1,7 +1,7 @@
 {
-  final int screens=getChildCount();
-  ArrayList<Folder> folders=new ArrayList<Folder>(screens);
-  for (int screen=0; screen < screens; screen++) {
+  final int screenCount=getChildCount();
+  ArrayList<Folder> folders=new ArrayList<Folder>(screenCount);
+  for (int screen=0; screen < screenCount; screen++) {
     CellLayout currentScreen=(CellLayout)getChildAt(screen);
     int count=currentScreen.getChildCount();
     for (int i=0; i < count; i++) {

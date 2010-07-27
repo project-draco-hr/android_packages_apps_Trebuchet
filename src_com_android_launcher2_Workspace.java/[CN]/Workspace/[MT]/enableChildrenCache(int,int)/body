@@ -4,9 +4,9 @@
     fromScreen=toScreen;
     toScreen=temp;
   }
-  final int count=getChildCount();
+  final int screenCount=getChildCount();
   fromScreen=Math.max(fromScreen,0);
-  toScreen=Math.min(toScreen,count - 1);
+  toScreen=Math.min(toScreen,screenCount - 1);
   for (int i=fromScreen; i <= toScreen; i++) {
     final CellLayout layout=(CellLayout)getChildAt(i);
     layout.setChildrenDrawnWithCacheEnabled(true);

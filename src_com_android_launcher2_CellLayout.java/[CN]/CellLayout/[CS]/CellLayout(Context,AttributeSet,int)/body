@@ -15,4 +15,5 @@
   a.recycle();
   setAlwaysDrawnWithCacheEnabled(false);
   mWallpaperManager=WallpaperManager.getInstance(getContext());
+  mDimmedBitmapPaint.setFilterBitmap(true);
 }

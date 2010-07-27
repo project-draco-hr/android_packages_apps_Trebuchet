@@ -2,8 +2,8 @@
   int result=-1;
   if (v != null) {
     ViewParent vp=v.getParent();
-    int count=getChildCount();
-    for (int i=0; i < count; i++) {
+    final int screenCount=getChildCount();
+    for (int i=0; i < screenCount; i++) {
       if (vp == getChildAt(i)) {
         return i;
       }

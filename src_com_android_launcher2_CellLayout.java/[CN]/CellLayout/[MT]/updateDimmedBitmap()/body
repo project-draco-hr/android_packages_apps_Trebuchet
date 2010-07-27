@@ -1,0 +1,13 @@
+{
+  if (mDimmedBitmap == null) {
+    mDimmedBitmap=Bitmap.createBitmap((int)(getWidth() * DIMMED_BITMAP_SCALE),(int)(getHeight() * DIMMED_BITMAP_SCALE),Bitmap.Config.ARGB_8888);
+    mDimmedBitmapCanvas=new Canvas(mDimmedBitmap);
+    mDimmedBitmapCanvas.scale(DIMMED_BITMAP_SCALE,DIMMED_BITMAP_SCALE);
+  }
+  mDimmedBitmapCanvas.drawColor(0x00000000,PorterDuff.Mode.CLEAR);
+  setChildrenAlpha(1.0f);
+  dispatchDraw(mDimmedBitmapCanvas);
+  setChildrenAlpha(1.0f - mDimmedBitmapAlpha);
+  mDimmedBitmapCanvas.drawColor(0xCCCCCCCC,PorterDuff.Mode.SRC_OUT);
+  mDimmedBitmapCanvas.drawColor(0xCC333333,PorterDuff.Mode.SRC_OUT);
+}

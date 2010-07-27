@@ -4,6 +4,7 @@
   }
  else   if (isCustomizationDrawerVisible()) {
     hideCustomizationDrawer();
+    mWorkspace.unshrink();
   }
  else {
     closeFolder();

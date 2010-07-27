@@ -1,0 +1,7 @@
+{
+  if (mIsSmall) {
+    unshrink((CellLayout)v);
+    mLauncher.hideCustomizationDrawer();
+  }
+  return false;
+}

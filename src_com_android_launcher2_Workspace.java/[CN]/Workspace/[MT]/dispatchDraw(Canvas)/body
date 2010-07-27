@@ -2,7 +2,14 @@
   boolean restore=false;
   int restoreCount=0;
   boolean fastDraw=mTouchState != TOUCH_STATE_SCROLLING && mNextScreen == INVALID_SCREEN;
-  if (fastDraw) {
+  if (mIsSmall) {
+    final int screenCount=getChildCount();
+    for (int i=0; i < screenCount; i++) {
+      CellLayout cl=(CellLayout)getChildAt(i);
+      drawChild(canvas,cl,getDrawingTime());
+    }
+  }
+ else   if (fastDraw) {
     drawChild(canvas,getChildAt(mCurrentScreen),getDrawingTime());
   }
  else {

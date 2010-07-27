@@ -9,4 +9,16 @@
   final ViewConfiguration configuration=ViewConfiguration.get(getContext());
   mTouchSlop=configuration.getScaledTouchSlop();
   mMaximumVelocity=configuration.getScaledMaximumFlingVelocity();
+  mUnshrinkAnimationListener=new AnimatableListener(){
+    public void onAnimationStart(    Animatable animation){
+    }
+    public void onAnimationEnd(    Animatable animation){
+      mIsSmall=false;
+    }
+    public void onAnimationCancel(    Animatable animation){
+    }
+    public void onAnimationRepeat(    Animatable animation){
+    }
+  }
+;
 }
