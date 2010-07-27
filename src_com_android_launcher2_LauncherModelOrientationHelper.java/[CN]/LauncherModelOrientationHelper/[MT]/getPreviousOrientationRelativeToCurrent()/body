@@ -1,7 +1,0 @@
-{
-  int orientationDifference=-(mOrientation - mPreviousOrientation);
-  if (Math.abs(orientationDifference) > 180) {
-    orientationDifference=(int)-Math.signum(orientationDifference) * (360 - Math.abs(orientationDifference));
-  }
-  return orientationDifference;
-}

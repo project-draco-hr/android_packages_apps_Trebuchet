@@ -1,3 +1,0 @@
-{
-  return getTransformedLayoutParams(cellX,cellY,spanX,spanY,mOrientation,mLocalDeviceWidth,mLocalDeviceHeight);
-}

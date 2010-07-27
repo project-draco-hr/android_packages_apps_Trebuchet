@@ -2,7 +2,6 @@
   final ContentValues values=new ContentValues();
   final ContentResolver cr=context.getContentResolver();
   item.onAddToDatabase(values);
-  final LauncherModelOrientationHelper.Coordinates coord=mModelOrientationHelper.getCanonicalCoordinates(item);
-  item.updateValuesWithCoordinates(values,coord.x,coord.y);
+  item.updateValuesWithCoordinates(values,item.cellX,item.cellY);
   cr.update(LauncherSettings.Favorites.getContentUri(item.id,false),values,null,null);
 }

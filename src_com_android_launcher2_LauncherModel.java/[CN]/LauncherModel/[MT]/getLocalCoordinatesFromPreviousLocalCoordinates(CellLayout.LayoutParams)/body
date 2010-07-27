@@ -1,3 +1,0 @@
-{
-  return mModelOrientationHelper.getLocalCoordinatesFromPreviousLocalCoordinates(lp.cellX,lp.cellY,lp.cellHSpan,lp.cellVSpan);
-}

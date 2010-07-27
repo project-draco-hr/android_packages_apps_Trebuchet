@@ -13,8 +13,8 @@
     cellToPoint(originCell[0] + spanX - 1,originCell[1] + spanY - 1,bottomRight);
     bottomRight[0]+=mCellWidth;
     bottomRight[1]+=mCellHeight;
-    final int countX=mPortrait ? mShortAxisCells : mLongAxisCells;
-    final int countY=mPortrait ? mLongAxisCells : mShortAxisCells;
+    final int countX=mCountX;
+    final int countY=mCountY;
     findOccupiedCells(countX,countY,mOccupied,view,false);
     boolean vacant=isVacant(originCell[0],originCell[1],spanX,spanY);
     mDragRectDrawable=vacant ? mVacantDrawable : mOccupiedDrawable;

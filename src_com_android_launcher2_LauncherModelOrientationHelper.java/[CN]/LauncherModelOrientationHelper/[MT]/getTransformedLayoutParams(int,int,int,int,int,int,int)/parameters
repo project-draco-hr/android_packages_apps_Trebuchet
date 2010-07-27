@@ -1,7 +1,0 @@
-int cellX
-int cellY
-int spanX
-int spanY
-int deviceRotationClockwise
-int initialDeviceWidth
-int initialDeviceHeight

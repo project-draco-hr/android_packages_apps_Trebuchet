@@ -1,11 +1,10 @@
 {
-  final boolean portrait=mPortrait;
   final int hStartPadding=getLeftPadding();
   final int vStartPadding=getTopPadding();
   result[0]=(x - hStartPadding) / (mCellWidth + mWidthGap);
   result[1]=(y - vStartPadding) / (mCellHeight + mHeightGap);
-  final int xAxis=portrait ? mShortAxisCells : mLongAxisCells;
-  final int yAxis=portrait ? mLongAxisCells : mShortAxisCells;
+  final int xAxis=mCountX;
+  final int yAxis=mCountY;
   if (result[0] < 0)   result[0]=0;
   if (result[0] >= xAxis)   result[0]=xAxis - 1;
   if (result[1] < 0)   result[1]=0;

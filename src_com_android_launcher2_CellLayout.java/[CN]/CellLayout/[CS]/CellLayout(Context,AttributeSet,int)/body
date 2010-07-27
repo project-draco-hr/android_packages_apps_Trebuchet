@@ -6,12 +6,12 @@
   TypedArray a=context.obtainStyledAttributes(attrs,R.styleable.CellLayout,defStyle,0);
   mCellWidth=a.getDimensionPixelSize(R.styleable.CellLayout_cellWidth,10);
   mCellHeight=a.getDimensionPixelSize(R.styleable.CellLayout_cellHeight,10);
-  mLongAxisStartPadding=a.getDimensionPixelSize(R.styleable.CellLayout_longAxisStartPadding,10);
-  mLongAxisEndPadding=a.getDimensionPixelSize(R.styleable.CellLayout_longAxisEndPadding,10);
-  mShortAxisStartPadding=a.getDimensionPixelSize(R.styleable.CellLayout_shortAxisStartPadding,10);
-  mShortAxisEndPadding=a.getDimensionPixelSize(R.styleable.CellLayout_shortAxisEndPadding,10);
-  mShortAxisCells=a.getInt(R.styleable.CellLayout_shortAxisCells,4);
-  mLongAxisCells=a.getInt(R.styleable.CellLayout_longAxisCells,4);
+  mLeftPadding=a.getDimensionPixelSize(R.styleable.CellLayout_xAxisStartPadding,10);
+  mRightPadding=a.getDimensionPixelSize(R.styleable.CellLayout_xAxisEndPadding,10);
+  mTopPadding=a.getDimensionPixelSize(R.styleable.CellLayout_yAxisStartPadding,10);
+  mBottomPadding=a.getDimensionPixelSize(R.styleable.CellLayout_yAxisEndPadding,10);
+  mCountX=LauncherModel.getCellCountX();
+  mCountY=LauncherModel.getCellCountY();
   a.recycle();
   setAlwaysDrawnWithCacheEnabled(false);
   mWallpaperManager=WallpaperManager.getInstance(getContext());

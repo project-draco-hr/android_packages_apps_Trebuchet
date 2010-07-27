@@ -1,7 +1,6 @@
 {
-  final boolean portrait=mPortrait;
-  final int xCount=portrait ? mShortAxisCells : mLongAxisCells;
-  final int yCount=portrait ? mLongAxisCells : mShortAxisCells;
+  final int xCount=mCountX;
+  final int yCount=mCountY;
   boolean[][] occupied=mOccupied;
   if (occupiedCells != null) {
     for (int y=0; y < yCount; y++) {

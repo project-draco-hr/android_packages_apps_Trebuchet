@@ -1,9 +1,8 @@
 {
   final CellInfo info=(CellInfo)super.getTag();
   if (mDirtyTag && info.valid) {
-    final boolean portrait=mPortrait;
-    final int xCount=portrait ? mShortAxisCells : mLongAxisCells;
-    final int yCount=portrait ? mLongAxisCells : mShortAxisCells;
+    final int xCount=mCountX;
+    final int yCount=mCountY;
     final boolean[][] occupied=mOccupied;
     findOccupiedCells(xCount,yCount,occupied,null,true);
     findIntersectingVacantCells(info,info.cellX,info.cellY,xCount,yCount,occupied);

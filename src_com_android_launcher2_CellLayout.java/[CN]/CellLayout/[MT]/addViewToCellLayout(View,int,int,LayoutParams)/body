@@ -1,8 +1,8 @@
 {
   final LayoutParams lp=params;
-  if (lp.cellX >= 0 && lp.cellX <= getCountX() - 1 && lp.cellY >= 0 && lp.cellY <= getCountY() - 1) {
-    if (lp.cellHSpan < 0)     lp.cellHSpan=getCountX();
-    if (lp.cellVSpan < 0)     lp.cellVSpan=getCountY();
+  if (lp.cellX >= 0 && lp.cellX <= mCountX - 1 && lp.cellY >= 0 && lp.cellY <= mCountY - 1) {
+    if (lp.cellHSpan < 0)     lp.cellHSpan=mCountX;
+    if (lp.cellVSpan < 0)     lp.cellVSpan=mCountY;
     child.setId(childId);
     child.setAlpha(1.0f - mDimmedBitmapAlpha);
     addView(child,index,lp);

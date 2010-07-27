@@ -1,3 +1,0 @@
-{
-  return getTransformedLayoutParams(localItem.cellX,localItem.cellY,localItem.spanX,localItem.spanY,mOrientation,mLocalDeviceWidth,mLocalDeviceHeight);
-}

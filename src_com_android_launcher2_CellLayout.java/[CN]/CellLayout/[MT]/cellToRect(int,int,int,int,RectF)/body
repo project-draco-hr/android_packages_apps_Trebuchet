@@ -1,5 +1,4 @@
 {
-  final boolean portrait=mPortrait;
   final int cellWidth=mCellWidth;
   final int cellHeight=mCellHeight;
   final int widthGap=mWidthGap;

@@ -18,13 +18,12 @@ case LauncherSettings.Favorites.ITEM_TYPE_LIVE_FOLDER:
     folderInfo=findOrMakeLiveFolder(folderList,id);
   break;
 }
-final LauncherModelOrientationHelper.Coordinates coord=mModelOrientationHelper.getLocalCoordinates(c.getInt(cellXIndex),c.getInt(cellYIndex),1,1);
 folderInfo.title=c.getString(titleIndex);
 folderInfo.id=id;
 folderInfo.container=c.getInt(containerIndex);
 folderInfo.screen=c.getInt(screenIndex);
-folderInfo.cellX=coord.x;
-folderInfo.cellY=coord.y;
+folderInfo.cellX=c.getInt(cellXIndex);
+folderInfo.cellY=c.getInt(cellYIndex);
 return folderInfo;
 }
 }

@@ -1,7 +1,6 @@
 {
-  final boolean portrait=mPortrait;
-  final int xCount=portrait ? mShortAxisCells : mLongAxisCells;
-  final int yCount=portrait ? mLongAxisCells : mShortAxisCells;
+  final int xCount=mCountX;
+  final int yCount=mCountY;
   final boolean[][] occupied=mOccupied;
   findOccupiedCells(xCount,yCount,occupied,null,true);
   final boolean[] flat=new boolean[xCount * yCount];
