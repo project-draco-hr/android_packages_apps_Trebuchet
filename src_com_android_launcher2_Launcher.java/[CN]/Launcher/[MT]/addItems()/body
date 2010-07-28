@@ -3,7 +3,7 @@
   if (LauncherApplication.isScreenXLarge()) {
     if (!isCustomizationDrawerVisible()) {
       showCustomizationDrawer();
-      mWorkspace.shrink();
+      mWorkspace.shrinkToTop();
     }
   }
  else {

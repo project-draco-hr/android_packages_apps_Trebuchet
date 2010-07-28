@@ -11,7 +11,8 @@
     final View child=getChildAt(i);
     if (child.getVisibility() != View.GONE) {
       final int childX=child.getX();
-      child.layout(childX,0,childX + child.getMeasuredWidth(),child.getMeasuredHeight());
+      final int childY=child.getY();
+      child.layout(childX,childY,childX + child.getMeasuredWidth(),childY + child.getMeasuredHeight());
     }
   }
   if (LauncherApplication.isInPlaceRotationEnabled()) {

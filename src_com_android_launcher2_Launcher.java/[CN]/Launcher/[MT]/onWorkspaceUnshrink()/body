@@ -1,0 +1,8 @@
+{
+  if (isAllAppsVisible()) {
+    closeAllApps(false);
+  }
+  if (isCustomizationDrawerVisible()) {
+    hideCustomizationDrawer();
+  }
+}
