@@ -1,4 +1,5 @@
 {
   mAllAppsList.clear();
   addApps(list);
+  filterApps(mCurrentFilter);
 }

@@ -8,5 +8,5 @@
     }
     mAllAppsList.add(index,item);
   }
-  mAppsAdapter.notifyDataSetChanged();
+  filterApps(mCurrentFilter);
 }
