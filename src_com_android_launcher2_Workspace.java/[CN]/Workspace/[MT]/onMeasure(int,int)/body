@@ -15,8 +15,7 @@
   }
   if (mFirstLayout) {
     setHorizontalScrollBarEnabled(false);
-    scrollTo(mCurrentScreen * width,0);
+    setCurrentScreen(mCurrentScreen,false,width);
     setHorizontalScrollBarEnabled(true);
-    updateWallpaperOffset(width * (getChildCount() - 1));
   }
 }

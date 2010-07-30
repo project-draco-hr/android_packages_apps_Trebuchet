@@ -1,0 +1,3 @@
+int currentScreen
+boolean animateScrolling
+int screenWidth

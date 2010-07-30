@@ -1,0 +1,17 @@
+{
+  if (!mScroller.isFinished())   mScroller.abortAnimation();
+  clearVacantCache();
+  mCurrentScreen=Math.max(0,Math.min(currentScreen,getChildCount() - 1));
+  if (mPreviousIndicator != null) {
+    mPreviousIndicator.setLevel(mCurrentScreen);
+    mNextIndicator.setLevel(mCurrentScreen);
+  }
+  if (animateScrolling) {
+    scrollTo(mCurrentScreen * screenWidth,0);
+  }
+ else {
+    mScrollX=mCurrentScreen * screenWidth;
+  }
+  updateWallpaperOffset(screenWidth * (getChildCount() - 1));
+  invalidate();
+}

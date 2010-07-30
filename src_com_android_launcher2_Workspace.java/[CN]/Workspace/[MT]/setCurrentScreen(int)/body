@@ -1,12 +1,3 @@
 {
-  if (!mScroller.isFinished())   mScroller.abortAnimation();
-  clearVacantCache();
-  mCurrentScreen=Math.max(0,Math.min(currentScreen,getChildCount() - 1));
-  if (mPreviousIndicator != null) {
-    mPreviousIndicator.setLevel(mCurrentScreen);
-    mNextIndicator.setLevel(mCurrentScreen);
-  }
-  scrollTo(mCurrentScreen * getWidth(),0);
-  updateWallpaperOffset();
-  invalidate();
+  setCurrentScreen(currentScreen,true);
 }
