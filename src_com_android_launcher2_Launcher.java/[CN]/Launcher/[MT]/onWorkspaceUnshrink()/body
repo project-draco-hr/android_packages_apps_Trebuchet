@@ -1,6 +1,6 @@
 {
   if (isAllAppsVisible()) {
-    closeAllApps(false);
+    closeAllApps(true);
   }
   if (isCustomizationDrawerVisible()) {
     hideCustomizationDrawer();
