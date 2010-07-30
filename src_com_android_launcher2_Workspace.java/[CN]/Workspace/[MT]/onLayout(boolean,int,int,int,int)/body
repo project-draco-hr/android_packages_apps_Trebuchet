@@ -15,6 +15,10 @@
       child.layout(childX,childY,childX + child.getMeasuredWidth(),childY + child.getMeasuredHeight());
     }
   }
+  if (mWaitingToShrinkToBottom) {
+    shrinkToBottom(false);
+    mWaitingToShrinkToBottom=false;
+  }
   if (LauncherApplication.isInPlaceRotationEnabled()) {
     setCurrentScreen(getCurrentScreen());
   }

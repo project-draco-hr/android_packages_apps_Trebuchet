@@ -1,0 +1,8 @@
+{
+  if (mFirstLayout) {
+    mWaitingToShrinkToBottom=true;
+  }
+ else {
+    shrink(false,animated);
+  }
+}

@@ -15,16 +15,25 @@
   Sequencer s=new Sequencer();
   for (int i=0; i < screenCount; i++) {
     CellLayout cl=(CellLayout)getChildAt(i);
-    PropertyAnimator translateX=new PropertyAnimator(500,cl,"x",cl.getX(),(int)newX);
-    PropertyAnimator translateY=new PropertyAnimator(500,cl,"y",cl.getY(),(int)newY);
-    PropertyAnimator scaleX=new PropertyAnimator(500,cl,"scaleX",cl.getScaleX(),SHRINK_FACTOR);
-    PropertyAnimator scaleY=new PropertyAnimator(500,cl,"scaleY",cl.getScaleY(),SHRINK_FACTOR);
-    PropertyAnimator alpha=new PropertyAnimator(500,cl,"dimmedBitmapAlpha",cl.getDimmedBitmapAlpha(),1.0f);
-    Sequencer.Builder b=s.play(translateX);
-    b.with(translateY);
-    b.with(scaleX);
-    b.with(scaleY);
-    b.with(alpha);
+    if (animated) {
+      PropertyAnimator translateX=new PropertyAnimator(500,cl,"x",cl.getX(),(int)newX);
+      PropertyAnimator translateY=new PropertyAnimator(500,cl,"y",cl.getY(),(int)newY);
+      PropertyAnimator scaleX=new PropertyAnimator(500,cl,"scaleX",cl.getScaleX(),SHRINK_FACTOR);
+      PropertyAnimator scaleY=new PropertyAnimator(500,cl,"scaleY",cl.getScaleY(),SHRINK_FACTOR);
+      PropertyAnimator alpha=new PropertyAnimator(500,cl,"dimmedBitmapAlpha",cl.getDimmedBitmapAlpha(),1.0f);
+      Sequencer.Builder b=s.play(translateX);
+      b.with(translateY);
+      b.with(scaleX);
+      b.with(scaleY);
+      b.with(alpha);
+    }
+ else {
+      cl.setX((int)newX);
+      cl.setY((int)newY);
+      cl.setScaleX(SHRINK_FACTOR);
+      cl.setScaleY(SHRINK_FACTOR);
+      cl.setDimmedBitmapAlpha(1.0f);
+    }
     newX+=scaledScreenWidth + scaledSpacing;
     cl.setOnInterceptTouchListener(this);
   }
