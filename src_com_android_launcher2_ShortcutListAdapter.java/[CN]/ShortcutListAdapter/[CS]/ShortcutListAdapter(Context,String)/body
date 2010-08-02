@@ -1,8 +1,0 @@
-{
-  super(context,actionFilter);
-  ResolveInfo folder=new ResolveInfo();
-  folder.icon=R.drawable.ic_launcher_application;
-  folder.labelRes=R.string.group_applications;
-  folder.resolvePackageName=context.getPackageName();
-  mIntentList.add(0,folder);
-}

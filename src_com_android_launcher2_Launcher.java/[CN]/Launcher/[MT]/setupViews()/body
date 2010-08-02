@@ -27,7 +27,7 @@
     folderChooser.setAdapter(folderTypes);
     folderChooser.setLauncher(this);
     ShortcutChooser shortcutChooser=(ShortcutChooser)findViewById(R.id.shortcut_chooser);
-    IntentListAdapter shortcutTypes=new ShortcutListAdapter(this,Intent.ACTION_CREATE_SHORTCUT);
+    IntentListAdapter shortcutTypes=new IntentListAdapter(this,Intent.ACTION_CREATE_SHORTCUT);
     shortcutChooser.setAdapter(shortcutTypes);
     shortcutChooser.setLauncher(this);
   }
@@ -53,7 +53,13 @@
   workspace.setLauncher(this);
   deleteZone.setLauncher(this);
   deleteZone.setDragController(dragController);
-  int deleteZoneHandleId=LauncherApplication.isScreenXLarge() ? R.id.add_button : R.id.all_apps_button_cluster;
+  int deleteZoneHandleId;
+  if (LauncherApplication.isScreenXLarge()) {
+    deleteZoneHandleId=R.id.add_button;
+  }
+ else {
+    deleteZoneHandleId=R.id.all_apps_button_cluster;
+  }
   deleteZone.setHandle(findViewById(deleteZoneHandleId));
   dragController.setDragScoller(workspace);
   dragController.setDragListener(deleteZone);
