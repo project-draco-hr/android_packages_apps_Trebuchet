@@ -1,0 +1,6 @@
+{
+  Intent i=new Intent(SearchManager.INTENT_ACTION_GLOBAL_SEARCH);
+  View button=findViewById(R.id.search_button);
+  i.setSourceBounds(new Rect(button.getLeft(),button.getTop(),button.getRight(),button.getBottom()));
+  startActivity(i);
+}

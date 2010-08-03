@@ -12,10 +12,12 @@
   workspace.setHapticFeedbackEnabled(false);
   DeleteZone deleteZone=(DeleteZone)dragLayer.findViewById(R.id.delete_zone);
   mDeleteZone=deleteZone;
-  mHandleView=(HandleView)findViewById(R.id.all_apps_button);
-  mHandleView.setLauncher(this);
-  mHandleView.setOnClickListener(this);
-  mHandleView.setOnLongClickListener(this);
+  View handleView=findViewById(R.id.all_apps_button);
+  if (handleView != null && handleView instanceof HandleView) {
+    mHandleView.setLauncher(this);
+    mHandleView.setOnClickListener(this);
+    mHandleView.setOnLongClickListener(this);
+  }
   WidgetChooser widgetChooser=(WidgetChooser)findViewById(R.id.widget_chooser);
   if (widgetChooser != null) {
     WidgetListAdapter widgetGalleryAdapter=new WidgetListAdapter(this);
@@ -55,7 +57,7 @@
   deleteZone.setDragController(dragController);
   int deleteZoneHandleId;
   if (LauncherApplication.isScreenXLarge()) {
-    deleteZoneHandleId=R.id.add_button;
+    deleteZoneHandleId=R.id.configure_button;
   }
  else {
     deleteZoneHandleId=R.id.all_apps_button_cluster;
