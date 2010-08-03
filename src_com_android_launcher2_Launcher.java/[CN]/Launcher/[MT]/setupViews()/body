@@ -14,6 +14,7 @@
   mDeleteZone=deleteZone;
   View handleView=findViewById(R.id.all_apps_button);
   if (handleView != null && handleView instanceof HandleView) {
+    mHandleView=(HandleView)handleView;
     mHandleView.setLauncher(this);
     mHandleView.setOnClickListener(this);
     mHandleView.setOnLongClickListener(this);
