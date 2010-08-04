@@ -4,18 +4,9 @@
     Sequencer s=new Sequencer();
     final int screenCount=getChildCount();
     for (int i=0; i < screenCount; i++) {
-      CellLayout cl=(CellLayout)getChildAt(i);
-      int x=screenWidth * i;
-      PropertyAnimator translateX=new PropertyAnimator(500,cl,"x",cl.getX(),x);
-      PropertyAnimator translateY=new PropertyAnimator(500,cl,"y",cl.getY(),0);
-      PropertyAnimator scaleX=new PropertyAnimator(500,cl,"scaleX",cl.getScaleX(),1.0f);
-      PropertyAnimator scaleY=new PropertyAnimator(500,cl,"scaleY",cl.getScaleY(),1.0f);
-      PropertyAnimator alpha=new PropertyAnimator(500,cl,"dimmedBitmapAlpha",cl.getDimmedBitmapAlpha(),0.0f);
-      Sequencer.Builder b=s.play(translateX);
-      b.with(translateY);
-      b.with(scaleX);
-      b.with(scaleY);
-      b.with(alpha);
+      final CellLayout cl=(CellLayout)getChildAt(i);
+      final int duration=getResources().getInteger(R.integer.config_workspaceUnshrinkTime);
+      s.playTogether(new PropertyAnimator(duration,cl,"x",(float)screenWidth * i),new PropertyAnimator(duration,cl,"y",0.0f),new PropertyAnimator(duration,cl,"scaleX",1.0f),new PropertyAnimator(duration,cl,"scaleY",cl.getScaleY(),1.0f),new PropertyAnimator(duration,cl,"dimmedBitmapAlpha",0.0f));
     }
     s.addListener(mUnshrinkAnimationListener);
     s.start();

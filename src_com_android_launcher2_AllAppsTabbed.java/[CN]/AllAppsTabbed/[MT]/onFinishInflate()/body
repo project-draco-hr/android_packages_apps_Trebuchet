@@ -40,5 +40,5 @@
   }
 );
   setCurrentTab(0);
-  setVisibility(GONE);
+  setVisibility(INVISIBLE);
 }

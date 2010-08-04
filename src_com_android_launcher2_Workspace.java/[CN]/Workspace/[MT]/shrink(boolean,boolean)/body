@@ -1,10 +1,11 @@
 {
   mIsSmall=true;
+  final Resources res=getResources();
   final int screenWidth=getWidth();
   final int screenHeight=getHeight();
   final int scaledScreenWidth=(int)(SHRINK_FACTOR * screenWidth);
   final int scaledScreenHeight=(int)(SHRINK_FACTOR * screenHeight);
-  final float scaledSpacing=getResources().getDimension(R.dimen.smallScreenSpacing);
+  final float scaledSpacing=res.getDimension(R.dimen.smallScreenSpacing);
   final int screenCount=getChildCount();
   float totalWidth=screenCount * scaledScreenWidth + (screenCount - 1) * scaledSpacing;
   float newY=getResources().getDimension(R.dimen.smallScreenVerticalMargin);
@@ -16,16 +17,8 @@
   for (int i=0; i < screenCount; i++) {
     CellLayout cl=(CellLayout)getChildAt(i);
     if (animated) {
-      PropertyAnimator translateX=new PropertyAnimator(500,cl,"x",cl.getX(),(int)newX);
-      PropertyAnimator translateY=new PropertyAnimator(500,cl,"y",cl.getY(),(int)newY);
-      PropertyAnimator scaleX=new PropertyAnimator(500,cl,"scaleX",cl.getScaleX(),SHRINK_FACTOR);
-      PropertyAnimator scaleY=new PropertyAnimator(500,cl,"scaleY",cl.getScaleY(),SHRINK_FACTOR);
-      PropertyAnimator alpha=new PropertyAnimator(500,cl,"dimmedBitmapAlpha",cl.getDimmedBitmapAlpha(),1.0f);
-      Sequencer.Builder b=s.play(translateX);
-      b.with(translateY);
-      b.with(scaleX);
-      b.with(scaleY);
-      b.with(alpha);
+      final int duration=res.getInteger(R.integer.config_workspaceShrinkTime);
+      s.playTogether(new PropertyAnimator(duration,cl,"x",newX),new PropertyAnimator(duration,cl,"y",newY),new PropertyAnimator(duration,cl,"scaleX",SHRINK_FACTOR),new PropertyAnimator(duration,cl,"scaleY",SHRINK_FACTOR),new PropertyAnimator(duration,cl,"dimmedBitmapAlpha",1.0f));
     }
  else {
       cl.setX((int)newX);
@@ -38,5 +31,5 @@
     cl.setOnInterceptTouchListener(this);
   }
   setChildrenDrawnWithCacheEnabled(true);
-  s.start();
+  if (animated)   s.start();
 }
