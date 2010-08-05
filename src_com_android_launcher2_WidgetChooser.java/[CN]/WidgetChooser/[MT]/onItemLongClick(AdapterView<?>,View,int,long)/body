@@ -10,5 +10,6 @@
   dragInfo.minWidth=info.minWidth;
   dragInfo.minHeight=info.minHeight;
   mDragController.startDrag(bmp,screenX,screenY,0,0,w,h,this,dragInfo,DragController.DRAG_ACTION_COPY);
+  mLauncher.hideCustomizationDrawer();
   return true;
 }

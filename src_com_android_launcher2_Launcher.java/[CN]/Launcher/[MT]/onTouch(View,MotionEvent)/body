@@ -1,5 +1,4 @@
 {
   hideCustomizationDrawer();
-  mWorkspace.unshrink();
   return false;
 }
