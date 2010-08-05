@@ -1,7 +1,7 @@
 {
   final int countX=mCountX;
   final int countY=mCountY;
-  pointToCellRounded(originX,originY,result);
+  pointToCellRounded(originX + (mCellWidth / 2),originY + (mCellHeight / 2),result);
   int rightOverhang=result[0] + spanX - countX;
   if (rightOverhang > 0) {
     result[0]-=rightOverhang;

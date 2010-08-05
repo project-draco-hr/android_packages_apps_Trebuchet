@@ -1,6 +1,6 @@
 {
-  ItemInfo item=(ItemInfo)dragInfo;
-  CellLayout currentLayout=getCurrentDropLayout();
+  final ItemInfo item=(ItemInfo)dragInfo;
+  final CellLayout currentLayout=getCurrentDropLayout();
   if (dragInfo instanceof LauncherAppWidgetInfo) {
     LauncherAppWidgetInfo widgetInfo=(LauncherAppWidgetInfo)dragInfo;
     if (widgetInfo.spanX == -1) {
@@ -17,6 +17,12 @@
   }
   int originX=x - xOffset;
   int originY=y - yOffset;
+  if (!source.equals(this)) {
+    int chunkWidth=dragView.getWidth() / item.spanX;
+    int chunkHeight=dragView.getHeight() / item.spanY;
+    originX+=(chunkWidth - currentLayout.getCellWidth()) / 2;
+    originY+=(chunkHeight - currentLayout.getCellHeight()) / 2;
+  }
   final View child=(mDragInfo == null) ? null : mDragInfo.cell;
   currentLayout.visualizeDropLocation(child,originX,originY,item.spanX,item.spanY);
 }
