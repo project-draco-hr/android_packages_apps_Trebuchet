@@ -1,0 +1,22 @@
+{
+  final int duration=getResources().getInteger(R.integer.config_allAppsCameraPanTime);
+  final int workspaceHeight=mWorkspace.getHeight();
+  final boolean panDown=fromView.getY() < toView.getY();
+  final float fromViewStartY=panDown ? 0.0f : fromView.getY();
+  final float fromViewEndY=panDown ? -fromView.getHeight() * 2 : workspaceHeight * 2;
+  final float toViewStartY=panDown ? workspaceHeight * 2 : -toView.getHeight() * 2;
+  final float toViewEndY=panDown ? workspaceHeight - toView.getHeight() : 0.0f;
+  Sequencer s=new Sequencer();
+  s.playTogether(new PropertyAnimator(duration,fromView,"y",fromViewStartY,fromViewEndY),new PropertyAnimator(duration,toView,"y",toViewStartY,toViewEndY));
+  s.addListener(new AnimatableListenerAdapter(){
+    public void onAnimationStart(    Animatable animation){
+      toView.setVisibility(View.VISIBLE);
+      toView.setY(toViewStartY);
+    }
+    public void onAnimationEnd(    Animatable animation){
+      fromView.setVisibility(View.GONE);
+    }
+  }
+);
+  s.start();
+}

@@ -1,6 +1,4 @@
 {
   setVisibility((zoom == 0.0f) ? View.GONE : View.VISIBLE);
   mAllApps2D.zoom(zoom,animate);
-  bringChildToFront((View)mAllApps2D);
-  getParent().bringChildToFront(this);
 }

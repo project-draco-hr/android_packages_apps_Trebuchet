@@ -40,5 +40,4 @@
   }
 );
   setCurrentTab(0);
-  setVisibility(INVISIBLE);
 }

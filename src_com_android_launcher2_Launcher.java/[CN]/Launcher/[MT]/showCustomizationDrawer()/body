@@ -1,7 +1,9 @@
 {
+  mWorkspace.shrinkToTop();
   if (isAllAppsVisible()) {
-    closeAllApps(false);
+    cameraPan((View)mAllAppsGrid,mHomeCustomizationDrawer);
   }
-  mHomeCustomizationDrawer.setVisibility(View.VISIBLE);
-  mHomeCustomizationDrawer.startAnimation(AnimationUtils.loadAnimation(this,R.anim.home_customization_drawer_slide_up));
+ else {
+    cameraZoomOut(mHomeCustomizationDrawer,false);
+  }
 }

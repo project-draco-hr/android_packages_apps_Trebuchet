@@ -1,19 +1,8 @@
 {
   if (isCustomizationDrawerVisible()) {
-    Animation slideDownAnimation=AnimationUtils.loadAnimation(this,R.anim.home_customization_drawer_slide_down);
-    slideDownAnimation.setAnimationListener(new Animation.AnimationListener(){
-      public void onAnimationEnd(      Animation animation){
-        mHomeCustomizationDrawer.setVisibility(View.GONE);
-      }
-      public void onAnimationRepeat(      Animation animation){
-      }
-      public void onAnimationStart(      Animation animation){
-      }
-    }
-);
-    mHomeCustomizationDrawer.startAnimation(slideDownAnimation);
     if (unshrinkWorkspace) {
       mWorkspace.unshrink();
     }
+    cameraZoomIn(mHomeCustomizationDrawer);
   }
 }

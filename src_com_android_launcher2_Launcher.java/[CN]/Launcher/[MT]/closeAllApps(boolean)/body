@@ -2,23 +2,8 @@
   if (mAllAppsGrid.isVisible()) {
     mWorkspace.setVisibility(View.VISIBLE);
     if (LauncherApplication.isScreenXLarge() && animated) {
-      Resources res=getResources();
-      int duration=res.getInteger(R.integer.config_allAppsZoomOutTime);
-      float scaleFactor=(float)res.getInteger(R.integer.config_allAppsZoomScaleFactor);
-      View allApps=(View)mAllAppsGrid;
-      allApps.setPivotX(allApps.getWidth() / 2.0f);
-      allApps.setPivotY(allApps.getHeight());
-      float newY=allApps.getY() - allApps.getHeight() * 0.2f;
-      Sequencer seq=new Sequencer();
-      seq.playTogether(new PropertyAnimator(duration,allApps,"scaleX",scaleFactor),new PropertyAnimator(duration,allApps,"scaleY",scaleFactor),new PropertyAnimator(duration,allApps,"y",newY));
-      seq.addListener(new AnimatableListenerAdapter(){
-        public void onAnimationEnd(        Animatable animation){
-          mAllAppsGrid.zoom(0.0f,false);
-        }
-      }
-);
-      seq.start();
       mWorkspace.unshrink();
+      cameraZoomIn((View)mAllAppsGrid);
     }
  else {
       mAllAppsGrid.zoom(0.0f,animated);

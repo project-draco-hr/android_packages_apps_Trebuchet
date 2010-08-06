@@ -1,0 +1,21 @@
+{
+  Resources res=getResources();
+  int duration=res.getInteger(R.integer.config_allAppsZoomOutTime);
+  float scaleFactor=(float)res.getInteger(R.integer.config_allAppsZoomScaleFactor);
+  Interpolator interp=new AccelerateInterpolator();
+  Sequencer s=new Sequencer();
+  Animator scaleXAnim=new PropertyAnimator(duration,fromView,"scaleX",scaleFactor);
+  scaleXAnim.setInterpolator(interp);
+  Animator scaleYAnim=new PropertyAnimator(duration,fromView,"scaleY",scaleFactor);
+  scaleYAnim.setInterpolator(interp);
+  s.playTogether(scaleXAnim,scaleYAnim);
+  s.addListener(new AnimatableListenerAdapter(){
+    public void onAnimationEnd(    Animatable animation){
+      fromView.setVisibility(View.GONE);
+      fromView.setScaleX(1.0f);
+      fromView.setScaleY(1.0f);
+    }
+  }
+);
+  s.start();
+}

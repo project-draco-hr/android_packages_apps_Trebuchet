@@ -7,6 +7,10 @@
   mAllAppsGrid.setDragController(dragController);
   ((View)mAllAppsGrid).setWillNotDraw(false);
   ((View)mAllAppsGrid).setFocusable(false);
+  if (LauncherApplication.isScreenXLarge()) {
+    ((View)mAllAppsGrid).setVisibility(View.INVISIBLE);
+    mHomeCustomizationDrawer.setVisibility(View.INVISIBLE);
+  }
   mWorkspace=(Workspace)dragLayer.findViewById(R.id.workspace);
   final Workspace workspace=mWorkspace;
   workspace.setHapticFeedbackEnabled(false);
