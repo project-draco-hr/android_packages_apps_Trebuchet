@@ -28,12 +28,16 @@
     Drawable background=resources.getDrawable(R.drawable.default_widget_preview);
     background.setBounds(0,0,width,height);
     background.draw(mCanvas);
-    Drawable icon=packageManager.getDrawable(packageName,info.icon,null);
-    background.getPadding(mTempRect);
-    final int left=mTempRect.left;
-    final int top=(height - icon.getIntrinsicHeight()) / 2;
-    icon.setBounds(left,top,left + icon.getIntrinsicWidth(),top + icon.getIntrinsicHeight());
-    icon.draw(mCanvas);
+    try {
+      Drawable icon=packageManager.getDrawable(packageName,info.icon,null);
+      background.getPadding(mTempRect);
+      final int left=mTempRect.left;
+      final int top=(height - icon.getIntrinsicHeight()) / 2;
+      icon.setBounds(left,top,left + icon.getIntrinsicWidth(),top + icon.getIntrinsicHeight());
+      icon.draw(mCanvas);
+    }
+ catch (    Resources.NotFoundException e) {
+    }
     drawable=new BitmapDrawable(resources,bitmap);
   }
   drawable.setBounds(0,0,drawable.getIntrinsicWidth(),drawable.getIntrinsicHeight());

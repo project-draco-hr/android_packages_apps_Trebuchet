@@ -1,5 +1,6 @@
 {
-  hideCustomizationDrawer();
+  boolean unshrinkWorkspace=false;
+  hideCustomizationDrawer(unshrinkWorkspace);
   if (LauncherApplication.isScreenXLarge()) {
     mWorkspace.shrinkToBottom(animated);
   }
