@@ -4,5 +4,6 @@
       mWorkspace.unshrink();
     }
     cameraZoomIn(mHomeCustomizationDrawer);
+    mCustomizePagedView.cleanup();
   }
 }

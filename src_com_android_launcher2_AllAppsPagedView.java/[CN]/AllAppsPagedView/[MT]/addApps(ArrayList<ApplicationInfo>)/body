@@ -1,5 +1,4 @@
 {
-  mApps.addAll(list);
-  mFilteredApps.addAll(rebuildFilteredApps(list));
+  addAppsWithoutInvalidate(list);
   invalidatePageData();
 }

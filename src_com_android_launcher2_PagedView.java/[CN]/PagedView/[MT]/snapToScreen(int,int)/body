@@ -10,5 +10,6 @@
   }
   if (!mScroller.isFinished())   mScroller.abortAnimation();
   mScroller.startScroll(sX,0,delta,0,duration);
+  loadAssociatedPages(mNextScreen);
   invalidate();
 }

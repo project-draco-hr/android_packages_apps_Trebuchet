@@ -1,0 +1,28 @@
+{
+  Context context=getContext();
+  mWidgetList=AppWidgetManager.getInstance(mLauncher).getInstalledProviders();
+  Collections.sort(mWidgetList,new Comparator<AppWidgetProviderInfo>(){
+    @Override public int compare(    AppWidgetProviderInfo object1,    AppWidgetProviderInfo object2){
+      return object1.label.compareTo(object2.label);
+    }
+  }
+);
+  Comparator<ResolveInfo> resolveInfoComparator=new Comparator<ResolveInfo>(){
+    @Override public int compare(    ResolveInfo object1,    ResolveInfo object2){
+      return object1.loadLabel(mPackageManager).toString().compareTo(object2.loadLabel(mPackageManager).toString());
+    }
+  }
+;
+  Intent liveFolderIntent=new Intent(LiveFolders.ACTION_CREATE_LIVE_FOLDER);
+  mFolderList=mPackageManager.queryIntentActivities(liveFolderIntent,0);
+  ResolveInfo folder=new ResolveInfo();
+  folder.icon=R.drawable.ic_launcher_folder;
+  folder.labelRes=R.string.group_folder;
+  folder.resolvePackageName=context.getPackageName();
+  mFolderList.add(0,folder);
+  Collections.sort(mFolderList,resolveInfoComparator);
+  Intent shortcutsIntent=new Intent(Intent.ACTION_CREATE_SHORTCUT);
+  mShortcutList=mPackageManager.queryIntentActivities(shortcutsIntent,0);
+  Collections.sort(mShortcutList,resolveInfoComparator);
+  invalidatePageData();
+}

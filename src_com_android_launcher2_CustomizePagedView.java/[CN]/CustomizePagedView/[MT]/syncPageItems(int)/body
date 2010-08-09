@@ -1,0 +1,16 @@
+{
+switch (mCustomizationType) {
+case WidgetCustomization:
+    syncWidgetPageItems(page);
+  break;
+case FolderCustomization:
+syncListPageItems(page,mFolderList);
+break;
+case ShortcutCustomization:
+syncListPageItems(page,mShortcutList);
+break;
+case WallpaperCustomization:
+syncWallpaperPageItems(page);
+break;
+}
+}

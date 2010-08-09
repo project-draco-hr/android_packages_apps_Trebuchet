@@ -1,0 +1,7 @@
+{
+  setDimmedBitmapAlpha(0.0f);
+  if (mDimmedBitmap != null) {
+    mDimmedBitmap.recycle();
+    mDimmedBitmap=null;
+  }
+}

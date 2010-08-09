@@ -1,0 +1,17 @@
+{
+  PagedViewCellLayout layout=(PagedViewCellLayout)getChildAt(page);
+  final ArrayList<PagedViewCellLayout.LayoutParams> list=mWidgetPages.get(page);
+  final int count=list.size();
+  layout.removeAllViews();
+  for (int i=0; i < count; ++i) {
+    PagedViewCellLayout.LayoutParams params=list.get(i);
+    AppWidgetProviderInfo info=(AppWidgetProviderInfo)params.getTag();
+    final Drawable icon=getWidgetIcon(params,info);
+    TextView text=(TextView)mInflater.inflate(R.layout.customize_paged_view_widget,layout,false);
+    text.setCompoundDrawablesWithIntrinsicBounds(null,icon,null,null);
+    text.setText(info.label);
+    text.setTag(info);
+    text.setOnLongClickListener(this);
+    layout.addViewToCellLayout(text,-1,mWidgetList.indexOf(info),params);
+  }
+}

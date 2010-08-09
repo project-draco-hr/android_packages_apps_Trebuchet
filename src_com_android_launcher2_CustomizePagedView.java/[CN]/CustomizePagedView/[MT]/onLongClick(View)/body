@@ -1,0 +1,53 @@
+{
+  if (!v.isInTouchMode()) {
+    return false;
+  }
+  final View animView=v;
+switch (mCustomizationType) {
+case WidgetCustomization:
+    AppWidgetProviderInfo appWidgetInfo=(AppWidgetProviderInfo)v.getTag();
+  LauncherAppWidgetInfo dragInfo=new LauncherAppWidgetInfo(appWidgetInfo.provider);
+dragInfo.minWidth=appWidgetInfo.minWidth;
+dragInfo.minHeight=appWidgetInfo.minHeight;
+mDragController.startDrag(v,this,dragInfo,DragController.DRAG_ACTION_COPY);
+mLauncher.hideCustomizationDrawer();
+return true;
+case FolderCustomization:
+animateClickFeedback(v,new Runnable(){
+@Override public void run(){
+ResolveInfo resolveInfo=(ResolveInfo)animView.getTag();
+Intent createFolderIntent=new Intent(LiveFolders.ACTION_CREATE_LIVE_FOLDER);
+if (resolveInfo.labelRes == R.string.group_folder) {
+createFolderIntent.putExtra(Intent.EXTRA_SHORTCUT_NAME,getContext().getString(R.string.group_folder));
+}
+ else {
+ComponentName name=new ComponentName(resolveInfo.activityInfo.packageName,resolveInfo.activityInfo.name);
+createFolderIntent.setComponent(name);
+}
+mLauncher.prepareAddItemFromHomeCustomizationDrawer();
+mLauncher.addLiveFolder(createFolderIntent);
+}
+}
+);
+return true;
+case ShortcutCustomization:
+animateClickFeedback(v,new Runnable(){
+@Override public void run(){
+ResolveInfo info=(ResolveInfo)animView.getTag();
+Intent createShortcutIntent=new Intent(Intent.ACTION_CREATE_SHORTCUT);
+if (info.labelRes == R.string.group_applications) {
+createShortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_NAME,getContext().getString(R.string.group_applications));
+}
+ else {
+ComponentName name=new ComponentName(info.activityInfo.packageName,info.activityInfo.name);
+createShortcutIntent.setComponent(name);
+}
+mLauncher.prepareAddItemFromHomeCustomizationDrawer();
+mLauncher.processShortcut(createShortcutIntent);
+}
+}
+);
+return true;
+}
+return false;
+}

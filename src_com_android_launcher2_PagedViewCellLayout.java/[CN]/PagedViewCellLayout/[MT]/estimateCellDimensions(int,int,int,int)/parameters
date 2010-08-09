@@ -1,0 +1,4 @@
+int approxWidth
+int approxHeight
+int cellHSpan
+int cellVSpan

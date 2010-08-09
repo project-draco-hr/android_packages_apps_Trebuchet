@@ -1,10 +1,12 @@
 {
+  if (mAllAppsGrid.isVisible())   return;
   if (LauncherApplication.isScreenXLarge()) {
     mWorkspace.shrinkToBottom(animated);
   }
   if (LauncherApplication.isScreenXLarge() && animated) {
     if (isCustomizationDrawerVisible()) {
       cameraPan(mHomeCustomizationDrawer,(View)mAllAppsGrid);
+      mCustomizePagedView.cleanup();
     }
  else {
       cameraZoomOut((View)mAllAppsGrid,true);

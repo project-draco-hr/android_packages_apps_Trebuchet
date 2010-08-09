@@ -1,4 +1,5 @@
 {
-  removeApps(list);
-  addApps(list);
+  removeAppsWithoutInvalidate(list);
+  addAppsWithoutInvalidate(list);
+  invalidatePageData();
 }

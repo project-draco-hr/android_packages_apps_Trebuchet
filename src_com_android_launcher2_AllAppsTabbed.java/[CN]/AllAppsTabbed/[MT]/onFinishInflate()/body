@@ -32,19 +32,31 @@
   }
   setOnTabChangedListener(new OnTabChangeListener(){
     public void onTabChanged(    String tabId){
-      String tag=getCurrentTabTag();
-      if (tag == TAG_ALL) {
-        mAllApps.setAppFilter(AllAppsPagedView.ALL_APPS_FLAG);
+      final int duration=150;
+      final float alpha=mAllApps.getAlpha();
+      Animator alphaAnim=new PropertyAnimator(duration,mAllApps,"alpha",alpha,0.0f);
+      alphaAnim.addListener(new AnimatableListenerAdapter(){
+        public void onAnimationEnd(        Animatable animation){
+          String tag=getCurrentTabTag();
+          if (tag == TAG_ALL) {
+            mAllApps.setAppFilter(AllAppsPagedView.ALL_APPS_FLAG);
+          }
+ else           if (tag == TAG_APPS) {
+            mAllApps.setAppFilter(ApplicationInfo.APP_FLAG);
+          }
+ else           if (tag == TAG_GAMES) {
+            mAllApps.setAppFilter(ApplicationInfo.GAME_FLAG);
+          }
+ else           if (tag == TAG_DOWNLOADED) {
+            mAllApps.setAppFilter(ApplicationInfo.DOWNLOADED_FLAG);
+          }
+          final float alpha=mAllApps.getAlpha();
+          Animator alphaAnim=new PropertyAnimator(duration,mAllApps,"alpha",alpha,1.0f);
+          alphaAnim.start();
+        }
       }
- else       if (tag == TAG_APPS) {
-        mAllApps.setAppFilter(ApplicationInfo.APP_FLAG);
-      }
- else       if (tag == TAG_GAMES) {
-        mAllApps.setAppFilter(ApplicationInfo.GAME_FLAG);
-      }
- else       if (tag == TAG_DOWNLOADED) {
-        mAllApps.setAppFilter(ApplicationInfo.DOWNLOADED_FLAG);
-      }
+);
+      alphaAnim.start();
     }
   }
 );

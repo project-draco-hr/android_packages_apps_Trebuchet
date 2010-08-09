@@ -1,18 +1,29 @@
 {
-  int numCells=mCellCountX * mCellCountY;
-  int startIndex=page * numCells;
-  int endIndex=Math.min(startIndex + numCells,mFilteredApps.size());
+  final int cellsPerPage=mCellCountX * mCellCountY;
+  final int startIndex=page * cellsPerPage;
+  final int endIndex=Math.min(startIndex + cellsPerPage,mFilteredApps.size());
   PagedViewCellLayout layout=(PagedViewCellLayout)getChildAt(page);
-  layout.removeAllViews();
-  for (int i=startIndex; i < endIndex; ++i) {
-    ApplicationInfo info=mFilteredApps.get(i);
+  final int curNumPageItems=layout.getChildCount();
+  final int numPageItems=endIndex - startIndex;
+  int extraPageItemsDiff=curNumPageItems - numPageItems;
+  for (int i=0; i < extraPageItemsDiff; ++i) {
+    layout.removeViewAt(numPageItems);
+  }
+  for (int i=curNumPageItems; i < numPageItems; ++i) {
     TextView text=(TextView)mInflater.inflate(R.layout.all_apps_paged_view_application,layout,false);
+    text.setOnClickListener(this);
+    text.setOnLongClickListener(this);
+    layout.addViewToCellLayout(text,-1,i,new PagedViewCellLayout.LayoutParams(0,0,1,1));
+  }
+  for (int i=startIndex; i < endIndex; ++i) {
+    int index=i - startIndex;
+    ApplicationInfo info=mFilteredApps.get(i);
+    TextView text=(TextView)layout.getChildAt(index);
     text.setCompoundDrawablesWithIntrinsicBounds(null,new BitmapDrawable(info.iconBitmap),null,null);
     text.setText(info.title);
     text.setTag(info);
-    text.setOnClickListener(this);
-    text.setOnLongClickListener(this);
-    int index=i - startIndex;
-    layout.addViewToCellLayout(text,index,i,new PagedViewCellLayout.LayoutParams(index % mCellCountX,index / mCellCountX,1,1));
+    PagedViewCellLayout.LayoutParams params=(PagedViewCellLayout.LayoutParams)text.getLayoutParams();
+    params.cellX=index % mCellCountX;
+    params.cellY=index / mCellCountX;
   }
 }

@@ -1,0 +1,21 @@
+{
+  final int count=getChildCount();
+  if (mCurrentScreen < count) {
+    if (skipCurrentScreens) {
+      int lowerScreenBound=Math.max(0,mCurrentScreen - 1);
+      int upperScreenBound=Math.min(mCurrentScreen + 1,count - 1);
+      for (int i=0; i < count; ++i) {
+        if (i < lowerScreenBound || i > upperScreenBound) {
+          PagedViewCellLayout layout=(PagedViewCellLayout)getChildAt(i);
+          layout.clearDimmedBitmap();
+        }
+      }
+    }
+ else {
+      for (int i=0; i < count; ++i) {
+        PagedViewCellLayout layout=(PagedViewCellLayout)getChildAt(i);
+        layout.clearDimmedBitmap();
+      }
+    }
+  }
+}

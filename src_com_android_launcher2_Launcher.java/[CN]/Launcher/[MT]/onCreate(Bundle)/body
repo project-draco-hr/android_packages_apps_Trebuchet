@@ -22,14 +22,60 @@
   mHomeCustomizationDrawer=(TabHost)findViewById(com.android.internal.R.id.tabhost);
   if (mHomeCustomizationDrawer != null) {
     mHomeCustomizationDrawer.setup();
+    mCustomizePagedView=new CustomizePagedView(this);
+    TabContentFactory contentFactory=new TabContentFactory(){
+      public View createTabContent(      String tag){
+        return mCustomizePagedView;
+      }
+    }
+;
     String widgetsLabel=getString(R.string.widgets_tab_label);
-    mHomeCustomizationDrawer.addTab(mHomeCustomizationDrawer.newTabSpec("widgets").setIndicator(widgetsLabel).setContent(R.id.widget_chooser));
+    mHomeCustomizationDrawer.addTab(mHomeCustomizationDrawer.newTabSpec(WIDGETS_TAG).setIndicator(widgetsLabel).setContent(contentFactory));
     String foldersLabel=getString(R.string.folders_tab_label);
-    mHomeCustomizationDrawer.addTab(mHomeCustomizationDrawer.newTabSpec("folders").setIndicator(foldersLabel).setContent(R.id.folder_chooser));
+    mHomeCustomizationDrawer.addTab(mHomeCustomizationDrawer.newTabSpec(FOLDERS_TAG).setIndicator(foldersLabel).setContent(contentFactory));
     String shortcutsLabel=getString(R.string.shortcuts_tab_label);
-    mHomeCustomizationDrawer.addTab(mHomeCustomizationDrawer.newTabSpec("shortcuts").setIndicator(shortcutsLabel).setContent(R.id.shortcut_chooser));
+    mHomeCustomizationDrawer.addTab(mHomeCustomizationDrawer.newTabSpec(SHORTCUTS_TAG).setIndicator(shortcutsLabel).setContent(contentFactory));
     String wallpapersLabel=getString(R.string.wallpapers_tab_label);
-    mHomeCustomizationDrawer.addTab(mHomeCustomizationDrawer.newTabSpec("wallpapers").setIndicator(wallpapersLabel).setContent(R.id.wallpaperstab));
+    mHomeCustomizationDrawer.addTab(mHomeCustomizationDrawer.newTabSpec(WALLPAPERS_TAG).setIndicator(wallpapersLabel).setContent(contentFactory));
+    TabWidget tabWidget=mHomeCustomizationDrawer.getTabWidget();
+    for (int i=0; i < tabWidget.getChildCount(); ++i) {
+      RelativeLayout tab=(RelativeLayout)tabWidget.getChildTabViewAt(i);
+      TextView text=(TextView)tab.getChildAt(1);
+      text.setTextSize(20.0f);
+      text.setPadding(20,0,20,0);
+      text.setShadowLayer(1.0f,0.0f,1.0f,Color.BLACK);
+      tab.setBackgroundDrawable(null);
+    }
+    mHomeCustomizationDrawer.setOnTabChangedListener(new OnTabChangeListener(){
+      public void onTabChanged(      String tabId){
+        final int duration=150;
+        final float alpha=mCustomizePagedView.getAlpha();
+        Animator alphaAnim=new PropertyAnimator(duration,mCustomizePagedView,"alpha",alpha,0.0f);
+        alphaAnim.addListener(new AnimatableListenerAdapter(){
+          public void onAnimationEnd(          Animatable animation){
+            String tag=mHomeCustomizationDrawer.getCurrentTabTag();
+            if (tag == WIDGETS_TAG) {
+              mCustomizePagedView.setCustomizationFilter(CustomizePagedView.CustomizationType.WidgetCustomization);
+            }
+ else             if (tag == FOLDERS_TAG) {
+              mCustomizePagedView.setCustomizationFilter(CustomizePagedView.CustomizationType.FolderCustomization);
+            }
+ else             if (tag == SHORTCUTS_TAG) {
+              mCustomizePagedView.setCustomizationFilter(CustomizePagedView.CustomizationType.ShortcutCustomization);
+            }
+ else             if (tag == WALLPAPERS_TAG) {
+              mCustomizePagedView.setCustomizationFilter(CustomizePagedView.CustomizationType.WallpaperCustomization);
+            }
+            final float alpha=mCustomizePagedView.getAlpha();
+            Animator alphaAnim=new PropertyAnimator(duration,mCustomizePagedView,"alpha",alpha,1.0f);
+            alphaAnim.start();
+          }
+        }
+);
+        alphaAnim.start();
+      }
+    }
+);
     mHomeCustomizationDrawer.setCurrentTab(0);
   }
   setupViews();

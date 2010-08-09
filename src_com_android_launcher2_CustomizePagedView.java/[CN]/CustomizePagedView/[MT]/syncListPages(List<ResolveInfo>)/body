@@ -1,0 +1,13 @@
+{
+  int numPages=(int)Math.ceil((float)list.size() / (mCellCountX * mCellCountY));
+  int curNumPages=getChildCount();
+  int extraPageDiff=curNumPages - numPages;
+  for (int i=0; i < extraPageDiff; ++i) {
+    removeViewAt(numPages);
+  }
+  for (int i=curNumPages; i < numPages; ++i) {
+    PagedViewCellLayout layout=new PagedViewCellLayout(getContext());
+    setupPage(layout);
+    addView(layout);
+  }
+}

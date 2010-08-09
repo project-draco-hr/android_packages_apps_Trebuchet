@@ -1,5 +1,7 @@
 {
+  final boolean isVisible=(visibility == View.VISIBLE);
   super.setVisibility(visibility);
-  float zoom=visibility == View.VISIBLE ? 1.0f : 0.0f;
+  float zoom=(isVisible ? 1.0f : 0.0f);
   mAllApps.zoom(zoom,false);
+  if (!isVisible)   mAllApps.cleanup();
 }

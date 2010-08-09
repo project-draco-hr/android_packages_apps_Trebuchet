@@ -1,0 +1,24 @@
+{
+  final int count=getChildCount();
+  if (screen < count) {
+    int lowerScreenBound=Math.max(0,screen - 1);
+    int upperScreenBound=Math.min(screen + 1,count - 1);
+    boolean hasDimmedBitmap=false;
+    for (int i=0; i < count; ++i) {
+      if (lowerScreenBound <= i && i <= upperScreenBound) {
+        syncPageItems(i);
+      }
+ else {
+        PagedViewCellLayout layout=(PagedViewCellLayout)getChildAt(i);
+        if (layout.getChildCount() > 0) {
+          layout.removeAllViews();
+        }
+        hasDimmedBitmap|=layout.getDimmedBitmapAlpha() > 0.0f;
+      }
+    }
+    if (hasDimmedBitmap) {
+      mHandler.removeMessages(0);
+      mHandler.postDelayed(clearLayoutOtherDimmedBitmapsRunnable,500);
+    }
+  }
+}

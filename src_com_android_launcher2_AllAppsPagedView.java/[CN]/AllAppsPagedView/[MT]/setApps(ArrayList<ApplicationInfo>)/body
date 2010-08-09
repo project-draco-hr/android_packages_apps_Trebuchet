@@ -1,11 +1,6 @@
 {
   mApps=list;
-  Collections.sort(mApps,new Comparator<ApplicationInfo>(){
-    @Override public int compare(    ApplicationInfo object1,    ApplicationInfo object2){
-      return object1.title.toString().compareTo(object2.title.toString());
-    }
-  }
-);
+  Collections.sort(mApps,LauncherModel.APP_NAME_COMPARATOR);
   mFilteredApps=rebuildFilteredApps(mApps);
   invalidatePageData();
 }

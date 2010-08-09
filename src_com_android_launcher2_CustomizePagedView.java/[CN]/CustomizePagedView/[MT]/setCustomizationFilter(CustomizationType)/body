@@ -1,0 +1,5 @@
+{
+  mCustomizationType=filterType;
+  setCurrentScreen(0);
+  invalidatePageData();
+}

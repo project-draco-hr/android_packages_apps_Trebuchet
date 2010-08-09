@@ -23,20 +23,10 @@
     mHandleView.setOnClickListener(this);
     mHandleView.setOnLongClickListener(this);
   }
-  WidgetChooser widgetChooser=(WidgetChooser)findViewById(R.id.widget_chooser);
-  if (widgetChooser != null) {
-    WidgetListAdapter widgetGalleryAdapter=new WidgetListAdapter(this);
-    widgetChooser.setAdapter(widgetGalleryAdapter);
-    widgetChooser.setDragController(dragController);
-    widgetChooser.setLauncher(this);
-    FolderChooser folderChooser=(FolderChooser)findViewById(R.id.folder_chooser);
-    IntentListAdapter folderTypes=new FolderListAdapter(this,LiveFolders.ACTION_CREATE_LIVE_FOLDER);
-    folderChooser.setAdapter(folderTypes);
-    folderChooser.setLauncher(this);
-    ShortcutChooser shortcutChooser=(ShortcutChooser)findViewById(R.id.shortcut_chooser);
-    IntentListAdapter shortcutTypes=new IntentListAdapter(this,Intent.ACTION_CREATE_SHORTCUT);
-    shortcutChooser.setAdapter(shortcutTypes);
-    shortcutChooser.setLauncher(this);
+  if (mCustomizePagedView != null) {
+    mCustomizePagedView.setLauncher(this);
+    mCustomizePagedView.setDragController(dragController);
+    mCustomizePagedView.update();
   }
  else {
     ImageView hotseatLeft=(ImageView)findViewById(R.id.hotseat_left);
