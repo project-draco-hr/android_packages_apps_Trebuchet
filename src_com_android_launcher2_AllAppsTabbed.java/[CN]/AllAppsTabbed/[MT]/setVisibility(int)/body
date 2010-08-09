@@ -1,5 +1,5 @@
 {
   super.setVisibility(visibility);
   float zoom=visibility == View.VISIBLE ? 1.0f : 0.0f;
-  mAllApps2D.zoom(zoom,false);
+  mAllApps.zoom(zoom,false);
 }

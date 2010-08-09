@@ -1,0 +1,7 @@
+{
+  super.requestChildFocus(child,focused);
+  int screen=indexOfChild(child);
+  if (screen >= 0 && !isInTouchMode()) {
+    snapToScreen(screen);
+  }
+}

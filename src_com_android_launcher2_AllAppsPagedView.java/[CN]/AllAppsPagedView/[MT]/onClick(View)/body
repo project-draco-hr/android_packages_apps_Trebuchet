@@ -1,0 +1,22 @@
+{
+  int childIndex=getChildIndexForGrandChild(v);
+  if (childIndex == getCurrentScreen()) {
+    final ApplicationInfo app=(ApplicationInfo)v.getTag();
+    AlphaAnimation anim=new AlphaAnimation(1.0f,0.65f);
+    anim.setDuration(100);
+    anim.setFillAfter(true);
+    anim.setRepeatMode(AlphaAnimation.REVERSE);
+    anim.setRepeatCount(1);
+    anim.setAnimationListener(new AnimationListener(){
+      @Override public void onAnimationStart(      Animation animation){
+      }
+      @Override public void onAnimationRepeat(      Animation animation){
+        mLauncher.startActivitySafely(app.intent,app);
+      }
+      @Override public void onAnimationEnd(      Animation animation){
+      }
+    }
+);
+    v.startAnimation(anim);
+  }
+}

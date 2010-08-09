@@ -1,0 +1,18 @@
+{
+  int numCells=mCellCountX * mCellCountY;
+  int startIndex=page * numCells;
+  int endIndex=Math.min(startIndex + numCells,mFilteredApps.size());
+  PagedViewCellLayout layout=(PagedViewCellLayout)getChildAt(page);
+  layout.removeAllViews();
+  for (int i=startIndex; i < endIndex; ++i) {
+    ApplicationInfo info=mFilteredApps.get(i);
+    TextView text=(TextView)mInflater.inflate(R.layout.all_apps_paged_view_application,layout,false);
+    text.setCompoundDrawablesWithIntrinsicBounds(null,new BitmapDrawable(info.iconBitmap),null,null);
+    text.setText(info.title);
+    text.setTag(info);
+    text.setOnClickListener(this);
+    text.setOnLongClickListener(this);
+    int index=i - startIndex;
+    layout.addViewToCellLayout(text,index,i,new PagedViewCellLayout.LayoutParams(index % mCellCountX,index / mCellCountX,1,1));
+  }
+}

@@ -1,0 +1,8 @@
+{
+  int screen=indexOfChild(child);
+  if (screen != mCurrentScreen || !mScroller.isFinished()) {
+    snapToScreen(screen);
+    return true;
+  }
+  return false;
+}

@@ -1,0 +1,8 @@
+{
+  syncPages();
+  for (int i=0; i < getChildCount(); ++i) {
+    syncPageItems(i);
+  }
+  invalidateDimmedPages();
+  requestLayout();
+}

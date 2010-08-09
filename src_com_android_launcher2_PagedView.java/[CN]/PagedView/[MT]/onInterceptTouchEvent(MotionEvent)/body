@@ -1,0 +1,47 @@
+{
+  final int action=ev.getAction();
+  if ((action == MotionEvent.ACTION_MOVE) && (mTouchState == TOUCH_STATE_SCROLLING)) {
+    return true;
+  }
+switch (action & MotionEvent.ACTION_MASK) {
+case MotionEvent.ACTION_MOVE:
+{
+      determineScrollingStart(ev);
+      break;
+    }
+case MotionEvent.ACTION_DOWN:
+{
+    final float x=ev.getX();
+    final float y=ev.getY();
+    mDownMotionX=x;
+    mLastMotionX=x;
+    mLastMotionY=y;
+    mActivePointerId=ev.getPointerId(0);
+    mAllowLongPress=true;
+    mTouchState=mScroller.isFinished() ? TOUCH_STATE_REST : TOUCH_STATE_SCROLLING;
+    if ((mTouchState != TOUCH_STATE_PREV_PAGE) && (mTouchState != TOUCH_STATE_NEXT_PAGE)) {
+      if (getChildCount() > 0) {
+        int relativeChildLeft=getChildOffset(0);
+        int relativeChildRight=relativeChildLeft + getChildAt(0).getMeasuredWidth();
+        if (x < relativeChildLeft) {
+          mTouchState=TOUCH_STATE_PREV_PAGE;
+        }
+ else         if (x > relativeChildRight) {
+          mTouchState=TOUCH_STATE_NEXT_PAGE;
+        }
+      }
+    }
+    break;
+  }
+case MotionEvent.ACTION_CANCEL:
+case MotionEvent.ACTION_UP:
+mTouchState=TOUCH_STATE_REST;
+mAllowLongPress=false;
+mActivePointerId=INVALID_POINTER;
+break;
+case MotionEvent.ACTION_POINTER_UP:
+onSecondaryPointerUp(ev);
+break;
+}
+return mTouchState != TOUCH_STATE_REST;
+}

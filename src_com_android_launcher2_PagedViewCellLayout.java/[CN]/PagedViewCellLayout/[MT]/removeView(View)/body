@@ -1,0 +1,5 @@
+{
+  super.removeView(view);
+  mDimmedBitmapDirty=true;
+  invalidate();
+}

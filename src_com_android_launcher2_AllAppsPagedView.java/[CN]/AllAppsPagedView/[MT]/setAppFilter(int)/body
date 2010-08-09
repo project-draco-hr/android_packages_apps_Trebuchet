@@ -1,0 +1,6 @@
+{
+  mAppFilter=filterType;
+  mFilteredApps=rebuildFilteredApps(mApps);
+  setCurrentScreen(0);
+  invalidatePageData();
+}

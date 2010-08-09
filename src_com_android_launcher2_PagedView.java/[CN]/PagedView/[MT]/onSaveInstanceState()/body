@@ -1,0 +1,5 @@
+{
+  final SavedState state=new SavedState(super.onSaveInstanceState());
+  state.currentScreen=mCurrentScreen;
+  return state;
+}

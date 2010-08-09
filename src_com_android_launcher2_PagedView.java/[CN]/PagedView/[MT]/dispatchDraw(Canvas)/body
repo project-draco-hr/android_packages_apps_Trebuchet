@@ -1,0 +1,26 @@
+{
+  if (mDimmedPagesDirty || (mTouchState == TOUCH_STATE_SCROLLING) || !mScroller.isFinished()) {
+    int screenCenter=mScrollX + (getMeasuredWidth() / 2);
+    final int childCount=getChildCount();
+    for (int i=0; i < childCount; ++i) {
+      PagedViewCellLayout layout=(PagedViewCellLayout)getChildAt(i);
+      int childWidth=layout.getMeasuredWidth();
+      int halfChildWidth=(childWidth / 2);
+      int childCenter=getChildOffset(i) + halfChildWidth;
+      int distanceFromScreenCenter=Math.abs(childCenter - screenCenter);
+      float dimAlpha=0.0f;
+      if (distanceFromScreenCenter < halfChildWidth) {
+        dimAlpha=0.0f;
+      }
+ else       if (distanceFromScreenCenter > childWidth) {
+        dimAlpha=1.0f;
+      }
+ else {
+        dimAlpha=(float)(distanceFromScreenCenter - halfChildWidth) / halfChildWidth;
+        dimAlpha=(dimAlpha * dimAlpha);
+      }
+      layout.setDimmedBitmapAlpha(Math.max(0.0f,Math.min(1.0f,dimAlpha)));
+    }
+  }
+  super.dispatchDraw(canvas);
+}

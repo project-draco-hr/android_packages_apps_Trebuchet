@@ -1,3 +1,3 @@
 {
-  return mAllApps2D.isVisible();
+  return mAllApps.isVisible();
 }

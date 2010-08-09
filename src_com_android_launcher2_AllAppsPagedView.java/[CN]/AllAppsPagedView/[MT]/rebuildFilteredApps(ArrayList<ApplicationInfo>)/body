@@ -1,0 +1,16 @@
+{
+  ArrayList<ApplicationInfo> filteredApps=new ArrayList<ApplicationInfo>();
+  if (mAppFilter == ALL_APPS_FLAG) {
+    return apps;
+  }
+ else {
+    final int length=apps.size();
+    for (int i=0; i < length; ++i) {
+      ApplicationInfo info=apps.get(i);
+      if ((info.flags & mAppFilter) > 0) {
+        filteredApps.add(info);
+      }
+    }
+  }
+  return filteredApps;
+}

@@ -1,4 +1,4 @@
 {
   setVisibility((zoom == 0.0f) ? View.GONE : View.VISIBLE);
-  mAllApps2D.zoom(zoom,animate);
+  mAllApps.zoom(zoom,animate);
 }

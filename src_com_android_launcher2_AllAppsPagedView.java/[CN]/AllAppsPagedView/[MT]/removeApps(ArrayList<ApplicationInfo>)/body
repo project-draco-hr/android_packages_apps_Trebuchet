@@ -1,0 +1,11 @@
+{
+  final int length=list.size();
+  for (int i=0; i < length; ++i) {
+    int removeIndex=findAppByComponent(mApps,list.get(i));
+    if (removeIndex > -1) {
+      mApps.remove(removeIndex);
+    }
+  }
+  mFilteredApps=rebuildFilteredApps(list);
+  invalidatePageData();
+}

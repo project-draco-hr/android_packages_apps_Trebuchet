@@ -1,0 +1,11 @@
+{
+  if (mScroller.computeScrollOffset()) {
+    scrollTo(mScroller.getCurrX(),mScroller.getCurrY());
+    postInvalidate();
+  }
+ else   if (mNextScreen != INVALID_SCREEN) {
+    mCurrentScreen=Math.max(0,Math.min(mNextScreen,getScreenCount() - 1));
+    notifyScreenSwitchListener();
+    mNextScreen=INVALID_SCREEN;
+  }
+}

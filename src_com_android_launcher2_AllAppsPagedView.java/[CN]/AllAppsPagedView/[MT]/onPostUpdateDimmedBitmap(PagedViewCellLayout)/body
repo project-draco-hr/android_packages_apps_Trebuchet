@@ -1,0 +1,8 @@
+{
+  final int childCount=layout.getChildCount();
+  for (int i=0; i < childCount; ++i) {
+    TextView text=(TextView)layout.getChildAt(i);
+    final ApplicationInfo info=(ApplicationInfo)text.getTag();
+    text.setText(info.title);
+  }
+}

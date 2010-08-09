@@ -1,0 +1,14 @@
+{
+  int focusableScreen;
+  if (mNextScreen != INVALID_SCREEN) {
+    focusableScreen=mNextScreen;
+  }
+ else {
+    focusableScreen=mCurrentScreen;
+  }
+  View v=getScreenAt(focusableScreen);
+  if (v != null) {
+    v.requestFocus(direction,previouslyFocusedRect);
+  }
+  return false;
+}

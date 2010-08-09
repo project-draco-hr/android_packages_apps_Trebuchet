@@ -1,0 +1,12 @@
+{
+  int count=getChildCount();
+  for (int i=0; i < count; i++) {
+    View child=getChildAt(i);
+    if (child.getVisibility() != GONE) {
+      PagedViewCellLayout.LayoutParams lp=(PagedViewCellLayout.LayoutParams)child.getLayoutParams();
+      int childLeft=lp.x;
+      int childTop=lp.y;
+      child.layout(childLeft,childTop,childLeft + lp.width,childTop + lp.height);
+    }
+  }
+}

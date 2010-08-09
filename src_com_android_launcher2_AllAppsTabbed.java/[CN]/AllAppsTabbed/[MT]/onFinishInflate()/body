@@ -1,15 +1,15 @@
 {
+  setup();
   try {
-    mAllApps2D=(AllApps2D)findViewById(R.id.all_apps_2d);
-    if (mAllApps2D == null)     throw new Resources.NotFoundException();
+    mAllApps=(AllAppsPagedView)findViewById(R.id.all_apps_paged_view);
+    if (mAllApps == null)     throw new Resources.NotFoundException();
   }
  catch (  Resources.NotFoundException e) {
     Log.e(TAG,"Can't find necessary layout elements for AllAppsTabbed");
   }
-  setup();
   TabContentFactory contentFactory=new TabContentFactory(){
     public View createTabContent(    String tag){
-      return mAllApps2D;
+      return mAllApps;
     }
   }
 ;
@@ -21,23 +21,33 @@
   addTab(newTabSpec(TAG_GAMES).setIndicator(label).setContent(contentFactory));
   label=mContext.getString(R.string.all_apps_tab_downloaded);
   addTab(newTabSpec(TAG_DOWNLOADED).setIndicator(label).setContent(contentFactory));
+  TabWidget tabWidget=getTabWidget();
+  for (int i=0; i < tabWidget.getChildCount(); ++i) {
+    RelativeLayout tab=(RelativeLayout)tabWidget.getChildTabViewAt(i);
+    TextView text=(TextView)tab.getChildAt(1);
+    text.setTextSize(20.0f);
+    text.setPadding(20,0,20,0);
+    text.setShadowLayer(1.0f,0.0f,1.0f,Color.BLACK);
+    tab.setBackgroundDrawable(null);
+  }
   setOnTabChangedListener(new OnTabChangeListener(){
     public void onTabChanged(    String tabId){
       String tag=getCurrentTabTag();
       if (tag == TAG_ALL) {
-        mAllApps2D.filterApps(AllApps2D.AppType.ALL);
+        mAllApps.setAppFilter(AllAppsPagedView.ALL_APPS_FLAG);
       }
  else       if (tag == TAG_APPS) {
-        mAllApps2D.filterApps(AllApps2D.AppType.APP);
+        mAllApps.setAppFilter(ApplicationInfo.APP_FLAG);
       }
  else       if (tag == TAG_GAMES) {
-        mAllApps2D.filterApps(AllApps2D.AppType.GAME);
+        mAllApps.setAppFilter(ApplicationInfo.GAME_FLAG);
       }
  else       if (tag == TAG_DOWNLOADED) {
-        mAllApps2D.filterApps(AllApps2D.AppType.DOWNLOADED);
+        mAllApps.setAppFilter(ApplicationInfo.DOWNLOADED_FLAG);
       }
     }
   }
 );
   setCurrentTab(0);
+  setVisibility(INVISIBLE);
 }

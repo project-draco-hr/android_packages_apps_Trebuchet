@@ -1,0 +1,3 @@
+{
+  return (getMeasuredWidth() - getChildAt(index).getMeasuredWidth()) / 2;
+}
