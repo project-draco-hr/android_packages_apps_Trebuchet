@@ -4,8 +4,11 @@
     closeSystemDialogs();
     boolean alreadyOnHome=((intent.getFlags() & Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT) != Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
     boolean allAppsVisible=isAllAppsVisible();
+    if (LauncherApplication.isScreenXLarge()) {
+      mWorkspace.unshrink(alreadyOnHome);
+    }
     if (!mWorkspace.isDefaultScreenShowing()) {
-      mWorkspace.moveToDefaultScreen(alreadyOnHome && !allAppsVisible);
+      mWorkspace.moveToDefaultScreen(alreadyOnHome && (LauncherApplication.isScreenXLarge() || !allAppsVisible));
     }
     closeAllApps(alreadyOnHome && allAppsVisible);
     hideCustomizationDrawer();

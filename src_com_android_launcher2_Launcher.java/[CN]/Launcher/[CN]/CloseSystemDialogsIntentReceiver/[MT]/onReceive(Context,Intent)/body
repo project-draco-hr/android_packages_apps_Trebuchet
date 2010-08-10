@@ -7,5 +7,6 @@
       animate=false;
     }
     closeAllApps(animate);
+    mWorkspace.unshrink(animate);
   }
 }

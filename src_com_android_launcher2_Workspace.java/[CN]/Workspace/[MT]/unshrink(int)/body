@@ -1,0 +1,13 @@
+{
+  if (mIsSmall) {
+    int delta=(newCurrentScreen - mCurrentScreen) * getWidth();
+    final int screenCount=getChildCount();
+    for (int i=0; i < screenCount; i++) {
+      CellLayout cl=(CellLayout)getChildAt(i);
+      cl.setX(cl.getX() + delta);
+    }
+    mScrollX=newCurrentScreen * getWidth();
+    unshrink();
+    setCurrentScreen(newCurrentScreen);
+  }
+}
