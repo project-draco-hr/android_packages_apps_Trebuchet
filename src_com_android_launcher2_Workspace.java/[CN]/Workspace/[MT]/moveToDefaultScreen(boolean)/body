@@ -1,6 +1,11 @@
 {
   if (animate) {
-    snapToScreen(mDefaultScreen);
+    if (mIsSmall) {
+      unshrink(mDefaultScreen);
+    }
+ else {
+      snapToScreen(mDefaultScreen);
+    }
   }
  else {
     setCurrentScreen(mDefaultScreen);

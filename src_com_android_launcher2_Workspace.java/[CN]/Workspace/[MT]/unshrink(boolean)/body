@@ -1,0 +1,22 @@
+{
+  if (mIsSmall) {
+    Sequencer s=new Sequencer();
+    final int screenCount=getChildCount();
+    final int duration=getResources().getInteger(R.integer.config_workspaceUnshrinkTime);
+    for (int i=0; i < screenCount; i++) {
+      final CellLayout cl=(CellLayout)getChildAt(i);
+      if (animated) {
+        s.playTogether(new PropertyAnimator(duration,cl,"translationX",0.0f),new PropertyAnimator(duration,cl,"translationY",0.0f),new PropertyAnimator(duration,cl,"scaleX",1.0f),new PropertyAnimator(duration,cl,"scaleY",1.0f),new PropertyAnimator(duration,cl,"dimmedBitmapAlpha",0.0f));
+      }
+ else {
+        cl.setTranslationX(0.0f);
+        cl.setTranslationY(0.0f);
+        cl.setScaleX(1.0f);
+        cl.setScaleY(1.0f);
+        cl.setDimmedBitmapAlpha(0.0f);
+      }
+    }
+    s.addListener(mUnshrinkAnimationListener);
+    s.start();
+  }
+}
