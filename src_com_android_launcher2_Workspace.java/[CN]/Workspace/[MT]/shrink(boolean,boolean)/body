@@ -16,6 +16,8 @@
   Sequencer s=new Sequencer();
   for (int i=0; i < screenCount; i++) {
     CellLayout cl=(CellLayout)getChildAt(i);
+    cl.setPivotX(0.0f);
+    cl.setPivotY(0.0f);
     if (animated) {
       final int duration=res.getInteger(R.integer.config_workspaceShrinkTime);
       s.playTogether(new PropertyAnimator(duration,cl,"x",newX),new PropertyAnimator(duration,cl,"y",newY),new PropertyAnimator(duration,cl,"scaleX",SHRINK_FACTOR),new PropertyAnimator(duration,cl,"scaleY",SHRINK_FACTOR),new PropertyAnimator(duration,cl,"dimmedBitmapAlpha",1.0f));
