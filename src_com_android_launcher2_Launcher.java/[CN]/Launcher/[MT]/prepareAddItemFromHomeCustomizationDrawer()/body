@@ -1,4 +1,4 @@
 {
-  mMenuAddInfo=mWorkspace.findAllVacantCells(null);
+  mMenuAddInfo=mWorkspace.updateOccupiedCells(null);
   mAddItemCellInfo=mMenuAddInfo;
 }

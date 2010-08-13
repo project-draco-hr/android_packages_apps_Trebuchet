@@ -1,5 +1,4 @@
 {
-  clearVacantCache();
   if (mDragTargetLayout != null) {
     mDragTargetLayout.onDragComplete();
     mDragTargetLayout=null;

@@ -1,13 +1,11 @@
 {
   final CellLayout layout=getCurrentDropLayout();
-  final CellLayout.CellInfo cellInfo=mDragInfo;
-  final int spanX=cellInfo == null ? 1 : cellInfo.spanX;
-  final int spanY=cellInfo == null ? 1 : cellInfo.spanY;
-  if (mVacantCache == null) {
-    final View ignoreView=cellInfo == null ? null : cellInfo.cell;
-    mVacantCache=layout.findAllVacantCells(null,ignoreView);
-  }
-  if (mVacantCache.findCellForSpan(mTempEstimate,spanX,spanY,false)) {
+  final CellLayout.CellInfo dragCellInfo=mDragInfo;
+  final int spanX=dragCellInfo == null ? 1 : dragCellInfo.spanX;
+  final int spanY=dragCellInfo == null ? 1 : dragCellInfo.spanY;
+  final View ignoreView=dragCellInfo == null ? null : dragCellInfo.cell;
+  final CellLayout.CellInfo cellInfo=layout.updateOccupiedCells(null,ignoreView);
+  if (cellInfo.findCellForSpan(mTempEstimate,spanX,spanY)) {
     return true;
   }
  else {

@@ -7,7 +7,7 @@
   menu.setGroupVisible(MENU_GROUP_ADD,visible);
   menu.setGroupVisible(MENU_GROUP_WALLPAPER,visible);
   if (visible) {
-    mMenuAddInfo=mWorkspace.findAllVacantCells(null);
+    mMenuAddInfo=mWorkspace.updateOccupiedCells(null);
     menu.setGroupEnabled(MENU_GROUP_ADD,mMenuAddInfo != null && mMenuAddInfo.valid);
   }
   return true;

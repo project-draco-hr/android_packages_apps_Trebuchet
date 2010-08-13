@@ -1,8 +1,0 @@
-{
-  final ArrayList<VacantCell> list=vacantCells;
-  final int count=list.size();
-  for (int i=0; i < count; i++) {
-    list.get(i).release();
-  }
-  list.clear();
-}

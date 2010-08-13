@@ -1,22 +1,24 @@
 {
   final int[] bestXY=recycle != null ? recycle : new int[2];
   double bestDistance=Double.MAX_VALUE;
-  if (!vacantCells.valid) {
-    return null;
-  }
-  final int size=vacantCells.vacantCells.size();
-  for (int i=0; i < size; i++) {
-    final CellInfo.VacantCell cell=vacantCells.vacantCells.get(i);
-    if (cell.spanX != spanX || cell.spanY != spanY) {
-      continue;
-    }
-    final int[] cellXY=mTmpCellXY;
-    cellToPoint(cell.cellX,cell.cellY,cellXY);
-    double distance=Math.sqrt(Math.pow(cellXY[0] - pixelX,2) + Math.pow(cellXY[1] - pixelY,2));
-    if (distance <= bestDistance) {
-      bestDistance=distance;
-      bestXY[0]=cell.cellX;
-      bestXY[1]=cell.cellY;
+  for (int x=0; x < mCountX - (spanX - 1); x++) {
+    inner:     for (int y=0; y < mCountY - (spanY - 1); y++) {
+      for (int i=0; i < spanX; i++) {
+        for (int j=0; j < spanY; j++) {
+          if (mOccupied[x + i][y + j]) {
+            y+=j;
+            continue inner;
+          }
+        }
+      }
+      final int[] cellXY=mTmpCellXY;
+      cellToPoint(x,y,cellXY);
+      double distance=Math.sqrt(Math.pow(cellXY[0] - pixelX,2) + Math.pow(cellXY[1] - pixelY,2));
+      if (distance <= bestDistance) {
+        bestDistance=distance;
+        bestXY[0]=x;
+        bestXY[1]=y;
+      }
     }
   }
   if (bestDistance < Double.MAX_VALUE) {

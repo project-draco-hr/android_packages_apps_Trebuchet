@@ -1,5 +1,4 @@
 {
-  clearVacantCache();
   if (mScroller.isFinished()) {
     if (mCurrentScreen > 0)     snapToScreen(mCurrentScreen - 1);
   }

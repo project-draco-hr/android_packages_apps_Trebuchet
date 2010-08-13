@@ -1,6 +1,5 @@
 {
   whichScreen=Math.max(0,Math.min(whichScreen,getChildCount() - 1));
-  clearVacantCache();
   enableChildrenCache(mCurrentScreen,whichScreen);
   mNextScreen=whichScreen;
   if (mPreviousIndicator != null) {

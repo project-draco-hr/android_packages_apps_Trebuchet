@@ -5,7 +5,7 @@
     final int yCount=mCountY;
     final boolean[][] occupied=mOccupied;
     findOccupiedCells(xCount,yCount,occupied,null,true);
-    findIntersectingVacantCells(info,info.cellX,info.cellY,xCount,yCount,occupied);
+    info.updateOccupiedCells(occupied,mCountX,mCountY);
     mDirtyTag=false;
   }
   return info;

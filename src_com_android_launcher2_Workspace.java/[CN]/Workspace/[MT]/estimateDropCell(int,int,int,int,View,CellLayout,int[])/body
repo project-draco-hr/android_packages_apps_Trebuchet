@@ -2,8 +2,6 @@
   final int[] cellXY=mTempCell;
   layout.estimateDropCell(pixelX,pixelY,spanX,spanY,cellXY);
   layout.cellToPoint(cellXY[0],cellXY[1],mTempEstimate);
-  if (mVacantCache == null) {
-    mVacantCache=layout.findAllVacantCells(null,ignoreView);
-  }
-  return layout.findNearestVacantArea(mTempEstimate[0],mTempEstimate[1],spanX,spanY,mVacantCache,recycle);
+  final CellLayout.CellInfo cellInfo=layout.updateOccupiedCells(null,ignoreView);
+  return layout.findNearestVacantArea(mTempEstimate[0],mTempEstimate[1],spanX,spanY,cellInfo,recycle);
 }
