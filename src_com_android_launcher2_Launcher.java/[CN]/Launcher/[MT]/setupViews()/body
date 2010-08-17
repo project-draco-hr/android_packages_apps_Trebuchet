@@ -52,16 +52,26 @@
   deleteZone.setDragController(dragController);
   int deleteZoneHandleId;
   if (LauncherApplication.isScreenXLarge()) {
-    deleteZoneHandleId=R.id.configure_button;
+    deleteZoneHandleId=R.id.all_apps_button;
   }
  else {
     deleteZoneHandleId=R.id.all_apps_button_cluster;
   }
   deleteZone.setHandle(findViewById(deleteZoneHandleId));
+  dragController.addDragListener(deleteZone);
+  ApplicationInfoDropTarget infoButton=(ApplicationInfoDropTarget)findViewById(R.id.info_button);
+  if (infoButton != null) {
+    infoButton.setLauncher(this);
+    infoButton.setHandle(findViewById(R.id.configure_button));
+    infoButton.setDragColor(getResources().getColor(R.color.app_info_filter));
+    dragController.addDragListener(infoButton);
+  }
   dragController.setDragScoller(workspace);
-  dragController.setDragListener(deleteZone);
   dragController.setScrollView(dragLayer);
   dragController.setMoveTarget(workspace);
   dragController.addDropTarget(workspace);
   dragController.addDropTarget(deleteZone);
+  if (infoButton != null) {
+    dragController.addDropTarget(infoButton);
+  }
 }

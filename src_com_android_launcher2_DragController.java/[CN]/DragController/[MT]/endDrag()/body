@@ -4,8 +4,8 @@
     if (mOriginator != null) {
       mOriginator.setVisibility(View.VISIBLE);
     }
-    if (mListener != null) {
-      mListener.onDragEnd();
+    for (    DragListener listener : mListeners) {
+      listener.onDragEnd();
     }
     if (mDragView != null) {
       mDragView.remove();

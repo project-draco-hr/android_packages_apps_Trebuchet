@@ -6,8 +6,8 @@
     mInputMethodManager=(InputMethodManager)mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
   }
   mInputMethodManager.hideSoftInputFromWindow(mWindowToken,0);
-  if (mListener != null) {
-    mListener.onDragStart(source,dragInfo,dragAction);
+  for (  DragListener listener : mListeners) {
+    listener.onDragStart(source,dragInfo,dragAction);
   }
   int registrationX=((int)mMotionDownX) - screenX;
   int registrationY=((int)mMotionDownY) - screenY;
