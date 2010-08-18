@@ -1,8 +1,5 @@
 {
   WallpaperManager wpm=(WallpaperManager)getSystemService(WALLPAPER_SERVICE);
   Display display=getWindowManager().getDefaultDisplay();
-  boolean isPortrait=display.getWidth() < display.getHeight();
-  final int width=isPortrait ? display.getWidth() : display.getHeight();
-  final int height=isPortrait ? display.getHeight() : display.getWidth();
-  wpm.suggestDesiredDimensions(width * WALLPAPER_SCREENS_SPAN,height);
+  wpm.suggestDesiredDimensions(Math.max(display.getWidth(),display.getHeight()),Math.max(display.getWidth(),display.getHeight()));
 }
