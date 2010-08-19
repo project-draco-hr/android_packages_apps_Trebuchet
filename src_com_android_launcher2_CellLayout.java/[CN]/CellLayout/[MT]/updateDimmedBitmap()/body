@@ -6,8 +6,7 @@
   }
   mDimmedBitmapCanvas.drawColor(0x00000000,PorterDuff.Mode.CLEAR);
   setChildrenAlpha(1.0f);
-  dispatchDraw(mDimmedBitmapCanvas);
+  super.dispatchDraw(mDimmedBitmapCanvas);
   setChildrenAlpha(1.0f - mDimmedBitmapAlpha);
-  mDimmedBitmapCanvas.drawColor(0xCCCCCCCC,PorterDuff.Mode.SRC_OUT);
-  mDimmedBitmapCanvas.drawColor(0xCC333333,PorterDuff.Mode.SRC_OUT);
+  mDimmedBitmapCanvas.drawColor(Color.argb(160,0,0,0),PorterDuff.Mode.SRC_IN);
 }

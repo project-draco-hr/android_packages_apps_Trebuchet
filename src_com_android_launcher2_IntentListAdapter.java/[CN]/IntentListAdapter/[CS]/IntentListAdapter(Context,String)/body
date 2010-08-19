@@ -1,6 +1,0 @@
-{
-  mLayoutInflater=(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-  mPackageManager=context.getPackageManager();
-  Intent createLiveFolderIntent=new Intent(actionFilter);
-  mIntentList=mPackageManager.queryIntentActivities(createLiveFolderIntent,0);
-}

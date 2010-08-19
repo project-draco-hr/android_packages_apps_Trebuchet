@@ -1,3 +1,0 @@
-{
-  return mWidgets.get(position);
-}

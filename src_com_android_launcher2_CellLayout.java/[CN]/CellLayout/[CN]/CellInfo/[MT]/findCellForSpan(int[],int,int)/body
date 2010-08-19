@@ -22,7 +22,7 @@
   if (intersectY >= 0) {
     endY=Math.min(endY,intersectY + (spanY - 1));
   }
-  for (int x=startX; x < endX + 1; x++) {
+  for (int x=startX; x < endX; x++) {
     inner:     for (int y=startY; y < endY; y++) {
       for (int i=0; i < spanX; i++) {
         for (int j=0; j < spanY; j++) {

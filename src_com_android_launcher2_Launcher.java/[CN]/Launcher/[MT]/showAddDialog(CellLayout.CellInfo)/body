@@ -1,5 +1,6 @@
 {
   mAddItemCellInfo=cellInfo;
+  mAddItemCoordinates=null;
   mWaitingForResult=true;
   showDialog(DIALOG_CREATE_SHORTCUT);
 }

@@ -1,6 +1,7 @@
 {
   mDragCell[0]=-1;
   mDragCell[1]=-1;
+  setHover(false);
   mDragRect.setEmpty();
   invalidate();
 }

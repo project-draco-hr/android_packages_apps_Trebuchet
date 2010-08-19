@@ -14,7 +14,10 @@ view=FolderIcon.fromXml(R.layout.folder_icon,mLauncher,(ViewGroup)getChildAt(mCu
 break;
 case LauncherSettings.Favorites.ITEM_TYPE_APPWIDGET:
 cellLayout.setTagToCellInfoForPoint(x,y);
-mLauncher.addAppWidgetFromDrop(((LauncherAppWidgetInfo)dragInfo).providerName,cellLayout.getTag());
+int[] position=new int[2];
+position[0]=x;
+position[1]=y;
+mLauncher.addAppWidgetFromDrop(((LauncherAppWidgetInfo)dragInfo).providerName,cellLayout.getTag(),position);
 break;
 default :
 throw new IllegalStateException("Unknown item type: " + info.itemType);

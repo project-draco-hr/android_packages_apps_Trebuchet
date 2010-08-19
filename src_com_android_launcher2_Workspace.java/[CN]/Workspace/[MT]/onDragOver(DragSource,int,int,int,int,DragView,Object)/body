@@ -1,6 +1,6 @@
 {
   final ItemInfo item=(ItemInfo)dragInfo;
-  final CellLayout currentLayout=getCurrentDropLayout();
+  CellLayout currentLayout=getCurrentDropLayout();
   if (dragInfo instanceof LauncherAppWidgetInfo) {
     LauncherAppWidgetInfo widgetInfo=(LauncherAppWidgetInfo)dragInfo;
     if (widgetInfo.spanX == -1) {
@@ -9,20 +9,39 @@
       item.spanY=spans[1];
     }
   }
+  int originX=x - xOffset;
+  int originY=y - yOffset;
+  if (mIsSmall) {
+    final float[] localXY=mTempDragCoordinates;
+    localXY[0]=originX;
+    localXY[1]=originY;
+    final float[] localBottomRightXY=mTempDragBottomRightCoordinates;
+    localBottomRightXY[0]=originX + dragView.getDragRegionWidth();
+    localBottomRightXY[1]=originY + dragView.getDragRegionHeight();
+    currentLayout=findMatchingScreenForDragOver(localXY,localBottomRightXY);
+    if (currentLayout != null) {
+      currentLayout.setHover(true);
+    }
+    originX=(int)localXY[0];
+    originY=(int)localXY[1];
+  }
+  if (source != this) {
+    if (item != null && item.spanX == 1 && currentLayout != null) {
+      int dragRegionLeft=(dragView.getWidth() - currentLayout.getCellWidth()) / 2;
+      originX+=dragRegionLeft - dragView.getDragRegionLeft();
+      if (dragView.getDragRegionWidth() != currentLayout.getCellWidth()) {
+        dragView.setDragRegion(dragView.getDragRegionLeft(),dragView.getDragRegionTop(),currentLayout.getCellWidth(),dragView.getDragRegionHeight());
+      }
+    }
+  }
   if (currentLayout != mDragTargetLayout) {
     if (mDragTargetLayout != null) {
       mDragTargetLayout.onDragComplete();
     }
     mDragTargetLayout=currentLayout;
   }
-  int originX=x - xOffset;
-  int originY=y - yOffset;
-  if (!source.equals(this)) {
-    int chunkWidth=dragView.getWidth() / item.spanX;
-    int chunkHeight=dragView.getHeight() / item.spanY;
-    originX+=(chunkWidth - currentLayout.getCellWidth()) / 2;
-    originY+=(chunkHeight - currentLayout.getCellHeight()) / 2;
+  if ((!LauncherApplication.isScreenXLarge() || source == this) && mDragTargetLayout != null) {
+    final View child=(mDragInfo == null) ? null : mDragInfo.cell;
+    mDragTargetLayout.visualizeDropLocation(child,originX,originY,item.spanX,item.spanY);
   }
-  final View child=(mDragInfo == null) ? null : mDragInfo.cell;
-  currentLayout.visualizeDropLocation(child,originX,originY,item.spanX,item.spanY);
 }

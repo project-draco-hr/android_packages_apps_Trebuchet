@@ -1,0 +1,6 @@
+{
+  mDragRegionLeft=left;
+  mDragRegionTop=top;
+  mDragRegionWidth=width;
+  mDragRegionHeight=height;
+}

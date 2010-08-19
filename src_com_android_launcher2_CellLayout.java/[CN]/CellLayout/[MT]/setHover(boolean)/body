@@ -1,0 +1,6 @@
+{
+  if (mHover != value) {
+    invalidate();
+  }
+  mHover=value;
+}

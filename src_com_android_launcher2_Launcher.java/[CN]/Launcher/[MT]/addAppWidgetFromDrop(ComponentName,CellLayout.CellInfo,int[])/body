@@ -1,0 +1,7 @@
+{
+  mAddItemCellInfo=cellInfo;
+  mAddItemCoordinates=position;
+  int appWidgetId=getAppWidgetHost().allocateAppWidgetId();
+  AppWidgetManager.getInstance(this).bindAppWidgetId(appWidgetId,appWidgetProvider);
+  addAppWidgetImpl(appWidgetId);
+}

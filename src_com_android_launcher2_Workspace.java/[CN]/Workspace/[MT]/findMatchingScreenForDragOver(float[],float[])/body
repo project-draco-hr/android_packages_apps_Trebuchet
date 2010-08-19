@@ -1,0 +1,56 @@
+{
+  float x=xy[0];
+  float y=xy[1];
+  float right=bottomRightXy[0];
+  float bottom=bottomRightXy[1];
+  float bestX=0;
+  float bestY=0;
+  float bestRight=0;
+  float bestBottom=0;
+  Matrix inverseMatrix=new Matrix();
+  final int screenCount=getChildCount();
+  CellLayout bestMatchingScreen=null;
+  float bestOverlapSoFar=0;
+  for (int i=0; i < screenCount; i++) {
+    CellLayout cl=(CellLayout)getChildAt(i);
+    float left=cl.getLeft();
+    float top=cl.getTop();
+    xy[0]=x + mScrollX - left;
+    xy[1]=y + mScrollY - top;
+    cl.getMatrix().invert(inverseMatrix);
+    bottomRightXy[0]=right + mScrollX - left;
+    bottomRightXy[1]=bottom + mScrollY - top;
+    inverseMatrix.mapPoints(xy);
+    inverseMatrix.mapPoints(bottomRightXy);
+    float dragRegionX=xy[0];
+    float dragRegionY=xy[1];
+    float dragRegionRight=bottomRightXy[0];
+    float dragRegionBottom=bottomRightXy[1];
+    float overlapLeft=Math.max(0f,dragRegionX);
+    float overlapTop=Math.max(0f,dragRegionY);
+    float overlapBottom=Math.min(cl.getHeight(),dragRegionBottom);
+    float overlapRight=Math.min(cl.getWidth(),dragRegionRight);
+    if (overlapRight >= 0 && overlapLeft <= cl.getWidth() && overlapTop >= 0 && overlapBottom <= cl.getHeight()) {
+      float overlap=(overlapRight - overlapLeft) * (overlapBottom - overlapTop);
+      if (overlap > bestOverlapSoFar) {
+        bestOverlapSoFar=overlap;
+        bestMatchingScreen=cl;
+        bestX=xy[0];
+        bestY=xy[1];
+        bestRight=bottomRightXy[0];
+        bestBottom=bottomRightXy[1];
+      }
+    }
+  }
+  if (bestMatchingScreen != null && bestMatchingScreen != mDragTargetLayout) {
+    if (mDragTargetLayout != null) {
+      mDragTargetLayout.onDragComplete();
+    }
+    mDragTargetLayout=bestMatchingScreen;
+  }
+  xy[0]=bestX;
+  xy[1]=bestY;
+  bottomRightXy[0]=bestRight;
+  bottomRightXy[1]=bestBottom;
+  return bestMatchingScreen;
+}

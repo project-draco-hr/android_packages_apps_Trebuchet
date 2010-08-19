@@ -12,6 +12,7 @@
   }
   final int addScreen=savedState.getInt(RUNTIME_STATE_PENDING_ADD_SCREEN,-1);
   if (addScreen > -1) {
+    mAddItemCoordinates=null;
     mAddItemCellInfo=new CellLayout.CellInfo();
     final CellLayout.CellInfo addItemCellInfo=mAddItemCellInfo;
     addItemCellInfo.valid=true;

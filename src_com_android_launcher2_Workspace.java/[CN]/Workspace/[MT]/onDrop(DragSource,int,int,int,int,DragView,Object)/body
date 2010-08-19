@@ -1,7 +1,23 @@
 {
-  final CellLayout cellLayout=getCurrentDropLayout();
+  CellLayout cellLayout=getCurrentDropLayout();
+  int originX=x - xOffset;
+  int originY=y - yOffset;
+  if (mIsSmall) {
+    final float[] localXY=mTempDragCoordinates;
+    localXY[0]=originX;
+    localXY[1]=originY;
+    final float[] localBottomRightXY=mTempDragBottomRightCoordinates;
+    localBottomRightXY[0]=originX + dragView.getDragRegionWidth();
+    localBottomRightXY[1]=originY + dragView.getDragRegionHeight();
+    cellLayout=findMatchingScreenForDragOver(localXY,localBottomRightXY);
+    if (cellLayout == null) {
+      return;
+    }
+    originX=(int)localXY[0];
+    originY=(int)localXY[1];
+  }
   if (source != this) {
-    onDropExternal(x - xOffset,y - yOffset,dragInfo,cellLayout);
+    onDropExternal(originX,originY,dragInfo,cellLayout);
   }
  else {
     if (mDragInfo != null) {
@@ -12,7 +28,7 @@
         originalCellLayout.removeView(cell);
         addInScreen(cell,index,mDragInfo.cellX,mDragInfo.cellY,mDragInfo.spanX,mDragInfo.spanY);
       }
-      mTargetCell=estimateDropCell(x - xOffset,y - yOffset,mDragInfo.spanX,mDragInfo.spanY,cell,cellLayout,mTargetCell);
+      mTargetCell=estimateDropCell(originX,originY,mDragInfo.spanX,mDragInfo.spanY,cell,cellLayout,mTargetCell);
       cellLayout.onDropChild(cell);
       final ItemInfo info=(ItemInfo)cell.getTag();
       CellLayout.LayoutParams lp=(CellLayout.LayoutParams)cell.getLayoutParams();
