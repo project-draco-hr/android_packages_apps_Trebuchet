@@ -1,0 +1,16 @@
+{
+  super.onLayout(changed,left,top,right,bottom);
+  if (mHolographicOutline == null) {
+    final PointF offset=new PointF(0,-(getCompoundPaddingBottom() + getCompoundPaddingTop()) / 2.0f);
+    getDrawingRect(mDrawableClipRect);
+    mDrawableClipRect.bottom=getPaddingTop() + getCompoundPaddingTop();
+    mIsHolographicUpdatePass=true;
+    mHolographicOutline=Bitmap.createBitmap(getMeasuredWidth(),getMeasuredHeight(),Bitmap.Config.ARGB_8888);
+    mHolographicOutlineCanvas=new Canvas(mHolographicOutline);
+    mHolographicOutlineCanvas.concat(getMatrix());
+    draw(mHolographicOutlineCanvas);
+    sHolographicOutlineHelper.applyOutline(mHolographicOutline,mHolographicOutlineCanvas,offset);
+    sHolographicOutlineHelper.applyBlur(mHolographicOutline,mHolographicOutlineCanvas);
+    mIsHolographicUpdatePass=false;
+  }
+}

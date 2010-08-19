@@ -1,9 +1,8 @@
 {
   super(context,attrs,defStyle);
-  setWillNotDraw(false);
   setAlwaysDrawnWithCacheEnabled(false);
   mCellWidth=mCellHeight=sDefaultCellDimensions;
   mCellCountX=LauncherModel.getCellCountX();
   mCellCountY=LauncherModel.getCellCountY();
-  mDimmedBitmapPaint.setFilterBitmap(true);
+  mHolographicAlpha=0.0f;
 }

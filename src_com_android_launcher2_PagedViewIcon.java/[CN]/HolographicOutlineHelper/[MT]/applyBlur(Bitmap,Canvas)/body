@@ -1,0 +1,6 @@
+{
+  int[] xy=new int[2];
+  Bitmap mask=srcDst.extractAlpha(mBlurPaint,xy);
+  srcDstCanvas.drawBitmap(mask,xy[0],xy[1],mHolographicPaint);
+  mask.recycle();
+}

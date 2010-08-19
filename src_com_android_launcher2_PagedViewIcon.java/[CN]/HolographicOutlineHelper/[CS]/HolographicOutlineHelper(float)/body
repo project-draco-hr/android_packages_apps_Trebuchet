@@ -1,0 +1,10 @@
+{
+  mHolographicPaint.setColor(0xFF6699ff);
+  mHolographicPaint.setFilterBitmap(true);
+  mHolographicPaint.setAntiAlias(true);
+  mBlurPaint.setMaskFilter(new BlurMaskFilter(BLUR_FACTOR * density,BlurMaskFilter.Blur.OUTER));
+  mBlurPaint.setFilterBitmap(true);
+  mErasePaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_OUT));
+  mErasePaint.setFilterBitmap(true);
+  mErasePaint.setAntiAlias(true);
+}

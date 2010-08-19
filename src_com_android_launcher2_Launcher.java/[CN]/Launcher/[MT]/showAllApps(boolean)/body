@@ -6,7 +6,6 @@
   if (LauncherApplication.isScreenXLarge() && animated) {
     if (isCustomizationDrawerVisible()) {
       cameraPan(mHomeCustomizationDrawer,(View)mAllAppsGrid);
-      mCustomizePagedView.cleanup();
     }
  else {
       cameraZoomOut((View)mAllAppsGrid,true);

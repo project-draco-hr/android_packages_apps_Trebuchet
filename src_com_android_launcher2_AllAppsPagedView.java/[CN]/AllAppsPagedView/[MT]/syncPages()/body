@@ -8,7 +8,6 @@
   for (int i=curNumPages; i < numPages; ++i) {
     PagedViewCellLayout layout=new PagedViewCellLayout(getContext());
     layout.setCellCount(mCellCountX,mCellCountY);
-    layout.setDimmedBitmapSetupListener(this);
     addView(layout);
   }
   setCurrentScreen(Math.max(0,Math.min(numPages - 1,getCurrentScreen())));

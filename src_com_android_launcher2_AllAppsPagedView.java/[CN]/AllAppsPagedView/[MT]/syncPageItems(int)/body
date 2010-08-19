@@ -19,7 +19,7 @@
     int index=i - startIndex;
     ApplicationInfo info=mFilteredApps.get(i);
     TextView text=(TextView)layout.getChildAt(index);
-    text.setCompoundDrawablesWithIntrinsicBounds(null,new BitmapDrawable(info.iconBitmap),null,null);
+    text.setCompoundDrawablesWithIntrinsicBounds(null,new FastBitmapDrawable(info.iconBitmap),null,null);
     text.setText(info.title);
     text.setTag(info);
     PagedViewCellLayout.LayoutParams params=(PagedViewCellLayout.LayoutParams)text.getLayoutParams();

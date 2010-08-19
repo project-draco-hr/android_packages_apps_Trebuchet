@@ -1,0 +1,5 @@
+{
+  super.setAlpha(alpha);
+  setChildrenAlpha(alpha);
+  mHolographicAlpha=1.0f - alpha;
+}

@@ -1,0 +1,12 @@
+{
+  super(context,attrs,defStyle);
+  if (sHolographicOutlineHelper == null) {
+    final Resources resources=context.getResources();
+    final DisplayMetrics metrics=resources.getDisplayMetrics();
+    final float density=metrics.density;
+    sHolographicOutlineHelper=new HolographicOutlineHelper(density);
+  }
+  mDrawableClipRect=new Rect();
+  setFocusable(true);
+  setBackgroundDrawable(null);
+}

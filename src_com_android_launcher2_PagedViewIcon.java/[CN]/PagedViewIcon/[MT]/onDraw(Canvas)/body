@@ -1,0 +1,19 @@
+{
+  if (mIsHolographicUpdatePass) {
+    canvas.save();
+    canvas.clipRect(mDrawableClipRect,Op.REPLACE);
+    super.onSetAlpha(255);
+    super.onDraw(canvas);
+    super.onSetAlpha(mAlpha);
+    canvas.restore();
+  }
+ else {
+    if (mAlpha > 0) {
+      super.onDraw(canvas);
+    }
+  }
+  if (!mIsHolographicUpdatePass && mHolographicOutline != null && mHolographicAlpha > 0) {
+    mPaint.setAlpha(mHolographicAlpha);
+    canvas.drawBitmap(mHolographicOutline,0,0,mPaint);
+  }
+}

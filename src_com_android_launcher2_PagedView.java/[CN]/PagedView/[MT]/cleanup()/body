@@ -1,4 +1,0 @@
-{
-  mHandler.removeMessages(0);
-  mHandler.postDelayed(clearLayoutDimmedBitmapsRunnable,500);
-}

@@ -1,0 +1,3 @@
+Bitmap srcDst
+Canvas srcDstCanvas
+PointF offset

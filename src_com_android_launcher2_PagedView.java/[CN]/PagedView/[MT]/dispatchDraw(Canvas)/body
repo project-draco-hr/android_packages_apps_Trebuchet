@@ -8,19 +8,19 @@
       int halfChildWidth=(childWidth / 2);
       int childCenter=getChildOffset(i) + halfChildWidth;
       int distanceFromScreenCenter=Math.abs(childCenter - screenCenter);
-      float dimAlpha=0.0f;
+      float alpha=0.0f;
       if (distanceFromScreenCenter < halfChildWidth) {
-        dimAlpha=0.0f;
+        alpha=1.0f;
       }
  else       if (distanceFromScreenCenter > childWidth) {
-        dimAlpha=1.0f;
+        alpha=0.0f;
       }
  else {
-        dimAlpha=(float)(distanceFromScreenCenter - halfChildWidth) / halfChildWidth;
-        dimAlpha=(dimAlpha * dimAlpha);
+        float dimAlpha=(float)(distanceFromScreenCenter - halfChildWidth) / halfChildWidth;
+        dimAlpha=Math.max(0.0f,Math.min(1.0f,(dimAlpha * dimAlpha)));
+        alpha=1.0f - dimAlpha;
       }
-      dimAlpha=Math.max(0.0f,Math.min(1.0f,dimAlpha));
-      if (Float.compare(dimAlpha,layout.getDimmedBitmapAlpha()) != 0)       layout.setDimmedBitmapAlpha(dimAlpha);
+      if (Float.compare(alpha,layout.getAlpha()) != 0)       layout.setAlpha(alpha);
     }
   }
   super.dispatchDraw(canvas);

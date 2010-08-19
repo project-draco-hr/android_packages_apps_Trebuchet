@@ -4,10 +4,8 @@
     if (lp.cellHSpan < 0)     lp.cellHSpan=mCellCountX;
     if (lp.cellVSpan < 0)     lp.cellVSpan=mCellCountY;
     child.setId(childId);
-    child.setAlpha(1.0f - mDimmedBitmapAlpha);
+    child.setAlpha(1.0f - mHolographicAlpha);
     addView(child,index,lp);
-    mDimmedBitmapDirty=true;
-    invalidate();
     return true;
   }
   return false;

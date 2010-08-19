@@ -1,5 +1,0 @@
-{
-  super.onSizeChanged(w,h,oldw,oldh);
-  mLayoutRect.set(0,0,w,h);
-  mDimmedBitmapRect.set(0,0,(int)(DIMMED_BITMAP_SCALE * w),(int)(DIMMED_BITMAP_SCALE * h));
-}
