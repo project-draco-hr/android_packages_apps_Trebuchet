@@ -1,0 +1,4 @@
+{
+  invalidateHolographicImage();
+  super.setCompoundDrawablesWithIntrinsicBounds(left,top,right,bottom);
+}

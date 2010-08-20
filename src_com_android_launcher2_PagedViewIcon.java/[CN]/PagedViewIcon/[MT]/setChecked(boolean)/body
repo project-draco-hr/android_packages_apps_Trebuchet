@@ -1,0 +1,4 @@
+{
+  mIsChecked=checked;
+  invalidate();
+}
