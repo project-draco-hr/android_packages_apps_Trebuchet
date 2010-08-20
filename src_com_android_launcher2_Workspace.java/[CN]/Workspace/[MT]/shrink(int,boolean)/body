@@ -9,8 +9,11 @@
   final int screenCount=getChildCount();
   float totalWidth=screenCount * scaledScreenWidth + (screenCount - 1) * scaledSpacing;
   float newY=getResources().getDimension(R.dimen.smallScreenVerticalMargin);
-  if (!shrinkToTop) {
+  if (shrinkPosition == SHRINK_TO_BOTTOM) {
     newY=screenHeight - newY - scaledScreenHeight;
+  }
+ else   if (shrinkPosition == SHRINK_TO_MIDDLE) {
+    newY=screenHeight / 2 - scaledScreenHeight / 2;
   }
   float newX=(mCurrentScreen + 1) * screenWidth - screenWidth / 2 - totalWidth / 2;
   Sequencer s=new Sequencer();

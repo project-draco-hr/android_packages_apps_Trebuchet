@@ -3,6 +3,6 @@
     mWaitingToShrinkToBottom=true;
   }
  else {
-    shrink(false,animated);
+    shrink(SHRINK_TO_BOTTOM,animated);
   }
 }
