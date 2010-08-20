@@ -2,6 +2,7 @@
   if (!isVisible()) {
     setVisibility(View.GONE);
     mZoom=0.0f;
+    endChoiceMode();
   }
  else {
     mZoom=1.0f;

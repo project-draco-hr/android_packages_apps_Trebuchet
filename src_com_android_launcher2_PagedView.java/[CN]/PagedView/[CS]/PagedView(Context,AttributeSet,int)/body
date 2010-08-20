@@ -1,5 +1,6 @@
 {
   super(context,attrs,defStyle);
+  mChoiceMode=CHOICE_MODE_NONE;
   setHapticFeedbackEnabled(false);
   init();
 }

@@ -13,8 +13,16 @@
       super.onDraw(canvas);
     }
   }
-  if (!mIsHolographicUpdatePass && mHolographicOutline != null && mHolographicAlpha > 0) {
-    mPaint.setAlpha(mHolographicAlpha);
-    canvas.drawBitmap(mHolographicOutline,0,0,mPaint);
+  if (!mIsHolographicUpdatePass) {
+    if (mCheckedOutline == null) {
+      if (mHolographicOutline != null && mHolographicAlpha > 0) {
+        mPaint.setAlpha(mHolographicAlpha);
+        canvas.drawBitmap(mHolographicOutline,0,0,mPaint);
+      }
+    }
+ else {
+      mPaint.setAlpha(255);
+      canvas.drawBitmap(mCheckedOutline,0,0,mPaint);
+    }
   }
 }

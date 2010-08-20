@@ -14,5 +14,5 @@
       minDistanceFromScreenCenterIndex=i;
     }
   }
-  snapToPage(minDistanceFromScreenCenterIndex,1000);
+  snapToPage(minDistanceFromScreenCenterIndex,PAGE_SNAP_ANIMATION_DURATION);
 }

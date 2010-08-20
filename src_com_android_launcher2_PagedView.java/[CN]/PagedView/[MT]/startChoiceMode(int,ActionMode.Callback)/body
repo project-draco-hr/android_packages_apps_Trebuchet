@@ -1,0 +1,4 @@
+{
+  mActionMode=startActionMode(callback);
+  mChoiceMode=mode;
+}

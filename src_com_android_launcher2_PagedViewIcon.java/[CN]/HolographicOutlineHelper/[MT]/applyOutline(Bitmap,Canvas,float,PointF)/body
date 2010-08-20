@@ -1,10 +1,11 @@
 {
+  strokeWidth*=mDensity;
   Bitmap mask=srcDst.extractAlpha();
   Matrix m=new Matrix();
   final int width=srcDst.getWidth();
   final int height=srcDst.getHeight();
-  float xScale=STROKE_WIDTH * 2.0f / width;
-  float yScale=STROKE_WIDTH * 2.0f / height;
+  float xScale=strokeWidth * 2.0f / width;
+  float yScale=strokeWidth * 2.0f / height;
   m.preScale(1 + xScale,1 + yScale,(width / 2.0f) + offset.x,(height / 2.0f) + offset.y);
   srcDstCanvas.drawColor(0,PorterDuff.Mode.CLEAR);
   srcDstCanvas.drawBitmap(mask,m,mHolographicPaint);

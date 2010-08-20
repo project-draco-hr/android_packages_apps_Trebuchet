@@ -1,0 +1,5 @@
+{
+  mDragController.addDropTarget(this);
+  mode.setTitle("Customization title goes here");
+  return true;
+}

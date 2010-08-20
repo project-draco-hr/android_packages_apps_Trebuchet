@@ -1,4 +1,5 @@
 {
+  mDensity=density;
   mHolographicPaint.setColor(HOLOGRAPHIC_BLUE);
   mHolographicPaint.setFilterBitmap(true);
   mHolographicPaint.setAntiAlias(true);

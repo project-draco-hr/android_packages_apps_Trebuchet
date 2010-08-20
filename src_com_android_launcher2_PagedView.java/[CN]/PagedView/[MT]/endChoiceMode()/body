@@ -1,0 +1,8 @@
+{
+  if (!isChoiceMode(CHOICE_MODE_NONE)) {
+    mActionMode.finish();
+    mActionMode=null;
+    mChoiceMode=CHOICE_MODE_NONE;
+    resetCheckedGrandchildren();
+  }
+}

@@ -1,0 +1,7 @@
+{
+  final ArrayList<Checkable> checked=getCheckedGrandchildren();
+  for (int i=0; i < checked.size(); ++i) {
+    final Checkable c=checked.get(i);
+    c.setChecked(false);
+  }
+}

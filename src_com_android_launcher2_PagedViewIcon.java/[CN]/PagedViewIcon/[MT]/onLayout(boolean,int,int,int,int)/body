@@ -10,9 +10,10 @@
     mHolographicOutlineCanvas.concat(getMatrix());
     draw(mHolographicOutlineCanvas);
     sHolographicOutlineHelper.setColor(HolographicOutlineHelper.HOLOGRAPHIC_BLUE);
-    sHolographicOutlineHelper.applyOutline(mHolographicOutline,mHolographicOutlineCanvas,offset);
+    sHolographicOutlineHelper.applyOutline(mHolographicOutline,mHolographicOutlineCanvas,HolographicOutlineHelper.DEFAULT_STROKE_WIDTH,offset);
     sHolographicOutlineHelper.applyBlur(mHolographicOutline,mHolographicOutlineCanvas);
     mIsHolographicUpdatePass=false;
     mIconCache.addOutline(mIconCacheKey,mHolographicOutline);
+    mHolographicOutlineCanvas=null;
   }
 }
