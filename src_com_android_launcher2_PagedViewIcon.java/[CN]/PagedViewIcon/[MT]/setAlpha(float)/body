@@ -1,11 +1,7 @@
 {
   final float viewAlpha=sHolographicOutlineHelper.viewAlphaInterpolator(alpha);
-  mAlpha=(int)(viewAlpha * 255);
   final float holographicAlpha=sHolographicOutlineHelper.highlightAlphaInterpolator(alpha);
+  mAlpha=(int)(viewAlpha * 255);
   mHolographicAlpha=(int)(holographicAlpha * 255);
-  int sRed=Color.red(mShadowColor);
-  int sGreen=Color.green(mShadowColor);
-  int sBlue=Color.blue(mShadowColor);
-  super.setShadowLayer(mShadowRadius,mShadowDx,mShadowDy,Color.argb(mAlpha,sRed,sGreen,sBlue));
   super.setAlpha(viewAlpha);
 }

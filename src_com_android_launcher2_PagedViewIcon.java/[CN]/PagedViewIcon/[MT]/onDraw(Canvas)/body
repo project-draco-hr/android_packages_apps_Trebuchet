@@ -2,9 +2,10 @@
   if (mIsHolographicUpdatePass) {
     canvas.save();
     canvas.clipRect(mDrawableClipRect,Op.REPLACE);
-    super.onSetAlpha(255);
+    final float alpha=getAlpha();
+    super.setAlpha(1.0f);
     super.onDraw(canvas);
-    super.onSetAlpha(mAlpha);
+    super.setAlpha(alpha);
     canvas.restore();
   }
  else {
