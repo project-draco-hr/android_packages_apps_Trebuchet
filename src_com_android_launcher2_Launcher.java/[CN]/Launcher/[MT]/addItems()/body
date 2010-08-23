@@ -1,8 +1,7 @@
 {
   if (LauncherApplication.isScreenXLarge()) {
     if (!isCustomizationDrawerVisible()) {
-      showCustomizationDrawer();
-      mWorkspace.shrinkToTop();
+      showCustomizationDrawer(true);
     }
   }
  else {

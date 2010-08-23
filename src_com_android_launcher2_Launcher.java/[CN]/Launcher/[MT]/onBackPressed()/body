@@ -3,7 +3,7 @@
     closeAllApps(true);
   }
  else   if (isCustomizationDrawerVisible()) {
-    hideCustomizationDrawer();
+    hideCustomizationDrawer(true);
   }
  else {
     closeFolder();

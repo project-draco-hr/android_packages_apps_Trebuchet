@@ -1,9 +1,0 @@
-{
-  mWorkspace.shrinkToTop();
-  if (isAllAppsVisible()) {
-    cameraPan((View)mAllAppsGrid,mHomeCustomizationDrawer);
-  }
- else {
-    cameraZoomOut(mHomeCustomizationDrawer,false);
-  }
-}

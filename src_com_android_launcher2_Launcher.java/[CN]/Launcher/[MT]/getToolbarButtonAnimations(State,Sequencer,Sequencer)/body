@@ -1,0 +1,20 @@
+{
+  final View searchButton=findViewById(R.id.search_button);
+  final View allAppsButton=findViewById(R.id.all_apps_button);
+  final View marketButton=findViewById(R.id.market_button);
+  final View configureButton=findViewById(R.id.configure_button);
+switch (newState) {
+case WORKSPACE:
+    showSeq.playTogether(new Animatable[]{getToolbarButtonAnim(true,searchButton),getToolbarButtonAnim(true,allAppsButton),getToolbarButtonAnim(true,configureButton)});
+  hideSeq.play(getToolbarButtonAnim(false,marketButton));
+break;
+case ALL_APPS:
+showSeq.play(getToolbarButtonAnim(true,configureButton)).with(getToolbarButtonAnim(true,marketButton));
+hideSeq.play(getToolbarButtonAnim(false,searchButton)).with(getToolbarButtonAnim(false,allAppsButton));
+break;
+case CUSTOMIZE:
+showSeq.play(getToolbarButtonAnim(true,allAppsButton));
+hideSeq.playTogether(new Animatable[]{getToolbarButtonAnim(false,searchButton),getToolbarButtonAnim(false,marketButton),getToolbarButtonAnim(false,configureButton)});
+break;
+}
+}

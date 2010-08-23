@@ -1,19 +1,15 @@
 {
   if (mAllAppsGrid.isVisible())   return;
   if (LauncherApplication.isScreenXLarge()) {
-    mWorkspace.shrinkToBottom(animated);
-  }
-  if (LauncherApplication.isScreenXLarge() && animated) {
     if (isCustomizationDrawerVisible()) {
-      cameraPan(mHomeCustomizationDrawer,(View)mAllAppsGrid);
+      cameraPan(State.CUSTOMIZE,State.ALL_APPS,animated);
     }
  else {
-      cameraZoomOut((View)mAllAppsGrid,true);
+      cameraZoomOut(State.ALL_APPS,animated);
     }
   }
  else {
     mAllAppsGrid.zoom(1.0f,animated);
-    hideCustomizationDrawer();
   }
   ((View)mAllAppsGrid).setFocusable(true);
   ((View)mAllAppsGrid).requestFocus();

@@ -1,0 +1,38 @@
+{
+  final Resources res=getResources();
+  final int duration=res.getInteger(R.integer.config_allAppsCameraPanTime);
+  final int workspaceHeight=mWorkspace.getHeight();
+  final boolean fromAllApps=(fromState == State.ALL_APPS);
+  final View fromView=fromAllApps ? (View)mAllAppsGrid : mHomeCustomizationDrawer;
+  final View toView=fromAllApps ? mHomeCustomizationDrawer : (View)mAllAppsGrid;
+  final float fromViewStartY=fromAllApps ? 0.0f : fromView.getY();
+  final float fromViewEndY=fromAllApps ? -fromView.getHeight() * 2 : workspaceHeight * 2;
+  final float toViewStartY=fromAllApps ? workspaceHeight * 2 : -toView.getHeight() * 2;
+  final float toViewEndY=fromAllApps ? workspaceHeight - toView.getHeight() : 0.0f;
+  Sequencer s=new Sequencer();
+  s.addListener(new AnimatableListenerAdapter(){
+    public void onAnimationStart(    Animatable animation){
+      toView.setVisibility(View.VISIBLE);
+      toView.setY(toViewStartY);
+      if (!animated)       animation.end();
+    }
+    public void onAnimationEnd(    Animatable animation){
+      fromView.setVisibility(View.GONE);
+    }
+  }
+);
+  Sequencer toolbarHideAnim=new Sequencer();
+  Sequencer toolbarShowAnim=new Sequencer();
+  getToolbarButtonAnimations(toState,toolbarShowAnim,toolbarHideAnim);
+  s.playTogether(toolbarHideAnim,new PropertyAnimator(duration,fromView,"y",fromViewStartY,fromViewEndY),new PropertyAnimator(duration,toView,"y",toViewStartY,toViewEndY));
+  final int fadeInTime=res.getInteger(R.integer.config_toolbarButtonFadeInTime);
+  s.play(toolbarShowAnim).after(duration - fadeInTime);
+  if (toState == State.ALL_APPS) {
+    mWorkspace.shrinkToBottom(animated);
+  }
+ else {
+    mWorkspace.shrinkToTop(animated);
+  }
+  s.start();
+  if (!animated)   s.end();
+}

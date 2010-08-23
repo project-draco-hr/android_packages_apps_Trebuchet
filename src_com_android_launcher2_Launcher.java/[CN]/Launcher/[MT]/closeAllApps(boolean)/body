@@ -2,8 +2,7 @@
   if (mAllAppsGrid.isVisible()) {
     mWorkspace.setVisibility(View.VISIBLE);
     if (LauncherApplication.isScreenXLarge() && animated) {
-      mWorkspace.unshrink();
-      cameraZoomIn((View)mAllAppsGrid);
+      cameraZoomIn(State.ALL_APPS,animated);
     }
  else {
       mAllAppsGrid.zoom(0.0f,animated);

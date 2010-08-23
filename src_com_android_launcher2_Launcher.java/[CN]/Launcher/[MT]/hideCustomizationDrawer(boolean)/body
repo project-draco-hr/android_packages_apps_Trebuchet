@@ -1,8 +1,5 @@
 {
   if (isCustomizationDrawerVisible()) {
-    if (unshrinkWorkspace) {
-      mWorkspace.unshrink();
-    }
-    cameraZoomIn(mHomeCustomizationDrawer);
+    cameraZoomIn(State.CUSTOMIZE,animated);
   }
 }

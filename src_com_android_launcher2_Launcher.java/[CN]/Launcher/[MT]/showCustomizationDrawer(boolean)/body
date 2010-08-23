@@ -1,0 +1,8 @@
+{
+  if (isAllAppsVisible()) {
+    cameraPan(State.ALL_APPS,State.CUSTOMIZE,animated);
+  }
+ else {
+    cameraZoomOut(State.CUSTOMIZE,animated);
+  }
+}

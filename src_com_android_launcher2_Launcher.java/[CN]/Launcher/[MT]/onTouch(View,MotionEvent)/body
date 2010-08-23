@@ -1,4 +1,4 @@
 {
-  hideCustomizationDrawer();
+  hideCustomizationDrawer(true);
   return false;
 }

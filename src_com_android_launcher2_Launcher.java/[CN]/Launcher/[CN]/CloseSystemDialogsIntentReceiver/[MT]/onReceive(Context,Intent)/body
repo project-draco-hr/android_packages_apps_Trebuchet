@@ -7,7 +7,6 @@
       animate=false;
     }
     closeAllApps(animate);
-    mWorkspace.unshrink(animate);
-    hideCustomizationDrawer();
+    hideCustomizationDrawer(animate);
   }
 }

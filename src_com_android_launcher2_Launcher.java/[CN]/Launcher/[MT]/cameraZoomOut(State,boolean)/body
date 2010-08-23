@@ -2,17 +2,12 @@
   final Resources res=getResources();
   final int duration=res.getInteger(R.integer.config_allAppsZoomInTime);
   final float scale=(float)res.getInteger(R.integer.config_allAppsZoomScaleFactor);
+  final boolean toAllApps=(toState == State.ALL_APPS);
+  final View toView=toAllApps ? (View)mAllAppsGrid : mHomeCustomizationDrawer;
   final int height=toView.getHeight();
   final int startDelay=res.getInteger(R.integer.config_workspaceShrinkTime) - duration;
+  setPivotsForZoom(toView,toState,scale);
   Interpolator interp=new DecelerateInterpolator();
-  toView.setPivotX(toView.getWidth() / 2.0f);
-  final int margin=200;
-  if (above) {
-    toView.setPivotY(height + ((toView.getTop() + height) / scale) + margin);
-  }
- else {
-    toView.setPivotY(0.0f - (toView.getTop() / scale) - margin);
-  }
   Animator scaleXAnim=new PropertyAnimator(duration,toView,"scaleX",scale,1.0f);
   scaleXAnim.setInterpolator(interp);
   scaleXAnim.addListener(new AnimatableListenerAdapter(){
@@ -20,13 +15,25 @@
       toView.setTranslationX(0.0f);
       toView.setTranslationY(0.0f);
       toView.setVisibility(View.VISIBLE);
+      if (!animated)       animation.end();
     }
   }
 );
   Animator scaleYAnim=new PropertyAnimator(duration,toView,"scaleY",scale,1.0f);
   scaleYAnim.setInterpolator(interp);
+  Sequencer toolbarHideAnim=new Sequencer();
+  Sequencer toolbarShowAnim=new Sequencer();
+  getToolbarButtonAnimations(toState,toolbarShowAnim,toolbarHideAnim);
   Sequencer s=new Sequencer();
-  s.playTogether(scaleXAnim,scaleYAnim);
+  s.playTogether(scaleXAnim,scaleYAnim,toolbarHideAnim);
   s.play(scaleXAnim).after(startDelay);
+  final int fadeInTime=res.getInteger(R.integer.config_toolbarButtonFadeInTime);
+  s.play(toolbarShowAnim).after(duration + startDelay - fadeInTime);
+  if (toState == State.ALL_APPS) {
+    mWorkspace.shrinkToBottom(animated);
+  }
+ else {
+    mWorkspace.shrinkToTop(animated);
+  }
   s.start();
 }
