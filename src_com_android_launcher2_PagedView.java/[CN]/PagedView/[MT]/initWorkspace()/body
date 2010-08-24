@@ -1,6 +1,8 @@
 {
+  mDirtyPageContent=new ArrayList<Boolean>();
+  mDirtyPageContent.ensureCapacity(32);
   mScroller=new Scroller(getContext());
-  mCurrentScreen=0;
+  mCurrentPage=0;
   final ViewConfiguration configuration=ViewConfiguration.get(getContext());
   mTouchSlop=configuration.getScaledTouchSlop();
   mPagingTouchSlop=configuration.getScaledPagingTouchSlop();

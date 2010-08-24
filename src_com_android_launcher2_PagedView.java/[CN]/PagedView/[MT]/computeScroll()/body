@@ -3,9 +3,9 @@
     scrollTo(mScroller.getCurrX(),mScroller.getCurrY());
     postInvalidate();
   }
- else   if (mNextScreen != INVALID_SCREEN) {
-    mCurrentScreen=Math.max(0,Math.min(mNextScreen,getScreenCount() - 1));
-    notifyScreenSwitchListener();
-    mNextScreen=INVALID_SCREEN;
+ else   if (mNextPage != INVALID_PAGE) {
+    mCurrentPage=Math.max(0,Math.min(mNextPage,getPageCount() - 1));
+    notifyPageSwitchListener();
+    mNextPage=INVALID_PAGE;
   }
 }

@@ -1,5 +1,0 @@
-{
-  if (mScreenSwitchListener != null) {
-    mScreenSwitchListener.onScreenSwitch(getScreenAt(mCurrentScreen),mCurrentScreen);
-  }
-}

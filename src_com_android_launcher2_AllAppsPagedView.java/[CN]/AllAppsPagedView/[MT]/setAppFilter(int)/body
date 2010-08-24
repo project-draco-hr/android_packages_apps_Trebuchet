@@ -2,7 +2,7 @@
   mAppFilter=filterType;
   if (mApps != null) {
     mFilteredApps=rebuildFilteredApps(mApps);
-    setCurrentScreen(0);
+    setCurrentPage(0);
     invalidatePageData();
   }
 }

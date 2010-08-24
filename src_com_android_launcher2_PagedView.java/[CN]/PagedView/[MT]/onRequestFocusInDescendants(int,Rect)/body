@@ -1,12 +1,12 @@
 {
-  int focusableScreen;
-  if (mNextScreen != INVALID_SCREEN) {
-    focusableScreen=mNextScreen;
+  int focusablePage;
+  if (mNextPage != INVALID_PAGE) {
+    focusablePage=mNextPage;
   }
  else {
-    focusableScreen=mCurrentScreen;
+    focusablePage=mCurrentPage;
   }
-  View v=getScreenAt(focusableScreen);
+  View v=getPageAt(focusablePage);
   if (v != null) {
     v.requestFocus(direction,previouslyFocusedRect);
   }

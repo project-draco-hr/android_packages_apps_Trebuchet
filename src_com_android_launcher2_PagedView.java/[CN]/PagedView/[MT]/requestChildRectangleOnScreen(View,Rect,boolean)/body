@@ -1,7 +1,7 @@
 {
-  int screen=indexOfChild(child);
-  if (screen != mCurrentScreen || !mScroller.isFinished()) {
-    snapToScreen(screen);
+  int page=indexOfChild(child);
+  if (page != mCurrentPage || !mScroller.isFinished()) {
+    snapToPage(page);
     return true;
   }
   return false;

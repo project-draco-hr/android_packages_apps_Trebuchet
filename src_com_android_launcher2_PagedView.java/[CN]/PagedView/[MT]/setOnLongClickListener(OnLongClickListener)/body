@@ -1,7 +1,7 @@
 {
   mLongClickListener=l;
-  final int count=getScreenCount();
+  final int count=getPageCount();
   for (int i=0; i < count; i++) {
-    getScreenAt(i).setOnLongClickListener(l);
+    getPageAt(i).setOnLongClickListener(l);
   }
 }

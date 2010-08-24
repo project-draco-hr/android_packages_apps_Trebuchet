@@ -1,6 +1,6 @@
 {
   int childIndex=getChildIndexForGrandChild(v);
-  if (childIndex == getCurrentScreen()) {
+  if (childIndex == getCurrentPage()) {
     final ApplicationInfo app=(ApplicationInfo)v.getTag();
     animateClickFeedback(v,new Runnable(){
       @Override public void run(){

@@ -1,15 +1,15 @@
 {
-  if (mCurrentScreen >= 0 && mCurrentScreen < getScreenCount()) {
-    getScreenAt(mCurrentScreen).addFocusables(views,direction);
+  if (mCurrentPage >= 0 && mCurrentPage < getPageCount()) {
+    getPageAt(mCurrentPage).addFocusables(views,direction);
   }
   if (direction == View.FOCUS_LEFT) {
-    if (mCurrentScreen > 0) {
-      getScreenAt(mCurrentScreen - 1).addFocusables(views,direction);
+    if (mCurrentPage > 0) {
+      getPageAt(mCurrentPage - 1).addFocusables(views,direction);
     }
   }
  else   if (direction == View.FOCUS_RIGHT) {
-    if (mCurrentScreen < getScreenCount() - 1) {
-      getScreenAt(mCurrentScreen + 1).addFocusables(views,direction);
+    if (mCurrentPage < getPageCount() - 1) {
+      getPageAt(mCurrentPage + 1).addFocusables(views,direction);
     }
   }
 }

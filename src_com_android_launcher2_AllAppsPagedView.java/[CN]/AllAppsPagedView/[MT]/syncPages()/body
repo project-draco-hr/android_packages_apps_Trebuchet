@@ -10,5 +10,5 @@
     layout.setCellCount(mCellCountX,mCellCountY);
     addView(layout);
   }
-  setCurrentScreen(Math.max(0,Math.min(numPages - 1,getCurrentScreen())));
+  setCurrentPage(Math.max(0,Math.min(numPages - 1,getCurrentPage())));
 }

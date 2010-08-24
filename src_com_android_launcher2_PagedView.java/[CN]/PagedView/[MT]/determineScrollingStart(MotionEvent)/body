@@ -15,8 +15,8 @@
     }
     if (mAllowLongPress) {
       mAllowLongPress=false;
-      final View currentScreen=getScreenAt(mCurrentScreen);
-      currentScreen.cancelLongPress();
+      final View currentPage=getPageAt(mCurrentPage);
+      currentPage.cancelLongPress();
     }
   }
 }

@@ -1,13 +1,13 @@
 {
   if (direction == View.FOCUS_LEFT) {
-    if (getCurrentScreen() > 0) {
-      snapToScreen(getCurrentScreen() - 1);
+    if (getCurrentPage() > 0) {
+      snapToPage(getCurrentPage() - 1);
       return true;
     }
   }
  else   if (direction == View.FOCUS_RIGHT) {
-    if (getCurrentScreen() < getScreenCount() - 1) {
-      snapToScreen(getCurrentScreen() + 1);
+    if (getCurrentPage() < getPageCount() - 1) {
+      snapToPage(getCurrentPage() + 1);
       return true;
     }
   }

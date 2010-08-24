@@ -1,4 +1,4 @@
 {
   super.writeToParcel(out,flags);
-  out.writeInt(currentScreen);
+  out.writeInt(currentPage);
 }

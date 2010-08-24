@@ -16,7 +16,7 @@
   setMeasuredDimension(widthSize,heightSize);
   if (mFirstLayout) {
     setHorizontalScrollBarEnabled(false);
-    scrollTo(mCurrentScreen * widthSize,0);
+    scrollTo(mCurrentPage * widthSize,0);
     setHorizontalScrollBarEnabled(true);
     mFirstLayout=false;
   }

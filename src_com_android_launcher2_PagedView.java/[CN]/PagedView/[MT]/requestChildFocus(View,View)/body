@@ -1,7 +1,7 @@
 {
   super.requestChildFocus(child,focused);
-  int screen=indexOfChild(child);
-  if (screen >= 0 && !isInTouchMode()) {
-    snapToScreen(screen);
+  int page=indexOfChild(child);
+  if (page >= 0 && !isInTouchMode()) {
+    snapToPage(page);
   }
 }

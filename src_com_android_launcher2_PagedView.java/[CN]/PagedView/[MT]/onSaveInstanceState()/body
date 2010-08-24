@@ -1,5 +1,5 @@
 {
   final SavedState state=new SavedState(super.onSaveInstanceState());
-  state.currentScreen=mCurrentScreen;
+  state.currentPage=mCurrentPage;
   return state;
 }

@@ -1,8 +1,0 @@
-{
-  if (!mScroller.isFinished())   mScroller.abortAnimation();
-  if (getChildCount() == 0)   return;
-  mCurrentScreen=Math.max(0,Math.min(currentScreen,getScreenCount() - 1));
-  scrollTo(getChildOffset(mCurrentScreen) - getRelativeChildOffset(mCurrentScreen),0);
-  invalidate();
-  notifyScreenSwitchListener();
-}

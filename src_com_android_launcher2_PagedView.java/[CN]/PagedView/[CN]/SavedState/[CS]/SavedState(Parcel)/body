@@ -1,4 +1,4 @@
 {
   super(in);
-  currentScreen=in.readInt();
+  currentPage=in.readInt();
 }

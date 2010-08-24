@@ -14,7 +14,7 @@ syncWallpaperPages();
 break;
 default :
 removeAllViews();
-setCurrentScreen(0);
+setCurrentPage(0);
 break;
 }
 final int childCount=getChildCount();
@@ -28,5 +28,5 @@ PagedViewCellLayout layout=(PagedViewCellLayout)getChildAt(i);
 layout.enableCenteredContent(false);
 }
 }
-setCurrentScreen(Math.max(0,Math.min(childCount - 1,getCurrentScreen())));
+setCurrentPage(Math.max(0,Math.min(childCount - 1,getCurrentPage())));
 }

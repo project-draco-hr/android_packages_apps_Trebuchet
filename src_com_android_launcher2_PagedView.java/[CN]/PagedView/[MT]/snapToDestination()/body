@@ -14,5 +14,5 @@
       minDistanceFromScreenCenterIndex=i;
     }
   }
-  snapToScreen(minDistanceFromScreenCenterIndex,1000);
+  snapToPage(minDistanceFromScreenCenterIndex,1000);
 }
