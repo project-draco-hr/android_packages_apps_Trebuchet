@@ -1,6 +1,7 @@
 {
   mDirtyPageContent=new ArrayList<Boolean>();
   mDirtyPageContent.ensureCapacity(32);
+  mPageViewIconCache=new PagedViewIconCache();
   mScroller=new Scroller(getContext());
   mCurrentPage=0;
   final ViewConfiguration configuration=ViewConfiguration.get(getContext());

@@ -13,5 +13,6 @@
     sHolographicOutlineHelper.applyOutline(mHolographicOutline,mHolographicOutlineCanvas,offset);
     sHolographicOutlineHelper.applyBlur(mHolographicOutline,mHolographicOutlineCanvas);
     mIsHolographicUpdatePass=false;
+    mIconCache.addOutline(mIconCacheKey,mHolographicOutline);
   }
 }

@@ -24,5 +24,6 @@
   Intent shortcutsIntent=new Intent(Intent.ACTION_CREATE_SHORTCUT);
   mShortcutList=mPackageManager.queryIntentActivities(shortcutsIntent,0);
   Collections.sort(mShortcutList,resolveInfoComparator);
+  mPageViewIconCache.clear();
   invalidatePageData();
 }
