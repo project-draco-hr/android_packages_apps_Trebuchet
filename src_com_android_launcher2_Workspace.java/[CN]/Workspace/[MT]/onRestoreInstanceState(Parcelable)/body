@@ -1,8 +1,4 @@
 {
-  SavedState savedState=(SavedState)state;
-  super.onRestoreInstanceState(savedState.getSuperState());
-  if (savedState.currentScreen != -1) {
-    setCurrentScreen(savedState.currentScreen,false);
-    Launcher.setScreen(mCurrentScreen);
-  }
+  super.onRestoreInstanceState(state);
+  Launcher.setScreen(mCurrentPage);
 }

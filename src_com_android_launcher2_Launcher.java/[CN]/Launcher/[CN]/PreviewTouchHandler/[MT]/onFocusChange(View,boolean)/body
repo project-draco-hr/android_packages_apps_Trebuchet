@@ -1,5 +1,5 @@
 {
   if (hasFocus) {
-    mWorkspace.snapToScreen((Integer)v.getTag());
+    mWorkspace.snapToPage((Integer)v.getTag());
   }
 }

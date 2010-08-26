@@ -1,0 +1,40 @@
+{
+  mIsSmall=true;
+  final Resources res=getResources();
+  final int screenWidth=getWidth();
+  final int screenHeight=getHeight();
+  final int pageWidth=getChildAt(0).getMeasuredWidth();
+  final int pageHeight=getChildAt(0).getMeasuredHeight();
+  final int scaledPageWidth=(int)(SHRINK_FACTOR * pageWidth);
+  final int scaledPageHeight=(int)(SHRINK_FACTOR * pageHeight);
+  final float scaledSpacing=res.getDimension(R.dimen.smallScreenSpacing);
+  final int screenCount=getChildCount();
+  float totalWidth=screenCount * scaledPageWidth + (screenCount - 1) * scaledSpacing;
+  float newY=getResources().getDimension(R.dimen.smallScreenVerticalMargin);
+  if (shrinkPosition == ShrinkPosition.SHRINK_TO_BOTTOM) {
+    newY=screenHeight - newY - scaledPageHeight;
+  }
+ else   if (shrinkPosition == ShrinkPosition.SHRINK_TO_MIDDLE) {
+    newY=screenHeight / 2 - scaledPageHeight / 2;
+  }
+  float newX=mScroller.getFinalX() + screenWidth / 2 - totalWidth / 2;
+  for (int i=0; i < screenCount; i++) {
+    CellLayout cl=(CellLayout)getChildAt(i);
+    cl.setPivotX(0.0f);
+    cl.setPivotY(0.0f);
+    if (animated) {
+      final int duration=res.getInteger(R.integer.config_workspaceShrinkTime);
+      new PropertyAnimator(duration,cl,new PropertyValuesHolder("x",newX),new PropertyValuesHolder("y",newY),new PropertyValuesHolder("scaleX",SHRINK_FACTOR),new PropertyValuesHolder("scaleY",SHRINK_FACTOR),new PropertyValuesHolder("dimmedBitmapAlpha",1.0f)).start();
+    }
+ else {
+      cl.setX((int)newX);
+      cl.setY((int)newY);
+      cl.setScaleX(SHRINK_FACTOR);
+      cl.setScaleY(SHRINK_FACTOR);
+      cl.setDimmedBitmapAlpha(1.0f);
+    }
+    newX+=scaledPageWidth + scaledSpacing;
+    cl.setOnInterceptTouchListener(this);
+  }
+  setChildrenDrawnWithCacheEnabled(true);
+}

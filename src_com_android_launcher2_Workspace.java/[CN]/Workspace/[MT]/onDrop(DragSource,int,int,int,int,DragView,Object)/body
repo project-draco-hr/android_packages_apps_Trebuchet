@@ -9,7 +9,7 @@
     final float[] localBottomRightXY=mTempDragBottomRightCoordinates;
     localBottomRightXY[0]=originX + dragView.getDragRegionWidth();
     localBottomRightXY[1]=originY + dragView.getDragRegionHeight();
-    cellLayout=findMatchingScreenForDragOver(localXY,localBottomRightXY);
+    cellLayout=findMatchingPageForDragOver(localXY,localBottomRightXY);
     if (cellLayout == null) {
       return;
     }
@@ -22,7 +22,7 @@
  else {
     if (mDragInfo != null) {
       final View cell=mDragInfo.cell;
-      int index=mScroller.isFinished() ? mCurrentScreen : mNextScreen;
+      int index=mScroller.isFinished() ? mCurrentPage : mNextPage;
       if (index != mDragInfo.screen) {
         final CellLayout originalCellLayout=(CellLayout)getChildAt(mDragInfo.screen);
         originalCellLayout.removeView(cell);

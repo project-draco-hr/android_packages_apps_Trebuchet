@@ -8,7 +8,7 @@
   }
   final int currentScreen=savedState.getInt(RUNTIME_STATE_CURRENT_SCREEN,-1);
   if (currentScreen > -1) {
-    mWorkspace.setCurrentScreen(currentScreen);
+    mWorkspace.setCurrentPage(currentScreen);
   }
   final int addScreen=savedState.getInt(RUNTIME_STATE_PENDING_ADD_SCREEN,-1);
   if (addScreen > -1) {

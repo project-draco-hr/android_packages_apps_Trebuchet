@@ -13,7 +13,7 @@
         mWorkspace.unshrink(alreadyOnHome);
       }
     }
- else     if (!mWorkspace.isDefaultScreenShowing()) {
+ else     if (!mWorkspace.isDefaultPageShowing()) {
       mWorkspace.moveToDefaultScreen(alreadyOnHome && !allAppsVisible);
     }
     closeAllApps(alreadyOnHome && allAppsVisible);

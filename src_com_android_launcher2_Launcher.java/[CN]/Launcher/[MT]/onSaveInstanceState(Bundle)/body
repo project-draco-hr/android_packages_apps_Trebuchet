@@ -1,5 +1,5 @@
 {
-  outState.putInt(RUNTIME_STATE_CURRENT_SCREEN,mWorkspace.getCurrentScreen());
+  outState.putInt(RUNTIME_STATE_CURRENT_SCREEN,mWorkspace.getCurrentPage());
   final ArrayList<Folder> folders=mWorkspace.getOpenFolders();
   if (folders.size() > 0) {
     final int count=folders.size();

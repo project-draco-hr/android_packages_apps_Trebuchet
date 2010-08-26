@@ -7,9 +7,9 @@
     Folder openFolder=mWorkspace.getFolderForTag(folderInfo);
     int folderScreen;
     if (openFolder != null) {
-      folderScreen=mWorkspace.getScreenForView(openFolder);
+      folderScreen=mWorkspace.getPageForView(openFolder);
       closeFolder(openFolder);
-      if (folderScreen != mWorkspace.getCurrentScreen()) {
+      if (folderScreen != mWorkspace.getCurrentPage()) {
         closeFolder();
         openFolder(folderInfo);
       }

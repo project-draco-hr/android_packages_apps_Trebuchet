@@ -2,10 +2,10 @@
   UserFolderInfo folderInfo=new UserFolderInfo();
   folderInfo.title=getText(R.string.folder_name);
   CellLayout.CellInfo cellInfo=mAddItemCellInfo;
-  cellInfo.screen=mWorkspace.getCurrentScreen();
+  cellInfo.screen=mWorkspace.getCurrentPage();
   if (!findSingleSlot(cellInfo))   return;
-  LauncherModel.addItemToDatabase(this,folderInfo,LauncherSettings.Favorites.CONTAINER_DESKTOP,mWorkspace.getCurrentScreen(),cellInfo.cellX,cellInfo.cellY,false);
+  LauncherModel.addItemToDatabase(this,folderInfo,LauncherSettings.Favorites.CONTAINER_DESKTOP,mWorkspace.getCurrentPage(),cellInfo.cellX,cellInfo.cellY,false);
   mFolders.put(folderInfo.id,folderInfo);
-  FolderIcon newFolder=FolderIcon.fromXml(R.layout.folder_icon,this,(ViewGroup)mWorkspace.getChildAt(mWorkspace.getCurrentScreen()),folderInfo);
+  FolderIcon newFolder=FolderIcon.fromXml(R.layout.folder_icon,this,(ViewGroup)mWorkspace.getChildAt(mWorkspace.getCurrentPage()),folderInfo);
   mWorkspace.addInCurrentScreen(newFolder,cellInfo.cellX,cellInfo.cellY,1,1,isWorkspaceLocked());
 }

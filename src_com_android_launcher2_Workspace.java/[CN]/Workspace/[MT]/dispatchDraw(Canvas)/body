@@ -1,30 +1,16 @@
 {
-  boolean restore=false;
-  int restoreCount=0;
-  boolean fastDraw=mTouchState != TOUCH_STATE_SCROLLING && mNextScreen == INVALID_SCREEN;
   if (mIsSmall) {
-    final int screenCount=getChildCount();
-    for (int i=0; i < screenCount; i++) {
-      CellLayout cl=(CellLayout)getChildAt(i);
-      drawChild(canvas,cl,getDrawingTime());
+    final int pageCount=getChildCount();
+    final long drawingTime=getDrawingTime();
+    for (int i=0; i < pageCount; i++) {
+      final View page=(View)getChildAt(i);
+      if (page.getAlpha() != 1.0f) {
+        page.setAlpha(1.0f);
+      }
+      drawChild(canvas,page,drawingTime);
     }
-  }
- else   if (fastDraw) {
-    drawChild(canvas,getChildAt(mCurrentScreen),getDrawingTime());
   }
  else {
-    final long drawingTime=getDrawingTime();
-    final float scrollPos=(float)mScrollX / getWidth();
-    final int leftScreen=(int)scrollPos;
-    final int rightScreen=leftScreen + 1;
-    if (leftScreen >= 0) {
-      drawChild(canvas,getChildAt(leftScreen),drawingTime);
-    }
-    if (scrollPos != leftScreen && rightScreen < getChildCount()) {
-      drawChild(canvas,getChildAt(rightScreen),drawingTime);
-    }
-  }
-  if (restore) {
-    canvas.restoreToCount(restoreCount);
+    super.dispatchDraw(canvas);
   }
 }

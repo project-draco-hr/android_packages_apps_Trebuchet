@@ -1,0 +1,13 @@
+{
+  boolean scrollComputed=computeScrollHelper();
+  if (!scrollComputed && mTouchState == TOUCH_STATE_SCROLLING) {
+    final float now=System.nanoTime() / NANOTIME_DIV;
+    final float e=(float)Math.exp((now - mSmoothingTime) / SMOOTHING_CONSTANT);
+    final float dx=mTouchX - mScrollX;
+    mScrollX+=dx * e;
+    mSmoothingTime=now;
+    if (dx > 1.f || dx < -1.f) {
+      invalidate();
+    }
+  }
+}

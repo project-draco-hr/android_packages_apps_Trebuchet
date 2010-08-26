@@ -1,6 +1,6 @@
 {
   mPreviousIndicator=previous;
   mNextIndicator=next;
-  previous.setLevel(mCurrentScreen);
-  next.setLevel(mCurrentScreen);
+  previous.setLevel(mCurrentPage);
+  next.setLevel(mCurrentPage);
 }

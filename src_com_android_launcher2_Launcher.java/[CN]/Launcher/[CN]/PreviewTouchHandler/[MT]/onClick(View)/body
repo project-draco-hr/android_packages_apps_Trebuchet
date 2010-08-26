@@ -1,4 +1,4 @@
 {
-  mWorkspace.snapToScreen((Integer)v.getTag());
+  mWorkspace.snapToPage((Integer)v.getTag());
   v.post(this);
 }

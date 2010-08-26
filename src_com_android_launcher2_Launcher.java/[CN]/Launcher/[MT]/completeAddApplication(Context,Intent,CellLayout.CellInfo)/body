@@ -1,5 +1,5 @@
 {
-  cellInfo.screen=mWorkspace.getCurrentScreen();
+  cellInfo.screen=mWorkspace.getCurrentPage();
   if (!findSingleSlot(cellInfo))   return;
   final ShortcutInfo info=mModel.getShortcutInfo(context.getPackageManager(),data,context);
   if (info != null) {

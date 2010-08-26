@@ -36,7 +36,7 @@
     image.setOnClickListener(handler);
     image.setOnFocusChangeListener(handler);
     image.setFocusable(true);
-    if (i == mWorkspace.getCurrentScreen())     image.requestFocus();
+    if (i == mWorkspace.getCurrentPage())     image.requestFocus();
     preview.addView(image,LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
     bitmaps.add(bitmap);
   }

@@ -1,10 +1,12 @@
 {
   super(context,attrs,defStyle);
+  mContentIsRefreshable=false;
+  mFadeInAdjacentScreens=false;
   mWallpaperManager=WallpaperManager.getInstance(context);
   TypedArray a=context.obtainStyledAttributes(attrs,R.styleable.Workspace,defStyle,0);
   int cellCountX=a.getInt(R.styleable.Workspace_cellCountX,DEFAULT_CELL_COUNT_X);
   int cellCountY=a.getInt(R.styleable.Workspace_cellCountY,DEFAULT_CELL_COUNT_Y);
-  mDefaultScreen=a.getInt(R.styleable.Workspace_defaultScreen,1);
+  mDefaultPage=a.getInt(R.styleable.Workspace_defaultScreen,1);
   a.recycle();
   LauncherModel.updateWorkspaceLayoutCells(cellCountX,cellCountY);
   setHapticFeedbackEnabled(false);

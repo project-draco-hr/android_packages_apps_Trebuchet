@@ -1,0 +1,5 @@
+{
+  super.init();
+  mScrollInterpolator=new WorkspaceOvershootInterpolator();
+  mScroller=new Scroller(getContext(),mScrollInterpolator);
+}

@@ -1,10 +1,10 @@
 {
-  int newCurrentScreen=mCurrentScreen;
+  int newCurrentPage=mCurrentPage;
   final int screenCount=getChildCount();
   for (int i=0; i < screenCount; i++) {
     if (getChildAt(i) == clThatWasClicked) {
-      newCurrentScreen=i;
+      newCurrentPage=i;
     }
   }
-  unshrink(newCurrentScreen);
+  unshrink(newCurrentPage);
 }

@@ -1,0 +1,3 @@
+{
+  snapToPageWithVelocity(mCurrentPage,0);
+}

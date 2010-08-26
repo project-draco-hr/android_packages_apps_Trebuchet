@@ -1,13 +1,13 @@
 {
-  if (fromScreen > toScreen) {
-    final int temp=fromScreen;
-    fromScreen=toScreen;
-    toScreen=temp;
+  if (fromPage > toPage) {
+    final int temp=fromPage;
+    fromPage=toPage;
+    toPage=temp;
   }
   final int screenCount=getChildCount();
-  fromScreen=Math.max(fromScreen,0);
-  toScreen=Math.min(toScreen,screenCount - 1);
-  for (int i=fromScreen; i <= toScreen; i++) {
+  fromPage=Math.max(fromPage,0);
+  toPage=Math.min(toPage,screenCount - 1);
+  for (int i=fromPage; i <= toPage; i++) {
     final CellLayout layout=(CellLayout)getChildAt(i);
     layout.setChildrenDrawnWithCacheEnabled(true);
     layout.setChildrenDrawingCacheEnabled(true);

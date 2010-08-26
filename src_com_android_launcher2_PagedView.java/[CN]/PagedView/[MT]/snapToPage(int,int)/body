@@ -1,15 +1,7 @@
 {
   whichPage=Math.max(0,Math.min(whichPage,getPageCount() - 1));
-  mNextPage=whichPage;
   int newX=getChildOffset(whichPage) - getRelativeChildOffset(whichPage);
   final int sX=getScrollX();
   final int delta=newX - sX;
-  awakenScrollBars(duration);
-  if (duration == 0) {
-    duration=Math.abs(delta);
-  }
-  if (!mScroller.isFinished())   mScroller.abortAnimation();
-  mScroller.startScroll(sX,0,delta,0,duration);
-  loadAssociatedPages(mNextPage);
-  invalidate();
+  snapToPage(whichPage,delta,duration);
 }

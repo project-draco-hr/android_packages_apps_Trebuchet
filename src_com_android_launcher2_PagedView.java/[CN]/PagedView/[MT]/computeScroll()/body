@@ -1,11 +1,3 @@
 {
-  if (mScroller.computeScrollOffset()) {
-    scrollTo(mScroller.getCurrX(),mScroller.getCurrY());
-    postInvalidate();
-  }
- else   if (mNextPage != INVALID_PAGE) {
-    mCurrentPage=Math.max(0,Math.min(mNextPage,getPageCount() - 1));
-    notifyPageSwitchListener();
-    mNextPage=INVALID_PAGE;
-  }
+  computeScrollHelper();
 }

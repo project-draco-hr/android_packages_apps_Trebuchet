@@ -1,22 +1,24 @@
 {
-  final int count=getChildCount();
-  if (page < count) {
-    int lowerPageBound=Math.max(0,page - 1);
-    int upperPageBound=Math.min(page + 1,count - 1);
-    for (int i=0; i < count; ++i) {
-      final PagedViewCellLayout layout=(PagedViewCellLayout)getChildAt(i);
-      final int childCount=layout.getChildCount();
-      if (lowerPageBound <= i && i <= upperPageBound) {
-        if (mDirtyPageContent.get(i)) {
-          syncPageItems(i);
-          mDirtyPageContent.set(i,false);
+  if (mContentIsRefreshable) {
+    final int count=getChildCount();
+    if (page < count) {
+      int lowerPageBound=Math.max(0,page - 1);
+      int upperPageBound=Math.min(page + 1,count - 1);
+      for (int i=0; i < count; ++i) {
+        final ViewGroup layout=(ViewGroup)getChildAt(i);
+        final int childCount=layout.getChildCount();
+        if (lowerPageBound <= i && i <= upperPageBound) {
+          if (mDirtyPageContent.get(i)) {
+            syncPageItems(i);
+            mDirtyPageContent.set(i,false);
+          }
         }
-      }
  else {
-        if (childCount > 0) {
-          layout.removeAllViews();
+          if (childCount > 0) {
+            layout.removeAllViews();
+          }
+          mDirtyPageContent.set(i,true);
         }
-        mDirtyPageContent.set(i,true);
       }
     }
   }

@@ -8,6 +8,6 @@
       mAllAppsGrid.zoom(0.0f,animated);
     }
     ((View)mAllAppsGrid).setFocusable(false);
-    mWorkspace.getChildAt(mWorkspace.getCurrentScreen()).requestFocus();
+    mWorkspace.getChildAt(mWorkspace.getCurrentPage()).requestFocus();
   }
 }

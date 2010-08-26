@@ -1,7 +1,0 @@
-{
-  if (disallowIntercept) {
-    final View currentScreen=getChildAt(mCurrentScreen);
-    currentScreen.cancelLongPress();
-  }
-  super.requestDisallowInterceptTouchEvent(disallowIntercept);
-}

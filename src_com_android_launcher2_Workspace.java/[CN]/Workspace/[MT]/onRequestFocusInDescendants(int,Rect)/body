@@ -5,14 +5,7 @@
       return openFolder.requestFocus(direction,previouslyFocusedRect);
     }
  else {
-      int focusableScreen;
-      if (mNextScreen != INVALID_SCREEN) {
-        focusableScreen=mNextScreen;
-      }
- else {
-        focusableScreen=mCurrentScreen;
-      }
-      getChildAt(focusableScreen).requestFocus(direction,previouslyFocusedRect);
+      return super.onRequestFocusInDescendants(direction,previouslyFocusedRect);
     }
   }
   return false;

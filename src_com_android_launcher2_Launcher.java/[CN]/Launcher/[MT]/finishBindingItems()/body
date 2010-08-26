@@ -1,7 +1,7 @@
 {
   if (mSavedState != null) {
     if (!mWorkspace.hasFocus()) {
-      mWorkspace.getChildAt(mWorkspace.getCurrentScreen()).requestFocus();
+      mWorkspace.getChildAt(mWorkspace.getCurrentPage()).requestFocus();
     }
     final long[] userFolders=mSavedState.getLongArray(RUNTIME_STATE_USER_FOLDERS);
     if (userFolders != null) {

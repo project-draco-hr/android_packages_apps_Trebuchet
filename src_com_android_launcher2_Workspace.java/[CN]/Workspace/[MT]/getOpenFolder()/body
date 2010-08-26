@@ -1,8 +1,8 @@
 {
-  CellLayout currentScreen=(CellLayout)getChildAt(mCurrentScreen);
-  int count=currentScreen.getChildCount();
+  CellLayout currentPage=(CellLayout)getChildAt(mCurrentPage);
+  int count=currentPage.getChildCount();
   for (int i=0; i < count; i++) {
-    View child=currentScreen.getChildAt(i);
+    View child=currentPage.getChildAt(i);
     if (child instanceof Folder) {
       Folder folder=(Folder)child;
       if (folder.getInfo().opened)       return folder;

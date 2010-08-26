@@ -18,7 +18,7 @@
     final float[] localBottomRightXY=mTempDragBottomRightCoordinates;
     localBottomRightXY[0]=originX + dragView.getDragRegionWidth();
     localBottomRightXY[1]=originY + dragView.getDragRegionHeight();
-    currentLayout=findMatchingScreenForDragOver(localXY,localBottomRightXY);
+    currentLayout=findMatchingPageForDragOver(localXY,localBottomRightXY);
     if (currentLayout != null) {
       currentLayout.setHover(true);
     }

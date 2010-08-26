@@ -1,9 +1,9 @@
 {
-  cellInfo.screen=mWorkspace.getCurrentScreen();
+  cellInfo.screen=mWorkspace.getCurrentPage();
   if (!findSingleSlot(cellInfo))   return;
   final LiveFolderInfo info=addLiveFolder(this,data,cellInfo,false);
   if (!mRestoring) {
-    final View view=LiveFolderIcon.fromXml(R.layout.live_folder_icon,this,(ViewGroup)mWorkspace.getChildAt(mWorkspace.getCurrentScreen()),info);
+    final View view=LiveFolderIcon.fromXml(R.layout.live_folder_icon,this,(ViewGroup)mWorkspace.getChildAt(mWorkspace.getCurrentPage()),info);
     mWorkspace.addInCurrentScreen(view,cellInfo.cellX,cellInfo.cellY,1,1,isWorkspaceLocked());
   }
 }

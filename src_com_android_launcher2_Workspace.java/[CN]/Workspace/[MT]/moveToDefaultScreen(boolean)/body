@@ -1,14 +1,14 @@
 {
   if (animate) {
     if (mIsSmall) {
-      unshrink(mDefaultScreen);
+      unshrink(mDefaultPage);
     }
  else {
-      snapToScreen(mDefaultScreen);
+      snapToPage(mDefaultPage);
     }
   }
  else {
-    setCurrentScreen(mDefaultScreen);
+    setCurrentPage(mDefaultPage);
   }
-  getChildAt(mDefaultScreen).requestFocus();
+  getChildAt(mDefaultPage).requestFocus();
 }

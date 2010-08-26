@@ -17,6 +17,7 @@
   if (mFirstLayout) {
     setHorizontalScrollBarEnabled(false);
     scrollTo(mCurrentPage * widthSize,0);
+    mScroller.setFinalX(mCurrentPage * widthSize);
     setHorizontalScrollBarEnabled(true);
     mFirstLayout=false;
   }

@@ -1,11 +1,13 @@
 {
-  syncPages();
-  final int count=getChildCount();
-  mDirtyPageContent.clear();
-  for (int i=0; i < count; ++i) {
-    mDirtyPageContent.add(true);
+  if (mContentIsRefreshable) {
+    syncPages();
+    final int count=getChildCount();
+    mDirtyPageContent.clear();
+    for (int i=0; i < count; ++i) {
+      mDirtyPageContent.add(true);
+    }
+    loadAssociatedPages(mCurrentPage);
+    mDirtyPageAlpha=true;
+    requestLayout();
   }
-  loadAssociatedPages(mCurrentPage);
-  mDirtyPageAlpha=true;
-  requestLayout();
 }

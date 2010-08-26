@@ -1,0 +1,8 @@
+{
+  if (mNextPage != INVALID_PAGE) {
+    enableChildrenCache(mCurrentPage,mNextPage);
+  }
+ else {
+    enableChildrenCache(mCurrentPage - 1,mCurrentPage + 1);
+  }
+}

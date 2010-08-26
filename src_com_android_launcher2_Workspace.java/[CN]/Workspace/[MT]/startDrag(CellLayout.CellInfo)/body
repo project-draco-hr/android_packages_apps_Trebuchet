@@ -4,8 +4,8 @@
     return;
   }
   mDragInfo=cellInfo;
-  mDragInfo.screen=mCurrentScreen;
-  CellLayout current=((CellLayout)getChildAt(mCurrentScreen));
+  mDragInfo.screen=mCurrentPage;
+  CellLayout current=((CellLayout)getChildAt(mCurrentPage));
   current.onDragChild(child);
   mDragController.startDrag(child,this,child.getTag(),DragController.DRAG_ACTION_MOVE);
   invalidate();

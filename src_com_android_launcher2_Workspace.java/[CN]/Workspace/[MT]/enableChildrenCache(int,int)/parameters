@@ -1,2 +1,2 @@
-int fromScreen
-int toScreen
+int fromPage
+int toPage

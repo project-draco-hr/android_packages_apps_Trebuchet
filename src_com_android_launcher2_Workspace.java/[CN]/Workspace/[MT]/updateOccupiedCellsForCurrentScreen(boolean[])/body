@@ -1,5 +1,5 @@
 {
-  CellLayout group=(CellLayout)getChildAt(mCurrentScreen);
+  CellLayout group=(CellLayout)getChildAt(mCurrentPage);
   if (group != null) {
     return group.updateOccupiedCells(occupied,null);
   }

@@ -10,7 +10,7 @@ case LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT:
   view=mLauncher.createShortcut(R.layout.application,cellLayout,(ShortcutInfo)info);
 break;
 case LauncherSettings.Favorites.ITEM_TYPE_USER_FOLDER:
-view=FolderIcon.fromXml(R.layout.folder_icon,mLauncher,(ViewGroup)getChildAt(mCurrentScreen),((UserFolderInfo)info));
+view=FolderIcon.fromXml(R.layout.folder_icon,mLauncher,(ViewGroup)getChildAt(mCurrentPage),((UserFolderInfo)info));
 break;
 case LauncherSettings.Favorites.ITEM_TYPE_APPWIDGET:
 cellLayout.setTagToCellInfoForPoint(x,y);
@@ -30,6 +30,6 @@ mTargetCell=estimateDropCell(x,y,1,1,view,cellLayout,mTargetCell);
 addInScreen(view,indexOfChild(cellLayout),mTargetCell[0],mTargetCell[1],info.spanX,info.spanY,insertAtFirst);
 cellLayout.onDropChild(view);
 CellLayout.LayoutParams lp=(CellLayout.LayoutParams)view.getLayoutParams();
-LauncherModel.addOrMoveItemInDatabase(mLauncher,info,LauncherSettings.Favorites.CONTAINER_DESKTOP,mCurrentScreen,lp.cellX,lp.cellY);
+LauncherModel.addOrMoveItemInDatabase(mLauncher,info,LauncherSettings.Favorites.CONTAINER_DESKTOP,mCurrentPage,lp.cellX,lp.cellY);
 }
 }

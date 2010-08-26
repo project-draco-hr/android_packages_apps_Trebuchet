@@ -9,9 +9,12 @@
   boolean xMoved=xDiff > touchSlop;
   boolean yMoved=yDiff > touchSlop;
   if (xMoved || yMoved) {
-    if (xPaged) {
+    if (mUsePagingTouchSlop ? xPaged : xMoved) {
       mTouchState=TOUCH_STATE_SCROLLING;
       mLastMotionX=x;
+      mTouchX=mScrollX;
+      mSmoothingTime=System.nanoTime() / NANOTIME_DIV;
+      pageBeginMoving();
     }
     if (mAllowLongPress) {
       mAllowLongPress=false;

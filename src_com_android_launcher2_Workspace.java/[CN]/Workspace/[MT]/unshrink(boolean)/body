@@ -8,7 +8,7 @@
       cl.setPivotX(0.0f);
       cl.setPivotY(0.0f);
       if (animated) {
-        s.playTogether(new PropertyAnimator(duration,cl,"translationX",0.0f),new PropertyAnimator(duration,cl,"translationY",0.0f),new PropertyAnimator(duration,cl,"scaleX",1.0f),new PropertyAnimator(duration,cl,"scaleY",1.0f),new PropertyAnimator(duration,cl,"dimmedBitmapAlpha",0.0f));
+        s.playTogether(new PropertyAnimator<Float>(duration,cl,"translationX",0.0f),new PropertyAnimator<Float>(duration,cl,"translationY",0.0f),new PropertyAnimator<Float>(duration,cl,"scaleX",1.0f),new PropertyAnimator<Float>(duration,cl,"scaleY",1.0f),new PropertyAnimator<Float>(duration,cl,"dimmedBitmapAlpha",0.0f));
       }
  else {
         cl.setTranslationX(0.0f);
