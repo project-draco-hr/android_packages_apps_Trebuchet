@@ -4,27 +4,30 @@
   float scaleFactor=(float)res.getInteger(R.integer.config_allAppsZoomScaleFactor);
   final View fromView=(fromState == State.ALL_APPS) ? (View)mAllAppsGrid : mHomeCustomizationDrawer;
   setPivotsForZoom(fromView,fromState,scaleFactor);
-  Sequencer s=new Sequencer();
-  Animator scaleAnim=new PropertyAnimator(duration,fromView,new PropertyValuesHolder<Float>("scaleX",scaleFactor),new PropertyValuesHolder<Float>("scaleY",scaleFactor));
-  scaleAnim.setInterpolator(new AccelerateInterpolator());
-  s.addListener(new AnimatableListenerAdapter(){
-    public void onAnimationStart(    Animatable animation){
-      if (!animated)       animation.end();
-    }
-    public void onAnimationEnd(    Animatable animation){
-      fromView.setVisibility(View.GONE);
-      fromView.setScaleX(1.0f);
-      fromView.setScaleY(1.0f);
-    }
-  }
-);
-  Sequencer toolbarHideAnim=new Sequencer();
-  Sequencer toolbarShowAnim=new Sequencer();
-  getToolbarButtonAnimations(State.WORKSPACE,toolbarShowAnim,toolbarHideAnim);
-  s.playTogether(scaleAnim,toolbarHideAnim);
-  final int fadeInTime=res.getInteger(R.integer.config_toolbarButtonFadeInTime);
-  final int unshrinkTime=res.getInteger(R.integer.config_workspaceUnshrinkTime);
-  s.play(toolbarShowAnim).after(unshrinkTime - fadeInTime);
   mWorkspace.unshrink(animated);
-  s.start();
+  if (animated) {
+    Sequencer s=new Sequencer();
+    Animator scaleAnim=new PropertyAnimator(duration,fromView,new PropertyValuesHolder<Float>("scaleX",scaleFactor),new PropertyValuesHolder<Float>("scaleY",scaleFactor));
+    scaleAnim.setInterpolator(new AccelerateInterpolator());
+    s.addListener(new AnimatableListenerAdapter(){
+      public void onAnimationEnd(      Animatable animation){
+        fromView.setVisibility(View.GONE);
+        fromView.setScaleX(1.0f);
+        fromView.setScaleY(1.0f);
+      }
+    }
+);
+    Sequencer toolbarHideAnim=new Sequencer();
+    Sequencer toolbarShowAnim=new Sequencer();
+    hideAndShowToolbarButtons(State.WORKSPACE,toolbarShowAnim,toolbarHideAnim);
+    s.playTogether(scaleAnim,toolbarHideAnim);
+    final int fadeInTime=res.getInteger(R.integer.config_toolbarButtonFadeInTime);
+    final int unshrinkTime=res.getInteger(R.integer.config_workspaceUnshrinkTime);
+    s.play(toolbarShowAnim).after(unshrinkTime - fadeInTime);
+    s.start();
+  }
+ else {
+    fromView.setVisibility(View.GONE);
+    hideAndShowToolbarButtons(State.WORKSPACE,null,null);
+  }
 }

@@ -1,0 +1,26 @@
+{
+  final boolean showing=show;
+  final boolean hiding=!show;
+  final int duration=show ? getResources().getInteger(R.integer.config_toolbarButtonFadeInTime) : getResources().getInteger(R.integer.config_toolbarButtonFadeOutTime);
+  if (seq != null) {
+    Animatable anim=new PropertyAnimator<Float>(duration,view,"alpha",show ? 1.0f : 0.0f);
+    anim.addListener(new AnimatableListenerAdapter(){
+      public void onAnimationStart(      Animatable animation){
+        if (showing)         showToolbarButton(view);
+      }
+      public void onAnimationEnd(      Animatable animation){
+        if (hiding)         hideToolbarButton(view);
+      }
+    }
+);
+    seq.play(anim);
+  }
+ else {
+    if (showing) {
+      showToolbarButton(view);
+    }
+ else {
+      hideToolbarButton(view);
+    }
+  }
+}

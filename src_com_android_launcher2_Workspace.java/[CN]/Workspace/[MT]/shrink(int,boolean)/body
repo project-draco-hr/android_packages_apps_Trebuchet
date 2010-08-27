@@ -16,14 +16,13 @@
     newY=screenHeight / 2 - scaledScreenHeight / 2;
   }
   float newX=(mCurrentScreen + 1) * screenWidth - screenWidth / 2 - totalWidth / 2;
-  Sequencer s=new Sequencer();
   for (int i=0; i < screenCount; i++) {
     CellLayout cl=(CellLayout)getChildAt(i);
     cl.setPivotX(0.0f);
     cl.setPivotY(0.0f);
     if (animated) {
       final int duration=res.getInteger(R.integer.config_workspaceShrinkTime);
-      s.playTogether(new PropertyAnimator(duration,cl,"x",newX),new PropertyAnimator(duration,cl,"y",newY),new PropertyAnimator(duration,cl,"scaleX",SHRINK_FACTOR),new PropertyAnimator(duration,cl,"scaleY",SHRINK_FACTOR),new PropertyAnimator(duration,cl,"dimmedBitmapAlpha",1.0f));
+      new PropertyAnimator(duration,cl,new PropertyValuesHolder("x",newX),new PropertyValuesHolder("y",newY),new PropertyValuesHolder("scaleX",SHRINK_FACTOR),new PropertyValuesHolder("scaleY",SHRINK_FACTOR),new PropertyValuesHolder("dimmedBitmapAlpha",1.0f)).start();
     }
  else {
       cl.setX((int)newX);
@@ -36,5 +35,4 @@
     cl.setOnInterceptTouchListener(this);
   }
   setChildrenDrawnWithCacheEnabled(true);
-  if (animated)   s.start();
 }
