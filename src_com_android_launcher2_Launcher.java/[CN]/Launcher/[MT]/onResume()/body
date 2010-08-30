@@ -6,4 +6,5 @@
     mModel.startLoader(this,true);
     mRestoring=false;
   }
+  updateAppMarketIcon();
 }
