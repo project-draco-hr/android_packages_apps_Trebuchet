@@ -1,5 +1,5 @@
 {
-  if (info.onExternalStorage && !info.customIcon && !info.usingFallbackIcon) {
+  if (!info.customIcon && !info.usingFallbackIcon) {
     boolean needSave;
     byte[] data=c.getBlob(iconIndex);
     try {

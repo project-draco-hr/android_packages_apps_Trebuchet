@@ -9,7 +9,7 @@
     writeBitmap(values,mIcon);
   }
  else {
-    if (onExternalStorage && !usingFallbackIcon) {
+    if (!usingFallbackIcon) {
       writeBitmap(values,mIcon);
     }
     values.put(LauncherSettings.BaseLauncherColumns.ICON_TYPE,LauncherSettings.BaseLauncherColumns.ICON_TYPE_RESOURCE);
