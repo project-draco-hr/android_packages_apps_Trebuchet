@@ -1,5 +1,5 @@
 {
-  if (mLocks != 0 || !isVisible()) {
+  if (!isVisible() || mLauncher.isWorkspaceLocked() || mLocks != 0) {
     return true;
   }
   if (sRollo.checkClickOK() && mCurrentIconIndex == mDownIconIndex && mCurrentIconIndex >= 0 && mCurrentIconIndex < mAllAppsList.size()) {
