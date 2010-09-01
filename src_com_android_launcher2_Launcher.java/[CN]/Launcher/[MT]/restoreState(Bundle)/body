@@ -26,7 +26,7 @@
   boolean renameFolder=savedState.getBoolean(RUNTIME_STATE_PENDING_FOLDER_RENAME,false);
   if (renameFolder) {
     long id=savedState.getLong(RUNTIME_STATE_PENDING_FOLDER_RENAME_ID);
-    mFolderInfo=mModel.getFolderById(this,mFolders,id);
+    mFolderInfo=mModel.getFolderById(this,sFolders,id);
     mRestoring=true;
   }
 }

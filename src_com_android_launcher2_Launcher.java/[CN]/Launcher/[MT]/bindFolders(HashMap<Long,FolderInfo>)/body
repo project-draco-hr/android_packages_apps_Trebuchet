@@ -1,4 +1,4 @@
 {
-  mFolders.clear();
-  mFolders.putAll(folders);
+  sFolders.clear();
+  sFolders.putAll(folders);
 }

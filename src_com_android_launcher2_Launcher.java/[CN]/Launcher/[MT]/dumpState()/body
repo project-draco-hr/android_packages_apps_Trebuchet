@@ -6,7 +6,7 @@
   Log.d(TAG,"mWaitingForResult=" + mWaitingForResult);
   Log.d(TAG,"mSavedInstanceState=" + mSavedInstanceState);
   Log.d(TAG,"mDesktopItems.size=" + mDesktopItems.size());
-  Log.d(TAG,"mFolders.size=" + mFolders.size());
+  Log.d(TAG,"sFolders.size=" + sFolders.size());
   mModel.dumpState();
   mAllAppsGrid.dumpState();
   Log.d(TAG,"END launcher2 dump state");
