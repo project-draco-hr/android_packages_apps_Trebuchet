@@ -1,4 +1,5 @@
 {
+  String packageName=componentName.getPackageName();
   Intent intent=new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS,Uri.fromParts("package",packageName,null));
   startActivity(intent);
 }

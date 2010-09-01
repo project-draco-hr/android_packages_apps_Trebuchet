@@ -9,18 +9,21 @@ case WORKSPACE:
   hideOrShowToolbarButton(true,allAppsButton,showSeq);
 hideOrShowToolbarButton(true,configureButton,showSeq);
 hideOrShowToolbarButton(false,marketButton,hideSeq);
+mDeleteZone.setHandle(allAppsButton);
 break;
 case ALL_APPS:
 hideOrShowToolbarButton(true,configureButton,showSeq);
 hideOrShowToolbarButton(true,marketButton,showSeq);
 hideOrShowToolbarButton(false,searchButton,hideSeq);
 hideOrShowToolbarButton(false,allAppsButton,hideSeq);
+mDeleteZone.setHandle(marketButton);
 break;
 case CUSTOMIZE:
 hideOrShowToolbarButton(true,allAppsButton,showSeq);
 hideOrShowToolbarButton(false,searchButton,hideSeq);
 hideOrShowToolbarButton(false,marketButton,hideSeq);
 hideOrShowToolbarButton(false,configureButton,hideSeq);
+mDeleteZone.setHandle(allAppsButton);
 break;
 }
 }

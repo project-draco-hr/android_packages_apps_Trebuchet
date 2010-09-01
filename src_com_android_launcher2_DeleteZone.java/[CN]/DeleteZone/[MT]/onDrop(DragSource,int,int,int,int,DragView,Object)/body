@@ -1,17 +1,19 @@
 {
   final ItemInfo item=(ItemInfo)dragInfo;
+  if (item instanceof ApplicationInfo && LauncherApplication.isScreenXLarge()) {
+    ApplicationInfo appInfo=(ApplicationInfo)item;
+    mLauncher.startApplicationUninstallActivity(appInfo.componentName);
+  }
   if (item.container == -1)   return;
   if (item.container == LauncherSettings.Favorites.CONTAINER_DESKTOP) {
     if (item instanceof LauncherAppWidgetInfo) {
       mLauncher.removeAppWidget((LauncherAppWidgetInfo)item);
     }
   }
- else {
-    if (source instanceof UserFolder) {
-      final UserFolder userFolder=(UserFolder)source;
-      final UserFolderInfo userFolderInfo=(UserFolderInfo)userFolder.getInfo();
-      userFolderInfo.remove((ShortcutInfo)item);
-    }
+ else   if (source instanceof UserFolder) {
+    final UserFolder userFolder=(UserFolder)source;
+    final UserFolderInfo userFolderInfo=(UserFolderInfo)userFolder.getInfo();
+    userFolderInfo.remove((ShortcutInfo)item);
   }
   if (item instanceof UserFolderInfo) {
     final UserFolderInfo userFolderInfo=(UserFolderInfo)item;
