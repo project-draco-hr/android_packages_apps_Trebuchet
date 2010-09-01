@@ -1,7 +1,6 @@
 {
-  final boolean workspaceLocked=mLauncher.isWorkspaceLocked();
   final boolean allAppsVisible=mLauncher.isAllAppsVisible();
-  if (workspaceLocked || (!LauncherApplication.isScreenXLarge() && allAppsVisible)) {
+  if (!LauncherApplication.isScreenXLarge() && allAppsVisible) {
     return false;
   }
   final int action=ev.getAction();
