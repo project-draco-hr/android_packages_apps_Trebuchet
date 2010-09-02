@@ -1,3 +1,0 @@
-{
-  mFolders.remove(folder.id);
-}

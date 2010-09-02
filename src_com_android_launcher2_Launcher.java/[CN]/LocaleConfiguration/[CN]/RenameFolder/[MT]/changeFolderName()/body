@@ -1,7 +1,7 @@
 {
   final String name=mInput.getText().toString();
   if (!TextUtils.isEmpty(name)) {
-    mFolderInfo=mFolders.get(mFolderInfo.id);
+    mFolderInfo=sFolders.get(mFolderInfo.id);
     mFolderInfo.title=name;
     LauncherModel.updateItemInDatabase(Launcher.this,mFolderInfo);
     if (mWorkspaceLoading) {
