@@ -1,5 +1,6 @@
 {
   super(context,attrs,defStyle);
+  mContext=context;
   final int srcColor=context.getResources().getColor(R.color.delete_color_filter);
   mTrashPaint.setColorFilter(new PorterDuffColorFilter(srcColor,PorterDuff.Mode.SRC_ATOP));
   TypedArray a=context.obtainStyledAttributes(attrs,R.styleable.DeleteZone,defStyle,0);

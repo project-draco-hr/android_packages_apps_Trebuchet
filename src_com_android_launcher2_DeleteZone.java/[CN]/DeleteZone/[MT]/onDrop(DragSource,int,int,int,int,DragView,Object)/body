@@ -2,7 +2,13 @@
   final ItemInfo item=(ItemInfo)dragInfo;
   if (item instanceof ApplicationInfo && LauncherApplication.isScreenXLarge()) {
     ApplicationInfo appInfo=(ApplicationInfo)item;
-    mLauncher.startApplicationUninstallActivity(appInfo.componentName);
+    if ((appInfo.flags & ApplicationInfo.DOWNLOADED_FLAG) != 0) {
+      mLauncher.startApplicationUninstallActivity(appInfo.componentName);
+    }
+ else {
+      int messageId=R.string.uninstall_system_app_text;
+      Toast.makeText(mContext,messageId,Toast.LENGTH_SHORT).show();
+    }
   }
   if (item.container == -1)   return;
   if (item.container == LauncherSettings.Favorites.CONTAINER_DESKTOP) {
