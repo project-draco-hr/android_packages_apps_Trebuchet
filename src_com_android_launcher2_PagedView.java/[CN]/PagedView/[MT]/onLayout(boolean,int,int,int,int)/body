@@ -8,7 +8,8 @@
     final View child=getChildAt(i);
     if (child.getVisibility() != View.GONE) {
       final int childWidth=child.getMeasuredWidth();
-      child.layout(childLeft,0,childLeft + childWidth,child.getMeasuredHeight());
+      final int childHeight=(getMeasuredHeight() - child.getMeasuredHeight()) / 2;
+      child.layout(childLeft,childHeight,childLeft + childWidth,childHeight + child.getMeasuredHeight());
       childLeft+=childWidth;
     }
   }

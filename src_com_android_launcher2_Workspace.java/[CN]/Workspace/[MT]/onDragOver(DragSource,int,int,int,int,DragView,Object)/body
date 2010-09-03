@@ -42,6 +42,8 @@
   }
   if ((!LauncherApplication.isScreenXLarge() || source == this) && mDragTargetLayout != null) {
     final View child=(mDragInfo == null) ? null : mDragInfo.cell;
-    mDragTargetLayout.visualizeDropLocation(child,originX,originY,item.spanX,item.spanY);
+    int localOriginX=originX - (mDragTargetLayout.getLeft() - mScrollX);
+    int localOriginY=originY - (mDragTargetLayout.getTop() - mScrollY);
+    mDragTargetLayout.visualizeDropLocation(child,localOriginX,localOriginY,item.spanX,item.spanY);
   }
 }

@@ -1,7 +1,7 @@
 {
-  if (mDimmedBitmapAlpha > 0.0f) {
-    final Drawable bg=mHover ? mDimmedBitmapBackgroundHover : mDimmedBitmapBackground;
-    bg.setAlpha((int)(mDimmedBitmapAlpha * 255));
+  if (mBackgroundAlpha > 0.0f) {
+    final Drawable bg=mHover ? mBackgroundHover : mBackground;
+    bg.setAlpha((int)(mBackgroundAlpha * 255));
     bg.draw(canvas);
   }
   super.dispatchDraw(canvas);

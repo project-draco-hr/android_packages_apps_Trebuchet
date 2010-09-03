@@ -3,11 +3,5 @@
     mDragRectDrawable.setBounds((int)mDragRect.left,(int)mDragRect.top,(int)mDragRect.right,(int)mDragRect.bottom);
     mDragRectDrawable.draw(canvas);
   }
-  if (mDimmedBitmap != null && mDimmedBitmapAlpha > 0.0f) {
-    if (mDimmedBitmapDirty) {
-      updateDimmedBitmap();
-      mDimmedBitmapDirty=false;
-    }
-    mDimmedBitmapPaint.setAlpha((int)(mDimmedBitmapAlpha * 255));
-  }
+  super.onDraw(canvas);
 }

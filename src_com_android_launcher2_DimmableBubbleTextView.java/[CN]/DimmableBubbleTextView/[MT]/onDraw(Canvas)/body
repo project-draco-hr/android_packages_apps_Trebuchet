@@ -1,0 +1,19 @@
+{
+  if (isDimmedViewUpdatePass) {
+    canvas.save();
+    final float alpha=getAlpha();
+    super.setAlpha(1.0f);
+    super.onDraw(canvas);
+    super.setAlpha(alpha);
+    canvas.restore();
+  }
+ else {
+    if (mAlpha > 0) {
+      super.onDraw(canvas);
+    }
+  }
+  if (mDimmedView != null && mDimmedAlpha > 0) {
+    mDimmedPaint.setAlpha(mDimmedAlpha);
+    canvas.drawBitmap(mDimmedView,mScrollX,mScrollY,mDimmedPaint);
+  }
+}

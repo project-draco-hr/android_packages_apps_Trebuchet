@@ -1,5 +1,7 @@
 {
   mIsSmall=true;
+  mTouchState=TOUCH_STATE_REST;
+  mActivePointerId=INVALID_POINTER;
   final Resources res=getResources();
   final int screenWidth=getWidth();
   final int screenHeight=getHeight();
@@ -27,14 +29,15 @@
     float rotationScaleY=getYScaleForScreen(i);
     if (animated) {
       final int duration=res.getInteger(R.integer.config_workspaceShrinkTime);
-      new ObjectAnimator(duration,cl,new PropertyValuesHolder("x",newX),new PropertyValuesHolder("y",newY),new PropertyValuesHolder("scaleX",SHRINK_FACTOR * rotationScaleX),new PropertyValuesHolder("scaleY",SHRINK_FACTOR * rotationScaleY),new PropertyValuesHolder("dimmedBitmapAlpha",1.0f),new PropertyValuesHolder("rotationY",rotation)).start();
+      new ObjectAnimator<Float>(duration,cl,new PropertyValuesHolder<Float>("x",newX),new PropertyValuesHolder<Float>("y",newY),new PropertyValuesHolder<Float>("scaleX",SHRINK_FACTOR),new PropertyValuesHolder<Float>("scaleY",SHRINK_FACTOR),new PropertyValuesHolder<Float>("backgroundAlpha",1.0f),new PropertyValuesHolder<Float>("alpha",0.0f),new PropertyValuesHolder<Float>("rotationY",rotation)).start();
     }
  else {
       cl.setX((int)newX);
       cl.setY((int)newY);
       cl.setScaleX(SHRINK_FACTOR);
       cl.setScaleY(SHRINK_FACTOR);
-      cl.setDimmedBitmapAlpha(1.0f);
+      cl.setBackgroundAlpha(1.0f);
+      cl.setAlpha(0.0f);
       cl.setRotationY(rotation);
     }
     newX+=scaledPageWidth + extraScaledSpacing;
