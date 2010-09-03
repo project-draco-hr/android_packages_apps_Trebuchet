@@ -28,24 +28,26 @@
       mDirtyPageAlpha=false;
     }
   }
-  final int pageWidth=getChildAt(0).getMeasuredWidth();
   final int pageCount=getChildCount();
-  final int screenWidth=getMeasuredWidth();
-  int x=getRelativeChildOffset(0) + pageWidth;
-  int leftScreen=0;
-  int rightScreen=0;
-  while (x <= mScrollX) {
-    leftScreen++;
-    x+=pageWidth;
-  }
-  rightScreen=leftScreen;
-  while (x < mScrollX + screenWidth) {
-    rightScreen++;
-    x+=pageWidth;
-  }
-  rightScreen=Math.min(getChildCount() - 1,rightScreen);
-  final long drawingTime=getDrawingTime();
-  for (int i=leftScreen; i <= rightScreen; i++) {
-    drawChild(canvas,getChildAt(i),drawingTime);
+  if (pageCount > 0) {
+    final int pageWidth=getChildAt(0).getMeasuredWidth();
+    final int screenWidth=getMeasuredWidth();
+    int x=getRelativeChildOffset(0) + pageWidth;
+    int leftScreen=0;
+    int rightScreen=0;
+    while (x <= mScrollX) {
+      leftScreen++;
+      x+=pageWidth;
+    }
+    rightScreen=leftScreen;
+    while (x < mScrollX + screenWidth) {
+      rightScreen++;
+      x+=pageWidth;
+    }
+    rightScreen=Math.min(getChildCount() - 1,rightScreen);
+    final long drawingTime=getDrawingTime();
+    for (int i=leftScreen; i <= rightScreen; i++) {
+      drawChild(canvas,getChildAt(i),drawingTime);
+    }
   }
 }
