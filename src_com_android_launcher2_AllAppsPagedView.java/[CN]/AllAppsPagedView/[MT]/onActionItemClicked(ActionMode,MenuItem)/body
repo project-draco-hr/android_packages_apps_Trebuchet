@@ -1,3 +1,12 @@
 {
+  final int id=item.getItemId();
+  final View chosenView=(View)getSingleCheckedGrandchild();
+  final ApplicationInfo appInfo=(ApplicationInfo)chosenView.getTag();
+  if (id == MENU_APP_INFO) {
+    mLauncher.startApplicationDetailsActivity(appInfo.componentName);
+  }
+ else   if (id == MENU_DELETE_APP) {
+    mLauncher.startApplicationUninstallActivity(appInfo.componentName);
+  }
   return false;
 }

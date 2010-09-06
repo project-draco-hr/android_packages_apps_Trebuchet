@@ -6,7 +6,7 @@
     final int grandChildCount=layout.getChildCount();
     for (int j=0; j < grandChildCount; ++j) {
       final View v=layout.getChildAt(j);
-      if (v instanceof Checkable) {
+      if (v instanceof Checkable && ((Checkable)v).isChecked()) {
         checked.add((Checkable)v);
       }
     }

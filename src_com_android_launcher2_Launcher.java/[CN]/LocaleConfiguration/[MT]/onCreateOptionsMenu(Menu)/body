@@ -1,5 +1,5 @@
 {
-  if (isWorkspaceLocked()) {
+  if (isWorkspaceLocked() || LauncherApplication.isScreenXLarge()) {
     return false;
   }
   super.onCreateOptionsMenu(menu);

@@ -1,11 +1,18 @@
 {
   if (v instanceof Checkable) {
     if (!isChoiceMode(CHOICE_MODE_NONE)) {
-      if (isChoiceMode(CHOICE_MODE_SINGLE)) {
-        resetCheckedGrandchildren();
-      }
       Checkable c=(Checkable)v;
-      c.toggle();
+      if (isChoiceMode(CHOICE_MODE_SINGLE)) {
+        boolean wasChecked=c.isChecked();
+        resetCheckedGrandchildren();
+        c.setChecked(!wasChecked);
+      }
+ else {
+        c.toggle();
+      }
+      if (getCheckedGrandchildren().size() == 0) {
+        endChoiceMode();
+      }
       return;
     }
   }
