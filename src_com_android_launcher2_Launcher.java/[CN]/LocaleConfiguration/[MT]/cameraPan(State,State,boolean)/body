@@ -16,21 +16,21 @@
     mWorkspace.shrinkToTop(animated);
   }
   if (animated) {
-    Sequencer s=new Sequencer();
-    s.addListener(new AnimatableListenerAdapter(){
-      public void onAnimationStart(      Animatable animation){
+    AnimatorSet s=new AnimatorSet();
+    s.addListener(new AnimatorListenerAdapter(){
+      public void onAnimationStart(      Animator animation){
         toView.setVisibility(View.VISIBLE);
         toView.setY(toViewStartY);
       }
-      public void onAnimationEnd(      Animatable animation){
+      public void onAnimationEnd(      Animator animation){
         fromView.setVisibility(View.GONE);
       }
     }
 );
-    Sequencer toolbarHideAnim=new Sequencer();
-    Sequencer toolbarShowAnim=new Sequencer();
+    AnimatorSet toolbarHideAnim=new AnimatorSet();
+    AnimatorSet toolbarShowAnim=new AnimatorSet();
     hideAndShowToolbarButtons(toState,toolbarShowAnim,toolbarHideAnim);
-    s.playTogether(toolbarHideAnim,new PropertyAnimator(duration,fromView,"y",fromViewStartY,fromViewEndY),new PropertyAnimator(duration,toView,"y",toViewStartY,toViewEndY));
+    s.playTogether(toolbarHideAnim,new ObjectAnimator(duration,fromView,"y",fromViewStartY,fromViewEndY),new ObjectAnimator(duration,toView,"y",toViewStartY,toViewEndY));
     final int fadeInTime=res.getInteger(R.integer.config_toolbarButtonFadeInTime);
     s.play(toolbarShowAnim).after(duration - fadeInTime);
     s.start();

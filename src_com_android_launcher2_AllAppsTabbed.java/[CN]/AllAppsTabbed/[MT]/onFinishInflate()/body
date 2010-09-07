@@ -34,9 +34,9 @@
     public void onTabChanged(    String tabId){
       final int duration=150;
       final float alpha=mAllApps.getAlpha();
-      Animator alphaAnim=new PropertyAnimator(duration,mAllApps,"alpha",alpha,0.0f);
-      alphaAnim.addListener(new AnimatableListenerAdapter(){
-        public void onAnimationEnd(        Animatable animation){
+      ValueAnimator alphaAnim=new ObjectAnimator(duration,mAllApps,"alpha",alpha,0.0f);
+      alphaAnim.addListener(new AnimatorListenerAdapter(){
+        public void onAnimationEnd(        Animator animation){
           String tag=getCurrentTabTag();
           if (tag == TAG_ALL) {
             mAllApps.setAppFilter(AllAppsPagedView.ALL_APPS_FLAG);
@@ -51,7 +51,7 @@
             mAllApps.setAppFilter(ApplicationInfo.DOWNLOADED_FLAG);
           }
           final float alpha=mAllApps.getAlpha();
-          Animator alphaAnim=new PropertyAnimator(duration,mAllApps,"alpha",alpha,1.0f);
+          ValueAnimator alphaAnim=new ObjectAnimator(duration,mAllApps,"alpha",alpha,1.0f);
           alphaAnim.start();
         }
       }

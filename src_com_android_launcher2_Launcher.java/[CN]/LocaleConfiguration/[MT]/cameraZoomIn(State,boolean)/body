@@ -6,19 +6,19 @@
   setPivotsForZoom(fromView,fromState,scaleFactor);
   mWorkspace.unshrink(animated);
   if (animated) {
-    Sequencer s=new Sequencer();
-    Animator scaleAnim=new PropertyAnimator(duration,fromView,new PropertyValuesHolder<Float>("scaleX",scaleFactor),new PropertyValuesHolder<Float>("scaleY",scaleFactor));
+    AnimatorSet s=new AnimatorSet();
+    ValueAnimator scaleAnim=new ObjectAnimator(duration,fromView,new PropertyValuesHolder<Float>("scaleX",scaleFactor),new PropertyValuesHolder<Float>("scaleY",scaleFactor));
     scaleAnim.setInterpolator(new AccelerateInterpolator());
-    s.addListener(new AnimatableListenerAdapter(){
-      public void onAnimationEnd(      Animatable animation){
+    s.addListener(new AnimatorListenerAdapter(){
+      public void onAnimationEnd(      Animator animation){
         fromView.setVisibility(View.GONE);
         fromView.setScaleX(1.0f);
         fromView.setScaleY(1.0f);
       }
     }
 );
-    Sequencer toolbarHideAnim=new Sequencer();
-    Sequencer toolbarShowAnim=new Sequencer();
+    AnimatorSet toolbarHideAnim=new AnimatorSet();
+    AnimatorSet toolbarShowAnim=new AnimatorSet();
     hideAndShowToolbarButtons(State.WORKSPACE,toolbarShowAnim,toolbarHideAnim);
     s.playTogether(scaleAnim,toolbarHideAnim);
     final int fadeInTime=res.getInteger(R.integer.config_toolbarButtonFadeInTime);

@@ -50,9 +50,9 @@
       public void onTabChanged(      String tabId){
         final int duration=150;
         final float alpha=mCustomizePagedView.getAlpha();
-        Animator alphaAnim=new PropertyAnimator(duration,mCustomizePagedView,"alpha",alpha,0.0f);
-        alphaAnim.addListener(new AnimatableListenerAdapter(){
-          public void onAnimationEnd(          Animatable animation){
+        ValueAnimator alphaAnim=new ObjectAnimator(duration,mCustomizePagedView,"alpha",alpha,0.0f);
+        alphaAnim.addListener(new AnimatorListenerAdapter(){
+          public void onAnimationEnd(          Animator animation){
             String tag=mHomeCustomizationDrawer.getCurrentTabTag();
             if (tag == WIDGETS_TAG) {
               mCustomizePagedView.setCustomizationFilter(CustomizePagedView.CustomizationType.WidgetCustomization);
@@ -67,7 +67,7 @@
               mCustomizePagedView.setCustomizationFilter(CustomizePagedView.CustomizationType.WallpaperCustomization);
             }
             final float alpha=mCustomizePagedView.getAlpha();
-            Animator alphaAnim=new PropertyAnimator(duration,mCustomizePagedView,"alpha",alpha,1.0f);
+            ValueAnimator alphaAnim=new ObjectAnimator(duration,mCustomizePagedView,"alpha",alpha,1.0f);
             alphaAnim.start();
           }
         }

@@ -24,7 +24,7 @@
     cl.setPivotY(0.0f);
     if (animated) {
       final int duration=res.getInteger(R.integer.config_workspaceShrinkTime);
-      new PropertyAnimator(duration,cl,new PropertyValuesHolder("x",newX),new PropertyValuesHolder("y",newY),new PropertyValuesHolder("scaleX",SHRINK_FACTOR),new PropertyValuesHolder("scaleY",SHRINK_FACTOR),new PropertyValuesHolder("dimmedBitmapAlpha",1.0f)).start();
+      new ObjectAnimator(duration,cl,new PropertyValuesHolder("x",newX),new PropertyValuesHolder("y",newY),new PropertyValuesHolder("scaleX",SHRINK_FACTOR),new PropertyValuesHolder("scaleY",SHRINK_FACTOR),new PropertyValuesHolder("dimmedBitmapAlpha",1.0f)).start();
     }
  else {
       cl.setX((int)newX);

@@ -1,6 +1,6 @@
 {
   if (mIsSmall) {
-    Sequencer s=new Sequencer();
+    AnimatorSet s=new AnimatorSet();
     final int screenCount=getChildCount();
     final int duration=getResources().getInteger(R.integer.config_workspaceUnshrinkTime);
     for (int i=0; i < screenCount; i++) {
@@ -8,7 +8,7 @@
       cl.setPivotX(0.0f);
       cl.setPivotY(0.0f);
       if (animated) {
-        s.playTogether(new PropertyAnimator<Float>(duration,cl,"translationX",0.0f),new PropertyAnimator<Float>(duration,cl,"translationY",0.0f),new PropertyAnimator<Float>(duration,cl,"scaleX",1.0f),new PropertyAnimator<Float>(duration,cl,"scaleY",1.0f),new PropertyAnimator<Float>(duration,cl,"dimmedBitmapAlpha",0.0f));
+        s.playTogether(new ObjectAnimator<Float>(duration,cl,"translationX",0.0f),new ObjectAnimator<Float>(duration,cl,"translationY",0.0f),new ObjectAnimator<Float>(duration,cl,"scaleX",1.0f),new ObjectAnimator<Float>(duration,cl,"scaleY",1.0f),new ObjectAnimator<Float>(duration,cl,"dimmedBitmapAlpha",0.0f));
       }
  else {
         cl.setTranslationX(0.0f);

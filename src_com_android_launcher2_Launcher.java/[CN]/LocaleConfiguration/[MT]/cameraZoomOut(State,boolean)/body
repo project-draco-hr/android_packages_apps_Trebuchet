@@ -12,21 +12,21 @@
     mWorkspace.shrinkToTop(animated);
   }
   if (animated) {
-    Animator scaleAnim=new PropertyAnimator(duration,toView,new PropertyValuesHolder<Float>("scaleX",scale,1.0f),new PropertyValuesHolder<Float>("scaleY",scale,1.0f));
+    ValueAnimator scaleAnim=new ObjectAnimator(duration,toView,new PropertyValuesHolder<Float>("scaleX",scale,1.0f),new PropertyValuesHolder<Float>("scaleY",scale,1.0f));
     scaleAnim.setInterpolator(new DecelerateInterpolator());
-    scaleAnim.addListener(new AnimatableListenerAdapter(){
-      public void onAnimationStart(      Animatable animation){
+    scaleAnim.addListener(new AnimatorListenerAdapter(){
+      public void onAnimationStart(      Animator animation){
         toView.setTranslationX(0.0f);
         toView.setTranslationY(0.0f);
         toView.setVisibility(View.VISIBLE);
       }
     }
 );
-    Sequencer toolbarHideAnim=new Sequencer();
-    Sequencer toolbarShowAnim=new Sequencer();
+    AnimatorSet toolbarHideAnim=new AnimatorSet();
+    AnimatorSet toolbarShowAnim=new AnimatorSet();
     hideAndShowToolbarButtons(toState,toolbarShowAnim,toolbarHideAnim);
     final int startDelay=res.getInteger(R.integer.config_workspaceShrinkTime) - duration;
-    Sequencer s=new Sequencer();
+    AnimatorSet s=new AnimatorSet();
     s.playTogether(scaleAnim,toolbarHideAnim);
     s.play(scaleAnim).after(startDelay);
     final int fadeInTime=res.getInteger(R.integer.config_toolbarButtonFadeInTime);
