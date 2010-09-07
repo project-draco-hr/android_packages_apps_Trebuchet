@@ -6,7 +6,7 @@
     mLauncher.startApplicationDetailsActivity(appInfo.componentName);
   }
  else   if (id == MENU_DELETE_APP) {
-    mLauncher.startApplicationUninstallActivity(appInfo.componentName);
+    mLauncher.startApplicationUninstallActivity(appInfo);
   }
   return false;
 }

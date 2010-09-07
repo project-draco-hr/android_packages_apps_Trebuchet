@@ -1,6 +1,0 @@
-{
-  String packageName=componentName.getPackageName();
-  String className=componentName.getClassName();
-  Intent intent=new Intent(Intent.ACTION_DELETE,Uri.fromParts("package",packageName,className));
-  startActivity(intent);
-}
