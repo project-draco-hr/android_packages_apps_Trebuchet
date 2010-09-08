@@ -1,4 +1,6 @@
 {
-  mActionMode=startActionMode(callback);
-  mChoiceMode=mode;
+  if (isChoiceMode(CHOICE_MODE_NONE)) {
+    mChoiceMode=mode;
+    mActionMode=startActionMode(callback);
+  }
 }

@@ -1,7 +1,6 @@
 {
   final int id=item.getItemId();
-  final View chosenView=(View)getSingleCheckedGrandchild();
-  final ApplicationInfo appInfo=(ApplicationInfo)chosenView.getTag();
+  final ApplicationInfo appInfo=(ApplicationInfo)getChosenItem();
   if (id == MENU_APP_INFO) {
     mLauncher.startApplicationDetailsActivity(appInfo.componentName);
   }

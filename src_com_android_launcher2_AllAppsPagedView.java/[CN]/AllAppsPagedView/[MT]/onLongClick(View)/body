@@ -2,13 +2,13 @@
   if (!v.isInTouchMode()) {
     return false;
   }
-  if (isChoiceMode(CHOICE_MODE_NONE)) {
-    startChoiceMode(CHOICE_MODE_SINGLE,this);
-  }
   if (v instanceof Checkable) {
     resetCheckedGrandchildren();
     Checkable c=(Checkable)v;
     c.toggle();
+  }
+  if (isChoiceMode(CHOICE_MODE_NONE)) {
+    startChoiceMode(CHOICE_MODE_SINGLE,this);
   }
   ApplicationInfo app=(ApplicationInfo)v.getTag();
   app=new ApplicationInfo(app);
