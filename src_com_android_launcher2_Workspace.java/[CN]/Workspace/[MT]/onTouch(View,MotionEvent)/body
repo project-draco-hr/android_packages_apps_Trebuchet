@@ -1,7 +1,6 @@
 {
   if (mIsSmall) {
-    unshrink((CellLayout)v);
-    mLauncher.onWorkspaceUnshrink();
+    mLauncher.onWorkspaceClick((CellLayout)v);
     return true;
   }
   return false;

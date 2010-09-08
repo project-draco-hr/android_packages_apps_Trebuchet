@@ -1,0 +1,10 @@
+{
+  CellLayout cl=(CellLayout)layout;
+  ItemInfo info=(ItemInfo)dragInfo;
+  final CellLayout.CellInfo cellInfo=cl.updateOccupiedCells(null,null);
+  if (cellInfo.findCellForSpan(mTempEstimate,info.spanX,info.spanY)) {
+    onDropExternal(0,0,dragInfo,cl,false);
+    return true;
+  }
+  return false;
+}

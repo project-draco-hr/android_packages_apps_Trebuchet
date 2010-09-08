@@ -1,9 +1,0 @@
-{
-  final boolean animated=true;
-  if (isAllAppsVisible()) {
-    closeAllApps(animated);
-  }
-  if (isCustomizationDrawerVisible()) {
-    hideCustomizationDrawer(animated);
-  }
-}

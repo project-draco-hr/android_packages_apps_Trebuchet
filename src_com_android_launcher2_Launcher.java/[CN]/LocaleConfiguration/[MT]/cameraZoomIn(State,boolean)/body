@@ -3,6 +3,8 @@
   int duration=res.getInteger(R.integer.config_allAppsZoomOutTime);
   float scaleFactor=(float)res.getInteger(R.integer.config_allAppsZoomScaleFactor);
   final View fromView=(fromState == State.ALL_APPS) ? (View)mAllAppsGrid : mHomeCustomizationDrawer;
+  mCustomizePagedView.endChoiceMode();
+  mAllAppsPagedView.endChoiceMode();
   setPivotsForZoom(fromView,fromState,scaleFactor);
   mWorkspace.unshrink(animated);
   if (animated) {

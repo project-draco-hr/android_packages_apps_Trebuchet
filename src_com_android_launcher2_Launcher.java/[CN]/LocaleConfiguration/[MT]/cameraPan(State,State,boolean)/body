@@ -9,6 +9,8 @@
   final float fromViewEndY=fromAllApps ? -fromView.getHeight() * 2 : workspaceHeight * 2;
   final float toViewStartY=fromAllApps ? workspaceHeight * 2 : -toView.getHeight() * 2;
   final float toViewEndY=fromAllApps ? workspaceHeight - toView.getHeight() : 0.0f;
+  mCustomizePagedView.endChoiceMode();
+  mAllAppsPagedView.endChoiceMode();
   if (toState == State.ALL_APPS) {
     mWorkspace.shrinkToBottom(animated);
   }
