@@ -5,8 +5,6 @@
     mDimmedBitmapCanvas.scale(DIMMED_BITMAP_SCALE,DIMMED_BITMAP_SCALE);
   }
   mDimmedBitmapCanvas.drawColor(0x00000000,PorterDuff.Mode.CLEAR);
-  setChildrenAlpha(1.0f);
   super.dispatchDraw(mDimmedBitmapCanvas);
-  setChildrenAlpha(1.0f - mDimmedBitmapAlpha);
   mDimmedBitmapCanvas.drawColor(Color.argb(160,0,0,0),PorterDuff.Mode.SRC_IN);
 }

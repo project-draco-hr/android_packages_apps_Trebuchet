@@ -3,6 +3,5 @@
     updateDimmedBitmap();
   }
   mDimmedBitmapAlpha=alpha;
-  setChildrenAlpha(1.0f - mDimmedBitmapAlpha);
   invalidate();
 }
