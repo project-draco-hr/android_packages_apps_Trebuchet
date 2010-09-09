@@ -9,6 +9,5 @@
       mDimmedBitmapDirty=false;
     }
     mDimmedBitmapPaint.setAlpha((int)(mDimmedBitmapAlpha * 255));
-    canvas.drawBitmap(mDimmedBitmap,mDimmedBitmapRect,mLayoutRect,mDimmedBitmapPaint);
   }
 }
