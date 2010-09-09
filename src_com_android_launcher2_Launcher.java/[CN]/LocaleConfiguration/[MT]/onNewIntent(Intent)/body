@@ -6,15 +6,10 @@
     boolean allAppsVisible=isAllAppsVisible();
     boolean customizationDrawerVisible=isCustomizationDrawerVisible();
     if (LauncherApplication.isScreenXLarge()) {
-      if (alreadyOnHome && !mWorkspace.isSmall() && !allAppsVisible&& !customizationDrawerVisible) {
-        mWorkspace.shrinkToMiddle();
-      }
- else {
-        mWorkspace.unshrink(alreadyOnHome);
-      }
+      mWorkspace.unshrink(alreadyOnHome);
     }
- else     if (!mWorkspace.isDefaultPageShowing()) {
-      mWorkspace.moveToDefaultScreen(alreadyOnHome && !allAppsVisible);
+    if (!mWorkspace.isDefaultPageShowing()) {
+      mWorkspace.moveToDefaultScreen(alreadyOnHome && (LauncherApplication.isScreenXLarge() || !allAppsVisible));
     }
     closeAllApps(alreadyOnHome && allAppsVisible);
     hideCustomizationDrawer(alreadyOnHome);
