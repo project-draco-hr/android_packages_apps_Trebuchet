@@ -7,9 +7,9 @@
   final int pageHeight=getChildAt(0).getMeasuredHeight();
   final int scaledPageWidth=(int)(SHRINK_FACTOR * pageWidth);
   final int scaledPageHeight=(int)(SHRINK_FACTOR * pageHeight);
-  final float scaledSpacing=res.getDimension(R.dimen.smallScreenSpacing);
+  final float extraScaledSpacing=res.getDimension(R.dimen.smallScreenExtraSpacing);
   final int screenCount=getChildCount();
-  float totalWidth=screenCount * scaledPageWidth + (screenCount - 1) * scaledSpacing;
+  float totalWidth=screenCount * scaledPageWidth + (screenCount - 1) * extraScaledSpacing;
   float newY=getResources().getDimension(R.dimen.smallScreenVerticalMargin);
   if (shrinkPosition == ShrinkPosition.SHRINK_TO_BOTTOM) {
     newY=screenHeight - newY - scaledPageHeight;
@@ -18,13 +18,16 @@
     newY=screenHeight / 2 - scaledPageHeight / 2;
   }
   float newX=mScroller.getFinalX() + screenWidth / 2 - totalWidth / 2;
+  newX-=(pageWidth - scaledPageWidth) / 2.0f;
+  newY-=(pageHeight - scaledPageHeight) / 2.0f;
   for (int i=0; i < screenCount; i++) {
     CellLayout cl=(CellLayout)getChildAt(i);
-    cl.setPivotX(0.0f);
-    cl.setPivotY(0.0f);
+    float rotation=(-i + 2) * MINI_PAGE_MAX_ROTATION / 2.0f;
+    float rotationScaleX=(float)(1.0f / Math.cos(Math.PI * rotation / 180.0f));
+    float rotationScaleY=getYScaleForScreen(i);
     if (animated) {
       final int duration=res.getInteger(R.integer.config_workspaceShrinkTime);
-      new ObjectAnimator(duration,cl,new PropertyValuesHolder("x",newX),new PropertyValuesHolder("y",newY),new PropertyValuesHolder("scaleX",SHRINK_FACTOR),new PropertyValuesHolder("scaleY",SHRINK_FACTOR),new PropertyValuesHolder("dimmedBitmapAlpha",1.0f)).start();
+      new ObjectAnimator(duration,cl,new PropertyValuesHolder("x",newX),new PropertyValuesHolder("y",newY),new PropertyValuesHolder("scaleX",SHRINK_FACTOR * rotationScaleX),new PropertyValuesHolder("scaleY",SHRINK_FACTOR * rotationScaleY),new PropertyValuesHolder("dimmedBitmapAlpha",1.0f),new PropertyValuesHolder("rotationY",rotation)).start();
     }
  else {
       cl.setX((int)newX);
@@ -32,8 +35,9 @@
       cl.setScaleX(SHRINK_FACTOR);
       cl.setScaleY(SHRINK_FACTOR);
       cl.setDimmedBitmapAlpha(1.0f);
+      cl.setRotationY(rotation);
     }
-    newX+=scaledPageWidth + scaledSpacing;
+    newX+=scaledPageWidth + extraScaledSpacing;
     cl.setOnInterceptTouchListener(this);
   }
   setChildrenDrawnWithCacheEnabled(true);
