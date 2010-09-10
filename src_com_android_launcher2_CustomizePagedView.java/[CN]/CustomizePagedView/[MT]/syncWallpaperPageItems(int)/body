@@ -3,5 +3,6 @@
   layout.removeAllViews();
   TextView text=(TextView)mInflater.inflate(R.layout.customize_paged_view_wallpaper_placeholder,layout,false);
   text.setText("Wallpaper customization coming soon!");
+  setupPage(layout);
   layout.addViewToCellLayout(text,-1,0,new PagedViewCellLayout.LayoutParams(0,0,3,1));
 }

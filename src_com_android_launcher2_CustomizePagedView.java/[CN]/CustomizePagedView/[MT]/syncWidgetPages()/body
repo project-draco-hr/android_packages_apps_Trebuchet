@@ -1,14 +1,15 @@
 {
   if (mWidgetList == null)   return;
+  removeAllViews();
   int numPages=relayoutWidgets();
-  int curNumPages=getChildCount();
-  int extraPageDiff=curNumPages - numPages;
-  for (int i=0; i < extraPageDiff; ++i) {
-    removeViewAt(numPages);
-  }
-  for (int i=curNumPages; i < numPages; ++i) {
-    PagedViewCellLayout layout=new PagedViewCellLayout(getContext());
-    setupPage(layout);
-    addView(layout);
+  for (int i=0; i < numPages; ++i) {
+    LinearLayout layout=new WidgetLayout(getContext());
+    layout.setGravity(Gravity.CENTER_HORIZONTAL);
+    if (i < numPages - 1) {
+      addView(layout,new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.MATCH_PARENT));
+    }
+ else {
+      addView(layout,new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.MATCH_PARENT));
+    }
   }
 }

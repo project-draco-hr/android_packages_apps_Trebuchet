@@ -1,3 +1,0 @@
-{
-  return new int[]{(cellHSpan * mCellWidth),(cellVSpan * mCellHeight)};
-}

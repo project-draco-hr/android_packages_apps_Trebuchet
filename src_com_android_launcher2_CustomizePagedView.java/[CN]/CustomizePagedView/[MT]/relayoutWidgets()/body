@@ -1,40 +1,21 @@
 {
-  final int widgetCount=mWidgetList.size();
-  if (widgetCount == 0)   return 0;
+  if (mWidgetList.isEmpty())   return 0;
+  ArrayList<AppWidgetProviderInfo> newPage=new ArrayList<AppWidgetProviderInfo>();
   mWidgetPages.clear();
-  ArrayList<PagedViewCellLayout.LayoutParams> page=new ArrayList<PagedViewCellLayout.LayoutParams>();
-  mWidgetPages.add(page);
-  int rowOffsetX=0;
-  int rowOffsetY=0;
-  int curRowHeight=0;
+  mWidgetPages.add(newPage);
+  final int maxNumCellsPerRow=mMaxWidgetsCellHSpan;
+  final int widgetCount=mWidgetList.size();
+  int numCellsInRow=0;
   for (int i=0; i < widgetCount; ++i) {
-    AppWidgetProviderInfo info=mWidgetList.get(i);
-    PagedViewCellLayout.LayoutParams params;
-    final int cellSpanX=mTmpWidgetLayout.estimateCellHSpan(info.minWidth);
-    final int cellSpanY=mTmpWidgetLayout.estimateCellVSpan(info.minHeight);
-    if (((rowOffsetX + cellSpanX) <= mCellCountX) && ((rowOffsetY + cellSpanY) <= mCellCountY)) {
-      params=new PagedViewCellLayout.LayoutParams(rowOffsetX,rowOffsetY,cellSpanX,cellSpanY);
-      rowOffsetX+=cellSpanX;
-      curRowHeight=Math.max(curRowHeight,cellSpanY);
+    final AppWidgetProviderInfo info=mWidgetList.get(i);
+    int cellSpanX=Math.max(sMinWidgetCellHSpan,Math.min(sMaxWidgetCellHSpan,mWorkspaceWidgetLayout.estimateCellHSpan(info.minWidth)));
+    if ((numCellsInRow + cellSpanX) > maxNumCellsPerRow) {
+      numCellsInRow=0;
+      newPage=new ArrayList<AppWidgetProviderInfo>();
+      mWidgetPages.add(newPage);
     }
- else {
-      if ((rowOffsetY + curRowHeight + cellSpanY) > mCellCountY) {
-        page=new ArrayList<PagedViewCellLayout.LayoutParams>();
-        mWidgetPages.add(page);
-        params=new PagedViewCellLayout.LayoutParams(0,0,cellSpanX,cellSpanY);
-        rowOffsetX=cellSpanX;
-        rowOffsetY=0;
-        curRowHeight=cellSpanY;
-      }
- else {
-        params=new PagedViewCellLayout.LayoutParams(0,rowOffsetY + curRowHeight,cellSpanX,cellSpanY);
-        rowOffsetX=cellSpanX;
-        rowOffsetY+=curRowHeight;
-        curRowHeight=cellSpanY;
-      }
-    }
-    params.setTag(info);
-    page.add(params);
+    newPage.add(info);
+    numCellsInRow+=cellSpanX;
   }
   return mWidgetPages.size();
 }

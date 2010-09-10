@@ -1,33 +1,5 @@
 {
-  if (mFadeInAdjacentScreens) {
-    if (mDirtyPageAlpha || (mTouchState == TOUCH_STATE_SCROLLING) || !mScroller.isFinished()) {
-      int screenCenter=mScrollX + (getMeasuredWidth() / 2);
-      final int childCount=getChildCount();
-      for (int i=0; i < childCount; ++i) {
-        View layout=(View)getChildAt(i);
-        int childWidth=layout.getMeasuredWidth();
-        int halfChildWidth=(childWidth / 2);
-        int childCenter=getChildOffset(i) + halfChildWidth;
-        int distanceFromScreenCenter=Math.abs(childCenter - screenCenter);
-        float alpha=0.0f;
-        if (distanceFromScreenCenter < halfChildWidth) {
-          alpha=1.0f;
-        }
- else         if (distanceFromScreenCenter > childWidth) {
-          alpha=0.0f;
-        }
- else {
-          float dimAlpha=(float)(distanceFromScreenCenter - halfChildWidth) / halfChildWidth;
-          dimAlpha=Math.max(0.0f,Math.min(1.0f,(dimAlpha * dimAlpha)));
-          alpha=1.0f - dimAlpha;
-        }
-        if (Float.compare(alpha,layout.getAlpha()) != 0) {
-          layout.setAlpha(alpha);
-        }
-      }
-      mDirtyPageAlpha=false;
-    }
-  }
+  updateAdjacentPagesAlpha();
   final int pageCount=getChildCount();
   if (pageCount > 0) {
     final int pageWidth=getChildAt(0).getMeasuredWidth();

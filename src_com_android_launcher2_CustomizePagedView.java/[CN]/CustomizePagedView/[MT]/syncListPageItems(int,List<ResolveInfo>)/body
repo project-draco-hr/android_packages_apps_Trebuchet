@@ -1,5 +1,5 @@
 {
-  int numCells=mCellCountX * mCellCountY;
+  int numCells=sCellCountX * sCellCountY;
   int startIndex=page * numCells;
   int endIndex=Math.min(startIndex + numCells,list.size());
   PagedViewCellLayout layout=(PagedViewCellLayout)getChildAt(page);
@@ -10,8 +10,9 @@
     icon.applyFromResolveInfo(info,mPackageManager,mPageViewIconCache);
     icon.setOnLongClickListener(this);
     final int index=i - startIndex;
-    final int x=index % mCellCountX;
-    final int y=index / mCellCountX;
+    final int x=index % sCellCountX;
+    final int y=index / sCellCountX;
+    setupPage(layout);
     layout.addViewToCellLayout(icon,-1,i,new PagedViewCellLayout.LayoutParams(x,y,1,1));
   }
 }

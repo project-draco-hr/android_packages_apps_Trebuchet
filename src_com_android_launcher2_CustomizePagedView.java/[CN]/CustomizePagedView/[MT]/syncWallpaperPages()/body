@@ -1,11 +1,7 @@
 {
+  removeAllViews();
   int numPages=1;
-  int curNumPages=getChildCount();
-  int extraPageDiff=curNumPages - numPages;
-  for (int i=0; i < extraPageDiff; ++i) {
-    removeViewAt(numPages);
-  }
-  for (int i=curNumPages; i < numPages; ++i) {
+  for (int i=0; i < numPages; ++i) {
     PagedViewCellLayout layout=new PagedViewCellLayout(getContext());
     setupPage(layout);
     addView(layout);

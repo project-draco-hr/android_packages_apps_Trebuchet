@@ -31,12 +31,12 @@ case MotionEvent.ACTION_DOWN:
     }
     if ((mTouchState != TOUCH_STATE_PREV_PAGE) && (mTouchState != TOUCH_STATE_NEXT_PAGE)) {
       if (getChildCount() > 0) {
-        int relativeChildLeft=getChildOffset(0);
-        int relativeChildRight=relativeChildLeft + getChildAt(0).getMeasuredWidth();
-        if (x < relativeChildLeft) {
+        int width=getMeasuredWidth();
+        int offset=getRelativeChildOffset(mCurrentPage);
+        if (x < offset) {
           mTouchState=TOUCH_STATE_PREV_PAGE;
         }
- else         if (x > relativeChildRight) {
+ else         if (x > (width - offset)) {
           mTouchState=TOUCH_STATE_NEXT_PAGE;
         }
       }
