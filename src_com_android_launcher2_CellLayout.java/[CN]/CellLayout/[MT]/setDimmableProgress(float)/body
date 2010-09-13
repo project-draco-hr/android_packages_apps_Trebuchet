@@ -1,0 +1,6 @@
+{
+  for (int i=0; i < getChildCount(); i++) {
+    Dimmable d=(Dimmable)getChildAt(i);
+    d.setDimmableProgress(progress);
+  }
+}

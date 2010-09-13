@@ -1,0 +1,3 @@
+{
+  return (float)(1.0f / Math.cos(Math.PI * degrees / 180.0f));
+}

@@ -4,10 +4,12 @@
   mVacantDrawable=getResources().getDrawable(R.drawable.rounded_rect_green);
   mOccupiedDrawable=getResources().getDrawable(R.drawable.rounded_rect_red);
   if (LauncherApplication.isScreenXLarge()) {
-    mBackground=getResources().getDrawable(R.drawable.mini_home_screen_bg);
+    mBackgroundMini=getResources().getDrawable(R.drawable.mini_home_screen_bg);
+    mBackgroundMini.setFilterBitmap(true);
+    mBackground=getResources().getDrawable(R.drawable.home_screen_bg);
     mBackground.setFilterBitmap(true);
-    mBackgroundHover=getResources().getDrawable(R.drawable.mini_home_screen_bg_hover);
-    mBackgroundHover.setFilterBitmap(true);
+    mBackgroundMiniHover=getResources().getDrawable(R.drawable.mini_home_screen_bg_hover);
+    mBackgroundMiniHover.setFilterBitmap(true);
   }
   TypedArray a=context.obtainStyledAttributes(attrs,R.styleable.CellLayout,defStyle,0);
   mCellWidth=a.getDimensionPixelSize(R.styleable.CellLayout_cellWidth,10);
