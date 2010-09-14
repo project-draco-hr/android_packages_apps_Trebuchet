@@ -1,0 +1,6 @@
+{
+  if (mIsSmall) {
+    return false;
+  }
+  return super.onInterceptTouchEvent(ev);
+}

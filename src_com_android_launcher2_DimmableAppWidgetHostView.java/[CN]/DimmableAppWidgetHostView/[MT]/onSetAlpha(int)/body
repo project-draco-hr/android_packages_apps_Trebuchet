@@ -1,0 +1,4 @@
+{
+  super.onSetAlpha(alpha);
+  return true;
+}

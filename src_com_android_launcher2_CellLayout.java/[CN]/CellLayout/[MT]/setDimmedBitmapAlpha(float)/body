@@ -1,7 +1,0 @@
-{
-  if (mDimmedBitmapAlpha == 0.0f && alpha > 0.0f) {
-    updateDimmedBitmap();
-  }
-  mDimmedBitmapAlpha=alpha;
-  invalidate();
-}

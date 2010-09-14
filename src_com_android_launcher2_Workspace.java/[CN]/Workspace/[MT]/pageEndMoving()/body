@@ -1,3 +1,5 @@
 {
-  clearChildrenCache();
+  if (!LauncherApplication.isScreenXLarge()) {
+    clearChildrenCache();
+  }
 }

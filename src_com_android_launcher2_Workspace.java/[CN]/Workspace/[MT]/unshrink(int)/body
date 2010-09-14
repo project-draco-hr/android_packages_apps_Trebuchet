@@ -1,6 +1,7 @@
 {
   if (mIsSmall) {
-    int delta=(newCurrentPage - mCurrentPage) * getWidth();
+    int newX=getChildOffset(newCurrentPage) - getRelativeChildOffset(newCurrentPage);
+    int delta=newX - mScrollX;
     final int screenCount=getChildCount();
     for (int i=0; i < screenCount; i++) {
       CellLayout cl=(CellLayout)getChildAt(i);

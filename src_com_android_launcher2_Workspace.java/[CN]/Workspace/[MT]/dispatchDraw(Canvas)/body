@@ -4,9 +4,6 @@
     final long drawingTime=getDrawingTime();
     for (int i=0; i < pageCount; i++) {
       final View page=(View)getChildAt(i);
-      if (page.getAlpha() != 1.0f) {
-        page.setAlpha(1.0f);
-      }
       drawChild(canvas,page,drawingTime);
     }
   }

@@ -1,0 +1,8 @@
+{
+  if (getChildCount() > 0) {
+    final View child=getChildAt(0);
+    if (child.getAlpha() != alpha) {
+      getChildAt(0).setAlpha(alpha);
+    }
+  }
+}
