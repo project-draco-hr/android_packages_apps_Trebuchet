@@ -32,11 +32,4 @@
     child.measure(childWidthMeasureSpec,childHeightMeasureSpec);
   }
   setMeasuredDimension(widthSize,heightSize);
-  if (mFirstLayout && mCurrentPage >= 0 && mCurrentPage < getChildCount()) {
-    setHorizontalScrollBarEnabled(false);
-    scrollTo(getChildOffset(mCurrentPage) - getRelativeChildOffset(mCurrentPage),0);
-    mScroller.setFinalX(getChildOffset(mCurrentPage) - getRelativeChildOffset(mCurrentPage));
-    setHorizontalScrollBarEnabled(true);
-    mFirstLayout=false;
-  }
 }
