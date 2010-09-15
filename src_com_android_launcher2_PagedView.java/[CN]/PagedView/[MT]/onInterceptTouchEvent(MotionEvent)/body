@@ -6,8 +6,10 @@
 switch (action & MotionEvent.ACTION_MASK) {
 case MotionEvent.ACTION_MOVE:
 {
-      determineScrollingStart(ev);
-      break;
+      if (mActivePointerId != INVALID_POINTER) {
+        determineScrollingStart(ev);
+        break;
+      }
     }
 case MotionEvent.ACTION_DOWN:
 {
