@@ -1,12 +1,3 @@
 {
-  super(context,attrs);
-  mCellCountX=8;
-  mCellCountY=4;
-  mCustomizationType=CustomizationType.WidgetCustomization;
-  mWidgetPages=new ArrayList<ArrayList<PagedViewCellLayout.LayoutParams>>();
-  mTmpWidgetLayout=new PagedViewCellLayout(context);
-  mInflater=LayoutInflater.from(context);
-  setupPage(mTmpWidgetLayout);
-  setVisibility(View.GONE);
-  setSoundEffectsEnabled(false);
+  this(context,attrs,0);
 }

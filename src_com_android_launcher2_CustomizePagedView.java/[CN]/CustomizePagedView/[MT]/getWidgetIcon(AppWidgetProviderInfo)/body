@@ -13,9 +13,10 @@
   }
   if (drawable == null) {
     Resources resources=mLauncher.getResources();
-    int[] dims=mTmpWidgetLayout.estimateCellDimensions(getMeasuredWidth(),getMeasuredHeight(),params.cellHSpan,params.cellVSpan);
-    final int width=dims[0];
-    final int height=dims[1] - 35;
+    final int minDim=mWorkspaceWidgetLayout.estimateCellWidth(1);
+    final int maxDim=mWorkspaceWidgetLayout.estimateCellWidth(3);
+    int width=(int)(Math.max(minDim,Math.min(maxDim,info.minWidth)) * sScaleFactor);
+    int height=(int)(Math.max(minDim,Math.min(maxDim,info.minHeight)) * sScaleFactor);
     Bitmap bitmap=Bitmap.createBitmap(width,height,Config.ARGB_8888);
     mCanvas.setBitmap(bitmap);
     mCanvas.clipRect(0,0,width,height,Op.REPLACE);
@@ -25,17 +26,16 @@
     try {
       Rect tmpRect=new Rect();
       Drawable icon=null;
-      if (info.icon != 0) {
+      if (info.icon > 0) {
         icon=packageManager.getDrawable(packageName,info.icon,null);
       }
  else {
         icon=resources.getDrawable(R.drawable.ic_launcher_application);
       }
       background.getPadding(tmpRect);
-      final int iconSize=Math.min(Math.min(icon.getIntrinsicWidth(),width - tmpRect.left - tmpRect.right),Math.min(icon.getIntrinsicHeight(),height - tmpRect.top - tmpRect.bottom));
-      final int left=(width / 2) - (iconSize / 2);
-      final int top=(height / 2) - (iconSize / 2);
-      icon.setBounds(new Rect(left,top,left + iconSize,top + iconSize));
+      final int iconSize=minDim / 2;
+      final int offset=iconSize / 4;
+      icon.setBounds(new Rect(offset,offset,offset + iconSize,offset + iconSize));
       icon.draw(mCanvas);
     }
  catch (    Resources.NotFoundException e) {

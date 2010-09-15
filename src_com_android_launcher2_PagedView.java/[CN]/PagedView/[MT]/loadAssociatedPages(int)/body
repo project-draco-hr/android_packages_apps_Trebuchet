@@ -2,8 +2,8 @@
   if (mContentIsRefreshable) {
     final int count=getChildCount();
     if (page < count) {
-      int lowerPageBound=Math.max(0,page - 1);
-      int upperPageBound=Math.min(page + 1,count - 1);
+      int lowerPageBound=getAssociatedLowerPageBound(page);
+      int upperPageBound=getAssociatedUpperPageBound(page);
       for (int i=0; i < count; ++i) {
         final ViewGroup layout=(ViewGroup)getChildAt(i);
         final int childCount=layout.getChildCount();
