@@ -1,9 +1,0 @@
-{
-  removeAllViews();
-  int numPages=1;
-  for (int i=0; i < numPages; ++i) {
-    PagedViewCellLayout layout=new PagedViewCellLayout(getContext());
-    setupPage(layout);
-    addView(layout);
-  }
-}

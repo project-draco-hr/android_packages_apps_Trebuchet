@@ -10,7 +10,7 @@ case ShortcutCustomization:
 syncListPageItems(page,mShortcutList);
 break;
 case WallpaperCustomization:
-syncWallpaperPageItems(page);
+syncListPageItems(page,mWallpaperList);
 break;
 }
 }

@@ -24,6 +24,9 @@
   Intent shortcutsIntent=new Intent(Intent.ACTION_CREATE_SHORTCUT);
   mShortcutList=mPackageManager.queryIntentActivities(shortcutsIntent,0);
   Collections.sort(mShortcutList,resolveInfoComparator);
+  Intent wallpapersIntent=new Intent(Intent.ACTION_SET_WALLPAPER);
+  mWallpaperList=mPackageManager.queryIntentActivities(wallpapersIntent,0);
+  Collections.sort(mWallpaperList,resolveInfoComparator);
   mPageViewIconCache.clear();
   invalidatePageData();
 }

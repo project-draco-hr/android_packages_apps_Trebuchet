@@ -13,7 +13,7 @@ syncListPages(mShortcutList);
 centerPagedViewCellLayouts=true;
 break;
 case WallpaperCustomization:
-syncWallpaperPages();
+syncListPages(mWallpaperList);
 centerPagedViewCellLayouts=true;
 break;
 default :

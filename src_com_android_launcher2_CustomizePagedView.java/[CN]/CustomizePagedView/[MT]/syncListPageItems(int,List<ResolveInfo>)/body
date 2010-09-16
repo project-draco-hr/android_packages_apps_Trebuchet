@@ -8,7 +8,12 @@
     ResolveInfo info=list.get(i);
     PagedViewIcon icon=(PagedViewIcon)mInflater.inflate(R.layout.customize_paged_view_item,layout,false);
     icon.applyFromResolveInfo(info,mPackageManager,mPageViewIconCache);
-    icon.setOnLongClickListener(this);
+    if (mCustomizationType == CustomizationType.WallpaperCustomization) {
+      icon.setOnClickListener(this);
+    }
+ else {
+      icon.setOnLongClickListener(this);
+    }
     final int index=i - startIndex;
     final int x=index % sCellCountX;
     final int y=index / sCellCountX;
