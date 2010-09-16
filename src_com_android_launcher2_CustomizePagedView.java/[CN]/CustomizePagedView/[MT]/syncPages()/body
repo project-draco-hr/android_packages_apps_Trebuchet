@@ -1,16 +1,20 @@
 {
+  boolean centerPagedViewCellLayouts=false;
 switch (mCustomizationType) {
 case WidgetCustomization:
     syncWidgetPages();
   break;
 case FolderCustomization:
 syncListPages(mFolderList);
+centerPagedViewCellLayouts=true;
 break;
 case ShortcutCustomization:
 syncListPages(mShortcutList);
+centerPagedViewCellLayouts=true;
 break;
 case WallpaperCustomization:
-syncWallpaperPages();
+syncListPages(mWallpaperList);
+centerPagedViewCellLayouts=true;
 break;
 default :
 removeAllViews();
@@ -18,6 +22,7 @@ setCurrentPage(0);
 break;
 }
 final int childCount=getChildCount();
+if (centerPagedViewCellLayouts) {
 if (childCount == 1) {
 PagedViewCellLayout layout=(PagedViewCellLayout)getChildAt(0);
 layout.enableCenteredContent(true);
@@ -26,6 +31,7 @@ layout.enableCenteredContent(true);
 for (int i=0; i < childCount; ++i) {
 PagedViewCellLayout layout=(PagedViewCellLayout)getChildAt(i);
 layout.enableCenteredContent(false);
+}
 }
 }
 setCurrentPage(Math.max(0,Math.min(childCount - 1,getCurrentPage())));

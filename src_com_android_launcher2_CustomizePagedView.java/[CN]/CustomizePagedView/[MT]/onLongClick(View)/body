@@ -5,22 +5,17 @@
   final View animView=v;
 switch (mCustomizationType) {
 case WidgetCustomization:
-    final TextView textView=(TextView)animView;
-  final Drawable[] drawables=textView.getCompoundDrawables();
-final Drawable icon=drawables[1];
-int dragPointOffsetX=0;
-int dragPointOffsetY=0;
-Rect bounds=null;
-if (icon != null) {
-bounds=icon.getBounds();
-bounds.left=(v.getWidth() - bounds.right) / 2;
-bounds.right+=bounds.left;
-}
+    final LinearLayout l=(LinearLayout)animView;
+  final Drawable icon=((ImageView)l.findViewById(R.id.icon)).getDrawable();
+Bitmap b=Bitmap.createBitmap(icon.getIntrinsicWidth(),icon.getIntrinsicHeight(),Bitmap.Config.ARGB_8888);
+Canvas c=new Canvas(b);
+icon.draw(c);
 AppWidgetProviderInfo appWidgetInfo=(AppWidgetProviderInfo)v.getTag();
 LauncherAppWidgetInfo dragInfo=new LauncherAppWidgetInfo(appWidgetInfo.provider);
 dragInfo.minWidth=appWidgetInfo.minWidth;
 dragInfo.minHeight=appWidgetInfo.minHeight;
-mDragController.startDrag(v,this,dragInfo,DragController.DRAG_ACTION_COPY,bounds);
+mDragController.startDrag(v,b,this,dragInfo,DragController.DRAG_ACTION_COPY,null);
+b.recycle();
 return true;
 case FolderCustomization:
 animateClickFeedback(v,new Runnable(){
