@@ -1,0 +1,3 @@
+{
+  startActivityForResult(intent,REQUEST_PICK_WALLPAPER);
+}
