@@ -2,7 +2,7 @@
   mRes=res;
   mWidth=width;
   mHeight=height;
-  mScript=new ScriptC_Allapps(sRS,mRes,R.raw.allapps,true);
+  mScript=new ScriptC_allapps(sRS,mRes,R.raw.allapps,true);
   initProgramVertex();
   initProgramFragment();
   initProgramStore();
