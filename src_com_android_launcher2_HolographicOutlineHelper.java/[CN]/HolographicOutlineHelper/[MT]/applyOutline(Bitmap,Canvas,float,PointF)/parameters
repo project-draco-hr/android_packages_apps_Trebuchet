@@ -1,4 +1,0 @@
-Bitmap srcDst
-Canvas srcDstCanvas
-float strokeWidth
-PointF offset
