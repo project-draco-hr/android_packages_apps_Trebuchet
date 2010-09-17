@@ -1,0 +1,8 @@
+{
+  resetAddInfo();
+  mAddScreen=screen;
+  mAddDropPosition=position;
+  Intent createShortcutIntent=new Intent(Intent.ACTION_CREATE_SHORTCUT);
+  createShortcutIntent.setComponent(componentName);
+  processShortcut(createShortcutIntent);
+}

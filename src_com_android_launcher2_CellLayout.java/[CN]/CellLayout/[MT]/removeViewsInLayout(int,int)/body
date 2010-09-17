@@ -1,0 +1,6 @@
+{
+  for (int i=start; i < start + count; i++) {
+    markCellsAsUnoccupiedForView(getChildAt(i));
+  }
+  super.removeViewsInLayout(start,count);
+}

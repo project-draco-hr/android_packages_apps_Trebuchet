@@ -1,4 +1,7 @@
 {
+  if (mIsSmall) {
+    return null;
+  }
   ItemInfo item=(ItemInfo)dragInfo;
   CellLayout currentLayout=getCurrentDropLayout();
   int dragPointX, dragPointY;
@@ -10,9 +13,9 @@
     dragPointX=x;
     dragPointY=y;
   }
+  dragPointX+=mScrollX - currentLayout.getLeft();
+  dragPointY+=mScrollY - currentLayout.getTop();
   final int[] cellXY=mTempCell;
-  int localDragPointX=dragPointX - (currentLayout.getLeft() - mScrollX);
-  int localDragPointY=dragPointY - (currentLayout.getTop() - mScrollY);
   currentLayout.estimateDropCell(dragPointX,dragPointY,item.spanX,item.spanY,cellXY);
   View child=currentLayout.getChildAt(cellXY[0],cellXY[1]);
   if (child instanceof DropTarget) {

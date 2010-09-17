@@ -1,8 +1,3 @@
 {
-  for (int i=0; i < spanY; i++) {
-    if (!isRowEmpty(originY + i,originX,originX + spanX - 1,mOccupied)) {
-      return false;
-    }
-  }
-  return true;
+  return isVacantIgnoring(originX,originY,spanX,spanY,null);
 }

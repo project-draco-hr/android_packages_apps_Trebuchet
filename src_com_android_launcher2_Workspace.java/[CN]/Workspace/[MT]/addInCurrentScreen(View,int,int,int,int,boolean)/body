@@ -1,3 +1,0 @@
-{
-  addInScreen(child,mCurrentPage,x,y,spanX,spanY,insert);
-}

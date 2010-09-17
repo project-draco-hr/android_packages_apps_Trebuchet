@@ -1,6 +1,23 @@
 {
+  CellLayout currentLayout;
+  int originX=x - xOffset;
+  int originY=y - yOffset;
+  if (mIsSmall) {
+    currentLayout=findMatchingPageForDragOver(dragView,originX,originY);
+    if (currentLayout == null) {
+      return;
+    }
+    currentLayout.setHover(true);
+    mTempOriginXY[0]=originX;
+    mTempOriginXY[1]=originY;
+    mapPointGlobalToLocal(currentLayout,mTempOriginXY);
+    originX=(int)mTempOriginXY[0];
+    originY=(int)mTempOriginXY[1];
+  }
+ else {
+    currentLayout=getCurrentDropLayout();
+  }
   final ItemInfo item=(ItemInfo)dragInfo;
-  CellLayout currentLayout=getCurrentDropLayout();
   if (dragInfo instanceof LauncherAppWidgetInfo) {
     LauncherAppWidgetInfo widgetInfo=(LauncherAppWidgetInfo)dragInfo;
     if (widgetInfo.spanX == -1) {
@@ -8,22 +25,6 @@
       item.spanX=spans[0];
       item.spanY=spans[1];
     }
-  }
-  int originX=x - xOffset;
-  int originY=y - yOffset;
-  if (mIsSmall) {
-    final float[] localXY=mTempDragCoordinates;
-    localXY[0]=originX;
-    localXY[1]=originY;
-    final float[] localBottomRightXY=mTempDragBottomRightCoordinates;
-    localBottomRightXY[0]=originX + dragView.getDragRegionWidth();
-    localBottomRightXY[1]=originY + dragView.getDragRegionHeight();
-    currentLayout=findMatchingPageForDragOver(localXY,localBottomRightXY);
-    if (currentLayout != null) {
-      currentLayout.setHover(true);
-    }
-    originX=(int)localXY[0];
-    originY=(int)localXY[1];
   }
   if (source != this) {
     if (item != null && item.spanX == 1 && currentLayout != null) {
@@ -36,7 +37,7 @@
   }
   if (currentLayout != mDragTargetLayout) {
     if (mDragTargetLayout != null) {
-      mDragTargetLayout.onDragComplete();
+      mDragTargetLayout.onDragExit();
     }
     mDragTargetLayout=currentLayout;
   }
@@ -44,6 +45,6 @@
     final View child=(mDragInfo == null) ? null : mDragInfo.cell;
     int localOriginX=originX - (mDragTargetLayout.getLeft() - mScrollX);
     int localOriginY=originY - (mDragTargetLayout.getTop() - mScrollY);
-    mDragTargetLayout.visualizeDropLocation(child,localOriginX,localOriginY,item.spanX,item.spanY);
+    mDragTargetLayout.visualizeDropLocation(child,localOriginX,localOriginY,item.spanX,item.spanY,child);
   }
 }

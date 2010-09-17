@@ -1,0 +1,50 @@
+{
+  float x=originX + dragView.getScaledDragRegionXOffset();
+  float y=originY + dragView.getScaledDragRegionYOffset();
+  float right=x + dragView.getScaledDragRegionWidth();
+  float bottom=y + dragView.getScaledDragRegionHeight();
+  final int screenCount=getChildCount();
+  CellLayout bestMatchingScreen=null;
+  float smallestDistSoFar=Float.MAX_VALUE;
+  final float[] xy=mTempDragCoordinates;
+  final float[] bottomRightXy=mTempDragBottomRightCoordinates;
+  for (int i=0; i < screenCount; i++) {
+    CellLayout cl=(CellLayout)getChildAt(i);
+    float left=cl.getLeft();
+    float top=cl.getTop();
+    xy[0]=x + mScrollX - left;
+    xy[1]=y + mScrollY - top;
+    bottomRightXy[0]=right + mScrollX - left;
+    bottomRightXy[1]=bottom + mScrollY - top;
+    cl.getMatrix().invert(mTempInverseMatrix);
+    mTempInverseMatrix.mapPoints(xy);
+    mTempInverseMatrix.mapPoints(bottomRightXy);
+    float dragRegionX=xy[0];
+    float dragRegionY=xy[1];
+    float dragRegionRight=bottomRightXy[0];
+    float dragRegionBottom=bottomRightXy[1];
+    float dragRegionCenterX=(dragRegionX + dragRegionRight) / 2.0f;
+    float dragRegionCenterY=(dragRegionY + dragRegionBottom) / 2.0f;
+    float overlapLeft=Math.max(0f,dragRegionX);
+    float overlapTop=Math.max(0f,dragRegionY);
+    float overlapBottom=Math.min(cl.getHeight(),dragRegionBottom);
+    float overlapRight=Math.min(cl.getWidth(),dragRegionRight);
+    if (overlapRight >= 0 && overlapLeft <= cl.getWidth() && (overlapTop >= 0 && overlapBottom <= cl.getHeight())) {
+      float distX=dragRegionCenterX - cl.getWidth() / 2;
+      float distY=dragRegionCenterY - cl.getHeight() / 2;
+      float dist=distX * distX + distY * distY;
+      float overlap=(overlapRight - overlapLeft) * (overlapBottom - overlapTop);
+      if (overlap > 0 && dist < smallestDistSoFar) {
+        smallestDistSoFar=dist;
+        bestMatchingScreen=cl;
+      }
+    }
+  }
+  if (bestMatchingScreen != mDragTargetLayout) {
+    if (mDragTargetLayout != null) {
+      mDragTargetLayout.onDragExit();
+    }
+    mDragTargetLayout=bestMatchingScreen;
+  }
+  return bestMatchingScreen;
+}

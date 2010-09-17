@@ -2,7 +2,6 @@
   final int xCount=mCountX;
   final int yCount=mCountY;
   final boolean[][] occupied=mOccupied;
-  findOccupiedCells(xCount,yCount,occupied,null,true);
   final boolean[] flat=new boolean[xCount * yCount];
   for (int y=0; y < yCount; y++) {
     for (int x=0; x < xCount; x++) {

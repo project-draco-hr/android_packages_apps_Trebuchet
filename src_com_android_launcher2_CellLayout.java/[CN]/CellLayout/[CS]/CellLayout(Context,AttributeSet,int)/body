@@ -18,6 +18,7 @@
   mBottomPadding=a.getDimensionPixelSize(R.styleable.CellLayout_yAxisEndPadding,10);
   mCountX=LauncherModel.getCellCountX();
   mCountY=LauncherModel.getCellCountY();
+  mOccupied=new boolean[mCountX][mCountY];
   a.recycle();
   setAlwaysDrawnWithCacheEnabled(false);
   mWallpaperManager=WallpaperManager.getInstance(getContext());

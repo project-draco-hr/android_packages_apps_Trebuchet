@@ -1,28 +1,28 @@
 {
   mWaitingForResult=false;
-  if (resultCode == RESULT_OK && mAddItemCellInfo != null) {
+  if (resultCode == RESULT_OK && mAddScreen != -1) {
 switch (requestCode) {
 case REQUEST_PICK_APPLICATION:
-      completeAddApplication(this,data,mAddItemCellInfo);
+      completeAddApplication(this,data,mAddScreen,mAddIntersectCellX,mAddIntersectCellY);
     break;
 case REQUEST_PICK_SHORTCUT:
   processShortcut(data);
 break;
 case REQUEST_CREATE_SHORTCUT:
-completeAddShortcut(data,mAddItemCellInfo);
+completeAddShortcut(data,mAddScreen,mAddIntersectCellX,mAddIntersectCellY);
 break;
 case REQUEST_PICK_LIVE_FOLDER:
 addLiveFolder(data);
 break;
 case REQUEST_CREATE_LIVE_FOLDER:
-completeAddLiveFolder(data,mAddItemCellInfo);
+completeAddLiveFolder(data,mAddScreen,mAddIntersectCellX,mAddIntersectCellY);
 break;
 case REQUEST_PICK_APPWIDGET:
 addAppWidgetFromPick(data);
 break;
 case REQUEST_CREATE_APPWIDGET:
 int appWidgetId=data.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,-1);
-completeAddAppWidget(appWidgetId,mAddItemCellInfo);
+completeAddAppWidget(appWidgetId,mAddScreen);
 break;
 case REQUEST_PICK_WALLPAPER:
 break;

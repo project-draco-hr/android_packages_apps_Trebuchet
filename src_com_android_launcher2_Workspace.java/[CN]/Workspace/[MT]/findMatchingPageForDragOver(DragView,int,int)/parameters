@@ -1,0 +1,3 @@
+DragView dragView
+int originX
+int originY

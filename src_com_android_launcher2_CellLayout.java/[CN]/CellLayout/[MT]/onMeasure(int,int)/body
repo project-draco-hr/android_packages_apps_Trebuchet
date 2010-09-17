@@ -8,9 +8,6 @@
   }
   final int cellWidth=mCellWidth;
   final int cellHeight=mCellHeight;
-  if (mOccupied == null) {
-    mOccupied=new boolean[mCountX][mCountY];
-  }
   int numWidthGaps=mCountX - 1;
   int numHeightGaps=mCountY - 1;
   int vSpaceLeft=heightSpecSize - mTopPadding - mBottomPadding- (cellHeight * mCountY);

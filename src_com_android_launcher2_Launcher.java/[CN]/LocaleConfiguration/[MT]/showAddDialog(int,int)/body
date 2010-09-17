@@ -1,0 +1,8 @@
+{
+  resetAddInfo();
+  mAddIntersectCellX=intersectX;
+  mAddIntersectCellY=intersectY;
+  mAddScreen=mWorkspace.getCurrentPage();
+  mWaitingForResult=true;
+  showDialog(DIALOG_CREATE_SHORTCUT);
+}

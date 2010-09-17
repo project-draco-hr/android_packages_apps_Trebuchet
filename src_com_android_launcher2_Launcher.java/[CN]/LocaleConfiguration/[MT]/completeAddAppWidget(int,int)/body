@@ -1,0 +1,39 @@
+{
+  AppWidgetProviderInfo appWidgetInfo=mAppWidgetManager.getAppWidgetInfo(appWidgetId);
+  CellLayout layout=(CellLayout)mWorkspace.getChildAt(screen);
+  int[] spanXY=layout.rectToCell(appWidgetInfo.minWidth,appWidgetInfo.minHeight,null);
+  final int[] cellXY=mTmpAddItemCellCoordinates;
+  final int[] touchXY=null;
+  boolean findNearestVacantAreaFailed=false;
+  boolean foundCellSpan=false;
+  if (touchXY != null) {
+    CellLayout screenLayout=(CellLayout)mWorkspace.getChildAt(screen);
+    int[] result=screenLayout.findNearestVacantArea(touchXY[0],touchXY[1],spanXY[0],spanXY[1],cellXY);
+    findNearestVacantAreaFailed=(result == null);
+    foundCellSpan=!findNearestVacantAreaFailed;
+  }
+ else {
+    if (mAddIntersectCellX != -1 && mAddIntersectCellY != -1) {
+      foundCellSpan=layout.findCellForSpanThatIntersects(cellXY,spanXY[0],spanXY[1],mAddIntersectCellX,mAddIntersectCellY);
+    }
+ else {
+      foundCellSpan=layout.findCellForSpan(cellXY,spanXY[0],spanXY[1]);
+    }
+  }
+  if (!foundCellSpan) {
+    if (appWidgetId != -1)     mAppWidgetHost.deleteAppWidgetId(appWidgetId);
+    showOutOfSpaceMessage();
+    return;
+  }
+  LauncherAppWidgetInfo launcherInfo=new LauncherAppWidgetInfo(appWidgetId);
+  launcherInfo.spanX=spanXY[0];
+  launcherInfo.spanY=spanXY[1];
+  LauncherModel.addItemToDatabase(this,launcherInfo,LauncherSettings.Favorites.CONTAINER_DESKTOP,screen,cellXY[0],cellXY[1],false);
+  if (!mRestoring) {
+    mDesktopItems.add(launcherInfo);
+    launcherInfo.hostView=mAppWidgetHost.createView(this,appWidgetId,appWidgetInfo);
+    launcherInfo.hostView.setAppWidget(appWidgetId,appWidgetInfo);
+    launcherInfo.hostView.setTag(launcherInfo);
+    mWorkspace.addInScreen(launcherInfo.hostView,screen,cellXY[0],cellXY[1],launcherInfo.spanX,launcherInfo.spanY,isWorkspaceLocked());
+  }
+}

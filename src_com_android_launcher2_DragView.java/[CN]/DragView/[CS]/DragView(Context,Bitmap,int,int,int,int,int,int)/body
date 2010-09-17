@@ -7,8 +7,7 @@
   scaleFactor=mScale=(scaleFactor + DRAG_SCALE) / scaleFactor;
   scale.setScale(scaleFactor,scaleFactor);
   mBitmap=Bitmap.createBitmap(bitmap,left,top,width,height,scale,true);
-  mDragRegionWidth=width;
-  mDragRegionHeight=height;
+  setDragRegion(0,0,width,height);
   mRegistrationX=registrationX + (DRAG_SCALE / 2);
   mRegistrationY=registrationY + (DRAG_SCALE / 2);
 }

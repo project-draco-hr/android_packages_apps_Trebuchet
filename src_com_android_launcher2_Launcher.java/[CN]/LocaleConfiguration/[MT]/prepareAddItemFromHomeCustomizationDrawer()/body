@@ -1,4 +1,0 @@
-{
-  mMenuAddInfo=mWorkspace.updateOccupiedCellsForCurrentScreen(null);
-  mAddItemCellInfo=mMenuAddInfo;
-}

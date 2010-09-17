@@ -1,15 +1,23 @@
 {
-  final CellLayout layout=getCurrentDropLayout();
+  CellLayout layout;
+  if (mIsSmall) {
+    layout=findMatchingPageForDragOver(dragView,x - xOffset,y - yOffset);
+    if (layout == null) {
+      return false;
+    }
+  }
+ else {
+    layout=getCurrentDropLayout();
+  }
   final CellLayout.CellInfo dragCellInfo=mDragInfo;
   final int spanX=dragCellInfo == null ? 1 : dragCellInfo.spanX;
   final int spanY=dragCellInfo == null ? 1 : dragCellInfo.spanY;
   final View ignoreView=dragCellInfo == null ? null : dragCellInfo.cell;
-  final CellLayout.CellInfo cellInfo=layout.updateOccupiedCells(null,ignoreView);
-  if (cellInfo.findCellForSpan(mTempEstimate,spanX,spanY)) {
+  if (layout.findCellForSpanIgnoring(null,spanX,spanY,ignoreView)) {
     return true;
   }
  else {
-    Toast.makeText(getContext(),getContext().getString(R.string.out_of_space),Toast.LENGTH_SHORT).show();
+    mLauncher.showOutOfSpaceMessage();
     return false;
   }
 }
