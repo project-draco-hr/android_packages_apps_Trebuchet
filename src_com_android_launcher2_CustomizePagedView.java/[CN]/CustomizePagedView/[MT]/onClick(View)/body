@@ -8,16 +8,10 @@ case WallpaperCustomization:
     animateClickFeedback(v,new Runnable(){
       @Override public void run(){
         ResolveInfo info=(ResolveInfo)animView.getTag();
-        Intent createShortcutIntent=new Intent(Intent.ACTION_CREATE_SHORTCUT);
-        if (info.labelRes == R.string.group_applications) {
-          createShortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_NAME,getContext().getString(R.string.group_applications));
-        }
- else {
-          ComponentName name=new ComponentName(info.activityInfo.packageName,info.activityInfo.name);
-          createShortcutIntent.setComponent(name);
-        }
-        mLauncher.prepareAddItemFromHomeCustomizationDrawer();
-        mLauncher.processShortcut(createShortcutIntent);
+        Intent createWallpapersIntent=new Intent(Intent.ACTION_SET_WALLPAPER);
+        ComponentName name=new ComponentName(info.activityInfo.packageName,info.activityInfo.name);
+        createWallpapersIntent.setComponent(name);
+        mLauncher.processWallpaper(createWallpapersIntent);
       }
     }
 );
