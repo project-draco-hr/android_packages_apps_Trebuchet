@@ -2,14 +2,14 @@
   if (mIsChecked != checked) {
     mIsChecked=checked;
     if (mIsChecked) {
-      final PointF offset=new PointF(0,-(getCompoundPaddingBottom() + getCompoundPaddingTop()) / 2.0f);
+      getDrawingRect(mDrawableClipRect);
+      mDrawableClipRect.bottom=getPaddingTop() + getCompoundPaddingTop();
       mIsHolographicUpdatePass=true;
       mCheckedOutline=Bitmap.createBitmap(getMeasuredWidth(),getMeasuredHeight(),Bitmap.Config.ARGB_8888);
       mHolographicOutlineCanvas=new Canvas(mCheckedOutline);
       mHolographicOutlineCanvas.concat(getMatrix());
       draw(mHolographicOutlineCanvas);
-      sHolographicOutlineHelper.setColor(HolographicOutlineHelper.HOLOGRAPHIC_GREEN);
-      sHolographicOutlineHelper.applyOutline(mCheckedOutline,mHolographicOutlineCanvas,HolographicOutlineHelper.DEFAULT_STROKE_WIDTH + 1.0f,offset);
+      sHolographicOutlineHelper.applyExpensiveOutlineWithBlur(mCheckedOutline,mHolographicOutlineCanvas,mCheckedBlurColor,mCheckedOutlineColor);
       mIsHolographicUpdatePass=false;
       mHolographicOutlineCanvas=null;
     }

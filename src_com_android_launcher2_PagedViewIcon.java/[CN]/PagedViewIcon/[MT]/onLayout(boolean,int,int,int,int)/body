@@ -1,7 +1,6 @@
 {
   super.onLayout(changed,left,top,right,bottom);
   if (mHolographicOutline == null) {
-    final PointF offset=new PointF(0,-(getCompoundPaddingBottom() + getCompoundPaddingTop()) / 2.0f);
     getDrawingRect(mDrawableClipRect);
     mDrawableClipRect.bottom=getPaddingTop() + getCompoundPaddingTop();
     mIsHolographicUpdatePass=true;
@@ -9,9 +8,7 @@
     mHolographicOutlineCanvas=new Canvas(mHolographicOutline);
     mHolographicOutlineCanvas.concat(getMatrix());
     draw(mHolographicOutlineCanvas);
-    sHolographicOutlineHelper.setColor(HolographicOutlineHelper.HOLOGRAPHIC_BLUE);
-    sHolographicOutlineHelper.applyOutline(mHolographicOutline,mHolographicOutlineCanvas,HolographicOutlineHelper.DEFAULT_STROKE_WIDTH,offset);
-    sHolographicOutlineHelper.applyBlur(mHolographicOutline,mHolographicOutlineCanvas);
+    sHolographicOutlineHelper.applyExpensiveOutlineWithBlur(mHolographicOutline,mHolographicOutlineCanvas,mHoloBlurColor,mHoloOutlineColor);
     mIsHolographicUpdatePass=false;
     mIconCache.addOutline(mIconCacheKey,mHolographicOutline);
     mHolographicOutlineCanvas=null;
