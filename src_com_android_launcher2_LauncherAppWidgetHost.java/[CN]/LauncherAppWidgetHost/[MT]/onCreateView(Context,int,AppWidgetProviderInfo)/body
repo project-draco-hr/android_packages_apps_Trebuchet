@@ -3,6 +3,6 @@
     return new DimmableAppWidgetHostView(context);
   }
  else {
-    return new AppWidgetHostView(context);
+    return new LauncherAppWidgetHostView(context);
   }
 }
