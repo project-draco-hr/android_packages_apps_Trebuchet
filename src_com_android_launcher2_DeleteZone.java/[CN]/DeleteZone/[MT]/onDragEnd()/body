@@ -2,8 +2,10 @@
   if (mTrashMode) {
     mTrashMode=false;
     mDragController.setDeleteRegion(null);
-    startAnimation(mOutAnimation);
-    mHandle.startAnimation(mHandleInAnimation);
-    setVisibility(GONE);
+    if (mOutAnimation != null)     startAnimation(mOutAnimation);
+    if (mHandleInAnimation != null)     mHandle.startAnimation(mHandleInAnimation);
+    if (mManageVisibility) {
+      setVisibility(GONE);
+    }
   }
 }
