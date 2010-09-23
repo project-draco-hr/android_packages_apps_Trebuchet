@@ -1,9 +1,11 @@
 {
   if (info != null) {
     mActive=true;
-    if (((ItemInfo)info).itemType == LauncherSettings.Favorites.ITEM_TYPE_APPLICATION) {
-      setVisibility(VISIBLE);
+    if (mManageVisibility) {
+      if (((ItemInfo)info).itemType == LauncherSettings.Favorites.ITEM_TYPE_APPLICATION) {
+        setVisibility(VISIBLE);
+      }
+      mHandle.setVisibility(INVISIBLE);
     }
-    mHandle.setVisibility(INVISIBLE);
   }
 }

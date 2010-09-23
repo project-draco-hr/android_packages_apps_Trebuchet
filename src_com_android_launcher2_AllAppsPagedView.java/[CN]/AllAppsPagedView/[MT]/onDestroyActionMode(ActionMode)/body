@@ -1,4 +1,14 @@
 {
+  ApplicationInfoDropTarget infoButton=(ApplicationInfoDropTarget)mLauncher.findViewById(R.id.info_button);
+  ((ViewGroup)infoButton.getParent()).removeView(infoButton);
+  mOrigInfoButtonParent.addView(infoButton,mOrigInfoButtonLayoutParams);
+  infoButton.setVisibility(View.GONE);
+  infoButton.setManageVisibility(true);
+  DeleteZone deleteZone=(DeleteZone)mLauncher.findViewById(R.id.delete_zone);
+  ((ViewGroup)deleteZone.getParent()).removeView(deleteZone);
+  mOrigDeleteZoneParent.addView(deleteZone,mOrigDeleteZoneLayoutParams);
+  deleteZone.setVisibility(View.GONE);
+  deleteZone.setManageVisibility(true);
   mDragController.removeDropTarget(this);
   endChoiceMode();
 }
