@@ -53,6 +53,11 @@ mLauncher.processShortcut(createShortcutIntent);
 }
 );
 return true;
+case ApplicationCustomization:
+ApplicationInfo app=(ApplicationInfo)v.getTag();
+app=new ApplicationInfo(app);
+mDragController.startDrag(v,this,app,DragController.DRAG_ACTION_COPY);
+return true;
 }
 return false;
 }

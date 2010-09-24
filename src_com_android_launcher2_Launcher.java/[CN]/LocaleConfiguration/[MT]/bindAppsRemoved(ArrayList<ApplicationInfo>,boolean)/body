@@ -4,5 +4,6 @@
     mWorkspace.removeItems(apps);
   }
   mAllAppsGrid.removeApps(apps);
+  mCustomizePagedView.removeApps(apps);
   updateAppMarketIcon();
 }
