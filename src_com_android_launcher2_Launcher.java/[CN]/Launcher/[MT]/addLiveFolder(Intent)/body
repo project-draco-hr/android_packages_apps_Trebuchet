@@ -5,6 +5,6 @@
     addFolder();
   }
  else {
-    startActivityForResult(intent,REQUEST_CREATE_LIVE_FOLDER);
+    startActivityForResultSafely(intent,REQUEST_CREATE_LIVE_FOLDER);
   }
 }
