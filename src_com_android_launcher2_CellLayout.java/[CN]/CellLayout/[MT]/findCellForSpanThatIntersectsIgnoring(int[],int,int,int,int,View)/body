@@ -2,6 +2,7 @@
   if (ignoreView != null) {
     markCellsAsUnoccupiedForView(ignoreView);
   }
+  boolean foundCell=false;
   while (true) {
     int startX=0;
     if (intersectX >= 0) {
@@ -33,10 +34,8 @@
           cellXY[0]=x;
           cellXY[1]=y;
         }
-        if (ignoreView != null) {
-          markCellsAsOccupiedForView(ignoreView);
-        }
-        return true;
+        foundCell=true;
+        break;
       }
     }
     if (intersectX == -1 && intersectY == -1) {
@@ -51,5 +50,5 @@
   if (ignoreView != null) {
     markCellsAsOccupiedForView(ignoreView);
   }
-  return false;
+  return foundCell;
 }
