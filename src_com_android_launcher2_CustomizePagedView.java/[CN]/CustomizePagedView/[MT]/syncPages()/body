@@ -16,6 +16,10 @@ case WallpaperCustomization:
 syncListPages(mWallpaperList);
 centerPagedViewCellLayouts=true;
 break;
+case ApplicationCustomization:
+syncAppPages();
+centerPagedViewCellLayouts=false;
+break;
 default :
 removeAllViews();
 setCurrentPage(0);

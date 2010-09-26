@@ -1,0 +1,13 @@
+{
+  final CellLayout layout=(CellLayout)mWorkspace.getChildAt(screen);
+  final int[] cellXY=mTmpAddItemCellCoordinates;
+  if (!layout.findCellForSpanThatIntersects(cellXY,1,1,intersectCellX,intersectCellY)) {
+    showOutOfSpaceMessage();
+    return;
+  }
+  final LiveFolderInfo info=addLiveFolder(this,data,screen,cellXY[0],cellXY[1],false);
+  if (!mRestoring) {
+    final View view=LiveFolderIcon.fromXml(R.layout.live_folder_icon,this,(ViewGroup)mWorkspace.getChildAt(mWorkspace.getCurrentPage()),info);
+    mWorkspace.addInScreen(view,screen,cellXY[0],cellXY[1],1,1,isWorkspaceLocked());
+  }
+}

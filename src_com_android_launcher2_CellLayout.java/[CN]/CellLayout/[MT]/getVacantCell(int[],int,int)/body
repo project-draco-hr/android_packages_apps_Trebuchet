@@ -1,7 +1,3 @@
 {
-  final int xCount=mCountX;
-  final int yCount=mCountY;
-  final boolean[][] occupied=mOccupied;
-  findOccupiedCells(xCount,yCount,occupied,null,true);
-  return findVacantCell(vacant,spanX,spanY,xCount,yCount,occupied);
+  return findVacantCell(vacant,spanX,spanY,mCountX,mCountY,mOccupied);
 }

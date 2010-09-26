@@ -6,5 +6,5 @@
     mDragRect.setEmpty();
     child.requestLayout();
   }
-  onDragComplete();
+  onDragExit();
 }

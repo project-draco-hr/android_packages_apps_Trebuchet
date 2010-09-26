@@ -1,0 +1,3 @@
+{
+  return findCellForSpanThatIntersectsIgnoring(cellXY,spanX,spanY,-1,-1,null);
+}

@@ -12,5 +12,8 @@ break;
 case WallpaperCustomization:
 syncListPageItems(page,mWallpaperList);
 break;
+case ApplicationCustomization:
+syncAppPageItems(page);
+break;
 }
 }

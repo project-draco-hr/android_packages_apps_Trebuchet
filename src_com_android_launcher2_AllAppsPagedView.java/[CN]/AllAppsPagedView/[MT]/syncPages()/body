@@ -8,6 +8,7 @@
   for (int i=curNumPages; i < numPages; ++i) {
     PagedViewCellLayout layout=new PagedViewCellLayout(getContext());
     layout.setCellCount(mCellCountX,mCellCountY);
+    layout.setPadding(mPageLayoutPaddingLeft,mPageLayoutPaddingTop,mPageLayoutPaddingRight,mPageLayoutPaddingBottom);
     addView(layout);
   }
   setCurrentPage(Math.max(0,Math.min(numPages - 1,getCurrentPage())));

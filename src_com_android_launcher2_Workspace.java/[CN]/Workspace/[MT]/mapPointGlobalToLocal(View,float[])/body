@@ -1,0 +1,6 @@
+{
+  xy[0]=xy[0] + mScrollX - v.getLeft();
+  xy[1]=xy[1] + mScrollY - v.getTop();
+  v.getMatrix().invert(mTempInverseMatrix);
+  mTempInverseMatrix.mapPoints(xy);
+}

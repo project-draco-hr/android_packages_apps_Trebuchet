@@ -1,5 +1,0 @@
-int xCount
-int yCount
-boolean[][] occupied
-View ignoreView
-boolean ignoreFolders

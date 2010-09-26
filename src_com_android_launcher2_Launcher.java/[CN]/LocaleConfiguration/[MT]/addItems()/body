@@ -6,6 +6,6 @@
   }
  else {
     closeAllApps(true);
-    showAddDialog(mMenuAddInfo);
+    showAddDialog(-1,-1);
   }
 }

@@ -1,0 +1,8 @@
+{
+  resetAddInfo();
+  mAddScreen=screen;
+  mAddDropPosition=position;
+  Intent createFolderIntent=new Intent(LiveFolders.ACTION_CREATE_LIVE_FOLDER);
+  createFolderIntent.setComponent(componentName);
+  addLiveFolder(createFolderIntent);
+}

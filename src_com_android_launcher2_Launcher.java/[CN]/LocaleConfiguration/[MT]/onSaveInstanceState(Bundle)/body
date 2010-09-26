@@ -16,17 +16,10 @@
   if (isAllAppsVisible()) {
     outState.putBoolean(RUNTIME_STATE_ALL_APPS_FOLDER,true);
   }
-  if (mAddItemCellInfo != null && mAddItemCellInfo.valid && mWaitingForResult) {
-    final CellLayout.CellInfo addItemCellInfo=mAddItemCellInfo;
-    final CellLayout layout=(CellLayout)mWorkspace.getChildAt(addItemCellInfo.screen);
-    outState.putInt(RUNTIME_STATE_PENDING_ADD_SCREEN,addItemCellInfo.screen);
-    outState.putInt(RUNTIME_STATE_PENDING_ADD_CELL_X,addItemCellInfo.cellX);
-    outState.putInt(RUNTIME_STATE_PENDING_ADD_CELL_Y,addItemCellInfo.cellY);
-    outState.putInt(RUNTIME_STATE_PENDING_ADD_SPAN_X,addItemCellInfo.spanX);
-    outState.putInt(RUNTIME_STATE_PENDING_ADD_SPAN_Y,addItemCellInfo.spanY);
-    outState.putInt(RUNTIME_STATE_PENDING_ADD_COUNT_X,layout.getCountX());
-    outState.putInt(RUNTIME_STATE_PENDING_ADD_COUNT_Y,layout.getCountY());
-    outState.putBooleanArray(RUNTIME_STATE_PENDING_ADD_OCCUPIED_CELLS,layout.getOccupiedCellsFlattened());
+  if (mAddScreen > -1 && mWaitingForResult) {
+    outState.putInt(RUNTIME_STATE_PENDING_ADD_SCREEN,mAddScreen);
+    outState.putInt(RUNTIME_STATE_PENDING_ADD_CELL_X,mAddIntersectCellX);
+    outState.putInt(RUNTIME_STATE_PENDING_ADD_CELL_Y,mAddIntersectCellY);
   }
   if (mFolderInfo != null && mWaitingForResult) {
     outState.putBoolean(RUNTIME_STATE_PENDING_FOLDER_RENAME,true);

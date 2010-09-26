@@ -25,22 +25,31 @@ return false;
 if (!(v instanceof CellLayout)) {
 v=(View)v.getParent();
 }
-CellLayout.CellInfo cellInfo=(CellLayout.CellInfo)v.getTag();
-if (cellInfo == null) {
+resetAddInfo();
+CellLayout.CellInfo longClickCellInfo=(CellLayout.CellInfo)v.getTag();
+if (longClickCellInfo == null || !longClickCellInfo.valid) {
 return true;
 }
+final View itemUnderLongClick=longClickCellInfo.cell;
 if (mWorkspace.allowLongPress()) {
-if (cellInfo.cell == null) {
-if (cellInfo.valid) {
+if (itemUnderLongClick == null) {
 mWorkspace.setAllowLongPress(false);
 mWorkspace.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS,HapticFeedbackConstants.FLAG_IGNORE_VIEW_SETTING);
-showAddDialog(cellInfo);
+if (LauncherApplication.isScreenXLarge()) {
+if (!isCustomizationDrawerVisible()) {
+showCustomizationDrawer(true);
 }
 }
  else {
-if (!(cellInfo.cell instanceof Folder)) {
+showAddDialog(longClickCellInfo.cellX,longClickCellInfo.cellY);
+}
+}
+ else {
+if (!(itemUnderLongClick instanceof Folder)) {
 mWorkspace.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS,HapticFeedbackConstants.FLAG_IGNORE_VIEW_SETTING);
-mWorkspace.startDrag(cellInfo);
+mAddIntersectCellX=longClickCellInfo.cellX;
+mAddIntersectCellY=longClickCellInfo.cellY;
+mWorkspace.startDrag(longClickCellInfo);
 }
 }
 }

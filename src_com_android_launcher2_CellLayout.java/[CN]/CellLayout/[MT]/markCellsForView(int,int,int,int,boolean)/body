@@ -1,0 +1,7 @@
+{
+  for (int x=cellX; x < cellX + spanX && x < mCountX; x++) {
+    for (int y=cellY; y < cellY + spanY && y < mCountY; y++) {
+      mOccupied[x][y]=value;
+    }
+  }
+}

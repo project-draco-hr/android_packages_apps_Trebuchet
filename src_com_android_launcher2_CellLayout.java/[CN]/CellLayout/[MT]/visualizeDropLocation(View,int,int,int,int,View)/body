@@ -1,0 +1,21 @@
+{
+  final int[] originCell=mDragCell;
+  final int[] cellXY=mTmpCellXY;
+  estimateDropCell(originX,originY,spanX,spanY,cellXY);
+  if (!Arrays.equals(cellXY,originCell)) {
+    originCell[0]=cellXY[0];
+    originCell[1]=cellXY[1];
+    final int[] topLeft=mTmpCellXY;
+    cellToPoint(originCell[0],originCell[1],topLeft);
+    final int left=topLeft[0];
+    final int top=topLeft[1];
+    final int[] bottomRight=mTmpCellXY;
+    cellToPoint(originCell[0] + spanX - 1,originCell[1] + spanY - 1,bottomRight);
+    bottomRight[0]+=mCellWidth;
+    bottomRight[1]+=mCellHeight;
+    boolean vacant=isVacantIgnoring(originCell[0],originCell[1],spanX,spanY,draggedItem);
+    mDragRectDrawable=vacant ? mVacantDrawable : mOccupiedDrawable;
+    mDragRect.set(left,top,bottomRight[0],bottomRight[1]);
+    invalidate();
+  }
+}

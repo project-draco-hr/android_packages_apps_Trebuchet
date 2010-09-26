@@ -1,4 +1,4 @@
 {
-  layout.setCellCount(sCellCountX,sCellCountY);
-  layout.setPadding(20,10,20,0);
+  layout.setCellCount(mCellCountX,mCellCountY);
+  layout.setPadding(mPageLayoutPaddingLeft,mPageLayoutPaddingTop,mPageLayoutPaddingRight,mPageLayoutPaddingBottom);
 }

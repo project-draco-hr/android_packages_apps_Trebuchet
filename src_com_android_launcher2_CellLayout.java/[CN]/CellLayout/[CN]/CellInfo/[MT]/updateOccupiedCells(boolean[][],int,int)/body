@@ -1,5 +1,0 @@
-{
-  mOccupied=occupied.clone();
-  mCountX=xCount;
-  mCountY=yCount;
-}

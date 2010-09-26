@@ -2,5 +2,6 @@
   removeDialog(DIALOG_CREATE_SHORTCUT);
   mWorkspace.updateShortcuts(apps);
   mAllAppsGrid.updateApps(apps);
+  mCustomizePagedView.updateApps(apps);
   updateAppMarketIcon();
 }

@@ -1,0 +1,16 @@
+{
+  if (ignoreView != null) {
+    markCellsAsUnoccupiedForView(ignoreView);
+  }
+  boolean isVacant=true;
+  for (int i=0; i < spanY; i++) {
+    if (!isRowEmpty(originY + i,originX,originX + spanX - 1,mOccupied)) {
+      isVacant=false;
+      break;
+    }
+  }
+  if (ignoreView != null) {
+    markCellsAsOccupiedForView(ignoreView);
+  }
+  return isVacant;
+}

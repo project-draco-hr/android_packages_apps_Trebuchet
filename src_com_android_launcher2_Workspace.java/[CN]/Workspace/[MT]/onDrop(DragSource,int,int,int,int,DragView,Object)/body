@@ -1,20 +1,20 @@
 {
-  CellLayout cellLayout=getCurrentDropLayout();
+  CellLayout cellLayout;
   int originX=x - xOffset;
   int originY=y - yOffset;
   if (mIsSmall) {
-    final float[] localXY=mTempDragCoordinates;
-    localXY[0]=originX;
-    localXY[1]=originY;
-    final float[] localBottomRightXY=mTempDragBottomRightCoordinates;
-    localBottomRightXY[0]=originX + dragView.getDragRegionWidth();
-    localBottomRightXY[1]=originY + dragView.getDragRegionHeight();
-    cellLayout=findMatchingPageForDragOver(localXY,localBottomRightXY);
+    cellLayout=findMatchingPageForDragOver(dragView,originX,originY);
     if (cellLayout == null) {
       return;
     }
-    originX=(int)localXY[0];
-    originY=(int)localXY[1];
+    mTempOriginXY[0]=originX;
+    mTempOriginXY[1]=originY;
+    mapPointGlobalToLocal(cellLayout,mTempOriginXY);
+    originX=(int)mTempOriginXY[0];
+    originY=(int)mTempOriginXY[1];
+  }
+ else {
+    cellLayout=getCurrentDropLayout();
   }
   if (source != this) {
     onDropExternal(originX,originY,dragInfo,cellLayout);
@@ -32,6 +32,7 @@
       cellLayout.onDropChild(cell);
       final ItemInfo info=(ItemInfo)cell.getTag();
       CellLayout.LayoutParams lp=(CellLayout.LayoutParams)cell.getLayoutParams();
+      cellLayout.onMove(cell,mTargetCell[0],mTargetCell[1]);
       lp.cellX=mTargetCell[0];
       lp.cellY=mTargetCell[1];
       LauncherModel.moveItemInDatabase(mLauncher,info,LauncherSettings.Favorites.CONTAINER_DESKTOP,index,lp.cellX,lp.cellY);
