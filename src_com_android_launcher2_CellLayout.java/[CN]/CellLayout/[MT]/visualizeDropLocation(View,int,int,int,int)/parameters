@@ -3,4 +3,3 @@ int originX
 int originY
 int spanX
 int spanY
-View draggedItem

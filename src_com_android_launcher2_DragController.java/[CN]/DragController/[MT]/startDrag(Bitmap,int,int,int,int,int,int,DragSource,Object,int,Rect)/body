@@ -24,4 +24,5 @@
     dragView.setDragRegion(dragRegionLeft,dragRegion.top,dragRegion.right - dragRegionLeft,dragRegion.bottom - dragRegionTop);
   }
   dragView.show(mWindowToken,(int)mMotionDownX,(int)mMotionDownY);
+  handleMoveEvent((int)mMotionDownX,(int)mMotionDownY);
 }

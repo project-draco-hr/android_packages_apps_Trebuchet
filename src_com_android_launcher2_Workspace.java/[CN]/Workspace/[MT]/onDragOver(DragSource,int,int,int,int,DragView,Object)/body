@@ -38,6 +38,7 @@
   if (currentLayout != mDragTargetLayout) {
     if (mDragTargetLayout != null) {
       mDragTargetLayout.onDragExit();
+      currentLayout.onDragEnter(dragView);
     }
     mDragTargetLayout=currentLayout;
   }
@@ -45,6 +46,6 @@
     final View child=(mDragInfo == null) ? null : mDragInfo.cell;
     int localOriginX=originX - (mDragTargetLayout.getLeft() - mScrollX);
     int localOriginY=originY - (mDragTargetLayout.getTop() - mScrollY);
-    mDragTargetLayout.visualizeDropLocation(child,localOriginX,localOriginY,item.spanX,item.spanY,child);
+    mDragTargetLayout.visualizeDropLocation(child,localOriginX,localOriginY,item.spanX,item.spanY);
   }
 }

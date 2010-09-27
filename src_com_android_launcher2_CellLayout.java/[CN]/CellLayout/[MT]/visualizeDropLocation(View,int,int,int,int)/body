@@ -1,0 +1,16 @@
+{
+  final int[] nearest=findNearestVacantArea(originX,originY,spanX,spanY,view,mDragCell);
+  mDragCenter.set(originX + (view.getWidth() / 2),originY + (view.getHeight() / 2));
+  if (nearest != null) {
+    final int[] topLeft=mTmpPoint;
+    cellToPoint(nearest[0],nearest[1],topLeft);
+    final int left=topLeft[0];
+    final int top=topLeft[1];
+    final int[] bottomRight=mTmpPoint;
+    cellToPoint(nearest[0] + spanX - 1,nearest[1] + spanY - 1,bottomRight);
+    bottomRight[0]+=mCellWidth;
+    bottomRight[1]+=mCellHeight;
+    mDragRect.set(left,top,bottomRight[0],bottomRight[1]);
+    invalidate();
+  }
+}
