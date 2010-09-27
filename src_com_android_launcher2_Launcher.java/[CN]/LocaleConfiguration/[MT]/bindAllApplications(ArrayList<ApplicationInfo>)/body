@@ -1,5 +1,7 @@
 {
   mAllAppsGrid.setApps(apps);
-  mCustomizePagedView.setApps(apps);
+  if (mCustomizePagedView != null) {
+    mCustomizePagedView.setApps(apps);
+  }
   updateAppMarketIcon();
 }
