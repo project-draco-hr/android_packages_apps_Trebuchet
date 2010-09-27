@@ -1,5 +1,5 @@
 {
-  mode.setTitle(R.string.cab_selection_text);
+  mode.setTitle(R.string.cab_app_selection_text);
   ApplicationInfoDropTarget infoButton=(ApplicationInfoDropTarget)mLauncher.findViewById(R.id.info_button);
   mOrigInfoButtonParent=(ViewGroup)infoButton.getParent();
   mOrigInfoButtonLayoutParams=infoButton.getLayoutParams();

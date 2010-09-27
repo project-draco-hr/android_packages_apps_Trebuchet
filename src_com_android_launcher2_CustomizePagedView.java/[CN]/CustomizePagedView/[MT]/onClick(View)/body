@@ -2,26 +2,42 @@
   if (!v.isInTouchMode()) {
     return;
   }
+  boolean enterChoiceMode=false;
 switch (mCustomizationType) {
 case WidgetCustomization:
+    mChoiceModeTitleText=R.string.cab_widget_selection_text;
+  enterChoiceMode=true;
+break;
 case ApplicationCustomization:
+mChoiceModeTitleText=R.string.cab_app_selection_text;
+enterChoiceMode=true;
+break;
 case FolderCustomization:
+mChoiceModeTitleText=R.string.cab_folder_selection_text;
+enterChoiceMode=true;
+break;
 case ShortcutCustomization:
-    if (isChoiceMode(CHOICE_MODE_NONE)) {
-      startChoiceMode(CHOICE_MODE_SINGLE,this);
-    }
-  if (v instanceof Checkable) {
-    final Checkable c=(Checkable)v;
-    final boolean wasChecked=c.isChecked();
-    resetCheckedGrandchildren();
-    c.setChecked(!wasChecked);
-    if (!c.isChecked()) {
-      endChoiceMode();
-    }
-  }
-return;
+mChoiceModeTitleText=R.string.cab_shortcut_selection_text;
+enterChoiceMode=true;
+break;
 default :
 break;
+}
+if (enterChoiceMode) {
+if (v instanceof Checkable) {
+final Checkable c=(Checkable)v;
+final boolean wasChecked=c.isChecked();
+resetCheckedGrandchildren();
+c.setChecked(!wasChecked);
+if (!c.isChecked()) {
+endChoiceMode();
+}
+ else if (isChoiceMode(CHOICE_MODE_NONE)) {
+endChoiceMode();
+startChoiceMode(CHOICE_MODE_SINGLE,this);
+}
+}
+return;
 }
 switch (mCustomizationType) {
 case WallpaperCustomization:
