@@ -2,4 +2,5 @@
   mCustomizationType=filterType;
   setCurrentPage(0);
   invalidatePageData();
+  endChoiceMode();
 }

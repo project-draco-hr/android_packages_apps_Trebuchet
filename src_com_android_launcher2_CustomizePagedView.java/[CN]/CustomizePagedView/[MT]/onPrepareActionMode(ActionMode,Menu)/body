@@ -1,0 +1,4 @@
+{
+  mode.setTitle(R.string.cab_selection_text);
+  return true;
+}

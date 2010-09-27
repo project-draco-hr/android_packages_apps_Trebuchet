@@ -2,18 +2,42 @@
   if (!v.isInTouchMode()) {
     return;
   }
-  final View animView=v;
+switch (mCustomizationType) {
+case WidgetCustomization:
+case ApplicationCustomization:
+case FolderCustomization:
+case ShortcutCustomization:
+    if (isChoiceMode(CHOICE_MODE_NONE)) {
+      startChoiceMode(CHOICE_MODE_SINGLE,this);
+    }
+  if (v instanceof Checkable) {
+    final Checkable c=(Checkable)v;
+    final boolean wasChecked=c.isChecked();
+    resetCheckedGrandchildren();
+    c.setChecked(!wasChecked);
+    if (!c.isChecked()) {
+      endChoiceMode();
+    }
+  }
+return;
+default :
+break;
+}
 switch (mCustomizationType) {
 case WallpaperCustomization:
-    animateClickFeedback(v,new Runnable(){
-      @Override public void run(){
-        ResolveInfo info=(ResolveInfo)animView.getTag();
-        Intent createWallpapersIntent=new Intent(Intent.ACTION_SET_WALLPAPER);
-        ComponentName name=new ComponentName(info.activityInfo.packageName,info.activityInfo.name);
-        createWallpapersIntent.setComponent(name);
-        mLauncher.processWallpaper(createWallpapersIntent);
-      }
-    }
+final View clickView=v;
+animateClickFeedback(v,new Runnable(){
+@Override public void run(){
+ResolveInfo info=(ResolveInfo)clickView.getTag();
+Intent createWallpapersIntent=new Intent(Intent.ACTION_SET_WALLPAPER);
+ComponentName name=new ComponentName(info.activityInfo.packageName,info.activityInfo.name);
+createWallpapersIntent.setComponent(name);
+mLauncher.processWallpaper(createWallpapersIntent);
+}
+}
 );
+break;
+default :
+break;
 }
 }
