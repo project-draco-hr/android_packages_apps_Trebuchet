@@ -29,7 +29,7 @@
       if (info.icon > 0) {
         icon=packageManager.getDrawable(packageName,info.icon,null);
       }
- else {
+      if (icon == null) {
         icon=resources.getDrawable(R.drawable.ic_launcher_application);
       }
       background.getPadding(tmpRect);
