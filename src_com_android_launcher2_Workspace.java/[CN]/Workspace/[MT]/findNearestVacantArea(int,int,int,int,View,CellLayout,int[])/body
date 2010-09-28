@@ -4,5 +4,5 @@
   int localPixelY=pixelY - (layout.getTop() - mScrollY);
   layout.estimateDropCell(localPixelX,localPixelY,spanX,spanY,cellXY);
   layout.cellToPoint(cellXY[0],cellXY[1],mTempEstimate);
-  return layout.findNearestVacantArea(mTempEstimate[0],mTempEstimate[1],spanX,spanY,recycle);
+  return layout.findNearestVacantArea(mTempEstimate[0],mTempEstimate[1],spanX,spanY,ignoreView,recycle);
 }

@@ -1,0 +1,36 @@
+{
+  if (ignoreView != null) {
+    markCellsAsUnoccupiedForView(ignoreView);
+  }
+  final int[] bestXY=recycle != null ? recycle : new int[2];
+  double bestDistance=Double.MAX_VALUE;
+  for (int x=0; x < mCountX - (spanX - 1); x++) {
+    inner:     for (int y=0; y < mCountY - (spanY - 1); y++) {
+      for (int i=0; i < spanX; i++) {
+        for (int j=0; j < spanY; j++) {
+          if (mOccupied[x + i][y + j]) {
+            y+=j;
+            continue inner;
+          }
+        }
+      }
+      final int[] cellXY=mTmpCellXY;
+      cellToPoint(x,y,cellXY);
+      double distance=Math.sqrt(Math.pow(cellXY[0] - pixelX,2) + Math.pow(cellXY[1] - pixelY,2));
+      if (distance <= bestDistance) {
+        bestDistance=distance;
+        bestXY[0]=x;
+        bestXY[1]=y;
+      }
+    }
+  }
+  if (ignoreView != null) {
+    markCellsAsOccupiedForView(ignoreView);
+  }
+  if (bestDistance < Double.MAX_VALUE) {
+    return bestXY;
+  }
+ else {
+    return null;
+  }
+}

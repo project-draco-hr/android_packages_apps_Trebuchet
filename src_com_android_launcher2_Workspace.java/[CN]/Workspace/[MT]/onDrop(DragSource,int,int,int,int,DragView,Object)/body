@@ -28,7 +28,7 @@
         originalCellLayout.removeView(cell);
         addInScreen(cell,index,mDragInfo.cellX,mDragInfo.cellY,mDragInfo.spanX,mDragInfo.spanY);
       }
-      mTargetCell=estimateDropCell(originX,originY,mDragInfo.spanX,mDragInfo.spanY,cell,cellLayout,mTargetCell);
+      mTargetCell=findNearestVacantArea(originX,originY,mDragInfo.spanX,mDragInfo.spanY,cell,cellLayout,mTargetCell);
       cellLayout.onDropChild(cell);
       final ItemInfo info=(ItemInfo)cell.getTag();
       CellLayout.LayoutParams lp=(CellLayout.LayoutParams)cell.getLayoutParams();
