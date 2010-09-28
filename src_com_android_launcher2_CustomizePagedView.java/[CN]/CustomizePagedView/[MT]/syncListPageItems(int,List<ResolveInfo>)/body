@@ -6,18 +6,41 @@
   layout.removeAllViews();
   for (int i=startIndex; i < endIndex; ++i) {
     ResolveInfo info=list.get(i);
+    PendingAddItemInfo createItemInfo=new PendingAddItemInfo();
     PagedViewIcon icon=(PagedViewIcon)mInflater.inflate(R.layout.customize_paged_view_item,layout,false);
     icon.applyFromResolveInfo(info,mPackageManager,mPageViewIconCache);
-    if (mCustomizationType == CustomizationType.WallpaperCustomization) {
+switch (mCustomizationType) {
+case WallpaperCustomization:
       icon.setOnClickListener(this);
-    }
- else {
-      icon.setOnLongClickListener(this);
-    }
-    final int index=i - startIndex;
-    final int x=index % mCellCountX;
-    final int y=index / mCellCountX;
-    setupPage(layout);
-    layout.addViewToCellLayout(icon,-1,i,new PagedViewCellLayout.LayoutParams(x,y,1,1));
+    break;
+case FolderCustomization:
+  if (info.labelRes != R.string.group_folder) {
+    createItemInfo.itemType=LauncherSettings.Favorites.ITEM_TYPE_LIVE_FOLDER;
+    createItemInfo.componentName=new ComponentName(info.activityInfo.packageName,info.activityInfo.name);
+    icon.setTag(createItemInfo);
   }
+ else {
+    UserFolderInfo folderInfo=new UserFolderInfo();
+    folderInfo.title=getResources().getText(R.string.folder_name);
+    icon.setTag(folderInfo);
+  }
+icon.setOnClickListener(this);
+icon.setOnLongClickListener(this);
+break;
+case ShortcutCustomization:
+createItemInfo.itemType=LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT;
+createItemInfo.componentName=new ComponentName(info.activityInfo.packageName,info.activityInfo.name);
+icon.setTag(createItemInfo);
+icon.setOnClickListener(this);
+icon.setOnLongClickListener(this);
+break;
+default :
+break;
+}
+final int index=i - startIndex;
+final int x=index % mCellCountX;
+final int y=index / mCellCountX;
+setupPage(layout);
+layout.addViewToCellLayout(icon,-1,i,new PagedViewCellLayout.LayoutParams(x,y,1,1));
+}
 }

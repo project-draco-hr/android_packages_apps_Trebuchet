@@ -1,6 +1,8 @@
 {
   removeDialog(DIALOG_CREATE_SHORTCUT);
   mAllAppsGrid.addApps(apps);
-  mCustomizePagedView.addApps(apps);
+  if (mCustomizePagedView != null) {
+    mCustomizePagedView.addApps(apps);
+  }
   updateAppMarketIcon();
 }

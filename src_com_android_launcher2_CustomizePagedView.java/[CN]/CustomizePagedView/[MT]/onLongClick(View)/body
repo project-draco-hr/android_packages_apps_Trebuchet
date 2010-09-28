@@ -2,38 +2,33 @@
   if (!v.isInTouchMode()) {
     return false;
   }
-  final View animView=v;
-  PendingAddItemInfo createItemInfo=new PendingAddItemInfo();
+  if (isChoiceMode(CHOICE_MODE_SINGLE)) {
+    endChoiceMode();
+  }
+  PendingAddItemInfo createItemInfo;
 switch (mCustomizationType) {
 case WidgetCustomization:
-    final LinearLayout l=(LinearLayout)animView;
-  final Drawable icon=((ImageView)l.findViewById(R.id.icon)).getDrawable();
+    final LinearLayout l=(LinearLayout)v;
+  final Drawable icon=((ImageView)l.findViewById(R.id.widget_preview)).getDrawable();
 Bitmap b=Bitmap.createBitmap(icon.getIntrinsicWidth(),icon.getIntrinsicHeight(),Bitmap.Config.ARGB_8888);
 Canvas c=new Canvas(b);
 icon.draw(c);
-AppWidgetProviderInfo appWidgetInfo=(AppWidgetProviderInfo)v.getTag();
-createItemInfo.itemType=LauncherSettings.Favorites.ITEM_TYPE_APPWIDGET;
-createItemInfo.componentName=appWidgetInfo.provider;
+createItemInfo=(PendingAddItemInfo)v.getTag();
 mDragController.startDrag(v,b,this,createItemInfo,DragController.DRAG_ACTION_COPY,null);
 b.recycle();
 return true;
 case FolderCustomization:
-ResolveInfo resolveInfo=(ResolveInfo)animView.getTag();
-if (resolveInfo.labelRes == R.string.group_folder) {
-UserFolderInfo folderInfo=new UserFolderInfo();
-folderInfo.title=getResources().getText(R.string.folder_name);
+if (v.getTag() instanceof UserFolderInfo) {
+UserFolderInfo folderInfo=(UserFolderInfo)v.getTag();
 mDragController.startDrag(v,this,folderInfo,DragController.DRAG_ACTION_COPY,null);
 }
  else {
-createItemInfo.itemType=LauncherSettings.Favorites.ITEM_TYPE_LIVE_FOLDER;
-createItemInfo.componentName=new ComponentName(resolveInfo.activityInfo.packageName,resolveInfo.activityInfo.name);
+createItemInfo=(PendingAddItemInfo)v.getTag();
 mDragController.startDrag(v,this,createItemInfo,DragController.DRAG_ACTION_COPY,null);
 }
 return true;
 case ShortcutCustomization:
-ResolveInfo info=(ResolveInfo)animView.getTag();
-createItemInfo.itemType=LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT;
-createItemInfo.componentName=new ComponentName(info.activityInfo.packageName,info.activityInfo.name);
+createItemInfo=(PendingAddItemInfo)v.getTag();
 mDragController.startDrag(v,this,createItemInfo,DragController.DRAG_ACTION_COPY,null);
 return true;
 case ApplicationCustomization:

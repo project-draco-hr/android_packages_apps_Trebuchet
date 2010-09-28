@@ -5,18 +5,22 @@
   layout.removeAllViews();
   for (int i=0; i < count; ++i) {
     AppWidgetProviderInfo info=(AppWidgetProviderInfo)list.get(i);
+    PendingAddItemInfo createItemInfo=new PendingAddItemInfo();
+    createItemInfo.itemType=LauncherSettings.Favorites.ITEM_TYPE_APPWIDGET;
+    createItemInfo.componentName=info.provider;
     LinearLayout l=(LinearLayout)mInflater.inflate(R.layout.customize_paged_view_widget,layout,false);
-    l.setTag(info);
+    l.setTag(createItemInfo);
+    l.setOnClickListener(this);
     l.setOnLongClickListener(this);
     final Drawable icon=getWidgetIcon(info);
     final int hSpan=mWorkspaceWidgetLayout.estimateCellHSpan(info.minWidth);
     final int vSpan=mWorkspaceWidgetLayout.estimateCellHSpan(info.minHeight);
-    ImageView image=(ImageView)l.findViewById(R.id.icon);
+    ImageView image=(ImageView)l.findViewById(R.id.widget_preview);
     image.setMaxWidth(mMaxWidgetWidth);
     image.setImageDrawable(icon);
-    TextView name=(TextView)l.findViewById(R.id.name);
+    TextView name=(TextView)l.findViewById(R.id.widget_name);
     name.setText(info.label);
-    TextView dims=(TextView)l.findViewById(R.id.dims);
+    TextView dims=(TextView)l.findViewById(R.id.widget_dims);
     dims.setText(mContext.getString(R.string.widget_dims_format,hSpan,vSpan));
     layout.addView(l);
   }
