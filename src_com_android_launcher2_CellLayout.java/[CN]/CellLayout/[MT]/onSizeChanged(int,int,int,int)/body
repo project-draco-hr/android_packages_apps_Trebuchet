@@ -4,10 +4,7 @@
   if (mBackground != null) {
     mBackground.setBounds(mBackgroundLayoutRect);
   }
-  if (mBackgroundMiniHover != null) {
-    mBackgroundMiniHover.setBounds(mBackgroundLayoutRect);
-  }
-  if (mBackgroundMini != null) {
-    mBackgroundMini.setBounds(mBackgroundLayoutRect);
+  if (mBackgroundHover != null) {
+    mBackgroundHover.setBounds(mBackgroundLayoutRect);
   }
 }

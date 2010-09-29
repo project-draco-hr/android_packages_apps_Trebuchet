@@ -24,12 +24,6 @@
         float dimAlpha=(float)(Math.abs(distanceFromScreenCenter)) / d;
         dimAlpha=Math.max(0.0f,Math.min(1.0f,(dimAlpha * dimAlpha)));
         float alpha=1.0f - dimAlpha;
-        if (alpha < ALPHA_QUANTIZE_LEVEL) {
-          alpha=0.0f;
-        }
- else         if (alpha > 1.0f - ALPHA_QUANTIZE_LEVEL) {
-          alpha=1.0f;
-        }
         if (Float.compare(alpha,layout.getAlpha()) != 0) {
           layout.setAlpha(alpha);
         }

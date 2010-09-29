@@ -1,0 +1,6 @@
+{
+  mDragRect.setEmpty();
+  if (mCrosshairsAnimator != null) {
+    animateCrosshairsTo(1.0f);
+  }
+}

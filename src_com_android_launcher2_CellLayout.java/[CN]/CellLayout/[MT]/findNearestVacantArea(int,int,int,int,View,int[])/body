@@ -2,13 +2,16 @@
   if (ignoreView != null) {
     markCellsAsUnoccupiedForView(ignoreView);
   }
-  final int[] bestXY=recycle != null ? recycle : new int[2];
+  final int[] bestXY=result != null ? result : new int[2];
   double bestDistance=Double.MAX_VALUE;
-  for (int x=0; x < mCountX - (spanX - 1); x++) {
-    inner:     for (int y=0; y < mCountY - (spanY - 1); y++) {
+  final int countX=mCountX;
+  final int countY=mCountY;
+  final boolean[][] occupied=mOccupied;
+  for (int x=0; x < countX - (spanX - 1); x++) {
+    inner:     for (int y=0; y < countY - (spanY - 1); y++) {
       for (int i=0; i < spanX; i++) {
         for (int j=0; j < spanY; j++) {
-          if (mOccupied[x + i][y + j]) {
+          if (occupied[x + i][y + j]) {
             y+=j;
             continue inner;
           }

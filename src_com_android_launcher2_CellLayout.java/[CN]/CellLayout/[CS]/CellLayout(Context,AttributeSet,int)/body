@@ -1,16 +1,6 @@
 {
   super(context,attrs,defStyle);
   setWillNotDraw(false);
-  mVacantDrawable=getResources().getDrawable(R.drawable.rounded_rect_green);
-  mOccupiedDrawable=getResources().getDrawable(R.drawable.rounded_rect_red);
-  if (LauncherApplication.isScreenXLarge()) {
-    mBackgroundMini=getResources().getDrawable(R.drawable.mini_home_screen_bg);
-    mBackgroundMini.setFilterBitmap(true);
-    mBackground=getResources().getDrawable(R.drawable.home_screen_bg);
-    mBackground.setFilterBitmap(true);
-    mBackgroundMiniHover=getResources().getDrawable(R.drawable.mini_home_screen_bg_hover);
-    mBackgroundMiniHover.setFilterBitmap(true);
-  }
   TypedArray a=context.obtainStyledAttributes(attrs,R.styleable.CellLayout,defStyle,0);
   mCellWidth=a.getDimensionPixelSize(R.styleable.CellLayout_cellWidth,10);
   mCellHeight=a.getDimensionPixelSize(R.styleable.CellLayout_cellHeight,10);
@@ -23,5 +13,23 @@
   mOccupied=new boolean[mCountX][mCountY];
   a.recycle();
   setAlwaysDrawnWithCacheEnabled(false);
-  mWallpaperManager=WallpaperManager.getInstance(getContext());
+  mWallpaperManager=WallpaperManager.getInstance(context);
+  if (LauncherApplication.isScreenXLarge()) {
+    final Resources res=getResources();
+    mBackground=res.getDrawable(R.drawable.mini_home_screen_bg);
+    mBackground.setFilterBitmap(true);
+    mBackgroundHover=res.getDrawable(R.drawable.mini_home_screen_bg_hover);
+    mBackgroundHover.setFilterBitmap(true);
+    mDragRectDrawable=res.getDrawable(R.drawable.rounded_rect_green);
+    mCrosshairsDrawable=res.getDrawable(R.drawable.gardening_crosshairs);
+    int animDuration=res.getInteger(R.integer.config_crosshairsFadeInTime);
+    mCrosshairsAnimator=new ValueAnimator<Float>(animDuration);
+    mCrosshairsAnimator.addUpdateListener(new AnimatorUpdateListener(){
+      public void onAnimationUpdate(      ValueAnimator animation){
+        mCrosshairsVisibility=((Float)animation.getAnimatedValue()).floatValue();
+        CellLayout.this.invalidate();
+      }
+    }
+);
+  }
 }

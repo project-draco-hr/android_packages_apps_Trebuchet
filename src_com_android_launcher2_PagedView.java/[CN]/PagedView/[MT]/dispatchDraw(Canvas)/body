@@ -1,8 +1,5 @@
 {
   updateAdjacentPagesAlpha();
-  int halfScreenSize=getMeasuredWidth() / 2;
-  int screenCenter=mScrollX + halfScreenSize;
-  screenScrolled(screenCenter);
   final int pageCount=getChildCount();
   if (pageCount > 0) {
     final int pageWidth=getChildAt(0).getMeasuredWidth();

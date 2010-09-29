@@ -3,7 +3,6 @@
     LayoutParams lp=(LayoutParams)child.getLayoutParams();
     lp.isDragging=false;
     lp.dropped=true;
-    mDragRect.setEmpty();
     child.requestLayout();
   }
   onDragExit();

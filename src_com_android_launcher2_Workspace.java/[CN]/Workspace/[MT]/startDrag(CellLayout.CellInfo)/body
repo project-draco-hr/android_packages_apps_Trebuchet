@@ -8,5 +8,6 @@
   CellLayout current=((CellLayout)getChildAt(mCurrentPage));
   current.onDragChild(child);
   mDragController.startDrag(child,this,child.getTag(),DragController.DRAG_ACTION_MOVE);
+  current.onDragEnter(child);
   invalidate();
 }

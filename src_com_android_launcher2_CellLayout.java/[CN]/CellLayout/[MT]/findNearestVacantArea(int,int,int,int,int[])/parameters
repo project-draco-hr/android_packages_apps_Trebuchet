@@ -2,4 +2,4 @@ int pixelX
 int pixelY
 int spanX
 int spanY
-int[] recycle
+int[] result
