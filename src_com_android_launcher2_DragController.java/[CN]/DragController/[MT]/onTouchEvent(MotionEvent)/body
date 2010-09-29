@@ -10,7 +10,7 @@ switch (action) {
 case MotionEvent.ACTION_DOWN:
     mMotionDownX=screenX;
   mMotionDownY=screenY;
-if ((screenX < SCROLL_ZONE) || (screenX > scrollView.getWidth() - SCROLL_ZONE)) {
+if ((screenX < mScrollZone) || (screenX > scrollView.getWidth() - mScrollZone)) {
   mScrollState=SCROLL_WAITING_IN_ZONE;
   mHandler.postDelayed(mScrollRunnable,SCROLL_DELAY);
 }
@@ -43,14 +43,14 @@ boolean inDeleteRegion=false;
 if (mDeleteRegion != null) {
 inDeleteRegion=mDeleteRegion.contains(screenX,screenY);
 }
-if (!inDeleteRegion && screenX < SCROLL_ZONE) {
+if (!inDeleteRegion && screenX < mScrollZone) {
 if (mScrollState == SCROLL_OUTSIDE_ZONE) {
 mScrollState=SCROLL_WAITING_IN_ZONE;
 mScrollRunnable.setDirection(SCROLL_LEFT);
 mHandler.postDelayed(mScrollRunnable,SCROLL_DELAY);
 }
 }
- else if (!inDeleteRegion && screenX > scrollView.getWidth() - SCROLL_ZONE) {
+ else if (!inDeleteRegion && screenX > scrollView.getWidth() - mScrollZone) {
 if (mScrollState == SCROLL_OUTSIDE_ZONE) {
 mScrollState=SCROLL_WAITING_IN_ZONE;
 mScrollRunnable.setDirection(SCROLL_RIGHT);
