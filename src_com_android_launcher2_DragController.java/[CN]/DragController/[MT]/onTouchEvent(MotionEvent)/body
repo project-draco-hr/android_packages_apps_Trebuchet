@@ -9,7 +9,7 @@ switch (action) {
 case MotionEvent.ACTION_DOWN:
     mMotionDownX=screenX;
   mMotionDownY=screenY;
-if ((screenX < SCROLL_ZONE) || (screenX > mScrollView.getWidth() - SCROLL_ZONE)) {
+if ((screenX < mScrollZone) || (screenX > mScrollView.getWidth() - mScrollZone)) {
   mScrollState=SCROLL_WAITING_IN_ZONE;
   mHandler.postDelayed(mScrollRunnable,SCROLL_DELAY);
 }
