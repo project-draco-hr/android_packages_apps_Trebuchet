@@ -9,5 +9,4 @@
       enableChildrenCache(mCurrentPage - 1,mCurrentPage + 1);
     }
   }
-  showOutlines();
 }

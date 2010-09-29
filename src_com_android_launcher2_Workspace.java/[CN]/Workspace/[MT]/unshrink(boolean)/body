@@ -6,15 +6,8 @@
     for (int i=0; i < screenCount; i++) {
       final CellLayout cl=(CellLayout)getChildAt(i);
       float finalAlphaValue=(i == mCurrentPage) ? 1.0f : 0.0f;
-      float rotation=0.0f;
-      if (i < mCurrentPage) {
-        rotation=WORKSPACE_ROTATION;
-      }
- else       if (i > mCurrentPage) {
-        rotation=-WORKSPACE_ROTATION;
-      }
       if (animated) {
-        s.playTogether(new ObjectAnimator<Float>(duration,cl,"translationX",0.0f),new ObjectAnimator<Float>(duration,cl,"translationY",0.0f),new ObjectAnimator<Float>(duration,cl,"scaleX",1.0f),new ObjectAnimator<Float>(duration,cl,"scaleY",1.0f),new ObjectAnimator<Float>(duration,cl,"backgroundAlpha",0.0f),new ObjectAnimator<Float>(duration,cl,"alpha",finalAlphaValue),new ObjectAnimator<Float>(duration,cl,"dimmableProgress",0.0f),new ObjectAnimator<Float>(duration,cl,"rotationY",rotation));
+        s.playTogether(new ObjectAnimator<Float>(duration,cl,"translationX",0.0f),new ObjectAnimator<Float>(duration,cl,"translationY",0.0f),new ObjectAnimator<Float>(duration,cl,"scaleX",1.0f),new ObjectAnimator<Float>(duration,cl,"scaleY",1.0f),new ObjectAnimator<Float>(duration,cl,"backgroundAlpha",0.0f),new ObjectAnimator<Float>(duration,cl,"alpha",finalAlphaValue),new ObjectAnimator<Float>(duration,cl,"rotationY",0.0f));
       }
  else {
         cl.setTranslationX(0.0f);
@@ -22,9 +15,8 @@
         cl.setScaleX(1.0f);
         cl.setScaleY(1.0f);
         cl.setBackgroundAlpha(0.0f);
-        cl.setDimmableProgress(0.0f);
-        cl.setAlpha(finalAlphaValue);
-        cl.setRotationY(rotation);
+        cl.setAlpha(1.0f);
+        cl.setRotationY(0.0f);
       }
     }
     s.addListener(mUnshrinkAnimationListener);

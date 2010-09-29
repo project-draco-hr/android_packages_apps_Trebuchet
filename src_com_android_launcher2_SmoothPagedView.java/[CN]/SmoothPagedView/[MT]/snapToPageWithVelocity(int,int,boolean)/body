@@ -3,27 +3,19 @@
   final int screenDelta=Math.max(1,Math.abs(whichPage - mCurrentPage));
   final int newX=getChildOffset(whichPage) - getRelativeChildOffset(whichPage);
   final int delta=newX - mScrollX;
-  int duration;
-  if (mScrollMode == OVERSHOOT_MODE) {
-    duration=(screenDelta + 1) * 100;
-  }
- else {
-    duration=Math.round(Math.abs(delta) * 0.6f);
-  }
+  int duration=(screenDelta + 1) * 100;
   if (!mScroller.isFinished()) {
     mScroller.abortAnimation();
   }
-  if (mScrollMode == OVERSHOOT_MODE) {
-    if (settle) {
-      ((WorkspaceOvershootInterpolator)mScrollInterpolator).setDistance(screenDelta);
-    }
+  if (settle) {
+    mScrollInterpolator.setDistance(screenDelta);
+  }
  else {
-      ((WorkspaceOvershootInterpolator)mScrollInterpolator).disableSettle();
-    }
+    mScrollInterpolator.disableSettle();
   }
   velocity=Math.abs(velocity);
   if (velocity > 0) {
-    duration+=(duration / (velocity / mBaseLineFlingVelocity)) * mFlingVelocityInfluence;
+    duration+=(duration / (velocity / BASELINE_FLING_VELOCITY)) * FLING_VELOCITY_INFLUENCE;
   }
  else {
     duration+=100;

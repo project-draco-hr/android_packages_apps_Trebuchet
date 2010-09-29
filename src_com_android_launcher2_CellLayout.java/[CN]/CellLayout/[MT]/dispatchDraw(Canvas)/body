@@ -1,15 +1,6 @@
 {
   if (mBackgroundAlpha > 0.0f) {
-    Drawable bg;
-    if (mHover && getScaleX() < 0.5f) {
-      bg=mBackgroundMiniHover;
-    }
- else     if (getScaleX() < 0.5f) {
-      bg=mBackgroundMini;
-    }
- else {
-      bg=mBackground;
-    }
+    final Drawable bg=mHover ? mBackgroundHover : mBackground;
     bg.setAlpha((int)(mBackgroundAlpha * 255));
     bg.draw(canvas);
   }
