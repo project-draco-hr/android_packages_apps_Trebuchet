@@ -10,4 +10,5 @@
   int dimmedColor=getContext().getResources().getColor(R.color.dimmed_view_color);
   mDimmedViewCanvas.drawColor(dimmedColor,PorterDuff.Mode.SRC_IN);
   isDimmedViewUpdatePass=false;
+  invalidate();
 }

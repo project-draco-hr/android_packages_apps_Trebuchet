@@ -1,0 +1,7 @@
+{
+  mBackgroundAlpha=alpha;
+  for (int i=0; i < getChildCount(); i++) {
+    CellLayout cl=(CellLayout)getChildAt(i);
+    cl.setBackgroundAlpha(alpha);
+  }
+}

@@ -2,7 +2,7 @@
   if (!isChoiceMode(CHOICE_MODE_NONE)) {
     mChoiceMode=CHOICE_MODE_NONE;
     resetCheckedGrandchildren();
-    mActionMode.finish();
+    if (mActionMode != null)     mActionMode.finish();
     mActionMode=null;
   }
 }

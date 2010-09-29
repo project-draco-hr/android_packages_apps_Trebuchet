@@ -8,8 +8,8 @@
     setAlpha(alpha);
   }
  else {
-    if (mDimmedView != null && mDimmedAlpha > 0) {
-      mPaint.setAlpha(mDimmedAlpha);
+    if (mDimmedView != null && mDimmableProgress > 0) {
+      mPaint.setAlpha((int)(mDimmableProgress * 255));
       canvas.drawBitmap(mDimmedView,0,0,mPaint);
     }
     updateChildAlpha();

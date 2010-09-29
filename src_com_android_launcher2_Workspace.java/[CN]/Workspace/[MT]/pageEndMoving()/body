@@ -2,4 +2,5 @@
   if (!LauncherApplication.isScreenXLarge()) {
     clearChildrenCache();
   }
+  hideOutlines();
 }

@@ -1,9 +1,0 @@
-{
-  final float pivot=0.6f;
-  if (r < pivot) {
-    return r / pivot;
-  }
- else {
-    return 1.0f;
-  }
-}

@@ -1,9 +1,0 @@
-{
-  final float pivot=0.3f;
-  if (r < pivot) {
-    return Math.max(0.5f,0.65f * cubic(r / pivot));
-  }
- else {
-    return Math.min(1.0f,0.65f * cubic(1 - (r - pivot) / (1 - pivot)));
-  }
-}
