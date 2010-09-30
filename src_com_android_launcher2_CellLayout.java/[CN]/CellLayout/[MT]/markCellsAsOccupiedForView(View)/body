@@ -1,4 +1,5 @@
 {
+  if (view == null || view.getParent() != this)   return;
   LayoutParams lp=(LayoutParams)view.getLayoutParams();
   markCellsForView(lp.cellX,lp.cellY,lp.cellHSpan,lp.cellVSpan,true);
 }

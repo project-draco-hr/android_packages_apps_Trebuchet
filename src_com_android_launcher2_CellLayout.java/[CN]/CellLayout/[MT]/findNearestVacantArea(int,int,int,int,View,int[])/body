@@ -1,7 +1,5 @@
 {
-  if (ignoreView != null) {
-    markCellsAsUnoccupiedForView(ignoreView);
-  }
+  markCellsAsUnoccupiedForView(ignoreView);
   final int[] bestXY=result != null ? result : new int[2];
   double bestDistance=Double.MAX_VALUE;
   final int countX=mCountX;
@@ -27,9 +25,7 @@
       }
     }
   }
-  if (ignoreView != null) {
-    markCellsAsOccupiedForView(ignoreView);
-  }
+  markCellsAsOccupiedForView(ignoreView);
   if (bestDistance < Double.MAX_VALUE) {
     return bestXY;
   }

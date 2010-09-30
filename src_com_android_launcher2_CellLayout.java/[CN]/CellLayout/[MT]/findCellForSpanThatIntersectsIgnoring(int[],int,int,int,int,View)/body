@@ -1,7 +1,5 @@
 {
-  if (ignoreView != null) {
-    markCellsAsUnoccupiedForView(ignoreView);
-  }
+  markCellsAsUnoccupiedForView(ignoreView);
   boolean foundCell=false;
   while (true) {
     int startX=0;
@@ -47,8 +45,6 @@
       continue;
     }
   }
-  if (ignoreView != null) {
-    markCellsAsOccupiedForView(ignoreView);
-  }
+  markCellsAsOccupiedForView(ignoreView);
   return foundCell;
 }
