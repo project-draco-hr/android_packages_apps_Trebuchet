@@ -1,0 +1,6 @@
+{
+  super(duration,fromValue,toValue);
+  mOriginalDuration=duration;
+  mOriginalFromValue=fromValue;
+  mOriginalToValue=toValue;
+}

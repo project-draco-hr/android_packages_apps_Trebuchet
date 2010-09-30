@@ -2,11 +2,6 @@
   if (mCrosshairsVisibility > 0.0f) {
     final int countX=mCountX;
     final int countY=mCountY;
-    if (!mDragRect.isEmpty()) {
-      mDragRectDrawable.setBounds((int)mDragRect.left,(int)mDragRect.top,(int)mDragRect.right,(int)mDragRect.bottom);
-      mDragRectDrawable.setAlpha((int)(mCrosshairsVisibility * 255));
-      mDragRectDrawable.draw(canvas);
-    }
     final float MAX_ALPHA=0.4f;
     final int MAX_VISIBLE_DISTANCE=600;
     final float DISTANCE_MULTIPLIER=0.002f;
@@ -28,6 +23,14 @@
         y+=mCellHeight + mHeightGap;
       }
       x+=mCellWidth + mWidthGap;
+    }
+    for (int i=0; i < mDragRects.length; i++) {
+      int alpha=mDragRectAlphas[i];
+      if (alpha > 0) {
+        mDragRectDrawable.setAlpha(alpha);
+        mDragRectDrawable.setBounds(mDragRects[i]);
+        mDragRectDrawable.draw(canvas);
+      }
     }
   }
 }
