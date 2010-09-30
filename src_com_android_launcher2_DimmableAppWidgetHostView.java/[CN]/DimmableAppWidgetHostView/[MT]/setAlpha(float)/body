@@ -1,8 +1,0 @@
-{
-  final float viewAlpha=viewAlphaInterpolator(alpha);
-  final float dimmedAlpha=highlightAlphaInterpolator(alpha);
-  mAlpha=(int)(viewAlpha * 255);
-  mDimmedAlpha=(int)(dimmedAlpha * 255);
-  super.setAlpha(viewAlpha);
-  setChildAlpha(viewAlpha);
-}
