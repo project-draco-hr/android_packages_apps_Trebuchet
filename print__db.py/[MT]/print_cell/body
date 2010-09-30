@@ -1,0 +1,3 @@
+def print_cell(out, id, i, cell):
+    if (not (cell is None)):
+        out.write(cgi.escape(str(cell)))
