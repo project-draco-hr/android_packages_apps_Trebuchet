@@ -8,4 +8,5 @@
     mCustomizePagedView.removeApps(apps);
   }
   updateAppMarketIcon();
+  updateGlobalSearchIcon();
 }

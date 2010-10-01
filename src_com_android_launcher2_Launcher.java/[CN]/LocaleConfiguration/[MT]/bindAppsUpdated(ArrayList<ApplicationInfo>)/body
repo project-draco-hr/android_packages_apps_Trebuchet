@@ -6,4 +6,5 @@
     mCustomizePagedView.updateApps(apps);
   }
   updateAppMarketIcon();
+  updateGlobalSearchIcon();
 }
