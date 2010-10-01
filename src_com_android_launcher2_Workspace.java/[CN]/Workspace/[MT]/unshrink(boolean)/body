@@ -14,7 +14,7 @@
         rotation=-WORKSPACE_ROTATION;
       }
       if (animated) {
-        s.playTogether(new ObjectAnimator<Float>(duration,cl,"translationX",0.0f),new ObjectAnimator<Float>(duration,cl,"translationY",0.0f),new ObjectAnimator<Float>(duration,cl,"scaleX",1.0f),new ObjectAnimator<Float>(duration,cl,"scaleY",1.0f),new ObjectAnimator<Float>(duration,cl,"backgroundAlpha",0.0f),new ObjectAnimator<Float>(duration,cl,"alpha",finalAlphaValue),new ObjectAnimator<Float>(duration,cl,"dimmableProgress",0.0f),new ObjectAnimator<Float>(duration,cl,"rotationY",rotation));
+        s.playTogether(new ObjectAnimator<Float>(duration,cl,"translationX",0.0f),new ObjectAnimator<Float>(duration,cl,"translationY",0.0f),new ObjectAnimator<Float>(duration,cl,"scaleX",1.0f),new ObjectAnimator<Float>(duration,cl,"scaleY",1.0f),new ObjectAnimator<Float>(duration,cl,"backgroundAlpha",0.0f),new ObjectAnimator<Float>(duration,cl,"alpha",finalAlphaValue),new ObjectAnimator<Float>(duration,cl,"rotationY",rotation));
       }
  else {
         cl.setTranslationX(0.0f);
@@ -22,7 +22,6 @@
         cl.setScaleX(1.0f);
         cl.setScaleY(1.0f);
         cl.setBackgroundAlpha(0.0f);
-        cl.setDimmableProgress(0.0f);
         cl.setAlpha(finalAlphaValue);
         cl.setRotationY(rotation);
       }
