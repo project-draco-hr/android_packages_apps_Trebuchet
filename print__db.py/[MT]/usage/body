@@ -1,0 +1,7 @@
+def usage():
+    print 'usage: print_db.py launcher.db -- prints a launcher.db'
+    print 'usage: print_db.py -- adb pulls a launcher.db from a device'
+    print '       and prints it'
+    print 
+    print 'The dump will be created in a directory called db_files in cwd.'
+    print 'This script will delete any db_files directory you have now'

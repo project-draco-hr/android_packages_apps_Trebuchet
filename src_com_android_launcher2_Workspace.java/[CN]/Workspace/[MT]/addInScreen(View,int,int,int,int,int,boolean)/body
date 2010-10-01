@@ -14,7 +14,7 @@
     lp.cellHSpan=spanX;
     lp.cellVSpan=spanY;
   }
-  int childId=LauncherModel.getCellLayoutChildId(child.getId(),screen,x,y,spanX,spanY);
+  int childId=LauncherModel.getCellLayoutChildId(-1,screen,x,y,spanX,spanY);
   if (!group.addViewToCellLayout(child,insert ? 0 : -1,childId,lp)) {
     Log.w(TAG,"Failed to add to item at (" + lp.cellX + ","+ lp.cellY+ ") to CellLayout");
   }

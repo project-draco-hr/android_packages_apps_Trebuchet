@@ -1,0 +1,98 @@
+def process_file(fn):
+    print ('process_file: ' + fn)
+    conn = sqlite3.connect(fn)
+    (columns, rows) = get_favorites(conn)
+    data = [dict(zip(columns, row)) for row in rows]
+    out = file(INDEX_FILE, 'w')
+    out.write('<html>\n<head>\n<style type="text/css">\n.intent {\n  font-style: italic;\n}\n</style>\n</head>\n<body>\n')
+    out.write('<b>Favorites table</b><br/>\n')
+    out.write('<html>\n<table border=1 cellspacing=0 cellpadding=4>\n<tr>\n')
+    print_functions = []
+    for col in columns:
+        print_functions.append(FUNCTIONS.get(col, print_cell))
+    for i in range(0, len(columns)):
+        col = columns[i]
+        out.write(('  <th>%s</th>\n' % col))
+    out.write('\n</tr>\n')
+    for row in rows:
+        out.write('<tr>\n')
+        for i in range(0, len(row)):
+            cell = row[i]
+            out.write('  <td>')
+            print_functions[i](out, row[0], row, cell)
+            out.write('</td>\n')
+        out.write('</tr>\n')
+    out.write('</table>\n')
+    screens = []
+    for i in range(0, SCREENS):
+        screen = []
+        for j in range(0, ROWS):
+            m = []
+            for k in range(0, COLUMNS):
+                m.append(None)
+            screen.append(m)
+        screens.append(screen)
+    occupied = 'occupied'
+    for row in data:
+        screen = screens[row['screen']]
+        if (row['container'] != (-100)):
+            continue
+        cellX = row['cellX']
+        cellY = row['cellY']
+        spanX = row['spanX']
+        spanY = row['spanY']
+        for j in range(cellY, (cellY + spanY)):
+            for k in range(cellX, (cellX + spanX)):
+                screen[j][k] = occupied
+        screen[cellY][cellX] = row
+    i = 0
+    for screen in screens:
+        out.write(('<br/><b>Screen %d</b><br/>\n' % i))
+        out.write('<table class=layout border=1 cellspacing=0 cellpadding=4>\n')
+        for m in screen:
+            out.write('  <tr>\n')
+            for cell in m:
+                if (cell is None):
+                    out.write(('    <td width=%d height=%d></td>\n' % (CELL_SIZE, CELL_SIZE)))
+                elif (cell == occupied):
+                    pass
+                else:
+                    cellX = cell['cellX']
+                    cellY = cell['cellY']
+                    spanX = cell['spanX']
+                    spanY = cell['spanY']
+                    intent = cell['intent']
+                    if intent:
+                        title = ('title="%s"' % cgi.escape(cell['intent'], True))
+                    else:
+                        title = ''
+                    out.write((('    <td colspan=%d rowspan=%d width=%d height=%d' + ' bgcolor=#dddddd align=center valign=middle %s>') % (spanX, spanY, (CELL_SIZE * spanX), (CELL_SIZE * spanY), title)))
+                    itemType = cell['itemType']
+                    if (itemType == 0):
+                        out.write(('<img src="icon_%d.png">\n' % cell['_id']))
+                        out.write('<br/>\n')
+                        out.write((cgi.escape(cell['title']) + ' <br/><i>(app)</i>'))
+                    elif (itemType == 1):
+                        out.write(('<img src="icon_%d.png">\n' % cell['_id']))
+                        out.write('<br/>\n')
+                        out.write((cgi.escape(cell['title']) + ' <br/><i>(shortcut)</i>'))
+                    elif (itemType == 2):
+                        out.write('<i>folder</i>')
+                    elif (itemType == 3):
+                        out.write('<i>live folder</i>')
+                    elif (itemType == 4):
+                        out.write(('<i>widget %d</i><br/>\n' % cell['appWidgetId']))
+                    elif (itemType == 1000):
+                        out.write('<i>clock</i>')
+                    elif (itemType == 1001):
+                        out.write('<i>search</i>')
+                    elif (itemType == 1002):
+                        out.write('<i>photo frame</i>')
+                    else:
+                        out.write(('<b>unknown type: %d</b>' % itemType))
+                    out.write('</td>\n')
+            out.write('</tr>\n')
+        out.write('</table>\n')
+        i = (i + 1)
+    out.write('\n</body>\n</html>\n')
+    out.close()

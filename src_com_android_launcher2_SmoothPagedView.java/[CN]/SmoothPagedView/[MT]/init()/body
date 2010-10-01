@@ -1,5 +1,15 @@
 {
   super.init();
-  mScrollInterpolator=new WorkspaceOvershootInterpolator();
+  mScrollMode=getScrollMode();
+  if (mScrollMode == QUINTIC_MODE) {
+    mBaseLineFlingVelocity=700.0f;
+    mFlingVelocityInfluence=0.8f;
+    mScrollInterpolator=new QuinticInterpolator();
+  }
+ else {
+    mBaseLineFlingVelocity=2500.0f;
+    mFlingVelocityInfluence=0.4f;
+    mScrollInterpolator=new WorkspaceOvershootInterpolator();
+  }
   mScroller=new Scroller(getContext(),mScrollInterpolator);
 }

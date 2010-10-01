@@ -6,4 +6,7 @@
   if (mCrosshairsAnimator != null) {
     animateCrosshairsTo(0.0f);
   }
+  mDragRectAnims[mDragRectCurrent].animateOut();
+  mDragRectCurrent=(mDragRectCurrent + 1) % mDragRects.length;
+  mDragRects[mDragRectCurrent].setEmpty();
 }

@@ -8,12 +8,10 @@
     canvas.restore();
   }
  else {
-    if (mAlpha > 0) {
-      super.onDraw(canvas);
-    }
+    super.onDraw(canvas);
   }
-  if (mDimmedView != null && mDimmedAlpha > 0) {
-    mDimmedPaint.setAlpha(mDimmedAlpha);
+  if (mDimmedView != null && mDimmableProgress > 0) {
+    mDimmedPaint.setAlpha((int)(mDimmableProgress * 255));
     canvas.drawBitmap(mDimmedView,mScrollX,mScrollY,mDimmedPaint);
   }
 }

@@ -1,0 +1,52 @@
+{
+  View cur=getChildAt(mCurrentPage);
+  View toRight=getChildAt(mCurrentPage + 1);
+  View toLeft=getChildAt(mCurrentPage - 1);
+  for (int i=0; i < mCurrentPage - 1; i++) {
+    View v=getChildAt(i);
+    if (v != null) {
+      v.setRotationY(WORKSPACE_ROTATION);
+      v.setScaleX(getScaleXForRotation(WORKSPACE_ROTATION));
+    }
+  }
+  for (int i=mCurrentPage + 1; i < getChildCount(); i++) {
+    View v=getChildAt(i);
+    if (v != null) {
+      v.setRotationY(-WORKSPACE_ROTATION);
+      v.setScaleX(getScaleXForRotation(-WORKSPACE_ROTATION));
+    }
+  }
+  int pageWidth=cur.getMeasuredWidth();
+  int delta=screenCenter - (mCurrentPage * pageWidth + pageWidth / 2 + getRelativeChildOffset(0));
+  float scrollProgress=Math.abs(delta / (pageWidth * 1.0f));
+  int scrollDirection=delta > 0 ? SCROLL_LEFT : SCROLL_RIGHT;
+  float rotation;
+  if (scrollDirection == SCROLL_RIGHT) {
+    rotation=-scrollProgress * WORKSPACE_ROTATION;
+    cur.setRotationY(rotation);
+    cur.setScaleX(getScaleXForRotation(rotation));
+    if (toLeft != null) {
+      rotation=WORKSPACE_ROTATION * (1 - scrollProgress);
+      toLeft.setRotationY(rotation);
+      toLeft.setScaleX(getScaleXForRotation(rotation));
+    }
+    if (toRight != null) {
+      toRight.setRotationY(-WORKSPACE_ROTATION);
+      toRight.setScaleX(getScaleXForRotation(WORKSPACE_ROTATION));
+    }
+  }
+ else {
+    rotation=scrollProgress * WORKSPACE_ROTATION;
+    cur.setRotationY(rotation);
+    cur.setScaleX(getScaleXForRotation(rotation));
+    if (toRight != null) {
+      rotation=-WORKSPACE_ROTATION * (1 - scrollProgress);
+      toRight.setRotationY(rotation);
+      toRight.setScaleX(getScaleXForRotation(rotation));
+    }
+    if (toLeft != null) {
+      toLeft.setRotationY(WORKSPACE_ROTATION);
+      toLeft.setScaleX(getScaleXForRotation(WORKSPACE_ROTATION));
+    }
+  }
+}

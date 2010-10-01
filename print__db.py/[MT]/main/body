@@ -1,0 +1,10 @@
+def main(argv):
+    if (len(argv) == 1):
+        make_dir()
+        pull_file(AUTO_FILE)
+        process_file(AUTO_FILE)
+    elif (len(argv) == 2):
+        make_dir()
+        process_file(argv[1])
+    else:
+        usage()

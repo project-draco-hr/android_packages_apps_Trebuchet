@@ -1,0 +1,6 @@
+{
+  if (getChildCount() > 0) {
+    return ((Dimmable)getChildAt(0)).getDimmableProgress();
+  }
+  return 0.0f;
+}

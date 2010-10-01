@@ -1,0 +1,7 @@
+def print_icon(out, id, i, cell):
+    if cell:
+        icon_fn = ('icon_%d.png' % id)
+        out.write(('<img src="%s">' % icon_fn))
+        f = file(((DIR + '/') + icon_fn), 'w')
+        f.write(cell)
+        f.close()
