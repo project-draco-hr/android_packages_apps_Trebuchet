@@ -12,4 +12,7 @@
   if (mBackgroundMini != null) {
     mBackgroundMini.setBounds(0,0,w,h);
   }
+  if (mBackgroundMiniAcceptsDrops != null) {
+    mBackgroundMiniAcceptsDrops.setBounds(0,0,w,h);
+  }
 }

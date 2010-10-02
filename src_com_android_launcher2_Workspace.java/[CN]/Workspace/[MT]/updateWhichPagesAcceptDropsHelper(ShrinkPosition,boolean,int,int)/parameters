@@ -1,0 +1,4 @@
+ShrinkPosition state
+boolean isDragHappening
+int spanX
+int spanY

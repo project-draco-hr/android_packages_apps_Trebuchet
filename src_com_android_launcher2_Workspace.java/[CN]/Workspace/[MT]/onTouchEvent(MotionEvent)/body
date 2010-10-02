@@ -3,7 +3,7 @@
     if (!mScroller.isFinished()) {
       mScroller.abortAnimation();
     }
-    snapToPage(mCurrentPage);
+    setCurrentPage(mCurrentPage);
     return false;
   }
   return super.onTouchEvent(ev);

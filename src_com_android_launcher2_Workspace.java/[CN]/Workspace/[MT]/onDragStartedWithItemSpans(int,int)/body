@@ -1,0 +1,6 @@
+{
+  updateWhichPagesAcceptDropsDuringDrag(mShrunkenState,spanX,spanY);
+  if (mShrunkenState == ShrinkPosition.SHRINK_TO_BOTTOM_HIDDEN) {
+    shrink(ShrinkPosition.SHRINK_TO_BOTTOM_VISIBLE,true);
+  }
+}

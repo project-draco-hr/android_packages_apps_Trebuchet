@@ -1,6 +1,8 @@
 {
-  if (mBackgroundFadeOut != null)   mBackgroundFadeOut.cancel();
-  if (mBackgroundFadeIn != null)   mBackgroundFadeIn.cancel();
-  mBackgroundFadeIn=new ObjectAnimator<Float>(BACKGROUND_FADE_IN_DURATION,this,new PropertyValuesHolder<Float>("backgroundAlpha",1.0f));
-  mBackgroundFadeIn.start();
+  if (!mIsSmall && !mIsInUnshrinkAnimation) {
+    if (mBackgroundFadeOutAnimation != null)     mBackgroundFadeOutAnimation.cancel();
+    if (mBackgroundFadeInAnimation != null)     mBackgroundFadeInAnimation.cancel();
+    mBackgroundFadeInAnimation=new ObjectAnimator<Float>(BACKGROUND_FADE_IN_DURATION,this,new PropertyValuesHolder<Float>("backgroundAlpha",1.0f));
+    mBackgroundFadeInAnimation.start();
+  }
 }
