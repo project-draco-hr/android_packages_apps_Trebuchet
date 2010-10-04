@@ -1,8 +1,3 @@
 {
-  if (LauncherApplication.isScreenXLarge()) {
-    return new DimmableAppWidgetHostView(context);
-  }
- else {
-    return new LauncherAppWidgetHostView(context);
-  }
+  return new LauncherAppWidgetHostView(context);
 }

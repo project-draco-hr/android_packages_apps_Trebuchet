@@ -1,13 +1,9 @@
 {
   if (mNextPage != INVALID_PAGE) {
-    if (!LauncherApplication.isScreenXLarge()) {
-      enableChildrenCache(mCurrentPage,mNextPage);
-    }
+    enableChildrenCache(mCurrentPage,mNextPage);
   }
  else {
-    if (!LauncherApplication.isScreenXLarge()) {
-      enableChildrenCache(mCurrentPage - 1,mCurrentPage + 1);
-    }
+    enableChildrenCache(mCurrentPage - 1,mCurrentPage + 1);
   }
   showOutlines();
 }
