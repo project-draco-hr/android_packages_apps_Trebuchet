@@ -1,4 +1,9 @@
 {
-  Intent intent=new Intent(SearchManager.INTENT_ACTION_GLOBAL_SEARCH);
-  mGlobalSearchIntent=updateExternalIcon(R.id.search_button,intent,R.drawable.search_button_generic);
+  if (LauncherApplication.isScreenXLarge()) {
+    final SearchManager searchManager=(SearchManager)getSystemService(Context.SEARCH_SERVICE);
+    ComponentName activityName=searchManager.getGlobalSearchActivity();
+    if (activityName != null) {
+      updateButtonWithIconFromExternalActivity(R.id.search_button,activityName,R.drawable.search_button_generic);
+    }
+  }
 }
