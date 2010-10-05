@@ -7,10 +7,6 @@
   a=context.obtainStyledAttributes(attrs,R.styleable.PagedView,defStyle,0);
   mCellCountX=a.getInt(R.styleable.PagedView_cellCountX,7);
   mCellCountY=a.getInt(R.styleable.PagedView_cellCountY,4);
-  mPageLayoutPaddingTop=a.getDimensionPixelSize(R.styleable.PagedView_pageLayoutPaddingTop,10);
-  mPageLayoutPaddingBottom=a.getDimensionPixelSize(R.styleable.PagedView_pageLayoutPaddingBottom,10);
-  mPageLayoutPaddingLeft=a.getDimensionPixelSize(R.styleable.PagedView_pageLayoutPaddingLeft,10);
-  mPageLayoutPaddingRight=a.getDimensionPixelSize(R.styleable.PagedView_pageLayoutPaddingRight,10);
   a.recycle();
   mCustomizationType=CustomizationType.WidgetCustomization;
   mWidgetPages=new ArrayList<ArrayList<AppWidgetProviderInfo>>();

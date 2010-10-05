@@ -18,7 +18,7 @@
       final int childWidth=child.getMeasuredWidth();
       final int childHeight=(getMeasuredHeight() - child.getMeasuredHeight()) / 2;
       child.layout(childLeft,childHeight,childLeft + childWidth,childHeight + child.getMeasuredHeight());
-      childLeft+=childWidth;
+      childLeft+=childWidth + mPageSpacing;
     }
   }
 }
