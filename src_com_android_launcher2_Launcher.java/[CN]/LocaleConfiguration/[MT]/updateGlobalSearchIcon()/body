@@ -1,0 +1,4 @@
+{
+  Intent intent=new Intent(SearchManager.INTENT_ACTION_GLOBAL_SEARCH);
+  mGlobalSearchIntent=updateExternalIcon(R.id.search_button,intent,R.drawable.search_button_generic);
+}

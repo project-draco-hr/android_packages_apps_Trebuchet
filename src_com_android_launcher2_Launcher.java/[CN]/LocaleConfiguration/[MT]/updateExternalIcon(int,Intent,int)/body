@@ -1,0 +1,30 @@
+{
+  if (LauncherApplication.isScreenXLarge()) {
+    PackageManager packageManager=getPackageManager();
+    ComponentName activityName=intent.resolveActivity(getPackageManager());
+    if (activityName != null) {
+      ImageView button=(ImageView)findViewById(buttonId);
+      Drawable toolbarIcon=null;
+      try {
+        Bundle metaData=packageManager.getActivityInfo(activityName,PackageManager.GET_META_DATA).metaData;
+        if (metaData != null) {
+          int iconResId=metaData.getInt(TOOLBAR_ICON_METADATA_NAME);
+          if (iconResId != 0) {
+            Resources res=packageManager.getResourcesForActivity(activityName);
+            toolbarIcon=res.getDrawable(iconResId);
+          }
+        }
+      }
+ catch (      NameNotFoundException e) {
+      }
+      if (toolbarIcon == null) {
+        button.setImageResource(fallbackDrawableId);
+      }
+ else {
+        button.setImageDrawable(toolbarIcon);
+      }
+      return intent;
+    }
+  }
+  return null;
+}
