@@ -35,17 +35,19 @@
       }
     }
   }
-  if (currentLayout != mDragTargetLayout) {
-    if (mDragTargetLayout != null) {
-      mDragTargetLayout.onDragExit();
+  if (!mInScrollArea) {
+    if (currentLayout != mDragTargetLayout) {
+      if (mDragTargetLayout != null) {
+        mDragTargetLayout.onDragExit();
+      }
       currentLayout.onDragEnter(dragView);
+      mDragTargetLayout=currentLayout;
     }
-    mDragTargetLayout=currentLayout;
-  }
-  if ((!LauncherApplication.isScreenXLarge() || source == this) && mDragTargetLayout != null) {
-    final View child=(mDragInfo == null) ? null : mDragInfo.cell;
-    int localOriginX=originX - (mDragTargetLayout.getLeft() - mScrollX);
-    int localOriginY=originY - (mDragTargetLayout.getTop() - mScrollY);
-    mDragTargetLayout.visualizeDropLocation(child,localOriginX,localOriginY,item.spanX,item.spanY);
+    if ((!LauncherApplication.isScreenXLarge() || source == this) && mDragTargetLayout != null) {
+      final View child=(mDragInfo == null) ? null : mDragInfo.cell;
+      int localOriginX=originX - (mDragTargetLayout.getLeft() - mScrollX);
+      int localOriginY=originY - (mDragTargetLayout.getTop() - mScrollY);
+      mDragTargetLayout.visualizeDropLocation(child,localOriginX,localOriginY,item.spanX,item.spanY);
+    }
   }
 }

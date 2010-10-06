@@ -2,7 +2,6 @@
   mDragCell[0]=-1;
   mDragCell[1]=-1;
   setHover(false);
-  invalidate();
   if (mCrosshairsAnimator != null) {
     animateCrosshairsTo(0.0f);
   }

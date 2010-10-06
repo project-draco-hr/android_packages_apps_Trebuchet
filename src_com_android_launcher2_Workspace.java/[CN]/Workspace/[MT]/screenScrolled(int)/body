@@ -20,9 +20,9 @@
   int pageWidth=cur.getMeasuredWidth();
   int delta=screenCenter - (getChildOffset(mCurrentPage) - getRelativeChildOffset(mCurrentPage) + halfScreenSize);
   float scrollProgress=Math.abs(delta / (pageWidth * 1.0f + mPageSpacing));
-  int scrollDirection=delta > 0 ? SCROLL_LEFT : SCROLL_RIGHT;
+  boolean scrollRight=(delta <= 0);
   float rotation;
-  if (scrollDirection == SCROLL_RIGHT) {
+  if (scrollRight) {
     rotation=-scrollProgress * WORKSPACE_ROTATION;
     cur.setRotationY(rotation);
     cur.setScaleX(getScaleXForRotation(rotation));

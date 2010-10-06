@@ -1,3 +1,4 @@
 {
   getCurrentDropLayout().onDragEnter(dragView);
+  showOutlines();
 }

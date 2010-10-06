@@ -3,4 +3,7 @@
     mDragTargetLayout.onDragExit();
     mDragTargetLayout=null;
   }
+  if (!mIsPageMoving) {
+    hideOutlines();
+  }
 }

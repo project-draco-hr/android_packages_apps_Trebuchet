@@ -1,2 +1,4 @@
 {
+  onPageEndMoving();
+  mIsPageMoving=false;
 }
