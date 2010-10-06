@@ -1,7 +1,7 @@
 {
-  View cur=getChildAt(mCurrentPage);
-  View toRight=getChildAt(mCurrentPage + 1);
-  View toLeft=getChildAt(mCurrentPage - 1);
+  CellLayout cur=(CellLayout)getChildAt(mCurrentPage);
+  CellLayout toRight=(CellLayout)getChildAt(mCurrentPage + 1);
+  CellLayout toLeft=(CellLayout)getChildAt(mCurrentPage - 1);
   for (int i=0; i < mCurrentPage - 1; i++) {
     View v=getChildAt(i);
     if (v != null) {
@@ -16,9 +16,10 @@
       v.setScaleX(getScaleXForRotation(-WORKSPACE_ROTATION));
     }
   }
+  int halfScreenSize=getMeasuredWidth() / 2;
   int pageWidth=cur.getMeasuredWidth();
-  int delta=screenCenter - (mCurrentPage * pageWidth + pageWidth / 2 + getRelativeChildOffset(0));
-  float scrollProgress=Math.abs(delta / (pageWidth * 1.0f));
+  int delta=screenCenter - (getChildOffset(mCurrentPage) - getRelativeChildOffset(mCurrentPage) + halfScreenSize);
+  float scrollProgress=Math.abs(delta / (pageWidth * 1.0f + mPageSpacing));
   int scrollDirection=delta > 0 ? SCROLL_LEFT : SCROLL_RIGHT;
   float rotation;
   if (scrollDirection == SCROLL_RIGHT) {

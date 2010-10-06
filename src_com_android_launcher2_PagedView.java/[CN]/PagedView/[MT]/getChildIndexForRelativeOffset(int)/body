@@ -1,12 +1,13 @@
 {
   final int childCount=getChildCount();
-  int left=getRelativeChildOffset(0);
+  int left;
+  int right;
   for (int i=0; i < childCount; ++i) {
-    final int right=(left + getChildAt(i).getMeasuredWidth());
+    left=getRelativeChildOffset(i);
+    right=(left + getChildAt(i).getMeasuredWidth());
     if (left <= relativeOffset && relativeOffset <= right) {
       return i;
     }
-    left=right;
   }
   return -1;
 }

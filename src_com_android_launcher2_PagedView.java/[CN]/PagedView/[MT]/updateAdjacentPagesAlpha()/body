@@ -21,6 +21,7 @@
             d+=getChildAt(i + 1).getMeasuredWidth() / 2;
           }
         }
+        d+=mPageSpacing;
         float dimAlpha=(float)(Math.abs(distanceFromScreenCenter)) / d;
         dimAlpha=Math.max(0.0f,Math.min(1.0f,(dimAlpha * dimAlpha)));
         float alpha=1.0f - dimAlpha;

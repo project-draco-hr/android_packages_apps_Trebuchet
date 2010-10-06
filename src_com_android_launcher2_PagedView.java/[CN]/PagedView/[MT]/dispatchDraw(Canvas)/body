@@ -15,12 +15,12 @@
     int rightScreen=0;
     while (x <= mScrollX) {
       leftScreen++;
-      x+=pageWidth;
+      x+=pageWidth + mPageSpacing;
     }
     rightScreen=leftScreen;
     while (x < mScrollX + screenWidth) {
       rightScreen++;
-      x+=pageWidth;
+      x+=pageWidth + mPageSpacing;
     }
     rightScreen=Math.min(getChildCount() - 1,rightScreen);
     final long drawingTime=getDrawingTime();
