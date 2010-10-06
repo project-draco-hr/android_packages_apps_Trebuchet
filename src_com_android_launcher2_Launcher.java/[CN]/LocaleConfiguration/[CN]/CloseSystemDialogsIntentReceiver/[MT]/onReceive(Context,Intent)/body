@@ -6,7 +6,6 @@
     if (mPaused || "lock".equals(reason)) {
       animate=false;
     }
-    closeAllApps(animate);
-    hideCustomizationDrawer(animate);
+    showWorkspace(animate);
   }
 }

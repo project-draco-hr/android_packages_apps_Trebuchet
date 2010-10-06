@@ -26,12 +26,13 @@
     AnimatorSet toolbarShowAnim=new AnimatorSet();
     hideAndShowToolbarButtons(toState,toolbarShowAnim,toolbarHideAnim);
     final int startDelay=res.getInteger(R.integer.config_workspaceShrinkTime) - duration;
-    AnimatorSet s=new AnimatorSet();
-    s.playTogether(scaleAnim,toolbarHideAnim);
-    s.play(scaleAnim).after(startDelay);
+    if (mStateAnimation != null)     mStateAnimation.cancel();
+    mStateAnimation=new AnimatorSet();
+    mStateAnimation.playTogether(scaleAnim,toolbarHideAnim);
+    mStateAnimation.play(scaleAnim).after(startDelay);
     final int fadeInTime=res.getInteger(R.integer.config_toolbarButtonFadeInTime);
-    s.play(toolbarShowAnim).after(duration + startDelay - fadeInTime);
-    s.start();
+    mStateAnimation.play(toolbarShowAnim).after(duration + startDelay - fadeInTime);
+    mStateAnimation.start();
   }
  else {
     toView.setTranslationX(0.0f);

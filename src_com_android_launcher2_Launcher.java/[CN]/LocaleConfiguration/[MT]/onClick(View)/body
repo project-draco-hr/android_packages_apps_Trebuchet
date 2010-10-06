@@ -11,8 +11,8 @@
     handleFolderClick((FolderInfo)tag);
   }
  else   if (v == mHandleView) {
-    if (isAllAppsVisible()) {
-      closeAllApps(true);
+    if (mState == State.ALL_APPS) {
+      showWorkspace(true);
     }
  else {
       showAllApps(true);

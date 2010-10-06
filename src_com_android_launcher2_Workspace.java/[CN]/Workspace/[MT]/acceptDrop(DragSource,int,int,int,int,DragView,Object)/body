@@ -1,6 +1,6 @@
 {
   CellLayout layout;
-  if (mIsSmall) {
+  if (mIsSmall || mIsInUnshrinkAnimation) {
     layout=findMatchingPageForDragOver(dragView,x - xOffset,y - yOffset);
     if (layout == null) {
       return false;

@@ -1,5 +1,6 @@
 {
   if (mIsSmall) {
+    mIsSmall=false;
     AnimatorSet s=new AnimatorSet();
     final int screenCount=getChildCount();
     final int duration=getResources().getInteger(R.integer.config_workspaceUnshrinkTime);

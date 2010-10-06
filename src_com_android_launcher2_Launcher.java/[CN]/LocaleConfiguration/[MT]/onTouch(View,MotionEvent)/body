@@ -1,4 +1,4 @@
 {
-  hideCustomizationDrawer(true);
+  showWorkspace(true);
   return false;
 }

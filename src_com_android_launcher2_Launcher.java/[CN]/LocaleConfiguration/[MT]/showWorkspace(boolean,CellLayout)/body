@@ -1,0 +1,15 @@
+{
+  if (layout != null && animated) {
+    mWorkspace.unshrink(layout);
+  }
+ else {
+    mWorkspace.unshrink(animated);
+  }
+  if (mState == State.ALL_APPS) {
+    closeAllApps(animated);
+  }
+ else   if (mState == State.CUSTOMIZE) {
+    hideCustomizationDrawer(animated);
+  }
+  mState=State.WORKSPACE;
+}

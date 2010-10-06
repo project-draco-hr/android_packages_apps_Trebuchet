@@ -1,5 +1,5 @@
 {
-  if (mIsSmall) {
+  if (mIsSmall || mIsInUnshrinkAnimation) {
     return false;
   }
   return super.onInterceptTouchEvent(ev);

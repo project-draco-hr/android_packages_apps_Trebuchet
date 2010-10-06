@@ -1,5 +1,5 @@
 {
-  closeAllApps(true);
+  showWorkspace(true);
   final Intent pickWallpaper=new Intent(Intent.ACTION_SET_WALLPAPER);
   Intent chooser=Intent.createChooser(pickWallpaper,getText(R.string.chooser_wallpaper));
   startActivityForResult(chooser,REQUEST_PICK_WALLPAPER);

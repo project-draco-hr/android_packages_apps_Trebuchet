@@ -2,7 +2,7 @@
   CellLayout currentLayout;
   int originX=x - xOffset;
   int originY=y - yOffset;
-  if (mIsSmall) {
+  if (mIsSmall || mIsInUnshrinkAnimation) {
     currentLayout=findMatchingPageForDragOver(dragView,originX,originY);
     if (currentLayout == null) {
       return;

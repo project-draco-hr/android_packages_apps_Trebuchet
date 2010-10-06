@@ -1,5 +1,5 @@
 {
-  closeAllApps(true);
+  showWorkspace(true);
   if (initialQuery == null) {
     initialQuery=getTypedText();
     clearTypedText();

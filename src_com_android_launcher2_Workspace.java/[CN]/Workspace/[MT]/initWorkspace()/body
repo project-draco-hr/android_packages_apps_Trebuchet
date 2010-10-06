@@ -6,9 +6,10 @@
   mIconCache=app.getIconCache();
   mUnshrinkAnimationListener=new AnimatorListener(){
     public void onAnimationStart(    Animator animation){
+      mIsInUnshrinkAnimation=true;
     }
     public void onAnimationEnd(    Animator animation){
-      mIsSmall=false;
+      mIsInUnshrinkAnimation=false;
     }
     public void onAnimationCancel(    Animator animation){
     }
