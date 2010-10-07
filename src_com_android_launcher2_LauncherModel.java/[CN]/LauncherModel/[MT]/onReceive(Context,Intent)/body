@@ -29,6 +29,8 @@
     }
   }
  else   if (Intent.ACTION_EXTERNAL_APPLICATIONS_AVAILABLE.equals(action)) {
+    String[] packages=intent.getStringArrayExtra(Intent.EXTRA_CHANGED_PACKAGE_LIST);
+    enqueuePackageUpdated(new PackageUpdatedTask(PackageUpdatedTask.OP_ADD,packages));
     startLoader(mApp,false);
   }
  else   if (Intent.ACTION_EXTERNAL_APPLICATIONS_UNAVAILABLE.equals(action)) {
