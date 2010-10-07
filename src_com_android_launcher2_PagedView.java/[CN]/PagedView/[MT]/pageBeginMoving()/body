@@ -1,2 +1,4 @@
 {
+  mIsPageMoving=true;
+  onPageBeginMoving();
 }

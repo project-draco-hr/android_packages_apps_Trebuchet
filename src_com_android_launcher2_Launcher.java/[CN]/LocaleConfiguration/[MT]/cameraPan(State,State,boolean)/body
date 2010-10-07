@@ -18,8 +18,9 @@
     mWorkspace.shrinkToTop(animated);
   }
   if (animated) {
-    AnimatorSet s=new AnimatorSet();
-    s.addListener(new AnimatorListenerAdapter(){
+    if (mStateAnimation != null)     mStateAnimation.cancel();
+    mStateAnimation=new AnimatorSet();
+    mStateAnimation.addListener(new AnimatorListenerAdapter(){
       public void onAnimationStart(      Animator animation){
         toView.setVisibility(View.VISIBLE);
         toView.setY(toViewStartY);
@@ -32,10 +33,10 @@
     AnimatorSet toolbarHideAnim=new AnimatorSet();
     AnimatorSet toolbarShowAnim=new AnimatorSet();
     hideAndShowToolbarButtons(toState,toolbarShowAnim,toolbarHideAnim);
-    s.playTogether(toolbarHideAnim,new ObjectAnimator(duration,fromView,"y",fromViewStartY,fromViewEndY),new ObjectAnimator(duration,toView,"y",toViewStartY,toViewEndY));
+    mStateAnimation.playTogether(toolbarHideAnim,new ObjectAnimator(duration,fromView,"y",fromViewStartY,fromViewEndY),new ObjectAnimator(duration,toView,"y",toViewStartY,toViewEndY));
     final int fadeInTime=res.getInteger(R.integer.config_toolbarButtonFadeInTime);
-    s.play(toolbarShowAnim).after(duration - fadeInTime);
-    s.start();
+    mStateAnimation.play(toolbarShowAnim).after(duration - fadeInTime);
+    mStateAnimation.start();
   }
  else {
     fromView.setY(fromViewEndY);

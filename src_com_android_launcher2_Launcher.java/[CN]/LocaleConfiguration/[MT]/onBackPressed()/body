@@ -1,9 +1,6 @@
 {
-  if (isAllAppsVisible()) {
-    closeAllApps(true);
-  }
- else   if (isCustomizationDrawerVisible()) {
-    hideCustomizationDrawer(true);
+  if (mState == State.ALL_APPS || mState == State.CUSTOMIZE) {
+    showWorkspace(true);
   }
  else {
     closeFolder();

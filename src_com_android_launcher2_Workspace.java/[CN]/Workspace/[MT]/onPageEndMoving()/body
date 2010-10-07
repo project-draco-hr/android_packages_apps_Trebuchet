@@ -1,0 +1,6 @@
+{
+  clearChildrenCache();
+  if (!mDragController.dragging()) {
+    hideOutlines();
+  }
+}

@@ -1,13 +1,15 @@
 {
   super.onSizeChanged(w,h,oldw,oldh);
-  mBackgroundLayoutRect.set(0,0,w,h);
   if (mBackground != null) {
-    mBackground.setBounds(mBackgroundLayoutRect);
+    mBackground.setBounds(0,0,w,h);
+  }
+  if (mBackgroundHover != null) {
+    mBackgroundHover.setBounds(0,0,w,h);
   }
   if (mBackgroundMiniHover != null) {
-    mBackgroundMiniHover.setBounds(mBackgroundLayoutRect);
+    mBackgroundMiniHover.setBounds(0,0,w,h);
   }
   if (mBackgroundMini != null) {
-    mBackgroundMini.setBounds(mBackgroundLayoutRect);
+    mBackgroundMini.setBounds(0,0,w,h);
   }
 }

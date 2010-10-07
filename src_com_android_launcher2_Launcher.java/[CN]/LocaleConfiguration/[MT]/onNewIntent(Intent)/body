@@ -3,16 +3,13 @@
   if (Intent.ACTION_MAIN.equals(intent.getAction())) {
     closeSystemDialogs();
     boolean alreadyOnHome=((intent.getFlags() & Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT) != Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
-    boolean allAppsVisible=isAllAppsVisible();
-    boolean customizationDrawerVisible=isCustomizationDrawerVisible();
     if (LauncherApplication.isScreenXLarge()) {
       mWorkspace.unshrink(alreadyOnHome);
     }
     if (!mWorkspace.isDefaultPageShowing()) {
-      mWorkspace.moveToDefaultScreen(alreadyOnHome && (LauncherApplication.isScreenXLarge() || !allAppsVisible));
+      mWorkspace.moveToDefaultScreen(alreadyOnHome && (LauncherApplication.isScreenXLarge() || mState != State.ALL_APPS));
     }
-    closeAllApps(alreadyOnHome && allAppsVisible);
-    hideCustomizationDrawer(alreadyOnHome);
+    showWorkspace(alreadyOnHome);
     final View v=getWindow().peekDecorView();
     if (v != null && v.getWindowToken() != null) {
       InputMethodManager imm=(InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);

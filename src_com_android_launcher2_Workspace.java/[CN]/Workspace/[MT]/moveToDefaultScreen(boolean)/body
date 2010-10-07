@@ -1,11 +1,9 @@
 {
-  if (animate) {
-    if (mIsSmall) {
-      unshrink(mDefaultPage);
-    }
- else {
-      snapToPage(mDefaultPage);
-    }
+  if (mIsSmall || mIsInUnshrinkAnimation) {
+    mLauncher.showWorkspace(animate,(CellLayout)getChildAt(mDefaultPage));
+  }
+ else   if (animate) {
+    snapToPage(mDefaultPage);
   }
  else {
     setCurrentPage(mDefaultPage);

@@ -14,45 +14,47 @@
   a.recycle();
   setAlwaysDrawnWithCacheEnabled(false);
   mWallpaperManager=WallpaperManager.getInstance(context);
+  final Resources res=getResources();
   if (LauncherApplication.isScreenXLarge()) {
-    final Resources res=getResources();
     mBackgroundMini=res.getDrawable(R.drawable.mini_home_screen_bg);
     mBackgroundMini.setFilterBitmap(true);
     mBackground=res.getDrawable(R.drawable.home_screen_bg);
     mBackground.setFilterBitmap(true);
     mBackgroundMiniHover=res.getDrawable(R.drawable.mini_home_screen_bg_hover);
     mBackgroundMiniHover.setFilterBitmap(true);
-    mDragRectDrawable=res.getDrawable(R.drawable.rounded_rect_green);
-    mCrosshairsDrawable=res.getDrawable(R.drawable.gardening_crosshairs);
-    Interpolator interp=new DecelerateInterpolator(2.5f);
-    int animDuration=res.getInteger(R.integer.config_crosshairsFadeInTime);
-    mCrosshairsAnimator=new ValueAnimator<Float>(animDuration);
-    mCrosshairsAnimator.addUpdateListener(new AnimatorUpdateListener(){
+    mBackgroundHover=res.getDrawable(R.drawable.home_screen_bg_hover);
+    mBackgroundHover.setFilterBitmap(true);
+  }
+  mDragRectDrawable=res.getDrawable(R.drawable.rounded_rect_green);
+  mCrosshairsDrawable=res.getDrawable(R.drawable.gardening_crosshairs);
+  Interpolator interp=new DecelerateInterpolator(2.5f);
+  int animDuration=res.getInteger(R.integer.config_crosshairsFadeInTime);
+  mCrosshairsAnimator=new ValueAnimator<Float>(animDuration);
+  mCrosshairsAnimator.addUpdateListener(new AnimatorUpdateListener(){
+    public void onAnimationUpdate(    ValueAnimator animation){
+      mCrosshairsVisibility=((Float)animation.getAnimatedValue()).floatValue();
+      CellLayout.this.invalidate();
+    }
+  }
+);
+  mCrosshairsAnimator.setInterpolator(interp);
+  for (int i=0; i < mDragRects.length; i++) {
+    mDragRects[i]=new Rect();
+  }
+  final int duration=res.getInteger(R.integer.config_dragOutlineFadeTime);
+  final int fromAlphaValue=0;
+  final int toAlphaValue=res.getInteger(R.integer.config_dragOutlineMaxAlpha);
+  for (int i=0; i < mDragRectAnims.length; i++) {
+    final InterruptibleInOutAnimator anim=new InterruptibleInOutAnimator(duration,fromAlphaValue,toAlphaValue);
+    anim.setInterpolator(interp);
+    final int thisIndex=i;
+    anim.addUpdateListener(new AnimatorUpdateListener(){
       public void onAnimationUpdate(      ValueAnimator animation){
-        mCrosshairsVisibility=((Float)animation.getAnimatedValue()).floatValue();
-        CellLayout.this.invalidate();
+        mDragRectAlphas[thisIndex]=(Integer)animation.getAnimatedValue();
+        CellLayout.this.invalidate(mDragRects[thisIndex]);
       }
     }
 );
-    mCrosshairsAnimator.setInterpolator(interp);
-    for (int i=0; i < mDragRects.length; i++) {
-      mDragRects[i]=new Rect();
-    }
-    final int duration=res.getInteger(R.integer.config_dragOutlineFadeTime);
-    final int fromAlphaValue=0;
-    final int toAlphaValue=res.getInteger(R.integer.config_dragOutlineMaxAlpha);
-    for (int i=0; i < mDragRectAnims.length; i++) {
-      final InterruptibleInOutAnimator anim=new InterruptibleInOutAnimator(duration,fromAlphaValue,toAlphaValue);
-      anim.setInterpolator(interp);
-      final int thisIndex=i;
-      anim.addUpdateListener(new AnimatorUpdateListener(){
-        public void onAnimationUpdate(        ValueAnimator animation){
-          mDragRectAlphas[thisIndex]=(Integer)animation.getAnimatedValue();
-          CellLayout.this.invalidate(mDragRects[thisIndex]);
-        }
-      }
-);
-      mDragRectAnims[i]=anim;
-    }
+    mDragRectAnims[i]=anim;
   }
 }

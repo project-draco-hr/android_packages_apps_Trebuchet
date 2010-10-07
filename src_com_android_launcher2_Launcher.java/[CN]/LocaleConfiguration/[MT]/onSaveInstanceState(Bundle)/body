@@ -13,7 +13,7 @@
  else {
     super.onSaveInstanceState(outState);
   }
-  if (isAllAppsVisible()) {
+  if (mState == State.ALL_APPS) {
     outState.putBoolean(RUNTIME_STATE_ALL_APPS_FOLDER,true);
   }
   if (mAddScreen > -1 && mWaitingForResult) {

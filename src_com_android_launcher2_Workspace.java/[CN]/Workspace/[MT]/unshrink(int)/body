@@ -7,8 +7,7 @@
       CellLayout cl=(CellLayout)getChildAt(i);
       cl.setX(cl.getX() + delta);
     }
-    snapToPage(newCurrentPage);
-    unshrink();
     setCurrentPage(newCurrentPage);
+    unshrink();
   }
 }

@@ -1,7 +1,3 @@
 {
-  if (mGlobalSearchIntent != null) {
-    View b=findViewById(R.id.search_button);
-    mGlobalSearchIntent.setSourceBounds(new Rect(b.getLeft(),b.getTop(),b.getRight(),b.getBottom()));
-    startActivitySafely(mGlobalSearchIntent,"global search");
-  }
+  startSearch(null,false,null,true);
 }

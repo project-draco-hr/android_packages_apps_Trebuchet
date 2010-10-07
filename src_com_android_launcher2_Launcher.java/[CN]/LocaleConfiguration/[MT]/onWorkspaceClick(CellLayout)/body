@@ -4,13 +4,7 @@
     itemInfo=mCustomizePagedView.getChosenItem();
   }
   if (itemInfo == null) {
-    mWorkspace.unshrink(layout);
-    if (isAllAppsVisible()) {
-      closeAllApps(true);
-    }
- else     if (isCustomizationDrawerVisible()) {
-      hideCustomizationDrawer(true);
-    }
+    showWorkspace(true,layout);
   }
  else {
     if (mWorkspace.addExternalItemToScreen(itemInfo,layout)) {
