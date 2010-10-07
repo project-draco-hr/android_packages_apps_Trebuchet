@@ -3,14 +3,14 @@
   int originX=x - xOffset;
   int originY=y - yOffset;
   if (mIsSmall || mIsInUnshrinkAnimation) {
-    currentLayout=findMatchingPageForDragOver(dragView,originX,originY);
+    currentLayout=findMatchingPageForDragOver(dragView,originX,originY,xOffset,yOffset);
     if (currentLayout == null) {
       return;
     }
     currentLayout.setHover(true);
     mTempOriginXY[0]=originX;
     mTempOriginXY[1]=originY;
-    mapPointGlobalToLocal(currentLayout,mTempOriginXY);
+    mapPointFromSelfToChild(currentLayout,mTempOriginXY);
     originX=(int)mTempOriginXY[0];
     originY=(int)mTempOriginXY[1];
   }
@@ -26,7 +26,7 @@
       item.spanY=spans[1];
     }
   }
-  if (source != this) {
+  if (source instanceof AllAppsPagedView) {
     if (item != null && item.spanX == 1 && currentLayout != null) {
       int dragRegionLeft=(dragView.getWidth() - currentLayout.getCellWidth()) / 2;
       originX+=dragRegionLeft - dragView.getDragRegionLeft();

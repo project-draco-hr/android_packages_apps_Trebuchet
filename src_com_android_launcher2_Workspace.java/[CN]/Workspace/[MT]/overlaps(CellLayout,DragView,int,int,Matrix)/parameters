@@ -1,0 +1,5 @@
+CellLayout cl
+DragView dragView
+int dragViewX
+int dragViewY
+Matrix cachedInverseMatrix
