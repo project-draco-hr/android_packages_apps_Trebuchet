@@ -7,5 +7,7 @@
       mDragScroller.scrollRight();
     }
     mScrollState=SCROLL_OUTSIDE_ZONE;
+    mDistanceSinceScroll=0;
+    mDragScroller.onExitScrollArea();
   }
 }
