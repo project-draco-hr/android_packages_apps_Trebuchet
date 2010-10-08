@@ -25,8 +25,12 @@
   if (mDeleteRegion != null) {
     inDeleteRegion=mDeleteRegion.contains(x,y);
   }
+  final int slop=ViewConfiguration.get(mContext).getScaledWindowTouchSlop();
+  mDistanceSinceScroll+=Math.sqrt(Math.pow(mLastTouch[0] - x,2) + Math.pow(mLastTouch[1] - y,2));
+  mLastTouch[0]=x;
+  mLastTouch[1]=y;
   if (!inDeleteRegion && x < mScrollZone) {
-    if (mScrollState == SCROLL_OUTSIDE_ZONE) {
+    if (mScrollState == SCROLL_OUTSIDE_ZONE && mDistanceSinceScroll > slop) {
       mScrollState=SCROLL_WAITING_IN_ZONE;
       mScrollRunnable.setDirection(SCROLL_LEFT);
       mHandler.postDelayed(mScrollRunnable,SCROLL_DELAY);
@@ -34,7 +38,7 @@
     }
   }
  else   if (!inDeleteRegion && x > mScrollView.getWidth() - mScrollZone) {
-    if (mScrollState == SCROLL_OUTSIDE_ZONE) {
+    if (mScrollState == SCROLL_OUTSIDE_ZONE && mDistanceSinceScroll > slop) {
       mScrollState=SCROLL_WAITING_IN_ZONE;
       mScrollRunnable.setDirection(SCROLL_RIGHT);
       mHandler.postDelayed(mScrollRunnable,SCROLL_DELAY);
