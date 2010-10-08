@@ -41,7 +41,6 @@
       cl.setRotationY(rotation);
     }
     newX+=scaledPageWidth + extraScaledSpacing;
-    cl.setOnInterceptTouchListener(this);
   }
   setChildrenDrawnWithCacheEnabled(true);
 }

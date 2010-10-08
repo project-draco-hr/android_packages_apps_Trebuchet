@@ -29,14 +29,14 @@ case MotionEvent.ACTION_DOWN:
  else {
       mTouchState=TOUCH_STATE_SCROLLING;
     }
-    if ((mTouchState != TOUCH_STATE_PREV_PAGE) && (mTouchState != TOUCH_STATE_NEXT_PAGE)) {
+    if ((mTouchState != TOUCH_STATE_PREV_PAGE) && !handlePagingClicks() && (mTouchState != TOUCH_STATE_NEXT_PAGE)) {
       if (getChildCount() > 0) {
         int width=getMeasuredWidth();
         int offset=getRelativeChildOffset(mCurrentPage);
-        if (x < offset) {
+        if (x < offset - mPageSpacing) {
           mTouchState=TOUCH_STATE_PREV_PAGE;
         }
- else         if (x > (width - offset)) {
+ else         if (x > (width - offset + mPageSpacing)) {
           mTouchState=TOUCH_STATE_NEXT_PAGE;
         }
       }

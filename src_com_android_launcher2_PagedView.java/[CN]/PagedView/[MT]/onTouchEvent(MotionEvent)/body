@@ -80,7 +80,7 @@ mVelocityTracker.recycle();
 mVelocityTracker=null;
 }
 }
- else if (mTouchState == TOUCH_STATE_PREV_PAGE) {
+ else if (mTouchState == TOUCH_STATE_PREV_PAGE && !handlePagingClicks()) {
 int nextPage=Math.max(0,mCurrentPage - 1);
 if (nextPage != mCurrentPage) {
 snapToPage(nextPage);
@@ -89,7 +89,7 @@ snapToPage(nextPage);
 snapToDestination();
 }
 }
- else if (mTouchState == TOUCH_STATE_NEXT_PAGE) {
+ else if (mTouchState == TOUCH_STATE_NEXT_PAGE && !handlePagingClicks()) {
 int nextPage=Math.min(getChildCount() - 1,mCurrentPage + 1);
 if (nextPage != mCurrentPage) {
 snapToPage(nextPage);

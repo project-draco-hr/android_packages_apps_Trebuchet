@@ -27,7 +27,7 @@
   }
   mDragRectDrawable=res.getDrawable(R.drawable.rounded_rect_green);
   mCrosshairsDrawable=res.getDrawable(R.drawable.gardening_crosshairs);
-  Interpolator interp=new DecelerateInterpolator(2.5f);
+  TimeInterpolator interp=new DecelerateInterpolator(2.5f);
   int animDuration=res.getInteger(R.integer.config_crosshairsFadeInTime);
   mCrosshairsAnimator=new ValueAnimator<Float>(animDuration);
   mCrosshairsAnimator.addUpdateListener(new AnimatorUpdateListener(){
