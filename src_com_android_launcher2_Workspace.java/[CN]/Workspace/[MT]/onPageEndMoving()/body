@@ -3,4 +3,5 @@
   if (!mDragController.dragging()) {
     hideOutlines();
   }
+  mPageMoving=false;
 }

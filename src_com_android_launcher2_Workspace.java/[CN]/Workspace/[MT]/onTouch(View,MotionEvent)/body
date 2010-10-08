@@ -3,5 +3,15 @@
     mLauncher.onWorkspaceClick((CellLayout)v);
     return true;
   }
+ else   if (!mPageMoving) {
+    if (v == getChildAt(mCurrentPage - 1)) {
+      snapToPage(mCurrentPage - 1);
+      return true;
+    }
+ else     if (v == getChildAt(mCurrentPage + 1)) {
+      snapToPage(mCurrentPage + 1);
+      return true;
+    }
+  }
   return false;
 }
