@@ -6,10 +6,7 @@
     snapToScreen(mCurrentScreen);
     return false;
   }
-  if (mVelocityTracker == null) {
-    mVelocityTracker=VelocityTracker.obtain();
-  }
-  mVelocityTracker.addMovement(ev);
+  acquireVelocityTrackerAndAddMovement(ev);
   final int action=ev.getAction();
 switch (action & MotionEvent.ACTION_MASK) {
 case MotionEvent.ACTION_DOWN:
@@ -67,17 +64,20 @@ snapToScreen(Math.max(whichScreen,bound),velocityX,true);
  else {
 snapToScreen(whichScreen,0,true);
 }
-if (mVelocityTracker != null) {
-mVelocityTracker.recycle();
-mVelocityTracker=null;
-}
 }
 mTouchState=TOUCH_STATE_REST;
 mActivePointerId=INVALID_POINTER;
+releaseVelocityTracker();
 break;
 case MotionEvent.ACTION_CANCEL:
+if (mTouchState == TOUCH_STATE_SCROLLING) {
+final int screenWidth=getWidth();
+final int whichScreen=(mScrollX + (screenWidth / 2)) / screenWidth;
+snapToScreen(whichScreen,0,true);
+}
 mTouchState=TOUCH_STATE_REST;
 mActivePointerId=INVALID_POINTER;
+releaseVelocityTracker();
 break;
 case MotionEvent.ACTION_POINTER_UP:
 onSecondaryPointerUp(ev);
