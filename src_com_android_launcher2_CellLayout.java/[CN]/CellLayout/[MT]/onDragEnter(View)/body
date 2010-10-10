@@ -1,4 +1,7 @@
 {
+  if (mDragging) {
+  }
+  mDragging=true;
   if (mCrosshairsAnimator != null) {
     mCrosshairsAnimator.animateIn();
   }

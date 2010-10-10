@@ -1,0 +1,10 @@
+{
+  setDuration(mOriginalDuration - getCurrentPlayTime());
+  final Object startValue=mFirstRun ? mOriginalFromValue : getAnimatedValue();
+  cancel();
+  if (startValue != toValue) {
+    setValues(startValue,toValue);
+    start();
+    mFirstRun=false;
+  }
+}
