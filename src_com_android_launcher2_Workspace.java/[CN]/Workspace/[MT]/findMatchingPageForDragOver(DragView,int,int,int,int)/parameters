@@ -1,3 +1,5 @@
 DragView dragView
 int originX
 int originY
+int offsetX
+int offsetY

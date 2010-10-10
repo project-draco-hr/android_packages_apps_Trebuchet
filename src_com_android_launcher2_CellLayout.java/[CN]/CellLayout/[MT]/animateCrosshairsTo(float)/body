@@ -1,8 +1,0 @@
-{
-  final ValueAnimator anim=mCrosshairsAnimator;
-  long fullDuration=getResources().getInteger(R.integer.config_crosshairsFadeInTime);
-  anim.setDuration(fullDuration - anim.getCurrentPlayTime());
-  anim.setValues(mCrosshairsVisibility,value);
-  anim.cancel();
-  anim.start();
-}

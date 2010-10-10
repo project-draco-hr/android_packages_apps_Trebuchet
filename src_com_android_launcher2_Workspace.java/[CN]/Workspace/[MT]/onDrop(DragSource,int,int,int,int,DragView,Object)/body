@@ -3,13 +3,13 @@
   int originX=x - xOffset;
   int originY=y - yOffset;
   if (mIsSmall || mIsInUnshrinkAnimation) {
-    cellLayout=findMatchingPageForDragOver(dragView,originX,originY);
+    cellLayout=findMatchingPageForDragOver(dragView,originX,originY,xOffset,yOffset);
     if (cellLayout == null) {
       return;
     }
     mTempOriginXY[0]=originX;
     mTempOriginXY[1]=originY;
-    mapPointGlobalToLocal(cellLayout,mTempOriginXY);
+    mapPointFromSelfToChild(cellLayout,mTempOriginXY);
     originX=(int)mTempOriginXY[0];
     originY=(int)mTempOriginXY[1];
   }

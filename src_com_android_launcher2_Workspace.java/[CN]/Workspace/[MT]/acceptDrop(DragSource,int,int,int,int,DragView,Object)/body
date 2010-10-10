@@ -1,7 +1,7 @@
 {
   CellLayout layout;
   if (mIsSmall || mIsInUnshrinkAnimation) {
-    layout=findMatchingPageForDragOver(dragView,x - xOffset,y - yOffset);
+    layout=findMatchingPageForDragOver(dragView,x - xOffset,y - yOffset,xOffset,yOffset);
     if (layout == null) {
       return false;
     }
