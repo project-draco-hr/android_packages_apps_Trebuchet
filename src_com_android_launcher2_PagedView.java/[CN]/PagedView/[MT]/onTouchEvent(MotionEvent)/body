@@ -1,8 +1,5 @@
 {
-  if (mVelocityTracker == null) {
-    mVelocityTracker=VelocityTracker.obtain();
-  }
-  mVelocityTracker.addMovement(ev);
+  acquireVelocityTrackerAndAddMovement(ev);
   final int action=ev.getAction();
 switch (action & MotionEvent.ACTION_MASK) {
 case MotionEvent.ACTION_DOWN:
@@ -75,10 +72,6 @@ snapToPageWithVelocity(mCurrentPage + 1,velocityX);
  else {
 snapToDestination();
 }
-if (mVelocityTracker != null) {
-mVelocityTracker.recycle();
-mVelocityTracker=null;
-}
 }
  else if (mTouchState == TOUCH_STATE_PREV_PAGE && !handlePagingClicks()) {
 int nextPage=Math.max(0,mCurrentPage - 1);
@@ -100,10 +93,15 @@ snapToDestination();
 }
 mTouchState=TOUCH_STATE_REST;
 mActivePointerId=INVALID_POINTER;
+releaseVelocityTracker();
 break;
 case MotionEvent.ACTION_CANCEL:
+if (mTouchState == TOUCH_STATE_SCROLLING) {
+snapToDestination();
+}
 mTouchState=TOUCH_STATE_REST;
 mActivePointerId=INVALID_POINTER;
+releaseVelocityTracker();
 break;
 case MotionEvent.ACTION_POINTER_UP:
 onSecondaryPointerUp(ev);
