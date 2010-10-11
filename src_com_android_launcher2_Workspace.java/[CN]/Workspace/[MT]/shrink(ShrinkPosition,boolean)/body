@@ -1,5 +1,8 @@
 {
   mIsSmall=true;
+  mShrunkenState=shrinkPosition;
+  setCurrentPage(mCurrentPage);
+  updateWhichPagesAcceptDrops(mShrunkenState);
   mTouchState=TOUCH_STATE_REST;
   mActivePointerId=INVALID_POINTER;
   final Resources res=getResources();
@@ -13,11 +16,19 @@
   final int screenCount=getChildCount();
   float totalWidth=screenCount * scaledPageWidth + (screenCount - 1) * extraScaledSpacing;
   float newY=getResources().getDimension(R.dimen.smallScreenVerticalMargin);
-  if (shrinkPosition == ShrinkPosition.SHRINK_TO_BOTTOM) {
+  float finalAlpha=1.0f;
+  float extraShrinkFactor=1.0f;
+  if (shrinkPosition == ShrinkPosition.SHRINK_TO_BOTTOM_VISIBLE) {
     newY=screenHeight - newY - scaledPageHeight;
+  }
+ else   if (shrinkPosition == ShrinkPosition.SHRINK_TO_BOTTOM_HIDDEN) {
+    newY=screenHeight - newY - scaledPageHeight;
+    finalAlpha=0.0f;
+    extraShrinkFactor=0.1f;
   }
  else   if (shrinkPosition == ShrinkPosition.SHRINK_TO_MIDDLE) {
     newY=screenHeight / 2 - scaledPageHeight / 2;
+    finalAlpha=1.0f;
   }
   float newX=mScroller.getFinalX() + screenWidth / 2 - totalWidth / 2;
   newX-=(pageWidth - scaledPageWidth) / 2.0f;
@@ -29,7 +40,7 @@
     float rotationScaleY=getYScaleForScreen(i);
     if (animated) {
       final int duration=res.getInteger(R.integer.config_workspaceShrinkTime);
-      new ObjectAnimator<Float>(duration,cl,new PropertyValuesHolder<Float>("x",newX),new PropertyValuesHolder<Float>("y",newY),new PropertyValuesHolder<Float>("scaleX",SHRINK_FACTOR * rotationScaleX),new PropertyValuesHolder<Float>("scaleY",SHRINK_FACTOR * rotationScaleY),new PropertyValuesHolder<Float>("backgroundAlpha",1.0f),new PropertyValuesHolder<Float>("alpha",1.0f),new PropertyValuesHolder<Float>("rotationY",rotation)).start();
+      new ObjectAnimator<Float>(duration,cl,new PropertyValuesHolder<Float>("x",newX),new PropertyValuesHolder<Float>("y",newY),new PropertyValuesHolder<Float>("scaleX",SHRINK_FACTOR * rotationScaleX * extraShrinkFactor),new PropertyValuesHolder<Float>("scaleY",SHRINK_FACTOR * rotationScaleY * extraShrinkFactor),new PropertyValuesHolder<Float>("backgroundAlpha",finalAlpha),new PropertyValuesHolder<Float>("alpha",finalAlpha),new PropertyValuesHolder<Float>("rotationY",rotation)).start();
     }
  else {
       cl.setX((int)newX);
@@ -37,7 +48,7 @@
       cl.setScaleX(SHRINK_FACTOR * rotationScaleX);
       cl.setScaleY(SHRINK_FACTOR * rotationScaleY);
       cl.setBackgroundAlpha(1.0f);
-      cl.setAlpha(0.0f);
+      cl.setAlpha(finalAlpha);
       cl.setRotationY(rotation);
     }
     newX+=scaledPageWidth + extraScaledSpacing;

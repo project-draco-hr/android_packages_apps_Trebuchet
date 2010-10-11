@@ -1,6 +1,6 @@
 {
   if (mHover != value) {
+    mHover=value;
     invalidate();
   }
-  mHover=value;
 }

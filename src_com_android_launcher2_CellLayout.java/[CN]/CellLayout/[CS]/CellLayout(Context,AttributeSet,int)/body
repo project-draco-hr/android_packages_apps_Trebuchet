@@ -24,6 +24,8 @@
     mBackgroundMiniHover.setFilterBitmap(true);
     mBackgroundHover=res.getDrawable(R.drawable.home_screen_bg_hover);
     mBackgroundHover.setFilterBitmap(true);
+    mBackgroundMiniAcceptsDrops=res.getDrawable(R.drawable.mini_home_screen_bg_accepts_drops);
+    mBackgroundMiniAcceptsDrops.setFilterBitmap(true);
   }
   mDragRectDrawable=res.getDrawable(R.drawable.rounded_rect_green);
   mCrosshairsDrawable=res.getDrawable(R.drawable.gardening_crosshairs);

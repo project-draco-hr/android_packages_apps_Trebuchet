@@ -2,4 +2,5 @@
   if (target != this) {
     endChoiceMode();
   }
+  mLauncher.getWorkspace().onDragStopped();
 }

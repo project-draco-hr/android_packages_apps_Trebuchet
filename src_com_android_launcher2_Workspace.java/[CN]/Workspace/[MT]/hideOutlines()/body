@@ -1,7 +1,9 @@
 {
-  if (mBackgroundFadeIn != null)   mBackgroundFadeIn.cancel();
-  if (mBackgroundFadeOut != null)   mBackgroundFadeOut.cancel();
-  mBackgroundFadeOut=new ObjectAnimator<Float>(BACKGROUND_FADE_OUT_DURATION,this,new PropertyValuesHolder<Float>("backgroundAlpha",0.0f));
-  mBackgroundFadeOut.setStartDelay(BACKGROUND_FADE_OUT_DELAY);
-  mBackgroundFadeOut.start();
+  if (!mIsSmall && !mIsInUnshrinkAnimation) {
+    if (mBackgroundFadeInAnimation != null)     mBackgroundFadeInAnimation.cancel();
+    if (mBackgroundFadeOutAnimation != null)     mBackgroundFadeOutAnimation.cancel();
+    mBackgroundFadeOutAnimation=new ObjectAnimator<Float>(BACKGROUND_FADE_OUT_DURATION,this,new PropertyValuesHolder<Float>("backgroundAlpha",0.0f));
+    mBackgroundFadeOutAnimation.setStartDelay(BACKGROUND_FADE_OUT_DELAY);
+    mBackgroundFadeOutAnimation.start();
+  }
 }

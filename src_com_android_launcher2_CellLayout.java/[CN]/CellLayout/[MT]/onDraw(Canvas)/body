@@ -2,7 +2,7 @@
   if (mBackgroundAlpha > 0.0f) {
     Drawable bg;
     if (getScaleX() < 0.5f) {
-      bg=mHover ? mBackgroundMiniHover : mBackgroundMini;
+      bg=mAcceptsDrops ? mBackgroundMiniAcceptsDrops : mBackgroundMini;
     }
  else {
       bg=mHover ? mBackgroundHover : mBackground;
@@ -10,6 +10,10 @@
     if (bg != null) {
       bg.setAlpha((int)(mBackgroundAlpha * 255));
       bg.draw(canvas);
+    }
+    if (mHover && getScaleX() < 0.5f) {
+      mBackgroundMiniHover.setAlpha((int)(mBackgroundAlpha * 255));
+      mBackgroundMiniHover.draw(canvas);
     }
   }
   if (mCrosshairsVisibility > 0.0f) {

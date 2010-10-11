@@ -1,0 +1,6 @@
+{
+  updateWhichPagesAcceptDrops(mShrunkenState);
+  if (mShrunkenState == ShrinkPosition.SHRINK_TO_BOTTOM_VISIBLE) {
+    shrink(ShrinkPosition.SHRINK_TO_BOTTOM_HIDDEN,true);
+  }
+}

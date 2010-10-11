@@ -13,8 +13,9 @@ case WidgetCustomization:
 Bitmap b=Bitmap.createBitmap(icon.getIntrinsicWidth(),icon.getIntrinsicHeight(),Bitmap.Config.ARGB_8888);
 Canvas c=new Canvas(b);
 icon.draw(c);
-createItemInfo=(PendingAddItemInfo)v.getTag();
-mDragController.startDrag(v,b,this,createItemInfo,DragController.DRAG_ACTION_COPY,null);
+PendingAddWidgetInfo createWidgetInfo=(PendingAddWidgetInfo)v.getTag();
+mLauncher.getWorkspace().onDragStartedWithItemMinSize(createWidgetInfo.minWidth,createWidgetInfo.minHeight);
+mDragController.startDrag(v,b,this,createWidgetInfo,DragController.DRAG_ACTION_COPY,null);
 b.recycle();
 return true;
 case FolderCustomization:
@@ -26,15 +27,18 @@ mDragController.startDrag(v,this,folderInfo,DragController.DRAG_ACTION_COPY,null
 createItemInfo=(PendingAddItemInfo)v.getTag();
 mDragController.startDrag(v,this,createItemInfo,DragController.DRAG_ACTION_COPY,null);
 }
+mLauncher.getWorkspace().onDragStartedWithItemSpans(1,1);
 return true;
 case ShortcutCustomization:
 createItemInfo=(PendingAddItemInfo)v.getTag();
 mDragController.startDrag(v,this,createItemInfo,DragController.DRAG_ACTION_COPY,null);
+mLauncher.getWorkspace().onDragStartedWithItemSpans(1,1);
 return true;
 case ApplicationCustomization:
 ApplicationInfo app=(ApplicationInfo)v.getTag();
 app=new ApplicationInfo(app);
 mDragController.startDrag(v,this,app,DragController.DRAG_ACTION_COPY);
+mLauncher.getWorkspace().onDragStartedWithItemSpans(1,1);
 return true;
 }
 return false;

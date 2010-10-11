@@ -27,7 +27,9 @@
         cl.setRotationY(rotation);
       }
     }
-    s.addListener(mUnshrinkAnimationListener);
-    s.start();
+    if (animated) {
+      s.addListener(mUnshrinkAnimationListener);
+      s.start();
+    }
   }
 }
