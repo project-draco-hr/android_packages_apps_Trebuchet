@@ -6,7 +6,7 @@ synchronized (mLock) {
     android.os.Process.setThreadPriority(mIsLaunching ? Process.THREAD_PRIORITY_DEFAULT : Process.THREAD_PRIORITY_BACKGROUND);
   }
   if (PROFILE_LOADERS) {
-    android.os.Debug.startMethodTracing("/sdcard/launcher-loaders");
+    android.os.Debug.startMethodTracing(Environment.getExternalStorageDirectory() + "/launcher-loaders");
   }
   if (loadWorkspaceFirst) {
     if (DEBUG_LOADERS)     Log.d(TAG,"step 1: loading workspace");
