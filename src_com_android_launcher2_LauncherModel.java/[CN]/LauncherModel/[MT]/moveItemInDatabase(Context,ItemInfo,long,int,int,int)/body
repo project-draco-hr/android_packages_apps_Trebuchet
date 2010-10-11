@@ -10,10 +10,10 @@
   values.put(LauncherSettings.Favorites.CELLX,item.cellX);
   values.put(LauncherSettings.Favorites.CELLY,item.cellY);
   values.put(LauncherSettings.Favorites.SCREEN,item.screen);
-  new Thread("moveItemInDatabase"){
+  sWorker.post(new Runnable(){
     public void run(){
       cr.update(uri,values,null,null);
     }
   }
-.start();
+);
 }
