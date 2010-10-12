@@ -1,10 +1,10 @@
 {
   final ContentResolver cr=context.getContentResolver();
   final Uri uriToDelete=LauncherSettings.Favorites.getContentUri(item.id,false);
-  new Thread("deleteItemFromDatabase"){
+  sWorker.post(new Runnable(){
     public void run(){
       cr.delete(uriToDelete,null,null);
     }
   }
-.start();
+);
 }
