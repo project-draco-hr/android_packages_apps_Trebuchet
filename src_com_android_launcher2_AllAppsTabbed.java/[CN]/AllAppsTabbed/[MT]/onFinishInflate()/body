@@ -60,6 +60,7 @@
     }
   }
 );
+  setCurrentTab(1);
   setCurrentTab(0);
   setVisibility(INVISIBLE);
 }

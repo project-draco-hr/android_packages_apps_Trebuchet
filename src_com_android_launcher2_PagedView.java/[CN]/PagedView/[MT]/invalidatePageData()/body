@@ -8,6 +8,7 @@
     }
     loadAssociatedPages(mCurrentPage);
     mDirtyPageAlpha=true;
+    updateAdjacentPagesAlpha();
     requestLayout();
   }
 }

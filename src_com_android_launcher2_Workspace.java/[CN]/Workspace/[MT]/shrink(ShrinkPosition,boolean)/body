@@ -30,6 +30,9 @@
     newY=screenHeight / 2 - scaledPageHeight / 2;
     finalAlpha=1.0f;
   }
+ else   if (shrinkPosition == ShrinkPosition.SHRINK_TO_TOP) {
+    newY=screenHeight / 10;
+  }
   float newX=mScroller.getFinalX() + screenWidth / 2 - totalWidth / 2;
   newX-=(pageWidth - scaledPageWidth) / 2.0f;
   newY-=(pageHeight - scaledPageHeight) / 2.0f;
