@@ -81,6 +81,7 @@
       }
     }
 );
+    mHomeCustomizationDrawer.setCurrentTab(1);
     mHomeCustomizationDrawer.setCurrentTab(0);
   }
   setupViews();
