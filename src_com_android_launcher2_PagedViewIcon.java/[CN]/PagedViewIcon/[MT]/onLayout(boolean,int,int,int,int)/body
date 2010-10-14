@@ -1,6 +1,6 @@
 {
   super.onLayout(changed,left,top,right,bottom);
-  if (mHolographicOutline == null) {
+  if (mIconCache != null && mHolographicOutline == null) {
     getDrawingRect(mDrawableClipRect);
     mDrawableClipRect.bottom=getPaddingTop() + getCompoundPaddingTop();
     mIsHolographicUpdatePass=true;
