@@ -1,0 +1,6 @@
+View v
+Bitmap dragOutline
+int originX
+int originY
+int spanX
+int spanY

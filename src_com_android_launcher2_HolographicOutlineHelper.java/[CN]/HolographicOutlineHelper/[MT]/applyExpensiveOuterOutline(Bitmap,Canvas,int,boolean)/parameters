@@ -1,0 +1,4 @@
+Bitmap bitmap
+Canvas canvas
+int color
+boolean removeOrig

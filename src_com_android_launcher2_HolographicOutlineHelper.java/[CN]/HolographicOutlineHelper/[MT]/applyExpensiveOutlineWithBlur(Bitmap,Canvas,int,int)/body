@@ -1,14 +1,14 @@
 {
-  mExpensiveBlurPaint.setMaskFilter(mThickOuterBlurMaskFilter);
+  mBlurPaint.setMaskFilter(sThickOuterBlurMaskFilter);
   int[] outerBlurOffset=new int[2];
-  Bitmap thickOuterBlur=srcDst.extractAlpha(mExpensiveBlurPaint,outerBlurOffset);
-  mExpensiveBlurPaint.setMaskFilter(mThinOuterBlurMaskFilter);
+  Bitmap thickOuterBlur=srcDst.extractAlpha(mBlurPaint,outerBlurOffset);
+  mBlurPaint.setMaskFilter(sThinOuterBlurMaskFilter);
   int[] thinOuterBlurOffset=new int[2];
-  Bitmap thinOuterBlur=srcDst.extractAlpha(mExpensiveBlurPaint,thinOuterBlurOffset);
+  Bitmap thinOuterBlur=srcDst.extractAlpha(mBlurPaint,thinOuterBlurOffset);
   srcDstCanvas.drawColor(0xFF000000,PorterDuff.Mode.SRC_OUT);
-  mExpensiveBlurPaint.setMaskFilter(mThickInnerBlurMaskFilter);
+  mBlurPaint.setMaskFilter(sThickInnerBlurMaskFilter);
   int[] thickInnerBlurOffset=new int[2];
-  Bitmap thickInnerBlur=srcDst.extractAlpha(mExpensiveBlurPaint,thickInnerBlurOffset);
+  Bitmap thickInnerBlur=srcDst.extractAlpha(mBlurPaint,thickInnerBlurOffset);
   srcDstCanvas.setBitmap(thickInnerBlur);
   srcDstCanvas.drawBitmap(srcDst,-thickInnerBlurOffset[0],-thickInnerBlurOffset[1],mErasePaint);
   srcDstCanvas.drawRect(0,0,-thickInnerBlurOffset[0],thickInnerBlur.getHeight(),mErasePaint);

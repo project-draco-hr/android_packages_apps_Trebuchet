@@ -1,7 +1,8 @@
 {
   mHolographicPaint.setFilterBitmap(true);
   mHolographicPaint.setAntiAlias(true);
-  mExpensiveBlurPaint.setFilterBitmap(true);
+  mBlurPaint.setFilterBitmap(true);
+  mBlurPaint.setAntiAlias(true);
   mErasePaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_OUT));
   mErasePaint.setFilterBitmap(true);
   mErasePaint.setAntiAlias(true);

@@ -41,13 +41,15 @@
       }
       x+=mCellWidth + mWidthGap;
     }
-    for (int i=0; i < mDragRects.length; i++) {
-      int alpha=mDragRectAlphas[i];
-      if (alpha > 0) {
-        mDragRectDrawable.setAlpha(alpha);
-        mDragRectDrawable.setBounds(mDragRects[i]);
-        mDragRectDrawable.draw(canvas);
-      }
+  }
+  final Paint paint=new Paint();
+  for (int i=0; i < mDragOutlines.length; i++) {
+    final int alpha=mDragOutlineAlphas[i];
+    if (alpha > 0) {
+      final Point p=mDragOutlines[i];
+      final Bitmap b=(Bitmap)mDragOutlineAnims[i].getTag();
+      paint.setAlpha(alpha);
+      canvas.drawBitmap(b,p.x,p.y,paint);
     }
   }
 }

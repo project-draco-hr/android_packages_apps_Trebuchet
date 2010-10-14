@@ -47,7 +47,7 @@
       final View child=(mDragInfo == null) ? null : mDragInfo.cell;
       int localOriginX=originX - (mDragTargetLayout.getLeft() - mScrollX);
       int localOriginY=originY - (mDragTargetLayout.getTop() - mScrollY);
-      mDragTargetLayout.visualizeDropLocation(child,localOriginX,localOriginY,item.spanX,item.spanY);
+      mDragTargetLayout.visualizeDropLocation(child,mDragOutline,localOriginX,localOriginY,item.spanX,item.spanY);
     }
   }
 }

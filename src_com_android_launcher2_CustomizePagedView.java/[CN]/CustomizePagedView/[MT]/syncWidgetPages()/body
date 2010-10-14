@@ -3,7 +3,7 @@
   removeAllViews();
   int numPages=relayoutWidgets();
   for (int i=0; i < numPages; ++i) {
-    LinearLayout layout=new WidgetLayout(getContext());
+    LinearLayout layout=new PagedViewWidgetLayout(getContext());
     layout.setGravity(Gravity.CENTER_HORIZONTAL);
     if (i < numPages - 1) {
       addView(layout,new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.MATCH_PARENT));

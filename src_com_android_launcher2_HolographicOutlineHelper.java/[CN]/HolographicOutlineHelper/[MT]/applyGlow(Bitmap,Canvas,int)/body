@@ -1,0 +1,9 @@
+{
+  mBlurPaint.setMaskFilter(sThickOuterBlurMaskFilter);
+  Bitmap glow=bitmap.extractAlpha(mBlurPaint,mTempOffset);
+  mHolographicPaint.setMaskFilter(sCoarseClipTable);
+  mHolographicPaint.setAlpha(150);
+  mHolographicPaint.setColor(color);
+  canvas.drawBitmap(glow,mTempOffset[0],mTempOffset[1],mHolographicPaint);
+  glow.recycle();
+}

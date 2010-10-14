@@ -14,5 +14,9 @@
       cellLayout.onDropAborted(mDragInfo.cell);
     }
   }
+  if (mDragInfo != null) {
+    mDragInfo.cell.setVisibility(View.VISIBLE);
+  }
+  mDragOutline=null;
   mDragInfo=null;
 }

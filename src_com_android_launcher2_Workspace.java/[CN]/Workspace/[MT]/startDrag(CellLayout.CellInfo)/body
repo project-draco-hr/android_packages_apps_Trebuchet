@@ -1,5 +1,6 @@
 {
   View child=cellInfo.cell;
+  final int blurPadding=40;
   if (!child.isInTouchMode()) {
     return;
   }
@@ -7,7 +8,18 @@
   mDragInfo.screen=mCurrentPage;
   CellLayout current=((CellLayout)getChildAt(mCurrentPage));
   current.onDragChild(child);
-  mDragController.startDrag(child,this,child.getTag(),DragController.DRAG_ACTION_MOVE);
+  child.clearFocus();
+  child.setPressed(false);
+  final Canvas canvas=new Canvas();
+  mDragOutline=createDragOutline(child,canvas,blurPadding);
+  final Bitmap b=createDragBitmap(child,canvas,blurPadding);
+  final int bmpWidth=b.getWidth();
+  final int bmpHeight=b.getHeight();
+  child.getLocationOnScreen(mTempXY);
+  final int screenX=(int)mTempXY[0] + (child.getWidth() - bmpWidth) / 2;
+  final int screenY=(int)mTempXY[1] + (child.getHeight() - bmpHeight) / 2;
+  mDragController.startDrag(b,screenX,screenY,0,0,bmpWidth,bmpHeight,this,child.getTag(),DragController.DRAG_ACTION_MOVE,null);
+  b.recycle();
   current.onDragEnter(child);
-  invalidate();
+  child.setVisibility(View.GONE);
 }
