@@ -1,0 +1,7 @@
+{
+  float marginFraction=(mHoverScale - 1.0f) / 2.0f;
+  int marginX=(int)(marginFraction * (mBackgroundRect.right - mBackgroundRect.left));
+  int marginY=(int)(marginFraction * (mBackgroundRect.bottom - mBackgroundRect.top));
+  mHoverRect.set(mBackgroundRect.left - marginX,mBackgroundRect.top - marginY,mBackgroundRect.right + marginX,mBackgroundRect.bottom + marginY);
+  invalidate();
+}

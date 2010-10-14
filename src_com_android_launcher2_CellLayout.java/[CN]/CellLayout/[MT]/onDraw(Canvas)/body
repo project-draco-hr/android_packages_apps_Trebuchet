@@ -9,11 +9,26 @@
     }
     if (bg != null) {
       bg.setAlpha((int)(mBackgroundAlpha * 255));
+      bg.setBounds(mBackgroundRect);
       bg.draw(canvas);
     }
     if (mHover && getScaleX() < 0.5f) {
-      mBackgroundMiniHover.setAlpha((int)(mBackgroundAlpha * 255));
+      boolean modifiedClipRect=false;
+      if (mHoverScale > 1.0f) {
+        float marginFraction=(mHoverScale - 1.0f) / 2.0f;
+        Rect clipRect=canvas.getClipBounds();
+        int marginX=(int)(marginFraction * (clipRect.right - clipRect.left));
+        int marginY=(int)(marginFraction * (clipRect.bottom - clipRect.top));
+        canvas.save(Canvas.CLIP_SAVE_FLAG);
+        canvas.clipRect(-marginX,-marginY,getWidth() + marginX,getHeight() + marginY,Region.Op.REPLACE);
+        modifiedClipRect=true;
+      }
+      mBackgroundMiniHover.setAlpha((int)(mBackgroundAlpha * mHoverAlpha * 255));
+      mBackgroundMiniHover.setBounds(mHoverRect);
       mBackgroundMiniHover.draw(canvas);
+      if (modifiedClipRect) {
+        canvas.restore();
+      }
     }
   }
   if (mCrosshairsVisibility > 0.0f) {

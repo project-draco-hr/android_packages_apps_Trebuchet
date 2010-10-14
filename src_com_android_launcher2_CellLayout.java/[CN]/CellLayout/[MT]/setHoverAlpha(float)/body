@@ -1,0 +1,4 @@
+{
+  mHoverAlpha=alpha;
+  invalidate();
+}
