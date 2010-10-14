@@ -44,11 +44,11 @@
   }
   final Paint paint=new Paint();
   for (int i=0; i < mDragOutlines.length; i++) {
-    final int alpha=mDragOutlineAlphas[i];
+    final float alpha=mDragOutlineAlphas[i];
     if (alpha > 0) {
       final Point p=mDragOutlines[i];
       final Bitmap b=(Bitmap)mDragOutlineAnims[i].getTag();
-      paint.setAlpha(alpha);
+      paint.setAlpha((int)(alpha + .5f));
       canvas.drawBitmap(b,p.x,p.y,paint);
     }
   }

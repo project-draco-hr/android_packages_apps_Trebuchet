@@ -4,16 +4,12 @@
   Launcher.setScreen(mCurrentPage);
   LauncherApplication app=(LauncherApplication)context.getApplicationContext();
   mIconCache=app.getIconCache();
-  mUnshrinkAnimationListener=new AnimatorListener(){
+  mUnshrinkAnimationListener=new AnimatorListenerAdapter(){
     public void onAnimationStart(    Animator animation){
       mIsInUnshrinkAnimation=true;
     }
     public void onAnimationEnd(    Animator animation){
       mIsInUnshrinkAnimation=false;
-    }
-    public void onAnimationCancel(    Animator animation){
-    }
-    public void onAnimationRepeat(    Animator animation){
     }
   }
 ;

@@ -10,7 +10,8 @@
   if (animated) {
     if (mStateAnimation != null)     mStateAnimation.cancel();
     mStateAnimation=new AnimatorSet();
-    ValueAnimator scaleAnim=new ObjectAnimator(duration,fromView,new PropertyValuesHolder<Float>("scaleX",scaleFactor),new PropertyValuesHolder<Float>("scaleY",scaleFactor));
+    ValueAnimator scaleAnim=ObjectAnimator.ofPropertyValuesHolder(fromView,PropertyValuesHolder.ofFloat("scaleX",scaleFactor),PropertyValuesHolder.ofFloat("scaleY",scaleFactor));
+    scaleAnim.setDuration(duration);
     scaleAnim.setInterpolator(new AccelerateInterpolator());
     mStateAnimation.addListener(new AnimatorListenerAdapter(){
       public void onAnimationEnd(      Animator animation){

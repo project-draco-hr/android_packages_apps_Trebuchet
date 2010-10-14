@@ -33,7 +33,11 @@
     AnimatorSet toolbarHideAnim=new AnimatorSet();
     AnimatorSet toolbarShowAnim=new AnimatorSet();
     hideAndShowToolbarButtons(toState,toolbarShowAnim,toolbarHideAnim);
-    mStateAnimation.playTogether(toolbarHideAnim,new ObjectAnimator(duration,fromView,"y",fromViewStartY,fromViewEndY),new ObjectAnimator(duration,toView,"y",toViewStartY,toViewEndY));
+    ObjectAnimator fromAnim=ObjectAnimator.ofFloat(fromView,"y",fromViewStartY,fromViewEndY);
+    fromAnim.setDuration(duration);
+    ObjectAnimator toAnim=ObjectAnimator.ofFloat(toView,"y",toViewStartY,toViewEndY);
+    fromAnim.setDuration(duration);
+    mStateAnimation.playTogether(toolbarHideAnim,fromAnim,toAnim);
     final int fadeInTime=res.getInteger(R.integer.config_toolbarButtonFadeInTime);
     mStateAnimation.play(toolbarShowAnim).after(duration - fadeInTime);
     mStateAnimation.start();
