@@ -1,6 +1,5 @@
 {
   View child=cellInfo.cell;
-  final int blurPadding=40;
   if (!child.isInTouchMode()) {
     return;
   }
@@ -11,8 +10,9 @@
   child.clearFocus();
   child.setPressed(false);
   final Canvas canvas=new Canvas();
-  mDragOutline=createDragOutline(child,canvas,blurPadding);
-  final Bitmap b=createDragBitmap(child,canvas,blurPadding);
+  final int bitmapPadding=HolographicOutlineHelper.OUTER_BLUR_RADIUS;
+  mDragOutline=createDragOutline(child,canvas,bitmapPadding);
+  final Bitmap b=createDragBitmap(child,canvas,bitmapPadding);
   final int bmpWidth=b.getWidth();
   final int bmpHeight=b.getHeight();
   child.getLocationOnScreen(mTempXY);
