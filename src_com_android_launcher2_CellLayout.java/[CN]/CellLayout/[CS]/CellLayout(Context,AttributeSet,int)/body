@@ -56,6 +56,10 @@
       public void onAnimationUpdate(      ValueAnimator animation){
         final Bitmap outline=(Bitmap)anim.getTag();
         if (outline == null) {
+          if (false) {
+            Object val=animation.getAnimatedValue();
+            Log.d(TAG,"anim " + thisIndex + " update: "+ val+ ", isStopped "+ anim.isStopped());
+          }
           animation.cancel();
         }
  else {

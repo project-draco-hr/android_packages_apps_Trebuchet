@@ -1,0 +1,13 @@
+{
+  final long currentPlayTime=getCurrentPlayTime();
+  final Object toValue=(direction == IN) ? mOriginalToValue : mOriginalFromValue;
+  final Object startValue=mFirstRun ? mOriginalFromValue : getAnimatedValue();
+  cancel();
+  if (startValue != toValue) {
+    mDirection=direction;
+    setDuration(mOriginalDuration - currentPlayTime);
+    setValues(startValue,toValue);
+    start();
+    mFirstRun=false;
+  }
+}

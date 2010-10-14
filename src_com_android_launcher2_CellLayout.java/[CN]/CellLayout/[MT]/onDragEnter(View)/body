@@ -1,8 +1,8 @@
 {
-  if (mDragging) {
+  if (!mDragging) {
+    if (mCrosshairsAnimator != null) {
+      mCrosshairsAnimator.animateIn();
+    }
   }
   mDragging=true;
-  if (mCrosshairsAnimator != null) {
-    mCrosshairsAnimator.animateIn();
-  }
 }
