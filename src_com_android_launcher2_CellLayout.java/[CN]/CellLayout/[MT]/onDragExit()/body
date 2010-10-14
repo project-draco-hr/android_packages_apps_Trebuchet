@@ -3,7 +3,6 @@
     mDragging=false;
     mDragCell[0]=-1;
     mDragCell[1]=-1;
-    setHover(false);
     if (mCrosshairsAnimator != null) {
       mCrosshairsAnimator.animateOut();
     }

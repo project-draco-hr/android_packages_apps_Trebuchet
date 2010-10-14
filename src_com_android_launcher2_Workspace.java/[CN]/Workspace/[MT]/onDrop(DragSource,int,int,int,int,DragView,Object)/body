@@ -1,38 +1,33 @@
 {
-  CellLayout cellLayout;
+  if (mDragTargetLayout == null) {
+    return;
+  }
   int originX=x - xOffset;
   int originY=y - yOffset;
   if (mIsSmall || mIsInUnshrinkAnimation) {
-    cellLayout=findMatchingPageForDragOver(dragView,originX,originY,xOffset,yOffset);
-    if (cellLayout == null) {
-      return;
-    }
     mTempOriginXY[0]=originX;
     mTempOriginXY[1]=originY;
-    mapPointFromSelfToChild(cellLayout,mTempOriginXY);
+    mapPointFromSelfToChild(mDragTargetLayout,mTempOriginXY);
     originX=(int)mTempOriginXY[0];
     originY=(int)mTempOriginXY[1];
   }
- else {
-    cellLayout=getCurrentDropLayout();
-  }
   if (source != this) {
-    onDropExternal(originX,originY,dragInfo,cellLayout);
+    onDropExternal(originX,originY,dragInfo,mDragTargetLayout);
   }
  else {
     if (mDragInfo != null) {
       final View cell=mDragInfo.cell;
-      mTargetCell=findNearestVacantArea(originX,originY,mDragInfo.spanX,mDragInfo.spanY,cell,cellLayout,mTargetCell);
-      int screen=indexOfChild(cellLayout);
+      mTargetCell=findNearestVacantArea(originX,originY,mDragInfo.spanX,mDragInfo.spanY,cell,mDragTargetLayout,mTargetCell);
+      int screen=indexOfChild(mDragTargetLayout);
       if (screen != mDragInfo.screen) {
         final CellLayout originalCellLayout=(CellLayout)getChildAt(mDragInfo.screen);
         originalCellLayout.removeView(cell);
         addInScreen(cell,screen,mTargetCell[0],mTargetCell[1],mDragInfo.spanX,mDragInfo.spanY);
       }
-      cellLayout.onDropChild(cell);
+      mDragTargetLayout.onDropChild(cell);
       final ItemInfo info=(ItemInfo)cell.getTag();
       CellLayout.LayoutParams lp=(CellLayout.LayoutParams)cell.getLayoutParams();
-      cellLayout.onMove(cell,mTargetCell[0],mTargetCell[1]);
+      mDragTargetLayout.onMove(cell,mTargetCell[0],mTargetCell[1]);
       lp.cellX=mTargetCell[0];
       lp.cellY=mTargetCell[1];
       cell.setId(LauncherModel.getCellLayoutChildId(-1,mDragInfo.screen,mTargetCell[0],mTargetCell[1],mDragInfo.spanX,mDragInfo.spanY));

@@ -1,4 +1,6 @@
 {
-  getCurrentDropLayout().onDragEnter(dragView);
-  showOutlines();
+  if (!mIsSmall) {
+    getCurrentDropLayout().onDragEnter(dragView);
+    showOutlines();
+  }
 }

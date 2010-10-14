@@ -26,11 +26,5 @@
       }
     }
   }
-  if (bestMatchingScreen != mDragTargetLayout) {
-    if (mDragTargetLayout != null) {
-      mDragTargetLayout.onDragExit();
-    }
-    mDragTargetLayout=bestMatchingScreen;
-  }
   return bestMatchingScreen;
 }
