@@ -12,7 +12,8 @@
     mWorkspace.shrinkToTop(animated);
   }
   if (animated) {
-    ValueAnimator scaleAnim=new ObjectAnimator(duration,toView,new PropertyValuesHolder<Float>("scaleX",scale,1.0f),new PropertyValuesHolder<Float>("scaleY",scale,1.0f));
+    ValueAnimator scaleAnim=ObjectAnimator.ofPropertyValuesHolder(toView,PropertyValuesHolder.ofFloat("scaleX",scale,1.0f),PropertyValuesHolder.ofFloat("scaleY",scale,1.0f));
+    scaleAnim.setDuration(duration);
     scaleAnim.setInterpolator(new DecelerateInterpolator());
     scaleAnim.addListener(new AnimatorListenerAdapter(){
       public void onAnimationStart(      Animator animation){

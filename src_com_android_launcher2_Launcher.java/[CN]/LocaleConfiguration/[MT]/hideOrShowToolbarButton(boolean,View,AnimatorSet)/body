@@ -3,7 +3,8 @@
   final boolean hiding=!show;
   final int duration=show ? getResources().getInteger(R.integer.config_toolbarButtonFadeInTime) : getResources().getInteger(R.integer.config_toolbarButtonFadeOutTime);
   if (seq != null) {
-    Animator anim=new ObjectAnimator<Float>(duration,view,"alpha",show ? 1.0f : 0.0f);
+    Animator anim=ObjectAnimator.ofFloat(view,"alpha",show ? 1.0f : 0.0f);
+    anim.setDuration(duration);
     anim.addListener(new AnimatorListenerAdapter(){
       public void onAnimationStart(      Animator animation){
         if (showing)         showToolbarButton(view);

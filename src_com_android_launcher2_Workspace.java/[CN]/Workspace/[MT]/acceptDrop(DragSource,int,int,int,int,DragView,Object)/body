@@ -1,19 +1,13 @@
 {
-  CellLayout layout;
-  if (mIsSmall || mIsInUnshrinkAnimation) {
-    layout=findMatchingPageForDragOver(dragView,x - xOffset,y - yOffset,xOffset,yOffset);
-    if (layout == null) {
-      return false;
-    }
-  }
- else {
-    layout=getCurrentDropLayout();
+  onDragOver(source,x,y,xOffset,yOffset,dragView,dragInfo);
+  if (mDragTargetLayout == null) {
+    return false;
   }
   final CellLayout.CellInfo dragCellInfo=mDragInfo;
   final int spanX=dragCellInfo == null ? 1 : dragCellInfo.spanX;
   final int spanY=dragCellInfo == null ? 1 : dragCellInfo.spanY;
   final View ignoreView=dragCellInfo == null ? null : dragCellInfo.cell;
-  if (layout.findCellForSpanIgnoring(null,spanX,spanY,ignoreView)) {
+  if (mDragTargetLayout.findCellForSpanIgnoring(null,spanX,spanY,ignoreView)) {
     return true;
   }
  else {

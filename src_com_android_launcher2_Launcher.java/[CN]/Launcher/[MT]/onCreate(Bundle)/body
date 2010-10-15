@@ -52,7 +52,8 @@
       public void onTabChanged(      String tabId){
         final int duration=150;
         final float alpha=mCustomizePagedView.getAlpha();
-        ValueAnimator alphaAnim=new ObjectAnimator(duration,mCustomizePagedView,"alpha",alpha,0.0f);
+        ValueAnimator alphaAnim=ObjectAnimator.ofFloat(mCustomizePagedView,"alpha",alpha,0.0f);
+        alphaAnim.setDuration(duration);
         alphaAnim.addListener(new AnimatorListenerAdapter(){
           public void onAnimationEnd(          Animator animation){
             String tag=mHomeCustomizationDrawer.getCurrentTabTag();
@@ -72,7 +73,8 @@
               mCustomizePagedView.setCustomizationFilter(CustomizePagedView.CustomizationType.ShortcutCustomization);
             }
             final float alpha=mCustomizePagedView.getAlpha();
-            ValueAnimator alphaAnim=new ObjectAnimator(duration,mCustomizePagedView,"alpha",alpha,1.0f);
+            ValueAnimator alphaAnim=ObjectAnimator.ofFloat(mCustomizePagedView,"alpha",alpha,1.0f);
+            alphaAnim.setDuration(duration);
             alphaAnim.start();
           }
         }

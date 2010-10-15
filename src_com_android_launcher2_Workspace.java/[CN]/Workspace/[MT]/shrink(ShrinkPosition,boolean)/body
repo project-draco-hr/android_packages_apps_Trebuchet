@@ -43,7 +43,9 @@
     float rotationScaleY=getYScaleForScreen(i);
     if (animated) {
       final int duration=res.getInteger(R.integer.config_workspaceShrinkTime);
-      new ObjectAnimator<Float>(duration,cl,new PropertyValuesHolder<Float>("x",newX),new PropertyValuesHolder<Float>("y",newY),new PropertyValuesHolder<Float>("scaleX",SHRINK_FACTOR * rotationScaleX * extraShrinkFactor),new PropertyValuesHolder<Float>("scaleY",SHRINK_FACTOR * rotationScaleY * extraShrinkFactor),new PropertyValuesHolder<Float>("backgroundAlpha",finalAlpha),new PropertyValuesHolder<Float>("alpha",finalAlpha),new PropertyValuesHolder<Float>("rotationY",rotation)).start();
+      ObjectAnimator anim=ObjectAnimator.ofPropertyValuesHolder(cl,PropertyValuesHolder.ofFloat("x",newX),PropertyValuesHolder.ofFloat("y",newY),PropertyValuesHolder.ofFloat("scaleX",SHRINK_FACTOR * rotationScaleX * extraShrinkFactor),PropertyValuesHolder.ofFloat("scaleY",SHRINK_FACTOR * rotationScaleY * extraShrinkFactor),PropertyValuesHolder.ofFloat("backgroundAlpha",finalAlpha),PropertyValuesHolder.ofFloat("alpha",finalAlpha),PropertyValuesHolder.ofFloat("rotationY",rotation));
+      anim.setDuration(duration);
+      anim.start();
     }
  else {
       cl.setX((int)newX);

@@ -31,28 +31,28 @@
   TimeInterpolator interp=new DecelerateInterpolator(2.5f);
   int animDuration=res.getInteger(R.integer.config_crosshairsFadeInTime);
   mCrosshairsAnimator=new InterruptibleInOutAnimator(animDuration,0.0f,1.0f);
-  mCrosshairsAnimator.addUpdateListener(new AnimatorUpdateListener(){
+  mCrosshairsAnimator.getAnimator().addUpdateListener(new AnimatorUpdateListener(){
     public void onAnimationUpdate(    ValueAnimator animation){
       mCrosshairsVisibility=((Float)animation.getAnimatedValue()).floatValue();
       CellLayout.this.invalidate();
     }
   }
 );
-  mCrosshairsAnimator.setInterpolator(interp);
+  mCrosshairsAnimator.getAnimator().setInterpolator(interp);
   for (int i=0; i < mDragOutlines.length; i++) {
     mDragOutlines[i]=new Point(-1,-1);
   }
   final int duration=res.getInteger(R.integer.config_dragOutlineFadeTime);
-  final int fromAlphaValue=0;
-  final int toAlphaValue=res.getInteger(R.integer.config_dragOutlineMaxAlpha);
+  final float fromAlphaValue=0;
+  final float toAlphaValue=(float)res.getInteger(R.integer.config_dragOutlineMaxAlpha);
   for (int i=0; i < mDragOutlineAlphas.length; i++) {
     mDragOutlineAlphas[i]=fromAlphaValue;
   }
   for (int i=0; i < mDragOutlineAnims.length; i++) {
     final InterruptibleInOutAnimator anim=new InterruptibleInOutAnimator(duration,fromAlphaValue,toAlphaValue);
-    anim.setInterpolator(interp);
+    anim.getAnimator().setInterpolator(interp);
     final int thisIndex=i;
-    anim.addUpdateListener(new AnimatorUpdateListener(){
+    anim.getAnimator().addUpdateListener(new AnimatorUpdateListener(){
       public void onAnimationUpdate(      ValueAnimator animation){
         final Bitmap outline=(Bitmap)anim.getTag();
         if (outline == null) {
@@ -63,7 +63,7 @@
           animation.cancel();
         }
  else {
-          mDragOutlineAlphas[thisIndex]=(Integer)animation.getAnimatedValue();
+          mDragOutlineAlphas[thisIndex]=(Float)animation.getAnimatedValue();
           final int left=mDragOutlines[thisIndex].x;
           final int top=mDragOutlines[thisIndex].y;
           CellLayout.this.invalidate(left,top,left + outline.getWidth(),top + outline.getHeight());
@@ -71,9 +71,9 @@
       }
     }
 );
-    anim.addListener(new AnimatorListenerAdapter(){
+    anim.getAnimator().addListener(new AnimatorListenerAdapter(){
       public void onAnimationEnd(      Animator animation){
-        if ((Integer)anim.getAnimatedValue() == 0) {
+        if ((Float)((ValueAnimator)animation).getAnimatedValue() == 0f) {
           anim.setTag(null);
         }
       }
