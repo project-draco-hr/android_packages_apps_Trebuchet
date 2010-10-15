@@ -2,5 +2,4 @@
   if (child != null) {
     ((LayoutParams)child.getLayoutParams()).isDragging=false;
   }
-  onDragExit();
 }

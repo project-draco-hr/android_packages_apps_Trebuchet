@@ -5,5 +5,4 @@
     lp.dropped=true;
     child.requestLayout();
   }
-  onDragExit();
 }

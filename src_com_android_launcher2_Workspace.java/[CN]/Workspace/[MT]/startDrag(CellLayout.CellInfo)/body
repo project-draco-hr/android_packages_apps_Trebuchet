@@ -6,7 +6,7 @@
   }
   mDragInfo=cellInfo;
   mDragInfo.screen=mCurrentPage;
-  CellLayout current=((CellLayout)getChildAt(mCurrentPage));
+  CellLayout current=getCurrentDropLayout();
   current.onDragChild(child);
   child.clearFocus();
   child.setPressed(false);
@@ -20,6 +20,5 @@
   final int screenY=(int)mTempXY[1] + (child.getHeight() - bmpHeight) / 2;
   mDragController.startDrag(b,screenX,screenY,0,0,bmpWidth,bmpHeight,this,child.getTag(),DragController.DRAG_ACTION_MOVE,null);
   b.recycle();
-  current.onDragEnter(child);
   child.setVisibility(View.GONE);
 }

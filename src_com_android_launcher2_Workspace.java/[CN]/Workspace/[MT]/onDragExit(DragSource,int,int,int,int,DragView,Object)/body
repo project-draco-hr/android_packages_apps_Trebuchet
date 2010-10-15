@@ -1,9 +1,9 @@
 {
   if (mDragTargetLayout != null) {
     mDragTargetLayout.onDragExit();
-    mDragTargetLayout=null;
   }
   if (!mIsPageMoving) {
     hideOutlines();
   }
+  clearAllHovers();
 }

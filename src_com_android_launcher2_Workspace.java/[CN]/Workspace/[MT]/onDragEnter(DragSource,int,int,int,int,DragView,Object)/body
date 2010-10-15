@@ -1,6 +1,8 @@
 {
+  mDragTargetLayout=null;
   if (!mIsSmall) {
-    getCurrentDropLayout().onDragEnter(dragView);
+    mDragTargetLayout=getCurrentDropLayout();
+    mDragTargetLayout.onDragEnter(dragView);
     showOutlines();
   }
 }

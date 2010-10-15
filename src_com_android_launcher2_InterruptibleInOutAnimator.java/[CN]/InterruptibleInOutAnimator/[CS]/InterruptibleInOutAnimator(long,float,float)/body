@@ -3,4 +3,10 @@
   mOriginalDuration=duration;
   mOriginalFromValue=fromValue;
   mOriginalToValue=toValue;
+  mAnimator.addListener(new AnimatorListenerAdapter(){
+    public void onAnimationEnd(    Animator animation){
+      mDirection=STOPPED;
+    }
+  }
+);
 }
