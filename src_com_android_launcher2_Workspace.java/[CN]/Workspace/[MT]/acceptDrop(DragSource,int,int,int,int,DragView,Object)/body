@@ -1,5 +1,4 @@
 {
-  onDragOver(source,x,y,xOffset,yOffset,dragView,dragInfo);
   if (mDragTargetLayout == null) {
     return false;
   }

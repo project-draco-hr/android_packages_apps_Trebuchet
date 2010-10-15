@@ -1,15 +1,13 @@
 {
   if (mDragging) {
     mDragging=false;
-    mDragCell[0]=-1;
-    mDragCell[1]=-1;
     if (mCrosshairsAnimator != null) {
       mCrosshairsAnimator.animateOut();
     }
-    final int prev=mDragOutlineCurrent;
-    mDragOutlineAnims[prev].animateOut();
-    mDragOutlineCurrent=(prev + 1) % mDragOutlines.length;
-    mDragOutlines[mDragOutlineCurrent].set(-1,-1);
-    mDragOutlineAlphas[mDragOutlineCurrent]=0;
   }
+  mDragCell[0]=-1;
+  mDragCell[1]=-1;
+  mDragOutlineAnims[mDragOutlineCurrent].animateOut();
+  mDragOutlineCurrent=(mDragOutlineCurrent + 1) % mDragOutlineAnims.length;
+  setHover(false);
 }
