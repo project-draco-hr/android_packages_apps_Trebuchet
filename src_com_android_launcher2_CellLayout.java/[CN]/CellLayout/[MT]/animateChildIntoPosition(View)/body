@@ -1,0 +1,24 @@
+{
+  final Resources res=getResources();
+  final ObjectAnimator anim=mDropAnim;
+  final CellLayout.LayoutParams lp=(CellLayout.LayoutParams)child.getLayoutParams();
+  final float startX=lp.oldX - lp.x;
+  final float startY=lp.oldY - lp.y;
+  final float dist=(float)Math.sqrt(startX * startX + startY * startY);
+  final float maxDist=(float)res.getInteger(R.integer.config_dropAnimMaxDist);
+  final int duration=(int)(res.getInteger(R.integer.config_dropAnimMaxDuration) * mEaseOutInterpolator.getInterpolation(dist / maxDist));
+  anim.cancel();
+  anim.setDuration(duration);
+  anim.setTarget(child);
+  anim.setPropertyName("translationX");
+  anim.setFloatValues(startX,0);
+  anim.removeAllUpdateListeners();
+  anim.addUpdateListener(new AnimatorUpdateListener(){
+    public void onAnimationUpdate(    ValueAnimator animation){
+      final float translationX=(Float)anim.getAnimatedValue();
+      child.setTranslationY((startY / startX) * translationX);
+    }
+  }
+);
+  anim.start();
+}

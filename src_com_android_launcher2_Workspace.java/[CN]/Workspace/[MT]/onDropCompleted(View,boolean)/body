@@ -8,14 +8,8 @@
       }
     }
   }
- else {
-    if (mDragInfo != null) {
-      final CellLayout cellLayout=(CellLayout)getChildAt(mDragInfo.screen);
-      cellLayout.onDropAborted(mDragInfo.cell);
-    }
-  }
-  if (mDragInfo != null) {
-    mDragInfo.cell.setVisibility(View.VISIBLE);
+ else   if (mDragInfo != null) {
+    ((CellLayout)getChildAt(mDragInfo.screen)).onDropAborted(mDragInfo.cell);
   }
   mDragOutline=null;
   mDragInfo=null;

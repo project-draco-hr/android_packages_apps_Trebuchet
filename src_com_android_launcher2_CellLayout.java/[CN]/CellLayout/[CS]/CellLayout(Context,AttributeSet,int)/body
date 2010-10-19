@@ -28,7 +28,7 @@
     mBackgroundMiniAcceptsDrops.setFilterBitmap(true);
   }
   mCrosshairsDrawable=res.getDrawable(R.drawable.gardening_crosshairs);
-  TimeInterpolator interp=new DecelerateInterpolator(2.5f);
+  mEaseOutInterpolator=new DecelerateInterpolator(2.5f);
   int animDuration=res.getInteger(R.integer.config_crosshairsFadeInTime);
   mCrosshairsAnimator=new InterruptibleInOutAnimator(animDuration,0.0f,1.0f);
   mCrosshairsAnimator.getAnimator().addUpdateListener(new AnimatorUpdateListener(){
@@ -38,7 +38,7 @@
     }
   }
 );
-  mCrosshairsAnimator.getAnimator().setInterpolator(interp);
+  mCrosshairsAnimator.getAnimator().setInterpolator(mEaseOutInterpolator);
   for (int i=0; i < mDragOutlines.length; i++) {
     mDragOutlines[i]=new Point(-1,-1);
   }
@@ -50,7 +50,7 @@
   }
   for (int i=0; i < mDragOutlineAnims.length; i++) {
     final InterruptibleInOutAnimator anim=new InterruptibleInOutAnimator(duration,fromAlphaValue,toAlphaValue);
-    anim.getAnimator().setInterpolator(interp);
+    anim.getAnimator().setInterpolator(mEaseOutInterpolator);
     final int thisIndex=i;
     anim.getAnimator().addUpdateListener(new AnimatorUpdateListener(){
       public void onAnimationUpdate(      ValueAnimator animation){
@@ -81,6 +81,8 @@
 );
     mDragOutlineAnims[i]=anim;
   }
+  mDropAnim=new ObjectAnimator();
+  mDropAnim.setInterpolator(mEaseOutInterpolator);
   mBackgroundRect=new Rect();
   mHoverRect=new Rect();
   setHoverScale(1.0f);

@@ -1,7 +1,7 @@
 {
   int count=getChildCount();
   for (int i=0; i < count; i++) {
-    View child=getChildAt(i);
+    final View child=getChildAt(i);
     if (child.getVisibility() != GONE) {
       CellLayout.LayoutParams lp=(CellLayout.LayoutParams)child.getLayoutParams();
       int childLeft=lp.x;
@@ -12,6 +12,7 @@
         final int[] cellXY=mTmpCellXY;
         getLocationOnScreen(cellXY);
         mWallpaperManager.sendWallpaperCommand(getWindowToken(),"android.home.drop",cellXY[0] + childLeft + lp.width / 2,cellXY[1] + childTop + lp.height / 2,0,null);
+        animateChildIntoPosition(child);
       }
     }
   }
