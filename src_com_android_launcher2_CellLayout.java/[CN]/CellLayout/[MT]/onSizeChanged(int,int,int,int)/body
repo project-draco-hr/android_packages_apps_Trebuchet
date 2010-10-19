@@ -1,18 +1,5 @@
 {
   super.onSizeChanged(w,h,oldw,oldh);
-  if (mBackground != null) {
-    mBackground.setBounds(0,0,w,h);
-  }
-  if (mBackgroundHover != null) {
-    mBackgroundHover.setBounds(0,0,w,h);
-  }
-  if (mBackgroundMiniHover != null) {
-    mBackgroundMiniHover.setBounds(0,0,w,h);
-  }
-  if (mBackgroundMini != null) {
-    mBackgroundMini.setBounds(0,0,w,h);
-  }
-  if (mBackgroundMiniAcceptsDrops != null) {
-    mBackgroundMiniAcceptsDrops.setBounds(0,0,w,h);
-  }
+  mBackgroundRect.set(0,0,w,h);
+  updateHoverRect();
 }

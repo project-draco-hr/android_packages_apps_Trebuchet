@@ -81,4 +81,8 @@
 );
     mDragOutlineAnims[i]=anim;
   }
+  mBackgroundRect=new Rect();
+  mHoverRect=new Rect();
+  setHoverScale(1.0f);
+  setHoverAlpha(1.0f);
 }

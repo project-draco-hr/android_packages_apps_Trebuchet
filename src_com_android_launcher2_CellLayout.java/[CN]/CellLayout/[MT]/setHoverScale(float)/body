@@ -1,0 +1,6 @@
+{
+  if (scaleFactor != mHoverScale) {
+    mHoverScale=scaleFactor;
+    updateHoverRect();
+  }
+}
