@@ -1,5 +1,8 @@
 {
   if (child != null) {
-    ((LayoutParams)child.getLayoutParams()).isDragging=false;
+    LayoutParams lp=(LayoutParams)child.getLayoutParams();
+    lp.isDragging=false;
+    child.setVisibility(View.VISIBLE);
+    animateChildIntoPosition(child);
   }
 }
