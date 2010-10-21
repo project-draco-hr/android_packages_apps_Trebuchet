@@ -1,4 +1,9 @@
 {
+  if (mFirstLayout) {
+    mWaitingToShrink=true;
+    mWaitingToShrinkPosition=shrinkPosition;
+    return;
+  }
   mIsSmall=true;
   mShrunkenState=shrinkPosition;
   setCurrentPage(mCurrentPage);
@@ -51,9 +56,9 @@
  else {
       cl.setX((int)newX);
       cl.setY((int)newY);
-      cl.setScaleX(SHRINK_FACTOR * rotationScaleX);
-      cl.setScaleY(SHRINK_FACTOR * rotationScaleY);
-      cl.setBackgroundAlpha(1.0f);
+      cl.setScaleX(SHRINK_FACTOR * rotationScaleX * extraShrinkFactor);
+      cl.setScaleY(SHRINK_FACTOR * rotationScaleY * extraShrinkFactor);
+      cl.setBackgroundAlpha(finalAlpha);
       cl.setAlpha(finalAlpha);
       cl.setRotationY(rotation);
     }
