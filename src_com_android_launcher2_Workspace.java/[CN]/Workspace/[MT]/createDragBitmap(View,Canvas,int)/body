@@ -4,6 +4,6 @@
   canvas.setBitmap(b);
   canvas.drawBitmap(mDragOutline,0,0,null);
   drawDragView(v,canvas,padding);
-  mOutlineHelper.applyGlow(b,canvas,outlineColor);
+  mOutlineHelper.applyOuterBlur(b,canvas,outlineColor);
   return b;
 }

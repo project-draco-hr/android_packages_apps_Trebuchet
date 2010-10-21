@@ -1,18 +1,3 @@
 {
-  Object itemInfo=mAllAppsPagedView.getChosenItem();
-  if (itemInfo == null) {
-    itemInfo=mCustomizePagedView.getChosenItem();
-  }
-  if (itemInfo == null) {
-    showWorkspace(true,layout);
-  }
- else {
-    if (mWorkspace.addExternalItemToScreen(itemInfo,layout)) {
-      mAllAppsPagedView.endChoiceMode();
-      mCustomizePagedView.endChoiceMode();
-    }
- else {
-      showOutOfSpaceMessage();
-    }
-  }
+  showWorkspace(true,layout);
 }

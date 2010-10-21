@@ -34,7 +34,7 @@
   mCrosshairsAnimator.getAnimator().addUpdateListener(new AnimatorUpdateListener(){
     public void onAnimationUpdate(    ValueAnimator animation){
       mCrosshairsVisibility=((Float)animation.getAnimatedValue()).floatValue();
-      CellLayout.this.invalidate();
+      invalidate();
     }
   }
 );
@@ -45,9 +45,7 @@
   final int duration=res.getInteger(R.integer.config_dragOutlineFadeTime);
   final float fromAlphaValue=0;
   final float toAlphaValue=(float)res.getInteger(R.integer.config_dragOutlineMaxAlpha);
-  for (int i=0; i < mDragOutlineAlphas.length; i++) {
-    mDragOutlineAlphas[i]=fromAlphaValue;
-  }
+  Arrays.fill(mDragOutlineAlphas,fromAlphaValue);
   for (int i=0; i < mDragOutlineAnims.length; i++) {
     final InterruptibleInOutAnimator anim=new InterruptibleInOutAnimator(duration,fromAlphaValue,toAlphaValue);
     anim.getAnimator().setInterpolator(mEaseOutInterpolator);

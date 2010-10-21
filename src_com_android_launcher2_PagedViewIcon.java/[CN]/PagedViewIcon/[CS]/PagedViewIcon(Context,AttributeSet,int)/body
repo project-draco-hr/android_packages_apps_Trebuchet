@@ -5,6 +5,7 @@
   mHoloOutlineColor=a.getColor(R.styleable.PagedViewIcon_outlineColor,0);
   mCheckedBlurColor=a.getColor(R.styleable.PagedViewIcon_checkedBlurColor,0);
   mCheckedOutlineColor=a.getColor(R.styleable.PagedViewIcon_checkedOutlineColor,0);
+  mScaledIconSize=a.getDimensionPixelSize(R.styleable.PagedViewIcon_scaledIconSize,64);
   a.recycle();
   if (sHolographicOutlineHelper == null) {
     sHolographicOutlineHelper=new HolographicOutlineHelper();

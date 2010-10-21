@@ -4,6 +4,7 @@
   mIconCache=new IconCache(this);
   mModel=new LauncherModel(this,mIconCache);
   sIsScreenXLarge=(getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_XLARGE;
+  sScreenDensity=getResources().getDisplayMetrics().density;
   IntentFilter filter=new IntentFilter(Intent.ACTION_PACKAGE_ADDED);
   filter.addAction(Intent.ACTION_PACKAGE_REMOVED);
   filter.addAction(Intent.ACTION_PACKAGE_CHANGED);

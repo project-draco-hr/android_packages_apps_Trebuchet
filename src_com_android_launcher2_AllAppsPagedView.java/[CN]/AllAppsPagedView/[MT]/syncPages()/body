@@ -9,6 +9,7 @@
     PagedViewCellLayout layout=new PagedViewCellLayout(getContext());
     layout.setCellCount(mCellCountX,mCellCountY);
     layout.setPadding(mPageLayoutPaddingLeft,mPageLayoutPaddingTop,mPageLayoutPaddingRight,mPageLayoutPaddingBottom);
+    layout.setGap(mPageLayoutWidthGap,mPageLayoutHeightGap);
     addView(layout);
   }
   setCurrentPage(Math.max(0,Math.min(numPages - 1,getCurrentPage())));

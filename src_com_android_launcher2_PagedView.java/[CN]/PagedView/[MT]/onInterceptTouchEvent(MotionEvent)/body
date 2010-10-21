@@ -20,7 +20,7 @@ case MotionEvent.ACTION_DOWN:
     mLastMotionY=y;
     mActivePointerId=ev.getPointerId(0);
     mAllowLongPress=true;
-    final int xDist=(mScroller.getFinalX() - mScroller.getCurrX());
+    final int xDist=Math.abs(mScroller.getFinalX() - mScroller.getCurrX());
     final boolean finishedScrolling=(mScroller.isFinished() || xDist < mTouchSlop);
     if (finishedScrolling) {
       mTouchState=TOUCH_STATE_REST;
