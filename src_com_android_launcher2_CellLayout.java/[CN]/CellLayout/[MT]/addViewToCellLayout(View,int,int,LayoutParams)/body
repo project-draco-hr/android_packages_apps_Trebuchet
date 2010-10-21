@@ -1,13 +1,3 @@
 {
-  final LayoutParams lp=params;
-  if (lp.cellX >= 0 && lp.cellX <= mCountX - 1 && lp.cellY >= 0 && lp.cellY <= mCountY - 1) {
-    if (lp.cellHSpan < 0)     lp.cellHSpan=mCountX;
-    if (lp.cellVSpan < 0)     lp.cellVSpan=mCountY;
-    child.setId(childId);
-    child.setAlpha(getAlpha());
-    addView(child,index,lp);
-    markCellsAsOccupiedForView(child);
-    return true;
-  }
-  return false;
+  return addViewToCellLayout(child,index,childId,params,true);
 }

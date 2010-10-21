@@ -15,7 +15,8 @@
     lp.cellVSpan=spanY;
   }
   int childId=LauncherModel.getCellLayoutChildId(-1,screen,x,y,spanX,spanY);
-  if (!group.addViewToCellLayout(child,insert ? 0 : -1,childId,lp)) {
+  boolean markCellsAsOccupied=!(child instanceof Folder);
+  if (!group.addViewToCellLayout(child,insert ? 0 : -1,childId,lp,markCellsAsOccupied)) {
     Log.w(TAG,"Failed to add to item at (" + lp.cellX + ","+ lp.cellY+ ") to CellLayout");
   }
   if (!(child instanceof Folder)) {
