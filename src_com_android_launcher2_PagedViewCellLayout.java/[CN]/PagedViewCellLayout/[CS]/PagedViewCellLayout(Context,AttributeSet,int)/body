@@ -5,4 +5,5 @@
   mCellCountX=LauncherModel.getCellCountX();
   mCellCountY=LauncherModel.getCellCountY();
   mHolographicAlpha=0.0f;
+  mWidthGap=mHeightGap=-1;
 }
