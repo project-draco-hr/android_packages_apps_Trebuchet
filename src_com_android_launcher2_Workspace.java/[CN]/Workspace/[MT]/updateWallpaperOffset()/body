@@ -1,0 +1,11 @@
+{
+  if (LauncherApplication.isScreenXLarge()) {
+    IBinder token=getWindowToken();
+    int scrollRange=getChildOffset(getChildCount() - 1) - getChildOffset(0);
+    if (token != null) {
+      mWallpaperManager.setWallpaperOffsetSteps(1.0f / (getChildCount() - 1),0);
+      float offset=mScrollX / (float)scrollRange;
+      mWallpaperManager.setWallpaperOffsets(getWindowToken(),Math.max(0.f,Math.min(offset,1.0f)),0);
+    }
+  }
+}
