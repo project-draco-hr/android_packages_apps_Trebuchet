@@ -1,9 +1,10 @@
 {
   super.getHitRect(outRect);
   if (LauncherApplication.isScreenXLarge()) {
-    outRect.top-=50;
-    outRect.left-=50;
-    outRect.bottom+=50;
-    outRect.right+=50;
+    final int dragPadding=mManageVisibility ? 50 : 10;
+    outRect.top-=dragPadding;
+    outRect.left-=dragPadding;
+    outRect.bottom+=dragPadding;
+    outRect.right+=dragPadding;
   }
 }

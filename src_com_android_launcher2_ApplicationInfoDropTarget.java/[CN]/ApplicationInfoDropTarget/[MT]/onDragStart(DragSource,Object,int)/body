@@ -1,8 +1,9 @@
 {
   if (info != null) {
+    final int itemType=((ItemInfo)info).itemType;
+    mActive=(itemType == LauncherSettings.Favorites.ITEM_TYPE_APPLICATION);
     if (mManageVisibility) {
-      mActive=true;
-      if (((ItemInfo)info).itemType == LauncherSettings.Favorites.ITEM_TYPE_APPLICATION) {
+      if (mActive) {
         setVisibility(VISIBLE);
       }
       mHandle.setVisibility(INVISIBLE);
