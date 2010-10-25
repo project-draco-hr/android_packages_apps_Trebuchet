@@ -1,8 +1,8 @@
 {
   super.onLayout(changed,left,top,right,bottom);
-  if (mWaitingToShrinkToBottom) {
-    shrinkToBottom(false);
-    mWaitingToShrinkToBottom=false;
+  if (mWaitingToShrink) {
+    shrink(mWaitingToShrinkPosition,false);
+    mWaitingToShrink=false;
   }
   if (LauncherApplication.isInPlaceRotationEnabled()) {
     setCurrentPage(getCurrentPage());

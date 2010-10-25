@@ -4,6 +4,8 @@
   TypedArray a=context.obtainStyledAttributes(attrs,R.styleable.CellLayout,defStyle,0);
   mCellWidth=a.getDimensionPixelSize(R.styleable.CellLayout_cellWidth,10);
   mCellHeight=a.getDimensionPixelSize(R.styleable.CellLayout_cellHeight,10);
+  mWidthGap=a.getDimensionPixelSize(R.styleable.CellLayout_widthGap,-1);
+  mHeightGap=a.getDimensionPixelSize(R.styleable.CellLayout_heightGap,-1);
   mLeftPadding=a.getDimensionPixelSize(R.styleable.CellLayout_xAxisStartPadding,10);
   mRightPadding=a.getDimensionPixelSize(R.styleable.CellLayout_xAxisEndPadding,10);
   mTopPadding=a.getDimensionPixelSize(R.styleable.CellLayout_yAxisStartPadding,10);

@@ -13,9 +13,7 @@
  else {
     super.onSaveInstanceState(outState);
   }
-  if (mState == State.ALL_APPS) {
-    outState.putBoolean(RUNTIME_STATE_ALL_APPS_FOLDER,true);
-  }
+  outState.putInt(RUNTIME_STATE,mState.ordinal());
   if (mAddScreen > -1 && mWaitingForResult) {
     outState.putInt(RUNTIME_STATE_PENDING_ADD_SCREEN,mAddScreen);
     outState.putInt(RUNTIME_STATE_PENDING_ADD_CELL_X,mAddIntersectCellX);

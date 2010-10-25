@@ -2,9 +2,12 @@
   if (savedState == null) {
     return;
   }
-  final boolean allApps=savedState.getBoolean(RUNTIME_STATE_ALL_APPS_FOLDER,false);
-  if (allApps) {
+  State state=intToState(savedState.getInt(RUNTIME_STATE,State.WORKSPACE.ordinal()));
+  if (state == State.ALL_APPS) {
     showAllApps(false);
+  }
+ else   if (state == State.CUSTOMIZE) {
+    showCustomizationDrawer(false);
   }
   final int currentScreen=savedState.getInt(RUNTIME_STATE_CURRENT_SCREEN,-1);
   if (currentScreen > -1) {
