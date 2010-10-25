@@ -4,10 +4,6 @@ switch (mCustomizationType) {
 case WidgetCustomization:
     syncWidgetPages();
   break;
-case FolderCustomization:
-syncListPages(mFolderList);
-centerPagedViewCellLayouts=true;
-break;
 case ShortcutCustomization:
 syncListPages(mShortcutList);
 centerPagedViewCellLayouts=true;
