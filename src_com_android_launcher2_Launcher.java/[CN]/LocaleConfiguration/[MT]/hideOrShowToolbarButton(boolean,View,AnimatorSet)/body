@@ -6,10 +6,10 @@
     Animator anim=ObjectAnimator.ofFloat(view,"alpha",show ? 1.0f : 0.0f);
     anim.setDuration(duration);
     anim.addListener(new AnimatorListenerAdapter(){
-      public void onAnimationStart(      Animator animation){
+      @Override public void onAnimationStart(      Animator animation){
         if (showing)         showToolbarButton(view);
       }
-      public void onAnimationEnd(      Animator animation){
+      @Override public void onAnimationEnd(      Animator animation){
         if (hiding)         hideToolbarButton(view);
       }
     }

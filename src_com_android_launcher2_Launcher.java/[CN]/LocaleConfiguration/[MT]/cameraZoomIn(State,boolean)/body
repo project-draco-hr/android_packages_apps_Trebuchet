@@ -14,7 +14,7 @@
     scaleAnim.setDuration(duration);
     scaleAnim.setInterpolator(new AccelerateInterpolator());
     mStateAnimation.addListener(new AnimatorListenerAdapter(){
-      public void onAnimationEnd(      Animator animation){
+      @Override public void onAnimationEnd(      Animator animation){
         fromView.setVisibility(View.GONE);
         fromView.setScaleX(1.0f);
         fromView.setScaleY(1.0f);

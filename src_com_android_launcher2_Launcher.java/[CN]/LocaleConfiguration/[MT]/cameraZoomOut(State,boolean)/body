@@ -16,7 +16,7 @@
     scaleAnim.setDuration(duration);
     scaleAnim.setInterpolator(new DecelerateInterpolator());
     scaleAnim.addListener(new AnimatorListenerAdapter(){
-      public void onAnimationStart(      Animator animation){
+      @Override public void onAnimationStart(      Animator animation){
         toView.setTranslationX(0.0f);
         toView.setTranslationY(0.0f);
         toView.setVisibility(View.VISIBLE);
