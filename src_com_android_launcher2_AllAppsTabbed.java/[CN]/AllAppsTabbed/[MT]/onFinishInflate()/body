@@ -15,10 +15,6 @@
 ;
   String label=mContext.getString(R.string.all_apps_tab_all);
   addTab(newTabSpec(TAG_ALL).setIndicator(label).setContent(contentFactory));
-  label=mContext.getString(R.string.all_apps_tab_apps);
-  addTab(newTabSpec(TAG_APPS).setIndicator(label).setContent(contentFactory));
-  label=mContext.getString(R.string.all_apps_tab_games);
-  addTab(newTabSpec(TAG_GAMES).setIndicator(label).setContent(contentFactory));
   label=mContext.getString(R.string.all_apps_tab_downloaded);
   addTab(newTabSpec(TAG_DOWNLOADED).setIndicator(label).setContent(contentFactory));
   setOnTabChangedListener(new OnTabChangeListener(){
@@ -31,12 +27,6 @@
           String tag=getCurrentTabTag();
           if (tag == TAG_ALL) {
             mAllApps.setAppFilter(AllAppsPagedView.ALL_APPS_FLAG);
-          }
- else           if (tag == TAG_APPS) {
-            mAllApps.setAppFilter(ApplicationInfo.APP_FLAG);
-          }
- else           if (tag == TAG_GAMES) {
-            mAllApps.setAppFilter(ApplicationInfo.GAME_FLAG);
           }
  else           if (tag == TAG_DOWNLOADED) {
             mAllApps.setAppFilter(ApplicationInfo.DOWNLOADED_FLAG);
