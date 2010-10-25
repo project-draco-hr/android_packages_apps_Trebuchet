@@ -33,8 +33,6 @@
     mHomeCustomizationDrawer.addTab(mHomeCustomizationDrawer.newTabSpec(WIDGETS_TAG).setIndicator(widgetsLabel).setContent(contentFactory));
     String applicationsLabel=getString(R.string.applications_tab_label);
     mHomeCustomizationDrawer.addTab(mHomeCustomizationDrawer.newTabSpec(APPLICATIONS_TAG).setIndicator(applicationsLabel).setContent(contentFactory));
-    String foldersLabel=getString(R.string.folders_tab_label);
-    mHomeCustomizationDrawer.addTab(mHomeCustomizationDrawer.newTabSpec(FOLDERS_TAG).setIndicator(foldersLabel).setContent(contentFactory));
     String wallpapersLabel=getString(R.string.wallpapers_tab_label);
     mHomeCustomizationDrawer.addTab(mHomeCustomizationDrawer.newTabSpec(WALLPAPERS_TAG).setIndicator(wallpapersLabel).setContent(contentFactory));
     String shortcutsLabel=getString(R.string.shortcuts_tab_label);
@@ -53,9 +51,6 @@
             }
  else             if (tag == APPLICATIONS_TAG) {
               mCustomizePagedView.setCustomizationFilter(CustomizePagedView.CustomizationType.ApplicationCustomization);
-            }
- else             if (tag == FOLDERS_TAG) {
-              mCustomizePagedView.setCustomizationFilter(CustomizePagedView.CustomizationType.FolderCustomization);
             }
  else             if (tag == WALLPAPERS_TAG) {
               mCustomizePagedView.setCustomizationFilter(CustomizePagedView.CustomizationType.WallpaperCustomization);
