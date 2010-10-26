@@ -21,11 +21,11 @@
     if (mStateAnimation != null)     mStateAnimation.cancel();
     mStateAnimation=new AnimatorSet();
     mStateAnimation.addListener(new AnimatorListenerAdapter(){
-      public void onAnimationStart(      Animator animation){
+      @Override public void onAnimationStart(      Animator animation){
         toView.setVisibility(View.VISIBLE);
         toView.setY(toViewStartY);
       }
-      public void onAnimationEnd(      Animator animation){
+      @Override public void onAnimationEnd(      Animator animation){
         fromView.setVisibility(View.GONE);
       }
     }

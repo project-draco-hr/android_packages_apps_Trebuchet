@@ -18,17 +18,6 @@ mLauncher.getWorkspace().onDragStartedWithItemMinSize(createWidgetInfo.minWidth,
 mDragController.startDrag(v,b,this,createWidgetInfo,DragController.DRAG_ACTION_COPY,null);
 b.recycle();
 return true;
-case FolderCustomization:
-if (v.getTag() instanceof UserFolderInfo) {
-UserFolderInfo folderInfo=(UserFolderInfo)v.getTag();
-mDragController.startDrag(v,this,folderInfo,DragController.DRAG_ACTION_COPY,null);
-}
- else {
-createItemInfo=(PendingAddItemInfo)v.getTag();
-mDragController.startDrag(v,this,createItemInfo,DragController.DRAG_ACTION_COPY,null);
-}
-mLauncher.getWorkspace().onDragStartedWithItemSpans(1,1);
-return true;
 case ShortcutCustomization:
 createItemInfo=(PendingAddItemInfo)v.getTag();
 mDragController.startDrag(v,this,createItemInfo,DragController.DRAG_ACTION_COPY,null);
