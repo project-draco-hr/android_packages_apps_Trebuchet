@@ -1,11 +1,3 @@
 {
-  final int id=item.getItemId();
-  final ApplicationInfo appInfo=(ApplicationInfo)getChosenItem();
-  if (id == MENU_APP_INFO) {
-    mLauncher.startApplicationDetailsActivity(appInfo.componentName);
-  }
- else   if (id == MENU_DELETE_APP) {
-    mLauncher.startApplicationUninstallActivity(appInfo);
-  }
   return false;
 }
