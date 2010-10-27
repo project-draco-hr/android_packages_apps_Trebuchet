@@ -1,10 +1,11 @@
 {
   super.onResume();
   mPaused=false;
-  if (mRestoring) {
+  if (mRestoring || mOnResumeNeedsLoad) {
     mWorkspaceLoading=true;
     mModel.startLoader(this,true);
     mRestoring=false;
+    mOnResumeNeedsLoad=false;
   }
   updateAppMarketIcon();
 }
