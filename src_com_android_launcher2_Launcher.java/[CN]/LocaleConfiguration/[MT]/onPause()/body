@@ -6,5 +6,6 @@
   if (mNextView != null) {
     dismissPreview(mNextView);
   }
+  mPaused=true;
   mDragController.cancelDrag();
 }
