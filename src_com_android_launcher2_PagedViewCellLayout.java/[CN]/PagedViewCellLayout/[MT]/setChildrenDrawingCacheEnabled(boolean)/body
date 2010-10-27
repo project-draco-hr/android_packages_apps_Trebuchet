@@ -3,6 +3,8 @@
   for (int i=0; i < count; i++) {
     final View view=getChildAt(i);
     view.setDrawingCacheEnabled(enabled);
-    view.buildDrawingCache(true);
+    if (!view.isHardwareAccelerated()) {
+      view.buildDrawingCache(true);
+    }
   }
 }
