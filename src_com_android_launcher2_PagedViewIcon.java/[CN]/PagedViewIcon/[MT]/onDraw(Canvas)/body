@@ -1,28 +1,22 @@
 {
-  if (mIsHolographicUpdatePass) {
-    canvas.save();
-    canvas.clipRect(mDrawableClipRect,Op.REPLACE);
-    final float alpha=getAlpha();
-    super.setAlpha(1.0f);
+  if (mAlpha > 0) {
     super.onDraw(canvas);
-    super.setAlpha(alpha);
-    canvas.restore();
+  }
+  Bitmap overlay=null;
+  if (mCheckedOutline == null) {
+    if (mHolographicOutline != null && mHolographicAlpha > 0) {
+      mPaint.setAlpha(mHolographicAlpha);
+      overlay=mHolographicOutline;
+    }
   }
  else {
-    if (mAlpha > 0) {
-      super.onDraw(canvas);
-    }
+    mPaint.setAlpha(255);
+    overlay=mCheckedOutline;
   }
-  if (!mIsHolographicUpdatePass) {
-    if (mCheckedOutline == null) {
-      if (mHolographicOutline != null && mHolographicAlpha > 0) {
-        mPaint.setAlpha(mHolographicAlpha);
-        canvas.drawBitmap(mHolographicOutline,0,0,mPaint);
-      }
-    }
- else {
-      mPaint.setAlpha(255);
-      canvas.drawBitmap(mCheckedOutline,0,0,mPaint);
-    }
+  if (overlay != null) {
+    final int compoundPaddingLeft=getCompoundPaddingLeft();
+    final int compoundPaddingRight=getCompoundPaddingRight();
+    int hspace=getWidth() - compoundPaddingRight - compoundPaddingLeft;
+    canvas.drawBitmap(overlay,compoundPaddingLeft + (hspace - overlay.getWidth()) / 2,mPaddingTop,mPaint);
   }
 }

@@ -1,0 +1,4 @@
+{
+  super.onDetachedFromWindow();
+  sWorker.removeMessages(MESSAGE_CREATE_HOLOGRAPHIC_OUTLINE,this);
+}

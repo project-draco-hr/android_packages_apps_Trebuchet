@@ -2,14 +2,14 @@
   mIconCache=cache;
   mIconCacheKey=info;
   mHolographicOutline=mIconCache.getOutline(mIconCacheKey);
-  Bitmap icon;
   if (scaleUp) {
-    icon=Bitmap.createScaledBitmap(info.iconBitmap,mScaledIconSize,mScaledIconSize,true);
+    mIcon=Bitmap.createScaledBitmap(info.iconBitmap,mScaledIconSize,mScaledIconSize,true);
   }
  else {
-    icon=info.iconBitmap;
+    mIcon=info.iconBitmap;
   }
-  setCompoundDrawablesWithIntrinsicBounds(null,new FastBitmapDrawable(icon),null,null);
+  setCompoundDrawablesWithIntrinsicBounds(null,new FastBitmapDrawable(mIcon),null,null);
   setText(info.title);
   setTag(info);
+  queueHolographicOutlineCreation();
 }
