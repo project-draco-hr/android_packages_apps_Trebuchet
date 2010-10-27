@@ -1,4 +1,5 @@
 {
+  setLoadOnResume();
   final Workspace workspace=mWorkspace;
   for (int i=start; i < end; i++) {
     final ItemInfo item=shortcuts.get(i);
