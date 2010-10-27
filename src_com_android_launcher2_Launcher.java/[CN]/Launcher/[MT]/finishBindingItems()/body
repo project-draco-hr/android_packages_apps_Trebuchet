@@ -1,4 +1,5 @@
 {
+  setLoadOnResume();
   if (mSavedState != null) {
     if (!mWorkspace.hasFocus()) {
       mWorkspace.getChildAt(mWorkspace.getCurrentScreen()).requestFocus();
