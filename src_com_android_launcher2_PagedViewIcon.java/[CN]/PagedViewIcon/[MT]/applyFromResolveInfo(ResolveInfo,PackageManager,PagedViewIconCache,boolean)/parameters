@@ -1,3 +1,4 @@
 ResolveInfo info
 PackageManager packageManager
 PagedViewIconCache cache
+boolean scaleUp

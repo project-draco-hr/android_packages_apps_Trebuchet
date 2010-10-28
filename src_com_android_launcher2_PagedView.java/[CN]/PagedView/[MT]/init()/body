@@ -4,6 +4,7 @@
   mPageViewIconCache=new PagedViewIconCache();
   mScroller=new Scroller(getContext());
   mCurrentPage=0;
+  mCenterPagesVertically=true;
   final ViewConfiguration configuration=ViewConfiguration.get(getContext());
   mTouchSlop=configuration.getScaledTouchSlop();
   mPagingTouchSlop=configuration.getScaledPagingTouchSlop();
