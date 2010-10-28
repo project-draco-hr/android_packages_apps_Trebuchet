@@ -1,0 +1,4 @@
+{
+  onAnimationEndOrCancel(animation);
+  cancelled.add(animation);
+}

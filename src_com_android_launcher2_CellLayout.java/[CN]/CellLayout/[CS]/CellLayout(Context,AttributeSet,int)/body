@@ -72,7 +72,7 @@
     }
 );
     anim.getAnimator().addListener(new AnimatorListenerAdapter(){
-      public void onAnimationEnd(      Animator animation){
+      @Override public void onAnimationEnd(      Animator animation){
         if ((Float)((ValueAnimator)animation).getAnimatedValue() == 0f) {
           anim.setTag(null);
         }

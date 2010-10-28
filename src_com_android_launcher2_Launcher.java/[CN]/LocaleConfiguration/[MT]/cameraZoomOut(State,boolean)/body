@@ -5,7 +5,7 @@
   final boolean toAllApps=(toState == State.ALL_APPS);
   final View toView=toAllApps ? (View)mAllAppsGrid : mHomeCustomizationDrawer;
   setPivotsForZoom(toView,toState,scale);
-  if (toState == State.ALL_APPS) {
+  if (toAllApps) {
     mWorkspace.shrinkToBottom(animated);
   }
  else {
@@ -15,11 +15,15 @@
     ValueAnimator scaleAnim=ObjectAnimator.ofPropertyValuesHolder(toView,PropertyValuesHolder.ofFloat("scaleX",scale,1.0f),PropertyValuesHolder.ofFloat("scaleY",scale,1.0f));
     scaleAnim.setDuration(duration);
     scaleAnim.setInterpolator(new DecelerateInterpolator());
-    scaleAnim.addListener(new AnimatorListenerAdapter(){
+    scaleAnim.addListener(new LauncherAnimatorListenerAdapter(){
       @Override public void onAnimationStart(      Animator animation){
         toView.setTranslationX(0.0f);
         toView.setTranslationY(0.0f);
         toView.setVisibility(View.VISIBLE);
+      }
+      @Override public void onAnimationEndOrCancel(      Animator animation){
+        toView.setScaleX(1.0f);
+        toView.setScaleY(1.0f);
       }
     }
 );
