@@ -39,7 +39,7 @@
         if (mDragTargetLayout != null) {
           mDragTargetLayout.onDragExit();
         }
-        layout.onDragEnter(dragView);
+        layout.onDragEnter();
         mDragTargetLayout=layout;
       }
       if ((!LauncherApplication.isScreenXLarge() || source == this) && mDragTargetLayout != null) {

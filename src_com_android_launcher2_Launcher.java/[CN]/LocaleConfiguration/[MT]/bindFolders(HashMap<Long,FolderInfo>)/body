@@ -1,4 +1,5 @@
 {
+  setLoadOnResume();
   sFolders.clear();
   sFolders.putAll(folders);
 }

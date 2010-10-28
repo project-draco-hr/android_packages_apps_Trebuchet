@@ -1,0 +1,56 @@
+{
+  final CellLayout layout=(CellLayout)getChildAt(mCurrentPage);
+  final int[] pos=new int[2];
+  layout.getLocationOnScreen(pos);
+  final int x=(int)event.getX() - pos[0];
+  final int y=(int)event.getY() - pos[1];
+switch (event.getAction()) {
+case DragEvent.ACTION_DRAG_STARTED:
+    if (!layout.findCellForSpan(pos,1,1)) {
+      Toast.makeText(mContext,mContext.getString(R.string.out_of_space),Toast.LENGTH_SHORT).show();
+      return false;
+    }
+  ClipDescription desc=event.getClipDescription();
+if (desc.filterMimeTypes(ClipDescription.MIMETYPE_TEXT_INTENT) != null) {
+  final Canvas canvas=new Canvas();
+  final int bitmapPadding=HolographicOutlineHelper.OUTER_BLUR_RADIUS;
+  mDragOutline=createExternalDragOutline(canvas,bitmapPadding);
+  showOutlines();
+  layout.setHover(true);
+  layout.onDragEnter();
+  layout.visualizeDropLocation(null,mDragOutline,x,y,1,1);
+  return true;
+}
+break;
+case DragEvent.ACTION_DRAG_LOCATION:
+layout.visualizeDropLocation(null,mDragOutline,x,y,1,1);
+return true;
+case DragEvent.ACTION_DROP:
+if (!layout.findCellForSpan(pos,1,1)) {
+Toast.makeText(mContext,mContext.getString(R.string.out_of_space),Toast.LENGTH_SHORT).show();
+return false;
+}
+int newDropCount=0;
+final LauncherModel model=mLauncher.getModel();
+final ClipData data=event.getClipData();
+final int itemCount=data.getItemCount();
+for (int i=0; i < itemCount; ++i) {
+final Intent intent=data.getItem(i).getIntent();
+if (intent != null && model.validateShortcutIntent(intent)) {
+ShortcutInfo info=model.infoFromShortcutIntent(mContext,intent,data.getIcon());
+onDropExternal(x,y,info,layout);
+newDropCount++;
+}
+}
+if (newDropCount <= 0) {
+Toast.makeText(mContext,"Only Shortcut Intents accepted.",Toast.LENGTH_SHORT).show();
+}
+return true;
+case DragEvent.ACTION_DRAG_ENDED:
+layout.setHover(false);
+layout.onDragExit();
+hideOutlines();
+return true;
+}
+return super.onDragEvent(event);
+}
