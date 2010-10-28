@@ -28,8 +28,13 @@
   }
   final ShortcutInfo info=new ShortcutInfo();
   if (icon == null) {
-    icon=getFallbackIcon();
-    info.usingFallbackIcon=true;
+    if (fallbackIcon != null) {
+      icon=fallbackIcon;
+    }
+ else {
+      icon=getFallbackIcon();
+      info.usingFallbackIcon=true;
+    }
   }
   info.setIcon(icon);
   info.title=name;

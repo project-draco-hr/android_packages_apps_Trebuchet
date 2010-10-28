@@ -2,7 +2,7 @@
   mDragTargetLayout=null;
   if (!mIsSmall) {
     mDragTargetLayout=getCurrentDropLayout();
-    mDragTargetLayout.onDragEnter(dragView);
+    mDragTargetLayout.onDragEnter();
     showOutlines();
   }
 }

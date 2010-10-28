@@ -1,0 +1,3 @@
+{
+  return InstallShortcutReceiver.ACTION_INSTALL_SHORTCUT.equals(data.getAction()) && (data.getParcelableExtra(Intent.EXTRA_SHORTCUT_INTENT) != null) && (data.getStringExtra(Intent.EXTRA_SHORTCUT_NAME) != null);
+}
