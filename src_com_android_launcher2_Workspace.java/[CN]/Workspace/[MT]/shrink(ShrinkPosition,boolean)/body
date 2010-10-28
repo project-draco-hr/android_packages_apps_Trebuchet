@@ -6,7 +6,7 @@
   }
   mIsSmall=true;
   mShrunkenState=shrinkPosition;
-  setCurrentPage(mCurrentPage);
+  setCurrentPage((mNextPage != INVALID_PAGE) ? mNextPage : mCurrentPage);
   updateWhichPagesAcceptDrops(mShrunkenState);
   mTouchState=TOUCH_STATE_REST;
   mActivePointerId=INVALID_POINTER;
