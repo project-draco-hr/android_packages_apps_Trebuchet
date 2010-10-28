@@ -8,7 +8,7 @@
       bg=mHover ? mBackgroundHover : mBackground;
     }
     if (bg != null) {
-      bg.setAlpha((int)(mBackgroundAlpha * 255));
+      bg.setAlpha((int)(mBackgroundAlpha * mBackgroundAlphaMultiplier * 255));
       bg.setBounds(mBackgroundRect);
       bg.draw(canvas);
     }

@@ -10,6 +10,8 @@
   updateWhichPagesAcceptDrops(mShrunkenState);
   mTouchState=TOUCH_STATE_REST;
   mActivePointerId=INVALID_POINTER;
+  CellLayout currentPage=(CellLayout)getChildAt(mCurrentPage);
+  currentPage.setBackgroundAlphaMultiplier(1.0f);
   final Resources res=getResources();
   final int screenWidth=getWidth();
   final int screenHeight=getHeight();
