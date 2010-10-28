@@ -36,10 +36,26 @@ final ClipData data=event.getClipData();
 final int itemCount=data.getItemCount();
 for (int i=0; i < itemCount; ++i) {
 final Intent intent=data.getItem(i).getIntent();
-if (intent != null && model.validateShortcutIntent(intent)) {
-ShortcutInfo info=model.infoFromShortcutIntent(mContext,intent,data.getIcon());
+if (intent != null) {
+Object info=null;
+if (model.validateShortcutIntent(intent)) {
+info=model.infoFromShortcutIntent(mContext,intent,data.getIcon());
+}
+ else if (model.validateWidgetIntent(intent)) {
+final ComponentName component=ComponentName.unflattenFromString(intent.getStringExtra(InstallWidgetReceiver.EXTRA_APPWIDGET_COMPONENT));
+final AppWidgetProviderInfo appInfo=model.findAppWidgetProviderInfoWithComponent(mContext,component);
+PendingAddWidgetInfo createInfo=new PendingAddWidgetInfo();
+createInfo.itemType=LauncherSettings.Favorites.ITEM_TYPE_APPWIDGET;
+createInfo.componentName=appInfo.provider;
+createInfo.minWidth=appInfo.minWidth;
+createInfo.minHeight=appInfo.minHeight;
+createInfo.configurationData=intent.getParcelableExtra(InstallWidgetReceiver.EXTRA_APPWIDGET_CONFIGURATION_DATA);
+info=createInfo;
+}
+if (info != null) {
 onDropExternal(x,y,info,layout);
 newDropCount++;
+}
 }
 }
 if (newDropCount <= 0) {
