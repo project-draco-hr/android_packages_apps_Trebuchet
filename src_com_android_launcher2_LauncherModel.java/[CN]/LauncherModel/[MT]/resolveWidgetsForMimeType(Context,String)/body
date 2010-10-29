@@ -1,0 +1,20 @@
+{
+  final PackageManager packageManager=context.getPackageManager();
+  final List<WidgetMimeTypeHandlerData> supportedConfigurationActivities=new ArrayList<WidgetMimeTypeHandlerData>();
+  final Intent supportsIntent=new Intent(InstallWidgetReceiver.ACTION_SUPPORTS_CLIPDATA_MIMETYPE);
+  supportsIntent.setType(mimeType);
+  final List<AppWidgetProviderInfo> widgets=AppWidgetManager.getInstance(context).getInstalledProviders();
+  final HashMap<ComponentName,AppWidgetProviderInfo> configurationComponentToWidget=new HashMap<ComponentName,AppWidgetProviderInfo>();
+  for (  AppWidgetProviderInfo info : widgets) {
+    configurationComponentToWidget.put(info.configure,info);
+  }
+  final List<ResolveInfo> activities=packageManager.queryIntentActivities(supportsIntent,PackageManager.MATCH_DEFAULT_ONLY);
+  for (  ResolveInfo info : activities) {
+    final ActivityInfo activityInfo=info.activityInfo;
+    final ComponentName infoComponent=new ComponentName(activityInfo.packageName,activityInfo.name);
+    if (configurationComponentToWidget.containsKey(infoComponent)) {
+      supportedConfigurationActivities.add(new InstallWidgetReceiver.WidgetMimeTypeHandlerData(info,configurationComponentToWidget.get(infoComponent)));
+    }
+  }
+  return supportedConfigurationActivities;
+}
