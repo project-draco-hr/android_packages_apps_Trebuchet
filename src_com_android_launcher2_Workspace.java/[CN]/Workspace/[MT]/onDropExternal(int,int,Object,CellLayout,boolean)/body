@@ -7,7 +7,7 @@
     touchXY[1]=y;
 switch (info.itemType) {
 case LauncherSettings.Favorites.ITEM_TYPE_APPWIDGET:
-      mLauncher.addAppWidgetFromDrop(info.componentName,screen,touchXY);
+      mLauncher.addAppWidgetFromDrop((PendingAddWidgetInfo)info,screen,touchXY);
     break;
 case LauncherSettings.Favorites.ITEM_TYPE_LIVE_FOLDER:
   mLauncher.addLiveFolderFromDrop(info.componentName,screen,touchXY);

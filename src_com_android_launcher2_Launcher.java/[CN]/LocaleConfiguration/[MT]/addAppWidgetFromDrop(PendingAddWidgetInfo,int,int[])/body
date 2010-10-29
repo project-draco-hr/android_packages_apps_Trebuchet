@@ -3,6 +3,6 @@
   mAddScreen=screen;
   mAddDropPosition=position;
   int appWidgetId=getAppWidgetHost().allocateAppWidgetId();
-  AppWidgetManager.getInstance(this).bindAppWidgetId(appWidgetId,appWidgetProvider);
-  addAppWidgetImpl(appWidgetId);
+  AppWidgetManager.getInstance(this).bindAppWidgetId(appWidgetId,info.componentName);
+  addAppWidgetImpl(appWidgetId,info);
 }

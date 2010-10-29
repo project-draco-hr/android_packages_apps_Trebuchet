@@ -1,5 +1,5 @@
 {
   int appWidgetId=data.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,-1);
   if (LOGD)   Log.d(TAG,"dumping extras content=" + data.getExtras());
-  addAppWidgetImpl(appWidgetId);
+  addAppWidgetImpl(appWidgetId,null);
 }
