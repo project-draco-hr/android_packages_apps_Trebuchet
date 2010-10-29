@@ -1,16 +1,16 @@
 {
-  if (mDragTargetLayout == null) {
-    return false;
+  if (source != this) {
+    if (mDragTargetLayout == null) {
+      return false;
+    }
+    final CellLayout.CellInfo dragCellInfo=mDragInfo;
+    final int spanX=dragCellInfo == null ? 1 : dragCellInfo.spanX;
+    final int spanY=dragCellInfo == null ? 1 : dragCellInfo.spanY;
+    final View ignoreView=dragCellInfo == null ? null : dragCellInfo.cell;
+    if (!mDragTargetLayout.findCellForSpanIgnoring(null,spanX,spanY,ignoreView)) {
+      mLauncher.showOutOfSpaceMessage();
+      return false;
+    }
   }
-  final CellLayout.CellInfo dragCellInfo=mDragInfo;
-  final int spanX=dragCellInfo == null ? 1 : dragCellInfo.spanX;
-  final int spanY=dragCellInfo == null ? 1 : dragCellInfo.spanY;
-  final View ignoreView=dragCellInfo == null ? null : dragCellInfo.cell;
-  if (mDragTargetLayout.findCellForSpanIgnoring(null,spanX,spanY,ignoreView)) {
-    return true;
-  }
- else {
-    mLauncher.showOutOfSpaceMessage();
-    return false;
-  }
+  return true;
 }

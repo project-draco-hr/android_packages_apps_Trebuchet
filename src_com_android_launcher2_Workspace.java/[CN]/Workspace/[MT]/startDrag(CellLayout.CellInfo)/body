@@ -7,6 +7,7 @@
   mDragInfo.screen=mCurrentPage;
   CellLayout current=getCurrentDropLayout();
   current.onDragChild(child);
+  child.setVisibility(View.GONE);
   child.clearFocus();
   child.setPressed(false);
   final Canvas canvas=new Canvas();

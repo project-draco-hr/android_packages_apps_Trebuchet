@@ -81,8 +81,6 @@
 );
     mDragOutlineAnims[i]=anim;
   }
-  mDropAnim=ValueAnimator.ofFloat(1.0f,0.0f);
-  mDropAnim.setInterpolator(mEaseOutInterpolator);
   mBackgroundRect=new Rect();
   mHoverRect=new Rect();
   setHoverScale(1.0f);

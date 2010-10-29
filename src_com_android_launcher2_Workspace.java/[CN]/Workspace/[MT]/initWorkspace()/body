@@ -5,6 +5,7 @@
   LauncherApplication app=(LauncherApplication)context.getApplicationContext();
   mIconCache=app.getIconCache();
   mExternalDragOutlinePaint.setAntiAlias(true);
+  setWillNotDraw(false);
   mUnshrinkAnimationListener=new AnimatorListenerAdapter(){
     public void onAnimationStart(    Animator animation){
       mIsInUnshrinkAnimation=true;

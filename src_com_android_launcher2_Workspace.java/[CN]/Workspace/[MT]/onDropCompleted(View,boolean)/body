@@ -9,7 +9,7 @@
     }
   }
  else   if (mDragInfo != null) {
-    ((CellLayout)getChildAt(mDragInfo.screen)).onDropAborted(mDragInfo.cell);
+    ((CellLayout)getChildAt(mDragInfo.screen)).onDropChild(mDragInfo.cell);
   }
   mDragOutline=null;
   mDragInfo=null;
