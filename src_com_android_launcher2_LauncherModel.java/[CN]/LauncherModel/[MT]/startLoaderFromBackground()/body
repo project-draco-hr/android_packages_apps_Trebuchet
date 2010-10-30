@@ -1,0 +1,14 @@
+{
+  boolean runLoader=false;
+  if (mCallbacks != null) {
+    Callbacks callbacks=mCallbacks.get();
+    if (callbacks != null) {
+      if (!callbacks.setLoadOnResume()) {
+        runLoader=true;
+      }
+    }
+  }
+  if (runLoader) {
+    startLoader(mApp,false);
+  }
+}
