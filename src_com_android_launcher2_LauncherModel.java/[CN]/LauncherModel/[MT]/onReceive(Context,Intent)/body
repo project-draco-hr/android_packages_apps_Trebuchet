@@ -31,21 +31,14 @@
  else   if (Intent.ACTION_EXTERNAL_APPLICATIONS_AVAILABLE.equals(action)) {
     String[] packages=intent.getStringArrayExtra(Intent.EXTRA_CHANGED_PACKAGE_LIST);
     enqueuePackageUpdated(new PackageUpdatedTask(PackageUpdatedTask.OP_ADD,packages));
-    boolean runLoader=true;
-    if (mCallbacks != null) {
-      Callbacks callbacks=mCallbacks.get();
-      if (callbacks != null) {
-        if (callbacks.setLoadOnResume()) {
-          runLoader=false;
-        }
-      }
-    }
-    if (runLoader) {
-      startLoader(mApp,false);
-    }
+    startLoaderFromBackground();
   }
  else   if (Intent.ACTION_EXTERNAL_APPLICATIONS_UNAVAILABLE.equals(action)) {
     String[] packages=intent.getStringArrayExtra(Intent.EXTRA_CHANGED_PACKAGE_LIST);
     enqueuePackageUpdated(new PackageUpdatedTask(PackageUpdatedTask.OP_UNAVAILABLE,packages));
+  }
+ else   if (Intent.ACTION_LOCALE_CHANGED.equals(action)) {
+    mAllAppsLoaded=false;
+    startLoaderFromBackground();
   }
 }
