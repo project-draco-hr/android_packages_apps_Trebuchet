@@ -1,5 +1,5 @@
 {
   mApps=list;
   Collections.sort(mApps,LauncherModel.APP_NAME_COMPARATOR);
-  update();
+  invalidatePageDataAndIconCache();
 }
