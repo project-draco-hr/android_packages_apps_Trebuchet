@@ -1,0 +1,7 @@
+{
+  final float percent=(Float)animation.getAnimatedValue();
+  invalidate(mDropViewPos[0],mDropViewPos[1],mDropViewPos[0] + view.getWidth(),mDropViewPos[1] + view.getHeight());
+  mDropViewPos[0]=fromX + (int)(percent * dx + 0.5f);
+  mDropViewPos[1]=fromY + (int)(percent * dy + 0.5f);
+  invalidate(mDropViewPos[0],mDropViewPos[1],mDropViewPos[0] + view.getWidth(),mDropViewPos[1] + view.getHeight());
+}

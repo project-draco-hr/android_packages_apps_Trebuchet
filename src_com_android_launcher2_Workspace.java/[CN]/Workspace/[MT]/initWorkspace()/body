@@ -5,11 +5,12 @@
   LauncherApplication app=(LauncherApplication)context.getApplicationContext();
   mIconCache=app.getIconCache();
   mExternalDragOutlinePaint.setAntiAlias(true);
-  mUnshrinkAnimationListener=new AnimatorListenerAdapter(){
-    public void onAnimationStart(    Animator animation){
+  setWillNotDraw(false);
+  mUnshrinkAnimationListener=new LauncherAnimatorListenerAdapter(){
+    @Override public void onAnimationStart(    Animator animation){
       mIsInUnshrinkAnimation=true;
     }
-    public void onAnimationEnd(    Animator animation){
+    @Override public void onAnimationEndOrCancel(    Animator animation){
       mIsInUnshrinkAnimation=false;
     }
   }

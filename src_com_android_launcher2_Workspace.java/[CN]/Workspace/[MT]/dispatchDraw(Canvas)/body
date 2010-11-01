@@ -9,5 +9,13 @@
   }
  else {
     super.dispatchDraw(canvas);
+    if (mDropView != null) {
+      canvas.save(Canvas.MATRIX_SAVE_FLAG);
+      final int xPos=mDropViewPos[0] - mDropView.getScrollX();
+      final int yPos=mDropViewPos[1] - mDropView.getScrollY();
+      canvas.translate(xPos,yPos);
+      mDropView.draw(canvas);
+      canvas.restore();
+    }
   }
 }

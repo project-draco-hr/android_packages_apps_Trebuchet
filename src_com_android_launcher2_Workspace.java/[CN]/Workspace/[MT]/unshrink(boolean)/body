@@ -1,7 +1,10 @@
 {
   if (mIsSmall) {
     mIsSmall=false;
-    AnimatorSet s=new AnimatorSet();
+    if (mAnimator != null) {
+      mAnimator.cancel();
+    }
+    mAnimator=new AnimatorSet();
     final int screenCount=getChildCount();
     final int duration=getResources().getInteger(R.integer.config_workspaceUnshrinkTime);
     for (int i=0; i < screenCount; i++) {
@@ -15,7 +18,7 @@
         rotation=-WORKSPACE_ROTATION;
       }
       if (animated) {
-        s.playTogether(ObjectAnimator.ofFloat(cl,"translationX",0.0f).setDuration(duration),ObjectAnimator.ofFloat(cl,"translationY",0.0f).setDuration(duration),ObjectAnimator.ofFloat(cl,"scaleX",1.0f).setDuration(duration),ObjectAnimator.ofFloat(cl,"scaleY",1.0f).setDuration(duration),ObjectAnimator.ofFloat(cl,"backgroundAlpha",0.0f).setDuration(duration),ObjectAnimator.ofFloat(cl,"alpha",finalAlphaValue).setDuration(duration),ObjectAnimator.ofFloat(cl,"rotationY",rotation).setDuration(duration));
+        mAnimator.playTogether(ObjectAnimator.ofFloat(cl,"translationX",0.0f).setDuration(duration),ObjectAnimator.ofFloat(cl,"translationY",0.0f).setDuration(duration),ObjectAnimator.ofFloat(cl,"scaleX",1.0f).setDuration(duration),ObjectAnimator.ofFloat(cl,"scaleY",1.0f).setDuration(duration),ObjectAnimator.ofFloat(cl,"backgroundAlpha",0.0f).setDuration(duration),ObjectAnimator.ofFloat(cl,"alpha",finalAlphaValue).setDuration(duration),ObjectAnimator.ofFloat(cl,"rotationY",rotation).setDuration(duration));
       }
  else {
         cl.setTranslationX(0.0f);
@@ -28,8 +31,8 @@
       }
     }
     if (animated) {
-      s.addListener(mUnshrinkAnimationListener);
-      s.start();
+      mAnimator.addListener(mUnshrinkAnimationListener);
+      mAnimator.start();
     }
   }
 }

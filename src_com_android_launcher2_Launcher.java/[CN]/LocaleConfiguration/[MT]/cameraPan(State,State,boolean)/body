@@ -20,12 +20,12 @@
   if (animated) {
     if (mStateAnimation != null)     mStateAnimation.cancel();
     mStateAnimation=new AnimatorSet();
-    mStateAnimation.addListener(new AnimatorListenerAdapter(){
+    mStateAnimation.addListener(new LauncherAnimatorListenerAdapter(){
       @Override public void onAnimationStart(      Animator animation){
         toView.setVisibility(View.VISIBLE);
         toView.setY(toViewStartY);
       }
-      @Override public void onAnimationEnd(      Animator animation){
+      @Override public void onAnimationEndOrCancel(      Animator animation){
         fromView.setVisibility(View.GONE);
       }
     }
@@ -35,7 +35,7 @@
     hideAndShowToolbarButtons(toState,toolbarShowAnim,toolbarHideAnim);
     ObjectAnimator fromAnim=ObjectAnimator.ofFloat(fromView,"y",fromViewStartY,fromViewEndY);
     fromAnim.setDuration(duration);
-    ObjectAnimator toAnim=ObjectAnimator.ofFloat(toView,"y",toViewStartY,toViewEndY);
+    ObjectAnimator toAnim=ObjectAnimator.ofPropertyValuesHolder(toView,PropertyValuesHolder.ofFloat("y",toViewStartY,toViewEndY),PropertyValuesHolder.ofFloat("scaleX",toView.getScaleX(),1.0f),PropertyValuesHolder.ofFloat("scaleY",toView.getScaleY(),1.0f));
     fromAnim.setDuration(duration);
     mStateAnimation.playTogether(toolbarHideAnim,fromAnim,toAnim);
     final int fadeInTime=res.getInteger(R.integer.config_toolbarButtonFadeInTime);
@@ -46,6 +46,8 @@
     fromView.setY(fromViewEndY);
     fromView.setVisibility(View.GONE);
     toView.setY(toViewEndY);
+    toView.setScaleX(1.0f);
+    toView.setScaleY(1.0f);
     toView.setVisibility(View.VISIBLE);
     hideAndShowToolbarButtons(toState,null,null);
   }
