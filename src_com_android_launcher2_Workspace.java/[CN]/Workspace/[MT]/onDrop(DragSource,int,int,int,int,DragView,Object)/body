@@ -16,7 +16,7 @@
     if (mDragTargetLayout != null) {
       mTargetCell=findNearestVacantArea(originX,originY,mDragInfo.spanX,mDragInfo.spanY,cell,mDragTargetLayout,mTargetCell);
       if (mTargetCell == null) {
-        mLauncher.showOutOfSpaceMessage();
+        snapToPage(mDragInfo.screen);
       }
  else {
         int screen=indexOfChild(mDragTargetLayout);
