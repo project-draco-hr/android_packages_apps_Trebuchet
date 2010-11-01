@@ -2,12 +2,7 @@
   mIconCache=cache;
   mIconCacheKey=info;
   mHolographicOutline=mIconCache.getOutline(mIconCacheKey);
-  if (scaleUp) {
-    mIcon=Bitmap.createScaledBitmap(info.iconBitmap,mScaledIconSize,mScaledIconSize,true);
-  }
- else {
-    mIcon=info.iconBitmap;
-  }
+  mIcon=info.iconBitmap;
   setCompoundDrawablesWithIntrinsicBounds(null,new FastBitmapDrawable(mIcon),null,null);
   setText(info.title);
   setTag(info);

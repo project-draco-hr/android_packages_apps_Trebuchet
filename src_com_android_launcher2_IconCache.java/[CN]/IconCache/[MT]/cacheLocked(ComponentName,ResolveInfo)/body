@@ -7,7 +7,7 @@
     if (entry.title == null) {
       entry.title=info.activityInfo.name;
     }
-    entry.icon=Utilities.createIconBitmap(info.activityInfo.loadIcon(mPackageManager),mContext);
+    entry.icon=Utilities.createIconBitmap(getFullResIcon(info,mPackageManager),mContext);
   }
   return entry;
 }
