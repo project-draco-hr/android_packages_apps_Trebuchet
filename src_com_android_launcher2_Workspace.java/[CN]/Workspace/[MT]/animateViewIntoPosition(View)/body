@@ -1,2 +1,52 @@
 {
+  final CellLayout parent=(CellLayout)view.getParent();
+  final CellLayout.LayoutParams lp=(CellLayout.LayoutParams)view.getLayoutParams();
+  final int fromX=lp.oldX + parent.getLeft();
+  final int fromY=lp.oldY + parent.getTop();
+  final int dx=lp.x - lp.oldX;
+  final int dy=lp.y - lp.oldY;
+  final float dist=(float)Math.sqrt(dx * dx + dy * dy);
+  final Resources res=getResources();
+  final float maxDist=(float)res.getInteger(R.integer.config_dropAnimMaxDist);
+  int duration=res.getInteger(R.integer.config_dropAnimMaxDuration);
+  if (dist < maxDist) {
+    duration*=mQuintEaseOutInterpolator.getInterpolation(dist / maxDist);
+  }
+  if (mDropAnim != null) {
+    mDropAnim.cancel();
+  }
+  mDropAnim=new ValueAnimator();
+  mDropAnim.setInterpolator(mQuintEaseOutInterpolator);
+  mDropAnim.addListener(new LauncherAnimatorListenerAdapter(){
+    public void onAnimationStart(    Animator animation){
+      mDropView=view;
+    }
+    public void onAnimationEndOrCancel(    Animator animation){
+      if (mDropView != null) {
+        mDropView.setVisibility(View.VISIBLE);
+        mDropView=null;
+      }
+    }
+  }
+);
+  mDropAnim.setDuration(duration);
+  mDropAnim.setFloatValues(0.0f,1.0f);
+  mDropAnim.removeAllUpdateListeners();
+  mDropAnim.addUpdateListener(new AnimatorUpdateListener(){
+    public void onAnimationUpdate(    ValueAnimator animation){
+      final float percent=(Float)animation.getAnimatedValue();
+      invalidate(mDropViewPos[0],mDropViewPos[1],mDropViewPos[0] + view.getWidth(),mDropViewPos[1] + view.getHeight());
+      mDropViewPos[0]=fromX + (int)(percent * dx + 0.5f);
+      mDropViewPos[1]=fromY + (int)(percent * dy + 0.5f);
+      invalidate(mDropViewPos[0],mDropViewPos[1],mDropViewPos[0] + view.getWidth(),mDropViewPos[1] + view.getHeight());
+    }
+  }
+);
+  view.setVisibility(View.INVISIBLE);
+  if (!mScroller.isFinished()) {
+    mAnimOnPageEndMoving=mDropAnim;
+  }
+ else {
+    mDropAnim.start();
+  }
 }
