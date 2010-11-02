@@ -16,7 +16,7 @@
     final View child=getChildAt(i);
     if (child.getVisibility() != View.GONE) {
       final int childWidth=child.getMeasuredWidth();
-      final int childHeight=(getMeasuredHeight() - child.getMeasuredHeight()) / 2;
+      final int childHeight=(mCenterPagesVertically ? (getMeasuredHeight() - child.getMeasuredHeight()) / 2 : 0);
       child.layout(childLeft,childHeight,childLeft + childWidth,childHeight + child.getMeasuredHeight());
       childLeft+=childWidth + mPageSpacing;
     }

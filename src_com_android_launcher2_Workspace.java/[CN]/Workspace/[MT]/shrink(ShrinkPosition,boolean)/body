@@ -31,8 +31,7 @@
   }
  else   if (shrinkPosition == ShrinkPosition.SHRINK_TO_BOTTOM_HIDDEN) {
     newY=screenHeight - newY - scaledPageHeight;
-    finalAlpha=0.0f;
-    extraShrinkFactor=0.1f;
+    finalAlpha=0.25f;
   }
  else   if (shrinkPosition == ShrinkPosition.SHRINK_TO_MIDDLE) {
     newY=screenHeight / 2 - scaledPageHeight / 2;

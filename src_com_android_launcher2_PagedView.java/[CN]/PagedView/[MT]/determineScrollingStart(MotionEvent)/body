@@ -19,7 +19,9 @@
     if (mAllowLongPress) {
       mAllowLongPress=false;
       final View currentPage=getPageAt(mCurrentPage);
-      currentPage.cancelLongPress();
+      if (currentPage != null) {
+        currentPage.cancelLongPress();
+      }
     }
   }
 }

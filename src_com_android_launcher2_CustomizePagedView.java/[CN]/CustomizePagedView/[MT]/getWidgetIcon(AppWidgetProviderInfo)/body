@@ -7,22 +7,16 @@
     if (drawable == null) {
       Log.w(TAG,"Can't load icon drawable 0x" + Integer.toHexString(info.icon) + " for provider: "+ info.provider);
     }
- else {
-      return drawable;
-    }
   }
+  final int minDim=mWorkspaceWidgetLayout.estimateCellWidth(1);
+  final int maxDim=mWorkspaceWidgetLayout.estimateCellWidth(3);
   if (drawable == null) {
     Resources resources=mLauncher.getResources();
-    final int minDim=mWorkspaceWidgetLayout.estimateCellWidth(1);
-    final int maxDim=mWorkspaceWidgetLayout.estimateCellWidth(3);
     int width=(int)(Math.max(minDim,Math.min(maxDim,info.minWidth)) * sScaleFactor);
     int height=(int)(Math.max(minDim,Math.min(maxDim,info.minHeight)) * sScaleFactor);
-    Bitmap bitmap=Bitmap.createBitmap(width,height,Config.ARGB_8888);
-    mCanvas.setBitmap(bitmap);
-    mCanvas.clipRect(0,0,width,height,Op.REPLACE);
-    Drawable background=resources.getDrawable(R.drawable.default_widget_preview);
-    background.setBounds(0,0,width,height);
-    background.draw(mCanvas);
+    final Bitmap bitmap=Bitmap.createBitmap(width,height,Config.ARGB_8888);
+    final Drawable background=resources.getDrawable(R.drawable.default_widget_preview);
+    renderDrawableToBitmap(background,bitmap,0,0,width,height);
     try {
       Rect tmpRect=new Rect();
       Drawable icon=null;
@@ -35,11 +29,31 @@
       background.getPadding(tmpRect);
       final int iconSize=minDim / 2;
       final int offset=iconSize / 4;
-      icon.setBounds(new Rect(offset,offset,offset + iconSize,offset + iconSize));
-      icon.draw(mCanvas);
+      final int offsetIconSize=offset + iconSize;
+      renderDrawableToBitmap(icon,null,offset,offset,offsetIconSize,offsetIconSize);
     }
  catch (    Resources.NotFoundException e) {
     }
+    drawable=new FastBitmapDrawable(bitmap);
+  }
+ else {
+    final float aspect=(float)info.minWidth / info.minHeight;
+    final int boundedWidth=(int)Math.max(minDim,Math.min(maxDim,info.minWidth));
+    final int boundedHeight=(int)Math.max(minDim,Math.min(maxDim,info.minHeight));
+    final int scaledWidth=(int)(boundedWidth * sScaleFactor);
+    final int scaledHeight=(int)(boundedHeight * sScaleFactor);
+    int width;
+    int height;
+    if (scaledWidth > scaledHeight) {
+      width=scaledWidth;
+      height=(int)(width / aspect);
+    }
+ else {
+      height=scaledHeight;
+      width=(int)(height * aspect);
+    }
+    final Bitmap bitmap=Bitmap.createBitmap(width,height,Config.ARGB_8888);
+    renderDrawableToBitmap(drawable,bitmap,0,0,width,height);
     drawable=new FastBitmapDrawable(bitmap);
   }
   drawable.setBounds(0,0,drawable.getIntrinsicWidth(),drawable.getIntrinsicHeight());

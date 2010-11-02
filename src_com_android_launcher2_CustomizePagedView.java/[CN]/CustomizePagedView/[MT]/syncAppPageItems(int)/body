@@ -8,7 +8,7 @@
   for (int i=startIndex; i < endIndex; ++i) {
     final ApplicationInfo info=mApps.get(i);
     PagedViewIcon icon=(PagedViewIcon)mInflater.inflate(R.layout.all_apps_paged_view_application,layout,false);
-    icon.applyFromApplicationInfo(info,mPageViewIconCache,false);
+    icon.applyFromApplicationInfo(info,mPageViewIconCache,true);
     icon.setOnClickListener(this);
     icon.setOnLongClickListener(this);
     final int index=i - startIndex;
