@@ -1,0 +1,4 @@
+{
+  mVisible=visibility == View.VISIBLE;
+  updateRunning();
+}
