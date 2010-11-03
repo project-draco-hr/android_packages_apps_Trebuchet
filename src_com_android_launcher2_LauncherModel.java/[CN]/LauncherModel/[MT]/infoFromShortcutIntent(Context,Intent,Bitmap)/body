@@ -19,7 +19,7 @@
         final PackageManager packageManager=context.getPackageManager();
         Resources resources=packageManager.getResourcesForApplication(iconResource.packageName);
         final int id=resources.getIdentifier(iconResource.resourceName,null,null);
-        icon=Utilities.createIconBitmap(resources.getDrawable(id),context);
+        icon=Utilities.createIconBitmap(mIconCache.getFullResIcon(resources,id),context);
       }
  catch (      Exception e) {
         Log.w(TAG,"Could not load shortcut icon: " + extra);

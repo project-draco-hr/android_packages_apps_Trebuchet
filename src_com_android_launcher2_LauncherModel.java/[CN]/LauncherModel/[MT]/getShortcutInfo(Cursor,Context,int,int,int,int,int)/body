@@ -14,7 +14,7 @@ try {
 Resources resources=packageManager.getResourcesForApplication(packageName);
 if (resources != null) {
 final int id=resources.getIdentifier(resourceName,null,null);
-icon=Utilities.createIconBitmap(resources.getDrawable(id),context);
+icon=Utilities.createIconBitmap(mIconCache.getFullResIcon(resources,id),context);
 }
 }
  catch (Exception e) {

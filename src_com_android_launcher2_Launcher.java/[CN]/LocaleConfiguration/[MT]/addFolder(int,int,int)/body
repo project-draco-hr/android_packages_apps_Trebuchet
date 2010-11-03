@@ -9,6 +9,6 @@
   }
   LauncherModel.addItemToDatabase(this,folderInfo,LauncherSettings.Favorites.CONTAINER_DESKTOP,screen,cellXY[0],cellXY[1],false);
   sFolders.put(folderInfo.id,folderInfo);
-  FolderIcon newFolder=FolderIcon.fromXml(R.layout.folder_icon,this,(ViewGroup)mWorkspace.getChildAt(mWorkspace.getCurrentPage()),folderInfo);
+  FolderIcon newFolder=FolderIcon.fromXml(R.layout.folder_icon,this,(ViewGroup)mWorkspace.getChildAt(mWorkspace.getCurrentPage()),folderInfo,mIconCache);
   mWorkspace.addInScreen(newFolder,screen,cellXY[0],cellXY[1],1,1,isWorkspaceLocked());
 }
