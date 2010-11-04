@@ -1,3 +1,0 @@
-{
-  return InstallWidgetReceiver.ACTION_INSTALL_WIDGET.equals(data.getAction()) && (data.getStringExtra(InstallWidgetReceiver.EXTRA_APPWIDGET_COMPONENT) != null);
-}

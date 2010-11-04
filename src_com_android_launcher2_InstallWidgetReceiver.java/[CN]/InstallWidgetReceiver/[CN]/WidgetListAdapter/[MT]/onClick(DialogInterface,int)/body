@@ -1,0 +1,6 @@
+{
+  final LauncherModel model=mLauncher.getModel();
+  final AppWidgetProviderInfo widgetInfo=mActivities.get(which).widgetInfo;
+  final PendingAddWidgetInfo createInfo=new PendingAddWidgetInfo(widgetInfo,mMimeType,mClipData);
+  mLauncher.addAppWidgetFromDrop(createInfo,mTargetLayoutScreen,mTargetLayoutPos);
+}
