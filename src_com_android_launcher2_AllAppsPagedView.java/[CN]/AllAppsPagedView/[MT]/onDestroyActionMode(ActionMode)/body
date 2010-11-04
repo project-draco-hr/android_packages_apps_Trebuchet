@@ -12,4 +12,5 @@
   deleteZone.setManageVisibility(true);
   mDragController.removeDropTarget(this);
   endChoiceMode();
+  mLauncher.getWorkspace().shrinkToBottomHidden();
 }

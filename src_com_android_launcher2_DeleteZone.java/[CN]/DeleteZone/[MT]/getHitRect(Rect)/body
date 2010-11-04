@@ -1,10 +1,13 @@
 {
   super.getHitRect(outRect);
   if (LauncherApplication.isScreenXLarge()) {
-    final int dragPadding=mManageVisibility ? 50 : 10;
-    outRect.top-=dragPadding;
-    outRect.left-=dragPadding;
-    outRect.bottom+=dragPadding;
-    outRect.right+=dragPadding;
+    final int minPadding=R.dimen.delete_zone_min_padding;
+    final int maxPadding=R.dimen.delete_zone_max_padding;
+    final int outerDragPadding=getResources().getDimensionPixelSize(R.dimen.delete_zone_size);
+    final int innerDragPadding=getResources().getDimensionPixelSize(mManageVisibility ? maxPadding : minPadding);
+    outRect.top-=outerDragPadding;
+    outRect.left-=innerDragPadding;
+    outRect.bottom+=outerDragPadding;
+    outRect.right+=innerDragPadding;
   }
 }

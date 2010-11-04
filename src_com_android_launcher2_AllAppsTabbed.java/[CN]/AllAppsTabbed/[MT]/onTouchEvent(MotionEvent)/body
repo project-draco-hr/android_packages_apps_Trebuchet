@@ -1,0 +1,6 @@
+{
+  if (ev.getY() > mAllApps.getBottom()) {
+    return false;
+  }
+  return true;
+}

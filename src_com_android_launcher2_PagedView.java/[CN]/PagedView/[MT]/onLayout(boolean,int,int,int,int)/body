@@ -7,6 +7,7 @@
     setHorizontalScrollBarEnabled(true);
     mFirstLayout=false;
   }
+  final int verticalPadding=mPaddingTop + mPaddingBottom;
   final int childCount=getChildCount();
   int childLeft=0;
   if (childCount > 0) {
@@ -16,8 +17,12 @@
     final View child=getChildAt(i);
     if (child.getVisibility() != View.GONE) {
       final int childWidth=child.getMeasuredWidth();
-      final int childHeight=(mCenterPagesVertically ? (getMeasuredHeight() - child.getMeasuredHeight()) / 2 : 0);
-      child.layout(childLeft,childHeight,childLeft + childWidth,childHeight + child.getMeasuredHeight());
+      final int childHeight=child.getMeasuredHeight();
+      int childTop=mPaddingTop;
+      if (mCenterPagesVertically) {
+        childTop+=((getMeasuredHeight() - verticalPadding) - childHeight) / 2;
+      }
+      child.layout(childLeft,childTop,childLeft + childWidth,childTop + childHeight);
       childLeft+=childWidth + mPageSpacing;
     }
   }

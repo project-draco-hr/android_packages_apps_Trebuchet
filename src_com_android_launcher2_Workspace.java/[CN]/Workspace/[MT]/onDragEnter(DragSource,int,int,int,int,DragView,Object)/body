@@ -4,6 +4,5 @@
     mDragTargetLayout=getCurrentDropLayout();
     mDragTargetLayout.onDragEnter();
     showOutlines();
-    mInDragMode=true;
   }
 }

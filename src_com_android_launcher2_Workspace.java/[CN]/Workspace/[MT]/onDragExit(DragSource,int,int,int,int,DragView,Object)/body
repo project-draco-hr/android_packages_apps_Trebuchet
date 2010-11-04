@@ -4,7 +4,6 @@
   }
   if (!mIsPageMoving) {
     hideOutlines();
-    mInDragMode=false;
   }
   clearAllHovers();
 }
