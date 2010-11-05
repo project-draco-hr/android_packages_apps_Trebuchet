@@ -80,4 +80,12 @@ callbacks.bindAppsRemoved(removedFinal,permanent);
 }
 );
 }
+mHandler.post(new Runnable(){
+@Override public void run(){
+if (callbacks == mCallbacks.get()) {
+callbacks.bindPackagesUpdated();
+}
+}
+}
+);
 }

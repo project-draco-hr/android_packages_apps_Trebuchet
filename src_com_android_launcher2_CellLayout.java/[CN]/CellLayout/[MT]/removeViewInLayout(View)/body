@@ -1,0 +1,4 @@
+{
+  markCellsAsUnoccupiedForView(view);
+  super.removeViewInLayout(view);
+}

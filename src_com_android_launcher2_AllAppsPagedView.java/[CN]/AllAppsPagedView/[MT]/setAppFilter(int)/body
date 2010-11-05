@@ -1,0 +1,8 @@
+{
+  mAppFilter=filterType;
+  if (mApps != null) {
+    mFilteredApps=rebuildFilteredApps(mApps);
+    setCurrentPage(0);
+    invalidatePageData();
+  }
+}

@@ -1,0 +1,21 @@
+{
+  if (mIsHolographicUpdatePass) {
+    canvas.save();
+    final float alpha=getAlpha();
+    super.setAlpha(1.0f);
+    super.onDraw(canvas);
+    super.setAlpha(alpha);
+    canvas.restore();
+  }
+ else {
+    if (mAlpha > 0) {
+      super.onDraw(canvas);
+    }
+  }
+  if (!mIsHolographicUpdatePass) {
+    if (mCheckedOutline != null) {
+      mPaint.setAlpha(255);
+      canvas.drawBitmap(mCheckedOutline,0,0,mPaint);
+    }
+  }
+}

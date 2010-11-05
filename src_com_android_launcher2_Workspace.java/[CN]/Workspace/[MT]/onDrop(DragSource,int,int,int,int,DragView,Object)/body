@@ -1,22 +1,40 @@
 {
-  final CellLayout cellLayout=getCurrentDropLayout();
-  if (source != this) {
-    onDropExternal(x - xOffset,y - yOffset,dragInfo,cellLayout);
+  int originX=x - xOffset;
+  int originY=y - yOffset;
+  if (mIsSmall || mIsInUnshrinkAnimation) {
+    mTempOriginXY[0]=originX;
+    mTempOriginXY[1]=originY;
+    mapPointFromSelfToChild(mDragTargetLayout,mTempOriginXY);
+    originX=(int)mTempOriginXY[0];
+    originY=(int)mTempOriginXY[1];
   }
- else {
-    if (mDragInfo != null) {
-      final View cell=mDragInfo.cell;
-      int index=mScroller.isFinished() ? mCurrentScreen : mNextScreen;
-      if (index != mDragInfo.screen) {
-        final CellLayout originalCellLayout=(CellLayout)getChildAt(mDragInfo.screen);
-        originalCellLayout.removeView(cell);
-        cellLayout.addView(cell);
+  if (source != this) {
+    onDropExternal(originX,originY,dragInfo,mDragTargetLayout);
+  }
+ else   if (mDragInfo != null) {
+    final View cell=mDragInfo.cell;
+    if (mDragTargetLayout != null) {
+      mTargetCell=findNearestVacantArea(originX,originY,mDragInfo.spanX,mDragInfo.spanY,cell,mDragTargetLayout,mTargetCell);
+      if (mTargetCell == null) {
+        snapToPage(mDragInfo.screen);
       }
-      mTargetCell=estimateDropCell(x - xOffset,y - yOffset,mDragInfo.spanX,mDragInfo.spanY,cell,cellLayout,mTargetCell);
-      cellLayout.onDropChild(cell,mTargetCell);
-      final ItemInfo info=(ItemInfo)cell.getTag();
-      CellLayout.LayoutParams lp=(CellLayout.LayoutParams)cell.getLayoutParams();
-      LauncherModel.moveItemInDatabase(mLauncher,info,LauncherSettings.Favorites.CONTAINER_DESKTOP,index,lp.cellX,lp.cellY);
+ else {
+        int screen=indexOfChild(mDragTargetLayout);
+        if (screen != mDragInfo.screen) {
+          ((CellLayout)getChildAt(mDragInfo.screen)).removeView(cell);
+          addInScreen(cell,screen,mTargetCell[0],mTargetCell[1],mDragInfo.spanX,mDragInfo.spanY);
+        }
+        final ItemInfo info=(ItemInfo)cell.getTag();
+        CellLayout.LayoutParams lp=(CellLayout.LayoutParams)cell.getLayoutParams();
+        mDragTargetLayout.onMove(cell,mTargetCell[0],mTargetCell[1]);
+        lp.cellX=mTargetCell[0];
+        lp.cellY=mTargetCell[1];
+        cell.setId(LauncherModel.getCellLayoutChildId(-1,mDragInfo.screen,mTargetCell[0],mTargetCell[1],mDragInfo.spanX,mDragInfo.spanY));
+        LauncherModel.moveItemInDatabase(mLauncher,info,LauncherSettings.Favorites.CONTAINER_DESKTOP,screen,lp.cellX,lp.cellY);
+      }
     }
+    final CellLayout parent=(CellLayout)cell.getParent();
+    setPositionForDropAnimation(dragView,originX,originY,parent,cell);
+    parent.onDropChild(cell);
   }
 }

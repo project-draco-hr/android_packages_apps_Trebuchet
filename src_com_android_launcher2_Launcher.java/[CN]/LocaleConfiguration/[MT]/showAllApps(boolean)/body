@@ -1,0 +1,20 @@
+{
+  if (mState == State.ALL_APPS) {
+    return;
+  }
+  if (LauncherApplication.isScreenXLarge()) {
+    if (mState == State.CUSTOMIZE) {
+      cameraPan(State.CUSTOMIZE,State.ALL_APPS,animated);
+    }
+ else {
+      cameraZoomOut(State.ALL_APPS,animated);
+    }
+  }
+ else {
+    mAllAppsGrid.zoom(1.0f,animated);
+  }
+  ((View)mAllAppsGrid).setFocusable(true);
+  ((View)mAllAppsGrid).requestFocus();
+  mDeleteZone.setVisibility(View.GONE);
+  mState=State.ALL_APPS;
+}

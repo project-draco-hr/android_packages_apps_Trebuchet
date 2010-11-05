@@ -1,3 +1,0 @@
-{
-  return findCellForSpan(cellXY,spanX,spanY,true);
-}

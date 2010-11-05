@@ -1,2 +1,53 @@
 {
+  if (!mInScrollArea) {
+    CellLayout layout;
+    int originX=x - xOffset;
+    int originY=y - yOffset;
+    if (mIsSmall || mIsInUnshrinkAnimation) {
+      layout=findMatchingPageForDragOver(dragView,originX,originY,xOffset,yOffset);
+      if (layout != mDragTargetLayout) {
+        if (mDragTargetLayout != null) {
+          mDragTargetLayout.setHover(false);
+        }
+        mDragTargetLayout=layout;
+        if (mDragTargetLayout != null) {
+          mDragTargetLayout.setHover(true);
+        }
+      }
+    }
+ else {
+      layout=getCurrentDropLayout();
+      final ItemInfo item=(ItemInfo)dragInfo;
+      if (dragInfo instanceof LauncherAppWidgetInfo) {
+        LauncherAppWidgetInfo widgetInfo=(LauncherAppWidgetInfo)dragInfo;
+        if (widgetInfo.spanX == -1) {
+          int[] spans=layout.rectToCell(widgetInfo.minWidth,widgetInfo.minHeight,null);
+          item.spanX=spans[0];
+          item.spanY=spans[1];
+        }
+      }
+      if (source instanceof AllAppsPagedView) {
+        if (item != null && item.spanX == 1 && layout != null) {
+          int dragRegionLeft=(dragView.getWidth() - layout.getCellWidth()) / 2;
+          originX+=dragRegionLeft - dragView.getDragRegionLeft();
+          if (dragView.getDragRegionWidth() != layout.getCellWidth()) {
+            dragView.setDragRegion(dragView.getDragRegionLeft(),dragView.getDragRegionTop(),layout.getCellWidth(),dragView.getDragRegionHeight());
+          }
+        }
+      }
+      if (layout != mDragTargetLayout) {
+        if (mDragTargetLayout != null) {
+          mDragTargetLayout.onDragExit();
+        }
+        layout.onDragEnter();
+        mDragTargetLayout=layout;
+      }
+      if ((!LauncherApplication.isScreenXLarge() || source == this) && mDragTargetLayout != null) {
+        final View child=(mDragInfo == null) ? null : mDragInfo.cell;
+        int localOriginX=originX - (mDragTargetLayout.getLeft() - mScrollX);
+        int localOriginY=originY - (mDragTargetLayout.getTop() - mScrollY);
+        mDragTargetLayout.visualizeDropLocation(child,mDragOutline,localOriginX,localOriginY,item.spanX,item.spanY);
+      }
+    }
+  }
 }

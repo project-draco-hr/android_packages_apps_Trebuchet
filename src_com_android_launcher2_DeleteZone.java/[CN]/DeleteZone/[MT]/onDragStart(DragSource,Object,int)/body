@@ -2,14 +2,19 @@
   final ItemInfo item=(ItemInfo)info;
   if (item != null) {
     mTrashMode=true;
-    createAnimations();
-    final int[] location=mLocation;
-    getLocationOnScreen(location);
-    mRegion.set(location[0],location[1],location[0] + mRight - mLeft,location[1] + mBottom - mTop);
-    mDragController.setDeleteRegion(mRegion);
+    getHitRect(mRegion);
+    mRegionF.set(mRegion);
+    if (LauncherApplication.isScreenXLarge()) {
+      mRegionF.top=mLauncher.getWorkspace().getTop();
+      mRegionF.right=mLauncher.getWorkspace().getRight();
+    }
+    mDragController.setDeleteRegion(mRegionF);
     mTransition.resetTransition();
-    startAnimation(mInAnimation);
-    mHandle.startAnimation(mHandleOutAnimation);
-    setVisibility(VISIBLE);
+    if (mManageVisibility) {
+      createAnimations();
+      startAnimation(mInAnimation);
+      mHandle.startAnimation(mHandleOutAnimation);
+      setVisibility(VISIBLE);
+    }
   }
 }

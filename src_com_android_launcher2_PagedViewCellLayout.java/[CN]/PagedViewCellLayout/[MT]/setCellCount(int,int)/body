@@ -1,0 +1,5 @@
+{
+  mCellCountX=xCount;
+  mCellCountY=yCount;
+  requestLayout();
+}

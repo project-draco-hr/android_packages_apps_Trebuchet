@@ -1,0 +1,26 @@
+{
+  LinearLayout layout=(LinearLayout)getChildAt(page);
+  final ArrayList<AppWidgetProviderInfo> list=mWidgetPages.get(page);
+  final int count=list.size();
+  layout.removeAllViews();
+  for (int i=0; i < count; ++i) {
+    final AppWidgetProviderInfo info=(AppWidgetProviderInfo)list.get(i);
+    final PendingAddWidgetInfo createItemInfo=new PendingAddWidgetInfo(info,null,null);
+    LinearLayout l=(LinearLayout)mInflater.inflate(R.layout.customize_paged_view_widget,layout,false);
+    l.setTag(createItemInfo);
+    l.setOnClickListener(this);
+    l.setOnLongClickListener(this);
+    final Drawable icon=getWidgetIcon(info);
+    int[] spans=CellLayout.rectToCell(getResources(),info.minWidth,info.minHeight,null);
+    final int hSpan=spans[0];
+    final int vSpan=spans[1];
+    ImageView image=(ImageView)l.findViewById(R.id.widget_preview);
+    image.setMaxWidth(mMaxWidgetWidth);
+    image.setImageDrawable(icon);
+    TextView name=(TextView)l.findViewById(R.id.widget_name);
+    name.setText(info.label);
+    TextView dims=(TextView)l.findViewById(R.id.widget_dims);
+    dims.setText(mContext.getString(R.string.widget_dims_format,hSpan,vSpan));
+    layout.addView(l);
+  }
+}

@@ -4,9 +4,21 @@
     return;
   }
   mDragInfo=cellInfo;
-  mDragInfo.screen=mCurrentScreen;
-  CellLayout current=((CellLayout)getChildAt(mCurrentScreen));
+  mDragInfo.screen=mCurrentPage;
+  CellLayout current=getCurrentDropLayout();
   current.onDragChild(child);
-  mDragController.startDrag(child,this,child.getTag(),DragController.DRAG_ACTION_MOVE);
-  invalidate();
+  child.setVisibility(View.GONE);
+  child.clearFocus();
+  child.setPressed(false);
+  final Canvas canvas=new Canvas();
+  final int bitmapPadding=HolographicOutlineHelper.OUTER_BLUR_RADIUS;
+  mDragOutline=createDragOutline(child,canvas,bitmapPadding);
+  final Bitmap b=createDragBitmap(child,canvas,bitmapPadding);
+  final int bmpWidth=b.getWidth();
+  final int bmpHeight=b.getHeight();
+  child.getLocationOnScreen(mTempXY);
+  final int screenX=(int)mTempXY[0] + (child.getWidth() - bmpWidth) / 2;
+  final int screenY=(int)mTempXY[1] + (child.getHeight() - bmpHeight) / 2;
+  mDragController.startDrag(b,screenX,screenY,0,0,bmpWidth,bmpHeight,this,child.getTag(),DragController.DRAG_ACTION_MOVE,null);
+  b.recycle();
 }

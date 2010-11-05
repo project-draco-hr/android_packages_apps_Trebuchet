@@ -1,6 +1,8 @@
 {
   VMRuntime.getRuntime().setMinimumHeapSize(4 * 1024 * 1024);
   super.onCreate();
+  sIsScreenXLarge=(getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_XLARGE;
+  sScreenDensity=getResources().getDisplayMetrics().density;
   mIconCache=new IconCache(this);
   mModel=new LauncherModel(this,mIconCache);
   IntentFilter filter=new IntentFilter(Intent.ACTION_PACKAGE_ADDED);
@@ -11,6 +13,7 @@
   filter=new IntentFilter();
   filter.addAction(Intent.ACTION_EXTERNAL_APPLICATIONS_AVAILABLE);
   filter.addAction(Intent.ACTION_EXTERNAL_APPLICATIONS_UNAVAILABLE);
+  filter.addAction(Intent.ACTION_LOCALE_CHANGED);
   registerReceiver(mModel,filter);
   ContentResolver resolver=getContentResolver();
   resolver.registerContentObserver(LauncherSettings.Favorites.CONTENT_URI,true,mFavoritesObserver);

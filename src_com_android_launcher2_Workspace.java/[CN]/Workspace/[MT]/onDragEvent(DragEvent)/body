@@ -1,0 +1,78 @@
+{
+  final ClipDescription desc=event.getClipDescription();
+  final CellLayout layout=(CellLayout)getChildAt(mCurrentPage);
+  final int[] pos=new int[2];
+  layout.getLocationOnScreen(pos);
+  final int x=(int)event.getX() - pos[0];
+  final int y=(int)event.getY() - pos[1];
+switch (event.getAction()) {
+case DragEvent.ACTION_DRAG_STARTED:
+    if (!layout.findCellForSpan(pos,1,1)) {
+      Toast.makeText(mContext,mContext.getString(R.string.out_of_space),Toast.LENGTH_SHORT).show();
+      return false;
+    }
+  final Canvas canvas=new Canvas();
+final int bitmapPadding=HolographicOutlineHelper.OUTER_BLUR_RADIUS;
+mDragOutline=createExternalDragOutline(canvas,bitmapPadding);
+showOutlines();
+layout.setHover(true);
+layout.onDragEnter();
+layout.visualizeDropLocation(null,mDragOutline,x,y,1,1);
+return true;
+case DragEvent.ACTION_DRAG_LOCATION:
+layout.visualizeDropLocation(null,mDragOutline,x,y,1,1);
+return true;
+case DragEvent.ACTION_DROP:
+if (!layout.findCellForSpan(pos,1,1)) {
+Toast.makeText(mContext,mContext.getString(R.string.out_of_space),Toast.LENGTH_SHORT).show();
+return false;
+}
+int newDropCount=0;
+final LauncherModel model=mLauncher.getModel();
+final ClipData data=event.getClipData();
+pos[0]=x;
+pos[1]=y;
+final int mimeTypeCount=desc.getMimeTypeCount();
+for (int j=0; j < mimeTypeCount; ++j) {
+final String mimeType=desc.getMimeType(j);
+if (mimeType.equals(InstallShortcutReceiver.SHORTCUT_MIMETYPE)) {
+final Intent intent=data.getItem(j).getIntent();
+Object info=model.infoFromShortcutIntent(mContext,intent,data.getIcon());
+onDropExternal(x,y,info,layout);
+}
+ else {
+final List<WidgetMimeTypeHandlerData> widgets=model.resolveWidgetsForMimeType(mContext,mimeType);
+final int numWidgets=widgets.size();
+if (numWidgets == 0) {
+continue;
+}
+ else if (numWidgets == 1) {
+final AppWidgetProviderInfo widgetInfo=widgets.get(0).widgetInfo;
+final PendingAddWidgetInfo createInfo=new PendingAddWidgetInfo(widgetInfo,mimeType,data);
+mLauncher.addAppWidgetFromDrop(createInfo,mCurrentPage,pos);
+}
+ else if (numWidgets > 1) {
+final InstallWidgetReceiver.WidgetListAdapter adapter=new InstallWidgetReceiver.WidgetListAdapter(mLauncher,mimeType,data,widgets,layout,mCurrentPage,pos);
+final AlertDialog.Builder builder=new AlertDialog.Builder(mContext);
+builder.setAdapter(adapter,adapter);
+builder.setCancelable(true);
+builder.setTitle(mContext.getString(R.string.external_drop_widget_pick_title));
+builder.setIcon(R.drawable.ic_no_applications);
+builder.show();
+}
+}
+newDropCount++;
+break;
+}
+if (newDropCount <= 0) {
+Toast.makeText(mContext,mContext.getString(R.string.external_drop_widget_error),Toast.LENGTH_SHORT).show();
+}
+return true;
+case DragEvent.ACTION_DRAG_ENDED:
+layout.setHover(false);
+layout.onDragExit();
+hideOutlines();
+return true;
+}
+return super.onDragEvent(event);
+}

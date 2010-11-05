@@ -1,0 +1,44 @@
+{
+  setup();
+  try {
+    mAllApps=(AllAppsPagedView)findViewById(R.id.all_apps_paged_view);
+    if (mAllApps == null)     throw new Resources.NotFoundException();
+  }
+ catch (  Resources.NotFoundException e) {
+    Log.e(TAG,"Can't find necessary layout elements for AllAppsTabbed");
+  }
+  TabContentFactory contentFactory=new TabContentFactory(){
+    public View createTabContent(    String tag){
+      return mAllApps;
+    }
+  }
+;
+  String label=mContext.getString(R.string.all_apps_tab_all);
+  addTab(newTabSpec(TAG_ALL).setIndicator(label).setContent(contentFactory));
+  label=mContext.getString(R.string.all_apps_tab_downloaded);
+  addTab(newTabSpec(TAG_DOWNLOADED).setIndicator(label).setContent(contentFactory));
+  setOnTabChangedListener(new OnTabChangeListener(){
+    public void onTabChanged(    String tabId){
+      final int duration=150;
+      final float alpha=mAllApps.getAlpha();
+      ValueAnimator alphaAnim=ObjectAnimator.ofFloat(mAllApps,"alpha",alpha,0.0f).setDuration(duration);
+      alphaAnim.addListener(new LauncherAnimatorListenerAdapter(){
+        @Override public void onAnimationEndOrCancel(        Animator animation){
+          String tag=getCurrentTabTag();
+          if (tag == TAG_ALL) {
+            mAllApps.setAppFilter(AllAppsPagedView.ALL_APPS_FLAG);
+          }
+ else           if (tag == TAG_DOWNLOADED) {
+            mAllApps.setAppFilter(ApplicationInfo.DOWNLOADED_FLAG);
+          }
+          final float alpha=mAllApps.getAlpha();
+          ObjectAnimator.ofFloat(mAllApps,"alpha",alpha,1.0f).setDuration(duration).start();
+        }
+      }
+);
+      alphaAnim.start();
+    }
+  }
+);
+  setVisibility(INVISIBLE);
+}

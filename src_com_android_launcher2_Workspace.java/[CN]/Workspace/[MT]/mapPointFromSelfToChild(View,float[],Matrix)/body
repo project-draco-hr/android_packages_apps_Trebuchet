@@ -1,0 +1,9 @@
+{
+  if (cachedInverseMatrix == null) {
+    v.getMatrix().invert(mTempInverseMatrix);
+    cachedInverseMatrix=mTempInverseMatrix;
+  }
+  xy[0]=xy[0] + mScrollX - v.getLeft();
+  xy[1]=xy[1] + mScrollY - v.getTop();
+  cachedInverseMatrix.mapPoints(xy);
+}

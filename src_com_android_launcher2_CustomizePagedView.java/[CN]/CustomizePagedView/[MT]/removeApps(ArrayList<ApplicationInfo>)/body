@@ -1,0 +1,4 @@
+{
+  removeAppsWithoutInvalidate(list);
+  invalidatePageDataAndIconCache();
+}

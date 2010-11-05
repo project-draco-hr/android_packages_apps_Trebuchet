@@ -1,0 +1,8 @@
+{
+  final CellLayout cellLayout=(CellLayout)getChildAt(screen);
+  View view=mLauncher.createShortcut(R.layout.application,cellLayout,(ShortcutInfo)info);
+  final int[] cellXY=new int[2];
+  cellLayout.findCellForSpanThatIntersects(cellXY,1,1,intersectX,intersectY);
+  addInScreen(view,screen,cellXY[0],cellXY[1],1,1,insertAtFirst);
+  LauncherModel.addOrMoveItemInDatabase(mLauncher,info,LauncherSettings.Favorites.CONTAINER_DESKTOP,screen,cellXY[0],cellXY[1]);
+}

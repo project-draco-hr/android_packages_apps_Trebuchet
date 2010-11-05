@@ -1,0 +1,13 @@
+{
+  showWorkspace(true);
+  if (initialQuery == null) {
+    initialQuery=getTypedText();
+    clearTypedText();
+  }
+  if (appSearchData == null) {
+    appSearchData=new Bundle();
+    appSearchData.putString(Search.SOURCE,"launcher-search");
+  }
+  final SearchManager searchManager=(SearchManager)getSystemService(Context.SEARCH_SERVICE);
+  searchManager.startSearch(initialQuery,selectInitialQuery,getComponentName(),appSearchData,globalSearch);
+}

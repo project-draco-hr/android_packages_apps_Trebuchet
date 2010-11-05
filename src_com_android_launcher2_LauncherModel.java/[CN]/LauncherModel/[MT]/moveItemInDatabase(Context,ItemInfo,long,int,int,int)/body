@@ -7,8 +7,8 @@
   final ContentValues values=new ContentValues();
   final ContentResolver cr=context.getContentResolver();
   values.put(LauncherSettings.Favorites.CONTAINER,item.container);
-  values.put(LauncherSettings.Favorites.CELLX,item.cellX);
-  values.put(LauncherSettings.Favorites.CELLY,item.cellY);
+  values.put(LauncherSettings.Favorites.CELLX,cellX);
+  values.put(LauncherSettings.Favorites.CELLY,cellY);
   values.put(LauncherSettings.Favorites.SCREEN,item.screen);
   sWorker.post(new Runnable(){
     public void run(){

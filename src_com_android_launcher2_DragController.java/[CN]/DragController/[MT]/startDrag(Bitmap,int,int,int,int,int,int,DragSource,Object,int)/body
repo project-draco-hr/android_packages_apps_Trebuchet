@@ -1,22 +1,3 @@
 {
-  if (PROFILE_DRAWING_DURING_DRAG) {
-    android.os.Debug.startMethodTracing("Launcher");
-  }
-  if (mInputMethodManager == null) {
-    mInputMethodManager=(InputMethodManager)mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
-  }
-  mInputMethodManager.hideSoftInputFromWindow(mWindowToken,0);
-  if (mListener != null) {
-    mListener.onDragStart(source,dragInfo,dragAction);
-  }
-  int registrationX=((int)mMotionDownX) - screenX;
-  int registrationY=((int)mMotionDownY) - screenY;
-  mTouchOffsetX=mMotionDownX - screenX;
-  mTouchOffsetY=mMotionDownY - screenY;
-  mDragging=true;
-  mDragSource=source;
-  mDragInfo=dragInfo;
-  mVibrator.vibrate(VIBRATE_DURATION);
-  DragView dragView=mDragView=new DragView(mContext,b,registrationX,registrationY,textureLeft,textureTop,textureWidth,textureHeight);
-  dragView.show(mWindowToken,(int)mMotionDownX,(int)mMotionDownY);
+  startDrag(b,screenX,screenY,textureLeft,textureTop,textureWidth,textureHeight,source,dragInfo,dragAction,null);
 }

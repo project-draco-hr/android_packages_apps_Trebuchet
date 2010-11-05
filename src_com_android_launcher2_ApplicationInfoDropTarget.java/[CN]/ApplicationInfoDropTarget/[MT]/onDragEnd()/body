@@ -1,0 +1,9 @@
+{
+  if (mActive) {
+    mActive=false;
+  }
+  if (mManageVisibility) {
+    setVisibility(GONE);
+    mHandle.setVisibility(VISIBLE);
+  }
+}

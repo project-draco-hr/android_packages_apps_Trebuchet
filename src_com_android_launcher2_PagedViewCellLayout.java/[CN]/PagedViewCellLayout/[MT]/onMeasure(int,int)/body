@@ -1,0 +1,39 @@
+{
+  int widthSpecMode=MeasureSpec.getMode(widthMeasureSpec);
+  int widthSpecSize=MeasureSpec.getSize(widthMeasureSpec);
+  int heightSpecMode=MeasureSpec.getMode(heightMeasureSpec);
+  int heightSpecSize=MeasureSpec.getSize(heightMeasureSpec);
+  if (widthSpecMode == MeasureSpec.UNSPECIFIED || heightSpecMode == MeasureSpec.UNSPECIFIED) {
+    throw new RuntimeException("CellLayout cannot have UNSPECIFIED dimensions");
+  }
+  final int cellWidth=mCellWidth;
+  final int cellHeight=mCellHeight;
+  int numWidthGaps=mCellCountX - 1;
+  int numHeightGaps=mCellCountY - 1;
+  int vSpaceLeft=heightSpecSize - mPaddingTop - mPaddingBottom- (cellHeight * mCellCountY);
+  int heightGap=vSpaceLeft / numHeightGaps;
+  int hSpaceLeft=widthSpecSize - mPaddingLeft - mPaddingRight- (cellWidth * mCellCountX);
+  int widthGap=hSpaceLeft / numWidthGaps;
+  int minGap=Math.min(widthGap,heightGap);
+  int paddingLeft=mPaddingLeft;
+  int paddingTop=mPaddingTop;
+  if (mWidthGap > -1 && mHeightGap > -1) {
+    widthGap=mWidthGap;
+    heightGap=mHeightGap;
+  }
+ else {
+    widthGap=heightGap=minGap;
+  }
+  int newWidth=mPaddingLeft + mPaddingRight + (mCellCountX * cellWidth)+ ((mCellCountX - 1) * widthGap);
+  int newHeight=mPaddingTop + mPaddingBottom + (mCellCountY * cellHeight)+ ((mCellCountY - 1) * heightGap);
+  final int count=getChildCount();
+  for (int i=0; i < count; i++) {
+    View child=getChildAt(i);
+    PagedViewCellLayout.LayoutParams lp=(PagedViewCellLayout.LayoutParams)child.getLayoutParams();
+    lp.setup(cellWidth,cellHeight,widthGap,heightGap,paddingLeft,paddingTop);
+    int childWidthMeasureSpec=MeasureSpec.makeMeasureSpec(lp.width,MeasureSpec.EXACTLY);
+    int childheightMeasureSpec=MeasureSpec.makeMeasureSpec(lp.height,MeasureSpec.EXACTLY);
+    child.measure(childWidthMeasureSpec,childheightMeasureSpec);
+  }
+  setMeasuredDimension(newWidth,newHeight);
+}

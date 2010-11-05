@@ -1,0 +1,76 @@
+{
+  if (mFirstLayout) {
+    mWaitingToShrink=true;
+    mWaitingToShrinkPosition=shrinkPosition;
+    return;
+  }
+  mIsSmall=true;
+  mShrunkenState=shrinkPosition;
+  setCurrentPage((mNextPage != INVALID_PAGE) ? mNextPage : mCurrentPage);
+  updateWhichPagesAcceptDrops(mShrunkenState);
+  mTouchState=TOUCH_STATE_REST;
+  mActivePointerId=INVALID_POINTER;
+  CellLayout currentPage=(CellLayout)getChildAt(mCurrentPage);
+  currentPage.setBackgroundAlphaMultiplier(1.0f);
+  final Resources res=getResources();
+  final int screenWidth=getWidth();
+  final int screenHeight=getHeight();
+  final int pageWidth=getChildAt(0).getMeasuredWidth();
+  final int pageHeight=getChildAt(0).getMeasuredHeight();
+  final int scaledPageWidth=(int)(SHRINK_FACTOR * pageWidth);
+  final int scaledPageHeight=(int)(SHRINK_FACTOR * pageHeight);
+  final float extraScaledSpacing=res.getDimension(R.dimen.smallScreenExtraSpacing);
+  final int screenCount=getChildCount();
+  float totalWidth=screenCount * scaledPageWidth + (screenCount - 1) * extraScaledSpacing;
+  boolean isPortrait=getMeasuredHeight() > getMeasuredWidth();
+  float newY=(isPortrait ? getResources().getDimension(R.dimen.allAppsSmallScreenVerticalMarginPortrait) : getResources().getDimension(R.dimen.allAppsSmallScreenVerticalMarginLandscape));
+  float finalAlpha=1.0f;
+  float extraShrinkFactor=1.0f;
+  if (shrinkPosition == ShrinkPosition.SHRINK_TO_BOTTOM_VISIBLE) {
+    newY=screenHeight - newY - scaledPageHeight;
+  }
+ else   if (shrinkPosition == ShrinkPosition.SHRINK_TO_BOTTOM_HIDDEN) {
+    newY=screenHeight - newY - scaledPageHeight;
+    finalAlpha=0.25f;
+  }
+ else   if (shrinkPosition == ShrinkPosition.SHRINK_TO_MIDDLE) {
+    newY=screenHeight / 2 - scaledPageHeight / 2;
+    finalAlpha=1.0f;
+  }
+ else   if (shrinkPosition == ShrinkPosition.SHRINK_TO_TOP) {
+    newY=(isPortrait ? getResources().getDimension(R.dimen.customizeSmallScreenVerticalMarginPortrait) : getResources().getDimension(R.dimen.customizeSmallScreenVerticalMarginLandscape));
+  }
+  float newX=mScroller.getFinalX() + screenWidth / 2 - totalWidth / 2;
+  newX-=(pageWidth - scaledPageWidth) / 2.0f;
+  newY-=(pageHeight - scaledPageHeight) / 2.0f;
+  if (mAnimator != null) {
+    mAnimator.cancel();
+  }
+  mAnimator=new AnimatorSet();
+  for (int i=0; i < screenCount; i++) {
+    CellLayout cl=(CellLayout)getChildAt(i);
+    float rotation=(-i + 2) * WORKSPACE_ROTATION;
+    float rotationScaleX=(float)(1.0f / Math.cos(Math.PI * rotation / 180.0f));
+    float rotationScaleY=getYScaleForScreen(i);
+    if (animated) {
+      final int duration=res.getInteger(R.integer.config_workspaceShrinkTime);
+      ObjectAnimator anim=ObjectAnimator.ofPropertyValuesHolder(cl,PropertyValuesHolder.ofFloat("x",newX),PropertyValuesHolder.ofFloat("y",newY),PropertyValuesHolder.ofFloat("scaleX",SHRINK_FACTOR * rotationScaleX * extraShrinkFactor),PropertyValuesHolder.ofFloat("scaleY",SHRINK_FACTOR * rotationScaleY * extraShrinkFactor),PropertyValuesHolder.ofFloat("backgroundAlpha",finalAlpha),PropertyValuesHolder.ofFloat("alpha",finalAlpha),PropertyValuesHolder.ofFloat("rotationY",rotation));
+      anim.setDuration(duration);
+      mAnimator.playTogether(anim);
+    }
+ else {
+      cl.setX((int)newX);
+      cl.setY((int)newY);
+      cl.setScaleX(SHRINK_FACTOR * rotationScaleX * extraShrinkFactor);
+      cl.setScaleY(SHRINK_FACTOR * rotationScaleY * extraShrinkFactor);
+      cl.setBackgroundAlpha(finalAlpha);
+      cl.setAlpha(finalAlpha);
+      cl.setRotationY(rotation);
+    }
+    newX+=scaledPageWidth + extraScaledSpacing;
+  }
+  if (animated) {
+    mAnimator.start();
+  }
+  setChildrenDrawnWithCacheEnabled(true);
+}

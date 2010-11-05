@@ -1,0 +1,29 @@
+{
+  final View searchButton=findViewById(R.id.search_button);
+  final View allAppsButton=findViewById(R.id.all_apps_button);
+  final View marketButton=findViewById(R.id.market_button);
+  final View configureButton=findViewById(R.id.configure_button);
+switch (newState) {
+case WORKSPACE:
+    hideOrShowToolbarButton(true,searchButton,showSeq);
+  hideOrShowToolbarButton(true,allAppsButton,showSeq);
+hideOrShowToolbarButton(true,configureButton,showSeq);
+hideOrShowToolbarButton(false,marketButton,hideSeq);
+mDeleteZone.setHandle(allAppsButton);
+break;
+case ALL_APPS:
+hideOrShowToolbarButton(true,configureButton,showSeq);
+hideOrShowToolbarButton(true,marketButton,showSeq);
+hideOrShowToolbarButton(false,searchButton,hideSeq);
+hideOrShowToolbarButton(false,allAppsButton,hideSeq);
+mDeleteZone.setHandle(marketButton);
+break;
+case CUSTOMIZE:
+hideOrShowToolbarButton(true,allAppsButton,showSeq);
+hideOrShowToolbarButton(false,searchButton,hideSeq);
+hideOrShowToolbarButton(false,marketButton,hideSeq);
+hideOrShowToolbarButton(false,configureButton,hideSeq);
+mDeleteZone.setHandle(allAppsButton);
+break;
+}
+}

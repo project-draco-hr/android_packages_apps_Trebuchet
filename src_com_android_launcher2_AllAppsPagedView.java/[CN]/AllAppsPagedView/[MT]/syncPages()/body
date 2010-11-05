@@ -1,0 +1,16 @@
+{
+  int numPages=Math.max(1,(int)Math.ceil((float)mFilteredApps.size() / (mCellCountX * mCellCountY)));
+  int curNumPages=getChildCount();
+  int extraPageDiff=curNumPages - numPages;
+  for (int i=0; i < extraPageDiff; ++i) {
+    removeViewAt(numPages);
+  }
+  for (int i=curNumPages; i < numPages; ++i) {
+    PagedViewCellLayout layout=new PagedViewCellLayout(getContext());
+    layout.setCellCount(mCellCountX,mCellCountY);
+    layout.setPadding(mPageLayoutPaddingLeft,mPageLayoutPaddingTop,mPageLayoutPaddingRight,mPageLayoutPaddingBottom);
+    layout.setGap(mPageLayoutWidthGap,mPageLayoutHeightGap);
+    addView(layout);
+  }
+  setCurrentPage(Math.max(0,Math.min(numPages - 1,getCurrentPage())));
+}

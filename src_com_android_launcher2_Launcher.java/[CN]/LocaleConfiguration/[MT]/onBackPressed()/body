@@ -1,0 +1,12 @@
+{
+  if (mState == State.ALL_APPS || mState == State.CUSTOMIZE) {
+    showWorkspace(true);
+  }
+ else {
+    closeFolder();
+  }
+  if (mPreviousView != null) {
+    dismissPreview(mPreviousView);
+    dismissPreview(mNextView);
+  }
+}

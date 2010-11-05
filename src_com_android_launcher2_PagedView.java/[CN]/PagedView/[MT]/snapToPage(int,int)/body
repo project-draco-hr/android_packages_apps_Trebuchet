@@ -1,0 +1,7 @@
+{
+  whichPage=Math.max(0,Math.min(whichPage,getPageCount() - 1));
+  int newX=getChildOffset(whichPage) - getRelativeChildOffset(whichPage);
+  final int sX=getScrollX();
+  final int delta=newX - sX;
+  snapToPage(whichPage,delta,duration);
+}

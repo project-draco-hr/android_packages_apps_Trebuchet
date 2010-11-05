@@ -1,12 +1,19 @@
 {
   Context context=getContext();
-  mScrollInterpolator=new WorkspaceOvershootInterpolator();
-  mScroller=new Scroller(context,mScrollInterpolator);
-  mCurrentScreen=mDefaultScreen;
-  Launcher.setScreen(mCurrentScreen);
+  mCurrentPage=mDefaultPage;
+  Launcher.setScreen(mCurrentPage);
   LauncherApplication app=(LauncherApplication)context.getApplicationContext();
   mIconCache=app.getIconCache();
-  final ViewConfiguration configuration=ViewConfiguration.get(getContext());
-  mTouchSlop=configuration.getScaledTouchSlop();
-  mMaximumVelocity=configuration.getScaledMaximumFlingVelocity();
+  mExternalDragOutlinePaint.setAntiAlias(true);
+  setWillNotDraw(false);
+  mUnshrinkAnimationListener=new LauncherAnimatorListenerAdapter(){
+    @Override public void onAnimationStart(    Animator animation){
+      mIsInUnshrinkAnimation=true;
+    }
+    @Override public void onAnimationEndOrCancel(    Animator animation){
+      mIsInUnshrinkAnimation=false;
+    }
+  }
+;
+  mSnapVelocity=600;
 }

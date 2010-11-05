@@ -1,0 +1,18 @@
+{
+  super(context,attrs,defStyle);
+  TypedArray a;
+  a=context.obtainStyledAttributes(attrs,R.styleable.CustomizePagedView,defStyle,0);
+  mMaxWidgetsCellHSpan=a.getInt(R.styleable.CustomizePagedView_widgetCellCountX,8);
+  a.recycle();
+  a=context.obtainStyledAttributes(attrs,R.styleable.PagedView,defStyle,0);
+  mCellCountX=a.getInt(R.styleable.PagedView_cellCountX,7);
+  mCellCountY=a.getInt(R.styleable.PagedView_cellCountY,4);
+  a.recycle();
+  mCustomizationType=CustomizationType.WidgetCustomization;
+  mWidgetPages=new ArrayList<ArrayList<AppWidgetProviderInfo>>();
+  mWorkspaceWidgetLayout=new PagedViewCellLayout(context);
+  mInflater=LayoutInflater.from(context);
+  setVisibility(View.GONE);
+  setSoundEffectsEnabled(false);
+  setupWorkspaceLayout();
+}

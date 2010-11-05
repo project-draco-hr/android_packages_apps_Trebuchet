@@ -1,0 +1,30 @@
+{
+  if (v instanceof Checkable) {
+    if (!isChoiceMode(CHOICE_MODE_NONE)) {
+      Checkable c=(Checkable)v;
+      if (isChoiceMode(CHOICE_MODE_SINGLE)) {
+        boolean wasChecked=c.isChecked();
+        resetCheckedGrandchildren();
+        c.setChecked(!wasChecked);
+      }
+ else {
+        c.toggle();
+      }
+      if (getCheckedGrandchildren().size() == 0) {
+        endChoiceMode();
+      }
+      return;
+    }
+  }
+  int childIndex=getChildIndexForGrandChild(v);
+  if (childIndex == getCurrentPage()) {
+    final ApplicationInfo app=(ApplicationInfo)v.getTag();
+    animateClickFeedback(v,new Runnable(){
+      @Override public void run(){
+        mLauncher.startActivitySafely(app.intent,app);
+      }
+    }
+);
+    endChoiceMode();
+  }
+}

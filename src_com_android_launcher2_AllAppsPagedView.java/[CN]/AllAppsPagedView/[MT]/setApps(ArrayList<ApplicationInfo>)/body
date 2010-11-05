@@ -1,0 +1,7 @@
+{
+  mApps=list;
+  Collections.sort(mApps,LauncherModel.APP_NAME_COMPARATOR);
+  mFilteredApps=rebuildFilteredApps(mApps);
+  mPageViewIconCache.clear();
+  invalidatePageData();
+}

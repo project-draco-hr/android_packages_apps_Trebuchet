@@ -1,0 +1,13 @@
+{
+  if (mDragging) {
+    mDragging=false;
+    if (mCrosshairsAnimator != null) {
+      mCrosshairsAnimator.animateOut();
+    }
+  }
+  mDragCell[0]=-1;
+  mDragCell[1]=-1;
+  mDragOutlineAnims[mDragOutlineCurrent].animateOut();
+  mDragOutlineCurrent=(mDragOutlineCurrent + 1) % mDragOutlineAnims.length;
+  setHover(false);
+}

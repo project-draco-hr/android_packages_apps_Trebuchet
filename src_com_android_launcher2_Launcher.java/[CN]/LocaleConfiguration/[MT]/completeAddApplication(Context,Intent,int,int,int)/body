@@ -1,0 +1,17 @@
+{
+  final int[] cellXY=mTmpAddItemCellCoordinates;
+  final CellLayout layout=(CellLayout)mWorkspace.getChildAt(screen);
+  if (!layout.findCellForSpanThatIntersects(cellXY,1,1,intersectCellX,intersectCellY)) {
+    showOutOfSpaceMessage();
+    return;
+  }
+  final ShortcutInfo info=mModel.getShortcutInfo(context.getPackageManager(),data,context);
+  if (info != null) {
+    info.setActivity(data.getComponent(),Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
+    info.container=ItemInfo.NO_ID;
+    mWorkspace.addApplicationShortcut(info,screen,cellXY[0],cellXY[1],isWorkspaceLocked(),mAddIntersectCellX,mAddIntersectCellY);
+  }
+ else {
+    Log.e(TAG,"Couldn't find ActivityInfo for selected application: " + data);
+  }
+}

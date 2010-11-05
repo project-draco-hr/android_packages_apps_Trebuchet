@@ -1,0 +1,4 @@
+{
+  mCellCountX=shortAxisCellCount;
+  mCellCountY=longAxisCellCount;
+}

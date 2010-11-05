@@ -1,0 +1,5 @@
+{
+  v.getMatrix().mapPoints(xy);
+  xy[0]-=(mScrollX - v.getLeft());
+  xy[1]-=(mScrollY - v.getTop());
+}

@@ -1,0 +1,7 @@
+{
+  final float viewAlpha=sHolographicOutlineHelper.viewAlphaInterpolator(alpha);
+  final float holographicAlpha=sHolographicOutlineHelper.highlightAlphaInterpolator(alpha);
+  mAlpha=(int)(viewAlpha * 255);
+  mHolographicAlpha=(int)(holographicAlpha * 255);
+  super.setAlpha(viewAlpha);
+}

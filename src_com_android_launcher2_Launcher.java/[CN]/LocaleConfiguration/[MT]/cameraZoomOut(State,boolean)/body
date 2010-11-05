@@ -1,0 +1,50 @@
+{
+  final Resources res=getResources();
+  final int duration=res.getInteger(R.integer.config_allAppsZoomInTime);
+  final float scale=(float)res.getInteger(R.integer.config_allAppsZoomScaleFactor);
+  final boolean toAllApps=(toState == State.ALL_APPS);
+  final View toView=toAllApps ? (View)mAllAppsGrid : mHomeCustomizationDrawer;
+  setPivotsForZoom(toView,toState,scale);
+  if (toAllApps) {
+    mWorkspace.shrinkToBottom(animated);
+  }
+ else {
+    mWorkspace.shrinkToTop(animated);
+  }
+  if (animated) {
+    ValueAnimator scaleAnim=ObjectAnimator.ofPropertyValuesHolder(toView,PropertyValuesHolder.ofFloat("scaleX",scale,1.0f),PropertyValuesHolder.ofFloat("scaleY",scale,1.0f));
+    scaleAnim.setDuration(duration);
+    scaleAnim.setInterpolator(new DecelerateInterpolator());
+    scaleAnim.addListener(new LauncherAnimatorListenerAdapter(){
+      @Override public void onAnimationStart(      Animator animation){
+        toView.setTranslationX(0.0f);
+        toView.setTranslationY(0.0f);
+        toView.setVisibility(View.VISIBLE);
+      }
+      @Override public void onAnimationEndOrCancel(      Animator animation){
+        toView.setScaleX(1.0f);
+        toView.setScaleY(1.0f);
+      }
+    }
+);
+    AnimatorSet toolbarHideAnim=new AnimatorSet();
+    AnimatorSet toolbarShowAnim=new AnimatorSet();
+    hideAndShowToolbarButtons(toState,toolbarShowAnim,toolbarHideAnim);
+    final int startDelay=res.getInteger(R.integer.config_workspaceShrinkTime) - duration;
+    if (mStateAnimation != null)     mStateAnimation.cancel();
+    mStateAnimation=new AnimatorSet();
+    mStateAnimation.playTogether(scaleAnim,toolbarHideAnim);
+    mStateAnimation.play(scaleAnim).after(startDelay);
+    final int fadeInTime=res.getInteger(R.integer.config_toolbarButtonFadeInTime);
+    mStateAnimation.play(toolbarShowAnim).after(duration + startDelay - fadeInTime);
+    mStateAnimation.start();
+  }
+ else {
+    toView.setTranslationX(0.0f);
+    toView.setTranslationY(0.0f);
+    toView.setScaleX(1.0f);
+    toView.setScaleY(1.0f);
+    toView.setVisibility(View.VISIBLE);
+    hideAndShowToolbarButtons(toState,null,null);
+  }
+}

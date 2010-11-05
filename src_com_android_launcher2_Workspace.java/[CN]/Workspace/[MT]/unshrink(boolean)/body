@@ -1,0 +1,38 @@
+{
+  if (mIsSmall) {
+    mIsSmall=false;
+    if (mAnimator != null) {
+      mAnimator.cancel();
+    }
+    mAnimator=new AnimatorSet();
+    final int screenCount=getChildCount();
+    final int duration=getResources().getInteger(R.integer.config_workspaceUnshrinkTime);
+    for (int i=0; i < screenCount; i++) {
+      final CellLayout cl=(CellLayout)getChildAt(i);
+      float finalAlphaValue=(i == mCurrentPage) ? 1.0f : 0.0f;
+      float rotation=0.0f;
+      if (i < mCurrentPage) {
+        rotation=WORKSPACE_ROTATION;
+      }
+ else       if (i > mCurrentPage) {
+        rotation=-WORKSPACE_ROTATION;
+      }
+      if (animated) {
+        mAnimator.playTogether(ObjectAnimator.ofFloat(cl,"translationX",0.0f).setDuration(duration),ObjectAnimator.ofFloat(cl,"translationY",0.0f).setDuration(duration),ObjectAnimator.ofFloat(cl,"scaleX",1.0f).setDuration(duration),ObjectAnimator.ofFloat(cl,"scaleY",1.0f).setDuration(duration),ObjectAnimator.ofFloat(cl,"backgroundAlpha",0.0f).setDuration(duration),ObjectAnimator.ofFloat(cl,"alpha",finalAlphaValue).setDuration(duration),ObjectAnimator.ofFloat(cl,"rotationY",rotation).setDuration(duration));
+      }
+ else {
+        cl.setTranslationX(0.0f);
+        cl.setTranslationY(0.0f);
+        cl.setScaleX(1.0f);
+        cl.setScaleY(1.0f);
+        cl.setBackgroundAlpha(0.0f);
+        cl.setAlpha(finalAlphaValue);
+        cl.setRotationY(rotation);
+      }
+    }
+    if (animated) {
+      mAnimator.addListener(mUnshrinkAnimationListener);
+      mAnimator.start();
+    }
+  }
+}

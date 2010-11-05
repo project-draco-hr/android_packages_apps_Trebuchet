@@ -1,23 +1,39 @@
 {
-  boolean restore=false;
-  int restoreCount=0;
-  boolean fastDraw=mTouchState != TOUCH_STATE_SCROLLING && mNextScreen == INVALID_SCREEN;
-  if (fastDraw) {
-    drawChild(canvas,getChildAt(mCurrentScreen),getDrawingTime());
+  if (mIsSmall || mIsInUnshrinkAnimation) {
+    final int pageCount=getChildCount();
+    final long drawingTime=getDrawingTime();
+    for (int i=0; i < pageCount; i++) {
+      final View page=(View)getChildAt(i);
+      drawChild(canvas,page,drawingTime);
+    }
   }
  else {
-    final long drawingTime=getDrawingTime();
-    final float scrollPos=(float)mScrollX / getWidth();
-    final int leftScreen=(int)scrollPos;
-    final int rightScreen=leftScreen + 1;
-    if (leftScreen >= 0) {
-      drawChild(canvas,getChildAt(leftScreen),drawingTime);
+    super.dispatchDraw(canvas);
+    final int width=getWidth();
+    final int height=getHeight();
+    if (mInScrollArea && (height > width)) {
+      final int pageHeight=getChildAt(0).getHeight();
+      final int padding=(int)((height - pageHeight) * 0.5f + pageHeight * 0.1f);
+      final CellLayout leftPage=(CellLayout)getChildAt(mCurrentPage - 1);
+      final CellLayout rightPage=(CellLayout)getChildAt(mCurrentPage + 1);
+      if (leftPage != null && leftPage.getHover()) {
+        final Drawable d=getResources().getDrawable(R.drawable.page_hover_left);
+        d.setBounds(mScrollX,padding,mScrollX + d.getIntrinsicWidth(),height - padding);
+        d.draw(canvas);
+      }
+ else       if (rightPage != null && rightPage.getHover()) {
+        final Drawable d=getResources().getDrawable(R.drawable.page_hover_right);
+        d.setBounds(mScrollX + width - d.getIntrinsicWidth(),padding,mScrollX + width,height - padding);
+        d.draw(canvas);
+      }
     }
-    if (scrollPos != leftScreen && rightScreen < getChildCount()) {
-      drawChild(canvas,getChildAt(rightScreen),drawingTime);
+    if (mDropView != null) {
+      canvas.save(Canvas.MATRIX_SAVE_FLAG);
+      final int xPos=mDropViewPos[0] - mDropView.getScrollX();
+      final int yPos=mDropViewPos[1] - mDropView.getScrollY();
+      canvas.translate(xPos,yPos);
+      mDropView.draw(canvas);
+      canvas.restore();
     }
-  }
-  if (restore) {
-    canvas.restoreToCount(restoreCount);
   }
 }

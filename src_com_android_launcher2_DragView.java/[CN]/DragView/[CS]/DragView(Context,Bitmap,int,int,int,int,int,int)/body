@@ -1,12 +1,15 @@
 {
   super(context);
+  final Resources res=getResources();
+  final int dragScale=res.getInteger(R.integer.config_dragViewExtraPixels);
   mWindowManager=WindowManagerImpl.getDefault();
   mTween=new SymmetricalLinearTween(false,110,this);
   Matrix scale=new Matrix();
   float scaleFactor=width;
-  scaleFactor=mScale=(scaleFactor + DRAG_SCALE) / scaleFactor;
+  scaleFactor=mScale=(scaleFactor + dragScale) / scaleFactor;
   scale.setScale(scaleFactor,scaleFactor);
   mBitmap=Bitmap.createBitmap(bitmap,left,top,width,height,scale,true);
-  mRegistrationX=registrationX + (DRAG_SCALE / 2);
-  mRegistrationY=registrationY + (DRAG_SCALE / 2);
+  setDragRegion(0,0,width,height);
+  mRegistrationX=registrationX + res.getInteger(R.integer.config_dragViewOffsetX);
+  mRegistrationY=registrationY + res.getInteger(R.integer.config_dragViewOffsetY);
 }

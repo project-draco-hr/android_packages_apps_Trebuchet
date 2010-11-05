@@ -3,7 +3,6 @@
     Log.e(TAG,"The screen must be >= 0 and < " + getChildCount() + " (was "+ screen+ "); skipping child");
     return;
   }
-  clearVacantCache();
   final CellLayout group=(CellLayout)getChildAt(screen);
   CellLayout.LayoutParams lp=(CellLayout.LayoutParams)child.getLayoutParams();
   if (lp == null) {
@@ -15,7 +14,11 @@
     lp.cellHSpan=spanX;
     lp.cellVSpan=spanY;
   }
-  group.addView(child,insert ? 0 : -1,lp);
+  int childId=LauncherModel.getCellLayoutChildId(-1,screen,x,y,spanX,spanY);
+  boolean markCellsAsOccupied=!(child instanceof Folder);
+  if (!group.addViewToCellLayout(child,insert ? 0 : -1,childId,lp,markCellsAsOccupied)) {
+    Log.w(TAG,"Failed to add to item at (" + lp.cellX + ","+ lp.cellY+ ") to CellLayout");
+  }
   if (!(child instanceof Folder)) {
     child.setHapticFeedbackEnabled(false);
     child.setOnLongClickListener(mLongClickListener);

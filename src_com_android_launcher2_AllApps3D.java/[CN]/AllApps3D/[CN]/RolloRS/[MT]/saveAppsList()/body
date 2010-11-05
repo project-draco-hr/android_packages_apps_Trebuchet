@@ -2,11 +2,7 @@
   if (mScript != null && mAllocIconIds != null) {
     mAllocIconIds.data(mIconIds);
     mAllocLabelIds.data(mLabelIds);
-    mScript.bindAllocation(mAllocIconIds,Defines.ALLOC_ICON_IDS);
-    mScript.bindAllocation(mAllocLabelIds,Defines.ALLOC_LABEL_IDS);
-    mState.save();
-    if (mInvokeResetWAR != null) {
-      mInvokeResetWAR.execute();
-    }
+    mScript.bind_gIconIDs(mAllocIconIds);
+    mScript.bind_gLabelIDs(mAllocLabelIds);
   }
 }

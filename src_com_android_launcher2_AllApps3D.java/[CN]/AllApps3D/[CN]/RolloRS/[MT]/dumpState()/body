@@ -13,21 +13,4 @@
     Log.d(TAG,"sRollo.mLabelIds.length=" + mLabelIds.length);
   }
   Log.d(TAG,"sRollo.mLabelIds=" + Arrays.toString(mLabelIds));
-  Log.d(TAG,"sRollo.mState.newPositionX=" + mState.newPositionX);
-  Log.d(TAG,"sRollo.mState.newTouchDown=" + mState.newTouchDown);
-  Log.d(TAG,"sRollo.mState.flingVelocity=" + mState.flingVelocity);
-  Log.d(TAG,"sRollo.mState.iconCount=" + mState.iconCount);
-  Log.d(TAG,"sRollo.mState.selectedIconIndex=" + mState.selectedIconIndex);
-  Log.d(TAG,"sRollo.mState.selectedIconTexture=" + mState.selectedIconTexture);
-  Log.d(TAG,"sRollo.mState.zoomTarget=" + mState.zoomTarget);
-  Log.d(TAG,"sRollo.mState.homeButtonId=" + mState.homeButtonId);
-  Log.d(TAG,"sRollo.mState.targetPos=" + mState.targetPos);
-  Log.d(TAG,"sRollo.mParams.bubbleWidth=" + mParams.bubbleWidth);
-  Log.d(TAG,"sRollo.mParams.bubbleHeight=" + mParams.bubbleHeight);
-  Log.d(TAG,"sRollo.mParams.bubbleBitmapWidth=" + mParams.bubbleBitmapWidth);
-  Log.d(TAG,"sRollo.mParams.bubbleBitmapHeight=" + mParams.bubbleBitmapHeight);
-  Log.d(TAG,"sRollo.mParams.homeButtonWidth=" + mParams.homeButtonWidth);
-  Log.d(TAG,"sRollo.mParams.homeButtonHeight=" + mParams.homeButtonHeight);
-  Log.d(TAG,"sRollo.mParams.homeButtonTextureWidth=" + mParams.homeButtonTextureWidth);
-  Log.d(TAG,"sRollo.mParams.homeButtonTextureHeight=" + mParams.homeButtonTextureHeight);
 }

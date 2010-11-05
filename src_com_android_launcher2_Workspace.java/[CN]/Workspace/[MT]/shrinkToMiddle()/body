@@ -1,0 +1,3 @@
+{
+  shrink(ShrinkPosition.SHRINK_TO_MIDDLE,true);
+}

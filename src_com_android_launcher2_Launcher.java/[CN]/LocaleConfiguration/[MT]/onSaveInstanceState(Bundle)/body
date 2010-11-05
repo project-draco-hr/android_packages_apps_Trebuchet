@@ -1,0 +1,32 @@
+{
+  outState.putInt(RUNTIME_STATE_CURRENT_SCREEN,mWorkspace.getCurrentPage());
+  final ArrayList<Folder> folders=mWorkspace.getOpenFolders();
+  if (folders.size() > 0) {
+    final int count=folders.size();
+    long[] ids=new long[count];
+    for (int i=0; i < count; i++) {
+      final FolderInfo info=folders.get(i).getInfo();
+      ids[i]=info.id;
+    }
+    outState.putLongArray(RUNTIME_STATE_USER_FOLDERS,ids);
+  }
+ else {
+    super.onSaveInstanceState(outState);
+  }
+  outState.putInt(RUNTIME_STATE,mState.ordinal());
+  if (mAddScreen > -1 && mWaitingForResult) {
+    outState.putInt(RUNTIME_STATE_PENDING_ADD_SCREEN,mAddScreen);
+    outState.putInt(RUNTIME_STATE_PENDING_ADD_CELL_X,mAddIntersectCellX);
+    outState.putInt(RUNTIME_STATE_PENDING_ADD_CELL_Y,mAddIntersectCellY);
+  }
+  if (mFolderInfo != null && mWaitingForResult) {
+    outState.putBoolean(RUNTIME_STATE_PENDING_FOLDER_RENAME,true);
+    outState.putLong(RUNTIME_STATE_PENDING_FOLDER_RENAME_ID,mFolderInfo.id);
+  }
+  if (mHomeCustomizationDrawer != null) {
+    String currentTabTag=mHomeCustomizationDrawer.getCurrentTabTag();
+    if (currentTabTag != null) {
+      outState.putString("currentTab",currentTabTag);
+    }
+  }
+}

@@ -1,0 +1,5 @@
+{
+  if (mAppMarketIntent != null) {
+    startActivitySafely(mAppMarketIntent,"app market");
+  }
+}

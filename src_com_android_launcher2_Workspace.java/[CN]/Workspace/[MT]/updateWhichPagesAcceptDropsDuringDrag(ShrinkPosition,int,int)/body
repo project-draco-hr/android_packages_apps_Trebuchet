@@ -1,0 +1,3 @@
+{
+  updateWhichPagesAcceptDropsHelper(state,true,spanX,spanY);
+}

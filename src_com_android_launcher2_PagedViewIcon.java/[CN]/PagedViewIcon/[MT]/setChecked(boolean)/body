@@ -1,0 +1,16 @@
+{
+  if (mIsChecked != checked) {
+    mIsChecked=checked;
+    if (mIsChecked) {
+      mCheckedOutline=Bitmap.createBitmap(mIcon.getWidth(),mIcon.getHeight(),Bitmap.Config.ARGB_8888);
+      Canvas checkedOutlineCanvas=new Canvas(mCheckedOutline);
+      mPaint.setAlpha(255);
+      checkedOutlineCanvas.drawBitmap(mIcon,0,0,mPaint);
+      sHolographicOutlineHelper.applyExpensiveOutlineWithBlur(mCheckedOutline,checkedOutlineCanvas,mCheckedBlurColor,mCheckedOutlineColor);
+    }
+ else {
+      invalidateCheckedImage();
+    }
+    invalidate();
+  }
+}

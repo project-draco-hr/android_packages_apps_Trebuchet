@@ -1,0 +1,11 @@
+{
+  ComponentName componentName=null;
+  if (dragInfo instanceof ApplicationInfo) {
+    componentName=((ApplicationInfo)dragInfo).componentName;
+  }
+ else   if (dragInfo instanceof ShortcutInfo) {
+    componentName=((ShortcutInfo)dragInfo).intent.getComponent();
+  }
+  mLauncher.startApplicationDetailsActivity(componentName);
+  return false;
+}

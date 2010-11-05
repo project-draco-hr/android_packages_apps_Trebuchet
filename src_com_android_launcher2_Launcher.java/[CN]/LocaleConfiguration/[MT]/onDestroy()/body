@@ -1,0 +1,20 @@
+{
+  super.onDestroy();
+  try {
+    mAppWidgetHost.stopListening();
+  }
+ catch (  NullPointerException ex) {
+    Log.w(TAG,"problem while stopping AppWidgetHost during Launcher destruction",ex);
+  }
+  TextKeyListener.getInstance().release();
+  mModel.stopLoader();
+  unbindDesktopItems();
+  getContentResolver().unregisterContentObserver(mWidgetObserver);
+  if (mPreviousView != null) {
+    dismissPreview(mPreviousView);
+  }
+  if (mNextView != null) {
+    dismissPreview(mNextView);
+  }
+  unregisterReceiver(mCloseSystemDialogsReceiver);
+}

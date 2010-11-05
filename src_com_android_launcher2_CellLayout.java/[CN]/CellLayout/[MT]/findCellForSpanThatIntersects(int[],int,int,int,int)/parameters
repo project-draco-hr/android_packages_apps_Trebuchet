@@ -1,0 +1,5 @@
+int[] cellXY
+int spanX
+int spanY
+int intersectX
+int intersectY

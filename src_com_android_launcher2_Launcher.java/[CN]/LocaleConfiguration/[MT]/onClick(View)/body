@@ -1,0 +1,21 @@
+{
+  Object tag=v.getTag();
+  if (tag instanceof ShortcutInfo) {
+    final Intent intent=((ShortcutInfo)tag).intent;
+    int[] pos=new int[2];
+    v.getLocationOnScreen(pos);
+    intent.setSourceBounds(new Rect(pos[0],pos[1],pos[0] + v.getWidth(),pos[1] + v.getHeight()));
+    startActivitySafely(intent,tag);
+  }
+ else   if (tag instanceof FolderInfo) {
+    handleFolderClick((FolderInfo)tag);
+  }
+ else   if (v == mHandleView) {
+    if (mState == State.ALL_APPS) {
+      showWorkspace(true);
+    }
+ else {
+      showAllApps(true);
+    }
+  }
+}

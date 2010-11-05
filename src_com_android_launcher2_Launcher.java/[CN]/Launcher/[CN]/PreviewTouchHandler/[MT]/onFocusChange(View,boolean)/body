@@ -1,5 +1,0 @@
-{
-  if (hasFocus) {
-    mWorkspace.snapToScreen((Integer)v.getTag());
-  }
-}

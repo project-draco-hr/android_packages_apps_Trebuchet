@@ -1,0 +1,28 @@
+{
+  if (LauncherApplication.isScreenXLarge()) {
+    Resources res=getResources();
+    float onDropScale=res.getInteger(R.integer.config_screenOnDropScalePercent) / 100.0f;
+    ObjectAnimator scaleUp=ObjectAnimator.ofFloat(this,"hoverScale",onDropScale);
+    scaleUp.setDuration(res.getInteger(R.integer.config_screenOnDropScaleUpDuration));
+    ObjectAnimator scaleDown=ObjectAnimator.ofFloat(this,"hoverScale",1.0f);
+    scaleDown.setDuration(res.getInteger(R.integer.config_screenOnDropScaleDownDuration));
+    ObjectAnimator alphaFadeOut=ObjectAnimator.ofFloat(this,"hoverAlpha",0.0f);
+    alphaFadeOut.setStartDelay(res.getInteger(R.integer.config_screenOnDropAlphaFadeDelay));
+    alphaFadeOut.setDuration(res.getInteger(R.integer.config_screenOnDropAlphaFadeDelay));
+    AnimatorSet bouncer=new AnimatorSet();
+    bouncer.play(scaleUp).before(scaleDown);
+    bouncer.play(scaleUp).with(alphaFadeOut);
+    bouncer.addListener(new LauncherAnimatorListenerAdapter(){
+      @Override public void onAnimationStart(      Animator animation){
+        setHover(true);
+      }
+      @Override public void onAnimationEndOrCancel(      Animator animation){
+        setHover(false);
+        setHoverScale(1.0f);
+        setHoverAlpha(1.0f);
+      }
+    }
+);
+    bouncer.start();
+  }
+}

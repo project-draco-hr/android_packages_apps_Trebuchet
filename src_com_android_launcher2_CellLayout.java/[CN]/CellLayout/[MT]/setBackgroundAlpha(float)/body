@@ -1,0 +1,4 @@
+{
+  mBackgroundAlpha=alpha;
+  invalidate();
+}

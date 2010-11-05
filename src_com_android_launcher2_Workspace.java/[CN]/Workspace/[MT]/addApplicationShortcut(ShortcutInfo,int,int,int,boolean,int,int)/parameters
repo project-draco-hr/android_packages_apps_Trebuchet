@@ -1,0 +1,7 @@
+ShortcutInfo info
+int screen
+int cellX
+int cellY
+boolean insertAtFirst
+int intersectX
+int intersectY

@@ -1,8 +1,0 @@
-{
-  TextView favorite=(TextView)mInflater.inflate(layoutResId,parent,false);
-  favorite.setCompoundDrawablesWithIntrinsicBounds(null,new FastBitmapDrawable(info.getIcon(mIconCache)),null,null);
-  favorite.setText(info.title);
-  favorite.setTag(info);
-  favorite.setOnClickListener(this);
-  return favorite;
-}

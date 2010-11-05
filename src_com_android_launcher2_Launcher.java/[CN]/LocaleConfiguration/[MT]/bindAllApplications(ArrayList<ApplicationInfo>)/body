@@ -1,0 +1,8 @@
+{
+  mAllAppsGrid.setApps(apps);
+  if (mCustomizePagedView != null) {
+    mCustomizePagedView.setApps(apps);
+  }
+  updateAppMarketIcon();
+  updateGlobalSearchIcon();
+}

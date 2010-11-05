@@ -1,0 +1,7 @@
+Launcher l
+String mimeType
+ClipData data
+List<WidgetMimeTypeHandlerData> list
+CellLayout target
+int targetScreen
+int[] targetPos

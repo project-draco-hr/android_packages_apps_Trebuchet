@@ -2,10 +2,13 @@
   mRes=res;
   mWidth=width;
   mHeight=height;
+  mScript=new ScriptC_allapps(sRS,mRes,R.raw.allapps,true);
   initProgramVertex();
   initProgramFragment();
   initProgramStore();
   initGl();
   initData();
-  initRs();
+  mScript.bind_gIconIDs(mAllocIconIds);
+  mScript.bind_gLabelIDs(mAllocLabelIds);
+  sRS.contextBindRootScript(mScript);
 }

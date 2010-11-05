@@ -1,0 +1,11 @@
+{
+  clearChildrenCache();
+  if (!mDragController.dragging()) {
+    hideOutlines();
+  }
+  if (mAnimOnPageEndMoving != null) {
+    mAnimOnPageEndMoving.start();
+    mAnimOnPageEndMoving=null;
+  }
+  mPageMoving=false;
+}

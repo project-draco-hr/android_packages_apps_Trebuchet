@@ -1,0 +1,11 @@
+{
+  if (LauncherApplication.isScreenXLarge()) {
+    if (mState != State.CUSTOMIZE) {
+      showCustomizationDrawer(true);
+    }
+  }
+ else {
+    showWorkspace(true);
+    showAddDialog(-1,-1);
+  }
+}

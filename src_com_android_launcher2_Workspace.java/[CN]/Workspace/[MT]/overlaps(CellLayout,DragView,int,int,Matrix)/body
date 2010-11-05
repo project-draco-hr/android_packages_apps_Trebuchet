@@ -1,0 +1,23 @@
+{
+  final float[] draggedItemTopLeft=mTempDragCoordinates;
+  draggedItemTopLeft[0]=dragViewX + dragView.getScaledDragRegionXOffset();
+  draggedItemTopLeft[1]=dragViewY + dragView.getScaledDragRegionYOffset();
+  final float[] draggedItemBottomRight=mTempDragBottomRightCoordinates;
+  draggedItemBottomRight[0]=draggedItemTopLeft[0] + dragView.getScaledDragRegionWidth();
+  draggedItemBottomRight[1]=draggedItemTopLeft[1] + dragView.getScaledDragRegionHeight();
+  mapPointFromSelfToChild(cl,draggedItemTopLeft,cachedInverseMatrix);
+  float overlapRegionLeft=Math.max(0f,draggedItemTopLeft[0]);
+  float overlapRegionTop=Math.max(0f,draggedItemTopLeft[1]);
+  if (overlapRegionLeft <= cl.getWidth() && overlapRegionTop >= 0) {
+    mapPointFromSelfToChild(cl,draggedItemBottomRight,cachedInverseMatrix);
+    float overlapRegionRight=Math.min(cl.getWidth(),draggedItemBottomRight[0]);
+    float overlapRegionBottom=Math.min(cl.getHeight(),draggedItemBottomRight[1]);
+    if (overlapRegionRight >= 0 && overlapRegionBottom <= cl.getHeight()) {
+      float overlap=(overlapRegionRight - overlapRegionLeft) * (overlapRegionBottom - overlapRegionTop);
+      if (overlap > 0) {
+        return true;
+      }
+    }
+  }
+  return false;
+}

@@ -1,0 +1,22 @@
+{
+  if (mAlpha > 0) {
+    super.onDraw(canvas);
+  }
+  Bitmap overlay=null;
+  if (mCheckedOutline == null) {
+    if (mHolographicOutline != null && mHolographicAlpha > 0) {
+      mPaint.setAlpha(mHolographicAlpha);
+      overlay=mHolographicOutline;
+    }
+  }
+ else {
+    mPaint.setAlpha(255);
+    overlay=mCheckedOutline;
+  }
+  if (overlay != null) {
+    final int compoundPaddingLeft=getCompoundPaddingLeft();
+    final int compoundPaddingRight=getCompoundPaddingRight();
+    int hspace=getWidth() - compoundPaddingRight - compoundPaddingLeft;
+    canvas.drawBitmap(overlay,compoundPaddingLeft + (hspace - overlay.getWidth()) / 2,mPaddingTop,mPaint);
+  }
+}

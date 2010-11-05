@@ -1,0 +1,5 @@
+{
+  if (mCustomizePagedView != null) {
+    mCustomizePagedView.update();
+  }
+}

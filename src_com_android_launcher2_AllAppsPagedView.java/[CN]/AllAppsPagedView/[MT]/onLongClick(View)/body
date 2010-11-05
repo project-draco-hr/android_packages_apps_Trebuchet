@@ -1,0 +1,18 @@
+{
+  if (!v.isInTouchMode()) {
+    return false;
+  }
+  if (v instanceof Checkable) {
+    resetCheckedGrandchildren();
+    Checkable c=(Checkable)v;
+    c.toggle();
+  }
+  if (isChoiceMode(CHOICE_MODE_NONE)) {
+    startChoiceMode(CHOICE_MODE_SINGLE,this);
+  }
+  ApplicationInfo app=(ApplicationInfo)v.getTag();
+  app=new ApplicationInfo(app);
+  mLauncher.getWorkspace().onDragStartedWithItemSpans(1,1);
+  mDragController.startDrag(v,this,app,DragController.DRAG_ACTION_COPY);
+  return true;
+}

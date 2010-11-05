@@ -1,0 +1,3 @@
+{
+  return mState == State.ALL_APPS;
+}

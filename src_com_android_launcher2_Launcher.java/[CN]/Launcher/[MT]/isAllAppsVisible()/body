@@ -1,3 +1,0 @@
-{
-  return (mAllAppsGrid != null) ? mAllAppsGrid.isVisible() : false;
-}

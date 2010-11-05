@@ -1,5 +1,5 @@
 {
-  int screenCount=getChildCount();
+  final int screenCount=getChildCount();
   for (int screen=0; screen < screenCount; screen++) {
     CellLayout currentScreen=((CellLayout)getChildAt(screen));
     int count=currentScreen.getChildCount();
@@ -8,7 +8,7 @@
       CellLayout.LayoutParams lp=(CellLayout.LayoutParams)child.getLayoutParams();
       if (lp.cellHSpan == 4 && lp.cellVSpan == 4 && child instanceof Folder) {
         Folder f=(Folder)child;
-        if (f.getInfo() == tag) {
+        if (f.getInfo() == tag && f.getInfo().opened) {
           return f;
         }
       }

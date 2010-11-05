@@ -1,0 +1,6 @@
+{
+  if (mAcceptsDrops != acceptsDrops) {
+    mAcceptsDrops=acceptsDrops;
+    invalidate();
+  }
+}

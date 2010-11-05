@@ -1,0 +1,9 @@
+{
+  mLauncher=l;
+  mMimeType=mimeType;
+  mClipData=data;
+  mActivities=list;
+  mTargetLayout=target;
+  mTargetLayoutScreen=targetScreen;
+  mTargetLayoutPos=targetPos;
+}

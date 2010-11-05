@@ -1,0 +1,12 @@
+{
+  if (info != null) {
+    final int itemType=((ItemInfo)info).itemType;
+    mActive=(itemType == LauncherSettings.Favorites.ITEM_TYPE_APPLICATION);
+    if (mManageVisibility) {
+      if (mActive) {
+        setVisibility(VISIBLE);
+      }
+      mHandle.setVisibility(INVISIBLE);
+    }
+  }
+}

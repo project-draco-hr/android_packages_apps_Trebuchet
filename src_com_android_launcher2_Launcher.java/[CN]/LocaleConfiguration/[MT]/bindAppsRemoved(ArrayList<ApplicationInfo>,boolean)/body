@@ -1,0 +1,12 @@
+{
+  removeDialog(DIALOG_CREATE_SHORTCUT);
+  if (permanent) {
+    mWorkspace.removeItems(apps);
+  }
+  mAllAppsGrid.removeApps(apps);
+  if (mCustomizePagedView != null) {
+    mCustomizePagedView.removeApps(apps);
+  }
+  updateAppMarketIcon();
+  updateGlobalSearchIcon();
+}

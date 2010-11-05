@@ -1,0 +1,5 @@
+{
+  if (zoom == 1.0f && !LauncherApplication.isScreenXLarge()) {
+    mWorkspace.setVisibility(View.GONE);
+  }
+}

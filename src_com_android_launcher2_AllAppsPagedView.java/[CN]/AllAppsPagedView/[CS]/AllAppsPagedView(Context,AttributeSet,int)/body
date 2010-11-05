@@ -1,0 +1,9 @@
+{
+  super(context,attrs,defStyle);
+  TypedArray a=context.obtainStyledAttributes(attrs,R.styleable.PagedView,defStyle,0);
+  mCellCountX=a.getInt(R.styleable.PagedView_cellCountX,6);
+  mCellCountY=a.getInt(R.styleable.PagedView_cellCountY,4);
+  mInflater=LayoutInflater.from(context);
+  a.recycle();
+  setSoundEffectsEnabled(false);
+}

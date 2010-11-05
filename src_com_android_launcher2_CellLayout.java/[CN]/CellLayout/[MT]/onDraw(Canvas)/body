@@ -1,0 +1,70 @@
+{
+  if (mBackgroundAlpha > 0.0f) {
+    Drawable bg;
+    if (getScaleX() < 0.5f) {
+      bg=mAcceptsDrops ? mBackgroundMiniAcceptsDrops : mBackgroundMini;
+    }
+ else {
+      bg=mHover ? mBackgroundHover : mBackground;
+    }
+    if (bg != null) {
+      bg.setAlpha((int)(mBackgroundAlpha * mBackgroundAlphaMultiplier * 255));
+      bg.setBounds(mBackgroundRect);
+      bg.draw(canvas);
+    }
+    if (mHover && getScaleX() < 0.5f) {
+      boolean modifiedClipRect=false;
+      if (mHoverScale > 1.0f) {
+        float marginFraction=(mHoverScale - 1.0f) / 2.0f;
+        Rect clipRect=canvas.getClipBounds();
+        int marginX=(int)(marginFraction * (clipRect.right - clipRect.left));
+        int marginY=(int)(marginFraction * (clipRect.bottom - clipRect.top));
+        canvas.save(Canvas.CLIP_SAVE_FLAG);
+        canvas.clipRect(-marginX,-marginY,getWidth() + marginX,getHeight() + marginY,Region.Op.REPLACE);
+        modifiedClipRect=true;
+      }
+      mBackgroundMiniHover.setAlpha((int)(mBackgroundAlpha * mHoverAlpha * 255));
+      mBackgroundMiniHover.setBounds(mHoverRect);
+      mBackgroundMiniHover.draw(canvas);
+      if (modifiedClipRect) {
+        canvas.restore();
+      }
+    }
+  }
+  if (mCrosshairsVisibility > 0.0f) {
+    final int countX=mCountX;
+    final int countY=mCountY;
+    final float MAX_ALPHA=0.4f;
+    final int MAX_VISIBLE_DISTANCE=600;
+    final float DISTANCE_MULTIPLIER=0.002f;
+    final Drawable d=mCrosshairsDrawable;
+    final int width=d.getIntrinsicWidth();
+    final int height=d.getIntrinsicHeight();
+    int x=getLeftPadding() - (mWidthGap / 2) - (width / 2);
+    for (int col=0; col <= countX; col++) {
+      int y=getTopPadding() - (mHeightGap / 2) - (height / 2);
+      for (int row=0; row <= countY; row++) {
+        mTmpPointF.set(x - mDragCenter.x,y - mDragCenter.y);
+        float dist=mTmpPointF.length();
+        float alpha=Math.min(MAX_ALPHA,DISTANCE_MULTIPLIER * (MAX_VISIBLE_DISTANCE - dist));
+        if (alpha > 0.0f) {
+          d.setBounds(x,y,x + width,y + height);
+          d.setAlpha((int)(alpha * 255 * mCrosshairsVisibility));
+          d.draw(canvas);
+        }
+        y+=mCellHeight + mHeightGap;
+      }
+      x+=mCellWidth + mWidthGap;
+    }
+  }
+  final Paint paint=mDragOutlinePaint;
+  for (int i=0; i < mDragOutlines.length; i++) {
+    final float alpha=mDragOutlineAlphas[i];
+    if (alpha > 0) {
+      final Point p=mDragOutlines[i];
+      final Bitmap b=(Bitmap)mDragOutlineAnims[i].getTag();
+      paint.setAlpha((int)(alpha + .5f));
+      canvas.drawBitmap(b,p.x,p.y,paint);
+    }
+  }
+}

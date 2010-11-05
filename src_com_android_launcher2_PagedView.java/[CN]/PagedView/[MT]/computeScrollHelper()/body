@@ -1,0 +1,17 @@
+{
+  if (mScroller.computeScrollOffset()) {
+    mDirtyPageAlpha=true;
+    scrollTo(mScroller.getCurrX(),mScroller.getCurrY());
+    invalidate();
+    return true;
+  }
+ else   if (mNextPage != INVALID_PAGE) {
+    mDirtyPageAlpha=true;
+    mCurrentPage=Math.max(0,Math.min(mNextPage,getPageCount() - 1));
+    mNextPage=INVALID_PAGE;
+    notifyPageSwitchListener();
+    pageEndMoving();
+    return true;
+  }
+  return false;
+}

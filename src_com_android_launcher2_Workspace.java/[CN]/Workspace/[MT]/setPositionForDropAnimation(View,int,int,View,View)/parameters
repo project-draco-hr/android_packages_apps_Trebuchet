@@ -1,0 +1,5 @@
+View dragView
+int dragViewX
+int dragViewY
+View parent
+View child

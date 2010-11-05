@@ -1,0 +1,4 @@
+{
+  markCellsAsUnoccupiedForView(getChildAt(index));
+  super.removeViewAt(index);
+}

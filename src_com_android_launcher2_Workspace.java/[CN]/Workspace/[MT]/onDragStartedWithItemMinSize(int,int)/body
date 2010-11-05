@@ -1,0 +1,4 @@
+{
+  int[] spanXY=CellLayout.rectToCell(getResources(),minWidth,minHeight,null);
+  onDragStartedWithItemSpans(spanXY[0],spanXY[1]);
+}

@@ -1,0 +1,4 @@
+{
+  mLauncher=launcher;
+  mLauncher.setAllAppsPagedView(this);
+}

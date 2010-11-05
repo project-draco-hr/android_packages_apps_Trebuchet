@@ -1,23 +1,88 @@
 {
   super(context,attrs,defStyle);
+  setWillNotDraw(false);
   TypedArray a=context.obtainStyledAttributes(attrs,R.styleable.CellLayout,defStyle,0);
   mCellWidth=a.getDimensionPixelSize(R.styleable.CellLayout_cellWidth,10);
   mCellHeight=a.getDimensionPixelSize(R.styleable.CellLayout_cellHeight,10);
-  mLongAxisStartPadding=a.getDimensionPixelSize(R.styleable.CellLayout_longAxisStartPadding,10);
-  mLongAxisEndPadding=a.getDimensionPixelSize(R.styleable.CellLayout_longAxisEndPadding,10);
-  mShortAxisStartPadding=a.getDimensionPixelSize(R.styleable.CellLayout_shortAxisStartPadding,10);
-  mShortAxisEndPadding=a.getDimensionPixelSize(R.styleable.CellLayout_shortAxisEndPadding,10);
-  mShortAxisCells=a.getInt(R.styleable.CellLayout_shortAxisCells,4);
-  mLongAxisCells=a.getInt(R.styleable.CellLayout_longAxisCells,4);
+  mWidthGap=a.getDimensionPixelSize(R.styleable.CellLayout_widthGap,-1);
+  mHeightGap=a.getDimensionPixelSize(R.styleable.CellLayout_heightGap,-1);
+  mLeftPadding=a.getDimensionPixelSize(R.styleable.CellLayout_xAxisStartPadding,10);
+  mRightPadding=a.getDimensionPixelSize(R.styleable.CellLayout_xAxisEndPadding,10);
+  mTopPadding=a.getDimensionPixelSize(R.styleable.CellLayout_yAxisStartPadding,10);
+  mBottomPadding=a.getDimensionPixelSize(R.styleable.CellLayout_yAxisEndPadding,10);
+  mCountX=LauncherModel.getCellCountX();
+  mCountY=LauncherModel.getCellCountY();
+  mOccupied=new boolean[mCountX][mCountY];
   a.recycle();
   setAlwaysDrawnWithCacheEnabled(false);
-  if (mOccupied == null) {
-    if (mPortrait) {
-      mOccupied=new boolean[mShortAxisCells][mLongAxisCells];
-    }
- else {
-      mOccupied=new boolean[mLongAxisCells][mShortAxisCells];
+  mWallpaperManager=WallpaperManager.getInstance(context);
+  final Resources res=getResources();
+  if (LauncherApplication.isScreenXLarge()) {
+    mBackgroundMini=res.getDrawable(R.drawable.mini_home_screen_bg);
+    mBackgroundMini.setFilterBitmap(true);
+    mBackground=res.getDrawable(R.drawable.home_screen_bg);
+    mBackground.setFilterBitmap(true);
+    mBackgroundMiniHover=res.getDrawable(R.drawable.mini_home_screen_bg_hover);
+    mBackgroundMiniHover.setFilterBitmap(true);
+    mBackgroundHover=res.getDrawable(R.drawable.home_screen_bg_hover);
+    mBackgroundHover.setFilterBitmap(true);
+    mBackgroundMiniAcceptsDrops=res.getDrawable(R.drawable.mini_home_screen_bg_accepts_drops);
+    mBackgroundMiniAcceptsDrops.setFilterBitmap(true);
+  }
+  mCrosshairsDrawable=res.getDrawable(R.drawable.gardening_crosshairs);
+  mEaseOutInterpolator=new DecelerateInterpolator(2.5f);
+  int animDuration=res.getInteger(R.integer.config_crosshairsFadeInTime);
+  mCrosshairsAnimator=new InterruptibleInOutAnimator(animDuration,0.0f,1.0f);
+  mCrosshairsAnimator.getAnimator().addUpdateListener(new AnimatorUpdateListener(){
+    public void onAnimationUpdate(    ValueAnimator animation){
+      mCrosshairsVisibility=((Float)animation.getAnimatedValue()).floatValue();
+      invalidate();
     }
   }
-  mWallpaperManager=WallpaperManager.getInstance(getContext());
+);
+  mCrosshairsAnimator.getAnimator().setInterpolator(mEaseOutInterpolator);
+  for (int i=0; i < mDragOutlines.length; i++) {
+    mDragOutlines[i]=new Point(-1,-1);
+  }
+  final int duration=res.getInteger(R.integer.config_dragOutlineFadeTime);
+  final float fromAlphaValue=0;
+  final float toAlphaValue=(float)res.getInteger(R.integer.config_dragOutlineMaxAlpha);
+  Arrays.fill(mDragOutlineAlphas,fromAlphaValue);
+  for (int i=0; i < mDragOutlineAnims.length; i++) {
+    final InterruptibleInOutAnimator anim=new InterruptibleInOutAnimator(duration,fromAlphaValue,toAlphaValue);
+    anim.getAnimator().setInterpolator(mEaseOutInterpolator);
+    final int thisIndex=i;
+    anim.getAnimator().addUpdateListener(new AnimatorUpdateListener(){
+      public void onAnimationUpdate(      ValueAnimator animation){
+        final Bitmap outline=(Bitmap)anim.getTag();
+        if (outline == null) {
+          if (false) {
+            Object val=animation.getAnimatedValue();
+            Log.d(TAG,"anim " + thisIndex + " update: "+ val+ ", isStopped "+ anim.isStopped());
+          }
+          animation.cancel();
+        }
+ else {
+          mDragOutlineAlphas[thisIndex]=(Float)animation.getAnimatedValue();
+          final int left=mDragOutlines[thisIndex].x;
+          final int top=mDragOutlines[thisIndex].y;
+          CellLayout.this.invalidate(left,top,left + outline.getWidth(),top + outline.getHeight());
+        }
+      }
+    }
+);
+    anim.getAnimator().addListener(new AnimatorListenerAdapter(){
+      @Override public void onAnimationEnd(      Animator animation){
+        if ((Float)((ValueAnimator)animation).getAnimatedValue() == 0f) {
+          anim.setTag(null);
+        }
+      }
+    }
+);
+    mDragOutlineAnims[i]=anim;
+  }
+  mBackgroundRect=new Rect();
+  mHoverRect=new Rect();
+  setHoverScale(1.0f);
+  setHoverAlpha(1.0f);
 }

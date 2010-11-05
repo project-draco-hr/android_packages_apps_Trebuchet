@@ -1,0 +1,6 @@
+int cellId
+int screen
+int localCellX
+int localCellY
+int spanX
+int spanY

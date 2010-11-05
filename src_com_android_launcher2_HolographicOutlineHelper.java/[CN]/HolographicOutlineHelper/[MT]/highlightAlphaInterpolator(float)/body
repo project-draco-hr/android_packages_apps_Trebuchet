@@ -1,0 +1,4 @@
+{
+  float maxAlpha=0.8f;
+  return (float)Math.pow(maxAlpha * (1.0f - r),1.5f);
+}

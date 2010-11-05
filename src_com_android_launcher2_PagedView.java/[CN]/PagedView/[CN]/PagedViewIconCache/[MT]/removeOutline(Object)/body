@@ -1,0 +1,5 @@
+{
+  if (iconOutlineCache.containsKey(key)) {
+    iconOutlineCache.remove(key);
+  }
+}

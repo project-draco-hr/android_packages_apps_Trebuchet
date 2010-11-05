@@ -1,0 +1,14 @@
+{
+  super.onPrepareOptionsMenu(menu);
+  if (mAllAppsGrid.isAnimating()) {
+    return false;
+  }
+  boolean visible=!mAllAppsGrid.isVisible();
+  menu.setGroupVisible(MENU_GROUP_ADD,visible);
+  menu.setGroupVisible(MENU_GROUP_WALLPAPER,visible);
+  if (visible) {
+    CellLayout layout=(CellLayout)mWorkspace.getChildAt(mWorkspace.getCurrentPage());
+    menu.setGroupEnabled(MENU_GROUP_ADD,layout.existsEmptyCell());
+  }
+  return true;
+}

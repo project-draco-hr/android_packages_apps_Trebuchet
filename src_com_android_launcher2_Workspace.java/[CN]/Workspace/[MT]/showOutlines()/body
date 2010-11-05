@@ -1,0 +1,9 @@
+{
+  if (!mIsSmall && !mIsInUnshrinkAnimation) {
+    if (mBackgroundFadeOutAnimation != null)     mBackgroundFadeOutAnimation.cancel();
+    if (mBackgroundFadeInAnimation != null)     mBackgroundFadeInAnimation.cancel();
+    mBackgroundFadeInAnimation=ObjectAnimator.ofFloat(this,"backgroundAlpha",1.0f);
+    mBackgroundFadeInAnimation.setDuration(BACKGROUND_FADE_IN_DURATION);
+    mBackgroundFadeInAnimation.start();
+  }
+}

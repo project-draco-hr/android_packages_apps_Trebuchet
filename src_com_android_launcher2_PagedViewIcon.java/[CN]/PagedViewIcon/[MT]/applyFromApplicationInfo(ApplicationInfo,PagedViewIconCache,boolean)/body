@@ -1,0 +1,10 @@
+{
+  mIconCache=cache;
+  mIconCacheKey=info;
+  mHolographicOutline=mIconCache.getOutline(mIconCacheKey);
+  mIcon=info.iconBitmap;
+  setCompoundDrawablesWithIntrinsicBounds(null,new FastBitmapDrawable(mIcon),null,null);
+  setText(info.title);
+  setTag(info);
+  queueHolographicOutlineCreation();
+}

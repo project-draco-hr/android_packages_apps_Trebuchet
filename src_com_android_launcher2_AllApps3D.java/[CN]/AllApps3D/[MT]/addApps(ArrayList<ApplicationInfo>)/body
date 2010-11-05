@@ -8,7 +8,7 @@
   final int N=list.size();
   if (sRollo != null) {
     sRollo.pause();
-    sRollo.reallocAppsList(sRollo.mState.iconCount + N);
+    sRollo.reallocAppsList(sRollo.mScript.get_gIconCount() + N);
   }
   for (int i=0; i < N; i++) {
     final ApplicationInfo item=list.get(i);

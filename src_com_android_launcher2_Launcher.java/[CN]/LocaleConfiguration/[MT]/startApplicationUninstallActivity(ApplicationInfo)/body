@@ -1,0 +1,12 @@
+{
+  if ((appInfo.flags & ApplicationInfo.DOWNLOADED_FLAG) == 0) {
+    int messageId=R.string.uninstall_system_app_text;
+    Toast.makeText(this,messageId,Toast.LENGTH_SHORT).show();
+  }
+ else {
+    String packageName=appInfo.componentName.getPackageName();
+    String className=appInfo.componentName.getClassName();
+    Intent intent=new Intent(Intent.ACTION_DELETE,Uri.fromParts("package",packageName,className));
+    startActivity(intent);
+  }
+}

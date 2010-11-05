@@ -1,9 +1,5 @@
 {
-  clearVacantCache();
-  if (mScroller.isFinished()) {
-    if (mCurrentScreen > 0)     snapToScreen(mCurrentScreen - 1);
-  }
- else {
-    if (mNextScreen > 0)     snapToScreen(mNextScreen - 1);
+  if (!mIsSmall && !mIsInUnshrinkAnimation) {
+    super.scrollLeft();
   }
 }

@@ -1,0 +1,13 @@
+{
+  if (mState == State.ALL_APPS) {
+    mWorkspace.setVisibility(View.VISIBLE);
+    if (LauncherApplication.isScreenXLarge()) {
+      cameraZoomIn(State.ALL_APPS,animated);
+    }
+ else {
+      mAllAppsGrid.zoom(0.0f,animated);
+    }
+    ((View)mAllAppsGrid).setFocusable(false);
+    mWorkspace.getChildAt(mWorkspace.getCurrentPage()).requestFocus();
+  }
+}

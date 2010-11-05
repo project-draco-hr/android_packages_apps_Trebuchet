@@ -1,0 +1,9 @@
+{
+  if (LauncherApplication.isScreenXLarge()) {
+    final SearchManager searchManager=(SearchManager)getSystemService(Context.SEARCH_SERVICE);
+    ComponentName activityName=searchManager.getGlobalSearchActivity();
+    if (activityName != null) {
+      updateButtonWithIconFromExternalActivity(R.id.search_button,activityName,R.drawable.search_button_generic);
+    }
+  }
+}

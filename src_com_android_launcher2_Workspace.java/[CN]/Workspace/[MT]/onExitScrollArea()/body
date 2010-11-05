@@ -1,0 +1,6 @@
+{
+  if (mInScrollArea) {
+    mInScrollArea=false;
+    clearAllHovers();
+  }
+}

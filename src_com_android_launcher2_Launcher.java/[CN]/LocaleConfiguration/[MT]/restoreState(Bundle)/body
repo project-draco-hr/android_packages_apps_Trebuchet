@@ -1,0 +1,29 @@
+{
+  if (savedState == null) {
+    return;
+  }
+  State state=intToState(savedState.getInt(RUNTIME_STATE,State.WORKSPACE.ordinal()));
+  if (state == State.ALL_APPS) {
+    showAllApps(false);
+  }
+ else   if (state == State.CUSTOMIZE) {
+    showCustomizationDrawer(false);
+  }
+  final int currentScreen=savedState.getInt(RUNTIME_STATE_CURRENT_SCREEN,-1);
+  if (currentScreen > -1) {
+    mWorkspace.setCurrentPage(currentScreen);
+  }
+  final int addScreen=savedState.getInt(RUNTIME_STATE_PENDING_ADD_SCREEN,-1);
+  if (addScreen > -1) {
+    mAddScreen=addScreen;
+    mAddIntersectCellX=savedState.getInt(RUNTIME_STATE_PENDING_ADD_CELL_X);
+    mAddIntersectCellY=savedState.getInt(RUNTIME_STATE_PENDING_ADD_CELL_Y);
+    mRestoring=true;
+  }
+  boolean renameFolder=savedState.getBoolean(RUNTIME_STATE_PENDING_FOLDER_RENAME,false);
+  if (renameFolder) {
+    long id=savedState.getLong(RUNTIME_STATE_PENDING_FOLDER_RENAME_ID);
+    mFolderInfo=mModel.getFolderById(this,sFolders,id);
+    mRestoring=true;
+  }
+}

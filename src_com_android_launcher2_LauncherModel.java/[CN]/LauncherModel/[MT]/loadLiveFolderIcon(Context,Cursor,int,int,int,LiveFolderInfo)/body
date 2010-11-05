@@ -6,18 +6,20 @@ case LauncherSettings.Favorites.ICON_TYPE_RESOURCE:
   String resourceName=c.getString(iconResourceIndex);
 PackageManager packageManager=context.getPackageManager();
 try {
-Resources resources=packageManager.getResourcesForApplication(packageName);
-final int id=resources.getIdentifier(resourceName,null,null);
-liveFolderInfo.icon=Utilities.createIconBitmap(resources.getDrawable(id),context);
+Resources appResources=packageManager.getResourcesForApplication(packageName);
+final int id=appResources.getIdentifier(resourceName,null,null);
+liveFolderInfo.icon=Utilities.createIconBitmap(mIconCache.getFullResIcon(appResources,id),context);
 }
  catch (Exception e) {
-liveFolderInfo.icon=Utilities.createIconBitmap(context.getResources().getDrawable(R.drawable.ic_launcher_folder),context);
+Resources resources=context.getResources();
+liveFolderInfo.icon=Utilities.createIconBitmap(mIconCache.getFullResIcon(resources,R.drawable.ic_launcher_folder),context);
 }
 liveFolderInfo.iconResource=new Intent.ShortcutIconResource();
 liveFolderInfo.iconResource.packageName=packageName;
 liveFolderInfo.iconResource.resourceName=resourceName;
 break;
 default :
-liveFolderInfo.icon=Utilities.createIconBitmap(context.getResources().getDrawable(R.drawable.ic_launcher_folder),context);
+Resources resources=context.getResources();
+liveFolderInfo.icon=Utilities.createIconBitmap(mIconCache.getFullResIcon(resources,R.drawable.ic_launcher_folder),context);
 }
 }

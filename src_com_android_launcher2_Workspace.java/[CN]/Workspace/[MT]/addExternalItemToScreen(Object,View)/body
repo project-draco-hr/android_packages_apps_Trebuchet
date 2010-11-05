@@ -1,0 +1,10 @@
+{
+  CellLayout cl=(CellLayout)layout;
+  ItemInfo info=(ItemInfo)dragInfo;
+  if (cl.findCellForSpan(mTempEstimate,info.spanX,info.spanY)) {
+    onDropExternal(-1,-1,dragInfo,cl,false);
+    return true;
+  }
+  mLauncher.showOutOfSpaceMessage();
+  return false;
+}

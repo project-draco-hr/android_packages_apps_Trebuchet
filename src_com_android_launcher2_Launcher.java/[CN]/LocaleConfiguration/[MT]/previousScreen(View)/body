@@ -1,0 +1,5 @@
+{
+  if (mState != State.ALL_APPS) {
+    mWorkspace.scrollLeft();
+  }
+}

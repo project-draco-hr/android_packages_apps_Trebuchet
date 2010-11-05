@@ -1,0 +1,4 @@
+{
+  mPaint.setAlpha(alpha);
+  return super.onSetAlpha(alpha);
+}

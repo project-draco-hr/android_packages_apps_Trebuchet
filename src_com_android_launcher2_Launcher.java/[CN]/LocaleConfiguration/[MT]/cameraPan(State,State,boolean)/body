@@ -1,0 +1,54 @@
+{
+  final Resources res=getResources();
+  final int duration=res.getInteger(R.integer.config_allAppsCameraPanTime);
+  final int workspaceHeight=mWorkspace.getHeight();
+  final boolean fromAllApps=(fromState == State.ALL_APPS);
+  final View fromView=fromAllApps ? (View)mAllAppsGrid : mHomeCustomizationDrawer;
+  final View toView=fromAllApps ? mHomeCustomizationDrawer : (View)mAllAppsGrid;
+  final float fromViewStartY=fromAllApps ? 0.0f : fromView.getY();
+  final float fromViewEndY=fromAllApps ? -fromView.getHeight() * 2 : workspaceHeight * 2;
+  final float toViewStartY=fromAllApps ? workspaceHeight * 2 : -toView.getHeight() * 2;
+  final float toViewEndY=fromAllApps ? workspaceHeight - toView.getHeight() : 0.0f;
+  mCustomizePagedView.endChoiceMode();
+  mAllAppsPagedView.endChoiceMode();
+  if (toState == State.ALL_APPS) {
+    mWorkspace.shrinkToBottom(animated);
+  }
+ else {
+    mWorkspace.shrinkToTop(animated);
+  }
+  if (animated) {
+    if (mStateAnimation != null)     mStateAnimation.cancel();
+    mStateAnimation=new AnimatorSet();
+    mStateAnimation.addListener(new LauncherAnimatorListenerAdapter(){
+      @Override public void onAnimationStart(      Animator animation){
+        toView.setVisibility(View.VISIBLE);
+        toView.setY(toViewStartY);
+      }
+      @Override public void onAnimationEndOrCancel(      Animator animation){
+        fromView.setVisibility(View.GONE);
+      }
+    }
+);
+    AnimatorSet toolbarHideAnim=new AnimatorSet();
+    AnimatorSet toolbarShowAnim=new AnimatorSet();
+    hideAndShowToolbarButtons(toState,toolbarShowAnim,toolbarHideAnim);
+    ObjectAnimator fromAnim=ObjectAnimator.ofFloat(fromView,"y",fromViewStartY,fromViewEndY);
+    fromAnim.setDuration(duration);
+    ObjectAnimator toAnim=ObjectAnimator.ofPropertyValuesHolder(toView,PropertyValuesHolder.ofFloat("y",toViewStartY,toViewEndY),PropertyValuesHolder.ofFloat("scaleX",toView.getScaleX(),1.0f),PropertyValuesHolder.ofFloat("scaleY",toView.getScaleY(),1.0f));
+    fromAnim.setDuration(duration);
+    mStateAnimation.playTogether(toolbarHideAnim,fromAnim,toAnim);
+    final int fadeInTime=res.getInteger(R.integer.config_toolbarButtonFadeInTime);
+    mStateAnimation.play(toolbarShowAnim).after(duration - fadeInTime);
+    mStateAnimation.start();
+  }
+ else {
+    fromView.setY(fromViewEndY);
+    fromView.setVisibility(View.GONE);
+    toView.setY(toViewEndY);
+    toView.setScaleX(1.0f);
+    toView.setScaleY(1.0f);
+    toView.setVisibility(View.VISIBLE);
+    hideAndShowToolbarButtons(toState,null,null);
+  }
+}

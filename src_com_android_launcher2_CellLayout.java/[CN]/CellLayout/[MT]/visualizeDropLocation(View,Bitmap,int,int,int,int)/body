@@ -1,0 +1,35 @@
+{
+  final int oldDragCellX=mDragCell[0];
+  final int oldDragCellY=mDragCell[1];
+  final int[] nearest=findNearestVacantArea(originX,originY,spanX,spanY,v,mDragCell);
+  if (v != null) {
+    mDragCenter.set(originX + (v.getWidth() / 2),originY + (v.getHeight() / 2));
+  }
+ else {
+    mDragCenter.set(originX,originY);
+  }
+  if (nearest != null && (nearest[0] != oldDragCellX || nearest[1] != oldDragCellY)) {
+    final int[] topLeft=mTmpPoint;
+    cellToPoint(nearest[0],nearest[1],topLeft);
+    int left=topLeft[0];
+    int top=topLeft[1];
+    if (v != null) {
+      if (v.getParent() instanceof CellLayout) {
+        LayoutParams lp=(LayoutParams)v.getLayoutParams();
+        left+=lp.leftMargin;
+        top+=lp.topMargin;
+      }
+      left+=(v.getWidth() - dragOutline.getWidth()) / 2;
+      top+=(v.getHeight() - dragOutline.getHeight()) / 2;
+    }
+    final int oldIndex=mDragOutlineCurrent;
+    mDragOutlineAnims[oldIndex].animateOut();
+    mDragOutlineCurrent=(oldIndex + 1) % mDragOutlines.length;
+    mDragOutlines[mDragOutlineCurrent].set(left,top);
+    mDragOutlineAnims[mDragOutlineCurrent].setTag(dragOutline);
+    mDragOutlineAnims[mDragOutlineCurrent].animateIn();
+  }
+  if (mCrosshairsDrawable != null) {
+    invalidate();
+  }
+}

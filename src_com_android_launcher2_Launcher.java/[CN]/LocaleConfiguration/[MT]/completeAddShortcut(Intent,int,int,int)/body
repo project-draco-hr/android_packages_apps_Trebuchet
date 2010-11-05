@@ -1,0 +1,13 @@
+{
+  final int[] cellXY=mTmpAddItemCellCoordinates;
+  final CellLayout layout=(CellLayout)mWorkspace.getChildAt(screen);
+  if (!layout.findCellForSpanThatIntersects(cellXY,1,1,intersectCellX,intersectCellY)) {
+    showOutOfSpaceMessage();
+    return;
+  }
+  final ShortcutInfo info=mModel.addShortcut(this,data,screen,cellXY[0],cellXY[1],false);
+  if (!mRestoring) {
+    final View view=createShortcut(info);
+    mWorkspace.addInScreen(view,screen,cellXY[0],cellXY[1],1,1,isWorkspaceLocked());
+  }
+}

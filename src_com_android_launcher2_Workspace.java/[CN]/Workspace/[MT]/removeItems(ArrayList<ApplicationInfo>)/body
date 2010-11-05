@@ -1,5 +1,5 @@
 {
-  final int count=getChildCount();
+  final int screenCount=getChildCount();
   final PackageManager manager=getContext().getPackageManager();
   final AppWidgetManager widgets=AppWidgetManager.getInstance(getContext());
   final HashSet<String> packageNames=new HashSet<String>();
@@ -7,7 +7,7 @@
   for (int i=0; i < appCount; i++) {
     packageNames.add(apps.get(i).componentName.getPackageName());
   }
-  for (int i=0; i < count; i++) {
+  for (int i=0; i < screenCount; i++) {
     final CellLayout layout=(CellLayout)getChildAt(i);
     post(new Runnable(){
       public void run(){

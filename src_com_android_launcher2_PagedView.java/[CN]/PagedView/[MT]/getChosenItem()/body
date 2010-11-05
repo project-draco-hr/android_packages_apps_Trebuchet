@@ -1,0 +1,7 @@
+{
+  View checkedView=(View)getSingleCheckedGrandchild();
+  if (checkedView != null) {
+    return checkedView.getTag();
+  }
+  return null;
+}

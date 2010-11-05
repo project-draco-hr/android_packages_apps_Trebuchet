@@ -1,0 +1,12 @@
+{
+  int x=Math.abs(screen - 2);
+switch (x) {
+case 0:
+    return EXTRA_SCALE_FACTOR_0;
+case 1:
+  return EXTRA_SCALE_FACTOR_1;
+case 2:
+return EXTRA_SCALE_FACTOR_2;
+}
+return 1.0f;
+}

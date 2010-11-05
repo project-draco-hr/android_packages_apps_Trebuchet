@@ -1,0 +1,3 @@
+{
+  return addViewToCellLayout(child,index,childId,params,true);
+}

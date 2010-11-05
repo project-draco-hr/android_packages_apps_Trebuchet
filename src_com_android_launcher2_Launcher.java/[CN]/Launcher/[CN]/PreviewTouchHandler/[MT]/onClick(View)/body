@@ -1,4 +1,0 @@
-{
-  mWorkspace.snapToScreen((Integer)v.getTag());
-  v.post(this);
-}

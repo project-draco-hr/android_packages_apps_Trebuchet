@@ -1,0 +1,14 @@
+{
+  if (mDimmedView == null) {
+    mDimmedView=Bitmap.createBitmap(getMeasuredWidth(),getMeasuredHeight(),Bitmap.Config.ARGB_8888);
+    mDimmedViewCanvas=new Canvas(mDimmedView);
+  }
+  mDimmedViewCanvas.drawColor(0x00000000);
+  mDimmedViewCanvas.concat(getMatrix());
+  isDimmedViewUpdatePass=true;
+  draw(mDimmedViewCanvas);
+  int dimmedColor=getContext().getResources().getColor(R.color.dimmed_view_color);
+  mDimmedViewCanvas.drawColor(dimmedColor,PorterDuff.Mode.SRC_IN);
+  isDimmedViewUpdatePass=false;
+  invalidate();
+}

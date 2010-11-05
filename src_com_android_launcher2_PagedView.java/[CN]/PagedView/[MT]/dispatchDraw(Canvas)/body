@@ -1,0 +1,31 @@
+{
+  int halfScreenSize=getMeasuredWidth() / 2;
+  int screenCenter=mScrollX + halfScreenSize;
+  if (screenCenter != mLastScreenCenter) {
+    screenScrolled(screenCenter);
+    updateAdjacentPagesAlpha();
+    mLastScreenCenter=screenCenter;
+  }
+  final int pageCount=getChildCount();
+  if (pageCount > 0) {
+    final int pageWidth=getChildAt(0).getMeasuredWidth();
+    final int screenWidth=getMeasuredWidth();
+    int x=getRelativeChildOffset(0) + pageWidth;
+    int leftScreen=0;
+    int rightScreen=0;
+    while (x <= mScrollX) {
+      leftScreen++;
+      x+=pageWidth + mPageSpacing;
+    }
+    rightScreen=leftScreen;
+    while (x < mScrollX + screenWidth) {
+      rightScreen++;
+      x+=pageWidth + mPageSpacing;
+    }
+    rightScreen=Math.min(getChildCount() - 1,rightScreen);
+    final long drawingTime=getDrawingTime();
+    for (int i=leftScreen; i <= rightScreen; i++) {
+      drawChild(canvas,getChildAt(i),drawingTime);
+    }
+  }
+}

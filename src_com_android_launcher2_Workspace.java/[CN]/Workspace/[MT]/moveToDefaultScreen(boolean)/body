@@ -1,9 +1,12 @@
 {
-  if (animate) {
-    snapToScreen(mDefaultScreen);
+  if (mIsSmall || mIsInUnshrinkAnimation) {
+    mLauncher.showWorkspace(animate,(CellLayout)getChildAt(mDefaultPage));
+  }
+ else   if (animate) {
+    snapToPage(mDefaultPage);
   }
  else {
-    setCurrentScreen(mDefaultScreen);
+    setCurrentPage(mDefaultPage);
   }
-  getChildAt(mDefaultScreen).requestFocus();
+  getChildAt(mDefaultPage).requestFocus();
 }

@@ -3,14 +3,5 @@
     sRollo.clearSelectedIcon();
     sRollo.setHomeSelected(SELECTED_NONE);
   }
-  if (zoom > 0.001f) {
-    sRollo.mState.zoomTarget=zoom;
-  }
- else {
-    sRollo.mState.zoomTarget=0;
-  }
-  sRollo.mState.save();
-  if (!animate) {
-    sRollo.mInvokeSetZoom.execute();
-  }
+  sRollo.mScript.invoke_setZoom(zoom,animate ? 1 : 0);
 }

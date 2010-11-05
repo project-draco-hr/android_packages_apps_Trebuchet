@@ -1,0 +1,4 @@
+{
+  mWidthGap=widthGap;
+  mHeightGap=heightGap;
+}

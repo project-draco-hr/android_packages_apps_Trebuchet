@@ -1,0 +1,52 @@
+{
+switch (v.getId()) {
+case R.id.previous_screen:
+    if (mState != State.ALL_APPS) {
+      mWorkspace.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS,HapticFeedbackConstants.FLAG_IGNORE_VIEW_SETTING);
+      showPreviews(v);
+    }
+  return true;
+case R.id.next_screen:
+if (mState != State.ALL_APPS) {
+  mWorkspace.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS,HapticFeedbackConstants.FLAG_IGNORE_VIEW_SETTING);
+  showPreviews(v);
+}
+return true;
+case R.id.all_apps_button:
+if (mState != State.ALL_APPS) {
+mWorkspace.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS,HapticFeedbackConstants.FLAG_IGNORE_VIEW_SETTING);
+showPreviews(v);
+}
+return true;
+}
+if (isWorkspaceLocked()) {
+return false;
+}
+if (!(v instanceof CellLayout)) {
+v=(View)v.getParent();
+}
+resetAddInfo();
+CellLayout.CellInfo longClickCellInfo=(CellLayout.CellInfo)v.getTag();
+if (longClickCellInfo == null || !longClickCellInfo.valid) {
+return true;
+}
+final View itemUnderLongClick=longClickCellInfo.cell;
+if (mWorkspace.allowLongPress()) {
+if (itemUnderLongClick == null) {
+mWorkspace.setAllowLongPress(false);
+mWorkspace.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS,HapticFeedbackConstants.FLAG_IGNORE_VIEW_SETTING);
+if (!LauncherApplication.isScreenXLarge()) {
+showAddDialog(longClickCellInfo.cellX,longClickCellInfo.cellY);
+}
+}
+ else {
+if (!(itemUnderLongClick instanceof Folder)) {
+mWorkspace.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS,HapticFeedbackConstants.FLAG_IGNORE_VIEW_SETTING);
+mAddIntersectCellX=longClickCellInfo.cellX;
+mAddIntersectCellY=longClickCellInfo.cellY;
+mWorkspace.startDrag(longClickCellInfo);
+}
+}
+}
+return true;
+}

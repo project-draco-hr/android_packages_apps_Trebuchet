@@ -1,0 +1,9 @@
+{
+  super(context,attrs,defStyle);
+  setAlwaysDrawnWithCacheEnabled(false);
+  mCellWidth=mCellHeight=sDefaultCellDimensions;
+  mCellCountX=LauncherModel.getCellCountX();
+  mCellCountY=LauncherModel.getCellCountY();
+  mHolographicAlpha=0.0f;
+  mWidthGap=mHeightGap=-1;
+}

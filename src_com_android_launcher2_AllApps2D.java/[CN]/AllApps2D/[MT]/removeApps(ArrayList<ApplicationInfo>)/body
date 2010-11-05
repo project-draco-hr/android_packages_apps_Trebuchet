@@ -10,5 +10,5 @@
       Log.w(TAG,"couldn't find a match for item \"" + item + "\"");
     }
   }
-  mAppsAdapter.notifyDataSetChanged();
+  filterApps(mCurrentFilter);
 }

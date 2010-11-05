@@ -1,0 +1,30 @@
+{
+  final int screenCount=getChildCount();
+  CellLayout bestMatchingScreen=null;
+  float smallestDistSoFar=Float.MAX_VALUE;
+  for (int i=0; i < screenCount; i++) {
+    CellLayout cl=(CellLayout)getChildAt(i);
+    final float[] touchXy=mTempTouchCoordinates;
+    touchXy[0]=originX + offsetX;
+    touchXy[1]=originY + offsetY;
+    cl.getMatrix().invert(mTempInverseMatrix);
+    mapPointFromSelfToChild(cl,touchXy,mTempInverseMatrix);
+    if (touchXy[0] >= 0 && touchXy[0] <= cl.getWidth() && touchXy[1] >= 0 && touchXy[1] <= cl.getHeight()) {
+      return cl;
+    }
+    if (overlaps(cl,dragView,originX,originY,mTempInverseMatrix)) {
+      final float[] cellLayoutCenter=mTempCellLayoutCenterCoordinates;
+      cellLayoutCenter[0]=cl.getWidth() / 2;
+      cellLayoutCenter[1]=cl.getHeight() / 2;
+      mapPointFromChildToSelf(cl,cellLayoutCenter);
+      touchXy[0]=originX + offsetX;
+      touchXy[1]=originY + offsetY;
+      float dist=squaredDistance(touchXy,cellLayoutCenter);
+      if (dist < smallestDistSoFar) {
+        smallestDistSoFar=dist;
+        bestMatchingScreen=cl;
+      }
+    }
+  }
+  return bestMatchingScreen;
+}

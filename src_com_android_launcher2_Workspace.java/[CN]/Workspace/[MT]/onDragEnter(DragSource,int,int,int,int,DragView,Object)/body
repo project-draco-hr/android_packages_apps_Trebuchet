@@ -1,3 +1,11 @@
 {
-  clearVacantCache();
+  mDragTargetLayout=null;
+  if (!mIsSmall) {
+    mDragTargetLayout=getCurrentDropLayout();
+    mDragTargetLayout.onDragEnter();
+    showOutlines();
+    mInDragMode=true;
+    CellLayout cl=(CellLayout)getChildAt(mCurrentPage);
+    cl.setBackgroundAlphaMultiplier(1.0f);
+  }
 }
