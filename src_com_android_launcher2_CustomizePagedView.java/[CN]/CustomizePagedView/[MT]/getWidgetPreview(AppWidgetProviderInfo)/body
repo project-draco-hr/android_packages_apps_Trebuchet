@@ -37,20 +37,20 @@
     drawable=new FastBitmapDrawable(bitmap);
   }
  else {
-    final float aspect=(float)info.minWidth / info.minHeight;
-    final int boundedWidth=(int)Math.max(minDim,Math.min(maxDim,info.minWidth));
-    final int boundedHeight=(int)Math.max(minDim,Math.min(maxDim,info.minHeight));
-    final int scaledWidth=(int)(boundedWidth * sScaleFactor);
-    final int scaledHeight=(int)(boundedHeight * sScaleFactor);
+    final float imageWidth=drawable.getIntrinsicWidth();
+    final float imageHeight=drawable.getIntrinsicHeight();
+    final float aspect=(float)imageWidth / imageHeight;
+    final int scaledWidth=(int)(Math.max(minDim,Math.min(maxDim,imageWidth)) * sScaleFactor);
+    final int scaledHeight=(int)(Math.max(minDim,Math.min(maxDim,imageHeight)) * sScaleFactor);
     int width;
     int height;
-    if (scaledWidth > scaledHeight) {
+    if (aspect >= 1.0f) {
       width=scaledWidth;
-      height=(int)(width / aspect);
+      height=(int)(((float)scaledWidth / imageWidth) * imageHeight);
     }
  else {
       height=scaledHeight;
-      width=(int)(height * aspect);
+      width=(int)(((float)scaledHeight / imageHeight) * imageWidth);
     }
     final Bitmap bitmap=Bitmap.createBitmap(width,height,Config.ARGB_8888);
     renderDrawableToBitmap(drawable,bitmap,0,0,width,height);
