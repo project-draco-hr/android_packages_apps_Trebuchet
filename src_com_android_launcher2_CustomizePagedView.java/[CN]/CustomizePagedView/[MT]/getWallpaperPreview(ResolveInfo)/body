@@ -1,0 +1,22 @@
+{
+  final int minDim=mWorkspaceWidgetLayout.estimateCellWidth(1);
+  final int dim=mWorkspaceWidgetLayout.estimateCellWidth(mWallpaperCellHSpan);
+  Resources resources=mLauncher.getResources();
+  int width=(int)(dim * sScaleFactor);
+  int height=(int)(dim * sScaleFactor);
+  final Bitmap bitmap=Bitmap.createBitmap(width,height,Config.ARGB_8888);
+  final Drawable background=resources.getDrawable(R.drawable.default_widget_preview);
+  renderDrawableToBitmap(background,bitmap,0,0,width,height);
+  try {
+    final IconCache iconCache=((LauncherApplication)mLauncher.getApplication()).getIconCache();
+    Drawable icon=new FastBitmapDrawable(Utilities.createIconBitmap(iconCache.getFullResIcon(info,mPackageManager),mContext));
+    final int iconSize=minDim / 2;
+    final int offset=iconSize / 4;
+    renderDrawableToBitmap(icon,null,offset,offset,iconSize,iconSize);
+  }
+ catch (  Resources.NotFoundException e) {
+  }
+  Drawable drawable=new FastBitmapDrawable(bitmap);
+  drawable.setBounds(0,0,drawable.getIntrinsicWidth(),drawable.getIntrinsicHeight());
+  return drawable;
+}

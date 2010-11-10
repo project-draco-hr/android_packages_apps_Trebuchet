@@ -9,8 +9,7 @@ syncListPages(mShortcutList);
 centerPagedViewCellLayouts=true;
 break;
 case WallpaperCustomization:
-syncListPages(mWallpaperList);
-centerPagedViewCellLayouts=true;
+syncWallpaperPages();
 break;
 case ApplicationCustomization:
 syncAppPages();

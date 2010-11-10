@@ -1,5 +1,5 @@
 {
-  PackageManager packageManager=mLauncher.getPackageManager();
+  final PackageManager packageManager=mPackageManager;
   String packageName=info.provider.getPackageName();
   Drawable drawable=null;
   if (info.previewImage != 0) {
@@ -18,7 +18,6 @@
     final Drawable background=resources.getDrawable(R.drawable.default_widget_preview);
     renderDrawableToBitmap(background,bitmap,0,0,width,height);
     try {
-      Rect tmpRect=new Rect();
       Drawable icon=null;
       if (info.icon > 0) {
         icon=packageManager.getDrawable(packageName,info.icon,null);
@@ -26,11 +25,9 @@
       if (icon == null) {
         icon=resources.getDrawable(R.drawable.ic_launcher_application);
       }
-      background.getPadding(tmpRect);
       final int iconSize=minDim / 2;
       final int offset=iconSize / 4;
-      final int offsetIconSize=offset + iconSize;
-      renderDrawableToBitmap(icon,null,offset,offset,offsetIconSize,offsetIconSize);
+      renderDrawableToBitmap(icon,null,offset,offset,iconSize,iconSize);
     }
  catch (    Resources.NotFoundException e) {
     }

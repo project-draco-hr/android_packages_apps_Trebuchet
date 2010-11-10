@@ -1,6 +1,6 @@
 Drawable d
 Bitmap bitmap
-int l
-int t
-int r
-int b
+int x
+int y
+int w
+int h

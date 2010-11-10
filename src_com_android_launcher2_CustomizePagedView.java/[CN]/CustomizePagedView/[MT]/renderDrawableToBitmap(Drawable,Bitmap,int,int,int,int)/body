@@ -1,7 +1,7 @@
 {
   if (bitmap != null)   mCanvas.setBitmap(bitmap);
   mCanvas.save();
-  d.setBounds(l,t,r,b);
+  d.setBounds(x,y,x + w,y + h);
   d.draw(mCanvas);
   mCanvas.restore();
 }

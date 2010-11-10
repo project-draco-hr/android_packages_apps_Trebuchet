@@ -1,4 +1,5 @@
 {
+  if (getChildCount() <= 0)   return super.onTouchEvent(ev);
   acquireVelocityTrackerAndAddMovement(ev);
   final int action=ev.getAction();
 switch (action & MotionEvent.ACTION_MASK) {

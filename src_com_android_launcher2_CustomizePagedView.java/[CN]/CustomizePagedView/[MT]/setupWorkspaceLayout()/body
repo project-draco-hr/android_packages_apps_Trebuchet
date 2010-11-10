@@ -2,4 +2,5 @@
   mWorkspaceWidgetLayout.setCellCount(mCellCountX,mCellCountY);
   mWorkspaceWidgetLayout.setPadding(20,10,20,0);
   mMaxWidgetWidth=mWorkspaceWidgetLayout.estimateCellWidth(sMaxWidgetCellHSpan);
+  mMaxWallpaperWidth=mWorkspaceWidgetLayout.estimateCellWidth(mWallpaperCellHSpan);
 }
