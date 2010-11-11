@@ -1,0 +1,16 @@
+{
+  boolean autoAdvanceRunning=mVisible && mUserPresent && !mWidgetsToAdvance.isEmpty();
+  if (autoAdvanceRunning != mAutoAdvanceRunning) {
+    mAutoAdvanceRunning=autoAdvanceRunning;
+    if (autoAdvanceRunning) {
+      long delay=mAutoAdvanceTimeLeft == -1 ? mAdvanceInterval : mAutoAdvanceTimeLeft;
+      sendAdvanceMessage(delay);
+    }
+ else {
+      if (!mWidgetsToAdvance.isEmpty()) {
+        mAutoAdvanceTimeLeft=Math.max(0,mAdvanceInterval - (System.currentTimeMillis() - mAutoAdvanceSentTime));
+      }
+      mHandler.removeMessages(ADVANCE_MSG);
+    }
+  }
+}

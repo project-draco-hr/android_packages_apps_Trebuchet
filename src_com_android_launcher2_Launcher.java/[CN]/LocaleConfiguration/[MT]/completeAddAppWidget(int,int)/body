@@ -38,5 +38,6 @@
     launcherInfo.hostView.setAppWidget(appWidgetId,appWidgetInfo);
     launcherInfo.hostView.setTag(launcherInfo);
     mWorkspace.addInScreen(launcherInfo.hostView,screen,cellXY[0],cellXY[1],launcherInfo.spanX,launcherInfo.spanY,isWorkspaceLocked());
+    addWidgetToAutoAdvanceIfNeeded(launcherInfo.hostView,appWidgetInfo);
   }
 }

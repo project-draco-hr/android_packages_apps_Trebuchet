@@ -2,6 +2,7 @@
   super(context,attrs,defStyle);
   TypedArray a;
   a=context.obtainStyledAttributes(attrs,R.styleable.CustomizePagedView,defStyle,0);
+  mWallpaperCellHSpan=a.getInt(R.styleable.CustomizePagedView_wallpaperCellSpanX,4);
   mMaxWidgetsCellHSpan=a.getInt(R.styleable.CustomizePagedView_widgetCellCountX,8);
   a.recycle();
   a=context.obtainStyledAttributes(attrs,R.styleable.PagedView,defStyle,0);

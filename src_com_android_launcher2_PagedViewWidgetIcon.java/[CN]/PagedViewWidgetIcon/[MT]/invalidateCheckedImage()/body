@@ -1,6 +1,0 @@
-{
-  if (mCheckedOutline != null) {
-    mCheckedOutline.recycle();
-    mCheckedOutline=null;
-  }
-}

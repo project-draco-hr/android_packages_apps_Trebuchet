@@ -14,6 +14,7 @@
   item.hostView.setAppWidget(appWidgetId,appWidgetInfo);
   item.hostView.setTag(item);
   workspace.addInScreen(item.hostView,item.screen,item.cellX,item.cellY,item.spanX,item.spanY,false);
+  addWidgetToAutoAdvanceIfNeeded(item.hostView,appWidgetInfo);
   workspace.requestLayout();
   mDesktopItems.add(item);
   if (DEBUG_WIDGETS) {

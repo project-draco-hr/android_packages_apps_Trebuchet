@@ -1,0 +1,18 @@
+{
+  LinearLayout layout=(LinearLayout)getChildAt(page);
+  layout.removeAllViews();
+  final int count=mWallpaperList.size();
+  for (int i=0; i < count; ++i) {
+    final ResolveInfo info=mWallpaperList.get(i);
+    LinearLayout l=(LinearLayout)mInflater.inflate(R.layout.customize_paged_view_wallpaper,layout,false);
+    l.setTag(info);
+    l.setOnClickListener(this);
+    final Drawable icon=getWallpaperPreview(info);
+    ImageView image=(ImageView)l.findViewById(R.id.wallpaper_preview);
+    image.setMaxWidth(mMaxWidgetWidth);
+    image.setImageDrawable(icon);
+    TextView name=(TextView)l.findViewById(R.id.wallpaper_name);
+    name.setText(info.loadLabel(mPackageManager));
+    layout.addView(l);
+  }
+}

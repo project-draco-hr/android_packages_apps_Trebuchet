@@ -1,7 +1,7 @@
 {
-  if (mWidgetList == null)   return;
+  if (mWallpaperList == null)   return;
   removeAllViews();
-  int numPages=relayoutWidgets();
+  int numPages=(int)Math.ceil((float)(mWallpaperList.size() * mWallpaperCellHSpan) / mMaxWidgetsCellHSpan);
   for (int i=0; i < numPages; ++i) {
     LinearLayout layout=new PagedViewExtendedLayout(getContext());
     layout.setGravity(Gravity.CENTER_HORIZONTAL);
