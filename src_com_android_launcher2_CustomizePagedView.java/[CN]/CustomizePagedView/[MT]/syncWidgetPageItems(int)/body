@@ -9,6 +9,7 @@
     LinearLayout l=(LinearLayout)mInflater.inflate(R.layout.customize_paged_view_widget,layout,false);
     l.setTag(createItemInfo);
     l.setOnClickListener(this);
+    l.setOnTouchListener(this);
     l.setOnLongClickListener(this);
     final Drawable icon=getWidgetPreview(info);
     int[] spans=CellLayout.rectToCell(getResources(),info.minWidth,info.minHeight,null);
