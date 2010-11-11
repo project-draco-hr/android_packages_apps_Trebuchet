@@ -8,8 +8,7 @@
       float scrollProgress=delta / (totalDistance * 1.0f);
       scrollProgress=Math.min(scrollProgress,1.0f);
       scrollProgress=Math.max(scrollProgress,-1.0f);
-      float mult=mInDragMode ? 1.0f : Math.abs(scrollProgress);
-      cl.setBackgroundAlphaMultiplier(mult);
+      cl.setBackgroundAlphaMultiplier(Math.abs(scrollProgress));
       float rotation=WORKSPACE_ROTATION * scrollProgress;
       cl.setRotationY(rotation);
     }

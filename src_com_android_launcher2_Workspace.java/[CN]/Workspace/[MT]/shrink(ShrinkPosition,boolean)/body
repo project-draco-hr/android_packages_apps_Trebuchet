@@ -11,6 +11,9 @@
   mTouchState=TOUCH_STATE_REST;
   mActivePointerId=INVALID_POINTER;
   CellLayout currentPage=(CellLayout)getChildAt(mCurrentPage);
+  if (currentPage.getBackgroundAlphaMultiplier() < 1.0f) {
+    currentPage.setBackgroundAlpha(0.0f);
+  }
   currentPage.setBackgroundAlphaMultiplier(1.0f);
   final Resources res=getResources();
   final int screenWidth=getWidth();
