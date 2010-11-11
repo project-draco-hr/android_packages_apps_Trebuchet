@@ -1,13 +1,2 @@
 {
-  final Rect clipRect=mTempRect;
-  v.getDrawingRect(clipRect);
-  if (v instanceof TextView) {
-    final int iconHeight=((TextView)v).getCompoundPaddingTop() - v.getPaddingTop();
-    clipRect.bottom=clipRect.top + iconHeight;
-  }
-  destCanvas.save();
-  destCanvas.translate(-v.getScrollX() + padding / 2,-v.getScrollY() + padding / 2);
-  destCanvas.clipRect(clipRect,Op.REPLACE);
-  v.draw(destCanvas);
-  destCanvas.restore();
 }
