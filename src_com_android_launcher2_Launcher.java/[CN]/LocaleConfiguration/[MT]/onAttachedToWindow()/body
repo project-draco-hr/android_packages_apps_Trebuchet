@@ -4,5 +4,6 @@
   filter.addAction(Intent.ACTION_SCREEN_OFF);
   filter.addAction(Intent.ACTION_USER_PRESENT);
   registerReceiver(mReceiver,filter);
+  mAttached=true;
   mVisible=true;
 }
