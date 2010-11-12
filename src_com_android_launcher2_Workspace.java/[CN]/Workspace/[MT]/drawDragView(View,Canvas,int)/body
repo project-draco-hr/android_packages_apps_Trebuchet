@@ -1,2 +1,13 @@
 {
+  final Rect clipRect=mTempRect;
+  v.getDrawingRect(clipRect);
+  if (v instanceof TextView) {
+    final TextView tv=(TextView)v;
+    clipRect.bottom=clipRect.top + tv.getCompoundPaddingTop() - 1;
+  }
+  destCanvas.save();
+  destCanvas.translate(-v.getScrollX() + padding / 2,-v.getScrollY() + padding / 2);
+  destCanvas.clipRect(clipRect,Op.REPLACE);
+  v.draw(destCanvas);
+  destCanvas.restore();
 }

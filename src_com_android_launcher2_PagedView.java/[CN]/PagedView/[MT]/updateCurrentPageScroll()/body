@@ -1,0 +1,5 @@
+{
+  int newX=getChildOffset(mCurrentPage) - getRelativeChildOffset(mCurrentPage);
+  scrollTo(newX,0);
+  mScroller.setFinalX(newX);
+}
