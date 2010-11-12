@@ -57,9 +57,12 @@
     float rotationScaleY=getYScaleForScreen(i);
     if (animated) {
       final int duration=res.getInteger(R.integer.config_workspaceShrinkTime);
-      ObjectAnimator anim=ObjectAnimator.ofPropertyValuesHolder(cl,PropertyValuesHolder.ofFloat("x",newX),PropertyValuesHolder.ofFloat("y",newY),PropertyValuesHolder.ofFloat("scaleX",SHRINK_FACTOR * rotationScaleX * extraShrinkFactor),PropertyValuesHolder.ofFloat("scaleY",SHRINK_FACTOR * rotationScaleY * extraShrinkFactor),PropertyValuesHolder.ofFloat("backgroundAlpha",finalAlpha),PropertyValuesHolder.ofFloat("alpha",finalAlpha),PropertyValuesHolder.ofFloat("rotationY",rotation));
+      ObjectAnimator anim=ObjectAnimator.ofPropertyValuesHolder(cl,PropertyValuesHolder.ofFloat("backgroundAlpha",finalAlpha),PropertyValuesHolder.ofFloat("alpha",finalAlpha),PropertyValuesHolder.ofFloat("rotationY",rotation));
       anim.setDuration(duration);
-      mAnimator.playTogether(anim);
+      ObjectAnimator animWithInterpolator=ObjectAnimator.ofPropertyValuesHolder(cl,PropertyValuesHolder.ofFloat("x",newX),PropertyValuesHolder.ofFloat("y",newY),PropertyValuesHolder.ofFloat("scaleX",SHRINK_FACTOR * rotationScaleX * extraShrinkFactor),PropertyValuesHolder.ofFloat("scaleY",SHRINK_FACTOR * rotationScaleY * extraShrinkFactor));
+      animWithInterpolator.setDuration(duration);
+      animWithInterpolator.setInterpolator(mZInterpolator);
+      mAnimator.playTogether(anim,animWithInterpolator);
     }
  else {
       cl.setX((int)newX);
