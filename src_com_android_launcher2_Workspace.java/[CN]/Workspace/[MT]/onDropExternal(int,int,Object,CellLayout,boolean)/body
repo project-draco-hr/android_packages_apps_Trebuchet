@@ -42,7 +42,8 @@ if (view == null) {
 cellLayout.onDragExit();
 }
  else {
-mTargetCell=findNearestVacantArea(x,y,1,1,null,cellLayout,mTargetCell);
+mTargetCell=new int[]{x,y};
+cellLayout.findCellForSpan(mTargetCell,1,1);
 addInScreen(view,indexOfChild(cellLayout),mTargetCell[0],mTargetCell[1],info.spanX,info.spanY,insertAtFirst);
 cellLayout.onDropChild(view);
 cellLayout.animateDrop();

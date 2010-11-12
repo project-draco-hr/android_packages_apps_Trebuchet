@@ -6,9 +6,7 @@
     return;
   }
   mCurrentPage=Math.max(0,Math.min(currentPage,getPageCount() - 1));
-  int newX=getChildOffset(mCurrentPage) - getRelativeChildOffset(mCurrentPage);
-  scrollTo(newX,0);
-  mScroller.setFinalX(newX);
+  updateCurrentPageScroll();
   invalidate();
   notifyPageSwitchListener();
 }

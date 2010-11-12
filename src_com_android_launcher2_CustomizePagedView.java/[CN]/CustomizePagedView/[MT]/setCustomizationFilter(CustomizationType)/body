@@ -1,6 +1,7 @@
 {
   mCustomizationType=filterType;
   setCurrentPage(0);
+  updateCurrentPageScroll();
   invalidatePageData();
   endChoiceMode();
 }
