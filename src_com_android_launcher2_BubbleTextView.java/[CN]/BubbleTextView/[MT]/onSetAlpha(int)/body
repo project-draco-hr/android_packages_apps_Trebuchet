@@ -1,4 +1,8 @@
 {
-  mPaint.setAlpha(alpha);
-  return super.onSetAlpha(alpha);
+  if (mPrevAlpha != alpha) {
+    mPrevAlpha=alpha;
+    mPaint.setAlpha(alpha);
+    super.onSetAlpha(alpha);
+  }
+  return true;
 }
