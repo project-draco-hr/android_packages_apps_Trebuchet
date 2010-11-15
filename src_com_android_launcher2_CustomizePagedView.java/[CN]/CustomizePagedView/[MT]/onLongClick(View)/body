@@ -1,6 +1,6 @@
 {
   if (!v.isInTouchMode())   return false;
-  if (mNextPage == INVALID_PAGE)   return false;
+  if (mNextPage != INVALID_PAGE)   return false;
   if (isChoiceMode(CHOICE_MODE_SINGLE)) {
     endChoiceMode();
   }
