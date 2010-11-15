@@ -1,0 +1,13 @@
+{
+  float pivotA=0.1f;
+  float pivotB=0.4f;
+  if (r < pivotA) {
+    return 0;
+  }
+ else   if (r > pivotB) {
+    return 1.0f;
+  }
+ else {
+    return (r - pivotA) / (pivotB - pivotA);
+  }
+}

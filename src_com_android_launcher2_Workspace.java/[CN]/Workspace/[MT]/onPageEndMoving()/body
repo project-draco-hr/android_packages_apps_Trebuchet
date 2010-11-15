@@ -7,5 +7,6 @@
     mAnimOnPageEndMoving.start();
     mAnimOnPageEndMoving=null;
   }
+  mOverScrollMaxBackgroundAlpha=0.0f;
   mPageMoving=false;
 }

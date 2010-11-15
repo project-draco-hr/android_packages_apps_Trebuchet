@@ -10,7 +10,7 @@
     duration=Math.abs(delta);
   }
   if (!mScroller.isFinished())   mScroller.abortAnimation();
-  mScroller.startScroll(getScrollX(),0,delta,0,duration);
+  mScroller.startScroll(mUnboundedScrollX,0,delta,0,duration);
   loadAssociatedPages(mNextPage);
   notifyPageSwitchListener();
   invalidate();

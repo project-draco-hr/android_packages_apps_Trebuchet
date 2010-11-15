@@ -19,31 +19,14 @@ final int pointerIndex=ev.findPointerIndex(mActivePointerId);
 final float x=ev.getX(pointerIndex);
 final int deltaX=(int)(mLastMotionX - x);
 mLastMotionX=x;
-int sx=getScrollX();
-if (deltaX < 0) {
-if (sx > 0) {
-mTouchX+=Math.max(-mTouchX,deltaX);
+if (deltaX != 0) {
+mTouchX+=deltaX;
 mSmoothingTime=System.nanoTime() / NANOTIME_DIV;
 if (!mDeferScrollUpdate) {
-  scrollBy(Math.max(-sx,deltaX),0);
+scrollBy(deltaX,0);
 }
  else {
-  invalidate();
-}
-}
-}
- else if (deltaX > 0) {
-final int lastChildIndex=getChildCount() - 1;
-final int availableToScroll=getChildOffset(lastChildIndex) - getRelativeChildOffset(lastChildIndex) - sx;
-if (availableToScroll > 0) {
-mTouchX+=Math.min(availableToScroll,deltaX);
-mSmoothingTime=System.nanoTime() / NANOTIME_DIV;
-if (!mDeferScrollUpdate) {
-  scrollBy(Math.min(availableToScroll,deltaX),0);
-}
- else {
-  invalidate();
-}
+invalidate();
 }
 }
  else {
