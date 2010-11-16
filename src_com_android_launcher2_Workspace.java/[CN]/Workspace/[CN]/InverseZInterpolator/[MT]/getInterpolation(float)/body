@@ -1,0 +1,3 @@
+{
+  return 1 - mZInterpolator.getInterpolation(1 - input);
+}
