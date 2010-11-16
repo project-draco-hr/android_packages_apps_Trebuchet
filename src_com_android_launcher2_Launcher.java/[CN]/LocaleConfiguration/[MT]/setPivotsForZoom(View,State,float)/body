@@ -1,11 +1,11 @@
 {
   final int height=view.getHeight();
   view.setPivotX(view.getWidth() / 2.0f);
-  final int margin=getResources().getInteger(R.integer.config_allAppsVerticalOffset);
+  final float initialHeightFactor=0.2f;
   if (state == State.ALL_APPS) {
-    view.setPivotY(height + ((view.getTop() + height) / scaleFactor) + margin);
+    view.setPivotY((1 + initialHeightFactor) * height);
   }
  else {
-    view.setPivotY(0.0f - (view.getTop() / scaleFactor) - margin);
+    view.setPivotY(-initialHeightFactor * height);
   }
 }

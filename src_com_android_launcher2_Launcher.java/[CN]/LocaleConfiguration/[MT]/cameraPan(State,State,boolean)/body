@@ -24,6 +24,7 @@
       @Override public void onAnimationStart(      Animator animation){
         toView.setVisibility(View.VISIBLE);
         toView.setY(toViewStartY);
+        toView.setAlpha(1.0f);
       }
       @Override public void onAnimationEndOrCancel(      Animator animation){
         fromView.setVisibility(View.GONE);

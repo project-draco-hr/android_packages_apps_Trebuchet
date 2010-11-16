@@ -1,0 +1,3 @@
+{
+  return decelerate.getInterpolation(inverseZInterpolator.getInterpolation(input));
+}
