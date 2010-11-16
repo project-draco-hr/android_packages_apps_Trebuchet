@@ -1,0 +1,5 @@
+{
+  updateAppMarketIcon();
+  updateGlobalSearchIcon();
+  updateVoiceSearchIcon();
+}

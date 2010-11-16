@@ -5,5 +5,8 @@
     if (activityName != null) {
       updateButtonWithIconFromExternalActivity(R.id.search_button,activityName,R.drawable.search_button_generic);
     }
+ else {
+      findViewById(R.id.search_button).setVisibility(View.GONE);
+    }
   }
 }
