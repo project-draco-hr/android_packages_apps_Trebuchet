@@ -72,11 +72,13 @@
       cl.setBackgroundAlpha(finalAlpha);
       cl.setAlpha(finalAlpha);
       cl.setRotationY(rotation);
+      mShrinkAnimationListener.onAnimationEnd(null);
     }
     newX+=scaledPageWidth + extraScaledSpacing;
   }
   setLayoutScale(1.0f);
   if (animated) {
+    mAnimator.addListener(mShrinkAnimationListener);
     mAnimator.start();
   }
   setChildrenDrawnWithCacheEnabled(true);
