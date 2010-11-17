@@ -1,0 +1,27 @@
+{
+  if (getLayout() == null) {
+    mWaitingToGenerateCache=true;
+    return;
+  }
+  final Layout layout=getLayout();
+  final int left=getCompoundPaddingLeft();
+  final int top=getExtendedPaddingTop();
+  mTextCacheLeft=layout.getLineLeft(0);
+  mTextCacheTop=top + layout.getLineTop(0) - mPaddingV;
+  mRectLeft=mScrollX + getLeft();
+  mRectTop=0;
+  mTextCacheScrollX=mScrollX;
+  final float textCacheRight=Math.min(left + layout.getLineRight(0) + mPaddingH,mScrollX + mRight - mLeft);
+  final float textCacheBottom=top + layout.getLineBottom(0) + mPaddingV;
+  mCache=Bitmap.createBitmap((int)(textCacheRight - mTextCacheLeft),(int)(textCacheBottom - mTextCacheTop),Config.ARGB_8888);
+  Canvas c=new Canvas(mCache);
+  c.translate(-mTextCacheLeft,-mTextCacheTop);
+  mIsBuildingCache=true;
+  float alpha=getAlpha();
+  setAlpha(1.0f);
+  draw(c);
+  setAlpha(alpha);
+  mIsBuildingCache=false;
+  mCachePaint.setFilterBitmap(true);
+  setText(" ");
+}
