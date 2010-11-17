@@ -1,33 +1,5 @@
 {
   if (!v.isInTouchMode())   return false;
   if (mNextPage != INVALID_PAGE)   return false;
-  if (isChoiceMode(CHOICE_MODE_SINGLE)) {
-    endChoiceMode();
-  }
-  PendingAddItemInfo createItemInfo;
-switch (mCustomizationType) {
-case WidgetCustomization:
-    final LinearLayout l=(LinearLayout)v;
-  final Drawable icon=((ImageView)l.findViewById(R.id.widget_preview)).getDrawable();
-Bitmap b=Bitmap.createBitmap(icon.getIntrinsicWidth(),icon.getIntrinsicHeight(),Bitmap.Config.ARGB_8888);
-Canvas c=new Canvas(b);
-icon.draw(c);
-PendingAddWidgetInfo createWidgetInfo=(PendingAddWidgetInfo)v.getTag();
-mLauncher.getWorkspace().onDragStartedWithItemMinSize(createWidgetInfo.minWidth,createWidgetInfo.minHeight);
-mDragController.startDrag(v,b,this,createWidgetInfo,DragController.DRAG_ACTION_COPY,null);
-b.recycle();
-return true;
-case ShortcutCustomization:
-createItemInfo=(PendingAddItemInfo)v.getTag();
-mDragController.startDrag(v,this,createItemInfo,DragController.DRAG_ACTION_COPY,null);
-mLauncher.getWorkspace().onDragStartedWithItemSpans(1,1);
-return true;
-case ApplicationCustomization:
-ApplicationInfo app=(ApplicationInfo)v.getTag();
-app=new ApplicationInfo(app);
-mDragController.startDrag(v,this,app,DragController.DRAG_ACTION_COPY);
-mLauncher.getWorkspace().onDragStartedWithItemSpans(1,1);
-return true;
-}
-return false;
+  return beginDragging(v);
 }

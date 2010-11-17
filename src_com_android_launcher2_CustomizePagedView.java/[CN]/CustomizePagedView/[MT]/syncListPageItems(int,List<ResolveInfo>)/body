@@ -18,6 +18,7 @@ case ShortcutCustomization:
 createItemInfo.componentName=new ComponentName(info.activityInfo.packageName,info.activityInfo.name);
 icon.setTag(createItemInfo);
 icon.setOnClickListener(this);
+icon.setOnTouchListener(this);
 icon.setOnLongClickListener(this);
 break;
 default :

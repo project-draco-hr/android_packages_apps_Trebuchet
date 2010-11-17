@@ -10,6 +10,7 @@
     PagedViewIcon icon=(PagedViewIcon)mInflater.inflate(R.layout.all_apps_paged_view_application,layout,false);
     icon.applyFromApplicationInfo(info,mPageViewIconCache,true);
     icon.setOnClickListener(this);
+    icon.setOnTouchListener(this);
     icon.setOnLongClickListener(this);
     final int index=i - startIndex;
     final int x=index % mCellCountX;

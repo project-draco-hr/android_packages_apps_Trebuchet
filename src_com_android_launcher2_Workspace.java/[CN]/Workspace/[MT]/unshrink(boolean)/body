@@ -18,12 +18,10 @@
         rotation=-WORKSPACE_ROTATION;
       }
       if (animated) {
-        ObjectAnimator anim=ObjectAnimator.ofPropertyValuesHolder(cl,PropertyValuesHolder.ofFloat("backgroundAlpha",0.0f),PropertyValuesHolder.ofFloat("alpha",finalAlphaValue),PropertyValuesHolder.ofFloat("rotationY",rotation));
-        anim.setDuration(duration);
-        ObjectAnimator animWithInterpolator=ObjectAnimator.ofPropertyValuesHolder(cl,PropertyValuesHolder.ofFloat("translationX",0.0f),PropertyValuesHolder.ofFloat("translationY",0.0f),PropertyValuesHolder.ofFloat("scaleX",1.0f),PropertyValuesHolder.ofFloat("scaleY",1.0f));
+        ObjectAnimator animWithInterpolator=ObjectAnimator.ofPropertyValuesHolder(cl,PropertyValuesHolder.ofFloat("translationX",0.0f),PropertyValuesHolder.ofFloat("translationY",0.0f),PropertyValuesHolder.ofFloat("scaleX",1.0f),PropertyValuesHolder.ofFloat("scaleY",1.0f),PropertyValuesHolder.ofFloat("backgroundAlpha",0.0f),PropertyValuesHolder.ofFloat("alpha",finalAlphaValue),PropertyValuesHolder.ofFloat("rotationY",rotation));
         animWithInterpolator.setDuration(duration);
-        animWithInterpolator.setInterpolator(mInverseZInterpolator);
-        mAnimator.playTogether(anim,animWithInterpolator);
+        animWithInterpolator.setInterpolator(mZoomInInterpolator);
+        mAnimator.playTogether(animWithInterpolator);
       }
  else {
         cl.setTranslationX(0.0f);
