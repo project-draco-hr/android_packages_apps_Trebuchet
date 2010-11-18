@@ -7,7 +7,7 @@
   final int touchSlop=mTouchSlop;
   boolean yMoved=yDiff > touchSlop;
   boolean isUpwardMotion=(yDiff / (float)xDiff) > mDragSlopeThreshold;
-  if (isUpwardMotion && yMoved) {
+  if (isUpwardMotion && yMoved && mLastTouchedItem != null) {
     beginDragging(mLastTouchedItem);
     if (mAllowLongPress) {
       mAllowLongPress=false;
