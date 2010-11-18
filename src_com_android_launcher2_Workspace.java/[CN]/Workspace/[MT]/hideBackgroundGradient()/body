@@ -1,0 +1,7 @@
+{
+  if (mBackgroundFadeInAnimation != null)   mBackgroundFadeInAnimation.cancel();
+  if (mBackgroundFadeOutAnimation != null)   mBackgroundFadeOutAnimation.cancel();
+  mBackgroundFadeOutAnimation=ObjectAnimator.ofFloat(this,"backgroundAlpha",0.0f);
+  mBackgroundFadeOutAnimation.setDuration(BACKGROUND_FADE_OUT_DURATION);
+  mBackgroundFadeOutAnimation.start();
+}
