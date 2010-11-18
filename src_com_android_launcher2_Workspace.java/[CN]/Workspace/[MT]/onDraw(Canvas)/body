@@ -1,0 +1,8 @@
+{
+  if (mBackgroundAlpha > 0.0f) {
+    mBackground.setAlpha((int)(mBackgroundAlpha * 255));
+    mBackground.setBounds(mScrollX,0,mScrollX + getMeasuredWidth(),getMeasuredHeight());
+    mBackground.draw(canvas);
+  }
+  super.onDraw(canvas);
+}

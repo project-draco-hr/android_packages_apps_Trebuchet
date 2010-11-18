@@ -6,6 +6,8 @@
   mIconCache=app.getIconCache();
   mExternalDragOutlinePaint.setAntiAlias(true);
   setWillNotDraw(false);
+  final Resources res=getResources();
+  mBackground=res.getDrawable(R.drawable.all_apps_bg_gradient);
   mUnshrinkAnimationListener=new LauncherAnimatorListenerAdapter(){
     @Override public void onAnimationStart(    Animator animation){
       mIsInUnshrinkAnimation=true;
