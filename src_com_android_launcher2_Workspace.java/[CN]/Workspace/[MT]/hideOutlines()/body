@@ -1,10 +1,10 @@
 {
   if (!mIsSmall && !mIsInUnshrinkAnimation) {
-    if (mBackgroundFadeInAnimation != null)     mBackgroundFadeInAnimation.cancel();
-    if (mBackgroundFadeOutAnimation != null)     mBackgroundFadeOutAnimation.cancel();
-    mBackgroundFadeOutAnimation=ObjectAnimator.ofFloat(this,"backgroundAlpha",0.0f);
-    mBackgroundFadeOutAnimation.setDuration(BACKGROUND_FADE_OUT_DURATION);
-    mBackgroundFadeOutAnimation.setStartDelay(BACKGROUND_FADE_OUT_DELAY);
-    mBackgroundFadeOutAnimation.start();
+    if (mChildrenOutlineFadeInAnimation != null)     mChildrenOutlineFadeInAnimation.cancel();
+    if (mChildrenOutlineFadeOutAnimation != null)     mChildrenOutlineFadeOutAnimation.cancel();
+    mChildrenOutlineFadeOutAnimation=ObjectAnimator.ofFloat(this,"childrenOutlineAlpha",0.0f);
+    mChildrenOutlineFadeOutAnimation.setDuration(CHILDREN_OUTLINE_FADE_OUT_DURATION);
+    mChildrenOutlineFadeOutAnimation.setStartDelay(CHILDREN_OUTLINE_FADE_OUT_DELAY);
+    mChildrenOutlineFadeOutAnimation.start();
   }
 }

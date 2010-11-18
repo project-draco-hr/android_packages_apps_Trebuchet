@@ -1,4 +1,5 @@
 {
+  showBackgroundGradient();
   if (mFirstLayout) {
     mWaitingToShrink=true;
     mWaitingToShrinkPosition=shrinkPosition;
