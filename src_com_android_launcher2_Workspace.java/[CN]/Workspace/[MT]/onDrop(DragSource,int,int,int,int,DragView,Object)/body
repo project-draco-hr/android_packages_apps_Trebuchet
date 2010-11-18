@@ -13,20 +13,29 @@
   }
  else   if (mDragInfo != null) {
     final View cell=mDragInfo.cell;
-    if (mDragTargetLayout != null) {
-      mTargetCell=findNearestVacantArea(originX,originY,mDragInfo.spanX,mDragInfo.spanY,cell,mDragTargetLayout,mTargetCell);
-      if (mTargetCell == null) {
-        snapToPage(mDragInfo.screen);
+    CellLayout dropTargetLayout=mDragTargetLayout;
+    if (dropTargetLayout == null && mInScrollArea) {
+      if (mPendingScrollDirection == DragController.SCROLL_LEFT) {
+        dropTargetLayout=(CellLayout)getChildAt(mCurrentPage - 1);
       }
- else {
-        int screen=indexOfChild(mDragTargetLayout);
+ else       if (mPendingScrollDirection == DragController.SCROLL_RIGHT) {
+        dropTargetLayout=(CellLayout)getChildAt(mCurrentPage + 1);
+      }
+    }
+    if (dropTargetLayout != null) {
+      mTargetCell=findNearestVacantArea(originX,originY,mDragInfo.spanX,mDragInfo.spanY,cell,dropTargetLayout,mTargetCell);
+      final int screen=(mTargetCell == null) ? mDragInfo.screen : indexOfChild(dropTargetLayout);
+      if (screen != mCurrentPage) {
+        snapToPage(screen);
+      }
+      if (mTargetCell != null) {
         if (screen != mDragInfo.screen) {
           ((CellLayout)getChildAt(mDragInfo.screen)).removeView(cell);
           addInScreen(cell,screen,mTargetCell[0],mTargetCell[1],mDragInfo.spanX,mDragInfo.spanY);
         }
         final ItemInfo info=(ItemInfo)cell.getTag();
         CellLayout.LayoutParams lp=(CellLayout.LayoutParams)cell.getLayoutParams();
-        mDragTargetLayout.onMove(cell,mTargetCell[0],mTargetCell[1]);
+        dropTargetLayout.onMove(cell,mTargetCell[0],mTargetCell[1]);
         lp.cellX=mTargetCell[0];
         lp.cellY=mTargetCell[1];
         cell.setId(LauncherModel.getCellLayoutChildId(-1,mDragInfo.screen,mTargetCell[0],mTargetCell[1],mDragInfo.spanX,mDragInfo.spanY));

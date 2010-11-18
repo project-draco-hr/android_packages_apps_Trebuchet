@@ -1,5 +1,8 @@
 {
   if (mIsSmall || mIsInUnshrinkAnimation) {
+    if (mLauncher.isAllAppsVisible() && mShrunkenState == ShrinkPosition.SHRINK_TO_BOTTOM_HIDDEN) {
+      return true;
+    }
     return false;
   }
   return super.onInterceptTouchEvent(ev);

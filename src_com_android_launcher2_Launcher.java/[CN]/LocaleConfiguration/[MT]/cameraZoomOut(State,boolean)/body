@@ -6,7 +6,7 @@
   final View toView=toAllApps ? (View)mAllAppsGrid : mHomeCustomizationDrawer;
   setPivotsForZoom(toView,toState,scale);
   if (toAllApps) {
-    mWorkspace.shrinkToBottom(animated);
+    mWorkspace.shrinkToBottomHidden(animated);
   }
  else {
     mWorkspace.shrinkToTop(animated);

@@ -10,6 +10,8 @@
       scrollProgress=Math.max(scrollProgress,-1.0f);
       cl.setBackgroundAlphaMultiplier(Math.abs(scrollProgress));
       float rotation=WORKSPACE_ROTATION * scrollProgress;
+      float translationX=getOffsetXForRotation(rotation,cl.getWidth(),cl.getHeight());
+      cl.setTranslationX(translationX);
       cl.setRotationY(rotation);
     }
   }

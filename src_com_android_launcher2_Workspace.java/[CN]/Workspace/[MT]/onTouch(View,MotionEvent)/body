@@ -1,6 +1,8 @@
 {
   if (mIsSmall || mIsInUnshrinkAnimation) {
-    mLauncher.onWorkspaceClick((CellLayout)v);
+    if (mShrunkenState != ShrinkPosition.SHRINK_TO_BOTTOM_HIDDEN) {
+      mLauncher.onWorkspaceClick((CellLayout)v);
+    }
     return true;
   }
  else   if (!mPageMoving) {

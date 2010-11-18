@@ -17,14 +17,15 @@
  else       if (i > mCurrentPage) {
         rotation=-WORKSPACE_ROTATION;
       }
+      float translation=getOffsetXForRotation(rotation,cl.getWidth(),cl.getHeight());
       if (animated) {
-        ObjectAnimator animWithInterpolator=ObjectAnimator.ofPropertyValuesHolder(cl,PropertyValuesHolder.ofFloat("translationX",0.0f),PropertyValuesHolder.ofFloat("translationY",0.0f),PropertyValuesHolder.ofFloat("scaleX",1.0f),PropertyValuesHolder.ofFloat("scaleY",1.0f),PropertyValuesHolder.ofFloat("backgroundAlpha",0.0f),PropertyValuesHolder.ofFloat("alpha",finalAlphaValue),PropertyValuesHolder.ofFloat("rotationY",rotation));
+        ObjectAnimator animWithInterpolator=ObjectAnimator.ofPropertyValuesHolder(cl,PropertyValuesHolder.ofFloat("translationX",translation),PropertyValuesHolder.ofFloat("translationY",0.0f),PropertyValuesHolder.ofFloat("scaleX",1.0f),PropertyValuesHolder.ofFloat("scaleY",1.0f),PropertyValuesHolder.ofFloat("backgroundAlpha",0.0f),PropertyValuesHolder.ofFloat("alpha",finalAlphaValue),PropertyValuesHolder.ofFloat("rotationY",rotation));
         animWithInterpolator.setDuration(duration);
         animWithInterpolator.setInterpolator(mZoomInInterpolator);
         mAnimator.playTogether(animWithInterpolator);
       }
  else {
-        cl.setTranslationX(0.0f);
+        cl.setTranslationX(translation);
         cl.setTranslationY(0.0f);
         cl.setScaleX(1.0f);
         cl.setScaleY(1.0f);

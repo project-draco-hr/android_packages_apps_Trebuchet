@@ -6,6 +6,5 @@
   if (mCustomizePagedView != null) {
     mCustomizePagedView.updateApps(apps);
   }
-  updateAppMarketIcon();
-  updateGlobalSearchIcon();
+  updateIconsAffectedByPackageManagerChanges();
 }

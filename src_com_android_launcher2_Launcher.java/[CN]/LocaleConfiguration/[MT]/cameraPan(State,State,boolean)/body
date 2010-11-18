@@ -12,7 +12,7 @@
   mCustomizePagedView.endChoiceMode();
   mAllAppsPagedView.endChoiceMode();
   if (toState == State.ALL_APPS) {
-    mWorkspace.shrinkToBottom(animated);
+    mWorkspace.shrinkToBottomHidden(animated);
   }
  else {
     mWorkspace.shrinkToTop(animated);

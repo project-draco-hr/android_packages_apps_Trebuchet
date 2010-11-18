@@ -4,6 +4,9 @@
       mScroller.abortAnimation();
     }
     setCurrentPage(mCurrentPage);
+    if (mShrunkenState == ShrinkPosition.SHRINK_TO_BOTTOM_HIDDEN) {
+      mLauncher.showWorkspace(true);
+    }
     return false;
   }
   return super.onTouchEvent(ev);

@@ -1,0 +1,5 @@
+{
+  Intent intent=new Intent(RecognizerIntent.ACTION_WEB_SEARCH);
+  intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+  startActivity(intent);
+}

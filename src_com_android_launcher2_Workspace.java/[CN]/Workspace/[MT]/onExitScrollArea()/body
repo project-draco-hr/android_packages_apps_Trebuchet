@@ -1,6 +1,7 @@
 {
   if (mInScrollArea) {
     mInScrollArea=false;
+    mPendingScrollDirection=DragController.SCROLL_NONE;
     clearAllHovers();
   }
 }
