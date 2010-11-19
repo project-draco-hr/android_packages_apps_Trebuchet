@@ -1,4 +1,5 @@
 {
+  if (mBackground == null)   return;
   if (mBackgroundFadeOutAnimation != null)   mBackgroundFadeOutAnimation.cancel();
   if (mBackgroundFadeInAnimation != null)   mBackgroundFadeInAnimation.cancel();
   mBackgroundFadeInAnimation=ObjectAnimator.ofFloat(this,"backgroundAlpha",1.0f);

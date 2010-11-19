@@ -1,0 +1,10 @@
+{
+  int overScrollAmount=(int)Math.round(OVERSCROLL_DAMP_FACTOR * amount);
+  if (amount < 0) {
+    mScrollX=overScrollAmount;
+  }
+ else {
+    mScrollX=mMaxScrollX + overScrollAmount;
+  }
+  invalidate();
+}

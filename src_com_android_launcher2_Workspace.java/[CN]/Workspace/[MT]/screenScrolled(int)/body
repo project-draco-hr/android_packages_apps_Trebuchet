@@ -8,7 +8,7 @@
       float scrollProgress=delta / (totalDistance * 1.0f);
       scrollProgress=Math.min(scrollProgress,1.0f);
       scrollProgress=Math.max(scrollProgress,-1.0f);
-      cl.setBackgroundAlphaMultiplier(Math.abs(scrollProgress));
+      cl.setBackgroundAlphaMultiplier(backgroundAlphaInterpolator(Math.abs(scrollProgress)));
       float rotation=WORKSPACE_ROTATION * scrollProgress;
       float translationX=getOffsetXForRotation(rotation,cl.getWidth(),cl.getHeight());
       cl.setTranslationX(translationX);

@@ -1,0 +1,10 @@
+{
+  float threshold=0.1f;
+  if (r > mOverScrollMaxBackgroundAlpha) {
+    mOverScrollMaxBackgroundAlpha=r;
+  }
+ else   if (r < mOverScrollMaxBackgroundAlpha) {
+    r=mOverScrollMaxBackgroundAlpha;
+  }
+  return Math.min(r / threshold,1.0f);
+}
