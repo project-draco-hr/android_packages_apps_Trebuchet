@@ -53,7 +53,9 @@ if (mTouchState != TOUCH_STATE_SCROLLING) {
   if (!currentScreen.lastDownOnOccupiedCell()) {
     getLocationOnScreen(mTempCell);
     final int pointerIndex=ev.findPointerIndex(mActivePointerId);
-    mWallpaperManager.sendWallpaperCommand(getWindowToken(),"android.wallpaper.tap",mTempCell[0] + (int)ev.getX(pointerIndex),mTempCell[1] + (int)ev.getY(pointerIndex),0,null);
+    if (pointerIndex >= 0) {
+      mWallpaperManager.sendWallpaperCommand(getWindowToken(),"android.wallpaper.tap",mTempCell[0] + (int)ev.getX(pointerIndex),mTempCell[1] + (int)ev.getY(pointerIndex),0,null);
+    }
   }
 }
 clearChildrenCache();
