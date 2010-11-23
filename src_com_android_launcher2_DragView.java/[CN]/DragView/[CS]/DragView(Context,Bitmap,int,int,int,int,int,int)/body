@@ -3,13 +3,37 @@
   final Resources res=getResources();
   final int dragScale=res.getInteger(R.integer.config_dragViewExtraPixels);
   mWindowManager=WindowManagerImpl.getDefault();
-  mTween=new SymmetricalLinearTween(false,110,this);
   Matrix scale=new Matrix();
-  float scaleFactor=width;
-  scaleFactor=mScale=(scaleFactor + dragScale) / scaleFactor;
-  scale.setScale(scaleFactor,scaleFactor);
+  final float scaleFactor=(width + dragScale) / width;
+  if (scaleFactor != 1.0f) {
+    scale.setScale(scaleFactor,scaleFactor);
+  }
+  final int offsetX=res.getInteger(R.integer.config_dragViewOffsetX);
+  final int offsetY=res.getInteger(R.integer.config_dragViewOffsetY);
+  mAnim=ValueAnimator.ofFloat(0.0f,1.0f);
+  mAnim.setDuration(110);
+  mAnim.setInterpolator(new DecelerateInterpolator(2.5f));
+  mAnim.addUpdateListener(new AnimatorUpdateListener(){
+    @Override public void onAnimationUpdate(    ValueAnimator animation){
+      final float value=(Float)animation.getAnimatedValue();
+      final int deltaX=(int)((value * offsetX) - mOffsetX);
+      final int deltaY=(int)((value * offsetY) - mOffsetY);
+      mOffsetX+=deltaX;
+      mOffsetY+=deltaY;
+      if (getParent() == null) {
+        animation.cancel();
+      }
+ else {
+        WindowManager.LayoutParams lp=mLayoutParams;
+        lp.x+=deltaX;
+        lp.y+=deltaY;
+        mWindowManager.updateViewLayout(DragView.this,lp);
+      }
+    }
+  }
+);
   mBitmap=Bitmap.createBitmap(bitmap,left,top,width,height,scale,true);
   setDragRegion(0,0,width,height);
-  mRegistrationX=registrationX + res.getInteger(R.integer.config_dragViewOffsetX);
-  mRegistrationY=registrationY + res.getInteger(R.integer.config_dragViewOffsetY);
+  mRegistrationX=registrationX;
+  mRegistrationY=registrationY;
 }

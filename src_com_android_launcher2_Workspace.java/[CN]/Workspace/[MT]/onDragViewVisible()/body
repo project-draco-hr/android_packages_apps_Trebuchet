@@ -1,0 +1,3 @@
+{
+  ((View)mDragInfo.cell).setVisibility(View.GONE);
+}

@@ -8,6 +8,5 @@
   lp.setTitle("DragView");
   mLayoutParams=lp;
   mWindowManager.addView(this,lp);
-  mAnimationScale=1.0f / mScale;
-  mTween.start(true);
+  mAnim.start();
 }
