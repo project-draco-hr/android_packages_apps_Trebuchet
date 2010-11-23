@@ -2,7 +2,7 @@
   mDirtyPageContent=new ArrayList<Boolean>();
   mDirtyPageContent.ensureCapacity(32);
   mPageViewIconCache=new PagedViewIconCache();
-  mScroller=new Scroller(getContext());
+  mScroller=new Scroller(getContext(),new ScrollInterpolator());
   mCurrentPage=0;
   mCenterPagesVertically=true;
   final ViewConfiguration configuration=ViewConfiguration.get(getContext());
