@@ -10,7 +10,7 @@
           mDragTargetLayout.setHover(false);
         }
         mDragTargetLayout=layout;
-        if (mDragTargetLayout != null) {
+        if (mDragTargetLayout != null && mDragTargetLayout.getAcceptsDrops()) {
           mDragTargetLayout.setHover(true);
         }
       }

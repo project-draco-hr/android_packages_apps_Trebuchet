@@ -1,6 +1,6 @@
 {
   if (source != this) {
-    if (mDragTargetLayout == null) {
+    if (mDragTargetLayout == null || !mDragTargetLayout.getAcceptsDrops()) {
       return false;
     }
     final CellLayout.CellInfo dragCellInfo=mDragInfo;
