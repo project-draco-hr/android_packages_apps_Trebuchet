@@ -1,12 +1,15 @@
 {
   super.onCreate(icicle);
-  requestWindowFeature(Window.FEATURE_NO_TITLE);
+  setContentView(R.layout.wallpaper_chooser_base);
+  mWallpaperChooserBase=(ViewGroup)findViewById(R.id.wallpaper_chooser_base);
   findWallpapers();
-  setContentView(R.layout.wallpaper_chooser);
-  mGallery=(Gallery)findViewById(R.id.gallery);
-  mGallery.setAdapter(new ImageAdapter(this));
-  mGallery.setOnItemSelectedListener(this);
-  mGallery.setCallbackDuringFling(false);
-  findViewById(R.id.set).setOnClickListener(this);
-  mImageView=(ImageView)findViewById(R.id.wallpaper);
+  DialogFragment newFragment=new WallpaperDialogFragment(this);
+  if (LauncherApplication.isScreenXLarge()) {
+    newFragment.show(getFragmentManager(),"dialog");
+  }
+ else {
+    FragmentTransaction ft=getFragmentManager().openTransaction();
+    ft.add(R.id.wallpaper_chooser_base,newFragment);
+    ft.commit();
+  }
 }
