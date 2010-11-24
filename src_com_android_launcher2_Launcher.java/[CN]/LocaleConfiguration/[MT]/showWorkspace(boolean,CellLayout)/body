@@ -1,5 +1,5 @@
 {
-  if (layout != null && animated) {
+  if (layout != null) {
     mWorkspace.unshrink(layout);
   }
  else {
