@@ -45,7 +45,9 @@ cellLayout.findNearestVacantArea(x,y,1,1,mTargetCell);
 cellLayout.findCellForSpan(mTargetCell,1,1);
 }
 addInScreen(view,indexOfChild(cellLayout),mTargetCell[0],mTargetCell[1],info.spanX,info.spanY,insertAtFirst);
-cellLayout.onDropChild(view);
+boolean animateDrop=!mWasSpringLoadedOnDragExit;
+cellLayout.onDropChild(view,animateDrop);
+cellLayout.animateDrop();
 CellLayout.LayoutParams lp=(CellLayout.LayoutParams)view.getLayoutParams();
 LauncherModel.addOrMoveItemInDatabase(mLauncher,info,LauncherSettings.Favorites.CONTAINER_DESKTOP,screen,lp.cellX,lp.cellY);
 }

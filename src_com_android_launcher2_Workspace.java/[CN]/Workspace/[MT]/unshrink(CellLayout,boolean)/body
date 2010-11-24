@@ -1,0 +1,10 @@
+{
+  int newCurrentPage=indexOfChild(clThatWasClicked);
+  if (mIsSmall) {
+    if (springLoaded) {
+      setLayoutScale(SPRING_LOADED_DRAG_SHRINK_FACTOR);
+    }
+    moveToNewPageWithoutMovingCellLayouts(newCurrentPage);
+    unshrink(true,springLoaded);
+  }
+}

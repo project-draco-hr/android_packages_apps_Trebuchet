@@ -1,0 +1,5 @@
+{
+  mShrinkState=ShrinkState.SPRING_LOADED;
+  unshrink(clThatWasClicked,true);
+  mDragTargetLayout.onDragEnter();
+}

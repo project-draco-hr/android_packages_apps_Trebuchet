@@ -1,0 +1,6 @@
+{
+  shrink(shrinkState);
+  if (mDragTargetLayout != null) {
+    mDragTargetLayout.onDragExit();
+  }
+}

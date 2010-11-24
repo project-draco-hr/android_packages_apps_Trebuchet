@@ -8,7 +8,7 @@
   }
   final int pageCount=getChildCount();
   if (pageCount > 0) {
-    final int pageWidth=getChildAt(0).getMeasuredWidth();
+    final int pageWidth=getScaledMeasuredWidth(getChildAt(0));
     final int screenWidth=getMeasuredWidth();
     int x=getRelativeChildOffset(0) + pageWidth;
     int leftScreen=0;

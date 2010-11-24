@@ -1,7 +1,20 @@
 {
   final int[] cellXY=mTmpAddItemCellCoordinates;
   final CellLayout layout=(CellLayout)mWorkspace.getChildAt(screen);
-  if (!layout.findCellForSpanThatIntersects(cellXY,1,1,intersectCellX,intersectCellY)) {
+  int[] touchXY=null;
+  if (mAddDropPosition != null && mAddDropPosition[0] > -1 && mAddDropPosition[1] > -1) {
+    touchXY=mAddDropPosition;
+  }
+  boolean foundCellSpan=false;
+  if (touchXY != null) {
+    CellLayout screenLayout=(CellLayout)mWorkspace.getChildAt(screen);
+    int[] result=screenLayout.findNearestVacantArea(touchXY[0],touchXY[1],1,1,cellXY);
+    foundCellSpan=(result != null);
+  }
+ else {
+    foundCellSpan=layout.findCellForSpanThatIntersects(cellXY,1,1,intersectCellX,intersectCellY);
+  }
+  if (!foundCellSpan) {
     showOutOfSpaceMessage();
     return;
   }

@@ -6,7 +6,7 @@
       final int childCount=getChildCount();
       for (int i=0; i < childCount; ++i) {
         View layout=(View)getChildAt(i);
-        int childWidth=layout.getMeasuredWidth();
+        int childWidth=getScaledMeasuredWidth(layout);
         int halfChildWidth=(childWidth / 2);
         int childCenter=getChildOffset(i) + halfChildWidth;
         if (childWidth <= 0) {
@@ -17,12 +17,12 @@
         int distanceFromScreenCenter=childCenter - screenCenter;
         if (distanceFromScreenCenter > 0) {
           if (i > 0) {
-            d+=getChildAt(i - 1).getMeasuredWidth() / 2;
+            d+=getScaledMeasuredWidth(getChildAt(i - 1)) / 2;
           }
         }
  else {
           if (i < childCount - 1) {
-            d+=getChildAt(i + 1).getMeasuredWidth() / 2;
+            d+=getScaledMeasuredWidth(getChildAt(i + 1)) / 2;
           }
         }
         d+=mPageSpacing;

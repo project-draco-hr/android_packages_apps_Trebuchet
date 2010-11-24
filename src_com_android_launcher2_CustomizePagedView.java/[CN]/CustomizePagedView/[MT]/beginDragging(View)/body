@@ -5,22 +5,38 @@
   mIsDragging=true;
 switch (mCustomizationType) {
 case WidgetCustomization:
-    PendingAddWidgetInfo createWidgetInfo=(PendingAddWidgetInfo)v.getTag();
-  final View dragView=v.findViewById(R.id.widget_preview);
-mLauncher.getWorkspace().onDragStartedWithItemMinSize(createWidgetInfo.minWidth,createWidgetInfo.minHeight);
-mDragController.startDrag(dragView,this,createWidgetInfo,DragController.DRAG_ACTION_COPY,null);
-return true;
+{
+      final LinearLayout l=(LinearLayout)v;
+      final Drawable icon=((ImageView)l.findViewById(R.id.widget_preview)).getDrawable();
+      Bitmap b=drawableToBitmap(icon);
+      PendingAddWidgetInfo createWidgetInfo=(PendingAddWidgetInfo)v.getTag();
+      final View dragView=v.findViewById(R.id.widget_preview);
+      int[] spanXY=CellLayout.rectToCell(getResources(),createWidgetInfo.minWidth,createWidgetInfo.minHeight,null);
+      createWidgetInfo.spanX=spanXY[0];
+      createWidgetInfo.spanY=spanXY[1];
+      mLauncher.getWorkspace().onDragStartedWithItemSpans(spanXY[0],spanXY[1],b);
+      mDragController.startDrag(v,b,this,createWidgetInfo,DragController.DRAG_ACTION_COPY,null);
+      return true;
+    }
 case ShortcutCustomization:
-PendingAddItemInfo createItemInfo=(PendingAddItemInfo)v.getTag();
-mDragController.startDrag(v,this,createItemInfo,DragController.DRAG_ACTION_COPY);
-mLauncher.getWorkspace().onDragStartedWithItemSpans(1,1);
-return true;
+{
+    final Drawable icon=((TextView)v).getCompoundDrawables()[1];
+    Bitmap b=drawableToBitmap(icon);
+    PendingAddItemInfo createItemInfo=(PendingAddItemInfo)v.getTag();
+    mDragController.startDrag(v,b,this,createItemInfo,DragController.DRAG_ACTION_COPY,null);
+    mLauncher.getWorkspace().onDragStartedWithItemSpans(1,1,b);
+    return true;
+  }
 case ApplicationCustomization:
-ApplicationInfo app=(ApplicationInfo)v.getTag();
-app=new ApplicationInfo(app);
-mDragController.startDrag(v,this,app,DragController.DRAG_ACTION_COPY);
-mLauncher.getWorkspace().onDragStartedWithItemSpans(1,1);
-return true;
+{
+  final Drawable icon=((TextView)v).getCompoundDrawables()[1];
+  Bitmap b=drawableToBitmap(icon);
+  ApplicationInfo app=(ApplicationInfo)v.getTag();
+  app=new ApplicationInfo(app);
+  mDragController.startDrag(v,b,this,app,DragController.DRAG_ACTION_COPY,null);
+  mLauncher.getWorkspace().onDragStartedWithItemSpans(1,1,b);
+  return true;
+}
 }
 return false;
 }

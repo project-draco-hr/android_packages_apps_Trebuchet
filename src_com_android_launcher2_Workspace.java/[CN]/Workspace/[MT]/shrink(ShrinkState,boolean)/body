@@ -7,7 +7,9 @@
   mIsSmall=true;
   mShrinkState=shrinkState;
   setCurrentPage((mNextPage != INVALID_PAGE) ? mNextPage : mCurrentPage);
-  updateWhichPagesAcceptDrops(mShrinkState);
+  if (!mIsDragInProcess) {
+    updateWhichPagesAcceptDrops(mShrinkState);
+  }
   mTouchState=TOUCH_STATE_REST;
   mActivePointerId=INVALID_POINTER;
   CellLayout currentPage=(CellLayout)getChildAt(mCurrentPage);
@@ -73,6 +75,7 @@
     }
     newX+=scaledPageWidth + extraScaledSpacing;
   }
+  setLayoutScale(1.0f);
   if (animated) {
     mAnimator.start();
   }

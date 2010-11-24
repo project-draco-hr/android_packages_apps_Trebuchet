@@ -10,7 +10,11 @@
   setupDragMode();
   ApplicationInfo app=(ApplicationInfo)v.getTag();
   app=new ApplicationInfo(app);
-  mLauncher.getWorkspace().onDragStartedWithItemSpans(1,1);
-  mDragController.startDrag(v,this,app,DragController.DRAG_ACTION_COPY);
+  final Drawable icon=((TextView)v).getCompoundDrawables()[1];
+  Bitmap b=Bitmap.createBitmap(icon.getIntrinsicWidth(),icon.getIntrinsicHeight(),Bitmap.Config.ARGB_8888);
+  Canvas c=new Canvas(b);
+  icon.draw(c);
+  mLauncher.getWorkspace().onDragStartedWithItemSpans(1,1,b);
+  mDragController.startDrag(v,b,this,app,DragController.DRAG_ACTION_COPY,null);
   return true;
 }

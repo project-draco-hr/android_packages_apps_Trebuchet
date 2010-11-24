@@ -1,0 +1,7 @@
+{
+  if (mScreen != null) {
+    mScreen.onDragExit();
+  }
+  mScreen=null;
+  mAlarm.setAlarm(EXIT_SPRING_LOAD_HOVER_TIME);
+}

@@ -1,3 +1,0 @@
-{
-  updateWhichPagesAcceptDropsDuringDrag(mShrinkState,spanX,spanY);
-}

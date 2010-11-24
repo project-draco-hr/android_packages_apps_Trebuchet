@@ -1,0 +1,3 @@
+{
+  return (int)(child.getMeasuredWidth() * mLayoutScale + 0.5f);
+}

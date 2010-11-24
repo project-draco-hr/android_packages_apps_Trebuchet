@@ -9,11 +9,11 @@
     originY=(int)mTempOriginXY[1];
   }
   if (source != this) {
-    if (mIsSmall) {
-      onDropExternal(-1,-1,dragInfo,mDragTargetLayout,false);
+    if (!mIsSmall || mWasSpringLoadedOnDragExit) {
+      onDropExternal(originX,originY,dragInfo,mDragTargetLayout,false);
     }
  else {
-      onDropExternal(originX,originY,dragInfo,mDragTargetLayout,false);
+      onDropExternal(-1,-1,dragInfo,mDragTargetLayout,false);
     }
   }
  else   if (mDragInfo != null) {
@@ -49,6 +49,7 @@
     }
     final CellLayout parent=(CellLayout)cell.getParent();
     setPositionForDropAnimation(dragView,originX,originY,parent,cell);
-    parent.onDropChild(cell);
+    boolean animateDrop=!mWasSpringLoadedOnDragExit;
+    parent.onDropChild(cell,animateDrop);
   }
 }

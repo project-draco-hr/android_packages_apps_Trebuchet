@@ -1,5 +1,5 @@
 {
-  if (mState == State.ALL_APPS) {
+  if (mState == State.ALL_APPS || mState == State.ALL_APPS_SPRING_LOADED) {
     mWorkspace.setVisibility(View.VISIBLE);
     if (LauncherApplication.isScreenXLarge()) {
       cameraZoomIn(State.ALL_APPS,animated);

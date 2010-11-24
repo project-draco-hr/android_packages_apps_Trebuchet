@@ -3,6 +3,7 @@
     LayoutParams lp=(LayoutParams)child.getLayoutParams();
     lp.isDragging=false;
     lp.dropped=true;
+    lp.animateDrop=animate;
     child.setVisibility(View.VISIBLE);
     child.requestLayout();
   }
