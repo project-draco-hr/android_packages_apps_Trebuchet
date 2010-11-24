@@ -1,13 +1,13 @@
 {
   if (mFirstLayout) {
     mWaitingToShrink=true;
-    mWaitingToShrinkPosition=shrinkPosition;
+    mWaitingToShrinkState=shrinkState;
     return;
   }
   mIsSmall=true;
-  mShrunkenState=shrinkPosition;
+  mShrinkState=shrinkState;
   setCurrentPage((mNextPage != INVALID_PAGE) ? mNextPage : mCurrentPage);
-  updateWhichPagesAcceptDrops(mShrunkenState);
+  updateWhichPagesAcceptDrops(mShrinkState);
   mTouchState=TOUCH_STATE_REST;
   mActivePointerId=INVALID_POINTER;
   CellLayout currentPage=(CellLayout)getChildAt(mCurrentPage);
@@ -29,18 +29,18 @@
   float newY=(isPortrait ? getResources().getDimension(R.dimen.allAppsSmallScreenVerticalMarginPortrait) : getResources().getDimension(R.dimen.allAppsSmallScreenVerticalMarginLandscape));
   float finalAlpha=1.0f;
   float extraShrinkFactor=1.0f;
-  if (shrinkPosition == ShrinkPosition.SHRINK_TO_BOTTOM_VISIBLE) {
+  if (shrinkState == ShrinkState.BOTTOM_VISIBLE) {
     newY=screenHeight - newY - scaledPageHeight;
   }
- else   if (shrinkPosition == ShrinkPosition.SHRINK_TO_BOTTOM_HIDDEN) {
+ else   if (shrinkState == ShrinkState.BOTTOM_HIDDEN) {
     newY=screenHeight - newY - scaledPageHeight;
     finalAlpha=0.0f;
   }
- else   if (shrinkPosition == ShrinkPosition.SHRINK_TO_MIDDLE) {
+ else   if (shrinkState == ShrinkState.MIDDLE) {
     newY=screenHeight / 2 - scaledPageHeight / 2;
     finalAlpha=1.0f;
   }
- else   if (shrinkPosition == ShrinkPosition.SHRINK_TO_TOP) {
+ else   if (shrinkState == ShrinkState.TOP) {
     newY=(isPortrait ? getResources().getDimension(R.dimen.customizeSmallScreenVerticalMarginPortrait) : getResources().getDimension(R.dimen.customizeSmallScreenVerticalMarginLandscape));
   }
   float newX=mScroller.getFinalX() + screenWidth / 2 - totalWidth / 2;
@@ -77,7 +77,7 @@
     mAnimator.start();
   }
   setChildrenDrawnWithCacheEnabled(true);
-  if (shrinkPosition == ShrinkPosition.SHRINK_TO_TOP) {
+  if (shrinkState == ShrinkState.TOP) {
     showBackgroundGradientForCustomizeTray();
   }
  else {

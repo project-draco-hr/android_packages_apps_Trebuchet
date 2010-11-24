@@ -1,4 +1,4 @@
-ShrinkPosition state
+ShrinkState state
 boolean isDragHappening
 int spanX
 int spanY

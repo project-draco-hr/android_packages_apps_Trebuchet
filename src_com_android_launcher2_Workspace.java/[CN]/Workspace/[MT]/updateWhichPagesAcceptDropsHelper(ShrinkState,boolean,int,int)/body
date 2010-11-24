@@ -3,14 +3,14 @@
   for (int i=0; i < screenCount; i++) {
     CellLayout cl=(CellLayout)getChildAt(i);
 switch (state) {
-case SHRINK_TO_TOP:
+case TOP:
       if (!isDragHappening) {
         boolean showDropHighlight=i == mCurrentPage;
         cl.setAcceptsDrops(showDropHighlight);
         break;
       }
-case SHRINK_TO_BOTTOM_HIDDEN:
-case SHRINK_TO_BOTTOM_VISIBLE:
+case BOTTOM_HIDDEN:
+case BOTTOM_VISIBLE:
     if (!isDragHappening) {
       spanX=1;
       spanY=1;
@@ -18,7 +18,7 @@ case SHRINK_TO_BOTTOM_VISIBLE:
   cl.setAcceptsDrops(cl.findCellForSpan(null,spanX,spanY));
 break;
 default :
-throw new RuntimeException("updateWhichPagesAcceptDropsHelper passed an unhandled ShrinkPosition");
+throw new RuntimeException("updateWhichPagesAcceptDropsHelper passed an unhandled ShrinkState");
 }
 }
 }

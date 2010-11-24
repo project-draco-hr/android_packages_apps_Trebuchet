@@ -1,6 +1,6 @@
 {
   if (mIsSmall || mIsInUnshrinkAnimation) {
-    if (mLauncher.isAllAppsVisible() && mShrunkenState == ShrinkPosition.SHRINK_TO_BOTTOM_HIDDEN) {
+    if (mLauncher.isAllAppsVisible() && mShrinkState == ShrinkState.BOTTOM_HIDDEN) {
       return true;
     }
     return false;

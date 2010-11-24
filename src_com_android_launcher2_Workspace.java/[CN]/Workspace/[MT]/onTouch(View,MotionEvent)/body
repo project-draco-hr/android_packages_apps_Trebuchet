@@ -1,6 +1,6 @@
 {
   if (mIsSmall || mIsInUnshrinkAnimation) {
-    if (mShrunkenState != ShrinkPosition.SHRINK_TO_BOTTOM_HIDDEN) {
+    if (mShrinkState != ShrinkState.BOTTOM_HIDDEN) {
       mLauncher.onWorkspaceClick((CellLayout)v);
     }
     return true;

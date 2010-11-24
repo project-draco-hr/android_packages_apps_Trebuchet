@@ -1,0 +1,3 @@
+ShrinkState state
+int spanX
+int spanY
