@@ -1,8 +1,8 @@
 {
   if (LauncherApplication.isScreenXLarge()) {
-    return SmoothPagedView.QUINTIC_MODE;
+    return SmoothPagedView.X_LARGE_MODE;
   }
  else {
-    return SmoothPagedView.OVERSHOOT_MODE;
+    return SmoothPagedView.DEFAULT_MODE;
   }
 }

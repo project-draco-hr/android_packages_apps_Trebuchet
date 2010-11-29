@@ -9,7 +9,12 @@
     originY=(int)mTempOriginXY[1];
   }
   if (source != this) {
-    onDropExternal(originX,originY,dragInfo,mDragTargetLayout);
+    if (mIsSmall) {
+      onDropExternal(-1,-1,dragInfo,mDragTargetLayout);
+    }
+ else {
+      onDropExternal(originX,originY,dragInfo,mDragTargetLayout);
+    }
   }
  else   if (mDragInfo != null) {
     final View cell=mDragInfo.cell;

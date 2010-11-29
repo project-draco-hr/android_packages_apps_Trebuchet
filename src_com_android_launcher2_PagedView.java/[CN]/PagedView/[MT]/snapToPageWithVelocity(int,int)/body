@@ -1,3 +1,17 @@
 {
-  snapToPage(whichPage);
+  whichPage=Math.max(0,Math.min(whichPage,getChildCount() - 1));
+  int halfScreenSize=getMeasuredWidth() / 2;
+  final int newX=getChildOffset(whichPage) - getRelativeChildOffset(whichPage);
+  int delta=newX - mUnboundedScrollX;
+  int duration=0;
+  if (Math.abs(velocity) < MIN_FLING_VELOCITY) {
+    snapToPage(whichPage,PAGE_SNAP_ANIMATION_DURATION);
+    return;
+  }
+  float distanceRatio=1.0f * Math.abs(delta) / 2 * halfScreenSize;
+  float distance=halfScreenSize + halfScreenSize * distanceInfluenceForSnapDuration(distanceRatio);
+  velocity=Math.abs(velocity);
+  velocity=Math.max(MINIMUM_SNAP_VELOCITY,velocity);
+  duration=6 * Math.round(1000 * Math.abs(distance / velocity));
+  snapToPage(whichPage,delta,duration);
 }

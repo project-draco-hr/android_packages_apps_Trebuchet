@@ -1,5 +1,5 @@
 {
-  float threshold=0.1f;
+  float threshold=0.08f;
   if (r > mOverScrollMaxBackgroundAlpha) {
     mOverScrollMaxBackgroundAlpha=r;
   }

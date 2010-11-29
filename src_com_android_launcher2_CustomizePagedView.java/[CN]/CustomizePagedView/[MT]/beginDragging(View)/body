@@ -18,7 +18,7 @@ b.recycle();
 return true;
 case ShortcutCustomization:
 createItemInfo=(PendingAddItemInfo)v.getTag();
-mDragController.startDrag(v,this,createItemInfo,DragController.DRAG_ACTION_COPY,null);
+mDragController.startDrag(v,this,createItemInfo,DragController.DRAG_ACTION_COPY);
 mLauncher.getWorkspace().onDragStartedWithItemSpans(1,1);
 return true;
 case ApplicationCustomization:

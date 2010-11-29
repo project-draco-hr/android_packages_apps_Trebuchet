@@ -10,7 +10,9 @@
     mCurrentPage=Math.max(0,Math.min(mNextPage,getPageCount() - 1));
     mNextPage=INVALID_PAGE;
     notifyPageSwitchListener();
-    pageEndMoving();
+    if (mTouchState == TOUCH_STATE_REST) {
+      pageEndMoving();
+    }
     return true;
   }
   return false;

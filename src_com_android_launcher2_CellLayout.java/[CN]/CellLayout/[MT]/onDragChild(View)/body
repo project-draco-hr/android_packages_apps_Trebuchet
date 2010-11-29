@@ -1,5 +1,4 @@
 {
   LayoutParams lp=(LayoutParams)child.getLayoutParams();
   lp.isDragging=true;
-  child.setVisibility(View.GONE);
 }

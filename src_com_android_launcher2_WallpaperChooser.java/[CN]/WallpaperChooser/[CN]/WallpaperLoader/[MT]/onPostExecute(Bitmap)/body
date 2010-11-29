@@ -5,12 +5,14 @@
       mBitmap.recycle();
     }
     final ImageView view=mImageView;
-    view.setImageBitmap(b);
-    mBitmap=b;
-    final Drawable drawable=view.getDrawable();
-    drawable.setFilterBitmap(true);
-    drawable.setDither(true);
-    view.postInvalidate();
+    if (view != null) {
+      view.setImageBitmap(b);
+      mBitmap=b;
+      final Drawable drawable=view.getDrawable();
+      drawable.setFilterBitmap(true);
+      drawable.setDither(true);
+      view.postInvalidate();
+    }
     mLoader=null;
   }
  else {

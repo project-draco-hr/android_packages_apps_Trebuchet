@@ -4,7 +4,7 @@
   int[] spanXY=layout.rectToCell(appWidgetInfo.minWidth,appWidgetInfo.minHeight,null);
   final int[] cellXY=mTmpAddItemCellCoordinates;
   int[] touchXY=null;
-  if (mAddDropPosition[0] > -1 && mAddDropPosition[1] > -1) {
+  if (mAddDropPosition != null && mAddDropPosition[0] > -1 && mAddDropPosition[1] > -1) {
     touchXY=mAddDropPosition;
   }
   boolean findNearestVacantAreaFailed=false;
@@ -16,12 +16,7 @@
     foundCellSpan=!findNearestVacantAreaFailed;
   }
  else {
-    if (mAddIntersectCellX != -1 && mAddIntersectCellY != -1) {
-      foundCellSpan=layout.findCellForSpanThatIntersects(cellXY,spanXY[0],spanXY[1],mAddIntersectCellX,mAddIntersectCellY);
-    }
- else {
-      foundCellSpan=layout.findCellForSpan(cellXY,spanXY[0],spanXY[1]);
-    }
+    foundCellSpan=layout.findCellForSpanThatIntersects(cellXY,spanXY[0],spanXY[1],mAddIntersectCellX,mAddIntersectCellY);
   }
   if (!foundCellSpan) {
     if (appWidgetId != -1)     mAppWidgetHost.deleteAppWidgetId(appWidgetId);
