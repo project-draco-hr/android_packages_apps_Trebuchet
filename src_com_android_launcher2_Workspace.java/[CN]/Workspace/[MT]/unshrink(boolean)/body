@@ -1,5 +1,4 @@
 {
-  hideBackgroundGradient();
   if (mIsSmall) {
     mIsSmall=false;
     if (mAnimator != null) {
@@ -40,4 +39,5 @@
       mAnimator.start();
     }
   }
+  hideBackgroundGradient();
 }
