@@ -1,4 +1,4 @@
 {
   super.onDetachedFromWindow();
-  mBackground.setCallback(null);
+  if (mBackground != null)   mBackground.setCallback(null);
 }
