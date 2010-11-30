@@ -3,7 +3,7 @@
     Intent intent=new Intent(RecognizerIntent.ACTION_WEB_SEARCH);
     ComponentName activityName=intent.resolveActivity(getPackageManager());
     if (activityName != null) {
-      updateButtonWithIconFromExternalActivity(R.id.voice_button,activityName,R.drawable.ic_voice_search);
+      sVoiceSearchIcon=updateButtonWithIconFromExternalActivity(R.id.voice_button,activityName,R.drawable.ic_voice_search);
     }
  else {
       findViewById(R.id.voice_button).setVisibility(View.GONE);

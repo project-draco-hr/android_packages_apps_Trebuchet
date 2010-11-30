@@ -4,7 +4,7 @@
     ComponentName activityName=intent.resolveActivity(getPackageManager());
     if (activityName != null) {
       mAppMarketIntent=intent;
-      updateButtonWithIconFromExternalActivity(R.id.market_button,activityName,R.drawable.app_market_generic);
+      sAppMarketIcon=updateButtonWithIconFromExternalActivity(R.id.market_button,activityName,R.drawable.app_market_generic);
     }
   }
 }

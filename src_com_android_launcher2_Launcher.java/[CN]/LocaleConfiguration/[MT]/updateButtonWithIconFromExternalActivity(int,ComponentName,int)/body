@@ -16,8 +16,10 @@
   }
   if (toolbarIcon == null) {
     button.setImageResource(fallbackDrawableId);
+    return null;
   }
  else {
     button.setImageDrawable(toolbarIcon);
+    return toolbarIcon;
   }
 }
