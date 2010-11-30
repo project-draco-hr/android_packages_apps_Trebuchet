@@ -9,6 +9,7 @@
   try {
     final Resources res=getResources();
     mBackground=res.getDrawable(R.drawable.all_apps_bg_gradient);
+    mCustomizeTrayBackground=res.getDrawable(R.drawable.customize_bg_gradient);
   }
  catch (  Resources.NotFoundException e) {
   }
@@ -18,6 +19,7 @@
     }
     @Override public void onAnimationEndOrCancel(    Animator animation){
       mIsInUnshrinkAnimation=false;
+      mDrawCustomizeTrayBackground=false;
     }
   }
 ;

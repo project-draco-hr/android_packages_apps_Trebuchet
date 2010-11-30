@@ -1,8 +1,14 @@
 {
   if (mBackground != null && mBackgroundAlpha > 0.0f) {
-    mBackground.setAlpha((int)(mBackgroundAlpha * 255));
+    int alpha=(int)(mBackgroundAlpha * 255);
+    mBackground.setAlpha(alpha);
     mBackground.setBounds(mScrollX,0,mScrollX + getMeasuredWidth(),getMeasuredHeight());
     mBackground.draw(canvas);
+    if (mDrawCustomizeTrayBackground) {
+      mCustomizeTrayBackground.setAlpha(alpha);
+      mCustomizeTrayBackground.setBounds(mScrollX,0,mScrollX + getMeasuredWidth(),getMeasuredHeight());
+      mCustomizeTrayBackground.draw(canvas);
+    }
   }
   super.onDraw(canvas);
 }

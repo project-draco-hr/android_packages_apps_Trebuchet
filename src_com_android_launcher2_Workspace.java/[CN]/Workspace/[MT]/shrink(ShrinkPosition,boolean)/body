@@ -1,5 +1,4 @@
 {
-  showBackgroundGradient();
   if (mFirstLayout) {
     mWaitingToShrink=true;
     mWaitingToShrinkPosition=shrinkPosition;
@@ -78,4 +77,10 @@
     mAnimator.start();
   }
   setChildrenDrawnWithCacheEnabled(true);
+  if (shrinkPosition == ShrinkPosition.SHRINK_TO_TOP) {
+    showBackgroundGradientForCustomizeTray();
+  }
+ else {
+    showBackgroundGradient();
+  }
 }
