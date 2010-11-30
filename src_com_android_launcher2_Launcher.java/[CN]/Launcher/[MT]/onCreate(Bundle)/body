@@ -86,4 +86,15 @@
   Selection.setSelection(mDefaultKeySsb,0);
   IntentFilter filter=new IntentFilter(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
   registerReceiver(mCloseSystemDialogsReceiver,filter);
+  if (LauncherApplication.isScreenXLarge()) {
+    if (sGlobalSearchIcon != null) {
+      updateGlobalSearchIcon(sGlobalSearchIcon);
+    }
+    if (sVoiceSearchIcon != null) {
+      updateVoiceSearchIcon(sVoiceSearchIcon);
+    }
+    if (sAppMarketIcon != null) {
+      updateAppMarketIcon(sAppMarketIcon);
+    }
+  }
 }
