@@ -1,0 +1,9 @@
+{
+  if (mAlpha > 0) {
+    super.onDraw(canvas);
+  }
+  if (mHolographicOutline != null && mHolographicAlpha > 0) {
+    mPaint.setAlpha(mHolographicAlpha);
+    canvas.drawBitmap(mHolographicOutline,0,0,mPaint);
+  }
+}

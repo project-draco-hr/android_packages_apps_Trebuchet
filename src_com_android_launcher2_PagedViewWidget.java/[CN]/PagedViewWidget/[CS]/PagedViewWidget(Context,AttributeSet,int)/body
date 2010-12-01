@@ -1,0 +1,13 @@
+{
+  super(context,attrs,defStyle);
+  TypedArray a=context.obtainStyledAttributes(attrs,R.styleable.PagedViewWidget,defStyle,0);
+  mHoloBlurColor=a.getColor(R.styleable.PagedViewWidget_blurColor,0);
+  mHoloOutlineColor=a.getColor(R.styleable.PagedViewWidget_outlineColor,0);
+  a.recycle();
+  if (sHolographicOutlineHelper == null) {
+    sHolographicOutlineHelper=new HolographicOutlineHelper();
+  }
+  setFocusable(true);
+  setWillNotDraw(false);
+  setClipToPadding(false);
+}

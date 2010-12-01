@@ -7,15 +7,11 @@
   final int endIndex=Math.min(count,startIndex + numItemsPerPage);
   for (int i=startIndex; i < endIndex; ++i) {
     final ResolveInfo info=mWallpaperList.get(i);
-    LinearLayout l=(LinearLayout)mInflater.inflate(R.layout.customize_paged_view_wallpaper,layout,false);
+    final FastBitmapDrawable icon=getWallpaperPreview(info);
+    PagedViewWidget l=(PagedViewWidget)mInflater.inflate(R.layout.customize_paged_view_wallpaper,layout,false);
+    l.applyFromWallpaperInfo(info,mPackageManager,icon,mMaxWidgetWidth);
     l.setTag(info);
     l.setOnClickListener(this);
-    final Drawable icon=getWallpaperPreview(info);
-    ImageView image=(ImageView)l.findViewById(R.id.wallpaper_preview);
-    image.setMaxWidth(mMaxWidgetWidth);
-    image.setImageDrawable(icon);
-    TextView name=(TextView)l.findViewById(R.id.wallpaper_name);
-    name.setText(info.loadLabel(mPackageManager));
     layout.addView(l);
   }
 }

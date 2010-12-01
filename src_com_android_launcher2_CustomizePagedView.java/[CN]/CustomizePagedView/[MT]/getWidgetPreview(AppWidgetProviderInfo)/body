@@ -2,6 +2,7 @@
   final PackageManager packageManager=mPackageManager;
   String packageName=info.provider.getPackageName();
   Drawable drawable=null;
+  FastBitmapDrawable newDrawable=null;
   if (info.previewImage != 0) {
     drawable=packageManager.getDrawable(packageName,info.previewImage,null);
     if (drawable == null) {
@@ -31,7 +32,7 @@
     }
  catch (    Resources.NotFoundException e) {
     }
-    drawable=new FastBitmapDrawable(bitmap);
+    newDrawable=new FastBitmapDrawable(bitmap);
   }
  else {
     final float imageWidth=drawable.getIntrinsicWidth();
@@ -51,8 +52,8 @@
     }
     final Bitmap bitmap=Bitmap.createBitmap(width,height,Config.ARGB_8888);
     renderDrawableToBitmap(drawable,bitmap,0,0,width,height);
-    drawable=new FastBitmapDrawable(bitmap);
+    newDrawable=new FastBitmapDrawable(bitmap);
   }
-  drawable.setBounds(0,0,drawable.getIntrinsicWidth(),drawable.getIntrinsicHeight());
-  return drawable;
+  newDrawable.setBounds(0,0,newDrawable.getIntrinsicWidth(),newDrawable.getIntrinsicHeight());
+  return newDrawable;
 }

@@ -1,0 +1,6 @@
+{
+  if (w > 0 && h > 0) {
+    queueHolographicOutlineCreation();
+  }
+  super.onSizeChanged(w,h,oldw,oldh);
+}

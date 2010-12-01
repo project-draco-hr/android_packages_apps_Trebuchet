@@ -1,0 +1,8 @@
+{
+  ImageView image=(ImageView)findViewById(R.id.wallpaper_preview);
+  image.setMaxWidth(maxWidth);
+  image.setImageDrawable(preview);
+  TextView name=(TextView)findViewById(R.id.wallpaper_name);
+  name.setText(info.loadLabel(packageManager));
+  mPreview=preview;
+}

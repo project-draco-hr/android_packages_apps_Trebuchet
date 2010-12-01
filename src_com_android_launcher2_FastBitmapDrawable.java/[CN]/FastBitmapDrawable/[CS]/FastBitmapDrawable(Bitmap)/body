@@ -1,4 +1,5 @@
 {
+  mAlpha=255;
   mBitmap=b;
   if (b != null) {
     mWidth=mBitmap.getWidth();
