@@ -1,9 +1,10 @@
 {
+  if (!mDragAndDropEnabled)   return;
   if (mActive) {
     mActive=false;
   }
-  if (mManageVisibility) {
-    setVisibility(GONE);
+  setVisibility(GONE);
+  if (mHandle != null) {
     mHandle.setVisibility(VISIBLE);
   }
 }

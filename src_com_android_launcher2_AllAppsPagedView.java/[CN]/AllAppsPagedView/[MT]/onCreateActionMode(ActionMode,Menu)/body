@@ -1,4 +1,0 @@
-{
-  mDragController.addDropTarget(this);
-  return true;
-}

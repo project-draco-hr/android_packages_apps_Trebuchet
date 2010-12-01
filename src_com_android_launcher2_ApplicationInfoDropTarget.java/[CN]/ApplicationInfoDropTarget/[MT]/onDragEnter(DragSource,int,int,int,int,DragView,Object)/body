@@ -1,3 +1,4 @@
 {
+  if (!mDragAndDropEnabled)   return;
   dragView.setPaint(mPaint);
 }

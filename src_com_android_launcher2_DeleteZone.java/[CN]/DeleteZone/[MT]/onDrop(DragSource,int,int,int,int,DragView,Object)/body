@@ -1,4 +1,5 @@
 {
+  if (!mDragAndDropEnabled)   return;
   final ItemInfo item=(ItemInfo)dragInfo;
   if (item instanceof ApplicationInfo && LauncherApplication.isScreenXLarge()) {
     mLauncher.startApplicationUninstallActivity((ApplicationInfo)item);
