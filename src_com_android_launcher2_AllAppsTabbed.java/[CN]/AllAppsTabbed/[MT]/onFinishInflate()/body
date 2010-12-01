@@ -13,10 +13,14 @@
     }
   }
 ;
-  String label=mContext.getString(R.string.all_apps_tab_all);
-  addTab(newTabSpec(TAG_ALL).setIndicator(label).setContent(contentFactory));
-  label=mContext.getString(R.string.all_apps_tab_downloaded);
-  addTab(newTabSpec(TAG_DOWNLOADED).setIndicator(label).setContent(contentFactory));
+  TextView tabView;
+  TabWidget tabWidget=(TabWidget)findViewById(com.android.internal.R.id.tabs);
+  tabView=(TextView)mInflater.inflate(R.layout.tab_widget_indicator,tabWidget,false);
+  tabView.setText(mContext.getString(R.string.all_apps_tab_all));
+  addTab(newTabSpec(TAG_ALL).setIndicator(tabView).setContent(contentFactory));
+  tabView=(TextView)mInflater.inflate(R.layout.tab_widget_indicator,tabWidget,false);
+  tabView.setText(mContext.getString(R.string.all_apps_tab_downloaded));
+  addTab(newTabSpec(TAG_DOWNLOADED).setIndicator(tabView).setContent(contentFactory));
   setOnTabChangedListener(new OnTabChangeListener(){
     public void onTabChanged(    String tabId){
       final Resources res=getResources();
