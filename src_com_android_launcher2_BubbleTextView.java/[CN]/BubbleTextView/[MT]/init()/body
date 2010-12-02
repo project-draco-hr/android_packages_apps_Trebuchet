@@ -7,7 +7,6 @@
   mPaint=new Paint(Paint.ANTI_ALIAS_FLAG);
   mPaint.setColor(bubbleColor);
   mBubbleColorAlpha=Color.alpha(bubbleColor) / 255.0f;
-  mAppCellWidth=(int)res.getDimension(R.dimen.app_icon_size);
   final float scale=res.getDisplayMetrics().density;
   mCornerRadius=CORNER_RADIUS * scale;
   mPaddingH=PADDING_H * scale;

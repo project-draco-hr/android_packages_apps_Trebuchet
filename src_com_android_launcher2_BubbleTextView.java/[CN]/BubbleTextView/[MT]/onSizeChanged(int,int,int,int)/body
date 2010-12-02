@@ -1,9 +1,0 @@
-{
-  if (w > 0 && h > 0) {
-    int d=w - mAppCellWidth;
-    int pL=d - (d / 2);
-    int pR=d - pL;
-    setPadding(pL,getPaddingTop(),pR,getPaddingBottom());
-  }
-  super.onSizeChanged(w,h,oldw,oldh);
-}
