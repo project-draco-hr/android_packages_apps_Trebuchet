@@ -1,0 +1,7 @@
+{
+  Bitmap b=info.getIcon(iconCache);
+  setCompoundDrawablesWithIntrinsicBounds(null,new FastBitmapDrawable(b),null,null);
+  setText(info.title);
+  buildAndEnableCache();
+  setTag(info);
+}

@@ -1,6 +1,6 @@
 {
   final ItemInfo item=(ItemInfo)info;
-  if (item != null) {
+  if (item != null && mDragAndDropEnabled) {
     mTrashMode=true;
     getHitRect(mRegion);
     mRegionF.set(mRegion);
@@ -10,11 +10,11 @@
     }
     mDragController.setDeleteRegion(mRegionF);
     mTransition.resetTransition();
-    if (mManageVisibility) {
-      createAnimations();
-      startAnimation(mInAnimation);
+    createAnimations();
+    startAnimation(mInAnimation);
+    if (mHandle != null) {
       mHandle.startAnimation(mHandleOutAnimation);
-      setVisibility(VISIBLE);
     }
+    setVisibility(VISIBLE);
   }
 }

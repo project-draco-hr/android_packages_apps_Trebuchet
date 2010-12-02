@@ -59,6 +59,26 @@
   }
   deleteZone.setHandle(findViewById(deleteZoneHandleId));
   dragController.addDragListener(deleteZone);
+  DeleteZone allAppsDeleteZone=(DeleteZone)findViewById(R.id.all_apps_delete_zone);
+  if (allAppsDeleteZone != null) {
+    allAppsDeleteZone.setLauncher(this);
+    allAppsDeleteZone.setDragController(dragController);
+    allAppsDeleteZone.setDragAndDropEnabled(false);
+    dragController.addDragListener(allAppsDeleteZone);
+    dragController.addDropTarget(allAppsDeleteZone);
+  }
+  ApplicationInfoDropTarget allAppsInfoTarget=(ApplicationInfoDropTarget)findViewById(R.id.all_apps_info_target);
+  if (allAppsInfoTarget != null) {
+    allAppsInfoTarget.setLauncher(this);
+    dragController.addDragListener(allAppsInfoTarget);
+    allAppsInfoTarget.setDragColor(getResources().getColor(R.color.app_info_filter));
+    allAppsInfoTarget.setDragAndDropEnabled(false);
+    View marketButton=findViewById(R.id.market_button);
+    if (marketButton != null) {
+      marketButton.setBackgroundColor(Color.RED);
+      allAppsInfoTarget.setHandle(marketButton);
+    }
+  }
   ApplicationInfoDropTarget infoButton=(ApplicationInfoDropTarget)findViewById(R.id.info_button);
   if (infoButton != null) {
     infoButton.setLauncher(this);
@@ -73,5 +93,11 @@
   dragController.addDropTarget(deleteZone);
   if (infoButton != null) {
     dragController.addDropTarget(infoButton);
+  }
+  if (allAppsInfoTarget != null) {
+    dragController.addDropTarget(allAppsInfoTarget);
+  }
+  if (allAppsDeleteZone != null) {
+    dragController.addDropTarget(allAppsDeleteZone);
   }
 }

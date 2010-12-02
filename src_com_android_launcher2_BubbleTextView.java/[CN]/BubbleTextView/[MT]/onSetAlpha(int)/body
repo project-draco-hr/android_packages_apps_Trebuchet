@@ -1,7 +1,7 @@
 {
   if (mPrevAlpha != alpha) {
     mPrevAlpha=alpha;
-    mPaint.setAlpha(alpha);
+    mPaint.setAlpha((int)(alpha * mBubbleColorAlpha));
     super.onSetAlpha(alpha);
   }
   return true;

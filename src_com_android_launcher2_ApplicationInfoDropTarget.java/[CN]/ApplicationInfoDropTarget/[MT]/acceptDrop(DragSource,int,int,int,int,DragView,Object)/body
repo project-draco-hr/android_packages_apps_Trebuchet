@@ -1,4 +1,5 @@
 {
+  if (getVisibility() != VISIBLE)   return false;
   ComponentName componentName=null;
   if (dragInfo instanceof ApplicationInfo) {
     componentName=((ApplicationInfo)dragInfo).componentName;

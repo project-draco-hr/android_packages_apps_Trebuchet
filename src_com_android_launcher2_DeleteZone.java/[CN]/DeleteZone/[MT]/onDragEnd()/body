@@ -1,11 +1,11 @@
 {
-  if (mTrashMode) {
+  if (mTrashMode && mDragAndDropEnabled) {
     mTrashMode=false;
     mDragController.setDeleteRegion(null);
     if (mOutAnimation != null)     startAnimation(mOutAnimation);
-    if (mHandleInAnimation != null)     mHandle.startAnimation(mHandleInAnimation);
-    if (mManageVisibility) {
-      setVisibility(GONE);
+    if (mHandleInAnimation != null && mHandle != null) {
+      mHandle.startAnimation(mHandleInAnimation);
     }
+    setVisibility(GONE);
   }
 }

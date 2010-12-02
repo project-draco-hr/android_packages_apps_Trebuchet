@@ -1,4 +1,5 @@
 {
+  if (!mDragAndDropEnabled)   return;
   mTransition.reverseTransition(TRANSITION_DURATION);
   dragView.setPaint(null);
 }

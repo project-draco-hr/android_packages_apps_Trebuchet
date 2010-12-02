@@ -1,11 +1,11 @@
 {
-  if (info != null) {
+  if (info != null && mDragAndDropEnabled) {
     final int itemType=((ItemInfo)info).itemType;
     mActive=(itemType == LauncherSettings.Favorites.ITEM_TYPE_APPLICATION);
-    if (mManageVisibility) {
-      if (mActive) {
-        setVisibility(VISIBLE);
-      }
+    if (mActive) {
+      setVisibility(VISIBLE);
+    }
+    if (mHandle != null) {
       mHandle.setVisibility(INVISIBLE);
     }
   }

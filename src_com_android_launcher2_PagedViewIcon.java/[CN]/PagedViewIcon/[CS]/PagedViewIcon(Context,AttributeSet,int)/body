@@ -1,6 +1,7 @@
 {
   super(context,attrs,defStyle);
   TypedArray a=context.obtainStyledAttributes(attrs,R.styleable.PagedViewIcon,defStyle,0);
+  mAlpha=255;
   mHoloBlurColor=a.getColor(R.styleable.PagedViewIcon_blurColor,0);
   mHoloOutlineColor=a.getColor(R.styleable.PagedViewIcon_outlineColor,0);
   mCheckedBlurColor=a.getColor(R.styleable.PagedViewIcon_checkedBlurColor,0);

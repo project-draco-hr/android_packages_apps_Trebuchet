@@ -1,0 +1,10 @@
+{
+  if (mWaitingToGenerateCache && !mIsBuildingCache) {
+    buildAndEnableCache();
+    mWaitingToGenerateCache=false;
+  }
+  if (mCache != null) {
+    canvas.drawBitmap(mCache,mTextCacheLeft - mTextCacheScrollX + mScrollX,mTextCacheTop,mCachePaint);
+  }
+  super.draw(canvas);
+}
