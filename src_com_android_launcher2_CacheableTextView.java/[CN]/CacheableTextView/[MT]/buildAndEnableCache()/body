@@ -16,13 +16,17 @@
   mTextCacheScrollX=mScrollX;
   final float textCacheRight=Math.min(left + layout.getLineRight(0) + mPaddingH,mScrollX + mRight - mLeft) + hPadding;
   final float textCacheBottom=top + layout.getLineBottom(0) + mPaddingV+ vPadding;
-  mCache=Bitmap.createBitmap((int)(textCacheRight - mTextCacheLeft),(int)(textCacheBottom - mTextCacheTop),Config.ARGB_8888);
-  mCacheCanvas.setBitmap(mCache);
-  mCacheCanvas.translate(-mTextCacheLeft,-mTextCacheTop);
-  mIsBuildingCache=true;
-  setAlpha(1.0f);
-  draw(mCacheCanvas);
-  setAlpha(prevAlpha);
-  mIsBuildingCache=false;
-  setText(" ");
+  int width=(int)(textCacheRight - mTextCacheLeft);
+  int height=(int)(textCacheBottom - mTextCacheTop);
+  if (width != 0 && height != 0) {
+    mCache=Bitmap.createBitmap(width,height,Config.ARGB_8888);
+    mCacheCanvas.setBitmap(mCache);
+    mCacheCanvas.translate(-mTextCacheLeft,-mTextCacheTop);
+    mIsBuildingCache=true;
+    setAlpha(1.0f);
+    draw(mCacheCanvas);
+    setAlpha(prevAlpha);
+    mIsBuildingCache=false;
+    setText(" ");
+  }
 }
