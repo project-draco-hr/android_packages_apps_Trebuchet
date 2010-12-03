@@ -1,0 +1,45 @@
+{
+  if (getLayout() == null || !isImmediate) {
+    mWaitingToGenerateCache=true;
+    return;
+  }
+  final Layout layout=getLayout();
+  final int left=getCompoundPaddingLeft();
+  final int top=getExtendedPaddingTop();
+  final float prevAlpha=getAlpha();
+  int vPadding=getVerticalPadding();
+  int hPadding=getHorizontalPadding();
+  mTextCacheLeft=layout.getLineLeft(0) - hPadding;
+  mTextCacheTop=top + layout.getLineTop(0) - mPaddingV - vPadding;
+  mRectLeft=mScrollX + getLeft();
+  mRectTop=0;
+  mTextCacheScrollX=mScrollX;
+  final float textCacheRight=Math.min(left + layout.getLineRight(0) + mPaddingH,mScrollX + mRight - mLeft) + hPadding;
+  final float textCacheBottom=top + layout.getLineBottom(0) + mPaddingV+ vPadding;
+  int width=(int)(textCacheRight - mTextCacheLeft);
+  int height=(int)(textCacheBottom - mTextCacheTop);
+  if (width != 0 && height != 0) {
+    if (mCache != null) {
+      if (mCache.getWidth() != width || mCache.getHeight() != height) {
+        mCache.recycle();
+        mCache=null;
+      }
+    }
+    if (mCache == null) {
+      mCache=Bitmap.createBitmap(width,height,Config.ARGB_8888);
+      mCacheCanvas.setBitmap(mCache);
+    }
+ else {
+      mCacheCanvas.drawColor(0x00000000);
+    }
+    mCacheCanvas.save();
+    mCacheCanvas.translate(-mTextCacheLeft,-mTextCacheTop);
+    mIsBuildingCache=true;
+    setAlpha(1.0f);
+    draw(mCacheCanvas);
+    setAlpha(prevAlpha);
+    mIsBuildingCache=false;
+    mCacheCanvas.restore();
+    setText(" ");
+  }
+}
