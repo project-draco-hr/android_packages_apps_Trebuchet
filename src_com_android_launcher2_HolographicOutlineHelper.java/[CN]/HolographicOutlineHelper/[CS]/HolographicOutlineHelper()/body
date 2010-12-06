@@ -6,4 +6,6 @@
   mErasePaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_OUT));
   mErasePaint.setFilterBitmap(true);
   mErasePaint.setAntiAlias(true);
+  MaskFilter alphaClipTable=TableMaskFilter.CreateClipTable(180,255);
+  mAlphaClipPaint.setMaskFilter(alphaClipTable);
 }

@@ -1,0 +1,29 @@
+{
+  Bitmap glowShape=srcDst.extractAlpha(mAlphaClipPaint,mTempOffset);
+  mBlurPaint.setMaskFilter(thickness == THICK ? sThickOuterBlurMaskFilter : sMediumOuterBlurMaskFilter);
+  int[] outerBlurOffset=new int[2];
+  Bitmap thickOuterBlur=glowShape.extractAlpha(mBlurPaint,outerBlurOffset);
+  mBlurPaint.setMaskFilter(sThinOuterBlurMaskFilter);
+  int[] thinOuterBlurOffset=new int[2];
+  Bitmap thinOuterBlur=glowShape.extractAlpha(mBlurPaint,thinOuterBlurOffset);
+  srcDstCanvas.setBitmap(glowShape);
+  srcDstCanvas.drawColor(0xFF000000,PorterDuff.Mode.SRC_OUT);
+  mBlurPaint.setMaskFilter(thickness == THICK ? sThickInnerBlurMaskFilter : sMediumInnerBlurMaskFilter);
+  int[] thickInnerBlurOffset=new int[2];
+  Bitmap thickInnerBlur=glowShape.extractAlpha(mBlurPaint,thickInnerBlurOffset);
+  srcDstCanvas.setBitmap(thickInnerBlur);
+  srcDstCanvas.drawBitmap(glowShape,-thickInnerBlurOffset[0],-thickInnerBlurOffset[1],mErasePaint);
+  srcDstCanvas.drawRect(0,0,-thickInnerBlurOffset[0],thickInnerBlur.getHeight(),mErasePaint);
+  srcDstCanvas.drawRect(0,0,thickInnerBlur.getWidth(),-thickInnerBlurOffset[1],mErasePaint);
+  srcDstCanvas.setBitmap(srcDst);
+  srcDstCanvas.drawColor(0x00000000,PorterDuff.Mode.CLEAR);
+  mHolographicPaint.setColor(color);
+  srcDstCanvas.drawBitmap(thickInnerBlur,thickInnerBlurOffset[0],thickInnerBlurOffset[1],mHolographicPaint);
+  srcDstCanvas.drawBitmap(thickOuterBlur,outerBlurOffset[0],outerBlurOffset[1],mHolographicPaint);
+  mHolographicPaint.setColor(outlineColor);
+  srcDstCanvas.drawBitmap(thinOuterBlur,thinOuterBlurOffset[0],thinOuterBlurOffset[1],mHolographicPaint);
+  thinOuterBlur.recycle();
+  thickOuterBlur.recycle();
+  thickInnerBlur.recycle();
+  glowShape.recycle();
+}

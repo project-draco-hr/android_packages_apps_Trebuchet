@@ -6,7 +6,7 @@
       Canvas checkedOutlineCanvas=new Canvas(mCheckedOutline);
       mPaint.setAlpha(255);
       checkedOutlineCanvas.drawBitmap(mIcon,0,0,mPaint);
-      sHolographicOutlineHelper.applyExpensiveOutlineWithBlur(mCheckedOutline,checkedOutlineCanvas,mCheckedBlurColor,mCheckedOutlineColor);
+      sHolographicOutlineHelper.applyThickExpensiveOutlineWithBlur(mCheckedOutline,checkedOutlineCanvas,mCheckedBlurColor,mCheckedOutlineColor);
     }
  else {
       invalidateCheckedImage();
