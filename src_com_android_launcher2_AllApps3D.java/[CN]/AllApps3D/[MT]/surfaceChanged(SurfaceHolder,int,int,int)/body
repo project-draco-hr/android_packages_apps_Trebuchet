@@ -22,6 +22,7 @@
   sRollo.resize(w,h);
   Log.d(TAG,"sc " + sRS);
   if (sRS != null) {
-    sRS.mMessageCallback=mMessageProc=new AAMessage();
+    mMessageProc=new AAMessage();
+    sRS.setMessageHandler(mMessageProc);
   }
 }

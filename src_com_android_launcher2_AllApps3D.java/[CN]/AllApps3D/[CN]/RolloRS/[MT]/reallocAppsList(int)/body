@@ -1,17 +1,11 @@
 {
   Allocation[] icons=new Allocation[count];
-  int[] iconIds=new int[count];
-  mAllocIconIds=Allocation.createSized(sRS,Element.I32(sRS),count);
+  mAllocIcons=Allocation.createSized(sRS,Element.ALLOCATION(sRS),count);
   Allocation[] labels=new Allocation[count];
-  int[] labelIds=new int[count];
-  mAllocLabelIds=Allocation.createSized(sRS,Element.I32(sRS),count);
+  mAllocLabels=Allocation.createSized(sRS,Element.ALLOCATION(sRS),count);
   final int oldCount=sRollo.mScript.get_gIconCount();
   System.arraycopy(mIcons,0,icons,0,oldCount);
-  System.arraycopy(mIconIds,0,iconIds,0,oldCount);
   System.arraycopy(mLabels,0,labels,0,oldCount);
-  System.arraycopy(mLabelIds,0,labelIds,0,oldCount);
   mIcons=icons;
-  mIconIds=iconIds;
   mLabels=labels;
-  mLabelIds=labelIds;
 }

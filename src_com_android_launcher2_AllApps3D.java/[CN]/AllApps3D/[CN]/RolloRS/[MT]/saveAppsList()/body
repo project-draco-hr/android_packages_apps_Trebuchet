@@ -1,8 +1,10 @@
 {
-  if (mScript != null && mAllocIconIds != null) {
-    mAllocIconIds.data(mIconIds);
-    mAllocLabelIds.data(mLabelIds);
-    mScript.bind_gIconIDs(mAllocIconIds);
-    mScript.bind_gLabelIDs(mAllocLabelIds);
+  if (mScript != null && mAllocIcons != null) {
+    if (mIcons.length > 0) {
+      mAllocIcons.copyFrom(mIcons);
+      mAllocLabels.copyFrom(mLabels);
+    }
+    mScript.bind_gIcons(mAllocIcons);
+    mScript.bind_gLabels(mAllocLabels);
   }
 }
