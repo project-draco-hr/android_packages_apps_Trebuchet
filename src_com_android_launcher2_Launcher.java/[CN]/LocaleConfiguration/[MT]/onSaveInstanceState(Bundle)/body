@@ -23,10 +23,17 @@
     outState.putBoolean(RUNTIME_STATE_PENDING_FOLDER_RENAME,true);
     outState.putLong(RUNTIME_STATE_PENDING_FOLDER_RENAME_ID,mFolderInfo.id);
   }
+  if (mAllAppsGrid != null && mAllAppsGrid instanceof AllAppsTabbed) {
+    AllAppsTabbed tabhost=(AllAppsTabbed)mAllAppsGrid;
+    String currentTabTag=tabhost.getCurrentTabTag();
+    if (currentTabTag != null) {
+      outState.putString("allapps_currentTab",currentTabTag);
+    }
+  }
   if (mHomeCustomizationDrawer != null) {
     String currentTabTag=mHomeCustomizationDrawer.getCurrentTabTag();
     if (currentTabTag != null) {
-      outState.putString("currentTab",currentTabTag);
+      outState.putString("customize_currentTab",currentTabTag);
     }
   }
 }
