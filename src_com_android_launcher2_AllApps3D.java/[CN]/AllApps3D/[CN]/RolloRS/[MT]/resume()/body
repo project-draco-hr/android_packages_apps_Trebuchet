@@ -1,5 +1,5 @@
 {
   if (sRS != null) {
-    sRS.contextBindRootScript(mScript);
+    sRS.bindRootScript(mScript);
   }
 }

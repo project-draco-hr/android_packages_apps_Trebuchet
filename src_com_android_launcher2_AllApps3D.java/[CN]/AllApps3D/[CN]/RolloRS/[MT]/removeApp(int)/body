@@ -2,13 +2,9 @@
   final int count=mScript.get_gIconCount() - index - 1;
   final int src=index + 1;
   System.arraycopy(mIcons,src,mIcons,index,count);
-  System.arraycopy(mIconIds,src,mIconIds,index,count);
   System.arraycopy(mLabels,src,mLabels,index,count);
-  System.arraycopy(mLabelIds,src,mLabelIds,index,count);
   mScript.set_gIconCount(mScript.get_gIconCount() - 1);
   final int last=mScript.get_gIconCount();
   mIcons[last]=null;
-  mIconIds[last]=0;
   mLabels[last]=null;
-  mLabelIds[last]=0;
 }

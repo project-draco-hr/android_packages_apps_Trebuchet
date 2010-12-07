@@ -21,6 +21,6 @@
     sRollo.dumpState();
   }
   if (sRS != null) {
-    sRS.contextDump(0);
+    sRS.contextDump();
   }
 }

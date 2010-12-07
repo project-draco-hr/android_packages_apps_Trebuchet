@@ -13,10 +13,10 @@
     RenderScriptGL.SurfaceConfig sc=new RenderScriptGL.SurfaceConfig();
     sc.setDepth(16,16);
     sc.setAlpha(8,8);
-    sRS=createRenderScript(sc);
+    sRS=createRenderScriptGL(sc);
   }
  else {
-    createRenderScript(sRS);
+    setRenderScriptGL(sRS);
   }
   final DisplayMetrics metrics=getResources().getDisplayMetrics();
   final boolean isPortrait=metrics.widthPixels < metrics.heightPixels;

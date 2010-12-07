@@ -6,11 +6,9 @@
     allocCount=1;
   }
   mIcons=new Allocation[count];
-  mIconIds=new int[allocCount];
-  mAllocIconIds=Allocation.createSized(sRS,Element.I32(sRS),allocCount);
+  mAllocIcons=Allocation.createSized(sRS,Element.ALLOCATION(sRS),allocCount);
   mLabels=new Allocation[count];
-  mLabelIds=new int[allocCount];
-  mAllocLabelIds=Allocation.createSized(sRS,Element.I32(sRS),allocCount);
+  mAllocLabels=Allocation.createSized(sRS,Element.ALLOCATION(sRS),allocCount);
   mScript.set_gIconCount(count);
   for (int i=0; i < count; i++) {
     createAppIconAllocations(i,list.get(i));

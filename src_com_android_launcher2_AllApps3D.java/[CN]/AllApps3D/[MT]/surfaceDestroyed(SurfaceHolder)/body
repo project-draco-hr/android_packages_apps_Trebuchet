@@ -1,7 +1,7 @@
 {
   super.surfaceDestroyed(holder);
   if (!mSurrendered) {
-    sRS.mMessageCallback=null;
+    sRS.setMessageHandler(null);
   }
   sZoomDirty=true;
   mHaveSurface=false;
