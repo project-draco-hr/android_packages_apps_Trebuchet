@@ -1,8 +1,8 @@
 {
-  sRS.mMessageCallback=null;
+  sRS.setMessageHandler(null);
   if (!mSurrendered) {
     Log.i(TAG,"onDetachedFromWindow");
-    destroyRenderScript();
+    destroyRenderScriptGL();
     sRS=null;
     sRollo=null;
     super.onDetachedFromWindow();

@@ -5,12 +5,4 @@
   if (mIcons != null) {
     Log.d(TAG,"sRollo.mIcons.length=" + mIcons.length);
   }
-  if (mIconIds != null) {
-    Log.d(TAG,"sRollo.mIconIds.length=" + mIconIds.length);
-  }
-  Log.d(TAG,"sRollo.mIconIds=" + Arrays.toString(mIconIds));
-  if (mLabelIds != null) {
-    Log.d(TAG,"sRollo.mLabelIds.length=" + mLabelIds.length);
-  }
-  Log.d(TAG,"sRollo.mLabelIds=" + Arrays.toString(mLabelIds));
 }

@@ -5,7 +5,7 @@
   pvb.setTextureMatrixEnable(true);
   ProgramVertex pv=pvb.create();
   pv.bindAllocation(mPVA);
-  sRS.contextBindProgramVertex(pv);
+  sRS.bindProgramVertex(pv);
   mUniformAlloc=new ScriptField_VpConsts(sRS,1);
   mScript.bind_vpConstants(mUniformAlloc);
   initMesh();
