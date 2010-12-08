@@ -10,10 +10,10 @@
   }
   if (source != this) {
     if (mIsSmall) {
-      onDropExternal(-1,-1,dragInfo,mDragTargetLayout);
+      onDropExternal(-1,-1,dragInfo,mDragTargetLayout,false);
     }
  else {
-      onDropExternal(originX,originY,dragInfo,mDragTargetLayout);
+      onDropExternal(originX,originY,dragInfo,mDragTargetLayout,false);
     }
   }
  else   if (mDragInfo != null) {

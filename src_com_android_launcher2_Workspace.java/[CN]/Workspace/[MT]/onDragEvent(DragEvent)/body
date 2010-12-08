@@ -50,7 +50,7 @@ if (test != null) {
   if (isShortcut) {
     final Intent intent=data.getItem(index).getIntent();
     Object info=model.infoFromShortcutIntent(mContext,intent,data.getIcon());
-    onDropExternal(x,y,info,layout);
+    onDropExternal(x,y,info,layout,false);
   }
  else {
     if (widgets.size() == 1) {

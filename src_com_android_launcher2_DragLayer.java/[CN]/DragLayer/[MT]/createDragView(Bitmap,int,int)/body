@@ -1,0 +1,8 @@
+{
+  ImageView imageView=new ImageView(mContext);
+  imageView.setImageBitmap(b);
+  imageView.setX(xPos);
+  imageView.setY(yPos);
+  addView(imageView,b.getWidth(),b.getHeight());
+  return imageView;
+}

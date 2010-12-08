@@ -1,0 +1,3 @@
+{
+  return (mCustomizationType == CustomizationType.WidgetCustomization) ? v.findViewById(R.id.widget_preview) : v;
+}

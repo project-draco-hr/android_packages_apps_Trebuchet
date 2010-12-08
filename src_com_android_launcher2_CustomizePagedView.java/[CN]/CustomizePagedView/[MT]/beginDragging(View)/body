@@ -3,19 +3,15 @@
     endChoiceMode();
   }
   mIsDragging=true;
-  PendingAddItemInfo createItemInfo;
 switch (mCustomizationType) {
 case WidgetCustomization:
-    final LinearLayout l=(LinearLayout)v;
-  final Drawable icon=((ImageView)l.findViewById(R.id.widget_preview)).getDrawable();
-Bitmap b=drawableToBitmap(icon);
-PendingAddWidgetInfo createWidgetInfo=(PendingAddWidgetInfo)v.getTag();
+    PendingAddWidgetInfo createWidgetInfo=(PendingAddWidgetInfo)v.getTag();
+  final View dragView=v.findViewById(R.id.widget_preview);
 mLauncher.getWorkspace().onDragStartedWithItemMinSize(createWidgetInfo.minWidth,createWidgetInfo.minHeight);
-mDragController.startDrag(v,b,this,createWidgetInfo,DragController.DRAG_ACTION_COPY,null);
-b.recycle();
+mDragController.startDrag(dragView,this,createWidgetInfo,DragController.DRAG_ACTION_COPY,null);
 return true;
 case ShortcutCustomization:
-createItemInfo=(PendingAddItemInfo)v.getTag();
+PendingAddItemInfo createItemInfo=(PendingAddItemInfo)v.getTag();
 mDragController.startDrag(v,this,createItemInfo,DragController.DRAG_ACTION_COPY);
 mLauncher.getWorkspace().onDragStartedWithItemSpans(1,1);
 return true;
