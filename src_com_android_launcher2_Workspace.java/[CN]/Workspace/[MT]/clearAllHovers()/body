@@ -3,4 +3,5 @@
   for (int i=0; i < childCount; i++) {
     ((CellLayout)getChildAt(i)).setHover(false);
   }
+  mSpringLoadedDragControllger.onDragExit();
 }

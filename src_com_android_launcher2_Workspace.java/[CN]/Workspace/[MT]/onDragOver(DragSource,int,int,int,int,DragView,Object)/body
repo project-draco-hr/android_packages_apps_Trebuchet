@@ -3,19 +3,32 @@
     CellLayout layout;
     int originX=x - xOffset;
     int originY=y - yOffset;
-    if (mIsSmall || mIsInUnshrinkAnimation) {
+    boolean shrunken=mIsSmall || mIsInUnshrinkAnimation;
+    if (shrunken) {
       layout=findMatchingPageForDragOver(dragView,originX,originY,xOffset,yOffset);
       if (layout != mDragTargetLayout) {
         if (mDragTargetLayout != null) {
           mDragTargetLayout.setHover(false);
+          mSpringLoadedDragControllger.onDragExit();
         }
         mDragTargetLayout=layout;
         if (mDragTargetLayout != null && mDragTargetLayout.getAcceptsDrops()) {
           mDragTargetLayout.setHover(true);
+          mSpringLoadedDragControllger.onDragEnter(mDragTargetLayout);
         }
       }
     }
  else {
+      layout=getCurrentDropLayout();
+      if (layout != mDragTargetLayout) {
+        if (mDragTargetLayout != null) {
+          mDragTargetLayout.onDragExit();
+        }
+        layout.onDragEnter();
+        mDragTargetLayout=layout;
+      }
+    }
+    if (!shrunken || mShrinkState == ShrinkState.SPRING_LOADED) {
       layout=getCurrentDropLayout();
       final ItemInfo item=(ItemInfo)dragInfo;
       if (dragInfo instanceof LauncherAppWidgetInfo) {
@@ -35,18 +48,11 @@
           }
         }
       }
-      if (layout != mDragTargetLayout) {
-        if (mDragTargetLayout != null) {
-          mDragTargetLayout.onDragExit();
-        }
-        layout.onDragEnter();
-        mDragTargetLayout=layout;
-      }
-      if ((!LauncherApplication.isScreenXLarge() || source == this) && mDragTargetLayout != null) {
+      if (mDragTargetLayout != null) {
         final View child=(mDragInfo == null) ? null : mDragInfo.cell;
-        int localOriginX=originX - (mDragTargetLayout.getLeft() - mScrollX);
-        int localOriginY=originY - (mDragTargetLayout.getTop() - mScrollY);
-        mDragTargetLayout.visualizeDropLocation(child,mDragOutline,localOriginX,localOriginY,item.spanX,item.spanY);
+        float[] localOrigin={originX,originY};
+        mapPointFromSelfToChild(mDragTargetLayout,localOrigin,null);
+        mDragTargetLayout.visualizeDropLocation(child,mDragOutline,(int)localOrigin[0],(int)localOrigin[1],item.spanX,item.spanY);
       }
     }
   }

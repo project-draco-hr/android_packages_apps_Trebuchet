@@ -1,0 +1,89 @@
+{
+  if (mFirstLayout) {
+    mWaitingToShrink=true;
+    mWaitingToShrinkState=shrinkState;
+    return;
+  }
+  mIsSmall=true;
+  mShrinkState=shrinkState;
+  setCurrentPage((mNextPage != INVALID_PAGE) ? mNextPage : mCurrentPage);
+  if (!mIsDragInProcess) {
+    updateWhichPagesAcceptDrops(mShrinkState);
+  }
+  mTouchState=TOUCH_STATE_REST;
+  mActivePointerId=INVALID_POINTER;
+  CellLayout currentPage=(CellLayout)getChildAt(mCurrentPage);
+  if (currentPage.getBackgroundAlphaMultiplier() < 1.0f) {
+    currentPage.setBackgroundAlpha(0.0f);
+  }
+  currentPage.setBackgroundAlphaMultiplier(1.0f);
+  final Resources res=getResources();
+  final int screenWidth=getWidth();
+  final int screenHeight=getHeight();
+  final int pageWidth=getChildAt(0).getMeasuredWidth();
+  final int pageHeight=getChildAt(0).getMeasuredHeight();
+  final int scaledPageWidth=(int)(SHRINK_FACTOR * pageWidth);
+  final int scaledPageHeight=(int)(SHRINK_FACTOR * pageHeight);
+  final float extraScaledSpacing=res.getDimension(R.dimen.smallScreenExtraSpacing);
+  final int screenCount=getChildCount();
+  float totalWidth=screenCount * scaledPageWidth + (screenCount - 1) * extraScaledSpacing;
+  boolean isPortrait=getMeasuredHeight() > getMeasuredWidth();
+  float newY=(isPortrait ? getResources().getDimension(R.dimen.allAppsSmallScreenVerticalMarginPortrait) : getResources().getDimension(R.dimen.allAppsSmallScreenVerticalMarginLandscape));
+  float finalAlpha=1.0f;
+  float extraShrinkFactor=1.0f;
+  if (shrinkState == ShrinkState.BOTTOM_VISIBLE) {
+    newY=screenHeight - newY - scaledPageHeight;
+  }
+ else   if (shrinkState == ShrinkState.BOTTOM_HIDDEN) {
+    newY=screenHeight - newY - scaledPageHeight;
+    finalAlpha=0.0f;
+  }
+ else   if (shrinkState == ShrinkState.MIDDLE) {
+    newY=screenHeight / 2 - scaledPageHeight / 2;
+    finalAlpha=1.0f;
+  }
+ else   if (shrinkState == ShrinkState.TOP) {
+    newY=(isPortrait ? getResources().getDimension(R.dimen.customizeSmallScreenVerticalMarginPortrait) : getResources().getDimension(R.dimen.customizeSmallScreenVerticalMarginLandscape));
+  }
+  float newX=mScroller.getFinalX() + screenWidth / 2 - totalWidth / 2;
+  newX-=(pageWidth - scaledPageWidth) / 2.0f;
+  newY-=(pageHeight - scaledPageHeight) / 2.0f;
+  if (mAnimator != null) {
+    mAnimator.cancel();
+  }
+  mAnimator=new AnimatorSet();
+  for (int i=0; i < screenCount; i++) {
+    CellLayout cl=(CellLayout)getChildAt(i);
+    float rotation=(-i + 2) * WORKSPACE_ROTATION;
+    float rotationScaleX=(float)(1.0f / Math.cos(Math.PI * rotation / 180.0f));
+    float rotationScaleY=getYScaleForScreen(i);
+    if (animated) {
+      final int duration=res.getInteger(R.integer.config_workspaceShrinkTime);
+      ObjectAnimator animWithInterpolator=ObjectAnimator.ofPropertyValuesHolder(cl,PropertyValuesHolder.ofFloat("x",newX),PropertyValuesHolder.ofFloat("y",newY),PropertyValuesHolder.ofFloat("scaleX",SHRINK_FACTOR * rotationScaleX * extraShrinkFactor),PropertyValuesHolder.ofFloat("scaleY",SHRINK_FACTOR * rotationScaleY * extraShrinkFactor),PropertyValuesHolder.ofFloat("backgroundAlpha",finalAlpha),PropertyValuesHolder.ofFloat("alpha",finalAlpha),PropertyValuesHolder.ofFloat("rotationY",rotation));
+      animWithInterpolator.setDuration(duration);
+      animWithInterpolator.setInterpolator(mZoomOutInterpolator);
+      mAnimator.playTogether(animWithInterpolator);
+    }
+ else {
+      cl.setX((int)newX);
+      cl.setY((int)newY);
+      cl.setScaleX(SHRINK_FACTOR * rotationScaleX * extraShrinkFactor);
+      cl.setScaleY(SHRINK_FACTOR * rotationScaleY * extraShrinkFactor);
+      cl.setBackgroundAlpha(finalAlpha);
+      cl.setAlpha(finalAlpha);
+      cl.setRotationY(rotation);
+    }
+    newX+=scaledPageWidth + extraScaledSpacing;
+  }
+  setLayoutScale(1.0f);
+  if (animated) {
+    mAnimator.start();
+  }
+  setChildrenDrawnWithCacheEnabled(true);
+  if (shrinkState == ShrinkState.TOP) {
+    showBackgroundGradientForCustomizeTray();
+  }
+ else {
+    showBackgroundGradient();
+  }
+}

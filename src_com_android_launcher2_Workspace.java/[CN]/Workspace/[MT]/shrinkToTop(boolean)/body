@@ -1,3 +1,0 @@
-{
-  shrink(ShrinkPosition.SHRINK_TO_TOP,animated);
-}

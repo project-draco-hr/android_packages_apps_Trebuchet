@@ -1,7 +1,7 @@
 {
   super.onLayout(changed,left,top,right,bottom);
   if (mWaitingToShrink) {
-    shrink(mWaitingToShrinkPosition,false);
+    shrink(mWaitingToShrinkState,false);
     mWaitingToShrink=false;
   }
   if (LauncherApplication.isInPlaceRotationEnabled()) {

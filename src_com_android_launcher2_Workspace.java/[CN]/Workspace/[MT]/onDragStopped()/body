@@ -1,3 +1,4 @@
 {
-  updateWhichPagesAcceptDrops(mShrunkenState);
+  mIsDragInProcess=false;
+  updateWhichPagesAcceptDrops(mShrinkState);
 }

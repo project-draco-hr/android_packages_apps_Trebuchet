@@ -5,6 +5,8 @@
   v.setWillNotCacheDrawing(false);
   int color=v.getDrawingCacheBackgroundColor();
   v.setDrawingCacheBackgroundColor(0);
+  float alpha=v.getAlpha();
+  v.setAlpha(1.0f);
   if (color != 0) {
     v.destroyDrawingCache();
   }
@@ -16,6 +18,7 @@
   }
   Bitmap bitmap=Bitmap.createBitmap(cacheBitmap);
   v.destroyDrawingCache();
+  v.setAlpha(alpha);
   v.setWillNotCacheDrawing(willNotCache);
   v.setDrawingCacheBackgroundColor(color);
   return bitmap;

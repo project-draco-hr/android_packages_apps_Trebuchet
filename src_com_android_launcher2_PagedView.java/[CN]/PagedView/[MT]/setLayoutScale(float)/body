@@ -1,0 +1,18 @@
+{
+  mLayoutScale=childrenScale;
+  int childCount=getChildCount();
+  float childrenX[]=new float[childCount];
+  float childrenY[]=new float[childCount];
+  for (int i=0; i < childCount; i++) {
+    final View child=getChildAt(i);
+    childrenX[i]=child.getX();
+    childrenY[i]=child.getY();
+  }
+  onLayout(false,mLeft,mTop,mRight,mBottom);
+  for (int i=0; i < childCount; i++) {
+    final View child=getChildAt(i);
+    child.setX(childrenX[i]);
+    child.setY(childrenY[i]);
+  }
+  moveToNewPageWithoutMovingCellLayouts(mCurrentPage);
+}

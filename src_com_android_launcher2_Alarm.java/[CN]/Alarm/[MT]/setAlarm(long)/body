@@ -1,0 +1,8 @@
+{
+  long currentTime=System.currentTimeMillis();
+  mAlarmTriggerTime=currentTime + millisecondsInFuture;
+  if (!mWaitingForCallback) {
+    mHandler.postDelayed(this,mAlarmTriggerTime - currentTime);
+    mWaitingForCallback=true;
+  }
+}

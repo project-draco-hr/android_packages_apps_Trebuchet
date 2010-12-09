@@ -1,37 +1,3 @@
 {
-  Resources res=getResources();
-  int duration=res.getInteger(R.integer.config_allAppsZoomOutTime);
-  float scaleFactor=(float)res.getInteger(R.integer.config_allAppsZoomScaleFactor);
-  final View fromView=(fromState == State.ALL_APPS) ? (View)mAllAppsGrid : mHomeCustomizationDrawer;
-  mCustomizePagedView.endChoiceMode();
-  mAllAppsPagedView.endChoiceMode();
-  setPivotsForZoom(fromView,fromState,scaleFactor);
-  mWorkspace.unshrink(animated);
-  if (animated) {
-    if (mStateAnimation != null)     mStateAnimation.cancel();
-    mStateAnimation=new AnimatorSet();
-    ValueAnimator scaleAnim=ObjectAnimator.ofPropertyValuesHolder(fromView,PropertyValuesHolder.ofFloat("scaleX",scaleFactor),PropertyValuesHolder.ofFloat("scaleY",scaleFactor));
-    scaleAnim.setDuration(duration);
-    scaleAnim.setInterpolator(new Workspace.ZoomInInterpolator());
-    ValueAnimator alphaAnim=ObjectAnimator.ofPropertyValuesHolder(fromView,PropertyValuesHolder.ofFloat("alpha",1.0f,0.0f));
-    alphaAnim.setDuration(res.getInteger(R.integer.config_allAppsFadeOutTime));
-    alphaAnim.addListener(new LauncherAnimatorListenerAdapter(){
-      @Override public void onAnimationEndOrCancel(      Animator animation){
-        fromView.setVisibility(View.GONE);
-      }
-    }
-);
-    AnimatorSet toolbarHideAnim=new AnimatorSet();
-    AnimatorSet toolbarShowAnim=new AnimatorSet();
-    hideAndShowToolbarButtons(State.WORKSPACE,toolbarShowAnim,toolbarHideAnim);
-    mStateAnimation.playTogether(scaleAnim,toolbarHideAnim,alphaAnim);
-    final int fadeInTime=res.getInteger(R.integer.config_toolbarButtonFadeInTime);
-    final int unshrinkTime=res.getInteger(R.integer.config_workspaceUnshrinkTime);
-    mStateAnimation.play(toolbarShowAnim).after(unshrinkTime - fadeInTime);
-    mStateAnimation.start();
-  }
- else {
-    fromView.setVisibility(View.GONE);
-    hideAndShowToolbarButtons(State.WORKSPACE,null,null);
-  }
+  cameraZoomIn(fromState,animated,false);
 }

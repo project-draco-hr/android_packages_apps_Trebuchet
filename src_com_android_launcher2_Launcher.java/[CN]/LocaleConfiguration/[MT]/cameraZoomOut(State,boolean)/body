@@ -6,10 +6,10 @@
   final View toView=toAllApps ? (View)mAllAppsGrid : mHomeCustomizationDrawer;
   setPivotsForZoom(toView,toState,scale);
   if (toAllApps) {
-    mWorkspace.shrinkToBottomHidden(animated);
+    mWorkspace.shrink(ShrinkState.BOTTOM_HIDDEN,animated);
   }
  else {
-    mWorkspace.shrinkToTop(animated);
+    mWorkspace.shrink(ShrinkState.TOP,animated);
   }
   if (animated) {
     ValueAnimator scaleAnim=ObjectAnimator.ofPropertyValuesHolder(toView,PropertyValuesHolder.ofFloat("scaleX",scale,1.0f),PropertyValuesHolder.ofFloat("scaleY",scale,1.0f));

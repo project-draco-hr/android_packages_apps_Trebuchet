@@ -1,14 +1,3 @@
 {
-  int newCurrentPage=indexOfChild(clThatWasClicked);
-  if (mIsSmall) {
-    int newX=getChildOffset(newCurrentPage) - getRelativeChildOffset(newCurrentPage);
-    int delta=newX - mScrollX;
-    final int screenCount=getChildCount();
-    for (int i=0; i < screenCount; i++) {
-      CellLayout cl=(CellLayout)getChildAt(i);
-      cl.setX(cl.getX() + delta);
-    }
-    setCurrentPage(newCurrentPage);
-    unshrink();
-  }
+  unshrink(clThatWasClicked,false);
 }

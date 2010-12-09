@@ -9,7 +9,8 @@
     }
   }
  else   if (mDragInfo != null) {
-    ((CellLayout)getChildAt(mDragInfo.screen)).onDropChild(mDragInfo.cell);
+    boolean animateDrop=!mWasSpringLoadedOnDragExit;
+    ((CellLayout)getChildAt(mDragInfo.screen)).onDropChild(mDragInfo.cell,animateDrop);
   }
   mDragOutline=null;
   mDragInfo=null;

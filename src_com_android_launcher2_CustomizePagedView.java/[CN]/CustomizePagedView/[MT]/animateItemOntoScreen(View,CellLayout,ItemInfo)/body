@@ -1,0 +1,54 @@
+{
+  mTmpFloatPos[0]=layout.getWidth() / 2;
+  mTmpFloatPos[1]=layout.getHeight() / 2;
+  mLauncher.getWorkspace().mapPointFromChildToSelf(layout,mTmpFloatPos);
+  final DragLayer dragLayer=(DragLayer)mLauncher.findViewById(R.id.drag_layer);
+  final View dragCopy=dragLayer.createDragView(dragView);
+  dragCopy.setAlpha(1.0f);
+  int dragViewWidth=dragView.getMeasuredWidth();
+  int dragViewHeight=dragView.getMeasuredHeight();
+  float heightOffset=0;
+  float widthOffset=0;
+  if (dragView instanceof ImageView) {
+    Drawable d=((ImageView)dragView).getDrawable();
+    int width=d.getIntrinsicWidth();
+    int height=d.getIntrinsicHeight();
+    if ((1.0 * width / height) >= (1.0f * dragViewWidth) / dragViewHeight) {
+      float f=(dragViewWidth / (width * 1.0f));
+      heightOffset=ANIMATION_SCALE * (dragViewHeight - f * height) / 2;
+    }
+ else {
+      float f=(dragViewHeight / (height * 1.0f));
+      widthOffset=ANIMATION_SCALE * (dragViewWidth - f * width) / 2;
+    }
+  }
+  float toX=mTmpFloatPos[0] - dragView.getMeasuredWidth() / 2 + widthOffset;
+  float toY=mTmpFloatPos[1] - dragView.getMeasuredHeight() / 2 + heightOffset;
+  ObjectAnimator posAnim=ObjectAnimator.ofPropertyValuesHolder(dragCopy,PropertyValuesHolder.ofFloat("x",toX),PropertyValuesHolder.ofFloat("y",toY));
+  posAnim.setInterpolator(mQuintEaseOutInterpolator);
+  posAnim.setDuration(ANIMATION_DURATION);
+  posAnim.addListener(new AnimatorListener(){
+    public void onAnimationCancel(    Animator animation){
+    }
+    public void onAnimationRepeat(    Animator animation){
+    }
+    public void onAnimationStart(    Animator animation){
+    }
+    public void onAnimationEnd(    Animator animation){
+      dragLayer.removeView(dragCopy);
+      mLauncher.addExternalItemToScreen(info,layout);
+      post(new Runnable(){
+        public void run(){
+          layout.animateDrop();
+        }
+      }
+);
+    }
+  }
+);
+  ObjectAnimator scaleAlphaAnim=ObjectAnimator.ofPropertyValuesHolder(dragCopy,PropertyValuesHolder.ofFloat("alpha",1.0f,0.0f),PropertyValuesHolder.ofFloat("scaleX",ANIMATION_SCALE),PropertyValuesHolder.ofFloat("scaleY",ANIMATION_SCALE));
+  scaleAlphaAnim.setInterpolator(mScaleAlphaInterpolator);
+  scaleAlphaAnim.setDuration(ANIMATION_DURATION);
+  posAnim.start();
+  scaleAlphaAnim.start();
+}

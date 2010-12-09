@@ -1,0 +1,8 @@
+{
+  if (mScreen != null) {
+    mLauncher.enterSpringLoadedDragMode(mScreen);
+  }
+ else {
+    mLauncher.exitSpringLoadedDragMode();
+  }
+}

@@ -1,0 +1,51 @@
+{
+  if (mIsSmall) {
+    float finalScaleFactor=1.0f;
+    float finalBackgroundAlpha=0.0f;
+    if (springLoaded) {
+      finalScaleFactor=SPRING_LOADED_DRAG_SHRINK_FACTOR;
+      finalBackgroundAlpha=1.0f;
+    }
+ else {
+      mIsSmall=false;
+    }
+    if (mAnimator != null) {
+      mAnimator.cancel();
+    }
+    mAnimator=new AnimatorSet();
+    final int screenCount=getChildCount();
+    final int duration=getResources().getInteger(R.integer.config_workspaceUnshrinkTime);
+    for (int i=0; i < screenCount; i++) {
+      final CellLayout cl=(CellLayout)getChildAt(i);
+      float finalAlphaValue=(i == mCurrentPage) ? 1.0f : 0.0f;
+      float rotation=0.0f;
+      if (i < mCurrentPage) {
+        rotation=WORKSPACE_ROTATION;
+      }
+ else       if (i > mCurrentPage) {
+        rotation=-WORKSPACE_ROTATION;
+      }
+      float translation=getOffsetXForRotation(rotation,cl.getWidth(),cl.getHeight());
+      if (animated) {
+        ObjectAnimator animWithInterpolator=ObjectAnimator.ofPropertyValuesHolder(cl,PropertyValuesHolder.ofFloat("translationX",translation),PropertyValuesHolder.ofFloat("translationY",0.0f),PropertyValuesHolder.ofFloat("scaleX",finalScaleFactor),PropertyValuesHolder.ofFloat("scaleY",finalScaleFactor),PropertyValuesHolder.ofFloat("backgroundAlpha",finalBackgroundAlpha),PropertyValuesHolder.ofFloat("alpha",finalAlphaValue),PropertyValuesHolder.ofFloat("rotationY",rotation));
+        animWithInterpolator.setDuration(duration);
+        animWithInterpolator.setInterpolator(mZoomInInterpolator);
+        mAnimator.playTogether(animWithInterpolator);
+      }
+ else {
+        cl.setTranslationX(translation);
+        cl.setTranslationY(0.0f);
+        cl.setScaleX(finalScaleFactor);
+        cl.setScaleY(finalScaleFactor);
+        cl.setBackgroundAlpha(0.0f);
+        cl.setAlpha(finalAlphaValue);
+        cl.setRotationY(rotation);
+      }
+    }
+    if (animated) {
+      mAnimator.addListener(mUnshrinkAnimationListener);
+      mAnimator.start();
+    }
+  }
+  hideBackgroundGradient();
+}

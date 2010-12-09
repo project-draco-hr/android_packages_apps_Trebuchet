@@ -40,6 +40,7 @@
     setAlpha(prevAlpha);
     mIsBuildingCache=false;
     mCacheCanvas.restore();
+    mText=getText();
     setText(" ");
   }
 }

@@ -7,13 +7,11 @@
   if (mAddDropPosition != null && mAddDropPosition[0] > -1 && mAddDropPosition[1] > -1) {
     touchXY=mAddDropPosition;
   }
-  boolean findNearestVacantAreaFailed=false;
   boolean foundCellSpan=false;
   if (touchXY != null) {
     CellLayout screenLayout=(CellLayout)mWorkspace.getChildAt(screen);
     int[] result=screenLayout.findNearestVacantArea(touchXY[0],touchXY[1],spanXY[0],spanXY[1],cellXY);
-    findNearestVacantAreaFailed=(result == null);
-    foundCellSpan=!findNearestVacantAreaFailed;
+    foundCellSpan=(result != null);
   }
  else {
     foundCellSpan=layout.findCellForSpanThatIntersects(cellXY,spanXY[0],spanXY[1],mAddIntersectCellX,mAddIntersectCellY);
