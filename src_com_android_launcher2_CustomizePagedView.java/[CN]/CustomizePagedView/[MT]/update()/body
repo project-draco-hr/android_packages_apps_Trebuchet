@@ -16,7 +16,7 @@
   mShortcutList=mPackageManager.queryIntentActivities(shortcutsIntent,0);
   Collections.sort(mShortcutList,resolveInfoComparator);
   Intent wallpapersIntent=new Intent(Intent.ACTION_SET_WALLPAPER);
-  mWallpaperList=mPackageManager.queryIntentActivities(wallpapersIntent,0);
+  mWallpaperList=mPackageManager.queryIntentActivities(wallpapersIntent,PackageManager.GET_META_DATA);
   Collections.sort(mWallpaperList,resolveInfoComparator);
   invalidatePageDataAndIconCache();
 }
