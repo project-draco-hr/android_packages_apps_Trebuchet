@@ -1,8 +1,13 @@
 {
   super.onLayout(changed,left,top,right,bottom);
   if (mWaitingToShrink) {
-    shrink(mWaitingToShrinkState,false);
-    mWaitingToShrink=false;
+    post(new Runnable(){
+      public void run(){
+        shrink(mWaitingToShrinkState,false);
+        mWaitingToShrink=false;
+      }
+    }
+);
   }
   if (LauncherApplication.isInPlaceRotationEnabled()) {
     setCurrentPage(getCurrentPage());

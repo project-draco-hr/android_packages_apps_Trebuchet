@@ -2,7 +2,7 @@
   LinearLayout layout=(LinearLayout)getChildAt(page);
   layout.removeAllViews();
   final int count=mWallpaperList.size();
-  final int numItemsPerPage=mMaxWidgetsCellHSpan / mWallpaperCellHSpan;
+  final int numItemsPerPage=mMaxWallpaperCellHSpan / mWallpaperCellHSpan;
   final int startIndex=page * numItemsPerPage;
   final int endIndex=Math.min(count,startIndex + numItemsPerPage);
   for (int i=startIndex; i < endIndex; ++i) {
