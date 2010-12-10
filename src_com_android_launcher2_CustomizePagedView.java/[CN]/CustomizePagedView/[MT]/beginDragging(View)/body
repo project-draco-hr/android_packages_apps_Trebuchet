@@ -7,34 +7,39 @@ switch (mCustomizationType) {
 case WidgetCustomization:
 {
       final LinearLayout l=(LinearLayout)v;
-      final Drawable icon=((ImageView)l.findViewById(R.id.widget_preview)).getDrawable();
-      Bitmap b=drawableToBitmap(icon);
+      final ImageView i=(ImageView)l.findViewById(R.id.widget_preview);
+      final Drawable icon=i.getDrawable();
+      Bitmap b=drawableToBitmap(icon,i);
       PendingAddWidgetInfo createWidgetInfo=(PendingAddWidgetInfo)v.getTag();
-      final View dragView=v.findViewById(R.id.widget_preview);
       int[] spanXY=CellLayout.rectToCell(getResources(),createWidgetInfo.minWidth,createWidgetInfo.minHeight,null);
       createWidgetInfo.spanX=spanXY[0];
       createWidgetInfo.spanY=spanXY[1];
       mLauncher.getWorkspace().onDragStartedWithItemSpans(spanXY[0],spanXY[1],b);
-      mDragController.startDrag(v,b,this,createWidgetInfo,DragController.DRAG_ACTION_COPY,null);
+      mDragController.startDrag(i,b,this,createWidgetInfo,DragController.DRAG_ACTION_COPY,null);
+      b.recycle();
       return true;
     }
 case ShortcutCustomization:
 {
-    final Drawable icon=((TextView)v).getCompoundDrawables()[1];
-    Bitmap b=drawableToBitmap(icon);
+    final TextView tv=(TextView)v;
+    final Drawable icon=tv.getCompoundDrawables()[1];
+    Bitmap b=drawableToBitmap(icon,tv);
     PendingAddItemInfo createItemInfo=(PendingAddItemInfo)v.getTag();
-    mDragController.startDrag(v,b,this,createItemInfo,DragController.DRAG_ACTION_COPY,null);
     mLauncher.getWorkspace().onDragStartedWithItemSpans(1,1,b);
+    mDragController.startDrag(v,b,this,createItemInfo,DragController.DRAG_ACTION_COPY,null);
+    b.recycle();
     return true;
   }
 case ApplicationCustomization:
 {
-  final Drawable icon=((TextView)v).getCompoundDrawables()[1];
-  Bitmap b=drawableToBitmap(icon);
+  final TextView tv=(TextView)v;
+  final Drawable icon=tv.getCompoundDrawables()[1];
+  Bitmap b=drawableToBitmap(icon,tv);
   ApplicationInfo app=(ApplicationInfo)v.getTag();
   app=new ApplicationInfo(app);
-  mDragController.startDrag(v,b,this,app,DragController.DRAG_ACTION_COPY,null);
   mLauncher.getWorkspace().onDragStartedWithItemSpans(1,1,b);
+  mDragController.startDrag(v,b,this,app,DragController.DRAG_ACTION_COPY,null);
+  b.recycle();
   return true;
 }
 }
