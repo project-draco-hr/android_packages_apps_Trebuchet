@@ -1,0 +1,5 @@
+{
+  WallpaperChooserDialogFragment fragment=new WallpaperChooserDialogFragment();
+  fragment.setCancelable(true);
+  return fragment;
+}

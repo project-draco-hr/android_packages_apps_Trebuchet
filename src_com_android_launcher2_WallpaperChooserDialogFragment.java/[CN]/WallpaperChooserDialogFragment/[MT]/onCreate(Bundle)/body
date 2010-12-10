@@ -1,0 +1,9 @@
+{
+  super.onCreate(savedInstanceState);
+  if (savedInstanceState != null && savedInstanceState.containsKey(EMBEDDED_KEY)) {
+    mEmbedded=savedInstanceState.getBoolean(EMBEDDED_KEY);
+  }
+ else {
+    mEmbedded=isInLayout();
+  }
+}
