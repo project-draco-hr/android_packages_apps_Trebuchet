@@ -2,6 +2,7 @@
   if (!v.isInTouchMode()) {
     return false;
   }
+  super.beginDragging(v);
   setupDragMode();
   ApplicationInfo app=(ApplicationInfo)v.getTag();
   app=new ApplicationInfo(app);

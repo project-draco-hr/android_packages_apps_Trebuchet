@@ -1,0 +1,4 @@
+{
+  mIsDragging=true;
+  return false;
+}

@@ -3,12 +3,13 @@
 switch (action & MotionEvent.ACTION_MASK) {
 case MotionEvent.ACTION_DOWN:
     mIsDragging=false;
-  break;
+  mLastTouchedItem=null;
+break;
 case MotionEvent.ACTION_MOVE:
 if (mTouchState != TOUCH_STATE_SCROLLING && !mIsDragging) {
-  determineDraggingStart(ev);
+determineDraggingStart(ev);
 }
 break;
 }
-return super.onTouchEvent(ev);
+return super.onInterceptTouchEvent(ev);
 }

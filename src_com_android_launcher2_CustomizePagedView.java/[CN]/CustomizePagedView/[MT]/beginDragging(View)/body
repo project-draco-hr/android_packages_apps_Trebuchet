@@ -2,7 +2,7 @@
   if (isChoiceMode(CHOICE_MODE_SINGLE)) {
     endChoiceMode();
   }
-  mIsDragging=true;
+  super.beginDragging(v);
 switch (mCustomizationType) {
 case WidgetCustomization:
 {
