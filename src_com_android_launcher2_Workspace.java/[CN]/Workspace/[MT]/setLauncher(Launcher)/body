@@ -1,4 +1,6 @@
 {
   mLauncher=launcher;
   mSpringLoadedDragControllger=new SpringLoadedDragController(mLauncher);
+  mCustomizationDrawer=mLauncher.findViewById(R.id.customization_drawer);
+  mCustomizationDrawerContent=mCustomizationDrawer.findViewById(com.android.internal.R.id.tabcontent);
 }

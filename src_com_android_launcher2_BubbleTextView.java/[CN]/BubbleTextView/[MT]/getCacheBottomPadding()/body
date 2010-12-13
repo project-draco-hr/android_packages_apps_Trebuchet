@@ -1,0 +1,3 @@
+{
+  return (int)(PADDING_V + SHADOW_LARGE_RADIUS + SHADOW_Y_OFFSET);
+}
