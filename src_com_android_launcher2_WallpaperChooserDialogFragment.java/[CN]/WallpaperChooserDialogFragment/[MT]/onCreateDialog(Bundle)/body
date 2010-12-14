@@ -1,0 +1,12 @@
+{
+  final View v=getActivity().getLayoutInflater().inflate(R.layout.wallpaper_chooser,null,false);
+  GridView gridView=(GridView)v.findViewById(R.id.gallery);
+  gridView.setOnItemClickListener(this);
+  gridView.setAdapter(new ImageAdapter(getActivity()));
+  final int viewInset=getResources().getDimensionPixelSize(R.dimen.alert_dialog_content_inset);
+  AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
+  builder.setNegativeButton(R.string.wallpaper_cancel,null);
+  builder.setTitle(R.string.wallpaper_dialog_title);
+  builder.setView(gridView,viewInset,viewInset,viewInset,viewInset);
+  return builder.create();
+}

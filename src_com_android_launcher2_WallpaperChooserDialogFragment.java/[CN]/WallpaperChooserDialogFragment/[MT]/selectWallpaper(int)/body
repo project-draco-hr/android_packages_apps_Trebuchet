@@ -1,0 +1,12 @@
+{
+  try {
+    WallpaperManager wpm=(WallpaperManager)getActivity().getSystemService(Context.WALLPAPER_SERVICE);
+    wpm.setResource(mImages.get(position));
+    Activity activity=getActivity();
+    activity.setResult(Activity.RESULT_OK);
+    activity.finish();
+  }
+ catch (  IOException e) {
+    Log.e(TAG,"Failed to set wallpaper: " + e);
+  }
+}

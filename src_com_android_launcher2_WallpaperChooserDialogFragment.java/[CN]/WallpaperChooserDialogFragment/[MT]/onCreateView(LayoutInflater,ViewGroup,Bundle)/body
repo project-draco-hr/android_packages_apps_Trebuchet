@@ -1,0 +1,20 @@
+{
+  findWallpapers();
+  if (mEmbedded) {
+    View view=inflater.inflate(R.layout.wallpaper_chooser,container,false);
+    final Gallery gallery=(Gallery)view.findViewById(R.id.gallery);
+    gallery.setCallbackDuringFling(false);
+    gallery.setOnItemSelectedListener(this);
+    gallery.setAdapter(new ImageAdapter(getActivity()));
+    View setButton=view.findViewById(R.id.set);
+    setButton.setOnClickListener(new OnClickListener(){
+      @Override public void onClick(      View v){
+        selectWallpaper(gallery.getSelectedItemPosition());
+      }
+    }
+);
+    mImageView=(ImageView)view.findViewById(R.id.wallpaper);
+    return view;
+  }
+  return null;
+}

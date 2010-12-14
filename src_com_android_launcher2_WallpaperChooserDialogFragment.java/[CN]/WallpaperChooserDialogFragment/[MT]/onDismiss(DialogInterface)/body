@@ -1,0 +1,7 @@
+{
+  super.onDismiss(dialog);
+  Activity activity=getActivity();
+  if (activity != null) {
+    activity.finish();
+  }
+}

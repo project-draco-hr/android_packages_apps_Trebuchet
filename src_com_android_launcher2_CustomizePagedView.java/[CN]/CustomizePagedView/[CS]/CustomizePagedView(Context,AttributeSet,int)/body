@@ -15,7 +15,7 @@
   mWorkspaceWidgetLayout=new PagedViewCellLayout(context);
   mInflater=LayoutInflater.from(context);
   final Resources r=context.getResources();
-  mDragSlopeThreshold=r.getInteger(R.integer.config_customizationDrawerDragSlopeThreshold) / 100.0f;
+  setDragSlopeThreshold(r.getInteger(R.integer.config_customizationDrawerDragSlopeThreshold) / 100.0f);
   setVisibility(View.GONE);
   setSoundEffectsEnabled(false);
   setupWorkspaceLayout();

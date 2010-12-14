@@ -4,5 +4,4 @@
   updateCurrentPageScroll();
   invalidatePageData();
   endChoiceMode();
-  mLastTouchedItem=null;
 }

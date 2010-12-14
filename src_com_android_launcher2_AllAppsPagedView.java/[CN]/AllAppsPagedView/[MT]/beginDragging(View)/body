@@ -1,0 +1,24 @@
+{
+  if (!v.isInTouchMode()) {
+    return false;
+  }
+  super.beginDragging(v);
+  setupDragMode();
+  ApplicationInfo app=(ApplicationInfo)v.getTag();
+  app=new ApplicationInfo(app);
+  final TextView tv=(TextView)v;
+  final Drawable icon=tv.getCompoundDrawables()[1];
+  Bitmap b=Bitmap.createBitmap(v.getWidth(),v.getHeight(),Bitmap.Config.ARGB_8888);
+  Canvas c=new Canvas(b);
+  c.translate((v.getWidth() - icon.getIntrinsicWidth()) / 2,v.getPaddingTop());
+  icon.draw(c);
+  if (v instanceof Checkable) {
+    resetCheckedGrandchildren();
+    Checkable checkable=(Checkable)v;
+    checkable.toggle();
+  }
+  mLauncher.getWorkspace().onDragStartedWithItemSpans(1,1,b);
+  mDragController.startDrag(v,b,this,app,DragController.DRAG_ACTION_COPY,null);
+  b.recycle();
+  return true;
+}
