@@ -20,6 +20,6 @@
   }
  else {
     button.setImageDrawable(toolbarIcon);
-    return toolbarIcon;
+    return toolbarIcon.getConstantState();
   }
 }
