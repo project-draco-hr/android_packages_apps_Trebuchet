@@ -19,7 +19,9 @@
     }
     @Override public void onAnimationEndOrCancel(    Animator animation){
       mIsInUnshrinkAnimation=false;
-      mDrawCustomizeTrayBackground=false;
+      if (mShrinkState != ShrinkState.SPRING_LOADED) {
+        mDrawCustomizeTrayBackground=false;
+      }
     }
   }
 ;

@@ -47,5 +47,7 @@
       mAnimator.start();
     }
   }
-  hideBackgroundGradient();
+  if (!springLoaded) {
+    hideBackgroundGradient();
+  }
 }
