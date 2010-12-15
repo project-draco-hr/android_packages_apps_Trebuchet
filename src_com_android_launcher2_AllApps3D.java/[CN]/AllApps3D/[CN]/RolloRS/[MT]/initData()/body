@@ -3,12 +3,9 @@
   mScript.set_ROWS_PER_PAGE_PORTRAIT(Defines.ROWS_PER_PAGE_PORTRAIT);
   mScript.set_COLUMNS_PER_PAGE_LANDSCAPE(Defines.COLUMNS_PER_PAGE_LANDSCAPE);
   mScript.set_ROWS_PER_PAGE_LANDSCAPE(Defines.ROWS_PER_PAGE_LANDSCAPE);
-  mHomeButtonNormal=Allocation.createFromBitmapResource(sRS,mRes,R.drawable.home_button_normal,Element.RGBA_8888(sRS),false);
-  mHomeButtonNormal.uploadToTexture(0);
-  mHomeButtonFocused=Allocation.createFromBitmapResource(sRS,mRes,R.drawable.home_button_focused,Element.RGBA_8888(sRS),false);
-  mHomeButtonFocused.uploadToTexture(0);
-  mHomeButtonPressed=Allocation.createFromBitmapResource(sRS,mRes,R.drawable.home_button_pressed,Element.RGBA_8888(sRS),false);
-  mHomeButtonPressed.uploadToTexture(0);
+  mHomeButtonNormal=Allocation.createFromBitmapResource(sRS,mRes,R.drawable.home_button_normal);
+  mHomeButtonFocused=Allocation.createFromBitmapResource(sRS,mRes,R.drawable.home_button_focused);
+  mHomeButtonPressed=Allocation.createFromBitmapResource(sRS,mRes,R.drawable.home_button_pressed);
   mScript.set_gHomeButton(mHomeButtonNormal);
   mSelectionBitmap=Bitmap.createBitmap(Defines.SELECTION_TEXTURE_WIDTH_PX,Defines.SELECTION_TEXTURE_HEIGHT_PX,Bitmap.Config.ARGB_8888);
   mSelectionCanvas=new Canvas(mSelectionBitmap);

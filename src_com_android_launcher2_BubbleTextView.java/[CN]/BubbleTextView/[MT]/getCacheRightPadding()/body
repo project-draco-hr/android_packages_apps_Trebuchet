@@ -1,0 +1,3 @@
+{
+  return (int)(PADDING_H + SHADOW_LARGE_RADIUS);
+}

@@ -9,12 +9,12 @@
       if (layout != mDragTargetLayout) {
         if (mDragTargetLayout != null) {
           mDragTargetLayout.setHover(false);
-          mSpringLoadedDragControllger.onDragExit();
+          mSpringLoadedDragController.onDragExit();
         }
         mDragTargetLayout=layout;
         if (mDragTargetLayout != null && mDragTargetLayout.getAcceptsDrops()) {
           mDragTargetLayout.setHover(true);
-          mSpringLoadedDragControllger.onDragEnter(mDragTargetLayout);
+          mSpringLoadedDragController.onDragEnter(mDragTargetLayout);
         }
       }
     }
