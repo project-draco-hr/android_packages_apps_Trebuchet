@@ -10,12 +10,12 @@
       mCustomizationDrawerTransformedPos[0]=0.0f;
       mCustomizationDrawerTransformedPos[1]=mCustomizationDrawerContent.getTop();
       m.mapPoints(mCustomizationDrawerTransformedPos);
-      final int offset=(int)(mCustomizationDrawerPos[1] + mCustomizationDrawerTransformedPos[1]);
-      mBackground.setBounds(mScrollX,offset,mScrollX + getMeasuredWidth(),offset + getMeasuredHeight());
-      mBackground.draw(canvas);
       mCustomizeTrayBackground.setAlpha(alpha);
       mCustomizeTrayBackground.setBounds(mScrollX,0,mScrollX + getMeasuredWidth(),getMeasuredHeight());
       mCustomizeTrayBackground.draw(canvas);
+      final int offset=(int)(mCustomizationDrawerPos[1] + mCustomizationDrawerTransformedPos[1]);
+      mBackground.setBounds(mScrollX,offset,mScrollX + getMeasuredWidth(),offset + getMeasuredHeight());
+      mBackground.draw(canvas);
     }
   }
   super.onDraw(canvas);

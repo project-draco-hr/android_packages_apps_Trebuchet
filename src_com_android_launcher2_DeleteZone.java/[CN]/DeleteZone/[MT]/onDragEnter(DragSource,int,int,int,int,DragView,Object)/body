@@ -1,5 +1,6 @@
 {
-  if (!mDragAndDropEnabled)   return;
-  mTransition.reverseTransition(TRANSITION_DURATION);
-  dragView.setPaint(mTrashPaint);
+  if (mDragAndDropEnabled) {
+    mTransition.reverseTransition(getTransitionAnimationDuration());
+    super.onDragEnter(source,x,y,xOffset,yOffset,dragView,dragInfo);
+  }
 }

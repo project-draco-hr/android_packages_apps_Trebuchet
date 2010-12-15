@@ -1,4 +1,4 @@
 {
   if (!mDragAndDropEnabled)   return;
-  dragView.setPaint(mPaint);
+  dragView.setPaint(mHoverPaint);
 }

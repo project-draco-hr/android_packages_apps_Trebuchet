@@ -1,0 +1,9 @@
+{
+  super.getHitRect(outRect);
+  if (LauncherApplication.isScreenXLarge()) {
+    outRect.top-=mOuterDragPadding;
+    outRect.left-=mInnerDragPadding;
+    outRect.bottom+=mOuterDragPadding;
+    outRect.right+=mOuterDragPadding;
+  }
+}

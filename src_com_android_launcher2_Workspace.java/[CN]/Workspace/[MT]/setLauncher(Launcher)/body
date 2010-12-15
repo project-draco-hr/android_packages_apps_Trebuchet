@@ -2,5 +2,7 @@
   mLauncher=launcher;
   mSpringLoadedDragController=new SpringLoadedDragController(mLauncher);
   mCustomizationDrawer=mLauncher.findViewById(R.id.customization_drawer);
-  mCustomizationDrawerContent=mCustomizationDrawer.findViewById(com.android.internal.R.id.tabcontent);
+  if (mCustomizationDrawer != null) {
+    mCustomizationDrawerContent=mCustomizationDrawer.findViewById(com.android.internal.R.id.tabcontent);
+  }
 }

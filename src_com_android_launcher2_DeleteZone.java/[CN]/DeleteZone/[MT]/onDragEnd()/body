@@ -1,6 +1,6 @@
 {
-  if (mTrashMode && mDragAndDropEnabled) {
-    mTrashMode=false;
+  if (mActive && mDragAndDropEnabled) {
+    mActive=false;
     mDragController.setDeleteRegion(null);
     if (mOutAnimation != null)     startAnimation(mOutAnimation);
     if (mHandleInAnimation != null && mHandle != null) {

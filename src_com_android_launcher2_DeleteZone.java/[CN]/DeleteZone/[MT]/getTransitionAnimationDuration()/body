@@ -1,0 +1,3 @@
+{
+  return LauncherApplication.isScreenXLarge() ? XLARGE_TRANSITION_DURATION : TRANSITION_DURATION;
+}
