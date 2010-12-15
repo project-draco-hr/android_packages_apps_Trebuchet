@@ -4,6 +4,5 @@
   System.arraycopy(mIcons,index,mIcons,dest,count);
   System.arraycopy(mLabels,index,mLabels,dest,count);
   createAppIconAllocations(index,item);
-  uploadAppIcon(index,item);
   mScript.set_gIconCount(mScript.get_gIconCount() + 1);
 }

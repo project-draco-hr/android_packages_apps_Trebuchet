@@ -1,4 +1,0 @@
-{
-  mIcons[index].uploadToTexture(true,0);
-  mLabels[index].uploadToTexture(true,0);
-}
