@@ -10,7 +10,7 @@
   child.clearFocus();
   child.setPressed(false);
   final Canvas canvas=new Canvas();
-  final int bitmapPadding=HolographicOutlineHelper.OUTER_BLUR_RADIUS;
+  final int bitmapPadding=HolographicOutlineHelper.MAX_OUTER_BLUR_RADIUS;
   mDragOutline=createDragOutline(child,canvas,bitmapPadding);
   final Bitmap b=createDragBitmap(child,canvas,bitmapPadding);
   final int bmpWidth=b.getWidth();

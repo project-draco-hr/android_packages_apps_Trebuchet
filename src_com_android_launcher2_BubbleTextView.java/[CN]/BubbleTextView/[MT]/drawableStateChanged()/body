@@ -1,4 +1,21 @@
 {
+  if (isPressed()) {
+    if (!mDidInvalidateForPressedState) {
+      invalidate();
+    }
+  }
+ else {
+    final boolean backgroundEmptyBefore=mPressedOrFocusedBackground == null;
+    mPressedOrFocusedBackground=null;
+    if (isFocused()) {
+      mPressedOrFocusedBackground=createGlowingOutline(mTempCanvas,mFocusedGlowColor,mFocusedOutlineColor);
+      invalidate();
+    }
+    final boolean backgroundEmptyNow=mPressedOrFocusedBackground == null;
+    if (!backgroundEmptyBefore && backgroundEmptyNow) {
+      invalidate();
+    }
+  }
   Drawable d=mBackground;
   if (d != null && d.isStateful()) {
     d.setState(getDrawableState());

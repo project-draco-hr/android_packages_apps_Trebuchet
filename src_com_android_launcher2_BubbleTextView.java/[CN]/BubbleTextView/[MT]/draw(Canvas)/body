@@ -1,4 +1,7 @@
 {
+  if (mPressedOrFocusedBackground != null && (isPressed() || isFocused())) {
+    canvas.drawBitmap(mPressedOrFocusedBackground,mScrollX - HolographicOutlineHelper.MAX_OUTER_BLUR_RADIUS / 2,mScrollY - HolographicOutlineHelper.MAX_OUTER_BLUR_RADIUS / 2,mTempPaint);
+  }
   if (isBuildingCache()) {
     this.setShadowLayer(SHADOW_LARGE_RADIUS,0.0f,SHADOW_Y_OFFSET,SHADOW_LARGE_COLOUR);
     super.draw(canvas);
