@@ -7,8 +7,8 @@
   mPaint=new Paint(Paint.ANTI_ALIAS_FLAG);
   mPaint.setColor(bubbleColor);
   mBubbleColorAlpha=Color.alpha(bubbleColor) / 255.0f;
-  final float scale=res.getDisplayMetrics().density;
-  mCornerRadius=CORNER_RADIUS * scale;
-  mPaddingH=PADDING_H * scale;
-  mPaddingV=PADDING_V * scale;
+  mFocusedOutlineColor=getResources().getColor(R.color.workspace_item_focused_outline_color);
+  mFocusedGlowColor=getResources().getColor(R.color.workspace_item_focused_glow_color);
+  mPressedOutlineColor=getResources().getColor(R.color.workspace_item_pressed_outline_color);
+  mPressedGlowColor=getResources().getColor(R.color.workspace_item_pressed_glow_color);
 }

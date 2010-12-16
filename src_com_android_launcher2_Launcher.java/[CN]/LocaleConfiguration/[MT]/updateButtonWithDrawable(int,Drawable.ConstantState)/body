@@ -1,0 +1,4 @@
+{
+  ImageView button=(ImageView)findViewById(buttonId);
+  button.setImageDrawable(d.newDrawable(getResources()));
+}

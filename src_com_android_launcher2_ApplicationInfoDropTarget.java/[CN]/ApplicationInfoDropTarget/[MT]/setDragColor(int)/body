@@ -1,3 +1,0 @@
-{
-  mPaint.setColorFilter(new PorterDuffColorFilter(color,PorterDuff.Mode.SRC_ATOP));
-}

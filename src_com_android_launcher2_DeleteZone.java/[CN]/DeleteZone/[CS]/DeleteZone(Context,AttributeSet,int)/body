@@ -1,7 +1,9 @@
 {
   super(context,attrs,defStyle);
+  mOuterDragPadding=getResources().getDimensionPixelSize(R.dimen.delete_zone_size);
+  mInnerDragPadding=getResources().getDimensionPixelSize(R.dimen.delete_zone_padding);
   final int srcColor=context.getResources().getColor(R.color.delete_color_filter);
-  mTrashPaint.setColorFilter(new PorterDuffColorFilter(srcColor,PorterDuff.Mode.SRC_ATOP));
+  mHoverPaint.setColorFilter(new PorterDuffColorFilter(srcColor,PorterDuff.Mode.SRC_ATOP));
   TypedArray a=context.obtainStyledAttributes(attrs,R.styleable.DeleteZone,defStyle,0);
   mOrientation=a.getInt(R.styleable.DeleteZone_direction,ORIENTATION_HORIZONTAL);
   a.recycle();

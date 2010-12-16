@@ -3,10 +3,34 @@
     final int itemType=((ItemInfo)info).itemType;
     mActive=(itemType == LauncherSettings.Favorites.ITEM_TYPE_APPLICATION);
     if (mActive) {
+      if (mFadeAnimator != null)       mFadeAnimator.cancel();
+      mFadeAnimator=ObjectAnimator.ofFloat(this,"alpha",0.0f,1.0f);
+      mFadeAnimator.setDuration(sFadeInAnimationDuration);
+      mFadeAnimator.start();
       setVisibility(VISIBLE);
-    }
-    if (mHandle != null) {
-      mHandle.setVisibility(INVISIBLE);
+      if (mHandle != null) {
+        if (mHandleFadeAnimator != null)         mHandleFadeAnimator.cancel();
+        mHandleFadeAnimator=ObjectAnimator.ofFloat(mHandle,"alpha",0.0f);
+        mHandleFadeAnimator.setDuration(sFadeOutAnimationDuration);
+        mHandleFadeAnimator.addListener(new AnimatorListener(){
+          public void onAnimationStart(          Animator animation){
+          }
+          public void onAnimationRepeat(          Animator animation){
+          }
+          public void onAnimationEnd(          Animator animation){
+            onEndOrCancel();
+          }
+          public void onAnimationCancel(          Animator animation){
+            onEndOrCancel();
+          }
+          private void onEndOrCancel(){
+            mHandle.setVisibility(INVISIBLE);
+            mHandleFadeAnimator=null;
+          }
+        }
+);
+        mHandleFadeAnimator.start();
+      }
     }
   }
 }

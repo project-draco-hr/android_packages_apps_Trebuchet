@@ -1,7 +1,7 @@
 {
   final ItemInfo item=(ItemInfo)info;
   if (item != null && mDragAndDropEnabled) {
-    mTrashMode=true;
+    mActive=true;
     getHitRect(mRegion);
     mRegionF.set(mRegion);
     if (LauncherApplication.isScreenXLarge()) {

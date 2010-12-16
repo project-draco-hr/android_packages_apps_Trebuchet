@@ -1,7 +1,8 @@
 {
+  int duration=getAnimationDuration();
   if (mHandleInAnimation == null) {
     mHandleInAnimation=new AlphaAnimation(0.0f,1.0f);
-    mHandleInAnimation.setDuration(ANIMATION_DURATION);
+    mHandleInAnimation.setDuration(duration);
   }
   if (mInAnimation == null) {
     mInAnimation=new FastAnimationSet();
@@ -15,7 +16,7 @@
  else {
         animationSet.addAnimation(new TranslateAnimation(Animation.RELATIVE_TO_SELF,1.0f,Animation.RELATIVE_TO_SELF,0.0f,Animation.ABSOLUTE,0.0f,Animation.ABSOLUTE,0.0f));
       }
-      animationSet.setDuration(ANIMATION_DURATION);
+      animationSet.setDuration(duration);
     }
  else {
       mInAnimation.addAnimation(mHandleInAnimation);
@@ -24,7 +25,7 @@
   if (mHandleOutAnimation == null) {
     mHandleOutAnimation=new AlphaAnimation(1.0f,0.0f);
     mHandleOutAnimation.setFillAfter(true);
-    mHandleOutAnimation.setDuration(ANIMATION_DURATION);
+    mHandleOutAnimation.setDuration(duration);
   }
   if (mOutAnimation == null) {
     mOutAnimation=new FastAnimationSet();
@@ -38,7 +39,7 @@
  else {
         animationSet.addAnimation(new FastTranslateAnimation(Animation.RELATIVE_TO_SELF,0.0f,Animation.RELATIVE_TO_SELF,1.0f,Animation.ABSOLUTE,0.0f,Animation.ABSOLUTE,0.0f));
       }
-      animationSet.setDuration(ANIMATION_DURATION);
+      animationSet.setDuration(duration);
     }
  else {
       mOutAnimation.addAnimation(mHandleOutAnimation);

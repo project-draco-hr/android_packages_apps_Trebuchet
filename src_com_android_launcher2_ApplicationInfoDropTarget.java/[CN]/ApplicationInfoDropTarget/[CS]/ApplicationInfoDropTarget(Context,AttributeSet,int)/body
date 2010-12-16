@@ -1,3 +1,5 @@
 {
   super(context,attrs,defStyle);
+  int colour=getContext().getResources().getColor(R.color.app_info_filter);
+  mHoverPaint.setColorFilter(new PorterDuffColorFilter(colour,PorterDuff.Mode.SRC_ATOP));
 }
