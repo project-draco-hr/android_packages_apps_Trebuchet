@@ -4,11 +4,23 @@
     mActive=(itemType == LauncherSettings.Favorites.ITEM_TYPE_APPLICATION);
     if (mActive) {
       if (mFadeAnimator != null)       mFadeAnimator.cancel();
-      mFadeAnimator=ObjectAnimator.ofFloat(this,"alpha",0.0f,1.0f);
-      mFadeAnimator.setDuration(sFadeInAnimationDuration);
+      mFadeAnimator=new AnimatorSet();
+      Animator infoButtonAnimator=ObjectAnimator.ofFloat(this,"alpha",0.0f,1.0f);
+      infoButtonAnimator.setDuration(sFadeInAnimationDuration);
+      if (mHandle == mLauncher.findViewById(R.id.configure_button)) {
+        final View divider=mLauncher.findViewById(R.id.divider_during_drag);
+        divider.setVisibility(VISIBLE);
+        Animator dividerAnimator=ObjectAnimator.ofFloat(divider,"alpha",1.0f);
+        dividerAnimator.setDuration(sFadeInAnimationDuration);
+        mFadeAnimator.play(infoButtonAnimator).with(dividerAnimator);
+      }
+ else {
+        mFadeAnimator.play(infoButtonAnimator);
+      }
       mFadeAnimator.start();
       setVisibility(VISIBLE);
       if (mHandle != null) {
+        mHandleWasVisibleOnDragStart=mHandle.getVisibility() == VISIBLE;
         if (mHandleFadeAnimator != null)         mHandleFadeAnimator.cancel();
         mHandleFadeAnimator=ObjectAnimator.ofFloat(mHandle,"alpha",0.0f);
         mHandleFadeAnimator.setDuration(sFadeOutAnimationDuration);

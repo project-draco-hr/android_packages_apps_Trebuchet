@@ -1,5 +1,4 @@
 {
-  Drawable d=null;
   ActivityInfo activityInfo=ri.activityInfo;
   XmlResourceParser parser=null;
   try {
