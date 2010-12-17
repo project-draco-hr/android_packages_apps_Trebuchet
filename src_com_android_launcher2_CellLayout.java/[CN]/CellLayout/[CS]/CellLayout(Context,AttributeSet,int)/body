@@ -1,7 +1,6 @@
 {
   super(context,attrs,defStyle);
   setWillNotDraw(false);
-  setClipChildren(false);
   TypedArray a=context.obtainStyledAttributes(attrs,R.styleable.CellLayout,defStyle,0);
   mCellWidth=a.getDimensionPixelSize(R.styleable.CellLayout_cellWidth,10);
   mCellHeight=a.getDimensionPixelSize(R.styleable.CellLayout_cellHeight,10);
