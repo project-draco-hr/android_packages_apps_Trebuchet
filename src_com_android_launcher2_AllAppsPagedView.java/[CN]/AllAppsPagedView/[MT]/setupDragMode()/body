@@ -1,7 +1,5 @@
 {
   mLauncher.getWorkspace().shrink(Workspace.ShrinkState.BOTTOM_VISIBLE);
-  DeleteZone deleteZone=(DeleteZone)mLauncher.findViewById(R.id.delete_zone);
-  deleteZone.setDragAndDropEnabled(false);
   DeleteZone allAppsDeleteZone=(DeleteZone)mLauncher.findViewById(R.id.all_apps_delete_zone);
   allAppsDeleteZone.setDragAndDropEnabled(true);
   ApplicationInfoDropTarget allAppsInfoButton=(ApplicationInfoDropTarget)mLauncher.findViewById(R.id.all_apps_info_target);

@@ -1,4 +1,10 @@
 {
   super.onFinishInflate();
-  mTransition=(TransitionDrawable)getDrawable();
+  mTransition=(TransitionDrawable)getCompoundDrawables()[LEFT_DRAWABLE];
+  if (LauncherApplication.isScreenXLarge()) {
+    mTransition.setCrossFadeEnabled(false);
+  }
+  Resources r=getResources();
+  mTextColor=r.getColor(R.color.workspace_all_apps_and_delete_zone_text_color);
+  mDragTextColor=r.getColor(R.color.workspace_delete_zone_drag_text_color);
 }

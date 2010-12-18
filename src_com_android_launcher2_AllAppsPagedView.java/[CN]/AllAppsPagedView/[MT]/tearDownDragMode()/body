@@ -1,8 +1,6 @@
 {
   post(new Runnable(){
     public void run(){
-      DeleteZone deleteZone=(DeleteZone)mLauncher.findViewById(R.id.delete_zone);
-      deleteZone.setDragAndDropEnabled(true);
       DeleteZone allAppsDeleteZone=(DeleteZone)mLauncher.findViewById(R.id.all_apps_delete_zone);
       allAppsDeleteZone.setDragAndDropEnabled(false);
       ApplicationInfoDropTarget allAppsInfoButton=(ApplicationInfoDropTarget)mLauncher.findViewById(R.id.all_apps_info_target);
