@@ -15,14 +15,14 @@
     ValueAnimator scaleAnim=ObjectAnimator.ofPropertyValuesHolder(toView,PropertyValuesHolder.ofFloat("scaleX",scale,1.0f),PropertyValuesHolder.ofFloat("scaleY",scale,1.0f));
     scaleAnim.setDuration(duration);
     scaleAnim.setInterpolator(new Workspace.ZoomOutInterpolator());
-    scaleAnim.addListener(new LauncherAnimatorListenerAdapter(){
+    scaleAnim.addListener(new AnimatorListenerAdapter(){
       @Override public void onAnimationStart(      Animator animation){
         toView.setTranslationX(0.0f);
         toView.setTranslationY(0.0f);
         toView.setVisibility(View.VISIBLE);
         toView.setAlpha(1.0f);
       }
-      @Override public void onAnimationEndOrCancel(      Animator animation){
+      @Override public void onAnimationEnd(      Animator animation){
         toView.setScaleX(1.0f);
         toView.setScaleY(1.0f);
       }

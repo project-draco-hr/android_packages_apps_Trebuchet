@@ -13,15 +13,15 @@
     duration*=mQuintEaseOutInterpolator.getInterpolation(dist / maxDist);
   }
   if (mDropAnim != null) {
-    mDropAnim.cancel();
+    mDropAnim.end();
   }
   mDropAnim=new ValueAnimator();
   mDropAnim.setInterpolator(mQuintEaseOutInterpolator);
-  mDropAnim.addListener(new LauncherAnimatorListenerAdapter(){
+  mDropAnim.addListener(new AnimatorListenerAdapter(){
     public void onAnimationStart(    Animator animation){
       mDropView=view;
     }
-    public void onAnimationEndOrCancel(    Animator animation){
+    public void onAnimationEnd(    Animator animation){
       if (mDropView != null) {
         mDropView.setVisibility(View.VISIBLE);
         mDropView=null;

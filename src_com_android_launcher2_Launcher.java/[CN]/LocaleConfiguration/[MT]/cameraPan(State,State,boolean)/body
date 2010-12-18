@@ -20,13 +20,13 @@
   if (animated) {
     if (mStateAnimation != null)     mStateAnimation.cancel();
     mStateAnimation=new AnimatorSet();
-    mStateAnimation.addListener(new LauncherAnimatorListenerAdapter(){
+    mStateAnimation.addListener(new AnimatorListenerAdapter(){
       @Override public void onAnimationStart(      Animator animation){
         toView.setVisibility(View.VISIBLE);
         toView.setY(toViewStartY);
         toView.setAlpha(1.0f);
       }
-      @Override public void onAnimationEndOrCancel(      Animator animation){
+      @Override public void onAnimationEnd(      Animator animation){
         fromView.setVisibility(View.GONE);
       }
     }

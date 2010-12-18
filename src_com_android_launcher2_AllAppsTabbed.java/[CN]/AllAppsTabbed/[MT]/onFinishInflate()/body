@@ -27,8 +27,8 @@
       final int duration=res.getInteger(R.integer.config_tabTransitionTime);
       final float alpha=mAllApps.getAlpha();
       ValueAnimator alphaAnim=ObjectAnimator.ofFloat(mAllApps,"alpha",alpha,0.0f).setDuration(duration);
-      alphaAnim.addListener(new LauncherAnimatorListenerAdapter(){
-        @Override public void onAnimationEndOrCancel(        Animator animation){
+      alphaAnim.addListener(new AnimatorListenerAdapter(){
+        @Override public void onAnimationEnd(        Animator animation){
           String tag=getCurrentTabTag();
           if (tag == TAG_ALL) {
             mAllApps.setAppFilter(AllAppsPagedView.ALL_APPS_FLAG);

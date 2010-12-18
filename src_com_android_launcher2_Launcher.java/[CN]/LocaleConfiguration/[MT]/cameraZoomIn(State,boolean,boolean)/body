@@ -17,8 +17,8 @@
     scaleAnim.setInterpolator(new Workspace.ZoomInInterpolator());
     ValueAnimator alphaAnim=ObjectAnimator.ofPropertyValuesHolder(fromView,PropertyValuesHolder.ofFloat("alpha",1.0f,0.0f));
     alphaAnim.setDuration(res.getInteger(R.integer.config_allAppsFadeOutTime));
-    alphaAnim.addListener(new LauncherAnimatorListenerAdapter(){
-      @Override public void onAnimationEndOrCancel(      Animator animation){
+    alphaAnim.addListener(new AnimatorListenerAdapter(){
+      @Override public void onAnimationEnd(      Animator animation){
         fromView.setVisibility(View.GONE);
       }
     }

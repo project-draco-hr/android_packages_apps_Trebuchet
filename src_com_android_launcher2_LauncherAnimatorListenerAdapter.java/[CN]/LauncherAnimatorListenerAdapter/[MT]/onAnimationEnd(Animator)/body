@@ -1,4 +1,0 @@
-{
-  if (!cancelled.contains(animation))   onAnimationEndOrCancel(animation);
-  cancelled.remove(animation);
-}
