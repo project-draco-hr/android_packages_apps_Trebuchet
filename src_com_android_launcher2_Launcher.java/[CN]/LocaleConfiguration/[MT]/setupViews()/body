@@ -26,7 +26,6 @@
   if (mCustomizePagedView != null) {
     mCustomizePagedView.setLauncher(this);
     mCustomizePagedView.setDragController(dragController);
-    mCustomizePagedView.update();
   }
  else {
     ImageView hotseatLeft=(ImageView)findViewById(R.id.hotseat_left);

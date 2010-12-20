@@ -1,7 +1,0 @@
-{
-  SavedState savedState=(SavedState)state;
-  super.onRestoreInstanceState(savedState.getSuperState());
-  if (savedState.currentPage != -1) {
-    mCurrentPage=savedState.currentPage;
-  }
-}

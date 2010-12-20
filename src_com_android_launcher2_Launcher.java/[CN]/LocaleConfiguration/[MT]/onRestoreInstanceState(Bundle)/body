@@ -1,16 +1,3 @@
 {
   mSavedInstanceState=savedInstanceState;
-  if (mAllAppsGrid != null && mAllAppsGrid instanceof AllAppsTabbed) {
-    String cur=savedInstanceState.getString("allapps_currentTab");
-    if (cur != null) {
-      AllAppsTabbed tabhost=(AllAppsTabbed)mAllAppsGrid;
-      tabhost.setCurrentTabByTag(cur);
-    }
-  }
-  if (mHomeCustomizationDrawer != null) {
-    String cur=savedInstanceState.getString("customize_currentTab");
-    if (cur != null) {
-      mHomeCustomizationDrawer.setCurrentTabByTag(cur);
-    }
-  }
 }

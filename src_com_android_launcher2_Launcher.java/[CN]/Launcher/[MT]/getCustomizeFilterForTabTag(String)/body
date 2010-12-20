@@ -1,0 +1,15 @@
+{
+  if (tag.equals(WIDGETS_TAG)) {
+    return CustomizationType.WidgetCustomization;
+  }
+ else   if (tag.equals(APPLICATIONS_TAG)) {
+    return CustomizationType.ApplicationCustomization;
+  }
+ else   if (tag.equals(WALLPAPERS_TAG)) {
+    return CustomizePagedView.CustomizationType.WallpaperCustomization;
+  }
+ else   if (tag.equals(SHORTCUTS_TAG)) {
+    return CustomizePagedView.CustomizationType.ShortcutCustomization;
+  }
+  return CustomizationType.WidgetCustomization;
+}

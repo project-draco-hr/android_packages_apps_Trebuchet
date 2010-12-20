@@ -28,6 +28,7 @@
     String currentTabTag=tabhost.getCurrentTabTag();
     if (currentTabTag != null) {
       outState.putString("allapps_currentTab",currentTabTag);
+      outState.putInt("allapps_currentPage",mAllAppsPagedView.getCurrentPage());
     }
   }
   if (mHomeCustomizationDrawer != null) {

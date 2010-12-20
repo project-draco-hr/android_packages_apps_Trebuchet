@@ -26,4 +26,22 @@
     mFolderInfo=mModel.getFolderById(this,sFolders,id);
     mRestoring=true;
   }
+  if (mAllAppsGrid != null && mAllAppsGrid instanceof AllAppsTabbed) {
+    String curTab=savedState.getString("allapps_currentTab");
+    if (curTab != null) {
+      AllAppsTabbed tabhost=(AllAppsTabbed)mAllAppsGrid;
+      tabhost.setCurrentTabByTag(curTab);
+    }
+    int curPage=savedState.getInt("allapps_currentPage",-1);
+    if (curPage > -1) {
+      mAllAppsPagedView.setRestorePage(curPage);
+    }
+  }
+  if (mHomeCustomizationDrawer != null) {
+    String curTab=savedState.getString("customize_currentTab");
+    if (curTab != null) {
+      mCustomizePagedView.setCustomizationFilter(getCustomizeFilterForTabTag(curTab));
+      mHomeCustomizationDrawer.setCurrentTabByTag(curTab);
+    }
+  }
 }
