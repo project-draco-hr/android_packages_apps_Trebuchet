@@ -45,34 +45,26 @@
     mHomeCustomizationDrawer.addTab(mHomeCustomizationDrawer.newTabSpec(SHORTCUTS_TAG).setIndicator(tabView).setContent(contentFactory));
     mHomeCustomizationDrawer.setOnTabChangedListener(new OnTabChangeListener(){
       public void onTabChanged(      String tabId){
-        final Resources res=getResources();
-        final int duration=res.getInteger(R.integer.config_tabTransitionTime);
-        final float alpha=mCustomizePagedView.getAlpha();
-        ValueAnimator alphaAnim=ObjectAnimator.ofFloat(mCustomizePagedView,"alpha",alpha,0.0f);
-        alphaAnim.setDuration(duration);
-        alphaAnim.addListener(new AnimatorListenerAdapter(){
-          @Override public void onAnimationEnd(          Animator animation){
-            String tag=mHomeCustomizationDrawer.getCurrentTabTag();
-            if (tag == WIDGETS_TAG) {
-              mCustomizePagedView.setCustomizationFilter(CustomizePagedView.CustomizationType.WidgetCustomization);
+        final CustomizePagedView.CustomizationType newType=getCustomizeFilterForTabTag(tabId);
+        if (newType != mCustomizePagedView.getCustomizationFilter()) {
+          final Resources res=getResources();
+          final int duration=res.getInteger(R.integer.config_tabTransitionTime);
+          final float alpha=mCustomizePagedView.getAlpha();
+          ValueAnimator alphaAnim=ObjectAnimator.ofFloat(mCustomizePagedView,"alpha",alpha,0.0f);
+          alphaAnim.setDuration(duration);
+          alphaAnim.addListener(new AnimatorListenerAdapter(){
+            @Override public void onAnimationEnd(            Animator animation){
+              String tag=mHomeCustomizationDrawer.getCurrentTabTag();
+              mCustomizePagedView.setCustomizationFilter(newType);
+              final float alpha=mCustomizePagedView.getAlpha();
+              ValueAnimator alphaAnim=ObjectAnimator.ofFloat(mCustomizePagedView,"alpha",alpha,1.0f);
+              alphaAnim.setDuration(duration);
+              alphaAnim.start();
             }
- else             if (tag == APPLICATIONS_TAG) {
-              mCustomizePagedView.setCustomizationFilter(CustomizePagedView.CustomizationType.ApplicationCustomization);
-            }
- else             if (tag == WALLPAPERS_TAG) {
-              mCustomizePagedView.setCustomizationFilter(CustomizePagedView.CustomizationType.WallpaperCustomization);
-            }
- else             if (tag == SHORTCUTS_TAG) {
-              mCustomizePagedView.setCustomizationFilter(CustomizePagedView.CustomizationType.ShortcutCustomization);
-            }
-            final float alpha=mCustomizePagedView.getAlpha();
-            ValueAnimator alphaAnim=ObjectAnimator.ofFloat(mCustomizePagedView,"alpha",alpha,1.0f);
-            alphaAnim.setDuration(duration);
-            alphaAnim.start();
           }
-        }
 );
-        alphaAnim.start();
+          alphaAnim.start();
+        }
       }
     }
 );
@@ -82,6 +74,7 @@
   lockAllApps();
   mSavedState=savedInstanceState;
   restoreState(mSavedState);
+  mCustomizePagedView.update();
   if (PROFILE_STARTUP) {
     android.os.Debug.stopMethodTracing();
   }

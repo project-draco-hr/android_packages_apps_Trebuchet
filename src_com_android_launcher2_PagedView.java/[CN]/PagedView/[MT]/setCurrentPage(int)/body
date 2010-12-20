@@ -7,6 +7,6 @@
   }
   mCurrentPage=Math.max(0,Math.min(currentPage,getPageCount() - 1));
   updateCurrentPageScroll();
-  invalidate();
   notifyPageSwitchListener();
+  invalidate();
 }

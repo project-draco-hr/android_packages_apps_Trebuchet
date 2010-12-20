@@ -6,6 +6,10 @@
     for (int i=0; i < count; ++i) {
       mDirtyPageContent.add(true);
     }
+    if (mRestorePage > -1) {
+      mCurrentPage=mRestorePage;
+      mRestorePage=-1;
+    }
     loadAssociatedPages(mCurrentPage);
     mDirtyPageAlpha=true;
     updateAdjacentPagesAlpha();

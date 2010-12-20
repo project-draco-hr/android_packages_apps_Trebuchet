@@ -1,7 +1,9 @@
 {
   mCustomizationType=filterType;
-  setCurrentPage(0);
-  updateCurrentPageScroll();
-  invalidatePageData();
-  endChoiceMode();
+  if (getChildCount() > 0) {
+    setCurrentPage(0);
+    updateCurrentPageScroll();
+    invalidatePageData();
+    endChoiceMode();
+  }
 }
