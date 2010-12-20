@@ -3,10 +3,6 @@
   if (!mDragController.dragging()) {
     hideOutlines();
   }
-  if (mAnimOnPageEndMoving != null) {
-    mAnimOnPageEndMoving.start();
-    mAnimOnPageEndMoving=null;
-  }
   mOverScrollMaxBackgroundAlpha=0.0f;
   mOverScrollPageIndex=-1;
   mPageMoving=false;

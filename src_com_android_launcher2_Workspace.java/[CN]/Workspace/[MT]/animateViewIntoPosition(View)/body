@@ -43,10 +43,5 @@
   }
 );
   view.setVisibility(View.INVISIBLE);
-  if (!mScroller.isFinished()) {
-    mAnimOnPageEndMoving=mDropAnim;
-  }
- else {
-    mDropAnim.start();
-  }
+  mDropAnim.start();
 }
