@@ -3,8 +3,8 @@
   mOriginalDuration=duration;
   mOriginalFromValue=fromValue;
   mOriginalToValue=toValue;
-  mAnimator.addListener(new LauncherAnimatorListenerAdapter(){
-    @Override public void onAnimationEndOrCancel(    Animator animation){
+  mAnimator.addListener(new AnimatorListenerAdapter(){
+    @Override public void onAnimationEnd(    Animator animation){
       mDirection=STOPPED;
     }
   }

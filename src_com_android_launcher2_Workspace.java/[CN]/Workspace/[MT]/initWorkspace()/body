@@ -13,11 +13,11 @@
   }
  catch (  Resources.NotFoundException e) {
   }
-  mUnshrinkAnimationListener=new LauncherAnimatorListenerAdapter(){
+  mUnshrinkAnimationListener=new AnimatorListenerAdapter(){
     @Override public void onAnimationStart(    Animator animation){
       mIsInUnshrinkAnimation=true;
     }
-    @Override public void onAnimationEndOrCancel(    Animator animation){
+    @Override public void onAnimationEnd(    Animator animation){
       mIsInUnshrinkAnimation=false;
       if (mShrinkState != ShrinkState.SPRING_LOADED) {
         mDrawCustomizeTrayBackground=false;
