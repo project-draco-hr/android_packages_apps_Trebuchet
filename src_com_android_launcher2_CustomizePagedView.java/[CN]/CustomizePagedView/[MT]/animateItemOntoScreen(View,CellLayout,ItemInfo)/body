@@ -27,13 +27,7 @@
   ObjectAnimator posAnim=ObjectAnimator.ofPropertyValuesHolder(dragCopy,PropertyValuesHolder.ofFloat("x",toX),PropertyValuesHolder.ofFloat("y",toY));
   posAnim.setInterpolator(mQuintEaseOutInterpolator);
   posAnim.setDuration(ANIMATION_DURATION);
-  posAnim.addListener(new AnimatorListener(){
-    public void onAnimationCancel(    Animator animation){
-    }
-    public void onAnimationRepeat(    Animator animation){
-    }
-    public void onAnimationStart(    Animator animation){
-    }
+  posAnim.addListener(new AnimatorListenerAdapter(){
     public void onAnimationEnd(    Animator animation){
       dragLayer.removeView(dragCopy);
       mLauncher.addExternalItemToScreen(info,layout);
