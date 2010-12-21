@@ -12,8 +12,10 @@
     mTransition.resetTransition();
     createAnimations();
     startAnimation(mInAnimation);
-    if (mHandle != null) {
-      mHandle.startAnimation(mHandleOutAnimation);
+    if (mOverlappingViews != null) {
+      for (      View view : mOverlappingViews) {
+        view.startAnimation(mHandleOutAnimation);
+      }
     }
     setVisibility(VISIBLE);
   }

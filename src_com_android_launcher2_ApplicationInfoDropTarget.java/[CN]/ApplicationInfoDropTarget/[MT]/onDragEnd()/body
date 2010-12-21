@@ -5,9 +5,6 @@
   mFadeAnimator=new AnimatorSet();
   Animator infoButtonAnimator=ObjectAnimator.ofFloat(this,"alpha",0.0f);
   infoButtonAnimator.setDuration(sFadeOutAnimationDuration);
-  final View divider=mLauncher.findViewById(R.id.divider_during_drag);
-  divider.setVisibility(VISIBLE);
-  Animator dividerAnimator=ObjectAnimator.ofFloat(divider,"alpha",0.0f);
   mFadeAnimator.addListener(new AnimatorListener(){
     public void onAnimationStart(    Animator animation){
     }
@@ -21,18 +18,18 @@
     }
     private void onEndOrCancel(){
       setVisibility(GONE);
-      divider.setVisibility(GONE);
       mFadeAnimator=null;
     }
   }
 );
-  mFadeAnimator.play(infoButtonAnimator).with(dividerAnimator);
-  mFadeAnimator.start();
-  if (mHandle != null && mHandleWasVisibleOnDragStart) {
-    if (mHandleFadeAnimator != null)     mHandleFadeAnimator.cancel();
-    mHandleFadeAnimator=ObjectAnimator.ofFloat(mHandle,"alpha",1.0f);
-    mHandleFadeAnimator.setDuration(sFadeInAnimationDuration);
-    mHandleFadeAnimator.start();
-    mHandle.setVisibility(VISIBLE);
+  mFadeAnimator.play(infoButtonAnimator);
+  if (mOverlappingViews != null) {
+    for (    View view : mOverlappingViews) {
+      ObjectAnimator oa=ObjectAnimator.ofFloat(view,"alpha",1.0f);
+      oa.setDuration(sFadeInAnimationDuration);
+      mFadeAnimator.play(oa);
+      view.setVisibility(VISIBLE);
+    }
   }
+  mFadeAnimator.start();
 }

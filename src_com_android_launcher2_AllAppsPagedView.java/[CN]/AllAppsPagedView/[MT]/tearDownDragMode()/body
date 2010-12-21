@@ -1,14 +1,12 @@
 {
   post(new Runnable(){
     public void run(){
-      ApplicationInfoDropTarget infoButton=(ApplicationInfoDropTarget)mLauncher.findViewById(R.id.info_button);
-      infoButton.setDragAndDropEnabled(true);
       DeleteZone deleteZone=(DeleteZone)mLauncher.findViewById(R.id.delete_zone);
       deleteZone.setDragAndDropEnabled(true);
-      ApplicationInfoDropTarget allAppsInfoButton=(ApplicationInfoDropTarget)mLauncher.findViewById(R.id.all_apps_info_target);
-      allAppsInfoButton.setDragAndDropEnabled(false);
       DeleteZone allAppsDeleteZone=(DeleteZone)mLauncher.findViewById(R.id.all_apps_delete_zone);
       allAppsDeleteZone.setDragAndDropEnabled(false);
+      ApplicationInfoDropTarget allAppsInfoButton=(ApplicationInfoDropTarget)mLauncher.findViewById(R.id.all_apps_info_target);
+      allAppsInfoButton.setDragAndDropEnabled(false);
     }
   }
 );

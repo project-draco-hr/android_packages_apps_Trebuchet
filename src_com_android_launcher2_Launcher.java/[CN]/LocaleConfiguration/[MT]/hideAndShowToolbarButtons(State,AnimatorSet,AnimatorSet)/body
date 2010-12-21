@@ -9,7 +9,7 @@ case WORKSPACE:
   hideOrShowToolbarButton(true,allAppsButton,showSeq);
 hideOrShowToolbarButton(true,divider,showSeq);
 hideOrShowToolbarButton(true,configureButton,showSeq);
-mDeleteZone.setHandle(allAppsButton);
+mDeleteZone.setOverlappingViews(new View[]{allAppsButton,divider,configureButton});
 break;
 case ALL_APPS:
 hideOrShowToolbarButton(false,configureButton,hideSeq);
@@ -22,7 +22,6 @@ hideOrShowToolbarButton(false,allAppsButton,hideSeq);
 hideOrShowToolbarButton(false,searchButton,hideSeq);
 hideOrShowToolbarButton(false,divider,hideSeq);
 hideOrShowToolbarButton(false,configureButton,hideSeq);
-mDeleteZone.setHandle(allAppsButton);
 break;
 }
 }

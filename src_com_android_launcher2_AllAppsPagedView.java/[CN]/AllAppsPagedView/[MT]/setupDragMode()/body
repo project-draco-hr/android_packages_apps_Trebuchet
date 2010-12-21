@@ -1,11 +1,9 @@
 {
   mLauncher.getWorkspace().shrink(Workspace.ShrinkState.BOTTOM_VISIBLE);
-  ApplicationInfoDropTarget infoButton=(ApplicationInfoDropTarget)mLauncher.findViewById(R.id.info_button);
-  infoButton.setDragAndDropEnabled(false);
   DeleteZone deleteZone=(DeleteZone)mLauncher.findViewById(R.id.delete_zone);
   deleteZone.setDragAndDropEnabled(false);
-  ApplicationInfoDropTarget allAppsInfoButton=(ApplicationInfoDropTarget)mLauncher.findViewById(R.id.all_apps_info_target);
-  allAppsInfoButton.setDragAndDropEnabled(true);
   DeleteZone allAppsDeleteZone=(DeleteZone)mLauncher.findViewById(R.id.all_apps_delete_zone);
   allAppsDeleteZone.setDragAndDropEnabled(true);
+  ApplicationInfoDropTarget allAppsInfoButton=(ApplicationInfoDropTarget)mLauncher.findViewById(R.id.all_apps_info_target);
+  allAppsInfoButton.setDragAndDropEnabled(true);
 }

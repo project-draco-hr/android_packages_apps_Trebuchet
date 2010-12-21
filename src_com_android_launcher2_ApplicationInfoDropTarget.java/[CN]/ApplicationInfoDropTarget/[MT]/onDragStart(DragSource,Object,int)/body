@@ -7,24 +7,15 @@
       mFadeAnimator=new AnimatorSet();
       Animator infoButtonAnimator=ObjectAnimator.ofFloat(this,"alpha",0.0f,1.0f);
       infoButtonAnimator.setDuration(sFadeInAnimationDuration);
-      if (mHandle == mLauncher.findViewById(R.id.configure_button)) {
-        final View divider=mLauncher.findViewById(R.id.divider_during_drag);
-        divider.setVisibility(VISIBLE);
-        Animator dividerAnimator=ObjectAnimator.ofFloat(divider,"alpha",1.0f);
-        dividerAnimator.setDuration(sFadeInAnimationDuration);
-        mFadeAnimator.play(infoButtonAnimator).with(dividerAnimator);
-      }
- else {
-        mFadeAnimator.play(infoButtonAnimator);
-      }
-      mFadeAnimator.start();
+      mFadeAnimator.play(infoButtonAnimator);
       setVisibility(VISIBLE);
-      if (mHandle != null) {
-        mHandleWasVisibleOnDragStart=mHandle.getVisibility() == VISIBLE;
-        if (mHandleFadeAnimator != null)         mHandleFadeAnimator.cancel();
-        mHandleFadeAnimator=ObjectAnimator.ofFloat(mHandle,"alpha",0.0f);
-        mHandleFadeAnimator.setDuration(sFadeOutAnimationDuration);
-        mHandleFadeAnimator.addListener(new AnimatorListener(){
+      if (mOverlappingViews != null) {
+        for (        View view : mOverlappingViews) {
+          ObjectAnimator oa=ObjectAnimator.ofFloat(view,"alpha",0.0f);
+          oa.setDuration(sFadeOutAnimationDuration);
+          mFadeAnimator.play(oa);
+        }
+        mFadeAnimator.addListener(new AnimatorListener(){
           public void onAnimationStart(          Animator animation){
           }
           public void onAnimationRepeat(          Animator animation){
@@ -36,13 +27,15 @@
             onEndOrCancel();
           }
           private void onEndOrCancel(){
-            mHandle.setVisibility(INVISIBLE);
-            mHandleFadeAnimator=null;
+            for (            View view : mOverlappingViews) {
+              view.setVisibility(INVISIBLE);
+            }
+            mFadeAnimator=null;
           }
         }
 );
-        mHandleFadeAnimator.start();
       }
+      mFadeAnimator.start();
     }
   }
 }
