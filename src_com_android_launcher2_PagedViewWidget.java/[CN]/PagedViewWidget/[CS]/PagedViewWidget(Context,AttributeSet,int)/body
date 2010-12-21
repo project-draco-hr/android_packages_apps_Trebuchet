@@ -7,6 +7,13 @@
   if (sHolographicOutlineHelper == null) {
     sHolographicOutlineHelper=new HolographicOutlineHelper();
   }
+  final Resources r=context.getResources();
+  final int alpha=r.getInteger(R.integer.icon_allAppsCustomizeFadeAlpha);
+  if (alpha > 0) {
+    mCheckedAlpha=r.getInteger(R.integer.icon_allAppsCustomizeFadeAlpha) / 256.0f;
+    mCheckedFadeInDuration=r.getInteger(R.integer.icon_allAppsCustomizeFadeInTime);
+    mCheckedFadeOutDuration=r.getInteger(R.integer.icon_allAppsCustomizeFadeOutTime);
+  }
   setFocusable(true);
   setWillNotDraw(false);
   setClipToPadding(false);

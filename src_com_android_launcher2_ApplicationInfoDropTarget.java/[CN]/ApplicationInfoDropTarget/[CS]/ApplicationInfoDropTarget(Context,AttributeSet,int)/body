@@ -2,7 +2,9 @@
   super(context,attrs,defStyle);
   int colour=getContext().getResources().getColor(R.color.app_info_filter);
   mHoverPaint.setColorFilter(new PorterDuffColorFilter(colour,PorterDuff.Mode.SRC_ATOP));
-  int tb=getResources().getDimensionPixelSize(R.dimen.delete_zone_vertical_drag_padding);
-  int lr=getResources().getDimensionPixelSize(R.dimen.delete_zone_horizontal_drag_padding);
-  setDragPadding(tb,lr,tb,0);
+  if (LauncherApplication.isScreenXLarge()) {
+    int tb=getResources().getDimensionPixelSize(R.dimen.delete_zone_vertical_drag_padding);
+    int lr=getResources().getDimensionPixelSize(R.dimen.delete_zone_horizontal_drag_padding);
+    setDragPadding(tb,lr,tb,0);
+  }
 }

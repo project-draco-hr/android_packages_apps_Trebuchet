@@ -3,6 +3,7 @@
     endChoiceMode();
   }
   super.beginDragging(v);
+  boolean result=false;
 switch (mCustomizationType) {
 case WidgetCustomization:
 {
@@ -17,7 +18,8 @@ case WidgetCustomization:
       mLauncher.getWorkspace().onDragStartedWithItemSpans(spanXY[0],spanXY[1],b);
       mDragController.startDrag(i,b,this,createWidgetInfo,DragController.DRAG_ACTION_COPY,null);
       b.recycle();
-      return true;
+      result=true;
+      break;
     }
 case ShortcutCustomization:
 {
@@ -28,7 +30,8 @@ case ShortcutCustomization:
     mLauncher.getWorkspace().onDragStartedWithItemSpans(1,1,b);
     mDragController.startDrag(v,b,this,createItemInfo,DragController.DRAG_ACTION_COPY,null);
     b.recycle();
-    return true;
+    result=true;
+    break;
   }
 case ApplicationCustomization:
 {
@@ -40,8 +43,14 @@ case ApplicationCustomization:
   mLauncher.getWorkspace().onDragStartedWithItemSpans(1,1,b);
   mDragController.startDrag(v,b,this,app,DragController.DRAG_ACTION_COPY,null);
   b.recycle();
-  return true;
+  result=true;
+  break;
 }
 }
-return false;
+if (v instanceof Checkable) {
+resetCheckedGrandchildren();
+Checkable checkable=(Checkable)v;
+checkable.toggle();
+}
+return result;
 }
