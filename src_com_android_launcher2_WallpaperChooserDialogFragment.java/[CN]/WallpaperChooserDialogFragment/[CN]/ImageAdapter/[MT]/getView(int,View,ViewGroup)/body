@@ -1,11 +1,12 @@
 {
-  ImageView image;
+  View view;
   if (convertView == null) {
-    image=(ImageView)mLayoutInflater.inflate(R.layout.wallpaper_item,parent,false);
+    view=mLayoutInflater.inflate(R.layout.wallpaper_item,parent,false);
   }
  else {
-    image=(ImageView)convertView;
+    view=convertView;
   }
+  ImageView image=(ImageView)view.findViewById(R.id.wallpaper_image);
   int thumbRes=mThumbs.get(position);
   image.setImageResource(thumbRes);
   Drawable thumbDrawable=image.getDrawable();
@@ -15,5 +16,5 @@
  else {
     Log.e(TAG,"Error decoding thumbnail resId=" + thumbRes + " for wallpaper #"+ position);
   }
-  return image;
+  return view;
 }
