@@ -9,5 +9,5 @@
   mDragCell[1]=-1;
   mDragOutlineAnims[mDragOutlineCurrent].animateOut();
   mDragOutlineCurrent=(mDragOutlineCurrent + 1) % mDragOutlineAnims.length;
-  setHover(false);
+  setIsDragOverlapping(false);
 }

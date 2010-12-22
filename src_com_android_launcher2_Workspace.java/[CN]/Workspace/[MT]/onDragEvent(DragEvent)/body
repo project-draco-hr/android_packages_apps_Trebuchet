@@ -26,7 +26,7 @@ case DragEvent.ACTION_DRAG_STARTED:
       final int bitmapPadding=HolographicOutlineHelper.MAX_OUTER_BLUR_RADIUS;
       mDragOutline=createExternalDragOutline(canvas,bitmapPadding);
       showOutlines();
-      layout.setHover(true);
+      layout.setIsDragOccuring(true);
       layout.onDragEnter();
       layout.visualizeDropLocation(null,mDragOutline,x,y,1,1);
       return true;
@@ -36,7 +36,6 @@ case DragEvent.ACTION_DRAG_LOCATION:
 return true;
 case DragEvent.ACTION_DROP:
 {
-int newDropCount=0;
 final LauncherModel model=mLauncher.getModel();
 final ClipData data=event.getClipData();
 pos[0]=x;
@@ -72,7 +71,7 @@ if (test != null) {
 return true;
 }
 case DragEvent.ACTION_DRAG_ENDED:
-layout.setHover(false);
+layout.setIsDragOccuring(false);
 layout.onDragExit();
 hideOutlines();
 return true;

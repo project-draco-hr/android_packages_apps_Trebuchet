@@ -1,0 +1,6 @@
+{
+  if (mIsDragOverlapping != isDragOverlapping) {
+    mIsDragOverlapping=isDragOverlapping;
+    invalidate();
+  }
+}

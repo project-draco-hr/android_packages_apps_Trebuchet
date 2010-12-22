@@ -2,13 +2,10 @@
   final int screenCount=getChildCount();
   for (int i=0; i < screenCount; i++) {
     CellLayout cl=(CellLayout)getChildAt(i);
+    cl.setIsDragOccuring(isDragHappening);
 switch (state) {
 case TOP:
-      if (!isDragHappening) {
-        boolean showDropHighlight=i == mCurrentPage;
-        cl.setAcceptsDrops(showDropHighlight);
-        break;
-      }
+      cl.setIsDefaultDropTarget(i == mCurrentPage);
 case BOTTOM_HIDDEN:
 case BOTTOM_VISIBLE:
     if (!isDragHappening) {

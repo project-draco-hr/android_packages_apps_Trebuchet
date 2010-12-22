@@ -14,10 +14,10 @@
     bouncer.play(scaleUp).with(alphaFadeOut);
     bouncer.addListener(new AnimatorListenerAdapter(){
       @Override public void onAnimationStart(      Animator animation){
-        setHover(true);
+        setIsDragOverlapping(true);
       }
       @Override public void onAnimationEnd(      Animator animation){
-        setHover(false);
+        setIsDragOverlapping(false);
         setHoverScale(1.0f);
         setHoverAlpha(1.0f);
       }

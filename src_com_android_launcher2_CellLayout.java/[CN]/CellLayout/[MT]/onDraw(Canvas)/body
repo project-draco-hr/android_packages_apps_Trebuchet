@@ -1,21 +1,26 @@
 {
   if (mBackgroundAlpha > 0.0f) {
     Drawable bg;
-    if (getScaleX() < 0.5f) {
-      bg=mAcceptsDrops ? mBackgroundMiniAcceptsDrops : mBackgroundMini;
+    boolean mini=getScaleX() < 0.5f;
+    if (mIsDragOverlapping) {
+      bg=mini ? mActiveBackgroundMini : mActiveGlowBackground;
+    }
+ else     if (mIsDragOccuring && mAcceptsDrops) {
+      bg=mini ? mActiveBackgroundMini : mActiveBackground;
+    }
+ else     if (mIsDefaultDropTarget) {
+      bg=mini ? mNormalGlowBackgroundMini : mNormalGlowBackground;
     }
  else {
-      bg=mHover ? mBackgroundHover : mBackground;
+      bg=mini ? mNormalBackgroundMini : mNormalBackground;
     }
-    if (bg != null) {
-      bg.setAlpha((int)(mBackgroundAlpha * mBackgroundAlphaMultiplier * 255));
-      bg.setBounds(mBackgroundRect);
-      bg.draw(canvas);
-    }
-    if (mHover && getScaleX() < 0.5f) {
+    bg.setAlpha((int)(mBackgroundAlpha * mBackgroundAlphaMultiplier * 255));
+    bg.setBounds(mBackgroundRect);
+    bg.draw(canvas);
+    if (mini && mIsDragOverlapping) {
       boolean modifiedClipRect=false;
-      if (mHoverScale > 1.0f) {
-        float marginFraction=(mHoverScale - 1.0f) / 2.0f;
+      if (mGlowBackgroundScale > 1.0f) {
+        float marginFraction=(mGlowBackgroundScale - 1.0f) / 2.0f;
         Rect clipRect=canvas.getClipBounds();
         int marginX=(int)(marginFraction * (clipRect.right - clipRect.left));
         int marginY=(int)(marginFraction * (clipRect.bottom - clipRect.top));
@@ -23,9 +28,9 @@
         canvas.clipRect(-marginX,-marginY,getWidth() + marginX,getHeight() + marginY,Region.Op.REPLACE);
         modifiedClipRect=true;
       }
-      mBackgroundMiniHover.setAlpha((int)(mBackgroundAlpha * mHoverAlpha * 255));
-      mBackgroundMiniHover.setBounds(mHoverRect);
-      mBackgroundMiniHover.draw(canvas);
+      mActiveGlowBackgroundMini.setAlpha((int)(mBackgroundAlpha * mGlowBackgroundAlpha * 255));
+      mActiveGlowBackgroundMini.setBounds(mGlowBackgroundRect);
+      mActiveGlowBackgroundMini.draw(canvas);
       if (modifiedClipRect) {
         canvas.restore();
       }

@@ -8,12 +8,12 @@
       layout=findMatchingPageForDragOver(dragView,originX,originY,xOffset,yOffset);
       if (layout != mDragTargetLayout) {
         if (mDragTargetLayout != null) {
-          mDragTargetLayout.setHover(false);
+          mDragTargetLayout.setIsDragOverlapping(false);
           mSpringLoadedDragController.onDragExit();
         }
         mDragTargetLayout=layout;
         if (mDragTargetLayout != null && mDragTargetLayout.getAcceptsDrops()) {
-          mDragTargetLayout.setHover(true);
+          mDragTargetLayout.setIsDragOverlapping(true);
           mSpringLoadedDragController.onDragEnter(mDragTargetLayout);
         }
       }

@@ -1,6 +1,6 @@
 {
-  if (scaleFactor != mHoverScale) {
-    mHoverScale=scaleFactor;
-    updateHoverRect();
+  if (scaleFactor != mGlowBackgroundScale) {
+    mGlowBackgroundScale=scaleFactor;
+    updateGlowRect();
   }
 }

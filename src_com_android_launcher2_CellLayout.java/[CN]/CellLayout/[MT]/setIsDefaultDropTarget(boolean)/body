@@ -1,0 +1,6 @@
+{
+  if (mIsDefaultDropTarget != isDefaultDropTarget) {
+    mIsDefaultDropTarget=isDefaultDropTarget;
+    invalidate();
+  }
+}

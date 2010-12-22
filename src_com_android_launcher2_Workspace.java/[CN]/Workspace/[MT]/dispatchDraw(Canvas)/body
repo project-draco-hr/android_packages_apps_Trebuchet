@@ -16,12 +16,12 @@
       final int padding=(int)((height - pageHeight) * 0.5f + pageHeight * 0.1f);
       final CellLayout leftPage=(CellLayout)getChildAt(mCurrentPage - 1);
       final CellLayout rightPage=(CellLayout)getChildAt(mCurrentPage + 1);
-      if (leftPage != null && leftPage.getHover()) {
+      if (leftPage != null && leftPage.getIsDragOverlapping()) {
         final Drawable d=getResources().getDrawable(R.drawable.page_hover_left);
         d.setBounds(mScrollX,padding,mScrollX + d.getIntrinsicWidth(),height - padding);
         d.draw(canvas);
       }
- else       if (rightPage != null && rightPage.getHover()) {
+ else       if (rightPage != null && rightPage.getIsDragOverlapping()) {
         final Drawable d=getResources().getDrawable(R.drawable.page_hover_right);
         d.setBounds(mScrollX + width - d.getIntrinsicWidth(),padding,mScrollX + width,height - padding);
         d.draw(canvas);

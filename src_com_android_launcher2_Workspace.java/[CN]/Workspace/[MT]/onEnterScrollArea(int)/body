@@ -5,7 +5,7 @@
     final int page=mCurrentPage + (direction == DragController.SCROLL_LEFT ? -1 : 1);
     final CellLayout layout=(CellLayout)getChildAt(page);
     if (layout != null) {
-      layout.setHover(true);
+      layout.setIsDragOverlapping(true);
       if (mDragTargetLayout != null) {
         mDragTargetLayout.onDragExit();
         mDragTargetLayout=null;

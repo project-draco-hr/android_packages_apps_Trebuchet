@@ -18,16 +18,22 @@
   mWallpaperManager=WallpaperManager.getInstance(context);
   final Resources res=getResources();
   if (LauncherApplication.isScreenXLarge()) {
-    mBackgroundMini=res.getDrawable(R.drawable.homescreen_small_blue);
-    mBackgroundMini.setFilterBitmap(true);
-    mBackground=res.getDrawable(R.drawable.homescreen_large_blue);
-    mBackground.setFilterBitmap(true);
-    mBackgroundMiniHover=res.getDrawable(R.drawable.homescreen_small_green_strong);
-    mBackgroundMiniHover.setFilterBitmap(true);
-    mBackgroundHover=res.getDrawable(R.drawable.homescreen_large_green_strong);
-    mBackgroundHover.setFilterBitmap(true);
-    mBackgroundMiniAcceptsDrops=res.getDrawable(R.drawable.homescreen_small_green);
-    mBackgroundMiniAcceptsDrops.setFilterBitmap(true);
+    mNormalBackground=res.getDrawable(R.drawable.homescreen_large_blue);
+    mNormalGlowBackground=res.getDrawable(R.drawable.homescreen_large_blue_strong);
+    mActiveBackground=res.getDrawable(R.drawable.homescreen_large_green);
+    mActiveGlowBackground=res.getDrawable(R.drawable.homescreen_large_green_strong);
+    mNormalBackgroundMini=res.getDrawable(R.drawable.homescreen_small_blue);
+    mNormalGlowBackgroundMini=res.getDrawable(R.drawable.homescreen_small_blue_strong);
+    mActiveBackgroundMini=res.getDrawable(R.drawable.homescreen_small_green);
+    mActiveGlowBackgroundMini=res.getDrawable(R.drawable.homescreen_small_green_strong);
+    mNormalBackground.setFilterBitmap(true);
+    mNormalGlowBackground.setFilterBitmap(true);
+    mActiveBackground.setFilterBitmap(true);
+    mActiveGlowBackground.setFilterBitmap(true);
+    mNormalBackgroundMini.setFilterBitmap(true);
+    mNormalGlowBackgroundMini.setFilterBitmap(true);
+    mActiveBackgroundMini.setFilterBitmap(true);
+    mActiveGlowBackgroundMini.setFilterBitmap(true);
   }
   mCrosshairsDrawable=res.getDrawable(R.drawable.gardening_crosshairs);
   mEaseOutInterpolator=new DecelerateInterpolator(2.5f);
@@ -82,7 +88,7 @@
     mDragOutlineAnims[i]=anim;
   }
   mBackgroundRect=new Rect();
-  mHoverRect=new Rect();
+  mGlowBackgroundRect=new Rect();
   setHoverScale(1.0f);
   setHoverAlpha(1.0f);
 }

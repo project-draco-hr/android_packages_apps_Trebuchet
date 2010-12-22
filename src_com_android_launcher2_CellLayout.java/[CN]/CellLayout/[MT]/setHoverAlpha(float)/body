@@ -1,4 +1,4 @@
 {
-  mHoverAlpha=alpha;
+  mGlowBackgroundAlpha=alpha;
   invalidate();
 }
