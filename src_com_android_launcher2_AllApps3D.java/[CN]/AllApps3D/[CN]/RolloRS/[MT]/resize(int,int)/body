@@ -1,6 +1,6 @@
 {
   Matrix4f proj=getProjectionMatrix(w,h);
-  mPVA.loadProjection(proj);
+  mPVA.setProjection(proj);
   if (mUniformAlloc != null) {
     ScriptField_VpConsts.Item i=new ScriptField_VpConsts.Item();
     i.Proj=proj;
