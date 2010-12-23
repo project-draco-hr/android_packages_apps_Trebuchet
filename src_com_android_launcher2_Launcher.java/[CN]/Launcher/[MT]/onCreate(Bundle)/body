@@ -74,7 +74,9 @@
   lockAllApps();
   mSavedState=savedInstanceState;
   restoreState(mSavedState);
-  mCustomizePagedView.update();
+  if (mCustomizePagedView != null) {
+    mCustomizePagedView.update();
+  }
   if (PROFILE_STARTUP) {
     android.os.Debug.stopMethodTracing();
   }
