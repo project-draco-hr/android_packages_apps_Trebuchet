@@ -1,0 +1,13 @@
+{
+  final int action=ev.getAction();
+switch (action & MotionEvent.ACTION_MASK) {
+case MotionEvent.ACTION_DOWN:
+    cancelDragging();
+  break;
+case MotionEvent.ACTION_MOVE:
+if (mTouchState != TOUCH_STATE_SCROLLING && !mIsDragging) {
+  determineDraggingStart(ev);
+}
+break;
+}
+}
