@@ -1,5 +1,6 @@
 {
   mCustomizationType=filterType;
+  cancelDragging();
   if (getChildCount() > 0) {
     setCurrentPage(0);
     updateCurrentPageScroll();
