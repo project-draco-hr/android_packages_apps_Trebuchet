@@ -16,12 +16,14 @@ case MotionEvent.ACTION_DOWN:
 mMotionDownY=screenY;
 mLastDropTarget=null;
 break;
-case MotionEvent.ACTION_CANCEL:
 case MotionEvent.ACTION_UP:
 if (mDragging) {
 drop(screenX,screenY);
 }
 endDrag();
+break;
+case MotionEvent.ACTION_CANCEL:
+cancelDrag();
 break;
 }
 return mDragging;
