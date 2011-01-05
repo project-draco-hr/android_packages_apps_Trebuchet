@@ -29,6 +29,7 @@ endDrag();
 break;
 case MotionEvent.ACTION_CANCEL:
 cancelDrag();
+break;
 }
 return true;
 }
