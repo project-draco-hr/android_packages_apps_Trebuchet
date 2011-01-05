@@ -1,0 +1,6 @@
+AppWidgetProviderInfo info
+FastBitmapDrawable preview
+int maxWidth
+int[] cellSpan
+PagedViewIconCache cache
+boolean createHolographicOutline

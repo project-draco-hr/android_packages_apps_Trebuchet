@@ -1,0 +1,5 @@
+{
+  final ComponentInfo ci=info.activityInfo != null ? info.activityInfo : info.serviceInfo;
+  mComponentName=new ComponentName(ci.packageName,ci.name);
+  mType=Type.AppWidgetProviderInfoKey;
+}

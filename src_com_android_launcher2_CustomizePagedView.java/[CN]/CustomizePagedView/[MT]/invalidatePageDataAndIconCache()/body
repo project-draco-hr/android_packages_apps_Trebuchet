@@ -1,4 +1,0 @@
-{
-  mPageViewIconCache.clear();
-  invalidatePageData();
-}

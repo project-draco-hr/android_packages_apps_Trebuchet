@@ -2,6 +2,7 @@
   LinearLayout layout=(LinearLayout)getChildAt(page);
   layout.removeAllViews();
   final int count=mWallpaperList.size();
+  final int numPages=getPageCount();
   final int numItemsPerPage=mMaxWallpaperCellHSpan / mWallpaperCellHSpan;
   final int startIndex=page * numItemsPerPage;
   final int endIndex=Math.min(count,startIndex + numItemsPerPage);
@@ -9,7 +10,7 @@
     final ResolveInfo info=mWallpaperList.get(i);
     final FastBitmapDrawable icon=getWallpaperPreview(info);
     PagedViewWidget l=(PagedViewWidget)mInflater.inflate(R.layout.customize_paged_view_wallpaper,layout,false);
-    l.applyFromWallpaperInfo(info,mPackageManager,icon,mMaxWidgetWidth);
+    l.applyFromWallpaperInfo(info,mPackageManager,icon,mMaxWidgetWidth,mPageViewIconCache,(numPages > 1));
     l.setTag(info);
     l.setOnClickListener(this);
     layout.addView(l);

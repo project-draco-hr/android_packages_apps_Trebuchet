@@ -1,0 +1,4 @@
+ApplicationInfo info
+PagedViewIconCache cache
+boolean scaleUp
+boolean createHolographicOutlines

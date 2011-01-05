@@ -2,6 +2,7 @@
   LinearLayout layout=(LinearLayout)getChildAt(page);
   final ArrayList<AppWidgetProviderInfo> list=mWidgetPages.get(page);
   final int count=list.size();
+  final int numPages=getPageCount();
   layout.removeAllViews();
   for (int i=0; i < count; ++i) {
     final AppWidgetProviderInfo info=(AppWidgetProviderInfo)list.get(i);
@@ -9,7 +10,7 @@
     final int[] cellSpans=CellLayout.rectToCell(getResources(),info.minWidth,info.minHeight,null);
     final FastBitmapDrawable icon=getWidgetPreview(info);
     PagedViewWidget l=(PagedViewWidget)mInflater.inflate(R.layout.customize_paged_view_widget,layout,false);
-    l.applyFromAppWidgetProviderInfo(info,icon,mMaxWidgetWidth,cellSpans);
+    l.applyFromAppWidgetProviderInfo(info,icon,mMaxWidgetWidth,cellSpans,mPageViewIconCache,(numPages > 1));
     l.setTag(createItemInfo);
     l.setOnClickListener(this);
     l.setOnTouchListener(this);

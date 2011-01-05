@@ -1,0 +1,7 @@
+{
+  if (o instanceof Key) {
+    Key k=(Key)o;
+    return mComponentName.equals(k.mComponentName);
+  }
+  return super.equals(o);
+}

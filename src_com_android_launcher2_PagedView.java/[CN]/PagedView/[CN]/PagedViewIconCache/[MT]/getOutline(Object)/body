@@ -1,3 +1,0 @@
-{
-  return iconOutlineCache.get(key);
-}

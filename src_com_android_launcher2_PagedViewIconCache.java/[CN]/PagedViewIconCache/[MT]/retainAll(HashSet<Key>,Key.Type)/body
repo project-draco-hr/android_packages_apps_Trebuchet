@@ -1,0 +1,10 @@
+{
+  HashSet<Key> keysToRemove=new HashSet<Key>(mIconOutlineCache.keySet());
+  keysToRemove.removeAll(keysToKeep);
+  for (  Key key : keysToRemove) {
+    if (key.isKeyType(t)) {
+      mIconOutlineCache.get(key).recycle();
+      mIconOutlineCache.remove(key);
+    }
+  }
+}

@@ -1,14 +1,15 @@
 {
-  int numCells=mCellCountX * mCellCountY;
-  int startIndex=page * numCells;
-  int endIndex=Math.min(startIndex + numCells,list.size());
-  PagedViewCellLayout layout=(PagedViewCellLayout)getChildAt(page);
+  final int numPages=getPageCount();
+  final int numCells=mCellCountX * mCellCountY;
+  final int startIndex=page * numCells;
+  final int endIndex=Math.min(startIndex + numCells,list.size());
+  final PagedViewCellLayout layout=(PagedViewCellLayout)getChildAt(page);
   layout.removeAllViews();
   for (int i=startIndex; i < endIndex; ++i) {
     ResolveInfo info=list.get(i);
     PendingAddItemInfo createItemInfo=new PendingAddItemInfo();
     PagedViewIcon icon=(PagedViewIcon)mInflater.inflate(R.layout.customize_paged_view_item,layout,false);
-    icon.applyFromResolveInfo(info,mPackageManager,mPageViewIconCache,((LauncherApplication)mLauncher.getApplication()).getIconCache());
+    icon.applyFromResolveInfo(info,mPackageManager,mPageViewIconCache,((LauncherApplication)mLauncher.getApplication()).getIconCache(),(numPages > 1));
 switch (mCustomizationType) {
 case WallpaperCustomization:
       icon.setOnClickListener(this);

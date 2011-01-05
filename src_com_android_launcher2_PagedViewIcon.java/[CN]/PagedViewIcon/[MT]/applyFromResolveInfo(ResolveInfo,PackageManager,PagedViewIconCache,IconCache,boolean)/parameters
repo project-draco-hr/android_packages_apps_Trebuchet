@@ -1,0 +1,5 @@
+ResolveInfo info
+PackageManager packageManager
+PagedViewIconCache cache
+IconCache modelIconCache
+boolean createHolographicOutlines

@@ -30,11 +30,12 @@
       text.setOnTouchListener(this);
       layout.addViewToCellLayout(text,-1,i,new PagedViewCellLayout.LayoutParams(0,0,1,1));
     }
+    final int numPages=getPageCount();
     for (int i=startIndex; i < endIndex; ++i) {
       final int index=i - startIndex;
       final ApplicationInfo info=mFilteredApps.get(i);
       PagedViewIcon icon=(PagedViewIcon)layout.getChildAt(index);
-      icon.applyFromApplicationInfo(info,mPageViewIconCache,true);
+      icon.applyFromApplicationInfo(info,mPageViewIconCache,true,(numPages > 1));
       PagedViewCellLayout.LayoutParams params=(PagedViewCellLayout.LayoutParams)icon.getLayoutParams();
       params.cellX=index % mCellCountX;
       params.cellY=index / mCellCountX;
