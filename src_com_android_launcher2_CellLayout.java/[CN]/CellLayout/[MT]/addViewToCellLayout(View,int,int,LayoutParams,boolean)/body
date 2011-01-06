@@ -6,6 +6,7 @@
     child.setId(childId);
     child.setAlpha(getAlpha());
     addView(child,index,lp);
+    invalidateCache();
     if (markCells)     markCellsAsOccupiedForView(child);
     return true;
   }

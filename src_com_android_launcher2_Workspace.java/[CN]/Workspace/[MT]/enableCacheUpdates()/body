@@ -1,0 +1,7 @@
+{
+  final int pageCount=getChildCount();
+  for (int i=0; i < pageCount; i++) {
+    final CellLayout page=(CellLayout)getChildAt(i);
+    page.enableCacheUpdates();
+  }
+}

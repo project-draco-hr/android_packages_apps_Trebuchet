@@ -40,6 +40,7 @@
         cl.setBackgroundAlpha(0.0f);
         cl.setAlpha(finalAlphaValue);
         cl.setRotationY(rotation);
+        mUnshrinkAnimationListener.onAnimationEnd(null);
       }
     }
     if (animated) {
