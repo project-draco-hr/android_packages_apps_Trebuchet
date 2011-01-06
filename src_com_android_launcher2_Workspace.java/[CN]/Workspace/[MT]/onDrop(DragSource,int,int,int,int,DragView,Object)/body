@@ -8,6 +8,10 @@
     originX=(int)mTempOriginXY[0];
     originY=(int)mTempOriginXY[1];
   }
+  int dragTargetIndex=indexOfChild(mDragTargetLayout);
+  if (mCurrentPage != dragTargetIndex && (mIsSmall || mIsInUnshrinkAnimation)) {
+    moveToNewPageWithoutMovingCellLayouts(dragTargetIndex);
+  }
   if (source != this) {
     if (!mIsSmall || mWasSpringLoadedOnDragExit) {
       onDropExternal(originX,originY,dragInfo,mDragTargetLayout,false);
