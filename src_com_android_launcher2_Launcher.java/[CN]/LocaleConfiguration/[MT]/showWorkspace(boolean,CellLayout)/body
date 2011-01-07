@@ -12,4 +12,5 @@
     hideCustomizationDrawer(animated);
   }
   mState=State.WORKSPACE;
+  getWindow().getDecorView().sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_SELECTED);
 }
