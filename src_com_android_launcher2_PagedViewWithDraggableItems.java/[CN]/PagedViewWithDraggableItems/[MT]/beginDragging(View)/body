@@ -1,4 +1,5 @@
 {
+  boolean wasDragging=mIsDragging;
   mIsDragging=true;
-  return false;
+  return !wasDragging;
 }

@@ -31,7 +31,7 @@ if (longClickCellInfo == null || !longClickCellInfo.valid) {
 return true;
 }
 final View itemUnderLongClick=longClickCellInfo.cell;
-if (mWorkspace.allowLongPress()) {
+if (mWorkspace.allowLongPress() && !mDragController.isDragging()) {
 if (itemUnderLongClick == null) {
 mWorkspace.setAllowLongPress(false);
 mWorkspace.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS,HapticFeedbackConstants.FLAG_IGNORE_VIEW_SETTING);
