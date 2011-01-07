@@ -9,13 +9,14 @@
       }
     }
   }
-  if (mForceCacheUpdate || (mIsCacheEnabled && !mDisableCacheUpdates)) {
+  boolean useBitmapCache=mIsCacheEnabled && getScaleX() < mMaxScaleForUsingBitmapCache;
+  if (mForceCacheUpdate || (useBitmapCache && !mDisableCacheUpdates)) {
     if (mIsCacheDirty) {
       updateCache();
     }
     mForceCacheUpdate=false;
   }
-  if (mIsCacheEnabled && getScaleX() < mMaxScaleForUsingBitmapCache) {
+  if (useBitmapCache) {
     mCachePaint.setAlpha((int)(255 * getAlpha()));
     canvas.drawBitmap(mCache,mCacheRect,mBackgroundRect,mCachePaint);
   }
