@@ -1,5 +1,5 @@
 {
-  if (mBackgroundAlpha > 0.0f) {
+  if (LauncherApplication.isScreenXLarge() && mBackgroundAlpha > 0.0f) {
     Drawable bg;
     boolean mini=getScaleX() < 0.5f;
     if (mIsDragOverlapping) {
