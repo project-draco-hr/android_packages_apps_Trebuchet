@@ -17,4 +17,5 @@
   ((View)mAllAppsGrid).requestFocus();
   mDeleteZone.setVisibility(View.GONE);
   mState=State.ALL_APPS;
+  getWindow().getDecorView().sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_SELECTED);
 }
