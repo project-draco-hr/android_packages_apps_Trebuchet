@@ -1,4 +1,5 @@
 {
   markCellsAsUnoccupiedForView(view);
   super.removeView(view);
+  invalidateCache();
 }

@@ -3,4 +3,5 @@
     markCellsAsUnoccupiedForView(getChildAt(i));
   }
   super.removeViewsInLayout(start,count);
+  invalidateCache();
 }
