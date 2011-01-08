@@ -1,4 +1,4 @@
 {
   mIsCacheDirty=true;
-  invalidateIfNeeded();
+  invalidate();
 }

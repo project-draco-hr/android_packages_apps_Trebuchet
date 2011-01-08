@@ -1,0 +1,6 @@
+{
+  if (mOnVisibilityChangedListener != null) {
+    mOnVisibilityChangedListener.receiveVisibilityChangedMessage(this);
+  }
+  super.onVisibilityChanged(changedView,visibility);
+}
