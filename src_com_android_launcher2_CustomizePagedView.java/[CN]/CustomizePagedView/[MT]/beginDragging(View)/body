@@ -1,8 +1,9 @@
 {
+  if (!v.isInTouchMode())   return false;
+  if (!super.beginDragging(v))   return false;
   if (isChoiceMode(CHOICE_MODE_SINGLE)) {
     endChoiceMode();
   }
-  super.beginDragging(v);
   boolean result=false;
 switch (mCustomizationType) {
 case WidgetCustomization:

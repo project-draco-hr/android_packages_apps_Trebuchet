@@ -1,8 +1,6 @@
 {
-  if (!v.isInTouchMode()) {
-    return false;
-  }
-  super.beginDragging(v);
+  if (!v.isInTouchMode())   return false;
+  if (!super.beginDragging(v))   return false;
   setupDragMode();
   ApplicationInfo app=(ApplicationInfo)v.getTag();
   app=new ApplicationInfo(app);
