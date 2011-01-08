@@ -14,7 +14,12 @@
         mWallpaperManager.sendWallpaperCommand(getWindowToken(),WallpaperManager.COMMAND_DROP,cellXY[0] + childLeft + lp.width / 2,cellXY[1] + childTop + lp.height / 2,0,null);
         if (lp.animateDrop) {
           lp.animateDrop=false;
-          ((Workspace)mParent).animateViewIntoPosition(child);
+          post(new Runnable(){
+            public void run(){
+              ((Workspace)mParent).animateViewIntoPosition(child);
+            }
+          }
+);
         }
       }
     }
