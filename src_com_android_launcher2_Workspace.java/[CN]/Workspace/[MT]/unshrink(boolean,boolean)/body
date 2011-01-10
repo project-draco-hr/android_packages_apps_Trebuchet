@@ -18,6 +18,7 @@
     for (int i=0; i < screenCount; i++) {
       final CellLayout cl=(CellLayout)getChildAt(i);
       float finalAlphaValue=(i == mCurrentPage) ? 1.0f : 0.0f;
+      float finalAlphaMultiplierValue=((i == mCurrentPage) && (mShrinkState != ShrinkState.SPRING_LOADED)) ? 0.0f : 1.0f;
       float rotation=0.0f;
       if (i < mCurrentPage) {
         rotation=WORKSPACE_ROTATION;
@@ -27,7 +28,7 @@
       }
       float translation=getOffsetXForRotation(rotation,cl.getWidth(),cl.getHeight());
       if (animated) {
-        ObjectAnimator animWithInterpolator=ObjectAnimator.ofPropertyValuesHolder(cl,PropertyValuesHolder.ofFloat("translationX",translation),PropertyValuesHolder.ofFloat("translationY",0.0f),PropertyValuesHolder.ofFloat("scaleX",finalScaleFactor),PropertyValuesHolder.ofFloat("scaleY",finalScaleFactor),PropertyValuesHolder.ofFloat("backgroundAlpha",finalBackgroundAlpha),PropertyValuesHolder.ofFloat("alpha",finalAlphaValue),PropertyValuesHolder.ofFloat("rotationY",rotation));
+        ObjectAnimator animWithInterpolator=ObjectAnimator.ofPropertyValuesHolder(cl,PropertyValuesHolder.ofFloat("translationX",translation),PropertyValuesHolder.ofFloat("translationY",0.0f),PropertyValuesHolder.ofFloat("scaleX",finalScaleFactor),PropertyValuesHolder.ofFloat("scaleY",finalScaleFactor),PropertyValuesHolder.ofFloat("backgroundAlpha",finalBackgroundAlpha),PropertyValuesHolder.ofFloat("backgroundAlphaMultiplier",finalAlphaMultiplierValue),PropertyValuesHolder.ofFloat("alpha",finalAlphaValue),PropertyValuesHolder.ofFloat("rotationY",rotation));
         animWithInterpolator.setDuration(duration);
         animWithInterpolator.setInterpolator(mZoomInInterpolator);
         mAnimator.playTogether(animWithInterpolator);
@@ -38,6 +39,7 @@
         cl.setScaleX(finalScaleFactor);
         cl.setScaleY(finalScaleFactor);
         cl.setBackgroundAlpha(0.0f);
+        cl.setBackgroundAlphaMultiplier(finalAlphaMultiplierValue);
         cl.setAlpha(finalAlphaValue);
         cl.setRotationY(rotation);
         mUnshrinkAnimationListener.onAnimationEnd(null);

@@ -8,7 +8,7 @@
  else     if (mIsDragOccuring && mAcceptsDrops) {
       bg=mini ? mActiveBackgroundMini : mActiveBackground;
     }
- else     if (mIsDefaultDropTarget) {
+ else     if (mIsDragOccuring && mIsDefaultDropTarget) {
       bg=mini ? mNormalGlowBackgroundMini : mNormalGlowBackground;
     }
  else {
