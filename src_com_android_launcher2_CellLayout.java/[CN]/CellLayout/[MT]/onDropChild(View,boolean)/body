@@ -4,7 +4,7 @@
     lp.isDragging=false;
     lp.dropped=true;
     lp.animateDrop=animate;
-    child.setVisibility(View.VISIBLE);
+    child.setVisibility(View.INVISIBLE);
     child.requestLayout();
   }
 }
