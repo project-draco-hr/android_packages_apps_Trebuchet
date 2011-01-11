@@ -20,4 +20,5 @@
     }
   }
   prepareCacheBitmap();
+  invalidateCache();
 }
