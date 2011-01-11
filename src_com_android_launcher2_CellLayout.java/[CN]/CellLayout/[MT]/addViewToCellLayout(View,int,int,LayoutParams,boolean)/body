@@ -5,6 +5,7 @@
     if (lp.cellVSpan < 0)     lp.cellVSpan=mCountY;
     child.setId(childId);
     addView(child,index,lp);
+    child.setAlpha(getAlpha());
     if (child instanceof VisibilityChangedBroadcaster) {
       VisibilityChangedBroadcaster v=(VisibilityChangedBroadcaster)child;
       v.setVisibilityChangedListener(this);
