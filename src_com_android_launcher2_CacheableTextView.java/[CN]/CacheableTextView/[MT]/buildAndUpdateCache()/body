@@ -1,8 +1,4 @@
 {
-  if (getLayout() == null || !isImmediate) {
-    mWaitingToGenerateCache=true;
-    return;
-  }
   final Layout layout=getLayout();
   final int left=getCompoundPaddingLeft();
   final int top=getExtendedPaddingTop();
