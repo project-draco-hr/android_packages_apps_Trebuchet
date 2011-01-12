@@ -4,4 +4,7 @@ synchronized (mLock) {
       mLoaderTask.stopLocked();
     }
   }
+  mItems.clear();
+  mAppWidgets.clear();
+  mFolders.clear();
 }
