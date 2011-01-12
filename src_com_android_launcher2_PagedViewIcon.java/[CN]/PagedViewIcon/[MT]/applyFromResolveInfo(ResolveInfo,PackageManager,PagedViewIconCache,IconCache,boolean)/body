@@ -2,7 +2,6 @@
   mIcon=Utilities.createIconBitmap(modelIconCache.getFullResIcon(info,packageManager),mContext);
   setCompoundDrawablesWithIntrinsicBounds(null,new FastBitmapDrawable(mIcon),null,null);
   setText(info.loadLabel(packageManager));
-  buildAndEnableCache();
   setTag(info);
   if (createHolographicOutlines) {
     mIconCache=cache;

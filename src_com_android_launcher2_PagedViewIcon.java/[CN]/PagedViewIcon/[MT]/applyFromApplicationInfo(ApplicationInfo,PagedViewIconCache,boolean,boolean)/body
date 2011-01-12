@@ -2,7 +2,6 @@
   mIcon=info.iconBitmap;
   setCompoundDrawablesWithIntrinsicBounds(null,new FastBitmapDrawable(mIcon),null,null);
   setText(info.title);
-  buildAndEnableCache();
   setTag(info);
   if (createHolographicOutlines) {
     mIconCache=cache;

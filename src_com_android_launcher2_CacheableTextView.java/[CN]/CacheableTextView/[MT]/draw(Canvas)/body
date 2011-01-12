@@ -1,7 +1,7 @@
 {
-  if (mWaitingToGenerateCache && !mIsBuildingCache) {
-    buildAndEnableCache(true);
-    mWaitingToGenerateCache=false;
+  if (mIsTextCacheDirty && !mIsBuildingCache) {
+    buildAndUpdateCache();
+    mIsTextCacheDirty=false;
   }
   if (mCache != null && !mIsBuildingCache) {
     canvas.drawBitmap(mCache,mTextCacheLeft - mTextCacheScrollX + mScrollX,mTextCacheTop,mCachePaint);
