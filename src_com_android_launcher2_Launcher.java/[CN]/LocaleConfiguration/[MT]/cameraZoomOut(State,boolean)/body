@@ -1,12 +1,13 @@
 {
   final Resources res=getResources();
-  final int duration=res.getInteger(R.integer.config_allAppsZoomInTime);
-  final float scale=(float)res.getInteger(R.integer.config_allAppsZoomScaleFactor);
   final boolean toAllApps=(toState == State.ALL_APPS);
+  final int duration=toAllApps ? res.getInteger(R.integer.config_allAppsZoomInTime) : res.getInteger(R.integer.config_customizeZoomInTime);
+  final float scale=toAllApps ? (float)res.getInteger(R.integer.config_allAppsZoomScaleFactor) : (float)res.getInteger(R.integer.config_customizeZoomScaleFactor);
   final View toView=toAllApps ? (View)mAllAppsGrid : mHomeCustomizationDrawer;
   setPivotsForZoom(toView,toState,scale);
   if (toAllApps) {
     mWorkspace.shrink(ShrinkState.BOTTOM_HIDDEN,animated);
+    toView.setAlpha(0f);
   }
  else {
     mWorkspace.shrink(ShrinkState.TOP,animated);
@@ -14,13 +15,21 @@
   if (animated) {
     ValueAnimator scaleAnim=ObjectAnimator.ofPropertyValuesHolder(toView,PropertyValuesHolder.ofFloat("scaleX",scale,1.0f),PropertyValuesHolder.ofFloat("scaleY",scale,1.0f));
     scaleAnim.setDuration(duration);
+    if (toAllApps) {
+      ObjectAnimator alphaAnim=ObjectAnimator.ofPropertyValuesHolder(toView,PropertyValuesHolder.ofFloat("alpha",1.0f));
+      alphaAnim.setInterpolator(new DecelerateInterpolator(1.5f));
+      alphaAnim.setDuration(duration);
+      alphaAnim.start();
+    }
     scaleAnim.setInterpolator(new Workspace.ZoomOutInterpolator());
     scaleAnim.addListener(new AnimatorListenerAdapter(){
       @Override public void onAnimationStart(      Animator animation){
         toView.setTranslationX(0.0f);
         toView.setTranslationY(0.0f);
         toView.setVisibility(View.VISIBLE);
-        toView.setAlpha(1.0f);
+        if (!toAllApps) {
+          toView.setAlpha(1.0f);
+        }
       }
       @Override public void onAnimationEnd(      Animator animation){
         toView.setScaleX(1.0f);
@@ -31,7 +40,7 @@
     AnimatorSet toolbarHideAnim=new AnimatorSet();
     AnimatorSet toolbarShowAnim=new AnimatorSet();
     hideAndShowToolbarButtons(toState,toolbarShowAnim,toolbarHideAnim);
-    final int startDelay=res.getInteger(R.integer.config_workspaceShrinkTime) - duration;
+    final int startDelay=0;
     if (mStateAnimation != null)     mStateAnimation.cancel();
     mStateAnimation=new AnimatorSet();
     mStateAnimation.playTogether(scaleAnim,toolbarHideAnim);

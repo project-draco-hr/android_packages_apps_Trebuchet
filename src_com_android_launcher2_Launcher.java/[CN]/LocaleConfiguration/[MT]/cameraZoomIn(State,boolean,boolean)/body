@@ -1,8 +1,9 @@
 {
   Resources res=getResources();
-  int duration=res.getInteger(R.integer.config_allAppsZoomOutTime);
-  float scaleFactor=(float)res.getInteger(R.integer.config_allAppsZoomScaleFactor);
-  final View fromView=(fromState == State.ALL_APPS) ? (View)mAllAppsGrid : mHomeCustomizationDrawer;
+  final boolean fromAllApps=(fromState == State.ALL_APPS);
+  int duration=fromAllApps ? res.getInteger(R.integer.config_allAppsZoomOutTime) : res.getInteger(R.integer.config_customizeZoomOutTime);
+  float scaleFactor=fromAllApps ? (float)res.getInteger(R.integer.config_allAppsZoomScaleFactor) : (float)res.getInteger(R.integer.config_customizeZoomScaleFactor);
+  final View fromView=fromAllApps ? (View)mAllAppsGrid : mHomeCustomizationDrawer;
   mCustomizePagedView.endChoiceMode();
   mAllAppsPagedView.endChoiceMode();
   setPivotsForZoom(fromView,fromState,scaleFactor);
@@ -17,6 +18,7 @@
     scaleAnim.setInterpolator(new Workspace.ZoomInInterpolator());
     ValueAnimator alphaAnim=ObjectAnimator.ofPropertyValuesHolder(fromView,PropertyValuesHolder.ofFloat("alpha",1.0f,0.0f));
     alphaAnim.setDuration(res.getInteger(R.integer.config_allAppsFadeOutTime));
+    alphaAnim.setInterpolator(new DecelerateInterpolator(1.5f));
     alphaAnim.addListener(new AnimatorListenerAdapter(){
       @Override public void onAnimationEnd(      Animator animation){
         fromView.setVisibility(View.GONE);
