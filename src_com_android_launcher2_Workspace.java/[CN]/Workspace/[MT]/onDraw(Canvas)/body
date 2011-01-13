@@ -1,4 +1,9 @@
 {
+  if (mWallpaperOffsetDirty) {
+    updateWallpaperOffsets(mUpdateWallpaperOffsetImmediately);
+    mWallpaperOffsetDirty=false;
+    mUpdateWallpaperOffsetImmediately=false;
+  }
   if (mBackground != null && mBackgroundAlpha > 0.0f) {
     int alpha=(int)(mBackgroundAlpha * 255);
     if (mDrawCustomizeTrayBackground) {

@@ -47,6 +47,7 @@
   workspace.setOnLongClickListener(this);
   workspace.setDragController(dragController);
   workspace.setLauncher(this);
+  workspace.setWallpaperDimension();
   deleteZone.setLauncher(this);
   deleteZone.setDragController(dragController);
   int deleteZoneHandleId;

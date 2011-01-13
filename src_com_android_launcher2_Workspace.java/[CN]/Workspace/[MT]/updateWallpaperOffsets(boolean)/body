@@ -1,0 +1,31 @@
+{
+  long currentTime=System.currentTimeMillis();
+  long millisecondsSinceLastUpdate=currentTime - mLastWallpaperOffsetUpdateTime;
+  millisecondsSinceLastUpdate=Math.min((long)(1000 / 30f),millisecondsSinceLastUpdate);
+  millisecondsSinceLastUpdate=Math.min(1L,millisecondsSinceLastUpdate);
+  final float PERCENT_TO_CATCH_UP_IN_100_MS_HORIZONTAL=25f;
+  final float PERCENT_TO_CATCH_UP_IN_100_MS_VERTICAL=25f;
+  final float UPDATE_THRESHOLD=0.0001f;
+  float hOffsetDelta=mTargetHorizontalWallpaperOffset - mHorizontalWallpaperOffset;
+  float vOffsetDelta=mTargetVerticalWallpaperOffset - mVerticalWallpaperOffset;
+  boolean stopUpdating=Math.abs(hOffsetDelta / mTargetHorizontalWallpaperOffset) < UPDATE_THRESHOLD && Math.abs(vOffsetDelta / mTargetVerticalWallpaperOffset) < UPDATE_THRESHOLD;
+  if (stopUpdating || immediate) {
+    mHorizontalWallpaperOffset=mTargetHorizontalWallpaperOffset;
+    mVerticalWallpaperOffset=mTargetVerticalWallpaperOffset;
+  }
+ else {
+    float percentToCatchUpVertical=millisecondsSinceLastUpdate / 100f * PERCENT_TO_CATCH_UP_IN_100_MS_VERTICAL;
+    float percentToCatchUpHorizontal=millisecondsSinceLastUpdate / 100f * PERCENT_TO_CATCH_UP_IN_100_MS_HORIZONTAL;
+    mHorizontalWallpaperOffset+=percentToCatchUpHorizontal * hOffsetDelta;
+    mVerticalWallpaperOffset+=percentToCatchUpVertical * (mTargetVerticalWallpaperOffset - mVerticalWallpaperOffset);
+  }
+  IBinder token=getWindowToken();
+  if (token != null) {
+    mWallpaperManager.setWallpaperOffsets(getWindowToken(),mHorizontalWallpaperOffset,mVerticalWallpaperOffset);
+  }
+  if (!stopUpdating && !immediate) {
+    invalidate();
+    mWallpaperOffsetDirty=true;
+  }
+  mLastWallpaperOffsetUpdateTime=System.currentTimeMillis();
+}

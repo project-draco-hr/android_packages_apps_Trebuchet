@@ -1,0 +1,9 @@
+{
+  WallpaperManager wpm=(WallpaperManager)mLauncher.getSystemService(Context.WALLPAPER_SERVICE);
+  Display display=mLauncher.getWindowManager().getDefaultDisplay();
+  final int maxDim=Math.max(display.getWidth(),display.getHeight());
+  final int minDim=Math.min(display.getWidth(),display.getHeight());
+  mWallpaperWidth=(int)(maxDim * wallpaperTravelToScreenWidthRatio(maxDim,minDim));
+  mWallpaperHeight=(int)(maxDim * wallpaperTravelToScreenHeightRatio(maxDim,minDim));
+  wpm.suggestDesiredDimensions(mWallpaperWidth,mWallpaperHeight);
+}
