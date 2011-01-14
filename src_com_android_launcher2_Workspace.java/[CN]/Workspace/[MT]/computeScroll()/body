@@ -1,4 +1,4 @@
 {
   super.computeScroll();
-  updateWallpaperOffset();
+  updateHorizontalWallpaperOffset();
 }
