@@ -17,7 +17,6 @@
   }
   loadHotseats();
   checkForLocaleChange();
-  setWallpaperDimension();
   setContentView(R.layout.launcher);
   mHomeCustomizationDrawer=(TabHost)findViewById(R.id.customization_drawer);
   if (mHomeCustomizationDrawer != null) {

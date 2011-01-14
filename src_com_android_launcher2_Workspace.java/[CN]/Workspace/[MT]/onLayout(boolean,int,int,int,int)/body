@@ -1,4 +1,7 @@
 {
+  if (mFirstLayout && mCurrentPage >= 0 && mCurrentPage < getChildCount()) {
+    mUpdateWallpaperOffsetImmediately=true;
+  }
   super.onLayout(changed,left,top,right,bottom);
   if (mWaitingToShrink) {
     post(new Runnable(){

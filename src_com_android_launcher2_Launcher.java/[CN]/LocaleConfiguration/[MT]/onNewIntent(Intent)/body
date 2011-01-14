@@ -7,7 +7,9 @@
       mWorkspace.unshrink(alreadyOnHome);
     }
     if (!mWorkspace.isDefaultPageShowing()) {
-      mWorkspace.moveToDefaultScreen(alreadyOnHome && (LauncherApplication.isScreenXLarge() || mState != State.ALL_APPS));
+      boolean animate=alreadyOnHome && (LauncherApplication.isScreenXLarge() || mState != State.ALL_APPS);
+      mWorkspace.moveToDefaultScreen(animate);
+      if (!animate)       mWorkspace.updateWallpaperOffsetImmediately();
     }
     showWorkspace(alreadyOnHome);
     final View v=getWindow().peekDecorView();
