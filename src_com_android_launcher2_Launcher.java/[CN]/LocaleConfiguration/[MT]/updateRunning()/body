@@ -11,6 +11,7 @@
         mAutoAdvanceTimeLeft=Math.max(0,mAdvanceInterval - (System.currentTimeMillis() - mAutoAdvanceSentTime));
       }
       mHandler.removeMessages(ADVANCE_MSG);
+      mHandler.removeMessages(0);
     }
   }
 }
