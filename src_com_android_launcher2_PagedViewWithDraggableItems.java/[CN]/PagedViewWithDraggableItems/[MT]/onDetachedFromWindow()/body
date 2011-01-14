@@ -1,0 +1,4 @@
+{
+  mLastTouchedItem=null;
+  super.onDetachedFromWindow();
+}
