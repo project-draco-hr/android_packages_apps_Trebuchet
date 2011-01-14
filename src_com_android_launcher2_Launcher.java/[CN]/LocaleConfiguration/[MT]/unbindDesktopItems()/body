@@ -2,4 +2,5 @@
   for (  ItemInfo item : mDesktopItems) {
     item.unbind();
   }
+  mDesktopItems.clear();
 }

@@ -6,6 +6,8 @@
  catch (  NullPointerException ex) {
     Log.w(TAG,"problem while stopping AppWidgetHost during Launcher destruction",ex);
   }
+  mAppWidgetHost=null;
+  mWidgetsToAdvance.clear();
   TextKeyListener.getInstance().release();
   mModel.stopLoader();
   unbindDesktopItems();
@@ -17,4 +19,8 @@
     dismissPreview(mNextView);
   }
   unregisterReceiver(mCloseSystemDialogsReceiver);
+  ((ViewGroup)mWorkspace.getParent()).removeAllViews();
+  mWorkspace.removeAllViews();
+  mWorkspace=null;
+  mDragController=null;
 }
