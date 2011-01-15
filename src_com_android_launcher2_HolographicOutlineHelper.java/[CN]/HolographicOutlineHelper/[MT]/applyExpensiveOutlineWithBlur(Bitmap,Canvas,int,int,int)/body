@@ -49,7 +49,7 @@ srcDstCanvas.drawBitmap(glowShape,-thickInnerBlurOffset[0],-thickInnerBlurOffset
 srcDstCanvas.drawRect(0,0,-thickInnerBlurOffset[0],thickInnerBlur.getHeight(),mErasePaint);
 srcDstCanvas.drawRect(0,0,thickInnerBlur.getWidth(),-thickInnerBlurOffset[1],mErasePaint);
 srcDstCanvas.setBitmap(srcDst);
-srcDstCanvas.drawColor(0x00000000,PorterDuff.Mode.CLEAR);
+srcDstCanvas.drawColor(0,PorterDuff.Mode.CLEAR);
 mHolographicPaint.setColor(color);
 srcDstCanvas.drawBitmap(thickInnerBlur,thickInnerBlurOffset[0],thickInnerBlurOffset[1],mHolographicPaint);
 srcDstCanvas.drawBitmap(thickOuterBlur,outerBlurOffset[0],outerBlurOffset[1],mHolographicPaint);
