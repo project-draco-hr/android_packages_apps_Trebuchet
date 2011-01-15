@@ -6,6 +6,9 @@
     if (index < 0) {
       mApps.add(-(index + 1),info);
     }
+ else {
+      mApps.add(index,info);
+    }
   }
   mFilteredApps=rebuildFilteredApps(mApps);
 }
