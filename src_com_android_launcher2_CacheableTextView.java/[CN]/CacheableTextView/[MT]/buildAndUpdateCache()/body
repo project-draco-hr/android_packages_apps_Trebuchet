@@ -25,7 +25,7 @@
       mCacheCanvas.setBitmap(mCache);
     }
  else {
-      mCacheCanvas.drawColor(0x00000000);
+      mCacheCanvas.drawColor(0,Mode.CLEAR);
     }
     mCacheCanvas.save();
     mCacheCanvas.translate(-mTextCacheLeft,-mTextCacheTop);
