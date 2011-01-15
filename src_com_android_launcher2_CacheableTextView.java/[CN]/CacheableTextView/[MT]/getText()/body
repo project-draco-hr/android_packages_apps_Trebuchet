@@ -1,3 +1,0 @@
-{
-  return (mText == null) ? super.getText() : mText;
-}
