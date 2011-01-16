@@ -1,0 +1,8 @@
+{
+  if (mPrevAlpha != alpha) {
+    mPrevAlpha=alpha;
+    mCachePaint.setAlpha(alpha);
+    super.onSetAlpha(alpha);
+  }
+  return true;
+}
