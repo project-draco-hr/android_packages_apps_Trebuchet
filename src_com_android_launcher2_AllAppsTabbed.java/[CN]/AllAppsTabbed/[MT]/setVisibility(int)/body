@@ -1,4 +1,7 @@
 {
+  if (visibility == View.GONE && mFirstLayout) {
+    visibility=View.INVISIBLE;
+  }
   final boolean isVisible=(visibility == View.VISIBLE);
   super.setVisibility(visibility);
   float zoom=(isVisible ? 1.0f : 0.0f);
