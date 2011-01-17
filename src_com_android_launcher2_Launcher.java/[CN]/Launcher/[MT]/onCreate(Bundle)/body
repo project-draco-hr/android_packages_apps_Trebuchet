@@ -53,7 +53,6 @@
           alphaAnim.setDuration(duration);
           alphaAnim.addListener(new AnimatorListenerAdapter(){
             @Override public void onAnimationEnd(            Animator animation){
-              String tag=mHomeCustomizationDrawer.getCurrentTabTag();
               mCustomizePagedView.setCustomizationFilter(newType);
               final float alpha=mCustomizePagedView.getAlpha();
               ValueAnimator alphaAnim=ObjectAnimator.ofFloat(mCustomizePagedView,"alpha",alpha,1.0f);

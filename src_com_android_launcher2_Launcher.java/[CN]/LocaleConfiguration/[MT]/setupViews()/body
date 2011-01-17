@@ -50,7 +50,6 @@
   workspace.setWallpaperDimension();
   deleteZone.setLauncher(this);
   deleteZone.setDragController(dragController);
-  int deleteZoneHandleId;
   final View allAppsButton=findViewById(R.id.all_apps_button);
   final View divider=findViewById(R.id.divider);
   final View configureButton=findViewById(R.id.configure_button);
