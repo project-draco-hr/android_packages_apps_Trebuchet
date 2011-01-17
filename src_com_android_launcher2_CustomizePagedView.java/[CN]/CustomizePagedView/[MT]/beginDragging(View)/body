@@ -5,6 +5,7 @@
     endChoiceMode();
   }
   boolean result=false;
+  mLauncher.lockScreenOrientation();
 switch (mCustomizationType) {
 case WidgetCustomization:
 {

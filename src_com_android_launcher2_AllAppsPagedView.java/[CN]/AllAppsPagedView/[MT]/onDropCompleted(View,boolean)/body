@@ -4,4 +4,5 @@
   }
   tearDownDragMode();
   mLauncher.getWorkspace().onDragStopped();
+  mLauncher.unlockScreenOrientation();
 }
