@@ -12,6 +12,7 @@
     boolean animateDrop=!mWasSpringLoadedOnDragExit;
     ((CellLayout)getChildAt(mDragInfo.screen)).onDropChild(mDragInfo.cell,animateDrop);
   }
+  mLauncher.unlockScreenOrientation();
   mDragOutline=null;
   mDragInfo=null;
 }
