@@ -9,47 +9,53 @@
 switch (mCustomizationType) {
 case WidgetCustomization:
 {
-      final LinearLayout l=(LinearLayout)v;
-      final ImageView i=(ImageView)l.findViewById(R.id.widget_preview);
-      final Drawable icon=i.getDrawable();
-      Bitmap b=drawableToBitmap(icon,i);
-      PendingAddWidgetInfo createWidgetInfo=(PendingAddWidgetInfo)v.getTag();
-      int[] spanXY=CellLayout.rectToCell(getResources(),createWidgetInfo.minWidth,createWidgetInfo.minHeight,null);
-      createWidgetInfo.spanX=spanXY[0];
-      createWidgetInfo.spanY=spanXY[1];
-      mLauncher.getWorkspace().onDragStartedWithItemSpans(spanXY[0],spanXY[1],b);
-      mDragController.startDrag(i,b,this,createWidgetInfo,DragController.DRAG_ACTION_COPY,null);
-      b.recycle();
-      result=true;
+      if (v instanceof PagedViewWidget) {
+        final LinearLayout l=(LinearLayout)v;
+        final ImageView i=(ImageView)l.findViewById(R.id.widget_preview);
+        final Drawable icon=i.getDrawable();
+        Bitmap b=drawableToBitmap(icon,i);
+        PendingAddWidgetInfo createWidgetInfo=(PendingAddWidgetInfo)v.getTag();
+        int[] spanXY=CellLayout.rectToCell(getResources(),createWidgetInfo.minWidth,createWidgetInfo.minHeight,null);
+        createWidgetInfo.spanX=spanXY[0];
+        createWidgetInfo.spanY=spanXY[1];
+        mLauncher.getWorkspace().onDragStartedWithItemSpans(spanXY[0],spanXY[1],b);
+        mDragController.startDrag(i,b,this,createWidgetInfo,DragController.DRAG_ACTION_COPY,null);
+        b.recycle();
+        result=true;
+      }
       break;
     }
 case ShortcutCustomization:
 {
-    final TextView tv=(TextView)v;
-    final Drawable icon=tv.getCompoundDrawables()[1];
-    Bitmap b=drawableToBitmap(icon,tv);
-    PendingAddItemInfo createItemInfo=(PendingAddItemInfo)v.getTag();
-    mLauncher.getWorkspace().onDragStartedWithItemSpans(1,1,b);
-    mDragController.startDrag(v,b,this,createItemInfo,DragController.DRAG_ACTION_COPY,null);
-    b.recycle();
-    result=true;
+    if (v instanceof PagedViewIcon) {
+      final TextView tv=(TextView)v;
+      final Drawable icon=tv.getCompoundDrawables()[1];
+      Bitmap b=drawableToBitmap(icon,tv);
+      PendingAddItemInfo createItemInfo=(PendingAddItemInfo)v.getTag();
+      mLauncher.getWorkspace().onDragStartedWithItemSpans(1,1,b);
+      mDragController.startDrag(v,b,this,createItemInfo,DragController.DRAG_ACTION_COPY,null);
+      b.recycle();
+      result=true;
+    }
     break;
   }
 case ApplicationCustomization:
 {
-  final TextView tv=(TextView)v;
-  final Drawable icon=tv.getCompoundDrawables()[1];
-  Bitmap b=drawableToBitmap(icon,tv);
-  ApplicationInfo app=(ApplicationInfo)v.getTag();
-  app=new ApplicationInfo(app);
-  mLauncher.getWorkspace().onDragStartedWithItemSpans(1,1,b);
-  mDragController.startDrag(v,b,this,app,DragController.DRAG_ACTION_COPY,null);
-  b.recycle();
-  result=true;
+  if (v instanceof PagedViewIcon) {
+    final TextView tv=(TextView)v;
+    final Drawable icon=tv.getCompoundDrawables()[1];
+    Bitmap b=drawableToBitmap(icon,tv);
+    ApplicationInfo app=(ApplicationInfo)v.getTag();
+    app=new ApplicationInfo(app);
+    mLauncher.getWorkspace().onDragStartedWithItemSpans(1,1,b);
+    mDragController.startDrag(v,b,this,app,DragController.DRAG_ACTION_COPY,null);
+    b.recycle();
+    result=true;
+  }
   break;
 }
 }
-if (v instanceof Checkable) {
+if (result && (v instanceof Checkable)) {
 resetCheckedGrandchildren();
 Checkable checkable=(Checkable)v;
 checkable.toggle();
