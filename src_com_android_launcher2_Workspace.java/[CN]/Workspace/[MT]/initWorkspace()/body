@@ -24,6 +24,7 @@
         mDrawCustomizeTrayBackground=false;
       }
       enableCacheUpdates();
+      mAnimator=null;
     }
   }
 ;
@@ -33,6 +34,7 @@
     }
     @Override public void onAnimationEnd(    Animator animation){
       enableCacheUpdates();
+      mAnimator=null;
     }
   }
 ;
