@@ -2,9 +2,9 @@
   post(new Runnable(){
     public void run(){
       DeleteZone allAppsDeleteZone=(DeleteZone)mLauncher.findViewById(R.id.all_apps_delete_zone);
-      allAppsDeleteZone.setDragAndDropEnabled(false);
+      if (allAppsDeleteZone != null)       allAppsDeleteZone.setDragAndDropEnabled(false);
       ApplicationInfoDropTarget allAppsInfoButton=(ApplicationInfoDropTarget)mLauncher.findViewById(R.id.all_apps_info_target);
-      allAppsInfoButton.setDragAndDropEnabled(false);
+      if (allAppsInfoButton != null)       allAppsInfoButton.setDragAndDropEnabled(false);
     }
   }
 );
