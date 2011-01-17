@@ -1,4 +1,5 @@
 {
   mLastTouchedItem=v;
+  mIsDragEnabled=true;
   return false;
 }
