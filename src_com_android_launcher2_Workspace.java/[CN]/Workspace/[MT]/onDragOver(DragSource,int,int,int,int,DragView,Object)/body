@@ -48,6 +48,11 @@
           }
         }
       }
+ else       if (source == this) {
+        final View origView=mDragInfo.cell;
+        originX+=(dragView.getMeasuredWidth() - origView.getWidth()) / 2;
+        originY+=(dragView.getMeasuredHeight() - origView.getHeight()) / 2 + dragView.getOffsetY();
+      }
       if (mDragTargetLayout != null) {
         final View child=(mDragInfo == null) ? null : mDragInfo.cell;
         float[] localOrigin={originX,originY};
