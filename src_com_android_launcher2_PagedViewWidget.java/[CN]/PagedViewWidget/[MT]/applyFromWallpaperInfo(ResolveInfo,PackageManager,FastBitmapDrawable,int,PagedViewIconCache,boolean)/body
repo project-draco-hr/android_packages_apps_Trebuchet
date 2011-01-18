@@ -4,6 +4,7 @@
   image.setImageDrawable(preview);
   TextView name=(TextView)findViewById(R.id.wallpaper_name);
   name.setText(info.loadLabel(packageManager));
+  name.setLayerType(View.LAYER_TYPE_SOFTWARE,null);
   if (createHolographicOutline) {
     mIconCache=cache;
     mIconCacheKey=new PagedViewIconCache.Key(info);
