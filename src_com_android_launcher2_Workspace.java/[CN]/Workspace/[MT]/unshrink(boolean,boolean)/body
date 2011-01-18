@@ -29,10 +29,13 @@
       }
       float translation=getOffsetXForRotation(rotation,cl.getWidth(),cl.getHeight());
       if (animated) {
-        ObjectAnimator animWithInterpolator=ObjectAnimator.ofPropertyValuesHolder(cl,PropertyValuesHolder.ofFloat("translationX",translation),PropertyValuesHolder.ofFloat("translationY",0.0f),PropertyValuesHolder.ofFloat("scaleX",finalScaleFactor),PropertyValuesHolder.ofFloat("scaleY",finalScaleFactor),PropertyValuesHolder.ofFloat("backgroundAlpha",finalBackgroundAlpha),PropertyValuesHolder.ofFloat("backgroundAlphaMultiplier",finalAlphaMultiplierValue),PropertyValuesHolder.ofFloat("alpha",finalAlphaValue),PropertyValuesHolder.ofFloat("rotationY",rotation));
+        ObjectAnimator animWithInterpolator=ObjectAnimator.ofPropertyValuesHolder(cl,PropertyValuesHolder.ofFloat("translationX",translation),PropertyValuesHolder.ofFloat("translationY",0.0f),PropertyValuesHolder.ofFloat("scaleX",finalScaleFactor),PropertyValuesHolder.ofFloat("scaleY",finalScaleFactor),PropertyValuesHolder.ofFloat("backgroundAlpha",finalBackgroundAlpha),PropertyValuesHolder.ofFloat("backgroundAlphaMultiplier",finalAlphaMultiplierValue),PropertyValuesHolder.ofFloat("alpha",finalAlphaValue));
         animWithInterpolator.setDuration(duration);
         animWithInterpolator.setInterpolator(mZoomInInterpolator);
-        mAnimator.playTogether(animWithInterpolator);
+        ObjectAnimator rotationAnim=ObjectAnimator.ofPropertyValuesHolder(cl,PropertyValuesHolder.ofFloat("rotationY",rotation));
+        rotationAnim.setDuration(duration);
+        rotationAnim.setInterpolator(new DecelerateInterpolator(2.0f));
+        mAnimator.playTogether(animWithInterpolator,rotationAnim);
       }
  else {
         cl.setTranslationX(translation);
