@@ -86,16 +86,43 @@
     }
     newX+=scaledPageWidth + extraScaledSpacing;
   }
-  setLayoutScale(1.0f);
-  if (animated) {
-    mAnimator.addListener(mShrinkAnimationListener);
-    mAnimator.start();
-  }
-  setChildrenDrawnWithCacheEnabled(true);
-  if (shrinkState == ShrinkState.TOP) {
-    showBackgroundGradientForCustomizeTray();
-  }
+  float wallpaperOffset=0.5f;
+  Display display=mLauncher.getWindowManager().getDefaultDisplay();
+  int wallpaperTravelHeight=(int)(display.getHeight() * wallpaperTravelToScreenHeightRatio(display.getWidth(),display.getHeight()));
+  float offsetFromCenter=(wallpaperTravelHeight / (float)mWallpaperHeight) / 2f;
+switch (shrinkState) {
+case TOP:
+    wallpaperOffset=0.5f + offsetFromCenter;
+  break;
+case MIDDLE:
+case SPRING_LOADED:
+wallpaperOffset=0.5f;
+break;
+case BOTTOM_HIDDEN:
+case BOTTOM_VISIBLE:
+wallpaperOffset=0.5f - offsetFromCenter;
+break;
+}
+setLayoutScale(1.0f);
+if (animated) {
+mSyncWallpaperOffsetWithScroll=false;
+ObjectAnimator wallpaperAnim=ObjectAnimator.ofPropertyValuesHolder(this,PropertyValuesHolder.ofFloat("verticalWallpaperOffset",wallpaperOffset),PropertyValuesHolder.ofFloat("horizontalWallpaperOffset",0.5f));
+mAnimator.play(wallpaperAnim);
+wallpaperAnim.setDuration(duration);
+wallpaperAnim.setInterpolator(mZoomOutInterpolator);
+mAnimator.addListener(mShrinkAnimationListener);
+mAnimator.start();
+}
  else {
-    showBackgroundGradientForAllApps();
-  }
+setVerticalWallpaperOffset(wallpaperOffset);
+setHorizontalWallpaperOffset(0.5f);
+updateWallpaperOffsetImmediately();
+}
+setChildrenDrawnWithCacheEnabled(true);
+if (shrinkState == ShrinkState.TOP) {
+showBackgroundGradientForCustomizeTray();
+}
+ else {
+showBackgroundGradientForAllApps();
+}
 }

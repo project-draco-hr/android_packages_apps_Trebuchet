@@ -1,0 +1,29 @@
+{
+  if (Float.compare(mHorizontalWallpaperOffset,mFinalHorizontalWallpaperOffset) == 0 && Float.compare(mVerticalWallpaperOffset,mFinalVerticalWallpaperOffset) == 0) {
+    return false;
+  }
+  Display display=mLauncher.getWindowManager().getDefaultDisplay();
+  boolean isLandscape=display.getWidth() > display.getHeight();
+  long currentTime=System.currentTimeMillis();
+  long timeSinceLastUpdate=currentTime - mLastWallpaperOffsetUpdateTime;
+  timeSinceLastUpdate=Math.min((long)(1000 / 30f),timeSinceLastUpdate);
+  timeSinceLastUpdate=Math.max(1L,timeSinceLastUpdate);
+  float fractionToCatchUpIn1MsHorizontal=isLandscape ? 0.75f / 100 : 0.75f / 100;
+  float fractionToCatchUpIn1MsVertical=isLandscape ? 1.1f / 100 : 1.1f / 100;
+  final float UPDATE_THRESHOLD=0.00001f;
+  float hOffsetDelta=mFinalHorizontalWallpaperOffset - mHorizontalWallpaperOffset;
+  float vOffsetDelta=mFinalVerticalWallpaperOffset - mVerticalWallpaperOffset;
+  boolean jumpToFinalValue=Math.abs(hOffsetDelta / mFinalHorizontalWallpaperOffset) < UPDATE_THRESHOLD && Math.abs(vOffsetDelta / mFinalVerticalWallpaperOffset) < UPDATE_THRESHOLD;
+  if (jumpToFinalValue) {
+    mHorizontalWallpaperOffset=mFinalHorizontalWallpaperOffset;
+    mVerticalWallpaperOffset=mFinalVerticalWallpaperOffset;
+  }
+ else {
+    float percentToCatchUpVertical=timeSinceLastUpdate * fractionToCatchUpIn1MsVertical;
+    float percentToCatchUpHorizontal=timeSinceLastUpdate * fractionToCatchUpIn1MsHorizontal;
+    mHorizontalWallpaperOffset+=percentToCatchUpHorizontal * hOffsetDelta;
+    mVerticalWallpaperOffset+=percentToCatchUpVertical * vOffsetDelta;
+  }
+  mLastWallpaperOffsetUpdateTime=System.currentTimeMillis();
+  return true;
+}

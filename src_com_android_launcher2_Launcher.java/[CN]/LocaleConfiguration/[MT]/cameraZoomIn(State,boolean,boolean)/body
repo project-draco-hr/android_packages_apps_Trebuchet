@@ -42,5 +42,4 @@
       hideAndShowToolbarButtons(State.WORKSPACE,null,null);
     }
   }
-  mWorkspace.setVerticalWallpaperOffset(Workspace.WallpaperVerticalOffset.MIDDLE);
 }
