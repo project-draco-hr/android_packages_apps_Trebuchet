@@ -9,7 +9,6 @@
   }
   loadHotseats();
   if (index >= 0 && index < mHotseats.length && mHotseats[index] != null) {
-    Intent intent=mHotseats[index];
     startActivitySafely(mHotseats[index],"hotseat");
   }
 }

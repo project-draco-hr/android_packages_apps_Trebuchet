@@ -1,3 +1,0 @@
-{
-  return isVacantIgnoring(originX,originY,spanX,spanY,null);
-}
