@@ -1,0 +1,5 @@
+{
+  if (LauncherApplication.isScreenXLarge()) {
+    mWallpaperOffset.setFinalX(wallpaperOffsetForCurrentScroll());
+  }
+}

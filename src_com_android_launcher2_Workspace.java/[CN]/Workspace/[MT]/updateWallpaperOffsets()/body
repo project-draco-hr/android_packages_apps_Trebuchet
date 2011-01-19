@@ -1,0 +1,22 @@
+{
+  boolean updateNow=false;
+  boolean keepUpdating=true;
+  if (mUpdateWallpaperOffsetImmediately) {
+    updateNow=true;
+    keepUpdating=false;
+    mWallpaperOffset.jumpToFinal();
+    mUpdateWallpaperOffsetImmediately=false;
+  }
+ else {
+    updateNow=keepUpdating=mWallpaperOffset.computeScrollOffset();
+  }
+  if (updateNow) {
+    IBinder token=getWindowToken();
+    if (token != null) {
+      mWallpaperManager.setWallpaperOffsets(getWindowToken(),mWallpaperOffset.getCurrX(),mWallpaperOffset.getCurrY());
+    }
+  }
+  if (keepUpdating) {
+    invalidate();
+  }
+}

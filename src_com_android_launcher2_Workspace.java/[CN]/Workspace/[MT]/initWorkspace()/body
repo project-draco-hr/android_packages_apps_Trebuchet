@@ -20,6 +20,7 @@
     }
     @Override public void onAnimationEnd(    Animator animation){
       mIsInUnshrinkAnimation=false;
+      mSyncWallpaperOffsetWithScroll=true;
       if (mShrinkState != ShrinkState.SPRING_LOADED) {
         mDrawCustomizeTrayBackground=false;
       }
@@ -39,4 +40,5 @@
   }
 ;
   mSnapVelocity=600;
+  mWallpaperOffset=new WallpaperOffsetInterpolator();
 }
