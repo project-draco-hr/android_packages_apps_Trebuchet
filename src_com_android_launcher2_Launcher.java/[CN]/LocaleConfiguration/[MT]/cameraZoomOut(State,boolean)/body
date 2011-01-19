@@ -57,5 +57,4 @@
     toView.setVisibility(View.VISIBLE);
     hideAndShowToolbarButtons(toState,null,null);
   }
-  mWorkspace.setVerticalWallpaperOffset(toAllApps ? Workspace.WallpaperVerticalOffset.TOP : Workspace.WallpaperVerticalOffset.BOTTOM);
 }
