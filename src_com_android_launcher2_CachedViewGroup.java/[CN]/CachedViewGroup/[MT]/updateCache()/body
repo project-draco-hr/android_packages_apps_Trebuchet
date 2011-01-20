@@ -2,7 +2,9 @@
   mCacheCanvas.drawColor(0,Mode.CLEAR);
   float alpha=getAlpha();
   setAlpha(1.0f);
-  drawChildren(mCacheCanvas);
+  isUpdatingCache=true;
+  draw(mCacheCanvas);
+  isUpdatingCache=false;
   setAlpha(alpha);
   mIsCacheDirty=false;
 }

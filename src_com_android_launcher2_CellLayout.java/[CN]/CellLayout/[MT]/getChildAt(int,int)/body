@@ -1,11 +1,3 @@
 {
-  final int count=getChildCount();
-  for (int i=0; i < count; i++) {
-    View child=getChildAt(i);
-    LayoutParams lp=(LayoutParams)child.getLayoutParams();
-    if ((lp.cellX <= x) && (x < lp.cellX + lp.cellHSpan) && (lp.cellY <= y)&& (y < lp.cellY + lp.cellHSpan)) {
-      return child;
-    }
-  }
-  return null;
+  return mChildren.getChildAt(x,y);
 }

@@ -15,7 +15,6 @@
   mOccupied=new boolean[mCountX][mCountY];
   a.recycle();
   setAlwaysDrawnWithCacheEnabled(false);
-  mWallpaperManager=WallpaperManager.getInstance(context);
   final Resources res=getResources();
   if (LauncherApplication.isScreenXLarge()) {
     mNormalBackground=res.getDrawable(R.drawable.homescreen_large_blue);
@@ -89,10 +88,9 @@
   }
   mBackgroundRect=new Rect();
   mGlowBackgroundRect=new Rect();
-  mCacheRect=new Rect();
   setHoverScale(1.0f);
   setHoverAlpha(1.0f);
-  mBitmapCacheScale=res.getInteger(R.integer.config_workspaceScreenBitmapCacheScale) / 100.0f;
-  mMaxScaleForUsingBitmapCache=res.getInteger(R.integer.config_maxScaleForUsingWorkspaceScreenBitmapCache) / 100.0f;
-  mCacheCanvas=new Canvas();
+  mChildren=new CellLayoutChildren(context);
+  mChildren.setCellDimensions(mCellWidth,mCellHeight,mLeftPadding,mTopPadding,mWidthGap,mHeightGap);
+  addView(mChildren);
 }

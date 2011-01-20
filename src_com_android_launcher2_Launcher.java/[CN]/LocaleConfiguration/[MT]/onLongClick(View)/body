@@ -23,7 +23,7 @@ if (isWorkspaceLocked()) {
 return false;
 }
 if (!(v instanceof CellLayout)) {
-v=(View)v.getParent();
+v=(View)v.getParent().getParent();
 }
 resetAddInfo();
 CellLayout.CellInfo longClickCellInfo=(CellLayout.CellInfo)v.getTag();
