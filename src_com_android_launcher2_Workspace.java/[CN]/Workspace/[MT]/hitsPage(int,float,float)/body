@@ -1,0 +1,9 @@
+{
+  final View page=getChildAt(index);
+  if (page != null) {
+    float[] localXY={x,y};
+    mapPointFromSelfToChild(page,localXY);
+    return (localXY[0] >= 0 && localXY[0] < page.getWidth() && localXY[1] >= 0 && localXY[1] < page.getHeight());
+  }
+  return false;
+}
