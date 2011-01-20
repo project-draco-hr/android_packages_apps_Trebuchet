@@ -1,0 +1,4 @@
+{
+  final int current=(mNextPage == INVALID_PAGE) ? mCurrentPage : mNextPage;
+  return hitsPage(current + 1,x,y);
+}
