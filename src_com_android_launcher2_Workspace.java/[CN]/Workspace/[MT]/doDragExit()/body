@@ -1,0 +1,13 @@
+{
+  mWasSpringLoadedOnDragExit=mShrinkState == ShrinkState.SPRING_LOADED;
+  if (mDragTargetLayout != null) {
+    mDragTargetLayout.onDragExit();
+  }
+  if (!mIsPageMoving) {
+    hideOutlines();
+  }
+  if (mShrinkState == ShrinkState.SPRING_LOADED) {
+    mLauncher.exitSpringLoadedDragMode();
+  }
+  clearAllHovers();
+}
