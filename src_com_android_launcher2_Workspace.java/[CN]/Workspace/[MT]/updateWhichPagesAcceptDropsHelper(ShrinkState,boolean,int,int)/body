@@ -8,6 +8,7 @@ case TOP:
       cl.setIsDefaultDropTarget(i == mCurrentPage);
 case BOTTOM_HIDDEN:
 case BOTTOM_VISIBLE:
+case SPRING_LOADED:
     if (!isDragHappening) {
       spanX=1;
       spanY=1;
@@ -15,7 +16,7 @@ case BOTTOM_VISIBLE:
   cl.setAcceptsDrops(cl.findCellForSpan(null,spanX,spanY));
 break;
 default :
-throw new RuntimeException("updateWhichPagesAcceptDropsHelper passed an unhandled ShrinkState");
+throw new RuntimeException("Unhandled ShrinkState " + state);
 }
 }
 }
