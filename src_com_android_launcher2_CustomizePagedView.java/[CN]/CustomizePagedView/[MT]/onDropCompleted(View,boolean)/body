@@ -1,5 +1,5 @@
 {
   resetCheckedGrandchildren();
-  mLauncher.getWorkspace().onDragStopped();
+  mLauncher.getWorkspace().onDragStopped(success);
   mLauncher.unlockScreenOrientation();
 }

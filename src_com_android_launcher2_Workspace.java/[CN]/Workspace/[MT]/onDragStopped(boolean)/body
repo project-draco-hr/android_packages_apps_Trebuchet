@@ -1,4 +1,7 @@
 {
+  if (!success) {
+    doDragExit();
+  }
   mIsDragInProcess=false;
   updateWhichPagesAcceptDrops(mShrinkState);
 }
