@@ -11,6 +11,7 @@
     if ((appFlags & android.content.pm.ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) != 0) {
       flags|=DOWNLOADED_FLAG;
     }
+    firstInstallTime=pm.getPackageInfo(packageName,0).firstInstallTime;
     if ((flags & GAME_FLAG) == 0) {
       flags|=APP_FLAG;
     }
