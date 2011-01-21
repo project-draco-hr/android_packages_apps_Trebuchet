@@ -9,8 +9,8 @@
     }
   }
  else   if (mDragInfo != null) {
-    boolean animateDrop=!mWasSpringLoadedOnDragExit;
-    ((CellLayout)getChildAt(mDragInfo.screen)).onDropChild(mDragInfo.cell,animateDrop);
+    doDragExit();
+    ((CellLayout)getChildAt(mDragInfo.screen)).onDropChild(mDragInfo.cell,false);
   }
   mLauncher.unlockScreenOrientation();
   mDragOutline=null;
