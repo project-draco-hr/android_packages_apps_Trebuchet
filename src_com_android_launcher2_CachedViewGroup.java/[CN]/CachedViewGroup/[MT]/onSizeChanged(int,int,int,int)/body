@@ -1,0 +1,8 @@
+{
+  super.onSizeChanged(w,h,oldw,oldh);
+  mBackgroundRect.set(0,0,w,h);
+  mCacheRect.set(0,0,(int)(mBitmapCacheScale * w),(int)(mBitmapCacheScale * h));
+  mCache=null;
+  prepareCacheBitmap();
+  invalidateCache();
+}

@@ -3,10 +3,10 @@
   final Rect frame=mRect;
   final int x=touchX + mScrollX;
   final int y=touchY + mScrollY;
-  final int count=getChildCount();
+  final int count=mChildren.getChildCount();
   boolean found=false;
   for (int i=count - 1; i >= 0; i--) {
-    final View child=getChildAt(i);
+    final View child=mChildren.getChildAt(i);
     if ((child.getVisibility()) == VISIBLE || child.getAnimation() != null) {
       child.getHitRect(frame);
       if (frame.contains(x,y)) {

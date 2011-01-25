@@ -4,13 +4,7 @@
     if (lp.cellHSpan < 0)     lp.cellHSpan=mCountX;
     if (lp.cellVSpan < 0)     lp.cellVSpan=mCountY;
     child.setId(childId);
-    addView(child,index,lp);
-    child.setAlpha(getAlpha());
-    if (child instanceof VisibilityChangedBroadcaster) {
-      VisibilityChangedBroadcaster v=(VisibilityChangedBroadcaster)child;
-      v.setVisibilityChangedListener(this);
-    }
-    invalidateCache();
+    mChildren.addView(child,index,lp);
     if (markCells)     markCellsAsOccupiedForView(child);
     return true;
   }

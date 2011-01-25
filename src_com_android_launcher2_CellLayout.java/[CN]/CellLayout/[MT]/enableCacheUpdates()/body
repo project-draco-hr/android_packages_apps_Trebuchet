@@ -1,4 +1,3 @@
 {
-  mDisableCacheUpdates=false;
-  invalidateIfNeeded();
+  mChildren.enableCacheUpdates();
 }

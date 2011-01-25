@@ -14,5 +14,5 @@
     child.setX(childrenX[i]);
     child.setY(childrenY[i]);
   }
-  moveToNewPageWithoutMovingCellLayouts(mCurrentPage);
+  scrollToNewPageWithoutMovingPages(mCurrentPage);
 }
