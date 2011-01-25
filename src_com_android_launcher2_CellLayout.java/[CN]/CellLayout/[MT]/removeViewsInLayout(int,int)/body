@@ -1,7 +1,6 @@
 {
   for (int i=start; i < start + count; i++) {
-    markCellsAsUnoccupiedForView(getChildAt(i));
+    markCellsAsUnoccupiedForView(mChildren.getChildAt(i));
   }
-  super.removeViewsInLayout(start,count);
-  invalidateCache();
+  mChildren.removeViewsInLayout(start,count);
 }

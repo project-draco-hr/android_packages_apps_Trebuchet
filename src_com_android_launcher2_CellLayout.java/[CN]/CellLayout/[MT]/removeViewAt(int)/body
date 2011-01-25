@@ -1,5 +1,4 @@
 {
-  markCellsAsUnoccupiedForView(getChildAt(index));
-  super.removeViewAt(index);
-  invalidateCache();
+  markCellsAsUnoccupiedForView(mChildren.getChildAt(index));
+  mChildren.removeViewAt(index);
 }

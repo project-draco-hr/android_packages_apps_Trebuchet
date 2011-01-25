@@ -18,21 +18,19 @@
     int minGap=Math.min(mWidthGap,mHeightGap);
     mWidthGap=mHeightGap=minGap;
   }
+  int newWidth=widthSpecSize;
+  int newHeight=heightSpecSize;
+  if (widthSpecMode == MeasureSpec.AT_MOST) {
+    newWidth=mLeftPadding + mRightPadding + (mCountX * cellWidth)+ ((mCountX - 1) * mWidthGap);
+    newHeight=mTopPadding + mBottomPadding + (mCountY * cellHeight)+ ((mCountY - 1) * mHeightGap);
+    setMeasuredDimension(newWidth,newHeight);
+  }
   int count=getChildCount();
   for (int i=0; i < count; i++) {
     View child=getChildAt(i);
-    LayoutParams lp=(LayoutParams)child.getLayoutParams();
-    lp.setup(cellWidth,cellHeight,mWidthGap,mHeightGap,mLeftPadding,mTopPadding);
-    int childWidthMeasureSpec=MeasureSpec.makeMeasureSpec(lp.width,MeasureSpec.EXACTLY);
-    int childheightMeasureSpec=MeasureSpec.makeMeasureSpec(lp.height,MeasureSpec.EXACTLY);
+    int childWidthMeasureSpec=MeasureSpec.makeMeasureSpec(newWidth,MeasureSpec.EXACTLY);
+    int childheightMeasureSpec=MeasureSpec.makeMeasureSpec(newHeight,MeasureSpec.EXACTLY);
     child.measure(childWidthMeasureSpec,childheightMeasureSpec);
   }
-  if (widthSpecMode == MeasureSpec.AT_MOST) {
-    int newWidth=mLeftPadding + mRightPadding + (mCountX * cellWidth)+ ((mCountX - 1) * mWidthGap);
-    int newHeight=mTopPadding + mBottomPadding + (mCountY * cellHeight)+ ((mCountY - 1) * mHeightGap);
-    setMeasuredDimension(newWidth,newHeight);
-  }
- else   if (widthSpecMode == MeasureSpec.EXACTLY) {
-    setMeasuredDimension(widthSpecSize,heightSpecSize);
-  }
+  setMeasuredDimension(newWidth,newHeight);
 }

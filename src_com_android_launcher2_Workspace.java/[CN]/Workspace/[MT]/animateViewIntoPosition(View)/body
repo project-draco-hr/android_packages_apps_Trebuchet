@@ -1,5 +1,5 @@
 {
-  final CellLayout parent=(CellLayout)view.getParent();
+  final CellLayout parent=(CellLayout)view.getParent().getParent();
   final CellLayout.LayoutParams lp=(CellLayout.LayoutParams)view.getLayoutParams();
   final int fromX=lp.oldX + parent.getLeft();
   final int fromY=lp.oldY + parent.getTop();

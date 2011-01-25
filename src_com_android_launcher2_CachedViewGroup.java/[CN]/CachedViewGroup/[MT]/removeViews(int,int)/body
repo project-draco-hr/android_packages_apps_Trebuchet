@@ -1,0 +1,4 @@
+{
+  super.removeViews(start,count);
+  invalidateCache();
+}

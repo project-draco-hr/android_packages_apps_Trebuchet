@@ -10,7 +10,7 @@
   }
   int dragTargetIndex=indexOfChild(mDragTargetLayout);
   if (mCurrentPage != dragTargetIndex && (mIsSmall || mIsInUnshrinkAnimation)) {
-    moveToNewPageWithoutMovingCellLayouts(dragTargetIndex);
+    scrollToNewPageWithoutMovingPages(dragTargetIndex);
   }
   if (source != this) {
     if (!mIsSmall || mWasSpringLoadedOnDragExit) {
@@ -51,7 +51,7 @@
         LauncherModel.moveItemInDatabase(mLauncher,info,LauncherSettings.Favorites.CONTAINER_DESKTOP,screen,lp.cellX,lp.cellY);
       }
     }
-    final CellLayout parent=(CellLayout)cell.getParent();
+    final CellLayout parent=(CellLayout)cell.getParent().getParent();
     setPositionForDropAnimation(dragView,originX,originY,parent,cell);
     boolean animateDrop=!mWasSpringLoadedOnDragExit;
     parent.onDropChild(cell,animateDrop);

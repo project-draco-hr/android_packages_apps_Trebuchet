@@ -1,4 +1,3 @@
 {
-  mDisableCacheUpdates=true;
-  mForceCacheUpdate=true;
+  mChildren.disableCacheUpdates();
 }

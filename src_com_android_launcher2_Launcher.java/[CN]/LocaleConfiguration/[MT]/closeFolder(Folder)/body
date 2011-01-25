@@ -1,6 +1,6 @@
 {
   folder.getInfo().opened=false;
-  ViewGroup parent=(ViewGroup)folder.getParent();
+  ViewGroup parent=(ViewGroup)folder.getParent().getParent();
   if (parent != null) {
     CellLayout cl=(CellLayout)parent;
     cl.removeViewWithoutMarkingCells(folder);
