@@ -1,4 +1,5 @@
 {
+  findWallpapers();
   final View v=getActivity().getLayoutInflater().inflate(R.layout.wallpaper_chooser,null,false);
   GridView gridView=(GridView)v.findViewById(R.id.gallery);
   gridView.setOnItemClickListener(this);
