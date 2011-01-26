@@ -5,5 +5,4 @@
   }
   mOverScrollMaxBackgroundAlpha=0.0f;
   mOverScrollPageIndex=-1;
-  mPageMoving=false;
 }
