@@ -5,6 +5,11 @@
     int originY=y - yOffset;
     boolean shrunken=mIsSmall || mIsInUnshrinkAnimation;
     if (shrunken) {
+      mLastDragView=dragView;
+      mLastDragOriginX=originX;
+      mLastDragOriginY=originY;
+      mLastDragXOffset=xOffset;
+      mLastDragYOffset=yOffset;
       layout=findMatchingPageForDragOver(dragView,originX,originY,xOffset,yOffset);
       if (layout != mDragTargetLayout) {
         if (mDragTargetLayout != null) {
@@ -14,7 +19,7 @@
         mDragTargetLayout=layout;
         if (mDragTargetLayout != null && mDragTargetLayout.getAcceptsDrops()) {
           mDragTargetLayout.setIsDragOverlapping(true);
-          mSpringLoadedDragController.onDragEnter(mDragTargetLayout);
+          mSpringLoadedDragController.onDragEnter(mDragTargetLayout,mShrinkState == ShrinkState.SPRING_LOADED);
         }
       }
     }
