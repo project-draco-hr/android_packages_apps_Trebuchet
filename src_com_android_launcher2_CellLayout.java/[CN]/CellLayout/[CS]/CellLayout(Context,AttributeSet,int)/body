@@ -18,7 +18,6 @@
   final Resources res=getResources();
   if (LauncherApplication.isScreenXLarge()) {
     mNormalBackground=res.getDrawable(R.drawable.homescreen_large_blue);
-    mNormalGlowBackground=res.getDrawable(R.drawable.homescreen_large_blue_strong);
     mActiveBackground=res.getDrawable(R.drawable.homescreen_large_green);
     mActiveGlowBackground=res.getDrawable(R.drawable.homescreen_large_green_strong);
     mNormalBackgroundMini=res.getDrawable(R.drawable.homescreen_small_blue);
@@ -26,7 +25,6 @@
     mActiveBackgroundMini=res.getDrawable(R.drawable.homescreen_small_green);
     mActiveGlowBackgroundMini=res.getDrawable(R.drawable.homescreen_small_green_strong);
     mNormalBackground.setFilterBitmap(true);
-    mNormalGlowBackground.setFilterBitmap(true);
     mActiveBackground.setFilterBitmap(true);
     mActiveGlowBackground.setFilterBitmap(true);
     mNormalBackgroundMini.setFilterBitmap(true);
