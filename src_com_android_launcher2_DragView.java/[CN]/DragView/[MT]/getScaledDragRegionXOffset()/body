@@ -1,3 +1,0 @@
-{
-  return -(int)((mScale - 1.0f) * mDragRegionWidth / 2);
-}
