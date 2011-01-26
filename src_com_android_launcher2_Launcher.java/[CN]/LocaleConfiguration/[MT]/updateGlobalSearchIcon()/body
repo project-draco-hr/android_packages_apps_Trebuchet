@@ -3,7 +3,7 @@
     final SearchManager searchManager=(SearchManager)getSystemService(Context.SEARCH_SERVICE);
     ComponentName activityName=searchManager.getGlobalSearchActivity();
     if (activityName != null) {
-      sGlobalSearchIcon=updateButtonWithIconFromExternalActivity(R.id.search_button,activityName,R.drawable.search_button_generic);
+      sGlobalSearchIcon=updateButtonWithIconFromExternalActivity(R.id.search_button,activityName,R.drawable.ic_generic_search);
     }
  else {
       findViewById(R.id.search_button).setVisibility(View.GONE);
