@@ -1,4 +1,6 @@
 {
   mScreen=cl;
   mAlarm.setAlarm(ENTER_SPRING_LOAD_HOVER_TIME);
+  mFinishedAnimation=isSpringLoaded;
+  mWaitingToReenter=false;
 }
