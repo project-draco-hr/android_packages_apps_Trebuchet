@@ -1,8 +1,0 @@
-{
-  final int outlineColor=getResources().getColor(R.color.drag_outline_color);
-  final Bitmap b=Bitmap.createBitmap(orig.getWidth() + padding,orig.getHeight() + padding,Bitmap.Config.ARGB_8888);
-  canvas.setBitmap(b);
-  canvas.drawBitmap(orig,0,0,new Paint());
-  mOutlineHelper.applyMediumExpensiveOutlineWithBlur(b,canvas,outlineColor,outlineColor);
-  return b;
-}

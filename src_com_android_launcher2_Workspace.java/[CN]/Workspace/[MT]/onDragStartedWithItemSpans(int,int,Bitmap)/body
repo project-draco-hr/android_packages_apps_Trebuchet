@@ -2,6 +2,8 @@
   mIsDragInProcess=true;
   final Canvas canvas=new Canvas();
   final int bitmapPadding=HolographicOutlineHelper.MAX_OUTER_BLUR_RADIUS;
-  mDragOutline=createDragOutline(b,canvas,bitmapPadding);
+  CellLayout cl=(CellLayout)getChildAt(0);
+  int[] desiredSize=cl.cellSpansToSize(spanX,spanY);
+  mDragOutline=createDragOutline(b,canvas,bitmapPadding,desiredSize[0],desiredSize[1]);
   updateWhichPagesAcceptDropsDuringDrag(mShrinkState,spanX,spanY);
 }
