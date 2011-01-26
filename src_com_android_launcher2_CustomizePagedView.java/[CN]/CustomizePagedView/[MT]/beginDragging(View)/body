@@ -12,8 +12,7 @@ case WidgetCustomization:
       if (v instanceof PagedViewWidget) {
         final LinearLayout l=(LinearLayout)v;
         final ImageView i=(ImageView)l.findViewById(R.id.widget_preview);
-        final Drawable icon=i.getDrawable();
-        Bitmap b=drawableToBitmap(icon,i);
+        Bitmap b=drawableToBitmap(i.getDrawable(),i,true);
         PendingAddWidgetInfo createWidgetInfo=(PendingAddWidgetInfo)v.getTag();
         int[] spanXY=CellLayout.rectToCell(getResources(),createWidgetInfo.minWidth,createWidgetInfo.minHeight,null);
         createWidgetInfo.spanX=spanXY[0];
@@ -30,7 +29,7 @@ case ShortcutCustomization:
     if (v instanceof PagedViewIcon) {
       final TextView tv=(TextView)v;
       final Drawable icon=tv.getCompoundDrawables()[1];
-      Bitmap b=drawableToBitmap(icon,tv);
+      Bitmap b=drawableToBitmap(icon,tv,false);
       PendingAddItemInfo createItemInfo=(PendingAddItemInfo)v.getTag();
       mLauncher.getWorkspace().onDragStartedWithItemSpans(1,1,b);
       mDragController.startDrag(v,b,this,createItemInfo,DragController.DRAG_ACTION_COPY,null);
@@ -44,7 +43,7 @@ case ApplicationCustomization:
   if (v instanceof PagedViewIcon) {
     final TextView tv=(TextView)v;
     final Drawable icon=tv.getCompoundDrawables()[1];
-    Bitmap b=drawableToBitmap(icon,tv);
+    Bitmap b=drawableToBitmap(icon,tv,false);
     ApplicationInfo app=(ApplicationInfo)v.getTag();
     app=new ApplicationInfo(app);
     mLauncher.getWorkspace().onDragStartedWithItemSpans(1,1,b);
