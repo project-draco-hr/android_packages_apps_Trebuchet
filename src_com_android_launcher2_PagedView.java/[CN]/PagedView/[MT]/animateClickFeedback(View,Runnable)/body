@@ -1,14 +1,11 @@
 {
-  Animation anim=AnimationUtils.loadAnimation(getContext(),R.anim.paged_view_click_feedback);
-  anim.setAnimationListener(new AnimationListener(){
-    @Override public void onAnimationStart(    Animation animation){
-    }
-    @Override public void onAnimationRepeat(    Animation animation){
+  ObjectAnimator anim=(ObjectAnimator)AnimatorInflater.loadAnimator(mContext,R.anim.paged_view_click_feedback);
+  anim.setTarget(v);
+  anim.addListener(new AnimatorListenerAdapter(){
+    public void onAnimationRepeat(    Animator animation){
       r.run();
-    }
-    @Override public void onAnimationEnd(    Animation animation){
     }
   }
 );
-  v.startAnimation(anim);
+  anim.start();
 }
