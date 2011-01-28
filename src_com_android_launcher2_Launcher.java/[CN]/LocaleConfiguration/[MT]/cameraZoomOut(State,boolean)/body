@@ -17,7 +17,7 @@
     if (toAllApps) {
       toView.setAlpha(0f);
       ObjectAnimator alphaAnim=ObjectAnimator.ofPropertyValuesHolder(toView,PropertyValuesHolder.ofFloat("alpha",1.0f));
-      alphaAnim.setInterpolator(new DecelerateInterpolator(1.5f));
+      alphaAnim.setInterpolator(new DecelerateInterpolator(1.0f));
       alphaAnim.setDuration(duration);
       alphaAnim.start();
     }
