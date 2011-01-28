@@ -49,23 +49,48 @@
         mUnshrinkAnimationListener.onAnimationEnd(null);
       }
     }
-    if (animated) {
-      ObjectAnimator wallpaperAnim=ObjectAnimator.ofPropertyValuesHolder(this,PropertyValuesHolder.ofFloat("verticalWallpaperOffset",0.5f),PropertyValuesHolder.ofFloat("horizontalWallpaperOffset",wallpaperOffsetForCurrentScroll()));
-      mAnimator.play(wallpaperAnim);
-      wallpaperAnim.setDuration(duration);
-      wallpaperAnim.setInterpolator(mZoomInInterpolator);
-    }
+    Display display=mLauncher.getWindowManager().getDefaultDisplay();
+    boolean isLandscape=display.getWidth() > display.getHeight();
+switch (mShrinkState) {
+case TOP:
+      if (animated) {
+        mWallpaperOffset.setHorizontalCatchupConstant(isLandscape ? 0.65f : 0.62f);
+        mWallpaperOffset.setVerticalCatchupConstant(isLandscape ? 0.65f : 0.62f);
+        mWallpaperOffset.setOverrideHorizontalCatchupConstant(true);
+      }
+    break;
+case MIDDLE:
+case SPRING_LOADED:
+  if (animated) {
+    mWallpaperOffset.setHorizontalCatchupConstant(isLandscape ? 0.49f : 0.46f);
+    mWallpaperOffset.setVerticalCatchupConstant(isLandscape ? 0.49f : 0.46f);
+    mWallpaperOffset.setOverrideHorizontalCatchupConstant(true);
+  }
+break;
+case BOTTOM_HIDDEN:
+case BOTTOM_VISIBLE:
+if (animated) {
+mWallpaperOffset.setHorizontalCatchupConstant(isLandscape ? 0.49f : 0.46f);
+mWallpaperOffset.setVerticalCatchupConstant(isLandscape ? 0.49f : 0.46f);
+mWallpaperOffset.setOverrideHorizontalCatchupConstant(true);
+}
+break;
+}
+if (animated) {
+ObjectAnimator wallpaperAnim=ObjectAnimator.ofPropertyValuesHolder(this,PropertyValuesHolder.ofFloat("verticalWallpaperOffset",0.5f),PropertyValuesHolder.ofFloat("horizontalWallpaperOffset",wallpaperOffsetForCurrentScroll()));
+wallpaperAnim.setDuration(duration);
+wallpaperAnim.setInterpolator(mZoomInInterpolator);
+mAnimator.play(wallpaperAnim);
+mAnimator.addListener(mUnshrinkAnimationListener);
+mAnimator.start();
+}
  else {
-      setHorizontalWallpaperOffset(wallpaperOffsetForCurrentScroll());
-      setVerticalWallpaperOffset(0.5f);
-      updateWallpaperOffsetImmediately();
-    }
-    if (animated) {
-      mAnimator.addListener(mUnshrinkAnimationListener);
-      mAnimator.start();
-    }
-  }
-  if (!springLoaded) {
-    hideBackgroundGradient();
-  }
+setHorizontalWallpaperOffset(wallpaperOffsetForCurrentScroll());
+setVerticalWallpaperOffset(0.5f);
+updateWallpaperOffsetImmediately();
+}
+}
+if (!springLoaded) {
+hideBackgroundGradient();
+}
 }

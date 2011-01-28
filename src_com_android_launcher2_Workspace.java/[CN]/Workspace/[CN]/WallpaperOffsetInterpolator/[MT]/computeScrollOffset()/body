@@ -1,5 +1,6 @@
 {
   if (Float.compare(mHorizontalWallpaperOffset,mFinalHorizontalWallpaperOffset) == 0 && Float.compare(mVerticalWallpaperOffset,mFinalVerticalWallpaperOffset) == 0) {
+    mIsMovingFast=false;
     return false;
   }
   Display display=mLauncher.getWindowManager().getDefaultDisplay();
@@ -8,19 +9,34 @@
   long timeSinceLastUpdate=currentTime - mLastWallpaperOffsetUpdateTime;
   timeSinceLastUpdate=Math.min((long)(1000 / 30f),timeSinceLastUpdate);
   timeSinceLastUpdate=Math.max(1L,timeSinceLastUpdate);
-  float fractionToCatchUpIn1MsHorizontal=isLandscape ? 0.75f / 100 : 0.75f / 100;
-  float fractionToCatchUpIn1MsVertical=isLandscape ? 1.1f / 100 : 1.1f / 100;
+  float xdiff=Math.abs(mFinalHorizontalWallpaperOffset - mHorizontalWallpaperOffset);
+  if (!mIsMovingFast && xdiff > 0.07) {
+    mIsMovingFast=true;
+  }
+  float fractionToCatchUpIn1MsHorizontal;
+  if (mOverrideHorizontalCatchupConstant) {
+    fractionToCatchUpIn1MsHorizontal=mHorizontalCatchupConstant;
+  }
+ else   if (mIsMovingFast) {
+    fractionToCatchUpIn1MsHorizontal=isLandscape ? 0.5f : 0.75f;
+  }
+ else {
+    fractionToCatchUpIn1MsHorizontal=isLandscape ? 0.27f : 0.5f;
+  }
+  float fractionToCatchUpIn1MsVertical=mVerticalCatchupConstant;
+  fractionToCatchUpIn1MsHorizontal/=33f;
+  fractionToCatchUpIn1MsVertical/=33f;
   final float UPDATE_THRESHOLD=0.00001f;
   float hOffsetDelta=mFinalHorizontalWallpaperOffset - mHorizontalWallpaperOffset;
   float vOffsetDelta=mFinalVerticalWallpaperOffset - mVerticalWallpaperOffset;
-  boolean jumpToFinalValue=Math.abs(hOffsetDelta / mFinalHorizontalWallpaperOffset) < UPDATE_THRESHOLD && Math.abs(vOffsetDelta / mFinalVerticalWallpaperOffset) < UPDATE_THRESHOLD;
+  boolean jumpToFinalValue=Math.abs(hOffsetDelta) < UPDATE_THRESHOLD && Math.abs(vOffsetDelta) < UPDATE_THRESHOLD;
   if (jumpToFinalValue) {
     mHorizontalWallpaperOffset=mFinalHorizontalWallpaperOffset;
     mVerticalWallpaperOffset=mFinalVerticalWallpaperOffset;
   }
  else {
-    float percentToCatchUpVertical=timeSinceLastUpdate * fractionToCatchUpIn1MsVertical;
-    float percentToCatchUpHorizontal=timeSinceLastUpdate * fractionToCatchUpIn1MsHorizontal;
+    float percentToCatchUpVertical=Math.min(1.0f,timeSinceLastUpdate * fractionToCatchUpIn1MsVertical);
+    float percentToCatchUpHorizontal=Math.min(1.0f,timeSinceLastUpdate * fractionToCatchUpIn1MsHorizontal);
     mHorizontalWallpaperOffset+=percentToCatchUpHorizontal * hOffsetDelta;
     mVerticalWallpaperOffset+=percentToCatchUpVertical * vOffsetDelta;
   }
