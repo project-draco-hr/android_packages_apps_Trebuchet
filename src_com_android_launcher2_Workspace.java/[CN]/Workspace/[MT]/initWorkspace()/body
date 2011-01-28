@@ -31,6 +31,7 @@
  else {
         mDrawCustomizeTrayBackground=false;
       }
+      mWallpaperOffset.setOverrideHorizontalCatchupConstant(false);
       enableCacheUpdates();
       mAnimator=null;
     }
@@ -41,6 +42,7 @@
       disableCacheUpdates();
     }
     @Override public void onAnimationEnd(    Animator animation){
+      mWallpaperOffset.setOverrideHorizontalCatchupConstant(false);
       enableCacheUpdates();
       mAnimator=null;
     }

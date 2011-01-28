@@ -90,18 +90,26 @@
   Display display=mLauncher.getWindowManager().getDefaultDisplay();
   int wallpaperTravelHeight=(int)(display.getHeight() * wallpaperTravelToScreenHeightRatio(display.getWidth(),display.getHeight()));
   float offsetFromCenter=(wallpaperTravelHeight / (float)mWallpaperHeight) / 2f;
+  boolean isLandscape=display.getWidth() > display.getHeight();
 switch (shrinkState) {
 case TOP:
     wallpaperOffset=0.5f + offsetFromCenter;
-  break;
+  mWallpaperOffset.setVerticalCatchupConstant(isLandscape ? 0.46f : 0.44f);
+break;
 case MIDDLE:
 case SPRING_LOADED:
 wallpaperOffset=0.5f;
+mWallpaperOffset.setVerticalCatchupConstant(isLandscape ? 0.34f : 0.32f);
 break;
 case BOTTOM_HIDDEN:
 case BOTTOM_VISIBLE:
 wallpaperOffset=0.5f - offsetFromCenter;
+mWallpaperOffset.setVerticalCatchupConstant(isLandscape ? 0.34f : 0.32f);
 break;
+}
+if (animated) {
+mWallpaperOffset.setHorizontalCatchupConstant(0.46f);
+mWallpaperOffset.setOverrideHorizontalCatchupConstant(true);
 }
 setLayoutScale(1.0f);
 if (animated) {
