@@ -3,7 +3,7 @@
   float alpha=getAlpha();
   setAlpha(1.0f);
   isUpdatingCache=true;
-  draw(mCacheCanvas);
+  drawChildren(mCacheCanvas);
   isUpdatingCache=false;
   setAlpha(alpha);
   mIsCacheDirty=false;
