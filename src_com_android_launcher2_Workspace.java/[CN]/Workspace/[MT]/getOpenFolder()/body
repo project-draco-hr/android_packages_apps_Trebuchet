@@ -1,5 +1,5 @@
 {
-  CellLayout currentPage=(CellLayout)getChildAt(mCurrentPage);
+  ViewGroup currentPage=((CellLayout)getChildAt(mCurrentPage)).getChildrenLayout();
   int count=currentPage.getChildCount();
   for (int i=0; i < count; i++) {
     View child=currentPage.getChildAt(i);
