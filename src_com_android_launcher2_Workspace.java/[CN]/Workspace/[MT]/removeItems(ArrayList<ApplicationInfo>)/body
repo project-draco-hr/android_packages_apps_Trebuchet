@@ -8,7 +8,7 @@
     packageNames.add(apps.get(i).componentName.getPackageName());
   }
   for (int i=0; i < screenCount; i++) {
-    final CellLayoutChildren layout=(CellLayoutChildren)((CellLayout)getChildAt(i)).getChildAt(0);
+    final ViewGroup layout=((CellLayout)getChildAt(i)).getChildrenLayout();
     post(new Runnable(){
       public void run(){
         final ArrayList<View> childrenToRemove=new ArrayList<View>();
