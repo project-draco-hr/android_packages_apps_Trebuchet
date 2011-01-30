@@ -8,7 +8,8 @@
     packageNames.add(apps.get(i).componentName.getPackageName());
   }
   for (int i=0; i < screenCount; i++) {
-    final ViewGroup layout=((CellLayout)getChildAt(i)).getChildrenLayout();
+    final CellLayout layoutParent=(CellLayout)getChildAt(i);
+    final ViewGroup layout=layoutParent.getChildrenLayout();
     post(new Runnable(){
       public void run(){
         final ArrayList<View> childrenToRemove=new ArrayList<View>();
@@ -85,7 +86,7 @@
         childCount=childrenToRemove.size();
         for (int j=0; j < childCount; j++) {
           View child=childrenToRemove.get(j);
-          layout.removeViewInLayout(child);
+          layoutParent.removeViewInLayout(child);
           if (child instanceof DropTarget) {
             mDragController.removeDropTarget((DropTarget)child);
           }
