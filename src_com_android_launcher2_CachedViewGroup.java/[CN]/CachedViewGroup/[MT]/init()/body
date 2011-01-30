@@ -1,0 +1,8 @@
+{
+  mBackgroundRect=new Rect();
+  mCacheRect=new Rect();
+  final Resources res=getResources();
+  mBitmapCacheScale=res.getInteger(R.integer.config_workspaceScreenBitmapCacheScale) / 100.0f;
+  mMaxScaleForUsingBitmapCache=res.getInteger(R.integer.config_maxScaleForUsingWorkspaceScreenBitmapCache) / 100.0f;
+  mCacheCanvas=new Canvas();
+}
