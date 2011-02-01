@@ -22,7 +22,9 @@
       alphaAnim.start();
     }
     scaleAnim.setInterpolator(new Workspace.ZoomOutInterpolator());
-    toView.setLayerType(View.LAYER_TYPE_HARDWARE,null);
+    if (mWorkspace.getWidth() < mWorkspace.getHeight()) {
+      toView.setLayerType(View.LAYER_TYPE_HARDWARE,null);
+    }
     scaleAnim.addListener(new AnimatorListenerAdapter(){
       @Override public void onAnimationStart(      Animator animation){
         toView.setTranslationX(0.0f);
