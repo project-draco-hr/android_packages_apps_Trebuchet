@@ -1,4 +1,8 @@
 {
+  if (ev.getAction() == MotionEvent.ACTION_DOWN) {
+    mXDown=ev.getX();
+    mYDown=ev.getY();
+  }
   if (mIsSmall || mIsInUnshrinkAnimation) {
     if (mLauncher.isAllAppsVisible() && mShrinkState == ShrinkState.BOTTOM_HIDDEN) {
       AllAppsPagedView allApps=(AllAppsPagedView)mLauncher.findViewById(R.id.all_apps_paged_view);
