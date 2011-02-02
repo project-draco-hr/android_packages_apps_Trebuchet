@@ -16,7 +16,6 @@
   mUnshrinkAnimationListener=new AnimatorListenerAdapter(){
     @Override public void onAnimationStart(    Animator animation){
       mIsInUnshrinkAnimation=true;
-      disableCacheUpdates();
     }
     @Override public void onAnimationEnd(    Animator animation){
       mIsInUnshrinkAnimation=false;
@@ -32,18 +31,13 @@
         mDrawCustomizeTrayBackground=false;
       }
       mWallpaperOffset.setOverrideHorizontalCatchupConstant(false);
-      enableCacheUpdates();
       mAnimator=null;
     }
   }
 ;
   mShrinkAnimationListener=new AnimatorListenerAdapter(){
-    @Override public void onAnimationStart(    Animator animation){
-      disableCacheUpdates();
-    }
     @Override public void onAnimationEnd(    Animator animation){
       mWallpaperOffset.setOverrideHorizontalCatchupConstant(false);
-      enableCacheUpdates();
       mAnimator=null;
     }
   }
