@@ -11,4 +11,5 @@
   mFocusedGlowColor=res.getColor(R.color.workspace_item_focused_glow_color);
   mPressedOutlineColor=res.getColor(R.color.workspace_item_pressed_outline_color);
   mPressedGlowColor=res.getColor(R.color.workspace_item_pressed_glow_color);
+  setShadowLayer(SHADOW_LARGE_RADIUS,0.0f,SHADOW_Y_OFFSET,SHADOW_LARGE_COLOUR);
 }
