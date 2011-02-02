@@ -5,8 +5,8 @@
       int lowerPageBound=getAssociatedLowerPageBound(page);
       int upperPageBound=getAssociatedUpperPageBound(page);
       for (int i=0; i < count; ++i) {
-        final ViewGroup layout=(ViewGroup)getChildAt(i);
-        final int childCount=layout.getChildCount();
+        Page layout=(Page)getChildAt(i);
+        final int childCount=layout.getPageChildCount();
         if (lowerPageBound <= i && i <= upperPageBound) {
           if (mDirtyPageContent.get(i)) {
             syncPageItems(i);
@@ -15,7 +15,7 @@
         }
  else {
           if (childCount > 0) {
-            layout.removeAllViews();
+            layout.removeAllViewsOnPage();
           }
           mDirtyPageContent.set(i,true);
         }

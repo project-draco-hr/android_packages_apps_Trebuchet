@@ -1,0 +1,4 @@
+{
+  mChildren.removeViewAt(index);
+  mHolographicChildren.removeViewAt(index);
+}

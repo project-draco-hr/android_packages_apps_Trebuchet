@@ -16,4 +16,5 @@
   }
   setFocusable(true);
   setBackgroundDrawable(null);
+  mHolographicOutlineView=new HolographicPagedViewIcon(context,this);
 }

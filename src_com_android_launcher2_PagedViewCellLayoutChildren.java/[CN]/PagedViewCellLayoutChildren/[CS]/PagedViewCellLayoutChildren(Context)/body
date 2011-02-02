@@ -1,0 +1,4 @@
+{
+  super(context);
+  setLayerType(LAYER_TYPE_HARDWARE,null);
+}
