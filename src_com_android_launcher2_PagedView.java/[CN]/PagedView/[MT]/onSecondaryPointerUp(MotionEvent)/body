@@ -5,6 +5,7 @@
     final int newPointerIndex=pointerIndex == 0 ? 1 : 0;
     mLastMotionX=mDownMotionX=ev.getX(newPointerIndex);
     mLastMotionY=ev.getY(newPointerIndex);
+    mLastMotionXRemainder=0;
     mActivePointerId=ev.getPointerId(newPointerIndex);
     if (mVelocityTracker != null) {
       mVelocityTracker.clear();
