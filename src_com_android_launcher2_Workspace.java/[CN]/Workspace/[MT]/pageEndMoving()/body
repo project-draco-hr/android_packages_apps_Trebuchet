@@ -1,0 +1,6 @@
+{
+  if (!mIsSmall && !mIsInUnshrinkAnimation) {
+    enableChildrenLayers(false);
+  }
+  super.pageEndMoving();
+}
