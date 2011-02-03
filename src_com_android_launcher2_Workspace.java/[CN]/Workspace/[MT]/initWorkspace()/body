@@ -32,10 +32,14 @@
       }
       mWallpaperOffset.setOverrideHorizontalCatchupConstant(false);
       mAnimator=null;
+      enableChildrenLayers(false);
     }
   }
 ;
   mShrinkAnimationListener=new AnimatorListenerAdapter(){
+    @Override public void onAnimationStart(    Animator animation){
+      enableChildrenLayers(true);
+    }
     @Override public void onAnimationEnd(    Animator animation){
       mWallpaperOffset.setOverrideHorizontalCatchupConstant(false);
       mAnimator=null;
