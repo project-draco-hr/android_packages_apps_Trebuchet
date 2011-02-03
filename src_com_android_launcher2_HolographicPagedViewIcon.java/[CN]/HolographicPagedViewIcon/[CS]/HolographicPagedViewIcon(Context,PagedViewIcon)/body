@@ -1,0 +1,5 @@
+{
+  super(context);
+  mOriginalIcon=original;
+  mPaint=new Paint();
+}

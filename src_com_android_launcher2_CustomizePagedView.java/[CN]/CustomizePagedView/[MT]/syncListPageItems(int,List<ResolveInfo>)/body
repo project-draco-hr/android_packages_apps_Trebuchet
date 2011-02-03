@@ -4,7 +4,7 @@
   final int startIndex=page * numCells;
   final int endIndex=Math.min(startIndex + numCells,list.size());
   final PagedViewCellLayout layout=(PagedViewCellLayout)getChildAt(page);
-  layout.removeAllViews();
+  layout.removeAllViewsOnPage();
   for (int i=startIndex; i < endIndex; ++i) {
     ResolveInfo info=list.get(i);
     PendingAddItemInfo createItemInfo=new PendingAddItemInfo();

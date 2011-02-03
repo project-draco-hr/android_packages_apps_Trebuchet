@@ -15,8 +15,6 @@
   int hSpaceLeft=widthSpecSize - mPaddingLeft - mPaddingRight- (cellWidth * mCellCountX);
   int widthGap=hSpaceLeft / numWidthGaps;
   int minGap=Math.min(widthGap,heightGap);
-  int paddingLeft=mPaddingLeft;
-  int paddingTop=mPaddingTop;
   if (mWidthGap > -1 && mHeightGap > -1) {
     widthGap=mWidthGap;
     heightGap=mHeightGap;
@@ -29,10 +27,8 @@
   final int count=getChildCount();
   for (int i=0; i < count; i++) {
     View child=getChildAt(i);
-    PagedViewCellLayout.LayoutParams lp=(PagedViewCellLayout.LayoutParams)child.getLayoutParams();
-    lp.setup(cellWidth,cellHeight,widthGap,heightGap,paddingLeft,paddingTop);
-    int childWidthMeasureSpec=MeasureSpec.makeMeasureSpec(lp.width,MeasureSpec.EXACTLY);
-    int childheightMeasureSpec=MeasureSpec.makeMeasureSpec(lp.height,MeasureSpec.EXACTLY);
+    int childWidthMeasureSpec=MeasureSpec.makeMeasureSpec(newWidth,MeasureSpec.EXACTLY);
+    int childheightMeasureSpec=MeasureSpec.makeMeasureSpec(newHeight,MeasureSpec.EXACTLY);
     child.measure(childWidthMeasureSpec,childheightMeasureSpec);
   }
   setMeasuredDimension(newWidth,newHeight);
