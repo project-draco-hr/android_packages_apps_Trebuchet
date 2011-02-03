@@ -2,7 +2,7 @@
   Resources res=getResources();
   final boolean fromAllApps=(fromState == State.ALL_APPS);
   int duration=fromAllApps ? res.getInteger(R.integer.config_allAppsZoomOutTime) : res.getInteger(R.integer.config_customizeZoomOutTime);
-  float scaleFactor=fromAllApps ? (float)res.getInteger(R.integer.config_allAppsZoomScaleFactor) : (float)res.getInteger(R.integer.config_customizeZoomScaleFactor);
+  final float scaleFactor=fromAllApps ? (float)res.getInteger(R.integer.config_allAppsZoomScaleFactor) : (float)res.getInteger(R.integer.config_customizeZoomScaleFactor);
   final View fromView=fromAllApps ? (View)mAllAppsGrid : mHomeCustomizationDrawer;
   mCustomizePagedView.endChoiceMode();
   mAllAppsPagedView.endChoiceMode();
@@ -13,12 +13,31 @@
   if (animated) {
     if (mStateAnimation != null)     mStateAnimation.cancel();
     mStateAnimation=new AnimatorSet();
-    ValueAnimator scaleAnim=ObjectAnimator.ofPropertyValuesHolder(fromView,PropertyValuesHolder.ofFloat("scaleX",scaleFactor),PropertyValuesHolder.ofFloat("scaleY",scaleFactor));
-    scaleAnim.setDuration(duration);
+    final float oldScaleX=fromView.getScaleX();
+    final float oldScaleY=fromView.getScaleY();
+    ValueAnimator scaleAnim=ValueAnimator.ofFloat(0f,1f).setDuration(duration);
     scaleAnim.setInterpolator(new Workspace.ZoomInInterpolator());
-    ValueAnimator alphaAnim=ObjectAnimator.ofPropertyValuesHolder(fromView,PropertyValuesHolder.ofFloat("alpha",1.0f,0.0f));
+    scaleAnim.addUpdateListener(new AnimatorUpdateListener(){
+      public void onAnimationUpdate(      ValueAnimator animation){
+        final float b=(Float)animation.getAnimatedValue();
+        final float a=1f - b;
+        ((View)fromView.getParent()).fastInvalidate();
+        fromView.setFastScaleX(a * oldScaleX + b * scaleFactor);
+        fromView.setFastScaleY(a * oldScaleY + b * scaleFactor);
+      }
+    }
+);
+    ValueAnimator alphaAnim=ValueAnimator.ofFloat(0f,1f);
     alphaAnim.setDuration(res.getInteger(R.integer.config_allAppsFadeOutTime));
     alphaAnim.setInterpolator(new DecelerateInterpolator(2.0f));
+    alphaAnim.addUpdateListener(new AnimatorUpdateListener(){
+      public void onAnimationUpdate(      ValueAnimator animation){
+        final float b=(Float)animation.getAnimatedValue();
+        final float a=1f - b;
+        fromView.setFastAlpha(a * 1f + b * 0f);
+      }
+    }
+);
     fromView.setLayerType(View.LAYER_TYPE_HARDWARE,null);
     alphaAnim.addListener(new AnimatorListenerAdapter(){
       @Override public void onAnimationEnd(      Animator animation){

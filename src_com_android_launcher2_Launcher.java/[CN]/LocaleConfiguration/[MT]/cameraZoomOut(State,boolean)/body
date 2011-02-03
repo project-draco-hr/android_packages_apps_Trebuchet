@@ -12,16 +12,34 @@
     mWorkspace.shrink(ShrinkState.TOP,animated);
   }
   if (animated) {
-    ValueAnimator scaleAnim=ObjectAnimator.ofPropertyValuesHolder(toView,PropertyValuesHolder.ofFloat("scaleX",scale,1.0f),PropertyValuesHolder.ofFloat("scaleY",scale,1.0f));
-    scaleAnim.setDuration(duration);
+    final float oldScaleX=toView.getScaleX();
+    final float oldScaleY=toView.getScaleY();
+    ValueAnimator scaleAnim=ValueAnimator.ofFloat(0f,1f).setDuration(duration);
+    scaleAnim.setInterpolator(new Workspace.ZoomOutInterpolator());
+    scaleAnim.addUpdateListener(new AnimatorUpdateListener(){
+      public void onAnimationUpdate(      ValueAnimator animation){
+        final float b=(Float)animation.getAnimatedValue();
+        final float a=1f - b;
+        ((View)toView.getParent()).fastInvalidate();
+        toView.setFastScaleX(a * oldScaleX + b * 1f);
+        toView.setFastScaleY(a * oldScaleY + b * 1f);
+      }
+    }
+);
     if (toAllApps) {
       toView.setAlpha(0f);
-      ObjectAnimator alphaAnim=ObjectAnimator.ofPropertyValuesHolder(toView,PropertyValuesHolder.ofFloat("alpha",1.0f));
+      ValueAnimator alphaAnim=ValueAnimator.ofFloat(0f,1f).setDuration(duration);
       alphaAnim.setInterpolator(new DecelerateInterpolator(1.0f));
-      alphaAnim.setDuration(duration);
+      alphaAnim.addUpdateListener(new AnimatorUpdateListener(){
+        public void onAnimationUpdate(        ValueAnimator animation){
+          final float b=(Float)animation.getAnimatedValue();
+          final float a=1f - b;
+          toView.setFastAlpha(a * 0f + b * 1f);
+        }
+      }
+);
       alphaAnim.start();
     }
-    scaleAnim.setInterpolator(new Workspace.ZoomOutInterpolator());
     if (mWorkspace.getWidth() < mWorkspace.getHeight()) {
       toView.setLayerType(View.LAYER_TYPE_HARDWARE,null);
     }
