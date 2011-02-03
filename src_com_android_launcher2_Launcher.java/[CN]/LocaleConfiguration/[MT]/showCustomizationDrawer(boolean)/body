@@ -6,4 +6,6 @@
     cameraZoomOut(State.CUSTOMIZE,animated);
   }
   mState=State.CUSTOMIZE;
+  mUserPresent=false;
+  updateRunning();
 }
