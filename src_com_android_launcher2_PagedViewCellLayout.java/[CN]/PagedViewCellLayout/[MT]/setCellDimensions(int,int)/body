@@ -1,5 +1,6 @@
 {
   mCellWidth=width;
   mCellHeight=height;
-  requestLayout();
+  mChildren.setCellDimensions(width,height);
+  mHolographicChildren.setCellDimensions(width,height);
 }

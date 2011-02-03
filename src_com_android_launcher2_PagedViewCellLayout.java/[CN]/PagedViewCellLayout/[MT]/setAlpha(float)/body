@@ -1,5 +1,4 @@
 {
-  mHolographicAlpha=1.0f - alpha;
-  setChildrenAlpha(alpha);
-  super.setAlpha(alpha);
+  mChildren.setAlpha(alpha);
+  mHolographicChildren.setAlpha(1.0f - alpha);
 }
