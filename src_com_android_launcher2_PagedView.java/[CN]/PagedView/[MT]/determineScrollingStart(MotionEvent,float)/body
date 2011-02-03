@@ -12,6 +12,7 @@
     if (mUsePagingTouchSlop ? xPaged : xMoved) {
       mTouchState=TOUCH_STATE_SCROLLING;
       mLastMotionX=x;
+      mLastMotionXRemainder=0;
       mTouchX=mScrollX;
       mSmoothingTime=System.nanoTime() / NANOTIME_DIV;
       pageBeginMoving();

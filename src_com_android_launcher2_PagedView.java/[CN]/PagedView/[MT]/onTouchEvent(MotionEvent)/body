@@ -8,6 +8,7 @@ case MotionEvent.ACTION_DOWN:
       mScroller.abortAnimation();
     }
   mDownMotionX=mLastMotionX=ev.getX();
+mLastMotionXRemainder=0;
 mActivePointerId=ev.getPointerId(0);
 if (mTouchState == TOUCH_STATE_SCROLLING) {
 pageBeginMoving();
@@ -17,17 +18,18 @@ case MotionEvent.ACTION_MOVE:
 if (mTouchState == TOUCH_STATE_SCROLLING) {
 final int pointerIndex=ev.findPointerIndex(mActivePointerId);
 final float x=ev.getX(pointerIndex);
-final int deltaX=(int)(mLastMotionX - x);
-mLastMotionX=x;
-if (deltaX != 0) {
+final float deltaX=mLastMotionX + mLastMotionXRemainder - x;
+if (Math.abs(deltaX) >= 1.0f) {
 mTouchX+=deltaX;
 mSmoothingTime=System.nanoTime() / NANOTIME_DIV;
 if (!mDeferScrollUpdate) {
-scrollBy(deltaX,0);
+scrollBy((int)deltaX,0);
 }
  else {
 invalidate();
 }
+mLastMotionX=x;
+mLastMotionXRemainder=deltaX - (int)deltaX;
 }
  else {
 awakenScrollBars();
