@@ -9,11 +9,14 @@ case TOP:
 case BOTTOM_HIDDEN:
 case BOTTOM_VISIBLE:
 case SPRING_LOADED:
-    if (!isDragHappening) {
-      spanX=1;
-      spanY=1;
+    if (state != ShrinkState.TOP) {
+      cl.setIsDefaultDropTarget(false);
     }
-  cl.setAcceptsDrops(cl.findCellForSpan(null,spanX,spanY));
+  if (!isDragHappening) {
+    spanX=1;
+    spanY=1;
+  }
+cl.setAcceptsDrops(cl.findCellForSpan(null,spanX,spanY));
 break;
 default :
 throw new RuntimeException("Unhandled ShrinkState " + state);
