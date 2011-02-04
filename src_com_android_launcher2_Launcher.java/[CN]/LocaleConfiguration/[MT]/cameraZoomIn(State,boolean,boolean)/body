@@ -29,7 +29,7 @@
 );
     ValueAnimator alphaAnim=ValueAnimator.ofFloat(0f,1f);
     alphaAnim.setDuration(res.getInteger(R.integer.config_allAppsFadeOutTime));
-    alphaAnim.setInterpolator(new DecelerateInterpolator(2.0f));
+    alphaAnim.setInterpolator(new DecelerateInterpolator(1.5f));
     alphaAnim.addUpdateListener(new AnimatorUpdateListener(){
       public void onAnimationUpdate(      ValueAnimator animation){
         final float b=(Float)animation.getAnimatedValue();
