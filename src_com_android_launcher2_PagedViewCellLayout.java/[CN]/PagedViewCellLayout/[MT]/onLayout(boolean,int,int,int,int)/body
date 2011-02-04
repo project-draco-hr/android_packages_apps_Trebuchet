@@ -1,24 +1,7 @@
 {
   int count=getChildCount();
-  int offsetX=0;
-  if (mCenterContent) {
-    int maxRowWidth=0;
-    for (int i=0; i < count; i++) {
-      View child=getChildAt(i);
-      if (child.getVisibility() != GONE) {
-        PagedViewCellLayout.LayoutParams lp=(PagedViewCellLayout.LayoutParams)child.getLayoutParams();
-        maxRowWidth=Math.max(maxRowWidth,lp.x + lp.width);
-      }
-    }
-    offsetX=(getMeasuredWidth() / 2) - (maxRowWidth / 2);
-  }
   for (int i=0; i < count; i++) {
     View child=getChildAt(i);
-    if (child.getVisibility() != GONE) {
-      PagedViewCellLayout.LayoutParams lp=(PagedViewCellLayout.LayoutParams)child.getLayoutParams();
-      int childLeft=offsetX + lp.x;
-      int childTop=lp.y;
-      child.layout(childLeft,childTop,childLeft + lp.width,childTop + lp.height);
-    }
+    child.layout(0,0,r - l,b - t);
   }
 }
