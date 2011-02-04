@@ -1,4 +1,7 @@
 {
+  if (mIsSmall && mShrinkState == ShrinkState.BOTTOM_VISIBLE) {
+    shrinkState=ShrinkState.BOTTOM_VISIBLE;
+  }
   if (mFirstLayout) {
     mWaitingToShrink=true;
     mWaitingToShrinkState=shrinkState;
