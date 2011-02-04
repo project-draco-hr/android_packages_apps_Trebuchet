@@ -8,9 +8,11 @@
     originX=(int)mTempOriginXY[0];
     originY=(int)mTempOriginXY[1];
   }
-  int dragTargetIndex=indexOfChild(mDragTargetLayout);
-  if (mCurrentPage != dragTargetIndex && (mIsSmall || mIsInUnshrinkAnimation)) {
-    scrollToNewPageWithoutMovingPages(dragTargetIndex);
+  if (!mLauncher.isAllAppsVisible()) {
+    int dragTargetIndex=indexOfChild(mDragTargetLayout);
+    if (mCurrentPage != dragTargetIndex && (mIsSmall || mIsInUnshrinkAnimation)) {
+      scrollToNewPageWithoutMovingPages(dragTargetIndex);
+    }
   }
   if (source != this) {
     if (!mIsSmall || mWasSpringLoadedOnDragExit) {
