@@ -2,4 +2,5 @@
   super(context);
   mWallpaperManager=WallpaperManager.getInstance(context);
   setLayerType(LAYER_TYPE_HARDWARE,null);
+  setMotionEventSplittingEnabled(false);
 }
