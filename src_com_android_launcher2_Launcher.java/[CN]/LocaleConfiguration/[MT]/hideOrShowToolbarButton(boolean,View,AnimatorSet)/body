@@ -19,6 +19,7 @@
  else {
     if (showing) {
       showToolbarButton(view);
+      view.setAlpha(1f);
     }
  else {
       hideToolbarButton(view);

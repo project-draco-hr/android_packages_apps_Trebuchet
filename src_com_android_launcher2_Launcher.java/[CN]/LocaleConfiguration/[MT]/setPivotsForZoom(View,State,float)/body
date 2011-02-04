@@ -2,7 +2,7 @@
   final int height=view.getHeight();
   view.setPivotX(view.getWidth() / 2.0f);
   if (state == State.ALL_APPS) {
-    final float initialHeightFactor=0.165f;
+    final float initialHeightFactor=0.175f;
     view.setPivotY((1 - initialHeightFactor) * height);
   }
  else {
