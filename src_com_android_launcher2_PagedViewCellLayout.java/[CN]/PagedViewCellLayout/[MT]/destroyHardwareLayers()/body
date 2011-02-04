@@ -1,0 +1,6 @@
+{
+  if (mUseHardwareLayers) {
+    mChildren.destroyHardwareLayer();
+    mHolographicChildren.destroyHardwareLayer();
+  }
+}

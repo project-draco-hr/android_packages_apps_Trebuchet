@@ -1,0 +1,6 @@
+{
+  if (mUseHardwareLayers) {
+    mChildren.createHardwareLayer();
+    mHolographicChildren.createHardwareLayer();
+  }
+}
