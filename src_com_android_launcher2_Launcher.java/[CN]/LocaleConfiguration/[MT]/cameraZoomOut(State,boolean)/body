@@ -27,7 +27,7 @@
     if (toAllApps) {
       toView.setAlpha(0f);
       ValueAnimator alphaAnim=ValueAnimator.ofFloat(0f,1f).setDuration(duration);
-      alphaAnim.setInterpolator(new DecelerateInterpolator(1.0f));
+      alphaAnim.setInterpolator(new DecelerateInterpolator(1.5f));
       alphaAnim.addUpdateListener(new AnimatorUpdateListener(){
         public void onAnimationUpdate(        ValueAnimator animation){
           final float b=(Float)animation.getAnimatedValue();
