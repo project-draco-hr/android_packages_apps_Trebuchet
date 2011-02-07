@@ -46,7 +46,7 @@
       float translation=getOffsetXForRotation(rotation,cl.getWidth(),cl.getHeight());
       oldAlphas[i]=cl.getAlpha();
       newAlphas[i]=finalAlphaValue;
-      if (animated && !(oldAlphas[i] == 0f && newAlphas[i] == 0f)) {
+      if (animated) {
         oldTranslationXs[i]=cl.getTranslationX();
         oldTranslationYs[i]=cl.getTranslationY();
         oldScaleXs[i]=cl.getScaleX();
@@ -71,7 +71,7 @@
         cl.setBackgroundAlphaMultiplier(finalAlphaMultiplierValue);
         cl.setAlpha(finalAlphaValue);
         cl.setRotationY(rotation);
-        if (!animated)         mUnshrinkAnimationListener.onAnimationEnd(null);
+        mUnshrinkAnimationListener.onAnimationEnd(null);
       }
     }
     Display display=mLauncher.getWindowManager().getDefaultDisplay();
@@ -116,7 +116,6 @@ final float a=1f - b;
 setHorizontalWallpaperOffset(a * oldHorizontalWallpaperOffset + b * newHorizontalWallpaperOffset);
 setVerticalWallpaperOffset(a * oldVerticalWallpaperOffset + b * newVerticalWallpaperOffset);
 for (int i=0; i < screenCount; i++) {
-if (oldAlphas[i] == 0f && newAlphas[i] == 0f) continue;
 final CellLayout cl=(CellLayout)getChildAt(i);
 cl.fastInvalidate();
 cl.setFastTranslationX(a * oldTranslationXs[i] + b * newTranslationXs[i]);
@@ -137,7 +136,6 @@ public void onAnimationUpdate(ValueAnimator animation){
 final float b=(Float)animation.getAnimatedValue();
 final float a=1f - b;
 for (int i=0; i < screenCount; i++) {
-if (oldAlphas[i] == 0f && newAlphas[i] == 0f) continue;
 final CellLayout cl=(CellLayout)getChildAt(i);
 cl.setFastRotationY(a * oldRotationYs[i] + b * newRotationYs[i]);
 }

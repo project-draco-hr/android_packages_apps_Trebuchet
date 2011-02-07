@@ -84,7 +84,7 @@
     float rotationScaleY=getYScaleForScreen(i);
     oldAlphas[i]=cl.getAlpha();
     newAlphas[i]=finalAlpha;
-    if (animated && !(oldAlphas[i] == 0f && newAlphas[i] == 0f)) {
+    if (animated) {
       oldXs[i]=cl.getX();
       oldYs[i]=cl.getY();
       oldScaleXs[i]=cl.getScaleX();
@@ -106,7 +106,7 @@
       cl.setBackgroundAlpha(finalAlpha);
       cl.setAlpha(finalAlpha);
       cl.setRotationY(rotation);
-      if (!animated)       mShrinkAnimationListener.onAnimationEnd(null);
+      mShrinkAnimationListener.onAnimationEnd(null);
     }
     x+=scaledPageWidth + extraScaledSpacing;
   }
@@ -150,7 +150,6 @@ final float a=1f - b;
 setHorizontalWallpaperOffset(a * oldHorizontalWallpaperOffset + b * newHorizontalWallpaperOffset);
 setVerticalWallpaperOffset(a * oldVerticalWallpaperOffset + b * newVerticalWallpaperOffset);
 for (int i=0; i < screenCount; i++) {
-if (oldAlphas[i] == 0f && newAlphas[i] == 0f) continue;
 final CellLayout cl=(CellLayout)getChildAt(i);
 cl.fastInvalidate();
 cl.setFastX(a * oldXs[i] + b * newXs[i]);
