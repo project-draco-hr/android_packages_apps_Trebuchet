@@ -36,9 +36,7 @@
  else         if (alpha > 1.0f - ALPHA_QUANTIZE_LEVEL) {
           alpha=1.0f;
         }
-        if (Float.compare(alpha,layout.getAlpha()) != 0) {
-          layout.setAlpha(alpha);
-        }
+        layout.setAlpha(alpha);
       }
       mDirtyPageAlpha=false;
     }
