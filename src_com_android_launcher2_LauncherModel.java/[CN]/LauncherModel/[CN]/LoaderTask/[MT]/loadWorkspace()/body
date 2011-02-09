@@ -55,7 +55,6 @@ case LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT:
         info=getShortcutInfo(c,context,iconTypeIndex,iconPackageIndex,iconResourceIndex,iconIndex,titleIndex);
       }
     if (info != null) {
-      updateSavedIcon(context,info,c,iconIndex);
       info.intent=intent;
       info.id=c.getLong(idIndex);
       container=c.getInt(containerIndex);
@@ -75,6 +74,7 @@ default :
   folderInfo.add(info);
 break;
 }
+updateSavedIcon(context,info,c,iconIndex);
 }
  else {
 id=c.getLong(idIndex);

@@ -1,4 +1,7 @@
 {
+  if (!mAppsCanBeOnExternalStorage) {
+    return;
+  }
   if (!info.customIcon && !info.usingFallbackIcon) {
     boolean needSave;
     byte[] data=c.getBlob(iconIndex);
