@@ -1,4 +1,5 @@
 {
+  mAppsCanBeOnExternalStorage=!Environment.isExternalStorageEmulated();
   mApp=app;
   mAllAppsList=new AllAppsList(iconCache);
   mIconCache=iconCache;
