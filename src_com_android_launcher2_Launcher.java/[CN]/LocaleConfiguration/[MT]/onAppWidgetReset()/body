@@ -1,3 +1,5 @@
 {
-  mAppWidgetHost.startListening();
+  if (mAppWidgetHost != null) {
+    mAppWidgetHost.startListening();
+  }
 }
