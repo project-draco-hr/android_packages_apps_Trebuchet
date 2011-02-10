@@ -1,8 +1,0 @@
-{
-  int height=clipHeight ? v.getPaddingTop() + d.getIntrinsicHeight() : v.getHeight();
-  Bitmap b=Bitmap.createBitmap(v.getWidth(),height,Bitmap.Config.ARGB_8888);
-  Canvas c=new Canvas(b);
-  c.translate((v.getWidth() - d.getIntrinsicWidth()) / 2,v.getPaddingTop());
-  d.draw(c);
-  return b;
-}

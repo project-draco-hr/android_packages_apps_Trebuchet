@@ -62,8 +62,6 @@
         final View child=(mDragInfo == null) ? null : mDragInfo.cell;
         float[] localOrigin={originX,originY};
         mapPointFromSelfToChild(mDragTargetLayout,localOrigin,null);
-        mSpringLoadedDropX=(int)localOrigin[0];
-        mSpringLoadedDropY=(int)localOrigin[1];
         mDragTargetLayout.visualizeDropLocation(child,mDragOutline,(int)localOrigin[0],(int)localOrigin[1],item.spanX,item.spanY);
       }
     }

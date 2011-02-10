@@ -2,9 +2,6 @@
   int screen=indexOfChild(cellLayout);
   if (dragInfo instanceof PendingAddItemInfo) {
     PendingAddItemInfo info=(PendingAddItemInfo)dragInfo;
-    int[] touchXY=new int[2];
-    touchXY[0]=mSpringLoadedDropX;
-    touchXY[1]=mSpringLoadedDropY;
 switch (info.itemType) {
 case LauncherSettings.Favorites.ITEM_TYPE_APPWIDGET:
       mLauncher.addAppWidgetFromDrop((PendingAddWidgetInfo)info,screen,touchXY);
@@ -38,8 +35,8 @@ default :
 throw new IllegalStateException("Unknown item type: " + info.itemType);
 }
 mTargetCell=new int[2];
-if (x != -1 && y != -1) {
-cellLayout.findNearestVacantArea(mSpringLoadedDropX,mSpringLoadedDropY,1,1,mTargetCell);
+if (touchXY != null) {
+cellLayout.findNearestVacantArea(touchXY[0],touchXY[1],1,1,mTargetCell);
 }
  else {
 cellLayout.findCellForSpan(mTargetCell,1,1);

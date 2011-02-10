@@ -1,5 +1,4 @@
-int x
-int y
+int[] touchXY
 Object dragInfo
 CellLayout cellLayout
 boolean insertAtFirst

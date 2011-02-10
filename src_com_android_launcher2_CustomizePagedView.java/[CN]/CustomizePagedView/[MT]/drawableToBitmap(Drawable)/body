@@ -1,0 +1,7 @@
+{
+  int w=d.getIntrinsicWidth();
+  int h=d.getIntrinsicHeight();
+  Bitmap b=Bitmap.createBitmap(w,h,Bitmap.Config.ARGB_8888);
+  renderDrawableToBitmap(d,b,0,0,w,h);
+  return b;
+}
