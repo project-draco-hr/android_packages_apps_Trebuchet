@@ -4,4 +4,7 @@
     ((CellLayout)getChildAt(i)).setIsDragOverlapping(false);
   }
   mSpringLoadedDragController.onDragExit();
+  if (getHeight() > getWidth()) {
+    invalidate();
+  }
 }

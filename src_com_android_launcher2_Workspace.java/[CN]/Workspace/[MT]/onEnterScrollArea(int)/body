@@ -10,6 +10,9 @@
         mDragTargetLayout.onDragExit();
         mDragTargetLayout=null;
       }
+      if (getHeight() > getWidth()) {
+        invalidate();
+      }
     }
   }
 }
