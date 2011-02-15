@@ -20,6 +20,7 @@ case MotionEvent.ACTION_DOWN:
     mLastMotionX=x;
     mLastMotionY=y;
     mLastMotionXRemainder=0;
+    mTotalMotionX=0;
     mActivePointerId=ev.getPointerId(0);
     mAllowLongPress=true;
     final int xDist=Math.abs(mScroller.getFinalX() - mScroller.getCurrX());

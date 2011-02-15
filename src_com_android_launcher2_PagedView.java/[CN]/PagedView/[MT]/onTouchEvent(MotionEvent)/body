@@ -9,6 +9,7 @@ case MotionEvent.ACTION_DOWN:
     }
   mDownMotionX=mLastMotionX=ev.getX();
 mLastMotionXRemainder=0;
+mTotalMotionX=0;
 mActivePointerId=ev.getPointerId(0);
 if (mTouchState == TOUCH_STATE_SCROLLING) {
 pageBeginMoving();
@@ -19,6 +20,7 @@ if (mTouchState == TOUCH_STATE_SCROLLING) {
 final int pointerIndex=ev.findPointerIndex(mActivePointerId);
 final float x=ev.getX(pointerIndex);
 final float deltaX=mLastMotionX + mLastMotionXRemainder - x;
+mTotalMotionX+=Math.abs(deltaX);
 if (Math.abs(deltaX) >= 1.0f) {
 mTouchX+=deltaX;
 mSmoothingTime=System.nanoTime() / NANOTIME_DIV;
@@ -48,14 +50,22 @@ final VelocityTracker velocityTracker=mVelocityTracker;
 velocityTracker.computeCurrentVelocity(1000,mMaximumVelocity);
 int velocityX=(int)velocityTracker.getXVelocity(activePointerId);
 final int deltaX=(int)(x - mDownMotionX);
-boolean isfling=Math.abs(deltaX) > MIN_LENGTH_FOR_FLING;
-boolean isSignificantMove=Math.abs(deltaX) > MIN_LENGTH_FOR_MOVE;
+boolean isSignificantMove=mTotalMotionX > MIN_LENGTH_FOR_MOVE;
 final int snapVelocity=mSnapVelocity;
-if ((isSignificantMove && deltaX > 0 || (isfling && velocityX > snapVelocity)) && mCurrentPage > 0) {
-snapToPageWithVelocity(mCurrentPage - 1,velocityX);
+boolean returnToOriginalPage=false;
+final int pageWidth=getScaledMeasuredWidth(getChildAt(mCurrentPage));
+if (Math.abs(deltaX) > pageWidth / 3 && Math.signum(velocityX) != Math.signum(deltaX)) {
+returnToOriginalPage=true;
 }
- else if ((isSignificantMove && deltaX < 0 || (isfling && velocityX < -snapVelocity)) && mCurrentPage < getChildCount() - 1) {
-snapToPageWithVelocity(mCurrentPage + 1,velocityX);
+boolean isFling=Math.abs(deltaX) > MIN_LENGTH_FOR_FLING && Math.abs(velocityX) > snapVelocity;
+int finalPage;
+if (((isSignificantMove && deltaX > 0 && !isFling) || (isFling && velocityX > 0)) && mCurrentPage > 0) {
+finalPage=returnToOriginalPage ? mCurrentPage : mCurrentPage - 1;
+snapToPageWithVelocity(finalPage,velocityX);
+}
+ else if (((isSignificantMove && deltaX < 0 && !isFling) || (isFling && velocityX < 0)) && mCurrentPage < getChildCount() - 1) {
+finalPage=returnToOriginalPage ? mCurrentPage : mCurrentPage + 1;
+snapToPageWithVelocity(finalPage,velocityX);
 }
  else {
 snapToDestination();
