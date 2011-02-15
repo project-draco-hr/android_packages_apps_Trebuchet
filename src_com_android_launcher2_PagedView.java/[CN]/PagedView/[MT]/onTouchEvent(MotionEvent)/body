@@ -50,14 +50,15 @@ final VelocityTracker velocityTracker=mVelocityTracker;
 velocityTracker.computeCurrentVelocity(1000,mMaximumVelocity);
 int velocityX=(int)velocityTracker.getXVelocity(activePointerId);
 final int deltaX=(int)(x - mDownMotionX);
-boolean isSignificantMove=mTotalMotionX > MIN_LENGTH_FOR_MOVE;
+boolean isSignificantMove=Math.abs(deltaX) > MIN_LENGTH_FOR_MOVE;
 final int snapVelocity=mSnapVelocity;
+mTotalMotionX+=Math.abs(mLastMotionX + mLastMotionXRemainder - x);
 boolean returnToOriginalPage=false;
 final int pageWidth=getScaledMeasuredWidth(getChildAt(mCurrentPage));
-if (Math.abs(deltaX) > pageWidth / 3 && Math.signum(velocityX) != Math.signum(deltaX)) {
+if (Math.abs(deltaX) > pageWidth * RETURN_TO_ORIGINAL_PAGE_THRESHOLD && Math.signum(velocityX) != Math.signum(deltaX)) {
 returnToOriginalPage=true;
 }
-boolean isFling=Math.abs(deltaX) > MIN_LENGTH_FOR_FLING && Math.abs(velocityX) > snapVelocity;
+boolean isFling=mTotalMotionX > MIN_LENGTH_FOR_FLING && Math.abs(velocityX) > snapVelocity;
 int finalPage;
 if (((isSignificantMove && deltaX > 0 && !isFling) || (isFling && velocityX > 0)) && mCurrentPage > 0) {
 finalPage=returnToOriginalPage ? mCurrentPage : mCurrentPage - 1;
