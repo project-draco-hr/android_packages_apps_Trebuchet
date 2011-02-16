@@ -1,12 +1,17 @@
 {
-  int originX=x - xOffset;
-  int originY=y - yOffset;
+  boolean largeOrSpringLoaded=!mIsSmall || mWasSpringLoadedOnDragExit;
+  int originX=largeOrSpringLoaded ? x - xOffset : x - xOffset + dragView.getWidth() / 2;
+  int originY=largeOrSpringLoaded ? y - yOffset : y - yOffset + dragView.getHeight() / 2;
   if (mIsSmall || mIsInUnshrinkAnimation) {
     mTempOriginXY[0]=originX;
     mTempOriginXY[1]=originY;
     mapPointFromSelfToChild(mDragTargetLayout,mTempOriginXY);
     originX=(int)mTempOriginXY[0];
     originY=(int)mTempOriginXY[1];
+    if (!largeOrSpringLoaded) {
+      originX-=mDragTargetLayout.getCellWidth() / 2;
+      originY-=mDragTargetLayout.getCellHeight() / 2;
+    }
   }
   if (!mLauncher.isAllAppsVisible()) {
     int dragTargetIndex=indexOfChild(mDragTargetLayout);
@@ -15,12 +20,7 @@
     }
   }
   if (source != this) {
-    if (!mIsSmall || mWasSpringLoadedOnDragExit) {
-      onDropExternal(originX,originY,dragInfo,mDragTargetLayout,false);
-    }
- else {
-      onDropExternal(-1,-1,dragInfo,mDragTargetLayout,false);
-    }
+    onDropExternal(new int[]{originX,originY},dragInfo,mDragTargetLayout,false);
   }
  else   if (mDragInfo != null) {
     final View cell=mDragInfo.cell;

@@ -110,9 +110,12 @@ final float newHorizontalWallpaperOffset=wallpaperOffsetForCurrentScroll();
 final float newVerticalWallpaperOffset=0.5f;
 animWithInterpolator.addUpdateListener(new AnimatorUpdateListener(){
 public void onAnimationUpdate(ValueAnimator animation){
-fastInvalidate();
 final float b=(Float)animation.getAnimatedValue();
 final float a=1f - b;
+if (b == 0f) {
+return;
+}
+fastInvalidate();
 setHorizontalWallpaperOffset(a * oldHorizontalWallpaperOffset + b * newHorizontalWallpaperOffset);
 setVerticalWallpaperOffset(a * oldVerticalWallpaperOffset + b * newVerticalWallpaperOffset);
 for (int i=0; i < screenCount; i++) {
@@ -135,6 +138,9 @@ rotationAnim.addUpdateListener(new AnimatorUpdateListener(){
 public void onAnimationUpdate(ValueAnimator animation){
 final float b=(Float)animation.getAnimatedValue();
 final float a=1f - b;
+if (b == 0f) {
+return;
+}
 for (int i=0; i < screenCount; i++) {
 final CellLayout cl=(CellLayout)getChildAt(i);
 cl.setFastRotationY(a * oldRotationYs[i] + b * newRotationYs[i]);
