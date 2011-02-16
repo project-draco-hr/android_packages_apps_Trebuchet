@@ -1,14 +1,9 @@
 {
-  if (mState == State.ALL_APPS) {
+  if (mState != State.WORKSPACE) {
     return;
   }
   if (LauncherApplication.isScreenXLarge()) {
-    if (mState == State.CUSTOMIZE) {
-      cameraPan(State.CUSTOMIZE,State.ALL_APPS,animated);
-    }
- else {
-      cameraZoomOut(State.ALL_APPS,animated);
-    }
+    cameraZoomOut(State.ALL_APPS,animated);
   }
  else {
     mAllAppsGrid.zoom(1.0f,animated);
