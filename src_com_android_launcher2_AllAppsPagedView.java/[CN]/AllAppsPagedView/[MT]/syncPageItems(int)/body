@@ -55,4 +55,5 @@ layout.enableCenteredContent(true);
 layout.removeAllViewsOnPage();
 layout.addViewToCellLayout(icon,-1,0,new PagedViewCellLayout.LayoutParams(0,0,4,1));
 }
+layout.createHardwareLayers();
 }
