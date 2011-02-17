@@ -1,19 +1,22 @@
 {
   if (isPressed()) {
     if (!mDidInvalidateForPressedState) {
-      invalidate();
+      invalidatePressedOrFocusedBackground();
     }
   }
  else {
     final boolean backgroundEmptyBefore=mPressedOrFocusedBackground == null;
-    mPressedOrFocusedBackground=null;
+    if (!mStayPressed) {
+      mPressedOrFocusedBackground=null;
+    }
     if (isFocused()) {
       mPressedOrFocusedBackground=createGlowingOutline(mTempCanvas,mFocusedGlowColor,mFocusedOutlineColor);
-      invalidate();
+      mStayPressed=false;
+      invalidatePressedOrFocusedBackground();
     }
     final boolean backgroundEmptyNow=mPressedOrFocusedBackground == null;
     if (!backgroundEmptyBefore && backgroundEmptyNow) {
-      invalidate();
+      invalidatePressedOrFocusedBackground();
     }
   }
   Drawable d=mBackground;

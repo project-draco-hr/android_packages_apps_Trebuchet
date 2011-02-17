@@ -1,5 +1,5 @@
 {
-  if (mPressedOrFocusedBackground != null && (isPressed() || isFocused())) {
+  if (mPressedOrFocusedBackground != null && (isPressed() || isFocused() || mStayPressed)) {
     canvas.save(Canvas.CLIP_SAVE_FLAG);
     int padding=HolographicOutlineHelper.MAX_OUTER_BLUR_RADIUS / 2;
     canvas.clipRect(-padding + mScrollX,-padding + mScrollY,getWidth() + padding + mScrollX,getHeight() + padding + mScrollY,Region.Op.REPLACE);

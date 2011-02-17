@@ -1,0 +1,5 @@
+{
+  int padding=HolographicOutlineHelper.MAX_OUTER_BLUR_RADIUS / 2;
+  ((View)getParent()).invalidate(getLeft() - padding,getTop() - padding,getRight() + padding,getBottom() + padding);
+  invalidate();
+}
