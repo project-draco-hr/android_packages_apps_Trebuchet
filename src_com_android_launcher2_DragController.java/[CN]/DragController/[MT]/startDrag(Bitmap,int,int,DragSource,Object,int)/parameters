@@ -1,0 +1,6 @@
+Bitmap b
+int screenX
+int screenY
+DragSource source
+Object dragInfo
+int dragAction

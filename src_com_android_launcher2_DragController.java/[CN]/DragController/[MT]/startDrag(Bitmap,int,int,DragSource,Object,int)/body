@@ -1,0 +1,3 @@
+{
+  startDrag(b,screenX,screenY,source,dragInfo,dragAction,null);
+}

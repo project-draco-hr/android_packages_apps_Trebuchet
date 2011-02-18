@@ -1,0 +1,27 @@
+{
+  if (mIsChecked != checked) {
+    mIsChecked=checked;
+    float alpha;
+    int duration;
+    if (mIsChecked) {
+      alpha=mCheckedAlpha;
+      duration=mCheckedFadeInDuration;
+    }
+ else {
+      alpha=1.0f;
+      duration=mCheckedFadeOutDuration;
+    }
+    if (mCheckedAlphaAnimator != null) {
+      mCheckedAlphaAnimator.cancel();
+    }
+    if (animate) {
+      mCheckedAlphaAnimator=ObjectAnimator.ofFloat(this,"alpha",getAlpha(),alpha);
+      mCheckedAlphaAnimator.setDuration(duration);
+      mCheckedAlphaAnimator.start();
+    }
+ else {
+      setAlpha(alpha);
+    }
+    invalidate();
+  }
+}

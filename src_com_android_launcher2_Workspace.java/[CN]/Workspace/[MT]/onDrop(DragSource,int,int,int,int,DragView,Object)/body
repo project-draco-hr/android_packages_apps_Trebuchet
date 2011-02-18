@@ -20,6 +20,9 @@
     }
   }
   if (source != this) {
+    if ((mIsSmall || mIsInUnshrinkAnimation) && !mLauncher.isAllAppsVisible()) {
+      return;
+    }
     onDropExternal(new int[]{originX,originY},dragInfo,mDragTargetLayout,false);
   }
  else   if (mDragInfo != null) {
