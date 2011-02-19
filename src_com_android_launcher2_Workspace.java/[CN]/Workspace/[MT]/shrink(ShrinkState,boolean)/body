@@ -50,7 +50,7 @@
     finalAlpha=1.0f;
   }
  else   if (shrinkState == ShrinkState.TOP) {
-    y=(isPortrait ? getResources().getDimension(R.dimen.customizeSmallScreenVerticalMarginPortrait) : getResources().getDimension(R.dimen.customizeSmallScreenVerticalMarginLandscape));
+    y=(screenHeight - getCustomizeDrawerHeight() - scaledPageHeight) / 2;
   }
   int duration;
   if (shrinkState == ShrinkState.BOTTOM_HIDDEN || shrinkState == ShrinkState.BOTTOM_VISIBLE) {
