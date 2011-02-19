@@ -1,0 +1,52 @@
+{
+  int xThreshold=mCellLayout.getCellWidth() + mCellLayout.getWidthGap();
+  int yThreshold=mCellLayout.getCellHeight() + mCellLayout.getHeightGap();
+  int hSpanInc=(int)Math.round(1.0f * mDeltaX / xThreshold) - mRunningHInc;
+  int vSpanInc=(int)Math.round(1.0f * mDeltaY / yThreshold) - mRunningVInc;
+  int cellXInc=0;
+  int cellYInc=0;
+  if (hSpanInc == 0 && vSpanInc == 0)   return;
+  mCellLayout.markCellsAsUnoccupiedForView(mWidgetView);
+  CellLayout.LayoutParams lp=(CellLayout.LayoutParams)mWidgetView.getLayoutParams();
+  if (mLeftBorderActive) {
+    cellXInc=Math.max(-mExpandability[0],hSpanInc);
+    cellXInc=Math.min(lp.cellHSpan - mMinHSpan,cellXInc);
+    hSpanInc*=-1;
+    hSpanInc=Math.min(mExpandability[0],hSpanInc);
+    hSpanInc=Math.max(-(lp.cellHSpan - mMinHSpan),hSpanInc);
+    mRunningHInc-=hSpanInc;
+  }
+ else   if (mRightBorderActive) {
+    hSpanInc=Math.min(mExpandability[2],hSpanInc);
+    hSpanInc=Math.max(-(lp.cellHSpan - mMinHSpan),hSpanInc);
+    mRunningHInc+=hSpanInc;
+  }
+  if (mTopBorderActive) {
+    cellYInc=Math.max(-mExpandability[1],vSpanInc);
+    cellYInc=Math.min(lp.cellVSpan - mMinVSpan,cellYInc);
+    vSpanInc*=-1;
+    vSpanInc=Math.min(mExpandability[1],vSpanInc);
+    vSpanInc=Math.max(-(lp.cellVSpan - mMinVSpan),vSpanInc);
+    mRunningVInc-=vSpanInc;
+  }
+ else   if (mBottomBorderActive) {
+    vSpanInc=Math.min(mExpandability[3],vSpanInc);
+    vSpanInc=Math.max(-(lp.cellVSpan - mMinVSpan),vSpanInc);
+    mRunningVInc+=vSpanInc;
+  }
+  if (mLeftBorderActive || mRightBorderActive) {
+    lp.cellHSpan+=hSpanInc;
+    lp.cellX+=cellXInc;
+  }
+  if (mTopBorderActive || mBottomBorderActive) {
+    lp.cellVSpan+=vSpanInc;
+    lp.cellY+=cellYInc;
+  }
+  try {
+    mCellLayout.getExpandabilityArrayForView(mWidgetView,mExpandability);
+  }
+ catch (  Exception e) {
+    System.out.println("Problem!");
+  }
+  mCellLayout.markCellsAsOccupiedForView(mWidgetView);
+}

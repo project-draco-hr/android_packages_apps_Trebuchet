@@ -1,0 +1,40 @@
+{
+  final LayoutParams lp=(LayoutParams)view.getLayoutParams();
+  boolean flag;
+  expandability[0]=0;
+  for (int x=lp.cellX - 1; x >= 0; x--) {
+    flag=false;
+    for (int y=lp.cellY; y < lp.cellY + lp.cellVSpan; y++) {
+      if (mOccupied[x][y])       flag=true;
+    }
+    if (flag)     break;
+    expandability[0]++;
+  }
+  expandability[1]=0;
+  for (int y=lp.cellY - 1; y >= 0; y--) {
+    flag=false;
+    for (int x=lp.cellX; x < lp.cellX + lp.cellHSpan; x++) {
+      if (mOccupied[x][y])       flag=true;
+    }
+    if (flag)     break;
+    expandability[1]++;
+  }
+  expandability[2]=0;
+  for (int x=lp.cellX + lp.cellHSpan; x < mCountX; x++) {
+    flag=false;
+    for (int y=lp.cellY; y < lp.cellY + lp.cellVSpan; y++) {
+      if (mOccupied[x][y])       flag=true;
+    }
+    if (flag)     break;
+    expandability[2]++;
+  }
+  expandability[3]=0;
+  for (int y=lp.cellY + lp.cellVSpan; y < mCountY; y++) {
+    flag=false;
+    for (int x=lp.cellX; x < lp.cellX + lp.cellHSpan; x++) {
+      if (mOccupied[x][y])       flag=true;
+    }
+    if (flag)     break;
+    expandability[3]++;
+  }
+}

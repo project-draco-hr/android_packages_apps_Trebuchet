@@ -1,0 +1,4 @@
+Context context
+ItemInfo itemInfo
+LauncherAppWidgetHostView widgetView
+CellLayout cellLayout

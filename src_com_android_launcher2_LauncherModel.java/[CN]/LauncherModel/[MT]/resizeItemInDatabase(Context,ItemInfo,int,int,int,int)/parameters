@@ -1,0 +1,6 @@
+Context context
+ItemInfo item
+int cellX
+int cellY
+int spanX
+int spanY

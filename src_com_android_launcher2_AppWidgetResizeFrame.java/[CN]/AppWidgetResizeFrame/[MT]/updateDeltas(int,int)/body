@@ -1,0 +1,18 @@
+{
+  if (mLeftBorderActive) {
+    mDeltaX=Math.max(-mBaselineX,deltaX);
+    mDeltaX=Math.min(mBaselineWidth - 2 * BORDER_WIDTH,mDeltaX);
+  }
+ else   if (mRightBorderActive) {
+    mDeltaX=Math.min(mCellLayout.getWidth() - (mBaselineX + mBaselineWidth),deltaX);
+    mDeltaX=Math.max(-mBaselineWidth + 2 * BORDER_WIDTH,mDeltaX);
+  }
+  if (mTopBorderActive) {
+    mDeltaY=Math.max(-mBaselineY,deltaY);
+    mDeltaY=Math.min(mBaselineHeight - 2 * BORDER_WIDTH,mDeltaY);
+  }
+ else   if (mBottomBorderActive) {
+    mDeltaY=Math.min(mCellLayout.getHeight() - (mBaselineY + mBaselineHeight),deltaY);
+    mDeltaY=Math.max(-mBaselineHeight + 2 * BORDER_WIDTH,mDeltaY);
+  }
+}

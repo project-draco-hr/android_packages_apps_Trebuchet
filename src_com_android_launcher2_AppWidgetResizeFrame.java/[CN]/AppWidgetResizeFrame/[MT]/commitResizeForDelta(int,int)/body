@@ -1,0 +1,12 @@
+{
+  visualizeResizeForDelta(deltaX,deltaY);
+  CellLayout.LayoutParams lp=(CellLayout.LayoutParams)mWidgetView.getLayoutParams();
+  LauncherModel.resizeItemInDatabase(getContext(),mItemInfo,lp.cellX,lp.cellY,lp.cellHSpan,lp.cellVSpan);
+  mWidgetView.requestLayout();
+  post(new Runnable(){
+    public void run(){
+      snapToWidget(true);
+    }
+  }
+);
+}
