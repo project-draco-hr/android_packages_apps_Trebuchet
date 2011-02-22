@@ -4,6 +4,7 @@
   if (isChoiceMode(CHOICE_MODE_SINGLE)) {
     endChoiceMode();
   }
+  final Workspace workspace=mLauncher.getWorkspace();
   boolean result=false;
   mLauncher.lockScreenOrientation();
 switch (mCustomizationType) {
@@ -12,47 +13,38 @@ case WidgetCustomization:
       if (v instanceof PagedViewWidget) {
         final LinearLayout l=(LinearLayout)v;
         final ImageView i=(ImageView)l.findViewById(R.id.widget_preview);
-        Bitmap b=drawableToBitmap(i.getDrawable());
+        mDragBitmap=drawableToBitmap(i.getDrawable());
+        i.getLocationOnScreen(mDragViewOrigin);
         PendingAddWidgetInfo createWidgetInfo=(PendingAddWidgetInfo)v.getTag();
         int[] spanXY=CellLayout.rectToCell(getResources(),createWidgetInfo.minWidth,createWidgetInfo.minHeight,null);
         createWidgetInfo.spanX=spanXY[0];
         createWidgetInfo.spanY=spanXY[1];
-        mLauncher.getWorkspace().onDragStartedWithItemSpans(spanXY[0],spanXY[1],b);
-        mDragController.startDrag(i,b,this,createWidgetInfo,DragController.DRAG_ACTION_COPY,null);
-        b.recycle();
+        workspace.onDragStartedWithItemSpans(spanXY[0],spanXY[1],mDragBitmap);
+        mDragController.startDrag(i,mDragBitmap,this,createWidgetInfo,DragController.DRAG_ACTION_COPY,null);
         result=true;
       }
       break;
     }
 case ShortcutCustomization:
+case ApplicationCustomization:
 {
     if (v instanceof PagedViewIcon) {
       final TextView tv=(TextView)v;
       final Drawable icon=tv.getCompoundDrawables()[1];
-      Bitmap b=drawableToBitmap(icon);
-      PendingAddItemInfo createItemInfo=(PendingAddItemInfo)v.getTag();
-      mLauncher.getWorkspace().onDragStartedWithItemSpans(1,1,b);
-      mDragController.startDrag(v,b,this,createItemInfo,DragController.DRAG_ACTION_COPY,null);
-      b.recycle();
+      mDragBitmap=drawableToBitmap(icon);
+      Object dragInfo=v.getTag();
+      if (mCustomizationType == CustomizationType.ApplicationCustomization) {
+        dragInfo=new ApplicationInfo((ApplicationInfo)dragInfo);
+      }
+      workspace.onDragStartedWithItemSpans(1,1,mDragBitmap);
+      v.getLocationOnScreen(mDragViewOrigin);
+      mDragViewOrigin[0]+=(v.getWidth() - icon.getIntrinsicWidth()) / 2;
+      mDragViewOrigin[1]+=v.getPaddingTop();
+      mDragController.startDrag(mDragBitmap,mDragViewOrigin[0],mDragViewOrigin[1],this,dragInfo,DragController.DRAG_ACTION_COPY);
       result=true;
     }
     break;
   }
-case ApplicationCustomization:
-{
-  if (v instanceof PagedViewIcon) {
-    final TextView tv=(TextView)v;
-    final Drawable icon=tv.getCompoundDrawables()[1];
-    Bitmap b=drawableToBitmap(icon);
-    ApplicationInfo app=(ApplicationInfo)v.getTag();
-    app=new ApplicationInfo(app);
-    mLauncher.getWorkspace().onDragStartedWithItemSpans(1,1,b);
-    mDragController.startDrag(v,b,this,app,DragController.DRAG_ACTION_COPY,null);
-    b.recycle();
-    result=true;
-  }
-  break;
-}
 }
 if (result && (v instanceof Checkable)) {
 resetCheckedGrandchildren();

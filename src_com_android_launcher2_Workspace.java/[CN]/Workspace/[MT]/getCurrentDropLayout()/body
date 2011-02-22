@@ -1,5 +1,3 @@
 {
-  if (mIsSmall)   return null;
-  int index=mScroller.isFinished() ? mCurrentPage : mNextPage;
-  return (CellLayout)getChildAt(index);
+  return (CellLayout)getChildAt(mNextPage == INVALID_PAGE ? mCurrentPage : mNextPage);
 }

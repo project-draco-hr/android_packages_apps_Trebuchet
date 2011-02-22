@@ -1,3 +1,0 @@
-{
-  startDrag(b,screenX,screenY,textureLeft,textureTop,textureWidth,textureHeight,source,dragInfo,dragAction,null);
-}

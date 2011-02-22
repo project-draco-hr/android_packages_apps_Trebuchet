@@ -4,7 +4,7 @@
   v.getLocationOnScreen(loc);
   int screenX=loc[0];
   int screenY=loc[1];
-  startDrag(bmp,screenX,screenY,0,0,bmp.getWidth(),bmp.getHeight(),source,dragInfo,dragAction,dragRegion);
+  startDrag(bmp,screenX,screenY,source,dragInfo,dragAction,dragRegion);
   if (dragAction == DRAG_ACTION_MOVE) {
     v.setVisibility(View.GONE);
   }

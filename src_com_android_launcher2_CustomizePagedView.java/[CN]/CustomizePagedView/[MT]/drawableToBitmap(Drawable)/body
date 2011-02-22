@@ -1,6 +1,7 @@
 {
-  int w=d.getIntrinsicWidth();
-  int h=d.getIntrinsicHeight();
+  final Rect bounds=d.getBounds();
+  final int w=bounds.width();
+  final int h=bounds.height();
   Bitmap b=Bitmap.createBitmap(w,h,Bitmap.Config.ARGB_8888);
   renderDrawableToBitmap(d,b,0,0,w,h);
   return b;

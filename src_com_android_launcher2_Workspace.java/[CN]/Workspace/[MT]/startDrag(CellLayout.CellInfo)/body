@@ -18,6 +18,6 @@
   final int screenX=(int)mTempXY[0] + (child.getWidth() - bmpWidth) / 2;
   final int screenY=(int)mTempXY[1] + (child.getHeight() - bmpHeight) / 2;
   mLauncher.lockScreenOrientation();
-  mDragController.startDrag(b,screenX,screenY,0,0,bmpWidth,bmpHeight,this,child.getTag(),DragController.DRAG_ACTION_MOVE,null);
+  mDragController.startDrag(b,screenX,screenY,this,child.getTag(),DragController.DRAG_ACTION_MOVE);
   b.recycle();
 }
