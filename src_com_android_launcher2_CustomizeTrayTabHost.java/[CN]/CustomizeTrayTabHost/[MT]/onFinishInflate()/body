@@ -1,0 +1,57 @@
+{
+  setup();
+  final CustomizePagedView customizePagedView=(CustomizePagedView)findViewById(R.id.customization_drawer_tab_contents);
+  TabContentFactory contentFactory=new TabContentFactory(){
+    public View createTabContent(    String tag){
+      return customizePagedView;
+    }
+  }
+;
+  TextView tabView;
+  TabWidget tabWidget=(TabWidget)findViewById(com.android.internal.R.id.tabs);
+  tabView=(TextView)mInflater.inflate(R.layout.tab_widget_indicator,tabWidget,false);
+  tabView.setText(mContext.getString(R.string.widgets_tab_label));
+  addTab(newTabSpec(WIDGETS_TAG).setIndicator(tabView).setContent(contentFactory));
+  tabView=(TextView)mInflater.inflate(R.layout.tab_widget_indicator,tabWidget,false);
+  tabView.setText(mContext.getString(R.string.applications_tab_label));
+  addTab(newTabSpec(APPLICATIONS_TAG).setIndicator(tabView).setContent(contentFactory));
+  tabView=(TextView)mInflater.inflate(R.layout.tab_widget_indicator,tabWidget,false);
+  tabView.setText(mContext.getString(R.string.wallpapers_tab_label));
+  addTab(newTabSpec(WALLPAPERS_TAG).setIndicator(tabView).setContent(contentFactory));
+  tabView=(TextView)mInflater.inflate(R.layout.tab_widget_indicator,tabWidget,false);
+  tabView.setText(mContext.getString(R.string.shortcuts_tab_label));
+  addTab(newTabSpec(SHORTCUTS_TAG).setIndicator(tabView).setContent(contentFactory));
+  setOnTabChangedListener(new OnTabChangeListener(){
+    public void onTabChanged(    String tabId){
+      final CustomizePagedView.CustomizationType newType=getCustomizeFilterForTabTag(tabId);
+      if (newType != customizePagedView.getCustomizationFilter()) {
+        final Resources res=getResources();
+        final int duration=res.getInteger(R.integer.config_tabTransitionTime);
+        final float alpha=customizePagedView.getAlpha();
+        ValueAnimator alphaAnim=ObjectAnimator.ofFloat(customizePagedView,"alpha",alpha,0.0f);
+        alphaAnim.setDuration(duration);
+        alphaAnim.addListener(new AnimatorListenerAdapter(){
+          @Override public void onAnimationEnd(          Animator animation){
+            customizePagedView.setCustomizationFilter(newType);
+            final float alpha=customizePagedView.getAlpha();
+            ValueAnimator alphaAnim=ObjectAnimator.ofFloat(customizePagedView,"alpha",alpha,1.0f);
+            alphaAnim.setDuration(duration);
+            alphaAnim.start();
+          }
+        }
+);
+        alphaAnim.start();
+      }
+    }
+  }
+);
+  int pageWidth=customizePagedView.getPageContentWidth();
+  TabWidget customizeTabBar=(TabWidget)findViewById(com.android.internal.R.id.tabs);
+  if (customizeTabBar == null)   throw new Resources.NotFoundException();
+  int tabWidgetPadding=0;
+  final int childCount=tabWidget.getChildCount();
+  if (childCount > 0) {
+    tabWidgetPadding+=tabWidget.getChildAt(0).getPaddingLeft() * 2;
+  }
+  customizeTabBar.getLayoutParams().width=pageWidth + tabWidgetPadding;
+}

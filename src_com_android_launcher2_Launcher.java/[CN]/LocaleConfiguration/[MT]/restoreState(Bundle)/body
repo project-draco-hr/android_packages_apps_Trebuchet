@@ -40,7 +40,7 @@
   if (mHomeCustomizationDrawer != null) {
     String curTab=savedState.getString("customize_currentTab");
     if (curTab != null) {
-      mCustomizePagedView.setCustomizationFilter(getCustomizeFilterForTabTag(curTab));
+      mCustomizePagedView.setCustomizationFilter(mHomeCustomizationDrawer.getCustomizeFilterForTabTag(curTab));
       mHomeCustomizationDrawer.setCurrentTabByTag(curTab);
     }
   }
