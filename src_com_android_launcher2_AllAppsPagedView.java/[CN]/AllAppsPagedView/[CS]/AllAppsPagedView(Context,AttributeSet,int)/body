@@ -4,6 +4,8 @@
   mCellCountX=a.getInt(R.styleable.PagedView_cellCountX,6);
   mCellCountY=a.getInt(R.styleable.PagedView_cellCountY,4);
   mInflater=LayoutInflater.from(context);
+  mApps=new ArrayList<ApplicationInfo>();
+  mFilteredApps=new ArrayList<ApplicationInfo>();
   a.recycle();
   setSoundEffectsEnabled(false);
   Resources r=context.getResources();
