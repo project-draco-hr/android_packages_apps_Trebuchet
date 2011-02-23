@@ -1,6 +1,0 @@
-{
-  mCellWidth=width;
-  mCellHeight=height;
-  mChildren.setCellDimensions(width,height);
-  mHolographicChildren.setCellDimensions(width,height);
-}

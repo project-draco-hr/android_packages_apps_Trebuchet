@@ -3,6 +3,9 @@
   final DisplayMetrics metrics=resources.getDisplayMetrics();
   final float density=metrics.density;
   sIconWidth=sIconHeight=(int)resources.getDimension(R.dimen.app_icon_size);
+  if (LauncherApplication.isScreenXLarge()) {
+    sIconContentSize=(int)resources.getDimension(R.dimen.app_icon_content_size);
+  }
   sIconTextureWidth=sIconTextureHeight=sIconWidth + 2;
   sBlurPaint.setMaskFilter(new BlurMaskFilter(5 * density,BlurMaskFilter.Blur.NORMAL));
   sGlowColorPressedPaint.setColor(0xffffc300);
