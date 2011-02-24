@@ -1,9 +1,11 @@
 {
-  Checkable checkable=getCheckedGrandchildren().get(0);
-  if (checkable instanceof PagedViewWidget) {
-    ((PagedViewWidget)checkable).setChecked(false,animated);
-  }
+  final Checkable checkable=getSingleCheckedGrandchild();
+  if (checkable != null) {
+    if (checkable instanceof PagedViewWidget) {
+      ((PagedViewWidget)checkable).setChecked(false,animated);
+    }
  else {
-    ((PagedViewIcon)checkable).setChecked(false,animated);
+      ((PagedViewIcon)checkable).setChecked(false,animated);
+    }
   }
 }
