@@ -1,0 +1,8 @@
+{
+  final ViewGroup allAppsParent=(ViewGroup)mAllApps.getParent();
+  final ViewGroup tabBarParent=(ViewGroup)mAllApps.getParent();
+  mAllApps.setFastAlpha(alpha);
+  allAppsParent.fastInvalidate();
+  mTabBar.setFastAlpha(alpha);
+  tabBarParent.fastInvalidate();
+}

@@ -25,7 +25,7 @@
     }
 );
     if (toAllApps) {
-      toView.setAlpha(0f);
+      toView.setFastAlpha(0f);
       ValueAnimator alphaAnim=ValueAnimator.ofFloat(0f,1f).setDuration(duration);
       alphaAnim.setInterpolator(new DecelerateInterpolator(1.5f));
       alphaAnim.addUpdateListener(new AnimatorUpdateListener(){
@@ -38,8 +38,8 @@
 );
       alphaAnim.start();
     }
-    if (mWorkspace.getWidth() < mWorkspace.getHeight()) {
-      toView.setLayerType(View.LAYER_TYPE_HARDWARE,null);
+    if (toView instanceof LauncherAnimatable) {
+      ((LauncherAnimatable)toView).onLauncherAnimationStart();
     }
     scaleAnim.addListener(new AnimatorListenerAdapter(){
       @Override public void onAnimationStart(      Animator animation){
@@ -47,13 +47,15 @@
         toView.setTranslationY(0.0f);
         toView.setVisibility(View.VISIBLE);
         if (!toAllApps) {
-          toView.setAlpha(1.0f);
+          toView.setFastAlpha(1.0f);
         }
       }
       @Override public void onAnimationEnd(      Animator animation){
-        toView.setLayerType(View.LAYER_TYPE_NONE,null);
         toView.setScaleX(1.0f);
         toView.setScaleY(1.0f);
+        if (toView instanceof LauncherAnimatable) {
+          ((LauncherAnimatable)toView).onLauncherAnimationEnd();
+        }
       }
     }
 );

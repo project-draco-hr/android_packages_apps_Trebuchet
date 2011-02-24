@@ -1,0 +1,4 @@
+{
+  mTabBar.setLayerType(LAYER_TYPE_NONE,null);
+  mAllApps.setLayerType(LAYER_TYPE_NONE,null);
+}
