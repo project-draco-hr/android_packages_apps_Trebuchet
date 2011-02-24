@@ -13,4 +13,5 @@
   LauncherModel.updateWorkspaceLayoutCells(cellCountX,cellCountY);
   setHapticFeedbackEnabled(false);
   initWorkspace();
+  setMotionEventSplittingEnabled(true);
 }
