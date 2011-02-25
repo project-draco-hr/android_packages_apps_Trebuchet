@@ -10,14 +10,14 @@
   if (!foundCustomDrawable) {
     background=resources.getDrawable(R.drawable.default_widget_preview);
   }
-  renderDrawableToBitmap(background,bitmap,0,0,width,height);
+  renderDrawableToBitmap(background,bitmap,0,0,width,height,1.0f,1.0f);
   if (!foundCustomDrawable) {
     try {
       final IconCache iconCache=((LauncherApplication)mLauncher.getApplication()).getIconCache();
       Drawable icon=new FastBitmapDrawable(Utilities.createIconBitmap(iconCache.getFullResIcon(info,mPackageManager),mContext));
       final int iconSize=minDim / 2;
       final int offset=iconSize / 4;
-      renderDrawableToBitmap(icon,null,offset,offset,iconSize,iconSize);
+      renderDrawableToBitmap(icon,null,offset,offset,iconSize,iconSize,1.0f,1.0f);
     }
  catch (    Resources.NotFoundException e) {
     }

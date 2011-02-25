@@ -3,6 +3,11 @@
   TypedArray a=context.obtainStyledAttributes(attrs,R.styleable.PagedViewWidget,defStyle,0);
   mHoloBlurColor=a.getColor(R.styleable.PagedViewWidget_blurColor,0);
   mHoloOutlineColor=a.getColor(R.styleable.PagedViewWidget_outlineColor,0);
+  mEraseStrokeRectPaint.setStyle(Paint.Style.STROKE);
+  mEraseStrokeRectPaint.setStrokeWidth(HolographicOutlineHelper.MIN_OUTER_BLUR_RADIUS);
+  mEraseStrokeRectPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_OUT));
+  mEraseStrokeRectPaint.setFilterBitmap(true);
+  mEraseStrokeRectPaint.setAntiAlias(true);
   a.recycle();
   if (sHolographicOutlineHelper == null) {
     sHolographicOutlineHelper=new HolographicOutlineHelper();

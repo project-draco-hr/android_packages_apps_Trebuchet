@@ -13,7 +13,9 @@ case WidgetCustomization:
       if (v instanceof PagedViewWidget) {
         final LinearLayout l=(LinearLayout)v;
         final ImageView i=(ImageView)l.findViewById(R.id.widget_preview);
-        mDragBitmap=drawableToBitmap(i.getDrawable());
+        RectF tmpScaleRect=new RectF(0,0,1,1);
+        i.getImageMatrix().mapRect(tmpScaleRect);
+        mDragBitmap=drawableToBitmap(i.getDrawable(),tmpScaleRect.right,tmpScaleRect.bottom);
         i.getLocationOnScreen(mDragViewOrigin);
         PendingAddWidgetInfo createWidgetInfo=(PendingAddWidgetInfo)v.getTag();
         int[] spanXY=CellLayout.rectToCell(getResources(),createWidgetInfo.minWidth,createWidgetInfo.minHeight,null);
@@ -31,7 +33,7 @@ case ApplicationCustomization:
     if (v instanceof PagedViewIcon) {
       final TextView tv=(TextView)v;
       final Drawable icon=tv.getCompoundDrawables()[1];
-      mDragBitmap=drawableToBitmap(icon);
+      mDragBitmap=drawableToBitmap(icon,1.0f,1.0f);
       Object dragInfo=v.getTag();
       if (mCustomizationType == CustomizationType.ApplicationCustomization) {
         dragInfo=new ApplicationInfo((ApplicationInfo)dragInfo);

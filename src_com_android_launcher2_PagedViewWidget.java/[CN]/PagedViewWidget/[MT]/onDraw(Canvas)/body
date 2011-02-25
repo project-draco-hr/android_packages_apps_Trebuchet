@@ -3,7 +3,12 @@
     super.onDraw(canvas);
   }
   if (mHolographicOutline != null && mHolographicAlpha > 0) {
+    mTmpScaleRect.set(0,0,1,1);
+    mPreviewImageView.getImageMatrix().mapRect(mTmpScaleRect);
     mPaint.setAlpha(mHolographicAlpha);
+    canvas.save();
+    canvas.scale(mTmpScaleRect.right,mTmpScaleRect.bottom);
     canvas.drawBitmap(mHolographicOutline,0,0,mPaint);
+    canvas.restore();
   }
 }

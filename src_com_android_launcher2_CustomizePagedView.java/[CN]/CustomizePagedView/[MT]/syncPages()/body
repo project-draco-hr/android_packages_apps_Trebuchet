@@ -1,15 +1,18 @@
 {
+  boolean enforceMinimumPagedWidths=false;
   boolean centerPagedViewCellLayouts=false;
 switch (mCustomizationType) {
 case WidgetCustomization:
     syncWidgetPages();
-  break;
+  enforceMinimumPagedWidths=true;
+break;
 case ShortcutCustomization:
 syncListPages(mShortcutList);
 centerPagedViewCellLayouts=true;
 break;
 case WallpaperCustomization:
 syncWallpaperPages();
+enforceMinimumPagedWidths=true;
 break;
 case ApplicationCustomization:
 syncAppPages();
@@ -32,6 +35,9 @@ PagedViewCellLayout layout=(PagedViewCellLayout)getChildAt(i);
 layout.enableCenteredContent(false);
 }
 }
+}
+if (enforceMinimumPagedWidths) {
+setMinimumWidthOverride((childCount > 1) ? mMinPageWidth : 0);
 }
 requestLayout();
 post(new Runnable(){

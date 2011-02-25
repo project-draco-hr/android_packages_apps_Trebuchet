@@ -2,6 +2,7 @@
   final ImageView image=(ImageView)findViewById(R.id.widget_preview);
   image.setMaxWidth(maxWidth);
   image.setImageDrawable(preview);
+  mPreviewImageView=image;
   final TextView name=(TextView)findViewById(R.id.widget_name);
   name.setText(info.label);
   name.setLayerType(View.LAYER_TYPE_SOFTWARE,null);

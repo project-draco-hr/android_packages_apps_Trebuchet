@@ -17,7 +17,7 @@
     int height=(int)(Math.max(minDim,Math.min(maxDim,info.minHeight)) * sScaleFactor);
     final Bitmap bitmap=Bitmap.createBitmap(width,height,Config.ARGB_8888);
     final Drawable background=resources.getDrawable(R.drawable.default_widget_preview);
-    renderDrawableToBitmap(background,bitmap,0,0,width,height);
+    renderDrawableToBitmap(background,bitmap,0,0,width,height,1.0f,1.0f);
     try {
       Drawable icon=null;
       if (info.icon > 0) {
@@ -28,7 +28,7 @@
       }
       final int iconSize=minDim / 2;
       final int offset=iconSize / 4;
-      renderDrawableToBitmap(icon,null,offset,offset,iconSize,iconSize);
+      renderDrawableToBitmap(icon,null,offset,offset,iconSize,iconSize,1.0f,1.0f);
     }
  catch (    Resources.NotFoundException e) {
     }
@@ -51,7 +51,7 @@
       width=(int)(((float)scaledHeight / imageHeight) * imageWidth);
     }
     final Bitmap bitmap=Bitmap.createBitmap(width,height,Config.ARGB_8888);
-    renderDrawableToBitmap(drawable,bitmap,0,0,width,height);
+    renderDrawableToBitmap(drawable,bitmap,0,0,width,height,1.0f,1.0f);
     newDrawable=new FastBitmapDrawable(bitmap);
   }
   newDrawable.setBounds(0,0,newDrawable.getIntrinsicWidth(),newDrawable.getIntrinsicHeight());
