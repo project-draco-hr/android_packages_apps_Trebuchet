@@ -1,0 +1,8 @@
+{
+  AppWidgetResizeFrame resizeFrame=new AppWidgetResizeFrame(getContext(),itemInfo,widget,cellLayout);
+  CellLayout.LayoutParams lp=new CellLayout.LayoutParams(-1,-1,-1,-1);
+  lp.isLockedToGrid=false;
+  addView(resizeFrame,lp);
+  mResizeFrames.add(resizeFrame);
+  resizeFrame.snapToWidget(false);
+}

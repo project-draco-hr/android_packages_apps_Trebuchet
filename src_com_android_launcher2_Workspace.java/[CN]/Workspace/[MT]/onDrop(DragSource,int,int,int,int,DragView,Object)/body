@@ -53,6 +53,20 @@
         lp.cellX=mTargetCell[0];
         lp.cellY=mTargetCell[1];
         cell.setId(LauncherModel.getCellLayoutChildId(-1,mDragInfo.screen,mTargetCell[0],mTargetCell[1],mDragInfo.spanX,mDragInfo.spanY));
+        if (cell instanceof LauncherAppWidgetHostView) {
+          final CellLayoutChildren children=dropTargetLayout.getChildrenLayout();
+          final CellLayout cellLayout=dropTargetLayout;
+          final LauncherAppWidgetHostView hostView=(LauncherAppWidgetHostView)cell;
+          AppWidgetProviderInfo pinfo=hostView.getAppWidgetInfo();
+          if (pinfo.resizableMode != AppWidgetProviderInfo.RESIZE_NONE) {
+            post(new Runnable(){
+              public void run(){
+                children.addResizeFrame(info,hostView,cellLayout);
+              }
+            }
+);
+          }
+        }
         LauncherModel.moveItemInDatabase(mLauncher,info,LauncherSettings.Favorites.CONTAINER_DESKTOP,screen,lp.cellX,lp.cellY);
       }
     }

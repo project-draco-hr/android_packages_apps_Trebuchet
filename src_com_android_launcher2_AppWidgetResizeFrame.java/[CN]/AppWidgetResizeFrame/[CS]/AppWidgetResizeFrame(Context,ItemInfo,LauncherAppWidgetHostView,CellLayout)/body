@@ -1,0 +1,39 @@
+{
+  super(context);
+  mContext=context;
+  mItemInfo=itemInfo;
+  mCellLayout=cellLayout;
+  mWidgetView=widgetView;
+  mResizeMode=widgetView.getAppWidgetInfo().resizableMode;
+  final AppWidgetProviderInfo info=widgetView.getAppWidgetInfo();
+  int[] result=mCellLayout.rectToCell(info.minWidth,info.minHeight,null);
+  mMinHSpan=result[0];
+  mMinVSpan=result[1];
+  setBackgroundResource(R.drawable.resize_frame);
+  setPadding(0,0,0,0);
+  LayoutParams lp;
+  mLeftHandle=new ImageView(context);
+  mLeftHandle.setImageResource(R.drawable.h_handle);
+  lp=new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT,Gravity.LEFT | Gravity.CENTER_VERTICAL);
+  addView(mLeftHandle,lp);
+  mRightHandle=new ImageView(context);
+  mRightHandle.setImageResource(R.drawable.h_handle);
+  lp=new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT,Gravity.RIGHT | Gravity.CENTER_VERTICAL);
+  addView(mRightHandle,lp);
+  mTopHandle=new ImageView(context);
+  mTopHandle.setImageResource(R.drawable.v_handle);
+  lp=new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT,Gravity.CENTER_HORIZONTAL | Gravity.TOP);
+  addView(mTopHandle,lp);
+  mBottomHandle=new ImageView(context);
+  mBottomHandle.setImageResource(R.drawable.v_handle);
+  lp=new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT,Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM);
+  addView(mBottomHandle,lp);
+  if (mResizeMode == AppWidgetProviderInfo.RESIZE_HORIZONTAL) {
+    mTopHandle.setVisibility(GONE);
+    mBottomHandle.setVisibility(GONE);
+  }
+ else   if (mResizeMode == AppWidgetProviderInfo.RESIZE_VERTICAL) {
+    mLeftHandle.setVisibility(GONE);
+    mRightHandle.setVisibility(GONE);
+  }
+}

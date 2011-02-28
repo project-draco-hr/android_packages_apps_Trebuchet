@@ -1,0 +1,6 @@
+{
+  for (  AppWidgetResizeFrame frame : mResizeFrames) {
+    removeView(frame);
+  }
+  mResizeFrames.clear();
+}

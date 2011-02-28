@@ -1,0 +1,23 @@
+{
+  boolean horizontalActive=(mResizeMode & AppWidgetProviderInfo.RESIZE_HORIZONTAL) != 0;
+  boolean verticalActive=(mResizeMode & AppWidgetProviderInfo.RESIZE_VERTICAL) != 0;
+  mLeftBorderActive=(x < BORDER_WIDTH) && horizontalActive;
+  mRightBorderActive=(x > getWidth() - BORDER_WIDTH) && horizontalActive;
+  mTopBorderActive=(y < BORDER_WIDTH) && verticalActive;
+  mBottomBorderActive=(y > getHeight() - BORDER_WIDTH) && verticalActive;
+  boolean anyBordersActive=mLeftBorderActive || mRightBorderActive || mTopBorderActive|| mBottomBorderActive;
+  mBaselineWidth=getMeasuredWidth();
+  mBaselineHeight=getMeasuredHeight();
+  mBaselineX=getLeft();
+  mBaselineY=getTop();
+  mRunningHInc=0;
+  mRunningVInc=0;
+  if (anyBordersActive) {
+    mLeftHandle.setAlpha(mLeftBorderActive ? 1.0f : 0.5f);
+    mRightHandle.setAlpha(mRightBorderActive ? 1.0f : 0.5f);
+    mTopHandle.setAlpha(mTopBorderActive ? 1.0f : 0.5f);
+    mBottomHandle.setAlpha(mBottomBorderActive ? 1.0f : 0.5f);
+  }
+  mCellLayout.getExpandabilityArrayForView(mWidgetView,mExpandability);
+  return anyBordersActive;
+}

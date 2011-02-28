@@ -1,0 +1,47 @@
+{
+  final CellLayout.LayoutParams lp=(CellLayout.LayoutParams)getLayoutParams();
+  final int newWidth=mWidgetView.getWidth() + 2 * FRAME_MARGIN;
+  final int newHeight=mWidgetView.getHeight() + 2 * FRAME_MARGIN;
+  final int newX=mWidgetView.getLeft() - FRAME_MARGIN;
+  final int newY=mWidgetView.getTop() - FRAME_MARGIN;
+  if (!animate) {
+    lp.width=newWidth;
+    lp.height=newHeight;
+    lp.x=newX;
+    lp.y=newY;
+    mLeftHandle.setAlpha(1.0f);
+    mRightHandle.setAlpha(1.0f);
+    mTopHandle.setAlpha(1.0f);
+    mBottomHandle.setAlpha(1.0f);
+    requestLayout();
+  }
+ else {
+    PropertyValuesHolder width=PropertyValuesHolder.ofInt("width",lp.width,newWidth);
+    PropertyValuesHolder height=PropertyValuesHolder.ofInt("height",lp.height,newHeight);
+    PropertyValuesHolder x=PropertyValuesHolder.ofInt("x",lp.x,newX);
+    PropertyValuesHolder y=PropertyValuesHolder.ofInt("y",lp.y,newY);
+    ObjectAnimator oa=ObjectAnimator.ofPropertyValuesHolder(lp,width,height,x,y);
+    ObjectAnimator leftOa=ObjectAnimator.ofFloat(mLeftHandle,"alpha",1.0f);
+    ObjectAnimator rightOa=ObjectAnimator.ofFloat(mRightHandle,"alpha",1.0f);
+    ObjectAnimator topOa=ObjectAnimator.ofFloat(mTopHandle,"alpha",1.0f);
+    ObjectAnimator bottomOa=ObjectAnimator.ofFloat(mBottomHandle,"alpha",1.0f);
+    oa.addUpdateListener(new AnimatorUpdateListener(){
+      public void onAnimationUpdate(      ValueAnimator animation){
+        requestLayout();
+      }
+    }
+);
+    AnimatorSet set=new AnimatorSet();
+    if (mResizeMode == AppWidgetProviderInfo.RESIZE_VERTICAL) {
+      set.playTogether(oa,topOa,bottomOa);
+    }
+ else     if (mResizeMode == AppWidgetProviderInfo.RESIZE_HORIZONTAL) {
+      set.playTogether(oa,leftOa,rightOa);
+    }
+ else {
+      set.playTogether(oa,leftOa,rightOa,topOa,bottomOa);
+    }
+    set.setDuration(SNAP_DURATION);
+    set.start();
+  }
+}
