@@ -7,14 +7,11 @@
     int appFlags=pm.getApplicationInfo(packageName,0).flags;
     if ((appFlags & android.content.pm.ApplicationInfo.FLAG_SYSTEM) == 0) {
       flags|=DOWNLOADED_FLAG;
-    }
-    if ((appFlags & android.content.pm.ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) != 0) {
-      flags|=DOWNLOADED_FLAG;
+      if ((appFlags & android.content.pm.ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) != 0) {
+        flags|=UPDATED_SYSTEM_APP_FLAG;
+      }
     }
     firstInstallTime=pm.getPackageInfo(packageName,0).firstInstallTime;
-    if ((flags & GAME_FLAG) == 0) {
-      flags|=APP_FLAG;
-    }
   }
  catch (  NameNotFoundException e) {
     Log.d(TAG,"PackageManager.getApplicationInfo failed for " + packageName);

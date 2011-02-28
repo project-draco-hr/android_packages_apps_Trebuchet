@@ -1,9 +1,9 @@
 {
   if (!v.isInTouchMode())   return false;
   if (!super.beginDragging(v))   return false;
-  setupDragMode();
   ApplicationInfo app=(ApplicationInfo)v.getTag();
   app=new ApplicationInfo(app);
+  setupDragMode(app);
   final TextView tv=(TextView)v;
   final Drawable icon=tv.getCompoundDrawables()[1];
   Bitmap b=Bitmap.createBitmap(v.getWidth(),v.getHeight(),Bitmap.Config.ARGB_8888);
