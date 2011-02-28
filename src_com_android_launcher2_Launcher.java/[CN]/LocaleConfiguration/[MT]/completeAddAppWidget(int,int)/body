@@ -14,7 +14,15 @@
     foundCellSpan=layout.findCellForSpanThatIntersects(cellXY,spanXY[0],spanXY[1],mAddIntersectCellX,mAddIntersectCellY);
   }
   if (!foundCellSpan) {
-    if (appWidgetId != -1)     mAppWidgetHost.deleteAppWidgetId(appWidgetId);
+    if (appWidgetId != -1) {
+      final LauncherAppWidgetHost appWidgetHost=mAppWidgetHost;
+      new Thread("deleteAppWidgetId"){
+        public void run(){
+          mAppWidgetHost.deleteAppWidgetId(appWidgetId);
+        }
+      }
+.start();
+    }
     showOutOfSpaceMessage();
     return;
   }
