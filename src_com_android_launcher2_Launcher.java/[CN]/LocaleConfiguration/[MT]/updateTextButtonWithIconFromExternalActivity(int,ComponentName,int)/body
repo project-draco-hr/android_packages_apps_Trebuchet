@@ -1,0 +1,12 @@
+{
+  TextView button=(TextView)findViewById(buttonId);
+  Drawable toolbarIcon=getExternalPackageToolbarIcon(activityName);
+  if (toolbarIcon == null) {
+    button.setCompoundDrawablesWithIntrinsicBounds(fallbackDrawableId,0,0,0);
+    return null;
+  }
+ else {
+    button.setCompoundDrawablesWithIntrinsicBounds(toolbarIcon,null,null,null);
+    return toolbarIcon.getConstantState();
+  }
+}
