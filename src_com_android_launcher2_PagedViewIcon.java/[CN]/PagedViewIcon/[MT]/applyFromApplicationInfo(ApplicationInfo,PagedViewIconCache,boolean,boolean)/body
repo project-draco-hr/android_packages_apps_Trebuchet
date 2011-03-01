@@ -7,6 +7,8 @@
     mIconCache=cache;
     mIconCacheKey=new PagedViewIconCache.Key(info);
     mHolographicOutline=mIconCache.getOutline(mIconCacheKey);
-    queueHolographicOutlineCreation();
+    if (!queueHolographicOutlineCreation()) {
+      getHolographicOutlineView().invalidate();
+    }
   }
 }
