@@ -3,5 +3,7 @@
     Message m=sWorker.obtainMessage(MESSAGE_CREATE_HOLOGRAPHIC_OUTLINE);
     m.obj=this;
     sWorker.sendMessage(m);
+    return true;
   }
+  return false;
 }
