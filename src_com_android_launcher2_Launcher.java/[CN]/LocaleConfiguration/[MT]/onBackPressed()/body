@@ -2,11 +2,14 @@
   if (mState == State.ALL_APPS || mState == State.CUSTOMIZE) {
     showWorkspace(true);
   }
- else {
+ else   if (mWorkspace.getOpenFolder() != null) {
     closeFolder();
   }
-  if (mPreviousView != null) {
+ else   if (isPreviewVisible()) {
     dismissPreview(mPreviousView);
     dismissPreview(mNextView);
+  }
+ else {
+    mWorkspace.showOutlinesTemporarily();
   }
 }

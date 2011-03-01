@@ -1,0 +1,3 @@
+{
+  return (mPreviousView != null && mPreviousView.getTag() != null) || (mNextView != null && mNextView.getTag() != null);
+}
