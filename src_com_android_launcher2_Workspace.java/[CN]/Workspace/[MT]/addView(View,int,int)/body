@@ -3,5 +3,7 @@
     throw new IllegalArgumentException("A Workspace can only have CellLayout children.");
   }
   ((CellLayout)child).setOnInterceptTouchListener(this);
+  child.setOnClickListener(this);
+  child.setClickable(true);
   super.addView(child,width,height);
 }

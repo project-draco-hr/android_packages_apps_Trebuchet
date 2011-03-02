@@ -1,4 +1,7 @@
 {
+  if (mState != State.WORKSPACE) {
+    return false;
+  }
 switch (v.getId()) {
 case R.id.previous_screen:
     if (mState != State.ALL_APPS) {
