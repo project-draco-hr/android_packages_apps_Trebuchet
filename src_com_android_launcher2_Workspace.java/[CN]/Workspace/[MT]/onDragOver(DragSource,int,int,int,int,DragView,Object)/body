@@ -17,7 +17,8 @@
           mSpringLoadedDragController.onDragExit();
         }
         mDragTargetLayout=layout;
-        if (mDragTargetLayout != null && mDragTargetLayout.getAcceptsDrops()) {
+        boolean allowDragOver=(mDragTargetLayout != null) && (mDragTargetLayout.getAcceptsDrops() || (mShrinkState == ShrinkState.SPRING_LOADED));
+        if (allowDragOver) {
           mDragTargetLayout.setIsDragOverlapping(true);
           mSpringLoadedDragController.onDragEnter(mDragTargetLayout,mShrinkState == ShrinkState.SPRING_LOADED);
         }
