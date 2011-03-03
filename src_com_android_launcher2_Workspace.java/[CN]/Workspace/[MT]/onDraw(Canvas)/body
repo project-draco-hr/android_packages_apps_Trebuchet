@@ -1,6 +1,6 @@
 {
   updateWallpaperOffsets();
-  if (mBackground != null && mBackgroundAlpha > 0.0f) {
+  if (mBackground != null && mBackgroundAlpha > 0.0f && mDrawBackground) {
     int alpha=(int)(mBackgroundAlpha * 255);
     if (mDrawCustomizeTrayBackground) {
       mCustomizationDrawer.getLocationOnScreen(mCustomizationDrawerPos);

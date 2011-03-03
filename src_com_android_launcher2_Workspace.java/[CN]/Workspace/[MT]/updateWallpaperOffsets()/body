@@ -11,9 +11,8 @@
     updateNow=keepUpdating=mWallpaperOffset.computeScrollOffset();
   }
   if (updateNow) {
-    IBinder token=getWindowToken();
-    if (token != null) {
-      mWallpaperManager.setWallpaperOffsets(getWindowToken(),mWallpaperOffset.getCurrX(),mWallpaperOffset.getCurrY());
+    if (mWindowToken != null) {
+      mWallpaperManager.setWallpaperOffsets(mWindowToken,mWallpaperOffset.getCurrX(),mWallpaperOffset.getCurrY());
     }
   }
   if (keepUpdating) {

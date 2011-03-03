@@ -1,4 +1,5 @@
 {
-  mTabBar.setLayerType(LAYER_TYPE_NONE,null);
-  mAllApps.setLayerType(LAYER_TYPE_NONE,null);
+  setLayerType(LAYER_TYPE_NONE,null);
+  mLauncher.getWorkspace().enableBackground();
+  mBackground.setVisibility(GONE);
 }

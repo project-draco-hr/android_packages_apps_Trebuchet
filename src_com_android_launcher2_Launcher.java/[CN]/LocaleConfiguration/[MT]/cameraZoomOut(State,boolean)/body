@@ -2,6 +2,7 @@
   final Resources res=getResources();
   final boolean toAllApps=(toState == State.ALL_APPS);
   final int duration=toAllApps ? res.getInteger(R.integer.config_allAppsZoomInTime) : res.getInteger(R.integer.config_customizeZoomInTime);
+  final int fadeDuration=toAllApps ? res.getInteger(R.integer.config_allAppsFadeInTime) : res.getInteger(R.integer.config_customizeFadeInTime);
   final float scale=toAllApps ? (float)res.getInteger(R.integer.config_allAppsZoomScaleFactor) : (float)res.getInteger(R.integer.config_customizeZoomScaleFactor);
   final View toView=toAllApps ? (View)mAllAppsGrid : mHomeCustomizationDrawer;
   setPivotsForZoom(toView,toState,scale);
@@ -26,7 +27,7 @@
 );
     if (toAllApps) {
       toView.setFastAlpha(0f);
-      ValueAnimator alphaAnim=ValueAnimator.ofFloat(0f,1f).setDuration(duration);
+      ValueAnimator alphaAnim=ValueAnimator.ofFloat(0f,1f).setDuration(fadeDuration);
       alphaAnim.setInterpolator(new DecelerateInterpolator(1.5f));
       alphaAnim.addUpdateListener(new AnimatorUpdateListener(){
         public void onAnimationUpdate(        ValueAnimator animation){

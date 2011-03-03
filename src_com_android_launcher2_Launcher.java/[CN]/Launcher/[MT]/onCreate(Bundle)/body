@@ -21,7 +21,7 @@
   mHomeCustomizationDrawer=(TabHost)findViewById(R.id.customization_drawer);
   if (mHomeCustomizationDrawer != null) {
     mHomeCustomizationDrawer.setup();
-    mCustomizePagedView=(CustomizePagedView)mInflater.inflate(R.layout.customization_drawer,mHomeCustomizationDrawer,false);
+    mCustomizePagedView=(CustomizePagedView)mInflater.inflate(R.layout.customization_drawer_tab_contents,mHomeCustomizationDrawer,false);
     TabContentFactory contentFactory=new TabContentFactory(){
       public View createTabContent(      String tag){
         return mCustomizePagedView;

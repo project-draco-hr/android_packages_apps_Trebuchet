@@ -1,3 +1,4 @@
 {
   mAllApps.setLauncher(launcher);
+  mLauncher=launcher;
 }

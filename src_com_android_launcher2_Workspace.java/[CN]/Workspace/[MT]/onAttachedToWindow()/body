@@ -1,5 +1,6 @@
 {
   super.onAttachedToWindow();
+  mWindowToken=getWindowToken();
   computeScroll();
-  mDragController.setWindowToken(getWindowToken());
+  mDragController.setWindowToken(mWindowToken);
 }
