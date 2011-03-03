@@ -1,9 +1,16 @@
 {
   final CellLayout.LayoutParams lp=(CellLayout.LayoutParams)getLayoutParams();
-  final int newWidth=mWidgetView.getWidth() + 2 * FRAME_MARGIN;
-  final int newHeight=mWidgetView.getHeight() + 2 * FRAME_MARGIN;
-  final int newX=mWidgetView.getLeft() - FRAME_MARGIN;
-  final int newY=mWidgetView.getTop() - FRAME_MARGIN;
+  int newWidth=mWidgetView.getWidth() + 2 * mBackgroundPadding;
+  int newHeight=mWidgetView.getHeight() + 2 * mBackgroundPadding;
+  int newX=mWidgetView.getLeft() - mBackgroundPadding;
+  int newY=mWidgetView.getTop() - mBackgroundPadding;
+  if (newY < 0) {
+    newHeight-=-newY;
+    newY=0;
+  }
+  if (newY + newHeight > mCellLayout.getHeight()) {
+    newHeight-=newY + newHeight - mCellLayout.getHeight();
+  }
   if (!animate) {
     lp.width=newWidth;
     lp.height=newHeight;

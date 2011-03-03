@@ -1,10 +1,10 @@
 {
   boolean horizontalActive=(mResizeMode & AppWidgetProviderInfo.RESIZE_HORIZONTAL) != 0;
   boolean verticalActive=(mResizeMode & AppWidgetProviderInfo.RESIZE_VERTICAL) != 0;
-  mLeftBorderActive=(x < BORDER_WIDTH) && horizontalActive;
-  mRightBorderActive=(x > getWidth() - BORDER_WIDTH) && horizontalActive;
-  mTopBorderActive=(y < BORDER_WIDTH) && verticalActive;
-  mBottomBorderActive=(y > getHeight() - BORDER_WIDTH) && verticalActive;
+  mLeftBorderActive=(x < mTouchTargetWidth) && horizontalActive;
+  mRightBorderActive=(x > getWidth() - mTouchTargetWidth) && horizontalActive;
+  mTopBorderActive=(y < mTouchTargetWidth) && verticalActive;
+  mBottomBorderActive=(y > getHeight() - mTouchTargetWidth) && verticalActive;
   boolean anyBordersActive=mLeftBorderActive || mRightBorderActive || mTopBorderActive|| mBottomBorderActive;
   mBaselineWidth=getMeasuredWidth();
   mBaselineHeight=getMeasuredHeight();
@@ -13,10 +13,10 @@
   mRunningHInc=0;
   mRunningVInc=0;
   if (anyBordersActive) {
-    mLeftHandle.setAlpha(mLeftBorderActive ? 1.0f : 0.5f);
-    mRightHandle.setAlpha(mRightBorderActive ? 1.0f : 0.5f);
-    mTopHandle.setAlpha(mTopBorderActive ? 1.0f : 0.5f);
-    mBottomHandle.setAlpha(mBottomBorderActive ? 1.0f : 0.5f);
+    mLeftHandle.setAlpha(mLeftBorderActive ? 1.0f : DIMMED_HANDLE_ALPHA);
+    mRightHandle.setAlpha(mRightBorderActive ? 1.0f : DIMMED_HANDLE_ALPHA);
+    mTopHandle.setAlpha(mTopBorderActive ? 1.0f : DIMMED_HANDLE_ALPHA);
+    mBottomHandle.setAlpha(mBottomBorderActive ? 1.0f : DIMMED_HANDLE_ALPHA);
   }
   mCellLayout.getExpandabilityArrayForView(mWidgetView,mExpandability);
   return anyBordersActive;

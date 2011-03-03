@@ -42,11 +42,6 @@
     lp.cellVSpan+=vSpanInc;
     lp.cellY+=cellYInc;
   }
-  try {
-    mCellLayout.getExpandabilityArrayForView(mWidgetView,mExpandability);
-  }
- catch (  Exception e) {
-    System.out.println("Problem!");
-  }
+  mCellLayout.getExpandabilityArrayForView(mWidgetView,mExpandability);
   mCellLayout.markCellsAsOccupiedForView(mWidgetView);
 }
