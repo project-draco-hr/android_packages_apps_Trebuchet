@@ -21,6 +21,7 @@ case MotionEvent.ACTION_MOVE:
 handleMoveEvent(screenX,screenY);
 break;
 case MotionEvent.ACTION_UP:
+handleMoveEvent(screenX,screenY);
 mHandler.removeCallbacks(mScrollRunnable);
 if (mDragging) {
 drop(screenX,screenY);
