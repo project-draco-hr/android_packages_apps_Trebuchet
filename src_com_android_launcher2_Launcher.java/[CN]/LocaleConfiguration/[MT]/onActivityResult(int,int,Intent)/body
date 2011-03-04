@@ -1,37 +1,23 @@
 {
   mWaitingForResult=false;
   if (resultCode == RESULT_OK && mAddScreen != -1) {
-switch (requestCode) {
-case REQUEST_PICK_APPLICATION:
-      completeAddApplication(this,data,mAddScreen,mAddIntersectCellX,mAddIntersectCellY);
-    break;
-case REQUEST_PICK_SHORTCUT:
-  processShortcut(data);
-break;
-case REQUEST_CREATE_SHORTCUT:
-completeAddShortcut(data,mAddScreen,mAddIntersectCellX,mAddIntersectCellY);
-break;
-case REQUEST_PICK_LIVE_FOLDER:
-addLiveFolder(data);
-break;
-case REQUEST_CREATE_LIVE_FOLDER:
-completeAddLiveFolder(data,mAddScreen,mAddIntersectCellX,mAddIntersectCellY);
-break;
-case REQUEST_PICK_APPWIDGET:
-addAppWidgetFromPick(data);
-break;
-case REQUEST_CREATE_APPWIDGET:
-int appWidgetId=data.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,-1);
-completeAddAppWidget(appWidgetId,mAddScreen);
-break;
-case REQUEST_PICK_WALLPAPER:
-break;
-}
-}
- else if ((requestCode == REQUEST_PICK_APPWIDGET || requestCode == REQUEST_CREATE_APPWIDGET) && resultCode == RESULT_CANCELED && data != null) {
-int appWidgetId=data.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,-1);
-if (appWidgetId != -1) {
-mAppWidgetHost.deleteAppWidgetId(appWidgetId);
-}
-}
+    final PendingAddArguments args=new PendingAddArguments();
+    args.requestCode=requestCode;
+    args.intent=data;
+    args.screen=mAddScreen;
+    args.cellX=mAddIntersectCellX;
+    args.cellY=mAddIntersectCellY;
+    if (isWorkspaceLocked()) {
+      sPendingAddList.add(args);
+    }
+ else {
+      completeAdd(args);
+    }
+  }
+ else   if ((requestCode == REQUEST_PICK_APPWIDGET || requestCode == REQUEST_CREATE_APPWIDGET) && resultCode == RESULT_CANCELED && data != null) {
+    int appWidgetId=data.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,-1);
+    if (appWidgetId != -1) {
+      mAppWidgetHost.deleteAppWidgetId(appWidgetId);
+    }
+  }
 }
