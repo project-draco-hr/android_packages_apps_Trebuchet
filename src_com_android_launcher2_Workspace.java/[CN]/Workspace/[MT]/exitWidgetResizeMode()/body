@@ -1,0 +1,4 @@
+{
+  final CellLayout currentLayout=(CellLayout)getChildAt(getCurrentPage());
+  currentLayout.getChildrenLayout().clearAllResizeFrames();
+}
