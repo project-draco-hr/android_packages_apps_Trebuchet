@@ -1,37 +1,25 @@
 {
   boolean handled=false;
-  Rect hitRect=new Rect();
   int action=ev.getAction();
   int x=(int)ev.getX();
   int y=(int)ev.getY();
   if (ev.getAction() == MotionEvent.ACTION_DOWN) {
-    for (    AppWidgetResizeFrame child : mResizeFrames) {
-      child.getHitRect(hitRect);
-      if (hitRect.contains(x,y)) {
-        if (child.beginResizeIfPointInRegion(x - child.getLeft(),y - child.getTop())) {
-          mCurrentResizeFrame=child;
-          mIsWidgetBeingResized=true;
-          mXDown=x;
-          mYDown=y;
-          requestDisallowInterceptTouchEvent(true);
-          return true;
-        }
+    if (ev.getAction() == MotionEvent.ACTION_DOWN) {
+      if (handleTouchDown(ev)) {
+        return true;
       }
     }
-    mCurrentResizeFrame=null;
   }
   if (mCurrentResizeFrame != null) {
+    handled=true;
 switch (action) {
 case MotionEvent.ACTION_MOVE:
       mCurrentResizeFrame.visualizeResizeForDelta(x - mXDown,y - mYDown);
     break;
 case MotionEvent.ACTION_CANCEL:
 case MotionEvent.ACTION_UP:
-{
-    mCurrentResizeFrame.commitResizeForDelta(x - mXDown,y - mYDown);
-    mIsWidgetBeingResized=false;
-    handled=true;
-  }
+  mCurrentResizeFrame.commitResizeForDelta(x - mXDown,y - mYDown);
+mCurrentResizeFrame=null;
 }
 }
 return handled;

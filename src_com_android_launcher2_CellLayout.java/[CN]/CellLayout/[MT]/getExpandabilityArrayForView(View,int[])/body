@@ -1,40 +1,40 @@
 {
   final LayoutParams lp=(LayoutParams)view.getLayoutParams();
   boolean flag;
-  expandability[0]=0;
+  expandability[AppWidgetResizeFrame.LEFT]=0;
   for (int x=lp.cellX - 1; x >= 0; x--) {
     flag=false;
     for (int y=lp.cellY; y < lp.cellY + lp.cellVSpan; y++) {
       if (mOccupied[x][y])       flag=true;
     }
     if (flag)     break;
-    expandability[0]++;
+    expandability[AppWidgetResizeFrame.LEFT]++;
   }
-  expandability[1]=0;
+  expandability[AppWidgetResizeFrame.TOP]=0;
   for (int y=lp.cellY - 1; y >= 0; y--) {
     flag=false;
     for (int x=lp.cellX; x < lp.cellX + lp.cellHSpan; x++) {
       if (mOccupied[x][y])       flag=true;
     }
     if (flag)     break;
-    expandability[1]++;
+    expandability[AppWidgetResizeFrame.TOP]++;
   }
-  expandability[2]=0;
+  expandability[AppWidgetResizeFrame.RIGHT]=0;
   for (int x=lp.cellX + lp.cellHSpan; x < mCountX; x++) {
     flag=false;
     for (int y=lp.cellY; y < lp.cellY + lp.cellVSpan; y++) {
       if (mOccupied[x][y])       flag=true;
     }
     if (flag)     break;
-    expandability[2]++;
+    expandability[AppWidgetResizeFrame.RIGHT]++;
   }
-  expandability[3]=0;
+  expandability[AppWidgetResizeFrame.BOTTOM]=0;
   for (int y=lp.cellY + lp.cellVSpan; y < mCountY; y++) {
     flag=false;
     for (int x=lp.cellX; x < lp.cellX + lp.cellHSpan; x++) {
       if (mOccupied[x][y])       flag=true;
     }
     if (flag)     break;
-    expandability[3]++;
+    expandability[AppWidgetResizeFrame.BOTTOM]++;
   }
 }
