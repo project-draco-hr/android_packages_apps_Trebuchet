@@ -10,6 +10,7 @@
     dismissPreview(mNextView);
   }
  else {
+    mWorkspace.exitWidgetResizeMode();
     mWorkspace.showOutlinesTemporarily();
   }
 }

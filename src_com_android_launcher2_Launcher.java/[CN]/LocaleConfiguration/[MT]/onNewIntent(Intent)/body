@@ -6,6 +6,7 @@
     if (LauncherApplication.isScreenXLarge()) {
       mWorkspace.unshrink(alreadyOnHome);
     }
+    mWorkspace.exitWidgetResizeMode();
     if (alreadyOnHome && mState == State.WORKSPACE && !mWorkspace.isTouchActive()) {
       mWorkspace.moveToDefaultScreen(true);
     }
