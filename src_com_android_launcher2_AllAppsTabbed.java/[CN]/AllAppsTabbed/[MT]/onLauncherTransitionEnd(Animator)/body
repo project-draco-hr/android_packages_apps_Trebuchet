@@ -1,0 +1,8 @@
+{
+  if (animation != null) {
+    setLayerType(LAYER_TYPE_NONE,null);
+  }
+  mLauncher.getWorkspace().enableBackground();
+  mBackground.setVisibility(GONE);
+  mAllApps.allowHardwareLayerCreation();
+}

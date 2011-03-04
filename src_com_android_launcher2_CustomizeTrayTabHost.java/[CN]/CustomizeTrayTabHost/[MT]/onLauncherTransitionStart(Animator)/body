@@ -1,0 +1,8 @@
+{
+  if (animation != null) {
+    setLayerType(LAYER_TYPE_HARDWARE,null);
+    if (!mFirstLayout) {
+      buildLayer();
+    }
+  }
+}

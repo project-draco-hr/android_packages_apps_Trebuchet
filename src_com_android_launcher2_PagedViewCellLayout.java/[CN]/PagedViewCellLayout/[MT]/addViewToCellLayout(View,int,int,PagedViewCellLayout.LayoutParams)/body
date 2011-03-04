@@ -7,7 +7,7 @@
     mChildren.addView(child,index,lp);
     if (child instanceof PagedViewIcon) {
       PagedViewIcon pagedViewIcon=(PagedViewIcon)child;
-      if (mUseHardwareLayers) {
+      if (mAllowHardwareLayerCreation) {
         pagedViewIcon.disableCache();
       }
       mHolographicChildren.addView(pagedViewIcon.getHolographicOutlineView(),index,lp);

@@ -87,6 +87,9 @@
     float rotationScaleY=getYScaleForScreen(i);
     oldAlphas[i]=cl.getAlpha();
     newAlphas[i]=finalAlpha;
+    if (animated && (oldAlphas[i] != 0f || newAlphas[i] != 0f)) {
+      cl.buildChildrenLayer();
+    }
     if (animated) {
       oldXs[i]=cl.getX();
       oldYs[i]=cl.getY();

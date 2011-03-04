@@ -2,8 +2,6 @@
   mZoom=zoom;
   cancelLongPress();
   if (isVisible()) {
-    getParent().bringChildToFront(this);
-    setVisibility(View.VISIBLE);
     if (animate) {
       startAnimation(AnimationUtils.loadAnimation(getContext(),R.anim.all_apps_2d_fade_in));
     }
