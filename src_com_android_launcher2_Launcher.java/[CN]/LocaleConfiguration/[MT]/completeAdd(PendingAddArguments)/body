@@ -1,0 +1,28 @@
+{
+switch (args.requestCode) {
+case REQUEST_PICK_APPLICATION:
+    completeAddApplication(args.intent,args.screen,args.cellX,args.cellY);
+  break;
+case REQUEST_PICK_SHORTCUT:
+processShortcut(args.intent);
+break;
+case REQUEST_CREATE_SHORTCUT:
+completeAddShortcut(args.intent,args.screen,args.cellX,args.cellY);
+break;
+case REQUEST_PICK_LIVE_FOLDER:
+addLiveFolder(args.intent);
+break;
+case REQUEST_CREATE_LIVE_FOLDER:
+completeAddLiveFolder(args.intent,args.screen,args.cellX,args.cellY);
+break;
+case REQUEST_PICK_APPWIDGET:
+addAppWidgetFromPick(args.intent);
+break;
+case REQUEST_CREATE_APPWIDGET:
+int appWidgetId=args.intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,-1);
+completeAddAppWidget(appWidgetId,args.screen);
+break;
+case REQUEST_PICK_WALLPAPER:
+break;
+}
+}

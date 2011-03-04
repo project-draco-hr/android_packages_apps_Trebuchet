@@ -30,4 +30,8 @@
     }
   }
   mWorkspaceLoading=false;
+  for (int i=0; i < sPendingAddList.size(); i++) {
+    completeAdd(sPendingAddList.get(i));
+  }
+  sPendingAddList.clear();
 }
