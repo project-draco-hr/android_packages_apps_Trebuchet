@@ -1,0 +1,10 @@
+{
+  super.onSizeChanged(w,h,oldw,oldh);
+  if (w > 0 && h > 0) {
+    mUpdateCachedBitmap=true;
+    mCache=Bitmap.createBitmap(w,h,Bitmap.Config.ARGB_8888);
+  }
+ else {
+    mCache=null;
+  }
+}

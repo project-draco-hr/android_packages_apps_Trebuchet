@@ -1,0 +1,10 @@
+{
+  TypedArray a=context.obtainStyledAttributes(attrs,R.styleable.StrokedTextView,defStyle,0);
+  mStrokeColor=a.getColor(R.styleable.StrokedTextView_strokeColor,0xFF000000);
+  mStrokeWidth=a.getFloat(R.styleable.StrokedTextView_strokeWidth,0.0f);
+  mTextColor=a.getColor(R.styleable.StrokedTextView_strokeTextColor,0xFFFFFFFF);
+  a.recycle();
+  mUpdateCachedBitmap=true;
+  mPaint.setAntiAlias(true);
+  mPaint.setStyle(Paint.Style.FILL_AND_STROKE);
+}
