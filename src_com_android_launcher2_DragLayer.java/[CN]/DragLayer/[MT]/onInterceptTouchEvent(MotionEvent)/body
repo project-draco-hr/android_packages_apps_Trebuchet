@@ -1,13 +1,15 @@
 {
-  post(new Runnable(){
-    public void run(){
-      Workspace w=(Workspace)findViewById(R.id.workspace);
-      CellLayout currentPage=(CellLayout)w.getChildAt(w.getCurrentPage());
-      if (!currentPage.getChildrenLayout().isWidgetBeingResized()) {
-        currentPage.getChildrenLayout().clearAllResizeFrames();
+  final Workspace w=(Workspace)findViewById(R.id.workspace);
+  final CellLayout currentPage=(CellLayout)w.getChildAt(w.getCurrentPage());
+  if (currentPage.getChildrenLayout().hasResizeFrames()) {
+    post(new Runnable(){
+      public void run(){
+        if (!currentPage.getChildrenLayout().isWidgetBeingResized()) {
+          currentPage.getChildrenLayout().clearAllResizeFrames();
+        }
       }
     }
-  }
 );
+  }
   return mDragController.onInterceptTouchEvent(ev);
 }

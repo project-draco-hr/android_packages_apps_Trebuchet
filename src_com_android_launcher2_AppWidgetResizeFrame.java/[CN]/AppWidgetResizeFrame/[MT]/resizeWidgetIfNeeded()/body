@@ -9,28 +9,28 @@
   mCellLayout.markCellsAsUnoccupiedForView(mWidgetView);
   CellLayout.LayoutParams lp=(CellLayout.LayoutParams)mWidgetView.getLayoutParams();
   if (mLeftBorderActive) {
-    cellXInc=Math.max(-mExpandability[0],hSpanInc);
+    cellXInc=Math.max(-mExpandability[LEFT],hSpanInc);
     cellXInc=Math.min(lp.cellHSpan - mMinHSpan,cellXInc);
     hSpanInc*=-1;
-    hSpanInc=Math.min(mExpandability[0],hSpanInc);
+    hSpanInc=Math.min(mExpandability[LEFT],hSpanInc);
     hSpanInc=Math.max(-(lp.cellHSpan - mMinHSpan),hSpanInc);
     mRunningHInc-=hSpanInc;
   }
  else   if (mRightBorderActive) {
-    hSpanInc=Math.min(mExpandability[2],hSpanInc);
+    hSpanInc=Math.min(mExpandability[RIGHT],hSpanInc);
     hSpanInc=Math.max(-(lp.cellHSpan - mMinHSpan),hSpanInc);
     mRunningHInc+=hSpanInc;
   }
   if (mTopBorderActive) {
-    cellYInc=Math.max(-mExpandability[1],vSpanInc);
+    cellYInc=Math.max(-mExpandability[TOP],vSpanInc);
     cellYInc=Math.min(lp.cellVSpan - mMinVSpan,cellYInc);
     vSpanInc*=-1;
-    vSpanInc=Math.min(mExpandability[1],vSpanInc);
+    vSpanInc=Math.min(mExpandability[TOP],vSpanInc);
     vSpanInc=Math.max(-(lp.cellVSpan - mMinVSpan),vSpanInc);
     mRunningVInc-=vSpanInc;
   }
  else   if (mBottomBorderActive) {
-    vSpanInc=Math.min(mExpandability[3],vSpanInc);
+    vSpanInc=Math.min(mExpandability[BOTTOM],vSpanInc);
     vSpanInc=Math.max(-(lp.cellVSpan - mMinVSpan),vSpanInc);
     mRunningVInc+=vSpanInc;
   }
