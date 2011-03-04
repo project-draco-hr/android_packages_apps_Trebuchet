@@ -1,0 +1,39 @@
+{
+  if (mCache != null) {
+    if (mUpdateCachedBitmap) {
+      final int gap=getCompoundDrawablePadding();
+      final int w=getMeasuredWidth();
+      final int h=getMeasuredHeight();
+      final String text=getText().toString();
+      final Rect textBounds=new Rect();
+      final Paint textPaint=getPaint();
+      final int textWidth=(int)textPaint.measureText(text);
+      textPaint.getTextBounds("x",0,1,textBounds);
+      mCanvas.setBitmap(mCache);
+      mCanvas.drawColor(0,PorterDuff.Mode.CLEAR);
+      final int drawableLeft=getPaddingLeft();
+      final int drawableTop=getPaddingTop();
+      final Drawable[] drawables=getCompoundDrawables();
+      for (int i=0; i < drawables.length; ++i) {
+        if (drawables[i] != null) {
+          drawables[i].setBounds(drawableLeft,drawableTop,drawableLeft + drawables[i].getIntrinsicWidth(),drawableTop + drawables[i].getIntrinsicHeight());
+          drawables[i].draw(mCanvas);
+        }
+      }
+      final int left=w - getPaddingRight() - textWidth;
+      final int bottom=(h + textBounds.height()) / 2;
+      mPaint.setStrokeWidth(mStrokeWidth);
+      mPaint.setColor(mStrokeColor);
+      mPaint.setTextSize(getTextSize());
+      mCanvas.drawText(text,left,bottom,mPaint);
+      mPaint.setStrokeWidth(0);
+      mPaint.setColor(mTextColor);
+      mCanvas.drawText(text,left,bottom,mPaint);
+      mUpdateCachedBitmap=false;
+    }
+    canvas.drawBitmap(mCache,0,0,mPaint);
+  }
+ else {
+    super.onDraw(canvas);
+  }
+}
