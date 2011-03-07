@@ -13,7 +13,7 @@
     mWorkspace.shrink(ShrinkState.TOP,animated);
   }
   if (animated) {
-    ValueAnimator scaleAnim=ValueAnimator.ofFloat(0f,1f).setDuration(duration);
+    final ValueAnimator scaleAnim=ValueAnimator.ofFloat(0f,1f).setDuration(duration);
     scaleAnim.setInterpolator(new Workspace.ZoomOutInterpolator());
     scaleAnim.addUpdateListener(new AnimatorUpdateListener(){
       public void onAnimationUpdate(      ValueAnimator animation){
@@ -39,8 +39,8 @@
 );
       alphaAnim.start();
     }
-    if (toView instanceof LauncherAnimatable) {
-      ((LauncherAnimatable)toView).onLauncherAnimationStart();
+    if (toView instanceof LauncherTransitionable) {
+      ((LauncherTransitionable)toView).onLauncherTransitionStart(scaleAnim);
     }
     scaleAnim.addListener(new AnimatorListenerAdapter(){
       @Override public void onAnimationStart(      Animator animation){
@@ -54,8 +54,8 @@
       @Override public void onAnimationEnd(      Animator animation){
         toView.setScaleX(1.0f);
         toView.setScaleY(1.0f);
-        if (toView instanceof LauncherAnimatable) {
-          ((LauncherAnimatable)toView).onLauncherAnimationEnd();
+        if (toView instanceof LauncherTransitionable) {
+          ((LauncherTransitionable)toView).onLauncherTransitionEnd(scaleAnim);
         }
       }
     }
@@ -78,6 +78,10 @@
     toView.setScaleX(1.0f);
     toView.setScaleY(1.0f);
     toView.setVisibility(View.VISIBLE);
+    if (toView instanceof LauncherTransitionable) {
+      ((LauncherTransitionable)toView).onLauncherTransitionStart(null);
+      ((LauncherTransitionable)toView).onLauncherTransitionEnd(null);
+    }
     hideAndShowToolbarButtons(toState,null,null);
   }
 }

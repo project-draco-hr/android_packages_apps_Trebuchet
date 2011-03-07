@@ -27,7 +27,7 @@
       }
     }
 );
-    ValueAnimator alphaAnim=ValueAnimator.ofFloat(0f,1f);
+    final ValueAnimator alphaAnim=ValueAnimator.ofFloat(0f,1f);
     alphaAnim.setDuration(res.getInteger(R.integer.config_allAppsFadeOutTime));
     alphaAnim.setInterpolator(new DecelerateInterpolator(1.5f));
     alphaAnim.addUpdateListener(new AnimatorUpdateListener(){
@@ -38,14 +38,14 @@
       }
     }
 );
-    if (fromView instanceof LauncherAnimatable) {
-      ((LauncherAnimatable)fromView).onLauncherAnimationStart();
+    if (fromView instanceof LauncherTransitionable) {
+      ((LauncherTransitionable)fromView).onLauncherTransitionStart(alphaAnim);
     }
     alphaAnim.addListener(new AnimatorListenerAdapter(){
       @Override public void onAnimationEnd(      Animator animation){
         fromView.setVisibility(View.GONE);
-        if (fromView instanceof LauncherAnimatable) {
-          ((LauncherAnimatable)fromView).onLauncherAnimationEnd();
+        if (fromView instanceof LauncherTransitionable) {
+          ((LauncherTransitionable)fromView).onLauncherTransitionEnd(alphaAnim);
         }
       }
     }
@@ -63,6 +63,10 @@
   }
  else {
     fromView.setVisibility(View.GONE);
+    if (fromView instanceof LauncherTransitionable) {
+      ((LauncherTransitionable)fromView).onLauncherTransitionStart(null);
+      ((LauncherTransitionable)fromView).onLauncherTransitionEnd(null);
+    }
     if (!springLoaded) {
       hideAndShowToolbarButtons(State.WORKSPACE,null,null);
     }

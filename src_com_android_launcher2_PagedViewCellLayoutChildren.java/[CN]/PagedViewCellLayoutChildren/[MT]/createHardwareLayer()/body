@@ -1,5 +1,5 @@
 {
-  if (getLayerType() == LAYER_TYPE_NONE) {
+  if (getLayerType() != LAYER_TYPE_HARDWARE) {
     setLayerType(LAYER_TYPE_HARDWARE,null);
   }
 }

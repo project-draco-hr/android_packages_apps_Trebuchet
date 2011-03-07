@@ -1,0 +1,10 @@
+{
+  if (animation != null) {
+    setLayerType(LAYER_TYPE_HARDWARE,null);
+    mLauncher.getWorkspace().disableBackground();
+    mBackground.setVisibility(VISIBLE);
+    if (!mFirstLayout) {
+      buildLayer();
+    }
+  }
+}
