@@ -3,11 +3,14 @@
   int curNumPages=getChildCount();
   int extraPageDiff=curNumPages - numPages;
   for (int i=0; i < extraPageDiff; ++i) {
+    PagedViewCellLayout page=(PagedViewCellLayout)getChildAt(numPages);
     removeViewAt(numPages);
   }
   for (int i=curNumPages; i < numPages; ++i) {
     PagedViewCellLayout layout=new PagedViewCellLayout(getContext());
-    layout.enableHardwareLayers();
+    if (mAllowHardwareLayerCreation) {
+      layout.allowHardwareLayerCreation();
+    }
     layout.setCellCount(mCellCountX,mCellCountY);
     layout.setPadding(mPageLayoutPaddingLeft,mPageLayoutPaddingTop,mPageLayoutPaddingRight,mPageLayoutPaddingBottom);
     layout.setGap(mPageLayoutWidthGap,mPageLayoutHeightGap);

@@ -1,5 +1,0 @@
-{
-  setLayerType(LAYER_TYPE_HARDWARE,null);
-  mLauncher.getWorkspace().disableBackground();
-  mBackground.setVisibility(VISIBLE);
-}

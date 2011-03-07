@@ -1,0 +1,8 @@
+{
+  if (!mAllowHardwareLayerCreation) {
+    mAllowHardwareLayerCreation=true;
+    if (mCreateHardwareLayersIfAllowed) {
+      createHardwareLayers();
+    }
+  }
+}
