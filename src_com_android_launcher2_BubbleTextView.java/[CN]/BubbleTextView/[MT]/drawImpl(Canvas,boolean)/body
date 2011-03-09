@@ -1,0 +1,36 @@
+{
+  if (!preventRecursion && isFocused() && mPressedOrFocusedBackground == null) {
+    mPressedOrFocusedBackground=createGlowingOutline(mTempCanvas,mFocusedGlowColor,mFocusedOutlineColor);
+  }
+  if (mPressedOrFocusedBackground != null && (isPressed() || isFocused() || mStayPressed)) {
+    canvas.save(Canvas.CLIP_SAVE_FLAG);
+    int padding=HolographicOutlineHelper.MAX_OUTER_BLUR_RADIUS / 2;
+    canvas.clipRect(-padding + mScrollX,-padding + mScrollY,getWidth() + padding + mScrollX,getHeight() + padding + mScrollY,Region.Op.REPLACE);
+    canvas.drawBitmap(mPressedOrFocusedBackground,mScrollX - padding,mScrollY - padding,mTempPaint);
+    canvas.restore();
+  }
+  final Drawable background=mBackground;
+  if (background != null) {
+    final int scrollX=mScrollX;
+    final int scrollY=mScrollY;
+    if (mBackgroundSizeChanged) {
+      background.setBounds(0,0,mRight - mLeft,mBottom - mTop);
+      mBackgroundSizeChanged=false;
+    }
+    if ((scrollX | scrollY) == 0) {
+      background.draw(canvas);
+    }
+ else {
+      canvas.translate(scrollX,scrollY);
+      background.draw(canvas);
+      canvas.translate(-scrollX,-scrollY);
+    }
+  }
+  getPaint().setShadowLayer(SHADOW_LARGE_RADIUS,0.0f,SHADOW_Y_OFFSET,SHADOW_LARGE_COLOUR);
+  super.draw(canvas);
+  canvas.save(Canvas.CLIP_SAVE_FLAG);
+  canvas.clipRect(mScrollX,mScrollY + getExtendedPaddingTop(),mScrollX + getWidth(),mScrollY + getHeight(),Region.Op.INTERSECT);
+  getPaint().setShadowLayer(SHADOW_SMALL_RADIUS,0.0f,0.0f,SHADOW_SMALL_COLOUR);
+  super.draw(canvas);
+  canvas.restore();
+}
