@@ -1,10 +1,18 @@
 {
   int xThreshold=mCellLayout.getCellWidth() + mCellLayout.getWidthGap();
   int yThreshold=mCellLayout.getCellHeight() + mCellLayout.getHeightGap();
-  int hSpanInc=(int)Math.round(1.0f * mDeltaX / xThreshold) - mRunningHInc;
-  int vSpanInc=(int)Math.round(1.0f * mDeltaY / yThreshold) - mRunningVInc;
+  float hSpanIncF=1.0f * mDeltaX / xThreshold - mRunningHInc;
+  float vSpanIncF=1.0f * mDeltaY / yThreshold - mRunningVInc;
+  int hSpanInc=0;
+  int vSpanInc=0;
   int cellXInc=0;
   int cellYInc=0;
+  if (Math.abs(hSpanIncF) > RESIZE_THRESHOLD) {
+    hSpanInc=Math.round(hSpanIncF);
+  }
+  if (Math.abs(vSpanIncF) > RESIZE_THRESHOLD) {
+    vSpanInc=Math.round(vSpanIncF);
+  }
   if (hSpanInc == 0 && vSpanInc == 0)   return;
   mCellLayout.markCellsAsUnoccupiedForView(mWidgetView);
   CellLayout.LayoutParams lp=(CellLayout.LayoutParams)mWidgetView.getLayoutParams();
