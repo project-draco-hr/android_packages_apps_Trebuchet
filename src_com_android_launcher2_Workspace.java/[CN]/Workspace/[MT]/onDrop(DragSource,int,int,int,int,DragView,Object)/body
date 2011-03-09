@@ -20,10 +20,12 @@
     }
   }
   if (source != this) {
+    final int[] touchXY=new int[]{originX,originY};
     if ((mIsSmall || mIsInUnshrinkAnimation) && !mLauncher.isAllAppsVisible()) {
+      ((ItemInfo)dragInfo).dropPos=touchXY;
       return;
     }
-    onDropExternal(new int[]{originX,originY},dragInfo,mDragTargetLayout,false);
+    onDropExternal(touchXY,dragInfo,mDragTargetLayout,false);
   }
  else   if (mDragInfo != null) {
     final View cell=mDragInfo.cell;
