@@ -10,7 +10,12 @@
       mPressedOrFocusedBackground=null;
     }
     if (isFocused()) {
-      mPressedOrFocusedBackground=createGlowingOutline(mTempCanvas,mFocusedGlowColor,mFocusedOutlineColor);
+      if (mLayout == null) {
+        mPressedOrFocusedBackground=null;
+      }
+ else {
+        mPressedOrFocusedBackground=createGlowingOutline(mTempCanvas,mFocusedGlowColor,mFocusedOutlineColor);
+      }
       mStayPressed=false;
       invalidatePressedOrFocusedBackground();
     }
