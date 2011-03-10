@@ -11,6 +11,7 @@
   if (xMoved || xPaged || yMoved) {
     if (mUsePagingTouchSlop ? xPaged : xMoved) {
       mTouchState=TOUCH_STATE_SCROLLING;
+      mTotalMotionX+=Math.abs(mLastMotionX - x);
       mLastMotionX=x;
       mLastMotionXRemainder=0;
       mTouchX=mScrollX;
