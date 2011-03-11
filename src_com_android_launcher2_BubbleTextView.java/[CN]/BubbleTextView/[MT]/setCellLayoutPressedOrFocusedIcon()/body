@@ -1,0 +1,5 @@
+{
+  CellLayoutChildren parent=(CellLayoutChildren)getParent();
+  CellLayout cellLayout=(CellLayout)parent.getParent();
+  cellLayout.setPressedOrFocusedIcon((mPressedOrFocusedBackground != null) ? this : null);
+}

@@ -1,0 +1,10 @@
+{
+  BubbleTextView oldIcon=mPressedOrFocusedIcon;
+  mPressedOrFocusedIcon=icon;
+  if (oldIcon != null) {
+    invalidateBubbleTextView(oldIcon);
+  }
+  if (mPressedOrFocusedIcon != null) {
+    invalidateBubbleTextView(mPressedOrFocusedIcon);
+  }
+}
