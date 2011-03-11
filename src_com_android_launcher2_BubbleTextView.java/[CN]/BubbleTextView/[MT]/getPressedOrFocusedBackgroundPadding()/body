@@ -1,0 +1,3 @@
+{
+  return HolographicOutlineHelper.MAX_OUTER_BLUR_RADIUS / 2;
+}

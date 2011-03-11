@@ -5,6 +5,6 @@
   destCanvas.save();
   destCanvas.translate(-getScrollX() + padding / 2,-getScrollY() + padding / 2);
   destCanvas.clipRect(clipRect,Op.REPLACE);
-  drawImpl(destCanvas,true);
+  draw(destCanvas);
   destCanvas.restore();
 }

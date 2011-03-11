@@ -3,5 +3,5 @@
   if (!stayPressed) {
     mPressedOrFocusedBackground=null;
   }
-  invalidatePressedOrFocusedBackground();
+  setCellLayoutPressedOrFocusedIcon();
 }
