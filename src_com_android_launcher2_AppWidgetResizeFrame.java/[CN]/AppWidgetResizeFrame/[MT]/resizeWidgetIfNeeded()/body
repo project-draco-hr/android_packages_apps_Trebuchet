@@ -52,4 +52,5 @@
   }
   mCellLayout.getExpandabilityArrayForView(mWidgetView,mExpandability);
   mCellLayout.markCellsAsOccupiedForView(mWidgetView);
+  mWidgetView.requestLayout();
 }

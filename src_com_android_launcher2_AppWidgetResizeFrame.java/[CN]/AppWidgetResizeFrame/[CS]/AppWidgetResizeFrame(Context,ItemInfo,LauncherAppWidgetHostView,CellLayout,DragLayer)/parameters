@@ -2,3 +2,4 @@ Context context
 ItemInfo itemInfo
 LauncherAppWidgetHostView widgetView
 CellLayout cellLayout
+DragLayer dragLayer

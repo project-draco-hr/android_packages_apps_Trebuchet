@@ -1,6 +1,6 @@
 {
   updateDeltas(deltaX,deltaY);
-  CellLayout.LayoutParams lp=(CellLayout.LayoutParams)getLayoutParams();
+  DragLayer.LayoutParams lp=(DragLayer.LayoutParams)getLayoutParams();
   if (mLeftBorderActive) {
     lp.x=mBaselineX + mDeltaX;
     lp.width=mBaselineWidth - mDeltaX;

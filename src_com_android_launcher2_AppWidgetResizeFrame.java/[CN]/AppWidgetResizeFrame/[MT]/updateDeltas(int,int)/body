@@ -4,7 +4,7 @@
     mDeltaX=Math.min(mBaselineWidth - 2 * mTouchTargetWidth,mDeltaX);
   }
  else   if (mRightBorderActive) {
-    mDeltaX=Math.min(mCellLayout.getWidth() - (mBaselineX + mBaselineWidth),deltaX);
+    mDeltaX=Math.min(mDragLayer.getWidth() - (mBaselineX + mBaselineWidth),deltaX);
     mDeltaX=Math.max(-mBaselineWidth + 2 * mTouchTargetWidth,mDeltaX);
   }
   if (mTopBorderActive) {
@@ -12,7 +12,7 @@
     mDeltaY=Math.min(mBaselineHeight - 2 * mTouchTargetWidth,mDeltaY);
   }
  else   if (mBottomBorderActive) {
-    mDeltaY=Math.min(mCellLayout.getHeight() - (mBaselineY + mBaselineHeight),deltaY);
+    mDeltaY=Math.min(mDragLayer.getHeight() - (mBaselineY + mBaselineHeight),deltaY);
     mDeltaY=Math.max(-mBaselineHeight + 2 * mTouchTargetWidth,mDeltaY);
   }
 }

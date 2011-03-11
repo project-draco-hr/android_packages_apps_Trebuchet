@@ -56,14 +56,14 @@
         lp.cellY=mTargetCell[1];
         cell.setId(LauncherModel.getCellLayoutChildId(-1,mDragInfo.screen,mTargetCell[0],mTargetCell[1],mDragInfo.spanX,mDragInfo.spanY));
         if (cell instanceof LauncherAppWidgetHostView) {
-          final CellLayoutChildren children=dropTargetLayout.getChildrenLayout();
           final CellLayout cellLayout=dropTargetLayout;
           final LauncherAppWidgetHostView hostView=(LauncherAppWidgetHostView)cell;
           AppWidgetProviderInfo pinfo=hostView.getAppWidgetInfo();
           if (pinfo.resizeMode != AppWidgetProviderInfo.RESIZE_NONE) {
             post(new Runnable(){
               public void run(){
-                children.addResizeFrame(info,hostView,cellLayout);
+                DragLayer dragLayer=(DragLayer)mLauncher.findViewById(R.id.drag_layer);
+                dragLayer.addResizeFrame(info,hostView,cellLayout);
               }
             }
 );

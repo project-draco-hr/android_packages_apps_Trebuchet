@@ -1,15 +1,17 @@
 {
-  final CellLayout.LayoutParams lp=(CellLayout.LayoutParams)getLayoutParams();
+  final DragLayer.LayoutParams lp=(DragLayer.LayoutParams)getLayoutParams();
+  int xOffset=mCellLayout.getLeft() - mWorkspace.getScrollX();
+  int yOffset=mCellLayout.getTop() - mWorkspace.getScrollY();
   int newWidth=mWidgetView.getWidth() + 2 * mBackgroundPadding;
   int newHeight=mWidgetView.getHeight() + 2 * mBackgroundPadding;
-  int newX=mWidgetView.getLeft() - mBackgroundPadding;
-  int newY=mWidgetView.getTop() - mBackgroundPadding;
+  int newX=mWidgetView.getLeft() - mBackgroundPadding + xOffset;
+  int newY=mWidgetView.getTop() - mBackgroundPadding + yOffset;
   if (newY < 0) {
     newHeight-=-newY;
     newY=0;
   }
-  if (newY + newHeight > mCellLayout.getHeight()) {
-    newHeight-=newY + newHeight - mCellLayout.getHeight();
+  if (newY + newHeight > mDragLayer.getHeight()) {
+    newHeight-=newY + newHeight - mDragLayer.getHeight();
   }
   if (!animate) {
     lp.width=newWidth;
