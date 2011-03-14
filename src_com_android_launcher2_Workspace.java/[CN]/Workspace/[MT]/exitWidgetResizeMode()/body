@@ -1,4 +1,4 @@
 {
-  final CellLayout currentLayout=(CellLayout)getChildAt(getCurrentPage());
-  currentLayout.getChildrenLayout().clearAllResizeFrames();
+  DragLayer dragLayer=(DragLayer)mLauncher.findViewById(R.id.drag_layer);
+  dragLayer.clearAllResizeFrames();
 }

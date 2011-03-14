@@ -1,18 +1,9 @@
 {
-  final Workspace w=(Workspace)findViewById(R.id.workspace);
-  if (w != null) {
-    final CellLayout currentPage=(CellLayout)w.getChildAt(w.getCurrentPage());
-    final CellLayoutChildren childrenLayout=currentPage.getChildrenLayout();
-    if (childrenLayout.hasResizeFrames() && !childrenLayout.isWidgetBeingResized()) {
-      post(new Runnable(){
-        public void run(){
-          if (!childrenLayout.isWidgetBeingResized()) {
-            childrenLayout.clearAllResizeFrames();
-          }
-        }
-      }
-);
+  if (ev.getAction() == MotionEvent.ACTION_DOWN) {
+    if (handleTouchDown(ev)) {
+      return true;
     }
   }
+  clearAllResizeFrames();
   return mDragController.onInterceptTouchEvent(ev);
 }
