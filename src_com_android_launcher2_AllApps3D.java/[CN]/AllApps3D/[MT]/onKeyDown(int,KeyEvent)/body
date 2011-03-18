@@ -8,7 +8,7 @@
     if (mArrowNavigation) {
       if (mLastSelection == SELECTION_HOME) {
         reallyPlaySoundEffect(SoundEffectConstants.CLICK);
-        mLauncher.closeAllApps(true);
+        mLauncher.showWorkspace(true);
       }
  else {
         int whichApp=sRollo.mScript.get_gSelectedIconIndex();

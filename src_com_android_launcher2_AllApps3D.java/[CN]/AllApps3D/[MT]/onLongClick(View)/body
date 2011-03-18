@@ -7,8 +7,10 @@
     final Bitmap bmp=app.iconBitmap;
     int screenX=mMotionDownRawX - (bmp.getWidth() / 2);
     int screenY=mMotionDownRawY - bmp.getHeight();
+    mLauncher.lockScreenOrientation();
+    mLauncher.getWorkspace().onDragStartedWithItemSpans(1,1,bmp);
     mDragController.startDrag(bmp,screenX,screenY,this,app,DragController.DRAG_ACTION_COPY);
-    mLauncher.closeAllApps(true);
+    mLauncher.showWorkspace(true);
   }
   return true;
 }

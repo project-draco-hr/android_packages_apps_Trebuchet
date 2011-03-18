@@ -3,23 +3,28 @@
   for (int i=0; i < screenCount; i++) {
     CellLayout cl=(CellLayout)getChildAt(i);
     cl.setIsDragOccuring(isDragHappening);
+    if (state == null) {
+      cl.setAcceptsDrops(cl.findCellForSpan(null,spanX,spanY));
+    }
+ else {
 switch (state) {
 case TOP:
-      cl.setIsDefaultDropTarget(i == mCurrentPage);
+        cl.setIsDefaultDropTarget(i == mCurrentPage);
 case BOTTOM_HIDDEN:
 case BOTTOM_VISIBLE:
 case SPRING_LOADED:
-    if (state != ShrinkState.TOP) {
-      cl.setIsDefaultDropTarget(false);
+      if (state != ShrinkState.TOP) {
+        cl.setIsDefaultDropTarget(false);
+      }
+    if (!isDragHappening) {
+      spanX=1;
+      spanY=1;
     }
-  if (!isDragHappening) {
-    spanX=1;
-    spanY=1;
-  }
-cl.setAcceptsDrops(cl.findCellForSpan(null,spanX,spanY));
+  cl.setAcceptsDrops(cl.findCellForSpan(null,spanX,spanY));
 break;
 default :
 throw new RuntimeException("Unhandled ShrinkState " + state);
+}
 }
 }
 }

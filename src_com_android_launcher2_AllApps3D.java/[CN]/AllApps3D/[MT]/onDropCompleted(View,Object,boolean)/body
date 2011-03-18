@@ -1,2 +1,4 @@
 {
+  mLauncher.getWorkspace().onDragStopped(success);
+  mLauncher.unlockScreenOrientation();
 }

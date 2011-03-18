@@ -71,7 +71,7 @@ if (mTouchTracking == TRACKING_HOME) {
 if (action == MotionEvent.ACTION_UP) {
 if ((isPortrait && y > mTouchYBorders[mTouchYBorders.length - 1]) || (!isPortrait && x > mTouchXBorders[mTouchXBorders.length - 1])) {
   reallyPlaySoundEffect(SoundEffectConstants.CLICK);
-  mLauncher.closeAllApps(true);
+  mLauncher.showWorkspace(true);
 }
 sRollo.setHomeSelected(SELECTED_NONE);
 }
