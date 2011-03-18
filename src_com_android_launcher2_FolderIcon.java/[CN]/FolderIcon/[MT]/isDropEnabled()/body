@@ -1,3 +1,6 @@
 {
-  return !((Workspace)getParent().getParent()).isSmall();
+  final ViewGroup cellLayoutChildren=(ViewGroup)getParent();
+  final ViewGroup cellLayout=(ViewGroup)cellLayoutChildren.getParent();
+  final Workspace workspace=(Workspace)cellLayout.getParent();
+  return !workspace.isSmall();
 }
