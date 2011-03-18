@@ -36,8 +36,11 @@ layout.enableCenteredContent(false);
 }
 }
 }
-if (enforceMinimumPagedWidths) {
-setMinimumWidthOverride((childCount > 1) ? mMinPageWidth : 0);
+if (enforceMinimumPagedWidths && childCount > 1) {
+setMinimumWidthOverride(mMinPageWidth);
+}
+ else {
+resetMinimumWidthOverride();
 }
 requestLayout();
 post(new Runnable(){
