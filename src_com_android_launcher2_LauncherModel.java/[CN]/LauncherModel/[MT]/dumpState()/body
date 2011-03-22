@@ -4,7 +4,6 @@
   ApplicationInfo.dumpApplicationInfoList(TAG,"mAllAppsList.added",mAllAppsList.added);
   ApplicationInfo.dumpApplicationInfoList(TAG,"mAllAppsList.removed",mAllAppsList.removed);
   ApplicationInfo.dumpApplicationInfoList(TAG,"mAllAppsList.modified",mAllAppsList.modified);
-  Log.d(TAG,"mItems size=" + mItems.size());
   if (mLoaderTask != null) {
     mLoaderTask.dumpState();
   }
