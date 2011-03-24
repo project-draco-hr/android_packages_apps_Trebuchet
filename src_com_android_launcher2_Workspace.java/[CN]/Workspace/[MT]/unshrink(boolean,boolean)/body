@@ -108,10 +108,8 @@ final float oldHorizontalWallpaperOffset=getHorizontalWallpaperOffset();
 final float oldVerticalWallpaperOffset=getVerticalWallpaperOffset();
 final float newHorizontalWallpaperOffset=wallpaperOffsetForCurrentScroll();
 final float newVerticalWallpaperOffset=0.5f;
-animWithInterpolator.addUpdateListener(new AnimatorUpdateListener(){
-public void onAnimationUpdate(ValueAnimator animation){
-final float b=(Float)animation.getAnimatedValue();
-final float a=1f - b;
+animWithInterpolator.addUpdateListener(new LauncherAnimatorUpdateListener(){
+public void onAnimationUpdate(float a,float b){
 if (b == 0f) {
 return;
 }
@@ -134,10 +132,8 @@ cl.setFastAlpha(a * oldAlphas[i] + b * newAlphas[i]);
 );
 ValueAnimator rotationAnim=ValueAnimator.ofFloat(0f,1f).setDuration(duration);
 rotationAnim.setInterpolator(new DecelerateInterpolator(2.0f));
-rotationAnim.addUpdateListener(new AnimatorUpdateListener(){
-public void onAnimationUpdate(ValueAnimator animation){
-final float b=(Float)animation.getAnimatedValue();
-final float a=1f - b;
+rotationAnim.addUpdateListener(new LauncherAnimatorUpdateListener(){
+public void onAnimationUpdate(float a,float b){
 if (b == 0f) {
 return;
 }

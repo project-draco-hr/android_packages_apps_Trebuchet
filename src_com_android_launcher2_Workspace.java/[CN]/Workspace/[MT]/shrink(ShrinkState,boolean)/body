@@ -148,10 +148,8 @@ final float oldHorizontalWallpaperOffset=getHorizontalWallpaperOffset();
 final float oldVerticalWallpaperOffset=getVerticalWallpaperOffset();
 final float newHorizontalWallpaperOffset=0.5f;
 final float newVerticalWallpaperOffset=wallpaperOffset;
-animWithInterpolator.addUpdateListener(new AnimatorUpdateListener(){
-public void onAnimationUpdate(ValueAnimator animation){
-final float b=(Float)animation.getAnimatedValue();
-final float a=1f - b;
+animWithInterpolator.addUpdateListener(new LauncherAnimatorUpdateListener(){
+public void onAnimationUpdate(float a,float b){
 if (b == 0f) {
 return;
 }

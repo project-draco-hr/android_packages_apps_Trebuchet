@@ -15,10 +15,8 @@
   if (animated) {
     final ValueAnimator scaleAnim=ValueAnimator.ofFloat(0f,1f).setDuration(duration);
     scaleAnim.setInterpolator(new Workspace.ZoomOutInterpolator());
-    scaleAnim.addUpdateListener(new AnimatorUpdateListener(){
-      public void onAnimationUpdate(      ValueAnimator animation){
-        final float b=(Float)animation.getAnimatedValue();
-        final float a=1f - b;
+    scaleAnim.addUpdateListener(new LauncherAnimatorUpdateListener(){
+      public void onAnimationUpdate(      float a,      float b){
         ((View)toView.getParent()).fastInvalidate();
         toView.setFastScaleX(a * scale + b * 1f);
         toView.setFastScaleY(a * scale + b * 1f);
@@ -29,10 +27,8 @@
       toView.setFastAlpha(0f);
       ValueAnimator alphaAnim=ValueAnimator.ofFloat(0f,1f).setDuration(fadeDuration);
       alphaAnim.setInterpolator(new DecelerateInterpolator(1.5f));
-      alphaAnim.addUpdateListener(new AnimatorUpdateListener(){
-        public void onAnimationUpdate(        ValueAnimator animation){
-          final float b=(Float)animation.getAnimatedValue();
-          final float a=1f - b;
+      alphaAnim.addUpdateListener(new LauncherAnimatorUpdateListener(){
+        public void onAnimationUpdate(        float a,        float b){
           toView.setFastAlpha(a * 0f + b * 1f);
         }
       }
