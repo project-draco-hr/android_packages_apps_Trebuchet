@@ -14,11 +14,9 @@
     int left=topLeft[0];
     int top=topLeft[1];
     if (v != null) {
-      if (v.getParent() instanceof CellLayout) {
-        LayoutParams lp=(LayoutParams)v.getLayoutParams();
-        left+=lp.leftMargin;
-        top+=lp.topMargin;
-      }
+      MarginLayoutParams lp=(MarginLayoutParams)v.getLayoutParams();
+      left+=lp.leftMargin;
+      top+=lp.topMargin;
       left+=(v.getWidth() - dragOutline.getWidth()) / 2;
       top+=(v.getHeight() - dragOutline.getHeight()) / 2;
     }
