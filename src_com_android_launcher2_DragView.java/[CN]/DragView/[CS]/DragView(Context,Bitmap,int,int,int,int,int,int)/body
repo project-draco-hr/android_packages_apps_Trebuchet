@@ -8,8 +8,8 @@
   if (scaleFactor != 1.0f) {
     scale.setScale(scaleFactor,scaleFactor);
   }
-  final int offsetX=res.getInteger(R.integer.config_dragViewOffsetX);
-  final int offsetY=res.getInteger(R.integer.config_dragViewOffsetY);
+  final int offsetX=res.getDimensionPixelSize(R.dimen.dragViewOffsetX);
+  final int offsetY=res.getDimensionPixelSize(R.dimen.dragViewOffsetY);
   mAnim=ValueAnimator.ofFloat(0.0f,1.0f);
   mAnim.setDuration(110);
   mAnim.setInterpolator(new DecelerateInterpolator(2.5f));
