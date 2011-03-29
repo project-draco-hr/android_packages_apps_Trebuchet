@@ -1,0 +1,7 @@
+int[] touchXY
+Object dragInfo
+CellLayout cellLayout
+boolean insertAtFirst
+DragView dragView
+int dragViewX
+int dragViewY

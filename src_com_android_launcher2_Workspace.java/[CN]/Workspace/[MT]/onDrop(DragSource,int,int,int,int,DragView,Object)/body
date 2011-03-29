@@ -25,7 +25,7 @@
       ((ItemInfo)dragInfo).dropPos=touchXY;
       return;
     }
-    onDropExternal(touchXY,dragInfo,mDragTargetLayout,false);
+    onDropExternal(touchXY,dragInfo,mDragTargetLayout,false,dragView,originX,originY);
   }
  else   if (mDragInfo != null) {
     final View cell=mDragInfo.cell;
