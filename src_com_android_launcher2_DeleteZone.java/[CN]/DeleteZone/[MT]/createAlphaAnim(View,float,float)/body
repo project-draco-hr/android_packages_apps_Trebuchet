@@ -1,0 +1,5 @@
+{
+  Animator anim=ObjectAnimator.ofFloat(v,"alpha",start,end);
+  anim.setDuration(getAnimationDuration());
+  return anim;
+}

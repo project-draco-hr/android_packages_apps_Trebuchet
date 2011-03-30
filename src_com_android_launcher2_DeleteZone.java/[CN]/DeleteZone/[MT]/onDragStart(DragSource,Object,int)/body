@@ -11,10 +11,10 @@
     mDragController.setDeleteRegion(mRegionF);
     mTransition.resetTransition();
     createAnimations();
-    startAnimation(mInAnimation);
+    mInAnimation.start();
     if (mOverlappingViews != null) {
       for (      View view : mOverlappingViews) {
-        view.startAnimation(mHandleOutAnimation);
+        createOutAlphaAnim(view).start();
       }
     }
     setVisibility(VISIBLE);

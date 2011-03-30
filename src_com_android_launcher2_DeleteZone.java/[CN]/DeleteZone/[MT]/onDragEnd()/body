@@ -2,12 +2,11 @@
   if (mActive && mDragAndDropEnabled) {
     mActive=false;
     mDragController.setDeleteRegion(null);
-    if (mOutAnimation != null)     startAnimation(mOutAnimation);
-    if (mHandleInAnimation != null && mOverlappingViews != null) {
+    mOutAnimation.start();
+    if (mOverlappingViews != null) {
       for (      View view : mOverlappingViews) {
-        view.startAnimation(mHandleInAnimation);
+        createInAlphaAnim(view).start();
       }
     }
-    setVisibility(GONE);
   }
 }
