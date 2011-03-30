@@ -1,48 +1,47 @@
 {
   int duration=getAnimationDuration();
-  if (mHandleInAnimation == null) {
-    mHandleInAnimation=new AlphaAnimation(0.0f,1.0f);
-    mHandleInAnimation.setDuration(duration);
-  }
+  Animator inAlphaAnim=createInAlphaAnim(this);
   if (mInAnimation == null) {
-    mInAnimation=new FastAnimationSet();
+    mInAnimation=new AnimatorSet();
+    mInAnimation.setInterpolator(new AccelerateInterpolator());
+    mInAnimation.setDuration(duration);
     if (!LauncherApplication.isScreenXLarge()) {
-      final AnimationSet animationSet=mInAnimation;
-      animationSet.setInterpolator(new AccelerateInterpolator());
-      animationSet.addAnimation(new AlphaAnimation(0.0f,1.0f));
+      Animator translateAnim;
       if (mOrientation == ORIENTATION_HORIZONTAL) {
-        animationSet.addAnimation(new TranslateAnimation(Animation.ABSOLUTE,0.0f,Animation.ABSOLUTE,0.0f,Animation.RELATIVE_TO_SELF,1.0f,Animation.RELATIVE_TO_SELF,0.0f));
+        translateAnim=ObjectAnimator.ofFloat(this,"translationY",getMeasuredWidth(),0f);
       }
  else {
-        animationSet.addAnimation(new TranslateAnimation(Animation.RELATIVE_TO_SELF,1.0f,Animation.RELATIVE_TO_SELF,0.0f,Animation.ABSOLUTE,0.0f,Animation.ABSOLUTE,0.0f));
+        translateAnim=ObjectAnimator.ofFloat(this,"translationX",getMeasuredHeight(),0f);
       }
-      animationSet.setDuration(duration);
+      mInAnimation.playTogether(translateAnim,inAlphaAnim);
     }
  else {
-      mInAnimation.addAnimation(mHandleInAnimation);
+      mInAnimation.play(inAlphaAnim);
     }
   }
-  if (mHandleOutAnimation == null) {
-    mHandleOutAnimation=new AlphaAnimation(1.0f,0.0f);
-    mHandleOutAnimation.setFillAfter(true);
-    mHandleOutAnimation.setDuration(duration);
-  }
+  Animator outAlphaAnim=createOutAlphaAnim(this);
   if (mOutAnimation == null) {
-    mOutAnimation=new FastAnimationSet();
+    mOutAnimation=new AnimatorSet();
+    mOutAnimation.setInterpolator(new AccelerateInterpolator());
+    mOutAnimation.setDuration(duration);
     if (!LauncherApplication.isScreenXLarge()) {
-      final AnimationSet animationSet=mOutAnimation;
-      animationSet.setInterpolator(new AccelerateInterpolator());
-      animationSet.addAnimation(new AlphaAnimation(1.0f,0.0f));
+      Animator translateAnim;
       if (mOrientation == ORIENTATION_HORIZONTAL) {
-        animationSet.addAnimation(new FastTranslateAnimation(Animation.ABSOLUTE,0.0f,Animation.ABSOLUTE,0.0f,Animation.RELATIVE_TO_SELF,0.0f,Animation.RELATIVE_TO_SELF,1.0f));
+        translateAnim=ObjectAnimator.ofFloat(this,"translationY",0f,getMeasuredWidth());
       }
  else {
-        animationSet.addAnimation(new FastTranslateAnimation(Animation.RELATIVE_TO_SELF,0.0f,Animation.RELATIVE_TO_SELF,1.0f,Animation.ABSOLUTE,0.0f,Animation.ABSOLUTE,0.0f));
+        translateAnim=ObjectAnimator.ofFloat(this,"translationX",0f,getMeasuredHeight());
       }
-      animationSet.setDuration(duration);
+      mOutAnimation.playTogether(translateAnim,outAlphaAnim);
     }
  else {
-      mOutAnimation.addAnimation(mHandleOutAnimation);
+      mOutAnimation.addListener(new AnimatorListenerAdapter(){
+        public void onAnimationEnd(        Animator animation){
+          setVisibility(GONE);
+        }
+      }
+);
+      mOutAnimation.play(outAlphaAnim);
     }
   }
 }
