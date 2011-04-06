@@ -3,7 +3,7 @@
     return;
   }
   if (LauncherApplication.isScreenXLarge()) {
-    cameraZoomOut(State.ALL_APPS,animated);
+    cameraZoomOut(State.ALL_APPS,animated,false);
   }
  else {
     mAllAppsGrid.zoom(1.0f,animated);

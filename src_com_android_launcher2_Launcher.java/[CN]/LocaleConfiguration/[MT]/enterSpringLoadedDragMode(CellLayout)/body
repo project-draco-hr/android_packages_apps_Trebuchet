@@ -1,11 +1,11 @@
 {
   mWorkspace.enterSpringLoadedDragMode(layout);
   if (mState == State.ALL_APPS) {
-    cameraZoomIn(State.ALL_APPS,true,true);
     mState=State.ALL_APPS_SPRING_LOADED;
+    cameraZoomIn(State.ALL_APPS,true,true);
   }
  else   if (mState == State.CUSTOMIZE) {
-    cameraZoomIn(State.CUSTOMIZE,true,true);
     mState=State.CUSTOMIZE_SPRING_LOADED;
+    cameraZoomIn(State.CUSTOMIZE,true,true);
   }
 }

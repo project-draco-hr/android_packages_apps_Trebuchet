@@ -1,3 +1,0 @@
-{
-  cameraZoomIn(fromState,animated,false);
-}

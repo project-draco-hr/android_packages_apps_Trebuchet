@@ -5,4 +5,10 @@
   tearDownDragMode();
   mLauncher.getWorkspace().onDragStopped(success);
   mLauncher.unlockScreenOrientation();
+  if (!success && !mHasMadeSuccessfulDrop) {
+    mLauncher.getWorkspace().shrink(Workspace.ShrinkState.BOTTOM_HIDDEN);
+  }
+ else {
+    mHasMadeSuccessfulDrop|=success;
+  }
 }
