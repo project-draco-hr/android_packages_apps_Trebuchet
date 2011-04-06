@@ -1,3 +1,3 @@
 {
-  return getWidthBeforeLayout() - (mCellWidth - Utilities.getIconContentSize());
+  return getWidthBeforeFirstLayout() - (mCellWidth - Utilities.getIconContentSize());
 }
