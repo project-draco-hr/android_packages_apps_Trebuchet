@@ -1,4 +1,3 @@
 {
-  int iconHorizontalOffset=(mCellWidth - Utilities.getIconContentSize());
-  return mCellCountX * mCellWidth + (mCellCountX - 1) * mWidthGap - iconHorizontalOffset;
+  return getWidthBeforeLayout() - (mCellWidth - Utilities.getIconContentSize());
 }
