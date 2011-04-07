@@ -9,6 +9,7 @@
   mPageLayoutPaddingRight=a.getDimensionPixelSize(R.styleable.PagedView_pageLayoutPaddingRight,0);
   mPageLayoutWidthGap=a.getDimensionPixelSize(R.styleable.PagedView_pageLayoutWidthGap,-1);
   mPageLayoutHeightGap=a.getDimensionPixelSize(R.styleable.PagedView_pageLayoutHeightGap,-1);
+  mPageLayoutMaxHeight=a.getDimensionPixelSize(R.styleable.PagedView_pageLayoutMaxHeight,-1);
   a.recycle();
   setHapticFeedbackEnabled(false);
   init();
