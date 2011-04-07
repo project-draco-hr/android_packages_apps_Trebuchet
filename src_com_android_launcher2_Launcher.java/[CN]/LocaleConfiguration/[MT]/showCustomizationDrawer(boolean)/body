@@ -2,7 +2,7 @@
   if (mState != State.WORKSPACE) {
     return;
   }
-  cameraZoomOut(State.CUSTOMIZE,animated);
+  cameraZoomOut(State.CUSTOMIZE,animated,false);
   mState=State.CUSTOMIZE;
   mUserPresent=false;
   updateRunning();

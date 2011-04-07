@@ -1,12 +1,12 @@
 {
   if (mState == State.ALL_APPS_SPRING_LOADED) {
     mWorkspace.exitSpringLoadedDragMode(Workspace.ShrinkState.BOTTOM_VISIBLE);
-    cameraZoomOut(State.ALL_APPS,true);
+    cameraZoomOut(State.ALL_APPS,true,true);
     mState=State.ALL_APPS;
   }
  else   if (mState == State.CUSTOMIZE_SPRING_LOADED) {
     mWorkspace.exitSpringLoadedDragMode(Workspace.ShrinkState.TOP);
-    cameraZoomOut(State.CUSTOMIZE,true);
+    cameraZoomOut(State.CUSTOMIZE,true,true);
     mState=State.CUSTOMIZE;
   }
 }

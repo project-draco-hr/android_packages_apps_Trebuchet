@@ -7,7 +7,13 @@
   final View toView=toAllApps ? (View)mAllAppsGrid : mHomeCustomizationDrawer;
   setPivotsForZoom(toView,toState,scale);
   if (toAllApps) {
-    mWorkspace.shrink(ShrinkState.BOTTOM_HIDDEN,animated);
+    if (!springLoaded) {
+      mWorkspace.shrink(ShrinkState.BOTTOM_HIDDEN,animated);
+      mAllAppsPagedView.resetSuccessfulDropFlag();
+    }
+ else {
+      mWorkspace.shrink(ShrinkState.BOTTOM_VISIBLE,animated);
+    }
   }
  else {
     mWorkspace.shrink(ShrinkState.TOP,animated);

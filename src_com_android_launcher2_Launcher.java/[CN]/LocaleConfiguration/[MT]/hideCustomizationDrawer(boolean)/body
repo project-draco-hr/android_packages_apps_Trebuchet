@@ -1,5 +1,5 @@
 {
   if (mState == State.CUSTOMIZE || mState == State.CUSTOMIZE_SPRING_LOADED) {
-    cameraZoomIn(State.CUSTOMIZE,animated);
+    cameraZoomIn(State.CUSTOMIZE,animated,false);
   }
 }
