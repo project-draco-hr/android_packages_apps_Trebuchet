@@ -1,0 +1,6 @@
+int pixelX
+int pixelY
+int spanX
+int spanY
+CellLayout layout
+int[] recycle

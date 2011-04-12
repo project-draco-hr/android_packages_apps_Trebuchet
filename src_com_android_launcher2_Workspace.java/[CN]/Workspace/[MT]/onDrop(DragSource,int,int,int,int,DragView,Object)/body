@@ -39,8 +39,20 @@
       }
     }
     if (dropTargetLayout != null) {
-      mTargetCell=findNearestVacantArea(originX,originY,mDragInfo.spanX,mDragInfo.spanY,cell,dropTargetLayout,mTargetCell);
+      mTargetCell=findNearestArea(originX,originY,mDragInfo.spanX,mDragInfo.spanY,dropTargetLayout,mTargetCell);
       final int screen=(mTargetCell == null) ? mDragInfo.screen : indexOfChild(dropTargetLayout);
+      View v=dropTargetLayout.getChildAt(mTargetCell[0],mTargetCell[1]);
+      boolean hasMoved=!(mDragInfo.cellX == mTargetCell[0] && mDragInfo.cellY == mTargetCell[1]);
+      if (v != null && (v.getTag() instanceof ShortcutInfo) && dragInfo instanceof ShortcutInfo && hasMoved) {
+        ShortcutInfo info1=(ShortcutInfo)v.getTag();
+        ShortcutInfo info2=(ShortcutInfo)dragInfo;
+        dropTargetLayout.removeView(v);
+        FolderIcon fi=mLauncher.addFolder(screen,mTargetCell[0],mTargetCell[1]);
+        fi.addItem(info1);
+        fi.addItem(info2);
+        return;
+      }
+      mTargetCell=findNearestVacantArea(originX,originY,mDragInfo.spanX,mDragInfo.spanY,cell,dropTargetLayout,mTargetCell);
       if (screen != mCurrentPage) {
         snapToPage(screen);
       }
