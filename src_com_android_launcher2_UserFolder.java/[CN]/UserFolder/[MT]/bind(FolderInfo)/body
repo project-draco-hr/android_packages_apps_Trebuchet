@@ -1,4 +1,11 @@
 {
   super.bind(info);
-  setContentAdapter(new ShortcutsAdapter(mContext,((UserFolderInfo)info).contents));
+  ArrayList<ShortcutInfo> children=((UserFolderInfo)info).contents;
+  for (int i=0; i < children.size(); i++) {
+    ShortcutInfo child=(ShortcutInfo)children.get(i);
+    if ((child.cellX == -1 && child.cellY == -1) || mContent.isOccupied(child.cellX,child.cellY)) {
+      findAndSetEmptyCells(child);
+    }
+    createAndAddShortcut((ShortcutInfo)children.get(i));
+  }
 }

@@ -1,0 +1,3 @@
+{
+  ((BaseAdapter)mContent.getAdapter()).notifyDataSetChanged();
+}

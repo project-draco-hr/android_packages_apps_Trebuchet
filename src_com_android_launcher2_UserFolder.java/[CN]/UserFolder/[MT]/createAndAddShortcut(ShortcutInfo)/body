@@ -1,0 +1,11 @@
+{
+  final TextView textView=(TextView)mInflater.inflate(R.layout.application_boxed,this,false);
+  textView.setCompoundDrawablesWithIntrinsicBounds(null,new FastBitmapDrawable(item.getIcon(mIconCache)),null,null);
+  textView.setText(item.title);
+  textView.setTag(item);
+  textView.setOnClickListener(this);
+  textView.setOnLongClickListener(this);
+  CellLayout.LayoutParams lp=new CellLayout.LayoutParams(item.cellX,item.cellY,item.spanX,item.spanY);
+  boolean insert=false;
+  mContent.addViewToCellLayout(textView,insert ? 0 : -1,(int)item.id,lp,true);
+}

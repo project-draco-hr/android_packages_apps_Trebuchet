@@ -1,0 +1,4 @@
+{
+  super.onFinishInflate();
+  mContent=(CellLayout)findViewById(R.id.folder_content);
+}

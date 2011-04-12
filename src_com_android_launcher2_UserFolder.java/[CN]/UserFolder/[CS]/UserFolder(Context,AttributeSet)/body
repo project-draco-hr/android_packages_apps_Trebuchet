@@ -1,3 +1,5 @@
 {
   super(context,attrs);
+  mInflater=LayoutInflater.from(context);
+  mIconCache=((LauncherApplication)context.getApplicationContext()).getIconCache();
 }

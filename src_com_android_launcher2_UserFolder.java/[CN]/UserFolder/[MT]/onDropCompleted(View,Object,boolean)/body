@@ -1,6 +1,5 @@
 {
   if (success) {
-    ShortcutsAdapter adapter=(ShortcutsAdapter)mContent.getAdapter();
-    adapter.remove(mDragItem);
+    ((UserFolderInfo)mInfo).remove(mDragItem);
   }
 }
