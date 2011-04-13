@@ -15,6 +15,7 @@
     }
   }
 ;
+  AllAppsTabKeyEventListener keyListener=new AllAppsTabKeyEventListener();
   TextView tabView;
   TabWidget tabWidget=(TabWidget)findViewById(com.android.internal.R.id.tabs);
   tabView=(TextView)mInflater.inflate(R.layout.tab_widget_indicator,tabWidget,false);
@@ -23,6 +24,10 @@
   tabView=(TextView)mInflater.inflate(R.layout.tab_widget_indicator,tabWidget,false);
   tabView.setText(mContext.getString(R.string.all_apps_tab_downloaded));
   addTab(newTabSpec(TAG_DOWNLOADED).setIndicator(tabView).setContent(contentFactory));
+  View lastTab=tabWidget.getChildTabViewAt(tabWidget.getTabCount() - 1);
+  lastTab.setOnKeyListener(keyListener);
+  View shopButton=findViewById(R.id.market_button);
+  shopButton.setOnKeyListener(keyListener);
   setOnTabChangedListener(new OnTabChangeListener(){
     public void onTabChanged(    String tabId){
       final Resources res=getResources();

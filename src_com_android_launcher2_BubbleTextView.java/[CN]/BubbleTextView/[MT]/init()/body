@@ -1,7 +1,5 @@
 {
   mBackground=getBackground();
-  setFocusable(true);
-  setBackgroundDrawable(null);
   final Resources res=getContext().getResources();
   int bubbleColor=res.getColor(R.color.bubble_dark_background);
   mPaint=new Paint(Paint.ANTI_ALIAS_FLAG);

@@ -1,0 +1,3 @@
+{
+  return FocusHelper.handlePagedViewIconKeyEvent(this,keyCode,event) || super.onKeyUp(keyCode,event);
+}

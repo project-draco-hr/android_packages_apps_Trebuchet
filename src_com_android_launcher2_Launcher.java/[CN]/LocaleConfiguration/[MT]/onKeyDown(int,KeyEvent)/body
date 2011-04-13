@@ -1,6 +1,8 @@
 {
-  boolean handled=super.onKeyDown(keyCode,event);
-  if (!handled && acceptFilter() && keyCode != KeyEvent.KEYCODE_ENTER) {
+  final int uniChar=event.getUnicodeChar();
+  final boolean handled=super.onKeyDown(keyCode,event);
+  final boolean isKeyNotWhitespace=uniChar > 0 && !Character.isWhitespace(uniChar);
+  if (!handled && acceptFilter() && isKeyNotWhitespace) {
     boolean gotKey=TextKeyListener.getInstance().onKeyDown(mWorkspace,mDefaultKeySsb,keyCode,event);
     if (gotKey && mDefaultKeySsb != null && mDefaultKeySsb.length() > 0) {
       return onSearchRequested();

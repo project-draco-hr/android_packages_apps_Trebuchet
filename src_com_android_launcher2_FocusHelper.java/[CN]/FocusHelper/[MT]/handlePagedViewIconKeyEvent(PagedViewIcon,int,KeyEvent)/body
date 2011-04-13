@@ -1,0 +1,118 @@
+{
+  if (!LauncherApplication.isScreenXLarge())   return false;
+  final PagedViewCellLayoutChildren parent=(PagedViewCellLayoutChildren)v.getParent();
+  final PagedViewCellLayout parentLayout=(PagedViewCellLayout)parent.getParent();
+  final ViewGroup container=(ViewGroup)parentLayout.getParent();
+  final TabHost tabHost=findTabHostParent(container);
+  final TabWidget tabs=(TabWidget)tabHost.findViewById(com.android.internal.R.id.tabs);
+  final int widgetIndex=parent.indexOfChild(v);
+  final int widgetCount=parent.getChildCount();
+  final int pageIndex=container.indexOfChild(parentLayout);
+  final int pageCount=container.getChildCount();
+  final int cellCountX=parentLayout.getCellCountX();
+  final int cellCountY=parentLayout.getCellCountY();
+  final int x=widgetIndex % cellCountX;
+  final int y=widgetIndex / cellCountX;
+  final int action=e.getAction();
+  final boolean handleKeyEvent=(action != KeyEvent.ACTION_UP);
+  PagedViewCellLayoutChildren newParent=null;
+  boolean wasHandled=false;
+switch (keyCode) {
+case KeyEvent.KEYCODE_DPAD_LEFT:
+    if (handleKeyEvent) {
+      if (widgetIndex > 0) {
+        parent.getChildAt(widgetIndex - 1).requestFocus();
+      }
+ else {
+        if (pageIndex > 0) {
+          newParent=getPagedViewCellLayoutChildrenForIndex(container,pageIndex - 1);
+          newParent.getChildAt(newParent.getChildCount() - 1).requestFocus();
+        }
+      }
+    }
+  wasHandled=true;
+break;
+case KeyEvent.KEYCODE_DPAD_RIGHT:
+if (handleKeyEvent) {
+if (widgetIndex < (widgetCount - 1)) {
+  parent.getChildAt(widgetIndex + 1).requestFocus();
+}
+ else {
+  if (pageIndex < (pageCount - 1)) {
+    newParent=getPagedViewCellLayoutChildrenForIndex(container,pageIndex + 1);
+    newParent.getChildAt(0).requestFocus();
+  }
+}
+}
+wasHandled=true;
+break;
+case KeyEvent.KEYCODE_DPAD_UP:
+if (handleKeyEvent) {
+if (y > 0) {
+int newWidgetIndex=((y - 1) * cellCountX) + x;
+parent.getChildAt(newWidgetIndex).requestFocus();
+}
+ else {
+tabs.requestFocus();
+}
+}
+wasHandled=true;
+break;
+case KeyEvent.KEYCODE_DPAD_DOWN:
+if (handleKeyEvent) {
+if (y < (cellCountY - 1)) {
+int newWidgetIndex=Math.min(widgetCount - 1,((y + 1) * cellCountX) + x);
+parent.getChildAt(newWidgetIndex).requestFocus();
+}
+}
+wasHandled=true;
+break;
+case KeyEvent.KEYCODE_ENTER:
+case KeyEvent.KEYCODE_DPAD_CENTER:
+if (handleKeyEvent) {
+View.OnClickListener clickListener=(View.OnClickListener)container;
+clickListener.onClick(v);
+}
+wasHandled=true;
+break;
+case KeyEvent.KEYCODE_PAGE_UP:
+if (handleKeyEvent) {
+if (pageIndex > 0) {
+newParent=getPagedViewCellLayoutChildrenForIndex(container,pageIndex - 1);
+newParent.getChildAt(0).requestFocus();
+}
+ else {
+parent.getChildAt(0).requestFocus();
+}
+}
+wasHandled=true;
+break;
+case KeyEvent.KEYCODE_PAGE_DOWN:
+if (handleKeyEvent) {
+if (pageIndex < (pageCount - 1)) {
+newParent=getPagedViewCellLayoutChildrenForIndex(container,pageIndex + 1);
+newParent.getChildAt(0).requestFocus();
+}
+ else {
+parent.getChildAt(widgetCount - 1).requestFocus();
+}
+}
+wasHandled=true;
+break;
+case KeyEvent.KEYCODE_MOVE_HOME:
+if (handleKeyEvent) {
+parent.getChildAt(0).requestFocus();
+}
+wasHandled=true;
+break;
+case KeyEvent.KEYCODE_MOVE_END:
+if (handleKeyEvent) {
+parent.getChildAt(widgetCount - 1).requestFocus();
+}
+wasHandled=true;
+break;
+default :
+break;
+}
+return wasHandled;
+}
