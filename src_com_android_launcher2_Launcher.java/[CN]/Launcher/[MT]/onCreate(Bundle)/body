@@ -30,6 +30,9 @@
   if (mCustomizePagedView != null) {
     mCustomizePagedView.update();
   }
+  if (mAppsCustomizeContent != null) {
+    mAppsCustomizeContent.onPackagesUpdated();
+  }
   if (PROFILE_STARTUP) {
     android.os.Debug.stopMethodTracing();
   }

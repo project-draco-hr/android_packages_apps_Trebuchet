@@ -2,6 +2,11 @@
   int count=getChildCount();
   for (int i=0; i < count; i++) {
     View child=getChildAt(i);
-    child.layout(0,0,r - l,b - t);
+    if (LauncherApplication.isScreenXLarge()) {
+      child.layout(0,0,r - l,b - t);
+    }
+ else {
+      child.layout(mPaddingLeft,mPaddingTop,getMeasuredWidth() - mPaddingRight,getMeasuredHeight() - mPaddingBottom);
+    }
   }
 }

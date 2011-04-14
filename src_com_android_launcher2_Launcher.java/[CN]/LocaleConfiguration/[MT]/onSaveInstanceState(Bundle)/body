@@ -37,4 +37,10 @@
       outState.putString("customize_currentTab",currentTabTag);
     }
   }
+  if (mAppsCustomizeTabHost != null) {
+    String currentTabTag=mAppsCustomizeTabHost.getCurrentTabTag();
+    if (currentTabTag != null) {
+      outState.putString("apps_customize_currentTab",currentTabTag);
+    }
+  }
 }

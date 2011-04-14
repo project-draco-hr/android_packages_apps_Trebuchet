@@ -51,7 +51,7 @@
   }
   int duration;
   if (shrinkState == ShrinkState.BOTTOM_HIDDEN || shrinkState == ShrinkState.BOTTOM_VISIBLE) {
-    duration=res.getInteger(R.integer.config_allAppsWorkspaceShrinkTime);
+    duration=res.getInteger(R.integer.config_appsCustomizeWorkspaceShrinkTime);
   }
  else {
     duration=res.getInteger(R.integer.config_customizeWorkspaceShrinkTime);

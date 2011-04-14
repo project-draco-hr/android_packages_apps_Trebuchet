@@ -1,7 +1,9 @@
 {
   super(context,attrs,defStyle);
   setAlwaysDrawnWithCacheEnabled(false);
-  mCellWidth=mCellHeight=sDefaultCellDimensions;
+  Resources resources=context.getResources();
+  mCellWidth=resources.getDimensionPixelSize(R.dimen.apps_customize_cell_width);
+  mCellHeight=resources.getDimensionPixelSize(R.dimen.apps_customize_cell_height);
   mCellCountX=LauncherModel.getCellCountX();
   mCellCountY=LauncherModel.getCellCountY();
   mWidthGap=mHeightGap=-1;

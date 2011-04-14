@@ -1,0 +1,5 @@
+{
+  layout.setGravity(Gravity.LEFT);
+  layout.setPadding(mPageLayoutPaddingLeft,mPageLayoutPaddingTop,mPageLayoutPaddingRight,mPageLayoutPaddingBottom);
+  layout.setMinimumWidth(getPageContentWidth());
+}

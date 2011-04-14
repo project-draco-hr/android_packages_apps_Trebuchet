@@ -1,4 +1,3 @@
 {
   button.setVisibility(View.VISIBLE);
-  button.setClickable(true);
 }

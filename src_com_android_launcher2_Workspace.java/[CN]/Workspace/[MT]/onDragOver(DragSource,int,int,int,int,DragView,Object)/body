@@ -18,10 +18,12 @@
           mSpringLoadedDragController.onDragExit();
         }
         mDragTargetLayout=layout;
-        boolean allowDragOver=(mDragTargetLayout != null) && (mDragTargetLayout.getAcceptsDrops() || (mShrinkState == ShrinkState.SPRING_LOADED));
-        if (allowDragOver) {
-          mDragTargetLayout.setIsDragOverlapping(true);
-          mSpringLoadedDragController.onDragEnter(mDragTargetLayout,mShrinkState == ShrinkState.SPRING_LOADED);
+        if (LauncherApplication.isScreenXLarge()) {
+          boolean allowDragOver=(mDragTargetLayout != null) && (mDragTargetLayout.getAcceptsDrops() || (mShrinkState == ShrinkState.SPRING_LOADED));
+          if (allowDragOver) {
+            mDragTargetLayout.setIsDragOverlapping(true);
+            mSpringLoadedDragController.onDragEnter(mDragTargetLayout,mShrinkState == ShrinkState.SPRING_LOADED);
+          }
         }
       }
     }

@@ -1,0 +1,9 @@
+{
+  Context context=getContext();
+  int numPages=(int)Math.ceil((float)mApps.size() / (mCellCountX * mCellCountY));
+  for (int i=0; i < numPages; ++i) {
+    PagedViewCellLayout layout=new PagedViewCellLayout(context);
+    setupPage(layout);
+    addView(layout);
+  }
+}

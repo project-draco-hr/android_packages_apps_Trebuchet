@@ -14,7 +14,6 @@
     anim.addListener(new AnimatorListenerAdapter(){
       @Override public void onAnimationStart(      Animator animation){
         if (showing)         showAndEnableToolbarButton(view);
-        if (hiding)         disableToolbarButton(view);
       }
       @Override public void onAnimationEnd(      Animator animation){
         if (hiding)         hideToolbarButton(view);
@@ -29,7 +28,6 @@
       view.setAlpha(1f);
     }
  else {
-      disableToolbarButton(view);
       hideToolbarButton(view);
     }
   }

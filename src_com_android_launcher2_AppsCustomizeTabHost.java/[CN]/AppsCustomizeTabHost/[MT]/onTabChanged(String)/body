@@ -1,0 +1,4 @@
+{
+  final AppsCustomizePagedView content=(AppsCustomizePagedView)findViewById(R.id.apps_customize_pane_content);
+  content.setContentType(getContentTypeForTabTag(tabId));
+}

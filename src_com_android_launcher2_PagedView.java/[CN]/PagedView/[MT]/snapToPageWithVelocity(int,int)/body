@@ -1,6 +1,8 @@
 {
   whichPage=Math.max(0,Math.min(whichPage,getChildCount() - 1));
   int halfScreenSize=getMeasuredWidth() / 2;
+  if (DEBUG)   Log.d(TAG,"snapToPage.getChildOffset(): " + getChildOffset(whichPage));
+  if (DEBUG)   Log.d(TAG,"snapToPageWithVelocity.getRelativeChildOffset(): " + getMeasuredWidth() + ", "+ getChildWidth(whichPage));
   final int newX=getChildOffset(whichPage) - getRelativeChildOffset(whichPage);
   int delta=newX - mUnboundedScrollX;
   int duration=0;

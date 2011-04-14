@@ -1,0 +1,12 @@
+{
+  PagedViewExtendedLayout layout=(PagedViewExtendedLayout)getChildAt(page);
+  layout.removeAllViewsOnPage();
+  for (int i=0; i < 1; ++i) {
+    AppWidgetProviderInfo info=(AppWidgetProviderInfo)mWidgets.get(page);
+    FastBitmapDrawable icon=getWidgetPreview(info);
+    ImageView image=new ImageView(getContext());
+    image.setBackgroundColor(0x99FF0000);
+    image.setImageDrawable(icon);
+    layout.addView(image,new PagedViewExtendedLayout.LayoutParams());
+  }
+}

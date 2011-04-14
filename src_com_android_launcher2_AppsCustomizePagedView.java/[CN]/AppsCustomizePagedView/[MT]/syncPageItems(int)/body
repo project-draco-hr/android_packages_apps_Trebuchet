@@ -1,0 +1,10 @@
+{
+switch (mContentType) {
+case Applications:
+    syncAppsPageItems(page);
+  break;
+case Widgets:
+syncWidgetPageItems(page);
+break;
+}
+}

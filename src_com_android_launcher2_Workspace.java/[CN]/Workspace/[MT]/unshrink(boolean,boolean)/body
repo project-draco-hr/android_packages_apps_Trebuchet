@@ -34,15 +34,21 @@
     final float[] newRotationYs=new float[getChildCount()];
     for (int i=0; i < screenCount; i++) {
       final CellLayout cl=(CellLayout)getChildAt(i);
-      float finalAlphaValue=(i == mCurrentPage) ? 1.0f : 0.0f;
+      float finalAlphaValue=0f;
+      float rotation=0f;
+      if (LauncherApplication.isScreenXLarge()) {
+        finalAlphaValue=(i == mCurrentPage) ? 1.0f : 0.0f;
+        if (i < mCurrentPage) {
+          rotation=WORKSPACE_ROTATION;
+        }
+ else         if (i > mCurrentPage) {
+          rotation=-WORKSPACE_ROTATION;
+        }
+      }
+ else {
+        finalAlphaValue=1f;
+      }
       float finalAlphaMultiplierValue=((i == mCurrentPage) && (mShrinkState != ShrinkState.SPRING_LOADED)) ? 0.0f : 1.0f;
-      float rotation=0.0f;
-      if (i < mCurrentPage) {
-        rotation=WORKSPACE_ROTATION;
-      }
- else       if (i > mCurrentPage) {
-        rotation=-WORKSPACE_ROTATION;
-      }
       float translation=getOffsetXForRotation(rotation,cl.getWidth(),cl.getHeight());
       oldAlphas[i]=cl.getAlpha();
       newAlphas[i]=finalAlphaValue;

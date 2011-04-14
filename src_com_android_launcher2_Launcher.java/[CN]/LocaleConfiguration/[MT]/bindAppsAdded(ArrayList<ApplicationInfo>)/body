@@ -1,7 +1,12 @@
 {
   setLoadOnResume();
   removeDialog(DIALOG_CREATE_SHORTCUT);
-  mAllAppsGrid.addApps(apps);
+  if (mAllAppsGrid != null) {
+    mAllAppsGrid.addApps(apps);
+  }
+  if (mAppsCustomizeContent != null) {
+    mAppsCustomizeContent.addApps(apps);
+  }
   if (mCustomizePagedView != null) {
     mCustomizePagedView.addApps(apps);
   }

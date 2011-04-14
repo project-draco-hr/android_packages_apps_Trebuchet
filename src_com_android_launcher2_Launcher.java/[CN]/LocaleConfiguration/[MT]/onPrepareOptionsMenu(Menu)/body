@@ -1,14 +1,17 @@
 {
   super.onPrepareOptionsMenu(menu);
-  if (mAllAppsGrid.isAnimating()) {
-    return false;
+  if (mAllAppsGrid != null) {
+    if (mAllAppsGrid.isAnimating()) {
+      return false;
+    }
+    boolean visible=!mAllAppsGrid.isVisible();
+    menu.setGroupVisible(MENU_GROUP_ADD,visible);
+    menu.setGroupVisible(MENU_GROUP_WALLPAPER,visible);
+    if (visible) {
+      CellLayout layout=(CellLayout)mWorkspace.getChildAt(mWorkspace.getCurrentPage());
+      menu.setGroupEnabled(MENU_GROUP_ADD,layout.existsEmptyCell());
+    }
   }
-  boolean visible=!mAllAppsGrid.isVisible();
-  menu.setGroupVisible(MENU_GROUP_ADD,visible);
-  menu.setGroupVisible(MENU_GROUP_WALLPAPER,visible);
-  if (visible) {
-    CellLayout layout=(CellLayout)mWorkspace.getChildAt(mWorkspace.getCurrentPage());
-    menu.setGroupEnabled(MENU_GROUP_ADD,layout.existsEmptyCell());
-  }
+  if (mAppsCustomizeContent != null && mAppsCustomizeContent.isAnimating())   return false;
   return true;
 }

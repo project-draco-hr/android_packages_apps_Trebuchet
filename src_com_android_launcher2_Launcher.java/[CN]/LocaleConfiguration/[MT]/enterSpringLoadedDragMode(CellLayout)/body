@@ -1,8 +1,13 @@
 {
   mWorkspace.enterSpringLoadedDragMode(layout);
-  if (mState == State.ALL_APPS) {
+  if (mState == State.ALL_APPS || mState == State.APPS_CUSTOMIZE) {
     mState=State.ALL_APPS_SPRING_LOADED;
-    cameraZoomIn(State.ALL_APPS,true,true);
+    if (LauncherApplication.isScreenXLarge()) {
+      cameraZoomIn(State.ALL_APPS,true,true);
+    }
+ else {
+      cameraZoomIn(State.APPS_CUSTOMIZE,true,true);
+    }
   }
  else   if (mState == State.CUSTOMIZE) {
     mState=State.CUSTOMIZE_SPRING_LOADED;

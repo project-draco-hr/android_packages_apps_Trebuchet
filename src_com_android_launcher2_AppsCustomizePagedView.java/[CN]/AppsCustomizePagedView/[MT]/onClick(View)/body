@@ -1,0 +1,9 @@
+{
+  final ApplicationInfo appInfo=(ApplicationInfo)v.getTag();
+  animateClickFeedback(v,new Runnable(){
+    @Override public void run(){
+      mLauncher.startActivitySafely(appInfo.intent,appInfo);
+    }
+  }
+);
+}

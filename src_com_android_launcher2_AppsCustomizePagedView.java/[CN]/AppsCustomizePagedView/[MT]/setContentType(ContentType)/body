@@ -1,0 +1,5 @@
+{
+  mContentType=type;
+  setCurrentPage(0);
+  invalidatePageData();
+}

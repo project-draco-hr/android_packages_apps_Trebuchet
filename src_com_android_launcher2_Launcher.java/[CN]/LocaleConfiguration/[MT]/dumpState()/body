@@ -8,6 +8,11 @@
   Log.d(TAG,"mDesktopItems.size=" + mDesktopItems.size());
   Log.d(TAG,"sFolders.size=" + sFolders.size());
   mModel.dumpState();
-  mAllAppsGrid.dumpState();
+  if (mAllAppsGrid != null) {
+    mAllAppsGrid.dumpState();
+  }
+  if (mAppsCustomizeContent != null) {
+    mAppsCustomizeContent.dumpState();
+  }
   Log.d(TAG,"END launcher2 dump state");
 }

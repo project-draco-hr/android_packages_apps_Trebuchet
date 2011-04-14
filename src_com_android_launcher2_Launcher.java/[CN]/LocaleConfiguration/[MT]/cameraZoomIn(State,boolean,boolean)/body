@@ -1,11 +1,20 @@
 {
   Resources res=getResources();
-  final boolean fromAllApps=(fromState == State.ALL_APPS);
-  int duration=fromAllApps ? res.getInteger(R.integer.config_allAppsZoomOutTime) : res.getInteger(R.integer.config_customizeZoomOutTime);
-  final float scaleFactor=fromAllApps ? (float)res.getInteger(R.integer.config_allAppsZoomScaleFactor) : (float)res.getInteger(R.integer.config_customizeZoomScaleFactor);
-  final View fromView=fromAllApps ? (View)mAllAppsGrid : mHomeCustomizationDrawer;
-  mCustomizePagedView.endChoiceMode();
-  mAllAppsPagedView.endChoiceMode();
+  final boolean fromAllApps=(fromState == State.ALL_APPS) || (fromState == State.APPS_CUSTOMIZE);
+  int duration=fromAllApps ? res.getInteger(R.integer.config_appsCustomizeZoomOutTime) : res.getInteger(R.integer.config_customizeZoomOutTime);
+  final float scaleFactor=fromAllApps ? (float)res.getInteger(R.integer.config_appsCustomizeZoomScaleFactor) : (float)res.getInteger(R.integer.config_customizeZoomScaleFactor);
+  View tmpView;
+  if (fromAllApps) {
+    tmpView=(LauncherApplication.isScreenXLarge()) ? (View)mAllAppsGrid : mAppsCustomizeTabHost;
+  }
+ else {
+    tmpView=mHomeCustomizationDrawer;
+  }
+  final View fromView=tmpView;
+  if (LauncherApplication.isScreenXLarge()) {
+    mCustomizePagedView.endChoiceMode();
+    mAllAppsPagedView.endChoiceMode();
+  }
   setPivotsForZoom(fromView,fromState,scaleFactor);
   if (!springLoaded) {
     mWorkspace.unshrink(animated);
@@ -26,7 +35,7 @@
     }
 );
     final ValueAnimator alphaAnim=ValueAnimator.ofFloat(0f,1f);
-    alphaAnim.setDuration(res.getInteger(R.integer.config_allAppsFadeOutTime));
+    alphaAnim.setDuration(res.getInteger(R.integer.config_appsCustomizeFadeOutTime));
     alphaAnim.setInterpolator(new DecelerateInterpolator(1.5f));
     alphaAnim.addUpdateListener(new LauncherAnimatorUpdateListener(){
       public void onAnimationUpdate(      float a,      float b){

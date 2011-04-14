@@ -1,10 +1,14 @@
 {
-  if (LauncherApplication.isScreenXLarge()) {
-    Intent intent=new Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_APP_MARKET);
-    ComponentName activityName=intent.resolveActivity(getPackageManager());
-    if (activityName != null) {
-      mAppMarketIntent=intent;
-      sAppMarketIcon=updateTextButtonWithIconFromExternalActivity(R.id.market_button,activityName,R.drawable.app_market_generic);
-    }
+  final View marketButton=findViewById(R.id.market_button);
+  Intent intent=new Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_APP_MARKET);
+  ComponentName activityName=intent.resolveActivity(getPackageManager());
+  if (activityName != null) {
+    mAppMarketIntent=intent;
+    sAppMarketIcon=updateTextButtonWithIconFromExternalActivity(R.id.market_button,activityName,R.drawable.app_market_generic);
+    marketButton.setVisibility(View.VISIBLE);
+  }
+ else {
+    marketButton.setVisibility(View.GONE);
+    marketButton.setEnabled(false);
   }
 }

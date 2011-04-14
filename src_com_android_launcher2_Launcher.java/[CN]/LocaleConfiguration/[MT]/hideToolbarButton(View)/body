@@ -1,4 +1,4 @@
 {
-  button.setAlpha(0.0f);
   button.setVisibility(View.INVISIBLE);
+  button.setAlpha(0.0f);
 }

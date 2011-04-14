@@ -1,0 +1,9 @@
+{
+  Context context=getContext();
+  int numPages=mWidgets.size();
+  for (int i=0; i < numPages; ++i) {
+    PagedViewExtendedLayout layout=new PagedViewExtendedLayout(context);
+    setupPage(layout);
+    addView(layout);
+  }
+}

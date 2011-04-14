@@ -1,0 +1,4 @@
+{
+  setCurrentPage(0);
+  invalidatePageData();
+}

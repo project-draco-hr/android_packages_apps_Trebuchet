@@ -1,0 +1,21 @@
+{
+  int numPages=getPageCount();
+  int numCells=mCellCountX * mCellCountY;
+  int startIndex=page * numCells;
+  int endIndex=Math.min(startIndex + numCells,mApps.size());
+  PagedViewCellLayout layout=(PagedViewCellLayout)getChildAt(page);
+  layout.removeAllViewsOnPage();
+  for (int i=startIndex; i < endIndex; ++i) {
+    ApplicationInfo info=mApps.get(i);
+    PagedViewIcon icon=(PagedViewIcon)mLayoutInflater.inflate(R.layout.apps_customize_application,layout,false);
+    icon.applyFromApplicationInfo(info,mPageViewIconCache,true,(numPages > 1));
+    icon.setOnClickListener(this);
+    icon.setOnLongClickListener(this);
+    icon.setOnTouchListener(this);
+    int index=i - startIndex;
+    int x=index % mCellCountX;
+    int y=index / mCellCountX;
+    setupPage(layout);
+    layout.addViewToCellLayout(icon,-1,i,new PagedViewCellLayout.LayoutParams(x,y,1,1));
+  }
+}

@@ -3,9 +3,7 @@
   if (Intent.ACTION_MAIN.equals(intent.getAction())) {
     closeSystemDialogs();
     boolean alreadyOnHome=((intent.getFlags() & Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT) != Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
-    if (LauncherApplication.isScreenXLarge()) {
-      mWorkspace.unshrink(alreadyOnHome);
-    }
+    mWorkspace.unshrink(alreadyOnHome);
     mWorkspace.exitWidgetResizeMode();
     if (alreadyOnHome && mState == State.WORKSPACE && !mWorkspace.isTouchActive()) {
       mWorkspace.moveToDefaultScreen(true);
@@ -18,6 +16,9 @@
     }
     if (mAllAppsGrid != null) {
       mAllAppsGrid.reset();
+    }
+    if (mAppsCustomizeContent != null) {
+      mAppsCustomizeContent.reset();
     }
   }
 }

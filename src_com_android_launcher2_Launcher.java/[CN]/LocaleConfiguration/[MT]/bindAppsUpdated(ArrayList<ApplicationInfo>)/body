@@ -7,6 +7,9 @@
   if (mAllAppsGrid != null) {
     mAllAppsGrid.updateApps(apps);
   }
+  if (mAppsCustomizeContent != null) {
+    mAppsCustomizeContent.updateApps(apps);
+  }
   if (mCustomizePagedView != null) {
     mCustomizePagedView.updateApps(apps);
   }

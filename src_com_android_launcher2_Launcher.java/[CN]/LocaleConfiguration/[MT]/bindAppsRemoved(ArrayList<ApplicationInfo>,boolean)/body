@@ -3,7 +3,12 @@
   if (permanent) {
     mWorkspace.removeItems(apps);
   }
-  mAllAppsGrid.removeApps(apps);
+  if (mAllAppsGrid != null) {
+    mAllAppsGrid.removeApps(apps);
+  }
+  if (mAppsCustomizeContent != null) {
+    mAppsCustomizeContent.removeApps(apps);
+  }
   if (mCustomizePagedView != null) {
     mCustomizePagedView.removeApps(apps);
   }

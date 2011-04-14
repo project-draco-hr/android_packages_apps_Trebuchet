@@ -1,0 +1,4 @@
+{
+  mLauncher=launcher;
+  mAllApps.setup(launcher,dragController);
+}

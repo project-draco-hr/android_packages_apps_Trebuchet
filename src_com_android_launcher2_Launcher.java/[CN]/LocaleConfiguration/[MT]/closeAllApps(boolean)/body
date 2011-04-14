@@ -1,13 +1,16 @@
 {
-  if (mState == State.ALL_APPS || mState == State.ALL_APPS_SPRING_LOADED) {
-    mWorkspace.setVisibility(View.VISIBLE);
-    if (LauncherApplication.isScreenXLarge()) {
+  if (LauncherApplication.isScreenXLarge()) {
+    if (mState == State.ALL_APPS || mState == State.ALL_APPS_SPRING_LOADED) {
+      mWorkspace.setVisibility(View.VISIBLE);
       cameraZoomIn(State.ALL_APPS,animated,false);
+      findViewById(R.id.all_apps_button).requestFocus();
     }
+  }
  else {
-      mAllAppsGrid.zoom(0.0f,animated);
+    if (mState == State.APPS_CUSTOMIZE || mState == State.ALL_APPS_SPRING_LOADED) {
+      mWorkspace.setVisibility(View.VISIBLE);
+      cameraZoomIn(State.APPS_CUSTOMIZE,animated,false);
+      findViewById(R.id.all_apps_button).requestFocus();
     }
-    ((View)mAllAppsGrid).setFocusable(false);
-    ((CellLayout)mWorkspace.getChildAt(mWorkspace.getCurrentPage())).getChildrenLayout().requestFocus();
   }
 }

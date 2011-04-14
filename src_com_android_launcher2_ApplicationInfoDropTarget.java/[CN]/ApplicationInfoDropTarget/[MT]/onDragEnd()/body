@@ -25,10 +25,12 @@
   mFadeAnimator.play(infoButtonAnimator);
   if (mOverlappingViews != null) {
     for (    View view : mOverlappingViews) {
-      ObjectAnimator oa=ObjectAnimator.ofFloat(view,"alpha",1.0f);
-      oa.setDuration(sFadeInAnimationDuration);
-      mFadeAnimator.play(oa);
-      view.setVisibility(VISIBLE);
+      if (view.isEnabled()) {
+        ObjectAnimator oa=ObjectAnimator.ofFloat(view,"alpha",1.0f);
+        oa.setDuration(sFadeInAnimationDuration);
+        mFadeAnimator.play(oa);
+        view.setVisibility(VISIBLE);
+      }
     }
   }
   mFadeAnimator.start();

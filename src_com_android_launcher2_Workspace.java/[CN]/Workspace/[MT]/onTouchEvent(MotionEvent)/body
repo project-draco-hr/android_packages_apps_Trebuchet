@@ -1,19 +1,27 @@
 {
-  AllAppsPagedView allApps=(AllAppsPagedView)mLauncher.findViewById(R.id.all_apps_paged_view);
-  if (mLauncher.isAllAppsVisible() && mShrinkState == ShrinkState.BOTTOM_HIDDEN && allApps != null) {
-    if (ev.getAction() == MotionEvent.ACTION_UP && allApps.getTouchState() == TOUCH_STATE_REST) {
-      if (!mScroller.isFinished()) {
-        mScroller.abortAnimation();
-      }
-      setCurrentPage(mCurrentPage);
-      if (mShrinkState == ShrinkState.BOTTOM_HIDDEN) {
-        mLauncher.showWorkspace(true);
-      }
-      allApps.onTouchEvent(ev);
-      return true;
+  if (mLauncher.isAllAppsVisible() && mShrinkState == ShrinkState.BOTTOM_HIDDEN) {
+    PagedView appsPane;
+    if (LauncherApplication.isScreenXLarge()) {
+      appsPane=(PagedView)mLauncher.findViewById(R.id.all_apps_paged_view);
     }
  else {
-      return allApps.onTouchEvent(ev);
+      appsPane=(PagedView)mLauncher.findViewById(R.id.apps_customize_pane_content);
+    }
+    if (appsPane != null) {
+      if (ev.getAction() == MotionEvent.ACTION_UP && appsPane.getTouchState() == TOUCH_STATE_REST) {
+        if (!mScroller.isFinished()) {
+          mScroller.abortAnimation();
+        }
+        setCurrentPage(mCurrentPage);
+        if (mShrinkState == ShrinkState.BOTTOM_HIDDEN) {
+          mLauncher.showWorkspace(true);
+        }
+        appsPane.onTouchEvent(ev);
+        return true;
+      }
+ else {
+        return appsPane.onTouchEvent(ev);
+      }
     }
   }
   return super.onTouchEvent(ev);

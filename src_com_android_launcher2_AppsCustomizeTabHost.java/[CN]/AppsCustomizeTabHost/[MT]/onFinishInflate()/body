@@ -1,0 +1,18 @@
+{
+  setup();
+  final ViewGroup tabs=(ViewGroup)findViewById(com.android.internal.R.id.tabs);
+  final AppsCustomizePagedView content=(AppsCustomizePagedView)findViewById(R.id.apps_customize_pane_content);
+  if (tabs == null || content == null)   throw new Resources.NotFoundException();
+  TabContentFactory contentFactory=new TabContentFactory(){
+    public View createTabContent(    String tag){
+      return content;
+    }
+  }
+;
+  TextView tabView;
+  tabView=(TextView)mLayoutInflater.inflate(R.layout.tab_widget_indicator,tabs,false);
+  tabView.setText(mContext.getString(R.string.all_apps_button_label));
+  addTab(newTabSpec(APPS_TAB_TAG).setIndicator(tabView).setContent(contentFactory));
+  setOnTabChangedListener(this);
+  tabs.getLayoutParams().width=content.getPageContentWidth();
+}

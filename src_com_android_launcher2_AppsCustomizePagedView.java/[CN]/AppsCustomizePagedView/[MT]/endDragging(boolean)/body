@@ -1,0 +1,13 @@
+{
+  post(new Runnable(){
+    public void run(){
+      DeleteZone allAppsDeleteZone=(DeleteZone)mLauncher.findViewById(R.id.all_apps_delete_zone);
+      ApplicationInfoDropTarget allAppsInfoButton=(ApplicationInfoDropTarget)mLauncher.findViewById(R.id.all_apps_info_target);
+      if (allAppsDeleteZone != null)       allAppsDeleteZone.setDragAndDropEnabled(false);
+      if (allAppsInfoButton != null)       allAppsInfoButton.setDragAndDropEnabled(false);
+    }
+  }
+);
+  mLauncher.getWorkspace().onDragStopped(success);
+  mLauncher.unlockScreenOrientation();
+}

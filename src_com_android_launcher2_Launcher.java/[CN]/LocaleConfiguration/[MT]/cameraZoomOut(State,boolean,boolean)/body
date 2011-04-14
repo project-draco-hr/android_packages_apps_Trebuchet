@@ -1,15 +1,24 @@
 {
   final Resources res=getResources();
-  final boolean toAllApps=(toState == State.ALL_APPS);
-  final int duration=toAllApps ? res.getInteger(R.integer.config_allAppsZoomInTime) : res.getInteger(R.integer.config_customizeZoomInTime);
-  final int fadeDuration=toAllApps ? res.getInteger(R.integer.config_allAppsFadeInTime) : res.getInteger(R.integer.config_customizeFadeInTime);
-  final float scale=toAllApps ? (float)res.getInteger(R.integer.config_allAppsZoomScaleFactor) : (float)res.getInteger(R.integer.config_customizeZoomScaleFactor);
-  final View toView=toAllApps ? (View)mAllAppsGrid : mHomeCustomizationDrawer;
+  final boolean toAllApps=(toState == State.ALL_APPS) || (toState == State.APPS_CUSTOMIZE);
+  final int duration=(toAllApps ? res.getInteger(R.integer.config_appsCustomizeZoomInTime) : res.getInteger(R.integer.config_customizeZoomInTime));
+  final int fadeDuration=(toAllApps ? res.getInteger(R.integer.config_appsCustomizeFadeInTime) : res.getInteger(R.integer.config_customizeFadeInTime));
+  final float scale=toAllApps ? (float)res.getInteger(R.integer.config_appsCustomizeZoomScaleFactor) : (float)res.getInteger(R.integer.config_customizeZoomScaleFactor);
+  View tmpView;
+  if (toAllApps) {
+    tmpView=(LauncherApplication.isScreenXLarge()) ? (View)mAllAppsGrid : mAppsCustomizeTabHost;
+  }
+ else {
+    tmpView=mHomeCustomizationDrawer;
+  }
+  final View toView=tmpView;
   setPivotsForZoom(toView,toState,scale);
   if (toAllApps) {
     if (!springLoaded) {
       mWorkspace.shrink(ShrinkState.BOTTOM_HIDDEN,animated);
-      mAllAppsPagedView.resetSuccessfulDropFlag();
+      if (LauncherApplication.isScreenXLarge()) {
+        mAllAppsPagedView.resetSuccessfulDropFlag();
+      }
     }
  else {
       mWorkspace.shrink(ShrinkState.BOTTOM_VISIBLE,animated);
@@ -49,6 +58,7 @@
         toView.setTranslationX(0.0f);
         toView.setTranslationY(0.0f);
         toView.setVisibility(View.VISIBLE);
+        toView.bringToFront();
         if (!toAllApps) {
           toView.setFastAlpha(1.0f);
         }
@@ -80,6 +90,7 @@
     toView.setScaleX(1.0f);
     toView.setScaleY(1.0f);
     toView.setVisibility(View.VISIBLE);
+    toView.bringToFront();
     if (toView instanceof LauncherTransitionable) {
       ((LauncherTransitionable)toView).onLauncherTransitionStart(null);
       ((LauncherTransitionable)toView).onLauncherTransitionEnd(null);

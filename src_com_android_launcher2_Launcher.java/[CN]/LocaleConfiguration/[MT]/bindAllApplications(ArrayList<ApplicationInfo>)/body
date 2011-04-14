@@ -1,5 +1,10 @@
 {
-  mAllAppsGrid.setApps(apps);
+  if (mAllAppsGrid != null) {
+    mAllAppsGrid.setApps(apps);
+  }
+  if (mAppsCustomizeContent != null) {
+    mAppsCustomizeContent.setApps(apps);
+  }
   if (mCustomizePagedView != null) {
     mCustomizePagedView.setApps(apps);
   }

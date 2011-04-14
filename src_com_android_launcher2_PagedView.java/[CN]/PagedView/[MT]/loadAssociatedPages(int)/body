@@ -4,6 +4,7 @@
     if (page < count) {
       int lowerPageBound=getAssociatedLowerPageBound(page);
       int upperPageBound=getAssociatedUpperPageBound(page);
+      if (DEBUG)       Log.d(TAG,"loadAssociatedPages: " + lowerPageBound + "/"+ upperPageBound);
       for (int i=0; i < count; ++i) {
         Page layout=(Page)getChildAt(i);
         final int childCount=layout.getPageChildCount();

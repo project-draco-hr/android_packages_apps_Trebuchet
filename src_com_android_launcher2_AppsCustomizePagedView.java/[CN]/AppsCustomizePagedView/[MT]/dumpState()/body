@@ -1,0 +1,4 @@
+{
+  ApplicationInfo.dumpApplicationInfoList(LOG_TAG,"mApps",mApps);
+  dumpAppWidgetProviderInfoList(LOG_TAG,"mWidgets",mWidgets);
+}

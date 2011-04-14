@@ -31,7 +31,7 @@
   setOnTabChangedListener(new OnTabChangeListener(){
     public void onTabChanged(    String tabId){
       final Resources res=getResources();
-      final int duration=res.getInteger(R.integer.config_tabTransitionTime);
+      final int duration=res.getInteger(R.integer.config_tabTransitionDuration);
       final float alpha=mAllApps.getAlpha();
       ValueAnimator alphaAnim=ObjectAnimator.ofFloat(mAllApps,"alpha",alpha,0.0f).setDuration(duration);
       alphaAnim.addListener(new AnimatorListenerAdapter(){

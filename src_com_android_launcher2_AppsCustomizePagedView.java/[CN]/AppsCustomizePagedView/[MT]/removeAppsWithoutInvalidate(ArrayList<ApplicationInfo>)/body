@@ -1,0 +1,11 @@
+{
+  int length=list.size();
+  for (int i=0; i < length; ++i) {
+    ApplicationInfo info=list.get(i);
+    int removeIndex=findAppByComponent(mApps,info);
+    if (removeIndex > -1) {
+      mApps.remove(removeIndex);
+      mPageViewIconCache.removeOutline(new PagedViewIconCache.Key(info));
+    }
+  }
+}

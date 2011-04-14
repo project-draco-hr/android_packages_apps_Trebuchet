@@ -1,0 +1,16 @@
+{
+  super(context,attrs);
+  mLayoutInflater=LayoutInflater.from(context);
+  mPackageManager=context.getPackageManager();
+  mContentType=ContentType.Applications;
+  mApps=new ArrayList<ApplicationInfo>();
+  TypedArray a=context.obtainStyledAttributes(attrs,R.styleable.PagedView,0,0);
+  mCellCountX=a.getInt(R.styleable.PagedView_cellCountX,6);
+  mCellCountY=a.getInt(R.styleable.PagedView_cellCountY,4);
+  a.recycle();
+  PagedViewCellLayout layout=new PagedViewCellLayout(context);
+  setupPage(layout);
+  mContentWidth=layout.getContentWidth();
+  mWidgetSpacingLayout=new PagedViewCellLayout(context);
+  mWidgetSpacingLayout.setCellCount(mCellCountX,mCellCountY);
+}

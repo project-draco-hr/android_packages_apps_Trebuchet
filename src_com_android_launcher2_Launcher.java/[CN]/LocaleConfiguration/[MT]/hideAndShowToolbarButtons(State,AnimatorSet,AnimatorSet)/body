@@ -2,14 +2,18 @@
 switch (newState) {
 case WORKSPACE:
     hideOrShowToolbarButton(true,mButtonCluster,showSeq);
-  mDeleteZone.setOverlappingViews(new View[]{mAllAppsButton,mDivider,mConfigureButton});
-mDeleteZone.setDragAndDropEnabled(true);
-mDeleteZone.setText(getResources().getString(R.string.delete_zone_label_workspace));
+  mDeleteZone.setDragAndDropEnabled(true);
+if (LauncherApplication.isScreenXLarge()) {
+  mDeleteZone.setText(getResources().getString(R.string.delete_zone_label_workspace));
+}
 break;
 case ALL_APPS:
+case APPS_CUSTOMIZE:
 hideOrShowToolbarButton(false,mButtonCluster,hideSeq);
 mDeleteZone.setDragAndDropEnabled(false);
+if (LauncherApplication.isScreenXLarge()) {
 mDeleteZone.setText(getResources().getString(R.string.delete_zone_label_all_apps));
+}
 break;
 case CUSTOMIZE:
 hideOrShowToolbarButton(false,mButtonCluster,hideSeq);

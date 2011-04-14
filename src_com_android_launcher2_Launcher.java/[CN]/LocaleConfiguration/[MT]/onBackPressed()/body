@@ -1,5 +1,5 @@
 {
-  if (mState == State.ALL_APPS || mState == State.CUSTOMIZE) {
+  if (mState == State.ALL_APPS || mState == State.CUSTOMIZE || mState == State.APPS_CUSTOMIZE) {
     showWorkspace(true);
   }
  else   if (mWorkspace.getOpenFolder() != null) {

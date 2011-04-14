@@ -1,0 +1,11 @@
+{
+  removeAllViews();
+switch (mContentType) {
+case Applications:
+    syncAppsPages();
+  break;
+case Widgets:
+syncWidgetPages();
+break;
+}
+}

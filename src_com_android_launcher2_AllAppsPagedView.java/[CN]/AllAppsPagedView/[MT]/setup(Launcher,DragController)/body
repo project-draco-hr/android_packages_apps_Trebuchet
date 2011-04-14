@@ -1,0 +1,5 @@
+{
+  mLauncher=launcher;
+  mLauncher.setAllAppsPagedView(this);
+  mDragController=dragController;
+}

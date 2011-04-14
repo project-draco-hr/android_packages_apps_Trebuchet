@@ -1,5 +1,6 @@
 {
   if (mState == State.CUSTOMIZE || mState == State.CUSTOMIZE_SPRING_LOADED) {
     cameraZoomIn(State.CUSTOMIZE,animated,false);
+    findViewById(R.id.configure_button).requestFocus();
   }
 }

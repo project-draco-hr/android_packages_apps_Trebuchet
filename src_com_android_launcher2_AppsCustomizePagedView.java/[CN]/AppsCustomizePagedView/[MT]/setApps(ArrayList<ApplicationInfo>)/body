@@ -1,0 +1,5 @@
+{
+  mApps=list;
+  Collections.sort(mApps,LauncherModel.APP_NAME_COMPARATOR);
+  invalidatePageData();
+}

@@ -1,5 +1,10 @@
 {
   mModel.stopLoader();
-  mAllAppsGrid.surrender();
+  if (mAllAppsGrid != null) {
+    mAllAppsGrid.surrender();
+  }
+  if (mAppsCustomizeContent != null) {
+    mAppsCustomizeContent.surrender();
+  }
   return Boolean.TRUE;
 }

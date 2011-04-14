@@ -1,0 +1,8 @@
+{
+  layout.setCellCount(mCellCountX,mCellCountY);
+  layout.setGap(mPageLayoutWidthGap,mPageLayoutHeightGap);
+  layout.setPadding(mPageLayoutPaddingLeft,mPageLayoutPaddingTop,mPageLayoutPaddingRight,mPageLayoutPaddingBottom);
+  int widthSpec=MeasureSpec.makeMeasureSpec(getMeasuredWidth(),MeasureSpec.AT_MOST);
+  int heightSpec=MeasureSpec.makeMeasureSpec(getMeasuredHeight(),MeasureSpec.AT_MOST);
+  layout.measure(widthSpec,heightSpec);
+}
