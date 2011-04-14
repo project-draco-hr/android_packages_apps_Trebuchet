@@ -1,0 +1,29 @@
+{
+  final TabHost tabHost=findTabHostParent(v);
+  final ViewGroup contents=(ViewGroup)tabHost.findViewById(com.android.internal.R.id.tabcontent);
+  final View shop=tabHost.findViewById(R.id.market_button);
+  final int action=e.getAction();
+  final boolean handleKeyEvent=(action != KeyEvent.ACTION_UP);
+  boolean wasHandled=false;
+switch (keyCode) {
+case KeyEvent.KEYCODE_DPAD_RIGHT:
+    if (handleKeyEvent) {
+      if (v != shop) {
+        shop.requestFocus();
+      }
+    }
+  wasHandled=true;
+break;
+case KeyEvent.KEYCODE_DPAD_DOWN:
+if (handleKeyEvent) {
+if (v == shop) {
+  contents.requestFocus();
+  wasHandled=true;
+}
+}
+break;
+default :
+break;
+}
+return wasHandled;
+}

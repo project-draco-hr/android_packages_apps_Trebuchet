@@ -1,0 +1,6 @@
+{
+  if (mIsSmall) {
+    return ViewGroup.FOCUS_BLOCK_DESCENDANTS;
+  }
+  return super.getDescendantFocusability();
+}

@@ -1,4 +1,3 @@
 {
-  button.setFocusable(false);
   button.setClickable(false);
 }

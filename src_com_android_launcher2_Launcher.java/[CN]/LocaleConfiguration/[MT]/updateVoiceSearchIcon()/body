@@ -1,12 +1,17 @@
 {
   if (LauncherApplication.isScreenXLarge()) {
+    final View searchDivider=findViewById(R.id.search_divider);
+    final View voiceButton=findViewById(R.id.voice_button);
     Intent intent=new Intent(RecognizerIntent.ACTION_WEB_SEARCH);
     ComponentName activityName=intent.resolveActivity(getPackageManager());
     if (activityName != null) {
       sVoiceSearchIcon=updateButtonWithIconFromExternalActivity(R.id.voice_button,activityName,R.drawable.ic_voice_search);
+      searchDivider.setVisibility(View.VISIBLE);
+      voiceButton.setVisibility(View.VISIBLE);
     }
  else {
-      findViewById(R.id.voice_button).setVisibility(View.GONE);
+      searchDivider.setVisibility(View.GONE);
+      voiceButton.setVisibility(View.GONE);
     }
   }
 }

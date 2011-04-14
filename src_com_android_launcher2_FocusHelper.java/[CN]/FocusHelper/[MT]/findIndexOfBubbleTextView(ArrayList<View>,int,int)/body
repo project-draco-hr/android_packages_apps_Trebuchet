@@ -1,0 +1,12 @@
+{
+  final int count=views.size();
+  int newI=i + delta;
+  while (0 <= newI && newI < count) {
+    View newV=views.get(newI);
+    if (newV instanceof BubbleTextView) {
+      return newV;
+    }
+    newI+=delta;
+  }
+  return null;
+}

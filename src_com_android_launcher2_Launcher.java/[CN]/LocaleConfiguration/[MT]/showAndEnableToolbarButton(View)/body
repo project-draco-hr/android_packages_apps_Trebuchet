@@ -1,5 +1,4 @@
 {
   button.setVisibility(View.VISIBLE);
-  button.setFocusable(true);
   button.setClickable(true);
 }

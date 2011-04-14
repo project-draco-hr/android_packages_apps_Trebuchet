@@ -1,0 +1,3 @@
+{
+  return FocusHelper.handlePagedViewWidgetKeyEvent(this,keyCode,event) || super.onKeyDown(keyCode,event);
+}

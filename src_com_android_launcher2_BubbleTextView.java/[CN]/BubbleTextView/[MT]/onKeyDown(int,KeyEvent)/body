@@ -1,0 +1,3 @@
+{
+  return FocusHelper.handleBubbleTextViewKeyEvent(this,keyCode,event) || super.onKeyDown(keyCode,event);
+}

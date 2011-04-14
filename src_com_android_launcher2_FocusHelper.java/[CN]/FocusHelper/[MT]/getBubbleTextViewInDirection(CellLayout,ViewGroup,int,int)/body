@@ -1,0 +1,4 @@
+{
+  final ArrayList<View> views=getCellLayoutChildrenSortedSpatially(layout,parent);
+  return findIndexOfBubbleTextView(views,i,delta);
+}
