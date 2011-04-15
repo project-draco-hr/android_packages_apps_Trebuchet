@@ -34,6 +34,9 @@ break;
 default :
 throw new IllegalStateException("Unknown item type: " + info.itemType);
 }
+if (touchXY != null && createUserFolderIfNecessary(view,cellLayout,touchXY[0],touchXY[1],true)) {
+return;
+}
 mTargetCell=new int[2];
 if (touchXY != null) {
 mTargetCell=findNearestVacantArea(touchXY[0],touchXY[1],1,1,null,cellLayout,mTargetCell);
