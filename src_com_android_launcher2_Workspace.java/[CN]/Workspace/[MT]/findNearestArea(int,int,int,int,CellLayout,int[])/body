@@ -1,5 +1,3 @@
 {
-  int localPixelX=pixelX - (layout.getLeft() - mScrollX);
-  int localPixelY=pixelY - (layout.getTop() - mScrollY);
-  return layout.findNearestArea(localPixelX,localPixelY,spanX,spanY,recycle);
+  return layout.findNearestArea(pixelX,pixelY,spanX,spanY,recycle);
 }

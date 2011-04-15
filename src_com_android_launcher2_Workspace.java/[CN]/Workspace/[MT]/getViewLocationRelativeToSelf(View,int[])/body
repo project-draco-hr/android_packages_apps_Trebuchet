@@ -1,0 +1,10 @@
+{
+  getLocationOnScreen(location);
+  int x=location[0];
+  int y=location[1];
+  v.getLocationOnScreen(location);
+  int vX=location[0];
+  int vY=location[1];
+  location[0]=vX - x;
+  location[1]=vY - y;
+}

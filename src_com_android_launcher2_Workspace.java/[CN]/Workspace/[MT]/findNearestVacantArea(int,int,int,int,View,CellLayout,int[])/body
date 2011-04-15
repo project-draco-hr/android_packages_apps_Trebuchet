@@ -1,5 +1,3 @@
 {
-  int localPixelX=pixelX - (layout.getLeft() - mScrollX);
-  int localPixelY=pixelY - (layout.getTop() - mScrollY);
-  return layout.findNearestVacantArea(localPixelX,localPixelY,spanX,spanY,ignoreView,recycle);
+  return layout.findNearestVacantArea(pixelX,pixelY,spanX,spanY,ignoreView,recycle);
 }

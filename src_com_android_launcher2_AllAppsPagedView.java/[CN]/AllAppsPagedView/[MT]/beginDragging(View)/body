@@ -10,6 +10,15 @@
   Canvas c=new Canvas(b);
   c.translate((v.getWidth() - icon.getIntrinsicWidth()) / 2,v.getPaddingTop());
   icon.draw(c);
+  Rect dragRect=null;
+  if (v instanceof TextView) {
+    int iconSize=getResources().getDimensionPixelSize(R.dimen.app_icon_size);
+    int top=v.getPaddingTop();
+    int left=(b.getWidth() - iconSize) / 2;
+    int right=left + iconSize;
+    int bottom=top + iconSize;
+    dragRect=new Rect(left,top,right,bottom);
+  }
   if (v instanceof Checkable) {
     resetCheckedGrandchildren();
     Checkable checkable=(Checkable)v;
@@ -17,7 +26,7 @@
   }
   mLauncher.lockScreenOrientation();
   mLauncher.getWorkspace().onDragStartedWithItemSpans(1,1,b);
-  mDragController.startDrag(v,b,this,app,DragController.DRAG_ACTION_COPY,null);
+  mDragController.startDrag(v,b,this,app,DragController.DRAG_ACTION_COPY,dragRect);
   b.recycle();
   return true;
 }

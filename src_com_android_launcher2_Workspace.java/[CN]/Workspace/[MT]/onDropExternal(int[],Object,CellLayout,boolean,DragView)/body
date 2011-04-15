@@ -36,7 +36,7 @@ throw new IllegalStateException("Unknown item type: " + info.itemType);
 }
 mTargetCell=new int[2];
 if (touchXY != null) {
-cellLayout.findNearestVacantArea(touchXY[0],touchXY[1],1,1,mTargetCell);
+mTargetCell=findNearestVacantArea(touchXY[0],touchXY[1],1,1,null,cellLayout,mTargetCell);
 }
  else {
 cellLayout.findCellForSpan(mTargetCell,1,1);
@@ -48,7 +48,9 @@ cellLayout.animateDrop();
 CellLayout.LayoutParams lp=(CellLayout.LayoutParams)view.getLayoutParams();
 cellLayout.getChildrenLayout().measureChild(view);
 if (dragView != null) {
-setPositionForDropAnimation(dragView,dragViewX,dragViewY,cellLayout,view);
+int loc[]=new int[2];
+getViewLocationRelativeToSelf(dragView,loc);
+setPositionForDropAnimation(dragView,loc[0],loc[1],cellLayout,view);
 }
 LauncherModel.addOrMoveItemInDatabase(mLauncher,info,LauncherSettings.Favorites.CONTAINER_DESKTOP,screen,lp.cellX,lp.cellY);
 }

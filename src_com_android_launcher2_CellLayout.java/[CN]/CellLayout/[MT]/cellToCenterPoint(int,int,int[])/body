@@ -1,0 +1,6 @@
+{
+  final int hStartPadding=getLeftPadding();
+  final int vStartPadding=getTopPadding();
+  result[0]=hStartPadding + cellX * (mCellWidth + mWidthGap) + mCellWidth / 2;
+  result[1]=vStartPadding + cellY * (mCellHeight + mHeightGap) + mCellHeight / 2;
+}
