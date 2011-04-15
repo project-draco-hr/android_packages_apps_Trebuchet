@@ -9,12 +9,12 @@
   for (  DragListener listener : mListeners) {
     listener.onDragStart(source,dragInfo,dragAction);
   }
-  int registrationX=((int)mMotionDownX) - screenX;
-  int registrationY=((int)mMotionDownY) - screenY;
+  final int registrationX=((int)mMotionDownX) - screenX;
+  final int registrationY=((int)mMotionDownY) - screenY;
   final int dragRegionLeft=dragRegion == null ? 0 : dragRegion.left;
   final int dragRegionTop=dragRegion == null ? 0 : dragRegion.top;
-  mTouchOffsetX=mMotionDownX - screenX - dragRegionLeft;
-  mTouchOffsetY=mMotionDownY - screenY - dragRegionTop;
+  mTouchOffsetX=mMotionDownX - (screenX + dragRegionLeft);
+  mTouchOffsetY=mMotionDownY - (screenY + dragRegionTop);
   mDragging=true;
   mDragSource=source;
   mDragInfo=dragInfo;
@@ -28,7 +28,7 @@
   }
 );
   if (dragRegion != null) {
-    dragView.setDragRegion(dragRegionLeft,dragRegion.top,dragRegion.right - dragRegionLeft,dragRegion.bottom - dragRegionTop);
+    dragView.setDragRegion(new Rect(dragRegion));
   }
   dragView.show(mWindowToken,(int)mMotionDownX,(int)mMotionDownY);
   handleMoveEvent((int)mMotionDownX,(int)mMotionDownY);

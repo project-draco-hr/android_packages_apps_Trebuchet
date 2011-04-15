@@ -33,7 +33,7 @@
   }
 );
   mBitmap=Bitmap.createBitmap(bitmap,left,top,width,height,scale,true);
-  setDragRegion(0,0,width,height);
+  setDragRegion(new Rect(0,0,width,height));
   mRegistrationX=registrationX;
   mRegistrationY=registrationY;
   int ms=View.MeasureSpec.makeMeasureSpec(0,View.MeasureSpec.UNSPECIFIED);

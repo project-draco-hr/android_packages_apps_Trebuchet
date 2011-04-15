@@ -1,16 +1,17 @@
 {
   if (!mInScrollArea) {
     CellLayout layout;
-    int originX=x - xOffset;
-    int originY=y - yOffset;
+    int left=x - xOffset;
+    int top=y - yOffset;
+    mDragViewVisualCenter=getDragViewVisualCenter(x,y,xOffset,yOffset,dragView,mDragViewVisualCenter);
     boolean shrunken=mIsSmall || mIsInUnshrinkAnimation;
     if (shrunken) {
       mLastDragView=dragView;
-      mLastDragOriginX=originX;
-      mLastDragOriginY=originY;
+      mLastDragOriginX=left;
+      mLastDragOriginY=top;
       mLastDragXOffset=xOffset;
       mLastDragYOffset=yOffset;
-      layout=findMatchingPageForDragOver(dragView,originX,originY,xOffset,yOffset);
+      layout=findMatchingPageForDragOver(dragView,left,top,xOffset,yOffset);
       if (layout != mDragTargetLayout) {
         if (mDragTargetLayout != null) {
           mDragTargetLayout.setIsDragOverlapping(false);
@@ -45,25 +46,10 @@
           item.spanY=spans[1];
         }
       }
-      if (source instanceof AllAppsPagedView) {
-        if (item != null && item.spanX == 1 && layout != null) {
-          int dragRegionLeft=(dragView.getWidth() - layout.getCellWidth()) / 2;
-          originX+=dragRegionLeft - dragView.getDragRegionLeft();
-          if (dragView.getDragRegionWidth() != layout.getCellWidth()) {
-            dragView.setDragRegion(dragView.getDragRegionLeft(),dragView.getDragRegionTop(),layout.getCellWidth(),dragView.getDragRegionHeight());
-          }
-        }
-      }
- else       if (source == this) {
-        final View origView=mDragInfo.cell;
-        originX+=(dragView.getMeasuredWidth() - origView.getWidth()) / 2;
-        originY+=(dragView.getMeasuredHeight() - origView.getHeight()) / 2 + dragView.getOffsetY();
-      }
       if (mDragTargetLayout != null) {
         final View child=(mDragInfo == null) ? null : mDragInfo.cell;
-        float[] localOrigin={originX,originY};
-        mapPointFromSelfToChild(mDragTargetLayout,localOrigin,null);
-        mDragTargetLayout.visualizeDropLocation(child,mDragOutline,(int)localOrigin[0],(int)localOrigin[1],item.spanX,item.spanY);
+        mapPointFromSelfToChild(mDragTargetLayout,mDragViewVisualCenter,null);
+        mDragTargetLayout.visualizeDropLocation(child,mDragOutline,(int)mDragViewVisualCenter[0],(int)mDragViewVisualCenter[1],item.spanX,item.spanY);
       }
     }
   }
