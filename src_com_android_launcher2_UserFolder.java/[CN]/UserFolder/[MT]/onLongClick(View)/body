@@ -5,6 +5,7 @@
     if (!v.isInTouchMode()) {
       return false;
     }
+    mLauncher.getWorkspace().onDragStartedWithItem(v);
     mDragController.startDrag(v,this,item,DragController.DRAG_ACTION_COPY);
     mLauncher.closeFolder(this);
     mDragItem=item;
