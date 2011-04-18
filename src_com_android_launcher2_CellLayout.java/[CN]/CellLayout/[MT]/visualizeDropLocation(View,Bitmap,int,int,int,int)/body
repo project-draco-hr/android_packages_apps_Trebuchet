@@ -20,6 +20,10 @@
       left+=(v.getWidth() - dragOutline.getWidth()) / 2;
       top+=(v.getHeight() - dragOutline.getHeight()) / 2;
     }
+ else {
+      left+=(mCellWidth - dragOutline.getWidth()) / 2;
+      top+=(mCellHeight - dragOutline.getHeight()) / 2;
+    }
     final int oldIndex=mDragOutlineCurrent;
     mDragOutlineAnims[oldIndex].animateOut();
     mDragOutlineCurrent=(oldIndex + 1) % mDragOutlines.length;
