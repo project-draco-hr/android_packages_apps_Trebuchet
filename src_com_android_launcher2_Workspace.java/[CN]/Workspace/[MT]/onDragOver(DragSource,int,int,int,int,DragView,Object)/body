@@ -49,7 +49,15 @@
       if (mDragTargetLayout != null) {
         final View child=(mDragInfo == null) ? null : mDragInfo.cell;
         mapPointFromSelfToChild(mDragTargetLayout,mDragViewVisualCenter,null);
-        mDragTargetLayout.visualizeDropLocation(child,mDragOutline,(int)mDragViewVisualCenter[0],(int)mDragViewVisualCenter[1],item.spanX,item.spanY);
+        ItemInfo info=(ItemInfo)dragInfo;
+        if (!willCreateUserFolder(info,mDragTargetLayout,(int)mDragViewVisualCenter[0],(int)mDragViewVisualCenter[1])) {
+          mIsDraggingOverIcon=false;
+          mDragTargetLayout.visualizeDropLocation(child,mDragOutline,(int)mDragViewVisualCenter[0],(int)mDragViewVisualCenter[1],item.spanX,item.spanY);
+        }
+ else         if (!mIsDraggingOverIcon) {
+          mIsDraggingOverIcon=true;
+          mDragTargetLayout.clearDragOutlines();
+        }
       }
     }
   }
