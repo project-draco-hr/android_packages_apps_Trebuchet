@@ -14,6 +14,9 @@
     lp.cellHSpan=spanX;
     lp.cellVSpan=spanY;
   }
+  if (spanX < 0 && spanY < 0) {
+    lp.isLockedToGrid=false;
+  }
   int childId=LauncherModel.getCellLayoutChildId(-1,screen,x,y,spanX,spanY);
   boolean markCellsAsOccupied=!(child instanceof Folder);
   if (!group.addViewToCellLayout(child,insert ? 0 : -1,childId,lp,markCellsAsOccupied)) {

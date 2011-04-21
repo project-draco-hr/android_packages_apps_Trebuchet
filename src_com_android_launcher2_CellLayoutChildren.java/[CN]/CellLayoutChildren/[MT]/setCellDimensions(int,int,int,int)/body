@@ -1,8 +1,6 @@
 {
   mCellWidth=cellWidth;
   mCellHeight=cellHeight;
-  mLeftPadding=leftPadding;
-  mTopPadding=topPadding;
   mWidthGap=widthGap;
   mHeightGap=heightGap;
 }

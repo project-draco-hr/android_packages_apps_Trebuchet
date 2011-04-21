@@ -89,6 +89,6 @@
   setHoverScale(1.0f);
   setHoverAlpha(1.0f);
   mChildren=new CellLayoutChildren(context);
-  mChildren.setCellDimensions(mCellWidth,mCellHeight,mLeftPadding,mTopPadding,mWidthGap,mHeightGap);
+  mChildren.setCellDimensions(mCellWidth,mCellHeight,mWidthGap,mHeightGap);
   addView(mChildren);
 }

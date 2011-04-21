@@ -1,0 +1,11 @@
+{
+  if (r == null) {
+    r=new Rect();
+  }
+  int left=getPaddingLeft();
+  int top=getPaddingTop();
+  int right=left + getWidth() - mLeftPadding - mRightPadding;
+  int bottom=top + getHeight() - mTopPadding - mBottomPadding;
+  r.set(left,top,right,bottom);
+  return r;
+}

@@ -1,0 +1,14 @@
+{
+  if (!(getParent() instanceof CellLayoutChildren))   return;
+  CellLayoutChildren clc=(CellLayoutChildren)getParent();
+  CellLayout cellLayout=(CellLayout)clc.getParent();
+  FolderIcon fi=(FolderIcon)cellLayout.getChildAt(mInfo.cellX,mInfo.cellY);
+  CellLayout.LayoutParams iconLp=(CellLayout.LayoutParams)fi.getLayoutParams();
+  CellLayout.LayoutParams lp=(CellLayout.LayoutParams)getLayoutParams();
+  lp.width=iconLp.width;
+  lp.height=iconLp.height;
+  lp.x=iconLp.x;
+  lp.y=iconLp.y;
+  mContent.setAlpha(0f);
+  mState=STATE_SMALL;
+}

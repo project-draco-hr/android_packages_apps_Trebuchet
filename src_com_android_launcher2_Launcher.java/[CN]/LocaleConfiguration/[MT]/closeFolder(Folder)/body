@@ -3,10 +3,16 @@
   ViewGroup parent=(ViewGroup)folder.getParent().getParent();
   if (parent != null) {
     CellLayout cl=(CellLayout)parent;
-    cl.removeViewWithoutMarkingCells(folder);
+    if (!(folder instanceof UserFolder)) {
+      cl.removeViewWithoutMarkingCells(folder);
+    }
     if (folder instanceof DropTarget) {
       mDragController.removeDropTarget((DropTarget)folder);
     }
+  }
+  if (folder instanceof UserFolder) {
+    UserFolder uf=(UserFolder)folder;
+    uf.animateClosed();
   }
   folder.onClose();
 }
