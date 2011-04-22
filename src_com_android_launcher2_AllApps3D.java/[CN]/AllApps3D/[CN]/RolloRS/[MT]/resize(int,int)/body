@@ -7,13 +7,15 @@
     i.ScaleOffset.x=(2.f / 480.f);
     i.ScaleOffset.y=0;
     i.ScaleOffset.z=-((float)w / 2) - 0.25f;
-    i.ScaleOffset.w=-380.25f;
-    i.BendPos.x=120.f;
-    i.BendPos.y=680.f;
-    if (w > h) {
-      i.ScaleOffset.z=40.f;
-      i.ScaleOffset.w=h - 40.f;
-      i.BendPos.y=1.f;
+    if (w < h) {
+      i.ScaleOffset.w=-380.25f;
+      i.BendPos.x=120.f;
+      i.BendPos.y=h - 82.f;
+    }
+ else {
+      i.ScaleOffset.w=-206.25f;
+      i.BendPos.x=50.f;
+      i.BendPos.y=h - 30.f;
     }
     mUniformAlloc.set(i,0,true);
   }
