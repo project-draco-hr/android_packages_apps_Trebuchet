@@ -4,7 +4,7 @@
   }
   Bitmap overlay=null;
   if (mCheckedOutline == null) {
-    if (mHolographicOutline != null && mHolographicAlpha > 0) {
+    if (mHolographicEffectsEnabled && mHolographicOutline != null && mHolographicAlpha > 0) {
       mPaint.setAlpha(mHolographicAlpha);
       overlay=mHolographicOutline;
     }

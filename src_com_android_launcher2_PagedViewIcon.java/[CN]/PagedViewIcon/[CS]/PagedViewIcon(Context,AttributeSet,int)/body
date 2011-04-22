@@ -15,4 +15,5 @@
     mCheckedFadeOutDuration=r.getInteger(R.integer.config_dragAppsCustomizeIconFadeOutDuration);
   }
   mHolographicOutlineView=new HolographicPagedViewIcon(context,this);
+  mHolographicEffectsEnabled=isHardwareAccelerated();
 }

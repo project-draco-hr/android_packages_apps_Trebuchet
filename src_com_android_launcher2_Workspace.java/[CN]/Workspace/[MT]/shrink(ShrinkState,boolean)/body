@@ -118,11 +118,13 @@
   int wallpaperTravelHeight=(int)(display.getHeight() * wallpaperTravelToScreenHeightRatio(display.getWidth(),display.getHeight()));
   float offsetFromCenter=(wallpaperTravelHeight / (float)mWallpaperHeight) / 2f;
   boolean isLandscape=display.getWidth() > display.getHeight();
+  final boolean enableWallpaperEffects=isHardwareAccelerated();
+  if (enableWallpaperEffects) {
 switch (shrinkState) {
 case TOP:
-    wallpaperOffset=0.5f + offsetFromCenter;
-  mWallpaperOffset.setVerticalCatchupConstant(isLandscape ? 0.46f : 0.44f);
-break;
+      wallpaperOffset=0.5f + offsetFromCenter;
+    mWallpaperOffset.setVerticalCatchupConstant(isLandscape ? 0.46f : 0.44f);
+  break;
 case MIDDLE:
 case SPRING_LOADED:
 wallpaperOffset=0.5f;
@@ -134,10 +136,13 @@ wallpaperOffset=0.5f - offsetFromCenter;
 mWallpaperOffset.setVerticalCatchupConstant(isLandscape ? 0.34f : 0.32f);
 break;
 }
+}
 setLayoutScale(1.0f);
 if (animated) {
+if (enableWallpaperEffects) {
 mWallpaperOffset.setHorizontalCatchupConstant(0.46f);
 mWallpaperOffset.setOverrideHorizontalCatchupConstant(true);
+}
 mSyncWallpaperOffsetWithScroll=false;
 ValueAnimator animWithInterpolator=ValueAnimator.ofFloat(0f,1f).setDuration(duration);
 animWithInterpolator.setInterpolator(mZoomOutInterpolator);
@@ -151,8 +156,10 @@ if (b == 0f) {
 return;
 }
 fastInvalidate();
+if (enableWallpaperEffects) {
 setHorizontalWallpaperOffset(a * oldHorizontalWallpaperOffset + b * newHorizontalWallpaperOffset);
 setVerticalWallpaperOffset(a * oldVerticalWallpaperOffset + b * newVerticalWallpaperOffset);
+}
 for (int i=0; i < screenCount; i++) {
 final CellLayout cl=(CellLayout)getChildAt(i);
 cl.fastInvalidate();
@@ -171,7 +178,7 @@ mAnimator.playTogether(animWithInterpolator);
 mAnimator.addListener(mShrinkAnimationListener);
 mAnimator.start();
 }
- else {
+ else if (enableWallpaperEffects) {
 setVerticalWallpaperOffset(wallpaperOffset);
 setHorizontalWallpaperOffset(0.5f);
 updateWallpaperOffsetImmediately();

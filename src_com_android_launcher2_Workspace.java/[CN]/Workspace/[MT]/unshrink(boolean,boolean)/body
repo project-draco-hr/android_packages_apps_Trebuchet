@@ -82,30 +82,33 @@
     }
     Display display=mLauncher.getWindowManager().getDefaultDisplay();
     boolean isLandscape=display.getWidth() > display.getHeight();
+    final boolean enableWallpaperEffects=isHardwareAccelerated();
+    if (enableWallpaperEffects) {
 switch (mShrinkState) {
 case TOP:
-      if (animated) {
-        mWallpaperOffset.setHorizontalCatchupConstant(isLandscape ? 0.65f : 0.62f);
-        mWallpaperOffset.setVerticalCatchupConstant(isLandscape ? 0.65f : 0.62f);
-        mWallpaperOffset.setOverrideHorizontalCatchupConstant(true);
-      }
-    break;
+        if (animated) {
+          mWallpaperOffset.setHorizontalCatchupConstant(isLandscape ? 0.65f : 0.62f);
+          mWallpaperOffset.setVerticalCatchupConstant(isLandscape ? 0.65f : 0.62f);
+          mWallpaperOffset.setOverrideHorizontalCatchupConstant(true);
+        }
+      break;
 case MIDDLE:
 case SPRING_LOADED:
-  if (animated) {
-    mWallpaperOffset.setHorizontalCatchupConstant(isLandscape ? 0.49f : 0.46f);
-    mWallpaperOffset.setVerticalCatchupConstant(isLandscape ? 0.49f : 0.46f);
-    mWallpaperOffset.setOverrideHorizontalCatchupConstant(true);
-  }
-break;
+    if (animated) {
+      mWallpaperOffset.setHorizontalCatchupConstant(isLandscape ? 0.49f : 0.46f);
+      mWallpaperOffset.setVerticalCatchupConstant(isLandscape ? 0.49f : 0.46f);
+      mWallpaperOffset.setOverrideHorizontalCatchupConstant(true);
+    }
+  break;
 case BOTTOM_HIDDEN:
 case BOTTOM_VISIBLE:
 if (animated) {
-mWallpaperOffset.setHorizontalCatchupConstant(isLandscape ? 0.65f : 0.65f);
-mWallpaperOffset.setVerticalCatchupConstant(isLandscape ? 0.65f : 0.65f);
-mWallpaperOffset.setOverrideHorizontalCatchupConstant(true);
+  mWallpaperOffset.setHorizontalCatchupConstant(isLandscape ? 0.65f : 0.65f);
+  mWallpaperOffset.setVerticalCatchupConstant(isLandscape ? 0.65f : 0.65f);
+  mWallpaperOffset.setOverrideHorizontalCatchupConstant(true);
 }
 break;
+}
 }
 if (animated) {
 ValueAnimator animWithInterpolator=ValueAnimator.ofFloat(0f,1f).setDuration(duration);
@@ -120,8 +123,10 @@ if (b == 0f) {
 return;
 }
 fastInvalidate();
+if (enableWallpaperEffects) {
 setHorizontalWallpaperOffset(a * oldHorizontalWallpaperOffset + b * newHorizontalWallpaperOffset);
 setVerticalWallpaperOffset(a * oldVerticalWallpaperOffset + b * newVerticalWallpaperOffset);
+}
 for (int i=0; i < screenCount; i++) {
 final CellLayout cl=(CellLayout)getChildAt(i);
 cl.fastInvalidate();
@@ -155,9 +160,11 @@ mAnimator.addListener(mUnshrinkAnimationListener);
 mAnimator.start();
 }
  else {
+if (enableWallpaperEffects) {
 setHorizontalWallpaperOffset(wallpaperOffsetForCurrentScroll());
 setVerticalWallpaperOffset(0.5f);
 updateWallpaperOffsetImmediately();
+}
 }
 }
 if (!springLoaded) {
