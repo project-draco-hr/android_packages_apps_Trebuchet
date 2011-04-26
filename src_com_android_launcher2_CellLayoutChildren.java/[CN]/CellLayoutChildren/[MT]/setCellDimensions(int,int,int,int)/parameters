@@ -1,6 +1,4 @@
 int cellWidth
 int cellHeight
-int leftPadding
-int topPadding
 int widthGap
 int heightGap

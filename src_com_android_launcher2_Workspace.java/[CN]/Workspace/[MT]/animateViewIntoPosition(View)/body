@@ -1,8 +1,8 @@
 {
   final CellLayout parent=(CellLayout)view.getParent().getParent();
   final CellLayout.LayoutParams lp=(CellLayout.LayoutParams)view.getLayoutParams();
-  final int fromX=lp.oldX + parent.getLeft();
-  final int fromY=lp.oldY + parent.getTop();
+  final int fromX=lp.oldX + parent.getLeft() + parent.getLeftPadding();
+  final int fromY=lp.oldY + parent.getTop() + parent.getTopPadding();
   final int dx=lp.x - lp.oldX;
   final int dy=lp.y - lp.oldY;
   final float dist=(float)Math.sqrt(dx * dx + dy * dy);

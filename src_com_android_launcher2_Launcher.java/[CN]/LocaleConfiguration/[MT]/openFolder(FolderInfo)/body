@@ -14,5 +14,9 @@
   openFolder.bind(folderInfo);
   folderInfo.opened=true;
   mWorkspace.addInFullScreen(openFolder,folderInfo.screen);
+  if (openFolder instanceof UserFolder) {
+    UserFolder uf=(UserFolder)openFolder;
+    uf.animateOpen();
+  }
   openFolder.onOpen();
 }

@@ -76,7 +76,7 @@
     final int padding=mPressedOrFocusedIcon.getPressedOrFocusedBackgroundPadding();
     final Bitmap b=mPressedOrFocusedIcon.getPressedOrFocusedBackground();
     if (b != null) {
-      canvas.drawBitmap(b,mPressedOrFocusedIcon.getLeft() - padding,mPressedOrFocusedIcon.getTop() - padding,null);
+      canvas.drawBitmap(b,mPressedOrFocusedIcon.getLeft() + getLeftPadding() - padding,mPressedOrFocusedIcon.getTop() + getTopPadding() - padding,null);
     }
   }
 }
