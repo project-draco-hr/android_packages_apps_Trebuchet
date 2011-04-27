@@ -8,7 +8,7 @@
       final FolderInfo info=folders.get(i).getInfo();
       ids[i]=info.id;
     }
-    outState.putLongArray(RUNTIME_STATE_USER_FOLDERS,ids);
+    outState.putLongArray(RUNTIME_STATE_FOLDERS,ids);
   }
  else {
     super.onSaveInstanceState(outState);

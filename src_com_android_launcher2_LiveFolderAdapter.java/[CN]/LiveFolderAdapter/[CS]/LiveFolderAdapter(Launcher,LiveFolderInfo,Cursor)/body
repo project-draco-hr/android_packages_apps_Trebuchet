@@ -1,7 +1,0 @@
-{
-  super(launcher,cursor,true);
-  mIsList=info.displayMode == LiveFolders.DISPLAY_MODE_LIST;
-  mInflater=LayoutInflater.from(launcher);
-  mLauncher=launcher;
-  mLauncher.startManagingCursor(getCursor());
-}

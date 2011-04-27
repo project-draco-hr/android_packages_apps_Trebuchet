@@ -1,5 +1,5 @@
 {
-  UserFolderInfo folderInfo=new UserFolderInfo();
+  FolderInfo folderInfo=new FolderInfo();
   folderInfo.title=getText(R.string.folder_name);
   final CellLayout layout=(CellLayout)mWorkspace.getChildAt(screen);
   final int[] cellXY=mTmpAddItemCellCoordinates;

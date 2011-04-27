@@ -1,7 +1,0 @@
-{
-  super.bind(info);
-  if (mLoadingTask != null && mLoadingTask.getStatus() == AsyncTask.Status.RUNNING) {
-    mLoadingTask.cancel(true);
-  }
-  mLoadingTask=new FolderLoadingTask(this).execute((LiveFolderInfo)info);
-}

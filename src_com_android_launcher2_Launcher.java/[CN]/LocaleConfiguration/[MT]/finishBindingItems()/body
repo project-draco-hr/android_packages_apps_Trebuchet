@@ -4,9 +4,9 @@
     if (!mWorkspace.hasFocus()) {
       mWorkspace.getChildAt(mWorkspace.getCurrentPage()).requestFocus();
     }
-    final long[] userFolders=mSavedState.getLongArray(RUNTIME_STATE_USER_FOLDERS);
-    if (userFolders != null) {
-      for (      long folderId : userFolders) {
+    final long[] folders=mSavedState.getLongArray(RUNTIME_STATE_FOLDERS);
+    if (folders != null) {
+      for (      long folderId : folders) {
         final FolderInfo info=sFolders.get(folderId);
         if (info != null) {
           openFolder(info);

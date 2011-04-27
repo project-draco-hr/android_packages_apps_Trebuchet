@@ -6,11 +6,8 @@ switch (info.itemType) {
 case LauncherSettings.Favorites.ITEM_TYPE_APPWIDGET:
       mLauncher.addAppWidgetFromDrop((PendingAddWidgetInfo)info,screen,touchXY);
     break;
-case LauncherSettings.Favorites.ITEM_TYPE_LIVE_FOLDER:
-  mLauncher.addLiveFolderFromDrop(info.componentName,screen,touchXY);
-break;
 case LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT:
-mLauncher.processShortcutFromDrop(info.componentName,screen,touchXY);
+  mLauncher.processShortcutFromDrop(info.componentName,screen,touchXY);
 break;
 default :
 throw new IllegalStateException("Unknown item type: " + info.itemType);
@@ -28,8 +25,8 @@ info=new ShortcutInfo((ApplicationInfo)info);
 }
 view=mLauncher.createShortcut(R.layout.application,cellLayout,(ShortcutInfo)info);
 break;
-case LauncherSettings.Favorites.ITEM_TYPE_USER_FOLDER:
-view=FolderIcon.fromXml(R.layout.folder_icon,mLauncher,cellLayout,(UserFolderInfo)info,mIconCache);
+case LauncherSettings.Favorites.ITEM_TYPE_FOLDER:
+view=FolderIcon.fromXml(R.layout.folder_icon,mLauncher,cellLayout,(FolderInfo)info,mIconCache);
 break;
 default :
 throw new IllegalStateException("Unknown item type: " + info.itemType);

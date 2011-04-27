@@ -1,6 +1,0 @@
-Context context
-Intent data
-int screen
-int cellX
-int cellY
-boolean notify

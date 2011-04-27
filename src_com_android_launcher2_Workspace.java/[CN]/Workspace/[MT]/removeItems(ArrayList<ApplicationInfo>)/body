@@ -31,8 +31,8 @@
               }
             }
           }
- else           if (tag instanceof UserFolderInfo) {
-            final UserFolderInfo info=(UserFolderInfo)tag;
+ else           if (tag instanceof FolderInfo) {
+            final FolderInfo info=(FolderInfo)tag;
             final ArrayList<ShortcutInfo> contents=info.contents;
             final ArrayList<ShortcutInfo> toRemove=new ArrayList<ShortcutInfo>(1);
             final int contentsCount=contents.size();
@@ -55,19 +55,6 @@
             if (removedFromFolder) {
               final Folder folder=getOpenFolder();
               if (folder != null)               folder.notifyDataSetChanged();
-            }
-          }
- else           if (tag instanceof LiveFolderInfo) {
-            final LiveFolderInfo info=(LiveFolderInfo)tag;
-            final Uri uri=info.uri;
-            final ProviderInfo providerInfo=manager.resolveContentProvider(uri.getAuthority(),0);
-            if (providerInfo != null) {
-              for (              String packageName : packageNames) {
-                if (packageName.equals(providerInfo.packageName)) {
-                  LauncherModel.deleteItemFromDatabase(mLauncher,info);
-                  childrenToRemove.add(view);
-                }
-              }
             }
           }
  else           if (tag instanceof LauncherAppWidgetInfo) {

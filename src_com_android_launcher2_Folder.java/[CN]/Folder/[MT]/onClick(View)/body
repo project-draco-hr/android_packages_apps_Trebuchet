@@ -1,3 +1,13 @@
 {
-  mLauncher.closeFolder(this);
+  Object tag=v.getTag();
+  if (tag instanceof ShortcutInfo) {
+    ShortcutInfo item=(ShortcutInfo)tag;
+    int[] pos=new int[2];
+    v.getLocationOnScreen(pos);
+    item.intent.setSourceBounds(new Rect(pos[0],pos[1],pos[0] + v.getWidth(),pos[1] + v.getHeight()));
+    mLauncher.startActivitySafely(item.intent,item);
+  }
+ else {
+    mLauncher.closeFolder(this);
+  }
 }

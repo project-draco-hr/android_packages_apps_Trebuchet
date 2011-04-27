@@ -1,3 +1,0 @@
-{
-  return context.getContentResolver().query(info.uri,null,null,null,LiveFolders.NAME + " ASC");
-}

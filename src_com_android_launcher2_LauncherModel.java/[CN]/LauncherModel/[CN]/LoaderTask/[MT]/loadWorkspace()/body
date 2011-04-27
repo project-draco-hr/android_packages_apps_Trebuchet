@@ -70,7 +70,7 @@ case LauncherSettings.Favorites.CONTAINER_DESKTOP:
         mItems.add(info);
       break;
 default :
-    UserFolderInfo folderInfo=findOrMakeUserFolder(mFolders,container);
+    FolderInfo folderInfo=findOrMakeFolder(mFolders,container);
   folderInfo.add(info);
 break;
 }
@@ -82,9 +82,9 @@ Log.e(TAG,"Error loading shortcut " + id + ", removing it");
 contentResolver.delete(LauncherSettings.Favorites.getContentUri(id,false),null,null);
 }
 break;
-case LauncherSettings.Favorites.ITEM_TYPE_USER_FOLDER:
+case LauncherSettings.Favorites.ITEM_TYPE_FOLDER:
 id=c.getLong(idIndex);
-UserFolderInfo folderInfo=findOrMakeUserFolder(mFolders,id);
+FolderInfo folderInfo=findOrMakeFolder(mFolders,id);
 folderInfo.title=c.getString(titleIndex);
 folderInfo.id=id;
 container=c.getInt(containerIndex);
@@ -101,46 +101,6 @@ mItems.add(folderInfo);
 break;
 }
 mFolders.put(folderInfo.id,folderInfo);
-break;
-case LauncherSettings.Favorites.ITEM_TYPE_LIVE_FOLDER:
-id=c.getLong(idIndex);
-Uri uri=Uri.parse(c.getString(uriIndex));
-final ProviderInfo providerInfo=context.getPackageManager().resolveContentProvider(uri.getAuthority(),0);
-if (providerInfo == null && !isSafeMode) {
-itemsToRemove.add(id);
-}
- else {
-LiveFolderInfo liveFolderInfo=findOrMakeLiveFolder(mFolders,id);
-intentDescription=c.getString(intentIndex);
-intent=null;
-if (intentDescription != null) {
-try {
-intent=Intent.parseUri(intentDescription,0);
-}
- catch (URISyntaxException e) {
-}
-}
-liveFolderInfo.title=c.getString(titleIndex);
-liveFolderInfo.id=id;
-liveFolderInfo.uri=uri;
-container=c.getInt(containerIndex);
-liveFolderInfo.container=container;
-liveFolderInfo.screen=c.getInt(screenIndex);
-liveFolderInfo.cellX=c.getInt(cellXIndex);
-liveFolderInfo.cellY=c.getInt(cellYIndex);
-liveFolderInfo.baseIntent=intent;
-liveFolderInfo.displayMode=c.getInt(displayModeIndex);
-if (!checkItemPlacement(occupied,liveFolderInfo)) {
-break;
-}
-loadLiveFolderIcon(context,c,iconTypeIndex,iconPackageIndex,iconResourceIndex,liveFolderInfo);
-switch (container) {
-case LauncherSettings.Favorites.CONTAINER_DESKTOP:
-mItems.add(liveFolderInfo);
-break;
-}
-mFolders.put(liveFolderInfo.id,liveFolderInfo);
-}
 break;
 case LauncherSettings.Favorites.ITEM_TYPE_APPWIDGET:
 int appWidgetId=c.getInt(appWidgetIdIndex);

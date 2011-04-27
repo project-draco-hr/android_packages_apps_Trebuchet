@@ -1,6 +1,0 @@
-{
-  super.onFinishInflate();
-  mContent=(GridView)findViewById(R.id.folder_content);
-  mContent.setOnItemClickListener(this);
-  mContent.setOnItemLongClickListener(this);
-}

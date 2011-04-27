@@ -1,2 +1,4 @@
 {
+  mContent.removeAllViewsInLayout();
+  bind(mInfo);
 }

@@ -1,22 +1,10 @@
 {
-  Folder openFolder;
-  if (folderInfo instanceof UserFolderInfo) {
-    openFolder=UserFolder.fromXml(this);
-  }
- else   if (folderInfo instanceof LiveFolderInfo) {
-    openFolder=com.android.launcher2.LiveFolder.fromXml(this,folderInfo);
-  }
- else {
-    return;
-  }
+  Folder openFolder=Folder.fromXml(this);
   openFolder.setDragController(mDragController);
   openFolder.setLauncher(this);
   openFolder.bind(folderInfo);
   folderInfo.opened=true;
   mWorkspace.addInFullScreen(openFolder,folderInfo.screen);
-  if (openFolder instanceof UserFolder) {
-    UserFolder uf=(UserFolder)openFolder;
-    uf.animateOpen();
-  }
+  openFolder.animateOpen();
   openFolder.onOpen();
 }

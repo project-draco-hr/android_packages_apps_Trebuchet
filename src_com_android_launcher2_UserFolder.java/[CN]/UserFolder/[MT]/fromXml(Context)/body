@@ -1,3 +1,0 @@
-{
-  return (UserFolder)LayoutInflater.from(context).inflate(R.layout.user_folder,null);
-}

@@ -3,4 +3,5 @@
   mCloseButton=(Button)findViewById(R.id.folder_close);
   mCloseButton.setOnClickListener(this);
   mCloseButton.setOnLongClickListener(this);
+  mContent=(CellLayout)findViewById(R.id.folder_content);
 }

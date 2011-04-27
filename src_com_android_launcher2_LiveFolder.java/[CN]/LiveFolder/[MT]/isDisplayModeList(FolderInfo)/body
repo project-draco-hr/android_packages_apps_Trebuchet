@@ -1,3 +1,0 @@
-{
-  return ((LiveFolderInfo)folderInfo).displayMode == LiveFolders.DISPLAY_MODE_LIST;
-}

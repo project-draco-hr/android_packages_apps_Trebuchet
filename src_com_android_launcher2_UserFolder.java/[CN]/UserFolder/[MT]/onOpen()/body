@@ -1,5 +1,0 @@
-{
-  super.onOpen();
-  mContent.requestLayout();
-  requestFocus();
-}
