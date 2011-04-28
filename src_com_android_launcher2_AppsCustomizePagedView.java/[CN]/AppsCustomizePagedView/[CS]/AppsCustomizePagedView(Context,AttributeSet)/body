@@ -4,13 +4,21 @@
   mPackageManager=context.getPackageManager();
   mContentType=ContentType.Applications;
   mApps=new ArrayList<ApplicationInfo>();
+  mWidgets=new ArrayList<AppWidgetProviderInfo>();
+  mShortcuts=new ArrayList<ResolveInfo>();
   TypedArray a=context.obtainStyledAttributes(attrs,R.styleable.PagedView,0,0);
   mCellCountX=a.getInt(R.styleable.PagedView_cellCountX,6);
   mCellCountY=a.getInt(R.styleable.PagedView_cellCountY,4);
   a.recycle();
-  PagedViewCellLayout layout=new PagedViewCellLayout(context);
-  setupPage(layout);
-  mContentWidth=layout.getContentWidth();
+  a=context.obtainStyledAttributes(attrs,R.styleable.AppsCustomizePagedView,0,0);
+  mWidgetCellWidthGap=a.getDimensionPixelSize(R.styleable.AppsCustomizePagedView_widgetCellWidthGap,10);
+  mWidgetCellHeightGap=a.getDimensionPixelSize(R.styleable.AppsCustomizePagedView_widgetCellHeightGap,10);
+  mWidgetCountX=a.getInt(R.styleable.AppsCustomizePagedView_widgetCountX,2);
+  mWidgetCountY=a.getInt(R.styleable.AppsCustomizePagedView_widgetCountY,2);
+  a.recycle();
   mWidgetSpacingLayout=new PagedViewCellLayout(context);
-  mWidgetSpacingLayout.setCellCount(mCellCountX,mCellCountY);
+  setupPage(mWidgetSpacingLayout);
+  mContentWidth=mWidgetSpacingLayout.getContentWidth();
+  mMinWidgetSpan=1;
+  mMaxWidgetSpan=3;
 }

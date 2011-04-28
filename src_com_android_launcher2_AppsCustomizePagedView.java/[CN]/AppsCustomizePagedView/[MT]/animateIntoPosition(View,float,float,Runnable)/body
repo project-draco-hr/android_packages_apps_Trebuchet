@@ -1,0 +1,14 @@
+{
+  ObjectAnimator anim=ObjectAnimator.ofPropertyValuesHolder(view,PropertyValuesHolder.ofFloat("x",toX),PropertyValuesHolder.ofFloat("y",toY));
+  anim.setInterpolator(new DecelerateInterpolator(2.5f));
+  anim.setDuration(TRANSLATE_ANIM_DURATION);
+  if (endRunnable != null) {
+    anim.addListener(new AnimatorListenerAdapter(){
+      @Override public void onAnimationEnd(      Animator animation){
+        endRunnable.run();
+      }
+    }
+);
+  }
+  anim.start();
+}

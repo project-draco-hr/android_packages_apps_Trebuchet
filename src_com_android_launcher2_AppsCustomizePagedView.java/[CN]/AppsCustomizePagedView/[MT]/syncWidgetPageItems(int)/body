@@ -1,12 +1,29 @@
 {
+  Context context=getContext();
   PagedViewExtendedLayout layout=(PagedViewExtendedLayout)getChildAt(page);
-  layout.removeAllViewsOnPage();
-  for (int i=0; i < 1; ++i) {
-    AppWidgetProviderInfo info=(AppWidgetProviderInfo)mWidgets.get(page);
-    FastBitmapDrawable icon=getWidgetPreview(info);
-    ImageView image=new ImageView(getContext());
-    image.setBackgroundColor(0x99FF0000);
-    image.setImageDrawable(icon);
-    layout.addView(image,new PagedViewExtendedLayout.LayoutParams());
+  layout.removeAllViews();
+  FrameLayout container=new FrameLayout(context);
+  int numWidgetsPerPage=mWidgetCountX * mWidgetCountY;
+  int offset=page * numWidgetsPerPage;
+  int cellWidth=((mWidgetSpacingLayout.getContentWidth() - mPageLayoutWidthGap - ((mWidgetCountX - 1) * mWidgetCellWidthGap)) / mWidgetCountX);
+  int cellHeight=((mWidgetSpacingLayout.getContentHeight() - mPageLayoutHeightGap - ((mWidgetCountY - 1) * mWidgetCellHeightGap)) / mWidgetCountY);
+  for (int i=0; i < Math.min(numWidgetsPerPage,mWidgets.size() - offset); ++i) {
+    AppWidgetProviderInfo info=(AppWidgetProviderInfo)mWidgets.get(offset + i);
+    PendingAddWidgetInfo createItemInfo=new PendingAddWidgetInfo(info,null,null);
+    final int[] cellSpans=CellLayout.rectToCell(getResources(),info.minWidth,info.minHeight,null);
+    FastBitmapDrawable preview=getWidgetPreview(info,cellSpans[0],cellSpans[1],cellWidth,cellHeight);
+    PagedViewWidget widget=(PagedViewWidget)mLayoutInflater.inflate(R.layout.apps_customize_widget,layout,false);
+    widget.applyFromAppWidgetProviderInfo(info,preview,-1,cellSpans,null,false);
+    widget.setTag(createItemInfo);
+    widget.setOnClickListener(this);
+    widget.setOnLongClickListener(this);
+    widget.setOnTouchListener(this);
+    FrameLayout.LayoutParams lp=new FrameLayout.LayoutParams(cellWidth,cellHeight);
+    int ix=i % mWidgetCountX;
+    int iy=i / mWidgetCountX;
+    lp.leftMargin=(ix * cellWidth) + (ix * mWidgetCellWidthGap);
+    lp.topMargin=(iy * cellHeight) + (iy * mWidgetCellHeightGap);
+    container.addView(widget,lp);
   }
+  layout.addView(container,new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.WRAP_CONTENT));
 }
