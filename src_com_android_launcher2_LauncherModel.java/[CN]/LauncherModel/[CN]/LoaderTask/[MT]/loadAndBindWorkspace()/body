@@ -2,7 +2,7 @@
   if (DEBUG_LOADERS) {
     Log.d(TAG,"loadAndBindWorkspace mWorkspaceLoaded=" + mWorkspaceLoaded);
   }
-  if (true || !mWorkspaceLoaded) {
+  if (!mWorkspaceLoaded) {
     loadWorkspace();
     if (mStopped) {
       return;

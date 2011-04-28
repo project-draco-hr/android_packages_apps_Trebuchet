@@ -25,6 +25,7 @@
   values.put(Favorites.ICON_TYPE,Favorites.ICON_TYPE_RESOURCE);
   values.put(Favorites.ICON_PACKAGE,mContext.getPackageName());
   values.put(Favorites.ICON_RESOURCE,r.getResourceName(iconResId));
-  db.insert(TABLE_FAVORITES,null,values);
+  values.put(Favorites._ID,generateNewId());
+  dbInsertAndCheck(this,db,TABLE_FAVORITES,null,values);
   return true;
 }

@@ -4,7 +4,21 @@
   sWorker.post(new Runnable(){
     public void run(){
       cr.delete(uriToDelete,null,null);
-    }
-  }
+switch (item.itemType) {
+case LauncherSettings.Favorites.ITEM_TYPE_FOLDER:
+        sFolders.remove(item.id);
+      sItems.remove(item);
+    break;
+case LauncherSettings.Favorites.ITEM_TYPE_APPLICATION:
+case LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT:
+  sItems.remove(item);
+break;
+case LauncherSettings.Favorites.ITEM_TYPE_APPWIDGET:
+sAppWidgets.remove((LauncherAppWidgetInfo)item);
+break;
+}
+sItemsIdMap.remove(item.id);
+}
+}
 );
 }

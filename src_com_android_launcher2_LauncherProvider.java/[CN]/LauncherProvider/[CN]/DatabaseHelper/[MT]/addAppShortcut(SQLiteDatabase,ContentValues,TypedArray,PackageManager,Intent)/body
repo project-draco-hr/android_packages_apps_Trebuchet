@@ -20,7 +20,8 @@
     values.put(Favorites.ITEM_TYPE,Favorites.ITEM_TYPE_APPLICATION);
     values.put(Favorites.SPANX,1);
     values.put(Favorites.SPANY,1);
-    db.insert(TABLE_FAVORITES,null,values);
+    values.put(Favorites._ID,generateNewId());
+    dbInsertAndCheck(this,db,TABLE_FAVORITES,null,values);
   }
  catch (  PackageManager.NameNotFoundException e) {
     Log.w(TAG,"Unable to add favorite: " + packageName + "/"+ className,e);
