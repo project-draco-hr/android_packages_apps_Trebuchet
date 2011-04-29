@@ -3,12 +3,10 @@
   String name=data.getStringExtra(Intent.EXTRA_SHORTCUT_NAME);
   Parcelable bitmap=data.getParcelableExtra(Intent.EXTRA_SHORTCUT_ICON);
   Bitmap icon=null;
-  boolean filtered=false;
   boolean customIcon=false;
   ShortcutIconResource iconResource=null;
   if (bitmap != null && bitmap instanceof Bitmap) {
     icon=Utilities.createIconBitmap(new FastBitmapDrawable((Bitmap)bitmap),context);
-    filtered=true;
     customIcon=true;
   }
  else {
