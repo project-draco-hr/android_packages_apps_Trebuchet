@@ -1,6 +1,7 @@
 {
   Context context=getContext();
-  int numPages=mWidgets.size();
+  int numWidgetsPerPage=mWidgetCountX * mWidgetCountY;
+  int numPages=(int)Math.ceil(mWidgets.size() / (float)numWidgetsPerPage);
   for (int i=0; i < numPages; ++i) {
     PagedViewExtendedLayout layout=new PagedViewExtendedLayout(context);
     setupPage(layout);

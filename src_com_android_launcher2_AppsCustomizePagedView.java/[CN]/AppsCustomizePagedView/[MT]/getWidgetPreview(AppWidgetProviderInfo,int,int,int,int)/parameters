@@ -1,0 +1,5 @@
+AppWidgetProviderInfo info
+int cellHSpan
+int cellVSpan
+int cellWidth
+int cellHeight

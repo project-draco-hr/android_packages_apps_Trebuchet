@@ -1,0 +1,16 @@
+{
+  ImageView image=(ImageView)v.findViewById(R.id.widget_preview);
+  PendingAddWidgetInfo createWidgetInfo=(PendingAddWidgetInfo)v.getTag();
+  Drawable preview=image.getDrawable();
+  int w=preview.getIntrinsicWidth();
+  int h=preview.getIntrinsicHeight();
+  Bitmap b=Bitmap.createBitmap(w,h,Bitmap.Config.ARGB_8888);
+  renderDrawableToBitmap(preview,b,0,0,w,h,1,1);
+  int[] spanXY=CellLayout.rectToCell(getResources(),createWidgetInfo.minWidth,createWidgetInfo.minHeight,null);
+  createWidgetInfo.spanX=spanXY[0];
+  createWidgetInfo.spanY=spanXY[1];
+  mLauncher.lockScreenOrientation();
+  mLauncher.getWorkspace().onDragStartedWithItemSpans(spanXY[0],spanXY[1],b);
+  mDragController.startDrag(image,b,this,createWidgetInfo,DragController.DRAG_ACTION_COPY,null);
+  b.recycle();
+}

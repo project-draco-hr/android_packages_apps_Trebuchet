@@ -1,0 +1,34 @@
+{
+  ApplicationInfo appInfo=new ApplicationInfo((ApplicationInfo)v.getTag());
+  if ((appInfo.flags & ApplicationInfo.DOWNLOADED_FLAG) != 0) {
+    DeleteZone allAppsDeleteZone=(DeleteZone)mLauncher.findViewById(R.id.all_apps_delete_zone);
+    allAppsDeleteZone.setDragAndDropEnabled(true);
+    if ((appInfo.flags & ApplicationInfo.UPDATED_SYSTEM_APP_FLAG) != 0) {
+      allAppsDeleteZone.setText(R.string.delete_zone_label_all_apps_system_app);
+    }
+ else {
+      allAppsDeleteZone.setText(R.string.delete_zone_label_all_apps);
+    }
+  }
+  ApplicationInfoDropTarget allAppsInfoButton=(ApplicationInfoDropTarget)mLauncher.findViewById(R.id.all_apps_info_target);
+  allAppsInfoButton.setDragAndDropEnabled(true);
+  final TextView tv=(TextView)v;
+  final Drawable icon=tv.getCompoundDrawables()[1];
+  Bitmap b=Bitmap.createBitmap(v.getWidth(),v.getHeight(),Bitmap.Config.ARGB_8888);
+  Canvas c=new Canvas(b);
+  c.translate((v.getWidth() - icon.getIntrinsicWidth()) / 2,v.getPaddingTop());
+  icon.draw(c);
+  Rect dragRect=null;
+  if (v instanceof TextView) {
+    int iconSize=getResources().getDimensionPixelSize(R.dimen.app_icon_size);
+    int top=v.getPaddingTop();
+    int left=(b.getWidth() - iconSize) / 2;
+    int right=left + iconSize;
+    int bottom=top + iconSize;
+    dragRect=new Rect(left,top,right,bottom);
+  }
+  mLauncher.lockScreenOrientation();
+  mLauncher.getWorkspace().onDragStartedWithItemSpans(1,1,b);
+  mDragController.startDrag(v,b,this,appInfo,DragController.DRAG_ACTION_COPY,dragRect);
+  b.recycle();
+}
