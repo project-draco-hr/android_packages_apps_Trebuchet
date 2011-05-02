@@ -9,4 +9,5 @@
     }
     createAndAddShortcut((ShortcutInfo)children.get(i));
   }
+  mInfo.addListener(this);
 }

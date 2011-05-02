@@ -12,7 +12,10 @@
     }
   }
  else   if (tag instanceof FolderInfo) {
-    handleFolderClick((FolderInfo)tag);
+    if (v instanceof FolderIcon) {
+      FolderIcon fi=(FolderIcon)v;
+      handleFolderClick(fi);
+    }
   }
  else   if (v == mHandleView) {
     if (mState == State.ALL_APPS) {

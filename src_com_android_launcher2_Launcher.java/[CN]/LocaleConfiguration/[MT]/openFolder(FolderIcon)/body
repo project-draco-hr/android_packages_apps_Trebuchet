@@ -1,0 +1,8 @@
+{
+  Folder folder=folderIcon.mFolder;
+  FolderInfo info=folder.mInfo;
+  info.opened=true;
+  mWorkspace.addInFullScreen(folder,info.screen);
+  folder.animateOpen();
+  folder.onOpen();
+}

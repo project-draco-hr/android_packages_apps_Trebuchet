@@ -1,5 +1,2 @@
 {
-  if (acceptDrop(source,x,y,xOffset,yOffset,dragView,dragInfo)) {
-    setCompoundDrawablesWithIntrinsicBounds(null,mOpenIcon,null,null);
-  }
 }

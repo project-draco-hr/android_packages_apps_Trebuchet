@@ -8,8 +8,9 @@
     if (folders != null) {
       for (      long folderId : folders) {
         final FolderInfo info=sFolders.get(folderId);
-        if (info != null) {
-          openFolder(info);
+        final FolderIcon folderIcon=(FolderIcon)mWorkspace.getViewForTag(info);
+        if (folderIcon != null) {
+          openFolder(folderIcon);
         }
       }
       final Folder openFolder=mWorkspace.getOpenFolder();
