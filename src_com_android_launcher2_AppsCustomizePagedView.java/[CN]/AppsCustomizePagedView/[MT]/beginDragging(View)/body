@@ -1,11 +1,11 @@
 {
   if (!super.beginDragging(v))   return false;
+  mLauncher.showWorkspace(true);
   if (v instanceof PagedViewIcon) {
     beginDraggingApplication(v);
   }
  else   if (v instanceof PagedViewWidget) {
     beginDraggingWidget(v);
   }
-  mLauncher.showWorkspace(true);
   return true;
 }
