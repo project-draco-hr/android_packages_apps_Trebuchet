@@ -1,4 +1,8 @@
 {
+  Bitmap cachedBitmap=mWidgetPreviewCache.get(info);
+  if (cachedBitmap != null) {
+    return new FastBitmapDrawable(cachedBitmap);
+  }
   cellHSpan=Math.max(mMinWidgetSpan,Math.min(mMaxWidgetSpan,cellHSpan));
   cellVSpan=Math.max(mMinWidgetSpan,Math.min(mMaxWidgetSpan,cellVSpan));
   int expectedWidth=mWidgetSpacingLayout.estimateCellWidth(cellHSpan);
@@ -32,29 +36,34 @@
       renderDrawableToBitmap(drawable,preview,0,0,newWidth,newHeight,1f,1f);
       newDrawable=new FastBitmapDrawable(preview);
       newDrawable.setBounds(0,0,newWidth,newHeight);
+      mWidgetPreviewCache.put(info,preview);
     }
   }
   if (drawable == null) {
-    cellHSpan=Math.max(2,cellHSpan);
-    cellVSpan=Math.max(2,cellVSpan);
-    expectedWidth=(int)(widgetPreviewScale * mWidgetSpacingLayout.estimateCellWidth(cellHSpan));
-    expectedHeight=(int)(widgetPreviewScale * mWidgetSpacingLayout.estimateCellHeight(cellVSpan));
-    Bitmap preview=Bitmap.createBitmap(expectedWidth,expectedHeight,Config.ARGB_8888);
     Resources resources=mLauncher.getResources();
-    Drawable background=resources.getDrawable(R.drawable.default_widget_preview);
-    renderDrawableToBitmap(background,preview,0,0,expectedWidth,expectedHeight,1f,1f);
+    int iconSize=resources.getDimensionPixelSize(R.dimen.app_icon_size);
+    if (info.minWidth >= info.minHeight) {
+      expectedWidth=cellWidth;
+      expectedHeight=mWidgetPreviewIconPaddedDimension;
+    }
+ else {
+      expectedWidth=mWidgetPreviewIconPaddedDimension;
+      expectedHeight=cellWidth;
+    }
+    Bitmap preview=Bitmap.createBitmap(expectedWidth,expectedHeight,Config.ARGB_8888);
+    renderDrawableToBitmap(mDefaultWidgetBackground,preview,0,0,expectedWidth,expectedHeight,1f,1f);
     try {
       Drawable icon=null;
       if (info.icon > 0)       icon=mPackageManager.getDrawable(packageName,info.icon,null);
       if (icon == null)       icon=resources.getDrawable(R.drawable.ic_launcher_application);
-      int iconSize=resources.getDimensionPixelSize(R.dimen.app_icon_size);
-      int offset=iconSize / 4;
+      int offset=(int)(iconSize * sWidgetPreviewIconPaddingPercentage);
       renderDrawableToBitmap(icon,preview,offset,offset,iconSize,iconSize,1f,1f);
     }
  catch (    Resources.NotFoundException e) {
     }
     newDrawable=new FastBitmapDrawable(preview);
     newDrawable.setBounds(0,0,expectedWidth,expectedHeight);
+    mWidgetPreviewCache.put(info,preview);
   }
   return newDrawable;
 }

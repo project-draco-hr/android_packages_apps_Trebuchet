@@ -1,6 +1,0 @@
-{
-  Log.d(tag,label + " size=" + list.size());
-  for (  AppWidgetProviderInfo info : list) {
-    Log.d(tag,"   label=\"" + info.label + "\" previewImage="+ info.previewImage+ " resizeMode="+ info.resizeMode+ " configure="+ info.configure+ " initialLayout="+ info.initialLayout+ " minWidth="+ info.minWidth+ " minHeight="+ info.minHeight);
-  }
-}

@@ -8,13 +8,26 @@
   int cellWidth=((mWidgetSpacingLayout.getContentWidth() - mPageLayoutWidthGap - ((mWidgetCountX - 1) * mWidgetCellWidthGap)) / mWidgetCountX);
   int cellHeight=((mWidgetSpacingLayout.getContentHeight() - mPageLayoutHeightGap - ((mWidgetCountY - 1) * mWidgetCellHeightGap)) / mWidgetCountY);
   for (int i=0; i < Math.min(numWidgetsPerPage,mWidgets.size() - offset); ++i) {
-    AppWidgetProviderInfo info=(AppWidgetProviderInfo)mWidgets.get(offset + i);
-    PendingAddWidgetInfo createItemInfo=new PendingAddWidgetInfo(info,null,null);
-    final int[] cellSpans=CellLayout.rectToCell(getResources(),info.minWidth,info.minHeight,null);
-    FastBitmapDrawable preview=getWidgetPreview(info,cellSpans[0],cellSpans[1],cellWidth,cellHeight);
+    Object rawInfo=mWidgets.get(offset + i);
+    PendingAddItemInfo createItemInfo=null;
     PagedViewWidget widget=(PagedViewWidget)mLayoutInflater.inflate(R.layout.apps_customize_widget,layout,false);
-    widget.applyFromAppWidgetProviderInfo(info,preview,-1,cellSpans,null,false);
-    widget.setTag(createItemInfo);
+    if (rawInfo instanceof AppWidgetProviderInfo) {
+      AppWidgetProviderInfo info=(AppWidgetProviderInfo)rawInfo;
+      createItemInfo=new PendingAddWidgetInfo(info,null,null);
+      final int[] cellSpans=CellLayout.rectToCell(getResources(),info.minWidth,info.minHeight,null);
+      FastBitmapDrawable preview=getWidgetPreview(info,cellSpans[0],cellSpans[1],cellWidth,cellHeight);
+      widget.applyFromAppWidgetProviderInfo(info,preview,-1,cellSpans,null,false);
+      widget.setTag(createItemInfo);
+    }
+ else     if (rawInfo instanceof ResolveInfo) {
+      ResolveInfo info=(ResolveInfo)rawInfo;
+      createItemInfo=new PendingAddItemInfo();
+      createItemInfo.itemType=LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT;
+      createItemInfo.componentName=new ComponentName(info.activityInfo.packageName,info.activityInfo.name);
+      FastBitmapDrawable preview=getShortcutPreview(info,cellWidth,cellHeight);
+      widget.applyFromResolveInfo(mPackageManager,info,preview,null,false);
+      widget.setTag(createItemInfo);
+    }
     widget.setOnClickListener(this);
     widget.setOnLongClickListener(this);
     widget.setOnTouchListener(this);

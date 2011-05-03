@@ -1,7 +1,7 @@
 {
-  mWidgets=AppWidgetManager.getInstance(mLauncher).getInstalledProviders();
-  Collections.sort(mWidgets,LauncherModel.WIDGET_NAME_COMPARATOR);
+  mWidgets.clear();
+  mWidgets.addAll(AppWidgetManager.getInstance(mLauncher).getInstalledProviders());
   Intent shortcutsIntent=new Intent(Intent.ACTION_CREATE_SHORTCUT);
-  mShortcuts=mPackageManager.queryIntentActivities(shortcutsIntent,0);
-  Collections.sort(mShortcuts,new LauncherModel.ShortcutNameComparator(mPackageManager));
+  mWidgets.addAll(mPackageManager.queryIntentActivities(shortcutsIntent,0));
+  Collections.sort(mWidgets,new LauncherModel.WidgetAndShortcutNameComparator(mPackageManager));
 }
