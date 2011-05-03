@@ -1,0 +1,23 @@
+{
+  if (mFolder == null)   return;
+  if (mFolder.getItemCount() == 0)   return;
+  canvas.save();
+  TextView v=(TextView)mFolder.getItemAt(0);
+  Drawable d=v.getCompoundDrawables()[1];
+  canvas.translate((getMeasuredWidth() - d.getIntrinsicWidth()) / 2,(getMeasuredHeight() - d.getIntrinsicHeight()) / 2);
+  canvas.translate(d.getIntrinsicWidth() / 2,d.getIntrinsicHeight() / 2);
+  canvas.rotate(ICON_ANGLE);
+  canvas.translate(-d.getIntrinsicWidth() / 2,-d.getIntrinsicHeight() / 2);
+  for (int i=Math.max(0,mFolder.getItemCount() - NUM_ITEMS_IN_PREVIEW); i < mFolder.getItemCount(); i++) {
+    v=(TextView)mFolder.getItemAt(i);
+    d=v.getCompoundDrawables()[1];
+    if (d != null) {
+      d.setBounds(0,0,d.getIntrinsicWidth(),d.getIntrinsicHeight());
+      d.draw(canvas);
+    }
+    canvas.translate(d.getIntrinsicWidth() / 2,d.getIntrinsicHeight() / 2);
+    canvas.rotate(-ICON_ANGLE);
+    canvas.translate(-d.getIntrinsicWidth() / 2,-d.getIntrinsicHeight() / 2);
+  }
+  canvas.restore();
+}

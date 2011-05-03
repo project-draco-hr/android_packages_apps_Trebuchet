@@ -1,14 +1,17 @@
 {
   FolderIcon icon=(FolderIcon)LayoutInflater.from(launcher).inflate(resId,group,false);
   final Resources resources=launcher.getResources();
-  Drawable d=iconCache.getFullResIcon(resources,R.drawable.ic_launcher_folder);
-  icon.mCloseIcon=d;
-  icon.mOpenIcon=iconCache.getFullResIcon(resources,R.drawable.ic_launcher_folder_open);
-  icon.setCompoundDrawablesWithIntrinsicBounds(null,d,null,null);
-  icon.setText(folderInfo.title);
+  Drawable d=iconCache.getFullResIcon(resources,R.drawable.folder_bg);
+  icon.setBackgroundDrawable(d);
   icon.setTag(folderInfo);
   icon.setOnClickListener(launcher);
   icon.mInfo=folderInfo;
   icon.mLauncher=launcher;
+  Folder folder=Folder.fromXml(launcher);
+  folder.setDragController(launcher.getDragController());
+  folder.setLauncher(launcher);
+  folder.bind(folderInfo);
+  icon.mFolder=folder;
+  folderInfo.addListener(icon);
   return icon;
 }

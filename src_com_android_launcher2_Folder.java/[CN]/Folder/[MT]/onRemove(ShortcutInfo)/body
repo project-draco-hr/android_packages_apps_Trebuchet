@@ -1,0 +1,4 @@
+{
+  View v=mContent.getChildAt(mDragItemPosition[0],mDragItemPosition[1]);
+  mContent.removeView(v);
+}
