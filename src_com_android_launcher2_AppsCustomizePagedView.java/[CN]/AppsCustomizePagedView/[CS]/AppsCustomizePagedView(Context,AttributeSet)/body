@@ -4,8 +4,15 @@
   mPackageManager=context.getPackageManager();
   mContentType=ContentType.Applications;
   mApps=new ArrayList<ApplicationInfo>();
-  mWidgets=new ArrayList<AppWidgetProviderInfo>();
-  mShortcuts=new ArrayList<ResolveInfo>();
+  mWidgets=new ArrayList<Object>();
+  mWidgetPreviewCache=new LruCache<Object,Bitmap>(sWidgetPreviewCacheSize){
+    protected int sizeOf(    Object key,    Bitmap value){
+      return value.getByteCount();
+    }
+  }
+;
+  Resources resources=context.getResources();
+  mDefaultWidgetBackground=resources.getDrawable(R.drawable.default_widget_preview);
   TypedArray a=context.obtainStyledAttributes(attrs,R.styleable.PagedView,0,0);
   mCellCountX=a.getInt(R.styleable.PagedView_cellCountX,6);
   mCellCountY=a.getInt(R.styleable.PagedView_cellCountY,4);
@@ -21,4 +28,6 @@
   mContentWidth=mWidgetSpacingLayout.getContentWidth();
   mMinWidgetSpan=1;
   mMaxWidgetSpan=3;
+  int iconSize=resources.getDimensionPixelSize(R.dimen.app_icon_size);
+  mWidgetPreviewIconPaddedDimension=(int)(iconSize * (1 + (2 * sWidgetPreviewIconPaddingPercentage)));
 }

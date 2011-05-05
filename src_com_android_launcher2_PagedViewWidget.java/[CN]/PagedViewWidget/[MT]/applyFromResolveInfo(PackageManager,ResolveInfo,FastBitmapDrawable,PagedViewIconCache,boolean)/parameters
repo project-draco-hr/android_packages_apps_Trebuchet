@@ -1,0 +1,5 @@
+PackageManager pm
+ResolveInfo info
+FastBitmapDrawable preview
+PagedViewIconCache cache
+boolean createHolographicOutline

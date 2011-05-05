@@ -1,16 +1,26 @@
 {
   ImageView image=(ImageView)v.findViewById(R.id.widget_preview);
-  PendingAddWidgetInfo createWidgetInfo=(PendingAddWidgetInfo)v.getTag();
+  PendingAddItemInfo createItemInfo=(PendingAddItemInfo)v.getTag();
+  Bitmap b;
   Drawable preview=image.getDrawable();
   int w=preview.getIntrinsicWidth();
   int h=preview.getIntrinsicHeight();
-  Bitmap b=Bitmap.createBitmap(w,h,Bitmap.Config.ARGB_8888);
-  renderDrawableToBitmap(preview,b,0,0,w,h,1,1);
-  int[] spanXY=CellLayout.rectToCell(getResources(),createWidgetInfo.minWidth,createWidgetInfo.minHeight,null);
-  createWidgetInfo.spanX=spanXY[0];
-  createWidgetInfo.spanY=spanXY[1];
+  if (createItemInfo instanceof PendingAddWidgetInfo) {
+    PendingAddWidgetInfo createWidgetInfo=(PendingAddWidgetInfo)createItemInfo;
+    int[] spanXY=CellLayout.rectToCell(getResources(),createWidgetInfo.minWidth,createWidgetInfo.minHeight,null);
+    createItemInfo.spanX=spanXY[0];
+    createItemInfo.spanY=spanXY[1];
+    b=Bitmap.createBitmap(w,h,Bitmap.Config.ARGB_8888);
+    renderDrawableToBitmap(preview,b,0,0,w,h,1,1);
+  }
+ else {
+    b=Bitmap.createBitmap(mWidgetPreviewIconPaddedDimension,mWidgetPreviewIconPaddedDimension,Bitmap.Config.ARGB_8888);
+    Canvas c=new Canvas(b);
+    preview.draw(c);
+    createItemInfo.spanX=createItemInfo.spanY=1;
+  }
   mLauncher.lockScreenOrientation();
-  mLauncher.getWorkspace().onDragStartedWithItemSpans(spanXY[0],spanXY[1],b);
-  mDragController.startDrag(image,b,this,createWidgetInfo,DragController.DRAG_ACTION_COPY,null);
+  mLauncher.getWorkspace().onDragStartedWithItemSpans(createItemInfo.spanX,createItemInfo.spanY,b);
+  mDragController.startDrag(image,b,this,createItemInfo,DragController.DRAG_ACTION_COPY,null);
   b.recycle();
 }

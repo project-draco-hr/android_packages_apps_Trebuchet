@@ -1,0 +1,20 @@
+{
+  Bitmap cachedBitmap=mWidgetPreviewCache.get(info);
+  if (cachedBitmap != null) {
+    return new FastBitmapDrawable(cachedBitmap);
+  }
+  Resources resources=mLauncher.getResources();
+  int iconSize=resources.getDimensionPixelSize(R.dimen.app_icon_size);
+  int expectedWidth=cellWidth;
+  int expectedHeight=mWidgetPreviewIconPaddedDimension;
+  int offset=(int)(iconSize * sWidgetPreviewIconPaddingPercentage);
+  Bitmap preview=Bitmap.createBitmap(expectedWidth,expectedHeight,Config.ARGB_8888);
+  IconCache cache=((LauncherApplication)mLauncher.getApplication()).getIconCache();
+  Drawable icon=cache.getFullResIcon(info,mPackageManager);
+  renderDrawableToBitmap(mDefaultWidgetBackground,preview,0,0,mWidgetPreviewIconPaddedDimension,mWidgetPreviewIconPaddedDimension,1f,1f);
+  renderDrawableToBitmap(icon,preview,offset,offset,iconSize,iconSize,1f,1f);
+  FastBitmapDrawable iconDrawable=new FastBitmapDrawable(preview);
+  iconDrawable.setBounds(0,0,expectedWidth,expectedHeight);
+  mWidgetPreviewCache.put(info,preview);
+  return iconDrawable;
+}
