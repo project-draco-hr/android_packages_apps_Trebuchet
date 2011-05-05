@@ -8,10 +8,10 @@
         for (int i=0; i < count; i++) {
           ((ImageView)group.getChildAt(i)).setImageDrawable(null);
         }
-        ArrayList<Bitmap> bitmaps=(ArrayList<Bitmap>)v.getTag(R.id.icon);
+        ArrayList<Bitmap> bitmaps=(ArrayList<Bitmap>)v.getTag(R.id.all_apps_button_cluster);
         for (        Bitmap bitmap : bitmaps)         bitmap.recycle();
         v.setTag(R.id.workspace,null);
-        v.setTag(R.id.icon,null);
+        v.setTag(R.id.all_apps_button_cluster,null);
         window.setOnDismissListener(null);
       }
     }
