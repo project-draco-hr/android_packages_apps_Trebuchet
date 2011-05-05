@@ -42,7 +42,7 @@ if (LauncherApplication.isScreenXLarge()) {
 addItems();
 }
  else {
-showAddDialog(longClickCellInfo.cellX,longClickCellInfo.cellY);
+startWallpaper();
 }
 }
  else {

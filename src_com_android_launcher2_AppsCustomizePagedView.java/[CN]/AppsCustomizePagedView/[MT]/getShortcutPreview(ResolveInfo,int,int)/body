@@ -9,8 +9,7 @@
   int expectedHeight=mWidgetPreviewIconPaddedDimension;
   int offset=(int)(iconSize * sWidgetPreviewIconPaddingPercentage);
   Bitmap preview=Bitmap.createBitmap(expectedWidth,expectedHeight,Config.ARGB_8888);
-  IconCache cache=((LauncherApplication)mLauncher.getApplication()).getIconCache();
-  Drawable icon=cache.getFullResIcon(info,mPackageManager);
+  Drawable icon=mIconCache.getFullResIcon(info,mPackageManager);
   renderDrawableToBitmap(mDefaultWidgetBackground,preview,0,0,mWidgetPreviewIconPaddedDimension,mWidgetPreviewIconPaddedDimension,1f,1f);
   renderDrawableToBitmap(icon,preview,offset,offset,iconSize,iconSize,1f,1f);
   FastBitmapDrawable iconDrawable=new FastBitmapDrawable(preview);

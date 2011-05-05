@@ -5,6 +5,7 @@
   mContentType=ContentType.Applications;
   mApps=new ArrayList<ApplicationInfo>();
   mWidgets=new ArrayList<Object>();
+  mIconCache=((LauncherApplication)context.getApplicationContext()).getIconCache();
   mWidgetPreviewCache=new LruCache<Object,Bitmap>(sWidgetPreviewCacheSize){
     protected int sizeOf(    Object key,    Bitmap value){
       return value.getByteCount();

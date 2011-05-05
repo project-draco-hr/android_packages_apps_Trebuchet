@@ -1,5 +1,6 @@
 {
-  mIcon=Utilities.createIconBitmap(modelIconCache.getFullResIcon(info,packageManager),mContext);
+  ComponentName cn=new ComponentName(info.activityInfo.packageName,info.activityInfo.name);
+  mIcon=modelIconCache.getIcon(cn,info);
   setCompoundDrawablesWithIntrinsicBounds(null,new FastBitmapDrawable(mIcon),null,null);
   setText(info.loadLabel(packageManager));
   setTag(info);
