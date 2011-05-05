@@ -10,6 +10,5 @@
   }
   findAndSetEmptyCells(item);
   mInfo.add(item);
-  createAndAddShortcut(item);
   LauncherModel.addOrMoveItemInDatabase(mLauncher,item,mInfo.id,0,item.cellX,item.cellY);
 }
