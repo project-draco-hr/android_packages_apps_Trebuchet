@@ -1,3 +1,6 @@
 {
-  return (int)(Math.max(mMinimumWidth,child.getMeasuredWidth()) * mLayoutScale + 0.5f);
+  final int measuredWidth=child.getMeasuredWidth();
+  final int minWidth=mMinimumWidth;
+  final int maxWidth=(minWidth > measuredWidth) ? minWidth : measuredWidth;
+  return (int)(maxWidth * mLayoutScale + 0.5f);
 }

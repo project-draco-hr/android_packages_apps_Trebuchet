@@ -19,6 +19,7 @@
     mCheckedFadeInDuration=r.getInteger(R.integer.config_dragAppsCustomizeIconFadeInDuration);
     mCheckedFadeOutDuration=r.getInteger(R.integer.config_dragAppsCustomizeIconFadeOutDuration);
   }
+  mDimensionsFormatString=r.getString(R.string.widget_dims_format);
   setWillNotDraw(false);
   setClipToPadding(false);
 }

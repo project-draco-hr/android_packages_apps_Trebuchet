@@ -37,20 +37,4 @@ synchronized (mLock) {
       mLoaderTask=null;
     }
   }
-  if (mStopped) {
-    mHandler.post(new Runnable(){
-      public void run(){
-        System.gc();
-      }
-    }
-);
-  }
- else {
-    mHandler.postIdle(new Runnable(){
-      public void run(){
-        System.gc();
-      }
-    }
-);
-  }
 }

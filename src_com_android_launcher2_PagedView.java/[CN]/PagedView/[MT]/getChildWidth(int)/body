@@ -1,3 +1,5 @@
 {
-  return Math.max(mMinimumWidth,getChildAt(index).getMeasuredWidth());
+  final int measuredWidth=getChildAt(index).getMeasuredWidth();
+  final int minWidth=mMinimumWidth;
+  return (minWidth > measuredWidth) ? minWidth : measuredWidth;
 }

@@ -1,5 +1,10 @@
 {
   layout.setGravity(Gravity.LEFT);
   layout.setPadding(mPageLayoutPaddingLeft,mPageLayoutPaddingTop,mPageLayoutPaddingRight,mPageLayoutPaddingBottom);
+  setVisibilityOnChildren(layout,View.GONE);
+  int widthSpec=MeasureSpec.makeMeasureSpec(getMeasuredWidth(),MeasureSpec.AT_MOST);
+  int heightSpec=MeasureSpec.makeMeasureSpec(getMeasuredHeight(),MeasureSpec.AT_MOST);
   layout.setMinimumWidth(getPageContentWidth());
+  layout.measure(widthSpec,heightSpec);
+  setVisibilityOnChildren(layout,View.VISIBLE);
 }

@@ -8,8 +8,9 @@
   for (int i=startIndex; i < endIndex; ++i) {
     ResolveInfo info=list.get(i);
     PendingAddItemInfo createItemInfo=new PendingAddItemInfo();
+    final boolean createHolographicOutlines=isHardwareAccelerated() && (numPages > 1);
     PagedViewIcon icon=(PagedViewIcon)mInflater.inflate(R.layout.customize_paged_view_item,layout,false);
-    icon.applyFromResolveInfo(info,mPackageManager,mPageViewIconCache,((LauncherApplication)mLauncher.getApplication()).getIconCache(),(numPages > 1));
+    icon.applyFromResolveInfo(info,mPackageManager,mPageViewIconCache,((LauncherApplication)mLauncher.getApplication()).getIconCache(),createHolographicOutlines);
 switch (mCustomizationType) {
 case WallpaperCustomization:
       icon.setOnClickListener(this);
@@ -29,6 +30,6 @@ final int index=i - startIndex;
 final int x=index % mCellCountX;
 final int y=index / mCellCountX;
 setupPage(layout);
-layout.addViewToCellLayout(icon,-1,i,new PagedViewCellLayout.LayoutParams(x,y,1,1));
+layout.addViewToCellLayout(icon,-1,i,new PagedViewCellLayout.LayoutParams(x,y,1,1),createHolographicOutlines);
 }
 }

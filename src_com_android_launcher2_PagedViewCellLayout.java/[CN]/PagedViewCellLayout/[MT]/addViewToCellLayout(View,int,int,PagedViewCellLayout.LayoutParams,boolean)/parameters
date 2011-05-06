@@ -2,3 +2,4 @@ View child
 int index
 int childId
 PagedViewCellLayout.LayoutParams params
+boolean createHolographicOutlines

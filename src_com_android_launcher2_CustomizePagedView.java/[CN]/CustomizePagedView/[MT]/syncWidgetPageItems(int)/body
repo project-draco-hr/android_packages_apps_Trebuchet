@@ -9,8 +9,9 @@
     final PendingAddWidgetInfo createItemInfo=new PendingAddWidgetInfo(info,null,null);
     final int[] cellSpans=CellLayout.rectToCell(getResources(),info.minWidth,info.minHeight,null);
     final FastBitmapDrawable icon=getWidgetPreview(info);
+    final boolean createHolographicOutlines=isHardwareAccelerated() && (numPages > 1);
     PagedViewWidget l=(PagedViewWidget)mInflater.inflate(R.layout.customize_paged_view_widget,layout,false);
-    l.applyFromAppWidgetProviderInfo(info,icon,mMaxWidgetWidth,cellSpans,mPageViewIconCache,(numPages > 1));
+    l.applyFromAppWidgetProviderInfo(info,icon,mMaxWidgetWidth,cellSpans,mPageViewIconCache,createHolographicOutlines);
     l.setTag(createItemInfo);
     l.setOnClickListener(this);
     l.setOnTouchListener(this);
