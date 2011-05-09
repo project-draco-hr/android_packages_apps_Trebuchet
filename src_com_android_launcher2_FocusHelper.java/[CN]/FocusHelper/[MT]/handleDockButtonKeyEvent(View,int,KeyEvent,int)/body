@@ -1,0 +1,58 @@
+{
+  final ViewGroup parent=(ViewGroup)v.getParent();
+  final ViewGroup launcher=(ViewGroup)parent.getParent();
+  final Workspace workspace=(Workspace)launcher.findViewById(R.id.workspace);
+  final int buttonIndex=parent.indexOfChild(v);
+  final int buttonCount=parent.getChildCount();
+  final int pageIndex=workspace.getCurrentPage();
+  final int pageCount=workspace.getChildCount();
+  final View previousIndicator=launcher.findViewById(R.id.previous_screen);
+  final View nextIndicator=launcher.findViewById(R.id.next_screen);
+  final int action=e.getAction();
+  final boolean handleKeyEvent=(action != KeyEvent.ACTION_UP);
+  boolean wasHandled=false;
+switch (keyCode) {
+case KeyEvent.KEYCODE_DPAD_LEFT:
+    if (handleKeyEvent) {
+      if (buttonIndex > 0) {
+        parent.getChildAt(buttonIndex - 1).requestFocus();
+      }
+ else {
+        previousIndicator.requestFocus();
+      }
+    }
+  wasHandled=true;
+break;
+case KeyEvent.KEYCODE_DPAD_RIGHT:
+if (handleKeyEvent) {
+if (buttonIndex < (buttonCount - 1)) {
+  parent.getChildAt(buttonIndex + 1).requestFocus();
+}
+ else {
+  nextIndicator.requestFocus();
+}
+}
+wasHandled=true;
+break;
+case KeyEvent.KEYCODE_DPAD_UP:
+if (handleKeyEvent) {
+final CellLayout layout=(CellLayout)workspace.getChildAt(pageIndex);
+final CellLayoutChildren children=layout.getChildrenLayout();
+final View newIcon=getBubbleTextViewInDirection(layout,children,-1,1);
+if (newIcon != null) {
+newIcon.requestFocus();
+}
+ else {
+workspace.requestFocus();
+}
+}
+wasHandled=true;
+break;
+case KeyEvent.KEYCODE_DPAD_DOWN:
+wasHandled=true;
+break;
+default :
+break;
+}
+return wasHandled;
+}

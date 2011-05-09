@@ -1,5 +1,4 @@
 {
-  if (!LauncherApplication.isScreenXLarge())   return false;
   CellLayoutChildren parent=(CellLayoutChildren)v.getParent();
   final CellLayout layout=(CellLayout)parent.getParent();
   final Workspace workspace=(Workspace)layout.getParent();

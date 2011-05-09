@@ -1,0 +1,4 @@
+{
+  final Configuration configuration=v.getResources().getConfiguration();
+  return FocusHelper.handleDockButtonKeyEvent(v,keyCode,event,configuration.orientation);
+}

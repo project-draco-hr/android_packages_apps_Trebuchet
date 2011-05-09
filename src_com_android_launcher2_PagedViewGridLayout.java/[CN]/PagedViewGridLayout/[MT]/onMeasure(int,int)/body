@@ -1,0 +1,5 @@
+{
+  int widthSpecSize=Math.max(getSuggestedMinimumWidth(),MeasureSpec.getSize(widthMeasureSpec));
+  int widthSpecMode=MeasureSpec.AT_MOST;
+  super.onMeasure(MeasureSpec.makeMeasureSpec(widthSpecSize,widthSpecMode),heightMeasureSpec);
+}

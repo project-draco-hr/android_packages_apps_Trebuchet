@@ -1,8 +1,6 @@
 {
-  Context context=getContext();
-  PagedViewExtendedLayout layout=(PagedViewExtendedLayout)getChildAt(page);
+  PagedViewGridLayout layout=(PagedViewGridLayout)getChildAt(page);
   layout.removeAllViews();
-  FrameLayout container=new FrameLayout(context);
   int numWidgetsPerPage=mWidgetCountX * mWidgetCountY;
   int offset=page * numWidgetsPerPage;
   int cellWidth=((mWidgetSpacingLayout.getContentWidth() - mPageLayoutWidthGap - ((mWidgetCountX - 1) * mWidgetCellWidthGap)) / mWidgetCountX);
@@ -31,12 +29,11 @@
     widget.setOnClickListener(this);
     widget.setOnLongClickListener(this);
     widget.setOnTouchListener(this);
-    FrameLayout.LayoutParams lp=new FrameLayout.LayoutParams(cellWidth,cellHeight);
     int ix=i % mWidgetCountX;
     int iy=i / mWidgetCountX;
+    PagedViewGridLayout.LayoutParams lp=new PagedViewGridLayout.LayoutParams(cellWidth,cellHeight);
     lp.leftMargin=(ix * cellWidth) + (ix * mWidgetCellWidthGap);
     lp.topMargin=(iy * cellHeight) + (iy * mWidgetCellHeightGap);
-    container.addView(widget,lp);
+    layout.addView(widget,lp);
   }
-  layout.addView(container,new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.WRAP_CONTENT));
 }
