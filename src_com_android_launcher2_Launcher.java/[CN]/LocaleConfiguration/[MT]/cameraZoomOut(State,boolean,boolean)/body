@@ -39,6 +39,7 @@
     }
 );
     if (toAllApps) {
+      toView.setVisibility(View.VISIBLE);
       toView.setFastAlpha(0f);
       ValueAnimator alphaAnim=ValueAnimator.ofFloat(0f,1f).setDuration(fadeDuration);
       alphaAnim.setInterpolator(new DecelerateInterpolator(1.5f));

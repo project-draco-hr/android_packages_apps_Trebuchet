@@ -1,5 +1,4 @@
 {
-  layout.setGravity(Gravity.LEFT);
   layout.setPadding(mPageLayoutPaddingLeft,mPageLayoutPaddingTop,mPageLayoutPaddingRight,mPageLayoutPaddingBottom);
   setVisibilityOnChildren(layout,View.GONE);
   int widthSpec=MeasureSpec.makeMeasureSpec(getMeasuredWidth(),MeasureSpec.AT_MOST);
