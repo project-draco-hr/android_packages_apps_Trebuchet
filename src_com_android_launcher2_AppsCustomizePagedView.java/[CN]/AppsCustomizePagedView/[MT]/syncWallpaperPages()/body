@@ -1,0 +1,10 @@
+{
+  Context context=getContext();
+  int numWidgetsPerPage=mWallpaperCountX * mWallpaperCountY;
+  int numPages=(int)Math.ceil(mWallpapers.size() / (float)numWidgetsPerPage);
+  for (int i=0; i < numPages; ++i) {
+    PagedViewGridLayout layout=new PagedViewGridLayout(context,mWallpaperCountX,mWallpaperCountY);
+    setupPage(layout);
+    addView(layout);
+  }
+}

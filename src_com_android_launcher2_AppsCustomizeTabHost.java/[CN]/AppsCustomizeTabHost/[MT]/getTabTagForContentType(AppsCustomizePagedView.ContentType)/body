@@ -5,5 +5,8 @@
  else   if (type == AppsCustomizePagedView.ContentType.Widgets) {
     return WIDGETS_TAB_TAG;
   }
+ else   if (type == AppsCustomizePagedView.ContentType.Wallpapers) {
+    return WALLPAPERS_TAB_TAG;
+  }
   return APPS_TAB_TAG;
 }
