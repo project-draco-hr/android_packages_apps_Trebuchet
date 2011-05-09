@@ -1,6 +1,8 @@
 {
   mDragViewVisualCenter=getDragViewVisualCenter(x,y,xOffset,yOffset,dragView,mDragViewVisualCenter);
-  mapPointFromSelfToChild(mDragTargetLayout,mDragViewVisualCenter,null);
+  if (mDragTargetLayout != null) {
+    mapPointFromSelfToChild(mDragTargetLayout,mDragViewVisualCenter,null);
+  }
   if (!mLauncher.isAllAppsVisible()) {
     int dragTargetIndex=indexOfChild(mDragTargetLayout);
     if (mCurrentPage != dragTargetIndex && (mIsSmall || mIsInUnshrinkAnimation)) {
@@ -18,7 +20,9 @@
  else   if (mDragInfo != null) {
     final View cell=mDragInfo.cell;
     CellLayout dropTargetLayout=mDragTargetLayout;
+    boolean dropInscrollArea=false;
     if (dropTargetLayout == null && mInScrollArea) {
+      dropInscrollArea=true;
       if (mPendingScrollDirection == DragController.SCROLL_LEFT) {
         dropTargetLayout=(CellLayout)getChildAt(mCurrentPage - 1);
       }
@@ -28,7 +32,7 @@
     }
     if (dropTargetLayout != null) {
       final int screen=(mTargetCell == null) ? mDragInfo.screen : indexOfChild(dropTargetLayout);
-      if (createUserFolderIfNecessary(cell,dropTargetLayout,(int)mDragViewVisualCenter[0],(int)mDragViewVisualCenter[1],false)) {
+      if (!dropInscrollArea && createUserFolderIfNecessary(cell,dropTargetLayout,(int)mDragViewVisualCenter[0],(int)mDragViewVisualCenter[1],false)) {
         return;
       }
       mTargetCell=findNearestVacantArea((int)mDragViewVisualCenter[0],(int)mDragViewVisualCenter[1],mDragInfo.spanX,mDragInfo.spanY,cell,dropTargetLayout,mTargetCell);
