@@ -8,7 +8,7 @@
   for (int i=startIndex; i < endIndex; ++i) {
     ResolveInfo info=list.get(i);
     PendingAddItemInfo createItemInfo=new PendingAddItemInfo();
-    final boolean createHolographicOutlines=isHardwareAccelerated() && (numPages > 1);
+    final boolean createHolographicOutlines=(numPages > 1);
     PagedViewIcon icon=(PagedViewIcon)mInflater.inflate(R.layout.customize_paged_view_item,layout,false);
     icon.applyFromResolveInfo(info,mPackageManager,mPageViewIconCache,((LauncherApplication)mLauncher.getApplication()).getIconCache(),createHolographicOutlines);
 switch (mCustomizationType) {

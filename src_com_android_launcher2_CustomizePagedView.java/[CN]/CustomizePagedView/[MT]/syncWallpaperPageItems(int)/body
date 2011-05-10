@@ -9,7 +9,7 @@
   for (int i=startIndex; i < endIndex; ++i) {
     final ResolveInfo info=mWallpaperList.get(i);
     final FastBitmapDrawable icon=getWallpaperPreview(info);
-    final boolean createHolographicOutlines=isHardwareAccelerated() && (numPages > 1);
+    final boolean createHolographicOutlines=(numPages > 1);
     PagedViewWidget l=(PagedViewWidget)mInflater.inflate(R.layout.customize_paged_view_wallpaper,layout,false);
     l.applyFromWallpaperInfo(info,mPackageManager,icon,mMaxWidgetWidth,mPageViewIconCache,createHolographicOutlines);
     l.setTag(info);

@@ -8,7 +8,7 @@
   layout.removeAllViewsOnPage();
   for (int i=startIndex; i < endIndex; ++i) {
     final ApplicationInfo info=mApps.get(i);
-    final boolean createHolographicOutlines=isHardwareAccelerated() && (numPages > 1);
+    final boolean createHolographicOutlines=(numPages > 1);
     PagedViewIcon icon=(PagedViewIcon)mInflater.inflate(R.layout.all_apps_paged_view_application,layout,false);
     icon.applyFromApplicationInfo(info,mPageViewIconCache,true,createHolographicOutlines);
     icon.setOnClickListener(this);
