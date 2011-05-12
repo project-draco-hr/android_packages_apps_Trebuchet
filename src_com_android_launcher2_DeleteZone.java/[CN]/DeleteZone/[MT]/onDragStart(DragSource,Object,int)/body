@@ -4,7 +4,7 @@
     mActive=true;
     getHitRect(mRegion);
     mRegionF.set(mRegion);
-    if (LauncherApplication.isScreenXLarge()) {
+    if (LauncherApplication.isScreenLarge()) {
       mRegionF.top=mLauncher.getWorkspace().getTop();
       mRegionF.right=mLauncher.getWorkspace().getRight();
     }

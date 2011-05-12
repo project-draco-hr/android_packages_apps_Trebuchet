@@ -36,7 +36,7 @@
       final CellLayout cl=(CellLayout)getChildAt(i);
       float finalAlphaValue=0f;
       float rotation=0f;
-      if (LauncherApplication.isScreenXLarge()) {
+      if (LauncherApplication.isScreenLarge()) {
         finalAlphaValue=(i == mCurrentPage) ? 1.0f : 0.0f;
         if (i < mCurrentPage) {
           rotation=WORKSPACE_ROTATION;
@@ -50,7 +50,7 @@
       }
       float finalAlphaMultiplierValue=((i == mCurrentPage) && (mShrinkState != ShrinkState.SPRING_LOADED)) ? 0.0f : 1.0f;
       float translation=0f;
-      if (LauncherApplication.isScreenXLarge()) {
+      if (LauncherApplication.isScreenLarge()) {
         translation=getOffsetXForRotation(rotation,cl.getWidth(),cl.getHeight());
       }
       oldAlphas[i]=cl.getAlpha();

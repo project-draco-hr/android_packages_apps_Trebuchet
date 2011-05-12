@@ -1,7 +1,7 @@
 {
   super.onFinishInflate();
   mTransition=(TransitionDrawable)getCompoundDrawables()[LEFT_DRAWABLE];
-  if (LauncherApplication.isScreenXLarge()) {
+  if (LauncherApplication.isScreenLarge()) {
     mTransition.setCrossFadeEnabled(false);
   }
   Resources r=getResources();

@@ -1,5 +1,5 @@
 {
-  if (LauncherApplication.isScreenXLarge()) {
+  if (LauncherApplication.isScreenLarge()) {
     return getWidthBeforeFirstLayout() - (mCellWidth - Utilities.getIconContentSize());
   }
  else {

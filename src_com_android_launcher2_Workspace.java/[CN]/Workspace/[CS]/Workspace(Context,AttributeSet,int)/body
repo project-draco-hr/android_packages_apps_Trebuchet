@@ -1,7 +1,7 @@
 {
   super(context,attrs,defStyle);
   mContentIsRefreshable=false;
-  if (!LauncherApplication.isScreenXLarge()) {
+  if (!LauncherApplication.isScreenLarge()) {
     mFadeInAdjacentScreens=false;
   }
   mWallpaperManager=WallpaperManager.getInstance(context);

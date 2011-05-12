@@ -1,5 +1,5 @@
 {
-  if (LauncherApplication.isScreenXLarge()) {
+  if (LauncherApplication.isScreenLarge()) {
     final View searchButton=findViewById(R.id.search_button);
     final View searchDivider=findViewById(R.id.search_divider);
     final SearchManager searchManager=(SearchManager)getSystemService(Context.SEARCH_SERVICE);

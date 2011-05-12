@@ -1,5 +1,5 @@
 {
-  if (!LauncherApplication.isScreenXLarge())   return false;
+  if (!LauncherApplication.isScreenLarge())   return false;
   final ViewGroup parent=(ViewGroup)v.getParent();
   final ViewGroup launcher=(ViewGroup)parent.getParent();
   final Workspace workspace=(Workspace)launcher.findViewById(R.id.workspace);

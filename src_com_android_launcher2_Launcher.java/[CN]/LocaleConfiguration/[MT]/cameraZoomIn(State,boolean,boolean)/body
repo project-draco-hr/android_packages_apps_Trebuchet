@@ -5,13 +5,13 @@
   final float scaleFactor=fromAllApps ? (float)res.getInteger(R.integer.config_appsCustomizeZoomScaleFactor) : (float)res.getInteger(R.integer.config_customizeZoomScaleFactor);
   View tmpView;
   if (fromAllApps) {
-    tmpView=(LauncherApplication.isScreenXLarge()) ? (View)mAllAppsGrid : mAppsCustomizeTabHost;
+    tmpView=(LauncherApplication.isScreenLarge()) ? (View)mAllAppsGrid : mAppsCustomizeTabHost;
   }
  else {
     tmpView=mHomeCustomizationDrawer;
   }
   final View fromView=tmpView;
-  if (LauncherApplication.isScreenXLarge()) {
+  if (LauncherApplication.isScreenLarge()) {
     mCustomizePagedView.endChoiceMode();
     mAllAppsPagedView.endChoiceMode();
   }

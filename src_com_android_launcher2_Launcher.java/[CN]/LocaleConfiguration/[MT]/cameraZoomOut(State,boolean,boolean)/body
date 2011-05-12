@@ -6,7 +6,7 @@
   final float scale=toAllApps ? (float)res.getInteger(R.integer.config_appsCustomizeZoomScaleFactor) : (float)res.getInteger(R.integer.config_customizeZoomScaleFactor);
   View tmpView;
   if (toAllApps) {
-    tmpView=(LauncherApplication.isScreenXLarge()) ? (View)mAllAppsGrid : mAppsCustomizeTabHost;
+    tmpView=(LauncherApplication.isScreenLarge()) ? (View)mAllAppsGrid : mAppsCustomizeTabHost;
   }
  else {
     tmpView=mHomeCustomizationDrawer;
@@ -16,7 +16,7 @@
   if (toAllApps) {
     if (!springLoaded) {
       mWorkspace.shrink(ShrinkState.BOTTOM_HIDDEN,animated);
-      if (LauncherApplication.isScreenXLarge()) {
+      if (LauncherApplication.isScreenLarge()) {
         mAllAppsPagedView.resetSuccessfulDropFlag();
       }
     }

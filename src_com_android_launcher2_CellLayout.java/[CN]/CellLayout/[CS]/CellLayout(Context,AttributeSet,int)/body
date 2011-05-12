@@ -16,7 +16,7 @@
   a.recycle();
   setAlwaysDrawnWithCacheEnabled(false);
   final Resources res=getResources();
-  if (LauncherApplication.isScreenXLarge()) {
+  if (LauncherApplication.isScreenLarge()) {
     mNormalBackground=res.getDrawable(R.drawable.homescreen_large_blue);
     mActiveBackground=res.getDrawable(R.drawable.homescreen_large_green);
     mActiveGlowBackground=res.getDrawable(R.drawable.homescreen_large_green_strong);

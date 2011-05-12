@@ -1,7 +1,7 @@
 {
   if (mLauncher.isAllAppsVisible() && mShrinkState == ShrinkState.BOTTOM_HIDDEN) {
     PagedView appsPane;
-    if (LauncherApplication.isScreenXLarge()) {
+    if (LauncherApplication.isScreenLarge()) {
       appsPane=(PagedView)mLauncher.findViewById(R.id.all_apps_paged_view);
     }
  else {

@@ -5,7 +5,7 @@
     mInAnimation=new AnimatorSet();
     mInAnimation.setInterpolator(new AccelerateInterpolator());
     mInAnimation.setDuration(duration);
-    if (!LauncherApplication.isScreenXLarge()) {
+    if (!LauncherApplication.isScreenLarge()) {
       Animator translateAnim;
       if (mOrientation == ORIENTATION_HORIZONTAL) {
         translateAnim=ObjectAnimator.ofFloat(this,"translationY",getMeasuredWidth(),0f);
@@ -24,7 +24,7 @@
     mOutAnimation=new AnimatorSet();
     mOutAnimation.setInterpolator(new AccelerateInterpolator());
     mOutAnimation.setDuration(duration);
-    if (!LauncherApplication.isScreenXLarge()) {
+    if (!LauncherApplication.isScreenLarge()) {
       Animator translateAnim;
       if (mOrientation == ORIENTATION_HORIZONTAL) {
         translateAnim=ObjectAnimator.ofFloat(this,"translationY",0f,getMeasuredWidth());

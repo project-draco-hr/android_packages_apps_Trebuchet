@@ -3,7 +3,7 @@ switch (newState) {
 case WORKSPACE:
     hideOrShowToolbarButton(true,mButtonCluster,showSeq);
   mDeleteZone.setDragAndDropEnabled(true);
-if (LauncherApplication.isScreenXLarge()) {
+if (LauncherApplication.isScreenLarge()) {
   mDeleteZone.setText(getResources().getString(R.string.delete_zone_label_workspace));
 }
 break;
@@ -11,7 +11,7 @@ case ALL_APPS:
 case APPS_CUSTOMIZE:
 hideOrShowToolbarButton(false,mButtonCluster,hideSeq);
 mDeleteZone.setDragAndDropEnabled(false);
-if (LauncherApplication.isScreenXLarge()) {
+if (LauncherApplication.isScreenLarge()) {
 mDeleteZone.setText(getResources().getString(R.string.delete_zone_label_all_apps));
 }
 break;

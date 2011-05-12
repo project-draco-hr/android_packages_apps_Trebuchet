@@ -11,7 +11,7 @@
   }
   if (source != this) {
     final int[] touchXY=new int[]{(int)mDragViewVisualCenter[0],(int)mDragViewVisualCenter[1]};
-    if (LauncherApplication.isScreenXLarge() && (mIsSmall || mIsInUnshrinkAnimation) && !mLauncher.isAllAppsVisible()) {
+    if (LauncherApplication.isScreenLarge() && (mIsSmall || mIsInUnshrinkAnimation) && !mLauncher.isAllAppsVisible()) {
       ((ItemInfo)dragInfo).dropPos=touchXY;
       return;
     }

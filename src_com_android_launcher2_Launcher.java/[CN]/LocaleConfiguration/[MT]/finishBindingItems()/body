@@ -24,7 +24,7 @@
     super.onRestoreInstanceState(mSavedInstanceState);
     mSavedInstanceState=null;
   }
-  if (LauncherApplication.isScreenXLarge() && (mState == State.CUSTOMIZE)) {
+  if (LauncherApplication.isScreenLarge() && (mState == State.CUSTOMIZE)) {
     final int childCount=mWorkspace.getChildCount();
     for (int i=0; i < childCount; ++i) {
       mWorkspace.getChildAt(i).requestLayout();

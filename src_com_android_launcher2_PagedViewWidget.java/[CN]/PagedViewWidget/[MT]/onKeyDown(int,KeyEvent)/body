@@ -1,5 +1,5 @@
 {
-  if (LauncherApplication.isScreenXLarge()) {
+  if (LauncherApplication.isScreenLarge()) {
     return FocusHelper.handlePagedViewWidgetKeyEvent(this,keyCode,event) || super.onKeyDown(keyCode,event);
   }
  else {

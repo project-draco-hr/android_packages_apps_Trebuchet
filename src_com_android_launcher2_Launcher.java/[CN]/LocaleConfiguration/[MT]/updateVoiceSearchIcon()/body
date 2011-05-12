@@ -1,5 +1,5 @@
 {
-  if (LauncherApplication.isScreenXLarge()) {
+  if (LauncherApplication.isScreenLarge()) {
     final View searchDivider=findViewById(R.id.search_divider);
     final View voiceButton=findViewById(R.id.voice_button);
     Intent intent=new Intent(RecognizerIntent.ACTION_WEB_SEARCH);

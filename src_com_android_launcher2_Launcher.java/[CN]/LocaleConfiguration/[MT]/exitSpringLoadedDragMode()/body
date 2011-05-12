@@ -1,7 +1,7 @@
 {
   if (mState == State.ALL_APPS_SPRING_LOADED) {
     mWorkspace.exitSpringLoadedDragMode(Workspace.ShrinkState.BOTTOM_VISIBLE);
-    if (LauncherApplication.isScreenXLarge()) {
+    if (LauncherApplication.isScreenLarge()) {
       cameraZoomOut(State.ALL_APPS,true,true);
       mState=State.ALL_APPS;
     }

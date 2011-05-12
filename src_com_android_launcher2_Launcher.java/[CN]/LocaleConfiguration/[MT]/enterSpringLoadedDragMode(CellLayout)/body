@@ -2,7 +2,7 @@
   mWorkspace.enterSpringLoadedDragMode(layout);
   if (mState == State.ALL_APPS || mState == State.APPS_CUSTOMIZE) {
     mState=State.ALL_APPS_SPRING_LOADED;
-    if (LauncherApplication.isScreenXLarge()) {
+    if (LauncherApplication.isScreenLarge()) {
       cameraZoomIn(State.ALL_APPS,true,true);
     }
  else {

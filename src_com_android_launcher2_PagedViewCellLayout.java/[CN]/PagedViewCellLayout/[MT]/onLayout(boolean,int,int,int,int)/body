@@ -2,7 +2,7 @@
   int count=getChildCount();
   for (int i=0; i < count; i++) {
     View child=getChildAt(i);
-    if (LauncherApplication.isScreenXLarge()) {
+    if (LauncherApplication.isScreenLarge()) {
       child.layout(0,0,r - l,b - t);
     }
  else {
