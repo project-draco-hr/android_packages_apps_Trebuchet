@@ -1,0 +1,10 @@
+{
+  super.onStart();
+  DisplayMetrics metrics=new DisplayMetrics();
+  getWindowManager().getDefaultDisplay().getMetrics(metrics);
+  final int longside=metrics.widthPixels > metrics.heightPixels ? metrics.widthPixels : metrics.heightPixels;
+  Board b=new Board(this,null);
+  setContentView(b,new ViewGroup.LayoutParams(longside,longside));
+  b.setX((metrics.widthPixels - longside) / 2);
+  b.setY((metrics.heightPixels - longside) / 2);
+}

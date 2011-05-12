@@ -1,0 +1,3 @@
+{
+  return (!(ROCKET_LAUNCHER && mManeuveringThrusters));
+}

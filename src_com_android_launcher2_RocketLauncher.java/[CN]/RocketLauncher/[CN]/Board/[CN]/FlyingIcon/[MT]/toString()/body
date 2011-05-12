@@ -1,0 +1,3 @@
+{
+  return String.format("<'%s' @ (%.1f, %.1f) v=%.1f a=%.1f dist/fuse=%.1f/%.1f>","icon",getX(),getY(),v,angle,dist,fuse);
+}

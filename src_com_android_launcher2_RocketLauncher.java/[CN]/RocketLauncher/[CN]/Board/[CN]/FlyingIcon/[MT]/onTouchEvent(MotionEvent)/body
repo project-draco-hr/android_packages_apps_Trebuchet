@@ -1,0 +1,48 @@
+{
+  if (!mManeuveringThrusters || component == null) {
+    return false;
+  }
+  if (getAlpha() < 0.5f) {
+    setPressed(false);
+    return false;
+  }
+switch (event.getAction()) {
+case MotionEvent.ACTION_DOWN:
+    setPressed(true);
+  Board.this.resetWarpTimer();
+break;
+case MotionEvent.ACTION_MOVE:
+final Rect hit=new Rect();
+final Point offset=new Point();
+getGlobalVisibleRect(hit,offset);
+final int globx=(int)event.getX() + offset.x;
+final int globy=(int)event.getY() + offset.y;
+setPressed(hit.contains(globx,globy));
+Board.this.resetWarpTimer();
+break;
+case MotionEvent.ACTION_UP:
+if (isPressed()) {
+setPressed(false);
+postDelayed(new Runnable(){
+public void run(){
+try {
+getContext().startActivity(new Intent(Intent.ACTION_MAIN).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).setComponent(component));
+}
+ catch (android.content.ActivityNotFoundException e) {
+}
+catch (SecurityException e) {
+}
+}
+}
+,LAUNCH_ZOOM_TIME);
+endscale=0;
+AnimatorSet s=new AnimatorSet();
+s.playTogether(ObjectAnimator.ofFloat(this,"scaleX",15f),ObjectAnimator.ofFloat(this,"scaleY",15f),ObjectAnimator.ofFloat(this,"alpha",0f));
+s.setDuration((int)(LAUNCH_ZOOM_TIME * 1.25));
+s.setInterpolator(new android.view.animation.AccelerateInterpolator(3));
+s.start();
+}
+break;
+}
+return true;
+}

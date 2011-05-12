@@ -1,0 +1,5 @@
+{
+  super.randomize();
+  v=randfrange(VMAX * 0.75f,VMAX * 2f);
+  endscale=randfrange(1f,2f);
+}

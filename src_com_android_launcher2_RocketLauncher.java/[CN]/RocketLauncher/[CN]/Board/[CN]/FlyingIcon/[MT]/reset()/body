@@ -1,0 +1,13 @@
+{
+  randomize();
+  boardCenterX=(Board.this.getWidth() - getWidth()) / 2;
+  boardCenterY=(Board.this.getHeight() - getHeight()) / 2;
+  setX(boardCenterX);
+  setY(boardCenterY);
+  fuse=(float)Math.max(boardCenterX,boardCenterY);
+  setRotation(180 - angle);
+  setScaleX(0f);
+  setScaleY(0f);
+  dist=0;
+  setAlpha(0f);
+}

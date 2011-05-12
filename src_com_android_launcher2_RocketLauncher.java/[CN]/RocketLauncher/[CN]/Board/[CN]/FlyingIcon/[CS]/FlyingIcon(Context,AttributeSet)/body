@@ -1,0 +1,7 @@
+{
+  super(context,as);
+  setLayerType(View.LAYER_TYPE_HARDWARE,null);
+  setBackgroundResource(R.drawable.flying_icon_bg);
+  hsv[1]=1f;
+  hsv[2]=1f;
+}
