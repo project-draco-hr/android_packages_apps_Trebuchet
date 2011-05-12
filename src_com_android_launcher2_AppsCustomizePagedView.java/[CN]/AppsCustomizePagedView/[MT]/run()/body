@@ -1,16 +1,6 @@
 {
-  cl.calculateSpans(itemInfo);
-  if (cl.findCellForSpan(null,itemInfo.spanX,itemInfo.spanY)) {
-    if (LauncherApplication.isScreenXLarge()) {
-      animateItemOntoScreen(dragView,cl,itemInfo);
-    }
- else {
-      mLauncher.addExternalItemToScreen(itemInfo,cl);
-      itemInfo.dropPos=null;
-    }
-    mLauncher.showWorkspace(true);
-  }
- else {
-    mLauncher.showOutOfSpaceMessage();
-  }
+  Intent createWallpapersIntent=new Intent(Intent.ACTION_SET_WALLPAPER);
+  ComponentName name=new ComponentName(info.activityInfo.packageName,info.activityInfo.name);
+  createWallpapersIntent.setComponent(name);
+  mLauncher.processWallpaper(createWallpapersIntent);
 }

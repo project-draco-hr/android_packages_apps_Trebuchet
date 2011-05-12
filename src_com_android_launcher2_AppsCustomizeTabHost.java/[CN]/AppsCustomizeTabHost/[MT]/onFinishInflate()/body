@@ -16,6 +16,9 @@
   tabView=(TextView)mLayoutInflater.inflate(R.layout.tab_widget_indicator,tabs,false);
   tabView.setText(mContext.getString(R.string.widgets_tab_label));
   addTab(newTabSpec(WIDGETS_TAB_TAG).setIndicator(tabView).setContent(contentFactory));
+  tabView=(TextView)mLayoutInflater.inflate(R.layout.tab_widget_indicator,tabs,false);
+  tabView.setText(mContext.getString(R.string.wallpapers_tab_label));
+  addTab(newTabSpec(WALLPAPERS_TAB_TAG).setIndicator(tabView).setContent(contentFactory));
   setOnTabChangedListener(this);
   tabs.getLayoutParams().width=content.getPageContentWidth();
 }

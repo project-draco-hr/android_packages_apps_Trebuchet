@@ -1,0 +1,41 @@
+{
+  Bitmap cachedBitmap=mWidgetPreviewCache.get(info);
+  if (cachedBitmap != null) {
+    return new FastBitmapDrawable(cachedBitmap);
+  }
+  Resources resources=getContext().getResources();
+  Drawable wallpaperPreview=parseWallpaperPreviewXml(info);
+  Drawable wallpaperIcon=null;
+  int expectedWidth;
+  int expectedHeight;
+  if (wallpaperPreview != null) {
+    expectedWidth=wallpaperPreview.getIntrinsicWidth();
+    expectedHeight=wallpaperPreview.getIntrinsicHeight();
+  }
+ else {
+    wallpaperPreview=mDefaultWidgetBackground;
+    expectedWidth=expectedHeight=Math.min(cellWidth,cellHeight);
+    String packageName=info.activityInfo.packageName;
+    try {
+      if (info.icon > 0) {
+        wallpaperIcon=mPackageManager.getDrawable(packageName,info.icon,null);
+      }
+      if (wallpaperIcon == null) {
+        wallpaperIcon=resources.getDrawable(R.drawable.ic_launcher_application);
+      }
+    }
+ catch (    Resources.NotFoundException e) {
+    }
+  }
+  Bitmap preview=Bitmap.createBitmap(expectedWidth,expectedHeight,Config.ARGB_8888);
+  renderDrawableToBitmap(wallpaperPreview,preview,0,0,expectedWidth,expectedHeight,1f,1f);
+  if (wallpaperIcon != null) {
+    int iconSize=resources.getDimensionPixelSize(R.dimen.app_icon_size);
+    int offset=(int)(iconSize * sWidgetPreviewIconPaddingPercentage);
+    renderDrawableToBitmap(wallpaperIcon,preview,offset,offset,iconSize,iconSize,1f,1f);
+  }
+  FastBitmapDrawable previewDrawable=new FastBitmapDrawable(preview);
+  previewDrawable.setBounds(0,0,expectedWidth,expectedHeight);
+  mWidgetPreviewCache.put(info,preview);
+  return previewDrawable;
+}

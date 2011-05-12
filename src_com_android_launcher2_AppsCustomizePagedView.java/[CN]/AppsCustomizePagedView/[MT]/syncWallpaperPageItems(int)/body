@@ -1,0 +1,24 @@
+{
+  PagedViewGridLayout layout=(PagedViewGridLayout)getChildAt(page);
+  layout.removeAllViews();
+  int numWidgetsPerPage=mWallpaperCountX * mWallpaperCountY;
+  int offset=page * numWidgetsPerPage;
+  int cellWidth=((mWidgetSpacingLayout.getContentWidth() - mPageLayoutWidthGap - ((mWallpaperCountX - 1) * mCellWidthGap)) / mWallpaperCountX);
+  int cellHeight=((mWidgetSpacingLayout.getContentHeight() - mPageLayoutHeightGap - ((mWallpaperCountY - 1) * mCellHeightGap)) / mWallpaperCountY);
+  for (int i=0; i < Math.min(numWidgetsPerPage,mWallpapers.size() - offset); ++i) {
+    ResolveInfo info=mWallpapers.get(offset + i);
+    PagedViewWidget widget=(PagedViewWidget)mLayoutInflater.inflate(R.layout.apps_customize_wallpaper,layout,false);
+    FastBitmapDrawable preview=getWallpaperPreview(info,cellWidth,cellHeight);
+    widget.applyFromResolveInfo(mPackageManager,info,preview,null,false);
+    widget.setTag(info);
+    widget.setOnClickListener(this);
+    widget.setOnLongClickListener(this);
+    widget.setOnTouchListener(this);
+    int ix=i % mWallpaperCountX;
+    int iy=i / mWallpaperCountX;
+    PagedViewGridLayout.LayoutParams lp=new PagedViewGridLayout.LayoutParams(cellWidth,cellHeight);
+    lp.leftMargin=(ix * cellWidth) + (ix * mCellWidthGap);
+    lp.topMargin=(iy * cellHeight) + (iy * mCellHeightGap);
+    layout.addView(widget,lp);
+  }
+}

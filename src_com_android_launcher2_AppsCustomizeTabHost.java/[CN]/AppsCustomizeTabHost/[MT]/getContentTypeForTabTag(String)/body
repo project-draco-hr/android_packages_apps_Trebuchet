@@ -5,5 +5,8 @@
  else   if (tag.equals(WIDGETS_TAB_TAG)) {
     return AppsCustomizePagedView.ContentType.Widgets;
   }
+ else   if (tag.equals(WALLPAPERS_TAB_TAG)) {
+    return AppsCustomizePagedView.ContentType.Wallpapers;
+  }
   return AppsCustomizePagedView.ContentType.Applications;
 }

@@ -4,4 +4,7 @@
   Intent shortcutsIntent=new Intent(Intent.ACTION_CREATE_SHORTCUT);
   mWidgets.addAll(mPackageManager.queryIntentActivities(shortcutsIntent,0));
   Collections.sort(mWidgets,new LauncherModel.WidgetAndShortcutNameComparator(mPackageManager));
+  Intent wallpapersIntent=new Intent(Intent.ACTION_SET_WALLPAPER);
+  mWallpapers=mPackageManager.queryIntentActivities(wallpapersIntent,PackageManager.GET_META_DATA);
+  Collections.sort(mWallpapers,new LauncherModel.ShortcutNameComparator(mPackageManager));
 }

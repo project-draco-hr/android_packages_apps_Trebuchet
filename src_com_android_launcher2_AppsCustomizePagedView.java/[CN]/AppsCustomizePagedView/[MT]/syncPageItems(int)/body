@@ -6,5 +6,8 @@ case Applications:
 case Widgets:
 syncWidgetPageItems(page);
 break;
+case Wallpapers:
+syncWallpaperPageItems(page);
+break;
 }
 }
