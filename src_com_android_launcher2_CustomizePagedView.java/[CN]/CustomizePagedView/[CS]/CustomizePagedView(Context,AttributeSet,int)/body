@@ -17,6 +17,9 @@
   final Resources r=context.getResources();
   setDragSlopeThreshold(r.getInteger(R.integer.config_customizationDrawerDragSlopeThreshold) / 100.0f);
   mMinPageWidth=r.getDimensionPixelSize(R.dimen.customization_drawer_content_min_width);
+  PagedViewCellLayout layout=new PagedViewCellLayout(getContext());
+  setupPage(layout);
+  mPageContentWidth=layout.getContentWidth();
   setVisibility(View.GONE);
   setSoundEffectsEnabled(false);
   setupWorkspaceLayout();

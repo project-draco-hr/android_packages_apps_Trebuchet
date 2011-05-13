@@ -18,54 +18,9 @@
   loadHotseats();
   checkForLocaleChange();
   setContentView(R.layout.launcher);
-  mHomeCustomizationDrawer=(TabHost)findViewById(R.id.customization_drawer);
+  mHomeCustomizationDrawer=(CustomizeTrayTabHost)findViewById(R.id.customization_drawer);
   if (mHomeCustomizationDrawer != null) {
-    mHomeCustomizationDrawer.setup();
-    mCustomizePagedView=(CustomizePagedView)mInflater.inflate(R.layout.customization_drawer_tab_contents,mHomeCustomizationDrawer,false);
-    TabContentFactory contentFactory=new TabContentFactory(){
-      public View createTabContent(      String tag){
-        return mCustomizePagedView;
-      }
-    }
-;
-    TextView tabView;
-    TabWidget tabWidget=(TabWidget)mHomeCustomizationDrawer.findViewById(com.android.internal.R.id.tabs);
-    tabView=(TextView)mInflater.inflate(R.layout.tab_widget_indicator,tabWidget,false);
-    tabView.setText(getString(R.string.widgets_tab_label));
-    mHomeCustomizationDrawer.addTab(mHomeCustomizationDrawer.newTabSpec(WIDGETS_TAG).setIndicator(tabView).setContent(contentFactory));
-    tabView=(TextView)mInflater.inflate(R.layout.tab_widget_indicator,tabWidget,false);
-    tabView.setText(getString(R.string.applications_tab_label));
-    mHomeCustomizationDrawer.addTab(mHomeCustomizationDrawer.newTabSpec(APPLICATIONS_TAG).setIndicator(tabView).setContent(contentFactory));
-    tabView=(TextView)mInflater.inflate(R.layout.tab_widget_indicator,tabWidget,false);
-    tabView.setText(getString(R.string.wallpapers_tab_label));
-    mHomeCustomizationDrawer.addTab(mHomeCustomizationDrawer.newTabSpec(WALLPAPERS_TAG).setIndicator(tabView).setContent(contentFactory));
-    tabView=(TextView)mInflater.inflate(R.layout.tab_widget_indicator,tabWidget,false);
-    tabView.setText(getString(R.string.shortcuts_tab_label));
-    mHomeCustomizationDrawer.addTab(mHomeCustomizationDrawer.newTabSpec(SHORTCUTS_TAG).setIndicator(tabView).setContent(contentFactory));
-    mHomeCustomizationDrawer.setOnTabChangedListener(new OnTabChangeListener(){
-      public void onTabChanged(      String tabId){
-        final CustomizePagedView.CustomizationType newType=getCustomizeFilterForTabTag(tabId);
-        if (newType != mCustomizePagedView.getCustomizationFilter()) {
-          final Resources res=getResources();
-          final int duration=res.getInteger(R.integer.config_tabTransitionTime);
-          final float alpha=mCustomizePagedView.getAlpha();
-          ValueAnimator alphaAnim=ObjectAnimator.ofFloat(mCustomizePagedView,"alpha",alpha,0.0f);
-          alphaAnim.setDuration(duration);
-          alphaAnim.addListener(new AnimatorListenerAdapter(){
-            @Override public void onAnimationEnd(            Animator animation){
-              mCustomizePagedView.setCustomizationFilter(newType);
-              final float alpha=mCustomizePagedView.getAlpha();
-              ValueAnimator alphaAnim=ObjectAnimator.ofFloat(mCustomizePagedView,"alpha",alpha,1.0f);
-              alphaAnim.setDuration(duration);
-              alphaAnim.start();
-            }
-          }
-);
-          alphaAnim.start();
-        }
-      }
-    }
-);
+    mCustomizePagedView=(CustomizePagedView)findViewById(R.id.customization_drawer_tab_contents);
   }
   setupViews();
   registerContentObservers();
