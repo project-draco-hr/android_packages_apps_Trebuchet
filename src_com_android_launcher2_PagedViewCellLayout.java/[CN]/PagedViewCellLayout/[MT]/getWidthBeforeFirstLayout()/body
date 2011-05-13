@@ -1,0 +1,3 @@
+{
+  return mCellCountX * mCellWidth + (mCellCountX - 1) * mWidthGap;
+}
