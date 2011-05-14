@@ -3,6 +3,8 @@
   ViewGroup parent=(ViewGroup)folder.getParent().getParent();
   if (parent != null) {
     CellLayout cl=(CellLayout)parent;
+    FolderIcon fi=(FolderIcon)cl.getChildAt(folder.mInfo.cellX,folder.mInfo.cellY);
+    shrinkAndFadeInFolderIcon(fi);
     mDragController.removeDropTarget((DropTarget)folder);
   }
   folder.animateClosed();

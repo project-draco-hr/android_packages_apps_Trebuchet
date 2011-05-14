@@ -1,0 +1,36 @@
+{
+  CellLayout.LayoutParams iconLp=(CellLayout.LayoutParams)mFolderIcon.getLayoutParams();
+  CellLayout.LayoutParams lp=(CellLayout.LayoutParams)getLayoutParams();
+  int width=getPaddingLeft() + getPaddingRight() + mContent.getDesiredWidth();
+  int height=getPaddingTop() + getPaddingBottom() + mContent.getDesiredHeight();
+  int centerX=iconLp.x + iconLp.width / 2;
+  int centerY=iconLp.y + iconLp.height / 2;
+  int centeredLeft=centerX - width / 2;
+  int centeredTop=centerY - height / 2;
+  CellLayoutChildren clc=(CellLayoutChildren)getParent();
+  int parentWidth=0;
+  int parentHeight=0;
+  if (clc != null) {
+    parentWidth=clc.getMeasuredWidth();
+    parentHeight=clc.getMeasuredHeight();
+  }
+  int left=Math.min(Math.max(0,centeredLeft),parentWidth - width);
+  int top=Math.min(Math.max(0,centeredTop),parentHeight - height);
+  int folderPivotX=width / 2 + (centeredLeft - left);
+  int folderPivotY=height / 2 + (centeredTop - top);
+  setPivotX(folderPivotX);
+  setPivotY(folderPivotY);
+  int folderIconPivotX=(int)(mFolderIcon.getMeasuredWidth() * (1.0f * folderPivotX / width));
+  int folderIconPivotY=(int)(mFolderIcon.getMeasuredHeight() * (1.0f * folderPivotY / height));
+  mFolderIcon.setPivotX(folderIconPivotX);
+  mFolderIcon.setPivotY(folderIconPivotY);
+  if (mMode == PARTIAL_GROW) {
+    lp.width=width;
+    lp.height=height;
+    lp.x=left;
+    lp.y=top;
+  }
+ else {
+    mNewSize.set(left,top,left + width,top + height);
+  }
+}

@@ -1,0 +1,3 @@
+{
+  return mTopPadding + mBottomPadding + (mCountY * mCellHeight)+ (Math.max((mCountY - 1),0) * mHeightGap);
+}

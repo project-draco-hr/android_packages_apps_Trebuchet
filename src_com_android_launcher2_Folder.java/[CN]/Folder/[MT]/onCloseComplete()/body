@@ -1,0 +1,6 @@
+{
+  if (mRearrangeOnClose) {
+    setupContentForNumItems(getItemCount());
+    mRearrangeOnClose=false;
+  }
+}

@@ -1,5 +1,6 @@
 {
-  if ((item.cellX == -1 && item.cellY == -1) || mContent.isOccupied(item.cellX,item.cellY)) {
+  if (!findAndSetEmptyCells(item)) {
+    setupContentForNumItems(getItemCount() + 1);
     findAndSetEmptyCells(item);
   }
   createAndAddShortcut(item);

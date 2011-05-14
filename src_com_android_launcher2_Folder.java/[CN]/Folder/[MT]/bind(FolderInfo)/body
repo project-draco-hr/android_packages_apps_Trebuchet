@@ -1,13 +1,9 @@
 {
   mInfo=info;
-  mCloseButton.setText(info.title);
   ArrayList<ShortcutInfo> children=info.contents;
   for (int i=0; i < children.size(); i++) {
     ShortcutInfo child=(ShortcutInfo)children.get(i);
-    if ((child.cellX == -1 && child.cellY == -1) || mContent.isOccupied(child.cellX,child.cellY)) {
-      findAndSetEmptyCells(child);
-    }
-    createAndAddShortcut((ShortcutInfo)children.get(i));
+    onAdd(child);
   }
   mInfo.addListener(this);
 }

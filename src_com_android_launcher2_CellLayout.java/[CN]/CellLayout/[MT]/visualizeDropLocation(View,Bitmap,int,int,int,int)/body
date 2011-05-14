@@ -8,6 +8,12 @@
  else {
     mDragCenter.set(originX,originY);
   }
+  if (dragOutline == null && v == null) {
+    if (mCrosshairsDrawable != null) {
+      invalidate();
+    }
+    return;
+  }
   if (nearest != null && (nearest[0] != oldDragCellX || nearest[1] != oldDragCellY)) {
     final int[] topLeft=mTmpPoint;
     cellToPoint(nearest[0],nearest[1],topLeft);

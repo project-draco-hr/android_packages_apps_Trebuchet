@@ -1,0 +1,25 @@
+{
+  ArrayList<View> list=getItemsInReadingOrder();
+  int countX=mContent.getCountX();
+  int countY=mContent.getCountY();
+  if (countX * countY < count) {
+    if (countX <= countY && countX < mMaxCountX) {
+      countX++;
+    }
+ else     if (countY < mMaxCountY) {
+      countY++;
+    }
+    if (countY == 0)     countY++;
+    mContent.setGridSize(countX,countY);
+  }
+ else   if ((countX - 1) * countY >= count || (countY - 1) * countX >= count) {
+    if (countX <= countY) {
+      countY--;
+    }
+ else {
+      countX--;
+    }
+    mContent.setGridSize(countX,countY);
+  }
+  arrangeChildren(list);
+}

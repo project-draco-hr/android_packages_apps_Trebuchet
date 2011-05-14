@@ -1,6 +1,7 @@
 {
   Object tag=v.getTag();
   if (tag instanceof ShortcutInfo) {
+    mLauncher.closeFolder(this);
     ShortcutInfo item=(ShortcutInfo)tag;
     if (!v.isInTouchMode()) {
       return false;
@@ -9,7 +10,7 @@
     mDragController.startDrag(v,this,item,DragController.DRAG_ACTION_COPY);
     mDragItemPosition[0]=item.cellX;
     mDragItemPosition[1]=item.cellY;
-    mLauncher.closeFolder(this);
+    mInfo.remove(item);
     mDragItem=item;
   }
  else {

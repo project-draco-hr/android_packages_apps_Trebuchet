@@ -1,4 +1,10 @@
 {
   View v=mContent.getChildAt(mDragItemPosition[0],mDragItemPosition[1]);
   mContent.removeView(v);
+  if (mState == STATE_ANIMATING) {
+    mRearrangeOnClose=true;
+  }
+ else {
+    setupContentForNumItems(getItemCount());
+  }
 }

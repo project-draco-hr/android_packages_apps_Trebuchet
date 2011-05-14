@@ -1,2 +1,24 @@
 {
+  final CellLayout.LayoutParams lp=(CellLayout.LayoutParams)getLayoutParams();
+  lp.isLockedToGrid=false;
+  PropertyValuesHolder width=PropertyValuesHolder.ofInt("width",mOriginalWidth);
+  PropertyValuesHolder height=PropertyValuesHolder.ofInt("height",mOriginalHeight);
+  PropertyValuesHolder newX=PropertyValuesHolder.ofInt("x",mOriginalX);
+  PropertyValuesHolder newY=PropertyValuesHolder.ofInt("y",mOriginalY);
+  ObjectAnimator oa=ObjectAnimator.ofPropertyValuesHolder(lp,width,height,newX,newY);
+  oa.addUpdateListener(new AnimatorUpdateListener(){
+    public void onAnimationUpdate(    ValueAnimator animation){
+      invalidate();
+      requestLayout();
+    }
+  }
+);
+  oa.addListener(new AnimatorListenerAdapter(){
+    @Override public void onAnimationEnd(    Animator animation){
+      lp.isLockedToGrid=true;
+    }
+  }
+);
+  oa.setDuration(50);
+  oa.start();
 }

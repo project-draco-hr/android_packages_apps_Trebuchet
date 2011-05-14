@@ -1,5 +1,2 @@
 {
-  if (success) {
-    mInfo.remove(mDragItem);
-  }
 }

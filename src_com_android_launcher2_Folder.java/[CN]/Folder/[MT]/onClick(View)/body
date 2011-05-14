@@ -7,7 +7,4 @@
     item.intent.setSourceBounds(new Rect(pos[0],pos[1],pos[0] + v.getWidth(),pos[1] + v.getHeight()));
     mLauncher.startActivitySafely(item.intent,item);
   }
- else {
-    mLauncher.closeFolder(this);
-  }
 }

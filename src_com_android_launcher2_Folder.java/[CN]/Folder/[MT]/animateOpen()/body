@@ -3,34 +3,42 @@
     positionAndSizeAsIcon();
   }
   if (!(getParent() instanceof CellLayoutChildren))   return;
+  ObjectAnimator oa;
   CellLayout.LayoutParams lp=(CellLayout.LayoutParams)getLayoutParams();
-  CellLayoutChildren clc=(CellLayoutChildren)getParent();
-  CellLayout cellLayout=(CellLayout)clc.getParent();
-  Rect r=cellLayout.getContentRect(null);
-  PropertyValuesHolder width=PropertyValuesHolder.ofInt("width",r.width());
-  PropertyValuesHolder height=PropertyValuesHolder.ofInt("height",r.height());
-  PropertyValuesHolder x=PropertyValuesHolder.ofInt("x",0);
-  PropertyValuesHolder y=PropertyValuesHolder.ofInt("y",0);
-  ObjectAnimator oa=ObjectAnimator.ofPropertyValuesHolder(lp,width,height,x,y);
-  oa.addUpdateListener(new AnimatorUpdateListener(){
-    public void onAnimationUpdate(    ValueAnimator animation){
-      requestLayout();
-    }
+  centerAboutIcon();
+  if (mMode == PARTIAL_GROW) {
+    PropertyValuesHolder alpha=PropertyValuesHolder.ofFloat("alpha",1);
+    PropertyValuesHolder scaleX=PropertyValuesHolder.ofFloat("scaleX",1.0f);
+    PropertyValuesHolder scaleY=PropertyValuesHolder.ofFloat("scaleY",1.0f);
+    oa=ObjectAnimator.ofPropertyValuesHolder(this,alpha,scaleX,scaleY);
   }
+ else {
+    PropertyValuesHolder width=PropertyValuesHolder.ofInt("width",mNewSize.width());
+    PropertyValuesHolder height=PropertyValuesHolder.ofInt("height",mNewSize.height());
+    PropertyValuesHolder x=PropertyValuesHolder.ofInt("x",mNewSize.left);
+    PropertyValuesHolder y=PropertyValuesHolder.ofInt("y",mNewSize.top);
+    oa=ObjectAnimator.ofPropertyValuesHolder(lp,width,height,x,y);
+    oa.addUpdateListener(new AnimatorUpdateListener(){
+      public void onAnimationUpdate(      ValueAnimator animation){
+        requestLayout();
+      }
+    }
 );
-  PropertyValuesHolder alpha=PropertyValuesHolder.ofFloat("alpha",1.0f);
-  ObjectAnimator oaContentAlpha=ObjectAnimator.ofPropertyValuesHolder(mContent,alpha);
-  AnimatorSet set=new AnimatorSet();
-  set.playTogether(oa,oaContentAlpha);
-  set.setDuration(mExpandDuration);
-  set.addListener(new AnimatorListenerAdapter(){
+    PropertyValuesHolder alpha=PropertyValuesHolder.ofFloat("alpha",1.0f);
+    ObjectAnimator alphaOa=ObjectAnimator.ofPropertyValuesHolder(mContent,alpha);
+    alphaOa.setDuration(mExpandDuration);
+    alphaOa.setInterpolator(new AccelerateInterpolator(2.0f));
+    alphaOa.start();
+  }
+  oa.addListener(new AnimatorListenerAdapter(){
     @Override public void onAnimationStart(    Animator animation){
       mState=STATE_ANIMATING;
     }
     @Override public void onAnimationEnd(    Animator animation){
-      mState=STATE_SMALL;
+      mState=STATE_OPEN;
     }
   }
 );
-  set.start();
+  oa.setDuration(mExpandDuration);
+  oa.start();
 }

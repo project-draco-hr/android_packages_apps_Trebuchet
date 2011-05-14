@@ -1,7 +1,7 @@
 {
   FolderIcon icon=(FolderIcon)LayoutInflater.from(launcher).inflate(resId,group,false);
   final Resources resources=launcher.getResources();
-  Drawable d=iconCache.getFullResIcon(resources,R.drawable.folder_bg);
+  Drawable d=iconCache.getFullResIcon(resources,R.drawable.portal_ring_inner_holo);
   icon.setBackgroundDrawable(d);
   icon.setTag(folderInfo);
   icon.setOnClickListener(launcher);
@@ -10,6 +10,7 @@
   Folder folder=Folder.fromXml(launcher);
   folder.setDragController(launcher.getDragController());
   folder.setLauncher(launcher);
+  folder.setFolderIcon(icon);
   folder.bind(folderInfo);
   icon.mFolder=folder;
   folderInfo.addListener(icon);

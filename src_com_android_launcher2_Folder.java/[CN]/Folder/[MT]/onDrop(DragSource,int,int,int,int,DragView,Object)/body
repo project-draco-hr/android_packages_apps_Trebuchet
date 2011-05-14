@@ -8,7 +8,6 @@
  else {
     item=(ShortcutInfo)dragInfo;
   }
-  findAndSetEmptyCells(item);
   mInfo.add(item);
   LauncherModel.addOrMoveItemInDatabase(mLauncher,item,mInfo.id,0,item.cellX,item.cellY);
 }
