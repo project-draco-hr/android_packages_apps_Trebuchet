@@ -1,4 +1,6 @@
 {
   mChildren.removeViewAt(index);
-  mHolographicChildren.removeViewAt(index);
+  if (mHolographicChildren.getChildAt(index) != null) {
+    mHolographicChildren.removeViewAt(index);
+  }
 }
