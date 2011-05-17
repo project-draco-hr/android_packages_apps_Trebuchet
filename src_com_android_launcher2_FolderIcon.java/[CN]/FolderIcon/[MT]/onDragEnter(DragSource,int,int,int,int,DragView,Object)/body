@@ -1,19 +1,6 @@
 {
-  CellLayout.LayoutParams lp=(CellLayout.LayoutParams)getLayoutParams();
-  lp.isLockedToGrid=false;
-  saveState(lp);
-  PropertyValuesHolder width=PropertyValuesHolder.ofInt("width",(int)(1.1 * lp.width));
-  PropertyValuesHolder height=PropertyValuesHolder.ofInt("height",(int)(1.1 * lp.height));
-  PropertyValuesHolder newX=PropertyValuesHolder.ofInt("x",lp.x - (int)(0.05 * lp.width));
-  PropertyValuesHolder newY=PropertyValuesHolder.ofInt("y",lp.y - (int)(0.05 * lp.height));
-  ObjectAnimator oa=ObjectAnimator.ofPropertyValuesHolder(lp,width,height,newX,newY);
-  oa.addUpdateListener(new AnimatorUpdateListener(){
-    public void onAnimationUpdate(    ValueAnimator animation){
-      invalidate();
-      requestLayout();
-    }
-  }
-);
-  oa.setDuration(50);
-  oa.start();
+  if (!willAcceptItem((ItemInfo)dragInfo))   return;
+  determineFolderLocationInWorkspace();
+  mLauncher.getWorkspace().showFolderAccept(this);
+  animateToAcceptState();
 }

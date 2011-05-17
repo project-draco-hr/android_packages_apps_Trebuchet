@@ -1,0 +1,40 @@
+{
+  CellLayout.LayoutParams lp=(CellLayout.LayoutParams)getLayoutParams();
+  lp.isLockedToGrid=false;
+  saveState(lp);
+  int newWidth=(int)((1 + INNER_RING_GROWTH_FACTOR) * lp.width);
+  int newHeight=(int)((1 + INNER_RING_GROWTH_FACTOR) * lp.width);
+  int newX=lp.x - (int)((INNER_RING_GROWTH_FACTOR / 2) * lp.width);
+  int newY=lp.y - (int)((INNER_RING_GROWTH_FACTOR / 2) * lp.height);
+  PropertyValuesHolder width=PropertyValuesHolder.ofInt("width",newWidth);
+  PropertyValuesHolder height=PropertyValuesHolder.ofInt("height",newHeight);
+  PropertyValuesHolder x=PropertyValuesHolder.ofInt("x",newX);
+  PropertyValuesHolder y=PropertyValuesHolder.ofInt("y",newY);
+  ObjectAnimator oa=ObjectAnimator.ofPropertyValuesHolder(lp,width,height,x,y);
+  oa.setDuration(CONSUMPTION_ANIMATION_DURATION);
+  oa.addUpdateListener(new AnimatorUpdateListener(){
+    public void onAnimationUpdate(    ValueAnimator animation){
+      requestLayout();
+      invalidate();
+    }
+  }
+);
+  oa.addListener(new AnimatorListenerAdapter(){
+    @Override public void onAnimationStart(    Animator animation){
+      mIsAnimating=true;
+    }
+  }
+);
+  ValueAnimator outerRingScale=ValueAnimator.ofFloat(0f,1f);
+  outerRingScale.setDuration(CONSUMPTION_ANIMATION_DURATION);
+  outerRingScale.addUpdateListener(new AnimatorUpdateListener(){
+    public void onAnimationUpdate(    ValueAnimator animation){
+      final float percent=(Float)animation.getAnimatedValue();
+      mOuterRingScale=OUTER_RING_BASELINE_SCALE + percent * OUTER_RING_GROWTH_FACTOR;
+      mLauncher.getWorkspace().invalidate();
+    }
+  }
+);
+  outerRingScale.start();
+  oa.start();
+}

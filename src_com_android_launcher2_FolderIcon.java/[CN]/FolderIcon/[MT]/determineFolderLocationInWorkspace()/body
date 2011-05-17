@@ -1,0 +1,8 @@
+{
+  int tvLocation[]=new int[2];
+  int wsLocation[]=new int[2];
+  getLocationOnScreen(tvLocation);
+  mLauncher.getWorkspace().getLocationOnScreen(wsLocation);
+  mFolderLocX=tvLocation[0] - wsLocation[0] + getMeasuredWidth() / 2;
+  mFolderLocY=tvLocation[1] - wsLocation[1] + getMeasuredHeight() / 2;
+}

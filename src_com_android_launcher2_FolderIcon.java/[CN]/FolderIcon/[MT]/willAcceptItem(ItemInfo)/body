@@ -1,0 +1,4 @@
+{
+  final int itemType=item.itemType;
+  return ((itemType == LauncherSettings.Favorites.ITEM_TYPE_APPLICATION || itemType == LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT) && !mFolder.isFull() && item != mInfo);
+}

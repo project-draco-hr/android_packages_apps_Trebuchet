@@ -1,0 +1,35 @@
+{
+  final CellLayout.LayoutParams lp=(CellLayout.LayoutParams)getLayoutParams();
+  lp.isLockedToGrid=false;
+  PropertyValuesHolder width=PropertyValuesHolder.ofInt("width",mOriginalWidth);
+  PropertyValuesHolder height=PropertyValuesHolder.ofInt("height",mOriginalHeight);
+  PropertyValuesHolder x=PropertyValuesHolder.ofInt("x",mOriginalX);
+  PropertyValuesHolder y=PropertyValuesHolder.ofInt("y",mOriginalY);
+  ObjectAnimator oa=ObjectAnimator.ofPropertyValuesHolder(lp,width,height,x,y);
+  oa.addUpdateListener(new AnimatorUpdateListener(){
+    public void onAnimationUpdate(    ValueAnimator animation){
+      requestLayout();
+      invalidate();
+    }
+  }
+);
+  oa.addListener(new AnimatorListenerAdapter(){
+    @Override public void onAnimationEnd(    Animator animation){
+      lp.isLockedToGrid=true;
+      mIsAnimating=false;
+    }
+  }
+);
+  ValueAnimator outerRingScale=ValueAnimator.ofFloat(0f,1f);
+  outerRingScale.setDuration(CONSUMPTION_ANIMATION_DURATION);
+  outerRingScale.addUpdateListener(new AnimatorUpdateListener(){
+    public void onAnimationUpdate(    ValueAnimator animation){
+      final float percent=(Float)animation.getAnimatedValue();
+      mOuterRingScale=OUTER_RING_BASELINE_SCALE + OUTER_RING_GROWTH_FACTOR - percent * OUTER_RING_GROWTH_FACTOR;
+      mLauncher.getWorkspace().invalidate();
+    }
+  }
+);
+  oa.setDuration(CONSUMPTION_ANIMATION_DURATION);
+  oa.start();
+}
