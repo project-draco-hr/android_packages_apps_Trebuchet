@@ -10,7 +10,4 @@
   setSoundEffectsEnabled(false);
   Resources r=context.getResources();
   setDragSlopeThreshold(r.getInteger(R.integer.config_appsCustomizeDragSlopeThreshold) / 100.0f);
-  PagedViewCellLayout layout=new PagedViewCellLayout(getContext());
-  setupPage(layout);
-  mPageContentWidth=layout.getContentWidth();
 }
