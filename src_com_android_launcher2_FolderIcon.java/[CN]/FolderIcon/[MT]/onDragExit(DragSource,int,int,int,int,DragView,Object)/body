@@ -1,5 +1,4 @@
 {
   if (!willAcceptItem((ItemInfo)dragInfo))   return;
-  mLauncher.getWorkspace().hideFolderAccept(this);
   animateToNaturalState();
 }
