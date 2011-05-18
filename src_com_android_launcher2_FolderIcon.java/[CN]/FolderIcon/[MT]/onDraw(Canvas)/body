@@ -11,11 +11,13 @@
   int xShift=(mOriginalWidth - d.getIntrinsicWidth()) / 2;
   int yShift=(mOriginalHeight - d.getIntrinsicHeight()) / 2;
   canvas.translate(xShift,yShift);
-  for (int i=Math.max(0,mFolder.getItemCount() - NUM_ITEMS_IN_PREVIEW); i < mFolder.getItemCount(); i++) {
-    v=(TextView)mFolder.getItemAt(i);
+  ArrayList<View> items=mFolder.getItemsInReadingOrder();
+  int firstItemIndex=Math.max(0,items.size() - NUM_ITEMS_IN_PREVIEW);
+  for (int i=firstItemIndex; i < mFolder.getItemCount(); i++) {
+    v=(TextView)items.get(i);
     d=v.getCompoundDrawables()[1];
     canvas.translate(d.getIntrinsicWidth() / 2,d.getIntrinsicHeight() / 2);
-    canvas.rotate(i == 0 ? ICON_ANGLE : -ICON_ANGLE);
+    canvas.rotate(i == firstItemIndex ? ICON_ANGLE : -ICON_ANGLE);
     canvas.translate(-d.getIntrinsicWidth() / 2,-d.getIntrinsicHeight() / 2);
     if (d != null) {
       d.setBounds(0,0,d.getIntrinsicWidth(),d.getIntrinsicHeight());

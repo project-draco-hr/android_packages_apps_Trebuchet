@@ -10,11 +10,6 @@
       mLauncher.removeAppWidget((LauncherAppWidgetInfo)item);
     }
   }
- else   if (source instanceof Folder) {
-    final Folder folder=(Folder)source;
-    final FolderInfo folderInfo=(FolderInfo)folder.getInfo();
-    folderInfo.remove((ShortcutInfo)item);
-  }
   if (item instanceof FolderInfo) {
     final FolderInfo folderInfo=(FolderInfo)item;
     LauncherModel.deleteFolderContentsFromDatabase(mLauncher,folderInfo);
