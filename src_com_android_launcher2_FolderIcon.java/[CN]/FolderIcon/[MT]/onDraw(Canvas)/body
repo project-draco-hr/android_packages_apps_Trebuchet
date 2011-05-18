@@ -4,7 +4,18 @@
   canvas.save();
   TextView v=(TextView)mFolder.getItemAt(0);
   Drawable d=v.getCompoundDrawables()[1];
-  canvas.translate((getMeasuredWidth() - d.getIntrinsicWidth()) / 2,(getMeasuredHeight() - d.getIntrinsicHeight()) / 2);
+  CellLayout.LayoutParams lp=(CellLayout.LayoutParams)getLayoutParams();
+  if (mOriginalWidth < 0 || mOriginalHeight < 0) {
+    mOriginalWidth=getMeasuredWidth();
+    mOriginalHeight=getMeasuredHeight();
+  }
+  int xShift=(mOriginalWidth - d.getIntrinsicWidth()) / 2;
+  int yShift=(mOriginalHeight - d.getIntrinsicHeight()) / 2;
+  if (mIsAnimating) {
+    xShift-=lp.x - mOriginalX;
+    yShift-=lp.y - mOriginalY;
+  }
+  canvas.translate(xShift,yShift);
   canvas.translate(d.getIntrinsicWidth() / 2,d.getIntrinsicHeight() / 2);
   canvas.rotate(ICON_ANGLE);
   canvas.translate(-d.getIntrinsicWidth() / 2,-d.getIntrinsicHeight() / 2);

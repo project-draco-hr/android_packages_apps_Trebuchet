@@ -1,0 +1,4 @@
+{
+  loc[0]=mFolderLocX;
+  loc[1]=mFolderLocY;
+}
