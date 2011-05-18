@@ -1,4 +1,5 @@
 {
+  mItemsInvalidated=true;
   if (!findAndSetEmptyCells(item)) {
     setupContentForNumItems(getItemCount() + 1);
     findAndSetEmptyCells(item);

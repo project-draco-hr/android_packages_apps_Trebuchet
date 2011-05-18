@@ -15,5 +15,7 @@
     info.cellY=vacant[1];
     boolean insert=false;
     mContent.addViewToCellLayout(v,insert ? 0 : -1,(int)info.id,lp,true);
+    LauncherModel.addOrMoveItemInDatabase(mLauncher,info,mInfo.id,0,info.cellX,info.cellY);
   }
+  mItemsInvalidated=true;
 }
