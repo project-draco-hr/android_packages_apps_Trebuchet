@@ -1,0 +1,12 @@
+{
+  super.onMeasure(widthMeasureSpec,heightMeasureSpec);
+  final int widthSize=MeasureSpec.getSize(widthMeasureSpec);
+  final int heightSize=MeasureSpec.getSize(heightMeasureSpec);
+  if (mFirstMeasure) {
+    mFirstMeasure=false;
+    invalidatePageData();
+    PagedViewCellLayout layout=new PagedViewCellLayout(getContext());
+    setupPage(layout);
+    mPageContentWidth=layout.getContentWidth();
+  }
+}
