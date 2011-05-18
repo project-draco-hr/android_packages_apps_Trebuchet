@@ -17,5 +17,8 @@
   if (sFolderOuterRingDrawable == null) {
     sFolderOuterRingDrawable=launcher.getResources().getDrawable(R.drawable.portal_ring_outer_holo);
   }
+  if (sFolderInnerRingDrawable == null) {
+    sFolderInnerRingDrawable=launcher.getResources().getDrawable(R.drawable.portal_ring_inner_holo);
+  }
   return icon;
 }
