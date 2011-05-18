@@ -1,11 +1,11 @@
 {
+  mIconCache=cache;
+  mIconCacheKey=new PagedViewIconCache.Key(info);
   mIcon=info.iconBitmap;
   setCompoundDrawablesWithIntrinsicBounds(null,new FastBitmapDrawable(mIcon),null,null);
   setText(info.title);
   setTag(info);
   if (createHolographicOutlines) {
-    mIconCache=cache;
-    mIconCacheKey=new PagedViewIconCache.Key(info);
     mHolographicOutline=mIconCache.getOutline(mIconCacheKey);
     if (!queueHolographicOutlineCreation()) {
       getHolographicOutlineView().invalidate();

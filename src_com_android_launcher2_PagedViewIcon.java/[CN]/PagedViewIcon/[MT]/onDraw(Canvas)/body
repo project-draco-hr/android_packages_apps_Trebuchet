@@ -3,13 +3,7 @@
     super.onDraw(canvas);
   }
   Bitmap overlay=null;
-  if (mCheckedOutline == null) {
-    if (canvas.isHardwareAccelerated() && mHolographicOutline != null && mHolographicAlpha > 0) {
-      mPaint.setAlpha(mHolographicAlpha);
-      overlay=mHolographicOutline;
-    }
-  }
- else {
+  if (mCheckedOutline != null) {
     mPaint.setAlpha(255);
     overlay=mCheckedOutline;
   }

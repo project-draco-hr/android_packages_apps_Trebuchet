@@ -10,9 +10,7 @@
       if (mAllowHardwareLayerCreation) {
         pagedViewIcon.disableCache();
       }
-      if (createHolographicOutlines) {
-        mHolographicChildren.addView(pagedViewIcon.getHolographicOutlineView(),index,lp);
-      }
+      mHolographicChildren.addView(pagedViewIcon.getHolographicOutlineView(),index,lp);
     }
     return true;
   }

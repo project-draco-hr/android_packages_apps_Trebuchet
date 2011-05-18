@@ -7,6 +7,7 @@
   if (!mFilteredApps.isEmpty()) {
     int curNumPageItems=layout.getPageChildCount();
     int numPageItems=endIndex - startIndex;
+    boolean createHolographicOutlines=(numPages > 1);
     boolean wasEmptyPage=false;
     if (curNumPageItems == 1) {
       View icon=layout.getChildOnPageAt(0);
@@ -25,23 +26,22 @@
       }
     }
     for (int i=curNumPageItems; i < numPageItems; ++i) {
-      final boolean createHolographicOutlines=(numPages > 1);
       TextView text=(TextView)mInflater.inflate(R.layout.all_apps_paged_view_application,layout,false);
       text.setOnClickListener(this);
       text.setOnLongClickListener(this);
       text.setOnTouchListener(this);
-      layout.addViewToCellLayout(text,-1,i,new PagedViewCellLayout.LayoutParams(0,0,1,1),createHolographicOutlines);
+      layout.addViewToCellLayout(text,-1,i,new PagedViewCellLayout.LayoutParams(0,0,1,1));
     }
     for (int i=startIndex; i < endIndex; ++i) {
       final int index=i - startIndex;
       final ApplicationInfo info=mFilteredApps.get(i);
-      final boolean createHolographicOutlines=(numPages > 1);
       PagedViewIcon icon=(PagedViewIcon)layout.getChildOnPageAt(index);
       icon.applyFromApplicationInfo(info,mPageViewIconCache,true,createHolographicOutlines);
       PagedViewCellLayout.LayoutParams params=(PagedViewCellLayout.LayoutParams)icon.getLayoutParams();
       params.cellX=index % mCellCountX;
       params.cellY=index / mCellCountX;
     }
+    layout.reloadHolographicIcons(createHolographicOutlines);
     layout.enableCenteredContent(false);
   }
  else {
@@ -56,7 +56,7 @@ default :
 final boolean createHolographicOutlines=(numPages > 1);
 layout.enableCenteredContent(true);
 layout.removeAllViewsOnPage();
-layout.addViewToCellLayout(icon,-1,0,new PagedViewCellLayout.LayoutParams(0,0,4,1),createHolographicOutlines);
+layout.addViewToCellLayout(icon,-1,0,new PagedViewCellLayout.LayoutParams(0,0,4,1));
 }
 layout.createHardwareLayers();
 }
