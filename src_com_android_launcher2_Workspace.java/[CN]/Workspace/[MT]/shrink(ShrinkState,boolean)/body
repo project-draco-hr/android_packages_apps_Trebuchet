@@ -24,10 +24,11 @@
   final Resources res=getResources();
   final int screenWidth=getWidth();
   final int screenHeight=getHeight();
+  final float shrinkFactor=res.getInteger(R.integer.config_workspaceShrinkPercent) / 100.0f;
   final int pageWidth=getChildAt(0).getMeasuredWidth();
   final int pageHeight=getChildAt(0).getMeasuredHeight();
-  final int scaledPageWidth=(int)(SHRINK_FACTOR * pageWidth);
-  final int scaledPageHeight=(int)(SHRINK_FACTOR * pageHeight);
+  final int scaledPageWidth=(int)(shrinkFactor * pageWidth);
+  final int scaledPageHeight=(int)(shrinkFactor * pageHeight);
   final float extraScaledSpacing=res.getDimension(R.dimen.smallScreenExtraSpacing);
   final int screenCount=getChildCount();
   float totalWidth=screenCount * scaledPageWidth + (screenCount - 1) * extraScaledSpacing;
@@ -63,20 +64,21 @@
     mAnimator.cancel();
   }
   mAnimator=new AnimatorSet();
-  final float[] oldXs=new float[getChildCount()];
-  final float[] oldYs=new float[getChildCount()];
-  final float[] oldScaleXs=new float[getChildCount()];
-  final float[] oldScaleYs=new float[getChildCount()];
-  final float[] oldBackgroundAlphas=new float[getChildCount()];
-  final float[] oldAlphas=new float[getChildCount()];
-  final float[] oldRotationYs=new float[getChildCount()];
-  final float[] newXs=new float[getChildCount()];
-  final float[] newYs=new float[getChildCount()];
-  final float[] newScaleXs=new float[getChildCount()];
-  final float[] newScaleYs=new float[getChildCount()];
-  final float[] newBackgroundAlphas=new float[getChildCount()];
-  final float[] newAlphas=new float[getChildCount()];
-  final float[] newRotationYs=new float[getChildCount()];
+  final int childCount=getChildCount();
+  final float[] oldXs=new float[childCount];
+  final float[] oldYs=new float[childCount];
+  final float[] oldScaleXs=new float[childCount];
+  final float[] oldScaleYs=new float[childCount];
+  final float[] oldBackgroundAlphas=new float[childCount];
+  final float[] oldAlphas=new float[childCount];
+  final float[] oldRotationYs=new float[childCount];
+  final float[] newXs=new float[childCount];
+  final float[] newYs=new float[childCount];
+  final float[] newScaleXs=new float[childCount];
+  final float[] newScaleYs=new float[childCount];
+  final float[] newBackgroundAlphas=new float[childCount];
+  final float[] newAlphas=new float[childCount];
+  final float[] newRotationYs=new float[childCount];
   for (int i=0; i < screenCount; i++) {
     final CellLayout cl=(CellLayout)getChildAt(i);
     float rotation=(-i + 2) * WORKSPACE_ROTATION;
@@ -96,16 +98,16 @@
       oldRotationYs[i]=cl.getRotationY();
       newXs[i]=x;
       newYs[i]=y;
-      newScaleXs[i]=SHRINK_FACTOR * rotationScaleX * extraShrinkFactor;
-      newScaleYs[i]=SHRINK_FACTOR * rotationScaleY * extraShrinkFactor;
+      newScaleXs[i]=shrinkFactor * rotationScaleX * extraShrinkFactor;
+      newScaleYs[i]=shrinkFactor * rotationScaleY * extraShrinkFactor;
       newBackgroundAlphas[i]=finalAlpha;
       newRotationYs[i]=rotation;
     }
  else {
       cl.setX((int)x);
       cl.setY((int)y);
-      cl.setScaleX(SHRINK_FACTOR * rotationScaleX * extraShrinkFactor);
-      cl.setScaleY(SHRINK_FACTOR * rotationScaleY * extraShrinkFactor);
+      cl.setScaleX(shrinkFactor * rotationScaleX * extraShrinkFactor);
+      cl.setScaleY(shrinkFactor * rotationScaleY * extraShrinkFactor);
       cl.setBackgroundAlpha(finalAlpha);
       cl.setAlpha(finalAlpha);
       cl.setRotationY(rotation);
