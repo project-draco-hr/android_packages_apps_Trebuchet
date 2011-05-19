@@ -1,0 +1,24 @@
+{
+  int cellCountX=0;
+  final int cellWidth=layout.getCellWidth();
+  availableWidth-=mPageLayoutPaddingLeft * 2 + mPageLayoutPaddingRight * 2;
+  availableWidth-=cellWidth;
+  cellCountX=1 + availableWidth / (cellWidth + mPageLayoutWidthGap);
+  availableWidth=availableWidth % (cellWidth + mPageLayoutWidthGap);
+  final int minLeftoverWidth=(int)(cellWidth * 0.6f);
+  if (cellCountX <= 4) {
+    final int missingWidth=minLeftoverWidth - availableWidth;
+    if (missingWidth > 0) {
+      mPageLayoutWidthGap-=Math.ceil(missingWidth * 1.0f / (cellCountX - 1));
+    }
+  }
+ else {
+    if (cellCountX >= 8) {
+      cellCountX=(int)(cellCountX * 0.9f);
+    }
+ else     if (availableWidth < minLeftoverWidth) {
+      cellCountX-=1;
+    }
+  }
+  return cellCountX;
+}
