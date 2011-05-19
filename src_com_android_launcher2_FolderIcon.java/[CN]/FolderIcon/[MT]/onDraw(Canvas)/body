@@ -13,7 +13,7 @@
   canvas.translate(xShift,yShift);
   ArrayList<View> items=mFolder.getItemsInReadingOrder();
   int firstItemIndex=Math.max(0,items.size() - NUM_ITEMS_IN_PREVIEW);
-  for (int i=firstItemIndex; i < mFolder.getItemCount(); i++) {
+  for (int i=firstItemIndex; i < items.size(); i++) {
     v=(TextView)items.get(i);
     d=v.getCompoundDrawables()[1];
     canvas.translate(d.getIntrinsicWidth() / 2,d.getIntrinsicHeight() / 2);

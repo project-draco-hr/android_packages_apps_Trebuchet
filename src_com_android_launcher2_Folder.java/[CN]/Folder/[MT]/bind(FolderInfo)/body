@@ -6,5 +6,6 @@
     ShortcutInfo child=(ShortcutInfo)children.get(i);
     createAndAddShortcut(child);
   }
+  mItemsInvalidated=true;
   mInfo.addListener(this);
 }
