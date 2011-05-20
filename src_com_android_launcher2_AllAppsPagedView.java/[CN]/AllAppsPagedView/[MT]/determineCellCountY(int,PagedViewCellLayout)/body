@@ -1,0 +1,8 @@
+{
+  final int cellHeight=layout.getCellHeight();
+  final int screenHeight=mLauncher.getResources().getDisplayMetrics().heightPixels;
+  availableHeight-=mPageLayoutPaddingTop + mPageLayoutPaddingBottom;
+  availableHeight-=cellHeight;
+  availableHeight-=screenHeight * 0.16f;
+  return (1 + availableHeight / (cellHeight + mPageLayoutHeightGap));
+}
