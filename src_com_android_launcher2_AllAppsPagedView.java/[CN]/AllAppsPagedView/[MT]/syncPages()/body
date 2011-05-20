@@ -1,4 +1,7 @@
 {
+  if (mFirstMeasure) {
+    return;
+  }
   int numPages=Math.max(1,(int)Math.ceil((float)mFilteredApps.size() / (mCellCountX * mCellCountY)));
   int curNumPages=getChildCount();
   int extraPageDiff=curNumPages - numPages;
