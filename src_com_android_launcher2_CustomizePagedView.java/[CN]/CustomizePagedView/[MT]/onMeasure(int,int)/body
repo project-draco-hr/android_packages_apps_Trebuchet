@@ -8,5 +8,6 @@
     PagedViewCellLayout layout=new PagedViewCellLayout(getContext());
     setupPage(layout);
     mPageContentWidth=layout.getContentWidth();
+    mMinPageWidth=layout.getWidthBeforeFirstLayout();
   }
 }
