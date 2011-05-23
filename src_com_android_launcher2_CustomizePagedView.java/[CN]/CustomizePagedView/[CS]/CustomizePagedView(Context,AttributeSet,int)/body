@@ -6,16 +6,13 @@
   mMaxWallpaperCellHSpan=a.getInt(R.styleable.CustomizePagedView_wallpaperCellCountX,8);
   mMaxWidgetsCellHSpan=a.getInt(R.styleable.CustomizePagedView_widgetCellCountX,8);
   a.recycle();
-  a=context.obtainStyledAttributes(attrs,R.styleable.PagedView,defStyle,0);
-  mCellCountX=a.getInt(R.styleable.PagedView_cellCountX,7);
-  mCellCountY=a.getInt(R.styleable.PagedView_cellCountY,4);
-  a.recycle();
   mCustomizationType=CustomizationType.WidgetCustomization;
   mWidgetPages=new ArrayList<ArrayList<AppWidgetProviderInfo>>();
   mWorkspaceWidgetLayout=new PagedViewCellLayout(context);
   mInflater=LayoutInflater.from(context);
   final Resources r=context.getResources();
   setDragSlopeThreshold(r.getInteger(R.integer.config_customizationDrawerDragSlopeThreshold) / 100.0f);
+  mMaxCellCountY=r.getInteger(R.integer.customization_drawer_contents_maxCellCountY);
   setVisibility(View.GONE);
   setSoundEffectsEnabled(false);
   setupWorkspaceLayout();

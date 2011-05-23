@@ -4,5 +4,8 @@
   availableHeight-=mPageLayoutPaddingTop + mPageLayoutPaddingBottom;
   availableHeight-=cellHeight;
   availableHeight-=screenHeight * 0.16f;
-  return (1 + availableHeight / (cellHeight + mPageLayoutHeightGap));
+  if (availableHeight > 0) {
+    return Math.min(mMaxCellCountY,1 + availableHeight / (cellHeight + mPageLayoutHeightGap));
+  }
+  return 0;
 }
