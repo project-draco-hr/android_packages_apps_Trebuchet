@@ -1,2 +1,2 @@
-int widthMeasureSpec
-int heightMeasureSpec
+int widthSpec
+int heightSpec
