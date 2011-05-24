@@ -1,3 +1,6 @@
 {
-  return mCellCountY * mCellHeight + (mCellCountY - 1) * Math.max(0,mHeightGap);
+  if (mCellCountY > 0) {
+    return mCellCountY * mCellHeight + (mCellCountY - 1) * Math.max(0,mHeightGap);
+  }
+  return 0;
 }

@@ -6,6 +6,7 @@
   mFilteredApps=new ArrayList<ApplicationInfo>();
   a.recycle();
   setSoundEffectsEnabled(false);
-  Resources r=context.getResources();
+  final Resources r=context.getResources();
   setDragSlopeThreshold(r.getInteger(R.integer.config_appsCustomizeDragSlopeThreshold) / 100.0f);
+  mMaxCellCountY=r.getInteger(R.integer.all_apps_view_maxCellCountY);
 }
