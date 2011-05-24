@@ -1,9 +1,10 @@
 {
+  final Resources res=getResources();
   setup();
-  final CustomizePagedView customizePagedView=(CustomizePagedView)findViewById(R.id.customization_drawer_tab_contents);
+  mCustomizePagedView=(CustomizePagedView)findViewById(R.id.customization_drawer_tab_contents);
   TabContentFactory contentFactory=new TabContentFactory(){
     public View createTabContent(    String tag){
-      return customizePagedView;
+      return mCustomizePagedView;
     }
   }
 ;
@@ -21,20 +22,21 @@
   tabView=(TextView)mInflater.inflate(R.layout.tab_widget_indicator,tabWidget,false);
   tabView.setText(mContext.getString(R.string.shortcuts_tab_label));
   addTab(newTabSpec(SHORTCUTS_TAG).setIndicator(tabView).setContent(contentFactory));
+  mVerticalFillPercentage=res.getInteger(R.integer.customization_drawer_verticalFillPercentage) / 100f;
   setOnTabChangedListener(new OnTabChangeListener(){
     public void onTabChanged(    String tabId){
       final CustomizePagedView.CustomizationType newType=getCustomizeFilterForTabTag(tabId);
-      if (newType != customizePagedView.getCustomizationFilter()) {
+      if (newType != mCustomizePagedView.getCustomizationFilter()) {
         final Resources res=getResources();
         final int duration=res.getInteger(R.integer.config_tabTransitionTime);
-        final float alpha=customizePagedView.getAlpha();
-        ValueAnimator alphaAnim=ObjectAnimator.ofFloat(customizePagedView,"alpha",alpha,0.0f);
+        final float alpha=mCustomizePagedView.getAlpha();
+        ValueAnimator alphaAnim=ObjectAnimator.ofFloat(mCustomizePagedView,"alpha",alpha,0.0f);
         alphaAnim.setDuration(duration);
         alphaAnim.addListener(new AnimatorListenerAdapter(){
           @Override public void onAnimationEnd(          Animator animation){
-            customizePagedView.setCustomizationFilter(newType);
-            final float alpha=customizePagedView.getAlpha();
-            ValueAnimator alphaAnim=ObjectAnimator.ofFloat(customizePagedView,"alpha",alpha,1.0f);
+            mCustomizePagedView.setCustomizationFilter(newType);
+            final float alpha=mCustomizePagedView.getAlpha();
+            ValueAnimator alphaAnim=ObjectAnimator.ofFloat(mCustomizePagedView,"alpha",alpha,1.0f);
             alphaAnim.setDuration(duration);
             alphaAnim.start();
           }
