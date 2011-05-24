@@ -1,0 +1,8 @@
+{
+  if (mFirstLayout) {
+    invalidatePageData();
+    measure(MeasureSpec.makeMeasureSpec(getMeasuredWidth(),MeasureSpec.EXACTLY),MeasureSpec.makeMeasureSpec(getMeasuredHeight(),MeasureSpec.EXACTLY));
+  }
+  super.onLayout(changed,left,top,right,bottom);
+  mFirstLayout=false;
+}

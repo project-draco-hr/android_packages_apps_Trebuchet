@@ -1,0 +1,9 @@
+{
+  super.onMeasure(widthMeasureSpec,heightMeasureSpec);
+  if (MeasureSpec.getMode(heightMeasureSpec) == MeasureSpec.AT_MOST) {
+    final int availableHeight=MeasureSpec.getSize(heightMeasureSpec);
+    final int finalHeight=Math.max(getMeasuredHeight(),(int)(availableHeight * mVerticalFillPercentage));
+    heightMeasureSpec=MeasureSpec.makeMeasureSpec(finalHeight,MeasureSpec.EXACTLY);
+    super.onMeasure(widthMeasureSpec,heightMeasureSpec);
+  }
+}
