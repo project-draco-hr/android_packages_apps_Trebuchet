@@ -1,0 +1,13 @@
+{
+  Iterator<ResolveInfo> iter=list.iterator();
+  while (iter.hasNext()) {
+    ResolveInfo rinfo=iter.next();
+    ActivityInfo info=rinfo.activityInfo;
+    ComponentName c=new ComponentName(info.packageName,info.name);
+    if (c.equals(cn)) {
+      iter.remove();
+      return rinfo;
+    }
+  }
+  return null;
+}
