@@ -1,0 +1,13 @@
+{
+  ShortcutInfo item;
+  if (d.dragInfo instanceof ApplicationInfo) {
+    item=((ApplicationInfo)d.dragInfo).makeShortcut();
+    item.spanX=1;
+    item.spanY=1;
+  }
+ else {
+    item=(ShortcutInfo)d.dragInfo;
+  }
+  mInfo.add(item);
+  LauncherModel.addOrMoveItemInDatabase(mLauncher,item,mInfo.id,0,item.cellX,item.cellY);
+}

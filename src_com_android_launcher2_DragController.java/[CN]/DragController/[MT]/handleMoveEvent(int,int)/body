@@ -1,23 +1,25 @@
 {
-  mDragView.move(x,y);
+  mDragObject.dragView.move(x,y);
   final int[] coordinates=mCoordinatesTemp;
   DropTarget dropTarget=findDropTarget(x,y,coordinates);
+  mDragObject.x=coordinates[0];
+  mDragObject.y=coordinates[1];
   if (dropTarget != null) {
-    DropTarget delegate=dropTarget.getDropTargetDelegate(mDragSource,coordinates[0],coordinates[1],(int)mTouchOffsetX,(int)mTouchOffsetY,mDragView,mDragInfo);
+    DropTarget delegate=dropTarget.getDropTargetDelegate(mDragObject);
     if (delegate != null) {
       dropTarget=delegate;
     }
     if (mLastDropTarget != dropTarget) {
       if (mLastDropTarget != null) {
-        mLastDropTarget.onDragExit(mDragSource,coordinates[0],coordinates[1],(int)mTouchOffsetX,(int)mTouchOffsetY,mDragView,mDragInfo);
+        mLastDropTarget.onDragExit(mDragObject);
       }
-      dropTarget.onDragEnter(mDragSource,coordinates[0],coordinates[1],(int)mTouchOffsetX,(int)mTouchOffsetY,mDragView,mDragInfo);
+      dropTarget.onDragEnter(mDragObject);
     }
-    dropTarget.onDragOver(mDragSource,coordinates[0],coordinates[1],(int)mTouchOffsetX,(int)mTouchOffsetY,mDragView,mDragInfo);
+    dropTarget.onDragOver(mDragObject);
   }
  else {
     if (mLastDropTarget != null) {
-      mLastDropTarget.onDragExit(mDragSource,coordinates[0],coordinates[1],(int)mTouchOffsetX,(int)mTouchOffsetY,mDragView,mDragInfo);
+      mLastDropTarget.onDragExit(mDragObject);
     }
   }
   mLastDropTarget=dropTarget;

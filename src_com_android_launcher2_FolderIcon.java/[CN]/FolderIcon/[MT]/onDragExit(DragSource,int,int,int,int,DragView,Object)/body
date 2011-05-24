@@ -1,4 +1,0 @@
-{
-  if (!willAcceptItem((ItemInfo)dragInfo))   return;
-  animateToNaturalState();
-}

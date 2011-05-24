@@ -1,0 +1,88 @@
+{
+  mDragViewVisualCenter=getDragViewVisualCenter(d.x,d.y,d.xOffset,d.yOffset,d.dragView,mDragViewVisualCenter);
+  if (mDragTargetLayout != null) {
+    mapPointFromSelfToChild(mDragTargetLayout,mDragViewVisualCenter,null);
+  }
+  if (!mLauncher.isAllAppsVisible()) {
+    int dragTargetIndex=indexOfChild(mDragTargetLayout);
+    if (mCurrentPage != dragTargetIndex && (mIsSmall || mIsInUnshrinkAnimation)) {
+      scrollToNewPageWithoutMovingPages(dragTargetIndex);
+    }
+  }
+  if (d.dragSource != this) {
+    final int[] touchXY=new int[]{(int)mDragViewVisualCenter[0],(int)mDragViewVisualCenter[1]};
+    if (LauncherApplication.isScreenLarge() && (mIsSmall || mIsInUnshrinkAnimation) && !mLauncher.isAllAppsVisible()) {
+      ((ItemInfo)d.dragInfo).dropPos=touchXY;
+      return;
+    }
+    onDropExternal(touchXY,d.dragInfo,mDragTargetLayout,false,d.dragView);
+  }
+ else   if (mDragInfo != null) {
+    final View cell=mDragInfo.cell;
+    CellLayout dropTargetLayout=mDragTargetLayout;
+    boolean dropInscrollArea=false;
+    if (dropTargetLayout == null && mInScrollArea) {
+      dropInscrollArea=true;
+      if (mPendingScrollDirection == DragController.SCROLL_LEFT) {
+        dropTargetLayout=(CellLayout)getChildAt(mCurrentPage - 1);
+      }
+ else       if (mPendingScrollDirection == DragController.SCROLL_RIGHT) {
+        dropTargetLayout=(CellLayout)getChildAt(mCurrentPage + 1);
+      }
+    }
+    if (dropTargetLayout != null) {
+      final int screen=(mTargetCell == null) ? mDragInfo.screen : indexOfChild(dropTargetLayout);
+      if (!dropInscrollArea && createUserFolderIfNecessary(cell,dropTargetLayout,(int)mDragViewVisualCenter[0],(int)mDragViewVisualCenter[1],false)) {
+        return;
+      }
+      mTargetCell=findNearestVacantArea((int)mDragViewVisualCenter[0],(int)mDragViewVisualCenter[1],mDragInfo.spanX,mDragInfo.spanY,cell,dropTargetLayout,mTargetCell);
+      if (screen != mCurrentPage) {
+        snapToPage(screen);
+      }
+      if (mTargetCell != null) {
+        if (screen != mDragInfo.screen) {
+          ((CellLayout)getChildAt(mDragInfo.screen)).removeView(cell);
+          addInScreen(cell,screen,mTargetCell[0],mTargetCell[1],mDragInfo.spanX,mDragInfo.spanY);
+        }
+        final ItemInfo info=(ItemInfo)cell.getTag();
+        CellLayout.LayoutParams lp=(CellLayout.LayoutParams)cell.getLayoutParams();
+        dropTargetLayout.onMove(cell,mTargetCell[0],mTargetCell[1]);
+        lp.cellX=mTargetCell[0];
+        lp.cellY=mTargetCell[1];
+        cell.setId(LauncherModel.getCellLayoutChildId(-1,mDragInfo.screen,mTargetCell[0],mTargetCell[1],mDragInfo.spanX,mDragInfo.spanY));
+        if (cell instanceof LauncherAppWidgetHostView) {
+          final CellLayout cellLayout=dropTargetLayout;
+          final LauncherAppWidgetHostView hostView=(LauncherAppWidgetHostView)cell;
+          AppWidgetProviderInfo pinfo=hostView.getAppWidgetInfo();
+          if (pinfo.resizeMode != AppWidgetProviderInfo.RESIZE_NONE) {
+            final Runnable resizeRunnable=new Runnable(){
+              public void run(){
+                DragLayer dragLayer=(DragLayer)mLauncher.findViewById(R.id.drag_layer);
+                dragLayer.addResizeFrame(info,hostView,cellLayout);
+              }
+            }
+;
+            post(new Runnable(){
+              public void run(){
+                if (!isPageMoving()) {
+                  resizeRunnable.run();
+                }
+ else {
+                  mDelayedResizeRunnable=resizeRunnable;
+                }
+              }
+            }
+);
+          }
+        }
+        LauncherModel.moveItemInDatabase(mLauncher,info,LauncherSettings.Favorites.CONTAINER_DESKTOP,screen,lp.cellX,lp.cellY);
+      }
+    }
+    final CellLayout parent=(CellLayout)cell.getParent().getParent();
+    int loc[]=new int[2];
+    getViewLocationRelativeToSelf(d.dragView,loc);
+    setPositionForDropAnimation(d.dragView,loc[0],loc[1],parent,cell);
+    boolean animateDrop=!mWasSpringLoadedOnDragExit;
+    parent.onDropChild(cell,animateDrop);
+  }
+}

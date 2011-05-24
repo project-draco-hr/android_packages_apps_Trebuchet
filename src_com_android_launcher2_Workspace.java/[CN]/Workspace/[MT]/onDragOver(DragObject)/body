@@ -1,0 +1,66 @@
+{
+  if (!mInScrollArea) {
+    CellLayout layout;
+    int left=d.x - d.xOffset;
+    int top=d.y - d.yOffset;
+    mDragViewVisualCenter=getDragViewVisualCenter(d.x,d.y,d.xOffset,d.yOffset,d.dragView,mDragViewVisualCenter);
+    boolean shrunken=mIsSmall || mIsInUnshrinkAnimation;
+    if (shrunken) {
+      mLastDragView=d.dragView;
+      mLastDragOriginX=left;
+      mLastDragOriginY=top;
+      mLastDragXOffset=d.xOffset;
+      mLastDragYOffset=d.yOffset;
+      layout=findMatchingPageForDragOver(d.dragView,left,top,d.xOffset,d.yOffset);
+      if (layout != null && layout != mDragTargetLayout) {
+        if (mDragTargetLayout != null) {
+          mDragTargetLayout.setIsDragOverlapping(false);
+          mSpringLoadedDragController.onDragExit();
+        }
+        mDragTargetLayout=layout;
+        if (LauncherApplication.isScreenLarge()) {
+          boolean allowDragOver=(mDragTargetLayout != null) && (mDragTargetLayout.getAcceptsDrops() || (mShrinkState == ShrinkState.SPRING_LOADED));
+          if (allowDragOver) {
+            mDragTargetLayout.setIsDragOverlapping(true);
+            mSpringLoadedDragController.onDragEnter(mDragTargetLayout,mShrinkState == ShrinkState.SPRING_LOADED);
+          }
+        }
+      }
+    }
+ else {
+      layout=getCurrentDropLayout();
+      if (layout != mDragTargetLayout) {
+        if (mDragTargetLayout != null) {
+          mDragTargetLayout.onDragExit();
+        }
+        layout.onDragEnter();
+        mDragTargetLayout=layout;
+      }
+    }
+    if (!shrunken || mShrinkState == ShrinkState.SPRING_LOADED) {
+      layout=getCurrentDropLayout();
+      final ItemInfo item=(ItemInfo)d.dragInfo;
+      if (d.dragInfo instanceof LauncherAppWidgetInfo) {
+        LauncherAppWidgetInfo widgetInfo=(LauncherAppWidgetInfo)d.dragInfo;
+        if (widgetInfo.spanX == -1) {
+          int[] spans=layout.rectToCell(widgetInfo.minWidth,widgetInfo.minHeight,null);
+          item.spanX=spans[0];
+          item.spanY=spans[1];
+        }
+      }
+      if (mDragTargetLayout != null) {
+        final View child=(mDragInfo == null) ? null : mDragInfo.cell;
+        mapPointFromSelfToChild(mDragTargetLayout,mDragViewVisualCenter,null);
+        ItemInfo info=(ItemInfo)d.dragInfo;
+        if (!willCreateUserFolder(info,mDragTargetLayout,(int)mDragViewVisualCenter[0],(int)mDragViewVisualCenter[1])) {
+          mIsDraggingOverIcon=false;
+          mDragTargetLayout.visualizeDropLocation(child,mDragOutline,(int)mDragViewVisualCenter[0],(int)mDragViewVisualCenter[1],item.spanX,item.spanY);
+        }
+ else         if (!mIsDraggingOverIcon) {
+          mIsDraggingOverIcon=true;
+          mDragTargetLayout.clearDragOutlines();
+        }
+      }
+    }
+  }
+}

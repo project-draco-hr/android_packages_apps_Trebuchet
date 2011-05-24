@@ -1,0 +1,5 @@
+{
+  if (mDragAndDropEnabled) {
+    d.dragView.setPaint(null);
+  }
+}

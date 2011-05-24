@@ -7,9 +7,9 @@
     for (    DragListener listener : mListeners) {
       listener.onDragEnd();
     }
-    if (mDragView != null) {
-      mDragView.remove();
-      mDragView=null;
+    if (mDragObject.dragView != null) {
+      mDragObject.dragView.remove();
+      mDragObject.dragView=null;
     }
   }
 }

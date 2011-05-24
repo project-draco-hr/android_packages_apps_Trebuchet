@@ -13,13 +13,13 @@
   final int registrationY=((int)mMotionDownY) - screenY;
   final int dragRegionLeft=dragRegion == null ? 0 : dragRegion.left;
   final int dragRegionTop=dragRegion == null ? 0 : dragRegion.top;
-  mTouchOffsetX=mMotionDownX - (screenX + dragRegionLeft);
-  mTouchOffsetY=mMotionDownY - (screenY + dragRegionTop);
   mDragging=true;
-  mDragSource=source;
-  mDragInfo=dragInfo;
+  mDragObject.xOffset=mMotionDownX - (screenX + dragRegionLeft);
+  mDragObject.yOffset=mMotionDownY - (screenY + dragRegionTop);
+  mDragObject.dragSource=source;
+  mDragObject.dragInfo=dragInfo;
   mVibrator.vibrate(VIBRATE_DURATION);
-  DragView dragView=mDragView=new DragView(mContext,b,registrationX,registrationY,0,0,b.getWidth(),b.getHeight());
+  final DragView dragView=mDragObject.dragView=new DragView(mContext,b,registrationX,registrationY,0,0,b.getWidth(),b.getHeight());
   final DragSource dragSource=source;
   dragView.setOnDrawRunnable(new Runnable(){
     public void run(){

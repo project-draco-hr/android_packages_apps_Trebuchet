@@ -1,0 +1,7 @@
+{
+  if (mDragAndDropEnabled) {
+    mTransition.reverseTransition(getTransitionAnimationDuration());
+    setTextColor(mDragTextColor);
+    super.onDragEnter(d);
+  }
+}
