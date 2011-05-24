@@ -10,6 +10,9 @@
     final LayoutParams lp=(LayoutParams)child.getLayoutParams();
     if ((child.getVisibility() == VISIBLE || child.getAnimation() != null) && lp.isLockedToGrid) {
       child.getHitRect(frame);
+      final int tmpXY[]=mTmpXY;
+      child.getLocationOnScreen(tmpXY);
+      frame.offset(mLeftPadding,mTopPadding);
       if (frame.contains(x,y)) {
         cellInfo.cell=child;
         cellInfo.cellX=lp.cellX;
@@ -23,7 +26,7 @@
     }
   }
   if (!found) {
-    final int cellXY[]=mTmpCellXY;
+    final int cellXY[]=mTmpXY;
     pointToCellExact(x,y,cellXY);
     cellInfo.cell=null;
     cellInfo.cellX=cellXY[0];
