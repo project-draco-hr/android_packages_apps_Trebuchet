@@ -8,8 +8,10 @@
     target.getHitRect(r);
     target.getLocationOnScreen(dropCoordinates);
     r.offset(dropCoordinates[0] - target.getLeft(),dropCoordinates[1] - target.getTop());
+    mDragObject.x=x;
+    mDragObject.y=y;
     if (r.contains(x,y)) {
-      DropTarget delegate=target.getDropTargetDelegate(mDragSource,x,y,(int)mTouchOffsetX,(int)mTouchOffsetY,mDragView,mDragInfo);
+      DropTarget delegate=target.getDropTargetDelegate(mDragObject);
       if (delegate != null) {
         target=delegate;
         target.getLocationOnScreen(dropCoordinates);

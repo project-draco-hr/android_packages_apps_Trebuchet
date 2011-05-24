@@ -1,0 +1,4 @@
+{
+  if (!mDragAndDropEnabled)   return;
+  d.dragView.setPaint(mHoverPaint);
+}

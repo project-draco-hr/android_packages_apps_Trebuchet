@@ -1,6 +1,4 @@
 {
   mOriginalWidth=lp.width;
   mOriginalHeight=lp.height;
-  mOriginalX=lp.x;
-  mOriginalY=lp.y;
 }

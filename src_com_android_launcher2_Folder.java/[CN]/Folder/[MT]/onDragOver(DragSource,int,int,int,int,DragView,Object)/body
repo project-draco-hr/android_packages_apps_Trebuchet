@@ -1,4 +1,0 @@
-{
-  float[] r=mapPointFromScreenToContent(x,y,null);
-  mContent.visualizeDropLocation(null,null,(int)r[0],(int)r[1],1,1);
-}

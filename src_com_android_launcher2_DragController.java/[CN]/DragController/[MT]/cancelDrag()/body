@@ -1,6 +1,6 @@
 {
   if (mDragging) {
-    mDragSource.onDropCompleted(null,mDragInfo,false);
+    mDragObject.dragSource.onDropCompleted(null,mDragObject.dragInfo,false);
   }
   endDrag();
 }

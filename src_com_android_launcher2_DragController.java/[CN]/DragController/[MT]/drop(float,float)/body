@@ -1,13 +1,15 @@
 {
   final int[] coordinates=mCoordinatesTemp;
   final DropTarget dropTarget=findDropTarget((int)x,(int)y,coordinates);
+  mDragObject.x=coordinates[0];
+  mDragObject.y=coordinates[1];
   boolean accepted=false;
   if (dropTarget != null) {
-    dropTarget.onDragExit(mDragSource,coordinates[0],coordinates[1],(int)mTouchOffsetX,(int)mTouchOffsetY,mDragView,mDragInfo);
-    if (dropTarget.acceptDrop(mDragSource,coordinates[0],coordinates[1],(int)mTouchOffsetX,(int)mTouchOffsetY,mDragView,mDragInfo)) {
-      dropTarget.onDrop(mDragSource,coordinates[0],coordinates[1],(int)mTouchOffsetX,(int)mTouchOffsetY,mDragView,mDragInfo);
+    dropTarget.onDragExit(mDragObject);
+    if (dropTarget.acceptDrop(mDragObject)) {
+      dropTarget.onDrop(mDragObject);
       accepted=true;
     }
   }
-  mDragSource.onDropCompleted((View)dropTarget,mDragInfo,accepted);
+  mDragObject.dragSource.onDropCompleted((View)dropTarget,mDragObject.dragInfo,accepted);
 }
