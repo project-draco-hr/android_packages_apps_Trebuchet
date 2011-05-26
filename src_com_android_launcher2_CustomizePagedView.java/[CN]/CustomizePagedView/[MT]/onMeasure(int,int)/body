@@ -9,6 +9,8 @@
     mPageContentWidth=layout.getContentWidth();
     mPageContentHeight=layout.getContentHeight();
     mMinPageWidth=layout.getWidthBeforeFirstLayout();
+    removeAllViews();
+    invalidatePageData();
   }
   if (mPageContentHeight > 0) {
     final int h=mPageContentHeight + mPageLayoutPaddingTop + mPageLayoutPaddingBottom;
