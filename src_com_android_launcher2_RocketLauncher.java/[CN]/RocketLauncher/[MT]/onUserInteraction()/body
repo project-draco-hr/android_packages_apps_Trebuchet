@@ -1,0 +1,5 @@
+{
+  if (!ROCKET_LAUNCHER) {
+    finish();
+  }
+}

@@ -1,0 +1,8 @@
+{
+  super(context,as);
+  setBackgroundColor(0xFF000000);
+  LauncherApplication app=(LauncherApplication)context.getApplicationContext();
+  mIcons=app.getIconCache().getAllIcons();
+  mComponentNames=new ComponentName[mIcons.size()];
+  mComponentNames=mIcons.keySet().toArray(mComponentNames);
+}

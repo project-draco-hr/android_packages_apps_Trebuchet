@@ -1,0 +1,21 @@
+{
+  dist+=v * dt;
+  setX(getX() + anglex * v * dt);
+  setY(getY() + angley * v * dt);
+  if (endscale > 0) {
+    float scale=lerp(0,endscale,(float)Math.sqrt(dist / fuse));
+    setScaleX(scale * lerp(1f,0.75f,(float)Math.pow((v - VMIN) / (VMAX - VMIN),3)));
+    setScaleY(scale * lerp(1f,1.5f,(float)Math.pow((v - VMIN) / (VMAX - VMIN),3)));
+    final float q1=fuse * 0.15f;
+    final float q4=fuse * 0.75f;
+    if (dist < q1) {
+      setAlpha((float)Math.sqrt(dist / q1));
+    }
+ else     if (dist > q4) {
+      setAlpha((dist >= fuse) ? 0f : (1f - (float)Math.pow((dist - q4) / (fuse - q4),2)));
+    }
+ else {
+      setAlpha(1f);
+    }
+  }
+}

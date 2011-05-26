@@ -1,0 +1,66 @@
+{
+  removeAllViews();
+  final ViewGroup.LayoutParams wrap=new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+  if (FIXED_STARS) {
+    for (int i=0; i < 20; i++) {
+      ImageView fixedStar=new ImageView(getContext(),null);
+      fixedStar.setImageResource(R.drawable.widget_resize_handle_bottom);
+      final float s=randfrange(0.25f,0.75f);
+      fixedStar.setScaleX(s);
+      fixedStar.setScaleY(s);
+      fixedStar.setAlpha(0.75f);
+      addView(fixedStar,wrap);
+      fixedStar.setX(randfrange(0,getWidth()));
+      fixedStar.setY(randfrange(0,getHeight()));
+    }
+  }
+  for (int i=0; i < NUM_ICONS * 2; i++) {
+    FlyingIcon nv=(FLYING_STARS && (i < NUM_ICONS)) ? new FlyingStar(getContext(),null) : new FlyingIcon(getContext(),null);
+    addView(nv,wrap);
+    nv.reset();
+  }
+  mAnim=new TimeAnimator();
+  mAnim.setTimeListener(new TimeAnimator.TimeListener(){
+    public void onTimeUpdate(    TimeAnimator animation,    long totalTime,    long deltaTime){
+      final int START_ZOOM_TIME=3000;
+      if (totalTime < START_ZOOM_TIME) {
+        final float x=totalTime / (float)START_ZOOM_TIME;
+        final float s=1f - (float)Math.pow(x - 1,4);
+        setScaleX(s);
+        setScaleY(s);
+      }
+ else {
+        setScaleX(1.0f);
+        setScaleY(1.0f);
+      }
+      if (mManeuveringThrusters) {
+        if (mSpeedScale > MANEUVERING_THRUST_SCALE) {
+          mSpeedScale-=(2 * deltaTime / 1000f);
+        }
+        if (mSpeedScale < MANEUVERING_THRUST_SCALE) {
+          mSpeedScale=MANEUVERING_THRUST_SCALE;
+        }
+      }
+ else {
+        if (mSpeedScale < 1.0f) {
+          mSpeedScale+=(deltaTime / 1000f);
+        }
+        if (mSpeedScale > 1.0f) {
+          mSpeedScale=1.0f;
+        }
+      }
+      for (int i=0; i < getChildCount(); i++) {
+        View v=getChildAt(i);
+        if (!(v instanceof FlyingIcon))         continue;
+        FlyingIcon nv=(FlyingIcon)v;
+        nv.update(deltaTime / 1000f * mSpeedScale);
+        final float scaledWidth=nv.getWidth() * nv.getScaleX();
+        final float scaledHeight=nv.getHeight() * nv.getScaleY();
+        if (nv.getX() + scaledWidth < 0 || nv.getX() - scaledWidth > getWidth() || nv.getY() + scaledHeight < 0 || nv.getY() - scaledHeight > getHeight()) {
+          nv.reset();
+        }
+      }
+    }
+  }
+);
+}

@@ -1,0 +1,9 @@
+{
+  v=randfrange(VMIN,VMAX);
+  angle=randfrange(0,360f);
+  anglex=(float)Math.sin(angle / 180. * Math.PI);
+  angley=(float)Math.cos(angle / 180. * Math.PI);
+  vr=randfrange(ANGULAR_VMIN,ANGULAR_VMAX) * randsign();
+  endscale=randfrange(SCALE_MIN,SCALE_MAX);
+  randomizeIcon();
+}
