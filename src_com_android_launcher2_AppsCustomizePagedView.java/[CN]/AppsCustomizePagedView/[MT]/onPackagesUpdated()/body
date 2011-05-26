@@ -4,16 +4,4 @@
   Intent shortcutsIntent=new Intent(Intent.ACTION_CREATE_SHORTCUT);
   mWidgets.addAll(mPackageManager.queryIntentActivities(shortcutsIntent,0));
   Collections.sort(mWidgets,new LauncherModel.WidgetAndShortcutNameComparator(mPackageManager));
-  Intent wallpapersIntent=new Intent(Intent.ACTION_SET_WALLPAPER);
-  mWallpapers=mPackageManager.queryIntentActivities(wallpapersIntent,PackageManager.GET_META_DATA);
-  Collections.sort(mWallpapers,new LauncherModel.ShortcutNameComparator(mPackageManager));
-  Context c=getContext();
-  ResolveInfo liveWallpapers=removeResolveInfoWithComponentName(mWallpapers,new ComponentName(c.getString(R.string.live_wallpaper_picker_package_name),c.getString(R.string.live_wallpaper_picker_class_name)));
-  if (liveWallpapers != null) {
-    mWallpapers.add(0,liveWallpapers);
-  }
-  ResolveInfo wallpapers=removeResolveInfoWithComponentName(mWallpapers,new ComponentName(c.getPackageName(),WallpaperChooser.class.getName()));
-  if (wallpapers != null) {
-    mWallpapers.add(0,wallpapers);
-  }
 }
