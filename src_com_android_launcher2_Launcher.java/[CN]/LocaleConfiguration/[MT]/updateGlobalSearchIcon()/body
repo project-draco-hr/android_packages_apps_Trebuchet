@@ -1,17 +1,26 @@
 {
-  if (LauncherApplication.isScreenLarge()) {
-    final View searchButton=findViewById(R.id.search_button);
-    final View searchDivider=findViewById(R.id.search_divider);
-    final SearchManager searchManager=(SearchManager)getSystemService(Context.SEARCH_SERVICE);
-    ComponentName activityName=searchManager.getGlobalSearchActivity();
-    if (activityName != null) {
+  final ImageView searchButton=(ImageView)findViewById(R.id.search_button);
+  final View searchDivider=findViewById(R.id.search_divider);
+  final SearchManager searchManager=(SearchManager)getSystemService(Context.SEARCH_SERVICE);
+  ComponentName activityName=searchManager.getGlobalSearchActivity();
+  if (activityName != null) {
+    boolean iconLoaded=false;
+    if (!LauncherApplication.isScreenLarge()) {
+      int orientation=getResources().getConfiguration().orientation;
+      if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+        searchButton.setImageResource(R.drawable.ic_generic_search);
+        iconLoaded=true;
+        sGlobalSearchIcon=null;
+      }
+    }
+    if (!iconLoaded) {
       sGlobalSearchIcon=updateButtonWithIconFromExternalActivity(R.id.search_button,activityName,R.drawable.ic_generic_search);
-      searchButton.setVisibility(View.VISIBLE);
-      searchDivider.setVisibility(View.VISIBLE);
     }
+    searchButton.setVisibility(View.VISIBLE);
+    searchDivider.setVisibility(View.VISIBLE);
+  }
  else {
-      searchButton.setVisibility(View.GONE);
-      searchDivider.setVisibility(View.GONE);
-    }
+    searchButton.setVisibility(View.GONE);
+    searchDivider.setVisibility(View.GONE);
   }
 }
