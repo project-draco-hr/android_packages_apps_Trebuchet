@@ -1,0 +1,3 @@
+{
+  setCurrentTabByTag(WIDGETS_TAB_TAG);
+}
