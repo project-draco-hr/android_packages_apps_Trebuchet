@@ -1,2 +1,4 @@
 {
+  mWaitingForResult=false;
+  cleanup();
 }

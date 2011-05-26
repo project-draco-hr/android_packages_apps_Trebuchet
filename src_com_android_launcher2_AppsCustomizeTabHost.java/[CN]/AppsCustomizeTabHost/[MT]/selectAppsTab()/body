@@ -1,0 +1,3 @@
+{
+  setCurrentTabByTag(APPS_TAB_TAG);
+}

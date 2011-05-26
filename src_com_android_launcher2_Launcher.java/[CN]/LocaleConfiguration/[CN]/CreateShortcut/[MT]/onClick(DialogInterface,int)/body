@@ -1,24 +1,33 @@
 {
   Resources res=getResources();
   cleanup();
-switch (which) {
+  AddAdapter.ListItem item=(AddAdapter.ListItem)mAdapter.getItem(which);
+switch (item.actionTag) {
 case AddAdapter.ITEM_SHORTCUT:
 {
       pickShortcut();
       break;
     }
-case AddAdapter.ITEM_APPWIDGET:
+case AddAdapter.ITEM_APPLICATION:
 {
-    int appWidgetId=Launcher.this.mAppWidgetHost.allocateAppWidgetId();
-    Intent pickIntent=new Intent(AppWidgetManager.ACTION_APPWIDGET_PICK);
-    pickIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,appWidgetId);
-    startActivityForResult(pickIntent,REQUEST_PICK_APPWIDGET);
+    if (mAppsCustomizeTabHost != null) {
+      mAppsCustomizeTabHost.selectAppsTab();
+    }
+    showAllApps(true);
     break;
   }
+case AddAdapter.ITEM_APPWIDGET:
+{
+  if (mAppsCustomizeTabHost != null) {
+    mAppsCustomizeTabHost.selectWidgetsTab();
+  }
+  showAllApps(true);
+  break;
+}
 case AddAdapter.ITEM_WALLPAPER:
 {
-  startWallpaper();
-  break;
+startWallpaper();
+break;
 }
 }
 }

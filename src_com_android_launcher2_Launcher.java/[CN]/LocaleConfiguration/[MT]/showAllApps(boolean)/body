@@ -7,9 +7,8 @@
     mState=State.ALL_APPS;
   }
  else {
-    View appsCustomizePane=findViewById(R.id.apps_customize_pane);
     cameraZoomOut(State.APPS_CUSTOMIZE,animated,false);
-    appsCustomizePane.requestFocus();
+    mAppsCustomizeTabHost.requestFocus();
     mState=State.APPS_CUSTOMIZE;
   }
   mUserPresent=false;
