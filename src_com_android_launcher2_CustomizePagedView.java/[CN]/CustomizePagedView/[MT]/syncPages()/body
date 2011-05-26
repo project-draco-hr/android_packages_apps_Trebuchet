@@ -1,7 +1,4 @@
 {
-  if (mFirstMeasure) {
-    return;
-  }
   boolean enforceMinimumPagedWidths=false;
   boolean centerPagedViewCellLayouts=false;
 switch (mCustomizationType) {
