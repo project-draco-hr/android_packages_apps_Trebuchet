@@ -1,6 +1,0 @@
-{
-  int cellHeight=r.getDimensionPixelSize(R.dimen.workspace_cell_height);
-  int heightGap=r.getDimensionPixelSize(R.dimen.workspace_height_gap_port);
-  int crosshairsSize=r.getDrawable(R.drawable.gardening_crosshairs).getIntrinsicHeight();
-  return heightGap * (numCells - 1) + cellHeight * numCells + (crosshairsSize + 1) / 2;
-}
