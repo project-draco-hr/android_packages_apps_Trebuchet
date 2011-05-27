@@ -8,21 +8,38 @@
     mOriginalWidth=getMeasuredWidth();
     mOriginalHeight=getMeasuredHeight();
   }
-  int xShift=(mOriginalWidth - d.getIntrinsicWidth()) / 2;
-  int yShift=(mOriginalHeight - d.getIntrinsicHeight()) / 2;
-  canvas.translate(xShift,yShift);
+  int unscaledHeight=(int)(d.getIntrinsicHeight() * (1 + PERSPECTIVE_SHIFT_FACTOR));
+  float baselineIconScale=SPACE_PERCENTAGE_FOR_ICONS / (unscaledHeight / (mOriginalHeight * 1.0f));
+  int baselineHeight=(int)(d.getIntrinsicHeight() * baselineIconScale);
+  int totalStackHeight=(int)(baselineHeight * (1 + PERSPECTIVE_SHIFT_FACTOR));
+  int baselineWidth=(int)(d.getIntrinsicWidth() * baselineIconScale);
+  float maxPerpectiveShift=baselineHeight * PERSPECTIVE_SHIFT_FACTOR;
   ArrayList<View> items=mFolder.getItemsInReadingOrder();
   int firstItemIndex=Math.max(0,items.size() - NUM_ITEMS_IN_PREVIEW);
+  int xShift=(int)(mOriginalWidth - baselineWidth) / 2;
+  int yShift=(int)(mOriginalHeight - totalStackHeight) / 2;
+  canvas.translate(xShift,yShift);
   for (int i=firstItemIndex; i < items.size(); i++) {
+    int index=i - firstItemIndex;
+    index+=Math.max(0,NUM_ITEMS_IN_PREVIEW - items.size());
+    float r=(index * 1.0f) / (NUM_ITEMS_IN_PREVIEW - 1);
+    float scale=(1 - PERSPECTIVE_SCALE_FACTOR * (1 - r));
+    r=(float)Math.pow(r,2);
+    float transY=r * maxPerpectiveShift;
+    float transX=(1 - scale) * baselineWidth / 2.0f;
     v=(TextView)items.get(i);
     d=v.getCompoundDrawables()[1];
-    canvas.translate(d.getIntrinsicWidth() / 2,d.getIntrinsicHeight() / 2);
-    canvas.rotate(i == firstItemIndex ? ICON_ANGLE : -ICON_ANGLE);
-    canvas.translate(-d.getIntrinsicWidth() / 2,-d.getIntrinsicHeight() / 2);
+    canvas.save();
+    canvas.translate(transX,transY);
+    canvas.scale(baselineIconScale * scale,baselineIconScale * scale);
+    int overlayAlpha=(int)(80 * (1 - r));
     if (d != null) {
       d.setBounds(0,0,d.getIntrinsicWidth(),d.getIntrinsicHeight());
+      d.setColorFilter(Color.argb(overlayAlpha,0,0,0),PorterDuff.Mode.SRC_ATOP);
       d.draw(canvas);
+      d.clearColorFilter();
     }
+    canvas.restore();
   }
   canvas.restore();
 }

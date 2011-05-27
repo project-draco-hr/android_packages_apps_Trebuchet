@@ -1,5 +1,4 @@
 {
-  CellLayout.LayoutParams lp=(CellLayout.LayoutParams)getLayoutParams();
   ValueAnimator va=ValueAnimator.ofFloat(0f,1f);
   va.setDuration(CONSUMPTION_ANIMATION_DURATION);
   va.addUpdateListener(new AnimatorUpdateListener(){
