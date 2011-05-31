@@ -1,5 +1,0 @@
-{
-  if (mFolderOuterRings.contains(fi)) {
-    mFolderOuterRings.remove(fi);
-  }
-}

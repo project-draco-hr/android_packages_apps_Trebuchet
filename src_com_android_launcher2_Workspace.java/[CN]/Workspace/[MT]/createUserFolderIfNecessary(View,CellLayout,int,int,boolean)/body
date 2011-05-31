@@ -4,7 +4,8 @@
   mTargetCell=findNearestArea(originX,originY,spanX,spanY,target,mTargetCell);
   View v=target.getChildAt(mTargetCell[0],mTargetCell[1]);
   boolean hasntMoved=mDragInfo != null && (mDragInfo.cellX == mTargetCell[0] && mDragInfo.cellY == mTargetCell[1]);
-  if (v == null || hasntMoved)   return false;
+  if (v == null || hasntMoved || !mCreateUserFolderOnDrop)   return false;
+  mCreateUserFolderOnDrop=false;
   final int screen=(mTargetCell == null) ? mDragInfo.screen : indexOfChild(target);
   boolean aboveShortcut=(v.getTag() instanceof ShortcutInfo);
   boolean willBecomeShortcut=(newView.getTag() instanceof ShortcutInfo);

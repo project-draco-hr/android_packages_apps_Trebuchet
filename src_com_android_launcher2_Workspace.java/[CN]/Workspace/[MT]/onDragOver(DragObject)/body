@@ -52,13 +52,28 @@
         final View child=(mDragInfo == null) ? null : mDragInfo.cell;
         mapPointFromSelfToChild(mDragTargetLayout,mDragViewVisualCenter,null);
         ItemInfo info=(ItemInfo)d.dragInfo;
-        if (!willCreateUserFolder(info,mDragTargetLayout,(int)mDragViewVisualCenter[0],(int)mDragViewVisualCenter[1])) {
-          mIsDraggingOverIcon=false;
-          mDragTargetLayout.visualizeDropLocation(child,mDragOutline,(int)mDragViewVisualCenter[0],(int)mDragViewVisualCenter[1],item.spanX,item.spanY);
+        boolean willCreateUserFolder=willCreateUserFolder(info,mDragTargetLayout,(int)mDragViewVisualCenter[0],(int)mDragViewVisualCenter[1]);
+        View newDropOver=null;
+        if (willCreateUserFolder) {
+          newDropOver=mDragTargetLayout.getChildAt(mTargetCell[0],mTargetCell[1]);
         }
- else         if (!mIsDraggingOverIcon) {
+        if (newDropOver != mLastDragOverView || !willCreateUserFolder) {
+          if (mDragFolderRingAnimator != null && mCreateUserFolderOnDrop) {
+            mDragFolderRingAnimator.animateToNaturalState();
+          }
+          mCreateUserFolderOnDrop=false;
+          mFolderCreationAlarm.cancelAlarm();
+          mIsDraggingOverIcon=false;
+        }
+        if (willCreateUserFolder && !mIsDraggingOverIcon) {
           mIsDraggingOverIcon=true;
+          mLastDragOverView=mDragTargetLayout.getChildAt(mTargetCell[0],mTargetCell[1]);
+          mFolderCreationAlarm.setOnAlarmListener(new FolderCreationAlarmListener(mLastDragOverView));
+          mFolderCreationAlarm.setAlarm(FOLDER_CREATION_TIMEOUT);
           mDragTargetLayout.clearDragOutlines();
+        }
+        if (!mCreateUserFolderOnDrop) {
+          mDragTargetLayout.visualizeDropLocation(child,mDragOutline,(int)mDragViewVisualCenter[0],(int)mDragViewVisualCenter[1],item.spanX,item.spanY);
         }
       }
     }

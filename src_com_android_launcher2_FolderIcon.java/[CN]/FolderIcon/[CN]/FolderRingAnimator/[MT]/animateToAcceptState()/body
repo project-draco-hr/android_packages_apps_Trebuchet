@@ -7,14 +7,18 @@
       mOuterRingScale=OUTER_RING_BASELINE_SCALE + percent * OUTER_RING_GROWTH_FACTOR;
       mInnerRingScale=INNER_RING_BASELINE_SCALE + percent * INNER_RING_GROWTH_FACTOR;
       mLauncher.getWorkspace().invalidate();
-      invalidate();
+      if (mFolderIcon != null) {
+        mFolderIcon.invalidate();
+      }
     }
   }
 );
   va.addListener(new AnimatorListenerAdapter(){
     @Override public void onAnimationEnd(    Animator animation){
-      setBackgroundColor(Color.TRANSPARENT);
-      requestLayout();
+      if (mFolderIcon != null) {
+        mFolderIcon.setBackgroundColor(Color.TRANSPARENT);
+        mFolderIcon.requestLayout();
+      }
     }
   }
 );
