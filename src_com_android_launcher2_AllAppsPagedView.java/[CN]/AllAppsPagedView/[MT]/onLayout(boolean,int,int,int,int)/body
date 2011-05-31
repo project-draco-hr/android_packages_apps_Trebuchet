@@ -1,8 +1,7 @@
 {
   if (mWaitingToInitPages) {
     mWaitingToInitPages=false;
-    invalidatePageData();
-    measure(MeasureSpec.makeMeasureSpec(getMeasuredWidth(),MeasureSpec.EXACTLY),MeasureSpec.makeMeasureSpec(getMeasuredHeight(),MeasureSpec.EXACTLY));
+    postInvalidatePageData(false);
   }
   super.onLayout(changed,left,top,right,bottom);
 }
