@@ -1,0 +1,4 @@
+{
+  super.onDragEnd();
+  mActive=false;
+}

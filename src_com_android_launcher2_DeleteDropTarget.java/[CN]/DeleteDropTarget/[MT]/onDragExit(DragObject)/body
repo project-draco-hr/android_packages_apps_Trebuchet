@@ -1,0 +1,5 @@
+{
+  super.onDragExit(d);
+  mIcon.reverseTransition(sTransitionDuration);
+  setTextColor(mDefaultTextColor);
+}

@@ -1,0 +1,9 @@
+{
+  dragController.addDragListener(this);
+  dragController.addDragListener(mInfoDropTarget);
+  dragController.addDragListener(mDeleteDropTarget);
+  dragController.addDropTarget(mInfoDropTarget);
+  dragController.addDropTarget(mDeleteDropTarget);
+  mInfoDropTarget.setLauncher(launcher);
+  mDeleteDropTarget.setLauncher(launcher);
+}

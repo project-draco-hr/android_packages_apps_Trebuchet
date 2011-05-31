@@ -1,0 +1,5 @@
+{
+  super.onDragEnter(d);
+  mIcon.startTransition(sTransitionDuration);
+  setTextColor(mHoverColor);
+}

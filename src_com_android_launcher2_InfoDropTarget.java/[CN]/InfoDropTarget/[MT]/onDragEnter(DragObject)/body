@@ -1,0 +1,4 @@
+{
+  super.onDragEnter(d);
+  setTextColor(mHoverColor);
+}

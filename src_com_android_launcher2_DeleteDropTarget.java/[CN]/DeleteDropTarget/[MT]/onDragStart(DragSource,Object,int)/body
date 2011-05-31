@@ -1,0 +1,22 @@
+{
+  ItemInfo item=(ItemInfo)info;
+  boolean isVisible=true;
+  boolean isUninstall=false;
+  if (isAllAppsWidget(source,info)) {
+    isVisible=false;
+  }
+  if (isAllAppsApplication(source,info)) {
+    ApplicationInfo appInfo=(ApplicationInfo)info;
+    if ((appInfo.flags & ApplicationInfo.DOWNLOADED_FLAG) != 0) {
+      isUninstall=true;
+    }
+ else {
+      isVisible=false;
+    }
+  }
+  mActive=isVisible;
+  ((ViewGroup)getParent()).setVisibility(isVisible ? View.VISIBLE : View.GONE);
+  if (getText().length() > 0) {
+    setText(isUninstall ? R.string.delete_target_uninstall_label : R.string.delete_target_label);
+  }
+}

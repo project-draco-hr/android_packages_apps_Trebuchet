@@ -3,7 +3,9 @@
   if (LauncherApplication.isScreenLarge()) {
     cameraZoomOut(State.ALL_APPS,animated,false);
     ((View)mAllAppsGrid).requestFocus();
-    mDeleteZone.setVisibility(View.GONE);
+    if (mDeleteZone != null) {
+      mDeleteZone.setVisibility(View.GONE);
+    }
     mState=State.ALL_APPS;
   }
  else {
