@@ -9,8 +9,7 @@
     mCellCountY=determineCellCountY(height,layout);
     mLastMeasureWidth=width;
     mLastMeasureHeight=height;
-    removeAllViews();
-    invalidatePageData();
+    postInvalidatePageData(true);
   }
   super.onMeasure(widthMeasureSpec,heightMeasureSpec);
 }
