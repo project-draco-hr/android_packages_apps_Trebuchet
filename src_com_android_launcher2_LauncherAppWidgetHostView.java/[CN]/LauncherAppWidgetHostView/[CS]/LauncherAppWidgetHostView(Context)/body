@@ -1,4 +1,6 @@
 {
   super(context);
   mInflater=(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+  Resources r=context.getResources();
+  setPadding(r.getDimensionPixelSize(R.dimen.app_widget_padding_left),r.getDimensionPixelSize(R.dimen.app_widget_padding_top),r.getDimensionPixelSize(R.dimen.app_widget_padding_right),r.getDimensionPixelSize(R.dimen.app_widget_padding_bottom));
 }
