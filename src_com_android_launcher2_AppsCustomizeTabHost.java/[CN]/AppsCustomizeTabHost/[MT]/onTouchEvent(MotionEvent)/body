@@ -1,0 +1,6 @@
+{
+  if (event.getY() < mAppsCustomizePane.getBottom()) {
+    return true;
+  }
+  return super.onTouchEvent(event);
+}
