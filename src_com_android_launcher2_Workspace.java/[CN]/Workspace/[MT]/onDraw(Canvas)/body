@@ -23,22 +23,26 @@
     }
   }
   for (int i=0; i < mFolderOuterRings.size(); i++) {
-    FolderIcon fi=mFolderOuterRings.get(i);
+    FolderRingAnimator fra=mFolderOuterRings.get(i);
     Drawable d=FolderIcon.sFolderOuterRingDrawable;
-    int width=(int)(d.getIntrinsicWidth() * fi.getOuterRingScale());
-    int height=(int)(d.getIntrinsicHeight() * fi.getOuterRingScale());
-    fi.getFolderLocation(mTempLocation);
+    int width=(int)(d.getIntrinsicWidth() * fra.getOuterRingScale());
+    int height=(int)(d.getIntrinsicHeight() * fra.getOuterRingScale());
+    fra.getLocation(mTempLocation);
     int x=mTempLocation[0] + mScrollX - width / 2;
     int y=mTempLocation[1] + mScrollY - height / 2;
     d.setBounds(x,y,x + width,y + height);
     d.draw(canvas);
-    d=FolderIcon.sFolderInnerRingDrawable;
-    width=(int)(fi.getMeasuredWidth() * fi.getInnerRingScale());
-    height=(int)(fi.getMeasuredHeight() * fi.getInnerRingScale());
-    x=mTempLocation[0] + mScrollX - width / 2;
-    y=mTempLocation[1] + mScrollY - height / 2;
-    d.setBounds(x,y,x + width,y + height);
-    d.draw(canvas);
+    if (fra.mFolderIcon != null) {
+      int folderWidth=fra.mFolderIcon != null ? fra.mFolderIcon.getMeasuredWidth() : mCellWidth;
+      int folderHeight=fra.mFolderIcon != null ? fra.mFolderIcon.getMeasuredWidth() : mCellHeight;
+      d=FolderIcon.sFolderInnerRingDrawable;
+      width=(int)(folderWidth * fra.getInnerRingScale());
+      height=(int)(folderHeight * fra.getInnerRingScale());
+      x=mTempLocation[0] + mScrollX - width / 2;
+      y=mTempLocation[1] + mScrollY - height / 2;
+      d.setBounds(x,y,x + width,y + height);
+      d.draw(canvas);
+    }
   }
   super.onDraw(canvas);
 }
