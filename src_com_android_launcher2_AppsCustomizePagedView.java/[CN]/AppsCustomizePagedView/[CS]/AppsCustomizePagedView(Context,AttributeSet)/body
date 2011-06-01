@@ -5,7 +5,6 @@
   mContentType=ContentType.Applications;
   mApps=new ArrayList<ApplicationInfo>();
   mWidgets=new ArrayList<Object>();
-  mWallpapers=new ArrayList<ResolveInfo>();
   mIconCache=((LauncherApplication)context.getApplicationContext()).getIconCache();
   mWidgetPreviewCache=new LruCache<Object,Bitmap>(sWidgetPreviewCacheSize){
     protected int sizeOf(    Object key,    Bitmap value){
@@ -24,8 +23,6 @@
   mCellHeightGap=a.getDimensionPixelSize(R.styleable.AppsCustomizePagedView_widgetCellHeightGap,10);
   mWidgetCountX=a.getInt(R.styleable.AppsCustomizePagedView_widgetCountX,2);
   mWidgetCountY=a.getInt(R.styleable.AppsCustomizePagedView_widgetCountY,2);
-  mWallpaperCountX=a.getInt(R.styleable.AppsCustomizePagedView_wallpaperCountX,2);
-  mWallpaperCountY=a.getInt(R.styleable.AppsCustomizePagedView_wallpaperCountY,2);
   a.recycle();
   mWidgetSpacingLayout=new PagedViewCellLayout(context);
   setupPage(mWidgetSpacingLayout);
