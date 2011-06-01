@@ -1,10 +1,12 @@
 {
   mLauncher=launcher;
   mFolderIcon=folderIcon;
-  if (sFolderOuterRingDrawable == null) {
-    sFolderOuterRingDrawable=launcher.getResources().getDrawable(R.drawable.portal_ring_outer_holo);
+  mOuterRingDrawable=launcher.getResources().getDrawable(R.drawable.portal_ring_outer_holo);
+  mInnerRingDrawable=launcher.getResources().getDrawable(R.drawable.portal_ring_inner_holo);
+  if (sSharedOuterRingDrawable == null) {
+    sSharedOuterRingDrawable=launcher.getResources().getDrawable(R.drawable.portal_ring_outer_holo);
   }
-  if (sFolderInnerRingDrawable == null) {
-    sFolderInnerRingDrawable=launcher.getResources().getDrawable(R.drawable.portal_ring_inner_holo);
+  if (sSharedInnerRingDrawable == null) {
+    sSharedInnerRingDrawable=launcher.getResources().getDrawable(R.drawable.portal_ring_inner_holo);
   }
 }

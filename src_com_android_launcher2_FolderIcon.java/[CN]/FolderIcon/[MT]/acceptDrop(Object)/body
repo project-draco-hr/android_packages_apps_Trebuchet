@@ -1,0 +1,4 @@
+{
+  final ItemInfo item=(ItemInfo)dragInfo;
+  return willAcceptItem(item);
+}

@@ -1,14 +1,14 @@
 {
   int tvLocation[]=new int[2];
   int wsLocation[]=new int[2];
-  v.getLocationOnScreen(tvLocation);
-  getLocationOnScreen(wsLocation);
-  if (mCellWidth < 0 || mCellHeight < 0) {
+  v.getLocationInWindow(tvLocation);
+  getLocationInWindow(wsLocation);
+  if (mCellWidth < 0 || mCellHeight < 0 && mDragTargetLayout != null) {
     mCellWidth=mDragTargetLayout.getCellWidth();
     mCellHeight=mDragTargetLayout.getCellHeight();
   }
-  int x=tvLocation[0] - wsLocation[0] + mCellWidth / 2;
-  int y=tvLocation[1] - wsLocation[1] + mCellHeight / 2;
+  int x=tvLocation[0] - wsLocation[0] + v.getMeasuredWidth() / 2;
+  int y=tvLocation[1] - wsLocation[1] + v.getMeasuredHeight() / 2;
   if (mDragFolderRingAnimator == null) {
     mDragFolderRingAnimator=new FolderRingAnimator(mLauncher,null);
   }
@@ -16,5 +16,7 @@
   mDragFolderRingAnimator.animateToAcceptState();
   showFolderAccept(mDragFolderRingAnimator);
   mCreateUserFolderOnDrop=true;
-  mDragTargetLayout.clearDragOutlines();
+  if (mDragTargetLayout != null) {
+    mDragTargetLayout.clearDragOutlines();
+  }
 }

@@ -1,9 +1,0 @@
-{
-  mTargetCell=findNearestArea(originX,originY,1,1,target,mTargetCell);
-  View v=target.getChildAt(mTargetCell[0],mTargetCell[1]);
-  boolean hasntMoved=mDragInfo != null && (mDragInfo.cellX == mTargetCell[0] && mDragInfo.cellY == mTargetCell[1]);
-  if (v == null || hasntMoved)   return false;
-  boolean aboveShortcut=(v.getTag() instanceof ShortcutInfo);
-  boolean willBecomeShortcut=(info.itemType == LauncherSettings.Favorites.ITEM_TYPE_APPLICATION || info.itemType == LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT);
-  return (aboveShortcut && willBecomeShortcut);
-}

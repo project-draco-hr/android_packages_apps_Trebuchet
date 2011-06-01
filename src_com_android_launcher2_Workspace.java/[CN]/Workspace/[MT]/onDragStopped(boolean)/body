@@ -1,7 +1,7 @@
 {
   mLastDragView=null;
   if (!success) {
-    doDragExit();
+    doDragExit(null);
   }
   mIsDragInProcess=false;
   updateWhichPagesAcceptDrops(mShrinkState);

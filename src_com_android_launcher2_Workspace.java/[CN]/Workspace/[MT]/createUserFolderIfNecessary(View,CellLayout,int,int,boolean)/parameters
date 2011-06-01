@@ -1,5 +1,0 @@
-View newView
-CellLayout target
-int originX
-int originY
-boolean external

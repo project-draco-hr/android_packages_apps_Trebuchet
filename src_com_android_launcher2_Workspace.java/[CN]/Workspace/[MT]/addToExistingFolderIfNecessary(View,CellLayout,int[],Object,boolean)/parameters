@@ -1,0 +1,5 @@
+View newView
+CellLayout target
+int[] tagetCell
+Object dragInfo
+boolean external

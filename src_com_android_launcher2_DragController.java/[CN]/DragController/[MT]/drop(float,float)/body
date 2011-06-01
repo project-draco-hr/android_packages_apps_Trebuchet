@@ -11,5 +11,5 @@
       accepted=true;
     }
   }
-  mDragObject.dragSource.onDropCompleted((View)dropTarget,mDragObject.dragInfo,accepted);
+  mDragObject.dragSource.onDropCompleted((View)dropTarget,mDragObject,accepted);
 }

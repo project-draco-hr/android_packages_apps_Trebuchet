@@ -31,10 +31,17 @@ break;
 default :
 throw new IllegalStateException("Unknown item type: " + info.itemType);
 }
-if (touchXY != null && createUserFolderIfNecessary(view,cellLayout,touchXY[0],touchXY[1],true)) {
+int spanX=mDragInfo != null ? mDragInfo.spanX : 1;
+int spanY=mDragInfo != null ? mDragInfo.spanY : 1;
+if (touchXY != null) {
+mTargetCell=findNearestArea((int)touchXY[0],(int)touchXY[1],spanX,spanY,cellLayout,mTargetCell);
+if (createUserFolderIfNecessary(view,cellLayout,mTargetCell,true)) {
 return;
 }
-mTargetCell=new int[2];
+if (addToExistingFolderIfNecessary(view,cellLayout,mTargetCell,dragInfo,true)) {
+return;
+}
+}
 if (touchXY != null) {
 mTargetCell=findNearestVacantArea(touchXY[0],touchXY[1],1,1,null,cellLayout,mTargetCell);
 }

@@ -1,0 +1,7 @@
+{
+  if (mDragFolderRingAnimator != null && mCreateUserFolderOnDrop) {
+    mDragFolderRingAnimator.animateToNaturalState();
+  }
+  mCreateUserFolderOnDrop=false;
+  mFolderCreationAlarm.cancelAlarm();
+}

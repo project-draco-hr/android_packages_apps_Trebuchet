@@ -1,6 +1,0 @@
-{
-  if (!willAcceptItem((ItemInfo)d.dragInfo))   return;
-  determineFolderLocationInWorkspace();
-  mLauncher.getWorkspace().showFolderAccept(mFolderRingAnimator);
-  mFolderRingAnimator.animateToAcceptState();
-}

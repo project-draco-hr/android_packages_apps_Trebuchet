@@ -1,7 +1,10 @@
 {
-  ValueAnimator va=ValueAnimator.ofFloat(0f,1f);
-  va.setDuration(CONSUMPTION_ANIMATION_DURATION);
-  va.addUpdateListener(new AnimatorUpdateListener(){
+  if (mAcceptAnimator != null) {
+    mAcceptAnimator.cancel();
+  }
+  mNeutralAnimator=ValueAnimator.ofFloat(0f,1f);
+  mNeutralAnimator.setDuration(CONSUMPTION_ANIMATION_DURATION);
+  mNeutralAnimator.addUpdateListener(new AnimatorUpdateListener(){
     public void onAnimationUpdate(    ValueAnimator animation){
       final float percent=(Float)animation.getAnimatedValue();
       mOuterRingScale=OUTER_RING_BASELINE_SCALE + OUTER_RING_GROWTH_FACTOR - percent * OUTER_RING_GROWTH_FACTOR;
@@ -13,14 +16,14 @@
     }
   }
 );
-  va.addListener(new AnimatorListenerAdapter(){
+  mNeutralAnimator.addListener(new AnimatorListenerAdapter(){
     @Override public void onAnimationEnd(    Animator animation){
       if (mFolderIcon != null) {
-        mFolderIcon.setBackgroundDrawable(sFolderInnerRingDrawable);
+        mFolderIcon.setBackgroundDrawable(mInnerRingDrawable);
       }
       mLauncher.getWorkspace().hideFolderAccept(FolderRingAnimator.this);
     }
   }
 );
-  va.start();
+  mNeutralAnimator.start();
 }

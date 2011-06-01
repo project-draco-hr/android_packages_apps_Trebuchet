@@ -1,0 +1,18 @@
+{
+  if (success) {
+    if (target != this && mDragInfo != null) {
+      final CellLayout cellLayout=(CellLayout)getChildAt(mDragInfo.screen);
+      cellLayout.removeView(mDragInfo.cell);
+      if (mDragInfo.cell instanceof DropTarget) {
+        mDragController.removeDropTarget((DropTarget)mDragInfo.cell);
+      }
+    }
+  }
+ else   if (mDragInfo != null) {
+    doDragExit(null);
+    ((CellLayout)getChildAt(mDragInfo.screen)).onDropChild(mDragInfo.cell,false);
+  }
+  mLauncher.unlockScreenOrientation();
+  mDragOutline=null;
+  mDragInfo=null;
+}

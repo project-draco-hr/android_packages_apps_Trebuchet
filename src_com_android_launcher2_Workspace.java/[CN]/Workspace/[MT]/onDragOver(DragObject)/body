@@ -52,27 +52,28 @@
         final View child=(mDragInfo == null) ? null : mDragInfo.cell;
         mapPointFromSelfToChild(mDragTargetLayout,mDragViewVisualCenter,null);
         ItemInfo info=(ItemInfo)d.dragInfo;
-        boolean willCreateUserFolder=willCreateUserFolder(info,mDragTargetLayout,(int)mDragViewVisualCenter[0],(int)mDragViewVisualCenter[1]);
-        View newDropOver=null;
-        if (willCreateUserFolder) {
-          newDropOver=mDragTargetLayout.getChildAt(mTargetCell[0],mTargetCell[1]);
-        }
-        if (newDropOver != mLastDragOverView || !willCreateUserFolder) {
-          if (mDragFolderRingAnimator != null && mCreateUserFolderOnDrop) {
-            mDragFolderRingAnimator.animateToNaturalState();
+        mTargetCell=findNearestArea((int)mDragViewVisualCenter[0],(int)mDragViewVisualCenter[1],1,1,mDragTargetLayout,mTargetCell);
+        final View dragOverView=mDragTargetLayout.getChildAt(mTargetCell[0],mTargetCell[1]);
+        boolean userFolderPending=willCreateUserFolder(info,dragOverView,mTargetCell);
+        boolean isOverFolder=dragOverView instanceof FolderIcon;
+        if (dragOverView != mLastDragOverView) {
+          cancelFolderCreation();
+          if (mLastDragOverView != null && mLastDragOverView instanceof FolderIcon) {
+            ((FolderIcon)mLastDragOverView).onDragExit(d.dragInfo);
           }
-          mCreateUserFolderOnDrop=false;
-          mFolderCreationAlarm.cancelAlarm();
-          mIsDraggingOverIcon=false;
         }
-        if (willCreateUserFolder && !mIsDraggingOverIcon) {
-          mIsDraggingOverIcon=true;
-          mLastDragOverView=mDragTargetLayout.getChildAt(mTargetCell[0],mTargetCell[1]);
-          mFolderCreationAlarm.setOnAlarmListener(new FolderCreationAlarmListener(mLastDragOverView));
+        if (userFolderPending && dragOverView != mLastDragOverView) {
+          mFolderCreationAlarm.setOnAlarmListener(new FolderCreationAlarmListener(dragOverView));
           mFolderCreationAlarm.setAlarm(FOLDER_CREATION_TIMEOUT);
-          mDragTargetLayout.clearDragOutlines();
         }
-        if (!mCreateUserFolderOnDrop) {
+        if (dragOverView != mLastDragOverView && isOverFolder) {
+          ((FolderIcon)dragOverView).onDragEnter(d.dragInfo);
+          if (mDragTargetLayout != null) {
+            mDragTargetLayout.clearDragOutlines();
+          }
+        }
+        mLastDragOverView=dragOverView;
+        if (!mCreateUserFolderOnDrop && !isOverFolder) {
           mDragTargetLayout.visualizeDropLocation(child,mDragOutline,(int)mDragViewVisualCenter[0],(int)mDragViewVisualCenter[1],item.spanX,item.spanY);
         }
       }

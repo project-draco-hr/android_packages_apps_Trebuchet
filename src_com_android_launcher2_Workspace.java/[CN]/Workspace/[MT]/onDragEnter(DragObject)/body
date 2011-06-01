@@ -1,5 +1,6 @@
 {
   mDragTargetLayout=null;
+  mLastDragOverView=null;
   if (!mIsSmall) {
     mDragTargetLayout=getCurrentDropLayout();
     mDragTargetLayout.onDragEnter();

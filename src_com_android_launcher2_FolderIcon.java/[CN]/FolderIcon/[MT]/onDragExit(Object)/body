@@ -1,0 +1,4 @@
+{
+  if (!willAcceptItem((ItemInfo)dragInfo))   return;
+  mFolderRingAnimator.animateToNaturalState();
+}

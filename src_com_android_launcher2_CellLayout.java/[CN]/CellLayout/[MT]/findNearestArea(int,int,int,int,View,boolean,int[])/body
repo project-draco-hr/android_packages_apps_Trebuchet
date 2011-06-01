@@ -30,10 +30,9 @@
     }
   }
   markCellsAsOccupiedForView(ignoreView);
-  if (bestDistance < Double.MAX_VALUE) {
-    return bestXY;
+  if (bestDistance == Double.MAX_VALUE) {
+    bestXY[0]=-1;
+    bestXY[1]=-1;
   }
- else {
-    return null;
-  }
+  return bestXY;
 }

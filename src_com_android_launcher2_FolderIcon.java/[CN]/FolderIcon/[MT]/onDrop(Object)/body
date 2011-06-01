@@ -1,0 +1,12 @@
+{
+  ShortcutInfo item;
+  if (dragInfo instanceof ApplicationInfo) {
+    item=((ApplicationInfo)dragInfo).makeShortcut();
+  }
+ else {
+    item=(ShortcutInfo)dragInfo;
+  }
+  item.cellX=-1;
+  item.cellY=-1;
+  addItem(item);
+}

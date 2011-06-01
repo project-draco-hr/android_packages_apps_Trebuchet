@@ -1,4 +1,0 @@
-{
-  final ItemInfo item=(ItemInfo)d.dragInfo;
-  return willAcceptItem(item);
-}

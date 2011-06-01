@@ -4,6 +4,7 @@
     mPendingScrollDirection=direction;
     final int page=mCurrentPage + (direction == DragController.SCROLL_LEFT ? -1 : 1);
     final CellLayout layout=(CellLayout)getChildAt(page);
+    cancelFolderCreation();
     if (layout != null) {
       layout.setIsDragOverlapping(true);
       if (mDragTargetLayout != null) {
