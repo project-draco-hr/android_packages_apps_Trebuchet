@@ -1,2 +1,24 @@
 {
+  if (v instanceof PagedViewIcon) {
+    final ApplicationInfo appInfo=(ApplicationInfo)v.getTag();
+    animateClickFeedback(v,new Runnable(){
+      @Override public void run(){
+        mLauncher.startActivitySafely(appInfo.intent,appInfo);
+      }
+    }
+);
+  }
+ else   if (v instanceof PagedViewWidget) {
+    Toast.makeText(getContext(),R.string.long_press_widget_to_add,Toast.LENGTH_SHORT).show();
+    float offsetY=getResources().getDimensionPixelSize(R.dimen.dragViewOffsetY);
+    final ImageView p=(ImageView)v.findViewById(R.id.widget_preview);
+    AnimatorSet bounce=new AnimatorSet();
+    ValueAnimator tyuAnim=ObjectAnimator.ofFloat(p,"translationY",offsetY);
+    tyuAnim.setDuration(125);
+    ValueAnimator tydAnim=ObjectAnimator.ofFloat(p,"translationY",0f);
+    tydAnim.setDuration(100);
+    bounce.play(tyuAnim).before(tydAnim);
+    bounce.setInterpolator(new AccelerateInterpolator());
+    bounce.start();
+  }
 }
