@@ -8,6 +8,7 @@
     }
   }
 );
+  mLauncher.exitSpringLoadedDragMode();
   mLauncher.getWorkspace().onDragStopped(success);
   mLauncher.unlockScreenOrientation();
 }

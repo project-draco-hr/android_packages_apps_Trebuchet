@@ -14,14 +14,19 @@
   final View toView=tmpView;
   setPivotsForZoom(toView,toState,scale);
   if (toAllApps) {
-    if (!springLoaded) {
+    if (springLoaded) {
+      if (toState == State.APPS_CUSTOMIZE) {
+        mWorkspace.shrink(ShrinkState.BOTTOM_HIDDEN,animated);
+      }
+ else {
+        mWorkspace.shrink(ShrinkState.BOTTOM_VISIBLE,animated);
+      }
+    }
+ else {
       mWorkspace.shrink(ShrinkState.BOTTOM_HIDDEN,animated);
       if (LauncherApplication.isScreenLarge()) {
         mAllAppsPagedView.resetSuccessfulDropFlag();
       }
-    }
- else {
-      mWorkspace.shrink(ShrinkState.BOTTOM_VISIBLE,animated);
     }
   }
  else {

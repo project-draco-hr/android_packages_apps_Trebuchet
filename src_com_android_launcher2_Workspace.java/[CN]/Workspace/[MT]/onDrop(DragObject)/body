@@ -88,7 +88,6 @@
     int loc[]=new int[2];
     getViewLocationRelativeToSelf(d.dragView,loc);
     setPositionForDropAnimation(d.dragView,loc[0],loc[1],parent,cell);
-    boolean animateDrop=!mWasSpringLoadedOnDragExit;
-    parent.onDropChild(cell,animateDrop);
+    parent.onDropChild(cell,true);
   }
 }

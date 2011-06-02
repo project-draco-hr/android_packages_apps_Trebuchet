@@ -1,5 +1,4 @@
 {
-  mWasSpringLoadedOnDragExit=mShrinkState == ShrinkState.SPRING_LOADED;
   if (mDragFolderRingAnimator != null && mCreateUserFolderOnDrop) {
     mDragFolderRingAnimator.animateToNaturalState();
   }
@@ -14,9 +13,6 @@
   }
   if (!mIsPageMoving) {
     hideOutlines();
-  }
-  if (mShrinkState == ShrinkState.SPRING_LOADED) {
-    mLauncher.exitSpringLoadedDragMode();
   }
   clearAllHovers();
 }

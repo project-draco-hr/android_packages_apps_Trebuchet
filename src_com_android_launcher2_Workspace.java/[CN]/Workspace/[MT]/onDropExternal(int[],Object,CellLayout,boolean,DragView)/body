@@ -49,8 +49,7 @@ mTargetCell=findNearestVacantArea(touchXY[0],touchXY[1],1,1,null,cellLayout,mTar
 cellLayout.findCellForSpan(mTargetCell,1,1);
 }
 addInScreen(view,indexOfChild(cellLayout),mTargetCell[0],mTargetCell[1],info.spanX,info.spanY,insertAtFirst);
-boolean animateDrop=!mWasSpringLoadedOnDragExit;
-cellLayout.onDropChild(view,animateDrop);
+cellLayout.onDropChild(view,false);
 cellLayout.animateDrop();
 CellLayout.LayoutParams lp=(CellLayout.LayoutParams)view.getLayoutParams();
 cellLayout.getChildrenLayout().measureChild(view);
