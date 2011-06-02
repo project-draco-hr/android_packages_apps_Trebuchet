@@ -22,8 +22,8 @@
  else {
     widthGap=heightGap=minGap;
   }
-  int newWidth=mPaddingLeft + mPaddingRight + (mCellCountX * cellWidth)+ ((mCellCountX - 1) * widthGap);
-  int newHeight=mPaddingTop + mPaddingBottom + (mCellCountY * cellHeight)+ ((mCellCountY - 1) * heightGap);
+  int newWidth=(mCellCountX * cellWidth) + ((mCellCountX - 1) * widthGap);
+  int newHeight=(mCellCountY * cellHeight) + ((mCellCountY - 1) * heightGap);
   final int count=getChildCount();
   for (int i=0; i < count; i++) {
     View child=getChildAt(i);
@@ -31,5 +31,5 @@
     int childheightMeasureSpec=MeasureSpec.makeMeasureSpec(newHeight,MeasureSpec.EXACTLY);
     child.measure(childWidthMeasureSpec,childheightMeasureSpec);
   }
-  setMeasuredDimension(newWidth,newHeight);
+  setMeasuredDimension(newWidth + mPaddingLeft + mPaddingRight,newHeight + mPaddingTop + mPaddingBottom);
 }
