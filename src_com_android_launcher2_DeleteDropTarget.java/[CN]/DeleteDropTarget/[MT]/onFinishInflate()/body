@@ -1,0 +1,8 @@
+{
+  super.onFinishInflate();
+  mIcon=(TransitionDrawable)getCompoundDrawables()[0];
+  Resources r=getResources();
+  mDefaultTextColor=getTextColors().getDefaultColor();
+  mHoverColor=r.getColor(R.color.delete_target_hover_tint);
+  mHoverPaint.setColorFilter(new PorterDuffColorFilter(mHoverColor,PorterDuff.Mode.SRC_ATOP));
+}

@@ -1,0 +1,9 @@
+{
+  ItemInfo item=(ItemInfo)info;
+  boolean isVisible=true;
+  if (!isApplication(info)) {
+    isVisible=false;
+  }
+  mActive=isVisible;
+  ((ViewGroup)getParent()).setVisibility(isVisible ? View.VISIBLE : View.GONE);
+}

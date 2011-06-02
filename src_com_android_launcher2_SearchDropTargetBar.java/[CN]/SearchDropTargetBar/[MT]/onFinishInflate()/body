@@ -1,0 +1,7 @@
+{
+  super.onFinishInflate();
+  mQSBSearchBar=findViewById(R.id.qsb_search_bar);
+  mDropTargetBar=findViewById(R.id.drag_target_bar);
+  mInfoDropTarget=(IconDropTarget)mDropTargetBar.findViewById(R.id.info_target);
+  mDeleteDropTarget=(IconDropTarget)mDropTargetBar.findViewById(R.id.delete_target);
+}

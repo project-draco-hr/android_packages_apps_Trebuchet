@@ -1,0 +1,4 @@
+{
+  mDropTargetBar.animate().alpha(0f).setDuration(sTransitionOutDuration);
+  mQSBSearchBar.animate().alpha(1f).setDuration(sTransitionInDuration);
+}
