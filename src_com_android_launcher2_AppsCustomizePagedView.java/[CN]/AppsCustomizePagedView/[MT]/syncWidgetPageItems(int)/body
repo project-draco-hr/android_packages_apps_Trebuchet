@@ -2,6 +2,7 @@
   PagedViewGridLayout layout=(PagedViewGridLayout)getChildAt(page);
   layout.removeAllViews();
   int numWidgetsPerPage=mWidgetCountX * mWidgetCountY;
+  int numPages=(int)Math.ceil(mWidgets.size() / (float)numWidgetsPerPage);
   int offset=page * numWidgetsPerPage;
   int cellWidth=((mWidgetSpacingLayout.getContentWidth() - mPageLayoutWidthGap - ((mWidgetCountX - 1) * mCellWidthGap)) / mWidgetCountX);
   int cellHeight=((mWidgetSpacingLayout.getContentHeight() - mPageLayoutHeightGap - ((mWidgetCountY - 1) * mCellHeightGap)) / mWidgetCountY);
@@ -14,7 +15,7 @@
       createItemInfo=new PendingAddWidgetInfo(info,null,null);
       final int[] cellSpans=CellLayout.rectToCell(getResources(),info.minWidth,info.minHeight,null);
       FastBitmapDrawable preview=getWidgetPreview(info,cellSpans[0],cellSpans[1],cellWidth,cellHeight);
-      widget.applyFromAppWidgetProviderInfo(info,preview,-1,cellSpans,null,false);
+      widget.applyFromAppWidgetProviderInfo(info,preview,-1,cellSpans,mPageViewIconCache,(numPages > 1));
       widget.setTag(createItemInfo);
     }
  else     if (rawInfo instanceof ResolveInfo) {
@@ -23,7 +24,7 @@
       createItemInfo.itemType=LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT;
       createItemInfo.componentName=new ComponentName(info.activityInfo.packageName,info.activityInfo.name);
       FastBitmapDrawable preview=getShortcutPreview(info,cellWidth,cellHeight);
-      widget.applyFromResolveInfo(mPackageManager,info,preview,null,false);
+      widget.applyFromResolveInfo(mPackageManager,info,preview,mPageViewIconCache,(numPages > 1));
       widget.setTag(createItemInfo);
     }
     widget.setOnClickListener(this);
