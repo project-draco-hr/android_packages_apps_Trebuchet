@@ -10,7 +10,7 @@
   for (int i=0; i < count; i++) {
     View child=getChildAt(i);
     PagedViewCellLayout.LayoutParams lp=(PagedViewCellLayout.LayoutParams)child.getLayoutParams();
-    lp.setup(mCellWidth,mCellHeight,mWidthGap,mHeightGap,((ViewGroup)getParent()).getPaddingLeft(),((ViewGroup)getParent()).getPaddingTop());
+    lp.setup(mCellWidth,mCellHeight,mWidthGap,mHeightGap,getPaddingLeft(),getPaddingTop());
     int childWidthMeasureSpec=MeasureSpec.makeMeasureSpec(lp.width,MeasureSpec.EXACTLY);
     int childheightMeasureSpec=MeasureSpec.makeMeasureSpec(lp.height,MeasureSpec.EXACTLY);
     child.measure(childWidthMeasureSpec,childheightMeasureSpec);
