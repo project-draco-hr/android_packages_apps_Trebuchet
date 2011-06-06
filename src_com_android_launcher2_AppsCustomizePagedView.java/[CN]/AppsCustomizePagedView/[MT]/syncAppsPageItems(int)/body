@@ -17,4 +17,6 @@
     int y=index / mCellCountX;
     layout.addViewToCellLayout(icon,-1,i,new PagedViewCellLayout.LayoutParams(x,y,1,1));
   }
+  layout.allowHardwareLayerCreation();
+  layout.createHardwareLayers();
 }

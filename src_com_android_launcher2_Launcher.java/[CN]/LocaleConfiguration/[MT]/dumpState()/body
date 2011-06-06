@@ -8,9 +8,6 @@
   Log.d(TAG,"mDesktopItems.size=" + mDesktopItems.size());
   Log.d(TAG,"sFolders.size=" + sFolders.size());
   mModel.dumpState();
-  if (mAllAppsGrid != null) {
-    mAllAppsGrid.dumpState();
-  }
   if (mAppsCustomizeContent != null) {
     mAppsCustomizeContent.dumpState();
   }

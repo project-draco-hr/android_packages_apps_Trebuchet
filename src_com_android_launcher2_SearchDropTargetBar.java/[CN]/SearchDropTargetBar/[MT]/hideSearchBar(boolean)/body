@@ -1,0 +1,9 @@
+{
+  if (animated) {
+    mQSBSearchBar.animate().alpha(0f).setDuration(sTransitionOutDuration);
+  }
+ else {
+    mQSBSearchBar.setAlpha(0f);
+  }
+  mIsSearchBarHidden=true;
+}

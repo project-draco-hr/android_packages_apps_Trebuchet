@@ -4,6 +4,4 @@
     mState=State.APPS_CUSTOMIZE_SPRING_LOADED;
     cameraZoomIn(State.APPS_CUSTOMIZE,true,true);
   }
- else {
-  }
 }

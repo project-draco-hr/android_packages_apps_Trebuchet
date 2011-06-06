@@ -1,4 +1,7 @@
 {
+  if (!mIsDataReady) {
+    return;
+  }
   if (DEBUG)   Log.d(TAG,"PagedView.onLayout()");
   if (mFirstLayout && mCurrentPage >= 0 && mCurrentPage < getChildCount()) {
     setHorizontalScrollBarEnabled(false);

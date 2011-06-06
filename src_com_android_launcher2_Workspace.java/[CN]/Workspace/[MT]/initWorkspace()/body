@@ -9,7 +9,6 @@
   try {
     final Resources res=getResources();
     mBackground=res.getDrawable(R.drawable.all_apps_bg_gradient);
-    mCustomizeTrayBackground=res.getDrawable(R.drawable.customize_bg_gradient);
   }
  catch (  Resources.NotFoundException e) {
   }
@@ -20,8 +19,11 @@
     @Override public void onAnimationEnd(    Animator animation){
       mIsInUnshrinkAnimation=false;
       mSyncWallpaperOffsetWithScroll=true;
-      if (mShrinkState != ShrinkState.SPRING_LOADED) {
-        mDrawCustomizeTrayBackground=false;
+      if (mShrinkState == ShrinkState.SPRING_LOADED) {
+        View layout=null;
+        if (mLastDragView != null) {
+          layout=findMatchingPageForDragOver(mLastDragView,mLastDragOriginX,mLastDragOriginY,mLastDragXOffset,mLastDragYOffset);
+        }
       }
       mWallpaperOffset.setOverrideHorizontalCatchupConstant(false);
       mAnimator=null;

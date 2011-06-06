@@ -7,46 +7,21 @@
   mWorkspace.setOnLongClickListener(this);
   mWorkspace.setup(this,dragController);
   mWorkspace.setWallpaperDimension();
-  DeleteZone allAppsDeleteZone=null;
-  ApplicationInfoDropTarget allAppsInfoTarget=null;
-  if (LauncherApplication.isScreenLarge()) {
-    mAllAppsGrid=(AllAppsView)mDragLayer.findViewById(R.id.all_apps_view);
-    mAllAppsGrid.setup(this,dragController);
-    ((View)mAllAppsGrid).setWillNotDraw(false);
-    mCustomizePagedView.setLauncher(this);
-    mCustomizePagedView.setDragController(dragController);
-    mCustomizePagedView.setAllAppsPagedView(mAllAppsPagedView);
-    mDeleteZone=(DeleteZone)mDragLayer.findViewById(R.id.delete_zone);
-    mDeleteZone.setLauncher(this);
-    mDeleteZone.setDragController(dragController);
-    mAllAppsButton=findViewById(R.id.all_apps_button);
-    mDivider=findViewById(R.id.all_apps_divider);
-    mConfigureButton=findViewById(R.id.configure_button);
-    mDeleteZone.setOverlappingViews(new View[]{mAllAppsButton,mDivider,mConfigureButton});
-    allAppsDeleteZone=(DeleteZone)findViewById(R.id.all_apps_delete_zone);
-    allAppsDeleteZone.setLauncher(this);
-    allAppsDeleteZone.setDragController(dragController);
-    allAppsDeleteZone.setDragAndDropEnabled(false);
-    allAppsInfoTarget=(ApplicationInfoDropTarget)findViewById(R.id.all_apps_info_target);
-    allAppsInfoTarget.setLauncher(this);
-    allAppsInfoTarget.setDragAndDropEnabled(false);
-    View marketButton=findViewById(R.id.market_button);
-    allAppsInfoTarget.setOverlappingView(marketButton);
-  }
- else {
-    mSearchDeleteBar=(SearchDropTargetBar)mDragLayer.findViewById(R.id.qsb_bar);
-    mAppsCustomizeTabHost=(AppsCustomizeTabHost)findViewById(R.id.apps_customize_pane);
-    mAppsCustomizeContent=(AppsCustomizePagedView)mAppsCustomizeTabHost.findViewById(R.id.apps_customize_pane_content);
-    mAppsCustomizeContent.setup(this,dragController);
-    mHandleView=(HandleView)mDragLayer.findViewById(R.id.all_apps_button);
-    mHandleView.setLauncher(this);
-    mHandleView.setOnLongClickListener(this);
-    mHandleView.setOnClickListener(new OnClickListener(){
-      public void onClick(      View v){
-        onClickAllAppsButton(v);
-      }
+  mSearchDeleteBar=(SearchDropTargetBar)mDragLayer.findViewById(R.id.qsb_bar);
+  mAppsCustomizeTabHost=(AppsCustomizeTabHost)findViewById(R.id.apps_customize_pane);
+  mAppsCustomizeContent=(AppsCustomizePagedView)mAppsCustomizeTabHost.findViewById(R.id.apps_customize_pane_content);
+  mAppsCustomizeContent.setup(this,dragController);
+  mAllAppsButton=mDragLayer.findViewById(R.id.all_apps_button);
+  mAllAppsButton.setOnClickListener(new OnClickListener(){
+    public void onClick(    View v){
+      onClickAllAppsButton(v);
     }
+  }
 );
+  if (!LauncherApplication.isScreenLarge()) {
+    HandleView handleView=(HandleView)mAllAppsButton;
+    handleView.setLauncher(this);
+    handleView.setOnLongClickListener(this);
     ImageView hotseatLeft=(ImageView)findViewById(R.id.hotseat_left);
     hotseatLeft.setContentDescription(mHotseatLabels[0]);
     hotseatLeft.setImageDrawable(mHotseatIcons[0]);
@@ -66,35 +41,25 @@
     mNextView.setHapticFeedbackEnabled(false);
     mNextView.setOnLongClickListener(this);
   }
-  mButtonCluster=(ViewGroup)findViewById(R.id.all_apps_button_cluster);
-  View.OnKeyListener listener=null;
-  if (LauncherApplication.isScreenLarge()) {
-    listener=new ButtonBarKeyEventListener();
-  }
+  if (!LauncherApplication.isScreenLarge()) {
+    mButtonCluster=(ViewGroup)findViewById(R.id.all_apps_button_cluster);
+    View.OnKeyListener listener=null;
+    if (LauncherApplication.isScreenLarge()) {
+      listener=new ButtonBarKeyEventListener();
+    }
  else {
-    listener=new DockKeyEventListener();
-  }
-  int buttonCount=mButtonCluster.getChildCount();
-  for (int i=0; i < buttonCount; ++i) {
-    mButtonCluster.getChildAt(i).setOnKeyListener(listener);
+      listener=new DockKeyEventListener();
+    }
+    int buttonCount=mButtonCluster.getChildCount();
+    for (int i=0; i < buttonCount; ++i) {
+      mButtonCluster.getChildAt(i).setOnKeyListener(listener);
+    }
   }
   dragController.setDragScoller(mWorkspace);
   dragController.setScrollView(mDragLayer);
   dragController.setMoveTarget(mWorkspace);
   dragController.addDropTarget(mWorkspace);
-  if (mDeleteZone != null) {
-    dragController.addDragListener(mDeleteZone);
-    dragController.addDropTarget(mDeleteZone);
-  }
   if (mSearchDeleteBar != null) {
     mSearchDeleteBar.setup(this,dragController);
-  }
-  if (allAppsDeleteZone != null) {
-    dragController.addDragListener(allAppsDeleteZone);
-    dragController.addDropTarget(allAppsDeleteZone);
-  }
-  if (allAppsInfoTarget != null) {
-    dragController.addDragListener(allAppsInfoTarget);
-    dragController.addDropTarget(allAppsInfoTarget);
   }
 }

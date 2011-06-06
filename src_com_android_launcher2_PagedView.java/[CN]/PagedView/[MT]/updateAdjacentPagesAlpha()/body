@@ -20,10 +20,16 @@
           if (i > 0) {
             d+=getScaledMeasuredWidth(getChildAt(i - 1)) / 2;
           }
+ else {
+            continue;
+          }
         }
  else {
           if (i < childCount - 1) {
             d+=getScaledMeasuredWidth(getChildAt(i + 1)) / 2;
+          }
+ else {
+            continue;
           }
         }
         d+=mPageSpacing;

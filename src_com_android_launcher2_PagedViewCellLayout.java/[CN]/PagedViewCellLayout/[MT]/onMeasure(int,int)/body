@@ -11,9 +11,9 @@
   int numWidthGaps=mCellCountX - 1;
   int numHeightGaps=mCellCountY - 1;
   int vSpaceLeft=heightSpecSize - mPaddingTop - mPaddingBottom- (cellHeight * mCellCountY);
-  int heightGap=vSpaceLeft / numHeightGaps;
+  int heightGap=(numHeightGaps <= 0) ? 0 : (vSpaceLeft / numHeightGaps);
   int hSpaceLeft=widthSpecSize - mPaddingLeft - mPaddingRight- (cellWidth * mCellCountX);
-  int widthGap=hSpaceLeft / numWidthGaps;
+  int widthGap=(numWidthGaps <= 0) ? 0 : (hSpaceLeft / numWidthGaps);
   int minGap=Math.min(widthGap,heightGap);
   if (mWidthGap > -1 && mHeightGap > -1) {
     widthGap=mWidthGap;

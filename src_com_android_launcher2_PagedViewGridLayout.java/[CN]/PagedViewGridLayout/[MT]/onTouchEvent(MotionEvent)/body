@@ -1,3 +1,10 @@
 {
-  return super.onTouchEvent(event) || true;
+  boolean result=super.onTouchEvent(event);
+  int count=getPageChildCount();
+  if (count > 0) {
+    View child=getChildOnPageAt(count - 1);
+    int bottom=child.getBottom();
+    result=result || (event.getY() < bottom);
+  }
+  return result;
 }

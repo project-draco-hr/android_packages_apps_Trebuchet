@@ -1,5 +1,5 @@
 {
-  if (mState == State.ALL_APPS)   return;
+  if (mState == State.APPS_CUSTOMIZE)   return;
   int index=-1;
   if (v.getId() == R.id.hotseat_left) {
     index=0;

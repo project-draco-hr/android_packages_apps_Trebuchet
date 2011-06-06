@@ -1,3 +1,0 @@
-{
-  return sIsScreenLarge && ENABLE_ROTATION;
-}

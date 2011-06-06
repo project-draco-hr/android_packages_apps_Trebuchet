@@ -1,20 +1,8 @@
 {
   Resources res=getResources();
-  final boolean fromAllApps=(fromState == State.ALL_APPS) || (fromState == State.APPS_CUSTOMIZE);
-  int duration=fromAllApps ? res.getInteger(R.integer.config_appsCustomizeZoomOutTime) : res.getInteger(R.integer.config_customizeZoomOutTime);
-  final float scaleFactor=fromAllApps ? (float)res.getInteger(R.integer.config_appsCustomizeZoomScaleFactor) : (float)res.getInteger(R.integer.config_customizeZoomScaleFactor);
-  View tmpView;
-  if (fromAllApps) {
-    tmpView=(LauncherApplication.isScreenLarge()) ? (View)mAllAppsGrid : mAppsCustomizeTabHost;
-  }
- else {
-    tmpView=mHomeCustomizationDrawer;
-  }
-  final View fromView=tmpView;
-  if (LauncherApplication.isScreenLarge()) {
-    mCustomizePagedView.endChoiceMode();
-    mAllAppsPagedView.endChoiceMode();
-  }
+  final int duration=res.getInteger(R.integer.config_appsCustomizeZoomOutTime);
+  final float scaleFactor=(float)res.getInteger(R.integer.config_appsCustomizeZoomScaleFactor);
+  final View fromView=mAppsCustomizeTabHost;
   setPivotsForZoom(fromView,fromState,scaleFactor);
   if (!springLoaded) {
     mWorkspace.unshrink(animated);
@@ -55,15 +43,7 @@
       }
     }
 );
-    AnimatorSet toolbarHideAnim=new AnimatorSet();
-    AnimatorSet toolbarShowAnim=new AnimatorSet();
-    if (!springLoaded) {
-      hideAndShowToolbarButtons(State.WORKSPACE,toolbarShowAnim,toolbarHideAnim);
-    }
-    mStateAnimation.playTogether(scaleAnim,toolbarHideAnim,alphaAnim);
-    final int fadeInTime=res.getInteger(R.integer.config_toolbarButtonFadeInTime);
-    final int unshrinkTime=res.getInteger(R.integer.config_workspaceUnshrinkTime);
-    mStateAnimation.play(toolbarShowAnim).after(unshrinkTime - fadeInTime);
+    mStateAnimation.playTogether(scaleAnim,alphaAnim);
     mStateAnimation.start();
   }
  else {
@@ -71,9 +51,6 @@
     if (fromView instanceof LauncherTransitionable) {
       ((LauncherTransitionable)fromView).onLauncherTransitionStart(null);
       ((LauncherTransitionable)fromView).onLauncherTransitionEnd(null);
-    }
-    if (!springLoaded) {
-      hideAndShowToolbarButtons(State.WORKSPACE,null,null);
     }
   }
 }

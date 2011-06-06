@@ -12,10 +12,6 @@
   CellLayout dropTargetLayout=mDragTargetLayout;
   if (d.dragSource != this) {
     final int[] touchXY=new int[]{(int)mDragViewVisualCenter[0],(int)mDragViewVisualCenter[1]};
-    if (LauncherApplication.isScreenLarge() && (mIsSmall || mIsInUnshrinkAnimation) && !mLauncher.isAllAppsVisible()) {
-      ((ItemInfo)d.dragInfo).dropPos=touchXY;
-      return;
-    }
     onDropExternal(touchXY,d.dragInfo,dropTargetLayout,false,d.dragView);
   }
  else   if (mDragInfo != null) {

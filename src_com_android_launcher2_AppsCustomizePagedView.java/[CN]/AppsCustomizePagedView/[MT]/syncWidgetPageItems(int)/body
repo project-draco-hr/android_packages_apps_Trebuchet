@@ -4,8 +4,8 @@
   int numWidgetsPerPage=mWidgetCountX * mWidgetCountY;
   int numPages=(int)Math.ceil(mWidgets.size() / (float)numWidgetsPerPage);
   int offset=page * numWidgetsPerPage;
-  int cellWidth=((mWidgetSpacingLayout.getContentWidth() - mPageLayoutWidthGap - ((mWidgetCountX - 1) * mCellWidthGap)) / mWidgetCountX);
-  int cellHeight=((mWidgetSpacingLayout.getContentHeight() - mPageLayoutHeightGap - ((mWidgetCountY - 1) * mCellHeightGap)) / mWidgetCountY);
+  int cellWidth=((mWidgetSpacingLayout.getContentWidth() - mPageLayoutWidthGap - ((mWidgetCountX - 1) * mWidgetWidthGap)) / mWidgetCountX);
+  int cellHeight=((mWidgetSpacingLayout.getContentHeight() - mPageLayoutHeightGap - ((mWidgetCountY - 1) * mWidgetHeightGap)) / mWidgetCountY);
   for (int i=0; i < Math.min(numWidgetsPerPage,mWidgets.size() - offset); ++i) {
     Object rawInfo=mWidgets.get(offset + i);
     PendingAddItemInfo createItemInfo=null;
@@ -33,8 +33,8 @@
     int ix=i % mWidgetCountX;
     int iy=i / mWidgetCountX;
     PagedViewGridLayout.LayoutParams lp=new PagedViewGridLayout.LayoutParams(cellWidth,cellHeight);
-    lp.leftMargin=(ix * cellWidth) + (ix * mCellWidthGap);
-    lp.topMargin=(iy * cellHeight) + (iy * mCellHeightGap);
+    lp.leftMargin=(ix * cellWidth) + (ix * mWidgetWidthGap);
+    lp.topMargin=(iy * cellHeight) + (iy * mWidgetHeightGap);
     layout.addView(widget,lp);
   }
 }

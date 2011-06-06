@@ -46,7 +46,6 @@ case MotionEvent.ACTION_DOWN:
     break;
   }
 case MotionEvent.ACTION_UP:
-onWallpaperTap(ev);
 case MotionEvent.ACTION_CANCEL:
 mTouchState=TOUCH_STATE_REST;
 mAllowLongPress=false;

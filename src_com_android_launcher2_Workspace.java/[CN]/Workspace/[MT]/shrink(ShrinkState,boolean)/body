@@ -47,9 +47,6 @@
     y=screenHeight / 2 - scaledPageHeight / 2;
     finalAlpha=1.0f;
   }
- else   if (shrinkState == ShrinkState.TOP) {
-    y=(screenHeight - getCustomizeDrawerHeight() - scaledPageHeight) / 2;
-  }
   int duration;
   if (shrinkState == ShrinkState.BOTTOM_HIDDEN || shrinkState == ShrinkState.BOTTOM_VISIBLE) {
     duration=res.getInteger(R.integer.config_appsCustomizeWorkspaceShrinkTime);
@@ -123,15 +120,11 @@
   final boolean enableWallpaperEffects=isHardwareAccelerated();
   if (enableWallpaperEffects) {
 switch (shrinkState) {
-case TOP:
-      wallpaperOffset=0.5f + offsetFromCenter;
-    mWallpaperOffset.setVerticalCatchupConstant(isLandscape ? 0.46f : 0.44f);
-  break;
 case MIDDLE:
 case SPRING_LOADED:
-wallpaperOffset=0.5f;
-mWallpaperOffset.setVerticalCatchupConstant(isLandscape ? 0.34f : 0.32f);
-break;
+      wallpaperOffset=0.5f;
+    mWallpaperOffset.setVerticalCatchupConstant(isLandscape ? 0.34f : 0.32f);
+  break;
 case BOTTOM_HIDDEN:
 case BOTTOM_VISIBLE:
 wallpaperOffset=0.5f - offsetFromCenter;
@@ -186,10 +179,5 @@ setHorizontalWallpaperOffset(0.5f);
 updateWallpaperOffsetImmediately();
 }
 setChildrenDrawnWithCacheEnabled(true);
-if (shrinkState == ShrinkState.TOP) {
-showBackgroundGradientForCustomizeTray();
-}
- else {
 showBackgroundGradientForAllApps();
-}
 }

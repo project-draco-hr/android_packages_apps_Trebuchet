@@ -1,0 +1,8 @@
+{
+  boolean remeasureTabWidth=(mTabs.getLayoutParams().width <= 0);
+  super.onMeasure(widthMeasureSpec,heightMeasureSpec);
+  if (remeasureTabWidth) {
+    mTabs.getLayoutParams().width=mAppsCustomizePane.getPageContentWidth();
+    super.onMeasure(widthMeasureSpec,heightMeasureSpec);
+  }
+}

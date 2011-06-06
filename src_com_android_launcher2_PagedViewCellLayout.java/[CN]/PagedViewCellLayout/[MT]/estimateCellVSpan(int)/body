@@ -1,3 +1,5 @@
 {
-  return (height + mCellHeight) / mCellHeight;
+  int availHeight=height - (mPaddingTop + mPaddingBottom);
+  int n=Math.max(1,(availHeight + mHeightGap) / (mCellHeight + mHeightGap));
+  return n;
 }

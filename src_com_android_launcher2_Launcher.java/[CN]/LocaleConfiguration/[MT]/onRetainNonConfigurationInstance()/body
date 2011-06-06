@@ -1,8 +1,5 @@
 {
   mModel.stopLoader();
-  if (mAllAppsGrid != null) {
-    mAllAppsGrid.surrender();
-  }
   if (mAppsCustomizeContent != null) {
     mAppsCustomizeContent.surrender();
   }

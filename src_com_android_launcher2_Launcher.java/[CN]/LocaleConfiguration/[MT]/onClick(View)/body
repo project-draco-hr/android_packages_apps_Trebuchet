@@ -17,8 +17,8 @@
       handleFolderClick(fi);
     }
   }
- else   if (v == mHandleView) {
-    if (mState == State.ALL_APPS) {
+ else   if (v == mAllAppsButton) {
+    if (mState == State.APPS_CUSTOMIZE) {
       showWorkspace(true);
     }
  else {

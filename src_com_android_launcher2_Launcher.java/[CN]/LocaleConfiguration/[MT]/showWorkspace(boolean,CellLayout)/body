@@ -5,11 +5,8 @@
  else {
     mWorkspace.unshrink(animated);
   }
-  if (mState == State.ALL_APPS || mState == State.APPS_CUSTOMIZE) {
+  if (mState == State.APPS_CUSTOMIZE) {
     closeAllApps(animated);
-  }
- else   if (mState == State.CUSTOMIZE) {
-    hideCustomizationDrawer(animated);
   }
   mState=State.WORKSPACE;
   mUserPresent=true;

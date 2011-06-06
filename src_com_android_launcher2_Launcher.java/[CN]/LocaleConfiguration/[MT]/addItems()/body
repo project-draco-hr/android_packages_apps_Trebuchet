@@ -1,11 +1,4 @@
 {
-  if (LauncherApplication.isScreenLarge()) {
-    if (mState != State.CUSTOMIZE) {
-      showCustomizationDrawer(true);
-    }
-  }
- else {
-    showWorkspace(true);
-    showAddDialog(-1,-1);
-  }
+  showWorkspace(true);
+  showAddDialog(-1,-1);
 }

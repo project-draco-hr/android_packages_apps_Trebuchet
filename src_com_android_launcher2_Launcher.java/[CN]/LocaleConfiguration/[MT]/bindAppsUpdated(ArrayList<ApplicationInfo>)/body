@@ -4,14 +4,8 @@
   if (mWorkspace != null) {
     mWorkspace.updateShortcuts(apps);
   }
-  if (mAllAppsGrid != null) {
-    mAllAppsGrid.updateApps(apps);
-  }
   if (mAppsCustomizeContent != null) {
     mAppsCustomizeContent.updateApps(apps);
-  }
-  if (mCustomizePagedView != null) {
-    mCustomizePagedView.updateApps(apps);
   }
   updateIconsAffectedByPackageManagerChanges();
 }

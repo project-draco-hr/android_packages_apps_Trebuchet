@@ -1,0 +1,12 @@
+{
+  int width=MeasureSpec.getSize(widthMeasureSpec);
+  int height=MeasureSpec.getSize(heightMeasureSpec);
+  if (!isDataReady()) {
+    if (testDataReady()) {
+      setDataIsReady();
+      setMeasuredDimension(width,height);
+      onDataReady(width,height);
+    }
+  }
+  super.onMeasure(widthMeasureSpec,heightMeasureSpec);
+}

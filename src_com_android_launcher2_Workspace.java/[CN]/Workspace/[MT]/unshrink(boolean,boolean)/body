@@ -88,29 +88,22 @@
     final boolean enableWallpaperEffects=isHardwareAccelerated();
     if (enableWallpaperEffects) {
 switch (mShrinkState) {
-case TOP:
+case MIDDLE:
+case SPRING_LOADED:
         if (animated) {
-          mWallpaperOffset.setHorizontalCatchupConstant(isLandscape ? 0.65f : 0.62f);
-          mWallpaperOffset.setVerticalCatchupConstant(isLandscape ? 0.65f : 0.62f);
+          mWallpaperOffset.setHorizontalCatchupConstant(isLandscape ? 0.49f : 0.46f);
+          mWallpaperOffset.setVerticalCatchupConstant(isLandscape ? 0.49f : 0.46f);
           mWallpaperOffset.setOverrideHorizontalCatchupConstant(true);
         }
       break;
-case MIDDLE:
-case SPRING_LOADED:
+case BOTTOM_HIDDEN:
+case BOTTOM_VISIBLE:
     if (animated) {
-      mWallpaperOffset.setHorizontalCatchupConstant(isLandscape ? 0.49f : 0.46f);
-      mWallpaperOffset.setVerticalCatchupConstant(isLandscape ? 0.49f : 0.46f);
+      mWallpaperOffset.setHorizontalCatchupConstant(isLandscape ? 0.65f : 0.65f);
+      mWallpaperOffset.setVerticalCatchupConstant(isLandscape ? 0.65f : 0.65f);
       mWallpaperOffset.setOverrideHorizontalCatchupConstant(true);
     }
   break;
-case BOTTOM_HIDDEN:
-case BOTTOM_VISIBLE:
-if (animated) {
-  mWallpaperOffset.setHorizontalCatchupConstant(isLandscape ? 0.65f : 0.65f);
-  mWallpaperOffset.setVerticalCatchupConstant(isLandscape ? 0.65f : 0.65f);
-  mWallpaperOffset.setOverrideHorizontalCatchupConstant(true);
-}
-break;
 }
 }
 if (animated) {
@@ -122,25 +115,25 @@ final float newHorizontalWallpaperOffset=enableWallpaperEffects ? wallpaperOffse
 final float newVerticalWallpaperOffset=enableWallpaperEffects ? 0.5f : 0;
 animWithInterpolator.addUpdateListener(new LauncherAnimatorUpdateListener(){
 public void onAnimationUpdate(float a,float b){
-if (b == 0f) {
-return;
-}
-fastInvalidate();
-if (enableWallpaperEffects) {
-setHorizontalWallpaperOffset(a * oldHorizontalWallpaperOffset + b * newHorizontalWallpaperOffset);
-setVerticalWallpaperOffset(a * oldVerticalWallpaperOffset + b * newVerticalWallpaperOffset);
-}
-for (int i=0; i < screenCount; i++) {
-final CellLayout cl=(CellLayout)getChildAt(i);
-cl.fastInvalidate();
-cl.setFastTranslationX(a * oldTranslationXs[i] + b * newTranslationXs[i]);
-cl.setFastTranslationY(a * oldTranslationYs[i] + b * newTranslationYs[i]);
-cl.setFastScaleX(a * oldScaleXs[i] + b * newScaleXs[i]);
-cl.setFastScaleY(a * oldScaleYs[i] + b * newScaleYs[i]);
-cl.setFastBackgroundAlpha(a * oldBackgroundAlphas[i] + b * newBackgroundAlphas[i]);
-cl.setBackgroundAlphaMultiplier(a * oldBackgroundAlphaMultipliers[i] + b * newBackgroundAlphaMultipliers[i]);
-cl.setFastAlpha(a * oldAlphas[i] + b * newAlphas[i]);
-}
+  if (b == 0f) {
+    return;
+  }
+  fastInvalidate();
+  if (enableWallpaperEffects) {
+    setHorizontalWallpaperOffset(a * oldHorizontalWallpaperOffset + b * newHorizontalWallpaperOffset);
+    setVerticalWallpaperOffset(a * oldVerticalWallpaperOffset + b * newVerticalWallpaperOffset);
+  }
+  for (int i=0; i < screenCount; i++) {
+    final CellLayout cl=(CellLayout)getChildAt(i);
+    cl.fastInvalidate();
+    cl.setFastTranslationX(a * oldTranslationXs[i] + b * newTranslationXs[i]);
+    cl.setFastTranslationY(a * oldTranslationYs[i] + b * newTranslationYs[i]);
+    cl.setFastScaleX(a * oldScaleXs[i] + b * newScaleXs[i]);
+    cl.setFastScaleY(a * oldScaleYs[i] + b * newScaleYs[i]);
+    cl.setFastBackgroundAlpha(a * oldBackgroundAlphas[i] + b * newBackgroundAlphas[i]);
+    cl.setBackgroundAlphaMultiplier(a * oldBackgroundAlphaMultipliers[i] + b * newBackgroundAlphaMultipliers[i]);
+    cl.setFastAlpha(a * oldAlphas[i] + b * newAlphas[i]);
+  }
 }
 }
 );
@@ -148,13 +141,13 @@ ValueAnimator rotationAnim=ValueAnimator.ofFloat(0f,1f).setDuration(duration);
 rotationAnim.setInterpolator(new DecelerateInterpolator(2.0f));
 rotationAnim.addUpdateListener(new LauncherAnimatorUpdateListener(){
 public void onAnimationUpdate(float a,float b){
-if (b == 0f) {
-return;
-}
-for (int i=0; i < screenCount; i++) {
-final CellLayout cl=(CellLayout)getChildAt(i);
-cl.setFastRotationY(a * oldRotationYs[i] + b * newRotationYs[i]);
-}
+  if (b == 0f) {
+    return;
+  }
+  for (int i=0; i < screenCount; i++) {
+    final CellLayout cl=(CellLayout)getChildAt(i);
+    cl.setFastRotationY(a * oldRotationYs[i] + b * newRotationYs[i]);
+  }
 }
 }
 );

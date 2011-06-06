@@ -19,14 +19,12 @@
   mCellCountY=a.getInt(R.styleable.PagedView_cellCountY,4);
   a.recycle();
   a=context.obtainStyledAttributes(attrs,R.styleable.AppsCustomizePagedView,0,0);
-  mCellWidthGap=a.getDimensionPixelSize(R.styleable.AppsCustomizePagedView_widgetCellWidthGap,10);
-  mCellHeightGap=a.getDimensionPixelSize(R.styleable.AppsCustomizePagedView_widgetCellHeightGap,10);
+  mWidgetWidthGap=a.getDimensionPixelSize(R.styleable.AppsCustomizePagedView_widgetCellWidthGap,0);
+  mWidgetHeightGap=a.getDimensionPixelSize(R.styleable.AppsCustomizePagedView_widgetCellHeightGap,0);
   mWidgetCountX=a.getInt(R.styleable.AppsCustomizePagedView_widgetCountX,2);
   mWidgetCountY=a.getInt(R.styleable.AppsCustomizePagedView_widgetCountY,2);
   a.recycle();
-  mWidgetSpacingLayout=new PagedViewCellLayout(context);
-  setupPage(mWidgetSpacingLayout);
-  mContentWidth=mWidgetSpacingLayout.getContentWidth();
+  mWidgetSpacingLayout=new PagedViewCellLayout(getContext());
   mMinWidgetSpan=1;
   mMaxWidgetSpan=3;
   int iconSize=resources.getDimensionPixelSize(R.dimen.app_icon_size);

@@ -1,16 +1,9 @@
 {
-  if (LauncherApplication.isScreenLarge()) {
-    if (mState == State.ALL_APPS) {
-      mWorkspace.setVisibility(View.VISIBLE);
-      cameraZoomIn(State.ALL_APPS,animated,false);
-      findViewById(R.id.all_apps_button).requestFocus();
-    }
-  }
- else {
-    if (mState == State.APPS_CUSTOMIZE || mState == State.APPS_CUSTOMIZE_SPRING_LOADED) {
-      mWorkspace.setVisibility(View.VISIBLE);
-      cameraZoomIn(State.APPS_CUSTOMIZE,animated,false);
-      findViewById(R.id.all_apps_button).requestFocus();
-    }
+  if (mState == State.APPS_CUSTOMIZE || mState == State.APPS_CUSTOMIZE_SPRING_LOADED) {
+    mWorkspace.setVisibility(View.VISIBLE);
+    cameraZoomIn(State.APPS_CUSTOMIZE,animated,false);
+    mSearchDeleteBar.showSearchBar(animated);
+    showDock(animated);
+    findViewById(R.id.all_apps_button).requestFocus();
   }
 }

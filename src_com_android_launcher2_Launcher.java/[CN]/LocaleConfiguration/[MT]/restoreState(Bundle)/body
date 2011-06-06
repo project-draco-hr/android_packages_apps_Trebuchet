@@ -3,11 +3,8 @@
     return;
   }
   State state=intToState(savedState.getInt(RUNTIME_STATE,State.WORKSPACE.ordinal()));
-  if (state == State.ALL_APPS || state == State.APPS_CUSTOMIZE) {
+  if (state == State.APPS_CUSTOMIZE) {
     showAllApps(false);
-  }
- else   if (state == State.CUSTOMIZE) {
-    showCustomizationDrawer(false);
   }
   final int currentScreen=savedState.getInt(RUNTIME_STATE_CURRENT_SCREEN,-1);
   if (currentScreen > -1) {
@@ -25,24 +22,6 @@
     long id=savedState.getLong(RUNTIME_STATE_PENDING_FOLDER_RENAME_ID);
     mFolderInfo=mModel.getFolderById(this,sFolders,id);
     mRestoring=true;
-  }
-  if (mAllAppsGrid != null && mAllAppsGrid instanceof AllAppsTabbed) {
-    String curTab=savedState.getString("allapps_currentTab");
-    if (curTab != null) {
-      AllAppsTabbed tabhost=(AllAppsTabbed)mAllAppsGrid;
-      tabhost.setCurrentTabByTag(curTab);
-    }
-    int curPage=savedState.getInt("allapps_currentPage",-1);
-    if (curPage > -1) {
-      mAllAppsPagedView.setRestorePage(curPage);
-    }
-  }
-  if (mHomeCustomizationDrawer != null) {
-    String curTab=savedState.getString("customize_currentTab");
-    if (curTab != null) {
-      mCustomizePagedView.setCustomizationFilter(mHomeCustomizationDrawer.getCustomizeFilterForTabTag(curTab));
-      mHomeCustomizationDrawer.setCurrentTabByTag(curTab);
-    }
   }
   if (mAppsCustomizeTabHost != null) {
     String curTab=savedState.getString("apps_customize_currentTab");

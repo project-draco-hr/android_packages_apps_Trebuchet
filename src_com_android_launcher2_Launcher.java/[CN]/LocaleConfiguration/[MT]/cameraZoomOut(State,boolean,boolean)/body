@@ -1,36 +1,20 @@
 {
   final Resources res=getResources();
-  final boolean toAllApps=(toState == State.ALL_APPS) || (toState == State.APPS_CUSTOMIZE);
-  final int duration=(toAllApps ? res.getInteger(R.integer.config_appsCustomizeZoomInTime) : res.getInteger(R.integer.config_customizeZoomInTime));
-  final int fadeDuration=(toAllApps ? res.getInteger(R.integer.config_appsCustomizeFadeInTime) : res.getInteger(R.integer.config_customizeFadeInTime));
-  final float scale=toAllApps ? (float)res.getInteger(R.integer.config_appsCustomizeZoomScaleFactor) : (float)res.getInteger(R.integer.config_customizeZoomScaleFactor);
-  View tmpView;
-  if (toAllApps) {
-    tmpView=(LauncherApplication.isScreenLarge()) ? (View)mAllAppsGrid : mAppsCustomizeTabHost;
-  }
- else {
-    tmpView=mHomeCustomizationDrawer;
-  }
-  final View toView=tmpView;
+  final int duration=res.getInteger(R.integer.config_appsCustomizeZoomInTime);
+  final int fadeDuration=res.getInteger(R.integer.config_appsCustomizeFadeInTime);
+  final float scale=(float)res.getInteger(R.integer.config_appsCustomizeZoomScaleFactor);
+  final View toView=mAppsCustomizeTabHost;
   setPivotsForZoom(toView,toState,scale);
-  if (toAllApps) {
-    if (springLoaded) {
-      if (toState == State.APPS_CUSTOMIZE) {
-        mWorkspace.shrink(ShrinkState.BOTTOM_HIDDEN,animated);
-      }
- else {
-        mWorkspace.shrink(ShrinkState.BOTTOM_VISIBLE,animated);
-      }
+  if (springLoaded) {
+    if (toState == State.APPS_CUSTOMIZE) {
+      mWorkspace.shrink(ShrinkState.BOTTOM_HIDDEN,animated);
     }
  else {
-      mWorkspace.shrink(ShrinkState.BOTTOM_HIDDEN,animated);
-      if (LauncherApplication.isScreenLarge()) {
-        mAllAppsPagedView.resetSuccessfulDropFlag();
-      }
+      mWorkspace.shrink(ShrinkState.BOTTOM_VISIBLE,animated);
     }
   }
  else {
-    mWorkspace.shrink(ShrinkState.TOP,animated);
+    mWorkspace.shrink(ShrinkState.BOTTOM_HIDDEN,animated);
   }
   if (animated) {
     final ValueAnimator scaleAnim=ValueAnimator.ofFloat(0f,1f).setDuration(duration);
@@ -43,19 +27,17 @@
       }
     }
 );
-    if (toAllApps) {
-      toView.setVisibility(View.VISIBLE);
-      toView.setFastAlpha(0f);
-      ValueAnimator alphaAnim=ValueAnimator.ofFloat(0f,1f).setDuration(fadeDuration);
-      alphaAnim.setInterpolator(new DecelerateInterpolator(1.5f));
-      alphaAnim.addUpdateListener(new LauncherAnimatorUpdateListener(){
-        public void onAnimationUpdate(        float a,        float b){
-          toView.setFastAlpha(a * 0f + b * 1f);
-        }
+    toView.setVisibility(View.VISIBLE);
+    toView.setFastAlpha(0f);
+    ValueAnimator alphaAnim=ValueAnimator.ofFloat(0f,1f).setDuration(fadeDuration);
+    alphaAnim.setInterpolator(new DecelerateInterpolator(1.5f));
+    alphaAnim.addUpdateListener(new LauncherAnimatorUpdateListener(){
+      public void onAnimationUpdate(      float a,      float b){
+        toView.setFastAlpha(a * 0f + b * 1f);
       }
-);
-      alphaAnim.start();
     }
+);
+    alphaAnim.start();
     if (toView instanceof LauncherTransitionable) {
       ((LauncherTransitionable)toView).onLauncherTransitionStart(scaleAnim);
     }
@@ -65,9 +47,6 @@
         toView.setTranslationY(0.0f);
         toView.setVisibility(View.VISIBLE);
         toView.bringToFront();
-        if (!toAllApps) {
-          toView.setFastAlpha(1.0f);
-        }
       }
       @Override public void onAnimationEnd(      Animator animation){
         toView.setScaleX(1.0f);
@@ -78,16 +57,10 @@
       }
     }
 );
-    AnimatorSet toolbarHideAnim=new AnimatorSet();
-    AnimatorSet toolbarShowAnim=new AnimatorSet();
-    hideAndShowToolbarButtons(toState,toolbarShowAnim,toolbarHideAnim);
     final int startDelay=0;
     if (mStateAnimation != null)     mStateAnimation.cancel();
     mStateAnimation=new AnimatorSet();
-    mStateAnimation.playTogether(scaleAnim,toolbarHideAnim);
     mStateAnimation.play(scaleAnim).after(startDelay);
-    final int fadeInTime=res.getInteger(R.integer.config_toolbarButtonFadeInTime);
-    mStateAnimation.play(toolbarShowAnim).after(duration + startDelay - fadeInTime);
     mStateAnimation.start();
   }
  else {
@@ -101,6 +74,5 @@
       ((LauncherTransitionable)toView).onLauncherTransitionStart(null);
       ((LauncherTransitionable)toView).onLauncherTransitionEnd(null);
     }
-    hideAndShowToolbarButtons(toState,null,null);
   }
 }

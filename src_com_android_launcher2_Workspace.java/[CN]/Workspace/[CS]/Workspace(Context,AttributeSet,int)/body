@@ -1,6 +1,7 @@
 {
   super(context,attrs,defStyle);
   mContentIsRefreshable=false;
+  setDataIsReady();
   if (!LauncherApplication.isScreenLarge()) {
     mFadeInAdjacentScreens=false;
   }

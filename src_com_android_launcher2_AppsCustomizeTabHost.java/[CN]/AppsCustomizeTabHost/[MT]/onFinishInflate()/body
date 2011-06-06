@@ -2,6 +2,7 @@
   setup();
   final ViewGroup tabs=(ViewGroup)findViewById(com.android.internal.R.id.tabs);
   final AppsCustomizePagedView appsCustomizePane=(AppsCustomizePagedView)findViewById(R.id.apps_customize_pane_content);
+  mTabs=tabs;
   mAppsCustomizePane=appsCustomizePane;
   if (tabs == null || mAppsCustomizePane == null)   throw new Resources.NotFoundException();
   TabContentFactory contentFactory=new TabContentFactory(){
@@ -18,5 +19,4 @@
   tabView.setText(mContext.getString(R.string.widgets_tab_label));
   addTab(newTabSpec(WIDGETS_TAB_TAG).setIndicator(tabView).setContent(contentFactory));
   setOnTabChangedListener(this);
-  tabs.getLayoutParams().width=mAppsCustomizePane.getPageContentWidth();
 }

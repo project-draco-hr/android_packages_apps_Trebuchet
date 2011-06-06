@@ -1,0 +1,15 @@
+{
+  if (!LauncherApplication.isScreenLarge()) {
+    if (animated) {
+      int duration=mSearchDeleteBar.getTransitionInDuration();
+      mButtonCluster.animate().alpha(1f).setDuration(duration);
+      mPreviousView.animate().alpha(1f).setDuration(duration);
+      mNextView.animate().alpha(1f).setDuration(duration);
+    }
+ else {
+      mButtonCluster.setAlpha(1f);
+      mPreviousView.setAlpha(1f);
+      mNextView.setAlpha(1f);
+    }
+  }
+}

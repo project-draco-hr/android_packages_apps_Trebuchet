@@ -1,4 +1,0 @@
-{
-  showBackgroundGradient();
-  mDrawCustomizeTrayBackground=true;
-}

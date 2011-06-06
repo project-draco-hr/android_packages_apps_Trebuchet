@@ -1,18 +1,10 @@
 {
   if (mState != State.WORKSPACE)   return;
-  if (LauncherApplication.isScreenLarge()) {
-    cameraZoomOut(State.ALL_APPS,animated,false);
-    ((View)mAllAppsGrid).requestFocus();
-    if (mDeleteZone != null) {
-      mDeleteZone.setVisibility(View.GONE);
-    }
-    mState=State.ALL_APPS;
-  }
- else {
-    cameraZoomOut(State.APPS_CUSTOMIZE,animated,false);
-    mAppsCustomizeTabHost.requestFocus();
-    mState=State.APPS_CUSTOMIZE;
-  }
+  cameraZoomOut(State.APPS_CUSTOMIZE,animated,false);
+  mAppsCustomizeTabHost.requestFocus();
+  mSearchDeleteBar.hideSearchBar(animated);
+  hideDock(animated);
+  mState=State.APPS_CUSTOMIZE;
   mUserPresent=false;
   updateRunning();
   getWindow().getDecorView().sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_SELECTED);

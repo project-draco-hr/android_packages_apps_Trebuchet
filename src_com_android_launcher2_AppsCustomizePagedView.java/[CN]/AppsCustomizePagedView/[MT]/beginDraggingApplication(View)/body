@@ -1,17 +1,5 @@
 {
   ApplicationInfo appInfo=new ApplicationInfo((ApplicationInfo)v.getTag());
-  if ((appInfo.flags & ApplicationInfo.DOWNLOADED_FLAG) != 0) {
-    DeleteZone allAppsDeleteZone=(DeleteZone)mLauncher.findViewById(R.id.all_apps_delete_zone);
-    allAppsDeleteZone.setDragAndDropEnabled(true);
-    if ((appInfo.flags & ApplicationInfo.UPDATED_SYSTEM_APP_FLAG) != 0) {
-      allAppsDeleteZone.setText(R.string.delete_zone_label_all_apps_system_app);
-    }
- else {
-      allAppsDeleteZone.setText(R.string.delete_zone_label_all_apps);
-    }
-  }
-  ApplicationInfoDropTarget allAppsInfoButton=(ApplicationInfoDropTarget)mLauncher.findViewById(R.id.all_apps_info_target);
-  allAppsInfoButton.setDragAndDropEnabled(true);
   final TextView tv=(TextView)v;
   final Drawable icon=tv.getCompoundDrawables()[1];
   Bitmap b=Bitmap.createBitmap(v.getWidth(),v.getHeight(),Bitmap.Config.ARGB_8888);
