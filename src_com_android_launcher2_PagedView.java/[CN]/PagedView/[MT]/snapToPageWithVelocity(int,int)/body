@@ -8,10 +8,10 @@
     snapToPage(whichPage,PAGE_SNAP_ANIMATION_DURATION);
     return;
   }
-  float distanceRatio=1.0f * Math.abs(delta) / 2 * halfScreenSize;
+  float distanceRatio=Math.min(1f,1.0f * Math.abs(delta) / (2 * halfScreenSize));
   float distance=halfScreenSize + halfScreenSize * distanceInfluenceForSnapDuration(distanceRatio);
   velocity=Math.abs(velocity);
   velocity=Math.max(MINIMUM_SNAP_VELOCITY,velocity);
-  duration=6 * Math.round(1000 * Math.abs(distance / velocity));
+  duration=4 * Math.round(1000 * Math.abs(distance / velocity));
   snapToPage(whichPage,delta,duration);
 }
