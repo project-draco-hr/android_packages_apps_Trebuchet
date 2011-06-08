@@ -1,4 +1,5 @@
 {
   TextView button=(TextView)findViewById(buttonId);
+  if (button == null)   return;
   button.setCompoundDrawables(d.newDrawable(getResources()),null,null,null);
 }
