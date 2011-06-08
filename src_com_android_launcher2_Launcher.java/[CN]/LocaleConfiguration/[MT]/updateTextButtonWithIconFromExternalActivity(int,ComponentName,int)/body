@@ -1,5 +1,6 @@
 {
   TextView button=(TextView)findViewById(buttonId);
+  if (button == null)   return null;
   Drawable toolbarIcon=getExternalPackageToolbarIcon(activityName);
   if (toolbarIcon == null) {
     button.setCompoundDrawablesWithIntrinsicBounds(fallbackDrawableId,0,0,0);
