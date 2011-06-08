@@ -1,5 +1,8 @@
 {
   super.onDestroy();
+  LauncherApplication app=((LauncherApplication)getApplication());
+  mModel.stopLoader();
+  app.setLauncher(null);
   try {
     mAppWidgetHost.stopListening();
   }
@@ -9,7 +12,6 @@
   mAppWidgetHost=null;
   mWidgetsToAdvance.clear();
   TextKeyListener.getInstance().release();
-  mModel.stopLoader();
   unbindDesktopItems();
   getContentResolver().unregisterContentObserver(mWidgetObserver);
   if (mPreviousView != null) {
