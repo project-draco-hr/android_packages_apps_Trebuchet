@@ -4,7 +4,7 @@
     float finalScaleFactor=1.0f;
     float finalBackgroundAlpha=0.0f;
     if (springLoaded) {
-      finalScaleFactor=SPRING_LOADED_DRAG_SHRINK_FACTOR;
+      finalScaleFactor=mSpringLoadedShrinkFactor;
       finalBackgroundAlpha=1.0f;
     }
  else {
@@ -48,7 +48,7 @@
  else {
         finalAlphaValue=1f;
       }
-      float finalAlphaMultiplierValue=((i == mCurrentPage) && (mShrinkState != ShrinkState.SPRING_LOADED)) ? 0.0f : 1.0f;
+      float finalAlphaMultiplierValue=1f;
       float translation=0f;
       if (LauncherApplication.isScreenLarge()) {
         translation=getOffsetXForRotation(rotation,cl.getWidth(),cl.getHeight());

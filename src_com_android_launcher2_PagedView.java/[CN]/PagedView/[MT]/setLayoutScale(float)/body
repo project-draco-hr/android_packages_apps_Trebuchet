@@ -8,7 +8,11 @@
     childrenX[i]=child.getX();
     childrenY[i]=child.getY();
   }
-  onLayout(false,mLeft,mTop,mRight,mBottom);
+  int widthSpec=MeasureSpec.makeMeasureSpec(getMeasuredWidth(),MeasureSpec.EXACTLY);
+  int heightSpec=MeasureSpec.makeMeasureSpec(getMeasuredHeight(),MeasureSpec.EXACTLY);
+  requestLayout();
+  measure(widthSpec,heightSpec);
+  layout(mLeft,mTop,mRight,mBottom);
   for (int i=0; i < childCount; i++) {
     final View child=getChildAt(i);
     child.setX(childrenX[i]);

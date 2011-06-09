@@ -20,14 +20,7 @@
     @Override public void onAnimationEnd(    Animator animation){
       mIsInUnshrinkAnimation=false;
       mSyncWallpaperOffsetWithScroll=true;
-      if (mShrinkState == ShrinkState.SPRING_LOADED) {
-        View layout=null;
-        if (mLastDragView != null) {
-          layout=findMatchingPageForDragOver(mLastDragView,mLastDragOriginX,mLastDragOriginY,mLastDragXOffset,mLastDragYOffset);
-        }
-        mSpringLoadedDragController.onEnterSpringLoadedMode(layout == null);
-      }
- else {
+      if (mShrinkState != ShrinkState.SPRING_LOADED) {
         mDrawCustomizeTrayBackground=false;
       }
       mWallpaperOffset.setOverrideHorizontalCatchupConstant(false);

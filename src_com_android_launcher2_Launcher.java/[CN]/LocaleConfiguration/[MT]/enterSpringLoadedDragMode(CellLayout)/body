@@ -1,16 +1,9 @@
 {
   mWorkspace.enterSpringLoadedDragMode(layout);
-  if (mState == State.ALL_APPS || mState == State.APPS_CUSTOMIZE) {
-    mState=State.ALL_APPS_SPRING_LOADED;
-    if (LauncherApplication.isScreenLarge()) {
-      cameraZoomIn(State.ALL_APPS,true,true);
-    }
- else {
-      cameraZoomIn(State.APPS_CUSTOMIZE,true,true);
-    }
+  if (mState == State.APPS_CUSTOMIZE) {
+    mState=State.APPS_CUSTOMIZE_SPRING_LOADED;
+    cameraZoomIn(State.APPS_CUSTOMIZE,true,true);
   }
- else   if (mState == State.CUSTOMIZE) {
-    mState=State.CUSTOMIZE_SPRING_LOADED;
-    cameraZoomIn(State.CUSTOMIZE,true,true);
+ else {
   }
 }

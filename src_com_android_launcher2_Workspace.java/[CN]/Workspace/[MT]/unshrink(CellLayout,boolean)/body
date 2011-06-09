@@ -2,7 +2,7 @@
   int newCurrentPage=indexOfChild(clThatWasClicked);
   if (mIsSmall) {
     if (springLoaded) {
-      setLayoutScale(SPRING_LOADED_DRAG_SHRINK_FACTOR);
+      setLayoutScale(mSpringLoadedShrinkFactor);
     }
     scrollToNewPageWithoutMovingPages(newCurrentPage);
     unshrink(true,springLoaded);

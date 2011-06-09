@@ -1,0 +1,6 @@
+{
+  if (mScreen != cl) {
+    mAlarm.setAlarm(ENTER_SPRING_LOAD_HOVER_TIME);
+  }
+  mScreen=cl;
+}

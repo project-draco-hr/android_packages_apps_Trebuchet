@@ -16,22 +16,20 @@
   a.recycle();
   setAlwaysDrawnWithCacheEnabled(false);
   final Resources res=getResources();
-  if (LauncherApplication.isScreenLarge()) {
-    mNormalBackground=res.getDrawable(R.drawable.homescreen_large_blue);
-    mActiveBackground=res.getDrawable(R.drawable.homescreen_large_green);
-    mActiveGlowBackground=res.getDrawable(R.drawable.homescreen_large_green_strong);
-    mNormalBackgroundMini=res.getDrawable(R.drawable.homescreen_small_blue);
-    mNormalGlowBackgroundMini=res.getDrawable(R.drawable.homescreen_small_blue_strong);
-    mActiveBackgroundMini=res.getDrawable(R.drawable.homescreen_small_green);
-    mActiveGlowBackgroundMini=res.getDrawable(R.drawable.homescreen_small_green_strong);
-    mNormalBackground.setFilterBitmap(true);
-    mActiveBackground.setFilterBitmap(true);
-    mActiveGlowBackground.setFilterBitmap(true);
-    mNormalBackgroundMini.setFilterBitmap(true);
-    mNormalGlowBackgroundMini.setFilterBitmap(true);
-    mActiveBackgroundMini.setFilterBitmap(true);
-    mActiveGlowBackgroundMini.setFilterBitmap(true);
-  }
+  mNormalBackground=res.getDrawable(R.drawable.homescreen_large_blue);
+  mActiveBackground=res.getDrawable(R.drawable.homescreen_large_green);
+  mActiveGlowBackground=res.getDrawable(R.drawable.homescreen_large_green_strong);
+  mNormalBackgroundMini=res.getDrawable(R.drawable.homescreen_small_blue);
+  mNormalGlowBackgroundMini=res.getDrawable(R.drawable.homescreen_small_blue_strong);
+  mActiveBackgroundMini=res.getDrawable(R.drawable.homescreen_small_green);
+  mActiveGlowBackgroundMini=res.getDrawable(R.drawable.homescreen_small_green_strong);
+  mNormalBackground.setFilterBitmap(true);
+  mActiveBackground.setFilterBitmap(true);
+  mActiveGlowBackground.setFilterBitmap(true);
+  mNormalBackgroundMini.setFilterBitmap(true);
+  mNormalGlowBackgroundMini.setFilterBitmap(true);
+  mActiveBackgroundMini.setFilterBitmap(true);
+  mActiveGlowBackgroundMini.setFilterBitmap(true);
   mCrosshairsDrawable=res.getDrawable(R.drawable.gardening_crosshairs);
   mEaseOutInterpolator=new DecelerateInterpolator(2.5f);
   int animDuration=res.getInteger(R.integer.config_crosshairsFadeInTime);

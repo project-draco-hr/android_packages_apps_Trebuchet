@@ -1,8 +1,7 @@
 {
   if (mScreen != null) {
-    mLauncher.enterSpringLoadedDragMode(mScreen);
-  }
- else {
-    mLauncher.exitSpringLoadedDragMode();
+    Workspace w=mLauncher.getWorkspace();
+    int page=w.indexOfChild(mScreen);
+    w.snapToPage(page);
   }
 }
