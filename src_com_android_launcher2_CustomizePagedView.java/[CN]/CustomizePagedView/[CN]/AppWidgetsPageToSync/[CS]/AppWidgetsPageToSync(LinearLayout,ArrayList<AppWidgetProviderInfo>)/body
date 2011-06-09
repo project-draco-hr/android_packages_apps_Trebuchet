@@ -1,0 +1,5 @@
+{
+  mLayout=layout;
+  mAppWidgets=(ArrayList<AppWidgetProviderInfo>)appWidgets.clone();
+  mAppWidgetBitmaps=new ArrayList<Bitmap>(appWidgets.size());
+}
