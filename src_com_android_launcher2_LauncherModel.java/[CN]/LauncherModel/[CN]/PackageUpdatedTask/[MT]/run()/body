@@ -50,7 +50,8 @@ if (added != null) {
 final ArrayList<ApplicationInfo> addedFinal=added;
 mHandler.post(new Runnable(){
 public void run(){
-if (callbacks == mCallbacks.get()) {
+Callbacks cb=mCallbacks != null ? mCallbacks.get() : null;
+if (callbacks == cb && cb != null) {
 callbacks.bindAppsAdded(addedFinal);
 }
 }
@@ -61,7 +62,8 @@ if (modified != null) {
 final ArrayList<ApplicationInfo> modifiedFinal=modified;
 mHandler.post(new Runnable(){
 public void run(){
-if (callbacks == mCallbacks.get()) {
+Callbacks cb=mCallbacks != null ? mCallbacks.get() : null;
+if (callbacks == cb && cb != null) {
 callbacks.bindAppsUpdated(modifiedFinal);
 }
 }
@@ -73,7 +75,8 @@ final boolean permanent=mOp != OP_UNAVAILABLE;
 final ArrayList<ApplicationInfo> removedFinal=removed;
 mHandler.post(new Runnable(){
 public void run(){
-if (callbacks == mCallbacks.get()) {
+Callbacks cb=mCallbacks != null ? mCallbacks.get() : null;
+if (callbacks == cb && cb != null) {
 callbacks.bindAppsRemoved(removedFinal,permanent);
 }
 }
@@ -82,7 +85,8 @@ callbacks.bindAppsRemoved(removedFinal,permanent);
 }
 mHandler.post(new Runnable(){
 @Override public void run(){
-if (callbacks == mCallbacks.get()) {
+Callbacks cb=mCallbacks != null ? mCallbacks.get() : null;
+if (callbacks == cb && cb != null) {
 callbacks.bindPackagesUpdated();
 }
 }
