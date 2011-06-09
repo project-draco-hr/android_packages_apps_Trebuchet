@@ -3,7 +3,6 @@
   if (mContent.findCellForSpan(emptyCell,item.spanX,item.spanY)) {
     item.cellX=emptyCell[0];
     item.cellY=emptyCell[1];
-    LauncherModel.addOrMoveItemInDatabase(mLauncher,item,mInfo.id,0,item.cellX,item.cellY);
     return true;
   }
  else {

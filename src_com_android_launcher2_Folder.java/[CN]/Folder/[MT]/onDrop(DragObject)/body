@@ -8,6 +8,8 @@
  else {
     item=(ShortcutInfo)d.dragInfo;
   }
+  if (item == mCurrentDragInfo) {
+    mInfo.remove(item);
+  }
   mInfo.add(item);
-  LauncherModel.addOrMoveItemInDatabase(mLauncher,item,mInfo.id,0,item.cellX,item.cellY);
 }

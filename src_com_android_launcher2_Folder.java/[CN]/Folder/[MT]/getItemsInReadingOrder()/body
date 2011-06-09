@@ -1,15 +1,3 @@
 {
-  if (mItemsInvalidated) {
-    mItemsInReadingOrder.clear();
-    for (int j=0; j < mContent.getCountY(); j++) {
-      for (int i=0; i < mContent.getCountX(); i++) {
-        View v=mContent.getChildAt(i,j);
-        if (v != null) {
-          mItemsInReadingOrder.add(v);
-        }
-      }
-    }
-    mItemsInvalidated=false;
-  }
-  return mItemsInReadingOrder;
+  return getItemsInReadingOrder(true);
 }
