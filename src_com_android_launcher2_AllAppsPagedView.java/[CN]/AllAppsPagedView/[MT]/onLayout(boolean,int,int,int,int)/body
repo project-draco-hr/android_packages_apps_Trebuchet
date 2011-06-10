@@ -1,6 +1,6 @@
 {
-  if (mWaitingToInitPages) {
-    mWaitingToInitPages=false;
+  if (mWaitingToDetermineRowsAndColumns) {
+    mWaitingToDetermineRowsAndColumns=false;
     postInvalidatePageData(false);
   }
   super.onLayout(changed,left,top,right,bottom);

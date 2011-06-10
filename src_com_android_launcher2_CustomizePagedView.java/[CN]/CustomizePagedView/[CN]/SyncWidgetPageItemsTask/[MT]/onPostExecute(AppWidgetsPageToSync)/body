@@ -1,0 +1,19 @@
+{
+  LinearLayout layout=(LinearLayout)pageToSync.mLayout;
+  final int numPages=getPageCount();
+  final int numWidgets=pageToSync.mAppWidgets.size();
+  for (int i=0; i < numWidgets; ++i) {
+    final AppWidgetProviderInfo info=pageToSync.mAppWidgets.get(i);
+    final PendingAddWidgetInfo createItemInfo=new PendingAddWidgetInfo(info,null,null);
+    final int[] cellSpans=CellLayout.rectToCell(getResources(),info.minWidth,info.minHeight,null);
+    FastBitmapDrawable icon=new FastBitmapDrawable(pageToSync.mAppWidgetBitmaps.get(i));
+    icon.setBounds(0,0,icon.getIntrinsicWidth(),icon.getIntrinsicHeight());
+    PagedViewWidget l=(PagedViewWidget)mInflater.inflate(R.layout.customize_paged_view_widget,layout,false);
+    l.applyFromAppWidgetProviderInfo(info,icon,mMaxWidgetWidth,cellSpans,mPageViewIconCache,(numPages > 1));
+    l.setTag(createItemInfo);
+    l.setOnClickListener(CustomizePagedView.this);
+    l.setOnTouchListener(CustomizePagedView.this);
+    l.setOnLongClickListener(CustomizePagedView.this);
+    layout.addView(l);
+  }
+}
