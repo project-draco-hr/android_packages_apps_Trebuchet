@@ -1,4 +1,5 @@
 {
+  mChildrenAlpha=alpha;
   setChildrenAlpha(alpha);
   super.setAlpha(alpha);
 }

@@ -3,9 +3,13 @@
   removeAllViews();
   int numPages=relayoutWidgets();
   for (int i=0; i < numPages; ++i) {
-    LinearLayout layout=new PagedViewExtendedLayout(getContext());
+    PagedViewExtendedLayout layout=new PagedViewExtendedLayout(getContext());
     layout.setGravity(Gravity.CENTER_HORIZONTAL);
     layout.setPadding(mPageLayoutPaddingLeft,mPageLayoutPaddingTop,mPageLayoutPaddingRight,mPageLayoutPaddingBottom);
+    if (i < (numPages - 1)) {
+      layout.setHasFixedWidth(true);
+      layout.setMinimumWidth(mMinPageWidth);
+    }
     addView(layout,new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.MATCH_PARENT));
   }
 }

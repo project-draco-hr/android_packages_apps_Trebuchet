@@ -7,9 +7,6 @@
   name.setText(info.loadLabel(packageManager));
   name.setLayerType(View.LAYER_TYPE_SOFTWARE,null);
   if (createHolographicOutline) {
-    mIconCache=cache;
-    mIconCacheKey=new PagedViewIconCache.Key(info);
-    mHolographicOutline=mIconCache.getOutline(mIconCacheKey);
     mPreview=preview;
   }
 }

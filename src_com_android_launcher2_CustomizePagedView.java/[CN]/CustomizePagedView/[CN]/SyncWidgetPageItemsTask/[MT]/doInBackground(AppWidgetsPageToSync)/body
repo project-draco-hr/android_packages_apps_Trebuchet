@@ -1,0 +1,14 @@
+{
+  if (args.length != 1) {
+    throw new RuntimeException("Wrong number of args to SyncWidgetPageItemsTask");
+  }
+  AppWidgetsPageToSync pageToSync=args[0];
+synchronized (CustomizePagedView.this) {
+    int numWidgets=pageToSync.mAppWidgets.size();
+    for (int i=0; i < numWidgets; i++) {
+      AppWidgetProviderInfo info=pageToSync.mAppWidgets.get(i);
+      pageToSync.mAppWidgetBitmaps.add(getWidgetPreview(info));
+    }
+  }
+  return pageToSync;
+}

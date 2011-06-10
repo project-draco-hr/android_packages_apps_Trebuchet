@@ -3,5 +3,6 @@
   Collections.sort(mApps,LauncherModel.APP_NAME_COMPARATOR);
   mFilteredApps=rebuildFilteredApps(mApps);
   mPageViewIconCache.retainAllApps(list);
+  mWaitingToInitPages=false;
   invalidatePageData();
 }
