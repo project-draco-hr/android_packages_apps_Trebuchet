@@ -11,7 +11,9 @@
     mDragItemPosition[0]=item.cellX;
     mDragItemPosition[1]=item.cellY;
     mIconDrawable=((TextView)v).getCompoundDrawables()[1];
-    mInfo.remove(item);
+    mCurrentDragInfo=item;
+    mItemsInvalidated=true;
+    mInfo.itemsChanged();
     mDragItem=item;
   }
  else {

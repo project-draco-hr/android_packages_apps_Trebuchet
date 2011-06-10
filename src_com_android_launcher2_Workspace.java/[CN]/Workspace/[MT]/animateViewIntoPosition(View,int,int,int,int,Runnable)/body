@@ -1,0 +1,37 @@
+{
+  final float dist=(float)Math.sqrt(dX * dX + dY * dY);
+  final Resources res=getResources();
+  final float maxDist=(float)res.getInteger(R.integer.config_dropAnimMaxDist);
+  int duration=res.getInteger(R.integer.config_dropAnimMaxDuration);
+  if (dist < maxDist) {
+    duration*=mQuintEaseOutInterpolator.getInterpolation(dist / maxDist);
+  }
+  if (mDropAnim != null) {
+    mDropAnim.end();
+  }
+  mDropAnim=new ValueAnimator();
+  mDropAnim.setInterpolator(mQuintEaseOutInterpolator);
+  mDropAnim.addListener(new AnimatorListenerAdapter(){
+    public void onAnimationStart(    Animator animation){
+      mDropView=view;
+    }
+    public void onAnimationEnd(    Animator animation){
+      animationEndRunnable.run();
+    }
+  }
+);
+  mDropAnim.setDuration(duration);
+  mDropAnim.setFloatValues(0.0f,1.0f);
+  mDropAnim.removeAllUpdateListeners();
+  mDropAnim.addUpdateListener(new AnimatorUpdateListener(){
+    public void onAnimationUpdate(    ValueAnimator animation){
+      final float percent=(Float)animation.getAnimatedValue();
+      invalidate(mDropViewPos[0],mDropViewPos[1],mDropViewPos[0] + view.getWidth(),mDropViewPos[1] + view.getHeight());
+      mDropViewPos[0]=fromX + (int)(percent * dX + 0.5f);
+      mDropViewPos[1]=fromY + (int)(percent * dY + 0.5f);
+      invalidate(mDropViewPos[0],mDropViewPos[1],mDropViewPos[0] + view.getWidth(),mDropViewPos[1] + view.getHeight());
+    }
+  }
+);
+  mDropAnim.start();
+}

@@ -9,7 +9,7 @@
       layout.setIsDragOverlapping(true);
       if (mDragTargetLayout != null) {
         mDragTargetLayout.onDragExit();
-        mDragTargetLayout=null;
+        mDragTargetLayout=layout;
       }
       if (getHeight() > getWidth()) {
         invalidate();

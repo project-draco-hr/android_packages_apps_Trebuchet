@@ -1,5 +1,8 @@
 {
   int screen=indexOfChild(cellLayout);
+  if (screen != mCurrentPage && mShrinkState != ShrinkState.SPRING_LOADED) {
+    snapToPage(screen);
+  }
   if (dragInfo instanceof PendingAddItemInfo) {
     PendingAddItemInfo info=(PendingAddItemInfo)dragInfo;
 switch (info.itemType) {
