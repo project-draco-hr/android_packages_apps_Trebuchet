@@ -10,9 +10,6 @@
   dims.setText(mContext.getString(R.string.widget_dims_format,cellSpan[0],cellSpan[1]));
   dims.setLayerType(View.LAYER_TYPE_SOFTWARE,null);
   if (createHolographicOutline) {
-    mIconCache=cache;
-    mIconCacheKey=new PagedViewIconCache.Key(info);
-    mHolographicOutline=mIconCache.getOutline(mIconCacheKey);
     mPreview=preview;
   }
 }

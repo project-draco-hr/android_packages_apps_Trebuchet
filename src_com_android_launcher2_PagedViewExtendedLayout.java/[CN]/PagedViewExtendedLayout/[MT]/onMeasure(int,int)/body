@@ -1,0 +1,8 @@
+{
+  if (mHasFixedWidth) {
+    int widthSpecSize=getSuggestedMinimumWidth();
+    int widthSpecMode=MeasureSpec.EXACTLY;
+    widthMeasureSpec=MeasureSpec.makeMeasureSpec(widthSpecSize,widthSpecMode);
+  }
+  super.onMeasure(widthMeasureSpec,heightMeasureSpec);
+}
