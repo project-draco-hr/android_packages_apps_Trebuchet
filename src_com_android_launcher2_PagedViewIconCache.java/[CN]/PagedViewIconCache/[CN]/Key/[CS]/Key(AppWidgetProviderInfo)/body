@@ -1,4 +1,4 @@
 {
   mComponentName=info.provider;
-  mType=Type.ResolveInfoKey;
+  mType=Type.AppWidgetProviderInfoKey;
 }

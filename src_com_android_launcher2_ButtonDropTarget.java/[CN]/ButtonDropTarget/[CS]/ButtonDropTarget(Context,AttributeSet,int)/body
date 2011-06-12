@@ -1,0 +1,4 @@
+{
+  super(context,attrs,defStyle);
+  mTransitionDuration=context.getResources().getInteger(R.integer.config_dropTargetBgTransitionDuration);
+}

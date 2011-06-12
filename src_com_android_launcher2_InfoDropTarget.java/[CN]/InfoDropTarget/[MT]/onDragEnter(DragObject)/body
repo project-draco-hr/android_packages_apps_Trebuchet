@@ -1,4 +1,6 @@
 {
   super.onDragEnter(d);
-  setTextColor(mHoverColor);
+  ObjectAnimator anim=ObjectAnimator.ofInt(getBackground(),"alpha",Color.alpha(mHoverColor));
+  anim.setDuration(mTransitionDuration);
+  anim.start();
 }

@@ -1,4 +1,6 @@
 {
   super.onDragExit(d);
-  setTextColor(mDefaultTextColor);
+  ObjectAnimator anim=ObjectAnimator.ofInt(getBackground(),"alpha",0);
+  anim.setDuration(mTransitionDuration);
+  anim.start();
 }

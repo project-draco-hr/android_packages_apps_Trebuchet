@@ -5,5 +5,5 @@
     isVisible=false;
   }
   mActive=isVisible;
-  ((ViewGroup)getParent()).setVisibility(isVisible ? View.VISIBLE : View.GONE);
+  setVisibility(isVisible ? View.VISIBLE : View.GONE);
 }

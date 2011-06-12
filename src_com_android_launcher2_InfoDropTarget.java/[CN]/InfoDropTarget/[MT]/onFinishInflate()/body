@@ -1,7 +1,8 @@
 {
   super.onFinishInflate();
   Resources r=getResources();
-  mDefaultTextColor=getTextColors().getDefaultColor();
   mHoverColor=r.getColor(R.color.info_target_hover_tint);
   mHoverPaint.setColorFilter(new PorterDuffColorFilter(mHoverColor,PorterDuff.Mode.SRC_ATOP));
+  setBackgroundColor(mHoverColor);
+  getBackground().setAlpha(0);
 }

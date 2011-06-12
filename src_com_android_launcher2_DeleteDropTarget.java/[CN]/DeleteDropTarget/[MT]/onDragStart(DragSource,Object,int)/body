@@ -1,5 +1,4 @@
 {
-  ItemInfo item=(ItemInfo)info;
   boolean isVisible=true;
   boolean isUninstall=false;
   if (isAllAppsWidget(source,info)) {
@@ -15,8 +14,8 @@
     }
   }
   mActive=isVisible;
-  ((ViewGroup)getParent()).setVisibility(isVisible ? View.VISIBLE : View.GONE);
-  if (getText().length() > 0) {
-    setText(isUninstall ? R.string.delete_target_uninstall_label : R.string.delete_target_label);
+  setVisibility(isVisible ? View.VISIBLE : View.GONE);
+  if (mText.getText().length() > 0) {
+    mText.setText(isUninstall ? R.string.delete_target_uninstall_label : R.string.delete_target_label);
   }
 }
