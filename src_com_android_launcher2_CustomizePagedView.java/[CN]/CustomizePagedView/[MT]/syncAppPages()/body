@@ -1,10 +1,2 @@
 {
-  if (mApps == null)   return;
-  removeAllViews();
-  int numPages=(int)Math.ceil((float)mApps.size() / (mCellCountX * mCellCountY));
-  for (int i=0; i < numPages; ++i) {
-    PagedViewCellLayout layout=new PagedViewCellLayout(getContext());
-    setupPage(layout);
-    addView(layout);
-  }
 }

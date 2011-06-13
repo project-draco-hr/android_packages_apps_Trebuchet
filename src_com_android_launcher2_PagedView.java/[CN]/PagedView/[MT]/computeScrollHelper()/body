@@ -10,6 +10,10 @@
     mCurrentPage=Math.max(0,Math.min(mNextPage,getPageCount() - 1));
     mNextPage=INVALID_PAGE;
     notifyPageSwitchListener();
+    if (mDeferLoadAssociatedPagesAfterScroll) {
+      loadAssociatedPages(mCurrentPage);
+      mDeferLoadAssociatedPagesAfterScroll=false;
+    }
     if (mTouchState == TOUCH_STATE_REST) {
       pageEndMoving();
     }

@@ -1,8 +1,0 @@
-{
-  if (createHolographicOutlines) {
-    mChildren.loadHolographicOutlines();
-  }
- else {
-    mChildren.clearHolographicOutlines();
-  }
-}

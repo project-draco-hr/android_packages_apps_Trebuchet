@@ -6,12 +6,9 @@
   mApps=new ArrayList<ApplicationInfo>();
   mWidgets=new ArrayList<Object>();
   mIconCache=((LauncherApplication)context.getApplicationContext()).getIconCache();
-  mWidgetPreviewCache=new LruCache<Object,Bitmap>(sWidgetPreviewCacheSize){
-    protected int sizeOf(    Object key,    Bitmap value){
-      return value.getByteCount();
-    }
-  }
-;
+  mHolographicOutlineHelper=new HolographicOutlineHelper();
+  mCanvas=new Canvas();
+  mRunningTasks=new ArrayList<AppsCustomizeAsyncTask>();
   Resources resources=context.getResources();
   mDefaultWidgetBackground=resources.getDrawable(R.drawable.default_widget_preview);
   TypedArray a=context.obtainStyledAttributes(attrs,R.styleable.PagedView,0,0);

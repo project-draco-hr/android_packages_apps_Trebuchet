@@ -15,7 +15,5 @@
   Collections.sort(mWallpaperList,resolveInfoComparator);
   ArrayList<ResolveInfo> retainShortcutList=new ArrayList<ResolveInfo>(mShortcutList);
   retainShortcutList.addAll(mWallpaperList);
-  mPageViewIconCache.retainAllShortcuts(retainShortcutList);
-  mPageViewIconCache.retainAllAppWidgets(mWidgetList);
   invalidatePageData();
 }

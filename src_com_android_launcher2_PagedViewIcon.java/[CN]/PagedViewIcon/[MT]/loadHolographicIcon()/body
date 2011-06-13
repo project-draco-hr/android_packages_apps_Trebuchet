@@ -1,8 +1,0 @@
-{
-  if (mHolographicOutline == null) {
-    mHolographicOutline=mIconCache.getOutline(mIconCacheKey);
-    if (!queueHolographicOutlineCreation()) {
-      getHolographicOutlineView().invalidate();
-    }
-  }
-}

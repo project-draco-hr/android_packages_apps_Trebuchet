@@ -1,0 +1,10 @@
+{
+  Resources resources=mLauncher.getResources();
+  int iconSize=resources.getDimensionPixelSize(R.dimen.app_icon_size);
+  int expectedWidth=cellWidth;
+  int expectedHeight=mWidgetPreviewIconPaddedDimension;
+  Bitmap preview=Bitmap.createBitmap(expectedWidth,expectedHeight,Config.ARGB_8888);
+  Drawable icon=mIconCache.getFullResIcon(info,mPackageManager);
+  renderDrawableToBitmap(icon,preview,0,0,iconSize,iconSize,1f,1f);
+  return preview;
+}

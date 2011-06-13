@@ -15,8 +15,10 @@
   }
  else {
     b=Bitmap.createBitmap(mWidgetPreviewIconPaddedDimension,mWidgetPreviewIconPaddedDimension,Bitmap.Config.ARGB_8888);
-    Canvas c=new Canvas(b);
-    preview.draw(c);
+    mCanvas.setBitmap(b);
+    mCanvas.save();
+    preview.draw(mCanvas);
+    mCanvas.restore();
     createItemInfo.spanX=createItemInfo.spanY=1;
   }
   mLauncher.lockScreenOrientation();

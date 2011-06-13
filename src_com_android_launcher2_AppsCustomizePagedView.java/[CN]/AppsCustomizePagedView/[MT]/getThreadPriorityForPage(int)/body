@@ -1,0 +1,12 @@
+{
+  int pageDiff=Math.abs(page - mCurrentPage);
+  if (pageDiff <= 0) {
+    return Process.THREAD_PRIORITY_MORE_FAVORABLE;
+  }
+ else   if (pageDiff <= 1) {
+    return Process.THREAD_PRIORITY_DEFAULT;
+  }
+ else {
+    return Process.THREAD_PRIORITY_DEFAULT;
+  }
+}

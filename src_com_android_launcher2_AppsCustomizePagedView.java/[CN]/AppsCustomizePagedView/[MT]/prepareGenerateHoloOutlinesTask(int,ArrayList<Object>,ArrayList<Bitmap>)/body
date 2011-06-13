@@ -1,0 +1,34 @@
+{
+  AsyncTaskPageData pageData=new AsyncTaskPageData(page,items,images,new AsyncTaskCallback(){
+    @Override public void run(    AppsCustomizeAsyncTask task,    AsyncTaskPageData data){
+      task.syncThreadPriority();
+      ArrayList<Bitmap> images=data.images;
+      ArrayList<Bitmap> srcImages=data.srcImages;
+      int count=srcImages.size();
+      Canvas c=new Canvas();
+      for (int i=0; i < count && !task.isCancelled(); ++i) {
+        task.syncThreadPriority();
+        Bitmap b=srcImages.get(i);
+        Bitmap outline=Bitmap.createBitmap(b.getWidth(),b.getHeight(),Bitmap.Config.ARGB_8888);
+        c.setBitmap(outline);
+        c.save();
+        c.drawBitmap(b,0,0,null);
+        c.restore();
+        images.add(outline);
+      }
+    }
+  }
+,new AsyncTaskCallback(){
+    @Override public void run(    AppsCustomizeAsyncTask task,    AsyncTaskPageData data){
+      mRunningTasks.remove(task);
+      if (task.page > getPageCount())       return;
+      if (task.pageContentType != mContentType)       return;
+      onHolographicPageItemsLoaded(data);
+    }
+  }
+);
+  GenerateHoloOutlinesTask t=new GenerateHoloOutlinesTask(page,mContentType);
+  t.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);
+  t.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR,pageData);
+  mRunningTasks.add(t);
+}

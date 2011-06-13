@@ -1,0 +1,5 @@
+ResolveInfo info
+PackageManager packageManager
+FastBitmapDrawable preview
+int maxWidth
+HolographicOutlineHelper holoOutlineHelper

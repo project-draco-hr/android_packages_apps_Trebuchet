@@ -1,0 +1,5 @@
+AppWidgetProviderInfo info
+FastBitmapDrawable preview
+int maxWidth
+int[] cellSpan
+HolographicOutlineHelper holoOutlineHelper

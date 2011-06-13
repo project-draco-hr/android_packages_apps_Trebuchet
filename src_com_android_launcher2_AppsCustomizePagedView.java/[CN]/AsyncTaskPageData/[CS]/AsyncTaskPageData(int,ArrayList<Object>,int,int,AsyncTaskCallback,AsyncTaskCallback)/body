@@ -1,0 +1,9 @@
+{
+  page=p;
+  items=l;
+  images=new ArrayList<Bitmap>();
+  cellWidth=cw;
+  cellHeight=ch;
+  doInBackgroundCallback=bgR;
+  postExecuteCallback=postR;
+}

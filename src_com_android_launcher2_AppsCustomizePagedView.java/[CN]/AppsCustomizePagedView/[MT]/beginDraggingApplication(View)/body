@@ -3,9 +3,11 @@
   final TextView tv=(TextView)v;
   final Drawable icon=tv.getCompoundDrawables()[1];
   Bitmap b=Bitmap.createBitmap(v.getWidth(),v.getHeight(),Bitmap.Config.ARGB_8888);
-  Canvas c=new Canvas(b);
-  c.translate((v.getWidth() - icon.getIntrinsicWidth()) / 2,v.getPaddingTop());
-  icon.draw(c);
+  mCanvas.setBitmap(b);
+  mCanvas.save();
+  mCanvas.translate((v.getWidth() - icon.getIntrinsicWidth()) / 2,v.getPaddingTop());
+  icon.draw(mCanvas);
+  mCanvas.restore();
   Rect dragRect=null;
   if (v instanceof TextView) {
     int iconSize=getResources().getDimensionPixelSize(R.dimen.app_icon_size);

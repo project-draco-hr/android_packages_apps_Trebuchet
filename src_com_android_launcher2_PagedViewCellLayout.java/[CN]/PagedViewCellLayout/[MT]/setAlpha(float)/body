@@ -1,4 +1,4 @@
 {
-  mChildren.setAlpha(alpha);
-  mHolographicChildren.setAlpha(1.0f - alpha);
+  mChildren.setAlpha(HolographicOutlineHelper.viewAlphaInterpolator(alpha));
+  mHolographicChildren.setAlpha(HolographicOutlineHelper.highlightAlphaInterpolator(alpha));
 }

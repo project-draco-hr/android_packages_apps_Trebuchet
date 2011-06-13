@@ -1,40 +1,11 @@
 {
-  PagedViewGridLayout layout=(PagedViewGridLayout)getChildAt(page);
-  layout.removeAllViews();
+  ArrayList<Object> widgets=new ArrayList<Object>();
+  int cellWidth=((mWidgetSpacingLayout.getContentWidth() - mPageLayoutPaddingLeft - mPageLayoutPaddingRight- ((mWidgetCountX - 1) * mWidgetWidthGap)) / mWidgetCountX);
+  int cellHeight=((mWidgetSpacingLayout.getContentHeight() - mPageLayoutPaddingTop - mPageLayoutPaddingBottom- ((mWidgetCountY - 1) * mWidgetHeightGap)) / mWidgetCountY);
   int numWidgetsPerPage=mWidgetCountX * mWidgetCountY;
-  int numPages=(int)Math.ceil(mWidgets.size() / (float)numWidgetsPerPage);
   int offset=page * numWidgetsPerPage;
-  int cellWidth=((mWidgetSpacingLayout.getContentWidth() - mPageLayoutWidthGap - ((mWidgetCountX - 1) * mWidgetWidthGap)) / mWidgetCountX);
-  int cellHeight=((mWidgetSpacingLayout.getContentHeight() - mPageLayoutHeightGap - ((mWidgetCountY - 1) * mWidgetHeightGap)) / mWidgetCountY);
-  for (int i=0; i < Math.min(numWidgetsPerPage,mWidgets.size() - offset); ++i) {
-    Object rawInfo=mWidgets.get(offset + i);
-    PendingAddItemInfo createItemInfo=null;
-    PagedViewWidget widget=(PagedViewWidget)mLayoutInflater.inflate(R.layout.apps_customize_widget,layout,false);
-    if (rawInfo instanceof AppWidgetProviderInfo) {
-      AppWidgetProviderInfo info=(AppWidgetProviderInfo)rawInfo;
-      createItemInfo=new PendingAddWidgetInfo(info,null,null);
-      final int[] cellSpans=CellLayout.rectToCell(getResources(),info.minWidth,info.minHeight,null);
-      FastBitmapDrawable preview=getWidgetPreview(info,cellSpans[0],cellSpans[1],cellWidth,cellHeight);
-      widget.applyFromAppWidgetProviderInfo(info,preview,-1,cellSpans,mPageViewIconCache,(numPages > 1));
-      widget.setTag(createItemInfo);
-    }
- else     if (rawInfo instanceof ResolveInfo) {
-      ResolveInfo info=(ResolveInfo)rawInfo;
-      createItemInfo=new PendingAddItemInfo();
-      createItemInfo.itemType=LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT;
-      createItemInfo.componentName=new ComponentName(info.activityInfo.packageName,info.activityInfo.name);
-      FastBitmapDrawable preview=getShortcutPreview(info,cellWidth,cellHeight);
-      widget.applyFromResolveInfo(mPackageManager,info,preview,mPageViewIconCache,(numPages > 1));
-      widget.setTag(createItemInfo);
-    }
-    widget.setOnClickListener(this);
-    widget.setOnLongClickListener(this);
-    widget.setOnTouchListener(this);
-    int ix=i % mWidgetCountX;
-    int iy=i / mWidgetCountX;
-    PagedViewGridLayout.LayoutParams lp=new PagedViewGridLayout.LayoutParams(cellWidth,cellHeight);
-    lp.leftMargin=(ix * cellWidth) + (ix * mWidgetWidthGap);
-    lp.topMargin=(iy * cellHeight) + (iy * mWidgetHeightGap);
-    layout.addView(widget,lp);
+  for (int i=offset; i < Math.min(offset + numWidgetsPerPage,mWidgets.size()); ++i) {
+    widgets.add(mWidgets.get(i));
   }
+  prepareLoadWidgetPreviewsTask(page,widgets,cellWidth,cellHeight);
 }

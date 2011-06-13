@@ -1,0 +1,43 @@
+{
+  int page=data.page;
+  PagedViewGridLayout layout=(PagedViewGridLayout)getChildAt(page);
+  layout.removeAllViews();
+  ArrayList<Object> items=data.items;
+  int count=items.size();
+  int cellWidth=data.cellWidth;
+  int cellHeight=data.cellHeight;
+  for (int i=0; i < count; ++i) {
+    Object rawInfo=items.get(i);
+    PendingAddItemInfo createItemInfo=null;
+    PagedViewWidget widget=(PagedViewWidget)mLayoutInflater.inflate(R.layout.apps_customize_widget,layout,false);
+    if (rawInfo instanceof AppWidgetProviderInfo) {
+      AppWidgetProviderInfo info=(AppWidgetProviderInfo)rawInfo;
+      createItemInfo=new PendingAddWidgetInfo(info,null,null);
+      int[] cellSpans=CellLayout.rectToCell(getResources(),info.minWidth,info.minHeight,null);
+      FastBitmapDrawable preview=new FastBitmapDrawable(data.images.get(i));
+      widget.applyFromAppWidgetProviderInfo(info,preview,-1,cellSpans,mHolographicOutlineHelper);
+      widget.setTag(createItemInfo);
+    }
+ else     if (rawInfo instanceof ResolveInfo) {
+      ResolveInfo info=(ResolveInfo)rawInfo;
+      createItemInfo=new PendingAddItemInfo();
+      createItemInfo.itemType=LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT;
+      createItemInfo.componentName=new ComponentName(info.activityInfo.packageName,info.activityInfo.name);
+      FastBitmapDrawable preview=new FastBitmapDrawable(data.images.get(i));
+      widget.applyFromResolveInfo(mPackageManager,info,preview,mHolographicOutlineHelper);
+      widget.setTag(createItemInfo);
+    }
+    widget.setOnClickListener(this);
+    widget.setOnLongClickListener(this);
+    widget.setOnTouchListener(this);
+    int ix=i % mWidgetCountX;
+    int iy=i / mWidgetCountX;
+    PagedViewGridLayout.LayoutParams lp=new PagedViewGridLayout.LayoutParams(cellWidth,cellHeight);
+    lp.leftMargin=(ix * cellWidth) + (ix * mWidgetWidthGap);
+    lp.topMargin=(iy * cellHeight) + (iy * mWidgetHeightGap);
+    layout.addView(widget,lp);
+  }
+  invalidate();
+  forceUpdateAdjacentPagesAlpha();
+  prepareGenerateHoloOutlinesTask(data.page,data.items,data.images);
+}

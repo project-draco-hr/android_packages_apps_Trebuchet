@@ -1,0 +1,4 @@
+{
+  mHolographicOutline=holoOutline;
+  invalidate();
+}

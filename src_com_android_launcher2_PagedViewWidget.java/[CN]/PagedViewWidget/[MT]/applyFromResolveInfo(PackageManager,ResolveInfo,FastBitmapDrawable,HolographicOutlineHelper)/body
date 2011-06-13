@@ -1,0 +1,17 @@
+{
+  mHolographicOutlineHelper=holoOutlineHelper;
+  final ImageView image=(ImageView)findViewById(R.id.widget_preview);
+  image.setImageDrawable(preview);
+  mPreviewImageView=image;
+  final TextView name=(TextView)findViewById(R.id.widget_name);
+  name.setText(info.loadLabel(pm));
+  name.setLayerType(View.LAYER_TYPE_SOFTWARE,null);
+  final TextView dims=(TextView)findViewById(R.id.widget_dims);
+  if (dims != null) {
+    dims.setText(String.format(mDimensionsFormatString,1,1));
+    dims.setLayerType(View.LAYER_TYPE_SOFTWARE,null);
+  }
+  if (!LauncherApplication.isScreenLarge()) {
+    findViewById(R.id.divider).setVisibility(View.GONE);
+  }
+}

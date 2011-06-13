@@ -5,7 +5,6 @@
     int removeIndex=findAppByComponent(mApps,info);
     if (removeIndex > -1) {
       mApps.remove(removeIndex);
-      mPageViewIconCache.removeOutline(new PagedViewIconCache.Key(info));
     }
   }
 }

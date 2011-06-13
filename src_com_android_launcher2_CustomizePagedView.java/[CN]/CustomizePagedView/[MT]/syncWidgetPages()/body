@@ -1,11 +1,2 @@
 {
-  if (mWidgetList == null)   return;
-  removeAllViews();
-  int numPages=relayoutWidgets();
-  for (int i=0; i < numPages; ++i) {
-    LinearLayout layout=new PagedViewExtendedLayout(getContext());
-    layout.setGravity(Gravity.CENTER_HORIZONTAL);
-    layout.setPadding(mPageLayoutPaddingLeft,mPageLayoutPaddingTop,mPageLayoutPaddingRight,mPageLayoutPaddingBottom);
-    addView(layout,new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.MATCH_PARENT));
-  }
 }

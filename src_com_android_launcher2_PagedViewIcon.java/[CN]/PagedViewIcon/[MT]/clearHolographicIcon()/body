@@ -1,4 +1,0 @@
-{
-  mHolographicOutline=null;
-  getHolographicOutlineView().invalidate();
-}

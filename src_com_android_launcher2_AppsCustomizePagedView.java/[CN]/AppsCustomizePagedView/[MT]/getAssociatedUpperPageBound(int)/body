@@ -1,0 +1,4 @@
+{
+  final int count=getChildCount();
+  return Math.min(page + 2,count - 1);
+}

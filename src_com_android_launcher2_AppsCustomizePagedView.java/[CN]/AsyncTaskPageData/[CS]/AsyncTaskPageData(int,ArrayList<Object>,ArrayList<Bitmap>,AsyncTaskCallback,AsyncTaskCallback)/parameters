@@ -1,0 +1,5 @@
+int p
+ArrayList<Object> l
+ArrayList<Bitmap> si
+AsyncTaskCallback bgR
+AsyncTaskCallback postR

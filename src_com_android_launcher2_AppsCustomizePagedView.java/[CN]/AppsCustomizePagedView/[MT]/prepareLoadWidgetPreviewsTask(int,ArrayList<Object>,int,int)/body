@@ -1,0 +1,50 @@
+{
+  Iterator<AppsCustomizeAsyncTask> iter=mRunningTasks.iterator();
+  while (iter.hasNext()) {
+    AppsCustomizeAsyncTask task=(AppsCustomizeAsyncTask)iter.next();
+    int taskPage=task.page;
+    if (taskPage < (mCurrentPage - 2) || taskPage > (mCurrentPage + 2)) {
+      task.cancel(false);
+      iter.remove();
+    }
+ else {
+      task.setThreadPriority(getThreadPriorityForPage(taskPage));
+    }
+  }
+  AsyncTaskPageData pageData=new AsyncTaskPageData(page,widgets,cellWidth,cellHeight,new AsyncTaskCallback(){
+    @Override public void run(    AppsCustomizeAsyncTask task,    AsyncTaskPageData data){
+      task.syncThreadPriority();
+      ArrayList<Object> items=data.items;
+      ArrayList<Bitmap> images=data.images;
+      int count=items.size();
+      int cellWidth=data.cellWidth;
+      int cellHeight=data.cellHeight;
+      for (int i=0; i < count && !task.isCancelled(); ++i) {
+        task.syncThreadPriority();
+        Object rawInfo=items.get(i);
+        if (rawInfo instanceof AppWidgetProviderInfo) {
+          AppWidgetProviderInfo info=(AppWidgetProviderInfo)rawInfo;
+          int[] cellSpans=CellLayout.rectToCell(getResources(),info.minWidth,info.minHeight,null);
+          images.add(getWidgetPreviewInBackground(info,cellSpans[0],cellSpans[1],cellWidth,cellHeight));
+        }
+ else         if (rawInfo instanceof ResolveInfo) {
+          ResolveInfo info=(ResolveInfo)rawInfo;
+          images.add(getShortcutPreviewInBackground(info,cellWidth,cellHeight));
+        }
+      }
+    }
+  }
+,new AsyncTaskCallback(){
+    @Override public void run(    AppsCustomizeAsyncTask task,    AsyncTaskPageData data){
+      mRunningTasks.remove(task);
+      if (task.page > getPageCount())       return;
+      if (task.pageContentType != mContentType)       return;
+      onSyncWidgetPageItems(data);
+    }
+  }
+);
+  LoadWidgetPreviewsTask t=new LoadWidgetPreviewsTask(page,mContentType);
+  t.setThreadPriority(getThreadPriorityForPage(page));
+  t.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,pageData);
+  mRunningTasks.add(t);
+}
