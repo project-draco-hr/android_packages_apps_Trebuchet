@@ -1,28 +1,3 @@
 {
-  if (mIsSmall || mIsInUnshrinkAnimation) {
-    return null;
-  }
-  ItemInfo item=(ItemInfo)d.dragInfo;
-  CellLayout currentLayout=getCurrentDropLayout();
-  int dragPointX, dragPointY;
-  if (item.spanX == 1 && item.spanY == 1) {
-    dragPointX=d.x - d.xOffset;
-    dragPointY=d.y - d.yOffset;
-  }
- else {
-    dragPointX=d.x;
-    dragPointY=d.y;
-  }
-  dragPointX+=mScrollX - currentLayout.getLeft();
-  dragPointY+=mScrollY - currentLayout.getTop();
-  final int[] cellXY=mTempCell;
-  currentLayout.estimateDropCell(dragPointX,dragPointY,item.spanX,item.spanY,cellXY);
-  View child=currentLayout.getChildAt(cellXY[0],cellXY[1]);
-  if (child instanceof DropTarget) {
-    DropTarget target=(DropTarget)child;
-    if (target.acceptDrop(d)) {
-      return target;
-    }
-  }
   return null;
 }

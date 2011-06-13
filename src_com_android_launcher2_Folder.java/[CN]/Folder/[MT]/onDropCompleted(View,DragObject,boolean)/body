@@ -1,17 +1,11 @@
 {
+  mCurrentDragInfo=null;
+  mCurrentDragView=null;
+  mSuppressOnAdd=false;
   if (!success) {
     if (d.dragView != null) {
       if (target instanceof CellLayout) {
       }
-    }
-    mCurrentDragInfo=null;
-    mItemsInvalidated=true;
-    mInfo.itemsChanged();
-  }
- else {
-    if (target != this) {
-      mInfo.remove(mCurrentDragInfo);
-      mCurrentDragInfo=null;
     }
   }
 }

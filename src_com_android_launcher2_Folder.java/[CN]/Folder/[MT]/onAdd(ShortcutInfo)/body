@@ -1,5 +1,6 @@
 {
   mItemsInvalidated=true;
+  if (mSuppressOnAdd)   return;
   if (!findAndSetEmptyCells(item)) {
     setupContentForNumItems(getItemCount() + 1);
     findAndSetEmptyCells(item);

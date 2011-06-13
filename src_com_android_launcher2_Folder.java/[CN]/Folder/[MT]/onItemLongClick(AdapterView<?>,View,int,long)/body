@@ -5,6 +5,5 @@
   ShortcutInfo app=(ShortcutInfo)parent.getItemAtPosition(position);
   mDragController.startDrag(view,this,app,DragController.DRAG_ACTION_COPY);
   mLauncher.closeFolder(this);
-  mDragItem=app;
   return true;
 }

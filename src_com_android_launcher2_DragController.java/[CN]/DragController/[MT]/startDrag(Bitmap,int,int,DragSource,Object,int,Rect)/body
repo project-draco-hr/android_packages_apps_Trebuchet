@@ -14,6 +14,7 @@
   final int dragRegionLeft=dragRegion == null ? 0 : dragRegion.left;
   final int dragRegionTop=dragRegion == null ? 0 : dragRegion.top;
   mDragging=true;
+  mDragObject.dragComplete=false;
   mDragObject.xOffset=mMotionDownX - (screenX + dragRegionLeft);
   mDragObject.yOffset=mMotionDownY - (screenY + dragRegionTop);
   mDragObject.dragSource=source;

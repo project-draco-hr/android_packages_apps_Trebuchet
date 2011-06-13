@@ -9,7 +9,14 @@
     item=(ShortcutInfo)d.dragInfo;
   }
   if (item == mCurrentDragInfo) {
-    mInfo.remove(item);
+    ShortcutInfo si=(ShortcutInfo)mCurrentDragView.getTag();
+    CellLayout.LayoutParams lp=(CellLayout.LayoutParams)mCurrentDragView.getLayoutParams();
+    si.cellX=lp.cellX=mEmptyCell[0];
+    si.cellX=lp.cellY=mEmptyCell[1];
+    mContent.addViewToCellLayout(mCurrentDragView,-1,(int)item.id,lp,true);
+    mSuppressOnAdd=true;
+    mItemsInvalidated=true;
+    setupContentDimension(getItemCount());
   }
   mInfo.add(item);
 }

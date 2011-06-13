@@ -1,3 +1,8 @@
 {
+  if (!d.dragComplete) {
+    mOnExitAlarm.setOnAlarmListener(mOnExitAlarmListener);
+    mOnExitAlarm.setAlarm(ON_EXIT_CLOSE_DELAY);
+  }
+  mReorderAlarm.cancelAlarm();
   mContent.onDragExit();
 }
