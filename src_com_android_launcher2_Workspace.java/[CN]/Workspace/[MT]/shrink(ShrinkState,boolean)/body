@@ -8,6 +8,7 @@
   if (!mIsDragInProcess) {
     updateWhichPagesAcceptDrops(shrinkState);
   }
+  hideScrollingIndicator(true);
   CellLayout currentPage=(CellLayout)getChildAt(mCurrentPage);
   if (currentPage == null) {
     Log.w(TAG,"currentPage is NULL! mCurrentPage " + mCurrentPage + " mNextPage "+ mNextPage);

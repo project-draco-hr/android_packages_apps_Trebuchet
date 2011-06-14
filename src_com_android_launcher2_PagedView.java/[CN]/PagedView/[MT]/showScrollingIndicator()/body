@@ -1,0 +1,12 @@
+{
+  if (LauncherApplication.isScreenLarge())   return;
+  if (getChildCount() <= 1)   return;
+  if (!isScrollingIndicatorEnabled())   return;
+  getScrollingIndicator();
+  if (mScrollIndicator != null) {
+    mScrollIndicator.getLayoutParams().width=getPageWidthForScrollingIndicator() / getChildCount();
+    mScrollIndicator.requestLayout();
+    updateScrollingIndicatorPosition();
+    mScrollIndicator.animate().alpha(1f).setDuration(sScrollIndicatorFadeInDuration);
+  }
+}

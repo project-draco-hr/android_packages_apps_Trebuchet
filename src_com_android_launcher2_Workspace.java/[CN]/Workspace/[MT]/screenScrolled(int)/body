@@ -1,4 +1,5 @@
 {
+  super.screenScrolled(screenCenter);
   if (!LauncherApplication.isScreenLarge())   return;
   final int halfScreenSize=getMeasuredWidth() / 2;
   for (int i=0; i < getChildCount(); i++) {

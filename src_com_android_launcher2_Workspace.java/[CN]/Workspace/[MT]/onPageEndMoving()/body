@@ -1,7 +1,10 @@
 {
+  super.onPageEndMoving();
   clearChildrenCache();
   if (!mDragController.dragging()) {
-    hideOutlines();
+    if (LauncherApplication.isScreenLarge()) {
+      hideOutlines();
+    }
   }
   mOverScrollMaxBackgroundAlpha=0.0f;
   mOverScrollPageIndex=-1;
