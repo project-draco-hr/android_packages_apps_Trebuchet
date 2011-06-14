@@ -14,8 +14,5 @@
   mWidgetCountX=Math.max(1,(int)Math.round(mCellCountX / 2f));
   mWidgetCountY=Math.max(1,(int)Math.round(mCellCountY / 3f));
   mContentWidth=mWidgetSpacingLayout.getContentWidth();
-  if (mOnSizeChangedCallback != null) {
-    mOnSizeChangedCallback.run();
-  }
   invalidatePageData();
 }
