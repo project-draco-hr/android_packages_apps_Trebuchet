@@ -3,7 +3,7 @@
   final CellLayout layout=(CellLayout)parent.getParent();
   final Workspace workspace=(Workspace)layout.getParent();
   final ViewGroup launcher=(ViewGroup)workspace.getParent();
-  final ViewGroup tabs=(ViewGroup)launcher.findViewById(R.id.all_apps_button_cluster);
+  final ViewGroup tabs=(ViewGroup)launcher.findViewById(R.id.qsb_bar);
   int iconIndex=parent.indexOfChild(v);
   int iconCount=parent.getChildCount();
   int pageIndex=workspace.indexOfChild(layout);
