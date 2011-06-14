@@ -2,10 +2,10 @@
   final DragLayer.LayoutParams lp=(DragLayer.LayoutParams)getLayoutParams();
   int xOffset=mCellLayout.getLeft() + mCellLayout.getLeftPadding() - mWorkspace.getScrollX();
   int yOffset=mCellLayout.getTop() + mCellLayout.getTopPadding() - mWorkspace.getScrollY();
-  int newWidth=mWidgetView.getWidth() + 2 * mBackgroundPadding;
-  int newHeight=mWidgetView.getHeight() + 2 * mBackgroundPadding;
-  int newX=mWidgetView.getLeft() - mBackgroundPadding + xOffset;
-  int newY=mWidgetView.getTop() - mBackgroundPadding + yOffset;
+  int newWidth=mWidgetView.getWidth() + 2 * mBackgroundPadding - mWidgetPaddingLeft - mWidgetPaddingRight;
+  int newHeight=mWidgetView.getHeight() + 2 * mBackgroundPadding - mWidgetPaddingTop - mWidgetPaddingBottom;
+  int newX=mWidgetView.getLeft() - mBackgroundPadding + xOffset + mWidgetPaddingLeft;
+  int newY=mWidgetView.getTop() - mBackgroundPadding + yOffset + mWidgetPaddingTop;
   if (newY < 0) {
     newHeight-=-newY;
     newY=0;
