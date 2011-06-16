@@ -1,8 +1,10 @@
 {
   setup();
+  final ViewGroup tabsContainer=(ViewGroup)findViewById(R.id.tabs_container);
   final TabWidget tabs=(TabWidget)findViewById(com.android.internal.R.id.tabs);
   final AppsCustomizePagedView appsCustomizePane=(AppsCustomizePagedView)findViewById(R.id.apps_customize_pane_content);
   mTabs=tabs;
+  mTabsContainer=tabsContainer;
   mAppsCustomizePane=appsCustomizePane;
   if (tabs == null || mAppsCustomizePane == null)   throw new Resources.NotFoundException();
   TabContentFactory contentFactory=new TabContentFactory(){
@@ -24,4 +26,5 @@
   lastTab.setOnKeyListener(keyListener);
   View shopButton=findViewById(R.id.market_button);
   shopButton.setOnKeyListener(keyListener);
+  mTabsContainer.setAlpha(0f);
 }

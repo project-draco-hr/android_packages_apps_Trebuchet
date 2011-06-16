@@ -32,9 +32,11 @@
     widget.setOnTouchListener(this);
     int ix=i % mWidgetCountX;
     int iy=i / mWidgetCountX;
-    PagedViewGridLayout.LayoutParams lp=new PagedViewGridLayout.LayoutParams(cellWidth,cellHeight);
-    lp.leftMargin=(ix * cellWidth) + (ix * mWidgetWidthGap);
-    lp.topMargin=(iy * cellHeight) + (iy * mWidgetHeightGap);
+    GridLayout.LayoutParams lp=new GridLayout.LayoutParams(new GridLayout.Group(iy,1,GridLayout.LEFT),new GridLayout.Group(ix,1,GridLayout.TOP));
+    lp.width=cellWidth;
+    lp.height=cellHeight;
+    if (ix > 0)     lp.leftMargin=mWidgetWidthGap;
+    if (iy > 0)     lp.topMargin=mWidgetHeightGap;
     layout.addView(widget,lp);
   }
   invalidate();

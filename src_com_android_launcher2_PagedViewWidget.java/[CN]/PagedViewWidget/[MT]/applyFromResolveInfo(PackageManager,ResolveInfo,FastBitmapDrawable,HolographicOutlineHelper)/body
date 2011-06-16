@@ -11,7 +11,4 @@
     dims.setText(String.format(mDimensionsFormatString,1,1));
     dims.setLayerType(View.LAYER_TYPE_SOFTWARE,null);
   }
-  if (!LauncherApplication.isScreenLarge()) {
-    findViewById(R.id.divider).setVisibility(View.GONE);
-  }
 }

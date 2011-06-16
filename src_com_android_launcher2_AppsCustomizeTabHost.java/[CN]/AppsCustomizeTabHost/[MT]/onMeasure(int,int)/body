@@ -2,7 +2,11 @@
   boolean remeasureTabWidth=(mTabs.getLayoutParams().width <= 0);
   super.onMeasure(widthMeasureSpec,heightMeasureSpec);
   if (remeasureTabWidth) {
-    mTabs.getLayoutParams().width=mAppsCustomizePane.getPageContentWidth();
-    super.onMeasure(widthMeasureSpec,heightMeasureSpec);
+    int contentWidth=mAppsCustomizePane.getPageContentWidth();
+    if (contentWidth > 0) {
+      mTabs.getLayoutParams().width=contentWidth;
+      mTabsContainer.animate().alpha(1f).setDuration(sTabBarFadeInDuration);
+    }
   }
+  super.onMeasure(widthMeasureSpec,heightMeasureSpec);
 }
