@@ -11,6 +11,9 @@
   final TextView dims=(TextView)findViewById(R.id.widget_dims);
   dims.setText(String.format(mDimensionsFormatString,cellSpan[0],cellSpan[1]));
   dims.setLayerType(View.LAYER_TYPE_SOFTWARE,null);
+  if (!LauncherApplication.isScreenLarge()) {
+    findViewById(R.id.divider).setVisibility(View.GONE);
+  }
   if (createHolographicOutline) {
     mIconCache=cache;
     mIconCacheKey=new PagedViewIconCache.Key(info);
