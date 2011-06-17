@@ -4,6 +4,6 @@
   getLocationInWindow(tvLocation);
   mLauncher.getWorkspace().getLocationInWindow(wsLocation);
   int x=tvLocation[0] - wsLocation[0] + getMeasuredWidth() / 2;
-  int y=tvLocation[1] - wsLocation[1] + getMeasuredHeight() / 2;
+  int y=tvLocation[1] - wsLocation[1] + FolderRingAnimator.sPreviewSize / 2;
   mFolderRingAnimator.setLocation(x,y);
 }

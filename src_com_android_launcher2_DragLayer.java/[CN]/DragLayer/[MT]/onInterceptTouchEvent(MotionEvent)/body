@@ -1,6 +1,6 @@
 {
   if (ev.getAction() == MotionEvent.ACTION_DOWN) {
-    if (handleTouchDown(ev)) {
+    if (handleTouchDown(ev,true)) {
       return true;
     }
   }

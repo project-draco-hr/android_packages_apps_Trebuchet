@@ -2,7 +2,7 @@
   CellLayout.LayoutParams iconLp=(CellLayout.LayoutParams)mFolderIcon.getLayoutParams();
   CellLayout.LayoutParams lp=(CellLayout.LayoutParams)getLayoutParams();
   int width=getPaddingLeft() + getPaddingRight() + mContent.getDesiredWidth();
-  int height=getPaddingTop() + getPaddingBottom() + mContent.getDesiredHeight();
+  int height=getPaddingTop() + mContent.getDesiredHeight() + mFolderNameHeight;
   int centerX=iconLp.x + iconLp.width / 2;
   int centerY=iconLp.y + iconLp.height / 2;
   int centeredLeft=centerX - width / 2;

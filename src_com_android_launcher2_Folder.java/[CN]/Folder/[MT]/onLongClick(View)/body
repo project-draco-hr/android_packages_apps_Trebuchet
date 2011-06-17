@@ -17,9 +17,5 @@
     mContent.removeView(mCurrentDragView);
     mInfo.remove(item);
   }
- else {
-    mLauncher.closeFolder(this);
-    mLauncher.showRenameDialog(mInfo);
-  }
   return true;
 }

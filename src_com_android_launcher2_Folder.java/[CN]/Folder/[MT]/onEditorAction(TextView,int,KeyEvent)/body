@@ -1,0 +1,7 @@
+{
+  if (actionId == EditorInfo.IME_ACTION_DONE) {
+    dismissEditingName();
+    return true;
+  }
+  return false;
+}

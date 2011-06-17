@@ -8,4 +8,5 @@
   }
   mItemsInvalidated=true;
   mInfo.addListener(this);
+  mFolderName.setText(mInfo.title);
 }

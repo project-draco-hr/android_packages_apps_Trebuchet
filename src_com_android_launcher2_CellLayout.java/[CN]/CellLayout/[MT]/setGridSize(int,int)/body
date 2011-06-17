@@ -2,4 +2,5 @@
   mCountX=x;
   mCountY=y;
   mOccupied=new boolean[mCountX][mCountY];
+  requestLayout();
 }

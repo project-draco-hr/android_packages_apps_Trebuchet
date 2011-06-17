@@ -3,4 +3,11 @@
   mContent=(CellLayout)findViewById(R.id.folder_content);
   mContent.setGridSize(0,0);
   mContent.enableHardwareLayers();
+  mFolderName=(TextView)findViewById(R.id.folder_name);
+  int measureSpec=MeasureSpec.UNSPECIFIED;
+  mFolderName.measure(measureSpec,measureSpec);
+  mFolderNameHeight=mFolderName.getMeasuredHeight();
+  mFolderName.setCustomSelectionActionModeCallback(mActionModeCallback);
+  mFolderName.setCursorVisible(false);
+  mFolderName.setOnEditorActionListener(this);
 }

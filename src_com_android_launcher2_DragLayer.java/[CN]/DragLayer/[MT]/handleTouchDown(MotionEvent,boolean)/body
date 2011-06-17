@@ -14,16 +14,18 @@
       }
     }
   }
-  if (mCurrentFolder != null) {
-    mCurrentFolder.getHitRect(hitRect);
-    int[] screenPos=new int[2];
-    View parent=(View)mCurrentFolder.getParent();
-    if (parent != null) {
-      parent.getLocationOnScreen(screenPos);
-      hitRect.offset(screenPos[0],screenPos[1]);
+  if (mCurrentFolder != null && intercept) {
+    if (mCurrentFolder.isEditingName()) {
+      getDescendantRectRelativeToSelf(mCurrentFolder.getEditTextRegion(),hitRect);
       if (!hitRect.contains(x,y)) {
-        mLauncher.closeFolder();
+        mCurrentFolder.dismissEditingName();
+        return true;
       }
+    }
+    getDescendantRectRelativeToSelf(mCurrentFolder,hitRect);
+    if (!hitRect.contains(x,y)) {
+      mLauncher.closeFolder();
+      return true;
     }
   }
   return false;

@@ -3,7 +3,13 @@
     showWorkspace(true);
   }
  else   if (mWorkspace.getOpenFolder() != null) {
-    closeFolder();
+    Folder openFolder=mWorkspace.getOpenFolder();
+    if (openFolder.isEditingName()) {
+      openFolder.dismissEditingName();
+    }
+ else {
+      closeFolder();
+    }
   }
  else   if (isPreviewVisible()) {
     dismissPreview(mPreviousView);

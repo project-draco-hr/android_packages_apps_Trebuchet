@@ -1,12 +1,17 @@
 {
   mLauncher=launcher;
   mFolderIcon=folderIcon;
-  mOuterRingDrawable=launcher.getResources().getDrawable(R.drawable.portal_ring_outer_holo);
-  mInnerRingDrawable=launcher.getResources().getDrawable(R.drawable.portal_ring_inner_holo);
+  Resources res=launcher.getResources();
+  mOuterRingDrawable=res.getDrawable(R.drawable.portal_ring_outer_holo);
+  mInnerRingDrawable=res.getDrawable(R.drawable.portal_ring_inner_holo);
+  if (sPreviewSize < 0 || sPreviewPadding < 0) {
+    sPreviewSize=res.getDimensionPixelSize(R.dimen.folder_preview_size);
+    sPreviewPadding=res.getDimensionPixelSize(R.dimen.folder_preview_padding);
+  }
   if (sSharedOuterRingDrawable == null) {
-    sSharedOuterRingDrawable=launcher.getResources().getDrawable(R.drawable.portal_ring_outer_holo);
+    sSharedOuterRingDrawable=res.getDrawable(R.drawable.portal_ring_outer_holo);
   }
   if (sSharedInnerRingDrawable == null) {
-    sSharedInnerRingDrawable=launcher.getResources().getDrawable(R.drawable.portal_ring_inner_holo);
+    sSharedInnerRingDrawable=res.getDrawable(R.drawable.portal_ring_inner_holo);
   }
 }

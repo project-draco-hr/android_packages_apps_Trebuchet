@@ -2,3 +2,4 @@ View child
 int cellX
 int cellY
 int duration
+int delay
