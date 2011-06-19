@@ -6,7 +6,7 @@
   if (LauncherApplication.isScreenLarge()) {
     sIconContentSize=(int)resources.getDimension(R.dimen.app_icon_content_size);
   }
-  sIconTextureWidth=sIconTextureHeight=sIconWidth + 2;
+  sIconTextureWidth=sIconTextureHeight=sIconWidth;
   sBlurPaint.setMaskFilter(new BlurMaskFilter(5 * density,BlurMaskFilter.Blur.NORMAL));
   sGlowColorPressedPaint.setColor(0xffffc300);
   sGlowColorPressedPaint.setMaskFilter(TableMaskFilter.CreateClipTable(0,30));

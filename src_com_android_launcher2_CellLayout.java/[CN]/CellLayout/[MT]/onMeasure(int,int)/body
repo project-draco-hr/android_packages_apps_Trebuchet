@@ -6,30 +6,33 @@
   if (widthSpecMode == MeasureSpec.UNSPECIFIED || heightSpecMode == MeasureSpec.UNSPECIFIED) {
     throw new RuntimeException("CellLayout cannot have UNSPECIFIED dimensions");
   }
-  final int cellWidth=mCellWidth;
-  final int cellHeight=mCellHeight;
   int numWidthGaps=mCountX - 1;
   int numHeightGaps=mCountY - 1;
   if (mWidthGap < 0 || mHeightGap < 0) {
-    int vSpaceLeft=heightSpecSize - mTopPadding - mBottomPadding- (cellHeight * mCountY);
-    mHeightGap=numHeightGaps > 0 ? vSpaceLeft / numHeightGaps : 0;
-    int hSpaceLeft=widthSpecSize - mLeftPadding - mRightPadding- (cellWidth * mCountX);
-    mWidthGap=numWidthGaps > 0 ? hSpaceLeft / numWidthGaps : 0;
-    int minGap=Math.min(mWidthGap,mHeightGap);
-    mWidthGap=mHeightGap=minGap;
+    int hSpace=widthSpecSize - mPaddingLeft - mPaddingRight;
+    int vSpace=heightSpecSize - mPaddingTop - mPaddingBottom;
+    int hFreeSpace=hSpace - (mCountX * mOriginalCellWidth);
+    int vFreeSpace=vSpace - (mCountY * mOriginalCellHeight);
+    mWidthGap=Math.min(mMaxGap,numWidthGaps > 0 ? (hFreeSpace / numWidthGaps) : 0);
+    mHeightGap=Math.min(mMaxGap,numHeightGaps > 0 ? (vFreeSpace / numHeightGaps) : 0);
+    int remainingHSpace=hFreeSpace - (numWidthGaps * mWidthGap);
+    int remainingVSpace=vFreeSpace - (numHeightGaps * mHeightGap);
+    mCellWidth=mOriginalCellWidth + remainingHSpace / mCountX;
+    mCellHeight=mOriginalCellHeight + remainingVSpace / mCountY;
+    mChildren.setCellDimensions(mCellWidth,mCellHeight,mWidthGap,mHeightGap);
   }
   int newWidth=widthSpecSize;
   int newHeight=heightSpecSize;
   if (widthSpecMode == MeasureSpec.AT_MOST) {
-    newWidth=mLeftPadding + mRightPadding + (mCountX * cellWidth)+ ((mCountX - 1) * mWidthGap);
-    newHeight=mTopPadding + mBottomPadding + (mCountY * cellHeight)+ ((mCountY - 1) * mHeightGap);
+    newWidth=mPaddingLeft + mPaddingRight + (mCountX * mCellWidth)+ ((mCountX - 1) * mWidthGap);
+    newHeight=mPaddingTop + mPaddingBottom + (mCountY * mCellHeight)+ ((mCountY - 1) * mHeightGap);
     setMeasuredDimension(newWidth,newHeight);
   }
   int count=getChildCount();
   for (int i=0; i < count; i++) {
     View child=getChildAt(i);
-    int childWidthMeasureSpec=MeasureSpec.makeMeasureSpec(newWidth - mLeftPadding - mRightPadding,MeasureSpec.EXACTLY);
-    int childheightMeasureSpec=MeasureSpec.makeMeasureSpec(newHeight - mTopPadding - mBottomPadding,MeasureSpec.EXACTLY);
+    int childWidthMeasureSpec=MeasureSpec.makeMeasureSpec(newWidth - mPaddingLeft - mPaddingRight,MeasureSpec.EXACTLY);
+    int childheightMeasureSpec=MeasureSpec.makeMeasureSpec(newHeight - mPaddingTop - mPaddingBottom,MeasureSpec.EXACTLY);
     child.measure(childWidthMeasureSpec,childheightMeasureSpec);
   }
   setMeasuredDimension(newWidth,newHeight);

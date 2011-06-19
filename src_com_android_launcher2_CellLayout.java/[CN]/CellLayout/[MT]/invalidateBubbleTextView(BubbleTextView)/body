@@ -1,4 +1,4 @@
 {
   final int padding=icon.getPressedOrFocusedBackgroundPadding();
-  invalidate(icon.getLeft() + getLeftPadding() - padding,icon.getTop() + getTopPadding() - padding,icon.getRight() + getLeftPadding() + padding,icon.getBottom() + getTopPadding() + padding);
+  invalidate(icon.getLeft() + getPaddingLeft() - padding,icon.getTop() + getPaddingTop() - padding,icon.getRight() + getPaddingLeft() + padding,icon.getBottom() + getPaddingTop() + padding);
 }

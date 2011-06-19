@@ -45,9 +45,9 @@
     final Drawable d=mCrosshairsDrawable;
     final int width=d.getIntrinsicWidth();
     final int height=d.getIntrinsicHeight();
-    int x=getLeftPadding() - (mWidthGap / 2) - (width / 2);
+    int x=getPaddingLeft() - (mWidthGap / 2) - (width / 2);
     for (int col=0; col <= countX; col++) {
-      int y=getTopPadding() - (mHeightGap / 2) - (height / 2);
+      int y=getPaddingTop() - (mHeightGap / 2) - (height / 2);
       for (int row=0; row <= countY; row++) {
         mTmpPointF.set(x - mDragCenter.x,y - mDragCenter.y);
         float dist=mTmpPointF.length();
@@ -76,7 +76,7 @@
     final int padding=mPressedOrFocusedIcon.getPressedOrFocusedBackgroundPadding();
     final Bitmap b=mPressedOrFocusedIcon.getPressedOrFocusedBackground();
     if (b != null) {
-      canvas.drawBitmap(b,mPressedOrFocusedIcon.getLeft() + getLeftPadding() - padding,mPressedOrFocusedIcon.getTop() + getTopPadding() - padding,null);
+      canvas.drawBitmap(b,mPressedOrFocusedIcon.getLeft() + getPaddingLeft() - padding,mPressedOrFocusedIcon.getTop() + getPaddingTop() - padding,null);
     }
   }
 }

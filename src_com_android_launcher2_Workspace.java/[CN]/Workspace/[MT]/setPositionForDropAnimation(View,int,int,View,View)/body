@@ -3,6 +3,6 @@
   int viewX=dragViewX + (dragView.getWidth() - child.getMeasuredWidth()) / 2;
   int viewY=dragViewY + (dragView.getHeight() - child.getMeasuredHeight()) / 2;
   CellLayout layout=(CellLayout)parent;
-  lp.oldX=viewX - (layout.getLeft() + layout.getLeftPadding() - mScrollX);
-  lp.oldY=viewY - (layout.getTop() + layout.getTopPadding() - mScrollY);
+  lp.oldX=viewX - (layout.getLeft() + layout.getPaddingLeft() - mScrollX);
+  lp.oldY=viewY - (layout.getTop() + layout.getPaddingTop() - mScrollY);
 }

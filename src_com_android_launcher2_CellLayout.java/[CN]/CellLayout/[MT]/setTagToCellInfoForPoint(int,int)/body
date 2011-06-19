@@ -12,7 +12,7 @@
       child.getHitRect(frame);
       final int tmpXY[]=mTmpXY;
       child.getLocationOnScreen(tmpXY);
-      frame.offset(mLeftPadding,mTopPadding);
+      frame.offset(mPaddingLeft,mPaddingTop);
       if (frame.contains(x,y)) {
         cellInfo.cell=child;
         cellInfo.cellX=lp.cellX;

@@ -1,6 +1,6 @@
 {
-  final int hStartPadding=getLeftPadding();
-  final int vStartPadding=getTopPadding();
+  final int hStartPadding=getPaddingLeft();
+  final int vStartPadding=getPaddingTop();
   result[0]=(x - hStartPadding) / (mCellWidth + mWidthGap);
   result[1]=(y - vStartPadding) / (mCellHeight + mHeightGap);
   final int xAxis=mCountX;
