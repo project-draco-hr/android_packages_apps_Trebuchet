@@ -1,12 +1,9 @@
 {
   Display display=mLauncher.getWindowManager().getDefaultDisplay();
-  Point displaySize=new Point();
-  display.getSize(displaySize);
-  if (LauncherApplication.isScreenLarge()) {
-    displaySize.y+=(int)getResources().getDimension(R.dimen.status_bar_height);
-  }
-  final int maxDim=Math.max(displaySize.x,displaySize.y);
-  final int minDim=Math.min(displaySize.x,displaySize.y);
+  DisplayMetrics displayMetrics=new DisplayMetrics();
+  display.getRealMetrics(displayMetrics);
+  final int maxDim=Math.max(displayMetrics.widthPixels,displayMetrics.heightPixels);
+  final int minDim=Math.min(displayMetrics.widthPixels,displayMetrics.heightPixels);
   mWallpaperWidth=(int)(maxDim * wallpaperTravelToScreenWidthRatio(maxDim,minDim));
   mWallpaperHeight=(int)(maxDim * wallpaperTravelToScreenHeightRatio(maxDim,minDim));
   new Thread("setWallpaperDimension"){

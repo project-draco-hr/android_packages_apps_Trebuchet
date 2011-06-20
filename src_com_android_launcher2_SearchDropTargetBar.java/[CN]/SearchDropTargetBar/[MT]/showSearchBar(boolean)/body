@@ -1,8 +1,10 @@
 {
+  cancelAnimations();
   if (animated) {
-    mQSBSearchBar.animate().alpha(1f).setDuration(sTransitionInDuration);
+    mQSBSearchBarFadeInAnim.start();
   }
  else {
+    mQSBSearchBar.setVisibility(View.VISIBLE);
     mQSBSearchBar.setAlpha(1f);
   }
   mIsSearchBarHidden=false;

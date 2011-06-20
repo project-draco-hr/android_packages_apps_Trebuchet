@@ -4,4 +4,36 @@
   mDropTargetBar=findViewById(R.id.drag_target_bar);
   mInfoDropTarget=(ButtonDropTarget)mDropTargetBar.findViewById(R.id.info_target);
   mDeleteDropTarget=(ButtonDropTarget)mDropTargetBar.findViewById(R.id.delete_target);
+  mDropTargetBarFadeInAnim=ObjectAnimator.ofFloat(mDropTargetBar,"alpha",1f);
+  mDropTargetBarFadeInAnim.setDuration(sTransitionInDuration);
+  mDropTargetBarFadeInAnim.addListener(new AnimatorListenerAdapter(){
+    @Override public void onAnimationStart(    Animator animation){
+      mDropTargetBar.setVisibility(View.VISIBLE);
+    }
+  }
+);
+  mDropTargetBarFadeOutAnim=ObjectAnimator.ofFloat(mDropTargetBar,"alpha",0f);
+  mDropTargetBarFadeOutAnim.setDuration(sTransitionOutDuration);
+  mDropTargetBarFadeOutAnim.addListener(new AnimatorListenerAdapter(){
+    @Override public void onAnimationEnd(    Animator animation){
+      mDropTargetBar.setVisibility(View.GONE);
+    }
+  }
+);
+  mQSBSearchBarFadeInAnim=ObjectAnimator.ofFloat(mQSBSearchBar,"alpha",1f);
+  mQSBSearchBarFadeInAnim.setDuration(sTransitionInDuration);
+  mQSBSearchBarFadeInAnim.addListener(new AnimatorListenerAdapter(){
+    @Override public void onAnimationStart(    Animator animation){
+      mQSBSearchBar.setVisibility(View.VISIBLE);
+    }
+  }
+);
+  mQSBSearchBarFadeOutAnim=ObjectAnimator.ofFloat(mQSBSearchBar,"alpha",0f);
+  mQSBSearchBarFadeOutAnim.setDuration(sTransitionOutDuration);
+  mQSBSearchBarFadeOutAnim.addListener(new AnimatorListenerAdapter(){
+    @Override public void onAnimationEnd(    Animator animation){
+      mQSBSearchBar.setVisibility(View.GONE);
+    }
+  }
+);
 }

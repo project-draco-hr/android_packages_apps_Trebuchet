@@ -1,4 +1,0 @@
-{
-  if (info instanceof ApplicationInfo)   return true;
-  return (((ItemInfo)info).itemType == LauncherSettings.Favorites.ITEM_TYPE_APPLICATION);
-}

@@ -1,7 +1,6 @@
 {
-  ItemInfo item=(ItemInfo)info;
   boolean isVisible=true;
-  if (!isApplication(info)) {
+  if (!isAllAppsApplication(source,info)) {
     isVisible=false;
   }
   mActive=isVisible;

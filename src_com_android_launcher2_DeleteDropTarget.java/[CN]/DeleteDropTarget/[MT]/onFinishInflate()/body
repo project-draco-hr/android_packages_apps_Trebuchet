@@ -6,4 +6,10 @@
   mHoverPaint.setColorFilter(new PorterDuffColorFilter(mHoverColor,PorterDuff.Mode.SRC_ATOP));
   setBackgroundColor(mHoverColor);
   getBackground().setAlpha(0);
+  int orientation=getResources().getConfiguration().orientation;
+  if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+    if (!LauncherApplication.isScreenLarge()) {
+      mText.setText("");
+    }
+  }
 }

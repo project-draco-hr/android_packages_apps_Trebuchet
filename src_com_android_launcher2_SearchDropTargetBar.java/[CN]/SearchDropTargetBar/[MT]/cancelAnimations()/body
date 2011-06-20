@@ -1,0 +1,6 @@
+{
+  mDropTargetBarFadeInAnim.cancel();
+  mDropTargetBarFadeOutAnim.cancel();
+  mQSBSearchBarFadeInAnim.cancel();
+  mQSBSearchBarFadeOutAnim.cancel();
+}
