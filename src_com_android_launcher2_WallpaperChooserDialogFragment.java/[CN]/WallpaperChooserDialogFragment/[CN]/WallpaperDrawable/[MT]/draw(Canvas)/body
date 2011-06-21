@@ -1,0 +1,8 @@
+{
+  if (mBitmap == null)   return;
+  int width=canvas.getWidth();
+  int height=canvas.getHeight();
+  int x=(width - mIntrinsicWidth) / 2;
+  int y=(height - mIntrinsicHeight) / 2;
+  canvas.drawBitmap(mBitmap,x,y,null);
+}

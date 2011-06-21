@@ -4,15 +4,9 @@
     if (mBitmap != null) {
       mBitmap.recycle();
     }
-    final ImageView view=mImageView;
-    if (view != null) {
-      view.setImageBitmap(b);
-      mBitmap=b;
-      final Drawable drawable=view.getDrawable();
-      drawable.setFilterBitmap(true);
-      drawable.setDither(true);
-      view.postInvalidate();
-    }
+    mBitmap=b;
+    mWallpaperDrawable.setBitmap(b);
+    getView().postInvalidate();
     mLoader=null;
   }
  else {

@@ -1,0 +1,6 @@
+{
+  mBitmap=bitmap;
+  if (mBitmap == null)   return;
+  mIntrinsicWidth=mBitmap.getWidth();
+  mIntrinsicHeight=mBitmap.getHeight();
+}
