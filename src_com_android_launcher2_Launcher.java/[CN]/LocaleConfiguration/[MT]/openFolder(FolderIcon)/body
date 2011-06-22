@@ -4,7 +4,6 @@
   growAndFadeOutFolderIcon(folderIcon);
   info.opened=true;
   mWorkspace.addInFullScreen(folder,info.screen);
-  mDragLayer.setCurrentFolder(folder);
   folder.animateOpen();
   folder.onOpen();
 }

@@ -14,15 +14,16 @@
       }
     }
   }
-  if (mCurrentFolder != null && intercept) {
-    if (mCurrentFolder.isEditingName()) {
-      getDescendantRectRelativeToSelf(mCurrentFolder.getEditTextRegion(),hitRect);
+  Folder currentFolder=mLauncher.getWorkspace().getOpenFolder();
+  if (currentFolder != null && intercept) {
+    if (currentFolder.isEditingName()) {
+      getDescendantRectRelativeToSelf(currentFolder.getEditTextRegion(),hitRect);
       if (!hitRect.contains(x,y)) {
-        mCurrentFolder.dismissEditingName();
+        currentFolder.dismissEditingName();
         return true;
       }
     }
-    getDescendantRectRelativeToSelf(mCurrentFolder,hitRect);
+    getDescendantRectRelativeToSelf(currentFolder,hitRect);
     if (!hitRect.contains(x,y)) {
       mLauncher.closeFolder();
       return true;

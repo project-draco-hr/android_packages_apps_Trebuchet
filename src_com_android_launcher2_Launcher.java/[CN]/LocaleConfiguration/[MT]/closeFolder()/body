@@ -2,6 +2,5 @@
   Folder folder=mWorkspace.getOpenFolder();
   if (folder != null) {
     closeFolder(folder);
-    mDragLayer.setCurrentFolder(null);
   }
 }
