@@ -8,5 +8,10 @@
   }
   mItemsInvalidated=true;
   mInfo.addListener(this);
-  mFolderName.setText(mInfo.title);
+  if (sDefaultFolderName != mInfo.title) {
+    mFolderName.setText(mInfo.title);
+  }
+ else {
+    mFolderName.setText("");
+  }
 }

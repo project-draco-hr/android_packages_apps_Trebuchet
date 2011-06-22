@@ -8,4 +8,7 @@
   mInputMethodManager=(InputMethodManager)mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
   Resources res=getResources();
   mExpandDuration=res.getInteger(R.integer.config_folderAnimDuration);
+  if (sDefaultFolderName == null) {
+    sDefaultFolderName=res.getString(R.string.folder_name);
+  }
 }
