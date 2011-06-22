@@ -1,0 +1,9 @@
+{
+  if (ev.getAction() == MotionEvent.ACTION_DOWN) {
+    mFolderName.getHitRect(mHitRect);
+    if (mHitRect.contains((int)ev.getX(),(int)ev.getY()) && !mIsEditingName) {
+      startEditingFolderName();
+    }
+  }
+  return false;
+}

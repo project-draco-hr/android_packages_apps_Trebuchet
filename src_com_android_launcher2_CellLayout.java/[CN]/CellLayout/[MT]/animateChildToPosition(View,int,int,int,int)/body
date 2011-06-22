@@ -18,6 +18,9 @@
     lp.isLockedToGrid=false;
     int newX=lp.x;
     int newY=lp.y;
+    lp.x=oldX;
+    lp.y=oldY;
+    child.requestLayout();
     PropertyValuesHolder x=PropertyValuesHolder.ofInt("x",oldX,newX);
     PropertyValuesHolder y=PropertyValuesHolder.ofInt("y",oldY,newY);
     ObjectAnimator oa=ObjectAnimator.ofPropertyValuesHolder(lp,x,y);
@@ -44,6 +47,7 @@
       }
     }
 );
+    oa.setStartDelay(delay);
     oa.start();
     return true;
   }

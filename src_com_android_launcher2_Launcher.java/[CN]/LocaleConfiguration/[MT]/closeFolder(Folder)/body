@@ -8,5 +8,4 @@
     mDragController.removeDropTarget((DropTarget)folder);
   }
   folder.animateClosed();
-  folder.onClose();
 }

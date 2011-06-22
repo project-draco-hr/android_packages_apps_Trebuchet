@@ -1,7 +1,5 @@
 {
   if (!(getParent() instanceof CellLayoutChildren))   return;
-  CellLayoutChildren clc=(CellLayoutChildren)getParent();
-  final CellLayout cellLayout=(CellLayout)clc.getParent();
   ObjectAnimator oa;
   if (mMode == PARTIAL_GROW) {
     PropertyValuesHolder alpha=PropertyValuesHolder.ofFloat("alpha",0);
@@ -31,8 +29,8 @@
   }
   oa.addListener(new AnimatorListenerAdapter(){
     @Override public void onAnimationEnd(    Animator animation){
+      onClose();
       onCloseComplete();
-      cellLayout.removeViewWithoutMarkingCells(Folder.this);
       mState=STATE_SMALL;
     }
     @Override public void onAnimationStart(    Animator animation){

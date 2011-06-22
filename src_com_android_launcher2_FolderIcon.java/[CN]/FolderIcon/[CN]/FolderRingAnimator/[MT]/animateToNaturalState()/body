@@ -7,8 +7,8 @@
   mNeutralAnimator.addUpdateListener(new AnimatorUpdateListener(){
     public void onAnimationUpdate(    ValueAnimator animation){
       final float percent=(Float)animation.getAnimatedValue();
-      mOuterRingScale=OUTER_RING_BASELINE_SCALE + OUTER_RING_GROWTH_FACTOR - percent * OUTER_RING_GROWTH_FACTOR;
-      mInnerRingScale=INNER_RING_BASELINE_SCALE + INNER_RING_GROWTH_FACTOR - percent * INNER_RING_GROWTH_FACTOR;
+      mOuterRingSize=(1 + (1 - percent) * OUTER_RING_GROWTH_FACTOR) * sPreviewSize;
+      mInnerRingSize=(1 + (1 - percent) * INNER_RING_GROWTH_FACTOR) * sPreviewSize;
       mLauncher.getWorkspace().invalidate();
       if (mFolderIcon != null) {
         mFolderIcon.invalidate();
@@ -19,7 +19,7 @@
   mNeutralAnimator.addListener(new AnimatorListenerAdapter(){
     @Override public void onAnimationEnd(    Animator animation){
       if (mFolderIcon != null) {
-        mFolderIcon.setBackgroundDrawable(mInnerRingDrawable);
+        mFolderIcon.mPreviewBackground.setVisibility(VISIBLE);
       }
       mLauncher.getWorkspace().hideFolderAccept(FolderRingAnimator.this);
     }

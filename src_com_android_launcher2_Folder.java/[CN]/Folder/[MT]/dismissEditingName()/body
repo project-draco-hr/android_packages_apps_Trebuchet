@@ -1,0 +1,4 @@
+{
+  mInputMethodManager.hideSoftInputFromWindow(getWindowToken(),0);
+  doneEditingFolderName(true);
+}

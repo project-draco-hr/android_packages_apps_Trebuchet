@@ -1,0 +1,4 @@
+{
+  mFolderName.setCursorVisible(true);
+  mIsEditingName=true;
+}

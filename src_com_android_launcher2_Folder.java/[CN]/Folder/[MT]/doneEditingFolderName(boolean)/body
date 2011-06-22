@@ -1,0 +1,7 @@
+{
+  mInfo.setTitle(mFolderName.getText());
+  LauncherModel.updateItemInDatabase(mLauncher,mInfo);
+  mFolderName.setCursorVisible(false);
+  mFolderName.clearFocus();
+  mIsEditingName=false;
+}

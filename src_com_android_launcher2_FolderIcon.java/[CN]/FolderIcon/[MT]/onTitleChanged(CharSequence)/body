@@ -1,0 +1,5 @@
+{
+  mFolderName.setText(title);
+  mFolderName.invalidate();
+  mFolderName.requestLayout();
+}
