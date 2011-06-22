@@ -10,4 +10,5 @@
   mFolderName.setCustomSelectionActionModeCallback(mActionModeCallback);
   mFolderName.setCursorVisible(false);
   mFolderName.setOnEditorActionListener(this);
+  mFolderName.setSelectAllOnFocus(true);
 }
