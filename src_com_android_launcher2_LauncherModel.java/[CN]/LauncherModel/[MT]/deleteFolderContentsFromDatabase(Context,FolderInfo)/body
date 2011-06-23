@@ -1,5 +1,3 @@
 {
-  final ContentResolver cr=context.getContentResolver();
-  cr.delete(LauncherSettings.Favorites.getContentUri(info.id,false),null,null);
-  cr.delete(LauncherSettings.Favorites.CONTENT_URI,LauncherSettings.Favorites.CONTAINER + "=" + info.id,null);
+  deleteFolderContentsFromDatabase(context,info,false);
 }

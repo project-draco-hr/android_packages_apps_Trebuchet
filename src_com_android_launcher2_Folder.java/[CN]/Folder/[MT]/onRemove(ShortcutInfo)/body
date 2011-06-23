@@ -9,4 +9,7 @@
  else {
     setupContentForNumItems(getItemCount());
   }
+  if (getItemCount() <= 1) {
+    replaceFolderWithFinalItem();
+  }
 }

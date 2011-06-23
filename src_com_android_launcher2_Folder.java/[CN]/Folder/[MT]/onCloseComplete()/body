@@ -3,4 +3,7 @@
     setupContentForNumItems(getItemCount());
     mRearrangeOnClose=false;
   }
+  if (getItemCount() <= 1) {
+    replaceFolderWithFinalItem();
+  }
 }
