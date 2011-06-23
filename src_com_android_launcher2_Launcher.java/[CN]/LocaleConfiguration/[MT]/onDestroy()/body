@@ -14,12 +14,6 @@
   TextKeyListener.getInstance().release();
   unbindDesktopItems();
   getContentResolver().unregisterContentObserver(mWidgetObserver);
-  if (mPreviousView != null) {
-    dismissPreview(mPreviousView);
-  }
-  if (mNextView != null) {
-    dismissPreview(mNextView);
-  }
   unregisterReceiver(mCloseSystemDialogsReceiver);
   ((ViewGroup)mWorkspace.getParent()).removeAllViews();
   mWorkspace.removeAllViews();

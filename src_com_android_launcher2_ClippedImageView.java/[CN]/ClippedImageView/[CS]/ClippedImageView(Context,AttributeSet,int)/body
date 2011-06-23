@@ -1,6 +1,0 @@
-{
-  super(context,attrs,defStyle);
-  TypedArray a=context.obtainStyledAttributes(attrs,R.styleable.ClippedImageView,defStyle,0);
-  mZone=a.getDimensionPixelSize(R.styleable.ClippedImageView_ignoreZone,0);
-  a.recycle();
-}

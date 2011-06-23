@@ -1,12 +1,4 @@
 {
   super.notifyPageSwitchListener();
-  if (mPreviousIndicator != null) {
-    int page=mNextPage;
-    if (page == INVALID_PAGE) {
-      page=mCurrentPage;
-    }
-    mPreviousIndicator.setLevel(page);
-    mNextIndicator.setLevel(page);
-  }
   Launcher.setScreen(mCurrentPage);
 }

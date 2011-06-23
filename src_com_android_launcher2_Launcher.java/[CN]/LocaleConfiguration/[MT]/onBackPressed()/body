@@ -11,10 +11,6 @@
       closeFolder();
     }
   }
- else   if (isPreviewVisible()) {
-    dismissPreview(mPreviousView);
-    dismissPreview(mNextView);
-  }
  else {
     mWorkspace.exitWidgetResizeMode();
     mWorkspace.showOutlinesTemporarily();

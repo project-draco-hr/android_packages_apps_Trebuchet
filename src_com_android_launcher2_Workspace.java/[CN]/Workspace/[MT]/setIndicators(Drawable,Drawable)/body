@@ -1,6 +1,0 @@
-{
-  mPreviousIndicator=previous;
-  mNextIndicator=next;
-  previous.setLevel(mCurrentPage);
-  next.setLevel(mCurrentPage);
-}
