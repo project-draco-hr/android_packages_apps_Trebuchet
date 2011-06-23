@@ -15,7 +15,7 @@
     loadAssociatedPages(mNextPage);
   }
  else {
-    mDeferLoadAssociatedPagesAfterScroll=true;
+    mDeferLoadAssociatedPagesUntilScrollCompletes=true;
   }
   notifyPageSwitchListener();
   invalidate();

@@ -1,7 +1,0 @@
-{
-  if (animate) {
-    sRollo.clearSelectedIcon();
-    sRollo.setHomeSelected(SELECTED_NONE);
-  }
-  sRollo.mScript.invoke_setZoom(zoom,animate ? 1 : 0);
-}

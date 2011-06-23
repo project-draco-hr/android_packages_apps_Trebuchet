@@ -1,7 +1,0 @@
-{
-  if (mWaitingToInitPages) {
-    mWaitingToInitPages=false;
-    postInvalidatePageData(false);
-  }
-  super.onLayout(changed,left,top,right,bottom);
-}

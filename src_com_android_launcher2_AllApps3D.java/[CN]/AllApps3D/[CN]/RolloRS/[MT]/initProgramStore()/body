@@ -1,8 +1,0 @@
-{
-  ProgramStore.Builder bs=new ProgramStore.Builder(sRS);
-  bs.setDepthFunc(ProgramStore.DepthFunc.ALWAYS);
-  bs.setColorMaskEnabled(true,true,true,false);
-  bs.setDitherEnabled(true);
-  bs.setBlendFunc(ProgramStore.BlendSrcFunc.SRC_ALPHA,ProgramStore.BlendDstFunc.ONE_MINUS_SRC_ALPHA);
-  mScript.set_gPS(bs.create());
-}

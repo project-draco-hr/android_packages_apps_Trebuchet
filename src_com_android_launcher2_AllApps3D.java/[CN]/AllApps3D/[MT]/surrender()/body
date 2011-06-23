@@ -1,7 +1,0 @@
-{
-  if (sRS != null) {
-    sRS.setSurface(null,0,0);
-    sRS.setMessageHandler(null);
-  }
-  mSurrendered=true;
-}

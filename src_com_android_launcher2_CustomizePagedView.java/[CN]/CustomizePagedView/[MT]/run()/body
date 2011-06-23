@@ -1,7 +1,0 @@
-{
-  ResolveInfo info=(ResolveInfo)clickView.getTag();
-  Intent createWallpapersIntent=new Intent(Intent.ACTION_SET_WALLPAPER);
-  ComponentName name=new ComponentName(info.activityInfo.packageName,info.activityInfo.name);
-  createWallpapersIntent.setComponent(name);
-  mLauncher.processWallpaper(createWallpapersIntent);
-}

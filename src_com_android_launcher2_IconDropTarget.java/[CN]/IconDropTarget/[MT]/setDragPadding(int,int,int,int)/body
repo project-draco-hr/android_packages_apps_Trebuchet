@@ -1,6 +1,0 @@
-{
-  mDragPadding[0]=t;
-  mDragPadding[1]=r;
-  mDragPadding[2]=b;
-  mDragPadding[3]=l;
-}

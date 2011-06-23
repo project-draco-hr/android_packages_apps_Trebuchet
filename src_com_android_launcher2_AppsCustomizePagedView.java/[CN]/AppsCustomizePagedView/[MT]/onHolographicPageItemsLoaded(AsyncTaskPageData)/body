@@ -7,14 +7,14 @@
     int count=cl.getPageChildCount();
     for (int i=0; i < count; ++i) {
       PagedViewIcon icon=(PagedViewIcon)cl.getChildOnPageAt(i);
-      icon.setHolographicOutline(data.images.get(i));
+      icon.setHolographicOutline(data.generatedImages.get(i));
     }
   }
  else {
     int count=layout.getChildCount();
     for (int i=0; i < count; ++i) {
       View v=layout.getChildAt(i);
-      ((PagedViewWidget)v).setHolographicOutline(data.images.get(i));
+      ((PagedViewWidget)v).setHolographicOutline(data.generatedImages.get(i));
     }
   }
 }

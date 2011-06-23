@@ -1,5 +1,0 @@
-{
-  Context context=getContext();
-  mLauncher=launcher;
-  mPackageManager=context.getPackageManager();
-}

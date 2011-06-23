@@ -1,5 +1,0 @@
-{
-  if (gainFocus) {
-    mGrid.requestFocus();
-  }
-}

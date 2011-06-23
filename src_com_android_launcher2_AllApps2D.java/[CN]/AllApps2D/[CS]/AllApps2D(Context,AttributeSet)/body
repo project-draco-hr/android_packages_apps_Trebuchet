@@ -1,6 +1,0 @@
-{
-  super(context,attrs);
-  setVisibility(View.GONE);
-  setSoundEffectsEnabled(false);
-  mAppsAdapter=new AppsAdapter(getContext(),mVisibleAppsList);
-}

@@ -3,7 +3,7 @@
   while (iter.hasNext()) {
     AppsCustomizeAsyncTask task=(AppsCustomizeAsyncTask)iter.next();
     int taskPage=task.page;
-    if (taskPage < (mCurrentPage - 2) || taskPage > (mCurrentPage + 2)) {
+    if (taskPage < getAssociatedLowerPageBound(mCurrentPage) || taskPage > getAssociatedUpperPageBound(mCurrentPage)) {
       task.cancel(false);
       iter.remove();
     }
@@ -15,7 +15,7 @@
     @Override public void run(    AppsCustomizeAsyncTask task,    AsyncTaskPageData data){
       task.syncThreadPriority();
       ArrayList<Object> items=data.items;
-      ArrayList<Bitmap> images=data.images;
+      ArrayList<Bitmap> images=data.generatedImages;
       int count=items.size();
       int cellWidth=data.cellWidth;
       int cellHeight=data.cellHeight;
@@ -25,11 +25,11 @@
         if (rawInfo instanceof AppWidgetProviderInfo) {
           AppWidgetProviderInfo info=(AppWidgetProviderInfo)rawInfo;
           int[] cellSpans=CellLayout.rectToCell(getResources(),info.minWidth,info.minHeight,null);
-          images.add(getWidgetPreviewInBackground(info,cellSpans[0],cellSpans[1],cellWidth,cellHeight));
+          images.add(getWidgetPreview(info,cellSpans[0],cellSpans[1],cellWidth,cellHeight));
         }
  else         if (rawInfo instanceof ResolveInfo) {
           ResolveInfo info=(ResolveInfo)rawInfo;
-          images.add(getShortcutPreviewInBackground(info,cellWidth,cellHeight));
+          images.add(getShortcutPreview(info,cellWidth,cellHeight));
         }
       }
     }
@@ -43,7 +43,7 @@
     }
   }
 );
-  LoadWidgetPreviewsTask t=new LoadWidgetPreviewsTask(page,mContentType);
+  AppsCustomizeAsyncTask t=new AppsCustomizeAsyncTask(page,mContentType);
   t.setThreadPriority(getThreadPriorityForPage(page));
   t.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,pageData);
   mRunningTasks.add(t);

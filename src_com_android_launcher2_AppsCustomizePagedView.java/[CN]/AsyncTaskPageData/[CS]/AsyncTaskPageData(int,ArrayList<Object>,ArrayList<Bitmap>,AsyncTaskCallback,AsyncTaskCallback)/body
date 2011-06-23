@@ -1,8 +1,8 @@
 {
   page=p;
   items=l;
-  srcImages=si;
-  images=new ArrayList<Bitmap>();
+  sourceImages=si;
+  generatedImages=new ArrayList<Bitmap>();
   cellWidth=cellHeight=-1;
   doInBackgroundCallback=bgR;
   postExecuteCallback=postR;

@@ -1,3 +1,0 @@
-{
-  return isVisible() && mZoom <= 0.999f;
-}

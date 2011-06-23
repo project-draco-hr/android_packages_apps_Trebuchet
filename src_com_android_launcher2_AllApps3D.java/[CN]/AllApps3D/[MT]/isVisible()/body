@@ -1,3 +1,0 @@
-{
-  return sRollo != null && mZoom > 0.001f;
-}

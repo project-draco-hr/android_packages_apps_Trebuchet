@@ -1,5 +1,0 @@
-{
-  if (sRS != null) {
-    sRS.bindRootScript(null);
-  }
-}

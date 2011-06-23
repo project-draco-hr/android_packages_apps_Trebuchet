@@ -1,6 +1,0 @@
-{
-  if (mWaitingToInitPages || mCellCountX <= 0 || mCellCountY <= 0) {
-    return;
-  }
-  super.invalidatePageData();
-}

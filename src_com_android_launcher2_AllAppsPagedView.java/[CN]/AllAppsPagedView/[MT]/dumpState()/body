@@ -1,3 +1,0 @@
-{
-  ApplicationInfo.dumpApplicationInfoList(TAG,"mApps",mApps);
-}

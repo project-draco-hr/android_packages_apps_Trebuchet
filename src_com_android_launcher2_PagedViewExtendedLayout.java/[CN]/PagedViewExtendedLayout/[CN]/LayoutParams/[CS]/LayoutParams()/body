@@ -1,3 +1,0 @@
-{
-  super(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.MATCH_PARENT);
-}

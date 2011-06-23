@@ -1,3 +1,0 @@
-{
-  return LauncherApplication.isScreenLarge() ? XLARGE_ANIMATION_DURATION : ANIMATION_DURATION;
-}

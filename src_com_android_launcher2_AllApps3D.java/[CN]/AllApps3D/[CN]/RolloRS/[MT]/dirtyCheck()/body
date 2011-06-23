@@ -1,5 +1,0 @@
-{
-  if (sZoomDirty) {
-    setZoom(mAllApps.sNextZoom,mAllApps.sAnimateNextZoom);
-  }
-}

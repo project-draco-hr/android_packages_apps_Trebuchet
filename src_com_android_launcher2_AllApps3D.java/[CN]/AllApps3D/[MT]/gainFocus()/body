@@ -1,6 +1,0 @@
-{
-  if (!mArrowNavigation && sRollo.mScript.get_gIconCount() > 0) {
-    mArrowNavigation=true;
-    sRollo.selectIcon(Math.round(sRollo.mScrollPos) * mColumnsPerPage,SELECTED_FOCUSED);
-  }
-}

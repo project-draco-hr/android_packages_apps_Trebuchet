@@ -1,4 +1,0 @@
-{
-  mBackground.setBounds(mScrollX,0,mScrollX + getMeasuredWidth(),getMeasuredHeight());
-  mBackground.draw(canvas);
-}

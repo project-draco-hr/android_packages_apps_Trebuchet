@@ -1,3 +1,0 @@
-{
-  return mZoom > 0.001f;
-}

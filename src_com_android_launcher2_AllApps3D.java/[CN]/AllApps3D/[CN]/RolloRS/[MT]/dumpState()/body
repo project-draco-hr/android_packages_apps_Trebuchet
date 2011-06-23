@@ -1,8 +1,0 @@
-{
-  Log.d(TAG,"sRollo.mWidth=" + mWidth);
-  Log.d(TAG,"sRollo.mHeight=" + mHeight);
-  Log.d(TAG,"sRollo.mIcons=" + Arrays.toString(mIcons));
-  if (mIcons != null) {
-    Log.d(TAG,"sRollo.mIcons.length=" + mIcons.length);
-  }
-}
