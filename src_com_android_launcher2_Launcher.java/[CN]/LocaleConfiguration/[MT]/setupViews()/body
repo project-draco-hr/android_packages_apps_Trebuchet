@@ -28,18 +28,6 @@
     ImageView hotseatRight=(ImageView)findViewById(R.id.hotseat_right);
     hotseatRight.setContentDescription(mHotseatLabels[1]);
     hotseatRight.setImageDrawable(mHotseatIcons[1]);
-    View.OnKeyListener listener=new IndicatorKeyEventListener();
-    mPreviousView=(ImageView)mDragLayer.findViewById(R.id.previous_screen);
-    mPreviousView.setOnKeyListener(listener);
-    mNextView=(ImageView)mDragLayer.findViewById(R.id.next_screen);
-    mNextView.setOnKeyListener(listener);
-    Drawable previous=mPreviousView.getDrawable();
-    Drawable next=mNextView.getDrawable();
-    mWorkspace.setIndicators(previous,next);
-    mPreviousView.setHapticFeedbackEnabled(false);
-    mPreviousView.setOnLongClickListener(this);
-    mNextView.setHapticFeedbackEnabled(false);
-    mNextView.setOnLongClickListener(this);
   }
   if (!LauncherApplication.isScreenLarge()) {
     mButtonCluster=(ViewGroup)findViewById(R.id.all_apps_button_cluster);

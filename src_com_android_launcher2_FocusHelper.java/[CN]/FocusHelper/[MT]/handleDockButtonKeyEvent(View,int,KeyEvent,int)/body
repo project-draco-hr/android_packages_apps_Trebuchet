@@ -6,8 +6,6 @@
   final int buttonCount=parent.getChildCount();
   final int pageIndex=workspace.getCurrentPage();
   final int pageCount=workspace.getChildCount();
-  final View previousIndicator=launcher.findViewById(R.id.previous_screen);
-  final View nextIndicator=launcher.findViewById(R.id.next_screen);
   final int action=e.getAction();
   final boolean handleKeyEvent=(action != KeyEvent.ACTION_UP);
   boolean wasHandled=false;
@@ -18,7 +16,7 @@ case KeyEvent.KEYCODE_DPAD_LEFT:
         parent.getChildAt(buttonIndex - 1).requestFocus();
       }
  else {
-        previousIndicator.requestFocus();
+        workspace.snapToPage(pageIndex - 1);
       }
     }
   wasHandled=true;
@@ -29,7 +27,7 @@ if (buttonIndex < (buttonCount - 1)) {
   parent.getChildAt(buttonIndex + 1).requestFocus();
 }
  else {
-  nextIndicator.requestFocus();
+  workspace.snapToPage(pageIndex + 1);
 }
 }
 wasHandled=true;

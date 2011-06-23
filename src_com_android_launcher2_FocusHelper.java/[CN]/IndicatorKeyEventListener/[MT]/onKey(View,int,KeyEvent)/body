@@ -1,3 +1,0 @@
-{
-  return FocusHelper.handleIndicatorButtonKeyEvent(v,keyCode,event);
-}
