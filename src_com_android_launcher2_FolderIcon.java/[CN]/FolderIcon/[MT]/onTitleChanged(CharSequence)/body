@@ -1,5 +1,3 @@
 {
-  mFolderName.setText(title);
-  mFolderName.invalidate();
-  mFolderName.requestLayout();
+  mFolderName.setText(title.toString());
 }
