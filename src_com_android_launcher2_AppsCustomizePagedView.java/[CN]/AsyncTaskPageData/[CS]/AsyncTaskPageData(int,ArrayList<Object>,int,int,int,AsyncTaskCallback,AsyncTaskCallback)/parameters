@@ -2,5 +2,6 @@ int p
 ArrayList<Object> l
 int cw
 int ch
+int ccx
 AsyncTaskCallback bgR
 AsyncTaskCallback postR

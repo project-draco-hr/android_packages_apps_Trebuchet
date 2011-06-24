@@ -11,7 +11,7 @@
       task.setThreadPriority(getThreadPriorityForPage(taskPage));
     }
   }
-  AsyncTaskPageData pageData=new AsyncTaskPageData(page,widgets,cellWidth,cellHeight,new AsyncTaskCallback(){
+  AsyncTaskPageData pageData=new AsyncTaskPageData(page,widgets,cellWidth,cellHeight,cellCountX,new AsyncTaskCallback(){
     @Override public void run(    AppsCustomizeAsyncTask task,    AsyncTaskPageData data){
       task.syncThreadPriority();
       ArrayList<Object> items=data.items;

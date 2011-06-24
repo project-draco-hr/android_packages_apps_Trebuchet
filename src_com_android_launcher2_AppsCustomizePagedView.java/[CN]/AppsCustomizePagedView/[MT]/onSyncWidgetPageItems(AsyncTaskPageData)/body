@@ -6,6 +6,7 @@
   int count=items.size();
   int cellWidth=data.cellWidth;
   int cellHeight=data.cellHeight;
+  int cellCountX=data.cellCountX;
   for (int i=0; i < count; ++i) {
     Object rawInfo=items.get(i);
     PendingAddItemInfo createItemInfo=null;
@@ -30,8 +31,8 @@
     widget.setOnClickListener(this);
     widget.setOnLongClickListener(this);
     widget.setOnTouchListener(this);
-    int ix=i % mWidgetCountX;
-    int iy=i / mWidgetCountX;
+    int ix=i % cellCountX;
+    int iy=i / cellCountX;
     GridLayout.LayoutParams lp=new GridLayout.LayoutParams(new GridLayout.Group(iy,1,GridLayout.LEFT),new GridLayout.Group(ix,1,GridLayout.TOP));
     lp.width=cellWidth;
     lp.height=cellHeight;

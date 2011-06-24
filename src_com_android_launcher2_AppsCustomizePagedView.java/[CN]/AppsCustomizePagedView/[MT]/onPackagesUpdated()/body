@@ -1,11 +1,12 @@
 {
   mWidgets.clear();
+  mShortcuts.clear();
   List<AppWidgetProviderInfo> widgets=AppWidgetManager.getInstance(mLauncher).getInstalledProviders();
   Collections.sort(widgets,new LauncherModel.WidgetAndShortcutNameComparator(mPackageManager));
   Intent shortcutsIntent=new Intent(Intent.ACTION_CREATE_SHORTCUT);
   List<ResolveInfo> shortcuts=mPackageManager.queryIntentActivities(shortcutsIntent,0);
   Collections.sort(shortcuts,new LauncherModel.WidgetAndShortcutNameComparator(mPackageManager));
   mWidgets.addAll(widgets);
-  mWidgets.addAll(shortcuts);
+  mShortcuts.addAll(shortcuts);
   if (testDataReady())   requestLayout();
 }

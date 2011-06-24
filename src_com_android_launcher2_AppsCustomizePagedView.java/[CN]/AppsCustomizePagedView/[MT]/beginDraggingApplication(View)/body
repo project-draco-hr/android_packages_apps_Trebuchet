@@ -10,11 +10,10 @@
   mCanvas.restore();
   Rect dragRect=null;
   if (v instanceof TextView) {
-    int iconSize=getResources().getDimensionPixelSize(R.dimen.app_icon_size);
     int top=v.getPaddingTop();
-    int left=(b.getWidth() - iconSize) / 2;
-    int right=left + iconSize;
-    int bottom=top + iconSize;
+    int left=(b.getWidth() - mAppIconSize) / 2;
+    int right=left + mAppIconSize;
+    int bottom=top + mAppIconSize;
     dragRect=new Rect(left,top,right,bottom);
   }
   mLauncher.lockScreenOrientation();

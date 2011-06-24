@@ -4,6 +4,7 @@
   generatedImages=new ArrayList<Bitmap>();
   cellWidth=cw;
   cellHeight=ch;
+  cellCountX=ccx;
   doInBackgroundCallback=bgR;
   postExecuteCallback=postR;
 }

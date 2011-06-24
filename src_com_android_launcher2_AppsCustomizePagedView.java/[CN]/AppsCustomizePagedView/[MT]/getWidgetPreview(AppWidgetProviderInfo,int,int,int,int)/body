@@ -34,7 +34,6 @@
   }
   if (drawable == null) {
     Resources resources=mLauncher.getResources();
-    int iconSize=resources.getDimensionPixelSize(R.dimen.app_icon_size);
     if (info.minWidth >= info.minHeight) {
       expectedWidth=cellWidth;
       expectedHeight=mWidgetPreviewIconPaddedDimension;
@@ -49,8 +48,8 @@
       Drawable icon=null;
       if (info.icon > 0)       icon=mPackageManager.getDrawable(packageName,info.icon,null);
       if (icon == null)       icon=resources.getDrawable(R.drawable.ic_launcher_application);
-      int offset=(int)(iconSize * sWidgetPreviewIconPaddingPercentage);
-      renderDrawableToBitmap(icon,preview,offset,offset,iconSize,iconSize,1f,1f);
+      int offset=(int)(mAppIconSize * sWidgetPreviewIconPaddingPercentage);
+      renderDrawableToBitmap(icon,preview,offset,offset,mAppIconSize,mAppIconSize,1f,1f);
     }
  catch (    Resources.NotFoundException e) {
     }

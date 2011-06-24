@@ -5,12 +5,14 @@
   mContentType=ContentType.Applications;
   mApps=new ArrayList<ApplicationInfo>();
   mWidgets=new ArrayList<Object>();
+  mShortcuts=new ArrayList<Object>();
   mIconCache=((LauncherApplication)context.getApplicationContext()).getIconCache();
   mHolographicOutlineHelper=new HolographicOutlineHelper();
   mCanvas=new Canvas();
   mRunningTasks=new ArrayList<AppsCustomizeAsyncTask>();
   Resources resources=context.getResources();
   mDefaultWidgetBackground=resources.getDrawable(R.drawable.default_widget_preview);
+  mAppIconSize=getResources().getDimensionPixelSize(R.dimen.app_icon_size);
   TypedArray a=context.obtainStyledAttributes(attrs,R.styleable.PagedView,0,0);
   mCellCountX=a.getInt(R.styleable.PagedView_cellCountX,6);
   mCellCountY=a.getInt(R.styleable.PagedView_cellCountY,4);
@@ -24,6 +26,5 @@
   mWidgetSpacingLayout=new PagedViewCellLayout(getContext());
   mMinWidgetSpan=1;
   mMaxWidgetSpan=3;
-  int iconSize=resources.getDimensionPixelSize(R.dimen.app_icon_size);
-  mWidgetPreviewIconPaddedDimension=(int)(iconSize * (1 + (2 * sWidgetPreviewIconPaddingPercentage)));
+  mWidgetPreviewIconPaddedDimension=(int)(mAppIconSize * (1 + (2 * sWidgetPreviewIconPaddingPercentage)));
 }
