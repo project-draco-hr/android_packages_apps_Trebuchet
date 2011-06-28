@@ -4,5 +4,4 @@
     doDragExit(null);
   }
   mIsDragInProcess=false;
-  updateWhichPagesAcceptDrops(mShrinkState);
 }

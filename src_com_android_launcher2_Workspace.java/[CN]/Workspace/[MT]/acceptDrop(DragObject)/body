@@ -1,11 +1,19 @@
 {
   if (d.dragSource != this) {
-    if (mDragTargetLayout == null || !mDragTargetLayout.getAcceptsDrops()) {
+    if (mDragTargetLayout == null) {
       return false;
     }
+    mDragViewVisualCenter=getDragViewVisualCenter(d.x,d.y,d.xOffset,d.yOffset,d.dragView,mDragViewVisualCenter);
     final CellLayout.CellInfo dragCellInfo=mDragInfo;
     final int spanX=dragCellInfo == null ? 1 : dragCellInfo.spanX;
     final int spanY=dragCellInfo == null ? 1 : dragCellInfo.spanY;
+    mTargetCell=findNearestArea((int)mDragViewVisualCenter[0],(int)mDragViewVisualCenter[1],spanX,spanY,mDragTargetLayout,mTargetCell);
+    if (willCreateUserFolder((ItemInfo)d.dragInfo,mDragTargetLayout,mTargetCell,true)) {
+      return true;
+    }
+    if (willAddToExistingUserFolder((ItemInfo)d.dragInfo,mDragTargetLayout,mTargetCell)) {
+      return true;
+    }
     final View ignoreView=dragCellInfo == null ? null : dragCellInfo.cell;
     if (!mDragTargetLayout.findCellForSpanIgnoring(null,spanX,spanY,ignoreView)) {
       mLauncher.showOutOfSpaceMessage();
