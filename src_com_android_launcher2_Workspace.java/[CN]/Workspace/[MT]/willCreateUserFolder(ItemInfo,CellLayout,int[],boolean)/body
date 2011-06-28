@@ -1,7 +1,10 @@
 {
+  View dropOverView=target.getChildAt(targetCell[0],targetCell[1]);
   boolean hasntMoved=mDragInfo != null && (mDragInfo.cellX == targetCell[0] && mDragInfo.cellY == targetCell[1]);
-  if (v == null || hasntMoved)   return false;
-  boolean aboveShortcut=(v.getTag() instanceof ShortcutInfo);
+  if (dropOverView == null || hasntMoved || (considerTimeout && !mCreateUserFolderOnDrop)) {
+    return false;
+  }
+  boolean aboveShortcut=(dropOverView.getTag() instanceof ShortcutInfo);
   boolean willBecomeShortcut=(info.itemType == LauncherSettings.Favorites.ITEM_TYPE_APPLICATION || info.itemType == LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT);
   return (aboveShortcut && willBecomeShortcut);
 }

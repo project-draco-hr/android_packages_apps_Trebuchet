@@ -5,5 +5,4 @@
   CellLayout cl=(CellLayout)getChildAt(0);
   int[] size=cl.cellSpansToSize(spanX,spanY);
   mDragOutline=createDragOutline(b,canvas,bitmapPadding,size[0],size[1]);
-  updateWhichPagesAcceptDropsDuringDrag(mShrinkState,spanX,spanY);
 }

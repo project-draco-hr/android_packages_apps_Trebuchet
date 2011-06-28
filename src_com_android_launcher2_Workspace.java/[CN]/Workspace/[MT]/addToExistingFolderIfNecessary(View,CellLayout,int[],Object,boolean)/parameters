@@ -1,5 +1,5 @@
 View newView
 CellLayout target
-int[] tagetCell
+int[] targetCell
 Object dragInfo
 boolean external

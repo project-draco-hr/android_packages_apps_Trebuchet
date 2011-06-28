@@ -19,7 +19,7 @@
         }
         mDragTargetLayout=layout;
         boolean isInSpringLoadedMode=(mShrinkState == ShrinkState.SPRING_LOADED);
-        boolean allowDragOver=(mDragTargetLayout != null) && (mDragTargetLayout.getAcceptsDrops() || isInSpringLoadedMode);
+        boolean allowDragOver=(mDragTargetLayout != null);
         if (allowDragOver) {
           if (isInSpringLoadedMode) {
             mSpringLoadedDragController.setAlarm(mDragTargetLayout);
@@ -55,7 +55,7 @@
         ItemInfo info=(ItemInfo)d.dragInfo;
         mTargetCell=findNearestArea((int)mDragViewVisualCenter[0],(int)mDragViewVisualCenter[1],1,1,mDragTargetLayout,mTargetCell);
         final View dragOverView=mDragTargetLayout.getChildAt(mTargetCell[0],mTargetCell[1]);
-        boolean userFolderPending=willCreateUserFolder(info,dragOverView,mTargetCell);
+        boolean userFolderPending=willCreateUserFolder(info,mDragTargetLayout,mTargetCell,false);
         boolean isOverFolder=dragOverView instanceof FolderIcon;
         if (dragOverView != mLastDragOverView) {
           cancelFolderCreation();

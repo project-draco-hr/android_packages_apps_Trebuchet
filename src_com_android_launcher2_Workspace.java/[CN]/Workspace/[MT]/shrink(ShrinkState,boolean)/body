@@ -5,9 +5,6 @@
     return;
   }
   setCurrentPage((mNextPage != INVALID_PAGE) ? mNextPage : mCurrentPage);
-  if (!mIsDragInProcess) {
-    updateWhichPagesAcceptDrops(shrinkState);
-  }
   hideScrollingIndicator(true);
   CellLayout currentPage=(CellLayout)getChildAt(mCurrentPage);
   if (currentPage == null) {
