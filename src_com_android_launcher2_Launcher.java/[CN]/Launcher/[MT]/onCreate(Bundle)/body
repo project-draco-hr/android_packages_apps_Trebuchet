@@ -34,6 +34,7 @@
   registerReceiver(mCloseSystemDialogsReceiver,filter);
   if (sGlobalSearchIcon == null || sVoiceSearchIcon == null || sAppMarketIcon == null) {
     updateIconsAffectedByPackageManagerChanges();
+    updateGlobalSearchIcon();
   }
   if (sGlobalSearchIcon != null) {
     updateGlobalSearchIcon(sGlobalSearchIcon);

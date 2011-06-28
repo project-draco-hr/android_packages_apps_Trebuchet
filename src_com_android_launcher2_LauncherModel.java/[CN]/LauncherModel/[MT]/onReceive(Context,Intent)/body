@@ -42,4 +42,8 @@
     mWorkspaceLoaded=false;
     startLoaderFromBackground();
   }
+ else   if (SearchManager.INTENT_GLOBAL_SEARCH_ACTIVITY_CHANGED.equals(action)) {
+    Callbacks callbacks=mCallbacks.get();
+    callbacks.bindSearchablesChanged();
+  }
 }
