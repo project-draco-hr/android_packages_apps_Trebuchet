@@ -5,7 +5,13 @@
   textView.setTag(item);
   textView.setOnClickListener(this);
   textView.setOnLongClickListener(this);
+  if (mContent.getChildAt(item.cellX,item.cellY) != null) {
+    if (!findAndSetEmptyCells(item)) {
+      return false;
+    }
+  }
   CellLayout.LayoutParams lp=new CellLayout.LayoutParams(item.cellX,item.cellY,item.spanX,item.spanY);
   boolean insert=false;
   mContent.addViewToCellLayout(textView,insert ? 0 : -1,(int)item.id,lp,true);
+  return true;
 }
