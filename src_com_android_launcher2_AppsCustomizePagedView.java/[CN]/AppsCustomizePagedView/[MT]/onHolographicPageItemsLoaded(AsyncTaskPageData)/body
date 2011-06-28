@@ -5,6 +5,7 @@
   if (layout instanceof PagedViewCellLayout) {
     PagedViewCellLayout cl=(PagedViewCellLayout)layout;
     int count=cl.getPageChildCount();
+    if (count != data.generatedImages.size())     return;
     for (int i=0; i < count; ++i) {
       PagedViewIcon icon=(PagedViewIcon)cl.getChildOnPageAt(i);
       icon.setHolographicOutline(data.generatedImages.get(i));
@@ -12,6 +13,7 @@
   }
  else {
     int count=layout.getChildCount();
+    if (count != data.generatedImages.size())     return;
     for (int i=0; i < count; ++i) {
       View v=layout.getChildAt(i);
       ((PagedViewWidget)v).setHolographicOutline(data.generatedImages.get(i));

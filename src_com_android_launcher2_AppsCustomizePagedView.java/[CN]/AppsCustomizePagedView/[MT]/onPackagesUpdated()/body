@@ -1,4 +1,5 @@
 {
+  boolean wasEmpty=mWidgets.isEmpty() && mShortcuts.isEmpty();
   mWidgets.clear();
   mShortcuts.clear();
   List<AppWidgetProviderInfo> widgets=AppWidgetManager.getInstance(mLauncher).getInstalledProviders();
@@ -8,5 +9,10 @@
   Collections.sort(shortcuts,new LauncherModel.WidgetAndShortcutNameComparator(mPackageManager));
   mWidgets.addAll(widgets);
   mShortcuts.addAll(shortcuts);
-  if (testDataReady())   requestLayout();
+  if (wasEmpty) {
+    if (testDataReady())     requestLayout();
+  }
+ else {
+    invalidatePageData();
+  }
 }

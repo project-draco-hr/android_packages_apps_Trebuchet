@@ -1,5 +1,11 @@
 {
   removeAllViews();
+  Iterator<AppsCustomizeAsyncTask> iter=mRunningTasks.iterator();
+  while (iter.hasNext()) {
+    AppsCustomizeAsyncTask task=(AppsCustomizeAsyncTask)iter.next();
+    task.cancel(false);
+    iter.remove();
+  }
 switch (mContentType) {
 case Applications:
     syncAppsPages();

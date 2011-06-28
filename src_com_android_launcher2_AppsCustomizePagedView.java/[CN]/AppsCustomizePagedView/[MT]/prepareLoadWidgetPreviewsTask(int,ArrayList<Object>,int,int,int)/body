@@ -3,7 +3,7 @@
   while (iter.hasNext()) {
     AppsCustomizeAsyncTask task=(AppsCustomizeAsyncTask)iter.next();
     int taskPage=task.page;
-    if (taskPage < getAssociatedLowerPageBound(mCurrentPage) || taskPage > getAssociatedUpperPageBound(mCurrentPage)) {
+    if ((taskPage == page) || taskPage < getAssociatedLowerPageBound(mCurrentPage) || taskPage > getAssociatedUpperPageBound(mCurrentPage)) {
       task.cancel(false);
       iter.remove();
     }
@@ -37,13 +37,14 @@
 ,new AsyncTaskCallback(){
     @Override public void run(    AppsCustomizeAsyncTask task,    AsyncTaskPageData data){
       mRunningTasks.remove(task);
+      if (task.isCancelled())       return;
       if (task.page > getPageCount())       return;
       if (task.pageContentType != mContentType)       return;
       onSyncWidgetPageItems(data);
     }
   }
 );
-  AppsCustomizeAsyncTask t=new AppsCustomizeAsyncTask(page,mContentType);
+  AppsCustomizeAsyncTask t=new AppsCustomizeAsyncTask(page,mContentType,AsyncTaskPageData.Type.LoadWidgetPreviewData);
   t.setThreadPriority(getThreadPriorityForPage(page));
   t.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,pageData);
   mRunningTasks.add(t);
