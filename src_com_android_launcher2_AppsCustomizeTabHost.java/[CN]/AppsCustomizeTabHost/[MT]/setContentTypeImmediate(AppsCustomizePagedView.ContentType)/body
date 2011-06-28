@@ -1,0 +1,4 @@
+{
+  onTabChangedStart();
+  onTabChangedEnd(type);
+}

@@ -5,6 +5,6 @@
     final int compoundPaddingLeft=getCompoundPaddingLeft();
     final int compoundPaddingRight=getCompoundPaddingRight();
     int hspace=getWidth() - compoundPaddingRight - compoundPaddingLeft;
-    canvas.drawBitmap(overlay,offset + compoundPaddingLeft + (hspace - overlay.getWidth()) / 2,mPaddingTop,mPaint);
+    canvas.drawBitmap(overlay,offset + compoundPaddingLeft + (hspace - overlay.getWidth()) / 2,mOriginalIcon.getPaddingTop(),mPaint);
   }
 }

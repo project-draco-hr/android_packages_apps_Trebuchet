@@ -5,7 +5,7 @@ switch (item.actionTag) {
 case AddAdapter.ITEM_SHORTCUT:
 {
       if (mAppsCustomizeTabHost != null) {
-        mAppsCustomizeTabHost.selectWidgetsTab();
+        mAppsCustomizeTabHost.selectShortcutsTab();
       }
       showAllApps(true);
       break;

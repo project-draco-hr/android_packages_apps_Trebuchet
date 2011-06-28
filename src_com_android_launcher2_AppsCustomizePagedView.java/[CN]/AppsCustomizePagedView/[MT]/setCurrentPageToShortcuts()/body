@@ -1,0 +1,3 @@
+{
+  invalidatePageData(mNumWidgetPages);
+}

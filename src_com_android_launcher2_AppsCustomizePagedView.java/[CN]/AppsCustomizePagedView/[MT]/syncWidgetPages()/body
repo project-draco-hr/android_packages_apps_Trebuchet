@@ -2,12 +2,9 @@
   Context context=getContext();
   int[] countX={mWidgetCountX,mShortcutCountX};
   int[] countY={mWidgetCountY,mShortcutCountY};
-  Object[] collection={mWidgets,mShortcuts};
+  int[] numPages={mNumWidgetPages,mNumShortcutPages};
   for (int i=0; i < 2; ++i) {
-    ArrayList<Object> list=(ArrayList<Object>)collection[i];
-    int numItemsPerPage=countX[i] * countY[i];
-    int numItemPages=(int)Math.ceil(list.size() / (float)numItemsPerPage);
-    for (int j=0; j < numItemPages; ++j) {
+    for (int j=0; j < numPages[i]; ++j) {
       PagedViewGridLayout layout=new PagedViewGridLayout(context,countX[i],countY[i]);
       setupPage(layout);
       addView(layout);

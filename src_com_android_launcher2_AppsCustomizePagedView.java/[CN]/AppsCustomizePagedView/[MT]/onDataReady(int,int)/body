@@ -15,6 +15,8 @@
   mWidgetCountY=Math.max(1,(int)Math.round(mCellCountY / 3f));
   mShortcutCountX=Math.max(1,(int)Math.round(mCellCountX / 2f));
   mShortcutCountY=Math.max(1,(int)Math.round(mCellCountY / 2f));
+  mNumWidgetPages=(int)Math.ceil(mWidgets.size() / (float)(mWidgetCountX * mWidgetCountY));
+  mNumShortcutPages=(int)Math.ceil(mShortcuts.size() / (float)(mShortcutCountX * mShortcutCountY));
   int widthSpec=MeasureSpec.makeMeasureSpec(getMeasuredWidth(),MeasureSpec.AT_MOST);
   int heightSpec=MeasureSpec.makeMeasureSpec(getMeasuredHeight(),MeasureSpec.AT_MOST);
   mWidgetSpacingLayout.measure(widthSpec,heightSpec);

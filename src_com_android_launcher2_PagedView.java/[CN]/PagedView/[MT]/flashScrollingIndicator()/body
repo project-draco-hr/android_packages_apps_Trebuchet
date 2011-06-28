@@ -1,9 +1,5 @@
 {
+  removeCallbacks(hideScrollingIndicatorRunnable);
   showScrollingIndicator();
-  postDelayed(new Runnable(){
-    @Override public void run(){
-      hideScrollingIndicator(false);
-    }
-  }
-,sScrollIndicatorFlashDuration);
+  postDelayed(hideScrollingIndicatorRunnable,sScrollIndicatorFlashDuration);
 }

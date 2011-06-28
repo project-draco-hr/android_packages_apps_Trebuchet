@@ -29,7 +29,7 @@
 );
     alphaAnim.start();
     if (toView instanceof LauncherTransitionable) {
-      ((LauncherTransitionable)toView).onLauncherTransitionStart(scaleAnim);
+      ((LauncherTransitionable)toView).onLauncherTransitionStart(scaleAnim,false);
     }
     scaleAnim.addListener(new AnimatorListenerAdapter(){
       @Override public void onAnimationStart(      Animator animation){
@@ -42,7 +42,7 @@
         toView.setScaleX(1.0f);
         toView.setScaleY(1.0f);
         if (toView instanceof LauncherTransitionable) {
-          ((LauncherTransitionable)toView).onLauncherTransitionEnd(scaleAnim);
+          ((LauncherTransitionable)toView).onLauncherTransitionEnd(scaleAnim,false);
         }
         if (!springLoaded && !LauncherApplication.isScreenLarge()) {
           mWorkspace.hideScrollingIndicator(true);
@@ -64,8 +64,8 @@
     toView.setVisibility(View.VISIBLE);
     toView.bringToFront();
     if (toView instanceof LauncherTransitionable) {
-      ((LauncherTransitionable)toView).onLauncherTransitionStart(null);
-      ((LauncherTransitionable)toView).onLauncherTransitionEnd(null);
+      ((LauncherTransitionable)toView).onLauncherTransitionStart(null,false);
+      ((LauncherTransitionable)toView).onLauncherTransitionEnd(null,false);
       if (!springLoaded && !LauncherApplication.isScreenLarge()) {
         mWorkspace.hideScrollingIndicator(true);
       }

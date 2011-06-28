@@ -7,10 +7,10 @@
     anim.setDuration(duration);
     anim.addListener(new AnimatorListenerAdapter(){
       @Override public void onAnimationStart(      android.animation.Animator animation){
-        mAppsCustomizePane.hideScrollingIndicator(false);
+        onTabChangedStart();
       }
       @Override public void onAnimationEnd(      android.animation.Animator animation){
-        mAppsCustomizePane.setContentType(type);
+        onTabChangedEnd(type);
         ObjectAnimator anim=ObjectAnimator.ofFloat(mAppsCustomizePane,"alpha",1f);
         anim.setDuration(duration);
         anim.addListener(new AnimatorListenerAdapter(){

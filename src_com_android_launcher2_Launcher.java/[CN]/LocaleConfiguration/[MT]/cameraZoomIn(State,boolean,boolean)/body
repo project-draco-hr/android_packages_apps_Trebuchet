@@ -32,19 +32,15 @@
     }
 );
     if (fromView instanceof LauncherTransitionable) {
-      ((LauncherTransitionable)fromView).onLauncherTransitionStart(alphaAnim);
+      ((LauncherTransitionable)fromView).onLauncherTransitionStart(alphaAnim,true);
     }
     alphaAnim.addListener(new AnimatorListenerAdapter(){
-      @Override public void onAnimationStart(      android.animation.Animator animation){
-        if (!springLoaded && !LauncherApplication.isScreenLarge()) {
-          mWorkspace.flashScrollingIndicator();
-        }
-      }
       @Override public void onAnimationEnd(      Animator animation){
         fromView.setVisibility(View.GONE);
         if (fromView instanceof LauncherTransitionable) {
-          ((LauncherTransitionable)fromView).onLauncherTransitionEnd(alphaAnim);
+          ((LauncherTransitionable)fromView).onLauncherTransitionEnd(alphaAnim,true);
         }
+        mWorkspace.flashScrollingIndicator();
       }
     }
 );
@@ -54,8 +50,8 @@
  else {
     fromView.setVisibility(View.GONE);
     if (fromView instanceof LauncherTransitionable) {
-      ((LauncherTransitionable)fromView).onLauncherTransitionStart(null);
-      ((LauncherTransitionable)fromView).onLauncherTransitionEnd(null);
+      ((LauncherTransitionable)fromView).onLauncherTransitionStart(null,true);
+      ((LauncherTransitionable)fromView).onLauncherTransitionEnd(null,true);
       if (!springLoaded && !LauncherApplication.isScreenLarge()) {
         mWorkspace.flashScrollingIndicator();
       }

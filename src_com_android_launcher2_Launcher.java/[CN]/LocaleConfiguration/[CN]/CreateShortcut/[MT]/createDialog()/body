@@ -1,7 +1,6 @@
 {
   mAdapter=new AddAdapter(Launcher.this);
   final AlertDialog.Builder builder=new AlertDialog.Builder(Launcher.this,AlertDialog.THEME_HOLO_DARK);
-  builder.setTitle(getString(R.string.menu_item_add_item));
   builder.setAdapter(mAdapter,this);
   AlertDialog dialog=builder.create();
   dialog.setOnCancelListener(this);
