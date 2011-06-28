@@ -1,4 +1,13 @@
 {
+  Iterator<AppsCustomizeAsyncTask> iter=mRunningTasks.iterator();
+  while (iter.hasNext()) {
+    AppsCustomizeAsyncTask task=(AppsCustomizeAsyncTask)iter.next();
+    int taskPage=task.page;
+    if ((taskPage == page) && (task.dataType == AsyncTaskPageData.Type.LoadHolographicIconsData)) {
+      task.cancel(false);
+      iter.remove();
+    }
+  }
   AsyncTaskPageData pageData=new AsyncTaskPageData(page,items,images,new AsyncTaskCallback(){
     @Override public void run(    AppsCustomizeAsyncTask task,    AsyncTaskPageData data){
       task.syncThreadPriority();
@@ -21,13 +30,14 @@
 ,new AsyncTaskCallback(){
     @Override public void run(    AppsCustomizeAsyncTask task,    AsyncTaskPageData data){
       mRunningTasks.remove(task);
+      if (task.isCancelled())       return;
       if (task.page > getPageCount())       return;
       if (task.pageContentType != mContentType)       return;
       onHolographicPageItemsLoaded(data);
     }
   }
 );
-  AppsCustomizeAsyncTask t=new AppsCustomizeAsyncTask(page,mContentType);
+  AppsCustomizeAsyncTask t=new AppsCustomizeAsyncTask(page,mContentType,AsyncTaskPageData.Type.LoadHolographicIconsData);
   t.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);
   t.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR,pageData);
   mRunningTasks.add(t);
