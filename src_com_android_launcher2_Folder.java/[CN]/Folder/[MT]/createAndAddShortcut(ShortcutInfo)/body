@@ -1,5 +1,5 @@
 {
-  final TextView textView=(TextView)mInflater.inflate(R.layout.application_boxed,this,false);
+  final TextView textView=(TextView)mInflater.inflate(R.layout.application,this,false);
   textView.setCompoundDrawablesWithIntrinsicBounds(null,new FastBitmapDrawable(item.getIcon(mIconCache)),null,null);
   textView.setText(item.title);
   textView.setTag(item);
