@@ -1,8 +1,8 @@
 {
-  ViewGroup currentPage=((CellLayout)getChildAt(mCurrentPage)).getChildrenLayout();
-  int count=currentPage.getChildCount();
+  DragLayer dragLayer=(DragLayer)mLauncher.findViewById(R.id.drag_layer);
+  int count=dragLayer.getChildCount();
   for (int i=0; i < count; i++) {
-    View child=currentPage.getChildAt(i);
+    View child=dragLayer.getChildAt(i);
     if (child instanceof Folder) {
       Folder folder=(Folder)child;
       if (folder.getInfo().opened)       return folder;

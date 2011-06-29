@@ -3,8 +3,8 @@
   setAlwaysDrawnWithCacheEnabled(false);
   mInflater=LayoutInflater.from(context);
   mIconCache=((LauncherApplication)context.getApplicationContext()).getIconCache();
-  mMaxCountX=LauncherModel.getCellCountX() - 1;
-  mMaxCountY=LauncherModel.getCellCountY() - 1;
+  mMaxCountX=LauncherModel.getCellCountX();
+  mMaxCountY=LauncherModel.getCellCountY();
   mInputMethodManager=(InputMethodManager)mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
   Resources res=getResources();
   mExpandDuration=res.getInteger(R.integer.config_folderAnimDuration);

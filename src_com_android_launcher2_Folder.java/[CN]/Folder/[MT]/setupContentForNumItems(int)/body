@@ -1,9 +1,9 @@
 {
   setupContentDimension(count);
-  CellLayout.LayoutParams lp=(CellLayout.LayoutParams)getLayoutParams();
+  DragLayer.LayoutParams lp=(DragLayer.LayoutParams)getLayoutParams();
   if (lp == null) {
-    lp=new CellLayout.LayoutParams(0,0,-1,-1);
-    lp.isLockedToGrid=false;
+    lp=new DragLayer.LayoutParams(0,0);
+    lp.customPosition=true;
     setLayoutParams(lp);
   }
   centerAboutIcon();

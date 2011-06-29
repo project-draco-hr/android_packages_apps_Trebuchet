@@ -1,5 +1,5 @@
 {
-  if (!(getParent() instanceof CellLayoutChildren))   return;
+  if (!(getParent() instanceof DragLayer))   return;
   ObjectAnimator oa;
   if (mMode == PARTIAL_GROW) {
     PropertyValuesHolder alpha=PropertyValuesHolder.ofFloat("alpha",0);
@@ -8,8 +8,8 @@
     oa=ObjectAnimator.ofPropertyValuesHolder(this,alpha,scaleX,scaleY);
   }
  else {
-    CellLayout.LayoutParams iconLp=(CellLayout.LayoutParams)mFolderIcon.getLayoutParams();
-    CellLayout.LayoutParams lp=(CellLayout.LayoutParams)getLayoutParams();
+    DragLayer.LayoutParams iconLp=(DragLayer.LayoutParams)mFolderIcon.getLayoutParams();
+    DragLayer.LayoutParams lp=(DragLayer.LayoutParams)getLayoutParams();
     PropertyValuesHolder width=PropertyValuesHolder.ofInt("width",iconLp.width);
     PropertyValuesHolder height=PropertyValuesHolder.ofInt("height",iconLp.height);
     PropertyValuesHolder x=PropertyValuesHolder.ofInt("x",iconLp.x);

@@ -1,7 +1,7 @@
 {
   if (!(getParent() instanceof CellLayoutChildren))   return;
-  CellLayout.LayoutParams iconLp=(CellLayout.LayoutParams)mFolderIcon.getLayoutParams();
-  CellLayout.LayoutParams lp=(CellLayout.LayoutParams)getLayoutParams();
+  DragLayer.LayoutParams iconLp=(DragLayer.LayoutParams)mFolderIcon.getLayoutParams();
+  DragLayer.LayoutParams lp=(DragLayer.LayoutParams)getLayoutParams();
   if (mMode == PARTIAL_GROW) {
     setScaleX(0.8f);
     setScaleY(0.8f);

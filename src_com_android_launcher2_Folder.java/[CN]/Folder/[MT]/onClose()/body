@@ -1,6 +1,5 @@
 {
-  CellLayoutChildren clc=(CellLayoutChildren)getParent();
-  final CellLayout cellLayout=(CellLayout)clc.getParent();
-  cellLayout.removeViewWithoutMarkingCells(Folder.this);
+  DragLayer parent=(DragLayer)getParent();
+  parent.removeView(Folder.this);
   clearFocus();
 }

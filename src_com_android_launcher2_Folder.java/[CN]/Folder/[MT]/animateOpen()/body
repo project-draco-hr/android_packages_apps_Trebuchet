@@ -2,9 +2,9 @@
   if (mState != STATE_SMALL) {
     positionAndSizeAsIcon();
   }
-  if (!(getParent() instanceof CellLayoutChildren))   return;
+  if (!(getParent() instanceof DragLayer))   return;
   ObjectAnimator oa;
-  CellLayout.LayoutParams lp=(CellLayout.LayoutParams)getLayoutParams();
+  DragLayer.LayoutParams lp=(DragLayer.LayoutParams)getLayoutParams();
   centerAboutIcon();
   if (mMode == PARTIAL_GROW) {
     PropertyValuesHolder alpha=PropertyValuesHolder.ofFloat("alpha",1);
