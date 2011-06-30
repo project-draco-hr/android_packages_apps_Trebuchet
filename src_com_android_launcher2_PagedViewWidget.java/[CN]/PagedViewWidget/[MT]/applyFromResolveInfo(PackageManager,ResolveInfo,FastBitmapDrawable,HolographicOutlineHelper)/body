@@ -1,10 +1,12 @@
 {
   mHolographicOutlineHelper=holoOutlineHelper;
+  CharSequence label=info.loadLabel(pm);
   final ImageView image=(ImageView)findViewById(R.id.widget_preview);
   image.setImageDrawable(preview);
+  image.setContentDescription(label);
   mPreviewImageView=image;
   final TextView name=(TextView)findViewById(R.id.widget_name);
-  name.setText(info.loadLabel(pm));
+  name.setText(label);
   name.setLayerType(View.LAYER_TYPE_SOFTWARE,null);
   final TextView dims=(TextView)findViewById(R.id.widget_dims);
   if (dims != null) {

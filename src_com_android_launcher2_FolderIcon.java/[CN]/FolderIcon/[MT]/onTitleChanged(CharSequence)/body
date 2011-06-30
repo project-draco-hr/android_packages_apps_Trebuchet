@@ -1,3 +1,4 @@
 {
   mFolderName.setText(title.toString());
+  mPreviewBackground.setContentDescription(title.toString());
 }

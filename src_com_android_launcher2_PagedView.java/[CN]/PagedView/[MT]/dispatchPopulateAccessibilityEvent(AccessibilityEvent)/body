@@ -1,0 +1,7 @@
+{
+  if (event.getEventType() != AccessibilityEvent.TYPE_VIEW_SCROLLED) {
+    super.dispatchPopulateAccessibilityEvent(event);
+  }
+  onPopulateAccessibilityEvent(event);
+  return false;
+}
