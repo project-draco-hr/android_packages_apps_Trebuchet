@@ -1,5 +1,4 @@
 {
-  mOriginator=v;
   int[] loc=mCoordinatesTemp;
   v.getLocationOnScreen(loc);
   int screenX=loc[0];

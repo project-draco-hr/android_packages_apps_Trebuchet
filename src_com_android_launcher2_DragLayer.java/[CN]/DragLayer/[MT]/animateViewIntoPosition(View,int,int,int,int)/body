@@ -16,7 +16,10 @@
       mDropView=view;
     }
     public void onAnimationEnd(    Animator animation){
-      animationEndRunnable.run();
+      if (mDropView != null) {
+        mDropView.setVisibility(View.VISIBLE);
+        mDropView=null;
+      }
     }
   }
 );
@@ -26,10 +29,12 @@
   mDropAnim.addUpdateListener(new AnimatorUpdateListener(){
     public void onAnimationUpdate(    ValueAnimator animation){
       final float percent=(Float)animation.getAnimatedValue();
-      invalidate(mDropViewPos[0],mDropViewPos[1],mDropViewPos[0] + view.getWidth(),mDropViewPos[1] + view.getHeight());
+      int width=view.getMeasuredWidth();
+      int height=view.getMeasuredHeight();
+      invalidate(mDropViewPos[0],mDropViewPos[1],mDropViewPos[0] + width,mDropViewPos[1] + height);
       mDropViewPos[0]=fromX + (int)(percent * dX + 0.5f);
       mDropViewPos[1]=fromY + (int)(percent * dY + 0.5f);
-      invalidate(mDropViewPos[0],mDropViewPos[1],mDropViewPos[0] + view.getWidth(),mDropViewPos[1] + view.getHeight());
+      invalidate(mDropViewPos[0],mDropViewPos[1],mDropViewPos[0] + width,mDropViewPos[1] + height);
     }
   }
 );

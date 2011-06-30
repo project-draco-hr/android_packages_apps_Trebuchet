@@ -50,7 +50,7 @@
           if (pinfo.resizeMode != AppWidgetProviderInfo.RESIZE_NONE) {
             final Runnable resizeRunnable=new Runnable(){
               public void run(){
-                DragLayer dragLayer=(DragLayer)mLauncher.findViewById(R.id.drag_layer);
+                DragLayer dragLayer=mLauncher.getDragLayer();
                 dragLayer.addResizeFrame(info,hostView,cellLayout);
               }
             }
@@ -72,9 +72,7 @@
       }
     }
     final CellLayout parent=(CellLayout)cell.getParent().getParent();
-    int loc[]=new int[2];
-    getViewLocationRelativeToSelf(d.dragView,loc);
-    setPositionForDropAnimation(d.dragView,loc[0],loc[1],parent,cell);
-    parent.onDropChild(cell,true);
+    mLauncher.getDragLayer().animateViewIntoPosition(d.dragView,cell);
+    parent.onDropChild(cell);
   }
 }

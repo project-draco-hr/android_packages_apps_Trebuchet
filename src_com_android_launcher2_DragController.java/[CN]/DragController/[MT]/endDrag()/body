@@ -1,9 +1,6 @@
 {
   if (mDragging) {
     mDragging=false;
-    if (mOriginator != null) {
-      mOriginator.setVisibility(View.VISIBLE);
-    }
     for (    DragListener listener : mListeners) {
       listener.onDragEnd();
     }

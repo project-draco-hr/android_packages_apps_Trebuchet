@@ -12,7 +12,7 @@
   if (finalItem != null) {
     LauncherModel.addOrMoveItemInDatabase(mLauncher,finalItem,LauncherSettings.Favorites.CONTAINER_DESKTOP,mInfo.screen,mInfo.cellX,mInfo.cellY);
   }
-  LauncherModel.deleteFolderContentsFromDatabase(mLauncher,mInfo,true);
+  LauncherModel.deleteItemFromDatabase(mLauncher,mInfo);
   if (finalItem != null) {
     View child=mLauncher.createShortcut(R.layout.application,cellLayout,(ShortcutInfo)finalItem);
     mLauncher.getWorkspace().addInScreen(child,mInfo.screen,mInfo.cellX,mInfo.cellY,mInfo.spanX,mInfo.spanY);

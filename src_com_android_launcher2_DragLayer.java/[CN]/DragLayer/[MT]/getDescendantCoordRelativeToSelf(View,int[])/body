@@ -1,0 +1,9 @@
+{
+  ViewParent viewParent=descendant.getParent();
+  while (viewParent instanceof View && viewParent != this) {
+    final View view=(View)viewParent;
+    coord[0]+=view.getLeft() + (int)(view.getTranslationX() + 0.5f) - view.getScrollX();
+    coord[1]+=view.getTop() + (int)(view.getTranslationY() + 0.5f) - view.getScrollY();
+    viewParent=view.getParent();
+  }
+}

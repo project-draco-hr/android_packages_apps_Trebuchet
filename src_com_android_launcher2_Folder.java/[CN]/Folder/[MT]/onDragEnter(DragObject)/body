@@ -1,6 +1,5 @@
 {
   mPreviousTargetCell[0]=-1;
   mPreviousTargetCell[1]=-1;
-  mContent.onDragEnter();
   mOnExitAlarm.cancelAlarm();
 }

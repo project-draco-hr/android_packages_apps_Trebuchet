@@ -1,5 +1,4 @@
 {
-  mOriginator=v;
   Bitmap b=getViewBitmap(v);
   if (b == null) {
     return;

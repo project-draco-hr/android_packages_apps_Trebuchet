@@ -1,9 +1,7 @@
 {
   descendant.getHitRect(r);
-  ViewParent viewParent=descendant.getParent();
-  while (viewParent instanceof View && viewParent != this) {
-    final View view=(View)viewParent;
-    r.offset(view.getLeft() + (int)(view.getTranslationX() + 0.5f) - view.getScrollX(),view.getTop() + (int)(view.getTranslationY() + 0.5f) - view.getScrollY());
-    viewParent=view.getParent();
-  }
+  mTmpXY[0]=0;
+  mTmpXY[1]=0;
+  getDescendantCoordRelativeToSelf(descendant,mTmpXY);
+  r.offset(mTmpXY[0],mTmpXY[1]);
 }

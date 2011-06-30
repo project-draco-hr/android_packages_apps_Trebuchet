@@ -1,5 +1,5 @@
 {
-  DragLayer dragLayer=(DragLayer)mLauncher.findViewById(R.id.drag_layer);
+  DragLayer dragLayer=mLauncher.getDragLayer();
   int count=dragLayer.getChildCount();
   for (int i=0; i < count; i++) {
     View child=dragLayer.getChildAt(i);

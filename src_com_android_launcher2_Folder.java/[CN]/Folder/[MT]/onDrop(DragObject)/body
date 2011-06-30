@@ -14,9 +14,9 @@
     si.cellX=lp.cellX=mEmptyCell[0];
     si.cellX=lp.cellY=mEmptyCell[1];
     mContent.addViewToCellLayout(mCurrentDragView,-1,(int)item.id,lp,true);
-    mSuppressOnAdd=true;
-    mItemsInvalidated=true;
+    mLauncher.getDragLayer().animateViewIntoPosition(d.dragView,mCurrentDragView);
     setupContentDimension(getItemCount());
+    mSuppressOnAdd=true;
   }
   mInfo.add(item);
 }
