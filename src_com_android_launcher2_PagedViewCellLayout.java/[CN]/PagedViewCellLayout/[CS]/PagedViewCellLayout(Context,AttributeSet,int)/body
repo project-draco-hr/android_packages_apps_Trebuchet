@@ -2,12 +2,13 @@
   super(context,attrs,defStyle);
   setAlwaysDrawnWithCacheEnabled(false);
   Resources resources=context.getResources();
-  mCellWidth=resources.getDimensionPixelSize(R.dimen.apps_customize_cell_width);
-  mCellHeight=resources.getDimensionPixelSize(R.dimen.apps_customize_cell_height);
+  mOriginalCellWidth=mCellWidth=resources.getDimensionPixelSize(R.dimen.apps_customize_cell_width);
+  mOriginalCellHeight=mCellHeight=resources.getDimensionPixelSize(R.dimen.apps_customize_cell_height);
   mPeekWidth=resources.getDimensionPixelSize(R.dimen.apps_customize_peek_width);
   mCellCountX=LauncherModel.getCellCountX();
   mCellCountY=LauncherModel.getCellCountY();
   mWidthGap=mHeightGap=-1;
+  mMaxGap=resources.getDimensionPixelSize(R.dimen.apps_customize_max_gap);
   mChildren=new PagedViewCellLayoutChildren(context);
   mChildren.setCellDimensions(mCellWidth,mCellHeight);
   mChildren.setGap(mWidthGap,mHeightGap);
