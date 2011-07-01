@@ -4,7 +4,7 @@
   ComponentName activityName=intent.resolveActivity(getPackageManager());
   if (activityName != null) {
     mAppMarketIntent=intent;
-    sAppMarketIcon=updateTextButtonWithIconFromExternalActivity(R.id.market_button,activityName,R.drawable.app_market_generic);
+    sAppMarketIcon=updateTextButtonWithIconFromExternalActivity(R.id.market_button,activityName,R.drawable.ic_launcher_market_holo);
     marketButton.setVisibility(View.VISIBLE);
     if (!LauncherApplication.isScreenLarge()) {
       ((TextView)marketButton).setText("");

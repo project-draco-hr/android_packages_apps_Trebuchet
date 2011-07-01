@@ -1,6 +1,4 @@
 {
   super.onDragExit(d);
-  ObjectAnimator anim=ObjectAnimator.ofInt(getBackground(),"alpha",0);
-  anim.setDuration(mTransitionDuration);
-  anim.start();
+  mDrawable.resetTransition();
 }

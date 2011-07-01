@@ -11,7 +11,7 @@
   mCanvas=new Canvas();
   mRunningTasks=new ArrayList<AppsCustomizeAsyncTask>();
   Resources resources=context.getResources();
-  mDefaultWidgetBackground=resources.getDrawable(R.drawable.default_widget_preview);
+  mDefaultWidgetBackground=resources.getDrawable(R.drawable.default_widget_preview_holo);
   mAppIconSize=getResources().getDimensionPixelSize(R.dimen.app_icon_size);
   TypedArray a=context.obtainStyledAttributes(attrs,R.styleable.PagedView,0,0);
   mCellCountX=a.getInt(R.styleable.PagedView_cellCountX,6);
