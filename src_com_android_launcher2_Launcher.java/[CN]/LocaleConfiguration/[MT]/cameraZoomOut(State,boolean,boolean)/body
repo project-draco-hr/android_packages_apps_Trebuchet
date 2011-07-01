@@ -47,6 +47,8 @@
         toView.setTranslationY(0.0f);
         toView.setVisibility(View.VISIBLE);
         toView.bringToFront();
+        mWorkspace.hideScrollingIndicator(true);
+        mWorkspace.hideScrollIndicatorTrack();
       }
       @Override public void onAnimationEnd(      Animator animation){
         toView.setScaleX(1.0f);
@@ -73,6 +75,8 @@
     if (toView instanceof LauncherTransitionable) {
       ((LauncherTransitionable)toView).onLauncherTransitionStart(null);
       ((LauncherTransitionable)toView).onLauncherTransitionEnd(null);
+      mWorkspace.hideScrollingIndicator(true);
+      mWorkspace.hideScrollIndicatorTrack();
     }
   }
 }

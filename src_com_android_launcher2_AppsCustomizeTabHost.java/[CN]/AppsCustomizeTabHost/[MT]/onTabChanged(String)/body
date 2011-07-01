@@ -10,6 +10,12 @@
         mAppsCustomizePane.setContentType(type);
         ObjectAnimator anim=ObjectAnimator.ofFloat(mAppsCustomizePane,"alpha",1f);
         anim.setDuration(duration);
+        anim.addListener(new AnimatorListenerAdapter(){
+          @Override public void onAnimationEnd(          android.animation.Animator animation){
+            mAppsCustomizePane.flashScrollingIndicator();
+          }
+        }
+);
         anim.start();
       }
     }

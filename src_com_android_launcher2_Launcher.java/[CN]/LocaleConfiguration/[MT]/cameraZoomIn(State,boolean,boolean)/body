@@ -39,6 +39,8 @@
         fromView.setVisibility(View.GONE);
         if (fromView instanceof LauncherTransitionable) {
           ((LauncherTransitionable)fromView).onLauncherTransitionEnd(alphaAnim);
+          mWorkspace.showScrollIndicatorTrack();
+          mWorkspace.flashScrollingIndicator();
         }
       }
     }
@@ -51,6 +53,8 @@
     if (fromView instanceof LauncherTransitionable) {
       ((LauncherTransitionable)fromView).onLauncherTransitionStart(null);
       ((LauncherTransitionable)fromView).onLauncherTransitionEnd(null);
+      mWorkspace.showScrollIndicatorTrack();
+      mWorkspace.flashScrollingIndicator();
     }
   }
 }

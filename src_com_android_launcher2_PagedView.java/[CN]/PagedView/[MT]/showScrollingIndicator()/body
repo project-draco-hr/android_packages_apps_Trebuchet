@@ -4,9 +4,7 @@
   if (!isScrollingIndicatorEnabled())   return;
   getScrollingIndicator();
   if (mScrollIndicator != null) {
-    mScrollIndicator.getLayoutParams().width=getPageWidthForScrollingIndicator() / getChildCount();
-    mScrollIndicator.requestLayout();
     updateScrollingIndicatorPosition();
-    mScrollIndicator.animate().alpha(1f).setDuration(sScrollIndicatorFadeInDuration);
+    mScrollIndicator.animate().alpha(1f).setDuration(sScrollIndicatorFadeInDuration).start();
   }
 }

@@ -5,6 +5,6 @@
   getScrollingIndicator();
   if (mScrollIndicator != null) {
     updateScrollingIndicatorPosition();
-    mScrollIndicator.animate().alpha(0f).setDuration(immediately ? sScrollIndicatorFastFadeOutDuration : sScrollIndicatorFadeOutDuration);
+    mScrollIndicator.animate().alpha(0f).setDuration(immediately ? sScrollIndicatorFastFadeOutDuration : sScrollIndicatorFadeOutDuration).start();
   }
 }

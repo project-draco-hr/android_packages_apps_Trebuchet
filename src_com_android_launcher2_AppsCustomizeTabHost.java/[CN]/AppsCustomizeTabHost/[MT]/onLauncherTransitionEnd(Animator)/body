@@ -2,4 +2,5 @@
   if (animation != null) {
     setLayerType(LAYER_TYPE_NONE,null);
   }
+  mAppsCustomizePane.flashScrollingIndicator();
 }

@@ -7,4 +7,5 @@
   int indicatorCenterOffset=indicatorWidth / 2 - mScrollIndicator.getMeasuredWidth() / 2;
   int indicatorPos=(int)(offset * pageWidth) + pageOffset + indicatorCenterOffset;
   mScrollIndicator.setTranslationX(indicatorPos);
+  mScrollIndicator.invalidate();
 }

@@ -3,7 +3,6 @@
     return;
   }
   if (mContentIsRefreshable) {
-    hideScrollingIndicator(true);
     syncPages();
     final int count=getChildCount();
     mDirtyPageContent.clear();
