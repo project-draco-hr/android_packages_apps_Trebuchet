@@ -4,4 +4,7 @@
     int page=w.indexOfChild(mScreen);
     w.snapToPage(page);
   }
+ else {
+    mLauncher.getDragController().cancelDrag();
+  }
 }

@@ -1,18 +1,13 @@
 {
-  if (mDragFolderRingAnimator != null && mCreateUserFolderOnDrop) {
-    mDragFolderRingAnimator.animateToNaturalState();
-  }
-  if (mLastDragOverView != null && mLastDragOverView instanceof FolderIcon) {
-    if (d != null) {
-      ((FolderIcon)mLastDragOverView).onDragExit(d.dragInfo);
-    }
-  }
-  mFolderCreationAlarm.cancelAlarm();
+  cleanupFolderCreation(d);
+  onResetScrollArea();
   if (mDragTargetLayout != null) {
+    mDragTargetLayout.setIsDragOverlapping(false);
     mDragTargetLayout.onDragExit();
   }
+  mLastDragView=null;
+  mLastDragOverView=null;
   if (!mIsPageMoving) {
     hideOutlines();
   }
-  clearAllHovers();
 }

@@ -6,14 +6,13 @@
     final CellLayout layout=(CellLayout)getChildAt(page);
     cancelFolderCreation();
     if (layout != null) {
-      layout.setIsDragOverlapping(true);
       if (mDragTargetLayout != null) {
+        mDragTargetLayout.setIsDragOverlapping(false);
         mDragTargetLayout.onDragExit();
-        mDragTargetLayout=layout;
       }
-      if (getHeight() > getWidth()) {
-        invalidate();
-      }
+      mDragTargetLayout=layout;
+      mDragTargetLayout.setIsDragOverlapping(true);
+      invalidate();
     }
   }
 }

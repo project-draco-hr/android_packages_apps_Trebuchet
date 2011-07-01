@@ -1,7 +1,12 @@
 {
   if (mInScrollArea) {
-    mInScrollArea=false;
+    if (mDragTargetLayout != null) {
+      mDragTargetLayout.setIsDragOverlapping(false);
+      mDragTargetLayout=getCurrentDropLayout();
+      mDragTargetLayout.onDragEnter();
+      invalidate();
+    }
     mPendingScrollDirection=DragController.SCROLL_NONE;
-    clearAllHovers();
+    mInScrollArea=false;
   }
 }

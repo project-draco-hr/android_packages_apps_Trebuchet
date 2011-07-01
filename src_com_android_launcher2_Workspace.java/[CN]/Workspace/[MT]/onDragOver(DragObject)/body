@@ -1,83 +1,73 @@
 {
-  if (!mInScrollArea) {
-    CellLayout layout;
+  if (mInScrollArea)   return;
+  if (mIsInUnshrinkAnimation)   return;
+  CellLayout layout;
+  ItemInfo item=(ItemInfo)d.dragInfo;
+  if (item.spanX < 0 || item.spanY < 0)   throw new RuntimeException("Improper spans found");
+  if (mIsSmall) {
     int left=d.x - d.xOffset;
     int top=d.y - d.yOffset;
-    mDragViewVisualCenter=getDragViewVisualCenter(d.x,d.y,d.xOffset,d.yOffset,d.dragView,mDragViewVisualCenter);
-    boolean shrunken=mIsSmall || mIsInUnshrinkAnimation;
-    if (shrunken) {
-      mLastDragView=d.dragView;
-      mLastDragOriginX=left;
-      mLastDragOriginY=top;
-      mLastDragXOffset=d.xOffset;
-      mLastDragYOffset=d.yOffset;
-      layout=findMatchingPageForDragOver(d.dragView,left,top,d.xOffset,d.yOffset);
-      if (layout != null && layout != mDragTargetLayout) {
-        if (mDragTargetLayout != null) {
-          mDragTargetLayout.setIsDragOverlapping(false);
-          mDragTargetLayout.clearDragOutlines();
-        }
-        mDragTargetLayout=layout;
-        boolean isInSpringLoadedMode=(mShrinkState == ShrinkState.SPRING_LOADED);
-        boolean allowDragOver=(mDragTargetLayout != null);
-        if (allowDragOver) {
-          if (isInSpringLoadedMode) {
-            mSpringLoadedDragController.setAlarm(mDragTargetLayout);
-          }
-          mDragTargetLayout.setIsDragOverlapping(true);
-        }
-      }
-    }
- else {
-      layout=getCurrentDropLayout();
-      if (layout != mDragTargetLayout) {
-        if (mDragTargetLayout != null) {
-          mDragTargetLayout.onDragExit();
-        }
-        layout.onDragEnter();
-        mDragTargetLayout=layout;
-      }
-    }
-    if (!shrunken || mShrinkState == ShrinkState.SPRING_LOADED) {
-      layout=getCurrentDropLayout();
-      final ItemInfo item=(ItemInfo)d.dragInfo;
-      if (d.dragInfo instanceof LauncherAppWidgetInfo) {
-        LauncherAppWidgetInfo widgetInfo=(LauncherAppWidgetInfo)d.dragInfo;
-        if (widgetInfo.spanX == -1) {
-          int[] spans=layout.rectToCell(widgetInfo.minWidth,widgetInfo.minHeight,null);
-          item.spanX=spans[0];
-          item.spanY=spans[1];
-        }
-      }
+    layout=findMatchingPageForDragOver(d.dragView,left,top,d.xOffset,d.yOffset,true);
+    if (layout != mDragTargetLayout) {
+      cleanupFolderCreation(d);
       if (mDragTargetLayout != null) {
-        final View child=(mDragInfo == null) ? null : mDragInfo.cell;
-        mapPointFromSelfToChild(mDragTargetLayout,mDragViewVisualCenter,null);
-        ItemInfo info=(ItemInfo)d.dragInfo;
-        mTargetCell=findNearestArea((int)mDragViewVisualCenter[0],(int)mDragViewVisualCenter[1],1,1,mDragTargetLayout,mTargetCell);
-        final View dragOverView=mDragTargetLayout.getChildAt(mTargetCell[0],mTargetCell[1]);
-        boolean userFolderPending=willCreateUserFolder(info,mDragTargetLayout,mTargetCell,false);
-        boolean isOverFolder=dragOverView instanceof FolderIcon;
-        if (dragOverView != mLastDragOverView) {
-          cancelFolderCreation();
-          if (mLastDragOverView != null && mLastDragOverView instanceof FolderIcon) {
-            ((FolderIcon)mLastDragOverView).onDragExit(d.dragInfo);
-          }
-        }
-        if (userFolderPending && dragOverView != mLastDragOverView) {
-          mFolderCreationAlarm.setOnAlarmListener(new FolderCreationAlarmListener(mDragTargetLayout,mTargetCell[0],mTargetCell[1]));
-          mFolderCreationAlarm.setAlarm(FOLDER_CREATION_TIMEOUT);
-        }
-        if (dragOverView != mLastDragOverView && isOverFolder) {
-          ((FolderIcon)dragOverView).onDragEnter(d.dragInfo);
-          if (mDragTargetLayout != null) {
-            mDragTargetLayout.clearDragOutlines();
-          }
-        }
-        mLastDragOverView=dragOverView;
-        if (!mCreateUserFolderOnDrop && !isOverFolder) {
-          mDragTargetLayout.visualizeDropLocation(child,mDragOutline,(int)mDragViewVisualCenter[0],(int)mDragViewVisualCenter[1],item.spanX,item.spanY);
-        }
+        mDragTargetLayout.setIsDragOverlapping(false);
+        mDragTargetLayout.onDragExit();
       }
+      mDragTargetLayout=layout;
+      if (mDragTargetLayout != null) {
+        mDragTargetLayout.setIsDragOverlapping(true);
+        mDragTargetLayout.onDragEnter();
+      }
+ else {
+        mLastDragOverView=null;
+      }
+      boolean isInSpringLoadedMode=(mShrinkState == ShrinkState.SPRING_LOADED);
+      if (isInSpringLoadedMode) {
+        mSpringLoadedDragController.setAlarm(mDragTargetLayout);
+      }
+    }
+  }
+ else {
+    layout=getCurrentDropLayout();
+    if (layout != mDragTargetLayout) {
+      if (mDragTargetLayout != null) {
+        mDragTargetLayout.setIsDragOverlapping(false);
+        mDragTargetLayout.onDragExit();
+      }
+      mDragTargetLayout=layout;
+      mDragTargetLayout.setIsDragOverlapping(true);
+      mDragTargetLayout.onDragEnter();
+    }
+  }
+  if (mDragTargetLayout != null) {
+    final View child=(mDragInfo == null) ? null : mDragInfo.cell;
+    mDragViewVisualCenter=getDragViewVisualCenter(d.x,d.y,d.xOffset,d.yOffset,d.dragView,mDragViewVisualCenter);
+    mapPointFromSelfToChild(mDragTargetLayout,mDragViewVisualCenter,null);
+    ItemInfo info=(ItemInfo)d.dragInfo;
+    mTargetCell=findNearestArea((int)mDragViewVisualCenter[0],(int)mDragViewVisualCenter[1],1,1,mDragTargetLayout,mTargetCell);
+    final View dragOverView=mDragTargetLayout.getChildAt(mTargetCell[0],mTargetCell[1]);
+    boolean userFolderPending=willCreateUserFolder(info,mDragTargetLayout,mTargetCell,false);
+    boolean isOverFolder=dragOverView instanceof FolderIcon;
+    if (dragOverView != mLastDragOverView) {
+      cancelFolderCreation();
+      if (mLastDragOverView != null && mLastDragOverView instanceof FolderIcon) {
+        ((FolderIcon)mLastDragOverView).onDragExit(d.dragInfo);
+      }
+    }
+    if (userFolderPending && dragOverView != mLastDragOverView) {
+      mFolderCreationAlarm.setOnAlarmListener(new FolderCreationAlarmListener(mDragTargetLayout,mTargetCell[0],mTargetCell[1]));
+      mFolderCreationAlarm.setAlarm(FOLDER_CREATION_TIMEOUT);
+    }
+    if (dragOverView != mLastDragOverView && isOverFolder) {
+      ((FolderIcon)dragOverView).onDragEnter(d.dragInfo);
+      if (mDragTargetLayout != null) {
+        mDragTargetLayout.clearDragOutlines();
+      }
+    }
+    mLastDragOverView=dragOverView;
+    if (!mCreateUserFolderOnDrop && !isOverFolder) {
+      mDragTargetLayout.visualizeDropLocation(child,mDragOutline,(int)mDragViewVisualCenter[0],(int)mDragViewVisualCenter[1],item.spanX,item.spanY);
     }
   }
 }

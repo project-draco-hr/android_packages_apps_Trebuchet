@@ -1,14 +1,13 @@
 {
-  mLastDragOverView=null;
   if (mDragTargetLayout != null) {
+    mDragTargetLayout.setIsDragOverlapping(false);
     mDragTargetLayout.onDragExit();
-    mDragTargetLayout=null;
   }
-  if (!mIsSmall) {
-    mDragTargetLayout=getCurrentDropLayout();
-    mDragTargetLayout.onDragEnter();
-    if (!LauncherApplication.isScreenLarge()) {
-      showOutlines();
-    }
+  mDragTargetLayout=getCurrentDropLayout();
+  mDragTargetLayout.setIsDragOverlapping(true);
+  mDragTargetLayout.onDragEnter();
+  mLastDragView=d.dragView;
+  if (LauncherApplication.isScreenLarge()) {
+    showOutlines();
   }
 }

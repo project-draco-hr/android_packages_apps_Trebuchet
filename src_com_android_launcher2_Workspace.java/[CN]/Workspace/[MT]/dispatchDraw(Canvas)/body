@@ -11,9 +11,9 @@
   }
  else {
     super.dispatchDraw(canvas);
-    final int width=getWidth();
-    final int height=getHeight();
-    if (mInScrollArea && (height > width)) {
+    if (mInScrollArea && !LauncherApplication.isScreenLarge()) {
+      final int width=getWidth();
+      final int height=getHeight();
       final int pageHeight=getChildAt(0).getHeight();
       final int padding=(int)((height - pageHeight) * 0.5f + pageHeight * 0.1f);
       final CellLayout leftPage=(CellLayout)getChildAt(mCurrentPage - 1);

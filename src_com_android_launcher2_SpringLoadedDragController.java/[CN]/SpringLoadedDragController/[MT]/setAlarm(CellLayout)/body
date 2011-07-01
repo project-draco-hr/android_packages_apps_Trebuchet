@@ -1,5 +1,6 @@
 {
   if (mScreen != cl) {
+    mAlarm.cancelAlarm();
     mAlarm.setAlarm(ENTER_SPRING_LOAD_HOVER_TIME);
   }
   mScreen=cl;

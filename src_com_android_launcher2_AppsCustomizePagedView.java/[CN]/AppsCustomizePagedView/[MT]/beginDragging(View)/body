@@ -1,13 +1,13 @@
 {
   if (!super.beginDragging(v))   return false;
+  int currentPageIndex=mLauncher.getWorkspace().getCurrentPage();
+  CellLayout currentPage=(CellLayout)mLauncher.getWorkspace().getChildAt(currentPageIndex);
+  mLauncher.enterSpringLoadedDragMode(currentPage);
   if (v instanceof PagedViewIcon) {
     beginDraggingApplication(v);
   }
  else   if (v instanceof PagedViewWidget) {
     beginDraggingWidget(v);
   }
-  int currentPageIndex=mLauncher.getWorkspace().getCurrentPage();
-  CellLayout currentPage=(CellLayout)mLauncher.getWorkspace().getChildAt(currentPageIndex);
-  mLauncher.enterSpringLoadedDragMode(currentPage);
   return true;
 }

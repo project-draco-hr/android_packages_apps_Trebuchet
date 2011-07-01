@@ -19,12 +19,6 @@
     @Override public void onAnimationEnd(    Animator animation){
       mIsInUnshrinkAnimation=false;
       mSyncWallpaperOffsetWithScroll=true;
-      if (mShrinkState == ShrinkState.SPRING_LOADED) {
-        View layout=null;
-        if (mLastDragView != null) {
-          layout=findMatchingPageForDragOver(mLastDragView,mLastDragOriginX,mLastDragOriginY,mLastDragXOffset,mLastDragYOffset);
-        }
-      }
       mWallpaperOffset.setOverrideHorizontalCatchupConstant(false);
       mAnimator=null;
       enableChildrenLayers(false);

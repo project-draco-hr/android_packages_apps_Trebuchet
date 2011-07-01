@@ -1,8 +1,4 @@
 {
   mShrinkState=ShrinkState.SPRING_LOADED;
   unshrink(clThatWasClicked,true);
-  mDragTargetLayout=getCurrentDropLayout();
-  mDragTargetLayout.onDragEnter();
-  mDragTargetLayout.setIsDragOverlapping(true);
-  showOutlines();
 }

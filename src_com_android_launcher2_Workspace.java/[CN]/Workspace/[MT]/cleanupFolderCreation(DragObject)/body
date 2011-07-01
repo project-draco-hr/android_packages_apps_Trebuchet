@@ -1,0 +1,11 @@
+{
+  if (mDragFolderRingAnimator != null && mCreateUserFolderOnDrop) {
+    mDragFolderRingAnimator.animateToNaturalState();
+  }
+  if (mLastDragOverView != null && mLastDragOverView instanceof FolderIcon) {
+    if (d != null) {
+      ((FolderIcon)mLastDragOverView).onDragExit(d.dragInfo);
+    }
+  }
+  mFolderCreationAlarm.cancelAlarm();
+}

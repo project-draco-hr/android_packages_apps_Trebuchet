@@ -1,5 +1,4 @@
 {
-  mLastDragView=null;
   if (!success) {
     doDragExit(null);
   }
