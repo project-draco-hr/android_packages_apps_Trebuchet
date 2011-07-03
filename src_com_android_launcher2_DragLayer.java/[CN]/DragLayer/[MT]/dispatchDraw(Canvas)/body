@@ -4,7 +4,12 @@
     canvas.save(Canvas.MATRIX_SAVE_FLAG);
     final int xPos=mDropViewPos[0] - mDropView.getScrollX();
     final int yPos=mDropViewPos[1] - mDropView.getScrollY();
+    int width=mDropView.getMeasuredWidth();
+    int height=mDropView.getMeasuredHeight();
     canvas.translate(xPos,yPos);
+    canvas.translate((1 - mDropViewScale) * width / 2,(1 - mDropViewScale) * height / 2);
+    canvas.scale(mDropViewScale,mDropViewScale);
+    mDropView.setAlpha(mDropViewAlpha);
     mDropView.draw(canvas);
     canvas.restore();
   }

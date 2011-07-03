@@ -41,7 +41,7 @@ mTargetCell=findNearestArea((int)touchXY[0],(int)touchXY[1],spanX,spanY,cellLayo
 if (createUserFolderIfNecessary(view,cellLayout,mTargetCell,true)) {
 return;
 }
-if (addToExistingFolderIfNecessary(view,cellLayout,mTargetCell,dragInfo,true)) {
+if (addToExistingFolderIfNecessary(view,cellLayout,mTargetCell,d,true)) {
 return;
 }
 }
@@ -56,9 +56,9 @@ cellLayout.onDropChild(view);
 cellLayout.animateDrop();
 CellLayout.LayoutParams lp=(CellLayout.LayoutParams)view.getLayoutParams();
 cellLayout.getChildrenLayout().measureChild(view);
-if (dragView != null) {
-mLauncher.getDragLayer().animateViewIntoPosition(dragView,view);
-}
 LauncherModel.addOrMoveItemInDatabase(mLauncher,info,LauncherSettings.Favorites.CONTAINER_DESKTOP,screen,lp.cellX,lp.cellY);
+if (d.dragView != null) {
+mLauncher.getDragLayer().animateViewIntoPosition(d.dragView,view);
+}
 }
 }

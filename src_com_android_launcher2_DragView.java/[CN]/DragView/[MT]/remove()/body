@@ -1,3 +1,8 @@
 {
-  mWindowManager.removeView(this);
+  post(new Runnable(){
+    public void run(){
+      mWindowManager.removeView(DragView.this);
+    }
+  }
+);
 }

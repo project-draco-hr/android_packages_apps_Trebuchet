@@ -1,6 +1,5 @@
 {
-  if (!(getParent() instanceof CellLayoutChildren))   return;
-  DragLayer.LayoutParams iconLp=(DragLayer.LayoutParams)mFolderIcon.getLayoutParams();
+  if (!(getParent() instanceof DragLayer))   return;
   DragLayer.LayoutParams lp=(DragLayer.LayoutParams)getLayoutParams();
   if (mMode == PARTIAL_GROW) {
     setScaleX(0.8f);
@@ -8,10 +7,11 @@
     setAlpha(0f);
   }
  else {
-    lp.width=iconLp.width;
-    lp.height=iconLp.height;
-    lp.x=iconLp.x;
-    lp.y=iconLp.y;
+    mLauncher.getDragLayer().getDescendantRectRelativeToSelf(mFolderIcon,mIconRect);
+    lp.width=mIconRect.width();
+    lp.height=mIconRect.height();
+    lp.x=mIconRect.left;
+    lp.y=mIconRect.top;
     mContent.setAlpha(0);
   }
   mState=STATE_SMALL;

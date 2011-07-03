@@ -1,5 +1,5 @@
 View newView
 CellLayout target
 int[] targetCell
-Object dragInfo
+DragObject d
 boolean external
