@@ -1,0 +1,12 @@
+{
+  int[] loc=new int[2];
+  getLocationOnScreen(loc);
+  int x=loc[0];
+  int y=loc[1];
+  v.getLocationOnScreen(loc);
+  int vX=loc[0];
+  int vY=loc[1];
+  int left=vX - x;
+  int top=vY - y;
+  r.set(left,top,left + v.getMeasuredWidth(),top + v.getMeasuredHeight());
+}

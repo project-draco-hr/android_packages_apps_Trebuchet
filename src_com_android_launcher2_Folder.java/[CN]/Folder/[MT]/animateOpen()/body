@@ -1,7 +1,5 @@
 {
-  if (mState != STATE_SMALL) {
-    positionAndSizeAsIcon();
-  }
+  positionAndSizeAsIcon();
   if (!(getParent() instanceof DragLayer))   return;
   ObjectAnimator oa;
   DragLayer.LayoutParams lp=(DragLayer.LayoutParams)getLayoutParams();

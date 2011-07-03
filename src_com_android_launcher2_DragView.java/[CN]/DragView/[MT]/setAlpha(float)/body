@@ -1,0 +1,8 @@
+{
+  super.setAlpha(alpha);
+  if (mPaint == null) {
+    mPaint=new Paint();
+  }
+  mPaint.setAlpha((int)(255 * alpha));
+  invalidate();
+}

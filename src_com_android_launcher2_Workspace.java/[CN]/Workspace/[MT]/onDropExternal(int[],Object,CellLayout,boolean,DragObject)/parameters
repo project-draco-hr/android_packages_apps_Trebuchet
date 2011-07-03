@@ -2,4 +2,4 @@ int[] touchXY
 Object dragInfo
 CellLayout cellLayout
 boolean insertAtFirst
-DragView dragView
+DragObject d

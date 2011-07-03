@@ -1,0 +1,5 @@
+View view
+Rect from
+Rect to
+float finalAlpha
+int duration

@@ -8,12 +8,11 @@
     oa=ObjectAnimator.ofPropertyValuesHolder(this,alpha,scaleX,scaleY);
   }
  else {
-    DragLayer.LayoutParams iconLp=(DragLayer.LayoutParams)mFolderIcon.getLayoutParams();
     DragLayer.LayoutParams lp=(DragLayer.LayoutParams)getLayoutParams();
-    PropertyValuesHolder width=PropertyValuesHolder.ofInt("width",iconLp.width);
-    PropertyValuesHolder height=PropertyValuesHolder.ofInt("height",iconLp.height);
-    PropertyValuesHolder x=PropertyValuesHolder.ofInt("x",iconLp.x);
-    PropertyValuesHolder y=PropertyValuesHolder.ofInt("y",iconLp.y);
+    PropertyValuesHolder width=PropertyValuesHolder.ofInt("width",mIconRect.width());
+    PropertyValuesHolder height=PropertyValuesHolder.ofInt("height",mIconRect.height());
+    PropertyValuesHolder x=PropertyValuesHolder.ofInt("x",mIconRect.left);
+    PropertyValuesHolder y=PropertyValuesHolder.ofInt("y",mIconRect.top);
     oa=ObjectAnimator.ofPropertyValuesHolder(lp,width,height,x,y);
     oa.addUpdateListener(new AnimatorUpdateListener(){
       public void onAnimationUpdate(      ValueAnimator animation){

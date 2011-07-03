@@ -1,0 +1,22 @@
+{
+  ShortcutInfo item;
+  if (d.dragInfo instanceof ApplicationInfo) {
+    item=((ApplicationInfo)d.dragInfo).makeShortcut();
+  }
+ else {
+    item=(ShortcutInfo)d.dragInfo;
+  }
+  item.cellX=-1;
+  item.cellY=-1;
+  addItem(item);
+  DragLayer dragLayer=mLauncher.getDragLayer();
+  Rect from=new Rect();
+  dragLayer.getViewRectRelativeToSelf(d.dragView,from);
+  Rect to=new Rect();
+  dragLayer.getDescendantRectRelativeToSelf(this,to);
+  int previewSize=FolderRingAnimator.sPreviewSize;
+  int vanishingPointX=(int)(previewSize * 0.7);
+  int vanishingPointY=(int)(previewSize * (1 - 0.88f));
+  to.offset(vanishingPointX - previewSize / 2,vanishingPointY - previewSize / 2);
+  dragLayer.animateView(d.dragView,from,to,0f,0.2f,400,new DecelerateInterpolator(2),new AccelerateInterpolator(2));
+}

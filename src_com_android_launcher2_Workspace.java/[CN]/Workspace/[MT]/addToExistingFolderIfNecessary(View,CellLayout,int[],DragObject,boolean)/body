@@ -2,8 +2,8 @@
   View dropOverView=target.getChildAt(targetCell[0],targetCell[1]);
   if (dropOverView instanceof FolderIcon) {
     FolderIcon fi=(FolderIcon)dropOverView;
-    if (fi.acceptDrop(dragInfo)) {
-      fi.onDrop(dragInfo);
+    if (fi.acceptDrop(d.dragInfo)) {
+      fi.onDrop(d);
       if (!external) {
         int fromScreen=mDragInfo.screen;
         CellLayout sourceLayout=(CellLayout)getChildAt(fromScreen);

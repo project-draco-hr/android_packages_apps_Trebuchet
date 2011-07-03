@@ -8,4 +8,10 @@
       }
     }
   }
+ else {
+    if (target != this) {
+      mOnExitAlarm.cancelAlarm();
+      completeDragExit();
+    }
+  }
 }
