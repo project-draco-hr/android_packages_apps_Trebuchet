@@ -1,6 +1,9 @@
 {
   if (!willAcceptItem((ItemInfo)dragInfo))   return;
-  determineFolderLocationInWorkspace();
-  mLauncher.getWorkspace().showFolderAccept(mFolderRingAnimator);
+  CellLayout.LayoutParams lp=(CellLayout.LayoutParams)getLayoutParams();
+  CellLayout layout=(CellLayout)getParent().getParent();
+  mFolderRingAnimator.setCell(lp.cellX,lp.cellY);
+  mFolderRingAnimator.setCellLayout(layout);
   mFolderRingAnimator.animateToAcceptState();
+  layout.showFolderAccept(mFolderRingAnimator);
 }

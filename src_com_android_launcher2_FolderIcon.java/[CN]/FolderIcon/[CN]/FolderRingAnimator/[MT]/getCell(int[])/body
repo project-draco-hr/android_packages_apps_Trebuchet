@@ -1,0 +1,4 @@
+{
+  loc[0]=mCellX;
+  loc[1]=mCellY;
+}

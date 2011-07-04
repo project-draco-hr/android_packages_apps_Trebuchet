@@ -1,5 +1,4 @@
 {
-  mLauncher=launcher;
   mFolderIcon=folderIcon;
   Resources res=launcher.getResources();
   mOuterRingDrawable=res.getDrawable(R.drawable.portal_ring_outer_holo);

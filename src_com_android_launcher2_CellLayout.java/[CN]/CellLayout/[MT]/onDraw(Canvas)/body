@@ -79,4 +79,29 @@
       canvas.drawBitmap(b,mPressedOrFocusedIcon.getLeft() + getPaddingLeft() - padding,mPressedOrFocusedIcon.getTop() + getPaddingTop() - padding,null);
     }
   }
+  for (int i=0; i < mFolderOuterRings.size(); i++) {
+    FolderRingAnimator fra=mFolderOuterRings.get(i);
+    Drawable d=FolderRingAnimator.sSharedOuterRingDrawable;
+    int width=(int)fra.getOuterRingSize();
+    int height=width;
+    cellToPoint(fra.mCellX,fra.mCellY,mTempLocation);
+    int centerX=mTempLocation[0] + mCellWidth / 2;
+    int centerY=mTempLocation[1] + FolderRingAnimator.sPreviewSize / 2;
+    canvas.save();
+    canvas.translate(centerX - width / 2,centerY - height / 2);
+    d.setBounds(0,0,width,height);
+    d.draw(canvas);
+    canvas.restore();
+    d=FolderRingAnimator.sSharedInnerRingDrawable;
+    width=(int)fra.getInnerRingSize();
+    height=width;
+    cellToPoint(fra.mCellX,fra.mCellY,mTempLocation);
+    centerX=mTempLocation[0] + mCellWidth / 2;
+    centerY=mTempLocation[1] + FolderRingAnimator.sPreviewSize / 2;
+    canvas.save();
+    canvas.translate(centerX - width / 2,centerY - width / 2);
+    d.setBounds(0,0,width,height);
+    d.draw(canvas);
+    canvas.restore();
+  }
 }

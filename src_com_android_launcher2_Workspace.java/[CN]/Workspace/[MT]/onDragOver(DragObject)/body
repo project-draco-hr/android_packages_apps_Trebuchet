@@ -64,7 +64,7 @@
           }
         }
         if (userFolderPending && dragOverView != mLastDragOverView) {
-          mFolderCreationAlarm.setOnAlarmListener(new FolderCreationAlarmListener(dragOverView));
+          mFolderCreationAlarm.setOnAlarmListener(new FolderCreationAlarmListener(mDragTargetLayout,mTargetCell[0],mTargetCell[1]));
           mFolderCreationAlarm.setAlarm(FOLDER_CREATION_TIMEOUT);
         }
         if (dragOverView != mLastDragOverView && isOverFolder) {
