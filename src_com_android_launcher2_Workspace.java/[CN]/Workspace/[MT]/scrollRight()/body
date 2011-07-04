@@ -2,4 +2,8 @@
   if (!mIsSmall && !mIsInUnshrinkAnimation) {
     super.scrollRight();
   }
+  Folder openFolder=getOpenFolder();
+  if (openFolder != null) {
+    openFolder.completeDragExit();
+  }
 }

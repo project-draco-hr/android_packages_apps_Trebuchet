@@ -1,14 +1,6 @@
 {
   outState.putInt(RUNTIME_STATE_CURRENT_SCREEN,mWorkspace.getCurrentPage());
-  final Folder folder=mWorkspace.getOpenFolder();
-  if (folder != null) {
-    long[] ids=new long[1];
-    ids[0]=folder.getInfo().id;
-    outState.putLongArray(RUNTIME_STATE_FOLDERS,ids);
-  }
- else {
-    super.onSaveInstanceState(outState);
-  }
+  super.onSaveInstanceState(outState);
   outState.putInt(RUNTIME_STATE,mState.ordinal());
   if (mAddScreen > -1 && mWaitingForResult) {
     outState.putInt(RUNTIME_STATE_PENDING_ADD_SCREEN,mAddScreen);

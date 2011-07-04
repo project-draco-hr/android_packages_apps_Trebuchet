@@ -4,20 +4,6 @@
     if (!mWorkspace.hasFocus()) {
       mWorkspace.getChildAt(mWorkspace.getCurrentPage()).requestFocus();
     }
-    final long[] folders=mSavedState.getLongArray(RUNTIME_STATE_FOLDERS);
-    if (folders != null) {
-      for (      long folderId : folders) {
-        final FolderInfo info=sFolders.get(folderId);
-        final FolderIcon folderIcon=(FolderIcon)mWorkspace.getViewForTag(info);
-        if (folderIcon != null) {
-          openFolder(folderIcon);
-        }
-      }
-      final Folder openFolder=mWorkspace.getOpenFolder();
-      if (openFolder != null) {
-        openFolder.requestFocus();
-      }
-    }
     mSavedState=null;
   }
   if (mSavedInstanceState != null) {
