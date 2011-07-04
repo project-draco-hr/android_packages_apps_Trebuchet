@@ -4,18 +4,7 @@
   final SearchManager searchManager=(SearchManager)getSystemService(Context.SEARCH_SERVICE);
   ComponentName activityName=searchManager.getGlobalSearchActivity();
   if (activityName != null) {
-    boolean iconLoaded=false;
-    if (!LauncherApplication.isScreenLarge()) {
-      int orientation=getResources().getConfiguration().orientation;
-      if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-        searchButton.setImageResource(R.drawable.ic_generic_search);
-        iconLoaded=true;
-        sGlobalSearchIcon=null;
-      }
-    }
-    if (!iconLoaded) {
-      sGlobalSearchIcon=updateButtonWithIconFromExternalActivity(R.id.search_button,activityName,R.drawable.ic_generic_search);
-    }
+    sGlobalSearchIcon=updateButtonWithIconFromExternalActivity(R.id.search_button,activityName,R.drawable.ic_generic_search);
     searchButton.setVisibility(View.VISIBLE);
     searchDivider.setVisibility(View.VISIBLE);
   }
