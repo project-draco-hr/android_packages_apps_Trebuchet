@@ -38,7 +38,7 @@ int spanX=mDragInfo != null ? mDragInfo.spanX : 1;
 int spanY=mDragInfo != null ? mDragInfo.spanY : 1;
 if (touchXY != null) {
 mTargetCell=findNearestArea((int)touchXY[0],(int)touchXY[1],spanX,spanY,cellLayout,mTargetCell);
-if (createUserFolderIfNecessary(view,cellLayout,mTargetCell,true)) {
+if (createUserFolderIfNecessary(view,cellLayout,mTargetCell,true,d.dragView)) {
 return;
 }
 if (addToExistingFolderIfNecessary(view,cellLayout,mTargetCell,d,true)) {

@@ -1,0 +1,15 @@
+{
+  canvas.save();
+  canvas.translate(params.transX + mPreviewOffsetX,params.transY + mPreviewOffsetY);
+  canvas.scale(params.scale,params.scale);
+  Drawable d=params.drawable;
+  if (d != null) {
+    d.setBounds(0,0,mIntrinsicIconSize,mIntrinsicIconSize);
+    d.setFilterBitmap(true);
+    d.setColorFilter(Color.argb(params.overlayAlpha,0,0,0),PorterDuff.Mode.SRC_ATOP);
+    d.draw(canvas);
+    d.clearColorFilter();
+    d.setFilterBitmap(false);
+  }
+  canvas.restore();
+}

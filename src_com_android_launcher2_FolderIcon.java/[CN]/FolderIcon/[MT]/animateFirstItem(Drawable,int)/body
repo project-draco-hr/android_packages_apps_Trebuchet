@@ -1,0 +1,30 @@
+{
+  computePreviewDrawingParams(d);
+  final PreviewItemDrawingParams finalParams=computePreviewItemDrawingParams(0,null);
+  final float scale0=1.0f;
+  final float transX0=0;
+  final float transY0=0;
+  mAnimParams.drawable=d;
+  ValueAnimator va=ValueAnimator.ofFloat(0f,1.0f);
+  va.addUpdateListener(new AnimatorUpdateListener(){
+    public void onAnimationUpdate(    ValueAnimator animation){
+      float progress=(Float)animation.getAnimatedValue();
+      mAnimParams.transX=transX0 + progress * (finalParams.transX - transX0);
+      mAnimParams.transY=transY0 + progress * (finalParams.transY - transY0);
+      mAnimParams.scale=scale0 + progress * (finalParams.scale - scale0);
+      invalidate();
+    }
+  }
+);
+  va.addListener(new AnimatorListenerAdapter(){
+    @Override public void onAnimationStart(    Animator animation){
+      mAnimating=true;
+    }
+    @Override public void onAnimationEnd(    Animator animation){
+      mAnimating=false;
+    }
+  }
+);
+  va.setDuration(duration);
+  va.start();
+}

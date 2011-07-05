@@ -1,0 +1,16 @@
+{
+  if (mIntrinsicIconSize != drawableSize || mTotalWidth != totalSize) {
+    mIntrinsicIconSize=drawableSize;
+    mTotalWidth=totalSize;
+    final int previewSize=FolderRingAnimator.sPreviewSize;
+    final int previewPadding=FolderRingAnimator.sPreviewPadding;
+    mAvailableSpaceInPreview=(previewSize - 2 * previewPadding);
+    int adjustedAvailableSpace=(int)((mAvailableSpaceInPreview / 2) * (1 + 0.8f));
+    int unscaledHeight=(int)(mIntrinsicIconSize * (1 + PERSPECTIVE_SHIFT_FACTOR));
+    mBaselineIconScale=(1.0f * adjustedAvailableSpace / unscaledHeight);
+    mBaselineIconSize=(int)(mIntrinsicIconSize * mBaselineIconScale);
+    mMaxPerspectiveShift=mBaselineIconSize * PERSPECTIVE_SHIFT_FACTOR;
+    mPreviewOffsetX=(mTotalWidth - mAvailableSpaceInPreview) / 2;
+    mPreviewOffsetY=previewPadding;
+  }
+}

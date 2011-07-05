@@ -2,3 +2,4 @@ View newView
 CellLayout target
 int[] targetCell
 boolean external
+DragView dragView

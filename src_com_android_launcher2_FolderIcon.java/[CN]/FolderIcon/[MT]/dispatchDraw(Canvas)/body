@@ -1,52 +1,29 @@
 {
   super.dispatchDraw(canvas);
   if (mFolder == null)   return;
-  if (mFolder.getItemCount() == 0)   return;
-  canvas.save();
-  TextView v=(TextView)mFolder.getItemAt(0);
-  Drawable d=v.getCompoundDrawables()[1];
-  int intrinsicIconSize=d.getIntrinsicHeight();
-  if (mOriginalWidth < 0 || mOriginalHeight < 0) {
-    mOriginalWidth=getMeasuredWidth();
-    mOriginalHeight=getMeasuredHeight();
-  }
-  final int previewSize=FolderRingAnimator.sPreviewSize;
-  final int previewPadding=FolderRingAnimator.sPreviewPadding;
-  int halfAvailableSpace=(previewSize - 2 * previewPadding) / 2;
-  int availableSpace=(int)(halfAvailableSpace * (1 + 0.8f));
-  int unscaledHeight=(int)(intrinsicIconSize * (1 + PERSPECTIVE_SHIFT_FACTOR));
-  float baselineIconScale=(1.0f * availableSpace / unscaledHeight);
-  int baselineSize=(int)(intrinsicIconSize * baselineIconScale);
-  float maxPerspectiveShift=baselineSize * PERSPECTIVE_SHIFT_FACTOR;
+  if (mFolder.getItemCount() == 0 && !mAnimating)   return;
   ArrayList<View> items=mFolder.getItemsInReadingOrder(false);
-  int xShift=(mOriginalWidth - 2 * halfAvailableSpace) / 2;
-  int yShift=previewPadding + getPaddingTop();
-  canvas.translate(xShift,yShift);
-  int nItemsInPreview=Math.min(items.size(),NUM_ITEMS_IN_PREVIEW);
-  for (int i=nItemsInPreview - 1; i >= 0; i--) {
-    int index=NUM_ITEMS_IN_PREVIEW - i - 1;
-    float r=(index * 1.0f) / (NUM_ITEMS_IN_PREVIEW - 1);
-    float scale=(1 - PERSPECTIVE_SCALE_FACTOR * (1 - r));
-    float offset=(1 - r) * maxPerspectiveShift;
-    float scaledSize=scale * baselineSize;
-    float scaleOffsetCorrection=(1 - scale) * baselineSize;
-    float transY=2 * halfAvailableSpace - (offset + scaledSize + scaleOffsetCorrection);
-    float transX=offset + scaleOffsetCorrection;
-    v=(TextView)items.get(i);
-    d=v.getCompoundDrawables()[1];
-    canvas.save();
-    canvas.translate(transX,transY);
-    canvas.scale(baselineIconScale * scale,baselineIconScale * scale);
-    int overlayAlpha=(int)(80 * (1 - r));
-    if (d != null) {
-      d.setBounds(0,0,intrinsicIconSize,intrinsicIconSize);
-      d.setFilterBitmap(true);
-      d.setColorFilter(Color.argb(overlayAlpha,0,0,0),PorterDuff.Mode.SRC_ATOP);
-      d.draw(canvas);
-      d.clearColorFilter();
-      d.setFilterBitmap(false);
-    }
-    canvas.restore();
+  Drawable d;
+  TextView v;
+  if (mAnimating) {
+    computePreviewDrawingParams(mAnimParams.drawable);
   }
-  canvas.restore();
+ else {
+    v=(TextView)items.get(0);
+    d=v.getCompoundDrawables()[1];
+    computePreviewDrawingParams(d);
+  }
+  int nItemsInPreview=Math.min(items.size(),NUM_ITEMS_IN_PREVIEW);
+  if (!mAnimating) {
+    for (int i=nItemsInPreview - 1; i >= 0; i--) {
+      v=(TextView)items.get(i);
+      d=v.getCompoundDrawables()[1];
+      mParams=computePreviewItemDrawingParams(i,mParams);
+      mParams.drawable=d;
+      drawPreviewItem(canvas,mParams);
+    }
+  }
+ else {
+    drawPreviewItem(canvas,mAnimParams);
+  }
 }

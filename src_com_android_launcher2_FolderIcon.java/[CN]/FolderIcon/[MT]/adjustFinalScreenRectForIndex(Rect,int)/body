@@ -1,0 +1,9 @@
+{
+  mParams=computePreviewItemDrawingParams(Math.min(NUM_ITEMS_IN_PREVIEW,index),mParams);
+  mParams.transX+=mPreviewOffsetX;
+  mParams.transY+=mPreviewOffsetY;
+  float offsetX=mParams.transX + (mParams.scale * mIntrinsicIconSize) / 2 - mTotalWidth / 2;
+  float offsetY=mParams.transY + (mParams.scale * mIntrinsicIconSize) / 2 - mTotalWidth / 2;
+  r.offset((int)offsetX,(int)offsetY);
+  return mParams.scale;
+}

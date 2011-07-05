@@ -1,0 +1,12 @@
+{
+  Drawable animateDrawable=((TextView)destView).getCompoundDrawables()[1];
+  computePreviewDrawingParams(animateDrawable.getIntrinsicWidth(),destView.getMeasuredWidth());
+  onDrop(srcInfo,srcView,dstRect,1);
+  animateFirstItem(animateDrawable,DROP_IN_ANIMATION_DURATION);
+  postDelayed(new Runnable(){
+    public void run(){
+      addItem(destInfo);
+    }
+  }
+,INITIAL_ITEM_ANIMATION_DURATION);
+}
