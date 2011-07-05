@@ -9,9 +9,8 @@
       final float percent=(Float)animation.getAnimatedValue();
       mOuterRingSize=(1 + percent * OUTER_RING_GROWTH_FACTOR) * sPreviewSize;
       mInnerRingSize=(1 + percent * INNER_RING_GROWTH_FACTOR) * sPreviewSize;
-      mLauncher.getWorkspace().invalidate();
-      if (mFolderIcon != null) {
-        mFolderIcon.invalidate();
+      if (mCellLayout != null) {
+        mCellLayout.invalidate();
       }
     }
   }

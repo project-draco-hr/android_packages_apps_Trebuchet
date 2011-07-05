@@ -9,19 +9,20 @@
       final float percent=(Float)animation.getAnimatedValue();
       mOuterRingSize=(1 + (1 - percent) * OUTER_RING_GROWTH_FACTOR) * sPreviewSize;
       mInnerRingSize=(1 + (1 - percent) * INNER_RING_GROWTH_FACTOR) * sPreviewSize;
-      mLauncher.getWorkspace().invalidate();
-      if (mFolderIcon != null) {
-        mFolderIcon.invalidate();
+      if (mCellLayout != null) {
+        mCellLayout.invalidate();
       }
     }
   }
 );
   mNeutralAnimator.addListener(new AnimatorListenerAdapter(){
     @Override public void onAnimationEnd(    Animator animation){
+      if (mCellLayout != null) {
+        mCellLayout.hideFolderAccept(FolderRingAnimator.this);
+      }
       if (mFolderIcon != null) {
         mFolderIcon.mPreviewBackground.setVisibility(VISIBLE);
       }
-      mLauncher.getWorkspace().hideFolderAccept(FolderRingAnimator.this);
     }
   }
 );
