@@ -1,0 +1,10 @@
+View view
+Rect from
+Rect to
+float finalAlpha
+float finalScale
+int duration
+Interpolator motionInterpolator
+Interpolator alphaInterpolator
+Runnable onCompleteRunnable
+boolean fadeOut

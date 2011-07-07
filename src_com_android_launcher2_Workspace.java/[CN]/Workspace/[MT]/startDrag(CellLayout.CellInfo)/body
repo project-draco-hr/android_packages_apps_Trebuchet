@@ -14,9 +14,9 @@
   final Bitmap b=createDragBitmap(child,canvas,bitmapPadding);
   final int bmpWidth=b.getWidth();
   final int bmpHeight=b.getHeight();
-  child.getLocationOnScreen(mTempXY);
-  final int screenX=(int)mTempXY[0] + (child.getWidth() - bmpWidth) / 2;
-  final int screenY=(int)mTempXY[1] + (child.getHeight() - bmpHeight) / 2;
+  mLauncher.getDragLayer().getLocationInDragLayer(child,mTempXY);
+  final int dragLayerX=(int)mTempXY[0] + (child.getWidth() - bmpWidth) / 2;
+  final int dragLayerY=(int)mTempXY[1] + (child.getHeight() - bmpHeight) / 2;
   Rect dragRect=null;
   if (child instanceof BubbleTextView) {
     int iconSize=getResources().getDimensionPixelSize(R.dimen.app_icon_size);
@@ -31,6 +31,6 @@
     dragRect=new Rect(0,0,child.getWidth(),previewSize);
   }
   mLauncher.lockScreenOrientation();
-  mDragController.startDrag(b,screenX,screenY,this,child.getTag(),DragController.DRAG_ACTION_MOVE,dragRect);
+  mDragController.startDrag(b,dragLayerX,dragLayerY,this,child.getTag(),DragController.DRAG_ACTION_MOVE,dragRect);
   b.recycle();
 }

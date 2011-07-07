@@ -14,5 +14,4 @@
   if (sHintText == null) {
     sHintText=res.getString(R.string.folder_hint_text);
   }
-  setLayerType(LAYER_TYPE_HARDWARE,null);
 }

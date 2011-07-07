@@ -1,5 +1,7 @@
 {
   if (!(getParent() instanceof DragLayer))   return;
+  setLayerType(LAYER_TYPE_HARDWARE,null);
+  buildLayer();
   ObjectAnimator oa;
   if (mMode == PARTIAL_GROW) {
     PropertyValuesHolder alpha=PropertyValuesHolder.ofFloat("alpha",0);

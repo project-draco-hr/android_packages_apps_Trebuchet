@@ -1,3 +1,0 @@
-{
-  animateView(view,from,to,finalAlpha,1.0f,duration,null,null);
-}

@@ -1,5 +1,0 @@
-{
-  mContext=context;
-  mHandler=new Handler();
-  mScrollZone=context.getResources().getDimensionPixelSize(R.dimen.scroll_zone);
-}

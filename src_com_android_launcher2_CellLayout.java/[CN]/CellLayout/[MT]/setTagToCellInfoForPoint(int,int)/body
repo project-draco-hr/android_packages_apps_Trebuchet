@@ -10,8 +10,6 @@
     final LayoutParams lp=(LayoutParams)child.getLayoutParams();
     if ((child.getVisibility() == VISIBLE || child.getAnimation() != null) && lp.isLockedToGrid) {
       child.getHitRect(frame);
-      final int tmpXY[]=mTmpXY;
-      child.getLocationOnScreen(tmpXY);
       frame.offset(mPaddingLeft,mPaddingTop);
       if (frame.contains(x,y)) {
         cellInfo.cell=child;

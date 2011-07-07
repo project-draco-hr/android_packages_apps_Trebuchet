@@ -1,0 +1,12 @@
+{
+  mDragLayer.addView(this);
+  DragLayer.LayoutParams lp=new DragLayer.LayoutParams(0,0);
+  lp.width=mBitmap.getWidth();
+  lp.height=mBitmap.getHeight();
+  lp.x=touchX - mRegistrationX;
+  lp.y=touchY - mRegistrationY;
+  lp.customPosition=true;
+  setLayoutParams(lp);
+  mLayoutParams=lp;
+  mAnim.start();
+}

@@ -1,7 +1,6 @@
 {
-  descendant.getHitRect(r);
   mTmpXY[0]=0;
   mTmpXY[1]=0;
   getDescendantCoordRelativeToSelf(descendant,mTmpXY);
-  r.offset(mTmpXY[0],mTmpXY[1]);
+  r.set(mTmpXY[0],mTmpXY[1],mTmpXY[0] + descendant.getWidth(),mTmpXY[1] + descendant.getHeight());
 }

@@ -1,9 +1,9 @@
 {
   int[] loc=new int[2];
-  getLocationOnScreen(loc);
+  getLocationInWindow(loc);
   int x=loc[0];
   int y=loc[1];
-  v.getLocationOnScreen(loc);
+  v.getLocationInWindow(loc);
   int vX=loc[0];
   int vY=loc[1];
   int left=vX - x;

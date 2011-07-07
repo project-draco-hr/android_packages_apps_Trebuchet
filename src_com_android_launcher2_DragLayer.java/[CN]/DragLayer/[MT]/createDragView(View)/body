@@ -1,4 +1,0 @@
-{
-  v.getLocationOnScreen(mTmpXY);
-  return createDragView(mDragController.getViewBitmap(v),mTmpXY[0],mTmpXY[1]);
-}

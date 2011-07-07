@@ -1,7 +1,7 @@
 {
   post(new Runnable(){
     public void run(){
-      mWindowManager.removeView(DragView.this);
+      mDragLayer.removeView(DragView.this);
     }
   }
 );

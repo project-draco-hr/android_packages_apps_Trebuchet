@@ -1,6 +1,6 @@
 Bitmap b
-int screenX
-int screenY
+int dragLayerX
+int dragLayerY
 DragSource source
 Object dragInfo
 int dragAction

@@ -16,7 +16,7 @@
   }
   float scale=adjustFinalScreenRectForIndex(to,index);
   float finalAlpha=index < NUM_ITEMS_IN_PREVIEW ? 0.5f : 0f;
-  dragLayer.animateView(animateView,from,to,finalAlpha,scale,DROP_IN_ANIMATION_DURATION,new DecelerateInterpolator(2),new AccelerateInterpolator(2));
+  dragLayer.animateView(animateView,from,to,finalAlpha,scale,DROP_IN_ANIMATION_DURATION,new DecelerateInterpolator(2),new AccelerateInterpolator(2),null,false);
   postDelayed(new Runnable(){
     public void run(){
       addItem(item);

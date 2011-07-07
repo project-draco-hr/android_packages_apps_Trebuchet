@@ -3,24 +3,24 @@
     android.os.Debug.startMethodTracing("Launcher");
   }
   if (mInputMethodManager == null) {
-    mInputMethodManager=(InputMethodManager)mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
+    mInputMethodManager=(InputMethodManager)mLauncher.getSystemService(Context.INPUT_METHOD_SERVICE);
   }
   mInputMethodManager.hideSoftInputFromWindow(mWindowToken,0);
   for (  DragListener listener : mListeners) {
     listener.onDragStart(source,dragInfo,dragAction);
   }
-  final int registrationX=((int)mMotionDownX) - screenX;
-  final int registrationY=((int)mMotionDownY) - screenY;
+  final int registrationX=mMotionDownX - dragLayerX;
+  final int registrationY=mMotionDownY - dragLayerY;
   final int dragRegionLeft=dragRegion == null ? 0 : dragRegion.left;
   final int dragRegionTop=dragRegion == null ? 0 : dragRegion.top;
   mDragging=true;
   mDragObject.dragComplete=false;
-  mDragObject.xOffset=mMotionDownX - (screenX + dragRegionLeft);
-  mDragObject.yOffset=mMotionDownY - (screenY + dragRegionTop);
+  mDragObject.xOffset=mMotionDownX - (dragLayerX + dragRegionLeft);
+  mDragObject.yOffset=mMotionDownY - (dragLayerY + dragRegionTop);
   mDragObject.dragSource=source;
   mDragObject.dragInfo=dragInfo;
   mVibrator.vibrate(VIBRATE_DURATION);
-  final DragView dragView=mDragObject.dragView=new DragView(mContext,b,registrationX,registrationY,0,0,b.getWidth(),b.getHeight());
+  final DragView dragView=mDragObject.dragView=new DragView(mLauncher,b,registrationX,registrationY,0,0,b.getWidth(),b.getHeight());
   final DragSource dragSource=source;
   dragView.setOnDrawRunnable(new Runnable(){
     public void run(){
@@ -31,6 +31,6 @@
   if (dragRegion != null) {
     dragView.setDragRegion(new Rect(dragRegion));
   }
-  dragView.show(mWindowToken,(int)mMotionDownX,(int)mMotionDownY);
-  handleMoveEvent((int)mMotionDownX,(int)mMotionDownY);
+  dragView.show(mMotionDownX,mMotionDownY);
+  handleMoveEvent(mMotionDownX,mMotionDownY);
 }

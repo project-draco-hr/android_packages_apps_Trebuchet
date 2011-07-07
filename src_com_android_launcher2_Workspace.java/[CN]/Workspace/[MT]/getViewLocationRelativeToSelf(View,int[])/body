@@ -1,8 +1,8 @@
 {
-  getLocationOnScreen(location);
+  getLocationInWindow(location);
   int x=location[0];
   int y=location[1];
-  v.getLocationOnScreen(location);
+  v.getLocationInWindow(location);
   int vX=location[0];
   int vY=location[1];
   location[0]=vX - x;
