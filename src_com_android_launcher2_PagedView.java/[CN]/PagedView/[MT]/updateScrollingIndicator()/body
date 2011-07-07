@@ -1,5 +1,4 @@
 {
-  if (LauncherApplication.isScreenLarge())   return;
   if (getChildCount() <= 1)   return;
   if (!isScrollingIndicatorEnabled())   return;
   getScrollingIndicator();
