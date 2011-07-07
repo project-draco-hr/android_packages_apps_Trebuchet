@@ -1,8 +1,7 @@
 {
-  if (!LauncherApplication.isScreenLarge()) {
-    getScrollingIndicatorTrack();
-    if (mScrollTrack != null) {
-      mScrollTrack.setVisibility(View.VISIBLE);
-    }
+  if (!isScrollingIndicatorEnabled())   return;
+  getScrollingIndicatorTrack();
+  if (mScrollTrack != null) {
+    mScrollTrack.setVisibility(View.VISIBLE);
   }
 }

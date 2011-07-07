@@ -1,11 +1,12 @@
 {
-  int pageWidth=getPageWidthForScrollingIndicator();
-  int pageOffset=(getMeasuredWidth() - pageWidth) / 2;
-  int maxPageWidth=getChildCount() * pageWidth;
+  if (!isScrollingIndicatorEnabled())   return;
+  getScrollingIndicatorTrack();
+  int pageWidth=mScrollTrack.getMeasuredWidth() - mScrollTrack.getPaddingLeft() - mScrollTrack.getPaddingRight();
+  int maxPageWidth=getChildCount() * getMeasuredWidth();
   float offset=(float)getScrollX() / maxPageWidth;
   int indicatorWidth=pageWidth / getChildCount();
   int indicatorCenterOffset=indicatorWidth / 2 - mScrollIndicator.getMeasuredWidth() / 2;
-  int indicatorPos=(int)(offset * pageWidth) + pageOffset + indicatorCenterOffset;
+  int indicatorPos=(int)(offset * pageWidth) + mScrollTrack.getPaddingLeft() + indicatorCenterOffset;
   mScrollIndicator.setTranslationX(indicatorPos);
   mScrollIndicator.invalidate();
 }
