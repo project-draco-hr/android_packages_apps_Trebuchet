@@ -3,5 +3,6 @@ int fromX
 int fromY
 int toX
 int toY
+float finalScale
 Runnable onCompleteRunnable
 boolean fadeOut

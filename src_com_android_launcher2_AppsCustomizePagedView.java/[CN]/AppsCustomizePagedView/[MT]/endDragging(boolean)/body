@@ -1,5 +1,0 @@
-{
-  mLauncher.getWorkspace().onDragStopped(success);
-  mLauncher.exitSpringLoadedDragMode();
-  mLauncher.unlockScreenOrientation();
-}

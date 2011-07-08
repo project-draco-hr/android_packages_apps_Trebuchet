@@ -10,7 +10,7 @@
   if (pageCount > 0) {
     final int pageWidth=getScaledMeasuredWidth(getChildAt(0));
     final int screenWidth=getMeasuredWidth();
-    int x=getRelativeChildOffset(0) + pageWidth;
+    int x=getScaledRelativeChildOffset(0) + pageWidth;
     int leftScreen=0;
     int rightScreen=0;
     while (x <= mScrollX) {

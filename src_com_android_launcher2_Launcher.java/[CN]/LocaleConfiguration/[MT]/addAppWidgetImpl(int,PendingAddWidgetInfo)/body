@@ -35,5 +35,6 @@
   }
  else {
     completeAddAppWidget(appWidgetId,mAddScreen);
+    exitSpringLoadedDragModeDelayed(false);
   }
 }

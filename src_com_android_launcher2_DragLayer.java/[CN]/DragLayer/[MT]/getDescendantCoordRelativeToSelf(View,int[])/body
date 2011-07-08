@@ -1,11 +1,20 @@
 {
-  coord[0]+=descendant.getLeft();
-  coord[1]+=descendant.getTop();
+  float scale=1.0f;
+  float[] pt={coord[0],coord[1]};
+  descendant.getMatrix().mapPoints(pt);
+  scale*=descendant.getScaleX();
+  pt[0]+=descendant.getLeft();
+  pt[1]+=descendant.getTop();
   ViewParent viewParent=descendant.getParent();
   while (viewParent instanceof View && viewParent != this) {
     final View view=(View)viewParent;
-    coord[0]+=view.getLeft() + (int)(view.getTranslationX() + 0.5f) - view.getScrollX();
-    coord[1]+=view.getTop() + (int)(view.getTranslationY() + 0.5f) - view.getScrollY();
+    view.getMatrix().mapPoints(pt);
+    scale*=view.getScaleX();
+    pt[0]+=view.getLeft() - view.getScrollX();
+    pt[1]+=view.getTop() - view.getScrollY();
     viewParent=view.getParent();
   }
+  coord[0]=(int)pt[0];
+  coord[1]=(int)pt[1];
+  return scale;
 }

@@ -22,7 +22,7 @@
       int spanY=mDragInfo != null ? mDragInfo.spanY : 1;
       mTargetCell=findNearestArea((int)mDragViewVisualCenter[0],(int)mDragViewVisualCenter[1],spanX,spanY,dropTargetLayout,mTargetCell);
       boolean dropInscrollArea=mCurrentPage != screen;
-      if (!dropInscrollArea && createUserFolderIfNecessary(cell,dropTargetLayout,mTargetCell,false,d.dragView)) {
+      if (!dropInscrollArea && createUserFolderIfNecessary(cell,dropTargetLayout,mTargetCell,false,d.dragView,null)) {
         return;
       }
       if (addToExistingFolderIfNecessary(cell,dropTargetLayout,mTargetCell,d,false)) {

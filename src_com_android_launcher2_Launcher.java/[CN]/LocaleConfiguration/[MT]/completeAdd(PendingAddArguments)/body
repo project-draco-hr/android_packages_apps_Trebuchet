@@ -8,15 +8,16 @@ processShortcut(args.intent);
 break;
 case REQUEST_CREATE_SHORTCUT:
 completeAddShortcut(args.intent,args.screen,args.cellX,args.cellY);
-break;
+return true;
 case REQUEST_PICK_APPWIDGET:
 addAppWidgetFromPick(args.intent);
 break;
 case REQUEST_CREATE_APPWIDGET:
 int appWidgetId=args.intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,-1);
 completeAddAppWidget(appWidgetId,args.screen);
-break;
+return true;
 case REQUEST_PICK_WALLPAPER:
 break;
 }
+return false;
 }

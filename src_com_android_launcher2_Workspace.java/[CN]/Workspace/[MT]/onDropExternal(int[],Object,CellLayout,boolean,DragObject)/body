@@ -1,21 +1,32 @@
 {
-  int screen=indexOfChild(cellLayout);
+  final Runnable exitSpringLoadedRunnable=new Runnable(){
+    @Override public void run(){
+      mLauncher.exitSpringLoadedDragModeDelayed(false);
+    }
+  }
+;
+  final int screen=indexOfChild(cellLayout);
   if (screen != mCurrentPage && mShrinkState != ShrinkState.SPRING_LOADED) {
     snapToPage(screen);
   }
   if (dragInfo instanceof PendingAddItemInfo) {
-    PendingAddItemInfo info=(PendingAddItemInfo)dragInfo;
+    final PendingAddItemInfo info=(PendingAddItemInfo)dragInfo;
+    mLauncher.getDragLayer().animateViewOut(d.dragView,new Runnable(){
+      @Override public void run(){
 switch (info.itemType) {
 case LauncherSettings.Favorites.ITEM_TYPE_APPWIDGET:
-      mLauncher.addAppWidgetFromDrop((PendingAddWidgetInfo)info,screen,touchXY);
-    break;
+          mLauncher.addAppWidgetFromDrop((PendingAddWidgetInfo)info,screen,touchXY);
+        break;
 case LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT:
-  mLauncher.processShortcutFromDrop(info.componentName,screen,touchXY);
-break;
+      mLauncher.processShortcutFromDrop(info.componentName,screen,touchXY);
+    break;
 default :
-throw new IllegalStateException("Unknown item type: " + info.itemType);
+  throw new IllegalStateException("Unknown item type: " + info.itemType);
 }
 cellLayout.onDragExit();
+}
+}
+);
 }
  else {
 ItemInfo info=(ItemInfo)dragInfo;
@@ -34,11 +45,20 @@ break;
 default :
 throw new IllegalStateException("Unknown item type: " + info.itemType);
 }
-int spanX=mDragInfo != null ? mDragInfo.spanX : 1;
-int spanY=mDragInfo != null ? mDragInfo.spanY : 1;
+int spanX=1;
+int spanY=1;
+if (mDragInfo != null) {
+spanX=mDragInfo.spanX;
+spanY=mDragInfo.spanY;
+}
+ else {
+spanX=info.spanX;
+spanY=info.spanY;
+}
 if (touchXY != null) {
 mTargetCell=findNearestArea((int)touchXY[0],(int)touchXY[1],spanX,spanY,cellLayout,mTargetCell);
-if (createUserFolderIfNecessary(view,cellLayout,mTargetCell,true,d.dragView)) {
+d.postAnimationRunnable=exitSpringLoadedRunnable;
+if (createUserFolderIfNecessary(view,cellLayout,mTargetCell,true,d.dragView,d.postAnimationRunnable)) {
 return;
 }
 if (addToExistingFolderIfNecessary(view,cellLayout,mTargetCell,d,true)) {
@@ -58,7 +78,7 @@ CellLayout.LayoutParams lp=(CellLayout.LayoutParams)view.getLayoutParams();
 cellLayout.getChildrenLayout().measureChild(view);
 LauncherModel.addOrMoveItemInDatabase(mLauncher,info,LauncherSettings.Favorites.CONTAINER_DESKTOP,screen,lp.cellX,lp.cellY);
 if (d.dragView != null) {
-mLauncher.getDragLayer().animateViewIntoPosition(d.dragView,view);
+mLauncher.getDragLayer().animateViewIntoPosition(d.dragView,view,exitSpringLoadedRunnable);
 }
 }
 }

@@ -22,7 +22,7 @@
     destInfo.cellY=-1;
     sourceInfo.cellX=-1;
     sourceInfo.cellY=-1;
-    fi.performCreateAnimation(destInfo,v,sourceInfo,dragView,folderLocation);
+    fi.performCreateAnimation(destInfo,v,sourceInfo,dragView,folderLocation,postAnimationRunnable);
     return true;
   }
   return false;

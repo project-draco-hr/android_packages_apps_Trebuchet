@@ -1,26 +1,3 @@
 {
-  ((CellLayoutChildren)child.getParent()).measureChild(child);
-  CellLayout.LayoutParams lp=(CellLayout.LayoutParams)child.getLayoutParams();
-  Rect r=new Rect();
-  getViewRectRelativeToSelf(dragView,r);
-  int coord[]=new int[2];
-  coord[0]=lp.x;
-  coord[1]=lp.y;
-  getDescendantCoordRelativeToSelf((View)child.getParent(),coord);
-  int toX=coord[0] - (dragView.getWidth() - child.getMeasuredWidth()) / 2;
-  int toY=coord[1] - (dragView.getHeight() - child.getMeasuredHeight()) / 2;
-  final int fromX=r.left + (dragView.getWidth() - child.getMeasuredWidth()) / 2;
-  final int fromY=r.top + (dragView.getHeight() - child.getMeasuredHeight()) / 2;
-  child.setVisibility(INVISIBLE);
-  child.setAlpha(0);
-  Runnable onCompleteRunnable=new Runnable(){
-    public void run(){
-      child.setVisibility(VISIBLE);
-      ObjectAnimator oa=ObjectAnimator.ofFloat(child,"alpha",0f,1f);
-      oa.setDuration(60);
-      oa.start();
-    }
-  }
-;
-  animateViewIntoPosition(dragView,fromX,fromY,toX,toY,onCompleteRunnable,true);
+  animateViewIntoPosition(dragView,child,null);
 }

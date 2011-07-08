@@ -163,7 +163,5 @@ updateWallpaperOffsetImmediately();
 }
 }
 }
-if (!springLoaded) {
-hideBackgroundGradient();
-}
+hideBackgroundGradient(springLoaded ? getResources().getInteger(R.integer.config_appsCustomizeSpringLoadedBgAlpha) / 100f : 0f);
 }

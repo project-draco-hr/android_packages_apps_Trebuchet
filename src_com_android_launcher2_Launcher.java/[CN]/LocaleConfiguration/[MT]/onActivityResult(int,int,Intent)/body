@@ -1,4 +1,5 @@
 {
+  boolean delayExitSpringLoadedMode=false;
   mWaitingForResult=false;
   if (resultCode == RESULT_OK && mAddScreen != -1) {
     final PendingAddArguments args=new PendingAddArguments();
@@ -11,13 +12,16 @@
       sPendingAddList.add(args);
     }
  else {
-      completeAdd(args);
+      delayExitSpringLoadedMode=completeAdd(args);
     }
   }
- else   if ((requestCode == REQUEST_PICK_APPWIDGET || requestCode == REQUEST_CREATE_APPWIDGET) && resultCode == RESULT_CANCELED && data != null) {
-    int appWidgetId=data.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,-1);
-    if (appWidgetId != -1) {
-      mAppWidgetHost.deleteAppWidgetId(appWidgetId);
+ else   if ((requestCode == REQUEST_PICK_APPWIDGET || requestCode == REQUEST_CREATE_APPWIDGET) && resultCode == RESULT_CANCELED) {
+    if (data != null) {
+      int appWidgetId=data.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,-1);
+      if (appWidgetId != -1) {
+        mAppWidgetHost.deleteAppWidgetId(appWidgetId);
+      }
     }
   }
+  exitSpringLoadedDragModeDelayed(delayExitSpringLoadedMode);
 }

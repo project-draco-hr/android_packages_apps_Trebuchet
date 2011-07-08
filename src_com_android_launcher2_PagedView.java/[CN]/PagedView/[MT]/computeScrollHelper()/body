@@ -1,7 +1,9 @@
 {
   if (mScroller.computeScrollOffset()) {
-    mDirtyPageAlpha=true;
-    scrollTo(mScroller.getCurrX(),mScroller.getCurrY());
+    if (mScrollX != mScroller.getCurrX() || mScrollY != mScroller.getCurrY()) {
+      mDirtyPageAlpha=true;
+      scrollTo(mScroller.getCurrX(),mScroller.getCurrY());
+    }
     invalidate();
     return true;
   }

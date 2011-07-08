@@ -4,7 +4,6 @@
   }
   CellLayout cl=((CellLayout)child);
   cl.setOnInterceptTouchListener(this);
-  cl.setOnClickListener(this);
   cl.setClickable(true);
   cl.enableHardwareLayers();
 }

@@ -1,0 +1,7 @@
+{
+  mLauncher.getWorkspace().onDragStopped(success);
+  if (!success || target != mLauncher.getWorkspace()) {
+    mLauncher.exitSpringLoadedDragMode();
+  }
+  mLauncher.unlockScreenOrientation();
+}

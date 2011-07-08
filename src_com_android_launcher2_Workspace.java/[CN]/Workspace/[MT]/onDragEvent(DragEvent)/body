@@ -13,7 +13,7 @@ case DragEvent.ACTION_DRAG_STARTED:
         boolean isShortcut=(test.second == null);
         if (isShortcut) {
           if (!layout.findCellForSpan(pos,1,1)) {
-            Toast.makeText(mContext,mContext.getString(R.string.out_of_space),Toast.LENGTH_SHORT).show();
+            mLauncher.showOutOfSpaceMessage();
             return false;
           }
         }

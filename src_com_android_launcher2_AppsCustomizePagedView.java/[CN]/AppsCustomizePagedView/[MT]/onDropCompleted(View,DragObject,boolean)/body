@@ -1,5 +1,5 @@
 {
-  endDragging(success);
+  endDragging(target,success);
   if (!success) {
     boolean showOutOfSpaceMessage=false;
     if (target instanceof Workspace) {

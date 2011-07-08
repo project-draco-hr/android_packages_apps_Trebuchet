@@ -6,5 +6,4 @@
   dragController.addDropTarget(mDeleteDropTarget);
   mInfoDropTarget.setLauncher(launcher);
   mDeleteDropTarget.setLauncher(launcher);
-  mDropTargetBar.setBackgroundColor(0x33000000);
 }
