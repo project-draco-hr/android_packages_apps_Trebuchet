@@ -1,0 +1,7 @@
+{
+  if (mMaxId < 0) {
+    throw new RuntimeException("Error: max id was not initialized");
+  }
+  mMaxId+=1;
+  return mMaxId;
+}

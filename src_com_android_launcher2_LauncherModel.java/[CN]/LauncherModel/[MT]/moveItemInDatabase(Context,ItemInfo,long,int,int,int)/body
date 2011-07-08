@@ -13,6 +13,18 @@
   sWorker.post(new Runnable(){
     public void run(){
       cr.update(uri,values,null,null);
+      ItemInfo modelItem=sItemsIdMap.get(item.id);
+      if (item != modelItem) {
+        throw new RuntimeException("Error: ItemInfo passed to moveItemInDatabase " + "doesn't match original");
+      }
+      if (modelItem.container == LauncherSettings.Favorites.CONTAINER_DESKTOP) {
+        if (!sItems.contains(modelItem)) {
+          sItems.add(modelItem);
+        }
+      }
+ else {
+        sItems.remove(modelItem);
+      }
     }
   }
 );

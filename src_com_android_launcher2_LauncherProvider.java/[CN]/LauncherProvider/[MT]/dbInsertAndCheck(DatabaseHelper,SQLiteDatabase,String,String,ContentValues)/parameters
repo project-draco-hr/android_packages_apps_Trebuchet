@@ -1,0 +1,5 @@
+DatabaseHelper helper
+SQLiteDatabase db
+String table
+String nullColumnHack
+ContentValues values

@@ -1,0 +1,6 @@
+{
+  if (!values.containsKey(LauncherSettings.Favorites._ID)) {
+    throw new RuntimeException("Error: attempting to add item without specifying an id");
+  }
+  return db.insert(table,nullColumnHack,values);
+}

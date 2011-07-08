@@ -39,7 +39,7 @@
   try {
     int numValues=rows.length;
     for (i=0; i < numValues; i++) {
-      if (db.insert(TABLE_FAVORITES,null,rows[i]) < 0) {
+      if (dbInsertAndCheck(this,db,TABLE_FAVORITES,null,rows[i]) < 0) {
         return 0;
       }
  else {
