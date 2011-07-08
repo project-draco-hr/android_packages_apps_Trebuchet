@@ -7,14 +7,7 @@
     if (entry.title == null) {
       entry.title=info.activityInfo.name;
     }
-    Drawable icon;
-    try {
-      icon=getFullResIcon(info,mPackageManager);
-    }
- catch (    Resources.NotFoundException e) {
-      icon=getFullResDefaultActivityIcon();
-    }
-    entry.icon=Utilities.createIconBitmap(icon,mContext);
+    entry.icon=Utilities.createIconBitmap(getFullResIcon(info,mPackageManager),mContext);
   }
   return entry;
 }
