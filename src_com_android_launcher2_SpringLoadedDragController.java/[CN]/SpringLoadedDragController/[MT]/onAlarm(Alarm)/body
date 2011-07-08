@@ -2,7 +2,9 @@
   if (mScreen != null) {
     Workspace w=mLauncher.getWorkspace();
     int page=w.indexOfChild(mScreen);
-    w.snapToPage(page);
+    if (page != w.getCurrentPage()) {
+      w.snapToPage(page);
+    }
   }
  else {
     mLauncher.getDragController().cancelDrag();
