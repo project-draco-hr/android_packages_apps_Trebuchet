@@ -3,13 +3,13 @@
     return false;
   }
   final int action=ev.getAction();
-  final int screenX=clamp((int)ev.getRawX(),0,mDisplayMetrics.widthPixels);
-  final int screenY=clamp((int)ev.getRawY(),0,mDisplayMetrics.heightPixels);
+  final int dragLayerX=(int)ev.getX();
+  final int dragLayerY=(int)ev.getY();
 switch (action) {
 case MotionEvent.ACTION_DOWN:
-    mMotionDownX=screenX;
-  mMotionDownY=screenY;
-if ((screenX < mScrollZone) || (screenX > mScrollView.getWidth() - mScrollZone)) {
+    mMotionDownX=dragLayerX;
+  mMotionDownY=dragLayerY;
+if ((dragLayerX < mScrollZone) || (dragLayerX > mScrollView.getWidth() - mScrollZone)) {
   mScrollState=SCROLL_WAITING_IN_ZONE;
   mHandler.postDelayed(mScrollRunnable,SCROLL_DELAY);
 }
@@ -18,13 +18,13 @@ if ((screenX < mScrollZone) || (screenX > mScrollView.getWidth() - mScrollZone))
 }
 break;
 case MotionEvent.ACTION_MOVE:
-handleMoveEvent(screenX,screenY);
+handleMoveEvent(dragLayerX,dragLayerY);
 break;
 case MotionEvent.ACTION_UP:
-handleMoveEvent(screenX,screenY);
+handleMoveEvent(dragLayerX,dragLayerY);
 mHandler.removeCallbacks(mScrollRunnable);
 if (mDragging) {
-drop(screenX,screenY);
+drop(dragLayerX,dragLayerY);
 }
 endDrag();
 break;

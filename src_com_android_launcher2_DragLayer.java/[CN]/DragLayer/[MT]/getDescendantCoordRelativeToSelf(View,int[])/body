@@ -1,4 +1,6 @@
 {
+  coord[0]+=descendant.getLeft();
+  coord[1]+=descendant.getTop();
   ViewParent viewParent=descendant.getParent();
   while (viewParent instanceof View && viewParent != this) {
     final View view=(View)viewParent;

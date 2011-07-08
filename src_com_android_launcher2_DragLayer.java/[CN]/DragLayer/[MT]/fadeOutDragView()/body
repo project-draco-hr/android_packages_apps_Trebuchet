@@ -1,0 +1,23 @@
+{
+  mFadeOutAnim=new ValueAnimator();
+  mFadeOutAnim.setDuration(150);
+  mFadeOutAnim.setFloatValues(0f,1f);
+  mFadeOutAnim.removeAllUpdateListeners();
+  mFadeOutAnim.addUpdateListener(new AnimatorUpdateListener(){
+    public void onAnimationUpdate(    ValueAnimator animation){
+      final float percent=(Float)animation.getAnimatedValue();
+      mDropViewAlpha=1 - percent;
+      int width=mDropView.getMeasuredWidth();
+      int height=mDropView.getMeasuredHeight();
+      invalidate(mDropViewPos[0],mDropViewPos[1],mDropViewPos[0] + width,mDropViewPos[1] + height);
+    }
+  }
+);
+  mFadeOutAnim.addListener(new AnimatorListenerAdapter(){
+    public void onAnimationEnd(    Animator animation){
+      mDropView=null;
+    }
+  }
+);
+  mFadeOutAnim.start();
+}

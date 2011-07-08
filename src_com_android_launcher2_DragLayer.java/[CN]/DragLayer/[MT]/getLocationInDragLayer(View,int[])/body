@@ -1,0 +1,5 @@
+{
+  loc[0]=0;
+  loc[1]=0;
+  getDescendantCoordRelativeToSelf(child,loc);
+}

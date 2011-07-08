@@ -6,7 +6,7 @@
     DropTarget target=dropTargets.get(i);
     if (!target.isDropEnabled())     continue;
     target.getHitRect(r);
-    target.getLocationOnScreen(dropCoordinates);
+    target.getLocationInDragLayer(dropCoordinates);
     r.offset(dropCoordinates[0] - target.getLeft(),dropCoordinates[1] - target.getTop());
     mDragObject.x=x;
     mDragObject.y=y;
@@ -14,7 +14,7 @@
       DropTarget delegate=target.getDropTargetDelegate(mDragObject);
       if (delegate != null) {
         target=delegate;
-        target.getLocationOnScreen(dropCoordinates);
+        target.getLocationInDragLayer(dropCoordinates);
       }
       dropCoordinates[0]=x - dropCoordinates[0];
       dropCoordinates[1]=y - dropCoordinates[1];

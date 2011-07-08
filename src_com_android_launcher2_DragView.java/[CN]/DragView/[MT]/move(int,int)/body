@@ -1,6 +1,6 @@
 {
-  WindowManager.LayoutParams lp=mLayoutParams;
+  DragLayer.LayoutParams lp=mLayoutParams;
   lp.x=touchX - mRegistrationX + (int)mOffsetX;
   lp.y=touchY - mRegistrationY + (int)mOffsetY;
-  mWindowManager.updateViewLayout(this,lp);
+  mDragLayer.requestLayout();
 }

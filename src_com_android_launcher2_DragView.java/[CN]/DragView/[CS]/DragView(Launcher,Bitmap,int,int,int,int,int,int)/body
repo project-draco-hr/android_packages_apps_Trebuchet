@@ -1,0 +1,41 @@
+{
+  super(launcher);
+  mDragLayer=launcher.getDragLayer();
+  final Resources res=getResources();
+  final int dragScale=res.getInteger(R.integer.config_dragViewExtraPixels);
+  Matrix scale=new Matrix();
+  final float scaleFactor=(width + dragScale) / width;
+  if (scaleFactor != 1.0f) {
+    scale.setScale(scaleFactor,scaleFactor);
+  }
+  final int offsetX=res.getDimensionPixelSize(R.dimen.dragViewOffsetX);
+  final int offsetY=res.getDimensionPixelSize(R.dimen.dragViewOffsetY);
+  mAnim=ValueAnimator.ofFloat(0.0f,1.0f);
+  mAnim.setDuration(110);
+  mAnim.setInterpolator(new DecelerateInterpolator(2.5f));
+  mAnim.addUpdateListener(new AnimatorUpdateListener(){
+    @Override public void onAnimationUpdate(    ValueAnimator animation){
+      final float value=(Float)animation.getAnimatedValue();
+      final int deltaX=(int)((value * offsetX) - mOffsetX);
+      final int deltaY=(int)((value * offsetY) - mOffsetY);
+      mOffsetX+=deltaX;
+      mOffsetY+=deltaY;
+      if (getParent() == null) {
+        animation.cancel();
+      }
+ else {
+        DragLayer.LayoutParams lp=mLayoutParams;
+        lp.x+=deltaX;
+        lp.y+=deltaY;
+        mDragLayer.requestLayout();
+      }
+    }
+  }
+);
+  mBitmap=Bitmap.createBitmap(bitmap,left,top,width,height,scale,true);
+  setDragRegion(new Rect(0,0,width,height));
+  mRegistrationX=registrationX;
+  mRegistrationY=registrationY;
+  int ms=View.MeasureSpec.makeMeasureSpec(0,View.MeasureSpec.UNSPECIFIED);
+  measure(ms,ms);
+}

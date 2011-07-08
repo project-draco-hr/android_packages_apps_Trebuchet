@@ -1,5 +1,5 @@
 {
-  WindowManager.LayoutParams lp=mLayoutParams;
+  DragLayer.LayoutParams lp=mLayoutParams;
   if (result == null)   result=new int[2];
   result[0]=lp.x;
   result[1]=lp.y;

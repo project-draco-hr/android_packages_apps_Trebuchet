@@ -1,0 +1,8 @@
+Launcher launcher
+Bitmap bitmap
+int registrationX
+int registrationY
+int left
+int top
+int width
+int height

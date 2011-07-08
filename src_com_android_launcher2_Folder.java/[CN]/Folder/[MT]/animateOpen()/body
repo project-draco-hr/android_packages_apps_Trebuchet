@@ -1,4 +1,9 @@
 {
+  if (mFirstOpen) {
+    setLayerType(LAYER_TYPE_HARDWARE,null);
+    buildLayer();
+    mFirstOpen=false;
+  }
   positionAndSizeAsIcon();
   if (!(getParent() instanceof DragLayer))   return;
   ObjectAnimator oa;
@@ -34,6 +39,8 @@
     }
     @Override public void onAnimationEnd(    Animator animation){
       mState=STATE_OPEN;
+      setLayerType(LAYER_TYPE_NONE,null);
+      enableHardwareLayersForChildren();
     }
   }
 );

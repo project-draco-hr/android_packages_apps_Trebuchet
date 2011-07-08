@@ -1,0 +1,5 @@
+{
+  mLauncher=launcher;
+  mHandler=new Handler();
+  mScrollZone=launcher.getResources().getDimensionPixelSize(R.dimen.scroll_zone);
+}
