@@ -85,7 +85,7 @@
     }
     Display display=mLauncher.getWindowManager().getDefaultDisplay();
     boolean isLandscape=display.getWidth() > display.getHeight();
-    final boolean enableWallpaperEffects=isHardwareAccelerated();
+    final boolean enableWallpaperEffects=isHardwareAccelerated() && LauncherApplication.isScreenLarge();
     if (enableWallpaperEffects) {
 switch (mShrinkState) {
 case MIDDLE:

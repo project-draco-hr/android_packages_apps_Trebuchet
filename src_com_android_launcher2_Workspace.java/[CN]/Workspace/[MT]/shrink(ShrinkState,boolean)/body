@@ -114,7 +114,7 @@
   int wallpaperTravelHeight=(int)(display.getHeight() * wallpaperTravelToScreenHeightRatio(display.getWidth(),display.getHeight()));
   float offsetFromCenter=(wallpaperTravelHeight / (float)mWallpaperHeight) / 2f;
   boolean isLandscape=display.getWidth() > display.getHeight();
-  final boolean enableWallpaperEffects=isHardwareAccelerated();
+  final boolean enableWallpaperEffects=isHardwareAccelerated() && LauncherApplication.isScreenLarge();
   if (enableWallpaperEffects) {
 switch (shrinkState) {
 case MIDDLE:
