@@ -6,7 +6,6 @@
   mDragTargetLayout=getCurrentDropLayout();
   mDragTargetLayout.setIsDragOverlapping(true);
   mDragTargetLayout.onDragEnter();
-  mLastDragView=d.dragView;
   if (LauncherApplication.isScreenLarge()) {
     showOutlines();
   }

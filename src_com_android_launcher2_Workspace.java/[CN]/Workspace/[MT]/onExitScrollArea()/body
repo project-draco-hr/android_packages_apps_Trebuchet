@@ -6,7 +6,6 @@
       mDragTargetLayout.onDragEnter();
       invalidate();
     }
-    mPendingScrollDirection=DragController.SCROLL_NONE;
     mInScrollArea=false;
   }
 }

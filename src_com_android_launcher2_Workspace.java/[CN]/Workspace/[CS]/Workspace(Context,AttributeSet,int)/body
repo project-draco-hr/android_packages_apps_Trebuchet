@@ -11,9 +11,6 @@
   TypedArray a=context.obtainStyledAttributes(attrs,R.styleable.Workspace,defStyle,0);
   final Resources res=context.getResources();
   if (LauncherApplication.isScreenLarge()) {
-    final DisplayMetrics dm=res.getDisplayMetrics();
-    float widthDp=dm.widthPixels / dm.density;
-    float heightDp=dm.heightPixels / dm.density;
     TypedArray actionBarSizeTypedArray=context.obtainStyledAttributes(new int[]{android.R.attr.actionBarSize});
     final float actionBarHeight=actionBarSizeTypedArray.getDimension(0,0f);
     final float systemBarHeight=res.getDimension(R.dimen.status_bar_height);

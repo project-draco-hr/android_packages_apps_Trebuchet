@@ -1,5 +1,4 @@
 {
-  mIsDragInProcess=true;
   final Canvas canvas=new Canvas();
   final int bitmapPadding=HolographicOutlineHelper.MAX_OUTER_BLUR_RADIUS;
   CellLayout cl=(CellLayout)getChildAt(0);

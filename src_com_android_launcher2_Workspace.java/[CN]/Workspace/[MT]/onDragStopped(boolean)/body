@@ -2,5 +2,4 @@
   if (!success) {
     doDragExit(null);
   }
-  mIsDragInProcess=false;
 }

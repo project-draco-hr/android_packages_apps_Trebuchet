@@ -3,6 +3,5 @@
     mDragTargetLayout.setIsDragOverlapping(false);
     invalidate();
   }
-  mPendingScrollDirection=DragController.SCROLL_NONE;
   mInScrollArea=false;
 }

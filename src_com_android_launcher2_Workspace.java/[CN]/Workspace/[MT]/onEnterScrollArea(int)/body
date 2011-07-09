@@ -1,7 +1,6 @@
 {
   if (!mIsSmall && !mIsInUnshrinkAnimation) {
     mInScrollArea=true;
-    mPendingScrollDirection=direction;
     final int page=mCurrentPage + (direction == DragController.SCROLL_LEFT ? -1 : 1);
     final CellLayout layout=(CellLayout)getChildAt(page);
     cancelFolderCreation();

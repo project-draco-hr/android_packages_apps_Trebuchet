@@ -1,5 +1,4 @@
 {
-  Resources res=getResources();
   cleanup();
   AddAdapter.ListItem item=(AddAdapter.ListItem)mAdapter.getItem(which);
 switch (item.actionTag) {

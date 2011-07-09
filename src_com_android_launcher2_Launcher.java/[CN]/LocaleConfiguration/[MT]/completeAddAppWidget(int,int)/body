@@ -15,7 +15,6 @@
   }
   if (!foundCellSpan) {
     if (appWidgetId != -1) {
-      final LauncherAppWidgetHost appWidgetHost=mAppWidgetHost;
       new Thread("deleteAppWidgetId"){
         public void run(){
           mAppWidgetHost.deleteAppWidgetId(appWidgetId);

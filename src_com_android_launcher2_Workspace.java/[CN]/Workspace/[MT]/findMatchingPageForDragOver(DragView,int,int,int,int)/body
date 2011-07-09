@@ -1,3 +1,0 @@
-{
-  return findMatchingPageForDragOver(dragView,originX,originY,offsetX,offsetY,false);
-}
