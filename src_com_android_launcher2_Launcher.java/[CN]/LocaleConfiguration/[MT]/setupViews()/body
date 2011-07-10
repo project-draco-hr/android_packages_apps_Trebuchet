@@ -6,7 +6,7 @@
   mWorkspace.setHapticFeedbackEnabled(false);
   mWorkspace.setOnLongClickListener(this);
   mWorkspace.setup(this,dragController);
-  mWorkspace.setWallpaperDimension();
+  dragController.addDragListener(mWorkspace);
   mSearchDeleteBar=(SearchDropTargetBar)mDragLayer.findViewById(R.id.qsb_bar);
   mAppsCustomizeTabHost=(AppsCustomizeTabHost)findViewById(R.id.apps_customize_pane);
   mAppsCustomizeContent=(AppsCustomizePagedView)mAppsCustomizeTabHost.findViewById(R.id.apps_customize_pane_content);

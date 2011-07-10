@@ -1,6 +1,5 @@
 {
-  mWaitingToShrink=false;
-  if (mIsSmall) {
+  if (isSmall()) {
     float finalScaleFactor=1.0f;
     float finalBackgroundAlpha=0.0f;
     if (springLoaded) {
@@ -8,7 +7,7 @@
       finalBackgroundAlpha=1.0f;
     }
  else {
-      mIsSmall=false;
+      mState=springLoaded ? State.SPRING_LOADED : State.NORMAL;
     }
     if (mAnimator != null) {
       mAnimator.cancel();
@@ -87,8 +86,7 @@
     boolean isLandscape=display.getWidth() > display.getHeight();
     final boolean enableWallpaperEffects=isHardwareAccelerated() && LauncherApplication.isScreenLarge();
     if (enableWallpaperEffects) {
-switch (mShrinkState) {
-case MIDDLE:
+switch (mState) {
 case SPRING_LOADED:
         if (animated) {
           mWallpaperOffset.setHorizontalCatchupConstant(isLandscape ? 0.49f : 0.46f);
@@ -96,8 +94,7 @@ case SPRING_LOADED:
           mWallpaperOffset.setOverrideHorizontalCatchupConstant(true);
         }
       break;
-case BOTTOM_HIDDEN:
-case BOTTOM_VISIBLE:
+case SMALL:
     if (animated) {
       mWallpaperOffset.setHorizontalCatchupConstant(isLandscape ? 0.65f : 0.65f);
       mWallpaperOffset.setVerticalCatchupConstant(isLandscape ? 0.65f : 0.65f);

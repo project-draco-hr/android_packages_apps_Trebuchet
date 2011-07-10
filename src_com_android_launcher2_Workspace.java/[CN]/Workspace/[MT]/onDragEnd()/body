@@ -1,0 +1,4 @@
+{
+  mIsDragOccuring=false;
+  updateChildrenLayersEnabled();
+}

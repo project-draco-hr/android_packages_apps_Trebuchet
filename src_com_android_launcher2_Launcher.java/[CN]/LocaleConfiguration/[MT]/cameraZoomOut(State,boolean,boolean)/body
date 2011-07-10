@@ -5,17 +5,7 @@
   final float scale=(float)res.getInteger(R.integer.config_appsCustomizeZoomScaleFactor);
   final View toView=mAppsCustomizeTabHost;
   setPivotsForZoom(toView,toState,scale);
-  if (springLoaded) {
-    if (toState == State.APPS_CUSTOMIZE) {
-      mWorkspace.shrink(ShrinkState.BOTTOM_HIDDEN,animated);
-    }
- else {
-      mWorkspace.shrink(ShrinkState.BOTTOM_VISIBLE,animated);
-    }
-  }
- else {
-    mWorkspace.shrink(ShrinkState.BOTTOM_HIDDEN,animated);
-  }
+  mWorkspace.shrink(Workspace.State.SMALL,animated);
   if (animated) {
     final ValueAnimator scaleAnim=ValueAnimator.ofFloat(0f,1f).setDuration(duration);
     scaleAnim.setInterpolator(new Workspace.ZoomOutInterpolator());

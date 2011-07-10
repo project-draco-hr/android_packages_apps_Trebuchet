@@ -1,10 +1,10 @@
 {
   if (mInScrollArea)   return;
-  if (mIsInUnshrinkAnimation)   return;
+  if (mIsSwitchingState)   return;
   CellLayout layout;
   ItemInfo item=(ItemInfo)d.dragInfo;
   if (item.spanX < 0 || item.spanY < 0)   throw new RuntimeException("Improper spans found");
-  if (mIsSmall) {
+  if (isSmall()) {
     int left=d.x - d.xOffset;
     int top=d.y - d.yOffset;
     layout=findMatchingPageForDragOver(d.dragView,left,top,d.xOffset,d.yOffset,true);
@@ -22,7 +22,7 @@
  else {
         mLastDragOverView=null;
       }
-      boolean isInSpringLoadedMode=(mShrinkState == ShrinkState.SPRING_LOADED);
+      boolean isInSpringLoadedMode=(mState == State.SPRING_LOADED);
       if (isInSpringLoadedMode) {
         mSpringLoadedDragController.setAlarm(mDragTargetLayout);
       }

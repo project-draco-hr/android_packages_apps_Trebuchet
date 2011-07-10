@@ -1,7 +1,7 @@
 {
   if (mFirstLayout) {
-    mWaitingToShrink=true;
-    mWaitingToShrinkState=shrinkState;
+    mSwitchStateAfterFirstLayout=true;
+    mStateAfterFirstLayout=shrinkState;
     return;
   }
   setCurrentPage((mNextPage != INVALID_PAGE) ? mNextPage : mCurrentPage);
@@ -14,8 +14,8 @@
     currentPage.setBackgroundAlpha(0.0f);
   }
   currentPage.setBackgroundAlphaMultiplier(1.0f);
-  mIsSmall=true;
-  mShrinkState=shrinkState;
+  mState=shrinkState;
+  updateChildrenLayersEnabled();
   mTouchState=TOUCH_STATE_REST;
   mActivePointerId=INVALID_POINTER;
   final Resources res=getResources();
@@ -33,24 +33,9 @@
   float y=(isPortrait ? getResources().getDimension(R.dimen.allAppsSmallScreenVerticalMarginPortrait) : getResources().getDimension(R.dimen.allAppsSmallScreenVerticalMarginLandscape));
   float finalAlpha=1.0f;
   float extraShrinkFactor=1.0f;
-  if (shrinkState == ShrinkState.BOTTOM_VISIBLE) {
-    y=screenHeight - y - scaledPageHeight;
-  }
- else   if (shrinkState == ShrinkState.BOTTOM_HIDDEN) {
-    y=screenHeight - y - scaledPageHeight;
-    finalAlpha=0.0f;
-  }
- else   if (shrinkState == ShrinkState.MIDDLE) {
-    y=screenHeight / 2 - scaledPageHeight / 2;
-    finalAlpha=1.0f;
-  }
-  int duration;
-  if (shrinkState == ShrinkState.BOTTOM_HIDDEN || shrinkState == ShrinkState.BOTTOM_VISIBLE) {
-    duration=res.getInteger(R.integer.config_appsCustomizeWorkspaceShrinkTime);
-  }
- else {
-    duration=res.getInteger(R.integer.config_customizeWorkspaceShrinkTime);
-  }
+  y=screenHeight - y - scaledPageHeight;
+  finalAlpha=0.0f;
+  int duration=res.getInteger(R.integer.config_appsCustomizeWorkspaceShrinkTime);
   float x=mScroller.getFinalX() + screenWidth / 2 - totalWidth / 2;
   x-=(pageWidth - scaledPageWidth) / 2.0f;
   y-=(pageHeight - scaledPageHeight) / 2.0f;
@@ -117,13 +102,11 @@
   final boolean enableWallpaperEffects=isHardwareAccelerated() && LauncherApplication.isScreenLarge();
   if (enableWallpaperEffects) {
 switch (shrinkState) {
-case MIDDLE:
 case SPRING_LOADED:
       wallpaperOffset=0.5f;
     mWallpaperOffset.setVerticalCatchupConstant(isLandscape ? 0.34f : 0.32f);
   break;
-case BOTTOM_HIDDEN:
-case BOTTOM_VISIBLE:
+case SMALL:
 wallpaperOffset=0.5f - offsetFromCenter;
 mWallpaperOffset.setVerticalCatchupConstant(isLandscape ? 0.34f : 0.32f);
 break;

@@ -3,11 +3,11 @@
     mUpdateWallpaperOffsetImmediately=true;
   }
   super.onLayout(changed,left,top,right,bottom);
-  if (mWaitingToShrink) {
+  if (mSwitchStateAfterFirstLayout) {
+    mSwitchStateAfterFirstLayout=false;
     post(new Runnable(){
       public void run(){
-        shrink(mWaitingToShrinkState,false);
-        mWaitingToShrink=false;
+        shrink(mStateAfterFirstLayout,false);
       }
     }
 );

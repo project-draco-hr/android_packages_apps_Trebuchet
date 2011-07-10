@@ -1,5 +1,5 @@
 {
-  if (!mIsSmall && !mIsInUnshrinkAnimation) {
+  if (!isSmall() && !mIsSwitchingState) {
     float deltaX=Math.abs(ev.getX() - mXDown);
     float deltaY=Math.abs(ev.getY() - mYDown);
     if (Float.compare(deltaX,0f) == 0)     return;

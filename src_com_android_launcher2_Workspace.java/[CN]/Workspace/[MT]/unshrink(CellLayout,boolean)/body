@@ -1,6 +1,6 @@
 {
   int newCurrentPage=indexOfChild(clThatWasClicked);
-  if (mIsSmall) {
+  if (isSmall()) {
     if (springLoaded) {
       setLayoutScale(mSpringLoadedShrinkFactor);
     }

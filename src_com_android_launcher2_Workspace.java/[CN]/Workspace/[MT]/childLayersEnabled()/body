@@ -1,0 +1,4 @@
+{
+  boolean isSmallOrSpringloaded=isSmall() || mIsSwitchingState || mState == State.SPRING_LOADED;
+  return isSmallOrSpringloaded || isPageMoving() || mIsDragOccuring;
+}

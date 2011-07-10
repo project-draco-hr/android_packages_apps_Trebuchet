@@ -1,0 +1,4 @@
+{
+  mAnimatingViewIntoPlace=false;
+  updateChildrenLayersEnabled();
+}

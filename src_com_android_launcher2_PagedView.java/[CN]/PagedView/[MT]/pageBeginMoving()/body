@@ -1,4 +1,6 @@
 {
-  mIsPageMoving=true;
-  onPageBeginMoving();
+  if (!mIsPageMoving) {
+    mIsPageMoving=true;
+    onPageBeginMoving();
+  }
 }

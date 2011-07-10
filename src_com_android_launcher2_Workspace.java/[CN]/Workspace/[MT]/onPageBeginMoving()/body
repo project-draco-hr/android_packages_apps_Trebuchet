@@ -1,10 +1,15 @@
 {
   super.onPageBeginMoving();
-  if (mNextPage != INVALID_PAGE) {
-    enableChildrenCache(mCurrentPage,mNextPage);
+  if (isHardwareAccelerated()) {
+    updateChildrenLayersEnabled();
   }
  else {
-    enableChildrenCache(mCurrentPage - 1,mCurrentPage + 1);
+    if (mNextPage != INVALID_PAGE) {
+      enableChildrenCache(mCurrentPage,mNextPage);
+    }
+ else {
+      enableChildrenCache(mCurrentPage - 1,mCurrentPage + 1);
+    }
   }
   if (LauncherApplication.isScreenLarge()) {
     showOutlines();

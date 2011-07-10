@@ -1,5 +1,5 @@
 {
-  if (!mIsSmall && !mIsInUnshrinkAnimation) {
+  if (!isSmall() && !mIsSwitchingState) {
     mInScrollArea=true;
     final int page=mCurrentPage + (direction == DragController.SCROLL_LEFT ? -1 : 1);
     final CellLayout layout=(CellLayout)getChildAt(page);

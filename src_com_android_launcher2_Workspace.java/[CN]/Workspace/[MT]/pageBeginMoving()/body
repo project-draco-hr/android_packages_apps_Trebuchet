@@ -1,4 +1,0 @@
-{
-  enableChildrenLayers(true);
-  super.pageBeginMoving();
-}

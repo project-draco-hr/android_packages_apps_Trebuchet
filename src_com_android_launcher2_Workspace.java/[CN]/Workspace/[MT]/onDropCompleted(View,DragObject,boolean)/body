@@ -1,10 +1,12 @@
 {
   if (success) {
-    if (target != this && mDragInfo != null) {
-      final CellLayout cellLayout=(CellLayout)getChildAt(mDragInfo.screen);
-      cellLayout.removeView(mDragInfo.cell);
-      if (mDragInfo.cell instanceof DropTarget) {
-        mDragController.removeDropTarget((DropTarget)mDragInfo.cell);
+    if (target != this) {
+      if (mDragInfo != null) {
+        final CellLayout cellLayout=(CellLayout)getChildAt(mDragInfo.screen);
+        cellLayout.removeView(mDragInfo.cell);
+        if (mDragInfo.cell instanceof DropTarget) {
+          mDragController.removeDropTarget((DropTarget)mDragInfo.cell);
+        }
       }
     }
   }

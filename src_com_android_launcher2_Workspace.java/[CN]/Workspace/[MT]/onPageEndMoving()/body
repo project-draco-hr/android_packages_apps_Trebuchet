@@ -1,6 +1,11 @@
 {
   super.onPageEndMoving();
-  clearChildrenCache();
+  if (isHardwareAccelerated()) {
+    updateChildrenLayersEnabled();
+  }
+ else {
+    clearChildrenCache();
+  }
   if (!mDragController.dragging()) {
     if (LauncherApplication.isScreenLarge()) {
       hideOutlines();

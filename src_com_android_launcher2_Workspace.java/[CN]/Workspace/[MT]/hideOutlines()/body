@@ -1,5 +1,5 @@
 {
-  if (!mIsSmall && !mIsInUnshrinkAnimation) {
+  if (!isSmall() && !mIsSwitchingState) {
     if (mChildrenOutlineFadeInAnimation != null)     mChildrenOutlineFadeInAnimation.cancel();
     if (mChildrenOutlineFadeOutAnimation != null)     mChildrenOutlineFadeOutAnimation.cancel();
     mChildrenOutlineFadeOutAnimation=ObjectAnimator.ofFloat(this,"childrenOutlineAlpha",0.0f);

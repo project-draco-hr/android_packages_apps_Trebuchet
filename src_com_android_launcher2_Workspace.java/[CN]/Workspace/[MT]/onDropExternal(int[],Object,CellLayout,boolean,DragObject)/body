@@ -6,7 +6,7 @@
   }
 ;
   final int screen=indexOfChild(cellLayout);
-  if (screen != mCurrentPage && mShrinkState != ShrinkState.SPRING_LOADED) {
+  if (screen != mCurrentPage && mState != State.SPRING_LOADED) {
     snapToPage(screen);
   }
   if (dragInfo instanceof PendingAddItemInfo) {

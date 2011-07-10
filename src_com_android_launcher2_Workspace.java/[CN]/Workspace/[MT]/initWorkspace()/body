@@ -14,22 +14,23 @@
   }
   mUnshrinkAnimationListener=new AnimatorListenerAdapter(){
     @Override public void onAnimationStart(    Animator animation){
-      mIsInUnshrinkAnimation=true;
+      mIsSwitchingState=true;
     }
     @Override public void onAnimationEnd(    Animator animation){
-      mIsInUnshrinkAnimation=false;
+      mIsSwitchingState=false;
       mSyncWallpaperOffsetWithScroll=true;
       mWallpaperOffset.setOverrideHorizontalCatchupConstant(false);
       mAnimator=null;
-      enableChildrenLayers(false);
+      updateChildrenLayersEnabled();
     }
   }
 ;
   mShrinkAnimationListener=new AnimatorListenerAdapter(){
     @Override public void onAnimationStart(    Animator animation){
-      enableChildrenLayers(true);
+      mIsSwitchingState=true;
     }
     @Override public void onAnimationEnd(    Animator animation){
+      mIsSwitchingState=false;
       mWallpaperOffset.setOverrideHorizontalCatchupConstant(false);
       mAnimator=null;
     }

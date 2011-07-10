@@ -1,4 +1,6 @@
 {
-  onPageEndMoving();
-  mIsPageMoving=false;
+  if (mIsPageMoving) {
+    mIsPageMoving=false;
+    onPageEndMoving();
+  }
 }
