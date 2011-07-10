@@ -1,0 +1,3 @@
+{
+  return (d.dragSource instanceof Workspace) || (d.dragSource instanceof Folder);
+}

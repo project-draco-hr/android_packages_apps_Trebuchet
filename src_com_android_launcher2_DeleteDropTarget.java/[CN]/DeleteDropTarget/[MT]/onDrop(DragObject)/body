@@ -3,7 +3,7 @@
   if (isAllAppsApplication(d.dragSource,item)) {
     mLauncher.startApplicationUninstallActivity((ApplicationInfo)item);
   }
- else   if (isWorkspaceApplication(d)) {
+ else   if (isWorkspaceOrFolderApplication(d)) {
     LauncherModel.deleteItemFromDatabase(mLauncher,item);
   }
  else   if (isWorkspaceFolder(d)) {
@@ -11,7 +11,7 @@
     mLauncher.removeFolder(folderInfo);
     LauncherModel.deleteFolderContentsFromDatabase(mLauncher,folderInfo);
   }
- else   if (isWorkspaceWidget(d)) {
+ else   if (isWorkspaceOrFolderWidget(d)) {
     mLauncher.removeAppWidget((LauncherAppWidgetInfo)item);
     LauncherModel.deleteItemFromDatabase(mLauncher,item);
     final LauncherAppWidgetInfo launcherAppWidgetInfo=(LauncherAppWidgetInfo)item;
