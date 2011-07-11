@@ -1,6 +1,7 @@
 {
   super.onFinishInflate();
   mText=(TextView)findViewById(R.id.delete_target_text);
+  mOriginalTextColor=mText.getTextColors();
   Resources r=getResources();
   mHoverColor=r.getColor(R.color.delete_target_hover_tint);
   mHoverPaint.setColorFilter(new PorterDuffColorFilter(mHoverColor,PorterDuff.Mode.SRC_ATOP));

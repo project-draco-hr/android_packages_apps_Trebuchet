@@ -5,5 +5,6 @@
   }
   mActive=isVisible;
   mDrawable.resetTransition();
+  mText.setTextColor(mOriginalTextColor);
   setVisibility(isVisible ? View.VISIBLE : View.GONE);
 }
