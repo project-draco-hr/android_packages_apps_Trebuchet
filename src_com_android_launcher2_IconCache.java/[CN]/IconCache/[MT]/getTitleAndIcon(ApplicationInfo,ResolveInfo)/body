@@ -1,11 +1,7 @@
 {
 synchronized (mCache) {
     CacheEntry entry=cacheLocked(application.componentName,info);
-    if (entry.titleBitmap == null) {
-      entry.titleBitmap=mBubble.createTextBitmap(entry.title);
-    }
     application.title=entry.title;
-    application.titleBitmap=entry.titleBitmap;
     application.iconBitmap=entry.icon;
   }
 }
