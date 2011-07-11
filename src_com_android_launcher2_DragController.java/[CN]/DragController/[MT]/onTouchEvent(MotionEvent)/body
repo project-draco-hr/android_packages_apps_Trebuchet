@@ -3,8 +3,9 @@
     return false;
   }
   final int action=ev.getAction();
-  final int dragLayerX=(int)ev.getX();
-  final int dragLayerY=(int)ev.getY();
+  final int[] dragLayerPos=getClampedDragLayerPos(ev.getX(),ev.getY());
+  final int dragLayerX=dragLayerPos[0];
+  final int dragLayerY=dragLayerPos[1];
 switch (action) {
 case MotionEvent.ACTION_DOWN:
     mMotionDownX=dragLayerX;
