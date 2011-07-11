@@ -2,6 +2,7 @@
   outState.putInt(RUNTIME_STATE_CURRENT_SCREEN,mWorkspace.getCurrentPage());
   super.onSaveInstanceState(outState);
   outState.putInt(RUNTIME_STATE,mState.ordinal());
+  closeFolder();
   if (mAddScreen > -1 && mWaitingForResult) {
     outState.putInt(RUNTIME_STATE_PENDING_ADD_SCREEN,mAddScreen);
     outState.putInt(RUNTIME_STATE_PENDING_ADD_CELL_X,mAddIntersectCellX);
