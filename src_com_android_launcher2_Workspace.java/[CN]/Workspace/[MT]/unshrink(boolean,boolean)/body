@@ -118,7 +118,7 @@ public void onAnimationUpdate(float a,float b){
   if (b == 0f) {
     return;
   }
-  fastInvalidate();
+  invalidate();
   if (enableWallpaperEffects) {
     setHorizontalWallpaperOffset(a * oldHorizontalWallpaperOffset + b * newHorizontalWallpaperOffset);
     setVerticalWallpaperOffset(a * oldVerticalWallpaperOffset + b * newVerticalWallpaperOffset);
