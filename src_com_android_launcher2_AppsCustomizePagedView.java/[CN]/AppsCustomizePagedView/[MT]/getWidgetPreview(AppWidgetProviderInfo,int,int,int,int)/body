@@ -34,15 +34,21 @@
   }
   if (drawable == null) {
     Resources resources=mLauncher.getResources();
-    if (info.minWidth >= info.minHeight) {
-      expectedWidth=cellWidth;
-      expectedHeight=mWidgetPreviewIconPaddedDimension;
+    int bitmapWidth;
+    int bitmapHeight;
+    if (cellHSpan == cellVSpan) {
+      bitmapWidth=bitmapHeight=cellWidth;
+      expectedWidth=expectedHeight=mWidgetPreviewIconPaddedDimension;
+    }
+ else     if (cellHSpan >= cellVSpan) {
+      bitmapWidth=expectedWidth=cellWidth;
+      bitmapHeight=expectedHeight=mWidgetPreviewIconPaddedDimension;
     }
  else {
-      expectedWidth=mWidgetPreviewIconPaddedDimension;
-      expectedHeight=cellWidth;
+      bitmapWidth=expectedWidth=mWidgetPreviewIconPaddedDimension;
+      bitmapHeight=expectedHeight=cellWidth;
     }
-    preview=Bitmap.createBitmap(expectedWidth,expectedHeight,Config.ARGB_8888);
+    preview=Bitmap.createBitmap(bitmapWidth,bitmapHeight,Config.ARGB_8888);
     renderDrawableToBitmap(mDefaultWidgetBackground,preview,0,0,expectedWidth,expectedHeight,1f,1f);
     try {
       Drawable icon=null;

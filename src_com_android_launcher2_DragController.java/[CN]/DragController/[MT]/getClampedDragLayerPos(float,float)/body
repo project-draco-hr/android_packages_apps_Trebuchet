@@ -1,0 +1,6 @@
+{
+  mLauncher.getDragLayer().getLocalVisibleRect(mDragLayerRect);
+  mTmpPoint[0]=(int)Math.max(mDragLayerRect.left,Math.min(x,mDragLayerRect.right - 1));
+  mTmpPoint[1]=(int)Math.max(mDragLayerRect.top,Math.min(y,mDragLayerRect.bottom - 1));
+  return mTmpPoint;
+}
