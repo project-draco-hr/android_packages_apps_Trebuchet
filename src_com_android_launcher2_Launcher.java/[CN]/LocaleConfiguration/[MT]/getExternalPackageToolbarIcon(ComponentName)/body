@@ -12,5 +12,8 @@
   }
  catch (  NameNotFoundException e) {
   }
+catch (  Resources.NotFoundException nfe) {
+    Log.w(TAG,"Failed to load toolbar icon from " + activityName.flattenToShortString(),nfe);
+  }
   return null;
 }
