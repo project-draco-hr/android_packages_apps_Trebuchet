@@ -19,13 +19,13 @@ switch (item.itemType) {
 case LauncherSettings.Favorites.ITEM_TYPE_FOLDER:
         sFolders.put(item.id,(FolderInfo)item);
       if (item.container == LauncherSettings.Favorites.CONTAINER_DESKTOP) {
-        sItems.add(item);
+        sWorkspaceItems.add(item);
       }
     break;
 case LauncherSettings.Favorites.ITEM_TYPE_APPLICATION:
 case LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT:
   if (item.container == LauncherSettings.Favorites.CONTAINER_DESKTOP) {
-    sItems.add(item);
+    sWorkspaceItems.add(item);
   }
 break;
 case LauncherSettings.Favorites.ITEM_TYPE_APPWIDGET:

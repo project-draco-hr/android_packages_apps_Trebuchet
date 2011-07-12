@@ -18,12 +18,12 @@
         throw new RuntimeException("Error: ItemInfo passed to moveItemInDatabase " + "doesn't match original");
       }
       if (modelItem.container == LauncherSettings.Favorites.CONTAINER_DESKTOP) {
-        if (!sItems.contains(modelItem)) {
-          sItems.add(modelItem);
+        if (!sWorkspaceItems.contains(modelItem)) {
+          sWorkspaceItems.add(modelItem);
         }
       }
  else {
-        sItems.remove(modelItem);
+        sWorkspaceItems.remove(modelItem);
       }
     }
   }

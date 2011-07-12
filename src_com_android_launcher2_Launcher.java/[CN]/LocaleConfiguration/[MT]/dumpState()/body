@@ -5,7 +5,6 @@
   Log.d(TAG,"mRestoring=" + mRestoring);
   Log.d(TAG,"mWaitingForResult=" + mWaitingForResult);
   Log.d(TAG,"mSavedInstanceState=" + mSavedInstanceState);
-  Log.d(TAG,"mDesktopItems.size=" + mDesktopItems.size());
   Log.d(TAG,"sFolders.size=" + sFolders.size());
   mModel.dumpState();
   if (mAppsCustomizeContent != null) {

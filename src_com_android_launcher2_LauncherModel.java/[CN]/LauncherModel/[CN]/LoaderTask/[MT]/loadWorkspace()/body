@@ -5,7 +5,7 @@
   final PackageManager manager=context.getPackageManager();
   final AppWidgetManager widgets=AppWidgetManager.getInstance(context);
   final boolean isSafeMode=manager.isSafeMode();
-  sItems.clear();
+  sWorkspaceItems.clear();
   sAppWidgets.clear();
   sFolders.clear();
   sItemsIdMap.clear();
@@ -68,7 +68,7 @@ case LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT:
       }
 switch (container) {
 case LauncherSettings.Favorites.CONTAINER_DESKTOP:
-        sItems.add(info);
+        sWorkspaceItems.add(info);
       break;
 default :
     FolderInfo folderInfo=findOrMakeFolder(sFolders,container);
@@ -99,7 +99,7 @@ break;
 }
 switch (container) {
 case LauncherSettings.Favorites.CONTAINER_DESKTOP:
-sItems.add(folderInfo);
+sWorkspaceItems.add(folderInfo);
 break;
 }
 sItemsIdMap.put(folderInfo.id,folderInfo);

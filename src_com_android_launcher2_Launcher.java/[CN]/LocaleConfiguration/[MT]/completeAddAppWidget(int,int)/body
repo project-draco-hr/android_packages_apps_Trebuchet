@@ -30,7 +30,6 @@
   launcherInfo.spanY=spanXY[1];
   LauncherModel.addItemToDatabase(this,launcherInfo,LauncherSettings.Favorites.CONTAINER_DESKTOP,screen,cellXY[0],cellXY[1],false);
   if (!mRestoring) {
-    mDesktopItems.add(launcherInfo);
     launcherInfo.hostView=mAppWidgetHost.createView(this,appWidgetId,appWidgetInfo);
     launcherInfo.hostView.setAppWidget(appWidgetId,appWidgetInfo);
     launcherInfo.hostView.setTag(launcherInfo);

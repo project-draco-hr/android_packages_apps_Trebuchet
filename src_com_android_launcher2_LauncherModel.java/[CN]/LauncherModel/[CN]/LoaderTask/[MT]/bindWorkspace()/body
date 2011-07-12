@@ -15,7 +15,7 @@
     }
   }
 );
-  N=sItems.size();
+  N=sWorkspaceItems.size();
   for (int i=0; i < N; i+=ITEMS_CHUNK) {
     final int start=i;
     final int chunkSize=(i + ITEMS_CHUNK <= N) ? ITEMS_CHUNK : (N - i);
@@ -23,7 +23,7 @@
       public void run(){
         Callbacks callbacks=tryGetCallbacks(oldCallbacks);
         if (callbacks != null) {
-          callbacks.bindItems(sItems,start,start + chunkSize);
+          callbacks.bindItems(sWorkspaceItems,start,start + chunkSize);
         }
       }
     }
