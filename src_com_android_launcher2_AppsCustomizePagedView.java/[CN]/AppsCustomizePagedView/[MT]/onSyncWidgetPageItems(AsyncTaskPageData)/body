@@ -1,7 +1,7 @@
 {
   int page=data.page;
   PagedViewGridLayout layout=(PagedViewGridLayout)getChildAt(page);
-  layout.removeAllViews();
+  layout.setColumnCount(layout.getCellCountX());
   ArrayList<Object> items=data.items;
   int count=items.size();
   int cellWidth=data.cellWidth;
@@ -33,7 +33,7 @@
     widget.setOnTouchListener(this);
     int ix=i % cellCountX;
     int iy=i / cellCountX;
-    GridLayout.LayoutParams lp=new GridLayout.LayoutParams(new GridLayout.Group(iy,1,GridLayout.LEFT),new GridLayout.Group(ix,1,GridLayout.TOP));
+    GridLayout.LayoutParams lp=new GridLayout.LayoutParams(GridLayout.spec(iy,GridLayout.LEFT,GridLayout.CAN_STRETCH),GridLayout.spec(ix,GridLayout.TOP,GridLayout.CAN_STRETCH));
     lp.width=cellWidth;
     lp.height=cellHeight;
     if (ix > 0)     lp.leftMargin=mWidgetWidthGap;
