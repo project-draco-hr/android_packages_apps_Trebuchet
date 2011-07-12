@@ -3,7 +3,15 @@
   if (entry == null) {
     entry=new CacheEntry();
     mCache.put(componentName,entry);
-    entry.title=info.loadLabel(mPackageManager).toString();
+    if (labelCache != null && labelCache.containsKey(info)) {
+      entry.title=labelCache.get(info).toString();
+    }
+ else {
+      entry.title=info.loadLabel(mPackageManager).toString();
+      if (labelCache != null) {
+        labelCache.put(info,entry.title);
+      }
+    }
     if (entry.title == null) {
       entry.title=info.activityInfo.name;
     }

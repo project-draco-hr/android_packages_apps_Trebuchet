@@ -1,4 +1,4 @@
 {
   mPackageManager=pm;
-  mLabelCache=new HashMap<Object,String>();
+  mLabelCache=new HashMap<Object,CharSequence>();
 }

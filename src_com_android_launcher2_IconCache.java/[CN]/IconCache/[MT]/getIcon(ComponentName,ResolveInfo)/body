@@ -3,7 +3,7 @@ synchronized (mCache) {
     if (resolveInfo == null || component == null) {
       return null;
     }
-    CacheEntry entry=cacheLocked(component,resolveInfo);
+    CacheEntry entry=cacheLocked(component,resolveInfo,null);
     return entry.icon;
   }
 }

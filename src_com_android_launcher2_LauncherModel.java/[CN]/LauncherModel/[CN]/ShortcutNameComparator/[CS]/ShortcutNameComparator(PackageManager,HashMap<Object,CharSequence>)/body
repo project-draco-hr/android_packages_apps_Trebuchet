@@ -1,0 +1,4 @@
+{
+  mPackageManager=pm;
+  mLabelCache=labelCache;
+}

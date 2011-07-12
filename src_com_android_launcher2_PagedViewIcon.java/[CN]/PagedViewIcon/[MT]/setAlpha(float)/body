@@ -1,6 +1,6 @@
 {
-  final float viewAlpha=mHolographicOutlineHelper.viewAlphaInterpolator(alpha);
-  final float holographicAlpha=mHolographicOutlineHelper.highlightAlphaInterpolator(alpha);
+  final float viewAlpha=HolographicOutlineHelper.viewAlphaInterpolator(alpha);
+  final float holographicAlpha=HolographicOutlineHelper.highlightAlphaInterpolator(alpha);
   int newViewAlpha=(int)(viewAlpha * 255);
   int newHolographicAlpha=(int)(holographicAlpha * 255);
   if ((mAlpha != newViewAlpha) || (mHolographicAlpha != newHolographicAlpha)) {

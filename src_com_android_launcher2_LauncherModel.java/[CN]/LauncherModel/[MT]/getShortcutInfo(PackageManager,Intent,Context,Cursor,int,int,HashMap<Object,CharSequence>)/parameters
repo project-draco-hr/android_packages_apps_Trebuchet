@@ -4,3 +4,4 @@ Context context
 Cursor c
 int iconIndex
 int titleIndex
+HashMap<Object,CharSequence> labelCache
