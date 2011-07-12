@@ -1,5 +1,4 @@
 {
-  mDesktopItems.remove(launcherInfo);
   removeWidgetToAutoAdvance(launcherInfo.hostView);
   launcherInfo.hostView=null;
 }

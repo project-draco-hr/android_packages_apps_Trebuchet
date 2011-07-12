@@ -7,11 +7,11 @@
 switch (item.itemType) {
 case LauncherSettings.Favorites.ITEM_TYPE_FOLDER:
         sFolders.remove(item.id);
-      sItems.remove(item);
+      sWorkspaceItems.remove(item);
     break;
 case LauncherSettings.Favorites.ITEM_TYPE_APPLICATION:
 case LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT:
-  sItems.remove(item);
+  sWorkspaceItems.remove(item);
 break;
 case LauncherSettings.Favorites.ITEM_TYPE_APPWIDGET:
 sAppWidgets.remove((LauncherAppWidgetInfo)item);
