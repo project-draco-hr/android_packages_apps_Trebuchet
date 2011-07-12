@@ -1,4 +1,6 @@
 {
   super.onDragExit(d);
-  mDrawable.resetTransition();
+  if (!d.dragComplete) {
+    mDrawable.resetTransition();
+  }
 }

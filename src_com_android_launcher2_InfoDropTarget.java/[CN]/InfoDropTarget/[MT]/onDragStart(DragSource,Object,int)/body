@@ -4,5 +4,6 @@
     isVisible=false;
   }
   mActive=isVisible;
+  mDrawable.resetTransition();
   setVisibility(isVisible ? View.VISIBLE : View.GONE);
 }
