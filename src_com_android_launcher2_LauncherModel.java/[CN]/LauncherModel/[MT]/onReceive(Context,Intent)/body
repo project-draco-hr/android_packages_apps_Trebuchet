@@ -39,6 +39,7 @@
   }
  else   if (Intent.ACTION_LOCALE_CHANGED.equals(action)) {
     mAllAppsLoaded=false;
+    mWorkspaceLoaded=false;
     startLoaderFromBackground();
   }
 }

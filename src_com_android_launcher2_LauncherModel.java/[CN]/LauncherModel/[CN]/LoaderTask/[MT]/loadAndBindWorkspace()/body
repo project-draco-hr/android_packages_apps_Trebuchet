@@ -2,11 +2,6 @@
   if (DEBUG_LOADERS) {
     Log.d(TAG,"loadAndBindWorkspace mWorkspaceLoaded=" + mWorkspaceLoaded);
   }
-  Locale l=mContext.getResources().getConfiguration().locale;
-  if (mLocale != null && !l.equals(mLocale)) {
-    mWorkspaceLoaded=false;
-  }
-  mLocale=l;
   if (!mWorkspaceLoaded) {
     loadWorkspace();
     if (mStopped) {
