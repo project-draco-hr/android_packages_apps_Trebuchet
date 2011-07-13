@@ -1,6 +1,8 @@
 {
+  mDropTargetBarFadeInAnim.cancel();
   mDropTargetBarFadeOutAnim.start();
   if (!mIsSearchBarHidden) {
+    mQSBSearchBarFadeOutAnim.cancel();
     mQSBSearchBarFadeInAnim.start();
   }
 }

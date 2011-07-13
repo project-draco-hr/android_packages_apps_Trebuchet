@@ -4,7 +4,17 @@
   mDropTargetBar=findViewById(R.id.drag_target_bar);
   mInfoDropTarget=(ButtonDropTarget)mDropTargetBar.findViewById(R.id.info_target);
   mDeleteDropTarget=(ButtonDropTarget)mDropTargetBar.findViewById(R.id.delete_target);
-  mDropTargetBarFadeInAnim=ObjectAnimator.ofFloat(mDropTargetBar,"alpha",1f);
+  mBarHeight=getResources().getDimensionPixelSize(R.dimen.qsb_bar_height);
+  boolean enableDropDownDropTargets=getResources().getBoolean(R.bool.config_useDropTargetDownTransition);
+  mDropTargetBar.setAlpha(0f);
+  ObjectAnimator fadeInAlphaAnim=ObjectAnimator.ofFloat(mDropTargetBar,"alpha",1f);
+  fadeInAlphaAnim.setInterpolator(new DecelerateInterpolator());
+  mDropTargetBarFadeInAnim=new AnimatorSet();
+  AnimatorSet.Builder fadeInAnimators=mDropTargetBarFadeInAnim.play(fadeInAlphaAnim);
+  if (enableDropDownDropTargets) {
+    mDropTargetBar.setTranslationY(-mBarHeight);
+    fadeInAnimators.with(ObjectAnimator.ofFloat(mDropTargetBar,"translationY",0f));
+  }
   mDropTargetBarFadeInAnim.setDuration(sTransitionInDuration);
   mDropTargetBarFadeInAnim.addListener(new AnimatorListenerAdapter(){
     @Override public void onAnimationStart(    Animator animation){
@@ -12,11 +22,18 @@
     }
   }
 );
-  mDropTargetBarFadeOutAnim=ObjectAnimator.ofFloat(mDropTargetBar,"alpha",0f);
+  ObjectAnimator fadeOutAlphaAnim=ObjectAnimator.ofFloat(mDropTargetBar,"alpha",0f);
+  fadeOutAlphaAnim.setInterpolator(new AccelerateInterpolator());
+  mDropTargetBarFadeOutAnim=new AnimatorSet();
+  AnimatorSet.Builder fadeOutAnimators=mDropTargetBarFadeOutAnim.play(fadeOutAlphaAnim);
+  if (enableDropDownDropTargets) {
+    fadeOutAnimators.with(ObjectAnimator.ofFloat(mDropTargetBar,"translationY",-mBarHeight));
+  }
   mDropTargetBarFadeOutAnim.setDuration(sTransitionOutDuration);
   mDropTargetBarFadeOutAnim.addListener(new AnimatorListenerAdapter(){
     @Override public void onAnimationEnd(    Animator animation){
       mDropTargetBar.setVisibility(View.GONE);
+      mDropTargetBar.setLayerType(View.LAYER_TYPE_NONE,null);
     }
   }
 );
