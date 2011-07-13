@@ -6,7 +6,7 @@
       return false;
     }
     mLauncher.getWorkspace().onDragStartedWithItem(v);
-    mDragController.startDrag(v,this,item,DragController.DRAG_ACTION_COPY);
+    mLauncher.getWorkspace().beginDragShared(v,this);
     mIconDrawable=((TextView)v).getCompoundDrawables()[1];
     mCurrentDragInfo=item;
     mEmptyCell[0]=item.cellX;

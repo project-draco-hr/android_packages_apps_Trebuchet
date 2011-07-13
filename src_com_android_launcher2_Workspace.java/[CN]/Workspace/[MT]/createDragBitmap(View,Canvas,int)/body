@@ -1,9 +1,15 @@
 {
   final int outlineColor=getResources().getColor(R.color.drag_outline_color);
-  final Bitmap b=Bitmap.createBitmap(mDragOutline.getWidth(),mDragOutline.getHeight(),Bitmap.Config.ARGB_8888);
+  Bitmap b;
+  if (v instanceof TextView) {
+    Drawable d=((TextView)v).getCompoundDrawables()[1];
+    b=Bitmap.createBitmap(d.getIntrinsicWidth() + padding,d.getIntrinsicHeight() + padding,Bitmap.Config.ARGB_8888);
+  }
+ else {
+    b=Bitmap.createBitmap(v.getWidth() + padding,v.getHeight() + padding,Bitmap.Config.ARGB_8888);
+  }
   canvas.setBitmap(b);
-  canvas.drawBitmap(mDragOutline,0,0,null);
-  drawDragView(v,canvas,padding);
+  drawDragView(v,canvas,padding,true);
   mOutlineHelper.applyOuterBlur(b,canvas,outlineColor);
   return b;
 }

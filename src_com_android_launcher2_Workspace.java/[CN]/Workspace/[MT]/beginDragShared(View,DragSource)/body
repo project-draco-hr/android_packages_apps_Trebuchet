@@ -1,0 +1,25 @@
+{
+  final int bitmapPadding=HolographicOutlineHelper.MAX_OUTER_BLUR_RADIUS;
+  final Bitmap b=createDragBitmap(child,new Canvas(),bitmapPadding);
+  final int bmpWidth=b.getWidth();
+  final int bmpHeight=b.getHeight();
+  mLauncher.getDragLayer().getLocationInDragLayer(child,mTempXY);
+  final int dragLayerX=(int)mTempXY[0] + (child.getWidth() - bmpWidth) / 2;
+  final int dragLayerY=(int)mTempXY[1] + (child.getHeight() - bmpHeight) / 2;
+  Rect dragRect=null;
+  if (child instanceof BubbleTextView) {
+    int iconSize=getResources().getDimensionPixelSize(R.dimen.app_icon_size);
+    int top=child.getPaddingTop();
+    int left=(bmpWidth - iconSize) / 2;
+    int right=left + iconSize;
+    int bottom=top + iconSize;
+    dragRect=new Rect(left,top,right,bottom);
+  }
+ else   if (child instanceof FolderIcon) {
+    int previewSize=getResources().getDimensionPixelSize(R.dimen.folder_preview_size);
+    dragRect=new Rect(0,0,child.getWidth(),previewSize);
+  }
+  mDragController.startDrag(b,dragLayerX,dragLayerY,source,child.getTag(),DragController.DRAG_ACTION_MOVE,dragRect);
+  b.recycle();
+  mLauncher.lockScreenOrientation();
+}

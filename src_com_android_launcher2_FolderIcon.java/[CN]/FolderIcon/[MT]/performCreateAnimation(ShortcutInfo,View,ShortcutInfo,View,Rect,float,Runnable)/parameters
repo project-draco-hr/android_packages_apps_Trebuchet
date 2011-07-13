@@ -3,4 +3,5 @@ View destView
 ShortcutInfo srcInfo
 View srcView
 Rect dstRect
+float scaleRelativeToDragLayer
 Runnable postAnimationRunnable

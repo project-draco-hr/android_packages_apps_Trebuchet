@@ -6,5 +6,5 @@
  else {
     item=(ShortcutInfo)d.dragInfo;
   }
-  onDrop(item,d.dragView,null,mInfo.contents.size(),d.postAnimationRunnable);
+  onDrop(item,d.dragView,null,1.0f,mInfo.contents.size(),d.postAnimationRunnable);
 }

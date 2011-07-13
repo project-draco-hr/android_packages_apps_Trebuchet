@@ -1,23 +1,4 @@
 {
-  ApplicationInfo appInfo=new ApplicationInfo((ApplicationInfo)v.getTag());
-  final TextView tv=(TextView)v;
-  final Drawable icon=tv.getCompoundDrawables()[1];
-  Bitmap b=Bitmap.createBitmap(v.getWidth(),v.getHeight(),Bitmap.Config.ARGB_8888);
-  mCanvas.setBitmap(b);
-  mCanvas.save();
-  mCanvas.translate((v.getWidth() - icon.getIntrinsicWidth()) / 2,v.getPaddingTop());
-  icon.draw(mCanvas);
-  mCanvas.restore();
-  Rect dragRect=null;
-  if (v instanceof TextView) {
-    int top=v.getPaddingTop();
-    int left=(b.getWidth() - mAppIconSize) / 2;
-    int right=left + mAppIconSize;
-    int bottom=top + mAppIconSize;
-    dragRect=new Rect(left,top,right,bottom);
-  }
-  mLauncher.lockScreenOrientation();
-  mLauncher.getWorkspace().onDragStartedWithItemSpans(1,1,b);
-  mDragController.startDrag(v,b,this,appInfo,DragController.DRAG_ACTION_COPY,dragRect);
-  b.recycle();
+  mLauncher.getWorkspace().onDragStartedWithItem(v);
+  mLauncher.getWorkspace().beginDragShared(v,this);
 }
