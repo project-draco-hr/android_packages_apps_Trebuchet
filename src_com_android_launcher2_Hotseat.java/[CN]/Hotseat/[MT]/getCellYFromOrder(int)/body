@@ -1,0 +1,3 @@
+{
+  return mIsLandscape ? (mContent.getCountY() - (rank + 1)) : 0;
+}

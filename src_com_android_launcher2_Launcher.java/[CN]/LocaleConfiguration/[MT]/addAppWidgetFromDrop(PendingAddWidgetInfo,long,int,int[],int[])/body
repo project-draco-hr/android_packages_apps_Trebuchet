@@ -1,0 +1,13 @@
+{
+  resetAddInfo();
+  mPendingAddInfo.container=info.container=container;
+  mPendingAddInfo.screen=info.screen=screen;
+  mPendingAddInfo.dropPos=loc;
+  if (cell != null) {
+    mPendingAddInfo.cellX=cell[0];
+    mPendingAddInfo.cellY=cell[1];
+  }
+  int appWidgetId=getAppWidgetHost().allocateAppWidgetId();
+  AppWidgetManager.getInstance(this).bindAppWidgetId(appWidgetId,info.componentName);
+  addAppWidgetImpl(appWidgetId,info);
+}

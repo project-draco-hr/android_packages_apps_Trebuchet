@@ -1,0 +1,27 @@
+{
+  int[] cellXY=mTmpAddItemCellCoordinates;
+  int[] touchXY=mPendingAddInfo.dropPos;
+  CellLayout layout=getCellLayout(container,screen);
+  boolean foundCellSpan=false;
+  if (cellX >= 0 && cellY >= 0) {
+    cellXY[0]=cellX;
+    cellXY[1]=cellY;
+    foundCellSpan=true;
+  }
+ else   if (touchXY != null) {
+    int[] result=layout.findNearestVacantArea(touchXY[0],touchXY[1],1,1,cellXY);
+    foundCellSpan=(result != null);
+  }
+ else {
+    foundCellSpan=layout.findCellForSpan(cellXY,1,1);
+  }
+  if (!foundCellSpan) {
+    showOutOfSpaceMessage();
+    return;
+  }
+  final ShortcutInfo info=mModel.addShortcut(this,data,container,screen,cellXY[0],cellXY[1],false);
+  if (!mRestoring) {
+    final View view=createShortcut(info);
+    mWorkspace.addInScreen(view,container,screen,cellXY[0],cellXY[1],1,1,isWorkspaceLocked());
+  }
+}

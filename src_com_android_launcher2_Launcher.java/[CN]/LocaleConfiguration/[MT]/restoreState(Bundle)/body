@@ -10,11 +10,13 @@
   if (currentScreen > -1) {
     mWorkspace.setCurrentPage(currentScreen);
   }
-  final int addScreen=savedState.getInt(RUNTIME_STATE_PENDING_ADD_SCREEN,-1);
-  if (addScreen > -1) {
-    mAddScreen=addScreen;
-    mAddCellX=savedState.getInt(RUNTIME_STATE_PENDING_ADD_CELL_X);
-    mAddCellY=savedState.getInt(RUNTIME_STATE_PENDING_ADD_CELL_Y);
+  final long pendingAddContainer=savedState.getLong(RUNTIME_STATE_PENDING_ADD_CONTAINER,-1);
+  final int pendingAddScreen=savedState.getInt(RUNTIME_STATE_PENDING_ADD_SCREEN,-1);
+  if (pendingAddContainer != ItemInfo.NO_ID && pendingAddScreen > -1) {
+    mPendingAddInfo.container=pendingAddContainer;
+    mPendingAddInfo.screen=pendingAddScreen;
+    mPendingAddInfo.cellX=savedState.getInt(RUNTIME_STATE_PENDING_ADD_CELL_X);
+    mPendingAddInfo.cellY=savedState.getInt(RUNTIME_STATE_PENDING_ADD_CELL_Y);
     mRestoring=true;
   }
   boolean renameFolder=savedState.getBoolean(RUNTIME_STATE_PENDING_FOLDER_RENAME,false);

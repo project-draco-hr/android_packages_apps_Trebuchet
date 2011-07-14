@@ -1,0 +1,7 @@
+View newView
+long container
+CellLayout target
+int[] targetCell
+boolean external
+DragView dragView
+Runnable postAnimationRunnable

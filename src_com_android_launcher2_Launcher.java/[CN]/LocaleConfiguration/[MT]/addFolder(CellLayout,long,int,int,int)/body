@@ -1,0 +1,9 @@
+{
+  final FolderInfo folderInfo=new FolderInfo();
+  folderInfo.title=getText(R.string.folder_name);
+  LauncherModel.addItemToDatabase(Launcher.this,folderInfo,container,screen,cellX,cellY,false);
+  sFolders.put(folderInfo.id,folderInfo);
+  FolderIcon newFolder=FolderIcon.fromXml(R.layout.folder_icon,this,layout,folderInfo,mIconCache);
+  mWorkspace.addInScreen(newFolder,container,screen,cellX,cellY,1,1,isWorkspaceLocked());
+  return newFolder;
+}

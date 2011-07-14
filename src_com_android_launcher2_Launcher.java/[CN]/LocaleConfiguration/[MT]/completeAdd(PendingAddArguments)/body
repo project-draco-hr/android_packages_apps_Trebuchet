@@ -1,20 +1,20 @@
 {
 switch (args.requestCode) {
 case REQUEST_PICK_APPLICATION:
-    completeAddApplication(args.intent,args.screen,args.cellX,args.cellY);
+    completeAddApplication(args.intent,args.container,args.screen,args.cellX,args.cellY);
   break;
 case REQUEST_PICK_SHORTCUT:
 processShortcut(args.intent);
 break;
 case REQUEST_CREATE_SHORTCUT:
-completeAddShortcut(args.intent,args.screen,args.cellX,args.cellY);
+completeAddShortcut(args.intent,args.container,args.screen,args.cellX,args.cellY);
 return true;
 case REQUEST_PICK_APPWIDGET:
 addAppWidgetFromPick(args.intent);
 break;
 case REQUEST_CREATE_APPWIDGET:
 int appWidgetId=args.intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,-1);
-completeAddAppWidget(appWidgetId,args.screen);
+completeAddAppWidget(appWidgetId,args.container,args.screen);
 return true;
 case REQUEST_PICK_WALLPAPER:
 break;

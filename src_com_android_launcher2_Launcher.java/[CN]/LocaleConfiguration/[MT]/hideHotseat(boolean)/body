@@ -1,0 +1,11 @@
+{
+  if (!LauncherApplication.isScreenLarge()) {
+    if (animated) {
+      int duration=mSearchDeleteBar.getTransitionOutDuration();
+      mHotseat.animate().alpha(0f).setDuration(duration);
+    }
+ else {
+      mHotseat.setAlpha(0f);
+    }
+  }
+}

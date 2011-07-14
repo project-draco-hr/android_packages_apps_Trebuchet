@@ -8,8 +8,7 @@
   int centerY=mTempRect.centerY();
   int centeredLeft=centerX - width / 2;
   int centeredTop=centerY - height / 2;
-  int page=mLauncher.getWorkspace().getCurrentPage();
-  CellLayout currentPage=(CellLayout)mLauncher.getWorkspace().getChildAt(page);
+  CellLayout currentPage=mLauncher.getWorkspace().getCurrentDropLayout();
   CellLayoutChildren boundingLayout=currentPage.getChildrenLayout();
   Rect bounds=new Rect();
   parent.getDescendantRectRelativeToSelf(boundingLayout,bounds);

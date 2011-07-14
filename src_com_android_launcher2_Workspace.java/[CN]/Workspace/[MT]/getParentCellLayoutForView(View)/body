@@ -1,0 +1,9 @@
+{
+  ArrayList<CellLayout> layouts=getWorkspaceAndHotseatCellLayouts();
+  for (  CellLayout layout : layouts) {
+    if (layout.getChildrenLayout().indexOfChild(v) > -1) {
+      return layout;
+    }
+  }
+  return null;
+}

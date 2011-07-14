@@ -1,0 +1,7 @@
+{
+  super(context,attrs,defStyle);
+  TypedArray a=context.obtainStyledAttributes(attrs,R.styleable.Hotseat,defStyle,0);
+  mCellCountX=a.getInt(R.styleable.Hotseat_cellCountX,-1);
+  mCellCountY=a.getInt(R.styleable.Hotseat_cellCountY,-1);
+  mIsLandscape=context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
+}

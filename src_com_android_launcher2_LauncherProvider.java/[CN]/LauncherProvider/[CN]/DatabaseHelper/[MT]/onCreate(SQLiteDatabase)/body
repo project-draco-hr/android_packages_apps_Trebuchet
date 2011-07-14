@@ -7,6 +7,6 @@
     sendAppWidgetResetNotify();
   }
   if (!convertDatabase(db)) {
-    loadFavorites(db);
+    loadFavorites(db,ItemInfo.NO_ID);
   }
 }

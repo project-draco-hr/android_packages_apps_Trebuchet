@@ -2,8 +2,7 @@
   if (success) {
     if (target != this) {
       if (mDragInfo != null) {
-        final CellLayout cellLayout=(CellLayout)getChildAt(mDragInfo.screen);
-        cellLayout.removeView(mDragInfo.cell);
+        getParentCellLayoutForView(mDragInfo.cell).removeView(mDragInfo.cell);
         if (mDragInfo.cell instanceof DropTarget) {
           mDragController.removeDropTarget((DropTarget)mDragInfo.cell);
         }
@@ -12,7 +11,14 @@
   }
  else   if (mDragInfo != null) {
     doDragExit(null);
-    ((CellLayout)getChildAt(mDragInfo.screen)).onDropChild(mDragInfo.cell);
+    CellLayout cellLayout;
+    if (mLauncher.isHotseatLayout(target)) {
+      cellLayout=mLauncher.getHotseat().getLayout();
+    }
+ else {
+      cellLayout=(CellLayout)getChildAt(mDragInfo.screen);
+    }
+    cellLayout.onDropChild(mDragInfo.cell);
   }
   mDragOutline=null;
   mDragInfo=null;

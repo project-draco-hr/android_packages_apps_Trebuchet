@@ -1,0 +1,16 @@
+{
+  mContent.removeAllViewsInLayout();
+  Context context=getContext();
+  LayoutInflater inflater=LayoutInflater.from(context);
+  BubbleTextView allAppsButton=(BubbleTextView)inflater.inflate(R.layout.application,mContent,false);
+  allAppsButton.setCompoundDrawablesWithIntrinsicBounds(null,context.getResources().getDrawable(R.drawable.apps_hotseat_button),null,null);
+  allAppsButton.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    android.view.View v){
+      mLauncher.showAllApps(true);
+    }
+  }
+);
+  int x=getCellXFromOrder(0);
+  int y=getCellYFromOrder(0);
+  mContent.addViewToCellLayout(allAppsButton,-1,0,new CellLayout.LayoutParams(x,y,1,1),true);
+}

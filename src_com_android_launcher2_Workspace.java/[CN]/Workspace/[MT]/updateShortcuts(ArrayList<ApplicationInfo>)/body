@@ -1,7 +1,6 @@
 {
-  final int screenCount=getChildCount();
-  for (int i=0; i < screenCount; i++) {
-    final ViewGroup layout=((CellLayout)getChildAt(i)).getChildrenLayout();
+  ArrayList<CellLayoutChildren> childrenLayouts=getWorkspaceAndHotseatCellLayoutChildren();
+  for (  CellLayoutChildren layout : childrenLayouts) {
     int childCount=layout.getChildCount();
     for (int j=0; j < childCount; j++) {
       final View view=layout.getChildAt(j);

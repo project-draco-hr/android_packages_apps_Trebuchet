@@ -1,5 +1,0 @@
-{
-  final ShortcutInfo info=infoFromShortcutIntent(context,data,null);
-  addItemToDatabase(context,info,LauncherSettings.Favorites.CONTAINER_DESKTOP,screen,cellX,cellY,notify);
-  return info;
-}

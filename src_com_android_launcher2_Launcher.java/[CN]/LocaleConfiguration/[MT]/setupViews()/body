@@ -3,6 +3,10 @@
   mDragLayer=(DragLayer)findViewById(R.id.drag_layer);
   mWorkspace=(Workspace)mDragLayer.findViewById(R.id.workspace);
   mDragLayer.setup(this,dragController);
+  mHotseat=(Hotseat)findViewById(R.id.hotseat);
+  if (mHotseat != null) {
+    mHotseat.setup(this);
+  }
   mWorkspace.setHapticFeedbackEnabled(false);
   mWorkspace.setOnLongClickListener(this);
   mWorkspace.setup(this,dragController);
@@ -11,38 +15,6 @@
   mAppsCustomizeTabHost=(AppsCustomizeTabHost)findViewById(R.id.apps_customize_pane);
   mAppsCustomizeContent=(AppsCustomizePagedView)mAppsCustomizeTabHost.findViewById(R.id.apps_customize_pane_content);
   mAppsCustomizeContent.setup(this,dragController);
-  mAllAppsButton=mDragLayer.findViewById(R.id.all_apps_button);
-  mAllAppsButton.setOnClickListener(new OnClickListener(){
-    public void onClick(    View v){
-      onClickAllAppsButton(v);
-    }
-  }
-);
-  if (!LauncherApplication.isScreenLarge()) {
-    HandleView handleView=(HandleView)mAllAppsButton;
-    handleView.setLauncher(this);
-    handleView.setOnLongClickListener(this);
-    ImageView hotseatLeft=(ImageView)findViewById(R.id.hotseat_left);
-    hotseatLeft.setContentDescription(mHotseatLabels[0]);
-    hotseatLeft.setImageDrawable(mHotseatIcons[0]);
-    ImageView hotseatRight=(ImageView)findViewById(R.id.hotseat_right);
-    hotseatRight.setContentDescription(mHotseatLabels[1]);
-    hotseatRight.setImageDrawable(mHotseatIcons[1]);
-  }
-  if (!LauncherApplication.isScreenLarge()) {
-    mButtonCluster=(ViewGroup)findViewById(R.id.all_apps_button_cluster);
-    View.OnKeyListener listener=null;
-    if (LauncherApplication.isScreenLarge()) {
-      listener=new ButtonBarKeyEventListener();
-    }
- else {
-      listener=new DockKeyEventListener();
-    }
-    int buttonCount=mButtonCluster.getChildCount();
-    for (int i=0; i < buttonCount; ++i) {
-      mButtonCluster.getChildAt(i).setOnKeyListener(listener);
-    }
-  }
   dragController.setDragScoller(mWorkspace);
   dragController.setScrollView(mDragLayer);
   dragController.setMoveTarget(mWorkspace);

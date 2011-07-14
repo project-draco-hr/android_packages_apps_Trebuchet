@@ -1,8 +1,13 @@
 {
   item.container=container;
-  item.screen=screen;
   item.cellX=cellX;
   item.cellY=cellY;
+  if (context instanceof Launcher && screen < 0 && container == LauncherSettings.Favorites.CONTAINER_HOTSEAT) {
+    item.screen=((Launcher)context).getHotseat().getOrderInHotseat(cellX,cellY);
+  }
+ else {
+    item.screen=screen;
+  }
   final ContentValues values=new ContentValues();
   final ContentResolver cr=context.getContentResolver();
   item.onAddToDatabase(values);
@@ -10,7 +15,7 @@
   LauncherApplication app=(LauncherApplication)l.getApplication();
   item.id=app.getLauncherProvider().generateNewId();
   values.put(LauncherSettings.Favorites._ID,item.id);
-  item.updateValuesWithCoordinates(values,cellX,cellY);
+  item.updateValuesWithCoordinates(values,item.cellX,item.cellY);
   sWorker.post(new Runnable(){
     public void run(){
       cr.insert(notify ? LauncherSettings.Favorites.CONTENT_URI : LauncherSettings.Favorites.CONTENT_URI_NO_NOTIFICATION,values);
@@ -18,18 +23,14 @@
 switch (item.itemType) {
 case LauncherSettings.Favorites.ITEM_TYPE_FOLDER:
         sFolders.put(item.id,(FolderInfo)item);
-      if (item.container == LauncherSettings.Favorites.CONTAINER_DESKTOP) {
+case LauncherSettings.Favorites.ITEM_TYPE_APPLICATION:
+case LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT:
+      if (item.container == LauncherSettings.Favorites.CONTAINER_DESKTOP || item.container == LauncherSettings.Favorites.CONTAINER_HOTSEAT) {
         sWorkspaceItems.add(item);
       }
     break;
-case LauncherSettings.Favorites.ITEM_TYPE_APPLICATION:
-case LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT:
-  if (item.container == LauncherSettings.Favorites.CONTAINER_DESKTOP) {
-    sWorkspaceItems.add(item);
-  }
-break;
 case LauncherSettings.Favorites.ITEM_TYPE_APPWIDGET:
-sAppWidgets.add((LauncherAppWidgetInfo)item);
+  sAppWidgets.add((LauncherAppWidgetInfo)item);
 break;
 }
 }

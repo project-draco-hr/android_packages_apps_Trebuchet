@@ -1,3 +1,0 @@
-{
-  return ((cellId & 0xFF) << 24) | (screen & 0xFF) << 16 | (localCellX & 0xFF) << 8 | (localCellY & 0xFF);
-}

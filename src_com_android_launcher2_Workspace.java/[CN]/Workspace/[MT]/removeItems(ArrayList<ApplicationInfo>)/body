@@ -6,8 +6,8 @@
   for (int i=0; i < appCount; i++) {
     packageNames.add(apps.get(i).componentName.getPackageName());
   }
-  for (int i=0; i < screenCount; i++) {
-    final CellLayout layoutParent=(CellLayout)getChildAt(i);
+  ArrayList<CellLayout> cellLayouts=getWorkspaceAndHotseatCellLayouts();
+  for (  final CellLayout layoutParent : cellLayouts) {
     final ViewGroup layout=layoutParent.getChildrenLayout();
     post(new Runnable(){
       public void run(){

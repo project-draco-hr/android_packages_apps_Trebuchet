@@ -2,8 +2,7 @@
   folder.getInfo().opened=false;
   ViewGroup parent=(ViewGroup)folder.getParent().getParent();
   if (parent != null) {
-    CellLayout cl=(CellLayout)mWorkspace.getChildAt(folder.mInfo.screen);
-    FolderIcon fi=(FolderIcon)cl.getChildAt(folder.mInfo.cellX,folder.mInfo.cellY);
+    FolderIcon fi=(FolderIcon)mWorkspace.getViewForTag(folder.mInfo);
     shrinkAndFadeInFolderIcon(fi);
     mDragController.removeDropTarget((DropTarget)folder);
   }

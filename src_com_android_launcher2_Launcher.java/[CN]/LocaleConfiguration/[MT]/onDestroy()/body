@@ -12,7 +12,7 @@
   mAppWidgetHost=null;
   mWidgetsToAdvance.clear();
   TextKeyListener.getInstance().release();
-  unbindWorkspaceItems();
+  unbindWorkspaceAndHotseatItems();
   getContentResolver().unregisterContentObserver(mWidgetObserver);
   unregisterReceiver(mCloseSystemDialogsReceiver);
   ((ViewGroup)mWorkspace.getParent()).removeAllViews();

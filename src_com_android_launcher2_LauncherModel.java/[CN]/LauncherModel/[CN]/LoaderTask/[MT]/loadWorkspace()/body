@@ -68,6 +68,7 @@ case LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT:
       }
 switch (container) {
 case LauncherSettings.Favorites.CONTAINER_DESKTOP:
+case LauncherSettings.Favorites.CONTAINER_HOTSEAT:
         sWorkspaceItems.add(info);
       break;
 default :
@@ -99,6 +100,7 @@ break;
 }
 switch (container) {
 case LauncherSettings.Favorites.CONTAINER_DESKTOP:
+case LauncherSettings.Favorites.CONTAINER_HOTSEAT:
 sWorkspaceItems.add(folderInfo);
 break;
 }
@@ -122,8 +124,8 @@ appWidgetInfo.cellY=c.getInt(cellYIndex);
 appWidgetInfo.spanX=c.getInt(spanXIndex);
 appWidgetInfo.spanY=c.getInt(spanYIndex);
 container=c.getInt(containerIndex);
-if (container != LauncherSettings.Favorites.CONTAINER_DESKTOP) {
-Log.e(TAG,"Widget found where container " + "!= CONTAINER_DESKTOP -- ignoring!");
+if (container != LauncherSettings.Favorites.CONTAINER_DESKTOP && container != LauncherSettings.Favorites.CONTAINER_HOTSEAT) {
+Log.e(TAG,"Widget found where container " + "!= CONTAINER_DESKTOP nor CONTAINER_HOTSEAT - ignoring!");
 continue;
 }
 appWidgetInfo.container=c.getInt(containerIndex);

@@ -6,12 +6,12 @@
 switch (item.itemType) {
 case LauncherSettings.Favorites.ITEM_TYPE_APPLICATION:
 case LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT:
-      final View shortcut=createShortcut((ShortcutInfo)item);
-    workspace.addInScreen(shortcut,item.screen,item.cellX,item.cellY,1,1,false);
+      View shortcut=createShortcut((ShortcutInfo)item);
+    workspace.addInScreen(shortcut,item.container,item.screen,item.cellX,item.cellY,1,1,false);
   break;
 case LauncherSettings.Favorites.ITEM_TYPE_FOLDER:
-final FolderIcon newFolder=FolderIcon.fromXml(R.layout.folder_icon,this,(ViewGroup)workspace.getChildAt(workspace.getCurrentPage()),(FolderInfo)item,mIconCache);
-workspace.addInScreen(newFolder,item.screen,item.cellX,item.cellY,1,1,false);
+FolderIcon newFolder=FolderIcon.fromXml(R.layout.folder_icon,this,(ViewGroup)workspace.getChildAt(workspace.getCurrentPage()),(FolderInfo)item,mIconCache);
+workspace.addInScreen(newFolder,item.container,item.screen,item.cellX,item.cellY,1,1,false);
 break;
 }
 }

@@ -1,7 +1,7 @@
 {
   if (mInScrollArea)   return;
   if (mIsSwitchingState)   return;
-  CellLayout layout;
+  CellLayout layout=null;
   ItemInfo item=(ItemInfo)d.dragInfo;
   if (item.spanX < 0 || item.spanY < 0)   throw new RuntimeException("Improper spans found");
   if (isSmall()) {
@@ -29,7 +29,16 @@
     }
   }
  else {
-    layout=getCurrentDropLayout();
+    Rect r=new Rect();
+    if (mLauncher.getHotseat() != null) {
+      mLauncher.getHotseat().getHitRect(r);
+      if (r.contains(d.x,d.y)) {
+        layout=mLauncher.getHotseat().getLayout();
+      }
+    }
+    if (layout == null) {
+      layout=getCurrentDropLayout();
+    }
     if (layout != mDragTargetLayout) {
       if (mDragTargetLayout != null) {
         mDragTargetLayout.setIsDragOverlapping(false);
@@ -43,7 +52,12 @@
   if (mDragTargetLayout != null) {
     final View child=(mDragInfo == null) ? null : mDragInfo.cell;
     mDragViewVisualCenter=getDragViewVisualCenter(d.x,d.y,d.xOffset,d.yOffset,d.dragView,mDragViewVisualCenter);
-    mapPointFromSelfToChild(mDragTargetLayout,mDragViewVisualCenter,null);
+    if (mLauncher.isHotseatLayout(mDragTargetLayout)) {
+      mapPointFromSelfToSibling(mLauncher.getHotseat(),mDragViewVisualCenter);
+    }
+ else {
+      mapPointFromSelfToChild(mDragTargetLayout,mDragViewVisualCenter,null);
+    }
     ItemInfo info=(ItemInfo)d.dragInfo;
     mTargetCell=findNearestArea((int)mDragViewVisualCenter[0],(int)mDragViewVisualCenter[1],1,1,mDragTargetLayout,mTargetCell);
     final View dragOverView=mDragTargetLayout.getChildAt(mTargetCell[0],mTargetCell[1]);

@@ -5,9 +5,7 @@
     if (fi.acceptDrop(d.dragInfo)) {
       fi.onDrop(d);
       if (!external) {
-        int fromScreen=mDragInfo.screen;
-        CellLayout sourceLayout=(CellLayout)getChildAt(fromScreen);
-        sourceLayout.removeView(newView);
+        getParentCellLayoutForView(mDragInfo.cell).removeView(mDragInfo.cell);
       }
       return true;
     }

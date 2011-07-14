@@ -1,13 +1,14 @@
 {
   boolean delayExitSpringLoadedMode=false;
   mWaitingForResult=false;
-  if (resultCode == RESULT_OK && mAddScreen != -1) {
+  if (resultCode == RESULT_OK && mPendingAddInfo.container != ItemInfo.NO_ID && mPendingAddInfo.screen > -1) {
     final PendingAddArguments args=new PendingAddArguments();
     args.requestCode=requestCode;
     args.intent=data;
-    args.screen=mAddScreen;
-    args.cellX=mAddCellX;
-    args.cellY=mAddCellY;
+    args.container=mPendingAddInfo.container;
+    args.screen=mPendingAddInfo.screen;
+    args.cellX=mPendingAddInfo.cellX;
+    args.cellY=mPendingAddInfo.cellY;
     if (isWorkspaceLocked()) {
       sPendingAddList.add(args);
     }

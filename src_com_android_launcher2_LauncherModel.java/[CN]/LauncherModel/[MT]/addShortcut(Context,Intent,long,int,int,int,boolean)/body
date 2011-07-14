@@ -1,0 +1,5 @@
+{
+  final ShortcutInfo info=infoFromShortcutIntent(context,data,null);
+  addItemToDatabase(context,info,container,screen,cellX,cellY,notify);
+  return info;
+}

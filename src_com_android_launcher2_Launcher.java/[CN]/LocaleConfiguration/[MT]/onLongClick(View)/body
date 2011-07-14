@@ -2,38 +2,30 @@
   if (mState != State.WORKSPACE) {
     return false;
   }
-switch (v.getId()) {
-case R.id.all_apps_button:
-    if (mState != State.APPS_CUSTOMIZE) {
-      mWorkspace.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS,HapticFeedbackConstants.FLAG_IGNORE_VIEW_SETTING);
-      showPreviews(v);
-    }
-  return true;
-}
-if (isWorkspaceLocked()) {
-return false;
-}
-if (!(v instanceof CellLayout)) {
-v=(View)v.getParent().getParent();
-}
-resetAddInfo();
-CellLayout.CellInfo longClickCellInfo=(CellLayout.CellInfo)v.getTag();
-if (longClickCellInfo == null || !longClickCellInfo.valid) {
-return true;
-}
-final View itemUnderLongClick=longClickCellInfo.cell;
-if (mWorkspace.allowLongPress() && !mDragController.isDragging()) {
-if (itemUnderLongClick == null) {
-  mWorkspace.setAllowLongPress(false);
-  mWorkspace.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS,HapticFeedbackConstants.FLAG_IGNORE_VIEW_SETTING);
-  addItems();
-}
- else {
-  if (!(itemUnderLongClick instanceof Folder)) {
-    mWorkspace.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS,HapticFeedbackConstants.FLAG_IGNORE_VIEW_SETTING);
-    mWorkspace.startDrag(longClickCellInfo);
+  if (isWorkspaceLocked()) {
+    return false;
   }
-}
-}
-return true;
+  if (!(v instanceof CellLayout)) {
+    v=(View)v.getParent().getParent();
+  }
+  resetAddInfo();
+  CellLayout.CellInfo longClickCellInfo=(CellLayout.CellInfo)v.getTag();
+  if (longClickCellInfo == null || !longClickCellInfo.valid) {
+    return true;
+  }
+  final View itemUnderLongClick=longClickCellInfo.cell;
+  boolean allowLongPress=isHotseatLayout(v) || mWorkspace.allowLongPress();
+  if (allowLongPress && !mDragController.isDragging()) {
+    if (itemUnderLongClick == null) {
+      mWorkspace.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS,HapticFeedbackConstants.FLAG_IGNORE_VIEW_SETTING);
+      addItems();
+    }
+ else {
+      if (!(itemUnderLongClick instanceof Folder)) {
+        mWorkspace.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS,HapticFeedbackConstants.FLAG_IGNORE_VIEW_SETTING);
+        mWorkspace.startDrag(longClickCellInfo);
+      }
+    }
+  }
+  return true;
 }

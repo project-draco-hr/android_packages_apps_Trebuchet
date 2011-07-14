@@ -1,0 +1,11 @@
+{
+  ArrayList<CellLayout> layouts=new ArrayList<CellLayout>();
+  int screenCount=getChildCount();
+  for (int screen=0; screen < screenCount; screen++) {
+    layouts.add(((CellLayout)getChildAt(screen)));
+  }
+  if (mLauncher.getHotseat() != null) {
+    layouts.add(mLauncher.getHotseat().getLayout());
+  }
+  return layouts;
+}

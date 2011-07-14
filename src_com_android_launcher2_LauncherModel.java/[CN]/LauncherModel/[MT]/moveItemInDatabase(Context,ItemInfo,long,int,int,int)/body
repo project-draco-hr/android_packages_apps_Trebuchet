@@ -1,14 +1,19 @@
 {
   item.container=container;
-  item.screen=screen;
   item.cellX=cellX;
   item.cellY=cellY;
+  if (context instanceof Launcher && screen < 0 && container == LauncherSettings.Favorites.CONTAINER_HOTSEAT) {
+    item.screen=((Launcher)context).getHotseat().getOrderInHotseat(cellX,cellY);
+  }
+ else {
+    item.screen=screen;
+  }
   final Uri uri=LauncherSettings.Favorites.getContentUri(item.id,false);
   final ContentValues values=new ContentValues();
   final ContentResolver cr=context.getContentResolver();
   values.put(LauncherSettings.Favorites.CONTAINER,item.container);
-  values.put(LauncherSettings.Favorites.CELLX,cellX);
-  values.put(LauncherSettings.Favorites.CELLY,cellY);
+  values.put(LauncherSettings.Favorites.CELLX,item.cellX);
+  values.put(LauncherSettings.Favorites.CELLY,item.cellY);
   values.put(LauncherSettings.Favorites.SCREEN,item.screen);
   sWorker.post(new Runnable(){
     public void run(){
@@ -17,7 +22,7 @@
       if (item != modelItem) {
         throw new RuntimeException("Error: ItemInfo passed to moveItemInDatabase " + "doesn't match original");
       }
-      if (modelItem.container == LauncherSettings.Favorites.CONTAINER_DESKTOP) {
+      if (modelItem.container == LauncherSettings.Favorites.CONTAINER_DESKTOP || modelItem.container == LauncherSettings.Favorites.CONTAINER_HOTSEAT) {
         if (!sWorkspaceItems.contains(modelItem)) {
           sWorkspaceItems.add(modelItem);
         }

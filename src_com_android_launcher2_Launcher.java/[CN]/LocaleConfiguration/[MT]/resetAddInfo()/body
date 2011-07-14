@@ -1,6 +1,7 @@
 {
-  mAddScreen=-1;
-  mAddCellX=-1;
-  mAddCellY=-1;
-  mAddDropPosition=null;
+  mPendingAddInfo.container=ItemInfo.NO_ID;
+  mPendingAddInfo.screen=-1;
+  mPendingAddInfo.cellX=mPendingAddInfo.cellY=-1;
+  mPendingAddInfo.spanX=mPendingAddInfo.spanY=-1;
+  mPendingAddInfo.dropPos=null;
 }

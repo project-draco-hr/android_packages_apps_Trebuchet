@@ -1,0 +1,13 @@
+{
+  resetAddInfo();
+  mPendingAddInfo.container=container;
+  mPendingAddInfo.screen=screen;
+  mPendingAddInfo.dropPos=loc;
+  if (cell != null) {
+    mPendingAddInfo.cellX=cell[0];
+    mPendingAddInfo.cellY=cell[1];
+  }
+  Intent createShortcutIntent=new Intent(Intent.ACTION_CREATE_SHORTCUT);
+  createShortcutIntent.setComponent(componentName);
+  processShortcut(createShortcutIntent);
+}

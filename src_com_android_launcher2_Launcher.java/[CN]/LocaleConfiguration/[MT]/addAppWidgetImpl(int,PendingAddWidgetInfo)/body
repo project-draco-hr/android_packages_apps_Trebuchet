@@ -34,7 +34,7 @@
     startActivityForResultSafely(intent,REQUEST_CREATE_APPWIDGET);
   }
  else {
-    completeAddAppWidget(appWidgetId,mAddScreen);
+    completeAddAppWidget(appWidgetId,info.container,info.screen);
     exitSpringLoadedDragModeDelayed(false);
   }
 }

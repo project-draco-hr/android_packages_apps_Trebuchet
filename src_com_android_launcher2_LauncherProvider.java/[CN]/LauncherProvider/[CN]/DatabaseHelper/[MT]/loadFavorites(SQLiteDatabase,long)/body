@@ -1,0 +1,67 @@
+{
+  Intent intent=new Intent(Intent.ACTION_MAIN,null);
+  intent.addCategory(Intent.CATEGORY_LAUNCHER);
+  ContentValues values=new ContentValues();
+  PackageManager packageManager=mContext.getPackageManager();
+  int i=0;
+  try {
+    XmlResourceParser parser=mContext.getResources().getXml(R.xml.default_workspace);
+    AttributeSet attrs=Xml.asAttributeSet(parser);
+    XmlUtils.beginDocument(parser,TAG_FAVORITES);
+    final int depth=parser.getDepth();
+    int type;
+    while (((type=parser.next()) != XmlPullParser.END_TAG || parser.getDepth() > depth) && type != XmlPullParser.END_DOCUMENT) {
+      if (type != XmlPullParser.START_TAG) {
+        continue;
+      }
+      boolean added=false;
+      final String name=parser.getName();
+      TypedArray a=mContext.obtainStyledAttributes(attrs,R.styleable.Favorite);
+      long container=LauncherSettings.Favorites.CONTAINER_DESKTOP;
+      if (a.hasValue(R.styleable.Favorite_container)) {
+        container=Long.valueOf(a.getString(R.styleable.Favorite_container));
+      }
+      if (filterContainerId == ItemInfo.NO_ID || filterContainerId == container) {
+        String screen=a.getString(R.styleable.Favorite_screen);
+        String x=a.getString(R.styleable.Favorite_x);
+        String y=a.getString(R.styleable.Favorite_y);
+        if (container == LauncherSettings.Favorites.CONTAINER_HOTSEAT && Integer.valueOf(screen) <= 0) {
+          throw new RuntimeException("Invalid screen position for hotseat item");
+        }
+        values.clear();
+        values.put(LauncherSettings.Favorites.CONTAINER,container);
+        values.put(LauncherSettings.Favorites.SCREEN,screen);
+        values.put(LauncherSettings.Favorites.CELLX,x);
+        values.put(LauncherSettings.Favorites.CELLY,y);
+        System.out.println("Adding item to container: " + container);
+        if (TAG_FAVORITE.equals(name)) {
+          added=addAppShortcut(db,values,a,packageManager,intent);
+        }
+ else         if (TAG_SEARCH.equals(name)) {
+          added=addSearchWidget(db,values);
+        }
+ else         if (TAG_CLOCK.equals(name)) {
+          added=addClockWidget(db,values);
+        }
+ else         if (TAG_APPWIDGET.equals(name)) {
+          added=addAppWidget(db,values,a,packageManager);
+        }
+ else         if (TAG_SHORTCUT.equals(name)) {
+          added=addUriShortcut(db,values,a);
+        }
+      }
+      if (added)       i++;
+      a.recycle();
+    }
+  }
+ catch (  XmlPullParserException e) {
+    Log.w(TAG,"Got exception parsing favorites.",e);
+  }
+catch (  IOException e) {
+    Log.w(TAG,"Got exception parsing favorites.",e);
+  }
+catch (  RuntimeException e) {
+    Log.w(TAG,"Got exception parsing favorites.",e);
+  }
+  return i;
+}

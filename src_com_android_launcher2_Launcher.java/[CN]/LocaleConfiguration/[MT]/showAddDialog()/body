@@ -1,6 +1,7 @@
 {
   resetAddInfo();
-  mAddScreen=mWorkspace.getCurrentPage();
+  mPendingAddInfo.container=LauncherSettings.Favorites.CONTAINER_DESKTOP;
+  mPendingAddInfo.screen=mWorkspace.getCurrentPage();
   mWaitingForResult=true;
   showDialog(DIALOG_CREATE_SHORTCUT);
 }

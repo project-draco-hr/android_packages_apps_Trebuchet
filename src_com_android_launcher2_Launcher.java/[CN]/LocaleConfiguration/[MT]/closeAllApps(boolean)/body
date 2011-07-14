@@ -3,7 +3,9 @@
     mWorkspace.setVisibility(View.VISIBLE);
     cameraZoomIn(State.APPS_CUSTOMIZE,animated,false);
     mSearchDeleteBar.showSearchBar(animated);
-    showDock(animated);
-    findViewById(R.id.all_apps_button).requestFocus();
+    showHotseat(animated);
+    if (mAllAppsButton != null) {
+      mAllAppsButton.requestFocus();
+    }
   }
 }

@@ -4,7 +4,7 @@
     return;
   }
   mDragInfo=cellInfo;
-  CellLayout current=(CellLayout)getChildAt(cellInfo.screen);
+  CellLayout current=getParentCellLayoutForView(cellInfo.cell);
   current.onDragChild(child);
   child.clearFocus();
   child.setPressed(false);

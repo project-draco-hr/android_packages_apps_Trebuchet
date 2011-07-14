@@ -1,5 +1,0 @@
-{
-  if (mState != State.APPS_CUSTOMIZE) {
-    mWorkspace.scrollLeft();
-  }
-}

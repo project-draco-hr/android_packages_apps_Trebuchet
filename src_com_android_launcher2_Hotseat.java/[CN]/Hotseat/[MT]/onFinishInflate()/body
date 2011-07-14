@@ -1,0 +1,8 @@
+{
+  super.onFinishInflate();
+  if (mCellCountX < 0)   mCellCountX=LauncherModel.getCellCountX();
+  if (mCellCountY < 0)   mCellCountY=LauncherModel.getCellCountY();
+  mContent=(CellLayout)findViewById(R.id.layout);
+  mContent.setGridSize(mCellCountX,mCellCountY);
+  resetLayout();
+}

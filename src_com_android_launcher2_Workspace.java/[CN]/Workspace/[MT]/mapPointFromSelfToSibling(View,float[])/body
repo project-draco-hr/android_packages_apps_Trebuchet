@@ -1,0 +1,4 @@
+{
+  xy[0]=xy[0] - v.getLeft();
+  xy[1]=xy[1] - v.getTop();
+}

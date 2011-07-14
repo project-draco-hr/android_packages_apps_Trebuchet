@@ -13,7 +13,7 @@
   item.hostView=mAppWidgetHost.createView(this,appWidgetId,appWidgetInfo);
   item.hostView.setAppWidget(appWidgetId,appWidgetInfo);
   item.hostView.setTag(item);
-  workspace.addInScreen(item.hostView,item.screen,item.cellX,item.cellY,item.spanX,item.spanY,false);
+  workspace.addInScreen(item.hostView,item.container,item.screen,item.cellX,item.cellY,item.spanX,item.spanY,false);
   addWidgetToAutoAdvanceIfNeeded(item.hostView,appWidgetInfo);
   workspace.requestLayout();
   if (DEBUG_WIDGETS) {
