@@ -11,6 +11,9 @@
   if (mDropAnim != null) {
     mDropAnim.cancel();
   }
+  if (mFadeOutAnim != null) {
+    mFadeOutAnim.cancel();
+  }
   mDropView=view;
   final float initialAlpha=view.getAlpha();
   mDropAnim=new ValueAnimator();
@@ -28,8 +31,8 @@
       invalidate(mDropViewPos[0],mDropViewPos[1],mDropViewPos[0] + width,mDropViewPos[1] + height);
       float alphaPercent=alphaInterpolator == null ? percent : alphaInterpolator.getInterpolation(percent);
       float motionPercent=motionInterpolator == null ? percent : motionInterpolator.getInterpolation(percent);
-      mDropViewPos[0]=from.left + (int)((to.left - from.left) * motionPercent);
-      mDropViewPos[1]=from.top + (int)((to.top - from.top) * motionPercent);
+      mDropViewPos[0]=from.left + (int)Math.round(((to.left - from.left) * motionPercent));
+      mDropViewPos[1]=from.top + (int)Math.round(((to.top - from.top) * motionPercent));
       mDropViewScale=percent * finalScale + (1 - percent);
       mDropViewAlpha=alphaPercent * finalAlpha + (1 - alphaPercent) * initialAlpha;
       invalidate(mDropViewPos[0],mDropViewPos[1],mDropViewPos[0] + width,mDropViewPos[1] + height);

@@ -1,6 +1,7 @@
 {
   mTmpXY[0]=0;
   mTmpXY[1]=0;
-  getDescendantCoordRelativeToSelf(descendant,mTmpXY);
+  float scale=getDescendantCoordRelativeToSelf(descendant,mTmpXY);
   r.set(mTmpXY[0],mTmpXY[1],mTmpXY[0] + descendant.getWidth(),mTmpXY[1] + descendant.getHeight());
+  return scale;
 }

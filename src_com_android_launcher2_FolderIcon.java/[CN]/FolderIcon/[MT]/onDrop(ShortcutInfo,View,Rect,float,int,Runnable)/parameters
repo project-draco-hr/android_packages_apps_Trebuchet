@@ -1,5 +1,6 @@
 ShortcutInfo item
 View animateView
 Rect finalRect
+float scaleRelativeToDragLayer
 int index
 Runnable postAnimationRunnable
