@@ -1,9 +1,0 @@
-{
-  Rect r=new Rect();
-  getViewRectRelativeToSelf(dragView,r);
-  final int fromX=r.left;
-  final int fromY=r.top;
-  final int toX=fromX;
-  final int toY=fromY;
-  animateViewIntoPosition(dragView,fromX,fromY,toX,toY,1.0f,onFinishAnimationRunnable,true);
-}
