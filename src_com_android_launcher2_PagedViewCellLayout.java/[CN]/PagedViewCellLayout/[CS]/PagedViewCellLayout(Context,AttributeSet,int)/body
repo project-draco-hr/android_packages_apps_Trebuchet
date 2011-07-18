@@ -7,7 +7,7 @@
   mPeekWidth=resources.getDimensionPixelSize(R.dimen.apps_customize_peek_width);
   mCellCountX=LauncherModel.getCellCountX();
   mCellCountY=LauncherModel.getCellCountY();
-  mWidthGap=mHeightGap=-1;
+  mOriginalHeightGap=mOriginalHeightGap=mWidthGap=mHeightGap=-1;
   mMaxGap=resources.getDimensionPixelSize(R.dimen.apps_customize_max_gap);
   mChildren=new PagedViewCellLayoutChildren(context);
   mChildren.setCellDimensions(mCellWidth,mCellHeight);

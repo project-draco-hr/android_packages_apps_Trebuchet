@@ -8,7 +8,7 @@
   }
   int numWidthGaps=mCellCountX - 1;
   int numHeightGaps=mCellCountY - 1;
-  if (mWidthGap < 0 || mHeightGap < 0) {
+  if (mOriginalWidthGap < 0 || mOriginalHeightGap < 0) {
     int hSpace=widthSpecSize - mPaddingLeft - mPaddingRight;
     int vSpace=heightSpecSize - mPaddingTop - mPaddingBottom;
     int hFreeSpace=hSpace - (mCellCountX * mOriginalCellWidth);
@@ -17,6 +17,10 @@
     mHeightGap=Math.min(mMaxGap,numHeightGaps > 0 ? (vFreeSpace / numHeightGaps) : 0);
     mChildren.setGap(mWidthGap,mHeightGap);
     mHolographicChildren.setGap(mWidthGap,mHeightGap);
+  }
+ else {
+    mWidthGap=mOriginalWidthGap;
+    mHeightGap=mOriginalHeightGap;
   }
   int newWidth=widthSpecSize;
   int newHeight=heightSpecSize;
