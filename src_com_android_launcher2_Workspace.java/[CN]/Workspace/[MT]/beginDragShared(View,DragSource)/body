@@ -22,5 +22,4 @@
   }
   mDragController.startDrag(b,dragLayerX,dragLayerY,source,child.getTag(),DragController.DRAG_ACTION_MOVE,dragRect);
   b.recycle();
-  mLauncher.lockScreenOrientation();
 }

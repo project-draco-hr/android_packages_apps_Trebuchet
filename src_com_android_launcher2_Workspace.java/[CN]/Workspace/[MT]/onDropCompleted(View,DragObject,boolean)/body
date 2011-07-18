@@ -14,7 +14,6 @@
     doDragExit(null);
     ((CellLayout)getChildAt(mDragInfo.screen)).onDropChild(mDragInfo.cell);
   }
-  mLauncher.unlockScreenOrientation();
   mDragOutline=null;
   mDragInfo=null;
 }
