@@ -1,3 +1,4 @@
 PendingAddWidgetInfo info
 int screen
-int[] position
+int[] cell
+int[] loc

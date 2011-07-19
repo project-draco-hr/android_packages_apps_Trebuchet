@@ -31,8 +31,6 @@ if (itemUnderLongClick == null) {
  else {
   if (!(itemUnderLongClick instanceof Folder)) {
     mWorkspace.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS,HapticFeedbackConstants.FLAG_IGNORE_VIEW_SETTING);
-    mAddIntersectCellX=longClickCellInfo.cellX;
-    mAddIntersectCellY=longClickCellInfo.cellY;
     mWorkspace.startDrag(longClickCellInfo);
   }
 }

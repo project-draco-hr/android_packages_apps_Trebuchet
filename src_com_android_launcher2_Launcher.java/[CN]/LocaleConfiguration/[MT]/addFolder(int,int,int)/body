@@ -1,15 +1,9 @@
 {
   final FolderInfo folderInfo=new FolderInfo();
   folderInfo.title=getText(R.string.folder_name);
-  final CellLayout layout=(CellLayout)mWorkspace.getChildAt(screen);
-  final int[] cellXY=mTmpAddItemCellCoordinates;
-  if (!layout.findCellForSpanThatIntersects(cellXY,1,1,intersectCellX,intersectCellY)) {
-    showOutOfSpaceMessage();
-    return null;
-  }
-  LauncherModel.addItemToDatabase(Launcher.this,folderInfo,LauncherSettings.Favorites.CONTAINER_DESKTOP,screen,cellXY[0],cellXY[1],false);
+  LauncherModel.addItemToDatabase(Launcher.this,folderInfo,LauncherSettings.Favorites.CONTAINER_DESKTOP,screen,cellX,cellY,false);
   sFolders.put(folderInfo.id,folderInfo);
   FolderIcon newFolder=FolderIcon.fromXml(R.layout.folder_icon,this,(ViewGroup)mWorkspace.getChildAt(mWorkspace.getCurrentPage()),folderInfo,mIconCache);
-  mWorkspace.addInScreen(newFolder,screen,cellXY[0],cellXY[1],1,1,isWorkspaceLocked());
+  mWorkspace.addInScreen(newFolder,screen,cellX,cellY,1,1,isWorkspaceLocked());
   return newFolder;
 }
