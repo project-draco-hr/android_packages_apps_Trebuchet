@@ -6,8 +6,8 @@
     args.requestCode=requestCode;
     args.intent=data;
     args.screen=mAddScreen;
-    args.cellX=mAddIntersectCellX;
-    args.cellY=mAddIntersectCellY;
+    args.cellX=mAddCellX;
+    args.cellY=mAddCellY;
     if (isWorkspaceLocked()) {
       sPendingAddList.add(args);
     }

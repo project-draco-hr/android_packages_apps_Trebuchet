@@ -1,6 +1,6 @@
 {
   mAddScreen=-1;
-  mAddIntersectCellX=-1;
-  mAddIntersectCellY=-1;
+  mAddCellX=-1;
+  mAddCellY=-1;
   mAddDropPosition=null;
 }

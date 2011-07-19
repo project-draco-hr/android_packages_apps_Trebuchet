@@ -1,4 +1,4 @@
 {
   showWorkspace(true);
-  showAddDialog(-1,-1);
+  showAddDialog();
 }

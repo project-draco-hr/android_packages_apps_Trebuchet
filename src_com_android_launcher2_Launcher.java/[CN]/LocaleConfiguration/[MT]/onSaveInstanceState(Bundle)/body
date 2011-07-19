@@ -5,8 +5,8 @@
   closeFolder();
   if (mAddScreen > -1 && mWaitingForResult) {
     outState.putInt(RUNTIME_STATE_PENDING_ADD_SCREEN,mAddScreen);
-    outState.putInt(RUNTIME_STATE_PENDING_ADD_CELL_X,mAddIntersectCellX);
-    outState.putInt(RUNTIME_STATE_PENDING_ADD_CELL_Y,mAddIntersectCellY);
+    outState.putInt(RUNTIME_STATE_PENDING_ADD_CELL_X,mAddCellX);
+    outState.putInt(RUNTIME_STATE_PENDING_ADD_CELL_Y,mAddCellY);
   }
   if (mFolderInfo != null && mWaitingForResult) {
     outState.putBoolean(RUNTIME_STATE_PENDING_FOLDER_RENAME,true);

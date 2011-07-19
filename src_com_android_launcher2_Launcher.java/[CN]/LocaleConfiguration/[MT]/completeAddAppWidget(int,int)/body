@@ -8,13 +8,18 @@
   final int[] cellXY=mTmpAddItemCellCoordinates;
   int[] touchXY=mAddDropPosition;
   boolean foundCellSpan=false;
-  if (touchXY != null) {
+  if (mAddCellX >= 0 && mAddCellY >= 0) {
+    cellXY[0]=mAddCellX;
+    cellXY[1]=mAddCellY;
+    foundCellSpan=true;
+  }
+ else   if (touchXY != null) {
     CellLayout screenLayout=(CellLayout)mWorkspace.getChildAt(screen);
     int[] result=screenLayout.findNearestVacantArea(touchXY[0],touchXY[1],spanXY[0],spanXY[1],cellXY);
     foundCellSpan=(result != null);
   }
  else {
-    foundCellSpan=layout.findCellForSpanThatIntersects(cellXY,spanXY[0],spanXY[1],mAddIntersectCellX,mAddIntersectCellY);
+    foundCellSpan=layout.findCellForSpan(cellXY,spanXY[0],spanXY[1]);
   }
   if (!foundCellSpan) {
     if (appWidgetId != -1) {

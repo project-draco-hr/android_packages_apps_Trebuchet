@@ -1,7 +1,11 @@
 {
   resetAddInfo();
   mAddScreen=screen;
-  mAddDropPosition=position;
+  mAddDropPosition=loc;
+  if (cell != null) {
+    mAddCellX=cell[0];
+    mAddCellY=cell[1];
+  }
   int appWidgetId=getAppWidgetHost().allocateAppWidgetId();
   AppWidgetManager.getInstance(this).bindAppWidgetId(appWidgetId,info.componentName);
   addAppWidgetImpl(appWidgetId,info);

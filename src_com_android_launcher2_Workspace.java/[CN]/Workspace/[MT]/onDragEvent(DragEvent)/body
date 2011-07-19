@@ -55,7 +55,7 @@ if (test != null) {
     if (widgets.size() == 1) {
       final AppWidgetProviderInfo widgetInfo=widgets.get(0).widgetInfo;
       final PendingAddWidgetInfo createInfo=new PendingAddWidgetInfo(widgetInfo,mimeType,data);
-      mLauncher.addAppWidgetFromDrop(createInfo,mCurrentPage,pos);
+      mLauncher.addAppWidgetFromDrop(createInfo,mCurrentPage,null,pos);
     }
  else {
       final InstallWidgetReceiver.WidgetListAdapter adapter=new InstallWidgetReceiver.WidgetListAdapter(mLauncher,mimeType,data,widgets,layout,mCurrentPage,pos);

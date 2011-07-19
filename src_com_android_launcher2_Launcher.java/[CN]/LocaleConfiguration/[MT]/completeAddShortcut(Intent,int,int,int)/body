@@ -3,13 +3,18 @@
   final CellLayout layout=(CellLayout)mWorkspace.getChildAt(screen);
   int[] touchXY=mAddDropPosition;
   boolean foundCellSpan=false;
-  if (touchXY != null) {
+  if (cellX >= 0 && cellY >= 0) {
+    cellXY[0]=cellX;
+    cellXY[1]=cellY;
+    foundCellSpan=true;
+  }
+ else   if (touchXY != null) {
     CellLayout screenLayout=(CellLayout)mWorkspace.getChildAt(screen);
     int[] result=screenLayout.findNearestVacantArea(touchXY[0],touchXY[1],1,1,cellXY);
     foundCellSpan=(result != null);
   }
  else {
-    foundCellSpan=layout.findCellForSpanThatIntersects(cellXY,1,1,intersectCellX,intersectCellY);
+    foundCellSpan=layout.findCellForSpan(cellXY,1,1);
   }
   if (!foundCellSpan) {
     showOutOfSpaceMessage();

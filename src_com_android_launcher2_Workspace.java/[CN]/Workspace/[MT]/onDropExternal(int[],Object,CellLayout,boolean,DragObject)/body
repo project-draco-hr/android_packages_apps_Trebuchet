@@ -18,14 +18,15 @@
   }
   if (info instanceof PendingAddItemInfo) {
     final PendingAddItemInfo pendingInfo=(PendingAddItemInfo)dragInfo;
+    mTargetCell=findNearestVacantArea(touchXY[0],touchXY[1],spanX,spanY,null,cellLayout,mTargetCell);
     Runnable onAnimationCompleteRunnable=new Runnable(){
       @Override public void run(){
 switch (pendingInfo.itemType) {
 case LauncherSettings.Favorites.ITEM_TYPE_APPWIDGET:
-          mLauncher.addAppWidgetFromDrop((PendingAddWidgetInfo)pendingInfo,screen,touchXY);
+          mLauncher.addAppWidgetFromDrop((PendingAddWidgetInfo)pendingInfo,screen,mTargetCell,null);
         break;
 case LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT:
-      mLauncher.processShortcutFromDrop(pendingInfo.componentName,screen,touchXY);
+      mLauncher.processShortcutFromDrop(pendingInfo.componentName,screen,mTargetCell,null);
     break;
 default :
   throw new IllegalStateException("Unknown item type: " + pendingInfo.itemType);
@@ -34,7 +35,6 @@ cellLayout.onDragExit();
 }
 }
 ;
-mTargetCell=findNearestVacantArea(touchXY[0],touchXY[1],spanX,spanY,null,cellLayout,mTargetCell);
 int loc[]=new int[2];
 cellLayout.cellToPoint(mTargetCell[0],mTargetCell[1],loc);
 RectF r=new RectF();
