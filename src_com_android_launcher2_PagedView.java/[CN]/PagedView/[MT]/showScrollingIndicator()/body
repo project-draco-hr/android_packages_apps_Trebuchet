@@ -4,6 +4,12 @@
   getScrollingIndicator();
   if (mScrollIndicator != null) {
     updateScrollingIndicatorPosition();
-    mScrollIndicator.animate().alpha(1f).setDuration(sScrollIndicatorFadeInDuration).start();
+    mScrollIndicator.setVisibility(View.VISIBLE);
+    if (mScrollIndicatorAnimator != null) {
+      mScrollIndicatorAnimator.cancel();
+    }
+    mScrollIndicatorAnimator=ObjectAnimator.ofFloat(mScrollIndicator,"alpha",1f);
+    mScrollIndicatorAnimator.setDuration(sScrollIndicatorFadeInDuration);
+    mScrollIndicatorAnimator.start();
   }
 }

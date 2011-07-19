@@ -37,16 +37,16 @@
         toView.setTranslationY(0.0f);
         toView.setVisibility(View.VISIBLE);
         toView.bringToFront();
-        if (!springLoaded && !LauncherApplication.isScreenLarge()) {
-          mWorkspace.hideScrollingIndicator(true);
-          mWorkspace.hideScrollIndicatorTrack();
-        }
       }
       @Override public void onAnimationEnd(      Animator animation){
         toView.setScaleX(1.0f);
         toView.setScaleY(1.0f);
         if (toView instanceof LauncherTransitionable) {
           ((LauncherTransitionable)toView).onLauncherTransitionEnd(scaleAnim);
+        }
+        if (!springLoaded && !LauncherApplication.isScreenLarge()) {
+          mWorkspace.hideScrollingIndicator(true);
+          mWorkspace.hideScrollIndicatorTrack();
         }
       }
     }
