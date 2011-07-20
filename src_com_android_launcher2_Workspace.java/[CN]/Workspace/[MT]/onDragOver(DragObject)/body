@@ -4,10 +4,11 @@
   CellLayout layout=null;
   ItemInfo item=(ItemInfo)d.dragInfo;
   if (item.spanX < 0 || item.spanY < 0)   throw new RuntimeException("Improper spans found");
+  mDragViewVisualCenter=getDragViewVisualCenter(d.x,d.y,d.xOffset,d.yOffset,d.dragView,mDragViewVisualCenter);
   if (isSmall()) {
     int left=d.x - d.xOffset;
     int top=d.y - d.yOffset;
-    layout=findMatchingPageForDragOver(d.dragView,left,top,d.xOffset,d.yOffset,true);
+    layout=findMatchingPageForDragOver(d.dragView,mDragViewVisualCenter[0],mDragViewVisualCenter[1],true);
     if (layout != mDragTargetLayout) {
       cleanupFolderCreation(d);
       if (mDragTargetLayout != null) {
@@ -51,7 +52,6 @@
   }
   if (mDragTargetLayout != null) {
     final View child=(mDragInfo == null) ? null : mDragInfo.cell;
-    mDragViewVisualCenter=getDragViewVisualCenter(d.x,d.y,d.xOffset,d.yOffset,d.dragView,mDragViewVisualCenter);
     if (mLauncher.isHotseatLayout(mDragTargetLayout)) {
       mapPointFromSelfToSibling(mLauncher.getHotseat(),mDragViewVisualCenter);
     }
