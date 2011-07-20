@@ -35,14 +35,16 @@
       ((LauncherTransitionable)fromView).onLauncherTransitionStart(alphaAnim);
     }
     alphaAnim.addListener(new AnimatorListenerAdapter(){
+      @Override public void onAnimationStart(      android.animation.Animator animation){
+        if (!springLoaded && !LauncherApplication.isScreenLarge()) {
+          mWorkspace.showScrollIndicatorTrack();
+          mWorkspace.flashScrollingIndicator();
+        }
+      }
       @Override public void onAnimationEnd(      Animator animation){
         fromView.setVisibility(View.GONE);
         if (fromView instanceof LauncherTransitionable) {
           ((LauncherTransitionable)fromView).onLauncherTransitionEnd(alphaAnim);
-          if (!springLoaded && !LauncherApplication.isScreenLarge()) {
-            mWorkspace.showScrollIndicatorTrack();
-            mWorkspace.flashScrollingIndicator();
-          }
         }
       }
     }

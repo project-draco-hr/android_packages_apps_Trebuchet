@@ -4,6 +4,29 @@
   getScrollingIndicator();
   if (mScrollIndicator != null) {
     updateScrollingIndicatorPosition();
-    mScrollIndicator.animate().alpha(0f).setDuration(immediately ? sScrollIndicatorFastFadeOutDuration : sScrollIndicatorFadeOutDuration).start();
+    if (mScrollIndicatorAnimator != null) {
+      mScrollIndicatorAnimator.cancel();
+    }
+    if (immediately) {
+      mScrollIndicator.setVisibility(View.GONE);
+      mScrollIndicator.setAlpha(0f);
+    }
+ else {
+      mScrollIndicatorAnimator=ObjectAnimator.ofFloat(mScrollIndicator,"alpha",0f);
+      mScrollIndicatorAnimator.setDuration(sScrollIndicatorFadeOutDuration);
+      mScrollIndicatorAnimator.addListener(new AnimatorListenerAdapter(){
+        private boolean cancelled=false;
+        @Override public void onAnimationCancel(        android.animation.Animator animation){
+          cancelled=true;
+        }
+        @Override public void onAnimationEnd(        Animator animation){
+          if (!cancelled) {
+            mScrollIndicator.setVisibility(View.GONE);
+          }
+        }
+      }
+);
+      mScrollIndicatorAnimator.start();
+    }
   }
 }
