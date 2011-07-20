@@ -5,11 +5,6 @@
     p.setColor(0xaaffffff);
     canvas.drawRect(0,0,getWidth(),getHeight(),p);
   }
-  if (getParent() != null) {
-    if (mOnDrawRunnable != null) {
-      mOnDrawRunnable.run();
-      mOnDrawRunnable=null;
-    }
-  }
+  mHasDrawn=true;
   canvas.drawBitmap(mBitmap,0.0f,0.0f,mPaint);
 }

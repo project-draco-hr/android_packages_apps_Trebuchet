@@ -1,4 +1,5 @@
 {
+  if (!mLauncher.isAllAppsCustomizeOpen() || mLauncher.getWorkspace().isSwitchingState())   return;
   if (v instanceof PagedViewIcon) {
     final ApplicationInfo appInfo=(ApplicationInfo)v.getTag();
     animateClickFeedback(v,new Runnable(){

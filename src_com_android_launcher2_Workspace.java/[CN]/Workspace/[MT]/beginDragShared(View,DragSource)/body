@@ -5,8 +5,7 @@
   final int bmpHeight=b.getHeight();
   mLauncher.getDragLayer().getLocationInDragLayer(child,mTempXY);
   final int dragLayerX=(int)mTempXY[0] + (child.getWidth() - bmpWidth) / 2;
-  int dragLayerY=(int)mTempXY[1] + (child.getHeight() - bmpHeight) / 2;
-  dragLayerY-=(child.getHeight() - b.getHeight()) / 2;
+  int dragLayerY=mTempXY[1] - bitmapPadding / 2;
   Rect dragRect=null;
   if (child instanceof BubbleTextView) {
     int iconSize=getResources().getDimensionPixelSize(R.dimen.app_icon_size);
@@ -14,6 +13,7 @@
     int left=(bmpWidth - iconSize) / 2;
     int right=left + iconSize;
     int bottom=top + iconSize;
+    dragLayerY+=top;
     dragRect=new Rect(left,top,right,bottom);
   }
  else   if (child instanceof FolderIcon) {

@@ -1,7 +1,6 @@
 {
   if (child != null) {
     LayoutParams lp=(LayoutParams)child.getLayoutParams();
-    lp.isDragging=false;
     lp.dropped=true;
     child.requestLayout();
   }

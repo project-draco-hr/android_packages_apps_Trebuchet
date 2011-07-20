@@ -4,8 +4,7 @@
     return;
   }
   mDragInfo=cellInfo;
-  CellLayout current=getParentCellLayoutForView(cellInfo.cell);
-  current.onDragChild(child);
+  child.setVisibility(GONE);
   child.clearFocus();
   child.setPressed(false);
   final Canvas canvas=new Canvas();

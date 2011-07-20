@@ -12,6 +12,8 @@
     mEmptyCell[0]=item.cellX;
     mEmptyCell[1]=item.cellY;
     mCurrentDragView=v;
+    mContent.removeView(mCurrentDragView);
+    mInfo.remove(mCurrentDragInfo);
   }
   return true;
 }

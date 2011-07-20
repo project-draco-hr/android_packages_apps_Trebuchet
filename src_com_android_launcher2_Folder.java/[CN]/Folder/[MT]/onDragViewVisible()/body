@@ -1,4 +1,0 @@
-{
-  mContent.removeView(mCurrentDragView);
-  mInfo.remove(mCurrentDragInfo);
-}

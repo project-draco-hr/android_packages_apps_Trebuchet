@@ -14,7 +14,12 @@
     si.cellX=lp.cellX=mEmptyCell[0];
     si.cellX=lp.cellY=mEmptyCell[1];
     mContent.addViewToCellLayout(mCurrentDragView,-1,(int)item.id,lp,true);
-    mLauncher.getDragLayer().animateViewIntoPosition(d.dragView,mCurrentDragView);
+    if (d.dragView.hasDrawn()) {
+      mLauncher.getDragLayer().animateViewIntoPosition(d.dragView,mCurrentDragView);
+    }
+ else {
+      mCurrentDragView.setVisibility(VISIBLE);
+    }
     mItemsInvalidated=true;
     setupContentDimension(getItemCount());
     mSuppressOnAdd=true;
