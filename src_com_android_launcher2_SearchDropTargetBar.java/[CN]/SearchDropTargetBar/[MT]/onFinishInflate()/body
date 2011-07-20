@@ -5,6 +5,8 @@
   mInfoDropTarget=(ButtonDropTarget)mDropTargetBar.findViewById(R.id.info_target);
   mDeleteDropTarget=(ButtonDropTarget)mDropTargetBar.findViewById(R.id.delete_target);
   mBarHeight=getResources().getDimensionPixelSize(R.dimen.qsb_bar_height);
+  mInfoDropTarget.setSearchDropTargetBar(this);
+  mDeleteDropTarget.setSearchDropTargetBar(this);
   boolean enableDropDownDropTargets=getResources().getBoolean(R.bool.config_useDropTargetDownTransition);
   mDropTargetBar.setAlpha(0f);
   ObjectAnimator fadeInAlphaAnim=ObjectAnimator.ofFloat(mDropTargetBar,"alpha",1f);
