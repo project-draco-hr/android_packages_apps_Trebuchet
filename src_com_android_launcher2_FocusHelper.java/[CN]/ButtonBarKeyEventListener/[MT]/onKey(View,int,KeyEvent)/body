@@ -1,3 +1,0 @@
-{
-  return FocusHelper.handleButtonBarButtonKeyEvent(v,keyCode,event);
-}
