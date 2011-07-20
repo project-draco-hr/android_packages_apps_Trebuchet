@@ -1,0 +1,23 @@
+{
+  DragLayer dragLayer=mLauncher.getDragLayer();
+  Rect from=new Rect();
+  Rect to=new Rect();
+  dragLayer.getViewRectRelativeToSelf(d.dragView,from);
+  dragLayer.getViewRectRelativeToSelf(mText,to);
+  int width=mDrawable.getIntrinsicWidth();
+  int height=mDrawable.getIntrinsicHeight();
+  to.set(to.left,to.top,to.left + width,to.bottom);
+  int xOffset=(int)-(d.dragView.getMeasuredWidth() - width) / 2;
+  int yOffset=(int)-(d.dragView.getMeasuredHeight() - height) / 2;
+  to.offset(xOffset,yOffset);
+  mSearchDropTargetBar.deferOnDragEnd();
+  Runnable onAnimationEndRunnable=new Runnable(){
+    @Override public void run(){
+      mSearchDropTargetBar.onDragEnd();
+      mLauncher.exitSpringLoadedDragMode();
+      completeDrop(d);
+    }
+  }
+;
+  dragLayer.animateView(d.dragView,from,to,0f,0.1f,DELETE_ANIMATION_DURATION,new DecelerateInterpolator(2),new AccelerateInterpolator(2),onAnimationEndRunnable,false);
+}

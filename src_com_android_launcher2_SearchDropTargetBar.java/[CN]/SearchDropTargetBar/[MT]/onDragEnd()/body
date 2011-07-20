@@ -1,8 +1,13 @@
 {
-  mDropTargetBarFadeInAnim.cancel();
-  mDropTargetBarFadeOutAnim.start();
-  if (!mIsSearchBarHidden) {
-    mQSBSearchBarFadeOutAnim.cancel();
-    mQSBSearchBarFadeInAnim.start();
+  if (!mDeferOnDragEnd) {
+    mDropTargetBarFadeInAnim.cancel();
+    mDropTargetBarFadeOutAnim.start();
+    if (!mIsSearchBarHidden) {
+      mQSBSearchBarFadeOutAnim.cancel();
+      mQSBSearchBarFadeInAnim.start();
+    }
+  }
+ else {
+    mDeferOnDragEnd=false;
   }
 }
