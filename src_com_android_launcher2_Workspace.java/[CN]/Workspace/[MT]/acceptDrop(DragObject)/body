@@ -3,6 +3,7 @@
     if (mDragTargetLayout == null) {
       return false;
     }
+    if (!transitionStateShouldAllowDrop())     return false;
     mDragViewVisualCenter=getDragViewVisualCenter(d.x,d.y,d.xOffset,d.yOffset,d.dragView,mDragViewVisualCenter);
     int spanX=1;
     int spanY=1;

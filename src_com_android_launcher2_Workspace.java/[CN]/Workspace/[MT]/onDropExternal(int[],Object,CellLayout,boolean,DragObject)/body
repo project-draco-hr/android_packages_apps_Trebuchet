@@ -40,7 +40,9 @@ int loc[]=new int[2];
 cellLayout.cellToPoint(mTargetCell[0],mTargetCell[1],loc);
 RectF r=new RectF();
 cellLayout.cellToRect(mTargetCell[0],mTargetCell[1],spanX,spanY,r);
+setFinalTransitionTransform(cellLayout);
 float cellLayoutScale=mLauncher.getDragLayer().getDescendantCoordRelativeToSelf(cellLayout,loc);
+resetTransitionTransform(cellLayout);
 float dragViewScale=r.width() / d.dragView.getMeasuredWidth();
 loc[0]-=(d.dragView.getMeasuredWidth() - cellLayoutScale * r.width()) / 2;
 loc[1]-=(d.dragView.getMeasuredHeight() - cellLayoutScale * r.height()) / 2;
@@ -85,7 +87,9 @@ CellLayout.LayoutParams lp=(CellLayout.LayoutParams)view.getLayoutParams();
 cellLayout.getChildrenLayout().measureChild(view);
 LauncherModel.addOrMoveItemInDatabase(mLauncher,info,container,screen,lp.cellX,lp.cellY);
 if (d.dragView != null) {
+setFinalTransitionTransform(cellLayout);
 mLauncher.getDragLayer().animateViewIntoPosition(d.dragView,view,exitSpringLoadedRunnable);
+resetTransitionTransform(cellLayout);
 }
 }
 }
