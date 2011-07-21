@@ -4,6 +4,7 @@
   final Workspace workspace=(Workspace)layout.getParent();
   final ViewGroup launcher=(ViewGroup)workspace.getParent();
   final ViewGroup tabs=(ViewGroup)launcher.findViewById(R.id.qsb_bar);
+  final ViewGroup hotseat=(ViewGroup)launcher.findViewById(R.id.hotseat);
   int iconIndex=parent.indexOfChild(v);
   int iconCount=parent.getChildCount();
   int pageIndex=workspace.indexOfChild(layout);
@@ -72,6 +73,9 @@ View newIcon=getClosestBubbleTextViewOnLine(layout,parent,v,1);
 if (newIcon != null) {
 newIcon.requestFocus();
 wasHandled=true;
+}
+ else if (hotseat != null) {
+hotseat.requestFocus();
 }
 }
 break;

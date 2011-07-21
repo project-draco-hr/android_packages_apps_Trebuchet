@@ -4,9 +4,12 @@
   LayoutInflater inflater=LayoutInflater.from(context);
   BubbleTextView allAppsButton=(BubbleTextView)inflater.inflate(R.layout.application,mContent,false);
   allAppsButton.setCompoundDrawablesWithIntrinsicBounds(null,context.getResources().getDrawable(R.drawable.apps_hotseat_button),null,null);
+  allAppsButton.setContentDescription(context.getString(R.string.all_apps_button_label));
   allAppsButton.setOnClickListener(new View.OnClickListener(){
     @Override public void onClick(    android.view.View v){
-      mLauncher.showAllApps(true);
+      if (mLauncher != null) {
+        mLauncher.showAllApps(true);
+      }
     }
   }
 );
