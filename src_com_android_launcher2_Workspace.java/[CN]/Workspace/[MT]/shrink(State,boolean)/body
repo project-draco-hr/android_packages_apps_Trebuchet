@@ -44,43 +44,30 @@
   }
   mAnimator=new AnimatorSet();
   final int childCount=getChildCount();
-  final float[] oldXs=new float[childCount];
-  final float[] oldYs=new float[childCount];
-  final float[] oldScaleXs=new float[childCount];
-  final float[] oldScaleYs=new float[childCount];
-  final float[] oldBackgroundAlphas=new float[childCount];
-  final float[] oldAlphas=new float[childCount];
-  final float[] oldRotationYs=new float[childCount];
-  final float[] newXs=new float[childCount];
-  final float[] newYs=new float[childCount];
-  final float[] newScaleXs=new float[childCount];
-  final float[] newScaleYs=new float[childCount];
-  final float[] newBackgroundAlphas=new float[childCount];
-  final float[] newAlphas=new float[childCount];
-  final float[] newRotationYs=new float[childCount];
+  initAnimationArrays();
   for (int i=0; i < screenCount; i++) {
     final CellLayout cl=(CellLayout)getChildAt(i);
     float rotation=(-i + 2) * WORKSPACE_ROTATION;
     float rotationScaleX=(float)(1.0f / Math.cos(Math.PI * rotation / 180.0f));
     float rotationScaleY=getYScaleForScreen(i);
-    oldAlphas[i]=cl.getAlpha();
-    newAlphas[i]=finalAlpha;
-    if (animated && (oldAlphas[i] != 0f || newAlphas[i] != 0f)) {
+    mOldAlphas[i]=cl.getAlpha();
+    mNewAlphas[i]=finalAlpha;
+    if (animated && (mOldAlphas[i] != 0f || mNewAlphas[i] != 0f)) {
       cl.buildChildrenLayer();
     }
     if (animated) {
-      oldXs[i]=cl.getX();
-      oldYs[i]=cl.getY();
-      oldScaleXs[i]=cl.getScaleX();
-      oldScaleYs[i]=cl.getScaleY();
-      oldBackgroundAlphas[i]=cl.getBackgroundAlpha();
-      oldRotationYs[i]=cl.getRotationY();
-      newXs[i]=x;
-      newYs[i]=y;
-      newScaleXs[i]=shrinkFactor * rotationScaleX * extraShrinkFactor;
-      newScaleYs[i]=shrinkFactor * rotationScaleY * extraShrinkFactor;
-      newBackgroundAlphas[i]=finalAlpha;
-      newRotationYs[i]=rotation;
+      mOldTranslationXs[i]=cl.getX();
+      mOldTranslationYs[i]=cl.getY();
+      mOldScaleXs[i]=cl.getScaleX();
+      mOldScaleYs[i]=cl.getScaleY();
+      mOldBackgroundAlphas[i]=cl.getBackgroundAlpha();
+      mOldRotationYs[i]=cl.getRotationY();
+      mNewTranslationXs[i]=x;
+      mNewTranslationYs[i]=y;
+      mNewScaleXs[i]=shrinkFactor * rotationScaleX * extraShrinkFactor;
+      mNewScaleYs[i]=shrinkFactor * rotationScaleY * extraShrinkFactor;
+      mNewBackgroundAlphas[i]=finalAlpha;
+      mNewRotationYs[i]=rotation;
     }
  else {
       cl.setX((int)x);
@@ -127,6 +114,7 @@ final float newHorizontalWallpaperOffset=0.5f;
 final float newVerticalWallpaperOffset=wallpaperOffset;
 animWithInterpolator.addUpdateListener(new LauncherAnimatorUpdateListener(){
 public void onAnimationUpdate(float a,float b){
+mTransitionProgress=b;
 if (b == 0f) {
 return;
 }
@@ -138,13 +126,13 @@ setVerticalWallpaperOffset(a * oldVerticalWallpaperOffset + b * newVerticalWallp
 for (int i=0; i < screenCount; i++) {
 final CellLayout cl=(CellLayout)getChildAt(i);
 cl.fastInvalidate();
-cl.setFastX(a * oldXs[i] + b * newXs[i]);
-cl.setFastY(a * oldYs[i] + b * newYs[i]);
-cl.setFastScaleX(a * oldScaleXs[i] + b * newScaleXs[i]);
-cl.setFastScaleY(a * oldScaleYs[i] + b * newScaleYs[i]);
-cl.setFastBackgroundAlpha(a * oldBackgroundAlphas[i] + b * newBackgroundAlphas[i]);
-cl.setFastAlpha(a * oldAlphas[i] + b * newAlphas[i]);
-cl.setFastRotationY(a * oldRotationYs[i] + b * newRotationYs[i]);
+cl.setFastX(a * mOldTranslationXs[i] + b * mNewTranslationXs[i]);
+cl.setFastY(a * mOldTranslationYs[i] + b * mNewTranslationYs[i]);
+cl.setFastScaleX(a * mOldScaleXs[i] + b * mNewScaleXs[i]);
+cl.setFastScaleY(a * mOldScaleYs[i] + b * mNewScaleYs[i]);
+cl.setFastBackgroundAlpha(a * mOldBackgroundAlphas[i] + b * mNewBackgroundAlphas[i]);
+cl.setFastAlpha(a * mOldAlphas[i] + b * mNewAlphas[i]);
+cl.setFastRotationY(a * mOldRotationYs[i] + b * mNewRotationYs[i]);
 }
 }
 }

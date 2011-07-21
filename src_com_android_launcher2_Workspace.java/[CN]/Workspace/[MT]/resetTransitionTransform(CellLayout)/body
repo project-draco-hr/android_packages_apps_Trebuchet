@@ -1,0 +1,15 @@
+{
+  if (isSwitchingState()) {
+    int index=indexOfChild(layout);
+    mCurrentScaleX=layout.getScaleX();
+    mCurrentScaleY=layout.getScaleY();
+    mCurrentTranslationX=layout.getTranslationX();
+    mCurrentTranslationY=layout.getTranslationY();
+    mCurrentRotationY=layout.getRotationY();
+    layout.setScaleX(mCurrentScaleX);
+    layout.setScaleY(mCurrentScaleY);
+    layout.setTranslationX(mCurrentTranslationX);
+    layout.setTranslationY(mCurrentTranslationY);
+    layout.setRotationY(mCurrentRotationY);
+  }
+}

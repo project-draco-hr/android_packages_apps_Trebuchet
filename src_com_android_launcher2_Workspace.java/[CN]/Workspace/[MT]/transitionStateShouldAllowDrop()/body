@@ -1,0 +1,3 @@
+{
+  return (!isSwitchingState() || mTransitionProgress > 0.5f);
+}
