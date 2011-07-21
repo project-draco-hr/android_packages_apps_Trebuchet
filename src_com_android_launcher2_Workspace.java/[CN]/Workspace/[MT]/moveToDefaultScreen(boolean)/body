@@ -1,12 +1,11 @@
 {
-  if (isSmall() || mIsSwitchingState) {
-    mLauncher.showWorkspace(animate,(CellLayout)getChildAt(mDefaultPage));
-  }
- else   if (animate) {
-    snapToPage(mDefaultPage);
-  }
+  if (!isSmall()) {
+    if (animate) {
+      snapToPage(mDefaultPage);
+    }
  else {
-    setCurrentPage(mDefaultPage);
+      setCurrentPage(mDefaultPage);
+    }
   }
   getChildAt(mDefaultPage).requestFocus();
 }

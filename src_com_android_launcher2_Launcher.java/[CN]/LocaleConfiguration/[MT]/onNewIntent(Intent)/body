@@ -4,11 +4,11 @@
     closeSystemDialogs();
     closeFolder();
     boolean alreadyOnHome=((intent.getFlags() & Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT) != Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
-    mWorkspace.unshrink(alreadyOnHome);
     mWorkspace.exitWidgetResizeMode();
     if (alreadyOnHome && mState == State.WORKSPACE && !mWorkspace.isTouchActive()) {
       mWorkspace.moveToDefaultScreen(true);
     }
+    exitSpringLoadedDragMode();
     showWorkspace(alreadyOnHome);
     final View v=getWindow().peekDecorView();
     if (v != null && v.getWindowToken() != null) {

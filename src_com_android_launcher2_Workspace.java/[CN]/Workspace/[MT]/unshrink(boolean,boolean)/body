@@ -14,6 +14,8 @@
       mAnimator.cancel();
     }
     mAnimator=new AnimatorSet();
+    mShrinkAnimationEnabled=false;
+    mUnshrinkAnimationEnabled=true;
     final int screenCount=getChildCount();
     initAnimationArrays();
     final int duration=getResources().getInteger(R.integer.config_workspaceUnshrinkTime);
@@ -98,6 +100,7 @@ final float newHorizontalWallpaperOffset=enableWallpaperEffects ? wallpaperOffse
 final float newVerticalWallpaperOffset=enableWallpaperEffects ? 0.5f : 0;
 animWithInterpolator.addUpdateListener(new LauncherAnimatorUpdateListener(){
 public void onAnimationUpdate(float a,float b){
+  if (!mUnshrinkAnimationEnabled)   return;
   mTransitionProgress=b;
   if (b == 0f) {
     return;
@@ -125,6 +128,7 @@ ValueAnimator rotationAnim=ValueAnimator.ofFloat(0f,1f).setDuration(duration);
 rotationAnim.setInterpolator(new DecelerateInterpolator(2.0f));
 rotationAnim.addUpdateListener(new LauncherAnimatorUpdateListener(){
 public void onAnimationUpdate(float a,float b){
+  if (!mUnshrinkAnimationEnabled)   return;
   if (b == 0f) {
     return;
   }

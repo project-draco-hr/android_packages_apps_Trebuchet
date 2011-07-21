@@ -43,6 +43,8 @@
     mAnimator.cancel();
   }
   mAnimator=new AnimatorSet();
+  mUnshrinkAnimationEnabled=false;
+  mShrinkAnimationEnabled=true;
   final int childCount=getChildCount();
   initAnimationArrays();
   for (int i=0; i < screenCount; i++) {
@@ -114,6 +116,7 @@ final float newHorizontalWallpaperOffset=0.5f;
 final float newVerticalWallpaperOffset=wallpaperOffset;
 animWithInterpolator.addUpdateListener(new LauncherAnimatorUpdateListener(){
 public void onAnimationUpdate(float a,float b){
+if (!mShrinkAnimationEnabled) return;
 mTransitionProgress=b;
 if (b == 0f) {
 return;
