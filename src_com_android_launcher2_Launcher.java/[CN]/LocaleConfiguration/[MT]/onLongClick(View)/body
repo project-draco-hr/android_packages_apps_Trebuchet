@@ -10,7 +10,7 @@
   }
   resetAddInfo();
   CellLayout.CellInfo longClickCellInfo=(CellLayout.CellInfo)v.getTag();
-  if (longClickCellInfo == null || !longClickCellInfo.valid) {
+  if (longClickCellInfo == null) {
     return true;
   }
   final View itemUnderLongClick=longClickCellInfo.cell;

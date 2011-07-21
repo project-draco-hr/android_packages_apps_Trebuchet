@@ -13,7 +13,6 @@
     cellInfo.cellY=-1;
     cellInfo.spanX=0;
     cellInfo.spanY=0;
-    cellInfo.valid=false;
     setTag(cellInfo);
   }
   return false;
