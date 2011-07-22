@@ -1,7 +1,0 @@
-{
-  if (mScrollTrack == null) {
-    ViewGroup parent=(ViewGroup)getParent();
-    mScrollTrack=(ImageView)(parent.findViewById(R.id.paged_view_indicator_track));
-  }
-  return mScrollTrack;
-}

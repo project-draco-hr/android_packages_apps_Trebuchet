@@ -46,7 +46,6 @@
         }
         if (!springLoaded && !LauncherApplication.isScreenLarge()) {
           mWorkspace.hideScrollingIndicator(true);
-          mWorkspace.hideScrollIndicatorTrack();
         }
       }
     }
@@ -69,7 +68,6 @@
       ((LauncherTransitionable)toView).onLauncherTransitionEnd(null);
       if (!springLoaded && !LauncherApplication.isScreenLarge()) {
         mWorkspace.hideScrollingIndicator(true);
-        mWorkspace.hideScrollIndicatorTrack();
       }
     }
   }
