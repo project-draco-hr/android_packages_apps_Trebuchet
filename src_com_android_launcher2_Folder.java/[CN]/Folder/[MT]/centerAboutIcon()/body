@@ -1,7 +1,7 @@
 {
   DragLayer.LayoutParams lp=(DragLayer.LayoutParams)getLayoutParams();
   int width=getPaddingLeft() + getPaddingRight() + mContent.getDesiredWidth();
-  int height=getPaddingTop() + mContent.getDesiredHeight() + mFolderNameHeight;
+  int height=getPaddingTop() + getPaddingBottom() + mContent.getDesiredHeight()+ mFolderNameHeight;
   DragLayer parent=(DragLayer)mLauncher.findViewById(R.id.drag_layer);
   parent.getDescendantRectRelativeToSelf(mFolderIcon,mTempRect);
   int centerX=mTempRect.centerX();

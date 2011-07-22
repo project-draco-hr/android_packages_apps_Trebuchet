@@ -1,6 +1,6 @@
 {
   int width=getPaddingLeft() + getPaddingRight() + mContent.getDesiredWidth();
-  int height=getPaddingTop() + mContent.getDesiredHeight() + mFolderNameHeight;
+  int height=getPaddingTop() + getPaddingBottom() + mContent.getDesiredHeight()+ mFolderNameHeight;
   int contentWidthSpec=MeasureSpec.makeMeasureSpec(mContent.getDesiredWidth(),MeasureSpec.EXACTLY);
   int contentHeightSpec=MeasureSpec.makeMeasureSpec(mContent.getDesiredHeight(),MeasureSpec.EXACTLY);
   mContent.measure(contentWidthSpec,contentHeightSpec);
