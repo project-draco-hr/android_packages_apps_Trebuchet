@@ -1,12 +1,13 @@
 {
   ImageView button=(ImageView)findViewById(buttonId);
   Drawable toolbarIcon=getExternalPackageToolbarIcon(activityName);
-  if (toolbarIcon == null) {
-    button.setImageResource(fallbackDrawableId);
-    return null;
-  }
+  if (button != null) {
+    if (toolbarIcon == null) {
+      button.setImageResource(fallbackDrawableId);
+    }
  else {
-    button.setImageDrawable(toolbarIcon);
-    return toolbarIcon.getConstantState();
+      button.setImageDrawable(toolbarIcon);
+    }
   }
+  return toolbarIcon != null ? toolbarIcon.getConstantState() : null;
 }
