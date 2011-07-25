@@ -1,7 +1,2 @@
 {
-  if (!isScrollingIndicatorEnabled())   return;
-  getScrollingIndicatorTrack();
-  if (mScrollTrack != null) {
-    mScrollTrack.setVisibility(View.GONE);
-  }
 }

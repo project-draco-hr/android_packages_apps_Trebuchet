@@ -37,7 +37,6 @@
     alphaAnim.addListener(new AnimatorListenerAdapter(){
       @Override public void onAnimationStart(      android.animation.Animator animation){
         if (!springLoaded && !LauncherApplication.isScreenLarge()) {
-          mWorkspace.showScrollIndicatorTrack();
           mWorkspace.flashScrollingIndicator();
         }
       }
@@ -58,7 +57,6 @@
       ((LauncherTransitionable)fromView).onLauncherTransitionStart(null);
       ((LauncherTransitionable)fromView).onLauncherTransitionEnd(null);
       if (!springLoaded && !LauncherApplication.isScreenLarge()) {
-        mWorkspace.showScrollIndicatorTrack();
         mWorkspace.flashScrollingIndicator();
       }
     }
