@@ -15,5 +15,6 @@
   int heightSpec=MeasureSpec.makeMeasureSpec(getMeasuredHeight(),MeasureSpec.AT_MOST);
   mWidgetSpacingLayout.measure(widthSpec,heightSpec);
   mContentWidth=mWidgetSpacingLayout.getContentWidth();
-  invalidatePageData();
+  invalidatePageData(Math.max(0,mRestorePage));
+  mRestorePage=-1;
 }

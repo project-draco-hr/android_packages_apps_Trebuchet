@@ -31,5 +31,7 @@
       mAppsCustomizeContent.setContentType(mAppsCustomizeTabHost.getContentTypeForTabTag(curTab));
       mAppsCustomizeTabHost.setCurrentTabByTag(curTab);
     }
+    int currentIndex=savedState.getInt("apps_customize_currentIndex");
+    mAppsCustomizeContent.restorePageForIndex(currentIndex);
   }
 }
