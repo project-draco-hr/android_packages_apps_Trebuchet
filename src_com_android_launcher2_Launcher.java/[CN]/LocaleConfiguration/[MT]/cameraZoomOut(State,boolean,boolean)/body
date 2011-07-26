@@ -46,6 +46,7 @@
         }
         if (!springLoaded && !LauncherApplication.isScreenLarge()) {
           mWorkspace.hideScrollingIndicator(true);
+          mWorkspace.hideDockDivider(true);
         }
       }
     }
@@ -68,6 +69,7 @@
       ((LauncherTransitionable)toView).onLauncherTransitionEnd(null,false);
       if (!springLoaded && !LauncherApplication.isScreenLarge()) {
         mWorkspace.hideScrollingIndicator(true);
+        mWorkspace.hideDockDivider(true);
       }
     }
   }

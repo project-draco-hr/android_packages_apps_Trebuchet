@@ -1,0 +1,30 @@
+{
+  final ViewGroup parent=(ViewGroup)getParent();
+  final View divider=(ImageView)(parent.findViewById(R.id.dock_divider));
+  if (divider != null) {
+    if (mDockDividerAnimator != null) {
+      mDockDividerAnimator.cancel();
+    }
+    if (immediately) {
+      divider.setVisibility(View.GONE);
+      divider.setAlpha(0f);
+    }
+ else {
+      mDockDividerAnimator=ObjectAnimator.ofFloat(divider,"alpha",0f);
+      mDockDividerAnimator.setDuration(sScrollIndicatorFadeOutDuration);
+      mDockDividerAnimator.addListener(new AnimatorListenerAdapter(){
+        private boolean cancelled=false;
+        @Override public void onAnimationCancel(        android.animation.Animator animation){
+          cancelled=true;
+        }
+        @Override public void onAnimationEnd(        android.animation.Animator animation){
+          if (!cancelled) {
+            divider.setVisibility(View.GONE);
+          }
+        }
+      }
+);
+      mDockDividerAnimator.start();
+    }
+  }
+}
