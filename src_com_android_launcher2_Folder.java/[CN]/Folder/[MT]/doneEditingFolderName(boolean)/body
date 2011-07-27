@@ -4,5 +4,6 @@
   LauncherModel.updateItemInDatabase(mLauncher,mInfo);
   mFolderName.setCursorVisible(false);
   mFolderName.clearFocus();
+  Selection.setSelection((Spannable)mFolderName.getText(),0,0);
   mIsEditingName=false;
 }
