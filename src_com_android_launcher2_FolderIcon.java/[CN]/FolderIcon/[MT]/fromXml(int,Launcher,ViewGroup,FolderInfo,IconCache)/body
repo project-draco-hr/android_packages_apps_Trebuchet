@@ -18,5 +18,9 @@
   icon.mFolder=folder;
   icon.mFolderRingAnimator=new FolderRingAnimator(launcher,icon);
   folderInfo.addListener(icon);
+  Resources res=launcher.getResources();
+  if (sSharedFolderLeaveBehind == null) {
+    sSharedFolderLeaveBehind=res.getDrawable(R.drawable.portal_ring_rest);
+  }
   return icon;
 }
