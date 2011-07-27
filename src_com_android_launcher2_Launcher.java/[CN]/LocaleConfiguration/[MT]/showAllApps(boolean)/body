@@ -7,5 +7,6 @@
   mState=State.APPS_CUSTOMIZE;
   mUserPresent=false;
   updateRunning();
+  closeFolder();
   getWindow().getDecorView().sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_SELECTED);
 }

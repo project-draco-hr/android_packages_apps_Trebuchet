@@ -1,4 +1,5 @@
 {
+  if (mWorkspace.isSwitchingState())   return;
   Object tag=v.getTag();
   if (tag instanceof ShortcutInfo) {
     final Intent intent=((ShortcutInfo)tag).intent;
