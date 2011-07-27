@@ -104,4 +104,17 @@
     d.draw(canvas);
     canvas.restore();
   }
+  if (mFolderLeaveBehindCell[0] >= 0 && mFolderLeaveBehindCell[1] >= 0) {
+    Drawable d=FolderIcon.sSharedFolderLeaveBehind;
+    int width=d.getIntrinsicWidth();
+    int height=d.getIntrinsicHeight();
+    cellToPoint(mFolderLeaveBehindCell[0],mFolderLeaveBehindCell[1],mTempLocation);
+    int centerX=mTempLocation[0] + mCellWidth / 2;
+    int centerY=mTempLocation[1] + FolderRingAnimator.sPreviewSize / 2;
+    canvas.save();
+    canvas.translate(centerX - width / 2,centerY - width / 2);
+    d.setBounds(0,0,width,height);
+    d.draw(canvas);
+    canvas.restore();
+  }
 }

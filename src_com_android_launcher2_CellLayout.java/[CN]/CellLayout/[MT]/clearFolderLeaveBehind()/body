@@ -1,0 +1,5 @@
+{
+  mFolderLeaveBehindCell[0]=-1;
+  mFolderLeaveBehindCell[1]=-1;
+  invalidate();
+}
