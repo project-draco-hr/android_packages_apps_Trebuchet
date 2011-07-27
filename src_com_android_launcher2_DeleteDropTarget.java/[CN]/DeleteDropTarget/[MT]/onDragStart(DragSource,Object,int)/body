@@ -15,9 +15,9 @@
   }
   mActive=isVisible;
   mDrawable.resetTransition();
-  mText.setTextColor(mOriginalTextColor);
-  setVisibility(isVisible ? View.VISIBLE : View.GONE);
-  if (mText.getText().length() > 0) {
-    mText.setText(isUninstall ? R.string.delete_target_uninstall_label : R.string.delete_target_label);
+  setTextColor(mOriginalTextColor);
+  ((ViewGroup)getParent()).setVisibility(isVisible ? View.VISIBLE : View.GONE);
+  if (getText().length() > 0) {
+    setText(isUninstall ? R.string.delete_target_uninstall_label : R.string.delete_target_label);
   }
 }
