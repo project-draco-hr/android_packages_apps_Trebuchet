@@ -2,7 +2,6 @@
   final int bitmapPadding=HolographicOutlineHelper.MAX_OUTER_BLUR_RADIUS;
   final Bitmap b=createDragBitmap(child,new Canvas(),bitmapPadding);
   final int bmpWidth=b.getWidth();
-  final int bmpHeight=b.getHeight();
   mLauncher.getDragLayer().getLocationInDragLayer(child,mTempXY);
   final int dragLayerX=(int)mTempXY[0] + (child.getWidth() - bmpWidth) / 2;
   int dragLayerY=mTempXY[1] - bitmapPadding / 2;

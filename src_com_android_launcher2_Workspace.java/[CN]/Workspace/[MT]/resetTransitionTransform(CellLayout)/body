@@ -1,6 +1,5 @@
 {
   if (isSwitchingState()) {
-    int index=indexOfChild(layout);
     mCurrentScaleX=layout.getScaleX();
     mCurrentScaleY=layout.getScaleY();
     mCurrentTranslationX=layout.getTranslationX();
