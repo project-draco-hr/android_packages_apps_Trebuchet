@@ -3,7 +3,10 @@
   mContentIsRefreshable=false;
   setDataIsReady();
   if (!LauncherApplication.isScreenLarge()) {
-    mFadeInAdjacentScreens=false;
+    mCenterPagesVertically=false;
+    if (!LauncherApplication.isScreenLandscape(context)) {
+      mFadeInAdjacentScreens=false;
+    }
   }
   mWallpaperManager=WallpaperManager.getInstance(context);
   int cellCountX=DEFAULT_CELL_COUNT_X;

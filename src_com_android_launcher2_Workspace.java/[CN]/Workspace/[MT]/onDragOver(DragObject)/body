@@ -1,12 +1,21 @@
 {
   if (mInScrollArea)   return;
   if (mIsSwitchingState)   return;
+  Rect r=new Rect();
   CellLayout layout=null;
   ItemInfo item=(ItemInfo)d.dragInfo;
   if (item.spanX < 0 || item.spanY < 0)   throw new RuntimeException("Improper spans found");
   mDragViewVisualCenter=getDragViewVisualCenter(d.x,d.y,d.xOffset,d.yOffset,d.dragView,mDragViewVisualCenter);
   if (isSmall()) {
-    layout=findMatchingPageForDragOver(d.dragView,mDragViewVisualCenter[0],mDragViewVisualCenter[1],true);
+    if (mLauncher.getHotseat() != null) {
+      mLauncher.getHotseat().getHitRect(r);
+      if (r.contains(d.x,d.y)) {
+        layout=mLauncher.getHotseat().getLayout();
+      }
+    }
+    if (layout == null) {
+      layout=findMatchingPageForDragOver(d.dragView,mDragViewVisualCenter[0],mDragViewVisualCenter[1],true);
+    }
     if (layout != mDragTargetLayout) {
       cleanupFolderCreation(d);
       if (mDragTargetLayout != null) {
@@ -23,12 +32,16 @@
       }
       boolean isInSpringLoadedMode=(mState == State.SPRING_LOADED);
       if (isInSpringLoadedMode) {
-        mSpringLoadedDragController.setAlarm(mDragTargetLayout);
+        if (mLauncher.isHotseatLayout(layout)) {
+          mSpringLoadedDragController.cancel();
+        }
+ else {
+          mSpringLoadedDragController.setAlarm(mDragTargetLayout);
+        }
       }
     }
   }
  else {
-    Rect r=new Rect();
     if (mLauncher.getHotseat() != null) {
       mLauncher.getHotseat().getHitRect(r);
       if (r.contains(d.x,d.y)) {

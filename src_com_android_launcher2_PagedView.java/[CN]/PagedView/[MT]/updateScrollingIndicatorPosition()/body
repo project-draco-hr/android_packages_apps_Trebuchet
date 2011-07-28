@@ -2,7 +2,7 @@
   if (!isScrollingIndicatorEnabled())   return;
   int numPages=getChildCount();
   int pageWidth=getMeasuredWidth();
-  int maxPageWidth=(numPages * getMeasuredWidth()) + ((numPages - 1) * mPageSpacing);
+  int maxPageWidth=(numPages * getChildWidth(0)) + ((numPages - 1) * mPageSpacing);
   int trackWidth=pageWidth - mScrollIndicatorPaddingLeft - mScrollIndicatorPaddingRight;
   int indicatorWidth=mScrollIndicator.getMeasuredWidth() - mScrollIndicator.getPaddingLeft() - mScrollIndicator.getPaddingRight();
   float offset=(float)getScrollX() / maxPageWidth;

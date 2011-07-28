@@ -1,3 +1,4 @@
 {
-  return (getMeasuredWidth() - getChildWidth(index)) / 2;
+  int padding=mPaddingLeft + mPaddingRight;
+  return mPaddingLeft + (getMeasuredWidth() - padding - getChildWidth(index)) / 2;
 }

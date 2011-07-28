@@ -6,6 +6,7 @@
   final View toView=mAppsCustomizeTabHost;
   setPivotsForZoom(toView,toState,scale);
   mWorkspace.shrink(Workspace.State.SMALL,animated);
+  hideHotseat(animated);
   if (animated) {
     final ValueAnimator scaleAnim=ValueAnimator.ofFloat(0f,1f).setDuration(duration);
     scaleAnim.setInterpolator(new Workspace.ZoomOutInterpolator());

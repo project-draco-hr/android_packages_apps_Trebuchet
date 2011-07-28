@@ -7,6 +7,7 @@
   if (!springLoaded) {
     mWorkspace.unshrink(animated);
   }
+  showHotseat(animated);
   if (animated) {
     if (mStateAnimation != null)     mStateAnimation.cancel();
     mStateAnimation=new AnimatorSet();

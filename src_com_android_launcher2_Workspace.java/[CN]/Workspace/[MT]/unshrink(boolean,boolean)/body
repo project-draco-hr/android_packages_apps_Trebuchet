@@ -28,17 +28,19 @@
       final CellLayout cl=(CellLayout)getChildAt(i);
       float finalAlphaValue=0f;
       float rotation=0f;
+      if (mFadeInAdjacentScreens) {
+        finalAlphaValue=(i == mCurrentPage) ? 1f : 0f;
+      }
+ else {
+        finalAlphaValue=1f;
+      }
       if (LauncherApplication.isScreenLarge()) {
-        finalAlphaValue=(i == mCurrentPage) ? 1.0f : 0.0f;
         if (i < mCurrentPage) {
           rotation=WORKSPACE_ROTATION;
         }
  else         if (i > mCurrentPage) {
           rotation=-WORKSPACE_ROTATION;
         }
-      }
- else {
-        finalAlphaValue=1f;
       }
       float finalAlphaMultiplierValue=1f;
       float translation=0f;
@@ -125,6 +127,12 @@ public void onAnimationUpdate(float a,float b){
     cl.setFastBackgroundAlpha(a * mOldBackgroundAlphas[i] + b * mNewBackgroundAlphas[i]);
     cl.setBackgroundAlphaMultiplier(a * mOldBackgroundAlphaMultipliers[i] + b * mNewBackgroundAlphaMultipliers[i]);
     cl.setFastAlpha(a * mOldAlphas[i] + b * mNewAlphas[i]);
+  }
+  if (mLauncher.getHotseat() != null) {
+    View hotseat=mLauncher.getHotseat().getLayout();
+    hotseat.fastInvalidate();
+    hotseat.setFastScaleX(a * mOldScaleXs[0] + b * mNewScaleXs[0]);
+    hotseat.setFastScaleY(a * mOldScaleXs[0] + b * mNewScaleXs[0]);
   }
 }
 }

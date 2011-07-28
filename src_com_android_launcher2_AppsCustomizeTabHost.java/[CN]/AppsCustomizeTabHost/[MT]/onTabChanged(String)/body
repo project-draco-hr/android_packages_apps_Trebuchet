@@ -15,7 +15,9 @@
         anim.setDuration(duration);
         anim.addListener(new AnimatorListenerAdapter(){
           @Override public void onAnimationEnd(          android.animation.Animator animation){
-            mAppsCustomizePane.flashScrollingIndicator();
+            if (!LauncherApplication.isScreenLarge()) {
+              mAppsCustomizePane.flashScrollingIndicator();
+            }
           }
         }
 );

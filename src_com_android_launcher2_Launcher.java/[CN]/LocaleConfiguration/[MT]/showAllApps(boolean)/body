@@ -3,7 +3,6 @@
   cameraZoomOut(State.APPS_CUSTOMIZE,animated,false);
   mAppsCustomizeTabHost.requestFocus();
   mSearchDeleteBar.hideSearchBar(animated);
-  hideHotseat(animated);
   mState=State.APPS_CUSTOMIZE;
   mUserPresent=false;
   updateRunning();
