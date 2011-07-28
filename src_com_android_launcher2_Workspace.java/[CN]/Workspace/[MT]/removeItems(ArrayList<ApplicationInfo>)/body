@@ -1,5 +1,4 @@
 {
-  final int screenCount=getChildCount();
   final AppWidgetManager widgets=AppWidgetManager.getInstance(getContext());
   final HashSet<String> packageNames=new HashSet<String>();
   final int appCount=apps.size();

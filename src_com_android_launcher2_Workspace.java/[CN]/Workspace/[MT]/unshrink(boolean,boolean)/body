@@ -1,4 +1,9 @@
 {
+  if (mFirstLayout) {
+    mSwitchStateAfterFirstLayout=false;
+    mStateAfterFirstLayout=State.NORMAL;
+    return;
+  }
   if (isSmall()) {
     float finalScaleFactor=1.0f;
     float finalBackgroundAlpha=0.0f;

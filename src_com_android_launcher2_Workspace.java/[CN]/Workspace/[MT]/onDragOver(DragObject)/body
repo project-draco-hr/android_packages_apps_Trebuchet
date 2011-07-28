@@ -6,8 +6,6 @@
   if (item.spanX < 0 || item.spanY < 0)   throw new RuntimeException("Improper spans found");
   mDragViewVisualCenter=getDragViewVisualCenter(d.x,d.y,d.xOffset,d.yOffset,d.dragView,mDragViewVisualCenter);
   if (isSmall()) {
-    int left=d.x - d.xOffset;
-    int top=d.y - d.yOffset;
     layout=findMatchingPageForDragOver(d.dragView,mDragViewVisualCenter[0],mDragViewVisualCenter[1],true);
     if (layout != mDragTargetLayout) {
       cleanupFolderCreation(d);
