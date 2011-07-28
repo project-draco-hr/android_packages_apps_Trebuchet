@@ -5,7 +5,7 @@
   textView.setTag(item);
   textView.setOnClickListener(this);
   textView.setOnLongClickListener(this);
-  if (mContent.getChildAt(item.cellX,item.cellY) != null) {
+  if (mContent.getChildAt(item.cellX,item.cellY) != null || item.cellX < 0 || item.cellY < 0) {
     if (!findAndSetEmptyCells(item)) {
       return false;
     }

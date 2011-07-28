@@ -1,0 +1,13 @@
+{
+  values.put(Favorites.ITEM_TYPE,Favorites.ITEM_TYPE_FOLDER);
+  values.put(Favorites.SPANX,1);
+  values.put(Favorites.SPANY,1);
+  long id=generateNewId();
+  values.put(Favorites._ID,id);
+  if (dbInsertAndCheck(this,db,TABLE_FAVORITES,null,values) <= 0) {
+    return -1;
+  }
+ else {
+    return id;
+  }
+}

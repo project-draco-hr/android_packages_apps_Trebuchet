@@ -10,12 +10,13 @@
   }
  catch (  URISyntaxException e) {
     Log.w(TAG,"Shortcut has malformed uri: " + uri);
-    return false;
+    return -1;
   }
   if (iconResId == 0 || titleResId == 0) {
     Log.w(TAG,"Shortcut is missing title or icon resource ID");
-    return false;
+    return -1;
   }
+  long id=generateNewId();
   intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
   values.put(Favorites.INTENT,intent.toUri(0));
   values.put(Favorites.TITLE,r.getString(titleResId));
@@ -25,7 +26,9 @@
   values.put(Favorites.ICON_TYPE,Favorites.ICON_TYPE_RESOURCE);
   values.put(Favorites.ICON_PACKAGE,mContext.getPackageName());
   values.put(Favorites.ICON_RESOURCE,r.getResourceName(iconResId));
-  values.put(Favorites._ID,generateNewId());
-  dbInsertAndCheck(this,db,TABLE_FAVORITES,null,values);
-  return true;
+  values.put(Favorites._ID,id);
+  if (dbInsertAndCheck(this,db,TABLE_FAVORITES,null,values) < 0) {
+    return -1;
+  }
+  return id;
 }

@@ -33,9 +33,9 @@
         values.put(LauncherSettings.Favorites.SCREEN,screen);
         values.put(LauncherSettings.Favorites.CELLX,x);
         values.put(LauncherSettings.Favorites.CELLY,y);
-        System.out.println("Adding item to container: " + container);
         if (TAG_FAVORITE.equals(name)) {
-          added=addAppShortcut(db,values,a,packageManager,intent);
+          long id=addAppShortcut(db,values,a,packageManager,intent);
+          added=id >= 0;
         }
  else         if (TAG_SEARCH.equals(name)) {
           added=addSearchWidget(db,values);
@@ -47,7 +47,55 @@
           added=addAppWidget(db,values,a,packageManager);
         }
  else         if (TAG_SHORTCUT.equals(name)) {
-          added=addUriShortcut(db,values,a);
+          long id=addUriShortcut(db,values,a);
+          added=id >= 0;
+        }
+ else         if (TAG_FOLDER.equals(name)) {
+          String title;
+          int titleResId=a.getResourceId(R.styleable.Favorite_title,-1);
+          if (titleResId != -1) {
+            title=mContext.getResources().getString(titleResId);
+          }
+ else {
+            title=mContext.getResources().getString(R.string.folder_name);
+          }
+          values.put(LauncherSettings.Favorites.TITLE,title);
+          long folderId=addFolder(db,values);
+          added=folderId >= 0;
+          ArrayList<Long> folderItems=new ArrayList<Long>();
+          int folderDepth=parser.getDepth();
+          while ((type=parser.next()) != XmlPullParser.END_TAG || parser.getDepth() > folderDepth) {
+            if (type != XmlPullParser.START_TAG) {
+              continue;
+            }
+            final String folder_item_name=parser.getName();
+            TypedArray ar=mContext.obtainStyledAttributes(attrs,R.styleable.Favorite);
+            values.clear();
+            values.put(LauncherSettings.Favorites.CONTAINER,folderId);
+            if (TAG_FAVORITE.equals(folder_item_name) && folderId >= 0) {
+              long id=addAppShortcut(db,values,ar,packageManager,intent);
+              if (id >= 0) {
+                folderItems.add(id);
+              }
+            }
+ else             if (TAG_SHORTCUT.equals(folder_item_name) && folderId >= 0) {
+              long id=addUriShortcut(db,values,ar);
+              if (id >= 0) {
+                folderItems.add(id);
+              }
+            }
+ else {
+              throw new RuntimeException("Folders can " + "contain only shortcuts");
+            }
+            ar.recycle();
+          }
+          if (folderItems.size() < 2 && folderId >= 0) {
+            deleteId(db,folderId);
+            if (folderItems.size() > 0) {
+              deleteId(db,folderItems.get(0));
+            }
+            added=false;
+          }
         }
       }
       if (added)       i++;

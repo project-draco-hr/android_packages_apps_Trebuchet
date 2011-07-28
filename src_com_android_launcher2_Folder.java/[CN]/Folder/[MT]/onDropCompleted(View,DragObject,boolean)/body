@@ -2,16 +2,15 @@
   mCurrentDragInfo=null;
   mCurrentDragView=null;
   mSuppressOnAdd=false;
-  if (!success) {
-    if (d.dragView != null) {
-      if (target instanceof CellLayout) {
-      }
-    }
+  if (target != this) {
+    mOnExitAlarm.cancelAlarm();
+    completeDragExit();
   }
+  if (!success) {
+    if (!mDestroyed) {
+      mFolderIcon.onDrop(d);
+    }
  else {
-    if (target != this) {
-      mOnExitAlarm.cancelAlarm();
-      completeDragExit();
     }
   }
 }

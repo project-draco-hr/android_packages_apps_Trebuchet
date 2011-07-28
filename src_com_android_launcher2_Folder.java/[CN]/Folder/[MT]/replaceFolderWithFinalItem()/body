@@ -1,5 +1,6 @@
 {
   ItemInfo finalItem=null;
+  mDestroyed=true;
   if (getItemCount() == 1) {
     finalItem=mInfo.contents.get(0);
   }

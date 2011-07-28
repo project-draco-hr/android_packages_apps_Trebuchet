@@ -1,4 +1,5 @@
 {
+  long id=-1;
   ActivityInfo info;
   String packageName=a.getString(R.styleable.Favorite_packageName);
   String className=a.getString(R.styleable.Favorite_className);
@@ -13,6 +14,7 @@
       cn=new ComponentName(packages[0],className);
       info=packageManager.getActivityInfo(cn,0);
     }
+    id=generateNewId();
     intent.setComponent(cn);
     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
     values.put(Favorites.INTENT,intent.toUri(0));
@@ -21,11 +23,12 @@
     values.put(Favorites.SPANX,1);
     values.put(Favorites.SPANY,1);
     values.put(Favorites._ID,generateNewId());
-    dbInsertAndCheck(this,db,TABLE_FAVORITES,null,values);
+    if (dbInsertAndCheck(this,db,TABLE_FAVORITES,null,values) < 0) {
+      return -1;
+    }
   }
  catch (  PackageManager.NameNotFoundException e) {
     Log.w(TAG,"Unable to add favorite: " + packageName + "/"+ className,e);
-    return false;
   }
-  return true;
+  return id;
 }
