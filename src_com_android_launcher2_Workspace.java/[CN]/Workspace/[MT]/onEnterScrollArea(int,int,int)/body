@@ -1,4 +1,11 @@
 {
+  if (mLauncher.getHotseat() != null) {
+    Rect r=new Rect();
+    mLauncher.getHotseat().getHitRect(r);
+    if (r.contains(x,y)) {
+      return;
+    }
+  }
   if (!isSmall() && !mIsSwitchingState) {
     mInScrollArea=true;
     final int page=mCurrentPage + (direction == DragController.SCROLL_LEFT ? -1 : 1);

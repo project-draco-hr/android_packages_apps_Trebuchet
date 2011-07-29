@@ -133,12 +133,6 @@ cl.setFastBackgroundAlpha(a * mOldBackgroundAlphas[i] + b * mNewBackgroundAlphas
 cl.setFastAlpha(a * mOldAlphas[i] + b * mNewAlphas[i]);
 cl.setFastRotationY(a * mOldRotationYs[i] + b * mNewRotationYs[i]);
 }
-if (shrinkState == State.SPRING_LOADED && mLauncher.getHotseat() != null) {
-View hotseat=mLauncher.getHotseat().getLayout();
-hotseat.fastInvalidate();
-hotseat.setFastScaleX(a * mOldScaleXs[0] + b * mNewScaleXs[0]);
-hotseat.setFastScaleY(a * mOldScaleXs[0] + b * mNewScaleXs[0]);
-}
 }
 }
 );
