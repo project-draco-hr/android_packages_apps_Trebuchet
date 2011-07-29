@@ -33,9 +33,10 @@
     widget.setOnTouchListener(this);
     int ix=i % cellCountX;
     int iy=i / cellCountX;
-    GridLayout.LayoutParams lp=new GridLayout.LayoutParams(GridLayout.spec(iy,GridLayout.LEFT,GridLayout.CAN_STRETCH),GridLayout.spec(ix,GridLayout.TOP,GridLayout.CAN_STRETCH));
+    GridLayout.LayoutParams lp=new GridLayout.LayoutParams(GridLayout.spec(iy,GridLayout.LEFT),GridLayout.spec(ix,GridLayout.TOP));
     lp.width=cellWidth;
     lp.height=cellHeight;
+    lp.setGravity(Gravity.TOP | Gravity.LEFT);
     if (ix > 0)     lp.leftMargin=mWidgetWidthGap;
     if (iy > 0)     lp.topMargin=mWidgetHeightGap;
     layout.addView(widget,lp);
