@@ -1,16 +1,25 @@
 {
+  if (success) {
+    if (mDeleteFolderOnDropCompleted && !mItemAddedBackToSelf) {
+      replaceFolderWithFinalItem();
+    }
+  }
+ else {
+    mFolderIcon.onDrop(d);
+    if (mOnExitAlarm.alarmPending()) {
+      mSuppressFolderDeletion=true;
+    }
+  }
+  if (target != this) {
+    if (mOnExitAlarm.alarmPending()) {
+      mOnExitAlarm.cancelAlarm();
+      completeDragExit();
+    }
+  }
+  mDeleteFolderOnDropCompleted=false;
+  mDragInProgress=false;
+  mItemAddedBackToSelf=false;
   mCurrentDragInfo=null;
   mCurrentDragView=null;
   mSuppressOnAdd=false;
-  if (target != this) {
-    mOnExitAlarm.cancelAlarm();
-    completeDragExit();
-  }
-  if (!success) {
-    if (!mDestroyed) {
-      mFolderIcon.onDrop(d);
-    }
- else {
-    }
-  }
 }

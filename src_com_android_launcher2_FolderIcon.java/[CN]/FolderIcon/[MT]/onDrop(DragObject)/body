@@ -6,5 +6,6 @@
  else {
     item=(ShortcutInfo)d.dragInfo;
   }
+  mFolder.notifyDrop();
   onDrop(item,d.dragView,null,1.0f,mInfo.contents.size(),d.postAnimationRunnable);
 }

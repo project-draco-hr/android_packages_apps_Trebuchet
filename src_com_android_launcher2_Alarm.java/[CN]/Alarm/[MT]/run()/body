@@ -7,6 +7,7 @@
       mWaitingForCallback=true;
     }
  else {
+      mAlarmPending=false;
       if (mAlarmListener != null) {
         mAlarmListener.onAlarm(this);
       }

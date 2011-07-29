@@ -9,7 +9,13 @@
     to=new Rect();
     Workspace workspace=mLauncher.getWorkspace();
     workspace.setFinalTransitionTransform((CellLayout)getParent().getParent());
+    float scaleX=getScaleX();
+    float scaleY=getScaleY();
+    setScaleX(1.0f);
+    setScaleY(1.0f);
     scaleRelativeToDragLayer=dragLayer.getDescendantRectRelativeToSelf(this,to);
+    setScaleX(scaleX);
+    setScaleY(scaleY);
     workspace.resetTransitionTransform((CellLayout)getParent().getParent());
   }
   int[] center=new int[2];

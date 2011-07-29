@@ -4,6 +4,12 @@
     mRearrangeOnClose=false;
   }
   if (getItemCount() <= 1) {
-    replaceFolderWithFinalItem();
+    if (!mDragInProgress && !mSuppressFolderDeletion) {
+      replaceFolderWithFinalItem();
+    }
+ else     if (mDragInProgress) {
+      mDeleteFolderOnDropCompleted=true;
+    }
   }
+  mSuppressFolderDeletion=false;
 }
