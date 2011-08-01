@@ -3,5 +3,8 @@
   for (int i=0; i < screenCount; i++) {
     final CellLayout layout=(CellLayout)getChildAt(i);
     layout.setChildrenDrawnWithCacheEnabled(false);
+    if (!isHardwareAccelerated()) {
+      layout.setChildrenDrawingCacheEnabled(false);
+    }
   }
 }
