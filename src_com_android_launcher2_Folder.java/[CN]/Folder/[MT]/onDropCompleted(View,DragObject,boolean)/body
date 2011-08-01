@@ -1,6 +1,6 @@
 {
   if (success) {
-    if (mDeleteFolderOnDropCompleted && !mItemAddedBackToSelf) {
+    if (mDeleteFolderOnDropCompleted && !mItemAddedBackToSelfViaIcon) {
       replaceFolderWithFinalItem();
     }
   }
@@ -18,7 +18,7 @@
   }
   mDeleteFolderOnDropCompleted=false;
   mDragInProgress=false;
-  mItemAddedBackToSelf=false;
+  mItemAddedBackToSelfViaIcon=false;
   mCurrentDragInfo=null;
   mCurrentDragView=null;
   mSuppressOnAdd=false;

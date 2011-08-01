@@ -15,7 +15,7 @@
     mContent.removeView(mCurrentDragView);
     mInfo.remove(mCurrentDragInfo);
     mDragInProgress=true;
-    mItemAddedBackToSelf=false;
+    mItemAddedBackToSelfViaIcon=false;
   }
   return true;
 }

@@ -30,7 +30,6 @@
   }
   oa.addListener(new AnimatorListenerAdapter(){
     @Override public void onAnimationEnd(    Animator animation){
-      onClose();
       onCloseComplete();
       mState=STATE_SMALL;
     }

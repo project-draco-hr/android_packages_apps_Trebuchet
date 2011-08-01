@@ -1,5 +1,0 @@
-{
-  DragLayer parent=(DragLayer)getParent();
-  parent.removeView(Folder.this);
-  clearFocus();
-}
