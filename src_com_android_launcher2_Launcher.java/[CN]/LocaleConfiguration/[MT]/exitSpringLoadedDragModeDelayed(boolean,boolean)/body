@@ -2,6 +2,9 @@
   mWorkspace.postDelayed(new Runnable(){
     @Override public void run(){
       exitSpringLoadedDragMode();
+      if (successfulDrop) {
+        showWorkspace(true);
+      }
     }
   }
 ,(extendedDelay ? EXIT_SPRINGLOADED_MODE_LONG_TIMEOUT : EXIT_SPRINGLOADED_MODE_SHORT_TIMEOUT));

@@ -1,5 +1,0 @@
-{
-  setContentTypeImmediate(AppsCustomizePagedView.ContentType.Widgets);
-  mAppsCustomizePane.setCurrentPageToShortcuts();
-  setCurrentTabByTag(WIDGETS_TAB_TAG);
-}

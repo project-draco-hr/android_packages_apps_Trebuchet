@@ -1,5 +1,5 @@
 {
   super.onPrepareOptionsMenu(menu);
-  if (mAppsCustomizeContent != null && mAppsCustomizeContent.isAnimating())   return false;
+  startWallpaper();
   return true;
 }

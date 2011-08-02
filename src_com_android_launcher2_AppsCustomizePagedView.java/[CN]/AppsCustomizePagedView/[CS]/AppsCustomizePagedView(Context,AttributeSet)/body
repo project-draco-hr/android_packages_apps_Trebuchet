@@ -5,7 +5,6 @@
   mContentType=ContentType.Applications;
   mApps=new ArrayList<ApplicationInfo>();
   mWidgets=new ArrayList<Object>();
-  mShortcuts=new ArrayList<Object>();
   mIconCache=((LauncherApplication)context.getApplicationContext()).getIconCache();
   mHolographicOutlineHelper=new HolographicOutlineHelper();
   mCanvas=new Canvas();

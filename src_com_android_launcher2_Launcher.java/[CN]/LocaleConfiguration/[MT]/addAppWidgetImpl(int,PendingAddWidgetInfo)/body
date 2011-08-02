@@ -35,6 +35,6 @@
   }
  else {
     completeAddAppWidget(appWidgetId,info.container,info.screen);
-    exitSpringLoadedDragModeDelayed(false);
+    exitSpringLoadedDragModeDelayed(true,false);
   }
 }
