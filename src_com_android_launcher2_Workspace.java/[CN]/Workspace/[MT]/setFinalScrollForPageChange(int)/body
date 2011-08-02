@@ -1,0 +1,12 @@
+{
+  if (screen >= 0) {
+    mSavedScrollX=getScrollX();
+    CellLayout cl=(CellLayout)getChildAt(screen);
+    mSavedTranslationX=cl.getTranslationX();
+    mSavedRotationY=cl.getRotationY();
+    final int newX=getChildOffset(screen) - getRelativeChildOffset(screen);
+    setScrollX(newX);
+    cl.setTranslationX(0f);
+    cl.setRotationY(0f);
+  }
+}

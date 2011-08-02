@@ -1,0 +1,45 @@
+{
+  ((CellLayoutChildren)child.getParent()).measureChild(child);
+  CellLayout.LayoutParams lp=(CellLayout.LayoutParams)child.getLayoutParams();
+  Rect r=new Rect();
+  getViewRectRelativeToSelf(dragView,r);
+  int coord[]=new int[2];
+  coord[0]=lp.x;
+  coord[1]=lp.y;
+  float scale=getDescendantCoordRelativeToSelf((View)child.getParent(),coord);
+  int toX=coord[0];
+  int toY=coord[1];
+  if (child instanceof TextView) {
+    TextView tv=(TextView)child;
+    Drawable d=tv.getCompoundDrawables()[1];
+    toY+=Math.round(scale * tv.getPaddingTop());
+    toY-=(dragView.getHeight() - (int)Math.round(scale * d.getIntrinsicHeight())) / 2;
+    toX-=(dragView.getMeasuredWidth() - Math.round(scale * child.getMeasuredWidth())) / 2;
+  }
+ else {
+    toY-=(Math.round(scale * (dragView.getHeight() - child.getMeasuredHeight()))) / 2;
+    toX-=(Math.round(scale * (dragView.getMeasuredWidth() - child.getMeasuredWidth()))) / 2;
+  }
+  final int fromX=r.left;
+  final int fromY=r.top;
+  child.setVisibility(INVISIBLE);
+  child.setAlpha(0);
+  Runnable onCompleteRunnable=new Runnable(){
+    public void run(){
+      child.setVisibility(VISIBLE);
+      ObjectAnimator oa=ObjectAnimator.ofFloat(child,"alpha",0f,1f);
+      oa.setDuration(60);
+      oa.addListener(new AnimatorListenerAdapter(){
+        @Override public void onAnimationEnd(        android.animation.Animator animation){
+          if (onFinishAnimationRunnable != null) {
+            onFinishAnimationRunnable.run();
+          }
+        }
+      }
+);
+      oa.start();
+    }
+  }
+;
+  animateViewIntoPosition(dragView,fromX,fromY,toX,toY,scale,onCompleteRunnable,true,duration);
+}

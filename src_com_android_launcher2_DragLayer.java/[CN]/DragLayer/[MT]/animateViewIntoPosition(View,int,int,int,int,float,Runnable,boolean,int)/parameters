@@ -6,3 +6,4 @@ int toY
 float finalScale
 Runnable onCompleteRunnable
 boolean fadeOut
+int duration
