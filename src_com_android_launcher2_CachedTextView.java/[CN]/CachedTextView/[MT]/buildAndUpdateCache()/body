@@ -35,6 +35,7 @@
     setAlpha(prevAlpha);
     mIsBuildingCache=false;
     mCacheCanvas.restore();
+    mCacheCanvas.setBitmap(null);
     mText=getText();
     setText(" ");
   }

@@ -6,5 +6,6 @@
     d.setBounds(x,y,x + w,y + h);
     d.draw(c);
     d.setBounds(oldBounds);
+    c.setBitmap(null);
   }
 }

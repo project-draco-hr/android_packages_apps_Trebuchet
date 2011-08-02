@@ -12,5 +12,6 @@
   p.setFilterBitmap(true);
   canvas.drawBitmap(orig,src,dst,p);
   mOutlineHelper.applyMediumExpensiveOutlineWithBlur(b,canvas,outlineColor,outlineColor);
+  canvas.setBitmap(null);
   return b;
 }

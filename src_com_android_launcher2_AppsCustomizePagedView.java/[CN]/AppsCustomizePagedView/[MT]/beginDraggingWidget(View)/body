@@ -19,6 +19,7 @@
     mCanvas.save();
     preview.draw(mCanvas);
     mCanvas.restore();
+    mCanvas.setBitmap(null);
     createItemInfo.spanX=createItemInfo.spanY=1;
   }
   mLauncher.lockScreenOrientation();
