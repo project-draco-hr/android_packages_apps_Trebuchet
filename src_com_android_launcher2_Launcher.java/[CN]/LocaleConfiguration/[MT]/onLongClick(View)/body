@@ -18,7 +18,7 @@
   if (allowLongPress && !mDragController.isDragging()) {
     if (itemUnderLongClick == null) {
       mWorkspace.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS,HapticFeedbackConstants.FLAG_IGNORE_VIEW_SETTING);
-      addItems();
+      startWallpaper();
     }
  else {
       if (!(itemUnderLongClick instanceof Folder)) {

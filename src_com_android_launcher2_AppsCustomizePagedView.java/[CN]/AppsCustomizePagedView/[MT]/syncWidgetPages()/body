@@ -1,13 +1,9 @@
 {
   Context context=getContext();
-  int[] countX={mWidgetCountX,mShortcutCountX};
-  int[] countY={mWidgetCountY,mShortcutCountY};
-  int[] numPages={mNumWidgetPages,mNumShortcutPages};
-  for (int i=0; i < 2; ++i) {
-    for (int j=0; j < numPages[i]; ++j) {
-      PagedViewGridLayout layout=new PagedViewGridLayout(context,countX[i],countY[i]);
-      setupPage(layout);
-      addView(layout);
-    }
+  int numPages=(int)Math.ceil(mWidgets.size() / (float)(mWidgetCountX * mWidgetCountY));
+  for (int j=0; j < numPages; ++j) {
+    PagedViewGridLayout layout=new PagedViewGridLayout(context,mWidgetCountX,mWidgetCountY);
+    setupPage(layout);
+    addView(layout);
   }
 }

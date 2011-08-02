@@ -2,34 +2,26 @@
   cleanup();
   AddAdapter.ListItem item=(AddAdapter.ListItem)mAdapter.getItem(which);
 switch (item.actionTag) {
-case AddAdapter.ITEM_SHORTCUT:
+case AddAdapter.ITEM_APPLICATION:
 {
       if (mAppsCustomizeTabHost != null) {
-        mAppsCustomizeTabHost.selectShortcutsTab();
+        mAppsCustomizeTabHost.selectAppsTab();
       }
       showAllApps(true);
       break;
     }
-case AddAdapter.ITEM_APPLICATION:
+case AddAdapter.ITEM_APPWIDGET:
 {
     if (mAppsCustomizeTabHost != null) {
-      mAppsCustomizeTabHost.selectAppsTab();
+      mAppsCustomizeTabHost.selectWidgetsTab();
     }
     showAllApps(true);
     break;
   }
-case AddAdapter.ITEM_APPWIDGET:
-{
-  if (mAppsCustomizeTabHost != null) {
-    mAppsCustomizeTabHost.selectWidgetsTab();
-  }
-  showAllApps(true);
-  break;
-}
 case AddAdapter.ITEM_WALLPAPER:
 {
-startWallpaper();
-break;
+  startWallpaper();
+  break;
 }
 }
 }
