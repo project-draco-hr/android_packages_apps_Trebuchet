@@ -9,5 +9,6 @@
   canvas.setBitmap(b);
   canvas.drawRoundRect(new RectF(inset,inset,iconWidth - inset,iconHeight - inset),rectRadius,rectRadius,mExternalDragOutlinePaint);
   mOutlineHelper.applyMediumExpensiveOutlineWithBlur(b,canvas,outlineColor,outlineColor);
+  canvas.setBitmap(null);
   return b;
 }
