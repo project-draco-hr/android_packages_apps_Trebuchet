@@ -2,8 +2,8 @@
   int actualWidth=resources.getDimensionPixelSize(R.dimen.workspace_cell_width);
   int actualHeight=resources.getDimensionPixelSize(R.dimen.workspace_cell_height);
   int smallerSize=Math.min(actualWidth,actualHeight);
-  int spanX=(width + smallerSize) / smallerSize;
-  int spanY=(height + smallerSize) / smallerSize;
+  int spanX=(int)Math.ceil(width / (float)smallerSize);
+  int spanY=(int)Math.ceil(height / (float)smallerSize);
   if (result == null) {
     return new int[]{spanX,spanY};
   }

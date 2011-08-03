@@ -43,5 +43,7 @@
   }
   invalidate();
   forceUpdateAdjacentPagesAlpha();
-  prepareGenerateHoloOutlinesTask(data.page,data.items,data.generatedImages);
+  if (mFadeInAdjacentScreens) {
+    prepareGenerateHoloOutlinesTask(data.page,data.items,data.generatedImages);
+  }
 }

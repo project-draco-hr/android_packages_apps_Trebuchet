@@ -26,4 +26,5 @@
   mMinWidgetSpan=1;
   mMaxWidgetSpan=3;
   mWidgetPreviewIconPaddedDimension=(int)(mAppIconSize * (1 + (2 * sWidgetPreviewIconPaddingPercentage)));
+  mFadeInAdjacentScreens=LauncherApplication.isScreenLarge();
 }
