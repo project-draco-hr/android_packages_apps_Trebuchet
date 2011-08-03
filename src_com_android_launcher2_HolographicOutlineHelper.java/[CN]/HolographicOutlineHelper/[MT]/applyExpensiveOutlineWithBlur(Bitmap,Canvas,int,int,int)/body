@@ -55,6 +55,7 @@ srcDstCanvas.drawBitmap(thickInnerBlur,thickInnerBlurOffset[0],thickInnerBlurOff
 srcDstCanvas.drawBitmap(thickOuterBlur,outerBlurOffset[0],outerBlurOffset[1],mHolographicPaint);
 mHolographicPaint.setColor(outlineColor);
 srcDstCanvas.drawBitmap(brightOutline,brightOutlineOffset[0],brightOutlineOffset[1],mHolographicPaint);
+srcDstCanvas.setBitmap(null);
 brightOutline.recycle();
 thickOuterBlur.recycle();
 thickInnerBlur.recycle();

@@ -11,5 +11,6 @@
   canvas.setBitmap(b);
   drawDragView(v,canvas,padding,true);
   mOutlineHelper.applyOuterBlur(b,canvas,outlineColor);
+  canvas.setBitmap(null);
   return b;
 }

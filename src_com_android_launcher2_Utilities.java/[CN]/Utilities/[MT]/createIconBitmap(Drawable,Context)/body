@@ -52,6 +52,7 @@ synchronized (sCanvas) {
     icon.setBounds(left,top,left + width,top + height);
     icon.draw(canvas);
     icon.setBounds(sOldBounds);
+    canvas.setBitmap(null);
     return bitmap;
   }
 }
