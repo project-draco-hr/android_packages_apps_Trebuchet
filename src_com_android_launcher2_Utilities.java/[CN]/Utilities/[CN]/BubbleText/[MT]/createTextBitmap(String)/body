@@ -13,6 +13,5 @@
     int y=mFirstLineY + (i * mLineHeight);
     c.drawText(lineText,x,y,mTextPaint);
   }
-  c.setBitmap(null);
   return b;
 }

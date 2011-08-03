@@ -23,7 +23,6 @@
         c.save();
         c.drawBitmap(b,0,0,null);
         c.restore();
-        c.setBitmap(null);
         images.add(outline);
       }
     }

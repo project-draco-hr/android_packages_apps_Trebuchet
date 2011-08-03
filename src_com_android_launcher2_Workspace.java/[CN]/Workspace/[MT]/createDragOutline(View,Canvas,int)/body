@@ -4,6 +4,5 @@
   canvas.setBitmap(b);
   drawDragView(v,canvas,padding,false);
   mOutlineHelper.applyMediumExpensiveOutlineWithBlur(b,canvas,outlineColor,outlineColor);
-  canvas.setBitmap(null);
   return b;
 }
