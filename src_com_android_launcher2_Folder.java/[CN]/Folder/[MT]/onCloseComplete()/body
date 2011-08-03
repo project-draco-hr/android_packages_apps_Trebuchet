@@ -1,6 +1,7 @@
 {
   DragLayer parent=(DragLayer)getParent();
-  parent.removeView(Folder.this);
+  parent.removeView(this);
+  mDragController.removeDropTarget((DropTarget)this);
   clearFocus();
   if (mRearrangeOnClose) {
     setupContentForNumItems(getItemCount());
