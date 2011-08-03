@@ -28,7 +28,7 @@
       final CellLayout cl=(CellLayout)getChildAt(i);
       float finalAlphaValue=0f;
       float rotation=0f;
-      if (mFadeInAdjacentScreens) {
+      if (mFadeInAdjacentScreens && !springLoaded) {
         finalAlphaValue=(i == mCurrentPage) ? 1f : 0f;
       }
  else {

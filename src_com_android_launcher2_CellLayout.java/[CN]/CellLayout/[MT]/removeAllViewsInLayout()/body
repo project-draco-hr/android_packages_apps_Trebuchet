@@ -1,4 +1,6 @@
 {
-  clearOccupiedCells();
-  mChildren.removeAllViewsInLayout();
+  if (mChildren.getChildCount() > 0) {
+    clearOccupiedCells();
+    mChildren.removeAllViewsInLayout();
+  }
 }

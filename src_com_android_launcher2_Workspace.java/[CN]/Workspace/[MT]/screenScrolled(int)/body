@@ -10,12 +10,14 @@
       float scrollProgress=delta / (totalDistance * 1.0f);
       scrollProgress=Math.min(scrollProgress,1.0f);
       scrollProgress=Math.max(scrollProgress,-1.0f);
-      if ((mScrollX < 0 && i == 0) || (mScrollX > mMaxScrollX && i == getChildCount() - 1)) {
-        cl.setBackgroundAlphaMultiplier(overScrollBackgroundAlphaInterpolator(Math.abs(scrollProgress)));
-        mOverScrollPageIndex=i;
-      }
- else       if (mOverScrollPageIndex != i) {
-        cl.setBackgroundAlphaMultiplier(backgroundAlphaInterpolator(Math.abs(scrollProgress)));
+      if (mState != State.SPRING_LOADED) {
+        if ((mScrollX < 0 && i == 0) || (mScrollX > mMaxScrollX && i == getChildCount() - 1)) {
+          cl.setBackgroundAlphaMultiplier(overScrollBackgroundAlphaInterpolator(Math.abs(scrollProgress)));
+          mOverScrollPageIndex=i;
+        }
+ else         if (mOverScrollPageIndex != i) {
+          cl.setBackgroundAlphaMultiplier(backgroundAlphaInterpolator(Math.abs(scrollProgress)));
+        }
       }
       float rotation=WORKSPACE_ROTATION * scrollProgress;
       float translationX=getOffsetXForRotation(rotation,cl.getWidth(),cl.getHeight());
