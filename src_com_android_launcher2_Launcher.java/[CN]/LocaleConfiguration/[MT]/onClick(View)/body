@@ -1,5 +1,10 @@
 {
-  if (mWorkspace.isSwitchingState())   return;
+  if (v.getWindowToken() == null) {
+    return;
+  }
+  if (mWorkspace.isSwitchingState()) {
+    return;
+  }
   Object tag=v.getTag();
   if (tag instanceof ShortcutInfo) {
     final Intent intent=((ShortcutInfo)tag).intent;
