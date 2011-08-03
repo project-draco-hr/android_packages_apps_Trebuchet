@@ -3,6 +3,7 @@
     @Override public void run(){
       exitSpringLoadedDragMode();
       if (successfulDrop) {
+        mAppsCustomizeTabHost.setVisibility(View.GONE);
         showWorkspace(true);
       }
     }
