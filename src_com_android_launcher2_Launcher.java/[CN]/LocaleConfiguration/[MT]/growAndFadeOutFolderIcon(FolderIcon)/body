@@ -1,4 +1,5 @@
 {
+  if (fi == null)   return;
   PropertyValuesHolder alpha=PropertyValuesHolder.ofFloat("alpha",0);
   PropertyValuesHolder scaleX=PropertyValuesHolder.ofFloat("scaleX",1.5f);
   PropertyValuesHolder scaleY=PropertyValuesHolder.ofFloat("scaleY",1.5f);
