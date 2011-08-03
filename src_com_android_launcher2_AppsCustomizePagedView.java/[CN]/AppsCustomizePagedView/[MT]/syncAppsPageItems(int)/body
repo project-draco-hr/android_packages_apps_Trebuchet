@@ -23,5 +23,7 @@
   }
   layout.allowHardwareLayerCreation();
   layout.createHardwareLayers();
-  prepareGenerateHoloOutlinesTask(page,items,images);
+  if (mFadeInAdjacentScreens) {
+    prepareGenerateHoloOutlinesTask(page,items,images);
+  }
 }
