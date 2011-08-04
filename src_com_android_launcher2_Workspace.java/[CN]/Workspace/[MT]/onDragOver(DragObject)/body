@@ -7,7 +7,7 @@
   if (item.spanX < 0 || item.spanY < 0)   throw new RuntimeException("Improper spans found");
   mDragViewVisualCenter=getDragViewVisualCenter(d.x,d.y,d.xOffset,d.yOffset,d.dragView,mDragViewVisualCenter);
   if (isSmall()) {
-    if (mLauncher.getHotseat() != null) {
+    if (mLauncher.getHotseat() != null && !isExternalDragWidget(d)) {
       mLauncher.getHotseat().getHitRect(r);
       if (r.contains(d.x,d.y)) {
         layout=mLauncher.getHotseat().getLayout();
@@ -42,7 +42,7 @@
     }
   }
  else {
-    if (mLauncher.getHotseat() != null) {
+    if (mLauncher.getHotseat() != null && !isDragWidget(d)) {
       mLauncher.getHotseat().getHitRect(r);
       if (r.contains(d.x,d.y)) {
         layout=mLauncher.getHotseat().getLayout();

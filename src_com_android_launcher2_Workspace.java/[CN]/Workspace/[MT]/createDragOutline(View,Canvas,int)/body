@@ -1,5 +1,5 @@
 {
-  final int outlineColor=getResources().getColor(R.color.drag_outline_color);
+  final int outlineColor=getResources().getColor(android.R.color.holo_blue_light);
   final Bitmap b=Bitmap.createBitmap(v.getWidth() + padding,v.getHeight() + padding,Bitmap.Config.ARGB_8888);
   canvas.setBitmap(b);
   drawDragView(v,canvas,padding,false);

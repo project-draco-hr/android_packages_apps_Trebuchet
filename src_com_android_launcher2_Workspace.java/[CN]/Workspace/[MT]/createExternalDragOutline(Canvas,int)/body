@@ -1,6 +1,6 @@
 {
   Resources r=getResources();
-  final int outlineColor=r.getColor(R.color.drag_outline_color);
+  final int outlineColor=r.getColor(android.R.color.holo_blue_light);
   final int iconWidth=r.getDimensionPixelSize(R.dimen.workspace_cell_width);
   final int iconHeight=r.getDimensionPixelSize(R.dimen.workspace_cell_height);
   final int rectRadius=r.getDimensionPixelSize(R.dimen.external_drop_icon_rect_radius);
