@@ -16,6 +16,10 @@
     toY-=(dragView.getHeight() - (int)Math.round(scale * d.getIntrinsicHeight())) / 2;
     toX-=(dragView.getMeasuredWidth() - Math.round(scale * child.getMeasuredWidth())) / 2;
   }
+ else   if (child instanceof FolderIcon) {
+    toY-=HolographicOutlineHelper.MAX_OUTER_BLUR_RADIUS / 2;
+    toX-=(dragView.getMeasuredWidth() - Math.round(scale * child.getMeasuredWidth())) / 2;
+  }
  else {
     toY-=(Math.round(scale * (dragView.getHeight() - child.getMeasuredHeight()))) / 2;
     toX-=(Math.round(scale * (dragView.getMeasuredWidth() - child.getMeasuredWidth()))) / 2;
