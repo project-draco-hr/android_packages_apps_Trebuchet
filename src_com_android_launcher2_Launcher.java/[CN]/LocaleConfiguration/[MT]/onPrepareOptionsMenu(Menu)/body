@@ -1,5 +1,0 @@
-{
-  super.onPrepareOptionsMenu(menu);
-  startWallpaper();
-  return true;
-}
