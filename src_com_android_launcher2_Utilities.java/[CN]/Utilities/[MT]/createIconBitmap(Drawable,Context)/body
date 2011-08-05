@@ -19,7 +19,7 @@ synchronized (sCanvas) {
     }
     int sourceWidth=icon.getIntrinsicWidth();
     int sourceHeight=icon.getIntrinsicHeight();
-    if (sourceWidth > 0 && sourceWidth > 0) {
+    if (sourceWidth > 0 && sourceHeight > 0) {
       if (width < sourceWidth || height < sourceHeight) {
         final float ratio=(float)sourceWidth / sourceHeight;
         if (sourceWidth > sourceHeight) {
