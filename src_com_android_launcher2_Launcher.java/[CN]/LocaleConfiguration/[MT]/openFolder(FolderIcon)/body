@@ -3,8 +3,12 @@
   FolderInfo info=folder.mInfo;
   growAndFadeOutFolderIcon(folderIcon);
   info.opened=true;
-  mDragLayer.addView(folder);
-  mDragController.addDropTarget((DropTarget)folder);
+  if (folder.getParent() == null) {
+    mDragLayer.addView(folder);
+    mDragController.addDropTarget((DropTarget)folder);
+  }
+ else {
+    Log.w(TAG,"Opening folder (" + folder + ") which already has a parent ("+ folder.getParent()+ ").");
+  }
   folder.animateOpen();
-  folder.onOpen();
 }

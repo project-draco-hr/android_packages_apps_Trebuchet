@@ -4,7 +4,6 @@
   if (parent != null) {
     FolderIcon fi=(FolderIcon)mWorkspace.getViewForTag(folder.mInfo);
     shrinkAndFadeInFolderIcon(fi);
-    mDragController.removeDropTarget((DropTarget)folder);
   }
   folder.animateClosed();
 }
