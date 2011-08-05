@@ -1,5 +1,5 @@
 {
-  mWorkspace.postDelayed(new Runnable(){
+  mHandler.postDelayed(new Runnable(){
     @Override public void run(){
       exitSpringLoadedDragMode();
       if (successfulDrop) {
