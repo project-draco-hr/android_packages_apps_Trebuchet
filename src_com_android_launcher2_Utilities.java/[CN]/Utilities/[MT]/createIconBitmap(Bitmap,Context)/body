@@ -1,0 +1,15 @@
+{
+  int textureWidth=sIconTextureWidth;
+  int textureHeight=sIconTextureHeight;
+  int sourceWidth=icon.getWidth();
+  int sourceHeight=icon.getHeight();
+  if (sourceWidth > textureWidth && sourceHeight > textureHeight) {
+    return Bitmap.createBitmap(icon,(sourceWidth - textureWidth) / 2,(sourceHeight - textureHeight) / 2,textureWidth,textureHeight);
+  }
+ else   if (sourceWidth == textureWidth && sourceHeight == textureHeight) {
+    return icon;
+  }
+ else {
+    return createIconBitmap(new BitmapDrawable(icon),context);
+  }
+}

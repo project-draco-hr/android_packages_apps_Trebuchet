@@ -20,7 +20,7 @@ icon=Utilities.createIconBitmap(mIconCache.getFullResIcon(resources,id),context)
  catch (Exception e) {
 }
 if (icon == null) {
-icon=getIconFromCursor(c,iconIndex);
+icon=getIconFromCursor(c,iconIndex,context);
 }
 if (icon == null) {
 icon=getFallbackIcon();
@@ -28,7 +28,7 @@ info.usingFallbackIcon=true;
 }
 break;
 case LauncherSettings.Favorites.ICON_TYPE_BITMAP:
-icon=getIconFromCursor(c,iconIndex);
+icon=getIconFromCursor(c,iconIndex,context);
 if (icon == null) {
 icon=getFallbackIcon();
 info.customIcon=false;
