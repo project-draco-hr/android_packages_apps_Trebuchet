@@ -1,7 +1,6 @@
 {
   mContext=context;
   mPackageManager=context.getPackageManager();
-  mBubble=new Utilities.BubbleText(context);
   int density=context.getResources().getDisplayMetrics().densityDpi;
   if (LauncherApplication.isScreenLarge()) {
     if (density == DisplayMetrics.DENSITY_LOW) {

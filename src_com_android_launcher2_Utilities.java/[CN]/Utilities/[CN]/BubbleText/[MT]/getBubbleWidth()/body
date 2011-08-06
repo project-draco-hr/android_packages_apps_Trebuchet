@@ -1,3 +1,0 @@
-{
-  return (int)(mBubbleRect.width() + 0.5f);
-}
