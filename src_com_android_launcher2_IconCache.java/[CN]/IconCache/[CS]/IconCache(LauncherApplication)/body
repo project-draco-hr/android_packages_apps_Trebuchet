@@ -2,8 +2,20 @@
   mContext=context;
   mPackageManager=context.getPackageManager();
   mBubble=new Utilities.BubbleText(context);
+  int density=context.getResources().getDisplayMetrics().densityDpi;
   if (LauncherApplication.isScreenLarge()) {
-    mIconDpi=DisplayMetrics.DENSITY_HIGH;
+    if (density == DisplayMetrics.DENSITY_LOW) {
+      mIconDpi=DisplayMetrics.DENSITY_MEDIUM;
+    }
+ else     if (density == DisplayMetrics.DENSITY_MEDIUM) {
+      mIconDpi=DisplayMetrics.DENSITY_HIGH;
+    }
+ else     if (density == DisplayMetrics.DENSITY_HIGH) {
+      mIconDpi=DisplayMetrics.DENSITY_XHIGH;
+    }
+ else     if (density == DisplayMetrics.DENSITY_XHIGH) {
+      mIconDpi=DisplayMetrics.DENSITY_XHIGH;
+    }
   }
  else {
     mIconDpi=context.getResources().getDisplayMetrics().densityDpi;
