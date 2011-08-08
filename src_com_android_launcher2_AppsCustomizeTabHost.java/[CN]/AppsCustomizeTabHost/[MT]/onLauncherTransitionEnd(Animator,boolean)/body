@@ -3,6 +3,6 @@
     setLayerType(LAYER_TYPE_NONE,null);
   }
   if (!toWorkspace && !LauncherApplication.isScreenLarge()) {
-    mAppsCustomizePane.flashScrollingIndicator();
+    mAppsCustomizePane.hideScrollingIndicator(false);
   }
 }

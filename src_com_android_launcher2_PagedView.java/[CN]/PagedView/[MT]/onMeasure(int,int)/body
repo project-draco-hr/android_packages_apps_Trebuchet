@@ -47,5 +47,6 @@
  else {
     mMaxScrollX=0;
   }
+  updateScrollingIndicatorPosition();
   setMeasuredDimension(widthSize,heightSize);
 }

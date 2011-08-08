@@ -3,4 +3,7 @@
     setLayerType(LAYER_TYPE_HARDWARE,null);
     buildLayer();
   }
+  if (!toWorkspace && !LauncherApplication.isScreenLarge()) {
+    mAppsCustomizePane.showScrollingIndicator(false);
+  }
 }
