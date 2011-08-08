@@ -5,7 +5,7 @@
     int contentWidth=mAppsCustomizePane.getPageContentWidth();
     if (contentWidth > 0) {
       mTabs.getLayoutParams().width=contentWidth;
-      mTabsContainer.animate().alpha(1f).setDuration(sTabBarFadeInDuration);
+      mTabsContainer.setAlpha(1f);
     }
   }
   super.onMeasure(widthMeasureSpec,heightMeasureSpec);
