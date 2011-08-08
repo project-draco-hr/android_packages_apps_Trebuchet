@@ -25,7 +25,7 @@
         String screen=a.getString(R.styleable.Favorite_screen);
         String x=a.getString(R.styleable.Favorite_x);
         String y=a.getString(R.styleable.Favorite_y);
-        if (container == LauncherSettings.Favorites.CONTAINER_HOTSEAT && Integer.valueOf(screen) <= 0) {
+        if (container == LauncherSettings.Favorites.CONTAINER_HOTSEAT && Hotseat.isAllAppsButtonRank(Integer.valueOf(screen))) {
           throw new RuntimeException("Invalid screen position for hotseat item");
         }
         values.clear();

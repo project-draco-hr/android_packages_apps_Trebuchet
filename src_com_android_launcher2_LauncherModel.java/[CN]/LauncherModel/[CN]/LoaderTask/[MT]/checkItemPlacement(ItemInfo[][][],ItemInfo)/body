@@ -1,18 +1,25 @@
 {
-  if (item.container != LauncherSettings.Favorites.CONTAINER_DESKTOP) {
+  int containerIndex=item.screen;
+  if (item.container == LauncherSettings.Favorites.CONTAINER_HOTSEAT) {
+    containerIndex=Launcher.SCREEN_COUNT;
+    if (Hotseat.isAllAppsButtonRank(item.screen)) {
+      return false;
+    }
+  }
+ else   if (item.container != LauncherSettings.Favorites.CONTAINER_DESKTOP) {
     return true;
   }
   for (int x=item.cellX; x < (item.cellX + item.spanX); x++) {
     for (int y=item.cellY; y < (item.cellY + item.spanY); y++) {
-      if (occupied[item.screen][x][y] != null) {
-        Log.e(TAG,"Error loading shortcut " + item + " into cell ("+ item.screen+ ":"+ x+ ","+ y+ ") occupied by "+ occupied[item.screen][x][y]);
+      if (occupied[containerIndex][x][y] != null) {
+        Log.e(TAG,"Error loading shortcut " + item + " into cell ("+ containerIndex+ "-"+ item.screen+ ":"+ x+ ","+ y+ ") occupied by "+ occupied[containerIndex][x][y]);
         return false;
       }
     }
   }
   for (int x=item.cellX; x < (item.cellX + item.spanX); x++) {
     for (int y=item.cellY; y < (item.cellY + item.spanY); y++) {
-      occupied[item.screen][x][y]=item;
+      occupied[containerIndex][x][y]=item;
     }
   }
   return true;

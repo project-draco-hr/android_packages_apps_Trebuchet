@@ -13,7 +13,7 @@
     }
   }
 );
-  int x=getCellXFromOrder(0);
-  int y=getCellYFromOrder(0);
+  int x=getCellXFromOrder(sAllAppsButtonRank);
+  int y=getCellYFromOrder(sAllAppsButtonRank);
   mContent.addViewToCellLayout(allAppsButton,-1,0,new CellLayout.LayoutParams(x,y,1,1),true);
 }
