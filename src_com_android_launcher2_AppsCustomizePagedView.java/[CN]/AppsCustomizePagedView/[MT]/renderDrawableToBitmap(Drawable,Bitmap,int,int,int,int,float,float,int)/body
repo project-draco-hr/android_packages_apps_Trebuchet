@@ -1,0 +1,14 @@
+{
+  if (bitmap != null) {
+    Canvas c=new Canvas(bitmap);
+    c.scale(scaleX,scaleY);
+    Rect oldBounds=d.copyBounds();
+    d.setBounds(x,y,x + w,y + h);
+    d.draw(c);
+    d.setBounds(oldBounds);
+    if (multiplyColor != 0xFFFFFFFF) {
+      c.drawColor(mDragViewMultiplyColor,PorterDuff.Mode.MULTIPLY);
+    }
+    c.setBitmap(null);
+  }
+}
