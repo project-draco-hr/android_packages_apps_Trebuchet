@@ -1,5 +1,6 @@
 {
   if (!isScrollingIndicatorEnabled())   return;
+  if (mScrollIndicator == null)   return;
   int numPages=getChildCount();
   int pageWidth=getMeasuredWidth();
   int maxPageWidth=(numPages * getChildWidth(0)) + ((numPages - 1) * mPageSpacing);
