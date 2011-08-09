@@ -11,7 +11,7 @@
     createItemInfo.spanX=spanXY[0];
     createItemInfo.spanY=spanXY[1];
     b=Bitmap.createBitmap(w,h,Bitmap.Config.ARGB_8888);
-    renderDrawableToBitmap(preview,b,0,0,w,h,1,1);
+    renderDrawableToBitmap(preview,b,0,0,w,h,1,1,mDragViewMultiplyColor);
   }
  else {
     b=Bitmap.createBitmap(mWidgetPreviewIconPaddedDimension,mWidgetPreviewIconPaddedDimension,Bitmap.Config.ARGB_8888);
@@ -19,6 +19,7 @@
     mCanvas.save();
     preview.draw(mCanvas);
     mCanvas.restore();
+    mCanvas.drawColor(mDragViewMultiplyColor,PorterDuff.Mode.MULTIPLY);
     mCanvas.setBitmap(null);
     createItemInfo.spanX=createItemInfo.spanY=1;
   }
