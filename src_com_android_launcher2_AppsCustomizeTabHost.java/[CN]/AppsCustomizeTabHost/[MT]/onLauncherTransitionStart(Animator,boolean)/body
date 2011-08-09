@@ -1,9 +1,14 @@
 {
+  mInTransition=true;
   if (animation != null && isHardwareAccelerated()) {
     setLayerType(LAYER_TYPE_HARDWARE,null);
     buildLayer();
   }
   if (!toWorkspace && !LauncherApplication.isScreenLarge()) {
     mAppsCustomizePane.showScrollingIndicator(false);
+  }
+  if (mResetAfterTransition) {
+    mAppsCustomizePane.reset();
+    mResetAfterTransition=false;
   }
 }

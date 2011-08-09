@@ -15,8 +15,8 @@
       InputMethodManager imm=(InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
       imm.hideSoftInputFromWindow(v.getWindowToken(),0);
     }
-    if (mAppsCustomizeContent != null) {
-      mAppsCustomizeContent.reset();
+    if (mAppsCustomizeTabHost != null) {
+      mAppsCustomizeTabHost.reset();
     }
   }
 }

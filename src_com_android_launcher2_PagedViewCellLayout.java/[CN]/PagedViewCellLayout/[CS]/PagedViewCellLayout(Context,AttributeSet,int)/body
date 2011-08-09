@@ -4,7 +4,6 @@
   Resources resources=context.getResources();
   mOriginalCellWidth=mCellWidth=resources.getDimensionPixelSize(R.dimen.apps_customize_cell_width);
   mOriginalCellHeight=mCellHeight=resources.getDimensionPixelSize(R.dimen.apps_customize_cell_height);
-  mPeekWidth=resources.getDimensionPixelSize(R.dimen.apps_customize_peek_width);
   mCellCountX=LauncherModel.getCellCountX();
   mCellCountY=LauncherModel.getCellCountY();
   mOriginalHeightGap=mOriginalHeightGap=mWidthGap=mHeightGap=-1;

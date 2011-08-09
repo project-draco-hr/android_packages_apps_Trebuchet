@@ -1,4 +1,5 @@
 {
+  mInTransition=false;
   if (animation != null) {
     setLayerType(LAYER_TYPE_NONE,null);
   }
