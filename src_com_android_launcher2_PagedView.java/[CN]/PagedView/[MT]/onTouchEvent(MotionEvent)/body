@@ -92,7 +92,7 @@ snapToDestination();
 }
 }
  else {
-onWallpaperTap(ev);
+onUnhandledTap(ev);
 }
 mTouchState=TOUCH_STATE_REST;
 mActivePointerId=INVALID_POINTER;

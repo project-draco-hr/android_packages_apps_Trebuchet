@@ -22,6 +22,7 @@
       }
     }
   }
+  mLastDownOnOccupiedCell=found;
   if (!found) {
     final int cellXY[]=mTmpXY;
     pointToCellExact(x,y,cellXY);

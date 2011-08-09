@@ -11,7 +11,4 @@
       mVelocityTracker.clear();
     }
   }
-  if (mTouchState == TOUCH_STATE_REST) {
-    onWallpaperTap(ev);
-  }
 }
