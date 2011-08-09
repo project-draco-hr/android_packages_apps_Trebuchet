@@ -1,0 +1,6 @@
+{
+  super(context,attrs,defStyle);
+  TypedArray a=context.obtainStyledAttributes(attrs,R.styleable.Cling,defStyle,0);
+  mDrawIdentifier=a.getString(R.styleable.Cling_drawIdentifier);
+  a.recycle();
+}

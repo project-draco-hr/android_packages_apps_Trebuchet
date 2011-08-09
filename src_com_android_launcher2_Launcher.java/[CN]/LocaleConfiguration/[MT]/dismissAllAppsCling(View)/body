@@ -1,0 +1,4 @@
+{
+  Cling cling=(Cling)findViewById(R.id.all_apps_cling);
+  dismissCling(cling,ALLAPPS_CLING_DISMISSED_KEY);
+}

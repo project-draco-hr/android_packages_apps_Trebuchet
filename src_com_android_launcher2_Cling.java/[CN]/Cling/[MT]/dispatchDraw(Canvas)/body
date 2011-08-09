@@ -1,0 +1,131 @@
+{
+  super.dispatchDraw(canvas);
+  if (mIsInitialized) {
+    DisplayMetrics metrics=new DisplayMetrics();
+    mLauncher.getWindowManager().getDefaultDisplay().getMetrics(metrics);
+    int dotRadius=(int)(6f * metrics.density);
+    Paint p=new Paint();
+    p.setAntiAlias(true);
+    p.setColor(0xFF49C0EC);
+    if (mDrawIdentifier.equals(WORKSPACE_PORTRAIT)) {
+{
+        FrameLayout.LayoutParams lp=(FrameLayout.LayoutParams)mWorkspaceDesc2.getLayoutParams();
+        int[] loc=new int[2];
+        mWorkspaceDesc2.getLocationInWindow(loc);
+        int x=loc[0];
+        int xOffset=(int)(10f * metrics.density);
+        int y=loc[1];
+        int yOffset=(int)(30f * metrics.density);
+        int w=mWorkspaceDesc2.getWidth();
+        int h=mWorkspaceDesc2.getHeight();
+        Point p1=new Point(x + w + xOffset,y - (2 * dotRadius));
+        Point p2=new Point(getMeasuredWidth() / 2,getMeasuredHeight() - mAppIconSize / 2 - yOffset);
+        canvas.drawCircle(p1.x,p1.y,dotRadius,p);
+        canvas.drawCircle(p2.x,p2.y,dotRadius,p);
+        Point p3=new Point(p1.x,(int)(p1.y + (p2.y - p1.y) * 0.30f));
+        Point p4=new Point(p2.x,(int)(p1.y + (p2.y - p1.y) * 0.55f));
+        canvas.drawLine(p1.x,p1.y,p3.x,p3.y,p);
+        canvas.drawLine(p3.x,p3.y,p4.x,p4.y,p);
+        canvas.drawLine(p4.x,p4.y,p2.x,p2.y,p);
+      }
+{
+        FrameLayout.LayoutParams lp=(FrameLayout.LayoutParams)mWorkspaceDesc1.getLayoutParams();
+        int[] loc=new int[2];
+        mWorkspaceDesc1.getLocationInWindow(loc);
+        int x=loc[0];
+        int y=loc[1];
+        int w=mWorkspaceDesc1.getWidth();
+        int h=mWorkspaceDesc1.getHeight();
+        Point p1=new Point(x + w,y - (2 * dotRadius));
+        Point p2=new Point(x + w,getMeasuredHeight() - (4 * mAppIconSize));
+        canvas.drawCircle(p1.x,p1.y,dotRadius,p);
+        canvas.drawCircle(p2.x,p2.y,dotRadius,p);
+        canvas.drawLine(p1.x,p1.y,p2.x,p2.y,p);
+      }
+    }
+ else     if (mDrawIdentifier.equals(WORKSPACE_LANDSCAPE)) {
+      int xOffset=(int)(1.5f * mAppIconSize);
+{
+        FrameLayout.LayoutParams lp=(FrameLayout.LayoutParams)mWorkspaceDesc2.getLayoutParams();
+        int[] loc=new int[2];
+        mWorkspaceDesc2.getLocationInWindow(loc);
+        int x=loc[0];
+        int y=loc[1];
+        int w=mWorkspaceDesc2.getWidth();
+        int h=mWorkspaceDesc2.getHeight();
+        Point p1=new Point(x + w,y - (2 * dotRadius));
+        Point p2=new Point(getMeasuredWidth() - xOffset,getMeasuredHeight() / 2);
+        canvas.drawCircle(p1.x,p1.y,dotRadius,p);
+        canvas.drawCircle(p2.x,p2.y,dotRadius,p);
+        Point p3=new Point((int)(p1.x + (p2.x - p1.x) * 0.6f),p1.y);
+        Point p4=new Point((int)(p1.x + (p2.x - p1.x) * 0.75f),p2.y);
+        canvas.drawLine(p1.x,p1.y,p3.x,p3.y,p);
+        canvas.drawLine(p3.x,p3.y,p4.x,p4.y,p);
+        canvas.drawLine(p4.x,p4.y,p2.x,p2.y,p);
+      }
+{
+        FrameLayout.LayoutParams lp=(FrameLayout.LayoutParams)mWorkspaceDesc1.getLayoutParams();
+        int[] loc=new int[2];
+        mWorkspaceDesc1.getLocationInWindow(loc);
+        int x=loc[0];
+        int y=loc[1];
+        int w=mWorkspaceDesc1.getWidth();
+        int h=mWorkspaceDesc1.getHeight();
+        Point p1=new Point(x + w,y - (2 * dotRadius));
+        Point p2=new Point(getMeasuredWidth() - xOffset,y - (2 * dotRadius));
+        canvas.drawCircle(p1.x,p1.y,dotRadius,p);
+        canvas.drawCircle(p2.x,p2.y,dotRadius,p);
+        canvas.drawLine(p1.x,p1.y,p2.x,p2.y,p);
+      }
+    }
+ else     if (mDrawIdentifier.equals(ALLAPPS_PORTRAIT)) {
+      float r=mAppIconSize * 1.1f;
+      float scale=r / mPunchThroughGraphicCenterRadius;
+      int dw=(int)(scale * mPunchThroughGraphic.getIntrinsicWidth());
+      int dh=(int)(scale * mPunchThroughGraphic.getIntrinsicHeight());
+      int cx=getMeasuredWidth() / 2;
+      int cy=mTabBarHeight + ((getMeasuredHeight() - mTabBarHeight) / 2);
+      mPunchThroughGraphic.setBounds(cx - dw / 2,cy - dh / 2,cx + dw / 2,cy + dh / 2);
+      mPunchThroughGraphic.draw(canvas);
+{
+        FrameLayout.LayoutParams lp=(FrameLayout.LayoutParams)mAllAppsDesc.getLayoutParams();
+        int[] loc=new int[2];
+        mAllAppsDesc.getLocationInWindow(loc);
+        int x=loc[0];
+        int y=loc[1];
+        int yOffset=(int)(2.5f * metrics.density);
+        int w=mAllAppsDesc.getWidth();
+        int h=mAllAppsDesc.getHeight();
+        Point p1=new Point(getMeasuredWidth() / 2,y + h + yOffset);
+        Point p2=new Point(cx,cy);
+        canvas.drawCircle(p1.x,p1.y,dotRadius,p);
+        canvas.drawCircle(p2.x,p2.y,dotRadius,p);
+        canvas.drawLine(p1.x,p1.y,p2.x,p2.y,p);
+      }
+    }
+ else     if (mDrawIdentifier.equals(ALLAPPS_LANDSCAPE)) {
+      float r=mAppIconSize * 1.1f;
+      float scale=r / mPunchThroughGraphicCenterRadius;
+      int dw=(int)(scale * mPunchThroughGraphic.getIntrinsicWidth());
+      int dh=(int)(scale * mPunchThroughGraphic.getIntrinsicHeight());
+      int cx=getMeasuredWidth() / 2 + getMeasuredWidth() / 4;
+      int cy=mTabBarHeight + ((getMeasuredHeight() - mTabBarHeight) / 2);
+      mPunchThroughGraphic.setBounds(cx - dw / 2,cy - dh / 2,cx + dw / 2,cy + dh / 2);
+      mPunchThroughGraphic.draw(canvas);
+{
+        FrameLayout.LayoutParams lp=(FrameLayout.LayoutParams)mAllAppsDesc.getLayoutParams();
+        int[] loc=new int[2];
+        mAllAppsDesc.getLocationInWindow(loc);
+        int x=loc[0];
+        int y=loc[1];
+        int w=mAllAppsDesc.getWidth();
+        int h=mAllAppsDesc.getHeight();
+        Point p1=new Point(x + w,y);
+        Point p2=new Point(cx,cy);
+        canvas.drawCircle(p1.x,p1.y,dotRadius,p);
+        canvas.drawCircle(p2.x,p2.y,dotRadius,p);
+        canvas.drawLine(p1.x,p1.y,p2.x,p2.y,p);
+      }
+    }
+  }
+}
