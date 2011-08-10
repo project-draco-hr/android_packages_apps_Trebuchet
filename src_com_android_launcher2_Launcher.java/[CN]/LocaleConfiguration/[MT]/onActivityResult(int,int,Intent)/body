@@ -1,7 +1,7 @@
 {
   boolean delayExitSpringLoadedMode=false;
   mWaitingForResult=false;
-  if (resultCode == RESULT_OK && mPendingAddInfo.container != ItemInfo.NO_ID && mPendingAddInfo.screen > -1) {
+  if (resultCode == RESULT_OK && mPendingAddInfo.container != ItemInfo.NO_ID) {
     final PendingAddArguments args=new PendingAddArguments();
     args.requestCode=requestCode;
     args.intent=data;
