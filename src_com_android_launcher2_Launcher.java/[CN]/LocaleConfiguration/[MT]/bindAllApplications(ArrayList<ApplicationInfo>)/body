@@ -1,7 +1,16 @@
 {
-  if (mAppsCustomizeContent != null) {
-    mAppsCustomizeContent.setApps(apps);
+  View progressBar=mAppsCustomizeTabHost.findViewById(R.id.apps_customize_progress_bar);
+  if (progressBar != null) {
+    ((ViewGroup)progressBar.getParent()).removeView(progressBar);
   }
+  mAppsCustomizeTabHost.post(new Runnable(){
+    public void run(){
+      if (mAppsCustomizeContent != null) {
+        mAppsCustomizeContent.setApps(apps);
+      }
+    }
+  }
+);
   updateIconsAffectedByPackageManagerChanges();
   updateGlobalSearchIcon();
 }

@@ -27,6 +27,10 @@
   if (!mRestoring) {
     mModel.startLoader(this,true);
   }
+  if (!mModel.isAllAppsLoaded()) {
+    ViewGroup appsCustomizeContentParent=(ViewGroup)mAppsCustomizeContent.getParent();
+    mInflater.inflate(R.layout.apps_customize_progressbar,appsCustomizeContentParent);
+  }
   mDefaultKeySsb=new SpannableStringBuilder();
   Selection.setSelection(mDefaultKeySsb,0);
   IntentFilter filter=new IntentFilter(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
