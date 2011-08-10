@@ -6,9 +6,6 @@
     mAppMarketIntent=intent;
     sAppMarketIcon=updateTextButtonWithIconFromExternalActivity(R.id.market_button,activityName,R.drawable.ic_launcher_market_holo);
     marketButton.setVisibility(View.VISIBLE);
-    if (!LauncherApplication.isScreenLarge()) {
-      ((TextView)marketButton).setText("");
-    }
   }
  else {
     marketButton.setVisibility(View.GONE);

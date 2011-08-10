@@ -1,0 +1,8 @@
+{
+  if (mInTransition) {
+    mResetAfterTransition=true;
+  }
+ else {
+    mAppsCustomizePane.reset();
+  }
+}
