@@ -1,4 +1,3 @@
 {
-  startSearch(null,false,null,true);
-  overridePendingTransition(R.anim.fade_in_fast,R.anim.fade_out_fast);
+  onSearchRequested();
 }
