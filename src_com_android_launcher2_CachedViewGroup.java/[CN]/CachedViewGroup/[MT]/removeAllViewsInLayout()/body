@@ -1,4 +1,0 @@
-{
-  super.removeAllViewsInLayout();
-  invalidateCache();
-}

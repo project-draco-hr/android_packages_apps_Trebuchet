@@ -1,8 +1,0 @@
-{
-  super.addView(child,index,params);
-  invalidateCache();
-  if (child instanceof VisibilityChangedBroadcaster) {
-    VisibilityChangedBroadcaster v=(VisibilityChangedBroadcaster)child;
-    v.setVisibilityChangedListener(this);
-  }
-}
