@@ -1,4 +1,0 @@
-{
-  onAddView(child);
-  super.addView(child,params);
-}

@@ -1,9 +1,0 @@
-{
-  if (mCache == null) {
-    mCache=Bitmap.createBitmap((int)(getWidth() * mBitmapCacheScale),(int)(getHeight() * mBitmapCacheScale),Config.ARGB_8888);
-    mCachePaint=new Paint();
-    mCachePaint.setFilterBitmap(true);
-    mCacheCanvas.setBitmap(mCache);
-    mCacheCanvas.scale(mBitmapCacheScale,mBitmapCacheScale);
-  }
-}

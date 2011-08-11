@@ -1,5 +1,0 @@
-{
-  if (mIsCacheDirty) {
-    invalidate();
-  }
-}
