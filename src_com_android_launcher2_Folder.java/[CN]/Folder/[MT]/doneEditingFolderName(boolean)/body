@@ -1,9 +1,9 @@
 {
   mFolderName.setHint(sHintText);
+  mInfo.setTitle(mFolderName.getText().toString());
   LauncherModel.updateItemInDatabase(mLauncher,mInfo);
   mFolderName.setCursorVisible(false);
   mFolderName.clearFocus();
   Selection.setSelection((Spannable)mFolderName.getText(),0,0);
   mIsEditingName=false;
-  mInfo.setTitle(mFolderName.getText().toString());
 }
