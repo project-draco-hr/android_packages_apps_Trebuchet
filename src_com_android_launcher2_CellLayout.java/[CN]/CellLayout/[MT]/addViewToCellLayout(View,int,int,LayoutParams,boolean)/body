@@ -4,6 +4,9 @@
     if (lp.cellHSpan < 0)     lp.cellHSpan=mCountX;
     if (lp.cellVSpan < 0)     lp.cellVSpan=mCountY;
     child.setId(childId);
+    if (!LauncherApplication.isScreenLarge()) {
+      child.setLayerType(LAYER_TYPE_HARDWARE,null);
+    }
     mChildren.addView(child,index,lp);
     if (markCells)     markCellsAsOccupiedForView(child);
     return true;

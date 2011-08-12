@@ -1,0 +1,8 @@
+{
+  if (LauncherApplication.isScreenLarge()) {
+    super.setChildrenLayersEnabled(enabled);
+  }
+ else {
+    mChildren.setChildrenLayersEnabled(enabled);
+  }
+}

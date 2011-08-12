@@ -1,3 +1,5 @@
 {
-  mChildren.enableHardwareLayers();
+  if (LauncherApplication.isScreenLarge()) {
+    mChildren.enableHardwareLayers();
+  }
 }
