@@ -3,12 +3,17 @@
   ArrayList<ShortcutInfo> children=info.contents;
   ArrayList<ShortcutInfo> overflow=new ArrayList<ShortcutInfo>();
   setupContentForNumItems(children.size());
+  int count=0;
   for (int i=0; i < children.size(); i++) {
     ShortcutInfo child=(ShortcutInfo)children.get(i);
     if (!createAndAddShortcut(child)) {
       overflow.add(child);
     }
+ else {
+      count++;
+    }
   }
+  setupContentForNumItems(count);
   for (  ShortcutInfo item : overflow) {
     mInfo.remove(item);
     LauncherModel.deleteItemFromDatabase(mLauncher,item);
