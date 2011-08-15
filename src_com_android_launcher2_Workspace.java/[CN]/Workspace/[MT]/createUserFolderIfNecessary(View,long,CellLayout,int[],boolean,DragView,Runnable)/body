@@ -24,7 +24,14 @@
     destInfo.cellY=-1;
     sourceInfo.cellX=-1;
     sourceInfo.cellY=-1;
-    fi.performCreateAnimation(destInfo,v,sourceInfo,dragView,folderLocation,scale,postAnimationRunnable);
+    boolean animate=dragView != null;
+    if (animate) {
+      fi.performCreateAnimation(destInfo,v,sourceInfo,dragView,folderLocation,scale,postAnimationRunnable);
+    }
+ else {
+      fi.addItem(destInfo);
+      fi.addItem(sourceInfo);
+    }
     return true;
   }
   return false;
