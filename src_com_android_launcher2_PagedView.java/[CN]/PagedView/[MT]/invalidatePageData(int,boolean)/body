@@ -1,0 +1,21 @@
+{
+  if (!mIsDataReady) {
+    return;
+  }
+  if (mContentIsRefreshable) {
+    syncPages();
+    measure(MeasureSpec.makeMeasureSpec(getMeasuredWidth(),MeasureSpec.EXACTLY),MeasureSpec.makeMeasureSpec(getMeasuredHeight(),MeasureSpec.EXACTLY));
+    if (currentPage > -1) {
+      setCurrentPage(currentPage);
+    }
+    final int count=getChildCount();
+    mDirtyPageContent.clear();
+    for (int i=0; i < count; ++i) {
+      mDirtyPageContent.add(true);
+    }
+    loadAssociatedPages(mCurrentPage,immediateAndOnly);
+    mDirtyPageAlpha=true;
+    updateAdjacentPagesAlpha();
+    requestLayout();
+  }
+}

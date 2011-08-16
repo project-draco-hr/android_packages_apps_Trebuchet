@@ -30,6 +30,7 @@
     if (curTab != null) {
       mAppsCustomizeContent.setContentType(mAppsCustomizeTabHost.getContentTypeForTabTag(curTab));
       mAppsCustomizeTabHost.setCurrentTabByTag(curTab);
+      mAppsCustomizeContent.loadAssociatedPages(mAppsCustomizeContent.getCurrentPage());
     }
   }
 }

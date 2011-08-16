@@ -1,26 +1,3 @@
 {
-  if (mContentIsRefreshable) {
-    final int count=getChildCount();
-    if (page < count) {
-      int lowerPageBound=getAssociatedLowerPageBound(page);
-      int upperPageBound=getAssociatedUpperPageBound(page);
-      if (DEBUG)       Log.d(TAG,"loadAssociatedPages: " + lowerPageBound + "/"+ upperPageBound);
-      for (int i=0; i < count; ++i) {
-        Page layout=(Page)getChildAt(i);
-        final int childCount=layout.getPageChildCount();
-        if (lowerPageBound <= i && i <= upperPageBound) {
-          if (mDirtyPageContent.get(i)) {
-            syncPageItems(i);
-            mDirtyPageContent.set(i,false);
-          }
-        }
- else {
-          if (childCount > 0) {
-            layout.removeAllViewsOnPage();
-          }
-          mDirtyPageContent.set(i,true);
-        }
-      }
-    }
-  }
+  loadAssociatedPages(page,false);
 }
