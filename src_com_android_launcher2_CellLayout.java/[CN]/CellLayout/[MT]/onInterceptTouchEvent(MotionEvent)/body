@@ -1,19 +1,13 @@
 {
+  final int action=ev.getAction();
+  if (action == MotionEvent.ACTION_DOWN) {
+    clearTagCellInfo();
+  }
   if (mInterceptTouchListener != null && mInterceptTouchListener.onTouch(this,ev)) {
     return true;
   }
-  final int action=ev.getAction();
-  final CellInfo cellInfo=mCellInfo;
   if (action == MotionEvent.ACTION_DOWN) {
     setTagToCellInfoForPoint((int)ev.getX(),(int)ev.getY());
-  }
- else   if (action == MotionEvent.ACTION_UP) {
-    cellInfo.cell=null;
-    cellInfo.cellX=-1;
-    cellInfo.cellY=-1;
-    cellInfo.spanX=0;
-    cellInfo.spanY=0;
-    setTag(cellInfo);
   }
   return false;
 }

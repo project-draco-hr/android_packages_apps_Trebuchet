@@ -1,0 +1,9 @@
+{
+  final CellInfo cellInfo=mCellInfo;
+  cellInfo.cell=null;
+  cellInfo.cellX=-1;
+  cellInfo.cellY=-1;
+  cellInfo.spanX=0;
+  cellInfo.spanY=0;
+  setTag(cellInfo);
+}
