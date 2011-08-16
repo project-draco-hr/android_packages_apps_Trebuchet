@@ -1,0 +1,26 @@
+{
+  if (task != null) {
+    task.syncThreadPriority();
+  }
+  ArrayList<Object> items=data.items;
+  ArrayList<Bitmap> images=data.generatedImages;
+  int count=items.size();
+  int cellWidth=data.cellWidth;
+  int cellHeight=data.cellHeight;
+  for (int i=0; i < count; ++i) {
+    if (task != null) {
+      if (task.isCancelled())       break;
+      task.syncThreadPriority();
+    }
+    Object rawInfo=items.get(i);
+    if (rawInfo instanceof AppWidgetProviderInfo) {
+      AppWidgetProviderInfo info=(AppWidgetProviderInfo)rawInfo;
+      int[] cellSpans=CellLayout.rectToCell(getResources(),info.minWidth,info.minHeight,null);
+      images.add(getWidgetPreview(info,cellSpans[0],cellSpans[1],cellWidth,cellHeight));
+    }
+ else     if (rawInfo instanceof ResolveInfo) {
+      ResolveInfo info=(ResolveInfo)rawInfo;
+      images.add(getShortcutPreview(info,cellWidth,cellHeight));
+    }
+  }
+}

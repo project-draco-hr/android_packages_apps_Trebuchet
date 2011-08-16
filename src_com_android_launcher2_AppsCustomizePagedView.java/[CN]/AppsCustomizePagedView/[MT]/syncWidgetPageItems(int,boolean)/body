@@ -9,5 +9,12 @@
   for (int i=offset; i < Math.min(offset + numItemsPerPage,mWidgets.size()); ++i) {
     items.add(mWidgets.get(i));
   }
-  prepareLoadWidgetPreviewsTask(page,items,cellWidth,cellHeight,mWidgetCountX);
+  if (immediate) {
+    AsyncTaskPageData data=new AsyncTaskPageData(page,items,cellWidth,cellHeight,mWidgetCountX,null,null);
+    loadWidgetPreviewsInBackground(null,data);
+    onSyncWidgetPageItems(data);
+  }
+ else {
+    prepareLoadWidgetPreviewsTask(page,items,cellWidth,cellHeight,mWidgetCountX);
+  }
 }

@@ -1,4 +1,4 @@
 {
   mContentType=type;
-  invalidatePageData(0);
+  invalidatePageData(0,true);
 }

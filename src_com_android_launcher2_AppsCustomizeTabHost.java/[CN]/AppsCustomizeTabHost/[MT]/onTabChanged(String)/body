@@ -3,28 +3,43 @@
   if (!mAppsCustomizePane.isContentType(type)) {
     final Resources res=getResources();
     final int duration=res.getInteger(R.integer.config_tabTransitionDuration);
-    ObjectAnimator anim=ObjectAnimator.ofFloat(mAppsCustomizePane,"alpha",0f);
-    anim.setDuration(duration);
-    anim.addListener(new AnimatorListenerAdapter(){
-      @Override public void onAnimationStart(      android.animation.Animator animation){
+    post(new Runnable(){
+      @Override public void run(){
+        Bitmap b=Bitmap.createBitmap(mAppsCustomizePane.getMeasuredWidth(),mAppsCustomizePane.getMeasuredHeight(),Bitmap.Config.ARGB_8888);
+        Canvas c=new Canvas(b);
+        mAppsCustomizePane.draw(c);
+        mAppsCustomizePane.setAlpha(0f);
+        mAnimationBuffer.setImageBitmap(b);
+        mAnimationBuffer.setAlpha(1f);
+        mAnimationBuffer.setVisibility(View.VISIBLE);
+        c.setBitmap(null);
+        b=null;
         onTabChangedStart();
-      }
-      @Override public void onAnimationEnd(      android.animation.Animator animation){
         onTabChangedEnd(type);
-        ObjectAnimator anim=ObjectAnimator.ofFloat(mAppsCustomizePane,"alpha",1f);
-        anim.setDuration(duration);
-        anim.addListener(new AnimatorListenerAdapter(){
-          @Override public void onAnimationEnd(          android.animation.Animator animation){
-            if (!LauncherApplication.isScreenLarge()) {
-              mAppsCustomizePane.flashScrollingIndicator();
-            }
+        ObjectAnimator outAnim=ObjectAnimator.ofFloat(mAnimationBuffer,"alpha",0f);
+        outAnim.addListener(new AnimatorListenerAdapter(){
+          @Override public void onAnimationEnd(          Animator animation){
+            mAnimationBuffer.setVisibility(View.GONE);
+            mAnimationBuffer.setImageBitmap(null);
           }
         }
 );
-        anim.start();
+        ObjectAnimator inAnim=ObjectAnimator.ofFloat(mAppsCustomizePane,"alpha",1f);
+        inAnim.addListener(new AnimatorListenerAdapter(){
+          @Override public void onAnimationEnd(          Animator animation){
+            if (!LauncherApplication.isScreenLarge()) {
+              mAppsCustomizePane.flashScrollingIndicator();
+            }
+            mAppsCustomizePane.loadAssociatedPages(mAppsCustomizePane.getCurrentPage());
+          }
+        }
+);
+        AnimatorSet animSet=new AnimatorSet();
+        animSet.playTogether(outAnim,inAnim);
+        animSet.setDuration(duration);
+        animSet.start();
       }
     }
 );
-    anim.start();
   }
 }
