@@ -1,0 +1,16 @@
+{
+  boolean wasEmpty=mWidgets.isEmpty();
+  mWidgets.clear();
+  List<AppWidgetProviderInfo> widgets=AppWidgetManager.getInstance(mLauncher).getInstalledProviders();
+  Intent shortcutsIntent=new Intent(Intent.ACTION_CREATE_SHORTCUT);
+  List<ResolveInfo> shortcuts=mPackageManager.queryIntentActivities(shortcutsIntent,0);
+  mWidgets.addAll(widgets);
+  mWidgets.addAll(shortcuts);
+  Collections.sort(mWidgets,new LauncherModel.WidgetAndShortcutNameComparator(mPackageManager));
+  if (wasEmpty) {
+    if (testDataReady())     requestLayout();
+  }
+ else {
+    invalidatePageData();
+  }
+}
