@@ -1,8 +1,10 @@
 {
   final Callbacks cbk=mCallbacks.get();
   final boolean loadWorkspaceFirst=cbk != null ? (!cbk.isAllAppsVisible()) : true;
+  mDbIconCache.clear();
   keep_running: {
 synchronized (mLock) {
+      if (DEBUG_LOADERS)       Log.d(TAG,"Setting thread priority to " + (mIsLaunching ? "DEFAULT" : "BACKGROUND"));
       android.os.Process.setThreadPriority(mIsLaunching ? Process.THREAD_PRIORITY_DEFAULT : Process.THREAD_PRIORITY_BACKGROUND);
     }
     if (loadWorkspaceFirst) {
@@ -18,6 +20,7 @@ synchronized (mLock) {
     }
 synchronized (mLock) {
       if (mIsLaunching) {
+        if (DEBUG_LOADERS)         Log.d(TAG,"Setting thread priority to BACKGROUND");
         android.os.Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);
       }
     }
@@ -31,6 +34,11 @@ synchronized (mLock) {
       loadAndBindWorkspace();
     }
   }
+  if (DEBUG_LOADERS)   Log.d(TAG,"Comparing loaded icons to database icons");
+  for (  Object key : mDbIconCache.keySet()) {
+    updateSavedIcon(mContext,(ShortcutInfo)key,mDbIconCache.get(key));
+  }
+  mDbIconCache.clear();
   mContext=null;
 synchronized (mLock) {
     if (mLoaderTask == this) {

@@ -1,0 +1,10 @@
+{
+  if (!mAppsCanBeOnExternalStorage) {
+    return false;
+  }
+  if (!info.customIcon && !info.usingFallbackIcon) {
+    cache.put(info,c.getBlob(iconIndex));
+    return true;
+  }
+  return false;
+}

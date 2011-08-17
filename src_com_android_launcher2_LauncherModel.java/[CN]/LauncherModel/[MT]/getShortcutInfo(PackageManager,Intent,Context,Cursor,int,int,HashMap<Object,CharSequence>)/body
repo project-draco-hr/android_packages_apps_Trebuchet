@@ -7,7 +7,7 @@
   }
   final ResolveInfo resolveInfo=manager.resolveActivity(intent,0);
   if (resolveInfo != null) {
-    icon=mIconCache.getIcon(componentName,resolveInfo);
+    icon=mIconCache.getIcon(componentName,resolveInfo,labelCache);
   }
   if (icon == null) {
     if (c != null) {

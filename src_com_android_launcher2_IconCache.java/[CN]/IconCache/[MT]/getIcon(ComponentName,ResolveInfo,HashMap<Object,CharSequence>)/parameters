@@ -1,2 +1,3 @@
 ComponentName component
 ResolveInfo resolveInfo
+HashMap<Object,CharSequence> labelCache
