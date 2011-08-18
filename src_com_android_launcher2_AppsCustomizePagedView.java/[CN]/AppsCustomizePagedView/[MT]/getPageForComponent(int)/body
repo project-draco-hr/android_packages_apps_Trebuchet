@@ -1,0 +1,15 @@
+{
+switch (mContentType) {
+case Applications:
+{
+      int numItemsPerPage=mCellCountX * mCellCountY;
+      return (index / numItemsPerPage);
+    }
+case Widgets:
+{
+    int numItemsPerPage=mWidgetCountX * mWidgetCountY;
+    return (index / numItemsPerPage);
+  }
+}
+return -1;
+}
