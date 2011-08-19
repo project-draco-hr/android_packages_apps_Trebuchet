@@ -20,13 +20,14 @@
   }
   info.setIcon(icon);
   if (resolveInfo != null) {
-    if (labelCache != null && labelCache.containsKey(resolveInfo)) {
-      info.title=labelCache.get(resolveInfo);
+    ComponentName key=LauncherModel.getComponentNameFromResolveInfo(resolveInfo);
+    if (labelCache != null && labelCache.containsKey(key)) {
+      info.title=labelCache.get(key);
     }
  else {
       info.title=resolveInfo.activityInfo.loadLabel(manager);
       if (labelCache != null) {
-        labelCache.put(resolveInfo,info.title);
+        labelCache.put(key,info.title);
       }
     }
   }
