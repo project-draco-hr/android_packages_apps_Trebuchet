@@ -1,5 +1,5 @@
 {
-  boolean small=isSmall() || mIsSwitchingState || mState == State.SPRING_LOADED;
+  boolean small=isSmall() || mIsSwitchingState;
   boolean dragging=mAnimatingViewIntoPlace || mIsDragOccuring;
   boolean enableChildrenLayers=small || dragging || isPageMoving();
   if (enableChildrenLayers != mChildrenLayersEnabled) {

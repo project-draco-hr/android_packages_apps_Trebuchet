@@ -10,7 +10,7 @@
       float scrollProgress=delta / (totalDistance * 1.0f);
       scrollProgress=Math.min(scrollProgress,1.0f);
       scrollProgress=Math.max(scrollProgress,-1.0f);
-      if (mState != State.SPRING_LOADED) {
+      if (!isSmall()) {
         if ((mScrollX < 0 && i == 0) || (mScrollX > mMaxScrollX && i == getChildCount() - 1)) {
           cl.setBackgroundAlphaMultiplier(overScrollBackgroundAlphaInterpolator(Math.abs(scrollProgress)));
           mOverScrollPageIndex=i;

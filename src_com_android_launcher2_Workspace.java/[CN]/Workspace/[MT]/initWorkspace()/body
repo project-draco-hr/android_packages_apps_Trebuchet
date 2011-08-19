@@ -6,33 +6,22 @@
   mIconCache=app.getIconCache();
   mExternalDragOutlinePaint.setAntiAlias(true);
   setWillNotDraw(false);
+  setChildrenDrawnWithCacheEnabled(true);
   try {
     final Resources res=getResources();
     mBackground=res.getDrawable(R.drawable.apps_customize_bg);
   }
  catch (  Resources.NotFoundException e) {
   }
-  mUnshrinkAnimationListener=new AnimatorListenerAdapter(){
+  mChangeStateAnimationListener=new AnimatorListenerAdapter(){
     @Override public void onAnimationStart(    Animator animation){
       mIsSwitchingState=true;
     }
     @Override public void onAnimationEnd(    Animator animation){
       mIsSwitchingState=false;
-      mSyncWallpaperOffsetWithScroll=true;
       mWallpaperOffset.setOverrideHorizontalCatchupConstant(false);
       mAnimator=null;
       updateChildrenLayersEnabled();
-    }
-  }
-;
-  mShrinkAnimationListener=new AnimatorListenerAdapter(){
-    @Override public void onAnimationStart(    Animator animation){
-      mIsSwitchingState=true;
-    }
-    @Override public void onAnimationEnd(    Animator animation){
-      mIsSwitchingState=false;
-      mWallpaperOffset.setOverrideHorizontalCatchupConstant(false);
-      mAnimator=null;
     }
   }
 ;

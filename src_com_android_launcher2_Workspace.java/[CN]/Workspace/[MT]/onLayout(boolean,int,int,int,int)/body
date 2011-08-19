@@ -7,7 +7,7 @@
     mSwitchStateAfterFirstLayout=false;
     post(new Runnable(){
       public void run(){
-        shrink(mStateAfterFirstLayout,false);
+        changeState(mStateAfterFirstLayout,false);
       }
     }
 );

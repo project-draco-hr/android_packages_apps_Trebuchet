@@ -5,14 +5,15 @@
   final float scale=(float)res.getInteger(R.integer.config_appsCustomizeZoomScaleFactor);
   final View toView=mAppsCustomizeTabHost;
   setPivotsForZoom(toView,toState,scale);
-  mWorkspace.shrink(Workspace.State.SMALL,animated);
+  mWorkspace.changeState(Workspace.State.SMALL,animated);
   hideHotseat(animated);
   if (animated) {
     final ValueAnimator scaleAnim=ValueAnimator.ofFloat(0f,1f).setDuration(duration);
     scaleAnim.setInterpolator(new Workspace.ZoomOutInterpolator());
     scaleAnim.addUpdateListener(new LauncherAnimatorUpdateListener(){
       public void onAnimationUpdate(      float a,      float b){
-        ((View)toView.getParent()).fastInvalidate();
+        ((View)toView.getParent()).invalidate();
+        toView.fastInvalidate();
         toView.setFastScaleX(a * scale + b * 1f);
         toView.setFastScaleY(a * scale + b * 1f);
       }
@@ -49,6 +50,7 @@
         if (!springLoaded && !LauncherApplication.isScreenLarge()) {
           mWorkspace.hideScrollingIndicator(true);
           mWorkspace.hideDockDivider(true);
+          mWorkspace.showAllAppsAnimationComplete();
         }
         updateWallpaperVisibility(false);
       }
