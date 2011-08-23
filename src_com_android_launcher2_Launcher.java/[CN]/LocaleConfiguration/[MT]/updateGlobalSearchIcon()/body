@@ -1,6 +1,7 @@
 {
   final ImageView searchButton=(ImageView)findViewById(R.id.search_button);
   final View searchDivider=findViewById(R.id.search_divider);
+  final View voiceButton=findViewById(R.id.voice_button);
   final SearchManager searchManager=(SearchManager)getSystemService(Context.SEARCH_SERVICE);
   ComponentName activityName=searchManager.getGlobalSearchActivity();
   if (activityName != null) {
@@ -11,5 +12,6 @@
  else {
     searchButton.setVisibility(View.GONE);
     if (searchDivider != null)     searchDivider.setVisibility(View.GONE);
+    voiceButton.setVisibility(View.GONE);
   }
 }
