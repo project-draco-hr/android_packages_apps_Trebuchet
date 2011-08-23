@@ -1,0 +1,18 @@
+{
+  if (cling != null) {
+    ObjectAnimator anim=ObjectAnimator.ofFloat(cling,"alpha",0f);
+    anim.setDuration(DISMISS_CLING_DURATION);
+    anim.addListener(new AnimatorListenerAdapter(){
+      public void onAnimationEnd(      Animator animation){
+        cling.setVisibility(View.GONE);
+        cling.cleanup();
+        SharedPreferences prefs=getSharedPreferences("com.android.launcher2.prefs",Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor=prefs.edit();
+        editor.putBoolean(flag,true);
+        editor.commit();
+      }
+    }
+);
+    anim.start();
+  }
+}

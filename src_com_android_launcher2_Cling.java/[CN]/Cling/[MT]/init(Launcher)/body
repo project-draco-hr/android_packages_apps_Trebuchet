@@ -1,0 +1,15 @@
+{
+  if (!mIsInitialized) {
+    mLauncher=l;
+    Resources r=getContext().getResources();
+    mPunchThroughGraphic=r.getDrawable(R.drawable.cling);
+    mPunchThroughGraphicCenterRadius=r.getDimensionPixelSize(R.dimen.clingPunchThroughGraphicCenterRadius);
+    mAppIconSize=r.getDimensionPixelSize(R.dimen.app_icon_size);
+    mTabBarHeight=r.getDimensionPixelSize(R.dimen.apps_customize_tab_bar_height);
+    mTabBarHorizontalPadding=r.getDimensionPixelSize(R.dimen.toolbar_button_horizontal_padding);
+    mWorkspaceDesc1=findViewById(R.id.workspace_cling_move_item);
+    mWorkspaceDesc2=findViewById(R.id.workspace_cling_open_all_apps);
+    mAllAppsDesc=findViewById(R.id.all_apps_cling_add_item);
+    mIsInitialized=true;
+  }
+}
