@@ -1,5 +1,6 @@
 {
   if (LauncherApplication.isScreenLarge())   return;
+  if (ActivityManager.isRunningInTestHarness())   return;
   SharedPreferences prefs=getSharedPreferences("com.android.launcher2.prefs",Context.MODE_PRIVATE);
   if (!prefs.getBoolean(WORKSPACE_CLING_DISMISSED_KEY,false)) {
     Cling cling=(Cling)findViewById(R.id.workspace_cling);
