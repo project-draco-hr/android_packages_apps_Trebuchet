@@ -2,5 +2,4 @@
   mContext=context;
   mIsLaunching=isLaunching;
   mLabelCache=new HashMap<Object,CharSequence>();
-  mDbIconCache=new HashMap<Object,byte[]>();
 }

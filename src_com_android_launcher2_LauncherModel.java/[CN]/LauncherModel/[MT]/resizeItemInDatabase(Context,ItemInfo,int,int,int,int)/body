@@ -16,6 +16,8 @@
       cr.update(uri,values,null,null);
       ItemInfo modelItem=sItemsIdMap.get(item.id);
       if (item != modelItem) {
+        Log.e(TAG,"item: " + ((item != null) ? item.toString() : "null"));
+        Log.e(TAG,"modelItem: " + ((modelItem != null) ? modelItem.toString() : "null"));
         throw new RuntimeException("Error: ItemInfo passed to moveItemInDatabase " + "doesn't match original");
       }
     }
