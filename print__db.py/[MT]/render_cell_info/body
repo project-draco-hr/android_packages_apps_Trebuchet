@@ -1,0 +1,40 @@
+def render_cell_info(out, cell, occupied):
+    if (cell is None):
+        out.write(('    <td width=%d height=%d></td>\n' % (CELL_SIZE, CELL_SIZE)))
+    elif (cell == occupied):
+        pass
+    else:
+        cellX = cell['cellX']
+        cellY = cell['cellY']
+        spanX = cell['spanX']
+        spanY = cell['spanY']
+        intent = cell['intent']
+        if intent:
+            title = ('title="%s"' % cgi.escape(cell['intent'], True))
+        else:
+            title = ''
+        out.write((('    <td colspan=%d rowspan=%d width=%d height=%d' + ' bgcolor=#dddddd align=center valign=middle %s>') % (spanX, spanY, (CELL_SIZE * spanX), (CELL_SIZE * spanY), title)))
+        itemType = cell['itemType']
+        if (itemType == 0):
+            out.write(('<img src="icon_%d.png">\n' % cell['_id']))
+            out.write('<br/>\n')
+            out.write((cgi.escape(cell['title']) + ' <br/><i>(app)</i>'))
+        elif (itemType == 1):
+            out.write(('<img src="icon_%d.png">\n' % cell['_id']))
+            out.write('<br/>\n')
+            out.write((cgi.escape(cell['title']) + ' <br/><i>(shortcut)</i>'))
+        elif (itemType == 2):
+            out.write('<i>folder</i>')
+        elif (itemType == 3):
+            out.write('<i>live folder</i>')
+        elif (itemType == 4):
+            out.write(('<i>widget %d</i><br/>\n' % cell['appWidgetId']))
+        elif (itemType == 1000):
+            out.write('<i>clock</i>')
+        elif (itemType == 1001):
+            out.write('<i>search</i>')
+        elif (itemType == 1002):
+            out.write('<i>photo frame</i>')
+        else:
+            out.write(('<b>unknown type: %d</b>' % itemType))
+        out.write('</td>\n')
