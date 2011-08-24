@@ -1,0 +1,8 @@
+{
+  if (visible) {
+    mFolderName.setVisibility(VISIBLE);
+  }
+ else {
+    mFolderName.setVisibility(INVISIBLE);
+  }
+}

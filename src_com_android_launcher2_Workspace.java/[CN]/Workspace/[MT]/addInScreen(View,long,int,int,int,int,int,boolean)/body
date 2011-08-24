@@ -9,6 +9,9 @@
   if (container == LauncherSettings.Favorites.CONTAINER_HOTSEAT) {
     layout=mLauncher.getHotseat().getLayout();
     child.setOnKeyListener(null);
+    if (child instanceof FolderIcon) {
+      ((FolderIcon)child).setTextVisible(false);
+    }
     if (screen < 0) {
       screen=mLauncher.getHotseat().getOrderInHotseat(x,y);
     }
@@ -18,6 +21,9 @@
     }
   }
  else {
+    if (child instanceof FolderIcon) {
+      ((FolderIcon)child).setTextVisible(true);
+    }
     layout=(CellLayout)getChildAt(screen);
     child.setOnKeyListener(new BubbleTextViewKeyEventListener());
   }
