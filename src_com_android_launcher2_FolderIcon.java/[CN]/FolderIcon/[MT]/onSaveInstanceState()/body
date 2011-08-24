@@ -1,0 +1,4 @@
+{
+  sStaticValuesDirty=true;
+  return super.onSaveInstanceState();
+}

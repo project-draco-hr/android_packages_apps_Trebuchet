@@ -1,6 +1,7 @@
 {
   final Rect clipRect=mTempRect;
   v.getDrawingRect(clipRect);
+  boolean textVisible=false;
   destCanvas.save();
   if (v instanceof TextView && pruneToDrawable) {
     Drawable d=((TextView)v).getCompoundDrawables()[1];
@@ -10,7 +11,10 @@
   }
  else {
     if (v instanceof FolderIcon) {
-      clipRect.bottom=getResources().getDimensionPixelSize(R.dimen.folder_preview_size);
+      if (((FolderIcon)v).getTextVisible()) {
+        ((FolderIcon)v).setTextVisible(false);
+        textVisible=true;
+      }
     }
  else     if (v instanceof BubbleTextView) {
       final BubbleTextView tv=(BubbleTextView)v;
@@ -23,6 +27,9 @@
     destCanvas.translate(-v.getScrollX() + padding / 2,-v.getScrollY() + padding / 2);
     destCanvas.clipRect(clipRect,Op.REPLACE);
     v.draw(destCanvas);
+    if (textVisible) {
+      ((FolderIcon)v).setTextVisible(true);
+    }
   }
   destCanvas.restore();
 }

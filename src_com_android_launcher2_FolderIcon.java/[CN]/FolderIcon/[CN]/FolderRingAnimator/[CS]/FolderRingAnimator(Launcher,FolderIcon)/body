@@ -3,14 +3,11 @@
   Resources res=launcher.getResources();
   mOuterRingDrawable=res.getDrawable(R.drawable.portal_ring_outer_holo);
   mInnerRingDrawable=res.getDrawable(R.drawable.portal_ring_inner_holo);
-  if (sPreviewSize < 0 || sPreviewPadding < 0) {
+  if (sStaticValuesDirty) {
     sPreviewSize=res.getDimensionPixelSize(R.dimen.folder_preview_size);
     sPreviewPadding=res.getDimensionPixelSize(R.dimen.folder_preview_padding);
-  }
-  if (sSharedOuterRingDrawable == null) {
     sSharedOuterRingDrawable=res.getDrawable(R.drawable.portal_ring_outer_holo);
-  }
-  if (sSharedInnerRingDrawable == null) {
     sSharedInnerRingDrawable=res.getDrawable(R.drawable.portal_ring_inner_holo);
+    sStaticValuesDirty=false;
   }
 }
