@@ -1,3 +1,8 @@
 {
-  return !mApps.isEmpty();
+  if (mContentType == AppsCustomizePagedView.ContentType.Widgets) {
+    return !mApps.isEmpty() && !mWidgets.isEmpty();
+  }
+ else {
+    return !mApps.isEmpty();
+  }
 }

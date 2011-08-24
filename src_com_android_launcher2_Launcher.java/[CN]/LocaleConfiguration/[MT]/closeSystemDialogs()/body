@@ -1,14 +1,4 @@
 {
   getWindow().closeAllPanels();
-  try {
-    dismissDialog(DIALOG_CREATE_SHORTCUT);
-  }
- catch (  Exception e) {
-  }
-  try {
-    dismissDialog(DIALOG_RENAME_FOLDER);
-  }
- catch (  Exception e) {
-  }
   mWaitingForResult=false;
 }
