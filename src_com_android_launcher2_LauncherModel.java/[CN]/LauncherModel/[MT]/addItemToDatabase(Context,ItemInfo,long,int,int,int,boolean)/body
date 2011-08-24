@@ -18,6 +18,9 @@
   sWorker.post(new Runnable(){
     public void run(){
       cr.insert(notify ? LauncherSettings.Favorites.CONTENT_URI : LauncherSettings.Favorites.CONTENT_URI_NO_NOTIFICATION,values);
+      if (sItemsIdMap.containsKey(item.id)) {
+        throw new RuntimeException("Error: ItemInfo id (" + item.id + ") passed to "+ "addItemToDatabase already exists."+ item.toString());
+      }
       sItemsIdMap.put(item.id,item);
 switch (item.itemType) {
 case LauncherSettings.Favorites.ITEM_TYPE_FOLDER:

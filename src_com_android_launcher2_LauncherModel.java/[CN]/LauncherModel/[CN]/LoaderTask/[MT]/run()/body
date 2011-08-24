@@ -1,7 +1,6 @@
 {
   final Callbacks cbk=mCallbacks.get();
   final boolean loadWorkspaceFirst=cbk != null ? (!cbk.isAllAppsVisible()) : true;
-  mDbIconCache.clear();
   keep_running: {
 synchronized (mLock) {
       if (DEBUG_LOADERS)       Log.d(TAG,"Setting thread priority to " + (mIsLaunching ? "DEFAULT" : "BACKGROUND"));
@@ -35,10 +34,10 @@ synchronized (mLock) {
     }
   }
   if (DEBUG_LOADERS)   Log.d(TAG,"Comparing loaded icons to database icons");
-  for (  Object key : mDbIconCache.keySet()) {
-    updateSavedIcon(mContext,(ShortcutInfo)key,mDbIconCache.get(key));
+  for (  Object key : sDbIconCache.keySet()) {
+    updateSavedIcon(mContext,(ShortcutInfo)key,sDbIconCache.get(key));
   }
-  mDbIconCache.clear();
+  sDbIconCache.clear();
   mContext=null;
 synchronized (mLock) {
     if (mLoaderTask == this) {

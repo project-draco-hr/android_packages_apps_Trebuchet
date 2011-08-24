@@ -18,6 +18,7 @@ sAppWidgets.remove((LauncherAppWidgetInfo)item);
 break;
 }
 sItemsIdMap.remove(item.id);
+sDbIconCache.remove(item);
 }
 }
 );
