@@ -1,0 +1,8 @@
+def main(argv):
+    if (len(argv) == 1):
+        make_dir()
+        pull_file(AUTO_FILE)
+        process_file(AUTO_FILE)
+        push_file(AUTO_FILE)
+    else:
+        usage()
