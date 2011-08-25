@@ -23,8 +23,8 @@
       MarginLayoutParams lp=(MarginLayoutParams)v.getLayoutParams();
       left+=lp.leftMargin;
       top+=lp.topMargin;
-      left+=(v.getWidth() - dragOutline.getWidth()) / 2;
       top+=(v.getHeight() - dragOutline.getHeight()) / 2;
+      left+=((mCellWidth * spanX) + ((spanX - 1) * mWidthGap) - dragOutline.getWidth()) / 2;
     }
  else {
       left+=((mCellWidth * spanX) + ((spanX - 1) * mWidthGap) - dragOutline.getWidth()) / 2;
