@@ -1,6 +1,0 @@
-{
-  ArrayList<View> children=getItemsInReadingOrder();
-  for (  View child : children) {
-    child.setLayerType(LAYER_TYPE_HARDWARE,null);
-  }
-}
