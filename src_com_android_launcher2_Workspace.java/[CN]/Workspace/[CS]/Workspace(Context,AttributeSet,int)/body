@@ -2,12 +2,7 @@
   super(context,attrs,defStyle);
   mContentIsRefreshable=false;
   setDataIsReady();
-  if (!LauncherApplication.isScreenLarge()) {
-    mCenterPagesVertically=false;
-    if (!LauncherApplication.isScreenLandscape(context)) {
-      mFadeInAdjacentScreens=false;
-    }
-  }
+  mFadeInAdjacentScreens=getResources().getBoolean(R.bool.config_workspaceFadeAdjacentScreens);
   mWallpaperManager=WallpaperManager.getInstance(context);
   int cellCountX=DEFAULT_CELL_COUNT_X;
   int cellCountY=DEFAULT_CELL_COUNT_Y;
