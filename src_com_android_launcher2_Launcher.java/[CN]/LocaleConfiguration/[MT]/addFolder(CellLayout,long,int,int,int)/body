@@ -1,5 +1,5 @@
 {
-  final FolderInfo folderInfo=new FolderInfo();
+  final FolderInfo folderInfo=new FolderInfo("3");
   folderInfo.title=getText(R.string.folder_name);
   LauncherModel.addItemToDatabase(Launcher.this,folderInfo,container,screen,cellX,cellY,false);
   sFolders.put(folderInfo.id,folderInfo);

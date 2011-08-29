@@ -1,7 +1,7 @@
 {
   FolderInfo folderInfo=folders.get(id);
   if (folderInfo == null) {
-    folderInfo=new FolderInfo();
+    folderInfo=new FolderInfo("10");
     folders.put(id,folderInfo);
   }
   return folderInfo;

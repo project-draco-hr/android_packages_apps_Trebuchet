@@ -20,7 +20,7 @@
       cr.update(uri,values,null,null);
       ItemInfo modelItem=sItemsIdMap.get(item.id);
       if (item != modelItem) {
-        String msg="item: " + ((item != null) ? item.toString() : "null") + "modelItem: "+ ((modelItem != null) ? modelItem.toString() : "null")+ "Error: ItemInfo passed to moveItemInDatabase doesn't match original";
+        String msg="item: " + ((item != null) ? item.toString() : "null") + " modelItem: "+ ((modelItem != null) ? modelItem.toString() : "null")+ " creation tag of item: "+ ((item != null) ? item.whereCreated : "null")+ " creation tag of modelItem: "+ ((modelItem != null) ? modelItem.whereCreated : "null")+ " Error: ItemInfo passed to moveItemInDatabase doesn't match original";
         throw new RuntimeException(msg);
       }
       if (modelItem.container == LauncherSettings.Favorites.CONTAINER_DESKTOP || modelItem.container == LauncherSettings.Favorites.CONTAINER_HOTSEAT) {

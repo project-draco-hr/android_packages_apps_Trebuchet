@@ -54,7 +54,7 @@ if (test != null) {
  else {
     if (widgets.size() == 1) {
       final AppWidgetProviderInfo widgetInfo=widgets.get(0).widgetInfo;
-      final PendingAddWidgetInfo createInfo=new PendingAddWidgetInfo(widgetInfo,mimeType,data);
+      final PendingAddWidgetInfo createInfo=new PendingAddWidgetInfo(widgetInfo,mimeType,data,"11");
       mLauncher.addAppWidgetFromDrop(createInfo,LauncherSettings.Favorites.CONTAINER_DESKTOP,mCurrentPage,null,pos);
     }
  else {

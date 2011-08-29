@@ -11,7 +11,7 @@
   final int spanYIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.SPANY);
   try {
     while (c.moveToNext()) {
-      ItemInfo item=new ItemInfo();
+      ItemInfo item=new ItemInfo("17");
       item.cellX=c.getInt(cellXIndex);
       item.cellY=c.getInt(cellYIndex);
       item.spanX=c.getInt(spanXIndex);

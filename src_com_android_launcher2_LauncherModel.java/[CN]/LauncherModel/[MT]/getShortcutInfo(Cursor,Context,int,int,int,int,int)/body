@@ -1,6 +1,6 @@
 {
   Bitmap icon=null;
-  final ShortcutInfo info=new ShortcutInfo();
+  final ShortcutInfo info=new ShortcutInfo("8");
   info.itemType=LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT;
   info.title=c.getString(titleIndex);
   int iconType=c.getInt(iconTypeIndex);

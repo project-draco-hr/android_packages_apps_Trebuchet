@@ -1,0 +1,4 @@
+{
+  super(whereCreated);
+  itemType=LauncherSettings.BaseLauncherColumns.ITEM_TYPE_SHORTCUT;
+}
