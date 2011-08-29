@@ -1,0 +1,5 @@
+{
+  super.setAppWidget(appWidgetId,info);
+  Launcher.Padding padding=mLauncher.getPaddingForWidget(info);
+  setPadding(padding.left,padding.top,padding.right,padding.bottom);
+}

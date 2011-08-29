@@ -1,0 +1,19 @@
+{
+  PackageManager packageManager=getPackageManager();
+  Padding p=new Padding();
+  android.content.pm.ApplicationInfo appInfo;
+  try {
+    appInfo=packageManager.getApplicationInfo(widgetInfo.provider.getPackageName(),0);
+  }
+ catch (  Exception e) {
+    return p;
+  }
+  if (appInfo.targetSdkVersion >= Build.VERSION_CODES.HONEYCOMB_MR2) {
+    Resources r=getResources();
+    p.left=r.getDimensionPixelSize(R.dimen.app_widget_padding_left);
+    p.right=r.getDimensionPixelSize(R.dimen.app_widget_padding_right);
+    p.top=r.getDimensionPixelSize(R.dimen.app_widget_padding_top);
+    p.bottom=r.getDimensionPixelSize(R.dimen.app_widget_padding_bottom);
+  }
+  return p;
+}

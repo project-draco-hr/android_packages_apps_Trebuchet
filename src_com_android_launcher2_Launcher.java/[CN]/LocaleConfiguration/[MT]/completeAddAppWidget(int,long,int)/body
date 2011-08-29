@@ -1,9 +1,9 @@
 {
   AppWidgetProviderInfo appWidgetInfo=mAppWidgetManager.getAppWidgetInfo(appWidgetId);
   CellLayout layout=getCellLayout(container,screen);
-  Resources r=getResources();
-  int requiredWidth=appWidgetInfo.minWidth + r.getDimensionPixelSize(R.dimen.app_widget_padding_left) + r.getDimensionPixelSize(R.dimen.app_widget_padding_right);
-  int requiredHeight=appWidgetInfo.minHeight + r.getDimensionPixelSize(R.dimen.app_widget_padding_top) + r.getDimensionPixelSize(R.dimen.app_widget_padding_bottom);
+  Padding padding=getPaddingForWidget(appWidgetInfo);
+  int requiredWidth=appWidgetInfo.minWidth + padding.left + padding.right;
+  int requiredHeight=appWidgetInfo.minHeight + padding.top + padding.bottom;
   int[] spanXY=layout.rectToCell(requiredWidth,requiredHeight,null);
   int[] cellXY=mTmpAddItemCellCoordinates;
   int[] touchXY=mPendingAddInfo.dropPos;
