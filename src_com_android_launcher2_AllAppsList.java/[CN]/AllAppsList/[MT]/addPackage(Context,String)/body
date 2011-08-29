@@ -2,7 +2,7 @@
   final List<ResolveInfo> matches=findActivitiesForPackage(context,packageName);
   if (matches.size() > 0) {
     for (    ResolveInfo info : matches) {
-      add(new ApplicationInfo(context.getPackageManager(),info,mIconCache,null,"15"));
+      add(new ApplicationInfo(context.getPackageManager(),info,mIconCache,null));
     }
   }
 }

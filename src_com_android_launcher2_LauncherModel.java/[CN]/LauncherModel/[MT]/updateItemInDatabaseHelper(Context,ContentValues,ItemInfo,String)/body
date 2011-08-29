@@ -1,0 +1,30 @@
+{
+  final long itemId=item.id;
+  final Uri uri=LauncherSettings.Favorites.getContentUri(itemId,false);
+  final ContentResolver cr=context.getContentResolver();
+  Runnable r=new Runnable(){
+    public void run(){
+      cr.update(uri,values,null,null);
+      ItemInfo modelItem=sItemsIdMap.get(itemId);
+      if (item != modelItem) {
+        String msg="item: " + ((item != null) ? item.toString() : "null") + "modelItem: "+ ((modelItem != null) ? modelItem.toString() : "null")+ "Error: ItemInfo passed to "+ callingFunction+ " doesn't match original";
+        throw new RuntimeException(msg);
+      }
+      if (modelItem.container == LauncherSettings.Favorites.CONTAINER_DESKTOP || modelItem.container == LauncherSettings.Favorites.CONTAINER_HOTSEAT) {
+        if (!sWorkspaceItems.contains(modelItem)) {
+          sWorkspaceItems.add(modelItem);
+        }
+      }
+ else {
+        sWorkspaceItems.remove(modelItem);
+      }
+    }
+  }
+;
+  if (sWorkerThread.getThreadId() == Process.myTid()) {
+    r.run();
+  }
+ else {
+    sWorker.post(r);
+  }
+}

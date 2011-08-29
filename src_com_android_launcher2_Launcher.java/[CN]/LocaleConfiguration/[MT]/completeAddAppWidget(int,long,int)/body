@@ -29,7 +29,7 @@
     showOutOfSpaceMessage();
     return;
   }
-  LauncherAppWidgetInfo launcherInfo=new LauncherAppWidgetInfo(appWidgetId,"2");
+  LauncherAppWidgetInfo launcherInfo=new LauncherAppWidgetInfo(appWidgetId);
   launcherInfo.spanX=spanXY[0];
   launcherInfo.spanY=spanXY[1];
   LauncherModel.addItemToDatabase(this,launcherInfo,container,screen,cellXY[0],cellXY[1],false);

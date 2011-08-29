@@ -117,7 +117,7 @@ Log.e(TAG,"Deleting widget that isn't installed anymore: id=" + id + " appWidget
 itemsToRemove.add(id);
 }
  else {
-appWidgetInfo=new LauncherAppWidgetInfo(appWidgetId,"5");
+appWidgetInfo=new LauncherAppWidgetInfo(appWidgetId);
 appWidgetInfo.id=id;
 appWidgetInfo.screen=c.getInt(screenIndex);
 appWidgetInfo.cellX=c.getInt(cellXIndex);

@@ -1,5 +1,0 @@
-PackageManager pm
-ResolveInfo info
-IconCache iconCache
-HashMap<Object,CharSequence> labelCache
-String whereCreated
