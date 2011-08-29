@@ -8,7 +8,7 @@
       cr.update(LauncherSettings.Favorites.getContentUri(item.id,false),values,null,null);
       final ItemInfo modelItem=sItemsIdMap.get(item.id);
       if (item != modelItem) {
-        String msg="item: " + ((item != null) ? item.toString() : "null") + "modelItem: "+ ((modelItem != null) ? modelItem.toString() : "null")+ "Error: ItemInfo passed to updateItemInDatabase doesn't match original";
+        String msg="item: " + ((item != null) ? item.toString() : "null") + " modelItem: "+ ((modelItem != null) ? modelItem.toString() : "null")+ " creation tag of item: "+ ((item != null) ? item.whereCreated : "null")+ " creation tag of modelItem: "+ ((modelItem != null) ? modelItem.whereCreated : "null")+ " Error: ItemInfo passed to updateItemInDatabase doesn't match original";
         throw new RuntimeException(msg);
       }
     }

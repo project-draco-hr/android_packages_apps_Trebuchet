@@ -17,7 +17,7 @@
       final ResolveInfo info=matches.get(i);
       ApplicationInfo applicationInfo=findApplicationInfoLocked(info.activityInfo.applicationInfo.packageName,info.activityInfo.name);
       if (applicationInfo == null) {
-        add(new ApplicationInfo(context.getPackageManager(),info,mIconCache,null));
+        add(new ApplicationInfo(context.getPackageManager(),info,mIconCache,null,"16"));
       }
  else {
         mIconCache.remove(applicationInfo.componentName);

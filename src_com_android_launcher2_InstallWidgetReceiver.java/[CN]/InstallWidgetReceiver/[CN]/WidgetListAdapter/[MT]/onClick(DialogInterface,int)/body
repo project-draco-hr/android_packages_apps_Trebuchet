@@ -1,5 +1,5 @@
 {
   final AppWidgetProviderInfo widgetInfo=mActivities.get(which).widgetInfo;
-  final PendingAddWidgetInfo createInfo=new PendingAddWidgetInfo(widgetInfo,mMimeType,mClipData);
+  final PendingAddWidgetInfo createInfo=new PendingAddWidgetInfo(widgetInfo,mMimeType,mClipData,"4");
   mLauncher.addAppWidgetFromDrop(createInfo,LauncherSettings.Favorites.CONTAINER_DESKTOP,mTargetLayoutScreen,null,mTargetLayoutPos);
 }

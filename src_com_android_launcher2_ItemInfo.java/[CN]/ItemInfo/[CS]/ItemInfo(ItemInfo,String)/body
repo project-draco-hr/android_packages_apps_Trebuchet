@@ -1,0 +1,11 @@
+{
+  id=info.id;
+  cellX=info.cellX;
+  cellY=info.cellY;
+  spanX=info.spanX;
+  spanY=info.spanY;
+  screen=info.screen;
+  itemType=info.itemType;
+  container=info.container;
+  this.whereCreated=whereCreated;
+}

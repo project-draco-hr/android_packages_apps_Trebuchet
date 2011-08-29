@@ -24,7 +24,7 @@
       }
     }
   }
-  final ShortcutInfo info=new ShortcutInfo();
+  final ShortcutInfo info=new ShortcutInfo("9");
   if (icon == null) {
     if (fallbackIcon != null) {
       icon=fallbackIcon;

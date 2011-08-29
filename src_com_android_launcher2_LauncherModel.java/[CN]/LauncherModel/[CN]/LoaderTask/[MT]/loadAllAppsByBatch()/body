@@ -46,7 +46,7 @@
     final long t2=DEBUG_LOADERS ? SystemClock.uptimeMillis() : 0;
     startIndex=i;
     for (int j=0; i < N && j < batchSize; j++) {
-      mAllAppsList.add(new ApplicationInfo(packageManager,apps.get(i),mIconCache,mLabelCache));
+      mAllAppsList.add(new ApplicationInfo(packageManager,apps.get(i),mIconCache,mLabelCache,"6"));
       i++;
     }
     final boolean first=i <= batchSize;
