@@ -4,6 +4,7 @@
   final float scaleFactor=(float)res.getInteger(R.integer.config_appsCustomizeZoomScaleFactor);
   final View fromView=mAppsCustomizeTabHost;
   setPivotsForZoom(fromView,fromState,scaleFactor);
+  updateWallpaperVisibility(true);
   if (!springLoaded) {
     mWorkspace.unshrink(animated);
   }
@@ -43,6 +44,7 @@
         mWorkspace.showScrollingIndicator(false);
       }
       @Override public void onAnimationEnd(      Animator animation){
+        updateWallpaperVisibility(true);
         fromView.setVisibility(View.GONE);
         if (fromView instanceof LauncherTransitionable) {
           ((LauncherTransitionable)fromView).onLauncherTransitionEnd(alphaAnim,true);
