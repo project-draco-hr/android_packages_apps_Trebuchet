@@ -34,6 +34,7 @@
     }
     scaleAnim.addListener(new AnimatorListenerAdapter(){
       @Override public void onAnimationStart(      Animator animation){
+        updateWallpaperVisibility(true);
         toView.setTranslationX(0.0f);
         toView.setTranslationY(0.0f);
         toView.setVisibility(View.VISIBLE);
@@ -49,6 +50,7 @@
           mWorkspace.hideScrollingIndicator(true);
           mWorkspace.hideDockDivider(true);
         }
+        updateWallpaperVisibility(false);
       }
     }
 );
@@ -73,5 +75,6 @@
         mWorkspace.hideDockDivider(true);
       }
     }
+    updateWallpaperVisibility(false);
   }
 }
