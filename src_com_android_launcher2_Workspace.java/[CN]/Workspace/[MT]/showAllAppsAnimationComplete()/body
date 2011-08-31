@@ -1,0 +1,6 @@
+{
+  if (mEnableSyncWallpaper) {
+    mSyncWallpaperOffsetWithScroll=true;
+    mEnableSyncWallpaper=true;
+  }
+}

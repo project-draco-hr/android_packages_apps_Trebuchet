@@ -1,6 +1,6 @@
 {
   if (mState == State.APPS_CUSTOMIZE) {
-    mWorkspace.enterSpringLoadedDragMode(layout);
+    mWorkspace.changeState(Workspace.State.SPRING_LOADED);
     cameraZoomIn(State.APPS_CUSTOMIZE,true,true);
     mState=State.APPS_CUSTOMIZE_SPRING_LOADED;
   }

@@ -1,10 +1,13 @@
 {
   mHandler.postDelayed(new Runnable(){
     @Override public void run(){
-      exitSpringLoadedDragMode();
       if (successfulDrop) {
         mAppsCustomizeTabHost.setVisibility(View.GONE);
+        mSearchDeleteBar.showSearchBar(true);
         showWorkspace(true);
+      }
+ else {
+        exitSpringLoadedDragMode();
       }
     }
   }

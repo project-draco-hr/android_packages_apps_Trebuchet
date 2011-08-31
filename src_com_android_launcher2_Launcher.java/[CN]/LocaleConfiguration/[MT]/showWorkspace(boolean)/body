@@ -1,3 +1,12 @@
 {
-  showWorkspace(animated,null);
+  mWorkspace.changeState(Workspace.State.NORMAL,animated);
+  if (mState == State.APPS_CUSTOMIZE) {
+    closeAllApps(animated);
+  }
+  mWorkspace.showDockDivider(!animated);
+  mWorkspace.flashScrollingIndicator();
+  mState=State.WORKSPACE;
+  mUserPresent=true;
+  updateRunning();
+  getWindow().getDecorView().sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_SELECTED);
 }

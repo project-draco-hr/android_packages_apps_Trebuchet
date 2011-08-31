@@ -5,9 +5,6 @@
   final View fromView=mAppsCustomizeTabHost;
   setPivotsForZoom(fromView,fromState,scaleFactor);
   updateWallpaperVisibility(true);
-  if (!springLoaded) {
-    mWorkspace.unshrink(animated);
-  }
   showHotseat(animated);
   if (animated) {
     if (mStateAnimation != null)     mStateAnimation.cancel();
@@ -37,12 +34,6 @@
       ((LauncherTransitionable)fromView).onLauncherTransitionStart(alphaAnim,true);
     }
     alphaAnim.addListener(new AnimatorListenerAdapter(){
-      @Override public void onAnimationStart(      android.animation.Animator animation){
-        if (!springLoaded) {
-          mWorkspace.showDockDivider(false);
-        }
-        mWorkspace.showScrollingIndicator(false);
-      }
       @Override public void onAnimationEnd(      Animator animation){
         updateWallpaperVisibility(true);
         fromView.setVisibility(View.GONE);
@@ -61,10 +52,6 @@
     if (fromView instanceof LauncherTransitionable) {
       ((LauncherTransitionable)fromView).onLauncherTransitionStart(null,true);
       ((LauncherTransitionable)fromView).onLauncherTransitionEnd(null,true);
-      if (!springLoaded && !LauncherApplication.isScreenLarge()) {
-        mWorkspace.showDockDivider(true);
-        mWorkspace.flashScrollingIndicator();
-      }
     }
   }
 }

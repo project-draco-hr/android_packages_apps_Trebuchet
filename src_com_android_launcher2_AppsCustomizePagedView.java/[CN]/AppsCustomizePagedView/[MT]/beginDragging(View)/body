@@ -2,7 +2,7 @@
   if (!super.beginDragging(v))   return false;
   int currentPageIndex=mLauncher.getWorkspace().getCurrentPage();
   CellLayout currentPage=(CellLayout)mLauncher.getWorkspace().getChildAt(currentPageIndex);
-  mLauncher.enterSpringLoadedDragMode(currentPage);
+  mLauncher.enterSpringLoadedDragMode();
   if (v instanceof PagedViewIcon) {
     beginDraggingApplication(v);
   }
