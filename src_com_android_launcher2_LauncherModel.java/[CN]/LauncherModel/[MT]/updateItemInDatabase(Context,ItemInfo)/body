@@ -3,7 +3,7 @@
   final ContentResolver cr=context.getContentResolver();
   item.onAddToDatabase(values);
   item.updateValuesWithCoordinates(values,item.cellX,item.cellY);
-  sWorker.post(new Runnable(){
+  Runnable r=new Runnable(){
     public void run(){
       cr.update(LauncherSettings.Favorites.getContentUri(item.id,false),values,null,null);
       final ItemInfo modelItem=sItemsIdMap.get(item.id);
@@ -13,5 +13,11 @@
       }
     }
   }
-);
+;
+  if (sWorkerThread.getThreadId() == Process.myTid()) {
+    r.run();
+  }
+ else {
+    sWorker.post(r);
+  }
 }
