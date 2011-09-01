@@ -20,8 +20,6 @@
     if (oldState == State.NORMAL && state == State.SMALL) {
       zoomIn=false;
       if (animated) {
-        mEnableSyncWallpaper=true;
-        mSyncWallpaperOffsetWithScroll=false;
         hideScrollingIndicator(true);
       }
       setLayoutScale(finalScaleFactor);

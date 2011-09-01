@@ -50,7 +50,6 @@
         if (!springLoaded && !LauncherApplication.isScreenLarge()) {
           mWorkspace.hideScrollingIndicator(true);
           mWorkspace.hideDockDivider(true);
-          mWorkspace.showAllAppsAnimationComplete();
         }
         updateWallpaperVisibility(false);
       }

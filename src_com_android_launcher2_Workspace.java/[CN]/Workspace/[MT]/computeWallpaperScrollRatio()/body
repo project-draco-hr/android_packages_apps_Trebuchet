@@ -1,0 +1,13 @@
+{
+  float layoutScale=mLayoutScale;
+  int scaled=getChildOffset(mCurrentPage) - getRelativeChildOffset(mCurrentPage);
+  mLayoutScale=1.0f;
+  float unscaled=getChildOffset(mCurrentPage) - getRelativeChildOffset(mCurrentPage);
+  mLayoutScale=layoutScale;
+  if (scaled > 0) {
+    mWallpaperScrollRatio=(1.0f * unscaled) / scaled;
+  }
+ else {
+    mWallpaperScrollRatio=1f;
+  }
+}
