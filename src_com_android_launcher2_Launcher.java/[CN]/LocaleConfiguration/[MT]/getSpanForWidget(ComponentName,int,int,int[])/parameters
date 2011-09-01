@@ -1,0 +1,4 @@
+ComponentName component
+int minWidth
+int minHeight
+int[] spanXY

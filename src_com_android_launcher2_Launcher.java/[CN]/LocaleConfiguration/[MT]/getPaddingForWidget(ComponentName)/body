@@ -3,7 +3,7 @@
   Padding p=new Padding();
   android.content.pm.ApplicationInfo appInfo;
   try {
-    appInfo=packageManager.getApplicationInfo(widgetInfo.provider.getPackageName(),0);
+    appInfo=packageManager.getApplicationInfo(component.getPackageName(),0);
   }
  catch (  Exception e) {
     return p;

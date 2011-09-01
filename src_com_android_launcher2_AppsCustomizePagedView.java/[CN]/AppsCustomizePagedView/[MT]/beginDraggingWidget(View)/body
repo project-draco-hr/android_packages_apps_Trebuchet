@@ -7,7 +7,7 @@
   int h=preview.getIntrinsicHeight();
   if (createItemInfo instanceof PendingAddWidgetInfo) {
     PendingAddWidgetInfo createWidgetInfo=(PendingAddWidgetInfo)createItemInfo;
-    int[] spanXY=CellLayout.rectToCell(getResources(),createWidgetInfo.minWidth,createWidgetInfo.minHeight,null);
+    int[] spanXY=mLauncher.getSpanForWidget(createWidgetInfo,null);
     createItemInfo.spanX=spanXY[0];
     createItemInfo.spanY=spanXY[1];
     b=Bitmap.createBitmap(w,h,Bitmap.Config.ARGB_8888);

@@ -1,0 +1,9 @@
+{
+  if (spanXY == null) {
+    spanXY=new int[2];
+  }
+  Padding padding=getPaddingForWidget(component);
+  int requiredWidth=minWidth + padding.left + padding.right;
+  int requiredHeight=minHeight + padding.top + padding.bottom;
+  return CellLayout.rectToCell(getResources(),requiredWidth,requiredHeight,null);
+}

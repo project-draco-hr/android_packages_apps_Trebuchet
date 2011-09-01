@@ -15,7 +15,7 @@
     Object rawInfo=items.get(i);
     if (rawInfo instanceof AppWidgetProviderInfo) {
       AppWidgetProviderInfo info=(AppWidgetProviderInfo)rawInfo;
-      int[] cellSpans=CellLayout.rectToCell(getResources(),info.minWidth,info.minHeight,null);
+      int[] cellSpans=mLauncher.getSpanForWidget(info,null);
       images.add(getWidgetPreview(info,cellSpans[0],cellSpans[1],cellWidth,cellHeight));
     }
  else     if (rawInfo instanceof ResolveInfo) {
