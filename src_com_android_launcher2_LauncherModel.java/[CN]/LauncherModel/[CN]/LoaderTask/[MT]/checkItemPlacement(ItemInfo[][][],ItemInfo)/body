@@ -1,9 +1,16 @@
 {
   int containerIndex=item.screen;
   if (item.container == LauncherSettings.Favorites.CONTAINER_HOTSEAT) {
-    containerIndex=Launcher.SCREEN_COUNT;
     if (Hotseat.isAllAppsButtonRank(item.screen)) {
       return false;
+    }
+    if (occupied[Launcher.SCREEN_COUNT][item.screen][0] != null) {
+      Log.e(TAG,"Error loading shortcut into hotseat " + item + " into position ("+ item.screen+ ":"+ item.cellX+ ","+ item.cellY+ ") occupied by "+ occupied[Launcher.SCREEN_COUNT][item.screen][0]);
+      return false;
+    }
+ else {
+      occupied[Launcher.SCREEN_COUNT][item.screen][0]=item;
+      return true;
     }
   }
  else   if (item.container != LauncherSettings.Favorites.CONTAINER_DESKTOP) {
