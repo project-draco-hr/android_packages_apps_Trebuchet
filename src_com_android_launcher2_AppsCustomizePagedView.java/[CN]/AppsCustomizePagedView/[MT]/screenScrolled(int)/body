@@ -1,0 +1,44 @@
+{
+  super.screenScrolled(screenCenter);
+  final int halfScreenSize=getMeasuredWidth() / 2;
+  for (int i=0; i < getChildCount(); i++) {
+    View v=getPageAt(i);
+    if (v != null) {
+      int totalDistance=getScaledMeasuredWidth(v) + mPageSpacing;
+      int delta=screenCenter - (getChildOffset(i) - getRelativeChildOffset(i) + halfScreenSize);
+      float scrollProgress=delta / (totalDistance * 1.0f);
+      scrollProgress=Math.min(scrollProgress,1.0f);
+      scrollProgress=Math.max(scrollProgress,-1.0f);
+      float interpolatedProgress=mZInterpolator.getInterpolation(Math.abs(Math.min(scrollProgress,0)));
+      float scale=(1 - interpolatedProgress) + interpolatedProgress * TRANSITION_SCALE_FACTOR;
+      float translationX=Math.min(0,scrollProgress) * v.getMeasuredWidth();
+      float alpha=scrollProgress < 0 ? 1 - Math.abs(scrollProgress) : 1.0f;
+      v.setCameraDistance(mDensity * CAMERA_DISTANCE);
+      int pageWidth=v.getMeasuredWidth();
+      int pageHeight=v.getMeasuredHeight();
+      if (i == 0 && scrollProgress < 0) {
+        v.setPivotX(TRANSITION_PIVOT * pageWidth);
+        v.setRotationY(-TRANSITION_MAX_ROTATION * scrollProgress);
+        scale=1.0f;
+        alpha=1.0f;
+        translationX=getScrollX();
+      }
+ else       if (i == getChildCount() - 1 && scrollProgress > 0) {
+        v.setPivotX((1 - TRANSITION_PIVOT) * pageWidth);
+        v.setRotationY(-TRANSITION_MAX_ROTATION * scrollProgress);
+        scale=1.0f;
+        alpha=1.0f;
+        translationX=getScrollX() - mMaxScrollX;
+      }
+ else {
+        v.setPivotY(pageHeight / 2.0f);
+        v.setPivotX(pageWidth / 2.0f);
+        v.setRotationY(0f);
+      }
+      v.setTranslationX(translationX);
+      v.setScaleX(scale);
+      v.setScaleY(scale);
+      v.setAlpha(alpha);
+    }
+  }
+}

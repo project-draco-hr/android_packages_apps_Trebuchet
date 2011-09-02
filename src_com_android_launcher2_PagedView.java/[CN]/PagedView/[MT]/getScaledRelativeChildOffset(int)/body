@@ -1,4 +1,4 @@
 {
   int padding=mPaddingLeft + mPaddingRight;
-  return mPaddingLeft + (getMeasuredWidth() - padding - getScaledMeasuredWidth(getChildAt(index))) / 2;
+  return mPaddingLeft + (getMeasuredWidth() - padding - getScaledMeasuredWidth(getPageAt(index))) / 2;
 }

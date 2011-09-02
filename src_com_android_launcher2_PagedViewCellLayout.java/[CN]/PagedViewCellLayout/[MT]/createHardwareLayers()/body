@@ -1,7 +1,3 @@
 {
-  mCreateHardwareLayersIfAllowed=true;
-  if (mAllowHardwareLayerCreation) {
-    mChildren.createHardwareLayer();
-    mHolographicChildren.createHardwareLayer();
-  }
+  mChildren.createHardwareLayer();
 }

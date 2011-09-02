@@ -13,6 +13,7 @@
   mDefaultWidgetBackground=resources.getDrawable(R.drawable.default_widget_preview_holo);
   mAppIconSize=resources.getDimensionPixelSize(R.dimen.app_icon_size);
   mDragViewMultiplyColor=resources.getColor(R.color.drag_view_multiply_color);
+  mDensity=resources.getDisplayMetrics().density;
   TypedArray a=context.obtainStyledAttributes(attrs,R.styleable.PagedView,0,0);
   mCellCountX=a.getInt(R.styleable.PagedView_cellCountX,6);
   mCellCountY=a.getInt(R.styleable.PagedView_cellCountY,4);

@@ -4,7 +4,7 @@
   float childrenX[]=new float[childCount];
   float childrenY[]=new float[childCount];
   for (int i=0; i < childCount; i++) {
-    final View child=getChildAt(i);
+    final View child=getPageAt(i);
     childrenX[i]=child.getX();
     childrenY[i]=child.getY();
   }
@@ -14,7 +14,7 @@
   measure(widthSpec,heightSpec);
   layout(mLeft,mTop,mRight,mBottom);
   for (int i=0; i < childCount; i++) {
-    final View child=getChildAt(i);
+    final View child=getPageAt(i);
     child.setX(childrenX[i]);
     child.setY(childrenY[i]);
   }

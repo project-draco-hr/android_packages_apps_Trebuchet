@@ -5,7 +5,7 @@
 switch (mContentType) {
 case Applications:
 {
-        PagedViewCellLayout layout=(PagedViewCellLayout)getChildAt(currentPage);
+        PagedViewCellLayout layout=(PagedViewCellLayout)getPageAt(currentPage);
         PagedViewCellLayoutChildren childrenLayout=layout.getChildrenLayout();
         int numItemsPerPage=mCellCountX * mCellCountY;
         int childCount=childrenLayout.getChildCount();
@@ -16,7 +16,7 @@ case Applications:
     break;
 case Widgets:
 {
-    PagedViewGridLayout layout=(PagedViewGridLayout)getChildAt(currentPage);
+    PagedViewGridLayout layout=(PagedViewGridLayout)getPageAt(currentPage);
     int numItemsPerPage=mWidgetCountX * mWidgetCountY;
     int childCount=layout.getChildCount();
     if (childCount > 0) {
