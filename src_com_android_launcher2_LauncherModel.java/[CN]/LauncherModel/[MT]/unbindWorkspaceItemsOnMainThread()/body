@@ -1,0 +1,12 @@
+{
+  final ArrayList<ItemInfo> workspaceItems=new ArrayList<ItemInfo>(sWorkspaceItems);
+  mHandler.post(new Runnable(){
+    @Override public void run(){
+      for (      ItemInfo item : workspaceItems) {
+        item.unbind();
+      }
+    }
+  }
+);
+  return workspaceItems;
+}
