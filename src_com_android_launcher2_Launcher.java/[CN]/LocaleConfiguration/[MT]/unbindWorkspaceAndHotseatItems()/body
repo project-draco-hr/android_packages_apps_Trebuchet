@@ -1,3 +1,5 @@
 {
-  LauncherModel.unbindWorkspaceItems();
+  if (mModel != null) {
+    mModel.unbindWorkspaceItems();
+  }
 }

@@ -1,5 +1,8 @@
 {
-  for (  ItemInfo item : sWorkspaceItems) {
-    item.unbind();
+  sWorker.post(new Runnable(){
+    @Override public void run(){
+      unbindWorkspaceItemsOnMainThread();
+    }
   }
+);
 }
