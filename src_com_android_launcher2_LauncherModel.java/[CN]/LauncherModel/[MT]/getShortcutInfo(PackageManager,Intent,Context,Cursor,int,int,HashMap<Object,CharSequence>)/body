@@ -1,6 +1,6 @@
 {
   Bitmap icon=null;
-  final ShortcutInfo info=new ShortcutInfo("7");
+  final ShortcutInfo info=new ShortcutInfo();
   ComponentName componentName=intent.getComponent();
   if (componentName == null) {
     return null;

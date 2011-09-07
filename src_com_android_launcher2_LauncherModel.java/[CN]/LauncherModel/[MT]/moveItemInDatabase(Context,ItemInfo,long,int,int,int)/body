@@ -8,30 +8,10 @@
  else {
     item.screen=screen;
   }
-  final Uri uri=LauncherSettings.Favorites.getContentUri(item.id,false);
   final ContentValues values=new ContentValues();
-  final ContentResolver cr=context.getContentResolver();
   values.put(LauncherSettings.Favorites.CONTAINER,item.container);
   values.put(LauncherSettings.Favorites.CELLX,item.cellX);
   values.put(LauncherSettings.Favorites.CELLY,item.cellY);
   values.put(LauncherSettings.Favorites.SCREEN,item.screen);
-  sWorker.post(new Runnable(){
-    public void run(){
-      cr.update(uri,values,null,null);
-      ItemInfo modelItem=sItemsIdMap.get(item.id);
-      if (item != modelItem) {
-        String msg="item: " + ((item != null) ? item.toString() : "null") + " modelItem: "+ ((modelItem != null) ? modelItem.toString() : "null")+ " creation tag of item: "+ ((item != null) ? item.whereCreated : "null")+ " creation tag of modelItem: "+ ((modelItem != null) ? modelItem.whereCreated : "null")+ " Error: ItemInfo passed to moveItemInDatabase doesn't match original";
-        throw new RuntimeException(msg);
-      }
-      if (modelItem.container == LauncherSettings.Favorites.CONTAINER_DESKTOP || modelItem.container == LauncherSettings.Favorites.CONTAINER_HOTSEAT) {
-        if (!sWorkspaceItems.contains(modelItem)) {
-          sWorkspaceItems.add(modelItem);
-        }
-      }
- else {
-        sWorkspaceItems.remove(modelItem);
-      }
-    }
-  }
-);
+  updateItemInDatabaseHelper(context,values,item,"moveItemInDatabase");
 }

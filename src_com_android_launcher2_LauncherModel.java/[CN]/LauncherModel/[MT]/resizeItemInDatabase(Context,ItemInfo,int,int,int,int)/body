@@ -3,23 +3,11 @@
   item.spanY=spanY;
   item.cellX=cellX;
   item.cellY=cellY;
-  final Uri uri=LauncherSettings.Favorites.getContentUri(item.id,false);
   final ContentValues values=new ContentValues();
-  final ContentResolver cr=context.getContentResolver();
   values.put(LauncherSettings.Favorites.CONTAINER,item.container);
   values.put(LauncherSettings.Favorites.SPANX,spanX);
   values.put(LauncherSettings.Favorites.SPANY,spanY);
   values.put(LauncherSettings.Favorites.CELLX,cellX);
   values.put(LauncherSettings.Favorites.CELLY,cellY);
-  sWorker.post(new Runnable(){
-    public void run(){
-      cr.update(uri,values,null,null);
-      ItemInfo modelItem=sItemsIdMap.get(item.id);
-      if (item != modelItem) {
-        String msg="item: " + ((item != null) ? item.toString() : "null") + " modelItem: "+ ((modelItem != null) ? modelItem.toString() : "null")+ " creation tag of item: "+ ((item != null) ? item.whereCreated : "null")+ " creation tag of modelItem: "+ ((modelItem != null) ? modelItem.whereCreated : "null")+ " Error: ItemInfo passed to resizeItemInDatabase doesn't match original";
-        throw new RuntimeException(msg);
-      }
-    }
-  }
-);
+  updateItemInDatabaseHelper(context,values,item,"resizeItemInDatabase");
 }

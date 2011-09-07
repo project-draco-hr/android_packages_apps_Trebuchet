@@ -1,5 +1,0 @@
-{
-  super(whereCreated);
-  itemType=LauncherSettings.Favorites.ITEM_TYPE_APPWIDGET;
-  this.appWidgetId=appWidgetId;
-}

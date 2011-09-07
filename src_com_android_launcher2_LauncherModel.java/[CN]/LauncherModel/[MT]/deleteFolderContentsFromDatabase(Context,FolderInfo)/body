@@ -1,6 +1,6 @@
 {
   final ContentResolver cr=context.getContentResolver();
-  sWorker.post(new Runnable(){
+  Runnable r=new Runnable(){
     public void run(){
       cr.delete(LauncherSettings.Favorites.getContentUri(info.id,false),null,null);
       sItemsIdMap.remove(info.id);
@@ -14,5 +14,11 @@
       }
     }
   }
-);
+;
+  if (sWorkerThread.getThreadId() == Process.myTid()) {
+    r.run();
+  }
+ else {
+    sWorker.post(r);
+  }
 }

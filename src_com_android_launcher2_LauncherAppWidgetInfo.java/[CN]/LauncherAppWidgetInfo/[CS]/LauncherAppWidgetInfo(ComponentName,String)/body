@@ -1,7 +1,0 @@
-{
-  super(whereCreated);
-  itemType=LauncherSettings.Favorites.ITEM_TYPE_APPWIDGET;
-  this.providerName=providerName;
-  spanX=-1;
-  spanY=-1;
-}

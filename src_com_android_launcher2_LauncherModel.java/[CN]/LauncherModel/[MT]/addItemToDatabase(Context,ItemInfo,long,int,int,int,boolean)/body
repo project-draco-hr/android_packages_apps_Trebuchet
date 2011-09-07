@@ -15,7 +15,7 @@
   item.id=app.getLauncherProvider().generateNewId();
   values.put(LauncherSettings.Favorites._ID,item.id);
   item.updateValuesWithCoordinates(values,item.cellX,item.cellY);
-  sWorker.post(new Runnable(){
+  Runnable r=new Runnable(){
     public void run(){
       cr.insert(notify ? LauncherSettings.Favorites.CONTENT_URI : LauncherSettings.Favorites.CONTENT_URI_NO_NOTIFICATION,values);
       if (sItemsIdMap.containsKey(item.id)) {
@@ -37,5 +37,11 @@ break;
 }
 }
 }
-);
+;
+if (sWorkerThread.getThreadId() == Process.myTid()) {
+r.run();
+}
+ else {
+sWorker.post(r);
+}
 }

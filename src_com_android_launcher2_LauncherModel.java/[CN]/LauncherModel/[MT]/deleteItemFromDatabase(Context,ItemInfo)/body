@@ -1,7 +1,7 @@
 {
   final ContentResolver cr=context.getContentResolver();
   final Uri uriToDelete=LauncherSettings.Favorites.getContentUri(item.id,false);
-  sWorker.post(new Runnable(){
+  Runnable r=new Runnable(){
     public void run(){
       cr.delete(uriToDelete,null,null);
 switch (item.itemType) {
@@ -21,5 +21,11 @@ sItemsIdMap.remove(item.id);
 sDbIconCache.remove(item);
 }
 }
-);
+;
+if (sWorkerThread.getThreadId() == Process.myTid()) {
+r.run();
+}
+ else {
+sWorker.post(r);
+}
 }

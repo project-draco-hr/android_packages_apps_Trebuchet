@@ -1,6 +1,0 @@
-{
-  super(info,whereCreated);
-  title=info.title.toString();
-  intent=new Intent(info.intent);
-  customIcon=false;
-}
