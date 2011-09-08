@@ -11,11 +11,13 @@
   int scrollRange=getScrollRange();
   float scrollProgressOffset=0;
   if (isStaticWallpaper) {
-    int overscrollOffset=(int)(maxOverScroll() * display.getWidth());
-    scrollProgressOffset+=overscrollOffset / (float)getScrollRange();
-    scrollRange+=2 * overscrollOffset;
+    int overScrollOffset=(int)(maxOverScroll() * display.getWidth());
+    scrollProgressOffset+=overScrollOffset / (float)getScrollRange();
+    scrollRange+=2 * overScrollOffset;
   }
-  float adjustedScrollX=mWallpaperScrollRatio * mScrollX;
+  boolean overScrollWallpaper=LauncherApplication.isScreenLarge();
+  float adjustedScrollX=overScrollWallpaper ? mScrollX : Math.max(0,Math.min(mScrollX,mMaxScrollX));
+  adjustedScrollX*=mWallpaperScrollRatio;
   mLayoutScale=layoutScale;
   float scrollProgress=adjustedScrollX / (float)scrollRange + scrollProgressOffset;
   float offsetInDips=wallpaperTravelWidth * scrollProgress + (mWallpaperWidth - wallpaperTravelWidth) / 2;

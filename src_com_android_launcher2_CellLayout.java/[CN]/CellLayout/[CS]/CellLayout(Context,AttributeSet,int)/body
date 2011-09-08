@@ -20,6 +20,9 @@
   mNormalGlowBackgroundMini=res.getDrawable(R.drawable.homescreen_small_blue_strong);
   mActiveBackgroundMini=res.getDrawable(R.drawable.homescreen_small_green);
   mActiveGlowBackgroundMini=res.getDrawable(R.drawable.homescreen_small_green_strong);
+  mOverScrollLeft=res.getDrawable(R.drawable.overscroll_glow_left);
+  mOverScrollRight=res.getDrawable(R.drawable.overscroll_glow_right);
+  mForegroundPadding=res.getDimensionPixelSize(R.dimen.workspace_overscroll_drawable_padding);
   mNormalBackground.setFilterBitmap(true);
   mActiveBackground.setFilterBitmap(true);
   mActiveGlowBackground.setFilterBitmap(true);
@@ -80,6 +83,7 @@
     mDragOutlineAnims[i]=anim;
   }
   mBackgroundRect=new Rect();
+  mForegroundRect=new Rect();
   mGlowBackgroundRect=new Rect();
   setHoverScale(1.0f);
   setHoverAlpha(1.0f);

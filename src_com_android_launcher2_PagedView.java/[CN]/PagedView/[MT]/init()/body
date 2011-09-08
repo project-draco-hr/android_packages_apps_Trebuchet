@@ -8,4 +8,5 @@
   mTouchSlop=configuration.getScaledTouchSlop();
   mPagingTouchSlop=configuration.getScaledPagingTouchSlop();
   mMaximumVelocity=configuration.getScaledMaximumFlingVelocity();
+  mDensity=getResources().getDisplayMetrics().density;
 }

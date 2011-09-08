@@ -1,0 +1,11 @@
+{
+  if (left && mOverScrollForegroundDrawable != mOverScrollLeft) {
+    mOverScrollForegroundDrawable=mOverScrollLeft;
+  }
+ else   if (!left && mOverScrollForegroundDrawable != mOverScrollRight) {
+    mOverScrollForegroundDrawable=mOverScrollRight;
+  }
+  mForegroundAlpha=(int)Math.round((r * 255));
+  mOverScrollForegroundDrawable.setAlpha(mForegroundAlpha);
+  invalidate();
+}

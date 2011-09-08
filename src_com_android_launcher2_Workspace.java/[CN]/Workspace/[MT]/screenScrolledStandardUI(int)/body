@@ -1,0 +1,18 @@
+{
+  if (mScrollX < 0 || mScrollX > mMaxScrollX) {
+    int index=mScrollX < 0 ? 0 : getChildCount() - 1;
+    CellLayout cl=(CellLayout)getChildAt(index);
+    float scrollProgress=getScrollProgress(screenCenter,cl,index);
+    cl.setOverScrollAmount(Math.abs(scrollProgress),index == 0);
+    float translationX=index == 0 ? mScrollX : -(mMaxScrollX - mScrollX);
+    float rotation=-WORKSPACE_OVERSCROLL_ROTATION * scrollProgress;
+    cl.setCameraDistance(mDensity * 6500);
+    cl.setPivotX(cl.getMeasuredWidth() * (index == 0 ? 0.75f : 0.25f));
+    cl.setTranslationX(translationX);
+    cl.setRotationY(rotation);
+  }
+ else {
+    resetCellLayoutTransforms((CellLayout)getChildAt(0),true);
+    resetCellLayoutTransforms((CellLayout)getChildAt(getChildCount() - 1),false);
+  }
+}

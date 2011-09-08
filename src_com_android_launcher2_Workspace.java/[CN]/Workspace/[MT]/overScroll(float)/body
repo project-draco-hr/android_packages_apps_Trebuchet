@@ -1,0 +1,8 @@
+{
+  if (LauncherApplication.isScreenLarge()) {
+    dampedOverScroll(amount);
+  }
+ else {
+    acceleratedOverScroll(amount);
+  }
+}
