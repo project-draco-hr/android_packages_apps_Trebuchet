@@ -12,6 +12,7 @@ synchronized (mLock) {
         oldTask.stopLocked();
       }
       mLoaderTask=new LoaderTask(context,isLaunching);
+      sWorkerThread.setPriority(Thread.NORM_PRIORITY);
       sWorker.post(mLoaderTask);
     }
   }
