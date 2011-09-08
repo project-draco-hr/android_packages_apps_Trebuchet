@@ -9,7 +9,7 @@
         if ((i != page) && immediateAndOnly) {
           continue;
         }
-        Page layout=(Page)getChildAt(i);
+        Page layout=(Page)getPageAt(i);
         final int childCount=layout.getPageChildCount();
         if (lowerPageBound <= i && i <= upperPageBound) {
           if (mDirtyPageContent.get(i)) {

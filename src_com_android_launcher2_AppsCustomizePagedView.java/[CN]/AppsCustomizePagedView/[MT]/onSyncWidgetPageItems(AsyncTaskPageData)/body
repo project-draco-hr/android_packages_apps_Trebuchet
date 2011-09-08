@@ -1,6 +1,6 @@
 {
   int page=data.page;
-  PagedViewGridLayout layout=(PagedViewGridLayout)getChildAt(page);
+  PagedViewGridLayout layout=(PagedViewGridLayout)getPageAt(page);
   layout.setColumnCount(layout.getCellCountX());
   ArrayList<Object> items=data.items;
   int count=items.size();

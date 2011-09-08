@@ -3,7 +3,7 @@
   int delta=newX - mScrollX;
   final int pageCount=getChildCount();
   for (int i=0; i < pageCount; i++) {
-    View page=(View)getChildAt(i);
+    View page=(View)getPageAt(i);
     page.setX(page.getX() + delta);
   }
   setCurrentPage(newCurrentPage);

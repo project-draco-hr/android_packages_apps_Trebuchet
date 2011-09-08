@@ -12,9 +12,4 @@
   mChildren.setCellDimensions(mCellWidth,mCellHeight);
   mChildren.setGap(mWidthGap,mHeightGap);
   addView(mChildren);
-  mHolographicChildren=new PagedViewCellLayoutChildren(context);
-  mHolographicChildren.setAlpha(0f);
-  mHolographicChildren.setCellDimensions(mCellWidth,mCellHeight);
-  mHolographicChildren.setGap(mWidthGap,mHeightGap);
-  addView(mHolographicChildren);
 }

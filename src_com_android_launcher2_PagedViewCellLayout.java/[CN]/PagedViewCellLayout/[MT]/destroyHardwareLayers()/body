@@ -1,7 +1,3 @@
 {
-  mCreateHardwareLayersIfAllowed=false;
-  if (mAllowHardwareLayerCreation) {
-    mChildren.destroyHardwareLayer();
-    mHolographicChildren.destroyHardwareLayer();
-  }
+  mChildren.destroyHardwareLayer();
 }

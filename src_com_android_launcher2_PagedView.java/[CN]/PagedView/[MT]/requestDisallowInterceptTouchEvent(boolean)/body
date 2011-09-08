@@ -1,6 +1,6 @@
 {
   if (disallowIntercept) {
-    final View currentPage=getChildAt(mCurrentPage);
+    final View currentPage=getPageAt(mCurrentPage);
     currentPage.cancelLongPress();
   }
   super.requestDisallowInterceptTouchEvent(disallowIntercept);

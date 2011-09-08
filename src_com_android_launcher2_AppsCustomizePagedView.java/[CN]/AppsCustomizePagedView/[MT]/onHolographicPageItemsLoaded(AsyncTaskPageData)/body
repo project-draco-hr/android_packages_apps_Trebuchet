@@ -1,7 +1,7 @@
 {
   invalidate();
   int page=data.page;
-  ViewGroup layout=(ViewGroup)getChildAt(page);
+  ViewGroup layout=(ViewGroup)getPageAt(page);
   if (layout instanceof PagedViewCellLayout) {
     PagedViewCellLayout cl=(PagedViewCellLayout)layout;
     int count=cl.getPageChildCount();

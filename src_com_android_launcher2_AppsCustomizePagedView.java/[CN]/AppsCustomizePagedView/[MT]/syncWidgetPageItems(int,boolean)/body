@@ -17,4 +17,6 @@
  else {
     prepareLoadWidgetPreviewsTask(page,items,cellWidth,cellHeight,mWidgetCountX);
   }
+  PagedViewGridLayout layout=(PagedViewGridLayout)getPageAt(page);
+  layout.createHardwareLayer();
 }

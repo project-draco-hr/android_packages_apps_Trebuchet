@@ -6,7 +6,7 @@
       int screenCenter=mScrollX + halfScreenSize + mPaddingLeft;
       final int childCount=getChildCount();
       for (int i=0; i < childCount; ++i) {
-        View layout=(View)getChildAt(i);
+        View layout=(View)getPageAt(i);
         int childWidth=getScaledMeasuredWidth(layout);
         int halfChildWidth=(childWidth / 2);
         int childCenter=getChildOffset(i) + halfChildWidth;
@@ -18,7 +18,7 @@
         int distanceFromScreenCenter=childCenter - screenCenter;
         if (distanceFromScreenCenter > 0) {
           if (i > 0) {
-            d+=getScaledMeasuredWidth(getChildAt(i - 1)) / 2;
+            d+=getScaledMeasuredWidth(getPageAt(i - 1)) / 2;
           }
  else {
             continue;
@@ -26,7 +26,7 @@
         }
  else {
           if (i < childCount - 1) {
-            d+=getScaledMeasuredWidth(getChildAt(i + 1)) / 2;
+            d+=getScaledMeasuredWidth(getPageAt(i + 1)) / 2;
           }
  else {
             continue;

@@ -2,5 +2,4 @@
   mWidthGap=widthGap;
   mHeightGap=heightGap;
   mChildren.setGap(widthGap,heightGap);
-  mHolographicChildren.setGap(widthGap,heightGap);
 }

@@ -55,7 +55,7 @@ boolean isSignificantMove=Math.abs(deltaX) > MIN_LENGTH_FOR_MOVE;
 final int snapVelocity=mSnapVelocity;
 mTotalMotionX+=Math.abs(mLastMotionX + mLastMotionXRemainder - x);
 boolean returnToOriginalPage=false;
-final int pageWidth=getScaledMeasuredWidth(getChildAt(mCurrentPage));
+final int pageWidth=getScaledMeasuredWidth(getPageAt(mCurrentPage));
 if (Math.abs(deltaX) > pageWidth * RETURN_TO_ORIGINAL_PAGE_THRESHOLD && Math.signum(velocityX) != Math.signum(deltaX)) {
 returnToOriginalPage=true;
 }

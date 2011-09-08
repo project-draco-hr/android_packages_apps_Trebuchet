@@ -4,7 +4,7 @@
     ViewParent vp=v.getParent();
     int count=getChildCount();
     for (int i=0; i < count; i++) {
-      if (vp == getChildAt(i)) {
+      if (vp == getPageAt(i)) {
         return i;
       }
     }

@@ -1,4 +1,3 @@
 {
   mChildren.enableCenteredContent(enabled);
-  mHolographicChildren.enableCenteredContent(enabled);
 }

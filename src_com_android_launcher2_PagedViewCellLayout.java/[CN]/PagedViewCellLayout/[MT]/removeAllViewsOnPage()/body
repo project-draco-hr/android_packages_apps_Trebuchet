@@ -1,5 +1,4 @@
 {
   mChildren.removeAllViews();
-  mHolographicChildren.removeAllViews();
   destroyHardwareLayers();
 }
