@@ -36,17 +36,18 @@
   Selection.setSelection(mDefaultKeySsb,0);
   IntentFilter filter=new IntentFilter(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
   registerReceiver(mCloseSystemDialogsReceiver,filter);
-  if (sGlobalSearchIcon == null || sVoiceSearchIcon == null || sAppMarketIcon == null) {
+  int coi=getCurrentOrientationIndexForGlobalIcons();
+  if (sGlobalSearchIcon[coi] == null || sVoiceSearchIcon[coi] == null || sAppMarketIcon[coi] == null) {
     updateIconsAffectedByPackageManagerChanges();
     updateGlobalSearchIcon();
   }
-  if (sGlobalSearchIcon != null) {
-    updateGlobalSearchIcon(sGlobalSearchIcon);
+  if (sGlobalSearchIcon[coi] != null) {
+    updateGlobalSearchIcon(sGlobalSearchIcon[coi]);
   }
-  if (sVoiceSearchIcon != null) {
-    updateVoiceSearchIcon(sVoiceSearchIcon);
+  if (sVoiceSearchIcon[coi] != null) {
+    updateVoiceSearchIcon(sVoiceSearchIcon[coi]);
   }
-  if (sAppMarketIcon != null) {
-    updateAppMarketIcon(sAppMarketIcon);
+  if (sAppMarketIcon[coi] != null) {
+    updateAppMarketIcon(sAppMarketIcon[coi]);
   }
 }

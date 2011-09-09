@@ -3,8 +3,9 @@
   Intent intent=new Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_APP_MARKET);
   ComponentName activityName=intent.resolveActivity(getPackageManager());
   if (activityName != null) {
+    int coi=getCurrentOrientationIndexForGlobalIcons();
     mAppMarketIntent=intent;
-    sAppMarketIcon=updateTextButtonWithIconFromExternalActivity(R.id.market_button,activityName,R.drawable.ic_launcher_market_holo);
+    sAppMarketIcon[coi]=updateTextButtonWithIconFromExternalActivity(R.id.market_button,activityName,R.drawable.ic_launcher_market_holo);
     marketButton.setVisibility(View.VISIBLE);
   }
  else {

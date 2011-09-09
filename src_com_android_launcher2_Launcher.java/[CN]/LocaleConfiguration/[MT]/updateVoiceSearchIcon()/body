@@ -4,7 +4,8 @@
   Intent intent=new Intent(RecognizerIntent.ACTION_WEB_SEARCH);
   ComponentName activityName=intent.resolveActivity(getPackageManager());
   if (activityName != null) {
-    sVoiceSearchIcon=updateButtonWithIconFromExternalActivity(R.id.voice_button,activityName,R.drawable.ic_voice_search_holo);
+    int coi=getCurrentOrientationIndexForGlobalIcons();
+    sVoiceSearchIcon[coi]=updateButtonWithIconFromExternalActivity(R.id.voice_button,activityName,R.drawable.ic_voice_search_holo);
     if (searchDivider != null)     searchDivider.setVisibility(View.VISIBLE);
     voiceButton.setVisibility(View.VISIBLE);
   }

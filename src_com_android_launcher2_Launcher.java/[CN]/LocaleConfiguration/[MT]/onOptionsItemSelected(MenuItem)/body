@@ -3,12 +3,6 @@ switch (item.getItemId()) {
 case MENU_WALLPAPER_SETTINGS:
     startWallpaper();
   return true;
-case MENU_MANAGE_APPS:
-manageApps();
-return true;
-case MENU_HELP:
-startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse(getString(R.string.help_url))));
-return true;
 }
 return super.onOptionsItemSelected(item);
 }
