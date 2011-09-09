@@ -5,10 +5,10 @@
     int contentWidth=mAppsCustomizePane.getPageContentWidth();
     if (contentWidth > 0) {
       mTabs.getLayoutParams().width=contentWidth;
-      mTabsContainer.setAlpha(1f);
       post(new Runnable(){
         public void run(){
           mTabs.requestLayout();
+          mTabsContainer.setAlpha(1f);
         }
       }
 );

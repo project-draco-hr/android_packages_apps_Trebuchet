@@ -32,6 +32,9 @@ synchronized (mLock) {
       if (DEBUG_LOADERS)       Log.d(TAG,"step 2: special: loading workspace");
       loadAndBindWorkspace();
     }
+synchronized (mLock) {
+      android.os.Process.setThreadPriority(Process.THREAD_PRIORITY_DEFAULT);
+    }
   }
   if (DEBUG_LOADERS)   Log.d(TAG,"Comparing loaded icons to database icons");
   for (  Object key : sDbIconCache.keySet()) {
