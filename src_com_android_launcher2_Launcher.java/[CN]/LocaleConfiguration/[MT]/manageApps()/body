@@ -1,3 +1,0 @@
-{
-  startActivity(new Intent(android.provider.Settings.ACTION_MANAGE_ALL_APPLICATIONS_SETTINGS));
-}

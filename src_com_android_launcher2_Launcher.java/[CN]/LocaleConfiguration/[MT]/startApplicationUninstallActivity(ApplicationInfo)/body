@@ -7,6 +7,7 @@
     String packageName=appInfo.componentName.getPackageName();
     String className=appInfo.componentName.getClassName();
     Intent intent=new Intent(Intent.ACTION_DELETE,Uri.fromParts("package",packageName,className));
+    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
     startActivity(intent);
   }
 }
