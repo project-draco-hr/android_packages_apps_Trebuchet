@@ -12,7 +12,9 @@
     cl.setRotationY(rotation);
   }
  else {
-    resetCellLayoutTransforms((CellLayout)getChildAt(0),true);
-    resetCellLayoutTransforms((CellLayout)getChildAt(getChildCount() - 1),false);
+    if (!isSwitchingState()) {
+      resetCellLayoutTransforms((CellLayout)getChildAt(0),true);
+      resetCellLayoutTransforms((CellLayout)getChildAt(getChildCount() - 1),false);
+    }
   }
 }
