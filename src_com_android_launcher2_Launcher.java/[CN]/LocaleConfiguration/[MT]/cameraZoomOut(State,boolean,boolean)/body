@@ -34,6 +34,7 @@
       ((LauncherTransitionable)toView).onLauncherTransitionStart(scaleAnim,false);
     }
     scaleAnim.addListener(new AnimatorListenerAdapter(){
+      boolean animationCancelled=false;
       @Override public void onAnimationStart(      Animator animation){
         updateWallpaperVisibility(true);
         toView.setTranslationX(0.0f);
@@ -51,7 +52,12 @@
           mWorkspace.hideScrollingIndicator(true);
           mWorkspace.hideDockDivider(true);
         }
-        updateWallpaperVisibility(false);
+        if (!animationCancelled) {
+          updateWallpaperVisibility(false);
+        }
+      }
+      public void onAnimationCancel(      Animator animation){
+        animationCancelled=true;
       }
     }
 );
