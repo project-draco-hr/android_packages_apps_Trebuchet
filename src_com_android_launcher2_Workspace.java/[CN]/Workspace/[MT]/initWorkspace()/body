@@ -27,4 +27,8 @@
 ;
   mSnapVelocity=600;
   mWallpaperOffset=new WallpaperOffsetInterpolator();
+  Display display=mLauncher.getWindowManager().getDefaultDisplay();
+  mDisplayWidth=display.getWidth();
+  mDisplayHeight=display.getHeight();
+  mWallpaperTravelWidth=(int)(mDisplayWidth * wallpaperTravelToScreenWidthRatio(mDisplayWidth,mDisplayHeight));
 }

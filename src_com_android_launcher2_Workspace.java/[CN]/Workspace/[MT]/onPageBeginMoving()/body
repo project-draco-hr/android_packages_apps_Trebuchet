@@ -1,5 +1,6 @@
 {
   super.onPageBeginMoving();
+  mIsStaticWallpaper=mWallpaperManager.getWallpaperInfo() == null;
   if (isHardwareAccelerated()) {
     updateChildrenLayersEnabled();
   }

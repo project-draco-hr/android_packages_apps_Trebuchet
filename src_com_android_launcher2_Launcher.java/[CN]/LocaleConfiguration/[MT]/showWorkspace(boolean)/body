@@ -1,5 +1,7 @@
 {
-  mWorkspace.changeState(Workspace.State.NORMAL,animated);
+  Resources res=getResources();
+  int stagger=res.getInteger(R.integer.config_appsCustomizeWorkspaceAnimationStagger);
+  mWorkspace.changeState(Workspace.State.NORMAL,animated,stagger);
   if (mState == State.APPS_CUSTOMIZE) {
     closeAllApps(animated);
   }

@@ -1,0 +1,3 @@
+State state
+boolean animated
+int delay

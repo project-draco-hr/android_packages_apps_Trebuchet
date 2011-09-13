@@ -1,7 +1,6 @@
 {
-  Display display=mLauncher.getWindowManager().getDefaultDisplay();
   DisplayMetrics displayMetrics=new DisplayMetrics();
-  display.getRealMetrics(displayMetrics);
+  mLauncher.getWindowManager().getDefaultDisplay().getRealMetrics(displayMetrics);
   final int maxDim=Math.max(displayMetrics.widthPixels,displayMetrics.heightPixels);
   final int minDim=Math.min(displayMetrics.widthPixels,displayMetrics.heightPixels);
   mWallpaperWidth=(int)(maxDim * wallpaperTravelToScreenWidthRatio(maxDim,minDim));

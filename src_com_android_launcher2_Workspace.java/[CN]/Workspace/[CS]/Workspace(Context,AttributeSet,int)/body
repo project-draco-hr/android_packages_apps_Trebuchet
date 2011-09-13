@@ -30,6 +30,7 @@
   a.recycle();
   LauncherModel.updateWorkspaceLayoutCells(cellCountX,cellCountY);
   setHapticFeedbackEnabled(false);
+  mLauncher=(Launcher)context;
   initWorkspace();
   setMotionEventSplittingEnabled(true);
 }

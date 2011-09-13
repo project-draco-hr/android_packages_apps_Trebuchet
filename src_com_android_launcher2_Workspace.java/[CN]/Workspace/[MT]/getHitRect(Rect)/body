@@ -1,4 +1,3 @@
 {
-  final Display d=mLauncher.getWindowManager().getDefaultDisplay();
-  outRect.set(0,0,d.getWidth(),d.getHeight());
+  outRect.set(0,0,mDisplayWidth,mDisplayHeight);
 }

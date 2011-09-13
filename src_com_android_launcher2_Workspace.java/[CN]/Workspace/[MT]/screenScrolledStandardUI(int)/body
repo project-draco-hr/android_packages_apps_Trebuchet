@@ -6,7 +6,7 @@
     cl.setOverScrollAmount(Math.abs(scrollProgress),index == 0);
     float translationX=index == 0 ? mScrollX : -(mMaxScrollX - mScrollX);
     float rotation=-WORKSPACE_OVERSCROLL_ROTATION * scrollProgress;
-    cl.setCameraDistance(mDensity * 6500);
+    cl.setCameraDistance(mDensity * CAMERA_DISTANCE);
     cl.setPivotX(cl.getMeasuredWidth() * (index == 0 ? 0.75f : 0.25f));
     cl.setTranslationX(translationX);
     cl.setRotationY(rotation);

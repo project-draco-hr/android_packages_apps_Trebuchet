@@ -1,7 +1,6 @@
 {
-  Display display=mLauncher.getWindowManager().getDefaultDisplay();
-  final boolean isStaticWallpaper=(mWallpaperManager.getWallpaperInfo() == null);
-  int wallpaperTravelWidth=(int)(display.getWidth() * wallpaperTravelToScreenWidthRatio(display.getWidth(),display.getHeight()));
+  final boolean isStaticWallpaper=mIsStaticWallpaper;
+  int wallpaperTravelWidth=mWallpaperTravelWidth;
   if (!isStaticWallpaper) {
     wallpaperTravelWidth=mWallpaperWidth;
   }
@@ -11,7 +10,7 @@
   int scrollRange=getScrollRange();
   float scrollProgressOffset=0;
   if (isStaticWallpaper) {
-    int overScrollOffset=(int)(maxOverScroll() * display.getWidth());
+    int overScrollOffset=(int)(maxOverScroll() * mDisplayWidth);
     scrollProgressOffset+=overScrollOffset / (float)getScrollRange();
     scrollRange+=2 * overScrollOffset;
   }

@@ -9,7 +9,7 @@
   }
   mWorkspace.setHapticFeedbackEnabled(false);
   mWorkspace.setOnLongClickListener(this);
-  mWorkspace.setup(this,dragController);
+  mWorkspace.setup(dragController);
   dragController.addDragListener(mWorkspace);
   mSearchDeleteBar=(SearchDropTargetBar)mDragLayer.findViewById(R.id.qsb_bar);
   mAppsCustomizeTabHost=(AppsCustomizeTabHost)findViewById(R.id.apps_customize_pane);

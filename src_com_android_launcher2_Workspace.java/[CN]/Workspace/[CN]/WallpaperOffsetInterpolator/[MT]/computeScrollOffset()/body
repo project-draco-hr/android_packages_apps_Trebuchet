@@ -3,8 +3,7 @@
     mIsMovingFast=false;
     return false;
   }
-  Display display=mLauncher.getWindowManager().getDefaultDisplay();
-  boolean isLandscape=display.getWidth() > display.getHeight();
+  boolean isLandscape=mDisplayWidth > mDisplayHeight;
   long currentTime=System.currentTimeMillis();
   long timeSinceLastUpdate=currentTime - mLastWallpaperOffsetUpdateTime;
   timeSinceLastUpdate=Math.min((long)(1000 / 30f),timeSinceLastUpdate);

@@ -4,9 +4,9 @@
   final int fadeDuration=res.getInteger(R.integer.config_appsCustomizeFadeInTime);
   final float scale=(float)res.getInteger(R.integer.config_appsCustomizeZoomScaleFactor);
   final View toView=mAppsCustomizeTabHost;
+  final int startDelay=res.getInteger(R.integer.config_workspaceAppsCustomizeAnimationStagger);
   setPivotsForZoom(toView,toState,scale);
   mWorkspace.changeState(Workspace.State.SMALL,animated);
-  hideHotseat(animated);
   if (animated) {
     final ValueAnimator scaleAnim=ValueAnimator.ofFloat(0f,1f).setDuration(duration);
     scaleAnim.setInterpolator(new Workspace.ZoomOutInterpolator());
@@ -29,6 +29,7 @@
       }
     }
 );
+    alphaAnim.setStartDelay(startDelay);
     alphaAnim.start();
     if (toView instanceof LauncherTransitionable) {
       ((LauncherTransitionable)toView).onLauncherTransitionStart(scaleAnim,false);
@@ -56,12 +57,11 @@
           updateWallpaperVisibility(false);
         }
       }
-      public void onAnimationCancel(      Animator animation){
+      @Override public void onAnimationCancel(      Animator animation){
         animationCancelled=true;
       }
     }
 );
-    final int startDelay=0;
     if (mStateAnimation != null)     mStateAnimation.cancel();
     mStateAnimation=new AnimatorSet();
     mStateAnimation.play(scaleAnim).after(startDelay);
