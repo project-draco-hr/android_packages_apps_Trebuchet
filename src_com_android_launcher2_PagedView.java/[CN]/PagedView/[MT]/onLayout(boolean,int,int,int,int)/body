@@ -17,6 +17,9 @@
   if (childCount > 0) {
     if (DEBUG)     Log.d(TAG,"getRelativeChildOffset(): " + getMeasuredWidth() + ", "+ getChildWidth(0));
     childLeft=getRelativeChildOffset(0);
+    if (mPageSpacing < 0) {
+      mPageSpacing=((right - left) - getChildAt(0).getMeasuredWidth()) / 2;
+    }
   }
   for (int i=0; i < childCount; i++) {
     final View child=getPageAt(i);
