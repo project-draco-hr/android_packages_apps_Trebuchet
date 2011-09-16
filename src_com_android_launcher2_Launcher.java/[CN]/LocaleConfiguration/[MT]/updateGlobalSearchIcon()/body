@@ -6,7 +6,7 @@
   ComponentName activityName=searchManager.getGlobalSearchActivity();
   if (activityName != null) {
     int coi=getCurrentOrientationIndexForGlobalIcons();
-    sGlobalSearchIcon[coi]=updateButtonWithIconFromExternalActivity(R.id.search_button,activityName,R.drawable.ic_search_normal_holo);
+    sGlobalSearchIcon[coi]=updateButtonWithIconFromExternalActivity(R.id.search_button,activityName,R.drawable.ic_home_search_normal_holo);
     searchButton.setVisibility(View.VISIBLE);
     if (searchDivider != null)     searchDivider.setVisibility(View.VISIBLE);
   }
