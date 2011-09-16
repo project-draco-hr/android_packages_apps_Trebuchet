@@ -1,0 +1,5 @@
+{
+  if (LauncherApplication.isScreenLarge()) {
+    setRequestedOrientation(mapConfigurationOriActivityInfoOri(getResources().getConfiguration().orientation));
+  }
+}

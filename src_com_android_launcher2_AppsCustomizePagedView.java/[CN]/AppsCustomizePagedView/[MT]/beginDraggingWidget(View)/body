@@ -23,7 +23,7 @@
     mCanvas.setBitmap(null);
     createItemInfo.spanX=createItemInfo.spanY=1;
   }
-  mLauncher.lockScreenOrientation();
+  mLauncher.lockScreenOrientationOnLargeUI();
   mLauncher.getWorkspace().onDragStartedWithItemSpans(createItemInfo.spanX,createItemInfo.spanY,b);
   mDragController.startDrag(image,b,this,createItemInfo,DragController.DRAG_ACTION_COPY,null);
   b.recycle();
