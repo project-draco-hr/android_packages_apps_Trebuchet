@@ -1,3 +1,0 @@
-{
-  setRequestedOrientation(mapConfigurationOriActivityInfoOri(getResources().getConfiguration().orientation));
-}

@@ -1,0 +1,10 @@
+{
+  if (LauncherApplication.isScreenLarge()) {
+    mHandler.postDelayed(new Runnable(){
+      public void run(){
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+      }
+    }
+,mRestoreScreenOrientationDelay);
+  }
+}

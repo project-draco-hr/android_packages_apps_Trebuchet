@@ -3,5 +3,5 @@
   if (!success || (target != mLauncher.getWorkspace() && !(target instanceof DeleteDropTarget))) {
     mLauncher.exitSpringLoadedDragMode();
   }
-  mLauncher.unlockScreenOrientation();
+  mLauncher.unlockScreenOrientationOnLargeUI();
 }
