@@ -50,4 +50,7 @@
   if (sAppMarketIcon[coi] != null) {
     updateAppMarketIcon(sAppMarketIcon[coi]);
   }
+  if (LauncherApplication.isScreenLarge()) {
+    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+  }
 }
