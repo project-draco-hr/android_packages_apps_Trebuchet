@@ -1,6 +1,7 @@
 {
   final FolderInfo info=folderIcon.mInfo;
   Folder openFolder=mWorkspace.getFolderForTag(info);
+  Cling cling=showFirstRunFoldersCling();
   if (info.opened && openFolder == null) {
     Log.d(TAG,"Folder info marked as open, but associated folder is not open. Screen: " + info.screen + " ("+ info.cellX+ ", "+ info.cellY+ ")");
     info.opened=false;
@@ -19,5 +20,8 @@
         openFolder(folderIcon);
       }
     }
+  }
+  if (cling != null) {
+    cling.bringToFront();
   }
 }

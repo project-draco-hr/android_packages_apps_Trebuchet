@@ -1,0 +1,7 @@
+{
+  if (!isClingsEnabled())   return;
+  SharedPreferences prefs=getSharedPreferences(PREFS_KEY,Context.MODE_PRIVATE);
+  if (!prefs.getBoolean(Cling.ALLAPPS_CLING_DISMISSED_KEY,false)) {
+    initCling(R.id.all_apps_cling,position,true,0);
+  }
+}

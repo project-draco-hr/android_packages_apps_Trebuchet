@@ -1,0 +1,17 @@
+{
+  Cling cling=(Cling)findViewById(clingId);
+  if (cling != null) {
+    cling.init(this,positionData);
+    cling.setVisibility(View.VISIBLE);
+    cling.setLayerType(View.LAYER_TYPE_HARDWARE,null);
+    if (animate) {
+      cling.buildLayer();
+      cling.setAlpha(0f);
+      cling.animate().alpha(1f).setInterpolator(new DecelerateInterpolator()).setDuration(SHOW_CLING_DURATION).setStartDelay(delay).start();
+    }
+ else {
+      cling.setAlpha(1f);
+    }
+  }
+  return cling;
+}
