@@ -14,7 +14,7 @@
   checkForLocaleChange();
   setContentView(R.layout.launcher);
   setupViews();
-  enableClingsIfNecessary();
+  showFirstRunWorkspaceCling();
   registerContentObservers();
   lockAllApps();
   mSavedState=savedInstanceState;
