@@ -1,5 +1,6 @@
 {
   Resources res=getResources();
+  final Launcher instance=this;
   final int duration=res.getInteger(R.integer.config_appsCustomizeZoomOutTime);
   final float scaleFactor=(float)res.getInteger(R.integer.config_appsCustomizeZoomScaleFactor);
   final View fromView=mAppsCustomizeTabHost;
@@ -31,14 +32,14 @@
     }
 );
     if (fromView instanceof LauncherTransitionable) {
-      ((LauncherTransitionable)fromView).onLauncherTransitionStart(alphaAnim,true);
+      ((LauncherTransitionable)fromView).onLauncherTransitionStart(instance,alphaAnim,true);
     }
     alphaAnim.addListener(new AnimatorListenerAdapter(){
       @Override public void onAnimationEnd(      Animator animation){
         updateWallpaperVisibility(true);
         fromView.setVisibility(View.GONE);
         if (fromView instanceof LauncherTransitionable) {
-          ((LauncherTransitionable)fromView).onLauncherTransitionEnd(alphaAnim,true);
+          ((LauncherTransitionable)fromView).onLauncherTransitionEnd(instance,alphaAnim,true);
         }
         mWorkspace.hideScrollingIndicator(false);
       }
@@ -50,8 +51,8 @@
  else {
     fromView.setVisibility(View.GONE);
     if (fromView instanceof LauncherTransitionable) {
-      ((LauncherTransitionable)fromView).onLauncherTransitionStart(null,true);
-      ((LauncherTransitionable)fromView).onLauncherTransitionEnd(null,true);
+      ((LauncherTransitionable)fromView).onLauncherTransitionStart(instance,null,true);
+      ((LauncherTransitionable)fromView).onLauncherTransitionEnd(instance,null,true);
     }
   }
 }

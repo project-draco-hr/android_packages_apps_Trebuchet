@@ -1,0 +1,5 @@
+{
+  if (LauncherApplication.isScreenLarge())   return false;
+  if (ActivityManager.isRunningInTestHarness())   return false;
+  return true;
+}

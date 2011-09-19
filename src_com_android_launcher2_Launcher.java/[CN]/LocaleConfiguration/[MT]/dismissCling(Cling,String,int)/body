@@ -1,7 +1,7 @@
 {
   if (cling != null) {
     ObjectAnimator anim=ObjectAnimator.ofFloat(cling,"alpha",0f);
-    anim.setDuration(DISMISS_CLING_DURATION);
+    anim.setDuration(duration);
     anim.addListener(new AnimatorListenerAdapter(){
       public void onAnimationEnd(      Animator animation){
         cling.setVisibility(View.GONE);

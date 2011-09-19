@@ -1,0 +1,4 @@
+{
+  Cling cling=(Cling)findViewById(R.id.folder_cling);
+  dismissCling(cling,Cling.FOLDER_CLING_DISMISSED_KEY,DISMISS_CLING_DURATION);
+}

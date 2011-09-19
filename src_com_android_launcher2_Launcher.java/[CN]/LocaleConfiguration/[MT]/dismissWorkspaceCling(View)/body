@@ -1,4 +1,4 @@
 {
   Cling cling=(Cling)findViewById(R.id.workspace_cling);
-  dismissCling(cling,WORKSPACE_CLING_DISMISSED_KEY);
+  dismissCling(cling,Cling.WORKSPACE_CLING_DISMISSED_KEY,DISMISS_CLING_DURATION);
 }
