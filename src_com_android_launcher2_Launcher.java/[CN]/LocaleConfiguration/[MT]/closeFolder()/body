@@ -2,5 +2,6 @@
   Folder folder=mWorkspace.getOpenFolder();
   if (folder != null) {
     closeFolder(folder);
+    dismissFolderCling(null);
   }
 }

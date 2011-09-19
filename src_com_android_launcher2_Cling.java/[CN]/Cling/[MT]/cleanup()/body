@@ -1,3 +1,6 @@
 {
+  mBackground=null;
   mPunchThroughGraphic=null;
+  mHandTouchGraphic=null;
+  mIsInitialized=false;
 }

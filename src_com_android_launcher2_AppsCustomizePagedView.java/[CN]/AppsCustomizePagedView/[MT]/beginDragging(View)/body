@@ -1,4 +1,5 @@
 {
+  mLauncher.dismissAllAppsCling(null);
   if (!super.beginDragging(v))   return false;
   mLauncher.enterSpringLoadedDragMode();
   if (v instanceof PagedViewIcon) {

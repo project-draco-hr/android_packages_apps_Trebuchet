@@ -1,15 +1,22 @@
 {
   if (!mIsInitialized) {
     mLauncher=l;
+    mPositionData=positionData;
     Resources r=getContext().getResources();
     mPunchThroughGraphic=r.getDrawable(R.drawable.cling);
     mPunchThroughGraphicCenterRadius=r.getDimensionPixelSize(R.dimen.clingPunchThroughGraphicCenterRadius);
     mAppIconSize=r.getDimensionPixelSize(R.dimen.app_icon_size);
+    mRevealRadius=mAppIconSize * 1f;
     mTabBarHeight=r.getDimensionPixelSize(R.dimen.apps_customize_tab_bar_height);
     mTabBarHorizontalPadding=r.getDimensionPixelSize(R.dimen.toolbar_button_horizontal_padding);
+    mButtonBarHeight=r.getDimensionPixelSize(R.dimen.button_bar_height);
     mWorkspaceDesc1=findViewById(R.id.workspace_cling_move_item);
     mWorkspaceDesc2=findViewById(R.id.workspace_cling_open_all_apps);
     mAllAppsDesc=findViewById(R.id.all_apps_cling_add_item);
+    mErasePaint=new Paint();
+    mErasePaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.MULTIPLY));
+    mErasePaint.setColor(0xFFFFFF);
+    mErasePaint.setAlpha(0);
     mIsInitialized=true;
   }
 }

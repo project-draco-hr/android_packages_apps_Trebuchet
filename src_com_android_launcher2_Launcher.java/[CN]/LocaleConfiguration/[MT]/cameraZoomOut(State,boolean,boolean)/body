@@ -1,5 +1,6 @@
 {
   final Resources res=getResources();
+  final Launcher instance=this;
   final int duration=res.getInteger(R.integer.config_appsCustomizeZoomInTime);
   final int fadeDuration=res.getInteger(R.integer.config_appsCustomizeFadeInTime);
   final float scale=(float)res.getInteger(R.integer.config_appsCustomizeZoomScaleFactor);
@@ -32,7 +33,7 @@
     alphaAnim.setStartDelay(startDelay);
     alphaAnim.start();
     if (toView instanceof LauncherTransitionable) {
-      ((LauncherTransitionable)toView).onLauncherTransitionStart(scaleAnim,false);
+      ((LauncherTransitionable)toView).onLauncherTransitionStart(instance,scaleAnim,false);
     }
     scaleAnim.addListener(new AnimatorListenerAdapter(){
       boolean animationCancelled=false;
@@ -47,7 +48,7 @@
         toView.setScaleX(1.0f);
         toView.setScaleY(1.0f);
         if (toView instanceof LauncherTransitionable) {
-          ((LauncherTransitionable)toView).onLauncherTransitionEnd(scaleAnim,false);
+          ((LauncherTransitionable)toView).onLauncherTransitionEnd(instance,scaleAnim,false);
         }
         if (!springLoaded && !LauncherApplication.isScreenLarge()) {
           mWorkspace.hideScrollingIndicator(true);
@@ -75,8 +76,8 @@
     toView.setVisibility(View.VISIBLE);
     toView.bringToFront();
     if (toView instanceof LauncherTransitionable) {
-      ((LauncherTransitionable)toView).onLauncherTransitionStart(null,false);
-      ((LauncherTransitionable)toView).onLauncherTransitionEnd(null,false);
+      ((LauncherTransitionable)toView).onLauncherTransitionStart(instance,null,false);
+      ((LauncherTransitionable)toView).onLauncherTransitionEnd(instance,null,false);
       if (!springLoaded && !LauncherApplication.isScreenLarge()) {
         mWorkspace.hideScrollingIndicator(true);
         mWorkspace.hideDockDivider(true);
