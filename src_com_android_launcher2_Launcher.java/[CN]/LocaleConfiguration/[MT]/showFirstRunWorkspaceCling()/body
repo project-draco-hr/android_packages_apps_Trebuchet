@@ -1,7 +1,9 @@
 {
-  if (!isClingsEnabled())   return;
   SharedPreferences prefs=getSharedPreferences(PREFS_KEY,Context.MODE_PRIVATE);
-  if (!prefs.getBoolean(Cling.WORKSPACE_CLING_DISMISSED_KEY,false)) {
+  if (isClingsEnabled() && !prefs.getBoolean(Cling.WORKSPACE_CLING_DISMISSED_KEY,false)) {
     initCling(R.id.workspace_cling,null,false,0);
+  }
+ else {
+    removeCling(R.id.workspace_cling);
   }
 }

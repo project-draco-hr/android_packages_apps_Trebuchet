@@ -1,0 +1,12 @@
+{
+  final View cling=findViewById(id);
+  if (cling != null) {
+    final ViewGroup parent=(ViewGroup)cling.getParent();
+    parent.post(new Runnable(){
+      @Override public void run(){
+        parent.removeView(cling);
+      }
+    }
+);
+  }
+}
