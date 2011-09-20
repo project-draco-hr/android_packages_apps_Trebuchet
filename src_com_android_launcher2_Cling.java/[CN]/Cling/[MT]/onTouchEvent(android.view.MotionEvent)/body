@@ -3,10 +3,6 @@
     int[] pos=getPunchThroughPosition();
     double diff=Math.sqrt(Math.pow(event.getX() - pos[0],2) + Math.pow(event.getY() - pos[1],2));
     if (diff < mRevealRadius) {
-      if (mDrawIdentifier.equals(WORKSPACE_PORTRAIT)) {
-      }
- else       if (mDrawIdentifier.equals(ALLAPPS_PORTRAIT)) {
-      }
       return false;
     }
   }
