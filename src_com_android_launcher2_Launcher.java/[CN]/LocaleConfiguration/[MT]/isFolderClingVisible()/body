@@ -1,4 +1,7 @@
 {
   Cling cling=(Cling)findViewById(R.id.folder_cling);
-  return cling.getVisibility() == View.VISIBLE;
+  if (cling != null) {
+    return cling.getVisibility() == View.VISIBLE;
+  }
+  return false;
 }
