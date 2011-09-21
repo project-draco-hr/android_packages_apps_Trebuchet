@@ -7,7 +7,7 @@
     if (animate) {
       cling.buildLayer();
       cling.setAlpha(0f);
-      cling.animate().alpha(1f).setInterpolator(new DecelerateInterpolator()).setDuration(SHOW_CLING_DURATION).setStartDelay(delay).start();
+      cling.animate().alpha(1f).setInterpolator(new AccelerateInterpolator()).setDuration(SHOW_CLING_DURATION).setStartDelay(delay).start();
     }
  else {
       cling.setAlpha(1f);
