@@ -1,20 +1,25 @@
 {
+  final boolean overScrollWallpaper=LauncherApplication.isScreenLarge();
   final boolean isStaticWallpaper=mIsStaticWallpaper;
   int wallpaperTravelWidth=mWallpaperTravelWidth;
-  if (!isStaticWallpaper) {
+  if (!overScrollWallpaper || !isStaticWallpaper) {
     wallpaperTravelWidth=mWallpaperWidth;
   }
-  mWallpaperManager.setWallpaperOffsetSteps(1.0f / (getChildCount() - 1),1.0f / (3 - 1));
+  if (LauncherApplication.isScreenLarge()) {
+    mWallpaperManager.setWallpaperOffsetSteps(1.0f / (getChildCount() - 1),1.0f / (3 - 1));
+  }
+ else {
+    mWallpaperManager.setWallpaperOffsetSteps(1.0f / (getChildCount() - 1),1.0f);
+  }
   float layoutScale=mLayoutScale;
   mLayoutScale=1f;
   int scrollRange=getScrollRange();
   float scrollProgressOffset=0;
-  if (isStaticWallpaper) {
+  if (isStaticWallpaper && overScrollWallpaper) {
     int overScrollOffset=(int)(maxOverScroll() * mDisplayWidth);
     scrollProgressOffset+=overScrollOffset / (float)getScrollRange();
     scrollRange+=2 * overScrollOffset;
   }
-  boolean overScrollWallpaper=LauncherApplication.isScreenLarge();
   float adjustedScrollX=overScrollWallpaper ? mScrollX : Math.max(0,Math.min(mScrollX,mMaxScrollX));
   adjustedScrollX*=mWallpaperScrollRatio;
   mLayoutScale=layoutScale;
