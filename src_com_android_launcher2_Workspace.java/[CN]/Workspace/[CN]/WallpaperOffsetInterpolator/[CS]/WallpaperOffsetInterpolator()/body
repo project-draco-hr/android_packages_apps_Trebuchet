@@ -1,2 +1,4 @@
 {
+  mVerticalWallpaperOffset=LauncherApplication.isScreenLarge() ? 0.5f : 0f;
+  mFinalVerticalWallpaperOffset=LauncherApplication.isScreenLarge() ? 0.5f : 0f;
 }

@@ -29,7 +29,7 @@
   float hOffsetDelta=mFinalHorizontalWallpaperOffset - mHorizontalWallpaperOffset;
   float vOffsetDelta=mFinalVerticalWallpaperOffset - mVerticalWallpaperOffset;
   boolean jumpToFinalValue=Math.abs(hOffsetDelta) < UPDATE_THRESHOLD && Math.abs(vOffsetDelta) < UPDATE_THRESHOLD;
-  if (jumpToFinalValue) {
+  if (!LauncherApplication.isScreenLarge() || jumpToFinalValue) {
     mHorizontalWallpaperOffset=mFinalHorizontalWallpaperOffset;
     mVerticalWallpaperOffset=mFinalVerticalWallpaperOffset;
   }
