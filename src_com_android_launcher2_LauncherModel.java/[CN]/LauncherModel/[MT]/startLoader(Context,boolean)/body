@@ -4,13 +4,7 @@ synchronized (mLock) {
       Log.d(TAG,"startLoader isLaunching=" + isLaunching);
     }
     if (mCallbacks != null && mCallbacks.get() != null) {
-      LoaderTask oldTask=mLoaderTask;
-      if (oldTask != null) {
-        if (oldTask.isLaunching()) {
-          isLaunching=true;
-        }
-        oldTask.stopLocked();
-      }
+      isLaunching=isLaunching || stopLoaderLocked();
       mLoaderTask=new LoaderTask(context,isLaunching);
       sWorkerThread.setPriority(Thread.NORM_PRIORITY);
       sWorker.post(mLoaderTask);
