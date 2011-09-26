@@ -8,7 +8,7 @@
     mWallpaperHeight=(int)(maxDim * wallpaperTravelToScreenHeightRatio(maxDim,minDim));
   }
  else {
-    mWallpaperWidth=(int)(minDim * WALLPAPER_SCREENS_SPAN);
+    mWallpaperWidth=Math.max((int)(minDim * WALLPAPER_SCREENS_SPAN),maxDim);
     mWallpaperHeight=maxDim;
   }
   new Thread("setWallpaperDimension"){
