@@ -2,12 +2,13 @@
   super.onNewIntent(intent);
   if (Intent.ACTION_MAIN.equals(intent.getAction())) {
     closeSystemDialogs();
-    closeFolder();
     boolean alreadyOnHome=((intent.getFlags() & Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT) != Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
+    Folder openFolder=mWorkspace.getOpenFolder();
     mWorkspace.exitWidgetResizeMode();
-    if (alreadyOnHome && mState == State.WORKSPACE && !mWorkspace.isTouchActive()) {
+    if (alreadyOnHome && mState == State.WORKSPACE && !mWorkspace.isTouchActive() && openFolder == null) {
       mWorkspace.moveToDefaultScreen(true);
     }
+    closeFolder();
     exitSpringLoadedDragMode();
     showWorkspace(alreadyOnHome);
     final View v=getWindow().peekDecorView();

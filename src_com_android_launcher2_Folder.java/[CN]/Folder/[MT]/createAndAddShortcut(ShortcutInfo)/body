@@ -12,6 +12,7 @@
   }
   CellLayout.LayoutParams lp=new CellLayout.LayoutParams(item.cellX,item.cellY,item.spanX,item.spanY);
   boolean insert=false;
+  textView.setOnKeyListener(new FolderKeyEventListener());
   mContent.addViewToCellLayout(textView,insert ? 0 : -1,(int)item.id,lp,true);
   return true;
 }

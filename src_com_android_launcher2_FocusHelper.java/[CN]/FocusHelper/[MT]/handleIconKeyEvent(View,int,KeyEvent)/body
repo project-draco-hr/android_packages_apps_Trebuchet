@@ -5,8 +5,6 @@
   final ViewGroup launcher=(ViewGroup)workspace.getParent();
   final ViewGroup tabs=(ViewGroup)launcher.findViewById(R.id.qsb_bar);
   final ViewGroup hotseat=(ViewGroup)launcher.findViewById(R.id.hotseat);
-  int iconIndex=parent.indexOfChild(v);
-  int iconCount=parent.getChildCount();
   int pageIndex=workspace.indexOfChild(layout);
   int pageCount=workspace.getChildCount();
   final int action=e.getAction();
@@ -15,14 +13,14 @@
 switch (keyCode) {
 case KeyEvent.KEYCODE_DPAD_LEFT:
     if (handleKeyEvent) {
-      View newIcon=getBubbleTextViewInDirection(layout,parent,v,-1);
+      View newIcon=getIconInDirection(layout,parent,v,-1);
       if (newIcon != null) {
         newIcon.requestFocus();
       }
  else {
         if (pageIndex > 0) {
           parent=getCellLayoutChildrenForIndex(workspace,pageIndex - 1);
-          newIcon=getBubbleTextViewInDirection(layout,parent,parent.getChildCount(),-1);
+          newIcon=getIconInDirection(layout,parent,parent.getChildCount(),-1);
           if (newIcon != null) {
             newIcon.requestFocus();
           }
@@ -36,14 +34,14 @@ case KeyEvent.KEYCODE_DPAD_LEFT:
 break;
 case KeyEvent.KEYCODE_DPAD_RIGHT:
 if (handleKeyEvent) {
-View newIcon=getBubbleTextViewInDirection(layout,parent,v,1);
+View newIcon=getIconInDirection(layout,parent,v,1);
 if (newIcon != null) {
   newIcon.requestFocus();
 }
  else {
   if (pageIndex < (pageCount - 1)) {
     parent=getCellLayoutChildrenForIndex(workspace,pageIndex + 1);
-    newIcon=getBubbleTextViewInDirection(layout,parent,-1,1);
+    newIcon=getIconInDirection(layout,parent,-1,1);
     if (newIcon != null) {
       newIcon.requestFocus();
     }
@@ -57,7 +55,7 @@ wasHandled=true;
 break;
 case KeyEvent.KEYCODE_DPAD_UP:
 if (handleKeyEvent) {
-View newIcon=getClosestBubbleTextViewOnLine(layout,parent,v,-1);
+View newIcon=getClosestIconOnLine(layout,parent,v,-1);
 if (newIcon != null) {
 newIcon.requestFocus();
 wasHandled=true;
@@ -69,7 +67,7 @@ tabs.requestFocus();
 break;
 case KeyEvent.KEYCODE_DPAD_DOWN:
 if (handleKeyEvent) {
-View newIcon=getClosestBubbleTextViewOnLine(layout,parent,v,1);
+View newIcon=getClosestIconOnLine(layout,parent,v,1);
 if (newIcon != null) {
 newIcon.requestFocus();
 wasHandled=true;
@@ -83,7 +81,7 @@ case KeyEvent.KEYCODE_PAGE_UP:
 if (handleKeyEvent) {
 if (pageIndex > 0) {
 parent=getCellLayoutChildrenForIndex(workspace,pageIndex - 1);
-View newIcon=getBubbleTextViewInDirection(layout,parent,-1,1);
+View newIcon=getIconInDirection(layout,parent,-1,1);
 if (newIcon != null) {
 newIcon.requestFocus();
 }
@@ -92,7 +90,7 @@ workspace.snapToPage(pageIndex - 1);
 }
 }
  else {
-View newIcon=getBubbleTextViewInDirection(layout,parent,-1,1);
+View newIcon=getIconInDirection(layout,parent,-1,1);
 if (newIcon != null) {
 newIcon.requestFocus();
 }
@@ -104,7 +102,7 @@ case KeyEvent.KEYCODE_PAGE_DOWN:
 if (handleKeyEvent) {
 if (pageIndex < (pageCount - 1)) {
 parent=getCellLayoutChildrenForIndex(workspace,pageIndex + 1);
-View newIcon=getBubbleTextViewInDirection(layout,parent,-1,1);
+View newIcon=getIconInDirection(layout,parent,-1,1);
 if (newIcon != null) {
 newIcon.requestFocus();
 }
@@ -113,7 +111,7 @@ workspace.snapToPage(pageIndex + 1);
 }
 }
  else {
-View newIcon=getBubbleTextViewInDirection(layout,parent,parent.getChildCount(),-1);
+View newIcon=getIconInDirection(layout,parent,parent.getChildCount(),-1);
 if (newIcon != null) {
 newIcon.requestFocus();
 }
@@ -123,7 +121,7 @@ wasHandled=true;
 break;
 case KeyEvent.KEYCODE_MOVE_HOME:
 if (handleKeyEvent) {
-View newIcon=getBubbleTextViewInDirection(layout,parent,-1,1);
+View newIcon=getIconInDirection(layout,parent,-1,1);
 if (newIcon != null) {
 newIcon.requestFocus();
 }
@@ -132,7 +130,7 @@ wasHandled=true;
 break;
 case KeyEvent.KEYCODE_MOVE_END:
 if (handleKeyEvent) {
-View newIcon=getBubbleTextViewInDirection(layout,parent,parent.getChildCount(),-1);
+View newIcon=getIconInDirection(layout,parent,parent.getChildCount(),-1);
 if (newIcon != null) {
 newIcon.requestFocus();
 }

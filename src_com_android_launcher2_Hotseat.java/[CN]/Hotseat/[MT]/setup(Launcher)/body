@@ -1,4 +1,4 @@
 {
   mLauncher=launcher;
-  setOnKeyListener(new HotseatBubbleTextViewKeyEventListener());
+  setOnKeyListener(new HotseatIconKeyEventListener());
 }

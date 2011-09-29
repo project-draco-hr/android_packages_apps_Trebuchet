@@ -3,6 +3,7 @@
   parent.removeView(this);
   mDragController.removeDropTarget((DropTarget)this);
   clearFocus();
+  mFolderIcon.requestFocus();
   if (mRearrangeOnClose) {
     setupContentForNumItems(getItemCount());
     mRearrangeOnClose=false;
