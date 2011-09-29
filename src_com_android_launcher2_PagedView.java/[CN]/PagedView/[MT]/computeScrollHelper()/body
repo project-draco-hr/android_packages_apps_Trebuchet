@@ -19,6 +19,11 @@
     if (mTouchState == TOUCH_STATE_REST) {
       pageEndMoving();
     }
+    if (AccessibilityManager.getInstance(getContext()).isEnabled()) {
+      AccessibilityEvent ev=AccessibilityEvent.obtain(AccessibilityEvent.TYPE_VIEW_SCROLLED);
+      ev.getText().add(getCurrentPageDescription());
+      sendAccessibilityEventUnchecked(ev);
+    }
     return true;
   }
   return false;
