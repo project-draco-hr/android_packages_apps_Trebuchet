@@ -1,6 +1,9 @@
 {
   Folder folder=mWorkspace.getOpenFolder();
   if (folder != null) {
+    if (folder.isEditingName()) {
+      folder.dismissEditingName();
+    }
     closeFolder(folder);
     dismissFolderCling(null);
   }

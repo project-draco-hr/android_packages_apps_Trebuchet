@@ -1,5 +1,4 @@
 {
   mFolderName.setHint("");
-  mFolderName.setCursorVisible(true);
   mIsEditingName=true;
 }

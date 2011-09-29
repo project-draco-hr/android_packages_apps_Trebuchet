@@ -2,8 +2,7 @@
   mFolderName.setHint(sHintText);
   mInfo.setTitle(mFolderName.getText().toString());
   LauncherModel.updateItemInDatabase(mLauncher,mInfo);
-  mFolderName.setCursorVisible(false);
-  mFolderName.clearFocus();
+  requestFocus();
   Selection.setSelection((Spannable)mFolderName.getText(),0,0);
   mIsEditingName=false;
 }

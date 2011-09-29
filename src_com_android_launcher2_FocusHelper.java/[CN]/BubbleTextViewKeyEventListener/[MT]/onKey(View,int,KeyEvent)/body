@@ -1,3 +1,0 @@
-{
-  return FocusHelper.handleBubbleTextViewKeyEvent((BubbleTextView)v,keyCode,event);
-}

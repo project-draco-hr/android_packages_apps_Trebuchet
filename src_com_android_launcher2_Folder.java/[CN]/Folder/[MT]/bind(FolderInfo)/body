@@ -19,6 +19,7 @@
     LauncherModel.deleteItemFromDatabase(mLauncher,item);
   }
   mItemsInvalidated=true;
+  updateTextViewFocus();
   mInfo.addListener(this);
   if (!sDefaultFolderName.contentEquals(mInfo.title)) {
     mFolderName.setText(mInfo.title);

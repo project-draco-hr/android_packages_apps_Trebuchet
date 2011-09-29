@@ -38,6 +38,7 @@
       if (cling != null) {
         cling.bringToFront();
       }
+      setFocusOnFirstChild();
     }
   }
 );
