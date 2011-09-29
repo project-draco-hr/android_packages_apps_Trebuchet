@@ -1,0 +1,18 @@
+{
+  if (sourceImages != null) {
+    if (cancelled) {
+      for (      Bitmap b : sourceImages) {
+        b.recycle();
+      }
+    }
+    sourceImages.clear();
+  }
+  if (generatedImages != null) {
+    if (cancelled) {
+      for (      Bitmap b : generatedImages) {
+        b.recycle();
+      }
+    }
+    generatedImages.clear();
+  }
+}
