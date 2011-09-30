@@ -9,6 +9,40 @@
   for (int i=offset; i < Math.min(offset + numItemsPerPage,mWidgets.size()); ++i) {
     items.add(mWidgets.get(i));
   }
+  PagedViewGridLayout layout=(PagedViewGridLayout)getPageAt(page);
+  layout.setColumnCount(layout.getCellCountX());
+  for (int i=0; i < items.size(); ++i) {
+    Object rawInfo=items.get(i);
+    PendingAddItemInfo createItemInfo=null;
+    PagedViewWidget widget=(PagedViewWidget)mLayoutInflater.inflate(R.layout.apps_customize_widget,layout,false);
+    if (rawInfo instanceof AppWidgetProviderInfo) {
+      AppWidgetProviderInfo info=(AppWidgetProviderInfo)rawInfo;
+      createItemInfo=new PendingAddWidgetInfo(info,null,null);
+      int[] cellSpans=mLauncher.getSpanForWidget(info,null);
+      widget.applyFromAppWidgetProviderInfo(info,-1,cellSpans,mHolographicOutlineHelper);
+      widget.setTag(createItemInfo);
+    }
+ else     if (rawInfo instanceof ResolveInfo) {
+      ResolveInfo info=(ResolveInfo)rawInfo;
+      createItemInfo=new PendingAddItemInfo();
+      createItemInfo.itemType=LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT;
+      createItemInfo.componentName=new ComponentName(info.activityInfo.packageName,info.activityInfo.name);
+      widget.applyFromResolveInfo(mPackageManager,info,mHolographicOutlineHelper);
+      widget.setTag(createItemInfo);
+    }
+    widget.setOnClickListener(this);
+    widget.setOnLongClickListener(this);
+    widget.setOnTouchListener(this);
+    int ix=i % mWidgetCountX;
+    int iy=i / mWidgetCountX;
+    GridLayout.LayoutParams lp=new GridLayout.LayoutParams(GridLayout.spec(iy,GridLayout.LEFT),GridLayout.spec(ix,GridLayout.TOP));
+    lp.width=cellWidth;
+    lp.height=cellHeight;
+    lp.setGravity(Gravity.TOP | Gravity.LEFT);
+    if (ix > 0)     lp.leftMargin=mWidgetWidthGap;
+    if (iy > 0)     lp.topMargin=mWidgetHeightGap;
+    layout.addView(widget,lp);
+  }
   if (immediate) {
     AsyncTaskPageData data=new AsyncTaskPageData(page,items,cellWidth,cellHeight,mWidgetCountX,null,null);
     loadWidgetPreviewsInBackground(null,data);
@@ -17,5 +51,4 @@
  else {
     prepareLoadWidgetPreviewsTask(page,items,cellWidth,cellHeight,mWidgetCountX);
   }
-  PagedViewGridLayout layout=(PagedViewGridLayout)getPageAt(page);
 }

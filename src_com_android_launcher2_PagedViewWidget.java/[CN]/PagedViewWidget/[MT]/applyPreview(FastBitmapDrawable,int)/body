@@ -1,0 +1,8 @@
+{
+  final ImageView image=(ImageView)findViewById(R.id.widget_preview);
+  if (preview != null) {
+    image.setImageDrawable(preview);
+    image.setAlpha(0f);
+    image.animate().alpha(1f).setDuration(sPreviewFadeInDuration + (index * sPreviewFadeInStaggerDuration)).start();
+  }
+}
