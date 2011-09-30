@@ -19,6 +19,10 @@
     int previewSize=getResources().getDimensionPixelSize(R.dimen.folder_preview_size);
     dragRect=new Rect(0,0,child.getWidth(),previewSize);
   }
+  if (child instanceof BubbleTextView) {
+    BubbleTextView icon=(BubbleTextView)child;
+    icon.clearPressedOrFocusedBackground();
+  }
   mDragController.startDrag(b,dragLayerX,dragLayerY,source,child.getTag(),DragController.DRAG_ACTION_MOVE,dragRect);
   b.recycle();
 }
