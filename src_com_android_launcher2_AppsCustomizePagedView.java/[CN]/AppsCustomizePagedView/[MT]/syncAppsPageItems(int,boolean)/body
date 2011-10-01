@@ -21,7 +21,4 @@
     images.add(info.iconBitmap);
   }
   layout.createHardwareLayers();
-  if (mFadeInAdjacentScreens) {
-    prepareGenerateHoloOutlinesTask(page,items,images);
-  }
 }
