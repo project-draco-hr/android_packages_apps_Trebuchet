@@ -4,6 +4,7 @@
   mContent.setGridSize(0,0);
   mFolderName=(FolderEditText)findViewById(R.id.folder_name);
   mFolderName.setFolder(this);
+  mFolderName.setOnFocusChangeListener(this);
   int measureSpec=MeasureSpec.UNSPECIFIED;
   mFolderName.measure(measureSpec,measureSpec);
   mFolderNameHeight=mFolderName.getMeasuredHeight();
