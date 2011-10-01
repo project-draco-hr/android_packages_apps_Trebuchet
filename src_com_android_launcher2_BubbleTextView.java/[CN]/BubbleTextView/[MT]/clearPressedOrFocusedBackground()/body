@@ -1,0 +1,4 @@
+{
+  mPressedOrFocusedBackground=null;
+  setCellLayoutPressedOrFocusedIcon();
+}
