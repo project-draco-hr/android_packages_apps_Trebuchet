@@ -12,7 +12,4 @@
   layout.createHardwareLayer();
   invalidate();
   forceUpdateAdjacentPagesAlpha();
-  if (mFadeInAdjacentScreens) {
-    prepareGenerateHoloOutlinesTask(data.page,data.items,data.generatedImages);
-  }
 }
