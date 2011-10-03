@@ -7,4 +7,5 @@
     mAppsCustomizeContent.removeApps(apps);
   }
   updateIconsAffectedByPackageManagerChanges();
+  mDragController.onAppsRemoved(apps,this);
 }
