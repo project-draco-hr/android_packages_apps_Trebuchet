@@ -1,11 +1,14 @@
 {
+  boolean result=false;
   if (mInScrollArea) {
     if (mDragTargetLayout != null) {
       mDragTargetLayout.setIsDragOverlapping(false);
       mDragTargetLayout=getCurrentDropLayout();
       mDragTargetLayout.onDragEnter();
       invalidate();
+      result=true;
     }
     mInScrollArea=false;
   }
+  return result;
 }
