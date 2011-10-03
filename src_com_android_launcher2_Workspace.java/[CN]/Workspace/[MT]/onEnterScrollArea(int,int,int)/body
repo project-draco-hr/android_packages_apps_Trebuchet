@@ -3,9 +3,10 @@
     Rect r=new Rect();
     mLauncher.getHotseat().getHitRect(r);
     if (r.contains(x,y)) {
-      return;
+      return false;
     }
   }
+  boolean result=false;
   if (!isSmall() && !mIsSwitchingState) {
     mInScrollArea=true;
     final int page=mCurrentPage + (direction == DragController.SCROLL_LEFT ? -1 : 1);
@@ -19,6 +20,8 @@
       mDragTargetLayout=layout;
       mDragTargetLayout.setIsDragOverlapping(true);
       invalidate();
+      result=true;
     }
   }
+  return result;
 }
