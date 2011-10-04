@@ -1,0 +1,14 @@
+{
+  if (mDragObject != null) {
+    Object rawDragInfo=mDragObject.dragInfo;
+    if (rawDragInfo instanceof ShortcutInfo) {
+      ShortcutInfo dragInfo=(ShortcutInfo)rawDragInfo;
+      for (      ApplicationInfo info : apps) {
+        if (dragInfo.intent.getComponent().equals(info.intent.getComponent())) {
+          cancelDrag();
+          return;
+        }
+      }
+    }
+  }
+}
