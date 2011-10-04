@@ -7,7 +7,7 @@ case MotionEvent.ACTION_DOWN:
     }
   if (isPressed()) {
     mDidInvalidateForPressedState=true;
-    invalidate();
+    setCellLayoutPressedOrFocusedIcon();
   }
  else {
     mDidInvalidateForPressedState=false;
