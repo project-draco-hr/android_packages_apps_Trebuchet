@@ -15,4 +15,5 @@
     completeAdd(sPendingAddList.get(i));
   }
   sPendingAddList.clear();
+  updateAppMarketIcon();
 }

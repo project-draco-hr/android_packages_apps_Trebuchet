@@ -6,6 +6,5 @@
   if (mAppsCustomizeContent != null) {
     mAppsCustomizeContent.removeApps(apps);
   }
-  updateIconsAffectedByPackageManagerChanges();
   mDragController.onAppsRemoved(apps,this);
 }

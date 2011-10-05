@@ -2,7 +2,7 @@
   if (mState != State.WORKSPACE)   return;
   cameraZoomOut(State.APPS_CUSTOMIZE,animated,false);
   mAppsCustomizeTabHost.requestFocus();
-  mSearchDeleteBar.hideSearchBar(animated);
+  mSearchDropTargetBar.hideSearchBar(animated);
   mState=State.APPS_CUSTOMIZE;
   mUserPresent=false;
   updateRunning();
