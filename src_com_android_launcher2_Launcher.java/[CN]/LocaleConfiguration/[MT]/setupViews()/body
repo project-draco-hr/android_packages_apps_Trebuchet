@@ -11,7 +11,7 @@
   mWorkspace.setOnLongClickListener(this);
   mWorkspace.setup(dragController);
   dragController.addDragListener(mWorkspace);
-  mSearchDeleteBar=(SearchDropTargetBar)mDragLayer.findViewById(R.id.qsb_bar);
+  mSearchDropTargetBar=(SearchDropTargetBar)mDragLayer.findViewById(R.id.qsb_bar);
   mAppsCustomizeTabHost=(AppsCustomizeTabHost)findViewById(R.id.apps_customize_pane);
   mAppsCustomizeContent=(AppsCustomizePagedView)mAppsCustomizeTabHost.findViewById(R.id.apps_customize_pane_content);
   mAppsCustomizeContent.setup(this,dragController);
@@ -19,7 +19,7 @@
   dragController.setScrollView(mDragLayer);
   dragController.setMoveTarget(mWorkspace);
   dragController.addDropTarget(mWorkspace);
-  if (mSearchDeleteBar != null) {
-    mSearchDeleteBar.setup(this,dragController);
+  if (mSearchDropTargetBar != null) {
+    mSearchDropTargetBar.setup(this,dragController);
   }
 }

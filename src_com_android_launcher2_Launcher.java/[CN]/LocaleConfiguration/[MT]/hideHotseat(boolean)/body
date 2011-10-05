@@ -1,7 +1,7 @@
 {
   if (!LauncherApplication.isScreenLarge()) {
     if (animated) {
-      int duration=mSearchDeleteBar.getTransitionOutDuration();
+      int duration=mSearchDropTargetBar.getTransitionOutDuration();
       mHotseat.animate().alpha(0f).setDuration(duration);
     }
  else {

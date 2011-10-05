@@ -1,4 +1,5 @@
 {
-  updateGlobalSearchIcon();
-  updateVoiceSearchIcon();
+  boolean searchVisible=updateGlobalSearchIcon();
+  boolean voiceVisible=updateVoiceSearchIcon(searchVisible);
+  mSearchDropTargetBar.onSearchPackagesChanged(searchVisible,voiceVisible);
 }
