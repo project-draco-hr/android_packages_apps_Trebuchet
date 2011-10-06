@@ -21,7 +21,7 @@
       mCurrentDragView.setVisibility(VISIBLE);
     }
     mItemsInvalidated=true;
-    setupContentDimension(getItemCount());
+    setupContentDimensions(getItemCount());
     mSuppressOnAdd=true;
   }
   mInfo.add(item);
