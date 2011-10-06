@@ -1,5 +1,5 @@
 {
-  setupContentDimension(count);
+  setupContentDimensions(count);
   DragLayer.LayoutParams lp=(DragLayer.LayoutParams)getLayoutParams();
   if (lp == null) {
     lp=new DragLayer.LayoutParams(0,0);
