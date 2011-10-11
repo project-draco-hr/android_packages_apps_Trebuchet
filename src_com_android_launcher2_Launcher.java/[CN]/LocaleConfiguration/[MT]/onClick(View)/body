@@ -28,7 +28,7 @@
       showWorkspace(true);
     }
  else {
-      showAllApps(true);
+      onClickAllAppsButton(v);
     }
   }
 }
