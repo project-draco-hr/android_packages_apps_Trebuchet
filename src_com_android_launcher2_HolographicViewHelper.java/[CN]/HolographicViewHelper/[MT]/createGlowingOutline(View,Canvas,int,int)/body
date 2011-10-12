@@ -1,0 +1,11 @@
+{
+  final int padding=HolographicOutlineHelper.MAX_OUTER_BLUR_RADIUS;
+  final Bitmap b=Bitmap.createBitmap(v.getWidth() + padding,v.getHeight() + padding,Bitmap.Config.ARGB_8888);
+  canvas.setBitmap(b);
+  canvas.save();
+  v.draw(canvas);
+  canvas.restore();
+  mOutlineHelper.applyOuterBlur(b,canvas,outlineColor);
+  canvas.setBitmap(null);
+  return b;
+}
