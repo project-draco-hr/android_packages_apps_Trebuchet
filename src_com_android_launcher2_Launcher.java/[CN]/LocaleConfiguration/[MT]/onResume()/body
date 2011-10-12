@@ -11,4 +11,7 @@
     mWaitingForResume.setStayPressed(false);
   }
   updateAppMarketIcon();
+  if (!mWorkspaceLoading) {
+    mWorkspace.post(mBuildLayersRunnable);
+  }
 }
