@@ -6,7 +6,9 @@
   for (int i=0; i < count; ++i) {
     PagedViewWidget widget=(PagedViewWidget)layout.getChildAt(i);
     if (widget != null) {
-      widget.applyPreview(new FastBitmapDrawable(data.generatedImages.get(i)),i);
+      Bitmap preview=data.generatedImages.get(i);
+      boolean scale=(preview.getWidth() >= data.cellWidth || preview.getHeight() >= data.cellHeight);
+      widget.applyPreview(new FastBitmapDrawable(preview),i,scale);
     }
   }
   layout.createHardwareLayer();

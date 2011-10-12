@@ -1,6 +1,9 @@
 {
-  Bitmap preview=Bitmap.createBitmap(cellWidth,mAppIconSize,Config.ARGB_8888);
+  int offset=(int)(mAppIconSize * sWidgetPreviewIconPaddingPercentage);
+  int bitmapSize=mAppIconSize + 2 * offset;
+  Bitmap preview=Bitmap.createBitmap(bitmapSize,bitmapSize,Config.ARGB_8888);
+  renderDrawableToBitmap(mDefaultWidgetBackground,preview,0,0,bitmapSize,bitmapSize);
   Drawable icon=mIconCache.getFullResIcon(info,mPackageManager);
-  renderDrawableToBitmap(icon,preview,0,0,mAppIconSize,mAppIconSize,1f,1f);
+  renderDrawableToBitmap(icon,preview,offset,offset,mAppIconSize,mAppIconSize);
   return preview;
 }
