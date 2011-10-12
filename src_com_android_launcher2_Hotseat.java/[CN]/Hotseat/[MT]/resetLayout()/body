@@ -8,7 +8,7 @@
   allAppsButton.setOnClickListener(new View.OnClickListener(){
     @Override public void onClick(    android.view.View v){
       if (mLauncher != null) {
-        mLauncher.showAllApps(true);
+        mLauncher.onClickAllAppsButton(v);
       }
     }
   }
