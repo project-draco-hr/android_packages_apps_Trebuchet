@@ -3,15 +3,18 @@
   PendingAddItemInfo createItemInfo=(PendingAddItemInfo)v.getTag();
   Bitmap b;
   Drawable preview=image.getDrawable();
-  int w=preview.getIntrinsicWidth();
-  int h=preview.getIntrinsicHeight();
+  RectF mTmpScaleRect=new RectF(0f,0f,1f,1f);
+  image.getImageMatrix().mapRect(mTmpScaleRect);
+  float scale=mTmpScaleRect.right;
+  int w=(int)(preview.getIntrinsicWidth() * scale);
+  int h=(int)(preview.getIntrinsicHeight() * scale);
   if (createItemInfo instanceof PendingAddWidgetInfo) {
     PendingAddWidgetInfo createWidgetInfo=(PendingAddWidgetInfo)createItemInfo;
     int[] spanXY=mLauncher.getSpanForWidget(createWidgetInfo,null);
     createItemInfo.spanX=spanXY[0];
     createItemInfo.spanY=spanXY[1];
     b=Bitmap.createBitmap(w,h,Bitmap.Config.ARGB_8888);
-    renderDrawableToBitmap(preview,b,0,0,w,h,1,1,mDragViewMultiplyColor);
+    renderDrawableToBitmap(preview,b,0,0,w,h,scale,mDragViewMultiplyColor);
   }
  else {
     b=Bitmap.createBitmap(mWidgetPreviewIconPaddedDimension,mWidgetPreviewIconPaddedDimension,Bitmap.Config.ARGB_8888);

@@ -1,2 +1,3 @@
 FastBitmapDrawable preview
 int index
+boolean scale
