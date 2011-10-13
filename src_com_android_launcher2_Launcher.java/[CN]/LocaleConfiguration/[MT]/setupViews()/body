@@ -15,6 +15,18 @@
   mAppsCustomizeTabHost=(AppsCustomizeTabHost)findViewById(R.id.apps_customize_pane);
   mAppsCustomizeContent=(AppsCustomizePagedView)mAppsCustomizeTabHost.findViewById(R.id.apps_customize_pane_content);
   mAppsCustomizeContent.setup(this,dragController);
+  mAllAppsButton=findViewById(R.id.all_apps_button);
+  if (mAllAppsButton != null) {
+    mAllAppsButton.setOnTouchListener(new View.OnTouchListener(){
+      @Override public boolean onTouch(      View v,      MotionEvent event){
+        if ((event.getAction() & MotionEvent.ACTION_MASK) == MotionEvent.ACTION_DOWN) {
+          onTouchDownAllAppsButton(v);
+        }
+        return false;
+      }
+    }
+);
+  }
   dragController.setDragScoller(mWorkspace);
   dragController.setScrollView(mDragLayer);
   dragController.setMoveTarget(mWorkspace);
