@@ -1,0 +1,11 @@
+{
+  if (!mStatesUpdated) {
+    mStatesUpdated=true;
+    Bitmap outline=createGlowingOutline(v,mTempCanvas,mHighlightColor,mHighlightColor);
+    FastBitmapDrawable d=new FastBitmapDrawable(outline);
+    StateListDrawable states=new StateListDrawable();
+    states.addState(new int[]{android.R.attr.state_pressed},d);
+    states.addState(new int[]{android.R.attr.state_focused},d);
+    v.setBackgroundDrawable(states);
+  }
+}
