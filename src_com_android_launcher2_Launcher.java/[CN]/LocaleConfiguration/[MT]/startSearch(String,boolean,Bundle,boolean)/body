@@ -2,7 +2,6 @@
   showWorkspace(true);
   if (initialQuery == null) {
     initialQuery=getTypedText();
-    clearTypedText();
   }
   if (appSearchData == null) {
     appSearchData=new Bundle();
