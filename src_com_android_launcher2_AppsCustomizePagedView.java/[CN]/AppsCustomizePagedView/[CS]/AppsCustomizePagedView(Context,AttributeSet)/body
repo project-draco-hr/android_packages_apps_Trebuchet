@@ -2,7 +2,6 @@
   super(context,attrs);
   mLayoutInflater=LayoutInflater.from(context);
   mPackageManager=context.getPackageManager();
-  mContentType=ContentType.Applications;
   mApps=new ArrayList<ApplicationInfo>();
   mWidgets=new ArrayList<Object>();
   mIconCache=((LauncherApplication)context.getApplicationContext()).getIconCache();

@@ -1,4 +1,8 @@
 {
-  mContentType=type;
-  invalidatePageData(0,(type != ContentType.Applications));
+  if (type == ContentType.Widgets) {
+    invalidatePageData(mNumAppsPages,true);
+  }
+ else   if (type == ContentType.Applications) {
+    invalidatePageData(0,true);
+  }
 }

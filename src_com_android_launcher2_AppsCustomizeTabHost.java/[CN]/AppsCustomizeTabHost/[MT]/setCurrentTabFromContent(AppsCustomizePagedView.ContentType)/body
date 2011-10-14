@@ -1,0 +1,4 @@
+{
+  mSuppressContentCallback=true;
+  setCurrentTabByTag(getTabTagForContentType(type));
+}

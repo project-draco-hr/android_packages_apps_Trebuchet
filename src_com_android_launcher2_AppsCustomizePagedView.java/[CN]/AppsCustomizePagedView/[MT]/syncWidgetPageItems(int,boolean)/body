@@ -9,7 +9,7 @@
   for (int i=offset; i < Math.min(offset + numItemsPerPage,mWidgets.size()); ++i) {
     items.add(mWidgets.get(i));
   }
-  PagedViewGridLayout layout=(PagedViewGridLayout)getPageAt(page);
+  PagedViewGridLayout layout=(PagedViewGridLayout)getPageAt(page + mNumAppsPages);
   layout.setColumnCount(layout.getCellCountX());
   for (int i=0; i < items.size(); ++i) {
     Object rawInfo=items.get(i);

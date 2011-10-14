@@ -1,10 +1,8 @@
 {
-switch (mContentType) {
-case Applications:
+  if (page < mNumAppsPages) {
     syncAppsPageItems(page,immediate);
-  break;
-case Widgets:
-syncWidgetPageItems(page,immediate);
-break;
-}
+  }
+ else {
+    syncWidgetPageItems(page - mNumAppsPages,immediate);
+  }
 }

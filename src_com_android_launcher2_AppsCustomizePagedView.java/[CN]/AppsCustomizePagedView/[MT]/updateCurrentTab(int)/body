@@ -1,0 +1,10 @@
+{
+  AppsCustomizeTabHost tabHost=getTabHost();
+  String tag=tabHost.getCurrentTabTag();
+  if (currentPage >= mNumAppsPages && !tag.equals(tabHost.getTabTagForContentType(ContentType.Widgets))) {
+    tabHost.setCurrentTabFromContent(ContentType.Widgets);
+  }
+ else   if (currentPage < mNumAppsPages && !tag.equals(tabHost.getTabTagForContentType(ContentType.Applications))) {
+    tabHost.setCurrentTabFromContent(ContentType.Applications);
+  }
+}

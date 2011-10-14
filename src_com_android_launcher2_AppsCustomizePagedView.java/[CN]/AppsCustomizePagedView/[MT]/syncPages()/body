@@ -1,17 +1,15 @@
 {
   removeAllViews();
-  Iterator<AppsCustomizeAsyncTask> iter=mRunningTasks.iterator();
-  while (iter.hasNext()) {
-    AppsCustomizeAsyncTask task=(AppsCustomizeAsyncTask)iter.next();
-    task.cancel(false);
-    iter.remove();
+  cancelAllTasks();
+  Context context=getContext();
+  for (int j=0; j < mNumWidgetPages; ++j) {
+    PagedViewGridLayout layout=new PagedViewGridLayout(context,mWidgetCountX,mWidgetCountY);
+    setupPage(layout);
+    addView(layout,new PagedViewGridLayout.LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT));
   }
-switch (mContentType) {
-case Applications:
-    syncAppsPages();
-  break;
-case Widgets:
-syncWidgetPages();
-break;
-}
+  for (int i=0; i < mNumAppsPages; ++i) {
+    PagedViewCellLayout layout=new PagedViewCellLayout(context);
+    setupPage(layout);
+    addView(layout);
+  }
 }
