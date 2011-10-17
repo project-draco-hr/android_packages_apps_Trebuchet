@@ -1,9 +1,0 @@
-{
-  Context context=getContext();
-  int numPages=(int)Math.ceil(mWidgets.size() / (float)(mWidgetCountX * mWidgetCountY));
-  for (int j=0; j < numPages; ++j) {
-    PagedViewGridLayout layout=new PagedViewGridLayout(context,mWidgetCountX,mWidgetCountY);
-    setupPage(layout);
-    addView(layout,new PagedViewGridLayout.LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT));
-  }
-}

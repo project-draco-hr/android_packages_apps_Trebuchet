@@ -1,15 +1,11 @@
 {
-switch (mContentType) {
-case Applications:
-{
-      int numItemsPerPage=mCellCountX * mCellCountY;
-      return (index / numItemsPerPage);
-    }
-case Widgets:
-{
-    int numItemsPerPage=mWidgetCountX * mWidgetCountY;
+  if (index < 0)   return 0;
+  if (index < mApps.size()) {
+    int numItemsPerPage=mCellCountX * mCellCountY;
     return (index / numItemsPerPage);
   }
-}
-return -1;
+ else {
+    int numItemsPerPage=mWidgetCountX * mWidgetCountY;
+    return mNumAppsPages + ((index - mApps.size()) / numItemsPerPage);
+  }
 }

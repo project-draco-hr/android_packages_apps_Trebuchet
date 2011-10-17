@@ -1,6 +1,6 @@
 {
   int page=data.page;
-  PagedViewGridLayout layout=(PagedViewGridLayout)getPageAt(page);
+  PagedViewGridLayout layout=(PagedViewGridLayout)getPageAt(page + mNumAppsPages);
   ArrayList<Object> items=data.items;
   int count=items.size();
   for (int i=0; i < count; ++i) {
