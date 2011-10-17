@@ -11,6 +11,7 @@
     if (testDataReady())     requestLayout();
   }
  else {
+    cancelAllTasks();
     invalidatePageData();
   }
 }

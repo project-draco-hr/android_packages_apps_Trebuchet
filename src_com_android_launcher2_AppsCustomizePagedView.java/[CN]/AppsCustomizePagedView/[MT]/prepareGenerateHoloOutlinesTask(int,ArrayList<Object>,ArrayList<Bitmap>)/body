@@ -40,8 +40,6 @@
       try {
         mRunningTasks.remove(task);
         if (task.isCancelled())         return;
-        if (task.page > getPageCount())         return;
-        if (task.pageContentType != mContentType)         return;
         onHolographicPageItemsLoaded(data);
       }
   finally {
@@ -50,7 +48,7 @@
     }
   }
 );
-  AppsCustomizeAsyncTask t=new AppsCustomizeAsyncTask(page,mContentType,AsyncTaskPageData.Type.LoadHolographicIconsData);
+  AppsCustomizeAsyncTask t=new AppsCustomizeAsyncTask(page,AsyncTaskPageData.Type.LoadHolographicIconsData);
   t.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);
   t.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR,pageData);
   mRunningTasks.add(t);

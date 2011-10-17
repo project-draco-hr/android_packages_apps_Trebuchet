@@ -11,12 +11,14 @@
   mWidgetSpacingLayout.calculateCellCount(width,height,maxCellCountX,maxCellCountY);
   mCellCountX=mWidgetSpacingLayout.getCellCountX();
   mCellCountY=mWidgetSpacingLayout.getCellCountY();
+  mNumWidgetPages=(int)Math.ceil(mWidgets.size() / (float)(mWidgetCountX * mWidgetCountY));
+  mNumAppsPages=(int)Math.ceil((float)mApps.size() / (mCellCountX * mCellCountY));
   int widthSpec=MeasureSpec.makeMeasureSpec(getMeasuredWidth(),MeasureSpec.AT_MOST);
   int heightSpec=MeasureSpec.makeMeasureSpec(getMeasuredHeight(),MeasureSpec.AT_MOST);
   mWidgetSpacingLayout.measure(widthSpec,heightSpec);
   mContentWidth=mWidgetSpacingLayout.getContentWidth();
-  invalidatePageData(Math.max(0,mRestorePage));
-  mRestorePage=-1;
+  int page=getPageForComponent(mSaveInstanceStateItemIndex);
+  invalidatePageData(Math.max(0,page));
   int[] offset=new int[2];
   int[] pos=mWidgetSpacingLayout.estimateCellPosition(mClingFocusedX,mClingFocusedY);
   mLauncher.getDragLayer().getLocationInDragLayer(this,offset);

@@ -1,0 +1,3 @@
+{
+  return (AppsCustomizeTabHost)mLauncher.findViewById(R.id.apps_customize_pane);
+}
