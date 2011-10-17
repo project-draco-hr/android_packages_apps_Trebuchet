@@ -2,29 +2,24 @@
   int i=-1;
   if (getPageCount() > 0) {
     int currentPage=getCurrentPage();
-switch (mContentType) {
-case Applications:
-{
-        PagedViewCellLayout layout=(PagedViewCellLayout)getPageAt(currentPage);
-        PagedViewCellLayoutChildren childrenLayout=layout.getChildrenLayout();
-        int numItemsPerPage=mCellCountX * mCellCountY;
-        int childCount=childrenLayout.getChildCount();
-        if (childCount > 0) {
-          i=(currentPage * numItemsPerPage) + (childCount / 2);
-        }
+    if (currentPage < mNumAppsPages) {
+      PagedViewCellLayout layout=(PagedViewCellLayout)getPageAt(currentPage);
+      PagedViewCellLayoutChildren childrenLayout=layout.getChildrenLayout();
+      int numItemsPerPage=mCellCountX * mCellCountY;
+      int childCount=childrenLayout.getChildCount();
+      if (childCount > 0) {
+        i=(currentPage * numItemsPerPage) + (childCount / 2);
       }
-    break;
-case Widgets:
-{
-    PagedViewGridLayout layout=(PagedViewGridLayout)getPageAt(currentPage);
-    int numItemsPerPage=mWidgetCountX * mWidgetCountY;
-    int childCount=layout.getChildCount();
-    if (childCount > 0) {
-      i=(currentPage * numItemsPerPage) + (childCount / 2);
+    }
+ else {
+      int numApps=mApps.size();
+      PagedViewGridLayout layout=(PagedViewGridLayout)getPageAt(currentPage);
+      int numItemsPerPage=mWidgetCountX * mWidgetCountY;
+      int childCount=layout.getChildCount();
+      if (childCount > 0) {
+        i=numApps + ((currentPage - mNumAppsPages) * numItemsPerPage) + (childCount / 2);
+      }
     }
   }
-break;
-}
-}
-return i;
+  return i;
 }

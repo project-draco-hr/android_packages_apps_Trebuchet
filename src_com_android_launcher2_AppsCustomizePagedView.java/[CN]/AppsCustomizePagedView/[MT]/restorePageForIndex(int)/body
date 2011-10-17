@@ -1,12 +1,4 @@
 {
   if (index < 0)   return;
-  int page=getPageForComponent(index);
-  if (page > -1) {
-    if (getChildCount() > 0) {
-      invalidatePageData(page);
-    }
- else {
-      mRestorePage=page;
-    }
-  }
+  mSaveInstanceStateItemIndex=index;
 }

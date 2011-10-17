@@ -1,45 +1,47 @@
 {
   final AppsCustomizePagedView.ContentType type=getContentTypeForTabTag(tabId);
-  if (!mAppsCustomizePane.isContentType(type)) {
-    final Resources res=getResources();
-    final int duration=res.getInteger(R.integer.config_tabTransitionDuration);
-    post(new Runnable(){
-      @Override public void run(){
-        Bitmap b=Bitmap.createBitmap(mAppsCustomizePane.getMeasuredWidth(),mAppsCustomizePane.getMeasuredHeight(),Bitmap.Config.ARGB_8888);
-        Canvas c=new Canvas(b);
-        mAppsCustomizePane.draw(c);
-        mAppsCustomizePane.setAlpha(0f);
-        mAnimationBuffer.setImageBitmap(b);
-        mAnimationBuffer.setAlpha(1f);
-        mAnimationBuffer.setVisibility(View.VISIBLE);
-        c.setBitmap(null);
-        b=null;
-        onTabChangedStart();
-        onTabChangedEnd(type);
-        ObjectAnimator outAnim=ObjectAnimator.ofFloat(mAnimationBuffer,"alpha",0f);
-        outAnim.addListener(new AnimatorListenerAdapter(){
-          @Override public void onAnimationEnd(          Animator animation){
-            mAnimationBuffer.setVisibility(View.GONE);
-            mAnimationBuffer.setImageBitmap(null);
-          }
-        }
-);
-        ObjectAnimator inAnim=ObjectAnimator.ofFloat(mAppsCustomizePane,"alpha",1f);
-        inAnim.addListener(new AnimatorListenerAdapter(){
-          @Override public void onAnimationEnd(          Animator animation){
-            if (!LauncherApplication.isScreenLarge()) {
-              mAppsCustomizePane.flashScrollingIndicator();
-            }
-            mAppsCustomizePane.loadAssociatedPages(mAppsCustomizePane.getCurrentPage());
-          }
-        }
-);
-        AnimatorSet animSet=new AnimatorSet();
-        animSet.playTogether(outAnim,inAnim);
-        animSet.setDuration(duration);
-        animSet.start();
-      }
-    }
-);
+  if (mSuppressContentCallback) {
+    mSuppressContentCallback=false;
+    return;
   }
+  final Resources res=getResources();
+  final int duration=res.getInteger(R.integer.config_tabTransitionDuration);
+  post(new Runnable(){
+    @Override public void run(){
+      Bitmap b=Bitmap.createBitmap(mAppsCustomizePane.getMeasuredWidth(),mAppsCustomizePane.getMeasuredHeight(),Bitmap.Config.ARGB_8888);
+      Canvas c=new Canvas(b);
+      mAppsCustomizePane.draw(c);
+      mAppsCustomizePane.setAlpha(0f);
+      mAnimationBuffer.setImageBitmap(b);
+      mAnimationBuffer.setAlpha(1f);
+      mAnimationBuffer.setVisibility(View.VISIBLE);
+      c.setBitmap(null);
+      b=null;
+      onTabChangedStart();
+      onTabChangedEnd(type);
+      ObjectAnimator outAnim=ObjectAnimator.ofFloat(mAnimationBuffer,"alpha",0f);
+      outAnim.addListener(new AnimatorListenerAdapter(){
+        @Override public void onAnimationEnd(        Animator animation){
+          mAnimationBuffer.setVisibility(View.GONE);
+          mAnimationBuffer.setImageBitmap(null);
+        }
+      }
+);
+      ObjectAnimator inAnim=ObjectAnimator.ofFloat(mAppsCustomizePane,"alpha",1f);
+      inAnim.addListener(new AnimatorListenerAdapter(){
+        @Override public void onAnimationEnd(        Animator animation){
+          if (!LauncherApplication.isScreenLarge()) {
+            mAppsCustomizePane.flashScrollingIndicator();
+          }
+          mAppsCustomizePane.loadAssociatedPages(mAppsCustomizePane.getCurrentPage());
+        }
+      }
+);
+      AnimatorSet animSet=new AnimatorSet();
+      animSet.playTogether(outAnim,inAnim);
+      animSet.setDuration(duration);
+      animSet.start();
+    }
+  }
+);
 }

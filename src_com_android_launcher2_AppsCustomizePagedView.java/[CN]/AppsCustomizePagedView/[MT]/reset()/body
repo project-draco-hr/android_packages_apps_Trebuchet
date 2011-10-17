@@ -1,9 +1,4 @@
 {
-  if (mContentType != ContentType.Applications) {
-    AppsCustomizeTabHost tabs=(AppsCustomizeTabHost)mLauncher.findViewById(R.id.apps_customize_pane);
-    tabs.selectAppsTab();
-  }
- else   if (getCurrentPage() != 0) {
-    invalidatePageData(0);
-  }
+  updateCurrentTab(0);
+  invalidatePageData(0);
 }
