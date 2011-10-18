@@ -1,0 +1,8 @@
+{
+synchronized (mLock) {
+    stopLoaderLocked();
+    mAllAppsLoaded=false;
+    mWorkspaceLoaded=false;
+  }
+  startLoaderFromBackground();
+}
