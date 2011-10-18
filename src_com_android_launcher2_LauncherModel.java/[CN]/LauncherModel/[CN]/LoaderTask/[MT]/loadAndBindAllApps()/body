@@ -4,10 +4,12 @@
   }
   if (!mAllAppsLoaded) {
     loadAllAppsByBatch();
-    if (mStopped) {
-      return;
+synchronized (LoaderTask.this) {
+      if (mStopped) {
+        return;
+      }
+      mAllAppsLoaded=true;
     }
-    mAllAppsLoaded=true;
   }
  else {
     onlyBindAllApps();

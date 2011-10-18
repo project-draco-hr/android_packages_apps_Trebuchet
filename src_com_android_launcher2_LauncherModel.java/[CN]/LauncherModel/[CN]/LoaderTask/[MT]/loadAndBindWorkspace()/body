@@ -4,10 +4,12 @@
   }
   if (!mWorkspaceLoaded) {
     loadWorkspace();
-    if (mStopped) {
-      return;
+synchronized (LoaderTask.this) {
+      if (mStopped) {
+        return;
+      }
+      mWorkspaceLoaded=true;
     }
-    mWorkspaceLoaded=true;
   }
   bindWorkspace();
 }

@@ -4,6 +4,8 @@
   mAllAppsList=new AllAppsList(iconCache);
   mIconCache=iconCache;
   mDefaultIcon=Utilities.createIconBitmap(mIconCache.getFullResDefaultActivityIcon(),app);
-  mAllAppsLoadDelay=app.getResources().getInteger(R.integer.config_allAppsBatchLoadDelay);
-  mBatchSize=app.getResources().getInteger(R.integer.config_allAppsBatchSize);
+  final Resources res=app.getResources();
+  mAllAppsLoadDelay=res.getInteger(R.integer.config_allAppsBatchLoadDelay);
+  mBatchSize=res.getInteger(R.integer.config_allAppsBatchSize);
+  mPreviousConfig=res.getConfiguration();
 }
