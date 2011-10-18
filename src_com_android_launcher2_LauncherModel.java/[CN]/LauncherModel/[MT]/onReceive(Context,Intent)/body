@@ -38,9 +38,15 @@
     enqueuePackageUpdated(new PackageUpdatedTask(PackageUpdatedTask.OP_UNAVAILABLE,packages));
   }
  else   if (Intent.ACTION_LOCALE_CHANGED.equals(action)) {
-    mAllAppsLoaded=false;
-    mWorkspaceLoaded=false;
-    startLoaderFromBackground();
+    forceReload();
+  }
+ else   if (Intent.ACTION_CONFIGURATION_CHANGED.equals(action)) {
+    Configuration currentConfig=context.getResources().getConfiguration();
+    if ((mPreviousConfig.diff(currentConfig) & ActivityInfo.CONFIG_MCC) != 0) {
+      Log.d(TAG,"Reload apps on config change. curr_mcc:" + currentConfig.mcc + " prevmcc:"+ mPreviousConfig.mcc);
+      forceReload();
+    }
+    mPreviousConfig=currentConfig;
   }
  else   if (SearchManager.INTENT_GLOBAL_SEARCH_ACTIVITY_CHANGED.equals(action) || SearchManager.INTENT_ACTION_SEARCHABLES_CHANGED.equals(action)) {
     if (mCallbacks != null) {
