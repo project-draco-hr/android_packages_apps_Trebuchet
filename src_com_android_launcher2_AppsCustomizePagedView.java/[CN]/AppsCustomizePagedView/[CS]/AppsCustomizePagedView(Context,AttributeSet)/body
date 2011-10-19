@@ -25,8 +25,6 @@
   mClingFocusedY=a.getInt(R.styleable.AppsCustomizePagedView_clingFocusedY,0);
   a.recycle();
   mWidgetSpacingLayout=new PagedViewCellLayout(getContext());
-  mMinWidgetSpan=1;
-  mMaxWidgetSpan=3;
   mWidgetPreviewIconPaddedDimension=(int)(mAppIconSize * (1 + (2 * sWidgetPreviewIconPaddingPercentage)));
   mFadeInAdjacentScreens=LauncherApplication.isScreenLarge();
 }

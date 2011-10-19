@@ -1,5 +1,6 @@
 {
   removeAppsWithoutInvalidate(list);
   addAppsWithoutInvalidate(list);
+  updatePageCounts();
   invalidatePageData();
 }
