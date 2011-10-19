@@ -11,8 +11,7 @@
   mWidgetSpacingLayout.calculateCellCount(width,height,maxCellCountX,maxCellCountY);
   mCellCountX=mWidgetSpacingLayout.getCellCountX();
   mCellCountY=mWidgetSpacingLayout.getCellCountY();
-  mNumWidgetPages=(int)Math.ceil(mWidgets.size() / (float)(mWidgetCountX * mWidgetCountY));
-  mNumAppsPages=(int)Math.ceil((float)mApps.size() / (mCellCountX * mCellCountY));
+  updatePageCounts();
   int widthSpec=MeasureSpec.makeMeasureSpec(getMeasuredWidth(),MeasureSpec.AT_MOST);
   int heightSpec=MeasureSpec.makeMeasureSpec(getMeasuredHeight(),MeasureSpec.AT_MOST);
   mWidgetSpacingLayout.measure(widthSpec,heightSpec);
