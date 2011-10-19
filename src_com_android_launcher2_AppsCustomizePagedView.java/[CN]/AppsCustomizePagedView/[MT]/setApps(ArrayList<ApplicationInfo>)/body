@@ -1,5 +1,6 @@
 {
   mApps=list;
   Collections.sort(mApps,LauncherModel.APP_NAME_COMPARATOR);
+  updatePageCounts();
   if (testDataReady())   requestLayout();
 }

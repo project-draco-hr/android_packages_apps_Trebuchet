@@ -7,6 +7,7 @@
   mWidgets.addAll(widgets);
   mWidgets.addAll(shortcuts);
   Collections.sort(mWidgets,new LauncherModel.WidgetAndShortcutNameComparator(mPackageManager));
+  updatePageCounts();
   if (wasEmpty) {
     if (testDataReady())     requestLayout();
   }

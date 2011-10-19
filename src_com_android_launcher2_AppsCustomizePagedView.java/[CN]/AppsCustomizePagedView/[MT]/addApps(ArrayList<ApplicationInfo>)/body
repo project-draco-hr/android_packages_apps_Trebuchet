@@ -1,4 +1,5 @@
 {
   addAppsWithoutInvalidate(list);
+  updatePageCounts();
   invalidatePageData();
 }
