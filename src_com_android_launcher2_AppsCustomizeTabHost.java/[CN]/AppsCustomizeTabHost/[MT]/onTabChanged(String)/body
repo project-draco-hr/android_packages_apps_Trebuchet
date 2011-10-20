@@ -8,6 +8,10 @@
   final int duration=res.getInteger(R.integer.config_tabTransitionDuration);
   post(new Runnable(){
     @Override public void run(){
+      if (mAppsCustomizePane.getMeasuredWidth() <= 0 || mAppsCustomizePane.getMeasuredHeight() <= 0) {
+        reloadCurrentPage();
+        return;
+      }
       Bitmap b=Bitmap.createBitmap(mAppsCustomizePane.getMeasuredWidth(),mAppsCustomizePane.getMeasuredHeight(),Bitmap.Config.ARGB_8888);
       Canvas c=new Canvas(b);
       mAppsCustomizePane.draw(c);
@@ -30,11 +34,7 @@
       ObjectAnimator inAnim=ObjectAnimator.ofFloat(mAppsCustomizePane,"alpha",1f);
       inAnim.addListener(new AnimatorListenerAdapter(){
         @Override public void onAnimationEnd(        Animator animation){
-          if (!LauncherApplication.isScreenLarge()) {
-            mAppsCustomizePane.flashScrollingIndicator();
-          }
-          mAppsCustomizePane.loadAssociatedPages(mAppsCustomizePane.getCurrentPage());
-          mAppsCustomizePane.requestFocus();
+          reloadCurrentPage();
         }
       }
 );
