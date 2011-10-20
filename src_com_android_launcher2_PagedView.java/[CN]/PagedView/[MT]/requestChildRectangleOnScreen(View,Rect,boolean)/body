@@ -1,5 +1,5 @@
 {
-  int page=indexOfChild(child);
+  int page=indexToPage(indexOfChild(child));
   if (page != mCurrentPage || !mScroller.isFinished()) {
     snapToPage(page);
     return true;
