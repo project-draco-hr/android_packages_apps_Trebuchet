@@ -1,32 +1,44 @@
 {
-  final PagedViewCellLayoutChildren parent=(PagedViewCellLayoutChildren)v.getParent();
-  final PagedViewCellLayout parentLayout=(PagedViewCellLayout)parent.getParent();
-  final ViewGroup container=(ViewGroup)parentLayout.getParent();
+  ViewGroup parentLayout;
+  ViewGroup itemContainer;
+  int countX;
+  int countY;
+  if (v.getParent() instanceof PagedViewCellLayoutChildren) {
+    itemContainer=(ViewGroup)v.getParent();
+    parentLayout=(ViewGroup)itemContainer.getParent();
+    countX=((PagedViewCellLayout)parentLayout).getCellCountX();
+    countY=((PagedViewCellLayout)parentLayout).getCellCountY();
+  }
+ else {
+    itemContainer=parentLayout=(ViewGroup)v.getParent();
+    countX=((PagedViewGridLayout)parentLayout).getCellCountX();
+    countY=((PagedViewGridLayout)parentLayout).getCellCountY();
+  }
+  final PagedView container=(PagedView)parentLayout.getParent();
   final TabHost tabHost=findTabHostParent(container);
   final TabWidget tabs=(TabWidget)tabHost.findViewById(com.android.internal.R.id.tabs);
-  final int iconIndex=parent.indexOfChild(v);
-  final int widgetCount=parent.getChildCount();
-  final int pageIndex=container.indexOfChild(parentLayout);
+  final int iconIndex=itemContainer.indexOfChild(v);
+  final int itemCount=itemContainer.getChildCount();
+  final int pageIndex=((PagedView)container).indexToPage(container.indexOfChild(parentLayout));
   final int pageCount=container.getChildCount();
-  final int cellCountX=parentLayout.getCellCountX();
-  final int cellCountY=parentLayout.getCellCountY();
-  final int x=iconIndex % cellCountX;
-  final int y=iconIndex / cellCountX;
+  final int x=iconIndex % countX;
+  final int y=iconIndex / countX;
   final int action=e.getAction();
   final boolean handleKeyEvent=(action != KeyEvent.ACTION_UP);
-  PagedViewCellLayoutChildren newParent=null;
+  ViewGroup newParent=null;
   View child=null;
   boolean wasHandled=false;
 switch (keyCode) {
 case KeyEvent.KEYCODE_DPAD_LEFT:
     if (handleKeyEvent) {
       if (iconIndex > 0) {
-        parent.getChildAt(iconIndex - 1).requestFocus();
+        itemContainer.getChildAt(iconIndex - 1).requestFocus();
       }
  else {
         if (pageIndex > 0) {
-          newParent=getPagedViewCellLayoutChildrenForIndex(container,pageIndex - 1);
+          newParent=getAppsCustomizePage(container,pageIndex - 1);
           if (newParent != null) {
+            container.snapToPage(pageIndex - 1);
             child=newParent.getChildAt(newParent.getChildCount() - 1);
             if (child != null)             child.requestFocus();
           }
@@ -37,13 +49,14 @@ case KeyEvent.KEYCODE_DPAD_LEFT:
 break;
 case KeyEvent.KEYCODE_DPAD_RIGHT:
 if (handleKeyEvent) {
-if (iconIndex < (widgetCount - 1)) {
-  parent.getChildAt(iconIndex + 1).requestFocus();
+if (iconIndex < (itemCount - 1)) {
+  itemContainer.getChildAt(iconIndex + 1).requestFocus();
 }
  else {
   if (pageIndex < (pageCount - 1)) {
-    newParent=getPagedViewCellLayoutChildrenForIndex(container,pageIndex + 1);
+    newParent=getAppsCustomizePage(container,pageIndex + 1);
     if (newParent != null) {
+      container.snapToPage(pageIndex + 1);
       child=newParent.getChildAt(0);
       if (child != null)       child.requestFocus();
     }
@@ -55,8 +68,8 @@ break;
 case KeyEvent.KEYCODE_DPAD_UP:
 if (handleKeyEvent) {
 if (y > 0) {
-int newiconIndex=((y - 1) * cellCountX) + x;
-parent.getChildAt(newiconIndex).requestFocus();
+int newiconIndex=((y - 1) * countX) + x;
+itemContainer.getChildAt(newiconIndex).requestFocus();
 }
  else {
 tabs.requestFocus();
@@ -66,9 +79,9 @@ wasHandled=true;
 break;
 case KeyEvent.KEYCODE_DPAD_DOWN:
 if (handleKeyEvent) {
-if (y < (cellCountY - 1)) {
-int newiconIndex=Math.min(widgetCount - 1,((y + 1) * cellCountX) + x);
-parent.getChildAt(newiconIndex).requestFocus();
+if (y < (countY - 1)) {
+int newiconIndex=Math.min(itemCount - 1,((y + 1) * countX) + x);
+itemContainer.getChildAt(newiconIndex).requestFocus();
 }
 }
 wasHandled=true;
@@ -84,14 +97,15 @@ break;
 case KeyEvent.KEYCODE_PAGE_UP:
 if (handleKeyEvent) {
 if (pageIndex > 0) {
-newParent=getPagedViewCellLayoutChildrenForIndex(container,pageIndex - 1);
+newParent=getAppsCustomizePage(container,pageIndex - 1);
 if (newParent != null) {
+container.snapToPage(pageIndex - 1);
 child=newParent.getChildAt(0);
 if (child != null) child.requestFocus();
 }
 }
  else {
-parent.getChildAt(0).requestFocus();
+itemContainer.getChildAt(0).requestFocus();
 }
 }
 wasHandled=true;
@@ -99,27 +113,28 @@ break;
 case KeyEvent.KEYCODE_PAGE_DOWN:
 if (handleKeyEvent) {
 if (pageIndex < (pageCount - 1)) {
-newParent=getPagedViewCellLayoutChildrenForIndex(container,pageIndex + 1);
+newParent=getAppsCustomizePage(container,pageIndex + 1);
 if (newParent != null) {
+container.snapToPage(pageIndex + 1);
 child=newParent.getChildAt(0);
 if (child != null) child.requestFocus();
 }
 }
  else {
-parent.getChildAt(widgetCount - 1).requestFocus();
+itemContainer.getChildAt(itemCount - 1).requestFocus();
 }
 }
 wasHandled=true;
 break;
 case KeyEvent.KEYCODE_MOVE_HOME:
 if (handleKeyEvent) {
-parent.getChildAt(0).requestFocus();
+itemContainer.getChildAt(0).requestFocus();
 }
 wasHandled=true;
 break;
 case KeyEvent.KEYCODE_MOVE_END:
 if (handleKeyEvent) {
-parent.getChildAt(widgetCount - 1).requestFocus();
+itemContainer.getChildAt(itemCount - 1).requestFocus();
 }
 wasHandled=true;
 break;

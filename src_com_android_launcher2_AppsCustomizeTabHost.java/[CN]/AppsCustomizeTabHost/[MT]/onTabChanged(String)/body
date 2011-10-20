@@ -34,6 +34,7 @@
             mAppsCustomizePane.flashScrollingIndicator();
           }
           mAppsCustomizePane.loadAssociatedPages(mAppsCustomizePane.getCurrentPage());
+          mAppsCustomizePane.requestFocus();
         }
       }
 );
