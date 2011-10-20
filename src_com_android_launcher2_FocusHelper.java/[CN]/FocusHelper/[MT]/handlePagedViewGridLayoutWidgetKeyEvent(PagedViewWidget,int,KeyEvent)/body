@@ -1,11 +1,11 @@
 {
   final PagedViewGridLayout parent=(PagedViewGridLayout)w.getParent();
-  final ViewGroup container=(ViewGroup)parent.getParent();
+  final PagedView container=(PagedView)parent.getParent();
   final TabHost tabHost=findTabHostParent(container);
   final TabWidget tabs=(TabWidget)tabHost.findViewById(com.android.internal.R.id.tabs);
   final int widgetIndex=parent.indexOfChild(w);
   final int widgetCount=parent.getChildCount();
-  final int pageIndex=container.indexOfChild(parent);
+  final int pageIndex=((PagedView)container).indexToPage(container.indexOfChild(parent));
   final int pageCount=container.getChildCount();
   final int cellCountX=parent.getCellCountX();
   final int cellCountY=parent.getCellCountY();
@@ -13,7 +13,7 @@
   final int y=widgetIndex / cellCountX;
   final int action=e.getAction();
   final boolean handleKeyEvent=(action != KeyEvent.ACTION_UP);
-  PagedViewGridLayout newParent=null;
+  ViewGroup newParent=null;
   View child=null;
   boolean wasHandled=false;
 switch (keyCode) {
@@ -24,9 +24,11 @@ case KeyEvent.KEYCODE_DPAD_LEFT:
       }
  else {
         if (pageIndex > 0) {
-          newParent=(PagedViewGridLayout)container.getChildAt(pageIndex - 1);
-          child=newParent.getChildAt(newParent.getChildCount() - 1);
-          if (child != null)           child.requestFocus();
+          newParent=getAppsCustomizePage(container,pageIndex - 1);
+          if (newParent != null) {
+            child=newParent.getChildAt(newParent.getChildCount() - 1);
+            if (child != null)             child.requestFocus();
+          }
         }
       }
     }
@@ -39,9 +41,11 @@ if (widgetIndex < (widgetCount - 1)) {
 }
  else {
   if (pageIndex < (pageCount - 1)) {
-    newParent=(PagedViewGridLayout)container.getChildAt(pageIndex + 1);
-    child=newParent.getChildAt(0);
-    if (child != null)     child.requestFocus();
+    newParent=getAppsCustomizePage(container,pageIndex + 1);
+    if (newParent != null) {
+      child=newParent.getChildAt(0);
+      if (child != null)       child.requestFocus();
+    }
   }
 }
 }
@@ -81,8 +85,10 @@ break;
 case KeyEvent.KEYCODE_PAGE_UP:
 if (handleKeyEvent) {
 if (pageIndex > 0) {
-newParent=(PagedViewGridLayout)container.getChildAt(pageIndex - 1);
+newParent=getAppsCustomizePage(container,pageIndex - 1);
+if (newParent != null) {
 child=newParent.getChildAt(0);
+}
 }
  else {
 child=parent.getChildAt(0);
@@ -94,8 +100,10 @@ break;
 case KeyEvent.KEYCODE_PAGE_DOWN:
 if (handleKeyEvent) {
 if (pageIndex < (pageCount - 1)) {
-newParent=(PagedViewGridLayout)container.getChildAt(pageIndex + 1);
+newParent=getAppsCustomizePage(container,pageIndex + 1);
+if (newParent != null) {
 child=newParent.getChildAt(0);
+}
 }
  else {
 child=parent.getChildAt(widgetCount - 1);
