@@ -42,6 +42,7 @@
   }
 );
   mCrosshairsAnimator.getAnimator().setInterpolator(mEaseOutInterpolator);
+  mDragCell[0]=mDragCell[1]=-1;
   for (int i=0; i < mDragOutlines.length; i++) {
     mDragOutlines[i]=new Point(-1,-1);
   }

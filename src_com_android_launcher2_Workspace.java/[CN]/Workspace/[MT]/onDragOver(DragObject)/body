@@ -92,7 +92,7 @@
     }
     mLastDragOverView=dragOverView;
     if (!mCreateUserFolderOnDrop && !isOverFolder) {
-      mDragTargetLayout.visualizeDropLocation(child,mDragOutline,(int)mDragViewVisualCenter[0],(int)mDragViewVisualCenter[1],item.spanX,item.spanY);
+      mDragTargetLayout.visualizeDropLocation(child,mDragOutline,(int)mDragViewVisualCenter[0],(int)mDragViewVisualCenter[1],item.spanX,item.spanY,d.dragView.getDragVisualizeOffset(),d.dragView.getDragRegion());
     }
   }
 }
