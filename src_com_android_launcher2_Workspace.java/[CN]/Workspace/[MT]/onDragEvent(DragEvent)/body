@@ -28,11 +28,11 @@ case DragEvent.ACTION_DRAG_STARTED:
       showOutlines();
       layout.setIsDragOccuring(true);
       layout.onDragEnter();
-      layout.visualizeDropLocation(null,mDragOutline,x,y,1,1);
+      layout.visualizeDropLocation(null,mDragOutline,x,y,1,1,null,null);
       return true;
     }
 case DragEvent.ACTION_DRAG_LOCATION:
-  layout.visualizeDropLocation(null,mDragOutline,x,y,1,1);
+  layout.visualizeDropLocation(null,mDragOutline,x,y,1,1,null,null);
 return true;
 case DragEvent.ACTION_DROP:
 {
