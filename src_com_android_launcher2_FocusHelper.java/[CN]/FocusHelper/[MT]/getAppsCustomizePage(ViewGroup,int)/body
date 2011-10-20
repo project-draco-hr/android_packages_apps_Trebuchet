@@ -1,0 +1,7 @@
+{
+  ViewGroup page=(ViewGroup)((PagedView)container).getPageAt(index);
+  if (page instanceof PagedViewCellLayout) {
+    page=(ViewGroup)page.getChildAt(0);
+  }
+  return page;
+}

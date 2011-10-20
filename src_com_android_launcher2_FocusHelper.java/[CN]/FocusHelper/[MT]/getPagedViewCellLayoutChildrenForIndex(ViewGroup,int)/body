@@ -1,4 +1,0 @@
-{
-  ViewGroup parent=(ViewGroup)container.getChildAt(i);
-  return (PagedViewCellLayoutChildren)parent.getChildAt(0);
-}
