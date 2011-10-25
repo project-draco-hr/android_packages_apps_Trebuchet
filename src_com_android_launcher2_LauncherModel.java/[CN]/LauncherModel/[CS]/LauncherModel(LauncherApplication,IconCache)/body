@@ -7,5 +7,6 @@
   final Resources res=app.getResources();
   mAllAppsLoadDelay=res.getInteger(R.integer.config_allAppsBatchLoadDelay);
   mBatchSize=res.getInteger(R.integer.config_allAppsBatchSize);
-  mPreviousConfig=res.getConfiguration();
+  Configuration config=res.getConfiguration();
+  mPreviousConfigMcc=config.mcc;
 }
