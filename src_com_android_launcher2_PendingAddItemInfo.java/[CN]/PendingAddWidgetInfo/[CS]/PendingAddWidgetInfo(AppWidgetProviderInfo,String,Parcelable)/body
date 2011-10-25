@@ -3,6 +3,7 @@
   componentName=i.provider;
   minWidth=i.minWidth;
   minHeight=i.minHeight;
+  hasDefaultPreview=i.previewImage <= 0;
   if (dataMimeType != null && data != null) {
     mimeType=dataMimeType;
     configurationData=data;

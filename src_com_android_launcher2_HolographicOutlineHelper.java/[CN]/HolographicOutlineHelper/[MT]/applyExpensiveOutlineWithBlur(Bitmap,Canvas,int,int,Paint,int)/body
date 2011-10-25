@@ -1,0 +1,66 @@
+{
+  if (alphaClipPaint == null) {
+    alphaClipPaint=mAlphaClipPaint;
+  }
+  Bitmap glowShape=srcDst.extractAlpha(alphaClipPaint,mTempOffset);
+  BlurMaskFilter outerBlurMaskFilter;
+switch (thickness) {
+case EXTRA_THICK:
+    outerBlurMaskFilter=sExtraThickOuterBlurMaskFilter;
+  break;
+case THICK:
+outerBlurMaskFilter=sThickOuterBlurMaskFilter;
+break;
+case MEDIUM:
+outerBlurMaskFilter=sMediumOuterBlurMaskFilter;
+break;
+default :
+throw new RuntimeException("Invalid blur thickness");
+}
+mBlurPaint.setMaskFilter(outerBlurMaskFilter);
+int[] outerBlurOffset=new int[2];
+Bitmap thickOuterBlur=glowShape.extractAlpha(mBlurPaint,outerBlurOffset);
+if (thickness == EXTRA_THICK) {
+mBlurPaint.setMaskFilter(sMediumOuterBlurMaskFilter);
+}
+ else {
+mBlurPaint.setMaskFilter(sThinOuterBlurMaskFilter);
+}
+int[] brightOutlineOffset=new int[2];
+Bitmap brightOutline=glowShape.extractAlpha(mBlurPaint,brightOutlineOffset);
+srcDstCanvas.setBitmap(glowShape);
+srcDstCanvas.drawColor(0xFF000000,PorterDuff.Mode.SRC_OUT);
+BlurMaskFilter innerBlurMaskFilter;
+switch (thickness) {
+case EXTRA_THICK:
+innerBlurMaskFilter=sExtraThickInnerBlurMaskFilter;
+break;
+case THICK:
+innerBlurMaskFilter=sThickInnerBlurMaskFilter;
+break;
+case MEDIUM:
+innerBlurMaskFilter=sMediumInnerBlurMaskFilter;
+break;
+default :
+throw new RuntimeException("Invalid blur thickness");
+}
+mBlurPaint.setMaskFilter(innerBlurMaskFilter);
+int[] thickInnerBlurOffset=new int[2];
+Bitmap thickInnerBlur=glowShape.extractAlpha(mBlurPaint,thickInnerBlurOffset);
+srcDstCanvas.setBitmap(thickInnerBlur);
+srcDstCanvas.drawBitmap(glowShape,-thickInnerBlurOffset[0],-thickInnerBlurOffset[1],mErasePaint);
+srcDstCanvas.drawRect(0,0,-thickInnerBlurOffset[0],thickInnerBlur.getHeight(),mErasePaint);
+srcDstCanvas.drawRect(0,0,thickInnerBlur.getWidth(),-thickInnerBlurOffset[1],mErasePaint);
+srcDstCanvas.setBitmap(srcDst);
+srcDstCanvas.drawColor(0,PorterDuff.Mode.CLEAR);
+mHolographicPaint.setColor(color);
+srcDstCanvas.drawBitmap(thickInnerBlur,thickInnerBlurOffset[0],thickInnerBlurOffset[1],mHolographicPaint);
+srcDstCanvas.drawBitmap(thickOuterBlur,outerBlurOffset[0],outerBlurOffset[1],mHolographicPaint);
+mHolographicPaint.setColor(outlineColor);
+srcDstCanvas.drawBitmap(brightOutline,brightOutlineOffset[0],brightOutlineOffset[1],mHolographicPaint);
+srcDstCanvas.setBitmap(null);
+brightOutline.recycle();
+thickOuterBlur.recycle();
+thickInnerBlur.recycle();
+glowShape.recycle();
+}

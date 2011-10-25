@@ -26,8 +26,16 @@
     mCanvas.setBitmap(null);
     createItemInfo.spanX=createItemInfo.spanY=1;
   }
+  Paint alphaClipPaint=null;
+  if (createItemInfo instanceof PendingAddWidgetInfo) {
+    if (((PendingAddWidgetInfo)createItemInfo).hasDefaultPreview) {
+      MaskFilter alphaClipTable=TableMaskFilter.CreateClipTable(0,255);
+      alphaClipPaint=new Paint();
+      alphaClipPaint.setMaskFilter(alphaClipTable);
+    }
+  }
   mLauncher.lockScreenOrientationOnLargeUI();
-  mLauncher.getWorkspace().onDragStartedWithItemSpans(createItemInfo.spanX,createItemInfo.spanY,b);
+  mLauncher.getWorkspace().onDragStartedWithItemSpans(createItemInfo.spanX,createItemInfo.spanY,b,alphaClipPaint);
   mDragController.startDrag(image,b,this,createItemInfo,DragController.DRAG_ACTION_COPY,null);
   b.recycle();
 }

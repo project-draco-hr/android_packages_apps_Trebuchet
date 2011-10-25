@@ -30,35 +30,39 @@
     int targetHeight=mWidgetSpacingLayout.estimateCellHeight(cellVSpan);
     int bitmapWidth=targetWidth;
     int bitmapHeight=targetHeight;
-    int offset=(int)(mAppIconSize * sWidgetPreviewIconPaddingPercentage);
+    int minOffset=(int)(mAppIconSize * sWidgetPreviewIconPaddingPercentage);
     float iconScale=1f;
     if (cellHSpan == cellVSpan) {
       if (cellHSpan <= 1) {
-        bitmapWidth=bitmapHeight=mAppIconSize + 2 * offset;
+        bitmapWidth=bitmapHeight=mAppIconSize + 2 * minOffset;
       }
  else {
-        bitmapWidth=bitmapHeight=mAppIconSize + 4 * offset;
+        bitmapWidth=bitmapHeight=mAppIconSize + 4 * minOffset;
       }
     }
  else {
       if (targetWidth > targetHeight) {
         bitmapWidth=Math.min(targetWidth,cellWidth);
         bitmapHeight=(int)(targetHeight * ((float)bitmapWidth / targetWidth));
-        iconScale=Math.min((float)bitmapHeight / (mAppIconSize + 2 * offset),1f);
+        iconScale=Math.min((float)bitmapHeight / (mAppIconSize + 2 * minOffset),1f);
       }
  else {
         bitmapHeight=Math.min(targetHeight,cellHeight);
         bitmapWidth=(int)(targetWidth * ((float)bitmapHeight / targetHeight));
-        iconScale=Math.min((float)bitmapWidth / (mAppIconSize + 2 * offset),1f);
+        iconScale=Math.min((float)bitmapWidth / (mAppIconSize + 2 * minOffset),1f);
       }
     }
     preview=Bitmap.createBitmap(bitmapWidth,bitmapHeight,Config.ARGB_8888);
-    renderDrawableToBitmap(mDefaultWidgetBackground,preview,0,0,bitmapWidth,bitmapWidth);
+    if (cellHSpan != 1 || cellVSpan != 1) {
+      renderDrawableToBitmap(mDefaultWidgetBackground,preview,0,0,bitmapWidth,bitmapHeight);
+    }
     try {
       Drawable icon=null;
+      int hoffset=(int)(bitmapWidth / 2 - mAppIconSize * iconScale / 2);
+      int yoffset=(int)(bitmapHeight / 2 - mAppIconSize * iconScale / 2);
       if (info.icon > 0)       icon=mPackageManager.getDrawable(packageName,info.icon,null);
       if (icon == null)       icon=resources.getDrawable(R.drawable.ic_launcher_application);
-      renderDrawableToBitmap(icon,preview,(int)(offset * iconScale),(int)(offset * iconScale),(int)(mAppIconSize * iconScale),(int)(mAppIconSize * iconScale));
+      renderDrawableToBitmap(icon,preview,hoffset,yoffset,(int)(mAppIconSize * iconScale),(int)(mAppIconSize * iconScale));
     }
  catch (    Resources.NotFoundException e) {
     }
