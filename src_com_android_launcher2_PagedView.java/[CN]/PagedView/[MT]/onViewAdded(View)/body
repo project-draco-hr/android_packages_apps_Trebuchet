@@ -1,0 +1,5 @@
+{
+  super.onViewAdded(child);
+  mForceScreenScrolled=true;
+  invalidate();
+}
