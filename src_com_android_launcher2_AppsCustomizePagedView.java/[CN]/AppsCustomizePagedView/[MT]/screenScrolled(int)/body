@@ -7,7 +7,13 @@
       float interpolatedProgress=mZInterpolator.getInterpolation(Math.abs(Math.min(scrollProgress,0)));
       float scale=(1 - interpolatedProgress) + interpolatedProgress * TRANSITION_SCALE_FACTOR;
       float translationX=Math.min(0,scrollProgress) * v.getMeasuredWidth();
-      float alpha=scrollProgress < 0 ? mAlphaInterpolator.getInterpolation(1 - Math.abs(scrollProgress)) : 1.0f;
+      float alpha;
+      if (!LauncherApplication.isScreenLarge() || scrollProgress < 0) {
+        alpha=scrollProgress < 0 ? mAlphaInterpolator.getInterpolation(1 - Math.abs(scrollProgress)) : 1.0f;
+      }
+ else {
+        alpha=mLeftScreenAlphaInterpolator.getInterpolation(1 - scrollProgress);
+      }
       v.setCameraDistance(mDensity * CAMERA_DISTANCE);
       int pageWidth=v.getMeasuredWidth();
       int pageHeight=v.getMeasuredHeight();

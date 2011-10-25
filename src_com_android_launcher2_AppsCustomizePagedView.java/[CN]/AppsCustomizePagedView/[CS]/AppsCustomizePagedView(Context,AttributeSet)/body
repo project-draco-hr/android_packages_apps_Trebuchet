@@ -26,5 +26,5 @@
   a.recycle();
   mWidgetSpacingLayout=new PagedViewCellLayout(getContext());
   mWidgetPreviewIconPaddedDimension=(int)(mAppIconSize * (1 + (2 * sWidgetPreviewIconPaddingPercentage)));
-  mFadeInAdjacentScreens=LauncherApplication.isScreenLarge();
+  mFadeInAdjacentScreens=false;
 }
