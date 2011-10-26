@@ -30,6 +30,7 @@
   }
   oa.addListener(new AnimatorListenerAdapter(){
     @Override public void onAnimationStart(    Animator animation){
+      sendCustomAccessibilityEvent(AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED,String.format(mContext.getString(R.string.folder_opened),mContent.getCountX(),mContent.getCountY()));
       mState=STATE_ANIMATING;
     }
     @Override public void onAnimationEnd(    Animator animation){

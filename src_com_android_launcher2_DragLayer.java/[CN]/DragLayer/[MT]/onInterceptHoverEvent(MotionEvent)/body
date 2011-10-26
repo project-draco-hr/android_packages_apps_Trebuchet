@@ -1,0 +1,41 @@
+{
+  Folder currentFolder=mLauncher.getWorkspace().getOpenFolder();
+  if (currentFolder == null) {
+    return false;
+  }
+ else {
+    if (AccessibilityManager.getInstance(mContext).isTouchExplorationEnabled()) {
+      final int action=ev.getAction();
+      boolean isOverFolder;
+switch (action) {
+case MotionEvent.ACTION_HOVER_ENTER:
+        isOverFolder=isEventOverFolder(currentFolder,ev);
+      if (!isOverFolder) {
+        sendTapOutsideFolderAccessibilityEvent(currentFolder.isEditingName());
+        mHoverPointClosesFolder=true;
+        return true;
+      }
+ else       if (isOverFolder) {
+        mHoverPointClosesFolder=false;
+      }
+ else {
+        return true;
+      }
+case MotionEvent.ACTION_HOVER_MOVE:
+    isOverFolder=isEventOverFolder(currentFolder,ev);
+  if (!isOverFolder && !mHoverPointClosesFolder) {
+    sendTapOutsideFolderAccessibilityEvent(currentFolder.isEditingName());
+    mHoverPointClosesFolder=true;
+    return true;
+  }
+ else   if (isOverFolder) {
+    mHoverPointClosesFolder=false;
+  }
+ else {
+    return true;
+  }
+}
+}
+}
+return false;
+}
