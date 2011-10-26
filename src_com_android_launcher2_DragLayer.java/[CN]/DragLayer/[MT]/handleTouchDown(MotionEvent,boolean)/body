@@ -17,14 +17,13 @@
   Folder currentFolder=mLauncher.getWorkspace().getOpenFolder();
   if (currentFolder != null && !mLauncher.isFolderClingVisible() && intercept) {
     if (currentFolder.isEditingName()) {
-      getDescendantRectRelativeToSelf(currentFolder.getEditTextRegion(),hitRect);
-      if (!hitRect.contains(x,y)) {
+      if (!isEventOverFolderTextRegion(currentFolder,ev)) {
         currentFolder.dismissEditingName();
         return true;
       }
     }
     getDescendantRectRelativeToSelf(currentFolder,hitRect);
-    if (!hitRect.contains(x,y)) {
+    if (!isEventOverFolder(currentFolder,ev)) {
       mLauncher.closeFolder();
       return true;
     }
