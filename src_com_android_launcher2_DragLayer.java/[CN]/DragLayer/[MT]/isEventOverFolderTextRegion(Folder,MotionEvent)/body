@@ -1,0 +1,7 @@
+{
+  getDescendantRectRelativeToSelf(folder.getEditTextRegion(),mHitRect);
+  if (mHitRect.contains((int)ev.getX(),(int)ev.getY())) {
+    return true;
+  }
+  return false;
+}
