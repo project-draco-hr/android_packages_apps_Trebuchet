@@ -42,11 +42,11 @@
   }
  else   if (Intent.ACTION_CONFIGURATION_CHANGED.equals(action)) {
     Configuration currentConfig=context.getResources().getConfiguration();
-    if ((mPreviousConfig.diff(currentConfig) & ActivityInfo.CONFIG_MCC) != 0) {
-      Log.d(TAG,"Reload apps on config change. curr_mcc:" + currentConfig.mcc + " prevmcc:"+ mPreviousConfig.mcc);
+    if (mPreviousConfigMcc != currentConfig.mcc) {
+      Log.d(TAG,"Reload apps on config change. curr_mcc:" + currentConfig.mcc + " prevmcc:"+ mPreviousConfigMcc);
       forceReload();
     }
-    mPreviousConfig=currentConfig;
+    mPreviousConfigMcc=currentConfig.mcc;
   }
  else   if (SearchManager.INTENT_GLOBAL_SEARCH_ACTIVITY_CHANGED.equals(action) || SearchManager.INTENT_ACTION_SEARCHABLES_CHANGED.equals(action)) {
     if (mCallbacks != null) {
