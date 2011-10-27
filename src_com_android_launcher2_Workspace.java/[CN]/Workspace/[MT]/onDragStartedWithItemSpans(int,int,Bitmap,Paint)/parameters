@@ -1,0 +1,4 @@
+int spanX
+int spanY
+Bitmap b
+Paint alphaClipPaint
