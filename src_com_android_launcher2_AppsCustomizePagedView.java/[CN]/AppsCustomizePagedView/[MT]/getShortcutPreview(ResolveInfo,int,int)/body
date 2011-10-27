@@ -1,8 +1,7 @@
 {
-  int offset=(int)(mAppIconSize * sWidgetPreviewIconPaddingPercentage);
-  int bitmapSize=mAppIconSize + 2 * offset;
+  int offset=0;
+  int bitmapSize=mAppIconSize;
   Bitmap preview=Bitmap.createBitmap(bitmapSize,bitmapSize,Config.ARGB_8888);
-  renderDrawableToBitmap(mDefaultWidgetBackground,preview,0,0,bitmapSize,bitmapSize);
   Drawable icon=mIconCache.getFullResIcon(info,mPackageManager);
   renderDrawableToBitmap(icon,preview,offset,offset,mAppIconSize,mAppIconSize);
   return preview;
