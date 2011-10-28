@@ -23,7 +23,6 @@
       rightScreen++;
       x+=getScaledMeasuredWidth(getPageAt(rightScreen)) + mPageSpacing;
     }
-    rightScreen=Math.min(getChildCount() - 1,rightScreen);
     final long drawingTime=getDrawingTime();
     canvas.save();
     canvas.clipRect(mScrollX,mScrollY,mScrollX + mRight - mLeft,mScrollY + mBottom - mTop);
