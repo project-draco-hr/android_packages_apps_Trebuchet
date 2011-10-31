@@ -10,7 +10,6 @@
   setCurrentPage((mNextPage != INVALID_PAGE) ? mNextPage : mCurrentPage);
   final State oldState=mState;
   final boolean oldStateIsNormal=(oldState == State.NORMAL);
-  final boolean oldStateIsSpringLoaded=(oldState == State.SPRING_LOADED);
   final boolean oldStateIsSmall=(oldState == State.SMALL);
   mState=state;
   final boolean stateIsNormal=(state == State.NORMAL);

@@ -1,5 +1,6 @@
 {
   mLayoutScale=childrenScale;
+  invalidateCachedOffsets();
   int childCount=getChildCount();
   float childrenX[]=new float[childCount];
   float childrenY[]=new float[childCount];
