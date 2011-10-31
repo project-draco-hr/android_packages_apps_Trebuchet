@@ -1,7 +1,3 @@
 {
-  final Canvas canvas=new Canvas();
-  final int bitmapPadding=HolographicOutlineHelper.MAX_OUTER_BLUR_RADIUS;
-  CellLayout cl=(CellLayout)getChildAt(0);
-  int[] size=cl.cellSpansToSize(spanX,spanY);
-  mDragOutline=createDragOutline(b,canvas,bitmapPadding,size[0],size[1]);
+  onDragStartedWithItemSpans(spanX,spanY,b,null);
 }

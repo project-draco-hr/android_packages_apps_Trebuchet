@@ -1,0 +1,6 @@
+Bitmap orig
+Canvas canvas
+int padding
+int w
+int h
+Paint alphaClipPaint
