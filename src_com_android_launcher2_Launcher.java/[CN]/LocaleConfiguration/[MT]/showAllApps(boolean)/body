@@ -1,6 +1,6 @@
 {
   if (mState != State.WORKSPACE)   return;
-  cameraZoomOut(State.APPS_CUSTOMIZE,animated,false);
+  showAppsCustomizeHelper(animated,false);
   mAppsCustomizeTabHost.requestFocus();
   mSearchDropTargetBar.hideSearchBar(animated);
   mState=State.APPS_CUSTOMIZE;

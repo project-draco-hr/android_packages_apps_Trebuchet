@@ -1,6 +1,8 @@
 {
   if (mState == State.APPS_CUSTOMIZE_SPRING_LOADED) {
-    cameraZoomOut(State.APPS_CUSTOMIZE,true,true);
+    final boolean animated=true;
+    final boolean springLoaded=true;
+    showAppsCustomizeHelper(animated,springLoaded);
     mState=State.APPS_CUSTOMIZE;
   }
 }
