@@ -2,7 +2,7 @@
   int offset=0;
   int bitmapSize=mAppIconSize;
   Bitmap preview=Bitmap.createBitmap(bitmapSize,bitmapSize,Config.ARGB_8888);
-  Drawable icon=mIconCache.getFullResIcon(info,mPackageManager);
+  Drawable icon=mIconCache.getFullResIcon(info);
   renderDrawableToBitmap(icon,preview,offset,offset,mAppIconSize,mAppIconSize);
   return preview;
 }
