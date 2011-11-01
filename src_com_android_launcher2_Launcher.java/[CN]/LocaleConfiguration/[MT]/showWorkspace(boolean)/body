@@ -2,8 +2,13 @@
   Resources res=getResources();
   int stagger=res.getInteger(R.integer.config_appsCustomizeWorkspaceAnimationStagger);
   mWorkspace.changeState(Workspace.State.NORMAL,animated,stagger);
-  if (mState == State.APPS_CUSTOMIZE) {
-    closeAllApps(animated);
+  if (mState != State.WORKSPACE) {
+    mWorkspace.setVisibility(View.VISIBLE);
+    hideAppsCustomizeHelper(animated);
+    mSearchDropTargetBar.showSearchBar(animated);
+    if (mAllAppsButton != null) {
+      mAllAppsButton.requestFocus();
+    }
   }
   mWorkspace.showDockDivider(!animated);
   mWorkspace.flashScrollingIndicator();

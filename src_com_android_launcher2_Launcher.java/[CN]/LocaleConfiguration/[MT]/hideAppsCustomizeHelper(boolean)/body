@@ -1,15 +1,17 @@
 {
+  if (mStateAnimation != null) {
+    mStateAnimation.cancel();
+    mStateAnimation=null;
+  }
   Resources res=getResources();
   final Launcher instance=this;
   final int duration=res.getInteger(R.integer.config_appsCustomizeZoomOutTime);
   final float scaleFactor=(float)res.getInteger(R.integer.config_appsCustomizeZoomScaleFactor);
   final View fromView=mAppsCustomizeTabHost;
-  setPivotsForZoom(fromView,fromState,scaleFactor);
+  setPivotsForZoom(fromView,scaleFactor);
   updateWallpaperVisibility(true);
   showHotseat(animated);
   if (animated) {
-    if (mStateAnimation != null)     mStateAnimation.cancel();
-    mStateAnimation=new AnimatorSet();
     final float oldScaleX=fromView.getScaleX();
     final float oldScaleY=fromView.getScaleY();
     ValueAnimator scaleAnim=ValueAnimator.ofFloat(0f,1f).setDuration(duration);
@@ -45,6 +47,7 @@
       }
     }
 );
+    mStateAnimation=new AnimatorSet();
     mStateAnimation.playTogether(scaleAnim,alphaAnim);
     mStateAnimation.start();
   }
