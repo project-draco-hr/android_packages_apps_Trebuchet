@@ -1,4 +1,8 @@
 {
+  if (mStateAnimation != null) {
+    mStateAnimation.cancel();
+    mStateAnimation=null;
+  }
   final Resources res=getResources();
   final Launcher instance=this;
   final int duration=res.getInteger(R.integer.config_appsCustomizeZoomInTime);
@@ -6,7 +10,7 @@
   final float scale=(float)res.getInteger(R.integer.config_appsCustomizeZoomScaleFactor);
   final View toView=mAppsCustomizeTabHost;
   final int startDelay=res.getInteger(R.integer.config_workspaceAppsCustomizeAnimationStagger);
-  setPivotsForZoom(toView,toState,scale);
+  setPivotsForZoom(toView,scale);
   mWorkspace.changeState(Workspace.State.SMALL,animated);
   if (animated) {
     final ValueAnimator scaleAnim=ValueAnimator.ofFloat(0f,1f).setDuration(duration);
@@ -63,7 +67,6 @@
       }
     }
 );
-    if (mStateAnimation != null)     mStateAnimation.cancel();
     mStateAnimation=new AnimatorSet();
     mStateAnimation.play(scaleAnim).after(startDelay);
     mStateAnimation.start();
