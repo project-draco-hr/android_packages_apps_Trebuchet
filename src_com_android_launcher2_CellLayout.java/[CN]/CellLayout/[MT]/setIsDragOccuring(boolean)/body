@@ -1,6 +1,0 @@
-{
-  if (mIsDragOccuring != isDragOccuring) {
-    mIsDragOccuring=isDragOccuring;
-    invalidate();
-  }
-}
