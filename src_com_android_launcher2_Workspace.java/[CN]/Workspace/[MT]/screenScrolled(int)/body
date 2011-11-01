@@ -1,9 +1,9 @@
 {
-  super.screenScrolled(screenCenter);
   if (LauncherApplication.isScreenLarge()) {
     screenScrolledLargeUI(screenCenter);
   }
  else {
+    super.screenScrolled(screenCenter);
     screenScrolledStandardUI(screenCenter);
   }
 }
