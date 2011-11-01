@@ -3,7 +3,6 @@
   int screenCenter=mScrollX + halfScreenSize;
   if (screenCenter != mLastScreenCenter || mForceScreenScrolled) {
     screenScrolled(screenCenter);
-    updateAdjacentPagesAlpha();
     mLastScreenCenter=screenCenter;
     mForceScreenScrolled=false;
   }

@@ -1,5 +1,0 @@
-{
-  if (!isSmall()) {
-    super.updateAdjacentPagesAlpha();
-  }
-}
