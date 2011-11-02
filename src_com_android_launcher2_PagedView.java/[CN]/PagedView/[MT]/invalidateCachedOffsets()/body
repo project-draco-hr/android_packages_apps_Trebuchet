@@ -1,6 +1,11 @@
 {
   int count=getChildCount();
-  if (count == 0)   return;
+  if (count == 0) {
+    mChildOffsets=null;
+    mChildRelativeOffsets=null;
+    mChildOffsetsWithLayoutScale=null;
+    return;
+  }
   mChildOffsets=new int[count];
   mChildRelativeOffsets=new int[count];
   mChildOffsetsWithLayoutScale=new int[count];
