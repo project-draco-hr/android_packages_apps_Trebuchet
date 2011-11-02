@@ -1,3 +1,17 @@
 {
-  updateScrollingIndicator();
+  if (isScrollingIndicatorEnabled()) {
+    updateScrollingIndicator();
+  }
+  if (mFadeInAdjacentScreens) {
+    for (int i=0; i < getChildCount(); i++) {
+      View child=getChildAt(i);
+      if (child != null) {
+        float scrollProgress=getScrollProgress(screenCenter,child,i);
+        float alpha=1 - Math.abs(scrollProgress);
+        child.setFastAlpha(alpha);
+        child.fastInvalidate();
+      }
+    }
+    invalidate();
+  }
 }

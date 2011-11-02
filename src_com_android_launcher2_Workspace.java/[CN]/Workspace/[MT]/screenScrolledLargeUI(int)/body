@@ -14,8 +14,14 @@
           cl.setBackgroundAlphaMultiplier(backgroundAlphaInterpolator(Math.abs(scrollProgress)));
         }
       }
-      cl.setTranslationX(translationX);
-      cl.setRotationY(rotation);
+      cl.setFastTranslationX(translationX);
+      cl.setFastRotationY(rotation);
+      if (mFadeInAdjacentScreens && !isSmall()) {
+        float alpha=1 - Math.abs(scrollProgress);
+        cl.setFastAlpha(alpha);
+      }
+      cl.fastInvalidate();
     }
   }
+  invalidate();
 }

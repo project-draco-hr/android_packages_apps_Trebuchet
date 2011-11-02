@@ -16,8 +16,6 @@
       mDirtyPageContent.add(true);
     }
     loadAssociatedPages(mCurrentPage,immediateAndOnly);
-    mDirtyPageAlpha=true;
-    updateAdjacentPagesAlpha();
     requestLayout();
   }
 }
