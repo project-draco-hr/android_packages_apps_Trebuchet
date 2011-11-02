@@ -1,40 +1,15 @@
 {
   if (mBackgroundAlpha > 0.0f) {
     Drawable bg;
-    boolean mini=getScaleX() < 0.5f;
     if (mIsDragOverlapping) {
-      bg=mini ? mActiveBackgroundMini : mActiveGlowBackground;
-    }
- else     if (mIsDragOccuring && mAcceptsDrops) {
-      bg=mini ? mActiveBackgroundMini : mActiveBackground;
-    }
- else     if (mIsDefaultDropTarget && mini) {
-      bg=mNormalGlowBackgroundMini;
+      bg=mActiveGlowBackground;
     }
  else {
-      bg=mini ? mNormalBackgroundMini : mNormalBackground;
+      bg=mNormalBackground;
     }
     bg.setAlpha((int)(mBackgroundAlpha * mBackgroundAlphaMultiplier * 255));
     bg.setBounds(mBackgroundRect);
     bg.draw(canvas);
-    if (mini && mIsDragOverlapping) {
-      boolean modifiedClipRect=false;
-      if (mGlowBackgroundScale > 1.0f) {
-        float marginFraction=(mGlowBackgroundScale - 1.0f) / 2.0f;
-        Rect clipRect=canvas.getClipBounds();
-        int marginX=(int)(marginFraction * (clipRect.right - clipRect.left));
-        int marginY=(int)(marginFraction * (clipRect.bottom - clipRect.top));
-        canvas.save(Canvas.CLIP_SAVE_FLAG);
-        canvas.clipRect(-marginX,-marginY,getWidth() + marginX,getHeight() + marginY,Region.Op.REPLACE);
-        modifiedClipRect=true;
-      }
-      mActiveGlowBackgroundMini.setAlpha((int)(mBackgroundAlpha * mGlowBackgroundAlpha * 255));
-      mActiveGlowBackgroundMini.setBounds(mGlowBackgroundRect);
-      mActiveGlowBackgroundMini.draw(canvas);
-      if (modifiedClipRect) {
-        canvas.restore();
-      }
-    }
   }
   if (mCrosshairsVisibility > 0.0f) {
     final int countX=mCountX;

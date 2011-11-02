@@ -1,4 +1,7 @@
 {
+  if (mState == state) {
+    return;
+  }
   if (mFirstLayout) {
     mSwitchStateAfterFirstLayout=false;
     mStateAfterFirstLayout=state;
