@@ -38,5 +38,4 @@
   if (mFirstLayout && mCurrentPage >= 0 && mCurrentPage < getChildCount()) {
     mFirstLayout=false;
   }
-  invalidateCachedOffsets();
 }
