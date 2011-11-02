@@ -1,29 +1,16 @@
 {
-  final boolean overScrollWallpaper=LauncherApplication.isScreenLarge();
-  final boolean isStaticWallpaper=mIsStaticWallpaper;
-  int wallpaperTravelWidth=mWallpaperTravelWidth;
-  if (!overScrollWallpaper || !isStaticWallpaper) {
-    wallpaperTravelWidth=mWallpaperWidth;
-  }
+  int wallpaperTravelWidth=mWallpaperWidth;
   if (LauncherApplication.isScreenLarge()) {
-    mWallpaperManager.setWallpaperOffsetSteps(1.0f / (getChildCount() - 1),1.0f / (3 - 1));
+    wallpaperTravelWidth=mWallpaperTravelWidth;
   }
- else {
-    mWallpaperManager.setWallpaperOffsetSteps(1.0f / (getChildCount() - 1),1.0f);
-  }
+  mWallpaperManager.setWallpaperOffsetSteps(1.0f / (getChildCount() - 1),1.0f);
   float layoutScale=mLayoutScale;
   mLayoutScale=1f;
   int scrollRange=getScrollRange();
-  float scrollProgressOffset=0;
-  if (isStaticWallpaper && overScrollWallpaper) {
-    int overScrollOffset=(int)(maxOverScroll() * mDisplayWidth);
-    scrollProgressOffset+=overScrollOffset / (float)getScrollRange();
-    scrollRange+=2 * overScrollOffset;
-  }
-  float adjustedScrollX=overScrollWallpaper ? mScrollX : Math.max(0,Math.min(mScrollX,mMaxScrollX));
+  float adjustedScrollX=Math.max(0,Math.min(mScrollX,mMaxScrollX));
   adjustedScrollX*=mWallpaperScrollRatio;
   mLayoutScale=layoutScale;
-  float scrollProgress=adjustedScrollX / (float)scrollRange + scrollProgressOffset;
+  float scrollProgress=adjustedScrollX / (float)scrollRange;
   float offsetInDips=wallpaperTravelWidth * scrollProgress + (mWallpaperWidth - wallpaperTravelWidth) / 2;
   float offset=offsetInDips / (float)mWallpaperWidth;
   return offset;
