@@ -5,8 +5,6 @@
   ArrayList<Object> items=data.items;
   ArrayList<Bitmap> images=data.generatedImages;
   int count=items.size();
-  int cellWidth=data.cellWidth;
-  int cellHeight=data.cellHeight;
   for (int i=0; i < count; ++i) {
     if (task != null) {
       if (task.isCancelled())       break;
@@ -16,11 +14,12 @@
     if (rawInfo instanceof AppWidgetProviderInfo) {
       AppWidgetProviderInfo info=(AppWidgetProviderInfo)rawInfo;
       int[] cellSpans=mLauncher.getSpanForWidget(info,null);
-      images.add(getWidgetPreview(info,cellSpans[0],cellSpans[1],cellWidth,cellHeight));
+      Bitmap b=getWidgetPreview(info.provider,info.previewImage,info.icon,cellSpans[0],cellSpans[1],data.maxImageWidth,data.maxImageHeight);
+      images.add(b);
     }
  else     if (rawInfo instanceof ResolveInfo) {
       ResolveInfo info=(ResolveInfo)rawInfo;
-      images.add(getShortcutPreview(info,cellWidth,cellHeight));
+      images.add(getShortcutPreview(info));
     }
   }
 }

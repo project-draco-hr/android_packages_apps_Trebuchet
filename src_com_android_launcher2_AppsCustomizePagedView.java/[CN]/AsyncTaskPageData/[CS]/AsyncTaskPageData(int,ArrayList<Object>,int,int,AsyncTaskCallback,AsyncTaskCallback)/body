@@ -2,9 +2,8 @@
   page=p;
   items=l;
   generatedImages=new ArrayList<Bitmap>();
-  cellWidth=cw;
-  cellHeight=ch;
-  cellCountX=ccx;
+  maxImageWidth=cw;
+  maxImageHeight=ch;
   doInBackgroundCallback=bgR;
   postExecuteCallback=postR;
 }
