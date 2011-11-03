@@ -34,7 +34,7 @@
   mDropTargetBarFadeOutAnim.setDuration(sTransitionOutDuration);
   mDropTargetBarFadeOutAnim.addListener(new AnimatorListenerAdapter(){
     @Override public void onAnimationEnd(    Animator animation){
-      mDropTargetBar.setVisibility(View.GONE);
+      mDropTargetBar.setVisibility(View.INVISIBLE);
       mDropTargetBar.setLayerType(View.LAYER_TYPE_NONE,null);
     }
   }
@@ -51,7 +51,7 @@
   mQSBSearchBarFadeOutAnim.setDuration(sTransitionOutDuration);
   mQSBSearchBarFadeOutAnim.addListener(new AnimatorListenerAdapter(){
     @Override public void onAnimationEnd(    Animator animation){
-      mQSBSearchBar.setVisibility(View.GONE);
+      mQSBSearchBar.setVisibility(View.INVISIBLE);
     }
   }
 );
