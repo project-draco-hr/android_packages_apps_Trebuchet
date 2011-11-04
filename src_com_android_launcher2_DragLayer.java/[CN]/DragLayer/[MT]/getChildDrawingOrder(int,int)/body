@@ -1,0 +1,14 @@
+{
+  if (mWorkspaceIndex == -1 || mHotseatIndex == -1 || mLauncher.getWorkspace().isDrawingBackgroundGradient()) {
+    return i;
+  }
+  if (i == mHotseatIndex) {
+    return mWorkspaceIndex;
+  }
+ else   if (i == mWorkspaceIndex) {
+    return mHotseatIndex;
+  }
+ else {
+    return i;
+  }
+}
