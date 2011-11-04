@@ -1,0 +1,11 @@
+{
+  if (!isScrollingIndicatorEnabled())   return;
+  mOverscrollFade=fade;
+  float reducedFade=0.5f + 0.5f * (1 - fade);
+  final ViewGroup parent=(ViewGroup)getParent();
+  final ImageView dockDivider=(ImageView)(parent.findViewById(R.id.dock_divider));
+  final ImageView scrollIndicator=getScrollingIndicator();
+  cancelScrollingIndicatorAnimations();
+  dockDivider.setAlpha(reducedFade);
+  scrollIndicator.setAlpha(1 - fade);
+}
