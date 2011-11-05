@@ -1,0 +1,3 @@
+{
+  return (mBackground != null && mBackgroundAlpha > 0.0f && mDrawBackground);
+}

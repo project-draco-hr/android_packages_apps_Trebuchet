@@ -10,8 +10,12 @@
     cl.setPivotX(cl.getMeasuredWidth() * (index == 0 ? 0.75f : 0.25f));
     cl.setTranslationX(translationX);
     cl.setRotationY(rotation);
+    setFadeForOverScroll(Math.abs(scrollProgress));
   }
  else {
+    if (mOverscrollFade != 0) {
+      setFadeForOverScroll(0);
+    }
     if (!isSwitchingState()) {
       resetCellLayoutTransforms((CellLayout)getChildAt(0),true);
       resetCellLayoutTransforms((CellLayout)getChildAt(getChildCount() - 1),false);
