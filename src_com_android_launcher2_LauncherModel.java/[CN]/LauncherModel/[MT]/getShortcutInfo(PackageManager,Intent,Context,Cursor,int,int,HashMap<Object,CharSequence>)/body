@@ -5,6 +5,15 @@
   if (componentName == null) {
     return null;
   }
+  try {
+    PackageInfo pi=manager.getPackageInfo(componentName.getPackageName(),0);
+    if (!pi.applicationInfo.enabled) {
+      return null;
+    }
+  }
+ catch (  NameNotFoundException e) {
+    Log.d(TAG,"getPackInfo failed for package " + componentName.getPackageName());
+  }
   final ResolveInfo resolveInfo=manager.resolveActivity(intent,0);
   if (resolveInfo != null) {
     icon=mIconCache.getIcon(componentName,resolveInfo,labelCache);
