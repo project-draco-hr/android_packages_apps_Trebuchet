@@ -7,8 +7,6 @@
     mPunchThroughGraphicCenterRadius=r.getDimensionPixelSize(R.dimen.clingPunchThroughGraphicCenterRadius);
     mAppIconSize=r.getDimensionPixelSize(R.dimen.app_icon_size);
     mRevealRadius=mAppIconSize * 1f;
-    mTabBarHeight=r.getDimensionPixelSize(R.dimen.apps_customize_tab_bar_height);
-    mTabBarHorizontalPadding=r.getDimensionPixelSize(R.dimen.toolbar_button_horizontal_padding);
     mButtonBarHeight=r.getDimensionPixelSize(R.dimen.button_bar_height);
     mErasePaint=new Paint();
     mErasePaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.MULTIPLY));
