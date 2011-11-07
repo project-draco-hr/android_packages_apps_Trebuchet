@@ -1,5 +1,8 @@
 {
   super(context,attrs,defStyle);
+  TypedArray a=context.obtainStyledAttributes(attrs,R.styleable.HolographicLinearLayout,defStyle,0);
+  mImageViewId=a.getResourceId(R.styleable.HolographicLinearLayout_sourceImageViewId,-1);
+  a.recycle();
   setWillNotDraw(false);
   mHolographicHelper=new HolographicViewHelper(context);
 }

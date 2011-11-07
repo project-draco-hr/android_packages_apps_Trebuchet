@@ -1,11 +1,12 @@
 {
-  if (!mStatesUpdated) {
+  if (!mStatesUpdated && v != null) {
     mStatesUpdated=true;
-    Bitmap outline=createGlowingOutline(v,mTempCanvas,mHighlightColor,mHighlightColor);
+    Bitmap outline=createGlowingOutline(v,mTempCanvas);
     FastBitmapDrawable d=new FastBitmapDrawable(outline);
     StateListDrawable states=new StateListDrawable();
     states.addState(new int[]{android.R.attr.state_pressed},d);
     states.addState(new int[]{android.R.attr.state_focused},d);
-    v.setBackgroundDrawable(states);
+    states.addState(new int[]{},v.getDrawable());
+    v.setImageDrawable(states);
   }
 }
