@@ -1,0 +1,10 @@
+{
+  super.drawableStateChanged();
+  if (mImageView != null) {
+    Drawable d=mImageView.getDrawable();
+    if (d instanceof StateListDrawable) {
+      StateListDrawable sld=(StateListDrawable)d;
+      sld.setState(getDrawableState());
+    }
+  }
+}

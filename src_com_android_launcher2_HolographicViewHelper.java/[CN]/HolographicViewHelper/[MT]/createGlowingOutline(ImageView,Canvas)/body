@@ -3,9 +3,9 @@
   final Bitmap b=Bitmap.createBitmap(v.getWidth() + padding,v.getHeight() + padding,Bitmap.Config.ARGB_8888);
   canvas.setBitmap(b);
   canvas.save();
-  v.draw(canvas);
+  v.getDrawable().draw(canvas);
   canvas.restore();
-  mOutlineHelper.applyOuterBlur(b,canvas,outlineColor);
+  canvas.drawColor(mHighlightColor,PorterDuff.Mode.SRC_IN);
   canvas.setBitmap(null);
   return b;
 }
