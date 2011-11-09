@@ -30,7 +30,7 @@
   mBottomHandle.setImageResource(R.drawable.widget_resize_handle_bottom);
   lp=new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT,Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM);
   addView(mBottomHandle,lp);
-  Launcher.Padding p=mLauncher.getPaddingForWidget(widgetView.getAppWidgetInfo().provider);
+  Rect p=AppWidgetHostView.getDefaultPaddingForWidget(context,widgetView.getAppWidgetInfo().provider,null);
   mWidgetPaddingLeft=p.left;
   mWidgetPaddingTop=p.top;
   mWidgetPaddingRight=p.right;
