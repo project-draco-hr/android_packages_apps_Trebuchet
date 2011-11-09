@@ -6,6 +6,12 @@
     maxCellCountX=(isLandscape ? LauncherModel.getCellCountX() : LauncherModel.getCellCountY());
     maxCellCountY=(isLandscape ? LauncherModel.getCellCountY() : LauncherModel.getCellCountX());
   }
+  if (mMaxAppCellCountX > -1) {
+    maxCellCountX=Math.min(maxCellCountX,mMaxAppCellCountX);
+  }
+  if (mMaxAppCellCountY > -1) {
+    maxCellCountY=Math.min(maxCellCountY,mMaxAppCellCountY);
+  }
   mWidgetSpacingLayout.setGap(mPageLayoutWidthGap,mPageLayoutHeightGap);
   mWidgetSpacingLayout.setPadding(mPageLayoutPaddingLeft,mPageLayoutPaddingTop,mPageLayoutPaddingRight,mPageLayoutPaddingBottom);
   mWidgetSpacingLayout.calculateCellCount(width,height,maxCellCountX,maxCellCountY);
