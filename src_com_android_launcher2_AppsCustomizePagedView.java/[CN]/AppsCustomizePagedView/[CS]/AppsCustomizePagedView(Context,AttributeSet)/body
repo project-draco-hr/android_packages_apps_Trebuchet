@@ -12,11 +12,9 @@
   mDefaultWidgetBackground=resources.getDrawable(R.drawable.default_widget_preview_holo);
   mAppIconSize=resources.getDimensionPixelSize(R.dimen.app_icon_size);
   mDragViewMultiplyColor=resources.getColor(R.color.drag_view_multiply_color);
-  TypedArray a=context.obtainStyledAttributes(attrs,R.styleable.PagedView,0,0);
-  mCellCountX=a.getInt(R.styleable.PagedView_cellCountX,6);
-  mCellCountY=a.getInt(R.styleable.PagedView_cellCountY,4);
-  a.recycle();
-  a=context.obtainStyledAttributes(attrs,R.styleable.AppsCustomizePagedView,0,0);
+  TypedArray a=context.obtainStyledAttributes(attrs,R.styleable.AppsCustomizePagedView,0,0);
+  mMaxAppCellCountX=a.getInt(R.styleable.AppsCustomizePagedView_maxAppCellCountX,-1);
+  mMaxAppCellCountY=a.getInt(R.styleable.AppsCustomizePagedView_maxAppCellCountY,-1);
   mWidgetWidthGap=a.getDimensionPixelSize(R.styleable.AppsCustomizePagedView_widgetCellWidthGap,0);
   mWidgetHeightGap=a.getDimensionPixelSize(R.styleable.AppsCustomizePagedView_widgetCellHeightGap,0);
   mWidgetCountX=a.getInt(R.styleable.AppsCustomizePagedView_widgetCountX,2);
