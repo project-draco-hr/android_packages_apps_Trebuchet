@@ -1,6 +1,6 @@
 {
   int halfScreenSize=getMeasuredWidth() / 2;
-  int screenCenter=mScrollX + halfScreenSize;
+  int screenCenter=mOverScrollX + halfScreenSize;
   if (screenCenter != mLastScreenCenter || mForceScreenScrolled) {
     screenScrolled(screenCenter);
     mLastScreenCenter=screenCenter;

@@ -8,10 +8,12 @@
   }
   int overScrollAmount=(int)Math.round(OVERSCROLL_DAMP_FACTOR * f * screenSize);
   if (amount < 0) {
-    mScrollX=overScrollAmount;
+    mOverScrollX=overScrollAmount;
+    mScrollX=0;
   }
  else {
-    mScrollX=mMaxScrollX + overScrollAmount;
+    mOverScrollX=mMaxScrollX + overScrollAmount;
+    mScrollX=mMaxScrollX;
   }
   invalidate();
 }
