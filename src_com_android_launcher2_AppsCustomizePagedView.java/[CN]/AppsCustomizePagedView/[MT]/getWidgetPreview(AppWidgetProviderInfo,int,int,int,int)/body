@@ -27,7 +27,6 @@
     }
   }
   if (drawable == null) {
-    Resources resources=mLauncher.getResources();
     int targetWidth=mWidgetSpacingLayout.estimateCellWidth(cellHSpan);
     int targetHeight=mWidgetSpacingLayout.estimateCellHeight(cellVSpan);
     int bitmapWidth=targetWidth;
