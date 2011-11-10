@@ -2,7 +2,4 @@
   if (!mWorkspace.addExternalItemToScreen(itemInfo,layout)) {
     showOutOfSpaceMessage();
   }
- else {
-    layout.animateDrop();
-  }
 }

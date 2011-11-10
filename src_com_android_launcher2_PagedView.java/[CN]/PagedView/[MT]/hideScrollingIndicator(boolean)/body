@@ -6,7 +6,7 @@
     updateScrollingIndicatorPosition();
     cancelScrollingIndicatorAnimations();
     if (immediately) {
-      mScrollIndicator.setVisibility(View.GONE);
+      mScrollIndicator.setVisibility(View.INVISIBLE);
       mScrollIndicator.setAlpha(0f);
     }
  else {
@@ -19,7 +19,7 @@
         }
         @Override public void onAnimationEnd(        Animator animation){
           if (!cancelled) {
-            mScrollIndicator.setVisibility(View.GONE);
+            mScrollIndicator.setVisibility(View.INVISIBLE);
           }
         }
       }
