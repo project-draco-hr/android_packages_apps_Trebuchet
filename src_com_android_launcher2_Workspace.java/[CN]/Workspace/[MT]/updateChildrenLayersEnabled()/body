@@ -4,8 +4,10 @@
   boolean enableChildrenLayers=small || dragging || isPageMoving();
   if (enableChildrenLayers != mChildrenLayersEnabled) {
     mChildrenLayersEnabled=enableChildrenLayers;
-    for (int i=0; i < getPageCount(); i++) {
-      ((ViewGroup)getChildAt(i)).setChildrenLayersEnabled(enableChildrenLayers);
+    if (!enableChildrenLayers) {
+      for (int i=0; i < getPageCount(); i++) {
+        ((ViewGroup)getChildAt(i)).setChildrenLayersEnabled(false);
+      }
     }
   }
 }
