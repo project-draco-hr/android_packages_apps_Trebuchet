@@ -1,0 +1,5 @@
+{
+  if (mAllowRequestLayout) {
+    super.requestLayout();
+  }
+}
