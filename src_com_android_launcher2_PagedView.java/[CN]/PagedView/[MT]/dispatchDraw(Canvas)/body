@@ -8,21 +8,9 @@
   }
   final int pageCount=getChildCount();
   if (pageCount > 0) {
-    final int pageWidth=getScaledMeasuredWidth(getPageAt(0));
-    final int screenWidth=getMeasuredWidth();
-    int x=getScaledRelativeChildOffset(0) + pageWidth;
-    int leftScreen=0;
-    int rightScreen=0;
-    while (x <= mScrollX && leftScreen < pageCount - 1) {
-      leftScreen++;
-      x+=getScaledMeasuredWidth(getPageAt(leftScreen)) + mPageSpacing;
-    }
-    rightScreen=leftScreen;
-    while (x < mScrollX + screenWidth && rightScreen < pageCount - 1) {
-      rightScreen++;
-      x+=getScaledMeasuredWidth(getPageAt(rightScreen)) + mPageSpacing;
-    }
-    rightScreen=Math.min(getChildCount() - 1,rightScreen);
+    getVisiblePages(mTempVisiblePagesRange);
+    final int leftScreen=mTempVisiblePagesRange[0];
+    final int rightScreen=mTempVisiblePagesRange[1];
     final long drawingTime=getDrawingTime();
     canvas.save();
     canvas.clipRect(mScrollX,mScrollY,mScrollX + mRight - mLeft,mScrollY + mBottom - mTop);
