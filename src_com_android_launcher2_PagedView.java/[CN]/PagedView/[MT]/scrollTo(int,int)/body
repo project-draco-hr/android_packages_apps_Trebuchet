@@ -13,6 +13,7 @@
     }
   }
  else {
+    mOverScrollX=x;
     super.scrollTo(x,y);
   }
   mTouchX=x;

@@ -1,6 +1,6 @@
 {
   if (mLauncher != null) {
     mWorkspaceIndex=indexOfChild(mLauncher.getWorkspace());
-    mHotseatIndex=indexOfChild(mLauncher.getHotseat());
+    mQsbIndex=indexOfChild(mLauncher.getSearchBar());
   }
 }

@@ -1,0 +1,10 @@
+{
+  if (mScrollingTransformsDirty) {
+    setOverscrollTransformsDirty(false);
+    setTranslationX(0);
+    setRotationY(0);
+    setOverScrollAmount(0,false);
+    setPivotX(getMeasuredWidth() / 2);
+    setPivotY(getMeasuredHeight() / 2);
+  }
+}
