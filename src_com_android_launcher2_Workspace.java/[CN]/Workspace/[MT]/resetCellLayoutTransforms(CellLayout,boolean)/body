@@ -1,7 +1,0 @@
-{
-  cl.setTranslationX(0);
-  cl.setRotationY(0);
-  cl.setOverScrollAmount(0,left);
-  cl.setPivotX(cl.getMeasuredWidth() / 2);
-  cl.setPivotY(cl.getMeasuredHeight() / 2);
-}

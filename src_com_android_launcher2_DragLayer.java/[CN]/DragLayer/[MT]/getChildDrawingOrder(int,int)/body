@@ -1,12 +1,12 @@
 {
-  if (mWorkspaceIndex == -1 || mHotseatIndex == -1 || mLauncher.getWorkspace().isDrawingBackgroundGradient()) {
+  if (mWorkspaceIndex == -1 || mQsbIndex == -1 || mLauncher.getWorkspace().isDrawingBackgroundGradient()) {
     return i;
   }
-  if (i == mHotseatIndex) {
+  if (i == mQsbIndex) {
     return mWorkspaceIndex;
   }
  else   if (i == mWorkspaceIndex) {
-    return mHotseatIndex;
+    return mQsbIndex;
   }
  else {
     return i;

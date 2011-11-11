@@ -13,8 +13,15 @@
       isVisible=false;
     }
   }
+  if (isUninstall) {
+    setCompoundDrawablesWithIntrinsicBounds(mUninstallDrawable,null,null,null);
+  }
+ else {
+    setCompoundDrawablesWithIntrinsicBounds(mRemoveDrawable,null,null,null);
+  }
+  mCurrentDrawable=(TransitionDrawable)getCompoundDrawables()[0];
   mActive=isVisible;
-  mDrawable.resetTransition();
+  mCurrentDrawable.resetTransition();
   setTextColor(mOriginalTextColor);
   ((ViewGroup)getParent()).setVisibility(isVisible ? View.VISIBLE : View.GONE);
   if (getText().length() > 0) {
