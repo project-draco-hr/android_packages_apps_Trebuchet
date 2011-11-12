@@ -1,15 +1,15 @@
 {
-  if (mScrollX < 0 || mScrollX > mMaxScrollX) {
-    int index=mScrollX < 0 ? 0 : getChildCount() - 1;
+  if (mOverScrollX < 0 || mOverScrollX > mMaxScrollX) {
+    int index=mOverScrollX < 0 ? 0 : getChildCount() - 1;
     CellLayout cl=(CellLayout)getChildAt(index);
     float scrollProgress=getScrollProgress(screenCenter,cl,index);
     cl.setOverScrollAmount(Math.abs(scrollProgress),index == 0);
-    float translationX=index == 0 ? mScrollX : -(mMaxScrollX - mScrollX);
     float rotation=-WORKSPACE_OVERSCROLL_ROTATION * scrollProgress;
     cl.setCameraDistance(mDensity * CAMERA_DISTANCE);
     cl.setPivotX(cl.getMeasuredWidth() * (index == 0 ? 0.75f : 0.25f));
-    cl.setTranslationX(translationX);
+    cl.setPivotY(cl.getMeasuredHeight() * 0.5f);
     cl.setRotationY(rotation);
+    cl.setOverscrollTransformsDirty(true);
     setFadeForOverScroll(Math.abs(scrollProgress));
   }
  else {
@@ -17,8 +17,8 @@
       setFadeForOverScroll(0);
     }
     if (!isSwitchingState()) {
-      resetCellLayoutTransforms((CellLayout)getChildAt(0),true);
-      resetCellLayoutTransforms((CellLayout)getChildAt(getChildCount() - 1),false);
+      ((CellLayout)getChildAt(0)).resetOverscrollTransforms();
+      ((CellLayout)getChildAt(getChildCount() - 1)).resetOverscrollTransforms();
     }
   }
 }

@@ -1,4 +1,5 @@
 {
+  boolean isInOverscroll=false;
   for (int i=0; i < getChildCount(); i++) {
     CellLayout cl=(CellLayout)getChildAt(i);
     if (cl != null) {
@@ -6,9 +7,15 @@
       float rotation=WORKSPACE_ROTATION * scrollProgress;
       float translationX=getOffsetXForRotation(rotation,cl.getWidth(),cl.getHeight());
       if (!isSmall()) {
-        if ((mScrollX < 0 && i == 0) || (mScrollX > mMaxScrollX && i == getChildCount() - 1)) {
+        if ((mOverScrollX < 0 && i == 0) || (mOverScrollX > mMaxScrollX && i == getChildCount() - 1)) {
+          isInOverscroll=true;
+          rotation*=-1;
           cl.setBackgroundAlphaMultiplier(overScrollBackgroundAlphaInterpolator(Math.abs(scrollProgress)));
           mOverScrollPageIndex=i;
+          cl.setOverScrollAmount(Math.abs(scrollProgress),i == 0);
+          cl.setPivotX(cl.getMeasuredWidth() * (i == 0 ? 0.75f : 0.25f));
+          cl.setPivotY(cl.getMeasuredHeight() * 0.5f);
+          cl.setOverscrollTransformsDirty(true);
         }
  else         if (mOverScrollPageIndex != i) {
           cl.setBackgroundAlphaMultiplier(backgroundAlphaInterpolator(Math.abs(scrollProgress)));
@@ -22,6 +29,10 @@
       }
       cl.fastInvalidate();
     }
+  }
+  if (!isSwitchingState() && !isInOverscroll) {
+    ((CellLayout)getChildAt(0)).resetOverscrollTransforms();
+    ((CellLayout)getChildAt(getChildCount() - 1)).resetOverscrollTransforms();
   }
   invalidate();
 }
