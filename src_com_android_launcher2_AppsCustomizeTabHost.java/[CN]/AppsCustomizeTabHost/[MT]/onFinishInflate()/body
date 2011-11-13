@@ -6,7 +6,7 @@
   mTabs=tabs;
   mTabsContainer=tabsContainer;
   mAppsCustomizePane=appsCustomizePane;
-  mAnimationBuffer=(ImageView)findViewById(R.id.animation_buffer);
+  mAnimationBuffer=(FrameLayout)findViewById(R.id.animation_buffer);
   if (tabs == null || mAppsCustomizePane == null)   throw new Resources.NotFoundException();
   TabContentFactory contentFactory=new TabContentFactory(){
     public View createTabContent(    String tag){
