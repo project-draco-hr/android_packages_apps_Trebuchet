@@ -12,22 +12,35 @@
         reloadCurrentPage();
         return;
       }
-      Bitmap b=Bitmap.createBitmap(mAppsCustomizePane.getMeasuredWidth(),mAppsCustomizePane.getMeasuredHeight(),Bitmap.Config.ARGB_8888);
-      Canvas c=new Canvas(b);
-      mAppsCustomizePane.draw(c);
-      mAppsCustomizePane.setAlpha(0f);
-      mAnimationBuffer.setImageBitmap(b);
-      mAnimationBuffer.setAlpha(1f);
-      mAnimationBuffer.setVisibility(View.VISIBLE);
-      c.setBitmap(null);
-      b=null;
+      mAnimationBuffer.scrollTo(mAppsCustomizePane.getScrollX(),0);
+      int[] visiblePageRange=new int[2];
+      mAppsCustomizePane.getVisiblePages(visiblePageRange);
+      ArrayList<View> visiblePages=new ArrayList<View>();
+      for (int i=visiblePageRange[0]; i <= visiblePageRange[1]; i++) {
+        visiblePages.add(mAppsCustomizePane.getPageAt(i));
+      }
+      for (int i=visiblePages.size() - 1; i >= 0; i--) {
+        View child=visiblePages.get(i);
+        PagedViewWidget.setDeletePreviewsWhenDetachedFromWindow(false);
+        mAppsCustomizePane.removeView(child);
+        PagedViewWidget.setDeletePreviewsWhenDetachedFromWindow(true);
+        mAnimationBuffer.setAlpha(1f);
+        mAnimationBuffer.setVisibility(View.VISIBLE);
+        LayoutParams p=new FrameLayout.LayoutParams(child.getWidth(),child.getHeight());
+        p.setMargins((int)child.getLeft(),(int)child.getTop(),0,0);
+        mAnimationBuffer.addView(child,p);
+      }
       onTabChangedStart();
       onTabChangedEnd(type);
       ObjectAnimator outAnim=ObjectAnimator.ofFloat(mAnimationBuffer,"alpha",0f);
       outAnim.addListener(new AnimatorListenerAdapter(){
         @Override public void onAnimationEnd(        Animator animation){
           mAnimationBuffer.setVisibility(View.GONE);
-          mAnimationBuffer.setImageBitmap(null);
+          mAnimationBuffer.removeAllViews();
+        }
+        @Override public void onAnimationCancel(        Animator animation){
+          mAnimationBuffer.setVisibility(View.GONE);
+          mAnimationBuffer.removeAllViews();
         }
       }
 );
