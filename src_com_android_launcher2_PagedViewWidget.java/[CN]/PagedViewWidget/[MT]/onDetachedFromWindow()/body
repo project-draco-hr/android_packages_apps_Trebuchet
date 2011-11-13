@@ -1,11 +1,13 @@
 {
   super.onDetachedFromWindow();
-  final ImageView image=(ImageView)findViewById(R.id.widget_preview);
-  if (image != null) {
-    FastBitmapDrawable preview=(FastBitmapDrawable)image.getDrawable();
-    if (preview != null && preview.getBitmap() != null) {
-      preview.getBitmap().recycle();
+  if (sDeletePreviewsWhenDetachedFromWindow) {
+    final ImageView image=(ImageView)findViewById(R.id.widget_preview);
+    if (image != null) {
+      FastBitmapDrawable preview=(FastBitmapDrawable)image.getDrawable();
+      if (preview != null && preview.getBitmap() != null) {
+        preview.getBitmap().recycle();
+      }
+      image.setImageDrawable(null);
     }
-    image.setImageDrawable(null);
   }
 }
