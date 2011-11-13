@@ -3,7 +3,7 @@
   super.onMeasure(widthMeasureSpec,heightMeasureSpec);
   if (remeasureTabWidth) {
     int contentWidth=mAppsCustomizePane.getPageContentWidth();
-    if (contentWidth > 0) {
+    if (contentWidth > 0 && mTabs.getLayoutParams().width != contentWidth) {
       mTabs.getLayoutParams().width=contentWidth;
       post(new Runnable(){
         public void run(){
