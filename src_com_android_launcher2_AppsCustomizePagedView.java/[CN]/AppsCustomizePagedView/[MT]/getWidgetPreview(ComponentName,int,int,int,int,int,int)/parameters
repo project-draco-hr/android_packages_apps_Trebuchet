@@ -1,0 +1,7 @@
+ComponentName provider
+int previewImage
+int iconId
+int cellHSpan
+int cellVSpan
+int maxWidth
+int maxHeight
