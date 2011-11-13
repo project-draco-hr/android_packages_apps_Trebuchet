@@ -12,7 +12,7 @@
     }
   }
   final int sleepMs=getSleepForPage(page + mNumAppsPages);
-  AsyncTaskPageData pageData=new AsyncTaskPageData(page,widgets,cellWidth,cellHeight,cellCountX,new AsyncTaskCallback(){
+  AsyncTaskPageData pageData=new AsyncTaskPageData(page,widgets,cellWidth,cellHeight,new AsyncTaskCallback(){
     @Override public void run(    AppsCustomizeAsyncTask task,    AsyncTaskPageData data){
       try {
         try {

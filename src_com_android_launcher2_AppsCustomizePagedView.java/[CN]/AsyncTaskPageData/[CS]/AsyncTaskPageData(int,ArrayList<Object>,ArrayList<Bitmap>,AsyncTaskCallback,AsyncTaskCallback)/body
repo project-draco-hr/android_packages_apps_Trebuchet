@@ -3,7 +3,7 @@
   items=l;
   sourceImages=si;
   generatedImages=new ArrayList<Bitmap>();
-  cellWidth=cellHeight=-1;
+  maxImageWidth=maxImageHeight=-1;
   doInBackgroundCallback=bgR;
   postExecuteCallback=postR;
 }

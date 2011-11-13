@@ -1,4 +1,3 @@
-int spanX
-int spanY
+PendingAddItemInfo info
 Bitmap b
 Paint alphaClipPaint

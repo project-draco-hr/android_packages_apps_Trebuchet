@@ -1,0 +1,13 @@
+{
+  RectF r=new RectF();
+  cl.cellToRect(hCell,vCell,hSpan,vSpan,r);
+  if (pendingInfo instanceof PendingAddWidgetInfo) {
+    PendingAddWidgetInfo widgetInfo=(PendingAddWidgetInfo)pendingInfo;
+    Rect p=AppWidgetHostView.getDefaultPaddingForWidget(mContext,widgetInfo.componentName,null);
+    r.top+=p.top;
+    r.left+=p.left;
+    r.right-=p.right;
+    r.bottom-=p.bottom;
+  }
+  return r;
+}

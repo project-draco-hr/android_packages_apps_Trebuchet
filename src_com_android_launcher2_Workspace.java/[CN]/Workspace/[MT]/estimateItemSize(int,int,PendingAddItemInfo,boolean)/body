@@ -1,0 +1,19 @@
+{
+  int[] size=new int[2];
+  if (getChildCount() > 0) {
+    CellLayout cl=(CellLayout)mLauncher.getWorkspace().getChildAt(0);
+    RectF r=estimateItemPosition(cl,pendingItemInfo,0,0,hSpan,vSpan);
+    size[0]=(int)r.width();
+    size[1]=(int)r.height();
+    if (springLoaded) {
+      size[0]*=mSpringLoadedShrinkFactor;
+      size[1]*=mSpringLoadedShrinkFactor;
+    }
+    return size;
+  }
+ else {
+    size[0]=Integer.MAX_VALUE;
+    size[1]=Integer.MAX_VALUE;
+    return size;
+  }
+}
