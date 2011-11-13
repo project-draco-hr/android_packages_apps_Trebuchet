@@ -1,15 +1,15 @@
 {
   int numItemsPerPage=mWidgetCountX * mWidgetCountY;
+  final ArrayList<Object> items=new ArrayList<Object>();
   int contentWidth=mWidgetSpacingLayout.getContentWidth();
+  final int cellWidth=((contentWidth - mPageLayoutPaddingLeft - mPageLayoutPaddingRight- ((mWidgetCountX - 1) * mWidgetWidthGap)) / mWidgetCountX);
   int contentHeight=mWidgetSpacingLayout.getContentHeight();
-  ArrayList<Object> items=new ArrayList<Object>();
-  int cellWidth=((contentWidth - mPageLayoutPaddingLeft - mPageLayoutPaddingRight- ((mWidgetCountX - 1) * mWidgetWidthGap)) / mWidgetCountX);
-  int cellHeight=((contentHeight - mPageLayoutPaddingTop - mPageLayoutPaddingBottom- ((mWidgetCountY - 1) * mWidgetHeightGap)) / mWidgetCountY);
+  final int cellHeight=((contentHeight - mPageLayoutPaddingTop - mPageLayoutPaddingBottom- ((mWidgetCountY - 1) * mWidgetHeightGap)) / mWidgetCountY);
   int offset=page * numItemsPerPage;
   for (int i=offset; i < Math.min(offset + numItemsPerPage,mWidgets.size()); ++i) {
     items.add(mWidgets.get(i));
   }
-  PagedViewGridLayout layout=(PagedViewGridLayout)getPageAt(page + mNumAppsPages);
+  final PagedViewGridLayout layout=(PagedViewGridLayout)getPageAt(page + mNumAppsPages);
   layout.setColumnCount(layout.getCellCountX());
   for (int i=0; i < items.size(); ++i) {
     Object rawInfo=items.get(i);
@@ -43,12 +43,25 @@
     if (iy > 0)     lp.topMargin=mWidgetHeightGap;
     layout.addView(widget,lp);
   }
-  if (immediate) {
-    AsyncTaskPageData data=new AsyncTaskPageData(page,items,cellWidth,cellHeight,mWidgetCountX,null,null);
-    loadWidgetPreviewsInBackground(null,data);
-    onSyncWidgetPageItems(data);
-  }
+  layout.setOnLayoutListener(new Runnable(){
+    public void run(){
+      int maxPreviewWidth=cellWidth;
+      int maxPreviewHeight=cellHeight;
+      if (layout.getChildCount() > 0) {
+        PagedViewWidget w=(PagedViewWidget)layout.getChildAt(0);
+        int[] maxSize=w.getPreviewSize();
+        maxPreviewWidth=maxSize[0];
+        maxPreviewHeight=maxSize[1];
+      }
+      if (immediate) {
+        AsyncTaskPageData data=new AsyncTaskPageData(page,items,maxPreviewWidth,maxPreviewHeight,null,null);
+        loadWidgetPreviewsInBackground(null,data);
+        onSyncWidgetPageItems(data);
+      }
  else {
-    prepareLoadWidgetPreviewsTask(page,items,cellWidth,cellHeight,mWidgetCountX);
+        prepareLoadWidgetPreviewsTask(page,items,maxPreviewWidth,maxPreviewHeight,mWidgetCountX);
+      }
+    }
   }
+);
 }

@@ -45,10 +45,10 @@ cellLayout.onDragExit();
 }
 }
 ;
+RectF r=estimateItemPosition(cellLayout,pendingInfo,mTargetCell[0],mTargetCell[1],spanX,spanY);
 int loc[]=new int[2];
-cellLayout.cellToPoint(mTargetCell[0],mTargetCell[1],loc);
-RectF r=new RectF();
-cellLayout.cellToRect(mTargetCell[0],mTargetCell[1],spanX,spanY,r);
+loc[0]=(int)r.left;
+loc[1]=(int)r.top;
 setFinalTransitionTransform(cellLayout);
 float cellLayoutScale=mLauncher.getDragLayer().getDescendantCoordRelativeToSelf(cellLayout,loc);
 resetTransitionTransform(cellLayout);
