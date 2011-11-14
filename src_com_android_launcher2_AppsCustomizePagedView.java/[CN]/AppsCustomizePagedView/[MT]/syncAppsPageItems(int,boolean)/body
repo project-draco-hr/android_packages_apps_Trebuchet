@@ -13,6 +13,7 @@
     icon.setOnClickListener(this);
     icon.setOnLongClickListener(this);
     icon.setOnTouchListener(this);
+    icon.setOnKeyListener(this);
     int index=i - startIndex;
     int x=index % mCellCountX;
     int y=index / mCellCountX;

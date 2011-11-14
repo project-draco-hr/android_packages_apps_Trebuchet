@@ -11,12 +11,14 @@
     getVisiblePages(mTempVisiblePagesRange);
     final int leftScreen=mTempVisiblePagesRange[0];
     final int rightScreen=mTempVisiblePagesRange[1];
-    final long drawingTime=getDrawingTime();
-    canvas.save();
-    canvas.clipRect(mScrollX,mScrollY,mScrollX + mRight - mLeft,mScrollY + mBottom - mTop);
-    for (int i=rightScreen; i >= leftScreen; i--) {
-      drawChild(canvas,getPageAt(i),drawingTime);
+    if (leftScreen != -1 && rightScreen != -1) {
+      final long drawingTime=getDrawingTime();
+      canvas.save();
+      canvas.clipRect(mScrollX,mScrollY,mScrollX + mRight - mLeft,mScrollY + mBottom - mTop);
+      for (int i=rightScreen; i >= leftScreen; i--) {
+        drawChild(canvas,getPageAt(i),drawingTime);
+      }
+      canvas.restore();
     }
-    canvas.restore();
   }
 }
