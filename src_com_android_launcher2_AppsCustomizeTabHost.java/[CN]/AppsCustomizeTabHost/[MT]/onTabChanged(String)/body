@@ -12,15 +12,25 @@
         reloadCurrentPage();
         return;
       }
-      mAnimationBuffer.scrollTo(mAppsCustomizePane.getScrollX(),0);
       int[] visiblePageRange=new int[2];
       mAppsCustomizePane.getVisiblePages(visiblePageRange);
+      if (visiblePageRange[0] == -1 && visiblePageRange[1] == -1) {
+        reloadCurrentPage();
+        return;
+      }
       ArrayList<View> visiblePages=new ArrayList<View>();
       for (int i=visiblePageRange[0]; i <= visiblePageRange[1]; i++) {
         visiblePages.add(mAppsCustomizePane.getPageAt(i));
       }
+      mAnimationBuffer.scrollTo(mAppsCustomizePane.getScrollX(),0);
       for (int i=visiblePages.size() - 1; i >= 0; i--) {
         View child=visiblePages.get(i);
+        if (child instanceof PagedViewCellLayout) {
+          ((PagedViewCellLayout)child).resetChildrenOnKeyListeners();
+        }
+ else         if (child instanceof PagedViewGridLayout) {
+          ((PagedViewGridLayout)child).resetChildrenOnKeyListeners();
+        }
         PagedViewWidget.setDeletePreviewsWhenDetachedFromWindow(false);
         mAppsCustomizePane.removeView(child);
         PagedViewWidget.setDeletePreviewsWhenDetachedFromWindow(true);
