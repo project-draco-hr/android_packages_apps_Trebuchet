@@ -4,14 +4,14 @@
   mWorkspace.changeState(Workspace.State.NORMAL,animated,stagger);
   if (mState != State.WORKSPACE) {
     mWorkspace.setVisibility(View.VISIBLE);
-    hideAppsCustomizeHelper(animated);
+    hideAppsCustomizeHelper(animated,false);
     mSearchDropTargetBar.showSearchBar(animated);
+    showDockDivider(animated && mState == State.APPS_CUSTOMIZE_SPRING_LOADED);
     if (mAllAppsButton != null) {
       mAllAppsButton.requestFocus();
     }
   }
-  mWorkspace.showDockDivider(!animated);
-  mWorkspace.flashScrollingIndicator();
+  mWorkspace.flashScrollingIndicator(animated);
   mState=State.WORKSPACE;
   mUserPresent=true;
   updateRunning();
