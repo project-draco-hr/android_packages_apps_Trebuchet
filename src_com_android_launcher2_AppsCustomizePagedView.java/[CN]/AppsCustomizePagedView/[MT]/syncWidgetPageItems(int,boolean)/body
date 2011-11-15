@@ -33,6 +33,7 @@
     widget.setOnClickListener(this);
     widget.setOnLongClickListener(this);
     widget.setOnTouchListener(this);
+    widget.setOnKeyListener(this);
     int ix=i % mWidgetCountX;
     int iy=i / mWidgetCountX;
     GridLayout.LayoutParams lp=new GridLayout.LayoutParams(GridLayout.spec(iy,GridLayout.LEFT),GridLayout.spec(ix,GridLayout.TOP));
