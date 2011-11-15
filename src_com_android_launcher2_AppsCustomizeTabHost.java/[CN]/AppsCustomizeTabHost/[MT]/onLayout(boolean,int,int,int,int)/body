@@ -1,0 +1,8 @@
+{
+  super.onLayout(changed,left,top,right,bottom);
+  if (mLauncherTransition != null) {
+    enableAndBuildHardwareLayer();
+    mLauncherTransition.start();
+    mLauncherTransition=null;
+  }
+}
