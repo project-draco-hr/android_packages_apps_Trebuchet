@@ -1,4 +1,4 @@
 {
-  int pageDiff=Math.abs(page - mCurrentPage) - 1;
+  int pageDiff=getWidgetPageLoadPriority(page);
   return Math.max(0,pageDiff * sPageSleepDelay);
 }
