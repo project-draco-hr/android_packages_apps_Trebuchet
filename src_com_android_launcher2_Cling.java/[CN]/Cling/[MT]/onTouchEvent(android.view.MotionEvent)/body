@@ -1,12 +1,12 @@
 {
-  if (mDrawIdentifier.equals(WORKSPACE_PORTRAIT) || mDrawIdentifier.equals(WORKSPACE_LANDSCAPE) || mDrawIdentifier.equals(ALLAPPS_PORTRAIT)|| mDrawIdentifier.equals(ALLAPPS_LANDSCAPE)) {
+  if (mDrawIdentifier.equals(WORKSPACE_PORTRAIT) || mDrawIdentifier.equals(WORKSPACE_LANDSCAPE) || mDrawIdentifier.equals(WORKSPACE_LARGE)|| mDrawIdentifier.equals(ALLAPPS_PORTRAIT)|| mDrawIdentifier.equals(ALLAPPS_LANDSCAPE)|| mDrawIdentifier.equals(ALLAPPS_LARGE)) {
     int[] pos=getPunchThroughPosition();
     double diff=Math.sqrt(Math.pow(event.getX() - pos[0],2) + Math.pow(event.getY() - pos[1],2));
     if (diff < mRevealRadius) {
       return false;
     }
   }
- else   if (mDrawIdentifier.equals(FOLDER_PORTRAIT) || mDrawIdentifier.equals(FOLDER_LANDSCAPE)) {
+ else   if (mDrawIdentifier.equals(FOLDER_PORTRAIT) || mDrawIdentifier.equals(FOLDER_LANDSCAPE) || mDrawIdentifier.equals(FOLDER_LARGE)) {
     Folder f=mLauncher.getWorkspace().getOpenFolder();
     if (f != null) {
       Rect r=new Rect();
