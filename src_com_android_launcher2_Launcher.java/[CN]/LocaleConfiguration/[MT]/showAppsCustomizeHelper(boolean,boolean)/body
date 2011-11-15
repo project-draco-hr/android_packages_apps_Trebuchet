@@ -36,9 +36,6 @@
 );
     alphaAnim.setStartDelay(startDelay);
     alphaAnim.start();
-    if (toView instanceof LauncherTransitionable) {
-      ((LauncherTransitionable)toView).onLauncherTransitionStart(instance,scaleAnim,false);
-    }
     scaleAnim.addListener(new AnimatorListenerAdapter(){
       boolean animationCancelled=false;
       @Override public void onAnimationStart(      Animator animation){
@@ -69,7 +66,14 @@
 );
     mStateAnimation=new AnimatorSet();
     mStateAnimation.play(scaleAnim).after(startDelay);
-    mStateAnimation.start();
+    boolean delayAnim=false;
+    if (toView instanceof LauncherTransitionable) {
+      LauncherTransitionable lt=(LauncherTransitionable)toView;
+      delayAnim=lt.onLauncherTransitionStart(instance,mStateAnimation,false);
+    }
+    if (!delayAnim) {
+      mStateAnimation.start();
+    }
   }
  else {
     toView.setTranslationX(0.0f);

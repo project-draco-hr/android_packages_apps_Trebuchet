@@ -7,6 +7,7 @@
   mTabsContainer=tabsContainer;
   mAppsCustomizePane=appsCustomizePane;
   mAnimationBuffer=(FrameLayout)findViewById(R.id.animation_buffer);
+  mContent=(LinearLayout)findViewById(R.id.apps_customize_content);
   if (tabs == null || mAppsCustomizePane == null)   throw new Resources.NotFoundException();
   TabContentFactory contentFactory=new TabContentFactory(){
     public View createTabContent(    String tag){
