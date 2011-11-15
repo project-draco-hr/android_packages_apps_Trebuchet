@@ -1,8 +1,16 @@
 {
   mInTransition=true;
-  if (animation != null && isHardwareAccelerated()) {
-    setLayerType(LAYER_TYPE_HARDWARE,null);
-    buildLayer();
+  boolean delayLauncherTransitionUntilLayout=false;
+  mLauncherTransition=null;
+  if (animation != null) {
+    if (mContent.getVisibility() == GONE) {
+      mLauncherTransition=animation;
+      delayLauncherTransitionUntilLayout=true;
+    }
+    mContent.setVisibility(VISIBLE);
+    if (!delayLauncherTransitionUntilLayout) {
+      enableAndBuildHardwareLayer();
+    }
   }
   if (!toWorkspace && !LauncherApplication.isScreenLarge()) {
     mAppsCustomizePane.showScrollingIndicator(false);
@@ -11,4 +19,5 @@
     mAppsCustomizePane.reset();
     mResetAfterTransition=false;
   }
+  return delayLauncherTransitionUntilLayout;
 }
