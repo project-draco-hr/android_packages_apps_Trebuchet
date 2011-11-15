@@ -2,13 +2,13 @@
   Iterator<AppsCustomizeAsyncTask> iter=mRunningTasks.iterator();
   while (iter.hasNext()) {
     AppsCustomizeAsyncTask task=(AppsCustomizeAsyncTask)iter.next();
-    int taskPage=task.page;
-    if ((taskPage == page) || taskPage < getAssociatedLowerPageBound(mCurrentPage - mNumAppsPages) || taskPage > getAssociatedUpperPageBound(mCurrentPage - mNumAppsPages)) {
+    int taskPage=task.page + mNumAppsPages;
+    if (taskPage < getAssociatedLowerPageBound(mCurrentPage) || taskPage > getAssociatedUpperPageBound(mCurrentPage)) {
       task.cancel(false);
       iter.remove();
     }
  else {
-      task.setThreadPriority(getThreadPriorityForPage(taskPage + mNumAppsPages));
+      task.setThreadPriority(getThreadPriorityForPage(taskPage));
     }
   }
   final int sleepMs=getSleepForPage(page + mNumAppsPages);
@@ -43,7 +43,7 @@
   }
 );
   AppsCustomizeAsyncTask t=new AppsCustomizeAsyncTask(page,AsyncTaskPageData.Type.LoadWidgetPreviewData);
-  t.setThreadPriority(getThreadPriorityForPage(page));
+  t.setThreadPriority(getThreadPriorityForPage(page + mNumAppsPages));
   t.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,pageData);
   mRunningTasks.add(t);
 }
