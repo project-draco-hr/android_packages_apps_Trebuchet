@@ -1,16 +1,15 @@
 {
   mInTransition=true;
   boolean delayLauncherTransitionUntilLayout=false;
+  boolean animated=(animation != null);
   mLauncherTransition=null;
-  if (animation != null) {
-    if (mContent.getVisibility() == GONE) {
-      mLauncherTransition=animation;
-      delayLauncherTransitionUntilLayout=true;
-    }
-    mContent.setVisibility(VISIBLE);
-    if (!delayLauncherTransitionUntilLayout) {
-      enableAndBuildHardwareLayer();
-    }
+  if (animated && mContent.getVisibility() == GONE) {
+    mLauncherTransition=animation;
+    delayLauncherTransitionUntilLayout=true;
+  }
+  mContent.setVisibility(VISIBLE);
+  if (animated && !delayLauncherTransitionUntilLayout) {
+    enableAndBuildHardwareLayer();
   }
   if (!toWorkspace && !LauncherApplication.isScreenLarge()) {
     mAppsCustomizePane.showScrollingIndicator(false);
