@@ -1,0 +1,18 @@
+{
+  if (mQsbDivider != null && mDockDivider != null) {
+    mQsbDivider.setVisibility(View.VISIBLE);
+    mDockDivider.setVisibility(View.VISIBLE);
+    if (mDividerAnimator != null) {
+      mDividerAnimator.cancel();
+      mQsbDivider.setAlpha(1f);
+      mDockDivider.setAlpha(1f);
+      mDividerAnimator=null;
+    }
+    if (animated) {
+      mDividerAnimator=new AnimatorSet();
+      mDividerAnimator.playTogether(ObjectAnimator.ofFloat(mQsbDivider,"alpha",1f),ObjectAnimator.ofFloat(mDockDivider,"alpha",1f));
+      mDividerAnimator.setDuration(mSearchDropTargetBar.getTransitionInDuration());
+      mDividerAnimator.start();
+    }
+  }
+}
