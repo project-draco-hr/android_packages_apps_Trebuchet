@@ -1,5 +1,5 @@
 {
   removeCallbacks(hideScrollingIndicatorRunnable);
-  showScrollingIndicator(false);
+  showScrollingIndicator(!animated);
   postDelayed(hideScrollingIndicatorRunnable,sScrollIndicatorFlashDuration);
 }

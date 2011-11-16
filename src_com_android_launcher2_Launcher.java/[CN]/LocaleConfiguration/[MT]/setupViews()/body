@@ -2,6 +2,8 @@
   final DragController dragController=mDragController;
   mDragLayer=(DragLayer)findViewById(R.id.drag_layer);
   mWorkspace=(Workspace)mDragLayer.findViewById(R.id.workspace);
+  mQsbDivider=(ImageView)findViewById(R.id.qsb_divider);
+  mDockDivider=(ImageView)findViewById(R.id.dock_divider);
   mDragLayer.setup(this,dragController);
   mHotseat=(Hotseat)findViewById(R.id.hotseat);
   if (mHotseat != null) {

@@ -57,5 +57,6 @@
       ((LauncherTransitionable)fromView).onLauncherTransitionStart(instance,null,true);
       ((LauncherTransitionable)fromView).onLauncherTransitionEnd(instance,null,true);
     }
+    mWorkspace.hideScrollingIndicator(false);
   }
 }
