@@ -7,7 +7,7 @@
     int oldCountX=countX;
     int oldCountY=countY;
     if (countX * countY < count) {
-      if (countX <= countY && countX < mMaxCountX) {
+      if ((countX <= countY || countY == mMaxCountY) && countX < mMaxCountX) {
         countX++;
       }
  else       if (countY < mMaxCountY) {
