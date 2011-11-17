@@ -49,7 +49,7 @@
     if (mMaxId == -1) {
       mMaxId=initializeMaxId(db);
     }
-    loadFavorites(db,LauncherSettings.Favorites.CONTAINER_HOTSEAT);
+    loadFavorites(db,R.xml.update_workspace);
     version=9;
   }
   if (version != DATABASE_VERSION) {

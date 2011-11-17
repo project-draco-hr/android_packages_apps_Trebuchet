@@ -7,6 +7,6 @@
     sendAppWidgetResetNotify();
   }
   if (!convertDatabase(db)) {
-    loadFavorites(db,ItemInfo.NO_ID);
+    loadFavorites(db,R.xml.default_workspace);
   }
 }
