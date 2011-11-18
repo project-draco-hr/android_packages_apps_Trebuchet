@@ -5,6 +5,7 @@
   }
   if (!toWorkspace) {
     l.dismissWorkspaceCling(null);
+    mAppsCustomizePane.showAllAppsCling();
     if (!LauncherApplication.isScreenLarge()) {
       mAppsCustomizePane.hideScrollingIndicator(false);
     }
