@@ -24,10 +24,13 @@
   mContentWidth=mWidgetSpacingLayout.getContentWidth();
   int page=getPageForComponent(mSaveInstanceStateItemIndex);
   invalidatePageData(Math.max(0,page));
-  int[] offset=new int[2];
-  int[] pos=mWidgetSpacingLayout.estimateCellPosition(mClingFocusedX,mClingFocusedY);
-  mLauncher.getDragLayer().getLocationInDragLayer(this,offset);
-  pos[0]+=(getMeasuredWidth() - mWidgetSpacingLayout.getMeasuredWidth()) / 2 + offset[0];
-  pos[1]+=(getMeasuredHeight() - mWidgetSpacingLayout.getMeasuredHeight()) / 2 + offset[1];
-  mLauncher.showFirstRunAllAppsCling(pos);
+  AppsCustomizeTabHost host=(AppsCustomizeTabHost)getTabHost();
+  if (!host.isTransitioning()) {
+    post(new Runnable(){
+      @Override public void run(){
+        showAllAppsCling();
+      }
+    }
+);
+  }
 }
