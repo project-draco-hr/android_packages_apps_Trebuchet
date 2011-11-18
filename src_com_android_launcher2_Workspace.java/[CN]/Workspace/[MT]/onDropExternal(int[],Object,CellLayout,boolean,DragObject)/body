@@ -52,7 +52,7 @@ loc[1]=(int)r.top;
 setFinalTransitionTransform(cellLayout);
 float cellLayoutScale=mLauncher.getDragLayer().getDescendantCoordRelativeToSelf(cellLayout,loc);
 resetTransitionTransform(cellLayout);
-float dragViewScale=r.width() / d.dragView.getMeasuredWidth();
+float dragViewScale=Math.min(r.width() / d.dragView.getMeasuredWidth(),r.height() / d.dragView.getMeasuredHeight());
 loc[0]-=(d.dragView.getMeasuredWidth() - cellLayoutScale * r.width()) / 2;
 loc[1]-=(d.dragView.getMeasuredHeight() - cellLayoutScale * r.height()) / 2;
 mLauncher.getDragLayer().animateViewIntoPosition(d.dragView,loc,dragViewScale * cellLayoutScale,onAnimationCompleteRunnable);
