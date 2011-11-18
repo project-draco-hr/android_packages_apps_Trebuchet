@@ -23,15 +23,11 @@
     }
   }
   mLastDropTarget=dropTarget;
-  boolean inDeleteRegion=false;
-  if (mDeleteRegion != null) {
-    inDeleteRegion=mDeleteRegion.contains(x,y);
-  }
   final int slop=ViewConfiguration.get(mLauncher).getScaledWindowTouchSlop();
   mDistanceSinceScroll+=Math.sqrt(Math.pow(mLastTouch[0] - x,2) + Math.pow(mLastTouch[1] - y,2));
   mLastTouch[0]=x;
   mLastTouch[1]=y;
-  if (!inDeleteRegion && x < mScrollZone) {
+  if (x < mScrollZone) {
     if (mScrollState == SCROLL_OUTSIDE_ZONE && mDistanceSinceScroll > slop) {
       mScrollState=SCROLL_WAITING_IN_ZONE;
       if (mDragScroller.onEnterScrollArea(x,y,SCROLL_LEFT)) {
@@ -40,7 +36,7 @@
       }
     }
   }
- else   if (!inDeleteRegion && x > mScrollView.getWidth() - mScrollZone) {
+ else   if (x > mScrollView.getWidth() - mScrollZone) {
     if (mScrollState == SCROLL_OUTSIDE_ZONE && mDistanceSinceScroll > slop) {
       mScrollState=SCROLL_WAITING_IN_ZONE;
       if (mDragScroller.onEnterScrollArea(x,y,SCROLL_RIGHT)) {
