@@ -1,3 +1,6 @@
 {
+  final View searchButtonContainer=findViewById(R.id.search_button_container);
+  final View searchButton=(ImageView)findViewById(R.id.search_button);
   updateButtonWithDrawable(R.id.search_button,d);
+  invalidatePressedFocusedStates(searchButtonContainer,searchButton);
 }

@@ -12,6 +12,7 @@
     if (searchDivider != null)     searchDivider.setVisibility(View.VISIBLE);
     if (searchButtonContainer != null)     searchButtonContainer.setVisibility(View.VISIBLE);
     searchButton.setVisibility(View.VISIBLE);
+    invalidatePressedFocusedStates(searchButtonContainer,searchButton);
     return true;
   }
  else {
