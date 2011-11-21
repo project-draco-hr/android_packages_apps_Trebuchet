@@ -6,6 +6,7 @@
   if (!toWorkspace) {
     l.dismissWorkspaceCling(null);
     mAppsCustomizePane.showAllAppsCling();
+    mAppsCustomizePane.loadAssociatedPages(mAppsCustomizePane.getCurrentPage());
     if (!LauncherApplication.isScreenLarge()) {
       mAppsCustomizePane.hideScrollingIndicator(false);
     }
