@@ -6,6 +6,7 @@
     mDragTargetLayout.onDragExit();
   }
   mLastDragOverView=null;
+  mSpringLoadedDragController.cancel();
   if (!mIsPageMoving) {
     hideOutlines();
   }
