@@ -14,7 +14,7 @@
       }
     }
     if (layout == null) {
-      layout=findMatchingPageForDragOver(d.dragView,d.x,d.y,true);
+      layout=findMatchingPageForDragOver(d.dragView,d.x,d.y,false);
     }
     if (layout != mDragTargetLayout) {
       cleanupFolderCreation(d);
