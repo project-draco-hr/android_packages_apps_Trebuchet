@@ -10,6 +10,7 @@
     if (searchDivider != null)     searchDivider.setVisibility(View.VISIBLE);
     if (voiceButtonContainer != null)     voiceButtonContainer.setVisibility(View.VISIBLE);
     voiceButton.setVisibility(View.VISIBLE);
+    invalidatePressedFocusedStates(voiceButtonContainer,voiceButton);
     return true;
   }
  else {
