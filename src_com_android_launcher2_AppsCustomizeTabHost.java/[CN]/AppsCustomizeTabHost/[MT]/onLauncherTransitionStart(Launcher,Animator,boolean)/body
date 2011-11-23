@@ -8,6 +8,9 @@
     delayLauncherTransitionUntilLayout=true;
   }
   mContent.setVisibility(VISIBLE);
+  if (!toWorkspace) {
+    mAppsCustomizePane.loadAssociatedPages(mAppsCustomizePane.getCurrentPage(),true);
+  }
   if (animated && !delayLauncherTransitionUntilLayout) {
     enableAndBuildHardwareLayer();
   }

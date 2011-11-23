@@ -11,6 +11,7 @@
     mWaitingForResume.setStayPressed(false);
   }
   updateAppMarketIcon();
+  mAppsCustomizeTabHost.onResume();
   if (!mWorkspaceLoading) {
     final ViewTreeObserver observer=mWorkspace.getViewTreeObserver();
     final Workspace workspace=mWorkspace;
