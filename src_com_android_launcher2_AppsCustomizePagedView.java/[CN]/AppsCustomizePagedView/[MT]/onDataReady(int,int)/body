@@ -22,10 +22,11 @@
   int heightSpec=MeasureSpec.makeMeasureSpec(getMeasuredHeight(),MeasureSpec.AT_MOST);
   mWidgetSpacingLayout.measure(widthSpec,heightSpec);
   mContentWidth=mWidgetSpacingLayout.getContentWidth();
-  int page=getPageForComponent(mSaveInstanceStateItemIndex);
-  invalidatePageData(Math.max(0,page));
   AppsCustomizeTabHost host=(AppsCustomizeTabHost)getTabHost();
-  if (!host.isTransitioning()) {
+  final boolean hostIsTransitioning=host.isTransitioning();
+  int page=getPageForComponent(mSaveInstanceStateItemIndex);
+  invalidatePageData(Math.max(0,page),hostIsTransitioning);
+  if (!hostIsTransitioning) {
     post(new Runnable(){
       @Override public void run(){
         showAllAppsCling();
