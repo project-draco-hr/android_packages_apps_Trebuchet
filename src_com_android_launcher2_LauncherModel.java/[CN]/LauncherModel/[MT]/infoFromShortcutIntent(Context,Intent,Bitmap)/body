@@ -2,6 +2,10 @@
   Intent intent=data.getParcelableExtra(Intent.EXTRA_SHORTCUT_INTENT);
   String name=data.getStringExtra(Intent.EXTRA_SHORTCUT_NAME);
   Parcelable bitmap=data.getParcelableExtra(Intent.EXTRA_SHORTCUT_ICON);
+  if (intent == null) {
+    Log.e(TAG,"Can't construct ShorcutInfo with null intent");
+    return null;
+  }
   Bitmap icon=null;
   boolean customIcon=false;
   ShortcutIconResource iconResource=null;
