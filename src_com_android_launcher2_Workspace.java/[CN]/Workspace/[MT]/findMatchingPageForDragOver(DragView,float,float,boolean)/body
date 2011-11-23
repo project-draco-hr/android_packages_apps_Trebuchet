@@ -10,7 +10,7 @@
     if (touchXy[0] >= 0 && touchXy[0] <= cl.getWidth() && touchXy[1] >= 0 && touchXy[1] <= cl.getHeight()) {
       return cl;
     }
-    if (!exact && overlaps(cl,dragView,(int)originX,(int)originY,mTempInverseMatrix)) {
+    if (!exact) {
       final float[] cellLayoutCenter=mTempCellLayoutCenterCoordinates;
       cellLayoutCenter[0]=cl.getWidth() / 2;
       cellLayoutCenter[1]=cl.getHeight() / 2;
