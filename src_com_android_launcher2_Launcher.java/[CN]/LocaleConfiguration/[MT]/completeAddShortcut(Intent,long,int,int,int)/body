@@ -4,6 +4,9 @@
   CellLayout layout=getCellLayout(container,screen);
   boolean foundCellSpan=false;
   ShortcutInfo info=mModel.infoFromShortcutIntent(this,data,null);
+  if (info == null) {
+    return;
+  }
   final View view=createShortcut(info);
   if (cellX >= 0 && cellY >= 0) {
     cellXY[0]=cellX;
