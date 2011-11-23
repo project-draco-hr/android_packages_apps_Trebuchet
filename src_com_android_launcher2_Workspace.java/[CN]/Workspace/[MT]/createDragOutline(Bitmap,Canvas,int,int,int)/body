@@ -1,3 +1,0 @@
-{
-  return createDragOutline(orig,canvas,padding,w,h,null);
-}

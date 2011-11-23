@@ -1,3 +1,0 @@
-{
-  return v.getVisibility() == View.VISIBLE;
-}
