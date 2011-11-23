@@ -1,3 +1,4 @@
 {
+  v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
   onSearchRequested();
 }
