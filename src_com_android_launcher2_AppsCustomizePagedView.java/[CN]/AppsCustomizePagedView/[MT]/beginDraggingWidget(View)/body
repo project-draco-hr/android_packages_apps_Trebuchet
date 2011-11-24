@@ -1,23 +1,21 @@
 {
   ImageView image=(ImageView)v.findViewById(R.id.widget_preview);
   PendingAddItemInfo createItemInfo=(PendingAddItemInfo)v.getTag();
-  Bitmap b;
+  Bitmap preview;
+  Bitmap outline;
   if (createItemInfo instanceof PendingAddWidgetInfo) {
     PendingAddWidgetInfo createWidgetInfo=(PendingAddWidgetInfo)createItemInfo;
     int[] spanXY=mLauncher.getSpanForWidget(createWidgetInfo,null);
     createItemInfo.spanX=spanXY[0];
     createItemInfo.spanY=spanXY[1];
     int[] maxSize=mLauncher.getWorkspace().estimateItemSize(spanXY[0],spanXY[1],createWidgetInfo,true);
-    b=getWidgetPreview(createWidgetInfo.componentName,createWidgetInfo.previewImage,createWidgetInfo.icon,spanXY[0],spanXY[1],maxSize[0],maxSize[1]);
+    preview=getWidgetPreview(createWidgetInfo.componentName,createWidgetInfo.previewImage,createWidgetInfo.icon,spanXY[0],spanXY[1],maxSize[0],maxSize[1]);
   }
  else {
-    b=Bitmap.createBitmap(mWidgetPreviewIconPaddedDimension,mWidgetPreviewIconPaddedDimension,Bitmap.Config.ARGB_8888);
-    Drawable preview=image.getDrawable();
-    mCanvas.setBitmap(b);
-    mCanvas.save();
-    preview.draw(mCanvas);
-    mCanvas.restore();
-    mCanvas.drawColor(mDragViewMultiplyColor,PorterDuff.Mode.MULTIPLY);
+    preview=Bitmap.createBitmap(mWidgetPreviewIconPaddedDimension,mWidgetPreviewIconPaddedDimension,Bitmap.Config.ARGB_8888);
+    Drawable d=image.getDrawable();
+    mCanvas.setBitmap(preview);
+    d.draw(mCanvas);
     mCanvas.setBitmap(null);
     createItemInfo.spanX=createItemInfo.spanY=1;
   }
@@ -29,8 +27,14 @@
       alphaClipPaint.setMaskFilter(alphaClipTable);
     }
   }
+  outline=Bitmap.createScaledBitmap(preview,preview.getWidth(),preview.getHeight(),false);
+  mCanvas.setBitmap(preview);
+  mCanvas.drawColor(mDragViewMultiplyColor,PorterDuff.Mode.MULTIPLY);
+  mCanvas.setBitmap(null);
+  alphaClipPaint=null;
   mLauncher.lockScreenOrientationOnLargeUI();
-  mLauncher.getWorkspace().onDragStartedWithItem(createItemInfo,b,alphaClipPaint);
-  mDragController.startDrag(image,b,this,createItemInfo,DragController.DRAG_ACTION_COPY,null);
-  b.recycle();
+  mLauncher.getWorkspace().onDragStartedWithItem(createItemInfo,outline,alphaClipPaint);
+  mDragController.startDrag(image,preview,this,createItemInfo,DragController.DRAG_ACTION_COPY,null);
+  outline.recycle();
+  preview.recycle();
 }
