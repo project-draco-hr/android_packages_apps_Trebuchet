@@ -10,7 +10,7 @@
       mPressedOrFocusedBackground=null;
     }
     if (isFocused()) {
-      if (mLayout == null) {
+      if (getLayout() == null) {
         mPressedOrFocusedBackground=null;
       }
  else {
