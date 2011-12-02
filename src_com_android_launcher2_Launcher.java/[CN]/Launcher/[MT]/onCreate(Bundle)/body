@@ -56,7 +56,8 @@
     updateAppMarketIcon(sAppMarketIcon[coi]);
   }
   mSearchDropTargetBar.onSearchPackagesChanged(searchVisible,voiceVisible);
-  if (LauncherApplication.isScreenLarge() || Build.TYPE.contentEquals("eng")) {
+  final String forceEnableRotation=SystemProperties.get(FORCE_ENABLE_ROTATION_PROPERTY,"false");
+  if (LauncherApplication.isScreenLarge() || "true".equalsIgnoreCase(forceEnableRotation)) {
     setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
   }
 }
