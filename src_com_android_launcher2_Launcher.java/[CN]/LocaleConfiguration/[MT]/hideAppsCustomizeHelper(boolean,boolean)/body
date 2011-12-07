@@ -18,9 +18,8 @@
     scaleAnim.setInterpolator(new Workspace.ZoomInInterpolator());
     scaleAnim.addUpdateListener(new LauncherAnimatorUpdateListener(){
       public void onAnimationUpdate(      float a,      float b){
-        ((View)fromView.getParent()).fastInvalidate();
-        fromView.setFastScaleX(a * oldScaleX + b * scaleFactor);
-        fromView.setFastScaleY(a * oldScaleY + b * scaleFactor);
+        fromView.setScaleX(a * oldScaleX + b * scaleFactor);
+        fromView.setScaleY(a * oldScaleY + b * scaleFactor);
       }
     }
 );
@@ -29,7 +28,7 @@
     alphaAnim.setInterpolator(new AccelerateDecelerateInterpolator());
     alphaAnim.addUpdateListener(new LauncherAnimatorUpdateListener(){
       public void onAnimationUpdate(      float a,      float b){
-        fromView.setFastAlpha(a * 1f + b * 0f);
+        fromView.setAlpha(a * 1f + b * 0f);
       }
     }
 );
