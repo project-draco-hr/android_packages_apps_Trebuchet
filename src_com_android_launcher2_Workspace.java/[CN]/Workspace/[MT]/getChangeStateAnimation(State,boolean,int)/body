@@ -1,15 +1,9 @@
 {
   if (mState == state) {
-    return;
-  }
-  if (mFirstLayout) {
-    mSwitchStateAfterFirstLayout=false;
-    mStateAfterFirstLayout=state;
-    return;
+    return null;
   }
   initAnimationArrays();
-  if (mAnimator != null)   mAnimator.cancel();
-  mAnimator=new AnimatorSet();
+  AnimatorSet anim=animated ? new AnimatorSet() : null;
   setCurrentPage((mNextPage != INVALID_PAGE) ? mNextPage : mCurrentPage);
   final State oldState=mState;
   final boolean oldStateIsNormal=(oldState == State.NORMAL);
@@ -112,6 +106,20 @@
       }
     }
 );
+    for (int i=0; i < getChildCount(); i++) {
+      invalidate();
+      if (mOldAlphas[i] == 0 && mNewAlphas[i] == 0) {
+        final CellLayout cl=(CellLayout)getChildAt(i);
+        cl.fastInvalidate();
+        cl.setFastTranslationX(mNewTranslationXs[i]);
+        cl.setFastTranslationY(mNewTranslationYs[i]);
+        cl.setFastScaleX(mNewScaleXs[i]);
+        cl.setFastScaleY(mNewScaleYs[i]);
+        cl.setFastBackgroundAlpha(mNewBackgroundAlphas[i]);
+        cl.setBackgroundAlphaMultiplier(mNewBackgroundAlphaMultipliers[i]);
+        cl.setFastAlpha(mNewAlphas[i]);
+      }
+    }
     animWithInterpolator.addUpdateListener(new LauncherAnimatorUpdateListener(){
       public void onAnimationUpdate(      float a,      float b){
         mTransitionProgress=b;
@@ -120,15 +128,17 @@
         }
         invalidate();
         for (int i=0; i < getChildCount(); i++) {
-          final CellLayout cl=(CellLayout)getChildAt(i);
-          cl.fastInvalidate();
-          cl.setFastTranslationX(a * mOldTranslationXs[i] + b * mNewTranslationXs[i]);
-          cl.setFastTranslationY(a * mOldTranslationYs[i] + b * mNewTranslationYs[i]);
-          cl.setFastScaleX(a * mOldScaleXs[i] + b * mNewScaleXs[i]);
-          cl.setFastScaleY(a * mOldScaleYs[i] + b * mNewScaleYs[i]);
-          cl.setFastBackgroundAlpha(a * mOldBackgroundAlphas[i] + b * mNewBackgroundAlphas[i]);
-          cl.setBackgroundAlphaMultiplier(a * mOldBackgroundAlphaMultipliers[i] + b * mNewBackgroundAlphaMultipliers[i]);
-          cl.setFastAlpha(a * mOldAlphas[i] + b * mNewAlphas[i]);
+          if (mOldAlphas[i] != 0 || mNewAlphas[i] != 0) {
+            final CellLayout cl=(CellLayout)getChildAt(i);
+            cl.fastInvalidate();
+            cl.setFastTranslationX(a * mOldTranslationXs[i] + b * mNewTranslationXs[i]);
+            cl.setFastTranslationY(a * mOldTranslationYs[i] + b * mNewTranslationYs[i]);
+            cl.setFastScaleX(a * mOldScaleXs[i] + b * mNewScaleXs[i]);
+            cl.setFastScaleY(a * mOldScaleYs[i] + b * mNewScaleYs[i]);
+            cl.setFastBackgroundAlpha(a * mOldBackgroundAlphas[i] + b * mNewBackgroundAlphas[i]);
+            cl.setBackgroundAlphaMultiplier(a * mOldBackgroundAlphaMultipliers[i] + b * mNewBackgroundAlphaMultipliers[i]);
+            cl.setFastAlpha(a * mOldAlphas[i] + b * mNewAlphas[i]);
+          }
         }
         syncChildrenLayersEnabledOnVisiblePages();
       }
@@ -142,16 +152,17 @@
           return;
         }
         for (int i=0; i < getChildCount(); i++) {
-          final CellLayout cl=(CellLayout)getChildAt(i);
-          cl.setFastRotationY(a * mOldRotationYs[i] + b * mNewRotationYs[i]);
+          if (mOldAlphas[i] != 0 || mNewAlphas[i] != 0 || mOldRotationYs[i] != 0 || mNewRotationYs[i] != 0) {
+            final CellLayout cl=(CellLayout)getChildAt(i);
+            cl.setFastRotationY(a * mOldRotationYs[i] + b * mNewRotationYs[i]);
+          }
         }
       }
     }
 );
-    mAnimator.playTogether(animWithInterpolator,rotationAnim);
-    mAnimator.setStartDelay(delay);
-    mAnimator.addListener(mChangeStateAnimationListener);
-    mAnimator.start();
+    anim.playTogether(animWithInterpolator,rotationAnim);
+    anim.setStartDelay(delay);
+    anim.addListener(mChangeStateAnimationListener);
   }
   if (stateIsSpringLoaded) {
     animateBackgroundGradient(getResources().getInteger(R.integer.config_appsCustomizeSpringLoadedBgAlpha) / 100f,false);
@@ -160,4 +171,5 @@
     animateBackgroundGradient(0f,true);
   }
   syncChildrenLayersEnabledOnVisiblePages();
+  return anim;
 }

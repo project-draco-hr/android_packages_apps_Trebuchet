@@ -1,10 +1,7 @@
 {
-  Resources res=getResources();
-  int stagger=res.getInteger(R.integer.config_appsCustomizeWorkspaceAnimationStagger);
-  mWorkspace.changeState(Workspace.State.NORMAL,animated,stagger);
   if (mState != State.WORKSPACE) {
     mWorkspace.setVisibility(View.VISIBLE);
-    hideAppsCustomizeHelper(animated,false);
+    hideAppsCustomizeHelper(State.WORKSPACE,animated,false);
     mSearchDropTargetBar.showSearchBar(animated);
     showDockDivider(animated && mState == State.APPS_CUSTOMIZE_SPRING_LOADED);
     if (mAllAppsButton != null) {

@@ -11,7 +11,7 @@
   final View toView=mAppsCustomizeTabHost;
   final int startDelay=res.getInteger(R.integer.config_workspaceAppsCustomizeAnimationStagger);
   setPivotsForZoom(toView,scale);
-  mWorkspace.changeState(Workspace.State.SMALL,animated);
+  Animator workspaceAnim=mWorkspace.getChangeStateAnimation(Workspace.State.SMALL,animated);
   if (animated) {
     final ValueAnimator scaleAnim=ValueAnimator.ofFloat(0f,1f).setDuration(duration);
     scaleAnim.setInterpolator(new Workspace.ZoomOutInterpolator());
@@ -32,9 +32,10 @@
       }
     }
 );
-    alphaAnim.setStartDelay(startDelay);
-    alphaAnim.start();
-    scaleAnim.addListener(new AnimatorListenerAdapter(){
+    mStateAnimation=new AnimatorSet();
+    mStateAnimation.play(alphaAnim).after(startDelay);
+    mStateAnimation.play(scaleAnim).after(startDelay);
+    mStateAnimation.addListener(new AnimatorListenerAdapter(){
       boolean animationCancelled=false;
       @Override public void onAnimationStart(      Animator animation){
         updateWallpaperVisibility(true);
@@ -62,14 +63,38 @@
       }
     }
 );
-    mStateAnimation=new AnimatorSet();
-    mStateAnimation.play(scaleAnim).after(startDelay);
-    boolean delayAnim=false;
-    if (toView instanceof LauncherTransitionable) {
-      LauncherTransitionable lt=(LauncherTransitionable)toView;
-      delayAnim=lt.onLauncherTransitionStart(instance,mStateAnimation,false);
+    if (workspaceAnim != null) {
+      mStateAnimation.play(workspaceAnim);
     }
-    if (!delayAnim) {
+    boolean delayAnim=false;
+    LauncherTransitionable lt=(LauncherTransitionable)toView;
+    final ViewTreeObserver observer;
+    lt.onLauncherTransitionStart(instance,mStateAnimation,false);
+    if ((lt.getContent().getMeasuredWidth() == 0) || (mWorkspace.getMeasuredWidth() == 0) || (toView.getMeasuredWidth() == 0)) {
+      observer=mWorkspace.getViewTreeObserver();
+      delayAnim=true;
+    }
+ else {
+      observer=null;
+    }
+    if (delayAnim) {
+      final OnGlobalLayoutListener delayedStart=new OnGlobalLayoutListener(){
+        public void onGlobalLayout(){
+          mWorkspace.post(new Runnable(){
+            public void run(){
+              setPivotsForZoom(toView,scale);
+              mStateAnimation.start();
+            }
+          }
+);
+          observer.removeGlobalOnLayoutListener(this);
+        }
+      }
+;
+      observer.addOnGlobalLayoutListener(delayedStart);
+    }
+ else {
+      setPivotsForZoom(toView,scale);
       mStateAnimation.start();
     }
   }

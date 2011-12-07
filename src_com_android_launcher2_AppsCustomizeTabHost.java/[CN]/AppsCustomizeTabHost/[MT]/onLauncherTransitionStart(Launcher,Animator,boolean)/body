@@ -1,17 +1,11 @@
 {
   mInTransition=true;
-  boolean delayLauncherTransitionUntilLayout=false;
   boolean animated=(animation != null);
-  mLauncherTransition=null;
-  if (animated && mContent.getVisibility() == GONE) {
-    mLauncherTransition=animation;
-    delayLauncherTransitionUntilLayout=true;
-  }
   mContent.setVisibility(VISIBLE);
   if (!toWorkspace) {
     mAppsCustomizePane.loadAssociatedPages(mAppsCustomizePane.getCurrentPage(),true);
   }
-  if (animated && !delayLauncherTransitionUntilLayout) {
+  if (animated) {
     enableAndBuildHardwareLayer();
   }
   if (!toWorkspace && !LauncherApplication.isScreenLarge()) {
@@ -21,5 +15,4 @@
     mAppsCustomizePane.reset();
     mResetAfterTransition=false;
   }
-  return delayLauncherTransitionUntilLayout;
 }

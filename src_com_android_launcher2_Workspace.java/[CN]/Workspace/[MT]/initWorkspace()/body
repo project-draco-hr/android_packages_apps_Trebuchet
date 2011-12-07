@@ -20,7 +20,6 @@
     @Override public void onAnimationEnd(    Animator animation){
       mIsSwitchingState=false;
       mWallpaperOffset.setOverrideHorizontalCatchupConstant(false);
-      mAnimator=null;
       updateChildrenLayersEnabled();
     }
   }
