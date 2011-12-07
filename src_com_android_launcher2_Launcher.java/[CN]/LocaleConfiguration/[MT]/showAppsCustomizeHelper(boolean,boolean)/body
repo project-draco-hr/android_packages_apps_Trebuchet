@@ -17,20 +17,18 @@
     scaleAnim.setInterpolator(new Workspace.ZoomOutInterpolator());
     scaleAnim.addUpdateListener(new LauncherAnimatorUpdateListener(){
       public void onAnimationUpdate(      float a,      float b){
-        ((View)toView.getParent()).invalidate();
-        toView.fastInvalidate();
-        toView.setFastScaleX(a * scale + b * 1f);
-        toView.setFastScaleY(a * scale + b * 1f);
+        toView.setScaleX(a * scale + b * 1f);
+        toView.setScaleY(a * scale + b * 1f);
       }
     }
 );
     toView.setVisibility(View.VISIBLE);
-    toView.setFastAlpha(0f);
+    toView.setAlpha(0f);
     ValueAnimator alphaAnim=ValueAnimator.ofFloat(0f,1f).setDuration(fadeDuration);
     alphaAnim.setInterpolator(new DecelerateInterpolator(1.5f));
     alphaAnim.addUpdateListener(new LauncherAnimatorUpdateListener(){
       public void onAnimationUpdate(      float a,      float b){
-        toView.setFastAlpha(a * 0f + b * 1f);
+        toView.setAlpha(a * 0f + b * 1f);
       }
     }
 );
