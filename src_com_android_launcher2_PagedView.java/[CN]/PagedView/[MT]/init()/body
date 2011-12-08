@@ -9,4 +9,7 @@
   mPagingTouchSlop=configuration.getScaledPagingTouchSlop();
   mMaximumVelocity=configuration.getScaledMaximumFlingVelocity();
   mDensity=getResources().getDisplayMetrics().density;
+  mFlingThresholdVelocity=(int)(FLING_THRESHOLD_VELOCITY * mDensity);
+  mMinFlingVelocity=(int)(MIN_FLING_VELOCITY * mDensity);
+  mMinSnapVelocity=(int)(MIN_SNAP_VELOCITY * mDensity);
 }
