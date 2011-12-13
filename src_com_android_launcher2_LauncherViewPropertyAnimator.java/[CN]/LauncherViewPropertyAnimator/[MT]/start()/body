@@ -1,0 +1,32 @@
+{
+  mViewPropertyAnimator=mTarget.animate();
+  if (mPropertiesToSet.contains(Properties.TRANSLATION_X)) {
+    mViewPropertyAnimator.translationX(mTranslationX);
+  }
+  if (mPropertiesToSet.contains(Properties.TRANSLATION_Y)) {
+    mViewPropertyAnimator.translationY(mTranslationY);
+  }
+  if (mPropertiesToSet.contains(Properties.SCALE_X)) {
+    mViewPropertyAnimator.scaleX(mScaleX);
+  }
+  if (mPropertiesToSet.contains(Properties.ROTATION_Y)) {
+    mViewPropertyAnimator.rotationY(mRotationY);
+  }
+  if (mPropertiesToSet.contains(Properties.SCALE_Y)) {
+    mViewPropertyAnimator.scaleY(mScaleY);
+  }
+  if (mPropertiesToSet.contains(Properties.ALPHA)) {
+    mViewPropertyAnimator.alpha(mAlpha);
+  }
+  if (mPropertiesToSet.contains(Properties.START_DELAY)) {
+    mViewPropertyAnimator.setStartDelay(mStartDelay);
+  }
+  if (mPropertiesToSet.contains(Properties.DURATION)) {
+    mViewPropertyAnimator.setDuration(mDuration);
+  }
+  if (mPropertiesToSet.contains(Properties.INTERPOLATOR)) {
+    mViewPropertyAnimator.setInterpolator(mInterpolator);
+  }
+  mViewPropertyAnimator.setListener(this);
+  mViewPropertyAnimator.start();
+}

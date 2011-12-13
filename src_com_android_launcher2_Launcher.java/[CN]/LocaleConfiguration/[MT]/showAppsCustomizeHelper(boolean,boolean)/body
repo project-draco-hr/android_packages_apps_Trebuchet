@@ -13,15 +13,10 @@
   setPivotsForZoom(toView,scale);
   Animator workspaceAnim=mWorkspace.getChangeStateAnimation(Workspace.State.SMALL,animated);
   if (animated) {
-    final ValueAnimator scaleAnim=ValueAnimator.ofFloat(0f,1f).setDuration(duration);
-    scaleAnim.setInterpolator(new Workspace.ZoomOutInterpolator());
-    scaleAnim.addUpdateListener(new LauncherAnimatorUpdateListener(){
-      public void onAnimationUpdate(      float a,      float b){
-        toView.setScaleX(a * scale + b * 1f);
-        toView.setScaleY(a * scale + b * 1f);
-      }
-    }
-);
+    toView.setScaleX(scale);
+    toView.setScaleY(scale);
+    final LauncherViewPropertyAnimator scaleAnim=new LauncherViewPropertyAnimator(toView);
+    scaleAnim.scaleX(1f).scaleY(1f).setDuration(duration).setInterpolator(new Workspace.ZoomOutInterpolator());
     toView.setVisibility(View.VISIBLE);
     toView.setAlpha(0f);
     ValueAnimator alphaAnim=ValueAnimator.ofFloat(0f,1f).setDuration(fadeDuration);
@@ -33,8 +28,8 @@
     }
 );
     mStateAnimation=new AnimatorSet();
-    mStateAnimation.play(alphaAnim).after(startDelay);
     mStateAnimation.play(scaleAnim).after(startDelay);
+    mStateAnimation.play(alphaAnim).after(startDelay);
     mStateAnimation.addListener(new AnimatorListenerAdapter(){
       boolean animationCancelled=false;
       @Override public void onAnimationStart(      Animator animation){
