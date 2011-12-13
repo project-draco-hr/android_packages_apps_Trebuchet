@@ -8,6 +8,14 @@
   final int duration=res.getInteger(R.integer.config_appsCustomizeZoomOutTime);
   final float scaleFactor=(float)res.getInteger(R.integer.config_appsCustomizeZoomScaleFactor);
   final View fromView=mAppsCustomizeTabHost;
+  Animator workspaceAnim=null;
+  if (toState == State.WORKSPACE) {
+    int stagger=res.getInteger(R.integer.config_appsCustomizeWorkspaceAnimationStagger);
+    workspaceAnim=mWorkspace.getChangeStateAnimation(Workspace.State.NORMAL,animated,stagger);
+  }
+ else   if (toState == State.APPS_CUSTOMIZE_SPRING_LOADED) {
+    workspaceAnim=mWorkspace.getChangeStateAnimation(Workspace.State.SPRING_LOADED,animated);
+  }
   setPivotsForZoom(fromView,scaleFactor);
   updateWallpaperVisibility(true);
   showHotseat(animated);
@@ -48,6 +56,9 @@
 );
     mStateAnimation=new AnimatorSet();
     mStateAnimation.playTogether(scaleAnim,alphaAnim);
+    if (workspaceAnim != null) {
+      mStateAnimation.play(workspaceAnim);
+    }
     mStateAnimation.start();
   }
  else {
