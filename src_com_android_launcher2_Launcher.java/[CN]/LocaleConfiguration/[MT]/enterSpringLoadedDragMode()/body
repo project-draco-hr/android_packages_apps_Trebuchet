@@ -1,7 +1,6 @@
 {
   if (mState == State.APPS_CUSTOMIZE) {
-    mWorkspace.changeState(Workspace.State.SPRING_LOADED);
-    hideAppsCustomizeHelper(true,true);
+    hideAppsCustomizeHelper(State.APPS_CUSTOMIZE_SPRING_LOADED,true,true);
     hideDockDivider();
     mState=State.APPS_CUSTOMIZE_SPRING_LOADED;
   }

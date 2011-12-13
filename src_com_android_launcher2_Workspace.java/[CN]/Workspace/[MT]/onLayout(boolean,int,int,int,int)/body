@@ -3,13 +3,4 @@
     mUpdateWallpaperOffsetImmediately=true;
   }
   super.onLayout(changed,left,top,right,bottom);
-  if (mSwitchStateAfterFirstLayout) {
-    mSwitchStateAfterFirstLayout=false;
-    post(new Runnable(){
-      public void run(){
-        changeState(mStateAfterFirstLayout,false);
-      }
-    }
-);
-  }
 }
