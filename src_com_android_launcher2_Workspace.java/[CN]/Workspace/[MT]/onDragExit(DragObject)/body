@@ -1,3 +1,4 @@
 {
+  mDragHasEnteredWorkspace=false;
   doDragExit(d);
 }
