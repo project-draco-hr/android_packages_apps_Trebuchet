@@ -1,7 +1,7 @@
 {
   if (mHasScrollIndicator && mScrollIndicator == null) {
     ViewGroup parent=(ViewGroup)getParent();
-    mScrollIndicator=(ImageView)(parent.findViewById(R.id.paged_view_indicator));
+    mScrollIndicator=(View)(parent.findViewById(R.id.paged_view_indicator));
     mHasScrollIndicator=mScrollIndicator != null;
     if (mHasScrollIndicator) {
       mScrollIndicator.setVisibility(View.VISIBLE);
