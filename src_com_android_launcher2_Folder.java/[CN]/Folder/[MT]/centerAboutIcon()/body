@@ -28,13 +28,8 @@
   int folderIconPivotY=(int)(mFolderIcon.getMeasuredHeight() * (1.0f * folderPivotY / height));
   mFolderIcon.setPivotX(folderIconPivotX);
   mFolderIcon.setPivotY(folderIconPivotY);
-  if (mMode == PARTIAL_GROW) {
-    lp.width=width;
-    lp.height=height;
-    lp.x=left;
-    lp.y=top;
-  }
- else {
-    mNewSize.set(left,top,left + width,top + height);
-  }
+  lp.width=width;
+  lp.height=height;
+  lp.x=left;
+  lp.y=top;
 }

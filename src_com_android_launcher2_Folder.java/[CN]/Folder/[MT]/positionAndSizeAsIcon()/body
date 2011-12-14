@@ -1,18 +1,7 @@
 {
   if (!(getParent() instanceof DragLayer))   return;
-  DragLayer.LayoutParams lp=(DragLayer.LayoutParams)getLayoutParams();
-  if (mMode == PARTIAL_GROW) {
-    setScaleX(0.8f);
-    setScaleY(0.8f);
-    setAlpha(0f);
-  }
- else {
-    mLauncher.getDragLayer().getDescendantRectRelativeToSelf(mFolderIcon,mIconRect);
-    lp.width=mIconRect.width();
-    lp.height=mIconRect.height();
-    lp.x=mIconRect.left;
-    lp.y=mIconRect.top;
-    mContent.setAlpha(0);
-  }
+  setScaleX(0.8f);
+  setScaleY(0.8f);
+  setAlpha(0f);
   mState=STATE_SMALL;
 }

@@ -1,33 +1,11 @@
 {
   positionAndSizeAsIcon();
   if (!(getParent() instanceof DragLayer))   return;
-  ObjectAnimator oa;
-  DragLayer.LayoutParams lp=(DragLayer.LayoutParams)getLayoutParams();
   centerAboutIcon();
-  if (mMode == PARTIAL_GROW) {
-    PropertyValuesHolder alpha=PropertyValuesHolder.ofFloat("alpha",1);
-    PropertyValuesHolder scaleX=PropertyValuesHolder.ofFloat("scaleX",1.0f);
-    PropertyValuesHolder scaleY=PropertyValuesHolder.ofFloat("scaleY",1.0f);
-    oa=ObjectAnimator.ofPropertyValuesHolder(this,alpha,scaleX,scaleY);
-  }
- else {
-    PropertyValuesHolder width=PropertyValuesHolder.ofInt("width",mNewSize.width());
-    PropertyValuesHolder height=PropertyValuesHolder.ofInt("height",mNewSize.height());
-    PropertyValuesHolder x=PropertyValuesHolder.ofInt("x",mNewSize.left);
-    PropertyValuesHolder y=PropertyValuesHolder.ofInt("y",mNewSize.top);
-    oa=ObjectAnimator.ofPropertyValuesHolder(lp,width,height,x,y);
-    oa.addUpdateListener(new AnimatorUpdateListener(){
-      public void onAnimationUpdate(      ValueAnimator animation){
-        requestLayout();
-      }
-    }
-);
-    PropertyValuesHolder alpha=PropertyValuesHolder.ofFloat("alpha",1.0f);
-    ObjectAnimator alphaOa=ObjectAnimator.ofPropertyValuesHolder(mContent,alpha);
-    alphaOa.setDuration(mExpandDuration);
-    alphaOa.setInterpolator(new AccelerateInterpolator(2.0f));
-    alphaOa.start();
-  }
+  PropertyValuesHolder alpha=PropertyValuesHolder.ofFloat("alpha",1);
+  PropertyValuesHolder scaleX=PropertyValuesHolder.ofFloat("scaleX",1.0f);
+  PropertyValuesHolder scaleY=PropertyValuesHolder.ofFloat("scaleY",1.0f);
+  ObjectAnimator oa=ObjectAnimator.ofPropertyValuesHolder(this,alpha,scaleX,scaleY);
   oa.addListener(new AnimatorListenerAdapter(){
     @Override public void onAnimationStart(    Animator animation){
       sendCustomAccessibilityEvent(AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED,String.format(mContext.getString(R.string.folder_opened),mContent.getCountX(),mContent.getCountY()));
