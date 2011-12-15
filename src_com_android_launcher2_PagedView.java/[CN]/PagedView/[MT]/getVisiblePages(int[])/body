@@ -1,19 +1,18 @@
 {
   final int pageCount=getChildCount();
   if (pageCount > 0) {
-    final int pageWidth=getScaledMeasuredWidth(getPageAt(0));
     final int screenWidth=getMeasuredWidth();
-    int x=getScaledRelativeChildOffset(0) + pageWidth;
+    int x=(int)getPageAt(0).getRight();
     int leftScreen=0;
     int rightScreen=0;
     while (x <= mScrollX && leftScreen < pageCount - 1) {
       leftScreen++;
-      x+=getScaledMeasuredWidth(getPageAt(leftScreen)) + mPageSpacing;
+      x=getPageAt(leftScreen).getRight();
     }
     rightScreen=leftScreen;
     while (x < mScrollX + screenWidth && rightScreen < pageCount - 1) {
       rightScreen++;
-      x+=getScaledMeasuredWidth(getPageAt(rightScreen)) + mPageSpacing;
+      x=(int)getPageAt(rightScreen).getRight();
     }
     range[0]=leftScreen;
     range[1]=rightScreen;
