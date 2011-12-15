@@ -1,31 +1,9 @@
 {
   if (!(getParent() instanceof DragLayer))   return;
-  ObjectAnimator oa;
-  if (mMode == PARTIAL_GROW) {
-    PropertyValuesHolder alpha=PropertyValuesHolder.ofFloat("alpha",0);
-    PropertyValuesHolder scaleX=PropertyValuesHolder.ofFloat("scaleX",0.9f);
-    PropertyValuesHolder scaleY=PropertyValuesHolder.ofFloat("scaleY",0.9f);
-    oa=ObjectAnimator.ofPropertyValuesHolder(this,alpha,scaleX,scaleY);
-  }
- else {
-    DragLayer.LayoutParams lp=(DragLayer.LayoutParams)getLayoutParams();
-    PropertyValuesHolder width=PropertyValuesHolder.ofInt("width",mIconRect.width());
-    PropertyValuesHolder height=PropertyValuesHolder.ofInt("height",mIconRect.height());
-    PropertyValuesHolder x=PropertyValuesHolder.ofInt("x",mIconRect.left);
-    PropertyValuesHolder y=PropertyValuesHolder.ofInt("y",mIconRect.top);
-    oa=ObjectAnimator.ofPropertyValuesHolder(lp,width,height,x,y);
-    oa.addUpdateListener(new AnimatorUpdateListener(){
-      public void onAnimationUpdate(      ValueAnimator animation){
-        requestLayout();
-      }
-    }
-);
-    PropertyValuesHolder alpha=PropertyValuesHolder.ofFloat("alpha",0f);
-    ObjectAnimator alphaOa=ObjectAnimator.ofPropertyValuesHolder(mContent,alpha);
-    alphaOa.setDuration(mExpandDuration);
-    alphaOa.setInterpolator(new DecelerateInterpolator(2.0f));
-    alphaOa.start();
-  }
+  PropertyValuesHolder alpha=PropertyValuesHolder.ofFloat("alpha",0);
+  PropertyValuesHolder scaleX=PropertyValuesHolder.ofFloat("scaleX",0.9f);
+  PropertyValuesHolder scaleY=PropertyValuesHolder.ofFloat("scaleY",0.9f);
+  ObjectAnimator oa=ObjectAnimator.ofPropertyValuesHolder(this,alpha,scaleX,scaleY);
   oa.addListener(new AnimatorListenerAdapter(){
     @Override public void onAnimationEnd(    Animator animation){
       onCloseComplete();
