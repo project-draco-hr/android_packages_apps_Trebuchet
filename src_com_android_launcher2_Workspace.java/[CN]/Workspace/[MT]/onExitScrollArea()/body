@@ -3,11 +3,13 @@
   if (mInScrollArea) {
     if (mDragTargetLayout != null) {
       mDragTargetLayout.setIsDragOverlapping(false);
+      invalidate();
+    }
+    if (mDragTargetLayout != null && mDragHasEnteredWorkspace) {
       mDragTargetLayout=getCurrentDropLayout();
       mDragTargetLayout.onDragEnter();
-      invalidate();
-      result=true;
     }
+    result=true;
     mInScrollArea=false;
   }
   return result;

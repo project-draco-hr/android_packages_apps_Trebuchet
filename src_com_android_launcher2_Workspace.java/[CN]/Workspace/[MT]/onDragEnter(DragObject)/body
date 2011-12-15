@@ -1,4 +1,5 @@
 {
+  mDragHasEnteredWorkspace=true;
   if (mDragTargetLayout != null) {
     mDragTargetLayout.setIsDragOverlapping(false);
     mDragTargetLayout.onDragExit();
