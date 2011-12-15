@@ -45,5 +45,5 @@
     }
   }
 ;
-  animateViewIntoPosition(dragView,fromX,fromY,toX,toY,scale,onCompleteRunnable,true,duration);
+  animateViewIntoPosition(dragView,fromX,fromY,toX,toY,scale,onCompleteRunnable,true,duration,anchorView);
 }

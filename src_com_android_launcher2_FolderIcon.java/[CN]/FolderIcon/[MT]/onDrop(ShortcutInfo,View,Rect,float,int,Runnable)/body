@@ -25,7 +25,7 @@
     center[1]=(int)Math.round(scaleRelativeToDragLayer * center[1]);
     to.offset(center[0] - animateView.getMeasuredWidth() / 2,center[1] - animateView.getMeasuredHeight() / 2);
     float finalAlpha=index < NUM_ITEMS_IN_PREVIEW ? 0.5f : 0f;
-    dragLayer.animateView(animateView,from,to,finalAlpha,scale * scaleRelativeToDragLayer,DROP_IN_ANIMATION_DURATION,new DecelerateInterpolator(2),new AccelerateInterpolator(2),postAnimationRunnable,false);
+    dragLayer.animateView(animateView,from,to,finalAlpha,scale * scaleRelativeToDragLayer,DROP_IN_ANIMATION_DURATION,new DecelerateInterpolator(2),new AccelerateInterpolator(2),postAnimationRunnable,false,null);
     postDelayed(new Runnable(){
       public void run(){
         addItem(item);

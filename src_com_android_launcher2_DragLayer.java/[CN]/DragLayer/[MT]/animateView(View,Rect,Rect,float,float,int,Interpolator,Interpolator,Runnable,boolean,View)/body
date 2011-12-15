@@ -20,6 +20,10 @@
   if (alphaInterpolator == null || motionInterpolator == null) {
     mDropAnim.setInterpolator(mCubicEaseOutInterpolator);
   }
+  if (anchorView != null) {
+    mAnchorViewInitialScrollX=anchorView.getScrollX();
+  }
+  mAnchorView=anchorView;
   mDropAnim.setDuration(duration);
   mDropAnim.setFloatValues(0.0f,1.0f);
   mDropAnim.removeAllUpdateListeners();

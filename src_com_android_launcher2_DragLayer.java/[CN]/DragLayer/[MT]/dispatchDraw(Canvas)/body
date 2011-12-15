@@ -2,7 +2,7 @@
   super.dispatchDraw(canvas);
   if (mDropView != null) {
     canvas.save(Canvas.MATRIX_SAVE_FLAG);
-    final int xPos=mDropViewPos[0] - mDropView.getScrollX();
+    final int xPos=mDropViewPos[0] - mDropView.getScrollX() + (mAnchorView != null ? (mAnchorViewInitialScrollX - mAnchorView.getScrollX()) : 0);
     final int yPos=mDropViewPos[1] - mDropView.getScrollY();
     int width=mDropView.getMeasuredWidth();
     int height=mDropView.getMeasuredHeight();

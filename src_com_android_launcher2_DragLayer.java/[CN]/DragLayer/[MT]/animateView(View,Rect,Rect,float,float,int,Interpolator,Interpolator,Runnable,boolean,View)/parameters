@@ -8,3 +8,4 @@ Interpolator motionInterpolator
 Interpolator alphaInterpolator
 Runnable onCompleteRunnable
 boolean fadeOut
+View anchorView
