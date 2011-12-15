@@ -5,7 +5,7 @@
   final ViewGroup parent=(ViewGroup)getParent();
   final ImageView qsbDivider=(ImageView)(parent.findViewById(R.id.qsb_divider));
   final ImageView dockDivider=(ImageView)(parent.findViewById(R.id.dock_divider));
-  final ImageView scrollIndicator=getScrollingIndicator();
+  final View scrollIndicator=getScrollingIndicator();
   cancelScrollingIndicatorAnimations();
   if (qsbDivider != null)   qsbDivider.setAlpha(reducedFade);
   if (dockDivider != null)   dockDivider.setAlpha(reducedFade);

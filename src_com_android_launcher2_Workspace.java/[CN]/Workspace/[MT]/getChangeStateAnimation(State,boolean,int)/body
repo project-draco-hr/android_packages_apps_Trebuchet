@@ -138,6 +138,9 @@
             cl.setFastBackgroundAlpha(a * mOldBackgroundAlphas[i] + b * mNewBackgroundAlphas[i]);
             cl.setBackgroundAlphaMultiplier(a * mOldBackgroundAlphaMultipliers[i] + b * mNewBackgroundAlphaMultipliers[i]);
             cl.setFastAlpha(a * mOldAlphas[i] + b * mNewAlphas[i]);
+            if (mOldAlphas[i] != mNewAlphas[i]) {
+              cl.setAlpha(a * mOldAlphas[i] + b * mNewAlphas[i]);
+            }
           }
         }
         syncChildrenLayersEnabledOnVisiblePages();
