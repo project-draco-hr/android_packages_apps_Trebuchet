@@ -8,10 +8,13 @@
   int centerY=mTempRect.centerY();
   int centeredLeft=centerX - width / 2;
   int centeredTop=centerY - height / 2;
-  CellLayout currentPage=mLauncher.getWorkspace().getCurrentDropLayout();
-  CellLayoutChildren boundingLayout=currentPage.getChildrenLayout();
+  int currentPage=mLauncher.getWorkspace().getCurrentPage();
+  mLauncher.getWorkspace().setFinalScrollForPageChange(currentPage);
+  CellLayout currentLayout=(CellLayout)mLauncher.getWorkspace().getChildAt(currentPage);
+  CellLayoutChildren boundingLayout=currentLayout.getChildrenLayout();
   Rect bounds=new Rect();
   parent.getDescendantRectRelativeToSelf(boundingLayout,bounds);
+  mLauncher.getWorkspace().resetFinalScrollForPageChange(currentPage);
   int left=Math.min(Math.max(bounds.left,centeredLeft),bounds.left + bounds.width() - width);
   int top=Math.min(Math.max(bounds.top,centeredTop),bounds.top + bounds.height() - height);
   if (width >= bounds.width()) {
