@@ -143,7 +143,6 @@
             }
           }
         }
-        syncChildrenLayersEnabledOnVisiblePages();
       }
     }
 );
@@ -173,6 +172,5 @@
  else {
     animateBackgroundGradient(0f,true);
   }
-  syncChildrenLayersEnabledOnVisiblePages();
   return anim;
 }
