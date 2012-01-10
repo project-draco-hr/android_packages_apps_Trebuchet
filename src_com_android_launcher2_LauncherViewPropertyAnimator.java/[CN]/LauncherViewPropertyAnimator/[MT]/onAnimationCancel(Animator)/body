@@ -1,0 +1,6 @@
+{
+  if (mListener != null) {
+    mListener.onAnimationCancel(this);
+  }
+  mRunning=false;
+}

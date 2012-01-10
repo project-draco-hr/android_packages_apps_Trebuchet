@@ -1,0 +1,5 @@
+{
+  mPropertiesToSet.add(Properties.TRANSLATION_X);
+  mTranslationX=value;
+  return this;
+}

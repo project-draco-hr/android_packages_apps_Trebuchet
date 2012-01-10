@@ -1,0 +1,8 @@
+{
+  if (mListener == listener) {
+    mListener=null;
+  }
+ else {
+    throw new RuntimeException("Removing listener that wasn't set");
+  }
+}
