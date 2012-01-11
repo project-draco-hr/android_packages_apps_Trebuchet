@@ -1,4 +1,5 @@
 {
+  mSaveInstanceStateItemIndex=-1;
   AppsCustomizeTabHost tabHost=getTabHost();
   String tag=tabHost.getCurrentTabTag();
   if (tag != null) {
