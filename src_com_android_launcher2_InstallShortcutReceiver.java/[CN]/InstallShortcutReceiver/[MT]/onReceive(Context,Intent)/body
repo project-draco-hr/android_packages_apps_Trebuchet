@@ -3,9 +3,13 @@
     return;
   }
   int screen=Launcher.getScreen();
-  if (!installShortcut(context,data,screen)) {
+  String[] errorMsgs={""};
+  if (!installShortcut(context,data,screen,errorMsgs)) {
     for (int i=0; i < Launcher.SCREEN_COUNT; i++) {
-      if (i != screen && installShortcut(context,data,i))       break;
+      if (i != screen && installShortcut(context,data,i,errorMsgs))       break;
     }
+  }
+  if (!errorMsgs[0].isEmpty()) {
+    Toast.makeText(context,errorMsgs[0],Toast.LENGTH_SHORT).show();
   }
 }

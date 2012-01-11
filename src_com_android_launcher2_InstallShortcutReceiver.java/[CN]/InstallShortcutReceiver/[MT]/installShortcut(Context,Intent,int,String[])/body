@@ -11,20 +11,20 @@
         LauncherApplication app=(LauncherApplication)context.getApplicationContext();
         ShortcutInfo info=app.getModel().addShortcut(context,data,LauncherSettings.Favorites.CONTAINER_DESKTOP,screen,mCoordinates[0],mCoordinates[1],true);
         if (info != null) {
-          Toast.makeText(context,context.getString(R.string.shortcut_installed,name),Toast.LENGTH_SHORT).show();
+          errorMsgs[0]=context.getString(R.string.shortcut_installed,name);
         }
  else {
           return false;
         }
       }
  else {
-        Toast.makeText(context,context.getString(R.string.shortcut_duplicate,name),Toast.LENGTH_SHORT).show();
+        errorMsgs[0]=context.getString(R.string.shortcut_duplicate,name);
       }
       return true;
     }
   }
  else {
-    Toast.makeText(context,context.getString(R.string.out_of_space),Toast.LENGTH_SHORT).show();
+    errorMsgs[0]=context.getString(R.string.out_of_space);
   }
   return false;
 }
