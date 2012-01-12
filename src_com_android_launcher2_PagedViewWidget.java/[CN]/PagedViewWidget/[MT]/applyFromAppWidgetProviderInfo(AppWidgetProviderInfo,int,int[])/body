@@ -1,0 +1,14 @@
+{
+  final ImageView image=(ImageView)findViewById(R.id.widget_preview);
+  if (maxWidth > -1) {
+    image.setMaxWidth(maxWidth);
+  }
+  image.setContentDescription(info.label);
+  mPreviewImageView=image;
+  final TextView name=(TextView)findViewById(R.id.widget_name);
+  name.setText(info.label);
+  final TextView dims=(TextView)findViewById(R.id.widget_dims);
+  if (dims != null) {
+    dims.setText(String.format(mDimensionsFormatString,cellSpan[0],cellSpan[1]));
+  }
+}

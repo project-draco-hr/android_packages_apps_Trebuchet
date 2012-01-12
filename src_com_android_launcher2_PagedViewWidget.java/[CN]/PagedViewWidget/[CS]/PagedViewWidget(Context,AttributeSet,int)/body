@@ -1,12 +1,6 @@
 {
   super(context,attrs,defStyle);
   final Resources r=context.getResources();
-  final int alpha=r.getInteger(R.integer.config_dragAppsCustomizeIconFadeAlpha);
-  if (alpha > 0) {
-    mCheckedAlpha=r.getInteger(R.integer.config_dragAppsCustomizeIconFadeAlpha) / 256.0f;
-    mCheckedFadeInDuration=r.getInteger(R.integer.config_dragAppsCustomizeIconFadeInDuration);
-    mCheckedFadeOutDuration=r.getInteger(R.integer.config_dragAppsCustomizeIconFadeOutDuration);
-  }
   mDimensionsFormatString=r.getString(R.string.widget_dims_format);
   setWillNotDraw(false);
   setClipToPadding(false);
