@@ -1,0 +1,3 @@
+AppWidgetProviderInfo info
+int maxWidth
+int[] cellSpan

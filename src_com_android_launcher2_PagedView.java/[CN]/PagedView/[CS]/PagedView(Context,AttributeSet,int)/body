@@ -1,6 +1,5 @@
 {
   super(context,attrs,defStyle);
-  mChoiceMode=CHOICE_MODE_NONE;
   TypedArray a=context.obtainStyledAttributes(attrs,R.styleable.PagedView,defStyle,0);
   setPageSpacing(a.getDimensionPixelSize(R.styleable.PagedView_pageSpacing,0));
   mPageLayoutPaddingTop=a.getDimensionPixelSize(R.styleable.PagedView_pageLayoutPaddingTop,0);
