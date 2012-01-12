@@ -2,12 +2,7 @@
   if (!mLauncher.isAllAppsCustomizeOpen() || mLauncher.getWorkspace().isSwitchingState())   return;
   if (v instanceof PagedViewIcon) {
     final ApplicationInfo appInfo=(ApplicationInfo)v.getTag();
-    animateClickFeedback(v,new Runnable(){
-      @Override public void run(){
-        mLauncher.startActivitySafely(appInfo.intent,appInfo);
-      }
-    }
-);
+    mLauncher.startActivitySafely(appInfo.intent,appInfo);
   }
  else   if (v instanceof PagedViewWidget) {
     Toast.makeText(getContext(),R.string.long_press_widget_to_add,Toast.LENGTH_SHORT).show();
