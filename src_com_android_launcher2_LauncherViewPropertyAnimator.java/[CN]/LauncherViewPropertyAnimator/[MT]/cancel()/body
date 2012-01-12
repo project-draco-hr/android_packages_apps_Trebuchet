@@ -1,3 +1,5 @@
 {
-  mViewPropertyAnimator.cancel();
+  if (mViewPropertyAnimator != null) {
+    mViewPropertyAnimator.cancel();
+  }
 }
