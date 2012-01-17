@@ -5,7 +5,6 @@
     mAppsCustomizeTabHost.onWindowVisible();
     if (!mWorkspaceLoading) {
       final ViewTreeObserver observer=mWorkspace.getViewTreeObserver();
-      final Workspace workspace=mWorkspace;
       observer.addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener(){
         boolean mFirstTime=true;
         public boolean onPreDraw(){
