@@ -105,16 +105,15 @@
     for (int index=0; index < getChildCount(); index++) {
       final int i=index;
       final CellLayout cl=(CellLayout)getChildAt(i);
-      invalidate();
       if (mOldAlphas[i] == 0 && mNewAlphas[i] == 0) {
-        cl.fastInvalidate();
-        cl.setFastTranslationX(mNewTranslationXs[i]);
-        cl.setFastTranslationY(mNewTranslationYs[i]);
-        cl.setFastScaleX(mNewScaleXs[i]);
-        cl.setFastScaleY(mNewScaleYs[i]);
-        cl.setFastBackgroundAlpha(mNewBackgroundAlphas[i]);
+        cl.setTranslationX(mNewTranslationXs[i]);
+        cl.setTranslationY(mNewTranslationYs[i]);
+        cl.setScaleX(mNewScaleXs[i]);
+        cl.setScaleY(mNewScaleYs[i]);
+        cl.setBackgroundAlpha(mNewBackgroundAlphas[i]);
         cl.setBackgroundAlphaMultiplier(mNewBackgroundAlphaMultipliers[i]);
-        cl.setFastAlpha(mNewAlphas[i]);
+        cl.setAlpha(mNewAlphas[i]);
+        cl.setRotationY(mNewRotationYs[i]);
       }
  else {
         LauncherViewPropertyAnimator a=new LauncherViewPropertyAnimator(cl);
@@ -139,7 +138,7 @@
           bgAnim.setInterpolator(mZoomInInterpolator);
           bgAnim.addUpdateListener(new LauncherAnimatorUpdateListener(){
             public void onAnimationUpdate(            float a,            float b){
-              cl.setFastBackgroundAlpha(a * mOldBackgroundAlphas[i] + b * mNewBackgroundAlphas[i]);
+              cl.setBackgroundAlpha(a * mOldBackgroundAlphas[i] + b * mNewBackgroundAlphas[i]);
               cl.setBackgroundAlphaMultiplier(a * mOldBackgroundAlphaMultipliers[i] + b * mNewBackgroundAlphaMultipliers[i]);
             }
           }

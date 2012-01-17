@@ -1,4 +1,0 @@
-{
-  setFastChildrenAlpha(alpha);
-  super.setFastAlpha(alpha);
-}

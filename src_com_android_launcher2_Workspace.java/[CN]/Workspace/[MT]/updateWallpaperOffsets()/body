@@ -16,6 +16,6 @@
     }
   }
   if (keepUpdating) {
-    fastInvalidate();
+    invalidate();
   }
 }

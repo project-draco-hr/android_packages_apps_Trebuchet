@@ -22,13 +22,12 @@
           cl.setBackgroundAlphaMultiplier(backgroundAlphaInterpolator(Math.abs(scrollProgress)));
         }
       }
-      cl.setFastTranslationX(translationX);
-      cl.setFastRotationY(rotation);
+      cl.setTranslationX(translationX);
+      cl.setRotationY(rotation);
       if (mFadeInAdjacentScreens && !isSmall()) {
         float alpha=1 - Math.abs(scrollProgress);
-        cl.setFastAlpha(alpha);
+        cl.setAlpha(alpha);
       }
-      cl.fastInvalidate();
     }
   }
   if (!isSwitchingState() && !isInOverscroll) {
