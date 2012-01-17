@@ -1,6 +1,3 @@
 {
-  if (mListener != null) {
-    throw new RuntimeException("Only one listener supported");
-  }
-  mListener=listener;
+  mListeners.add(listener);
 }

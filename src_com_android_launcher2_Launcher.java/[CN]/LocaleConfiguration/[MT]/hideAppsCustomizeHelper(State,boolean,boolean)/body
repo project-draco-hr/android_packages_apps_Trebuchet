@@ -6,6 +6,7 @@
   Resources res=getResources();
   final Launcher instance=this;
   final int duration=res.getInteger(R.integer.config_appsCustomizeZoomOutTime);
+  final int fadeOutDuration=res.getInteger(R.integer.config_appsCustomizeFadeOutTime);
   final float scaleFactor=(float)res.getInteger(R.integer.config_appsCustomizeZoomScaleFactor);
   final View fromView=mAppsCustomizeTabHost;
   Animator workspaceAnim=null;
@@ -22,24 +23,10 @@
   if (animated) {
     final float oldScaleX=fromView.getScaleX();
     final float oldScaleY=fromView.getScaleY();
-    ValueAnimator scaleAnim=ValueAnimator.ofFloat(0f,1f).setDuration(duration);
-    scaleAnim.setInterpolator(new Workspace.ZoomInInterpolator());
-    scaleAnim.addUpdateListener(new LauncherAnimatorUpdateListener(){
-      public void onAnimationUpdate(      float a,      float b){
-        fromView.setScaleX(a * oldScaleX + b * scaleFactor);
-        fromView.setScaleY(a * oldScaleY + b * scaleFactor);
-      }
-    }
-);
-    final ValueAnimator alphaAnim=ValueAnimator.ofFloat(0f,1f);
-    alphaAnim.setDuration(res.getInteger(R.integer.config_appsCustomizeFadeOutTime));
+    final LauncherViewPropertyAnimator scaleAnim=new LauncherViewPropertyAnimator(fromView);
+    scaleAnim.scaleX(scaleFactor).scaleY(scaleFactor).setDuration(duration).setInterpolator(new Workspace.ZoomInInterpolator());
+    final ObjectAnimator alphaAnim=ObjectAnimator.ofFloat(fromView,"alpha",1f,0f).setDuration(fadeOutDuration);
     alphaAnim.setInterpolator(new AccelerateDecelerateInterpolator());
-    alphaAnim.addUpdateListener(new LauncherAnimatorUpdateListener(){
-      public void onAnimationUpdate(      float a,      float b){
-        fromView.setAlpha(a * 1f + b * 0f);
-      }
-    }
-);
     if (fromView instanceof LauncherTransitionable) {
       ((LauncherTransitionable)fromView).onLauncherTransitionStart(instance,alphaAnim,true);
     }
