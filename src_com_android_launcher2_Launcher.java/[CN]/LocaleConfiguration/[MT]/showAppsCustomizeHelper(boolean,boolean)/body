@@ -19,14 +19,8 @@
     scaleAnim.scaleX(1f).scaleY(1f).setDuration(duration).setInterpolator(new Workspace.ZoomOutInterpolator());
     toView.setVisibility(View.VISIBLE);
     toView.setAlpha(0f);
-    ValueAnimator alphaAnim=ValueAnimator.ofFloat(0f,1f).setDuration(fadeDuration);
+    final ObjectAnimator alphaAnim=ObjectAnimator.ofFloat(toView,"alpha",0f,1f).setDuration(fadeDuration);
     alphaAnim.setInterpolator(new DecelerateInterpolator(1.5f));
-    alphaAnim.addUpdateListener(new LauncherAnimatorUpdateListener(){
-      public void onAnimationUpdate(      float a,      float b){
-        toView.setAlpha(a * 0f + b * 1f);
-      }
-    }
-);
     mStateAnimation=new AnimatorSet();
     mStateAnimation.play(scaleAnim).after(startDelay);
     mStateAnimation.play(alphaAnim).after(startDelay);
@@ -40,8 +34,6 @@
         toView.bringToFront();
       }
       @Override public void onAnimationEnd(      Animator animation){
-        toView.setScaleX(1.0f);
-        toView.setScaleY(1.0f);
         if (toView instanceof LauncherTransitionable) {
           ((LauncherTransitionable)toView).onLauncherTransitionEnd(instance,scaleAnim,false);
         }
