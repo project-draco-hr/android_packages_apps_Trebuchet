@@ -73,12 +73,15 @@
       observer=null;
     }
     if (delayAnim) {
+      final AnimatorSet stateAnimation=mStateAnimation;
       final OnGlobalLayoutListener delayedStart=new OnGlobalLayoutListener(){
         public void onGlobalLayout(){
           mWorkspace.post(new Runnable(){
             public void run(){
-              setPivotsForZoom(toView,scale);
-              mStateAnimation.start();
+              if (mStateAnimation == stateAnimation) {
+                setPivotsForZoom(toView,scale);
+                mStateAnimation.start();
+              }
             }
           }
 );
