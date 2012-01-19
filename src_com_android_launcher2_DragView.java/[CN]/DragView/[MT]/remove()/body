@@ -1,8 +1,3 @@
 {
-  post(new Runnable(){
-    public void run(){
-      mDragLayer.removeView(DragView.this);
-    }
-  }
-);
+  mDragLayer.removeView(DragView.this);
 }
