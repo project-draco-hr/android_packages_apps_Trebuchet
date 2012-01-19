@@ -8,6 +8,7 @@
   final int duration=res.getInteger(R.integer.config_appsCustomizeZoomInTime);
   final int fadeDuration=res.getInteger(R.integer.config_appsCustomizeFadeInTime);
   final float scale=(float)res.getInteger(R.integer.config_appsCustomizeZoomScaleFactor);
+  final View fromView=mWorkspace;
   final View toView=mAppsCustomizeTabHost;
   final int startDelay=res.getInteger(R.integer.config_workspaceAppsCustomizeAnimationStagger);
   setPivotsForZoom(toView,scale);
@@ -34,9 +35,8 @@
         toView.bringToFront();
       }
       @Override public void onAnimationEnd(      Animator animation){
-        if (toView instanceof LauncherTransitionable) {
-          ((LauncherTransitionable)toView).onLauncherTransitionEnd(instance,scaleAnim,false);
-        }
+        dispatchOnLauncherTransitionEnd(fromView,animated,false);
+        dispatchOnLauncherTransitionEnd(toView,animated,false);
         if (!springLoaded && !LauncherApplication.isScreenLarge()) {
           mWorkspace.hideScrollingIndicator(true);
           hideDockDivider();
@@ -54,10 +54,10 @@
       mStateAnimation.play(workspaceAnim);
     }
     boolean delayAnim=false;
-    LauncherTransitionable lt=(LauncherTransitionable)toView;
     final ViewTreeObserver observer;
-    lt.onLauncherTransitionStart(instance,mStateAnimation,false);
-    if ((lt.getContent().getMeasuredWidth() == 0) || (mWorkspace.getMeasuredWidth() == 0) || (toView.getMeasuredWidth() == 0)) {
+    dispatchOnLauncherTransitionStart(fromView,animated,false);
+    dispatchOnLauncherTransitionStart(toView,animated,false);
+    if ((((LauncherTransitionable)toView).getContent().getMeasuredWidth() == 0) || (mWorkspace.getMeasuredWidth() == 0) || (toView.getMeasuredWidth() == 0)) {
       observer=mWorkspace.getViewTreeObserver();
       delayAnim=true;
     }
@@ -95,14 +95,14 @@
     toView.setScaleY(1.0f);
     toView.setVisibility(View.VISIBLE);
     toView.bringToFront();
-    if (toView instanceof LauncherTransitionable) {
-      ((LauncherTransitionable)toView).onLauncherTransitionStart(instance,null,false);
-      ((LauncherTransitionable)toView).onLauncherTransitionEnd(instance,null,false);
-      if (!springLoaded && !LauncherApplication.isScreenLarge()) {
-        mWorkspace.hideScrollingIndicator(true);
-        hideDockDivider();
-      }
+    if (!springLoaded && !LauncherApplication.isScreenLarge()) {
+      mWorkspace.hideScrollingIndicator(true);
+      hideDockDivider();
     }
+    dispatchOnLauncherTransitionStart(fromView,animated,false);
+    dispatchOnLauncherTransitionEnd(fromView,animated,false);
+    dispatchOnLauncherTransitionStart(toView,animated,false);
+    dispatchOnLauncherTransitionEnd(toView,animated,false);
     updateWallpaperVisibility(false);
   }
 }

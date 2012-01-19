@@ -1,6 +1,5 @@
 {
   mInTransition=true;
-  boolean animated=(animation != null);
   mContent.setVisibility(VISIBLE);
   if (!toWorkspace) {
     mAppsCustomizePane.loadAssociatedPages(mAppsCustomizePane.getCurrentPage(),true);
