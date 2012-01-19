@@ -1,6 +1,7 @@
 {
   if (mDragging) {
     mDragging=false;
+    clearScrollRunnable();
     for (    DragListener listener : mListeners) {
       listener.onDragEnd();
     }

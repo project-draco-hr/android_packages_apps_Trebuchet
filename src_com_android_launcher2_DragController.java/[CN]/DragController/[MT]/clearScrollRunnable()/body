@@ -1,0 +1,8 @@
+{
+  mHandler.removeCallbacks(mScrollRunnable);
+  if (mScrollState == SCROLL_WAITING_IN_ZONE) {
+    mScrollState=SCROLL_OUTSIDE_ZONE;
+    mScrollRunnable.setDirection(SCROLL_RIGHT);
+    mDragScroller.onExitScrollArea();
+  }
+}

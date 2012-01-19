@@ -9,5 +9,8 @@
     mScrollState=SCROLL_OUTSIDE_ZONE;
     mDistanceSinceScroll=0;
     mDragScroller.onExitScrollArea();
+    if (isDragging()) {
+      handleMoveEvent(mDragObject.x,mDragObject.y);
+    }
   }
 }

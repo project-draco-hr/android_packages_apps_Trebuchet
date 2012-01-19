@@ -9,10 +9,10 @@
   boolean result=false;
   if (!isSmall() && !mIsSwitchingState) {
     mInScrollArea=true;
-    final int page=mCurrentPage + (direction == DragController.SCROLL_LEFT ? -1 : 1);
-    final CellLayout layout=(CellLayout)getChildAt(page);
+    final int page=(mNextPage != INVALID_PAGE ? mNextPage : mCurrentPage) + (direction == DragController.SCROLL_LEFT ? -1 : 1);
     cancelFolderCreation();
-    if (layout != null) {
+    if (0 <= page && page < getChildCount()) {
+      CellLayout layout=(CellLayout)getChildAt(page);
       if (mDragTargetLayout != null) {
         mDragTargetLayout.setIsDragOverlapping(false);
         mDragTargetLayout.onDragExit();
