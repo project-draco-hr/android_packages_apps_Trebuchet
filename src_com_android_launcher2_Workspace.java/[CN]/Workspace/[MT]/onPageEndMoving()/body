@@ -6,7 +6,12 @@
  else {
     clearChildrenCache();
   }
-  if (!mDragController.dragging()) {
+  if (mDragController.isDragging()) {
+    if (isSmall()) {
+      mDragController.forceMoveEvent();
+    }
+  }
+ else {
     if (LauncherApplication.isScreenLarge()) {
       hideOutlines();
     }
