@@ -23,12 +23,14 @@ handleMoveEvent(dragLayerX,dragLayerY);
 break;
 case MotionEvent.ACTION_UP:
 handleMoveEvent(dragLayerX,dragLayerY);
+mHandler.removeCallbacks(mScrollRunnable);
 if (mDragging) {
 drop(dragLayerX,dragLayerY);
 }
 endDrag();
 break;
 case MotionEvent.ACTION_CANCEL:
+mHandler.removeCallbacks(mScrollRunnable);
 cancelDrag();
 break;
 }

@@ -1,5 +1,9 @@
 {
   v.getMatrix().mapPoints(xy);
-  xy[0]-=(mScrollX - v.getLeft());
+  int scrollX=mScrollX;
+  if (mNextPage != INVALID_PAGE) {
+    scrollX=mScroller.getFinalX();
+  }
+  xy[0]-=(scrollX - v.getLeft());
   xy[1]-=(mScrollY - v.getTop());
 }
