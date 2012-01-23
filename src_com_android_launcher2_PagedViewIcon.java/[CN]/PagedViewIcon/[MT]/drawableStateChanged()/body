@@ -1,4 +1,13 @@
 {
-  setAlpha(isPressed() ? 0.5f : 1f);
   super.drawableStateChanged();
+  if (isPressed()) {
+    setAlpha(PRESS_ALPHA);
+    if (mPressedCallback != null) {
+      mPressedCallback.iconPressed(this);
+    }
+  }
+ else   if (mResetDrawableState) {
+    setAlpha(1f);
+    mResetDrawableState=false;
+  }
 }
