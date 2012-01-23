@@ -1,6 +1,6 @@
 {
   mInTransition=false;
-  if (animation != null) {
+  if (animated) {
     setLayerType(LAYER_TYPE_NONE,null);
   }
   if (!toWorkspace) {
