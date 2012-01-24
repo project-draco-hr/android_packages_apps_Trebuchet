@@ -1,6 +1,7 @@
 {
   mLauncher.dismissAllAppsCling(null);
   if (!super.beginDragging(v))   return false;
+  resetDrawableState();
   mLauncher.enterSpringLoadedDragMode();
   if (v instanceof PagedViewIcon) {
     beginDraggingApplication(v);

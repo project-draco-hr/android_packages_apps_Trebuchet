@@ -10,5 +10,8 @@
   if (mWaitingForResume != null) {
     mWaitingForResume.setStayPressed(false);
   }
+  if (mAppsCustomizeContent != null) {
+    mAppsCustomizeContent.resetDrawableState();
+  }
   updateAppMarketIcon();
 }
