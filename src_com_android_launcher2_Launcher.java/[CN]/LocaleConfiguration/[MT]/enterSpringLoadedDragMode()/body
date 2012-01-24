@@ -1,6 +1,6 @@
 {
   if (mState == State.APPS_CUSTOMIZE) {
-    hideAppsCustomizeHelper(State.APPS_CUSTOMIZE_SPRING_LOADED,true,true);
+    hideAppsCustomizeHelper(State.APPS_CUSTOMIZE_SPRING_LOADED,true,true,null);
     hideDockDivider();
     mState=State.APPS_CUSTOMIZE_SPRING_LOADED;
   }

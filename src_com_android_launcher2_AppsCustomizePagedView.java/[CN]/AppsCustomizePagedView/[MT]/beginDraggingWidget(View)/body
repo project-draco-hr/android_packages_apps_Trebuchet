@@ -1,4 +1,6 @@
 {
+  mWidgetCleanupState=WIDGET_NO_CLEANUP_REQUIRED;
+  mWidgetLoadingId=-1;
   ImageView image=(ImageView)v.findViewById(R.id.widget_preview);
   PendingAddItemInfo createItemInfo=(PendingAddItemInfo)v.getTag();
   Bitmap preview;
@@ -6,10 +8,10 @@
   if (createItemInfo instanceof PendingAddWidgetInfo) {
     PendingAddWidgetInfo createWidgetInfo=(PendingAddWidgetInfo)createItemInfo;
     int[] spanXY=mLauncher.getSpanForWidget(createWidgetInfo,null);
+    int[] size=mLauncher.getWorkspace().estimateItemSize(spanXY[0],spanXY[1],createWidgetInfo,true);
     createItemInfo.spanX=spanXY[0];
     createItemInfo.spanY=spanXY[1];
-    int[] maxSize=mLauncher.getWorkspace().estimateItemSize(spanXY[0],spanXY[1],createWidgetInfo,true);
-    preview=getWidgetPreview(createWidgetInfo.componentName,createWidgetInfo.previewImage,createWidgetInfo.icon,spanXY[0],spanXY[1],maxSize[0],maxSize[1]);
+    preview=getWidgetPreview(createWidgetInfo.componentName,createWidgetInfo.previewImage,createWidgetInfo.icon,spanXY[0],spanXY[1],size[0],size[1]);
   }
  else {
     preview=Bitmap.createBitmap(mWidgetPreviewIconPaddedDimension,mWidgetPreviewIconPaddedDimension,Bitmap.Config.ARGB_8888);

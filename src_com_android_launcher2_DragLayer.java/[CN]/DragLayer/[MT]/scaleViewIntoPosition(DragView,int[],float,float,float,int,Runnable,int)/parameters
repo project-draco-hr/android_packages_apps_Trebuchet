@@ -1,0 +1,8 @@
+DragView dragView
+int[] pos
+float finalAlpha
+float scaleX
+float scaleY
+int animationEndStyle
+Runnable onFinishRunnable
+int duration

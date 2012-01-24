@@ -1,0 +1,16 @@
+{
+  PendingAddWidgetInfo info=(PendingAddWidgetInfo)v.getTag();
+  if (mWidgetCleanupState >= 0 && mWidgetLoadingId != -1) {
+    mLauncher.getAppWidgetHost().deleteAppWidgetId(mWidgetLoadingId);
+  }
+  if (mWidgetCleanupState == WIDGET_BOUND) {
+    removeCallbacks(mInflateWidgetRunnable);
+  }
+ else   if (mWidgetCleanupState == WIDGET_INFLATED) {
+    AppWidgetHostView widget=info.boundWidget;
+    int widgetId=widget.getAppWidgetId();
+    mLauncher.getAppWidgetHost().deleteAppWidgetId(widgetId);
+  }
+  mWidgetCleanupState=WIDGET_NO_CLEANUP_REQUIRED;
+  mWidgetLoadingId=-1;
+}

@@ -1,0 +1,14 @@
+View view
+Rect from
+Rect to
+float finalAlpha
+float initScaleX
+float initScaleY
+float finalScaleX
+float finalScaleY
+int duration
+Interpolator motionInterpolator
+Interpolator alphaInterpolator
+Runnable onCompleteRunnable
+int animationEndStyle
+View anchorView

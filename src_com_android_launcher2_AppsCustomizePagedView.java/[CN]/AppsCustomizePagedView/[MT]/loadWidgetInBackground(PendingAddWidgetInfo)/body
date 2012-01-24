@@ -1,0 +1,24 @@
+{
+  final AppWidgetProviderInfo pInfo=info.info;
+  if (pInfo.configure != null) {
+    return;
+  }
+  mBindWidgetRunnable=new Runnable(){
+    @Override public void run(){
+      mWidgetLoadingId=mLauncher.getAppWidgetHost().allocateAppWidgetId();
+      AppWidgetManager.getInstance(mLauncher).bindAppWidgetId(mWidgetLoadingId,info.componentName);
+      mWidgetCleanupState=WIDGET_BOUND;
+    }
+  }
+;
+  post(mBindWidgetRunnable);
+  mInflateWidgetRunnable=new Runnable(){
+    @Override public void run(){
+      AppWidgetHostView hostView=mLauncher.getAppWidgetHost().createView(mContext,mWidgetLoadingId,pInfo);
+      info.boundWidget=hostView;
+      mWidgetCleanupState=WIDGET_INFLATED;
+    }
+  }
+;
+  post(mInflateWidgetRunnable);
+}

@@ -1,5 +1,6 @@
 {
   itemType=LauncherSettings.Favorites.ITEM_TYPE_APPWIDGET;
+  this.info=i;
   componentName=i.provider;
   minWidth=i.minWidth;
   minHeight=i.minHeight;

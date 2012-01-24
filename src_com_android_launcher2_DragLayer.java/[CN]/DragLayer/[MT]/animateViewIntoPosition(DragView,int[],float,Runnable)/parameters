@@ -1,4 +1,0 @@
-DragView dragView
-int[] pos
-float scale
-Runnable onFinishRunnable

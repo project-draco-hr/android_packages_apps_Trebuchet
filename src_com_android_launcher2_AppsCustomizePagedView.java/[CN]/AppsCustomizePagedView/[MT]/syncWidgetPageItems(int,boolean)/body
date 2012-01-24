@@ -21,6 +21,7 @@
       int[] cellSpans=mLauncher.getSpanForWidget(info,null);
       widget.applyFromAppWidgetProviderInfo(info,-1,cellSpans);
       widget.setTag(createItemInfo);
+      widget.setShortPressListener(this);
     }
  else     if (rawInfo instanceof ResolveInfo) {
       ResolveInfo info=(ResolveInfo)rawInfo;

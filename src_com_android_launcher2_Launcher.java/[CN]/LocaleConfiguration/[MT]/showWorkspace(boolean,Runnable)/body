@@ -1,0 +1,16 @@
+{
+  if (mState != State.WORKSPACE) {
+    mWorkspace.setVisibility(View.VISIBLE);
+    hideAppsCustomizeHelper(State.WORKSPACE,animated,false,onCompleteRunnable);
+    mSearchDropTargetBar.showSearchBar(animated);
+    showDockDivider(animated && mState == State.APPS_CUSTOMIZE_SPRING_LOADED);
+    if (mAllAppsButton != null) {
+      mAllAppsButton.requestFocus();
+    }
+  }
+  mWorkspace.flashScrollingIndicator(animated);
+  mState=State.WORKSPACE;
+  mUserPresent=true;
+  updateRunning();
+  getWindow().getDecorView().sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_SELECTED);
+}

@@ -1,5 +1,6 @@
 {
-  AppWidgetProviderInfo appWidget=mAppWidgetManager.getAppWidgetInfo(appWidgetId);
+  final AppWidgetProviderInfo appWidget=info.info;
+  Runnable configurationActivity=null;
   if (appWidget.configure != null) {
     Intent intent=new Intent(AppWidgetManager.ACTION_APPWIDGET_CONFIGURE);
     intent.setComponent(appWidget.configure);
@@ -32,9 +33,10 @@
       }
     }
     startActivityForResultSafely(intent,REQUEST_CREATE_APPWIDGET);
+    mWidgetBeingConfigured=info;
   }
  else {
-    completeAddAppWidget(appWidgetId,info.container,info.screen);
-    exitSpringLoadedDragModeDelayed(true,false);
+    completeAddAppWidget(appWidgetId,info.container,info.screen,info.boundWidget,appWidget);
+    exitSpringLoadedDragModeDelayed(true,false,null);
   }
 }

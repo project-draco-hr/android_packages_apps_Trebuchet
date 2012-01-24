@@ -1,13 +1,18 @@
 {
-  mLauncher.dismissAllAppsCling(null);
   if (!super.beginDragging(v))   return false;
-  resetDrawableState();
-  mLauncher.enterSpringLoadedDragMode();
   if (v instanceof PagedViewIcon) {
     beginDraggingApplication(v);
   }
  else   if (v instanceof PagedViewWidget) {
     beginDraggingWidget(v);
   }
+  postDelayed(new Runnable(){
+    @Override public void run(){
+      mLauncher.dismissAllAppsCling(null);
+      resetDrawableState();
+      mLauncher.enterSpringLoadedDragMode();
+    }
+  }
+,150);
   return true;
 }

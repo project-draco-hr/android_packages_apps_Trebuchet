@@ -1,0 +1,38 @@
+{
+  int spanX=pendingInfo.spanX;
+  int spanY=pendingInfo.spanY;
+  RectF r=estimateItemPosition(cellLayout,pendingInfo,mTargetCell[0],mTargetCell[1],spanX,spanY);
+  int loc[]=new int[2];
+  loc[0]=(int)r.left;
+  loc[1]=(int)r.top;
+  setFinalTransitionTransform(cellLayout);
+  float cellLayoutScale=mLauncher.getDragLayer().getDescendantCoordRelativeToSelf(cellLayout,loc);
+  resetTransitionTransform(cellLayout);
+  float dragViewScaleX=r.width() / dragView.getMeasuredWidth();
+  float dragViewScaleY=r.height() / dragView.getMeasuredHeight();
+  loc[0]-=(dragView.getMeasuredWidth() - cellLayoutScale * r.width()) / 2;
+  loc[1]-=(dragView.getMeasuredHeight() - cellLayoutScale * r.height()) / 2;
+  float scaleX=dragViewScaleX * cellLayoutScale;
+  float scaleY=dragViewScaleY * cellLayoutScale;
+  Resources res=mLauncher.getResources();
+  int duration=res.getInteger(R.integer.config_dropAnimMaxDuration) - 200;
+  int animationEnd=DragLayer.ANIMATION_END_REMAIN_VISIBLE;
+  if (pendingInfo.itemType == LauncherSettings.Favorites.ITEM_TYPE_APPWIDGET && (((PendingAddWidgetInfo)pendingInfo).info.configure == null || animationType == COMPLETE_TWO_STAGE_WIDGET_DROP_ANIMATION)) {
+    Bitmap crossFadeBitmap=createWidgetBitmap((PendingAddWidgetInfo)pendingInfo);
+    dragView.setCrossFadeBitmap(crossFadeBitmap);
+    dragView.crossFade((int)(duration * 0.8f));
+    animationEnd=DragLayer.ANIMATION_END_DISAPPEAR;
+  }
+ else {
+    scaleX=scaleY=Math.min(scaleX,scaleY);
+  }
+  if (animationType == COMPLETE_TWO_STAGE_WIDGET_DROP_ANIMATION) {
+    mLauncher.getDragLayer().scaleViewIntoPosition(dragView,loc,1,scaleX,scaleY,animationEnd,onCompleteRunnable,duration);
+  }
+ else   if (animationType == CANCEL_TWO_STAGE_WIDGET_DROP_ANIMATION) {
+    mLauncher.getDragLayer().scaleViewIntoPosition(dragView,loc,0,0.1f,0.1f,DragLayer.ANIMATION_END_DISAPPEAR,onCompleteRunnable,duration);
+  }
+ else {
+    mLauncher.getDragLayer().animateViewIntoPosition(dragView,loc,scaleX,scaleY,animationEnd,onCompleteRunnable,duration);
+  }
+}

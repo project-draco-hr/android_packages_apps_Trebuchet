@@ -7,8 +7,8 @@
     int width=mDropView.getMeasuredWidth();
     int height=mDropView.getMeasuredHeight();
     canvas.translate(xPos,yPos);
-    canvas.translate((1 - mDropViewScale) * width / 2,(1 - mDropViewScale) * height / 2);
-    canvas.scale(mDropViewScale,mDropViewScale);
+    canvas.translate((1 - mDropViewScaleX) * width / 2,(1 - mDropViewScaleY) * height / 2);
+    canvas.scale(mDropViewScaleX,mDropViewScaleY);
     mDropView.setAlpha(mDropViewAlpha);
     mDropView.draw(canvas);
     canvas.restore();
