@@ -15,6 +15,9 @@
     if (LauncherApplication.isScreenLarge()) {
       hideOutlines();
     }
+    if (!mDragController.isDragging()) {
+      hideScrollingIndicator(false);
+    }
   }
   mOverScrollMaxBackgroundAlpha=0.0f;
   mOverScrollPageIndex=-1;
