@@ -6,8 +6,7 @@
       mPressedCallback.iconPressed(this);
     }
   }
- else   if (mResetDrawableState) {
+ else   if (!mLockDrawableState) {
     setAlpha(1f);
-    mResetDrawableState=false;
   }
 }
