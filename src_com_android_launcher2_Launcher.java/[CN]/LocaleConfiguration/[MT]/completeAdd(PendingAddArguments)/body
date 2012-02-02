@@ -22,6 +22,5 @@ break;
 case REQUEST_PICK_WALLPAPER:
 break;
 }
-resetAddInfo();
 return result;
 }
