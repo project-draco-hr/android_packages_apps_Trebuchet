@@ -1,0 +1,5 @@
+{
+  if (mAnim != null && mAnim.isRunning()) {
+    mAnim.cancel();
+  }
+}

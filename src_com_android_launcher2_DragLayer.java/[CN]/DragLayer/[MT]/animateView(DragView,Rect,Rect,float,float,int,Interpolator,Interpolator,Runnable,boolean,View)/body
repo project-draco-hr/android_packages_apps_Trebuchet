@@ -15,7 +15,8 @@
     mFadeOutAnim.cancel();
   }
   mDropView=view;
-  final float initialAlpha=view.getAlpha();
+  mDropView.cancelAnimation();
+  mDropView.resetLayoutParams();
   mDropAnim=new ValueAnimator();
   if (alphaInterpolator == null || motionInterpolator == null) {
     mDropAnim.setInterpolator(mCubicEaseOutInterpolator);
@@ -24,22 +25,32 @@
     mAnchorViewInitialScrollX=anchorView.getScrollX();
   }
   mAnchorView=anchorView;
+  final float initialAlpha=view.getAlpha();
+  final float initialScale=mDropView.getScaleX();
   mDropAnim.setDuration(duration);
   mDropAnim.setFloatValues(0.0f,1.0f);
   mDropAnim.removeAllUpdateListeners();
   mDropAnim.addUpdateListener(new AnimatorUpdateListener(){
     public void onAnimationUpdate(    ValueAnimator animation){
       final float percent=(Float)animation.getAnimatedValue();
-      int width=view.getMeasuredWidth();
-      int height=view.getMeasuredHeight();
-      invalidate(mDropViewPos[0],mDropViewPos[1],mDropViewPos[0] + width,mDropViewPos[1] + height);
+      final int width=view.getMeasuredWidth();
+      final int height=view.getMeasuredHeight();
       float alphaPercent=alphaInterpolator == null ? percent : alphaInterpolator.getInterpolation(percent);
       float motionPercent=motionInterpolator == null ? percent : motionInterpolator.getInterpolation(percent);
-      mDropViewPos[0]=from.left + (int)Math.round(((to.left - from.left) * motionPercent));
-      mDropViewPos[1]=from.top + (int)Math.round(((to.top - from.top) * motionPercent));
-      mDropViewScale=percent * finalScale + (1 - percent);
-      mDropViewAlpha=alphaPercent * finalAlpha + (1 - alphaPercent) * initialAlpha;
-      invalidate(mDropViewPos[0],mDropViewPos[1],mDropViewPos[0] + width,mDropViewPos[1] + height);
+      float scale=finalScale * percent + initialScale * (1 - percent);
+      float alpha=finalAlpha * alphaPercent + initialAlpha * (1 - alphaPercent);
+      float fromLeft=from.left + (initialScale - 1f) * width / 2;
+      float fromTop=from.top + (initialScale - 1f) * height / 2;
+      int x=(int)(fromLeft + Math.round(((to.left - fromLeft) * motionPercent)));
+      int y=(int)(fromTop + Math.round(((to.top - fromTop) * motionPercent)));
+      int xPos=x - mDropView.getScrollX() + (mAnchorView != null ? (mAnchorViewInitialScrollX - mAnchorView.getScrollX()) : 0);
+      int yPos=y - mDropView.getScrollY();
+      mDropView.setTranslationX(xPos);
+      mDropView.setTranslationY(yPos);
+      mDropView.setScaleX(scale);
+      mDropView.setScaleY(scale);
+      mDropView.setAlpha(alpha);
+      invalidate();
     }
   }
 );
@@ -52,6 +63,7 @@
         fadeOutDragView();
       }
  else {
+        mDropView.remove();
         mDropView=null;
       }
     }

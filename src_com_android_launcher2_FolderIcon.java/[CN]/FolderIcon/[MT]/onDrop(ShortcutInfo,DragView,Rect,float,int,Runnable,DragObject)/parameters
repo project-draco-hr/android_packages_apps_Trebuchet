@@ -1,6 +1,7 @@
 ShortcutInfo item
-View animateView
+DragView animateView
 Rect finalRect
 float scaleRelativeToDragLayer
 int index
 Runnable postAnimationRunnable
+DragObject d
