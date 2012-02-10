@@ -22,6 +22,14 @@
     toView.setAlpha(0f);
     final ObjectAnimator alphaAnim=ObjectAnimator.ofFloat(toView,"alpha",0f,1f).setDuration(fadeDuration);
     alphaAnim.setInterpolator(new DecelerateInterpolator(1.5f));
+    alphaAnim.addUpdateListener(new AnimatorUpdateListener(){
+      @Override public void onAnimationUpdate(      ValueAnimator animation){
+        float t=(Float)animation.getAnimatedValue();
+        dispatchOnLauncherTransitionStep(fromView,t);
+        dispatchOnLauncherTransitionStep(toView,t);
+      }
+    }
+);
     mStateAnimation=new AnimatorSet();
     mStateAnimation.play(scaleAnim).after(startDelay);
     mStateAnimation.play(alphaAnim).after(startDelay);

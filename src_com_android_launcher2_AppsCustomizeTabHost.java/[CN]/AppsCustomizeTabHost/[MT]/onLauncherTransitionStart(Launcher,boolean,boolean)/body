@@ -1,5 +1,6 @@
 {
   mInTransition=true;
+  mTransitioningToWorkspace=toWorkspace;
   if (toWorkspace) {
     setVisibilityOfSiblingsWithLowerZOrder(VISIBLE);
   }
