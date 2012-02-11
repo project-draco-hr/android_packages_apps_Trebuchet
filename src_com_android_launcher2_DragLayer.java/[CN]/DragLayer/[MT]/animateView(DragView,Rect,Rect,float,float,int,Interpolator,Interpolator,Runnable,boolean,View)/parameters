@@ -1,4 +1,4 @@
-View view
+DragView view
 Rect from
 Rect to
 float finalAlpha

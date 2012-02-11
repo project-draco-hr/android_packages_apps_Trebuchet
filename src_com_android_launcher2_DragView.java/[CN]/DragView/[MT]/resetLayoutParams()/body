@@ -1,0 +1,5 @@
+{
+  DragLayer.LayoutParams lp=mLayoutParams;
+  lp.x=lp.y=0;
+  mOffsetX=mOffsetY=0;
+}
