@@ -9,6 +9,5 @@
   if (componentName != null) {
     mLauncher.startApplicationDetailsActivity(componentName);
   }
-  d.deferDragViewCleanupPostAnimation=false;
   return false;
 }
