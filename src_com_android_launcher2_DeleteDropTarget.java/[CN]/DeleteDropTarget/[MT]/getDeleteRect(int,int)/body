@@ -1,0 +1,12 @@
+{
+  DragLayer dragLayer=mLauncher.getDragLayer();
+  Rect to=new Rect();
+  dragLayer.getViewRectRelativeToSelf(this,to);
+  int width=mCurrentDrawable.getIntrinsicWidth();
+  int height=mCurrentDrawable.getIntrinsicHeight();
+  to.set(to.left + getPaddingLeft(),to.top + getPaddingTop(),to.left + getPaddingLeft() + width,to.bottom);
+  int xOffset=(int)-(deleteItemWidth - width) / 2;
+  int yOffset=(int)-(deleteItemHeight - height) / 2;
+  to.offset(xOffset,yOffset);
+  return to;
+}

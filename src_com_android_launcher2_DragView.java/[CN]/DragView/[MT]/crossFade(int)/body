@@ -1,0 +1,12 @@
+{
+  ValueAnimator va=ValueAnimator.ofFloat(0f,1f);
+  va.setDuration(duration);
+  va.setInterpolator(new DecelerateInterpolator(1.5f));
+  va.addUpdateListener(new AnimatorUpdateListener(){
+    @Override public void onAnimationUpdate(    ValueAnimator animation){
+      mCrossFadeProgress=animation.getAnimatedFraction();
+    }
+  }
+);
+  va.start();
+}

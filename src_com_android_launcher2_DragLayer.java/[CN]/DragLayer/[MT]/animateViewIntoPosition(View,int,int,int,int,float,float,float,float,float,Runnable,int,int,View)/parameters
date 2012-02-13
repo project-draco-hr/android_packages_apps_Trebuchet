@@ -1,0 +1,14 @@
+View view
+int fromX
+int fromY
+int toX
+int toY
+float finalAlpha
+float initScaleX
+float initScaleY
+float finalScaleX
+float finalScaleY
+Runnable onCompleteRunnable
+int animationEndStyle
+int duration
+View anchorView

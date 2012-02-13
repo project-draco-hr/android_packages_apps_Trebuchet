@@ -16,7 +16,7 @@ addAppWidgetFromPick(args.intent);
 break;
 case REQUEST_CREATE_APPWIDGET:
 int appWidgetId=args.intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,-1);
-completeAddAppWidget(appWidgetId,args.container,args.screen);
+completeAddAppWidget(appWidgetId,args.container,args.screen,null,null);
 result=true;
 break;
 case REQUEST_PICK_WALLPAPER:

@@ -1,7 +1,7 @@
 {
   final Runnable exitSpringLoadedRunnable=new Runnable(){
     @Override public void run(){
-      mLauncher.exitSpringLoadedDragModeDelayed(true,false);
+      mLauncher.exitSpringLoadedDragModeDelayed(true,false,null);
     }
   }
 ;
@@ -45,17 +45,7 @@ cellLayout.onDragExit();
 }
 }
 ;
-RectF r=estimateItemPosition(cellLayout,pendingInfo,mTargetCell[0],mTargetCell[1],spanX,spanY);
-int loc[]=new int[2];
-loc[0]=(int)r.left;
-loc[1]=(int)r.top;
-setFinalTransitionTransform(cellLayout);
-float cellLayoutScale=mLauncher.getDragLayer().getDescendantCoordRelativeToSelf(cellLayout,loc);
-resetTransitionTransform(cellLayout);
-float dragViewScale=Math.min(r.width() / d.dragView.getMeasuredWidth(),r.height() / d.dragView.getMeasuredHeight());
-loc[0]-=(d.dragView.getMeasuredWidth() - cellLayoutScale * r.width()) / 2;
-loc[1]-=(d.dragView.getMeasuredHeight() - cellLayoutScale * r.height()) / 2;
-mLauncher.getDragLayer().animateViewIntoPosition(d.dragView,loc,dragViewScale * cellLayoutScale,onAnimationCompleteRunnable);
+animateExternalDrop((PendingAddItemInfo)info,cellLayout,d.dragView,onAnimationCompleteRunnable,ANIMATE_INTO_POSITION);
 }
  else {
 View view=null;

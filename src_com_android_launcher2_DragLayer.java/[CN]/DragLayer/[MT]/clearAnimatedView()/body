@@ -1,0 +1,6 @@
+{
+  mDropView=null;
+  mDropViewScaleX=1;
+  mDropViewScaleY=1;
+  invalidate();
+}

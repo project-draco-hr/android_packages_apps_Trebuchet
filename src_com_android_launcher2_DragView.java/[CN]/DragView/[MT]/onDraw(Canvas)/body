@@ -5,6 +5,23 @@
     p.setColor(0xaaffffff);
     canvas.drawRect(0,0,getWidth(),getHeight(),p);
   }
+  if (mPaint == null) {
+    mPaint=new Paint();
+  }
   mHasDrawn=true;
+  boolean crossFade=mCrossFadeProgress > 0 && mCrossFadeBitmap != null;
+  if (crossFade) {
+    int alpha=crossFade ? (int)(255 * (1 - mCrossFadeProgress)) : 255;
+    mPaint.setAlpha(alpha);
+  }
   canvas.drawBitmap(mBitmap,0.0f,0.0f,mPaint);
+  if (crossFade) {
+    mPaint.setAlpha((int)(255 * mCrossFadeProgress));
+    canvas.save();
+    float sX=(mBitmap.getWidth() * 1.0f) / mCrossFadeBitmap.getWidth();
+    float sY=(mBitmap.getHeight() * 1.0f) / mCrossFadeBitmap.getHeight();
+    canvas.scale(sX,sY);
+    canvas.drawBitmap(mCrossFadeBitmap,0.0f,0.0f,mPaint);
+    canvas.restore();
+  }
 }

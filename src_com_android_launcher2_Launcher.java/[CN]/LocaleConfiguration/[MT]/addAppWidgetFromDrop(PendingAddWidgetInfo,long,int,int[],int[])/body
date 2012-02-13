@@ -7,7 +7,14 @@
     mPendingAddInfo.cellX=cell[0];
     mPendingAddInfo.cellY=cell[1];
   }
-  int appWidgetId=getAppWidgetHost().allocateAppWidgetId();
-  AppWidgetManager.getInstance(this).bindAppWidgetId(appWidgetId,info.componentName);
+  AppWidgetHostView hostView=info.boundWidget;
+  int appWidgetId;
+  if (hostView != null) {
+    appWidgetId=hostView.getAppWidgetId();
+  }
+ else {
+    appWidgetId=getAppWidgetHost().allocateAppWidgetId();
+    AppWidgetManager.getInstance(this).bindAppWidgetId(appWidgetId,info.componentName);
+  }
   addAppWidgetImpl(appWidgetId,info);
 }

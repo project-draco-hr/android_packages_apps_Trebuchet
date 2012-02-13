@@ -1,0 +1,5 @@
+{
+  Rect from=new Rect(fromX,fromY,fromX + view.getMeasuredWidth(),fromY + view.getMeasuredHeight());
+  Rect to=new Rect(toX,toY,toX + view.getMeasuredWidth(),toY + view.getMeasuredHeight());
+  animateView(view,from,to,finalAlpha,initScaleX,initScaleY,finalScaleX,finalScaleY,duration,null,null,onCompleteRunnable,animationEndStyle,anchorView);
+}

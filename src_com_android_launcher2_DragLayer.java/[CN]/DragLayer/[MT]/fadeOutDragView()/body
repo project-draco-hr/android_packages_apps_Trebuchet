@@ -16,6 +16,7 @@
   mFadeOutAnim.addListener(new AnimatorListenerAdapter(){
     public void onAnimationEnd(    Animator animation){
       mDropView=null;
+      invalidate();
     }
   }
 );

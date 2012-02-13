@@ -27,11 +27,13 @@
     layout=(CellLayout)getChildAt(screen);
     child.setOnKeyListener(new IconKeyEventListener());
   }
-  CellLayout.LayoutParams lp=(CellLayout.LayoutParams)child.getLayoutParams();
-  if (lp == null) {
+  LayoutParams genericLp=child.getLayoutParams();
+  CellLayout.LayoutParams lp;
+  if (genericLp == null || !(genericLp instanceof CellLayout.LayoutParams)) {
     lp=new CellLayout.LayoutParams(x,y,spanX,spanY);
   }
  else {
+    lp=(CellLayout.LayoutParams)genericLp;
     lp.cellX=x;
     lp.cellY=y;
     lp.cellHSpan=spanX;
