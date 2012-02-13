@@ -1,7 +1,7 @@
 {
   Drawable animateDrawable=((TextView)destView).getCompoundDrawables()[1];
   computePreviewDrawingParams(animateDrawable.getIntrinsicWidth(),destView.getMeasuredWidth());
-  onDrop(srcInfo,srcView,dstRect,scaleRelativeToDragLayer,1,postAnimationRunnable,null);
+  onDrop(srcInfo,srcView,dstRect,scaleRelativeToDragLayer,1,postAnimationRunnable);
   animateFirstItem(animateDrawable,INITIAL_ITEM_ANIMATION_DURATION);
   postDelayed(new Runnable(){
     public void run(){

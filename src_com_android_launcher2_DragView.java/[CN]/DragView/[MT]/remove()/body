@@ -1,5 +1,3 @@
 {
-  if (getParent() != null) {
-    mDragLayer.removeView(DragView.this);
-  }
+  mDragLayer.removeView(DragView.this);
 }
