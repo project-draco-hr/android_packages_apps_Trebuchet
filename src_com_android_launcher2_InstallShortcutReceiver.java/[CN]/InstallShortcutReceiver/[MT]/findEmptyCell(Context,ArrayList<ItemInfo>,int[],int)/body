@@ -2,7 +2,6 @@
   final int xCount=LauncherModel.getCellCountX();
   final int yCount=LauncherModel.getCellCountY();
   boolean[][] occupied=new boolean[xCount][yCount];
-  ArrayList<ItemInfo> items=LauncherModel.getItemsInLocalCoordinates(context);
   ItemInfo item=null;
   int cellX, cellY, spanX, spanY;
   for (int i=0; i < items.size(); ++i) {
