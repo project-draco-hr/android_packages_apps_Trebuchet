@@ -2,8 +2,18 @@
   mContext=context;
   mPackageManager=context.getPackageManager();
   if (LauncherApplication.isScreenLarge()) {
-    ActivityManager activityManager=(ActivityManager)context.getSystemService(Context.ACTIVITY_SERVICE);
-    mIconDpi=activityManager.getLauncherLargeIconDensity();
+    if (density == DisplayMetrics.DENSITY_LOW) {
+      mIconDpi=DisplayMetrics.DENSITY_MEDIUM;
+    }
+ else     if (density == DisplayMetrics.DENSITY_MEDIUM) {
+      mIconDpi=DisplayMetrics.DENSITY_HIGH;
+    }
+ else     if (density == DisplayMetrics.DENSITY_HIGH) {
+      mIconDpi=DisplayMetrics.DENSITY_XHIGH;
+    }
+ else     if (density == DisplayMetrics.DENSITY_XHIGH) {
+      mIconDpi=DisplayMetrics.DENSITY_XHIGH;
+    }
   }
  else {
     mIconDpi=context.getResources().getDisplayMetrics().densityDpi;
