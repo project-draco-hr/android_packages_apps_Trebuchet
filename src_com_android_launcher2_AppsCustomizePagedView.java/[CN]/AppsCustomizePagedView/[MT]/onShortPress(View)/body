@@ -1,4 +1,4 @@
 {
-  PendingAddWidgetInfo createWidgetInfo=(PendingAddWidgetInfo)v.getTag();
-  loadWidgetInBackground(createWidgetInfo);
+  mCreateWidgetInfo=new PendingAddWidgetInfo((PendingAddWidgetInfo)v.getTag());
+  loadWidgetInBackground(mCreateWidgetInfo);
 }

@@ -1,5 +1,6 @@
 {
-  PendingAddWidgetInfo info=(PendingAddWidgetInfo)v.getTag();
+  PendingAddWidgetInfo info=mCreateWidgetInfo;
+  mCreateWidgetInfo=null;
   if (mWidgetCleanupState >= 0 && mWidgetLoadingId != -1) {
     mLauncher.getAppWidgetHost().deleteAppWidgetId(mWidgetLoadingId);
   }
