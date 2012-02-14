@@ -1,3 +1,0 @@
-{
-  animateViewIntoPosition(dragView,pos[0],pos[1],pos[0],pos[1],finalAlpha,mDropViewScaleX,mDropViewScaleY,scaleX,scaleY,onFinishRunnable,animationEndStyle,duration,null);
-}

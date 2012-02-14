@@ -26,13 +26,10 @@
  else {
     scaleX=scaleY=Math.min(scaleX,scaleY);
   }
-  if (animationType == COMPLETE_TWO_STAGE_WIDGET_DROP_ANIMATION) {
-    mLauncher.getDragLayer().scaleViewIntoPosition(dragView,loc,1,scaleX,scaleY,animationEnd,onCompleteRunnable,duration);
-  }
- else   if (animationType == CANCEL_TWO_STAGE_WIDGET_DROP_ANIMATION) {
-    mLauncher.getDragLayer().scaleViewIntoPosition(dragView,loc,0,0.1f,0.1f,DragLayer.ANIMATION_END_DISAPPEAR,onCompleteRunnable,duration);
+  if (animationType == CANCEL_TWO_STAGE_WIDGET_DROP_ANIMATION) {
+    mLauncher.getDragLayer().animateViewIntoPosition(dragView,loc,0f,0.1f,0.1f,DragLayer.ANIMATION_END_DISAPPEAR,onCompleteRunnable,duration);
   }
  else {
-    mLauncher.getDragLayer().animateViewIntoPosition(dragView,loc,scaleX,scaleY,animationEnd,onCompleteRunnable,duration);
+    mLauncher.getDragLayer().animateViewIntoPosition(dragView,loc,1f,scaleX,scaleY,animationEnd,onCompleteRunnable,duration);
   }
 }

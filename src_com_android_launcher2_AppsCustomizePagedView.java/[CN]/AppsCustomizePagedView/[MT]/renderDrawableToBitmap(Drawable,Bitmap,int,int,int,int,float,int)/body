@@ -6,9 +6,6 @@
     d.setBounds(x,y,x + w,y + h);
     d.draw(c);
     d.setBounds(oldBounds);
-    if (multiplyColor != 0xFFFFFFFF) {
-      c.drawColor(mDragViewMultiplyColor,PorterDuff.Mode.MULTIPLY);
-    }
     c.setBitmap(null);
   }
 }
