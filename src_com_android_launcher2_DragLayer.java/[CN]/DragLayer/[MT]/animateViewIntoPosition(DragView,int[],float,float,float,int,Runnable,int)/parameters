@@ -1,6 +1,6 @@
 DragView dragView
 int[] pos
-float finalAlpha
+float alpha
 float scaleX
 float scaleY
 int animationEndStyle

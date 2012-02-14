@@ -15,5 +15,6 @@
     if (showOutOfSpaceMessage) {
       mLauncher.showOutOfSpaceMessage();
     }
+    d.deferDragViewCleanupPostAnimation=false;
   }
 }

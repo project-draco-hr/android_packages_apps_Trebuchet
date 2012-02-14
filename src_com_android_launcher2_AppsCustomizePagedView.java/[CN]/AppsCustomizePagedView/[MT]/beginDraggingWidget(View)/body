@@ -30,9 +30,6 @@
     }
   }
   outline=Bitmap.createScaledBitmap(preview,preview.getWidth(),preview.getHeight(),false);
-  mCanvas.setBitmap(preview);
-  mCanvas.drawColor(mDragViewMultiplyColor,PorterDuff.Mode.MULTIPLY);
-  mCanvas.setBitmap(null);
   alphaClipPaint=null;
   mLauncher.lockScreenOrientationOnLargeUI();
   mLauncher.getWorkspace().onDragStartedWithItem(createItemInfo,outline,alphaClipPaint);

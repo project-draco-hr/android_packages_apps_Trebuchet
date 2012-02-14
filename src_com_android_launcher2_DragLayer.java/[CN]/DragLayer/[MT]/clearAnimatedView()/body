@@ -1,6 +1,10 @@
 {
+  if (mDropAnim != null) {
+    mDropAnim.cancel();
+  }
+  if (mDropView != null) {
+    mDropView.remove();
+  }
   mDropView=null;
-  mDropViewScaleX=1;
-  mDropViewScaleY=1;
   invalidate();
 }

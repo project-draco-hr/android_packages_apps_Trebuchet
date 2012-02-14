@@ -1,0 +1,4 @@
+{
+  mOffsetX=mOffsetY=0;
+  requestLayout();
+}
