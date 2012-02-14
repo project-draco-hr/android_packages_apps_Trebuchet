@@ -1,5 +1,0 @@
-{
-  if (v instanceof LauncherTransitionable) {
-    ((LauncherTransitionable)v).onLauncherTransitionStart(this,animated,toWorkspace);
-  }
-}

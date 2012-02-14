@@ -1,2 +1,160 @@
 {
+  if (mState == state) {
+    return null;
+  }
+  initAnimationArrays();
+  AnimatorSet anim=animated ? new AnimatorSet() : null;
+  setCurrentPage((mNextPage != INVALID_PAGE) ? mNextPage : mCurrentPage);
+  final State oldState=mState;
+  final boolean oldStateIsNormal=(oldState == State.NORMAL);
+  final boolean oldStateIsSmall=(oldState == State.SMALL);
+  mState=state;
+  final boolean stateIsNormal=(state == State.NORMAL);
+  final boolean stateIsSpringLoaded=(state == State.SPRING_LOADED);
+  final boolean stateIsSmall=(state == State.SMALL);
+  float finalScaleFactor=1.0f;
+  float finalBackgroundAlpha=stateIsSpringLoaded ? 1.0f : 0f;
+  float translationX=0;
+  float translationY=0;
+  boolean zoomIn=true;
+  if (state != State.NORMAL) {
+    finalScaleFactor=mSpringLoadedShrinkFactor - (stateIsSmall ? 0.1f : 0);
+    if (oldStateIsNormal && stateIsSmall) {
+      zoomIn=false;
+      setLayoutScale(finalScaleFactor);
+      updateChildrenLayersEnabled();
+    }
+ else {
+      finalBackgroundAlpha=1.0f;
+      setLayoutScale(finalScaleFactor);
+    }
+  }
+ else {
+    setLayoutScale(1.0f);
+  }
+  final int duration=zoomIn ? getResources().getInteger(R.integer.config_workspaceUnshrinkTime) : getResources().getInteger(R.integer.config_appsCustomizeWorkspaceShrinkTime);
+  for (int i=0; i < getChildCount(); i++) {
+    final CellLayout cl=(CellLayout)getChildAt(i);
+    float rotation=0f;
+    float initialAlpha=cl.getAlpha();
+    float finalAlphaMultiplierValue=1f;
+    float finalAlpha=(!mFadeInAdjacentScreens || stateIsSpringLoaded || (i == mCurrentPage)) ? 1f : 0f;
+    if ((oldStateIsSmall && stateIsNormal) || (oldStateIsNormal && stateIsSmall)) {
+      if (i == mCurrentPage || !animated) {
+        finalAlpha=1f;
+        finalAlphaMultiplierValue=0f;
+      }
+ else {
+        initialAlpha=0f;
+        finalAlpha=0f;
+      }
+    }
+    if (LauncherApplication.isScreenLarge()) {
+      if (i < mCurrentPage) {
+        rotation=WORKSPACE_ROTATION;
+      }
+ else       if (i > mCurrentPage) {
+        rotation=-WORKSPACE_ROTATION;
+      }
+    }
+    if (LauncherApplication.isScreenLarge()) {
+      translationX=getOffsetXForRotation(rotation,cl.getWidth(),cl.getHeight());
+    }
+    mOldAlphas[i]=initialAlpha;
+    mNewAlphas[i]=finalAlpha;
+    if (animated) {
+      mOldTranslationXs[i]=cl.getTranslationX();
+      mOldTranslationYs[i]=cl.getTranslationY();
+      mOldScaleXs[i]=cl.getScaleX();
+      mOldScaleYs[i]=cl.getScaleY();
+      mOldBackgroundAlphas[i]=cl.getBackgroundAlpha();
+      mOldBackgroundAlphaMultipliers[i]=cl.getBackgroundAlphaMultiplier();
+      mOldRotationYs[i]=cl.getRotationY();
+      mNewTranslationXs[i]=translationX;
+      mNewTranslationYs[i]=translationY;
+      mNewScaleXs[i]=finalScaleFactor;
+      mNewScaleYs[i]=finalScaleFactor;
+      mNewBackgroundAlphas[i]=finalBackgroundAlpha;
+      mNewBackgroundAlphaMultipliers[i]=finalAlphaMultiplierValue;
+      mNewRotationYs[i]=rotation;
+    }
+ else {
+      cl.setTranslationX(translationX);
+      cl.setTranslationY(translationY);
+      cl.setScaleX(finalScaleFactor);
+      cl.setScaleY(finalScaleFactor);
+      cl.setBackgroundAlpha(finalBackgroundAlpha);
+      cl.setBackgroundAlphaMultiplier(finalAlphaMultiplierValue);
+      cl.setAlpha(finalAlpha);
+      cl.setRotationY(rotation);
+      mChangeStateAnimationListener.onAnimationEnd(null);
+    }
+  }
+  if (animated) {
+    anim.addListener(new AnimatorListenerAdapter(){
+      @Override public void onAnimationEnd(      android.animation.Animator animation){
+        if (!mFadeInAdjacentScreens) {
+          for (int i=0; i < getChildCount(); i++) {
+            final CellLayout cl=(CellLayout)getChildAt(i);
+            cl.setAlpha(1f);
+          }
+        }
+      }
+    }
+);
+    for (int index=0; index < getChildCount(); index++) {
+      final int i=index;
+      final CellLayout cl=(CellLayout)getChildAt(i);
+      if (mOldAlphas[i] == 0 && mNewAlphas[i] == 0) {
+        cl.setTranslationX(mNewTranslationXs[i]);
+        cl.setTranslationY(mNewTranslationYs[i]);
+        cl.setScaleX(mNewScaleXs[i]);
+        cl.setScaleY(mNewScaleYs[i]);
+        cl.setBackgroundAlpha(mNewBackgroundAlphas[i]);
+        cl.setBackgroundAlphaMultiplier(mNewBackgroundAlphaMultipliers[i]);
+        cl.setAlpha(mNewAlphas[i]);
+        cl.setRotationY(mNewRotationYs[i]);
+      }
+ else {
+        LauncherViewPropertyAnimator a=new LauncherViewPropertyAnimator(cl);
+        a.translationX(mNewTranslationXs[i]).translationY(mNewTranslationYs[i]).scaleX(mNewScaleXs[i]).scaleY(mNewScaleYs[i]).setDuration(duration).setInterpolator(mZoomInInterpolator);
+        if (mOldAlphas[i] != mNewAlphas[i]) {
+          a.alpha(mNewAlphas[i]);
+        }
+        anim.play(a);
+        if (mOldRotationYs[i] != 0 || mNewRotationYs[i] != 0) {
+          ValueAnimator rotate=ValueAnimator.ofFloat(0f,1f).setDuration(duration);
+          rotate.setInterpolator(new DecelerateInterpolator(2.0f));
+          rotate.addUpdateListener(new LauncherAnimatorUpdateListener(){
+            public void onAnimationUpdate(            float a,            float b){
+              cl.setRotationY(a * mOldRotationYs[i] + b * mNewRotationYs[i]);
+            }
+          }
+);
+          anim.play(rotate);
+        }
+        if (mOldBackgroundAlphas[i] != 0 || mNewBackgroundAlphas[i] != 0 || mOldBackgroundAlphaMultipliers[i] != 0 || mNewBackgroundAlphaMultipliers[i] != 0) {
+          ValueAnimator bgAnim=ValueAnimator.ofFloat(0f,1f).setDuration(duration);
+          bgAnim.setInterpolator(mZoomInInterpolator);
+          bgAnim.addUpdateListener(new LauncherAnimatorUpdateListener(){
+            public void onAnimationUpdate(            float a,            float b){
+              cl.setBackgroundAlpha(a * mOldBackgroundAlphas[i] + b * mNewBackgroundAlphas[i]);
+              cl.setBackgroundAlphaMultiplier(a * mOldBackgroundAlphaMultipliers[i] + b * mNewBackgroundAlphaMultipliers[i]);
+            }
+          }
+);
+          anim.play(bgAnim);
+        }
+      }
+    }
+    anim.setStartDelay(delay);
+    anim.addListener(mChangeStateAnimationListener);
+  }
+  if (stateIsSpringLoaded) {
+    animateBackgroundGradient(getResources().getInteger(R.integer.config_appsCustomizeSpringLoadedBgAlpha) / 100f,false);
+  }
+ else {
+    animateBackgroundGradient(0f,true);
+  }
+  return anim;
 }
