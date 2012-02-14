@@ -1,0 +1,8 @@
+Context context
+Intent data
+ArrayList<ItemInfo> items
+String name
+Intent intent
+int screen
+boolean shortcutExists
+String[] errorMsgs

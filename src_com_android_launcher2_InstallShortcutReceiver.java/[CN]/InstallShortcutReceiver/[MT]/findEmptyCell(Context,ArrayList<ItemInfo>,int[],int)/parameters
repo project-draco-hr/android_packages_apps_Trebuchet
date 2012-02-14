@@ -1,3 +1,4 @@
 Context context
+ArrayList<ItemInfo> items
 int[] xy
 int screen
