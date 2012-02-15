@@ -11,6 +11,7 @@
     AppWidgetHostView widget=info.boundWidget;
     int widgetId=widget.getAppWidgetId();
     mLauncher.getAppWidgetHost().deleteAppWidgetId(widgetId);
+    mLauncher.getDragLayer().removeView(widget);
   }
   mWidgetCleanupState=WIDGET_NO_CLEANUP_REQUIRED;
   mWidgetLoadingId=-1;
