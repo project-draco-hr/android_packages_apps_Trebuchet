@@ -17,6 +17,8 @@
       AppWidgetHostView hostView=mLauncher.getAppWidgetHost().createView(mContext,mWidgetLoadingId,pInfo);
       info.boundWidget=hostView;
       mWidgetCleanupState=WIDGET_INFLATED;
+      hostView.setVisibility(INVISIBLE);
+      mLauncher.getDragLayer().addView(hostView);
     }
   }
 ;
