@@ -1,0 +1,21 @@
+{
+  ViewGroup parent=(ViewGroup)getParent();
+  final int count=parent.getChildCount();
+  if (!isChildrenDrawingOrderEnabled()) {
+    for (int i=0; i < count; i++) {
+      final View child=parent.getChildAt(i);
+      if (child == this) {
+        break;
+      }
+ else {
+        if (child.getVisibility() == GONE) {
+          continue;
+        }
+        child.setVisibility(visibility);
+      }
+    }
+  }
+ else {
+    throw new RuntimeException("Failed; can't get z-order of views");
+  }
+}
