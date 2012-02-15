@@ -1,6 +1,5 @@
 {
-  if (mInScrollArea)   return;
-  if (mIsSwitchingState)   return;
+  if (mInScrollArea || mIsSwitchingState || mState == State.SMALL)   return;
   Rect r=new Rect();
   CellLayout layout=null;
   ItemInfo item=(ItemInfo)d.dragInfo;
