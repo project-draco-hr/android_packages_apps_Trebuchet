@@ -1,6 +1,9 @@
 {
+  mShouldShowScrollIndicator=true;
+  mShouldShowScrollIndicatorImmediately=true;
   if (getChildCount() <= 1)   return;
   if (!isScrollingIndicatorEnabled())   return;
+  mShouldShowScrollIndicator=false;
   getScrollingIndicator();
   if (mScrollIndicator != null) {
     updateScrollingIndicatorPosition();

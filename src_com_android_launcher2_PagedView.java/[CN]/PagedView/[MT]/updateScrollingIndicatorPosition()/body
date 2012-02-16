@@ -21,5 +21,4 @@
     indicatorPos+=indicatorCenterOffset;
   }
   mScrollIndicator.setTranslationX(indicatorPos);
-  mScrollIndicator.invalidate();
 }

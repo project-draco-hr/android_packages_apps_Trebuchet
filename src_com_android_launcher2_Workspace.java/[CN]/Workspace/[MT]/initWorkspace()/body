@@ -13,17 +13,6 @@
   }
  catch (  Resources.NotFoundException e) {
   }
-  mChangeStateAnimationListener=new AnimatorListenerAdapter(){
-    @Override public void onAnimationStart(    Animator animation){
-      mIsSwitchingState=true;
-    }
-    @Override public void onAnimationEnd(    Animator animation){
-      mIsSwitchingState=false;
-      mWallpaperOffset.setOverrideHorizontalCatchupConstant(false);
-      updateChildrenLayersEnabled();
-    }
-  }
-;
   mWallpaperOffset=new WallpaperOffsetInterpolator();
   Display display=mLauncher.getWindowManager().getDefaultDisplay();
   mDisplayWidth=display.getWidth();

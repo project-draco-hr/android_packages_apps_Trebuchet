@@ -4,11 +4,11 @@
     mStateAnimation=null;
   }
   Resources res=getResources();
-  final Launcher instance=this;
   final int duration=res.getInteger(R.integer.config_appsCustomizeZoomOutTime);
   final int fadeOutDuration=res.getInteger(R.integer.config_appsCustomizeFadeOutTime);
   final float scaleFactor=(float)res.getInteger(R.integer.config_appsCustomizeZoomScaleFactor);
   final View fromView=mAppsCustomizeTabHost;
+  final View toView=mWorkspace;
   Animator workspaceAnim=null;
   if (toState == State.WORKSPACE) {
     int stagger=res.getInteger(R.integer.config_appsCustomizeWorkspaceAnimationStagger);
@@ -27,16 +27,15 @@
     scaleAnim.scaleX(scaleFactor).scaleY(scaleFactor).setDuration(duration).setInterpolator(new Workspace.ZoomInInterpolator());
     final ObjectAnimator alphaAnim=ObjectAnimator.ofFloat(fromView,"alpha",1f,0f).setDuration(fadeOutDuration);
     alphaAnim.setInterpolator(new AccelerateDecelerateInterpolator());
-    if (fromView instanceof LauncherTransitionable) {
-      ((LauncherTransitionable)fromView).onLauncherTransitionStart(instance,alphaAnim,true);
-    }
-    alphaAnim.addListener(new AnimatorListenerAdapter(){
+    mStateAnimation=new AnimatorSet();
+    dispatchOnLauncherTransitionStart(fromView,animated,true);
+    dispatchOnLauncherTransitionStart(toView,animated,true);
+    mStateAnimation.addListener(new AnimatorListenerAdapter(){
       @Override public void onAnimationEnd(      Animator animation){
         updateWallpaperVisibility(true);
         fromView.setVisibility(View.GONE);
-        if (fromView instanceof LauncherTransitionable) {
-          ((LauncherTransitionable)fromView).onLauncherTransitionEnd(instance,alphaAnim,true);
-        }
+        dispatchOnLauncherTransitionEnd(fromView,animated,true);
+        dispatchOnLauncherTransitionEnd(toView,animated,true);
         mWorkspace.hideScrollingIndicator(false);
         if (onCompleteRunnable != null) {
           onCompleteRunnable.run();
@@ -44,7 +43,6 @@
       }
     }
 );
-    mStateAnimation=new AnimatorSet();
     mStateAnimation.playTogether(scaleAnim,alphaAnim);
     if (workspaceAnim != null) {
       mStateAnimation.play(workspaceAnim);
@@ -53,10 +51,10 @@
   }
  else {
     fromView.setVisibility(View.GONE);
-    if (fromView instanceof LauncherTransitionable) {
-      ((LauncherTransitionable)fromView).onLauncherTransitionStart(instance,null,true);
-      ((LauncherTransitionable)fromView).onLauncherTransitionEnd(instance,null,true);
-    }
+    dispatchOnLauncherTransitionStart(fromView,animated,true);
+    dispatchOnLauncherTransitionEnd(fromView,animated,true);
+    dispatchOnLauncherTransitionStart(toView,animated,true);
+    dispatchOnLauncherTransitionEnd(toView,animated,true);
     mWorkspace.hideScrollingIndicator(false);
   }
 }
