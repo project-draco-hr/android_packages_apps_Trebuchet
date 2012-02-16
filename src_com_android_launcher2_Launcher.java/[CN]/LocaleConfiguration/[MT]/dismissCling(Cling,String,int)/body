@@ -6,10 +6,14 @@
       public void onAnimationEnd(      Animator animation){
         cling.setVisibility(View.GONE);
         cling.cleanup();
-        SharedPreferences prefs=getSharedPreferences("com.android.launcher2.prefs",Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor=prefs.edit();
-        editor.putBoolean(flag,true);
-        editor.commit();
+        new Thread("dismissClingThread"){
+          public void run(){
+            SharedPreferences.Editor editor=mSharedPrefs.edit();
+            editor.putBoolean(flag,true);
+            editor.commit();
+          }
+        }
+.start();
       }
     }
 );

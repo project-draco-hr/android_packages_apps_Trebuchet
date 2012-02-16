@@ -1,6 +1,7 @@
 {
   super.onCreate(savedInstanceState);
   LauncherApplication app=((LauncherApplication)getApplication());
+  mSharedPrefs=getSharedPreferences(PREFS_KEY,Context.MODE_PRIVATE);
   mModel=app.setLauncher(this);
   mIconCache=app.getIconCache();
   mDragController=new DragController(this);

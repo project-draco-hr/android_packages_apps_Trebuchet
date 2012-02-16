@@ -1,11 +1,9 @@
 {
-  SharedPreferences prefs=getSharedPreferences(PREFS_KEY,Context.MODE_PRIVATE);
-  Cling cling=null;
-  if (isClingsEnabled() && !prefs.getBoolean(Cling.FOLDER_CLING_DISMISSED_KEY,false)) {
-    cling=initCling(R.id.folder_cling,null,true,0);
+  if (isClingsEnabled() && !mSharedPrefs.getBoolean(Cling.FOLDER_CLING_DISMISSED_KEY,false)) {
+    return initCling(R.id.folder_cling,null,true,0);
   }
  else {
     removeCling(R.id.folder_cling);
+    return null;
   }
-  return cling;
 }
