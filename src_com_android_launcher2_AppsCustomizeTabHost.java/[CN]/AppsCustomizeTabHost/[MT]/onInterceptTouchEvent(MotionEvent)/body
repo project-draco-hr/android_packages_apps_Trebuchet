@@ -1,0 +1,6 @@
+{
+  if (mInTransition) {
+    return true;
+  }
+  return super.onInterceptTouchEvent(ev);
+}

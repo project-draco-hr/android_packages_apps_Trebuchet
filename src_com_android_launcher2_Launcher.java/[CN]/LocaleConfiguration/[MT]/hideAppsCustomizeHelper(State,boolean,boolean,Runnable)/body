@@ -27,6 +27,14 @@
     scaleAnim.scaleX(scaleFactor).scaleY(scaleFactor).setDuration(duration).setInterpolator(new Workspace.ZoomInInterpolator());
     final ObjectAnimator alphaAnim=ObjectAnimator.ofFloat(fromView,"alpha",1f,0f).setDuration(fadeOutDuration);
     alphaAnim.setInterpolator(new AccelerateDecelerateInterpolator());
+    alphaAnim.addUpdateListener(new AnimatorUpdateListener(){
+      @Override public void onAnimationUpdate(      ValueAnimator animation){
+        float t=1f - (Float)animation.getAnimatedValue();
+        dispatchOnLauncherTransitionStep(fromView,t);
+        dispatchOnLauncherTransitionStep(toView,t);
+      }
+    }
+);
     mStateAnimation=new AnimatorSet();
     dispatchOnLauncherTransitionStart(fromView,animated,true);
     dispatchOnLauncherTransitionStart(toView,animated,true);

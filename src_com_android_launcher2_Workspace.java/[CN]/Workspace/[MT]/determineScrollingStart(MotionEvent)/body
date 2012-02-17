@@ -1,23 +1,23 @@
 {
-  if (!isSmall() && !mIsSwitchingState) {
-    float deltaX=Math.abs(ev.getX() - mXDown);
-    float deltaY=Math.abs(ev.getY() - mYDown);
-    if (Float.compare(deltaX,0f) == 0)     return;
-    float slope=deltaY / deltaX;
-    float theta=(float)Math.atan(slope);
-    if (deltaX > mTouchSlop || deltaY > mTouchSlop) {
-      cancelCurrentPageLongPress();
-    }
-    if (theta > MAX_SWIPE_ANGLE) {
-      return;
-    }
- else     if (theta > START_DAMPING_TOUCH_SLOP_ANGLE) {
-      theta-=START_DAMPING_TOUCH_SLOP_ANGLE;
-      float extraRatio=(float)Math.sqrt((theta / (MAX_SWIPE_ANGLE - START_DAMPING_TOUCH_SLOP_ANGLE)));
-      super.determineScrollingStart(ev,1 + TOUCH_SLOP_DAMPING_FACTOR * extraRatio);
-    }
+  if (isSmall())   return;
+  if (!isFinishedSwitchingState())   return;
+  float deltaX=Math.abs(ev.getX() - mXDown);
+  float deltaY=Math.abs(ev.getY() - mYDown);
+  if (Float.compare(deltaX,0f) == 0)   return;
+  float slope=deltaY / deltaX;
+  float theta=(float)Math.atan(slope);
+  if (deltaX > mTouchSlop || deltaY > mTouchSlop) {
+    cancelCurrentPageLongPress();
+  }
+  if (theta > MAX_SWIPE_ANGLE) {
+    return;
+  }
+ else   if (theta > START_DAMPING_TOUCH_SLOP_ANGLE) {
+    theta-=START_DAMPING_TOUCH_SLOP_ANGLE;
+    float extraRatio=(float)Math.sqrt((theta / (MAX_SWIPE_ANGLE - START_DAMPING_TOUCH_SLOP_ANGLE)));
+    super.determineScrollingStart(ev,1 + TOUCH_SLOP_DAMPING_FACTOR * extraRatio);
+  }
  else {
-      super.determineScrollingStart(ev);
-    }
+    super.determineScrollingStart(ev);
   }
 }

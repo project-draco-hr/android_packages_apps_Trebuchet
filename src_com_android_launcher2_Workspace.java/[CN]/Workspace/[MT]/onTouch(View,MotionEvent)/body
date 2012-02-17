@@ -1,3 +1,3 @@
 {
-  return (isSmall() || mIsSwitchingState);
+  return (isSmall() || !isFinishedSwitchingState());
 }
