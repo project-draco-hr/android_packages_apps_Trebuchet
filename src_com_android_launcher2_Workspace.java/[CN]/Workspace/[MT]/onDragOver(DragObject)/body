@@ -91,7 +91,13 @@
     }
     mLastDragOverView=dragOverView;
     if (!mCreateUserFolderOnDrop && !isOverFolder) {
-      mDragTargetLayout.visualizeDropLocation(child,mDragOutline,(int)mDragViewVisualCenter[0],(int)mDragViewVisualCenter[1],item.spanX,item.spanY,d.dragView.getDragVisualizeOffset(),d.dragView.getDragRegion());
+      int minSpanX=item.spanX;
+      int minSpanY=item.spanY;
+      if (item.minSpanX > 0 && item.minSpanY > 0) {
+        minSpanX=item.minSpanX;
+        minSpanY=item.minSpanY;
+      }
+      mDragTargetLayout.visualizeDropLocation(child,mDragOutline,(int)mDragViewVisualCenter[0],(int)mDragViewVisualCenter[1],minSpanX,minSpanY,item.spanX,item.spanY,d.dragView.getDragVisualizeOffset(),d.dragView.getDragRegion());
     }
   }
 }

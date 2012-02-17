@@ -1,0 +1,7 @@
+ItemInfo info
+CellLayout cellLayout
+DragView dragView
+Runnable onCompleteRunnable
+int animationType
+View finalView
+boolean external

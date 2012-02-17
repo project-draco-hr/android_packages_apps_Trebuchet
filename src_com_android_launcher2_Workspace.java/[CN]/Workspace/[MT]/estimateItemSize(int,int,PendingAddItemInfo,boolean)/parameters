@@ -1,4 +1,0 @@
-int hSpan
-int vSpan
-PendingAddItemInfo pendingItemInfo
-boolean springLoaded

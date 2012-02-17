@@ -3,21 +3,27 @@
     appWidgetInfo=mAppWidgetManager.getAppWidgetInfo(appWidgetId);
   }
   CellLayout layout=getCellLayout(container,screen);
+  int[] minSpanXY=getMinSpanForWidget(appWidgetInfo,null);
   int[] spanXY=getSpanForWidget(appWidgetInfo,null);
   int[] cellXY=mTmpAddItemCellCoordinates;
   int[] touchXY=mPendingAddInfo.dropPos;
+  int[] finalSpan=new int[2];
   boolean foundCellSpan=false;
   if (mPendingAddInfo.cellX >= 0 && mPendingAddInfo.cellY >= 0) {
     cellXY[0]=mPendingAddInfo.cellX;
     cellXY[1]=mPendingAddInfo.cellY;
+    spanXY[0]=mPendingAddInfo.spanX;
+    spanXY[1]=mPendingAddInfo.spanY;
     foundCellSpan=true;
   }
  else   if (touchXY != null) {
-    int[] result=layout.findNearestVacantArea(touchXY[0],touchXY[1],spanXY[0],spanXY[1],cellXY);
+    int[] result=layout.findNearestVacantArea(touchXY[0],touchXY[1],minSpanXY[0],minSpanXY[1],spanXY[0],spanXY[1],cellXY,finalSpan);
+    spanXY[0]=finalSpan[0];
+    spanXY[1]=finalSpan[1];
     foundCellSpan=(result != null);
   }
  else {
-    foundCellSpan=layout.findCellForSpan(cellXY,spanXY[0],spanXY[1]);
+    foundCellSpan=layout.findCellForSpan(cellXY,minSpanXY[0],minSpanXY[1]);
   }
   if (!foundCellSpan) {
     if (appWidgetId != -1) {
@@ -34,6 +40,8 @@
   LauncherAppWidgetInfo launcherInfo=new LauncherAppWidgetInfo(appWidgetId);
   launcherInfo.spanX=spanXY[0];
   launcherInfo.spanY=spanXY[1];
+  launcherInfo.minSpanX=mPendingAddInfo.minSpanX;
+  launcherInfo.minSpanY=mPendingAddInfo.minSpanY;
   LauncherModel.addItemToDatabase(this,launcherInfo,container,screen,cellXY[0],cellXY[1],false);
   if (!mRestoring) {
     if (hostView == null) {
@@ -44,6 +52,7 @@
       launcherInfo.hostView=hostView;
     }
     launcherInfo.hostView.setTag(launcherInfo);
+    launcherInfo.hostView.setVisibility(View.VISIBLE);
     mWorkspace.addInScreen(launcherInfo.hostView,container,screen,cellXY[0],cellXY[1],launcherInfo.spanX,launcherInfo.spanY,isWorkspaceLocked());
     addWidgetToAutoAdvanceIfNeeded(launcherInfo.hostView,appWidgetInfo);
   }

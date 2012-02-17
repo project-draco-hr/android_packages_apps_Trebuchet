@@ -1,5 +1,0 @@
-PendingAddItemInfo pendingInfo
-CellLayout cellLayout
-DragView dragView
-Runnable onCompleteRunnable
-int animationType

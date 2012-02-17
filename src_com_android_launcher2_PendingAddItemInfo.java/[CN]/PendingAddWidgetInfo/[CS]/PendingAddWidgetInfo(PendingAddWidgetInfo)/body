@@ -1,6 +1,8 @@
 {
   minWidth=copy.minWidth;
   minHeight=copy.minHeight;
+  minResizeWidth=copy.minResizeWidth;
+  minResizeHeight=copy.minResizeHeight;
   previewImage=copy.previewImage;
   icon=copy.icon;
   info=copy.info;

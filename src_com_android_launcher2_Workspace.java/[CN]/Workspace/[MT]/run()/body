@@ -1,4 +1,7 @@
 {
   mAnimatingViewIntoPlace=false;
   updateChildrenLayersEnabled();
+  if (finalResizeRunnable != null) {
+    finalResizeRunnable.run();
+  }
 }

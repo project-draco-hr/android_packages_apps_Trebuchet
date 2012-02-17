@@ -4,11 +4,10 @@
     return;
   }
   mDragInfo=cellInfo;
-  child.setVisibility(GONE);
+  child.setVisibility(INVISIBLE);
   child.clearFocus();
   child.setPressed(false);
   final Canvas canvas=new Canvas();
-  final int bitmapPadding=HolographicOutlineHelper.MAX_OUTER_BLUR_RADIUS;
-  mDragOutline=createDragOutline(child,canvas,bitmapPadding);
+  mDragOutline=createDragOutline(child,canvas,DRAG_BITMAP_PADDING);
   beginDragShared(child,this);
 }

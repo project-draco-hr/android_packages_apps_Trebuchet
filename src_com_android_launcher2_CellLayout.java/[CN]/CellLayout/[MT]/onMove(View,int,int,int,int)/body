@@ -1,0 +1,5 @@
+{
+  LayoutParams lp=(LayoutParams)view.getLayoutParams();
+  markCellsAsUnoccupiedForView(view);
+  markCellsForView(newCellX,newCellY,newSpanX,newSpanY,true);
+}

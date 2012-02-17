@@ -41,10 +41,10 @@
   for (int i=0; i < mDragOutlines.length; i++) {
     final float alpha=mDragOutlineAlphas[i];
     if (alpha > 0) {
-      final Point p=mDragOutlines[i];
+      final Rect r=mDragOutlines[i];
       final Bitmap b=(Bitmap)mDragOutlineAnims[i].getTag();
       paint.setAlpha((int)(alpha + .5f));
-      canvas.drawBitmap(b,p.x,p.y,paint);
+      canvas.drawBitmap(b,null,r,paint);
     }
   }
   if (mPressedOrFocusedIcon != null) {

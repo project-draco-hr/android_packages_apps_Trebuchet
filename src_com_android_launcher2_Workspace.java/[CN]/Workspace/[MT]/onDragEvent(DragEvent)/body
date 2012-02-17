@@ -23,15 +23,14 @@ case DragEvent.ACTION_DRAG_STARTED:
         return false;
       }
       final Canvas canvas=new Canvas();
-      final int bitmapPadding=HolographicOutlineHelper.MAX_OUTER_BLUR_RADIUS;
-      mDragOutline=createExternalDragOutline(canvas,bitmapPadding);
+      mDragOutline=createExternalDragOutline(canvas,DRAG_BITMAP_PADDING);
       showOutlines();
       layout.onDragEnter();
-      layout.visualizeDropLocation(null,mDragOutline,x,y,1,1,null,null);
+      layout.visualizeDropLocation(null,mDragOutline,x,y,1,1,1,1,null,null);
       return true;
     }
 case DragEvent.ACTION_DRAG_LOCATION:
-  layout.visualizeDropLocation(null,mDragOutline,x,y,1,1,null,null);
+  layout.visualizeDropLocation(null,mDragOutline,x,y,1,1,1,1,null,null);
 return true;
 case DragEvent.ACTION_DROP:
 {
@@ -56,7 +55,7 @@ if (test != null) {
     if (widgets.size() == 1) {
       final AppWidgetProviderInfo widgetInfo=widgets.get(0).widgetInfo;
       final PendingAddWidgetInfo createInfo=new PendingAddWidgetInfo(widgetInfo,mimeType,data);
-      mLauncher.addAppWidgetFromDrop(createInfo,LauncherSettings.Favorites.CONTAINER_DESKTOP,mCurrentPage,null,pos);
+      mLauncher.addAppWidgetFromDrop(createInfo,LauncherSettings.Favorites.CONTAINER_DESKTOP,mCurrentPage,null,null,pos);
     }
  else {
       final InstallWidgetReceiver.WidgetListAdapter adapter=new InstallWidgetReceiver.WidgetListAdapter(mLauncher,mimeType,data,widgets,layout,mCurrentPage,pos);
