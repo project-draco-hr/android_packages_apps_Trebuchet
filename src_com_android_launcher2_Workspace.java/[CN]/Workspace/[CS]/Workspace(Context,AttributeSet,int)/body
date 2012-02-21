@@ -2,12 +2,14 @@
   super(context,attrs,defStyle);
   mContentIsRefreshable=false;
   setDataIsReady();
-  mFadeInAdjacentScreens=getResources().getBoolean(R.bool.config_workspaceFadeAdjacentScreens);
+  final Resources res=getResources();
+  mFadeInAdjacentScreens=res.getBoolean(R.bool.config_workspaceFadeAdjacentScreens);
+  mDragFadeOutAlpha=res.getInteger(R.integer.config_dragFadeOutAlpha) / 100f;
+  mDragFadeOutDuration=res.getInteger(R.integer.config_dragFadeOutDuration);
   mWallpaperManager=WallpaperManager.getInstance(context);
   int cellCountX=DEFAULT_CELL_COUNT_X;
   int cellCountY=DEFAULT_CELL_COUNT_Y;
   TypedArray a=context.obtainStyledAttributes(attrs,R.styleable.Workspace,defStyle,0);
-  final Resources res=context.getResources();
   if (LauncherApplication.isScreenLarge()) {
     TypedArray actionBarSizeTypedArray=context.obtainStyledAttributes(new int[]{android.R.attr.actionBarSize});
     DisplayMetrics displayMetrics=res.getDisplayMetrics();
