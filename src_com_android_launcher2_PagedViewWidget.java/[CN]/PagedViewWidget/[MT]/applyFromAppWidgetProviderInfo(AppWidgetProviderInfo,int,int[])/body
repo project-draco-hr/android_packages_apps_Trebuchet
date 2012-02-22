@@ -4,7 +4,6 @@
     image.setMaxWidth(maxWidth);
   }
   image.setContentDescription(info.label);
-  mPreviewImageView=image;
   final TextView name=(TextView)findViewById(R.id.widget_name);
   name.setText(info.label);
   final TextView dims=(TextView)findViewById(R.id.widget_dims);

@@ -4,3 +4,6 @@ int dragLayerY
 DragSource source
 Object dragInfo
 int dragAction
+Point dragOffset
+Rect dragRegion
+float initialDragViewScale

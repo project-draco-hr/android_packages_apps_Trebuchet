@@ -4,6 +4,7 @@
   PendingAddItemInfo createItemInfo=(PendingAddItemInfo)v.getTag();
   Bitmap preview;
   Bitmap outline;
+  float scale=1f;
   if (createItemInfo instanceof PendingAddWidgetInfo) {
     PendingAddWidgetInfo createWidgetInfo=mCreateWidgetInfo;
     createItemInfo=createWidgetInfo;
@@ -11,7 +12,17 @@
     int[] size=mLauncher.getWorkspace().estimateItemSize(spanXY[0],spanXY[1],createWidgetInfo,true);
     createItemInfo.spanX=spanXY[0];
     createItemInfo.spanY=spanXY[1];
-    preview=getWidgetPreview(createWidgetInfo.componentName,createWidgetInfo.previewImage,createWidgetInfo.icon,spanXY[0],spanXY[1],size[0],size[1]);
+    FastBitmapDrawable previewDrawable=(FastBitmapDrawable)image.getDrawable();
+    float minScale=1.25f;
+    int minWidth, minHeight;
+    minWidth=Math.max((int)(previewDrawable.getIntrinsicWidth() * minScale),size[0]);
+    minHeight=Math.max((int)(previewDrawable.getIntrinsicHeight() * minScale),size[1]);
+    preview=getWidgetPreview(createWidgetInfo.componentName,createWidgetInfo.previewImage,createWidgetInfo.icon,spanXY[0],spanXY[1],minWidth,minHeight);
+    float[] mv=new float[9];
+    Matrix m=new Matrix();
+    m.setRectToRect(new RectF(0f,0f,(float)preview.getWidth(),(float)preview.getHeight()),new RectF(0f,0f,(float)previewDrawable.getIntrinsicWidth(),(float)previewDrawable.getIntrinsicHeight()),Matrix.ScaleToFit.START);
+    m.getValues(mv);
+    scale=(float)mv[0];
   }
  else {
     preview=Bitmap.createBitmap(mWidgetPreviewIconPaddedDimension,mWidgetPreviewIconPaddedDimension,Bitmap.Config.ARGB_8888);
@@ -33,7 +44,7 @@
   alphaClipPaint=null;
   mLauncher.lockScreenOrientationOnLargeUI();
   mLauncher.getWorkspace().onDragStartedWithItem(createItemInfo,outline,alphaClipPaint);
-  mDragController.startDrag(image,preview,this,createItemInfo,DragController.DRAG_ACTION_COPY,null);
+  mDragController.startDrag(image,preview,this,createItemInfo,DragController.DRAG_ACTION_COPY,null,scale);
   outline.recycle();
   preview.recycle();
 }

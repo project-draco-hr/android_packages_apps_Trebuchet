@@ -1,3 +1,0 @@
-{
-  startDrag(b,dragLayerX,dragLayerY,source,dragInfo,dragAction,null,null);
-}

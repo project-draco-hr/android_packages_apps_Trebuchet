@@ -27,7 +27,7 @@
     BubbleTextView icon=(BubbleTextView)child;
     icon.clearPressedOrFocusedBackground();
   }
-  mDragController.startDrag(b,dragLayerX,dragLayerY,source,child.getTag(),DragController.DRAG_ACTION_MOVE,dragVisualizeOffset,dragRect);
+  mDragController.startDrag(b,dragLayerX,dragLayerY,source,child.getTag(),DragController.DRAG_ACTION_MOVE,dragVisualizeOffset,dragRect,1f);
   b.recycle();
   showScrollingIndicator(false);
 }

@@ -7,7 +7,7 @@
   mLauncher.getDragLayer().getLocationInDragLayer(v,loc);
   int dragLayerX=loc[0];
   int dragLayerY=loc[1];
-  startDrag(b,dragLayerX,dragLayerY,source,dragInfo,dragAction,null,dragRegion);
+  startDrag(b,dragLayerX,dragLayerY,source,dragInfo,dragAction,null,dragRegion,1f);
   b.recycle();
   if (dragAction == DRAG_ACTION_MOVE) {
     v.setVisibility(View.GONE);

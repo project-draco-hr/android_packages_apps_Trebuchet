@@ -1,8 +1,7 @@
-Bitmap b
-int dragLayerX
-int dragLayerY
+View v
+Bitmap bmp
 DragSource source
 Object dragInfo
 int dragAction
-Point dragOffset
 Rect dragRegion
+float initialDragViewScale

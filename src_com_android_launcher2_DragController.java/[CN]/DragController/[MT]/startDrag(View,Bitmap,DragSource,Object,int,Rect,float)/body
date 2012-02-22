@@ -1,0 +1,10 @@
+{
+  int[] loc=mCoordinatesTemp;
+  mLauncher.getDragLayer().getLocationInDragLayer(v,loc);
+  int dragLayerX=loc[0] + v.getPaddingLeft() + (int)((initialDragViewScale * bmp.getWidth() - bmp.getWidth()) / 2);
+  int dragLayerY=loc[1] + v.getPaddingTop() + (int)((initialDragViewScale * bmp.getHeight() - bmp.getHeight()) / 2);
+  startDrag(bmp,dragLayerX,dragLayerY,source,dragInfo,dragAction,null,dragRegion,initialDragViewScale);
+  if (dragAction == DRAG_ACTION_MOVE) {
+    v.setVisibility(View.GONE);
+  }
+}

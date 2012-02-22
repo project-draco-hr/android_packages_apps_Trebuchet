@@ -15,8 +15,6 @@
   if (widgetPreviewExists) {
     bitmapWidth=drawable.getIntrinsicWidth();
     bitmapHeight=drawable.getIntrinsicHeight();
-    maxWidth=Math.min(maxWidth,mWidgetSpacingLayout.estimateCellWidth(cellHSpan));
-    maxHeight=Math.min(maxHeight,mWidgetSpacingLayout.estimateCellHeight(cellVSpan));
   }
  else {
     bitmapWidth=mWidgetSpacingLayout.estimateCellWidth(cellHSpan);

@@ -21,7 +21,7 @@
   mDragObject.dragSource=source;
   mDragObject.dragInfo=dragInfo;
   mVibrator.vibrate(VIBRATE_DURATION);
-  final DragView dragView=mDragObject.dragView=new DragView(mLauncher,b,registrationX,registrationY,0,0,b.getWidth(),b.getHeight());
+  final DragView dragView=mDragObject.dragView=new DragView(mLauncher,b,registrationX,registrationY,0,0,b.getWidth(),b.getHeight(),initialDragViewScale);
   if (dragOffset != null) {
     dragView.setDragVisualizeOffset(new Point(dragOffset));
   }

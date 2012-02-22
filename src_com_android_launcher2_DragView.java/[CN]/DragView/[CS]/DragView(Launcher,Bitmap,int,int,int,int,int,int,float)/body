@@ -16,8 +16,8 @@
       final int deltaY=(int)((value * offsetY) - mOffsetY);
       mOffsetX+=deltaX;
       mOffsetY+=deltaY;
-      setScaleX(1f + (value * (scale - 1f)));
-      setScaleY(1f + (value * (scale - 1f)));
+      setScaleX(initialScale + (value * (scale - initialScale)));
+      setScaleY(initialScale + (value * (scale - initialScale)));
       if (sDragAlpha != 1f) {
         setAlpha(sDragAlpha * value + (1f - value));
       }
