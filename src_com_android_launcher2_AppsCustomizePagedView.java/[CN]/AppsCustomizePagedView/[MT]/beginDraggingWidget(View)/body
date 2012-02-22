@@ -1,6 +1,5 @@
 {
-  mWidgetCleanupState=WIDGET_NO_CLEANUP_REQUIRED;
-  mWidgetLoadingId=-1;
+  mDraggingWidget=true;
   ImageView image=(ImageView)v.findViewById(R.id.widget_preview);
   PendingAddItemInfo createItemInfo=(PendingAddItemInfo)v.getTag();
   Bitmap preview;
@@ -8,7 +7,6 @@
   if (createItemInfo instanceof PendingAddWidgetInfo) {
     PendingAddWidgetInfo createWidgetInfo=mCreateWidgetInfo;
     createItemInfo=createWidgetInfo;
-    mCreateWidgetInfo=null;
     int[] spanXY=mLauncher.getSpanForWidget(createWidgetInfo,null);
     int[] size=mLauncher.getWorkspace().estimateItemSize(spanXY[0],spanXY[1],createWidgetInfo,true);
     createItemInfo.spanX=spanXY[0];
