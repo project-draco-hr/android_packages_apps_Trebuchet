@@ -6,19 +6,15 @@
     if (!mWorkspaceLoading) {
       final ViewTreeObserver observer=mWorkspace.getViewTreeObserver();
       observer.addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener(){
-        boolean mFirstTime=true;
         public boolean onPreDraw(){
-          if (mFirstTime) {
-            mFirstTime=false;
-          }
- else {
-            observer.removeOnPreDrawListener(this);
-          }
+          workspace.postDelayed(mBuildLayersRunnable,500);
+          observer.removeOnPreDrawListener(this);
           return true;
         }
       }
 );
     }
+    updateAppMarketIcon();
     clearTypedText();
   }
 }
