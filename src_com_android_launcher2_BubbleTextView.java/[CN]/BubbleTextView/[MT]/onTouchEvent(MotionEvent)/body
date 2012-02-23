@@ -12,12 +12,14 @@ case MotionEvent.ACTION_DOWN:
  else {
     mDidInvalidateForPressedState=false;
   }
+mLongPressHelper.postCheckForLongPress();
 break;
 case MotionEvent.ACTION_CANCEL:
 case MotionEvent.ACTION_UP:
 if (!isPressed()) {
 mPressedOrFocusedBackground=null;
 }
+mLongPressHelper.cancelLongPress();
 break;
 }
 return result;

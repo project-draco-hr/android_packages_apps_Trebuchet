@@ -1,0 +1,13 @@
+{
+  boolean result=super.onTouchEvent(event);
+switch (event.getAction()) {
+case MotionEvent.ACTION_DOWN:
+    mLongPressHelper.postCheckForLongPress();
+  break;
+case MotionEvent.ACTION_CANCEL:
+case MotionEvent.ACTION_UP:
+mLongPressHelper.cancelLongPress();
+break;
+}
+return result;
+}

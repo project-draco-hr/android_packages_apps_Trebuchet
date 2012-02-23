@@ -1,20 +1,17 @@
 {
-  if (mHasPerformedLongPress) {
-    mHasPerformedLongPress=false;
+  if (mLongPressHelper.hasPerformedLongPress()) {
+    mLongPressHelper.cancelLongPress();
     return true;
   }
 switch (ev.getAction()) {
 case MotionEvent.ACTION_DOWN:
 {
-      postCheckForLongClick();
+      mLongPressHelper.postCheckForLongPress();
       break;
     }
 case MotionEvent.ACTION_UP:
 case MotionEvent.ACTION_CANCEL:
-  mHasPerformedLongPress=false;
-if (mPendingCheckForLongPress != null) {
-  removeCallbacks(mPendingCheckForLongPress);
-}
+  mLongPressHelper.cancelLongPress();
 break;
 }
 return false;

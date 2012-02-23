@@ -1,4 +1,5 @@
 {
   super(context);
+  mLongPressHelper=new CheckLongPressHelper(this);
   mInflater=(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 }

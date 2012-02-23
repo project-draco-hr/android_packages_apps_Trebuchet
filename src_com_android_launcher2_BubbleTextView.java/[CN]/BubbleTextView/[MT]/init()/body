@@ -1,4 +1,5 @@
 {
+  mLongPressHelper=new CheckLongPressHelper(this);
   mBackground=getBackground();
   final Resources res=getContext().getResources();
   int bubbleColor=res.getColor(R.color.bubble_dark_background);
