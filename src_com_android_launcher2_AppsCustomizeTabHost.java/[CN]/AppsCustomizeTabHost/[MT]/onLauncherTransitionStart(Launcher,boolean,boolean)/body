@@ -3,6 +3,7 @@
   mTransitioningToWorkspace=toWorkspace;
   if (toWorkspace) {
     setVisibilityOfSiblingsWithLowerZOrder(VISIBLE);
+    mAppsCustomizePane.cancelScrollingIndicatorAnimations();
   }
  else {
     mContent.setVisibility(VISIBLE);
