@@ -2,7 +2,7 @@
   if (v.getWindowToken() == null) {
     return;
   }
-  if (mWorkspace.isSwitchingState()) {
+  if (!mWorkspace.isFinishedSwitchingState()) {
     return;
   }
   Object tag=v.getTag();

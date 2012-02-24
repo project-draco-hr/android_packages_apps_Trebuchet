@@ -2,5 +2,5 @@
   mIsDragOccuring=true;
   updateChildrenLayersEnabled();
   mLauncher.lockScreenOrientationOnLargeUI();
-  animate().alpha(mDragFadeOutAlpha).setInterpolator(new AccelerateInterpolator()).setDuration(mDragFadeOutDuration).start();
+  animate().alpha(mDragFadeOutAlpha).setInterpolator(new AccelerateInterpolator(1.5f)).setDuration(mDragFadeOutDuration).start();
 }
