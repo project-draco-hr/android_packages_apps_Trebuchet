@@ -16,5 +16,5 @@
   }
   sPendingAddList.clear();
   updateAppMarketIcon();
-  mWorkspace.post(mBuildLayersRunnable);
+  mWorkspace.postDelayed(mBuildLayersRunnable,500);
 }
