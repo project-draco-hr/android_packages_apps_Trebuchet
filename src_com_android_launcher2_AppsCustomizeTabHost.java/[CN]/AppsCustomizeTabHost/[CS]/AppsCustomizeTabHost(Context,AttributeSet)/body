@@ -1,4 +1,11 @@
 {
   super(context,attrs);
   mLayoutInflater=LayoutInflater.from(context);
+  mRelayoutAndMakeVisible=new Runnable(){
+    public void run(){
+      mTabs.requestLayout();
+      mTabsContainer.setAlpha(1f);
+    }
+  }
+;
 }

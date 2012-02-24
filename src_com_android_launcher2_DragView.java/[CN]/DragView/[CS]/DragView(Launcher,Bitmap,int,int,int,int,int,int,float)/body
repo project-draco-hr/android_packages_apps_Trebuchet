@@ -36,4 +36,5 @@
   mRegistrationY=registrationY;
   int ms=View.MeasureSpec.makeMeasureSpec(0,View.MeasureSpec.UNSPECIFIED);
   measure(ms,ms);
+  mPaint=new Paint(Paint.FILTER_BITMAP_FLAG);
 }
