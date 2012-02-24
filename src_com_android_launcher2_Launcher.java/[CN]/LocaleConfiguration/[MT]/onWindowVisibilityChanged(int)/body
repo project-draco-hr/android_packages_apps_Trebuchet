@@ -7,7 +7,7 @@
       final ViewTreeObserver observer=mWorkspace.getViewTreeObserver();
       observer.addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener(){
         public boolean onPreDraw(){
-          workspace.postDelayed(mBuildLayersRunnable,500);
+          mWorkspace.postDelayed(mBuildLayersRunnable,500);
           observer.removeOnPreDrawListener(this);
           return true;
         }
