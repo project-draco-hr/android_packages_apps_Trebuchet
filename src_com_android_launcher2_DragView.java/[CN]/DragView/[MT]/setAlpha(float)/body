@@ -1,7 +1,7 @@
 {
   super.setAlpha(alpha);
   if (mPaint == null) {
-    mPaint=new Paint();
+    mPaint=new Paint(Paint.FILTER_BITMAP_FLAG);
   }
   mPaint.setAlpha((int)(255 * alpha));
   invalidate();

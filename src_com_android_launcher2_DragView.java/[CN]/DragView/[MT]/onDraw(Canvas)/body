@@ -6,7 +6,7 @@
     canvas.drawRect(0,0,getWidth(),getHeight(),p);
   }
   if (mPaint == null) {
-    mPaint=new Paint();
+    mPaint=new Paint(Paint.FILTER_BITMAP_FLAG);
   }
   mHasDrawn=true;
   boolean crossFade=mCrossFadeProgress > 0 && mCrossFadeBitmap != null;
