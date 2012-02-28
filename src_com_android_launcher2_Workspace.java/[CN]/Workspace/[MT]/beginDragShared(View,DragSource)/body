@@ -1,11 +1,10 @@
 {
   Resources r=getResources();
-  final int bitmapPadding=HolographicOutlineHelper.MAX_OUTER_BLUR_RADIUS;
-  final Bitmap b=createDragBitmap(child,new Canvas(),bitmapPadding);
+  final Bitmap b=createDragBitmap(child,new Canvas(),DRAG_BITMAP_PADDING);
   final int bmpWidth=b.getWidth();
   mLauncher.getDragLayer().getLocationInDragLayer(child,mTempXY);
   final int dragLayerX=(int)mTempXY[0] + (child.getWidth() - bmpWidth) / 2;
-  int dragLayerY=mTempXY[1] - bitmapPadding / 2;
+  int dragLayerY=mTempXY[1] - DRAG_BITMAP_PADDING / 2;
   Point dragVisualizeOffset=null;
   Rect dragRect=null;
   if (child instanceof BubbleTextView || child instanceof PagedViewIcon) {
@@ -16,7 +15,7 @@
     int right=left + iconSize;
     int bottom=top + iconSize;
     dragLayerY+=top;
-    dragVisualizeOffset=new Point(-bitmapPadding / 2,iconPaddingTop - bitmapPadding / 2);
+    dragVisualizeOffset=new Point(-DRAG_BITMAP_PADDING / 2,iconPaddingTop - DRAG_BITMAP_PADDING / 2);
     dragRect=new Rect(left,top,right,bottom);
   }
  else   if (child instanceof FolderIcon) {

@@ -1,0 +1,5 @@
+{
+  while (!used.isEmpty()) {
+    mTempRectStack.push(used.pop());
+  }
+}

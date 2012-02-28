@@ -1,0 +1,3 @@
+{
+  return layout.findNearestVacantArea(pixelX,pixelY,minSpanX,minSpanY,spanX,spanY,ignoreView,recycle,returnSpan);
+}

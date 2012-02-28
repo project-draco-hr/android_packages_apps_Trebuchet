@@ -1,0 +1,26 @@
+{
+  resetAddInfo();
+  mPendingAddInfo.container=info.container=container;
+  mPendingAddInfo.screen=info.screen=screen;
+  mPendingAddInfo.dropPos=loc;
+  mPendingAddInfo.minSpanX=info.minSpanX;
+  mPendingAddInfo.minSpanY=info.minSpanY;
+  if (cell != null) {
+    mPendingAddInfo.cellX=cell[0];
+    mPendingAddInfo.cellY=cell[1];
+  }
+  if (span != null) {
+    mPendingAddInfo.spanX=span[0];
+    mPendingAddInfo.spanY=span[1];
+  }
+  AppWidgetHostView hostView=info.boundWidget;
+  int appWidgetId;
+  if (hostView != null) {
+    appWidgetId=hostView.getAppWidgetId();
+  }
+ else {
+    appWidgetId=getAppWidgetHost().allocateAppWidgetId();
+    AppWidgetManager.getInstance(this).bindAppWidgetId(appWidgetId,info.componentName);
+  }
+  addAppWidgetImpl(appWidgetId,info);
+}

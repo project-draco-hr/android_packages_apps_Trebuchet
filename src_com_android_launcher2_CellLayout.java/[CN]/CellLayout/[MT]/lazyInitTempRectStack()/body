@@ -1,0 +1,7 @@
+{
+  if (mTempRectStack.isEmpty()) {
+    for (int i=0; i < mCountX * mCountY; i++) {
+      mTempRectStack.push(new Rect());
+    }
+  }
+}

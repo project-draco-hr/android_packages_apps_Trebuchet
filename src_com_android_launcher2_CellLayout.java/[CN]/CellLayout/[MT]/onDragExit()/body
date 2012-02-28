@@ -5,8 +5,7 @@
       mCrosshairsAnimator.animateOut();
     }
   }
-  mDragCell[0]=-1;
-  mDragCell[1]=-1;
+  mDragCell[0]=mDragCell[1]=-1;
   mDragOutlineAnims[mDragOutlineCurrent].animateOut();
   mDragOutlineCurrent=(mDragOutlineCurrent + 1) % mDragOutlineAnims.length;
   setIsDragOverlapping(false);

@@ -4,6 +4,8 @@
   componentName=i.provider;
   minWidth=i.minWidth;
   minHeight=i.minHeight;
+  minResizeWidth=i.minResizeWidth;
+  minResizeHeight=i.minResizeHeight;
   previewImage=i.previewImage;
   icon=i.icon;
   if (dataMimeType != null && data != null) {

@@ -1,5 +1,4 @@
 {
   final Canvas canvas=new Canvas();
-  final int bitmapPadding=HolographicOutlineHelper.MAX_OUTER_BLUR_RADIUS;
-  mDragOutline=createDragOutline(v,canvas,bitmapPadding);
+  mDragOutline=createDragOutline(v,canvas,DRAG_BITMAP_PADDING);
 }

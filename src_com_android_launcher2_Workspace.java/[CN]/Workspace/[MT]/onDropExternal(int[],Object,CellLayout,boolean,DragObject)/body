@@ -26,26 +26,44 @@
         findNearestVacantCell=false;
       }
     }
+    final ItemInfo item=(ItemInfo)d.dragInfo;
+    int minSpanX=item.spanX;
+    int minSpanY=item.spanY;
+    if (item.minSpanX > 0 && item.minSpanY > 0) {
+      minSpanX=item.minSpanX;
+      minSpanY=item.minSpanY;
+    }
     if (findNearestVacantCell) {
-      mTargetCell=findNearestVacantArea(touchXY[0],touchXY[1],spanX,spanY,null,cellLayout,mTargetCell);
+      int[] resultSpan=new int[2];
+      mTargetCell=findNearestVacantArea(touchXY[0],touchXY[1],minSpanX,minSpanY,spanX,spanY,null,cellLayout,mTargetCell,resultSpan);
+      item.spanX=resultSpan[0];
+      item.spanY=resultSpan[1];
     }
     Runnable onAnimationCompleteRunnable=new Runnable(){
       @Override public void run(){
 switch (pendingInfo.itemType) {
 case LauncherSettings.Favorites.ITEM_TYPE_APPWIDGET:
-          mLauncher.addAppWidgetFromDrop((PendingAddWidgetInfo)pendingInfo,container,screen,mTargetCell,null);
-        break;
+          int span[]=new int[2];
+        span[0]=item.spanX;
+      span[1]=item.spanY;
+    mLauncher.addAppWidgetFromDrop((PendingAddWidgetInfo)pendingInfo,container,screen,mTargetCell,span,null);
+  break;
 case LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT:
-      mLauncher.processShortcutFromDrop(pendingInfo.componentName,container,screen,mTargetCell,null);
-    break;
+mLauncher.processShortcutFromDrop(pendingInfo.componentName,container,screen,mTargetCell,null);
+break;
 default :
-  throw new IllegalStateException("Unknown item type: " + pendingInfo.itemType);
+throw new IllegalStateException("Unknown item type: " + pendingInfo.itemType);
 }
 cellLayout.onDragExit();
 }
 }
 ;
-animateExternalDrop((PendingAddItemInfo)info,cellLayout,d.dragView,onAnimationCompleteRunnable,ANIMATE_INTO_POSITION);
+View finalView=pendingInfo.itemType == LauncherSettings.Favorites.ITEM_TYPE_APPWIDGET ? ((PendingAddWidgetInfo)pendingInfo).boundWidget : null;
+int animationStyle=ANIMATE_INTO_POSITION_AND_DISAPPEAR;
+if (pendingInfo.itemType == LauncherSettings.Favorites.ITEM_TYPE_APPWIDGET && ((PendingAddWidgetInfo)pendingInfo).info.configure != null) {
+animationStyle=ANIMATE_INTO_POSITION_AND_REMAIN;
+}
+animateWidgetDrop(info,cellLayout,d.dragView,onAnimationCompleteRunnable,animationStyle,finalView,true);
 }
  else {
 View view=null;

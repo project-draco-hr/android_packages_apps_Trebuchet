@@ -1,0 +1,4 @@
+int hSpan
+int vSpan
+ItemInfo itemInfo
+boolean springLoaded

@@ -1,0 +1,57 @@
+{
+  final int oldDragCellX=mDragCell[0];
+  final int oldDragCellY=mDragCell[1];
+  int[] resultSpan=new int[2];
+  final int[] nearest=findNearestVacantArea(originX,originY,minSpanX,minSpanY,spanX,spanY,v,mDragCell,resultSpan);
+  boolean resize=spanX > resultSpan[0] || spanY > resultSpan[1];
+  spanX=resultSpan[0];
+  spanY=resultSpan[1];
+  if (v != null && dragOffset == null) {
+    mDragCenter.set(originX + (v.getWidth() / 2),originY + (v.getHeight() / 2));
+  }
+ else {
+    mDragCenter.set(originX,originY);
+  }
+  if (dragOutline == null && v == null) {
+    if (mCrosshairsDrawable != null) {
+      invalidate();
+    }
+    return;
+  }
+  if (nearest != null && (nearest[0] != oldDragCellX || nearest[1] != oldDragCellY)) {
+    final int[] topLeft=mTmpPoint;
+    cellToPoint(nearest[0],nearest[1],topLeft);
+    int left=topLeft[0];
+    int top=topLeft[1];
+    if (v != null && dragOffset == null) {
+      MarginLayoutParams lp=(MarginLayoutParams)v.getLayoutParams();
+      left+=lp.leftMargin;
+      top+=lp.topMargin;
+      top+=(v.getHeight() - dragOutline.getHeight()) / 2;
+      left+=((mCellWidth * spanX) + ((spanX - 1) * mWidthGap) - dragOutline.getWidth()) / 2;
+    }
+ else {
+      if (dragOffset != null && dragRegion != null) {
+        left+=dragOffset.x + ((mCellWidth * spanX) + ((spanX - 1) * mWidthGap) - dragRegion.width()) / 2;
+        top+=dragOffset.y;
+      }
+ else {
+        left+=((mCellWidth * spanX) + ((spanX - 1) * mWidthGap) - dragOutline.getWidth()) / 2;
+        top+=((mCellHeight * spanY) + ((spanY - 1) * mHeightGap) - dragOutline.getHeight()) / 2;
+      }
+    }
+    final int oldIndex=mDragOutlineCurrent;
+    mDragOutlineAnims[oldIndex].animateOut();
+    mDragOutlineCurrent=(oldIndex + 1) % mDragOutlines.length;
+    Rect r=mDragOutlines[mDragOutlineCurrent];
+    r.set(left,top,left + dragOutline.getWidth(),top + dragOutline.getHeight());
+    if (resize) {
+      cellToRect(nearest[0],nearest[1],spanX,spanY,r);
+    }
+    mDragOutlineAnims[mDragOutlineCurrent].setTag(dragOutline);
+    mDragOutlineAnims[mDragOutlineCurrent].animateIn();
+  }
+  if (mCrosshairsDrawable != null) {
+    invalidate();
+  }
+}

@@ -1,5 +1,5 @@
 {
-  RectF r=new RectF();
+  Rect r=new Rect();
   cl.cellToRect(hCell,vCell,hSpan,vSpan,r);
   return r;
 }

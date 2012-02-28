@@ -34,7 +34,7 @@
   mCrosshairsAnimator.getAnimator().setInterpolator(mEaseOutInterpolator);
   mDragCell[0]=mDragCell[1]=-1;
   for (int i=0; i < mDragOutlines.length; i++) {
-    mDragOutlines[i]=new Point(-1,-1);
+    mDragOutlines[i]=new Rect(-1,-1,-1,-1);
   }
   final int duration=res.getInteger(R.integer.config_dragOutlineFadeTime);
   final float fromAlphaValue=0;
@@ -56,9 +56,7 @@
         }
  else {
           mDragOutlineAlphas[thisIndex]=(Float)animation.getAnimatedValue();
-          final int left=mDragOutlines[thisIndex].x;
-          final int top=mDragOutlines[thisIndex].y;
-          CellLayout.this.invalidate(left,top,left + outline.getWidth(),top + outline.getHeight());
+          CellLayout.this.invalidate(mDragOutlines[thisIndex]);
         }
       }
     }

@@ -1,6 +1,5 @@
 {
   final int oldIndex=mDragOutlineCurrent;
   mDragOutlineAnims[oldIndex].animateOut();
-  mDragCell[0]=-1;
-  mDragCell[1]=-1;
+  mDragCell[0]=mDragCell[1]=-1;
 }
