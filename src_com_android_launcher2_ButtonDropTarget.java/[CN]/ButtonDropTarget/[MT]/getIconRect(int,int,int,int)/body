@@ -1,0 +1,14 @@
+{
+  DragLayer dragLayer=mLauncher.getDragLayer();
+  Rect to=new Rect();
+  dragLayer.getViewRectRelativeToSelf(this,to);
+  int width=drawableWidth;
+  int height=drawableHeight;
+  int left=to.left + getPaddingLeft();
+  int top=to.top + (getMeasuredHeight() - height) / 2;
+  to.set(left,top,left + width,top + height);
+  int xOffset=(int)-(itemWidth - width) / 2;
+  int yOffset=(int)-(itemHeight - height) / 2;
+  to.offset(xOffset,yOffset);
+  return to;
+}
