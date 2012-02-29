@@ -3,7 +3,6 @@
   mOriginalTextColor=getTextColors();
   Resources r=getResources();
   mHoverColor=r.getColor(R.color.info_target_hover_tint);
-  mHoverPaint.setColorFilter(new PorterDuffColorFilter(mHoverColor,PorterDuff.Mode.SRC_ATOP));
   mDrawable=(TransitionDrawable)getCompoundDrawables()[0];
   mDrawable.setCrossFadeEnabled(true);
   int orientation=getResources().getConfiguration().orientation;

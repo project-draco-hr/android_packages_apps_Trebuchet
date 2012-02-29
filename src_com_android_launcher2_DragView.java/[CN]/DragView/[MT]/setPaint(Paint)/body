@@ -1,7 +1,0 @@
-{
-  mPaint=paint;
-  if (mPaint == null) {
-    mPaint=new Paint(Paint.FILTER_BITMAP_FLAG);
-  }
-  invalidate();
-}

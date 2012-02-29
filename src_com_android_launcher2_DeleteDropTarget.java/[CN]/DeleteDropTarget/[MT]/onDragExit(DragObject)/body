@@ -4,4 +4,7 @@
     mCurrentDrawable.resetTransition();
     setTextColor(mOriginalTextColor);
   }
+ else {
+    d.dragView.setColor(mHoverColor);
+  }
 }

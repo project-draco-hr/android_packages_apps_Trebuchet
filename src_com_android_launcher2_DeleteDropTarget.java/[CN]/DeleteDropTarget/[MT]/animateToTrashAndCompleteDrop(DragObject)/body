@@ -2,7 +2,8 @@
   DragLayer dragLayer=mLauncher.getDragLayer();
   Rect from=new Rect();
   dragLayer.getViewRectRelativeToSelf(d.dragView,from);
-  Rect to=getDeleteRect(d.dragView.getMeasuredWidth(),d.dragView.getMeasuredHeight());
+  Rect to=getIconRect(d.dragView.getMeasuredWidth(),d.dragView.getMeasuredHeight(),mCurrentDrawable.getIntrinsicWidth(),mCurrentDrawable.getIntrinsicHeight());
+  float scale=(float)to.width() / from.width();
   mSearchDropTargetBar.deferOnDragEnd();
   Runnable onAnimationEndRunnable=new Runnable(){
     @Override public void run(){
@@ -12,5 +13,5 @@
     }
   }
 ;
-  dragLayer.animateView(d.dragView,from,to,0.1f,1,1,0.1f,0.1f,DELETE_ANIMATION_DURATION,new DecelerateInterpolator(2),new DecelerateInterpolator(1.5f),onAnimationEndRunnable,DragLayer.ANIMATION_END_DISAPPEAR,null);
+  dragLayer.animateView(d.dragView,from,to,scale,1f,1f,0.1f,0.1f,DELETE_ANIMATION_DURATION,new DecelerateInterpolator(2),new LinearInterpolator(),onAnimationEndRunnable,DragLayer.ANIMATION_END_DISAPPEAR,null);
 }
