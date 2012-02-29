@@ -1,7 +1,7 @@
 {
   int containerIndex=item.screen;
   if (item.container == LauncherSettings.Favorites.CONTAINER_HOTSEAT) {
-    if (Hotseat.isAllAppsButtonRank(item.screen)) {
+    if (mCallbacks == null || mCallbacks.get().isAllAppsButtonRank(item.screen)) {
       return false;
     }
     if (occupied[Launcher.SCREEN_COUNT][item.screen][0] != null) {
