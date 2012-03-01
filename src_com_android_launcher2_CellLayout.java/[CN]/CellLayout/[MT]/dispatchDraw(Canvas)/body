@@ -1,4 +1,18 @@
 {
+  if (false) {
+    final Rect frame=mRect;
+    for (int i=mChildren.getChildCount() - 1; i >= 0; i--) {
+      final View child=mChildren.getChildAt(i);
+      final LayoutParams lp=(LayoutParams)child.getLayoutParams();
+      if ((child.getVisibility() == VISIBLE || child.getAnimation() != null) && lp.isLockedToGrid) {
+        child.getHitRect(frame);
+        frame.offset(mPaddingLeft,mPaddingTop);
+        Paint p=new Paint();
+        p.setColor(Color.GREEN);
+        canvas.drawRect(frame,p);
+      }
+    }
+  }
   super.dispatchDraw(canvas);
   if (mForegroundAlpha > 0) {
     mOverScrollForegroundDrawable.setBounds(mForegroundRect);

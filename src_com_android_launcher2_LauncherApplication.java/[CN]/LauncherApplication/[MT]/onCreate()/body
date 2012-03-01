@@ -1,7 +1,6 @@
 {
   super.onCreate();
-  final int screenSize=getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK;
-  sIsScreenLarge=screenSize == Configuration.SCREENLAYOUT_SIZE_LARGE || screenSize == Configuration.SCREENLAYOUT_SIZE_XLARGE;
+  sIsScreenLarge=getResources().getBoolean(R.bool.is_large_screen);
   sScreenDensity=getResources().getDisplayMetrics().density;
   mIconCache=new IconCache(this);
   mModel=new LauncherModel(this,mIconCache);

@@ -3,5 +3,6 @@
   TypedArray a=context.obtainStyledAttributes(attrs,R.styleable.Hotseat,defStyle,0);
   mCellCountX=a.getInt(R.styleable.Hotseat_cellCountX,-1);
   mCellCountY=a.getInt(R.styleable.Hotseat_cellCountY,-1);
+  mAllAppsButtonRank=context.getResources().getInteger(R.integer.hotseat_all_apps_index);
   mIsLandscape=context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
 }
