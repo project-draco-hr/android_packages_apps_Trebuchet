@@ -1,0 +1,11 @@
+View v
+Bitmap dragOutline
+int originX
+int originY
+int cellX
+int cellY
+int spanX
+int spanY
+boolean resize
+Point dragOffset
+Rect dragRegion

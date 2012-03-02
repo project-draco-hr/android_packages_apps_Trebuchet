@@ -1,0 +1,9 @@
+{
+  int count=cl.getChildrenLayout().getChildCount();
+  int screen=indexOfChild(cl);
+  for (int i=0; i < count; i++) {
+    View v=cl.getChildrenLayout().getChildAt(i);
+    ItemInfo info=(ItemInfo)v.getTag();
+    LauncherModel.moveItemInDatabase(mLauncher,info,Favorites.CONTAINER_DESKTOP,screen,info.cellX,info.cellY);
+  }
+}

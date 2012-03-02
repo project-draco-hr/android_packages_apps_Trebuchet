@@ -54,6 +54,22 @@
       canvas.drawBitmap(b,mPressedOrFocusedIcon.getLeft() + getPaddingLeft() - padding,mPressedOrFocusedIcon.getTop() + getPaddingTop() - padding,null);
     }
   }
+  if (DEBUG_VISUALIZE_OCCUPIED) {
+    int[] pt=new int[2];
+    ColorDrawable cd=new ColorDrawable(Color.RED);
+    cd.setBounds(0,0,80,80);
+    for (int i=0; i < mCountX; i++) {
+      for (int j=0; j < mCountY; j++) {
+        if (mOccupied[i][j]) {
+          cellToPoint(i,j,pt);
+          canvas.save();
+          canvas.translate(pt[0],pt[1]);
+          cd.draw(canvas);
+          canvas.restore();
+        }
+      }
+    }
+  }
   for (int i=0; i < mFolderOuterRings.size(); i++) {
     FolderRingAnimator fra=mFolderOuterRings.get(i);
     Drawable d=FolderRingAnimator.sSharedOuterRingDrawable;

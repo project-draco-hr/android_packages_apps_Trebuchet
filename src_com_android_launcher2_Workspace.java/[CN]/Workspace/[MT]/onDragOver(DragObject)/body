@@ -5,6 +5,7 @@
   ItemInfo item=(ItemInfo)d.dragInfo;
   if (item.spanX < 0 || item.spanY < 0)   throw new RuntimeException("Improper spans found");
   mDragViewVisualCenter=getDragViewVisualCenter(d.x,d.y,d.xOffset,d.yOffset,d.dragView,mDragViewVisualCenter);
+  final View child=(mDragInfo == null) ? null : mDragInfo.cell;
   if (isSmall()) {
     if (mLauncher.getHotseat() != null && !isExternalDragWidget(d)) {
       mLauncher.getHotseat().getHitRect(r);
@@ -28,6 +29,7 @@
       }
  else {
         mLastDragOverView=null;
+        mDragMode=DRAG_MODE_NONE;
       }
       boolean isInSpringLoadedMode=(mState == State.SPRING_LOADED);
       if (isInSpringLoadedMode) {
@@ -61,7 +63,6 @@
     }
   }
   if (mDragTargetLayout != null) {
-    final View child=(mDragInfo == null) ? null : mDragInfo.cell;
     if (mLauncher.isHotseatLayout(mDragTargetLayout)) {
       mapPointFromSelfToSibling(mLauncher.getHotseat(),mDragViewVisualCenter);
     }
@@ -70,34 +71,33 @@
     }
     ItemInfo info=(ItemInfo)d.dragInfo;
     mTargetCell=findNearestArea((int)mDragViewVisualCenter[0],(int)mDragViewVisualCenter[1],1,1,mDragTargetLayout,mTargetCell);
+    float targetCellDistance=mDragTargetLayout.getDistanceFromCell(mDragViewVisualCenter[0],mDragViewVisualCenter[1],mTargetCell);
     final View dragOverView=mDragTargetLayout.getChildAt(mTargetCell[0],mTargetCell[1]);
-    boolean userFolderPending=willCreateUserFolder(info,mDragTargetLayout,mTargetCell,false);
-    boolean isOverFolder=dragOverView instanceof FolderIcon;
-    if (dragOverView != mLastDragOverView) {
+    final View lastDragOverView=mLastDragOverView;
+    if (mLastDragOverView != dragOverView) {
+      mDragMode=DRAG_MODE_NONE;
+      mLastDragOverView=dragOverView;
+      if (mReorderAlarm != null) {
+        mReorderAlarm.cancelAlarm();
+      }
+    }
+    boolean folder=willCreateOrAddToFolder(info,mDragTargetLayout,mTargetCell,targetCellDistance,dragOverView,lastDragOverView);
+    int minSpanX=item.spanX;
+    int minSpanY=item.spanY;
+    if (item.minSpanX > 0 && item.minSpanY > 0) {
+      minSpanX=item.minSpanX;
+      minSpanY=item.minSpanY;
+    }
+    if (!folder && !mReorderAlarm.alarmPending() && (mLastReorderX != mTargetCell[0] || mLastReorderY != mTargetCell[1])) {
       cancelFolderCreation();
-      if (mLastDragOverView != null && mLastDragOverView instanceof FolderIcon) {
-        ((FolderIcon)mLastDragOverView).onDragExit(d.dragInfo);
-      }
+      ReorderAlarmListener listener=new ReorderAlarmListener(mDragViewVisualCenter,minSpanX,minSpanY,item.spanX,item.spanY,d.dragView,child);
+      mReorderAlarm.setOnAlarmListener(listener);
+      mReorderAlarm.setAlarm(REORDER_TIMEOUT);
     }
-    if (userFolderPending && dragOverView != mLastDragOverView) {
-      mFolderCreationAlarm.setOnAlarmListener(new FolderCreationAlarmListener(mDragTargetLayout,mTargetCell[0],mTargetCell[1]));
-      mFolderCreationAlarm.setAlarm(FOLDER_CREATION_TIMEOUT);
-    }
-    if (dragOverView != mLastDragOverView && isOverFolder) {
-      ((FolderIcon)dragOverView).onDragEnter(d.dragInfo);
-      if (mDragTargetLayout != null) {
-        mDragTargetLayout.clearDragOutlines();
+ else     if (folder) {
+      if (mReorderAlarm != null) {
+        mReorderAlarm.cancelAlarm();
       }
-    }
-    mLastDragOverView=dragOverView;
-    if (!mCreateUserFolderOnDrop && !isOverFolder) {
-      int minSpanX=item.spanX;
-      int minSpanY=item.spanY;
-      if (item.minSpanX > 0 && item.minSpanY > 0) {
-        minSpanX=item.minSpanX;
-        minSpanY=item.minSpanY;
-      }
-      mDragTargetLayout.visualizeDropLocation(child,mDragOutline,(int)mDragViewVisualCenter[0],(int)mDragViewVisualCenter[1],minSpanX,minSpanY,item.spanX,item.spanY,d.dragView.getDragVisualizeOffset(),d.dragView.getDragRegion());
     }
   }
 }

@@ -8,4 +8,5 @@
   layout.showFolderAccept(mDragFolderRingAnimator);
   layout.clearDragOutlines();
   mCreateUserFolderOnDrop=true;
+  mDragMode=DRAG_MODE_CREATE_FOLDER;
 }

@@ -1,0 +1,20 @@
+{
+  for (int i=0; i < mCountX; i++) {
+    for (int j=0; j < mCountY; j++) {
+      mTmpOccupied[i][j]=false;
+    }
+  }
+  int childCount=mChildren.getChildCount();
+  for (int i=0; i < childCount; i++) {
+    View child=mChildren.getChildAt(i);
+    if (child == dragView)     continue;
+    LayoutParams lp=(LayoutParams)child.getLayoutParams();
+    Point p=solution.map.get(child);
+    if (p != null) {
+      lp.tmpCellX=p.x;
+      lp.tmpCellY=p.y;
+      markCellsForView(lp.tmpCellX,lp.tmpCellY,lp.cellHSpan,lp.cellVSpan,mTmpOccupied,true);
+    }
+  }
+  markCellsForView(solution.dragViewX,solution.dragViewY,solution.dragViewSpanX,solution.dragViewSpanY,mTmpOccupied,true);
+}

@@ -1,0 +1,7 @@
+{
+  int childCount=mChildren.getChildCount();
+  for (int i=0; i < childCount; i++) {
+    LayoutParams lp=(LayoutParams)mChildren.getChildAt(i).getLayoutParams();
+    lp.useTmpCoords=useTempCoords;
+  }
+}

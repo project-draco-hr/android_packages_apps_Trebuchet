@@ -6,8 +6,8 @@
   mIconCache=app.getIconCache();
   setWillNotDraw(false);
   setChildrenDrawnWithCacheEnabled(true);
+  final Resources res=getResources();
   try {
-    final Resources res=getResources();
     mBackground=res.getDrawable(R.drawable.apps_customize_bg);
   }
  catch (  Resources.NotFoundException e) {
@@ -17,5 +17,6 @@
   mDisplayWidth=display.getWidth();
   mDisplayHeight=display.getHeight();
   mWallpaperTravelWidth=(int)(mDisplayWidth * wallpaperTravelToScreenWidthRatio(mDisplayWidth,mDisplayHeight));
+  mMaxDistanceForFolderCreation=(0.5f * res.getDimension(R.dimen.app_icon_size));
   mFlingThresholdVelocity=(int)(FLING_THRESHOLD_VELOCITY * mDensity);
 }

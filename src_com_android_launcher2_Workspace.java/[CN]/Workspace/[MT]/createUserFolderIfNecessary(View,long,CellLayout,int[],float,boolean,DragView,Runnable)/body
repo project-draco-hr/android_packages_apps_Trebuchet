@@ -1,0 +1,39 @@
+{
+  if (distance > mMaxDistanceForFolderCreation)   return false;
+  View v=target.getChildAt(targetCell[0],targetCell[1]);
+  boolean hasntMoved=false;
+  if (mDragInfo != null) {
+    CellLayout cellParent=getParentCellLayoutForView(mDragInfo.cell);
+    hasntMoved=(mDragInfo.cellX == targetCell[0] && mDragInfo.cellY == targetCell[1]) && (cellParent == target);
+  }
+  if (v == null || hasntMoved || !mCreateUserFolderOnDrop)   return false;
+  mCreateUserFolderOnDrop=false;
+  final int screen=(targetCell == null) ? mDragInfo.screen : indexOfChild(target);
+  boolean aboveShortcut=(v.getTag() instanceof ShortcutInfo);
+  boolean willBecomeShortcut=(newView.getTag() instanceof ShortcutInfo);
+  if (aboveShortcut && willBecomeShortcut) {
+    ShortcutInfo sourceInfo=(ShortcutInfo)newView.getTag();
+    ShortcutInfo destInfo=(ShortcutInfo)v.getTag();
+    if (!external) {
+      getParentCellLayoutForView(mDragInfo.cell).removeView(mDragInfo.cell);
+    }
+    Rect folderLocation=new Rect();
+    float scale=mLauncher.getDragLayer().getDescendantRectRelativeToSelf(v,folderLocation);
+    target.removeView(v);
+    FolderIcon fi=mLauncher.addFolder(target,container,screen,targetCell[0],targetCell[1]);
+    destInfo.cellX=-1;
+    destInfo.cellY=-1;
+    sourceInfo.cellX=-1;
+    sourceInfo.cellY=-1;
+    boolean animate=dragView != null;
+    if (animate) {
+      fi.performCreateAnimation(destInfo,v,sourceInfo,dragView,folderLocation,scale,postAnimationRunnable);
+    }
+ else {
+      fi.addItem(destInfo);
+      fi.addItem(sourceInfo);
+    }
+    return true;
+  }
+  return false;
+}

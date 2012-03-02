@@ -1,3 +1,3 @@
 {
-  return findNearestArea(pixelX,pixelY,spanX,spanY,spanX,spanY,ignoreView,ignoreOccupied,result,null);
+  return findNearestArea(pixelX,pixelY,spanX,spanY,spanX,spanY,ignoreView,ignoreOccupied,result,null,mOccupied);
 }

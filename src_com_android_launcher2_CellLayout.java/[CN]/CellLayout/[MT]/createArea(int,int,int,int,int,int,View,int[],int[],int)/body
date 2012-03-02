@@ -1,0 +1,47 @@
+{
+  result=findNearestArea(pixelX,pixelY,1,1,result);
+  if (resultSpan == null) {
+    resultSpan=new int[2];
+  }
+  cellToCenterPoint(result[0],result[1],mTmpPoint);
+  computeDirectionVector(pixelX,pixelY,mTmpPoint[0],mTmpPoint[1],mDirectionVector);
+  ItemConfiguration swapSolution=simpleSwap(pixelX,pixelY,minSpanX,minSpanY,spanX,spanY,mDirectionVector,dragView,true,new ItemConfiguration());
+  ItemConfiguration noShuffleSolution=findConfigurationNoShuffle(pixelX,pixelY,minSpanX,minSpanY,spanX,spanY,dragView,new ItemConfiguration());
+  ItemConfiguration finalSolution=null;
+  if (swapSolution.isSolution && swapSolution.area() >= noShuffleSolution.area()) {
+    finalSolution=swapSolution;
+  }
+ else   if (noShuffleSolution.isSolution) {
+    finalSolution=noShuffleSolution;
+  }
+  boolean foundSolution=true;
+  if (!DESTRUCTIVE_REORDER) {
+    setUseTempCoords(true);
+  }
+  if (finalSolution != null) {
+    result[0]=finalSolution.dragViewX;
+    result[1]=finalSolution.dragViewY;
+    resultSpan[0]=finalSolution.dragViewSpanX;
+    resultSpan[1]=finalSolution.dragViewSpanY;
+    if (mode == MODE_DRAG_OVER || mode == MODE_ON_DROP || mode == MODE_ON_DROP_EXTERNAL) {
+      if (!DESTRUCTIVE_REORDER) {
+        copySolutionToTempState(finalSolution,dragView);
+      }
+      setItemPlacementDirty(true);
+      animateItemsToSolution(finalSolution,dragView,mode == MODE_ON_DROP);
+      if (!DESTRUCTIVE_REORDER && mode == MODE_ON_DROP) {
+        commitTempPlacement();
+      }
+    }
+  }
+ else {
+    foundSolution=false;
+    result[0]=result[1]=resultSpan[0]=resultSpan[1]=-1;
+  }
+  if ((mode == MODE_ON_DROP || !foundSolution) && !DESTRUCTIVE_REORDER) {
+    setUseTempCoords(false);
+  }
+  boolean[][] occupied=mOccupied;
+  mChildren.requestLayout();
+  return result;
+}

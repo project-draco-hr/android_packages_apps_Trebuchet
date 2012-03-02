@@ -2,8 +2,8 @@
   if (isLockedToGrid) {
     final int myCellHSpan=cellHSpan;
     final int myCellVSpan=cellVSpan;
-    final int myCellX=cellX;
-    final int myCellY=cellY;
+    final int myCellX=useTmpCoords ? tmpCellX : cellX;
+    final int myCellY=useTmpCoords ? tmpCellY : cellY;
     width=myCellHSpan * cellWidth + ((myCellHSpan - 1) * widthGap) - leftMargin - rightMargin;
     height=myCellVSpan * cellHeight + ((myCellVSpan - 1) * heightGap) - topMargin - bottomMargin;
     x=(int)(myCellX * (cellWidth + widthGap) + leftMargin);

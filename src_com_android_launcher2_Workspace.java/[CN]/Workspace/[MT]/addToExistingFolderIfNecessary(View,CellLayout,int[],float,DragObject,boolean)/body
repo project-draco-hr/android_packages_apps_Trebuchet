@@ -1,0 +1,15 @@
+{
+  if (distance > mMaxDistanceForFolderCreation)   return false;
+  View dropOverView=target.getChildAt(targetCell[0],targetCell[1]);
+  if (dropOverView instanceof FolderIcon) {
+    FolderIcon fi=(FolderIcon)dropOverView;
+    if (fi.acceptDrop(d.dragInfo)) {
+      fi.onDrop(d);
+      if (!external) {
+        getParentCellLayoutForView(mDragInfo.cell).removeView(mDragInfo.cell);
+      }
+      return true;
+    }
+  }
+  return false;
+}
