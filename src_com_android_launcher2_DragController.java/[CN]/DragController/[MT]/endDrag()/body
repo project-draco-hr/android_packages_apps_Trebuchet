@@ -2,14 +2,19 @@
   if (mDragging) {
     mDragging=false;
     clearScrollRunnable();
-    for (    DragListener listener : mListeners) {
-      listener.onDragEnd();
-    }
+    boolean isDeferred=false;
     if (mDragObject.dragView != null) {
-      if (!mDragObject.deferDragViewCleanupPostAnimation) {
+      isDeferred=mDragObject.deferDragViewCleanupPostAnimation;
+      if (!isDeferred) {
         mDragObject.dragView.remove();
       }
       mDragObject.dragView=null;
     }
+    if (!isDeferred) {
+      for (      DragListener listener : mListeners) {
+        listener.onDragEnd();
+      }
+    }
   }
+  releaseVelocityTracker();
 }

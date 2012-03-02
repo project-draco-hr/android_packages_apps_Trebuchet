@@ -1,0 +1,6 @@
+{
+  mDropTargetBarFadeInAnim.end();
+  mDropTargetBarFadeOutAnim.end();
+  mQSBSearchBarFadeInAnim.end();
+  mQSBSearchBarFadeOutAnim.end();
+}

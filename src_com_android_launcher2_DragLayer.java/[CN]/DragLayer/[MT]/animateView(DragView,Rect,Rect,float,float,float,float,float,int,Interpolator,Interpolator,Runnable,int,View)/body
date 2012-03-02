@@ -9,30 +9,14 @@
     }
     duration=Math.max(duration,res.getInteger(R.integer.config_dropAnimMinDuration));
   }
-  if (mDropAnim != null) {
-    mDropAnim.cancel();
-  }
-  if (mFadeOutAnim != null) {
-    mFadeOutAnim.cancel();
-  }
-  mDropView=view;
-  mDropView.cancelAnimation();
-  mDropView.resetLayoutParams();
-  mDropAnim=new ValueAnimator();
+  TimeInterpolator interpolator=null;
   if (alphaInterpolator == null || motionInterpolator == null) {
-    mDropAnim.setInterpolator(mCubicEaseOutInterpolator);
+    interpolator=mCubicEaseOutInterpolator;
   }
-  if (anchorView != null) {
-    mAnchorViewInitialScrollX=anchorView.getScrollX();
-  }
-  mAnchorView=anchorView;
   final float initAlpha=view.getAlpha();
-  final float dropViewScale=mDropView.getScaleX();
-  mDropAnim.setDuration(duration);
-  mDropAnim.setFloatValues(0.0f,1.0f);
-  mDropAnim.removeAllUpdateListeners();
-  mDropAnim.addUpdateListener(new AnimatorUpdateListener(){
-    public void onAnimationUpdate(    ValueAnimator animation){
+  final float dropViewScale=view.getScaleX();
+  AnimatorUpdateListener updateCb=new AnimatorUpdateListener(){
+    @Override public void onAnimationUpdate(    ValueAnimator animation){
       final float percent=(Float)animation.getAnimatedValue();
       final int width=view.getMeasuredWidth();
       final int height=view.getMeasuredHeight();
@@ -56,24 +40,6 @@
       mDropView.setAlpha(alpha);
     }
   }
-);
-  mDropAnim.addListener(new AnimatorListenerAdapter(){
-    public void onAnimationEnd(    Animator animation){
-      if (onCompleteRunnable != null) {
-        onCompleteRunnable.run();
-      }
-switch (animationEndStyle) {
-case ANIMATION_END_DISAPPEAR:
-        clearAnimatedView();
-      break;
-case ANIMATION_END_FADE_OUT:
-    fadeOutDragView();
-  break;
-case ANIMATION_END_REMAIN_VISIBLE:
-break;
-}
-}
-}
-);
-mDropAnim.start();
+;
+  animateView(view,updateCb,duration,interpolator,onCompleteRunnable,animationEndStyle,anchorView);
 }

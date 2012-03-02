@@ -2,6 +2,7 @@
   if (!mDragging) {
     return false;
   }
+  acquireVelocityTrackerAndAddMovement(ev);
   final int action=ev.getAction();
   final int[] dragLayerPos=getClampedDragLayerPos(ev.getX(),ev.getY());
   final int dragLayerX=dragLayerPos[0];
@@ -25,7 +26,13 @@ case MotionEvent.ACTION_UP:
 handleMoveEvent(dragLayerX,dragLayerY);
 mHandler.removeCallbacks(mScrollRunnable);
 if (mDragging) {
+PointF vec=isFlingingToDelete(mDragObject.dragSource);
+if (vec != null) {
+dropOnFlingToDeleteTarget(dragLayerX,dragLayerY,vec);
+}
+ else {
 drop(dragLayerX,dragLayerY);
+}
 }
 endDrag();
 break;

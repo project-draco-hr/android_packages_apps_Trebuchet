@@ -3,7 +3,7 @@
     mDropAnim.cancel();
   }
   if (mDropView != null) {
-    mDropView.remove();
+    mDragController.onDeferredEndDrag(mDropView);
   }
   mDropView=null;
   invalidate();

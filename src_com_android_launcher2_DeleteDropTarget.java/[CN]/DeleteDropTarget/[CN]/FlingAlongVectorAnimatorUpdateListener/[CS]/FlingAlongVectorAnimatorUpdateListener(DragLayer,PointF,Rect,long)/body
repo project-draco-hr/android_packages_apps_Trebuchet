@@ -1,0 +1,6 @@
+{
+  mDragLayer=dragLayer;
+  mVelocity=vel;
+  mFrom=from;
+  mPrevTime=startTime;
+}
