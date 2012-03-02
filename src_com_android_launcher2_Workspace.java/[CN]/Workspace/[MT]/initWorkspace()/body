@@ -4,7 +4,6 @@
   Launcher.setScreen(mCurrentPage);
   LauncherApplication app=(LauncherApplication)context.getApplicationContext();
   mIconCache=app.getIconCache();
-  mExternalDragOutlinePaint.setAntiAlias(true);
   setWillNotDraw(false);
   setChildrenDrawnWithCacheEnabled(true);
   try {
