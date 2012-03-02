@@ -3,6 +3,7 @@
   intent.addCategory(Intent.CATEGORY_LAUNCHER);
   ContentValues values=new ContentValues();
   PackageManager packageManager=mContext.getPackageManager();
+  int allAppsButtonRank=mContext.getResources().getInteger(R.integer.hotseat_all_apps_index);
   int i=0;
   try {
     XmlResourceParser parser=mContext.getResources().getXml(workspaceResourceId);
@@ -24,7 +25,7 @@
       String screen=a.getString(R.styleable.Favorite_screen);
       String x=a.getString(R.styleable.Favorite_x);
       String y=a.getString(R.styleable.Favorite_y);
-      if (container == LauncherSettings.Favorites.CONTAINER_HOTSEAT && Hotseat.isAllAppsButtonRank(Integer.valueOf(screen))) {
+      if (container == LauncherSettings.Favorites.CONTAINER_HOTSEAT && Integer.valueOf(screen) == allAppsButtonRank) {
         throw new RuntimeException("Invalid screen position for hotseat item");
       }
       values.clear();

@@ -4,5 +4,6 @@
   if (mCellCountY < 0)   mCellCountY=LauncherModel.getCellCountY();
   mContent=(CellLayout)findViewById(R.id.layout);
   mContent.setGridSize(mCellCountX,mCellCountY);
+  mContent.setIsHotseat(true);
   resetLayout();
 }

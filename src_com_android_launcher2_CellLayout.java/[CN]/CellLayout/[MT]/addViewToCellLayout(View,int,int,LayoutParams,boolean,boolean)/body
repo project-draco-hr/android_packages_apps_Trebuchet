@@ -1,0 +1,37 @@
+{
+  final LayoutParams lp=params;
+  if (child instanceof BubbleTextView) {
+    BubbleTextView bubbleChild=(BubbleTextView)child;
+    if (mIsHotseat && !allApps && mBubbleScalePercent >= 0) {
+      if ((bubbleChild.getMeasuredWidth() | bubbleChild.getMeasuredHeight()) == 0) {
+        getChildrenLayout().measureChild(bubbleChild);
+      }
+      int measuredWidth=bubbleChild.getMeasuredWidth();
+      int measuredHeight=bubbleChild.getMeasuredHeight();
+      float bubbleScale=mBubbleScalePercent / 100f;
+      bubbleChild.setPivotX(0);
+      bubbleChild.setPivotY(0);
+      bubbleChild.setScaleX(bubbleScale);
+      bubbleChild.setScaleY(bubbleScale);
+      bubbleChild.setTranslationX(measuredWidth * (1 - bubbleScale) / 2);
+      bubbleChild.setTranslationY(measuredHeight * (1 - bubbleScale) / 2);
+      bubbleChild.setTextColor(android.R.color.transparent);
+    }
+ else {
+      bubbleChild.setScaleX(1f);
+      bubbleChild.setScaleY(1f);
+      bubbleChild.setTranslationX(0f);
+      bubbleChild.setTranslationY(0f);
+      bubbleChild.setTextColor(getResources().getColor(R.color.workspace_icon_text_color));
+    }
+  }
+  if (lp.cellX >= 0 && lp.cellX <= mCountX - 1 && lp.cellY >= 0 && lp.cellY <= mCountY - 1) {
+    if (lp.cellHSpan < 0)     lp.cellHSpan=mCountX;
+    if (lp.cellVSpan < 0)     lp.cellVSpan=mCountY;
+    child.setId(childId);
+    mChildren.addView(child,index,lp);
+    if (markCells)     markCellsAsOccupiedForView(child);
+    return true;
+  }
+  return false;
+}
