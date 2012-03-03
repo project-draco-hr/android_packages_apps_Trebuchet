@@ -3,12 +3,12 @@
   if (child instanceof BubbleTextView) {
     BubbleTextView bubbleChild=(BubbleTextView)child;
     resetChild(bubbleChild);
-    if (mIsHotseat && !allApps && mBubbleHotseatScalePercent >= 0) {
-      scaleChild(bubbleChild,0f,mBubbleHotseatScalePercent);
+    if (mIsHotseat && !allApps && mHotseatChildScale >= 0) {
+      scaleChild(bubbleChild,0f,mHotseatChildScale);
       bubbleChild.setTextColor(getResources().getColor(android.R.color.transparent));
     }
- else     if (mBubbleScalePercent >= 0) {
-      scaleChild(bubbleChild,0f,mBubbleScalePercent);
+ else     if (mChildScale >= 0) {
+      scaleChild(bubbleChild,0f,mChildScale);
     }
   }
   if (lp.cellX >= 0 && lp.cellX <= mCountX - 1 && lp.cellY >= 0 && lp.cellY <= mCountY - 1) {

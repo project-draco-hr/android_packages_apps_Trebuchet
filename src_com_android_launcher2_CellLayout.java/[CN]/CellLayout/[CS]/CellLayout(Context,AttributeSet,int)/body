@@ -20,8 +20,14 @@
   mForegroundPadding=res.getDimensionPixelSize(R.dimen.workspace_overscroll_drawable_padding);
   mNormalBackground.setFilterBitmap(true);
   mActiveGlowBackground.setFilterBitmap(true);
-  mBubbleScalePercent=res.getInteger(R.integer.app_icon_scale_percent);
-  mBubbleHotseatScalePercent=res.getInteger(R.integer.app_icon_hotseat_scale_percent);
+  int iconScale=res.getInteger(R.integer.app_icon_scale_percent);
+  if (iconScale >= 0) {
+    mChildScale=iconScale / 100f;
+  }
+  int hotseatIconScale=res.getInteger(R.integer.app_icon_hotseat_scale_percent);
+  if (hotseatIconScale >= 0) {
+    mHotseatChildScale=hotseatIconScale / 100f;
+  }
   mCrosshairsDrawable=res.getDrawable(R.drawable.gardening_crosshairs);
   mEaseOutInterpolator=new DecelerateInterpolator(2.5f);
   int animDuration=res.getInteger(R.integer.config_crosshairsFadeInTime);

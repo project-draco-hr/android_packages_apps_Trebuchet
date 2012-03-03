@@ -10,7 +10,9 @@
     if (DEBUG)     Log.d(TAG,"getRelativeChildOffset(): " + getMeasuredWidth() + ", "+ getChildWidth(0));
     childLeft=getRelativeChildOffset(0);
     if (mPageSpacing < 0) {
-      setPageSpacing(((right - left) - getChildAt(0).getMeasuredWidth()) / 2);
+      int offset=getRelativeChildOffset(0);
+      int spacing=Math.max(offset,(right - left) - offset - getChildAt(0).getMeasuredWidth());
+      setPageSpacing(spacing);
     }
   }
   for (int i=0; i < childCount; i++) {

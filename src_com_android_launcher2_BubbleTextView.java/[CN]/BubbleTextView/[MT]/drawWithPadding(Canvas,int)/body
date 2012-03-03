@@ -3,7 +3,7 @@
   getDrawingRect(clipRect);
   clipRect.bottom=getExtendedPaddingTop() - (int)BubbleTextView.PADDING_V + getLayout().getLineTop(0);
   destCanvas.save();
-  destCanvas.scale(getScaleX(),getScaleY(),getWidth() / 2,getHeight() / 2);
+  destCanvas.scale(getScaleX(),getScaleY(),(getWidth() + padding) / 2,(getHeight() + padding) / 2);
   destCanvas.translate(-getScrollX() + padding / 2,-getScrollY() + padding / 2);
   destCanvas.clipRect(clipRect,Op.REPLACE);
   draw(destCanvas);
