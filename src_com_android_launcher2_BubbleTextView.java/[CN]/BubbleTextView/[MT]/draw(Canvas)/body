@@ -16,7 +16,7 @@
       canvas.translate(-scrollX,-scrollY);
     }
   }
-  if (getCurrentTextColor() == android.R.color.transparent) {
+  if (getCurrentTextColor() == getResources().getColor(android.R.color.transparent)) {
     getPaint().clearShadowLayer();
     super.draw(canvas);
     return;
