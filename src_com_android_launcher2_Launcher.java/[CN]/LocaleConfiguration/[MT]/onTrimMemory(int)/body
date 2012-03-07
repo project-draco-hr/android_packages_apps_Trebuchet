@@ -1,6 +1,6 @@
 {
   super.onTrimMemory(level);
-  if (level == ComponentCallbacks2.TRIM_MEMORY_UI_HIDDEN) {
+  if (level >= ComponentCallbacks2.TRIM_MEMORY_UI_HIDDEN) {
     mAppsCustomizeTabHost.onTrimMemory();
   }
 }
