@@ -1,0 +1,3 @@
+BubbleTextView bubbleChild
+float pivot
+int scalePercent
