@@ -14,8 +14,10 @@
           for (int k=0; k < appCount; k++) {
             ApplicationInfo app=apps.get(k);
             if (app.componentName.equals(name)) {
-              info.setIcon(mIconCache.getIcon(info.intent));
-              ((TextView)view).setCompoundDrawablesWithIntrinsicBounds(null,new FastBitmapDrawable(info.getIcon(mIconCache)),null,null);
+              BubbleTextView shortcut=(BubbleTextView)view;
+              info.updateIcon(mIconCache);
+              info.title=app.title.toString();
+              shortcut.applyFromShortcutInfo(info,mIconCache);
             }
           }
         }
