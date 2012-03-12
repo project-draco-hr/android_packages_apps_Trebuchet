@@ -1,6 +1,6 @@
 {
   final CellInfo cellInfo=mCellInfo;
-  final Rect frame=mRect;
+  Rect frame=mRect;
   final int x=touchX + mScrollX;
   final int y=touchY + mScrollY;
   final int count=mChildren.getChildCount();
@@ -10,7 +10,10 @@
     final LayoutParams lp=(LayoutParams)child.getLayoutParams();
     if ((child.getVisibility() == VISIBLE || child.getAnimation() != null) && lp.isLockedToGrid) {
       child.getHitRect(frame);
+      float scale=child.getScaleX();
+      frame=new Rect(child.getLeft(),child.getTop(),child.getRight(),child.getBottom());
       frame.offset(mPaddingLeft,mPaddingTop);
+      frame.inset((int)(frame.width() * (1f - scale) / 2),(int)(frame.height() * (1f - scale) / 2));
       if (frame.contains(x,y)) {
         cellInfo.cell=child;
         cellInfo.cellX=lp.cellX;

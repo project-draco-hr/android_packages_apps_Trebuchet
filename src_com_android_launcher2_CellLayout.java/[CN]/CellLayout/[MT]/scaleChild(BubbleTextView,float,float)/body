@@ -4,11 +4,6 @@
   }
   int measuredWidth=bubbleChild.getMeasuredWidth();
   int measuredHeight=bubbleChild.getMeasuredHeight();
-  float scale=scalePercent / 100f;
-  bubbleChild.setPivotX(pivot);
-  bubbleChild.setPivotY(pivot);
   bubbleChild.setScaleX(scale);
   bubbleChild.setScaleY(scale);
-  bubbleChild.setTranslationX(measuredWidth * (1 - scale) / 2);
-  bubbleChild.setTranslationY(measuredHeight * (1 - scale) / 2);
 }

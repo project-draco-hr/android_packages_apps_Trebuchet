@@ -3,9 +3,6 @@
   mBackground=getBackground();
   final Resources res=getContext().getResources();
   int bubbleColor=res.getColor(R.color.bubble_dark_background);
-  mPaint=new Paint(Paint.ANTI_ALIAS_FLAG);
-  mPaint.setColor(bubbleColor);
-  mBubbleColorAlpha=Color.alpha(bubbleColor) / 255.0f;
   mFocusedOutlineColor=mFocusedGlowColor=mPressedOutlineColor=mPressedGlowColor=res.getColor(android.R.color.holo_blue_light);
   setShadowLayer(SHADOW_LARGE_RADIUS,0.0f,SHADOW_Y_OFFSET,SHADOW_LARGE_COLOUR);
 }
