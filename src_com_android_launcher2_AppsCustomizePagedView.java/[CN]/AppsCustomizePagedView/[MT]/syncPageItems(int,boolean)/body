@@ -3,6 +3,6 @@
     syncAppsPageItems(page,immediate);
   }
  else {
-    syncWidgetPageItems(page - mNumAppsPages,immediate);
+    syncWidgetPageItems(page,immediate);
   }
 }

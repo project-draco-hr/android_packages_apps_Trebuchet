@@ -1,0 +1,7 @@
+{
+  mInTransition=false;
+  for (  AsyncTaskPageData d : mDeferredSyncWidgetPageItems) {
+    onSyncWidgetPageItems(d);
+  }
+  mDeferredSyncWidgetPageItems.clear();
+}

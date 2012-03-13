@@ -2,7 +2,7 @@
   Iterator<AppsCustomizeAsyncTask> iter=mRunningTasks.iterator();
   while (iter.hasNext()) {
     AppsCustomizeAsyncTask task=(AppsCustomizeAsyncTask)iter.next();
-    int taskPage=task.page + mNumAppsPages;
+    int taskPage=task.page;
     if (taskPage < getAssociatedLowerPageBound(mCurrentPage) || taskPage > getAssociatedUpperPageBound(mCurrentPage)) {
       task.cancel(false);
       iter.remove();
@@ -11,7 +11,7 @@
       task.setThreadPriority(getThreadPriorityForPage(taskPage));
     }
   }
-  final int sleepMs=getSleepForPage(page + mNumAppsPages);
+  final int sleepMs=getSleepForPage(page);
   AsyncTaskPageData pageData=new AsyncTaskPageData(page,widgets,cellWidth,cellHeight,new AsyncTaskCallback(){
     @Override public void run(    AppsCustomizeAsyncTask task,    AsyncTaskPageData data){
       try {
@@ -31,19 +31,14 @@
   }
 ,new AsyncTaskCallback(){
     @Override public void run(    AppsCustomizeAsyncTask task,    AsyncTaskPageData data){
-      try {
-        mRunningTasks.remove(task);
-        if (task.isCancelled())         return;
-        onSyncWidgetPageItems(data);
-      }
-  finally {
-        data.cleanup(task.isCancelled());
-      }
+      mRunningTasks.remove(task);
+      if (task.isCancelled())       return;
+      onSyncWidgetPageItems(data);
     }
   }
 );
   AppsCustomizeAsyncTask t=new AppsCustomizeAsyncTask(page,AsyncTaskPageData.Type.LoadWidgetPreviewData);
-  t.setThreadPriority(getThreadPriorityForPage(page + mNumAppsPages));
+  t.setThreadPriority(getThreadPriorityForPage(page));
   t.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,pageData);
   mRunningTasks.add(t);
 }
