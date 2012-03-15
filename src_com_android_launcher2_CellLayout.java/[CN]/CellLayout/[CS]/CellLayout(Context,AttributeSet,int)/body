@@ -10,6 +10,7 @@
   mCountX=LauncherModel.getCellCountX();
   mCountY=LauncherModel.getCellCountY();
   mOccupied=new boolean[mCountX][mCountY];
+  mTmpOccupied=new boolean[mCountX][mCountY];
   a.recycle();
   setAlwaysDrawnWithCacheEnabled(false);
   final Resources res=getResources();

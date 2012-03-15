@@ -1,0 +1,32 @@
+{
+  if (views.size() == 0)   return true;
+  boolean success=false;
+  Rect boundingRect=null;
+  for (  View v : views) {
+    LayoutParams lp=(LayoutParams)v.getLayoutParams();
+    markCellsForView(lp.tmpCellX,lp.tmpCellY,lp.cellHSpan,lp.cellVSpan,mTmpOccupied,false);
+    if (boundingRect == null) {
+      boundingRect=new Rect(lp.tmpCellX,lp.tmpCellY,lp.tmpCellX + lp.cellHSpan,lp.tmpCellY + lp.cellVSpan);
+    }
+ else {
+      boundingRect.union(lp.tmpCellX,lp.tmpCellY,lp.tmpCellX + lp.cellHSpan,lp.tmpCellY + lp.cellVSpan);
+    }
+  }
+  markCellsForRect(rectOccupiedByPotentialDrop,mTmpOccupied,true);
+  findNearestArea(boundingRect.left,boundingRect.top,boundingRect.width(),boundingRect.height(),direction,mTmpOccupied,mTempLocation);
+  int deltaX=mTempLocation[0] - boundingRect.left;
+  int deltaY=mTempLocation[1] - boundingRect.top;
+  if (mTempLocation[0] >= 0 && mTempLocation[1] >= 0) {
+    for (    View v : views) {
+      LayoutParams lp=(LayoutParams)v.getLayoutParams();
+      lp.tmpCellX+=deltaX;
+      lp.tmpCellY+=deltaY;
+    }
+    success=true;
+  }
+  for (  View v : views) {
+    LayoutParams lp=(LayoutParams)v.getLayoutParams();
+    markCellsForView(lp.tmpCellX,lp.tmpCellY,lp.cellHSpan,lp.cellVSpan,mTmpOccupied,true);
+  }
+  return success;
+}

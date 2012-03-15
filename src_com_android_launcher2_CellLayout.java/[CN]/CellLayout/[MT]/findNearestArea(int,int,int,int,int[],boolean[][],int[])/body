@@ -1,0 +1,33 @@
+{
+  final int[] bestXY=result != null ? result : new int[2];
+  float bestDistance=Float.MAX_VALUE;
+  int bestDirectionScore=Integer.MIN_VALUE;
+  final int countX=mCountX;
+  final int countY=mCountY;
+  for (int y=0; y < countY - (spanY - 1); y++) {
+    inner:     for (int x=0; x < countX - (spanX - 1); x++) {
+      for (int i=0; i < spanX; i++) {
+        for (int j=0; j < spanY; j++) {
+          if (occupied[x + i][y + j]) {
+            continue inner;
+          }
+        }
+      }
+      float distance=(float)Math.sqrt((x - cellX) * (x - cellX) + (y - cellY) * (y - cellY));
+      int[] curDirection=mTmpPoint;
+      computeDirectionVector(cellX,cellY,x,y,curDirection);
+      int curDirectionScore=direction[0] * curDirection[0] + direction[1] * curDirection[1];
+      if (Float.compare(distance,bestDistance) < 0 || (Float.compare(distance,bestDistance) == 0 && curDirectionScore > bestDirectionScore)) {
+        bestDistance=distance;
+        bestDirectionScore=curDirectionScore;
+        bestXY[0]=x;
+        bestXY[1]=y;
+      }
+    }
+  }
+  if (bestDistance == Float.MAX_VALUE) {
+    bestXY[0]=-1;
+    bestXY[1]=-1;
+  }
+  return bestXY;
+}

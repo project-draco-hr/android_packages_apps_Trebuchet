@@ -1,0 +1,7 @@
+float[] dragViewCenter
+int minSpanX
+int minSpanY
+int spanX
+int spanY
+DragView dragView
+View child

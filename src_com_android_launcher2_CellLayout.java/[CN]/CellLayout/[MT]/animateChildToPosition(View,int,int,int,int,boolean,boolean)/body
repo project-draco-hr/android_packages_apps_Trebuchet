@@ -1,0 +1,73 @@
+{
+  CellLayoutChildren clc=getChildrenLayout();
+  boolean[][] occupied=mOccupied;
+  if (!permanent) {
+    occupied=mTmpOccupied;
+  }
+  if (clc.indexOfChild(child) != -1 && !occupied[cellX][cellY]) {
+    final LayoutParams lp=(LayoutParams)child.getLayoutParams();
+    final ItemInfo info=(ItemInfo)child.getTag();
+    if (mReorderAnimators.containsKey(lp)) {
+      mReorderAnimators.get(lp).cancel();
+      mReorderAnimators.remove(lp);
+    }
+    final int oldX=lp.x;
+    final int oldY=lp.y;
+    if (adjustOccupied) {
+      occupied[lp.cellX][lp.cellY]=false;
+      occupied[cellX][cellY]=true;
+    }
+    lp.isLockedToGrid=true;
+    if (permanent) {
+      lp.cellX=info.cellX=cellX;
+      lp.cellY=info.cellY=cellY;
+    }
+ else {
+      lp.tmpCellX=cellX;
+      lp.tmpCellY=cellY;
+    }
+    clc.setupLp(lp);
+    lp.isLockedToGrid=false;
+    final int newX=lp.x;
+    final int newY=lp.y;
+    lp.x=oldX;
+    lp.y=oldY;
+    if (oldX == newX && oldY == newY) {
+      lp.isLockedToGrid=true;
+      return true;
+    }
+    ValueAnimator va=ValueAnimator.ofFloat(0f,1f);
+    va.setDuration(duration);
+    mReorderAnimators.put(lp,va);
+    va.addUpdateListener(new AnimatorUpdateListener(){
+      @Override public void onAnimationUpdate(      ValueAnimator animation){
+        float r=((Float)animation.getAnimatedValue()).floatValue();
+        child.setTranslationX(r * (newX - oldX));
+        child.setTranslationY(r * (newY - oldY));
+      }
+    }
+);
+    va.addListener(new AnimatorListenerAdapter(){
+      boolean cancelled=false;
+      public void onAnimationEnd(      Animator animation){
+        if (!cancelled) {
+          child.setTranslationX(0);
+          child.setTranslationY(0);
+          lp.isLockedToGrid=true;
+          child.requestLayout();
+        }
+        if (mReorderAnimators.containsKey(lp)) {
+          mReorderAnimators.remove(lp);
+        }
+      }
+      public void onAnimationCancel(      Animator animation){
+        cancelled=true;
+      }
+    }
+);
+    va.setStartDelay(delay);
+    va.start();
+    return true;
+  }
+  return false;
+}

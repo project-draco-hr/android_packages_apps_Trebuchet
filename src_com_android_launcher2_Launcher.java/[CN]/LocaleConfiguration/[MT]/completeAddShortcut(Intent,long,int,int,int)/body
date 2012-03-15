@@ -12,12 +12,12 @@
     cellXY[0]=cellX;
     cellXY[1]=cellY;
     foundCellSpan=true;
-    if (mWorkspace.createUserFolderIfNecessary(view,container,layout,cellXY,true,null,null)) {
+    if (mWorkspace.createUserFolderIfNecessary(view,container,layout,cellXY,0,true,null,null)) {
       return;
     }
     DragObject dragObject=new DragObject();
     dragObject.dragInfo=info;
-    if (mWorkspace.addToExistingFolderIfNecessary(view,layout,cellXY,dragObject,true)) {
+    if (mWorkspace.addToExistingFolderIfNecessary(view,layout,cellXY,0,dragObject,true)) {
       return;
     }
   }

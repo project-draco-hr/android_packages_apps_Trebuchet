@@ -5,6 +5,8 @@
   }
   mDragInfo=cellInfo;
   child.setVisibility(INVISIBLE);
+  CellLayout layout=(CellLayout)child.getParent().getParent();
+  layout.prepareChildForDrag(child);
   child.clearFocus();
   child.setPressed(false);
   final Canvas canvas=new Canvas();

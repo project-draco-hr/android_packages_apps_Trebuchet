@@ -1,0 +1,25 @@
+{
+  resetTempLayoutToCurrent(dragView);
+  int result[]=new int[2];
+  result=findNearestArea(pixelX,pixelY,spanX,spanY,result);
+  boolean success=false;
+  success=rearrangementExists(result[0],result[1],spanX,spanY,direction,dragView);
+  if (!success) {
+    if (spanX > minSpanX && (minSpanY == spanY || decX)) {
+      return simpleSwap(pixelX,pixelY,minSpanX,minSpanY,spanX - 1,spanY,direction,dragView,false,solution);
+    }
+ else     if (spanY > minSpanY) {
+      return simpleSwap(pixelX,pixelY,minSpanX,minSpanY,spanX,spanY - 1,direction,dragView,true,solution);
+    }
+    solution.isSolution=false;
+  }
+ else {
+    solution.isSolution=true;
+    solution.dragViewX=result[0];
+    solution.dragViewY=result[1];
+    solution.dragViewSpanX=spanX;
+    solution.dragViewSpanY=spanY;
+    copyCurrentStateToSolution(solution,true);
+  }
+  return solution;
+}

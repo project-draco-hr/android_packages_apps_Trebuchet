@@ -1,0 +1,10 @@
+int pixelX
+int pixelY
+int minSpanX
+int minSpanY
+int spanX
+int spanY
+View dragView
+int[] result
+int resultSpan[]
+int mode

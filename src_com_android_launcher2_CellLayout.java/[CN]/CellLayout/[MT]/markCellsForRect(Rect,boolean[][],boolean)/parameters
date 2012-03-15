@@ -1,0 +1,3 @@
+Rect r
+boolean[][] occupied
+boolean value

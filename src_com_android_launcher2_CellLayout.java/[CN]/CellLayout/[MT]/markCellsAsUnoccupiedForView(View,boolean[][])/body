@@ -1,0 +1,5 @@
+{
+  if (view == null || view.getParent() != mChildren)   return;
+  LayoutParams lp=(LayoutParams)view.getLayoutParams();
+  markCellsForView(lp.cellX,lp.cellY,lp.cellHSpan,lp.cellVSpan,occupied,false);
+}

@@ -13,7 +13,7 @@
       endX=y < target[1] ? mContent.getCountX() - 1 : target[0];
       for (int x=startX; x <= endX; x++) {
         View v=mContent.getChildAt(x,y);
-        if (mContent.animateChildToPosition(v,empty[0],empty[1],REORDER_ANIMATION_DURATION,delay)) {
+        if (mContent.animateChildToPosition(v,empty[0],empty[1],REORDER_ANIMATION_DURATION,delay,true,true)) {
           empty[0]=x;
           empty[1]=y;
           delay+=delayAmount;
@@ -30,7 +30,7 @@
       endX=y > target[1] ? 0 : target[0];
       for (int x=startX; x >= endX; x--) {
         View v=mContent.getChildAt(x,y);
-        if (mContent.animateChildToPosition(v,empty[0],empty[1],REORDER_ANIMATION_DURATION,delay)) {
+        if (mContent.animateChildToPosition(v,empty[0],empty[1],REORDER_ANIMATION_DURATION,delay,true,true)) {
           empty[0]=x;
           empty[1]=y;
           delay+=delayAmount;

@@ -1,0 +1,14 @@
+{
+  LayoutParams lp=(LayoutParams)v.getLayoutParams();
+  boolean success=false;
+  markCellsForView(lp.tmpCellX,lp.tmpCellY,lp.cellHSpan,lp.cellVSpan,mTmpOccupied,false);
+  markCellsForRect(rectOccupiedByPotentialDrop,mTmpOccupied,true);
+  findNearestArea(lp.tmpCellX,lp.tmpCellY,lp.cellHSpan,lp.cellVSpan,direction,mTmpOccupied,mTempLocation);
+  if (mTempLocation[0] >= 0 && mTempLocation[1] >= 0) {
+    lp.tmpCellX=mTempLocation[0];
+    lp.tmpCellY=mTempLocation[1];
+    success=true;
+  }
+  markCellsForView(lp.tmpCellX,lp.tmpCellY,lp.cellHSpan,lp.cellVSpan,mTmpOccupied,true);
+  return success;
+}

@@ -1,0 +1,13 @@
+{
+  int deltaX=x1 - x0;
+  int deltaY=y1 - y0;
+  double angle=Math.atan(((float)deltaY) / deltaX);
+  result[0]=0;
+  result[1]=0;
+  if (Math.abs(Math.cos(angle)) > 0.5f) {
+    result[0]=(int)Math.signum(deltaX);
+  }
+  if (Math.abs(Math.sin(angle)) > 0.5f) {
+    result[1]=(int)Math.signum(deltaY);
+  }
+}
