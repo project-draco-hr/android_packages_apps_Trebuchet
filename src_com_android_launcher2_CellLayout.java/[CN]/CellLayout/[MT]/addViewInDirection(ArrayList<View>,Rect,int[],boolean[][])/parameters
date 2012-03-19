@@ -1,0 +1,4 @@
+ArrayList<View> views
+Rect boundingRect
+int[] direction
+boolean[][] occupied

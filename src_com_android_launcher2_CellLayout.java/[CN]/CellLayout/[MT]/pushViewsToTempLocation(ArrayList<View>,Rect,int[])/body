@@ -4,7 +4,6 @@
   Rect boundingRect=null;
   for (  View v : views) {
     LayoutParams lp=(LayoutParams)v.getLayoutParams();
-    markCellsForView(lp.tmpCellX,lp.tmpCellY,lp.cellHSpan,lp.cellVSpan,mTmpOccupied,false);
     if (boundingRect == null) {
       boundingRect=new Rect(lp.tmpCellX,lp.tmpCellY,lp.tmpCellX + lp.cellHSpan,lp.tmpCellY + lp.cellVSpan);
     }
@@ -12,26 +11,33 @@
       boundingRect.union(lp.tmpCellX,lp.tmpCellY,lp.tmpCellX + lp.cellHSpan,lp.tmpCellY + lp.cellVSpan);
     }
   }
+  ArrayList<View> dup=(ArrayList<View>)views.clone();
+  while (addViewInDirection(dup,boundingRect,direction,mTmpOccupied)) {
+  }
+  for (  View v : dup) {
+    LayoutParams lp=(LayoutParams)v.getLayoutParams();
+    markCellsForView(lp.tmpCellX,lp.tmpCellY,lp.cellHSpan,lp.cellVSpan,mTmpOccupied,false);
+  }
   boolean[][] blockOccupied=new boolean[boundingRect.width()][boundingRect.height()];
   int top=boundingRect.top;
   int left=boundingRect.left;
-  for (  View v : views) {
+  for (  View v : dup) {
     LayoutParams lp=(LayoutParams)v.getLayoutParams();
     markCellsForView(lp.tmpCellX - left,lp.tmpCellY - top,lp.cellHSpan,lp.cellVSpan,blockOccupied,true);
   }
   markCellsForRect(rectOccupiedByPotentialDrop,mTmpOccupied,true);
-  findNearestArea(boundingRect.left,boundingRect.top,boundingRect.width(),boundingRect.height(),direction,mTmpOccupied,blockOccupied,mTempLocation);
+  findNearestAreaInDirection(boundingRect.left,boundingRect.top,boundingRect.width(),boundingRect.height(),direction,mTmpOccupied,blockOccupied,mTempLocation);
   int deltaX=mTempLocation[0] - boundingRect.left;
   int deltaY=mTempLocation[1] - boundingRect.top;
   if (mTempLocation[0] >= 0 && mTempLocation[1] >= 0) {
-    for (    View v : views) {
+    for (    View v : dup) {
       LayoutParams lp=(LayoutParams)v.getLayoutParams();
       lp.tmpCellX+=deltaX;
       lp.tmpCellY+=deltaY;
     }
     success=true;
   }
-  for (  View v : views) {
+  for (  View v : dup) {
     LayoutParams lp=(LayoutParams)v.getLayoutParams();
     markCellsForView(lp.tmpCellX,lp.tmpCellY,lp.cellHSpan,lp.cellVSpan,mTmpOccupied,true);
   }

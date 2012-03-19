@@ -1,0 +1,32 @@
+{
+  final int[] bestXY=result != null ? result : new int[2];
+  bestXY[0]=-1;
+  bestXY[1]=-1;
+  float bestDistance=Float.MAX_VALUE;
+  if (direction[0] != 0 && direction[1] != 0) {
+    return bestXY;
+  }
+  int x=cellX + direction[0];
+  int y=cellY + direction[1];
+  while (x >= 0 && x + spanX <= mCountX && y >= 0 && y + spanY <= mCountY) {
+    boolean fail=false;
+    for (int i=0; i < spanX; i++) {
+      for (int j=0; j < spanY; j++) {
+        if (occupied[x + i][y + j] && (blockOccupied == null || blockOccupied[i][j])) {
+          fail=true;
+        }
+      }
+    }
+    if (!fail) {
+      float distance=(float)Math.sqrt((x - cellX) * (x - cellX) + (y - cellY) * (y - cellY));
+      if (Float.compare(distance,bestDistance) < 0) {
+        bestDistance=distance;
+        bestXY[0]=x;
+        bestXY[1]=y;
+      }
+    }
+    x+=direction[0];
+    y+=direction[1];
+  }
+  return bestXY;
+}

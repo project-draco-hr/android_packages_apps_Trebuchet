@@ -1,10 +1,10 @@
 {
-  result=findNearestArea(pixelX,pixelY,1,1,result);
+  result=findNearestArea(pixelX,pixelY,spanX,spanY,result);
   if (resultSpan == null) {
     resultSpan=new int[2];
   }
-  cellToCenterPoint(result[0],result[1],mTmpPoint);
-  computeDirectionVector(pixelX,pixelY,mTmpPoint[0],mTmpPoint[1],mDirectionVector);
+  regionToCenterPoint(result[0],result[1],spanX,spanY,mTmpPoint);
+  computeDirectionVector((mTmpPoint[0] - pixelX) / spanX,(mTmpPoint[1] - pixelY) / spanY,mDirectionVector);
   ItemConfiguration swapSolution=simpleSwap(pixelX,pixelY,minSpanX,minSpanY,spanX,spanY,mDirectionVector,dragView,true,new ItemConfiguration());
   ItemConfiguration noShuffleSolution=findConfigurationNoShuffle(pixelX,pixelY,minSpanX,minSpanY,spanX,spanY,dragView,new ItemConfiguration());
   ItemConfiguration finalSolution=null;

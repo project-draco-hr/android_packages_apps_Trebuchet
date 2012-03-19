@@ -1,6 +1,3 @@
 {
   markCellsAsUnoccupiedForView(child);
-  LayoutParams lp=(LayoutParams)child.getLayoutParams();
-  lp.cellX=-1;
-  lp.cellY=-1;
 }

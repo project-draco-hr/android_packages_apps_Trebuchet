@@ -1,7 +1,6 @@
 {
   mIntersectingViews.clear();
   mOccupiedRect.set(cellX,cellY,cellX + spanX,cellY + spanY);
-  markCellsForRect(mOccupiedRect,mTmpOccupied,true);
   if (ignoreView != null) {
     LayoutParams lp=(LayoutParams)ignoreView.getLayoutParams();
     lp.tmpCellX=cellX;
@@ -22,6 +21,16 @@
       mIntersectingViews.add(child);
     }
   }
+  if (pushViewsToTempLocation(mIntersectingViews,mOccupiedRect,direction)) {
+    return true;
+  }
+  direction[0]*=-1;
+  direction[1]*=-1;
+  if (pushViewsToTempLocation(mIntersectingViews,mOccupiedRect,direction)) {
+    return true;
+  }
+  direction[0]*=-1;
+  direction[1]*=-1;
   if (addViewsToTempLocation(mIntersectingViews,mOccupiedRect,direction)) {
     return true;
   }

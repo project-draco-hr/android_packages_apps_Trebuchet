@@ -1,6 +1,4 @@
 {
-  int deltaX=x1 - x0;
-  int deltaY=y1 - y0;
   double angle=Math.atan(((float)deltaY) / deltaX);
   result[0]=0;
   result[1]=0;

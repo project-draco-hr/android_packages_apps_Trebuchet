@@ -1,0 +1,50 @@
+{
+  boolean found=false;
+  int childCount=mChildren.getChildCount();
+  Rect r0=new Rect(boundingRect);
+  Rect r1=new Rect();
+  int deltaX=0;
+  int deltaY=0;
+  if (direction[1] < 0) {
+    r0.set(r0.left,r0.top - 1,r0.right,r0.bottom);
+    deltaY=-1;
+  }
+ else   if (direction[1] > 0) {
+    r0.set(r0.left,r0.top,r0.right,r0.bottom + 1);
+    deltaY=1;
+  }
+ else   if (direction[0] < 0) {
+    r0.set(r0.left - 1,r0.top,r0.right,r0.bottom);
+    deltaX=-1;
+  }
+ else   if (direction[0] > 0) {
+    r0.set(r0.left,r0.top,r0.right + 1,r0.bottom);
+    deltaX=1;
+  }
+  for (int i=0; i < childCount; i++) {
+    View child=mChildren.getChildAt(i);
+    if (views.contains(child))     continue;
+    LayoutParams lp=(LayoutParams)child.getLayoutParams();
+    r1.set(lp.tmpCellX,lp.tmpCellY,lp.tmpCellX + lp.cellHSpan,lp.tmpCellY + lp.cellVSpan);
+    if (Rect.intersects(r0,r1)) {
+      if (!lp.canReorder) {
+        return false;
+      }
+      boolean pushed=false;
+      for (int x=lp.tmpCellX; x < lp.tmpCellX + lp.cellHSpan; x++) {
+        for (int y=lp.tmpCellY; y < lp.tmpCellY + lp.cellVSpan; y++) {
+          boolean inBounds=x - deltaX >= 0 && x - deltaX < mCountX && y - deltaY >= 0 && y - deltaY < mCountY;
+          if (inBounds && occupied[x - deltaX][y - deltaY]) {
+            pushed=true;
+          }
+        }
+      }
+      if (pushed) {
+        views.add(child);
+        boundingRect.union(lp.tmpCellX,lp.tmpCellY,lp.tmpCellX + lp.cellHSpan,lp.tmpCellY + lp.cellVSpan);
+        found=true;
+      }
+    }
+  }
+  return found;
+}
