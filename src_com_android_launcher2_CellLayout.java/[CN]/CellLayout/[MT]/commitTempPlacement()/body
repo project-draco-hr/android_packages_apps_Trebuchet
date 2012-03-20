@@ -4,9 +4,9 @@
       mOccupied[i][j]=mTmpOccupied[i][j];
     }
   }
-  int childCount=mChildren.getChildCount();
+  int childCount=mShortcutsAndWidgets.getChildCount();
   for (int i=0; i < childCount; i++) {
-    LayoutParams lp=(LayoutParams)mChildren.getChildAt(i).getLayoutParams();
+    LayoutParams lp=(LayoutParams)mShortcutsAndWidgets.getChildAt(i).getLayoutParams();
     lp.cellX=lp.tmpCellX;
     lp.cellY=lp.tmpCellY;
   }

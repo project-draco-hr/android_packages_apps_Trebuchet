@@ -34,7 +34,7 @@ break;
 case KeyEvent.KEYCODE_DPAD_UP:
 if (handleKeyEvent) {
 final CellLayout layout=(CellLayout)workspace.getChildAt(pageIndex);
-final CellLayoutChildren children=layout.getChildrenLayout();
+final ShortcutAndWidgetContainer children=layout.getShortcutsAndWidgets();
 final View newIcon=getIconInDirection(layout,children,-1,1);
 if (newIcon != null) {
 newIcon.requestFocus();

@@ -15,7 +15,7 @@
     if (lp.cellHSpan < 0)     lp.cellHSpan=mCountX;
     if (lp.cellVSpan < 0)     lp.cellVSpan=mCountY;
     child.setId(childId);
-    mChildren.addView(child,index,lp);
+    mShortcutsAndWidgets.addView(child,index,lp);
     if (markCells)     markCellsAsOccupiedForView(child);
     return true;
   }

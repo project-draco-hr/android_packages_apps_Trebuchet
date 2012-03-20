@@ -1,5 +1,5 @@
 {
-  CellLayoutChildren parentChildren=(CellLayoutChildren)child.getParent();
+  ShortcutAndWidgetContainer parentChildren=(ShortcutAndWidgetContainer)child.getParent();
   CellLayout parent=(CellLayout)(CellLayout)parentChildren.getParent();
   CellLayout.LayoutParams lp=(CellLayout.LayoutParams)child.getLayoutParams();
   parentChildren.measureChild(child);

@@ -82,7 +82,7 @@
   }
   mBackgroundRect=new Rect();
   mForegroundRect=new Rect();
-  mChildren=new CellLayoutChildren(context);
-  mChildren.setCellDimensions(mCellWidth,mCellHeight,mWidthGap,mHeightGap);
-  addView(mChildren);
+  mShortcutsAndWidgets=new ShortcutAndWidgetContainer(context);
+  mShortcutsAndWidgets.setCellDimensions(mCellWidth,mCellHeight,mWidthGap,mHeightGap);
+  addView(mShortcutsAndWidgets);
 }

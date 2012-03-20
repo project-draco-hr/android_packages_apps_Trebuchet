@@ -1,4 +1,4 @@
 {
   markCellsAsUnoccupiedForView(view);
-  mChildren.removeView(view);
+  mShortcutsAndWidgets.removeView(view);
 }

@@ -1,4 +1,4 @@
 {
   clearOccupiedCells();
-  mChildren.removeAllViews();
+  mShortcutsAndWidgets.removeAllViews();
 }

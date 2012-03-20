@@ -42,6 +42,6 @@
     setUseTempCoords(false);
   }
   boolean[][] occupied=mOccupied;
-  mChildren.requestLayout();
+  mShortcutsAndWidgets.requestLayout();
   return result;
 }

@@ -4,9 +4,9 @@
       mTmpOccupied[i][j]=mOccupied[i][j];
     }
   }
-  int childCount=mChildren.getChildCount();
+  int childCount=mShortcutsAndWidgets.getChildCount();
   for (int i=0; i < childCount; i++) {
-    View child=mChildren.getChildAt(i);
+    View child=mShortcutsAndWidgets.getChildAt(i);
     if (child == ignoreView)     continue;
     LayoutParams lp=(LayoutParams)child.getLayoutParams();
     lp.tmpCellX=lp.cellX;

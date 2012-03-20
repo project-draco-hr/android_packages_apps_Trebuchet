@@ -1,4 +1,4 @@
 {
   ViewGroup parent=(ViewGroup)container.getChildAt(i);
-  return (CellLayoutChildren)parent.getChildAt(0);
+  return (ShortcutAndWidgetContainer)parent.getChildAt(0);
 }

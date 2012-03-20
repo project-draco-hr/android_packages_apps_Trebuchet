@@ -7,7 +7,7 @@
   }
   ArrayList<CellLayout> cellLayouts=getWorkspaceAndHotseatCellLayouts();
   for (  final CellLayout layoutParent : cellLayouts) {
-    final ViewGroup layout=layoutParent.getChildrenLayout();
+    final ViewGroup layout=layoutParent.getShortcutsAndWidgets();
     post(new Runnable(){
       public void run(){
         final ArrayList<View> childrenToRemove=new ArrayList<View>();
