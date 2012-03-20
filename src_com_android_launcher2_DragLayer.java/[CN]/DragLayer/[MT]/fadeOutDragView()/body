@@ -14,7 +14,7 @@
   mFadeOutAnim.addListener(new AnimatorListenerAdapter(){
     public void onAnimationEnd(    Animator animation){
       if (mDropView != null) {
-        mDropView.remove();
+        mDragController.onDeferredEndDrag(mDropView);
       }
       mDropView=null;
       invalidate();

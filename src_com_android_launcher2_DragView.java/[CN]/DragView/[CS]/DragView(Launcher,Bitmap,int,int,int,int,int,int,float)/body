@@ -1,6 +1,7 @@
 {
   super(launcher);
   mDragLayer=launcher.getDragLayer();
+  mInitialScale=initialScale;
   final Resources res=getResources();
   final float offsetX=res.getDimensionPixelSize(R.dimen.dragViewOffsetX);
   final float offsetY=res.getDimensionPixelSize(R.dimen.dragViewOffsetY);

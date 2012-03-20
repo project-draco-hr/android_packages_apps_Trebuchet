@@ -1,0 +1,7 @@
+DragView view
+AnimatorUpdateListener updateCb
+int duration
+TimeInterpolator interpolator
+Runnable onCompleteRunnable
+int animationEndStyle
+View anchorView

@@ -1,0 +1,5 @@
+{
+  final Rect from=new Rect();
+  dragLayer.getViewRectRelativeToSelf(d.dragView,from);
+  return new FlingAlongVectorAnimatorUpdateListener(dragLayer,vel,from,startTime);
+}

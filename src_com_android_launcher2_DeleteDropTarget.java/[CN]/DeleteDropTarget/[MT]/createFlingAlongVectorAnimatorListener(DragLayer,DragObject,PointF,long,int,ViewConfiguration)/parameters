@@ -1,0 +1,6 @@
+DragLayer dragLayer
+DragObject d
+PointF vel
+long startTime
+int duration
+ViewConfiguration config

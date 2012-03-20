@@ -1,0 +1,17 @@
+{
+  final int[] coordinates=mCoordinatesTemp;
+  mDragObject.x=coordinates[0];
+  mDragObject.y=coordinates[1];
+  mDragObject.dragComplete=true;
+  if (mLastDropTarget != null && mFlingToDeleteDropTarget != mLastDropTarget) {
+    mLastDropTarget.onDragExit(mDragObject);
+  }
+  boolean accepted=false;
+  mFlingToDeleteDropTarget.onDragEnter(mDragObject);
+  mFlingToDeleteDropTarget.onDragExit(mDragObject);
+  if (mFlingToDeleteDropTarget.acceptDrop(mDragObject)) {
+    mFlingToDeleteDropTarget.onFlingToDelete(mDragObject,mDragObject.x,mDragObject.y,vel);
+    accepted=true;
+  }
+  mDragObject.dragSource.onDropCompleted((View)mFlingToDeleteDropTarget,mDragObject,accepted);
+}

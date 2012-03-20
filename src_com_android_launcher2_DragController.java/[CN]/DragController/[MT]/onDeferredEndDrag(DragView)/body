@@ -1,0 +1,6 @@
+{
+  dragView.remove();
+  for (  DragListener listener : mListeners) {
+    listener.onDragEnd();
+  }
+}
