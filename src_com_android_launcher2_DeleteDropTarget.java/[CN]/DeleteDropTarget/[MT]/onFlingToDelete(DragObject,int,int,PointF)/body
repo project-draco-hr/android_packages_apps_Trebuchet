@@ -1,6 +1,10 @@
 {
+  final boolean isAllApps=d.dragSource instanceof AppsCustomizePagedView;
   d.dragView.setColor(0);
   d.dragView.updateInitialScaleToCurrentScale();
+  if (isAllApps) {
+    resetHoverColor();
+  }
   if (mFlingDeleteMode == MODE_FLING_DELETE_TO_TRASH) {
     mSearchDropTargetBar.deferOnDragEnd();
     mSearchDropTargetBar.finishAnimations();
@@ -34,8 +38,11 @@
   Runnable onAnimationEndRunnable=new Runnable(){
     @Override public void run(){
       mSearchDropTargetBar.onDragEnd();
-      mLauncher.exitSpringLoadedDragMode();
-      completeDrop(d);
+      if (!isAllApps) {
+        mLauncher.exitSpringLoadedDragMode();
+        completeDrop(d);
+      }
+      mLauncher.getDragController().onDeferredEndFling(d);
     }
   }
 ;

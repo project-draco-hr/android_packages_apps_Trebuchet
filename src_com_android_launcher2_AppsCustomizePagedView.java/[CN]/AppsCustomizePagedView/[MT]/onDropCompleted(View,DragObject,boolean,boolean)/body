@@ -1,5 +1,6 @@
 {
-  endDragging(target,success);
+  if (isFlingToDelete)   return;
+  endDragging(target,false,success);
   if (!success) {
     boolean showOutOfSpaceMessage=false;
     if (target instanceof Workspace) {

@@ -13,5 +13,5 @@
     mFlingToDeleteDropTarget.onFlingToDelete(mDragObject,mDragObject.x,mDragObject.y,vel);
     accepted=true;
   }
-  mDragObject.dragSource.onDropCompleted((View)mFlingToDeleteDropTarget,mDragObject,accepted);
+  mDragObject.dragSource.onDropCompleted((View)mFlingToDeleteDropTarget,mDragObject,true,accepted);
 }
