@@ -1,0 +1,50 @@
+{
+  if (views.size() == 0)   return true;
+  boolean success=false;
+  Rect boundingRect=null;
+  for (  View v : views) {
+    CellAndSpan c=currentState.map.get(v);
+    if (boundingRect == null) {
+      boundingRect=new Rect(c.x,c.y,c.x + c.spanX,c.y + c.spanY);
+    }
+ else {
+      boundingRect.union(c.x,c.y,c.x + c.spanX,c.y + c.spanY);
+    }
+  }
+  @SuppressWarnings("unchecked") ArrayList<View> dup=(ArrayList<View>)views.clone();
+  while (push && addViewInDirection(dup,boundingRect,direction,mTmpOccupied,currentState)) {
+  }
+  for (  View v : dup) {
+    CellAndSpan c=currentState.map.get(v);
+    markCellsForView(c.x,c.y,c.spanX,c.spanY,mTmpOccupied,false);
+  }
+  boolean[][] blockOccupied=new boolean[boundingRect.width()][boundingRect.height()];
+  int top=boundingRect.top;
+  int left=boundingRect.left;
+  for (  View v : dup) {
+    CellAndSpan c=currentState.map.get(v);
+    markCellsForView(c.x - left,c.y - top,c.spanX,c.spanY,blockOccupied,true);
+  }
+  markCellsForRect(rectOccupiedByPotentialDrop,mTmpOccupied,true);
+  if (push) {
+    findNearestAreaInDirection(boundingRect.left,boundingRect.top,boundingRect.width(),boundingRect.height(),direction,mTmpOccupied,blockOccupied,mTempLocation);
+  }
+ else {
+    findNearestArea(boundingRect.left,boundingRect.top,boundingRect.width(),boundingRect.height(),direction,mTmpOccupied,blockOccupied,mTempLocation);
+  }
+  if (mTempLocation[0] >= 0 && mTempLocation[1] >= 0) {
+    int deltaX=mTempLocation[0] - boundingRect.left;
+    int deltaY=mTempLocation[1] - boundingRect.top;
+    for (    View v : dup) {
+      CellAndSpan c=currentState.map.get(v);
+      c.x+=deltaX;
+      c.y+=deltaY;
+    }
+    success=true;
+  }
+  for (  View v : dup) {
+    CellAndSpan c=currentState.map.get(v);
+    markCellsForView(c.x,c.y,c.spanX,c.spanY,mTmpOccupied,true);
+  }
+  return success;
+}

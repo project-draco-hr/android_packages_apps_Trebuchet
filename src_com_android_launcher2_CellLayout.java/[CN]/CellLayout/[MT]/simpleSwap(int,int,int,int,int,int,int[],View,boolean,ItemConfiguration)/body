@@ -1,9 +1,10 @@
 {
-  resetTempLayoutToCurrent(dragView);
+  copyCurrentStateToSolution(solution,false);
+  copyOccupiedArray(mTmpOccupied);
   int result[]=new int[2];
   result=findNearestArea(pixelX,pixelY,spanX,spanY,result);
   boolean success=false;
-  success=rearrangementExists(result[0],result[1],spanX,spanY,direction,dragView);
+  success=rearrangementExists(result[0],result[1],spanX,spanY,direction,dragView,solution);
   if (!success) {
     if (spanX > minSpanX && (minSpanY == spanY || decX)) {
       return simpleSwap(pixelX,pixelY,minSpanX,minSpanY,spanX - 1,spanY,direction,dragView,false,solution);
@@ -19,7 +20,6 @@
     solution.dragViewY=result[1];
     solution.dragViewSpanX=spanX;
     solution.dragViewSpanY=spanY;
-    copyCurrentStateToSolution(solution,true);
   }
   return solution;
 }

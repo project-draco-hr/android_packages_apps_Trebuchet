@@ -1,0 +1,7 @@
+{
+  for (int i=0; i < mCountX; i++) {
+    for (int j=0; j < mCountY; j++) {
+      occupied[i][j]=mOccupied[i][j];
+    }
+  }
+}

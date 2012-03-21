@@ -10,12 +10,12 @@
     View child=mShortcutsAndWidgets.getChildAt(i);
     if (child == dragView)     continue;
     LayoutParams lp=(LayoutParams)child.getLayoutParams();
-    Point p=solution.map.get(child);
-    if (p != null) {
-      if (lp.cellX != p.x || lp.cellY != p.y) {
-        animateChildToPosition(child,p.x,p.y,150,0,DESTRUCTIVE_REORDER,false);
+    CellAndSpan c=solution.map.get(child);
+    if (c != null) {
+      if (lp.cellX != c.x || lp.cellY != c.y) {
+        animateChildToPosition(child,c.x,c.y,150,0,DESTRUCTIVE_REORDER,false);
       }
-      markCellsForView(p.x,p.y,lp.cellHSpan,lp.cellVSpan,occupied,true);
+      markCellsForView(c.x,c.y,c.spanX,c.spanY,occupied,true);
     }
   }
   if (commitDragView) {

@@ -41,7 +41,6 @@
   if ((mode == MODE_ON_DROP || !foundSolution) && !DESTRUCTIVE_REORDER) {
     setUseTempCoords(false);
   }
-  boolean[][] occupied=mOccupied;
   mShortcutsAndWidgets.requestLayout();
   return result;
 }

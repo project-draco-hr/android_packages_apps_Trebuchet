@@ -4,3 +4,4 @@ int spanX
 int spanY
 int[] direction
 View ignoreView
+ItemConfiguration solution

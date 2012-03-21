@@ -24,15 +24,16 @@
   for (int i=0; i < childCount; i++) {
     View child=mShortcutsAndWidgets.getChildAt(i);
     if (views.contains(child))     continue;
+    CellAndSpan c=currentState.map.get(child);
     LayoutParams lp=(LayoutParams)child.getLayoutParams();
-    r1.set(lp.tmpCellX,lp.tmpCellY,lp.tmpCellX + lp.cellHSpan,lp.tmpCellY + lp.cellVSpan);
+    r1.set(c.x,c.y,c.x + c.spanX,c.y + c.spanY);
     if (Rect.intersects(r0,r1)) {
       if (!lp.canReorder) {
         return false;
       }
       boolean pushed=false;
-      for (int x=lp.tmpCellX; x < lp.tmpCellX + lp.cellHSpan; x++) {
-        for (int y=lp.tmpCellY; y < lp.tmpCellY + lp.cellVSpan; y++) {
+      for (int x=c.x; x < c.x + c.spanX; x++) {
+        for (int y=c.y; y < c.y + c.spanY; y++) {
           boolean inBounds=x - deltaX >= 0 && x - deltaX < mCountX && y - deltaY >= 0 && y - deltaY < mCountY;
           if (inBounds && occupied[x - deltaX][y - deltaY]) {
             pushed=true;
@@ -41,7 +42,7 @@
       }
       if (pushed) {
         views.add(child);
-        boundingRect.union(lp.tmpCellX,lp.tmpCellY,lp.tmpCellX + lp.cellHSpan,lp.tmpCellY + lp.cellVSpan);
+        boundingRect.union(c.x,c.y,c.x + c.spanX,c.y + c.spanY);
         found=true;
       }
     }

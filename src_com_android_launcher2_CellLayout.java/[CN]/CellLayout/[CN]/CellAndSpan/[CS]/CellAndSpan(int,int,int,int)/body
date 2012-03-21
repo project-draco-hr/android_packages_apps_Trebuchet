@@ -1,0 +1,6 @@
+{
+  this.x=x;
+  this.y=y;
+  this.spanX=spanX;
+  this.spanY=spanY;
+}

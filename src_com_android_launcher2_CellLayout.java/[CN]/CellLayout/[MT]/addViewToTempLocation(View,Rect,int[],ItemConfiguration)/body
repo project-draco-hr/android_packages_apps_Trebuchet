@@ -1,0 +1,14 @@
+{
+  CellAndSpan c=currentState.map.get(v);
+  boolean success=false;
+  markCellsForView(c.x,c.y,c.spanX,c.spanY,mTmpOccupied,false);
+  markCellsForRect(rectOccupiedByPotentialDrop,mTmpOccupied,true);
+  findNearestArea(c.x,c.y,c.spanX,c.spanY,direction,mTmpOccupied,null,mTempLocation);
+  if (mTempLocation[0] >= 0 && mTempLocation[1] >= 0) {
+    c.x=mTempLocation[0];
+    c.y=mTempLocation[1];
+    success=true;
+  }
+  markCellsForView(c.x,c.y,c.spanX,c.spanY,mTmpOccupied,true);
+  return success;
+}

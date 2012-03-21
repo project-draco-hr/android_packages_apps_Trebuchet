@@ -3,13 +3,13 @@
   for (int i=0; i < childCount; i++) {
     View child=mShortcutsAndWidgets.getChildAt(i);
     LayoutParams lp=(LayoutParams)child.getLayoutParams();
-    Point p;
+    CellAndSpan c;
     if (temp) {
-      p=new Point(lp.tmpCellX,lp.tmpCellY);
+      c=new CellAndSpan(lp.tmpCellX,lp.tmpCellY,lp.cellHSpan,lp.cellVSpan);
     }
  else {
-      p=new Point(lp.cellX,lp.cellY);
+      c=new CellAndSpan(lp.cellX,lp.cellY,lp.cellHSpan,lp.cellVSpan);
     }
-    solution.map.put(child,p);
+    solution.map.put(child,c);
   }
 }

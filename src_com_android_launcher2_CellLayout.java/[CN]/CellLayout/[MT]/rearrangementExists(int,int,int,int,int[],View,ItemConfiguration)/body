@@ -2,18 +2,17 @@
   mIntersectingViews.clear();
   mOccupiedRect.set(cellX,cellY,cellX + spanX,cellY + spanY);
   if (ignoreView != null) {
-    LayoutParams lp=(LayoutParams)ignoreView.getLayoutParams();
-    lp.tmpCellX=cellX;
-    lp.tmpCellY=cellY;
+    CellAndSpan c=solution.map.get(ignoreView);
+    c.x=cellX;
+    c.y=cellY;
   }
-  int childCount=mShortcutsAndWidgets.getChildCount();
   Rect r0=new Rect(cellX,cellY,cellX + spanX,cellY + spanY);
   Rect r1=new Rect();
-  for (int i=0; i < childCount; i++) {
-    View child=mShortcutsAndWidgets.getChildAt(i);
+  for (  View child : solution.map.keySet()) {
     if (child == ignoreView)     continue;
+    CellAndSpan c=solution.map.get(child);
     LayoutParams lp=(LayoutParams)child.getLayoutParams();
-    r1.set(lp.cellX,lp.cellY,lp.cellX + lp.cellHSpan,lp.cellY + lp.cellVSpan);
+    r1.set(c.x,c.y,c.x + c.spanX,c.y + c.spanY);
     if (Rect.intersects(r0,r1)) {
       if (!lp.canReorder) {
         return false;
@@ -21,21 +20,21 @@
       mIntersectingViews.add(child);
     }
   }
-  if (pushViewsToTempLocation(mIntersectingViews,mOccupiedRect,direction)) {
+  if (addViewsToTempLocation(mIntersectingViews,mOccupiedRect,direction,true,solution)) {
     return true;
   }
   direction[0]*=-1;
   direction[1]*=-1;
-  if (pushViewsToTempLocation(mIntersectingViews,mOccupiedRect,direction)) {
+  if (addViewsToTempLocation(mIntersectingViews,mOccupiedRect,direction,true,solution)) {
     return true;
   }
   direction[0]*=-1;
   direction[1]*=-1;
-  if (addViewsToTempLocation(mIntersectingViews,mOccupiedRect,direction)) {
+  if (addViewsToTempLocation(mIntersectingViews,mOccupiedRect,direction,false,solution)) {
     return true;
   }
   for (  View v : mIntersectingViews) {
-    if (!addViewToTempLocation(v,mOccupiedRect,direction)) {
+    if (!addViewToTempLocation(v,mOccupiedRect,direction,solution)) {
       return false;
     }
   }

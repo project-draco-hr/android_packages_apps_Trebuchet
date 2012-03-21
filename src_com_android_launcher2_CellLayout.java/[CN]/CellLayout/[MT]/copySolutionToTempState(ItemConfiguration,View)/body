@@ -9,11 +9,13 @@
     View child=mShortcutsAndWidgets.getChildAt(i);
     if (child == dragView)     continue;
     LayoutParams lp=(LayoutParams)child.getLayoutParams();
-    Point p=solution.map.get(child);
-    if (p != null) {
-      lp.tmpCellX=p.x;
-      lp.tmpCellY=p.y;
-      markCellsForView(lp.tmpCellX,lp.tmpCellY,lp.cellHSpan,lp.cellVSpan,mTmpOccupied,true);
+    CellAndSpan c=solution.map.get(child);
+    if (c != null) {
+      lp.tmpCellX=c.x;
+      lp.tmpCellY=c.y;
+      lp.cellHSpan=c.spanX;
+      lp.cellVSpan=c.spanY;
+      markCellsForView(c.x,c.y,c.spanX,c.spanY,mTmpOccupied,true);
     }
   }
   markCellsForView(solution.dragViewX,solution.dragViewY,solution.dragViewSpanX,solution.dragViewSpanY,mTmpOccupied,true);
