@@ -1,5 +1,5 @@
 {
-  CellLayoutChildren parent=(CellLayoutChildren)v.getParent();
+  ShortcutAndWidgetContainer parent=(ShortcutAndWidgetContainer)v.getParent();
   final CellLayout layout=(CellLayout)parent.getParent();
   final Workspace workspace=(Workspace)layout.getParent();
   final ViewGroup launcher=(ViewGroup)workspace.getParent();

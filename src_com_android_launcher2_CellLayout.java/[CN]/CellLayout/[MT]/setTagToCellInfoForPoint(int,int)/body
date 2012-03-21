@@ -3,10 +3,10 @@
   Rect frame=mRect;
   final int x=touchX + mScrollX;
   final int y=touchY + mScrollY;
-  final int count=mChildren.getChildCount();
+  final int count=mShortcutsAndWidgets.getChildCount();
   boolean found=false;
   for (int i=count - 1; i >= 0; i--) {
-    final View child=mChildren.getChildAt(i);
+    final View child=mShortcutsAndWidgets.getChildAt(i);
     final LayoutParams lp=(LayoutParams)child.getLayoutParams();
     if ((child.getVisibility() == VISIBLE || child.getAnimation() != null) && lp.isLockedToGrid) {
       child.getHitRect(frame);

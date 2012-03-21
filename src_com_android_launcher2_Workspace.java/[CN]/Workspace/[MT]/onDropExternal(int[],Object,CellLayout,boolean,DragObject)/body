@@ -102,7 +102,7 @@ cellLayout.findCellForSpan(mTargetCell,1,1);
 addInScreen(view,container,screen,mTargetCell[0],mTargetCell[1],info.spanX,info.spanY,insertAtFirst);
 cellLayout.onDropChild(view);
 CellLayout.LayoutParams lp=(CellLayout.LayoutParams)view.getLayoutParams();
-cellLayout.getChildrenLayout().measureChild(view);
+cellLayout.getShortcutsAndWidgets().measureChild(view);
 LauncherModel.addOrMoveItemInDatabase(mLauncher,info,container,screen,lp.cellX,lp.cellY);
 if (d.dragView != null) {
 setFinalTransitionTransform(cellLayout);

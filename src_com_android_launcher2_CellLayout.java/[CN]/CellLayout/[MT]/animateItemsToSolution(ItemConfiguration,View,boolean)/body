@@ -5,9 +5,9 @@
       occupied[i][j]=false;
     }
   }
-  int childCount=mChildren.getChildCount();
+  int childCount=mShortcutsAndWidgets.getChildCount();
   for (int i=0; i < childCount; i++) {
-    View child=mChildren.getChildAt(i);
+    View child=mShortcutsAndWidgets.getChildAt(i);
     if (child == dragView)     continue;
     LayoutParams lp=(LayoutParams)child.getLayoutParams();
     Point p=solution.map.get(child);

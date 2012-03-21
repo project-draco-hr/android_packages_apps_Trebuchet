@@ -1,0 +1,6 @@
+{
+  if (getChildCount() > 0) {
+    return (ShortcutAndWidgetContainer)getChildAt(0);
+  }
+  return null;
+}

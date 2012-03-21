@@ -1,7 +1,7 @@
 {
   ArrayList<CellLayout> layouts=getWorkspaceAndHotseatCellLayouts();
   for (  CellLayout layout : layouts) {
-    if (layout.getChildrenLayout().indexOfChild(v) > -1) {
+    if (layout.getShortcutsAndWidgets().indexOfChild(v) > -1) {
       return layout;
     }
   }

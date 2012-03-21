@@ -1,5 +1,5 @@
 {
-  CellLayoutChildren parent=(CellLayoutChildren)v.getParent();
+  ShortcutAndWidgetContainer parent=(ShortcutAndWidgetContainer)v.getParent();
   final CellLayout layout=(CellLayout)parent.getParent();
   final Folder folder=(Folder)layout.getParent();
   View title=folder.mFolderName;

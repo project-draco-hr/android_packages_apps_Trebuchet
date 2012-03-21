@@ -1,6 +1,6 @@
 {
   boolean found=false;
-  int childCount=mChildren.getChildCount();
+  int childCount=mShortcutsAndWidgets.getChildCount();
   Rect r0=new Rect(boundingRect);
   Rect r1=new Rect();
   int deltaX=0;
@@ -22,7 +22,7 @@
     deltaX=1;
   }
   for (int i=0; i < childCount; i++) {
-    View child=mChildren.getChildAt(i);
+    View child=mShortcutsAndWidgets.getChildAt(i);
     if (views.contains(child))     continue;
     LayoutParams lp=(LayoutParams)child.getLayoutParams();
     r1.set(lp.tmpCellX,lp.tmpCellY,lp.tmpCellX + lp.cellHSpan,lp.tmpCellY + lp.cellVSpan);

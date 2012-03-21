@@ -1,6 +1,6 @@
 {
   for (int i=start; i < start + count; i++) {
-    markCellsAsUnoccupiedForView(mChildren.getChildAt(i));
+    markCellsAsUnoccupiedForView(mShortcutsAndWidgets.getChildAt(i));
   }
-  mChildren.removeViews(start,count);
+  mShortcutsAndWidgets.removeViews(start,count);
 }

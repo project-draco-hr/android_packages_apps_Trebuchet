@@ -6,11 +6,11 @@
     lp.tmpCellX=cellX;
     lp.tmpCellY=cellY;
   }
-  int childCount=mChildren.getChildCount();
+  int childCount=mShortcutsAndWidgets.getChildCount();
   Rect r0=new Rect(cellX,cellY,cellX + spanX,cellY + spanY);
   Rect r1=new Rect();
   for (int i=0; i < childCount; i++) {
-    View child=mChildren.getChildAt(i);
+    View child=mShortcutsAndWidgets.getChildAt(i);
     if (child == ignoreView)     continue;
     LayoutParams lp=(LayoutParams)child.getLayoutParams();
     r1.set(lp.cellX,lp.cellY,lp.cellX + lp.cellHSpan,lp.cellY + lp.cellVSpan);
