@@ -13,12 +13,10 @@
     }
     int spanX=1;
     int spanY=1;
-    View ignoreView=null;
     if (mDragInfo != null) {
       final CellLayout.CellInfo dragCellInfo=mDragInfo;
       spanX=dragCellInfo.spanX;
       spanY=dragCellInfo.spanY;
-      ignoreView=dragCellInfo.cell;
     }
  else {
       final ItemInfo dragInfo=(ItemInfo)d.dragInfo;

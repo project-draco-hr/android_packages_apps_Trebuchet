@@ -12,7 +12,7 @@
     }
   }
   @SuppressWarnings("unchecked") ArrayList<View> dup=(ArrayList<View>)views.clone();
-  while (push && addViewInDirection(dup,boundingRect,direction,mTmpOccupied,currentState)) {
+  while (push && addViewInDirection(dup,boundingRect,direction,mTmpOccupied,dragView,currentState)) {
   }
   for (  View v : dup) {
     CellAndSpan c=currentState.map.get(v);

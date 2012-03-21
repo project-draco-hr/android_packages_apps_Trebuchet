@@ -3,8 +3,10 @@
   mOccupiedRect.set(cellX,cellY,cellX + spanX,cellY + spanY);
   if (ignoreView != null) {
     CellAndSpan c=solution.map.get(ignoreView);
-    c.x=cellX;
-    c.y=cellY;
+    if (c != null) {
+      c.x=cellX;
+      c.y=cellY;
+    }
   }
   Rect r0=new Rect(cellX,cellY,cellX + spanX,cellY + spanY);
   Rect r1=new Rect();
@@ -20,17 +22,17 @@
       mIntersectingViews.add(child);
     }
   }
-  if (addViewsToTempLocation(mIntersectingViews,mOccupiedRect,direction,true,solution)) {
+  if (addViewsToTempLocation(mIntersectingViews,mOccupiedRect,direction,true,ignoreView,solution)) {
     return true;
   }
   direction[0]*=-1;
   direction[1]*=-1;
-  if (addViewsToTempLocation(mIntersectingViews,mOccupiedRect,direction,true,solution)) {
+  if (addViewsToTempLocation(mIntersectingViews,mOccupiedRect,direction,true,ignoreView,solution)) {
     return true;
   }
   direction[0]*=-1;
   direction[1]*=-1;
-  if (addViewsToTempLocation(mIntersectingViews,mOccupiedRect,direction,false,solution)) {
+  if (addViewsToTempLocation(mIntersectingViews,mOccupiedRect,direction,false,ignoreView,solution)) {
     return true;
   }
   for (  View v : mIntersectingViews) {

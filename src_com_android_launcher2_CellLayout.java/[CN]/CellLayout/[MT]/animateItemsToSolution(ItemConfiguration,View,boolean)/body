@@ -9,12 +9,9 @@
   for (int i=0; i < childCount; i++) {
     View child=mShortcutsAndWidgets.getChildAt(i);
     if (child == dragView)     continue;
-    LayoutParams lp=(LayoutParams)child.getLayoutParams();
     CellAndSpan c=solution.map.get(child);
     if (c != null) {
-      if (lp.cellX != c.x || lp.cellY != c.y) {
-        animateChildToPosition(child,c.x,c.y,150,0,DESTRUCTIVE_REORDER,false);
-      }
+      animateChildToPosition(child,c.x,c.y,REORDER_ANIMATION_DURATION,0,DESTRUCTIVE_REORDER,false);
       markCellsForView(c.x,c.y,c.spanX,c.spanY,occupied,true);
     }
   }

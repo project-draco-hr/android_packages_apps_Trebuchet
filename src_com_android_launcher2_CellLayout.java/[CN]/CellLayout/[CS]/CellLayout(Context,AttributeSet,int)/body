@@ -19,6 +19,7 @@
   mOverScrollLeft=res.getDrawable(R.drawable.overscroll_glow_left);
   mOverScrollRight=res.getDrawable(R.drawable.overscroll_glow_right);
   mForegroundPadding=res.getDimensionPixelSize(R.dimen.workspace_overscroll_drawable_padding);
+  mReorderHintAnimationMagnitude=(REORDER_HINT_MAGNITUDE * res.getDimensionPixelSize(R.dimen.app_icon_size));
   mNormalBackground.setFilterBitmap(true);
   mActiveGlowBackground.setFilterBitmap(true);
   int iconScale=res.getInteger(R.integer.app_icon_scale_percent);

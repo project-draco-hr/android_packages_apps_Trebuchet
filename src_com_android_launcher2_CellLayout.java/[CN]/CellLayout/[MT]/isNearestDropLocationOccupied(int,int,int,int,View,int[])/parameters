@@ -1,0 +1,6 @@
+int pixelX
+int pixelY
+int spanX
+int spanY
+View dragView
+int[] result

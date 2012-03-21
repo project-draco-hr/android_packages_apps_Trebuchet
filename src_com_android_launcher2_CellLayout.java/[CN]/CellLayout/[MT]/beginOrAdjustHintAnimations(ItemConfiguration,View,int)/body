@@ -1,0 +1,14 @@
+{
+  int childCount=mShortcutsAndWidgets.getChildCount();
+  int timeForPriorAnimationToComplete=getMaxCompletionTime();
+  for (int i=0; i < childCount; i++) {
+    View child=mShortcutsAndWidgets.getChildAt(i);
+    if (child == dragView)     continue;
+    CellAndSpan c=solution.map.get(child);
+    LayoutParams lp=(LayoutParams)child.getLayoutParams();
+    if (c != null) {
+      ReorderHintAnimation rha=new ReorderHintAnimation(child,lp.cellX,lp.cellY,c.x,c.y,c.spanX,c.spanY);
+      rha.animate(timeForPriorAnimationToComplete);
+    }
+  }
+}

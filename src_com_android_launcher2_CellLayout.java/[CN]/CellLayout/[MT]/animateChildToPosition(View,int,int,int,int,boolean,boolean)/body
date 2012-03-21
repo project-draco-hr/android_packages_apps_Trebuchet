@@ -4,7 +4,7 @@
   if (!permanent) {
     occupied=mTmpOccupied;
   }
-  if (clc.indexOfChild(child) != -1 && !occupied[cellX][cellY]) {
+  if (clc.indexOfChild(child) != -1) {
     final LayoutParams lp=(LayoutParams)child.getLayoutParams();
     final ItemInfo info=(ItemInfo)child.getTag();
     if (mReorderAnimators.containsKey(lp)) {
@@ -42,8 +42,8 @@
     va.addUpdateListener(new AnimatorUpdateListener(){
       @Override public void onAnimationUpdate(      ValueAnimator animation){
         float r=((Float)animation.getAnimatedValue()).floatValue();
-        lp.x=(int)(r * newX + (1 - r) * oldX);
-        lp.y=(int)(r * newY + (1 - r) * oldY);
+        lp.x=(int)((1 - r) * oldX + r * newX);
+        lp.y=(int)((1 - r) * oldY + r * newY);
         child.requestLayout();
       }
     }

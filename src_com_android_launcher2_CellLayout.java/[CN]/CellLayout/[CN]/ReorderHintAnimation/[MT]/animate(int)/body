@@ -1,0 +1,36 @@
+{
+  if (mShakeAnimators.containsKey(child)) {
+    ReorderHintAnimation oldAnimation=mShakeAnimators.get(child);
+    oldAnimation.completeAnimation();
+    mShakeAnimators.remove(child);
+  }
+  if (deltaX == 0 && deltaY == 0) {
+    return;
+  }
+  va=ValueAnimator.ofFloat(0f,1f);
+  va.setRepeatMode(ValueAnimator.REVERSE);
+  va.setRepeatCount(ValueAnimator.INFINITE);
+  va.setDuration(DURATION);
+  va.addUpdateListener(new AnimatorUpdateListener(){
+    @Override public void onAnimationUpdate(    ValueAnimator animation){
+      float r=((Float)animation.getAnimatedValue()).floatValue();
+      float x=r * deltaX;
+      float y=r * deltaY;
+      child.setTranslationX(x);
+      child.setTranslationY(y);
+    }
+  }
+);
+  va.addListener(new AnimatorListenerAdapter(){
+    public void onAnimationRepeat(    Animator animation){
+      repeatCount++;
+      if (cancelOnCycleComplete && repeatCount % 2 == 0) {
+        va.cancel();
+      }
+    }
+  }
+);
+  va.setStartDelay(Math.max(REORDER_ANIMATION_DURATION,delay));
+  mShakeAnimators.put(child,this);
+  va.start();
+}

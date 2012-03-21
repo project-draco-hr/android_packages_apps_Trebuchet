@@ -1,9 +1,15 @@
 {
   int[] resultSpan=new int[2];
-  mTargetCell=mDragTargetLayout.createArea((int)mDragViewVisualCenter[0],(int)mDragViewVisualCenter[1],minSpanX,minSpanY,spanX,spanY,child,mTargetCell,resultSpan,CellLayout.MODE_DRAG_OVER);
+  mTargetCell=findNearestArea((int)mDragViewVisualCenter[0],(int)mDragViewVisualCenter[1],spanX,spanY,mDragTargetLayout,mTargetCell);
   mLastReorderX=mTargetCell[0];
   mLastReorderY=mTargetCell[1];
+  mTargetCell=mDragTargetLayout.createArea((int)mDragViewVisualCenter[0],(int)mDragViewVisualCenter[1],minSpanX,minSpanY,spanX,spanY,child,mTargetCell,resultSpan,CellLayout.MODE_DRAG_OVER);
+  if (mTargetCell[0] < 0 || mTargetCell[1] < 0) {
+    mDragTargetLayout.revertTempState();
+  }
   if (mDragMode == DRAG_MODE_ADD_TO_FOLDER) {
   }
   mDragMode=DRAG_MODE_REORDER;
+  boolean resize=resultSpan[0] != spanX || resultSpan[1] != spanY;
+  mDragTargetLayout.visualizeDropLocation(child,mDragOutline,(int)mDragViewVisualCenter[0],(int)mDragViewVisualCenter[1],mTargetCell[0],mTargetCell[1],resultSpan[0],resultSpan[1],resize,dragView.getDragVisualizeOffset(),dragView.getDragRegion());
 }

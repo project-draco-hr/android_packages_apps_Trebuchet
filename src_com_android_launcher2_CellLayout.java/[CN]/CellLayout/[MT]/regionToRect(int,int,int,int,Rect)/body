@@ -1,0 +1,7 @@
+{
+  final int hStartPadding=getPaddingLeft();
+  final int vStartPadding=getPaddingTop();
+  final int left=hStartPadding + cellX * (mCellWidth + mWidthGap);
+  final int top=vStartPadding + cellY * (mCellHeight + mHeightGap);
+  result.set(left,top,left + (spanX * mCellWidth + (spanX - 1) * mWidthGap),top + (spanY * mCellHeight + (spanY - 1) * mHeightGap));
+}

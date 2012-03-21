@@ -1,0 +1,7 @@
+View child
+int cellX0
+int cellY0
+int cellX1
+int cellY1
+int spanX
+int spanY

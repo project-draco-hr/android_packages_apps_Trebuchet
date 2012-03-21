@@ -1,0 +1,8 @@
+{
+  if (repeatCount % 2 == 0) {
+    return (int)(va.getDuration() - va.getCurrentPlayTime() + DURATION);
+  }
+ else {
+    return (int)(va.getDuration() - va.getCurrentPlayTime());
+  }
+}

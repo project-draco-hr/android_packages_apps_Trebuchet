@@ -2,8 +2,6 @@
   if (bubbleChild.getLayoutParams() instanceof LayoutParams && (bubbleChild.getMeasuredWidth() | bubbleChild.getMeasuredHeight()) == 0) {
     getShortcutsAndWidgets().measureChild(bubbleChild);
   }
-  int measuredWidth=bubbleChild.getMeasuredWidth();
-  int measuredHeight=bubbleChild.getMeasuredHeight();
   bubbleChild.setScaleX(scale);
   bubbleChild.setScaleY(scale);
 }

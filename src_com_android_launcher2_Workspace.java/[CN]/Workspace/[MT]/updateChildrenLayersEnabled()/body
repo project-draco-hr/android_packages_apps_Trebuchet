@@ -1,7 +1,6 @@
 {
-  boolean small=isSmall() || mIsSwitchingState;
-  boolean dragging=mAnimatingViewIntoPlace || mIsDragOccuring;
-  boolean enableChildrenLayers=small || dragging || isPageMoving();
+  boolean small=mState == State.SMALL || mIsSwitchingState;
+  boolean enableChildrenLayers=small || mAnimatingViewIntoPlace || isPageMoving();
   if (enableChildrenLayers != mChildrenLayersEnabled) {
     mChildrenLayersEnabled=enableChildrenLayers;
     for (int i=0; i < getPageCount(); i++) {

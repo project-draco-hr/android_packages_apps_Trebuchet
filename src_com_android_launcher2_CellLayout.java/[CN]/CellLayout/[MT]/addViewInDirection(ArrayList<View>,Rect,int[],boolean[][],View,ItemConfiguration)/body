@@ -23,7 +23,7 @@
   }
   for (int i=0; i < childCount; i++) {
     View child=mShortcutsAndWidgets.getChildAt(i);
-    if (views.contains(child))     continue;
+    if (views.contains(child) || child == dragView)     continue;
     CellAndSpan c=currentState.map.get(child);
     LayoutParams lp=(LayoutParams)child.getLayoutParams();
     r1.set(c.x,c.y,c.x + c.spanX,c.y + c.spanY);

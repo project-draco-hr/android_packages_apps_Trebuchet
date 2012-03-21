@@ -1,0 +1,7 @@
+{
+  int maxTime=0;
+  for (  ReorderHintAnimation a : mShakeAnimators.values()) {
+    maxTime=Math.max(maxTime,a.completionTime());
+  }
+  return maxTime;
+}

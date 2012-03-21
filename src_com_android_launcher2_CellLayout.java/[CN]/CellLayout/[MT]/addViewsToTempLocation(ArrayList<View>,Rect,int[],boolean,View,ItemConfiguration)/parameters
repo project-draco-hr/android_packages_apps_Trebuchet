@@ -2,4 +2,5 @@ ArrayList<View> views
 Rect rectOccupiedByPotentialDrop
 int[] direction
 boolean push
+View dragView
 ItemConfiguration currentState

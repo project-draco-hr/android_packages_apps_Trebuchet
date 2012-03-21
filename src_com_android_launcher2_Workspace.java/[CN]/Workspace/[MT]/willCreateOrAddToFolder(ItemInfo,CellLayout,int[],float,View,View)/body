@@ -8,6 +8,7 @@
   if (willAddToFolder && mDragMode == DRAG_MODE_NONE) {
     FolderIcon fi=((FolderIcon)dragOverView);
     mDragMode=DRAG_MODE_ADD_TO_FOLDER;
+    mWillAddToExistingFolder=true;
     fi.onDragEnter(info);
     if (targetLayout != null) {
       targetLayout.clearDragOutlines();
@@ -15,9 +16,10 @@
   }
   if (dragOverView != lastDragOverView || (mCreateUserFolderOnDrop && !userFolderPending) || (!willAddToFolder && mDragMode == DRAG_MODE_ADD_TO_FOLDER)) {
     cancelFolderCreation();
+    mWillAddToExistingFolder=false;
     if (lastDragOverView != null && lastDragOverView instanceof FolderIcon) {
       ((FolderIcon)lastDragOverView).onDragExit(info);
     }
   }
-  return willAddToFolder || userFolderPending;
+  return (willAddToFolder || userFolderPending) && mDragMode != DRAG_MODE_REORDER;
 }
