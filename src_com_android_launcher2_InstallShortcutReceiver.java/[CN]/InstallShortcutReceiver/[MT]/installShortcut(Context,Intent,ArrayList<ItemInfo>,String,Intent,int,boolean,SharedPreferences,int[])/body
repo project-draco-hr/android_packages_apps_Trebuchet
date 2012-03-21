@@ -6,23 +6,27 @@
       }
       boolean duplicate=data.getBooleanExtra(Launcher.EXTRA_SHORTCUT_DUPLICATE,true);
       if (duplicate || !shortcutExists) {
+        int newAppsScreen=sharedPrefs.getInt(NEW_APPS_PAGE_KEY,screen);
+        Set<String> newApps=new HashSet<String>();
+        if (newAppsScreen == screen) {
+          newApps=sharedPrefs.getStringSet(NEW_APPS_LIST_KEY,newApps);
+        }
+        newApps.add(intent.toUri(0).toString());
+        sharedPrefs.edit().putInt(NEW_APPS_PAGE_KEY,screen).putStringSet(NEW_APPS_LIST_KEY,newApps).commit();
         LauncherApplication app=(LauncherApplication)context.getApplicationContext();
         ShortcutInfo info=app.getModel().addShortcut(context,data,LauncherSettings.Favorites.CONTAINER_DESKTOP,screen,mCoordinates[0],mCoordinates[1],true);
-        if (info != null) {
-          errorMsgs[0]=context.getString(R.string.shortcut_installed,name);
-        }
- else {
+        if (info == null) {
           return false;
         }
       }
  else {
-        errorMsgs[0]=context.getString(R.string.shortcut_duplicate,name);
+        result[0]=INSTALL_SHORTCUT_IS_DUPLICATE;
       }
       return true;
     }
   }
  else {
-    errorMsgs[0]=context.getString(R.string.out_of_space);
+    result[0]=INSTALL_SHORTCUT_NO_SPACE;
   }
   return false;
 }

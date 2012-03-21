@@ -25,4 +25,8 @@
     mDelayedResizeRunnable.run();
     mDelayedResizeRunnable=null;
   }
+  if (mDelayedSnapToPageRunnable != null) {
+    mDelayedSnapToPageRunnable.run();
+    mDelayedSnapToPageRunnable=null;
+  }
 }

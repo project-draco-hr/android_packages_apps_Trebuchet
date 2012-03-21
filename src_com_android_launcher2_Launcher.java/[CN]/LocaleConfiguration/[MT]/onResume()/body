@@ -3,7 +3,7 @@
   mPaused=false;
   if (mRestoring || mOnResumeNeedsLoad) {
     mWorkspaceLoading=true;
-    mModel.startLoader(this,true);
+    mModel.startLoader(true);
     mRestoring=false;
     mOnResumeNeedsLoad=false;
   }

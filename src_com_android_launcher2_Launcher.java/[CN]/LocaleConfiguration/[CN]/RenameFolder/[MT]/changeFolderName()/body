@@ -6,7 +6,7 @@
     LauncherModel.updateItemInDatabase(Launcher.this,mFolderInfo);
     if (mWorkspaceLoading) {
       lockAllApps();
-      mModel.startLoader(Launcher.this,false);
+      mModel.startLoader(false);
     }
  else {
       final FolderIcon folderIcon=(FolderIcon)mWorkspace.getViewForTag(mFolderInfo);
@@ -16,7 +16,7 @@
  else {
         lockAllApps();
         mWorkspaceLoading=true;
-        mModel.startLoader(Launcher.this,false);
+        mModel.startLoader(false);
       }
     }
   }

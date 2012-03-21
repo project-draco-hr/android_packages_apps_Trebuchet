@@ -9,6 +9,6 @@
     }
   }
   if (runLoader) {
-    startLoader(mApp,false);
+    startLoader(false);
   }
 }

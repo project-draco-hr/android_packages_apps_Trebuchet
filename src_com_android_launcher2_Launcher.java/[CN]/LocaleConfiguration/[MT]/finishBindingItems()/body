@@ -10,11 +10,24 @@
     super.onRestoreInstanceState(mSavedInstanceState);
     mSavedInstanceState=null;
   }
-  mWorkspaceLoading=false;
   for (int i=0; i < sPendingAddList.size(); i++) {
     completeAdd(sPendingAddList.get(i));
   }
   sPendingAddList.clear();
   updateAppMarketIcon();
-  mWorkspace.postDelayed(mBuildLayersRunnable,500);
+  if (mVisible || mWorkspaceLoading) {
+    Runnable newAppsRunnable=new Runnable(){
+      @Override public void run(){
+        runNewAppsAnimation();
+      }
+    }
+;
+    if (mNewShortcutAnimatePage > -1 && mNewShortcutAnimatePage != mWorkspace.getCurrentPage()) {
+      mWorkspace.snapToPage(mNewShortcutAnimatePage,newAppsRunnable);
+    }
+ else {
+      newAppsRunnable.run();
+    }
+  }
+  mWorkspaceLoading=false;
 }
