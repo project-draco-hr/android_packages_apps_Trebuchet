@@ -4,5 +4,6 @@
     AppsCustomizeAsyncTask task=(AppsCustomizeAsyncTask)iter.next();
     task.cancel(false);
     iter.remove();
+    mDirtyPageContent.set(task.page,true);
   }
 }

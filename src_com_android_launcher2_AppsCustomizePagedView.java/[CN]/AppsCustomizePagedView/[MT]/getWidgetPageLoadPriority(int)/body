@@ -7,7 +7,7 @@
   int minPageDiff=Integer.MAX_VALUE;
   while (iter.hasNext()) {
     AppsCustomizeAsyncTask task=(AppsCustomizeAsyncTask)iter.next();
-    minPageDiff=Math.abs(task.page + mNumAppsPages - toPage);
+    minPageDiff=Math.abs(task.page - toPage);
   }
   int rawPageDiff=Math.abs(page - toPage);
   return rawPageDiff - Math.min(rawPageDiff,minPageDiff);

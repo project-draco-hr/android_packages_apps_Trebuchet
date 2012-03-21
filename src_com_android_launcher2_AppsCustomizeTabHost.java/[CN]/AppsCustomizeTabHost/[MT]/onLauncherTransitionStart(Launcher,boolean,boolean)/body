@@ -1,4 +1,5 @@
 {
+  mAppsCustomizePane.onLauncherTransitionStart(l,animated,toWorkspace);
   mInTransition=true;
   mTransitioningToWorkspace=toWorkspace;
   if (toWorkspace) {

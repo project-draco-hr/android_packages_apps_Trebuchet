@@ -5,11 +5,11 @@
   final int cellWidth=((contentWidth - mPageLayoutPaddingLeft - mPageLayoutPaddingRight- ((mWidgetCountX - 1) * mWidgetWidthGap)) / mWidgetCountX);
   int contentHeight=mWidgetSpacingLayout.getContentHeight();
   final int cellHeight=((contentHeight - mPageLayoutPaddingTop - mPageLayoutPaddingBottom- ((mWidgetCountY - 1) * mWidgetHeightGap)) / mWidgetCountY);
-  int offset=page * numItemsPerPage;
+  int offset=(page - mNumAppsPages) * numItemsPerPage;
   for (int i=offset; i < Math.min(offset + numItemsPerPage,mWidgets.size()); ++i) {
     items.add(mWidgets.get(i));
   }
-  final PagedViewGridLayout layout=(PagedViewGridLayout)getPageAt(page + mNumAppsPages);
+  final PagedViewGridLayout layout=(PagedViewGridLayout)getPageAt(page);
   layout.setColumnCount(layout.getCellCountX());
   for (int i=0; i < items.size(); ++i) {
     Object rawInfo=items.get(i);
