@@ -3,6 +3,6 @@
     onDropExternal(dragInfo.dropPos,(ItemInfo)dragInfo,(CellLayout)layout,false);
     return true;
   }
-  mLauncher.showOutOfSpaceMessage();
+  mLauncher.showOutOfSpaceMessage(mLauncher.isHotseatLayout(layout));
   return false;
 }

@@ -6,7 +6,7 @@
     cellXY[1]=cellY;
   }
  else   if (!layout.findCellForSpan(cellXY,1,1)) {
-    showOutOfSpaceMessage();
+    showOutOfSpaceMessage(isHotseatLayout(layout));
     return;
   }
   final ShortcutInfo info=mModel.getShortcutInfo(getPackageManager(),data,this);

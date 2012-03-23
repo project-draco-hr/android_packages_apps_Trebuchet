@@ -1,5 +1,5 @@
 {
   if (!mWorkspace.addExternalItemToScreen(itemInfo,layout)) {
-    showOutOfSpaceMessage();
+    showOutOfSpaceMessage(isHotseatLayout(layout));
   }
 }

@@ -1,0 +1,4 @@
+{
+  int strId=(isHotseatLayout ? R.string.hotseat_out_of_space : R.string.out_of_space);
+  Toast.makeText(this,getString(strId),Toast.LENGTH_SHORT).show();
+}

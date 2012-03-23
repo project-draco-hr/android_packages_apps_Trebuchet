@@ -34,7 +34,7 @@
       }
 .start();
     }
-    showOutOfSpaceMessage();
+    showOutOfSpaceMessage(isHotseatLayout(layout));
     return;
   }
   LauncherAppWidgetInfo launcherInfo=new LauncherAppWidgetInfo(appWidgetId);

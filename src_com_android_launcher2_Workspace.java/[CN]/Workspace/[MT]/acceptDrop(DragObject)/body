@@ -43,13 +43,14 @@
     mTargetCell=mDragTargetLayout.createArea((int)mDragViewVisualCenter[0],(int)mDragViewVisualCenter[1],minSpanX,minSpanY,spanX,spanY,null,mTargetCell,resultSpan,CellLayout.MODE_ACCEPT_DROP);
     boolean foundCell=mTargetCell[0] >= 0 && mTargetCell[1] >= 0;
     if (!foundCell) {
-      if (mTargetCell != null && mLauncher.isHotseatLayout(mDragTargetLayout)) {
+      boolean isHotseat=mLauncher.isHotseatLayout(mDragTargetLayout);
+      if (mTargetCell != null && isHotseat) {
         Hotseat hotseat=mLauncher.getHotseat();
         if (hotseat.isAllAppsButtonRank(hotseat.getOrderInHotseat(mTargetCell[0],mTargetCell[1]))) {
           return false;
         }
       }
-      mLauncher.showOutOfSpaceMessage();
+      mLauncher.showOutOfSpaceMessage(isHotseat);
       return false;
     }
   }

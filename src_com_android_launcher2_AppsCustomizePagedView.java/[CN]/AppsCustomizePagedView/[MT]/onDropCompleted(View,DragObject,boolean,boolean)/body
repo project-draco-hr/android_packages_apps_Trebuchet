@@ -14,7 +14,7 @@
       }
     }
     if (showOutOfSpaceMessage) {
-      mLauncher.showOutOfSpaceMessage();
+      mLauncher.showOutOfSpaceMessage(false);
     }
     d.deferDragViewCleanupPostAnimation=false;
     cleanupWidgetPreloading();
