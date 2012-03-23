@@ -1,6 +1,6 @@
 {
   mLauncher.getWorkspace().onDragStopped(success);
-  if (!success || (target != mLauncher.getWorkspace() && !(target instanceof DeleteDropTarget))) {
+  if (isFlingToDelete || !success || (target != mLauncher.getWorkspace() && !(target instanceof DeleteDropTarget))) {
     mLauncher.exitSpringLoadedDragMode();
   }
   mLauncher.unlockScreenOrientationOnLargeUI();

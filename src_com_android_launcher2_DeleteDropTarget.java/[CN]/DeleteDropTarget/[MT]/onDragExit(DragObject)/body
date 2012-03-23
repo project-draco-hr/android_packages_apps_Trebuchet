@@ -1,8 +1,7 @@
 {
   super.onDragExit(d);
   if (!d.dragComplete) {
-    mCurrentDrawable.resetTransition();
-    setTextColor(mOriginalTextColor);
+    resetHoverColor();
   }
  else {
     d.dragView.setColor(mHoverColor);

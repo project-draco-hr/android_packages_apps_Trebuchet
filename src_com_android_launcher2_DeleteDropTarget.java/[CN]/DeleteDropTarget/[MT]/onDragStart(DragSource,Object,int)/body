@@ -21,8 +21,7 @@
   }
   mCurrentDrawable=(TransitionDrawable)getCompoundDrawables()[0];
   mActive=isVisible;
-  mCurrentDrawable.resetTransition();
-  setTextColor(mOriginalTextColor);
+  resetHoverColor();
   ((ViewGroup)getParent()).setVisibility(isVisible ? View.VISIBLE : View.GONE);
   if (getText().length() > 0) {
     setText(isUninstall ? R.string.delete_target_uninstall_label : R.string.delete_target_label);

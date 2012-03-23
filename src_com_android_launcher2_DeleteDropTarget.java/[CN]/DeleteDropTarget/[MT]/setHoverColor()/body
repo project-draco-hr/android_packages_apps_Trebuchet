@@ -1,0 +1,4 @@
+{
+  mCurrentDrawable.startTransition(mTransitionDuration);
+  setTextColor(mHoverColor);
+}
