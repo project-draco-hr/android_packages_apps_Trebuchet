@@ -2,6 +2,8 @@
   if (!ACTION_INSTALL_SHORTCUT.equals(data.getAction())) {
     return;
   }
+  String spKey=LauncherApplication.getSharedPreferencesKey();
+  SharedPreferences sp=context.getSharedPreferences(spKey,Context.MODE_PRIVATE);
   final int screen=Launcher.getScreen();
   final Intent intent=data.getParcelableExtra(Intent.EXTRA_SHORTCUT_INTENT);
   if (intent == null) {
@@ -19,14 +21,21 @@
     }
   }
   final ArrayList<ItemInfo> items=LauncherModel.getItemsInLocalCoordinates(context);
-  final boolean shortcutExists=LauncherModel.shortcutExists(context,name,intent);
-  final String[] errorMsgs={""};
-  if (!installShortcut(context,data,items,name,intent,screen,shortcutExists,errorMsgs)) {
-    for (int i=0; i < Launcher.SCREEN_COUNT; i++) {
-      if (i != screen && installShortcut(context,data,items,name,intent,i,shortcutExists,errorMsgs))       break;
+  final boolean exists=LauncherModel.shortcutExists(context,name,intent);
+  final int[] result={INSTALL_SHORTCUT_SUCCESSFUL};
+  boolean found=false;
+  for (int i=0; i < (2 * Launcher.SCREEN_COUNT) + 1 && !found; ++i) {
+    int si=screen + (int)((i / 2f) + 0.5f) * ((i % 2 == 1) ? 1 : -1);
+    if (0 <= si && si < Launcher.SCREEN_COUNT) {
+      found=installShortcut(context,data,items,name,intent,si,exists,sp,result);
     }
   }
-  if (!errorMsgs[0].isEmpty()) {
-    Toast.makeText(context,errorMsgs[0],Toast.LENGTH_SHORT).show();
+  if (!found) {
+    if (result[0] == INSTALL_SHORTCUT_NO_SPACE) {
+      Toast.makeText(context,context.getString(R.string.out_of_space),Toast.LENGTH_SHORT).show();
+    }
+ else     if (result[0] == INSTALL_SHORTCUT_IS_DUPLICATE) {
+      Toast.makeText(context,context.getString(R.string.shortcut_duplicate,name),Toast.LENGTH_SHORT).show();
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   super.onCreate(savedInstanceState);
   LauncherApplication app=((LauncherApplication)getApplication());
-  mSharedPrefs=getSharedPreferences(PREFS_KEY,Context.MODE_PRIVATE);
+  mSharedPrefs=getSharedPreferences(LauncherApplication.getSharedPreferencesKey(),Context.MODE_PRIVATE);
   mModel=app.setLauncher(this);
   mIconCache=app.getIconCache();
   mDragController=new DragController(this);
@@ -27,7 +27,7 @@
     android.os.Debug.stopMethodTracing();
   }
   if (!mRestoring) {
-    mModel.startLoader(this,true);
+    mModel.startLoader(true);
   }
   if (!mModel.isAllAppsLoaded()) {
     ViewGroup appsCustomizeContentParent=(ViewGroup)mAppsCustomizeContent.getParent();

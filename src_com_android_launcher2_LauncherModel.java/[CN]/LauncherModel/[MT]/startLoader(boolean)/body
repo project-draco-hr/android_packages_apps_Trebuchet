@@ -5,7 +5,7 @@ synchronized (mLock) {
     }
     if (mCallbacks != null && mCallbacks.get() != null) {
       isLaunching=isLaunching || stopLoaderLocked();
-      mLoaderTask=new LoaderTask(context,isLaunching);
+      mLoaderTask=new LoaderTask(mApp,isLaunching);
       sWorkerThread.setPriority(Thread.NORM_PRIORITY);
       sWorker.post(mLoaderTask);
     }

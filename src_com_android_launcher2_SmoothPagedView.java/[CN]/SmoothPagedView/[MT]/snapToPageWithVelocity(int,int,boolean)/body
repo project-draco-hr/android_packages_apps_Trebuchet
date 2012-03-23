@@ -8,10 +8,10 @@
     mScroller.abortAnimation();
   }
   if (settle) {
-    ((WorkspaceOvershootInterpolator)mScrollInterpolator).setDistance(screenDelta);
+    ((OvershootInterpolator)mScrollInterpolator).setDistance(screenDelta);
   }
  else {
-    ((WorkspaceOvershootInterpolator)mScrollInterpolator).disableSettle();
+    ((OvershootInterpolator)mScrollInterpolator).disableSettle();
   }
   velocity=Math.abs(velocity);
   if (velocity > 0) {

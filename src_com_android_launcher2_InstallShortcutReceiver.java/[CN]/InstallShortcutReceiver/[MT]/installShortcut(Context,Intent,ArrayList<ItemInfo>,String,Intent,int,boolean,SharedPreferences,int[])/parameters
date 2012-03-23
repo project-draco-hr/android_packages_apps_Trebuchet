@@ -5,4 +5,5 @@ String name
 Intent intent
 int screen
 boolean shortcutExists
-String[] errorMsgs
+SharedPreferences sharedPrefs
+int[] result

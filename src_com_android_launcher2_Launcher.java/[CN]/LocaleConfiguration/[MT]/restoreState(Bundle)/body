@@ -6,7 +6,7 @@
   if (state == State.APPS_CUSTOMIZE) {
     showAllApps(false);
   }
-  final int currentScreen=savedState.getInt(RUNTIME_STATE_CURRENT_SCREEN,-1);
+  int currentScreen=savedState.getInt(RUNTIME_STATE_CURRENT_SCREEN,-1);
   if (currentScreen > -1) {
     mWorkspace.setCurrentPage(currentScreen);
   }
