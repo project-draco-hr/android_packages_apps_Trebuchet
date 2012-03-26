@@ -1,0 +1,6 @@
+{
+  if (mLoader != null && mLoader.getStatus() != WallpaperLoader.Status.FINISHED) {
+    mLoader.cancel(true);
+    mLoader=null;
+  }
+}
