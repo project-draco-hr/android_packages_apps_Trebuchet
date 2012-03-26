@@ -17,6 +17,8 @@
     bitmapHeight=drawable.getIntrinsicHeight();
   }
  else {
+    if (cellHSpan < 1)     cellHSpan=1;
+    if (cellVSpan < 1)     cellVSpan=1;
     bitmapWidth=mWidgetSpacingLayout.estimateCellWidth(cellHSpan);
     bitmapHeight=mWidgetSpacingLayout.estimateCellHeight(cellVSpan);
     if (cellHSpan == cellVSpan) {
