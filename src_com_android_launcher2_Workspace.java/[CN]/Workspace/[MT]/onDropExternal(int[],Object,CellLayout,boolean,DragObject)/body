@@ -94,7 +94,7 @@ return;
 }
 }
 if (touchXY != null) {
-mTargetCell=mDragTargetLayout.createArea((int)mDragViewVisualCenter[0],(int)mDragViewVisualCenter[1],1,1,1,1,null,mTargetCell,null,CellLayout.MODE_ON_DROP);
+mTargetCell=mDragTargetLayout.createArea((int)mDragViewVisualCenter[0],(int)mDragViewVisualCenter[1],1,1,1,1,null,mTargetCell,null,CellLayout.MODE_ON_DROP_EXTERNAL);
 }
  else {
 cellLayout.findCellForSpan(mTargetCell,1,1);
