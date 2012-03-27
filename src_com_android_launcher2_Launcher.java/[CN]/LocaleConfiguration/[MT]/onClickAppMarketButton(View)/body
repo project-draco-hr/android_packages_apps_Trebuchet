@@ -2,4 +2,7 @@
   if (mAppMarketIntent != null) {
     startActivitySafely(mAppMarketIntent,"app market");
   }
+ else {
+    Log.e(TAG,"Invalid app market intent.");
+  }
 }
