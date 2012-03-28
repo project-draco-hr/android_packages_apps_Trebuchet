@@ -3,12 +3,12 @@
   if (resultSpan == null) {
     resultSpan=new int[2];
   }
-  if ((mode == MODE_ON_DROP || mode == MODE_ACCEPT_DROP) && mPreviousReorderDirection[0] != -1) {
+  if ((mode == MODE_ON_DROP || mode == MODE_ON_DROP_EXTERNAL || mode == MODE_ACCEPT_DROP) && mPreviousReorderDirection[0] != INVALID_DIRECTION) {
     mDirectionVector[0]=mPreviousReorderDirection[0];
     mDirectionVector[1]=mPreviousReorderDirection[1];
-    if (mode == MODE_ON_DROP) {
-      mPreviousReorderDirection[0]=-1;
-      mPreviousReorderDirection[1]=-1;
+    if (mode == MODE_ON_DROP || mode == MODE_ON_DROP_EXTERNAL) {
+      mPreviousReorderDirection[0]=INVALID_DIRECTION;
+      mPreviousReorderDirection[1]=INVALID_DIRECTION;
     }
   }
  else {
