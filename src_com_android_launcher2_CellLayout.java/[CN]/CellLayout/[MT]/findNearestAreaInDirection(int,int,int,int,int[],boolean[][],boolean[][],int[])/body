@@ -3,7 +3,7 @@
   bestXY[0]=-1;
   bestXY[1]=-1;
   float bestDistance=Float.MAX_VALUE;
-  if (direction[0] != 0 && direction[1] != 0) {
+  if ((direction[0] != 0 && direction[1] != 0) || (direction[0] == 0 && direction[1] == 0)) {
     return bestXY;
   }
   int x=cellX + direction[0];

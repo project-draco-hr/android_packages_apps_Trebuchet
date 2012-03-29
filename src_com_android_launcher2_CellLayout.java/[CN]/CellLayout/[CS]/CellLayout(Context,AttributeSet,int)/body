@@ -11,6 +11,8 @@
   mCountY=LauncherModel.getCellCountY();
   mOccupied=new boolean[mCountX][mCountY];
   mTmpOccupied=new boolean[mCountX][mCountY];
+  mPreviousReorderDirection[0]=INVALID_DIRECTION;
+  mPreviousReorderDirection[1]=INVALID_DIRECTION;
   a.recycle();
   setAlwaysDrawnWithCacheEnabled(false);
   final Resources res=getResources();
