@@ -1,6 +1,7 @@
 {
   super(context,attrs,defStyle);
   setWillNotDraw(false);
+  mLauncher=(Launcher)context;
   TypedArray a=context.obtainStyledAttributes(attrs,R.styleable.CellLayout,defStyle,0);
   mOriginalCellWidth=mCellWidth=a.getDimensionPixelSize(R.styleable.CellLayout_cellWidth,10);
   mOriginalCellHeight=mCellHeight=a.getDimensionPixelSize(R.styleable.CellLayout_cellHeight,10);

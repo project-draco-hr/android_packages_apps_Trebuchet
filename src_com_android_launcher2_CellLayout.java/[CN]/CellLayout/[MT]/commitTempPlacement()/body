@@ -9,9 +9,10 @@
     View child=mShortcutsAndWidgets.getChildAt(i);
     LayoutParams lp=(LayoutParams)child.getLayoutParams();
     ItemInfo info=(ItemInfo)child.getTag();
-    info.cellX=lp.cellX=lp.tmpCellX;
-    info.cellY=lp.cellY=lp.tmpCellY;
+    if (info != null) {
+      info.cellX=lp.cellX=lp.tmpCellX;
+      info.cellY=lp.cellY=lp.tmpCellY;
+    }
   }
-  Workspace workspace=(Workspace)getParent();
-  workspace.updateItemLocationsInDatabase(this);
+  mLauncher.getWorkspace().updateItemLocationsInDatabase(this);
 }
