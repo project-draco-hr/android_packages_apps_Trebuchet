@@ -14,7 +14,21 @@
  catch (  NameNotFoundException e) {
     Log.d(TAG,"getPackInfo failed for package " + componentName.getPackageName());
   }
-  final ResolveInfo resolveInfo=manager.resolveActivity(intent,0);
+  ResolveInfo resolveInfo=null;
+  ComponentName oldComponent=intent.getComponent();
+  Intent newIntent=new Intent(intent.getAction(),null);
+  newIntent.addCategory(Intent.CATEGORY_LAUNCHER);
+  newIntent.setPackage(oldComponent.getPackageName());
+  List<ResolveInfo> infos=manager.queryIntentActivities(newIntent,0);
+  for (  ResolveInfo i : infos) {
+    ComponentName cn=new ComponentName(i.activityInfo.packageName,i.activityInfo.name);
+    if (cn.equals(oldComponent)) {
+      resolveInfo=i;
+    }
+  }
+  if (resolveInfo == null) {
+    resolveInfo=manager.resolveActivity(intent,0);
+  }
   if (resolveInfo != null) {
     icon=mIconCache.getIcon(componentName,resolveInfo,labelCache);
   }
