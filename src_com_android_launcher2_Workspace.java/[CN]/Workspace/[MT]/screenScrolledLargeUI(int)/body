@@ -14,9 +14,12 @@
           cl.setBackgroundAlphaMultiplier(overScrollBackgroundAlphaInterpolator(Math.abs(scrollProgress)));
           mOverScrollPageIndex=i;
           cl.setOverScrollAmount(Math.abs(scrollProgress),i == 0);
-          cl.setPivotX(cl.getMeasuredWidth() * (i == 0 ? 0.75f : 0.25f));
-          cl.setPivotY(cl.getMeasuredHeight() * 0.5f);
-          cl.setOverscrollTransformsDirty(true);
+          if (!mOverscrollTransformsSet) {
+            mOverscrollTransformsSet=true;
+            cl.setPivotX(cl.getMeasuredWidth() * (i == 0 ? 0.75f : 0.25f));
+            cl.setPivotY(cl.getMeasuredHeight() * 0.5f);
+            cl.setOverscrollTransformsDirty(true);
+          }
         }
  else         if (mOverScrollPageIndex != i) {
           cl.setBackgroundAlphaMultiplier(backgroundAlphaInterpolator(Math.abs(scrollProgress)));
@@ -30,7 +33,8 @@
       }
     }
   }
-  if (!isSwitchingState() && !isInOverscroll) {
+  if (mOverscrollTransformsSet && !isInOverscroll) {
+    mOverscrollTransformsSet=false;
     ((CellLayout)getChildAt(0)).resetOverscrollTransforms();
     ((CellLayout)getChildAt(getChildCount() - 1)).resetOverscrollTransforms();
   }
