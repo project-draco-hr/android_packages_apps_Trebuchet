@@ -4,7 +4,7 @@
     Log.w(TAG,"LoaderTask running with no launcher (onlyBindAllApps)");
     return;
   }
-  final ArrayList<ApplicationInfo> list=(ArrayList<ApplicationInfo>)mAllAppsList.data.clone();
+  @SuppressWarnings("unchecked") final ArrayList<ApplicationInfo> list=(ArrayList<ApplicationInfo>)mAllAppsList.data.clone();
   mHandler.post(new Runnable(){
     public void run(){
       final long t=SystemClock.uptimeMillis();
