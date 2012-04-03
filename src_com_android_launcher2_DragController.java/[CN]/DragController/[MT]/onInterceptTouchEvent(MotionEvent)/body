@@ -16,6 +16,7 @@ mMotionDownY=dragLayerY;
 mLastDropTarget=null;
 break;
 case MotionEvent.ACTION_UP:
+mLastTouchUpTime=System.currentTimeMillis();
 if (mDragging) {
 PointF vec=isFlingingToDelete(mDragObject.dragSource);
 if (vec != null) {

@@ -18,15 +18,21 @@
   if (mVisible || mWorkspaceLoading) {
     Runnable newAppsRunnable=new Runnable(){
       @Override public void run(){
-        runNewAppsAnimation();
+        runNewAppsAnimation(false);
       }
     }
 ;
-    if (mNewShortcutAnimatePage > -1 && mNewShortcutAnimatePage != mWorkspace.getCurrentPage()) {
-      mWorkspace.snapToPage(mNewShortcutAnimatePage,newAppsRunnable);
+    boolean willSnapPage=mNewShortcutAnimatePage > -1 && mNewShortcutAnimatePage != mWorkspace.getCurrentPage();
+    if (canRunNewAppsAnimation()) {
+      if (willSnapPage) {
+        mWorkspace.snapToPage(mNewShortcutAnimatePage,newAppsRunnable);
+      }
+ else {
+        runNewAppsAnimation(false);
+      }
     }
  else {
-      newAppsRunnable.run();
+      runNewAppsAnimation(willSnapPage);
     }
   }
   mWorkspaceLoading=false;

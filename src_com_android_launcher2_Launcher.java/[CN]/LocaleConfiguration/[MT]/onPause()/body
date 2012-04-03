@@ -2,4 +2,5 @@
   super.onPause();
   mPaused=true;
   mDragController.cancelDrag();
+  mDragController.resetLastGestureUpTime();
 }

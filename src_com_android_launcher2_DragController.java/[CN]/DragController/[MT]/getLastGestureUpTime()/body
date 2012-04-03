@@ -1,0 +1,8 @@
+{
+  if (mDragging) {
+    return System.currentTimeMillis();
+  }
+ else {
+    return mLastTouchUpTime;
+  }
+}
