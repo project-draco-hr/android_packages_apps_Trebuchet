@@ -5,18 +5,22 @@
     float scrollProgress=getScrollProgress(screenCenter,cl,index);
     cl.setOverScrollAmount(Math.abs(scrollProgress),index == 0);
     float rotation=-WORKSPACE_OVERSCROLL_ROTATION * scrollProgress;
-    cl.setCameraDistance(mDensity * CAMERA_DISTANCE);
-    cl.setPivotX(cl.getMeasuredWidth() * (index == 0 ? 0.75f : 0.25f));
-    cl.setPivotY(cl.getMeasuredHeight() * 0.5f);
     cl.setRotationY(rotation);
-    cl.setOverscrollTransformsDirty(true);
     setFadeForOverScroll(Math.abs(scrollProgress));
+    if (!mOverscrollTransformsSet) {
+      mOverscrollTransformsSet=true;
+      cl.setCameraDistance(mDensity * CAMERA_DISTANCE);
+      cl.setPivotX(cl.getMeasuredWidth() * (index == 0 ? 0.75f : 0.25f));
+      cl.setPivotY(cl.getMeasuredHeight() * 0.5f);
+      cl.setOverscrollTransformsDirty(true);
+    }
   }
  else {
     if (mOverscrollFade != 0) {
       setFadeForOverScroll(0);
     }
-    if (!isSwitchingState()) {
+    if (mOverscrollTransformsSet) {
+      mOverscrollTransformsSet=false;
       ((CellLayout)getChildAt(0)).resetOverscrollTransforms();
       ((CellLayout)getChildAt(getChildCount() - 1)).resetOverscrollTransforms();
     }
