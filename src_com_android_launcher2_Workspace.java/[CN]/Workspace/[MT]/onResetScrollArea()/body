@@ -1,7 +1,4 @@
 {
-  if (mDragTargetLayout != null) {
-    mDragTargetLayout.setIsDragOverlapping(false);
-    invalidate();
-  }
+  setCurrentDragOverlappingLayout(null);
   mInScrollArea=false;
 }

@@ -1,11 +1,10 @@
 {
   super(context,attrs,defStyle);
   mContentIsRefreshable=false;
+  mDragEnforcer=new DropTarget.DragEnforcer(context);
   setDataIsReady();
   final Resources res=getResources();
   mFadeInAdjacentScreens=res.getBoolean(R.bool.config_workspaceFadeAdjacentScreens);
-  mDragFadeOutAlpha=res.getInteger(R.integer.config_dragFadeOutAlpha) / 100f;
-  mDragFadeOutDuration=res.getInteger(R.integer.config_dragFadeOutDuration);
   mWallpaperManager=WallpaperManager.getInstance(context);
   int cellCountX=DEFAULT_CELL_COUNT_X;
   int cellCountY=DEFAULT_CELL_COUNT_Y;

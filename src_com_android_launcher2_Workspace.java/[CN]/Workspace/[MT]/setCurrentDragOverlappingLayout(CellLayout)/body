@@ -1,0 +1,10 @@
+{
+  if (mDragOverlappingLayout != null) {
+    mDragOverlappingLayout.setIsDragOverlapping(false);
+  }
+  mDragOverlappingLayout=layout;
+  if (mDragOverlappingLayout != null) {
+    mDragOverlappingLayout.setIsDragOverlapping(true);
+  }
+  invalidate();
+}

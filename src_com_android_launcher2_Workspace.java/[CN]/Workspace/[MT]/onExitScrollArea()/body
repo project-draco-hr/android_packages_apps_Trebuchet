@@ -1,14 +1,10 @@
 {
   boolean result=false;
   if (mInScrollArea) {
-    if (mDragTargetLayout != null) {
-      mDragTargetLayout.setIsDragOverlapping(false);
-      invalidate();
-    }
-    if (mDragTargetLayout != null && mDragHasEnteredWorkspace) {
-      mDragTargetLayout=getCurrentDropLayout();
-      mDragTargetLayout.onDragEnter();
-    }
+    invalidate();
+    CellLayout layout=getCurrentDropLayout();
+    setCurrentDropLayout(layout);
+    setCurrentDragOverlappingLayout(layout);
     result=true;
     mInScrollArea=false;
   }

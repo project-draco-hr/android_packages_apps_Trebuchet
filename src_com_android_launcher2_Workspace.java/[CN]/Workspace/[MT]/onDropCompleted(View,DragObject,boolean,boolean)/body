@@ -10,7 +10,6 @@
     }
   }
  else   if (mDragInfo != null) {
-    doDragExit(null);
     CellLayout cellLayout;
     if (mLauncher.isHotseatLayout(target)) {
       cellLayout=mLauncher.getHotseat().getLayout();

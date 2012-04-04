@@ -1,0 +1,13 @@
+{
+  if (mDragTargetLayout != null) {
+    mDragTargetLayout.revertTempState();
+    mDragTargetLayout.onDragExit();
+  }
+  mDragTargetLayout=layout;
+  if (mDragTargetLayout != null) {
+    mDragTargetLayout.onDragEnter();
+  }
+  cleanupReorder(true);
+  cleanupFolderCreation();
+  setCurrentDropOverCell(-1,-1);
+}

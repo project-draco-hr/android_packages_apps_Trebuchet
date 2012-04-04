@@ -23,7 +23,7 @@
     if (pendingInfo.itemType == LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT) {
       mTargetCell=findNearestArea((int)touchXY[0],(int)touchXY[1],spanX,spanY,cellLayout,mTargetCell);
       float distance=cellLayout.getDistanceFromCell(mDragViewVisualCenter[0],mDragViewVisualCenter[1],mTargetCell);
-      if (willCreateUserFolder((ItemInfo)d.dragInfo,mDragTargetLayout,mTargetCell,distance,true) || willAddToExistingUserFolder((ItemInfo)d.dragInfo,mDragTargetLayout,mTargetCell,distance)) {
+      if (willCreateUserFolder((ItemInfo)d.dragInfo,cellLayout,mTargetCell,distance,true) || willAddToExistingUserFolder((ItemInfo)d.dragInfo,cellLayout,mTargetCell,distance)) {
         findNearestVacantCell=false;
       }
     }
@@ -36,7 +36,7 @@
         minSpanY=item.minSpanY;
       }
       int[] resultSpan=new int[2];
-      mTargetCell=mDragTargetLayout.createArea((int)mDragViewVisualCenter[0],(int)mDragViewVisualCenter[1],minSpanX,minSpanY,info.spanX,info.spanY,null,mTargetCell,resultSpan,CellLayout.MODE_ON_DROP_EXTERNAL);
+      mTargetCell=cellLayout.createArea((int)mDragViewVisualCenter[0],(int)mDragViewVisualCenter[1],minSpanX,minSpanY,info.spanX,info.spanY,null,mTargetCell,resultSpan,CellLayout.MODE_ON_DROP_EXTERNAL);
       item.spanX=resultSpan[0];
       item.spanY=resultSpan[1];
     }
@@ -55,7 +55,6 @@ break;
 default :
 throw new IllegalStateException("Unknown item type: " + pendingInfo.itemType);
 }
-cellLayout.onDragExit();
 }
 }
 ;
@@ -94,7 +93,7 @@ return;
 }
 }
 if (touchXY != null) {
-mTargetCell=mDragTargetLayout.createArea((int)mDragViewVisualCenter[0],(int)mDragViewVisualCenter[1],1,1,1,1,null,mTargetCell,null,CellLayout.MODE_ON_DROP_EXTERNAL);
+mTargetCell=cellLayout.createArea((int)mDragViewVisualCenter[0],(int)mDragViewVisualCenter[1],1,1,1,1,null,mTargetCell,null,CellLayout.MODE_ON_DROP_EXTERNAL);
 }
  else {
 cellLayout.findCellForSpan(mTargetCell,1,1);

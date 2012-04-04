@@ -1,8 +1,8 @@
 {
   if (distance > mMaxDistanceForFolderCreation)   return false;
   View dropOverView=target.getChildAt(targetCell[0],targetCell[1]);
-  if (!mWillAddToExistingFolder)   return false;
-  mWillAddToExistingFolder=false;
+  if (!mAddToExistingFolderOnDrop)   return false;
+  mAddToExistingFolderOnDrop=false;
   if (dropOverView instanceof FolderIcon) {
     FolderIcon fi=(FolderIcon)dropOverView;
     if (fi.acceptDrop(d.dragInfo)) {

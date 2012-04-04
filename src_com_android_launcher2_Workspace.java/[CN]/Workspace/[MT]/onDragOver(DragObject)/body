@@ -17,20 +17,8 @@
       layout=findMatchingPageForDragOver(d.dragView,d.x,d.y,false);
     }
     if (layout != mDragTargetLayout) {
-      cleanupFolderCreation(d);
-      if (mDragTargetLayout != null) {
-        mDragTargetLayout.setIsDragOverlapping(false);
-        mDragTargetLayout.onDragExit();
-      }
-      mDragTargetLayout=layout;
-      if (mDragTargetLayout != null) {
-        mDragTargetLayout.setIsDragOverlapping(true);
-        mDragTargetLayout.onDragEnter();
-      }
- else {
-        mLastDragOverView=null;
-        mDragMode=DRAG_MODE_NONE;
-      }
+      setCurrentDropLayout(layout);
+      setCurrentDragOverlappingLayout(layout);
       boolean isInSpringLoadedMode=(mState == State.SPRING_LOADED);
       if (isInSpringLoadedMode) {
         if (mLauncher.isHotseatLayout(layout)) {
@@ -53,35 +41,23 @@
       layout=getCurrentDropLayout();
     }
     if (layout != mDragTargetLayout) {
-      if (mDragTargetLayout != null) {
-        mDragTargetLayout.setIsDragOverlapping(false);
-        mDragTargetLayout.onDragExit();
-      }
-      mDragTargetLayout=layout;
-      mDragTargetLayout.setIsDragOverlapping(true);
-      mDragTargetLayout.onDragEnter();
+      setCurrentDropLayout(layout);
+      setCurrentDragOverlappingLayout(layout);
     }
   }
   if (mDragTargetLayout != null) {
     if (mLauncher.isHotseatLayout(mDragTargetLayout)) {
-      mapPointFromSelfToSibling(mLauncher.getHotseat(),mDragViewVisualCenter);
+      mapPointFromSelfToHotseatLayout(mLauncher.getHotseat(),mDragViewVisualCenter);
     }
  else {
       mapPointFromSelfToChild(mDragTargetLayout,mDragViewVisualCenter,null);
     }
     ItemInfo info=(ItemInfo)d.dragInfo;
     mTargetCell=findNearestArea((int)mDragViewVisualCenter[0],(int)mDragViewVisualCenter[1],1,1,mDragTargetLayout,mTargetCell);
+    setCurrentDropOverCell(mTargetCell[0],mTargetCell[1]);
     float targetCellDistance=mDragTargetLayout.getDistanceFromCell(mDragViewVisualCenter[0],mDragViewVisualCenter[1],mTargetCell);
     final View dragOverView=mDragTargetLayout.getChildAt(mTargetCell[0],mTargetCell[1]);
-    final View lastDragOverView=mLastDragOverView;
-    if (mLastDragOverView != dragOverView) {
-      mDragMode=DRAG_MODE_NONE;
-      mLastDragOverView=dragOverView;
-      if (mReorderAlarm != null) {
-        mReorderAlarm.cancelAlarm();
-      }
-    }
-    boolean folder=willCreateOrAddToFolder(info,mDragTargetLayout,mTargetCell,targetCellDistance,dragOverView,lastDragOverView);
+    manageFolderFeedback(info,mDragTargetLayout,mTargetCell,targetCellDistance,dragOverView);
     int minSpanX=item.spanX;
     int minSpanY=item.spanY;
     if (item.minSpanX > 0 && item.minSpanY > 0) {
@@ -90,30 +66,19 @@
     }
     int[] reorderPosition=new int[2];
     reorderPosition=findNearestArea((int)mDragViewVisualCenter[0],(int)mDragViewVisualCenter[1],item.spanX,item.spanY,mDragTargetLayout,reorderPosition);
-    if (!mDragTargetLayout.isNearestDropLocationOccupied((int)mDragViewVisualCenter[0],(int)mDragViewVisualCenter[1],item.spanX,item.spanY,child,mTargetCell)) {
-      mDragTargetLayout.revertTempState();
-      mDragMode=DRAG_MODE_NONE;
-      mLastDragOverView=dragOverView;
-      if (mReorderAlarm != null) {
-        mReorderAlarm.cancelAlarm();
-      }
-      mLastReorderX=-1;
-      mLastReorderY=-1;
+    boolean nearestDropOccupied=mDragTargetLayout.isNearestDropLocationOccupied((int)mDragViewVisualCenter[0],(int)mDragViewVisualCenter[1],item.spanX,item.spanY,child,mTargetCell);
+    if (!nearestDropOccupied) {
       mDragTargetLayout.visualizeDropLocation(child,mDragOutline,(int)mDragViewVisualCenter[0],(int)mDragViewVisualCenter[1],mTargetCell[0],mTargetCell[1],item.spanX,item.spanY,false,d.dragView.getDragVisualizeOffset(),d.dragView.getDragRegion());
     }
- else     if (!folder && !mReorderAlarm.alarmPending() && (mLastReorderX != reorderPosition[0] || mLastReorderY != reorderPosition[1])) {
-      cancelFolderCreation();
+ else     if ((mDragMode == DRAG_MODE_NONE || mDragMode == DRAG_MODE_REORDER) && !mReorderAlarm.alarmPending() && (mLastReorderX != reorderPosition[0] || mLastReorderY != reorderPosition[1])) {
       ReorderAlarmListener listener=new ReorderAlarmListener(mDragViewVisualCenter,minSpanX,minSpanY,item.spanX,item.spanY,d.dragView,child);
       mReorderAlarm.setOnAlarmListener(listener);
       mReorderAlarm.setAlarm(REORDER_TIMEOUT);
     }
- else     if (folder) {
-      if (mReorderAlarm != null) {
-        mReorderAlarm.cancelAlarm();
+    if (mDragMode == DRAG_MODE_CREATE_FOLDER || mDragMode == DRAG_MODE_ADD_TO_FOLDER || !nearestDropOccupied) {
+      if (mDragTargetLayout != null) {
+        mDragTargetLayout.revertTempState();
       }
-      mDragTargetLayout.revertTempState();
-      mLastReorderX=-1;
-      mLastReorderY=-1;
     }
   }
 }

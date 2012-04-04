@@ -17,6 +17,6 @@
   mDisplayWidth=display.getWidth();
   mDisplayHeight=display.getHeight();
   mWallpaperTravelWidth=(int)(mDisplayWidth * wallpaperTravelToScreenWidthRatio(mDisplayWidth,mDisplayHeight));
-  mMaxDistanceForFolderCreation=(0.5f * res.getDimensionPixelSize(R.dimen.app_icon_size));
+  mMaxDistanceForFolderCreation=(0.6f * res.getDimensionPixelSize(R.dimen.app_icon_size));
   mFlingThresholdVelocity=(int)(FLING_THRESHOLD_VELOCITY * mDensity);
 }

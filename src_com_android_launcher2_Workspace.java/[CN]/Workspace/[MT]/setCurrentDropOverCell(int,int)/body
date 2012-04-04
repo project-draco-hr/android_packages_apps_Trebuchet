@@ -1,0 +1,7 @@
+{
+  if (x != mDragOverX || y != mDragOverY) {
+    mDragOverX=x;
+    mDragOverY=y;
+    setDragMode(DRAG_MODE_NONE);
+  }
+}

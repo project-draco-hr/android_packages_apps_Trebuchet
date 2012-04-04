@@ -1,4 +1,5 @@
 {
+  mDragEnforcer.onDragExit();
   if (mDragging) {
     mDragging=false;
     if (mCrosshairsAnimator != null) {

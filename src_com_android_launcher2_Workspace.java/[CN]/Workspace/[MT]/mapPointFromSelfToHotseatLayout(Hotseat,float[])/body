@@ -1,0 +1,4 @@
+{
+  xy[0]=xy[0] - hotseat.getLeft() - hotseat.getLayout().getLeft();
+  xy[1]=xy[1] - hotseat.getTop() - hotseat.getLayout().getTop();
+}

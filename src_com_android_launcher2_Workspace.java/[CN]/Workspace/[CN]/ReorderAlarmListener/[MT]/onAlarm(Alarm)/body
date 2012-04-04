@@ -7,9 +7,9 @@
   if (mTargetCell[0] < 0 || mTargetCell[1] < 0) {
     mDragTargetLayout.revertTempState();
   }
-  if (mDragMode == DRAG_MODE_ADD_TO_FOLDER) {
+ else {
+    setDragMode(DRAG_MODE_REORDER);
   }
-  mDragMode=DRAG_MODE_REORDER;
   boolean resize=resultSpan[0] != spanX || resultSpan[1] != spanY;
   mDragTargetLayout.visualizeDropLocation(child,mDragOutline,(int)mDragViewVisualCenter[0],(int)mDragViewVisualCenter[1],mTargetCell[0],mTargetCell[1],resultSpan[0],resultSpan[1],resize,dragView.getDragVisualizeOffset(),dragView.getDragRegion());
 }

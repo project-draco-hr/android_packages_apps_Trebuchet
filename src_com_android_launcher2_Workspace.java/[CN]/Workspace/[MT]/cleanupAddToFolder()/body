@@ -1,0 +1,6 @@
+{
+  if (mDragOverFolderIcon != null) {
+    mDragOverFolderIcon.onDragExit(null);
+    mDragOverFolderIcon=null;
+  }
+}
