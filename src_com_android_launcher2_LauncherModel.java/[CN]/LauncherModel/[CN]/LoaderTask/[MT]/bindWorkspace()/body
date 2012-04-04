@@ -5,7 +5,32 @@
     Log.w(TAG,"LoaderTask running with no launcher");
     return;
   }
-  int N;
+  final int currentScreen=oldCallbacks.getCurrentWorkspaceScreen();
+  final ArrayList<ItemInfo> tmpWorkspaceItems=unbindWorkspaceItemsOnMainThread();
+  Collections.sort(tmpWorkspaceItems,new Comparator<ItemInfo>(){
+    @Override public int compare(    ItemInfo lhs,    ItemInfo rhs){
+      int cellCountX=LauncherModel.getCellCountX();
+      int cellCountY=LauncherModel.getCellCountY();
+      int screenOffset=cellCountX * cellCountY;
+      int containerOffset=screenOffset * (Launcher.SCREEN_COUNT + 1);
+      long lr=(lhs.container * containerOffset + lhs.screen * screenOffset + lhs.cellY * cellCountX + lhs.cellX);
+      long rr=(rhs.container * containerOffset + rhs.screen * screenOffset + rhs.cellY * cellCountX + rhs.cellX);
+      return (int)(lr - rr);
+    }
+  }
+);
+  final ArrayList<ItemInfo> workspaceItems=new ArrayList<ItemInfo>();
+  for (  ItemInfo ii : tmpWorkspaceItems) {
+    if (ii.container == LauncherSettings.Favorites.CONTAINER_DESKTOP && ii.screen == currentScreen) {
+      workspaceItems.add(0,ii);
+    }
+ else     if (ii.container == LauncherSettings.Favorites.CONTAINER_HOTSEAT) {
+      workspaceItems.add(0,ii);
+    }
+ else {
+      workspaceItems.add(ii);
+    }
+  }
   mHandler.post(new Runnable(){
     public void run(){
       Callbacks callbacks=tryGetCallbacks(oldCallbacks);
@@ -15,8 +40,7 @@
     }
   }
 );
-  final ArrayList<ItemInfo> workspaceItems=unbindWorkspaceItemsOnMainThread();
-  N=workspaceItems.size();
+  int N=workspaceItems.size();
   for (int i=0; i < N; i+=ITEMS_CHUNK) {
     final int start=i;
     final int chunkSize=(i + ITEMS_CHUNK <= N) ? ITEMS_CHUNK : (N - i);
@@ -48,7 +72,6 @@
     }
   }
 );
-  final int currentScreen=oldCallbacks.getCurrentWorkspaceScreen();
   N=sAppWidgets.size();
   for (int i=0; i < N; i++) {
     final LauncherAppWidgetInfo widget=sAppWidgets.get(i);
