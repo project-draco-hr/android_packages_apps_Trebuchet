@@ -8,19 +8,15 @@
   if (createItemInfo instanceof PendingAddWidgetInfo) {
     PendingAddWidgetInfo createWidgetInfo=mCreateWidgetInfo;
     createItemInfo=createWidgetInfo;
-    int[] spanXY=mLauncher.getSpanForWidget(createWidgetInfo,null);
-    int[] size=mLauncher.getWorkspace().estimateItemSize(spanXY[0],spanXY[1],createWidgetInfo,true);
-    createItemInfo.spanX=spanXY[0];
-    createItemInfo.spanY=spanXY[1];
-    int[] minSpanXY=mLauncher.getMinSpanForWidget(createWidgetInfo,null);
-    createWidgetInfo.minSpanX=minSpanXY[0];
-    createWidgetInfo.minSpanY=minSpanXY[1];
+    int spanX=createItemInfo.spanX;
+    int spanY=createItemInfo.spanY;
+    int[] size=mLauncher.getWorkspace().estimateItemSize(spanX,spanY,createWidgetInfo,true);
     FastBitmapDrawable previewDrawable=(FastBitmapDrawable)image.getDrawable();
     float minScale=1.25f;
     int minWidth, minHeight;
     minWidth=Math.max((int)(previewDrawable.getIntrinsicWidth() * minScale),size[0]);
     minHeight=Math.max((int)(previewDrawable.getIntrinsicHeight() * minScale),size[1]);
-    preview=getWidgetPreview(createWidgetInfo.componentName,createWidgetInfo.previewImage,createWidgetInfo.icon,spanXY[0],spanXY[1],minWidth,minHeight);
+    preview=getWidgetPreview(createWidgetInfo.componentName,createWidgetInfo.previewImage,createWidgetInfo.icon,spanX,spanY,minWidth,minHeight);
     float[] mv=new float[9];
     Matrix m=new Matrix();
     m.setRectToRect(new RectF(0f,0f,(float)preview.getWidth(),(float)preview.getHeight()),new RectF(0f,0f,(float)previewDrawable.getIntrinsicWidth(),(float)previewDrawable.getIntrinsicHeight()),Matrix.ScaleToFit.START);

@@ -18,8 +18,14 @@
     if (rawInfo instanceof AppWidgetProviderInfo) {
       AppWidgetProviderInfo info=(AppWidgetProviderInfo)rawInfo;
       createItemInfo=new PendingAddWidgetInfo(info,null,null);
-      int[] cellSpans=mLauncher.getSpanForWidget(info,null);
-      widget.applyFromAppWidgetProviderInfo(info,-1,cellSpans);
+      int[] spanXY=mLauncher.getSpanForWidget(info,null);
+      int[] size=mLauncher.getWorkspace().estimateItemSize(spanXY[0],spanXY[1],createItemInfo,true);
+      createItemInfo.spanX=spanXY[0];
+      createItemInfo.spanY=spanXY[1];
+      int[] minSpanXY=mLauncher.getMinSpanForWidget(info,null);
+      createItemInfo.minSpanX=minSpanXY[0];
+      createItemInfo.minSpanY=minSpanXY[1];
+      widget.applyFromAppWidgetProviderInfo(info,-1,spanXY);
       widget.setTag(createItemInfo);
       widget.setShortPressListener(this);
     }
