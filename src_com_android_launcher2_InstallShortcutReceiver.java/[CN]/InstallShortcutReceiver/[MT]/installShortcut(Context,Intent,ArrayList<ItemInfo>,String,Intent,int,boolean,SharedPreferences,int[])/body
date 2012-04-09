@@ -12,13 +12,7 @@
           newApps=sharedPrefs.getStringSet(NEW_APPS_LIST_KEY,newApps);
         }
         newApps.add(intent.toUri(0).toString());
-        final Set<String> savedNewApps=newApps;
-        new Thread("setNewAppsThread"){
-          public void run(){
-            sharedPrefs.edit().putInt(NEW_APPS_PAGE_KEY,screen).putStringSet(NEW_APPS_LIST_KEY,savedNewApps).commit();
-          }
-        }
-.start();
+        sharedPrefs.edit().putInt(NEW_APPS_PAGE_KEY,screen).putStringSet(NEW_APPS_LIST_KEY,newApps).commit();
         LauncherApplication app=(LauncherApplication)context.getApplicationContext();
         ShortcutInfo info=app.getModel().addShortcut(context,data,LauncherSettings.Favorites.CONTAINER_DESKTOP,screen,mCoordinates[0],mCoordinates[1],true);
         if (info == null) {
