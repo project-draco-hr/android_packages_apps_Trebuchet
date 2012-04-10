@@ -11,7 +11,7 @@
   }
   final ViewConfiguration config=ViewConfiguration.get(mLauncher);
   final DragLayer dragLayer=mLauncher.getDragLayer();
-  final int duration=DELETE_ANIMATION_DURATION;
+  final int duration=FLIND_DELETE_ANIMATION_DURATION;
   final long startTime=AnimationUtils.currentAnimationTimeMillis();
   final TimeInterpolator tInterpolator=new TimeInterpolator(){
     private int mCount=-1;
