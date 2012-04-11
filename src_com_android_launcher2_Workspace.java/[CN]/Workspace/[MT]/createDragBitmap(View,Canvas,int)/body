@@ -1,5 +1,4 @@
 {
-  final int outlineColor=getResources().getColor(android.R.color.holo_blue_light);
   Bitmap b;
   if (v instanceof TextView) {
     Drawable d=((TextView)v).getCompoundDrawables()[1];

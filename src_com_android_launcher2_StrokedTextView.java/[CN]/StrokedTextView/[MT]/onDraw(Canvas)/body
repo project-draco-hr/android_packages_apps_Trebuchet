@@ -1,7 +1,6 @@
 {
   if (mCache != null) {
     if (mUpdateCachedBitmap) {
-      final int gap=getCompoundDrawablePadding();
       final int w=getMeasuredWidth();
       final int h=getMeasuredHeight();
       final String text=getText().toString();

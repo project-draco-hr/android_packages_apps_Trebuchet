@@ -21,8 +21,6 @@
   updateWallpaperVisibility(true);
   showHotseat(animated);
   if (animated) {
-    final float oldScaleX=fromView.getScaleX();
-    final float oldScaleY=fromView.getScaleY();
     final LauncherViewPropertyAnimator scaleAnim=new LauncherViewPropertyAnimator(fromView);
     scaleAnim.scaleX(scaleFactor).scaleY(scaleFactor).setDuration(duration).setInterpolator(new Workspace.ZoomInInterpolator());
     final ObjectAnimator alphaAnim=ObjectAnimator.ofFloat(fromView,"alpha",1f,0f).setDuration(fadeOutDuration);

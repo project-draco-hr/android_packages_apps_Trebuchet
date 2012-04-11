@@ -4,7 +4,6 @@
     mStateAnimation=null;
   }
   final Resources res=getResources();
-  final Launcher instance=this;
   final int duration=res.getInteger(R.integer.config_appsCustomizeZoomInTime);
   final int fadeDuration=res.getInteger(R.integer.config_appsCustomizeFadeInTime);
   final float scale=(float)res.getInteger(R.integer.config_appsCustomizeZoomScaleFactor);
