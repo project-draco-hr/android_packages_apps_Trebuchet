@@ -1,2 +1,3 @@
 int deltaX
 int deltaY
+boolean onDismiss

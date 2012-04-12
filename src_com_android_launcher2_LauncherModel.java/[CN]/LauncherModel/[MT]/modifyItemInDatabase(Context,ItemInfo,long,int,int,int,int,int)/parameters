@@ -1,5 +1,7 @@
 Context context
 ItemInfo item
+long container
+int screen
 int cellX
 int cellY
 int spanX

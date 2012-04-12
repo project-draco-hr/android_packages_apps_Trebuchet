@@ -10,14 +10,11 @@
   mBaselineHeight=getMeasuredHeight();
   mBaselineX=getLeft();
   mBaselineY=getTop();
-  mRunningHInc=0;
-  mRunningVInc=0;
   if (anyBordersActive) {
     mLeftHandle.setAlpha(mLeftBorderActive ? 1.0f : DIMMED_HANDLE_ALPHA);
     mRightHandle.setAlpha(mRightBorderActive ? 1.0f : DIMMED_HANDLE_ALPHA);
     mTopHandle.setAlpha(mTopBorderActive ? 1.0f : DIMMED_HANDLE_ALPHA);
     mBottomHandle.setAlpha(mBottomBorderActive ? 1.0f : DIMMED_HANDLE_ALPHA);
   }
-  mCellLayout.getExpandabilityArrayForView(mWidgetView,mExpandability);
   return anyBordersActive;
 }

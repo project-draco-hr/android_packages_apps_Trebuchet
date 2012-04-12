@@ -12,6 +12,8 @@
     if (info != null) {
       info.cellX=lp.cellX=lp.tmpCellX;
       info.cellY=lp.cellY=lp.tmpCellY;
+      info.spanX=lp.cellHSpan;
+      info.spanY=lp.cellVSpan;
     }
   }
   mLauncher.getWorkspace().updateItemLocationsInDatabase(this);
