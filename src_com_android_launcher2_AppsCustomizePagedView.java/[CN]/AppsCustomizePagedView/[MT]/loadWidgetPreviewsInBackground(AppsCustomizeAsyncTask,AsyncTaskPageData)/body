@@ -13,7 +13,7 @@
     Object rawInfo=items.get(i);
     if (rawInfo instanceof AppWidgetProviderInfo) {
       AppWidgetProviderInfo info=(AppWidgetProviderInfo)rawInfo;
-      int[] cellSpans=mLauncher.getSpanForWidget(info,null);
+      int[] cellSpans=mLauncher.getSpanForWidget(info);
       int maxWidth=Math.min(data.maxImageWidth,mWidgetSpacingLayout.estimateCellWidth(cellSpans[0]));
       int maxHeight=Math.min(data.maxImageHeight,mWidgetSpacingLayout.estimateCellHeight(cellSpans[1]));
       Bitmap b=getWidgetPreview(info.provider,info.previewImage,info.icon,cellSpans[0],cellSpans[1],maxWidth,maxHeight);

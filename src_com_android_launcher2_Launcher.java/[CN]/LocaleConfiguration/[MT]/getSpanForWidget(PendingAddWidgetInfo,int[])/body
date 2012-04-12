@@ -1,3 +1,0 @@
-{
-  return getSpanForWidget(info.componentName,info.minWidth,info.minHeight,spanXY);
-}
