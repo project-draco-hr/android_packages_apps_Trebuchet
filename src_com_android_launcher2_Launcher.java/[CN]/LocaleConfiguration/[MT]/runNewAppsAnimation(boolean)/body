@@ -1,0 +1,46 @@
+{
+  AnimatorSet anim=new AnimatorSet();
+  Collection<Animator> bounceAnims=new ArrayList<Animator>();
+  Collections.sort(mNewShortcutAnimateViews,new Comparator<View>(){
+    @Override public int compare(    View a,    View b){
+      CellLayout.LayoutParams alp=(CellLayout.LayoutParams)a.getLayoutParams();
+      CellLayout.LayoutParams blp=(CellLayout.LayoutParams)b.getLayoutParams();
+      int cellCountX=LauncherModel.getCellCountX();
+      return (alp.cellY * cellCountX + alp.cellX) - (blp.cellY * cellCountX + blp.cellX);
+    }
+  }
+);
+  if (immediate) {
+    for (    View v : mNewShortcutAnimateViews) {
+      v.setAlpha(1f);
+      v.setScaleX(1f);
+      v.setScaleY(1f);
+    }
+  }
+ else {
+    for (int i=0; i < mNewShortcutAnimateViews.size(); ++i) {
+      View v=mNewShortcutAnimateViews.get(i);
+      ValueAnimator bounceAnim=ObjectAnimator.ofPropertyValuesHolder(v,PropertyValuesHolder.ofFloat("alpha",1f),PropertyValuesHolder.ofFloat("scaleX",1f),PropertyValuesHolder.ofFloat("scaleY",1f));
+      bounceAnim.setDuration(InstallShortcutReceiver.NEW_SHORTCUT_BOUNCE_DURATION);
+      bounceAnim.setStartDelay(i * InstallShortcutReceiver.NEW_SHORTCUT_STAGGER_DELAY);
+      bounceAnim.setInterpolator(new SmoothPagedView.OvershootInterpolator());
+      bounceAnims.add(bounceAnim);
+    }
+    anim.playTogether(bounceAnims);
+    anim.addListener(new AnimatorListenerAdapter(){
+      @Override public void onAnimationEnd(      Animator animation){
+        mWorkspace.postDelayed(mBuildLayersRunnable,500);
+      }
+    }
+);
+    anim.start();
+  }
+  mNewShortcutAnimatePage=-1;
+  mNewShortcutAnimateViews.clear();
+  new Thread("clearNewAppsThread"){
+    public void run(){
+      mSharedPrefs.edit().putInt(InstallShortcutReceiver.NEW_APPS_PAGE_KEY,-1).putStringSet(InstallShortcutReceiver.NEW_APPS_LIST_KEY,null).commit();
+    }
+  }
+.start();
+}

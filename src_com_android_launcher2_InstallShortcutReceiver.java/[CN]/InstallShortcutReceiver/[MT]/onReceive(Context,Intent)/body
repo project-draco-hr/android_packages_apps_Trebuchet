@@ -4,7 +4,6 @@
   }
   String spKey=LauncherApplication.getSharedPreferencesKey();
   SharedPreferences sp=context.getSharedPreferences(spKey,Context.MODE_PRIVATE);
-  final int screen=Launcher.getScreen();
   final Intent intent=data.getParcelableExtra(Intent.EXTRA_SHORTCUT_INTENT);
   if (intent == null) {
     return;
@@ -20,14 +19,18 @@
       return;
     }
   }
-  final ArrayList<ItemInfo> items=LauncherModel.getItemsInLocalCoordinates(context);
-  final boolean exists=LauncherModel.shortcutExists(context,name,intent);
+  LauncherApplication app=(LauncherApplication)context.getApplicationContext();
   final int[] result={INSTALL_SHORTCUT_SUCCESSFUL};
   boolean found=false;
-  for (int i=0; i < (2 * Launcher.SCREEN_COUNT) + 1 && !found; ++i) {
-    int si=screen + (int)((i / 2f) + 0.5f) * ((i % 2 == 1) ? 1 : -1);
-    if (0 <= si && si < Launcher.SCREEN_COUNT) {
-      found=installShortcut(context,data,items,name,intent,si,exists,sp,result);
+synchronized (app) {
+    final ArrayList<ItemInfo> items=LauncherModel.getItemsInLocalCoordinates(context);
+    final boolean exists=LauncherModel.shortcutExists(context,name,intent);
+    final int screen=Launcher.DEFAULT_SCREEN;
+    for (int i=0; i < (2 * Launcher.SCREEN_COUNT) + 1 && !found; ++i) {
+      int si=screen + (int)((i / 2f) + 0.5f) * ((i % 2 == 1) ? 1 : -1);
+      if (0 <= si && si < Launcher.SCREEN_COUNT) {
+        found=installShortcut(context,data,items,name,intent,si,exists,sp,result);
+      }
     }
   }
   if (!found) {
