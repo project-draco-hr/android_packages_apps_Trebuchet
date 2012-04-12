@@ -10,7 +10,7 @@
     View v=cl.getShortcutsAndWidgets().getChildAt(i);
     ItemInfo info=(ItemInfo)v.getTag();
     if (info != null) {
-      LauncherModel.moveItemInDatabase(mLauncher,info,container,screen,info.cellX,info.cellY);
+      LauncherModel.modifyItemInDatabase(mLauncher,info,container,screen,info.cellX,info.cellY,info.spanX,info.spanY);
     }
   }
 }

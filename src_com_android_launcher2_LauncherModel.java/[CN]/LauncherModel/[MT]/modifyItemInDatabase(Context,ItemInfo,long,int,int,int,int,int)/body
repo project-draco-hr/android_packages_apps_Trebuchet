@@ -1,0 +1,21 @@
+{
+  item.container=container;
+  item.cellX=cellX;
+  item.cellY=cellY;
+  item.spanX=spanX;
+  item.spanY=spanY;
+  if (context instanceof Launcher && screen < 0 && container == LauncherSettings.Favorites.CONTAINER_HOTSEAT) {
+    item.screen=((Launcher)context).getHotseat().getOrderInHotseat(cellX,cellY);
+  }
+ else {
+    item.screen=screen;
+  }
+  final ContentValues values=new ContentValues();
+  values.put(LauncherSettings.Favorites.CONTAINER,item.container);
+  values.put(LauncherSettings.Favorites.CELLX,item.cellX);
+  values.put(LauncherSettings.Favorites.CELLY,item.cellY);
+  values.put(LauncherSettings.Favorites.SPANX,item.spanX);
+  values.put(LauncherSettings.Favorites.SPANY,item.spanY);
+  values.put(LauncherSettings.Favorites.SCREEN,item.screen);
+  updateItemInDatabaseHelper(context,values,item,"moveItemInDatabase");
+}

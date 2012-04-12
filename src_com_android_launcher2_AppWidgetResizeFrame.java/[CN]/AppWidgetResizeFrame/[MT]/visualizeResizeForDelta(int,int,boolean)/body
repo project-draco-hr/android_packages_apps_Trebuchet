@@ -1,0 +1,20 @@
+{
+  updateDeltas(deltaX,deltaY);
+  DragLayer.LayoutParams lp=(DragLayer.LayoutParams)getLayoutParams();
+  if (mLeftBorderActive) {
+    lp.x=mBaselineX + mDeltaX;
+    lp.width=mBaselineWidth - mDeltaX;
+  }
+ else   if (mRightBorderActive) {
+    lp.width=mBaselineWidth + mDeltaX;
+  }
+  if (mTopBorderActive) {
+    lp.y=mBaselineY + mDeltaY;
+    lp.height=mBaselineHeight - mDeltaY;
+  }
+ else   if (mBottomBorderActive) {
+    lp.height=mBaselineHeight + mDeltaY;
+  }
+  resizeWidgetIfNeeded(onDismiss);
+  requestLayout();
+}

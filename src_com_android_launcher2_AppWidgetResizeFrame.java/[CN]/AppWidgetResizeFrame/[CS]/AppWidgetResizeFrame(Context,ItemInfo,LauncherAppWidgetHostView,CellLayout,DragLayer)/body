@@ -46,4 +46,5 @@
   final float density=mLauncher.getResources().getDisplayMetrics().density;
   mBackgroundPadding=(int)Math.ceil(density * BACKGROUND_PADDING);
   mTouchTargetWidth=2 * mBackgroundPadding;
+  mCellLayout.markCellsAsUnoccupiedForView(mWidgetView);
 }

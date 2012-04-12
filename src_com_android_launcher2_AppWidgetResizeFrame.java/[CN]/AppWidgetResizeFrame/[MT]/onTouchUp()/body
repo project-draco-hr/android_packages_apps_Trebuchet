@@ -1,0 +1,14 @@
+{
+  int xThreshold=mCellLayout.getCellWidth() + mCellLayout.getWidthGap();
+  int yThreshold=mCellLayout.getCellHeight() + mCellLayout.getHeightGap();
+  mDeltaXAddOn=mRunningHInc * xThreshold;
+  mDeltaYAddOn=mRunningVInc * yThreshold;
+  mDeltaX=0;
+  mDeltaY=0;
+  post(new Runnable(){
+    @Override public void run(){
+      snapToWidget(true);
+    }
+  }
+);
+}
