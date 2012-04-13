@@ -6,7 +6,13 @@
   List<ResolveInfo> shortcuts=mPackageManager.queryIntentActivities(shortcutsIntent,0);
   for (  AppWidgetProviderInfo widget : widgets) {
     if (widget.minWidth > 0 && widget.minHeight > 0) {
-      mWidgets.add(widget);
+      int[] spanXY=mLauncher.getSpanForWidget(widget);
+      int[] minSpanXY=mLauncher.getMinSpanForWidget(widget);
+      int minSpanX=Math.min(spanXY[0],minSpanXY[0]);
+      int minSpanY=Math.min(spanXY[1],minSpanXY[1]);
+      if (minSpanX < LauncherModel.getCellCountX() && minSpanY < LauncherModel.getCellCountY()) {
+        mWidgets.add(widget);
+      }
     }
  else {
       Log.e(LOG_TAG,"Widget " + widget.provider + " has invalid dimensions ("+ widget.minWidth+ ", "+ widget.minHeight+ ")");

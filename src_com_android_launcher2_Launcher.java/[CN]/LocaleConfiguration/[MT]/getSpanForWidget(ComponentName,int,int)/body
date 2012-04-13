@@ -1,7 +1,4 @@
 {
-  if (spanXY == null) {
-    spanXY=new int[2];
-  }
   Rect padding=AppWidgetHostView.getDefaultPaddingForWidget(this,component,null);
   int requiredWidth=minWidth + padding.left + padding.right;
   int requiredHeight=minHeight + padding.top + padding.bottom;
