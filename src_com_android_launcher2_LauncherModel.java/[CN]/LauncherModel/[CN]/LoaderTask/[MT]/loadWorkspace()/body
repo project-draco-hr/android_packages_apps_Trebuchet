@@ -29,8 +29,6 @@
     final int cellYIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.CELLY);
     final int spanXIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.SPANX);
     final int spanYIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.SPANY);
-    final int uriIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.URI);
-    final int displayModeIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.DISPLAY_MODE);
     ShortcutInfo info;
     String intentDescription;
     LauncherAppWidgetInfo appWidgetInfo;

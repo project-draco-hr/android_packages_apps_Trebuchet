@@ -1,5 +1,6 @@
 {
-  if (false) {
+  @SuppressWarnings("all") final boolean debug=false;
+  if (debug) {
     Log.d(TAG,"getIconFromCursor app=" + c.getString(c.getColumnIndexOrThrow(LauncherSettings.Favorites.TITLE)));
   }
   byte[] data=c.getBlob(iconIndex);

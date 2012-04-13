@@ -1,6 +1,5 @@
 {
   final AppWidgetProviderInfo appWidget=info.info;
-  Runnable configurationActivity=null;
   if (appWidget.configure != null) {
     Intent intent=new Intent(AppWidgetManager.ACTION_APPWIDGET_CONFIGURE);
     intent.setComponent(appWidget.configure);

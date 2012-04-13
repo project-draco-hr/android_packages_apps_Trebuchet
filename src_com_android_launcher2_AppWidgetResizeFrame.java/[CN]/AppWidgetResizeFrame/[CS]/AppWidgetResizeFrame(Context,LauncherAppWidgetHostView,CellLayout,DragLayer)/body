@@ -1,7 +1,6 @@
 {
   super(context);
   mLauncher=(Launcher)context;
-  mItemInfo=itemInfo;
   mCellLayout=cellLayout;
   mWidgetView=widgetView;
   mResizeMode=widgetView.getAppWidgetInfo().resizeMode;

@@ -1,6 +1,5 @@
 {
   mDragEnforcer.onDragExit();
-  mDragHasEnteredWorkspace=false;
   if (mInScrollArea) {
     mDropToLayout=mDragOverlappingLayout;
   }

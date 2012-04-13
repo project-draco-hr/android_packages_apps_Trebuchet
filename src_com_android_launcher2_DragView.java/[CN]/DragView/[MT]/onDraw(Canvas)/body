@@ -1,5 +1,6 @@
 {
-  if (false) {
+  @SuppressWarnings("all") final boolean debug=false;
+  if (debug) {
     Paint p=new Paint();
     p.setStyle(Paint.Style.FILL);
     p.setColor(0x66ffffff);

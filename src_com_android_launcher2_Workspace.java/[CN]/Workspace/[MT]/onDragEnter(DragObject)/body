@@ -1,6 +1,5 @@
 {
   mDragEnforcer.onDragEnter();
-  mDragHasEnteredWorkspace=true;
   mCreateUserFolderOnDrop=false;
   mAddToExistingFolderOnDrop=false;
   mDropToLayout=null;

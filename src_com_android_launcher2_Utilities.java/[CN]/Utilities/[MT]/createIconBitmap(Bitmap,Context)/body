@@ -10,6 +10,7 @@
     return icon;
   }
  else {
-    return createIconBitmap(new BitmapDrawable(icon),context);
+    final Resources resources=context.getResources();
+    return createIconBitmap(new BitmapDrawable(resources,icon),context);
   }
 }

@@ -41,7 +41,8 @@ synchronized (sCanvas) {
     canvas.setBitmap(bitmap);
     final int left=(textureWidth - width) / 2;
     final int top=(textureHeight - height) / 2;
-    if (false) {
+    @SuppressWarnings("all") final boolean debug=false;
+    if (debug) {
       canvas.drawColor(sColors[sColorIndex]);
       if (++sColorIndex >= sColors.length)       sColorIndex=0;
       Paint debugPaint=new Paint();

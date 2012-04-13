@@ -7,7 +7,8 @@ synchronized (sCanvas) {
       return bitmap;
     }
  else {
-      return createIconBitmap(new BitmapDrawable(bitmap),context);
+      final Resources resources=context.getResources();
+      return createIconBitmap(new BitmapDrawable(resources,bitmap),context);
     }
   }
 }

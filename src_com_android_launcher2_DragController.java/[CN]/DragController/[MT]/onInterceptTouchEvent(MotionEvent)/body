@@ -1,5 +1,6 @@
 {
-  if (false) {
+  @SuppressWarnings("all") final boolean debug=false;
+  if (debug) {
     Log.d(Launcher.TAG,"DragController.onInterceptTouchEvent " + ev + " mDragging="+ mDragging);
   }
   acquireVelocityTrackerAndAddMovement(ev);

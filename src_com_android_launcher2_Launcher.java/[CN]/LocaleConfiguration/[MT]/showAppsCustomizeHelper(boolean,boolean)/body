@@ -84,7 +84,7 @@
             }
           }
 );
-          observer.removeGlobalOnLayoutListener(this);
+          observer.removeOnGlobalLayoutListener(this);
         }
       }
 ;

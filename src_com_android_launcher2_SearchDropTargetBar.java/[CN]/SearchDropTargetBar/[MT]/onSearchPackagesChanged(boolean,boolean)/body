@@ -6,7 +6,7 @@
       mQSBSearchBar.setBackgroundResource(0);
     }
  else     if (mPreviousBackground != null && (searchVisible || voiceVisible)) {
-      mQSBSearchBar.setBackgroundDrawable(mPreviousBackground);
+      mQSBSearchBar.setBackground(mPreviousBackground);
     }
   }
 }
