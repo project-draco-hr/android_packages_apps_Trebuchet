@@ -1,6 +1,5 @@
 {
   setLoadOnResume();
-  removeDialog(DIALOG_CREATE_SHORTCUT);
   if (mWorkspace != null) {
     mWorkspace.updateShortcuts(apps);
   }
