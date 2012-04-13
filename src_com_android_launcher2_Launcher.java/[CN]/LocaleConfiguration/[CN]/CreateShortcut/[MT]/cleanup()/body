@@ -1,7 +1,0 @@
-{
-  try {
-    dismissDialog(DIALOG_CREATE_SHORTCUT);
-  }
- catch (  Exception e) {
-  }
-}

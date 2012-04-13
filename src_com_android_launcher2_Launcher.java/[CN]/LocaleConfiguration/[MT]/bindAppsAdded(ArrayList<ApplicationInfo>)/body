@@ -1,6 +1,5 @@
 {
   setLoadOnResume();
-  removeDialog(DIALOG_CREATE_SHORTCUT);
   if (mAppsCustomizeContent != null) {
     mAppsCustomizeContent.addApps(apps);
   }
