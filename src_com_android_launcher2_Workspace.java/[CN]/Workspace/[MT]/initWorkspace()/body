@@ -14,9 +14,8 @@
   }
   mWallpaperOffset=new WallpaperOffsetInterpolator();
   Display display=mLauncher.getWindowManager().getDefaultDisplay();
-  mDisplayWidth=display.getWidth();
-  mDisplayHeight=display.getHeight();
-  mWallpaperTravelWidth=(int)(mDisplayWidth * wallpaperTravelToScreenWidthRatio(mDisplayWidth,mDisplayHeight));
+  display.getSize(mDisplaySize);
+  mWallpaperTravelWidth=(int)(mDisplaySize.x * wallpaperTravelToScreenWidthRatio(mDisplaySize.x,mDisplaySize.y));
   mMaxDistanceForFolderCreation=(0.6f * res.getDimensionPixelSize(R.dimen.app_icon_size));
   mFlingThresholdVelocity=(int)(FLING_THRESHOLD_VELOCITY * mDensity);
 }
