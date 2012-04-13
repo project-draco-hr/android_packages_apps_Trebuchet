@@ -3,6 +3,7 @@
   mHandler=new Handler();
   mScrollZone=launcher.getResources().getDimensionPixelSize(R.dimen.scroll_zone);
   mVelocityTracker=VelocityTracker.obtain();
+  mVibrator=(Vibrator)launcher.getSystemService(Context.VIBRATOR_SERVICE);
   float density=launcher.getResources().getDisplayMetrics().density;
   mFlingToDeleteThresholdVelocity=(int)(FLING_TO_DELETE_THRESHOLD_Y_VELOCITY * density);
 }
