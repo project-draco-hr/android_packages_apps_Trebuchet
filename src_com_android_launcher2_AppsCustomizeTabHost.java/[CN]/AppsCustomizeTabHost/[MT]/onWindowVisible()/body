@@ -3,5 +3,12 @@
     mContent.setVisibility(VISIBLE);
     mAppsCustomizePane.loadAssociatedPages(mAppsCustomizePane.getCurrentPage(),true);
     mAppsCustomizePane.loadAssociatedPages(mAppsCustomizePane.getCurrentPage());
+    int duration=getResources().getInteger(android.R.integer.config_shortAnimTime);
+    postDelayed(new Runnable(){
+      @Override public void run(){
+        mLauncher.updateWallpaperVisibility(false);
+      }
+    }
+,duration);
   }
 }

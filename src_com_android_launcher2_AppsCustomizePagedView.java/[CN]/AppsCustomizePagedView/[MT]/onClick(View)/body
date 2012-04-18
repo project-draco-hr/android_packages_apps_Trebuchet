@@ -2,10 +2,11 @@
   if (!mLauncher.isAllAppsCustomizeOpen() || mLauncher.getWorkspace().isSwitchingState())   return;
   if (v instanceof PagedViewIcon) {
     final ApplicationInfo appInfo=(ApplicationInfo)v.getTag();
-    mLauncher.startActivitySafely(appInfo.intent,appInfo);
     if (mPressedIcon != null) {
       mPressedIcon.lockDrawableState();
     }
+    mLauncher.updateWallpaperVisibility(true);
+    mLauncher.startActivitySafely(v,appInfo.intent,appInfo);
   }
  else   if (v instanceof PagedViewWidget) {
     Toast.makeText(getContext(),R.string.long_press_widget_to_add,Toast.LENGTH_SHORT).show();
