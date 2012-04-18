@@ -1,6 +1,6 @@
 {
   int newX=getChildOffset(newCurrentPage) - getRelativeChildOffset(newCurrentPage);
-  int delta=newX - mScrollX;
+  int delta=newX - getScrollX();
   final int pageCount=getChildCount();
   for (int i=0; i < pageCount; i++) {
     View page=(View)getPageAt(i);

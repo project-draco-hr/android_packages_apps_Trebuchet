@@ -8,7 +8,7 @@
       final float now=System.nanoTime() / NANOTIME_DIV;
       final float e=(float)Math.exp((now - mSmoothingTime) / SMOOTHING_CONSTANT);
       final float dx=mTouchX - mUnboundedScrollX;
-      scrollTo(Math.round(mUnboundedScrollX + dx * e),mScrollY);
+      scrollTo(Math.round(mUnboundedScrollX + dx * e),getScrollY());
       mSmoothingTime=now;
       if (dx > 1.f || dx < -1.f) {
         invalidate();

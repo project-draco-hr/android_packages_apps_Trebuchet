@@ -2,7 +2,7 @@
   final PagedViewGridLayout parent=(PagedViewGridLayout)w.getParent();
   final PagedView container=(PagedView)parent.getParent();
   final TabHost tabHost=findTabHostParent(container);
-  final TabWidget tabs=(TabWidget)tabHost.findViewById(com.android.internal.R.id.tabs);
+  final TabWidget tabs=tabHost.getTabWidget();
   final int widgetIndex=parent.indexOfChild(w);
   final int widgetCount=parent.getChildCount();
   final int pageIndex=((PagedView)container).indexToPage(container.indexOfChild(parent));

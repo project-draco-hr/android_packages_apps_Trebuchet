@@ -42,7 +42,7 @@
       v.setScaleX(scale);
       v.setScaleY(scale);
       v.setAlpha(alpha);
-      if (alpha < ViewConfiguration.ALPHA_THRESHOLD) {
+      if (alpha == 0) {
         v.setVisibility(INVISIBLE);
       }
  else       if (v.getVisibility() != VISIBLE) {

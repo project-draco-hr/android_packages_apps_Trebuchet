@@ -3,7 +3,7 @@
   float layoutScale=mLayoutScale;
   mLayoutScale=1f;
   int scrollRange=getScrollRange();
-  float adjustedScrollX=Math.max(0,Math.min(mScrollX,mMaxScrollX));
+  float adjustedScrollX=Math.max(0,Math.min(getScrollX(),mMaxScrollX));
   adjustedScrollX*=mWallpaperScrollRatio;
   mLayoutScale=layoutScale;
   float scrollProgress=adjustedScrollX / (float)scrollRange;

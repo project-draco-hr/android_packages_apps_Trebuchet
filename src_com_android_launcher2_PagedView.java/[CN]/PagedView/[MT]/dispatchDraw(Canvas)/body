@@ -14,10 +14,10 @@
     if (leftScreen != -1 && rightScreen != -1) {
       final long drawingTime=getDrawingTime();
       canvas.save();
-      canvas.clipRect(mScrollX,mScrollY,mScrollX + mRight - mLeft,mScrollY + mBottom - mTop);
+      canvas.clipRect(getScrollX(),getScrollY(),getScrollX() + getRight() - getLeft(),getScrollY() + getBottom() - getTop());
       for (int i=getChildCount() - 1; i >= 0; i--) {
         final View v=getPageAt(i);
-        if (leftScreen <= i && i <= rightScreen && v.getAlpha() > ViewConfiguration.ALPHA_THRESHOLD) {
+        if (leftScreen <= i && i <= rightScreen && v.getAlpha() > 0) {
           v.setVisibility(VISIBLE);
           drawChild(canvas,v,drawingTime);
         }

@@ -8,7 +8,7 @@
   try {
     XmlResourceParser parser=mContext.getResources().getXml(workspaceResourceId);
     AttributeSet attrs=Xml.asAttributeSet(parser);
-    XmlUtils.beginDocument(parser,TAG_FAVORITES);
+    beginDocument(parser,TAG_FAVORITES);
     final int depth=parser.getDepth();
     int type;
     while (((type=parser.next()) != XmlPullParser.END_TAG || parser.getDepth() > depth) && type != XmlPullParser.END_DOCUMENT) {

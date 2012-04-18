@@ -6,15 +6,16 @@
   mBindWidgetRunnable=new Runnable(){
     @Override public void run(){
       mWidgetLoadingId=mLauncher.getAppWidgetHost().allocateAppWidgetId();
-      AppWidgetManager.getInstance(mLauncher).bindAppWidgetId(mWidgetLoadingId,info.componentName);
-      mWidgetCleanupState=WIDGET_BOUND;
+      if (AppWidgetManager.getInstance(mLauncher).bindAppWidgetIdIfAllowed(mWidgetLoadingId,info.componentName)) {
+        mWidgetCleanupState=WIDGET_BOUND;
+      }
     }
   }
 ;
   post(mBindWidgetRunnable);
   mInflateWidgetRunnable=new Runnable(){
     @Override public void run(){
-      AppWidgetHostView hostView=mLauncher.getAppWidgetHost().createView(mContext,mWidgetLoadingId,pInfo);
+      AppWidgetHostView hostView=mLauncher.getAppWidgetHost().createView(getContext(),mWidgetLoadingId,pInfo);
       info.boundWidget=hostView;
       mWidgetCleanupState=WIDGET_INFLATED;
       hostView.setVisibility(INVISIBLE);

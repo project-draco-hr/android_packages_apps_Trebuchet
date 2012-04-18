@@ -16,7 +16,7 @@
   }
   final PagedView container=(PagedView)parentLayout.getParent();
   final TabHost tabHost=findTabHostParent(container);
-  final TabWidget tabs=(TabWidget)tabHost.findViewById(com.android.internal.R.id.tabs);
+  final TabWidget tabs=tabHost.getTabWidget();
   final int iconIndex=itemContainer.indexOfChild(v);
   final int itemCount=itemContainer.getChildCount();
   final int pageIndex=((PagedView)container).indexToPage(container.indexOfChild(parentLayout));

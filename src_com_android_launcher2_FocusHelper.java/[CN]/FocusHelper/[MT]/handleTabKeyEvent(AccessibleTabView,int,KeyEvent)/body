@@ -2,7 +2,7 @@
   if (!LauncherApplication.isScreenLarge())   return false;
   final FocusOnlyTabWidget parent=(FocusOnlyTabWidget)v.getParent();
   final TabHost tabHost=findTabHostParent(parent);
-  final ViewGroup contents=(ViewGroup)tabHost.findViewById(com.android.internal.R.id.tabcontent);
+  final ViewGroup contents=tabHost.getTabContentView();
   final int tabCount=parent.getTabCount();
   final int tabIndex=parent.getChildTabIndex(v);
   final int action=e.getAction();

@@ -1,6 +1,6 @@
 {
   if (mScroller.computeScrollOffset()) {
-    if (mScrollX != mScroller.getCurrX() || mScrollY != mScroller.getCurrY() || mOverScrollX != mScroller.getCurrX()) {
+    if (getScrollX() != mScroller.getCurrX() || getScrollY() != mScroller.getCurrY() || mOverScrollX != mScroller.getCurrX()) {
       scrollTo(mScroller.getCurrX(),mScroller.getCurrY());
     }
     invalidate();
@@ -17,7 +17,8 @@
     if (mTouchState == TOUCH_STATE_REST) {
       pageEndMoving();
     }
-    if (AccessibilityManager.getInstance(getContext()).isEnabled()) {
+    AccessibilityManager accessibilityManager=(AccessibilityManager)getContext().getSystemService(Context.ACCESSIBILITY_SERVICE);
+    if (accessibilityManager.isEnabled()) {
       AccessibilityEvent ev=AccessibilityEvent.obtain(AccessibilityEvent.TYPE_VIEW_SCROLLED);
       ev.getText().add(getCurrentPageDescription());
       sendAccessibilityEventUnchecked(ev);

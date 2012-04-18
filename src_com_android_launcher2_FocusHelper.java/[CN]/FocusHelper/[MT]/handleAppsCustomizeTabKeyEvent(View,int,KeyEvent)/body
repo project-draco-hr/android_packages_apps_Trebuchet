@@ -1,6 +1,6 @@
 {
   final TabHost tabHost=findTabHostParent(v);
-  final ViewGroup contents=(ViewGroup)tabHost.findViewById(com.android.internal.R.id.tabcontent);
+  final ViewGroup contents=tabHost.getTabContentView();
   final View shop=tabHost.findViewById(R.id.market_button);
   final int action=e.getAction();
   final boolean handleKeyEvent=(action != KeyEvent.ACTION_UP);
