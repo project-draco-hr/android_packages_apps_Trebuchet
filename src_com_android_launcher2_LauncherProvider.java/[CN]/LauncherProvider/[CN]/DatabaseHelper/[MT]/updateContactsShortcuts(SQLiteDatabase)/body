@@ -1,32 +1,33 @@
 {
-  Cursor c=null;
   final String selectWhere=buildOrWhereString(Favorites.ITEM_TYPE,new int[]{Favorites.ITEM_TYPE_SHORTCUT});
+  Cursor c=null;
+  final String actionQuickContact="com.android.contacts.action.QUICK_CONTACT";
   db.beginTransaction();
   try {
     c=db.query(TABLE_FAVORITES,new String[]{Favorites._ID,Favorites.INTENT},selectWhere,null,null,null,null);
+    if (c == null)     return false;
     if (LOGD)     Log.d(TAG,"found upgrade cursor count=" + c.getCount());
-    final ContentValues values=new ContentValues();
     final int idIndex=c.getColumnIndex(Favorites._ID);
     final int intentIndex=c.getColumnIndex(Favorites.INTENT);
-    while (c != null && c.moveToNext()) {
+    while (c.moveToNext()) {
       long favoriteId=c.getLong(idIndex);
       final String intentUri=c.getString(intentIndex);
       if (intentUri != null) {
         try {
-          Intent intent=Intent.parseUri(intentUri,0);
+          final Intent intent=Intent.parseUri(intentUri,0);
           android.util.Log.d("Home",intent.toString());
           final Uri uri=intent.getData();
-          final String data=uri.toString();
-          if (Intent.ACTION_VIEW.equals(intent.getAction()) && (data.startsWith("content://contacts/people/") || data.startsWith("content://com.android.contacts/contacts/lookup/"))) {
-            intent=new Intent("com.android.contacts.action.QUICK_CONTACT");
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
-            intent.setData(uri);
-            intent.putExtra("mode",3);
-            intent.putExtra("exclude_mimes",(String[])null);
-            values.clear();
-            values.put(LauncherSettings.Favorites.INTENT,intent.toUri(0));
-            String updateWhere=Favorites._ID + "=" + favoriteId;
-            db.update(TABLE_FAVORITES,values,updateWhere,null);
+          if (uri != null) {
+            final String data=uri.toString();
+            if ((Intent.ACTION_VIEW.equals(intent.getAction()) || actionQuickContact.equals(intent.getAction())) && (data.startsWith("content://contacts/people/") || data.startsWith("content://com.android.contacts/" + "contacts/lookup/"))) {
+              final Intent newIntent=new Intent(actionQuickContact);
+              newIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+              newIntent.setData(uri);
+              final ContentValues values=new ContentValues();
+              values.put(LauncherSettings.Favorites.INTENT,newIntent.toUri(0));
+              String updateWhere=Favorites._ID + "=" + favoriteId;
+              db.update(TABLE_FAVORITES,values,updateWhere,null);
+            }
           }
         }
  catch (        RuntimeException ex) {
