@@ -2,6 +2,7 @@
   final View searchDivider=findViewById(R.id.search_divider);
   final View voiceButtonContainer=findViewById(R.id.voice_button_container);
   final View voiceButton=findViewById(R.id.voice_button);
+  final View voiceButtonProxy=findViewById(R.id.voice_button_proxy);
   Intent intent=new Intent(RecognizerIntent.ACTION_WEB_SEARCH);
   ComponentName activityName=intent.resolveActivity(getPackageManager());
   if (searchVisible && activityName != null) {
@@ -10,6 +11,7 @@
     if (searchDivider != null)     searchDivider.setVisibility(View.VISIBLE);
     if (voiceButtonContainer != null)     voiceButtonContainer.setVisibility(View.VISIBLE);
     voiceButton.setVisibility(View.VISIBLE);
+    voiceButtonProxy.setVisibility(View.VISIBLE);
     invalidatePressedFocusedStates(voiceButtonContainer,voiceButton);
     return true;
   }
@@ -17,6 +19,7 @@
     if (searchDivider != null)     searchDivider.setVisibility(View.GONE);
     if (voiceButtonContainer != null)     voiceButtonContainer.setVisibility(View.GONE);
     voiceButton.setVisibility(View.GONE);
+    voiceButtonProxy.setVisibility(View.GONE);
     return false;
   }
 }

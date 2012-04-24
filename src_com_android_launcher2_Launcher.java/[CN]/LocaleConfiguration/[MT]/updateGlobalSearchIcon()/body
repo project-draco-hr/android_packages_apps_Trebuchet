@@ -4,6 +4,7 @@
   final View searchDivider=findViewById(R.id.search_divider);
   final View voiceButtonContainer=findViewById(R.id.voice_button_container);
   final View voiceButton=findViewById(R.id.voice_button);
+  final View voiceButtonProxy=findViewById(R.id.voice_button_proxy);
   final SearchManager searchManager=(SearchManager)getSystemService(Context.SEARCH_SERVICE);
   ComponentName activityName=searchManager.getGlobalSearchActivity();
   if (activityName != null) {
@@ -21,6 +22,7 @@
     if (voiceButtonContainer != null)     voiceButtonContainer.setVisibility(View.GONE);
     searchButton.setVisibility(View.GONE);
     voiceButton.setVisibility(View.GONE);
+    voiceButtonProxy.setVisibility(View.GONE);
     return false;
   }
 }
