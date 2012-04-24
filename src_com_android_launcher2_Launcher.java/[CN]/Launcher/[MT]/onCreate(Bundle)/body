@@ -62,7 +62,8 @@
   }
   mSearchDropTargetBar.onSearchPackagesChanged(searchVisible,voiceVisible);
   final String forceEnableRotation=SystemProperties.get(FORCE_ENABLE_ROTATION_PROPERTY,"false");
-  if (LauncherApplication.isScreenLarge() || "true".equalsIgnoreCase(forceEnableRotation)) {
+  boolean enableRotation=getResources().getBoolean(R.bool.allow_rotation);
+  if (enableRotation || "true".equalsIgnoreCase(forceEnableRotation)) {
     setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
   }
 }
