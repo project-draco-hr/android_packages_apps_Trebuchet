@@ -6,4 +6,5 @@
     iter.remove();
     mDirtyPageContent.set(task.page,true);
   }
+  mDeferredSyncWidgetPageItems.clear();
 }
