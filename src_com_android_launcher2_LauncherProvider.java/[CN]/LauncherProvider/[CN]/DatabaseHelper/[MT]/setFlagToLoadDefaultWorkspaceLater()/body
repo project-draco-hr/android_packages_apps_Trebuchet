@@ -1,0 +1,7 @@
+{
+  String spKey=LauncherApplication.getSharedPreferencesKey();
+  SharedPreferences sp=mContext.getSharedPreferences(spKey,Context.MODE_PRIVATE);
+  SharedPreferences.Editor editor=sp.edit();
+  editor.putBoolean(DB_CREATED_BUT_DEFAULT_WORKSPACE_NOT_LOADED,true);
+  editor.commit();
+}
