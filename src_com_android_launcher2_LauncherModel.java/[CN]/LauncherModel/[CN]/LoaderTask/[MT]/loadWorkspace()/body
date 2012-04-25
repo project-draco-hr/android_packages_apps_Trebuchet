@@ -5,6 +5,7 @@
   final PackageManager manager=context.getPackageManager();
   final AppWidgetManager widgets=AppWidgetManager.getInstance(context);
   final boolean isSafeMode=manager.isSafeMode();
+  mApp.getLauncherProvider().loadDefaultFavoritesIfNecessary();
   sWorkspaceItems.clear();
   sAppWidgets.clear();
   sFolders.clear();
