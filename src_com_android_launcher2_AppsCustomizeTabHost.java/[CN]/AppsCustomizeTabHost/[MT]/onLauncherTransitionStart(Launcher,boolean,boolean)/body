@@ -1,22 +1,4 @@
 {
-  mAppsCustomizePane.onLauncherTransitionStart(l,animated,toWorkspace);
-  mInTransition=true;
-  mTransitioningToWorkspace=toWorkspace;
-  if (toWorkspace) {
-    setVisibilityOfSiblingsWithLowerZOrder(VISIBLE);
-    mAppsCustomizePane.cancelScrollingIndicatorAnimations();
-  }
- else {
-    mContent.setVisibility(VISIBLE);
-    mAppsCustomizePane.loadAssociatedPages(mAppsCustomizePane.getCurrentPage(),true);
-    if (!LauncherApplication.isScreenLarge()) {
-      mAppsCustomizePane.showScrollingIndicator(true);
-    }
-  }
-  if (mResetAfterTransition) {
-    mAppsCustomizePane.reset();
-    mResetAfterTransition=false;
-  }
   if (animated) {
     enableAndBuildHardwareLayer();
   }
