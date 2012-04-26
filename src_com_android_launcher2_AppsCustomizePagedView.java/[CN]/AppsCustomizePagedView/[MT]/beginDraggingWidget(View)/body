@@ -41,7 +41,7 @@
   }
   outline=Bitmap.createScaledBitmap(preview,preview.getWidth(),preview.getHeight(),false);
   alphaClipPaint=null;
-  mLauncher.lockScreenOrientationOnLargeUI();
+  mLauncher.lockScreenOrientation();
   mLauncher.getWorkspace().onDragStartedWithItem(createItemInfo,outline,alphaClipPaint);
   mDragController.startDrag(image,preview,this,createItemInfo,DragController.DRAG_ACTION_COPY,null,scale);
   outline.recycle();
