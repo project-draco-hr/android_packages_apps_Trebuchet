@@ -34,18 +34,7 @@
   if (hotseatIconScale >= 0) {
     mHotseatChildScale=hotseatIconScale / 100f;
   }
-  mCrosshairsDrawable=res.getDrawable(R.drawable.gardening_crosshairs);
   mEaseOutInterpolator=new DecelerateInterpolator(2.5f);
-  int animDuration=res.getInteger(R.integer.config_crosshairsFadeInTime);
-  mCrosshairsAnimator=new InterruptibleInOutAnimator(animDuration,0.0f,1.0f);
-  mCrosshairsAnimator.getAnimator().addUpdateListener(new AnimatorUpdateListener(){
-    public void onAnimationUpdate(    ValueAnimator animation){
-      mCrosshairsVisibility=((Float)animation.getAnimatedValue()).floatValue();
-      invalidate();
-    }
-  }
-);
-  mCrosshairsAnimator.getAnimator().setInterpolator(mEaseOutInterpolator);
   mDragCell[0]=mDragCell[1]=-1;
   for (int i=0; i < mDragOutlines.length; i++) {
     mDragOutlines[i]=new Rect(-1,-1,-1,-1);
