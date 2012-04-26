@@ -2,9 +2,6 @@
   mDragEnforcer.onDragExit();
   if (mDragging) {
     mDragging=false;
-    if (mCrosshairsAnimator != null) {
-      mCrosshairsAnimator.animateOut();
-    }
   }
   mDragCell[0]=mDragCell[1]=-1;
   mDragOutlineAnims[mDragOutlineCurrent].animateOut();

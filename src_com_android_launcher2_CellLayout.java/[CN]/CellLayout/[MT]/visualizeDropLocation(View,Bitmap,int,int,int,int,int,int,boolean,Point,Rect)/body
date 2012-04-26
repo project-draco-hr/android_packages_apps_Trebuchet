@@ -8,9 +8,6 @@
     mDragCenter.set(originX,originY);
   }
   if (dragOutline == null && v == null) {
-    if (mCrosshairsDrawable != null) {
-      invalidate();
-    }
     return;
   }
   if (cellX != oldDragCellX || cellY != oldDragCellY) {
@@ -47,8 +44,5 @@
     }
     mDragOutlineAnims[mDragOutlineCurrent].setTag(dragOutline);
     mDragOutlineAnims[mDragOutlineCurrent].animateIn();
-  }
-  if (mCrosshairsDrawable != null) {
-    invalidate();
   }
 }
