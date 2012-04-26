@@ -34,8 +34,8 @@
     }
 );
     mStateAnimation=new AnimatorSet();
-    dispatchOnLauncherTransitionStart(fromView,animated,true);
-    dispatchOnLauncherTransitionStart(toView,animated,true);
+    dispatchOnLauncherTransitionPrepare(fromView,animated,true);
+    dispatchOnLauncherTransitionPrepare(toView,animated,true);
     mStateAnimation.addListener(new AnimatorListenerAdapter(){
       @Override public void onAnimationEnd(      Animator animation){
         updateWallpaperVisibility(true);
@@ -55,12 +55,16 @@
     if (workspaceAnim != null) {
       mStateAnimation.play(workspaceAnim);
     }
+    dispatchOnLauncherTransitionStart(fromView,animated,true);
+    dispatchOnLauncherTransitionStart(toView,animated,true);
     mStateAnimation.start();
   }
  else {
     fromView.setVisibility(View.GONE);
+    dispatchOnLauncherTransitionPrepare(fromView,animated,true);
     dispatchOnLauncherTransitionStart(fromView,animated,true);
     dispatchOnLauncherTransitionEnd(fromView,animated,true);
+    dispatchOnLauncherTransitionPrepare(toView,animated,true);
     dispatchOnLauncherTransitionStart(toView,animated,true);
     dispatchOnLauncherTransitionEnd(toView,animated,true);
     mWorkspace.hideScrollingIndicator(false);

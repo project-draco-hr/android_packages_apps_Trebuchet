@@ -1,0 +1,4 @@
+{
+  mIsSwitchingState=true;
+  cancelScrollingIndicatorAnimations();
+}
