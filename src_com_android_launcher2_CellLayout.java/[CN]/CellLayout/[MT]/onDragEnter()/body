@@ -1,9 +1,4 @@
 {
   mDragEnforcer.onDragEnter();
-  if (!mDragging) {
-    if (mCrosshairsAnimator != null) {
-      mCrosshairsAnimator.animateIn();
-    }
-  }
   mDragging=true;
 }
