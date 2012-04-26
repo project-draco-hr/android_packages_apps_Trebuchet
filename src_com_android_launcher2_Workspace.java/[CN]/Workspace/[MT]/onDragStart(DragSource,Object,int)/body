@@ -1,5 +1,5 @@
 {
   mIsDragOccuring=true;
   updateChildrenLayersEnabled();
-  mLauncher.lockScreenOrientationOnLargeUI();
+  mLauncher.lockScreenOrientation();
 }
