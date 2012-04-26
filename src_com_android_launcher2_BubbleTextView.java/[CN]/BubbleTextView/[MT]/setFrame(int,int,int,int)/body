@@ -1,5 +1,5 @@
 {
-  if (mLeft != left || mRight != right || mTop != top || mBottom != bottom) {
+  if (getLeft() != left || getRight() != right || getTop() != top || getBottom() != bottom) {
     mBackgroundSizeChanged=true;
   }
   return super.setFrame(left,top,right,bottom);

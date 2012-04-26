@@ -12,7 +12,7 @@
     mMaxCountY=LauncherModel.getCellCountY();
     mMaxNumItems=mMaxCountX * mMaxCountY;
   }
-  mInputMethodManager=(InputMethodManager)mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
+  mInputMethodManager=(InputMethodManager)getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
   mExpandDuration=res.getInteger(R.integer.config_folderAnimDuration);
   if (sDefaultFolderName == null) {
     sDefaultFolderName=res.getString(R.string.folder_name);

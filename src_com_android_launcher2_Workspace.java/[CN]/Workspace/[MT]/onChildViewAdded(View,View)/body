@@ -1,5 +1,4 @@
 {
-  super.onViewAdded(child);
   if (!(child instanceof CellLayout)) {
     throw new IllegalArgumentException("A Workspace can only have CellLayout children.");
   }

@@ -1,8 +1,9 @@
 {
-  if (AccessibilityManager.getInstance(mContext).isEnabled()) {
+  AccessibilityManager accessibilityManager=(AccessibilityManager)getContext().getSystemService(Context.ACCESSIBILITY_SERVICE);
+  if (accessibilityManager.isEnabled()) {
     AccessibilityEvent event=AccessibilityEvent.obtain(type);
     onInitializeAccessibilityEvent(event);
     event.getText().add(text);
-    AccessibilityManager.getInstance(mContext).sendAccessibilityEvent(event);
+    accessibilityManager.sendAccessibilityEvent(event);
   }
 }

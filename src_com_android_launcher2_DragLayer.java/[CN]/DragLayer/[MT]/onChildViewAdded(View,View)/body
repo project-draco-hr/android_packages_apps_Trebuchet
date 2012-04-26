@@ -1,4 +1,3 @@
 {
-  super.onViewAdded(child);
   updateChildIndices();
 }

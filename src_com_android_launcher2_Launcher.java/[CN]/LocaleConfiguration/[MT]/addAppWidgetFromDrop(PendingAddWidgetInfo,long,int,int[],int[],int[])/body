@@ -17,10 +17,19 @@
   int appWidgetId;
   if (hostView != null) {
     appWidgetId=hostView.getAppWidgetId();
+    addAppWidgetImpl(appWidgetId,info);
   }
  else {
     appWidgetId=getAppWidgetHost().allocateAppWidgetId();
-    AppWidgetManager.getInstance(this).bindAppWidgetId(appWidgetId,info.componentName);
+    mWidgetBeingBoundOrConfigured=info;
+    if (mAppWidgetManager.bindAppWidgetIdIfAllowed(appWidgetId,info.componentName)) {
+      addAppWidgetImpl(appWidgetId,info);
+    }
+ else {
+      Intent intent=new Intent(AppWidgetManager.ACTION_APPWIDGET_BIND);
+      intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,appWidgetId);
+      intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_PROVIDER,info.componentName);
+      startActivityForResult(intent,REQUEST_BIND_APPWIDGET);
+    }
   }
-  addAppWidgetImpl(appWidgetId,info);
 }

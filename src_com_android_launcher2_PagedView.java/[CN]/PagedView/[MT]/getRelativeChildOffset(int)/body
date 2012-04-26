@@ -3,8 +3,8 @@
     return mChildRelativeOffsets[index];
   }
  else {
-    final int padding=mPaddingLeft + mPaddingRight;
-    final int offset=mPaddingLeft + (getMeasuredWidth() - padding - getChildWidth(index)) / 2;
+    final int padding=getPaddingLeft() + getPaddingRight();
+    final int offset=getPaddingLeft() + (getMeasuredWidth() - padding - getChildWidth(index)) / 2;
     if (mChildRelativeOffsets != null) {
       mChildRelativeOffsets[index]=offset;
     }

@@ -1,5 +1,5 @@
 {
-  int availWidth=width - (mPaddingLeft + mPaddingRight);
+  int availWidth=width - (getPaddingLeft() + getPaddingRight());
   int n=Math.max(1,(availWidth + mWidthGap) / (mCellWidth + mWidthGap));
   return n;
 }

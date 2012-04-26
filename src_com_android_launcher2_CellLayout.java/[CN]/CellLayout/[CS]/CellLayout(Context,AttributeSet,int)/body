@@ -1,6 +1,6 @@
 {
   super(context,attrs,defStyle);
-  mDragEnforcer=new DropTarget.DragEnforcer(mContext);
+  mDragEnforcer=new DropTarget.DragEnforcer(context);
   setWillNotDraw(false);
   mLauncher=(Launcher)context;
   TypedArray a=context.obtainStyledAttributes(attrs,R.styleable.CellLayout,defStyle,0);

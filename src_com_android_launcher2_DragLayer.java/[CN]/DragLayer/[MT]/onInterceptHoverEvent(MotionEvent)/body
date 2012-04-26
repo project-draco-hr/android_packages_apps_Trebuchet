@@ -4,7 +4,8 @@
     return false;
   }
  else {
-    if (AccessibilityManager.getInstance(mContext).isTouchExplorationEnabled()) {
+    AccessibilityManager accessibilityManager=(AccessibilityManager)getContext().getSystemService(Context.ACCESSIBILITY_SERVICE);
+    if (accessibilityManager.isTouchExplorationEnabled()) {
       final int action=ev.getAction();
       boolean isOverFolder;
 switch (action) {

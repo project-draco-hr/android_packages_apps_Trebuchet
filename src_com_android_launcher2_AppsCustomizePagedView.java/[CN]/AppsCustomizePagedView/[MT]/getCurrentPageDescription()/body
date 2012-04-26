@@ -11,5 +11,5 @@
     stringId=R.string.apps_customize_widgets_scroll_format;
     count=mNumWidgetPages;
   }
-  return String.format(mContext.getString(stringId),page + 1,count);
+  return String.format(getContext().getString(stringId),page + 1,count);
 }

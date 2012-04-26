@@ -10,7 +10,7 @@
     values.put(Favorites._ID,generateNewId());
     dbInsertAndCheck(this,db,TABLE_FAVORITES,null,values);
     allocatedAppWidgets=true;
-    appWidgetManager.bindAppWidgetId(appWidgetId,cn);
+    appWidgetManager.bindAppWidgetIdIfAllowed(appWidgetId,cn);
   }
  catch (  RuntimeException ex) {
     Log.e(TAG,"Problem allocating appWidgetId",ex);

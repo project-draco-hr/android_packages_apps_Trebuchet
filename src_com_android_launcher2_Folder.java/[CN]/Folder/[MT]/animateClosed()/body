@@ -10,7 +10,7 @@
       mState=STATE_SMALL;
     }
     @Override public void onAnimationStart(    Animator animation){
-      sendCustomAccessibilityEvent(AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED,mContext.getString(R.string.folder_closed));
+      sendCustomAccessibilityEvent(AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED,getContext().getString(R.string.folder_closed));
       mState=STATE_ANIMATING;
     }
   }

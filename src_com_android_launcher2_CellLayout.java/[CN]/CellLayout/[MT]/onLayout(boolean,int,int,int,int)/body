@@ -2,6 +2,6 @@
   int count=getChildCount();
   for (int i=0; i < count; i++) {
     View child=getChildAt(i);
-    child.layout(mPaddingLeft,mPaddingTop,r - l - mPaddingRight,b - t - mPaddingBottom);
+    child.layout(getPaddingLeft(),getPaddingTop(),r - l - getPaddingRight(),b - t - getPaddingBottom());
   }
 }

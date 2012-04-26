@@ -32,7 +32,7 @@
       }
     }
     startActivityForResultSafely(intent,REQUEST_CREATE_APPWIDGET);
-    mWidgetBeingConfigured=info;
+    mWidgetBeingBoundOrConfigured=info;
   }
  else {
     completeAddAppWidget(appWidgetId,info.container,info.screen,info.boundWidget,appWidget);

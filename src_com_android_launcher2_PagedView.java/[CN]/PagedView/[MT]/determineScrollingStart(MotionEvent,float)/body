@@ -17,7 +17,7 @@
       mTotalMotionX+=Math.abs(mLastMotionX - x);
       mLastMotionX=x;
       mLastMotionXRemainder=0;
-      mTouchX=mScrollX;
+      mTouchX=getScrollX();
       mSmoothingTime=System.nanoTime() / NANOTIME_DIV;
       pageBeginMoving();
     }

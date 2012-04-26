@@ -13,7 +13,7 @@
   int heightSpec=MeasureSpec.makeMeasureSpec(getMeasuredHeight(),MeasureSpec.EXACTLY);
   requestLayout();
   measure(widthSpec,heightSpec);
-  layout(mLeft,mTop,mRight,mBottom);
+  layout(getLeft(),getTop(),getRight(),getBottom());
   for (int i=0; i < childCount; i++) {
     final View child=getPageAt(i);
     child.setX(childrenX[i]);

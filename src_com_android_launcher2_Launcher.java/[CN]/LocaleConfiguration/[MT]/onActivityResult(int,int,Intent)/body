@@ -1,4 +1,14 @@
 {
+  if (requestCode == REQUEST_BIND_APPWIDGET) {
+    int appWidgetId=data != null ? data.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,-1) : -1;
+    if (resultCode == RESULT_CANCELED) {
+      completeTwoStageWidgetDrop(RESULT_CANCELED,appWidgetId);
+    }
+ else     if (resultCode == RESULT_OK) {
+      addAppWidgetImpl(appWidgetId,mWidgetBeingBoundOrConfigured);
+    }
+    return;
+  }
   boolean delayExitSpringLoadedMode=false;
   boolean isWidgetDrop=(requestCode == REQUEST_PICK_APPWIDGET || requestCode == REQUEST_CREATE_APPWIDGET);
   mWaitingForResult=false;
