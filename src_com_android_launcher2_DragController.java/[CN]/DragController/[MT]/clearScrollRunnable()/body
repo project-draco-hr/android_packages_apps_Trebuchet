@@ -4,5 +4,6 @@
     mScrollState=SCROLL_OUTSIDE_ZONE;
     mScrollRunnable.setDirection(SCROLL_RIGHT);
     mDragScroller.onExitScrollArea();
+    mLauncher.getDragLayer().onExitScrollArea();
   }
 }
