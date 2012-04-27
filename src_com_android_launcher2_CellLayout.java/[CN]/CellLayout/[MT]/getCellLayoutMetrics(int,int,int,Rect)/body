@@ -1,0 +1,42 @@
+{
+  int numWidthGaps=mCountX - 1;
+  int numHeightGaps=mCountY - 1;
+  int widthGap;
+  int heightGap;
+  int cellWidth;
+  int cellHeight;
+  int paddingLeft;
+  int paddingRight;
+  int paddingTop;
+  int paddingBottom;
+  Resources res=getContext().getResources();
+  if (orientation == LANDSCAPE) {
+    cellWidth=res.getDimensionPixelSize(R.dimen.workspace_cell_width_land);
+    cellHeight=res.getDimensionPixelSize(R.dimen.workspace_cell_height_land);
+    widthGap=res.getDimensionPixelSize(R.dimen.workspace_width_gap_land);
+    heightGap=res.getDimensionPixelSize(R.dimen.workspace_height_gap_land);
+    paddingLeft=res.getDimensionPixelSize(R.dimen.cell_layout_left_padding_land);
+    paddingRight=res.getDimensionPixelSize(R.dimen.cell_layout_right_padding_land);
+    paddingTop=res.getDimensionPixelSize(R.dimen.cell_layout_top_padding_land);
+    paddingBottom=res.getDimensionPixelSize(R.dimen.cell_layout_bottom_padding_land);
+  }
+ else {
+    cellWidth=res.getDimensionPixelSize(R.dimen.workspace_cell_width_port);
+    cellHeight=res.getDimensionPixelSize(R.dimen.workspace_cell_height_port);
+    widthGap=res.getDimensionPixelSize(R.dimen.workspace_width_gap_port);
+    heightGap=res.getDimensionPixelSize(R.dimen.workspace_height_gap_port);
+    paddingLeft=res.getDimensionPixelSize(R.dimen.cell_layout_left_padding_port);
+    paddingRight=res.getDimensionPixelSize(R.dimen.cell_layout_right_padding_port);
+    paddingTop=res.getDimensionPixelSize(R.dimen.cell_layout_top_padding_port);
+    paddingBottom=res.getDimensionPixelSize(R.dimen.cell_layout_bottom_padding_port);
+  }
+  if (widthGap < 0 || heightGap < 0) {
+    int hSpace=measureWidth - paddingLeft - paddingRight;
+    int vSpace=measureHeight - paddingTop - paddingBottom;
+    int hFreeSpace=hSpace - (mCountX * cellWidth);
+    int vFreeSpace=vSpace - (mCountY * cellHeight);
+    widthGap=Math.min(mMaxGap,numWidthGaps > 0 ? (hFreeSpace / numWidthGaps) : 0);
+    heightGap=Math.min(mMaxGap,numHeightGaps > 0 ? (vFreeSpace / numHeightGaps) : 0);
+  }
+  metrics.set(cellWidth,cellHeight,widthGap,heightGap);
+}
