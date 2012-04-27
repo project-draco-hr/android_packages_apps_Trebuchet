@@ -10,7 +10,7 @@
   boolean result=false;
   if (!isSmall() && !mIsSwitchingState) {
     mInScrollArea=true;
-    final int page=(mNextPage != INVALID_PAGE ? mNextPage : mCurrentPage) + (direction == DragController.SCROLL_LEFT ? -1 : 1);
+    final int page=getNextPage() + (direction == DragController.SCROLL_LEFT ? -1 : 1);
     setCurrentDropLayout(null);
     if (0 <= page && page < getChildCount()) {
       CellLayout layout=(CellLayout)getChildAt(page);

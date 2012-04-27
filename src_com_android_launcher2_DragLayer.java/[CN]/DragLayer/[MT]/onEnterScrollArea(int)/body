@@ -1,0 +1,4 @@
+{
+  mInScrollArea=true;
+  invalidate();
+}

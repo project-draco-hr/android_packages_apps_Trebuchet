@@ -9,6 +9,7 @@
     mScrollState=SCROLL_OUTSIDE_ZONE;
     mDistanceSinceScroll=0;
     mDragScroller.onExitScrollArea();
+    mLauncher.getDragLayer().onExitScrollArea();
     if (isDragging()) {
       forceMoveEvent();
     }

@@ -32,6 +32,7 @@
     if (mScrollState == SCROLL_OUTSIDE_ZONE) {
       mScrollState=SCROLL_WAITING_IN_ZONE;
       if (mDragScroller.onEnterScrollArea(x,y,SCROLL_LEFT)) {
+        mLauncher.getDragLayer().onEnterScrollArea(SCROLL_LEFT);
         mScrollRunnable.setDirection(SCROLL_LEFT);
         mHandler.postDelayed(mScrollRunnable,delay);
       }
@@ -41,6 +42,7 @@
     if (mScrollState == SCROLL_OUTSIDE_ZONE) {
       mScrollState=SCROLL_WAITING_IN_ZONE;
       if (mDragScroller.onEnterScrollArea(x,y,SCROLL_RIGHT)) {
+        mLauncher.getDragLayer().onEnterScrollArea(SCROLL_RIGHT);
         mScrollRunnable.setDirection(SCROLL_RIGHT);
         mHandler.postDelayed(mScrollRunnable,delay);
       }

@@ -1,4 +1,3 @@
 {
-  int page=(mNextPage != INVALID_PAGE) ? mNextPage : mCurrentPage;
-  return String.format(getContext().getString(R.string.default_scroll_format),page + 1,getChildCount());
+  return String.format(getContext().getString(R.string.default_scroll_format),getNextPage() + 1,getChildCount());
 }
