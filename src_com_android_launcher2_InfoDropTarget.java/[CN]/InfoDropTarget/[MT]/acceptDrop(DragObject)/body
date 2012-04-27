@@ -6,6 +6,9 @@
  else   if (d.dragInfo instanceof ShortcutInfo) {
     componentName=((ShortcutInfo)d.dragInfo).intent.getComponent();
   }
+ else   if (d.dragInfo instanceof PendingAddItemInfo) {
+    componentName=((PendingAddItemInfo)d.dragInfo).componentName;
+  }
   if (componentName != null) {
     mLauncher.startApplicationDetailsActivity(componentName);
   }

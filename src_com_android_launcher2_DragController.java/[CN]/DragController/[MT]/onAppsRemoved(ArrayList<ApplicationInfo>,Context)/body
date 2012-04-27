@@ -4,9 +4,12 @@
     if (rawDragInfo instanceof ShortcutInfo) {
       ShortcutInfo dragInfo=(ShortcutInfo)rawDragInfo;
       for (      ApplicationInfo info : apps) {
-        if (dragInfo != null && dragInfo.intent != null && info.intent != null && dragInfo.intent.getComponent().equals(info.intent.getComponent())) {
-          cancelDrag();
-          return;
+        if (dragInfo != null && dragInfo.intent != null && info.intent != null) {
+          boolean isSamePackage=dragInfo.intent.getPackage().equals(info.intent.getPackage());
+          if (isSamePackage) {
+            cancelDrag();
+            return;
+          }
         }
       }
     }
