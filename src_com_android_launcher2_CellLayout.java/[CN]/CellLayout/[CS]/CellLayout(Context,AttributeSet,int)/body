@@ -4,8 +4,8 @@
   setWillNotDraw(false);
   mLauncher=(Launcher)context;
   TypedArray a=context.obtainStyledAttributes(attrs,R.styleable.CellLayout,defStyle,0);
-  mOriginalCellWidth=mCellWidth=a.getDimensionPixelSize(R.styleable.CellLayout_cellWidth,10);
-  mOriginalCellHeight=mCellHeight=a.getDimensionPixelSize(R.styleable.CellLayout_cellHeight,10);
+  mCellWidth=a.getDimensionPixelSize(R.styleable.CellLayout_cellWidth,10);
+  mCellHeight=a.getDimensionPixelSize(R.styleable.CellLayout_cellHeight,10);
   mWidthGap=mOriginalWidthGap=a.getDimensionPixelSize(R.styleable.CellLayout_widthGap,0);
   mHeightGap=mOriginalHeightGap=a.getDimensionPixelSize(R.styleable.CellLayout_heightGap,0);
   mMaxGap=a.getDimensionPixelSize(R.styleable.CellLayout_maxGap,0);
