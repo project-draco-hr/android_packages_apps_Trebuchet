@@ -1,11 +1,5 @@
 {
-  if (mInTransition) {
-    if (mTransitioningToWorkspace) {
-      return super.onTouchEvent(event);
-    }
+  if (mInTransition && mTransitioningToWorkspace) {
+    return super.onTouchEvent(event);
   }
-  if (event.getY() < mAppsCustomizePane.getBottom()) {
-    return true;
-  }
-  return super.onTouchEvent(event);
 }
