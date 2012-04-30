@@ -1,0 +1,7 @@
+{
+  boolean result=super.dispatchPopulateAccessibilityEvent(event);
+  final List<CharSequence> text=event.getText();
+  text.clear();
+  text.add(getString(R.string.home));
+  return result;
+}
