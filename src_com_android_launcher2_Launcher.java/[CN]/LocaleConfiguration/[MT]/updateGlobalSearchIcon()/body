@@ -9,7 +9,10 @@
   ComponentName activityName=searchManager.getGlobalSearchActivity();
   if (activityName != null) {
     int coi=getCurrentOrientationIndexForGlobalIcons();
-    sGlobalSearchIcon[coi]=updateButtonWithIconFromExternalActivity(R.id.search_button,activityName,R.drawable.ic_home_search_normal_holo);
+    sGlobalSearchIcon[coi]=updateButtonWithIconFromExternalActivity(R.id.search_button,activityName,R.drawable.ic_home_search_normal_holo,TOOLBAR_SEARCH_ICON_METADATA_NAME);
+    if (sGlobalSearchIcon[coi] == null) {
+      sGlobalSearchIcon[coi]=updateButtonWithIconFromExternalActivity(R.id.search_button,activityName,R.drawable.ic_home_search_normal_holo,TOOLBAR_ICON_METADATA_NAME);
+    }
     if (searchDivider != null)     searchDivider.setVisibility(View.VISIBLE);
     if (searchButtonContainer != null)     searchButtonContainer.setVisibility(View.VISIBLE);
     searchButton.setVisibility(View.VISIBLE);

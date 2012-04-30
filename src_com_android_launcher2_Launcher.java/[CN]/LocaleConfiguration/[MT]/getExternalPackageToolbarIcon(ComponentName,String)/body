@@ -3,7 +3,7 @@
     PackageManager packageManager=getPackageManager();
     Bundle metaData=packageManager.getActivityInfo(activityName,PackageManager.GET_META_DATA).metaData;
     if (metaData != null) {
-      int iconResId=metaData.getInt(TOOLBAR_ICON_METADATA_NAME);
+      int iconResId=metaData.getInt(resourceName);
       if (iconResId != 0) {
         Resources res=packageManager.getResourcesForActivity(activityName);
         return res.getDrawable(iconResId);

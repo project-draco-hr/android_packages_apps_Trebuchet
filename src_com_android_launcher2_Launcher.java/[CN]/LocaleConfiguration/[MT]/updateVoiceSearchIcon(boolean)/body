@@ -3,11 +3,24 @@
   final View voiceButtonContainer=findViewById(R.id.voice_button_container);
   final View voiceButton=findViewById(R.id.voice_button);
   final View voiceButtonProxy=findViewById(R.id.voice_button_proxy);
-  Intent intent=new Intent(RecognizerIntent.ACTION_WEB_SEARCH);
-  ComponentName activityName=intent.resolveActivity(getPackageManager());
+  final SearchManager searchManager=(SearchManager)getSystemService(Context.SEARCH_SERVICE);
+  ComponentName globalSearchActivity=searchManager.getGlobalSearchActivity();
+  ComponentName activityName=null;
+  if (globalSearchActivity != null) {
+    Intent intent=new Intent(RecognizerIntent.ACTION_WEB_SEARCH);
+    intent.setPackage(globalSearchActivity.getPackageName());
+    activityName=intent.resolveActivity(getPackageManager());
+  }
+  if (activityName == null) {
+    Intent intent=new Intent(RecognizerIntent.ACTION_WEB_SEARCH);
+    activityName=intent.resolveActivity(getPackageManager());
+  }
   if (searchVisible && activityName != null) {
     int coi=getCurrentOrientationIndexForGlobalIcons();
-    sVoiceSearchIcon[coi]=updateButtonWithIconFromExternalActivity(R.id.voice_button,activityName,R.drawable.ic_home_voice_search_holo);
+    sVoiceSearchIcon[coi]=updateButtonWithIconFromExternalActivity(R.id.voice_button,activityName,R.drawable.ic_home_voice_search_holo,TOOLBAR_VOICE_SEARCH_ICON_METADATA_NAME);
+    if (sVoiceSearchIcon[coi] == null) {
+      sVoiceSearchIcon[coi]=updateButtonWithIconFromExternalActivity(R.id.voice_button,activityName,R.drawable.ic_home_voice_search_holo,TOOLBAR_ICON_METADATA_NAME);
+    }
     if (searchDivider != null)     searchDivider.setVisibility(View.VISIBLE);
     if (voiceButtonContainer != null)     voiceButtonContainer.setVisibility(View.VISIBLE);
     voiceButton.setVisibility(View.VISIBLE);

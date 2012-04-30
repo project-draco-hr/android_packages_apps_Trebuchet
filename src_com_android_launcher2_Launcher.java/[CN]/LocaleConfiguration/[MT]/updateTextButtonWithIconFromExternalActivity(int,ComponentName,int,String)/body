@@ -1,5 +1,5 @@
 {
-  Drawable toolbarIcon=getExternalPackageToolbarIcon(activityName);
+  Drawable toolbarIcon=getExternalPackageToolbarIcon(activityName,toolbarResourceName);
   Resources r=getResources();
   int w=r.getDimensionPixelSize(R.dimen.toolbar_external_icon_width);
   int h=r.getDimensionPixelSize(R.dimen.toolbar_external_icon_height);
