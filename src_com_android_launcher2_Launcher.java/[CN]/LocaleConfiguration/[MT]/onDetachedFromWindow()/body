@@ -1,7 +1,6 @@
 {
   super.onDetachedFromWindow();
   mVisible=false;
-  mDragLayer.clearAllResizeFrames();
   if (mAttached) {
     unregisterReceiver(mReceiver);
     mAttached=false;

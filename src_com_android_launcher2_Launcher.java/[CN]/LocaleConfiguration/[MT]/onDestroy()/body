@@ -18,6 +18,7 @@
   unbindWorkspaceAndHotseatItems();
   getContentResolver().unregisterContentObserver(mWidgetObserver);
   unregisterReceiver(mCloseSystemDialogsReceiver);
+  mDragLayer.clearAllResizeFrames();
   ((ViewGroup)mWorkspace.getParent()).removeAllViews();
   mWorkspace.removeAllViews();
   mWorkspace=null;
