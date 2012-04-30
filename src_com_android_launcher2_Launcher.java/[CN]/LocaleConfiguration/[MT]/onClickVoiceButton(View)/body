@@ -1,6 +1,18 @@
 {
   v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
-  Intent intent=new Intent(RecognizerIntent.ACTION_WEB_SEARCH);
-  intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
-  startActivitySafely(null,intent,"onClickVoiceButton");
+  try {
+    final SearchManager searchManager=(SearchManager)getSystemService(Context.SEARCH_SERVICE);
+    ComponentName activityName=searchManager.getGlobalSearchActivity();
+    Intent intent=new Intent(RecognizerIntent.ACTION_WEB_SEARCH);
+    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+    if (activityName != null) {
+      intent.setPackage(activityName.getPackageName());
+    }
+    startActivitySafely(null,intent,"onClickVoiceButton");
+  }
+ catch (  ActivityNotFoundException e) {
+    Intent intent=new Intent(RecognizerIntent.ACTION_WEB_SEARCH);
+    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+    startActivitySafely(null,intent,"onClickVoiceButton");
+  }
 }

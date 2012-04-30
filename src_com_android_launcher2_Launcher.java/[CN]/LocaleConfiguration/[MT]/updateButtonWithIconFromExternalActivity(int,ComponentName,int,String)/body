@@ -1,6 +1,6 @@
 {
   ImageView button=(ImageView)findViewById(buttonId);
-  Drawable toolbarIcon=getExternalPackageToolbarIcon(activityName);
+  Drawable toolbarIcon=getExternalPackageToolbarIcon(activityName,toolbarResourceName);
   if (button != null) {
     if (toolbarIcon == null) {
       button.setImageResource(fallbackDrawableId);
