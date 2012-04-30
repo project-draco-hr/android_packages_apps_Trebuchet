@@ -37,7 +37,7 @@
     showOutOfSpaceMessage(isHotseatLayout(layout));
     return;
   }
-  LauncherAppWidgetInfo launcherInfo=new LauncherAppWidgetInfo(appWidgetId);
+  LauncherAppWidgetInfo launcherInfo=new LauncherAppWidgetInfo(appWidgetId,appWidgetInfo.provider);
   launcherInfo.spanX=spanXY[0];
   launcherInfo.spanY=spanXY[1];
   launcherInfo.minSpanX=mPendingAddInfo.minSpanX;
