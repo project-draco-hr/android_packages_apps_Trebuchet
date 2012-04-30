@@ -42,6 +42,14 @@
     heightSize=maxChildHeight + verticalPadding;
   }
   setMeasuredDimension(widthSize,heightSize);
+  if (childCount > 0) {
+    if (DEBUG)     Log.d(TAG,"getRelativeChildOffset(): " + getMeasuredWidth() + ", "+ getChildWidth(0));
+    if (mPageSpacing < 0) {
+      int offset=getRelativeChildOffset(0);
+      int spacing=Math.max(offset,widthSize - offset - getChildAt(0).getMeasuredWidth());
+      setPageSpacing(spacing);
+    }
+  }
   invalidateCachedOffsets();
   updateScrollingIndicatorPosition();
   if (childCount > 0) {
