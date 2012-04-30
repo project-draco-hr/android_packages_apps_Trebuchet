@@ -1,6 +1,6 @@
 {
-  int numWidthGaps=mCountX - 1;
-  int numHeightGaps=mCountY - 1;
+  int numWidthGaps=countX - 1;
+  int numHeightGaps=countY - 1;
   int widthGap;
   int heightGap;
   int cellWidth;
@@ -9,7 +9,7 @@
   int paddingRight;
   int paddingTop;
   int paddingBottom;
-  Resources res=getContext().getResources();
+  int maxGap=res.getDimensionPixelSize(R.dimen.workspace_max_gap);
   if (orientation == LANDSCAPE) {
     cellWidth=res.getDimensionPixelSize(R.dimen.workspace_cell_width_land);
     cellHeight=res.getDimensionPixelSize(R.dimen.workspace_cell_height_land);
@@ -33,10 +33,10 @@
   if (widthGap < 0 || heightGap < 0) {
     int hSpace=measureWidth - paddingLeft - paddingRight;
     int vSpace=measureHeight - paddingTop - paddingBottom;
-    int hFreeSpace=hSpace - (mCountX * cellWidth);
-    int vFreeSpace=vSpace - (mCountY * cellHeight);
-    widthGap=Math.min(mMaxGap,numWidthGaps > 0 ? (hFreeSpace / numWidthGaps) : 0);
-    heightGap=Math.min(mMaxGap,numHeightGaps > 0 ? (vFreeSpace / numHeightGaps) : 0);
+    int hFreeSpace=hSpace - (countX * cellWidth);
+    int vFreeSpace=vSpace - (countY * cellHeight);
+    widthGap=Math.min(maxGap,numWidthGaps > 0 ? (hFreeSpace / numWidthGaps) : 0);
+    heightGap=Math.min(maxGap,numHeightGaps > 0 ? (vFreeSpace / numHeightGaps) : 0);
   }
   metrics.set(cellWidth,cellHeight,widthGap,heightGap);
 }
