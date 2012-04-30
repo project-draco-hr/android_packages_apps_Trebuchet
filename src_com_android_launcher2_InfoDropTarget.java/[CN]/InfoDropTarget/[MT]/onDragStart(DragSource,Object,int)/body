@@ -1,6 +1,6 @@
 {
   boolean isVisible=true;
-  if (!isAllAppsApplication(source,info)) {
+  if (!isFromAllApps(source)) {
     isVisible=false;
   }
   mActive=isVisible;
