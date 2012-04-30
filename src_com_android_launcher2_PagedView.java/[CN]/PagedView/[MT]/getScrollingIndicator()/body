@@ -1,10 +1,12 @@
 {
   if (mHasScrollIndicator && mScrollIndicator == null) {
     ViewGroup parent=(ViewGroup)getParent();
-    mScrollIndicator=(View)(parent.findViewById(R.id.paged_view_indicator));
-    mHasScrollIndicator=mScrollIndicator != null;
-    if (mHasScrollIndicator) {
-      mScrollIndicator.setVisibility(View.VISIBLE);
+    if (parent != null) {
+      mScrollIndicator=(View)(parent.findViewById(R.id.paged_view_indicator));
+      mHasScrollIndicator=mScrollIndicator != null;
+      if (mHasScrollIndicator) {
+        mScrollIndicator.setVisibility(View.VISIBLE);
+      }
     }
   }
   return mScrollIndicator;

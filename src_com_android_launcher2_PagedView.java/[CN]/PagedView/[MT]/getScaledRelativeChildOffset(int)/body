@@ -1,5 +1,0 @@
-{
-  final int padding=getPaddingLeft() + getPaddingRight();
-  final int offset=getPaddingLeft() + (getMeasuredWidth() - padding - getScaledMeasuredWidth(getPageAt(index))) / 2;
-  return offset;
-}

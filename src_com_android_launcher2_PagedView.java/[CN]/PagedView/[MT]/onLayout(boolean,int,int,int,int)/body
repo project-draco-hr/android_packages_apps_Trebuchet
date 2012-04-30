@@ -5,16 +5,7 @@
   if (DEBUG)   Log.d(TAG,"PagedView.onLayout()");
   final int verticalPadding=getPaddingTop() + getPaddingBottom();
   final int childCount=getChildCount();
-  int childLeft=0;
-  if (childCount > 0) {
-    if (DEBUG)     Log.d(TAG,"getRelativeChildOffset(): " + getMeasuredWidth() + ", "+ getChildWidth(0));
-    childLeft=getRelativeChildOffset(0);
-    if (mPageSpacing < 0) {
-      int offset=getRelativeChildOffset(0);
-      int spacing=Math.max(offset,(right - left) - offset - getChildAt(0).getMeasuredWidth());
-      setPageSpacing(spacing);
-    }
-  }
+  int childLeft=getRelativeChildOffset(0);
   for (int i=0; i < childCount; i++) {
     final View child=getPageAt(i);
     if (child.getVisibility() != View.GONE) {
@@ -33,9 +24,6 @@
     setHorizontalScrollBarEnabled(false);
     updateCurrentPageScroll();
     setHorizontalScrollBarEnabled(true);
-    mFirstLayout=false;
-  }
-  if (mFirstLayout && mCurrentPage >= 0 && mCurrentPage < getChildCount()) {
     mFirstLayout=false;
   }
 }
