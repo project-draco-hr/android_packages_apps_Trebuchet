@@ -1,4 +1,7 @@
+Rect metrics
+Resources res
 int measureWidth
 int measureHeight
+int countX
+int countY
 int orientation
-Rect metrics

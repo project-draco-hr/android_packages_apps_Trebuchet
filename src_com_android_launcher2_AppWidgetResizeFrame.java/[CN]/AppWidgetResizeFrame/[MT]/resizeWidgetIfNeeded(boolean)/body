@@ -71,6 +71,9 @@
     lp.cellVSpan=spanY;
     mRunningVInc+=vSpanDelta;
     mRunningHInc+=hSpanDelta;
+    if (!onDismiss) {
+      updateWidgetSizeRanges(mWidgetView,mLauncher,spanX,spanY);
+    }
   }
   mWidgetView.requestLayout();
 }
