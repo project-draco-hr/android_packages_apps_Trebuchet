@@ -11,6 +11,13 @@
     dbInsertAndCheck(this,db,TABLE_FAVORITES,null,values);
     allocatedAppWidgets=true;
     appWidgetManager.bindAppWidgetIdIfAllowed(appWidgetId,cn);
+    if (extras != null && !extras.isEmpty()) {
+      Intent intent=new Intent(ACTION_APPWIDGET_DEFAULT_WORKSPACE_CONFIGURE);
+      intent.setComponent(cn);
+      intent.putExtras(extras);
+      intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,appWidgetId);
+      mContext.sendBroadcast(intent);
+    }
   }
  catch (  RuntimeException ex) {
     Log.e(TAG,"Problem allocating appWidgetId",ex);
