@@ -1,0 +1,5 @@
+{
+  boolean forceEnableRotation="true".equalsIgnoreCase(SystemProperties.get(FORCE_ENABLE_ROTATION_PROPERTY,"false"));
+  boolean enableRotation=forceEnableRotation || getResources().getBoolean(R.bool.allow_rotation);
+  return enableRotation;
+}
