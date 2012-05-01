@@ -3,8 +3,8 @@
     appWidgetInfo=mAppWidgetManager.getAppWidgetInfo(appWidgetId);
   }
   CellLayout layout=getCellLayout(container,screen);
-  int[] minSpanXY=getMinSpanForWidget(appWidgetInfo);
-  int[] spanXY=getSpanForWidget(appWidgetInfo);
+  int[] minSpanXY=getMinSpanForWidget(this,appWidgetInfo);
+  int[] spanXY=getSpanForWidget(this,appWidgetInfo);
   int[] cellXY=mTmpAddItemCellCoordinates;
   int[] touchXY=mPendingAddInfo.dropPos;
   int[] finalSpan=new int[2];
