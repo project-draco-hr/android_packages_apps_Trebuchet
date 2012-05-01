@@ -1,4 +1,5 @@
 {
+  if (cellX < 0 || cellY < 0)   return false;
   mIntersectingViews.clear();
   mOccupiedRect.set(cellX,cellY,cellX + spanX,cellY + spanY);
   if (ignoreView != null) {
