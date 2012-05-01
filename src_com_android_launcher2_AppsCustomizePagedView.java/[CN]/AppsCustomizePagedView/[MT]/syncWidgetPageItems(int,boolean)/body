@@ -18,10 +18,10 @@
     if (rawInfo instanceof AppWidgetProviderInfo) {
       AppWidgetProviderInfo info=(AppWidgetProviderInfo)rawInfo;
       createItemInfo=new PendingAddWidgetInfo(info,null,null);
-      int[] spanXY=mLauncher.getSpanForWidget(info);
+      int[] spanXY=Launcher.getSpanForWidget(mLauncher,info);
       createItemInfo.spanX=spanXY[0];
       createItemInfo.spanY=spanXY[1];
-      int[] minSpanXY=mLauncher.getMinSpanForWidget(info);
+      int[] minSpanXY=Launcher.getMinSpanForWidget(mLauncher,info);
       createItemInfo.minSpanX=minSpanXY[0];
       createItemInfo.minSpanY=minSpanXY[1];
       widget.applyFromAppWidgetProviderInfo(info,-1,spanXY);
