@@ -44,6 +44,7 @@
       }
     }
   }
+  int previewOffset=FolderRingAnimator.sPreviewSize;
   for (int i=0; i < mFolderOuterRings.size(); i++) {
     FolderRingAnimator fra=mFolderOuterRings.get(i);
     Drawable d=FolderRingAnimator.sSharedOuterRingDrawable;
@@ -51,7 +52,7 @@
     int height=width;
     cellToPoint(fra.mCellX,fra.mCellY,mTempLocation);
     int centerX=mTempLocation[0] + mCellWidth / 2;
-    int centerY=mTempLocation[1] + FolderRingAnimator.sPreviewSize / 2;
+    int centerY=mTempLocation[1] + previewOffset / 2;
     canvas.save();
     canvas.translate(centerX - width / 2,centerY - height / 2);
     d.setBounds(0,0,width,height);
@@ -62,7 +63,7 @@
     height=width;
     cellToPoint(fra.mCellX,fra.mCellY,mTempLocation);
     centerX=mTempLocation[0] + mCellWidth / 2;
-    centerY=mTempLocation[1] + FolderRingAnimator.sPreviewSize / 2;
+    centerY=mTempLocation[1] + previewOffset / 2;
     canvas.save();
     canvas.translate(centerX - width / 2,centerY - width / 2);
     d.setBounds(0,0,width,height);
@@ -75,7 +76,7 @@
     int height=d.getIntrinsicHeight();
     cellToPoint(mFolderLeaveBehindCell[0],mFolderLeaveBehindCell[1],mTempLocation);
     int centerX=mTempLocation[0] + mCellWidth / 2;
-    int centerY=mTempLocation[1] + FolderRingAnimator.sPreviewSize / 2;
+    int centerY=mTempLocation[1] + previewOffset / 2;
     canvas.save();
     canvas.translate(centerX - width / 2,centerY - width / 2);
     d.setBounds(0,0,width,height);
