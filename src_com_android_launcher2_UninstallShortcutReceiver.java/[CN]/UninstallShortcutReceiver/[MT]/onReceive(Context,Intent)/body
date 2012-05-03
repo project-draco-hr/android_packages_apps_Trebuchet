@@ -2,10 +2,11 @@
   if (!ACTION_UNINSTALL_SHORTCUT.equals(data.getAction())) {
     return;
   }
-  String spKey=LauncherApplication.getSharedPreferencesKey();
-  SharedPreferences sharedPrefs=context.getSharedPreferences(spKey,Context.MODE_PRIVATE);
-  LauncherApplication app=(LauncherApplication)context.getApplicationContext();
-synchronized (app) {
-    removeShortcut(context,data,sharedPrefs);
+  PendingUninstallShortcutInfo info=new PendingUninstallShortcutInfo(data);
+  if (mUseUninstallQueue) {
+    mUninstallQueue.add(info);
+  }
+ else {
+    processUninstallShortcut(context,info);
   }
 }

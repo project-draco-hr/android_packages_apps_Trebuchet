@@ -1,0 +1,5 @@
+{
+  data=rawData;
+  name=shortcutName;
+  launchIntent=shortcutIntent;
+}
