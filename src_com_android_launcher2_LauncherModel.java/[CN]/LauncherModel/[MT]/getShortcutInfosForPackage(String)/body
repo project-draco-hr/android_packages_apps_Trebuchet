@@ -1,0 +1,12 @@
+{
+  ArrayList<ShortcutInfo> infos=new ArrayList<ShortcutInfo>();
+  for (  ItemInfo i : sWorkspaceItems) {
+    if (i instanceof ShortcutInfo) {
+      ShortcutInfo info=(ShortcutInfo)i;
+      if (info.intent.getPackage().equals(packageName)) {
+        infos.add(info);
+      }
+    }
+  }
+  return infos;
+}
