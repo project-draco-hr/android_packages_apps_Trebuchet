@@ -2,4 +2,6 @@
   mIsDragOccuring=true;
   updateChildrenLayersEnabled();
   mLauncher.lockScreenOrientation();
+  InstallShortcutReceiver.enableInstallQueue();
+  UninstallShortcutReceiver.enableUninstallQueue();
 }
