@@ -1,0 +1,23 @@
+{
+  String spKey=LauncherApplication.getSharedPreferencesKey();
+  SharedPreferences sp=getContext().getSharedPreferences(spKey,Context.MODE_PRIVATE);
+  Set<String> newApps=sp.getStringSet(InstallShortcutReceiver.NEW_APPS_LIST_KEY,null);
+  for (  String packageName : packageNames) {
+    ArrayList<ShortcutInfo> infos=mLauncher.getModel().getShortcutInfosForPackage(packageName);
+    for (    ShortcutInfo info : infos) {
+      LauncherModel.deleteItemFromDatabase(mLauncher,info);
+    }
+    if (newApps != null) {
+      for (      String intentStr : newApps) {
+        try {
+          Intent intent=Intent.parseUri(intentStr,0);
+          if (packageNames.contains(intent.getPackage())) {
+            newApps.remove(intentStr);
+          }
+        }
+ catch (        URISyntaxException e) {
+        }
+      }
+    }
+  }
+}
