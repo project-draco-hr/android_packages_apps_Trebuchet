@@ -1,0 +1,9 @@
+{
+  String spKey=LauncherApplication.getSharedPreferencesKey();
+  SharedPreferences sharedPrefs=context.getSharedPreferences(spKey,Context.MODE_PRIVATE);
+  final Intent data=pendingInfo.data;
+  LauncherApplication app=(LauncherApplication)context.getApplicationContext();
+synchronized (app) {
+    removeShortcut(context,data,sharedPrefs);
+  }
+}

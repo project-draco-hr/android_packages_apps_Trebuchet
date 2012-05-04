@@ -1,5 +1,6 @@
 {
-  if (findEmptyCell(context,items,mCoordinates,screen)) {
+  int[] tmpCoordinates=new int[2];
+  if (findEmptyCell(context,items,tmpCoordinates,screen)) {
     if (intent != null) {
       if (intent.getAction() == null) {
         intent.setAction(Intent.ACTION_VIEW);
@@ -23,7 +24,7 @@
         }
 .start();
         LauncherApplication app=(LauncherApplication)context.getApplicationContext();
-        ShortcutInfo info=app.getModel().addShortcut(context,data,LauncherSettings.Favorites.CONTAINER_DESKTOP,screen,mCoordinates[0],mCoordinates[1],true);
+        ShortcutInfo info=app.getModel().addShortcut(context,data,LauncherSettings.Favorites.CONTAINER_DESKTOP,screen,tmpCoordinates[0],tmpCoordinates[1],true);
         if (info == null) {
           return false;
         }

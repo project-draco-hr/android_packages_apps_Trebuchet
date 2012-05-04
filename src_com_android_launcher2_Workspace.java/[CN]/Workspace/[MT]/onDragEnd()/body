@@ -2,4 +2,6 @@
   mIsDragOccuring=false;
   updateChildrenLayersEnabled();
   mLauncher.unlockScreenOrientation(false);
+  InstallShortcutReceiver.disableAndFlushInstallQueue(getContext());
+  UninstallShortcutReceiver.disableAndFlushUninstallQueue(getContext());
 }
