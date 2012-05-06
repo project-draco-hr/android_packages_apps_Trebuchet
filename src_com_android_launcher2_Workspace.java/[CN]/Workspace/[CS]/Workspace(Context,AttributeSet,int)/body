@@ -4,7 +4,8 @@
   mDragEnforcer=new DropTarget.DragEnforcer(context);
   setDataIsReady();
   final Resources res=getResources();
-  mFadeInAdjacentScreens=res.getBoolean(R.bool.config_workspaceFadeAdjacentScreens);
+  mWorkspaceFadeInAdjacentScreens=res.getBoolean(R.bool.config_workspaceFadeAdjacentScreens);
+  mFadeInAdjacentScreens=false;
   mWallpaperManager=WallpaperManager.getInstance(context);
   int cellCountX=DEFAULT_CELL_COUNT_X;
   int cellCountY=DEFAULT_CELL_COUNT_Y;
