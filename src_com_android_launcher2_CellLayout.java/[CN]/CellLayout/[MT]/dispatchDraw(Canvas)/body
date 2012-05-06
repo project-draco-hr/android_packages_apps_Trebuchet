@@ -3,7 +3,7 @@
   if (mForegroundAlpha > 0) {
     mOverScrollForegroundDrawable.setBounds(mForegroundRect);
     Paint p=((NinePatchDrawable)mOverScrollForegroundDrawable).getPaint();
-    p.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.ADD));
+    p.setXfermode(sAddBlendMode);
     mOverScrollForegroundDrawable.draw(canvas);
     p.setXfermode(null);
   }
