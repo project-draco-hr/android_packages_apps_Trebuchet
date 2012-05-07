@@ -1,0 +1,12 @@
+{
+  if (intent != null) {
+    String packageName=intent.getPackage();
+    if (packageName == null) {
+      packageName=intent.getComponent().getPackageName();
+    }
+    if (packageName != null) {
+      return packageName;
+    }
+  }
+  return "";
+}
