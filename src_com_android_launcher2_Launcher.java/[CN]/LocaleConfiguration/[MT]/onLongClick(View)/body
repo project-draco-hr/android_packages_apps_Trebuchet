@@ -1,10 +1,7 @@
 {
-  if (mState != State.WORKSPACE) {
-    return false;
-  }
-  if (isWorkspaceLocked()) {
-    return false;
-  }
+  if (!isDraggingEnabled())   return false;
+  if (isWorkspaceLocked())   return false;
+  if (mState != State.WORKSPACE)   return false;
   if (!(v instanceof CellLayout)) {
     v=(View)v.getParent().getParent();
   }

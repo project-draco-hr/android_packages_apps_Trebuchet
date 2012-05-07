@@ -115,6 +115,7 @@
       if (DEBUG_LOADERS) {
         Log.d(TAG,"bound workspace in " + (SystemClock.uptimeMillis() - t) + "ms");
       }
+      mIsLoadingAndBindingWorkspace=false;
     }
   }
 );

@@ -1,4 +1,5 @@
 {
+  mIsLoadingAndBindingWorkspace=true;
   if (DEBUG_LOADERS) {
     Log.d(TAG,"loadAndBindWorkspace mWorkspaceLoaded=" + mWorkspaceLoaded);
   }

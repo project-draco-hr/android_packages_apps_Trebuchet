@@ -1,4 +1,5 @@
 {
+  if (!mLauncher.isDraggingEnabled())   return true;
   Object tag=v.getTag();
   if (tag instanceof ShortcutInfo) {
     ShortcutInfo item=(ShortcutInfo)tag;
