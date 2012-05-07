@@ -22,6 +22,7 @@
             if ((Intent.ACTION_VIEW.equals(intent.getAction()) || actionQuickContact.equals(intent.getAction())) && (data.startsWith("content://contacts/people/") || data.startsWith("content://com.android.contacts/" + "contacts/lookup/"))) {
               final Intent newIntent=new Intent(actionQuickContact);
               newIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+              newIntent.putExtra(Launcher.INTENT_EXTRA_IGNORE_LAUNCH_ANIMATION,true);
               newIntent.setData(uri);
               final ContentValues values=new ContentValues();
               values.put(LauncherSettings.Favorites.INTENT,newIntent.toUri(0));
