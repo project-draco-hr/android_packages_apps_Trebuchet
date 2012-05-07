@@ -1,7 +1,8 @@
 {
   intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
   try {
-    if (v != null) {
+    boolean useLaunchAnimation=(v != null) && !intent.hasExtra(INTENT_EXTRA_IGNORE_LAUNCH_ANIMATION);
+    if (useLaunchAnimation) {
       ActivityOptions opts=ActivityOptions.makeScaleUpAnimation(v,0,0,v.getMeasuredWidth(),v.getMeasuredHeight());
       startActivity(intent,opts.toBundle());
     }
