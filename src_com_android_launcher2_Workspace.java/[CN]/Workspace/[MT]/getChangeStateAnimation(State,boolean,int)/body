@@ -1,2 +1,120 @@
 {
+  if (mState == state) {
+    return null;
+  }
+  initAnimationArrays();
+  AnimatorSet anim=animated ? new AnimatorSet() : null;
+  setCurrentPage(getNextPage());
+  final State oldState=mState;
+  final boolean oldStateIsNormal=(oldState == State.NORMAL);
+  final boolean oldStateIsSpringLoaded=(oldState == State.SPRING_LOADED);
+  final boolean oldStateIsSmall=(oldState == State.SMALL);
+  mState=state;
+  final boolean stateIsNormal=(state == State.NORMAL);
+  final boolean stateIsSpringLoaded=(state == State.SPRING_LOADED);
+  final boolean stateIsSmall=(state == State.SMALL);
+  float finalScaleFactor=1.0f;
+  float finalBackgroundAlpha=stateIsSpringLoaded ? 1.0f : 0f;
+  float translationX=0;
+  float translationY=0;
+  boolean zoomIn=true;
+  if (state != State.NORMAL) {
+    finalScaleFactor=mSpringLoadedShrinkFactor - (stateIsSmall ? 0.1f : 0);
+    if (oldStateIsNormal && stateIsSmall) {
+      zoomIn=false;
+      setLayoutScale(finalScaleFactor);
+      updateChildrenLayersEnabled();
+    }
+ else {
+      finalBackgroundAlpha=1.0f;
+      setLayoutScale(finalScaleFactor);
+    }
+  }
+ else {
+    setLayoutScale(1.0f);
+  }
+  final int duration=zoomIn ? getResources().getInteger(R.integer.config_workspaceUnshrinkTime) : getResources().getInteger(R.integer.config_appsCustomizeWorkspaceShrinkTime);
+  for (int i=0; i < getChildCount(); i++) {
+    final CellLayout cl=(CellLayout)getChildAt(i);
+    float finalAlpha=(!mWorkspaceFadeInAdjacentScreens || stateIsSpringLoaded || (i == mCurrentPage)) ? 1f : 0f;
+    float currentAlpha=cl.getShortcutsAndWidgets().getAlpha();
+    float initialAlpha=currentAlpha;
+    if ((oldStateIsSmall && stateIsNormal) || (oldStateIsNormal && stateIsSmall)) {
+      if (i == mCurrentPage || !animated || oldStateIsSpringLoaded) {
+        finalAlpha=1f;
+      }
+ else {
+        initialAlpha=0f;
+        finalAlpha=0f;
+      }
+    }
+    mOldAlphas[i]=initialAlpha;
+    mNewAlphas[i]=finalAlpha;
+    if (animated) {
+      mOldTranslationXs[i]=cl.getTranslationX();
+      mOldTranslationYs[i]=cl.getTranslationY();
+      mOldScaleXs[i]=cl.getScaleX();
+      mOldScaleYs[i]=cl.getScaleY();
+      mOldBackgroundAlphas[i]=cl.getBackgroundAlpha();
+      mNewTranslationXs[i]=translationX;
+      mNewTranslationYs[i]=translationY;
+      mNewScaleXs[i]=finalScaleFactor;
+      mNewScaleYs[i]=finalScaleFactor;
+      mNewBackgroundAlphas[i]=finalBackgroundAlpha;
+    }
+ else {
+      cl.setTranslationX(translationX);
+      cl.setTranslationY(translationY);
+      cl.setScaleX(finalScaleFactor);
+      cl.setScaleY(finalScaleFactor);
+      cl.setBackgroundAlpha(finalBackgroundAlpha);
+      cl.setShortcutAndWidgetAlpha(finalAlpha);
+    }
+  }
+  if (animated) {
+    for (int index=0; index < getChildCount(); index++) {
+      final int i=index;
+      final CellLayout cl=(CellLayout)getChildAt(i);
+      float currentAlpha=cl.getShortcutsAndWidgets().getAlpha();
+      if (mOldAlphas[i] == 0 && mNewAlphas[i] == 0) {
+        cl.setTranslationX(mNewTranslationXs[i]);
+        cl.setTranslationY(mNewTranslationYs[i]);
+        cl.setScaleX(mNewScaleXs[i]);
+        cl.setScaleY(mNewScaleYs[i]);
+        cl.setBackgroundAlpha(mNewBackgroundAlphas[i]);
+        cl.setShortcutAndWidgetAlpha(mNewAlphas[i]);
+        cl.setRotationY(mNewRotationYs[i]);
+      }
+ else {
+        LauncherViewPropertyAnimator a=new LauncherViewPropertyAnimator(cl);
+        a.translationX(mNewTranslationXs[i]).translationY(mNewTranslationYs[i]).scaleX(mNewScaleXs[i]).scaleY(mNewScaleYs[i]).setDuration(duration).setInterpolator(mZoomInInterpolator);
+        anim.play(a);
+        if (mOldAlphas[i] != mNewAlphas[i] || currentAlpha != mNewAlphas[i]) {
+          LauncherViewPropertyAnimator alphaAnim=new LauncherViewPropertyAnimator(cl.getShortcutsAndWidgets());
+          alphaAnim.alpha(mNewAlphas[i]).setDuration(duration).setInterpolator(mZoomInInterpolator);
+          anim.play(alphaAnim);
+        }
+        if (mOldBackgroundAlphas[i] != 0 || mNewBackgroundAlphas[i] != 0) {
+          ValueAnimator bgAnim=ValueAnimator.ofFloat(0f,1f).setDuration(duration);
+          bgAnim.setInterpolator(mZoomInInterpolator);
+          bgAnim.addUpdateListener(new LauncherAnimatorUpdateListener(){
+            public void onAnimationUpdate(            float a,            float b){
+              cl.setBackgroundAlpha(a * mOldBackgroundAlphas[i] + b * mNewBackgroundAlphas[i]);
+            }
+          }
+);
+          anim.play(bgAnim);
+        }
+      }
+    }
+    buildPageHardwareLayers();
+    anim.setStartDelay(delay);
+  }
+  if (stateIsSpringLoaded) {
+    animateBackgroundGradient(getResources().getInteger(R.integer.config_appsCustomizeSpringLoadedBgAlpha) / 100f,false);
+  }
+ else {
+    animateBackgroundGradient(0f,true);
+  }
+  return anim;
 }

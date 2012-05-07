@@ -2,7 +2,7 @@
   mIsSwitchingState=false;
   mWallpaperOffset.setOverrideHorizontalCatchupConstant(false);
   updateChildrenLayersEnabled();
-  if (!mFadeInAdjacentScreens) {
+  if (!mWorkspaceFadeInAdjacentScreens) {
     for (int i=0; i < getChildCount(); i++) {
       final CellLayout cl=(CellLayout)getChildAt(i);
       cl.setShortcutAndWidgetAlpha(1f);
