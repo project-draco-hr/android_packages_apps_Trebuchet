@@ -1,5 +1,0 @@
-{
-  bubbleChild.setScaleX(1f);
-  bubbleChild.setScaleY(1f);
-  bubbleChild.setTextColor(getResources().getColor(R.color.workspace_icon_text_color));
-}

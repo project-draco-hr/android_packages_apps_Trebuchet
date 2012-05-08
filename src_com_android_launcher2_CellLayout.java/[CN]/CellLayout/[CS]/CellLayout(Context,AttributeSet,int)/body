@@ -26,14 +26,6 @@
   mReorderHintAnimationMagnitude=(REORDER_HINT_MAGNITUDE * res.getDimensionPixelSize(R.dimen.app_icon_size));
   mNormalBackground.setFilterBitmap(true);
   mActiveGlowBackground.setFilterBitmap(true);
-  int iconScale=res.getInteger(R.integer.app_icon_scale_percent);
-  if (iconScale >= 0) {
-    mChildScale=iconScale / 100f;
-  }
-  int hotseatIconScale=res.getInteger(R.integer.app_icon_hotseat_scale_percent);
-  if (hotseatIconScale >= 0) {
-    mHotseatChildScale=hotseatIconScale / 100f;
-  }
   mEaseOutInterpolator=new DecelerateInterpolator(2.5f);
   mDragCell[0]=mDragCell[1]=-1;
   for (int i=0; i < mDragOutlines.length; i++) {
