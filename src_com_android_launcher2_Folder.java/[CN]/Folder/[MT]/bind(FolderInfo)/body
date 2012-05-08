@@ -3,6 +3,7 @@
   ArrayList<ShortcutInfo> children=info.contents;
   ArrayList<ShortcutInfo> overflow=new ArrayList<ShortcutInfo>();
   setupContentForNumItems(children.size());
+  placeInReadingOrder(children);
   int count=0;
   for (int i=0; i < children.size(); i++) {
     ShortcutInfo child=(ShortcutInfo)children.get(i);
