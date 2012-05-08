@@ -1,0 +1,8 @@
+{
+synchronized (mLock) {
+    if (mLoaderTask != null) {
+      return mLoaderTask.isLoadingWorkspace();
+    }
+  }
+  return false;
+}
