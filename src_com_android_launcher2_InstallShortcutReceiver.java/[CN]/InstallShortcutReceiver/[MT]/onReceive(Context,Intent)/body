@@ -17,8 +17,9 @@
       return;
     }
   }
+  boolean launcherNotLoaded=LauncherModel.getCellCountX() <= 0 || LauncherModel.getCellCountY() <= 0;
   PendingInstallShortcutInfo info=new PendingInstallShortcutInfo(data,name,intent);
-  if (mUseInstallQueue) {
+  if (mUseInstallQueue || launcherNotLoaded) {
     mInstallQueue.add(info);
   }
  else {

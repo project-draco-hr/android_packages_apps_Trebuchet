@@ -1,0 +1,7 @@
+{
+  Iterator<PendingInstallShortcutInfo> iter=mInstallQueue.iterator();
+  while (iter.hasNext()) {
+    processInstallShortcut(context,iter.next());
+    iter.remove();
+  }
+}
