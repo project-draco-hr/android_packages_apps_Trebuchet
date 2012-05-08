@@ -1,4 +1,5 @@
 {
+  updateWallpaperVisibility(true);
   super.onPause();
   mPaused=true;
   mDragController.cancelDrag();
