@@ -1,3 +1,6 @@
 {
-  mBackgroundAlphaMultiplier=multiplier;
+  if (mBackgroundAlphaMultiplier != multiplier) {
+    mBackgroundAlphaMultiplier=multiplier;
+    invalidate();
+  }
 }
