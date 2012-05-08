@@ -1,5 +1,0 @@
-View v
-DragSource source
-Object dragInfo
-int dragAction
-Rect dragRegion
