@@ -18,6 +18,7 @@
       mLauncher.getDragLayer().animateViewIntoPosition(d.dragView,mCurrentDragView);
     }
  else {
+      d.deferDragViewCleanupPostAnimation=false;
       mCurrentDragView.setVisibility(VISIBLE);
     }
     mItemsInvalidated=true;
