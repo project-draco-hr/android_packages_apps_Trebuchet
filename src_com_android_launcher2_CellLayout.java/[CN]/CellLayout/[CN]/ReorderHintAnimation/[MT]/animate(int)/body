@@ -10,7 +10,7 @@
   va=ValueAnimator.ofFloat(0f,1f);
   va.setRepeatMode(ValueAnimator.REVERSE);
   va.setRepeatCount(ValueAnimator.INFINITE);
-  va.setDuration(DURATION);
+  va.setDuration((int)(DURATION * (1.0f + Math.random() * .08f)));
   va.addUpdateListener(new AnimatorUpdateListener(){
     @Override public void onAnimationUpdate(    ValueAnimator animation){
       float r=((Float)animation.getAnimatedValue()).floatValue();
@@ -18,6 +18,10 @@
       float y=r * deltaY;
       child.setTranslationX(x);
       child.setTranslationY(y);
+      float sf=4.0f / child.getWidth();
+      float s=1.0f - r * sf;
+      child.setScaleX(s);
+      child.setScaleY(s);
     }
   }
 );
