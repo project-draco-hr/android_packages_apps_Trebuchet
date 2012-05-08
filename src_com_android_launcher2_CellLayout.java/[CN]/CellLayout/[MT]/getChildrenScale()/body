@@ -1,3 +1,0 @@
-{
-  return mIsHotseat ? mHotseatChildScale : mChildScale;
-}
