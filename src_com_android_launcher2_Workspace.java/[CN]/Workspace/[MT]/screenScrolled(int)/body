@@ -1,17 +1,6 @@
 {
   super.screenScrolled(screenCenter);
-  boolean isInOverscroll=mOverScrollX < 0 || mOverScrollX > mMaxScrollX;
-  if (mWorkspaceFadeInAdjacentScreens && mState == State.NORMAL && !mIsSwitchingState && !isInOverscroll) {
-    for (int i=0; i < getChildCount(); i++) {
-      CellLayout child=(CellLayout)getChildAt(i);
-      if (child != null) {
-        float scrollProgress=getScrollProgress(screenCenter,child,i);
-        float alpha=1 - Math.abs(scrollProgress);
-        child.getShortcutsAndWidgets().setAlpha(alpha);
-      }
-    }
-    invalidate();
-  }
+  updatePageAlphaValues(screenCenter);
   if (mOverScrollX < 0 || mOverScrollX > mMaxScrollX) {
     int index=mOverScrollX < 0 ? 0 : getChildCount() - 1;
     CellLayout cl=(CellLayout)getChildAt(index);
