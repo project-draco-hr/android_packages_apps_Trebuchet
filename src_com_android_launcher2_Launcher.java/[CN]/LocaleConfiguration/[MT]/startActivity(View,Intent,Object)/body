@@ -1,0 +1,19 @@
+{
+  intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+  try {
+    boolean useLaunchAnimation=(v != null) && !intent.hasExtra(INTENT_EXTRA_IGNORE_LAUNCH_ANIMATION);
+    if (useLaunchAnimation) {
+      ActivityOptions opts=ActivityOptions.makeScaleUpAnimation(v,0,0,v.getMeasuredWidth(),v.getMeasuredHeight());
+      startActivity(intent,opts.toBundle());
+    }
+ else {
+      startActivity(intent);
+    }
+    return true;
+  }
+ catch (  SecurityException e) {
+    Toast.makeText(this,R.string.activity_not_found,Toast.LENGTH_SHORT).show();
+    Log.e(TAG,"Launcher does not have the permission to launch " + intent + ". Make sure to create a MAIN intent-filter for the corresponding activity "+ "or use the exported attribute for this activity. "+ "tag="+ tag+ " intent="+ intent,e);
+  }
+  return false;
+}
