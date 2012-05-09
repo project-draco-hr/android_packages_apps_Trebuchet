@@ -24,5 +24,7 @@
       deltaY=(int)(Math.sin(angle) * mReorderHintAnimationMagnitude);
     }
   }
+  child.setPivotY(child.getMeasuredHeight() * 0.5f);
+  child.setPivotX(child.getMeasuredWidth() * 0.5f);
   this.child=child;
 }

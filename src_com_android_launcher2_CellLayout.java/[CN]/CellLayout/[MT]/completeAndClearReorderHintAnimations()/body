@@ -1,6 +1,6 @@
 {
   for (  ReorderHintAnimation a : mShakeAnimators.values()) {
-    a.completeAnimation();
+    a.completeAnimationImmediately();
   }
   mShakeAnimators.clear();
 }
