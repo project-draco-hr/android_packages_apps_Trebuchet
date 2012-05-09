@@ -2,6 +2,7 @@
   mIsDragOccuring=true;
   updateChildrenLayersEnabled();
   mLauncher.lockScreenOrientation();
+  setChildrenBackgroundAlphaMultipliers(1f);
   InstallShortcutReceiver.enableInstallQueue();
   UninstallShortcutReceiver.enableUninstallQueue();
 }
