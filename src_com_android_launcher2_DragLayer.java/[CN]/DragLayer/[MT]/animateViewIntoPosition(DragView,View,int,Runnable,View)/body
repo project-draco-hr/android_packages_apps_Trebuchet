@@ -11,15 +11,7 @@
   float scale=getDescendantCoordRelativeToSelf((View)child.getParent(),coord);
   int toX=coord[0];
   int toY=coord[1];
-  if (child instanceof TextView) {
-    float childrenScale=parent.getChildrenScale();
-    TextView tv=(TextView)child;
-    toY+=Math.round(((1f - childrenScale) * child.getMeasuredHeight()) / 2 + scale * childrenScale * tv.getPaddingTop());
-    toY-=dragView.getMeasuredHeight() * (1 - scale * childrenScale) / 2;
-    toX-=(dragView.getMeasuredWidth() - Math.round(scale * child.getMeasuredWidth())) / 2;
-    scale*=childrenScale;
-  }
- else   if (child instanceof FolderIcon) {
+  if (child instanceof FolderIcon) {
     toY-=Workspace.DRAG_BITMAP_PADDING / 2;
     toX-=(dragView.getMeasuredWidth() - Math.round(scale * child.getMeasuredWidth())) / 2;
   }

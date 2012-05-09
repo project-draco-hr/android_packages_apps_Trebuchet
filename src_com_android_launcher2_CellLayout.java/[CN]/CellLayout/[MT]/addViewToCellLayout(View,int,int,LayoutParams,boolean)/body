@@ -2,13 +2,12 @@
   final LayoutParams lp=params;
   if (child instanceof BubbleTextView) {
     BubbleTextView bubbleChild=(BubbleTextView)child;
-    resetChild(bubbleChild);
-    if (mIsHotseat && mHotseatChildScale >= 0) {
-      scaleChild(bubbleChild,mHotseatChildScale);
-      bubbleChild.setTextColor(getResources().getColor(android.R.color.transparent));
+    Resources res=getResources();
+    if (mIsHotseat) {
+      bubbleChild.setTextColor(res.getColor(android.R.color.transparent));
     }
- else     if (mChildScale >= 0) {
-      scaleChild(bubbleChild,mChildScale);
+ else {
+      bubbleChild.setTextColor(res.getColor(R.color.workspace_icon_text_color));
     }
   }
   if (lp.cellX >= 0 && lp.cellX <= mCountX - 1 && lp.cellY >= 0 && lp.cellY <= mCountY - 1) {
