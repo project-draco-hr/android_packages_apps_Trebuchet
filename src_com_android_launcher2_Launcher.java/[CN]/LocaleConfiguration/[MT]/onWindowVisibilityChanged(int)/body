@@ -10,11 +10,7 @@
           mWorkspace.postDelayed(mBuildLayersRunnable,500);
           mWorkspace.post(new Runnable(){
             @Override public void run(){
-              if (mState == State.APPS_CUSTOMIZE) {
-                if (mAppsCustomizeTabHost != null && !mAppsCustomizeTabHost.isTransitioning()) {
-                  updateWallpaperVisibility(false);
-                }
-              }
+              disableWallpaperIfInAllApps();
             }
           }
 );
