@@ -8,7 +8,7 @@
     if (activityName != null) {
       intent.setPackage(activityName.getPackageName());
     }
-    startActivitySafely(null,intent,"onClickVoiceButton");
+    startActivity(null,intent,"onClickVoiceButton");
   }
  catch (  ActivityNotFoundException e) {
     Intent intent=new Intent(RecognizerIntent.ACTION_WEB_SEARCH);
