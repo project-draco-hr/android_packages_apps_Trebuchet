@@ -1,0 +1,7 @@
+{
+  if (mState == State.APPS_CUSTOMIZE) {
+    if (mAppsCustomizeTabHost != null && !mAppsCustomizeTabHost.isTransitioning()) {
+      updateWallpaperVisibility(false);
+    }
+  }
+}
