@@ -3,7 +3,7 @@
   mLauncher.getDragLayer().getViewRectRelativeToSelf(dragView,from);
   int[] finalPos=new int[2];
   float scaleXY[]=new float[2];
-  getFinalPositionForDropAnimation(finalPos,scaleXY,dragView,cellLayout,info,mTargetCell,finalView,external);
+  getFinalPositionForDropAnimation(finalPos,scaleXY,dragView,cellLayout,info,mTargetCell,external);
   Resources res=mLauncher.getResources();
   int duration=res.getInteger(R.integer.config_dropAnimMaxDuration) - 200;
   if (finalView instanceof AppWidgetHostView && external) {

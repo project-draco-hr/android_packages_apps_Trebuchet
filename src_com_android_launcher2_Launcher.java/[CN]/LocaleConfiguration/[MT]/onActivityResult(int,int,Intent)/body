@@ -5,7 +5,7 @@
       completeTwoStageWidgetDrop(RESULT_CANCELED,appWidgetId);
     }
  else     if (resultCode == RESULT_OK) {
-      addAppWidgetImpl(appWidgetId,mWidgetBeingBoundOrConfigured);
+      addAppWidgetImpl(appWidgetId,mPendingAddInfo,null,mPendingAddWidgetInfo);
     }
     return;
   }
