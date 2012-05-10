@@ -17,6 +17,9 @@
     mPendingAddInfo.screen=pendingAddScreen;
     mPendingAddInfo.cellX=savedState.getInt(RUNTIME_STATE_PENDING_ADD_CELL_X);
     mPendingAddInfo.cellY=savedState.getInt(RUNTIME_STATE_PENDING_ADD_CELL_Y);
+    mPendingAddInfo.spanX=savedState.getInt(RUNTIME_STATE_PENDING_ADD_SPAN_X);
+    mPendingAddInfo.spanY=savedState.getInt(RUNTIME_STATE_PENDING_ADD_SPAN_Y);
+    mPendingAddWidgetInfo=savedState.getParcelable(RUNTIME_STATE_PENDING_ADD_WIDGET_INFO);
     mRestoring=true;
   }
   boolean renameFolder=savedState.getBoolean(RUNTIME_STATE_PENDING_FOLDER_RENAME,false);
