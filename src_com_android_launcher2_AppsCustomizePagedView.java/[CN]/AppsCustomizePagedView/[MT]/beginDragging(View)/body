@@ -4,7 +4,9 @@
     beginDraggingApplication(v);
   }
  else   if (v instanceof PagedViewWidget) {
-    beginDraggingWidget(v);
+    if (!beginDraggingWidget(v)) {
+      return false;
+    }
   }
   postDelayed(new Runnable(){
     @Override public void run(){
