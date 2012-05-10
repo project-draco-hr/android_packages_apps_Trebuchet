@@ -2,6 +2,10 @@
   mDraggingWidget=true;
   ImageView image=(ImageView)v.findViewById(R.id.widget_preview);
   PendingAddItemInfo createItemInfo=(PendingAddItemInfo)v.getTag();
+  if (image.getDrawable() == null) {
+    mDraggingWidget=false;
+    return false;
+  }
   Bitmap preview;
   Bitmap outline;
   float scale=1f;
@@ -46,4 +50,5 @@
   mDragController.startDrag(image,preview,this,createItemInfo,DragController.DRAG_ACTION_COPY,null,scale);
   outline.recycle();
   preview.recycle();
+  return true;
 }
