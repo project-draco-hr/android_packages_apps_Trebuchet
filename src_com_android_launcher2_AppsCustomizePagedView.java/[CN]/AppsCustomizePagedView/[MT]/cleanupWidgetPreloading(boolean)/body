@@ -1,0 +1,20 @@
+{
+  if (!widgetWasAdded) {
+    PendingAddWidgetInfo info=mCreateWidgetInfo;
+    mCreateWidgetInfo=null;
+    if ((mWidgetCleanupState == WIDGET_BOUND || mWidgetCleanupState == WIDGET_INFLATED) && mWidgetLoadingId != -1) {
+      mLauncher.getAppWidgetHost().deleteAppWidgetId(mWidgetLoadingId);
+    }
+    if (mWidgetCleanupState == WIDGET_BOUND) {
+      removeCallbacks(mInflateWidgetRunnable);
+    }
+ else     if (mWidgetCleanupState == WIDGET_INFLATED) {
+      AppWidgetHostView widget=info.boundWidget;
+      mLauncher.getDragLayer().removeView(widget);
+    }
+  }
+  mWidgetCleanupState=WIDGET_NO_CLEANUP_REQUIRED;
+  mWidgetLoadingId=-1;
+  mCreateWidgetInfo=null;
+  PagedViewWidget.resetShortPressTarget();
+}

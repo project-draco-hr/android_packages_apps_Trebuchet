@@ -1,6 +1,8 @@
 {
   if (mShortPressListener != null) {
+    if (sShortpressTarget != null)     return;
     mShortPressListener.onShortPress(PagedViewWidget.this);
   }
+  sShortpressTarget=PagedViewWidget.this;
   mShortPressTriggered=true;
 }

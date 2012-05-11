@@ -1,5 +1,5 @@
 {
   endDragging(null,true,true);
-  cleanupWidgetPreloading();
+  cleanupWidgetPreloading(false);
   mDraggingWidget=false;
 }
