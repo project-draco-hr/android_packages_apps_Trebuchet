@@ -5,11 +5,15 @@
   }
   final int widthMode=MeasureSpec.getMode(widthMeasureSpec);
   final int widthSize=MeasureSpec.getSize(widthMeasureSpec);
+  final int heightMode=MeasureSpec.getMode(heightMeasureSpec);
+  int heightSize=MeasureSpec.getSize(heightMeasureSpec);
   if (widthMode != MeasureSpec.EXACTLY) {
     throw new IllegalStateException("Workspace can only be used in EXACTLY mode.");
   }
-  final int heightMode=MeasureSpec.getMode(heightMeasureSpec);
-  int heightSize=MeasureSpec.getSize(heightMeasureSpec);
+  if (widthSize <= 0 || heightSize <= 0) {
+    super.onMeasure(widthMeasureSpec,heightMeasureSpec);
+    return;
+  }
   int maxChildHeight=0;
   final int verticalPadding=getPaddingTop() + getPaddingBottom();
   final int horizontalPadding=getPaddingLeft() + getPaddingRight();
@@ -42,15 +46,15 @@
     heightSize=maxChildHeight + verticalPadding;
   }
   setMeasuredDimension(widthSize,heightSize);
+  invalidateCachedOffsets();
   if (childCount > 0) {
     if (DEBUG)     Log.d(TAG,"getRelativeChildOffset(): " + getMeasuredWidth() + ", "+ getChildWidth(0));
-    if (mPageSpacing < 0) {
+    if (mPageSpacing == AUTOMATIC_PAGE_SPACING) {
       int offset=getRelativeChildOffset(0);
       int spacing=Math.max(offset,widthSize - offset - getChildAt(0).getMeasuredWidth());
       setPageSpacing(spacing);
     }
   }
-  invalidateCachedOffsets();
   updateScrollingIndicatorPosition();
   if (childCount > 0) {
     mMaxScrollX=getChildOffset(childCount - 1) - getRelativeChildOffset(childCount - 1);

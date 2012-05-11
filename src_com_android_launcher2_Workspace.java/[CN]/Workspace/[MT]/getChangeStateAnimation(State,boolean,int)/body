@@ -20,6 +20,7 @@
   boolean zoomIn=true;
   if (state != State.NORMAL) {
     finalScaleFactor=mSpringLoadedShrinkFactor - (stateIsSmall ? 0.1f : 0);
+    setPageSpacing(mSpringLoadedPageSpacing);
     if (oldStateIsNormal && stateIsSmall) {
       zoomIn=false;
       setLayoutScale(finalScaleFactor);
@@ -31,6 +32,7 @@
     }
   }
  else {
+    setPageSpacing(PagedView.AUTOMATIC_PAGE_SPACING);
     setLayoutScale(1.0f);
   }
   final int duration=zoomIn ? getResources().getInteger(R.integer.config_workspaceUnshrinkTime) : getResources().getInteger(R.integer.config_appsCustomizeWorkspaceShrinkTime);
