@@ -6,6 +6,7 @@
  else {
     mQSBSearchBar.setVisibility(View.INVISIBLE);
     mQSBSearchBar.setAlpha(0f);
+    mQSBSearchBar.setTranslationY(0);
   }
   mIsSearchBarHidden=true;
 }
