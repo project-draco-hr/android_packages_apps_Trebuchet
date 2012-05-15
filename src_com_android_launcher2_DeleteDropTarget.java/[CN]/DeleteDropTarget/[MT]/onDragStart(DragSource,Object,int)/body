@@ -19,7 +19,7 @@
  else {
     setCompoundDrawablesWithIntrinsicBounds(mRemoveDrawable,null,null,null);
   }
-  mCurrentDrawable=(TransitionDrawable)getCompoundDrawables()[0];
+  mCurrentDrawable=(TransitionDrawable)getCurrentDrawable();
   mActive=isVisible;
   resetHoverColor();
   ((ViewGroup)getParent()).setVisibility(isVisible ? View.VISIBLE : View.GONE);
