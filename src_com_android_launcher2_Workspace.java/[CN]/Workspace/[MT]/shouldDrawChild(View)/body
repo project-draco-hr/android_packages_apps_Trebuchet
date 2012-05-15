@@ -1,0 +1,4 @@
+{
+  final CellLayout cl=(CellLayout)child;
+  return super.shouldDrawChild(child) && (cl.getShortcutsAndWidgets().getAlpha() > 0 || cl.getBackgroundAlpha() > 0);
+}
