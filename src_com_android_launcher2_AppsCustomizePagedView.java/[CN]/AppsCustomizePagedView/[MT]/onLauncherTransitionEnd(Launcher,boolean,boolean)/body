@@ -4,4 +4,5 @@
     onSyncWidgetPageItems(d);
   }
   mDeferredSyncWidgetPageItems.clear();
+  mForceDrawAllChildrenNextFrame=!toWorkspace;
 }
