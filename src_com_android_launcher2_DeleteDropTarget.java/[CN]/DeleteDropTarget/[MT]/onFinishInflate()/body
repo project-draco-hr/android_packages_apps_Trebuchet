@@ -7,7 +7,7 @@
   mRemoveDrawable=(TransitionDrawable)r.getDrawable(R.drawable.remove_target_selector);
   mRemoveDrawable.setCrossFadeEnabled(true);
   mUninstallDrawable.setCrossFadeEnabled(true);
-  mCurrentDrawable=(TransitionDrawable)getCompoundDrawables()[0];
+  mCurrentDrawable=(TransitionDrawable)getCurrentDrawable();
   int orientation=getResources().getConfiguration().orientation;
   if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
     if (!LauncherApplication.isScreenLarge()) {

@@ -3,7 +3,7 @@
   mOriginalTextColor=getTextColors();
   Resources r=getResources();
   mHoverColor=r.getColor(R.color.info_target_hover_tint);
-  mDrawable=(TransitionDrawable)getCompoundDrawables()[0];
+  mDrawable=(TransitionDrawable)getCurrentDrawable();
   mDrawable.setCrossFadeEnabled(true);
   int orientation=getResources().getConfiguration().orientation;
   if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
