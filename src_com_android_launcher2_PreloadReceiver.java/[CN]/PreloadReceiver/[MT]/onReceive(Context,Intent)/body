@@ -1,0 +1,12 @@
+{
+  final LauncherApplication app=(LauncherApplication)context.getApplicationContext();
+  final LauncherProvider provider=app.getLauncherProvider();
+  if (provider != null) {
+    new Thread(new Runnable(){
+      public void run(){
+        provider.loadDefaultFavoritesIfNecessary();
+      }
+    }
+).start();
+  }
+}
