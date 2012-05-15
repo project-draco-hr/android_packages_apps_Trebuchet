@@ -1,0 +1,4 @@
+{
+  AppWidgetResizeFrame.updateWidgetSizeRanges(hostView,launcher,spanX,spanY);
+  mHasNotifiedInitialWidgetSizeChanged=true;
+}
