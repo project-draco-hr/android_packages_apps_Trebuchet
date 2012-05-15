@@ -23,4 +23,7 @@
   mWidgetSpacingLayout=new PagedViewCellLayout(getContext());
   mWidgetPreviewIconPaddedDimension=(int)(mAppIconSize * (1 + (2 * sWidgetPreviewIconPaddingPercentage)));
   mFadeInAdjacentScreens=false;
+  if (getImportantForAccessibility() == View.IMPORTANT_FOR_ACCESSIBILITY_AUTO) {
+    setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_YES);
+  }
 }
