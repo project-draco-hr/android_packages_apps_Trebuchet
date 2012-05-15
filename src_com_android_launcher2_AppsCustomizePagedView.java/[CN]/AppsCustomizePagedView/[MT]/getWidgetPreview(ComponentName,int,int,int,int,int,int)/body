@@ -6,7 +6,7 @@
   if (previewImage != 0) {
     drawable=mPackageManager.getDrawable(packageName,previewImage,null);
     if (drawable == null) {
-      Log.w(LOG_TAG,"Can't load widget preview drawable 0x" + Integer.toHexString(previewImage) + " for provider: "+ provider);
+      Log.w(TAG,"Can't load widget preview drawable 0x" + Integer.toHexString(previewImage) + " for provider: "+ provider);
     }
   }
   int bitmapWidth;

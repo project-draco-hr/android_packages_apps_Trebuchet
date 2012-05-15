@@ -17,7 +17,7 @@
       mLauncher.showOutOfSpaceMessage(false);
     }
     d.deferDragViewCleanupPostAnimation=false;
-    cleanupWidgetPreloading();
   }
+  cleanupWidgetPreloading(success);
   mDraggingWidget=false;
 }
