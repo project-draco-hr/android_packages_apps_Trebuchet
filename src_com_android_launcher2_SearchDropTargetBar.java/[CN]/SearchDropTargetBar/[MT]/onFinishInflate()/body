@@ -7,8 +7,8 @@
   mBarHeight=getResources().getDimensionPixelSize(R.dimen.qsb_bar_height);
   mInfoDropTarget.setSearchDropTargetBar(this);
   mDeleteDropTarget.setSearchDropTargetBar(this);
-  boolean enableDropDownDropTargets=getResources().getBoolean(R.bool.config_useDropTargetDownTransition);
-  if (enableDropDownDropTargets) {
+  mEnableDropDownDropTargets=getResources().getBoolean(R.bool.config_useDropTargetDownTransition);
+  if (mEnableDropDownDropTargets) {
     mDropTargetBar.setTranslationY(-mBarHeight);
     mDropTargetBarFadeInAnim=ObjectAnimator.ofFloat(mDropTargetBar,"translationY",0f);
     mDropTargetBarFadeOutAnim=ObjectAnimator.ofFloat(mDropTargetBar,"translationY",-mBarHeight);

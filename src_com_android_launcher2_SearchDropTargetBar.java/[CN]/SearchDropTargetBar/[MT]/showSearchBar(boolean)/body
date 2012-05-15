@@ -5,8 +5,12 @@
   }
  else {
     mQSBSearchBar.setVisibility(View.VISIBLE);
-    mQSBSearchBar.setAlpha(1f);
-    mQSBSearchBar.setTranslationY(0);
+    if (mEnableDropDownDropTargets) {
+      mQSBSearchBar.setTranslationY(0);
+    }
+ else {
+      mQSBSearchBar.setAlpha(1f);
+    }
   }
   mIsSearchBarHidden=false;
 }
