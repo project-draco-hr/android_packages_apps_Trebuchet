@@ -26,6 +26,7 @@
     }
   }
   mSpringLoadedShrinkFactor=res.getInteger(R.integer.config_workspaceSpringLoadShrinkPercentage) / 100.0f;
+  mSpringLoadedPageSpacing=res.getDimensionPixelSize(R.dimen.workspace_spring_loaded_page_spacing);
   cellCountX=a.getInt(R.styleable.Workspace_cellCountX,cellCountX);
   cellCountY=a.getInt(R.styleable.Workspace_cellCountY,cellCountY);
   mDefaultPage=a.getInt(R.styleable.Workspace_defaultScreen,1);
