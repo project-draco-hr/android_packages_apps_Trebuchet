@@ -24,6 +24,7 @@
               newIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
               newIntent.putExtra(Launcher.INTENT_EXTRA_IGNORE_LAUNCH_ANIMATION,true);
               newIntent.setData(uri);
+              newIntent.setDataAndType(uri,newIntent.resolveType(mContext));
               final ContentValues values=new ContentValues();
               values.put(LauncherSettings.Favorites.INTENT,newIntent.toUri(0));
               String updateWhere=Favorites._ID + "=" + favoriteId;
