@@ -1,12 +1,15 @@
 {
+  Log.d(TAG,"begin dragging widget, view: " + v);
   mDraggingWidget=true;
   ImageView image=(ImageView)v.findViewById(R.id.widget_preview);
   PendingAddItemInfo createItemInfo=(PendingAddItemInfo)v.getTag();
   if (image.getDrawable() == null) {
+    Log.d(TAG,"begin dragging widget, no drawable");
     mDraggingWidget=false;
     return false;
   }
   if (mCreateWidgetInfo == null) {
+    Log.d(TAG,"begin dragging widget, create widget info null");
     return false;
   }
   Bitmap preview;
