@@ -1,5 +1,5 @@
 {
-  if (mDrawIdentifier.equals(WORKSPACE_PORTRAIT) || mDrawIdentifier.equals(WORKSPACE_LANDSCAPE) || mDrawIdentifier.equals(WORKSPACE_LARGE)|| mDrawIdentifier.equals(WORKSPACE_CUSTOM)|| mDrawIdentifier.equals(ALLAPPS_PORTRAIT)|| mDrawIdentifier.equals(ALLAPPS_LANDSCAPE)|| mDrawIdentifier.equals(ALLAPPS_LARGE)) {
+  if (mDrawIdentifier.equals(WORKSPACE_PORTRAIT) || mDrawIdentifier.equals(WORKSPACE_LANDSCAPE) || mDrawIdentifier.equals(WORKSPACE_LARGE)|| mDrawIdentifier.equals(ALLAPPS_PORTRAIT)|| mDrawIdentifier.equals(ALLAPPS_LANDSCAPE)|| mDrawIdentifier.equals(ALLAPPS_LARGE)) {
     int[] positions=getPunchThroughPositions();
     for (int i=0; i < positions.length; i+=2) {
       double diff=Math.sqrt(Math.pow(event.getX() - positions[i],2) + Math.pow(event.getY() - positions[i + 1],2));
@@ -17,6 +17,9 @@
         return false;
       }
     }
+  }
+ else   if (mDrawIdentifier.equals(WORKSPACE_CUSTOM)) {
+    return false;
   }
   return true;
 }
