@@ -51,6 +51,7 @@
         if (!animationCancelled) {
           updateWallpaperVisibility(false);
         }
+        mSearchDropTargetBar.hideSearchBar(false);
       }
       @Override public void onAnimationCancel(      Animator animation){
         animationCancelled=true;
@@ -109,6 +110,7 @@
     if (!springLoaded && !LauncherApplication.isScreenLarge()) {
       mWorkspace.hideScrollingIndicator(true);
       hideDockDivider();
+      mSearchDropTargetBar.hideSearchBar(false);
     }
     dispatchOnLauncherTransitionPrepare(fromView,animated,false);
     dispatchOnLauncherTransitionStart(fromView,animated,false);

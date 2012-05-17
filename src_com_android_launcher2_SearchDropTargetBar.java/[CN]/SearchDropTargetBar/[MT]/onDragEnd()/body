@@ -1,8 +1,10 @@
 {
   if (!mDeferOnDragEnd) {
+    prepareStartAnimation(mDropTargetBar);
     mDropTargetBarFadeInAnim.cancel();
     mDropTargetBarFadeOutAnim.start();
     if (!mIsSearchBarHidden) {
+      prepareStartAnimation(mQSBSearchBar);
       mQSBSearchBarFadeOutAnim.cancel();
       mQSBSearchBarFadeInAnim.start();
     }
