@@ -1,5 +1,4 @@
 {
-  Log.d(TAG,"begin dragging widget, view: " + v);
   mDraggingWidget=true;
   ImageView image=(ImageView)v.findViewById(R.id.widget_preview);
   PendingAddItemInfo createItemInfo=(PendingAddItemInfo)v.getTag();
@@ -7,13 +6,13 @@
     mDraggingWidget=false;
     return false;
   }
-  if (mCreateWidgetInfo == null) {
-    return false;
-  }
   Bitmap preview;
   Bitmap outline;
   float scale=1f;
   if (createItemInfo instanceof PendingAddWidgetInfo) {
+    if (mCreateWidgetInfo == null) {
+      return false;
+    }
     PendingAddWidgetInfo createWidgetInfo=mCreateWidgetInfo;
     createItemInfo=createWidgetInfo;
     int spanX=createItemInfo.spanX;
