@@ -20,7 +20,6 @@
     }
   }
   mOverScrollMaxBackgroundAlpha=0.0f;
-  mOverScrollPageIndex=-1;
   if (mDelayedResizeRunnable != null) {
     mDelayedResizeRunnable.run();
     mDelayedResizeRunnable=null;

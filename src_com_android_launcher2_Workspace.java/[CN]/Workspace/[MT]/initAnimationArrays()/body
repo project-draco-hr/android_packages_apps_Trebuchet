@@ -7,7 +7,6 @@
   mOldScaleYs=new float[childCount];
   mOldBackgroundAlphas=new float[childCount];
   mOldAlphas=new float[childCount];
-  mOldRotationYs=new float[childCount];
   mNewTranslationXs=new float[childCount];
   mNewTranslationYs=new float[childCount];
   mNewScaleXs=new float[childCount];
