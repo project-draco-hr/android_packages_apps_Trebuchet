@@ -1,7 +1,5 @@
 {
-  Log.d(TAG,"cleanup shortpress, view: " + v);
   if (!mDraggingWidget) {
-    Log.d(TAG,"cleanup shortpress --> cleanup preloading");
     cleanupWidgetPreloading(false);
   }
 }

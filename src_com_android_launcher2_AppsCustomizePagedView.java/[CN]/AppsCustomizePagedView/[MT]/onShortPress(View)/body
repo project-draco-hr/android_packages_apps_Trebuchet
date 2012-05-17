@@ -1,10 +1,7 @@
 {
-  Log.d(TAG,"onShortPress, view: " + v);
   if (mCreateWidgetInfo != null) {
-    Log.d(TAG,"onShortPress --> cleanup previous, view: " + v + ", create info: "+ mCreateWidgetInfo);
     cleanupWidgetPreloading(false);
   }
   mCreateWidgetInfo=new PendingAddWidgetInfo((PendingAddWidgetInfo)v.getTag());
-  Log.d(TAG,"onShortPress --> create widget info: " + mCreateWidgetInfo);
   preloadWidget(mCreateWidgetInfo);
 }
