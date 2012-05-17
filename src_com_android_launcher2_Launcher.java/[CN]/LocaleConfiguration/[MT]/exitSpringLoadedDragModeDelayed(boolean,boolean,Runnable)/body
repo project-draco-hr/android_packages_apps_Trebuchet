@@ -4,7 +4,6 @@
     @Override public void run(){
       if (successfulDrop) {
         mAppsCustomizeTabHost.setVisibility(View.GONE);
-        mSearchDropTargetBar.showSearchBar(true);
         showWorkspace(true,onCompleteRunnable);
       }
  else {

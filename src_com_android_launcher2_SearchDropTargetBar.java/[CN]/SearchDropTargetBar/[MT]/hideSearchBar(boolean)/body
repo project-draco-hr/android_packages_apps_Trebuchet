@@ -1,6 +1,7 @@
 {
-  cancelAnimations();
+  cancelSearchBarAnimations();
   if (animated) {
+    prepareStartAnimation(mQSBSearchBar);
     mQSBSearchBarFadeOutAnim.start();
   }
  else {

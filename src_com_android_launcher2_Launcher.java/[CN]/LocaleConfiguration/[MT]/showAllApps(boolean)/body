@@ -2,7 +2,6 @@
   if (mState != State.WORKSPACE)   return;
   showAppsCustomizeHelper(animated,false);
   mAppsCustomizeTabHost.requestFocus();
-  mSearchDropTargetBar.hideSearchBar(animated);
   mState=State.APPS_CUSTOMIZE;
   mUserPresent=false;
   updateRunning();
