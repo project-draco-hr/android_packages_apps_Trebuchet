@@ -3,14 +3,6 @@
     mLauncher=l;
     mPositionData=positionData;
     Resources r=getContext().getResources();
-    TypedArray punchThroughCoords=r.obtainTypedArray(R.array.punch_through_coords);
-    if (punchThroughCoords != null) {
-      int len=punchThroughCoords.length();
-      mCustomPositionData=new int[len];
-      for (int i=0; i < len; i++) {
-        mCustomPositionData[i]=punchThroughCoords.getDimensionPixelSize(i,0);
-      }
-    }
     mPunchThroughGraphic=r.getDrawable(R.drawable.cling);
     mPunchThroughGraphicCenterRadius=r.getDimensionPixelSize(R.dimen.clingPunchThroughGraphicCenterRadius);
     mAppIconSize=r.getDimensionPixelSize(R.dimen.app_icon_size);
