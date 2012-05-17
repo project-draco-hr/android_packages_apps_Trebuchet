@@ -6,6 +6,9 @@
     mDraggingWidget=false;
     return false;
   }
+  if (mCreateWidgetInfo == null) {
+    return false;
+  }
   Bitmap preview;
   Bitmap outline;
   float scale=1f;
