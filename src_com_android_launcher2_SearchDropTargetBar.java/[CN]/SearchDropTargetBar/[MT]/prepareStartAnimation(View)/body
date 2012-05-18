@@ -1,0 +1,4 @@
+{
+  v.setLayerType(View.LAYER_TYPE_HARDWARE,null);
+  v.buildLayer();
+}

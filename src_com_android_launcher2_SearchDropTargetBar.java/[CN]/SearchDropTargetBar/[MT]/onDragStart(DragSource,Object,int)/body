@@ -1,9 +1,9 @@
 {
-  mDropTargetBar.setLayerType(View.LAYER_TYPE_HARDWARE,null);
-  mDropTargetBar.buildLayer();
+  prepareStartAnimation(mDropTargetBar);
   mDropTargetBarFadeOutAnim.cancel();
   mDropTargetBarFadeInAnim.start();
   if (!mIsSearchBarHidden) {
+    prepareStartAnimation(mQSBSearchBar);
     mQSBSearchBarFadeInAnim.cancel();
     mQSBSearchBarFadeOutAnim.start();
   }
