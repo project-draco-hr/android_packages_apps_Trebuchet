@@ -11,9 +11,6 @@
     final int cornerYOffset=(int)(scale * 10);
     return new int[]{getMeasuredWidth() - cornerXOffset,cornerYOffset};
   }
- else   if (mDrawIdentifier.equals(WORKSPACE_CUSTOM)) {
-    return mCustomPositionData;
-  }
  else   if (mDrawIdentifier.equals(ALLAPPS_PORTRAIT) || mDrawIdentifier.equals(ALLAPPS_LANDSCAPE) || mDrawIdentifier.equals(ALLAPPS_LARGE)) {
     return mPositionData;
   }
