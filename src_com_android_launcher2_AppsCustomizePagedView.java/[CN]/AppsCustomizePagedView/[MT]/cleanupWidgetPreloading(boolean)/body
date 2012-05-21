@@ -1,5 +1,7 @@
 {
+  Log.d(TAG,"cleanup widget preloading");
   if (!widgetWasAdded) {
+    Log.d(TAG,"cleanup widget preloading --> widget wasn't added");
     PendingAddWidgetInfo info=mCreateWidgetInfo;
     mCreateWidgetInfo=null;
     if ((mWidgetCleanupState == WIDGET_BOUND || mWidgetCleanupState == WIDGET_INFLATED) && mWidgetLoadingId != -1) {
