@@ -15,7 +15,6 @@
   int paddingLeft=getResources().getDimensionPixelOffset(R.dimen.shortcut_preview_padding_left);
   int paddingRight=getResources().getDimensionPixelOffset(R.dimen.shortcut_preview_padding_right);
   int scaledIconWidth=(maxWidth - paddingLeft - paddingRight);
-  float scaleSize=scaledIconWidth / (float)mAppIconSize;
   renderDrawableToBitmap(icon,tempBitmap,paddingLeft,paddingTop,scaledIconWidth,scaledIconWidth);
   Bitmap preview=Bitmap.createBitmap(maxWidth,maxHeight,Config.ARGB_8888);
   c.setBitmap(preview);

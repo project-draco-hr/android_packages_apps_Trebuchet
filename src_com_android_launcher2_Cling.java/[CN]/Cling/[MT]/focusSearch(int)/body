@@ -1,3 +1,3 @@
 {
-  return this.focusSearch(null,direction);
+  return this.focusSearch(this,direction);
 }

@@ -4,7 +4,7 @@ switch (event.getKeyCode()) {
 case KeyEvent.KEYCODE_HOME:
       return true;
 case KeyEvent.KEYCODE_VOLUME_DOWN:
-    if (SystemProperties.getInt("debug.launcher2.dumpstate",0) != 0) {
+    if (doesFileExist(DUMP_STATE_PROPERTY)) {
       dumpState();
       return true;
     }
