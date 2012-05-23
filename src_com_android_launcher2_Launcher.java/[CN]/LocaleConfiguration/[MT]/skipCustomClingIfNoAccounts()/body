@@ -1,0 +1,10 @@
+{
+  Cling cling=(Cling)findViewById(R.id.workspace_cling);
+  boolean customCling=cling.getDrawIdentifier().equals("workspace_custom");
+  if (customCling) {
+    AccountManager am=AccountManager.get(this);
+    Account[] accounts=am.getAccountsByType("com.google");
+    return accounts.length == 0;
+  }
+  return false;
+}
