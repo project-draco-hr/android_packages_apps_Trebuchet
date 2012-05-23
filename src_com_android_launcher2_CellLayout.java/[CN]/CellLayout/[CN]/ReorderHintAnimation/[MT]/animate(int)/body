@@ -10,7 +10,8 @@
   va=ValueAnimator.ofFloat(0f,1f);
   va.setRepeatMode(ValueAnimator.REVERSE);
   va.setRepeatCount(ValueAnimator.INFINITE);
-  va.setDuration((int)(DURATION * (1.0f + Math.random() * .08f)));
+  va.setDuration(DURATION);
+  va.setStartDelay((int)((Math.max(REORDER_ANIMATION_DURATION,delay) + Math.random() * 60)));
   va.addUpdateListener(new AnimatorUpdateListener(){
     @Override public void onAnimationUpdate(    ValueAnimator animation){
       float r=((Float)animation.getAnimatedValue()).floatValue();
@@ -34,7 +35,6 @@
     }
   }
 );
-  va.setStartDelay(Math.max(REORDER_ANIMATION_DURATION,delay));
   mShakeAnimators.put(child,this);
   va.start();
 }
