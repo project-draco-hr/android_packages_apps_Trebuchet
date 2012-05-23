@@ -1,4 +1,5 @@
 {
+  mIsAppWidget=true;
   final ImageView image=(ImageView)findViewById(R.id.widget_preview);
   if (maxWidth > -1) {
     image.setMaxWidth(maxWidth);
