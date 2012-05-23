@@ -1,0 +1,3 @@
+{
+  return (mDrawIdentifier.equals(WORKSPACE_PORTRAIT) || mDrawIdentifier.equals(WORKSPACE_LANDSCAPE) || mDrawIdentifier.equals(WORKSPACE_LARGE)|| mDrawIdentifier.equals(ALLAPPS_PORTRAIT)|| mDrawIdentifier.equals(ALLAPPS_LANDSCAPE)|| mDrawIdentifier.equals(ALLAPPS_LARGE)|| mDrawIdentifier.equals(WORKSPACE_CUSTOM));
+}
