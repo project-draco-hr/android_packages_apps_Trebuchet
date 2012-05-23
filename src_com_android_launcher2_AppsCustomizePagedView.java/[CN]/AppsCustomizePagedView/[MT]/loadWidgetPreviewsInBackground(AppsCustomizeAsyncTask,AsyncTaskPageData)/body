@@ -21,7 +21,7 @@
     }
  else     if (rawInfo instanceof ResolveInfo) {
       ResolveInfo info=(ResolveInfo)rawInfo;
-      images.add(getShortcutPreview(info));
+      images.add(getShortcutPreview(info,data.maxImageWidth,data.maxImageHeight));
     }
   }
 }

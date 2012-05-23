@@ -2,6 +2,6 @@
   final ImageView i=(ImageView)findViewById(R.id.widget_preview);
   int[] maxSize=new int[2];
   maxSize[0]=i.getWidth() - i.getPaddingLeft() - i.getPaddingRight();
-  maxSize[1]=i.getHeight() - i.getPaddingBottom() - i.getPaddingTop();
+  maxSize[1]=i.getHeight() - i.getPaddingTop();
   return maxSize;
 }

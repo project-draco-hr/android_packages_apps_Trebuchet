@@ -11,6 +11,7 @@
   }
   int bitmapWidth;
   int bitmapHeight;
+  Bitmap defaultPreview=null;
   boolean widgetPreviewExists=(drawable != null);
   if (widgetPreviewExists) {
     bitmapWidth=drawable.getIntrinsicWidth();
@@ -19,24 +20,37 @@
  else {
     if (cellHSpan < 1)     cellHSpan=1;
     if (cellVSpan < 1)     cellVSpan=1;
-    bitmapWidth=mWidgetSpacingLayout.estimateCellWidth(cellHSpan);
-    bitmapHeight=mWidgetSpacingLayout.estimateCellHeight(cellVSpan);
-    if (cellHSpan == cellVSpan) {
-      int minOffset=(int)(mAppIconSize * sWidgetPreviewIconPaddingPercentage);
-      if (cellHSpan <= 1) {
-        bitmapWidth=bitmapHeight=mAppIconSize + 2 * minOffset;
+    BitmapDrawable previewDrawable=(BitmapDrawable)getResources().getDrawable(R.drawable.widget_preview_tile);
+    final int previewDrawableWidth=previewDrawable.getIntrinsicWidth();
+    final int previewDrawableHeight=previewDrawable.getIntrinsicHeight();
+    bitmapWidth=previewDrawableWidth * cellHSpan;
+    bitmapHeight=previewDrawableHeight * cellVSpan;
+    defaultPreview=Bitmap.createBitmap(bitmapWidth,bitmapHeight,Config.ARGB_8888);
+    final Canvas c=mCachedAppWidgetPreviewCanvas.get();
+    c.setBitmap(defaultPreview);
+    previewDrawable.setBounds(0,0,bitmapWidth,bitmapHeight);
+    previewDrawable.setTileModeXY(Shader.TileMode.REPEAT,Shader.TileMode.REPEAT);
+    previewDrawable.draw(c);
+    c.setBitmap(null);
+    int minOffset=(int)(mAppIconSize * sWidgetPreviewIconPaddingPercentage);
+    int smallestSide=Math.min(bitmapWidth,bitmapHeight);
+    float iconScale=Math.min((float)smallestSide / (mAppIconSize + 2 * minOffset),1f);
+    try {
+      Drawable icon=null;
+      int hoffset=(int)((previewDrawableWidth - mAppIconSize * iconScale) / 2);
+      int yoffset=(int)((previewDrawableHeight - mAppIconSize * iconScale) / 2);
+      if (iconId > 0)       icon=mIconCache.getFullResIcon(packageName,iconId);
+      Resources resources=mLauncher.getResources();
+      if (icon != null) {
+        renderDrawableToBitmap(icon,defaultPreview,hoffset,yoffset,(int)(mAppIconSize * iconScale),(int)(mAppIconSize * iconScale));
       }
- else {
-        bitmapWidth=bitmapHeight=mAppIconSize + 4 * minOffset;
-      }
+    }
+ catch (    Resources.NotFoundException e) {
     }
   }
   float scale=1f;
   if (bitmapWidth > maxWidth) {
     scale=maxWidth / (float)bitmapWidth;
-  }
-  if (bitmapHeight * scale > maxHeight) {
-    scale=maxHeight / (float)bitmapHeight;
   }
   if (scale != 1f) {
     bitmapWidth=(int)(scale * bitmapWidth);
@@ -47,23 +61,20 @@
     renderDrawableToBitmap(drawable,preview,0,0,bitmapWidth,bitmapHeight);
   }
  else {
-    int minOffset=(int)(mAppIconSize * sWidgetPreviewIconPaddingPercentage);
-    int smallestSide=Math.min(bitmapWidth,bitmapHeight);
-    float iconScale=Math.min((float)smallestSide / (mAppIconSize + 2 * minOffset),1f);
-    if (cellHSpan != 1 || cellVSpan != 1) {
-      renderDrawableToBitmap(mDefaultWidgetBackground,preview,0,0,bitmapWidth,bitmapHeight);
+    final Canvas c=mCachedAppWidgetPreviewCanvas.get();
+    final Rect src=mCachedAppWidgetPreviewSrcRect.get();
+    final Rect dest=mCachedAppWidgetPreviewDestRect.get();
+    c.setBitmap(preview);
+    src.set(0,0,defaultPreview.getWidth(),defaultPreview.getHeight());
+    dest.set(0,0,preview.getWidth(),preview.getHeight());
+    Paint p=mCachedAppWidgetPreviewPaint.get();
+    if (p == null) {
+      p=new Paint();
+      p.setFilterBitmap(true);
+      mCachedAppWidgetPreviewPaint.set(p);
     }
-    try {
-      Drawable icon=null;
-      int hoffset=(int)(bitmapWidth / 2 - mAppIconSize * iconScale / 2);
-      int yoffset=(int)(bitmapHeight / 2 - mAppIconSize * iconScale / 2);
-      if (iconId > 0)       icon=mIconCache.getFullResIcon(packageName,iconId);
-      Resources resources=mLauncher.getResources();
-      if (icon == null)       icon=resources.getDrawable(R.drawable.ic_launcher_application);
-      renderDrawableToBitmap(icon,preview,hoffset,yoffset,(int)(mAppIconSize * iconScale),(int)(mAppIconSize * iconScale));
-    }
- catch (    Resources.NotFoundException e) {
-    }
+    c.drawBitmap(defaultPreview,src,dest,p);
+    c.setBitmap(null);
   }
   return preview;
 }
