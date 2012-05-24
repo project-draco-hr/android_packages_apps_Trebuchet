@@ -53,7 +53,7 @@
       mapPointFromSelfToChild(mDragTargetLayout,mDragViewVisualCenter,null);
     }
     ItemInfo info=(ItemInfo)d.dragInfo;
-    mTargetCell=findNearestArea((int)mDragViewVisualCenter[0],(int)mDragViewVisualCenter[1],1,1,mDragTargetLayout,mTargetCell);
+    mTargetCell=findNearestArea((int)mDragViewVisualCenter[0],(int)mDragViewVisualCenter[1],item.spanX,item.spanY,mDragTargetLayout,mTargetCell);
     setCurrentDropOverCell(mTargetCell[0],mTargetCell[1]);
     float targetCellDistance=mDragTargetLayout.getDistanceFromCell(mDragViewVisualCenter[0],mDragViewVisualCenter[1],mTargetCell);
     final View dragOverView=mDragTargetLayout.getChildAt(mTargetCell[0],mTargetCell[1]);
@@ -64,13 +64,11 @@
       minSpanX=item.minSpanX;
       minSpanY=item.minSpanY;
     }
-    int[] reorderPosition=new int[2];
-    reorderPosition=findNearestArea((int)mDragViewVisualCenter[0],(int)mDragViewVisualCenter[1],item.spanX,item.spanY,mDragTargetLayout,reorderPosition);
     boolean nearestDropOccupied=mDragTargetLayout.isNearestDropLocationOccupied((int)mDragViewVisualCenter[0],(int)mDragViewVisualCenter[1],item.spanX,item.spanY,child,mTargetCell);
     if (!nearestDropOccupied) {
       mDragTargetLayout.visualizeDropLocation(child,mDragOutline,(int)mDragViewVisualCenter[0],(int)mDragViewVisualCenter[1],mTargetCell[0],mTargetCell[1],item.spanX,item.spanY,false,d.dragView.getDragVisualizeOffset(),d.dragView.getDragRegion());
     }
- else     if ((mDragMode == DRAG_MODE_NONE || mDragMode == DRAG_MODE_REORDER) && !mReorderAlarm.alarmPending() && (mLastReorderX != reorderPosition[0] || mLastReorderY != reorderPosition[1])) {
+ else     if ((mDragMode == DRAG_MODE_NONE || mDragMode == DRAG_MODE_REORDER) && !mReorderAlarm.alarmPending() && (mLastReorderX != mTargetCell[0] || mLastReorderY != mTargetCell[1])) {
       ReorderAlarmListener listener=new ReorderAlarmListener(mDragViewVisualCenter,minSpanX,minSpanY,item.spanX,item.spanY,d.dragView,child);
       mReorderAlarm.setOnAlarmListener(listener);
       mReorderAlarm.setAlarm(REORDER_TIMEOUT);
