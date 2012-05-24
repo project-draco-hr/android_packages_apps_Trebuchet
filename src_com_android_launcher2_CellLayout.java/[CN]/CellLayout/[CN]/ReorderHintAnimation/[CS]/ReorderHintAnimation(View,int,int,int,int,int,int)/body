@@ -7,23 +7,27 @@
   final int y1=mTmpPoint[1];
   final int dX=x1 - x0;
   final int dY=y1 - y0;
-  deltaX=0;
-  deltaY=0;
+  finalDeltaX=0;
+  finalDeltaY=0;
   if (dX == dY && dX == 0) {
   }
  else {
     if (dY == 0) {
-      deltaX=-Math.signum(dX) * mReorderHintAnimationMagnitude;
+      finalDeltaX=-Math.signum(dX) * mReorderHintAnimationMagnitude;
     }
  else     if (dX == 0) {
-      deltaY=-Math.signum(dY) * mReorderHintAnimationMagnitude;
+      finalDeltaY=-Math.signum(dY) * mReorderHintAnimationMagnitude;
     }
  else {
       double angle=Math.atan((float)(dY) / dX);
-      deltaX=(int)(-Math.signum(dX) * Math.abs(Math.cos(angle) * mReorderHintAnimationMagnitude));
-      deltaY=(int)(-Math.signum(dY) * Math.abs(Math.sin(angle) * mReorderHintAnimationMagnitude));
+      finalDeltaX=(int)(-Math.signum(dX) * Math.abs(Math.cos(angle) * mReorderHintAnimationMagnitude));
+      finalDeltaY=(int)(-Math.signum(dY) * Math.abs(Math.sin(angle) * mReorderHintAnimationMagnitude));
     }
   }
+  initDeltaX=child.getTranslationX();
+  initDeltaY=child.getTranslationY();
+  finalScale=1.0f - 4.0f / child.getWidth();
+  initScale=child.getScaleX();
   child.setPivotY(child.getMeasuredHeight() * 0.5f);
   child.setPivotX(child.getMeasuredWidth() * 0.5f);
   this.child=child;
