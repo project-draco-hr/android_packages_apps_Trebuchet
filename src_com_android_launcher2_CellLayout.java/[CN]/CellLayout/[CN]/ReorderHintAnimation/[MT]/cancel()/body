@@ -1,3 +1,5 @@
 {
-  va.cancel();
+  if (a != null) {
+    a.cancel();
+  }
 }

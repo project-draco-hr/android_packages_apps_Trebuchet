@@ -31,7 +31,7 @@
   if (DEBUG_VISUALIZE_OCCUPIED) {
     int[] pt=new int[2];
     ColorDrawable cd=new ColorDrawable(Color.RED);
-    cd.setBounds(0,0,80,80);
+    cd.setBounds(0,0,mCellWidth,mCellHeight);
     for (int i=0; i < mCountX; i++) {
       for (int j=0; j < mCountY; j++) {
         if (mOccupied[i][j]) {
