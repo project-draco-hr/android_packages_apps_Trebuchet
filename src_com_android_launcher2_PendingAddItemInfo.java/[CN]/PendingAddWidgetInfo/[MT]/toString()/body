@@ -1,0 +1,3 @@
+{
+  return "Widget: " + componentName.toShortString();
+}

@@ -5,6 +5,10 @@
     task.cancel(false);
     iter.remove();
     mDirtyPageContent.set(task.page,true);
+    View v=getPageAt(task.page);
+    if (v instanceof PagedViewGridLayout) {
+      ((PagedViewGridLayout)v).removeAllViewsOnPage();
+    }
   }
   mDeferredSyncWidgetPageItems.clear();
 }
