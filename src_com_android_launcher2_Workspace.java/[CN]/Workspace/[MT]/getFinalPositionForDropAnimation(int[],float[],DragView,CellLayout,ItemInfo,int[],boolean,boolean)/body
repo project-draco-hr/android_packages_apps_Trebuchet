@@ -7,8 +7,16 @@
   setFinalTransitionTransform(layout);
   float cellLayoutScale=mLauncher.getDragLayer().getDescendantCoordRelativeToSelf(layout,loc);
   resetTransitionTransform(layout);
-  float dragViewScaleX=(1.0f * r.width()) / dragView.getMeasuredWidth();
-  float dragViewScaleY=(1.0f * r.height()) / dragView.getMeasuredHeight();
+  float dragViewScaleX;
+  float dragViewScaleY;
+  if (scale) {
+    dragViewScaleX=(1.0f * r.width()) / dragView.getMeasuredWidth();
+    dragViewScaleY=(1.0f * r.height()) / dragView.getMeasuredHeight();
+  }
+ else {
+    dragViewScaleX=1f;
+    dragViewScaleY=1f;
+  }
   loc[0]-=(dragView.getMeasuredWidth() - cellLayoutScale * r.width()) / 2;
   loc[1]-=(dragView.getMeasuredHeight() - cellLayoutScale * r.height()) / 2;
   scaleXY[0]=dragViewScaleX * cellLayoutScale;
