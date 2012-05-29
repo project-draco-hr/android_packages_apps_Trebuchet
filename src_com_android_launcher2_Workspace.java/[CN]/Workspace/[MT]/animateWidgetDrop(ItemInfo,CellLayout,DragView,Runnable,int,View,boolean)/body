@@ -7,6 +7,7 @@
   Resources res=mLauncher.getResources();
   int duration=res.getInteger(R.integer.config_dropAnimMaxDuration) - 200;
   if (finalView instanceof AppWidgetHostView && external) {
+    Log.d(TAG,"6557954 Animate widget drop, final view is appWidgetHostView");
     mLauncher.getDragLayer().removeView(finalView);
   }
   if ((animationType == ANIMATE_INTO_POSITION_AND_RESIZE || external) && finalView != null) {

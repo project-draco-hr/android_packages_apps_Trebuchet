@@ -1,14 +1,21 @@
 {
+  Log.d(TAG,"6557954 Cleaning up widget, was added: " + widgetWasAdded);
+  if (mCreateWidgetInfo != null) {
+    Log.d(TAG,"    6557954 Cleaning up widget, widget info: " + mCreateWidgetInfo.info);
+  }
   if (!widgetWasAdded) {
     PendingAddWidgetInfo info=mCreateWidgetInfo;
     mCreateWidgetInfo=null;
     if ((mWidgetCleanupState == WIDGET_BOUND || mWidgetCleanupState == WIDGET_INFLATED) && mWidgetLoadingId != -1) {
+      Log.d(TAG,"    6557954 Cleaning up widget, delete widget id");
       mLauncher.getAppWidgetHost().deleteAppWidgetId(mWidgetLoadingId);
     }
     if (mWidgetCleanupState == WIDGET_BOUND) {
+      Log.d(TAG,"    6557954 Cleaning up widget, remove callbacks");
       removeCallbacks(mInflateWidgetRunnable);
     }
  else     if (mWidgetCleanupState == WIDGET_INFLATED) {
+      Log.d(TAG,"    6557954 Cleaning up widget, remove inflated widget from draglayer");
       AppWidgetHostView widget=info.boundWidget;
       mLauncher.getDragLayer().removeView(widget);
     }
