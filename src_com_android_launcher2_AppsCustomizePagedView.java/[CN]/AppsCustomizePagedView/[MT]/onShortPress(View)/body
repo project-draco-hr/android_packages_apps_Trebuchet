@@ -1,7 +1,9 @@
 {
   if (mCreateWidgetInfo != null) {
+    Log.d(TAG,"**** 6557954 Previous shortpress not cleaned up, cleaning up now: " + mCreateWidgetInfo.info);
     cleanupWidgetPreloading(false);
   }
   mCreateWidgetInfo=new PendingAddWidgetInfo((PendingAddWidgetInfo)v.getTag());
+  Log.d(TAG,"6557954 Short press triggered for view: " + v + ", widget info: "+ mCreateWidgetInfo.info);
   preloadWidget(mCreateWidgetInfo);
 }
