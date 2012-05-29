@@ -5,3 +5,4 @@ CellLayout layout
 ItemInfo info
 int[] targetCell
 boolean external
+boolean scale
