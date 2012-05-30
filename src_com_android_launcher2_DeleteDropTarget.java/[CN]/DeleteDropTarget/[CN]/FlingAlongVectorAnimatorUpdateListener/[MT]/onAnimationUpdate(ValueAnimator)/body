@@ -15,7 +15,7 @@
   dragView.setTranslationX(mFrom.left);
   dragView.setTranslationY(mFrom.top);
   dragView.setAlpha(1f - mAlphaInterpolator.getInterpolation(t));
-  mVelocity.x*=FRICTION;
-  mVelocity.y*=FRICTION;
+  mVelocity.x*=mFriction;
+  mVelocity.y*=mFriction;
   mPrevTime=curTime;
 }
