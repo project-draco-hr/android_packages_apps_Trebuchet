@@ -1,0 +1,5 @@
+ArrayList<View> intersectingViews
+Rect occupied
+int[] direction
+View ignoreView
+ItemConfiguration solution
