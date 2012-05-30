@@ -23,16 +23,9 @@
       mIntersectingViews.add(child);
     }
   }
-  if (addViewsToTempLocation(mIntersectingViews,mOccupiedRect,direction,true,ignoreView,solution)) {
+  if (attemptPushInDirection(mIntersectingViews,mOccupiedRect,direction,ignoreView,solution)) {
     return true;
   }
-  direction[0]*=-1;
-  direction[1]*=-1;
-  if (addViewsToTempLocation(mIntersectingViews,mOccupiedRect,direction,true,ignoreView,solution)) {
-    return true;
-  }
-  direction[0]*=-1;
-  direction[1]*=-1;
   if (addViewsToTempLocation(mIntersectingViews,mOccupiedRect,direction,false,ignoreView,solution)) {
     return true;
   }
