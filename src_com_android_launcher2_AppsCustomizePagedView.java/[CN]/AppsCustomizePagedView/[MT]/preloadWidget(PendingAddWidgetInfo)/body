@@ -4,6 +4,7 @@
   if (pInfo.configure != null) {
     return;
   }
+  mWidgetCleanupState=WIDGET_PRELOAD_PENDING;
   mBindWidgetRunnable=new Runnable(){
     @Override public void run(){
       Log.d(TAG,"    6557954 Preload, bind widget: " + info.info);

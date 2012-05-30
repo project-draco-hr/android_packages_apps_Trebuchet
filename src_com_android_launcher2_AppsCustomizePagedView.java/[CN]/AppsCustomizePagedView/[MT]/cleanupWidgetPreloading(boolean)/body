@@ -6,15 +6,24 @@
   if (!widgetWasAdded) {
     PendingAddWidgetInfo info=mCreateWidgetInfo;
     mCreateWidgetInfo=null;
-    if ((mWidgetCleanupState == WIDGET_BOUND || mWidgetCleanupState == WIDGET_INFLATED) && mWidgetLoadingId != -1) {
-      Log.d(TAG,"    6557954 Cleaning up widget, delete widget id");
-      mLauncher.getAppWidgetHost().deleteAppWidgetId(mWidgetLoadingId);
+    if (mWidgetCleanupState == WIDGET_PRELOAD_PENDING) {
+      Log.d(TAG,"    6557954 Cleaning up widget, remove preload callbacks");
+      removeCallbacks(mBindWidgetRunnable);
+      removeCallbacks(mInflateWidgetRunnable);
     }
-    if (mWidgetCleanupState == WIDGET_BOUND) {
+ else     if (mWidgetCleanupState == WIDGET_BOUND) {
+      if (mWidgetLoadingId != -1) {
+        Log.d(TAG,"    6557954 Cleaning up widget, delete widget id");
+        mLauncher.getAppWidgetHost().deleteAppWidgetId(mWidgetLoadingId);
+      }
       Log.d(TAG,"    6557954 Cleaning up widget, remove callbacks");
       removeCallbacks(mInflateWidgetRunnable);
     }
  else     if (mWidgetCleanupState == WIDGET_INFLATED) {
+      if (mWidgetLoadingId != -1) {
+        Log.d(TAG,"    6557954 Cleaning up widget, delete widget id");
+        mLauncher.getAppWidgetHost().deleteAppWidgetId(mWidgetLoadingId);
+      }
       Log.d(TAG,"    6557954 Cleaning up widget, remove inflated widget from draglayer");
       AppWidgetHostView widget=info.boundWidget;
       mLauncher.getDragLayer().removeView(widget);
