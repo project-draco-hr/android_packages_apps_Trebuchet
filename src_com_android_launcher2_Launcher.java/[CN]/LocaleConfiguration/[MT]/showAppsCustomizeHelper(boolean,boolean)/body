@@ -72,21 +72,27 @@
  else {
       observer=null;
     }
+    final AnimatorSet stateAnimation=mStateAnimation;
+    final Runnable startAnimRunnable=new Runnable(){
+      public void run(){
+        if (mStateAnimation != stateAnimation)         return;
+        setPivotsForZoom(toView,scale);
+        dispatchOnLauncherTransitionStart(fromView,animated,false);
+        dispatchOnLauncherTransitionStart(toView,animated,false);
+        mWorkspace.post(new Runnable(){
+          public void run(){
+            if (mStateAnimation != stateAnimation)             return;
+            mStateAnimation.start();
+          }
+        }
+);
+      }
+    }
+;
     if (delayAnim) {
-      final AnimatorSet stateAnimation=mStateAnimation;
       final OnGlobalLayoutListener delayedStart=new OnGlobalLayoutListener(){
         public void onGlobalLayout(){
-          mWorkspace.post(new Runnable(){
-            public void run(){
-              if (mStateAnimation == stateAnimation) {
-                setPivotsForZoom(toView,scale);
-                dispatchOnLauncherTransitionStart(fromView,animated,false);
-                dispatchOnLauncherTransitionStart(toView,animated,false);
-                mStateAnimation.start();
-              }
-            }
-          }
-);
+          mWorkspace.post(startAnimRunnable);
           observer.removeOnGlobalLayoutListener(this);
         }
       }
@@ -94,10 +100,7 @@
       observer.addOnGlobalLayoutListener(delayedStart);
     }
  else {
-      setPivotsForZoom(toView,scale);
-      dispatchOnLauncherTransitionStart(fromView,animated,false);
-      dispatchOnLauncherTransitionStart(toView,animated,false);
-      mStateAnimation.start();
+      startAnimRunnable.run();
     }
   }
  else {

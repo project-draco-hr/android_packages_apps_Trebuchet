@@ -57,7 +57,14 @@
     }
     dispatchOnLauncherTransitionStart(fromView,animated,true);
     dispatchOnLauncherTransitionStart(toView,animated,true);
-    mStateAnimation.start();
+    final Animator stateAnimation=mStateAnimation;
+    mWorkspace.post(new Runnable(){
+      public void run(){
+        if (stateAnimation != mStateAnimation)         return;
+        mStateAnimation.start();
+      }
+    }
+);
   }
  else {
     fromView.setVisibility(View.GONE);
