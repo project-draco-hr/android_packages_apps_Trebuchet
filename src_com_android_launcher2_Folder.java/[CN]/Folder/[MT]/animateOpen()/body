@@ -5,7 +5,7 @@
   PropertyValuesHolder alpha=PropertyValuesHolder.ofFloat("alpha",1);
   PropertyValuesHolder scaleX=PropertyValuesHolder.ofFloat("scaleX",1.0f);
   PropertyValuesHolder scaleY=PropertyValuesHolder.ofFloat("scaleY",1.0f);
-  ObjectAnimator oa=ObjectAnimator.ofPropertyValuesHolder(this,alpha,scaleX,scaleY);
+  final ObjectAnimator oa=mOpenCloseAnimator=ObjectAnimator.ofPropertyValuesHolder(this,alpha,scaleX,scaleY);
   oa.addListener(new AnimatorListenerAdapter(){
     @Override public void onAnimationStart(    Animator animation){
       sendCustomAccessibilityEvent(AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED,String.format(getContext().getString(R.string.folder_opened),mContent.getCountX(),mContent.getCountY()));
@@ -13,6 +13,7 @@
     }
     @Override public void onAnimationEnd(    Animator animation){
       mState=STATE_OPEN;
+      setLayerType(LAYER_TYPE_NONE,null);
       Cling cling=mLauncher.showFirstRunFoldersCling();
       if (cling != null) {
         cling.bringToFront();
@@ -22,5 +23,13 @@
   }
 );
   oa.setDuration(mExpandDuration);
-  oa.start();
+  setLayerType(LAYER_TYPE_HARDWARE,null);
+  buildLayer();
+  post(new Runnable(){
+    public void run(){
+      if (oa != mOpenCloseAnimator)       return;
+      oa.start();
+    }
+  }
+);
 }
