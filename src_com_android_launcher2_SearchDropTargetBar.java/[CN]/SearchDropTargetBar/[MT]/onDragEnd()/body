@@ -1,12 +1,10 @@
 {
   if (!mDeferOnDragEnd) {
     prepareStartAnimation(mDropTargetBar);
-    mDropTargetBarFadeInAnim.cancel();
-    mDropTargetBarFadeOutAnim.start();
+    mDropTargetBarAnim.reverse();
     if (!mIsSearchBarHidden) {
       prepareStartAnimation(mQSBSearchBar);
-      mQSBSearchBarFadeOutAnim.cancel();
-      mQSBSearchBarFadeInAnim.start();
+      mQSBSearchBarAnim.reverse();
     }
   }
  else {

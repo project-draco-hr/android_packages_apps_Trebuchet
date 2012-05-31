@@ -1,16 +1,16 @@
 {
-  cancelSearchBarAnimations();
+  if (!mIsSearchBarHidden)   return;
   if (animated) {
     prepareStartAnimation(mQSBSearchBar);
-    mQSBSearchBarFadeInAnim.start();
+    mQSBSearchBarAnim.reverse();
   }
  else {
-    mQSBSearchBar.setVisibility(View.VISIBLE);
+    mQSBSearchBarAnim.cancel();
     if (mEnableDropDownDropTargets) {
       mQSBSearchBar.setTranslationY(0);
     }
  else {
-      mQSBSearchBar.setAlpha(1f);
+      mDropTargetBar.setAlpha(1f);
     }
   }
   mIsSearchBarHidden=false;
