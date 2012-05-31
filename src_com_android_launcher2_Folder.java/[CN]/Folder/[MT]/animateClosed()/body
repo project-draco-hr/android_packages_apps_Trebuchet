@@ -3,10 +3,11 @@
   PropertyValuesHolder alpha=PropertyValuesHolder.ofFloat("alpha",0);
   PropertyValuesHolder scaleX=PropertyValuesHolder.ofFloat("scaleX",0.9f);
   PropertyValuesHolder scaleY=PropertyValuesHolder.ofFloat("scaleY",0.9f);
-  ObjectAnimator oa=ObjectAnimator.ofPropertyValuesHolder(this,alpha,scaleX,scaleY);
+  final ObjectAnimator oa=mOpenCloseAnimator=ObjectAnimator.ofPropertyValuesHolder(this,alpha,scaleX,scaleY);
   oa.addListener(new AnimatorListenerAdapter(){
     @Override public void onAnimationEnd(    Animator animation){
       onCloseComplete();
+      setLayerType(LAYER_TYPE_NONE,null);
       mState=STATE_SMALL;
     }
     @Override public void onAnimationStart(    Animator animation){
@@ -16,5 +17,13 @@
   }
 );
   oa.setDuration(mExpandDuration);
-  oa.start();
+  setLayerType(LAYER_TYPE_HARDWARE,null);
+  buildLayer();
+  post(new Runnable(){
+    public void run(){
+      if (oa != mOpenCloseAnimator)       return;
+      oa.start();
+    }
+  }
+);
 }
