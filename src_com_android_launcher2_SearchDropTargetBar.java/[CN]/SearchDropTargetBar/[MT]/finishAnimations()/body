@@ -1,6 +1,6 @@
 {
-  mDropTargetBarFadeInAnim.end();
-  mDropTargetBarFadeOutAnim.end();
-  mQSBSearchBarFadeInAnim.end();
-  mQSBSearchBarFadeOutAnim.end();
+  prepareStartAnimation(mDropTargetBar);
+  mDropTargetBarAnim.reverse();
+  prepareStartAnimation(mQSBSearchBar);
+  mQSBSearchBarAnim.reverse();
 }

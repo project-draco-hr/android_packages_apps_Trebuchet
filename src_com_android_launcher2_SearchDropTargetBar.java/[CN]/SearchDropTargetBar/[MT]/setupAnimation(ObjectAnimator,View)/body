@@ -1,0 +1,10 @@
+{
+  anim.setInterpolator(sAccelerateInterpolator);
+  anim.setDuration(sTransitionInDuration);
+  anim.addListener(new AnimatorListenerAdapter(){
+    @Override public void onAnimationEnd(    Animator animation){
+      v.setLayerType(View.LAYER_TYPE_NONE,null);
+    }
+  }
+);
+}
