@@ -10,18 +10,14 @@
   mEnableDropDownDropTargets=getResources().getBoolean(R.bool.config_useDropTargetDownTransition);
   if (mEnableDropDownDropTargets) {
     mDropTargetBar.setTranslationY(-mBarHeight);
-    mDropTargetBarFadeInAnim=ObjectAnimator.ofFloat(mDropTargetBar,"translationY",0f);
-    mDropTargetBarFadeOutAnim=ObjectAnimator.ofFloat(mDropTargetBar,"translationY",-mBarHeight);
-    mQSBSearchBarFadeInAnim=ObjectAnimator.ofFloat(mQSBSearchBar,"translationY",0);
-    mQSBSearchBarFadeOutAnim=ObjectAnimator.ofFloat(mQSBSearchBar,"translationY",-mBarHeight);
+    mDropTargetBarAnim=ObjectAnimator.ofFloat(mDropTargetBar,"translationY",-mBarHeight,0f);
+    mQSBSearchBarAnim=ObjectAnimator.ofFloat(mQSBSearchBar,"translationY",0,-mBarHeight);
   }
  else {
     mDropTargetBar.setAlpha(0f);
-    mDropTargetBarFadeInAnim=ObjectAnimator.ofFloat(mDropTargetBar,"alpha",1f);
-    mDropTargetBarFadeOutAnim=ObjectAnimator.ofFloat(mDropTargetBar,"alpha",0f);
-    mQSBSearchBarFadeInAnim=ObjectAnimator.ofFloat(mQSBSearchBar,"alpha",1f);
-    mQSBSearchBarFadeOutAnim=ObjectAnimator.ofFloat(mQSBSearchBar,"alpha",0f);
+    mDropTargetBarAnim=ObjectAnimator.ofFloat(mDropTargetBar,"alpha",0f,1f);
+    mQSBSearchBarAnim=ObjectAnimator.ofFloat(mQSBSearchBar,"alpha",1f,0f);
   }
-  prepareAnimation(mDropTargetBarFadeInAnim,mDropTargetBarFadeOutAnim,mDropTargetBar);
-  prepareAnimation(mQSBSearchBarFadeInAnim,mQSBSearchBarFadeOutAnim,mQSBSearchBar);
+  setupAnimation(mDropTargetBarAnim,mDropTargetBar);
+  setupAnimation(mQSBSearchBarAnim,mQSBSearchBar);
 }

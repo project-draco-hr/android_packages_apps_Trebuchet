@@ -1,4 +1,0 @@
-{
-  mQSBSearchBarFadeInAnim.cancel();
-  mQSBSearchBarFadeOutAnim.cancel();
-}
