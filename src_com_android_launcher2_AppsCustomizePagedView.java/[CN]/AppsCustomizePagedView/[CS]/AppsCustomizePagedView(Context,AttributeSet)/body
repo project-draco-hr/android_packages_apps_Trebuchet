@@ -21,9 +21,9 @@
   mClingFocusedY=a.getInt(R.styleable.AppsCustomizePagedView_clingFocusedY,0);
   a.recycle();
   mWidgetSpacingLayout=new PagedViewCellLayout(getContext());
-  mWidgetPreviewIconPaddedDimension=(int)(mAppIconSize * (1 + (2 * sWidgetPreviewIconPaddingPercentage)));
   mFadeInAdjacentScreens=false;
   if (getImportantForAccessibility() == View.IMPORTANT_FOR_ACCESSIBILITY_AUTO) {
     setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_YES);
   }
+  Log.d(TAG,"6549598 ctor mNumWidgetPages: " + mNumWidgetPages + " mNumAppsPages: "+ mNumAppsPages);
 }

@@ -1,5 +1,7 @@
 {
   addAppsWithoutInvalidate(list);
+  Log.d(TAG,"6549598 addApps mApps.size(): " + mApps.size() + " list.size(): "+ list.size());
   updatePageCounts();
   invalidatePageData();
+  Log.d(TAG,"6549598 addApps mNumAppsPages: " + mNumAppsPages);
 }

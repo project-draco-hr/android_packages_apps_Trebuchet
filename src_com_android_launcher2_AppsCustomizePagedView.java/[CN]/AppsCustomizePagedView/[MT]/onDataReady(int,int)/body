@@ -1,4 +1,5 @@
 {
+  Log.d(TAG,"6549598 onDataReady");
   boolean isLandscape=getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
   int maxCellCountX=Integer.MAX_VALUE;
   int maxCellCountY=Integer.MAX_VALUE;

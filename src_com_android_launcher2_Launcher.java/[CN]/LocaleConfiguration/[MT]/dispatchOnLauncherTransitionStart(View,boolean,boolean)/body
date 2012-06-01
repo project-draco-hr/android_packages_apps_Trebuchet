@@ -1,4 +1,10 @@
 {
+  if (toWorkspace) {
+    Log.d(TAG,"6549598 Start animation to workspace");
+  }
+ else {
+    Log.d(TAG,"6549598 Start animation to all apps");
+  }
   if (v instanceof LauncherTransitionable) {
     ((LauncherTransitionable)v).onLauncherTransitionStart(this,animated,toWorkspace);
   }

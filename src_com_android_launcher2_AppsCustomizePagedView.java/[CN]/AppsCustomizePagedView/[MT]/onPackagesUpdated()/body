@@ -1,4 +1,5 @@
 {
+  Log.d(TAG,"6549598 onPackagesUpdated");
   postDelayed(new Runnable(){
     public void run(){
       updatePackages();

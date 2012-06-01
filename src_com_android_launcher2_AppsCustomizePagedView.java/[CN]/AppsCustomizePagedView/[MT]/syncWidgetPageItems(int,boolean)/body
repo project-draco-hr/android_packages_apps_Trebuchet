@@ -1,4 +1,5 @@
 {
+  Log.d(TAG,"6549598 syncWidgetPageItems page: " + page);
   int numItemsPerPage=mWidgetCountX * mWidgetCountY;
   final ArrayList<Object> items=new ArrayList<Object>();
   int contentWidth=mWidgetSpacingLayout.getContentWidth();
