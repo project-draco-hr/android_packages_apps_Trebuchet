@@ -1,4 +1,6 @@
 {
   mNumWidgetPages=(int)Math.ceil(mWidgets.size() / (float)(mWidgetCountX * mWidgetCountY));
   mNumAppsPages=(int)Math.ceil((float)mApps.size() / (mCellCountX * mCellCountY));
+  Log.d(TAG,"6549598 updatePageCounts mNumWidgetPages: " + mNumWidgetPages + " mNumAppsPages: "+ mNumAppsPages);
+  Log.d(TAG,"6549598 mApps.size(): " + mApps.size() + " mWidgets.size(): "+ mWidgets.size()+ " mCellCountX: "+ mCellCountX+ " mCellCountY: "+ mCellCountY);
 }
