@@ -1,0 +1,13 @@
+{
+  for (  LauncherAppWidgetInfo info : LauncherModel.getWidgets()) {
+    LauncherAppWidgetHostView lahv=(LauncherAppWidgetHostView)info.hostView;
+    if (lahv != null && lahv.orientationChangedSincedInflation()) {
+      AppWidgetProviderInfo pInfo=lahv.getAppWidgetInfo();
+      getWorkspace().getParentCellLayoutForView(lahv).removeView(lahv);
+      AppWidgetHostView widget=mAppWidgetHost.createView(this,info.appWidgetId,pInfo);
+      widget.setTag(info);
+      info.hostView=widget;
+      getWorkspace().addInScreen(widget,info.container,info.screen,info.cellX,info.cellY,info.spanX,info.spanY);
+    }
+  }
+}
