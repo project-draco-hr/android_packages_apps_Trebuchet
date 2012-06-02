@@ -1,4 +1,10 @@
 {
+  if (toWorkspace) {
+    Log.d(TAG,"6549598 End animation to workspace");
+  }
+ else {
+    Log.d(TAG,"6549598 End animation to all apps");
+  }
   if (v instanceof LauncherTransitionable) {
     ((LauncherTransitionable)v).onLauncherTransitionEnd(this,animated,toWorkspace);
   }

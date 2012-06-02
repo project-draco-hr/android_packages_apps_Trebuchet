@@ -20,6 +20,7 @@
   }
   mWidgets.addAll(shortcuts);
   Collections.sort(mWidgets,new LauncherModel.WidgetAndShortcutNameComparator(mPackageManager));
+  Log.d(TAG,"6549598 updatePackages mWidgets.size(): " + mWidgets.size() + " wasEmpty: "+ wasEmpty);
   updatePageCounts();
   if (wasEmpty) {
     if (testDataReady())     requestLayout();
