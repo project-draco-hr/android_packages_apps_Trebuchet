@@ -1,4 +1,5 @@
 {
+  Log.d(TAG,"6549598 setContentType mNumAppsPages: " + mNumAppsPages);
   if (type == ContentType.Widgets) {
     invalidatePageData(mNumAppsPages,true);
   }
