@@ -1,0 +1,4 @@
+{
+  mPreviousOrientation=mContext.getResources().getConfiguration().orientation;
+  super.updateAppWidget(remoteViews);
+}
