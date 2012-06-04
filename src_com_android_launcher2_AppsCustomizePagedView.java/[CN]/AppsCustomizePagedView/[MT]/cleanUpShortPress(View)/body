@@ -1,7 +1,5 @@
 {
-  Log.d(TAG,"6557954 Cleanup shortpress");
   if (!mDraggingWidget) {
-    Log.d(TAG,"    6557954 Cleanup shortpress, cleanup cleanup preloading");
     cleanupWidgetPreloading(false);
   }
 }
