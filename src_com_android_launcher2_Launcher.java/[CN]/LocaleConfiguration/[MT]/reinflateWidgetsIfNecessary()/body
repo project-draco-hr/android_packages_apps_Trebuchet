@@ -3,7 +3,8 @@
     LauncherAppWidgetHostView lahv=(LauncherAppWidgetHostView)info.hostView;
     if (lahv != null && lahv.orientationChangedSincedInflation()) {
       AppWidgetProviderInfo pInfo=lahv.getAppWidgetInfo();
-      getWorkspace().getParentCellLayoutForView(lahv).removeView(lahv);
+      CellLayout cl=getWorkspace().getParentCellLayoutForView(lahv);
+      if (cl != null)       cl.removeView(lahv);
       AppWidgetHostView widget=mAppWidgetHost.createView(this,info.appWidgetId,pInfo);
       widget.setTag(info);
       info.hostView=widget;
