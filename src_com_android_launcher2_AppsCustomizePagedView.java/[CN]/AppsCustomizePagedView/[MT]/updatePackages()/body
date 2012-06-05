@@ -13,6 +13,9 @@
       if (minSpanX <= LauncherModel.getCellCountX() && minSpanY <= LauncherModel.getCellCountY()) {
         mWidgets.add(widget);
       }
+ else {
+        Log.e(TAG,"Widget " + widget.provider + " can not fit on this device ("+ widget.minWidth+ ", "+ widget.minHeight+ ")");
+      }
     }
  else {
       Log.e(TAG,"Widget " + widget.provider + " has invalid dimensions ("+ widget.minWidth+ ", "+ widget.minHeight+ ")");
