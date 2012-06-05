@@ -15,4 +15,5 @@
     mAppsCustomizeContent.resetDrawableState();
   }
   reinflateWidgetsIfNecessary();
+  updateGlobalIcons();
 }
