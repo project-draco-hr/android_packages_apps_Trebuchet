@@ -3,12 +3,15 @@
     LauncherAppWidgetHostView lahv=(LauncherAppWidgetHostView)info.hostView;
     if (lahv != null && lahv.orientationChangedSincedInflation()) {
       AppWidgetProviderInfo pInfo=lahv.getAppWidgetInfo();
-      CellLayout cl=getWorkspace().getParentCellLayoutForView(lahv);
-      if (cl != null)       cl.removeView(lahv);
-      AppWidgetHostView widget=mAppWidgetHost.createView(this,info.appWidgetId,pInfo);
-      widget.setTag(info);
-      info.hostView=widget;
-      getWorkspace().addInScreen(widget,info.container,info.screen,info.cellX,info.cellY,info.spanX,info.spanY);
+      Workspace workspace=getWorkspace();
+      CellLayout parent=workspace.getParentCellLayoutForView(lahv);
+      if (parent != null) {
+        parent.removeView(lahv);
+        AppWidgetHostView widget=mAppWidgetHost.createView(this,info.appWidgetId,pInfo);
+        widget.setTag(info);
+        info.hostView=widget;
+        getWorkspace().addInScreen(widget,info.container,info.screen,info.cellX,info.cellY,info.spanX,info.spanY);
+      }
     }
   }
 }
