@@ -8,6 +8,7 @@
     setVisibilityOfSiblingsWithLowerZOrder(INVISIBLE);
     l.dismissWorkspaceCling(null);
     mAppsCustomizePane.showAllAppsCling();
+    Log.d(LOG_TAG,"6549598 onLauncherTransitionEnd currentPage: " + mAppsCustomizePane.getCurrentPage());
     mAppsCustomizePane.loadAssociatedPages(mAppsCustomizePane.getCurrentPage());
     if (!LauncherApplication.isScreenLarge()) {
       mAppsCustomizePane.hideScrollingIndicator(false);
