@@ -1,5 +1,5 @@
 {
-  Log.d(TAG,"6549598 syncAppsPageItems page: " + page);
+  Log.d(TAG,"6549598 syncAppsPageItems page: " + page + " mNumAppsPages: "+ mNumAppsPages);
   int numCells=mCellCountX * mCellCountY;
   int startIndex=page * numCells;
   int endIndex=Math.min(startIndex + numCells,mApps.size());
