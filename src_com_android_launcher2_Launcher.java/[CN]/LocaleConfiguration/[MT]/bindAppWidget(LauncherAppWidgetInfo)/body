@@ -11,7 +11,6 @@
     Log.d(TAG,"bindAppWidget: id=" + item.appWidgetId + " belongs to component "+ appWidgetInfo.provider);
   }
   item.hostView=mAppWidgetHost.createView(this,appWidgetId,appWidgetInfo);
-  item.hostView.setAppWidget(appWidgetId,appWidgetInfo);
   item.hostView.setTag(item);
   item.onBindAppWidget(this);
   workspace.addInScreen(item.hostView,item.container,item.screen,item.cellX,item.cellY,item.spanX,item.spanY,false);

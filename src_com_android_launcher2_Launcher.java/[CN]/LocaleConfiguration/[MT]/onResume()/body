@@ -14,6 +14,6 @@
   if (mAppsCustomizeContent != null) {
     mAppsCustomizeContent.resetDrawableState();
   }
-  reinflateWidgetsIfNecessary();
+  getWorkspace().reinflateWidgetsIfNecessary();
   updateGlobalIcons();
 }
