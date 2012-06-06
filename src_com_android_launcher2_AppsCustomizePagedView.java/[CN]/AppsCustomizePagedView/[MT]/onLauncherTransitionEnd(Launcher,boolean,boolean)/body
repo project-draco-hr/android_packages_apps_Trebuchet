@@ -1,5 +1,5 @@
 {
-  Log.d(TAG,"6549598 onLauncherTransitionEnd");
+  Log.d(TAG,"6549598 onLauncherTransitionEnd mDeferredSyncWidgetPageItems.size(): " + mDeferredSyncWidgetPageItems.size());
   mInTransition=false;
   for (  AsyncTaskPageData d : mDeferredSyncWidgetPageItems) {
     onSyncWidgetPageItems(d);
