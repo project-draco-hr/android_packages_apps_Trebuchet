@@ -5,5 +5,9 @@
     onSyncWidgetPageItems(d);
   }
   mDeferredSyncWidgetPageItems.clear();
+  for (  Runnable r : mDeferredPrepareLoadWidgetPreviewsTasks) {
+    r.run();
+  }
+  mDeferredPrepareLoadWidgetPreviewsTasks.clear();
   mForceDrawAllChildrenNextFrame=!toWorkspace;
 }
