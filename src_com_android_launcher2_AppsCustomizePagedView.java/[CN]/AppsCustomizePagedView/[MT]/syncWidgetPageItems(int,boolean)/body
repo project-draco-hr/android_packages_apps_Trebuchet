@@ -67,7 +67,12 @@
         onSyncWidgetPageItems(data);
       }
  else {
-        prepareLoadWidgetPreviewsTask(page,items,maxPreviewWidth,maxPreviewHeight,mWidgetCountX);
+        if (mInTransition) {
+          mDeferredPrepareLoadWidgetPreviewsTasks.add(this);
+        }
+ else {
+          prepareLoadWidgetPreviewsTask(page,items,maxPreviewWidth,maxPreviewHeight,mWidgetCountX);
+        }
       }
     }
   }
