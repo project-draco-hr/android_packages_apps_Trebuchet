@@ -15,14 +15,19 @@ case LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT:
     String uri=info.intent.toUri(0).toString();
   View shortcut=createShortcut(info);
 workspace.addInScreen(shortcut,item.container,item.screen,item.cellX,item.cellY,1,1,false);
+boolean animateIconUp=false;
+synchronized (newApps) {
 if (newApps.contains(uri)) {
-newApps.remove(uri);
+animateIconUp=newApps.remove(uri);
+}
+}
+if (animateIconUp) {
 shortcut.setAlpha(0f);
 shortcut.setScaleX(0f);
 shortcut.setScaleY(0f);
 mNewShortcutAnimatePage=item.screen;
 if (!mNewShortcutAnimateViews.contains(shortcut)) {
-  mNewShortcutAnimateViews.add(shortcut);
+mNewShortcutAnimateViews.add(shortcut);
 }
 }
 break;

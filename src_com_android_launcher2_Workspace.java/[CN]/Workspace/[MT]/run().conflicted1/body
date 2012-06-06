@@ -8,15 +8,17 @@
       LauncherModel.deleteItemFromDatabase(mLauncher,info);
     }
     if (newApps != null) {
-      for (      String intentStr : newApps) {
-        try {
-          Intent intent=Intent.parseUri(intentStr,0);
-          String pn=ItemInfo.getPackageName(intent);
-          if (packageNames.contains(pn)) {
-            newApps.remove(intentStr);
+synchronized (newApps) {
+        for (        String intentStr : newApps) {
+          try {
+            Intent intent=Intent.parseUri(intentStr,0);
+            String pn=ItemInfo.getPackageName(intent);
+            if (packageNames.contains(pn)) {
+              newApps.remove(intentStr);
+            }
           }
-        }
- catch (        URISyntaxException e) {
+ catch (          URISyntaxException e) {
+          }
         }
       }
     }

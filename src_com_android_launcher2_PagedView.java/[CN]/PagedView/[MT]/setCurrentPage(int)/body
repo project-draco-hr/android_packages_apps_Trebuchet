@@ -6,6 +6,7 @@
     return;
   }
   mCurrentPage=Math.max(0,Math.min(currentPage,getPageCount() - 1));
+  if (this instanceof AppsCustomizePagedView)   Log.d(TAG,"6549598 setCurrentPage mCurrentPage: " + mCurrentPage);
   updateCurrentPageScroll();
   updateScrollingIndicator();
   notifyPageSwitchListener();
