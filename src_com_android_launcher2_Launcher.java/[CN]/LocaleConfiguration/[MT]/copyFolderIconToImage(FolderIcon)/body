@@ -19,13 +19,20 @@
   lp.customPosition=true;
   lp.x=mRectForFolderAnimation.left;
   lp.y=mRectForFolderAnimation.top;
+  lp.width=width;
+  lp.height=height;
   mFolderIconCanvas.drawColor(0,PorterDuff.Mode.CLEAR);
   fi.draw(mFolderIconCanvas);
   mFolderIconImageView.setImageBitmap(mFolderIconBitmap);
-  mFolderIconImageView.setPivotX(fi.mFolder.getPivotXForIconAnimation());
-  mFolderIconImageView.setPivotY(fi.mFolder.getPivotYForIconAnimation());
+  if (fi.mFolder != null) {
+    mFolderIconImageView.setPivotX(fi.mFolder.getPivotXForIconAnimation());
+    mFolderIconImageView.setPivotY(fi.mFolder.getPivotYForIconAnimation());
+  }
   if (mDragLayer.indexOfChild(mFolderIconImageView) != -1) {
     mDragLayer.removeView(mFolderIconImageView);
   }
   mDragLayer.addView(mFolderIconImageView,lp);
+  if (fi.mFolder != null) {
+    fi.mFolder.bringToFront();
+  }
 }
