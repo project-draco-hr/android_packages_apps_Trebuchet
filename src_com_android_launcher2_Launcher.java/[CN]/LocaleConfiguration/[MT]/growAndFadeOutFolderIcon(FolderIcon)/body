@@ -9,7 +9,9 @@
     CellLayout.LayoutParams lp=(CellLayout.LayoutParams)fi.getLayoutParams();
     cl.setFolderLeaveBehindCell(lp.cellX,lp.cellY);
   }
-  ObjectAnimator oa=ObjectAnimator.ofPropertyValuesHolder(fi,alpha,scaleX,scaleY);
+  copyFolderIconToImage(fi);
+  fi.setVisibility(View.INVISIBLE);
+  ObjectAnimator oa=ObjectAnimator.ofPropertyValuesHolder(mFolderIconImageView,alpha,scaleX,scaleY);
   oa.setDuration(getResources().getInteger(R.integer.config_folderAnimDuration));
   oa.start();
 }
