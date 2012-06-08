@@ -27,10 +27,8 @@
   int folderPivotY=height / 2 + (centeredTop - top);
   setPivotX(folderPivotX);
   setPivotY(folderPivotY);
-  int folderIconPivotX=(int)(mFolderIcon.getMeasuredWidth() * (1.0f * folderPivotX / width));
-  int folderIconPivotY=(int)(mFolderIcon.getMeasuredHeight() * (1.0f * folderPivotY / height));
-  mFolderIcon.setPivotX(folderIconPivotX);
-  mFolderIcon.setPivotY(folderIconPivotY);
+  mFolderIconPivotX=(int)(mFolderIcon.getMeasuredWidth() * (1.0f * folderPivotX / width));
+  mFolderIconPivotY=(int)(mFolderIcon.getMeasuredHeight() * (1.0f * folderPivotY / height));
   lp.width=width;
   lp.height=height;
   lp.x=left;

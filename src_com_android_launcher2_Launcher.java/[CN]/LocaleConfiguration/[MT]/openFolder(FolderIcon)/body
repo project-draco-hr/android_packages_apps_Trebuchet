@@ -1,7 +1,6 @@
 {
   Folder folder=folderIcon.mFolder;
   FolderInfo info=folder.mInfo;
-  growAndFadeOutFolderIcon(folderIcon);
   info.opened=true;
   if (folder.getParent() == null) {
     mDragLayer.addView(folder);
@@ -11,4 +10,5 @@
     Log.w(TAG,"Opening folder (" + folder + ") which already has a parent ("+ folder.getParent()+ ").");
   }
   folder.animateOpen();
+  growAndFadeOutFolderIcon(folderIcon);
 }
