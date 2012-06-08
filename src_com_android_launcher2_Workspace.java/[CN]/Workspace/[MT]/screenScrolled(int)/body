@@ -11,7 +11,7 @@
     setFadeForOverScroll(Math.abs(scrollProgress));
     if (!mOverscrollTransformsSet) {
       mOverscrollTransformsSet=true;
-      cl.setCameraDistance(mDensity * CAMERA_DISTANCE);
+      cl.setCameraDistance(mDensity * mCameraDistance);
       cl.setPivotX(cl.getMeasuredWidth() * (index == 0 ? 0.75f : 0.25f));
       cl.setPivotY(cl.getMeasuredHeight() * 0.5f);
       cl.setOverscrollTransformsDirty(true);
