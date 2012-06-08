@@ -3,6 +3,11 @@
     updateWallpaperVisibility(true);
   }
  else {
-    disableWallpaperIfInAllApps();
+    mWorkspace.postDelayed(new Runnable(){
+      @Override public void run(){
+        disableWallpaperIfInAllApps();
+      }
+    }
+,500);
   }
 }

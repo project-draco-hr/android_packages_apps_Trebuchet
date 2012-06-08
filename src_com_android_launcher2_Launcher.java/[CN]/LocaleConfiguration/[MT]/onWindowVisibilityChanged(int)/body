@@ -8,12 +8,6 @@
       observer.addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener(){
         public boolean onPreDraw(){
           mWorkspace.postDelayed(mBuildLayersRunnable,500);
-          mWorkspace.post(new Runnable(){
-            @Override public void run(){
-              disableWallpaperIfInAllApps();
-            }
-          }
-);
           observer.removeOnPreDrawListener(this);
           return true;
         }
