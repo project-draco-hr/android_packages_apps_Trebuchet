@@ -24,15 +24,15 @@
   mFolderIconCanvas.drawColor(0,PorterDuff.Mode.CLEAR);
   fi.draw(mFolderIconCanvas);
   mFolderIconImageView.setImageBitmap(mFolderIconBitmap);
-  if (fi.mFolder != null) {
-    mFolderIconImageView.setPivotX(fi.mFolder.getPivotXForIconAnimation());
-    mFolderIconImageView.setPivotY(fi.mFolder.getPivotYForIconAnimation());
+  if (fi.getFolder() != null) {
+    mFolderIconImageView.setPivotX(fi.getFolder().getPivotXForIconAnimation());
+    mFolderIconImageView.setPivotY(fi.getFolder().getPivotYForIconAnimation());
   }
   if (mDragLayer.indexOfChild(mFolderIconImageView) != -1) {
     mDragLayer.removeView(mFolderIconImageView);
   }
   mDragLayer.addView(mFolderIconImageView,lp);
-  if (fi.mFolder != null) {
-    fi.mFolder.bringToFront();
+  if (fi.getFolder() != null) {
+    fi.getFolder().bringToFront();
   }
 }
