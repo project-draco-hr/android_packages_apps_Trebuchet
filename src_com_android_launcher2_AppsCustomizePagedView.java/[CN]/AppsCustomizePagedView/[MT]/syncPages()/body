@@ -12,5 +12,4 @@
     setupPage(layout);
     addView(layout);
   }
-  Log.d(TAG,"6549598 syncPages mNumAppsPages: " + mNumAppsPages + " mNumWidgetPages: "+ mNumWidgetPages);
 }

@@ -1,6 +1,5 @@
 {
   if (!mIsDataReady) {
-    if (this instanceof AppsCustomizePagedView)     Log.d(TAG,"6549598 invalidatePageData page: " + currentPage + " not data ready");
     return;
   }
   if (mContentIsRefreshable) {
@@ -18,6 +17,5 @@
     }
     loadAssociatedPages(mCurrentPage,immediateAndOnly);
     requestLayout();
-    if (this instanceof AppsCustomizePagedView)     Log.d(TAG,"6549598 invalidatePageData page: " + currentPage);
   }
 }

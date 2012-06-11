@@ -8,7 +8,6 @@
   }
  else {
     mContent.setVisibility(VISIBLE);
-    Log.d(LOG_TAG,"6549598 onLauncherTransitionPrepare currentPage: " + mAppsCustomizePane.getCurrentPage());
     mAppsCustomizePane.loadAssociatedPages(mAppsCustomizePane.getCurrentPage(),true);
     if (!LauncherApplication.isScreenLarge()) {
       mAppsCustomizePane.showScrollingIndicator(true);
