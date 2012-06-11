@@ -1,5 +1,4 @@
 {
-  Log.d(TAG,"6557954 Preload widget: " + info.info);
   final AppWidgetProviderInfo pInfo=info.info;
   if (pInfo.configure != null) {
     return;
@@ -7,7 +6,6 @@
   mWidgetCleanupState=WIDGET_PRELOAD_PENDING;
   mBindWidgetRunnable=new Runnable(){
     @Override public void run(){
-      Log.d(TAG,"    6557954 Preload, bind widget: " + info.info);
       mWidgetLoadingId=mLauncher.getAppWidgetHost().allocateAppWidgetId();
       if (AppWidgetManager.getInstance(mLauncher).bindAppWidgetIdIfAllowed(mWidgetLoadingId,info.componentName)) {
         mWidgetCleanupState=WIDGET_BOUND;
@@ -20,7 +18,6 @@
     @Override public void run(){
       AppWidgetHostView hostView=mLauncher.getAppWidgetHost().createView(getContext(),mWidgetLoadingId,pInfo);
       info.boundWidget=hostView;
-      Log.d(TAG,"    6557954 Preload, inflate widget: " + info.info);
       mWidgetCleanupState=WIDGET_INFLATED;
       hostView.setVisibility(INVISIBLE);
       int[] unScaledSize=mLauncher.getWorkspace().estimateItemSize(info.spanX,info.spanY,info,false);
