@@ -2,12 +2,7 @@
   mDraggingWidget=true;
   ImageView image=(ImageView)v.findViewById(R.id.widget_preview);
   PendingAddItemInfo createItemInfo=(PendingAddItemInfo)v.getTag();
-  if (createItemInfo instanceof PendingAddWidgetInfo) {
-    PendingAddWidgetInfo createWidgetInfo=mCreateWidgetInfo;
-    Log.d(TAG,"6557954 Begin dragging widget, view: " + v + ", widget info: "+ createWidgetInfo.info);
-  }
   if (image.getDrawable() == null) {
-    Log.d(TAG,"    6557954 Begin dragging widget, abort, no drawable set");
     mDraggingWidget=false;
     return false;
   }
