@@ -1,5 +1,4 @@
 {
-  boolean wasEmpty=mWidgets.isEmpty();
   mWidgets.clear();
   List<AppWidgetProviderInfo> widgets=AppWidgetManager.getInstance(mLauncher).getInstalledProviders();
   Intent shortcutsIntent=new Intent(Intent.ACTION_CREATE_SHORTCUT);
@@ -23,13 +22,7 @@
   }
   mWidgets.addAll(shortcuts);
   Collections.sort(mWidgets,new LauncherModel.WidgetAndShortcutNameComparator(mPackageManager));
-  Log.d(TAG,"6549598 updatePackages mWidgets.size(): " + mWidgets.size() + " wasEmpty: "+ wasEmpty);
+  Log.d(TAG,"6549598 updatePackages mWidgets.size(): " + mWidgets.size());
   updatePageCounts();
-  if (wasEmpty) {
-    if (testDataReady())     requestLayout();
-  }
- else {
-    cancelAllTasks();
-    invalidatePageData();
-  }
+  invalidateOnDataChange();
 }

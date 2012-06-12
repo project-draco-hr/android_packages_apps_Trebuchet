@@ -1,5 +1,5 @@
 {
-  if (!mHasShownAllAppsCling && isDataReady() && testDataReady()) {
+  if (!mHasShownAllAppsCling && isDataReady()) {
     mHasShownAllAppsCling=true;
     int[] offset=new int[2];
     int[] pos=mWidgetSpacingLayout.estimateCellPosition(mClingFocusedX,mClingFocusedY);

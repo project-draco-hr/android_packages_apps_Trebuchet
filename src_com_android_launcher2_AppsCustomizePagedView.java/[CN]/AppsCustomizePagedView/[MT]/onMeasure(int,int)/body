@@ -2,7 +2,7 @@
   int width=MeasureSpec.getSize(widthMeasureSpec);
   int height=MeasureSpec.getSize(heightMeasureSpec);
   if (!isDataReady()) {
-    if (testDataReady()) {
+    if (!mApps.isEmpty() && !mWidgets.isEmpty()) {
       setDataIsReady();
       setMeasuredDimension(width,height);
       onDataReady(width,height);

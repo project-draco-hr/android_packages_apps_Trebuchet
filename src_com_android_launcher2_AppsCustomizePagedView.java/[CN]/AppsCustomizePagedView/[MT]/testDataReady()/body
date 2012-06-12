@@ -1,3 +1,0 @@
-{
-  return !mApps.isEmpty() && !mWidgets.isEmpty();
-}
