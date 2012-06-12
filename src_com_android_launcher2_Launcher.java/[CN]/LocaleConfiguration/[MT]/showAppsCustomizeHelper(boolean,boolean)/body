@@ -79,7 +79,7 @@
         setPivotsForZoom(toView,scale);
         dispatchOnLauncherTransitionStart(fromView,animated,false);
         dispatchOnLauncherTransitionStart(toView,animated,false);
-        mWorkspace.post(new Runnable(){
+        toView.post(new Runnable(){
           public void run(){
             if (mStateAnimation != stateAnimation)             return;
             mStateAnimation.start();
@@ -92,7 +92,7 @@
     if (delayAnim) {
       final OnGlobalLayoutListener delayedStart=new OnGlobalLayoutListener(){
         public void onGlobalLayout(){
-          mWorkspace.post(startAnimRunnable);
+          toView.post(startAnimRunnable);
           observer.removeOnGlobalLayoutListener(this);
         }
       }
