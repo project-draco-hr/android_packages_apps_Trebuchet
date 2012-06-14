@@ -3,7 +3,6 @@
   mDirtyPageContent.ensureCapacity(32);
   mScroller=new Scroller(getContext(),new ScrollInterpolator());
   mCurrentPage=0;
-  if (this instanceof AppsCustomizePagedView)   Log.d(TAG,"6549598 init() mCurrentPage: " + mCurrentPage);
   mCenterPagesVertically=true;
   final ViewConfiguration configuration=ViewConfiguration.get(getContext());
   mTouchSlop=configuration.getScaledTouchSlop();

@@ -25,7 +25,6 @@
   mSavedState=savedInstanceState;
   restoreState(mSavedState);
   if (mAppsCustomizeContent != null) {
-    Log.d(TAG,"6549598 Launcher.onCreate()");
     mAppsCustomizeContent.onPackagesUpdated();
   }
   if (PROFILE_STARTUP) {
