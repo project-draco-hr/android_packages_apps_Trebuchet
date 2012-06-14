@@ -1,7 +1,6 @@
 {
   mApps=list;
   Collections.sort(mApps,LauncherModel.APP_NAME_COMPARATOR);
-  Log.d(TAG,"6549598 setApps mApps.size(): " + mApps.size());
   updatePageCounts();
   invalidateOnDataChange();
 }

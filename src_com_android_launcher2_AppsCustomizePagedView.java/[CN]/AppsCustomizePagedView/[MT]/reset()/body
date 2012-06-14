@@ -1,5 +1,4 @@
 {
-  Log.d(TAG,"6549598 reset");
   mSaveInstanceStateItemIndex=-1;
   AppsCustomizeTabHost tabHost=getTabHost();
   String tag=tabHost.getCurrentTabTag();

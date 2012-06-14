@@ -1,5 +1,4 @@
 {
-  Log.d(TAG,"6549598 syncPageItems page: " + page + " immediate: "+ immediate);
   if (page < mNumAppsPages) {
     syncAppsPageItems(page,immediate);
   }
