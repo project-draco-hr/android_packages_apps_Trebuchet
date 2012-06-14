@@ -3,4 +3,4 @@ Canvas canvas
 int padding
 int w
 int h
-Paint alphaClipPaint
+boolean clipAlpha

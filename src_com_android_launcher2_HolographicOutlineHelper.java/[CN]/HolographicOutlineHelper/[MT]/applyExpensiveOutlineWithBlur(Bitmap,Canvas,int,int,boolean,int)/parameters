@@ -2,4 +2,5 @@ Bitmap srcDst
 Canvas srcDstCanvas
 int color
 int outlineColor
-Paint alphaClipPaint
+boolean clipAlpha
+int thickness

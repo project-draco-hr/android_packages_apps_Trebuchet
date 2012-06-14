@@ -1,8 +1,16 @@
 {
-  if (alphaClipPaint == null) {
-    alphaClipPaint=mAlphaClipPaint;
+  if (clipAlpha) {
+    int[] srcBuffer=new int[srcDst.getWidth() * srcDst.getHeight()];
+    srcDst.getPixels(srcBuffer,0,srcDst.getWidth(),0,0,srcDst.getWidth(),srcDst.getHeight());
+    for (int i=0; i < srcBuffer.length; i++) {
+      final int alpha=srcBuffer[i] >>> 24;
+      if (alpha < 188) {
+        srcBuffer[i]=0;
+      }
+    }
+    srcDst.setPixels(srcBuffer,0,srcDst.getWidth(),0,0,srcDst.getWidth(),srcDst.getHeight());
   }
-  Bitmap glowShape=srcDst.extractAlpha(alphaClipPaint,mTempOffset);
+  Bitmap glowShape=srcDst.extractAlpha();
   BlurMaskFilter outerBlurMaskFilter;
 switch (thickness) {
 case EXTRA_THICK:

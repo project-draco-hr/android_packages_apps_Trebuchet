@@ -41,18 +41,10 @@
     mCanvas.setBitmap(null);
     createItemInfo.spanX=createItemInfo.spanY=1;
   }
-  Paint alphaClipPaint=null;
-  if (createItemInfo instanceof PendingAddWidgetInfo) {
-    if (((PendingAddWidgetInfo)createItemInfo).previewImage != 0) {
-      MaskFilter alphaClipTable=TableMaskFilter.CreateClipTable(0,255);
-      alphaClipPaint=new Paint();
-      alphaClipPaint.setMaskFilter(alphaClipTable);
-    }
-  }
+  boolean clipAlpha=!(createItemInfo instanceof PendingAddWidgetInfo && (((PendingAddWidgetInfo)createItemInfo).previewImage == 0));
   outline=Bitmap.createScaledBitmap(preview,preview.getWidth(),preview.getHeight(),false);
-  alphaClipPaint=null;
   mLauncher.lockScreenOrientation();
-  mLauncher.getWorkspace().onDragStartedWithItem(createItemInfo,outline,alphaClipPaint);
+  mLauncher.getWorkspace().onDragStartedWithItem(createItemInfo,outline,clipAlpha);
   mDragController.startDrag(image,preview,this,createItemInfo,DragController.DRAG_ACTION_COPY,null,scale);
   outline.recycle();
   preview.recycle();

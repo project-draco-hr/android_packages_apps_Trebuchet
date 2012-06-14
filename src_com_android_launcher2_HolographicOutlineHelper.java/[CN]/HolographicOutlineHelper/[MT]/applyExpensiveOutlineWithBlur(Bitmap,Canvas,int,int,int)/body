@@ -1,3 +1,3 @@
 {
-  applyExpensiveOutlineWithBlur(srcDst,srcDstCanvas,color,outlineColor,mAlphaClipPaint,thickness);
+  applyExpensiveOutlineWithBlur(srcDst,srcDstCanvas,color,outlineColor,true,thickness);
 }
