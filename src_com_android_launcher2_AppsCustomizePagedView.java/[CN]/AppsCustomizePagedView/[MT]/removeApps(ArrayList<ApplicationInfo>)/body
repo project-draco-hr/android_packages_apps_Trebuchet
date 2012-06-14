@@ -1,7 +1,5 @@
 {
   removeAppsWithoutInvalidate(list);
-  Log.d(TAG,"6549598 removeApps mApps.size(): " + mApps.size() + " list.size(): "+ list.size());
   updatePageCounts();
   invalidateOnDataChange();
-  Log.d(TAG,"6549598 removeApps mNumAppsPages: " + mNumAppsPages);
 }

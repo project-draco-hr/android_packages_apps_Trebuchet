@@ -1,5 +1,4 @@
 {
-  Log.d(TAG,"6549598 updateCurrentTab mNumAppsPages: " + mNumAppsPages);
   AppsCustomizeTabHost tabHost=getTabHost();
   if (tabHost != null) {
     String tag=tabHost.getCurrentTabTag();

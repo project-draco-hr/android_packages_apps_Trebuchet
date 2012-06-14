@@ -25,5 +25,4 @@
   if (getImportantForAccessibility() == View.IMPORTANT_FOR_ACCESSIBILITY_AUTO) {
     setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_YES);
   }
-  Log.d(TAG,"6549598 ctor mNumWidgetPages: " + mNumWidgetPages + " mNumAppsPages: "+ mNumAppsPages);
 }
