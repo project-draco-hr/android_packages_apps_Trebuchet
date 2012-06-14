@@ -1,0 +1,5 @@
+{
+  Drawable animateDrawable=((TextView)finalView).getCompoundDrawables()[1];
+  computePreviewDrawingParams(animateDrawable.getIntrinsicWidth(),finalView.getMeasuredWidth());
+  animateFirstItem(animateDrawable,FINAL_ITEM_ANIMATION_DURATION,true,onCompleteRunnable);
+}

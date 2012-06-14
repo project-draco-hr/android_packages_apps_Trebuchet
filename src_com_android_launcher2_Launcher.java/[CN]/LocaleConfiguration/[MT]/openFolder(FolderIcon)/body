@@ -1,5 +1,5 @@
 {
-  Folder folder=folderIcon.mFolder;
+  Folder folder=folderIcon.getFolder();
   FolderInfo info=folder.mInfo;
   info.opened=true;
   if (folder.getParent() == null) {

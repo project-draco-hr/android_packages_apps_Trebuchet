@@ -1,0 +1,4 @@
+Drawable d
+int duration
+boolean reverse
+Runnable onCompleteRunnable

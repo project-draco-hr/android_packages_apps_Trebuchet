@@ -27,9 +27,12 @@
     float finalAlpha=index < NUM_ITEMS_IN_PREVIEW ? 0.5f : 0f;
     float finalScale=scale * scaleRelativeToDragLayer;
     dragLayer.animateView(animateView,from,to,finalAlpha,1,1,finalScale,finalScale,DROP_IN_ANIMATION_DURATION,new DecelerateInterpolator(2),new AccelerateInterpolator(2),postAnimationRunnable,DragLayer.ANIMATION_END_DISAPPEAR,null);
+    addItem(item);
+    mHiddenItems.add(item);
     postDelayed(new Runnable(){
       public void run(){
-        addItem(item);
+        mHiddenItems.remove(item);
+        invalidate();
       }
     }
 ,DROP_IN_ANIMATION_DURATION);
