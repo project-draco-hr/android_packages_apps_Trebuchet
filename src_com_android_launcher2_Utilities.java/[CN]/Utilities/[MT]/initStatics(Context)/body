@@ -6,9 +6,7 @@
   sIconTextureWidth=sIconTextureHeight=sIconWidth;
   sBlurPaint.setMaskFilter(new BlurMaskFilter(5 * density,BlurMaskFilter.Blur.NORMAL));
   sGlowColorPressedPaint.setColor(0xffffc300);
-  sGlowColorPressedPaint.setMaskFilter(TableMaskFilter.CreateClipTable(0,30));
   sGlowColorFocusedPaint.setColor(0xffff8e00);
-  sGlowColorFocusedPaint.setMaskFilter(TableMaskFilter.CreateClipTable(0,30));
   ColorMatrix cm=new ColorMatrix();
   cm.setSaturation(0.2f);
   sDisabledPaint.setColorFilter(new ColorMatrixColorFilter(cm));
