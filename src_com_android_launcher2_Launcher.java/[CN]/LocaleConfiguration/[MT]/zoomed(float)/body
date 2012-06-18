@@ -1,5 +1,0 @@
-{
-  if (zoom == 1.0f) {
-    mWorkspace.setVisibility(View.GONE);
-  }
-}

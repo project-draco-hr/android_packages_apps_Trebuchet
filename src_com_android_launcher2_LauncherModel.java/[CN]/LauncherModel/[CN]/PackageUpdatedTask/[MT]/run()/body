@@ -24,22 +24,18 @@ mAllAppsList.removePackage(packages[i]);
 break;
 }
 ArrayList<ApplicationInfo> added=null;
-ArrayList<ApplicationInfo> removed=null;
 ArrayList<ApplicationInfo> modified=null;
 if (mAllAppsList.added.size() > 0) {
 added=mAllAppsList.added;
 mAllAppsList.added=new ArrayList<ApplicationInfo>();
 }
-if (mAllAppsList.removed.size() > 0) {
-removed=mAllAppsList.removed;
-mAllAppsList.removed=new ArrayList<ApplicationInfo>();
-for (ApplicationInfo info : removed) {
-mIconCache.remove(info.intent.getComponent());
-}
-}
 if (mAllAppsList.modified.size() > 0) {
 modified=mAllAppsList.modified;
 mAllAppsList.modified=new ArrayList<ApplicationInfo>();
+}
+final ArrayList<String> removedPackageNames=new ArrayList<String>();
+for (int i=0; i < N; ++i) {
+removedPackageNames.add(packages[i]);
 }
 final Callbacks callbacks=mCallbacks != null ? mCallbacks.get() : null;
 if (callbacks == null) {
@@ -70,14 +66,13 @@ callbacks.bindAppsUpdated(modifiedFinal);
 }
 );
 }
-if (removed != null) {
+if (!removedPackageNames.isEmpty()) {
 final boolean permanent=mOp != OP_UNAVAILABLE;
-final ArrayList<ApplicationInfo> removedFinal=removed;
 mHandler.post(new Runnable(){
 public void run(){
 Callbacks cb=mCallbacks != null ? mCallbacks.get() : null;
 if (callbacks == cb && cb != null) {
-callbacks.bindAppsRemoved(removedFinal,permanent);
+callbacks.bindAppsRemoved(removedPackageNames,permanent);
 }
 }
 }

@@ -1,5 +1,0 @@
-{
-  removeAppsWithoutInvalidate(list);
-  updatePageCounts();
-  invalidateOnDataChange();
-}

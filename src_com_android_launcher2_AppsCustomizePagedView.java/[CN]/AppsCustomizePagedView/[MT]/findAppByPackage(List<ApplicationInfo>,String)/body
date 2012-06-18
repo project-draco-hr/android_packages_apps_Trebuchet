@@ -1,0 +1,10 @@
+{
+  int length=list.size();
+  for (int i=0; i < length; ++i) {
+    ApplicationInfo info=list.get(i);
+    if (ItemInfo.getPackageName(info.intent).equals(packageName)) {
+      return i;
+    }
+  }
+  return -1;
+}

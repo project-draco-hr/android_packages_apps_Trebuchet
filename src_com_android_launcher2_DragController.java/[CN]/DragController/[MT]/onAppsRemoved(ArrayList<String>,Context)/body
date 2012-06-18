@@ -3,9 +3,9 @@
     Object rawDragInfo=mDragObject.dragInfo;
     if (rawDragInfo instanceof ShortcutInfo) {
       ShortcutInfo dragInfo=(ShortcutInfo)rawDragInfo;
-      for (      ApplicationInfo info : apps) {
-        if (dragInfo != null && dragInfo.intent != null && info.intent != null) {
-          boolean isSamePackage=dragInfo.getPackageName().equals(info.getPackageName());
+      for (      String pn : packageNames) {
+        if (dragInfo != null && dragInfo.intent != null) {
+          boolean isSamePackage=dragInfo.getPackageName().equals(pn);
           if (isSamePackage) {
             cancelDrag();
             return;
