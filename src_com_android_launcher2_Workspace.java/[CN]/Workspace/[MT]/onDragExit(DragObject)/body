@@ -1,7 +1,12 @@
 {
   mDragEnforcer.onDragExit();
   if (mInScrollArea) {
-    mDropToLayout=mDragOverlappingLayout;
+    if (isPageMoving()) {
+      mDropToLayout=(CellLayout)getPageAt(getNextPage());
+    }
+ else {
+      mDropToLayout=mDragOverlappingLayout;
+    }
   }
  else {
     mDropToLayout=mDragTargetLayout;
