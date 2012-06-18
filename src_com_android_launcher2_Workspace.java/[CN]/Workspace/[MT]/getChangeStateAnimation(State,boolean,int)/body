@@ -3,7 +3,7 @@
     return null;
   }
   initAnimationArrays();
-  AnimatorSet anim=animated ? new AnimatorSet() : null;
+  AnimatorSet anim=animated ? LauncherAnimUtils.createAnimatorSet() : null;
   setCurrentPage(getNextPage());
   final State oldState=mState;
   final boolean oldStateIsNormal=(oldState == State.NORMAL);
@@ -97,7 +97,7 @@
           anim.play(alphaAnim);
         }
         if (mOldBackgroundAlphas[i] != 0 || mNewBackgroundAlphas[i] != 0) {
-          ValueAnimator bgAnim=ValueAnimator.ofFloat(0f,1f).setDuration(duration);
+          ValueAnimator bgAnim=LauncherAnimUtils.ofFloat(0f,1f).setDuration(duration);
           bgAnim.setInterpolator(mZoomInInterpolator);
           bgAnim.addUpdateListener(new LauncherAnimatorUpdateListener(){
             public void onAnimationUpdate(            float a,            float b){

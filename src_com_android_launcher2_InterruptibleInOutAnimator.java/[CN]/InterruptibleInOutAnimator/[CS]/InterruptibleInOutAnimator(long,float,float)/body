@@ -1,5 +1,5 @@
 {
-  mAnimator=ValueAnimator.ofFloat(fromValue,toValue).setDuration(duration);
+  mAnimator=LauncherAnimUtils.ofFloat(fromValue,toValue).setDuration(duration);
   mOriginalDuration=duration;
   mOriginalFromValue=fromValue;
   mOriginalToValue=toValue;

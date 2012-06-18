@@ -2,7 +2,7 @@
   if (mAcceptAnimator != null) {
     mAcceptAnimator.cancel();
   }
-  mNeutralAnimator=ValueAnimator.ofFloat(0f,1f);
+  mNeutralAnimator=LauncherAnimUtils.ofFloat(0f,1f);
   mNeutralAnimator.setDuration(CONSUMPTION_ANIMATION_DURATION);
   final int previewSize=sPreviewSize;
   mNeutralAnimator.addUpdateListener(new AnimatorUpdateListener(){

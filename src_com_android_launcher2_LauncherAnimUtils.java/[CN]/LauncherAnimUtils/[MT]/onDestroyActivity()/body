@@ -1,0 +1,7 @@
+{
+  for (  Animator a : sAnimators) {
+    if (a.isRunning()) {
+      a.cancel();
+    }
+  }
+}

@@ -29,7 +29,7 @@
       }
     }
 );
-    mStateAnimation=new AnimatorSet();
+    mStateAnimation=LauncherAnimUtils.createAnimatorSet();
     mStateAnimation.play(scaleAnim).after(startDelay);
     mStateAnimation.play(alphaAnim).after(startDelay);
     mStateAnimation.addListener(new AnimatorListenerAdapter(){

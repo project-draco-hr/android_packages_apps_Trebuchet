@@ -1,6 +1,6 @@
 {
   if (cling != null) {
-    ObjectAnimator anim=ObjectAnimator.ofFloat(cling,"alpha",0f);
+    ObjectAnimator anim=LauncherAnimUtils.ofFloat(cling,"alpha",0f);
     anim.setDuration(duration);
     anim.addListener(new AnimatorListenerAdapter(){
       public void onAnimationEnd(      Animator animation){

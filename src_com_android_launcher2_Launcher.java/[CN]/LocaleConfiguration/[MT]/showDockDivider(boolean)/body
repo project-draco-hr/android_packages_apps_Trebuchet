@@ -9,8 +9,8 @@
       mDividerAnimator=null;
     }
     if (animated) {
-      mDividerAnimator=new AnimatorSet();
-      mDividerAnimator.playTogether(ObjectAnimator.ofFloat(mQsbDivider,"alpha",1f),ObjectAnimator.ofFloat(mDockDivider,"alpha",1f));
+      mDividerAnimator=LauncherAnimUtils.createAnimatorSet();
+      mDividerAnimator.playTogether(LauncherAnimUtils.ofFloat(mQsbDivider,"alpha",1f),LauncherAnimUtils.ofFloat(mDockDivider,"alpha",1f));
       mDividerAnimator.setDuration(mSearchDropTargetBar.getTransitionInDuration());
       mDividerAnimator.start();
     }

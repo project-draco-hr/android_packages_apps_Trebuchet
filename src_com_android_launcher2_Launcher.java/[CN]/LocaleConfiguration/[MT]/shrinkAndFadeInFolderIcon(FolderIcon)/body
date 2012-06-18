@@ -6,7 +6,7 @@
   final CellLayout cl=(CellLayout)fi.getParent().getParent();
   mDragLayer.removeView(mFolderIconImageView);
   copyFolderIconToImage(fi);
-  ObjectAnimator oa=ObjectAnimator.ofPropertyValuesHolder(mFolderIconImageView,alpha,scaleX,scaleY);
+  ObjectAnimator oa=LauncherAnimUtils.ofPropertyValuesHolder(mFolderIconImageView,alpha,scaleX,scaleY);
   oa.setDuration(getResources().getInteger(R.integer.config_folderAnimDuration));
   oa.addListener(new AnimatorListenerAdapter(){
     @Override public void onAnimationEnd(    Animator animation){

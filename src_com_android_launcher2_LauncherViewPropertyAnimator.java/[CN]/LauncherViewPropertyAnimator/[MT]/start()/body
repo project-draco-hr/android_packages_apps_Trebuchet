@@ -29,4 +29,5 @@
   }
   mViewPropertyAnimator.setListener(this);
   mViewPropertyAnimator.start();
+  LauncherAnimUtils.cancelOnDestroyActivity(this);
 }

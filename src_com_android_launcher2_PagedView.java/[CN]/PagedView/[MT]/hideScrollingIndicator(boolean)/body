@@ -10,7 +10,7 @@
       mScrollIndicator.setAlpha(0f);
     }
  else {
-      mScrollIndicatorAnimator=ObjectAnimator.ofFloat(mScrollIndicator,"alpha",0f);
+      mScrollIndicatorAnimator=LauncherAnimUtils.ofFloat(mScrollIndicator,"alpha",0f);
       mScrollIndicatorAnimator.setDuration(sScrollIndicatorFadeOutDuration);
       mScrollIndicatorAnimator.addListener(new AnimatorListenerAdapter(){
         private boolean cancelled=false;

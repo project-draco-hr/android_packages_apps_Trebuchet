@@ -36,8 +36,8 @@ catch (SecurityException e) {
 }
 ,LAUNCH_ZOOM_TIME);
 endscale=0;
-AnimatorSet s=new AnimatorSet();
-s.playTogether(ObjectAnimator.ofFloat(this,"scaleX",15f),ObjectAnimator.ofFloat(this,"scaleY",15f),ObjectAnimator.ofFloat(this,"alpha",0f));
+AnimatorSet s=LauncherAnimUtils.createAnimatorSet();
+s.playTogether(LauncherAnimUtils.ofFloat(this,"scaleX",15f),LauncherAnimUtils.ofFloat(this,"scaleY",15f),LauncherAnimUtils.ofFloat(this,"alpha",0f));
 s.setDuration((int)(LAUNCH_ZOOM_TIME * 1.25));
 s.setInterpolator(new android.view.animation.AccelerateInterpolator(3));
 s.start();

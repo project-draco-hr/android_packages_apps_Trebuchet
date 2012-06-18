@@ -33,7 +33,7 @@
       }
     }
 );
-    mStateAnimation=new AnimatorSet();
+    mStateAnimation=LauncherAnimUtils.createAnimatorSet();
     dispatchOnLauncherTransitionPrepare(fromView,animated,true);
     dispatchOnLauncherTransitionPrepare(toView,animated,true);
     mStateAnimation.addListener(new AnimatorListenerAdapter(){

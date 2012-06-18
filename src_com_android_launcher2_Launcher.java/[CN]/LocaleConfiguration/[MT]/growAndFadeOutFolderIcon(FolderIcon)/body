@@ -11,7 +11,7 @@
   }
   copyFolderIconToImage(fi);
   fi.setVisibility(View.INVISIBLE);
-  ObjectAnimator oa=ObjectAnimator.ofPropertyValuesHolder(mFolderIconImageView,alpha,scaleX,scaleY);
+  ObjectAnimator oa=LauncherAnimUtils.ofPropertyValuesHolder(mFolderIconImageView,alpha,scaleX,scaleY);
   oa.setDuration(getResources().getInteger(R.integer.config_folderAnimDuration));
   oa.start();
 }

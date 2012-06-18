@@ -1,0 +1,6 @@
+{
+  ValueAnimator anim=new ValueAnimator();
+  anim.setFloatValues(values);
+  cancelOnDestroyActivity(anim);
+  return anim;
+}

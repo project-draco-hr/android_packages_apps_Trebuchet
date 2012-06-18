@@ -23,5 +23,5 @@
   mWorkspace.removeAllViews();
   mWorkspace=null;
   mDragController=null;
-  ValueAnimator.clearAllAnimations();
+  LauncherAnimUtils.onDestroyActivity();
 }

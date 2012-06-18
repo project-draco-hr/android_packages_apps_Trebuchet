@@ -36,7 +36,7 @@
       lp.isLockedToGrid=true;
       return true;
     }
-    ValueAnimator va=ValueAnimator.ofFloat(0f,1f);
+    ValueAnimator va=LauncherAnimUtils.ofFloat(0f,1f);
     va.setDuration(duration);
     mReorderAnimators.put(lp,va);
     va.addUpdateListener(new AnimatorUpdateListener(){
