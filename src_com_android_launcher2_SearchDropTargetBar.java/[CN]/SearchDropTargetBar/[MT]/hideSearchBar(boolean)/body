@@ -10,7 +10,7 @@
       mQSBSearchBar.setTranslationY(-mBarHeight);
     }
  else {
-      mDropTargetBar.setAlpha(0f);
+      mQSBSearchBar.setAlpha(0f);
     }
   }
   mIsSearchBarHidden=true;
