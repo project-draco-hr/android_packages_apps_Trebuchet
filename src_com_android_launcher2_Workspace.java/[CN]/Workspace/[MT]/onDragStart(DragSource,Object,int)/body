@@ -1,6 +1,6 @@
 {
   mIsDragOccuring=true;
-  updateChildrenLayersEnabled();
+  updateChildrenLayersEnabled(false);
   mLauncher.lockScreenOrientation();
   setChildrenBackgroundAlphaMultipliers(1f);
   InstallShortcutReceiver.enableInstallQueue();

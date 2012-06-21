@@ -1,7 +1,7 @@
 {
   super.onPageBeginMoving();
   if (isHardwareAccelerated()) {
-    updateChildrenLayersEnabled();
+    updateChildrenLayersEnabled(false);
   }
  else {
     if (mNextPage != INVALID_PAGE) {
