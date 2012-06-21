@@ -24,7 +24,7 @@
     if (oldStateIsNormal && stateIsSmall) {
       zoomIn=false;
       setLayoutScale(finalScaleFactor);
-      updateChildrenLayersEnabled();
+      updateChildrenLayersEnabled(false);
     }
  else {
       finalBackgroundAlpha=1.0f;

@@ -1,7 +1,7 @@
 {
   super.onPageEndMoving();
   if (isHardwareAccelerated()) {
-    updateChildrenLayersEnabled();
+    updateChildrenLayersEnabled(false);
   }
  else {
     clearChildrenCache();
