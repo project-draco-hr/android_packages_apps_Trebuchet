@@ -18,8 +18,5 @@
       }
     }
   }
- else   if (mDrawIdentifier.equals(WORKSPACE_CUSTOM)) {
-    return false;
-  }
   return true;
 }
