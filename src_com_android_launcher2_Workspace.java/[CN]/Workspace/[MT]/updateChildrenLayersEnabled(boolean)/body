@@ -3,9 +3,14 @@
   boolean enableChildrenLayers=force || small || mAnimatingViewIntoPlace|| isPageMoving();
   if (enableChildrenLayers != mChildrenLayersEnabled) {
     mChildrenLayersEnabled=enableChildrenLayers;
-    for (int i=0; i < getPageCount(); i++) {
-      CellLayout cl=(CellLayout)getChildAt(i);
-      cl.getShortcutsAndWidgets().setLayerType(mChildrenLayersEnabled ? LAYER_TYPE_HARDWARE : LAYER_TYPE_NONE,null);
+    if (mChildrenLayersEnabled) {
+      enableHwLayersOnVisiblePages();
+    }
+ else {
+      for (int i=0; i < getPageCount(); i++) {
+        final CellLayout cl=(CellLayout)getChildAt(i);
+        cl.disableHardwareLayers();
+      }
     }
   }
 }

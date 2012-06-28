@@ -1,0 +1,28 @@
+{
+  if (mChildrenLayersEnabled) {
+    final int screenCount=getChildCount();
+    getVisiblePages(mTempVisiblePagesRange);
+    int leftScreen=mTempVisiblePagesRange[0];
+    int rightScreen=mTempVisiblePagesRange[1];
+    if (leftScreen == rightScreen) {
+      if (rightScreen < screenCount - 1) {
+        rightScreen++;
+      }
+ else       if (leftScreen > 0) {
+        leftScreen--;
+      }
+    }
+    for (int i=0; i < screenCount; i++) {
+      final CellLayout layout=(CellLayout)getChildAt(i);
+      if (!(leftScreen <= i && i <= rightScreen && shouldDrawChild(layout))) {
+        layout.disableHardwareLayers();
+      }
+    }
+    for (int i=0; i < screenCount; i++) {
+      final CellLayout layout=(CellLayout)getChildAt(i);
+      if (leftScreen <= i && i <= rightScreen && shouldDrawChild(layout)) {
+        layout.enableHardwareLayers();
+      }
+    }
+  }
+}

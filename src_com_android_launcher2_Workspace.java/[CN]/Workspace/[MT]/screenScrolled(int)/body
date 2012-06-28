@@ -1,6 +1,7 @@
 {
   super.screenScrolled(screenCenter);
   updatePageAlphaValues(screenCenter);
+  enableHwLayersOnVisiblePages();
   if (mOverScrollX < 0 || mOverScrollX > mMaxScrollX) {
     int index=mOverScrollX < 0 ? 0 : getChildCount() - 1;
     CellLayout cl=(CellLayout)getChildAt(index);
