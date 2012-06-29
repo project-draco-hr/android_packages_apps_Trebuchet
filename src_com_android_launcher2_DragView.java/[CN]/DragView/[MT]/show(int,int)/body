@@ -1,6 +1,5 @@
 {
   mDragLayer.addView(this);
-  setLayerType(View.LAYER_TYPE_HARDWARE,null);
   DragLayer.LayoutParams lp=new DragLayer.LayoutParams(0,0);
   lp.width=mBitmap.getWidth();
   lp.height=mBitmap.getHeight();
@@ -8,5 +7,10 @@
   setLayoutParams(lp);
   setTranslationX(touchX - mRegistrationX);
   setTranslationY(touchY - mRegistrationY);
-  mAnim.start();
+  post(new Runnable(){
+    public void run(){
+      mAnim.start();
+    }
+  }
+);
 }
