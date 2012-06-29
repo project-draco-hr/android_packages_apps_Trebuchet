@@ -1,3 +1,4 @@
 {
   sAnimators.add(a);
+  a.addListener(sEndAnimListener);
 }
