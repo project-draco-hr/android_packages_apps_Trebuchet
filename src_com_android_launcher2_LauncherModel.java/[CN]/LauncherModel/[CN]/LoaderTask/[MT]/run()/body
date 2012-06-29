@@ -37,10 +37,10 @@ synchronized (mLock) {
     }
   }
   if (DEBUG_LOADERS)   Log.d(TAG,"Comparing loaded icons to database icons");
-  for (  Object key : sDbIconCache.keySet()) {
-    updateSavedIcon(mContext,(ShortcutInfo)key,sDbIconCache.get(key));
+  for (  Object key : sBgDbIconCache.keySet()) {
+    updateSavedIcon(mContext,(ShortcutInfo)key,sBgDbIconCache.get(key));
   }
-  sDbIconCache.clear();
+  sBgDbIconCache.clear();
   mContext=null;
 synchronized (mLock) {
     if (mLoaderTask == this) {

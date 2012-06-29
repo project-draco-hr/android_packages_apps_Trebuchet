@@ -1,6 +1,6 @@
 {
-  final ArrayList<ItemInfo> workspaceItems=new ArrayList<ItemInfo>(sWorkspaceItems);
-  final ArrayList<ItemInfo> appWidgets=new ArrayList<ItemInfo>(sAppWidgets);
+  final ArrayList<ItemInfo> workspaceItems=new ArrayList<ItemInfo>(sBgWorkspaceItems);
+  final ArrayList<ItemInfo> appWidgets=new ArrayList<ItemInfo>(sBgAppWidgets);
   mHandler.post(new Runnable(){
     @Override public void run(){
       for (      ItemInfo item : workspaceItems) {

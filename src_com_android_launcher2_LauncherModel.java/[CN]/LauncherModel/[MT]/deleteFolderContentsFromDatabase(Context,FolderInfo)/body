@@ -3,14 +3,14 @@
   Runnable r=new Runnable(){
     public void run(){
       cr.delete(LauncherSettings.Favorites.getContentUri(info.id,false),null,null);
-      sItemsIdMap.remove(info.id);
-      sFolders.remove(info.id);
-      sDbIconCache.remove(info);
-      sWorkspaceItems.remove(info);
+      sBgItemsIdMap.remove(info.id);
+      sBgFolders.remove(info.id);
+      sBgDbIconCache.remove(info);
+      sBgWorkspaceItems.remove(info);
       cr.delete(LauncherSettings.Favorites.CONTENT_URI_NO_NOTIFICATION,LauncherSettings.Favorites.CONTAINER + "=" + info.id,null);
       for (      ItemInfo childInfo : info.contents) {
-        sItemsIdMap.remove(childInfo.id);
-        sDbIconCache.remove(childInfo);
+        sBgItemsIdMap.remove(childInfo.id);
+        sBgDbIconCache.remove(childInfo);
       }
     }
   }

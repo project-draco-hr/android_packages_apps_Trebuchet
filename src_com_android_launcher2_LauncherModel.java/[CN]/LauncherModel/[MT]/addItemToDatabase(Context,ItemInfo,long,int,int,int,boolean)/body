@@ -15,24 +15,37 @@
   item.id=app.getLauncherProvider().generateNewId();
   values.put(LauncherSettings.Favorites._ID,item.id);
   item.updateValuesWithCoordinates(values,item.cellX,item.cellY);
+  final StackTraceElement[] stackTrace=new Throwable().getStackTrace();
   Runnable r=new Runnable(){
     public void run(){
+      String transaction="DbDebug    Add item (" + item.title + ") to db, id: "+ item.id+ " ("+ container+ ", "+ screen+ ", "+ cellX+ ", "+ cellY+ ")";
+      Launcher.sDumpLogs.add(transaction);
+      Log.d(TAG,transaction);
       cr.insert(notify ? LauncherSettings.Favorites.CONTENT_URI : LauncherSettings.Favorites.CONTENT_URI_NO_NOTIFICATION,values);
-      if (sItemsIdMap.containsKey(item.id)) {
+      if (sBgItemsIdMap.containsKey(item.id)) {
         throw new RuntimeException("Error: ItemInfo id (" + item.id + ") passed to "+ "addItemToDatabase already exists."+ item.toString());
       }
-      sItemsIdMap.put(item.id,item);
+      sBgItemsIdMap.put(item.id,item);
 switch (item.itemType) {
 case LauncherSettings.Favorites.ITEM_TYPE_FOLDER:
-        sFolders.put(item.id,(FolderInfo)item);
+        sBgFolders.put(item.id,(FolderInfo)item);
 case LauncherSettings.Favorites.ITEM_TYPE_APPLICATION:
 case LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT:
       if (item.container == LauncherSettings.Favorites.CONTAINER_DESKTOP || item.container == LauncherSettings.Favorites.CONTAINER_HOTSEAT) {
-        sWorkspaceItems.add(item);
+        sBgWorkspaceItems.add(item);
+      }
+ else {
+        if (!sBgFolders.containsKey(item.container)) {
+          String msg="adding item: " + item + " to a folder that "+ " doesn't exist";
+          RuntimeException e=new RuntimeException(msg);
+          e.setStackTrace(stackTrace);
+          Launcher.dumpDebugLogsToConsole();
+          throw e;
+        }
       }
     break;
 case LauncherSettings.Favorites.ITEM_TYPE_APPWIDGET:
-  sAppWidgets.add((LauncherAppWidgetInfo)item);
+  sBgAppWidgets.add((LauncherAppWidgetInfo)item);
 break;
 }
 }

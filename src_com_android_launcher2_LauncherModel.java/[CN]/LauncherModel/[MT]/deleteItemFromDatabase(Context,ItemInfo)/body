@@ -1,24 +1,37 @@
 {
   final ContentResolver cr=context.getContentResolver();
   final Uri uriToDelete=LauncherSettings.Favorites.getContentUri(item.id,false);
+  final StackTraceElement[] stackTrace=new Throwable().getStackTrace();
   Runnable r=new Runnable(){
     public void run(){
+      String transaction="DbDebug    Delete item (" + item.title + ") from db, id: "+ item.id+ " ("+ item.container+ ", "+ item.screen+ ", "+ item.cellX+ ", "+ item.cellY+ ")";
+      Launcher.sDumpLogs.add(transaction);
+      Log.d(TAG,transaction);
       cr.delete(uriToDelete,null,null);
 switch (item.itemType) {
 case LauncherSettings.Favorites.ITEM_TYPE_FOLDER:
-        sFolders.remove(item.id);
-      sWorkspaceItems.remove(item);
-    break;
+        sBgFolders.remove(item.id);
+      for (      ItemInfo info : sBgItemsIdMap.values()) {
+        if (info.container == item.id) {
+          String msg="deleting a folder (" + item + ") which still "+ "contains items ("+ info+ ")";
+          RuntimeException e=new RuntimeException(msg);
+          e.setStackTrace(stackTrace);
+          Launcher.dumpDebugLogsToConsole();
+          throw e;
+        }
+      }
+    sBgWorkspaceItems.remove(item);
+  break;
 case LauncherSettings.Favorites.ITEM_TYPE_APPLICATION:
 case LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT:
-  sWorkspaceItems.remove(item);
+sBgWorkspaceItems.remove(item);
 break;
 case LauncherSettings.Favorites.ITEM_TYPE_APPWIDGET:
-sAppWidgets.remove((LauncherAppWidgetInfo)item);
+sBgAppWidgets.remove((LauncherAppWidgetInfo)item);
 break;
 }
-sItemsIdMap.remove(item.id);
-sDbIconCache.remove(item);
+sBgItemsIdMap.remove(item.id);
+sBgDbIconCache.remove(item);
 }
 }
 ;
