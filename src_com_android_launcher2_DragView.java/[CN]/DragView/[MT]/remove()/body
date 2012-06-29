@@ -1,6 +1,5 @@
 {
   if (getParent() != null) {
-    setLayerType(View.LAYER_TYPE_NONE,null);
     mDragLayer.removeView(DragView.this);
   }
 }
