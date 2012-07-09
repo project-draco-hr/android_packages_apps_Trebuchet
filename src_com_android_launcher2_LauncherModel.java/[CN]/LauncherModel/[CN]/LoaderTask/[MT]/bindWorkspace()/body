@@ -54,7 +54,7 @@
     }
 );
   }
-  final HashMap<Long,FolderInfo> folders=new HashMap<Long,FolderInfo>(sFolders);
+  final HashMap<Long,FolderInfo> folders=new HashMap<Long,FolderInfo>(sBgFolders);
   mHandler.post(new Runnable(){
     public void run(){
       Callbacks callbacks=tryGetCallbacks(oldCallbacks);
@@ -72,9 +72,9 @@
     }
   }
 );
-  N=sAppWidgets.size();
+  N=sBgAppWidgets.size();
   for (int i=0; i < N; i++) {
-    final LauncherAppWidgetInfo widget=sAppWidgets.get(i);
+    final LauncherAppWidgetInfo widget=sBgAppWidgets.get(i);
     if (widget.screen == currentScreen) {
       mHandler.post(new Runnable(){
         public void run(){
@@ -88,7 +88,7 @@
     }
   }
   for (int i=0; i < N; i++) {
-    final LauncherAppWidgetInfo widget=sAppWidgets.get(i);
+    final LauncherAppWidgetInfo widget=sBgAppWidgets.get(i);
     if (widget.screen != currentScreen) {
       mHandler.post(new Runnable(){
         public void run(){

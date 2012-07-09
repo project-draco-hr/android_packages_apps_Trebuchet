@@ -1,4 +1,7 @@
 {
+  String transaction="DbDebug    Modify item (" + item.title + ") in db, id: "+ item.id+ " ("+ item.container+ ", "+ item.screen+ ", "+ item.cellX+ ", "+ item.cellY+ ") --> "+ "("+ container+ ", "+ screen+ ", "+ cellX+ ", "+ cellY+ ")";
+  Launcher.sDumpLogs.add(transaction);
+  Log.d(TAG,transaction);
   item.container=container;
   item.cellX=cellX;
   item.cellY=cellY;

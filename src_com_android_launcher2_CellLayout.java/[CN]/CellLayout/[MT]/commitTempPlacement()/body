@@ -10,6 +10,9 @@
     LayoutParams lp=(LayoutParams)child.getLayoutParams();
     ItemInfo info=(ItemInfo)child.getTag();
     if (info != null) {
+      if (info.cellX != lp.tmpCellX || info.cellY != lp.tmpCellY || info.spanX != lp.cellHSpan || info.spanY != lp.cellVSpan) {
+        info.requiresDbUpdate=true;
+      }
       info.cellX=lp.cellX=lp.tmpCellX;
       info.cellY=lp.cellY=lp.tmpCellY;
       info.spanX=lp.cellHSpan;
