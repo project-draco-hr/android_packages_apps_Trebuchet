@@ -1,3 +1,0 @@
-{
-  return super.isScrollingIndicatorEnabled() && (mState != State.SPRING_LOADED);
-}
