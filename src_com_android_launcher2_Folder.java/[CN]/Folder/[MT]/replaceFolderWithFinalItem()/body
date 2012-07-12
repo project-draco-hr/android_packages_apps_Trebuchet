@@ -2,11 +2,11 @@
   Runnable onCompleteRunnable=new Runnable(){
     @Override public void run(){
       CellLayout cellLayout=mLauncher.getCellLayout(mInfo.container,mInfo.screen);
+      View child=null;
       if (getItemCount() == 1) {
         ShortcutInfo finalItem=mInfo.contents.get(0);
-        final View child=mLauncher.createShortcut(R.layout.application,cellLayout,finalItem);
+        child=mLauncher.createShortcut(R.layout.application,cellLayout,finalItem);
         LauncherModel.addOrMoveItemInDatabase(mLauncher,finalItem,mInfo.container,mInfo.screen,mInfo.cellX,mInfo.cellY);
-        mLauncher.getWorkspace().addInScreen(child,mInfo.container,mInfo.screen,mInfo.cellX,mInfo.cellY,mInfo.spanX,mInfo.spanY);
       }
       if (getItemCount() <= 1) {
         LauncherModel.deleteItemFromDatabase(mLauncher,mInfo);
@@ -15,6 +15,9 @@
           mDragController.removeDropTarget((DropTarget)mFolderIcon);
         }
         mLauncher.removeFolder(mInfo);
+      }
+      if (child != null) {
+        mLauncher.getWorkspace().addInScreen(child,mInfo.container,mInfo.screen,mInfo.cellX,mInfo.cellY,mInfo.spanX,mInfo.spanY);
       }
     }
   }
