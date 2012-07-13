@@ -7,11 +7,16 @@
   int newX=mWidgetView.getLeft() - mBackgroundPadding + xOffset + mWidgetPaddingLeft;
   int newY=mWidgetView.getTop() - mBackgroundPadding + yOffset + mWidgetPaddingTop;
   if (newY < 0) {
-    newHeight-=-newY;
-    newY=0;
+    mTopTouchRegionAdjustment=-newY;
+  }
+ else {
+    mTopTouchRegionAdjustment=0;
   }
   if (newY + newHeight > mDragLayer.getHeight()) {
-    newHeight-=newY + newHeight - mDragLayer.getHeight();
+    mBottomTouchRegionAdjustment=-(newY + newHeight - mDragLayer.getHeight());
+  }
+ else {
+    mBottomTouchRegionAdjustment=0;
   }
   if (!animate) {
     lp.width=newWidth;
