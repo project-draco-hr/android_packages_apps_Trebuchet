@@ -1,0 +1,4 @@
+int currentScreen
+ArrayList<LauncherAppWidgetInfo> appWidgets
+ArrayList<LauncherAppWidgetInfo> currentScreenWidgets
+ArrayList<LauncherAppWidgetInfo> otherScreenWidgets

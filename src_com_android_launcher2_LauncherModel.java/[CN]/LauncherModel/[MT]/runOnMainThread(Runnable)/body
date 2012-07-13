@@ -1,0 +1,8 @@
+{
+  if (sWorkerThread.getThreadId() == Process.myTid()) {
+    mHandler.post(r);
+  }
+ else {
+    r.run();
+  }
+}

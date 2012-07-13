@@ -9,6 +9,6 @@
     }
   }
   if (runLoader) {
-    startLoader(false);
+    startLoader(false,-1);
   }
 }

@@ -4,5 +4,8 @@
     if (a.isRunning()) {
       a.cancel();
     }
+ else {
+      sAnimators.remove(a);
+    }
   }
 }
