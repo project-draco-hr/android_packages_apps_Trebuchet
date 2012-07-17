@@ -4,7 +4,6 @@
     ApplicationInfo info=list.get(i);
     int removeIndex=findAppByComponent(mApps,info);
     if (removeIndex > -1) {
-      Log.d(TAG,"Removing app in removeAppsWithoutInvalidate: " + info);
       mApps.remove(removeIndex);
     }
   }
