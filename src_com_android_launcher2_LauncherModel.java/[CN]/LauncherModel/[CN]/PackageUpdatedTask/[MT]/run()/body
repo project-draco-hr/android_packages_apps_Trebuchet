@@ -26,16 +26,19 @@ break;
 ArrayList<ApplicationInfo> added=null;
 ArrayList<ApplicationInfo> modified=null;
 if (mBgAllAppsList.added.size() > 0) {
-added=mBgAllAppsList.added;
-mBgAllAppsList.added=new ArrayList<ApplicationInfo>();
+added=new ArrayList<ApplicationInfo>(mBgAllAppsList.added);
+mBgAllAppsList.added.clear();
 }
 if (mBgAllAppsList.modified.size() > 0) {
-modified=mBgAllAppsList.modified;
-mBgAllAppsList.modified=new ArrayList<ApplicationInfo>();
+modified=new ArrayList<ApplicationInfo>(mBgAllAppsList.modified);
+mBgAllAppsList.modified.clear();
 }
 final ArrayList<String> removedPackageNames=new ArrayList<String>();
+if (mBgAllAppsList.removed.size() > 0) {
+mBgAllAppsList.removed.clear();
 for (int i=0; i < N; ++i) {
 removedPackageNames.add(packages[i]);
+}
 }
 final Callbacks callbacks=mCallbacks != null ? mCallbacks.get() : null;
 if (callbacks == null) {
