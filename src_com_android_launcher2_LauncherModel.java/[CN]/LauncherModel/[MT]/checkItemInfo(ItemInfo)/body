@@ -3,20 +3,17 @@
   final long itemId=item.id;
   Runnable r=new Runnable(){
     public void run(){
-      ItemInfo modelItem=sBgItemsIdMap.get(itemId);
-      if (modelItem != null && item != modelItem) {
-        String msg="item: " + ((item != null) ? item.toString() : "null") + "modelItem: "+ ((modelItem != null) ? modelItem.toString() : "null")+ "Error: ItemInfo passed to checkItemInfo doesn't match original";
-        RuntimeException e=new RuntimeException(msg);
-        e.setStackTrace(stackTrace);
-        throw e;
+synchronized (mBgLock) {
+        ItemInfo modelItem=sBgItemsIdMap.get(itemId);
+        if (modelItem != null && item != modelItem) {
+          String msg="item: " + ((item != null) ? item.toString() : "null") + "modelItem: "+ ((modelItem != null) ? modelItem.toString() : "null")+ "Error: ItemInfo passed to checkItemInfo doesn't match original";
+          RuntimeException e=new RuntimeException(msg);
+          e.setStackTrace(stackTrace);
+          throw e;
+        }
       }
     }
   }
 ;
-  if (sWorkerThread.getThreadId() == Process.myTid()) {
-    r.run();
-  }
- else {
-    sWorker.post(r);
-  }
+  runOnWorkerThread(r);
 }

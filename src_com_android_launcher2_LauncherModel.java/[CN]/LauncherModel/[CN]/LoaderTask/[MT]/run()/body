@@ -1,4 +1,7 @@
 {
+synchronized (mLock) {
+    mIsLoaderTaskRunning=true;
+  }
   final Callbacks cbk=mCallbacks.get();
   final boolean loadWorkspaceFirst=cbk != null ? (!cbk.isAllAppsVisible()) : true;
   keep_running: {
@@ -37,14 +40,17 @@ synchronized (mLock) {
     }
   }
   if (DEBUG_LOADERS)   Log.d(TAG,"Comparing loaded icons to database icons");
-  for (  Object key : sBgDbIconCache.keySet()) {
-    updateSavedIcon(mContext,(ShortcutInfo)key,sBgDbIconCache.get(key));
+synchronized (mBgLock) {
+    for (    Object key : sBgDbIconCache.keySet()) {
+      updateSavedIcon(mContext,(ShortcutInfo)key,sBgDbIconCache.get(key));
+    }
+    sBgDbIconCache.clear();
   }
-  sBgDbIconCache.clear();
   mContext=null;
 synchronized (mLock) {
     if (mLoaderTask == this) {
       mLoaderTask=null;
     }
+    mIsLoaderTaskRunning=false;
   }
 }

@@ -1,8 +1,9 @@
 {
-  Log.d(TAG,"mLoaderTask.mContext=" + mContext);
-  Log.d(TAG,"mLoaderTask.mWaitThread=" + mWaitThread);
-  Log.d(TAG,"mLoaderTask.mIsLaunching=" + mIsLaunching);
-  Log.d(TAG,"mLoaderTask.mStopped=" + mStopped);
-  Log.d(TAG,"mLoaderTask.mLoadAndBindStepFinished=" + mLoadAndBindStepFinished);
-  Log.d(TAG,"mItems size=" + sBgWorkspaceItems.size());
+synchronized (mBgLock) {
+    Log.d(TAG,"mLoaderTask.mContext=" + mContext);
+    Log.d(TAG,"mLoaderTask.mIsLaunching=" + mIsLaunching);
+    Log.d(TAG,"mLoaderTask.mStopped=" + mStopped);
+    Log.d(TAG,"mLoaderTask.mLoadAndBindStepFinished=" + mLoadAndBindStepFinished);
+    Log.d(TAG,"mItems size=" + sBgWorkspaceItems.size());
+  }
 }

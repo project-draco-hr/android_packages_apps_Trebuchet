@@ -1,0 +1,15 @@
+{
+  if (synchronousBindPage < 0) {
+    throw new RuntimeException("Should not call runBindSynchronousPage() without " + "valid page index");
+  }
+  if (!mAllAppsLoaded || !mWorkspaceLoaded) {
+    throw new RuntimeException("Expecting AllApps and Workspace to be loaded");
+  }
+synchronized (mLock) {
+    if (mIsLoaderTaskRunning) {
+      throw new RuntimeException("Error! Background loading is already running");
+    }
+  }
+  bindWorkspace(synchronousBindPage);
+  onlyBindAllApps();
+}

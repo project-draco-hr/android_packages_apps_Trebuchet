@@ -8,23 +8,24 @@
       Launcher.sDumpLogs.add(transaction);
       Log.d(TAG,transaction);
       cr.delete(uriToDelete,null,null);
+synchronized (mBgLock) {
 switch (item.itemType) {
 case LauncherSettings.Favorites.ITEM_TYPE_FOLDER:
-        sBgFolders.remove(item.id);
-      for (      ItemInfo info : sBgItemsIdMap.values()) {
-        if (info.container == item.id) {
-          String msg="deleting a folder (" + item + ") which still "+ "contains items ("+ info+ ")";
-          RuntimeException e=new RuntimeException(msg);
-          e.setStackTrace(stackTrace);
-          Launcher.dumpDebugLogsToConsole();
-          throw e;
+          sBgFolders.remove(item.id);
+        for (        ItemInfo info : sBgItemsIdMap.values()) {
+          if (info.container == item.id) {
+            String msg="deleting a folder (" + item + ") which still "+ "contains items ("+ info+ ")";
+            RuntimeException e=new RuntimeException(msg);
+            e.setStackTrace(stackTrace);
+            Launcher.dumpDebugLogsToConsole();
+            throw e;
+          }
         }
-      }
-    sBgWorkspaceItems.remove(item);
-  break;
+      sBgWorkspaceItems.remove(item);
+    break;
 case LauncherSettings.Favorites.ITEM_TYPE_APPLICATION:
 case LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT:
-sBgWorkspaceItems.remove(item);
+  sBgWorkspaceItems.remove(item);
 break;
 case LauncherSettings.Favorites.ITEM_TYPE_APPWIDGET:
 sBgAppWidgets.remove((LauncherAppWidgetInfo)item);
@@ -34,11 +35,7 @@ sBgItemsIdMap.remove(item.id);
 sBgDbIconCache.remove(item);
 }
 }
+}
 ;
-if (sWorkerThread.getThreadId() == Process.myTid()) {
-r.run();
-}
- else {
-sWorker.post(r);
-}
+runOnWorkerThread(r);
 }

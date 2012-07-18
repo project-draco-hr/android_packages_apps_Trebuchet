@@ -22,39 +22,36 @@
       Launcher.sDumpLogs.add(transaction);
       Log.d(TAG,transaction);
       cr.insert(notify ? LauncherSettings.Favorites.CONTENT_URI : LauncherSettings.Favorites.CONTENT_URI_NO_NOTIFICATION,values);
-      if (sBgItemsIdMap.containsKey(item.id)) {
-        throw new RuntimeException("Error: ItemInfo id (" + item.id + ") passed to "+ "addItemToDatabase already exists."+ item.toString());
-      }
-      sBgItemsIdMap.put(item.id,item);
+synchronized (mBgLock) {
+        if (sBgItemsIdMap.containsKey(item.id)) {
+          throw new RuntimeException("Error: ItemInfo id (" + item.id + ") passed to "+ "addItemToDatabase already exists."+ item.toString());
+        }
+        sBgItemsIdMap.put(item.id,item);
 switch (item.itemType) {
 case LauncherSettings.Favorites.ITEM_TYPE_FOLDER:
-        sBgFolders.put(item.id,(FolderInfo)item);
+          sBgFolders.put(item.id,(FolderInfo)item);
 case LauncherSettings.Favorites.ITEM_TYPE_APPLICATION:
 case LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT:
-      if (item.container == LauncherSettings.Favorites.CONTAINER_DESKTOP || item.container == LauncherSettings.Favorites.CONTAINER_HOTSEAT) {
-        sBgWorkspaceItems.add(item);
-      }
- else {
-        if (!sBgFolders.containsKey(item.container)) {
-          String msg="adding item: " + item + " to a folder that "+ " doesn't exist";
-          RuntimeException e=new RuntimeException(msg);
-          e.setStackTrace(stackTrace);
-          Launcher.dumpDebugLogsToConsole();
-          throw e;
+        if (item.container == LauncherSettings.Favorites.CONTAINER_DESKTOP || item.container == LauncherSettings.Favorites.CONTAINER_HOTSEAT) {
+          sBgWorkspaceItems.add(item);
         }
-      }
-    break;
+ else {
+          if (!sBgFolders.containsKey(item.container)) {
+            String msg="adding item: " + item + " to a folder that "+ " doesn't exist";
+            RuntimeException e=new RuntimeException(msg);
+            e.setStackTrace(stackTrace);
+            Launcher.dumpDebugLogsToConsole();
+            throw e;
+          }
+        }
+      break;
 case LauncherSettings.Favorites.ITEM_TYPE_APPWIDGET:
-  sBgAppWidgets.add((LauncherAppWidgetInfo)item);
-break;
+    sBgAppWidgets.add((LauncherAppWidgetInfo)item);
+  break;
+}
 }
 }
 }
 ;
-if (sWorkerThread.getThreadId() == Process.myTid()) {
-r.run();
-}
- else {
-sWorker.post(r);
-}
+runOnWorkerThread(r);
 }
