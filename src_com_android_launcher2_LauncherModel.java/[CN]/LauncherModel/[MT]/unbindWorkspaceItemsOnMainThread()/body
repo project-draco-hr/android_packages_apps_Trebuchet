@@ -1,16 +1,20 @@
 {
-  final ArrayList<ItemInfo> workspaceItems=new ArrayList<ItemInfo>(sWorkspaceItems);
-  final ArrayList<ItemInfo> appWidgets=new ArrayList<ItemInfo>(sAppWidgets);
-  mHandler.post(new Runnable(){
+  final ArrayList<ItemInfo> tmpWorkspaceItems=new ArrayList<ItemInfo>();
+  final ArrayList<ItemInfo> tmpAppWidgets=new ArrayList<ItemInfo>();
+synchronized (sBgLock) {
+    tmpWorkspaceItems.addAll(sBgWorkspaceItems);
+    tmpAppWidgets.addAll(sBgAppWidgets);
+  }
+  Runnable r=new Runnable(){
     @Override public void run(){
-      for (      ItemInfo item : workspaceItems) {
+      for (      ItemInfo item : tmpWorkspaceItems) {
         item.unbind();
       }
-      for (      ItemInfo item : appWidgets) {
+      for (      ItemInfo item : tmpAppWidgets) {
         item.unbind();
       }
     }
   }
-);
-  return workspaceItems;
+;
+  runOnMainThread(r);
 }

@@ -13,6 +13,7 @@
   mAppWidgetManager=AppWidgetManager.getInstance(this);
   mAppWidgetHost=new LauncherAppWidgetHost(this,APPWIDGET_HOST_ID);
   mAppWidgetHost.startListening();
+  mPaused=false;
   if (PROFILE_STARTUP) {
     android.os.Debug.startMethodTracing(Environment.getExternalStorageDirectory() + "/launcher");
   }
@@ -31,7 +32,7 @@
     android.os.Debug.stopMethodTracing();
   }
   if (!mRestoring) {
-    mModel.startLoader(true);
+    mModel.startLoader(true,mWorkspace.getCurrentPage());
   }
   if (!mModel.isAllAppsLoaded()) {
     ViewGroup appsCustomizeContentParent=(ViewGroup)mAppsCustomizeContent.getParent();
