@@ -6,7 +6,7 @@
   final AppWidgetManager widgets=AppWidgetManager.getInstance(context);
   final boolean isSafeMode=manager.isSafeMode();
   mApp.getLauncherProvider().loadDefaultFavoritesIfNecessary();
-synchronized (mBgLock) {
+synchronized (sBgLock) {
     sBgWorkspaceItems.clear();
     sBgAppWidgets.clear();
     sBgFolders.clear();

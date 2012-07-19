@@ -12,7 +12,7 @@
   ArrayList<LauncherAppWidgetInfo> appWidgets=new ArrayList<LauncherAppWidgetInfo>();
   HashMap<Long,FolderInfo> folders=new HashMap<Long,FolderInfo>();
   HashMap<Long,ItemInfo> itemsIdMap=new HashMap<Long,ItemInfo>();
-synchronized (mBgLock) {
+synchronized (sBgLock) {
     workspaceItems.addAll(sBgWorkspaceItems);
     appWidgets.addAll(sBgAppWidgets);
     folders.putAll(sBgFolders);

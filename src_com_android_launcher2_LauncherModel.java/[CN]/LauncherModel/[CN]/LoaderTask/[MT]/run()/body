@@ -40,7 +40,7 @@ synchronized (mLock) {
     }
   }
   if (DEBUG_LOADERS)   Log.d(TAG,"Comparing loaded icons to database icons");
-synchronized (mBgLock) {
+synchronized (sBgLock) {
     for (    Object key : sBgDbIconCache.keySet()) {
       updateSavedIcon(mContext,(ShortcutInfo)key,sBgDbIconCache.get(key));
     }

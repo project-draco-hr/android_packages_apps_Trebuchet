@@ -6,7 +6,7 @@
   Runnable r=new Runnable(){
     public void run(){
       cr.update(uri,values,null,null);
-synchronized (mBgLock) {
+synchronized (sBgLock) {
         ItemInfo modelItem=sBgItemsIdMap.get(itemId);
         if (item != modelItem) {
           String msg="item: " + ((item != null) ? item.toString() : "null") + "modelItem: "+ ((modelItem != null) ? modelItem.toString() : "null")+ "Error: ItemInfo passed to "+ callingFunction+ " doesn't match "+ "original";

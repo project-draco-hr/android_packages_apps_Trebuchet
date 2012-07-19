@@ -1,7 +1,7 @@
 {
   final ArrayList<ItemInfo> tmpWorkspaceItems=new ArrayList<ItemInfo>();
   final ArrayList<ItemInfo> tmpAppWidgets=new ArrayList<ItemInfo>();
-synchronized (mBgLock) {
+synchronized (sBgLock) {
     tmpWorkspaceItems.addAll(sBgWorkspaceItems);
     tmpAppWidgets.addAll(sBgAppWidgets);
   }

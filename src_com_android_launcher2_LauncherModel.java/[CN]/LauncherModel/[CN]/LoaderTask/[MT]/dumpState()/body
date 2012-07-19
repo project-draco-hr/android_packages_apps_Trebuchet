@@ -1,5 +1,5 @@
 {
-synchronized (mBgLock) {
+synchronized (sBgLock) {
     Log.d(TAG,"mLoaderTask.mContext=" + mContext);
     Log.d(TAG,"mLoaderTask.mIsLaunching=" + mIsLaunching);
     Log.d(TAG,"mLoaderTask.mStopped=" + mStopped);
