@@ -32,7 +32,12 @@
     android.os.Debug.stopMethodTracing();
   }
   if (!mRestoring) {
-    mModel.startLoader(true,mWorkspace.getCurrentPage());
+    if (sPausedFromUserAction) {
+      mModel.startLoader(true,-1);
+    }
+ else {
+      mModel.startLoader(true,mWorkspace.getCurrentPage());
+    }
   }
   if (!mModel.isAllAppsLoaded()) {
     ViewGroup appsCustomizeContentParent=(ViewGroup)mAppsCustomizeContent.getParent();
