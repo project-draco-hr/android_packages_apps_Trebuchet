@@ -4,28 +4,25 @@
   Runnable r=new Runnable(){
     public void run(){
       cr.delete(uriToDelete,null,null);
+synchronized (sBgLock) {
 switch (item.itemType) {
 case LauncherSettings.Favorites.ITEM_TYPE_FOLDER:
-        sFolders.remove(item.id);
-      sWorkspaceItems.remove(item);
-    break;
+          sBgFolders.remove(item.id);
+        sBgWorkspaceItems.remove(item);
+      break;
 case LauncherSettings.Favorites.ITEM_TYPE_APPLICATION:
 case LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT:
-  sWorkspaceItems.remove(item);
-break;
+    sBgWorkspaceItems.remove(item);
+  break;
 case LauncherSettings.Favorites.ITEM_TYPE_APPWIDGET:
-sAppWidgets.remove((LauncherAppWidgetInfo)item);
+sBgAppWidgets.remove((LauncherAppWidgetInfo)item);
 break;
 }
-sItemsIdMap.remove(item.id);
-sDbIconCache.remove(item);
+sBgItemsIdMap.remove(item.id);
+sBgDbIconCache.remove(item);
+}
 }
 }
 ;
-if (sWorkerThread.getThreadId() == Process.myTid()) {
-r.run();
-}
- else {
-sWorker.post(r);
-}
+runOnWorkerThread(r);
 }

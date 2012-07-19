@@ -1,0 +1,59 @@
+{
+  final long t=SystemClock.uptimeMillis();
+  Runnable r;
+  final Callbacks oldCallbacks=mCallbacks.get();
+  if (oldCallbacks == null) {
+    Log.w(TAG,"LoaderTask running with no launcher");
+    return;
+  }
+  final int currentScreen=(synchronizeBindPage > -1) ? synchronizeBindPage : oldCallbacks.getCurrentWorkspaceScreen();
+  unbindWorkspaceItemsOnMainThread();
+  ArrayList<ItemInfo> workspaceItems=new ArrayList<ItemInfo>();
+  ArrayList<LauncherAppWidgetInfo> appWidgets=new ArrayList<LauncherAppWidgetInfo>();
+  HashMap<Long,FolderInfo> folders=new HashMap<Long,FolderInfo>();
+  HashMap<Long,ItemInfo> itemsIdMap=new HashMap<Long,ItemInfo>();
+synchronized (sBgLock) {
+    workspaceItems.addAll(sBgWorkspaceItems);
+    appWidgets.addAll(sBgAppWidgets);
+    folders.putAll(sBgFolders);
+    itemsIdMap.putAll(sBgItemsIdMap);
+  }
+  ArrayList<ItemInfo> currentWorkspaceItems=new ArrayList<ItemInfo>();
+  ArrayList<ItemInfo> otherWorkspaceItems=new ArrayList<ItemInfo>();
+  ArrayList<LauncherAppWidgetInfo> currentAppWidgets=new ArrayList<LauncherAppWidgetInfo>();
+  ArrayList<LauncherAppWidgetInfo> otherAppWidgets=new ArrayList<LauncherAppWidgetInfo>();
+  HashMap<Long,FolderInfo> currentFolders=new HashMap<Long,FolderInfo>();
+  HashMap<Long,FolderInfo> otherFolders=new HashMap<Long,FolderInfo>();
+  filterCurrentWorkspaceItems(currentScreen,workspaceItems,currentWorkspaceItems,otherWorkspaceItems);
+  filterCurrentAppWidgets(currentScreen,appWidgets,currentAppWidgets,otherAppWidgets);
+  filterCurrentFolders(currentScreen,itemsIdMap,folders,currentFolders,otherFolders);
+  sortWorkspaceItemsSpatially(currentWorkspaceItems);
+  sortWorkspaceItemsSpatially(otherWorkspaceItems);
+  r=new Runnable(){
+    public void run(){
+      Callbacks callbacks=tryGetCallbacks(oldCallbacks);
+      if (callbacks != null) {
+        callbacks.startBinding();
+      }
+    }
+  }
+;
+  runOnMainThread(r);
+  bindWorkspaceItems(oldCallbacks,currentWorkspaceItems,currentAppWidgets,currentFolders,null);
+  mDeferredBindRunnables.clear();
+  bindWorkspaceItems(oldCallbacks,otherWorkspaceItems,otherAppWidgets,otherFolders,mDeferredBindRunnables);
+  r=new Runnable(){
+    public void run(){
+      Callbacks callbacks=tryGetCallbacks(oldCallbacks);
+      if (callbacks != null) {
+        callbacks.finishBindingItems();
+      }
+      if (DEBUG_LOADERS) {
+        Log.d(TAG,"bound workspace in " + (SystemClock.uptimeMillis() - t) + "ms");
+      }
+      mIsLoadingAndBindingWorkspace=false;
+    }
+  }
+;
+  mDeferredBindRunnables.add(r);
+}

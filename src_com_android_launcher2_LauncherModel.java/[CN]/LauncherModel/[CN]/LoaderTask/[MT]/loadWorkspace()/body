@@ -6,81 +6,82 @@
   final AppWidgetManager widgets=AppWidgetManager.getInstance(context);
   final boolean isSafeMode=manager.isSafeMode();
   mApp.getLauncherProvider().loadDefaultFavoritesIfNecessary();
-  sWorkspaceItems.clear();
-  sAppWidgets.clear();
-  sFolders.clear();
-  sItemsIdMap.clear();
-  sDbIconCache.clear();
-  final ArrayList<Long> itemsToRemove=new ArrayList<Long>();
-  final Cursor c=contentResolver.query(LauncherSettings.Favorites.CONTENT_URI,null,null,null,null);
-  final ItemInfo occupied[][][]=new ItemInfo[Launcher.SCREEN_COUNT + 1][mCellCountX + 1][mCellCountY + 1];
-  try {
-    final int idIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites._ID);
-    final int intentIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.INTENT);
-    final int titleIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.TITLE);
-    final int iconTypeIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.ICON_TYPE);
-    final int iconIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.ICON);
-    final int iconPackageIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.ICON_PACKAGE);
-    final int iconResourceIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.ICON_RESOURCE);
-    final int containerIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.CONTAINER);
-    final int itemTypeIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.ITEM_TYPE);
-    final int appWidgetIdIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.APPWIDGET_ID);
-    final int screenIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.SCREEN);
-    final int cellXIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.CELLX);
-    final int cellYIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.CELLY);
-    final int spanXIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.SPANX);
-    final int spanYIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.SPANY);
-    ShortcutInfo info;
-    String intentDescription;
-    LauncherAppWidgetInfo appWidgetInfo;
-    int container;
-    long id;
-    Intent intent;
-    while (!mStopped && c.moveToNext()) {
-      try {
-        int itemType=c.getInt(itemTypeIndex);
+synchronized (sBgLock) {
+    sBgWorkspaceItems.clear();
+    sBgAppWidgets.clear();
+    sBgFolders.clear();
+    sBgItemsIdMap.clear();
+    sBgDbIconCache.clear();
+    final ArrayList<Long> itemsToRemove=new ArrayList<Long>();
+    final Cursor c=contentResolver.query(LauncherSettings.Favorites.CONTENT_URI,null,null,null,null);
+    final ItemInfo occupied[][][]=new ItemInfo[Launcher.SCREEN_COUNT + 1][mCellCountX + 1][mCellCountY + 1];
+    try {
+      final int idIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites._ID);
+      final int intentIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.INTENT);
+      final int titleIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.TITLE);
+      final int iconTypeIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.ICON_TYPE);
+      final int iconIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.ICON);
+      final int iconPackageIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.ICON_PACKAGE);
+      final int iconResourceIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.ICON_RESOURCE);
+      final int containerIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.CONTAINER);
+      final int itemTypeIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.ITEM_TYPE);
+      final int appWidgetIdIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.APPWIDGET_ID);
+      final int screenIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.SCREEN);
+      final int cellXIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.CELLX);
+      final int cellYIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.CELLY);
+      final int spanXIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.SPANX);
+      final int spanYIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.SPANY);
+      ShortcutInfo info;
+      String intentDescription;
+      LauncherAppWidgetInfo appWidgetInfo;
+      int container;
+      long id;
+      Intent intent;
+      while (!mStopped && c.moveToNext()) {
+        try {
+          int itemType=c.getInt(itemTypeIndex);
 switch (itemType) {
 case LauncherSettings.Favorites.ITEM_TYPE_APPLICATION:
 case LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT:
-          intentDescription=c.getString(intentIndex);
-        try {
-          intent=Intent.parseUri(intentDescription,0);
+            intentDescription=c.getString(intentIndex);
+          try {
+            intent=Intent.parseUri(intentDescription,0);
+          }
+ catch (          URISyntaxException e) {
+            continue;
+          }
+        if (itemType == LauncherSettings.Favorites.ITEM_TYPE_APPLICATION) {
+          info=getShortcutInfo(manager,intent,context,c,iconIndex,titleIndex,mLabelCache);
         }
- catch (        URISyntaxException e) {
-          continue;
-        }
-      if (itemType == LauncherSettings.Favorites.ITEM_TYPE_APPLICATION) {
-        info=getShortcutInfo(manager,intent,context,c,iconIndex,titleIndex,mLabelCache);
-      }
  else {
-        info=getShortcutInfo(c,context,iconTypeIndex,iconPackageIndex,iconResourceIndex,iconIndex,titleIndex);
-        if (intent.getAction() != null && intent.getCategories() != null && intent.getAction().equals(Intent.ACTION_MAIN) && intent.getCategories().contains(Intent.CATEGORY_LAUNCHER)) {
-          intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
+          info=getShortcutInfo(c,context,iconTypeIndex,iconPackageIndex,iconResourceIndex,iconIndex,titleIndex);
+          if (intent.getAction() != null && intent.getCategories() != null && intent.getAction().equals(Intent.ACTION_MAIN) && intent.getCategories().contains(Intent.CATEGORY_LAUNCHER)) {
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
+          }
         }
-      }
-    if (info != null) {
-      info.intent=intent;
-      info.id=c.getLong(idIndex);
-      container=c.getInt(containerIndex);
-      info.container=container;
-      info.screen=c.getInt(screenIndex);
-      info.cellX=c.getInt(cellXIndex);
-      info.cellY=c.getInt(cellYIndex);
-      if (!checkItemPlacement(occupied,info)) {
-        break;
-      }
+      if (info != null) {
+        info.intent=intent;
+        info.id=c.getLong(idIndex);
+        container=c.getInt(containerIndex);
+        info.container=container;
+        info.screen=c.getInt(screenIndex);
+        info.cellX=c.getInt(cellXIndex);
+        info.cellY=c.getInt(cellYIndex);
+        if (!checkItemPlacement(occupied,info)) {
+          break;
+        }
 switch (container) {
 case LauncherSettings.Favorites.CONTAINER_DESKTOP:
 case LauncherSettings.Favorites.CONTAINER_HOTSEAT:
-        sWorkspaceItems.add(info);
-      break;
+          sBgWorkspaceItems.add(info);
+        break;
 default :
-    FolderInfo folderInfo=findOrMakeFolder(sFolders,container);
-  folderInfo.add(info);
-break;
+      FolderInfo folderInfo=findOrMakeFolder(sBgFolders,container);
+    folderInfo.add(info);
+  break;
 }
-sItemsIdMap.put(info.id,info);
-queueIconToBeChecked(sDbIconCache,info,c,iconIndex);
+sBgItemsIdMap.put(info.id,info);
+queueIconToBeChecked(sBgDbIconCache,info,c,iconIndex);
 }
  else {
 id=c.getLong(idIndex);
@@ -90,7 +91,7 @@ contentResolver.delete(LauncherSettings.Favorites.getContentUri(id,false),null,n
 break;
 case LauncherSettings.Favorites.ITEM_TYPE_FOLDER:
 id=c.getLong(idIndex);
-FolderInfo folderInfo=findOrMakeFolder(sFolders,id);
+FolderInfo folderInfo=findOrMakeFolder(sBgFolders,id);
 folderInfo.title=c.getString(titleIndex);
 folderInfo.id=id;
 container=c.getInt(containerIndex);
@@ -104,11 +105,11 @@ break;
 switch (container) {
 case LauncherSettings.Favorites.CONTAINER_DESKTOP:
 case LauncherSettings.Favorites.CONTAINER_HOTSEAT:
-sWorkspaceItems.add(folderInfo);
+sBgWorkspaceItems.add(folderInfo);
 break;
 }
-sItemsIdMap.put(folderInfo.id,folderInfo);
-sFolders.put(folderInfo.id,folderInfo);
+sBgItemsIdMap.put(folderInfo.id,folderInfo);
+sBgFolders.put(folderInfo.id,folderInfo);
 break;
 case LauncherSettings.Favorites.ITEM_TYPE_APPWIDGET:
 int appWidgetId=c.getInt(appWidgetIdIndex);
@@ -133,15 +134,15 @@ appWidgetInfo.minSpanX=minSpan[0];
 appWidgetInfo.minSpanY=minSpan[1];
 container=c.getInt(containerIndex);
 if (container != LauncherSettings.Favorites.CONTAINER_DESKTOP && container != LauncherSettings.Favorites.CONTAINER_HOTSEAT) {
-Log.e(TAG,"Widget found where container " + "!= CONTAINER_DESKTOP nor CONTAINER_HOTSEAT - ignoring!");
+Log.e(TAG,"Widget found where container != " + "CONTAINER_DESKTOP nor CONTAINER_HOTSEAT - ignoring!");
 continue;
 }
 appWidgetInfo.container=c.getInt(containerIndex);
 if (!checkItemPlacement(occupied,appWidgetInfo)) {
 break;
 }
-sItemsIdMap.put(appWidgetInfo.id,appWidgetInfo);
-sAppWidgets.add(appWidgetInfo);
+sBgItemsIdMap.put(appWidgetInfo.id,appWidgetInfo);
+sBgAppWidgets.add(appWidgetInfo);
 }
 break;
 }
@@ -182,6 +183,7 @@ line+=((occupied[s][x][y] != null) ? "#" : ".");
 }
 }
 Log.d(TAG,"[ " + line + " ]");
+}
 }
 }
 }

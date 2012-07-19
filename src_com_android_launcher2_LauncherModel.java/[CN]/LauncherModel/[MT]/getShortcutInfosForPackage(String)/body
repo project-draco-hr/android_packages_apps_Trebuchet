@@ -1,10 +1,12 @@
 {
   ArrayList<ShortcutInfo> infos=new ArrayList<ShortcutInfo>();
-  for (  ItemInfo i : sWorkspaceItems) {
-    if (i instanceof ShortcutInfo) {
-      ShortcutInfo info=(ShortcutInfo)i;
-      if (packageName.equals(info.getPackageName())) {
-        infos.add(info);
+synchronized (sBgLock) {
+    for (    ItemInfo i : sBgWorkspaceItems) {
+      if (i instanceof ShortcutInfo) {
+        ShortcutInfo info=(ShortcutInfo)i;
+        if (packageName.equals(info.getPackageName())) {
+          infos.add(info);
+        }
       }
     }
   }
