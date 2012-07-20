@@ -4,7 +4,7 @@
   }
   State state=intToState(savedState.getInt(RUNTIME_STATE,State.WORKSPACE.ordinal()));
   if (state == State.APPS_CUSTOMIZE) {
-    showAllApps(false);
+    mOnResumeState=State.APPS_CUSTOMIZE;
   }
   int currentScreen=savedState.getInt(RUNTIME_STATE_CURRENT_SCREEN,-1);
   if (currentScreen > -1) {

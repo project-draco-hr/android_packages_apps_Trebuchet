@@ -6,7 +6,8 @@
     Log.w(TAG,"LoaderTask running with no launcher");
     return;
   }
-  final int currentScreen=(synchronizeBindPage > -1) ? synchronizeBindPage : oldCallbacks.getCurrentWorkspaceScreen();
+  final boolean isLoadingSynchronously=(synchronizeBindPage > -1);
+  final int currentScreen=isLoadingSynchronously ? synchronizeBindPage : oldCallbacks.getCurrentWorkspaceScreen();
   unbindWorkspaceItemsOnMainThread();
   ArrayList<ItemInfo> workspaceItems=new ArrayList<ItemInfo>();
   ArrayList<LauncherAppWidgetInfo> appWidgets=new ArrayList<LauncherAppWidgetInfo>();
@@ -41,7 +42,7 @@ synchronized (sBgLock) {
   runOnMainThread(r);
   bindWorkspaceItems(oldCallbacks,currentWorkspaceItems,currentAppWidgets,currentFolders,null);
   mDeferredBindRunnables.clear();
-  bindWorkspaceItems(oldCallbacks,otherWorkspaceItems,otherAppWidgets,otherFolders,mDeferredBindRunnables);
+  bindWorkspaceItems(oldCallbacks,otherWorkspaceItems,otherAppWidgets,otherFolders,(isLoadingSynchronously ? mDeferredBindRunnables : null));
   r=new Runnable(){
     public void run(){
       Callbacks callbacks=tryGetCallbacks(oldCallbacks);
@@ -55,5 +56,10 @@ synchronized (sBgLock) {
     }
   }
 ;
-  mDeferredBindRunnables.add(r);
+  if (isLoadingSynchronously) {
+    mDeferredBindRunnables.add(r);
+  }
+ else {
+    runOnMainThread(r);
+  }
 }

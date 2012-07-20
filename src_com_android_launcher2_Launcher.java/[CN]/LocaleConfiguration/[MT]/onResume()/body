@@ -1,7 +1,15 @@
 {
   super.onResume();
+  if (mOnResumeState == State.WORKSPACE) {
+    showWorkspace(false);
+  }
+ else   if (mOnResumeState == State.APPS_CUSTOMIZE) {
+    showAllApps(false);
+  }
+  mOnResumeState=State.NONE;
   InstallShortcutReceiver.flushInstallQueue(this);
   mPaused=false;
+  sPausedFromUserAction=false;
   if (mRestoring || mOnResumeNeedsLoad) {
     mWorkspaceLoading=true;
     mModel.startLoader(true,-1);
