@@ -1,0 +1,10 @@
+{
+  LinkedList<Runnable> queue=new LinkedList<Runnable>();
+synchronized (mQueue) {
+    queue.addAll(mQueue);
+    mQueue.clear();
+  }
+  for (  Runnable r : queue) {
+    r.run();
+  }
+}
