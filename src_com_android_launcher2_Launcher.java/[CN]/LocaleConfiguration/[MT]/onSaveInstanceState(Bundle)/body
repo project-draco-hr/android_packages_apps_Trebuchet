@@ -1,5 +1,5 @@
 {
-  outState.putInt(RUNTIME_STATE_CURRENT_SCREEN,mWorkspace.getCurrentPage());
+  outState.putInt(RUNTIME_STATE_CURRENT_SCREEN,mWorkspace.getNextPage());
   super.onSaveInstanceState(outState);
   outState.putInt(RUNTIME_STATE,mState.ordinal());
   closeFolder();

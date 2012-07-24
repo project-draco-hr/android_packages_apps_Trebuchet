@@ -1,0 +1,8 @@
+{
+  super.onFinishInflate();
+  final ImageView image=(ImageView)findViewById(R.id.widget_preview);
+  mOriginalImagePadding.left=image.getPaddingLeft();
+  mOriginalImagePadding.top=image.getPaddingTop();
+  mOriginalImagePadding.right=image.getPaddingRight();
+  mOriginalImagePadding.bottom=image.getPaddingBottom();
+}

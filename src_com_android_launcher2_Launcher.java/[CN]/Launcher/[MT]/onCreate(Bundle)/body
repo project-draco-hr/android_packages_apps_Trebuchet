@@ -26,7 +26,7 @@
   mSavedState=savedInstanceState;
   restoreState(mSavedState);
   if (mAppsCustomizeContent != null) {
-    mAppsCustomizeContent.onPackagesUpdated();
+    mAppsCustomizeContent.onPackagesUpdated(true);
   }
   if (PROFILE_STARTUP) {
     android.os.Debug.stopMethodTracing();
