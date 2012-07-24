@@ -10,6 +10,7 @@ synchronized (mLock) {
       throw new RuntimeException("Error! Background loading is already running");
     }
   }
+  mHandler.flush();
   bindWorkspace(synchronousBindPage);
   onlyBindAllApps();
 }
