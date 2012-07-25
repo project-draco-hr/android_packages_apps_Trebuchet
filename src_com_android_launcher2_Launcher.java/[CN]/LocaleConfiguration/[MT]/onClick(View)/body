@@ -24,7 +24,7 @@
     }
   }
  else   if (v == mAllAppsButton) {
-    if (mState == State.APPS_CUSTOMIZE) {
+    if (isAllAppsVisible()) {
       showWorkspace(true);
     }
  else {

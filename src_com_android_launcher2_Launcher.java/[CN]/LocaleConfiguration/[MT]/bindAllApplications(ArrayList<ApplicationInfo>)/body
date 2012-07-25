@@ -1,14 +1,18 @@
 {
-  View progressBar=mAppsCustomizeTabHost.findViewById(R.id.apps_customize_progress_bar);
-  if (progressBar != null) {
-    ((ViewGroup)progressBar.getParent()).removeView(progressBar);
-  }
-  mAppsCustomizeTabHost.post(new Runnable(){
+  Runnable setAllAppsRunnable=new Runnable(){
     public void run(){
       if (mAppsCustomizeContent != null) {
         mAppsCustomizeContent.setApps(apps);
       }
     }
   }
-);
+;
+  View progressBar=mAppsCustomizeTabHost.findViewById(R.id.apps_customize_progress_bar);
+  if (progressBar != null) {
+    ((ViewGroup)progressBar.getParent()).removeView(progressBar);
+    mAppsCustomizeTabHost.post(setAllAppsRunnable);
+  }
+ else {
+    setAllAppsRunnable.run();
+  }
 }
