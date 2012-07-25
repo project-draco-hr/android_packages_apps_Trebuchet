@@ -1,5 +1,5 @@
 {
-  if (!mLauncher.isAllAppsCustomizeOpen() || mLauncher.getWorkspace().isSwitchingState())   return;
+  if (!mLauncher.isAllAppsVisible() || mLauncher.getWorkspace().isSwitchingState())   return;
   if (v instanceof PagedViewIcon) {
     final ApplicationInfo appInfo=(ApplicationInfo)v.getTag();
     if (mPressedIcon != null) {

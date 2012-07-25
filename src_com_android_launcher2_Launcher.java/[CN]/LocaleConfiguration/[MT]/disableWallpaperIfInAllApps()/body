@@ -1,5 +1,5 @@
 {
-  if (mState == State.APPS_CUSTOMIZE) {
+  if (isAllAppsVisible()) {
     if (mAppsCustomizeTabHost != null && !mAppsCustomizeTabHost.isTransitioning()) {
       updateWallpaperVisibility(false);
     }

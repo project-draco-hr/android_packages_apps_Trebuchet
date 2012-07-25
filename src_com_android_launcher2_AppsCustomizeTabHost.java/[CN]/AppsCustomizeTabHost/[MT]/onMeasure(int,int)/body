@@ -5,8 +5,8 @@
     int contentWidth=mAppsCustomizePane.getPageContentWidth();
     if (contentWidth > 0 && mTabs.getLayoutParams().width != contentWidth) {
       mTabs.getLayoutParams().width=contentWidth;
-      post(mRelayoutAndMakeVisible);
+      mRelayoutAndMakeVisible.run();
     }
+    super.onMeasure(widthMeasureSpec,heightMeasureSpec);
   }
-  super.onMeasure(widthMeasureSpec,heightMeasureSpec);
 }

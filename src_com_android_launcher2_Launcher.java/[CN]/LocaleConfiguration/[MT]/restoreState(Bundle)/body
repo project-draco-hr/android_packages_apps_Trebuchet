@@ -32,8 +32,7 @@
   if (mAppsCustomizeTabHost != null) {
     String curTab=savedState.getString("apps_customize_currentTab");
     if (curTab != null) {
-      mAppsCustomizeContent.setContentType(mAppsCustomizeTabHost.getContentTypeForTabTag(curTab));
-      mAppsCustomizeTabHost.setCurrentTabByTag(curTab);
+      mAppsCustomizeTabHost.setContentTypeImmediate(mAppsCustomizeTabHost.getContentTypeForTabTag(curTab));
       mAppsCustomizeContent.loadAssociatedPages(mAppsCustomizeContent.getCurrentPage());
     }
     int currentIndex=savedState.getInt("apps_customize_currentIndex");

@@ -1,0 +1,13 @@
+{
+  if (immediate) {
+    updatePackages();
+  }
+ else {
+    postDelayed(new Runnable(){
+      public void run(){
+        updatePackages();
+      }
+    }
+,1500);
+  }
+}
