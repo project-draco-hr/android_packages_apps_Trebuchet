@@ -6,10 +6,7 @@
     }
     mSavedState=null;
   }
-  if (mSavedInstanceState != null) {
-    super.onRestoreInstanceState(mSavedInstanceState);
-    mSavedInstanceState=null;
-  }
+  mWorkspace.restoreInstanceStateForRemainingPages();
   for (int i=0; i < sPendingAddList.size(); i++) {
     completeAdd(sPendingAddList.get(i));
   }
