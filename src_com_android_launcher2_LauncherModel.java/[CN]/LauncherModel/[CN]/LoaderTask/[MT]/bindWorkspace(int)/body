@@ -41,6 +41,18 @@ synchronized (sBgLock) {
 ;
   runOnMainThread(r);
   bindWorkspaceItems(oldCallbacks,currentWorkspaceItems,currentAppWidgets,currentFolders,null);
+  if (isLoadingSynchronously) {
+    r=new Runnable(){
+      public void run(){
+        Callbacks callbacks=tryGetCallbacks(oldCallbacks);
+        if (callbacks != null) {
+          callbacks.onPageBoundSynchronously(currentScreen);
+        }
+      }
+    }
+;
+    runOnMainThread(r);
+  }
   mDeferredBindRunnables.clear();
   bindWorkspaceItems(oldCallbacks,otherWorkspaceItems,otherAppWidgets,otherFolders,(isLoadingSynchronously ? mDeferredBindRunnables : null));
   r=new Runnable(){

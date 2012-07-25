@@ -1,0 +1,9 @@
+{
+  int count=getChildCount();
+  for (int i=0; i < count; i++) {
+    if (!mRestoredPages.contains(i)) {
+      restoreInstanceStateForChild(i);
+    }
+  }
+  mRestoredPages.clear();
+}
