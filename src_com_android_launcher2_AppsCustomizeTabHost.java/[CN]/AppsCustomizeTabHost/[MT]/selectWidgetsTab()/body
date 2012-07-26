@@ -1,4 +1,3 @@
 {
   setContentTypeImmediate(AppsCustomizePagedView.ContentType.Widgets);
-  setCurrentTabByTag(WIDGETS_TAB_TAG);
 }

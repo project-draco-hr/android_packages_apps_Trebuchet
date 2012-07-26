@@ -1,4 +1,3 @@
 {
   setContentTypeImmediate(AppsCustomizePagedView.ContentType.Applications);
-  setCurrentTabByTag(APPS_TAB_TAG);
 }

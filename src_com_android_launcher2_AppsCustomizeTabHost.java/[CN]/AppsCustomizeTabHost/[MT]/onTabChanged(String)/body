@@ -1,9 +1,5 @@
 {
   final AppsCustomizePagedView.ContentType type=getContentTypeForTabTag(tabId);
-  if (mSuppressContentCallback) {
-    mSuppressContentCallback=false;
-    return;
-  }
   final Resources res=getResources();
   final int duration=res.getInteger(R.integer.config_tabTransitionDuration);
   post(new Runnable(){
