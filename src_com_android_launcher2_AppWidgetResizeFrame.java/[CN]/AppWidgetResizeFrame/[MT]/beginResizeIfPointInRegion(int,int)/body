@@ -3,8 +3,8 @@
   boolean verticalActive=(mResizeMode & AppWidgetProviderInfo.RESIZE_VERTICAL) != 0;
   mLeftBorderActive=(x < mTouchTargetWidth) && horizontalActive;
   mRightBorderActive=(x > getWidth() - mTouchTargetWidth) && horizontalActive;
-  mTopBorderActive=(y < mTouchTargetWidth) && verticalActive;
-  mBottomBorderActive=(y > getHeight() - mTouchTargetWidth) && verticalActive;
+  mTopBorderActive=(y < mTouchTargetWidth + mTopTouchRegionAdjustment) && verticalActive;
+  mBottomBorderActive=(y > getHeight() - mTouchTargetWidth + mBottomTouchRegionAdjustment) && verticalActive;
   boolean anyBordersActive=mLeftBorderActive || mRightBorderActive || mTopBorderActive|| mBottomBorderActive;
   mBaselineWidth=getMeasuredWidth();
   mBaselineHeight=getMeasuredHeight();
