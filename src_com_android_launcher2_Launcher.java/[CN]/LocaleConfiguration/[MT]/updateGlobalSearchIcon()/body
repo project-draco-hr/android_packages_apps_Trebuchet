@@ -1,7 +1,6 @@
 {
   final View searchButtonContainer=findViewById(R.id.search_button_container);
   final ImageView searchButton=(ImageView)findViewById(R.id.search_button);
-  final View searchDivider=findViewById(R.id.search_divider);
   final View voiceButtonContainer=findViewById(R.id.voice_button_container);
   final View voiceButton=findViewById(R.id.voice_button);
   final View voiceButtonProxy=findViewById(R.id.voice_button_proxy);
@@ -13,14 +12,12 @@
     if (sGlobalSearchIcon[coi] == null) {
       sGlobalSearchIcon[coi]=updateButtonWithIconFromExternalActivity(R.id.search_button,activityName,R.drawable.ic_home_search_normal_holo,TOOLBAR_ICON_METADATA_NAME);
     }
-    if (searchDivider != null)     searchDivider.setVisibility(View.VISIBLE);
     if (searchButtonContainer != null)     searchButtonContainer.setVisibility(View.VISIBLE);
     searchButton.setVisibility(View.VISIBLE);
     invalidatePressedFocusedStates(searchButtonContainer,searchButton);
     return true;
   }
  else {
-    if (searchDivider != null)     searchDivider.setVisibility(View.GONE);
     if (searchButtonContainer != null)     searchButtonContainer.setVisibility(View.GONE);
     if (voiceButtonContainer != null)     voiceButtonContainer.setVisibility(View.GONE);
     searchButton.setVisibility(View.GONE);
