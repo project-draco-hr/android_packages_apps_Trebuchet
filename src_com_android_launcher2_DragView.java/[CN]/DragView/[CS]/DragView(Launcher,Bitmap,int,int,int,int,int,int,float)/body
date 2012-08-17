@@ -7,6 +7,8 @@
   final float offsetY=res.getDimensionPixelSize(R.dimen.dragViewOffsetY);
   final float scaleDps=res.getDimensionPixelSize(R.dimen.dragViewScale);
   final float scale=(width + scaleDps) / width;
+  setScaleX(initialScale);
+  setScaleY(initialScale);
   mAnim=LauncherAnimUtils.ofFloat(0.0f,1.0f);
   mAnim.setDuration(150);
   mAnim.addUpdateListener(new AnimatorUpdateListener(){
