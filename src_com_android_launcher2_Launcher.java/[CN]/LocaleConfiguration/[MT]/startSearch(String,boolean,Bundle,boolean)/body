@@ -7,6 +7,9 @@
     appSearchData=new Bundle();
     appSearchData.putString(Search.SOURCE,"launcher-search");
   }
-  Rect sourceBounds=mSearchDropTargetBar.getSearchBarBounds();
+  Rect sourceBounds=new Rect();
+  if (mSearchDropTargetBar != null) {
+    sourceBounds=mSearchDropTargetBar.getSearchBarBounds();
+  }
   startGlobalSearch(initialQuery,selectInitialQuery,appSearchData,sourceBounds);
 }

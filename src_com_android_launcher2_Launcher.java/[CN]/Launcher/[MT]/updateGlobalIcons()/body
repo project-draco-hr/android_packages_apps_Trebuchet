@@ -18,5 +18,7 @@
   if (sAppMarketIcon[coi] != null) {
     updateAppMarketIcon(sAppMarketIcon[coi]);
   }
-  mSearchDropTargetBar.onSearchPackagesChanged(searchVisible,voiceVisible);
+  if (mSearchDropTargetBar != null) {
+    mSearchDropTargetBar.onSearchPackagesChanged(searchVisible,voiceVisible);
+  }
 }
