@@ -1,8 +1,5 @@
 {
-  if (LauncherApplication.isScreenLandscape(getContext())) {
-    return super.getChildDrawingOrder(childCount,i);
-  }
-  if (mWorkspaceIndex == -1 || mQsbIndex == -1 || mLauncher.getWorkspace().isDrawingBackgroundGradient()) {
+  if (true || LauncherApplication.isScreenLandscape(getContext()) || mWorkspaceIndex == -1 || mQsbIndex == -1 || mLauncher.getWorkspace().isDrawingBackgroundGradient()) {
     return i;
   }
   if (i == mQsbIndex) {
