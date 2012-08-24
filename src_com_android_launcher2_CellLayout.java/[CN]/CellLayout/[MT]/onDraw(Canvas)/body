@@ -16,9 +16,10 @@
     final float alpha=mDragOutlineAlphas[i];
     if (alpha > 0) {
       final Rect r=mDragOutlines[i];
+      scaleRectAboutCenter(r,temp,getChildrenScale());
       final Bitmap b=(Bitmap)mDragOutlineAnims[i].getTag();
       paint.setAlpha((int)(alpha + .5f));
-      canvas.drawBitmap(b,null,r,paint);
+      canvas.drawBitmap(b,null,temp,paint);
     }
   }
   if (mPressedOrFocusedIcon != null) {

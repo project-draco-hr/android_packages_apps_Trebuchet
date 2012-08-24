@@ -26,9 +26,7 @@
   }
   initDeltaX=child.getTranslationX();
   initDeltaY=child.getTranslationY();
-  finalScale=1.0f - 4.0f / child.getWidth();
+  finalScale=getChildrenScale() - 4.0f / child.getWidth();
   initScale=child.getScaleX();
-  child.setPivotY(child.getMeasuredHeight() * 0.5f);
-  child.setPivotX(child.getMeasuredWidth() * 0.5f);
   this.child=child;
 }
