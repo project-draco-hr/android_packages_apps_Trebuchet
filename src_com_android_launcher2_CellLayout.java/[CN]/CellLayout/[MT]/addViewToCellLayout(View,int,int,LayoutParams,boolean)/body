@@ -10,6 +10,8 @@
       bubbleChild.setTextColor(res.getColor(R.color.workspace_icon_text_color));
     }
   }
+  child.setScaleX(getChildrenScale());
+  child.setScaleY(getChildrenScale());
   if (lp.cellX >= 0 && lp.cellX <= mCountX - 1 && lp.cellY >= 0 && lp.cellY <= mCountY - 1) {
     if (lp.cellHSpan < 0)     lp.cellHSpan=mCountX;
     if (lp.cellVSpan < 0)     lp.cellVSpan=mCountY;

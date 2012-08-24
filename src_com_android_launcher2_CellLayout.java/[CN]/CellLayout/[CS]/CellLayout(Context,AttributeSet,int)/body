@@ -18,6 +18,7 @@
   a.recycle();
   setAlwaysDrawnWithCacheEnabled(false);
   final Resources res=getResources();
+  mHotseatScale=(res.getInteger(R.integer.hotseat_item_scale_percentage) / 100f);
   mNormalBackground=res.getDrawable(R.drawable.homescreen_blue_normal_holo);
   mActiveGlowBackground=res.getDrawable(R.drawable.homescreen_blue_strong_holo);
   mOverScrollLeft=res.getDrawable(R.drawable.overscroll_glow_left);
