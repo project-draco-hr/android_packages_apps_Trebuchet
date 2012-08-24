@@ -15,12 +15,12 @@
  else {
     lp=new DragLayer.LayoutParams(width,height);
   }
-  mDragLayer.getViewRectRelativeToSelf(fi,mRectForFolderAnimation);
+  float scale=mDragLayer.getDescendantRectRelativeToSelf(fi,mRectForFolderAnimation);
   lp.customPosition=true;
   lp.x=mRectForFolderAnimation.left;
   lp.y=mRectForFolderAnimation.top;
-  lp.width=width;
-  lp.height=height;
+  lp.width=(int)(scale * width);
+  lp.height=(int)(scale * height);
   mFolderIconCanvas.drawColor(0,PorterDuff.Mode.CLEAR);
   fi.draw(mFolderIconCanvas);
   mFolderIconImageView.setImageBitmap(mFolderIconBitmap);

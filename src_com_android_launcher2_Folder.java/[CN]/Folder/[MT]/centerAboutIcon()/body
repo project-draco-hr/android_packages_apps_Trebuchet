@@ -3,9 +3,9 @@
   int width=getPaddingLeft() + getPaddingRight() + mContent.getDesiredWidth();
   int height=getPaddingTop() + getPaddingBottom() + mContent.getDesiredHeight()+ mFolderNameHeight;
   DragLayer parent=(DragLayer)mLauncher.findViewById(R.id.drag_layer);
-  parent.getDescendantRectRelativeToSelf(mFolderIcon,mTempRect);
-  int centerX=mTempRect.centerX();
-  int centerY=mTempRect.centerY();
+  float scale=parent.getDescendantRectRelativeToSelf(mFolderIcon,mTempRect);
+  int centerX=(int)(mTempRect.left + mTempRect.width() * scale / 2);
+  int centerY=(int)(mTempRect.top + mTempRect.height() * scale / 2);
   int centeredLeft=centerX - width / 2;
   int centeredTop=centerY - height / 2;
   int currentPage=mLauncher.getWorkspace().getCurrentPage();

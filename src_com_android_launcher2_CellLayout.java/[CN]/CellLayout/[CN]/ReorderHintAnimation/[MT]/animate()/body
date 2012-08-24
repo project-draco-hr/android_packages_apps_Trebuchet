@@ -34,7 +34,7 @@
     public void onAnimationRepeat(    Animator animation){
       initDeltaX=0;
       initDeltaY=0;
-      initScale=1.0f;
+      initScale=getChildrenScale();
     }
   }
 );

@@ -5,9 +5,11 @@
   Rect r=new Rect();
   getViewRectRelativeToSelf(dragView,r);
   int coord[]=new int[2];
-  coord[0]=lp.x;
-  coord[1]=lp.y;
+  float childScale=child.getScaleX();
+  coord[0]=lp.x + (int)(child.getMeasuredWidth() * (1 - childScale) / 2);
+  coord[1]=lp.y + (int)(child.getMeasuredHeight() * (1 - childScale) / 2);
   float scale=getDescendantCoordRelativeToSelf((View)child.getParent(),coord);
+  scale*=childScale;
   int toX=coord[0];
   int toY=coord[1];
   if (child instanceof TextView) {
@@ -17,7 +19,8 @@
     toX-=(dragView.getMeasuredWidth() - Math.round(scale * child.getMeasuredWidth())) / 2;
   }
  else   if (child instanceof FolderIcon) {
-    toY-=Workspace.DRAG_BITMAP_PADDING / 2;
+    toY-=scale * Workspace.DRAG_BITMAP_PADDING / 2;
+    toY-=(1 - scale) * dragView.getMeasuredHeight() / 2;
     toX-=(dragView.getMeasuredWidth() - Math.round(scale * child.getMeasuredWidth())) / 2;
   }
  else {
