@@ -1,6 +1,7 @@
 {
   if (mQueue.size() > 0) {
-    Runnable peek=mQueue.getFirst();
+    Pair<Runnable,Integer> p=mQueue.getFirst();
+    Runnable peek=p.first;
     if (peek instanceof IdleRunnable) {
       mMessageQueue.addIdleHandler(mHandler);
     }

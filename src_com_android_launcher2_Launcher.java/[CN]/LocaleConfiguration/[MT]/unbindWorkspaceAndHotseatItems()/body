@@ -1,5 +1,0 @@
-{
-  if (mModel != null) {
-    mModel.unbindWorkspaceItems();
-  }
-}

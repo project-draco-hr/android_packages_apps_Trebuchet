@@ -1,7 +1,7 @@
 {
   if (!mDeferredBindRunnables.isEmpty()) {
     for (    final Runnable r : mDeferredBindRunnables) {
-      mHandler.post(r);
+      mHandler.post(r,MAIN_THREAD_BINDING_RUNNABLE);
     }
     mDeferredBindRunnables.clear();
   }
