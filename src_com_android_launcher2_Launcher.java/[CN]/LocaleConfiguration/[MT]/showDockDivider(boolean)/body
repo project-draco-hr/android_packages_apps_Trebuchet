@@ -11,7 +11,11 @@
     if (animated) {
       mDividerAnimator=LauncherAnimUtils.createAnimatorSet();
       mDividerAnimator.playTogether(LauncherAnimUtils.ofFloat(mQsbDivider,"alpha",1f),LauncherAnimUtils.ofFloat(mDockDivider,"alpha",1f));
-      mDividerAnimator.setDuration(mSearchDropTargetBar.getTransitionInDuration());
+      int duration=0;
+      if (mSearchDropTargetBar != null) {
+        duration=mSearchDropTargetBar.getTransitionInDuration();
+      }
+      mDividerAnimator.setDuration(duration);
       mDividerAnimator.start();
     }
   }
