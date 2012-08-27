@@ -2,7 +2,10 @@
   if (!LauncherApplication.isScreenLarge()) {
     if (animated) {
       if (mHotseat.getAlpha() != 0f) {
-        int duration=mSearchDropTargetBar.getTransitionOutDuration();
+        int duration=0;
+        if (mSearchDropTargetBar != null) {
+          duration=mSearchDropTargetBar.getTransitionOutDuration();
+        }
         mHotseat.animate().alpha(0f).setDuration(duration);
       }
     }
