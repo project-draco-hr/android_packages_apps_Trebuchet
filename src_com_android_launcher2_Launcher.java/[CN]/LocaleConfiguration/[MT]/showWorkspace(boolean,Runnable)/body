@@ -3,7 +3,9 @@
     boolean wasInSpringLoadedMode=(mState == State.APPS_CUSTOMIZE_SPRING_LOADED);
     mWorkspace.setVisibility(View.VISIBLE);
     hideAppsCustomizeHelper(State.WORKSPACE,animated,false,onCompleteRunnable);
-    mSearchDropTargetBar.showSearchBar(wasInSpringLoadedMode);
+    if (mSearchDropTargetBar != null) {
+      mSearchDropTargetBar.showSearchBar(wasInSpringLoadedMode);
+    }
     showDockDivider(animated && wasInSpringLoadedMode);
     if (mAllAppsButton != null) {
       mAllAppsButton.requestFocus();
