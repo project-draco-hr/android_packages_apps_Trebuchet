@@ -1,0 +1,21 @@
+{
+  Rect r0=new Rect(boundingRect);
+  int minRuns=0;
+  if (direction[1] < 0) {
+    r0.set(r0.left,r0.bottom - 1,r0.right,r0.bottom);
+  }
+ else   if (direction[1] > 0) {
+    r0.set(r0.left,r0.top,r0.right,r0.top + 1);
+  }
+ else   if (direction[0] < 0) {
+    r0.set(r0.right - 1,r0.top,r0.right,r0.bottom);
+  }
+ else   if (direction[0] > 0) {
+    r0.set(r0.left,r0.top,r0.left + 1,r0.bottom);
+  }
+  minRuns=Math.max(Math.abs(boundingRect.width() - r0.width()),Math.abs(boundingRect.height() - r0.height())) + 1;
+  while (addViewInDirection(views,r0,direction,mTmpOccupied,dragView,currentState) || minRuns > 0) {
+    minRuns--;
+  }
+  boundingRect.union(r0);
+}
