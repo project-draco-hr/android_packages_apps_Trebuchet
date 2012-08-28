@@ -56,14 +56,26 @@
   if (mLeftBorderActive || mRightBorderActive) {
     spanX+=hSpanInc;
     cellX+=cellXInc;
-    mDirectionVector[0]=mLeftBorderActive ? -1 : 1;
+    if (hSpanDelta != 0) {
+      mDirectionVector[0]=mLeftBorderActive ? -1 : 1;
+    }
   }
   if (mTopBorderActive || mBottomBorderActive) {
     spanY+=vSpanInc;
     cellY+=cellYInc;
-    mDirectionVector[1]=mTopBorderActive ? -1 : 1;
+    if (vSpanDelta != 0) {
+      mDirectionVector[1]=mTopBorderActive ? -1 : 1;
+    }
   }
   if (!onDismiss && vSpanDelta == 0 && hSpanDelta == 0)   return;
+  if (onDismiss) {
+    mDirectionVector[0]=mLastDirectionVector[0];
+    mDirectionVector[1]=mLastDirectionVector[1];
+  }
+ else {
+    mLastDirectionVector[0]=mDirectionVector[0];
+    mLastDirectionVector[1]=mDirectionVector[1];
+  }
   if (mCellLayout.createAreaForResize(cellX,cellY,spanX,spanY,mWidgetView,mDirectionVector,onDismiss)) {
     lp.tmpCellX=cellX;
     lp.tmpCellY=cellY;
