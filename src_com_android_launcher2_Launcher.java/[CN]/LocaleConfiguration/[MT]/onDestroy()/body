@@ -15,7 +15,9 @@
   mAppWidgetHost=null;
   mWidgetsToAdvance.clear();
   TextKeyListener.getInstance().release();
-  unbindWorkspaceAndHotseatItems();
+  if (mModel != null) {
+    mModel.unbindItemInfosAndClearQueuedBindRunnables();
+  }
   getContentResolver().unregisterContentObserver(mWidgetObserver);
   unregisterReceiver(mCloseSystemDialogsReceiver);
   mDragLayer.clearAllResizeFrames();
