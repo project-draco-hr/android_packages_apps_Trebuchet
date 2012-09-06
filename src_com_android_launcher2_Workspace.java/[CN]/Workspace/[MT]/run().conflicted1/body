@@ -12,6 +12,10 @@ synchronized (newApps) {
           if (packageNames.contains(pn)) {
             iter.remove();
           }
+          ArrayList<ItemInfo> shortcuts=model.getWorkspaceShortcutItemInfosWithIntent(intent);
+          for (          ItemInfo info : shortcuts) {
+            model.deleteItemFromDatabase(context,info);
+          }
         }
  catch (        URISyntaxException e) {
         }
