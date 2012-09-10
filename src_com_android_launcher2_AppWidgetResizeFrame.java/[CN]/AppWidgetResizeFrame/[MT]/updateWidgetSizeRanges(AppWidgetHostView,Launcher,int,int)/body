@@ -1,18 +1,4 @@
 {
-  Rect landMetrics=Workspace.getCellLayoutMetrics(launcher,CellLayout.LANDSCAPE);
-  Rect portMetrics=Workspace.getCellLayoutMetrics(launcher,CellLayout.PORTRAIT);
-  final float density=launcher.getResources().getDisplayMetrics().density;
-  int cellWidth=landMetrics.left;
-  int cellHeight=landMetrics.top;
-  int widthGap=landMetrics.right;
-  int heightGap=landMetrics.bottom;
-  int landWidth=(int)((spanX * cellWidth + (spanX - 1) * widthGap) / density);
-  int landHeight=(int)((spanY * cellHeight + (spanY - 1) * heightGap) / density);
-  cellWidth=portMetrics.left;
-  cellHeight=portMetrics.top;
-  widthGap=portMetrics.right;
-  heightGap=portMetrics.bottom;
-  int portWidth=(int)((spanX * cellWidth + (spanX - 1) * widthGap) / density);
-  int portHeight=(int)((spanY * cellHeight + (spanY - 1) * heightGap) / density);
-  widgetView.updateAppWidgetSize(null,portWidth,landHeight,landWidth,portHeight);
+  getWidgetSizeRanges(launcher,spanX,spanY,mTmpRect);
+  widgetView.updateAppWidgetSize(null,mTmpRect.left,mTmpRect.top,mTmpRect.right,mTmpRect.bottom);
 }
