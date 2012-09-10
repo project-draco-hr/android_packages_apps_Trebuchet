@@ -4,7 +4,6 @@
   canvas.save();
   v.draw(canvas);
   canvas.restore();
-  canvas.drawColor(mHighlightColor,PorterDuff.Mode.SRC_IN);
   canvas.setBitmap(null);
   return b;
 }
