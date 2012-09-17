@@ -1,0 +1,9 @@
+{
+  final String[] extras=resources.getStringArray(resid);
+  for (  String extra : extras) {
+    int res=resources.getIdentifier(extra,"drawable",packageName);
+    if (res != 0) {
+      outList.add(res);
+    }
+  }
+}
