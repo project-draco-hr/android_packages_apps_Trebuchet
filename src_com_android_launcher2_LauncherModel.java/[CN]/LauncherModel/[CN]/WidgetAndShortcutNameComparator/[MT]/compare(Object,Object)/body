@@ -14,5 +14,5 @@
     labelB=(b instanceof AppWidgetProviderInfo) ? ((AppWidgetProviderInfo)b).label : ((ResolveInfo)b).loadLabel(mPackageManager).toString();
     mLabelCache.put(b,labelB);
   }
-  return sCollator.compare(labelA,labelB);
+  return mCollator.compare(labelA,labelB);
 }
