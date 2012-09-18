@@ -1,0 +1,9 @@
+{
+  final Collator collator=Collator.getInstance();
+  return new Comparator<AppWidgetProviderInfo>(){
+    public final int compare(    AppWidgetProviderInfo a,    AppWidgetProviderInfo b){
+      return collator.compare(a.label.toString(),b.label.toString());
+    }
+  }
+;
+}

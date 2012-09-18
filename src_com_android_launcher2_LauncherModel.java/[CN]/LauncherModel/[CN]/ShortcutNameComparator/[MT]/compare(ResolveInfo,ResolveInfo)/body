@@ -16,5 +16,5 @@
     labelB=b.loadLabel(mPackageManager).toString();
     mLabelCache.put(keyB,labelB);
   }
-  return sCollator.compare(labelA,labelB);
+  return mCollator.compare(labelA,labelB);
 }

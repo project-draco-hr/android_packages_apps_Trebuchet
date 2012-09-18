@@ -2,7 +2,7 @@
   int count=list.size();
   for (int i=0; i < count; ++i) {
     ApplicationInfo info=list.get(i);
-    int index=Collections.binarySearch(mApps,info,LauncherModel.APP_NAME_COMPARATOR);
+    int index=Collections.binarySearch(mApps,info,LauncherModel.getAppNameComparator());
     if (index < 0) {
       mApps.add(-(index + 1),info);
     }
