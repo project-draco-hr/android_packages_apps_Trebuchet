@@ -1,0 +1,12 @@
+{
+  Bundle options=null;
+  if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+    AppWidgetResizeFrame.getWidgetSizeRanges(mLauncher,info.spanX,info.spanY,mTmpRect);
+    options=new Bundle();
+    options.putInt(AppWidgetManager.OPTION_APPWIDGET_MIN_WIDTH,mTmpRect.left);
+    options.putInt(AppWidgetManager.OPTION_APPWIDGET_MIN_HEIGHT,mTmpRect.top);
+    options.putInt(AppWidgetManager.OPTION_APPWIDGET_MAX_WIDTH,mTmpRect.right);
+    options.putInt(AppWidgetManager.OPTION_APPWIDGET_MAX_HEIGHT,mTmpRect.bottom);
+  }
+  return options;
+}
