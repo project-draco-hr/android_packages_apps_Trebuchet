@@ -7,8 +7,16 @@
   mBindWidgetRunnable=new Runnable(){
     @Override public void run(){
       mWidgetLoadingId=mLauncher.getAppWidgetHost().allocateAppWidgetId();
-      if (AppWidgetManager.getInstance(mLauncher).bindAppWidgetIdIfAllowed(mWidgetLoadingId,info.componentName)) {
-        mWidgetCleanupState=WIDGET_BOUND;
+      Bundle options=getDefaultOptionsForWidget(mLauncher,info);
+      if (options == null) {
+        if (AppWidgetManager.getInstance(mLauncher).bindAppWidgetIdIfAllowed(mWidgetLoadingId,info.componentName)) {
+          mWidgetCleanupState=WIDGET_BOUND;
+        }
+      }
+ else {
+        if (AppWidgetManager.getInstance(mLauncher).bindAppWidgetIdIfAllowed(mWidgetLoadingId,info.componentName,options)) {
+          mWidgetCleanupState=WIDGET_BOUND;
+        }
       }
     }
   }
