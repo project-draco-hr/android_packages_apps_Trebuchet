@@ -1,5 +1,0 @@
-{
-  if (LauncherApplication.isScreenLarge()) {
-    mLauncher.showWorkspace(true);
-  }
-}
