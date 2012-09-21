@@ -23,9 +23,7 @@
       Log.d(TAG,transaction);
       cr.insert(notify ? LauncherSettings.Favorites.CONTENT_URI : LauncherSettings.Favorites.CONTENT_URI_NO_NOTIFICATION,values);
 synchronized (sBgLock) {
-        if (sBgItemsIdMap.containsKey(item.id)) {
-          throw new RuntimeException("Error: ItemInfo id (" + item.id + ") passed to "+ "addItemToDatabase already exists."+ item.toString());
-        }
+        checkItemInfoLocked(item.id,item,null);
         sBgItemsIdMap.put(item.id,item);
 switch (item.itemType) {
 case LauncherSettings.Favorites.ITEM_TYPE_FOLDER:
