@@ -47,7 +47,7 @@
       @Override public void onAnimationEnd(      Animator animation){
         dispatchOnLauncherTransitionEnd(fromView,animated,false);
         dispatchOnLauncherTransitionEnd(toView,animated,false);
-        if (!springLoaded && !LauncherApplication.isScreenLarge()) {
+        if (mWorkspace != null && !springLoaded && !LauncherApplication.isScreenLarge()) {
           mWorkspace.hideScrollingIndicator(true);
           hideDockDivider();
         }
