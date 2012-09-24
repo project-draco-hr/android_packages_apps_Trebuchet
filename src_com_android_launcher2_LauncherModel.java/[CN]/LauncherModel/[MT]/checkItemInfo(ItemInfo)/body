@@ -4,13 +4,7 @@
   Runnable r=new Runnable(){
     public void run(){
 synchronized (sBgLock) {
-        ItemInfo modelItem=sBgItemsIdMap.get(itemId);
-        if (modelItem != null && item != modelItem) {
-          String msg="item: " + ((item != null) ? item.toString() : "null") + "modelItem: "+ ((modelItem != null) ? modelItem.toString() : "null")+ "Error: ItemInfo passed to checkItemInfo doesn't match original";
-          RuntimeException e=new RuntimeException(msg);
-          e.setStackTrace(stackTrace);
-          throw e;
-        }
+        checkItemInfoLocked(itemId,item,stackTrace);
       }
     }
   }
