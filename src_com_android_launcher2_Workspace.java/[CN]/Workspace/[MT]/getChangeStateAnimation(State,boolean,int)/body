@@ -32,7 +32,7 @@
     }
   }
  else {
-    setPageSpacing(PagedView.AUTOMATIC_PAGE_SPACING);
+    setPageSpacing(mOriginalPageSpacing);
     setLayoutScale(1.0f);
   }
   final int duration=zoomIn ? getResources().getInteger(R.integer.config_workspaceUnshrinkTime) : getResources().getInteger(R.integer.config_appsCustomizeWorkspaceShrinkTime);

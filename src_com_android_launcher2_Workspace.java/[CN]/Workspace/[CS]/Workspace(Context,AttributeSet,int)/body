@@ -1,6 +1,7 @@
 {
   super(context,attrs,defStyle);
   mContentIsRefreshable=false;
+  mOriginalPageSpacing=mPageSpacing;
   mDragEnforcer=new DropTarget.DragEnforcer(context);
   setDataIsReady();
   mLauncher=(Launcher)context;
