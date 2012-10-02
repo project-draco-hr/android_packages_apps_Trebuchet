@@ -1,8 +1,9 @@
 {
-  final Bitmap b=Bitmap.createBitmap(v.getWidth(),v.getHeight(),Bitmap.Config.ARGB_8888);
+  final Drawable d=v.getDrawable();
+  final Bitmap b=Bitmap.createBitmap(d.getIntrinsicWidth(),d.getIntrinsicHeight(),Bitmap.Config.ARGB_8888);
   canvas.setBitmap(b);
   canvas.save();
-  v.draw(canvas);
+  d.draw(canvas);
   canvas.restore();
   canvas.setBitmap(null);
   return b;
