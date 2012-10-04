@@ -1,5 +1,5 @@
 {
-  Cling cling=(Cling)findViewById(clingId);
+  final Cling cling=(Cling)findViewById(clingId);
   if (cling != null) {
     cling.init(this,positionData);
     cling.setVisibility(View.VISIBLE);
@@ -12,6 +12,15 @@
  else {
       cling.setAlpha(1f);
     }
+    cling.setFocusableInTouchMode(true);
+    cling.post(new Runnable(){
+      public void run(){
+        cling.setFocusable(true);
+        cling.requestFocus();
+      }
+    }
+);
+    mHideFromAccessibilityHelper.setImportantForAccessibilityToNo(mDragLayer,clingId == R.id.all_apps_cling);
   }
   return cling;
 }

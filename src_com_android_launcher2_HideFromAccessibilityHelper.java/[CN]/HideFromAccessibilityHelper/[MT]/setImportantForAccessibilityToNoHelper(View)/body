@@ -1,0 +1,14 @@
+{
+  mPreviousValues.put(v,v.getImportantForAccessibility());
+  v.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO);
+  if (v instanceof ViewGroup) {
+    ViewGroup vg=(ViewGroup)v;
+    vg.setOnHierarchyChangeListener(this);
+    for (int i=0; i < vg.getChildCount(); i++) {
+      View child=vg.getChildAt(i);
+      if (includeView(child)) {
+        setImportantForAccessibilityToNoHelper(child);
+      }
+    }
+  }
+}
