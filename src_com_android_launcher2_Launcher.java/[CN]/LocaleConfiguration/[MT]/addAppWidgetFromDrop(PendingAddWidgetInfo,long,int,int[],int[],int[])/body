@@ -21,7 +21,15 @@
   }
  else {
     appWidgetId=getAppWidgetHost().allocateAppWidgetId();
-    if (mAppWidgetManager.bindAppWidgetIdIfAllowed(appWidgetId,info.componentName)) {
+    Bundle options=info.bindOptions;
+    boolean success=false;
+    if (options != null) {
+      success=mAppWidgetManager.bindAppWidgetIdIfAllowed(appWidgetId,info.componentName,options);
+    }
+ else {
+      success=mAppWidgetManager.bindAppWidgetIdIfAllowed(appWidgetId,info.componentName);
+    }
+    if (success) {
       addAppWidgetImpl(appWidgetId,info,null,info.info);
     }
  else {

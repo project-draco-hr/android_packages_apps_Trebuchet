@@ -15,4 +15,5 @@
   spanY=copy.spanY;
   minSpanX=copy.minSpanX;
   minSpanY=copy.minSpanY;
+  bindOptions=copy.bindOptions == null ? null : (Bundle)copy.bindOptions.clone();
 }
