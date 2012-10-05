@@ -11,10 +11,8 @@ synchronized (sBgLock) {
         if (item.container != LauncherSettings.Favorites.CONTAINER_DESKTOP && item.container != LauncherSettings.Favorites.CONTAINER_HOTSEAT) {
           if (!sBgFolders.containsKey(item.container)) {
             String msg="item: " + item + " container being set to: "+ item.container+ ", not in the list of folders";
-            RuntimeException e=new RuntimeException(msg);
-            e.setStackTrace(stackTrace);
+            Log.e(TAG,msg);
             Launcher.dumpDebugLogsToConsole();
-            throw e;
           }
         }
         ItemInfo modelItem=sBgItemsIdMap.get(itemId);
