@@ -1,7 +1,6 @@
 {
   final ContentResolver cr=context.getContentResolver();
   final Uri uriToDelete=LauncherSettings.Favorites.getContentUri(item.id,false);
-  final StackTraceElement[] stackTrace=new Throwable().getStackTrace();
   Runnable r=new Runnable(){
     public void run(){
       String transaction="DbDebug    Delete item (" + item.title + ") from db, id: "+ item.id+ " ("+ item.container+ ", "+ item.screen+ ", "+ item.cellX+ ", "+ item.cellY+ ")";
@@ -15,10 +14,8 @@ case LauncherSettings.Favorites.ITEM_TYPE_FOLDER:
         for (        ItemInfo info : sBgItemsIdMap.values()) {
           if (info.container == item.id) {
             String msg="deleting a folder (" + item + ") which still "+ "contains items ("+ info+ ")";
-            RuntimeException e=new RuntimeException(msg);
-            e.setStackTrace(stackTrace);
+            Log.e(TAG,msg);
             Launcher.dumpDebugLogsToConsole();
-            throw e;
           }
         }
       sBgWorkspaceItems.remove(item);
