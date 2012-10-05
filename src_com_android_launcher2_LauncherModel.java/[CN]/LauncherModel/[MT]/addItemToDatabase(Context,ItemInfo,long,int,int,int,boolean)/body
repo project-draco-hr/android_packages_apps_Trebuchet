@@ -36,10 +36,8 @@ case LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT:
  else {
           if (!sBgFolders.containsKey(item.container)) {
             String msg="adding item: " + item + " to a folder that "+ " doesn't exist";
-            RuntimeException e=new RuntimeException(msg);
-            e.setStackTrace(stackTrace);
+            Log.e(TAG,msg);
             Launcher.dumpDebugLogsToConsole();
-            throw e;
           }
         }
       break;
