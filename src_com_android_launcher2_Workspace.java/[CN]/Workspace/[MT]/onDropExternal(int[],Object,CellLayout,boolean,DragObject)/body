@@ -28,7 +28,7 @@
       }
     }
     final ItemInfo item=(ItemInfo)d.dragInfo;
-    boolean updateWidgetSize=Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN;
+    boolean updateWidgetSize=false;
     if (findNearestVacantCell) {
       int minSpanX=item.spanX;
       int minSpanY=item.spanY;
