@@ -1,0 +1,4 @@
+{
+  mPreviousValues=new HashMap<View,Integer>();
+  mHide=false;
+}

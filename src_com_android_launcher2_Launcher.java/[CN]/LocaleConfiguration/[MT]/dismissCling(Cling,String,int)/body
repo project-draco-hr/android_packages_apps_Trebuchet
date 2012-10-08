@@ -1,5 +1,5 @@
 {
-  if (cling != null) {
+  if (cling != null && cling.getVisibility() == View.VISIBLE) {
     ObjectAnimator anim=LauncherAnimUtils.ofFloat(cling,"alpha",0f);
     anim.setDuration(duration);
     anim.addListener(new AnimatorListenerAdapter(){
@@ -18,5 +18,6 @@
     }
 );
     anim.start();
+    mHideFromAccessibilityHelper.restoreImportantForAccessibility(mDragLayer);
   }
 }
