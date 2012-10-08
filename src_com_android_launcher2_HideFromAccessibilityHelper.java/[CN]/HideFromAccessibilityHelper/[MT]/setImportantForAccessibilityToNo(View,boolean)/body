@@ -1,0 +1,5 @@
+{
+  mOnlyAllApps=onlyAllApps;
+  setImportantForAccessibilityToNoHelper(v);
+  mHide=true;
+}

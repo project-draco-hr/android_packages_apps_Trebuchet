@@ -8,5 +8,6 @@
       }
     }
 );
+    mHideFromAccessibilityHelper.restoreImportantForAccessibility(mDragLayer);
   }
 }

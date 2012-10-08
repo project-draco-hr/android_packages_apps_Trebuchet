@@ -1,0 +1,5 @@
+{
+  if (mHide && includeView(child)) {
+    restoreImportantForAccessibilityHelper(child);
+  }
+}

@@ -1,0 +1,3 @@
+{
+  return v != null && (v.getClass().equals(c) || (v.getParent() instanceof ViewGroup && hasAncestorOfType((ViewGroup)v.getParent(),c)));
+}
