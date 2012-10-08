@@ -9,8 +9,9 @@
   if (mMaxAppCellCountX > -1) {
     maxCellCountX=Math.min(maxCellCountX,mMaxAppCellCountX);
   }
+  int maxWidgetCellCountY=maxCellCountY;
   if (mMaxAppCellCountY > -1) {
-    maxCellCountY=Math.min(maxCellCountY,mMaxAppCellCountY);
+    maxWidgetCellCountY=Math.min(maxWidgetCellCountY,mMaxAppCellCountY);
   }
   mWidgetSpacingLayout.setGap(mPageLayoutWidthGap,mPageLayoutHeightGap);
   mWidgetSpacingLayout.setPadding(mPageLayoutPaddingLeft,mPageLayoutPaddingTop,mPageLayoutPaddingRight,mPageLayoutPaddingBottom);
@@ -20,6 +21,7 @@
   updatePageCounts();
   int widthSpec=MeasureSpec.makeMeasureSpec(getMeasuredWidth(),MeasureSpec.AT_MOST);
   int heightSpec=MeasureSpec.makeMeasureSpec(getMeasuredHeight(),MeasureSpec.AT_MOST);
+  mWidgetSpacingLayout.calculateCellCount(width,height,maxCellCountX,maxWidgetCellCountY);
   mWidgetSpacingLayout.measure(widthSpec,heightSpec);
   mContentWidth=mWidgetSpacingLayout.getContentWidth();
   AppsCustomizeTabHost host=(AppsCustomizeTabHost)getTabHost();
