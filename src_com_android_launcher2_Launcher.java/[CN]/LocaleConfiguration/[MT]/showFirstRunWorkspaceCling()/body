@@ -1,5 +1,14 @@
 {
   if (isClingsEnabled() && !mSharedPrefs.getBoolean(Cling.WORKSPACE_CLING_DISMISSED_KEY,false) && !skipCustomClingIfNoAccounts()) {
+    if (mSharedPrefs.getInt(LauncherProvider.DEFAULT_WORKSPACE_RESOURCE_ID,0) != 0 && LauncherApplication.isScreenLarge()) {
+      View cling=findViewById(R.id.workspace_cling);
+      ViewGroup clingParent=(ViewGroup)cling.getParent();
+      int clingIndex=clingParent.indexOfChild(cling);
+      clingParent.removeViewAt(clingIndex);
+      View customCling=mInflater.inflate(R.layout.custom_workspace_cling,clingParent,false);
+      clingParent.addView(customCling,clingIndex);
+      customCling.setId(R.id.workspace_cling);
+    }
     initCling(R.id.workspace_cling,null,false,0);
   }
  else {
