@@ -1,6 +1,6 @@
 {
   if (isClingsEnabled() && !mSharedPrefs.getBoolean(Cling.WORKSPACE_CLING_DISMISSED_KEY,false) && !skipCustomClingIfNoAccounts()) {
-    if (mSharedPrefs.getInt(LauncherProvider.DEFAULT_WORKSPACE_RESOURCE_ID,0) != 0 && LauncherApplication.isScreenLarge()) {
+    if (mSharedPrefs.getInt(LauncherProvider.DEFAULT_WORKSPACE_RESOURCE_ID,0) != 0 && getResources().getBoolean(R.bool.config_useCustomClings)) {
       View cling=findViewById(R.id.workspace_cling);
       ViewGroup clingParent=(ViewGroup)cling.getParent();
       int clingIndex=clingParent.indexOfChild(cling);
