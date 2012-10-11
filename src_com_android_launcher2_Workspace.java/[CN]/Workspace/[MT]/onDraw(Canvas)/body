@@ -7,10 +7,5 @@
     mBackground.draw(canvas);
   }
   super.onDraw(canvas);
-  post(new Runnable(){
-    @Override public void run(){
-      mLauncher.getModel().bindRemainingSynchronousPages();
-    }
-  }
-);
+  post(mBindPages);
 }
