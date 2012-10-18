@@ -1,4 +1,0 @@
-{
-  component=pick(mComponentNames);
-  setImageBitmap(mIcons.get(component));
-}
