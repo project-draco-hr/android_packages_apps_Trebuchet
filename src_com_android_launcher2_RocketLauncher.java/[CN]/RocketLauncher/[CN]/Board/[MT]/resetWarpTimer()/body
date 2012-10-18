@@ -1,5 +1,0 @@
-{
-  final Handler h=getHandler();
-  h.removeCallbacks(mEngageWarp);
-  h.postDelayed(mEngageWarp,5000);
-}
