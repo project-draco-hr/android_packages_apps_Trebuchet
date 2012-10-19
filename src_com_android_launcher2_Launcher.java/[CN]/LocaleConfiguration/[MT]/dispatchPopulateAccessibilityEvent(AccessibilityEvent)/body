@@ -1,7 +1,12 @@
 {
-  boolean result=super.dispatchPopulateAccessibilityEvent(event);
+  final boolean result=super.dispatchPopulateAccessibilityEvent(event);
   final List<CharSequence> text=event.getText();
   text.clear();
-  text.add(getString(R.string.home));
+  if (mState == State.APPS_CUSTOMIZE) {
+    text.add(getString(R.string.all_apps_button_label));
+  }
+ else {
+    text.add(getString(R.string.all_apps_home_button_label));
+  }
   return result;
 }

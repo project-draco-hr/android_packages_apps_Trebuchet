@@ -15,5 +15,5 @@
   mState=State.WORKSPACE;
   mUserPresent=true;
   updateRunning();
-  getWindow().getDecorView().sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_SELECTED);
+  getWindow().getDecorView().sendAccessibilityEvent(AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED);
 }
