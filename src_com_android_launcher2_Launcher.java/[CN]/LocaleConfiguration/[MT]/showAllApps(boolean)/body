@@ -6,5 +6,5 @@
   mUserPresent=false;
   updateRunning();
   closeFolder();
-  getWindow().getDecorView().sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_SELECTED);
+  getWindow().getDecorView().sendAccessibilityEvent(AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED);
 }
