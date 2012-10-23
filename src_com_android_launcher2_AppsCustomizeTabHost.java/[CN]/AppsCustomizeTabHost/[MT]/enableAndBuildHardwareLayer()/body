@@ -2,6 +2,5 @@
   if (isHardwareAccelerated()) {
     setLayerType(LAYER_TYPE_HARDWARE,null);
     buildLayer();
-    System.gc();
   }
 }
