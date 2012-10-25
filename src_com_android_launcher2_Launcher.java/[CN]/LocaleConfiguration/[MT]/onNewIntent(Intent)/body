@@ -2,27 +2,38 @@
   super.onNewIntent(intent);
   if (Intent.ACTION_MAIN.equals(intent.getAction())) {
     closeSystemDialogs();
-    boolean alreadyOnHome=((intent.getFlags() & Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT) != Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
-    Folder openFolder=mWorkspace.getOpenFolder();
-    mWorkspace.exitWidgetResizeMode();
-    if (alreadyOnHome && mState == State.WORKSPACE && !mWorkspace.isTouchActive() && openFolder == null) {
-      mWorkspace.moveToDefaultScreen(true);
+    final boolean alreadyOnHome=((intent.getFlags() & Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT) != Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
+    Runnable processIntent=new Runnable(){
+      public void run(){
+        Folder openFolder=mWorkspace.getOpenFolder();
+        mWorkspace.exitWidgetResizeMode();
+        if (alreadyOnHome && mState == State.WORKSPACE && !mWorkspace.isTouchActive() && openFolder == null) {
+          mWorkspace.moveToDefaultScreen(true);
+        }
+        closeFolder();
+        exitSpringLoadedDragMode();
+        if (alreadyOnHome) {
+          showWorkspace(true);
+        }
+ else {
+          mOnResumeState=State.WORKSPACE;
+        }
+        final View v=getWindow().peekDecorView();
+        if (v != null && v.getWindowToken() != null) {
+          InputMethodManager imm=(InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+          imm.hideSoftInputFromWindow(v.getWindowToken(),0);
+        }
+        if (!alreadyOnHome && mAppsCustomizeTabHost != null) {
+          mAppsCustomizeTabHost.reset();
+        }
+      }
     }
-    closeFolder();
-    exitSpringLoadedDragMode();
-    if (alreadyOnHome) {
-      showWorkspace(true);
+;
+    if (alreadyOnHome && !mWorkspace.hasWindowFocus()) {
+      mWorkspace.postDelayed(processIntent,350);
     }
  else {
-      mOnResumeState=State.WORKSPACE;
-    }
-    final View v=getWindow().peekDecorView();
-    if (v != null && v.getWindowToken() != null) {
-      InputMethodManager imm=(InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
-      imm.hideSoftInputFromWindow(v.getWindowToken(),0);
-    }
-    if (!alreadyOnHome && mAppsCustomizeTabHost != null) {
-      mAppsCustomizeTabHost.reset();
+      processIntent.run();
     }
   }
 }
