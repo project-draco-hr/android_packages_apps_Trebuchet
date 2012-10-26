@@ -15,5 +15,6 @@
   velocity=Math.abs(velocity);
   velocity=Math.max(mMinSnapVelocity,velocity);
   duration=4 * Math.round(1000 * Math.abs(distance / velocity));
+  duration=Math.min(duration,MAX_PAGE_SNAP_DURATION);
   snapToPage(whichPage,delta,duration);
 }
