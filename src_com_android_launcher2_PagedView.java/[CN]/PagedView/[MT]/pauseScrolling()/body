@@ -1,0 +1,5 @@
+{
+  mScroller.forceFinished(true);
+  cancelScrollingIndicatorAnimations();
+  mScrollingPaused=true;
+}
