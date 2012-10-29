@@ -5,7 +5,7 @@
   if (mScrollIndicator != null) {
     updateScrollingIndicatorPosition();
     cancelScrollingIndicatorAnimations();
-    if (immediately) {
+    if (immediately || mScrollingPaused) {
       mScrollIndicator.setVisibility(View.INVISIBLE);
       mScrollIndicator.setAlpha(0f);
     }

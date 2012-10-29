@@ -36,6 +36,7 @@
     mStateAnimation=LauncherAnimUtils.createAnimatorSet();
     dispatchOnLauncherTransitionPrepare(fromView,animated,true);
     dispatchOnLauncherTransitionPrepare(toView,animated,true);
+    mAppsCustomizeContent.pauseScrolling();
     mStateAnimation.addListener(new AnimatorListenerAdapter(){
       @Override public void onAnimationEnd(      Animator animation){
         updateWallpaperVisibility(true);
@@ -48,6 +49,8 @@
         if (onCompleteRunnable != null) {
           onCompleteRunnable.run();
         }
+        mAppsCustomizeContent.updateCurrentPageScroll();
+        mAppsCustomizeContent.resumeScrolling();
       }
     }
 );
