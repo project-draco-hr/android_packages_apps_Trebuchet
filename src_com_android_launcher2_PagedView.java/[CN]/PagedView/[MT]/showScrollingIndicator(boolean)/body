@@ -9,7 +9,7 @@
     updateScrollingIndicatorPosition();
     mScrollIndicator.setVisibility(View.VISIBLE);
     cancelScrollingIndicatorAnimations();
-    if (immediately) {
+    if (immediately || mScrollingPaused) {
       mScrollIndicator.setAlpha(1f);
     }
  else {
