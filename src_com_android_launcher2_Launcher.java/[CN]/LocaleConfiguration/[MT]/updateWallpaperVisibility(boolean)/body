@@ -4,4 +4,5 @@
   if (wpflags != curflags) {
     getWindow().setFlags(wpflags,WindowManager.LayoutParams.FLAG_SHOW_WALLPAPER);
   }
+  setWorkspaceBackground(visible);
 }
