@@ -5,6 +5,9 @@
     final boolean alreadyOnHome=((intent.getFlags() & Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT) != Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
     Runnable processIntent=new Runnable(){
       public void run(){
+        if (mWorkspace == null) {
+          return;
+        }
         Folder openFolder=mWorkspace.getOpenFolder();
         mWorkspace.exitWidgetResizeMode();
         if (alreadyOnHome && mState == State.WORKSPACE && !mWorkspace.isTouchActive() && openFolder == null) {
