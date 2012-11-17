@@ -7,6 +7,7 @@
     showAllApps(false);
   }
   mOnResumeState=State.NONE;
+  setWorkspaceBackground(mState == State.WORKSPACE);
   InstallShortcutReceiver.flushInstallQueue(this);
   mPaused=false;
   sPausedFromUserAction=false;
