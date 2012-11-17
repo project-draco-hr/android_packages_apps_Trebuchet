@@ -1,0 +1,15 @@
+{
+  for (int i=0; i < mCountX; i++) {
+    topEdge[i]=-1;
+    bottomEdge[i]=-1;
+  }
+  for (int i=0; i < mCountY; i++) {
+    leftEdge[i]=-1;
+    rightEdge[i]=-1;
+  }
+  leftEdgeDirty=true;
+  rightEdgeDirty=true;
+  bottomEdgeDirty=true;
+  topEdgeDirty=true;
+  boundingRectDirty=true;
+}

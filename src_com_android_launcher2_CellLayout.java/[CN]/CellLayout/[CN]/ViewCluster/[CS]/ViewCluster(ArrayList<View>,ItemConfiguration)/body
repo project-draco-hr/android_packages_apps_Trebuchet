@@ -1,0 +1,5 @@
+{
+  this.views=(ArrayList<View>)views.clone();
+  this.config=config;
+  resetEdges();
+}
