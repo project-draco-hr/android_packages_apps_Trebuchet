@@ -1,0 +1,3 @@
+{
+  return Log.isLoggable(propertyName,Log.VERBOSE);
+}
