@@ -1,0 +1,35 @@
+{
+  CellAndSpan cs=config.map.get(v);
+  int[] edge=getEdge(whichEdge);
+switch (whichEdge) {
+case LEFT:
+    for (int i=cs.y; i < cs.y + cs.spanY; i++) {
+      if (edge[i] == cs.x + cs.spanX) {
+        return true;
+      }
+    }
+  break;
+case RIGHT:
+for (int i=cs.y; i < cs.y + cs.spanY; i++) {
+  if (edge[i] == cs.x) {
+    return true;
+  }
+}
+break;
+case TOP:
+for (int i=cs.x; i < cs.x + cs.spanX; i++) {
+if (edge[i] == cs.y + cs.spanY) {
+return true;
+}
+}
+break;
+case BOTTOM:
+for (int i=cs.x; i < cs.x + cs.spanX; i++) {
+if (edge[i] == cs.y) {
+return true;
+}
+}
+break;
+}
+return false;
+}

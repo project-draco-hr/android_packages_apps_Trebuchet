@@ -1,8 +1,0 @@
-int cellX
-int cellY
-int spanX
-int spanY
-int[] direction
-boolean[][] occupied
-boolean blockOccupied[][]
-int[] result

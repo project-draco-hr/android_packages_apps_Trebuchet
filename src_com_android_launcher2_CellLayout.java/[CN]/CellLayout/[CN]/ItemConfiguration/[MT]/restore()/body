@@ -1,0 +1,5 @@
+{
+  for (  View v : savedMap.keySet()) {
+    savedMap.get(v).copy(map.get(v));
+  }
+}

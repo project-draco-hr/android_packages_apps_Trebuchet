@@ -1,0 +1,21 @@
+{
+  for (  View v : views) {
+    CellAndSpan c=config.map.get(v);
+switch (whichEdge) {
+case LEFT:
+      c.x-=delta;
+    break;
+case RIGHT:
+  c.x+=delta;
+break;
+case TOP:
+c.y-=delta;
+break;
+case BOTTOM:
+default :
+c.y+=delta;
+break;
+}
+}
+resetEdges();
+}
