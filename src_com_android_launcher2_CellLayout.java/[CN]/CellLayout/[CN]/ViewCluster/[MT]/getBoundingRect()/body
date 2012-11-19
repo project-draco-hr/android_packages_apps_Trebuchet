@@ -1,0 +1,16 @@
+{
+  if (boundingRectDirty) {
+    boolean first=true;
+    for (    View v : views) {
+      CellAndSpan c=config.map.get(v);
+      if (first) {
+        boundingRect.set(c.x,c.y,c.x + c.spanX,c.y + c.spanY);
+        first=false;
+      }
+ else {
+        boundingRect.union(c.x,c.y,c.x + c.spanX,c.y + c.spanY);
+      }
+    }
+  }
+  return boundingRect;
+}

@@ -1,0 +1,13 @@
+{
+switch (which) {
+case LEFT:
+    return getLeftEdge();
+case RIGHT:
+  return getRightEdge();
+case TOP:
+return getTopEdge();
+case BOTTOM:
+default :
+return getBottomEdge();
+}
+}

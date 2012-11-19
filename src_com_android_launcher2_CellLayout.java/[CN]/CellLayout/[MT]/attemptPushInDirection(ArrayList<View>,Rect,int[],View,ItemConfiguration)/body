@@ -2,13 +2,13 @@
   if ((Math.abs(direction[0]) + Math.abs(direction[1])) > 1) {
     int temp=direction[1];
     direction[1]=0;
-    if (addViewsToTempLocation(intersectingViews,occupied,direction,true,ignoreView,solution)) {
+    if (pushViewsToTempLocation(intersectingViews,occupied,direction,ignoreView,solution)) {
       return true;
     }
     direction[1]=temp;
     temp=direction[0];
     direction[0]=0;
-    if (addViewsToTempLocation(intersectingViews,occupied,direction,true,ignoreView,solution)) {
+    if (pushViewsToTempLocation(intersectingViews,occupied,direction,ignoreView,solution)) {
       return true;
     }
     direction[0]=temp;
@@ -16,13 +16,13 @@
     direction[1]*=-1;
     temp=direction[1];
     direction[1]=0;
-    if (addViewsToTempLocation(intersectingViews,occupied,direction,true,ignoreView,solution)) {
+    if (pushViewsToTempLocation(intersectingViews,occupied,direction,ignoreView,solution)) {
       return true;
     }
     direction[1]=temp;
     temp=direction[0];
     direction[0]=0;
-    if (addViewsToTempLocation(intersectingViews,occupied,direction,true,ignoreView,solution)) {
+    if (pushViewsToTempLocation(intersectingViews,occupied,direction,ignoreView,solution)) {
       return true;
     }
     direction[0]=temp;
@@ -30,12 +30,12 @@
     direction[1]*=-1;
   }
  else {
-    if (addViewsToTempLocation(intersectingViews,occupied,direction,true,ignoreView,solution)) {
+    if (pushViewsToTempLocation(intersectingViews,occupied,direction,ignoreView,solution)) {
       return true;
     }
     direction[0]*=-1;
     direction[1]*=-1;
-    if (addViewsToTempLocation(intersectingViews,occupied,direction,true,ignoreView,solution)) {
+    if (pushViewsToTempLocation(intersectingViews,occupied,direction,ignoreView,solution)) {
       return true;
     }
     direction[0]*=-1;
@@ -43,12 +43,12 @@
     int temp=direction[1];
     direction[1]=direction[0];
     direction[0]=temp;
-    if (addViewsToTempLocation(intersectingViews,occupied,direction,true,ignoreView,solution)) {
+    if (pushViewsToTempLocation(intersectingViews,occupied,direction,ignoreView,solution)) {
       return true;
     }
     direction[0]*=-1;
     direction[1]*=-1;
-    if (addViewsToTempLocation(intersectingViews,occupied,direction,true,ignoreView,solution)) {
+    if (pushViewsToTempLocation(intersectingViews,occupied,direction,ignoreView,solution)) {
       return true;
     }
     direction[0]*=-1;

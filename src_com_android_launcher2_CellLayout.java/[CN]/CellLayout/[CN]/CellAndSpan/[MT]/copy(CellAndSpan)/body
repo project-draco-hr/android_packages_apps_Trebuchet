@@ -1,0 +1,6 @@
+{
+  copy.x=x;
+  copy.y=y;
+  copy.spanX=spanX;
+  copy.spanY=spanY;
+}

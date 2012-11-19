@@ -10,6 +10,6 @@
  else {
       c=new CellAndSpan(lp.cellX,lp.cellY,lp.cellHSpan,lp.cellVSpan);
     }
-    solution.map.put(child,c);
+    solution.add(child,c);
   }
 }

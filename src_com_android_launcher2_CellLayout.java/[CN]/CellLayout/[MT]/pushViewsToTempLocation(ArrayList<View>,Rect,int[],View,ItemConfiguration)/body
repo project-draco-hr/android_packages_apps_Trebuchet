@@ -1,0 +1,63 @@
+{
+  ViewCluster cluster=new ViewCluster(views,currentState);
+  Rect clusterRect=cluster.getBoundingRect();
+  int whichEdge;
+  int pushDistance;
+  boolean fail=false;
+  if (direction[0] < 0) {
+    whichEdge=ViewCluster.LEFT;
+    pushDistance=clusterRect.right - rectOccupiedByPotentialDrop.left;
+  }
+ else   if (direction[0] > 0) {
+    whichEdge=ViewCluster.RIGHT;
+    pushDistance=rectOccupiedByPotentialDrop.right - clusterRect.left;
+  }
+ else   if (direction[1] < 0) {
+    whichEdge=ViewCluster.TOP;
+    pushDistance=clusterRect.bottom - rectOccupiedByPotentialDrop.top;
+  }
+ else {
+    whichEdge=ViewCluster.BOTTOM;
+    pushDistance=rectOccupiedByPotentialDrop.bottom - clusterRect.top;
+  }
+  if (pushDistance <= 0) {
+    return false;
+  }
+  for (  View v : views) {
+    CellAndSpan c=currentState.map.get(v);
+    markCellsForView(c.x,c.y,c.spanX,c.spanY,mTmpOccupied,false);
+  }
+  currentState.save();
+  cluster.sortConfigurationForEdgePush(whichEdge);
+  while (pushDistance > 0 && !fail) {
+    for (    View v : currentState.sortedViews) {
+      if (!cluster.views.contains(v) && v != dragView) {
+        if (cluster.isViewTouchingEdge(v,whichEdge)) {
+          LayoutParams lp=(LayoutParams)v.getLayoutParams();
+          if (!lp.canReorder) {
+            fail=true;
+            break;
+          }
+          cluster.addView(v);
+          CellAndSpan c=currentState.map.get(v);
+          markCellsForView(c.x,c.y,c.spanX,c.spanY,mTmpOccupied,false);
+        }
+      }
+    }
+    pushDistance--;
+    cluster.shift(whichEdge,1);
+  }
+  boolean foundSolution=false;
+  clusterRect=cluster.getBoundingRect();
+  if (!fail && clusterRect.left >= 0 && clusterRect.right <= mCountX && clusterRect.top >= 0 && clusterRect.bottom <= mCountY) {
+    foundSolution=true;
+  }
+ else {
+    currentState.restore();
+  }
+  for (  View v : cluster.views) {
+    CellAndSpan c=currentState.map.get(v);
+    markCellsForView(c.x,c.y,c.spanX,c.spanY,mTmpOccupied,true);
+  }
+  return foundSolution;
+}
