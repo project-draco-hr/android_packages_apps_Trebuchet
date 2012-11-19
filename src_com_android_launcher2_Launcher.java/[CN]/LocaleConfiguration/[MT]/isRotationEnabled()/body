@@ -1,5 +1,4 @@
 {
-  boolean forceEnableRotation=doesFileExist(FORCE_ENABLE_ROTATION_PROPERTY);
-  boolean enableRotation=forceEnableRotation || getResources().getBoolean(R.bool.allow_rotation);
+  boolean enableRotation=sForceEnableRotation || getResources().getBoolean(R.bool.allow_rotation);
   return enableRotation;
 }
