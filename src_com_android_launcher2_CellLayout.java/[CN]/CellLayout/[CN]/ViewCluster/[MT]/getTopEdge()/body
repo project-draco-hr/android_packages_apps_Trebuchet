@@ -1,0 +1,6 @@
+{
+  if (topEdgeDirty) {
+    computeEdge(TOP,topEdge);
+  }
+  return topEdge;
+}

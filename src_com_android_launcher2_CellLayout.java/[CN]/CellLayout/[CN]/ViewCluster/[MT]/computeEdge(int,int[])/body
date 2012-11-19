@@ -1,0 +1,40 @@
+{
+  int count=views.size();
+  for (int i=0; i < count; i++) {
+    CellAndSpan cs=config.map.get(views.get(i));
+switch (which) {
+case LEFT:
+      int left=cs.x;
+    for (int j=cs.y; j < cs.y + cs.spanY; j++) {
+      if (left < edge[j] || edge[j] < 0) {
+        edge[j]=left;
+      }
+    }
+  break;
+case RIGHT:
+int right=cs.x + cs.spanX;
+for (int j=cs.y; j < cs.y + cs.spanY; j++) {
+if (right > edge[j]) {
+  edge[j]=right;
+}
+}
+break;
+case TOP:
+int top=cs.y;
+for (int j=cs.x; j < cs.x + cs.spanX; j++) {
+if (top < edge[j] || edge[j] < 0) {
+edge[j]=top;
+}
+}
+break;
+case BOTTOM:
+int bottom=cs.y + cs.spanY;
+for (int j=cs.x; j < cs.x + cs.spanX; j++) {
+if (bottom > edge[j]) {
+edge[j]=bottom;
+}
+}
+break;
+}
+}
+}

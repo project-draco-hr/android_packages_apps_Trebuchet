@@ -1,0 +1,6 @@
+{
+  if (rightEdgeDirty) {
+    computeEdge(RIGHT,rightEdge);
+  }
+  return rightEdge;
+}

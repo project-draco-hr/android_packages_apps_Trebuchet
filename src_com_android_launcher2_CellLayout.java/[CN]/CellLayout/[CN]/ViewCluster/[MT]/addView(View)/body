@@ -1,0 +1,4 @@
+{
+  views.add(v);
+  resetEdges();
+}
