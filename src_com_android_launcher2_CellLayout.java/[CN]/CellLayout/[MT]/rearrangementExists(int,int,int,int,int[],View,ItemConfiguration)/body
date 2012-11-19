@@ -26,7 +26,7 @@
   if (attemptPushInDirection(mIntersectingViews,mOccupiedRect,direction,ignoreView,solution)) {
     return true;
   }
-  if (addViewsToTempLocation(mIntersectingViews,mOccupiedRect,direction,false,ignoreView,solution)) {
+  if (addViewsToTempLocation(mIntersectingViews,mOccupiedRect,direction,ignoreView,solution)) {
     return true;
   }
   for (  View v : mIntersectingViews) {

@@ -1,0 +1,5 @@
+{
+  map.put(v,cs);
+  savedMap.put(v,new CellAndSpan());
+  sortedViews.add(v);
+}
