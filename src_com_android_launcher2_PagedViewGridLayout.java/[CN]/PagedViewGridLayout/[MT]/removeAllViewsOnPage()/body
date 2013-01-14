@@ -1,5 +1,5 @@
 {
   removeAllViews();
   mOnLayoutListener=null;
-  destroyHardwareLayer();
+  setLayerType(LAYER_TYPE_NONE,null);
 }

@@ -1,4 +1,4 @@
 {
   mChildren.removeAllViews();
-  destroyHardwareLayers();
+  setLayerType(LAYER_TYPE_NONE,null);
 }
