@@ -1,16 +1,8 @@
 {
-  if (sourceImages != null) {
-    if (cancelled) {
-      for (      Bitmap b : sourceImages) {
-        b.recycle();
-      }
-    }
-    sourceImages.clear();
-  }
   if (generatedImages != null) {
     if (cancelled) {
-      for (      Bitmap b : generatedImages) {
-        b.recycle();
+      for (int i=0; i < generatedImages.size(); i++) {
+        WidgetPreviewLoader.releaseBitmap(items.get(i),generatedImages.get(i));
       }
     }
     generatedImages.clear();

@@ -1,0 +1,21 @@
+{
+  if (mCachedSelectQuery == null) {
+    mCachedSelectQuery=WidgetPreviewCacheDb.COLUMN_NAME + " = ? AND " + WidgetPreviewCacheDb.COLUMN_SIZE+ " = ?";
+  }
+  SQLiteDatabase db=mDb.getReadableDatabase();
+  Cursor result=db.query(WidgetPreviewCacheDb.TABLE_NAME,new String[]{WidgetPreviewCacheDb.COLUMN_PREVIEW_BITMAP},mCachedSelectQuery,new String[]{name,mSize},null,null,null,null);
+  if (result.getCount() > 0) {
+    result.moveToFirst();
+    byte[] blob=result.getBlob(0);
+    result.close();
+    final BitmapFactory.Options opts=mCachedBitmapFactoryOptions.get();
+    opts.inBitmap=b;
+    opts.inSampleSize=1;
+    Bitmap out=BitmapFactory.decodeByteArray(blob,0,blob.length,opts);
+    return out;
+  }
+ else {
+    result.close();
+    return null;
+  }
+}

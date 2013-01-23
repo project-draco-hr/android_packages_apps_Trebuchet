@@ -23,8 +23,6 @@
       layout.setLayerType(LAYER_TYPE_NONE,null);
     }
   }
-  int newLeft=-1;
-  int newRight=-1;
   for (int i=0; i < screenCount; i++) {
     final View layout=(View)getPageAt(i);
     if (leftScreen <= i && i <= rightScreen && (i == forceDrawScreen || shouldDrawChild(layout))) {

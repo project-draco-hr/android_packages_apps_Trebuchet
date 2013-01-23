@@ -1,9 +1,0 @@
-{
-  page=p;
-  items=l;
-  sourceImages=si;
-  generatedImages=new ArrayList<Bitmap>();
-  maxImageWidth=maxImageHeight=-1;
-  doInBackgroundCallback=bgR;
-  postExecuteCallback=postR;
-}

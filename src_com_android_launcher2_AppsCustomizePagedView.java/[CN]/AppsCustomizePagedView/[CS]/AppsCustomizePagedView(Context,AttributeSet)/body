@@ -7,8 +7,6 @@
   mIconCache=((LauncherApplication)context.getApplicationContext()).getIconCache();
   mCanvas=new Canvas();
   mRunningTasks=new ArrayList<AppsCustomizeAsyncTask>();
-  Resources resources=context.getResources();
-  mAppIconSize=resources.getDimensionPixelSize(R.dimen.app_icon_size);
   TypedArray a=context.obtainStyledAttributes(attrs,R.styleable.AppsCustomizePagedView,0,0);
   mMaxAppCellCountX=a.getInt(R.styleable.AppsCustomizePagedView_maxAppCellCountX,-1);
   mMaxAppCellCountY=a.getInt(R.styleable.AppsCustomizePagedView_maxAppCellCountY,-1);

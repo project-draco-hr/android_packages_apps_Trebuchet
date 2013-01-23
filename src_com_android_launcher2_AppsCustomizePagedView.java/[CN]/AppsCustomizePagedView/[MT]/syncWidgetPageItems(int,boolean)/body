@@ -60,6 +60,9 @@
         maxPreviewWidth=maxSize[0];
         maxPreviewHeight=maxSize[1];
       }
+      if (mWidgetPreviewLoader == null) {
+        mWidgetPreviewLoader=new WidgetPreviewLoader(maxPreviewWidth,maxPreviewHeight,mLauncher,mWidgetSpacingLayout);
+      }
       if (immediate) {
         AsyncTaskPageData data=new AsyncTaskPageData(page,items,maxPreviewWidth,maxPreviewHeight,null,null);
         loadWidgetPreviewsInBackground(null,data);

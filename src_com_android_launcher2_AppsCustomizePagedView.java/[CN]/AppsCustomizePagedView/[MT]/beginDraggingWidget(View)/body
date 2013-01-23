@@ -9,6 +9,7 @@
   Bitmap preview;
   Bitmap outline;
   float scale=1f;
+  Point previewPadding=null;
   if (createItemInfo instanceof PendingAddWidgetInfo) {
     if (mCreateWidgetInfo == null) {
       return false;
@@ -23,12 +24,14 @@
     int maxWidth, maxHeight;
     maxWidth=Math.min((int)(previewDrawable.getIntrinsicWidth() * minScale),size[0]);
     maxHeight=Math.min((int)(previewDrawable.getIntrinsicHeight() * minScale),size[1]);
-    preview=getWidgetPreview(createWidgetInfo.componentName,createWidgetInfo.previewImage,createWidgetInfo.icon,spanX,spanY,maxWidth,maxHeight);
-    float[] mv=new float[9];
-    Matrix m=new Matrix();
-    m.setRectToRect(new RectF(0f,0f,(float)preview.getWidth(),(float)preview.getHeight()),new RectF(0f,0f,(float)previewDrawable.getIntrinsicWidth(),(float)previewDrawable.getIntrinsicHeight()),Matrix.ScaleToFit.START);
-    m.getValues(mv);
-    scale=(float)mv[0];
+    int[] previewSizeBeforeScale=new int[1];
+    preview=mWidgetPreviewLoader.generateWidgetPreview(createWidgetInfo.componentName,createWidgetInfo.previewImage,createWidgetInfo.icon,spanX,spanY,maxWidth,maxHeight,null,previewSizeBeforeScale);
+    int previewWidthInAppsCustomize=Math.min(previewSizeBeforeScale[0],mWidgetPreviewLoader.maxWidthForWidgetPreview(spanX));
+    scale=previewWidthInAppsCustomize / (float)preview.getWidth();
+    if (previewWidthInAppsCustomize < previewDrawable.getIntrinsicWidth()) {
+      int padding=(previewDrawable.getIntrinsicWidth() - previewWidthInAppsCustomize) / 2;
+      previewPadding=new Point(padding,0);
+    }
   }
  else {
     PendingAddShortcutInfo createShortcutInfo=(PendingAddShortcutInfo)v.getTag();
@@ -36,7 +39,7 @@
     preview=Bitmap.createBitmap(icon.getIntrinsicWidth(),icon.getIntrinsicHeight(),Bitmap.Config.ARGB_8888);
     mCanvas.setBitmap(preview);
     mCanvas.save();
-    renderDrawableToBitmap(icon,preview,0,0,icon.getIntrinsicWidth(),icon.getIntrinsicHeight());
+    WidgetPreviewLoader.renderDrawableToBitmap(icon,preview,0,0,icon.getIntrinsicWidth(),icon.getIntrinsicHeight());
     mCanvas.restore();
     mCanvas.setBitmap(null);
     createItemInfo.spanX=createItemInfo.spanY=1;
@@ -45,7 +48,7 @@
   outline=Bitmap.createScaledBitmap(preview,preview.getWidth(),preview.getHeight(),false);
   mLauncher.lockScreenOrientation();
   mLauncher.getWorkspace().onDragStartedWithItem(createItemInfo,outline,clipAlpha);
-  mDragController.startDrag(image,preview,this,createItemInfo,DragController.DRAG_ACTION_COPY,null,scale);
+  mDragController.startDrag(image,preview,this,createItemInfo,DragController.DRAG_ACTION_COPY,previewPadding,scale);
   outline.recycle();
   preview.recycle();
   return true;

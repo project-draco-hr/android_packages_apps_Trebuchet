@@ -1,0 +1,17 @@
+{
+  String name=getObjectName(o);
+synchronized (sLoadedPreviews) {
+synchronized (sUnusedBitmaps) {
+      Bitmap b=sLoadedPreviews.get(name).get();
+      if (b == bitmapToFree) {
+        sLoadedPreviews.remove(name);
+        if (bitmapToFree.isMutable()) {
+          sUnusedBitmaps.add(new SoftReference<Bitmap>(b));
+        }
+      }
+ else {
+        throw new RuntimeException("Bitmap passed in doesn't match up");
+      }
+    }
+  }
+}
