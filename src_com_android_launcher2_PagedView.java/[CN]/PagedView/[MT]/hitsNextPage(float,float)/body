@@ -1,3 +1,8 @@
 {
-  return (x > (getMeasuredWidth() - getRelativeChildOffset(mCurrentPage) + mPageSpacing));
+  if (isLayoutRtl()) {
+    return (x < getRelativeChildOffset(mCurrentPage) - mPageSpacing);
+  }
+ else {
+    return (x > (getMeasuredWidth() - getRelativeChildOffset(mCurrentPage) + mPageSpacing));
+  }
 }

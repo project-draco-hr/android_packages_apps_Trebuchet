@@ -5,8 +5,12 @@
   if (DEBUG)   Log.d(TAG,"PagedView.onLayout()");
   final int verticalPadding=getPaddingTop() + getPaddingBottom();
   final int childCount=getChildCount();
-  int childLeft=getRelativeChildOffset(0);
-  for (int i=0; i < childCount; i++) {
+  final boolean isRtl=isLayoutRtl();
+  final int startIndex=isRtl ? childCount - 1 : 0;
+  final int endIndex=isRtl ? -1 : childCount;
+  final int delta=isRtl ? -1 : 1;
+  int childLeft=getRelativeChildOffset(startIndex);
+  for (int i=startIndex; i != endIndex; i+=delta) {
     final View child=getPageAt(i);
     if (child.getVisibility() != View.GONE) {
       final int childWidth=getScaledMeasuredWidth(child);

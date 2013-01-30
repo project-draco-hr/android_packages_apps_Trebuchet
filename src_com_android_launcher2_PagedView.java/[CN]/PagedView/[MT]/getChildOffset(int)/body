@@ -1,12 +1,16 @@
 {
+  final boolean isRtl=isLayoutRtl();
   int[] childOffsets=Float.compare(mLayoutScale,1f) == 0 ? mChildOffsets : mChildOffsetsWithLayoutScale;
   if (childOffsets != null && childOffsets[index] != -1) {
     return childOffsets[index];
   }
  else {
     if (getChildCount() == 0)     return 0;
-    int offset=getRelativeChildOffset(0);
-    for (int i=0; i < index; ++i) {
+    final int startIndex=isRtl ? getChildCount() - 1 : 0;
+    final int endIndex=isRtl ? index : index;
+    final int delta=isRtl ? -1 : 1;
+    int offset=getRelativeChildOffset(startIndex);
+    for (int i=startIndex; i != endIndex; i+=delta) {
       offset+=getScaledMeasuredWidth(getPageAt(i)) + mPageSpacing;
     }
     if (childOffsets != null) {
