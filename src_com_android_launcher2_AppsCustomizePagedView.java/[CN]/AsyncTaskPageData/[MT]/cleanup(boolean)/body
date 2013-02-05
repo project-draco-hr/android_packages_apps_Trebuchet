@@ -2,7 +2,7 @@
   if (generatedImages != null) {
     if (cancelled) {
       for (int i=0; i < generatedImages.size(); i++) {
-        WidgetPreviewLoader.releaseBitmap(items.get(i),generatedImages.get(i));
+        widgetPreviewLoader.releaseBitmap(items.get(i),generatedImages.get(i));
       }
     }
     generatedImages.clear();

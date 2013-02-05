@@ -24,7 +24,7 @@
       int[] minSpanXY=Launcher.getMinSpanForWidget(mLauncher,info);
       createItemInfo.minSpanX=minSpanXY[0];
       createItemInfo.minSpanY=minSpanXY[1];
-      widget.applyFromAppWidgetProviderInfo(info,-1,spanXY);
+      widget.applyFromAppWidgetProviderInfo(info,-1,spanXY,mWidgetPreviewLoader);
       widget.setTag(createItemInfo);
       widget.setShortPressListener(this);
     }
@@ -33,7 +33,7 @@
       createItemInfo=new PendingAddShortcutInfo(info.activityInfo);
       createItemInfo.itemType=LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT;
       createItemInfo.componentName=new ComponentName(info.activityInfo.packageName,info.activityInfo.name);
-      widget.applyFromResolveInfo(mPackageManager,info);
+      widget.applyFromResolveInfo(mPackageManager,info,mWidgetPreviewLoader);
       widget.setTag(createItemInfo);
     }
     widget.setOnClickListener(this);
@@ -60,11 +60,9 @@
         maxPreviewWidth=maxSize[0];
         maxPreviewHeight=maxSize[1];
       }
-      if (mWidgetPreviewLoader == null) {
-        mWidgetPreviewLoader=new WidgetPreviewLoader(maxPreviewWidth,maxPreviewHeight,mLauncher,mWidgetSpacingLayout);
-      }
+      mWidgetPreviewLoader.setPreviewSize(maxPreviewWidth,maxPreviewHeight,mWidgetSpacingLayout);
       if (immediate) {
-        AsyncTaskPageData data=new AsyncTaskPageData(page,items,maxPreviewWidth,maxPreviewHeight,null,null);
+        AsyncTaskPageData data=new AsyncTaskPageData(page,items,maxPreviewWidth,maxPreviewHeight,null,null,mWidgetPreviewLoader);
         loadWidgetPreviewsInBackground(null,data);
         onSyncWidgetPageItems(data);
       }

@@ -1,4 +1,3 @@
 int previewWidth
 int previewHeight
-Launcher launcher
 PagedViewCellLayout widgetSpacingLayout

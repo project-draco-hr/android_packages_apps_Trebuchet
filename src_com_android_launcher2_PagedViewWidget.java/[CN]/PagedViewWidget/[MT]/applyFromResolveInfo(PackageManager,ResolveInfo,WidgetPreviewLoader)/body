@@ -10,4 +10,5 @@
   if (dims != null) {
     dims.setText(String.format(mDimensionsFormatString,1,1));
   }
+  mWidgetPreviewLoader=loader;
 }

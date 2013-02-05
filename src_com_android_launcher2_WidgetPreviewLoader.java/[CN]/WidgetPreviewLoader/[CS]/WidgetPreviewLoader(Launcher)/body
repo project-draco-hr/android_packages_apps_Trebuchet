@@ -1,11 +1,9 @@
 {
-  mPreviewBitmapMaxWidth=previewWidth;
-  mPreviewBitmapMaxHeight=previewHeight;
-  mSize=previewWidth + "x" + previewHeight;
   mContext=mLauncher=launcher;
   mPackageManager=mContext.getPackageManager();
   mAppIconSize=mContext.getResources().getDimensionPixelSize(R.dimen.app_icon_size);
   mIconCache=((LauncherApplication)launcher.getApplicationContext()).getIconCache();
-  mWidgetSpacingLayout=widgetSpacingLayout;
   mDb=new WidgetPreviewCacheDb(mContext);
+  mLoadedPreviews=new HashMap<String,WeakReference<Bitmap>>();
+  mUnusedBitmaps=new ArrayList<SoftReference<Bitmap>>();
 }

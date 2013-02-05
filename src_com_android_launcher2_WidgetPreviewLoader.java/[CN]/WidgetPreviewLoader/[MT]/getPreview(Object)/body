@@ -8,16 +8,16 @@ synchronized (sInvalidPackages) {
     return null;
   }
   if (packageValid) {
-synchronized (sLoadedPreviews) {
-      if (sLoadedPreviews.containsKey(name) && sLoadedPreviews.get(name).get() != null) {
-        return sLoadedPreviews.get(name).get();
+synchronized (mLoadedPreviews) {
+      if (mLoadedPreviews.containsKey(name) && mLoadedPreviews.get(name).get() != null) {
+        return mLoadedPreviews.get(name).get();
       }
     }
   }
   Bitmap unusedBitmap=null;
-synchronized (sUnusedBitmaps) {
-    while ((unusedBitmap == null || !unusedBitmap.isMutable()) && sUnusedBitmaps.size() > 0) {
-      unusedBitmap=sUnusedBitmaps.remove(0).get();
+synchronized (mUnusedBitmaps) {
+    while ((unusedBitmap == null || !unusedBitmap.isMutable() || unusedBitmap.getWidth() != mPreviewBitmapWidth || unusedBitmap.getHeight() != mPreviewBitmapHeight) && mUnusedBitmaps.size() > 0) {
+      unusedBitmap=mUnusedBitmaps.remove(0).get();
     }
     if (unusedBitmap != null) {
       final Canvas c=mCachedAppWidgetPreviewCanvas.get();
@@ -27,15 +27,15 @@ synchronized (sUnusedBitmaps) {
     }
   }
   if (unusedBitmap == null) {
-    unusedBitmap=Bitmap.createBitmap(mPreviewBitmapMaxWidth,mPreviewBitmapMaxHeight,Bitmap.Config.ARGB_8888);
+    unusedBitmap=Bitmap.createBitmap(mPreviewBitmapWidth,mPreviewBitmapHeight,Bitmap.Config.ARGB_8888);
   }
   Bitmap preview=null;
   if (packageValid) {
     preview=readFromDb(name,unusedBitmap);
   }
   if (preview != null) {
-synchronized (sLoadedPreviews) {
-      sLoadedPreviews.put(name,new WeakReference<Bitmap>(preview));
+synchronized (mLoadedPreviews) {
+      mLoadedPreviews.put(name,new WeakReference<Bitmap>(preview));
     }
     return preview;
   }
@@ -45,8 +45,8 @@ synchronized (sLoadedPreviews) {
     if (preview != unusedBitmap) {
       throw new RuntimeException("generatePreview is not recycling the bitmap " + o);
     }
-synchronized (sLoadedPreviews) {
-      sLoadedPreviews.put(name,new WeakReference<Bitmap>(preview));
+synchronized (mLoadedPreviews) {
+      mLoadedPreviews.put(name,new WeakReference<Bitmap>(preview));
     }
     new AsyncTask<Void,Void,Void>(){
       public Void doInBackground(      Void... args){

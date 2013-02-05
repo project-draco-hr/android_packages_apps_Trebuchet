@@ -36,7 +36,7 @@
       onSyncWidgetPageItems(data);
     }
   }
-);
+,mWidgetPreviewLoader);
   AppsCustomizeAsyncTask t=new AppsCustomizeAsyncTask(page,AsyncTaskPageData.Type.LoadWidgetPreviewData);
   t.setThreadPriority(getThreadPriorityForPage(page));
   t.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,pageData);

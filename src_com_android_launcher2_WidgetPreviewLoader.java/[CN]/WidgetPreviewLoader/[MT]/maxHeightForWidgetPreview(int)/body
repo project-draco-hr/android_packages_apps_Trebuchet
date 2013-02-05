@@ -1,3 +1,3 @@
 {
-  return Math.min(mPreviewBitmapMaxHeight,mWidgetSpacingLayout.estimateCellHeight(spanY));
+  return Math.min(mPreviewBitmapHeight,mWidgetSpacingLayout.estimateCellHeight(spanY));
 }

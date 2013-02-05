@@ -14,4 +14,5 @@
     int vSpan=Math.min(cellSpan[1],LauncherModel.getCellCountY());
     dims.setText(String.format(mDimensionsFormatString,hSpan,vSpan));
   }
+  mWidgetPreviewLoader=loader;
 }

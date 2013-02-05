@@ -4,3 +4,4 @@ int cw
 int ch
 AsyncTaskCallback bgR
 AsyncTaskCallback postR
+WidgetPreviewLoader w

@@ -1,12 +1,12 @@
 {
   String name=getObjectName(o);
-synchronized (sLoadedPreviews) {
-synchronized (sUnusedBitmaps) {
-      Bitmap b=sLoadedPreviews.get(name).get();
+synchronized (mLoadedPreviews) {
+synchronized (mUnusedBitmaps) {
+      Bitmap b=mLoadedPreviews.get(name).get();
       if (b == bitmapToFree) {
-        sLoadedPreviews.remove(name);
+        mLoadedPreviews.remove(name);
         if (bitmapToFree.isMutable()) {
-          sUnusedBitmaps.add(new SoftReference<Bitmap>(b));
+          mUnusedBitmaps.add(new SoftReference<Bitmap>(b));
         }
       }
  else {
