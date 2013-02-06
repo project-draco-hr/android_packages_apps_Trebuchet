@@ -74,6 +74,7 @@
           prepareLoadWidgetPreviewsTask(page,items,maxPreviewWidth,maxPreviewHeight,mWidgetCountX);
         }
       }
+      layout.setOnLayoutListener(null);
     }
   }
 );
