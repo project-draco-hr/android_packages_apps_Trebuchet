@@ -57,7 +57,8 @@
   }
   updateScrollingIndicatorPosition();
   if (childCount > 0) {
-    mMaxScrollX=getChildOffset(childCount - 1) - getRelativeChildOffset(childCount - 1);
+    final int index=isLayoutRtl() ? 0 : childCount - 1;
+    mMaxScrollX=getChildOffset(index) - getRelativeChildOffset(index);
   }
  else {
     mMaxScrollX=0;
