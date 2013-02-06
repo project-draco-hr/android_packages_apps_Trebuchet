@@ -1,4 +1,4 @@
-int itemWidth
-int itemHeight
+int viewWidth
+int viewHeight
 int drawableWidth
 int drawableHeight
