@@ -4,8 +4,8 @@
     final ImageView image=(ImageView)findViewById(R.id.widget_preview);
     if (image != null) {
       FastBitmapDrawable preview=(FastBitmapDrawable)image.getDrawable();
-      if (mInfo != null && preview != null && preview.getBitmap() != null) {
-        mWidgetPreviewLoader.releaseBitmap(mInfo,preview.getBitmap());
+      if (sRecyclePreviewsWhenDetachedFromWindow && mInfo != null && preview != null && preview.getBitmap() != null) {
+        mWidgetPreviewLoader.recycleBitmap(mInfo,preview.getBitmap());
       }
       image.setImageDrawable(null);
     }
