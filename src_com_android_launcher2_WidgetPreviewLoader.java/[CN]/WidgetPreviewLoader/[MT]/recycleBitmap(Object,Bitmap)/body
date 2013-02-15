@@ -1,12 +1,14 @@
 {
   String name=getObjectName(o);
 synchronized (mLoadedPreviews) {
-synchronized (mUnusedBitmaps) {
+    if (mLoadedPreviews.containsKey(name)) {
       Bitmap b=mLoadedPreviews.get(name).get();
       if (b == bitmapToRecycle) {
         mLoadedPreviews.remove(name);
         if (bitmapToRecycle.isMutable()) {
-          mUnusedBitmaps.add(new SoftReference<Bitmap>(b));
+synchronized (mUnusedBitmaps) {
+            mUnusedBitmaps.add(new SoftReference<Bitmap>(b));
+          }
         }
       }
  else {
