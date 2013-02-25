@@ -2,6 +2,8 @@
   super(context,attrs,defStyle);
   mDragEnforcer=new DropTarget.DragEnforcer(context);
   setWillNotDraw(false);
+  setClipChildren(false);
+  setClipToPadding(false);
   mLauncher=(Launcher)context;
   TypedArray a=context.obtainStyledAttributes(attrs,R.styleable.CellLayout,defStyle,0);
   mCellWidth=a.getDimensionPixelSize(R.styleable.CellLayout_cellWidth,10);
