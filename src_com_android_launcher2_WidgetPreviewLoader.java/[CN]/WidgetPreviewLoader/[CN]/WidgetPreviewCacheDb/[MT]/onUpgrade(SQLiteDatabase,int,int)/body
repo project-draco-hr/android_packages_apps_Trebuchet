@@ -1,2 +1,5 @@
 {
+  if (oldVersion != newVersion) {
+    db.execSQL("DELETE FROM " + TABLE_NAME);
+  }
 }

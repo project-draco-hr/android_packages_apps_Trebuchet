@@ -71,7 +71,7 @@
     final Rect dest=mCachedAppWidgetPreviewDestRect.get();
     c.setBitmap(preview);
     src.set(0,0,defaultPreview.getWidth(),defaultPreview.getHeight());
-    dest.set(x,0,previewWidth,previewHeight);
+    dest.set(x,0,x + previewWidth,previewHeight);
     Paint p=mCachedAppWidgetPreviewPaint.get();
     if (p == null) {
       p=new Paint();
