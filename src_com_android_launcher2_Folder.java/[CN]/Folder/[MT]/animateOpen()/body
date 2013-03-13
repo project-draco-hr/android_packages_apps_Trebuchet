@@ -24,12 +24,5 @@
 );
   oa.setDuration(mExpandDuration);
   setLayerType(LAYER_TYPE_HARDWARE,null);
-  buildLayer();
-  post(new Runnable(){
-    public void run(){
-      if (oa != mOpenCloseAnimator)       return;
-      oa.start();
-    }
-  }
-);
+  oa.start();
 }
