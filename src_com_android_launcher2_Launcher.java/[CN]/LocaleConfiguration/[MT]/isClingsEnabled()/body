@@ -1,4 +1,9 @@
 {
   if (ActivityManager.isRunningInTestHarness())   return false;
+  boolean supportsRestrictedUsers=android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN_MR2;
+  if (supportsRestrictedUsers) {
+    final UserManager um=(UserManager)getSystemService(Context.USER_SERVICE);
+    if (um.isUserRestricted())     return false;
+  }
   return true;
 }
