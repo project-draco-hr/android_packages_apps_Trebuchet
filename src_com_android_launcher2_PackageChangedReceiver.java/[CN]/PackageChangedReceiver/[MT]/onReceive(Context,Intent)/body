@@ -3,5 +3,6 @@
   if (packageName == null || packageName.length() == 0) {
     return;
   }
-  WidgetPreviewLoader.removeFromDb(context,packageName);
+  LauncherApplication app=(LauncherApplication)context.getApplicationContext();
+  WidgetPreviewLoader.removeFromDb(app.getWidgetPreviewCacheDb(),packageName);
 }

@@ -2,6 +2,7 @@
   super.onCreate();
   sIsScreenLarge=getResources().getBoolean(R.bool.is_large_screen);
   sScreenDensity=getResources().getDisplayMetrics().density;
+  mWidgetPreviewCacheDb=new WidgetPreviewLoader.CacheDb(this);
   mIconCache=new IconCache(this);
   mModel=new LauncherModel(this,mIconCache);
   IntentFilter filter=new IntentFilter(Intent.ACTION_PACKAGE_ADDED);

@@ -2,10 +2,10 @@
   String name=getObjectName(o);
   SQLiteDatabase db=mDb.getWritableDatabase();
   ContentValues values=new ContentValues();
-  values.put(WidgetPreviewCacheDb.COLUMN_NAME,name);
+  values.put(CacheDb.COLUMN_NAME,name);
   ByteArrayOutputStream stream=new ByteArrayOutputStream();
   preview.compress(Bitmap.CompressFormat.PNG,100,stream);
-  values.put(WidgetPreviewCacheDb.COLUMN_PREVIEW_BITMAP,stream.toByteArray());
-  values.put(WidgetPreviewCacheDb.COLUMN_SIZE,mSize);
-  db.insert(WidgetPreviewCacheDb.TABLE_NAME,null,values);
+  values.put(CacheDb.COLUMN_PREVIEW_BITMAP,stream.toByteArray());
+  values.put(CacheDb.COLUMN_SIZE,mSize);
+  db.insert(CacheDb.TABLE_NAME,null,values);
 }

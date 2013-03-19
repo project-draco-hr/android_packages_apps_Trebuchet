@@ -4,8 +4,8 @@ synchronized (sInvalidPackages) {
   }
   new AsyncTask<Void,Void,Void>(){
     public Void doInBackground(    Void... args){
-      SQLiteDatabase db=new WidgetPreviewCacheDb(mContext).getWritableDatabase();
-      db.delete(WidgetPreviewCacheDb.TABLE_NAME,WidgetPreviewCacheDb.COLUMN_NAME + " LIKE ? OR " + WidgetPreviewCacheDb.COLUMN_NAME+ " LIKE ?",new String[]{WIDGET_PREFIX + packageName + "/%",SHORTCUT_PREFIX + packageName + "/%"});
+      SQLiteDatabase db=cacheDb.getWritableDatabase();
+      db.delete(CacheDb.TABLE_NAME,CacheDb.COLUMN_NAME + " LIKE ? OR " + CacheDb.COLUMN_NAME+ " LIKE ?",new String[]{WIDGET_PREFIX + packageName + "/%",SHORTCUT_PREFIX + packageName + "/%"});
       db.close();
 synchronized (sInvalidPackages) {
         sInvalidPackages.remove(packageName);
