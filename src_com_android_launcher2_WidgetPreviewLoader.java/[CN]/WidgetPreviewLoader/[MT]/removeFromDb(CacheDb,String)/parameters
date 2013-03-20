@@ -1,2 +1,2 @@
-Context mContext
+CacheDb cacheDb
 String packageName

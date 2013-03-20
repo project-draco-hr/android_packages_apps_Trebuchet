@@ -1,9 +1,9 @@
 {
   if (mCachedSelectQuery == null) {
-    mCachedSelectQuery=WidgetPreviewCacheDb.COLUMN_NAME + " = ? AND " + WidgetPreviewCacheDb.COLUMN_SIZE+ " = ?";
+    mCachedSelectQuery=CacheDb.COLUMN_NAME + " = ? AND " + CacheDb.COLUMN_SIZE+ " = ?";
   }
   SQLiteDatabase db=mDb.getReadableDatabase();
-  Cursor result=db.query(WidgetPreviewCacheDb.TABLE_NAME,new String[]{WidgetPreviewCacheDb.COLUMN_PREVIEW_BITMAP},mCachedSelectQuery,new String[]{name,mSize},null,null,null,null);
+  Cursor result=db.query(CacheDb.TABLE_NAME,new String[]{CacheDb.COLUMN_PREVIEW_BITMAP},mCachedSelectQuery,new String[]{name,mSize},null,null,null,null);
   if (result.getCount() > 0) {
     result.moveToFirst();
     byte[] blob=result.getBlob(0);
