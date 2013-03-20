@@ -1,7 +1,4 @@
 {
   super.onDetachedFromWindow();
   cancelAllTasks();
-  if (mWidgetPreviewLoader != null) {
-    mWidgetPreviewLoader.closeDb();
-  }
 }

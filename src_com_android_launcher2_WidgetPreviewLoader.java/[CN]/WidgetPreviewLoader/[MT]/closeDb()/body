@@ -1,5 +1,0 @@
-{
-  if (mDb != null) {
-    mDb.close();
-  }
-}

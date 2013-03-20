@@ -6,7 +6,6 @@ synchronized (sInvalidPackages) {
     public Void doInBackground(    Void... args){
       SQLiteDatabase db=cacheDb.getWritableDatabase();
       db.delete(CacheDb.TABLE_NAME,CacheDb.COLUMN_NAME + " LIKE ? OR " + CacheDb.COLUMN_NAME+ " LIKE ?",new String[]{WIDGET_PREFIX + packageName + "/%",SHORTCUT_PREFIX + packageName + "/%"});
-      db.close();
 synchronized (sInvalidPackages) {
         sInvalidPackages.remove(packageName);
       }
