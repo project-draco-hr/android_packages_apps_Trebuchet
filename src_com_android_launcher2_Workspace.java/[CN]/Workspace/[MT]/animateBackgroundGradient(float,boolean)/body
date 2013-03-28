@@ -11,7 +11,7 @@
   float startAlpha=getBackgroundAlpha();
   if (finalAlpha != startAlpha) {
     if (animated) {
-      mBackgroundFadeOutAnimation=LauncherAnimUtils.ofFloat(startAlpha,finalAlpha);
+      mBackgroundFadeOutAnimation=LauncherAnimUtils.ofFloat(this,startAlpha,finalAlpha);
       mBackgroundFadeOutAnimation.addUpdateListener(new AnimatorUpdateListener(){
         public void onAnimationUpdate(        ValueAnimator animation){
           setBackgroundAlpha(((Float)animation.getAnimatedValue()).floatValue());

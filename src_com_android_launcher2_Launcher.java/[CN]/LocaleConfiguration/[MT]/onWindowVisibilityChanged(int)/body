@@ -5,11 +5,11 @@
     mAppsCustomizeTabHost.onWindowVisible();
     if (!mWorkspaceLoading) {
       final ViewTreeObserver observer=mWorkspace.getViewTreeObserver();
-      observer.addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener(){
-        public boolean onPreDraw(){
+      observer.addOnDrawListener(new ViewTreeObserver.OnDrawListener(){
+        public void onDraw(){
           mWorkspace.postDelayed(mBuildLayersRunnable,500);
-          observer.removeOnPreDrawListener(this);
-          return true;
+          observer.removeOnDrawListener(this);
+          return;
         }
       }
 );

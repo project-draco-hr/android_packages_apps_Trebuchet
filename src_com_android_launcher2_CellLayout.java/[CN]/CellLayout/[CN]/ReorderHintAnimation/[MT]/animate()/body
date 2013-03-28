@@ -11,7 +11,7 @@
   if (finalDeltaX == 0 && finalDeltaY == 0) {
     return;
   }
-  ValueAnimator va=LauncherAnimUtils.ofFloat(0f,1f);
+  ValueAnimator va=LauncherAnimUtils.ofFloat(child,0f,1f);
   a=va;
   va.setRepeatMode(ValueAnimator.REVERSE);
   va.setRepeatCount(ValueAnimator.INFINITE);

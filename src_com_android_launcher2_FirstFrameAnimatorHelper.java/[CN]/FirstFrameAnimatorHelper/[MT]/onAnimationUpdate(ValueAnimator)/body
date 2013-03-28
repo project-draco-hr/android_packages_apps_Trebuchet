@@ -1,0 +1,28 @@
+{
+  if (mStartTime == -1) {
+    mStartFrame=sGlobalFrameCounter;
+    mStartTime=System.currentTimeMillis();
+  }
+  if (!mHandlingOnAnimationUpdate) {
+    mHandlingOnAnimationUpdate=true;
+    long frameNum=sGlobalFrameCounter - mStartFrame;
+    if (frameNum == 0 && System.currentTimeMillis() < mStartTime + MAX_FIRST_FRAME_DELAY) {
+      mTarget.getRootView().invalidate();
+      animation.setCurrentPlayTime(0);
+    }
+ else     if (frameNum == 1 && !mAdjustedSecondFrameTime && System.currentTimeMillis() > mStartTime + 16) {
+      animation.setCurrentPlayTime(IDEAL_FRAME_DURATION);
+      mAdjustedSecondFrameTime=true;
+    }
+ else {
+      if (frameNum > 1) {
+        animation.removeUpdateListener(this);
+      }
+      if (DEBUG)       print(animation);
+    }
+    mHandlingOnAnimationUpdate=false;
+  }
+ else {
+    if (DEBUG)     print(animation);
+  }
+}

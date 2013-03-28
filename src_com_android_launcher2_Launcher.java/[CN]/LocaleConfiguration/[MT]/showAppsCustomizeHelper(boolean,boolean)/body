@@ -1,5 +1,6 @@
 {
   if (mStateAnimation != null) {
+    mStateAnimation.setDuration(0);
     mStateAnimation.cancel();
     mStateAnimation=null;
   }
@@ -19,7 +20,7 @@
     scaleAnim.scaleX(1f).scaleY(1f).setDuration(duration).setInterpolator(new Workspace.ZoomOutInterpolator());
     toView.setVisibility(View.VISIBLE);
     toView.setAlpha(0f);
-    final ObjectAnimator alphaAnim=ObjectAnimator.ofFloat(toView,"alpha",0f,1f).setDuration(fadeDuration);
+    final ObjectAnimator alphaAnim=LauncherAnimUtils.ofFloat(toView,"alpha",0f,1f).setDuration(fadeDuration);
     alphaAnim.setInterpolator(new DecelerateInterpolator(1.5f));
     alphaAnim.addUpdateListener(new AnimatorUpdateListener(){
       @Override public void onAnimationUpdate(      ValueAnimator animation){
@@ -67,15 +68,10 @@
       mStateAnimation.play(workspaceAnim);
     }
     boolean delayAnim=false;
-    final ViewTreeObserver observer;
     dispatchOnLauncherTransitionPrepare(fromView,animated,false);
     dispatchOnLauncherTransitionPrepare(toView,animated,false);
     if ((((LauncherTransitionable)toView).getContent().getMeasuredWidth() == 0) || (mWorkspace.getMeasuredWidth() == 0) || (toView.getMeasuredWidth() == 0)) {
-      observer=mWorkspace.getViewTreeObserver();
       delayAnim=true;
-    }
- else {
-      observer=null;
     }
     final AnimatorSet stateAnimation=mStateAnimation;
     final Runnable startAnimRunnable=new Runnable(){
@@ -84,25 +80,19 @@
         setPivotsForZoom(toView,scale);
         dispatchOnLauncherTransitionStart(fromView,animated,false);
         dispatchOnLauncherTransitionStart(toView,animated,false);
-        toView.post(new Runnable(){
-          public void run(){
-            if (mStateAnimation != stateAnimation)             return;
-            mStateAnimation.start();
-          }
-        }
-);
+        LauncherAnimUtils.startAnimationAfterNextDraw(mStateAnimation,toView);
       }
     }
 ;
     if (delayAnim) {
-      final OnGlobalLayoutListener delayedStart=new OnGlobalLayoutListener(){
+      final ViewTreeObserver observer=toView.getViewTreeObserver();
+      observer.addOnGlobalLayoutListener(new OnGlobalLayoutListener(){
         public void onGlobalLayout(){
-          toView.post(startAnimRunnable);
-          observer.removeOnGlobalLayoutListener(this);
+          startAnimRunnable.run();
+          toView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
         }
       }
-;
-      observer.addOnGlobalLayoutListener(delayedStart);
+);
     }
  else {
       startAnimRunnable.run();

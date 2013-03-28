@@ -1,5 +1,6 @@
 {
   if (mStateAnimation != null) {
+    mStateAnimation.setDuration(0);
     mStateAnimation.cancel();
     mStateAnimation=null;
   }
@@ -23,7 +24,7 @@
   if (animated) {
     final LauncherViewPropertyAnimator scaleAnim=new LauncherViewPropertyAnimator(fromView);
     scaleAnim.scaleX(scaleFactor).scaleY(scaleFactor).setDuration(duration).setInterpolator(new Workspace.ZoomInInterpolator());
-    final ObjectAnimator alphaAnim=ObjectAnimator.ofFloat(fromView,"alpha",1f,0f).setDuration(fadeOutDuration);
+    final ObjectAnimator alphaAnim=LauncherAnimUtils.ofFloat(fromView,"alpha",1f,0f).setDuration(fadeOutDuration);
     alphaAnim.setInterpolator(new AccelerateDecelerateInterpolator());
     alphaAnim.addUpdateListener(new AnimatorUpdateListener(){
       @Override public void onAnimationUpdate(      ValueAnimator animation){
@@ -60,14 +61,7 @@
     }
     dispatchOnLauncherTransitionStart(fromView,animated,true);
     dispatchOnLauncherTransitionStart(toView,animated,true);
-    final Animator stateAnimation=mStateAnimation;
-    mWorkspace.post(new Runnable(){
-      public void run(){
-        if (stateAnimation != mStateAnimation)         return;
-        mStateAnimation.start();
-      }
-    }
-);
+    LauncherAnimUtils.startAnimationAfterNextDraw(mStateAnimation,toView);
   }
  else {
     fromView.setVisibility(View.GONE);

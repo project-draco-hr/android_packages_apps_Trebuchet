@@ -9,7 +9,7 @@
   final float scale=(width + scaleDps) / width;
   setScaleX(initialScale);
   setScaleY(initialScale);
-  mAnim=LauncherAnimUtils.ofFloat(0.0f,1.0f);
+  mAnim=LauncherAnimUtils.ofFloat(this,0f,1f);
   mAnim.setDuration(150);
   mAnim.addUpdateListener(new AnimatorUpdateListener(){
     @Override public void onAnimationUpdate(    ValueAnimator animation){
