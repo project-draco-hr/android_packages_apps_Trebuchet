@@ -1,0 +1,15 @@
+{
+  sGlobalDrawListener=new ViewTreeObserver.OnDrawListener(){
+    private long mTime=System.currentTimeMillis();
+    public void onDraw(){
+      sGlobalFrameCounter++;
+      long newTime=System.currentTimeMillis();
+      if (DEBUG) {
+        Log.d("FirstFrameAnimatorHelper","TICK " + (newTime - mTime));
+      }
+      mTime=newTime;
+    }
+  }
+;
+  view.getViewTreeObserver().addOnDrawListener(sGlobalDrawListener);
+}

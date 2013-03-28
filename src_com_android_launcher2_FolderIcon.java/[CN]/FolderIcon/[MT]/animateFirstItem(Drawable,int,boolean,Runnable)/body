@@ -4,7 +4,7 @@
   final float transX0=(mAvailableSpaceInPreview - d.getIntrinsicWidth()) / 2;
   final float transY0=(mAvailableSpaceInPreview - d.getIntrinsicHeight()) / 2;
   mAnimParams.drawable=d;
-  ValueAnimator va=LauncherAnimUtils.ofFloat(0f,1.0f);
+  ValueAnimator va=LauncherAnimUtils.ofFloat(this,0f,1.0f);
   va.addUpdateListener(new AnimatorUpdateListener(){
     public void onAnimationUpdate(    ValueAnimator animation){
       float progress=(Float)animation.getAnimatedValue();
