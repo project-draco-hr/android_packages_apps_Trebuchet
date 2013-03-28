@@ -16,7 +16,12 @@
     }
  else {
       if (frameNum > 1) {
-        animation.removeUpdateListener(this);
+        mTarget.post(new Runnable(){
+          public void run(){
+            animation.removeUpdateListener(FirstFrameAnimatorHelper.this);
+          }
+        }
+);
       }
       if (DEBUG)       print(animation);
     }
