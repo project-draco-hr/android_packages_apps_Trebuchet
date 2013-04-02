@@ -1,4 +1,5 @@
 {
+  final boolean isRtl=isLayoutRtl();
   int numCells=mCellCountX * mCellCountY;
   int startIndex=page * numCells;
   int endIndex=Math.min(startIndex + numCells,mApps.size());
@@ -17,6 +18,9 @@
     int index=i - startIndex;
     int x=index % mCellCountX;
     int y=index / mCellCountX;
+    if (isRtl) {
+      x=mCellCountX - x - 1;
+    }
     layout.addViewToCellLayout(icon,-1,i,new PagedViewCellLayout.LayoutParams(x,y,1,1));
     items.add(info);
     images.add(info.iconBitmap);
