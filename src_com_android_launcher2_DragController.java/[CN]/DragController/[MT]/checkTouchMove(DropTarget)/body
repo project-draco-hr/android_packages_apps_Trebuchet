@@ -1,0 +1,21 @@
+{
+  if (dropTarget != null) {
+    DropTarget delegate=dropTarget.getDropTargetDelegate(mDragObject);
+    if (delegate != null) {
+      dropTarget=delegate;
+    }
+    if (mLastDropTarget != dropTarget) {
+      if (mLastDropTarget != null) {
+        mLastDropTarget.onDragExit(mDragObject);
+      }
+      dropTarget.onDragEnter(mDragObject);
+    }
+    dropTarget.onDragOver(mDragObject);
+  }
+ else {
+    if (mLastDropTarget != null) {
+      mLastDropTarget.onDragExit(mDragObject);
+    }
+  }
+  mLastDropTarget=dropTarget;
+}
