@@ -17,6 +17,10 @@
     mRestoring=false;
     mOnResumeNeedsLoad=false;
   }
+  for (int i=0; i < mOnResumeCallbacks.size(); i++) {
+    mOnResumeCallbacks.get(i).run();
+  }
+  mOnResumeCallbacks.clear();
   if (mWaitingForResume != null) {
     mWaitingForResume.setStayPressed(false);
   }

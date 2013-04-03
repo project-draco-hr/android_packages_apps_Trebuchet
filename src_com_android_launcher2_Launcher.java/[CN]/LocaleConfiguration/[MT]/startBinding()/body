@@ -1,4 +1,5 @@
 {
+  mOnResumeCallbacks.clear();
   final Workspace workspace=mWorkspace;
   mNewShortcutAnimatePage=-1;
   mNewShortcutAnimateViews.clear();

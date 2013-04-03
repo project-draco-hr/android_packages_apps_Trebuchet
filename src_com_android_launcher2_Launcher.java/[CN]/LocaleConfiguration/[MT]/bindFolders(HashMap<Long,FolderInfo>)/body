@@ -1,5 +1,12 @@
 {
-  setLoadOnResume();
+  if (waitUntilResume(new Runnable(){
+    public void run(){
+      bindFolders(folders);
+    }
+  }
+)) {
+    return;
+  }
   sFolders.clear();
   sFolders.putAll(folders);
 }
