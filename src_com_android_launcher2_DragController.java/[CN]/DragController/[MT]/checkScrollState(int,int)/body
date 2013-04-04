@@ -1,0 +1,31 @@
+{
+  final int slop=ViewConfiguration.get(mLauncher).getScaledWindowTouchSlop();
+  final int delay=mDistanceSinceScroll < slop ? RESCROLL_DELAY : SCROLL_DELAY;
+  final DragLayer dragLayer=mLauncher.getDragLayer();
+  final boolean isRtl=(dragLayer.getLayoutDirection() == View.LAYOUT_DIRECTION_RTL);
+  final int forwardDirection=isRtl ? SCROLL_RIGHT : SCROLL_LEFT;
+  final int backwardsDirection=isRtl ? SCROLL_LEFT : SCROLL_RIGHT;
+  if (x < mScrollZone) {
+    if (mScrollState == SCROLL_OUTSIDE_ZONE) {
+      mScrollState=SCROLL_WAITING_IN_ZONE;
+      if (mDragScroller.onEnterScrollArea(x,y,forwardDirection)) {
+        dragLayer.onEnterScrollArea(forwardDirection);
+        mScrollRunnable.setDirection(forwardDirection);
+        mHandler.postDelayed(mScrollRunnable,delay);
+      }
+    }
+  }
+ else   if (x > mScrollView.getWidth() - mScrollZone) {
+    if (mScrollState == SCROLL_OUTSIDE_ZONE) {
+      mScrollState=SCROLL_WAITING_IN_ZONE;
+      if (mDragScroller.onEnterScrollArea(x,y,backwardsDirection)) {
+        dragLayer.onEnterScrollArea(backwardsDirection);
+        mScrollRunnable.setDirection(backwardsDirection);
+        mHandler.postDelayed(mScrollRunnable,delay);
+      }
+    }
+  }
+ else {
+    clearScrollRunnable();
+  }
+}
