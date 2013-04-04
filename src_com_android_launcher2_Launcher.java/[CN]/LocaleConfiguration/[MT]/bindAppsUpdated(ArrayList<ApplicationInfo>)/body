@@ -1,5 +1,12 @@
 {
-  setLoadOnResume();
+  if (waitUntilResume(new Runnable(){
+    public void run(){
+      bindAppsUpdated(apps);
+    }
+  }
+)) {
+    return;
+  }
   if (mWorkspace != null) {
     mWorkspace.updateShortcuts(apps);
   }
