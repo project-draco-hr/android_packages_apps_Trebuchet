@@ -1,0 +1,10 @@
+{
+  if (mPaused) {
+    Log.i(TAG,"Deferring update until onResume");
+    mOnResumeCallbacks.add(run);
+    return true;
+  }
+ else {
+    return false;
+  }
+}

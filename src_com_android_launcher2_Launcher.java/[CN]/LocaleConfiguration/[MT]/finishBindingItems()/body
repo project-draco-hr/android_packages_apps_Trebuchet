@@ -1,5 +1,12 @@
 {
-  setLoadOnResume();
+  if (waitUntilResume(new Runnable(){
+    public void run(){
+      finishBindingItems();
+    }
+  }
+)) {
+    return;
+  }
   if (mSavedState != null) {
     if (!mWorkspace.hasFocus()) {
       mWorkspace.getChildAt(mWorkspace.getCurrentPage()).requestFocus();

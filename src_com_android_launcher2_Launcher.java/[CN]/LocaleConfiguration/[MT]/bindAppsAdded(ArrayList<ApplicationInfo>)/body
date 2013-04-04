@@ -1,5 +1,12 @@
 {
-  setLoadOnResume();
+  if (waitUntilResume(new Runnable(){
+    public void run(){
+      bindAppsAdded(apps);
+    }
+  }
+)) {
+    return;
+  }
   if (mAppsCustomizeContent != null) {
     mAppsCustomizeContent.addApps(apps);
   }
