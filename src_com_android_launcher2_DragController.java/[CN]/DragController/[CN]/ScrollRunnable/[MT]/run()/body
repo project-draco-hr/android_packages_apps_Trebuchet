@@ -11,7 +11,7 @@
     mDragScroller.onExitScrollArea();
     mLauncher.getDragLayer().onExitScrollArea();
     if (isDragging()) {
-      forceMoveEvent();
+      checkScrollState(mLastTouch[0],mLastTouch[1]);
     }
   }
 }

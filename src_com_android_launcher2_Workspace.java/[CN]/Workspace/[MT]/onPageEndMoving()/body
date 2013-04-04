@@ -8,7 +8,7 @@
   }
   if (mDragController.isDragging()) {
     if (isSmall()) {
-      mDragController.forceMoveEvent();
+      mDragController.forceTouchMove();
     }
   }
  else {

@@ -1,5 +1,0 @@
-{
-  if (mDragging) {
-    handleMoveEvent(mDragObject.x,mDragObject.y);
-  }
-}
