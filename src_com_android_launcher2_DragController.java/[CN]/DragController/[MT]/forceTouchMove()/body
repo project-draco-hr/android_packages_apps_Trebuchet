@@ -1,0 +1,5 @@
+{
+  int[] dummyCoordinates=mCoordinatesTemp;
+  DropTarget dropTarget=findDropTarget(mLastTouch[0],mLastTouch[1],dummyCoordinates);
+  checkTouchMove(dropTarget);
+}
