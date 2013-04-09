@@ -1,16 +1,17 @@
 {
+  final long currentTime=System.currentTimeMillis();
   if (mStartTime == -1) {
     mStartFrame=sGlobalFrameCounter;
-    mStartTime=System.currentTimeMillis();
+    mStartTime=currentTime;
   }
-  if (!mHandlingOnAnimationUpdate) {
+  if (!mHandlingOnAnimationUpdate && animation.getCurrentPlayTime() < animation.getDuration()) {
     mHandlingOnAnimationUpdate=true;
     long frameNum=sGlobalFrameCounter - mStartFrame;
-    if (frameNum == 0 && System.currentTimeMillis() < mStartTime + MAX_FIRST_FRAME_DELAY) {
+    if (frameNum == 0 && currentTime < mStartTime + MAX_DELAY) {
       mTarget.getRootView().invalidate();
       animation.setCurrentPlayTime(0);
     }
- else     if (frameNum == 1 && !mAdjustedSecondFrameTime && System.currentTimeMillis() > mStartTime + 16) {
+ else     if (frameNum == 1 && currentTime < mStartTime + MAX_DELAY && !mAdjustedSecondFrameTime && currentTime > mStartTime + IDEAL_FRAME_DURATION) {
       animation.setCurrentPlayTime(IDEAL_FRAME_DURATION);
       mAdjustedSecondFrameTime=true;
     }

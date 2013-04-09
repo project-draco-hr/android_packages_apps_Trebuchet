@@ -1,5 +1,6 @@
 {
   mViewPropertyAnimator=mTarget.animate();
+  mFirstFrameHelper=new FirstFrameAnimatorHelper(mViewPropertyAnimator,mTarget);
   if (mPropertiesToSet.contains(Properties.TRANSLATION_X)) {
     mViewPropertyAnimator.translationX(mTranslationX);
   }
