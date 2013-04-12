@@ -6,4 +6,5 @@
     shrinkAndFadeInFolderIcon(fi);
   }
   folder.animateClosed();
+  getDragLayer().sendAccessibilityEvent(AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED);
 }

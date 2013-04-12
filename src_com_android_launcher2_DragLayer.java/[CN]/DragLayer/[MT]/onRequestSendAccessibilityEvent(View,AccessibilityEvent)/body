@@ -1,0 +1,10 @@
+{
+  Folder currentFolder=mLauncher.getWorkspace().getOpenFolder();
+  if (currentFolder != null) {
+    if (child == currentFolder) {
+      return super.onRequestSendAccessibilityEvent(child,event);
+    }
+    return false;
+  }
+  return super.onRequestSendAccessibilityEvent(child,event);
+}
