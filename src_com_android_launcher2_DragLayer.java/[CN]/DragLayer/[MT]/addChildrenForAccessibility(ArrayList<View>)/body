@@ -1,0 +1,9 @@
+{
+  Folder currentFolder=mLauncher.getWorkspace().getOpenFolder();
+  if (currentFolder != null) {
+    childrenForAccessibility.add(currentFolder);
+  }
+ else {
+    super.addChildrenForAccessibility(childrenForAccessibility);
+  }
+}
