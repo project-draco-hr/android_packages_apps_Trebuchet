@@ -11,4 +11,6 @@
   }
   folder.animateOpen();
   growAndFadeOutFolderIcon(folderIcon);
+  folder.sendAccessibilityEvent(AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED);
+  getDragLayer().sendAccessibilityEvent(AccessibilityEvent.TYPE_WINDOW_CONTENT_CHANGED);
 }
