@@ -3,4 +3,5 @@
   mCellHeight=cellHeight;
   mWidthGap=widthGap;
   mHeightGap=heightGap;
+  mCountX=countX;
 }
