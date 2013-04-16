@@ -3,6 +3,7 @@
   mContent=(CellLayout)findViewById(R.id.folder_content);
   mContent.setGridSize(0,0);
   mContent.getShortcutsAndWidgets().setMotionEventSplittingEnabled(false);
+  mContent.setInvertIfRtl(true);
   mFolderName=(FolderEditText)findViewById(R.id.folder_name);
   mFolderName.setFolder(this);
   mFolderName.setOnFocusChangeListener(this);

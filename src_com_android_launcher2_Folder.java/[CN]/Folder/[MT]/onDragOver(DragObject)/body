@@ -1,6 +1,9 @@
 {
   float[] r=getDragViewVisualCenter(d.x,d.y,d.xOffset,d.yOffset,d.dragView,null);
   mTargetCell=mContent.findNearestArea((int)r[0],(int)r[1],1,1,mTargetCell);
+  if (isLayoutRtl()) {
+    mTargetCell[0]=mContent.getCountX() - mTargetCell[0] - 1;
+  }
   if (mTargetCell[0] != mPreviousTargetCell[0] || mTargetCell[1] != mPreviousTargetCell[1]) {
     mReorderAlarm.cancelAlarm();
     mReorderAlarm.setOnAlarmListener(mReorderAlarmListener);
