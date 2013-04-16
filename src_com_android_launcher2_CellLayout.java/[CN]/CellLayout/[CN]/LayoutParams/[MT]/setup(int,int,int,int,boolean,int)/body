@@ -2,8 +2,11 @@
   if (isLockedToGrid) {
     final int myCellHSpan=cellHSpan;
     final int myCellVSpan=cellVSpan;
-    final int myCellX=useTmpCoords ? tmpCellX : cellX;
-    final int myCellY=useTmpCoords ? tmpCellY : cellY;
+    int myCellX=useTmpCoords ? tmpCellX : cellX;
+    int myCellY=useTmpCoords ? tmpCellY : cellY;
+    if (invertHorizontally) {
+      myCellX=colCount - myCellX - cellHSpan;
+    }
     width=myCellHSpan * cellWidth + ((myCellHSpan - 1) * widthGap) - leftMargin - rightMargin;
     height=myCellVSpan * cellHeight + ((myCellVSpan - 1) * heightGap) - topMargin - bottomMargin;
     x=(int)(myCellX * (cellWidth + widthGap) + leftMargin);

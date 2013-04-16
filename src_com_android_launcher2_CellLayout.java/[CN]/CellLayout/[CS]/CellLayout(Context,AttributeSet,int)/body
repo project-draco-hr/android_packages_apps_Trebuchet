@@ -72,6 +72,6 @@
   mBackgroundRect=new Rect();
   mForegroundRect=new Rect();
   mShortcutsAndWidgets=new ShortcutAndWidgetContainer(context);
-  mShortcutsAndWidgets.setCellDimensions(mCellWidth,mCellHeight,mWidthGap,mHeightGap);
+  mShortcutsAndWidgets.setCellDimensions(mCellWidth,mCellHeight,mWidthGap,mHeightGap,mCountX);
   addView(mShortcutsAndWidgets);
 }
