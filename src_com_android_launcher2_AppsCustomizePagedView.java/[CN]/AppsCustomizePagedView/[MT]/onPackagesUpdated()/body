@@ -4,6 +4,7 @@
   Intent shortcutsIntent=new Intent(Intent.ACTION_CREATE_SHORTCUT);
   List<ResolveInfo> shortcuts=mPackageManager.queryIntentActivities(shortcutsIntent,0);
   for (  AppWidgetProviderInfo widget : widgets) {
+    widget.label=widget.label.trim();
     if (widget.minWidth > 0 && widget.minHeight > 0) {
       int[] spanXY=Launcher.getSpanForWidget(mLauncher,widget);
       int[] minSpanXY=Launcher.getMinSpanForWidget(mLauncher,widget);
