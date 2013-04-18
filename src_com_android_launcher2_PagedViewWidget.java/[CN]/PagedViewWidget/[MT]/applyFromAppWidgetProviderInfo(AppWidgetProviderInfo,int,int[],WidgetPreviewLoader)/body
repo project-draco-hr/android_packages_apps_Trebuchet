@@ -5,7 +5,6 @@
   if (maxWidth > -1) {
     image.setMaxWidth(maxWidth);
   }
-  image.setContentDescription(info.label);
   final TextView name=(TextView)findViewById(R.id.widget_name);
   name.setText(info.label);
   final TextView dims=(TextView)findViewById(R.id.widget_dims);
