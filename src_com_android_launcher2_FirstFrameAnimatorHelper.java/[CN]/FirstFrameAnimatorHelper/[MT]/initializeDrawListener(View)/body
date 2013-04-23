@@ -15,4 +15,5 @@
   }
 ;
   view.getViewTreeObserver().addOnDrawListener(sGlobalDrawListener);
+  sVisible=true;
 }
