@@ -19,7 +19,6 @@
       hideScrollingIndicator(false);
     }
   }
-  mOverScrollMaxBackgroundAlpha=0.0f;
   if (mDelayedResizeRunnable != null) {
     mDelayedResizeRunnable.run();
     mDelayedResizeRunnable=null;
