@@ -1,5 +1,0 @@
-{
-  removeAppsWithPackageNameWithoutInvalidate(packageNames);
-  updatePageCounts();
-  invalidateOnDataChange();
-}

@@ -1,9 +1,0 @@
-{
-  if (permanent) {
-    mWorkspace.removeItems(packageNames);
-  }
-  if (mAppsCustomizeContent != null) {
-    mAppsCustomizeContent.removeApps(packageNames);
-  }
-  mDragController.onAppsRemoved(packageNames,this);
-}
