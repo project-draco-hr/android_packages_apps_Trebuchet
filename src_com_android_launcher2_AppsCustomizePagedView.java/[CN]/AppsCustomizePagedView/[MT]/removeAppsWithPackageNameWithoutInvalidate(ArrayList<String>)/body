@@ -1,9 +1,0 @@
-{
-  for (  String pn : packageNames) {
-    int removeIndex=findAppByPackage(mApps,pn);
-    while (removeIndex > -1) {
-      mApps.remove(removeIndex);
-      removeIndex=findAppByPackage(mApps,pn);
-    }
-  }
-}

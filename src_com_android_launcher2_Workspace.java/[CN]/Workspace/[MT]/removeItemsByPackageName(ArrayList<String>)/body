@@ -1,0 +1,38 @@
+{
+  HashSet<String> packageNames=new HashSet<String>();
+  packageNames.addAll(packages);
+  HashSet<ComponentName> cns=new HashSet<ComponentName>();
+  ArrayList<CellLayout> cellLayouts=getWorkspaceAndHotseatCellLayouts();
+  for (  CellLayout layoutParent : cellLayouts) {
+    ViewGroup layout=layoutParent.getShortcutsAndWidgets();
+    int childCount=layout.getChildCount();
+    for (int i=0; i < childCount; ++i) {
+      View view=layout.getChildAt(i);
+      Object tag=view.getTag();
+      if (tag instanceof ShortcutInfo) {
+        ShortcutInfo info=(ShortcutInfo)tag;
+        ComponentName cn=info.intent.getComponent();
+        if (packageNames.contains(cn.getPackageName())) {
+          cns.add(cn);
+        }
+      }
+ else       if (tag instanceof FolderInfo) {
+        FolderInfo info=(FolderInfo)tag;
+        for (        ShortcutInfo s : info.contents) {
+          ComponentName cn=s.intent.getComponent();
+          if (packageNames.contains(cn.getPackageName())) {
+            cns.add(cn);
+          }
+        }
+      }
+ else       if (tag instanceof LauncherAppWidgetInfo) {
+        LauncherAppWidgetInfo info=(LauncherAppWidgetInfo)tag;
+        ComponentName cn=info.providerName;
+        if (packageNames.contains(cn.getPackageName())) {
+          cns.add(cn);
+        }
+      }
+    }
+  }
+  removeItemsByComponentName(cns);
+}

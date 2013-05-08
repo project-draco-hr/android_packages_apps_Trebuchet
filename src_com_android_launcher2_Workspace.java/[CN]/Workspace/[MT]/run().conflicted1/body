@@ -8,8 +8,7 @@ synchronized (newApps) {
       while (iter.hasNext()) {
         try {
           Intent intent=Intent.parseUri(iter.next(),0);
-          String pn=ItemInfo.getPackageName(intent);
-          if (packageNames.contains(pn)) {
+          if (componentNames.contains(intent.getComponent())) {
             iter.remove();
           }
           ArrayList<ItemInfo> shortcuts;
