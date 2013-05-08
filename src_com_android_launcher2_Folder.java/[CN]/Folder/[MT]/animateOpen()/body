@@ -19,6 +19,9 @@
         cling.bringToFront();
       }
       setFocusOnFirstChild();
+      setAlpha(1);
+      setScaleX(1);
+      setScaleY(1);
     }
   }
 );
