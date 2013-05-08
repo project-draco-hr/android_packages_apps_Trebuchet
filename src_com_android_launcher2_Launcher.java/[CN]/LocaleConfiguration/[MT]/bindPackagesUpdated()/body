@@ -1,4 +1,12 @@
 {
+  if (waitUntilResume(new Runnable(){
+    public void run(){
+      bindPackagesUpdated();
+    }
+  }
+)) {
+    return;
+  }
   if (mAppsCustomizeContent != null) {
     mAppsCustomizeContent.onPackagesUpdated();
   }
