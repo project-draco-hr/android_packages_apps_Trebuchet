@@ -1,0 +1,22 @@
+{
+synchronized (sLock) {
+    try {
+      JSONStringer json=new JSONStringer().object().key(DATA_INTENT_KEY).value(info.data.toUri(0)).key(LAUNCH_INTENT_KEY).value(info.launchIntent.toUri(0)).key(NAME_KEY).value(info.name);
+      if (info.icon != null) {
+        byte[] iconByteArray=ItemInfo.flattenBitmap(info.icon);
+        json=json.key(ICON_KEY).value(Base64.encodeToString(iconByteArray,0,iconByteArray.length,Base64.DEFAULT));
+      }
+      if (info.iconResource != null) {
+        json=json.key(ICON_RESOURCE_NAME_KEY).value(info.iconResource.resourceName);
+        json=json.key(ICON_RESOURCE_PACKAGE_NAME_KEY).value(info.iconResource.packageName);
+      }
+      json=json.endObject();
+      SharedPreferences.Editor editor=sharedPrefs.edit();
+      addToStringSet(sharedPrefs,editor,APPS_PENDING_INSTALL,json.toString());
+      editor.commit();
+    }
+ catch (    org.json.JSONException e) {
+      Log.d("InstallShortcutReceiver","Exception when adding shortcut: " + e);
+    }
+  }
+}
