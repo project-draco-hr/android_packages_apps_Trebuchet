@@ -13,9 +13,9 @@ synchronized (LoaderTask.this) {
       }
     }
 );
-    while (!mStopped && !mLoadAndBindStepFinished) {
+    while (!mStopped && !mLoadAndBindStepFinished && !mFlushingWorkerThread) {
       try {
-        this.wait();
+        this.wait(1000);
       }
  catch (      InterruptedException ex) {
       }
