@@ -1,0 +1,4 @@
+SharedPreferences sharedPrefs
+SharedPreferences.Editor editor
+String key
+String value

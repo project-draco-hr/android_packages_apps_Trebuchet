@@ -10,19 +10,16 @@
       }
       boolean duplicate=data.getBooleanExtra(Launcher.EXTRA_SHORTCUT_DUPLICATE,true);
       if (duplicate || !shortcutExists) {
-        int newAppsScreen=sharedPrefs.getInt(NEW_APPS_PAGE_KEY,screen);
-        Set<String> newApps=new HashSet<String>();
-        if (newAppsScreen == screen) {
-          newApps=sharedPrefs.getStringSet(NEW_APPS_LIST_KEY,newApps);
-        }
-synchronized (newApps) {
-          newApps.add(intent.toUri(0).toString());
-        }
-        final Set<String> savedNewApps=newApps;
         new Thread("setNewAppsThread"){
           public void run(){
-synchronized (savedNewApps) {
-              sharedPrefs.edit().putInt(NEW_APPS_PAGE_KEY,screen).putStringSet(NEW_APPS_LIST_KEY,savedNewApps).commit();
+synchronized (sLock) {
+              final int newAppsScreen=sharedPrefs.getInt(NEW_APPS_PAGE_KEY,screen);
+              SharedPreferences.Editor editor=sharedPrefs.edit();
+              if (newAppsScreen == screen) {
+                addToStringSet(sharedPrefs,editor,NEW_APPS_LIST_KEY,intent.toUri(0));
+              }
+              editor.putInt(NEW_APPS_PAGE_KEY,screen);
+              editor.commit();
             }
           }
         }
