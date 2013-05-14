@@ -8,6 +8,7 @@
   final int[] result={INSTALL_SHORTCUT_SUCCESSFUL};
   boolean found=false;
 synchronized (app) {
+    app.getModel().flushWorkerThread();
     final ArrayList<ItemInfo> items=LauncherModel.getItemsInLocalCoordinates(context);
     final boolean exists=LauncherModel.shortcutExists(context,name,intent);
     final int screen=Launcher.DEFAULT_SCREEN;
