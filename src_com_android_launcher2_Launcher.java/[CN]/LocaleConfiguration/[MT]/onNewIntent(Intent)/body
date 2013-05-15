@@ -1,4 +1,8 @@
 {
+  long startTime=0;
+  if (DEBUG_RESUME_TIME) {
+    startTime=System.currentTimeMillis();
+  }
   super.onNewIntent(intent);
   if (Intent.ACTION_MAIN.equals(intent.getAction())) {
     closeSystemDialogs();
@@ -38,5 +42,8 @@
  else {
       processIntent.run();
     }
+  }
+  if (DEBUG_RESUME_TIME) {
+    Log.d(TAG,"Time spent in onNewIntent: " + (System.currentTimeMillis() - startTime));
   }
 }
