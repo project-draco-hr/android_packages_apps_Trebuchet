@@ -1,0 +1,10 @@
+{
+  if (mInBulkBind) {
+    mNeedToUpdatePageCountsAndInvalidateData=true;
+  }
+ else {
+    updatePageCounts();
+    invalidateOnDataChange();
+    mNeedToUpdatePageCountsAndInvalidateData=false;
+  }
+}
