@@ -17,10 +17,16 @@
       return;
     }
   }
+  Bitmap icon=data.getParcelableExtra(Intent.EXTRA_SHORTCUT_ICON);
+  Intent.ShortcutIconResource iconResource=data.getParcelableExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE);
   boolean launcherNotLoaded=LauncherModel.getCellCountX() <= 0 || LauncherModel.getCellCountY() <= 0;
   PendingInstallShortcutInfo info=new PendingInstallShortcutInfo(data,name,intent);
+  info.icon=icon;
+  info.iconResource=iconResource;
   if (mUseInstallQueue || launcherNotLoaded) {
-    mInstallQueue.add(info);
+    String spKey=LauncherApplication.getSharedPreferencesKey();
+    SharedPreferences sp=context.getSharedPreferences(spKey,Context.MODE_PRIVATE);
+    addToInstallQueue(sp,info);
   }
  else {
     processInstallShortcut(context,info);
