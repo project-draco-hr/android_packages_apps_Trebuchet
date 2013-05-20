@@ -1,7 +1,9 @@
 {
-  Iterator<PendingInstallShortcutInfo> iter=mInstallQueue.iterator();
+  String spKey=LauncherApplication.getSharedPreferencesKey();
+  SharedPreferences sp=context.getSharedPreferences(spKey,Context.MODE_PRIVATE);
+  ArrayList<PendingInstallShortcutInfo> installQueue=getAndClearInstallQueue(sp);
+  Iterator<PendingInstallShortcutInfo> iter=installQueue.iterator();
   while (iter.hasNext()) {
     processInstallShortcut(context,iter.next());
-    iter.remove();
   }
 }
