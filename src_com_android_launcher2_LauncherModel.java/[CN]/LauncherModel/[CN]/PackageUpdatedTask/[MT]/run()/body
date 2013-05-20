@@ -84,11 +84,12 @@ callbacks.bindComponentsRemoved(removedPackageNames,removedApps,permanent);
 }
 );
 }
+final ArrayList<Object> widgetsAndShortcuts=getSortedWidgetsAndShortcuts(context);
 mHandler.post(new Runnable(){
 @Override public void run(){
 Callbacks cb=mCallbacks != null ? mCallbacks.get() : null;
 if (callbacks == cb && cb != null) {
-callbacks.bindPackagesUpdated();
+callbacks.bindPackagesUpdated(widgetsAndShortcuts);
 }
 }
 }
