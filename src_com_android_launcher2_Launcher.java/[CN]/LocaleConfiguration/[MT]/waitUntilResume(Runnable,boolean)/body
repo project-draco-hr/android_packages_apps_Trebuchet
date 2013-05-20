@@ -1,0 +1,14 @@
+{
+  if (mPaused) {
+    Log.i(TAG,"Deferring update until onResume");
+    if (deletePreviousRunnables) {
+      while (mOnResumeCallbacks.remove(run)) {
+      }
+    }
+    mOnResumeCallbacks.add(run);
+    return true;
+  }
+ else {
+    return false;
+  }
+}

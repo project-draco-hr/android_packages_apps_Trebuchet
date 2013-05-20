@@ -21,16 +21,24 @@
     mRestoring=false;
     mOnResumeNeedsLoad=false;
   }
-  long startTimeCallbacks=0;
-  if (DEBUG_RESUME_TIME) {
-    startTimeCallbacks=System.currentTimeMillis();
-  }
-  for (int i=0; i < mOnResumeCallbacks.size(); i++) {
-    mOnResumeCallbacks.get(i).run();
-  }
-  mOnResumeCallbacks.clear();
-  if (DEBUG_RESUME_TIME) {
-    Log.d(TAG,"Time spent processing callbacks in onResume: " + (System.currentTimeMillis() - startTimeCallbacks));
+  if (mOnResumeCallbacks.size() > 0) {
+    long startTimeCallbacks=0;
+    if (DEBUG_RESUME_TIME) {
+      startTimeCallbacks=System.currentTimeMillis();
+    }
+    if (mAppsCustomizeContent != null) {
+      mAppsCustomizeContent.setBulkBind(true);
+    }
+    for (int i=0; i < mOnResumeCallbacks.size(); i++) {
+      mOnResumeCallbacks.get(i).run();
+    }
+    if (mAppsCustomizeContent != null) {
+      mAppsCustomizeContent.setBulkBind(false);
+    }
+    mOnResumeCallbacks.clear();
+    if (DEBUG_RESUME_TIME) {
+      Log.d(TAG,"Time spent processing callbacks in onResume: " + (System.currentTimeMillis() - startTimeCallbacks));
+    }
   }
   if (mWaitingForResume != null) {
     mWaitingForResume.setStayPressed(false);
