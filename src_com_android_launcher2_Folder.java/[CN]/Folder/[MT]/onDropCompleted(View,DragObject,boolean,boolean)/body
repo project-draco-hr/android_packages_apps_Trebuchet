@@ -5,14 +5,15 @@
     }
   }
  else {
+    setupContentForNumItems(getItemCount());
     mFolderIcon.onDrop(d);
-    if (mOnExitAlarm.alarmPending()) {
-      mSuppressFolderDeletion=true;
-    }
   }
   if (target != this) {
     if (mOnExitAlarm.alarmPending()) {
       mOnExitAlarm.cancelAlarm();
+      if (!success) {
+        mSuppressFolderDeletion=true;
+      }
       completeDragExit();
     }
   }

@@ -29,9 +29,11 @@
     dragLayer.animateView(animateView,from,to,finalAlpha,1,1,finalScale,finalScale,DROP_IN_ANIMATION_DURATION,new DecelerateInterpolator(2),new AccelerateInterpolator(2),postAnimationRunnable,DragLayer.ANIMATION_END_DISAPPEAR,null);
     addItem(item);
     mHiddenItems.add(item);
+    mFolder.hideItem(item);
     postDelayed(new Runnable(){
       public void run(){
         mHiddenItems.remove(item);
+        mFolder.showItem(item);
         invalidate();
       }
     }
