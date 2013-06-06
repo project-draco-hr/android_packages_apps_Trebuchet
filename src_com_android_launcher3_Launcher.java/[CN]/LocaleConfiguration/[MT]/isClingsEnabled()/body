@@ -1,0 +1,4 @@
+{
+  if (ActivityManager.isRunningInTestHarness())   return false;
+  return true;
+}
