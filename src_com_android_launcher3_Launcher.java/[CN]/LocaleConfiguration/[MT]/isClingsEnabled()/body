@@ -1,4 +1,7 @@
 {
+  if (DISABLE_CLINGS) {
+    return false;
+  }
   if (ActivityManager.isRunningInTestHarness())   return false;
   return true;
 }
