@@ -8,6 +8,11 @@
   Object tag=v.getTag();
   if (tag instanceof ShortcutInfo) {
     final Intent intent=((ShortcutInfo)tag).intent;
+    ComponentName widgetComp=new ComponentName(this,WidgetAdder.class);
+    if (intent.getComponent().getClassName().equals(widgetComp.getClassName())) {
+      showAllApps(true);
+      return;
+    }
     int[] pos=new int[2];
     v.getLocationOnScreen(pos);
     intent.setSourceBounds(new Rect(pos[0],pos[1],pos[0] + v.getWidth(),pos[1] + v.getHeight()));
