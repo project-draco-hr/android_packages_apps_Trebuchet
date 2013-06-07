@@ -11,5 +11,5 @@
   if (mSearchDropTargetBar != null) {
     sourceBounds=mSearchDropTargetBar.getSearchBarBounds();
   }
-  startGlobalSearch(initialQuery,selectInitialQuery,appSearchData,sourceBounds);
+  startSearch(initialQuery,selectInitialQuery,appSearchData,sourceBounds);
 }
