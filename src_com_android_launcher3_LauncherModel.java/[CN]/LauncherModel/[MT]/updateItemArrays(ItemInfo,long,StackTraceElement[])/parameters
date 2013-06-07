@@ -1,0 +1,3 @@
+ItemInfo item
+long itemId
+StackTraceElement[] stackTrace

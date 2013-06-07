@@ -1,0 +1,8 @@
+{
+  int contentAreaHeight=mContent.getDesiredHeight();
+  if (contentAreaHeight >= mMaxContentAreaHeight) {
+    contentAreaHeight=mMaxContentAreaHeight;
+  }
+  int height=getPaddingTop() + getPaddingBottom() + contentAreaHeight+ mFolderNameHeight;
+  return height;
+}

@@ -4,13 +4,30 @@
   mInflater=LayoutInflater.from(context);
   mIconCache=((LauncherApplication)context.getApplicationContext()).getIconCache();
   Resources res=getResources();
-  mMaxCountX=res.getInteger(R.integer.folder_max_count_x);
-  mMaxCountY=res.getInteger(R.integer.folder_max_count_y);
+  mMaxCountX=mMaxVisibleX=res.getInteger(R.integer.folder_max_count_x);
+  mMaxCountY=mMaxVisibleY=res.getInteger(R.integer.folder_max_count_y);
   mMaxNumItems=res.getInteger(R.integer.folder_max_num_items);
-  if (mMaxCountX < 0 || mMaxCountY < 0 || mMaxNumItems < 0) {
-    mMaxCountX=LauncherModel.getCellCountX();
-    mMaxCountY=LauncherModel.getCellCountY();
+  if (mMaxCountY == -1) {
+    mMaxCountY=Integer.MAX_VALUE;
+    mMaxVisibleX=LauncherModel.getCellCountX() + 1;
+  }
+  if (mMaxNumItems == -1) {
+    mMaxNumItems=Integer.MAX_VALUE;
+    mMaxVisibleY=LauncherModel.getCellCountY() + 1;
+  }
+  if (mMaxCountX == 0) {
+    mMaxCountX=mMaxVisibleX=LauncherModel.getCellCountX();
+    mMaxVisibleX++;
+  }
+  if (mMaxCountY == 0) {
+    mMaxCountY=mMaxVisibleY=LauncherModel.getCellCountY();
+    mMaxVisibleY++;
+  }
+  if (mMaxNumItems == 0) {
     mMaxNumItems=mMaxCountX * mMaxCountY;
+    if (mMaxNumItems < 0) {
+      mMaxNumItems=Integer.MAX_VALUE;
+    }
   }
   mInputMethodManager=(InputMethodManager)getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
   mExpandDuration=res.getInteger(R.integer.config_folderAnimDuration);

@@ -1,0 +1,29 @@
+{
+synchronized (sBgLock) {
+    checkItemInfoLocked(itemId,item,stackTrace);
+    if (item.container != LauncherSettings.Favorites.CONTAINER_DESKTOP && item.container != LauncherSettings.Favorites.CONTAINER_HOTSEAT) {
+      if (!sBgFolders.containsKey(item.container)) {
+        String msg="item: " + item + " container being set to: "+ item.container+ ", not in the list of folders";
+        Log.e(TAG,msg);
+        Launcher.dumpDebugLogsToConsole();
+      }
+    }
+    ItemInfo modelItem=sBgItemsIdMap.get(itemId);
+    if (modelItem.container == LauncherSettings.Favorites.CONTAINER_DESKTOP || modelItem.container == LauncherSettings.Favorites.CONTAINER_HOTSEAT) {
+switch (modelItem.itemType) {
+case LauncherSettings.Favorites.ITEM_TYPE_APPLICATION:
+case LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT:
+case LauncherSettings.Favorites.ITEM_TYPE_FOLDER:
+        if (!sBgWorkspaceItems.contains(modelItem)) {
+          sBgWorkspaceItems.add(modelItem);
+        }
+      break;
+default :
+    break;
+}
+}
+ else {
+sBgWorkspaceItems.remove(modelItem);
+}
+}
+}

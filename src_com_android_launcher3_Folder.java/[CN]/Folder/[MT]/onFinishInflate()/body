@@ -1,6 +1,9 @@
 {
   super.onFinishInflate();
+  mScrollView=(ScrollView)findViewById(R.id.scroll_view);
   mContent=(CellLayout)findViewById(R.id.folder_content);
+  mContent.setGridSize(mMaxVisibleX,mMaxVisibleY);
+  mMaxContentAreaHeight=mContent.getDesiredHeight() - SCROLL_CUT_OFF_AMOUNT;
   mContent.setGridSize(0,0);
   mContent.getShortcutsAndWidgets().setMotionEventSplittingEnabled(false);
   mContent.setInvertIfRtl(true);

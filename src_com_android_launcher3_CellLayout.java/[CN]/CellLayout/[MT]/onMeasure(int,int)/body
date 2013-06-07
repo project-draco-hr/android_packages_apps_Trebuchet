@@ -3,7 +3,13 @@
   int widthSpecSize=MeasureSpec.getSize(widthMeasureSpec);
   int heightSpecMode=MeasureSpec.getMode(heightMeasureSpec);
   int heightSpecSize=MeasureSpec.getSize(heightMeasureSpec);
-  if (widthSpecMode == MeasureSpec.UNSPECIFIED || heightSpecMode == MeasureSpec.UNSPECIFIED) {
+  int newWidth=widthSpecSize;
+  int newHeight=heightSpecSize;
+  if (mFixedWidth > 0 && mFixedHeight > 0) {
+    newWidth=mFixedWidth;
+    newHeight=mFixedHeight;
+  }
+ else   if (widthSpecMode == MeasureSpec.UNSPECIFIED || heightSpecMode == MeasureSpec.UNSPECIFIED) {
     throw new RuntimeException("CellLayout cannot have UNSPECIFIED dimensions");
   }
   int numWidthGaps=mCountX - 1;
@@ -21,8 +27,6 @@
     mWidthGap=mOriginalWidthGap;
     mHeightGap=mOriginalHeightGap;
   }
-  int newWidth=widthSpecSize;
-  int newHeight=heightSpecSize;
   if (widthSpecMode == MeasureSpec.AT_MOST) {
     newWidth=getPaddingLeft() + getPaddingRight() + (mCountX * mCellWidth)+ ((mCountX - 1) * mWidthGap);
     newHeight=getPaddingTop() + getPaddingBottom() + (mCountY * mCellHeight)+ ((mCountY - 1) * mHeightGap);

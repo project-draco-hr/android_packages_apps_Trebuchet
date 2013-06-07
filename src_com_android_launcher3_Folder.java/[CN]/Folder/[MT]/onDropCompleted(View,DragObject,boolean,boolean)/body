@@ -23,5 +23,5 @@
   mCurrentDragInfo=null;
   mCurrentDragView=null;
   mSuppressOnAdd=false;
-  updateItemLocationsInDatabase();
+  updateItemLocationsInDatabaseBatch();
 }
