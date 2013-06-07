@@ -1,0 +1,8 @@
+{
+  saveWorkspaceScreenToDb((CellLayout)mLauncher.getHotseat().getLayout());
+  int count=getChildCount();
+  for (int i=0; i < count; i++) {
+    CellLayout cl=(CellLayout)getChildAt(i);
+    saveWorkspaceScreenToDb(cl);
+  }
+}

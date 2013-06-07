@@ -1,7 +1,7 @@
 {
   if (waitUntilResume(new Runnable(){
     public void run(){
-      finishBindingItems();
+      finishBindingItems(upgradePath);
     }
   }
 )) {
@@ -40,4 +40,9 @@
     }
   }
   mWorkspaceLoading=false;
+  if (upgradePath) {
+    mWorkspace.saveWorkspaceToDb();
+    mWorkspace.stripDuplicateApps();
+    mIntentsOnWorkspaceFromUpgradePath=mWorkspace.stripDuplicateApps();
+  }
 }

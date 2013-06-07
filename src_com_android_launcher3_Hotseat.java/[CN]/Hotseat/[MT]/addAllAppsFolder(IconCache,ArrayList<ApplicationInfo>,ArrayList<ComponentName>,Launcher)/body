@@ -1,0 +1,23 @@
+{
+  FolderInfo fi=new FolderInfo();
+  fi.cellX=getCellXFromOrder(mAllAppsButtonRank);
+  fi.cellY=getCellYFromOrder(mAllAppsButtonRank);
+  fi.spanX=1;
+  fi.spanY=1;
+  fi.container=LauncherSettings.Favorites.CONTAINER_HOTSEAT;
+  fi.screen=mAllAppsButtonRank;
+  fi.itemType=LauncherSettings.Favorites.ITEM_TYPE_FOLDER;
+  fi.title="All Apps";
+  LauncherModel.addItemToDatabase(launcher,fi,fi.container,fi.screen,fi.cellX,fi.cellY,false);
+  FolderIcon folder=FolderIcon.fromXml(R.layout.folder_icon,launcher,getLayout(),fi,iconCache);
+  CellLayout.LayoutParams lp=new CellLayout.LayoutParams(fi.cellX,fi.cellY,1,1);
+  mContent.addViewToCellLayout(folder,-1,0,lp,true);
+  for (  ApplicationInfo info : allApps) {
+    ComponentName cn=info.intent.getComponent();
+    if (!onWorkspace.contains(cn)) {
+      System.out.println("Adding to all apps: " + info.intent);
+      ShortcutInfo si=info.makeShortcut();
+      fi.add(si);
+    }
+  }
+}

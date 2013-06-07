@@ -3,6 +3,10 @@
     public void run(){
       if (mAppsCustomizeContent != null) {
         mAppsCustomizeContent.setApps(apps);
+        if (mIntentsOnWorkspaceFromUpgradePath != null) {
+          getHotseat().addAllAppsFolder(mIconCache,apps,mIntentsOnWorkspaceFromUpgradePath,Launcher.this);
+          mIntentsOnWorkspaceFromUpgradePath=null;
+        }
       }
     }
   }

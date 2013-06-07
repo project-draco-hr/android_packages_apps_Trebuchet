@@ -4,5 +4,6 @@
     updatePageCountsAndInvalidateData();
   }
  else {
+    mLauncher.getHotseat().addAppsToAllAppsFolder(list);
   }
 }

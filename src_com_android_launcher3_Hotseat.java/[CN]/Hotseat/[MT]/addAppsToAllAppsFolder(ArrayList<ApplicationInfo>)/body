@@ -1,0 +1,16 @@
+{
+  View v=mContent.getChildAt(getCellXFromOrder(mAllAppsButtonRank),getCellYFromOrder(mAllAppsButtonRank));
+  FolderIcon fi=null;
+  if (v instanceof FolderIcon) {
+    fi=(FolderIcon)v;
+  }
+ else {
+    return;
+  }
+  FolderInfo info=fi.getFolderInfo();
+  for (  ApplicationInfo a : apps) {
+    ComponentName cn=a.intent.getComponent();
+    ShortcutInfo si=a.makeShortcut();
+    info.add(si);
+  }
+}

@@ -1,0 +1,12 @@
+{
+  String spKey=LauncherApplication.getSharedPreferencesKey();
+  SharedPreferences sp=getContext().getSharedPreferences(spKey,Context.MODE_PRIVATE);
+  boolean loadOldDb=false;
+  if (sp.getBoolean(DB_CREATED_BUT_DEFAULT_WORKSPACE_NOT_LOADED,false)) {
+    SharedPreferences.Editor editor=sp.edit();
+    editor.remove(DB_CREATED_BUT_DEFAULT_WORKSPACE_NOT_LOADED);
+    editor.commit();
+    loadOldDb=true;
+  }
+  return loadOldDb;
+}
