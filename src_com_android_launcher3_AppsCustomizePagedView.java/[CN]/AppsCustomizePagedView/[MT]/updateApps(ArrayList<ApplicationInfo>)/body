@@ -1,5 +1,7 @@
 {
-  removeAppsWithoutInvalidate(list);
-  addAppsWithoutInvalidate(list);
-  updatePageCountsAndInvalidateData();
+  if (!DISABLE_ALL_APPS) {
+    removeAppsWithoutInvalidate(list);
+    addAppsWithoutInvalidate(list);
+    updatePageCountsAndInvalidateData();
+  }
 }

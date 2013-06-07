@@ -4,14 +4,11 @@
   if (isAllAppsWidget(source,info)) {
     isVisible=false;
   }
-  if (isAllAppsApplication(source,info)) {
-    ApplicationInfo appInfo=(ApplicationInfo)info;
-    if ((appInfo.flags & ApplicationInfo.DOWNLOADED_FLAG) != 0) {
-      isUninstall=true;
-    }
+  if ((info instanceof LauncherAppWidgetInfo) || (info instanceof PendingAddWidgetInfo)) {
+    isVisible=true;
+  }
  else {
-      isVisible=false;
-    }
+    isVisible=false;
   }
   if (isUninstall) {
     setCompoundDrawablesRelativeWithIntrinsicBounds(mUninstallDrawable,null,null,null);
