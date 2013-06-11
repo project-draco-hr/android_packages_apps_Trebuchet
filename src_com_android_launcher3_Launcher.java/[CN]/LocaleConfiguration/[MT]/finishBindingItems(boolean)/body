@@ -45,4 +45,10 @@
     mWorkspace.stripDuplicateApps();
     mIntentsOnWorkspaceFromUpgradePath=mWorkspace.stripDuplicateApps();
   }
+  mWorkspace.post(new Runnable(){
+    @Override public void run(){
+      onFinishBindingItems();
+    }
+  }
+);
 }
