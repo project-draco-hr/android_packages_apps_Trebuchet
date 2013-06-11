@@ -1,0 +1,27 @@
+{
+  mContext=context;
+  sIsScreenLarge=context.getResources().getBoolean(R.bool.is_large_screen);
+  sScreenDensity=context.getResources().getDisplayMetrics().density;
+  mWidgetPreviewCacheDb=new WidgetPreviewLoader.CacheDb(context);
+  mIconCache=new IconCache(context);
+  mModel=new LauncherModel(context,mIconCache);
+  IntentFilter filter=new IntentFilter(Intent.ACTION_PACKAGE_ADDED);
+  filter.addAction(Intent.ACTION_PACKAGE_REMOVED);
+  filter.addAction(Intent.ACTION_PACKAGE_CHANGED);
+  filter.addDataScheme("package");
+  context.registerReceiver(mModel,filter);
+  filter=new IntentFilter();
+  filter.addAction(Intent.ACTION_EXTERNAL_APPLICATIONS_AVAILABLE);
+  filter.addAction(Intent.ACTION_EXTERNAL_APPLICATIONS_UNAVAILABLE);
+  filter.addAction(Intent.ACTION_LOCALE_CHANGED);
+  filter.addAction(Intent.ACTION_CONFIGURATION_CHANGED);
+  context.registerReceiver(mModel,filter);
+  filter=new IntentFilter();
+  filter.addAction(SearchManager.INTENT_GLOBAL_SEARCH_ACTIVITY_CHANGED);
+  context.registerReceiver(mModel,filter);
+  filter=new IntentFilter();
+  filter.addAction(SearchManager.INTENT_ACTION_SEARCHABLES_CHANGED);
+  context.registerReceiver(mModel,filter);
+  ContentResolver resolver=context.getContentResolver();
+  resolver.registerContentObserver(LauncherSettings.Favorites.CONTENT_URI,true,mFavoritesObserver);
+}

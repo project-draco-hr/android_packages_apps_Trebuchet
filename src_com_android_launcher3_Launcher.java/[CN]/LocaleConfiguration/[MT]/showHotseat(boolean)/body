@@ -1,5 +1,5 @@
 {
-  if (!LauncherApplication.isScreenLarge()) {
+  if (!LauncherAppState.isScreenLarge()) {
     if (animated) {
       if (mHotseat.getAlpha() != 1f) {
         int duration=0;

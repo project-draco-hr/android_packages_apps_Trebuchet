@@ -4,7 +4,7 @@
   mPackageManager=context.getPackageManager();
   mApps=new ArrayList<ApplicationInfo>();
   mWidgets=new ArrayList<Object>();
-  mIconCache=((LauncherApplication)context.getApplicationContext()).getIconCache();
+  mIconCache=(LauncherAppState.getInstance()).getIconCache();
   mCanvas=new Canvas();
   mRunningTasks=new ArrayList<AppsCustomizeAsyncTask>();
   TypedArray a=context.obtainStyledAttributes(attrs,R.styleable.AppsCustomizePagedView,0,0);

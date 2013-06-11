@@ -11,7 +11,7 @@
       enableChildrenCache(mCurrentPage - 1,mCurrentPage + 1);
     }
   }
-  if (LauncherApplication.isScreenLarge()) {
+  if (LauncherAppState.isScreenLarge()) {
     showOutlines();
     mIsStaticWallpaper=mWallpaperManager.getWallpaperInfo() == null;
   }

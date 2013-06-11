@@ -2,7 +2,7 @@
   Context context=getContext();
   mCurrentPage=mDefaultPage;
   Launcher.setScreen(mCurrentPage);
-  LauncherApplication app=(LauncherApplication)context.getApplicationContext();
+  LauncherAppState app=LauncherAppState.getInstance();
   mIconCache=app.getIconCache();
   setWillNotDraw(false);
   setClipChildren(false);

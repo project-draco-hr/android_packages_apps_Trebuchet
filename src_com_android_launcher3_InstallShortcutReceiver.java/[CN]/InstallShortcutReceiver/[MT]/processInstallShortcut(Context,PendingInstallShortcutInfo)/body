@@ -1,10 +1,10 @@
 {
-  String spKey=LauncherApplication.getSharedPreferencesKey();
+  String spKey=LauncherAppState.getSharedPreferencesKey();
   SharedPreferences sp=context.getSharedPreferences(spKey,Context.MODE_PRIVATE);
   final Intent data=pendingInfo.data;
   final Intent intent=pendingInfo.launchIntent;
   final String name=pendingInfo.name;
-  LauncherApplication app=(LauncherApplication)context.getApplicationContext();
+  LauncherAppState app=LauncherAppState.getInstance();
   final int[] result={INSTALL_SHORTCUT_SUCCESSFUL};
   boolean found=false;
 synchronized (app) {

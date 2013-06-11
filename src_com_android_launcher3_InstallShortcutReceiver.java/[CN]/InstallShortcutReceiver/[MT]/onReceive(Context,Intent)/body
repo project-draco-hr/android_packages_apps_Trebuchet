@@ -24,7 +24,7 @@
   info.icon=icon;
   info.iconResource=iconResource;
   if (mUseInstallQueue || launcherNotLoaded) {
-    String spKey=LauncherApplication.getSharedPreferencesKey();
+    String spKey=LauncherAppState.getSharedPreferencesKey();
     SharedPreferences sp=context.getSharedPreferences(spKey,Context.MODE_PRIVATE);
     addToInstallQueue(sp,info);
   }

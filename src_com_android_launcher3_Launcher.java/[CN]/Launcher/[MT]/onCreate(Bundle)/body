@@ -4,8 +4,8 @@
     StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder().detectLeakedSqlLiteObjects().detectLeakedClosableObjects().penaltyLog().penaltyDeath().build());
   }
   super.onCreate(savedInstanceState);
-  LauncherApplication app=((LauncherApplication)getApplication());
-  mSharedPrefs=getSharedPreferences(LauncherApplication.getSharedPreferencesKey(),Context.MODE_PRIVATE);
+  LauncherAppState app=LauncherAppState.getInstance();
+  mSharedPrefs=getSharedPreferences(LauncherAppState.getSharedPreferencesKey(),Context.MODE_PRIVATE);
   mModel=app.setLauncher(this);
   mIconCache=app.getIconCache();
   mDragController=new DragController(this);

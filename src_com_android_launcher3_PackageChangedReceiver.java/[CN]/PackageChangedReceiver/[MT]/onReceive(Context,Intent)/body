@@ -3,6 +3,6 @@
   if (packageName == null || packageName.length() == 0) {
     return;
   }
-  LauncherApplication app=(LauncherApplication)context.getApplicationContext();
+  LauncherAppState app=LauncherAppState.getInstance();
   WidgetPreviewLoader.removeFromDb(app.getWidgetPreviewCacheDb(),packageName);
 }
