@@ -3,7 +3,6 @@
   final ImageView searchButton=(ImageView)findViewById(R.id.search_button);
   final View voiceButtonContainer=findViewById(R.id.voice_button_container);
   final View voiceButton=findViewById(R.id.voice_button);
-  final View voiceButtonProxy=findViewById(R.id.voice_button_proxy);
   final SearchManager searchManager=(SearchManager)getSystemService(Context.SEARCH_SERVICE);
   ComponentName activityName=searchManager.getGlobalSearchActivity();
   if (activityName != null) {
@@ -22,9 +21,7 @@
     if (voiceButtonContainer != null)     voiceButtonContainer.setVisibility(View.GONE);
     searchButton.setVisibility(View.GONE);
     voiceButton.setVisibility(View.GONE);
-    if (voiceButtonProxy != null) {
-      voiceButtonProxy.setVisibility(View.GONE);
-    }
+    setVoiceButtonProxyVisible(false);
     return false;
   }
 }

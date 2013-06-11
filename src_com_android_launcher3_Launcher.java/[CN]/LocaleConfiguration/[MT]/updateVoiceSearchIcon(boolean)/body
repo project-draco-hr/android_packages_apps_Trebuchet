@@ -1,7 +1,6 @@
 {
   final View voiceButtonContainer=findViewById(R.id.voice_button_container);
   final View voiceButton=findViewById(R.id.voice_button);
-  final View voiceButtonProxy=findViewById(R.id.voice_button_proxy);
   final SearchManager searchManager=(SearchManager)getSystemService(Context.SEARCH_SERVICE);
   ComponentName globalSearchActivity=searchManager.getGlobalSearchActivity();
   ComponentName activityName=null;
@@ -22,18 +21,14 @@
     }
     if (voiceButtonContainer != null)     voiceButtonContainer.setVisibility(View.VISIBLE);
     voiceButton.setVisibility(View.VISIBLE);
-    if (voiceButtonProxy != null) {
-      voiceButtonProxy.setVisibility(View.VISIBLE);
-    }
+    setVoiceButtonProxyVisible(true);
     invalidatePressedFocusedStates(voiceButtonContainer,voiceButton);
     return true;
   }
  else {
     if (voiceButtonContainer != null)     voiceButtonContainer.setVisibility(View.GONE);
     voiceButton.setVisibility(View.GONE);
-    if (voiceButtonProxy != null) {
-      voiceButtonProxy.setVisibility(View.GONE);
-    }
+    setVoiceButtonProxyVisible(false);
     return false;
   }
 }
