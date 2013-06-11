@@ -1,4 +1,6 @@
 {
-  showWorkspace(true);
+  if (event.getAction() == MotionEvent.ACTION_DOWN) {
+    showWorkspace(true);
+  }
   return false;
 }
