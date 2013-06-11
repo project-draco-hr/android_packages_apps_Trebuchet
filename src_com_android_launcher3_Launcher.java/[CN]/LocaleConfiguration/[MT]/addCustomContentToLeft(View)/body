@@ -6,11 +6,6 @@
   lp.canReorder=false;
   customScreen.addViewToCellLayout(customContent,0,0,lp,true);
   mWorkspace.addView(customScreen,0);
-  mWorkspace.post(new Runnable(){
-    @Override public void run(){
-      mWorkspace.incrementDefaultScreen();
-      mWorkspace.setCurrentPage(mWorkspace.getCurrentPage() + 1);
-    }
-  }
-);
+  mWorkspace.incrementDefaultScreen();
+  mWorkspace.setCurrentPage(mWorkspace.getCurrentPage() + 1);
 }
