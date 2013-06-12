@@ -1,0 +1,19 @@
+{
+  super(context,attrs);
+  final float dp=getResources().getDisplayMetrics().density;
+  setBackgroundColor(BACKGROUND_COLOR);
+  mRamText=new TextView(getContext());
+  mUptimeText=new TextView(getContext());
+  mRamText.setTextColor(TEXT_COLOR);
+  mUptimeText.setTextColor(TEXT_COLOR);
+  final int p=(int)(4 * dp);
+  setPadding(p,0,p,0);
+  mRamGraph=new GraphView(getContext());
+  LinearLayout.LayoutParams wrapParams=new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
+  wrapParams.gravity=Gravity.LEFT | Gravity.CENTER_VERTICAL;
+  wrapParams.setMarginEnd((int)(8 * dp));
+  LinearLayout.LayoutParams fillParams=new LinearLayout.LayoutParams(0,LinearLayout.LayoutParams.MATCH_PARENT,1.0f);
+  addView(mUptimeText,wrapParams);
+  addView(mRamText,wrapParams);
+  addView(mRamGraph,fillParams);
+}

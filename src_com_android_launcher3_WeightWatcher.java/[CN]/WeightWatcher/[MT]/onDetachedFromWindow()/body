@@ -1,0 +1,4 @@
+{
+  super.onDetachedFromWindow();
+  mHandler.sendEmptyMessage(MSG_STOP);
+}

@@ -1,0 +1,9 @@
+{
+  int w=c.getWidth();
+  int h=c.getHeight();
+  final float barWidth=(float)w / data.length;
+  final float scale=(float)h / max;
+  for (int i=0; i < data.length; i++) {
+    c.drawRect(i * barWidth,h - scale * data[i],(i + 1) * barWidth,h,paint);
+  }
+}

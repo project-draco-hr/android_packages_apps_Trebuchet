@@ -1,0 +1,7 @@
+{
+  final long pss=Debug.getPss();
+  mRamGraph.add(pss);
+  mRamText.setText("pss=" + pss);
+  mUptimeText.setText("uptime=" + getUptimeString());
+  postInvalidate();
+}
