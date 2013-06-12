@@ -5,7 +5,7 @@
   boolean isLandscape=getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
   int maxCellCountX=Integer.MAX_VALUE;
   int maxCellCountY=Integer.MAX_VALUE;
-  if (LauncherApplication.isScreenLarge()) {
+  if (LauncherAppState.isScreenLarge()) {
     maxCellCountX=(isLandscape ? LauncherModel.getCellCountX() : LauncherModel.getCellCountY());
     maxCellCountY=(isLandscape ? LauncherModel.getCellCountY() : LauncherModel.getCellCountX());
   }

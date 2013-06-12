@@ -1,5 +1,5 @@
 {
-  final Context context=mApp;
+  final Context context=mApp.getContext();
   final String[] packages=mPackages;
   final int N=packages.length;
 switch (mOp) {
@@ -13,7 +13,7 @@ case OP_UPDATE:
 for (int i=0; i < N; i++) {
   if (DEBUG_LOADERS)   Log.d(TAG,"mAllAppsList.updatePackage " + packages[i]);
   mBgAllAppsList.updatePackage(context,packages[i]);
-  LauncherApplication app=(LauncherApplication)context.getApplicationContext();
+  LauncherAppState app=LauncherAppState.getInstance();
   WidgetPreviewLoader.removeFromDb(app.getWidgetPreviewCacheDb(),packages[i]);
 }
 break;
@@ -22,7 +22,7 @@ case OP_UNAVAILABLE:
 for (int i=0; i < N; i++) {
 if (DEBUG_LOADERS) Log.d(TAG,"mAllAppsList.removePackage " + packages[i]);
 mBgAllAppsList.removePackage(packages[i]);
-LauncherApplication app=(LauncherApplication)context.getApplicationContext();
+LauncherAppState app=LauncherAppState.getInstance();
 WidgetPreviewLoader.removeFromDb(app.getWidgetPreviewCacheDb(),packages[i]);
 }
 break;

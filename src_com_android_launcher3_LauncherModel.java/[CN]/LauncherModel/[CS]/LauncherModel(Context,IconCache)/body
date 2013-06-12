@@ -1,10 +1,10 @@
 {
   mAppsCanBeOnExternalStorage=!Environment.isExternalStorageEmulated();
-  mApp=app;
+  mApp=LauncherAppState.getInstance();
   mBgAllAppsList=new AllAppsList(iconCache);
   mIconCache=iconCache;
-  mDefaultIcon=Utilities.createIconBitmap(mIconCache.getFullResDefaultActivityIcon(),app);
-  final Resources res=app.getResources();
+  mDefaultIcon=Utilities.createIconBitmap(mIconCache.getFullResDefaultActivityIcon(),context);
+  final Resources res=context.getResources();
   mAllAppsLoadDelay=res.getInteger(R.integer.config_allAppsBatchLoadDelay);
   mBatchSize=res.getInteger(R.integer.config_allAppsBatchSize);
   Configuration config=res.getConfiguration();

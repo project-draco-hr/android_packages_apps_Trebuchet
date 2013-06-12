@@ -12,7 +12,7 @@
   int cellCountX=DEFAULT_CELL_COUNT_X;
   int cellCountY=DEFAULT_CELL_COUNT_Y;
   TypedArray a=context.obtainStyledAttributes(attrs,R.styleable.Workspace,defStyle,0);
-  if (LauncherApplication.isScreenLarge()) {
+  if (LauncherAppState.isScreenLarge()) {
     TypedArray actionBarSizeTypedArray=context.obtainStyledAttributes(new int[]{android.R.attr.actionBarSize});
     final float actionBarHeight=actionBarSizeTypedArray.getDimension(0,0f);
     Point minDims=new Point();

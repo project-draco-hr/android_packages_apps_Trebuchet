@@ -3,7 +3,7 @@
   mHandler.removeMessages(ADVANCE_MSG);
   mHandler.removeMessages(0);
   mWorkspace.removeCallbacks(mBuildLayersRunnable);
-  LauncherApplication app=((LauncherApplication)getApplication());
+  LauncherAppState app=(LauncherAppState.getInstance());
   mModel.stopLoader();
   app.setLauncher(null);
   try {

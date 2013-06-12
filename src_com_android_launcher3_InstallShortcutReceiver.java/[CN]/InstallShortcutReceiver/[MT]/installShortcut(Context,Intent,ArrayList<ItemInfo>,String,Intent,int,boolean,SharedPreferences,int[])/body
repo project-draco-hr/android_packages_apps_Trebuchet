@@ -24,7 +24,7 @@ synchronized (sLock) {
           }
         }
 .start();
-        LauncherApplication app=(LauncherApplication)context.getApplicationContext();
+        LauncherAppState app=LauncherAppState.getInstance();
         ShortcutInfo info=app.getModel().addShortcut(context,data,LauncherSettings.Favorites.CONTAINER_DESKTOP,screen,tmpCoordinates[0],tmpCoordinates[1],true);
         if (info == null) {
           return false;

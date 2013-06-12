@@ -1,0 +1,5 @@
+{
+  super(context,attrs);
+  paint=new Paint();
+  paint.setColor(RAM_GRAPH_COLOR);
+}

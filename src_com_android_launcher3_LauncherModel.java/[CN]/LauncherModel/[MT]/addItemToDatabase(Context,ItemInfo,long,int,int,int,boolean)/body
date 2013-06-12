@@ -11,7 +11,7 @@
   final ContentValues values=new ContentValues();
   final ContentResolver cr=context.getContentResolver();
   item.onAddToDatabase(values);
-  LauncherApplication app=(LauncherApplication)context.getApplicationContext();
+  LauncherAppState app=LauncherAppState.getInstance();
   item.id=app.getLauncherProvider().generateNewId();
   values.put(LauncherSettings.Favorites._ID,item.id);
   item.updateValuesWithCoordinates(values,item.cellX,item.cellY);

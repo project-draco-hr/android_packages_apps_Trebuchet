@@ -1,0 +1,4 @@
+{
+  super.onAttachedToWindow();
+  mHandler.sendEmptyMessage(MSG_START);
+}

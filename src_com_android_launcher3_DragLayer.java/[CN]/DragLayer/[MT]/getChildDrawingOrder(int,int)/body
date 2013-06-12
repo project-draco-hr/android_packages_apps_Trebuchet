@@ -1,5 +1,5 @@
 {
-  if (true || LauncherApplication.isScreenLandscape(getContext()) || mWorkspaceIndex == -1 || mQsbIndex == -1 || mLauncher.getWorkspace().isDrawingBackgroundGradient()) {
+  if (true || LauncherAppState.isScreenLandscape(getContext()) || mWorkspaceIndex == -1 || mQsbIndex == -1 || mLauncher.getWorkspace().isDrawingBackgroundGradient()) {
     return i;
   }
   if (i == mQsbIndex) {

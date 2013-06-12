@@ -12,7 +12,7 @@
     }
   }
  else {
-    if (LauncherApplication.isScreenLarge()) {
+    if (LauncherAppState.isScreenLarge()) {
       hideOutlines();
     }
     if (!mDragController.isDragging()) {

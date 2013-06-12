@@ -1,5 +1,5 @@
 {
-  String spKey=LauncherApplication.getSharedPreferencesKey();
+  String spKey=LauncherAppState.getSharedPreferencesKey();
   SharedPreferences sp=context.getSharedPreferences(spKey,Context.MODE_PRIVATE);
   ArrayList<PendingInstallShortcutInfo> installQueue=getAndClearInstallQueue(sp);
   Iterator<PendingInstallShortcutInfo> iter=installQueue.iterator();
