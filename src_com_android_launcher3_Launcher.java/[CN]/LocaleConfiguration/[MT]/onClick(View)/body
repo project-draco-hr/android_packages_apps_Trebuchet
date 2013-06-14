@@ -9,7 +9,7 @@
   if (tag instanceof ShortcutInfo) {
     final Intent intent=((ShortcutInfo)tag).intent;
     ComponentName widgetComp=new ComponentName(this,WidgetAdder.class);
-    if (intent.getComponent().getClassName().equals(widgetComp.getClassName())) {
+    if (intent.getComponent() != null && intent.getComponent().getClassName().equals(widgetComp.getClassName())) {
       showAllApps(true);
       return;
     }

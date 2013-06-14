@@ -11,6 +11,10 @@
     if (info instanceof ShortcutInfo) {
       ShortcutInfo si=(ShortcutInfo)info;
       ComponentName cn=si.intent.getComponent();
+      Uri dataUri=si.intent.getData();
+      if ((dataUri != null && !dataUri.equals(Uri.EMPTY)) || !allApps.contains(cn)) {
+        continue;
+      }
       if (!uniqueIntents.contains(cn)) {
         uniqueIntents.add(cn);
       }
@@ -26,6 +30,10 @@
         if (items.get(j).getTag() instanceof ShortcutInfo) {
           ShortcutInfo si=(ShortcutInfo)items.get(j).getTag();
           ComponentName cn=si.intent.getComponent();
+          Uri dataUri=si.intent.getData();
+          if (dataUri != null && !dataUri.equals(Uri.EMPTY) || !allApps.contains(cn)) {
+            continue;
+          }
           if (!uniqueIntents.contains(cn)) {
             uniqueIntents.add(cn);
           }

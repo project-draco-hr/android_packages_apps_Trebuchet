@@ -1,2 +1,3 @@
 CellLayout cl
 ArrayList<ComponentName> uniqueIntents
+ArrayList<ComponentName> allApps

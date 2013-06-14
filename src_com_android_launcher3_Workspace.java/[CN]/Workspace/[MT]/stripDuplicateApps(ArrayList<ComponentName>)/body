@@ -1,10 +1,10 @@
 {
   ArrayList<ComponentName> uniqueIntents=new ArrayList<ComponentName>();
-  stripDuplicateApps((CellLayout)mLauncher.getHotseat().getLayout(),uniqueIntents);
+  stripDuplicateApps((CellLayout)mLauncher.getHotseat().getLayout(),uniqueIntents,allApps);
   int count=getChildCount();
   for (int i=0; i < count; i++) {
     CellLayout cl=(CellLayout)getChildAt(i);
-    stripDuplicateApps(cl,uniqueIntents);
+    stripDuplicateApps(cl,uniqueIntents,allApps);
   }
   return uniqueIntents;
 }
