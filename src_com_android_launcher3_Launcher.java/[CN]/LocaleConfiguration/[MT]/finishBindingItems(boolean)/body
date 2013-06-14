@@ -42,9 +42,8 @@
   mWorkspaceLoading=false;
   if (upgradePath) {
     mWorkspace.saveWorkspaceToDb();
-    ArrayList<ComponentName> allApps=constructAllAppsComponents();
-    mWorkspace.stripDuplicateApps(allApps);
-    mIntentsOnWorkspaceFromUpgradePath=mWorkspace.stripDuplicateApps(allApps);
+    mWorkspace.stripDuplicateApps();
+    mIntentsOnWorkspaceFromUpgradePath=mWorkspace.stripDuplicateApps();
   }
   mWorkspace.post(new Runnable(){
     @Override public void run(){

@@ -11,8 +11,7 @@
     if (info instanceof ShortcutInfo) {
       ShortcutInfo si=(ShortcutInfo)info;
       ComponentName cn=si.intent.getComponent();
-      Uri dataUri=si.intent.getData();
-      if ((dataUri != null && !dataUri.equals(Uri.EMPTY)) || !allApps.contains(cn)) {
+      if (si.itemType == LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT) {
         continue;
       }
       if (!uniqueIntents.contains(cn)) {
@@ -30,8 +29,7 @@
         if (items.get(j).getTag() instanceof ShortcutInfo) {
           ShortcutInfo si=(ShortcutInfo)items.get(j).getTag();
           ComponentName cn=si.intent.getComponent();
-          Uri dataUri=si.intent.getData();
-          if (dataUri != null && !dataUri.equals(Uri.EMPTY) || !allApps.contains(cn)) {
+          if (si.itemType == LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT) {
             continue;
           }
           if (!uniqueIntents.contains(cn)) {
