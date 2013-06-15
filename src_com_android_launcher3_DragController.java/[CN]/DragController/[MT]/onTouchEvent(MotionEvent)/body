@@ -27,7 +27,7 @@ handleMoveEvent(dragLayerX,dragLayerY);
 mHandler.removeCallbacks(mScrollRunnable);
 if (mDragging) {
 PointF vec=isFlingingToDelete(mDragObject.dragSource);
-if (!(mDragObject.dragInfo instanceof LauncherAppWidgetInfo) && !(mDragObject.dragInfo instanceof PendingAddWidgetInfo)) {
+if (!DeleteDropTarget.willAcceptDrop(mDragObject.dragInfo)) {
 vec=null;
 }
 if (vec != null) {

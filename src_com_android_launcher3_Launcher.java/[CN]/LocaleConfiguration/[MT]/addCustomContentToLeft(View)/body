@@ -6,6 +6,6 @@
   lp.canReorder=false;
   customScreen.addViewToCellLayout(customContent,0,0,lp,true);
   mWorkspace.addView(customScreen,0);
-  mWorkspace.incrementDefaultScreen();
+  mWorkspace.incrementNumScreensToLeft();
   mWorkspace.setCurrentPage(mWorkspace.getCurrentPage() + 1);
 }

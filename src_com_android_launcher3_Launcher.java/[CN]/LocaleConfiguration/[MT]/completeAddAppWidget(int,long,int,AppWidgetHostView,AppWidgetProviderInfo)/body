@@ -42,7 +42,8 @@
   launcherInfo.spanY=spanXY[1];
   launcherInfo.minSpanX=mPendingAddInfo.minSpanX;
   launcherInfo.minSpanY=mPendingAddInfo.minSpanY;
-  LauncherModel.addItemToDatabase(this,launcherInfo,container,screen,cellXY[0],cellXY[1],false);
+  int adjustedScreen=screen - getWorkspace().mNumPagesToLeft;
+  LauncherModel.addItemToDatabase(this,launcherInfo,container,adjustedScreen,cellXY[0],cellXY[1],false);
   if (!mRestoring) {
     if (hostView == null) {
       launcherInfo.hostView=mAppWidgetHost.createView(this,appWidgetId,appWidgetInfo);

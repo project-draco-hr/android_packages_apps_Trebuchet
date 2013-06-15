@@ -4,7 +4,7 @@
   if (isAllAppsWidget(source,info)) {
     isVisible=false;
   }
-  if ((info instanceof LauncherAppWidgetInfo) || (info instanceof PendingAddWidgetInfo)) {
+  if (willAcceptDrop(info)) {
     isVisible=true;
   }
  else {

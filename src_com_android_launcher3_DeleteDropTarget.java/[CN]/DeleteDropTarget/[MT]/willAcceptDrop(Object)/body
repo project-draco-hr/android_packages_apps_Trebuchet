@@ -1,0 +1,9 @@
+{
+  if (info instanceof ItemInfo) {
+    ItemInfo item=(ItemInfo)info;
+    if (item.itemType == LauncherSettings.Favorites.ITEM_TYPE_APPWIDGET || item.itemType == LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT) {
+      return true;
+    }
+  }
+  return false;
+}

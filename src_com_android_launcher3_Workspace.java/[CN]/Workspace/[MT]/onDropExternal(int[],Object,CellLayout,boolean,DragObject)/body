@@ -110,7 +110,8 @@ addInScreen(view,container,screen,mTargetCell[0],mTargetCell[1],info.spanX,info.
 cellLayout.onDropChild(view);
 CellLayout.LayoutParams lp=(CellLayout.LayoutParams)view.getLayoutParams();
 cellLayout.getShortcutsAndWidgets().measureChild(view);
-LauncherModel.addOrMoveItemInDatabase(mLauncher,info,container,screen,lp.cellX,lp.cellY);
+int adjustedScreen=screen - mNumPagesToLeft;
+LauncherModel.addOrMoveItemInDatabase(mLauncher,info,container,adjustedScreen,lp.cellX,lp.cellY);
 if (d.dragView != null) {
 setFinalTransitionTransform(cellLayout);
 mLauncher.getDragLayer().animateViewIntoPosition(d.dragView,view,exitSpringLoadedRunnable);

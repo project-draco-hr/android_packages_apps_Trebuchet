@@ -11,7 +11,8 @@
     ItemInfo info=(ItemInfo)v.getTag();
     if (info != null && info.requiresDbUpdate) {
       info.requiresDbUpdate=false;
-      LauncherModel.modifyItemInDatabase(mLauncher,info,container,screen,info.cellX,info.cellY,info.spanX,info.spanY);
+      int adjustedScreen=screen - mNumPagesToLeft;
+      LauncherModel.modifyItemInDatabase(mLauncher,info,container,adjustedScreen,info.cellX,info.cellY,info.spanX,info.spanY);
     }
   }
 }
