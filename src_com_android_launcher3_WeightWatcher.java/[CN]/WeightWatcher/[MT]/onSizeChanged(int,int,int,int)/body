@@ -1,4 +1,0 @@
-{
-  mRamText.setTextSize(h * 0.25f);
-  mUptimeText.setTextSize(h * 0.25f);
-}

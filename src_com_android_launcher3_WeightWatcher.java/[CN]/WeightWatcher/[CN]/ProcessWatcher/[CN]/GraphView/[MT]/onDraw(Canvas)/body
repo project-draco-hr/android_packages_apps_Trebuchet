@@ -1,0 +1,18 @@
+{
+  int w=c.getWidth();
+  int h=c.getHeight();
+  if (mMemInfo == null)   return;
+  final int N=mMemInfo.pss.length;
+  final float barStep=(float)w / N;
+  final float barWidth=Math.max(1,barStep);
+  final float scale=(float)h / mMemInfo.max;
+  int i;
+  float x;
+  for (i=0; i < N; i++) {
+    x=i * barStep;
+    c.drawRect(x,h - scale * mMemInfo.pss[i],x + barWidth,h,pssPaint);
+    c.drawRect(x,h - scale * mMemInfo.uss[i],x + barWidth,h,ussPaint);
+  }
+  x=mMemInfo.head * barStep;
+  c.drawRect(x,0,x + barWidth,h,headPaint);
+}

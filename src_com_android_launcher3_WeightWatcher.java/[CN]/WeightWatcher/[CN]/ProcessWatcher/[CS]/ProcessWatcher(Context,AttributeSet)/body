@@ -1,0 +1,17 @@
+{
+  super(context,attrs);
+  final float dp=getResources().getDisplayMetrics().density;
+  mText=new TextView(getContext());
+  mText.setTextColor(TEXT_COLOR);
+  mText.setTextSize(TypedValue.COMPLEX_UNIT_PX,10 * dp);
+  mText.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
+  final int p=(int)(2 * dp);
+  setPadding(p,0,p,0);
+  mRamGraph=new GraphView(getContext());
+  LinearLayout.LayoutParams params=new LinearLayout.LayoutParams(0,(int)(22 * dp),1f);
+  addView(mText,params);
+  params.leftMargin=(int)(4 * dp);
+  params.weight=0f;
+  params.width=(int)(200 * dp);
+  addView(mRamGraph,params);
+}

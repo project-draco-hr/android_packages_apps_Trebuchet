@@ -1,0 +1,13 @@
+{
+  Debug.MemoryInfo[] dinfos=mAm.getProcessMemoryInfo(mPidsArray);
+  for (int i=0; i < dinfos.length; i++) {
+    Debug.MemoryInfo dinfo=dinfos[i];
+    final long pid=mPids.get(i).intValue();
+    final ProcessMemInfo info=mData.get(pid);
+    info.head=(info.head + 1) % info.pss.length;
+    info.pss[info.head]=info.currentPss=dinfo.getTotalPss();
+    info.uss[info.head]=info.currentUss=dinfo.getTotalPrivateDirty();
+    if (info.currentPss > info.max)     info.max=info.currentPss;
+    if (info.currentUss > info.max)     info.max=info.currentUss;
+  }
+}

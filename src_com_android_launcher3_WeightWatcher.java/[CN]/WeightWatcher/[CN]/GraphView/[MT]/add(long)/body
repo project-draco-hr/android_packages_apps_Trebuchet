@@ -1,6 +1,0 @@
-{
-  head=(head + 1) % data.length;
-  data[head]=dat;
-  if (dat > max)   max=dat;
-  invalidate();
-}
