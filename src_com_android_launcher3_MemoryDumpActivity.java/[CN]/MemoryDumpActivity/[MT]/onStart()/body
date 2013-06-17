@@ -1,0 +1,5 @@
+{
+  super.onStart();
+  dumpHprofAndShare(this);
+  finish();
+}

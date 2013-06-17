@@ -27,7 +27,7 @@
   if (mSearchDropTargetBar != null) {
     mSearchDropTargetBar.setup(this,dragController);
   }
-  if (DEBUG_MEMORY) {
+  if (getResources().getBoolean(R.bool.debug_memory_enabled)) {
     Log.v(TAG,"adding WeightWatcher");
     ((FrameLayout)mLauncherView).addView(new WeightWatcher(this),new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,44,Gravity.BOTTOM));
   }
