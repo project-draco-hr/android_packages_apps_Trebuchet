@@ -1,5 +1,0 @@
-ComponentName componentName
-long container
-int screen
-int[] cell
-int[] loc

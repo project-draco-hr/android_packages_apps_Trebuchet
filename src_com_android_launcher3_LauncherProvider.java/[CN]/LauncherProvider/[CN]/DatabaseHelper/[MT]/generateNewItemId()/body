@@ -1,0 +1,7 @@
+{
+  if (mMaxItemId < 0) {
+    throw new RuntimeException("Error: max item id was not initialized");
+  }
+  mMaxItemId+=1;
+  return mMaxItemId;
+}

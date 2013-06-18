@@ -4,7 +4,7 @@
   }
   for (  LauncherAppWidgetInfo widget : appWidgets) {
     if (widget == null)     continue;
-    if (widget.container == LauncherSettings.Favorites.CONTAINER_DESKTOP && widget.screen == currentScreen) {
+    if (widget.container == LauncherSettings.Favorites.CONTAINER_DESKTOP && widget.screenId == currentScreen) {
       currentScreenWidgets.add(widget);
     }
  else {

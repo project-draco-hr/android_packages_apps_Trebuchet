@@ -1,11 +1,3 @@
 {
-  CellLayout customScreen=(CellLayout)getLayoutInflater().inflate(R.layout.workspace_custom_content,null);
-  int spanX=customScreen.getCountX();
-  int spanY=customScreen.getCountY();
-  CellLayout.LayoutParams lp=new CellLayout.LayoutParams(0,0,spanX,spanY);
-  lp.canReorder=false;
-  customScreen.addViewToCellLayout(customContent,0,0,lp,true);
-  mWorkspace.addView(customScreen,0);
-  mWorkspace.incrementNumScreensToLeft();
-  mWorkspace.setCurrentPage(mWorkspace.getCurrentPage() + 1);
+  mWorkspace.addCustomContentToLeft(customContent);
 }

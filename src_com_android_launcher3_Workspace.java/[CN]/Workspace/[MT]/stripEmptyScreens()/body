@@ -1,0 +1,20 @@
+{
+  ArrayList<Long> removeScreens=new ArrayList<Long>();
+  for (  Long id : mWorkspaceScreens.keySet()) {
+    CellLayout cl=mWorkspaceScreens.get(id);
+    if (id != EXTRA_EMPTY_SCREEN_ID && cl.getShortcutsAndWidgets().getChildCount() == 0) {
+      removeScreens.add(id);
+    }
+  }
+  int pageShift=0;
+  for (  Long id : removeScreens) {
+    CellLayout cl=mWorkspaceScreens.get(id);
+    mWorkspaceScreens.remove(id);
+    mScreenOrder.remove(id);
+    if (indexOfChild(cl) < mCurrentPage) {
+      pageShift++;
+    }
+    removeView(cl);
+  }
+  setCurrentPage(mCurrentPage - pageShift);
+}

@@ -1,0 +1,52 @@
+{
+  item.container=container;
+  item.cellX=cellX;
+  item.cellY=cellY;
+  if (context instanceof Launcher && screenId < 0 && container == LauncherSettings.Favorites.CONTAINER_HOTSEAT) {
+    item.screenId=((Launcher)context).getHotseat().getOrderInHotseat(cellX,cellY);
+  }
+ else {
+    item.screenId=screenId;
+  }
+  final ContentValues values=new ContentValues();
+  final ContentResolver cr=context.getContentResolver();
+  item.onAddToDatabase(values);
+  LauncherAppState app=LauncherAppState.getInstance();
+  item.id=app.getLauncherProvider().generateNewItemId();
+  values.put(LauncherSettings.Favorites._ID,item.id);
+  item.updateValuesWithCoordinates(values,item.cellX,item.cellY);
+  Runnable r=new Runnable(){
+    public void run(){
+      String transaction="DbDebug    Add item (" + item.title + ") to db, id: "+ item.id+ " ("+ container+ ", "+ screenId+ ", "+ cellX+ ", "+ cellY+ ")";
+      Launcher.sDumpLogs.add(transaction);
+      Log.d(TAG,transaction);
+      cr.insert(notify ? LauncherSettings.Favorites.CONTENT_URI : LauncherSettings.Favorites.CONTENT_URI_NO_NOTIFICATION,values);
+synchronized (sBgLock) {
+        checkItemInfoLocked(item.id,item,null);
+        sBgItemsIdMap.put(item.id,item);
+switch (item.itemType) {
+case LauncherSettings.Favorites.ITEM_TYPE_FOLDER:
+          sBgFolders.put(item.id,(FolderInfo)item);
+case LauncherSettings.Favorites.ITEM_TYPE_APPLICATION:
+case LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT:
+        if (item.container == LauncherSettings.Favorites.CONTAINER_DESKTOP || item.container == LauncherSettings.Favorites.CONTAINER_HOTSEAT) {
+          sBgWorkspaceItems.add(item);
+        }
+ else {
+          if (!sBgFolders.containsKey(item.container)) {
+            String msg="adding item: " + item + " to a folder that "+ " doesn't exist";
+            Log.e(TAG,msg);
+            Launcher.dumpDebugLogsToConsole();
+          }
+        }
+      break;
+case LauncherSettings.Favorites.ITEM_TYPE_APPWIDGET:
+    sBgAppWidgets.add((LauncherAppWidgetInfo)item);
+  break;
+}
+}
+}
+}
+;
+runOnWorkerThread(r);
+}

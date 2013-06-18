@@ -13,9 +13,9 @@
     spanY=mDragInfo.spanY;
   }
   final long container=mLauncher.isHotseatLayout(cellLayout) ? LauncherSettings.Favorites.CONTAINER_HOTSEAT : LauncherSettings.Favorites.CONTAINER_DESKTOP;
-  final int screen=indexOfChild(cellLayout);
-  if (!mLauncher.isHotseatLayout(cellLayout) && screen != mCurrentPage && mState != State.SPRING_LOADED) {
-    snapToPage(screen);
+  final long screenId=getIdForScreen(cellLayout);
+  if (!mLauncher.isHotseatLayout(cellLayout) && screenId != getScreenIdForPageIndex(mCurrentPage) && mState != State.SPRING_LOADED) {
+    snapToScreenId(screenId,null);
   }
   if (info instanceof PendingAddItemInfo) {
     final PendingAddItemInfo pendingInfo=(PendingAddItemInfo)dragInfo;
@@ -51,10 +51,10 @@ case LauncherSettings.Favorites.ITEM_TYPE_APPWIDGET:
           int span[]=new int[2];
         span[0]=item.spanX;
       span[1]=item.spanY;
-    mLauncher.addAppWidgetFromDrop((PendingAddWidgetInfo)pendingInfo,container,screen,mTargetCell,span,null);
+    mLauncher.addAppWidgetFromDrop((PendingAddWidgetInfo)pendingInfo,container,screenId,mTargetCell,span,null);
   break;
 case LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT:
-mLauncher.processShortcutFromDrop(pendingInfo.componentName,container,screen,mTargetCell,null);
+mLauncher.processShortcutFromDrop(pendingInfo.componentName,container,screenId,mTargetCell,null);
 break;
 default :
 throw new IllegalStateException("Unknown item type: " + pendingInfo.itemType);
@@ -106,12 +106,11 @@ mTargetCell=cellLayout.createArea((int)mDragViewVisualCenter[0],(int)mDragViewVi
  else {
 cellLayout.findCellForSpan(mTargetCell,1,1);
 }
-addInScreen(view,container,screen,mTargetCell[0],mTargetCell[1],info.spanX,info.spanY,insertAtFirst);
+addInScreen(view,container,screenId,mTargetCell[0],mTargetCell[1],info.spanX,info.spanY,insertAtFirst);
 cellLayout.onDropChild(view);
 CellLayout.LayoutParams lp=(CellLayout.LayoutParams)view.getLayoutParams();
 cellLayout.getShortcutsAndWidgets().measureChild(view);
-int adjustedScreen=screen - mNumPagesToLeft;
-LauncherModel.addOrMoveItemInDatabase(mLauncher,info,container,adjustedScreen,lp.cellX,lp.cellY);
+LauncherModel.addOrMoveItemInDatabase(mLauncher,info,container,screenId,lp.cellX,lp.cellY);
 if (d.dragView != null) {
 setFinalTransitionTransform(cellLayout);
 mLauncher.getDragLayer().animateViewIntoPosition(d.dragView,view,exitSpringLoadedRunnable);

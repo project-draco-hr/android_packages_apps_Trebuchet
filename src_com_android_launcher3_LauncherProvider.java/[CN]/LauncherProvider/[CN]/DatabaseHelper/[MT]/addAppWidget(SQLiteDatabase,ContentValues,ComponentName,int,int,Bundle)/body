@@ -7,7 +7,7 @@
     values.put(Favorites.SPANX,spanX);
     values.put(Favorites.SPANY,spanY);
     values.put(Favorites.APPWIDGET_ID,appWidgetId);
-    values.put(Favorites._ID,generateNewId());
+    values.put(Favorites._ID,generateNewItemId());
     dbInsertAndCheck(this,db,TABLE_FAVORITES,null,values);
     allocatedAppWidgets=true;
     appWidgetManager.bindAppWidgetIdIfAllowed(appWidgetId,cn);

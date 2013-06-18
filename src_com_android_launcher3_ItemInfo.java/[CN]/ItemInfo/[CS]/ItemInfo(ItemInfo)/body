@@ -4,7 +4,7 @@
   cellY=info.cellY;
   spanX=info.spanX;
   spanY=info.spanY;
-  screen=info.screen;
+  screenId=info.screenId;
   itemType=info.itemType;
   container=info.container;
   LauncherModel.checkItemInfo(this);

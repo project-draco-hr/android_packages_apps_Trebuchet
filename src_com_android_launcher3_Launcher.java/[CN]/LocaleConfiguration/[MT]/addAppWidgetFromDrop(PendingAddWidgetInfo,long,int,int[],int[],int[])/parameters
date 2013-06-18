@@ -1,6 +1,0 @@
-PendingAddWidgetInfo info
-long container
-int screen
-int[] cell
-int[] span
-int[] loc

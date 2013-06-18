@@ -1,6 +1,6 @@
 {
   mPendingAddInfo.container=ItemInfo.NO_ID;
-  mPendingAddInfo.screen=-1;
+  mPendingAddInfo.screenId=-1;
   mPendingAddInfo.cellX=mPendingAddInfo.cellY=-1;
   mPendingAddInfo.spanX=mPendingAddInfo.spanY=-1;
   mPendingAddInfo.minSpanX=mPendingAddInfo.minSpanY=-1;

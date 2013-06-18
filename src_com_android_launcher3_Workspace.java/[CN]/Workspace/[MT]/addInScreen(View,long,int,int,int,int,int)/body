@@ -1,3 +1,0 @@
-{
-  addInScreen(child,container,screen,x,y,spanX,spanY,false);
-}

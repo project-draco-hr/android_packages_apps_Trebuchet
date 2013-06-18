@@ -1,9 +1,9 @@
 {
   int count=cl.getShortcutsAndWidgets().getChildCount();
-  int screen=indexOfChild(cl);
+  long screenId=getIdForScreen(cl);
   int container=Favorites.CONTAINER_DESKTOP;
   if (mLauncher.isHotseatLayout(cl)) {
-    screen=-1;
+    screenId=-1;
     container=Favorites.CONTAINER_HOTSEAT;
   }
   for (int i=0; i < count; i++) {
@@ -11,8 +11,7 @@
     ItemInfo info=(ItemInfo)v.getTag();
     if (info != null && info.requiresDbUpdate) {
       info.requiresDbUpdate=false;
-      int adjustedScreen=screen - mNumPagesToLeft;
-      LauncherModel.modifyItemInDatabase(mLauncher,info,container,adjustedScreen,info.cellX,info.cellY,info.spanX,info.spanY);
+      LauncherModel.modifyItemInDatabase(mLauncher,info,container,screenId,info.cellX,info.cellY,info.spanX,info.spanY);
     }
   }
 }

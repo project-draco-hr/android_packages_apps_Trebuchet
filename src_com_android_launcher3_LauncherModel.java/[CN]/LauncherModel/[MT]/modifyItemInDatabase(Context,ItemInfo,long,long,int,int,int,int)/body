@@ -1,0 +1,23 @@
+{
+  String transaction="DbDebug    Modify item (" + item.title + ") in db, id: "+ item.id+ " ("+ item.container+ ", "+ item.screenId+ ", "+ item.cellX+ ", "+ item.cellY+ ") --> "+ "("+ container+ ", "+ screenId+ ", "+ cellX+ ", "+ cellY+ ")";
+  Launcher.sDumpLogs.add(transaction);
+  Log.d(TAG,transaction);
+  item.cellX=cellX;
+  item.cellY=cellY;
+  item.spanX=spanX;
+  item.spanY=spanY;
+  if (context instanceof Launcher && screenId < 0 && container == LauncherSettings.Favorites.CONTAINER_HOTSEAT) {
+    item.screenId=((Launcher)context).getHotseat().getOrderInHotseat(cellX,cellY);
+  }
+ else {
+    item.screenId=screenId;
+  }
+  final ContentValues values=new ContentValues();
+  values.put(LauncherSettings.Favorites.CONTAINER,item.container);
+  values.put(LauncherSettings.Favorites.CELLX,item.cellX);
+  values.put(LauncherSettings.Favorites.CELLY,item.cellY);
+  values.put(LauncherSettings.Favorites.SPANX,item.spanX);
+  values.put(LauncherSettings.Favorites.SPANY,item.spanY);
+  values.put(LauncherSettings.Favorites.SCREEN,item.screenId);
+  updateItemInDatabaseHelper(context,values,item,"modifyItemInDatabase");
+}

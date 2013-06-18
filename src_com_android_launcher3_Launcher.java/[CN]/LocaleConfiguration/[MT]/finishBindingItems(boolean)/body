@@ -26,10 +26,10 @@
       }
     }
 ;
-    boolean willSnapPage=mNewShortcutAnimatePage > -1 && mNewShortcutAnimatePage != mWorkspace.getCurrentPage();
+    boolean willSnapPage=mNewShortcutAnimateScreenId > -1 && mNewShortcutAnimateScreenId != mWorkspace.getCurrentPage();
     if (canRunNewAppsAnimation()) {
       if (willSnapPage) {
-        mWorkspace.snapToPage(mNewShortcutAnimatePage,newAppsRunnable);
+        mWorkspace.snapToScreenId(mNewShortcutAnimateScreenId,newAppsRunnable);
       }
  else {
         runNewAppsAnimation(false);

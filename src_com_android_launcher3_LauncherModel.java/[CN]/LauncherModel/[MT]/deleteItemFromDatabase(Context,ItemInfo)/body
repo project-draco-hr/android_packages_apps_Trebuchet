@@ -3,7 +3,7 @@
   final Uri uriToDelete=LauncherSettings.Favorites.getContentUri(item.id,false);
   Runnable r=new Runnable(){
     public void run(){
-      String transaction="DbDebug    Delete item (" + item.title + ") from db, id: "+ item.id+ " ("+ item.container+ ", "+ item.screen+ ", "+ item.cellX+ ", "+ item.cellY+ ")";
+      String transaction="DbDebug    Delete item (" + item.title + ") from db, id: "+ item.id+ " ("+ item.container+ ", "+ item.screenId+ ", "+ item.cellX+ ", "+ item.cellY+ ")";
       Launcher.sDumpLogs.add(transaction);
       Log.d(TAG,transaction);
       cr.delete(uriToDelete,null,null);
