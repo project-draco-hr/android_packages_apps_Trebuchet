@@ -4,7 +4,7 @@
   mLauncher.getWindowManager().getDefaultDisplay().getCurrentSizeRange(minDims,maxDims);
   final int maxDim=Math.max(maxDims.x,maxDims.y);
   final int minDim=Math.min(minDims.x,minDims.y);
-  if (LauncherAppState.isScreenLarge()) {
+  if (LauncherAppState.getInstance().isScreenLarge()) {
     mWallpaperWidth=(int)(maxDim * wallpaperTravelToScreenWidthRatio(maxDim,minDim));
     mWallpaperHeight=maxDim;
   }

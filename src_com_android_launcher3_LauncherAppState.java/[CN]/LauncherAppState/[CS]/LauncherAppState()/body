@@ -1,2 +1,33 @@
 {
+  if (sContext == null) {
+    throw new IllegalStateException("LauncherAppState inited before app context set");
+  }
+  Log.v(Launcher.TAG,"LauncherAppState inited");
+  if (sContext.getResources().getBoolean(R.bool.debug_memory_enabled)) {
+    MemoryTracker.startTrackingMe(sContext,"L");
+  }
+  mIsScreenLarge=sContext.getResources().getBoolean(R.bool.is_large_screen);
+  mScreenDensity=sContext.getResources().getDisplayMetrics().density;
+  mWidgetPreviewCacheDb=new WidgetPreviewLoader.CacheDb(sContext);
+  mIconCache=new IconCache(sContext);
+  mModel=new LauncherModel(this,mIconCache);
+  IntentFilter filter=new IntentFilter(Intent.ACTION_PACKAGE_ADDED);
+  filter.addAction(Intent.ACTION_PACKAGE_REMOVED);
+  filter.addAction(Intent.ACTION_PACKAGE_CHANGED);
+  filter.addDataScheme("package");
+  sContext.registerReceiver(mModel,filter);
+  filter=new IntentFilter();
+  filter.addAction(Intent.ACTION_EXTERNAL_APPLICATIONS_AVAILABLE);
+  filter.addAction(Intent.ACTION_EXTERNAL_APPLICATIONS_UNAVAILABLE);
+  filter.addAction(Intent.ACTION_LOCALE_CHANGED);
+  filter.addAction(Intent.ACTION_CONFIGURATION_CHANGED);
+  sContext.registerReceiver(mModel,filter);
+  filter=new IntentFilter();
+  filter.addAction(SearchManager.INTENT_GLOBAL_SEARCH_ACTIVITY_CHANGED);
+  sContext.registerReceiver(mModel,filter);
+  filter=new IntentFilter();
+  filter.addAction(SearchManager.INTENT_ACTION_SEARCHABLES_CHANGED);
+  sContext.registerReceiver(mModel,filter);
+  ContentResolver resolver=sContext.getContentResolver();
+  resolver.registerContentObserver(LauncherSettings.Favorites.CONTENT_URI,true,mFavoritesObserver);
 }

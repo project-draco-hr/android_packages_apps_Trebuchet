@@ -1,6 +1,7 @@
 {
+  final Context context=app.getContext();
   mAppsCanBeOnExternalStorage=!Environment.isExternalStorageEmulated();
-  mApp=LauncherAppState.getInstance();
+  mApp=app;
   mBgAllAppsList=new AllAppsList(iconCache);
   mIconCache=iconCache;
   mDefaultIcon=Utilities.createIconBitmap(mIconCache.getFullResDefaultActivityIcon(),context);
