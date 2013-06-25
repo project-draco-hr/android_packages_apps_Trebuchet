@@ -28,7 +28,7 @@
     args.requestCode=requestCode;
     args.intent=data;
     args.container=mPendingAddInfo.container;
-    args.screen=mPendingAddInfo.screen;
+    args.screenId=mPendingAddInfo.screenId;
     args.cellX=mPendingAddInfo.cellX;
     args.cellY=mPendingAddInfo.cellY;
     if (isWorkspaceLocked()) {

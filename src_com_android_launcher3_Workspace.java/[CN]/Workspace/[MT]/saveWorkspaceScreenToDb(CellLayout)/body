@@ -1,16 +1,16 @@
 {
   int count=cl.getShortcutsAndWidgets().getChildCount();
-  int screen=indexOfChild(cl);
+  long screenId=getIdForScreen(cl);
   int container=Favorites.CONTAINER_DESKTOP;
   if (mLauncher.isHotseatLayout(cl)) {
-    screen=-1;
+    screenId=-1;
     container=Favorites.CONTAINER_HOTSEAT;
   }
   for (int i=0; i < count; i++) {
     View v=cl.getShortcutsAndWidgets().getChildAt(i);
     ItemInfo info=(ItemInfo)v.getTag();
     if (info != null) {
-      LauncherModel.addItemToDatabase(mLauncher,info,container,screen,info.cellX,info.cellY,false);
+      LauncherModel.addItemToDatabase(mLauncher,info,container,screenId,info.cellX,info.cellY,false);
     }
     if (v instanceof FolderIcon) {
       FolderIcon fi=(FolderIcon)v;

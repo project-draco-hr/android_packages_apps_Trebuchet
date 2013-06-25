@@ -1,0 +1,60 @@
+{
+  if (container == LauncherSettings.Favorites.CONTAINER_DESKTOP) {
+    if (getScreenWithId(screenId) == null) {
+      Log.e(TAG,"Skipping child, screenId " + screenId + " not found");
+      return;
+    }
+  }
+  if (screenId == EXTRA_EMPTY_SCREEN_ID) {
+    screenId=commitExtraEmptyScreen();
+  }
+  final CellLayout layout;
+  if (container == LauncherSettings.Favorites.CONTAINER_HOTSEAT) {
+    layout=mLauncher.getHotseat().getLayout();
+    child.setOnKeyListener(null);
+    if (child instanceof FolderIcon) {
+      ((FolderIcon)child).setTextVisible(false);
+    }
+    if (computeXYFromRank) {
+      x=mLauncher.getHotseat().getCellXFromOrder((int)screenId);
+      y=mLauncher.getHotseat().getCellYFromOrder((int)screenId);
+    }
+ else {
+      screenId=mLauncher.getHotseat().getOrderInHotseat(x,y);
+    }
+  }
+ else {
+    if (child instanceof FolderIcon) {
+      ((FolderIcon)child).setTextVisible(true);
+    }
+    layout=getScreenWithId(screenId);
+    child.setOnKeyListener(new IconKeyEventListener());
+  }
+  LayoutParams genericLp=child.getLayoutParams();
+  CellLayout.LayoutParams lp;
+  if (genericLp == null || !(genericLp instanceof CellLayout.LayoutParams)) {
+    lp=new CellLayout.LayoutParams(x,y,spanX,spanY);
+  }
+ else {
+    lp=(CellLayout.LayoutParams)genericLp;
+    lp.cellX=x;
+    lp.cellY=y;
+    lp.cellHSpan=spanX;
+    lp.cellVSpan=spanY;
+  }
+  if (spanX < 0 && spanY < 0) {
+    lp.isLockedToGrid=false;
+  }
+  int childId=LauncherModel.getCellLayoutChildId(container,screenId,x,y,spanX,spanY);
+  boolean markCellsAsOccupied=!(child instanceof Folder);
+  if (!layout.addViewToCellLayout(child,insert ? 0 : -1,childId,lp,markCellsAsOccupied)) {
+    Log.w(TAG,"Failed to add to item at (" + lp.cellX + ","+ lp.cellY+ ") to CellLayout");
+  }
+  if (!(child instanceof Folder)) {
+    child.setHapticFeedbackEnabled(false);
+    child.setOnLongClickListener(mLongClickListener);
+  }
+  if (child instanceof DropTarget) {
+    mDragController.addDropTarget((DropTarget)child);
+  }
+}

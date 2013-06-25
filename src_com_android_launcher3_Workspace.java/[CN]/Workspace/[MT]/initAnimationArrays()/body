@@ -1,6 +1,6 @@
 {
   final int childCount=getChildCount();
-  if (mOldTranslationXs != null)   return;
+  if (mLastChildCount == childCount)   return;
   mOldTranslationXs=new float[childCount];
   mOldTranslationYs=new float[childCount];
   mOldScaleXs=new float[childCount];

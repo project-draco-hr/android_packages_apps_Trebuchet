@@ -1,5 +1,5 @@
 {
-  if (!mIsDataReady) {
+  if (!mIsDataReady || getChildCount() == 0) {
     super.onMeasure(widthMeasureSpec,heightMeasureSpec);
     return;
   }

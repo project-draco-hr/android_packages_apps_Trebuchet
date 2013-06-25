@@ -6,7 +6,7 @@
     ItemInfo info=itemsIdMap.get(id);
     FolderInfo folder=folders.get(id);
     if (info == null || folder == null)     continue;
-    if (info.container == LauncherSettings.Favorites.CONTAINER_DESKTOP && info.screen == currentScreen) {
+    if (info.container == LauncherSettings.Favorites.CONTAINER_DESKTOP && info.screenId == currentScreen) {
       currentScreenFolders.put(id,folder);
     }
  else {

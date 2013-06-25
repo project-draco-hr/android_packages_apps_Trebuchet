@@ -1,0 +1,12 @@
+{
+  final Runnable r=new Runnable(){
+    @Override public void run(){
+      Callbacks callbacks=tryGetCallbacks(oldCallbacks);
+      if (callbacks != null) {
+        callbacks.bindScreens(orderedScreens);
+      }
+    }
+  }
+;
+  runOnMainThread(r,MAIN_THREAD_BINDING_RUNNABLE);
+}

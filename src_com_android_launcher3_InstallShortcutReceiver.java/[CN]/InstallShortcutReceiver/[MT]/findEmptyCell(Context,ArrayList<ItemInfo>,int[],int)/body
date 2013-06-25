@@ -7,7 +7,7 @@
   for (int i=0; i < items.size(); ++i) {
     item=items.get(i);
     if (item.container == LauncherSettings.Favorites.CONTAINER_DESKTOP) {
-      if (item.screen == screen) {
+      if (item.screenId == screen) {
         cellX=item.cellX;
         cellY=item.cellY;
         spanX=item.spanX;

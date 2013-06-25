@@ -1,7 +1,7 @@
 {
   mOnResumeCallbacks.clear();
   final Workspace workspace=mWorkspace;
-  mNewShortcutAnimatePage=-1;
+  mNewShortcutAnimateScreenId=-1;
   mNewShortcutAnimateViews.clear();
   mWorkspace.clearDropTargets();
   int count=workspace.getChildCount();

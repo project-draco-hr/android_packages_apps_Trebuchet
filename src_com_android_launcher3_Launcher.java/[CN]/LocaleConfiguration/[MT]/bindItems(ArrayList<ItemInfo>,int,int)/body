@@ -21,7 +21,7 @@ case LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT:
       ShortcutInfo info=(ShortcutInfo)item;
     String uri=info.intent.toUri(0).toString();
   View shortcut=createShortcut(info);
-workspace.addInScreen(shortcut,item.container,item.screen,item.cellX,item.cellY,1,1,false);
+workspace.addInScreenFromBind(shortcut,item.container,item.screenId,item.cellX,item.cellY,1,1);
 boolean animateIconUp=false;
 synchronized (newApps) {
 if (newApps.contains(uri)) {
@@ -32,7 +32,7 @@ if (animateIconUp) {
 shortcut.setAlpha(0f);
 shortcut.setScaleX(0f);
 shortcut.setScaleY(0f);
-mNewShortcutAnimatePage=item.screen;
+mNewShortcutAnimateScreenId=item.screenId;
 if (!mNewShortcutAnimateViews.contains(shortcut)) {
 mNewShortcutAnimateViews.add(shortcut);
 }
@@ -40,7 +40,7 @@ mNewShortcutAnimateViews.add(shortcut);
 break;
 case LauncherSettings.Favorites.ITEM_TYPE_FOLDER:
 FolderIcon newFolder=FolderIcon.fromXml(R.layout.folder_icon,this,(ViewGroup)workspace.getChildAt(workspace.getCurrentPage()),(FolderInfo)item,mIconCache);
-workspace.addInScreen(newFolder,item.container,item.screen,item.cellX,item.cellY,1,1,false);
+workspace.addInScreenFromBind(newFolder,item.container,item.screenId,item.cellX,item.cellY,1,1);
 break;
 }
 }

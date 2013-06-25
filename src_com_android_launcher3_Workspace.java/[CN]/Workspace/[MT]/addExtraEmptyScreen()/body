@@ -1,0 +1,3 @@
+{
+  insertNewWorkspaceScreen(EXTRA_EMPTY_SCREEN_ID,false);
+}

@@ -37,7 +37,7 @@
 );
     anim.start();
   }
-  mNewShortcutAnimatePage=-1;
+  mNewShortcutAnimateScreenId=-1;
   mNewShortcutAnimateViews.clear();
   new Thread("clearNewAppsThread"){
     public void run(){

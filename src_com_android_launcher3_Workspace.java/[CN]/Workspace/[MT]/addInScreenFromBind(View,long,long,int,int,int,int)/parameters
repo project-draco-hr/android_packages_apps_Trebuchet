@@ -1,0 +1,7 @@
+View child
+long container
+long screenId
+int x
+int y
+int spanX
+int spanY

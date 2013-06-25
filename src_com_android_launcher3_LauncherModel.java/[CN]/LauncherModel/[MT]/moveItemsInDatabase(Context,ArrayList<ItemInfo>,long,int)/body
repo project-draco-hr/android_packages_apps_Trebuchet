@@ -3,20 +3,20 @@
   int count=items.size();
   for (int i=0; i < count; i++) {
     ItemInfo item=items.get(i);
-    String transaction="DbDebug    Modify item (" + item.title + ") in db, id: "+ item.id+ " ("+ item.container+ ", "+ item.screen+ ", "+ item.cellX+ ", "+ item.cellY+ ") --> "+ "("+ container+ ", "+ screen+ ", "+ item.cellX+ ", "+ item.cellY+ ")";
+    String transaction="DbDebug    Modify item (" + item.title + ") in db, id: "+ item.id+ " ("+ item.container+ ", "+ item.screenId+ ", "+ item.cellX+ ", "+ item.cellY+ ") --> "+ "("+ container+ ", "+ screen+ ", "+ item.cellX+ ", "+ item.cellY+ ")";
     Launcher.sDumpLogs.add(transaction);
     item.container=container;
     if (context instanceof Launcher && screen < 0 && container == LauncherSettings.Favorites.CONTAINER_HOTSEAT) {
-      item.screen=((Launcher)context).getHotseat().getOrderInHotseat(item.cellX,item.cellY);
+      item.screenId=((Launcher)context).getHotseat().getOrderInHotseat(item.cellX,item.cellY);
     }
  else {
-      item.screen=screen;
+      item.screenId=screen;
     }
     final ContentValues values=new ContentValues();
     values.put(LauncherSettings.Favorites.CONTAINER,item.container);
     values.put(LauncherSettings.Favorites.CELLX,item.cellX);
     values.put(LauncherSettings.Favorites.CELLY,item.cellY);
-    values.put(LauncherSettings.Favorites.SCREEN,item.screen);
+    values.put(LauncherSettings.Favorites.SCREEN,item.screenId);
     contentValues.add(values);
   }
   updateItemsInDatabaseHelper(context,contentValues,items,"moveItemInDatabase");

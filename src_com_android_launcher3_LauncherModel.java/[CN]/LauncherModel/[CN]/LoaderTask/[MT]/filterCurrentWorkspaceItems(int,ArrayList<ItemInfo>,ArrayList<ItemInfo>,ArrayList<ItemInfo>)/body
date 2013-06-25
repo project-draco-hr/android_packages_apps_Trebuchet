@@ -18,7 +18,7 @@
 );
   for (  ItemInfo info : allWorkspaceItems) {
     if (info.container == LauncherSettings.Favorites.CONTAINER_DESKTOP) {
-      if (info.screen == currentScreen) {
+      if (info.screenId == currentScreen) {
         currentScreenItems.add(info);
         itemsOnScreen.add(info.id);
       }

@@ -13,11 +13,13 @@
   ArrayList<LauncherAppWidgetInfo> appWidgets=new ArrayList<LauncherAppWidgetInfo>();
   HashMap<Long,FolderInfo> folders=new HashMap<Long,FolderInfo>();
   HashMap<Long,ItemInfo> itemsIdMap=new HashMap<Long,ItemInfo>();
+  ArrayList<Long> orderedScreenIds=new ArrayList<Long>();
 synchronized (sBgLock) {
     workspaceItems.addAll(sBgWorkspaceItems);
     appWidgets.addAll(sBgAppWidgets);
     folders.putAll(sBgFolders);
     itemsIdMap.putAll(sBgItemsIdMap);
+    orderedScreenIds.addAll(sBgWorkspaceScreens);
   }
   ArrayList<ItemInfo> currentWorkspaceItems=new ArrayList<ItemInfo>();
   ArrayList<ItemInfo> otherWorkspaceItems=new ArrayList<ItemInfo>();
@@ -40,6 +42,7 @@ synchronized (sBgLock) {
   }
 ;
   runOnMainThread(r,MAIN_THREAD_BINDING_RUNNABLE);
+  bindWorkspaceScreens(oldCallbacks,orderedScreenIds);
   bindWorkspaceItems(oldCallbacks,currentWorkspaceItems,currentAppWidgets,currentFolders,null);
   if (isLoadingSynchronously) {
     r=new Runnable(){

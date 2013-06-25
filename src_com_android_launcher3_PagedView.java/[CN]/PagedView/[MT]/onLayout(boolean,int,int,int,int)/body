@@ -1,5 +1,5 @@
 {
-  if (!mIsDataReady) {
+  if (!mIsDataReady || getChildCount() == 0) {
     return;
   }
   if (DEBUG)   Log.d(TAG,"PagedView.onLayout()");

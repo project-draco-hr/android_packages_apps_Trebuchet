@@ -16,7 +16,7 @@
     Log.w(TAG,"Shortcut is missing title or icon resource ID");
     return -1;
   }
-  long id=generateNewId();
+  long id=generateNewItemId();
   intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
   values.put(Favorites.INTENT,intent.toUri(0));
   values.put(Favorites.TITLE,r.getString(titleResId));

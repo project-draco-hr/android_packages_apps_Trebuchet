@@ -8,7 +8,7 @@
   }
   if (v == null || hasntMoved || !mCreateUserFolderOnDrop)   return false;
   mCreateUserFolderOnDrop=false;
-  final int screen=(targetCell == null) ? mDragInfo.screen : indexOfChild(target);
+  final long screenId=(targetCell == null) ? mDragInfo.screenId : getIdForScreen(target);
   boolean aboveShortcut=(v.getTag() instanceof ShortcutInfo);
   boolean willBecomeShortcut=(newView.getTag() instanceof ShortcutInfo);
   if (aboveShortcut && willBecomeShortcut) {
@@ -20,7 +20,7 @@
     Rect folderLocation=new Rect();
     float scale=mLauncher.getDragLayer().getDescendantRectRelativeToSelf(v,folderLocation);
     target.removeView(v);
-    FolderIcon fi=mLauncher.addFolder(target,container,screen,targetCell[0],targetCell[1]);
+    FolderIcon fi=mLauncher.addFolder(target,container,screenId,targetCell[0],targetCell[1]);
     destInfo.cellX=-1;
     destInfo.cellY=-1;
     sourceInfo.cellX=-1;

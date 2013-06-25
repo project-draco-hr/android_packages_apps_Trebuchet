@@ -7,7 +7,7 @@
     startActivityForResultSafely(intent,REQUEST_CREATE_APPWIDGET);
   }
  else {
-    completeAddAppWidget(appWidgetId,info.container,info.screen,boundWidget,appWidgetInfo);
+    completeAddAppWidget(appWidgetId,info.container,info.screenId,boundWidget,appWidgetInfo);
     exitSpringLoadedDragModeDelayed(true,false,null);
   }
 }

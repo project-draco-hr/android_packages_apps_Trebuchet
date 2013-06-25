@@ -14,9 +14,10 @@ synchronized (sBgLock) {
     sBgFolders.clear();
     sBgItemsIdMap.clear();
     sBgDbIconCache.clear();
+    sBgWorkspaceScreens.clear();
     final ArrayList<Long> itemsToRemove=new ArrayList<Long>();
     final Cursor c=contentResolver.query(contentUri,null,null,null,null);
-    final ItemInfo occupied[][][]=new ItemInfo[Launcher.SCREEN_COUNT + 1][mCellCountX + 1][mCellCountY + 1];
+    final HashMap<Long,ItemInfo[][]> occupied=new HashMap<Long,ItemInfo[][]>();
     try {
       final int idIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites._ID);
       final int intentIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.INTENT);
@@ -66,7 +67,7 @@ case LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT:
         info.id=c.getLong(idIndex);
         container=c.getInt(containerIndex);
         info.container=container;
-        info.screen=c.getInt(screenIndex);
+        info.screenId=c.getInt(screenIndex);
         info.cellX=c.getInt(cellXIndex);
         info.cellY=c.getInt(cellYIndex);
         if (!checkItemPlacement(occupied,info)) {
@@ -83,7 +84,7 @@ default :
   break;
 }
 if (container != LauncherSettings.Favorites.CONTAINER_HOTSEAT && loadOldDb) {
-info.screen=permuteScreens(info.screen);
+info.screenId=permuteScreens(info.screenId);
 }
 sBgItemsIdMap.put(info.id,info);
 queueIconToBeChecked(sBgDbIconCache,info,c,iconIndex);
@@ -101,7 +102,7 @@ folderInfo.title=c.getString(titleIndex);
 folderInfo.id=id;
 container=c.getInt(containerIndex);
 folderInfo.container=container;
-folderInfo.screen=c.getInt(screenIndex);
+folderInfo.screenId=c.getInt(screenIndex);
 folderInfo.cellX=c.getInt(cellXIndex);
 folderInfo.cellY=c.getInt(cellYIndex);
 if (!checkItemPlacement(occupied,folderInfo)) {
@@ -114,7 +115,7 @@ sBgWorkspaceItems.add(folderInfo);
 break;
 }
 if (container != LauncherSettings.Favorites.CONTAINER_HOTSEAT && loadOldDb) {
-folderInfo.screen=permuteScreens(folderInfo.screen);
+folderInfo.screenId=permuteScreens(folderInfo.screenId);
 }
 sBgItemsIdMap.put(folderInfo.id,folderInfo);
 sBgFolders.put(folderInfo.id,folderInfo);
@@ -132,7 +133,7 @@ itemsToRemove.add(id);
  else {
 appWidgetInfo=new LauncherAppWidgetInfo(appWidgetId,provider.provider);
 appWidgetInfo.id=id;
-appWidgetInfo.screen=c.getInt(screenIndex);
+appWidgetInfo.screenId=c.getInt(screenIndex);
 appWidgetInfo.cellX=c.getInt(cellXIndex);
 appWidgetInfo.cellY=c.getInt(cellYIndex);
 appWidgetInfo.spanX=c.getInt(spanXIndex);
@@ -146,7 +147,7 @@ Log.e(TAG,"Widget found where container != " + "CONTAINER_DESKTOP nor CONTAINER_
 continue;
 }
 if (container != LauncherSettings.Favorites.CONTAINER_HOTSEAT && loadOldDb) {
-appWidgetInfo.screen=permuteScreens(appWidgetInfo.screen);
+appWidgetInfo.screenId=permuteScreens(appWidgetInfo.screenId);
 }
 appWidgetInfo.container=c.getInt(containerIndex);
 if (!checkItemPlacement(occupied,appWidgetInfo)) {
@@ -180,17 +181,73 @@ Log.w(TAG,"Could not remove id = " + id);
 }
 }
 }
+if (loadOldDb) {
+long maxScreenId=0;
+for (ItemInfo item : sBgItemsIdMap.values()) {
+long screenId=item.screenId;
+if (item.container == LauncherSettings.Favorites.CONTAINER_DESKTOP && !sBgWorkspaceScreens.contains(screenId)) {
+sBgWorkspaceScreens.add(screenId);
+if (screenId > maxScreenId) {
+maxScreenId=screenId;
+}
+}
+}
+Collections.sort(sBgWorkspaceScreens);
+mApp.getLauncherProvider().updateMaxScreenId(maxScreenId);
+updateWorkspaceScreenOrder(context,sBgWorkspaceScreens);
+}
+ else {
+Uri screensUri=LauncherSettings.WorkspaceScreens.CONTENT_URI;
+final Cursor sc=contentResolver.query(screensUri,null,null,null,null);
+TreeMap<Integer,Long> orderedScreens=new TreeMap<Integer,Long>();
+try {
+final int idIndex=sc.getColumnIndexOrThrow(LauncherSettings.WorkspaceScreens._ID);
+final int rankIndex=sc.getColumnIndexOrThrow(LauncherSettings.WorkspaceScreens.SCREEN_RANK);
+while (sc.moveToNext()) {
+try {
+long screenId=sc.getLong(idIndex);
+int rank=sc.getInt(rankIndex);
+orderedScreens.put(rank,screenId);
+}
+ catch (Exception e) {
+Log.w(TAG,"Desktop items loading interrupted:",e);
+}
+}
+}
+  finally {
+sc.close();
+}
+Iterator<Integer> iter=orderedScreens.keySet().iterator();
+while (iter.hasNext()) {
+sBgWorkspaceScreens.add(orderedScreens.get(iter.next()));
+}
+ArrayList<Long> unusedScreens=new ArrayList<Long>();
+unusedScreens.addAll(sBgWorkspaceScreens);
+for (ItemInfo item : sBgItemsIdMap.values()) {
+long screenId=item.screenId;
+if (item.container == LauncherSettings.Favorites.CONTAINER_DESKTOP && unusedScreens.contains(screenId)) {
+unusedScreens.remove(screenId);
+}
+}
+if (unusedScreens.size() != 0) {
+sBgWorkspaceScreens.removeAll(unusedScreens);
+updateWorkspaceScreenOrder(context,sBgWorkspaceScreens);
+}
+}
 if (DEBUG_LOADERS) {
 Log.d(TAG,"loaded workspace in " + (SystemClock.uptimeMillis() - t) + "ms");
 Log.d(TAG,"workspace layout: ");
+Iterator<Long> iter=occupied.keySet().iterator();
+int nScreens=occupied.size();
 for (int y=0; y < mCellCountY; y++) {
 String line="";
-for (int s=0; s < Launcher.SCREEN_COUNT; s++) {
+for (int s=0; s < nScreens; s++) {
+long screenId=iter.next();
 if (s > 0) {
 line+=" | ";
 }
 for (int x=0; x < mCellCountX; x++) {
-line+=((occupied[s][x][y] != null) ? "#" : ".");
+line+=((occupied.get(screenId)[x][y] != null) ? "#" : ".");
 }
 }
 Log.d(TAG,"[ " + line + " ]");

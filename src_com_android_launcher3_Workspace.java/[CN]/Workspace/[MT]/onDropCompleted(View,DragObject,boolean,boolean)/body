@@ -15,7 +15,7 @@
       cellLayout=mLauncher.getHotseat().getLayout();
     }
  else {
-      cellLayout=(CellLayout)getChildAt(mDragInfo.screen);
+      cellLayout=getScreenWithId(mDragInfo.screenId);
     }
     cellLayout.onDropChild(mDragInfo.cell);
   }
@@ -24,5 +24,6 @@
   }
   mDragOutline=null;
   mDragInfo=null;
+  stripEmptyScreens();
   hideScrollingIndicator(false);
 }
