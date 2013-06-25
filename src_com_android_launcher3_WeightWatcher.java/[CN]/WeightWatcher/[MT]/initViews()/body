@@ -1,4 +1,5 @@
 {
+  removeAllViews();
   int[] processes=mMemoryService.getTrackedProcesses();
   for (int i=0; i < processes.length; i++) {
     final ProcessWatcher v=new ProcessWatcher(getContext());
