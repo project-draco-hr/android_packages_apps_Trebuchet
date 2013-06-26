@@ -241,9 +241,9 @@ int nScreens=occupied.size();
 for (int y=0; y < mCellCountY; y++) {
 String line="";
 Iterator<Long> iter=occupied.keySet().iterator();
-for (int s=0; s < nScreens; s++) {
+while (iter.hasNext()) {
 long screenId=iter.next();
-if (s > 0) {
+if (screenId > 0) {
 line+=" | ";
 }
 for (int x=0; x < mCellCountX; x++) {

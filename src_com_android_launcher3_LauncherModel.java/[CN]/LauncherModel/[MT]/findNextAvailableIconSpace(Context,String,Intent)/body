@@ -1,0 +1,17 @@
+{
+  LauncherAppState app=LauncherAppState.getInstance();
+  LauncherModel model=app.getModel();
+  boolean found=false;
+synchronized (app) {
+    model.flushWorkerThread();
+    final ArrayList<ItemInfo> items=LauncherModel.getItemsInLocalCoordinates(context);
+    final boolean shortcutExists=LauncherModel.shortcutExists(context,name,launchIntent);
+    for (int screen=0; screen < sBgWorkspaceScreens.size() && !found; screen++) {
+      int[] tmpCoordinates=new int[2];
+      if (findNextAvailableIconSpaceInScreen(items,tmpCoordinates,sBgWorkspaceScreens.get(screen))) {
+        return new Pair<Long,int[]>(sBgWorkspaceScreens.get(screen),tmpCoordinates);
+      }
+    }
+  }
+  return null;
+}

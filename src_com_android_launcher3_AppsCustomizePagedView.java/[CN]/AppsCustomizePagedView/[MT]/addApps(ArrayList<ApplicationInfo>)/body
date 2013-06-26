@@ -3,7 +3,4 @@
     addAppsWithoutInvalidate(list);
     updatePageCountsAndInvalidateData();
   }
- else {
-    mLauncher.getHotseat().addAppsToAllAppsFolder(list);
-  }
 }
