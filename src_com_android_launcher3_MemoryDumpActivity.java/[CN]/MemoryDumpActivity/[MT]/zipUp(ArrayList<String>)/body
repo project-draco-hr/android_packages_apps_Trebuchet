@@ -1,0 +1,40 @@
+{
+  final int BUFSIZ=256 * 1024;
+  final byte[] buf=new byte[BUFSIZ];
+  final String zipfilePath=String.format("%s/hprof-%d.zip",Environment.getExternalStorageDirectory(),System.currentTimeMillis());
+  ZipOutputStream zos=null;
+  try {
+    OutputStream os=new FileOutputStream(zipfilePath);
+    zos=new ZipOutputStream(new BufferedOutputStream(os));
+    for (    String filename : paths) {
+      InputStream is=null;
+      try {
+        is=new BufferedInputStream(new FileInputStream(filename));
+        ZipEntry entry=new ZipEntry(filename);
+        zos.putNextEntry(entry);
+        int len;
+        while (0 < (len=is.read(buf,0,BUFSIZ))) {
+          zos.write(buf,0,len);
+        }
+        zos.closeEntry();
+      }
+  finally {
+        is.close();
+      }
+    }
+  }
+ catch (  IOException e) {
+    Log.e(TAG,"error zipping up profile data",e);
+    return null;
+  }
+ finally {
+    if (zos != null) {
+      try {
+        zos.close();
+      }
+ catch (      IOException e) {
+      }
+    }
+  }
+  return zipfilePath;
+}

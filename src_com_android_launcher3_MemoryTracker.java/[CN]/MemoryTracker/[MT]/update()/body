@@ -9,5 +9,6 @@
     info.uss[info.head]=info.currentUss=dinfo.getTotalPrivateDirty();
     if (info.currentPss > info.max)     info.max=info.currentPss;
     if (info.currentUss > info.max)     info.max=info.currentUss;
+    Log.v(TAG,"update: pid " + pid + " pss="+ info.currentPss+ " uss="+ info.currentUss);
   }
 }

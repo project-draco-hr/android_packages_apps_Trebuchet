@@ -1,0 +1,3 @@
+{
+  context.startService(new Intent(context,MemoryTracker.class).setAction(MemoryTracker.ACTION_START_TRACKING).putExtra("pid",android.os.Process.myPid()).putExtra("name",name));
+}
