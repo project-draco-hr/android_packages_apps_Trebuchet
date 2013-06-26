@@ -6,4 +6,5 @@
   cl.setOnInterceptTouchListener(this);
   cl.setClickable(true);
   cl.setContentDescription(getContext().getString(R.string.workspace_description_format,getChildCount()));
+  super.onChildViewAdded(parent,child);
 }
