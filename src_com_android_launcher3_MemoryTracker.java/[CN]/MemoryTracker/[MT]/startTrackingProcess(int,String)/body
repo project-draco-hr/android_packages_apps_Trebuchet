@@ -1,5 +1,7 @@
 {
-  mPids.add(new Long(pid));
+  final Long lpid=new Long(pid);
+  if (mPids.contains(lpid))   return;
+  mPids.add(lpid);
   final int N=mPids.size();
   mPidsArray=new int[N];
   StringBuffer sb=new StringBuffer("Now tracking processes: ");

@@ -1,4 +1,5 @@
 {
   this.pid=pid;
   this.name=name;
+  this.startTime=System.currentTimeMillis();
 }
