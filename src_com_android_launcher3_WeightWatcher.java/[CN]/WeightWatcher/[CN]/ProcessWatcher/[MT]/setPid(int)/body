@@ -1,4 +1,8 @@
 {
   mPid=pid;
   mMemInfo=mMemoryService.getMemInfo(mPid);
+  if (mMemInfo == null) {
+    Log.v("WeightWatcher","Missing info for pid " + mPid + ", removing view: "+ this);
+    initViews();
+  }
 }
