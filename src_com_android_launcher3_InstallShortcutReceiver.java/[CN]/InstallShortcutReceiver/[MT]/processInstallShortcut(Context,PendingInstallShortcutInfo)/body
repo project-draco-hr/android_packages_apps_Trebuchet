@@ -12,7 +12,7 @@ synchronized (app) {
     final ArrayList<ItemInfo> items=LauncherModel.getItemsInLocalCoordinates(context);
     final boolean exists=LauncherModel.shortcutExists(context,name,intent);
     final int screen=Launcher.DEFAULT_SCREEN;
-    for (int i=0; i < Launcher.SCREEN_COUNT; i++) {
+    for (int i=0; i < Launcher.SCREEN_COUNT && !found; i++) {
       int si=i;
       if (0 <= si && si < Launcher.SCREEN_COUNT) {
         found=installShortcut(context,data,items,name,intent,si,exists,sp,result);

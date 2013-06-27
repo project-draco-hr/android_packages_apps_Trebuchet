@@ -2,7 +2,7 @@
   ArrayList<Long> removeScreens=new ArrayList<Long>();
   for (  Long id : mWorkspaceScreens.keySet()) {
     CellLayout cl=mWorkspaceScreens.get(id);
-    if (id != EXTRA_EMPTY_SCREEN_ID && cl.getShortcutsAndWidgets().getChildCount() == 0) {
+    if (id >= 0 && cl.getShortcutsAndWidgets().getChildCount() == 0) {
       removeScreens.add(id);
     }
   }

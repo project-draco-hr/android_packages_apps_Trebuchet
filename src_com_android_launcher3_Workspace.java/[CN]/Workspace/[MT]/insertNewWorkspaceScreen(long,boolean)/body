@@ -4,7 +4,7 @@
   mWorkspaceScreens.put(screenId,newScreen);
   mScreenOrder.add(screenId);
   if (updateDb) {
-    LauncherModel.updateWorkspaceScreenOrder(mLauncher,mScreenOrder);
+    mLauncher.getModel().updateWorkspaceScreenOrder(mLauncher,mScreenOrder);
   }
   return screenId;
 }
