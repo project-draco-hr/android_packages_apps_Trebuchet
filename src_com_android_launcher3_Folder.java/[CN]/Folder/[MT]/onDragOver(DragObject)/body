@@ -1,5 +1,7 @@
 {
   int scrollOffset=mScrollView.getScrollY();
+  int height=getMeasuredHeight();
+  int scrollBandHeight=Math.min((int)(height * sScrollBandMaxFactor),(Math.max(sMinScrollBandHeight,(int)(height * sScrollBandFactor))));
   float[] r=getDragViewVisualCenter(d.x,d.y,d.xOffset,d.yOffset,d.dragView,null);
   r[0]-=getPaddingLeft();
   r[1]-=getPaddingTop();
@@ -7,16 +9,18 @@
   if (isLayoutRtl()) {
     mTargetCell[0]=mContent.getCountX() - mTargetCell[0] - 1;
   }
-  if (r[1] < SCROLL_BAND_HEIGHT && mScrollView.getScrollY() > 0) {
+  if (r[1] < scrollBandHeight && mScrollView.getScrollY() > 0) {
     if (mDragMode != DRAG_MODE_SCROLL_UP) {
       mDragMode=DRAG_MODE_SCROLL_UP;
+      mDragScrollStart=System.currentTimeMillis();
       scrollUp();
     }
     mReorderAlarm.cancelAlarm();
   }
- else   if (r[1] > (getFolderHeight() - SCROLL_BAND_HEIGHT) && mScrollView.getScrollY() < (mContent.getMeasuredHeight() - mScrollView.getMeasuredHeight())) {
+ else   if (r[1] > (getFolderHeight() - scrollBandHeight) && mScrollView.getScrollY() < (mContent.getMeasuredHeight() - mScrollView.getMeasuredHeight())) {
     if (mDragMode != DRAG_MODE_SCROLL_DOWN) {
       mDragMode=DRAG_MODE_SCROLL_DOWN;
+      mDragScrollStart=System.currentTimeMillis();
       scrollDown();
     }
     mReorderAlarm.cancelAlarm();

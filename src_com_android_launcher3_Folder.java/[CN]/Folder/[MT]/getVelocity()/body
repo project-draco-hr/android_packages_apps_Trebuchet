@@ -1,0 +1,4 @@
+{
+  float duration=(System.currentTimeMillis() - mDragScrollStart) / mDurationToMax;
+  return (int)Math.min(mMaxVelocity,(int)(mEdgeInterpolator.getInterpolation(duration) * mMaxVelocity));
+}

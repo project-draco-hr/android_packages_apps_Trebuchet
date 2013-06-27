@@ -37,6 +37,15 @@
   if (sHintText == null) {
     sHintText=res.getString(R.string.folder_hint_text);
   }
+  if (sMinScrollBandHeight == -1) {
+    sMinScrollBandHeight=res.getDimensionPixelSize(R.dimen.min_scroll_band_size);
+  }
+  if (sScrollBandFactor == -1f) {
+    sScrollBandFactor=res.getInteger(R.integer.scroll_band_factor) / 100f;
+  }
+  if (sScrollBandMaxFactor == -1f) {
+    sScrollBandMaxFactor=res.getInteger(R.integer.scroll_band_max_factor) / 100f;
+  }
   mLauncher=(Launcher)context;
   setFocusableInTouchMode(true);
 }
