@@ -1,10 +1,13 @@
 {
-  CellLayout customScreen=(CellLayout)mLauncher.getLayoutInflater().inflate(R.layout.workspace_custom_content,null);
+  CellLayout customScreen=(CellLayout)mLauncher.getLayoutInflater().inflate(R.layout.workspace_screen,null);
   int spanX=customScreen.getCountX();
   int spanY=customScreen.getCountY();
   CellLayout.LayoutParams lp=new CellLayout.LayoutParams(0,0,spanX,spanY);
   lp.canReorder=false;
   customScreen.addViewToCellLayout(customContent,0,0,lp,true);
+  Rect p=new Rect();
+  AppWidgetHostView.getDefaultPaddingForWidget(mLauncher,mLauncher.getComponentName(),p);
+  customContent.setPadding(p.left,p.top,p.right,p.bottom);
   addView(customScreen,0);
   mWorkspaceScreens.put(CUSTOM_CONTENT_SCREEN_ID,customScreen);
   mScreenOrder.add(0,CUSTOM_CONTENT_SCREEN_ID);
