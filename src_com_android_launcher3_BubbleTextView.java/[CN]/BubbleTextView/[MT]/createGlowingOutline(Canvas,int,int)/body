@@ -1,5 +1,5 @@
 {
-  final int padding=HolographicOutlineHelper.MAX_OUTER_BLUR_RADIUS;
+  final int padding=mOutlineHelper.mMaxOuterBlurRadius;
   final Bitmap b=Bitmap.createBitmap(getWidth() + padding,getHeight() + padding,Bitmap.Config.ARGB_8888);
   canvas.setBitmap(b);
   drawWithPadding(canvas,padding);

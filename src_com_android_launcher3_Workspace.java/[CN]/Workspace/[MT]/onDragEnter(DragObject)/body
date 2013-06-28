@@ -6,7 +6,7 @@
   CellLayout layout=getCurrentDropLayout();
   setCurrentDropLayout(layout);
   setCurrentDragOverlappingLayout(layout);
-  if (LauncherAppState.isScreenLarge()) {
+  if (LauncherAppState.getInstance().isScreenLarge()) {
     showOutlines();
   }
 }

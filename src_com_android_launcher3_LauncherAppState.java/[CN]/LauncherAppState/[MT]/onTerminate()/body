@@ -1,5 +1,5 @@
 {
-  mContext.unregisterReceiver(mModel);
-  ContentResolver resolver=mContext.getContentResolver();
+  sContext.unregisterReceiver(mModel);
+  ContentResolver resolver=sContext.getContentResolver();
   resolver.unregisterContentObserver(mFavoritesObserver);
 }

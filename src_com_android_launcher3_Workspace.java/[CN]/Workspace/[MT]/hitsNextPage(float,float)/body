@@ -1,4 +1,4 @@
 {
   final int current=(mNextPage == INVALID_PAGE) ? mCurrentPage : mNextPage;
-  return LauncherAppState.isScreenLarge() && hitsPage(current + 1,x,y);
+  return LauncherAppState.getInstance().isScreenLarge() && hitsPage(current + 1,x,y);
 }

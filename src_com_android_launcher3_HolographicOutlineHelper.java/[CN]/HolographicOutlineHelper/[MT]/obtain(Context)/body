@@ -1,6 +1,6 @@
 {
   if (INSTANCE == null) {
-    INSTANCE=new LauncherAppState();
+    INSTANCE=new HolographicOutlineHelper(context);
   }
   return INSTANCE;
 }

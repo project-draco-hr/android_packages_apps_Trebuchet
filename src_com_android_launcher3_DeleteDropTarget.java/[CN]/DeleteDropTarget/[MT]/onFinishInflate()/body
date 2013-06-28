@@ -10,7 +10,7 @@
   mCurrentDrawable=(TransitionDrawable)getCurrentDrawable();
   int orientation=getResources().getConfiguration().orientation;
   if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-    if (!LauncherAppState.isScreenLarge()) {
+    if (!LauncherAppState.getInstance().isScreenLarge()) {
       setText("");
     }
   }

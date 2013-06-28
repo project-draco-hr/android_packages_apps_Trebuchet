@@ -9,7 +9,7 @@
  else {
     mContent.setVisibility(VISIBLE);
     mAppsCustomizePane.loadAssociatedPages(mAppsCustomizePane.getCurrentPage(),true);
-    if (!LauncherAppState.isScreenLarge()) {
+    if (!LauncherAppState.getInstance().isScreenLarge()) {
       mAppsCustomizePane.showScrollingIndicator(true);
     }
   }

@@ -14,13 +14,13 @@
   BlurMaskFilter outerBlurMaskFilter;
 switch (thickness) {
 case EXTRA_THICK:
-    outerBlurMaskFilter=sExtraThickOuterBlurMaskFilter;
+    outerBlurMaskFilter=mExtraThickOuterBlurMaskFilter;
   break;
 case THICK:
-outerBlurMaskFilter=sThickOuterBlurMaskFilter;
+outerBlurMaskFilter=mThickOuterBlurMaskFilter;
 break;
 case MEDIUM:
-outerBlurMaskFilter=sMediumOuterBlurMaskFilter;
+outerBlurMaskFilter=mMediumOuterBlurMaskFilter;
 break;
 default :
 throw new RuntimeException("Invalid blur thickness");
@@ -29,10 +29,10 @@ mBlurPaint.setMaskFilter(outerBlurMaskFilter);
 int[] outerBlurOffset=new int[2];
 Bitmap thickOuterBlur=glowShape.extractAlpha(mBlurPaint,outerBlurOffset);
 if (thickness == EXTRA_THICK) {
-mBlurPaint.setMaskFilter(sMediumOuterBlurMaskFilter);
+mBlurPaint.setMaskFilter(mMediumOuterBlurMaskFilter);
 }
  else {
-mBlurPaint.setMaskFilter(sThinOuterBlurMaskFilter);
+mBlurPaint.setMaskFilter(mThinOuterBlurMaskFilter);
 }
 int[] brightOutlineOffset=new int[2];
 Bitmap brightOutline=glowShape.extractAlpha(mBlurPaint,brightOutlineOffset);
@@ -41,13 +41,13 @@ srcDstCanvas.drawColor(0xFF000000,PorterDuff.Mode.SRC_OUT);
 BlurMaskFilter innerBlurMaskFilter;
 switch (thickness) {
 case EXTRA_THICK:
-innerBlurMaskFilter=sExtraThickInnerBlurMaskFilter;
+innerBlurMaskFilter=mExtraThickInnerBlurMaskFilter;
 break;
 case THICK:
-innerBlurMaskFilter=sThickInnerBlurMaskFilter;
+innerBlurMaskFilter=mThickInnerBlurMaskFilter;
 break;
 case MEDIUM:
-innerBlurMaskFilter=sMediumInnerBlurMaskFilter;
+innerBlurMaskFilter=mMediumInnerBlurMaskFilter;
 break;
 default :
 throw new RuntimeException("Invalid blur thickness");

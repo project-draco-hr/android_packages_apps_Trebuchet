@@ -1,0 +1,6 @@
+{
+  if (sContext != null) {
+    throw new IllegalStateException("setApplicationContext called twice! old=" + sContext + " new="+ context);
+  }
+  sContext=context.getApplicationContext();
+}
