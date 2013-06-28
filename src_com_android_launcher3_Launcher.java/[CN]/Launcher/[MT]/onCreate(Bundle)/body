@@ -4,6 +4,7 @@
     StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder().detectLeakedSqlLiteObjects().detectLeakedClosableObjects().penaltyLog().penaltyDeath().build());
   }
   super.onCreate(savedInstanceState);
+  LauncherAppState.setApplicationContext(getApplicationContext());
   LauncherAppState app=LauncherAppState.getInstance();
   mSharedPrefs=getSharedPreferences(LauncherAppState.getSharedPreferencesKey(),Context.MODE_PRIVATE);
   mModel=app.setLauncher(this);
