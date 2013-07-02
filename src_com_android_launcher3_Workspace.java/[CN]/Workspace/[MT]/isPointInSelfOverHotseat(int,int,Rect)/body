@@ -1,0 +1,13 @@
+{
+  if (r == null) {
+    r=new Rect();
+  }
+  mTempPt[0]=x;
+  mTempPt[1]=y;
+  mLauncher.getDragLayer().getDescendantCoordRelativeToSelf(this,mTempPt,true);
+  mLauncher.getHotseat().getHitRect(r);
+  if (r.contains(mTempPt[0],mTempPt[1])) {
+    return true;
+  }
+  return false;
+}

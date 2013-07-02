@@ -5,7 +5,7 @@
   loc[0]=r.left;
   loc[1]=r.top;
   setFinalTransitionTransform(layout);
-  float cellLayoutScale=mLauncher.getDragLayer().getDescendantCoordRelativeToSelf(layout,loc);
+  float cellLayoutScale=mLauncher.getDragLayer().getDescendantCoordRelativeToSelf(layout,loc,true);
   resetTransitionTransform(layout);
   float dragViewScaleX;
   float dragViewScaleY;

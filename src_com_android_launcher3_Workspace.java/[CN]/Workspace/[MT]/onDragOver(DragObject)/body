@@ -8,8 +8,7 @@
   final View child=(mDragInfo == null) ? null : mDragInfo.cell;
   if (isSmall()) {
     if (mLauncher.getHotseat() != null && !isExternalDragWidget(d)) {
-      mLauncher.getHotseat().getHitRect(r);
-      if (r.contains(d.x,d.y)) {
+      if (isPointInSelfOverHotseat(d.x,d.y,r)) {
         layout=mLauncher.getHotseat().getLayout();
       }
     }
@@ -32,8 +31,7 @@
   }
  else {
     if (mLauncher.getHotseat() != null && !isDragWidget(d)) {
-      mLauncher.getHotseat().getHitRect(r);
-      if (r.contains(d.x,d.y)) {
+      if (isPointInSelfOverHotseat(d.x,d.y,r)) {
         layout=mLauncher.getHotseat().getLayout();
       }
     }

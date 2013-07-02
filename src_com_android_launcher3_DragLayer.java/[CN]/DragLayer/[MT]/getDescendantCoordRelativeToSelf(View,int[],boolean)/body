@@ -1,0 +1,27 @@
+{
+  ArrayList<View> ancestorChain=new ArrayList<View>();
+  float[] pt={coord[0],coord[1]};
+  View v=descendant;
+  while (v != this && v != null) {
+    ancestorChain.add(v);
+    v=(View)v.getParent();
+  }
+  ancestorChain.add(this);
+  float scale=1.0f;
+  int count=ancestorChain.size();
+  for (int i=0; i < count; i++) {
+    View v0=ancestorChain.get(i);
+    View v1=i < count - 1 ? ancestorChain.get(i + 1) : null;
+    if (v0 != descendant || includeRootScroll) {
+      pt[0]-=v0.getScrollX();
+      pt[1]-=v0.getScrollY();
+    }
+    v0.getMatrix().mapPoints(pt);
+    pt[0]+=v0.getLeft();
+    pt[1]+=v0.getTop();
+    scale*=v0.getScaleX();
+  }
+  coord[0]=(int)Math.round(pt[0]);
+  coord[1]=(int)Math.round(pt[1]);
+  return scale;
+}

@@ -1,7 +1,6 @@
 {
   super(context,attrs,defStyle);
   mContentIsRefreshable=false;
-  mOriginalPageSpacing=mPageSpacing;
   mOutlineHelper=HolographicOutlineHelper.obtain(context);
   mDragEnforcer=new DropTarget.DragEnforcer(context);
   setDataIsReady();
@@ -29,7 +28,6 @@
     }
   }
   mSpringLoadedShrinkFactor=res.getInteger(R.integer.config_workspaceSpringLoadShrinkPercentage) / 100.0f;
-  mSpringLoadedPageSpacing=res.getDimensionPixelSize(R.dimen.workspace_spring_loaded_page_spacing);
   mCameraDistance=res.getInteger(R.integer.config_cameraDistance);
   cellCountX=a.getInt(R.styleable.Workspace_cellCountX,cellCountX);
   cellCountY=a.getInt(R.styleable.Workspace_cellCountY,cellCountY);
