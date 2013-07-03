@@ -8,9 +8,9 @@
   Rect p=new Rect();
   AppWidgetHostView.getDefaultPaddingForWidget(mLauncher,mLauncher.getComponentName(),p);
   customContent.setPadding(p.left,p.top,p.right,p.bottom);
-  addView(customScreen,0);
   mWorkspaceScreens.put(CUSTOM_CONTENT_SCREEN_ID,customScreen);
   mScreenOrder.add(0,CUSTOM_CONTENT_SCREEN_ID);
+  addView(customScreen,0);
   mDefaultPage++;
   setCurrentPage(getCurrentPage() + 1);
 }
