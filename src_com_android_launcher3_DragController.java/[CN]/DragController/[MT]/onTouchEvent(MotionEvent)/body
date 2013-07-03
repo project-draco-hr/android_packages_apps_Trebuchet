@@ -18,6 +18,7 @@ if ((dragLayerX < mScrollZone) || (dragLayerX > mScrollView.getWidth() - mScroll
  else {
   mScrollState=SCROLL_OUTSIDE_ZONE;
 }
+handleMoveEvent(dragLayerX,dragLayerY);
 break;
 case MotionEvent.ACTION_MOVE:
 handleMoveEvent(dragLayerX,dragLayerY);

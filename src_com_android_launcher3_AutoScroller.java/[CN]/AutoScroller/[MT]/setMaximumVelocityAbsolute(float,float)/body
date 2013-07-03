@@ -1,0 +1,5 @@
+{
+  mMaxVelocityScale=SCALE_ABSOLUTE;
+  mMaxVelocityX=x / 1000f;
+  mMaxVelocityY=y / 1000f;
+}

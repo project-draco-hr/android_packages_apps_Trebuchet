@@ -1,0 +1,4 @@
+{
+  mActivationEdgeScale=SCALE_RELATIVE;
+  mActivationEdges.set(l,t,r,b);
+}

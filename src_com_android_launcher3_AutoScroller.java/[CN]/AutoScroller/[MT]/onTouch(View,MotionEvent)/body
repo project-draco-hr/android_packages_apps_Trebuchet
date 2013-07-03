@@ -1,0 +1,58 @@
+{
+  final int action=event.getActionMasked();
+switch (action) {
+case MotionEvent.ACTION_DOWN:
+case MotionEvent.ACTION_MOVE:
+    final int sourceWidth=v.getWidth();
+  final int sourceHeight=v.getHeight();
+final float x=event.getX();
+final float y=event.getY();
+final float l;
+final float t;
+final float r;
+final float b;
+final RectF activationEdges=mActivationEdges;
+if (mActivationEdgeScale == SCALE_ABSOLUTE) {
+l=activationEdges.left;
+t=activationEdges.top;
+r=activationEdges.right;
+b=activationEdges.bottom;
+}
+ else {
+l=activationEdges.left * sourceWidth;
+t=activationEdges.top * sourceHeight;
+r=activationEdges.right * sourceWidth;
+b=activationEdges.bottom * sourceHeight;
+}
+final float maxVelX;
+final float maxVelY;
+if (mMaxVelocityScale == SCALE_ABSOLUTE) {
+maxVelX=mMaxVelocityX;
+maxVelY=mMaxVelocityY;
+}
+ else {
+maxVelX=mMaxVelocityX * mTarget.getWidth();
+maxVelY=mMaxVelocityY * mTarget.getHeight();
+}
+final float velocityX=getEdgeVelocity(X,l,r,x,sourceWidth,event);
+final float velocityY=getEdgeVelocity(Y,t,b,y,sourceHeight,event);
+mScroller.setTargetVelocity(velocityX * maxVelX,velocityY * maxVelY);
+if ((velocityX != 0 || velocityY != 0) && !mActive) {
+mActive=true;
+mResetScroller=true;
+if (mSkipDelay) {
+mTarget.postOnAnimation(this);
+}
+ else {
+mSkipDelay=true;
+mTarget.postOnAnimationDelayed(this,mActivationDelay);
+}
+}
+break;
+case MotionEvent.ACTION_UP:
+case MotionEvent.ACTION_CANCEL:
+stop(true);
+break;
+}
+return false;
+}
