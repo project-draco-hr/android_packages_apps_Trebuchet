@@ -1,39 +1,23 @@
 {
   int scrollOffset=mScrollView.getScrollY();
-  int height=getMeasuredHeight();
-  int scrollBandHeight=Math.min((int)(height * sScrollBandMaxFactor),(Math.max(sMinScrollBandHeight,(int)(height * sScrollBandFactor))));
   float[] r=getDragViewVisualCenter(d.x,d.y,d.xOffset,d.yOffset,d.dragView,null);
   r[0]-=getPaddingLeft();
   r[1]-=getPaddingTop();
-  mTargetCell=mContent.findNearestArea((int)r[0],(int)r[1] + scrollOffset,1,1,mTargetCell);
-  if (isLayoutRtl()) {
-    mTargetCell[0]=mContent.getCountX() - mTargetCell[0] - 1;
-  }
-  if (r[1] < scrollBandHeight && mScrollView.getScrollY() > 0) {
-    if (mDragMode != DRAG_MODE_SCROLL_UP) {
-      mDragMode=DRAG_MODE_SCROLL_UP;
-      mDragScrollStart=System.currentTimeMillis();
-      scrollUp();
+  if (!mAutoScroller.onTouch(this,getDragObjectDrawingRect(d.dragView,r))) {
+    mTargetCell=mContent.findNearestArea((int)r[0],(int)r[1] + scrollOffset,1,1,mTargetCell);
+    if (isLayoutRtl()) {
+      mTargetCell[0]=mContent.getCountX() - mTargetCell[0] - 1;
     }
-    mReorderAlarm.cancelAlarm();
-  }
- else   if (r[1] > (getFolderHeight() - scrollBandHeight) && mScrollView.getScrollY() < (mContent.getMeasuredHeight() - mScrollView.getMeasuredHeight())) {
-    if (mDragMode != DRAG_MODE_SCROLL_DOWN) {
-      mDragMode=DRAG_MODE_SCROLL_DOWN;
-      mDragScrollStart=System.currentTimeMillis();
-      scrollDown();
+    if (mTargetCell[0] != mPreviousTargetCell[0] || mTargetCell[1] != mPreviousTargetCell[1]) {
+      mReorderAlarm.cancelAlarm();
+      mReorderAlarm.setOnAlarmListener(mReorderAlarmListener);
+      mReorderAlarm.setAlarm(REORDER_DELAY);
+      mPreviousTargetCell[0]=mTargetCell[0];
+      mPreviousTargetCell[1]=mTargetCell[1];
+      mDragMode=DRAG_MODE_REORDER;
     }
-    mReorderAlarm.cancelAlarm();
-  }
- else   if (mTargetCell[0] != mPreviousTargetCell[0] || mTargetCell[1] != mPreviousTargetCell[1]) {
-    mReorderAlarm.cancelAlarm();
-    mReorderAlarm.setOnAlarmListener(mReorderAlarmListener);
-    mReorderAlarm.setAlarm(REORDER_DELAY);
-    mPreviousTargetCell[0]=mTargetCell[0];
-    mPreviousTargetCell[1]=mTargetCell[1];
-    mDragMode=DRAG_MODE_REORDER;
-  }
  else {
-    mDragMode=DRAG_MODE_NONE;
+      mDragMode=DRAG_MODE_NONE;
+    }
   }
 }

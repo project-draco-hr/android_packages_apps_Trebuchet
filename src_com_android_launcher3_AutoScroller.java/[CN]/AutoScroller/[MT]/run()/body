@@ -1,0 +1,28 @@
+{
+  if (!mActive) {
+    return;
+  }
+  if (mResetScroller) {
+    mResetScroller=false;
+    mScroller.start();
+  }
+  final View target=mTarget;
+  final RampUpScroller scroller=mScroller;
+  final float targetVelocityX=scroller.getTargetVelocityX();
+  final float targetVelocityY=scroller.getTargetVelocityY();
+  if ((targetVelocityY == 0 || !target.canScrollVertically(targetVelocityY > 0 ? 1 : -1) && (targetVelocityX == 0 || !target.canScrollHorizontally(targetVelocityX > 0 ? 1 : -1)))) {
+    stop(false);
+    return;
+  }
+  scroller.computeScrollDelta();
+  final int deltaX=scroller.getDeltaX();
+  final int deltaY=scroller.getDeltaY();
+  if (target instanceof AbsListView) {
+    final AbsListView list=(AbsListView)target;
+    list.smoothScrollBy(deltaY,0);
+  }
+ else {
+    target.scrollBy(deltaX,deltaY);
+  }
+  target.postOnAnimation(this);
+}

@@ -1,7 +1,0 @@
-{
-  if (mDragMode == DRAG_MODE_SCROLL_UP) {
-    mScrollView.setScrollY(mScrollView.getScrollY() - getVelocity());
-    invalidate();
-    post(mScrollUpRunnable);
-  }
-}

@@ -17,4 +17,7 @@
   mFolderName.setOnEditorActionListener(this);
   mFolderName.setSelectAllOnFocus(true);
   mFolderName.setInputType(mFolderName.getInputType() | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS | InputType.TYPE_TEXT_FLAG_CAP_WORDS);
+  mAutoScroller=new AutoScroller(mScrollView);
+  mAutoScroller.setMaximumVelocityAbsolute(MAX_SCROLL_VELOCITY,MAX_SCROLL_VELOCITY);
+  mAutoScroller.setExtendsBeyondEdges(false);
 }

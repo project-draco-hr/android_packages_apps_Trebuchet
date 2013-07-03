@@ -1,0 +1,4 @@
+{
+  MotionEvent event=MotionEvent.obtain(SystemClock.uptimeMillis(),SystemClock.uptimeMillis(),MotionEvent.ACTION_MOVE,r.left,r.top,0);
+  return onTouch(v,event);
+}
