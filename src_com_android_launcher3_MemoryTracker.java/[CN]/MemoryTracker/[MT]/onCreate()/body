@@ -1,3 +1,16 @@
 {
   mAm=(ActivityManager)getSystemService(Context.ACTIVITY_SERVICE);
+  List<ActivityManager.RunningServiceInfo> svcs=mAm.getRunningServices(256);
+  for (  ActivityManager.RunningServiceInfo svc : svcs) {
+    if (svc.service.getPackageName().equals(getPackageName())) {
+      startTrackingProcess(svc.pid,svc.process,System.currentTimeMillis() - (SystemClock.elapsedRealtime() - svc.activeSince));
+    }
+  }
+  List<ActivityManager.RunningAppProcessInfo> procs=mAm.getRunningAppProcesses();
+  for (  ActivityManager.RunningAppProcessInfo proc : procs) {
+    final String pname=proc.processName;
+    if (pname.startsWith(getPackageName())) {
+      startTrackingProcess(proc.pid,pname,System.currentTimeMillis());
+    }
+  }
 }

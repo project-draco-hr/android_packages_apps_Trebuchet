@@ -12,7 +12,7 @@ synchronized (mLock) {
       sb.append(p);
       sb.append(" ");
     }
-    mData.put(pid,new ProcessMemInfo(pid,name));
+    mData.put(pid,new ProcessMemInfo(pid,name,start));
     Log.v(TAG,sb.toString());
   }
 }
