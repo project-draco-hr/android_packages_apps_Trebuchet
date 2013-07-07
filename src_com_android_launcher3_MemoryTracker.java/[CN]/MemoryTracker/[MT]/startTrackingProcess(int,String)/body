@@ -1,16 +1,18 @@
 {
-  final Long lpid=new Long(pid);
-  if (mPids.contains(lpid))   return;
-  mPids.add(lpid);
-  final int N=mPids.size();
-  mPidsArray=new int[N];
-  StringBuffer sb=new StringBuffer("Now tracking processes: ");
-  for (int i=0; i < N; i++) {
-    final int p=mPids.get(i).intValue();
-    mPidsArray[i]=p;
-    sb.append(p);
-    sb.append(" ");
+synchronized (mLock) {
+    final Long lpid=new Long(pid);
+    if (mPids.contains(lpid))     return;
+    mPids.add(lpid);
+    final int N=mPids.size();
+    mPidsArray=new int[N];
+    StringBuffer sb=new StringBuffer("Now tracking processes: ");
+    for (int i=0; i < N; i++) {
+      final int p=mPids.get(i).intValue();
+      mPidsArray[i]=p;
+      sb.append(p);
+      sb.append(" ");
+    }
+    mData.put(pid,new ProcessMemInfo(pid,name));
+    Log.v(TAG,sb.toString());
   }
-  mData.put(pid,new ProcessMemInfo(pid,name));
-  Log.v(TAG,sb.toString());
 }
