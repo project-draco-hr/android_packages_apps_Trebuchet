@@ -1,28 +1,15 @@
 {
-  final boolean isRtl=isLayoutRtl();
   mUnboundedScrollX=x;
-  boolean isXBeforeFirstPage=isRtl ? (x > mMaxScrollX) : (x < 0);
-  boolean isXAfterLastPage=isRtl ? (x < 0) : (x > mMaxScrollX);
-  if (isXBeforeFirstPage) {
+  if (x < 0) {
     super.scrollTo(0,y);
     if (mAllowOverScroll) {
-      if (isRtl) {
-        overScroll(x - mMaxScrollX);
-      }
- else {
-        overScroll(x);
-      }
+      overScroll(x);
     }
   }
- else   if (isXAfterLastPage) {
+ else   if (x > mMaxScrollX) {
     super.scrollTo(mMaxScrollX,y);
     if (mAllowOverScroll) {
-      if (isRtl) {
-        overScroll(x);
-      }
- else {
-        overScroll(x - mMaxScrollX);
-      }
+      overScroll(x - mMaxScrollX);
     }
   }
  else {
@@ -31,4 +18,10 @@
   }
   mTouchX=x;
   mSmoothingTime=System.nanoTime() / NANOTIME_DIV;
+  if (isReordering(true)) {
+    float[] p=mapPointFromParentToView(this,mParentDownMotionX,mParentDownMotionY);
+    mLastMotionX=p[0];
+    mLastMotionY=p[1];
+    updateDragViewTranslationDuringDrag();
+  }
 }

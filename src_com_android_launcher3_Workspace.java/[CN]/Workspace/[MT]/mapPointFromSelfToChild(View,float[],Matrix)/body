@@ -1,13 +1,4 @@
 {
-  if (cachedInverseMatrix == null) {
-    v.getMatrix().invert(mTempInverseMatrix);
-    cachedInverseMatrix=mTempInverseMatrix;
-  }
-  int scrollX=getScrollX();
-  if (mNextPage != INVALID_PAGE) {
-    scrollX=mScroller.getFinalX();
-  }
-  xy[0]=xy[0] + scrollX - v.getLeft();
-  xy[1]=xy[1] + getScrollY() - v.getTop();
-  cachedInverseMatrix.mapPoints(xy);
+  xy[0]=xy[0] - v.getLeft();
+  xy[1]=xy[1] - v.getTop();
 }

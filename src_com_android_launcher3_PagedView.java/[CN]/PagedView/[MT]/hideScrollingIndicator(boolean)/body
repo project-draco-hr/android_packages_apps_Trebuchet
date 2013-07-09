@@ -5,12 +5,12 @@
   if (mScrollIndicator != null) {
     updateScrollingIndicatorPosition();
     cancelScrollingIndicatorAnimations();
-    if (immediately || mScrollingPaused) {
+    if (immediately) {
       mScrollIndicator.setVisibility(View.INVISIBLE);
       mScrollIndicator.setAlpha(0f);
     }
  else {
-      mScrollIndicatorAnimator=LauncherAnimUtils.ofFloat(mScrollIndicator,"alpha",0f);
+      mScrollIndicatorAnimator=ObjectAnimator.ofFloat(mScrollIndicator,"alpha",0f);
       mScrollIndicatorAnimator.setDuration(sScrollIndicatorFadeOutDuration);
       mScrollIndicatorAnimator.addListener(new AnimatorListenerAdapter(){
         private boolean cancelled=false;

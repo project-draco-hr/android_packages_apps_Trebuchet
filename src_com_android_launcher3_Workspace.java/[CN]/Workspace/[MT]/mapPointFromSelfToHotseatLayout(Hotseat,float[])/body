@@ -1,6 +1,9 @@
 {
-  hotseat.getLayout().getMatrix().invert(mTempInverseMatrix);
-  xy[0]=xy[0] - hotseat.getLeft() - hotseat.getLayout().getLeft();
-  xy[1]=xy[1] - hotseat.getTop() - hotseat.getLayout().getTop();
-  mTempInverseMatrix.mapPoints(xy);
+  mTempPt[0]=(int)xy[0];
+  mTempPt[1]=(int)xy[1];
+  mLauncher.getDragLayer().getDescendantCoordRelativeToSelf(this,mTempPt,true);
+  mTempPt[0]-=hotseat.getLeft();
+  mTempPt[1]-=hotseat.getTop();
+  xy[0]=mTempPt[0];
+  xy[1]=mTempPt[1];
 }

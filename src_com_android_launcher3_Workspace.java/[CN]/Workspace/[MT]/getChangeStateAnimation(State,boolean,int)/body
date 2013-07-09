@@ -13,27 +13,18 @@
   final boolean stateIsNormal=(state == State.NORMAL);
   final boolean stateIsSpringLoaded=(state == State.SPRING_LOADED);
   final boolean stateIsSmall=(state == State.SMALL);
-  float finalScaleFactor=1.0f;
   float finalBackgroundAlpha=stateIsSpringLoaded ? 1.0f : 0f;
-  float translationX=0;
-  float translationY=0;
   boolean zoomIn=true;
+  mNewScale=1.0f;
   if (state != State.NORMAL) {
-    finalScaleFactor=mSpringLoadedShrinkFactor - (stateIsSmall ? 0.1f : 0);
-    setPageSpacing(mSpringLoadedPageSpacing);
+    mNewScale=mSpringLoadedShrinkFactor - (stateIsSmall ? 0.1f : 0);
     if (oldStateIsNormal && stateIsSmall) {
       zoomIn=false;
-      setLayoutScale(finalScaleFactor);
       updateChildrenLayersEnabled(false);
     }
  else {
       finalBackgroundAlpha=1.0f;
-      setLayoutScale(finalScaleFactor);
     }
-  }
- else {
-    setPageSpacing(mOriginalPageSpacing);
-    setLayoutScale(1.0f);
   }
   final int duration=zoomIn ? getResources().getInteger(R.integer.config_workspaceUnshrinkTime) : getResources().getInteger(R.integer.config_appsCustomizeWorkspaceShrinkTime);
   for (int i=0; i < getChildCount(); i++) {
@@ -53,44 +44,29 @@
     mOldAlphas[i]=initialAlpha;
     mNewAlphas[i]=finalAlpha;
     if (animated) {
-      mOldTranslationXs[i]=cl.getTranslationX();
-      mOldTranslationYs[i]=cl.getTranslationY();
-      mOldScaleXs[i]=cl.getScaleX();
-      mOldScaleYs[i]=cl.getScaleY();
       mOldBackgroundAlphas[i]=cl.getBackgroundAlpha();
-      mNewTranslationXs[i]=translationX;
-      mNewTranslationYs[i]=translationY;
-      mNewScaleXs[i]=finalScaleFactor;
-      mNewScaleYs[i]=finalScaleFactor;
       mNewBackgroundAlphas[i]=finalBackgroundAlpha;
     }
  else {
-      cl.setTranslationX(translationX);
-      cl.setTranslationY(translationY);
-      cl.setScaleX(finalScaleFactor);
-      cl.setScaleY(finalScaleFactor);
+      setScaleX(mNewScale);
+      setScaleY(mNewScale);
       cl.setBackgroundAlpha(finalBackgroundAlpha);
       cl.setShortcutAndWidgetAlpha(finalAlpha);
     }
   }
   if (animated) {
+    LauncherViewPropertyAnimator scale=new LauncherViewPropertyAnimator(this);
+    scale.scaleX(mNewScale).scaleY(mNewScale).setInterpolator(mZoomInInterpolator);
+    anim.play(scale);
     for (int index=0; index < getChildCount(); index++) {
       final int i=index;
       final CellLayout cl=(CellLayout)getChildAt(i);
       float currentAlpha=cl.getShortcutsAndWidgets().getAlpha();
       if (mOldAlphas[i] == 0 && mNewAlphas[i] == 0) {
-        cl.setTranslationX(mNewTranslationXs[i]);
-        cl.setTranslationY(mNewTranslationYs[i]);
-        cl.setScaleX(mNewScaleXs[i]);
-        cl.setScaleY(mNewScaleYs[i]);
         cl.setBackgroundAlpha(mNewBackgroundAlphas[i]);
         cl.setShortcutAndWidgetAlpha(mNewAlphas[i]);
-        cl.setRotationY(mNewRotationYs[i]);
       }
  else {
-        LauncherViewPropertyAnimator a=new LauncherViewPropertyAnimator(cl);
-        a.translationX(mNewTranslationXs[i]).translationY(mNewTranslationYs[i]).scaleX(mNewScaleXs[i]).scaleY(mNewScaleYs[i]).setDuration(duration).setInterpolator(mZoomInInterpolator);
-        anim.play(a);
         if (mOldAlphas[i] != mNewAlphas[i] || currentAlpha != mNewAlphas[i]) {
           LauncherViewPropertyAnimator alphaAnim=new LauncherViewPropertyAnimator(cl.getShortcutsAndWidgets());
           alphaAnim.alpha(mNewAlphas[i]).setDuration(duration).setInterpolator(mZoomInInterpolator);

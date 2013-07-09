@@ -1,17 +1,8 @@
 {
   final int childCount=getChildCount();
   if (mLastChildCount == childCount)   return;
-  mOldTranslationXs=new float[childCount];
-  mOldTranslationYs=new float[childCount];
-  mOldScaleXs=new float[childCount];
-  mOldScaleYs=new float[childCount];
   mOldBackgroundAlphas=new float[childCount];
   mOldAlphas=new float[childCount];
-  mNewTranslationXs=new float[childCount];
-  mNewTranslationYs=new float[childCount];
-  mNewScaleXs=new float[childCount];
-  mNewScaleYs=new float[childCount];
   mNewBackgroundAlphas=new float[childCount];
   mNewAlphas=new float[childCount];
-  mNewRotationYs=new float[childCount];
 }

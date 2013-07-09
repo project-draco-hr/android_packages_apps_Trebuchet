@@ -1,5 +1,6 @@
 {
   mForceScreenScrolled=true;
+  mRecomputePageSpacing=true;
   invalidate();
   invalidateCachedOffsets();
 }
