@@ -3,7 +3,7 @@
   CellLayout cl=mWorkspaceScreens.get(EXTRA_EMPTY_SCREEN_ID);
   mWorkspaceScreens.remove(EXTRA_EMPTY_SCREEN_ID);
   mScreenOrder.remove(EXTRA_EMPTY_SCREEN_ID);
-  long newId=LauncherAppState.getInstance().getLauncherProvider().generateNewScreenId();
+  long newId=LauncherAppState.getLauncherProvider().generateNewScreenId();
   mWorkspaceScreens.put(newId,cl);
   mScreenOrder.add(newId);
   addExtraEmptyScreen();

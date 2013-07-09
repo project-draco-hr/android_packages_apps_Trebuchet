@@ -1,0 +1,3 @@
+{
+  this(context,null,uri,0,previewSize,rotation);
+}

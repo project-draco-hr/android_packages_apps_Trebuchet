@@ -1,0 +1,32 @@
+{
+  final Intent pickWallpaperIntent=new Intent(Intent.ACTION_SET_WALLPAPER);
+  final PackageManager pm=getPackageManager();
+  final List<ResolveInfo> apps=pm.queryIntentActivities(pickWallpaperIntent,0);
+  SubMenu sub=menu.addSubMenu("Other\u2026");
+  sub.getItem().setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+  Intent pickImageIntent=new Intent(Intent.ACTION_GET_CONTENT);
+  pickImageIntent.setType("image/*");
+  final List<ResolveInfo> imagePickerActivities=pm.queryIntentActivities(pickImageIntent,0);
+  final ComponentName[] imageActivities=new ComponentName[imagePickerActivities.size()];
+  for (int i=0; i < imagePickerActivities.size(); i++) {
+    ActivityInfo activityInfo=imagePickerActivities.get(i).activityInfo;
+    imageActivities[i]=new ComponentName(activityInfo.packageName,activityInfo.name);
+  }
+  outerLoop:   for (  ResolveInfo info : apps) {
+    final ComponentName componentName=new ComponentName(info.activityInfo.packageName,info.activityInfo.name);
+    if (componentName.getPackageName().equals(getPackageName()) || componentName.getPackageName().equals("com.android.launcher")) {
+      continue;
+    }
+    for (    ResolveInfo imagePickerActivityInfo : imagePickerActivities) {
+      if (componentName.getPackageName().equals(imagePickerActivityInfo.activityInfo.packageName)) {
+        continue outerLoop;
+      }
+    }
+    MenuItem mi=sub.add(info.loadLabel(pm));
+    Drawable icon=info.loadIcon(pm);
+    if (icon != null) {
+      mi.setIcon(icon);
+    }
+  }
+  return super.onCreateOptionsMenu(menu);
+}

@@ -1,0 +1,41 @@
+{
+  if (requestCode == IMAGE_PICK && resultCode == RESULT_OK) {
+    Uri uri=data.getData();
+    LinearLayout wallpapers=(LinearLayout)findViewById(R.id.wallpaper_list);
+    FrameLayout pickedImageThumbnail=(FrameLayout)getLayoutInflater().inflate(R.layout.wallpaper_picker_item,wallpapers,false);
+    setWallpaperItemPaddingToZero(pickedImageThumbnail);
+    ImageView image=(ImageView)pickedImageThumbnail.findViewById(R.id.wallpaper_image);
+    Resources res=getResources();
+    int width=res.getDimensionPixelSize(R.dimen.wallpaperThumbnailWidth);
+    int height=res.getDimensionPixelSize(R.dimen.wallpaperThumbnailHeight);
+    BitmapCropTask cropTask=new BitmapCropTask(uri,null,width,height,false,true);
+    Point bounds=cropTask.getImageBounds();
+    RectF cropRect=new RectF();
+    if (bounds.x / (float)bounds.y > width / (float)height) {
+      cropRect.top=0;
+      cropRect.bottom=bounds.y;
+      cropRect.left=(bounds.x - (width / (float)height) * bounds.y) / 2;
+      cropRect.right=bounds.x - cropRect.left;
+    }
+ else {
+      cropRect.left=0;
+      cropRect.right=bounds.x;
+      cropRect.top=(bounds.y - (height / (float)width) * bounds.x) / 2;
+      cropRect.bottom=bounds.y - cropRect.top;
+    }
+    cropTask.setCropBounds(cropRect);
+    if (cropTask.cropBitmap()) {
+      image.setImageBitmap(cropTask.getCroppedBitmap());
+      Drawable thumbDrawable=image.getDrawable();
+      thumbDrawable.setDither(true);
+    }
+ else {
+      Log.e(TAG,"Error loading thumbnail for uri=" + uri);
+    }
+    wallpapers.addView(pickedImageThumbnail,0);
+    ThumbnailMetaData meta=new ThumbnailMetaData();
+    meta.mGalleryImageUri=uri;
+    pickedImageThumbnail.setTag(meta);
+    mThumbnailOnClickListener.onClick(pickedImageThumbnail);
+  }
+}

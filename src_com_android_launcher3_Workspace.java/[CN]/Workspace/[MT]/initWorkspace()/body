@@ -20,7 +20,6 @@
   mWallpaperOffset=new WallpaperOffsetInterpolator();
   Display display=mLauncher.getWindowManager().getDefaultDisplay();
   display.getSize(mDisplaySize);
-  mWallpaperTravelWidth=(int)(mDisplaySize.x * wallpaperTravelToScreenWidthRatio(mDisplaySize.x,mDisplaySize.y));
   mMaxDistanceForFolderCreation=(0.55f * grid.iconSizePx);
   mFlingThresholdVelocity=(int)(FLING_THRESHOLD_VELOCITY * mDensity);
 }

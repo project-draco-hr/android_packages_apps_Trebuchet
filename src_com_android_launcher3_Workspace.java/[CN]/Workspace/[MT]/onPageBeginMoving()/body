@@ -13,7 +13,6 @@
   }
   if (LauncherAppState.getInstance().isScreenLarge()) {
     showOutlines();
-    mIsStaticWallpaper=mWallpaperManager.getWallpaperInfo() == null;
   }
   if (!mWorkspaceFadeInAdjacentScreens) {
     for (int i=0; i < getChildCount(); ++i) {

@@ -6,7 +6,7 @@
   if (sContext.getResources().getBoolean(R.bool.debug_memory_enabled)) {
     MemoryTracker.startTrackingMe(sContext,"L");
   }
-  mIsScreenLarge=sContext.getResources().getBoolean(R.bool.is_large_tablet);
+  mIsScreenLarge=isScreenLarge(sContext.getResources());
   mScreenDensity=sContext.getResources().getDisplayMetrics().density;
   mWidgetPreviewCacheDb=new WidgetPreviewLoader.CacheDb(sContext);
   mIconCache=new IconCache(sContext);

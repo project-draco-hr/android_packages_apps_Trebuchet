@@ -1,0 +1,6 @@
+Context context
+String path
+Uri uri
+int resId
+int previewSize
+int rotation

@@ -1,0 +1,21 @@
+{
+  View view;
+  if (convertView == null) {
+    view=mLayoutInflater.inflate(R.layout.wallpaper_picker_item,parent,false);
+  }
+ else {
+    view=convertView;
+  }
+  setWallpaperItemPaddingToZero((FrameLayout)view);
+  ImageView image=(ImageView)view.findViewById(R.id.wallpaper_image);
+  int thumbRes=mThumbs.get(position);
+  image.setImageResource(thumbRes);
+  Drawable thumbDrawable=image.getDrawable();
+  if (thumbDrawable != null) {
+    thumbDrawable.setDither(true);
+  }
+ else {
+    Log.e(TAG,"Error decoding thumbnail resId=" + thumbRes + " for wallpaper #"+ position);
+  }
+  return view;
+}

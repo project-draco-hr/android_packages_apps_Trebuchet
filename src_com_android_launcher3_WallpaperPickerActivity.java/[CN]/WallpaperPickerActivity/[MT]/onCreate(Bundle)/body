@@ -1,0 +1,60 @@
+{
+  super.onCreate(savedInstanceState);
+  setContentView(R.layout.wallpaper_picker);
+  mCropView=(CropView)findViewById(R.id.cropView);
+  findWallpapers();
+  LinearLayout wallpapers=(LinearLayout)findViewById(R.id.wallpaper_list);
+  ImageAdapter ia=new ImageAdapter(this);
+  for (int i=0; i < ia.getCount(); i++) {
+    FrameLayout thumbnail=(FrameLayout)ia.getView(i,null,wallpapers);
+    wallpapers.addView(thumbnail,i);
+    ThumbnailMetaData meta=new ThumbnailMetaData();
+    meta.mWallpaperResId=mImages.get(i);
+    thumbnail.setTag(meta);
+    thumbnail.setOnClickListener(mThumbnailOnClickListener);
+    if (i == 0) {
+      mThumbnailOnClickListener.onClick(thumbnail);
+    }
+  }
+  FrameLayout galleryThumbnail=(FrameLayout)getLayoutInflater().inflate(R.layout.wallpaper_picker_gallery_item,wallpapers,false);
+  setWallpaperItemPaddingToZero(galleryThumbnail);
+  TextView galleryLabel=(TextView)galleryThumbnail.findViewById(R.id.wallpaper_item_label);
+  galleryLabel.setText(R.string.gallery);
+  wallpapers.addView(galleryThumbnail,0);
+  ThumbnailMetaData meta=new ThumbnailMetaData();
+  meta.mLaunchesGallery=true;
+  galleryThumbnail.setTag(meta);
+  galleryThumbnail.setOnClickListener(mThumbnailOnClickListener);
+  final ActionBar actionBar=getActionBar();
+  actionBar.setCustomView(R.layout.actionbar_set_wallpaper);
+  actionBar.getCustomView().setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      ThumbnailMetaData meta=(ThumbnailMetaData)mSelectedThumb.getTag();
+      if (meta.mLaunchesGallery) {
+      }
+ else       if (meta.mGalleryImageUri != null) {
+        BitmapCropTask cropTask=new BitmapCropTask(meta.mGalleryImageUri,mCropView.getCrop(),mCropView.getWidth(),mCropView.getHeight(),true,false);
+        cropTask.execute();
+      }
+ else       if (meta.mWallpaperResId != 0) {
+        try {
+          WallpaperManager wm=WallpaperManager.getInstance(getApplicationContext());
+          wm.setResource(meta.mWallpaperResId);
+          updateWallpaperDimensions(0,0);
+          String spKey=LauncherAppState.getSharedPreferencesKey();
+          SharedPreferences sp=getSharedPreferences(spKey,Context.MODE_PRIVATE);
+          SharedPreferences.Editor editor=sp.edit();
+          editor.remove(WALLPAPER_WIDTH_KEY);
+          editor.remove(WALLPAPER_HEIGHT_KEY);
+          editor.commit();
+          setResult(Activity.RESULT_OK);
+          finish();
+        }
+ catch (        IOException e) {
+          Log.e(TAG,"Failed to set wallpaper: " + e);
+        }
+      }
+    }
+  }
+);
+}

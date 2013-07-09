@@ -1,0 +1,8 @@
+{
+synchronized (mLock) {
+    if (source != null) {
+      mMinScale=Math.max(w / (float)source.getImageWidth(),h / (float)source.getImageHeight());
+      mRenderer.scale=Math.max(mMinScale,mRenderer.scale);
+    }
+  }
+}
