@@ -1,0 +1,11 @@
+{
+  PackageInfo pi=null;
+  try {
+    PackageManager pm=context.getPackageManager();
+    pi=pm.getPackageInfo(packageName,0);
+  }
+ catch (  NameNotFoundException e) {
+    Log.d("ShortcutInfo","PackageManager.getPackageInfo failed for " + packageName);
+  }
+  return pi;
+}

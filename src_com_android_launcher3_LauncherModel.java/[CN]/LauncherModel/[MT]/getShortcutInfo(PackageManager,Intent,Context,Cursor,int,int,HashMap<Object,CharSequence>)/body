@@ -10,6 +10,7 @@
     if (!pi.applicationInfo.enabled) {
       return null;
     }
+    info.initFlagsAndFirstInstallTime(pi);
   }
  catch (  NameNotFoundException e) {
     Log.d(TAG,"getPackInfo failed for package " + componentName.getPackageName());

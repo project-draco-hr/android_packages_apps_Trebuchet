@@ -22,7 +22,7 @@
     mRestoring=false;
     mOnResumeNeedsLoad=false;
   }
-  if (mOnResumeCallbacks.size() > 0) {
+  if (mBindOnResumeCallbacks.size() > 0) {
     long startTimeCallbacks=0;
     if (DEBUG_RESUME_TIME) {
       startTimeCallbacks=System.currentTimeMillis();
@@ -30,13 +30,13 @@
     if (mAppsCustomizeContent != null) {
       mAppsCustomizeContent.setBulkBind(true);
     }
-    for (int i=0; i < mOnResumeCallbacks.size(); i++) {
-      mOnResumeCallbacks.get(i).run();
+    for (int i=0; i < mBindOnResumeCallbacks.size(); i++) {
+      mBindOnResumeCallbacks.get(i).run();
     }
     if (mAppsCustomizeContent != null) {
       mAppsCustomizeContent.setBulkBind(false);
     }
-    mOnResumeCallbacks.clear();
+    mBindOnResumeCallbacks.clear();
     if (DEBUG_RESUME_TIME) {
       Log.d(TAG,"Time spent processing callbacks in onResume: " + (System.currentTimeMillis() - startTimeCallbacks));
     }

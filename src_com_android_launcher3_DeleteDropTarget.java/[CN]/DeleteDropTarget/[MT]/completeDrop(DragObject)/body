@@ -1,7 +1,18 @@
 {
   ItemInfo item=(ItemInfo)d.dragInfo;
+  boolean wasWaitingForUninstall=mWaitingForUninstall;
+  mWaitingForUninstall=false;
   if (isAllAppsApplication(d.dragSource,item)) {
-    mLauncher.startApplicationUninstallActivity((ApplicationInfo)item);
+    ApplicationInfo appInfo=(ApplicationInfo)item;
+    mLauncher.startApplicationUninstallActivity(appInfo.componentName,appInfo.flags);
+  }
+ else   if (AppsCustomizePagedView.DISABLE_ALL_APPS && isWorkspaceOrFolderApplication(d)) {
+    ShortcutInfo shortcut=(ShortcutInfo)item;
+    if (shortcut.intent != null && shortcut.intent.getComponent() != null) {
+      ComponentName componentName=shortcut.intent.getComponent();
+      int flags=ApplicationInfo.initFlags(ShortcutInfo.getPackageInfo(getContext(),componentName.getPackageName()));
+      mWaitingForUninstall=mLauncher.startApplicationUninstallActivity(componentName,flags);
+    }
   }
  else   if (isWorkspaceOrFolderApplication(d)) {
     LauncherModel.deleteItemFromDatabase(mLauncher,item);
@@ -24,5 +35,35 @@
       }
 .start();
     }
+  }
+  if (wasWaitingForUninstall && !mWaitingForUninstall) {
+    if (d.dragSource instanceof Folder) {
+      ((Folder)d.dragSource).onUninstallActivityReturned(false);
+    }
+ else     if (d.dragSource instanceof Workspace) {
+      ((Workspace)d.dragSource).onUninstallActivityReturned(false);
+    }
+  }
+  if (mWaitingForUninstall) {
+    final Runnable checkIfUninstallWasSuccess=new Runnable(){
+      @Override public void run(){
+        mWaitingForUninstall=false;
+        ShortcutInfo shortcut=(ShortcutInfo)d.dragInfo;
+        if (shortcut.intent != null && shortcut.intent.getComponent() != null) {
+          String packageName=shortcut.intent.getComponent().getPackageName();
+          List<ResolveInfo> activities=AllAppsList.findActivitiesForPackage(getContext(),packageName);
+          boolean uninstallSuccessful=activities.size() == 0;
+          mLauncher.removeOnResumeCallback(this);
+          if (d.dragSource instanceof Folder) {
+            ((Folder)d.dragSource).onUninstallActivityReturned(uninstallSuccessful);
+          }
+ else           if (d.dragSource instanceof Workspace) {
+            ((Workspace)d.dragSource).onUninstallActivityReturned(uninstallSuccessful);
+          }
+        }
+      }
+    }
+;
+    mLauncher.addOnResumeCallback(checkIfUninstallWasSuccess);
   }
 }

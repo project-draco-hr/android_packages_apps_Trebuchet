@@ -1,0 +1,3 @@
+{
+  mBindOnResumeCallbacks.add(run);
+}

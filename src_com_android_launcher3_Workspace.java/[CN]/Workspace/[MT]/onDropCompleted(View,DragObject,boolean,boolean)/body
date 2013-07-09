@@ -1,11 +1,20 @@
 {
-  if (success) {
-    if (target != this) {
-      if (mDragInfo != null) {
-        getParentCellLayoutForView(mDragInfo.cell).removeView(mDragInfo.cell);
-        if (mDragInfo.cell instanceof DropTarget) {
-          mDragController.removeDropTarget((DropTarget)mDragInfo.cell);
-        }
+  if (mDeferDropAfterUninstall) {
+    mDeferredAction=new Runnable(){
+      public void run(){
+        onDropCompleted(target,d,isFlingToDelete,success);
+        mDeferredAction=null;
+      }
+    }
+;
+    return;
+  }
+  boolean beingCalledAfterUninstall=mDeferredAction != null;
+  if (success && !(beingCalledAfterUninstall && !mUninstallSuccessful)) {
+    if (target != this && mDragInfo != null) {
+      getParentCellLayoutForView(mDragInfo.cell).removeView(mDragInfo.cell);
+      if (mDragInfo.cell instanceof DropTarget) {
+        mDragController.removeDropTarget((DropTarget)mDragInfo.cell);
       }
       stripEmptyScreens();
     }
@@ -20,7 +29,7 @@
     }
     cellLayout.onDropChild(mDragInfo.cell);
   }
-  if (d.cancelled && mDragInfo.cell != null) {
+  if ((d.cancelled || (beingCalledAfterUninstall && !mUninstallSuccessful)) && mDragInfo.cell != null) {
     mDragInfo.cell.setVisibility(VISIBLE);
   }
   mDragOutline=null;

@@ -9,4 +9,5 @@
   }
   mIcon=info.mIcon;
   customIcon=info.customIcon;
+  initFlagsAndFirstInstallTime(getPackageInfo(context,intent.getComponent().getPackageName()));
 }

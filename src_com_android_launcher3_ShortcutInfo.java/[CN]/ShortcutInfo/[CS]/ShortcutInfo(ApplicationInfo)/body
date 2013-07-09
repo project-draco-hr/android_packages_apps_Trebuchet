@@ -3,4 +3,6 @@
   title=info.title.toString();
   intent=new Intent(info.intent);
   customIcon=false;
+  flags=info.flags;
+  firstInstallTime=info.firstInstallTime;
 }

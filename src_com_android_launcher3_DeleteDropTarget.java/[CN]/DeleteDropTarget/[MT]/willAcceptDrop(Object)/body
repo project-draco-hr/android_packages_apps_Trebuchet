@@ -4,6 +4,10 @@
     if (item.itemType == LauncherSettings.Favorites.ITEM_TYPE_APPWIDGET || item.itemType == LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT) {
       return true;
     }
+    if (AppsCustomizePagedView.DISABLE_ALL_APPS && item.itemType == LauncherSettings.Favorites.ITEM_TYPE_APPLICATION && item instanceof ShortcutInfo) {
+      ShortcutInfo shortcutInfo=(ShortcutInfo)info;
+      return (shortcutInfo.flags & ApplicationInfo.DOWNLOADED_FLAG) != 0;
+    }
   }
   return false;
 }

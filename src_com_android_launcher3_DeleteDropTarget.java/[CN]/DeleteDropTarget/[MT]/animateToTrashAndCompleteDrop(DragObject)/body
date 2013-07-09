@@ -1,15 +1,16 @@
 {
-  DragLayer dragLayer=mLauncher.getDragLayer();
-  Rect from=new Rect();
+  final DragLayer dragLayer=mLauncher.getDragLayer();
+  final Rect from=new Rect();
   dragLayer.getViewRectRelativeToSelf(d.dragView,from);
-  Rect to=getIconRect(d.dragView.getMeasuredWidth(),d.dragView.getMeasuredHeight(),mCurrentDrawable.getIntrinsicWidth(),mCurrentDrawable.getIntrinsicHeight());
-  float scale=(float)to.width() / from.width();
+  final Rect to=getIconRect(d.dragView.getMeasuredWidth(),d.dragView.getMeasuredHeight(),mCurrentDrawable.getIntrinsicWidth(),mCurrentDrawable.getIntrinsicHeight());
+  final float scale=(float)to.width() / from.width();
   mSearchDropTargetBar.deferOnDragEnd();
+  deferCompleteDropIfUninstalling(d);
   Runnable onAnimationEndRunnable=new Runnable(){
     @Override public void run(){
+      completeDrop(d);
       mSearchDropTargetBar.onDragEnd();
       mLauncher.exitSpringLoadedDragMode();
-      completeDrop(d);
     }
   }
 ;

@@ -11,7 +11,7 @@
   }
   final ShortcutInfo info=mModel.getShortcutInfo(getPackageManager(),data,this);
   if (info != null) {
-    info.setActivity(data.getComponent(),Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
+    info.setActivity(this,data.getComponent(),Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
     info.container=ItemInfo.NO_ID;
     mWorkspace.addApplicationShortcut(info,layout,container,screenId,cellXY[0],cellXY[1],isWorkspaceLocked(),cellX,cellY);
   }

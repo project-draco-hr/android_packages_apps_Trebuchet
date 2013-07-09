@@ -1,5 +1,17 @@
 {
-  if (success) {
+  if (mDeferDropAfterUninstall) {
+    mDeferredAction=new Runnable(){
+      public void run(){
+        onDropCompleted(target,d,isFlingToDelete,success);
+        mDeferredAction=null;
+      }
+    }
+;
+    return;
+  }
+  boolean beingCalledAfterUninstall=mDeferredAction != null;
+  boolean successfulDrop=success && (!beingCalledAfterUninstall || mUninstallSuccessful);
+  if (successfulDrop) {
     if (mDeleteFolderOnDropCompleted && !mItemAddedBackToSelfViaIcon) {
       replaceFolderWithFinalItem();
     }
@@ -11,7 +23,7 @@
   if (target != this) {
     if (mOnExitAlarm.alarmPending()) {
       mOnExitAlarm.cancelAlarm();
-      if (!success) {
+      if (successfulDrop) {
         mSuppressFolderDeletion=true;
       }
       completeDragExit();
