@@ -7,5 +7,8 @@
       setCurrentPage(mDefaultPage);
     }
   }
-  getChildAt(mDefaultPage).requestFocus();
+  View child=getChildAt(mDefaultPage);
+  if (child != null) {
+    child.requestFocus();
+  }
 }

@@ -1,0 +1,29 @@
+{
+  HashSet<ItemInfo> filtered=new HashSet<ItemInfo>();
+  for (  ItemInfo i : infos) {
+    if (i instanceof ShortcutInfo) {
+      ShortcutInfo info=(ShortcutInfo)i;
+      ComponentName cn=info.intent.getComponent();
+      if (cn != null && f.filterItem(null,info,cn)) {
+        filtered.add(info);
+      }
+    }
+ else     if (i instanceof FolderInfo) {
+      FolderInfo info=(FolderInfo)i;
+      for (      ShortcutInfo s : info.contents) {
+        ComponentName cn=s.intent.getComponent();
+        if (cn != null && f.filterItem(info,s,cn)) {
+          filtered.add(s);
+        }
+      }
+    }
+ else     if (i instanceof LauncherAppWidgetInfo) {
+      LauncherAppWidgetInfo info=(LauncherAppWidgetInfo)i;
+      ComponentName cn=info.providerName;
+      if (cn != null && f.filterItem(null,info,cn)) {
+        filtered.add(info);
+      }
+    }
+  }
+  return new ArrayList<ItemInfo>(filtered);
+}

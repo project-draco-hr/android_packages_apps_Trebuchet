@@ -1,0 +1,10 @@
+{
+  HashSet<ItemInfo> infos=new HashSet<ItemInfo>();
+  ItemInfoFilter filter=new ItemInfoFilter(){
+    @Override public boolean filterItem(    ItemInfo parent,    ItemInfo info,    ComponentName cn){
+      return cn.equals(cname);
+    }
+  }
+;
+  return filterItemInfos(sBgItemsIdMap.values(),filter);
+}

@@ -1,22 +1,6 @@
 {
-  Runnable setAllAppsRunnable=new Runnable(){
-    public void run(){
-      if (mAppsCustomizeContent != null) {
-        mAppsCustomizeContent.setApps(apps);
-        if (mIntentsOnWorkspaceFromUpgradePath != null) {
-          getHotseat().addAllAppsFolder(mIconCache,apps,mIntentsOnWorkspaceFromUpgradePath,Launcher.this);
-          mIntentsOnWorkspaceFromUpgradePath=null;
-        }
-      }
-    }
-  }
-;
-  View progressBar=mAppsCustomizeTabHost.findViewById(R.id.apps_customize_progress_bar);
-  if (progressBar != null) {
-    ((ViewGroup)progressBar.getParent()).removeView(progressBar);
-    mAppsCustomizeTabHost.post(setAllAppsRunnable);
-  }
- else {
-    setAllAppsRunnable.run();
+  if (mIntentsOnWorkspaceFromUpgradePath != null) {
+    getHotseat().addAllAppsFolder(mIconCache,apps,mIntentsOnWorkspaceFromUpgradePath,Launcher.this);
+    mIntentsOnWorkspaceFromUpgradePath=null;
   }
 }

@@ -10,7 +10,4 @@
   if (mWorkspace != null) {
     mWorkspace.updateShortcuts(apps);
   }
-  if (mAppsCustomizeContent != null) {
-    mAppsCustomizeContent.updateApps(apps);
-  }
 }

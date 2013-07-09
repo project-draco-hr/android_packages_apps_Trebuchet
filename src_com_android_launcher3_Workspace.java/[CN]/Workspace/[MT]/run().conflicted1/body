@@ -11,11 +11,6 @@ synchronized (newApps) {
           if (componentNames.contains(intent.getComponent())) {
             iter.remove();
           }
-          ArrayList<ItemInfo> shortcuts;
-          shortcuts=LauncherModel.getWorkspaceShortcutItemInfosWithIntent(intent);
-          for (          ItemInfo info : shortcuts) {
-            LauncherModel.deleteItemFromDatabase(context,info);
-          }
         }
  catch (        URISyntaxException e) {
         }

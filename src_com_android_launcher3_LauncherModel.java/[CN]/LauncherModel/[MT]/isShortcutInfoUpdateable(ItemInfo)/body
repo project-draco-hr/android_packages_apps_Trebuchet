@@ -1,0 +1,11 @@
+{
+  if (i instanceof ShortcutInfo) {
+    ShortcutInfo info=(ShortcutInfo)i;
+    Intent intent=info.intent;
+    ComponentName name=intent.getComponent();
+    if (info.itemType == LauncherSettings.Favorites.ITEM_TYPE_APPLICATION && Intent.ACTION_MAIN.equals(intent.getAction()) && name != null) {
+      return true;
+    }
+  }
+  return false;
+}

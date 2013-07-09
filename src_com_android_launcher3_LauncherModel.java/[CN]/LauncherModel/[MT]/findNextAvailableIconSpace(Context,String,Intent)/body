@@ -3,9 +3,10 @@
   LauncherModel model=app.getModel();
   boolean found=false;
 synchronized (app) {
-    model.flushWorkerThread();
+    if (sWorkerThread.getThreadId() != Process.myTid()) {
+      model.flushWorkerThread();
+    }
     final ArrayList<ItemInfo> items=LauncherModel.getItemsInLocalCoordinates(context);
-    final boolean shortcutExists=LauncherModel.shortcutExists(context,name,launchIntent);
     for (int screen=0; screen < sBgWorkspaceScreens.size() && !found; screen++) {
       int[] tmpCoordinates=new int[2];
       if (findNextAvailableIconSpaceInScreen(items,tmpCoordinates,sBgWorkspaceScreens.get(screen))) {

@@ -5,20 +5,18 @@
     for (int j=0; j < childCount; j++) {
       final View view=layout.getChildAt(j);
       Object tag=view.getTag();
-      if (tag instanceof ShortcutInfo) {
+      if (LauncherModel.isShortcutInfoUpdateable((ItemInfo)tag)) {
         ShortcutInfo info=(ShortcutInfo)tag;
         final Intent intent=info.intent;
         final ComponentName name=intent.getComponent();
-        if (info.itemType == LauncherSettings.Favorites.ITEM_TYPE_APPLICATION && Intent.ACTION_MAIN.equals(intent.getAction()) && name != null) {
-          final int appCount=apps.size();
-          for (int k=0; k < appCount; k++) {
-            ApplicationInfo app=apps.get(k);
-            if (app.componentName.equals(name)) {
-              BubbleTextView shortcut=(BubbleTextView)view;
-              info.updateIcon(mIconCache);
-              info.title=app.title.toString();
-              shortcut.applyFromShortcutInfo(info,mIconCache);
-            }
+        final int appCount=apps.size();
+        for (int k=0; k < appCount; k++) {
+          ApplicationInfo app=apps.get(k);
+          if (app.componentName.equals(name)) {
+            BubbleTextView shortcut=(BubbleTextView)view;
+            info.updateIcon(mIconCache);
+            info.title=app.title.toString();
+            shortcut.applyFromShortcutInfo(info,mIconCache);
           }
         }
       }

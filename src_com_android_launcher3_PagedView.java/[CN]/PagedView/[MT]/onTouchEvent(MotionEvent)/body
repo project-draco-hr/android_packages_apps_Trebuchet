@@ -211,6 +211,5 @@ case MotionEvent.ACTION_POINTER_UP:
 onSecondaryPointerUp(ev);
 break;
 }
-System.out.println("onTouch, return true");
 return true;
 }
