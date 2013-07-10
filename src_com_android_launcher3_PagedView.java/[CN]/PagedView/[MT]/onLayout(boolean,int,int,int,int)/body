@@ -7,9 +7,13 @@
   int offsetX=getViewportOffsetX();
   int offsetY=getViewportOffsetY();
   mViewport.offset(offsetX,offsetY);
+  final boolean isRtl=isLayoutRtl();
+  final int startIndex=isRtl ? childCount - 1 : 0;
+  final int endIndex=isRtl ? -1 : childCount;
+  final int delta=isRtl ? -1 : 1;
   int verticalPadding=getPaddingTop() + getPaddingBottom();
-  int childLeft=offsetX + getRelativeChildOffset(0);
-  for (int i=0; i < childCount; i++) {
+  int childLeft=offsetX + getRelativeChildOffset(startIndex);
+  for (int i=startIndex; i != endIndex; i+=delta) {
     final View child=getPageAt(i);
     int childTop=offsetY + getPaddingTop();
     if (mCenterPagesVertically) {

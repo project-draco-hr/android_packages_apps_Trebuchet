@@ -1,4 +1,5 @@
 {
+  final boolean isRtl=isLayoutRtl();
   if (!isScrollingIndicatorEnabled())   return;
   if (mScrollIndicator == null)   return;
   int numPages=getChildCount();
@@ -7,7 +8,11 @@
   int maxScrollX=getChildOffset(lastChildIndex) - getRelativeChildOffset(lastChildIndex);
   int trackWidth=pageWidth - mScrollIndicatorPaddingLeft - mScrollIndicatorPaddingRight;
   int indicatorWidth=mScrollIndicator.getMeasuredWidth() - mScrollIndicator.getPaddingLeft() - mScrollIndicator.getPaddingRight();
-  float offset=Math.max(0f,Math.min(1f,(float)getScrollX() / maxScrollX));
+  float scrollPos=isRtl ? mMaxScrollX - getScrollX() : getScrollX();
+  float offset=Math.max(0f,Math.min(1f,(float)scrollPos / mMaxScrollX));
+  if (isRtl) {
+    offset=1f - offset;
+  }
   int indicatorSpace=trackWidth / numPages;
   int indicatorPos=(int)(offset * (trackWidth - indicatorSpace)) + mScrollIndicatorPaddingLeft;
   if (hasElasticScrollIndicator()) {

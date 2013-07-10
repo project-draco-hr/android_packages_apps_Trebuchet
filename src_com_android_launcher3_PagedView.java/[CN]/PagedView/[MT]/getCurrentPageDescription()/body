@@ -1,0 +1,3 @@
+{
+  return String.format(getContext().getString(R.string.default_scroll_format),getNextPage() + 1,getChildCount());
+}

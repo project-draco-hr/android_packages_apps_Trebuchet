@@ -1,3 +1,6 @@
 {
+  if (isLayoutRtl()) {
+    return (x > (getViewportOffsetX() + getViewportWidth() - getRelativeChildOffset(mCurrentPage) + mPageSpacing));
+  }
   return (x < getViewportOffsetX() + getRelativeChildOffset(mCurrentPage) - mPageSpacing);
 }

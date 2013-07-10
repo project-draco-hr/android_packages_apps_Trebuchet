@@ -1,15 +1,28 @@
 {
+  final boolean isRtl=isLayoutRtl();
   mUnboundedScrollX=x;
-  if (x < 0) {
+  boolean isXBeforeFirstPage=isRtl ? (x > mMaxScrollX) : (x < 0);
+  boolean isXAfterLastPage=isRtl ? (x < 0) : (x > mMaxScrollX);
+  if (isXBeforeFirstPage) {
     super.scrollTo(0,y);
     if (mAllowOverScroll) {
-      overScroll(x);
+      if (isRtl) {
+        overScroll(x - mMaxScrollX);
+      }
+ else {
+        overScroll(x);
+      }
     }
   }
- else   if (x > mMaxScrollX) {
+ else   if (isXAfterLastPage) {
     super.scrollTo(mMaxScrollX,y);
     if (mAllowOverScroll) {
-      overScroll(x - mMaxScrollX);
+      if (isRtl) {
+        overScroll(x);
+      }
+ else {
+        overScroll(x - mMaxScrollX);
+      }
     }
   }
  else {
