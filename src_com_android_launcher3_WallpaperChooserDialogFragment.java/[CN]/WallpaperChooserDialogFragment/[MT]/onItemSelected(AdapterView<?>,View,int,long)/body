@@ -1,6 +1,0 @@
-{
-  if (mLoader != null && mLoader.getStatus() != WallpaperLoader.Status.FINISHED) {
-    mLoader.cancel();
-  }
-  mLoader=(WallpaperLoader)new WallpaperLoader().execute(position);
-}

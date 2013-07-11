@@ -1,3 +1,0 @@
-{
-  outState.putBoolean(EMBEDDED_KEY,mEmbedded);
-}

@@ -1,5 +1,0 @@
-{
-  mOptions=new BitmapFactory.Options();
-  mOptions.inDither=false;
-  mOptions.inPreferredConfig=Bitmap.Config.ARGB_8888;
-}
