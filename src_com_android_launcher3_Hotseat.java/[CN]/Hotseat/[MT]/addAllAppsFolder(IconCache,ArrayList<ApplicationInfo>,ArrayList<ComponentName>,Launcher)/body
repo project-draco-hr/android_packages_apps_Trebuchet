@@ -15,7 +15,7 @@
   for (  ApplicationInfo info : allApps) {
     ComponentName cn=info.intent.getComponent();
     if (!onWorkspace.contains(cn)) {
-      System.out.println("Adding to all apps: " + info.intent);
+      Log.d(TAG,"Adding to all apps: " + info.intent);
       ShortcutInfo si=info.makeShortcut();
       fi.add(si);
     }

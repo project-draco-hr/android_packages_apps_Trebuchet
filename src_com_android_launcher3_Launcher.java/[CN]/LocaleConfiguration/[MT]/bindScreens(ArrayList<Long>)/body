@@ -1,7 +1,4 @@
 {
-  int count=orderedScreenIds.size();
-  for (int i=0; i < count; i++) {
-    mWorkspace.insertNewWorkspaceScreenOnBind(orderedScreenIds.get(i));
-  }
+  bindAddScreens(orderedScreenIds);
   mWorkspace.addExtraEmptyScreen();
 }

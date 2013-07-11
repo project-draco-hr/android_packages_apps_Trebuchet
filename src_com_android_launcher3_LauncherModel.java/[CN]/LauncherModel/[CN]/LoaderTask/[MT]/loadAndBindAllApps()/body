@@ -3,7 +3,7 @@
     Log.d(TAG,"loadAndBindAllApps mAllAppsLoaded=" + mAllAppsLoaded);
   }
   if (!mAllAppsLoaded) {
-    loadAllAppsByBatch();
+    loadAllApps();
 synchronized (LoaderTask.this) {
       if (mStopped) {
         return;

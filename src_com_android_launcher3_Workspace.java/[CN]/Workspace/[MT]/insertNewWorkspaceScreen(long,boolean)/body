@@ -1,11 +1,3 @@
 {
-  CellLayout newScreen=(CellLayout)mLauncher.getLayoutInflater().inflate(R.layout.workspace_screen,null);
-  newScreen.setOnLongClickListener(mLongClickListener);
-  mWorkspaceScreens.put(screenId,newScreen);
-  mScreenOrder.add(screenId);
-  addView(newScreen,getChildCount());
-  if (updateDb) {
-    mLauncher.getModel().updateWorkspaceScreenOrder(mLauncher,mScreenOrder);
-  }
-  return screenId;
+  return insertNewWorkspaceScreen(screenId,getChildCount(),updateDb);
 }

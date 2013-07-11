@@ -8,7 +8,7 @@
       @Override public void run(){
         Callbacks callbacks=tryGetCallbacks(oldCallbacks);
         if (callbacks != null) {
-          callbacks.bindItems(workspaceItems,start,start + chunkSize);
+          callbacks.bindItems(workspaceItems,start,start + chunkSize,false);
         }
       }
     }

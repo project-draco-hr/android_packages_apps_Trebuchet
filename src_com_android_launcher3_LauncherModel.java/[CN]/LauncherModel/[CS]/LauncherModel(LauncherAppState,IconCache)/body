@@ -6,8 +6,6 @@
   mIconCache=iconCache;
   mDefaultIcon=Utilities.createIconBitmap(mIconCache.getFullResDefaultActivityIcon(),context);
   final Resources res=context.getResources();
-  mAllAppsLoadDelay=res.getInteger(R.integer.config_allAppsBatchLoadDelay);
-  mBatchSize=res.getInteger(R.integer.config_allAppsBatchSize);
   Configuration config=res.getConfiguration();
   mPreviousConfigMcc=config.mcc;
 }

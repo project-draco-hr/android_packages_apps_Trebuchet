@@ -1,0 +1,7 @@
+{
+  int insertIndex=mScreenOrder.indexOf(EXTRA_EMPTY_SCREEN_ID);
+  if (insertIndex < 0) {
+    insertIndex=mScreenOrder.size();
+  }
+  return insertNewWorkspaceScreen(screenId,insertIndex,updateDb);
+}

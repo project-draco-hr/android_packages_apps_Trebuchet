@@ -1,20 +1,17 @@
 {
   if (waitUntilResume(new Runnable(){
     public void run(){
-      bindComponentsRemoved(packageNames,appInfos,matchPackageNamesOnly);
+      bindComponentsRemoved(packageNames,appInfos,packageRemoved);
     }
   }
 )) {
     return;
   }
-  if (matchPackageNamesOnly) {
+  if (packageRemoved) {
     mWorkspace.removeItemsByPackageName(packageNames);
   }
  else {
     mWorkspace.removeItemsByApplicationInfo(appInfos);
-  }
-  if (mAppsCustomizeContent != null) {
-    mAppsCustomizeContent.removeApps(appInfos);
   }
   mDragController.onAppsRemoved(appInfos,this);
 }

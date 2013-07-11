@@ -17,4 +17,7 @@
     removeView(cl);
   }
   setCurrentPage(mCurrentPage - pageShift);
+  if (!removeScreens.isEmpty()) {
+    mLauncher.getModel().updateWorkspaceScreenOrder(mLauncher,mScreenOrder);
+  }
 }

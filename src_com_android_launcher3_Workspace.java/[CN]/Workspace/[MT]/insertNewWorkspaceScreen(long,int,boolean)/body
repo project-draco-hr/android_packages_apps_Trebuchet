@@ -1,0 +1,11 @@
+{
+  CellLayout newScreen=(CellLayout)mLauncher.getLayoutInflater().inflate(R.layout.workspace_screen,null);
+  newScreen.setOnLongClickListener(mLongClickListener);
+  mWorkspaceScreens.put(screenId,newScreen);
+  mScreenOrder.add(insertIndex,screenId);
+  addView(newScreen,insertIndex);
+  if (updateDb) {
+    mLauncher.getModel().updateWorkspaceScreenOrder(mLauncher,mScreenOrder);
+  }
+  return screenId;
+}

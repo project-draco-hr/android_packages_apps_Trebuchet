@@ -6,5 +6,6 @@
   mWorkspaceScreens.put(newId,cl);
   mScreenOrder.add(newId);
   addExtraEmptyScreen();
+  mLauncher.getModel().updateWorkspaceScreenOrder(mLauncher,mScreenOrder);
   return newId;
 }

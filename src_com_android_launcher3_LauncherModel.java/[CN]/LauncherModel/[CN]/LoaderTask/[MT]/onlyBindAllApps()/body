@@ -19,7 +19,7 @@
   }
 ;
   boolean isRunningOnMainThread=!(sWorkerThread.getThreadId() == Process.myTid());
-  if (oldCallbacks.isAllAppsVisible() && isRunningOnMainThread) {
+  if (isRunningOnMainThread) {
     r.run();
   }
  else {
