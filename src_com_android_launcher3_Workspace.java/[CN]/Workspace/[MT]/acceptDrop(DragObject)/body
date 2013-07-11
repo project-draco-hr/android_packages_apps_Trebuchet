@@ -53,5 +53,9 @@
       return false;
     }
   }
+  long screenId=getIdForScreen(dropTargetLayout);
+  if (screenId == EXTRA_EMPTY_SCREEN_ID) {
+    commitExtraEmptyScreen();
+  }
   return true;
 }

@@ -1,0 +1,14 @@
+{
+  super.onEndReordering();
+  int count=getChildCount();
+  for (int i=0; i < count; i++) {
+    ((CellLayout)getChildAt(i)).setUseActiveGlowBackground(false);
+  }
+  hideOutlines();
+  mScreenOrder.clear();
+  for (int i=0; i < count; i++) {
+    CellLayout cl=((CellLayout)getChildAt(i));
+    mScreenOrder.add(getIdForScreen(cl));
+  }
+  mLauncher.getModel().updateWorkspaceScreenOrder(mLauncher,mScreenOrder);
+}

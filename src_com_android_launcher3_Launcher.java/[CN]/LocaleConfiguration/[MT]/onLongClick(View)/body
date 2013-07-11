@@ -15,7 +15,12 @@
   if (allowLongPress && !mDragController.isDragging()) {
     if (itemUnderLongClick == null) {
       mWorkspace.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS,HapticFeedbackConstants.FLAG_IGNORE_VIEW_SETTING);
-      startWallpaper();
+      if (mWorkspace.getIdForScreen((CellLayout)v) >= 0) {
+        mWorkspace.startReordering();
+      }
+ else {
+        startWallpaper();
+      }
     }
  else {
       if (!(itemUnderLongClick instanceof Folder)) {
