@@ -27,4 +27,8 @@
     mDelayedSnapToPageRunnable.run();
     mDelayedSnapToPageRunnable=null;
   }
+  if (mStripScreensOnPageStopMoving) {
+    stripEmptyScreens();
+    mStripScreensOnPageStopMoving=false;
+  }
 }

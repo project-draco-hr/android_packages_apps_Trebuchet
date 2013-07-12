@@ -1,4 +1,9 @@
 {
+  if (isPageMoving()) {
+    mStripScreensOnPageStopMoving=true;
+    return;
+  }
+  int currentPage=getNextPage();
   ArrayList<Long> removeScreens=new ArrayList<Long>();
   for (  Long id : mWorkspaceScreens.keySet()) {
     CellLayout cl=mWorkspaceScreens.get(id);
@@ -11,13 +16,15 @@
     CellLayout cl=mWorkspaceScreens.get(id);
     mWorkspaceScreens.remove(id);
     mScreenOrder.remove(id);
-    if (indexOfChild(cl) < mCurrentPage) {
+    if (indexOfChild(cl) < currentPage) {
       pageShift++;
     }
     removeView(cl);
   }
-  setCurrentPage(mCurrentPage - pageShift);
   if (!removeScreens.isEmpty()) {
     mLauncher.getModel().updateWorkspaceScreenOrder(mLauncher,mScreenOrder);
+  }
+  if (pageShift >= 0) {
+    setCurrentPage(currentPage - pageShift);
   }
 }
