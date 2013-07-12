@@ -2,3 +2,4 @@ IconCache iconCache
 ArrayList<ApplicationInfo> allApps
 ArrayList<ComponentName> onWorkspace
 Launcher launcher
+Workspace workspace

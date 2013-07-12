@@ -12,7 +12,8 @@ synchronized (sBgLock) {
           if (LauncherModel.shortcutExists(context,name,launchIntent)) {
             continue;
           }
-          Pair<Long,int[]> coords=LauncherModel.findNextAvailableIconSpace(context,name,launchIntent);
+          int startSearchPageIndex=1;
+          Pair<Long,int[]> coords=LauncherModel.findNextAvailableIconSpace(context,name,launchIntent,startSearchPageIndex);
           if (coords == null) {
             LauncherAppState appState=LauncherAppState.getInstance();
             LauncherProvider lp=appState.getLauncherProvider();
@@ -20,7 +21,7 @@ synchronized (sBgLock) {
             sBgWorkspaceScreens.add(screenId);
             updateWorkspaceScreenOrder(context,sBgWorkspaceScreens);
             addedWorkspaceScreensFinal.add(screenId);
-            coords=LauncherModel.findNextAvailableIconSpace(context,a.title.toString(),a.intent);
+            coords=LauncherModel.findNextAvailableIconSpace(context,a.title.toString(),a.intent,startSearchPageIndex);
           }
           if (coords == null) {
             throw new RuntimeException("Coordinates should not be null");

@@ -1,6 +1,6 @@
 {
   if (mIntentsOnWorkspaceFromUpgradePath != null) {
-    getHotseat().addAllAppsFolder(mIconCache,apps,mIntentsOnWorkspaceFromUpgradePath,Launcher.this);
+    getHotseat().addAllAppsFolder(mIconCache,apps,mIntentsOnWorkspaceFromUpgradePath,Launcher.this,mWorkspace);
     mIntentsOnWorkspaceFromUpgradePath=null;
   }
 }
