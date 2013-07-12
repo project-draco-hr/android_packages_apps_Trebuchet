@@ -1,9 +1,9 @@
 def main(argv):
-    if (len(argv) == 1):
+    if ((len(argv) == 1) or ((len(argv) == 2) and updateDeviceClassConstants(argv[1]))):
         make_dir()
         pull_file(AUTO_FILE)
         process_file(AUTO_FILE)
-    elif (len(argv) == 2):
+    elif ((len(argv) == 2) or ((len(argv) == 3) and updateDeviceClassConstants(argv[2]))):
         make_dir()
         process_file(argv[1])
     else:

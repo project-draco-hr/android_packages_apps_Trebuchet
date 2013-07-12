@@ -1,0 +1,11 @@
+def print_icon_type(out, id, i, cell):
+    if (cell == 0):
+        out.write(('Application (%d)' % cell))
+    elif (cell == 1):
+        out.write(('Shortcut (%d)' % cell))
+    elif (cell == 2):
+        out.write(('Folder (%d)' % cell))
+    elif (cell == 4):
+        out.write(('Widget (%d)' % cell))
+    elif cell:
+        out.write(('%d' % cell))

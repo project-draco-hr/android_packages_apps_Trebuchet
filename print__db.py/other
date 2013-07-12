@@ -1,16 +1,20 @@
 import cgi
+import codecs
 import os
+import pprint
 import shutil
 import sys
 import sqlite3
-SCREENS = 5
+SCREENS = 0
 COLUMNS = 4
 ROWS = 4
-HOTSEAT_SIZE = 5
+HOTSEAT_SIZE = 4
 CELL_SIZE = 110
+CONTAINER_DESKTOP = (-100)
+CONTAINER_HOTSEAT = (-101)
 DIR = 'db_files'
 AUTO_FILE = (DIR + '/launcher.db')
 INDEX_FILE = (DIR + '/index.html')
-FUNCTIONS = {'intent': print_intent, 'icon': print_icon, }
+FUNCTIONS = {'intent': print_intent, 'icon': print_icon, 'iconType': print_icon_type, }
 if (__name__ == '__main__'):
     main(sys.argv)

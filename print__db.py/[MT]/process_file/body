@@ -1,9 +1,23 @@
 def process_file(fn):
+    global SCREENS, COLUMNS, ROWS, HOTSEAT_SIZE
     print ('process_file: ' + fn)
     conn = sqlite3.connect(fn)
     (columns, rows) = get_favorites(conn)
     data = [dict(zip(columns, row)) for row in rows]
-    out = file(INDEX_FILE, 'w')
+    screensIdMap = []
+    hotseatIdMap = []
+    HOTSEAT_SIZE = 0
+    for d in data:
+        if (d['container'] == CONTAINER_DESKTOP):
+            if (d['screen'] not in screensIdMap):
+                screensIdMap.append(d['screen'])
+            COLUMNS = max(COLUMNS, (d['cellX'] + d['spanX']))
+            ROWS = max(ROWS, (d['cellX'] + d['spanX']))
+        elif (d['container'] == CONTAINER_HOTSEAT):
+            hotseatIdMap.append(d['screen'])
+            HOTSEAT_SIZE = max(HOTSEAT_SIZE, (d['screen'] + 1))
+    SCREENS = len(screensIdMap)
+    out = codecs.open(INDEX_FILE, encoding='utf-8', mode='w')
     out.write('<html>\n<head>\n<style type="text/css">\n.intent {\n  font-style: italic;\n}\n</style>\n</head>\n<body>\n')
     out.write('<b>Favorites table</b><br/>\n')
     out.write('<html>\n<table border=1 cellspacing=0 cellpadding=4>\n<tr>\n')
@@ -27,7 +41,7 @@ def process_file(fn):
     for i in range(0, HOTSEAT_SIZE):
         hotseat.append(None)
     for row in data:
-        if (row['container'] != (-101)):
+        if (row['container'] != CONTAINER_HOTSEAT):
             continue
         screen = row['screen']
         hotseat[screen] = row
@@ -47,9 +61,9 @@ def process_file(fn):
         screens.append(screen)
     occupied = 'occupied'
     for row in data:
-        screen = screens[row['screen']]
-        if (row['container'] != (-100)):
+        if (row['container'] != CONTAINER_DESKTOP):
             continue
+        screen = screens[screensIdMap.index(row['screen'])]
         cellX = row['cellX']
         cellY = row['cellY']
         spanX = row['spanX']
