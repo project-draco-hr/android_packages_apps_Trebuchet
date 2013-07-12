@@ -1,6 +1,6 @@
 def usage():
-    print 'usage: print_db.py launcher.db -- prints a launcher.db'
-    print 'usage: print_db.py -- adb pulls a launcher.db from a device'
+    print 'usage: print_db.py launcher.db <sw600|sw720> -- prints a launcher.db'
+    print 'usage: print_db.py <sw600|sw720> -- adb pulls a launcher.db from a device'
     print '       and prints it'
     print 
     print 'The dump will be created in a directory called db_files in cwd.'

@@ -1,0 +1,14 @@
+def updateDeviceClassConstants(str):
+    global SCREENS, COLUMNS, ROWS, HOTSEAT_SIZE
+    devClass = str.lower()
+    if (devClass == 'sw600'):
+        COLUMNS = 6
+        ROWS = 6
+        HOTSEAT_SIZE = 6
+        return True
+    elif (devClass == 'sw720'):
+        COLUMNS = 8
+        ROWS = 6
+        HOTSEAT_SIZE = 8
+        return True
+    return False
