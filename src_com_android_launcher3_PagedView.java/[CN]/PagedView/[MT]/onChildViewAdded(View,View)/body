@@ -1,4 +1,7 @@
 {
+  if (mPageIndicator != null && !isReordering(false)) {
+    mPageIndicator.addMarker(indexOfChild(child));
+  }
   mForceScreenScrolled=true;
   mRecomputePageSpacing=true;
   invalidate();

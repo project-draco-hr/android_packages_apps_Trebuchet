@@ -8,9 +8,6 @@
     l.dismissWorkspaceCling(null);
     mAppsCustomizePane.showAllAppsCling();
     mAppsCustomizePane.loadAssociatedPages(mAppsCustomizePane.getCurrentPage());
-    if (!LauncherAppState.getInstance().isScreenLarge()) {
-      mAppsCustomizePane.hideScrollingIndicator(false);
-    }
     setVisibilityOfSiblingsWithLowerZOrder(INVISIBLE);
   }
 }

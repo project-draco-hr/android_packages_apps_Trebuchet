@@ -1,5 +1,4 @@
 {
   mIsSwitchingState=true;
   updateChildrenLayersEnabled(false);
-  cancelScrollingIndicatorAnimations();
 }

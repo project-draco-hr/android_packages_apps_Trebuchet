@@ -25,5 +25,4 @@
   }
   mDragOutline=null;
   mDragInfo=null;
-  hideScrollingIndicator(false);
 }

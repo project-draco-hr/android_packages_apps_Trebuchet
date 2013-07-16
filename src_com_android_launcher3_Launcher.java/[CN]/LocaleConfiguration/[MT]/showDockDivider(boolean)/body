@@ -1,16 +1,14 @@
 {
-  if (mQsbDivider != null && mDockDivider != null) {
+  if (mQsbDivider != null) {
     mQsbDivider.setVisibility(View.VISIBLE);
-    mDockDivider.setVisibility(View.VISIBLE);
     if (mDividerAnimator != null) {
       mDividerAnimator.cancel();
       mQsbDivider.setAlpha(1f);
-      mDockDivider.setAlpha(1f);
       mDividerAnimator=null;
     }
     if (animated) {
       mDividerAnimator=LauncherAnimUtils.createAnimatorSet();
-      mDividerAnimator.playTogether(LauncherAnimUtils.ofFloat(mQsbDivider,"alpha",1f),LauncherAnimUtils.ofFloat(mDockDivider,"alpha",1f));
+      mDividerAnimator.playTogether(LauncherAnimUtils.ofFloat(mQsbDivider,"alpha",1f));
       int duration=0;
       if (mSearchDropTargetBar != null) {
         duration=mSearchDropTargetBar.getTransitionInDuration();

@@ -1,0 +1,8 @@
+{
+  ViewGroup parent=(ViewGroup)getParent();
+  if (mPageIndicator == null && mPageIndicatorViewId > -1) {
+    mPageIndicator=(PageIndicator)parent.findViewById(mPageIndicatorViewId);
+    mPageIndicator.removeAllMarkers();
+    mPageIndicator.addMarkers(getChildCount());
+  }
+}

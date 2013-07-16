@@ -1,6 +1,5 @@
 {
-  if (mQsbDivider != null && mDockDivider != null) {
+  if (mQsbDivider != null) {
     mQsbDivider.setVisibility(View.INVISIBLE);
-    mDockDivider.setVisibility(View.INVISIBLE);
   }
 }

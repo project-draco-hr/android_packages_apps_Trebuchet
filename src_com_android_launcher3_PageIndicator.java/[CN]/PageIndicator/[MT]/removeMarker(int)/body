@@ -1,0 +1,6 @@
+{
+  if (getChildCount() > 0) {
+    index=Math.max(0,Math.min(index,getChildCount() - 1));
+    removeViewAt(index);
+  }
+}

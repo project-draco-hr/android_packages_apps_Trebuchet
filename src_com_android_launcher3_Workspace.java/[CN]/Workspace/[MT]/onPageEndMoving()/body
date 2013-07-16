@@ -15,9 +15,6 @@
     if (LauncherAppState.getInstance().isScreenLarge()) {
       hideOutlines();
     }
-    if (!mDragController.isDragging()) {
-      hideScrollingIndicator(false);
-    }
   }
   if (mDelayedResizeRunnable != null) {
     mDelayedResizeRunnable.run();

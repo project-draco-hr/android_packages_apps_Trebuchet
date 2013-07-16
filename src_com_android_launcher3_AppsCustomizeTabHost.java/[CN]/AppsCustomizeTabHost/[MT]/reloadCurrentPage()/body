@@ -1,7 +1,4 @@
 {
-  if (!LauncherAppState.getInstance().isScreenLarge()) {
-    mAppsCustomizePane.flashScrollingIndicator(true);
-  }
   mAppsCustomizePane.loadAssociatedPages(mAppsCustomizePane.getCurrentPage());
   mAppsCustomizePane.requestFocus();
 }

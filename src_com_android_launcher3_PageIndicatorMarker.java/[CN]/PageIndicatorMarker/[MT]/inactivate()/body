@@ -1,0 +1,4 @@
+{
+  mInactiveMarker.animate().alpha(1f).setDuration(MARKER_FADE_DURATION).start();
+  mActiveMarker.animate().alpha(0f).setDuration(MARKER_FADE_DURATION).start();
+}

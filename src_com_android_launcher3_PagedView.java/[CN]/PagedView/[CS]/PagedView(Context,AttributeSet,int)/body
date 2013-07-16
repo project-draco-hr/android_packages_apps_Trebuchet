@@ -11,8 +11,7 @@
   mPageLayoutPaddingRight=a.getDimensionPixelSize(R.styleable.PagedView_pageLayoutPaddingRight,0);
   mPageLayoutWidthGap=a.getDimensionPixelSize(R.styleable.PagedView_pageLayoutWidthGap,0);
   mPageLayoutHeightGap=a.getDimensionPixelSize(R.styleable.PagedView_pageLayoutHeightGap,0);
-  mScrollIndicatorPaddingLeft=a.getDimensionPixelSize(R.styleable.PagedView_scrollIndicatorPaddingLeft,0);
-  mScrollIndicatorPaddingRight=a.getDimensionPixelSize(R.styleable.PagedView_scrollIndicatorPaddingRight,0);
+  mPageIndicatorViewId=a.getResourceId(R.styleable.PagedView_pageIndicator,-1);
   a.recycle();
   setHapticFeedbackEnabled(false);
   init();

@@ -1,0 +1,6 @@
+{
+  if (mPageIndicator != null) {
+    mPageIndicator.removeAllMarkers();
+  }
+  super.removeAllViewsInLayout();
+}

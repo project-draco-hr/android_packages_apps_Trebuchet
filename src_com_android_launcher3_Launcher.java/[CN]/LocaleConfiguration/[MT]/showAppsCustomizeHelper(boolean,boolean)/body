@@ -49,7 +49,6 @@
         dispatchOnLauncherTransitionEnd(fromView,animated,false);
         dispatchOnLauncherTransitionEnd(toView,animated,false);
         if (mWorkspace != null && !springLoaded && !LauncherAppState.getInstance().isScreenLarge()) {
-          mWorkspace.hideScrollingIndicator(true);
           hideDockDivider();
         }
         if (!animationCancelled) {
@@ -106,7 +105,6 @@
     toView.setVisibility(View.VISIBLE);
     toView.bringToFront();
     if (!springLoaded && !LauncherAppState.getInstance().isScreenLarge()) {
-      mWorkspace.hideScrollingIndicator(true);
       hideDockDivider();
       if (mSearchDropTargetBar != null) {
         mSearchDropTargetBar.hideSearchBar(false);

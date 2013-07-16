@@ -20,5 +20,4 @@
       ((CellLayout)getPageAt(i)).setShortcutAndWidgetAlpha(1f);
     }
   }
-  showScrollingIndicator(false);
 }

@@ -1,0 +1,5 @@
+{
+  index=Math.max(0,Math.min(index,getChildCount()));
+  View marker=mLayoutInflater.inflate(R.layout.page_indicator_marker,this,false);
+  addView(marker,index);
+}

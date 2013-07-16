@@ -1,0 +1,4 @@
+{
+  removeViewAt(index);
+  super.removeViewAt(index);
+}

@@ -1,0 +1,6 @@
+{
+  super(context,attrs,defStyle);
+  mLayoutInflater=LayoutInflater.from(context);
+  LayoutTransition transition=getLayoutTransition();
+  transition.setDuration(250);
+}
