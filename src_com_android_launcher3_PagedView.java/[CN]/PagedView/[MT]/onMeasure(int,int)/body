@@ -34,29 +34,37 @@
     final View child=getPageAt(i);
     final LayoutParams lp=(LayoutParams)child.getLayoutParams();
     int childWidthMode;
-    if (lp.width == LayoutParams.WRAP_CONTENT) {
-      childWidthMode=MeasureSpec.AT_MOST;
+    int childHeightMode;
+    int childWidth;
+    int childHeight;
+    if (!lp.isFullScreenPage) {
+      if (lp.width == LayoutParams.WRAP_CONTENT) {
+        childWidthMode=MeasureSpec.AT_MOST;
+      }
+ else {
+        childWidthMode=MeasureSpec.EXACTLY;
+      }
+      if (lp.height == LayoutParams.WRAP_CONTENT) {
+        childHeightMode=MeasureSpec.AT_MOST;
+      }
+ else {
+        childHeightMode=MeasureSpec.EXACTLY;
+      }
+      childWidth=widthSize - horizontalPadding;
+      childHeight=heightSize - verticalPadding;
     }
  else {
       childWidthMode=MeasureSpec.EXACTLY;
-    }
-    int childHeightMode;
-    if (lp.height == LayoutParams.WRAP_CONTENT) {
-      childHeightMode=MeasureSpec.AT_MOST;
-    }
- else {
       childHeightMode=MeasureSpec.EXACTLY;
+      childWidth=getViewportWidth();
+      childHeight=getViewportHeight();
     }
-    final int childWidthMeasureSpec=MeasureSpec.makeMeasureSpec(widthSize - horizontalPadding,childWidthMode);
-    final int childHeightMeasureSpec=MeasureSpec.makeMeasureSpec(heightSize - verticalPadding,childHeightMode);
+    final int childWidthMeasureSpec=MeasureSpec.makeMeasureSpec(childWidth,childWidthMode);
+    final int childHeightMeasureSpec=MeasureSpec.makeMeasureSpec(childHeight,childHeightMode);
     child.measure(childWidthMeasureSpec,childHeightMeasureSpec);
   }
   setMeasuredDimension(scaledWidthSize,scaledHeightSize);
   invalidateCachedOffsets();
-  if (mScroller.isFinished() && mChildCountOnLastMeasure != getChildCount() && !mDeferringForDelete) {
-    setCurrentPage(getNextPage());
-  }
-  mChildCountOnLastMeasure=getChildCount();
   if (childCount > 0) {
     if (DEBUG)     Log.d(TAG,"getRelativeChildOffset(): " + getViewportWidth() + ", "+ getChildWidth(0));
     if (mAutoComputePageSpacing && mRecomputePageSpacing) {
@@ -66,6 +74,10 @@
       mRecomputePageSpacing=false;
     }
   }
+  if (mScroller.isFinished() && mChildCountOnLastMeasure != getChildCount() && !mDeferringForDelete) {
+    setCurrentPage(getNextPage());
+  }
+  mChildCountOnLastMeasure=getChildCount();
   if (childCount > 0) {
     final int index=isLayoutRtl() ? 0 : childCount - 1;
     mMaxScrollX=getChildOffset(index) - getRelativeChildOffset(index);

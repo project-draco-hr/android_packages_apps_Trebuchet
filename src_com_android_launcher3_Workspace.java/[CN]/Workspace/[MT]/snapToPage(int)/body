@@ -1,4 +1,0 @@
-{
-  super.snapToPage(whichPage);
-  computeWallpaperScrollRatio(whichPage);
-}

@@ -15,12 +15,19 @@
   int childLeft=offsetX + getRelativeChildOffset(startIndex);
   for (int i=startIndex; i != endIndex; i+=delta) {
     final View child=getPageAt(i);
-    int childTop=offsetY + getPaddingTop();
-    if (mCenterPagesVertically) {
-      childTop+=((getViewportHeight() - verticalPadding) - child.getMeasuredHeight()) / 2;
+    LayoutParams lp=(LayoutParams)child.getLayoutParams();
+    int childTop;
+    if (lp.isFullScreenPage) {
+      childTop=offsetY;
+    }
+ else {
+      childTop=offsetY + getPaddingTop();
+      if (mCenterPagesVertically) {
+        childTop+=((getViewportHeight() - verticalPadding) - child.getMeasuredHeight()) / 2;
+      }
     }
     if (child.getVisibility() != View.GONE) {
-      final int childWidth=getScaledMeasuredWidth(child);
+      final int childWidth=child.getMeasuredWidth();
       final int childHeight=child.getMeasuredHeight();
       if (DEBUG)       Log.d(TAG,"\tlayout-child" + i + ": "+ childLeft+ ", "+ childTop);
       child.layout(childLeft,childTop,childLeft + child.getMeasuredWidth(),childTop + childHeight);

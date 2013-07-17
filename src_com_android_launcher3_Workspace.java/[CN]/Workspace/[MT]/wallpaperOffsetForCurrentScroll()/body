@@ -1,11 +1,8 @@
 {
   mWallpaperManager.setWallpaperOffsetSteps(1.0f / (getChildCount() - 1),1.0f);
-  float layoutScale=mLayoutScale;
-  mLayoutScale=1f;
   int scrollRange=getScrollRange();
   float adjustedScrollX=Math.max(0,Math.min(getScrollX(),mMaxScrollX));
   adjustedScrollX*=mWallpaperScrollRatio;
-  mLayoutScale=layoutScale;
   float scrollProgress=adjustedScrollX / (float)scrollRange;
   if (LauncherAppState.getInstance().isScreenLarge() && mIsStaticWallpaper) {
     int wallpaperTravelWidth=Math.min(mWallpaperTravelWidth,mWallpaperWidth);
