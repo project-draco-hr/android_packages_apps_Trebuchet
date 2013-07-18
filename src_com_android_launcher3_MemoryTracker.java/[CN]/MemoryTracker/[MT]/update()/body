@@ -3,6 +3,10 @@ synchronized (mLock) {
     Debug.MemoryInfo[] dinfos=mAm.getProcessMemoryInfo(mPidsArray);
     for (int i=0; i < dinfos.length; i++) {
       Debug.MemoryInfo dinfo=dinfos[i];
+      if (i > mPids.size()) {
+        Log.e(TAG,"update: unknown process info received: " + dinfo);
+        break;
+      }
       final long pid=mPids.get(i).intValue();
       final ProcessMemInfo info=mData.get(pid);
       info.head=(info.head + 1) % info.pss.length;
@@ -19,6 +23,7 @@ synchronized (mLock) {
       final long pid=mPids.get(i).intValue();
       if (mData.get(pid) == null) {
         mPids.remove(i);
+        updatePidsArrayL();
       }
     }
   }
