@@ -40,4 +40,15 @@
     setHorizontalScrollBarEnabled(true);
     mFirstLayout=false;
   }
+  if (childCount > 0) {
+    final int index=isLayoutRtl() ? 0 : childCount - 1;
+    mMaxScrollX=getChildOffset(index) - getRelativeChildOffset(index);
+  }
+ else {
+    mMaxScrollX=0;
+  }
+  if (mScroller.isFinished() && mChildCountOnLastLayout != getChildCount() && !mDeferringForDelete) {
+    setCurrentPage(getNextPage());
+  }
+  mChildCountOnLastLayout=getChildCount();
 }

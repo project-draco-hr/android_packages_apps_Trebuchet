@@ -74,15 +74,4 @@
       mRecomputePageSpacing=false;
     }
   }
-  if (mScroller.isFinished() && mChildCountOnLastMeasure != getChildCount() && !mDeferringForDelete) {
-    setCurrentPage(getNextPage());
-  }
-  mChildCountOnLastMeasure=getChildCount();
-  if (childCount > 0) {
-    final int index=isLayoutRtl() ? 0 : childCount - 1;
-    mMaxScrollX=getChildOffset(index) - getRelativeChildOffset(index);
-  }
- else {
-    mMaxScrollX=0;
-  }
 }
