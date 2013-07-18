@@ -1,5 +1,4 @@
 {
   mForceScreenScrolled=true;
   invalidate();
-  invalidateCachedOffsets();
 }

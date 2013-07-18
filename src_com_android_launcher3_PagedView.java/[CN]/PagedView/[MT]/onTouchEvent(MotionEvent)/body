@@ -88,7 +88,7 @@ if (mTempVisiblePagesRange[0] <= pageUnderPointIndex && pageUnderPointIndex <= m
 mSidePageHoverIndex=pageUnderPointIndex;
 mSidePageHoverRunnable=new Runnable(){
 @Override public void run(){
-mDownScrollX=getChildOffset(pageUnderPointIndex) - getRelativeChildOffset(pageUnderPointIndex);
+mDownScrollX=getScrollForPage(pageUnderPointIndex);
 snapToPage(pageUnderPointIndex);
 int shiftDelta=(dragViewIndex < pageUnderPointIndex) ? -1 : 1;
 int lowerIndex=(dragViewIndex < pageUnderPointIndex) ? dragViewIndex + 1 : pageUnderPointIndex;

@@ -2,8 +2,9 @@
   final boolean isRtl=isLayoutRtl();
   super.screenScrolled(screenCenter);
   updatePageAlphaValues(screenCenter);
+  updateStateForCustomContent(screenCenter);
   enableHwLayersOnVisiblePages();
-  if (mOverScrollX < 0 || mOverScrollX > mMaxScrollX) {
+  if ((mOverScrollX < 0 && !hasCustomContent()) || mOverScrollX > mMaxScrollX) {
     int index=0;
     float pivotX=0f;
     final float leftBiasedPivot=0.25f;

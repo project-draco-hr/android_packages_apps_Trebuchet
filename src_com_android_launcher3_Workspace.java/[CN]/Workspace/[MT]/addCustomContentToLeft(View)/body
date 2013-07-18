@@ -7,10 +7,10 @@
   customScreen.addViewToCellLayout(customContent,0,0,lp,true);
   Rect p=new Rect();
   AppWidgetHostView.getDefaultPaddingForWidget(mLauncher,mLauncher.getComponentName(),p);
-  customContent.setPadding(p.left,p.top,p.right,p.bottom);
+  customContent.setPadding(p.left,mLauncher.getTopOffsetForCustomContent(),p.right,p.bottom);
   mWorkspaceScreens.put(CUSTOM_CONTENT_SCREEN_ID,customScreen);
   mScreenOrder.add(0,CUSTOM_CONTENT_SCREEN_ID);
-  addView(customScreen,0);
+  addFullScreenPage(customScreen);
   mDefaultPage++;
   setCurrentPage(getCurrentPage() + 1);
 }

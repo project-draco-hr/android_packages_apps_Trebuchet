@@ -4,7 +4,7 @@
     mSavedScrollX=getScrollX();
     mSavedTranslationX=cl.getTranslationX();
     mSavedRotationY=cl.getRotationY();
-    final int newX=getChildOffset(pageIndex) - getRelativeChildOffset(pageIndex);
+    final int newX=getScrollForPage(pageIndex);
     setScrollX(newX);
     cl.setTranslationX(0f);
     cl.setRotationY(0f);
