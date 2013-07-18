@@ -1,5 +1,5 @@
 {
-  Log.i(TAG,"Received start id " + startId + ": "+ intent);
+  Log.v(TAG,"Received start id " + startId + ": "+ intent);
   if (intent != null) {
     if (ACTION_START_TRACKING.equals(intent.getAction())) {
       final int pid=intent.getIntExtra("pid",-1);
