@@ -1,0 +1,13 @@
+{
+  if (immediate) {
+    mActiveMarker.animate().cancel();
+    mActiveMarker.setAlpha(1f);
+    mInactiveMarker.animate().cancel();
+    mInactiveMarker.setAlpha(0f);
+  }
+ else {
+    mActiveMarker.animate().alpha(1f).setDuration(MARKER_FADE_DURATION).start();
+    mInactiveMarker.animate().alpha(0f).setDuration(MARKER_FADE_DURATION).start();
+  }
+  mIsActive=true;
+}

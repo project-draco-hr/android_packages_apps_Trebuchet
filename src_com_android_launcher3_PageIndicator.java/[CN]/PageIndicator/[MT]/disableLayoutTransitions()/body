@@ -1,0 +1,7 @@
+{
+  LayoutTransition transition=getLayoutTransition();
+  transition.disableTransitionType(LayoutTransition.APPEARING);
+  transition.disableTransitionType(LayoutTransition.DISAPPEARING);
+  transition.disableTransitionType(LayoutTransition.CHANGE_APPEARING);
+  transition.disableTransitionType(LayoutTransition.CHANGE_DISAPPEARING);
+}

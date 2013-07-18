@@ -1,6 +1,11 @@
 {
   super(context,attrs,defStyle);
+  TypedArray a=context.obtainStyledAttributes(attrs,R.styleable.PageIndicator,defStyle,0);
+  mMaxWindowSize=a.getInteger(R.styleable.PageIndicator_windowSize,15);
+  mWindowRange[0]=0;
+  mWindowRange[1]=0;
   mLayoutInflater=LayoutInflater.from(context);
+  a.recycle();
   LayoutTransition transition=getLayoutTransition();
-  transition.setDuration(250);
+  transition.setDuration(175);
 }

@@ -1,6 +1,7 @@
 {
-  if (getChildCount() > 0) {
-    index=Math.max(0,Math.min(index,getChildCount() - 1));
-    removeViewAt(index);
+  if (mMarkers.size() > 0) {
+    index=Math.max(0,Math.min(mMarkers.size() - 1,index));
+    mMarkers.remove(index);
+    offsetWindowCenterTo(mActiveMarkerIndex,true);
   }
 }

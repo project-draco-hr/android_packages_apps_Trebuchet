@@ -1,5 +1,5 @@
 {
-  while (getChildCount() > 0) {
+  while (mMarkers.size() > 0) {
     removeMarker(Integer.MAX_VALUE);
   }
 }

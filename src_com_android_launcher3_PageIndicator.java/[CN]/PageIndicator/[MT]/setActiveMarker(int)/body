@@ -1,11 +1,4 @@
 {
-  for (int i=0; i < getChildCount(); ++i) {
-    PageIndicatorMarker marker=(PageIndicatorMarker)getChildAt(i);
-    if (index == i) {
-      marker.activate();
-    }
- else {
-      marker.inactivate();
-    }
-  }
+  mActiveMarkerIndex=index;
+  offsetWindowCenterTo(index,false);
 }
