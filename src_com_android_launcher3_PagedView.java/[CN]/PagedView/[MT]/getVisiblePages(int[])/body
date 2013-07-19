@@ -1,4 +1,31 @@
 {
-  range[0]=0;
-  range[1]=getPageCount() - 1;
+  final int pageCount=getChildCount();
+  mTmpIntPoint[0]=mTmpIntPoint[1]=0;
+  if (pageCount > 0) {
+    int viewportWidth=getViewportWidth();
+    int leftScreen=0;
+    int rightScreen=0;
+    for (leftScreen=getNextPage(); leftScreen >= 0; --leftScreen) {
+      View currPage=getPageAt(leftScreen);
+      mTmpIntPoint[0]=currPage.getMeasuredWidth();
+      DragLayer.getDescendantCoordRelativeToParent(currPage,this,mTmpIntPoint,false);
+      if (mTmpIntPoint[0] < 0) {
+        break;
+      }
+    }
+    for (rightScreen=getNextPage(); rightScreen < getChildCount(); ++rightScreen) {
+      View currPage=getPageAt(rightScreen);
+      mTmpIntPoint[0]=0;
+      DragLayer.getDescendantCoordRelativeToParent(currPage,this,mTmpIntPoint,false);
+      if (mTmpIntPoint[0] >= viewportWidth) {
+        break;
+      }
+    }
+    range[0]=Math.max(0,leftScreen);
+    range[1]=Math.min(rightScreen,getChildCount() - 1);
+  }
+ else {
+    range[0]=-1;
+    range[1]=-1;
+  }
 }

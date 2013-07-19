@@ -1,0 +1,4 @@
+{
+  range[0]=0;
+  range[1]=getChildCount() - 1;
+}

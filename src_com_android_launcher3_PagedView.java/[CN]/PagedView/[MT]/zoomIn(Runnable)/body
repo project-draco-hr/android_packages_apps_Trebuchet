@@ -25,6 +25,7 @@
         if (onCompleteRunnable != null) {
           onCompleteRunnable.run();
         }
+        invalidate();
       }
     }
 );
