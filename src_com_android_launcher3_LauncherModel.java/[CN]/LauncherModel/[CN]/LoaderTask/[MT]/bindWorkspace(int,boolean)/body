@@ -62,7 +62,7 @@ synchronized (sBgLock) {
     public void run(){
       Callbacks callbacks=tryGetCallbacks(oldCallbacks);
       if (callbacks != null) {
-        callbacks.finishBindingItems(mIsUpgradePath);
+        callbacks.finishBindingItems(isUpgradePath);
       }
       if (DEBUG_LOADERS) {
         Log.d(TAG,"bound workspace in " + (SystemClock.uptimeMillis() - t) + "ms");

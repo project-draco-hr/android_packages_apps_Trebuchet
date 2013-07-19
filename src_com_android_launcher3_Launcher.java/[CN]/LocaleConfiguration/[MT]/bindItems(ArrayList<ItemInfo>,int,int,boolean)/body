@@ -56,6 +56,8 @@ case LauncherSettings.Favorites.ITEM_TYPE_FOLDER:
 FolderIcon newFolder=FolderIcon.fromXml(R.layout.folder_icon,this,(ViewGroup)workspace.getChildAt(workspace.getCurrentPage()),(FolderInfo)item,mIconCache);
 workspace.addInScreenFromBind(newFolder,item.container,item.screenId,item.cellX,item.cellY,1,1);
 break;
+default :
+throw new RuntimeException("Invalid Item Type");
 }
 }
 if (forceAnimateIcons) {

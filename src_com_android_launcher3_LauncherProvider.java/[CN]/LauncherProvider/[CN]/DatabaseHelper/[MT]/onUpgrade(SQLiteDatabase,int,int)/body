@@ -1,5 +1,5 @@
 {
-  if (LOGD)   Log.d(TAG,"onUpgrade triggered");
+  if (LOGD)   Log.d(TAG,"onUpgrade triggered: " + oldVersion);
   int version=oldVersion;
   if (version < 3) {
     db.beginTransaction();
@@ -58,7 +58,7 @@
   }
   if (version < 13) {
     mMaxScreenId=0;
-    sLoadOldDb=true;
+    sJustLoadedFromOldDb=true;
     addWorkspacesTable(db);
     version=13;
   }
