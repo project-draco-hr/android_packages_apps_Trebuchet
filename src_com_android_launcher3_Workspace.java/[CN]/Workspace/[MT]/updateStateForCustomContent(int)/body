@@ -6,7 +6,11 @@
     float translationX=Math.max(scrollDelta,0);
     float progress=(1.0f * scrollDelta) / (getScrollForPage(index + 1) - getScrollForPage(index));
     setBackgroundAlpha(progress * 0.8f);
-    mLauncher.getHotseat().setTranslationX(translationX);
-    getPageIndicator().setTranslationX(translationX);
+    if (mLauncher.getHotseat() != null) {
+      mLauncher.getHotseat().setTranslationX(translationX);
+    }
+    if (getPageIndicator() != null) {
+      getPageIndicator().setTranslationX(translationX);
+    }
   }
 }

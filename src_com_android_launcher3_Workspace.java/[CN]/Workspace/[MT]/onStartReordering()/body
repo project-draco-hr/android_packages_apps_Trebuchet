@@ -5,4 +5,5 @@
     ((CellLayout)getChildAt(i)).setUseActiveGlowBackground(true);
   }
   showOutlines();
+  setLayoutTransition(null);
 }
