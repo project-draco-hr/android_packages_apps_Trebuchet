@@ -1,0 +1,12 @@
+{
+  String spKey=LauncherAppState.getSharedPreferencesKey();
+  SharedPreferences sp=getSharedPreferences(spKey,Context.MODE_PRIVATE);
+  boolean show=sp.getBoolean(SHOW_WEIGHT_WATCHER,true);
+  show=!show;
+  SharedPreferences.Editor editor=sp.edit();
+  editor.putBoolean(SHOW_WEIGHT_WATCHER,show);
+  editor.commit();
+  if (mWeightWatcher != null) {
+    mWeightWatcher.setVisibility(show ? View.VISIBLE : View.GONE);
+  }
+}
