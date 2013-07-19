@@ -1,9 +1,7 @@
 {
   int newX=0;
   if (0 <= mCurrentPage && mCurrentPage < getPageCount()) {
-    int offset=getChildOffset(mCurrentPage);
-    int relOffset=getRelativeChildOffset(mCurrentPage);
-    newX=offset - relOffset;
+    newX=getScrollForPage(mCurrentPage);
   }
   scrollTo(newX,0);
   mScroller.setFinalX(newX);

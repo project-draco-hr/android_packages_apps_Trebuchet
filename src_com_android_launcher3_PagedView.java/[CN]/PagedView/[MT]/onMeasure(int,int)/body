@@ -64,11 +64,9 @@
     child.measure(childWidthMeasureSpec,childHeightMeasureSpec);
   }
   setMeasuredDimension(scaledWidthSize,scaledHeightSize);
-  invalidateCachedOffsets();
   if (childCount > 0) {
-    if (DEBUG)     Log.d(TAG,"getRelativeChildOffset(): " + getViewportWidth() + ", "+ getChildWidth(0));
     if (mAutoComputePageSpacing && mRecomputePageSpacing) {
-      int offset=getRelativeChildOffset(0);
+      int offset=(getViewportWidth() - getChildWidth(0)) / 2;
       int spacing=Math.max(offset,widthSize - offset - getChildAt(0).getMeasuredWidth());
       setPageSpacing(spacing);
       mRecomputePageSpacing=false;

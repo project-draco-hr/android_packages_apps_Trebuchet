@@ -1,0 +1,8 @@
+{
+  if (mPageScrolls == null || index >= mPageScrolls.length) {
+    return 0;
+  }
+ else {
+    return mPageScrolls[index];
+  }
+}
