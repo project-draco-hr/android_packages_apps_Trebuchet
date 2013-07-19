@@ -1,0 +1,8 @@
+{
+  mLayoutTransition=new LayoutTransition();
+  mLayoutTransition.enableTransitionType(LayoutTransition.DISAPPEARING);
+  mLayoutTransition.enableTransitionType(LayoutTransition.CHANGE_DISAPPEARING);
+  mLayoutTransition.disableTransitionType(LayoutTransition.APPEARING);
+  mLayoutTransition.disableTransitionType(LayoutTransition.CHANGE_APPEARING);
+  setLayoutTransition(mLayoutTransition);
+}

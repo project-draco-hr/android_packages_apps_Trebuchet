@@ -9,6 +9,7 @@
   setClipToPadding(false);
   setChildrenDrawnWithCacheEnabled(true);
   setMinScale(0.5f);
+  setupLayoutTransition();
   final Resources res=getResources();
   try {
     mBackground=res.getDrawable(R.drawable.apps_customize_bg);
