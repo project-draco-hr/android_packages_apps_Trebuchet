@@ -18,6 +18,7 @@
   if (immediate) {
     computeScroll();
   }
+  mDeferLoadAssociatedPagesUntilScrollCompletes=true;
   mForceScreenScrolled=true;
   invalidate();
 }
