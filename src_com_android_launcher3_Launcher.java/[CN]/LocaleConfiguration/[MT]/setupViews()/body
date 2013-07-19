@@ -28,8 +28,10 @@
   }
   if (getResources().getBoolean(R.bool.debug_memory_enabled)) {
     Log.v(TAG,"adding WeightWatcher");
-    final View ww=new WeightWatcher(this);
-    ww.setAlpha(0.5f);
-    ((FrameLayout)mLauncherView).addView(ww,new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,FrameLayout.LayoutParams.WRAP_CONTENT,Gravity.BOTTOM));
+    mWeightWatcher=new WeightWatcher(this);
+    mWeightWatcher.setAlpha(0.5f);
+    ((FrameLayout)mLauncherView).addView(mWeightWatcher,new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,FrameLayout.LayoutParams.WRAP_CONTENT,Gravity.BOTTOM));
+    boolean show=shouldShowWeightWatcher();
+    mWeightWatcher.setVisibility(show ? View.VISIBLE : View.GONE);
   }
 }

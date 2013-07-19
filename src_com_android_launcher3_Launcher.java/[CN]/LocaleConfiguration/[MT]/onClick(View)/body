@@ -18,6 +18,10 @@
         MemoryDumpActivity.startDump(this);
         return;
       }
+ else       if (shortcutClass.equals(ToggleWeightWatcher.class.getName())) {
+        toggleShowWeightWatcher();
+        return;
+      }
     }
     int[] pos=new int[2];
     v.getLocationOnScreen(pos);
