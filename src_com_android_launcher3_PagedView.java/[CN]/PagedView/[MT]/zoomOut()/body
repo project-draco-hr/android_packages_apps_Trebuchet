@@ -18,6 +18,9 @@
 );
         }
       }
+      @Override public void onAnimationEnd(      Animator animation){
+        invalidate();
+      }
     }
 );
     mZoomInOutAnim.start();

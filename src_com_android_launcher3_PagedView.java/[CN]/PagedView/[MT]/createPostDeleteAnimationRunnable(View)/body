@@ -2,8 +2,7 @@
   return new Runnable(){
     @Override public void run(){
       int dragViewIndex=indexOfChild(dragView);
-      getVisiblePages(mTempVisiblePagesRange);
-      boundByReorderablePages(true,mTempVisiblePagesRange);
+      getReorderablePages(mTempVisiblePagesRange);
       boolean isLastWidgetPage=(mTempVisiblePagesRange[0] == mTempVisiblePagesRange[1]);
       boolean slideFromLeft=(isLastWidgetPage || dragViewIndex > mTempVisiblePagesRange[0]);
       if (slideFromLeft) {
