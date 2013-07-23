@@ -1,0 +1,3 @@
+{
+  return hasCustomContent() && getNextPage() == 0;
+}

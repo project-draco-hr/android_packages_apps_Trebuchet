@@ -1,0 +1,3 @@
+{
+  mSearchDropTargetBar.animate().translationY(0).start();
+}

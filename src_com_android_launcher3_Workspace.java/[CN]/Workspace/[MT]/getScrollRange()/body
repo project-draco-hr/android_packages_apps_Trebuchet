@@ -1,3 +1,0 @@
-{
-  return getChildOffset(getChildCount() - 1) - getChildOffset(0);
-}
