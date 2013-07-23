@@ -5,6 +5,17 @@
   if (!mWorkspace.isFinishedSwitchingState()) {
     return;
   }
+  if (v instanceof PageIndicator) {
+    if (!mWorkspace.isInOverviewMode()) {
+      mWorkspace.enterOverviewMode();
+    }
+    return;
+  }
+  if (v instanceof CellLayout) {
+    if (mWorkspace.isInOverviewMode()) {
+      mWorkspace.exitOverviewMode(mWorkspace.indexOfChild(v));
+    }
+  }
   Object tag=v.getTag();
   if (tag instanceof ShortcutInfo) {
     final Intent intent=((ShortcutInfo)tag).intent;

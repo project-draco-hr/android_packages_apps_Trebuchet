@@ -13,8 +13,5 @@ if (!currentPage.lastDownOnOccupiedCell()) {
 }
 }
 }
-if (mLauncher != null && mLauncher.onTouch(this,ev)) {
-return true;
-}
 return super.onInterceptTouchEvent(ev);
 }

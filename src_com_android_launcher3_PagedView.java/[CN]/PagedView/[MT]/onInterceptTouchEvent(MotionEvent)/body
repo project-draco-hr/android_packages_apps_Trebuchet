@@ -31,11 +31,6 @@ case MotionEvent.ACTION_DOWN:
     mLastMotionXRemainder=0;
     mTotalMotionX=0;
     mActivePointerId=ev.getPointerId(0);
-    int leftEdgeBoundary=getViewportOffsetX() + mEdgeSwipeRegionSize;
-    int rightEdgeBoundary=getMeasuredWidth() - getViewportOffsetX() - mEdgeSwipeRegionSize;
-    if ((mDownMotionX <= leftEdgeBoundary || mDownMotionX >= rightEdgeBoundary)) {
-      mDownEventOnEdge=true;
-    }
     final int xDist=Math.abs(mScroller.getFinalX() - mScroller.getCurrX());
     final boolean finishedScrolling=(mScroller.isFinished() || xDist < mTouchSlop);
     if (finishedScrolling) {
@@ -67,9 +62,6 @@ case MotionEvent.ACTION_DOWN:
 case MotionEvent.ACTION_UP:
 case MotionEvent.ACTION_CANCEL:
 resetTouchState();
-if (!isTouchPointInCurrentPage((int)mLastMotionX,(int)mLastMotionY)) {
-return true;
-}
 break;
 case MotionEvent.ACTION_POINTER_UP:
 onSecondaryPointerUp(ev);

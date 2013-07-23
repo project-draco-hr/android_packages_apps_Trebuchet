@@ -8,5 +8,6 @@
       markers.add(getPageIndicatorMarker(i));
     }
     mPageIndicator.addMarkers(markers);
+    mPageIndicator.setOnClickListener((Launcher)getContext());
   }
 }

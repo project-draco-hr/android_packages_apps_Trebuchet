@@ -2,6 +2,9 @@
   if (isAllAppsVisible()) {
     showWorkspace(true);
   }
+ else   if (mWorkspace.isInOverviewMode()) {
+    mWorkspace.exitOverviewMode();
+  }
  else   if (mWorkspace.getOpenFolder() != null) {
     Folder openFolder=mWorkspace.getOpenFolder();
     if (openFolder.isEditingName()) {

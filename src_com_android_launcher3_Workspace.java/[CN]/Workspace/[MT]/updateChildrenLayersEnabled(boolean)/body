@@ -1,5 +1,5 @@
 {
-  boolean small=mState == State.SMALL || mIsSwitchingState;
+  boolean small=mState == State.SMALL || mState == State.OVERVIEW || mIsSwitchingState;
   boolean enableChildrenLayers=force || small || mAnimatingViewIntoPlace|| isPageMoving();
   if (enableChildrenLayers != mChildrenLayersEnabled) {
     mChildrenLayersEnabled=enableChildrenLayers;

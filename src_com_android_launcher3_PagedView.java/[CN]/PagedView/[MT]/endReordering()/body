@@ -10,7 +10,8 @@
   if (!mDeferringForDelete) {
     mPostReorderingPreZoomInRunnable=new Runnable(){
       public void run(){
-        zoomIn(onCompleteRunnable);
+        onCompleteRunnable.run();
+        enableFreeScroll();
       }
     }
 ;

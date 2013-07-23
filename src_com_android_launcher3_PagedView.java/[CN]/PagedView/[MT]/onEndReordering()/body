@@ -1,9 +1,3 @@
 {
   mIsReordering=false;
-  getReorderablePages(mTempVisiblePagesRange);
-  for (int i=0; i < getPageCount(); ++i) {
-    if (i < mTempVisiblePagesRange[0] || i > mTempVisiblePagesRange[1]) {
-      getPageAt(i).setAlpha(1f);
-    }
-  }
 }
