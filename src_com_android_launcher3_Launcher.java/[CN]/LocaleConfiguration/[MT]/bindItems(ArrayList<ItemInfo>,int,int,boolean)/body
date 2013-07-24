@@ -7,11 +7,11 @@
 )) {
     return;
   }
-  Set<String> newApps=new HashSet<String>();
-  newApps=mSharedPrefs.getStringSet(InstallShortcutReceiver.NEW_APPS_LIST_KEY,newApps);
   final AnimatorSet anim=LauncherAnimUtils.createAnimatorSet();
   final Collection<Animator> bounceAnims=new ArrayList<Animator>();
+  final boolean animateIcons=forceAnimateIcons && canRunNewAppsAnimation();
   Workspace workspace=mWorkspace;
+  long newShortcutsScreenId=-1;
   for (int i=start; i < end; i++) {
     final ItemInfo item=shortcuts.get(i);
     if (item.container == LauncherSettings.Favorites.CONTAINER_HOTSEAT && mHotseat == null) {
@@ -21,35 +21,20 @@ switch (item.itemType) {
 case LauncherSettings.Favorites.ITEM_TYPE_APPLICATION:
 case LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT:
       ShortcutInfo info=(ShortcutInfo)item;
-    String uri=info.intent.toUri(0).toString();
-  View shortcut=createShortcut(info);
-if (item.container == LauncherSettings.Favorites.CONTAINER_DESKTOP) {
-  CellLayout cl=mWorkspace.getScreenWithId(item.screenId);
-  if (cl != null && cl.isOccupied(item.cellX,item.cellY)) {
-    throw new RuntimeException("OCCUPIED");
+    View shortcut=createShortcut(info);
+  if (item.container == LauncherSettings.Favorites.CONTAINER_DESKTOP) {
+    CellLayout cl=mWorkspace.getScreenWithId(item.screenId);
+    if (cl != null && cl.isOccupied(item.cellX,item.cellY)) {
+      throw new RuntimeException("OCCUPIED");
+    }
   }
-}
 workspace.addInScreenFromBind(shortcut,item.container,item.screenId,item.cellX,item.cellY,1,1);
-boolean animateIconUp=false;
-synchronized (newApps) {
-if (newApps.contains(uri)) {
-animateIconUp=newApps.remove(uri);
-}
-}
-if (forceAnimateIcons) {
+if (animateIcons) {
 shortcut.setAlpha(0f);
 shortcut.setScaleX(0f);
 shortcut.setScaleY(0f);
 bounceAnims.add(createNewAppBounceAnimation(shortcut,i));
-}
- else if (animateIconUp) {
-shortcut.setAlpha(0f);
-shortcut.setScaleX(0f);
-shortcut.setScaleY(0f);
-mNewShortcutAnimateScreenId=item.screenId;
-if (!mNewShortcutAnimateViews.contains(shortcut)) {
-mNewShortcutAnimateViews.add(shortcut);
-}
+newShortcutsScreenId=item.screenId;
 }
 break;
 case LauncherSettings.Favorites.ITEM_TYPE_FOLDER:
@@ -58,7 +43,14 @@ workspace.addInScreenFromBind(newFolder,item.container,item.screenId,item.cellX,
 break;
 }
 }
-if (forceAnimateIcons) {
+if (animateIcons) {
+if (newShortcutsScreenId > -1) {
+long currentScreenId=mWorkspace.getScreenIdForPageIndex(mWorkspace.getNextPage());
+int newScreenIndex=mWorkspace.getPageIndexForScreenId(newShortcutsScreenId);
+if (newShortcutsScreenId != currentScreenId) {
+mWorkspace.snapToPage(newScreenIndex);
+}
+}
 mWorkspace.postDelayed(new Runnable(){
 public void run(){
 anim.playTogether(bounceAnims);

@@ -23,12 +23,10 @@
   PendingInstallShortcutInfo info=new PendingInstallShortcutInfo(data,name,intent);
   info.icon=icon;
   info.iconResource=iconResource;
-  if (mUseInstallQueue || launcherNotLoaded) {
-    String spKey=LauncherAppState.getSharedPreferencesKey();
-    SharedPreferences sp=context.getSharedPreferences(spKey,Context.MODE_PRIVATE);
-    addToInstallQueue(sp,info);
-  }
- else {
-    processInstallShortcut(context,info);
+  String spKey=LauncherAppState.getSharedPreferencesKey();
+  SharedPreferences sp=context.getSharedPreferences(spKey,Context.MODE_PRIVATE);
+  addToInstallQueue(sp,info);
+  if (!mUseInstallQueue && !launcherNotLoaded) {
+    flushInstallQueue(context);
   }
 }

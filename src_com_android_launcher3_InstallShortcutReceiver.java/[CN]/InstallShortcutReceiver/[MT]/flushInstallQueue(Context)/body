@@ -2,8 +2,29 @@
   String spKey=LauncherAppState.getSharedPreferencesKey();
   SharedPreferences sp=context.getSharedPreferences(spKey,Context.MODE_PRIVATE);
   ArrayList<PendingInstallShortcutInfo> installQueue=getAndClearInstallQueue(sp);
-  Iterator<PendingInstallShortcutInfo> iter=installQueue.iterator();
-  while (iter.hasNext()) {
-    processInstallShortcut(context,iter.next());
+  if (!installQueue.isEmpty()) {
+    Iterator<PendingInstallShortcutInfo> iter=installQueue.iterator();
+    ArrayList<ItemInfo> addShortcuts=new ArrayList<ItemInfo>();
+    int result=INSTALL_SHORTCUT_SUCCESSFUL;
+    String duplicateName="";
+    while (iter.hasNext()) {
+      final PendingInstallShortcutInfo pendingInfo=iter.next();
+      final Intent data=pendingInfo.data;
+      final Intent intent=pendingInfo.launchIntent;
+      final String name=pendingInfo.name;
+      final boolean exists=LauncherModel.shortcutExists(context,name,intent);
+      final boolean allowDuplicate=data.getBooleanExtra(Launcher.EXTRA_SHORTCUT_DUPLICATE,true);
+      if (!exists) {
+        ShortcutInfo info=getShortcutInfo(context,pendingInfo.data,pendingInfo.launchIntent);
+        addShortcuts.add(info);
+      }
+    }
+    if (result == INSTALL_SHORTCUT_IS_DUPLICATE) {
+      Toast.makeText(context,context.getString(R.string.shortcut_duplicate,duplicateName),Toast.LENGTH_SHORT).show();
+    }
+    if (!addShortcuts.isEmpty()) {
+      LauncherAppState app=LauncherAppState.getInstance();
+      app.getModel().addAndBindAddedApps(context,addShortcuts);
+    }
   }
 }

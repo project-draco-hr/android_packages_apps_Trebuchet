@@ -1,8 +1,6 @@
 {
   mBindOnResumeCallbacks.clear();
   final Workspace workspace=mWorkspace;
-  mNewShortcutAnimateScreenId=-1;
-  mNewShortcutAnimateViews.clear();
   mWorkspace.clearDropTargets();
   int count=workspace.getChildCount();
   for (int i=0; i < count; i++) {
