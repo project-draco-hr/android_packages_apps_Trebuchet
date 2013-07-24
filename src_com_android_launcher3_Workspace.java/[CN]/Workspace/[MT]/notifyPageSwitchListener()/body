@@ -1,17 +1,4 @@
 {
   super.notifyPageSwitchListener();
   Launcher.setScreen(mCurrentPage);
-  if (hasCustomContent() && mCurrentPage == 0) {
-    mCustomContentShowing=true;
-    if (mCustomContentCallbacks != null) {
-      mCustomContentCallbacks.onShow();
-    }
-  }
- else   if (hasCustomContent() && mCustomContentShowing) {
-    mCustomContentShowing=false;
-    if (mCustomContentCallbacks != null) {
-      mCustomContentCallbacks.onHide();
-      mLauncher.resetQSBScroll();
-    }
-  }
 }

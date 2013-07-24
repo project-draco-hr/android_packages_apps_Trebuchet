@@ -35,9 +35,12 @@
       final int childHeight=child.getMeasuredHeight();
       if (DEBUG)       Log.d(TAG,"\tlayout-child" + i + ": "+ childLeft+ ", "+ childTop);
       child.layout(childLeft,childTop,childLeft + child.getMeasuredWidth(),childTop + childHeight);
-      int scrollOffset=false ? 0 : (getViewportWidth() - childWidth) / 2;
+      int scrollOffset=(getViewportWidth() - childWidth) / 2;
       mPageScrolls[i]=childLeft - scrollOffset - offsetX;
-      childLeft+=childWidth + mPageSpacing;
+      if (i != endIndex - delta) {
+        int nextScrollOffset=(getViewportWidth() - getChildWidth(i + delta)) / 2;
+        childLeft+=childWidth + nextScrollOffset;
+      }
     }
   }
   if (mFirstLayout && mCurrentPage >= 0 && mCurrentPage < getChildCount()) {
