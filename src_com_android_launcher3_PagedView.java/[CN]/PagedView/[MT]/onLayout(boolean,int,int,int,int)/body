@@ -54,7 +54,13 @@
     mMaxScrollX=0;
   }
   if (mScroller.isFinished() && mChildCountOnLastLayout != getChildCount() && !mDeferringForDelete) {
-    setCurrentPage(getNextPage());
+    if (mRestorePage > -1) {
+      setCurrentPage(mRestorePage);
+      mRestorePage=-1;
+    }
+ else {
+      setCurrentPage(getNextPage());
+    }
   }
   mChildCountOnLastLayout=getChildCount();
 }
