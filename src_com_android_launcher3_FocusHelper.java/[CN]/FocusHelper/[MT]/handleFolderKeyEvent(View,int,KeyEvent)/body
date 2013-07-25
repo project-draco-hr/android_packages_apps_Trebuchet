@@ -1,7 +1,8 @@
 {
   ShortcutAndWidgetContainer parent=(ShortcutAndWidgetContainer)v.getParent();
   final CellLayout layout=(CellLayout)parent.getParent();
-  final Folder folder=(Folder)layout.getParent();
+  final ScrollView scrollView=(ScrollView)layout.getParent();
+  final Folder folder=(Folder)scrollView.getParent();
   View title=folder.mFolderName;
   final int action=e.getAction();
   final boolean handleKeyEvent=(action != KeyEvent.ACTION_UP);
