@@ -165,7 +165,9 @@ Log.w(TAG,"Desktop items loading interrupted:",e);
 }
 }
   finally {
+if (c != null) {
 c.close();
+}
 }
 if (itemsToRemove.size() > 0) {
 ContentProviderClient client=contentResolver.acquireContentProviderClient(LauncherSettings.Favorites.CONTENT_URI);
