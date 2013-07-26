@@ -1,7 +1,0 @@
-{
-  index=Math.max(0,Math.min(index,mMarkers.size()));
-  int mLayoutId=R.layout.page_indicator_marker;
-  PageIndicatorMarker marker=(PageIndicatorMarker)mLayoutInflater.inflate(mLayoutId,this,false);
-  mMarkers.add(index,marker);
-  offsetWindowCenterTo(mActiveMarkerIndex,true);
-}

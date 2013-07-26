@@ -1,0 +1,6 @@
+{
+  index=Math.max(0,Math.min(index,mMarkers.size()));
+  PageIndicatorMarker marker=(PageIndicatorMarker)mLayoutInflater.inflate(layoutId,this,false);
+  mMarkers.add(index,marker);
+  offsetWindowCenterTo(mActiveMarkerIndex,true);
+}
