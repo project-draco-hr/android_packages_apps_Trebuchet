@@ -1,4 +1,0 @@
-{
-  mWorkspace.addCustomContentToLeft(customContent,callbacks);
-  return mQsbScroller;
-}

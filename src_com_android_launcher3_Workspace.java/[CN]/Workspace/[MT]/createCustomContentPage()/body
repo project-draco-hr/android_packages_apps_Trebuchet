@@ -1,17 +1,10 @@
 {
   CellLayout customScreen=(CellLayout)mLauncher.getLayoutInflater().inflate(R.layout.workspace_screen,null);
-  int spanX=customScreen.getCountX();
-  int spanY=customScreen.getCountY();
-  CellLayout.LayoutParams lp=new CellLayout.LayoutParams(0,0,spanX,spanY);
-  lp.canReorder=false;
-  lp.isFullscreen=true;
-  customScreen.addViewToCellLayout(customContent,0,0,lp,true);
   Rect p=new Rect();
   AppWidgetHostView.getDefaultPaddingForWidget(mLauncher,mLauncher.getComponentName(),p);
   mWorkspaceScreens.put(CUSTOM_CONTENT_SCREEN_ID,customScreen);
   mScreenOrder.add(0,CUSTOM_CONTENT_SCREEN_ID);
   addFullScreenPage(customScreen);
-  mCustomContentCallbacks=callbacks;
   mDefaultPage++;
   setCurrentPage(getCurrentPage() + 1);
 }
