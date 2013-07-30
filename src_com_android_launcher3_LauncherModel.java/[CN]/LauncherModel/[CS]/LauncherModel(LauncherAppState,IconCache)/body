@@ -1,6 +1,6 @@
 {
   final Context context=app.getContext();
-  mAppsCanBeOnExternalStorage=!Environment.isExternalStorageEmulated();
+  mAppsCanBeOnRemoveableStorage=Environment.isExternalStorageRemovable();
   mApp=app;
   mBgAllAppsList=new AllAppsList(iconCache);
   mIconCache=iconCache;

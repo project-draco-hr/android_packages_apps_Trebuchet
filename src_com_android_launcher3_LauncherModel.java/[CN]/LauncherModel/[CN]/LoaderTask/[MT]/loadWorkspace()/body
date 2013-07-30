@@ -46,53 +46,61 @@ synchronized (sBgLock) {
 switch (itemType) {
 case LauncherSettings.Favorites.ITEM_TYPE_APPLICATION:
 case LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT:
-            intentDescription=c.getString(intentIndex);
-          try {
-            intent=Intent.parseUri(intentDescription,0);
-          }
- catch (          URISyntaxException e) {
+            id=c.getLong(idIndex);
+          intentDescription=c.getString(intentIndex);
+        try {
+          intent=Intent.parseUri(intentDescription,0);
+          ComponentName cn=intent.getComponent();
+          if (!isValidPackage(manager,cn)) {
+            if (!mAppsCanBeOnRemoveableStorage) {
+              Uri uri=LauncherSettings.Favorites.getContentUri(id,false);
+              contentResolver.delete(uri,null,null);
+              Log.e(TAG,"Invalid package removed in loadWorkspace: " + cn);
+            }
+ else {
+              Log.e(TAG,"Invalid package found in loadWorkspace: " + cn);
+            }
             continue;
           }
-        if (itemType == LauncherSettings.Favorites.ITEM_TYPE_APPLICATION) {
-          info=getShortcutInfo(manager,intent,context,c,iconIndex,titleIndex,mLabelCache);
         }
+ catch (        URISyntaxException e) {
+          continue;
+        }
+      if (itemType == LauncherSettings.Favorites.ITEM_TYPE_APPLICATION) {
+        info=getShortcutInfo(manager,intent,context,c,iconIndex,titleIndex,mLabelCache);
+      }
  else {
-          info=getShortcutInfo(c,context,iconTypeIndex,iconPackageIndex,iconResourceIndex,iconIndex,titleIndex);
-          if (intent.getAction() != null && intent.getCategories() != null && intent.getAction().equals(Intent.ACTION_MAIN) && intent.getCategories().contains(Intent.CATEGORY_LAUNCHER)) {
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
-          }
+        info=getShortcutInfo(c,context,iconTypeIndex,iconPackageIndex,iconResourceIndex,iconIndex,titleIndex);
+        if (intent.getAction() != null && intent.getCategories() != null && intent.getAction().equals(Intent.ACTION_MAIN) && intent.getCategories().contains(Intent.CATEGORY_LAUNCHER)) {
+          intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
         }
-      if (info != null) {
-        info.intent=intent;
-        info.id=c.getLong(idIndex);
-        container=c.getInt(containerIndex);
-        info.container=container;
-        info.screenId=c.getInt(screenIndex);
-        info.cellX=c.getInt(cellXIndex);
-        info.cellY=c.getInt(cellYIndex);
-        if (!checkItemPlacement(occupied,info)) {
-          break;
-        }
+      }
+    if (info != null) {
+      info.id=id;
+      info.intent=intent;
+      container=c.getInt(containerIndex);
+      info.container=container;
+      info.screenId=c.getInt(screenIndex);
+      info.cellX=c.getInt(cellXIndex);
+      info.cellY=c.getInt(cellYIndex);
+      if (!checkItemPlacement(occupied,info)) {
+        break;
+      }
 switch (container) {
 case LauncherSettings.Favorites.CONTAINER_DESKTOP:
 case LauncherSettings.Favorites.CONTAINER_HOTSEAT:
-          sBgWorkspaceItems.add(info);
-        break;
+        sBgWorkspaceItems.add(info);
+      break;
 default :
-      FolderInfo folderInfo=findOrMakeFolder(sBgFolders,container);
-    folderInfo.add(info);
-  break;
+    FolderInfo folderInfo=findOrMakeFolder(sBgFolders,container);
+  folderInfo.add(info);
+break;
 }
 if (container != LauncherSettings.Favorites.CONTAINER_HOTSEAT && loadOldDb) {
 info.screenId=permuteScreens(info.screenId);
 }
 sBgItemsIdMap.put(info.id,info);
 queueIconToBeChecked(sBgDbIconCache,info,c,iconIndex);
-}
- else {
-id=c.getLong(idIndex);
-Log.e(TAG,"Error loading shortcut " + id + ", removing it");
-contentResolver.delete(LauncherSettings.Favorites.getContentUri(id,false),null,null);
 }
 break;
 case LauncherSettings.Favorites.ITEM_TYPE_FOLDER:
