@@ -1,9 +1,10 @@
 {
   mFolderIcon=folderIcon;
   Resources res=launcher.getResources();
-  mOuterRingDrawable=res.getDrawable(R.drawable.portal_ring_outer_holo);
-  mInnerRingDrawable=res.getDrawable(R.drawable.portal_ring_inner_holo);
   if (sStaticValuesDirty) {
+    if (Looper.myLooper() != Looper.getMainLooper()) {
+      throw new RuntimeException("FolderRingAnimator loading drawables on non-UI thread " + Thread.currentThread());
+    }
     sPreviewSize=res.getDimensionPixelSize(R.dimen.folder_preview_size);
     sPreviewPadding=res.getDimensionPixelSize(R.dimen.folder_preview_padding);
     sSharedOuterRingDrawable=res.getDrawable(R.drawable.portal_ring_outer_holo);
