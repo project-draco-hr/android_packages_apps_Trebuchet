@@ -110,5 +110,8 @@ catch (  IOException e) {
 catch (  RuntimeException e) {
     Log.w(TAG,"Got exception parsing favorites.",e);
   }
+  if (mMaxItemId == -1) {
+    mMaxItemId=initializeMaxItemId(db);
+  }
   return i;
 }

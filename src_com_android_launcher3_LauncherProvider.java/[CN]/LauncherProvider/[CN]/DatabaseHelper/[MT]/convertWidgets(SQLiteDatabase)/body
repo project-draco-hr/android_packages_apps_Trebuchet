@@ -54,4 +54,6 @@
       c.close();
     }
   }
+  mMaxItemId=initializeMaxItemId(db);
+  if (LOGD)   Log.d(TAG,"mMaxItemId: " + mMaxItemId);
 }

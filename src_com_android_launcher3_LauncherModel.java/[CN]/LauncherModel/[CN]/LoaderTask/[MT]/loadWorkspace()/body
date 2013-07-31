@@ -5,9 +5,8 @@
   final PackageManager manager=context.getPackageManager();
   final AppWidgetManager widgets=AppWidgetManager.getInstance(context);
   final boolean isSafeMode=manager.isSafeMode();
-  boolean loadOldDb=mApp.getLauncherProvider().shouldLoadOldDb();
-  Uri contentUri=loadOldDb ? LauncherSettings.Favorites.OLD_CONTENT_URI : LauncherSettings.Favorites.CONTENT_URI;
-  mIsUpgradePath=loadOldDb;
+  mApp.getLauncherProvider().loadDefaultFavoritesIfNecessary(0);
+  boolean loadedOldDb=mApp.getLauncherProvider().justLoadedOldDb();
 synchronized (sBgLock) {
     sBgWorkspaceItems.clear();
     sBgAppWidgets.clear();
@@ -16,6 +15,7 @@ synchronized (sBgLock) {
     sBgDbIconCache.clear();
     sBgWorkspaceScreens.clear();
     final ArrayList<Long> itemsToRemove=new ArrayList<Long>();
+    final Uri contentUri=LauncherSettings.Favorites.CONTENT_URI;
     final Cursor c=contentResolver.query(contentUri,null,null,null,null);
     final HashMap<Long,ItemInfo[][]> occupied=new HashMap<Long,ItemInfo[][]>();
     try {
@@ -83,9 +83,6 @@ default :
     folderInfo.add(info);
   break;
 }
-if (container != LauncherSettings.Favorites.CONTAINER_HOTSEAT && loadOldDb) {
-info.screenId=permuteScreens(info.screenId);
-}
 sBgItemsIdMap.put(info.id,info);
 queueIconToBeChecked(sBgDbIconCache,info,c,iconIndex);
 }
@@ -113,9 +110,6 @@ case LauncherSettings.Favorites.CONTAINER_DESKTOP:
 case LauncherSettings.Favorites.CONTAINER_HOTSEAT:
 sBgWorkspaceItems.add(folderInfo);
 break;
-}
-if (container != LauncherSettings.Favorites.CONTAINER_HOTSEAT && loadOldDb) {
-folderInfo.screenId=permuteScreens(folderInfo.screenId);
 }
 sBgItemsIdMap.put(folderInfo.id,folderInfo);
 sBgFolders.put(folderInfo.id,folderInfo);
@@ -145,9 +139,6 @@ container=c.getInt(containerIndex);
 if (container != LauncherSettings.Favorites.CONTAINER_DESKTOP && container != LauncherSettings.Favorites.CONTAINER_HOTSEAT) {
 Log.e(TAG,"Widget found where container != " + "CONTAINER_DESKTOP nor CONTAINER_HOTSEAT - ignoring!");
 continue;
-}
-if (container != LauncherSettings.Favorites.CONTAINER_HOTSEAT && loadOldDb) {
-appWidgetInfo.screenId=permuteScreens(appWidgetInfo.screenId);
 }
 appWidgetInfo.container=c.getInt(containerIndex);
 if (!checkItemPlacement(occupied,appWidgetInfo)) {
@@ -183,7 +174,7 @@ Log.w(TAG,"Could not remove id = " + id);
 }
 }
 }
-if (loadOldDb) {
+if (loadedOldDb) {
 long maxScreenId=0;
 for (ItemInfo item : sBgItemsIdMap.values()) {
 long screenId=item.screenId;
@@ -197,6 +188,12 @@ maxScreenId=screenId;
 Collections.sort(sBgWorkspaceScreens);
 mApp.getLauncherProvider().updateMaxScreenId(maxScreenId);
 updateWorkspaceScreenOrder(context,sBgWorkspaceScreens);
+long maxItemId=0;
+for (ItemInfo item : sBgItemsIdMap.values()) {
+maxItemId=Math.max(maxItemId,item.id);
+}
+LauncherAppState app=LauncherAppState.getInstance();
+app.getLauncherProvider().updateMaxItemId(maxItemId);
 }
  else {
 Uri screensUri=LauncherSettings.WorkspaceScreens.CONTENT_URI;
@@ -256,4 +253,5 @@ Log.d(TAG,"[ " + line + " ]");
 }
 }
 }
+return loadedOldDb;
 }

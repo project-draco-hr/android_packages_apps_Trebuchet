@@ -32,24 +32,29 @@
     values.put(LauncherSettings.Favorites.CELLY,c.getInt(cellYIndex));
     values.put(LauncherSettings.Favorites.URI,c.getString(uriIndex));
     values.put(LauncherSettings.Favorites.DISPLAY_MODE,c.getInt(displayModeIndex));
+    if (cb != null) {
+      cb.onRow(values);
+    }
     rows[i++]=values;
   }
-  db.beginTransaction();
   int total=0;
-  try {
-    int numValues=rows.length;
-    for (i=0; i < numValues; i++) {
-      if (dbInsertAndCheck(this,db,TABLE_FAVORITES,null,rows[i]) < 0) {
-        return 0;
-      }
+  if (i > 0) {
+    db.beginTransaction();
+    try {
+      int numValues=rows.length;
+      for (i=0; i < numValues; i++) {
+        if (dbInsertAndCheck(this,db,TABLE_FAVORITES,null,rows[i]) < 0) {
+          return 0;
+        }
  else {
-        total++;
+          total++;
+        }
       }
+      db.setTransactionSuccessful();
     }
-    db.setTransactionSuccessful();
-  }
   finally {
-    db.endTransaction();
+      db.endTransaction();
+    }
   }
   return total;
 }

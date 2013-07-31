@@ -8,7 +8,7 @@
     for (leftScreen=getNextPage(); leftScreen >= 0; --leftScreen) {
       View currPage=getPageAt(leftScreen);
       mTmpIntPoint[0]=currPage.getMeasuredWidth();
-      DragLayer.getDescendantCoordRelativeToParent(currPage,this,mTmpIntPoint,false);
+      Utilities.getDescendantCoordRelativeToParent(currPage,this,mTmpIntPoint,false);
       if (mTmpIntPoint[0] < 0) {
         break;
       }
@@ -16,7 +16,7 @@
     for (rightScreen=getNextPage(); rightScreen < getChildCount(); ++rightScreen) {
       View currPage=getPageAt(rightScreen);
       mTmpIntPoint[0]=0;
-      DragLayer.getDescendantCoordRelativeToParent(currPage,this,mTmpIntPoint,false);
+      Utilities.getDescendantCoordRelativeToParent(currPage,this,mTmpIntPoint,false);
       if (mTmpIntPoint[0] >= viewportWidth) {
         break;
       }

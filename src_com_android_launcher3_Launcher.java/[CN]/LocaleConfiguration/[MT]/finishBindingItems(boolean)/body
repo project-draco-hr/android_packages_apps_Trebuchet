@@ -41,7 +41,6 @@
   }
   mWorkspaceLoading=false;
   if (upgradePath) {
-    mWorkspace.saveWorkspaceToDb();
     mWorkspace.stripDuplicateApps();
     mIntentsOnWorkspaceFromUpgradePath=mWorkspace.stripDuplicateApps();
   }
