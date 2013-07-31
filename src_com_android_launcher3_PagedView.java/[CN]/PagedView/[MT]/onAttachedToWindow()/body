@@ -3,6 +3,10 @@
   if (mPageIndicator == null && mPageIndicatorViewId > -1) {
     mPageIndicator=(PageIndicator)parent.findViewById(mPageIndicatorViewId);
     mPageIndicator.removeAllMarkers();
-    mPageIndicator.addMarkers(getChildCount());
+    ArrayList<Integer> markers=new ArrayList<Integer>();
+    for (int i=0; i < getChildCount(); ++i) {
+      markers.add(getPageIndicatorMarker(i));
+    }
+    mPageIndicator.addMarkers(markers);
   }
 }

@@ -1,0 +1,3 @@
+{
+  return R.layout.page_indicator_marker;
+}

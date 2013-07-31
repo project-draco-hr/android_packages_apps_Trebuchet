@@ -1,6 +1,7 @@
 {
   if (mPageIndicator != null && !isReordering(false)) {
-    mPageIndicator.addMarker(indexOfChild(child));
+    int pageIndex=indexOfChild(child);
+    mPageIndicator.addMarker(pageIndex,getPageIndicatorMarker(pageIndex));
   }
   mForceScreenScrolled=true;
   mRecomputePageSpacing=true;
