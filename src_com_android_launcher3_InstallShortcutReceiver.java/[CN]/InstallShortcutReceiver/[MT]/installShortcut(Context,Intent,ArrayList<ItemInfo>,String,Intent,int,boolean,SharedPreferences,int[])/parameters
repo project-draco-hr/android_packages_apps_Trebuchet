@@ -1,9 +1,0 @@
-Context context
-Intent data
-ArrayList<ItemInfo> items
-String name
-Intent intent
-int screen
-boolean shortcutExists
-SharedPreferences sharedPrefs
-int[] result

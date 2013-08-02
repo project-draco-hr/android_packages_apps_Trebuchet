@@ -22,26 +22,6 @@
   }
   sPendingAddList.clear();
   updateAppMarketIcon();
-  if (mVisible || mWorkspaceLoading) {
-    Runnable newAppsRunnable=new Runnable(){
-      @Override public void run(){
-        runNewAppsAnimation(false);
-      }
-    }
-;
-    boolean willSnapPage=mNewShortcutAnimateScreenId > -1 && mNewShortcutAnimateScreenId != mWorkspace.getCurrentPage();
-    if (canRunNewAppsAnimation()) {
-      if (willSnapPage) {
-        mWorkspace.snapToScreenId(mNewShortcutAnimateScreenId,newAppsRunnable);
-      }
- else {
-        runNewAppsAnimation(false);
-      }
-    }
- else {
-      runNewAppsAnimation(willSnapPage);
-    }
-  }
   mWorkspaceLoading=false;
   if (upgradePath) {
     mWorkspace.stripDuplicateApps();

@@ -1,0 +1,83 @@
+{
+  if (added.isEmpty()) {
+    throw new RuntimeException("EMPTY ADDED ARRAY?");
+  }
+  Runnable r=new Runnable(){
+    public void run(){
+      final ArrayList<ItemInfo> addedShortcutsFinal=new ArrayList<ItemInfo>();
+      final ArrayList<Long> addedWorkspaceScreensFinal=new ArrayList<Long>();
+synchronized (sBgLock) {
+        Iterator<ItemInfo> iter=added.iterator();
+        while (iter.hasNext()) {
+          ItemInfo a=iter.next();
+          final String name=a.title.toString();
+          final Intent launchIntent=a.getIntent();
+          if (LauncherModel.shortcutExists(context,name,launchIntent)) {
+            continue;
+          }
+          int startSearchPageIndex=1;
+          Pair<Long,int[]> coords=LauncherModel.findNextAvailableIconSpace(context,name,launchIntent,startSearchPageIndex);
+          if (coords == null) {
+            LauncherAppState appState=LauncherAppState.getInstance();
+            LauncherProvider lp=appState.getLauncherProvider();
+            int numPagesToAdd=Math.max(1,startSearchPageIndex + 1 - sBgWorkspaceScreens.size());
+            while (numPagesToAdd > 0) {
+              long screenId=lp.generateNewScreenId();
+              sBgWorkspaceScreens.add(screenId);
+              updateWorkspaceScreenOrder(context,sBgWorkspaceScreens);
+              addedWorkspaceScreensFinal.add(screenId);
+              numPagesToAdd--;
+            }
+            coords=LauncherModel.findNextAvailableIconSpace(context,name,launchIntent,startSearchPageIndex);
+          }
+          if (coords == null) {
+            throw new RuntimeException("Coordinates should not be null");
+          }
+          ShortcutInfo shortcutInfo;
+          if (a instanceof ShortcutInfo) {
+            shortcutInfo=(ShortcutInfo)a;
+          }
+ else           if (a instanceof ApplicationInfo) {
+            shortcutInfo=((ApplicationInfo)a).makeShortcut();
+          }
+ else {
+            throw new RuntimeException("Unexpected info type");
+          }
+          addItemToDatabase(context,shortcutInfo,LauncherSettings.Favorites.CONTAINER_DESKTOP,coords.first,coords.second[0],coords.second[1],false);
+          addedShortcutsFinal.add(shortcutInfo);
+        }
+      }
+      if (!addedShortcutsFinal.isEmpty()) {
+        runOnMainThread(new Runnable(){
+          public void run(){
+            Callbacks cb=mCallbacks != null ? mCallbacks.get() : null;
+            if (callbacks == cb && cb != null) {
+              callbacks.bindAddScreens(addedWorkspaceScreensFinal);
+              ItemInfo info=addedShortcutsFinal.get(addedShortcutsFinal.size() - 1);
+              long lastScreenId=info.screenId;
+              final ArrayList<ItemInfo> addAnimated=new ArrayList<ItemInfo>();
+              final ArrayList<ItemInfo> addNotAnimated=new ArrayList<ItemInfo>();
+              for (              ItemInfo i : addedShortcutsFinal) {
+                if (i.screenId == lastScreenId) {
+                  addAnimated.add(i);
+                }
+ else {
+                  addNotAnimated.add(i);
+                }
+              }
+              if (!addNotAnimated.isEmpty()) {
+                callbacks.bindItems(addNotAnimated,0,addNotAnimated.size(),false);
+              }
+              if (!addAnimated.isEmpty()) {
+                callbacks.bindItems(addAnimated,0,addAnimated.size(),true);
+              }
+            }
+          }
+        }
+);
+      }
+    }
+  }
+;
+  runOnWorkerThread(r);
+}

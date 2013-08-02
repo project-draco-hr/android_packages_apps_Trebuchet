@@ -13,7 +13,7 @@
   }
   mOnResumeState=State.NONE;
   setWorkspaceBackground(mState == State.WORKSPACE);
-  InstallShortcutReceiver.flushInstallQueue(this);
+  InstallShortcutReceiver.disableAndFlushInstallQueue(this);
   mPaused=false;
   sPausedFromUserAction=false;
   if (mRestoring || mOnResumeNeedsLoad) {
