@@ -1,0 +1,11 @@
+{
+  if (cn == null) {
+    return false;
+  }
+  try {
+    return (pm.getActivityInfo(cn,0) != null);
+  }
+ catch (  NameNotFoundException e) {
+    return false;
+  }
+}

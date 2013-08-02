@@ -1,5 +1,5 @@
 {
-  if (!mAppsCanBeOnExternalStorage) {
+  if (!mAppsCanBeOnRemoveableStorage) {
     return false;
   }
   if (!info.customIcon && !info.usingFallbackIcon) {
