@@ -23,7 +23,7 @@
   if (target != this) {
     if (mOnExitAlarm.alarmPending()) {
       mOnExitAlarm.cancelAlarm();
-      if (successfulDrop) {
+      if (!successfulDrop) {
         mSuppressFolderDeletion=true;
       }
       completeDragExit();

@@ -41,6 +41,12 @@
       Log.d(TAG,"Time spent processing callbacks in onResume: " + (System.currentTimeMillis() - startTimeCallbacks));
     }
   }
+  if (mOnResumeCallbacks.size() > 0) {
+    for (int i=0; i < mOnResumeCallbacks.size(); i++) {
+      mOnResumeCallbacks.get(i).run();
+    }
+    mOnResumeCallbacks.clear();
+  }
   if (mWaitingForResume != null) {
     mWaitingForResume.setStayPressed(false);
   }
