@@ -1,0 +1,27 @@
+{
+  mLauncher=launcher;
+  loadStats();
+  if (LOCAL_LAUNCH_LOG) {
+    try {
+      mLog=new DataOutputStream(mLauncher.openFileOutput(LOG_FILE_NAME,Context.MODE_APPEND));
+      mLog.writeInt(LOG_TAG_VERSION);
+      mLog.writeInt(LOG_VERSION);
+    }
+ catch (    FileNotFoundException e) {
+      Log.e(TAG,"unable to create stats log: " + e);
+      mLog=null;
+    }
+catch (    IOException e) {
+      Log.e(TAG,"unable to write to stats log: " + e);
+      mLog=null;
+    }
+  }
+  if (DEBUG_BROADCASTS) {
+    launcher.registerReceiver(new BroadcastReceiver(){
+      @Override public void onReceive(      Context context,      Intent intent){
+        android.util.Log.v("Stats","got broadcast: " + intent + " for launched intent: "+ intent.getStringExtra(EXTRA_INTENT));
+      }
+    }
+,new IntentFilter(ACTION_LAUNCH),PERM_LAUNCH,null);
+  }
+}
