@@ -1,10 +1,19 @@
 {
   ComponentName componentName=intent.getComponent();
-  if (!isValidPackage(manager,componentName)) {
+  final ShortcutInfo info=new ShortcutInfo();
+  if (!isValidPackageComponent(manager,componentName)) {
     Log.d(TAG,"Invalid package found in getShortcutInfo: " + componentName);
     return null;
   }
-  final ShortcutInfo info=new ShortcutInfo();
+ else {
+    try {
+      PackageInfo pi=manager.getPackageInfo(componentName.getPackageName(),0);
+      info.initFlagsAndFirstInstallTime(pi);
+    }
+ catch (    NameNotFoundException e) {
+      Log.d(TAG,"getPackInfo failed for package " + componentName.getPackageName());
+    }
+  }
   Bitmap icon=null;
   ResolveInfo resolveInfo=null;
   ComponentName oldComponent=intent.getComponent();
