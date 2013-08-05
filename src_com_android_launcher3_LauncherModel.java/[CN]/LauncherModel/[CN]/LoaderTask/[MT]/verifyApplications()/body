@@ -1,7 +1,7 @@
 {
   final Context context=mApp.getContext();
   ArrayList<ItemInfo> tmpInfos;
-  ArrayList<ApplicationInfo> added=new ArrayList<ApplicationInfo>();
+  ArrayList<ItemInfo> added=new ArrayList<ItemInfo>();
 synchronized (sBgLock) {
     for (    ApplicationInfo app : mBgAllAppsList.data) {
       tmpInfos=getItemInfoForComponentName(app.componentName);
