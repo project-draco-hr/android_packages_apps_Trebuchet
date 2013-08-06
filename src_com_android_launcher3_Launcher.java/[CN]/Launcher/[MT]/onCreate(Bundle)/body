@@ -11,6 +11,7 @@
   mIconCache=app.getIconCache();
   mDragController=new DragController(this);
   mInflater=getLayoutInflater();
+  mStats=new Stats(this);
   mAppWidgetManager=AppWidgetManager.getInstance(this);
   mAppWidgetHost=new LauncherAppWidgetHost(this,APPWIDGET_HOST_ID);
   mAppWidgetHost.startListening();

@@ -1,0 +1,27 @@
+{
+  intent=new Intent(intent);
+  intent.setSourceBounds(null);
+  final String flat=intent.toUri(0);
+  mLauncher.sendBroadcast(new Intent(ACTION_LAUNCH).putExtra(EXTRA_INTENT,flat).putExtra(EXTRA_CONTAINER,shortcut.container).putExtra(EXTRA_SCREEN,shortcut.screenId).putExtra(EXTRA_CELLX,shortcut.cellX).putExtra(EXTRA_CELLY,shortcut.cellY),PERM_LAUNCH);
+  incrementLaunch(flat);
+  if (FLUSH_IMMEDIATELY) {
+    saveStats();
+  }
+  if (LOCAL_LAUNCH_LOG && mLog != null) {
+    try {
+      mLog.writeInt(LOG_TAG_LAUNCH);
+      mLog.writeLong(System.currentTimeMillis());
+      mLog.writeShort((short)shortcut.container);
+      mLog.writeShort((short)shortcut.screenId);
+      mLog.writeShort((short)shortcut.cellX);
+      mLog.writeShort((short)shortcut.cellY);
+      mLog.writeUTF(flat);
+      if (FLUSH_IMMEDIATELY) {
+        mLog.flush();
+      }
+    }
+ catch (    IOException e) {
+      e.printStackTrace();
+    }
+  }
+}
