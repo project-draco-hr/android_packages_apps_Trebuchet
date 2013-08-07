@@ -51,14 +51,14 @@ case LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT:
         try {
           intent=Intent.parseUri(intentDescription,0);
           ComponentName cn=intent.getComponent();
-          if (!isValidPackage(manager,cn)) {
+          if (!isValidPackageComponent(manager,cn)) {
             if (!mAppsCanBeOnRemoveableStorage) {
               Uri uri=LauncherSettings.Favorites.getContentUri(id,false);
               contentResolver.delete(uri,null,null);
-              Log.e(TAG,"Invalid package removed in loadWorkspace: " + cn);
+              Log.e(TAG,"Invalid package removed: " + cn);
             }
  else {
-              Log.e(TAG,"Invalid package found in loadWorkspace: " + cn);
+              Log.e(TAG,"Invalid package found: " + cn);
             }
             continue;
           }
@@ -98,6 +98,9 @@ break;
 }
 sBgItemsIdMap.put(info.id,info);
 queueIconToBeChecked(sBgDbIconCache,info,c,iconIndex);
+}
+ else {
+throw new RuntimeException("Unexpected null ShortcutInfo");
 }
 break;
 case LauncherSettings.Favorites.ITEM_TYPE_FOLDER:
