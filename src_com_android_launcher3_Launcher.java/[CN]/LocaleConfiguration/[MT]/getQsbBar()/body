@@ -1,0 +1,6 @@
+{
+  if (mQsbBar == null) {
+    mQsbBar=mInflater.inflate(R.layout.qsb_bar,mSearchDropTargetBar);
+  }
+  return mQsbBar;
+}

@@ -7,4 +7,12 @@
   dragController.setFlingToDeleteDropTarget(mDeleteDropTarget);
   mInfoDropTarget.setLauncher(launcher);
   mDeleteDropTarget.setLauncher(launcher);
+  mQSBSearchBar=launcher.getQsbBar();
+  if (mEnableDropDownDropTargets) {
+    mQSBSearchBarAnim=LauncherAnimUtils.ofFloat(mQSBSearchBar,"translationY",0,-mBarHeight);
+  }
+ else {
+    mQSBSearchBarAnim=LauncherAnimUtils.ofFloat(mQSBSearchBar,"alpha",1f,0f);
+  }
+  setupAnimation(mQSBSearchBarAnim,mQSBSearchBar);
 }
