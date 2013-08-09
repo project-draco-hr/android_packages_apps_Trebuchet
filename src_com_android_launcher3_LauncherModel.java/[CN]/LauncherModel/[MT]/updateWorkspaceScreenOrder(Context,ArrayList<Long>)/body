@@ -19,6 +19,7 @@
         long screenId=screens.get(i);
         v.put(LauncherSettings.WorkspaceScreens._ID,screenId);
         v.put(LauncherSettings.WorkspaceScreens.SCREEN_RANK,i);
+        Log.d(TAG,"10249126 - updateWorkspaceScreenOrder(" + screenId + ", "+ i+ ")");
         values[i]=v;
       }
       cr.bulkInsert(uri,values);

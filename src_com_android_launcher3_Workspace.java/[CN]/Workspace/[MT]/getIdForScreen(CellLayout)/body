@@ -1,4 +1,5 @@
 {
+  Log.d(TAG,"10249126 - getIdForScreen()");
   Iterator<Long> iter=mWorkspaceScreens.keySet().iterator();
   while (iter.hasNext()) {
     long id=iter.next();

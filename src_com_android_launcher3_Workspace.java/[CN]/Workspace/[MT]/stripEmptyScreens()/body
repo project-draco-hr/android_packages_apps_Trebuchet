@@ -3,6 +3,7 @@
     mStripScreensOnPageStopMoving=true;
     return;
   }
+  Log.d(TAG,"10249126 - stripEmptyScreens()");
   int currentPage=getNextPage();
   ArrayList<Long> removeScreens=new ArrayList<Long>();
   for (  Long id : mWorkspaceScreens.keySet()) {

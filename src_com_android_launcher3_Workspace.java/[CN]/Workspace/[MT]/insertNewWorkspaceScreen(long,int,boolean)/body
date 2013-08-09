@@ -1,4 +1,5 @@
 {
+  Log.d(TAG,"10249126 - insertNewWorkspaceScreen(" + screenId + ", "+ insertIndex+ ", "+ updateDb+ ")");
   CellLayout newScreen=(CellLayout)mLauncher.getLayoutInflater().inflate(R.layout.workspace_screen,null);
   newScreen.setOnLongClickListener(mLongClickListener);
   mWorkspaceScreens.put(screenId,newScreen);

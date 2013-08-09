@@ -1,4 +1,5 @@
 {
+  Log.d(TAG,"10249126 - createCustomContentPage()");
   CellLayout customScreen=(CellLayout)mLauncher.getLayoutInflater().inflate(R.layout.workspace_screen,null);
   Rect p=new Rect();
   AppWidgetHostView.getDefaultPaddingForWidget(mLauncher,mLauncher.getComponentName(),p);

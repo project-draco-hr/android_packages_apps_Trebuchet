@@ -1,4 +1,5 @@
 {
+  Log.d(TAG,"10249126 - bindWorkspaceScreens()");
   final Runnable r=new Runnable(){
     @Override public void run(){
       Callbacks callbacks=tryGetCallbacks(oldCallbacks);

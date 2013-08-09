@@ -23,6 +23,7 @@ synchronized (sBgLock) {
             int numPagesToAdd=Math.max(1,startSearchPageIndex + 1 - sBgWorkspaceScreens.size());
             while (numPagesToAdd > 0) {
               long screenId=lp.generateNewScreenId();
+              Log.d(TAG,"10249126 - addAndBindAddedApps(" + screenId + ")");
               sBgWorkspaceScreens.add(screenId);
               updateWorkspaceScreenOrder(context,sBgWorkspaceScreens);
               addedWorkspaceScreensFinal.add(screenId);
