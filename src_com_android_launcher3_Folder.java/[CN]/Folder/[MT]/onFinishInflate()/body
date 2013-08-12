@@ -2,6 +2,9 @@
   super.onFinishInflate();
   mScrollView=(ScrollView)findViewById(R.id.scroll_view);
   mContent=(CellLayout)findViewById(R.id.folder_content);
+  LauncherAppState app=LauncherAppState.getInstance();
+  DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
+  mContent.setCellDimensions(grid.folderCellWidthPx,grid.folderCellHeightPx);
   mContent.setGridSize(mMaxVisibleX,mMaxVisibleY);
   mMaxContentAreaHeight=mContent.getDesiredHeight() - SCROLL_CUT_OFF_AMOUNT;
   mContent.setGridSize(0,0);

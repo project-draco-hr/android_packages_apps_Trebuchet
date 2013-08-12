@@ -1,6 +1,7 @@
 {
   layout.setPadding(mPageLayoutPaddingLeft,mPageLayoutPaddingTop,mPageLayoutPaddingRight,mPageLayoutPaddingBottom);
-  int widthSpec=MeasureSpec.makeMeasureSpec(getMeasuredWidth(),MeasureSpec.AT_MOST);
+  int workspaceWidth=mLauncher.getWorkspace().getMeasuredWidth();
+  int widthSpec=MeasureSpec.makeMeasureSpec(Math.min(getMeasuredWidth(),workspaceWidth),MeasureSpec.AT_MOST);
   int heightSpec=MeasureSpec.makeMeasureSpec(getMeasuredHeight(),MeasureSpec.AT_MOST);
   layout.setMinimumWidth(getPageContentWidth());
   layout.measure(widthSpec,heightSpec);

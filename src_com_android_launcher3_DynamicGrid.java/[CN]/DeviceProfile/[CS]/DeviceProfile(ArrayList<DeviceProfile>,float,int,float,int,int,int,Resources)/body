@@ -1,0 +1,58 @@
+{
+  DisplayMetrics dm=resources.getDisplayMetrics();
+  ArrayList<DeviceProfileQuery> points=new ArrayList<DeviceProfileQuery>();
+  transposeLayoutWithOrientation=resources.getBoolean(R.bool.hotseat_transpose_layout_with_orientation);
+  updateFromConfiguration(resources,wPx,hPx);
+  minWidthDps=minWidth;
+  minHeightDps=minHeight;
+  edgeMarginPx=resources.getDimensionPixelSize(R.dimen.dynamic_grid_edge_margin);
+  pageIndicatorHeightPx=resources.getDimensionPixelSize(R.dimen.dynamic_grid_page_indicator_height);
+  for (  DeviceProfile p : profiles) {
+    points.add(new DeviceProfileQuery(p.minWidthDps,p.minHeightDps,p.numRows));
+  }
+  numRows=Math.round(invDistWeightedInterpolate(minWidth,minHeight,points));
+  points.clear();
+  for (  DeviceProfile p : profiles) {
+    points.add(new DeviceProfileQuery(p.minWidthDps,p.minHeightDps,p.numColumns));
+  }
+  numColumns=Math.round(invDistWeightedInterpolate(minWidth,minHeight,points));
+  points.clear();
+  for (  DeviceProfile p : profiles) {
+    points.add(new DeviceProfileQuery(p.minWidthDps,p.minHeightDps,p.iconSize));
+  }
+  iconSize=invDistWeightedInterpolate(minWidth,minHeight,points);
+  iconSizePx=(int)Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,iconSize,dm));
+  points.clear();
+  for (  DeviceProfile p : profiles) {
+    points.add(new DeviceProfileQuery(p.minWidthDps,p.minHeightDps,p.iconTextSize));
+  }
+  iconTextSize=invDistWeightedInterpolate(minWidth,minHeight,points);
+  iconTextSizePx=(int)Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP,iconTextSize,dm));
+  points.clear();
+  for (  DeviceProfile p : profiles) {
+    points.add(new DeviceProfileQuery(p.minWidthDps,p.minHeightDps,p.numHotseatIcons));
+  }
+  numHotseatIcons=Math.round(invDistWeightedInterpolate(minWidth,minHeight,points));
+  points.clear();
+  for (  DeviceProfile p : profiles) {
+    points.add(new DeviceProfileQuery(p.minWidthDps,p.minHeightDps,p.hotseatIconSize));
+  }
+  hotseatIconSize=invDistWeightedInterpolate(minWidth,minHeight,points);
+  hotseatIconSizePx=(int)Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,hotseatIconSize,dm));
+  hotseatBarHeightPx=iconSizePx + 4 * edgeMarginPx;
+  hotseatCellWidthPx=iconSizePx;
+  hotseatCellHeightPx=iconSizePx;
+  searchBarSpaceMaxWidthPx=resources.getDimensionPixelSize(R.dimen.dynamic_grid_search_bar_max_width);
+  searchBarHeightPx=resources.getDimensionPixelSize(R.dimen.dynamic_grid_search_bar_height);
+  searchBarSpaceWidthPx=Math.min(searchBarSpaceMaxWidthPx,widthPx);
+  searchBarSpaceHeightPx=searchBarHeightPx + 2 * edgeMarginPx;
+  Paint textPaint=new Paint();
+  textPaint.setTextSize(iconTextSizePx);
+  FontMetrics fm=textPaint.getFontMetrics();
+  cellWidthPx=iconSizePx;
+  cellHeightPx=iconSizePx + (int)Math.ceil(fm.bottom - fm.top);
+  folderCellWidthPx=cellWidthPx + 3 * edgeMarginPx;
+  folderCellHeightPx=cellHeightPx + edgeMarginPx;
+  folderBackgroundOffset=-edgeMarginPx;
+  folderIconSizePx=iconSizePx + 2 * -folderBackgroundOffset;
+}

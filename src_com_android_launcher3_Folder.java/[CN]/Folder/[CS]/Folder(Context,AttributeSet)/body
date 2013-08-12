@@ -1,34 +1,13 @@
 {
   super(context,attrs);
+  LauncherAppState app=LauncherAppState.getInstance();
+  DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
   setAlwaysDrawnWithCacheEnabled(false);
   mInflater=LayoutInflater.from(context);
-  mIconCache=(LauncherAppState.getInstance()).getIconCache();
+  mIconCache=app.getIconCache();
   Resources res=getResources();
-  mMaxCountX=mMaxVisibleX=res.getInteger(R.integer.folder_max_count_x);
-  mMaxCountY=mMaxVisibleY=res.getInteger(R.integer.folder_max_count_y);
-  mMaxNumItems=res.getInteger(R.integer.folder_max_num_items);
-  if (mMaxCountY == -1) {
-    mMaxCountY=Integer.MAX_VALUE;
-    mMaxVisibleX=LauncherModel.getCellCountX() + 1;
-  }
-  if (mMaxNumItems == -1) {
-    mMaxNumItems=Integer.MAX_VALUE;
-    mMaxVisibleY=LauncherModel.getCellCountY() + 1;
-  }
-  if (mMaxCountX == 0) {
-    mMaxCountX=mMaxVisibleX=LauncherModel.getCellCountX();
-    mMaxVisibleX++;
-  }
-  if (mMaxCountY == 0) {
-    mMaxCountY=mMaxVisibleY=LauncherModel.getCellCountY();
-    mMaxVisibleY++;
-  }
-  if (mMaxNumItems == 0) {
-    mMaxNumItems=mMaxCountX * mMaxCountY;
-    if (mMaxNumItems < 0) {
-      mMaxNumItems=Integer.MAX_VALUE;
-    }
-  }
+  mMaxCountX=mMaxVisibleX=mMaxVisibleY=(int)(grid.numColumns);
+  mMaxCountY=mMaxNumItems=Integer.MAX_VALUE;
   mInputMethodManager=(InputMethodManager)getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
   mExpandDuration=res.getInteger(R.integer.config_folderAnimDuration);
   if (sDefaultFolderName == null) {

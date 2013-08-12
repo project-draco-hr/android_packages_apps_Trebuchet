@@ -1,8 +1,10 @@
 {
   if (mIntrinsicIconSize != drawableSize || mTotalWidth != totalSize) {
+    LauncherAppState app=LauncherAppState.getInstance();
+    DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
     mIntrinsicIconSize=drawableSize;
     mTotalWidth=totalSize;
-    final int previewSize=FolderRingAnimator.sPreviewSize;
+    final int previewSize=mPreviewBackground.getLayoutParams().height;
     final int previewPadding=FolderRingAnimator.sPreviewPadding;
     mAvailableSpaceInPreview=(previewSize - 2 * previewPadding);
     int adjustedAvailableSpace=(int)((mAvailableSpaceInPreview / 2) * (1 + 0.8f));
@@ -11,6 +13,6 @@
     mBaselineIconSize=(int)(mIntrinsicIconSize * mBaselineIconScale);
     mMaxPerspectiveShift=mBaselineIconSize * PERSPECTIVE_SHIFT_FACTOR;
     mPreviewOffsetX=(mTotalWidth - mAvailableSpaceInPreview) / 2;
-    mPreviewOffsetY=previewPadding;
+    mPreviewOffsetY=previewPadding + grid.folderBackgroundOffset;
   }
 }

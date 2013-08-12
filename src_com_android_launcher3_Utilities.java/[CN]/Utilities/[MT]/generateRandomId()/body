@@ -1,3 +1,0 @@
-{
-  return new Random(System.currentTimeMillis()).nextInt(1 << 24);
-}

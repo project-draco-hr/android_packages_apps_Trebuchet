@@ -5,7 +5,7 @@
   float offset=(1 - r) * mMaxPerspectiveShift;
   float scaledSize=scale * mBaselineIconSize;
   float scaleOffsetCorrection=(1 - scale) * mBaselineIconSize;
-  float transY=mAvailableSpaceInPreview - (offset + scaledSize + scaleOffsetCorrection);
+  float transY=mAvailableSpaceInPreview - (offset + scaledSize + scaleOffsetCorrection) + getPaddingTop();
   float transX=offset + scaleOffsetCorrection;
   float totalScale=mBaselineIconScale * scale;
   final int overlayAlpha=(int)(80 * (1 - r));

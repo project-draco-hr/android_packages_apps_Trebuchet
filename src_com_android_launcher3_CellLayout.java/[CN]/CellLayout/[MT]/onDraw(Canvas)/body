@@ -46,25 +46,29 @@
     }
   }
   int previewOffset=FolderRingAnimator.sPreviewSize;
+  LauncherAppState app=LauncherAppState.getInstance();
+  DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
   for (int i=0; i < mFolderOuterRings.size(); i++) {
     FolderRingAnimator fra=mFolderOuterRings.get(i);
     Drawable d=FolderRingAnimator.sSharedOuterRingDrawable;
-    int width=(int)fra.getOuterRingSize();
+    int width=(int)(fra.getOuterRingSize() * getChildrenScale());
     int height=width;
     cellToPoint(fra.mCellX,fra.mCellY,mTempLocation);
+    View child=getChildAt(fra.mCellX,fra.mCellY);
     int centerX=mTempLocation[0] + mCellWidth / 2;
-    int centerY=mTempLocation[1] + previewOffset / 2;
+    int centerY=mTempLocation[1] + previewOffset / 2 + child.getPaddingTop() + grid.folderBackgroundOffset;
     canvas.save();
     canvas.translate(centerX - width / 2,centerY - height / 2);
     d.setBounds(0,0,width,height);
     d.draw(canvas);
     canvas.restore();
     d=FolderRingAnimator.sSharedInnerRingDrawable;
-    width=(int)fra.getInnerRingSize();
+    width=(int)(fra.getInnerRingSize() * getChildrenScale());
     height=width;
     cellToPoint(fra.mCellX,fra.mCellY,mTempLocation);
+    child=getChildAt(fra.mCellX,fra.mCellY);
     centerX=mTempLocation[0] + mCellWidth / 2;
-    centerY=mTempLocation[1] + previewOffset / 2;
+    centerY=mTempLocation[1] + previewOffset / 2 + child.getPaddingTop() + grid.folderBackgroundOffset;
     canvas.save();
     canvas.translate(centerX - width / 2,centerY - width / 2);
     d.setBounds(0,0,width,height);
@@ -76,8 +80,9 @@
     int width=d.getIntrinsicWidth();
     int height=d.getIntrinsicHeight();
     cellToPoint(mFolderLeaveBehindCell[0],mFolderLeaveBehindCell[1],mTempLocation);
+    View child=getChildAt(mFolderLeaveBehindCell[0],mFolderLeaveBehindCell[1]);
     int centerX=mTempLocation[0] + mCellWidth / 2;
-    int centerY=mTempLocation[1] + previewOffset / 2;
+    int centerY=mTempLocation[1] + previewOffset / 2 + child.getPaddingTop() + grid.folderBackgroundOffset;
     canvas.save();
     canvas.translate(centerX - width / 2,centerY - width / 2);
     d.setBounds(0,0,width,height);

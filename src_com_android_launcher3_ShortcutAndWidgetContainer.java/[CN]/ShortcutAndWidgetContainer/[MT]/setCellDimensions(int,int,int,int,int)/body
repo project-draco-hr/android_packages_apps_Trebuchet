@@ -1,7 +1,0 @@
-{
-  mCellWidth=cellWidth;
-  mCellHeight=cellHeight;
-  mWidthGap=widthGap;
-  mHeightGap=heightGap;
-  mCountX=countX;
-}

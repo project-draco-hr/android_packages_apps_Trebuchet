@@ -20,18 +20,12 @@ synchronized (sCanvas) {
     int sourceWidth=icon.getIntrinsicWidth();
     int sourceHeight=icon.getIntrinsicHeight();
     if (sourceWidth > 0 && sourceHeight > 0) {
-      if (width < sourceWidth || height < sourceHeight) {
-        final float ratio=(float)sourceWidth / sourceHeight;
-        if (sourceWidth > sourceHeight) {
-          height=(int)(width / ratio);
-        }
- else         if (sourceHeight > sourceWidth) {
-          width=(int)(height * ratio);
-        }
+      final float ratio=(float)sourceWidth / sourceHeight;
+      if (sourceWidth > sourceHeight) {
+        height=(int)(width / ratio);
       }
- else       if (sourceWidth < width && sourceHeight < height) {
-        width=sourceWidth;
-        height=sourceHeight;
+ else       if (sourceHeight > sourceWidth) {
+        width=(int)(height * ratio);
       }
     }
     int textureWidth=sIconTextureWidth;

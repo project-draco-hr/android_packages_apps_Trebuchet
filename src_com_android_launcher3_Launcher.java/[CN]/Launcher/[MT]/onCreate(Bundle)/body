@@ -6,6 +6,13 @@
   super.onCreate(savedInstanceState);
   LauncherAppState.setApplicationContext(getApplicationContext());
   LauncherAppState app=LauncherAppState.getInstance();
+  Point smallestSize=new Point();
+  Point largestSize=new Point();
+  Point realSize=new Point();
+  Display display=getWindowManager().getDefaultDisplay();
+  display.getCurrentSizeRange(smallestSize,largestSize);
+  display.getRealSize(realSize);
+  DeviceProfile grid=app.initDynamicGrid(this,Math.min(smallestSize.x,smallestSize.y),Math.min(largestSize.x,largestSize.y),realSize.x,realSize.y);
   mSharedPrefs=getSharedPreferences(LauncherAppState.getSharedPreferencesKey(),Context.MODE_PRIVATE);
   mModel=app.setLauncher(this);
   mIconCache=app.getIconCache();
@@ -21,6 +28,7 @@
   }
   checkForLocaleChange();
   setContentView(R.layout.launcher);
+  grid.layout(this);
   setupViews();
   showFirstRunWorkspaceCling();
   registerContentObservers();

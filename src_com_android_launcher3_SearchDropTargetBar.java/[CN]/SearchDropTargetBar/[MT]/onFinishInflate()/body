@@ -4,11 +4,13 @@
   mDropTargetBar=findViewById(R.id.drag_target_bar);
   mInfoDropTarget=(ButtonDropTarget)mDropTargetBar.findViewById(R.id.info_target_text);
   mDeleteDropTarget=(ButtonDropTarget)mDropTargetBar.findViewById(R.id.delete_target_text);
-  mBarHeight=getResources().getDimensionPixelSize(R.dimen.qsb_bar_height);
   mInfoDropTarget.setSearchDropTargetBar(this);
   mDeleteDropTarget.setSearchDropTargetBar(this);
   mEnableDropDownDropTargets=getResources().getBoolean(R.bool.config_useDropTargetDownTransition);
   if (mEnableDropDownDropTargets) {
+    LauncherAppState app=LauncherAppState.getInstance();
+    DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
+    mBarHeight=grid.searchBarSpaceHeightPx;
     mDropTargetBar.setTranslationY(-mBarHeight);
     mDropTargetBarAnim=LauncherAnimUtils.ofFloat(mDropTargetBar,"translationY",-mBarHeight,0f);
     mQSBSearchBarAnim=LauncherAnimUtils.ofFloat(mQSBSearchBar,"translationY",0,-mBarHeight);

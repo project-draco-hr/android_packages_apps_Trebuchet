@@ -1,0 +1,3 @@
+{
+  return (float)Math.sqrt((p1.x - p0.x) * (p1.x - p0.x) + (p1.y - p0.y) * (p1.y - p0.y));
+}

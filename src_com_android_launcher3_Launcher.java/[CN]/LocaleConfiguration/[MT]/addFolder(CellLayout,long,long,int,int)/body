@@ -5,5 +5,7 @@
   sFolders.put(folderInfo.id,folderInfo);
   FolderIcon newFolder=FolderIcon.fromXml(R.layout.folder_icon,this,layout,folderInfo,mIconCache);
   mWorkspace.addInScreen(newFolder,container,screenId,cellX,cellY,1,1,isWorkspaceLocked());
+  CellLayout parent=mWorkspace.getParentCellLayoutForView(newFolder);
+  parent.getShortcutsAndWidgets().measureChild(newFolder);
   return newFolder;
 }

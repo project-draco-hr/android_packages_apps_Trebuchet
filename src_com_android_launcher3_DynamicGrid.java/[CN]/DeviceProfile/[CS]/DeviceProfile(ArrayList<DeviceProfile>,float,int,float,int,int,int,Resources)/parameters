@@ -1,0 +1,8 @@
+ArrayList<DeviceProfile> profiles
+float minWidth
+int minWidthPx
+float minHeight
+int minHeightPx
+int wPx
+int hPx
+Resources resources

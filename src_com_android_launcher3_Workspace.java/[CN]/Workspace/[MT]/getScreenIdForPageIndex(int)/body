@@ -1,3 +1,6 @@
 {
-  return mScreenOrder.get(index);
+  if (0 <= index && index < mScreenOrder.size()) {
+    return mScreenOrder.get(index);
+  }
+  return -1;
 }

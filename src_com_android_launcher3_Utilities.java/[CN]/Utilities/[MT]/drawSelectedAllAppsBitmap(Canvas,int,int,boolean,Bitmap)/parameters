@@ -1,5 +1,0 @@
-Canvas dest
-int destWidth
-int destHeight
-boolean pressed
-Bitmap src
