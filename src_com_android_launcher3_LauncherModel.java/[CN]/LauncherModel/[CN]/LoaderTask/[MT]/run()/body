@@ -34,6 +34,7 @@ synchronized (sBgLock) {
     }
     sBgDbIconCache.clear();
   }
+  Log.d(TAG,"10249126 - verifyApplications(" + isUpgrade + ")");
   if (!isUpgrade) {
     verifyApplications();
   }

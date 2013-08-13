@@ -219,10 +219,11 @@ while (sc.moveToNext()) {
 try {
 long screenId=sc.getLong(idIndex);
 int rank=sc.getInt(rankIndex);
+Log.d(TAG,"10249126 - loadWorkspace-!loadedOldDb(" + screenId + ", "+ rank+ ")");
 orderedScreens.put(rank,screenId);
 }
  catch (Exception e) {
-Log.w(TAG,"Desktop items loading interrupted:",e);
+Log.w(TAG,"Desktop items loading interrupted - invalid screens: ",e);
 }
 }
 }
@@ -233,7 +234,6 @@ Iterator<Integer> iter=orderedScreens.keySet().iterator();
 while (iter.hasNext()) {
 sBgWorkspaceScreens.add(orderedScreens.get(iter.next()));
 }
-Log.d(TAG,"10249126 - loadWorkspace-!loadedOldDb()");
 ArrayList<Long> unusedScreens=new ArrayList<Long>();
 unusedScreens.addAll(sBgWorkspaceScreens);
 for (ItemInfo item : sBgItemsIdMap.values()) {
