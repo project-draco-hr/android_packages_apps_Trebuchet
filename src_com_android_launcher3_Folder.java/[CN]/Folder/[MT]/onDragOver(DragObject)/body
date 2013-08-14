@@ -20,4 +20,7 @@
       mDragMode=DRAG_MODE_NONE;
     }
   }
+ else {
+    mReorderAlarm.cancelAlarm();
+  }
 }
