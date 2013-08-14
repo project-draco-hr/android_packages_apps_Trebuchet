@@ -66,4 +66,7 @@
     }
   }
   mChildCountOnLastLayout=getChildCount();
+  if (isReordering(true)) {
+    updateDragViewTranslationDuringDrag();
+  }
 }

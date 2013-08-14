@@ -1,0 +1,19 @@
+{
+  if (mDragView != null) {
+    int dragX=(int)(mDragView.getLeft() + (mDragView.getMeasuredWidth() / 2) + mDragView.getTranslationX());
+    getOverviewModePages(mTempVisiblePagesRange);
+    int minDistance=Integer.MAX_VALUE;
+    int minIndex=indexOfChild(mDragView);
+    for (int i=mTempVisiblePagesRange[0]; i <= mTempVisiblePagesRange[1]; i++) {
+      View page=getPageAt(i);
+      int pageX=(int)(page.getLeft() + page.getMeasuredWidth() / 2);
+      int d=Math.abs(dragX - pageX);
+      if (d < minDistance) {
+        minIndex=i;
+        minDistance=d;
+      }
+    }
+    return minIndex;
+  }
+  return -1;
+}

@@ -1,5 +1,4 @@
 {
-  if (isSmall())   return;
   if (!isFinishedSwitchingState())   return;
   float deltaX=Math.abs(ev.getX() - mXDown);
   float deltaY=Math.abs(ev.getY() - mYDown);

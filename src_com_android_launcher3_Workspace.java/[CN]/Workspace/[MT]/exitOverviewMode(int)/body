@@ -1,0 +1,3 @@
+{
+  enableOverviewMode(false,snapPage);
+}

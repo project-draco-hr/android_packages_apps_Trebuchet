@@ -28,6 +28,7 @@
     }
   }
   mSpringLoadedShrinkFactor=res.getInteger(R.integer.config_workspaceSpringLoadShrinkPercentage) / 100.0f;
+  mOverviewModeShrinkFactor=res.getInteger(R.integer.config_workspaceOverviewShrinkPercentage) / 100.0f;
   mCameraDistance=res.getInteger(R.integer.config_cameraDistance);
   cellCountX=a.getInt(R.styleable.Workspace_cellCountX,cellCountX);
   cellCountY=a.getInt(R.styleable.Workspace_cellCountY,cellCountY);

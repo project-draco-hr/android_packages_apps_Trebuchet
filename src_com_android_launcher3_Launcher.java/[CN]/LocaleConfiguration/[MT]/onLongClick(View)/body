@@ -15,11 +15,11 @@
   if (allowLongPress && !mDragController.isDragging()) {
     if (itemUnderLongClick == null) {
       mWorkspace.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS,HapticFeedbackConstants.FLAG_IGNORE_VIEW_SETTING);
-      if (mWorkspace.getIdForScreen((CellLayout)v) >= 0) {
-        mWorkspace.startReordering();
+      if (mWorkspace.isInOverviewMode()) {
+        mWorkspace.startReordering(v);
       }
  else {
-        startWallpaper();
+        mWorkspace.enterOverviewMode();
       }
     }
  else {

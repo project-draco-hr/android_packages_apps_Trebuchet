@@ -1,5 +1,5 @@
 {
-  if (hasCustomContent()) {
+  if (hasCustomContent() && !isSmall() && !isSwitchingState()) {
     int index=mScreenOrder.indexOf(CUSTOM_CONTENT_SCREEN_ID);
     int scrollDelta=getScrollForPage(index + 1) - getScrollX();
     float progress=(1.0f * scrollDelta) / (getScrollForPage(index + 1) - getScrollForPage(index));
@@ -18,7 +18,15 @@
       mLauncher.getHotseat().setAlpha(1 - progress);
     }
     if (getPageIndicator() != null) {
-      getPageIndicator().setAlpha(1 - progress);
+      final float alpha=1 - progress;
+      final View pi=getPageIndicator();
+      getPageIndicator().setAlpha(alpha);
+      if (alpha < ALPHA_CUTOFF_THRESHOLD && pi.getVisibility() != INVISIBLE) {
+        pi.setVisibility(INVISIBLE);
+      }
+ else       if (alpha > ALPHA_CUTOFF_THRESHOLD && pi.getVisibility() != VISIBLE) {
+        pi.setVisibility(VISIBLE);
+      }
     }
   }
 }

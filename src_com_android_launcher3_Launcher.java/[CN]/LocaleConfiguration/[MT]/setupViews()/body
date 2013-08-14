@@ -11,6 +11,19 @@
   if (mHotseat != null) {
     mHotseat.setup(this);
   }
+  mOverviewPanel=findViewById(R.id.overview_panel);
+  findViewById(R.id.widget_button).setOnClickListener(new OnClickListener(){
+    @Override public void onClick(    View arg0){
+      showAllApps(true);
+    }
+  }
+);
+  findViewById(R.id.wallpaper_button).setOnClickListener(new OnClickListener(){
+    @Override public void onClick(    View arg0){
+      startWallpaper();
+    }
+  }
+);
   mWorkspace.setHapticFeedbackEnabled(false);
   mWorkspace.setOnLongClickListener(this);
   mWorkspace.setup(dragController);

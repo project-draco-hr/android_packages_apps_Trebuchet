@@ -12,7 +12,9 @@
  else   if (duration == 0) {
     duration=Math.abs(delta);
   }
-  if (!mScroller.isFinished())   mScroller.abortAnimation();
+  if (!mScroller.isFinished()) {
+    mScroller.abortAnimation();
+  }
   mScroller.startScroll(mUnboundedScrollX,0,delta,0,duration);
   notifyPageSwitchListener();
   if (immediate) {

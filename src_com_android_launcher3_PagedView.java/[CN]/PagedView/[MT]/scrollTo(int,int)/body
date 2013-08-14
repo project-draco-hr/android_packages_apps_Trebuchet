@@ -1,4 +1,8 @@
 {
+  if (mFreeScroll) {
+    x=Math.min(x,mFreeScrollMaxScrollX);
+    x=Math.max(x,mFreeScrollMinScrollX);
+  }
   final boolean isRtl=isLayoutRtl();
   mUnboundedScrollX=x;
   boolean isXBeforeFirstPage=isRtl ? (x > mMaxScrollX) : (x < 0);

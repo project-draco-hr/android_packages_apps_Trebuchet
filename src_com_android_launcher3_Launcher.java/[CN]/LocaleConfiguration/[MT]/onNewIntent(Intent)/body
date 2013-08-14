@@ -21,6 +21,9 @@
         exitSpringLoadedDragMode();
         if (alreadyOnHome) {
           showWorkspace(true);
+          if (mWorkspace.isInOverviewMode()) {
+            mWorkspace.exitOverviewMode();
+          }
         }
  else {
           mOnResumeState=State.WORKSPACE;

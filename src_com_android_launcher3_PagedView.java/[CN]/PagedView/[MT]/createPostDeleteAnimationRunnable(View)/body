@@ -2,7 +2,7 @@
   return new Runnable(){
     @Override public void run(){
       int dragViewIndex=indexOfChild(dragView);
-      getReorderablePages(mTempVisiblePagesRange);
+      getOverviewModePages(mTempVisiblePagesRange);
       boolean isLastWidgetPage=(mTempVisiblePagesRange[0] == mTempVisiblePagesRange[1]);
       boolean slideFromLeft=(isLastWidgetPage || dragViewIndex > mTempVisiblePagesRange[0]);
       if (slideFromLeft) {
@@ -46,15 +46,9 @@
       slideAnimations.setDuration(DELETE_SLIDE_IN_SIDE_PAGE_DURATION);
       slideAnimations.addListener(new AnimatorListenerAdapter(){
         @Override public void onAnimationEnd(        Animator animation){
-          final Runnable onCompleteRunnable=new Runnable(){
-            @Override public void run(){
-              mDeferringForDelete=false;
-              onEndReordering();
-              onRemoveViewAnimationCompleted();
-            }
-          }
-;
-          zoomIn(onCompleteRunnable);
+          mDeferringForDelete=false;
+          onEndReordering();
+          onRemoveViewAnimationCompleted();
         }
       }
 );
