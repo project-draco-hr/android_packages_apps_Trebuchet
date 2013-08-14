@@ -1,12 +1,17 @@
 {
   if (!isFinishedSwitchingState())   return;
-  float deltaX=Math.abs(ev.getX() - mXDown);
-  float deltaY=Math.abs(ev.getY() - mYDown);
-  if (Float.compare(deltaX,0f) == 0)   return;
-  float slope=deltaY / deltaX;
+  float deltaX=ev.getX() - mXDown;
+  float absDeltaX=Math.abs(deltaX);
+  float absDeltaY=Math.abs(ev.getY() - mYDown);
+  if (Float.compare(absDeltaX,0f) == 0)   return;
+  float slope=absDeltaY / absDeltaX;
   float theta=(float)Math.atan(slope);
-  if (deltaX > mTouchSlop || deltaY > mTouchSlop) {
+  if (absDeltaX > mTouchSlop || absDeltaY > mTouchSlop) {
     cancelCurrentPageLongPress();
+  }
+  boolean passRightSwipesToCustomContent=(mTouchDownTime - mCustomContentShowTime) > CUSTOM_CONTENT_GESTURE_DELAY;
+  if (deltaX > 0 && getScreenIdForPageIndex(getCurrentPage()) == CUSTOM_CONTENT_SCREEN_ID && passRightSwipesToCustomContent) {
+    return;
   }
   if (theta > MAX_SWIPE_ANGLE) {
     return;

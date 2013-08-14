@@ -32,6 +32,7 @@
     mCustomContentShowing=true;
     if (mCustomContentCallbacks != null) {
       mCustomContentCallbacks.onShow();
+      mCustomContentShowTime=System.currentTimeMillis();
     }
   }
  else   if (hasCustomContent() && getNextPage() != 0 && mCustomContentShowing) {
