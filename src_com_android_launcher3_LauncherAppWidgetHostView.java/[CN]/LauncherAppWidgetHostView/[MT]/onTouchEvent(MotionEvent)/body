@@ -1,0 +1,9 @@
+{
+switch (ev.getAction()) {
+case MotionEvent.ACTION_UP:
+case MotionEvent.ACTION_CANCEL:
+    mLongPressHelper.cancelLongPress();
+  break;
+}
+return false;
+}
