@@ -1,4 +1,4 @@
 {
-  Log.d(TAG,"10249126 - getPageIndexForScreenId(" + screenId + ")");
+  Log.w(TAG,"10249126 - getPageIndexForScreenId(" + screenId + ")");
   return indexOfChild(mWorkspaceScreens.get(screenId));
 }

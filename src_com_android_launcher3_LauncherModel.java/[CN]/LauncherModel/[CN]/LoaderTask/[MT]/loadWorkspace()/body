@@ -14,7 +14,7 @@ synchronized (sBgLock) {
     sBgItemsIdMap.clear();
     sBgDbIconCache.clear();
     sBgWorkspaceScreens.clear();
-    Log.d(TAG,"10249126 - loadWorkspace()");
+    Log.w(TAG,"10249126 - loadWorkspace()");
     final ArrayList<Long> itemsToRemove=new ArrayList<Long>();
     final Uri contentUri=LauncherSettings.Favorites.CONTENT_URI;
     final Cursor c=contentResolver.query(contentUri,null,null,null,null);
@@ -191,7 +191,7 @@ long maxScreenId=0;
 for (ItemInfo item : sBgItemsIdMap.values()) {
 long screenId=item.screenId;
 if (item.container == LauncherSettings.Favorites.CONTAINER_DESKTOP && !sBgWorkspaceScreens.contains(screenId)) {
-Log.d(TAG,"10249126 - loadWorkspace-loadedOldDb(" + screenId + ")");
+Log.w(TAG,"10249126 - loadWorkspace-loadedOldDb(" + screenId + ")");
 sBgWorkspaceScreens.add(screenId);
 if (screenId > maxScreenId) {
 maxScreenId=screenId;
@@ -209,30 +209,9 @@ LauncherAppState app=LauncherAppState.getInstance();
 app.getLauncherProvider().updateMaxItemId(maxItemId);
 }
  else {
-Uri screensUri=LauncherSettings.WorkspaceScreens.CONTENT_URI;
-final Cursor sc=contentResolver.query(screensUri,null,null,null,null);
-TreeMap<Integer,Long> orderedScreens=new TreeMap<Integer,Long>();
-try {
-final int idIndex=sc.getColumnIndexOrThrow(LauncherSettings.WorkspaceScreens._ID);
-final int rankIndex=sc.getColumnIndexOrThrow(LauncherSettings.WorkspaceScreens.SCREEN_RANK);
-while (sc.moveToNext()) {
-try {
-long screenId=sc.getLong(idIndex);
-int rank=sc.getInt(rankIndex);
-Log.d(TAG,"10249126 - loadWorkspace-!loadedOldDb(" + screenId + ", "+ rank+ ")");
-orderedScreens.put(rank,screenId);
-}
- catch (Exception e) {
-Log.w(TAG,"Desktop items loading interrupted - invalid screens: ",e);
-}
-}
-}
-  finally {
-sc.close();
-}
-Iterator<Integer> iter=orderedScreens.keySet().iterator();
-while (iter.hasNext()) {
-sBgWorkspaceScreens.add(orderedScreens.get(iter.next()));
+TreeMap<Integer,Long> orderedScreens=loadWorkspaceScreensDb(mContext);
+for (Integer i : orderedScreens.keySet()) {
+sBgWorkspaceScreens.add(orderedScreens.get(i));
 }
 ArrayList<Long> unusedScreens=new ArrayList<Long>();
 unusedScreens.addAll(sBgWorkspaceScreens);

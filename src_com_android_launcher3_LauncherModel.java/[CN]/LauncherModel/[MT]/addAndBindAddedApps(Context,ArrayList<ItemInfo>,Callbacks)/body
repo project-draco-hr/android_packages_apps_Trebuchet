@@ -6,6 +6,12 @@
     public void run(){
       final ArrayList<ItemInfo> addedShortcutsFinal=new ArrayList<ItemInfo>();
       final ArrayList<Long> addedWorkspaceScreensFinal=new ArrayList<Long>();
+      ArrayList<Long> workspaceScreens=new ArrayList<Long>();
+      TreeMap<Integer,Long> orderedScreens=loadWorkspaceScreensDb(context);
+      for (      Integer i : orderedScreens.keySet()) {
+        long screenId=orderedScreens.get(i);
+        workspaceScreens.add(screenId);
+      }
 synchronized (sBgLock) {
         Iterator<ItemInfo> iter=added.iterator();
         while (iter.hasNext()) {
@@ -16,20 +22,19 @@ synchronized (sBgLock) {
             continue;
           }
           int startSearchPageIndex=1;
-          Pair<Long,int[]> coords=LauncherModel.findNextAvailableIconSpace(context,name,launchIntent,startSearchPageIndex);
+          Pair<Long,int[]> coords=LauncherModel.findNextAvailableIconSpace(context,name,launchIntent,startSearchPageIndex,workspaceScreens);
           if (coords == null) {
             LauncherAppState appState=LauncherAppState.getInstance();
             LauncherProvider lp=appState.getLauncherProvider();
-            int numPagesToAdd=Math.max(1,startSearchPageIndex + 1 - sBgWorkspaceScreens.size());
+            int numPagesToAdd=Math.max(1,startSearchPageIndex + 1 - workspaceScreens.size());
             while (numPagesToAdd > 0) {
               long screenId=lp.generateNewScreenId();
-              Log.d(TAG,"10249126 - addAndBindAddedApps(" + screenId + ")");
-              sBgWorkspaceScreens.add(screenId);
-              updateWorkspaceScreenOrder(context,sBgWorkspaceScreens);
+              Log.w(TAG,"10249126 - addAndBindAddedApps(" + screenId + ")");
+              workspaceScreens.add(screenId);
               addedWorkspaceScreensFinal.add(screenId);
               numPagesToAdd--;
             }
-            coords=LauncherModel.findNextAvailableIconSpace(context,name,launchIntent,startSearchPageIndex);
+            coords=LauncherModel.findNextAvailableIconSpace(context,name,launchIntent,startSearchPageIndex,workspaceScreens);
           }
           if (coords == null) {
             throw new RuntimeException("Coordinates should not be null");
@@ -48,6 +53,7 @@ synchronized (sBgLock) {
           addedShortcutsFinal.add(shortcutInfo);
         }
       }
+      updateWorkspaceScreenOrder(context,workspaceScreens);
       if (!addedShortcutsFinal.isEmpty()) {
         runOnMainThread(new Runnable(){
           public void run(){

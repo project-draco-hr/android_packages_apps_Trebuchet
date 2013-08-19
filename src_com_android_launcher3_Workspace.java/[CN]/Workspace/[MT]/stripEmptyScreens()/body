@@ -3,7 +3,7 @@
     mStripScreensOnPageStopMoving=true;
     return;
   }
-  Log.d(TAG,"10249126 - stripEmptyScreens()");
+  Log.w(TAG,"10249126 - stripEmptyScreens()");
   int currentPage=getNextPage();
   ArrayList<Long> removeScreens=new ArrayList<Long>();
   for (  Long id : mWorkspaceScreens.keySet()) {
@@ -14,7 +14,7 @@
   }
   int pageShift=0;
   for (  Long id : removeScreens) {
-    Log.d(TAG,"10249126 - \tremove(" + id + ")");
+    Log.w(TAG,"10249126 - \tremove(" + id + ")");
     CellLayout cl=mWorkspaceScreens.get(id);
     mWorkspaceScreens.remove(id);
     mScreenOrder.remove(id);

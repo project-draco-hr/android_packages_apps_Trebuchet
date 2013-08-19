@@ -1,5 +1,5 @@
 {
-  Log.d(TAG,"10249126 - commitExtraEmptyScreen()");
+  Log.w(TAG,"10249126 - commitExtraEmptyScreen()");
   CellLayout cl=mWorkspaceScreens.get(EXTRA_EMPTY_SCREEN_ID);
   mWorkspaceScreens.remove(EXTRA_EMPTY_SCREEN_ID);
   mScreenOrder.remove(EXTRA_EMPTY_SCREEN_ID);
