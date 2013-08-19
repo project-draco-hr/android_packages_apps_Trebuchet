@@ -1,0 +1,25 @@
+{
+  final ContentResolver contentResolver=context.getContentResolver();
+  final Uri screensUri=LauncherSettings.WorkspaceScreens.CONTENT_URI;
+  final Cursor sc=contentResolver.query(screensUri,null,null,null,null);
+  TreeMap<Integer,Long> orderedScreens=new TreeMap<Integer,Long>();
+  try {
+    final int idIndex=sc.getColumnIndexOrThrow(LauncherSettings.WorkspaceScreens._ID);
+    final int rankIndex=sc.getColumnIndexOrThrow(LauncherSettings.WorkspaceScreens.SCREEN_RANK);
+    while (sc.moveToNext()) {
+      try {
+        long screenId=sc.getLong(idIndex);
+        int rank=sc.getInt(rankIndex);
+        Log.w(TAG,"10249126 - loadWorkspaceScreensDb(" + screenId + ", "+ rank+ ")");
+        orderedScreens.put(rank,screenId);
+      }
+ catch (      Exception e) {
+        Log.w(TAG,"Desktop items loading interrupted - invalid screens: ",e);
+      }
+    }
+  }
+  finally {
+    sc.close();
+  }
+  return orderedScreens;
+}

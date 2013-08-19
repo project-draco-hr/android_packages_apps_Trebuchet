@@ -7,12 +7,12 @@ synchronized (app) {
       model.flushWorkerThread();
     }
     final ArrayList<ItemInfo> items=LauncherModel.getItemsInLocalCoordinates(context);
-    firstScreenIndex=Math.min(firstScreenIndex,sBgWorkspaceScreens.size());
-    int count=sBgWorkspaceScreens.size();
+    firstScreenIndex=Math.min(firstScreenIndex,workspaceScreens.size());
+    int count=workspaceScreens.size();
     for (int screen=firstScreenIndex; screen < count && !found; screen++) {
       int[] tmpCoordinates=new int[2];
-      if (findNextAvailableIconSpaceInScreen(items,tmpCoordinates,sBgWorkspaceScreens.get(screen))) {
-        return new Pair<Long,int[]>(sBgWorkspaceScreens.get(screen),tmpCoordinates);
+      if (findNextAvailableIconSpaceInScreen(items,tmpCoordinates,workspaceScreens.get(screen))) {
+        return new Pair<Long,int[]>(workspaceScreens.get(screen),tmpCoordinates);
       }
     }
   }

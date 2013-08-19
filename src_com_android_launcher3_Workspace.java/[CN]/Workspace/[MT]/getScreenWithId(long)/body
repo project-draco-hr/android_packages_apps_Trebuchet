@@ -1,5 +1,5 @@
 {
-  Log.d(TAG,"10249126 - getScreenWithId(" + screenId + ")");
+  Log.w(TAG,"10249126 - getScreenWithId(" + screenId + ")");
   CellLayout layout=mWorkspaceScreens.get(screenId);
   return layout;
 }
