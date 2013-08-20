@@ -1,0 +1,7 @@
+{
+  if (on == mHotwordOn) {
+    return;
+  }
+  mHotwordOn=on;
+  refreshDrawableState();
+}

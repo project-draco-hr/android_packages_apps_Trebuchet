@@ -1,4 +1,5 @@
 {
   Resources res=context.getResources();
   mHighlightColor=res.getColor(android.R.color.holo_blue_light);
+  mHotwordColor=res.getColor(android.R.color.holo_green_light);
 }
