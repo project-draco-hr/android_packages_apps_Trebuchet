@@ -1,5 +1,0 @@
-int cellWidth
-int cellHeight
-int widthGap
-int heightGap
-int countX

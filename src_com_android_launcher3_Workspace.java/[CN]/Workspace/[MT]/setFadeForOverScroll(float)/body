@@ -1,7 +1,0 @@
-{
-  mOverscrollFade=fade;
-  float reducedFade=0.5f + 0.5f * (1 - fade);
-  final ViewGroup parent=(ViewGroup)getParent();
-  final ImageView qsbDivider=(ImageView)(parent.findViewById(R.id.qsb_divider));
-  if (qsbDivider != null)   qsbDivider.setAlpha(reducedFade);
-}

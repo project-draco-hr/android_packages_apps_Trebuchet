@@ -6,7 +6,6 @@
     if (mSearchDropTargetBar != null) {
       mSearchDropTargetBar.showSearchBar(wasInSpringLoadedMode);
     }
-    showDockDivider(animated && wasInSpringLoadedMode);
     if (mAllAppsButton != null) {
       mAllAppsButton.requestFocus();
     }

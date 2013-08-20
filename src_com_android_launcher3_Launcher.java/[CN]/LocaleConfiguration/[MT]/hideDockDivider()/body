@@ -1,5 +1,0 @@
-{
-  if (mQsbDivider != null) {
-    mQsbDivider.setVisibility(View.INVISIBLE);
-  }
-}

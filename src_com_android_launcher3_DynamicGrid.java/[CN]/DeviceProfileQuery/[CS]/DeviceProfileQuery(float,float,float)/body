@@ -1,0 +1,6 @@
+{
+  widthDps=w;
+  heightDps=h;
+  value=v;
+  dimens=new PointF(w,h);
+}

@@ -6,22 +6,23 @@
   float scale=mLauncher.getDragLayer().getLocationInDragLayer(child,mTempXY);
   int dragLayerX=Math.round(mTempXY[0] - (bmpWidth - scale * child.getWidth()) / 2);
   int dragLayerY=Math.round(mTempXY[1] - (bmpHeight - scale * bmpHeight) / 2 - DRAG_BITMAP_PADDING / 2);
+  LauncherAppState app=LauncherAppState.getInstance();
+  DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
   Point dragVisualizeOffset=null;
   Rect dragRect=null;
   if (child instanceof BubbleTextView || child instanceof PagedViewIcon) {
-    int iconSize=r.getDimensionPixelSize(R.dimen.app_icon_size);
-    int iconPaddingTop=r.getDimensionPixelSize(R.dimen.app_icon_padding_top);
+    int iconSize=grid.iconSizePx;
     int top=child.getPaddingTop();
     int left=(bmpWidth - iconSize) / 2;
     int right=left + iconSize;
     int bottom=top + iconSize;
     dragLayerY+=top;
-    dragVisualizeOffset=new Point(-DRAG_BITMAP_PADDING / 2,iconPaddingTop - DRAG_BITMAP_PADDING / 2);
+    dragVisualizeOffset=new Point(-DRAG_BITMAP_PADDING / 2,DRAG_BITMAP_PADDING / 2);
     dragRect=new Rect(left,top,right,bottom);
   }
  else   if (child instanceof FolderIcon) {
-    int previewSize=r.getDimensionPixelSize(R.dimen.folder_preview_size);
-    dragRect=new Rect(0,0,child.getWidth(),previewSize);
+    int previewSize=grid.folderIconSizePx;
+    dragRect=new Rect(0,child.getPaddingTop(),child.getWidth(),previewSize);
   }
   if (child instanceof BubbleTextView) {
     BubbleTextView icon=(BubbleTextView)child;

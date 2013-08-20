@@ -5,11 +5,11 @@
   setClipToPadding(false);
   mLauncher=(Launcher)context;
   TypedArray a=context.obtainStyledAttributes(attrs,R.styleable.CellLayout,defStyle,0);
-  mCellWidth=a.getDimensionPixelSize(R.styleable.CellLayout_cellWidth,10);
-  mCellHeight=a.getDimensionPixelSize(R.styleable.CellLayout_cellHeight,10);
-  mWidthGap=mOriginalWidthGap=a.getDimensionPixelSize(R.styleable.CellLayout_widthGap,0);
-  mHeightGap=mOriginalHeightGap=a.getDimensionPixelSize(R.styleable.CellLayout_heightGap,0);
-  mMaxGap=a.getDimensionPixelSize(R.styleable.CellLayout_maxGap,0);
+  mCellWidth=-1;
+  mCellHeight=-1;
+  mWidthGap=mOriginalWidthGap=0;
+  mHeightGap=mOriginalHeightGap=0;
+  mMaxGap=Integer.MAX_VALUE;
   mCountX=LauncherModel.getCellCountX();
   mCountY=LauncherModel.getCellCountY();
   mOccupied=new boolean[mCountX][mCountY];
@@ -19,13 +19,15 @@
   a.recycle();
   setAlwaysDrawnWithCacheEnabled(false);
   final Resources res=getResources();
-  mHotseatScale=(res.getInteger(R.integer.hotseat_item_scale_percentage) / 100f);
+  LauncherAppState app=LauncherAppState.getInstance();
+  DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
+  mHotseatScale=(float)grid.hotseatIconSize / grid.iconSize;
   mNormalBackground=res.getDrawable(R.drawable.homescreen_blue_normal_holo);
   mActiveGlowBackground=res.getDrawable(R.drawable.homescreen_blue_strong_holo);
   mOverScrollLeft=res.getDrawable(R.drawable.overscroll_glow_left);
   mOverScrollRight=res.getDrawable(R.drawable.overscroll_glow_right);
   mForegroundPadding=res.getDimensionPixelSize(R.dimen.workspace_overscroll_drawable_padding);
-  mReorderHintAnimationMagnitude=(REORDER_HINT_MAGNITUDE * res.getDimensionPixelSize(R.dimen.app_icon_size));
+  mReorderHintAnimationMagnitude=(REORDER_HINT_MAGNITUDE * grid.iconSizePx);
   mNormalBackground.setFilterBitmap(true);
   mActiveGlowBackground.setFilterBitmap(true);
   mEaseOutInterpolator=new DecelerateInterpolator(2.5f);
@@ -72,6 +74,6 @@
   mBackgroundRect=new Rect();
   mForegroundRect=new Rect();
   mShortcutsAndWidgets=new ShortcutAndWidgetContainer(context);
-  mShortcutsAndWidgets.setCellDimensions(mCellWidth,mCellHeight,mWidthGap,mHeightGap,mCountX);
+  mShortcutsAndWidgets.setCellDimensions(mCellWidth,mCellHeight,mWidthGap,mHeightGap,mCountX,mCountY);
   addView(mShortcutsAndWidgets);
 }

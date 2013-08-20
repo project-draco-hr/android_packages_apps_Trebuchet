@@ -1,7 +1,6 @@
 {
   if (isAllAppsVisible()) {
     hideAppsCustomizeHelper(State.APPS_CUSTOMIZE_SPRING_LOADED,true,true,null);
-    hideDockDivider();
     mState=State.APPS_CUSTOMIZE_SPRING_LOADED;
   }
 }

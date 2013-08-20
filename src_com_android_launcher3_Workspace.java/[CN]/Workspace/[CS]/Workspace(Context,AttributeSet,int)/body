@@ -9,33 +9,13 @@
   mWorkspaceFadeInAdjacentScreens=res.getBoolean(R.bool.config_workspaceFadeAdjacentScreens);
   mFadeInAdjacentScreens=false;
   mWallpaperManager=WallpaperManager.getInstance(context);
-  int cellCountX=DEFAULT_CELL_COUNT_X;
-  int cellCountY=DEFAULT_CELL_COUNT_Y;
   TypedArray a=context.obtainStyledAttributes(attrs,R.styleable.Workspace,defStyle,0);
-  if (LauncherAppState.getInstance().isScreenLarge()) {
-    TypedArray actionBarSizeTypedArray=context.obtainStyledAttributes(new int[]{android.R.attr.actionBarSize});
-    final float actionBarHeight=actionBarSizeTypedArray.getDimension(0,0f);
-    Point minDims=new Point();
-    Point maxDims=new Point();
-    mLauncher.getWindowManager().getDefaultDisplay().getCurrentSizeRange(minDims,maxDims);
-    cellCountX=1;
-    while (CellLayout.widthInPortrait(res,cellCountX + 1) <= minDims.x) {
-      cellCountX++;
-    }
-    cellCountY=1;
-    while (actionBarHeight + CellLayout.heightInLandscape(res,cellCountY + 1) <= minDims.y) {
-      cellCountY++;
-    }
-  }
   mSpringLoadedShrinkFactor=res.getInteger(R.integer.config_workspaceSpringLoadShrinkPercentage) / 100.0f;
   mOverviewModeShrinkFactor=res.getInteger(R.integer.config_workspaceOverviewShrinkPercentage) / 100.0f;
   mCameraDistance=res.getInteger(R.integer.config_cameraDistance);
-  cellCountX=a.getInt(R.styleable.Workspace_cellCountX,cellCountX);
-  cellCountY=a.getInt(R.styleable.Workspace_cellCountY,cellCountY);
   mDefaultPage=a.getInt(R.styleable.Workspace_defaultScreen,1);
   a.recycle();
   setOnHierarchyChangeListener(this);
-  LauncherModel.updateWorkspaceLayoutCells(cellCountX,cellCountY);
   setHapticFeedbackEnabled(false);
   initWorkspace();
   setMotionEventSplittingEnabled(true);

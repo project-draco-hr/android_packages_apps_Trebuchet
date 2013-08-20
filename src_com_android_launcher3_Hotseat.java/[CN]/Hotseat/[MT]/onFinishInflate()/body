@@ -1,9 +1,15 @@
 {
   super.onFinishInflate();
-  if (mCellCountX < 0)   mCellCountX=LauncherModel.getCellCountX();
-  if (mCellCountY < 0)   mCellCountY=LauncherModel.getCellCountY();
+  LauncherAppState app=LauncherAppState.getInstance();
+  DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
+  mAllAppsButtonRank=(int)(grid.numHotseatIcons / 2);
   mContent=(CellLayout)findViewById(R.id.layout);
-  mContent.setGridSize(mCellCountX,mCellCountY);
+  if (grid.isLandscape && !grid.isLargeTablet()) {
+    mContent.setGridSize(1,(int)grid.numHotseatIcons);
+  }
+ else {
+    mContent.setGridSize((int)grid.numHotseatIcons,1);
+  }
   mContent.setIsHotseat(true);
   resetLayout();
 }

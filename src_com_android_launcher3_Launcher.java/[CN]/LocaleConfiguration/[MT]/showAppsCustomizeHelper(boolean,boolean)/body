@@ -48,9 +48,6 @@
       @Override public void onAnimationEnd(      Animator animation){
         dispatchOnLauncherTransitionEnd(fromView,animated,false);
         dispatchOnLauncherTransitionEnd(toView,animated,false);
-        if (mWorkspace != null && !springLoaded && !LauncherAppState.getInstance().isScreenLarge()) {
-          hideDockDivider();
-        }
         if (!animationCancelled) {
           updateWallpaperVisibility(false);
         }
@@ -105,7 +102,6 @@
     toView.setVisibility(View.VISIBLE);
     toView.bringToFront();
     if (!springLoaded && !LauncherAppState.getInstance().isScreenLarge()) {
-      hideDockDivider();
       if (mSearchDropTargetBar != null) {
         mSearchDropTargetBar.hideSearchBar(false);
       }

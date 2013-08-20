@@ -1,0 +1,10 @@
+{
+  Resources res=getResources();
+  if (visible) {
+    setTextColor(res.getColor(R.color.workspace_icon_text_color));
+  }
+ else {
+    setTextColor(res.getColor(android.R.color.transparent));
+  }
+  mIsTextVisible=visible;
+}

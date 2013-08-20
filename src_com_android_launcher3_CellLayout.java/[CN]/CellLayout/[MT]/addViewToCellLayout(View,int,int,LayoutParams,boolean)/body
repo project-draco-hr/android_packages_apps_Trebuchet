@@ -3,12 +3,7 @@
   if (child instanceof BubbleTextView) {
     BubbleTextView bubbleChild=(BubbleTextView)child;
     Resources res=getResources();
-    if (mIsHotseat) {
-      bubbleChild.setTextColor(res.getColor(android.R.color.transparent));
-    }
- else {
-      bubbleChild.setTextColor(res.getColor(R.color.workspace_icon_text_color));
-    }
+    bubbleChild.setTextVisibility(!mIsHotseat);
   }
   child.setScaleX(getChildrenScale());
   child.setScaleY(getChildrenScale());
