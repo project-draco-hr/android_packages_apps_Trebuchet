@@ -1,10 +1,11 @@
 {
-  if (waitUntilResume(new Runnable(){
+  Runnable r=new Runnable(){
     public void run(){
       bindComponentsRemoved(packageNames,appInfos,packageRemoved);
     }
   }
-)) {
+;
+  if (waitUntilResume(r)) {
     return;
   }
   if (packageRemoved) {

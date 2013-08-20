@@ -1,10 +1,11 @@
 {
-  if (waitUntilResume(new Runnable(){
+  Runnable r=new Runnable(){
     public void run(){
       bindAppsUpdated(apps);
     }
   }
-)) {
+;
+  if (waitUntilResume(r)) {
     return;
   }
   if (mWorkspace != null) {

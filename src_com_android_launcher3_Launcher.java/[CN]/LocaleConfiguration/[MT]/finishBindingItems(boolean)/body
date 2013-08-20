@@ -1,10 +1,11 @@
 {
-  if (waitUntilResume(new Runnable(){
+  Runnable r=new Runnable(){
     public void run(){
       finishBindingItems(upgradePath);
     }
   }
-)) {
+;
+  if (waitUntilResume(r)) {
     return;
   }
   if (mSavedState != null) {

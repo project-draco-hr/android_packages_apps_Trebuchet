@@ -10,6 +10,7 @@
     CellLayout cl=((CellLayout)getChildAt(i));
     mScreenOrder.add(getIdForScreen(cl));
   }
+  Log.w(TAG,"10249126 - onEndReordering()");
   mLauncher.getModel().updateWorkspaceScreenOrder(mLauncher,mScreenOrder);
   setLayoutTransition(mLayoutTransition);
 }

@@ -210,6 +210,7 @@ Log.w(TAG,"Could not remove id = " + id);
 }
 }
 if (loadedOldDb) {
+Log.w(TAG,"10249126 - loadWorkspace - loadedOldDb");
 long maxScreenId=0;
 for (ItemInfo item : sBgItemsIdMap.values()) {
 long screenId=item.screenId;
@@ -232,6 +233,7 @@ LauncherAppState app=LauncherAppState.getInstance();
 app.getLauncherProvider().updateMaxItemId(maxItemId);
 }
  else {
+Log.w(TAG,"10249126 - loadWorkspace - !loadedOldDb");
 TreeMap<Integer,Long> orderedScreens=loadWorkspaceScreensDb(mContext);
 for (Integer i : orderedScreens.keySet()) {
 sBgWorkspaceScreens.add(orderedScreens.get(i));

@@ -1,12 +1,7 @@
 {
   mBindOnResumeCallbacks.clear();
-  final Workspace workspace=mWorkspace;
   mWorkspace.clearDropTargets();
-  int count=workspace.getChildCount();
-  for (int i=0; i < count; i++) {
-    final CellLayout layoutParent=(CellLayout)workspace.getChildAt(i);
-    layoutParent.removeAllViewsInLayout();
-  }
+  mWorkspace.removeAllViews();
   mWidgetsToAdvance.clear();
   if (mHotseat != null) {
     mHotseat.resetLayout();

@@ -1,10 +1,11 @@
 {
-  if (waitUntilResume(new Runnable(){
+  Runnable r=new Runnable(){
     public void run(){
       bindAppWidget(item);
     }
   }
-)) {
+;
+  if (waitUntilResume(r)) {
     return;
   }
   final long start=DEBUG_WIDGETS ? SystemClock.uptimeMillis() : 0;

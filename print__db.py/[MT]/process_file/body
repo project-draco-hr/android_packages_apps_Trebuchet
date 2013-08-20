@@ -3,7 +3,9 @@ def process_file(fn):
     print ('process_file: ' + fn)
     conn = sqlite3.connect(fn)
     (columns, rows) = get_favorites(conn)
+    (screenCols, screenRows) = get_screens(conn)
     data = [dict(zip(columns, row)) for row in rows]
+    screenData = [dict(zip(screenCols, screenRow)) for screenRow in screenRows]
     screensIdMap = []
     hotseatIdMap = []
     HOTSEAT_SIZE = 0
@@ -40,6 +42,12 @@ def process_file(fn):
             print_functions[i](out, row[0], row, cell)
             out.write('</td>\n')
         out.write('</tr>\n')
+    out.write('</table>\n')
+    out.write('<br/><b>Screens</b><br/>\n')
+    out.write('<table class=layout border=1 cellspacing=0 cellpadding=4>\n')
+    out.write('<tr><td>Screen ID</td><td>Rank</td></tr>\n')
+    for screen in screenData:
+        render_screen_info(out, screen)
     out.write('</table>\n')
     hotseat = []
     for i in range(0, HOTSEAT_SIZE):
