@@ -3,5 +3,5 @@
   if (insertIndex < 0) {
     insertIndex=mScreenOrder.size();
   }
-  return insertNewWorkspaceScreen(screenId,insertIndex,updateDb);
+  return insertNewWorkspaceScreen(screenId,insertIndex);
 }
