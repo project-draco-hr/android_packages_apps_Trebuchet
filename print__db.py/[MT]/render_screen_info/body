@@ -1,0 +1,5 @@
+def render_screen_info(out, screen):
+    out.write('<tr>')
+    out.write(('<td>%s</td>' % screen['_id']))
+    out.write(('<td>%s</td>' % screen['screenRank']))
+    out.write('</tr>')

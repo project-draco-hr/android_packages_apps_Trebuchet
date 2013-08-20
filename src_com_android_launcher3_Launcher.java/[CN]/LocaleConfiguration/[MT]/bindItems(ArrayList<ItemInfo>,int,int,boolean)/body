@@ -1,10 +1,11 @@
 {
-  if (waitUntilResume(new Runnable(){
+  Runnable r=new Runnable(){
     public void run(){
       bindItems(shortcuts,start,end,forceAnimateIcons);
     }
   }
-)) {
+;
+  if (waitUntilResume(r)) {
     return;
   }
   final AnimatorSet anim=LauncherAnimUtils.createAnimatorSet();

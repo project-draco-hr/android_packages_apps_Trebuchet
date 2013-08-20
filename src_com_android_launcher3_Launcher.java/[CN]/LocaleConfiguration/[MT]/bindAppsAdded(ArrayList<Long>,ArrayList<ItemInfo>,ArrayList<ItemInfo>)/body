@@ -1,0 +1,19 @@
+{
+  Runnable r=new Runnable(){
+    public void run(){
+      bindAppsAdded(newScreens,addNotAnimated,addAnimated);
+    }
+  }
+;
+  if (waitUntilResume(r)) {
+    return;
+  }
+  Log.w(TAG,"10249126 - bindAppsAdded(" + newScreens.size() + ")");
+  bindAddScreens(newScreens);
+  if (!addNotAnimated.isEmpty()) {
+    bindItems(addNotAnimated,0,addNotAnimated.size(),false);
+  }
+  if (!addAnimated.isEmpty()) {
+    bindItems(addAnimated,0,addAnimated.size(),true);
+  }
+}

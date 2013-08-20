@@ -1,4 +1,5 @@
 {
+  Log.w(TAG,"10249126 - addAndBindAddedApps()");
   if (added.isEmpty()) {
     throw new RuntimeException("EMPTY ADDED ARRAY?");
   }
@@ -53,13 +54,13 @@ synchronized (sBgLock) {
           addedShortcutsFinal.add(shortcutInfo);
         }
       }
+      Log.w(TAG,"10249126 - addAndBindAddedApps - updateWorkspaceScreenOrder(" + workspaceScreens.size() + ")");
       updateWorkspaceScreenOrder(context,workspaceScreens);
       if (!addedShortcutsFinal.isEmpty()) {
         runOnMainThread(new Runnable(){
           public void run(){
             Callbacks cb=mCallbacks != null ? mCallbacks.get() : null;
             if (callbacks == cb && cb != null) {
-              callbacks.bindAddScreens(addedWorkspaceScreensFinal);
               ItemInfo info=addedShortcutsFinal.get(addedShortcutsFinal.size() - 1);
               long lastScreenId=info.screenId;
               final ArrayList<ItemInfo> addAnimated=new ArrayList<ItemInfo>();
@@ -72,12 +73,7 @@ synchronized (sBgLock) {
                   addNotAnimated.add(i);
                 }
               }
-              if (!addNotAnimated.isEmpty()) {
-                callbacks.bindItems(addNotAnimated,0,addNotAnimated.size(),false);
-              }
-              if (!addAnimated.isEmpty()) {
-                callbacks.bindItems(addAnimated,0,addAnimated.size(),true);
-              }
+              callbacks.bindAppsAdded(addedWorkspaceScreensFinal,addNotAnimated,addAnimated);
             }
           }
         }
