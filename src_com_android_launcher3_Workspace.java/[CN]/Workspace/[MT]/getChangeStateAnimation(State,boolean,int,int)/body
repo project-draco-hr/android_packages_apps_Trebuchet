@@ -102,12 +102,17 @@
         }
       }
     }
+    ObjectAnimator pageIndicatorAlpha=null;
+    if (getPageIndicator() != null) {
+      pageIndicatorAlpha=ObjectAnimator.ofFloat(getPageIndicator(),"alpha",finalHotseatAndPageIndicatorAlpha);
+    }
     ObjectAnimator hotseatAlpha=ObjectAnimator.ofFloat(mLauncher.getHotseat(),"alpha",finalHotseatAndPageIndicatorAlpha);
-    ObjectAnimator pageIndicatorAlpha=ObjectAnimator.ofFloat(getPageIndicator(),"alpha",finalHotseatAndPageIndicatorAlpha);
     ObjectAnimator overviewPanelAlpha=ObjectAnimator.ofFloat(mLauncher.getOverviewPanel(),"alpha",finalOverviewPanelAlpha);
     overviewPanelAlpha.addUpdateListener(new AlphaUpdateListener(mLauncher.getOverviewPanel()));
     hotseatAlpha.addUpdateListener(new AlphaUpdateListener(mLauncher.getHotseat()));
-    pageIndicatorAlpha.addUpdateListener(new AlphaUpdateListener(getPageIndicator()));
+    if (getPageIndicator() != null) {
+      pageIndicatorAlpha.addUpdateListener(new AlphaUpdateListener(getPageIndicator()));
+    }
     anim.play(overviewPanelAlpha);
     anim.play(hotseatAlpha);
     anim.play(pageIndicatorAlpha);
@@ -116,7 +121,9 @@
  else {
     mLauncher.getOverviewPanel().setAlpha(finalOverviewPanelAlpha);
     mLauncher.getHotseat().setAlpha(finalHotseatAndPageIndicatorAlpha);
-    getPageIndicator().setAlpha(finalHotseatAndPageIndicatorAlpha);
+    if (getPageIndicator() != null) {
+      getPageIndicator().setAlpha(finalHotseatAndPageIndicatorAlpha);
+    }
   }
   if (stateIsSpringLoaded) {
     animateBackgroundGradient(getResources().getInteger(R.integer.config_appsCustomizeSpringLoadedBgAlpha) / 100f,false);
