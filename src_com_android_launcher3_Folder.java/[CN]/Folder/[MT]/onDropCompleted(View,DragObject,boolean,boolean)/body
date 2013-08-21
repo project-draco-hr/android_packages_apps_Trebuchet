@@ -1,5 +1,6 @@
 {
   if (mDeferDropAfterUninstall) {
+    Log.d(TAG,"Deferred handling drop because waiting for uninstall.");
     mDeferredAction=new Runnable(){
       public void run(){
         onDropCompleted(target,d,isFlingToDelete,success);
