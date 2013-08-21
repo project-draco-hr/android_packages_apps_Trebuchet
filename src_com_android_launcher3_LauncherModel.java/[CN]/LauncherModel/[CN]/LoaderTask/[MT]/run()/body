@@ -34,8 +34,8 @@ synchronized (sBgLock) {
     }
     sBgDbIconCache.clear();
   }
-  Log.w(TAG,"10249126 - verifyApplications(" + isUpgrade + ")");
-  if (!isUpgrade) {
+  Log.w(TAG,"10249126 - verifyApplications - useMoreApps=" + UPGRADE_USE_MORE_APPS_FOLDER + " isUpgrade="+ isUpgrade);
+  if (!UPGRADE_USE_MORE_APPS_FOLDER || !isUpgrade) {
     verifyApplications();
   }
   mContext=null;
