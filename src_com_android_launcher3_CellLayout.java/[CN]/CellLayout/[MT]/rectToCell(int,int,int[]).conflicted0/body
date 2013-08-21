@@ -1,3 +1,0 @@
-{
-  return rectToCell(width,height,result);
-}
