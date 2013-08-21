@@ -1,7 +1,7 @@
 {
   int count=orderedScreenIds.size();
   for (int i=0; i < count; i++) {
-    Log.w(TAG,"10249126 - bindAddScreens(" + orderedScreenIds.get(i) + ")");
+    Launcher.addDumpLog(TAG,"10249126 - bindAddScreens(" + orderedScreenIds.get(i) + ")",true);
     mWorkspace.insertNewWorkspaceScreenBeforeEmptyScreen(orderedScreenIds.get(i));
   }
 }

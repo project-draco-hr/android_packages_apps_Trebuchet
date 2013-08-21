@@ -11,15 +11,21 @@
     if (info instanceof ShortcutInfo) {
       ShortcutInfo si=(ShortcutInfo)info;
       ComponentName cn=si.intent.getComponent();
-      if (si.itemType == LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT) {
+      Uri dataUri=si.intent.getData();
+      if (dataUri != null && !dataUri.equals(Uri.EMPTY)) {
         continue;
       }
       if (!uniqueIntents.contains(cn)) {
         uniqueIntents.add(cn);
       }
  else {
-        cl.removeViewInLayout(v);
-        LauncherModel.deleteItemFromDatabase(mLauncher,si);
+        if (stripDuplicates) {
+          cl.removeViewInLayout(v);
+          LauncherModel.deleteItemFromDatabase(mLauncher,si);
+        }
+        if (duplicates != null) {
+          duplicates.add(cn);
+        }
       }
     }
     if (v instanceof FolderIcon) {
@@ -29,15 +35,21 @@
         if (items.get(j).getTag() instanceof ShortcutInfo) {
           ShortcutInfo si=(ShortcutInfo)items.get(j).getTag();
           ComponentName cn=si.intent.getComponent();
-          if (si.itemType == LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT) {
+          Uri dataUri=si.intent.getData();
+          if (dataUri != null && !dataUri.equals(Uri.EMPTY)) {
             continue;
           }
           if (!uniqueIntents.contains(cn)) {
             uniqueIntents.add(cn);
           }
  else {
-            fi.getFolderInfo().remove(si);
-            LauncherModel.deleteItemFromDatabase(mLauncher,si);
+            if (stripDuplicates) {
+              fi.getFolderInfo().remove(si);
+              LauncherModel.deleteItemFromDatabase(mLauncher,si);
+            }
+            if (duplicates != null) {
+              duplicates.add(cn);
+            }
           }
         }
       }

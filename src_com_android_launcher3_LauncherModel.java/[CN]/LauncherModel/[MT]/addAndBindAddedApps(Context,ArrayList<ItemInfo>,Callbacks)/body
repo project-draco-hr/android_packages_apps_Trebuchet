@@ -1,5 +1,5 @@
 {
-  Log.w(TAG,"10249126 - addAndBindAddedApps()");
+  Launcher.addDumpLog(TAG,"10249126 - addAndBindAddedApps()",true);
   if (added.isEmpty()) {
     return;
   }
@@ -29,7 +29,7 @@ synchronized (sBgLock) {
             int numPagesToAdd=Math.max(1,startSearchPageIndex + 1 - workspaceScreens.size());
             while (numPagesToAdd > 0) {
               long screenId=lp.generateNewScreenId();
-              Log.w(TAG,"10249126 - addAndBindAddedApps(" + screenId + ")");
+              Launcher.addDumpLog(TAG,"10249126 - addAndBindAddedApps(" + screenId + ")",true);
               workspaceScreens.add(screenId);
               addedWorkspaceScreensFinal.add(screenId);
               numPagesToAdd--;
@@ -53,7 +53,7 @@ synchronized (sBgLock) {
           addedShortcutsFinal.add(shortcutInfo);
         }
       }
-      Log.w(TAG,"10249126 - addAndBindAddedApps - updateWorkspaceScreenOrder(" + workspaceScreens.size() + ")");
+      Launcher.addDumpLog(TAG,"10249126 - addAndBindAddedApps - updateWorkspaceScreenOrder(" + workspaceScreens.size() + ")",true);
       updateWorkspaceScreenOrder(context,workspaceScreens);
       if (!addedShortcutsFinal.isEmpty()) {
         runOnMainThread(new Runnable(){

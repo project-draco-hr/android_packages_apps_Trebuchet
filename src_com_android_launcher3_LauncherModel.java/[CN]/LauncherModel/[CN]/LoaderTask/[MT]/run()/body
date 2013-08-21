@@ -33,8 +33,9 @@ synchronized (sBgLock) {
     }
     sBgDbIconCache.clear();
   }
-  Log.w(TAG,"10249126 - verifyApplications - useMoreApps=" + UPGRADE_USE_MORE_APPS_FOLDER + " isUpgrade="+ isUpgrade);
+  Launcher.addDumpLog(TAG,"10249126 - verifyApplications - useMoreApps=" + UPGRADE_USE_MORE_APPS_FOLDER + " isUpgrade="+ isUpgrade,true);
   if (!UPGRADE_USE_MORE_APPS_FOLDER || !isUpgrade) {
+    Launcher.addDumpLog(TAG,"10249126 - verifyApplications(" + isUpgrade + ")",true);
     verifyApplications();
   }
   mContext=null;

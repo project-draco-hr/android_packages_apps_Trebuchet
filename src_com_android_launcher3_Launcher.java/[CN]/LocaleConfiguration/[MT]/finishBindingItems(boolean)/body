@@ -22,8 +22,8 @@
   updateAppMarketIcon();
   mWorkspaceLoading=false;
   if (upgradePath) {
-    mWorkspace.stripDuplicateApps();
-    mIntentsOnWorkspaceFromUpgradePath=mWorkspace.stripDuplicateApps();
+    mWorkspace.getUniqueComponents(true,null);
+    mIntentsOnWorkspaceFromUpgradePath=mWorkspace.getUniqueComponents(true,null);
   }
   mWorkspace.post(new Runnable(){
     @Override public void run(){
@@ -31,4 +31,6 @@
     }
   }
 );
+  Launcher.addDumpLog(TAG,"10249126 - finishBindingItems() - dumping logs to disk",true);
+  dumpLogsToLocalData(false);
 }

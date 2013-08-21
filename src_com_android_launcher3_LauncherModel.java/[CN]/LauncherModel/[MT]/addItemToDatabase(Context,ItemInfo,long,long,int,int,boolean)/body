@@ -17,8 +17,7 @@
   Runnable r=new Runnable(){
     public void run(){
       String transaction="DbDebug    Add item (" + item.title + ") to db, id: "+ item.id+ " ("+ container+ ", "+ screenId+ ", "+ cellX+ ", "+ cellY+ ")";
-      Launcher.sDumpLogs.add(transaction);
-      Log.d(TAG,transaction);
+      Launcher.addDumpLog(TAG,transaction,true);
       cr.insert(notify ? LauncherSettings.Favorites.CONTENT_URI : LauncherSettings.Favorites.CONTENT_URI_NO_NOTIFICATION,values);
 synchronized (sBgLock) {
         checkItemInfoLocked(item.id,item,null);

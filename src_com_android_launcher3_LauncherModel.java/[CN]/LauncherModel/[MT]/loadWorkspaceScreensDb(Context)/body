@@ -10,7 +10,7 @@
       try {
         long screenId=sc.getLong(idIndex);
         int rank=sc.getInt(rankIndex);
-        Log.w(TAG,"10249126 - loadWorkspaceScreensDb(" + screenId + ", "+ rank+ ")");
+        Launcher.addDumpLog(TAG,"10249126 - loadWorkspaceScreensDb(" + screenId + ", "+ rank+ ")",true);
         orderedScreens.put(rank,screenId);
       }
  catch (      Exception e) {

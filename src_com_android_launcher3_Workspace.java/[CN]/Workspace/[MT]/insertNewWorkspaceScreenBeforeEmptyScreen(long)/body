@@ -1,6 +1,6 @@
 {
   int insertIndex=mScreenOrder.indexOf(EXTRA_EMPTY_SCREEN_ID);
-  Log.w(TAG,"10249126 - insertNewWorkspaceScreenBeforeEmptyScreen(" + insertIndex + ")");
+  Launcher.addDumpLog(TAG,"10249126 - insertNewWorkspaceScreenBeforeEmptyScreen(" + insertIndex + ")",true);
   if (insertIndex < 0) {
     insertIndex=mScreenOrder.size();
   }

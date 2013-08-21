@@ -49,7 +49,7 @@
   int childId=LauncherModel.getCellLayoutChildId(container,screenId,x,y,spanX,spanY);
   boolean markCellsAsOccupied=!(child instanceof Folder);
   if (!layout.addViewToCellLayout(child,insert ? 0 : -1,childId,lp,markCellsAsOccupied)) {
-    Log.w(TAG,"Failed to add to item at (" + lp.cellX + ","+ lp.cellY+ ") to CellLayout");
+    Launcher.addDumpLog(TAG,"Failed to add to item at (" + lp.cellX + ","+ lp.cellY+ ") to CellLayout",true);
   }
   if (!(child instanceof Folder)) {
     child.setHapticFeedbackEnabled(false);

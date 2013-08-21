@@ -1,5 +1,5 @@
 {
-  Log.w(TAG,"10249126 - getIdForScreen()");
+  Launcher.addDumpLog(TAG,"10249126 - getIdForScreen()",true);
   Iterator<Long> iter=mWorkspaceScreens.keySet().iterator();
   while (iter.hasNext()) {
     long id=iter.next();

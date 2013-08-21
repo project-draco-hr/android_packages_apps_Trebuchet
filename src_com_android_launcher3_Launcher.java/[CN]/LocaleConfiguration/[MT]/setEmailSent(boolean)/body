@@ -1,0 +1,7 @@
+{
+  String spKey=LauncherAppState.getSharedPreferencesKey();
+  SharedPreferences sp=getSharedPreferences(spKey,Context.MODE_PRIVATE);
+  SharedPreferences.Editor editor=sp.edit();
+  editor.putBoolean(CORRUPTION_EMAIL_SENT_KEY,sent);
+  editor.commit();
+}

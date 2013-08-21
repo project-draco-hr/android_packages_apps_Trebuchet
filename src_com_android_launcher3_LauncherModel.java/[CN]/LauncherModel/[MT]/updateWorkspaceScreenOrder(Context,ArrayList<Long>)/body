@@ -1,5 +1,5 @@
 {
-  Log.w(TAG,"10249126 - updateWorkspaceScreenOrder()");
+  Launcher.addDumpLog(TAG,"10249126 - updateWorkspaceScreenOrder()",true);
   final ArrayList<Long> screensCopy=new ArrayList<Long>(screens);
   final ContentResolver cr=context.getContentResolver();
   final Uri uri=LauncherSettings.WorkspaceScreens.CONTENT_URI;
@@ -7,13 +7,13 @@
   while (iter.hasNext()) {
     long id=iter.next();
     if (id < 0) {
-      Log.w(TAG,"10249126 - updateWorkspaceScreenOrder - remove: " + id + ")");
+      Launcher.addDumpLog(TAG,"10249126 - updateWorkspaceScreenOrder - remove: " + id + ")",true);
       iter.remove();
     }
   }
-  Log.w(TAG,"10249126 - updateWorkspaceScreenOrder - screensCopy");
+  Launcher.addDumpLog(TAG,"10249126 - updateWorkspaceScreenOrder - screensCopy",true);
   for (  Long l : screensCopy) {
-    Log.w(TAG,"10249126\t- " + l);
+    Launcher.addDumpLog(TAG,"10249126\t- " + l,true);
   }
   Runnable r=new Runnable(){
     @Override public void run(){
@@ -25,16 +25,20 @@
         long screenId=screensCopy.get(i);
         v.put(LauncherSettings.WorkspaceScreens._ID,screenId);
         v.put(LauncherSettings.WorkspaceScreens.SCREEN_RANK,i);
-        Log.w(TAG,"10249126 - updateWorkspaceScreenOrder - add: " + screenId + ", "+ i+ ")");
+        Launcher.addDumpLog(TAG,"10249126 - updateWorkspaceScreenOrder(" + screenId + ", "+ i+ ")",true);
         values[i]=v;
       }
       cr.bulkInsert(uri,values);
-      Log.w(TAG,"10249126 - updateWorkspaceScreenOrder - sBgWorkspaceScreens");
+      Launcher.addDumpLog(TAG,"10249126 - updateWorkspaceScreenOrder - sBgWorkspaceScreens",true);
       for (      Long l : sBgWorkspaceScreens) {
-        Log.w(TAG,"10249126\t- " + l);
+        Launcher.addDumpLog(TAG,"10249126\t- " + l,true);
       }
       sBgWorkspaceScreens.clear();
       sBgWorkspaceScreens.addAll(screensCopy);
+      Launcher.addDumpLog(TAG,"10249126 - updateWorkspaceScreenOrder - sBgWorkspaceScreens",true);
+      for (      Long l : sBgWorkspaceScreens) {
+        Launcher.addDumpLog(TAG,"10249126\t- " + l,true);
+      }
     }
   }
 ;

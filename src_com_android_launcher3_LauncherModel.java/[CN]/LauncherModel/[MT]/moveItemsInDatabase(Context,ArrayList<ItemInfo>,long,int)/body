@@ -4,7 +4,7 @@
   for (int i=0; i < count; i++) {
     ItemInfo item=items.get(i);
     String transaction="DbDebug    Modify item (" + item.title + ") in db, id: "+ item.id+ " ("+ item.container+ ", "+ item.screenId+ ", "+ item.cellX+ ", "+ item.cellY+ ") --> "+ "("+ container+ ", "+ screen+ ", "+ item.cellX+ ", "+ item.cellY+ ")";
-    Launcher.sDumpLogs.add(transaction);
+    Launcher.addDumpLog(TAG,transaction,true);
     item.container=container;
     if (context instanceof Launcher && screen < 0 && container == LauncherSettings.Favorites.CONTAINER_HOTSEAT) {
       item.screenId=((Launcher)context).getHotseat().getOrderInHotseat(item.cellX,item.cellY);

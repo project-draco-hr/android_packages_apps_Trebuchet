@@ -111,4 +111,14 @@ callbacks.bindPackagesUpdated(widgetsAndShortcuts);
 }
 }
 );
+Launcher.addDumpLog(TAG,"10249126 - PackageUpdatedTask - dumping logs to disk",true);
+mHandler.post(new Runnable(){
+public void run(){
+Callbacks cb=mCallbacks != null ? mCallbacks.get() : null;
+if (callbacks == cb && cb != null) {
+callbacks.dumpLogsToLocalData(false);
+}
+}
+}
+);
 }

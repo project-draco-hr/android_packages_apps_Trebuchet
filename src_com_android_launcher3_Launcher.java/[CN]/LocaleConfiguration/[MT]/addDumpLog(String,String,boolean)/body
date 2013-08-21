@@ -1,0 +1,9 @@
+{
+  if (debugLog) {
+    Log.d(tag,log);
+  }
+  sDateStamp.setTime(System.currentTimeMillis());
+synchronized (sDumpLogs) {
+    sDumpLogs.add(sDateFormat.format(sDateStamp) + ": " + tag+ ", "+ log);
+  }
+}
