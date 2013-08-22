@@ -38,4 +38,8 @@
     pickedImageThumbnail.setTag(meta);
     mThumbnailOnClickListener.onClick(pickedImageThumbnail);
   }
+ else   if (requestCode == PICK_WALLPAPER_THIRD_PARTY_ACTIVITY) {
+    setResult(RESULT_OK);
+    finish();
+  }
 }
