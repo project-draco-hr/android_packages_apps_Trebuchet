@@ -1,0 +1,9 @@
+{
+  if (item.getIntent() == null) {
+    return super.onMenuItemSelected(featureId,item);
+  }
+ else {
+    Utilities.startActivityForResultSafely(this,item.getIntent(),PICK_WALLPAPER_THIRD_PARTY_ACTIVITY);
+    return true;
+  }
+}

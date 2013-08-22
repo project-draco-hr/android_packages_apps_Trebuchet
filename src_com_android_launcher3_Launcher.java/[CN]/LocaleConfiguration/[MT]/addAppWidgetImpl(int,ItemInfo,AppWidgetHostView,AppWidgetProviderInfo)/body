@@ -4,7 +4,7 @@
     Intent intent=new Intent(AppWidgetManager.ACTION_APPWIDGET_CONFIGURE);
     intent.setComponent(appWidgetInfo.configure);
     intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,appWidgetId);
-    startActivityForResultSafely(intent,REQUEST_CREATE_APPWIDGET);
+    Utilities.startActivityForResultSafely(this,intent,REQUEST_CREATE_APPWIDGET);
   }
  else {
     completeAddAppWidget(appWidgetId,info.container,info.screenId,boundWidget,appWidgetInfo);

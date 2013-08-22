@@ -13,16 +13,20 @@
     imageActivities[i]=new ComponentName(activityInfo.packageName,activityInfo.name);
   }
   outerLoop:   for (  ResolveInfo info : apps) {
-    final ComponentName componentName=new ComponentName(info.activityInfo.packageName,info.activityInfo.name);
-    if (componentName.getPackageName().equals(getPackageName()) || componentName.getPackageName().equals("com.android.launcher")) {
+    final ComponentName itemComponentName=new ComponentName(info.activityInfo.packageName,info.activityInfo.name);
+    final String itemPackageName=itemComponentName.getPackageName();
+    if (itemPackageName.equals(getPackageName()) || itemPackageName.equals("com.android.launcher")) {
       continue;
     }
     for (    ResolveInfo imagePickerActivityInfo : imagePickerActivities) {
-      if (componentName.getPackageName().equals(imagePickerActivityInfo.activityInfo.packageName)) {
+      if (itemPackageName.equals(imagePickerActivityInfo.activityInfo.packageName)) {
         continue outerLoop;
       }
     }
     MenuItem mi=sub.add(info.loadLabel(pm));
+    Intent launchIntent=new Intent(Intent.ACTION_SET_WALLPAPER);
+    launchIntent.setComponent(itemComponentName);
+    mi.setIntent(launchIntent);
     Drawable icon=info.loadIcon(pm);
     if (icon != null) {
       mi.setIcon(icon);
