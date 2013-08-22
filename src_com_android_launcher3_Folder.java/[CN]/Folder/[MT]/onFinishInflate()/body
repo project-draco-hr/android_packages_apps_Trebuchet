@@ -4,9 +4,9 @@
   mContent=(CellLayout)findViewById(R.id.folder_content);
   LauncherAppState app=LauncherAppState.getInstance();
   DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
+  Rect padding=grid.getWorkspacePadding(grid.isLandscape ? CellLayout.LANDSCAPE : CellLayout.PORTRAIT);
+  DisplayMetrics dm=getResources().getDisplayMetrics();
   mContent.setCellDimensions(grid.folderCellWidthPx,grid.folderCellHeightPx);
-  mContent.setGridSize(mMaxVisibleX,mMaxVisibleY);
-  mMaxContentAreaHeight=mContent.getDesiredHeight() - SCROLL_CUT_OFF_AMOUNT;
   mContent.setGridSize(0,0);
   mContent.getShortcutsAndWidgets().setMotionEventSplittingEnabled(false);
   mContent.setInvertIfRtl(true);

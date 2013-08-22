@@ -1,4 +1,4 @@
 {
   float densityRatio=(float)metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT;
-  return (int)Math.round(size / densityRatio);
+  return (size / densityRatio);
 }

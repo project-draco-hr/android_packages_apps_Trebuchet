@@ -1,4 +1,8 @@
 {
+  LauncherAppState app=LauncherAppState.getInstance();
+  DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
+  int countX=(int)grid.numColumns;
+  int countY=(int)grid.numRows;
   long containerIndex=item.screenId;
   if (item.container == LauncherSettings.Favorites.CONTAINER_HOTSEAT) {
     if (occupied.containsKey(LauncherSettings.Favorites.CONTAINER_HOTSEAT)) {
@@ -8,7 +12,7 @@
       }
     }
  else {
-      ItemInfo[][] items=new ItemInfo[mCellCountX + 1][mCellCountY + 1];
+      ItemInfo[][] items=new ItemInfo[countX + 1][countY + 1];
       items[(int)item.screenId][0]=item;
       occupied.put((long)LauncherSettings.Favorites.CONTAINER_HOTSEAT,items);
       return true;
@@ -18,7 +22,7 @@
     return true;
   }
   if (!occupied.containsKey(item.screenId)) {
-    ItemInfo[][] items=new ItemInfo[mCellCountX + 1][mCellCountY + 1];
+    ItemInfo[][] items=new ItemInfo[countX + 1][countY + 1];
     occupied.put(item.screenId,items);
   }
   ItemInfo[][] screens=occupied.get(item.screenId);
