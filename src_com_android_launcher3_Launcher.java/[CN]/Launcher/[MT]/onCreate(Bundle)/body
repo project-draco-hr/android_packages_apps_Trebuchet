@@ -28,8 +28,8 @@
   }
   checkForLocaleChange();
   setContentView(R.layout.launcher);
-  grid.layout(this);
   setupViews();
+  grid.layout(this);
   showFirstRunWorkspaceCling();
   registerContentObservers();
   lockAllApps();

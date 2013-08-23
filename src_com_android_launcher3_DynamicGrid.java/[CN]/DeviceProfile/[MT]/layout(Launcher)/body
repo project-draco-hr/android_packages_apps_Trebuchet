@@ -17,7 +17,7 @@
     searchBarSpace.setPadding(2 * edgeMarginPx,2 * edgeMarginPx,2 * edgeMarginPx,0);
   }
   searchBarSpace.setLayoutParams(lp);
-  View searchBar=searchBarSpace.findViewById(R.id.qsb_search_bar);
+  View searchBar=launcher.getQsbBar();
   lp=(FrameLayout.LayoutParams)searchBar.getLayoutParams();
   lp.width=LayoutParams.MATCH_PARENT;
   lp.height=LayoutParams.MATCH_PARENT;
