@@ -14,9 +14,6 @@
     }
     mSavedState=null;
   }
-  if (!mWorkspace.hasCustomContent() && hasCustomContentToLeft()) {
-    mWorkspace.createCustomContentPage();
-  }
   mWorkspace.restoreInstanceStateForRemainingPages();
   for (int i=0; i < sPendingAddList.size(); i++) {
     completeAdd(sPendingAddList.get(i));
