@@ -12,5 +12,5 @@
   deviceProfiles.add(new DeviceProfile("20-inch Tablet",1527,2527,7,7,100,20,7,72));
   mMinWidth=dpiFromPx(minWidthPx,dm);
   mMinHeight=dpiFromPx(minHeightPx,dm);
-  mProfile=new DeviceProfile(deviceProfiles,mMinWidth,minWidthPx,mMinHeight,minHeightPx,widthPx,heightPx,resources);
+  mProfile=new DeviceProfile(deviceProfiles,mMinWidth,mMinHeight,widthPx,heightPx,awPx,ahPx,resources);
 }

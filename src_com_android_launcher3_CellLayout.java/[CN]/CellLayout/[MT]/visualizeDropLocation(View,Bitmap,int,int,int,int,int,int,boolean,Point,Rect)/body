@@ -17,6 +17,9 @@
     cellToPoint(cellX,cellY,topLeft);
     int left=topLeft[0];
     int top=topLeft[1];
+    if (v instanceof BubbleTextView) {
+      top+=v.getPaddingTop();
+    }
     if (v != null && dragOffset == null) {
       MarginLayoutParams lp=(MarginLayoutParams)v.getLayoutParams();
       left+=lp.leftMargin;

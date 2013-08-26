@@ -1,7 +1,10 @@
 {
+  DisplayMetrics dm=resources.getDisplayMetrics();
   isLandscape=(resources.getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE);
   isTablet=resources.getBoolean(R.bool.is_tablet);
   isLargeTablet=resources.getBoolean(R.bool.is_large_tablet);
   widthPx=wPx;
   heightPx=hPx;
+  availableWidthPx=awPx;
+  availableHeightPx=ahPx;
 }

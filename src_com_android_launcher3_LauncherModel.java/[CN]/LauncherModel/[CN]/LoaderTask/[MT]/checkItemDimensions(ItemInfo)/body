@@ -1,3 +1,5 @@
 {
-  return (info.cellX + info.spanX) > mCellCountX || (info.cellY + info.spanY) > mCellCountY;
+  LauncherAppState app=LauncherAppState.getInstance();
+  DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
+  return (info.cellX + info.spanX) > (int)grid.numColumns || (info.cellY + info.spanY) > (int)grid.numRows;
 }

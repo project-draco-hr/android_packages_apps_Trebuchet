@@ -4,14 +4,16 @@
   setWillNotDraw(false);
   setClipToPadding(false);
   mLauncher=(Launcher)context;
+  LauncherAppState app=LauncherAppState.getInstance();
+  DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
   TypedArray a=context.obtainStyledAttributes(attrs,R.styleable.CellLayout,defStyle,0);
   mCellWidth=-1;
   mCellHeight=-1;
   mWidthGap=mOriginalWidthGap=0;
   mHeightGap=mOriginalHeightGap=0;
   mMaxGap=Integer.MAX_VALUE;
-  mCountX=LauncherModel.getCellCountX();
-  mCountY=LauncherModel.getCellCountY();
+  mCountX=(int)grid.numColumns;
+  mCountY=(int)grid.numRows;
   mOccupied=new boolean[mCountX][mCountY];
   mTmpOccupied=new boolean[mCountX][mCountY];
   mPreviousReorderDirection[0]=INVALID_DIRECTION;
@@ -19,8 +21,6 @@
   a.recycle();
   setAlwaysDrawnWithCacheEnabled(false);
   final Resources res=getResources();
-  LauncherAppState app=LauncherAppState.getInstance();
-  DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
   mHotseatScale=(float)grid.hotseatIconSize / grid.iconSize;
   mNormalBackground=res.getDrawable(R.drawable.homescreen_blue_normal_holo);
   mActiveGlowBackground=res.getDrawable(R.drawable.homescreen_blue_strong_holo);

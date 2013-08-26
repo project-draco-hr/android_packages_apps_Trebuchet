@@ -1,4 +1,6 @@
 {
+  LauncherAppState app=LauncherAppState.getInstance();
+  DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
   mWidgets.clear();
   for (  Object o : widgetsAndShortcuts) {
     if (o instanceof AppWidgetProviderInfo) {
@@ -9,7 +11,7 @@
         int[] minSpanXY=Launcher.getMinSpanForWidget(mLauncher,widget);
         int minSpanX=Math.min(spanXY[0],minSpanXY[0]);
         int minSpanY=Math.min(spanXY[1],minSpanXY[1]);
-        if (minSpanX <= LauncherModel.getCellCountX() && minSpanY <= LauncherModel.getCellCountY()) {
+        if (minSpanX <= (int)grid.numColumns && minSpanY <= (int)grid.numRows) {
           mWidgets.add(widget);
         }
  else {

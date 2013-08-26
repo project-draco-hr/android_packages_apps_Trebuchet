@@ -12,7 +12,9 @@
   Display display=getWindowManager().getDefaultDisplay();
   display.getCurrentSizeRange(smallestSize,largestSize);
   display.getRealSize(realSize);
-  DeviceProfile grid=app.initDynamicGrid(this,Math.min(smallestSize.x,smallestSize.y),Math.min(largestSize.x,largestSize.y),realSize.x,realSize.y);
+  DisplayMetrics dm=new DisplayMetrics();
+  display.getMetrics(dm);
+  DeviceProfile grid=app.initDynamicGrid(this,Math.min(smallestSize.x,smallestSize.y),Math.min(largestSize.x,largestSize.y),realSize.x,realSize.y,dm.widthPixels,dm.heightPixels);
   mSharedPrefs=getSharedPreferences(LauncherAppState.getSharedPreferencesKey(),Context.MODE_PRIVATE);
   mModel=app.setLauncher(this);
   mIconCache=app.getIconCache();

@@ -1,0 +1,11 @@
+{
+  boolean created=false;
+  if (mDynamicGrid == null) {
+    mDynamicGrid=new DynamicGrid(context.getResources(),minWidth,minHeight,width,height,availableWidth,availableHeight);
+    created=true;
+  }
+  DeviceProfile grid=mDynamicGrid.getDeviceProfile();
+  Utilities.setIconSize(grid.iconSizePx);
+  grid.updateFromConfiguration(context.getResources(),width,height,availableWidth,availableHeight);
+  return grid;
+}
