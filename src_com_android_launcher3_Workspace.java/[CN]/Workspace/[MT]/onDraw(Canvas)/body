@@ -1,5 +1,4 @@
 {
-  updateWallpaperOffsets();
   if (mBackground != null && mBackgroundAlpha > 0.0f && mDrawBackground) {
     int alpha=(int)(mBackgroundAlpha * 255);
     mBackground.setAlpha(alpha);

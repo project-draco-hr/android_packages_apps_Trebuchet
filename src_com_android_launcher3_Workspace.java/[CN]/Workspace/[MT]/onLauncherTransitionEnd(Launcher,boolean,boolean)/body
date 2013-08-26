@@ -1,6 +1,5 @@
 {
   mIsSwitchingState=false;
-  mWallpaperOffset.setOverrideHorizontalCatchupConstant(false);
   updateChildrenLayersEnabled(false);
   if (!mWorkspaceFadeInAdjacentScreens) {
     for (int i=0; i < getChildCount(); i++) {

@@ -1,5 +1,3 @@
 {
-  final boolean enableWallpaperEffects=isHardwareAccelerated();
-  if (enableWallpaperEffects) {
-  }
+  mWallpaperOffset.setFinalX(wallpaperOffsetForCurrentScroll());
 }

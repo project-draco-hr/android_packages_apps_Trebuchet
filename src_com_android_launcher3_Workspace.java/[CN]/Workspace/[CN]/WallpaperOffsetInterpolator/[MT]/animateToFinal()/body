@@ -1,0 +1,5 @@
+{
+  mAnimating=true;
+  mAnimationStartOffset=mCurrentOffset;
+  mAnimationStartTime=System.currentTimeMillis();
+}

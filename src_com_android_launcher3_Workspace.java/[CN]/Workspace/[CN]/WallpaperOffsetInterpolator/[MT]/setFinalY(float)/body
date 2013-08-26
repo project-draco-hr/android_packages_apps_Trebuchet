@@ -1,3 +1,0 @@
-{
-  mFinalVerticalWallpaperOffset=Math.max(0f,Math.min(y,1.0f));
-}

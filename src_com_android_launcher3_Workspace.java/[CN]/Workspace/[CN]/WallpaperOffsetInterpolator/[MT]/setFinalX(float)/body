@@ -1,3 +1,10 @@
 {
-  mFinalHorizontalWallpaperOffset=Math.max(0f,Math.min(x,1.0f));
+  scheduleCallback();
+  mFinalOffset=Math.max(0f,Math.min(x,1.0f));
+  if (getChildCount() != mNumScreens) {
+    if (mNumScreens > 0) {
+      animateToFinal();
+    }
+    mNumScreens=getChildCount();
+  }
 }

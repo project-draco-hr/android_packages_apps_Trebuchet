@@ -1,4 +1,3 @@
 {
-  mHorizontalWallpaperOffset=mFinalHorizontalWallpaperOffset;
-  mVerticalWallpaperOffset=mFinalVerticalWallpaperOffset;
+  mCurrentOffset=mFinalOffset;
 }
