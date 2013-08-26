@@ -14,12 +14,14 @@
   boolean allowLongPress=isHotseatLayout(v) || mWorkspace.allowLongPress();
   if (allowLongPress && !mDragController.isDragging()) {
     if (itemUnderLongClick == null) {
-      mWorkspace.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS,HapticFeedbackConstants.FLAG_IGNORE_VIEW_SETTING);
-      if (mWorkspace.isInOverviewMode()) {
-        mWorkspace.startReordering(v);
-      }
+      if (mWorkspace.hasNonCustomEmptyScreens()) {
+        mWorkspace.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS,HapticFeedbackConstants.FLAG_IGNORE_VIEW_SETTING);
+        if (mWorkspace.isInOverviewMode()) {
+          mWorkspace.startReordering(v);
+        }
  else {
-        mWorkspace.enterOverviewMode();
+          mWorkspace.enterOverviewMode();
+        }
       }
     }
  else {
