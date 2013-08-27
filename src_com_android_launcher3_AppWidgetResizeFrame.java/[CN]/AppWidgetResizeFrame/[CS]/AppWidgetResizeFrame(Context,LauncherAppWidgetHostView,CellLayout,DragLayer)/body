@@ -5,7 +5,6 @@
   mWidgetView=widgetView;
   mResizeMode=widgetView.getAppWidgetInfo().resizeMode;
   mDragLayer=dragLayer;
-  mWorkspace=(Workspace)dragLayer.findViewById(R.id.workspace);
   final AppWidgetProviderInfo info=widgetView.getAppWidgetInfo();
   int[] result=Launcher.getMinSpanForWidget(mLauncher,info);
   mMinHSpan=result[0];

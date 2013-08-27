@@ -25,8 +25,7 @@ synchronized (sBgLock) {
           int startSearchPageIndex=1;
           Pair<Long,int[]> coords=LauncherModel.findNextAvailableIconSpace(context,name,launchIntent,startSearchPageIndex,workspaceScreens);
           if (coords == null) {
-            LauncherAppState appState=LauncherAppState.getInstance();
-            LauncherProvider lp=appState.getLauncherProvider();
+            LauncherProvider lp=LauncherAppState.getLauncherProvider();
             int numPagesToAdd=Math.max(1,startSearchPageIndex + 1 - workspaceScreens.size());
             while (numPagesToAdd > 0) {
               long screenId=lp.generateNewScreenId();

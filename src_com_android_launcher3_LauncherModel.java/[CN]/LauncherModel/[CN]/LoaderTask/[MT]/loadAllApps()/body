@@ -23,7 +23,6 @@
   if (DEBUG_LOADERS) {
     Log.d(TAG,"sort took " + (SystemClock.uptimeMillis() - sortTime) + "ms");
   }
-  final long addTime=DEBUG_LOADERS ? SystemClock.uptimeMillis() : 0;
   for (int i=0; i < apps.size(); i++) {
     mBgAllAppsList.add(new ApplicationInfo(packageManager,apps.get(i),mIconCache,mLabelCache));
   }

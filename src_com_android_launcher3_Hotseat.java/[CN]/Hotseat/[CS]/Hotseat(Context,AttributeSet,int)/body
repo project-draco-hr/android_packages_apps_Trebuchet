@@ -1,6 +1,5 @@
 {
   super(context,attrs,defStyle);
-  TypedArray a=context.obtainStyledAttributes(attrs,R.styleable.Hotseat,defStyle,0);
   Resources r=context.getResources();
   mTransposeLayoutWithOrientation=r.getBoolean(R.bool.hotseat_transpose_layout_with_orientation);
   mIsLandscape=context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;

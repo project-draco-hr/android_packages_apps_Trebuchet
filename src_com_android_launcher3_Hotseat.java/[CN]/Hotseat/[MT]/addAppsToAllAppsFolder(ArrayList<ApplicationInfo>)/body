@@ -9,7 +9,6 @@
   }
   FolderInfo info=fi.getFolderInfo();
   for (  ApplicationInfo a : apps) {
-    ComponentName cn=a.intent.getComponent();
     ShortcutInfo si=a.makeShortcut();
     info.add(si);
   }

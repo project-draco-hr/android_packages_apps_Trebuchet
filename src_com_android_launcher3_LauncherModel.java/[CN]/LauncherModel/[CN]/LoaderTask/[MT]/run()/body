@@ -3,7 +3,6 @@
 synchronized (mLock) {
     mIsLoaderTaskRunning=true;
   }
-  final Callbacks cbk=mCallbacks.get();
   keep_running: {
 synchronized (mLock) {
       if (DEBUG_LOADERS)       Log.d(TAG,"Setting thread priority to " + (mIsLaunching ? "DEFAULT" : "BACKGROUND"));

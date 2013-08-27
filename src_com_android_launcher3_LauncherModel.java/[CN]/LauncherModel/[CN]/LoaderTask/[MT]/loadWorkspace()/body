@@ -9,8 +9,8 @@
   DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
   int countX=(int)grid.numColumns;
   int countY=(int)grid.numRows;
-  mApp.getLauncherProvider().loadDefaultFavoritesIfNecessary(0);
-  boolean loadedOldDb=mApp.getLauncherProvider().justLoadedOldDb();
+  LauncherAppState.getLauncherProvider().loadDefaultFavoritesIfNecessary(0);
+  boolean loadedOldDb=LauncherAppState.getLauncherProvider().justLoadedOldDb();
 synchronized (sBgLock) {
     sBgWorkspaceItems.clear();
     sBgAppWidgets.clear();
@@ -129,7 +129,6 @@ folderInfo.cellY=c.getInt(cellYIndex);
 folderInfo.spanX=1;
 folderInfo.spanY=1;
 if (container == LauncherSettings.Favorites.CONTAINER_DESKTOP) {
-int iconSpan=1;
 if (checkItemDimensions(folderInfo)) {
 Log.d(TAG,"Skipped loading out of bounds folder");
 continue;
@@ -231,13 +230,13 @@ Log.w(TAG,"10249126 - updateWorkspaceScreenOrder - sBgWorkspaceScreens");
 for (Long l : sBgWorkspaceScreens) {
 Log.w(TAG,"10249126\t- " + l);
 }
-mApp.getLauncherProvider().updateMaxScreenId(maxScreenId);
+LauncherAppState.getLauncherProvider().updateMaxScreenId(maxScreenId);
 updateWorkspaceScreenOrder(context,sBgWorkspaceScreens);
 long maxItemId=0;
 for (ItemInfo item : sBgItemsIdMap.values()) {
 maxItemId=Math.max(maxItemId,item.id);
 }
-app.getLauncherProvider().updateMaxItemId(maxItemId);
+LauncherAppState.getLauncherProvider().updateMaxItemId(maxItemId);
 }
  else {
 Log.w(TAG,"10249126 - loadWorkspace - !loadedOldDb");

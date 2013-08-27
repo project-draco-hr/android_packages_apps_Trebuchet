@@ -2,7 +2,6 @@
   final LayoutParams lp=params;
   if (child instanceof BubbleTextView) {
     BubbleTextView bubbleChild=(BubbleTextView)child;
-    Resources res=getResources();
     bubbleChild.setTextVisibility(!mIsHotseat);
   }
   child.setScaleX(getChildrenScale());

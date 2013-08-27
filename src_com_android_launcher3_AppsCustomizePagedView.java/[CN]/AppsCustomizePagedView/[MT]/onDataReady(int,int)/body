@@ -2,7 +2,6 @@
   if (mWidgetPreviewLoader == null) {
     mWidgetPreviewLoader=new WidgetPreviewLoader(mLauncher);
   }
-  boolean isLandscape=getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
   int maxCellCountX=Integer.MAX_VALUE;
   int maxCellCountY=Integer.MAX_VALUE;
   if (mMaxAppCellCountX > -1) {
