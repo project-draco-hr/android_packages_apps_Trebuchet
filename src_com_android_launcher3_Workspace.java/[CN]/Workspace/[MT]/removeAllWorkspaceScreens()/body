@@ -1,0 +1,6 @@
+{
+  Log.w(TAG,"10249126 - removeAllWorkspaceScreens()");
+  removeAllViews();
+  mScreenOrder.clear();
+  mWorkspaceScreens.clear();
+}

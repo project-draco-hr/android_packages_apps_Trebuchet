@@ -1,7 +1,7 @@
 {
   Log.w(TAG,"10249126 - addAndBindAddedApps()");
   if (added.isEmpty()) {
-    throw new RuntimeException("EMPTY ADDED ARRAY?");
+    return;
   }
   Runnable r=new Runnable(){
     public void run(){

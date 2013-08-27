@@ -5,6 +5,6 @@
   mScreenOrder.add(0,CUSTOM_CONTENT_SCREEN_ID);
   customScreen.setPadding(0,0,0,0);
   addFullScreenPage(customScreen);
-  mDefaultPage++;
+  mDefaultPage=mOriginalDefaultPage + 1;
   setCurrentPage(getCurrentPage() + 1);
 }

@@ -1,4 +1,5 @@
 {
+  Log.w(TAG,"10249126 - updateWorkspaceScreenOrder()");
   final ArrayList<Long> screensCopy=new ArrayList<Long>(screens);
   final ContentResolver cr=context.getContentResolver();
   final Uri uri=LauncherSettings.WorkspaceScreens.CONTENT_URI;
@@ -6,8 +7,13 @@
   while (iter.hasNext()) {
     long id=iter.next();
     if (id < 0) {
+      Log.w(TAG,"10249126 - updateWorkspaceScreenOrder - remove: " + id + ")");
       iter.remove();
     }
+  }
+  Log.w(TAG,"10249126 - updateWorkspaceScreenOrder - screensCopy");
+  for (  Long l : screensCopy) {
+    Log.w(TAG,"10249126\t- " + l);
   }
   Runnable r=new Runnable(){
     @Override public void run(){
@@ -19,10 +25,14 @@
         long screenId=screensCopy.get(i);
         v.put(LauncherSettings.WorkspaceScreens._ID,screenId);
         v.put(LauncherSettings.WorkspaceScreens.SCREEN_RANK,i);
-        Log.w(TAG,"10249126 - updateWorkspaceScreenOrder(" + screenId + ", "+ i+ ")");
+        Log.w(TAG,"10249126 - updateWorkspaceScreenOrder - add: " + screenId + ", "+ i+ ")");
         values[i]=v;
       }
       cr.bulkInsert(uri,values);
+      Log.w(TAG,"10249126 - updateWorkspaceScreenOrder - sBgWorkspaceScreens");
+      for (      Long l : sBgWorkspaceScreens) {
+        Log.w(TAG,"10249126\t- " + l);
+      }
       sBgWorkspaceScreens.clear();
       sBgWorkspaceScreens.addAll(screensCopy);
     }

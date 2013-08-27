@@ -227,6 +227,10 @@ maxScreenId=screenId;
 }
 }
 Collections.sort(sBgWorkspaceScreens);
+Log.w(TAG,"10249126 - updateWorkspaceScreenOrder - sBgWorkspaceScreens");
+for (Long l : sBgWorkspaceScreens) {
+Log.w(TAG,"10249126\t- " + l);
+}
 mApp.getLauncherProvider().updateMaxScreenId(maxScreenId);
 updateWorkspaceScreenOrder(context,sBgWorkspaceScreens);
 long maxItemId=0;
@@ -251,6 +255,10 @@ unusedScreens.remove(screenId);
 }
 if (unusedScreens.size() != 0) {
 sBgWorkspaceScreens.removeAll(unusedScreens);
+Log.w(TAG,"10249126 - updateWorkspaceScreenOrder - sBgWorkspaceScreens");
+for (Long l : sBgWorkspaceScreens) {
+Log.w(TAG,"10249126\t- " + l);
+}
 updateWorkspaceScreenOrder(context,sBgWorkspaceScreens);
 }
 }
