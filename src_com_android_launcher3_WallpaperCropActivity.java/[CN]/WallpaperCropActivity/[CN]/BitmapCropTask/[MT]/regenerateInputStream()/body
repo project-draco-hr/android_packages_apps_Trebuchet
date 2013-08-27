@@ -1,11 +1,16 @@
 {
-  if (mInUri == null) {
-    Log.w(LOGTAG,"cannot read original file, no input URI given");
+  if (mInUri == null && mInResId == 0) {
+    Log.w(LOGTAG,"cannot read original file, no input URI or resource ID given");
   }
  else {
     Utils.closeSilently(mInStream);
     try {
-      mInStream=new BufferedInputStream(getContentResolver().openInputStream(mInUri));
+      if (mInUri != null) {
+        mInStream=new BufferedInputStream(getContentResolver().openInputStream(mInUri));
+      }
+ else {
+        mInStream=new BufferedInputStream(getResources().openRawResource(mInResId));
+      }
     }
  catch (    FileNotFoundException e) {
       Log.w(LOGTAG,"cannot read file: " + mInUri.toString(),e);

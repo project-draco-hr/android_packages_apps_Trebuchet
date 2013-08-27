@@ -33,26 +33,53 @@
       if (meta.mLaunchesGallery) {
       }
  else       if (meta.mGalleryImageUri != null) {
-        BitmapCropTask cropTask=new BitmapCropTask(meta.mGalleryImageUri,mCropView.getCrop(),mCropView.getWidth(),mCropView.getHeight(),true,false);
+        Point inSize=mCropView.getSourceDimensions();
+        Point minDims=new Point();
+        Point maxDims=new Point();
+        Display d=getWindowManager().getDefaultDisplay();
+        d.getCurrentSizeRange(minDims,maxDims);
+        Point displaySize=new Point();
+        d.getSize(displaySize);
+        RectF cropRect=mCropView.getCrop();
+        float cropScale=displaySize.x / (float)cropRect.width();
+        if (displaySize.x < displaySize.y) {
+          float extraSpaceToRight=inSize.x - cropRect.right;
+          cropRect.right=inSize.x;
+        }
+ else {
+          float leftForPortrait=(cropRect.width() - minDims.x) / 2;
+          cropRect.right=inSize.x;
+          float portraitHeight=Math.max(maxDims.x,maxDims.y);
+          float extraPortraitHeight=portraitHeight - cropRect.height();
+          float expandHeight=Math.min(Math.min(inSize.y - cropRect.bottom,cropRect.top),extraPortraitHeight / 2);
+          cropRect.top-=expandHeight;
+          cropRect.bottom+=expandHeight;
+        }
+        final int outWidth=(int)Math.ceil(cropRect.width() * cropScale);
+        final int outHeight=(int)Math.ceil(cropRect.height() * cropScale);
+        Runnable onEndCrop=new Runnable(){
+          public void run(){
+            updateWallpaperDimensions(outWidth,outHeight);
+          }
+        }
+;
+        BitmapCropTask cropTask=new BitmapCropTask(meta.mGalleryImageUri,cropRect,outWidth,outHeight,true,false,onEndCrop);
         cropTask.execute();
       }
  else       if (meta.mWallpaperResId != 0) {
-        try {
-          WallpaperManager wm=WallpaperManager.getInstance(getApplicationContext());
-          wm.setResource(meta.mWallpaperResId);
-          updateWallpaperDimensions(0,0);
-          String spKey=LauncherAppState.getSharedPreferencesKey();
-          SharedPreferences sp=getSharedPreferences(spKey,Context.MODE_PRIVATE);
-          SharedPreferences.Editor editor=sp.edit();
-          editor.remove(WALLPAPER_WIDTH_KEY);
-          editor.remove(WALLPAPER_HEIGHT_KEY);
-          editor.commit();
-          setResult(Activity.RESULT_OK);
-          finish();
+        Point inSize=mCropView.getSourceDimensions();
+        Point outSize=getDefaultWallpaperSize(getResources(),getWindowManager());
+        RectF crop=getMaxCropRect(inSize.x,inSize.y,outSize.x,outSize.y);
+        Runnable onEndCrop=new Runnable(){
+          public void run(){
+            updateWallpaperDimensions(0,0);
+          }
         }
- catch (        IOException e) {
-          Log.e(TAG,"Failed to set wallpaper: " + e);
-        }
+;
+        BitmapCropTask cropTask=new BitmapCropTask(meta.mWallpaperResId,crop,outSize.x,outSize.y,true,false,onEndCrop);
+        cropTask.execute();
+        setResult(Activity.RESULT_OK);
+        finish();
       }
     }
   }

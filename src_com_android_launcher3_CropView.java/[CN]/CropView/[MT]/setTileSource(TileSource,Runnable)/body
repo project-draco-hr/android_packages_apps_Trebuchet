@@ -1,4 +1,4 @@
 {
   super.setTileSource(source,isReadyCallback);
-  updateMinScale(getWidth(),getHeight(),source);
+  updateMinScale(getWidth(),getHeight(),source,true);
 }

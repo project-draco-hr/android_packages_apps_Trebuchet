@@ -4,3 +4,4 @@ int outWidth
 int outHeight
 boolean setWallpaper
 boolean saveCroppedBitmap
+Runnable onEndRunnable

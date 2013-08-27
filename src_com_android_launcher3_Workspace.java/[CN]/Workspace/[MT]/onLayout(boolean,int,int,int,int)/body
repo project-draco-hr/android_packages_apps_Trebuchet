@@ -1,6 +1,6 @@
 {
   if (mFirstLayout && mCurrentPage >= 0 && mCurrentPage < getChildCount()) {
-    syncWallpaperOffsetWithScroll();
+    mWallpaperOffset.syncWithScroll();
     mWallpaperOffset.jumpToFinal();
   }
   super.onLayout(changed,left,top,right,bottom);

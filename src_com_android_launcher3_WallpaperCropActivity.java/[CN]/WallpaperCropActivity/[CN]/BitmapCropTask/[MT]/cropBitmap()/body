@@ -84,13 +84,15 @@
  else {
           try {
             mWPManager.setStream(new ByteArrayInputStream(tmpOut.toByteArray()));
-            updateWallpaperDimensions(mOutWidth,mOutHeight);
           }
  catch (          IOException e) {
             Log.w(LOGTAG,"cannot write stream to wallpaper",e);
             failure=true;
           }
         }
+      }
+      if (mOnEndRunnable != null) {
+        mOnEndRunnable.run();
       }
     }
  else {

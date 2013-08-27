@@ -1,0 +1,16 @@
+{
+  if (getChildCount() <= 1) {
+    return 0;
+  }
+  final int lastIndex=isLayoutRtl() ? 0 : getChildCount() - 1;
+  final int firstIndex=isLayoutRtl() ? getChildCount() - 2 : 1;
+  int firstPageScrollX=getScrollForPage(firstIndex);
+  int scrollRange=getScrollForPage(lastIndex) - firstPageScrollX;
+  if (scrollRange == 0) {
+    return 0;
+  }
+ else {
+    float offset=(getScrollX() - firstPageScrollX) / (float)scrollRange;
+    return offset;
+  }
+}

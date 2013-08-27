@@ -1,6 +1,0 @@
-{
-  if (!mWaitingForCallback) {
-    mChoreographer.postFrameCallback(this);
-    mWaitingForCallback=true;
-  }
-}

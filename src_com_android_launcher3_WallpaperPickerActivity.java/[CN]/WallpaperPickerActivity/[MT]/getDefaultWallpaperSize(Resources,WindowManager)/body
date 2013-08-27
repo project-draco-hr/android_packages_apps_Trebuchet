@@ -1,0 +1,17 @@
+{
+  Point minDims=new Point();
+  Point maxDims=new Point();
+  windowManager.getDefaultDisplay().getCurrentSizeRange(minDims,maxDims);
+  final int maxDim=Math.max(maxDims.x,maxDims.y);
+  final int minDim=Math.min(minDims.x,minDims.y);
+  final int defaultWidth, defaultHeight;
+  if (LauncherAppState.isScreenLarge(res)) {
+    defaultWidth=(int)(maxDim * wallpaperTravelToScreenWidthRatio(maxDim,minDim));
+    defaultHeight=maxDim;
+  }
+ else {
+    defaultWidth=Math.max((int)(minDim * WALLPAPER_SCREENS_SPAN),maxDim);
+    defaultHeight=maxDim;
+  }
+  return new Point(defaultWidth,defaultHeight);
+}

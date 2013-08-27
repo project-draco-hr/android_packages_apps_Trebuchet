@@ -10,8 +10,10 @@
  else {
     mCurrentOffset=mFinalOffset;
   }
+  if (Math.abs(mCurrentOffset - mFinalOffset) > 0.0000001f) {
+    scheduleUpdate();
+  }
   if (Math.abs(oldOffset - mCurrentOffset) > 0.0000001f) {
-    scheduleCallback();
     return true;
   }
   return false;

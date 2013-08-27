@@ -6,4 +6,5 @@
   mWPManager=WallpaperManager.getInstance(getApplicationContext());
   mSetWallpaper=setWallpaper;
   mSaveCroppedBitmap=saveCroppedBitmap;
+  mOnEndRunnable=onEndRunnable;
 }

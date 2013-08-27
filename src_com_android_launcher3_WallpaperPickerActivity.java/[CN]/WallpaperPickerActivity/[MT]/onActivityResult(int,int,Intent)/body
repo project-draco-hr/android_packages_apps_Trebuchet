@@ -8,21 +8,9 @@
     Resources res=getResources();
     int width=res.getDimensionPixelSize(R.dimen.wallpaperThumbnailWidth);
     int height=res.getDimensionPixelSize(R.dimen.wallpaperThumbnailHeight);
-    BitmapCropTask cropTask=new BitmapCropTask(uri,null,width,height,false,true);
+    BitmapCropTask cropTask=new BitmapCropTask(uri,null,width,height,false,true,null);
     Point bounds=cropTask.getImageBounds();
-    RectF cropRect=new RectF();
-    if (bounds.x / (float)bounds.y > width / (float)height) {
-      cropRect.top=0;
-      cropRect.bottom=bounds.y;
-      cropRect.left=(bounds.x - (width / (float)height) * bounds.y) / 2;
-      cropRect.right=bounds.x - cropRect.left;
-    }
- else {
-      cropRect.left=0;
-      cropRect.right=bounds.x;
-      cropRect.top=(bounds.y - (height / (float)width) * bounds.x) / 2;
-      cropRect.bottom=bounds.y - cropRect.top;
-    }
+    RectF cropRect=getMaxCropRect(bounds.x,bounds.y,width,height);
     cropTask.setCropBounds(cropRect);
     if (cropTask.cropBitmap()) {
       image.setImageBitmap(cropTask.getCroppedBitmap());
@@ -36,6 +24,7 @@
     ThumbnailMetaData meta=new ThumbnailMetaData();
     meta.mGalleryImageUri=uri;
     pickedImageThumbnail.setTag(meta);
+    pickedImageThumbnail.setOnClickListener(mThumbnailOnClickListener);
     mThumbnailOnClickListener.onClick(pickedImageThumbnail);
   }
  else   if (requestCode == PICK_WALLPAPER_THIRD_PARTY_ACTIVITY) {

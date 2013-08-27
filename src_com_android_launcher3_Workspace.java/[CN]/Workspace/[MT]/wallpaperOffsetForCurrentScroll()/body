@@ -1,7 +1,0 @@
-{
-  mWallpaperManager.setWallpaperOffsetSteps(1.0f / (getChildCount() - 1),1.0f);
-  if (mMaxScrollX == 0) {
-    return 0;
-  }
-  return getScrollX() / (float)mMaxScrollX;
-}

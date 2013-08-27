@@ -1,6 +1,3 @@
 {
-  mWaitingForCallback=false;
-  if (computeScrollOffset()) {
-    mWallpaperManager.setWallpaperOffsets(mWindowToken,mWallpaperOffset.getCurrX(),0f);
-  }
+  updateOffset(false);
 }

@@ -1,3 +1,4 @@
 int w
 int h
 TileSource source
+boolean resetScale
