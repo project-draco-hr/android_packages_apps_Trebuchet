@@ -4,6 +4,8 @@
     int scrollDelta=getScrollForPage(index + 1) - getScrollX();
     float progress=(1.0f * scrollDelta) / (getScrollForPage(index + 1) - getScrollForPage(index));
     progress=Math.max(0,progress);
+    if (Float.compare(progress,mLastCustomContentScrollProgress) == 0)     return;
+    mLastCustomContentScrollProgress=progress;
     setBackgroundAlpha(progress * 0.8f);
     float height=getViewportHeight();
     if (getPageIndicator() != null) {
@@ -27,6 +29,9 @@
  else       if (alpha > ALPHA_CUTOFF_THRESHOLD && pi.getVisibility() != VISIBLE) {
         pi.setVisibility(VISIBLE);
       }
+    }
+    if (mCustomContentCallbacks != null) {
+      mCustomContentCallbacks.onScrollProgressChanged(progress);
     }
   }
 }
