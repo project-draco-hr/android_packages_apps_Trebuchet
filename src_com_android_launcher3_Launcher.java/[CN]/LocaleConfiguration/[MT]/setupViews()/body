@@ -23,6 +23,12 @@
     }
   }
 );
+  findViewById(R.id.settings_button).setOnClickListener(new OnClickListener(){
+    @Override public void onClick(    View arg0){
+      startSettings();
+    }
+  }
+);
   mWorkspace.setHapticFeedbackEnabled(false);
   mWorkspace.setOnLongClickListener(this);
   mWorkspace.setup(dragController);
