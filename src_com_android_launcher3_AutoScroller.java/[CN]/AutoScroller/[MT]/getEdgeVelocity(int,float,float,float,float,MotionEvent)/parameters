@@ -1,6 +1,0 @@
-int dir
-float leading
-float trailing
-float current
-float size
-MotionEvent ev

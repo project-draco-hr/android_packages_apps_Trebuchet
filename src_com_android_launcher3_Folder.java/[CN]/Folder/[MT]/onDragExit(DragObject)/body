@@ -1,5 +1,5 @@
 {
-  mAutoScroller.stop();
+  mAutoScrollHelper.setEnabled(false);
   if (!d.dragComplete) {
     mOnExitAlarm.setOnAlarmListener(mOnExitAlarmListener);
     mOnExitAlarm.setAlarm(ON_EXIT_CLOSE_DELAY);

@@ -1,5 +1,0 @@
-{
-  mTarget=target;
-  mScroller=new RampUpScroller(250);
-  mActivationDelay=ViewConfiguration.getTapTimeout();
-}

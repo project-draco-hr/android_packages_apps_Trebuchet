@@ -1,8 +1,0 @@
-{
-  final Rect drawingRect=mTempRect;
-  drawingRect.left=(int)r[0];
-  drawingRect.top=(int)r[1];
-  drawingRect.right=drawingRect.left + dragView.getMeasuredWidth();
-  drawingRect.bottom=drawingRect.top + dragView.getMeasuredHeight();
-  return drawingRect;
-}

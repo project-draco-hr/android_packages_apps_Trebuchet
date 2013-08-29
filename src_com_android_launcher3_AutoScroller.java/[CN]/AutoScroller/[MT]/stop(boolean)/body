@@ -1,5 +1,0 @@
-{
-  mActive=false;
-  mSkipDelay=!reset;
-  mTarget.removeCallbacks(this);
-}
