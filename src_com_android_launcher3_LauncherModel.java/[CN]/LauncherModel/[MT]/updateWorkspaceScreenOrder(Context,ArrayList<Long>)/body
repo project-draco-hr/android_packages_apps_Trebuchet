@@ -29,13 +29,13 @@
         values[i]=v;
       }
       cr.bulkInsert(uri,values);
-      Launcher.addDumpLog(TAG,"10249126 - updateWorkspaceScreenOrder - sBgWorkspaceScreens",true);
+      Launcher.addDumpLog(TAG,"10249126 - updateWorkspaceScreenOrder - sBgWorkspaceScreens - pre clear",true);
       for (      Long l : sBgWorkspaceScreens) {
         Launcher.addDumpLog(TAG,"10249126\t- " + l,true);
       }
       sBgWorkspaceScreens.clear();
       sBgWorkspaceScreens.addAll(screensCopy);
-      Launcher.addDumpLog(TAG,"10249126 - updateWorkspaceScreenOrder - sBgWorkspaceScreens",true);
+      Launcher.addDumpLog(TAG,"10249126 - updateWorkspaceScreenOrder - sBgWorkspaceScreens - post clear",true);
       for (      Long l : sBgWorkspaceScreens) {
         Launcher.addDumpLog(TAG,"10249126\t- " + l,true);
       }
