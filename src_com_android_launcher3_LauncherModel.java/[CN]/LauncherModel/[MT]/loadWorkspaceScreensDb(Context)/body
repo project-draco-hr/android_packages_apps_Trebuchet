@@ -14,7 +14,7 @@
         orderedScreens.put(rank,screenId);
       }
  catch (      Exception e) {
-        Log.w(TAG,"Desktop items loading interrupted - invalid screens: ",e);
+        Launcher.addDumpLog(TAG,"Desktop items loading interrupted - invalid screens: " + e,true);
       }
     }
   }

@@ -12,12 +12,7 @@
   LauncherAppState.getLauncherProvider().loadDefaultFavoritesIfNecessary(0);
   boolean loadedOldDb=LauncherAppState.getLauncherProvider().justLoadedOldDb();
 synchronized (sBgLock) {
-    sBgWorkspaceItems.clear();
-    sBgAppWidgets.clear();
-    sBgFolders.clear();
-    sBgItemsIdMap.clear();
-    sBgDbIconCache.clear();
-    sBgWorkspaceScreens.clear();
+    clearSBgDataStructures();
     Launcher.addDumpLog(TAG,"10249126 - loadWorkspace()",true);
     final ArrayList<Long> itemsToRemove=new ArrayList<Long>();
     final Uri contentUri=LauncherSettings.Favorites.CONTENT_URI;
@@ -45,6 +40,7 @@ synchronized (sBgLock) {
       int container;
       long id;
       Intent intent;
+      Launcher.addDumpLog(TAG,"10249126 - Num rows: " + c.getCount(),true);
       while (!mStopped && c.moveToNext()) {
         try {
           int itemType=c.getInt(itemTypeIndex);
@@ -190,7 +186,7 @@ break;
 }
 }
  catch (Exception e) {
-Log.w(TAG,"Desktop items loading interrupted:",e);
+Launcher.addDumpLog(TAG,"Desktop items loading interrupted: " + e,true);
 }
 }
 }
@@ -198,6 +194,11 @@ Log.w(TAG,"Desktop items loading interrupted:",e);
 if (c != null) {
 c.close();
 }
+}
+if (mStopped) {
+Launcher.addDumpLog(TAG,"10249126 - loadWorkspace() - Stopped",true);
+clearSBgDataStructures();
+return false;
 }
 if (itemsToRemove.size() > 0) {
 ContentProviderClient client=contentResolver.acquireContentProviderClient(LauncherSettings.Favorites.CONTENT_URI);

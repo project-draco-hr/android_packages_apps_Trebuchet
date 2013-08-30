@@ -1,4 +1,5 @@
 {
+  Launcher.addDumpLog(TAG,"10249126 - bindWorkspace(" + synchronizeBindPage + ", "+ isUpgradePath+ ")",true);
   final long t=SystemClock.uptimeMillis();
   Runnable r;
   final Callbacks oldCallbacks=mCallbacks.get();
