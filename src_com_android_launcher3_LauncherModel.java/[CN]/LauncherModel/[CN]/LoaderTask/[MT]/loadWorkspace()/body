@@ -52,7 +52,7 @@ case LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT:
         try {
           intent=Intent.parseUri(intentDescription,0);
           ComponentName cn=intent.getComponent();
-          if (!isValidPackageComponent(manager,cn)) {
+          if (cn != null && !isValidPackageComponent(manager,cn)) {
             if (!mAppsCanBeOnRemoveableStorage) {
               Uri uri=LauncherSettings.Favorites.getContentUri(id,false);
               contentResolver.delete(uri,null,null);

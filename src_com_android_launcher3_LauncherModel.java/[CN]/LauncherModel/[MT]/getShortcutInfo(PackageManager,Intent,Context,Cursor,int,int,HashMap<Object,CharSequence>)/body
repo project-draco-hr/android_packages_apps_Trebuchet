@@ -1,7 +1,7 @@
 {
   ComponentName componentName=intent.getComponent();
   final ShortcutInfo info=new ShortcutInfo();
-  if (!isValidPackageComponent(manager,componentName)) {
+  if (componentName != null && !isValidPackageComponent(manager,componentName)) {
     Log.d(TAG,"Invalid package found in getShortcutInfo: " + componentName);
     return null;
   }
