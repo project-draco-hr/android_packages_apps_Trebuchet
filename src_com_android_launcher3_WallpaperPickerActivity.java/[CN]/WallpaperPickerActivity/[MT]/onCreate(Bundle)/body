@@ -40,23 +40,45 @@
         d.getCurrentSizeRange(minDims,maxDims);
         Point displaySize=new Point();
         d.getSize(displaySize);
-        RectF cropRect=mCropView.getCrop();
-        float cropScale=displaySize.x / (float)cropRect.width();
-        if (displaySize.x < displaySize.y) {
-          float extraSpaceToRight=inSize.x - cropRect.right;
-          cropRect.right=inSize.x;
+        int maxDim=Math.max(maxDims.x,maxDims.y);
+        final int minDim=Math.min(minDims.x,minDims.y);
+        int defaultWidth;
+        if (LauncherAppState.isScreenLarge(getResources())) {
+          defaultWidth=(int)(maxDim * wallpaperTravelToScreenWidthRatio(maxDim,minDim));
         }
  else {
-          float leftForPortrait=(cropRect.width() - minDims.x) / 2;
-          cropRect.right=inSize.x;
-          float portraitHeight=Math.max(maxDims.x,maxDims.y);
-          float extraPortraitHeight=portraitHeight - cropRect.height();
+          defaultWidth=Math.max((int)(minDim * WALLPAPER_SCREENS_SPAN),maxDim);
+        }
+        boolean isPortrait=displaySize.x < displaySize.y;
+        int portraitHeight;
+        if (isPortrait) {
+          portraitHeight=mCropView.getHeight();
+        }
+ else {
+          portraitHeight=Math.max(maxDims.x,maxDims.y);
+        }
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN_MR1) {
+          Point realSize=new Point();
+          d.getRealSize(realSize);
+          portraitHeight=Math.max(realSize.x,realSize.y);
+        }
+        RectF cropRect=mCropView.getCrop();
+        float cropScale=mCropView.getWidth() / (float)cropRect.width();
+        float extraSpaceToRight=inSize.x - cropRect.right;
+        float maxExtraSpace=defaultWidth / cropScale - cropRect.width();
+        extraSpaceToRight=Math.min(extraSpaceToRight,maxExtraSpace);
+        cropRect.right+=extraSpaceToRight;
+        if (isPortrait) {
+          cropRect.bottom=cropRect.top + portraitHeight / cropScale;
+        }
+ else {
+          float extraPortraitHeight=portraitHeight / cropScale - cropRect.height();
           float expandHeight=Math.min(Math.min(inSize.y - cropRect.bottom,cropRect.top),extraPortraitHeight / 2);
           cropRect.top-=expandHeight;
           cropRect.bottom+=expandHeight;
         }
-        final int outWidth=(int)Math.ceil(cropRect.width() * cropScale);
-        final int outHeight=(int)Math.ceil(cropRect.height() * cropScale);
+        final int outWidth=(int)Math.round(cropRect.width() * cropScale);
+        final int outHeight=(int)Math.round(cropRect.height() * cropScale);
         Runnable onEndCrop=new Runnable(){
           public void run(){
             updateWallpaperDimensions(outWidth,outHeight);

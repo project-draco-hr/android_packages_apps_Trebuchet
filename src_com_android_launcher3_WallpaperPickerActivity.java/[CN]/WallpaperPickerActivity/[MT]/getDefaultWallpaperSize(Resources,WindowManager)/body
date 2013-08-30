@@ -2,8 +2,13 @@
   Point minDims=new Point();
   Point maxDims=new Point();
   windowManager.getDefaultDisplay().getCurrentSizeRange(minDims,maxDims);
-  final int maxDim=Math.max(maxDims.x,maxDims.y);
+  int maxDim=Math.max(maxDims.x,maxDims.y);
   final int minDim=Math.min(minDims.x,minDims.y);
+  if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN_MR1) {
+    Point realSize=new Point();
+    windowManager.getDefaultDisplay().getRealSize(realSize);
+    maxDim=Math.max(realSize.x,realSize.y);
+  }
   final int defaultWidth, defaultHeight;
   if (LauncherAppState.isScreenLarge(res)) {
     defaultWidth=(int)(maxDim * wallpaperTravelToScreenWidthRatio(maxDim,minDim));
