@@ -1,5 +1,6 @@
 {
 synchronized (LoaderTask.this) {
+    Launcher.addDumpLog(TAG,"10249126 - STOPPED",true);
     mStopped=true;
     this.notify();
   }

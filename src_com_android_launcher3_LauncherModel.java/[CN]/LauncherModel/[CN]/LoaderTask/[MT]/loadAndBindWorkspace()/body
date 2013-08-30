@@ -8,6 +8,7 @@
     isUpgradePath=loadWorkspace();
 synchronized (LoaderTask.this) {
       if (mStopped) {
+        Launcher.addDumpLog(TAG,"10249126 - loadAndBindWorkspace() stopped",true);
         return isUpgradePath;
       }
       mWorkspaceLoaded=true;
