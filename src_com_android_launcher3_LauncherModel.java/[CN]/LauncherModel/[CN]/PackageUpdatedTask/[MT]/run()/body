@@ -25,15 +25,15 @@ WidgetPreviewLoader.removeFromDb(mApp.getWidgetPreviewCacheDb(),packages[i]);
 }
 break;
 }
-ArrayList<ApplicationInfo> added=null;
-ArrayList<ApplicationInfo> modified=null;
-final ArrayList<ApplicationInfo> removedApps=new ArrayList<ApplicationInfo>();
+ArrayList<AppInfo> added=null;
+ArrayList<AppInfo> modified=null;
+final ArrayList<AppInfo> removedApps=new ArrayList<AppInfo>();
 if (mBgAllAppsList.added.size() > 0) {
-added=new ArrayList<ApplicationInfo>(mBgAllAppsList.added);
+added=new ArrayList<AppInfo>(mBgAllAppsList.added);
 mBgAllAppsList.added.clear();
 }
 if (mBgAllAppsList.modified.size() > 0) {
-modified=new ArrayList<ApplicationInfo>(mBgAllAppsList.modified);
+modified=new ArrayList<AppInfo>(mBgAllAppsList.modified);
 mBgAllAppsList.modified.clear();
 }
 if (mBgAllAppsList.removed.size() > 0) {
@@ -51,8 +51,8 @@ Callbacks cb=mCallbacks != null ? mCallbacks.get() : null;
 addAndBindAddedApps(context,addedInfos,cb);
 }
 if (modified != null) {
-final ArrayList<ApplicationInfo> modifiedFinal=modified;
-for (ApplicationInfo a : modifiedFinal) {
+final ArrayList<AppInfo> modifiedFinal=modified;
+for (AppInfo a : modifiedFinal) {
 ArrayList<ItemInfo> infos=getItemInfoForComponentName(a.componentName);
 for (ItemInfo i : infos) {
 if (isShortcutInfoUpdateable(i)) {
@@ -84,7 +84,7 @@ deleteItemFromDatabase(context,i);
 }
 }
  else {
-for (ApplicationInfo a : removedApps) {
+for (AppInfo a : removedApps) {
 ArrayList<ItemInfo> infos=getItemInfoForComponentName(a.componentName);
 for (ItemInfo i : infos) {
 deleteItemFromDatabase(context,i);

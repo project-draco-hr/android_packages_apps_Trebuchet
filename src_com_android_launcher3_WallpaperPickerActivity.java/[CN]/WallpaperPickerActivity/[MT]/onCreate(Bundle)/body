@@ -98,7 +98,7 @@
           }
         }
 ;
-        BitmapCropTask cropTask=new BitmapCropTask(meta.mWallpaperResId,crop,outSize.x,outSize.y,true,false,onEndCrop);
+        BitmapCropTask cropTask=new BitmapCropTask(mWallpaperResources,meta.mWallpaperResId,crop,outSize.x,outSize.y,true,false,onEndCrop);
         cropTask.execute();
         setResult(Activity.RESULT_OK);
         finish();

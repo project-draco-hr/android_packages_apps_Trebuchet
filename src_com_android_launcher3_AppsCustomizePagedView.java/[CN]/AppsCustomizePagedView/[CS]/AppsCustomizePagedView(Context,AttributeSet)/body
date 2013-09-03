@@ -2,7 +2,7 @@
   super(context,attrs);
   mLayoutInflater=LayoutInflater.from(context);
   mPackageManager=context.getPackageManager();
-  mApps=new ArrayList<ApplicationInfo>();
+  mApps=new ArrayList<AppInfo>();
   mWidgets=new ArrayList<Object>();
   mIconCache=(LauncherAppState.getInstance()).getIconCache();
   mCanvas=new Canvas();

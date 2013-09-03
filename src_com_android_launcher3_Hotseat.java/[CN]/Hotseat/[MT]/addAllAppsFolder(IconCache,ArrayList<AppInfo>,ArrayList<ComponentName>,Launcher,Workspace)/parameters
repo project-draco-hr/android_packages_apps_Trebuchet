@@ -1,0 +1,5 @@
+IconCache iconCache
+ArrayList<AppInfo> allApps
+ArrayList<ComponentName> onWorkspace
+Launcher launcher
+Workspace workspace

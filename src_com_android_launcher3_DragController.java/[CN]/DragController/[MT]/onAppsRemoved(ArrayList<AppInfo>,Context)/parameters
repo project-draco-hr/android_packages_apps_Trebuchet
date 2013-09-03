@@ -1,0 +1,2 @@
+ArrayList<AppInfo> appInfos
+Context context

@@ -8,14 +8,13 @@
   }
   setWallpaperItemPaddingToZero((FrameLayout)view);
   ImageView image=(ImageView)view.findViewById(R.id.wallpaper_image);
-  int thumbRes=mThumbs.get(position);
-  image.setImageResource(thumbRes);
-  Drawable thumbDrawable=image.getDrawable();
+  Drawable thumbDrawable=mThumbs.get(position);
   if (thumbDrawable != null) {
+    image.setImageDrawable(thumbDrawable);
     thumbDrawable.setDither(true);
   }
  else {
-    Log.e(TAG,"Error decoding thumbnail resId=" + thumbRes + " for wallpaper #"+ position);
+    Log.e(TAG,"Error decoding thumbnail for wallpaper #" + position);
   }
   return view;
 }

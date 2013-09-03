@@ -1,0 +1,11 @@
+{
+  mInResId=inResId;
+  mCropBounds=cropBounds;
+  mOutWidth=outWidth;
+  mOutHeight=outHeight;
+  mWPManager=WallpaperManager.getInstance(getApplicationContext());
+  mSetWallpaper=setWallpaper;
+  mSaveCroppedBitmap=saveCroppedBitmap;
+  mOnEndRunnable=onEndRunnable;
+  mResources=res;
+}

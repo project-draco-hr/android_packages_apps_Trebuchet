@@ -1,3 +1,0 @@
-ArrayList<String> packageNames
-ArrayList<ApplicationInfo> appInfos
-boolean packageRemoved
