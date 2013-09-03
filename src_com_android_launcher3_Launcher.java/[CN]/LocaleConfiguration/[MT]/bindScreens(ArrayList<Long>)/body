@@ -1,6 +1,8 @@
 {
   bindAddScreens(orderedScreenIds);
-  mWorkspace.addExtraEmptyScreen();
+  if (orderedScreenIds.size() == 0) {
+    mWorkspace.addExtraEmptyScreen();
+  }
   if (!mWorkspace.hasCustomContent() && hasCustomContentToLeft()) {
     mWorkspace.createCustomContentPage();
   }

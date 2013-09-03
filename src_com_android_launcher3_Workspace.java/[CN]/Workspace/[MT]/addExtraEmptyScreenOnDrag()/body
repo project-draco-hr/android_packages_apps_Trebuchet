@@ -1,0 +1,19 @@
+{
+  boolean lastChildOnScreen=false;
+  boolean childOnFinalScreen=false;
+  if (mDragSourceInternal != null) {
+    if (mDragSourceInternal.getChildCount() == 1) {
+      lastChildOnScreen=true;
+    }
+    CellLayout cl=(CellLayout)mDragSourceInternal.getParent();
+    if (indexOfChild(cl) == getChildCount() - 1) {
+      childOnFinalScreen=true;
+    }
+  }
+  if (lastChildOnScreen && childOnFinalScreen) {
+    return;
+  }
+  if (!mWorkspaceScreens.containsKey(EXTRA_EMPTY_SCREEN_ID)) {
+    insertNewWorkspaceScreen(EXTRA_EMPTY_SCREEN_ID);
+  }
+}

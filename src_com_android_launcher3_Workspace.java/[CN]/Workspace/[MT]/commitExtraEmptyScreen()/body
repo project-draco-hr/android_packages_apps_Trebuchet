@@ -8,7 +8,6 @@
   long newId=LauncherAppState.getLauncherProvider().generateNewScreenId();
   mWorkspaceScreens.put(newId,cl);
   mScreenOrder.add(newId);
-  addExtraEmptyScreen();
   mLauncher.getModel().updateWorkspaceScreenOrder(mLauncher,mScreenOrder);
   return newId;
 }

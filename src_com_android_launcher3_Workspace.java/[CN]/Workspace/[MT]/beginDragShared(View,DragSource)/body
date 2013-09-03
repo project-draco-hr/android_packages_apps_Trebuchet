@@ -28,5 +28,8 @@
     icon.clearPressedOrFocusedBackground();
   }
   mDragController.startDrag(b,dragLayerX,dragLayerY,source,child.getTag(),DragController.DRAG_ACTION_MOVE,dragVisualizeOffset,dragRect,scale);
+  if (child.getParent() instanceof ShortcutAndWidgetContainer) {
+    mDragSourceInternal=(ShortcutAndWidgetContainer)child.getParent();
+  }
   b.recycle();
 }
