@@ -1,0 +1,103 @@
+{
+  setContentView(R.layout.wallpaper_picker);
+  mCropView=(CropView)findViewById(R.id.cropView);
+  final View wallpaperStrip=findViewById(R.id.wallpaper_strip);
+  mCropView.setTouchCallback(new CropView.TouchCallback(){
+    LauncherViewPropertyAnimator mAnim;
+    public void onTouchDown(){
+      if (mAnim != null) {
+        mAnim.cancel();
+      }
+      if (wallpaperStrip.getTranslationY() == 0) {
+        mIgnoreNextTap=true;
+      }
+      mAnim=new LauncherViewPropertyAnimator(wallpaperStrip);
+      mAnim.translationY(wallpaperStrip.getHeight()).setInterpolator(new DecelerateInterpolator(0.75f));
+      mAnim.start();
+    }
+    public void onTap(){
+      boolean ignoreTap=mIgnoreNextTap;
+      mIgnoreNextTap=false;
+      if (!ignoreTap) {
+        if (mAnim != null) {
+          mAnim.cancel();
+        }
+        mAnim=new LauncherViewPropertyAnimator(wallpaperStrip);
+        mAnim.translationY(0).setInterpolator(new DecelerateInterpolator(0.75f));
+        mAnim.start();
+      }
+    }
+  }
+);
+  mThumbnailOnClickListener=new OnClickListener(){
+    public void onClick(    View v){
+      if (mSelectedThumb != null) {
+        mSelectedThumb.setSelected(false);
+      }
+      ThumbnailMetaData meta=(ThumbnailMetaData)v.getTag();
+      if (!meta.mLaunchesGallery) {
+        mSelectedThumb=v;
+        v.setSelected(true);
+      }
+      if (meta.mLaunchesGallery) {
+        Intent intent=new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType("image/*");
+        Utilities.startActivityForResultSafely(WallpaperPickerActivity.this,intent,IMAGE_PICK);
+      }
+ else       if (meta.mGalleryImageUri != null) {
+        mCropView.setTileSource(new BitmapRegionTileSource(WallpaperPickerActivity.this,meta.mGalleryImageUri,1024,0),null);
+        mCropView.setTouchEnabled(true);
+      }
+ else {
+        BitmapRegionTileSource source=new BitmapRegionTileSource(mWallpaperResources,WallpaperPickerActivity.this,meta.mWallpaperResId,1024,0);
+        mCropView.setTileSource(source,null);
+        Point wallpaperSize=WallpaperCropActivity.getDefaultWallpaperSize(getResources(),getWindowManager());
+        RectF crop=WallpaperCropActivity.getMaxCropRect(source.getImageWidth(),source.getImageHeight(),wallpaperSize.x,wallpaperSize.y);
+        mCropView.setScale(wallpaperSize.x / crop.width());
+        mCropView.setTouchEnabled(false);
+      }
+    }
+  }
+;
+  findWallpapers();
+  LinearLayout wallpapers=(LinearLayout)findViewById(R.id.wallpaper_list);
+  ImageAdapter ia=new ImageAdapter(this);
+  for (int i=0; i < ia.getCount(); i++) {
+    FrameLayout thumbnail=(FrameLayout)ia.getView(i,null,wallpapers);
+    wallpapers.addView(thumbnail,i);
+    ThumbnailMetaData meta=new ThumbnailMetaData();
+    meta.mWallpaperResId=mImages.get(i);
+    thumbnail.setTag(meta);
+    thumbnail.setOnClickListener(mThumbnailOnClickListener);
+    if (i == 0) {
+      mThumbnailOnClickListener.onClick(thumbnail);
+    }
+  }
+  FrameLayout galleryThumbnail=(FrameLayout)getLayoutInflater().inflate(R.layout.wallpaper_picker_gallery_item,wallpapers,false);
+  setWallpaperItemPaddingToZero(galleryThumbnail);
+  TextView galleryLabel=(TextView)galleryThumbnail.findViewById(R.id.wallpaper_item_label);
+  galleryLabel.setText(R.string.gallery);
+  wallpapers.addView(galleryThumbnail,0);
+  ThumbnailMetaData meta=new ThumbnailMetaData();
+  meta.mLaunchesGallery=true;
+  galleryThumbnail.setTag(meta);
+  galleryThumbnail.setOnClickListener(mThumbnailOnClickListener);
+  final ActionBar actionBar=getActionBar();
+  actionBar.setCustomView(R.layout.actionbar_set_wallpaper);
+  actionBar.getCustomView().setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      ThumbnailMetaData meta=(ThumbnailMetaData)mSelectedThumb.getTag();
+      if (meta.mLaunchesGallery) {
+      }
+ else       if (meta.mGalleryImageUri != null) {
+        boolean finishActivityWhenDone=true;
+        cropImageAndSetWallpaper(meta.mGalleryImageUri,finishActivityWhenDone);
+      }
+ else       if (meta.mWallpaperResId != 0) {
+        boolean finishActivityWhenDone=true;
+        cropImageAndSetWallpaper(mWallpaperResources,meta.mWallpaperResId,finishActivityWhenDone);
+      }
+    }
+  }
+);
+}

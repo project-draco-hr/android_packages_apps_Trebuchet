@@ -10,7 +10,7 @@
     int height=res.getDimensionPixelSize(R.dimen.wallpaperThumbnailHeight);
     BitmapCropTask cropTask=new BitmapCropTask(uri,null,width,height,false,true,null);
     Point bounds=cropTask.getImageBounds();
-    RectF cropRect=getMaxCropRect(bounds.x,bounds.y,width,height);
+    RectF cropRect=WallpaperCropActivity.getMaxCropRect(bounds.x,bounds.y,width,height);
     cropTask.setCropBounds(cropRect);
     if (cropTask.cropBitmap()) {
       image.setImageBitmap(cropTask.getCroppedBitmap());

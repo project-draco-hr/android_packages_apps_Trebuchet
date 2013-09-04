@@ -11,5 +11,5 @@
     editor.remove(WALLPAPER_HEIGHT_KEY);
   }
   editor.commit();
-  WallpaperPickerActivity.suggestWallpaperDimension(getResources(),sp,getWindowManager(),WallpaperManager.getInstance(this));
+  suggestWallpaperDimension(getResources(),sp,getWindowManager(),WallpaperManager.getInstance(this));
 }
