@@ -48,7 +48,7 @@ return;
 if (added != null) {
 final ArrayList<ItemInfo> addedInfos=new ArrayList<ItemInfo>(added);
 Callbacks cb=mCallbacks != null ? mCallbacks.get() : null;
-addAndBindAddedApps(context,addedInfos,cb);
+addAndBindAddedApps(context,addedInfos,cb,added);
 }
 if (modified != null) {
 final ArrayList<AppInfo> modifiedFinal=modified;

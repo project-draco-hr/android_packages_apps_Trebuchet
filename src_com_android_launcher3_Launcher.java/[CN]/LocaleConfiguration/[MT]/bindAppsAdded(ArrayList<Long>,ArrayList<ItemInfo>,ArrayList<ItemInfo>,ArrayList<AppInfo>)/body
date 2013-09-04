@@ -1,0 +1,22 @@
+{
+  Runnable r=new Runnable(){
+    public void run(){
+      bindAppsAdded(newScreens,addNotAnimated,addAnimated,addedApps);
+    }
+  }
+;
+  if (waitUntilResume(r)) {
+    return;
+  }
+  Launcher.addDumpLog(TAG,"10249126 - bindAppsAdded(" + newScreens.size() + ")",true);
+  bindAddScreens(newScreens);
+  if (!addNotAnimated.isEmpty()) {
+    bindItems(addNotAnimated,0,addNotAnimated.size(),false);
+  }
+  if (!addAnimated.isEmpty()) {
+    bindItems(addAnimated,0,addAnimated.size(),true);
+  }
+  if (!AppsCustomizePagedView.DISABLE_ALL_APPS && addedApps != null && mAppsCustomizeContent != null) {
+    mAppsCustomizeContent.addApps(addedApps);
+  }
+}

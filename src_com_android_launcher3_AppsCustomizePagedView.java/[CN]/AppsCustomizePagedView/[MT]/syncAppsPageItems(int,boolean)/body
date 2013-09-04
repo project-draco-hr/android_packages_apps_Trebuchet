@@ -3,7 +3,7 @@
   int numCells=mCellCountX * mCellCountY;
   int startIndex=page * numCells;
   int endIndex=Math.min(startIndex + numCells,mApps.size());
-  PagedViewCellLayout layout=(PagedViewCellLayout)getPageAt(page);
+  AppsCustomizeCellLayout layout=(AppsCustomizeCellLayout)getPageAt(page);
   layout.removeAllViewsOnPage();
   ArrayList<Object> items=new ArrayList<Object>();
   ArrayList<Bitmap> images=new ArrayList<Bitmap>();
@@ -21,7 +21,7 @@
     if (isRtl) {
       x=mCellCountX - x - 1;
     }
-    layout.addViewToCellLayout(icon,-1,i,new PagedViewCellLayout.LayoutParams(x,y,1,1));
+    layout.addViewToCellLayout(icon,-1,i,new CellLayout.LayoutParams(x,y,1,1),false);
     items.add(info);
     images.add(info.iconBitmap);
   }

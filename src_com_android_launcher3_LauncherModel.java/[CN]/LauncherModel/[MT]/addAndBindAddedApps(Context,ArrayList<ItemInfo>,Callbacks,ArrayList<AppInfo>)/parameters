@@ -1,0 +1,4 @@
+Context context
+ArrayList<ItemInfo> added
+Callbacks callbacks
+ArrayList<AppInfo> addedApps

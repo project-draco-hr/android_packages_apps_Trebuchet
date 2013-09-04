@@ -6,6 +6,6 @@
   }
  else {
     int numItemsPerPage=mWidgetCountX * mWidgetCountY;
-    return mNumAppsPages + ((index - mApps.size()) / numItemsPerPage);
+    return (index - mApps.size()) / numItemsPerPage;
   }
 }

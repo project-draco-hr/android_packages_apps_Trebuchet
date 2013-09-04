@@ -1,0 +1,7 @@
+{
+  ShortcutAndWidgetContainer children=getShortcutsAndWidgets();
+  int childCount=children.getChildCount();
+  for (int j=0; j < childCount; ++j) {
+    children.getChildAt(j).setOnKeyListener(null);
+  }
+}

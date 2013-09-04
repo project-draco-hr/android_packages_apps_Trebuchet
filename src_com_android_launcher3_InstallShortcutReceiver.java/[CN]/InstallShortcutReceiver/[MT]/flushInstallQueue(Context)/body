@@ -24,7 +24,7 @@
     }
     if (!addShortcuts.isEmpty()) {
       LauncherAppState app=LauncherAppState.getInstance();
-      app.getModel().addAndBindAddedApps(context,addShortcuts);
+      app.getModel().addAndBindAddedApps(context,addShortcuts,null);
     }
   }
 }

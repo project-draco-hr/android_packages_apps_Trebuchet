@@ -1,11 +1,11 @@
 {
   int numItemsPerPage=mWidgetCountX * mWidgetCountY;
   final ArrayList<Object> items=new ArrayList<Object>();
-  int contentWidth=mWidgetSpacingLayout.getContentWidth();
+  int contentWidth=mContentWidth;
   final int cellWidth=((contentWidth - mPageLayoutPaddingLeft - mPageLayoutPaddingRight- ((mWidgetCountX - 1) * mWidgetWidthGap)) / mWidgetCountX);
-  int contentHeight=mWidgetSpacingLayout.getContentHeight();
+  int contentHeight=mContentHeight;
   final int cellHeight=((contentHeight - mPageLayoutPaddingTop - mPageLayoutPaddingBottom- ((mWidgetCountY - 1) * mWidgetHeightGap)) / mWidgetCountY);
-  int offset=(page - mNumAppsPages) * numItemsPerPage;
+  int offset=page * numItemsPerPage;
   for (int i=offset; i < Math.min(offset + numItemsPerPage,mWidgets.size()); ++i) {
     items.add(mWidgets.get(i));
   }

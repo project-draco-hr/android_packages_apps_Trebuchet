@@ -1,0 +1,5 @@
+{
+  while (mMarkers.size() > 0) {
+    removeMarker(Integer.MAX_VALUE,allowAnimations);
+  }
+}

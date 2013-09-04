@@ -2,12 +2,12 @@
   ViewGroup parent=(ViewGroup)getParent();
   if (mPageIndicator == null && mPageIndicatorViewId > -1) {
     mPageIndicator=(PageIndicator)parent.findViewById(mPageIndicatorViewId);
-    mPageIndicator.removeAllMarkers();
+    mPageIndicator.removeAllMarkers(mAllowPagedViewAnimations);
     ArrayList<Integer> markers=new ArrayList<Integer>();
     for (int i=0; i < getChildCount(); ++i) {
       markers.add(getPageIndicatorMarker(i));
     }
-    mPageIndicator.addMarkers(markers);
+    mPageIndicator.addMarkers(markers,mAllowPagedViewAnimations);
     mPageIndicator.setOnClickListener((Launcher)getContext());
   }
 }

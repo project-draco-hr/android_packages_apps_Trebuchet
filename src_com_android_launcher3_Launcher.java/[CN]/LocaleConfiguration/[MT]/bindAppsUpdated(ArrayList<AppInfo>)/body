@@ -11,4 +11,7 @@
   if (mWorkspace != null) {
     mWorkspace.updateShortcuts(apps);
   }
+  if (!AppsCustomizePagedView.DISABLE_ALL_APPS && mAppsCustomizeContent != null) {
+    mAppsCustomizeContent.updateApps(apps);
+  }
 }

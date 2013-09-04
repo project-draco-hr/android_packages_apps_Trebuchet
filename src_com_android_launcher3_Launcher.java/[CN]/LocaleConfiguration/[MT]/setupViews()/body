@@ -13,7 +13,7 @@
   mOverviewPanel=findViewById(R.id.overview_panel);
   findViewById(R.id.widget_button).setOnClickListener(new OnClickListener(){
     @Override public void onClick(    View arg0){
-      showAllApps(true);
+      showAllApps(true,AppsCustomizePagedView.ContentType.Widgets);
     }
   }
 );

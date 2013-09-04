@@ -1,8 +1,15 @@
 {
-  if (mIntentsOnWorkspaceFromUpgradePath != null) {
-    if (LauncherModel.UPGRADE_USE_MORE_APPS_FOLDER) {
-      getHotseat().addAllAppsFolder(mIconCache,apps,mIntentsOnWorkspaceFromUpgradePath,Launcher.this,mWorkspace);
+  if (AppsCustomizePagedView.DISABLE_ALL_APPS) {
+    if (mIntentsOnWorkspaceFromUpgradePath != null) {
+      if (LauncherModel.UPGRADE_USE_MORE_APPS_FOLDER) {
+        getHotseat().addAllAppsFolder(mIconCache,apps,mIntentsOnWorkspaceFromUpgradePath,Launcher.this,mWorkspace);
+      }
+      mIntentsOnWorkspaceFromUpgradePath=null;
     }
-    mIntentsOnWorkspaceFromUpgradePath=null;
+  }
+ else {
+    if (!AppsCustomizePagedView.DISABLE_ALL_APPS && mAppsCustomizeContent != null) {
+      mAppsCustomizeContent.setApps(apps);
+    }
   }
 }

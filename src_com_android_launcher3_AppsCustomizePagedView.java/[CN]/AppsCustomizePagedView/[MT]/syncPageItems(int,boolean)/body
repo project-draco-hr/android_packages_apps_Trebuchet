@@ -1,8 +1,8 @@
 {
-  if (page < mNumAppsPages) {
-    syncAppsPageItems(page,immediate);
+  if (mContentType == ContentType.Widgets) {
+    syncWidgetPageItems(page,immediate);
   }
  else {
-    syncWidgetPageItems(page,immediate);
+    syncAppsPageItems(page,immediate);
   }
 }

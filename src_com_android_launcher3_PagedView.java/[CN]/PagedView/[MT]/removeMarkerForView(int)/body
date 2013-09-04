@@ -1,5 +1,5 @@
 {
   if (mPageIndicator != null && !isReordering(false)) {
-    mPageIndicator.removeMarker(index);
+    mPageIndicator.removeMarker(index,mAllowPagedViewAnimations);
   }
 }

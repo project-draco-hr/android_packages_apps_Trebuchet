@@ -38,6 +38,7 @@
   }
   hotseatIconSize=invDistWeightedInterpolate(minWidth,minHeight,points);
   hotseatIconSizePx=DynamicGrid.pxFromDp(hotseatIconSize,dm);
+  hotseatAllAppsRank=(int)(numColumns / 2);
   updateFromConfiguration(resources,wPx,hPx,awPx,ahPx);
   searchBarSpaceMaxWidthPx=resources.getDimensionPixelSize(R.dimen.dynamic_grid_search_bar_max_width);
   searchBarHeightPx=resources.getDimensionPixelSize(R.dimen.dynamic_grid_search_bar_height);

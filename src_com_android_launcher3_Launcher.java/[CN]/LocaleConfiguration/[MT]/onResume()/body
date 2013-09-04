@@ -9,7 +9,7 @@
     showWorkspace(false);
   }
  else   if (mOnResumeState == State.APPS_CUSTOMIZE) {
-    showAllApps(false);
+    showAllApps(false,AppsCustomizePagedView.ContentType.Applications);
   }
   mOnResumeState=State.NONE;
   setWorkspaceBackground(mState == State.WORKSPACE);

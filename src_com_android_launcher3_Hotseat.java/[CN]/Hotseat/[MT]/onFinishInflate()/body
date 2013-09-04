@@ -2,7 +2,7 @@
   super.onFinishInflate();
   LauncherAppState app=LauncherAppState.getInstance();
   DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
-  mAllAppsButtonRank=(int)(grid.numHotseatIcons / 2);
+  mAllAppsButtonRank=grid.hotseatAllAppsRank;
   mContent=(CellLayout)findViewById(R.id.layout);
   if (grid.isLandscape && !grid.isLargeTablet()) {
     mContent.setGridSize(1,(int)grid.numHotseatIcons);

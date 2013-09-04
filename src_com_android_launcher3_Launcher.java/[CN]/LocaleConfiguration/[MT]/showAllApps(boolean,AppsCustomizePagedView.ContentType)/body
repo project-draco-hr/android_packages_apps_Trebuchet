@@ -1,0 +1,10 @@
+{
+  if (mState != State.WORKSPACE)   return;
+  showAppsCustomizeHelper(animated,false,contentType);
+  mAppsCustomizeTabHost.requestFocus();
+  mState=State.APPS_CUSTOMIZE;
+  mUserPresent=false;
+  updateRunning();
+  closeFolder();
+  getWindow().getDecorView().sendAccessibilityEvent(AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED);
+}

@@ -9,7 +9,6 @@
   mCellCountX=(int)grid.numColumns;
   mCellCountY=(int)grid.numRows;
   mOriginalWidthGap=mOriginalHeightGap=mWidthGap=mHeightGap=-1;
-  mMaxGap=resources.getDimensionPixelSize(R.dimen.apps_customize_max_gap);
   mChildren=new PagedViewCellLayoutChildren(context);
   mChildren.setCellDimensions(mCellWidth,mCellHeight);
   mChildren.setGap(mWidthGap,mHeightGap);

@@ -3,11 +3,11 @@
   ViewGroup itemContainer;
   int countX;
   int countY;
-  if (v.getParent() instanceof PagedViewCellLayoutChildren) {
+  if (v.getParent() instanceof ShortcutAndWidgetContainer) {
     itemContainer=(ViewGroup)v.getParent();
     parentLayout=(ViewGroup)itemContainer.getParent();
-    countX=((PagedViewCellLayout)parentLayout).getCellCountX();
-    countY=((PagedViewCellLayout)parentLayout).getCellCountY();
+    countX=((CellLayout)parentLayout).getCountX();
+    countY=((CellLayout)parentLayout).getCountY();
   }
  else {
     itemContainer=parentLayout=(ViewGroup)v.getParent();

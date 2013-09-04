@@ -2,26 +2,17 @@
   if (mWidgetPreviewLoader == null) {
     mWidgetPreviewLoader=new WidgetPreviewLoader(mLauncher);
   }
-  int maxCellCountX=Integer.MAX_VALUE;
-  int maxCellCountY=Integer.MAX_VALUE;
-  if (mMaxAppCellCountX > -1) {
-    maxCellCountX=Math.min(maxCellCountX,mMaxAppCellCountX);
-  }
-  int maxWidgetCellCountY=maxCellCountY;
-  if (mMaxAppCellCountY > -1) {
-    maxWidgetCellCountY=Math.min(maxWidgetCellCountY,mMaxAppCellCountY);
-  }
-  mWidgetSpacingLayout.setGap(mPageLayoutWidthGap,mPageLayoutHeightGap);
+  LauncherAppState app=LauncherAppState.getInstance();
+  DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
   mWidgetSpacingLayout.setPadding(mPageLayoutPaddingLeft,mPageLayoutPaddingTop,mPageLayoutPaddingRight,mPageLayoutPaddingBottom);
-  mWidgetSpacingLayout.calculateCellCount(width,height,maxCellCountX,maxCellCountY);
-  mCellCountX=mWidgetSpacingLayout.getCellCountX();
-  mCellCountY=mWidgetSpacingLayout.getCellCountY();
+  mCellCountX=(int)grid.allAppsNumCols;
+  mCellCountY=(int)grid.allAppsNumRows;
   updatePageCounts();
-  int widthSpec=MeasureSpec.makeMeasureSpec(getMeasuredWidth(),MeasureSpec.AT_MOST);
-  int heightSpec=MeasureSpec.makeMeasureSpec(getMeasuredHeight(),MeasureSpec.AT_MOST);
-  mWidgetSpacingLayout.calculateCellCount(width,height,maxCellCountX,maxWidgetCellCountY);
+  mContentWidth=getMeasuredWidth() - getPaddingLeft() - getPaddingRight();
+  mContentHeight=getMeasuredHeight() - getPaddingTop() - getPaddingBottom();
+  int widthSpec=MeasureSpec.makeMeasureSpec(mContentWidth,MeasureSpec.AT_MOST);
+  int heightSpec=MeasureSpec.makeMeasureSpec(mContentHeight,MeasureSpec.AT_MOST);
   mWidgetSpacingLayout.measure(widthSpec,heightSpec);
-  mContentWidth=mWidgetSpacingLayout.getContentWidth();
   AppsCustomizeTabHost host=(AppsCustomizeTabHost)getTabHost();
   final boolean hostIsTransitioning=host.isTransitioning();
   int page=getPageForComponent(mSaveInstanceStateItemIndex);
