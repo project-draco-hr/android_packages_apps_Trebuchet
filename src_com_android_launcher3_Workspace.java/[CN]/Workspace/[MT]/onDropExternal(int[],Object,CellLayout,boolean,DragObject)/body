@@ -78,8 +78,8 @@ View view=null;
 switch (info.itemType) {
 case LauncherSettings.Favorites.ITEM_TYPE_APPLICATION:
 case LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT:
-if (info.container == NO_ID && info instanceof ApplicationInfo) {
-info=new ShortcutInfo((ApplicationInfo)info);
+if (info.container == NO_ID && info instanceof AppInfo) {
+info=new ShortcutInfo((AppInfo)info);
 }
 view=mLauncher.createShortcut(R.layout.application,cellLayout,(ShortcutInfo)info);
 break;

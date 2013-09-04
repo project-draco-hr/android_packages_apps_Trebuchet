@@ -43,8 +43,8 @@ synchronized (sBgLock) {
           if (a instanceof ShortcutInfo) {
             shortcutInfo=(ShortcutInfo)a;
           }
- else           if (a instanceof ApplicationInfo) {
-            shortcutInfo=((ApplicationInfo)a).makeShortcut();
+ else           if (a instanceof AppInfo) {
+            shortcutInfo=((AppInfo)a).makeShortcut();
           }
  else {
             throw new RuntimeException("Unexpected info type");

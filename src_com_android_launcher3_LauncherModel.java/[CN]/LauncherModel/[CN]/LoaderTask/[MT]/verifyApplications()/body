@@ -3,7 +3,7 @@
   ArrayList<ItemInfo> tmpInfos;
   ArrayList<ItemInfo> added=new ArrayList<ItemInfo>();
 synchronized (sBgLock) {
-    for (    ApplicationInfo app : mBgAllAppsList.data) {
+    for (    AppInfo app : mBgAllAppsList.data) {
       tmpInfos=getItemInfoForComponentName(app.componentName);
       Launcher.addDumpLog(TAG,"10249126 - \t" + app.componentName.getPackageName() + ", "+ tmpInfos.isEmpty(),true);
       if (tmpInfos.isEmpty()) {

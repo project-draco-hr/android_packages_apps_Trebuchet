@@ -8,7 +8,7 @@
   ArrayList<Object> items=new ArrayList<Object>();
   ArrayList<Bitmap> images=new ArrayList<Bitmap>();
   for (int i=startIndex; i < endIndex; ++i) {
-    ApplicationInfo info=mApps.get(i);
+    AppInfo info=mApps.get(i);
     PagedViewIcon icon=(PagedViewIcon)mLayoutInflater.inflate(R.layout.apps_customize_application,layout,false);
     icon.applyFromApplicationInfo(info,true,this);
     icon.setOnClickListener(this);

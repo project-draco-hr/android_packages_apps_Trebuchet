@@ -9,7 +9,7 @@
         mInStream=new BufferedInputStream(getContentResolver().openInputStream(mInUri));
       }
  else {
-        mInStream=new BufferedInputStream(getResources().openRawResource(mInResId));
+        mInStream=new BufferedInputStream(mResources.openRawResource(mInResId));
       }
     }
  catch (    FileNotFoundException e) {

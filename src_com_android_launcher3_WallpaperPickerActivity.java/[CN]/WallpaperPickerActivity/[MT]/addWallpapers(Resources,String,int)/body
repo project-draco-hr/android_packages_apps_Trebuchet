@@ -1,11 +1,11 @@
 {
-  final String[] extras=resources.getStringArray(list);
+  final String[] extras=resources.getStringArray(listResId);
   for (  String extra : extras) {
     int res=resources.getIdentifier(extra,"drawable",packageName);
     if (res != 0) {
       final int thumbRes=resources.getIdentifier(extra + "_small","drawable",packageName);
       if (thumbRes != 0) {
-        mThumbs.add(thumbRes);
+        mThumbs.add(resources.getDrawable(thumbRes));
         mImages.add(res);
       }
     }

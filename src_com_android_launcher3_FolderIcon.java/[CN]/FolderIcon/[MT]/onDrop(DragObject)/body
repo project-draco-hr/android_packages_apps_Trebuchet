@@ -1,7 +1,7 @@
 {
   ShortcutInfo item;
-  if (d.dragInfo instanceof ApplicationInfo) {
-    item=((ApplicationInfo)d.dragInfo).makeShortcut();
+  if (d.dragInfo instanceof AppInfo) {
+    item=((AppInfo)d.dragInfo).makeShortcut();
   }
  else {
     item=(ShortcutInfo)d.dragInfo;
