@@ -1,5 +1,6 @@
 {
-  v.setImportantForAccessibility(mPreviousValues.get(v));
+  Integer important=mPreviousValues.get(v);
+  v.setImportantForAccessibility(important);
   mPreviousValues.remove(v);
   if (v instanceof ViewGroup) {
     ViewGroup vg=(ViewGroup)v;
