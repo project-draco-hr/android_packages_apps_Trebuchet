@@ -2,6 +2,34 @@
   super.onCreate(savedInstanceState);
   setContentView(R.layout.wallpaper_picker);
   mCropView=(CropView)findViewById(R.id.cropView);
+  final View wallpaperStrip=findViewById(R.id.wallpaper_strip);
+  mCropView.setTouchCallback(new CropView.TouchCallback(){
+    LauncherViewPropertyAnimator mAnim;
+    public void onTouchDown(){
+      if (mAnim != null) {
+        mAnim.cancel();
+      }
+      if (wallpaperStrip.getTranslationY() == 0) {
+        mIgnoreNextTap=true;
+      }
+      mAnim=new LauncherViewPropertyAnimator(wallpaperStrip);
+      mAnim.translationY(wallpaperStrip.getHeight()).setInterpolator(new DecelerateInterpolator(0.75f));
+      mAnim.start();
+    }
+    public void onTap(){
+      boolean ignoreTap=mIgnoreNextTap;
+      mIgnoreNextTap=false;
+      if (!ignoreTap) {
+        if (mAnim != null) {
+          mAnim.cancel();
+        }
+        mAnim=new LauncherViewPropertyAnimator(wallpaperStrip);
+        mAnim.translationY(0).setInterpolator(new DecelerateInterpolator(0.75f));
+        mAnim.start();
+      }
+    }
+  }
+);
   findWallpapers();
   LinearLayout wallpapers=(LinearLayout)findViewById(R.id.wallpaper_list);
   ImageAdapter ia=new ImageAdapter(this);
