@@ -41,6 +41,7 @@ synchronized (sBgLock) {
       long id;
       Intent intent;
       while (!mStopped && c.moveToNext()) {
+        AtomicBoolean deleteOnItemOverlap=new AtomicBoolean(false);
         try {
           int itemType=c.getInt(itemTypeIndex);
 switch (itemType) {
@@ -53,8 +54,8 @@ case LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT:
           ComponentName cn=intent.getComponent();
           if (cn != null && !isValidPackageComponent(manager,cn)) {
             if (!mAppsCanBeOnRemoveableStorage) {
-              Uri uri=LauncherSettings.Favorites.getContentUri(id,false);
-              contentResolver.delete(uri,null,null);
+              Launcher.addDumpLog(TAG,"Invalid package removed: " + cn,true);
+              itemsToRemove.add(id);
             }
  else {
               Launcher.addDumpLog(TAG,"Invalid package found: " + cn,true);
@@ -91,7 +92,11 @@ case LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT:
           continue;
         }
       }
-      if (!checkItemPlacement(occupied,info)) {
+      deleteOnItemOverlap.set(false);
+      if (!checkItemPlacement(occupied,info,deleteOnItemOverlap)) {
+        if (deleteOnItemOverlap.get()) {
+          itemsToRemove.add(id);
+        }
         break;
       }
 switch (container) {
@@ -129,7 +134,11 @@ Log.d(TAG,"Skipped loading out of bounds folder");
 continue;
 }
 }
-if (!checkItemPlacement(occupied,folderInfo)) {
+deleteOnItemOverlap.set(false);
+if (!checkItemPlacement(occupied,folderInfo,deleteOnItemOverlap)) {
+if (deleteOnItemOverlap.get()) {
+itemsToRemove.add(id);
+}
 break;
 }
 switch (container) {
@@ -175,7 +184,11 @@ Log.d(TAG,"Skipped loading out of bounds app widget");
 continue;
 }
 }
-if (!checkItemPlacement(occupied,appWidgetInfo)) {
+deleteOnItemOverlap.set(false);
+if (!checkItemPlacement(occupied,appWidgetInfo,deleteOnItemOverlap)) {
+if (deleteOnItemOverlap.get()) {
+itemsToRemove.add(id);
+}
 break;
 }
 String providerName=provider.provider.flattenToString();

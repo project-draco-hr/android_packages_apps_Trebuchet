@@ -1,0 +1,6 @@
+{
+  if (mHotseat != null) {
+    return mHotseat.isAllAppsButtonRank(rank);
+  }
+  return false;
+}
