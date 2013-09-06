@@ -24,7 +24,10 @@
     Log.d(TAG,"sort took " + (SystemClock.uptimeMillis() - sortTime) + "ms");
   }
   for (int i=0; i < apps.size(); i++) {
-    mBgAllAppsList.add(new AppInfo(packageManager,apps.get(i),mIconCache,mLabelCache));
+    ResolveInfo app=apps.get(i);
+    if (oldCallbacks.shouldShowApp(app)) {
+      mBgAllAppsList.add(new AppInfo(packageManager,app,mIconCache,mLabelCache));
+    }
   }
   final Callbacks callbacks=tryGetCallbacks(oldCallbacks);
   final ArrayList<AppInfo> added=mBgAllAppsList.added;
