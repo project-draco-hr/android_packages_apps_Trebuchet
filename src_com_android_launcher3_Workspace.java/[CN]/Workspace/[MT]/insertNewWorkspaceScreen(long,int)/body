@@ -4,6 +4,7 @@
   CellLayout newScreen=(CellLayout)mLauncher.getLayoutInflater().inflate(R.layout.workspace_screen,null);
   newScreen.setOnLongClickListener(mLongClickListener);
   newScreen.setOnClickListener(mLauncher);
+  newScreen.setSoundEffectsEnabled(false);
   mWorkspaceScreens.put(screenId,newScreen);
   mScreenOrder.add(insertIndex,screenId);
   addView(newScreen,insertIndex);
