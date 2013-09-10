@@ -9,5 +9,8 @@
         mImages.add(res);
       }
     }
+ else {
+      Log.e(TAG,"Couldn't find wallpaper " + extra);
+    }
   }
 }
