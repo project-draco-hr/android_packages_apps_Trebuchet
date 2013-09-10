@@ -1,0 +1,6 @@
+{
+  if (checked != mChecked) {
+    mChecked=checked;
+    refreshDrawableState();
+  }
+}
