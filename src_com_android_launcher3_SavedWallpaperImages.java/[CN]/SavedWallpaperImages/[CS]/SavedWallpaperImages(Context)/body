@@ -1,0 +1,4 @@
+{
+  mDb=new ImageDb(context);
+  mContext=context;
+}

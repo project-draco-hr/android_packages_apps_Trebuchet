@@ -1,0 +1,9 @@
+{
+  Pair<String,String> filenames=getImageFilenames(id);
+  File imageFile=new File(mContext.getFilesDir(),filenames.first);
+  imageFile.delete();
+  File thumbFile=new File(mContext.getFilesDir(),filenames.second);
+  thumbFile.delete();
+  SQLiteDatabase db=mDb.getWritableDatabase();
+  db.delete(ImageDb.TABLE_NAME,ImageDb.COLUMN_ID + " = ?",new String[]{Integer.toString(id)});
+}

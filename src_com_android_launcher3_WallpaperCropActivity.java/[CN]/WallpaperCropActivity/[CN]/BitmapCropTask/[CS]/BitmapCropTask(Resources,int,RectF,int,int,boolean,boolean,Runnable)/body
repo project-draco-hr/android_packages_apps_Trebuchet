@@ -1,11 +1,6 @@
 {
   mInResId=inResId;
-  mCropBounds=cropBounds;
-  mOutWidth=outWidth;
-  mOutHeight=outHeight;
-  mWPManager=WallpaperManager.getInstance(getApplicationContext());
-  mSetWallpaper=setWallpaper;
-  mSaveCroppedBitmap=saveCroppedBitmap;
-  mOnEndRunnable=onEndRunnable;
   mResources=res;
+  mWPManager=WallpaperManager.getInstance(getApplicationContext());
+  init(cropBounds,outWidth,outHeight,setWallpaper,saveCroppedBitmap,onEndRunnable);
 }

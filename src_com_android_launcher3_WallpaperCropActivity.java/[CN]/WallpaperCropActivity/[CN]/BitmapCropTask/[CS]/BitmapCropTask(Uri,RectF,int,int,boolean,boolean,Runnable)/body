@@ -1,10 +1,5 @@
 {
   mInUri=inUri;
-  mCropBounds=cropBounds;
-  mOutWidth=outWidth;
-  mOutHeight=outHeight;
   mWPManager=WallpaperManager.getInstance(getApplicationContext());
-  mSetWallpaper=setWallpaper;
-  mSaveCroppedBitmap=saveCroppedBitmap;
-  mOnEndRunnable=onEndRunnable;
+  init(cropBounds,outWidth,outHeight,setWallpaper,saveCroppedBitmap,onEndRunnable);
 }

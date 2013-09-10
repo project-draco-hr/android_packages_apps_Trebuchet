@@ -10,7 +10,7 @@
   actionBar.getCustomView().setOnClickListener(new View.OnClickListener(){
     @Override public void onClick(    View v){
       boolean finishActivityWhenDone=true;
-      cropImageAndSetWallpaper(imageUri,finishActivityWhenDone);
+      cropImageAndSetWallpaper(imageUri,null,finishActivityWhenDone);
     }
   }
 );

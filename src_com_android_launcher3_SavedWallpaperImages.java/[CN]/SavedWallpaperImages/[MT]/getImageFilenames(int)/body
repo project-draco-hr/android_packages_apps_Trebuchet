@@ -1,0 +1,14 @@
+{
+  SQLiteDatabase db=mDb.getReadableDatabase();
+  Cursor result=db.query(ImageDb.TABLE_NAME,new String[]{ImageDb.COLUMN_IMAGE_THUMBNAIL_FILENAME,ImageDb.COLUMN_IMAGE_FILENAME},ImageDb.COLUMN_ID + " = ?",new String[]{Integer.toString(id)},null,null,null,null);
+  if (result.getCount() > 0) {
+    result.moveToFirst();
+    String thumbFilename=result.getString(0);
+    String imageFilename=result.getString(1);
+    result.close();
+    return new Pair<String,String>(thumbFilename,imageFilename);
+  }
+ else {
+    return null;
+  }
+}
