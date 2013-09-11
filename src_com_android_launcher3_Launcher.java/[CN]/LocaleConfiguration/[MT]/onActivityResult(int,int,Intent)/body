@@ -10,6 +10,12 @@
     }
     return;
   }
+ else   if (requestCode == REQUEST_PICK_WALLPAPER) {
+    if (resultCode == RESULT_OK && mWorkspace.isInOverviewMode()) {
+      mWorkspace.exitOverviewMode(false);
+    }
+    return;
+  }
   boolean delayExitSpringLoadedMode=false;
   boolean isWidgetDrop=(requestCode == REQUEST_PICK_APPWIDGET || requestCode == REQUEST_CREATE_APPWIDGET);
   if (isWidgetDrop) {

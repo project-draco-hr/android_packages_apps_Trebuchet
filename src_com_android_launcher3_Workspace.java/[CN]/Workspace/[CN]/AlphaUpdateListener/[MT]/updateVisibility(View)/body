@@ -1,0 +1,8 @@
+{
+  if (view.getAlpha() < ALPHA_CUTOFF_THRESHOLD && view.getVisibility() != INVISIBLE) {
+    view.setVisibility(INVISIBLE);
+  }
+ else   if (view.getAlpha() > ALPHA_CUTOFF_THRESHOLD && view.getVisibility() != VISIBLE) {
+    view.setVisibility(VISIBLE);
+  }
+}

@@ -120,9 +120,12 @@
   }
  else {
     mLauncher.getOverviewPanel().setAlpha(finalOverviewPanelAlpha);
+    AlphaUpdateListener.updateVisibility(mLauncher.getOverviewPanel());
     mLauncher.getHotseat().setAlpha(finalHotseatAndPageIndicatorAlpha);
+    AlphaUpdateListener.updateVisibility(mLauncher.getHotseat());
     if (getPageIndicator() != null) {
       getPageIndicator().setAlpha(finalHotseatAndPageIndicatorAlpha);
+      AlphaUpdateListener.updateVisibility(getPageIndicator());
     }
   }
   if (stateIsSpringLoaded) {

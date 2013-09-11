@@ -3,7 +3,7 @@
     showWorkspace(true);
   }
  else   if (mWorkspace.isInOverviewMode()) {
-    mWorkspace.exitOverviewMode();
+    mWorkspace.exitOverviewMode(true);
   }
  else   if (mWorkspace.getOpenFolder() != null) {
     Folder openFolder=mWorkspace.getOpenFolder();
