@@ -1,3 +1,5 @@
 {
-  WallpaperPickerActivity.suggestWallpaperDimension(mLauncher.getResources(),mLauncher.getSharedPrefs(),mLauncher.getWindowManager(),mWallpaperManager);
+  String spKey=WallpaperCropActivity.getSharedPreferencesKey();
+  SharedPreferences sp=mLauncher.getSharedPreferences(spKey,Context.MODE_PRIVATE);
+  WallpaperPickerActivity.suggestWallpaperDimension(mLauncher.getResources(),sp,mLauncher.getWindowManager(),mWallpaperManager);
 }
