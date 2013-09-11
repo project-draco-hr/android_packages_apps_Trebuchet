@@ -8,6 +8,9 @@
   CellLayout.LayoutParams lp=new CellLayout.LayoutParams(0,0,spanX,spanY);
   lp.canReorder=false;
   lp.isFullscreen=true;
+  if (customContent instanceof Insettable) {
+    ((Insettable)customContent).setInsets(mInsets);
+  }
   customScreen.addViewToCellLayout(customContent,0,0,lp,true);
   mCustomContentCallbacks=callbacks;
 }
