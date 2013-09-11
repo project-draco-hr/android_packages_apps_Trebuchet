@@ -1,9 +1,7 @@
 {
   super.onPrepareOptionsMenu(menu);
-  if (mAppsCustomizeTabHost.isTransitioning()) {
-    return false;
+  if (!mWorkspace.isInOverviewMode()) {
+    mWorkspace.enterOverviewMode();
   }
-  boolean allAppsVisible=(mAppsCustomizeTabHost.getVisibility() == View.VISIBLE);
-  menu.setGroupVisible(MENU_GROUP_WALLPAPER,!allAppsVisible);
-  return true;
+  return false;
 }

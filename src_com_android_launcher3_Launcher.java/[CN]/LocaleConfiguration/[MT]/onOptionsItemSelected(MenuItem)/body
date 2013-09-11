@@ -1,8 +1,0 @@
-{
-switch (item.getItemId()) {
-case MENU_WALLPAPER_SETTINGS:
-    startWallpaper();
-  return true;
-}
-return super.onOptionsItemSelected(item);
-}
