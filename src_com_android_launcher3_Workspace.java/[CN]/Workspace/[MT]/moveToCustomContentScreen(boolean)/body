@@ -1,0 +1,15 @@
+{
+  if (hasCustomContent()) {
+    int ccIndex=getPageIndexForScreenId(CUSTOM_CONTENT_SCREEN_ID);
+    if (animate) {
+      snapToPage(ccIndex);
+    }
+ else {
+      setCurrentPage(ccIndex);
+    }
+    View child=getChildAt(ccIndex);
+    if (child != null) {
+      child.requestFocus();
+    }
+  }
+}

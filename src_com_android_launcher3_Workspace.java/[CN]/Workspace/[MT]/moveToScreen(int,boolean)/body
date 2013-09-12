@@ -1,0 +1,14 @@
+{
+  if (!isSmall()) {
+    if (animate) {
+      snapToPage(page);
+    }
+ else {
+      setCurrentPage(page);
+    }
+  }
+  View child=getChildAt(page);
+  if (child != null) {
+    child.requestFocus();
+  }
+}

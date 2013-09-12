@@ -1,5 +1,5 @@
 {
-  if (hasCustomContent() && !isSmall() && !isSwitchingState()) {
+  if (hasCustomContent()) {
     int index=mScreenOrder.indexOf(CUSTOM_CONTENT_SCREEN_ID);
     int scrollDelta=getScrollForPage(index + 1) - getScrollX();
     float translationX=Math.max(scrollDelta,0);

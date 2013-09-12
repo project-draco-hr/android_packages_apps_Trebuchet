@@ -1,14 +1,3 @@
 {
-  if (!isSmall()) {
-    if (animate) {
-      snapToPage(mDefaultPage);
-    }
- else {
-      setCurrentPage(mDefaultPage);
-    }
-  }
-  View child=getChildAt(mDefaultPage);
-  if (child != null) {
-    child.requestFocus();
-  }
+  moveToScreen(mDefaultPage,animate);
 }

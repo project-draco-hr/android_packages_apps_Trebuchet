@@ -20,10 +20,7 @@
         closeFolder();
         exitSpringLoadedDragMode();
         if (alreadyOnHome) {
-          showWorkspace(true);
-          if (mWorkspace.isInOverviewMode()) {
-            mWorkspace.exitOverviewMode();
-          }
+          showWorkspace();
         }
  else {
           mOnResumeState=State.WORKSPACE;

@@ -1,0 +1,6 @@
+{
+  showWorkspace(true);
+  if (mWorkspace.isInOverviewMode()) {
+    mWorkspace.exitOverviewMode();
+  }
+}
