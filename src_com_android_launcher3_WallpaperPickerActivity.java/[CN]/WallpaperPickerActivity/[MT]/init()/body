@@ -12,7 +12,7 @@
         mIgnoreNextTap=true;
       }
       mAnim=new LauncherViewPropertyAnimator(wallpaperStrip);
-      mAnim.translationY(wallpaperStrip.getHeight()).setInterpolator(new DecelerateInterpolator(0.75f));
+      mAnim.translationY(wallpaperStrip.getHeight()).alpha(0f).setInterpolator(new DecelerateInterpolator(0.75f));
       mAnim.start();
     }
     public void onTap(){
@@ -23,7 +23,7 @@
           mAnim.cancel();
         }
         mAnim=new LauncherViewPropertyAnimator(wallpaperStrip);
-        mAnim.translationY(0).setInterpolator(new DecelerateInterpolator(0.75f));
+        mAnim.translationY(0).alpha(1f).setInterpolator(new DecelerateInterpolator(0.75f));
         mAnim.start();
       }
     }
