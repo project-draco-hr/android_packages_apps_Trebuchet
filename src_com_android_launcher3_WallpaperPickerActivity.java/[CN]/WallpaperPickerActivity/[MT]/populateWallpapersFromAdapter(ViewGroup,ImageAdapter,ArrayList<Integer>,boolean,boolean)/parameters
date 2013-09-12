@@ -1,0 +1,5 @@
+ViewGroup parent
+ImageAdapter ia
+ArrayList<Integer> imageIds
+boolean imagesAreResources
+boolean addLongPressHandler

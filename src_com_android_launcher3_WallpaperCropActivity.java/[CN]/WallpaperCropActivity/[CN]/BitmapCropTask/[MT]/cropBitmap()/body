@@ -1,6 +1,19 @@
 {
   boolean failure=false;
   regenerateInputStream();
+  if (mNoCrop && mInStream != null) {
+    try {
+      mWPManager.setStream(mInStream);
+    }
+ catch (    IOException e) {
+      Log.w(LOGTAG,"cannot write stream to wallpaper",e);
+      failure=true;
+    }
+    if (mOnEndRunnable != null) {
+      mOnEndRunnable.run();
+    }
+    return !failure;
+  }
   if (mInStream != null) {
     Rect roundedTrueCrop=new Rect();
     mCropBounds.roundOut(roundedTrueCrop);
@@ -83,7 +96,11 @@
         }
  else {
           try {
-            mWPManager.setStream(new ByteArrayInputStream(tmpOut.toByteArray()));
+            byte[] outByteArray=tmpOut.toByteArray();
+            mWPManager.setStream(new ByteArrayInputStream(outByteArray));
+            if (mOnBitmapCroppedHandler != null) {
+              mOnBitmapCroppedHandler.onBitmapCropped(outByteArray);
+            }
           }
  catch (          IOException e) {
             Log.w(LOGTAG,"cannot write stream to wallpaper",e);

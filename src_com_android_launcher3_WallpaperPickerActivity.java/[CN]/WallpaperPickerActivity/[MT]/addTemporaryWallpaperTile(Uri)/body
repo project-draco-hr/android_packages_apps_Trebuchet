@@ -1,0 +1,21 @@
+{
+  mTempWallpaperTiles.add(uri);
+  FrameLayout pickedImageThumbnail=(FrameLayout)getLayoutInflater().inflate(R.layout.wallpaper_picker_item,mWallpapersView,false);
+  setWallpaperItemPaddingToZero(pickedImageThumbnail);
+  ImageView image=(ImageView)pickedImageThumbnail.findViewById(R.id.wallpaper_image);
+  Bitmap thumb=createThumbnail(uri,null,false);
+  if (thumb != null) {
+    image.setImageBitmap(thumb);
+    Drawable thumbDrawable=image.getDrawable();
+    thumbDrawable.setDither(true);
+  }
+ else {
+    Log.e(TAG,"Error loading thumbnail for uri=" + uri);
+  }
+  mWallpapersView.addView(pickedImageThumbnail,1);
+  ThumbnailMetaData meta=new ThumbnailMetaData();
+  meta.mWallpaperUri=uri;
+  pickedImageThumbnail.setTag(meta);
+  pickedImageThumbnail.setOnClickListener(mThumbnailOnClickListener);
+  mThumbnailOnClickListener.onClick(pickedImageThumbnail);
+}

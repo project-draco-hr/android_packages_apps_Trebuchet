@@ -44,40 +44,43 @@
         intent.setType("image/*");
         Utilities.startActivityForResultSafely(WallpaperPickerActivity.this,intent,IMAGE_PICK);
       }
- else       if (meta.mGalleryImageUri != null) {
-        mCropView.setTileSource(new BitmapRegionTileSource(WallpaperPickerActivity.this,meta.mGalleryImageUri,1024,0),null);
+ else       if (meta.mWallpaperUri != null) {
+        mCropView.setTileSource(new BitmapRegionTileSource(WallpaperPickerActivity.this,meta.mWallpaperUri,1024,0),null);
         mCropView.setTouchEnabled(true);
       }
- else {
+ else       if (meta.mSavedWallpaperDbId != 0) {
+        String imageFilename=mSavedImages.getImageFilename(meta.mSavedWallpaperDbId);
+        File file=new File(getFilesDir(),imageFilename);
+        mCropView.setTileSource(new BitmapRegionTileSource(WallpaperPickerActivity.this,file.getAbsolutePath(),1024,0),null);
+        mCropView.moveToLeft();
+        mCropView.setTouchEnabled(false);
+      }
+ else       if (meta.mWallpaperResId != 0) {
         BitmapRegionTileSource source=new BitmapRegionTileSource(mWallpaperResources,WallpaperPickerActivity.this,meta.mWallpaperResId,1024,0);
         mCropView.setTileSource(source,null);
         Point wallpaperSize=WallpaperCropActivity.getDefaultWallpaperSize(getResources(),getWindowManager());
-        RectF crop=WallpaperCropActivity.getMaxCropRect(source.getImageWidth(),source.getImageHeight(),wallpaperSize.x,wallpaperSize.y);
+        RectF crop=WallpaperCropActivity.getMaxCropRect(source.getImageWidth(),source.getImageHeight(),wallpaperSize.x,wallpaperSize.y,false);
         mCropView.setScale(wallpaperSize.x / crop.width());
         mCropView.setTouchEnabled(false);
       }
     }
   }
 ;
-  findWallpapers();
-  LinearLayout wallpapers=(LinearLayout)findViewById(R.id.wallpaper_list);
-  ImageAdapter ia=new ImageAdapter(this);
-  for (int i=0; i < ia.getCount(); i++) {
-    FrameLayout thumbnail=(FrameLayout)ia.getView(i,null,wallpapers);
-    wallpapers.addView(thumbnail,i);
-    ThumbnailMetaData meta=new ThumbnailMetaData();
-    meta.mWallpaperResId=mImages.get(i);
-    thumbnail.setTag(meta);
-    thumbnail.setOnClickListener(mThumbnailOnClickListener);
-    if (i == 0) {
-      mThumbnailOnClickListener.onClick(thumbnail);
-    }
-  }
-  FrameLayout galleryThumbnail=(FrameLayout)getLayoutInflater().inflate(R.layout.wallpaper_picker_gallery_item,wallpapers,false);
+  findBundledWallpapers();
+  mWallpapersView=(LinearLayout)findViewById(R.id.wallpaper_list);
+  ImageAdapter ia=new ImageAdapter(this,mBundledWallpaperThumbs);
+  populateWallpapersFromAdapter(mWallpapersView,ia,mBundledWallpaperResIds,true,false);
+  mSavedImages=new SavedWallpaperImages(this);
+  mSavedImages.loadThumbnailsAndImageIdList();
+  ArrayList<Drawable> savedWallpaperThumbs=mSavedImages.getThumbnails();
+  ArrayList<Integer> savedWallpaperIds=mSavedImages.getImageIds();
+  ia=new ImageAdapter(this,savedWallpaperThumbs);
+  populateWallpapersFromAdapter(mWallpapersView,ia,savedWallpaperIds,false,true);
+  FrameLayout galleryThumbnail=(FrameLayout)getLayoutInflater().inflate(R.layout.wallpaper_picker_gallery_item,mWallpapersView,false);
   setWallpaperItemPaddingToZero(galleryThumbnail);
   TextView galleryLabel=(TextView)galleryThumbnail.findViewById(R.id.wallpaper_item_label);
   galleryLabel.setText(R.string.gallery);
-  wallpapers.addView(galleryThumbnail,0);
+  mWallpapersView.addView(galleryThumbnail,0);
   ThumbnailMetaData meta=new ThumbnailMetaData();
   meta.mLaunchesGallery=true;
   galleryThumbnail.setTag(meta);
@@ -89,9 +92,21 @@
       ThumbnailMetaData meta=(ThumbnailMetaData)mSelectedThumb.getTag();
       if (meta.mLaunchesGallery) {
       }
- else       if (meta.mGalleryImageUri != null) {
+ else       if (meta.mWallpaperUri != null) {
         boolean finishActivityWhenDone=true;
-        cropImageAndSetWallpaper(meta.mGalleryImageUri,finishActivityWhenDone);
+        OnBitmapCroppedHandler h=new OnBitmapCroppedHandler(){
+          public void onBitmapCropped(          byte[] imageBytes){
+            Bitmap thumb=createThumbnail(null,imageBytes,true);
+            mSavedImages.writeImage(thumb,imageBytes);
+          }
+        }
+;
+        cropImageAndSetWallpaper(meta.mWallpaperUri,h,finishActivityWhenDone);
+      }
+ else       if (meta.mSavedWallpaperDbId != 0) {
+        boolean finishActivityWhenDone=true;
+        String imageFilename=mSavedImages.getImageFilename(meta.mSavedWallpaperDbId);
+        setWallpaper(imageFilename,finishActivityWhenDone);
       }
  else       if (meta.mWallpaperResId != 0) {
         boolean finishActivityWhenDone=true;
