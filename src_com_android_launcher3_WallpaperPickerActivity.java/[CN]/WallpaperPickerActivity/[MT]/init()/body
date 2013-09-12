@@ -31,6 +31,12 @@
 );
   mThumbnailOnClickListener=new OnClickListener(){
     public void onClick(    View v){
+      if (mActionMode != null) {
+        if (v.isLongClickable()) {
+          mLongClickListener.onLongClick(v);
+        }
+        return;
+      }
       if (mSelectedThumb != null) {
         mSelectedThumb.setSelected(false);
       }
@@ -66,6 +72,24 @@
     }
   }
 ;
+  mLongClickListener=new View.OnLongClickListener(){
+    public boolean onLongClick(    View view){
+      CheckableFrameLayout c=(CheckableFrameLayout)view;
+      c.toggle();
+      if (mActionMode != null) {
+        mActionMode.invalidate();
+      }
+ else {
+        mActionMode=startActionMode(mActionModeCallback);
+        int childCount=mWallpapersView.getChildCount();
+        for (int i=0; i < childCount; i++) {
+          mWallpapersView.getChildAt(i).setSelected(false);
+        }
+      }
+      return true;
+    }
+  }
+;
   findBundledWallpapers();
   mWallpapersView=(LinearLayout)findViewById(R.id.wallpaper_list);
   ImageAdapter ia=new ImageAdapter(this,mBundledWallpaperThumbs);
@@ -85,6 +109,11 @@
   meta.mLaunchesGallery=true;
   galleryThumbnail.setTag(meta);
   galleryThumbnail.setOnClickListener(mThumbnailOnClickListener);
+  final LayoutTransition transitioner=new LayoutTransition();
+  transitioner.setDuration(200);
+  transitioner.setStartDelay(LayoutTransition.CHANGE_DISAPPEARING,0);
+  transitioner.setAnimator(LayoutTransition.DISAPPEARING,null);
+  mWallpapersView.setLayoutTransition(transitioner);
   final ActionBar actionBar=getActionBar();
   actionBar.setCustomView(R.layout.actionbar_set_wallpaper);
   actionBar.getCustomView().setOnClickListener(new View.OnClickListener(){
@@ -115,4 +144,65 @@
     }
   }
 );
+  mActionModeCallback=new ActionMode.Callback(){
+    @Override public boolean onCreateActionMode(    ActionMode mode,    Menu menu){
+      MenuInflater inflater=mode.getMenuInflater();
+      inflater.inflate(R.menu.cab_delete_wallpapers,menu);
+      return true;
+    }
+    private int numCheckedItems(){
+      int childCount=mWallpapersView.getChildCount();
+      int numCheckedItems=0;
+      for (int i=0; i < childCount; i++) {
+        CheckableFrameLayout c=(CheckableFrameLayout)mWallpapersView.getChildAt(i);
+        if (c.isChecked()) {
+          numCheckedItems++;
+        }
+      }
+      return numCheckedItems;
+    }
+    @Override public boolean onPrepareActionMode(    ActionMode mode,    Menu menu){
+      int numCheckedItems=numCheckedItems();
+      if (numCheckedItems == 0) {
+        mode.finish();
+        return true;
+      }
+ else {
+        mode.setTitle(getResources().getQuantityString(R.plurals.number_of_items_selected,numCheckedItems,numCheckedItems));
+        return true;
+      }
+    }
+    @Override public boolean onActionItemClicked(    ActionMode mode,    MenuItem item){
+switch (item.getItemId()) {
+case R.id.menu_delete:
+        int childCount=mWallpapersView.getChildCount();
+      ArrayList<View> viewsToRemove=new ArrayList<View>();
+    for (int i=0; i < childCount; i++) {
+      CheckableFrameLayout c=(CheckableFrameLayout)mWallpapersView.getChildAt(i);
+      if (c.isChecked()) {
+        ThumbnailMetaData meta=(ThumbnailMetaData)c.getTag();
+        mSavedImages.deleteImage(meta.mSavedWallpaperDbId);
+        viewsToRemove.add(c);
+      }
+    }
+  for (  View v : viewsToRemove) {
+    mWallpapersView.removeView(v);
+  }
+mode.finish();
+return true;
+default :
+return false;
+}
+}
+@Override public void onDestroyActionMode(ActionMode mode){
+int childCount=mWallpapersView.getChildCount();
+for (int i=0; i < childCount; i++) {
+CheckableFrameLayout c=(CheckableFrameLayout)mWallpapersView.getChildAt(i);
+c.setChecked(false);
+}
+mSelectedThumb.setSelected(true);
+mActionMode=null;
+}
+}
+;
 }
