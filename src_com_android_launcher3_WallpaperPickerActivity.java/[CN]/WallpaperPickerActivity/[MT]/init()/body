@@ -173,36 +173,37 @@
       }
     }
     @Override public boolean onActionItemClicked(    ActionMode mode,    MenuItem item){
-switch (item.getItemId()) {
-case R.id.menu_delete:
+      int itemId=item.getItemId();
+      if (itemId == R.id.menu_delete) {
         int childCount=mWallpapersView.getChildCount();
-      ArrayList<View> viewsToRemove=new ArrayList<View>();
-    for (int i=0; i < childCount; i++) {
-      CheckableFrameLayout c=(CheckableFrameLayout)mWallpapersView.getChildAt(i);
-      if (c.isChecked()) {
-        ThumbnailMetaData meta=(ThumbnailMetaData)c.getTag();
-        mSavedImages.deleteImage(meta.mSavedWallpaperDbId);
-        viewsToRemove.add(c);
+        ArrayList<View> viewsToRemove=new ArrayList<View>();
+        for (int i=0; i < childCount; i++) {
+          CheckableFrameLayout c=(CheckableFrameLayout)mWallpapersView.getChildAt(i);
+          if (c.isChecked()) {
+            ThumbnailMetaData meta=(ThumbnailMetaData)c.getTag();
+            mSavedImages.deleteImage(meta.mSavedWallpaperDbId);
+            viewsToRemove.add(c);
+          }
+        }
+        for (        View v : viewsToRemove) {
+          mWallpapersView.removeView(v);
+        }
+        mode.finish();
+        return true;
+      }
+ else {
+        return false;
       }
     }
-  for (  View v : viewsToRemove) {
-    mWallpapersView.removeView(v);
+    @Override public void onDestroyActionMode(    ActionMode mode){
+      int childCount=mWallpapersView.getChildCount();
+      for (int i=0; i < childCount; i++) {
+        CheckableFrameLayout c=(CheckableFrameLayout)mWallpapersView.getChildAt(i);
+        c.setChecked(false);
+      }
+      mSelectedThumb.setSelected(true);
+      mActionMode=null;
+    }
   }
-mode.finish();
-return true;
-default :
-return false;
-}
-}
-@Override public void onDestroyActionMode(ActionMode mode){
-int childCount=mWallpapersView.getChildCount();
-for (int i=0; i < childCount; i++) {
-CheckableFrameLayout c=(CheckableFrameLayout)mWallpapersView.getChildAt(i);
-c.setChecked(false);
-}
-mSelectedThumb.setSelected(true);
-mActionMode=null;
-}
-}
 ;
 }
