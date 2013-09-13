@@ -5,12 +5,14 @@
   int heightSpecMode=MeasureSpec.getMode(heightMeasureSpec);
   int widthSize=MeasureSpec.getSize(widthMeasureSpec);
   int heightSize=MeasureSpec.getSize(heightMeasureSpec);
-  int cw=grid.calculateCellWidth(widthSize,mCountX);
-  int ch=grid.calculateCellHeight(heightSize,mCountY);
-  if (cw != mCellWidth || ch != mCellHeight) {
-    mCellWidth=cw;
-    mCellHeight=ch;
-    mShortcutsAndWidgets.setCellDimensions(mCellWidth,mCellHeight,mWidthGap,mHeightGap,mCountX,mCountY);
+  if (mFixedCellWidth < 0 || mFixedCellHeight < 0) {
+    int cw=grid.calculateCellWidth(widthSize,mCountX);
+    int ch=grid.calculateCellHeight(heightSize,mCountY);
+    if (cw != mCellWidth || ch != mCellHeight) {
+      mCellWidth=cw;
+      mCellHeight=ch;
+      mShortcutsAndWidgets.setCellDimensions(mCellWidth,mCellHeight,mWidthGap,mHeightGap,mCountX,mCountY);
+    }
   }
   int newWidth=widthSize;
   int newHeight=heightSize;

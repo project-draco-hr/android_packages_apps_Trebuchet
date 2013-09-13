@@ -1,5 +1,5 @@
 {
-  mCellWidth=width;
-  mCellHeight=height;
+  mFixedCellWidth=mCellWidth=width;
+  mFixedCellHeight=mCellHeight=height;
   mShortcutsAndWidgets.setCellDimensions(mCellWidth,mCellHeight,mWidthGap,mHeightGap,mCountX,mCountY);
 }

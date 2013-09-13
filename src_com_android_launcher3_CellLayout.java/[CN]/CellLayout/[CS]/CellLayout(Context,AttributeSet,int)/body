@@ -7,8 +7,8 @@
   LauncherAppState app=LauncherAppState.getInstance();
   DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
   TypedArray a=context.obtainStyledAttributes(attrs,R.styleable.CellLayout,defStyle,0);
-  mCellWidth=-1;
-  mCellHeight=-1;
+  mCellWidth=mCellHeight=-1;
+  mFixedCellHeight=mFixedCellHeight=-1;
   mWidthGap=mOriginalWidthGap=0;
   mHeightGap=mOriginalHeightGap=0;
   mMaxGap=Integer.MAX_VALUE;

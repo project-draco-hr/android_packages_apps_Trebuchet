@@ -29,12 +29,12 @@
       mBgAllAppsList.add(new AppInfo(packageManager,app,mIconCache,mLabelCache));
     }
   }
-  final Callbacks callbacks=tryGetCallbacks(oldCallbacks);
   final ArrayList<AppInfo> added=mBgAllAppsList.added;
   mBgAllAppsList.added=new ArrayList<AppInfo>();
   mHandler.post(new Runnable(){
     public void run(){
       final long bindTime=SystemClock.uptimeMillis();
+      final Callbacks callbacks=tryGetCallbacks(oldCallbacks);
       if (callbacks != null) {
         callbacks.bindAllApplications(added);
         if (DEBUG_LOADERS) {

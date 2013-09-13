@@ -9,6 +9,7 @@
   mHotseat=(Hotseat)findViewById(R.id.hotseat);
   if (mHotseat != null) {
     mHotseat.setup(this);
+    mHotseat.setOnLongClickListener(this);
   }
   mOverviewPanel=findViewById(R.id.overview_panel);
   findViewById(R.id.widget_button).setOnClickListener(new OnClickListener(){
