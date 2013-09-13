@@ -12,16 +12,23 @@
       removeScreens.add(id);
     }
   }
+  int minScreens=hasCustomContent() ? 2 : 1;
   int pageShift=0;
   for (  Long id : removeScreens) {
     Launcher.addDumpLog(TAG,"10249126 - \tremove(" + id + ")",true);
     CellLayout cl=mWorkspaceScreens.get(id);
     mWorkspaceScreens.remove(id);
     mScreenOrder.remove(id);
-    if (indexOfChild(cl) < currentPage) {
-      pageShift++;
+    if (getChildCount() > minScreens) {
+      if (indexOfChild(cl) < currentPage) {
+        pageShift++;
+      }
+      removeView(cl);
     }
-    removeView(cl);
+ else {
+      mWorkspaceScreens.put(EXTRA_EMPTY_SCREEN_ID,cl);
+      mScreenOrder.add(EXTRA_EMPTY_SCREEN_ID);
+    }
   }
   if (!removeScreens.isEmpty()) {
     mLauncher.getModel().updateWorkspaceScreenOrder(mLauncher,mScreenOrder);

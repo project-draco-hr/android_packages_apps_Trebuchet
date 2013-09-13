@@ -5,4 +5,12 @@
   setChildrenBackgroundAlphaMultipliers(1f);
   InstallShortcutReceiver.enableInstallQueue();
   UninstallShortcutReceiver.enableUninstallQueue();
+  post(new Runnable(){
+    @Override public void run(){
+      if (mIsDragOccuring) {
+        addExtraEmptyScreenOnDrag();
+      }
+    }
+  }
+);
 }

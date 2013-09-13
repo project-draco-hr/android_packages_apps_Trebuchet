@@ -1,3 +1,7 @@
 {
-  insertNewWorkspaceScreen(EXTRA_EMPTY_SCREEN_ID);
+  if (!mWorkspaceScreens.containsKey(EXTRA_EMPTY_SCREEN_ID)) {
+    insertNewWorkspaceScreen(EXTRA_EMPTY_SCREEN_ID);
+    return true;
+  }
+  return false;
 }
