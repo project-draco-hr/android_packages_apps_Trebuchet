@@ -1,0 +1,8 @@
+{
+  CheckedMessage wrapper=new CheckedMessage();
+  wrapper.payload=MessageNano.toByteArray(proto);
+  CRC32 checksum=new CRC32();
+  checksum.update(wrapper.payload);
+  wrapper.checksum=checksum.getValue();
+  return MessageNano.toByteArray(wrapper);
+}

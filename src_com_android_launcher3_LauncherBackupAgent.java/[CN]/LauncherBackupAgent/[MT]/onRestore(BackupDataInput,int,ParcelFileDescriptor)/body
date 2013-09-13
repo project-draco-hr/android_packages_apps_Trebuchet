@@ -1,0 +1,41 @@
+{
+  Log.v(TAG,"onRestore");
+  int numRows=0;
+  Journal out=new Journal();
+  ArrayList<Key> keys=new ArrayList<Key>();
+  byte[] buffer=new byte[512];
+  while (data.readNextHeader()) {
+    numRows++;
+    String backupKey=data.getKey();
+    int dataSize=data.getDataSize();
+    if (buffer.length < dataSize) {
+      buffer=new byte[dataSize];
+    }
+    Key key=null;
+    int bytesRead=data.readEntityData(buffer,0,dataSize);
+    if (DEBUG) {
+      Log.d(TAG,"read " + bytesRead + " of "+ dataSize+ " available");
+    }
+    try {
+      key=backupKeyToKey(backupKey);
+switch (key.type) {
+case Key.FAVORITE:
+        restoreFavorite(key,buffer,dataSize,keys);
+      break;
+case Key.SCREEN:
+    restoreScreen(key,buffer,dataSize,keys);
+  break;
+default :
+Log.w(TAG,"unknown restore entity type: " + key.type);
+break;
+}
+}
+ catch (KeyParsingException e) {
+Log.w(TAG,"ignoring unparsable backup key: " + backupKey);
+}
+}
+out.t=0;
+out.key=keys.toArray(BackupProtos.Key.EMPTY_ARRAY);
+writeJournal(newState,out);
+Log.v(TAG,"onRestore: read " + numRows + " rows");
+}

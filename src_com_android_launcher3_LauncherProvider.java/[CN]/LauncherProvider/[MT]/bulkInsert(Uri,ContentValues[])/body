@@ -5,6 +5,7 @@
   try {
     int numValues=values.length;
     for (int i=0; i < numValues; i++) {
+      addModifiedTime(values[i]);
       if (dbInsertAndCheck(mOpenHelper,db,args.table,null,values[i]) < 0) {
         return 0;
       }
