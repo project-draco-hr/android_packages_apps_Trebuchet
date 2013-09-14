@@ -1,6 +1,6 @@
 {
   mWaitingForUninstall=false;
-  if (isUninstall(d)) {
+  if (isUninstallFromWorkspace(d)) {
     if (d.dragSource instanceof Folder) {
       ((Folder)d.dragSource).deferCompleteDropAfterUninstallActivity();
     }

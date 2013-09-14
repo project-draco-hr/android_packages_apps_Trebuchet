@@ -6,7 +6,7 @@
     AppInfo appInfo=(AppInfo)item;
     mLauncher.startApplicationUninstallActivity(appInfo.componentName,appInfo.flags);
   }
- else   if (AppsCustomizePagedView.DISABLE_ALL_APPS && isWorkspaceOrFolderApplication(d)) {
+ else   if (isUninstallFromWorkspace(d)) {
     ShortcutInfo shortcut=(ShortcutInfo)item;
     if (shortcut.intent != null && shortcut.intent.getComponent() != null) {
       final ComponentName componentName=shortcut.intent.getComponent();

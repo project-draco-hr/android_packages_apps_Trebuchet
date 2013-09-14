@@ -1,3 +1,0 @@
-{
-  return AppsCustomizePagedView.DISABLE_ALL_APPS && isWorkspaceOrFolderApplication(d);
-}
