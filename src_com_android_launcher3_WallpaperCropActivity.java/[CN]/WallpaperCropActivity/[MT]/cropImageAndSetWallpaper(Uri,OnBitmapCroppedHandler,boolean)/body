@@ -9,7 +9,7 @@
   int maxDim=Math.max(maxDims.x,maxDims.y);
   final int minDim=Math.min(minDims.x,minDims.y);
   int defaultWidth;
-  if (LauncherAppState.isScreenLarge(getResources())) {
+  if (isScreenLarge(getResources())) {
     defaultWidth=(int)(maxDim * wallpaperTravelToScreenWidthRatio(maxDim,minDim));
   }
  else {

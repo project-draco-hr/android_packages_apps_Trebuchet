@@ -1,5 +1,5 @@
 {
-  String spKey=LauncherAppState.getSharedPreferencesKey();
+  String spKey=getSharedPreferencesKey();
   SharedPreferences sp=getSharedPreferences(spKey,Context.MODE_PRIVATE);
   SharedPreferences.Editor editor=sp.edit();
   if (width != 0 && height != 0) {
