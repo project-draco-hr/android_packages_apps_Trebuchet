@@ -2,7 +2,7 @@
   mIds=new ArrayList<Integer>();
   mThumbs=new ArrayList<Drawable>();
   SQLiteDatabase db=mDb.getReadableDatabase();
-  Cursor result=db.query(ImageDb.TABLE_NAME,new String[]{ImageDb.COLUMN_ID,ImageDb.COLUMN_IMAGE_THUMBNAIL_FILENAME},null,null,null,null,null,null);
+  Cursor result=db.query(ImageDb.TABLE_NAME,new String[]{ImageDb.COLUMN_ID,ImageDb.COLUMN_IMAGE_THUMBNAIL_FILENAME},null,null,null,null,ImageDb.COLUMN_ID + " DESC",null);
   while (result.moveToNext()) {
     String filename=result.getString(1);
     File file=new File(mContext.getFilesDir(),filename);
