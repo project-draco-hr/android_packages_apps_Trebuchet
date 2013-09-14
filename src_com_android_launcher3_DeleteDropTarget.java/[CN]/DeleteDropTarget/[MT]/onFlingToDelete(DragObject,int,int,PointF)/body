@@ -38,7 +38,6 @@
   deferCompleteDropIfUninstalling(d);
   Runnable onAnimationEndRunnable=new Runnable(){
     @Override public void run(){
-      mSearchDropTargetBar.onDragEnd();
       if (!isAllApps) {
         mLauncher.exitSpringLoadedDragMode();
         completeDrop(d);
