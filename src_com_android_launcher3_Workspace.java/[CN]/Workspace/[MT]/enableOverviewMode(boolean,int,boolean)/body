@@ -5,12 +5,10 @@
   }
   Animator workspaceAnim=getChangeStateAnimation(finalState,animated,0,snapPage);
   if (workspaceAnim != null) {
+    onTransitionPrepare();
     workspaceAnim.addListener(new AnimatorListenerAdapter(){
       @Override public void onAnimationEnd(      Animator arg0){
-        mIsSwitchingState=false;
-      }
-      @Override public void onAnimationStart(      Animator arg0){
-        mIsSwitchingState=true;
+        onTransitionEnd();
       }
     }
 );

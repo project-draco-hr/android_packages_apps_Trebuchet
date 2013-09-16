@@ -1,0 +1,15 @@
+{
+  mIsSwitchingState=false;
+  updateChildrenLayersEnabled(false);
+  if (!mWorkspaceFadeInAdjacentScreens) {
+    for (int i=0; i < getChildCount(); i++) {
+      final CellLayout cl=(CellLayout)getChildAt(i);
+      cl.setShortcutAndWidgetAlpha(1f);
+    }
+  }
+  if (mState == Workspace.State.NORMAL) {
+    if (hasCustomContent()) {
+      mWorkspaceScreens.get(CUSTOM_CONTENT_SCREEN_ID).setVisibility(VISIBLE);
+    }
+  }
+}
