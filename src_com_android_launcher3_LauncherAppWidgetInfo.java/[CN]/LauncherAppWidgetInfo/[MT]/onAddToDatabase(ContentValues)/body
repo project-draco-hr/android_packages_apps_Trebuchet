@@ -1,4 +1,5 @@
 {
   super.onAddToDatabase(values);
   values.put(LauncherSettings.Favorites.APPWIDGET_ID,appWidgetId);
+  values.put(LauncherSettings.Favorites.APPWIDGET_PROVIDER,providerName.flattenToString());
 }

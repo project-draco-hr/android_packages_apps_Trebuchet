@@ -62,6 +62,20 @@
     addWorkspacesTable(db);
     version=13;
   }
+  if (version < 14) {
+    db.beginTransaction();
+    try {
+      db.execSQL("ALTER TABLE favorites " + "ADD COLUMN appWidgetProvider TEXT;");
+      db.setTransactionSuccessful();
+      version=14;
+    }
+ catch (    SQLException ex) {
+      Log.e(TAG,ex.getMessage(),ex);
+    }
+ finally {
+      db.endTransaction();
+    }
+  }
   if (version != DATABASE_VERSION) {
     Log.w(TAG,"Destroying all old data.");
     db.execSQL("DROP TABLE IF EXISTS " + TABLE_FAVORITES);
