@@ -1,0 +1,12 @@
+{
+  if (mWorkspace.getScreenOrder().isEmpty()) {
+    return;
+  }
+  if (!mWorkspace.hasCustomContent() && hasCustomContentToLeft()) {
+    mWorkspace.createCustomContentPage();
+    addCustomContentToLeft();
+  }
+ else   if (mWorkspace.hasCustomContent() && !hasCustomContentToLeft()) {
+    mWorkspace.removeCustomContentPage();
+  }
+}
