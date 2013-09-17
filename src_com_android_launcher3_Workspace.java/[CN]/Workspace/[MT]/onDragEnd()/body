@@ -6,4 +6,5 @@
   UninstallShortcutReceiver.disableAndFlushUninstallQueue(getContext());
   removeExtraEmptyScreen();
   mDragSourceInternal=null;
+  mLauncher.onInteractionEnd();
 }

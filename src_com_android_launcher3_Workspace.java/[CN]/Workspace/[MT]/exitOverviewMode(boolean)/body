@@ -1,3 +1,4 @@
 {
   exitOverviewMode(-1,animated);
+  mLauncher.onInteractionEnd();
 }
