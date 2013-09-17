@@ -102,9 +102,12 @@
   populateWallpapersFromAdapter(mWallpapersView,ia,savedWallpaperIds,false,true);
   FrameLayout galleryThumbnail=(FrameLayout)getLayoutInflater().inflate(R.layout.wallpaper_picker_gallery_item,mWallpapersView,false);
   setWallpaperItemPaddingToZero(galleryThumbnail);
-  TextView galleryLabel=(TextView)galleryThumbnail.findViewById(R.id.wallpaper_item_label);
-  galleryLabel.setText(R.string.gallery);
   mWallpapersView.addView(galleryThumbnail,0);
+  Bitmap lastPhoto=getThumbnailOfLastPhoto();
+  if (lastPhoto != null) {
+    ImageView galleryThumbnailBg=(ImageView)galleryThumbnail.findViewById(R.id.wallpaper_image);
+    galleryThumbnailBg.setImageBitmap(getThumbnailOfLastPhoto());
+  }
   ThumbnailMetaData meta=new ThumbnailMetaData();
   meta.mLaunchesGallery=true;
   galleryThumbnail.setTag(meta);
