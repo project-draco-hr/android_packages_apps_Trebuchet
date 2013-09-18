@@ -5,9 +5,9 @@
   if (!mWorkspace.isFinishedSwitchingState()) {
     return;
   }
-  if (v instanceof PageIndicator) {
-    if (!mWorkspace.isInOverviewMode()) {
-      mWorkspace.enterOverviewMode();
+  if (v instanceof Workspace) {
+    if (mWorkspace.isInOverviewMode()) {
+      mWorkspace.exitOverviewMode(true);
     }
     return;
   }

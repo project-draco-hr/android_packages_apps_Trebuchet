@@ -2,6 +2,7 @@
   if (DISABLE_TOUCH_INTERACTION) {
     return false;
   }
+  super.onTouchEvent(ev);
   if (getChildCount() <= 0)   return super.onTouchEvent(ev);
   acquireVelocityTrackerAndAddMovement(ev);
   final int action=ev.getAction();

@@ -8,6 +8,5 @@
       markers.add(getPageIndicatorMarker(i));
     }
     mPageIndicator.addMarkers(markers,mAllowPagedViewAnimations);
-    mPageIndicator.setOnClickListener((Launcher)getContext());
   }
 }
