@@ -7,4 +7,13 @@
     setResult(RESULT_OK);
     finish();
   }
+ else   if (requestCode == PICK_LIVE_WALLPAPER) {
+    WallpaperManager wm=WallpaperManager.getInstance(this);
+    final WallpaperInfo oldLiveWallpaper=mLiveWallpaperInfoOnPickerLaunch;
+    WallpaperInfo newLiveWallpaper=wm.getWallpaperInfo();
+    if (newLiveWallpaper != null && (oldLiveWallpaper == null || !oldLiveWallpaper.getComponent().equals(newLiveWallpaper.getComponent()))) {
+      setResult(RESULT_OK);
+      finish();
+    }
+  }
 }

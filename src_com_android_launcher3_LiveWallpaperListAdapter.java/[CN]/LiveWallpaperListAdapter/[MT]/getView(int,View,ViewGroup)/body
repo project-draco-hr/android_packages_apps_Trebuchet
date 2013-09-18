@@ -1,0 +1,24 @@
+{
+  View view;
+  if (convertView == null) {
+    view=mInflater.inflate(R.layout.live_wallpaper_picker_item,parent,false);
+  }
+ else {
+    view=convertView;
+  }
+  WallpaperPickerActivity.setWallpaperItemPaddingToZero((FrameLayout)view);
+  LiveWallpaperInfo wallpaperInfo=mWallpapers.get(position);
+  ImageView image=(ImageView)view.findViewById(R.id.wallpaper_image);
+  ImageView icon=(ImageView)view.findViewById(R.id.wallpaper_icon);
+  if (wallpaperInfo.thumbnail != null) {
+    image.setImageDrawable(wallpaperInfo.thumbnail);
+    icon.setVisibility(View.GONE);
+  }
+ else {
+    icon.setImageDrawable(wallpaperInfo.info.loadIcon(mPackageManager));
+    icon.setVisibility(View.VISIBLE);
+  }
+  TextView label=(TextView)view.findViewById(R.id.wallpaper_item_label);
+  label.setText(wallpaperInfo.info.loadLabel(mPackageManager));
+  return view;
+}

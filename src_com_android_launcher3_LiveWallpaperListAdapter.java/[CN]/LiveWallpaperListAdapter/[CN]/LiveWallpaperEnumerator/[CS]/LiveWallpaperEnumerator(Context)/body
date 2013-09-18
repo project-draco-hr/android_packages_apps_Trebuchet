@@ -1,0 +1,5 @@
+{
+  super();
+  mContext=context;
+  mWallpaperPosition=0;
+}
