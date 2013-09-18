@@ -29,6 +29,7 @@ synchronized (sBgLock) {
       final int containerIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.CONTAINER);
       final int itemTypeIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.ITEM_TYPE);
       final int appWidgetIdIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.APPWIDGET_ID);
+      final int appWidgetProviderIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.APPWIDGET_PROVIDER);
       final int screenIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.SCREEN);
       final int cellXIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.CELLX);
       final int cellYIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.CELLY);
@@ -145,6 +146,7 @@ sBgFolders.put(folderInfo.id,folderInfo);
 break;
 case LauncherSettings.Favorites.ITEM_TYPE_APPWIDGET:
 int appWidgetId=c.getInt(appWidgetIdIndex);
+String savedProvider=c.getString(appWidgetProviderIndex);
 id=c.getLong(idIndex);
 final AppWidgetProviderInfo provider=widgets.getAppWidgetInfo(appWidgetId);
 if (!isSafeMode && (provider == null || provider.provider == null || provider.provider.getPackageName() == null)) {
@@ -178,6 +180,14 @@ continue;
 }
 if (!checkItemPlacement(occupied,appWidgetInfo)) {
 break;
+}
+String providerName=provider.provider.flattenToString();
+if (!providerName.equals(savedProvider)) {
+ContentValues values=new ContentValues();
+values.put(LauncherSettings.Favorites.APPWIDGET_PROVIDER,providerName);
+String where=BaseColumns._ID + "= ?";
+String[] args={Integer.toString(c.getInt(idIndex))};
+contentResolver.update(contentUri,values,where,args);
 }
 sBgItemsIdMap.put(appWidgetInfo.id,appWidgetInfo);
 sBgAppWidgets.add(appWidgetInfo);
