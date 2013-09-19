@@ -1,0 +1,4 @@
+{
+  activeId=R.drawable.ic_pageindicator_current;
+  inactiveId=R.drawable.ic_pageindicator_default;
+}

@@ -1,0 +1,2 @@
+ArrayList<PageMarkerResources> markers
+boolean allowAnimations

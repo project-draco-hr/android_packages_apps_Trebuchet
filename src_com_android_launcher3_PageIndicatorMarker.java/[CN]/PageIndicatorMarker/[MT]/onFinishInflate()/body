@@ -1,4 +1,4 @@
 {
-  mActiveMarker=findViewById(R.id.active);
-  mInactiveMarker=findViewById(R.id.inactive);
+  mActiveMarker=(ImageView)findViewById(R.id.active);
+  mInactiveMarker=(ImageView)findViewById(R.id.inactive);
 }

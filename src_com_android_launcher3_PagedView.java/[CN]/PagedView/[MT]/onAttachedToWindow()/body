@@ -3,7 +3,7 @@
   if (mPageIndicator == null && mPageIndicatorViewId > -1) {
     mPageIndicator=(PageIndicator)parent.findViewById(mPageIndicatorViewId);
     mPageIndicator.removeAllMarkers(mAllowPagedViewAnimations);
-    ArrayList<Integer> markers=new ArrayList<Integer>();
+    ArrayList<PageIndicator.PageMarkerResources> markers=new ArrayList<PageIndicator.PageMarkerResources>();
     for (int i=0; i < getChildCount(); ++i) {
       markers.add(getPageIndicatorMarker(i));
     }
