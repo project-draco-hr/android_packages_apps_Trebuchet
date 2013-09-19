@@ -16,8 +16,6 @@
   item.updateValuesWithCoordinates(values,item.cellX,item.cellY);
   Runnable r=new Runnable(){
     public void run(){
-      String transaction="DbDebug    Add item (" + item.title + ") to db, id: "+ item.id+ " ("+ container+ ", "+ screenId+ ", "+ cellX+ ", "+ cellY+ ")";
-      Launcher.addDumpLog(TAG,transaction,true);
       cr.insert(notify ? LauncherSettings.Favorites.CONTENT_URI : LauncherSettings.Favorites.CONTENT_URI_NO_NOTIFICATION,values);
 synchronized (sBgLock) {
         checkItemInfoLocked(item.id,item,null);
@@ -34,7 +32,6 @@ case LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT:
           if (!sBgFolders.containsKey(item.container)) {
             String msg="adding item: " + item + " to a folder that "+ " doesn't exist";
             Log.e(TAG,msg);
-            Launcher.dumpDebugLogsToConsole();
           }
         }
       break;

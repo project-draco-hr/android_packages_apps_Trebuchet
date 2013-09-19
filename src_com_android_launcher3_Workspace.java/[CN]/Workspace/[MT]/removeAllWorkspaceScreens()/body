@@ -1,5 +1,4 @@
 {
-  Launcher.addDumpLog(TAG,"10249126 - removeAllWorkspaceScreens()",true);
   removeAllViews();
   mScreenOrder.clear();
   mWorkspaceScreens.clear();

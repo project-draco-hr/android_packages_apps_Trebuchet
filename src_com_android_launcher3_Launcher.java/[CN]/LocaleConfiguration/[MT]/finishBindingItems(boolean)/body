@@ -31,6 +31,4 @@
     }
   }
 );
-  Launcher.addDumpLog(TAG,"10249126 - finishBindingItems() - dumping logs to disk",true);
-  dumpLogsToLocalData(false);
 }

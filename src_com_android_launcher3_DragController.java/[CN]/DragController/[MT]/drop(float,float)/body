@@ -13,6 +13,4 @@
     }
   }
   mDragObject.dragSource.onDropCompleted((View)dropTarget,mDragObject,false,accepted);
-  Launcher.addDumpLog(TAG,"10249126 - DragController.drop() - dumping logs to disk",true);
-  mLauncher.dumpLogsToLocalData(false);
 }

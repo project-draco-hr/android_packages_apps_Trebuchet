@@ -1,6 +1,4 @@
 {
-  String log="10249126 - insertNewWorkspaceScreen(" + screenId + ", "+ insertIndex+ ")";
-  Launcher.addDumpLog(TAG,log,true);
   if (mWorkspaceScreens.containsKey(screenId)) {
     throw new RuntimeException("Screen id " + screenId + " already exists!");
   }

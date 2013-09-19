@@ -5,6 +5,4 @@
   mPaused=true;
   mDragController.cancelDrag();
   mDragController.resetLastGestureUpTime();
-  Launcher.addDumpLog(TAG,"10249126 - onPause() - dumping logs to disk",true);
-  dumpLogsToLocalData(false);
 }

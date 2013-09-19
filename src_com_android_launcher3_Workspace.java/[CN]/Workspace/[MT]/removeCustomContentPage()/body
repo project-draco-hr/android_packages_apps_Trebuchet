@@ -1,5 +1,4 @@
 {
-  Launcher.addDumpLog(TAG,"10249126 - removeCustomContentPage()",true);
   CellLayout customScreen=getScreenWithId(CUSTOM_CONTENT_SCREEN_ID);
   if (customScreen == null) {
     throw new RuntimeException("Expected custom content screen to exist");

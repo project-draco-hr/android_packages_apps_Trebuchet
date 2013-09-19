@@ -1,0 +1,42 @@
+{
+  if (DEBUG_DUMP_LOG) {
+    new Thread("DumpLogsToLocalData"){
+      @Override public void run(){
+        boolean success=false;
+        sDateStamp.setTime(sRunStart);
+        String FILENAME=sDateStamp.getMonth() + "-" + sDateStamp.getDay()+ "_"+ sDateStamp.getHours()+ "-"+ sDateStamp.getMinutes()+ "_"+ sDateStamp.getSeconds()+ ".txt";
+        FileOutputStream fos=null;
+        File outFile=null;
+        try {
+          outFile=new File(getFilesDir(),FILENAME);
+          outFile.createNewFile();
+          fos=new FileOutputStream(outFile);
+        }
+ catch (        Exception e) {
+          e.printStackTrace();
+        }
+        if (fos != null) {
+          PrintWriter writer=new PrintWriter(fos);
+          writer.println(" ");
+          writer.println("Debug logs: ");
+synchronized (sDumpLogs) {
+            for (int i=0; i < sDumpLogs.size(); i++) {
+              writer.println("  " + sDumpLogs.get(i));
+            }
+          }
+          writer.close();
+        }
+        try {
+          if (fos != null) {
+            fos.close();
+            success=true;
+          }
+        }
+ catch (        IOException e) {
+          e.printStackTrace();
+        }
+      }
+    }
+.start();
+  }
+}

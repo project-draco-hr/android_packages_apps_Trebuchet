@@ -3,7 +3,6 @@
     mStripScreensOnPageStopMoving=true;
     return;
   }
-  Launcher.addDumpLog(TAG,"10249126 - stripEmptyScreens()",true);
   int currentPage=getNextPage();
   ArrayList<Long> removeScreens=new ArrayList<Long>();
   for (  Long id : mWorkspaceScreens.keySet()) {
@@ -15,7 +14,6 @@
   int minScreens=hasCustomContent() ? 2 : 1;
   int pageShift=0;
   for (  Long id : removeScreens) {
-    Launcher.addDumpLog(TAG,"10249126 - \tremove(" + id + ")",true);
     CellLayout cl=mWorkspaceScreens.get(id);
     mWorkspaceScreens.remove(id);
     mScreenOrder.remove(id);

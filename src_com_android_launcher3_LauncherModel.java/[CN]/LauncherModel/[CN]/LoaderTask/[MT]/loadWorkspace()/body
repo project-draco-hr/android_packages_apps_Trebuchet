@@ -13,7 +13,6 @@
   boolean loadedOldDb=LauncherAppState.getLauncherProvider().justLoadedOldDb();
 synchronized (sBgLock) {
     clearSBgDataStructures();
-    Launcher.addDumpLog(TAG,"10249126 - loadWorkspace()",true);
     final ArrayList<Long> itemsToRemove=new ArrayList<Long>();
     final Uri contentUri=LauncherSettings.Favorites.CONTENT_URI;
     final Cursor c=contentResolver.query(contentUri,null,null,null,null);
@@ -41,7 +40,6 @@ synchronized (sBgLock) {
       int container;
       long id;
       Intent intent;
-      Launcher.addDumpLog(TAG,"10249126 - Num rows: " + c.getCount(),true);
       while (!mStopped && c.moveToNext()) {
         try {
           int itemType=c.getInt(itemTypeIndex);
@@ -57,7 +55,6 @@ case LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT:
             if (!mAppsCanBeOnRemoveableStorage) {
               Uri uri=LauncherSettings.Favorites.getContentUri(id,false);
               contentResolver.delete(uri,null,null);
-              Launcher.addDumpLog(TAG,"Invalid package removed: " + cn,true);
             }
  else {
               Launcher.addDumpLog(TAG,"Invalid package found: " + cn,true);
@@ -206,7 +203,6 @@ c.close();
 }
 }
 if (mStopped) {
-Launcher.addDumpLog(TAG,"10249126 - loadWorkspace() - Stopped",true);
 clearSBgDataStructures();
 return false;
 }
@@ -225,12 +221,10 @@ Log.w(TAG,"Could not remove id = " + id);
 }
 }
 if (loadedOldDb) {
-Launcher.addDumpLog(TAG,"10249126 - loadWorkspace - loadedOldDb",true);
 long maxScreenId=0;
 for (ItemInfo item : sBgItemsIdMap.values()) {
 long screenId=item.screenId;
 if (item.container == LauncherSettings.Favorites.CONTAINER_DESKTOP && !sBgWorkspaceScreens.contains(screenId)) {
-Launcher.addDumpLog(TAG,"10249126 - loadWorkspace-loadedOldDb(" + screenId + ")",true);
 sBgWorkspaceScreens.add(screenId);
 if (screenId > maxScreenId) {
 maxScreenId=screenId;
@@ -238,10 +232,6 @@ maxScreenId=screenId;
 }
 }
 Collections.sort(sBgWorkspaceScreens);
-Launcher.addDumpLog(TAG,"10249126 - updateWorkspaceScreenOrder - sBgWorkspaceScreens",true);
-for (Long l : sBgWorkspaceScreens) {
-Launcher.addDumpLog(TAG,"10249126\t- " + l,true);
-}
 LauncherAppState.getLauncherProvider().updateMaxScreenId(maxScreenId);
 updateWorkspaceScreenOrder(context,sBgWorkspaceScreens);
 long maxItemId=0;
@@ -251,38 +241,19 @@ maxItemId=Math.max(maxItemId,item.id);
 LauncherAppState.getLauncherProvider().updateMaxItemId(maxItemId);
 }
  else {
-Launcher.addDumpLog(TAG,"10249126 - loadWorkspace - !loadedOldDb [" + sWorkerThread.getThreadId() + ", "+ Process.myTid()+ "]",true);
 TreeMap<Integer,Long> orderedScreens=loadWorkspaceScreensDb(mContext);
 for (Integer i : orderedScreens.keySet()) {
-Launcher.addDumpLog(TAG,"10249126 - adding to sBgWorkspaceScreens: " + orderedScreens.get(i),true);
 sBgWorkspaceScreens.add(orderedScreens.get(i));
 }
 ArrayList<Long> unusedScreens=new ArrayList<Long>(sBgWorkspaceScreens);
-for (Long l : unusedScreens) {
-Launcher.addDumpLog(TAG,"10249126 - unused screens: " + l,true);
-}
-Launcher.addDumpLog(TAG,"10249126 - sBgItemsIdMap [" + sWorkerThread.getThreadId() + ", "+ Process.myTid()+ "]",true);
 for (ItemInfo item : sBgItemsIdMap.values()) {
 long screenId=item.screenId;
-Launcher.addDumpLog(TAG,"10249126 - \t" + item.container + ", "+ screenId+ " - "+ unusedScreens.contains(screenId)+ " | "+ item,true);
 if (item.container == LauncherSettings.Favorites.CONTAINER_DESKTOP && unusedScreens.contains(screenId)) {
 unusedScreens.remove(screenId);
-Launcher.addDumpLog(TAG,"10249126 - \t\tRemoving " + screenId,true);
-for (Long l : unusedScreens) {
-Launcher.addDumpLog(TAG,"10249126 - \t\t\t unused screens: " + l,true);
-}
 }
 }
 if (unusedScreens.size() != 0) {
-Launcher.addDumpLog(TAG,"10249126 - updateWorkspaceScreenOrder - sBgWorkspaceScreens - pre removeAll",true);
-for (Long l : sBgWorkspaceScreens) {
-Launcher.addDumpLog(TAG,"10249126\t- " + l,true);
-}
 sBgWorkspaceScreens.removeAll(unusedScreens);
-Launcher.addDumpLog(TAG,"10249126 - updateWorkspaceScreenOrder - sBgWorkspaceScreens - post removeAll",true);
-for (Long l : sBgWorkspaceScreens) {
-Launcher.addDumpLog(TAG,"10249126\t- " + l,true);
-}
 updateWorkspaceScreenOrder(context,sBgWorkspaceScreens);
 }
 }
