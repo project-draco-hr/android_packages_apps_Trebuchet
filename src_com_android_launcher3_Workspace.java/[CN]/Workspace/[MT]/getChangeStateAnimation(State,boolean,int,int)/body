@@ -133,7 +133,8 @@
       AlphaUpdateListener.updateVisibility(getPageIndicator());
     }
     searchBar.setAlpha(finalSearchBarAlpha);
-    AlphaUpdateListener.updateVisibility(mLauncher.getSearchBar());
+    AlphaUpdateListener.updateVisibility(searchBar);
+    updateCustomContentVisibility();
   }
   if (finalSearchBarAlpha == 0) {
     mLauncher.setVoiceButtonProxyVisible(false);
