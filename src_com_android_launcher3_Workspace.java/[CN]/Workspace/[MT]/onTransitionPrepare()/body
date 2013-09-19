@@ -1,9 +1,5 @@
 {
   mIsSwitchingState=true;
   updateChildrenLayersEnabled(false);
-  if (mState != Workspace.State.NORMAL) {
-    if (hasCustomContent()) {
-      mWorkspaceScreens.get(CUSTOM_CONTENT_SCREEN_ID).setVisibility(INVISIBLE);
-    }
-  }
+  hideCustomContentIfNecessary();
 }

@@ -1,0 +1,6 @@
+{
+  int visibility=mState == Workspace.State.NORMAL ? VISIBLE : INVISIBLE;
+  if (hasCustomContent()) {
+    mWorkspaceScreens.get(CUSTOM_CONTENT_SCREEN_ID).setVisibility(visibility);
+  }
+}

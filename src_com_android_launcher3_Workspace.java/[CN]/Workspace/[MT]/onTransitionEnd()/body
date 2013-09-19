@@ -7,9 +7,5 @@
       cl.setShortcutAndWidgetAlpha(1f);
     }
   }
-  if (mState == Workspace.State.NORMAL) {
-    if (hasCustomContent()) {
-      mWorkspaceScreens.get(CUSTOM_CONTENT_SCREEN_ID).setVisibility(VISIBLE);
-    }
-  }
+  showCustomContentIfNecessary();
 }
