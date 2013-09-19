@@ -194,7 +194,9 @@ onDropToDelete();
 }
 }
  else {
+if (!mCancelTap) {
 onUnhandledTap(ev);
+}
 }
 removeCallbacks(mSidePageHoverRunnable);
 resetTouchState();

@@ -1,0 +1,4 @@
+{
+  mCancelTap=true;
+  return super.performLongClick();
+}

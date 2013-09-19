@@ -30,6 +30,7 @@
     }
   }
 );
+  mOverviewPanel.setAlpha(0f);
   mWorkspace.setHapticFeedbackEnabled(false);
   mWorkspace.setOnLongClickListener(this);
   mWorkspace.setup(dragController);
