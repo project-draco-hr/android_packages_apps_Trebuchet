@@ -1,21 +1,23 @@
 {
+  float translationX=0;
+  float progress=0;
   if (hasCustomContent()) {
     int index=mScreenOrder.indexOf(CUSTOM_CONTENT_SCREEN_ID);
     int scrollDelta=getScrollForPage(index + 1) - getScrollX();
-    float translationX=Math.max(scrollDelta,0);
-    float progress=(1.0f * scrollDelta) / (getScrollForPage(index + 1) - getScrollForPage(index));
+    translationX=Math.max(scrollDelta,0);
+    progress=(1.0f * scrollDelta) / (getScrollForPage(index + 1) - getScrollForPage(index));
     progress=Math.max(0,progress);
-    if (Float.compare(progress,mLastCustomContentScrollProgress) == 0)     return;
-    mLastCustomContentScrollProgress=progress;
-    setBackgroundAlpha(progress * 0.8f);
-    if (mLauncher.getHotseat() != null) {
-      mLauncher.getHotseat().setTranslationX(translationX);
-    }
-    if (getPageIndicator() != null) {
-      getPageIndicator().setTranslationX(translationX);
-    }
-    if (mCustomContentCallbacks != null) {
-      mCustomContentCallbacks.onScrollProgressChanged(progress);
-    }
+  }
+  if (Float.compare(progress,mLastCustomContentScrollProgress) == 0)   return;
+  mLastCustomContentScrollProgress=progress;
+  setBackgroundAlpha(progress * 0.8f);
+  if (mLauncher.getHotseat() != null) {
+    mLauncher.getHotseat().setTranslationX(translationX);
+  }
+  if (getPageIndicator() != null) {
+    getPageIndicator().setTranslationX(translationX);
+  }
+  if (mCustomContentCallbacks != null) {
+    mCustomContentCallbacks.onScrollProgressChanged(progress);
   }
 }
