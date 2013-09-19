@@ -1,19 +1,18 @@
 {
   if (!mIsInitialized) {
     mLauncher=l;
-    mPositionData=positionData;
-    Resources r=getContext().getResources();
-    LauncherAppState app=LauncherAppState.getInstance();
-    DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
-    mPunchThroughGraphic=r.getDrawable(R.drawable.cling);
-    mPunchThroughGraphicCenterRadius=r.getDimensionPixelSize(R.dimen.clingPunchThroughGraphicCenterRadius);
-    mAppIconSize=grid.iconSizePx;
-    mRevealRadius=grid.iconSizePx * 1f;
-    mButtonBarHeight=grid.hotseatBarHeightPx;
+    setOnLongClickListener(this);
     mErasePaint=new Paint();
     mErasePaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.MULTIPLY));
     mErasePaint.setColor(0xFFFFFF);
     mErasePaint.setAlpha(0);
+    mErasePaint.setAntiAlias(true);
+    mBubblePaint=new Paint();
+    mBubblePaint.setColor(0xFFFFFF);
+    mBubblePaint.setAntiAlias(true);
+    mDotPaint=new Paint();
+    mDotPaint.setColor(0x72BBED);
+    mDotPaint.setAntiAlias(true);
     mIsInitialized=true;
   }
 }

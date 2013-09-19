@@ -1,0 +1,11 @@
+{
+  final Cling cling=(Cling)findViewById(clingId);
+  if (cling != null) {
+    cling.init(this,positionData);
+    cling.show(animate,SHOW_CLING_DURATION);
+    if (dimNavBarVisibilty) {
+      cling.setSystemUiVisibility(cling.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LOW_PROFILE);
+    }
+  }
+  return cling;
+}

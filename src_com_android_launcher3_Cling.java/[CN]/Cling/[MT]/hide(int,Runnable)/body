@@ -1,0 +1,27 @@
+{
+  if (mDrawIdentifier.equals(FIRST_RUN_PORTRAIT) || mDrawIdentifier.equals(FIRST_RUN_LANDSCAPE)) {
+    View content=getContent();
+    ObjectAnimator anim=LauncherAnimUtils.ofFloat(content,"alpha",0f);
+    anim.setDuration(duration);
+    anim.addListener(new AnimatorListenerAdapter(){
+      public void onAnimationEnd(      Animator animation){
+        setVisibility(View.GONE);
+        postCb.run();
+      }
+    }
+);
+    anim.start();
+  }
+ else {
+    ObjectAnimator anim=LauncherAnimUtils.ofFloat(this,"alpha",0f);
+    anim.setDuration(duration);
+    anim.addListener(new AnimatorListenerAdapter(){
+      public void onAnimationEnd(      Animator animation){
+        setVisibility(View.GONE);
+        postCb.run();
+      }
+    }
+);
+    anim.start();
+  }
+}

@@ -1,59 +1,54 @@
 {
   if (mIsInitialized) {
-    DisplayMetrics metrics=new DisplayMetrics();
-    mLauncher.getWindowManager().getDefaultDisplay().getMetrics(metrics);
-    Bitmap b=Bitmap.createBitmap(getMeasuredWidth(),getMeasuredHeight(),Bitmap.Config.ARGB_8888);
-    Canvas c=new Canvas(b);
+    canvas.save();
     if (mBackground == null) {
-      if (mDrawIdentifier.equals(WORKSPACE_PORTRAIT) || mDrawIdentifier.equals(WORKSPACE_LANDSCAPE) || mDrawIdentifier.equals(WORKSPACE_LARGE)) {
-        mBackground=getResources().getDrawable(R.drawable.bg_cling1);
-      }
- else       if (mDrawIdentifier.equals(ALLAPPS_PORTRAIT) || mDrawIdentifier.equals(ALLAPPS_LANDSCAPE) || mDrawIdentifier.equals(ALLAPPS_LARGE)) {
-        mBackground=getResources().getDrawable(R.drawable.bg_cling2);
-      }
- else       if (mDrawIdentifier.equals(FOLDER_PORTRAIT) || mDrawIdentifier.equals(FOLDER_LANDSCAPE)) {
-        mBackground=getResources().getDrawable(R.drawable.bg_cling3);
-      }
- else       if (mDrawIdentifier.equals(FOLDER_LARGE)) {
-        mBackground=getResources().getDrawable(R.drawable.bg_cling4);
-      }
- else       if (mDrawIdentifier.equals(WORKSPACE_CUSTOM)) {
+      if (mDrawIdentifier.equals(WORKSPACE_CUSTOM)) {
         mBackground=getResources().getDrawable(R.drawable.bg_cling5);
       }
     }
+    Bitmap eraseBg=null;
+    Canvas eraseCanvas=null;
     if (mBackground != null) {
       mBackground.setBounds(0,0,getMeasuredWidth(),getMeasuredHeight());
-      mBackground.draw(c);
+      mBackground.draw(canvas);
+    }
+ else     if (mDrawIdentifier.equals(FOLDER_PORTRAIT) || mDrawIdentifier.equals(FOLDER_LANDSCAPE) || mDrawIdentifier.equals(FOLDER_LARGE)) {
+      canvas.drawColor(0xcc000000);
+    }
+ else     if (mDrawIdentifier.equals(WORKSPACE_PORTRAIT) || mDrawIdentifier.equals(WORKSPACE_LANDSCAPE) || mDrawIdentifier.equals(WORKSPACE_LARGE)) {
+      eraseBg=Bitmap.createBitmap(getMeasuredWidth(),getMeasuredHeight(),Bitmap.Config.ARGB_8888);
+      eraseCanvas=new Canvas(eraseBg);
+      eraseCanvas.drawColor(0xdd000000);
     }
  else {
-      c.drawColor(0x99000000);
+      canvas.drawColor(0xdd000000);
     }
-    int cx=-1;
-    int cy=-1;
-    float scale=mRevealRadius / mPunchThroughGraphicCenterRadius;
-    int dw=(int)(scale * mPunchThroughGraphic.getIntrinsicWidth());
-    int dh=(int)(scale * mPunchThroughGraphic.getIntrinsicHeight());
-    int[] positions=getPunchThroughPositions();
-    for (int i=0; i < positions.length; i+=2) {
-      cx=positions[i];
-      cy=positions[i + 1];
-      if (cx > -1 && cy > -1) {
-        c.drawCircle(cx,cy,mRevealRadius,mErasePaint);
-        mPunchThroughGraphic.setBounds(cx - dw / 2,cy - dh / 2,cx + dw / 2,cy + dh / 2);
-        mPunchThroughGraphic.draw(c);
-      }
+    DisplayMetrics metrics=new DisplayMetrics();
+    mLauncher.getWindowManager().getDefaultDisplay().getMetrics(metrics);
+    float alpha=getAlpha();
+    View content=getContent();
+    if (content != null) {
+      alpha*=content.getAlpha();
     }
-    if (mDrawIdentifier.equals(ALLAPPS_PORTRAIT) || mDrawIdentifier.equals(ALLAPPS_LANDSCAPE) || mDrawIdentifier.equals(ALLAPPS_LARGE)) {
-      if (mHandTouchGraphic == null) {
-        mHandTouchGraphic=getResources().getDrawable(R.drawable.hand);
-      }
-      int offset=mAppIconSize / 4;
-      mHandTouchGraphic.setBounds(cx + offset,cy + offset,cx + mHandTouchGraphic.getIntrinsicWidth() + offset,cy + mHandTouchGraphic.getIntrinsicHeight() + offset);
-      mHandTouchGraphic.draw(c);
+    if (mDrawIdentifier.equals(FIRST_RUN_PORTRAIT) || mDrawIdentifier.equals(FIRST_RUN_LANDSCAPE)) {
+      View bubbleContent=findViewById(R.id.bubble_content);
+      Rect bubbleRect=new Rect();
+      bubbleContent.getGlobalVisibleRect(bubbleRect);
+      mBubblePaint.setAlpha((int)(255 * alpha));
+      float buffer=DynamicGrid.pxFromDp(FIRST_RUN_CIRCLE_BUFFER_DPS,metrics);
+      canvas.drawCircle(metrics.widthPixels / 2,bubbleRect.centerY(),(bubbleContent.getMeasuredWidth() + buffer) / 2,mBubblePaint);
     }
-    canvas.drawBitmap(b,0,0,null);
-    c.setBitmap(null);
-    b=null;
+ else     if (mDrawIdentifier.equals(WORKSPACE_PORTRAIT) || mDrawIdentifier.equals(WORKSPACE_LANDSCAPE) || mDrawIdentifier.equals(WORKSPACE_LARGE)) {
+      int offset=DynamicGrid.pxFromDp(WORKSPACE_CIRCLE_Y_OFFSET_DPS,metrics);
+      mErasePaint.setAlpha((int)(128));
+      eraseCanvas.drawCircle(metrics.widthPixels / 2,metrics.heightPixels / 2 - offset,DynamicGrid.pxFromDp(WORKSPACE_OUTER_CIRCLE_RADIUS_DPS,metrics),mErasePaint);
+      mErasePaint.setAlpha(0);
+      eraseCanvas.drawCircle(metrics.widthPixels / 2,metrics.heightPixels / 2 - offset,DynamicGrid.pxFromDp(WORKSPACE_INNER_CIRCLE_RADIUS_DPS,metrics),mErasePaint);
+      canvas.drawBitmap(eraseBg,0,0,null);
+      eraseCanvas.setBitmap(null);
+      eraseBg=null;
+    }
+    canvas.restore();
   }
   super.dispatchDraw(canvas);
 }

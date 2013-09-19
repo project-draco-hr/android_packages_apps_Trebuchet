@@ -5,7 +5,6 @@
     setLayerType(LAYER_TYPE_NONE,null);
   }
   if (!toWorkspace) {
-    l.dismissWorkspaceCling(null);
     mAppsCustomizePane.showAllAppsCling();
     mAppsCustomizePane.loadAssociatedPages(mAppsCustomizePane.getCurrentPage());
     setVisibilityOfSiblingsWithLowerZOrder(INVISIBLE);

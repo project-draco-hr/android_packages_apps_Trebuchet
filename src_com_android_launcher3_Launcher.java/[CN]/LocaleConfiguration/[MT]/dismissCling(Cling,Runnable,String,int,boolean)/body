@@ -1,0 +1,23 @@
+{
+  if (cling != null && cling.getVisibility() != View.GONE) {
+    final Runnable cleanUpClingCb=new Runnable(){
+      public void run(){
+        cling.cleanup();
+        if (postAnimationCb != null) {
+          postAnimationCb.run();
+        }
+      }
+    }
+;
+    if (duration <= 0) {
+      cleanUpClingCb.run();
+    }
+ else {
+      cling.hide(duration,cleanUpClingCb);
+    }
+    mHideFromAccessibilityHelper.restoreImportantForAccessibility(mDragLayer);
+    if (restoreNavBarVisibilty) {
+      cling.setSystemUiVisibility(cling.getSystemUiVisibility() & ~View.SYSTEM_UI_FLAG_LOW_PROFILE);
+    }
+  }
+}
