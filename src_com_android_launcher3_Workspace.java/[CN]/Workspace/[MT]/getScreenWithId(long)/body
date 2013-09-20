@@ -1,5 +1,4 @@
 {
-  Launcher.addDumpLog(TAG,"10249126 - getScreenWithId(" + screenId + ")",true);
   CellLayout layout=mWorkspaceScreens.get(screenId);
   return layout;
 }

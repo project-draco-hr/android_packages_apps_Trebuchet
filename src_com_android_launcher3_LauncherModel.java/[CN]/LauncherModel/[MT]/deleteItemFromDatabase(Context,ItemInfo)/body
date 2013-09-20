@@ -3,8 +3,6 @@
   final Uri uriToDelete=LauncherSettings.Favorites.getContentUri(item.id,false);
   Runnable r=new Runnable(){
     public void run(){
-      String transaction="DbDebug    Delete item (" + item.title + ") from db, id: "+ item.id+ " ("+ item.container+ ", "+ item.screenId+ ", "+ item.cellX+ ", "+ item.cellY+ ")";
-      Launcher.addDumpLog(TAG,transaction,true);
       cr.delete(uriToDelete,null,null);
 synchronized (sBgLock) {
 switch (item.itemType) {
@@ -14,7 +12,6 @@ case LauncherSettings.Favorites.ITEM_TYPE_FOLDER:
           if (info.container == item.id) {
             String msg="deleting a folder (" + item + ") which still "+ "contains items ("+ info+ ")";
             Log.e(TAG,msg);
-            Launcher.dumpDebugLogsToConsole();
           }
         }
       sBgWorkspaceItems.remove(item);

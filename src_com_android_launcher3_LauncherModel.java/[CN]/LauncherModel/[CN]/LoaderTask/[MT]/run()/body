@@ -34,9 +34,7 @@ synchronized (sBgLock) {
     sBgDbIconCache.clear();
   }
   if (AppsCustomizePagedView.DISABLE_ALL_APPS) {
-    Launcher.addDumpLog(TAG,"10249126 - verifyApplications - useMoreApps=" + UPGRADE_USE_MORE_APPS_FOLDER + " isUpgrade="+ isUpgrade,true);
     if (!UPGRADE_USE_MORE_APPS_FOLDER || !isUpgrade) {
-      Launcher.addDumpLog(TAG,"10249126 - verifyApplications(" + isUpgrade + ")",true);
       verifyApplications();
     }
   }

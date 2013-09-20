@@ -58,6 +58,4 @@
   if (DEBUG_RESUME_TIME) {
     Log.d(TAG,"Time spent in onResume: " + (System.currentTimeMillis() - startTime));
   }
-  Launcher.addDumpLog(TAG,"10249126 - onResume() - dumping logs to disk",true);
-  dumpLogsToLocalData(false);
 }

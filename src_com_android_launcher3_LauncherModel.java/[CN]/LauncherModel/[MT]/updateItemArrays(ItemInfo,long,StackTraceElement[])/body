@@ -5,7 +5,6 @@ synchronized (sBgLock) {
       if (!sBgFolders.containsKey(item.container)) {
         String msg="item: " + item + " container being set to: "+ item.container+ ", not in the list of folders";
         Log.e(TAG,msg);
-        Launcher.dumpDebugLogsToConsole();
       }
     }
     ItemInfo modelItem=sBgItemsIdMap.get(itemId);

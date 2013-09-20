@@ -1,7 +1,4 @@
 {
-  Launcher.addDumpLog(TAG,"10249126 - commitExtraEmptyScreen()",true);
-  Launcher.addDumpLog(TAG,"10249126 - commitExtraEmptyScreen() - dumping logs to disk",true);
-  mLauncher.dumpLogsToLocalData(false);
   CellLayout cl=mWorkspaceScreens.get(EXTRA_EMPTY_SCREEN_ID);
   mWorkspaceScreens.remove(EXTRA_EMPTY_SCREEN_ID);
   mScreenOrder.remove(EXTRA_EMPTY_SCREEN_ID);

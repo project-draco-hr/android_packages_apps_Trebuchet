@@ -1,11 +1,4 @@
 {
-  Launcher.addDumpLog(TAG,"10249126 - bindWorkspaceScreens()",true);
-synchronized (sBgLock) {
-    Launcher.addDumpLog(TAG,"10249126 - orderedScreens",true);
-    for (    Long l : sBgWorkspaceScreens) {
-      Launcher.addDumpLog(TAG,"10249126\t- " + l,true);
-    }
-  }
   final Runnable r=new Runnable(){
     @Override public void run(){
       Callbacks callbacks=tryGetCallbacks(oldCallbacks);

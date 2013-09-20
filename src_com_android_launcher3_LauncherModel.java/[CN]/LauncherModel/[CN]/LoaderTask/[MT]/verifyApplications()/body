@@ -5,7 +5,6 @@
 synchronized (sBgLock) {
     for (    AppInfo app : mBgAllAppsList.data) {
       tmpInfos=getItemInfoForComponentName(app.componentName);
-      Launcher.addDumpLog(TAG,"10249126 - \t" + app.componentName.getPackageName() + ", "+ tmpInfos.isEmpty(),true);
       if (tmpInfos.isEmpty()) {
         added.add(app);
         Log.e(TAG,"Missing Application on load: " + app);

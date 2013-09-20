@@ -1,4 +1,3 @@
 {
-  Launcher.addDumpLog(TAG,"10249126 - getPageIndexForScreenId(" + screenId + ")",true);
   return indexOfChild(mWorkspaceScreens.get(screenId));
 }
