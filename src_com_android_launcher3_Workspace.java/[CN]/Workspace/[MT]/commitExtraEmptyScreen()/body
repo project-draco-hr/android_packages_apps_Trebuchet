@@ -1,10 +1,14 @@
 {
+  int index=getPageIndexForScreenId(EXTRA_EMPTY_SCREEN_ID);
   CellLayout cl=mWorkspaceScreens.get(EXTRA_EMPTY_SCREEN_ID);
   mWorkspaceScreens.remove(EXTRA_EMPTY_SCREEN_ID);
   mScreenOrder.remove(EXTRA_EMPTY_SCREEN_ID);
   long newId=LauncherAppState.getLauncherProvider().generateNewScreenId();
   mWorkspaceScreens.put(newId,cl);
   mScreenOrder.add(newId);
+  if (getPageIndicator() != null) {
+    getPageIndicator().updateMarker(index,getPageIndicatorMarker(index));
+  }
   mLauncher.getModel().updateWorkspaceScreenOrder(mLauncher,mScreenOrder);
   return newId;
 }

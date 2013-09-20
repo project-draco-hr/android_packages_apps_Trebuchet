@@ -1,0 +1,4 @@
+{
+  PageIndicatorMarker m=mMarkers.get(index);
+  m.setMarkerDrawables(marker.activeId,marker.inactiveId);
+}
