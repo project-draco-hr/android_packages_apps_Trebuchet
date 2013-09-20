@@ -4,7 +4,7 @@
   final View wallpaperStrip=findViewById(R.id.wallpaper_strip);
   mCropView.setTouchCallback(new CropView.TouchCallback(){
     LauncherViewPropertyAnimator mAnim;
-    public void onTouchDown(){
+    @Override public void onTouchDown(){
       if (mAnim != null) {
         mAnim.cancel();
       }
@@ -15,7 +15,10 @@
       mAnim.translationY(wallpaperStrip.getHeight()).alpha(0f).setInterpolator(new DecelerateInterpolator(0.75f));
       mAnim.start();
     }
-    public void onTap(){
+    @Override public void onTouchUp(){
+      mIgnoreNextTap=false;
+    }
+    @Override public void onTap(){
       boolean ignoreTap=mIgnoreNextTap;
       mIgnoreNextTap=false;
       if (!ignoreTap) {
