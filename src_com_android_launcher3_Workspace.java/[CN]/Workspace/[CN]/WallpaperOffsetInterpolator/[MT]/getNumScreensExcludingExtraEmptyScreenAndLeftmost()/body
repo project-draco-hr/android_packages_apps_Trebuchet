@@ -1,0 +1,4 @@
+{
+  int numScrollingPages=getChildCount() - 1 - numExtraScreensToIgnore();
+  return numScrollingPages;
+}
