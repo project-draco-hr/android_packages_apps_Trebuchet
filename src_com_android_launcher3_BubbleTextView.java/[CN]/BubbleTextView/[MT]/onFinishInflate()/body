@@ -3,4 +3,5 @@
   LauncherAppState app=LauncherAppState.getInstance();
   DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
   setTextSize(TypedValue.COMPLEX_UNIT_SP,grid.iconTextSize);
+  setTextColor(getResources().getColor(R.color.workspace_icon_text_color));
 }

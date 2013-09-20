@@ -1,4 +1,8 @@
 {
+  if (!mShadowsEnabled) {
+    super.draw(canvas);
+    return;
+  }
   final Drawable background=mBackground;
   if (background != null) {
     final int scrollX=getScrollX();
