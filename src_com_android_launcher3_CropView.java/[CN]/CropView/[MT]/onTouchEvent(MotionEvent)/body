@@ -28,6 +28,7 @@
     if (mTouchCallback != null && squaredDist < slop && now < mTouchDownTime + ViewConfiguration.getTapTimeout()) {
       mTouchCallback.onTap();
     }
+    mTouchCallback.onTouchUp();
   }
   if (!mTouchEnabled) {
     return true;
