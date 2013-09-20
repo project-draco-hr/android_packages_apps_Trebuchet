@@ -1,0 +1,7 @@
+{
+  mInflater=(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+  mPackageManager=context.getPackageManager();
+  List<ResolveInfo> list=mPackageManager.queryIntentServices(new Intent(WallpaperService.SERVICE_INTERFACE),PackageManager.GET_META_DATA);
+  mWallpapers=generatePlaceholderViews(list.size());
+  new LiveWallpaperEnumerator(context).execute(list);
+}

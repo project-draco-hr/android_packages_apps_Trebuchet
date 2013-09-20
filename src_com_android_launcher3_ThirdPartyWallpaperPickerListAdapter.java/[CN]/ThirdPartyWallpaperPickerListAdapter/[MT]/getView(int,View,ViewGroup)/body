@@ -1,0 +1,15 @@
+{
+  View view;
+  if (convertView == null) {
+    view=mInflater.inflate(R.layout.third_party_wallpaper_picker_item,parent,false);
+  }
+ else {
+    view=convertView;
+  }
+  WallpaperPickerActivity.setWallpaperItemPaddingToZero((FrameLayout)view);
+  ResolveInfo info=mThirdPartyWallpaperPickers.get(position);
+  TextView label=(TextView)view.findViewById(R.id.wallpaper_item_label);
+  label.setText(info.loadLabel(mPackageManager));
+  label.setCompoundDrawablesWithIntrinsicBounds(null,info.loadIcon(mPackageManager),null,null);
+  return view;
+}

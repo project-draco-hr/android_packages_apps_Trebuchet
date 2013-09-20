@@ -12,8 +12,9 @@
  else {
     Log.e(TAG,"Error loading thumbnail for uri=" + uri);
   }
-  mWallpapersView.addView(pickedImageThumbnail,1);
+  mWallpapersView.addView(pickedImageThumbnail,0);
   ThumbnailMetaData meta=new ThumbnailMetaData();
+  meta.mTileType=TileType.WALLPAPER_URI;
   meta.mWallpaperUri=uri;
   pickedImageThumbnail.setTag(meta);
   pickedImageThumbnail.setOnClickListener(mThumbnailOnClickListener);
