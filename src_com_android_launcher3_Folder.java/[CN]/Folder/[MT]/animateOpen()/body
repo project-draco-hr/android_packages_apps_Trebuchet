@@ -17,6 +17,7 @@
       Cling cling=mLauncher.showFirstRunFoldersCling();
       if (cling != null) {
         cling.bringToFront();
+        bringToFront();
       }
       setFocusOnFirstChild();
     }

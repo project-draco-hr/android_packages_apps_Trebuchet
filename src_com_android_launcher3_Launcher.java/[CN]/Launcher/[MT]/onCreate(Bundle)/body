@@ -32,7 +32,6 @@
   setContentView(R.layout.launcher);
   setupViews();
   grid.layout(this);
-  showFirstRunWorkspaceCling();
   registerContentObservers();
   lockAllApps();
   mSavedState=savedInstanceState;
@@ -57,4 +56,5 @@
   registerReceiver(mCloseSystemDialogsReceiver,filter);
   updateGlobalIcons();
   unlockScreenOrientation(true);
+  showFirstRunCling();
 }

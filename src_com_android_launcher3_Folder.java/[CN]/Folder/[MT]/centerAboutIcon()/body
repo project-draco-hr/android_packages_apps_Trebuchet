@@ -4,6 +4,8 @@
   int width=getPaddingLeft() + getPaddingRight() + mContent.getDesiredWidth();
   int height=getFolderHeight();
   float scale=parent.getDescendantRectRelativeToSelf(mFolderIcon,mTempRect);
+  LauncherAppState app=LauncherAppState.getInstance();
+  DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
   int centerX=(int)(mTempRect.left + mTempRect.width() * scale / 2);
   int centerY=(int)(mTempRect.top + mTempRect.height() * scale / 2);
   int centeredLeft=centerX - width / 2;
@@ -17,7 +19,10 @@
   mLauncher.getWorkspace().resetFinalScrollForPageChange(currentPage);
   int left=Math.min(Math.max(bounds.left,centeredLeft),bounds.left + bounds.width() - width);
   int top=Math.min(Math.max(bounds.top,centeredTop),bounds.top + bounds.height() - height);
-  if (width >= bounds.width()) {
+  if (grid.isPhone() && (grid.availableWidthPx - width) < grid.iconSizePx) {
+    left=(grid.availableWidthPx - width) / 2;
+  }
+ else   if (width >= bounds.width()) {
     left=bounds.left + (bounds.width() - width) / 2;
   }
   if (height >= bounds.height()) {

@@ -1,0 +1,10 @@
+{
+  Cling cling=(Cling)findViewById(R.id.first_run_cling);
+  Runnable cb=new Runnable(){
+    public void run(){
+      showFirstRunWorkspaceCling();
+    }
+  }
+;
+  dismissCling(cling,cb,Cling.FIRST_RUN_CLING_DISMISSED_KEY,DISMISS_CLING_DURATION,false);
+}

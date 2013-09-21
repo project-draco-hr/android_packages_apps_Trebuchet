@@ -1,4 +1,4 @@
 int clingId
 int[] positionData
 boolean animate
-int delay
+boolean dimNavBarVisibilty

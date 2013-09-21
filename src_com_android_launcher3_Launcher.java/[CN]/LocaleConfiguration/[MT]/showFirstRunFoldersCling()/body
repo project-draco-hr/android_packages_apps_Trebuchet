@@ -1,6 +1,7 @@
 {
   if (isClingsEnabled() && !mSharedPrefs.getBoolean(Cling.FOLDER_CLING_DISMISSED_KEY,false)) {
-    return initCling(R.id.folder_cling,null,true,0);
+    Cling cling=initCling(R.id.folder_cling,null,true,true);
+    return cling;
   }
  else {
     removeCling(R.id.folder_cling);
