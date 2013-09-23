@@ -1,57 +1,27 @@
 {
-  Set<String> savedIds=new HashSet<String>();
-  for (int i=0; i < in.key.length; i++) {
-    Key key=in.key[i];
-    if (key.type == Key.FAVORITE) {
-      savedIds.add(keyToBackupKey(key));
-    }
-  }
+  Set<String> savedIds=getSavedIdsByType(Key.FAVORITE,in);
   if (DEBUG)   Log.d(TAG,"favorite savedIds.size()=" + savedIds.size());
   ContentResolver cr=getContentResolver();
-  String where=ChangeLogColumns.MODIFIED + " > ?";
-  String[] args={Long.toString(in.t)};
-  String updateOrder=ChangeLogColumns.MODIFIED;
-  Cursor updated=cr.query(Favorites.CONTENT_URI,FAVORITE_PROJECTION,where,args,updateOrder);
-  if (DEBUG)   Log.d(TAG,"favorite updated.getCount()=" + updated.getCount());
+  Cursor cursor=cr.query(Favorites.CONTENT_URI,FAVORITE_PROJECTION,null,null,null);
+  Set<String> currentIds=new HashSet<String>(cursor.getCount());
   try {
-    updated.moveToPosition(-1);
-    while (updated.moveToNext()) {
-      final long id=updated.getLong(ID_INDEX);
+    cursor.moveToPosition(-1);
+    while (cursor.moveToNext()) {
+      final long id=cursor.getLong(ID_INDEX);
+      final long updateTime=cursor.getLong(ID_MODIFIED);
       Key key=getKey(Key.FAVORITE,id);
-      byte[] blob=packFavorite(updated);
-      String backupKey=keyToBackupKey(key);
-      data.writeEntityHeader(backupKey,blob.length);
-      data.writeEntityData(blob,blob.length);
-      out.rows++;
-      out.bytes+=blob.length;
-      Log.v(TAG,"saving favorite " + backupKey + ": "+ id+ "/"+ blob.length);
-      if (DEBUG)       Log.d(TAG,"wrote " + Base64.encodeToString(blob,0,blob.length,Base64.NO_WRAP));
-      savedIds.add(backupKey);
-    }
-  }
-  finally {
-    updated.close();
-  }
-  if (DEBUG)   Log.d(TAG,"favorite savedIds.size()=" + savedIds.size());
-  String idOrder=BaseColumns._ID;
-  Cursor idCursor=cr.query(Favorites.CONTENT_URI,ID_ONLY_PROJECTION,null,null,idOrder);
-  Set<String> currentIds=new HashSet<String>(idCursor.getCount());
-  try {
-    idCursor.moveToPosition(-1);
-    while (idCursor.moveToNext()) {
-      Key key=getKey(Key.FAVORITE,idCursor.getLong(ID_INDEX));
-      currentIds.add(keyToBackupKey(key));
       keys.add(key);
+      currentIds.add(keyToBackupKey(key));
+      if (updateTime > in.t) {
+        byte[] blob=packFavorite(cursor);
+        writeRowToBackup(key,blob,out,data);
+      }
     }
   }
   finally {
-    idCursor.close();
+    cursor.close();
   }
   if (DEBUG)   Log.d(TAG,"favorite currentIds.size()=" + currentIds.size());
   savedIds.removeAll(currentIds);
-  for (  String deleted : savedIds) {
-    Log.v(TAG,"dropping favorite " + deleted);
-    data.writeEntityHeader(deleted,-1);
-    out.rows++;
-  }
+  out.rows+=removeDeletedKeysFromBackup(savedIds,data);
 }

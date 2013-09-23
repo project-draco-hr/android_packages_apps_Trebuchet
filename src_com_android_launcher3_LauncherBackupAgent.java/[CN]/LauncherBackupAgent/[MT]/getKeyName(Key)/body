@@ -1,0 +1,8 @@
+{
+  if (TextUtils.isEmpty(key.name)) {
+    return Long.toString(key.id);
+  }
+ else {
+    return key.name;
+  }
+}
