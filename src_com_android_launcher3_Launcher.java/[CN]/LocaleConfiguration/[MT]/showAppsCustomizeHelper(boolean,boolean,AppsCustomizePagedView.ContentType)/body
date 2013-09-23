@@ -42,7 +42,6 @@
     mStateAnimation.addListener(new AnimatorListenerAdapter(){
       boolean animationCancelled=false;
       @Override public void onAnimationStart(      Animator animation){
-        updateWallpaperVisibility(true);
         toView.setTranslationX(0.0f);
         toView.setTranslationY(0.0f);
         toView.setVisibility(View.VISIBLE);
@@ -51,9 +50,6 @@
       @Override public void onAnimationEnd(      Animator animation){
         dispatchOnLauncherTransitionEnd(fromView,animated,false);
         dispatchOnLauncherTransitionEnd(toView,animated,false);
-        if (!animationCancelled) {
-          updateWallpaperVisibility(false);
-        }
         if (mSearchDropTargetBar != null) {
           mSearchDropTargetBar.hideSearchBar(false);
         }
@@ -115,6 +111,5 @@
     dispatchOnLauncherTransitionPrepare(toView,animated,false);
     dispatchOnLauncherTransitionStart(toView,animated,false);
     dispatchOnLauncherTransitionEnd(toView,animated,false);
-    updateWallpaperVisibility(false);
   }
 }

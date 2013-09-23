@@ -1,6 +1,6 @@
 {
   if (mState != State.WORKSPACE) {
-    boolean wasInSpringLoadedMode=(mState == State.APPS_CUSTOMIZE_SPRING_LOADED);
+    boolean wasInSpringLoadedMode=(mState != State.WORKSPACE);
     mWorkspace.setVisibility(View.VISIBLE);
     hideAppsCustomizeHelper(State.WORKSPACE,animated,false,onCompleteRunnable);
     if (mSearchDropTargetBar != null) {

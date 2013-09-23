@@ -1,5 +1,4 @@
 {
-  updateWallpaperVisibility(true);
   InstallShortcutReceiver.enableInstallQueue();
   super.onPause();
   mPaused=true;
