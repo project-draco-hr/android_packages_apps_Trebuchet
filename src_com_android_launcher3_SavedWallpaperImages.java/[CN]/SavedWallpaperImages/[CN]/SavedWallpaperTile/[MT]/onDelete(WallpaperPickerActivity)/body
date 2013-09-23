@@ -1,0 +1,3 @@
+{
+  a.getSavedImages().deleteImage(mDbId);
+}

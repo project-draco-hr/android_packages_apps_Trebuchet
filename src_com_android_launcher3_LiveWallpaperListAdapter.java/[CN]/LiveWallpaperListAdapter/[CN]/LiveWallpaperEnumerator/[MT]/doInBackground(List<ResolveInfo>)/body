@@ -24,12 +24,10 @@ catch (    IOException e) {
       Log.w(LOG_TAG,"Skipping wallpaper " + resolveInfo.serviceInfo,e);
       continue;
     }
-    LiveWallpaperInfo wallpaper=new LiveWallpaperInfo();
-    wallpaper.intent=new Intent(WallpaperService.SERVICE_INTERFACE);
-    wallpaper.intent.setClassName(info.getPackageName(),info.getServiceName());
-    wallpaper.info=info;
     Drawable thumb=info.loadThumbnail(packageManager);
-    wallpaper.thumbnail=thumb;
+    Intent launchIntent=new Intent(WallpaperService.SERVICE_INTERFACE);
+    launchIntent.setClassName(info.getPackageName(),info.getServiceName());
+    LiveWallpaperTile wallpaper=new LiveWallpaperTile(thumb,info,launchIntent);
     publishProgress(wallpaper);
   }
   return null;

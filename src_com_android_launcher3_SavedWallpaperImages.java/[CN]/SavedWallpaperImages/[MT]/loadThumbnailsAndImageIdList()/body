@@ -1,6 +1,5 @@
 {
-  mIds=new ArrayList<Integer>();
-  mThumbs=new ArrayList<Drawable>();
+  mImages=new ArrayList<SavedWallpaperTile>();
   SQLiteDatabase db=mDb.getReadableDatabase();
   Cursor result=db.query(ImageDb.TABLE_NAME,new String[]{ImageDb.COLUMN_ID,ImageDb.COLUMN_IMAGE_THUMBNAIL_FILENAME},null,null,null,null,ImageDb.COLUMN_ID + " DESC",null);
   while (result.moveToNext()) {
@@ -8,8 +7,7 @@
     File file=new File(mContext.getFilesDir(),filename);
     Bitmap thumb=BitmapFactory.decodeFile(file.getAbsolutePath());
     if (thumb != null) {
-      mIds.add(result.getInt(0));
-      mThumbs.add(new BitmapDrawable(thumb));
+      mImages.add(new SavedWallpaperTile(result.getInt(0),new BitmapDrawable(thumb)));
     }
   }
   result.close();

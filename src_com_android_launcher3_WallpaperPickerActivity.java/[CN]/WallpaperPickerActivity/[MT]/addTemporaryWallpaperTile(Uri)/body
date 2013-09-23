@@ -3,7 +3,8 @@
   FrameLayout pickedImageThumbnail=(FrameLayout)getLayoutInflater().inflate(R.layout.wallpaper_picker_item,mWallpapersView,false);
   setWallpaperItemPaddingToZero(pickedImageThumbnail);
   ImageView image=(ImageView)pickedImageThumbnail.findViewById(R.id.wallpaper_image);
-  Bitmap thumb=createThumbnail(uri,null,false);
+  Point defaultSize=getDefaultThumbnailSize(this.getResources());
+  Bitmap thumb=createThumbnail(defaultSize,this,uri,null,null,0,false);
   if (thumb != null) {
     image.setImageBitmap(thumb);
     Drawable thumbDrawable=image.getDrawable();
@@ -13,10 +14,8 @@
     Log.e(TAG,"Error loading thumbnail for uri=" + uri);
   }
   mWallpapersView.addView(pickedImageThumbnail,0);
-  ThumbnailMetaData meta=new ThumbnailMetaData();
-  meta.mTileType=TileType.WALLPAPER_URI;
-  meta.mWallpaperUri=uri;
-  pickedImageThumbnail.setTag(meta);
+  UriWallpaperInfo info=new UriWallpaperInfo(uri);
+  pickedImageThumbnail.setTag(info);
   pickedImageThumbnail.setOnClickListener(mThumbnailOnClickListener);
   mThumbnailOnClickListener.onClick(pickedImageThumbnail);
 }

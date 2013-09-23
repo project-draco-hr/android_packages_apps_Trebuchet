@@ -1,0 +1,7 @@
+Point size
+Context context
+Uri uri
+byte[] imageBytes
+Resources res
+int resId
+boolean leftAligned

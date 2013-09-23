@@ -1,8 +1,0 @@
-{
-  ArrayList<LiveWallpaperInfo> list=new ArrayList<LiveWallpaperInfo>(amount);
-  for (int i=0; i < amount; i++) {
-    LiveWallpaperInfo info=new LiveWallpaperInfo();
-    list.add(info);
-  }
-  return list;
-}

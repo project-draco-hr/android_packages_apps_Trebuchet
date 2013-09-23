@@ -1,0 +1,8 @@
+{
+  String imageFilename=a.getSavedImages().getImageFilename(mDbId);
+  File file=new File(a.getFilesDir(),imageFilename);
+  CropView v=a.getCropView();
+  v.setTileSource(new BitmapRegionTileSource(a,file.getAbsolutePath(),1024,0),null);
+  v.moveToLeft();
+  v.setTouchEnabled(false);
+}

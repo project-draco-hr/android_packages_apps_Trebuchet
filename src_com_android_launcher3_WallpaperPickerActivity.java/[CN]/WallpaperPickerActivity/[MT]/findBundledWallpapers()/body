@@ -1,13 +1,13 @@
 {
-  mBundledWallpaperThumbs=new ArrayList<Drawable>(24);
-  mBundledWallpaperResIds=new ArrayList<Integer>(24);
+  ArrayList<ResourceWallpaperInfo> bundledWallpapers=new ArrayList<ResourceWallpaperInfo>(24);
   Pair<ApplicationInfo,Integer> r=getWallpaperArrayResourceId();
   if (r != null) {
     try {
-      mWallpaperResources=getPackageManager().getResourcesForApplication(r.first);
-      addWallpapers(mWallpaperResources,r.first.packageName,r.second);
+      Resources wallpaperRes=getPackageManager().getResourcesForApplication(r.first);
+      bundledWallpapers=addWallpapers(wallpaperRes,r.first.packageName,r.second);
     }
  catch (    PackageManager.NameNotFoundException e) {
     }
   }
+  return bundledWallpapers;
 }

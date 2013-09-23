@@ -1,16 +1,18 @@
 {
-  final String[] extras=resources.getStringArray(listResId);
+  ArrayList<ResourceWallpaperInfo> bundledWallpapers=new ArrayList<ResourceWallpaperInfo>(24);
+  final String[] extras=res.getStringArray(listResId);
   for (  String extra : extras) {
-    int res=resources.getIdentifier(extra,"drawable",packageName);
-    if (res != 0) {
-      final int thumbRes=resources.getIdentifier(extra + "_small","drawable",packageName);
+    int resId=res.getIdentifier(extra,"drawable",packageName);
+    if (resId != 0) {
+      final int thumbRes=res.getIdentifier(extra + "_small","drawable",packageName);
       if (thumbRes != 0) {
-        mBundledWallpaperThumbs.add(resources.getDrawable(thumbRes));
-        mBundledWallpaperResIds.add(res);
+        ResourceWallpaperInfo wallpaperInfo=new ResourceWallpaperInfo(res,resId,res.getDrawable(thumbRes));
+        bundledWallpapers.add(wallpaperInfo);
       }
     }
  else {
       Log.e(TAG,"Couldn't find wallpaper " + extra);
     }
   }
+  return bundledWallpapers;
 }

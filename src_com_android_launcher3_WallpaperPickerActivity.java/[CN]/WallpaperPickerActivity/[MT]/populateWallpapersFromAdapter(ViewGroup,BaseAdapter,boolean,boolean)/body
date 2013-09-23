@@ -1,0 +1,14 @@
+{
+  for (int i=0; i < adapter.getCount(); i++) {
+    FrameLayout thumbnail=(FrameLayout)adapter.getView(i,null,parent);
+    parent.addView(thumbnail,i);
+    thumbnail.setTag(adapter.getItem(i));
+    if (addLongPressHandler) {
+      addLongPressHandler(thumbnail);
+    }
+    thumbnail.setOnClickListener(mThumbnailOnClickListener);
+    if (i == 0 && selectFirstTile) {
+      mThumbnailOnClickListener.onClick(thumbnail);
+    }
+  }
+}

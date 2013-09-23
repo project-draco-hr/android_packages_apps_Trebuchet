@@ -1,0 +1,5 @@
+LayoutInflater layoutInflater
+int position
+View convertView
+ViewGroup parent
+Drawable thumb

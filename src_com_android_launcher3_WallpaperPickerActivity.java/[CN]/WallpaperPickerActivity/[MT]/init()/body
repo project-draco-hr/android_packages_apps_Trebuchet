@@ -40,52 +40,16 @@
         }
         return;
       }
+      WallpaperTileInfo info=(WallpaperTileInfo)v.getTag();
       if (mSelectedThumb != null) {
         mSelectedThumb.setSelected(false);
+        mSelectedThumb=null;
       }
-      ThumbnailMetaData meta=(ThumbnailMetaData)v.getTag();
-      if (meta.mTileType == TileType.WALLPAPER_RESOURCE || meta.mTileType == TileType.SAVED_WALLPAPER || meta.mTileType == TileType.WALLPAPER_URI) {
+      if (info.isSelectable()) {
         mSelectedThumb=v;
         v.setSelected(true);
       }
-      if (meta.mTileType == TileType.PICK_IMAGE) {
-        Intent intent=new Intent(Intent.ACTION_GET_CONTENT);
-        intent.setType("image/*");
-        Utilities.startActivityForResultSafely(WallpaperPickerActivity.this,intent,IMAGE_PICK);
-      }
- else       if (meta.mTileType == TileType.WALLPAPER_URI) {
-        mCropView.setTileSource(new BitmapRegionTileSource(WallpaperPickerActivity.this,meta.mWallpaperUri,1024,0),null);
-        mCropView.setTouchEnabled(true);
-      }
- else       if (meta.mTileType == TileType.SAVED_WALLPAPER) {
-        String imageFilename=mSavedImages.getImageFilename(meta.mSavedWallpaperDbId);
-        File file=new File(getFilesDir(),imageFilename);
-        mCropView.setTileSource(new BitmapRegionTileSource(WallpaperPickerActivity.this,file.getAbsolutePath(),1024,0),null);
-        mCropView.moveToLeft();
-        mCropView.setTouchEnabled(false);
-      }
- else       if (meta.mTileType == TileType.LIVE_WALLPAPER) {
-        Intent preview=new Intent(WallpaperManager.ACTION_CHANGE_LIVE_WALLPAPER);
-        preview.putExtra(WallpaperManager.EXTRA_LIVE_WALLPAPER_COMPONENT,meta.mLiveWallpaperInfo.info.getComponent());
-        WallpaperManager wm=WallpaperManager.getInstance(WallpaperPickerActivity.this);
-        mLiveWallpaperInfoOnPickerLaunch=wm.getWallpaperInfo();
-        Utilities.startActivityForResultSafely(WallpaperPickerActivity.this,preview,PICK_LIVE_WALLPAPER);
-      }
- else       if (meta.mTileType == TileType.WALLPAPER_RESOURCE) {
-        BitmapRegionTileSource source=new BitmapRegionTileSource(mWallpaperResources,WallpaperPickerActivity.this,meta.mWallpaperResId,1024,0);
-        mCropView.setTileSource(source,null);
-        Point wallpaperSize=WallpaperCropActivity.getDefaultWallpaperSize(getResources(),getWindowManager());
-        RectF crop=WallpaperCropActivity.getMaxCropRect(source.getImageWidth(),source.getImageHeight(),wallpaperSize.x,wallpaperSize.y,false);
-        mCropView.setScale(wallpaperSize.x / crop.width());
-        mCropView.setTouchEnabled(false);
-      }
- else       if (meta.mTileType == TileType.THIRD_PARTY_WALLPAPER_PICKER) {
-        ResolveInfo info=meta.mThirdPartyWallpaperPickerInfo;
-        final ComponentName itemComponentName=new ComponentName(info.activityInfo.packageName,info.activityInfo.name);
-        Intent launchIntent=new Intent(Intent.ACTION_SET_WALLPAPER);
-        launchIntent.setComponent(itemComponentName);
-        Utilities.startActivityForResultSafely(WallpaperPickerActivity.this,launchIntent,PICK_WALLPAPER_THIRD_PARTY_ACTIVITY);
-      }
+      info.onClick(WallpaperPickerActivity.this);
     }
   }
 ;
@@ -107,28 +71,25 @@
     }
   }
 ;
-  findBundledWallpapers();
+  ArrayList<ResourceWallpaperInfo> wallpapers=findBundledWallpapers();
   mWallpapersView=(LinearLayout)findViewById(R.id.wallpaper_list);
-  ImageAdapter ia=new ImageAdapter(this,mBundledWallpaperThumbs);
-  populateWallpapersFromAdapter(mWallpapersView,ia,mBundledWallpaperResIds,TileType.WALLPAPER_RESOURCE,false,true);
+  BuiltInWallpapersAdapter ia=new BuiltInWallpapersAdapter(this,wallpapers);
+  populateWallpapersFromAdapter(mWallpapersView,ia,false,true);
   mSavedImages=new SavedWallpaperImages(this);
   mSavedImages.loadThumbnailsAndImageIdList();
-  ArrayList<Drawable> savedWallpaperThumbs=mSavedImages.getThumbnails();
-  ArrayList<Integer> savedWallpaperIds=mSavedImages.getImageIds();
-  ia=new ImageAdapter(this,savedWallpaperThumbs);
-  populateWallpapersFromAdapter(mWallpapersView,ia,savedWallpaperIds,TileType.SAVED_WALLPAPER,true,true);
+  populateWallpapersFromAdapter(mWallpapersView,mSavedImages,true,true);
   final LinearLayout liveWallpapersView=(LinearLayout)findViewById(R.id.live_wallpaper_list);
   final LiveWallpaperListAdapter a=new LiveWallpaperListAdapter(this);
   a.registerDataSetObserver(new DataSetObserver(){
     public void onChanged(){
       liveWallpapersView.removeAllViews();
-      populateWallpapersFromAdapter(liveWallpapersView,a,null,TileType.LIVE_WALLPAPER,false,false);
+      populateWallpapersFromAdapter(liveWallpapersView,a,false,false);
     }
   }
 );
   final LinearLayout thirdPartyWallpapersView=(LinearLayout)findViewById(R.id.third_party_wallpaper_list);
   final ThirdPartyWallpaperPickerListAdapter ta=new ThirdPartyWallpaperPickerListAdapter(this);
-  populateWallpapersFromAdapter(thirdPartyWallpapersView,ta,null,TileType.THIRD_PARTY_WALLPAPER_PICKER,false,false);
+  populateWallpapersFromAdapter(thirdPartyWallpapersView,ta,false,false);
   LinearLayout masterWallpaperList=(LinearLayout)findViewById(R.id.master_wallpaper_list);
   FrameLayout galleryThumbnail=(FrameLayout)getLayoutInflater().inflate(R.layout.wallpaper_picker_gallery_item,masterWallpaperList,false);
   setWallpaperItemPaddingToZero(galleryThumbnail);
@@ -140,9 +101,8 @@
     int colorOverlay=getResources().getColor(R.color.wallpaper_picker_translucent_gray);
     galleryThumbnailBg.setColorFilter(colorOverlay,PorterDuff.Mode.SRC_ATOP);
   }
-  ThumbnailMetaData meta=new ThumbnailMetaData();
-  meta.mTileType=TileType.PICK_IMAGE;
-  galleryThumbnail.setTag(meta);
+  PickImageInfo pickImageInfo=new PickImageInfo();
+  galleryThumbnail.setTag(pickImageInfo);
   galleryThumbnail.setOnClickListener(mThumbnailOnClickListener);
   final LayoutTransition transitioner=new LayoutTransition();
   transitioner.setDuration(200);
@@ -153,29 +113,8 @@
   actionBar.setCustomView(R.layout.actionbar_set_wallpaper);
   actionBar.getCustomView().setOnClickListener(new View.OnClickListener(){
     @Override public void onClick(    View v){
-      ThumbnailMetaData meta=(ThumbnailMetaData)mSelectedThumb.getTag();
-      if (meta.mTileType == TileType.PICK_IMAGE) {
-      }
- else       if (meta.mWallpaperUri != null) {
-        boolean finishActivityWhenDone=true;
-        OnBitmapCroppedHandler h=new OnBitmapCroppedHandler(){
-          public void onBitmapCropped(          byte[] imageBytes){
-            Bitmap thumb=createThumbnail(null,imageBytes,true);
-            mSavedImages.writeImage(thumb,imageBytes);
-          }
-        }
-;
-        cropImageAndSetWallpaper(meta.mWallpaperUri,h,finishActivityWhenDone);
-      }
- else       if (meta.mSavedWallpaperDbId != 0) {
-        boolean finishActivityWhenDone=true;
-        String imageFilename=mSavedImages.getImageFilename(meta.mSavedWallpaperDbId);
-        setWallpaper(imageFilename,finishActivityWhenDone);
-      }
- else       if (meta.mWallpaperResId != 0) {
-        boolean finishActivityWhenDone=true;
-        cropImageAndSetWallpaper(mWallpaperResources,meta.mWallpaperResId,finishActivityWhenDone);
-      }
+      WallpaperTileInfo info=(WallpaperTileInfo)mSelectedThumb.getTag();
+      info.onSave(WallpaperPickerActivity.this);
     }
   }
 );
@@ -215,8 +154,7 @@
         for (int i=0; i < childCount; i++) {
           CheckableFrameLayout c=(CheckableFrameLayout)mWallpapersView.getChildAt(i);
           if (c.isChecked()) {
-            ThumbnailMetaData meta=(ThumbnailMetaData)c.getTag();
-            mSavedImages.deleteImage(meta.mSavedWallpaperDbId);
+            ((WallpaperTileInfo)c.getTag()).onDelete();
             viewsToRemove.add(c);
           }
         }

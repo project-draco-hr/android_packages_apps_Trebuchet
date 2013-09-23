@@ -1,6 +1,0 @@
-ViewGroup parent
-BaseAdapter adapter
-ArrayList<Integer> imageIds
-TileType tileType
-boolean addLongPressHandler
-boolean selectFirstTile
