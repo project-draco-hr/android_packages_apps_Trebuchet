@@ -60,6 +60,7 @@
       }
       childWidth=widthSize - horizontalPadding;
       childHeight=heightSize - verticalPadding - mInsets.top- mInsets.bottom;
+      mNormalChildHeight=childHeight;
     }
  else {
       childWidthMode=MeasureSpec.EXACTLY;

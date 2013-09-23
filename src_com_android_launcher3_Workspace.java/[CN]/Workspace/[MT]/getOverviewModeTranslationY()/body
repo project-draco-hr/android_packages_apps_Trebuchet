@@ -1,0 +1,8 @@
+{
+  int childHeight=getNormalChildHeight();
+  int viewPortHeight=getViewportHeight();
+  int scaledChildHeight=(int)(mOverviewModeShrinkFactor * childHeight);
+  int offset=(viewPortHeight - scaledChildHeight) / 2;
+  int offsetDelta=mOverviewModePageOffset - offset + mInsets.top;
+  return offsetDelta;
+}

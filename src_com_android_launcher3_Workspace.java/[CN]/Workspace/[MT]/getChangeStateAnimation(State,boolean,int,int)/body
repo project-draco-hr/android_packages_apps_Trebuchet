@@ -18,6 +18,7 @@
   float finalHotseatAndPageIndicatorAlpha=(stateIsOverview || stateIsSmall) ? 0f : 1f;
   float finalOverviewPanelAlpha=stateIsOverview ? 1f : 0f;
   float finalSearchBarAlpha=stateIsOverview ? 0f : 1f;
+  float finalWorkspaceTranslationY=stateIsOverview ? getOverviewModeTranslationY() : 0;
   boolean zoomIn=true;
   mNewScale=1.0f;
   if (oldStateIsOverview) {
@@ -66,8 +67,6 @@
       mNewBackgroundAlphas[i]=finalBackgroundAlpha;
     }
  else {
-      setScaleX(mNewScale);
-      setScaleY(mNewScale);
       cl.setBackgroundAlpha(finalBackgroundAlpha);
       cl.setShortcutAndWidgetAlpha(finalAlpha);
     }
@@ -75,7 +74,7 @@
   View searchBar=mLauncher.getQsbBar();
   if (animated) {
     LauncherViewPropertyAnimator scale=new LauncherViewPropertyAnimator(this);
-    scale.scaleX(mNewScale).scaleY(mNewScale).setInterpolator(mZoomInInterpolator);
+    scale.scaleX(mNewScale).scaleY(mNewScale).translationY(finalWorkspaceTranslationY).setInterpolator(mZoomInInterpolator);
     anim.play(scale);
     for (int index=0; index < getChildCount(); index++) {
       final int i=index;
@@ -135,6 +134,9 @@
     searchBar.setAlpha(finalSearchBarAlpha);
     AlphaUpdateListener.updateVisibility(searchBar);
     updateCustomContentVisibility();
+    setScaleX(mNewScale);
+    setScaleY(mNewScale);
+    setTranslationY(finalWorkspaceTranslationY);
   }
   if (finalSearchBarAlpha == 0) {
     mLauncher.setVoiceButtonProxyVisible(false);
