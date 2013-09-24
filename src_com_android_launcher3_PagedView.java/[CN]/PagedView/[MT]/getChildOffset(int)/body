@@ -1,7 +1,5 @@
 {
   if (index < 0 || index > getChildCount() - 1)   return 0;
-  final boolean isRtl=isLayoutRtl();
-  if (isRtl)   index=getChildCount() - index - 1;
   int offset=getPageAt(index).getLeft() - getViewportOffsetX();
   return offset;
 }

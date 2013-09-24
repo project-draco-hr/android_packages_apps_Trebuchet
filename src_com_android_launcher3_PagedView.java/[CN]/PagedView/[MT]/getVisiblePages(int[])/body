@@ -1,28 +1,41 @@
 {
   final int pageCount=getChildCount();
   mTmpIntPoint[0]=mTmpIntPoint[1]=0;
+  range[0]=-1;
+  range[1]=-1;
   if (pageCount > 0) {
     int viewportWidth=getViewportWidth();
-    int leftScreen=0;
-    int rightScreen=0;
-    for (leftScreen=getNextPage(); leftScreen >= 0; --leftScreen) {
-      View currPage=getPageAt(leftScreen);
-      mTmpIntPoint[0]=currPage.getMeasuredWidth();
-      Utilities.getDescendantCoordRelativeToParent(currPage,this,mTmpIntPoint,false);
-      if (mTmpIntPoint[0] < 0) {
-        break;
-      }
-    }
-    for (rightScreen=getNextPage(); rightScreen < getChildCount(); ++rightScreen) {
-      View currPage=getPageAt(rightScreen);
+    int curScreen=0;
+    int count=getChildCount();
+    for (int i=0; i < count; i++) {
+      View currPage=getPageAt(i);
       mTmpIntPoint[0]=0;
       Utilities.getDescendantCoordRelativeToParent(currPage,this,mTmpIntPoint,false);
-      if (mTmpIntPoint[0] >= viewportWidth) {
-        break;
+      if (mTmpIntPoint[0] > viewportWidth) {
+        if (range[0] == -1) {
+          continue;
+        }
+ else {
+          break;
+        }
+      }
+      mTmpIntPoint[0]=currPage.getMeasuredWidth();
+      ;
+      Utilities.getDescendantCoordRelativeToParent(currPage,this,mTmpIntPoint,false);
+      if (mTmpIntPoint[0] < 0) {
+        if (range[0] == -1) {
+          continue;
+        }
+ else {
+          break;
+        }
+      }
+      curScreen=i;
+      if (range[0] < 0) {
+        range[0]=curScreen;
       }
     }
-    range[0]=Math.max(0,leftScreen);
-    range[1]=Math.min(rightScreen,getChildCount() - 1);
+    range[1]=curScreen;
   }
  else {
     range[0]=-1;

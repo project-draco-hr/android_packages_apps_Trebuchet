@@ -4,8 +4,14 @@
   if (hasCustomContent()) {
     int index=mScreenOrder.indexOf(CUSTOM_CONTENT_SCREEN_ID);
     int scrollDelta=getScrollForPage(index + 1) - getScrollX();
-    translationX=Math.max(scrollDelta,0);
+    translationX=scrollDelta;
     progress=(1.0f * scrollDelta) / (getScrollForPage(index + 1) - getScrollForPage(index));
+    if (isLayoutRtl()) {
+      translationX=Math.min(0,translationX);
+    }
+ else {
+      translationX=Math.max(0,translationX);
+    }
     progress=Math.max(0,progress);
   }
   if (Float.compare(progress,mLastCustomContentScrollProgress) == 0)   return;

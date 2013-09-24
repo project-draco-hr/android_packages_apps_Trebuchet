@@ -38,8 +38,9 @@
       int scrollOffset=(getViewportWidth() - childWidth) / 2;
       mPageScrolls[i]=childLeft - scrollOffset - offsetX;
       if (i != endIndex - delta) {
+        childLeft+=childWidth + scrollOffset;
         int nextScrollOffset=(getViewportWidth() - getChildWidth(i + delta)) / 2;
-        childLeft+=childWidth + nextScrollOffset;
+        childLeft+=nextScrollOffset;
       }
     }
   }

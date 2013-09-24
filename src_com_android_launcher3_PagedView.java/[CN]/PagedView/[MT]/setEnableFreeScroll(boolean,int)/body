@@ -8,8 +8,14 @@
     snapToPage(snapPage);
   }
  else {
-    mFreeScrollMinScrollX=getScrollForPage(mTempVisiblePagesRange[0]);
-    mFreeScrollMaxScrollX=getScrollForPage(mTempVisiblePagesRange[1]);
+    if (isLayoutRtl()) {
+      mFreeScrollMinScrollX=getScrollForPage(mTempVisiblePagesRange[1]);
+      mFreeScrollMaxScrollX=getScrollForPage(mTempVisiblePagesRange[0]);
+    }
+ else {
+      mFreeScrollMinScrollX=getScrollForPage(mTempVisiblePagesRange[0]);
+      mFreeScrollMaxScrollX=getScrollForPage(mTempVisiblePagesRange[1]);
+    }
     if (getCurrentPage() < mTempVisiblePagesRange[0]) {
       setCurrentPage(mTempVisiblePagesRange[0]);
     }
