@@ -5,7 +5,6 @@
     if (mPressedIcon != null) {
       mPressedIcon.lockDrawableState();
     }
-    mLauncher.updateWallpaperVisibility(true);
     mLauncher.startActivitySafely(v,appInfo.intent,appInfo);
   }
  else   if (v instanceof PagedViewWidget) {

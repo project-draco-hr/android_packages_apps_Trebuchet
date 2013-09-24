@@ -1,3 +1,5 @@
 {
+  int bgAlpha=(int)(255 * (getResources().getInteger(R.integer.config_appsCustomizeSpringLoadedBgAlpha) / 100f));
+  setBackgroundColor(Color.argb(bgAlpha,0,0,0));
   mAppsCustomizePane.setContentType(type);
 }

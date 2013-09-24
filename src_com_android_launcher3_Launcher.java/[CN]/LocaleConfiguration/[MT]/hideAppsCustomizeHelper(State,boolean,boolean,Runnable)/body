@@ -19,7 +19,6 @@
     workspaceAnim=mWorkspace.getChangeStateAnimation(Workspace.State.SPRING_LOADED,animated);
   }
   setPivotsForZoom(fromView,scaleFactor);
-  updateWallpaperVisibility(true);
   showHotseat(animated);
   if (animated) {
     final LauncherViewPropertyAnimator scaleAnim=new LauncherViewPropertyAnimator(fromView);
@@ -40,7 +39,6 @@
     mAppsCustomizeContent.pauseScrolling();
     mStateAnimation.addListener(new AnimatorListenerAdapter(){
       @Override public void onAnimationEnd(      Animator animation){
-        updateWallpaperVisibility(true);
         fromView.setVisibility(View.GONE);
         dispatchOnLauncherTransitionEnd(fromView,animated,true);
         dispatchOnLauncherTransitionEnd(toView,animated,true);
