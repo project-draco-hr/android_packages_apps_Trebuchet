@@ -20,7 +20,6 @@
         }
       }
       mTmpIntPoint[0]=currPage.getMeasuredWidth();
-      ;
       Utilities.getDescendantCoordRelativeToParent(currPage,this,mTmpIntPoint,false);
       if (mTmpIntPoint[0] < 0) {
         if (range[0] == -1) {
