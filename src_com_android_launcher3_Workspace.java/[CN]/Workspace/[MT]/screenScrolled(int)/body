@@ -4,7 +4,8 @@
   updatePageAlphaValues(screenCenter);
   updateStateForCustomContent(screenCenter);
   enableHwLayersOnVisiblePages();
-  if ((mOverScrollX < 0 && !hasCustomContent()) || mOverScrollX > mMaxScrollX) {
+  boolean shouldOverScroll=(mOverScrollX < 0 && (!hasCustomContent() || isLayoutRtl())) || (mOverScrollX > mMaxScrollX && (!hasCustomContent() || !isLayoutRtl()));
+  if (shouldOverScroll) {
     int index=0;
     float pivotX=0f;
     final float leftBiasedPivot=0.25f;

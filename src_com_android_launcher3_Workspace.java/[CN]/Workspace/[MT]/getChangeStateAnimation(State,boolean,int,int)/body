@@ -35,7 +35,7 @@
       mNewScale=mOverviewModeShrinkFactor;
     }
  else     if (stateIsSmall) {
-      mNewScale=mOverviewModeShrinkFactor - 0.1f;
+      mNewScale=mOverviewModeShrinkFactor - 0.3f;
     }
     if (oldStateIsNormal && stateIsSmall) {
       zoomIn=false;

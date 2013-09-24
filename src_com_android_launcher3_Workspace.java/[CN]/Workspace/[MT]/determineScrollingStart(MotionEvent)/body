@@ -10,7 +10,8 @@
     cancelCurrentPageLongPress();
   }
   boolean passRightSwipesToCustomContent=(mTouchDownTime - mCustomContentShowTime) > CUSTOM_CONTENT_GESTURE_DELAY;
-  if (deltaX > 0 && getScreenIdForPageIndex(getCurrentPage()) == CUSTOM_CONTENT_SCREEN_ID && passRightSwipesToCustomContent) {
+  boolean swipeInIgnoreDirection=isLayoutRtl() ? deltaX < 0 : deltaX > 0;
+  if (swipeInIgnoreDirection && getScreenIdForPageIndex(getCurrentPage()) == CUSTOM_CONTENT_SCREEN_ID && passRightSwipesToCustomContent) {
     return;
   }
   if (theta > MAX_SWIPE_ANGLE) {
