@@ -7,8 +7,9 @@
     mErasePaint.setColor(0xFFFFFF);
     mErasePaint.setAlpha(0);
     mErasePaint.setAntiAlias(true);
+    int circleColor=getResources().getColor(R.color.first_run_cling_circle_background_color);
     mBubblePaint=new Paint();
-    mBubblePaint.setColor(0xFFFFFF);
+    mBubblePaint.setColor(circleColor);
     mBubblePaint.setAntiAlias(true);
     mDotPaint=new Paint();
     mDotPaint.setColor(0x72BBED);
