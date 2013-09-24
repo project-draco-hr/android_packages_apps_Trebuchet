@@ -1,0 +1,3 @@
+{
+  values.put(LauncherSettings.ChangeLogColumns.MODIFIED,System.currentTimeMillis());
+}

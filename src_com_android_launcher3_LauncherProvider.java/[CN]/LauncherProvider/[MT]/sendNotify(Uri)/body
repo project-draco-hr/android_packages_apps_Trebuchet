@@ -3,4 +3,5 @@
   if (notify == null || "true".equals(notify)) {
     getContext().getContentResolver().notifyChange(uri,null);
   }
+  LauncherBackupAgent.dataChanged(getContext());
 }
