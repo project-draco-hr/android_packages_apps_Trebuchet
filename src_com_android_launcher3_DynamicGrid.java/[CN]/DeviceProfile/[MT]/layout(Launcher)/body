@@ -1,7 +1,7 @@
 {
   FrameLayout.LayoutParams lp;
   Resources res=launcher.getResources();
-  boolean hasVerticalBarLayout=isLandscape && res.getBoolean(R.bool.hotseat_transpose_layout_with_orientation);
+  boolean hasVerticalBarLayout=isVerticalBarLayout();
   View searchBarSpace=launcher.findViewById(R.id.qsb_bar);
   lp=(FrameLayout.LayoutParams)searchBarSpace.getLayoutParams();
   if (hasVerticalBarLayout) {
