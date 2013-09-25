@@ -1,3 +1,0 @@
-{
-  return (int)(mTargetVelocityY / Math.abs(mTargetVelocityY));
-}

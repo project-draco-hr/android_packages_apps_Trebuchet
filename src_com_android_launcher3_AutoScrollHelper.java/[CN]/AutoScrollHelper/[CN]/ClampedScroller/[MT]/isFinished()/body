@@ -1,3 +1,0 @@
-{
-  return mStopTime > 0 && AnimationUtils.currentAnimationTimeMillis() > mStopTime + mEffectiveRampDown;
-}

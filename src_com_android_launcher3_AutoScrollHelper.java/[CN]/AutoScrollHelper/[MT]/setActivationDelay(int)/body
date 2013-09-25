@@ -1,4 +1,0 @@
-{
-  mActivationDelay=delayMillis;
-  return this;
-}

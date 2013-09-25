@@ -1,5 +1,0 @@
-{
-  mRelativeVelocity[HORIZONTAL]=horizontal / 1000f;
-  mRelativeVelocity[VERTICAL]=vertical / 1000f;
-  return this;
-}

@@ -1,4 +1,0 @@
-{
-  mScroller.setRampUpDuration(durationMillis);
-  return this;
-}

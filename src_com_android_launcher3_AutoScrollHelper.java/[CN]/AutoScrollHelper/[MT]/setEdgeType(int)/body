@@ -1,4 +1,0 @@
-{
-  mEdgeType=type;
-  return this;
-}

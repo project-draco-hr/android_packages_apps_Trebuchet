@@ -1,4 +1,0 @@
-{
-  mExclusive=exclusive;
-  return this;
-}

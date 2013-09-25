@@ -1,4 +1,0 @@
-int direction
-float coordinate
-float srcSize
-float dstSize
