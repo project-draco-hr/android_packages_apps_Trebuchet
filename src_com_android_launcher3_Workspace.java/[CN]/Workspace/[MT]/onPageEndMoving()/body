@@ -28,18 +28,4 @@
     stripEmptyScreens();
     mStripScreensOnPageStopMoving=false;
   }
-  if (hasCustomContent() && getNextPage() == 0 && !mCustomContentShowing) {
-    mCustomContentShowing=true;
-    if (mCustomContentCallbacks != null) {
-      mCustomContentCallbacks.onShow();
-      mCustomContentShowTime=System.currentTimeMillis();
-    }
-  }
- else   if (hasCustomContent() && getNextPage() != 0 && mCustomContentShowing) {
-    mCustomContentShowing=false;
-    if (mCustomContentCallbacks != null) {
-      mCustomContentCallbacks.onHide();
-      mLauncher.resetQSBScroll();
-    }
-  }
 }
