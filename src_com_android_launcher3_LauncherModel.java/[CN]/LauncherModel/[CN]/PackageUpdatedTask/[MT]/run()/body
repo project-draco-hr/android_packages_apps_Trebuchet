@@ -46,9 +46,14 @@ Log.w(TAG,"Nobody to tell about the new app.  Launcher is probably loading.");
 return;
 }
 if (added != null) {
-final ArrayList<ItemInfo> addedInfos=new ArrayList<ItemInfo>(added);
 Callbacks cb=mCallbacks != null ? mCallbacks.get() : null;
+if (!AppsCustomizePagedView.DISABLE_ALL_APPS) {
+addAndBindAddedApps(context,new ArrayList<ItemInfo>(),cb,added);
+}
+ else {
+final ArrayList<ItemInfo> addedInfos=new ArrayList<ItemInfo>(added);
 addAndBindAddedApps(context,addedInfos,cb,added);
+}
 }
 if (modified != null) {
 final ArrayList<AppInfo> modifiedFinal=modified;

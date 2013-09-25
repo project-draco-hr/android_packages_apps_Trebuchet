@@ -1,4 +1,4 @@
 Context context
-ArrayList<ItemInfo> added
+ArrayList<ItemInfo> workspaceApps
 Callbacks callbacks
-ArrayList<AppInfo> addedApps
+ArrayList<AppInfo> allAppsApps

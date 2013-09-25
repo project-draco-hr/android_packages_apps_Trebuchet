@@ -1,5 +1,5 @@
 {
-  if (added.isEmpty()) {
+  if (workspaceApps.isEmpty() && allAppsApps.isEmpty()) {
     return;
   }
   Runnable r=new Runnable(){
@@ -13,7 +13,7 @@
         workspaceScreens.add(screenId);
       }
 synchronized (sBgLock) {
-        Iterator<ItemInfo> iter=added.iterator();
+        Iterator<ItemInfo> iter=workspaceApps.iterator();
         while (iter.hasNext()) {
           ItemInfo a=iter.next();
           final String name=a.title.toString();
@@ -52,24 +52,26 @@ synchronized (sBgLock) {
         }
       }
       updateWorkspaceScreenOrder(context,workspaceScreens);
-      if (!addedShortcutsFinal.isEmpty()) {
+      if (!addedShortcutsFinal.isEmpty() || !allAppsApps.isEmpty()) {
         runOnMainThread(new Runnable(){
           public void run(){
             Callbacks cb=mCallbacks != null ? mCallbacks.get() : null;
             if (callbacks == cb && cb != null) {
-              ItemInfo info=addedShortcutsFinal.get(addedShortcutsFinal.size() - 1);
-              long lastScreenId=info.screenId;
               final ArrayList<ItemInfo> addAnimated=new ArrayList<ItemInfo>();
               final ArrayList<ItemInfo> addNotAnimated=new ArrayList<ItemInfo>();
-              for (              ItemInfo i : addedShortcutsFinal) {
-                if (i.screenId == lastScreenId) {
-                  addAnimated.add(i);
-                }
+              if (!addedShortcutsFinal.isEmpty()) {
+                ItemInfo info=addedShortcutsFinal.get(addedShortcutsFinal.size() - 1);
+                long lastScreenId=info.screenId;
+                for (                ItemInfo i : addedShortcutsFinal) {
+                  if (i.screenId == lastScreenId) {
+                    addAnimated.add(i);
+                  }
  else {
-                  addNotAnimated.add(i);
+                    addNotAnimated.add(i);
+                  }
                 }
               }
-              callbacks.bindAppsAdded(addedWorkspaceScreensFinal,addNotAnimated,addAnimated,addedApps);
+              callbacks.bindAppsAdded(addedWorkspaceScreensFinal,addNotAnimated,addAnimated,allAppsApps);
             }
           }
         }
