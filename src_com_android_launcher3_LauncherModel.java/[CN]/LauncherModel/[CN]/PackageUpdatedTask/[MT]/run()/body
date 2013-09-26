@@ -87,6 +87,9 @@ for (ItemInfo i : infos) {
 deleteItemFromDatabase(context,i);
 }
 }
+String spKey=LauncherAppState.getSharedPreferencesKey();
+SharedPreferences sp=context.getSharedPreferences(spKey,Context.MODE_PRIVATE);
+InstallShortcutReceiver.removeFromInstallQueue(sp,removedPackageNames);
 }
  else {
 for (AppInfo a : removedApps) {

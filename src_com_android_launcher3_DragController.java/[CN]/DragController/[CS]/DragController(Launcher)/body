@@ -4,7 +4,6 @@
   mHandler=new Handler();
   mScrollZone=r.getDimensionPixelSize(R.dimen.scroll_zone);
   mVelocityTracker=VelocityTracker.obtain();
-  mVibrator=(Vibrator)launcher.getSystemService(Context.VIBRATOR_SERVICE);
   float density=r.getDisplayMetrics().density;
   mFlingToDeleteThresholdVelocity=(int)(r.getInteger(R.integer.config_flingToDeleteMinVelocity) * density);
 }
