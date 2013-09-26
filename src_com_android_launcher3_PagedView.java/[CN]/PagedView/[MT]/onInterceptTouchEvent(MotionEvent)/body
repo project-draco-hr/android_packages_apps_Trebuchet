@@ -13,8 +13,8 @@ case MotionEvent.ACTION_MOVE:
 {
       if (mActivePointerId != INVALID_POINTER) {
         determineScrollingStart(ev);
-        break;
       }
+      break;
     }
 case MotionEvent.ACTION_DOWN:
 {
