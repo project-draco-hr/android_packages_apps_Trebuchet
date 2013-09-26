@@ -4,11 +4,10 @@
     FileOutputStream imageFileStream=mContext.openFileOutput(imageFile.getName(),Context.MODE_PRIVATE);
     imageFileStream.write(imageBytes);
     imageFileStream.close();
-    ByteArrayOutputStream stream=new ByteArrayOutputStream();
-    thumbnail.compress(Bitmap.CompressFormat.JPEG,95,stream);
     File thumbFile=File.createTempFile("wallpaperthumb","",mContext.getFilesDir());
     FileOutputStream thumbFileStream=mContext.openFileOutput(thumbFile.getName(),Context.MODE_PRIVATE);
-    thumbFileStream.write(stream.toByteArray());
+    thumbnail.compress(Bitmap.CompressFormat.JPEG,95,thumbFileStream);
+    thumbFileStream.close();
     SQLiteDatabase db=mDb.getWritableDatabase();
     ContentValues values=new ContentValues();
     values.put(ImageDb.COLUMN_IMAGE_THUMBNAIL_FILENAME,thumbFile.getName());
