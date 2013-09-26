@@ -1,6 +1,6 @@
 {
   Rect padding=new Rect();
-  if (isVerticalBarLayout()) {
+  if (orientation == CellLayout.LANDSCAPE && transposeLayoutWithOrientation) {
     padding.set(searchBarSpaceHeightPx,edgeMarginPx,hotseatBarHeightPx,edgeMarginPx);
   }
  else {
