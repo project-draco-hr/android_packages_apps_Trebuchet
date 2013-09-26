@@ -6,14 +6,14 @@
     labelA=mLabelCache.get(keyA);
   }
  else {
-    labelA=a.loadLabel(mPackageManager).toString();
+    labelA=a.loadLabel(mPackageManager).toString().trim();
     mLabelCache.put(keyA,labelA);
   }
   if (mLabelCache.containsKey(keyB)) {
     labelB=mLabelCache.get(keyB);
   }
  else {
-    labelB=b.loadLabel(mPackageManager).toString();
+    labelB=b.loadLabel(mPackageManager).toString().trim();
     mLabelCache.put(keyB,labelB);
   }
   return mCollator.compare(labelA,labelB);
