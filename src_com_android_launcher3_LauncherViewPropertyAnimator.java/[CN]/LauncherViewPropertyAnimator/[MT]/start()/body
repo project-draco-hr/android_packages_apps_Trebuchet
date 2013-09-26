@@ -28,6 +28,9 @@
   if (mPropertiesToSet.contains(Properties.INTERPOLATOR)) {
     mViewPropertyAnimator.setInterpolator(mInterpolator);
   }
+  if (mPropertiesToSet.contains(Properties.WITH_LAYER)) {
+    mViewPropertyAnimator.withLayer();
+  }
   mViewPropertyAnimator.setListener(this);
   mViewPropertyAnimator.start();
   LauncherAnimUtils.cancelOnDestroyActivity(this);

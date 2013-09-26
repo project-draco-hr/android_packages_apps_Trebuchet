@@ -1,0 +1,3 @@
+{
+  return super.enableRotation() || Launcher.sForceEnableRotation;
+}

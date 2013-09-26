@@ -40,7 +40,6 @@
     mStateAnimation.play(scaleAnim).after(startDelay);
     mStateAnimation.play(alphaAnim).after(startDelay);
     mStateAnimation.addListener(new AnimatorListenerAdapter(){
-      boolean animationCancelled=false;
       @Override public void onAnimationStart(      Animator animation){
         toView.setTranslationX(0.0f);
         toView.setTranslationY(0.0f);
@@ -53,9 +52,6 @@
         if (mSearchDropTargetBar != null) {
           mSearchDropTargetBar.hideSearchBar(false);
         }
-      }
-      @Override public void onAnimationCancel(      Animator animation){
-        animationCancelled=true;
       }
     }
 );
