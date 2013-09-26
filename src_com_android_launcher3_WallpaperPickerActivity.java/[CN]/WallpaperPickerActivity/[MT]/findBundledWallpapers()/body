@@ -9,5 +9,9 @@
  catch (    PackageManager.NameNotFoundException e) {
     }
   }
+  ResourceWallpaperInfo defaultWallpaperInfo=getDefaultWallpaperInfo();
+  if (defaultWallpaperInfo != null) {
+    bundledWallpapers.add(0,defaultWallpaperInfo);
+  }
   return bundledWallpapers;
 }
