@@ -1,13 +1,7 @@
 {
   boolean isVisible=true;
   boolean isUninstall=false;
-  if (isAllAppsWidget(source,info)) {
-    isVisible=false;
-  }
-  if (willAcceptDrop(info)) {
-    isVisible=true;
-  }
- else {
+  if (!willAcceptDrop(info) || isAllAppsWidget(source,info)) {
     isVisible=false;
   }
   if (isUninstall) {
