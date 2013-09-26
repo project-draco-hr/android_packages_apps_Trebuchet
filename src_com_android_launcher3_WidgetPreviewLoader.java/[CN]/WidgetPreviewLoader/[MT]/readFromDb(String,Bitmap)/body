@@ -11,8 +11,13 @@
     final BitmapFactory.Options opts=mCachedBitmapFactoryOptions.get();
     opts.inBitmap=b;
     opts.inSampleSize=1;
-    Bitmap out=BitmapFactory.decodeByteArray(blob,0,blob.length,opts);
-    return out;
+    try {
+      return BitmapFactory.decodeByteArray(blob,0,blob.length,opts);
+    }
+ catch (    IllegalArgumentException e) {
+      removeItemFromDb(mDb,name);
+      return null;
+    }
   }
  else {
     result.close();

@@ -1,8 +1,9 @@
 {
-  String name=getObjectName(o);
+  final String name=getObjectName(o);
+  final String packageName=getObjectPackage(o);
   boolean packageValid=true;
 synchronized (sInvalidPackages) {
-    packageValid=!sInvalidPackages.contains(getObjectPackage(o));
+    packageValid=!sInvalidPackages.contains(packageName);
   }
   if (!packageValid) {
     return null;
