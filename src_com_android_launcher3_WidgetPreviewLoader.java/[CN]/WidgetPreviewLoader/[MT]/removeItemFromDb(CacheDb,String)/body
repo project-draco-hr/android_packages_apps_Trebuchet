@@ -1,0 +1,10 @@
+{
+  new AsyncTask<Void,Void,Void>(){
+    public Void doInBackground(    Void... args){
+      SQLiteDatabase db=cacheDb.getWritableDatabase();
+      db.delete(CacheDb.TABLE_NAME,CacheDb.COLUMN_NAME + " = ? ",new String[]{objectName});
+      return null;
+    }
+  }
+.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,(Void)null);
+}

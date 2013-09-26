@@ -5,5 +5,5 @@
   }
   LauncherAppState.setApplicationContext(context.getApplicationContext());
   LauncherAppState app=LauncherAppState.getInstance();
-  WidgetPreviewLoader.removeFromDb(app.getWidgetPreviewCacheDb(),packageName);
+  WidgetPreviewLoader.removePackageFromDb(app.getWidgetPreviewCacheDb(),packageName);
 }
