@@ -1,6 +1,6 @@
 {
   if (isClingsEnabled() && !mSharedPrefs.getBoolean(Cling.WORKSPACE_CLING_DISMISSED_KEY,false)) {
-    initCling(R.id.workspace_cling,null,false,true);
+    initCling(R.id.workspace_cling,0,false,true);
   }
  else {
     removeCling(R.id.workspace_cling);

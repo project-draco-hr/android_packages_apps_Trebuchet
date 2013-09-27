@@ -4,22 +4,23 @@
   if (mDrawIdentifier.equals(WORKSPACE_PORTRAIT) || mDrawIdentifier.equals(WORKSPACE_LANDSCAPE) || mDrawIdentifier.equals(WORKSPACE_LARGE)|| mDrawIdentifier.equals(WORKSPACE_CUSTOM)) {
     View content=getContent();
     content.setAlpha(0f);
-    content.animate().alpha(1f).setDuration(duration).setListener(new AnimatorListenerAdapter(){
-      public void onAnimationEnd(      Animator animation){
-      }
-    }
-).start();
+    content.animate().alpha(1f).setDuration(duration).setListener(null).start();
     setAlpha(1f);
   }
  else {
     if (animate) {
       buildLayer();
       setAlpha(0f);
-      animate().alpha(1f).setInterpolator(new AccelerateInterpolator()).setDuration(duration).start();
+      animate().alpha(1f).setInterpolator(new AccelerateInterpolator()).setDuration(duration).setListener(null).start();
     }
  else {
       setAlpha(1f);
     }
+  }
+  if (mScrimView != null) {
+    mScrimView.setVisibility(View.VISIBLE);
+    mScrimView.setAlpha(0f);
+    mScrimView.animate().alpha(1f).setDuration(duration).setListener(null).start();
   }
   setFocusableInTouchMode(true);
   post(new Runnable(){

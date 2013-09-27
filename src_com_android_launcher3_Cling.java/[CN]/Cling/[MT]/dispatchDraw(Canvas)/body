@@ -8,20 +8,20 @@
     }
     Bitmap eraseBg=null;
     Canvas eraseCanvas=null;
-    if (mBackground != null) {
+    if (mScrimView != null) {
+      mScrimView.setBackgroundColor(mBackgroundColor);
+    }
+ else     if (mBackground != null) {
       mBackground.setBounds(0,0,getMeasuredWidth(),getMeasuredHeight());
       mBackground.draw(canvas);
-    }
- else     if (mDrawIdentifier.equals(FOLDER_PORTRAIT) || mDrawIdentifier.equals(FOLDER_LANDSCAPE) || mDrawIdentifier.equals(FOLDER_LARGE)) {
-      canvas.drawColor(0xcc000000);
     }
  else     if (mDrawIdentifier.equals(WORKSPACE_PORTRAIT) || mDrawIdentifier.equals(WORKSPACE_LANDSCAPE) || mDrawIdentifier.equals(WORKSPACE_LARGE)) {
       eraseBg=Bitmap.createBitmap(getMeasuredWidth(),getMeasuredHeight(),Bitmap.Config.ARGB_8888);
       eraseCanvas=new Canvas(eraseBg);
-      eraseCanvas.drawColor(0xdd000000);
+      eraseCanvas.drawColor(mBackgroundColor);
     }
  else {
-      canvas.drawColor(0xdd000000);
+      canvas.drawColor(mBackgroundColor);
     }
     DisplayMetrics metrics=new DisplayMetrics();
     mLauncher.getWindowManager().getDefaultDisplay().getMetrics(metrics);

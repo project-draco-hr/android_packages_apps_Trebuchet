@@ -1,4 +1,4 @@
 int clingId
-int[] positionData
+int scrimId
 boolean animate
 boolean dimNavBarVisibilty
