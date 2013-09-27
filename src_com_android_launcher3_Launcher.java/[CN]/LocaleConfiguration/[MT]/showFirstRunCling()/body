@@ -26,7 +26,7 @@
         ccHint.setVisibility(View.VISIBLE);
       }
     }
-    initCling(R.id.first_run_cling,null,false,true);
+    initCling(R.id.first_run_cling,0,false,true);
   }
  else {
     removeCling(R.id.first_run_cling);
