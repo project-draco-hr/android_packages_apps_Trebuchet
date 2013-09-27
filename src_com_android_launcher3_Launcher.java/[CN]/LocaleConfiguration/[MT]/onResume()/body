@@ -13,7 +13,6 @@
   }
   mOnResumeState=State.NONE;
   setWorkspaceBackground(mState == State.WORKSPACE);
-  InstallShortcutReceiver.disableAndFlushInstallQueue(this);
   mPaused=false;
   sPausedFromUserAction=false;
   if (mRestoring || mOnResumeNeedsLoad) {
@@ -53,7 +52,11 @@
   if (mAppsCustomizeContent != null) {
     mAppsCustomizeContent.resetDrawableState();
   }
+  if (mAppsCustomizeTabHost != null) {
+    mAppsCustomizeTabHost.reset();
+  }
   getWorkspace().reinflateWidgetsIfNecessary();
+  InstallShortcutReceiver.disableAndFlushInstallQueue(this);
   updateGlobalIcons();
   if (DEBUG_RESUME_TIME) {
     Log.d(TAG,"Time spent in onResume: " + (System.currentTimeMillis() - startTime));
