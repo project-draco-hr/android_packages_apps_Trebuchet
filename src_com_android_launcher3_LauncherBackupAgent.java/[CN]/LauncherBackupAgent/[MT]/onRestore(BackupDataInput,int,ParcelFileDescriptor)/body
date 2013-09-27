@@ -28,6 +28,9 @@ case Key.SCREEN:
 case Key.ICON:
 restoreIcon(key,buffer,dataSize,keys);
 break;
+case Key.WIDGET:
+restoreWidget(key,buffer,dataSize,keys);
+break;
 default :
 Log.w(TAG,"unknown restore entity type: " + key.type);
 break;
