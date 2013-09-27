@@ -19,6 +19,7 @@
   }
   Bitmap icon=data.getParcelableExtra(Intent.EXTRA_SHORTCUT_ICON);
   Intent.ShortcutIconResource iconResource=data.getParcelableExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE);
+  LauncherAppState.setApplicationContext(context.getApplicationContext());
   LauncherAppState app=LauncherAppState.getInstance();
   boolean launcherNotLoaded=(app.getDynamicGrid() == null);
   PendingInstallShortcutInfo info=new PendingInstallShortcutInfo(data,name,intent);
