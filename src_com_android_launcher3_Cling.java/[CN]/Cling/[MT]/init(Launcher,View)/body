@@ -1,6 +1,8 @@
 {
   if (!mIsInitialized) {
     mLauncher=l;
+    mScrimView=scrim;
+    mBackgroundColor=0xdd000000;
     setOnLongClickListener(this);
     mErasePaint=new Paint();
     mErasePaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.MULTIPLY));

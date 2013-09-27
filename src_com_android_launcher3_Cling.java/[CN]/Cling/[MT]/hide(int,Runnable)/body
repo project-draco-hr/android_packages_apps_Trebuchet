@@ -1,27 +1,29 @@
 {
   if (mDrawIdentifier.equals(FIRST_RUN_PORTRAIT) || mDrawIdentifier.equals(FIRST_RUN_LANDSCAPE)) {
     View content=getContent();
-    ObjectAnimator anim=LauncherAnimUtils.ofFloat(content,"alpha",0f);
-    anim.setDuration(duration);
-    anim.addListener(new AnimatorListenerAdapter(){
+    content.animate().alpha(0f).setDuration(duration).setListener(new AnimatorListenerAdapter(){
       public void onAnimationEnd(      Animator animation){
         setVisibility(View.GONE);
         postCb.run();
       }
     }
-);
-    anim.start();
+).start();
   }
  else {
-    ObjectAnimator anim=LauncherAnimUtils.ofFloat(this,"alpha",0f);
-    anim.setDuration(duration);
-    anim.addListener(new AnimatorListenerAdapter(){
+    animate().alpha(0f).setDuration(duration).setListener(new AnimatorListenerAdapter(){
       public void onAnimationEnd(      Animator animation){
         setVisibility(View.GONE);
         postCb.run();
       }
     }
-);
-    anim.start();
+).start();
+  }
+  if (mScrimView != null) {
+    mScrimView.animate().alpha(0f).setDuration(duration).setListener(new AnimatorListenerAdapter(){
+      public void onAnimationEnd(      Animator animation){
+        mScrimView.setVisibility(View.GONE);
+      }
+    }
+).start();
   }
 }

@@ -1,7 +1,11 @@
 {
-  final Cling cling=(Cling)findViewById(clingId);
+  Cling cling=(Cling)findViewById(clingId);
+  View scrim=null;
+  if (scrimId > 0) {
+    scrim=findViewById(R.id.scrim);
+  }
   if (cling != null) {
-    cling.init(this,positionData);
+    cling.init(this,scrim);
     cling.show(animate,SHOW_CLING_DURATION);
     if (dimNavBarVisibilty) {
       cling.setSystemUiVisibility(cling.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LOW_PROFILE);
