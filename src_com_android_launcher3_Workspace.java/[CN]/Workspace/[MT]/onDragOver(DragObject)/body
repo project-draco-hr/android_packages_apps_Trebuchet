@@ -51,22 +51,24 @@
       mapPointFromSelfToChild(mDragTargetLayout,mDragViewVisualCenter,null);
     }
     ItemInfo info=(ItemInfo)d.dragInfo;
-    mTargetCell=findNearestArea((int)mDragViewVisualCenter[0],(int)mDragViewVisualCenter[1],item.spanX,item.spanY,mDragTargetLayout,mTargetCell);
-    setCurrentDropOverCell(mTargetCell[0],mTargetCell[1]);
-    float targetCellDistance=mDragTargetLayout.getDistanceFromCell(mDragViewVisualCenter[0],mDragViewVisualCenter[1],mTargetCell);
-    final View dragOverView=mDragTargetLayout.getChildAt(mTargetCell[0],mTargetCell[1]);
-    manageFolderFeedback(info,mDragTargetLayout,mTargetCell,targetCellDistance,dragOverView);
     int minSpanX=item.spanX;
     int minSpanY=item.spanY;
     if (item.minSpanX > 0 && item.minSpanY > 0) {
       minSpanX=item.minSpanX;
       minSpanY=item.minSpanY;
     }
+    mTargetCell=findNearestArea((int)mDragViewVisualCenter[0],(int)mDragViewVisualCenter[1],minSpanX,minSpanY,mDragTargetLayout,mTargetCell);
+    int reorderX=mTargetCell[0];
+    int reorderY=mTargetCell[1];
+    setCurrentDropOverCell(mTargetCell[0],mTargetCell[1]);
+    float targetCellDistance=mDragTargetLayout.getDistanceFromCell(mDragViewVisualCenter[0],mDragViewVisualCenter[1],mTargetCell);
+    final View dragOverView=mDragTargetLayout.getChildAt(mTargetCell[0],mTargetCell[1]);
+    manageFolderFeedback(info,mDragTargetLayout,mTargetCell,targetCellDistance,dragOverView);
     boolean nearestDropOccupied=mDragTargetLayout.isNearestDropLocationOccupied((int)mDragViewVisualCenter[0],(int)mDragViewVisualCenter[1],item.spanX,item.spanY,child,mTargetCell);
     if (!nearestDropOccupied) {
       mDragTargetLayout.visualizeDropLocation(child,mDragOutline,(int)mDragViewVisualCenter[0],(int)mDragViewVisualCenter[1],mTargetCell[0],mTargetCell[1],item.spanX,item.spanY,false,d.dragView.getDragVisualizeOffset(),d.dragView.getDragRegion());
     }
- else     if ((mDragMode == DRAG_MODE_NONE || mDragMode == DRAG_MODE_REORDER) && !mReorderAlarm.alarmPending() && (mLastReorderX != mTargetCell[0] || mLastReorderY != mTargetCell[1])) {
+ else     if ((mDragMode == DRAG_MODE_NONE || mDragMode == DRAG_MODE_REORDER) && !mReorderAlarm.alarmPending() && (mLastReorderX != reorderX || mLastReorderY != reorderY)) {
       ReorderAlarmListener listener=new ReorderAlarmListener(mDragViewVisualCenter,minSpanX,minSpanY,item.spanX,item.spanY,d.dragView,child);
       mReorderAlarm.setOnAlarmListener(listener);
       mReorderAlarm.setAlarm(REORDER_TIMEOUT);
