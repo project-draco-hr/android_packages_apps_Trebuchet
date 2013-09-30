@@ -12,24 +12,30 @@
     mHotseat.setOnLongClickListener(this);
   }
   mOverviewPanel=findViewById(R.id.overview_panel);
-  findViewById(R.id.widget_button).setOnClickListener(new OnClickListener(){
+  View widgetButton=findViewById(R.id.widget_button);
+  widgetButton.setOnClickListener(new OnClickListener(){
     @Override public void onClick(    View arg0){
       showAllApps(true,AppsCustomizePagedView.ContentType.Widgets);
     }
   }
 );
-  findViewById(R.id.wallpaper_button).setOnClickListener(new OnClickListener(){
+  widgetButton.setOnTouchListener(getHapticFeedbackTouchListener());
+  View wallpaperButton=findViewById(R.id.wallpaper_button);
+  wallpaperButton.setOnClickListener(new OnClickListener(){
     @Override public void onClick(    View arg0){
       startWallpaper();
     }
   }
 );
-  findViewById(R.id.settings_button).setOnClickListener(new OnClickListener(){
+  wallpaperButton.setOnTouchListener(getHapticFeedbackTouchListener());
+  View settingsButton=findViewById(R.id.settings_button);
+  settingsButton.setOnClickListener(new OnClickListener(){
     @Override public void onClick(    View arg0){
       startSettings();
     }
   }
 );
+  settingsButton.setOnTouchListener(getHapticFeedbackTouchListener());
   mOverviewPanel.setAlpha(0f);
   mWorkspace.setHapticFeedbackEnabled(false);
   mWorkspace.setOnLongClickListener(this);
