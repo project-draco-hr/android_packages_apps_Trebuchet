@@ -1,9 +1,5 @@
 {
   super.onStartReordering();
-  int count=getChildCount();
-  for (int i=0; i < count; i++) {
-    ((CellLayout)getChildAt(i)).setUseActiveGlowBackground(true);
-  }
   showOutlines();
   setLayoutTransition(null);
 }
