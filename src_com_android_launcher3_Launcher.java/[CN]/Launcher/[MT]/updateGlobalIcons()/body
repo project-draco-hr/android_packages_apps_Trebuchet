@@ -3,7 +3,9 @@
   boolean voiceVisible=false;
   int coi=getCurrentOrientationIndexForGlobalIcons();
   if (sGlobalSearchIcon[coi] == null || sVoiceSearchIcon[coi] == null || sAppMarketIcon[coi] == null) {
-    updateAppMarketIcon();
+    if (!DISABLE_MARKET_BUTTON) {
+      updateAppMarketIcon();
+    }
     searchVisible=updateGlobalSearchIcon();
     voiceVisible=updateVoiceSearchIcon(searchVisible);
   }
@@ -15,7 +17,7 @@
     updateVoiceSearchIcon(sVoiceSearchIcon[coi]);
     voiceVisible=true;
   }
-  if (sAppMarketIcon[coi] != null) {
+  if (!DISABLE_MARKET_BUTTON && sAppMarketIcon[coi] != null) {
     updateAppMarketIcon(sAppMarketIcon[coi]);
   }
   if (mSearchDropTargetBar != null) {
