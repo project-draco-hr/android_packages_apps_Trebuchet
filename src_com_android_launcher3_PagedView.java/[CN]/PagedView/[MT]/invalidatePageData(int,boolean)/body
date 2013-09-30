@@ -18,4 +18,7 @@
     loadAssociatedPages(mCurrentPage,immediateAndOnly);
     requestLayout();
   }
+  if (isPageMoving()) {
+    snapToDestination();
+  }
 }
