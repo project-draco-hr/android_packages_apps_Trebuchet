@@ -1,8 +1,10 @@
 {
-  Resources r=getResources();
-  Drawable marketIconDrawable=d.newDrawable(r);
-  int w=r.getDimensionPixelSize(R.dimen.toolbar_external_icon_width);
-  int h=r.getDimensionPixelSize(R.dimen.toolbar_external_icon_height);
-  marketIconDrawable.setBounds(0,0,w,h);
-  updateTextButtonWithDrawable(R.id.market_button,marketIconDrawable);
+  if (!DISABLE_MARKET_BUTTON) {
+    Resources r=getResources();
+    Drawable marketIconDrawable=d.newDrawable(r);
+    int w=r.getDimensionPixelSize(R.dimen.toolbar_external_icon_width);
+    int h=r.getDimensionPixelSize(R.dimen.toolbar_external_icon_height);
+    marketIconDrawable.setBounds(0,0,w,h);
+    updateTextButtonWithDrawable(R.id.market_button,marketIconDrawable);
+  }
 }

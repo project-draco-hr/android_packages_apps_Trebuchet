@@ -1,8 +1,10 @@
 {
-  if (mAppMarketIntent != null) {
-    startActivitySafely(v,mAppMarketIntent,"app market");
-  }
+  if (!DISABLE_MARKET_BUTTON) {
+    if (mAppMarketIntent != null) {
+      startActivitySafely(v,mAppMarketIntent,"app market");
+    }
  else {
-    Log.e(TAG,"Invalid app market intent.");
+      Log.e(TAG,"Invalid app market intent.");
+    }
   }
 }
