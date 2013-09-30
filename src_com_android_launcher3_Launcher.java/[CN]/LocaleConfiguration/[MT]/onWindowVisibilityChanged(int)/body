@@ -25,7 +25,9 @@
       }
 );
     }
-    updateAppMarketIcon();
+    if (!DISABLE_MARKET_BUTTON) {
+      updateAppMarketIcon();
+    }
     clearTypedText();
   }
 }

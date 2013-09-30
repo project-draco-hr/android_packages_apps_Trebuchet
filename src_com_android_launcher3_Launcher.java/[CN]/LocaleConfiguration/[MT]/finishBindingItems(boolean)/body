@@ -19,7 +19,9 @@
     completeAdd(sPendingAddList.get(i));
   }
   sPendingAddList.clear();
-  updateAppMarketIcon();
+  if (!DISABLE_MARKET_BUTTON) {
+    updateAppMarketIcon();
+  }
   mWorkspaceLoading=false;
   if (upgradePath) {
     mWorkspace.getUniqueComponents(true,null);
