@@ -1,0 +1,7 @@
+{
+  if (getPageIndicator() != null) {
+    getPageIndicator().setOnClickListener(getPageIndicatorClickListener());
+  }
+  AccessibilityManager am=(AccessibilityManager)getContext().getSystemService(Context.ACCESSIBILITY_SERVICE);
+  sAccessibilityEnabled=am.isEnabled();
+}

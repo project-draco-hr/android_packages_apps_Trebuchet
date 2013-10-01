@@ -12,5 +12,6 @@
     ((Insettable)customContent).setInsets(mInsets);
   }
   customScreen.addViewToCellLayout(customContent,0,0,lp,true);
+  mCustomContentDescription=description;
   mCustomContentCallbacks=callbacks;
 }

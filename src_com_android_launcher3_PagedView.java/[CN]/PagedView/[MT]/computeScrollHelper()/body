@@ -9,6 +9,7 @@
     return true;
   }
  else   if (mNextPage != INVALID_PAGE) {
+    sendScrollAccessibilityEvent();
     mCurrentPage=Math.max(0,Math.min(mNextPage,getPageCount() - 1));
     mNextPage=INVALID_PAGE;
     notifyPageSwitchListener();
@@ -20,11 +21,9 @@
       pageEndMoving();
     }
     onPostReorderingAnimationCompleted();
-    AccessibilityManager accessibilityManager=(AccessibilityManager)getContext().getSystemService(Context.ACCESSIBILITY_SERVICE);
-    if (accessibilityManager.isEnabled()) {
-      AccessibilityEvent ev=AccessibilityEvent.obtain(AccessibilityEvent.TYPE_VIEW_SCROLLED);
-      ev.getText().add(getCurrentPageDescription());
-      sendAccessibilityEventUnchecked(ev);
+    AccessibilityManager am=(AccessibilityManager)getContext().getSystemService(Context.ACCESSIBILITY_SERVICE);
+    if (am.isEnabled()) {
+      announceForAccessibility(getCurrentPageDescription());
     }
     return true;
   }
