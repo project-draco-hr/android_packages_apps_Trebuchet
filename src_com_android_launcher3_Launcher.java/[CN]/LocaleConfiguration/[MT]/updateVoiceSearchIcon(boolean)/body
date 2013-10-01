@@ -21,14 +21,14 @@
     }
     if (voiceButtonContainer != null)     voiceButtonContainer.setVisibility(View.VISIBLE);
     voiceButton.setVisibility(View.VISIBLE);
-    setVoiceButtonProxyVisible(true);
+    updateVoiceButtonProxyVisible(false);
     invalidatePressedFocusedStates(voiceButtonContainer,voiceButton);
     return true;
   }
  else {
     if (voiceButtonContainer != null)     voiceButtonContainer.setVisibility(View.GONE);
     if (voiceButton != null)     voiceButton.setVisibility(View.GONE);
-    setVoiceButtonProxyVisible(false);
+    updateVoiceButtonProxyVisible(false);
     return false;
   }
 }

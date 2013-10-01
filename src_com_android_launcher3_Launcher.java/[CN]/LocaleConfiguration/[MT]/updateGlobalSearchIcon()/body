@@ -21,7 +21,7 @@
     if (voiceButtonContainer != null)     voiceButtonContainer.setVisibility(View.GONE);
     if (searchButton != null)     searchButton.setVisibility(View.GONE);
     if (voiceButton != null)     voiceButton.setVisibility(View.GONE);
-    setVoiceButtonProxyVisible(false);
+    updateVoiceButtonProxyVisible(false);
     return false;
   }
 }

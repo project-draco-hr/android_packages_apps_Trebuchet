@@ -127,12 +127,7 @@
     setScaleY(mNewScale);
     setTranslationY(finalWorkspaceTranslationY);
   }
-  if (finalSearchBarAlpha == 0) {
-    mLauncher.setVoiceButtonProxyVisible(false);
-  }
- else {
-    mLauncher.setVoiceButtonProxyVisible(true);
-  }
+  mLauncher.updateVoiceButtonProxyVisible(false);
   if (stateIsSpringLoaded) {
     animateBackgroundGradient(getResources().getInteger(R.integer.config_appsCustomizeSpringLoadedBgAlpha) / 100f,false);
   }
