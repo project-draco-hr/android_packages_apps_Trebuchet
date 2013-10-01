@@ -1,8 +1,8 @@
 {
   super.onStop();
-  final View wallpaperStrip=findViewById(R.id.wallpaper_strip);
-  if (wallpaperStrip.getTranslationY() > 0) {
-    wallpaperStrip.setTranslationY(0);
-    wallpaperStrip.setAlpha(1f);
+  mWallpaperStrip=findViewById(R.id.wallpaper_strip);
+  if (mWallpaperStrip.getTranslationY() > 0f) {
+    mWallpaperStrip.setTranslationY(0f);
+    mWallpaperStrip.setAlpha(1f);
   }
 }
