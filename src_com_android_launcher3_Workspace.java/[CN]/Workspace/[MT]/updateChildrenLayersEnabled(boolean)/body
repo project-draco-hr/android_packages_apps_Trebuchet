@@ -9,7 +9,7 @@
  else {
       for (int i=0; i < getPageCount(); i++) {
         final CellLayout cl=(CellLayout)getChildAt(i);
-        cl.disableHardwareLayers();
+        cl.enableHardwareLayer(false);
       }
     }
   }

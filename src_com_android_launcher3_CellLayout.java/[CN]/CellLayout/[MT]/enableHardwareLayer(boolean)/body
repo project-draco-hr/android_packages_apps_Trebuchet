@@ -1,0 +1,3 @@
+{
+  mShortcutsAndWidgets.setLayerType(hasLayer ? LAYER_TYPE_HARDWARE : LAYER_TYPE_NONE,sPaint);
+}
