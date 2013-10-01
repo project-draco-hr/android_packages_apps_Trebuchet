@@ -7,7 +7,7 @@
     view=convertView;
   }
   WallpaperPickerActivity.setWallpaperItemPaddingToZero((FrameLayout)view);
-  ResolveInfo info=mThirdPartyWallpaperPickers.get(position);
+  ResolveInfo info=mThirdPartyWallpaperPickers.get(position).mResolveInfo;
   TextView label=(TextView)view.findViewById(R.id.wallpaper_item_label);
   label.setText(info.loadLabel(mPackageManager));
   label.setCompoundDrawablesWithIntrinsicBounds(null,info.loadIcon(mPackageManager),null,null);

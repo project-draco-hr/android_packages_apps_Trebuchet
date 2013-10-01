@@ -2,9 +2,10 @@
   if (getChildCount() <= 1) {
     return 0;
   }
-  final int firstIndex=isLayoutRtl() ? getChildCount() - 2 : 1;
-  int extra=numExtraScreensToIgnore();
-  final int lastIndex=isLayoutRtl() ? 0 + extra : getChildCount() - 1 - extra;
+  final int startPage=hasCustomContent() ? 1 : 0;
+  final int firstIndex=isLayoutRtl() ? getChildCount() - 1 - startPage : startPage;
+  int emptyExtraPages=numExtraScreensToIgnore();
+  final int lastIndex=isLayoutRtl() ? 0 + emptyExtraPages : getChildCount() - 1 - emptyExtraPages;
   int firstPageScrollX=getScrollForPage(firstIndex);
   int scrollRange=getScrollForPage(lastIndex) - firstPageScrollX;
   if (scrollRange == 0) {
