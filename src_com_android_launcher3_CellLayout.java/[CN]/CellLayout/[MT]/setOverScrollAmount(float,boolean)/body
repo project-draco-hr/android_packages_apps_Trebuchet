@@ -5,6 +5,7 @@
  else   if (!left && mOverScrollForegroundDrawable != mOverScrollRight) {
     mOverScrollForegroundDrawable=mOverScrollRight;
   }
+  r*=FOREGROUND_ALPHA_DAMPER;
   mForegroundAlpha=(int)Math.round((r * 255));
   mOverScrollForegroundDrawable.setAlpha(mForegroundAlpha);
   invalidate();
