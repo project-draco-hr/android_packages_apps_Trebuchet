@@ -23,6 +23,6 @@
         continue outerLoop;
       }
     }
-    mThirdPartyWallpaperPickers.add(info);
+    mThirdPartyWallpaperPickers.add(new ThirdPartyWallpaperTile(info));
   }
 }
