@@ -147,7 +147,7 @@
     animateBackgroundGradient(getResources().getInteger(R.integer.config_appsCustomizeSpringLoadedBgAlpha) / 100f,true);
   }
  else {
-    animateBackgroundGradient(0f,true);
+    animateBackgroundGradient(0f,animated);
   }
   return anim;
 }

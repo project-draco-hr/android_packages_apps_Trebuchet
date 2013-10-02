@@ -11,12 +11,12 @@
   final View fromView=mAppsCustomizeTabHost;
   final View toView=mWorkspace;
   Animator workspaceAnim=null;
-  if (toState == State.WORKSPACE) {
+  if (toState == Workspace.State.NORMAL) {
     int stagger=res.getInteger(R.integer.config_appsCustomizeWorkspaceAnimationStagger);
-    workspaceAnim=mWorkspace.getChangeStateAnimation(Workspace.State.NORMAL,animated,stagger,-1);
+    workspaceAnim=mWorkspace.getChangeStateAnimation(toState,animated,stagger,-1);
   }
- else   if (toState == State.APPS_CUSTOMIZE_SPRING_LOADED) {
-    workspaceAnim=mWorkspace.getChangeStateAnimation(Workspace.State.SPRING_LOADED,animated);
+ else   if (toState == Workspace.State.SPRING_LOADED || toState == Workspace.State.OVERVIEW) {
+    workspaceAnim=mWorkspace.getChangeStateAnimation(toState,animated);
   }
   setPivotsForZoom(fromView,scaleFactor);
   showHotseat(animated);

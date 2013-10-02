@@ -1,6 +1,6 @@
 {
   if (isAllAppsVisible()) {
-    hideAppsCustomizeHelper(State.APPS_CUSTOMIZE_SPRING_LOADED,true,true,null);
+    hideAppsCustomizeHelper(Workspace.State.SPRING_LOADED,true,true,null);
     mState=State.APPS_CUSTOMIZE_SPRING_LOADED;
   }
 }

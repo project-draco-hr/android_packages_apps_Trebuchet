@@ -1,6 +1,11 @@
 {
   if (isAllAppsVisible()) {
-    showWorkspace(true);
+    if (mAppsCustomizeContent.getContentType() == AppsCustomizePagedView.ContentType.Applications) {
+      showWorkspace(true);
+    }
+ else {
+      showOverviewMode(true);
+    }
   }
  else   if (mWorkspace.isInOverviewMode()) {
     mWorkspace.exitOverviewMode(true);
