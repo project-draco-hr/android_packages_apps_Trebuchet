@@ -3,7 +3,6 @@
   showAppsCustomizeHelper(animated,false,contentType);
   mAppsCustomizeTabHost.requestFocus();
   mState=State.APPS_CUSTOMIZE;
-  onInteractionBegin();
   mUserPresent=false;
   updateRunning();
   closeFolder();
