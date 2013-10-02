@@ -62,4 +62,5 @@
   if (DEBUG_RESUME_TIME) {
     Log.d(TAG,"Time spent in onResume: " + (System.currentTimeMillis() - startTime));
   }
+  mWorkspace.updateInteractionForState();
 }

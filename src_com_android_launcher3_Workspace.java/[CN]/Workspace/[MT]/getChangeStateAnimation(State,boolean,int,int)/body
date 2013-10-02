@@ -9,7 +9,7 @@
   final boolean oldStateIsSpringLoaded=(oldState == State.SPRING_LOADED);
   final boolean oldStateIsSmall=(oldState == State.SMALL);
   final boolean oldStateIsOverview=(oldState == State.OVERVIEW);
-  mState=state;
+  setState(state);
   final boolean stateIsNormal=(state == State.NORMAL);
   final boolean stateIsSpringLoaded=(state == State.SPRING_LOADED);
   final boolean stateIsSmall=(state == State.SMALL);
