@@ -1,6 +1,0 @@
-{
-  String spKey=LauncherAppState.getSharedPreferencesKey();
-  SharedPreferences sp=getSharedPreferences(spKey,Context.MODE_PRIVATE);
-  boolean show=sp.getBoolean(CORRUPTION_EMAIL_SENT_KEY,false);
-  return show;
-}

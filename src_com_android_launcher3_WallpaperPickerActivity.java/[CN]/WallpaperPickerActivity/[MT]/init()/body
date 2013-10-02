@@ -1,18 +1,21 @@
 {
   setContentView(R.layout.wallpaper_picker);
+  final WallpaperRootView root=(WallpaperRootView)findViewById(R.id.wallpaper_root);
+  TransparentBars transparentBars=new TransparentBars(root);
+  transparentBars.requestTransparentBars(true);
   mCropView=(CropView)findViewById(R.id.cropView);
-  final View wallpaperStrip=findViewById(R.id.wallpaper_strip);
+  mWallpaperStrip=findViewById(R.id.wallpaper_strip);
   mCropView.setTouchCallback(new CropView.TouchCallback(){
     LauncherViewPropertyAnimator mAnim;
     @Override public void onTouchDown(){
       if (mAnim != null) {
         mAnim.cancel();
       }
-      if (wallpaperStrip.getTranslationY() == 0) {
+      if (mWallpaperStrip.getTranslationY() == 0) {
         mIgnoreNextTap=true;
       }
-      mAnim=new LauncherViewPropertyAnimator(wallpaperStrip);
-      mAnim.translationY(wallpaperStrip.getHeight()).alpha(0f).setInterpolator(new DecelerateInterpolator(0.75f));
+      mAnim=new LauncherViewPropertyAnimator(mWallpaperStrip);
+      mAnim.translationY(mWallpaperStrip.getHeight()).alpha(0f).setInterpolator(new DecelerateInterpolator(0.75f));
       mAnim.start();
     }
     @Override public void onTouchUp(){
@@ -25,8 +28,8 @@
         if (mAnim != null) {
           mAnim.cancel();
         }
-        mAnim=new LauncherViewPropertyAnimator(wallpaperStrip);
-        mAnim.translationY(0).alpha(1f).setInterpolator(new DecelerateInterpolator(0.75f));
+        mAnim=new LauncherViewPropertyAnimator(mWallpaperStrip);
+        mAnim.translationY(0f).alpha(1f).setInterpolator(new DecelerateInterpolator(0.75f));
         mAnim.start();
       }
     }

@@ -14,4 +14,6 @@
     }
   }
 );
+  TransparentBars transparentBars=new TransparentBars(findViewById(R.id.wallpaper_root));
+  transparentBars.requestTransparentBars(true);
 }

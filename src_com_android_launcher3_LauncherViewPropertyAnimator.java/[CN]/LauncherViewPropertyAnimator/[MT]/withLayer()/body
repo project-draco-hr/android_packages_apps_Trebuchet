@@ -1,0 +1,4 @@
+{
+  mPropertiesToSet.add(Properties.WITH_LAYER);
+  return this;
+}
