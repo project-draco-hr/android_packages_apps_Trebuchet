@@ -1,4 +1,5 @@
 {
   mForceScreenScrolled=true;
+  updateFreescrollBounds();
   invalidate();
 }

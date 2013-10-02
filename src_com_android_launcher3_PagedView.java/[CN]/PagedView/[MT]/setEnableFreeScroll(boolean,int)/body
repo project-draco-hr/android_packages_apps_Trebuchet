@@ -3,19 +3,12 @@
   if (snapPage == -1) {
     snapPage=getPageNearestToCenterOfScreen();
   }
-  getOverviewModePages(mTempVisiblePagesRange);
   if (!mFreeScroll) {
     snapToPage(snapPage);
   }
  else {
-    if (isLayoutRtl()) {
-      mFreeScrollMinScrollX=getScrollForPage(mTempVisiblePagesRange[1]);
-      mFreeScrollMaxScrollX=getScrollForPage(mTempVisiblePagesRange[0]);
-    }
- else {
-      mFreeScrollMinScrollX=getScrollForPage(mTempVisiblePagesRange[0]);
-      mFreeScrollMaxScrollX=getScrollForPage(mTempVisiblePagesRange[1]);
-    }
+    updateFreescrollBounds();
+    getOverviewModePages(mTempVisiblePagesRange);
     if (getCurrentPage() < mTempVisiblePagesRange[0]) {
       setCurrentPage(mTempVisiblePagesRange[0]);
     }
