@@ -15,5 +15,4 @@
   updateRunning();
   getWindow().getDecorView().sendAccessibilityEvent(AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED);
   onWorkspaceShown(animated);
-  onInteractionEnd();
 }

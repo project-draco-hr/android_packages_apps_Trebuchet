@@ -1,4 +1,3 @@
 {
   enableOverviewMode(false,snapPage,animated);
-  mLauncher.onInteractionEnd();
 }
