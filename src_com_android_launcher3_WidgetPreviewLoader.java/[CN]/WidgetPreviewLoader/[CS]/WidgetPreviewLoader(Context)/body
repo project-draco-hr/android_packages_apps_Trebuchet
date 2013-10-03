@@ -1,7 +1,7 @@
 {
   LauncherAppState app=LauncherAppState.getInstance();
   DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
-  mContext=mLauncher=launcher;
+  mContext=context;
   mPackageManager=mContext.getPackageManager();
   mAppIconSize=grid.iconSizePx;
   mIconCache=app.getIconCache();
