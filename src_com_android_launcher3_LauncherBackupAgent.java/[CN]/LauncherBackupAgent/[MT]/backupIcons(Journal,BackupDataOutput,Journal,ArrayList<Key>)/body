@@ -1,6 +1,7 @@
 {
   final ContentResolver cr=getContentResolver();
-  final IconCache iconCache=new IconCache(this);
+  final LauncherAppState app=LauncherAppState.getInstance();
+  final IconCache iconCache=app.getIconCache();
   final int dpi=getResources().getDisplayMetrics().densityDpi;
   Set<String> savedIds=getSavedIdsByType(Key.ICON,in);
   if (DEBUG)   Log.d(TAG,"icon savedIds.size()=" + savedIds.size());
@@ -43,7 +44,7 @@
             }
           }
  else {
-            if (DEBUG)             Log.d(TAG,"scheduling another rtun for icon " + backupKey);
+            if (DEBUG)             Log.d(TAG,"scheduling another run for icon " + backupKey);
             dataChanged(this);
           }
         }
