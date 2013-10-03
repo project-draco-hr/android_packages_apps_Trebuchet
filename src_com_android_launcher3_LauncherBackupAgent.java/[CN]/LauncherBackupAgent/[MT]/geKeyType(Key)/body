@@ -1,0 +1,12 @@
+{
+switch (key.type) {
+case Key.FAVORITE:
+    return "favorite";
+case Key.SCREEN:
+  return "screen";
+case Key.ICON:
+return "icon";
+default :
+return "anonymous";
+}
+}

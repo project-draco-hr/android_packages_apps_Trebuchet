@@ -25,6 +25,9 @@ case Key.FAVORITE:
 case Key.SCREEN:
     restoreScreen(key,buffer,dataSize,keys);
   break;
+case Key.ICON:
+restoreIcon(key,buffer,dataSize,keys);
+break;
 default :
 Log.w(TAG,"unknown restore entity type: " + key.type);
 break;
