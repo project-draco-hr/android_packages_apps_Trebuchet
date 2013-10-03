@@ -10,7 +10,8 @@
   mScreenDensity=sContext.getResources().getDisplayMetrics().density;
   mWidgetPreviewCacheDb=new WidgetPreviewLoader.CacheDb(sContext);
   mIconCache=new IconCache(sContext);
-  mModel=new LauncherModel(this,mIconCache);
+  mAppFilter=AppFilter.loadByName(sContext.getString(R.string.app_filter_class));
+  mModel=new LauncherModel(this,mIconCache,mAppFilter);
   IntentFilter filter=new IntentFilter(Intent.ACTION_PACKAGE_ADDED);
   filter.addAction(Intent.ACTION_PACKAGE_REMOVED);
   filter.addAction(Intent.ACTION_PACKAGE_CHANGED);
