@@ -1,0 +1,5 @@
+{
+  Resource res=new Resource();
+  MessageNano.mergeFrom(res,readCheckedBytes(buffer,offset,dataSize));
+  return res;
+}

@@ -1,0 +1,9 @@
+{
+  Resource res=new Resource();
+  res.dpi=dpi;
+  ByteArrayOutputStream os=new ByteArrayOutputStream();
+  if (icon.compress(WEBP,100,os)) {
+    res.data=os.toByteArray();
+  }
+  return writeCheckedBytes(res);
+}

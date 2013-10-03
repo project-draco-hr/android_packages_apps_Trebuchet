@@ -1,0 +1,9 @@
+{
+  String backupKey=keyToBackupKey(key);
+  data.writeEntityHeader(backupKey,blob.length);
+  data.writeEntityData(blob,blob.length);
+  out.rows++;
+  out.bytes+=blob.length;
+  Log.v(TAG,"saving " + geKeyType(key) + " "+ backupKey+ ": "+ getKeyName(key)+ "/"+ blob.length);
+  if (DEBUG)   Log.d(TAG,"wrote " + Base64.encodeToString(blob,0,blob.length,Base64.NO_WRAP));
+}
