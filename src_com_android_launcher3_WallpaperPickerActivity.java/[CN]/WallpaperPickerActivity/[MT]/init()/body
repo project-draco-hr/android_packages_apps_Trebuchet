@@ -87,6 +87,7 @@
     public void onChanged(){
       liveWallpapersView.removeAllViews();
       populateWallpapersFromAdapter(liveWallpapersView,a,false,false);
+      initializeScrollForRtl();
     }
   }
 );
@@ -107,6 +108,7 @@
   PickImageInfo pickImageInfo=new PickImageInfo();
   galleryThumbnail.setTag(pickImageInfo);
   galleryThumbnail.setOnClickListener(mThumbnailOnClickListener);
+  initializeScrollForRtl();
   final LayoutTransition transitioner=new LayoutTransition();
   transitioner.setDuration(200);
   transitioner.setStartDelay(LayoutTransition.CHANGE_DISAPPEARING,0);

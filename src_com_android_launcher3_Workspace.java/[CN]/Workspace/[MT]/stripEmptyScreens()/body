@@ -11,7 +11,7 @@
       removeScreens.add(id);
     }
   }
-  int minScreens=hasCustomContent() ? 2 : 1;
+  int minScreens=1 + numCustomPages();
   int pageShift=0;
   for (  Long id : removeScreens) {
     CellLayout cl=mWorkspaceScreens.get(id);

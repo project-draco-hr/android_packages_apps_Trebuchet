@@ -1,0 +1,3 @@
+{
+  return hasCustomContent() ? 1 : 0;
+}
