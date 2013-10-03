@@ -1,0 +1,3 @@
+{
+  return mAppFilter == null || mAppFilter.shouldShowApp(componentName);
+}
