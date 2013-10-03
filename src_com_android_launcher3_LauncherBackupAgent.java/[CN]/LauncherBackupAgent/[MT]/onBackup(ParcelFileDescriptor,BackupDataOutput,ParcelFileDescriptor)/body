@@ -11,6 +11,7 @@
   backupFavorites(in,data,out,keys);
   backupScreens(in,data,out,keys);
   backupIcons(in,data,out,keys);
+  backupWidgets(in,data,out,keys);
   out.key=keys.toArray(BackupProtos.Key.EMPTY_ARRAY);
   writeJournal(newState,out);
   Log.v(TAG,"onBackup: wrote " + out.bytes + "b in "+ out.rows+ " rows.");

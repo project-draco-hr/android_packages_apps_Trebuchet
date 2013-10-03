@@ -6,6 +6,8 @@ case Key.SCREEN:
   return "screen";
 case Key.ICON:
 return "icon";
+case Key.WIDGET:
+return "widget";
 default :
 return "anonymous";
 }
