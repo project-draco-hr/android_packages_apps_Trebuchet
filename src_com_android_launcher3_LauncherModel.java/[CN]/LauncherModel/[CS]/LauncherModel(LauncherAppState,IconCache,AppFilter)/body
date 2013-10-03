@@ -2,7 +2,7 @@
   final Context context=app.getContext();
   mAppsCanBeOnRemoveableStorage=Environment.isExternalStorageRemovable();
   mApp=app;
-  mBgAllAppsList=new AllAppsList(iconCache);
+  mBgAllAppsList=new AllAppsList(iconCache,appFilter);
   mIconCache=iconCache;
   mDefaultIcon=Utilities.createIconBitmap(mIconCache.getFullResDefaultActivityIcon(),context);
   final Resources res=context.getResources();
