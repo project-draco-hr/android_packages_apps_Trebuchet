@@ -62,5 +62,10 @@
   if (DEBUG_RESUME_TIME) {
     Log.d(TAG,"Time spent in onResume: " + (System.currentTimeMillis() - startTime));
   }
+  if (mWorkspace.getCustomContentCallbacks() != null) {
+    if (mWorkspace.isOnOrMovingToCustomContent()) {
+      mWorkspace.getCustomContentCallbacks().onShow();
+    }
+  }
   mWorkspace.updateInteractionForState();
 }
