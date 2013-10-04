@@ -21,7 +21,7 @@ synchronized (sBgLock) {
           if (LauncherModel.shortcutExists(context,name,launchIntent)) {
             continue;
           }
-          int startSearchPageIndex=1;
+          int startSearchPageIndex=workspaceScreens.isEmpty() ? 0 : 1;
           Pair<Long,int[]> coords=LauncherModel.findNextAvailableIconSpace(context,name,launchIntent,startSearchPageIndex,workspaceScreens);
           if (coords == null) {
             LauncherProvider lp=LauncherAppState.getLauncherProvider();
