@@ -15,6 +15,7 @@
   if (!addAnimated.isEmpty()) {
     bindItems(addAnimated,0,addAnimated.size(),true);
   }
+  mWorkspace.removeExtraEmptyScreen();
   if (!AppsCustomizePagedView.DISABLE_ALL_APPS && addedApps != null && mAppsCustomizeContent != null) {
     mAppsCustomizeContent.addApps(addedApps);
   }
