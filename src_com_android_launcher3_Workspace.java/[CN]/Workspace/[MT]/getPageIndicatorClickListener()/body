@@ -1,0 +1,13 @@
+{
+  AccessibilityManager am=(AccessibilityManager)getContext().getSystemService(Context.ACCESSIBILITY_SERVICE);
+  if (!am.isTouchExplorationEnabled()) {
+    return null;
+  }
+  OnClickListener listener=new OnClickListener(){
+    @Override public void onClick(    View arg0){
+      enterOverviewMode();
+    }
+  }
+;
+  return listener;
+}

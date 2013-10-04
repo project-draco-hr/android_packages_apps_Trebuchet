@@ -1,4 +1,5 @@
 {
+  super.onAttachedToWindow();
   ViewGroup parent=(ViewGroup)getParent();
   if (mPageIndicator == null && mPageIndicatorViewId > -1) {
     mPageIndicator=(PageIndicator)parent.findViewById(mPageIndicatorViewId);
@@ -8,5 +9,7 @@
       markers.add(getPageIndicatorMarker(i));
     }
     mPageIndicator.addMarkers(markers,mAllowPagedViewAnimations);
+    mPageIndicator.setOnClickListener(getPageIndicatorClickListener());
+    mPageIndicator.setContentDescription(getPageIndicatorDescription());
   }
 }
