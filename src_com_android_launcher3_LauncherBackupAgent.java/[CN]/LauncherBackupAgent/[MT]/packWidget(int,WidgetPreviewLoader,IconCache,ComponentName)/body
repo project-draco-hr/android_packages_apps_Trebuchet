@@ -9,7 +9,7 @@
     Drawable fullResIcon=iconCache.getFullResIcon(provider.getPackageName(),info.icon);
     Bitmap icon=Utilities.createIconBitmap(fullResIcon,this);
     ByteArrayOutputStream os=new ByteArrayOutputStream();
-    if (icon.compress(WEBP,IMAGE_COMPRESSION_QUALITY,os)) {
+    if (icon.compress(IMAGE_FORMAT,IMAGE_COMPRESSION_QUALITY,os)) {
       widget.icon.data=os.toByteArray();
       widget.icon.dpi=dpi;
     }
@@ -18,7 +18,7 @@
     widget.preview=new Resource();
     Bitmap preview=previewLoader.generateWidgetPreview(info,null);
     ByteArrayOutputStream os=new ByteArrayOutputStream();
-    if (preview.compress(WEBP,IMAGE_COMPRESSION_QUALITY,os)) {
+    if (preview.compress(IMAGE_FORMAT,IMAGE_COMPRESSION_QUALITY,os)) {
       widget.preview.data=os.toByteArray();
       widget.preview.dpi=dpi;
     }
