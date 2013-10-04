@@ -88,6 +88,7 @@
       liveWallpapersView.removeAllViews();
       populateWallpapersFromAdapter(liveWallpapersView,a,false,false);
       initializeScrollForRtl();
+      updateTileIndices();
     }
   }
 );
@@ -95,19 +96,22 @@
   final ThirdPartyWallpaperPickerListAdapter ta=new ThirdPartyWallpaperPickerListAdapter(this);
   populateWallpapersFromAdapter(thirdPartyWallpapersView,ta,false,false);
   LinearLayout masterWallpaperList=(LinearLayout)findViewById(R.id.master_wallpaper_list);
-  FrameLayout galleryThumbnail=(FrameLayout)getLayoutInflater().inflate(R.layout.wallpaper_picker_image_picker_item,masterWallpaperList,false);
-  setWallpaperItemPaddingToZero(galleryThumbnail);
-  masterWallpaperList.addView(galleryThumbnail,0);
+  FrameLayout pickImageTile=(FrameLayout)getLayoutInflater().inflate(R.layout.wallpaper_picker_image_picker_item,masterWallpaperList,false);
+  setWallpaperItemPaddingToZero(pickImageTile);
+  masterWallpaperList.addView(pickImageTile,0);
   Bitmap lastPhoto=getThumbnailOfLastPhoto();
   if (lastPhoto != null) {
-    ImageView galleryThumbnailBg=(ImageView)galleryThumbnail.findViewById(R.id.wallpaper_image);
+    ImageView galleryThumbnailBg=(ImageView)pickImageTile.findViewById(R.id.wallpaper_image);
     galleryThumbnailBg.setImageBitmap(getThumbnailOfLastPhoto());
     int colorOverlay=getResources().getColor(R.color.wallpaper_picker_translucent_gray);
     galleryThumbnailBg.setColorFilter(colorOverlay,PorterDuff.Mode.SRC_ATOP);
   }
   PickImageInfo pickImageInfo=new PickImageInfo();
-  galleryThumbnail.setTag(pickImageInfo);
-  galleryThumbnail.setOnClickListener(mThumbnailOnClickListener);
+  pickImageTile.setTag(pickImageInfo);
+  pickImageInfo.setView(pickImageTile);
+  pickImageTile.setOnClickListener(mThumbnailOnClickListener);
+  pickImageInfo.setView(pickImageTile);
+  updateTileIndices();
   initializeScrollForRtl();
   final LayoutTransition transitioner=new LayoutTransition();
   transitioner.setDuration(200);
@@ -169,6 +173,7 @@
         for (        View v : viewsToRemove) {
           mWallpapersView.removeView(v);
         }
+        updateTileIndices();
         mode.finish();
         return true;
       }

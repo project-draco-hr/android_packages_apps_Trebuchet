@@ -30,5 +30,6 @@ catch (    IOException e) {
     LiveWallpaperTile wallpaper=new LiveWallpaperTile(thumb,info,launchIntent);
     publishProgress(wallpaper);
   }
+  publishProgress((LiveWallpaperTile)null);
   return null;
 }
