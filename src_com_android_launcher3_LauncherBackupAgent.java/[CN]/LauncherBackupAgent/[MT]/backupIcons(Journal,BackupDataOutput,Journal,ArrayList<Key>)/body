@@ -1,6 +1,11 @@
 {
+  final LauncherAppState app=LauncherAppState.getInstanceNoCreate();
+  if (app == null) {
+    dataChanged(this);
+    if (DEBUG)     Log.d(TAG,"Launcher is not initialized, delaying icon backup");
+    return;
+  }
   final ContentResolver cr=getContentResolver();
-  final LauncherAppState app=LauncherAppState.getInstance();
   final IconCache iconCache=app.getIconCache();
   final int dpi=getResources().getDisplayMetrics().densityDpi;
   Set<String> savedIds=getSavedIdsByType(Key.ICON,in);
