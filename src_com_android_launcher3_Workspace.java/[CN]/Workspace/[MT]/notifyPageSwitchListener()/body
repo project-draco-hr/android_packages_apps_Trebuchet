@@ -17,4 +17,7 @@
       mLauncher.updateVoiceButtonProxyVisible(false);
     }
   }
+  if (getPageIndicator() != null) {
+    getPageIndicator().setContentDescription(getPageIndicatorDescription());
+  }
 }

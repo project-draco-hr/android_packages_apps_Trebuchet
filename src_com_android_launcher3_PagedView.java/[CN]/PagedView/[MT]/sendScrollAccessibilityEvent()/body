@@ -1,0 +1,18 @@
+{
+  AccessibilityManager am=(AccessibilityManager)getContext().getSystemService(Context.ACCESSIBILITY_SERVICE);
+  if (am.isEnabled()) {
+    AccessibilityEvent ev=AccessibilityEvent.obtain(AccessibilityEvent.TYPE_VIEW_SCROLLED);
+    ev.getText().add("");
+    ev.setItemCount(getChildCount());
+    ev.setFromIndex(mCurrentPage);
+    int action=AccessibilityNodeInfo.ACTION_SCROLL_FORWARD;
+    if (getNextPage() >= mCurrentPage) {
+      action=AccessibilityNodeInfo.ACTION_SCROLL_FORWARD;
+    }
+ else {
+      action=AccessibilityNodeInfo.ACTION_SCROLL_BACKWARD;
+    }
+    ev.setAction(action);
+    sendAccessibilityEventUnchecked(ev);
+  }
+}
