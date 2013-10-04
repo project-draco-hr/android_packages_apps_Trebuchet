@@ -1,6 +1,7 @@
 {
   mInflater=(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
   mPackageManager=context.getPackageManager();
+  mIconSize=context.getResources().getDimensionPixelSize(R.dimen.wallpaperItemIconSize);
   final PackageManager pm=mPackageManager;
   final Intent pickWallpaperIntent=new Intent(Intent.ACTION_SET_WALLPAPER);
   final List<ResolveInfo> apps=pm.queryIntentActivities(pickWallpaperIntent,0);

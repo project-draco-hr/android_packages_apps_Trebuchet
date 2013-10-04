@@ -95,7 +95,7 @@
   final ThirdPartyWallpaperPickerListAdapter ta=new ThirdPartyWallpaperPickerListAdapter(this);
   populateWallpapersFromAdapter(thirdPartyWallpapersView,ta,false,false);
   LinearLayout masterWallpaperList=(LinearLayout)findViewById(R.id.master_wallpaper_list);
-  FrameLayout galleryThumbnail=(FrameLayout)getLayoutInflater().inflate(R.layout.wallpaper_picker_gallery_item,masterWallpaperList,false);
+  FrameLayout galleryThumbnail=(FrameLayout)getLayoutInflater().inflate(R.layout.wallpaper_picker_image_picker_item,masterWallpaperList,false);
   setWallpaperItemPaddingToZero(galleryThumbnail);
   masterWallpaperList.addView(galleryThumbnail,0);
   Bitmap lastPhoto=getThumbnailOfLastPhoto();
