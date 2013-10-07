@@ -3,5 +3,9 @@
     return false;
   }
   if (ActivityManager.isRunningInTestHarness())   return false;
+  final AccessibilityManager a11yManager=(AccessibilityManager)getSystemService(ACCESSIBILITY_SERVICE);
+  if (a11yManager.isTouchExplorationEnabled()) {
+    return false;
+  }
   return true;
 }
