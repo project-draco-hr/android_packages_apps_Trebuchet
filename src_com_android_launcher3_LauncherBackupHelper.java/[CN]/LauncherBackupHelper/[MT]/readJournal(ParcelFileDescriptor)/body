@@ -1,0 +1,56 @@
+{
+  Journal journal=new Journal();
+  if (oldState == null) {
+    return journal;
+  }
+  FileInputStream inStream=new FileInputStream(oldState.getFileDescriptor());
+  try {
+    int remaining=inStream.available();
+    if (DEBUG)     Log.d(TAG,"available " + remaining);
+    if (remaining < MAX_JOURNAL_SIZE) {
+      byte[] buffer=new byte[remaining];
+      int bytesRead=0;
+      while (remaining > 0) {
+        try {
+          int result=inStream.read(buffer,bytesRead,remaining);
+          if (result > 0) {
+            if (DEBUG)             Log.d(TAG,"read some bytes: " + result);
+            remaining-=result;
+            bytesRead+=result;
+          }
+ else {
+            Log.w(TAG,"read error: " + result);
+            remaining=0;
+          }
+        }
+ catch (        IOException e) {
+          Log.w(TAG,"failed to read the journal",e);
+          buffer=null;
+          remaining=0;
+        }
+      }
+      if (DEBUG)       Log.d(TAG,"journal bytes read: " + bytesRead);
+      if (buffer != null) {
+        try {
+          MessageNano.mergeFrom(journal,readCheckedBytes(buffer,0,bytesRead));
+        }
+ catch (        InvalidProtocolBufferNanoException e) {
+          Log.d(TAG,"failed to read the journal",e);
+          journal.clear();
+        }
+      }
+    }
+  }
+ catch (  IOException e) {
+    Log.d(TAG,"failed to close the journal",e);
+  }
+ finally {
+    try {
+      inStream.close();
+    }
+ catch (    IOException e) {
+      Log.d(TAG,"failed to close the journal",e);
+    }
+  }
+  return journal;
+}
