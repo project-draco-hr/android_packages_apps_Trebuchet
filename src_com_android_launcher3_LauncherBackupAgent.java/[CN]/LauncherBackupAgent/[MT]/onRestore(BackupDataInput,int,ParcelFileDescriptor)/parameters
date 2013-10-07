@@ -1,3 +1,0 @@
-BackupDataInput data
-int versionCode
-ParcelFileDescriptor newState

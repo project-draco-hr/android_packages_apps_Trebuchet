@@ -1,0 +1,3 @@
+{
+  addHelper(LauncherBackupHelper.LAUNCHER_PREFIX,new LauncherBackupHelper(this));
+}
