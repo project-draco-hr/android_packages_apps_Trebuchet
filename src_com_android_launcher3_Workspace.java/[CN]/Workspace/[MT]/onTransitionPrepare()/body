@@ -1,5 +1,6 @@
 {
   mIsSwitchingState=true;
+  invalidate();
   updateChildrenLayersEnabled(false);
   hideCustomContentIfNecessary();
 }
