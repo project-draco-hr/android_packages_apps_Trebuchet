@@ -19,7 +19,8 @@
   float finalOverviewPanelAlpha=stateIsOverview ? 1f : 0f;
   float finalSearchBarAlpha=!stateIsNormal ? 0f : 1f;
   float finalWorkspaceTranslationY=stateIsOverview ? getOverviewModeTranslationY() : 0;
-  boolean zoomIn=true;
+  boolean workspaceToAllApps=(oldStateIsNormal && stateIsSmall);
+  boolean allAppsToWorkspace=(oldStateIsSmall && stateIsNormal);
   mNewScale=1.0f;
   if (oldStateIsOverview) {
     disableFreeScroll(snapPage);
@@ -37,16 +38,27 @@
  else     if (stateIsSmall) {
       mNewScale=mOverviewModeShrinkFactor - 0.3f;
     }
-    if (oldStateIsNormal && stateIsSmall) {
-      zoomIn=false;
+    if (workspaceToAllApps) {
       updateChildrenLayersEnabled(false);
     }
   }
-  final int duration=zoomIn ? getResources().getInteger(R.integer.config_workspaceUnshrinkTime) : getResources().getInteger(R.integer.config_appsCustomizeWorkspaceShrinkTime);
+  final int duration=workspaceToAllApps ? getResources().getInteger(R.integer.config_workspaceUnshrinkTime) : getResources().getInteger(R.integer.config_appsCustomizeWorkspaceShrinkTime);
   for (int i=0; i < getChildCount(); i++) {
     final CellLayout cl=(CellLayout)getChildAt(i);
-    float finalAlpha=(!mWorkspaceFadeInAdjacentScreens || (i == mCurrentPage)) && !stateIsSmall ? 1f : 0f;
+    boolean isCurrentPage=(i == mCurrentPage);
     float initialAlpha=cl.getShortcutsAndWidgets().getAlpha();
+    float finalAlpha=stateIsSmall ? 0f : 1f;
+    if (!mIsSwitchingState) {
+      if (workspaceToAllApps || allAppsToWorkspace) {
+        if (allAppsToWorkspace && isCurrentPage) {
+          initialAlpha=0f;
+        }
+ else         if (!isCurrentPage) {
+          initialAlpha=finalAlpha=0f;
+        }
+        cl.setShortcutAndWidgetAlpha(initialAlpha);
+      }
+    }
     mOldAlphas[i]=initialAlpha;
     mNewAlphas[i]=finalAlpha;
     if (animated) {
