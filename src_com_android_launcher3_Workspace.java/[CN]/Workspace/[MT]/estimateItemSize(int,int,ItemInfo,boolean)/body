@@ -1,7 +1,7 @@
 {
   int[] size=new int[2];
   if (getChildCount() > 0) {
-    CellLayout cl=(CellLayout)mLauncher.getWorkspace().getChildAt(0);
+    CellLayout cl=(CellLayout)getChildAt(numCustomPages());
     Rect r=estimateItemPosition(cl,itemInfo,0,0,hSpan,vSpan);
     size[0]=r.width();
     size[1]=r.height();
