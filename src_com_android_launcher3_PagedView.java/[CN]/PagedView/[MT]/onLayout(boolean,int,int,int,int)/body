@@ -19,18 +19,18 @@
   }
   for (int i=startIndex; i != endIndex; i+=delta) {
     final View child=getPageAt(i);
-    LayoutParams lp=(LayoutParams)child.getLayoutParams();
-    int childTop;
-    if (lp.isFullScreenPage) {
-      childTop=offsetY;
-    }
- else {
-      childTop=offsetY + getPaddingTop() + mInsets.top;
-      if (mCenterPagesVertically) {
-        childTop+=(getViewportHeight() - mInsets.top - mInsets.bottom- verticalPadding- child.getMeasuredHeight()) / 2;
-      }
-    }
     if (child.getVisibility() != View.GONE) {
+      LayoutParams lp=(LayoutParams)child.getLayoutParams();
+      int childTop;
+      if (lp.isFullScreenPage) {
+        childTop=offsetY;
+      }
+ else {
+        childTop=offsetY + getPaddingTop() + mInsets.top;
+        if (mCenterPagesVertically) {
+          childTop+=(getViewportHeight() - mInsets.top - mInsets.bottom- verticalPadding- child.getMeasuredHeight()) / 2;
+        }
+      }
       final int childWidth=child.getMeasuredWidth();
       final int childHeight=child.getMeasuredHeight();
       if (DEBUG)       Log.d(TAG,"\tlayout-child" + i + ": "+ childLeft+ ", "+ childTop);
