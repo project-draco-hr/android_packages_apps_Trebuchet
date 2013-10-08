@@ -1,0 +1,38 @@
+{
+  LinearLayout masterWallpaperList=(LinearLayout)findViewById(R.id.master_wallpaper_list);
+  final int childCount=masterWallpaperList.getChildCount();
+  ArrayList<WallpaperTileInfo> tiles=new ArrayList<WallpaperTileInfo>();
+  final Resources res=getResources();
+  int numTiles=0;
+  for (int passNum=0; passNum < 2; passNum++) {
+    int tileIndex=0;
+    for (int i=0; i < childCount; i++) {
+      View child=masterWallpaperList.getChildAt(i);
+      LinearLayout subList;
+      int subListStart;
+      int subListEnd;
+      if (child.getTag() instanceof WallpaperTileInfo) {
+        subList=masterWallpaperList;
+        subListStart=i;
+        subListEnd=i + 1;
+      }
+ else {
+        subList=(LinearLayout)child;
+        subListStart=0;
+        subListEnd=subList.getChildCount();
+      }
+      for (int j=subListStart; j < subListEnd; j++) {
+        WallpaperTileInfo info=(WallpaperTileInfo)subList.getChildAt(j).getTag();
+        if (info.isNamelessWallpaper()) {
+          if (passNum == 0) {
+            numTiles++;
+          }
+ else {
+            CharSequence label=res.getString(R.string.wallpaper_accessibility_name,++tileIndex,numTiles);
+            info.onIndexUpdated(label);
+          }
+        }
+      }
+    }
+  }
+}
