@@ -8,6 +8,7 @@
   }
   WallpaperPickerActivity.setWallpaperItemPaddingToZero((FrameLayout)view);
   LiveWallpaperTile wallpaperInfo=mWallpapers.get(position);
+  wallpaperInfo.setView(view);
   ImageView image=(ImageView)view.findViewById(R.id.wallpaper_image);
   ImageView icon=(ImageView)view.findViewById(R.id.wallpaper_icon);
   if (wallpaperInfo.mThumbnail != null) {

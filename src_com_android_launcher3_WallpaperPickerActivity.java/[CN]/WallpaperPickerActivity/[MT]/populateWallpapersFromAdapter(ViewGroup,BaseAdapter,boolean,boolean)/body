@@ -2,7 +2,9 @@
   for (int i=0; i < adapter.getCount(); i++) {
     FrameLayout thumbnail=(FrameLayout)adapter.getView(i,null,parent);
     parent.addView(thumbnail,i);
-    thumbnail.setTag(adapter.getItem(i));
+    WallpaperTileInfo info=(WallpaperTileInfo)adapter.getItem(i);
+    thumbnail.setTag(info);
+    info.setView(thumbnail);
     if (addLongPressHandler) {
       addLongPressHandler(thumbnail);
     }
