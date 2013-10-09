@@ -7,6 +7,7 @@ switch (ev.getAction()) {
 case MotionEvent.ACTION_DOWN:
 {
       mLongPressHelper.postCheckForLongPress();
+      mDragLayer.setTouchCompleteListener(this);
       break;
     }
 case MotionEvent.ACTION_UP:
