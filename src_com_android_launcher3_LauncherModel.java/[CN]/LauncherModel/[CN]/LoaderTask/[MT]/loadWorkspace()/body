@@ -15,6 +15,7 @@ synchronized (sBgLock) {
     clearSBgDataStructures();
     final ArrayList<Long> itemsToRemove=new ArrayList<Long>();
     final Uri contentUri=LauncherSettings.Favorites.CONTENT_URI;
+    if (DEBUG_LOADERS)     Log.d(TAG,"loading model from " + contentUri);
     final Cursor c=contentResolver.query(contentUri,null,null,null,null);
     final HashMap<Long,ItemInfo[][]> occupied=new HashMap<Long,ItemInfo[][]>();
     try {
