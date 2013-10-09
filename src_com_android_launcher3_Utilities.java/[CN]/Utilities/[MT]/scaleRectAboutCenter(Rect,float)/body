@@ -1,0 +1,7 @@
+{
+  int cx=r.centerX();
+  int cy=r.centerY();
+  r.offset(-cx,-cy);
+  Utilities.scaleRect(r,scale);
+  r.offset(cx,cy);
+}

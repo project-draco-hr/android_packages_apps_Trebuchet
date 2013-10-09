@@ -4,6 +4,8 @@
     mScrimView=scrim;
     mBackgroundColor=0xdd000000;
     setOnLongClickListener(this);
+    setOnClickListener(this);
+    setOnTouchListener(this);
     mErasePaint=new Paint();
     mErasePaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.MULTIPLY));
     mErasePaint.setColor(0xFFFFFF);
