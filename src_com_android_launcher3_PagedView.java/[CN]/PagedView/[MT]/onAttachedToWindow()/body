@@ -9,7 +9,10 @@
       markers.add(getPageIndicatorMarker(i));
     }
     mPageIndicator.addMarkers(markers,mAllowPagedViewAnimations);
-    mPageIndicator.setOnClickListener(getPageIndicatorClickListener());
+    OnClickListener listener=getPageIndicatorClickListener();
+    if (listener != null) {
+      mPageIndicator.setOnClickListener(listener);
+    }
     mPageIndicator.setContentDescription(getPageIndicatorDescription());
   }
 }
