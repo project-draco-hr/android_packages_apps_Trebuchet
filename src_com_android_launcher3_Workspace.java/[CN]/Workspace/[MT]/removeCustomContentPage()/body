@@ -9,4 +9,5 @@
   mCustomContentCallbacks=null;
   mDefaultPage=mOriginalDefaultPage - 1;
   setCurrentPage(getCurrentPage() - 1);
+  mLauncher.updateCustomContentHintVisibility();
 }

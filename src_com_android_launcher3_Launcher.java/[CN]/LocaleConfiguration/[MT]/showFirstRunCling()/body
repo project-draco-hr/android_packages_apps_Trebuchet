@@ -20,11 +20,7 @@
         sbHint.setText(sbHintStr);
         sbHint.setVisibility(View.VISIBLE);
       }
-      if (!ccHintStr.isEmpty()) {
-        TextView ccHint=(TextView)cling.findViewById(R.id.custom_content_hint);
-        ccHint.setText(ccHintStr);
-        ccHint.setVisibility(View.VISIBLE);
-      }
+      setCustomContentHintVisibility(cling,ccHintStr,true,false);
     }
     initCling(R.id.first_run_cling,0,false,true);
   }
