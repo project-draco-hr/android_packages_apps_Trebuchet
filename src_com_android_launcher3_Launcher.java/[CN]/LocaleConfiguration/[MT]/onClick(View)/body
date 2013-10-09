@@ -23,7 +23,7 @@
     if (intent.getComponent() != null) {
       final String shortcutClass=intent.getComponent().getClassName();
       if (shortcutClass.equals(WidgetAdder.class.getName())) {
-        showAllApps(true,AppsCustomizePagedView.ContentType.Widgets);
+        showAllApps(true,AppsCustomizePagedView.ContentType.Widgets,true);
         return;
       }
  else       if (shortcutClass.equals(MemoryDumpActivity.class.getName())) {

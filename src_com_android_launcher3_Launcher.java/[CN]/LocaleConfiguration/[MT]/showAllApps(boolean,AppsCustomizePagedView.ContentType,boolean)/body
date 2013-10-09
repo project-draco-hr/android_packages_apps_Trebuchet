@@ -1,5 +1,8 @@
 {
   if (mState != State.WORKSPACE)   return;
+  if (resetPageToZero) {
+    mAppsCustomizeTabHost.reset();
+  }
   showAppsCustomizeHelper(animated,false,contentType);
   mAppsCustomizeTabHost.requestFocus();
   mState=State.APPS_CUSTOMIZE;
