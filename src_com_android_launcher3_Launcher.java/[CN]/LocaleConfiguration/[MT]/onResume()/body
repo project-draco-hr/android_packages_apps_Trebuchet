@@ -9,7 +9,7 @@
     showWorkspace(false);
   }
  else   if (mOnResumeState == State.APPS_CUSTOMIZE) {
-    showAllApps(false,AppsCustomizePagedView.ContentType.Applications);
+    showAllApps(false,AppsCustomizePagedView.ContentType.Applications,false);
   }
   mOnResumeState=State.NONE;
   setWorkspaceBackground(mState == State.WORKSPACE);
@@ -51,9 +51,6 @@
   }
   if (mAppsCustomizeContent != null) {
     mAppsCustomizeContent.resetDrawableState();
-  }
-  if (mAppsCustomizeTabHost != null) {
-    mAppsCustomizeTabHost.reset();
   }
   getWorkspace().reinflateWidgetsIfNecessary();
   InstallShortcutReceiver.disableAndFlushInstallQueue(this);

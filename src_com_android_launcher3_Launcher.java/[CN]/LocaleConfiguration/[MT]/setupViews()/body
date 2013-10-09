@@ -15,7 +15,7 @@
   View widgetButton=findViewById(R.id.widget_button);
   widgetButton.setOnClickListener(new OnClickListener(){
     @Override public void onClick(    View arg0){
-      showAllApps(true,AppsCustomizePagedView.ContentType.Widgets);
+      showAllApps(true,AppsCustomizePagedView.ContentType.Widgets,true);
     }
   }
 );
