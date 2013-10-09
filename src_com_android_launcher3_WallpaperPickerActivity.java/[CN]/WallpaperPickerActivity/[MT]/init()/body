@@ -49,6 +49,7 @@
         }
         mSelectedThumb=v;
         v.setSelected(true);
+        v.announceForAccessibility(getString(R.string.announce_selection,v.getContentDescription()));
       }
       info.onClick(WallpaperPickerActivity.this);
     }
