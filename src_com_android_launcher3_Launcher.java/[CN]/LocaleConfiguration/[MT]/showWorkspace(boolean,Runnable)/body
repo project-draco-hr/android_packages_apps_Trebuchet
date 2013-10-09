@@ -7,7 +7,7 @@
     mWorkspace.setVisibility(View.VISIBLE);
     hideAppsCustomizeHelper(Workspace.State.NORMAL,animated,false,onCompleteRunnable);
     if (mSearchDropTargetBar != null) {
-      mSearchDropTargetBar.showSearchBar(wasInSpringLoadedMode);
+      mSearchDropTargetBar.showSearchBar(animated && wasInSpringLoadedMode);
     }
     if (mAllAppsButton != null) {
       mAllAppsButton.requestFocus();
