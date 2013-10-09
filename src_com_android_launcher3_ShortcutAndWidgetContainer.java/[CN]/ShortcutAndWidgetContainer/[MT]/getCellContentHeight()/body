@@ -1,0 +1,5 @@
+{
+  final LauncherAppState app=LauncherAppState.getInstance();
+  final DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
+  return Math.min(getMeasuredHeight(),mIsHotseatLayout ? grid.hotseatCellHeightPx : grid.cellHeightPx);
+}
