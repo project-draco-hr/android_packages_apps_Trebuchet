@@ -9,7 +9,7 @@
     if (child instanceof LauncherAppWidgetHostView) {
     }
  else {
-      int cHeight=mIsHotseatLayout ? grid.hotseatCellHeightPx : Math.min(getMeasuredHeight(),grid.cellHeightPx);
+      int cHeight=getCellContentHeight();
       int cellPaddingY=(int)Math.max(0,((lp.height - cHeight) / 2f));
       int cellPaddingX=(int)(grid.edgeMarginPx / 2f);
       child.setPadding(cellPaddingX,cellPaddingY,cellPaddingX,0);
