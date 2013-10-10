@@ -2,6 +2,11 @@
   if (DISABLE_CLINGS) {
     return false;
   }
+  LauncherAppState app=LauncherAppState.getInstance();
+  DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
+  if (grid.isTablet()) {
+    return false;
+  }
   if (ActivityManager.isRunningInTestHarness())   return false;
   final AccessibilityManager a11yManager=(AccessibilityManager)getSystemService(ACCESSIBILITY_SERVICE);
   if (a11yManager.isTouchExplorationEnabled()) {

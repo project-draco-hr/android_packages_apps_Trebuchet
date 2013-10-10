@@ -16,17 +16,21 @@
     final float alpha=mDragOutlineAlphas[i];
     if (alpha > 0) {
       final Rect r=mDragOutlines[i];
-      scaleRectAboutCenter(r,temp,getChildrenScale());
+      mTempRect.set(r);
+      Utilities.scaleRectAboutCenter(mTempRect,getChildrenScale());
       final Bitmap b=(Bitmap)mDragOutlineAnims[i].getTag();
       paint.setAlpha((int)(alpha + .5f));
-      canvas.drawBitmap(b,null,temp,paint);
+      canvas.drawBitmap(b,null,mTempRect,paint);
     }
   }
   if (mPressedOrFocusedIcon != null) {
     final int padding=mPressedOrFocusedIcon.getPressedOrFocusedBackgroundPadding();
     final Bitmap b=mPressedOrFocusedIcon.getPressedOrFocusedBackground();
     if (b != null) {
-      canvas.drawBitmap(b,mPressedOrFocusedIcon.getLeft() + getPaddingLeft() - padding,mPressedOrFocusedIcon.getTop() + getPaddingTop() - padding,null);
+      int offset=getMeasuredWidth() - getPaddingLeft() - getPaddingRight()- (mCountX * mCellWidth);
+      int left=getPaddingLeft() + (int)Math.ceil(offset / 2f);
+      int top=getPaddingTop();
+      canvas.drawBitmap(b,mPressedOrFocusedIcon.getLeft() + left - padding,mPressedOrFocusedIcon.getTop() + top - padding,null);
     }
   }
   if (DEBUG_VISUALIZE_OCCUPIED) {

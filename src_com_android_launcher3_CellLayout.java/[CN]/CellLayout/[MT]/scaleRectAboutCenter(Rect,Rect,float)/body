@@ -1,8 +1,0 @@
-{
-  int cx=in.centerX();
-  int cy=in.centerY();
-  out.set(in);
-  out.offset(-cx,-cy);
-  scaleRect(out,scale);
-  out.offset(cx,cy);
-}

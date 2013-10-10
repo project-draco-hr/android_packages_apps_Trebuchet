@@ -1,0 +1,11 @@
+{
+  if (mDrawIdentifier.equals(WORKSPACE_PORTRAIT) || mDrawIdentifier.equals(WORKSPACE_LANDSCAPE) || mDrawIdentifier.equals(WORKSPACE_LARGE)) {
+    if (mFocusedHotseatAppBounds != null && mFocusedHotseatAppBounds.contains(mTouchDownPt[0],mTouchDownPt[1])) {
+      Intent intent=new Intent(Intent.ACTION_MAIN);
+      intent.setComponent(mFocusedHotseatAppComponent);
+      intent.addCategory(Intent.CATEGORY_LAUNCHER);
+      mLauncher.startActivity(intent,null);
+      mLauncher.dismissWorkspaceCling(this);
+    }
+  }
+}
