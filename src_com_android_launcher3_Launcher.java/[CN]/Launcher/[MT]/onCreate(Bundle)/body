@@ -30,8 +30,6 @@
   }
   checkForLocaleChange();
   setContentView(R.layout.launcher);
-  mTransparentDecor=new TranslucentDecor(findViewById(R.id.launcher));
-  mTransparentDecor.requestTranslucentDecor(true);
   setupViews();
   grid.layout(this);
   registerContentObservers();
