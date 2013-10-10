@@ -58,9 +58,9 @@
     mMaxScrollX=0;
   }
   if (mScroller.isFinished() && mChildCountOnLastLayout != getChildCount() && !mDeferringForDelete) {
-    if (mRestorePage > -1) {
+    if (mRestorePage != INVALID_RESTORE_PAGE) {
       setCurrentPage(mRestorePage);
-      mRestorePage=-1;
+      mRestorePage=INVALID_RESTORE_PAGE;
     }
  else {
       setCurrentPage(getNextPage());
