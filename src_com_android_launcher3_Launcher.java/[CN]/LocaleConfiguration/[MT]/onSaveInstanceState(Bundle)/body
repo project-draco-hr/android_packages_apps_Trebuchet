@@ -1,5 +1,7 @@
 {
-  outState.putInt(RUNTIME_STATE_CURRENT_SCREEN,mWorkspace.getNextPage());
+  if (mWorkspace.getChildCount() > 0) {
+    outState.putInt(RUNTIME_STATE_CURRENT_SCREEN,mWorkspace.getRestorePage());
+  }
   super.onSaveInstanceState(outState);
   outState.putInt(RUNTIME_STATE,mState.ordinal());
   closeFolder();
