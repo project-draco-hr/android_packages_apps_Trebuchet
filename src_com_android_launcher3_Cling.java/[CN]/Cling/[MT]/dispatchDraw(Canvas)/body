@@ -47,6 +47,11 @@
       canvas.drawBitmap(eraseBg,0,0,null);
       eraseCanvas.setBitmap(null);
       eraseBg=null;
+      if (mFocusedHotseatAppBounds != null && mFocusedHotseatApp != null) {
+        mFocusedHotseatApp.setBounds(mFocusedHotseatAppBounds.left,mFocusedHotseatAppBounds.top,mFocusedHotseatAppBounds.right,mFocusedHotseatAppBounds.bottom);
+        mFocusedHotseatApp.setAlpha((int)(255 * alpha));
+        mFocusedHotseatApp.draw(canvas);
+      }
     }
     canvas.restore();
   }
