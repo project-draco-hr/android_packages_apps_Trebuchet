@@ -6,8 +6,8 @@
   if (state == State.APPS_CUSTOMIZE) {
     mOnResumeState=State.APPS_CUSTOMIZE;
   }
-  int currentScreen=savedState.getInt(RUNTIME_STATE_CURRENT_SCREEN,-1);
-  if (currentScreen > -1) {
+  int currentScreen=savedState.getInt(RUNTIME_STATE_CURRENT_SCREEN,PagedView.INVALID_RESTORE_PAGE);
+  if (currentScreen != PagedView.INVALID_RESTORE_PAGE) {
     mWorkspace.setRestorePage(currentScreen);
   }
   final long pendingAddContainer=savedState.getLong(RUNTIME_STATE_PENDING_ADD_CONTAINER,-1);
