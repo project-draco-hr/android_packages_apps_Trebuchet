@@ -6,6 +6,10 @@
   mWorkspaceScreens.remove(CUSTOM_CONTENT_SCREEN_ID);
   mScreenOrder.remove(CUSTOM_CONTENT_SCREEN_ID);
   removeView(customScreen);
+  if (mCustomContentCallbacks != null) {
+    mCustomContentCallbacks.onScrollProgressChanged(0);
+    mCustomContentCallbacks.onHide();
+  }
   mCustomContentCallbacks=null;
   mDefaultPage=mOriginalDefaultPage - 1;
   mLauncher.updateCustomContentHintVisibility();
