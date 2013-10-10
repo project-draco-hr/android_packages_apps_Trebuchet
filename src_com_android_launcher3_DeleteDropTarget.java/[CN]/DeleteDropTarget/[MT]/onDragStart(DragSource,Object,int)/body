@@ -1,10 +1,10 @@
 {
   boolean isVisible=true;
-  boolean isUninstall=false;
+  boolean useUninstallLabel=!AppsCustomizePagedView.DISABLE_ALL_APPS && isAllAppsApplication(source,info);
   if (!willAcceptDrop(info) || isAllAppsWidget(source,info)) {
     isVisible=false;
   }
-  if (isUninstall) {
+  if (useUninstallLabel) {
     setCompoundDrawablesRelativeWithIntrinsicBounds(mUninstallDrawable,null,null,null);
   }
  else {
@@ -15,6 +15,6 @@
   resetHoverColor();
   ((ViewGroup)getParent()).setVisibility(isVisible ? View.VISIBLE : View.GONE);
   if (getText().length() > 0) {
-    setText(isUninstall ? R.string.delete_target_uninstall_label : R.string.delete_target_label);
+    setText(useUninstallLabel ? R.string.delete_target_uninstall_label : R.string.delete_target_label);
   }
 }
