@@ -1,5 +1,6 @@
 {
-  BitmapRegionTileSource source=new BitmapRegionTileSource(mResources,a,mResId,1024,0);
+  int rotation=WallpaperCropActivity.getRotationFromExif(mResources,mResId);
+  BitmapRegionTileSource source=new BitmapRegionTileSource(mResources,a,mResId,1024,rotation);
   CropView v=a.getCropView();
   v.setTileSource(source,null);
   Point wallpaperSize=WallpaperCropActivity.getDefaultWallpaperSize(a.getResources(),a.getWindowManager());

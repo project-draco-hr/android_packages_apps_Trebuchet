@@ -1,7 +1,6 @@
 {
   LinearLayout masterWallpaperList=(LinearLayout)findViewById(R.id.master_wallpaper_list);
   final int childCount=masterWallpaperList.getChildCount();
-  ArrayList<WallpaperTileInfo> tiles=new ArrayList<WallpaperTileInfo>();
   final Resources res=getResources();
   int numTiles=0;
   for (int passNum=0; passNum < 2; passNum++) {
