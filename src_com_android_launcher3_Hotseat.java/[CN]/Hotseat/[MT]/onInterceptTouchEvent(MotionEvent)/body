@@ -1,0 +1,6 @@
+{
+  if (mLauncher.getWorkspace().isSmall()) {
+    return true;
+  }
+  return false;
+}
