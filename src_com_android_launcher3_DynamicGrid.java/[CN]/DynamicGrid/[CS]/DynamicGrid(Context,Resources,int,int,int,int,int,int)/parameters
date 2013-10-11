@@ -1,3 +1,4 @@
+Context context
 Resources resources
 int minWidthPx
 int minHeightPx
