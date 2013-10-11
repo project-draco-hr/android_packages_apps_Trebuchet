@@ -10,7 +10,7 @@
       padding.set(edgeMarginPx + gap,searchBarSpaceHeightPx,edgeMarginPx + gap,hotseatBarHeightPx + pageIndicatorHeightPx);
     }
  else {
-      padding.set(edgeMarginPx,searchBarSpaceHeightPx,edgeMarginPx,hotseatBarHeightPx + pageIndicatorHeightPx);
+      padding.set(desiredWorkspaceLeftRightMarginPx - defaultWidgetPadding.left,searchBarSpaceHeightPx,desiredWorkspaceLeftRightMarginPx - defaultWidgetPadding.right,hotseatBarHeightPx + pageIndicatorHeightPx);
     }
   }
   return padding;

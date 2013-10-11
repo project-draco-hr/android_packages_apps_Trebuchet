@@ -1,6 +1,6 @@
 {
   if (mDynamicGrid == null) {
-    mDynamicGrid=new DynamicGrid(context.getResources(),minWidth,minHeight,width,height,availableWidth,availableHeight);
+    mDynamicGrid=new DynamicGrid(context,context.getResources(),minWidth,minHeight,width,height,availableWidth,availableHeight);
   }
   DeviceProfile grid=mDynamicGrid.getDeviceProfile();
   Utilities.setIconSize(grid.iconSizePx);
