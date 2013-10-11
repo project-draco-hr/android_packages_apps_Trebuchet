@@ -1,5 +1,10 @@
 {
+  disableLayoutTransitions();
+  if (hasCustomContent()) {
+    removeCustomContentPage();
+  }
   removeAllViews();
   mScreenOrder.clear();
   mWorkspaceScreens.clear();
+  enableLayoutTransitions();
 }
