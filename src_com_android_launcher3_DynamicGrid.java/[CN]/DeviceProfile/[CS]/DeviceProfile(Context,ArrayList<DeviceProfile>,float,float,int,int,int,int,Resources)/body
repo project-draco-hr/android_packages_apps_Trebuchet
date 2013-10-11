@@ -4,7 +4,10 @@
   transposeLayoutWithOrientation=resources.getBoolean(R.bool.hotseat_transpose_layout_with_orientation);
   minWidthDps=minWidth;
   minHeightDps=minHeight;
+  ComponentName cn=new ComponentName(context.getPackageName(),this.getClass().getName());
+  defaultWidgetPadding=AppWidgetHostView.getDefaultPaddingForWidget(context,cn,null);
   edgeMarginPx=resources.getDimensionPixelSize(R.dimen.dynamic_grid_edge_margin);
+  desiredWorkspaceLeftRightMarginPx=2 * edgeMarginPx;
   pageIndicatorHeightPx=resources.getDimensionPixelSize(R.dimen.dynamic_grid_page_indicator_height);
   for (  DeviceProfile p : profiles) {
     points.add(new DeviceProfileQuery(p.minWidthDps,p.minHeightDps,p.numRows));

@@ -1,3 +1,4 @@
+Context context
 ArrayList<DeviceProfile> profiles
 float minWidth
 float minHeight
