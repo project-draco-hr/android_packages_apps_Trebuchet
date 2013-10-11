@@ -10,7 +10,7 @@
   int centerY=(int)(mTempRect.top + mTempRect.height() * scale / 2);
   int centeredLeft=centerX - width / 2;
   int centeredTop=centerY - height / 2;
-  int currentPage=mLauncher.getWorkspace().getCurrentPage();
+  int currentPage=mLauncher.getWorkspace().getNextPage();
   mLauncher.getWorkspace().setFinalScrollForPageChange(currentPage);
   CellLayout currentLayout=(CellLayout)mLauncher.getWorkspace().getChildAt(currentPage);
   ShortcutAndWidgetContainer boundingLayout=currentLayout.getShortcutsAndWidgets();
