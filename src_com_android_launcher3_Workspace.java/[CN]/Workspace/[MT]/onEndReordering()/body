@@ -8,5 +8,5 @@
     mScreenOrder.add(getIdForScreen(cl));
   }
   mLauncher.getModel().updateWorkspaceScreenOrder(mLauncher,mScreenOrder);
-  setLayoutTransition(mLayoutTransition);
+  enableLayoutTransitions();
 }
