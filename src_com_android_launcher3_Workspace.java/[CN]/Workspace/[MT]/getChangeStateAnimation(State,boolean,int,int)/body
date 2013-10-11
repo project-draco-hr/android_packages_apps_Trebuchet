@@ -111,11 +111,11 @@
     ObjectAnimator hotseatAlpha=ObjectAnimator.ofFloat(hotseat,"alpha",finalHotseatAndPageIndicatorAlpha);
     ObjectAnimator searchBarAlpha=ObjectAnimator.ofFloat(searchBar,"alpha",finalSearchBarAlpha);
     ObjectAnimator overviewPanelAlpha=ObjectAnimator.ofFloat(overviewPanel,"alpha",finalOverviewPanelAlpha);
-    overviewPanelAlpha.addUpdateListener(new AlphaUpdateListener(overviewPanel));
-    hotseatAlpha.addUpdateListener(new AlphaUpdateListener(hotseat));
-    searchBarAlpha.addUpdateListener(new AlphaUpdateListener(searchBar));
+    overviewPanelAlpha.addListener(new AlphaUpdateListener(overviewPanel));
+    hotseatAlpha.addListener(new AlphaUpdateListener(hotseat));
+    searchBarAlpha.addListener(new AlphaUpdateListener(searchBar));
     if (getPageIndicator() != null) {
-      pageIndicatorAlpha.addUpdateListener(new AlphaUpdateListener(getPageIndicator()));
+      pageIndicatorAlpha.addListener(new AlphaUpdateListener(getPageIndicator()));
     }
     anim.play(overviewPanelAlpha);
     anim.play(hotseatAlpha);
