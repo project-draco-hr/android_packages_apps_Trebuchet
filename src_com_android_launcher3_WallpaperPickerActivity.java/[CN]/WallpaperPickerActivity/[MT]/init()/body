@@ -1,6 +1,5 @@
 {
   setContentView(R.layout.wallpaper_picker);
-  final WallpaperRootView root=(WallpaperRootView)findViewById(R.id.wallpaper_root);
   mCropView=(CropView)findViewById(R.id.cropView);
   mWallpaperStrip=findViewById(R.id.wallpaper_strip);
   mCropView.setTouchCallback(new CropView.TouchCallback(){
