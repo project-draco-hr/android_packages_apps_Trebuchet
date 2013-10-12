@@ -3,7 +3,8 @@
   mCropView=(CropView)findViewById(R.id.cropView);
   Intent cropIntent=this.getIntent();
   final Uri imageUri=cropIntent.getData();
-  mCropView.setTileSource(new BitmapRegionTileSource(this,imageUri,1024,0),null);
+  int rotation=getRotationFromExif(this,imageUri);
+  mCropView.setTileSource(new BitmapRegionTileSource(this,imageUri,1024,rotation),null);
   mCropView.setTouchEnabled(true);
   final ActionBar actionBar=getActionBar();
   actionBar.setCustomView(R.layout.actionbar_set_wallpaper);

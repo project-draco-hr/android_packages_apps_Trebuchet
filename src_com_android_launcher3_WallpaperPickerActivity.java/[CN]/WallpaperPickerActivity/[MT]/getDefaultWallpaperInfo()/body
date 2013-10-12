@@ -9,8 +9,10 @@
     defaultWallpaperExists=true;
   }
  else {
-    Point defaultThumbSize=getDefaultThumbnailSize(getResources());
-    thumb=createThumbnail(defaultThumbSize,this,null,null,sysRes,resId,false);
+    Resources res=getResources();
+    Point defaultThumbSize=getDefaultThumbnailSize(res);
+    int rotation=WallpaperCropActivity.getRotationFromExif(res,resId);
+    thumb=createThumbnail(defaultThumbSize,this,null,null,sysRes,resId,rotation,false);
     if (thumb != null) {
       try {
         defaultThumbFile.createNewFile();
