@@ -23,6 +23,7 @@
     if (appWidgetId < 0) {
       Log.e(TAG,"Error: appWidgetId (EXTRA_APPWIDGET_ID) was not returned from the \\" + "widget configuration activity.");
       completeTwoStageWidgetDrop(RESULT_CANCELED,appWidgetId);
+      mWorkspace.stripEmptyScreens();
     }
  else {
       completeTwoStageWidgetDrop(resultCode,appWidgetId);
@@ -43,6 +44,9 @@
  else {
       delayExitSpringLoadedMode=completeAdd(args);
     }
+  }
+ else   if (resultCode == RESULT_CANCELED) {
+    mWorkspace.stripEmptyScreens();
   }
   mDragLayer.clearAnimatedView();
   exitSpringLoadedDragModeDelayed((resultCode != RESULT_CANCELED),delayExitSpringLoadedMode,null);
