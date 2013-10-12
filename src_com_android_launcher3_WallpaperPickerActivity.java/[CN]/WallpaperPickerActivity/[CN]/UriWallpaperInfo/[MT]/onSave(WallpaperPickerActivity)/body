@@ -3,7 +3,7 @@
   OnBitmapCroppedHandler h=new OnBitmapCroppedHandler(){
     public void onBitmapCropped(    byte[] imageBytes){
       Point thumbSize=getDefaultThumbnailSize(a.getResources());
-      Bitmap thumb=createThumbnail(thumbSize,null,null,imageBytes,null,0,true);
+      Bitmap thumb=createThumbnail(thumbSize,null,null,imageBytes,null,0,0,true);
       a.getSavedImages().writeImage(thumb,imageBytes);
     }
   }

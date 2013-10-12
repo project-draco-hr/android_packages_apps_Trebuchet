@@ -4,4 +4,5 @@ Uri uri
 byte[] imageBytes
 Resources res
 int resId
+int rotation
 boolean leftAligned
