@@ -1,7 +1,8 @@
 {
-  if (mDragFolderRingAnimator == null) {
-    mDragFolderRingAnimator=new FolderRingAnimator(mLauncher,null);
+  if (mDragFolderRingAnimator != null) {
+    mDragFolderRingAnimator.animateToNaturalState();
   }
+  mDragFolderRingAnimator=new FolderRingAnimator(mLauncher,null);
   mDragFolderRingAnimator.setCell(cellX,cellY);
   mDragFolderRingAnimator.setCellLayout(layout);
   mDragFolderRingAnimator.animateToAcceptState();
