@@ -1,5 +1,4 @@
 {
-  if (mIsSearchBarHidden)   return;
   if (animated) {
     prepareStartAnimation(mQSBSearchBar);
     mQSBSearchBarAnim.start();
