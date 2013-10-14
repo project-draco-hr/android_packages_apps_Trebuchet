@@ -1,0 +1,5 @@
+{
+  FastBitmapDrawable d=new FastBitmapDrawable(icon);
+  resizeIconDrawable(d);
+  return d;
+}
