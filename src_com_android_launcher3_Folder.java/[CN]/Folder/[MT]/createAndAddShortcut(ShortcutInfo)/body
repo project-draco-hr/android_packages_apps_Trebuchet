@@ -1,6 +1,6 @@
 {
   final BubbleTextView textView=(BubbleTextView)mInflater.inflate(R.layout.application,this,false);
-  textView.setCompoundDrawablesWithIntrinsicBounds(null,Utilities.createIconDrawable(item.getIcon(mIconCache)),null,null);
+  textView.setCompoundDrawables(null,Utilities.createIconDrawable(item.getIcon(mIconCache)),null,null);
   textView.setText(item.title);
   textView.setTag(item);
   textView.setTextColor(getResources().getColor(R.color.folder_items_text_color));

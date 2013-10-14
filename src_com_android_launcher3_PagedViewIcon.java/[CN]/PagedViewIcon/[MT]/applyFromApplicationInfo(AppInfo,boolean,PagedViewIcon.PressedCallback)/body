@@ -1,7 +1,7 @@
 {
   mIcon=info.iconBitmap;
   mPressedCallback=cb;
-  setCompoundDrawablesWithIntrinsicBounds(null,Utilities.createIconDrawable(mIcon),null,null);
+  setCompoundDrawables(null,Utilities.createIconDrawable(mIcon),null,null);
   setText(info.title);
   setTag(info);
 }
