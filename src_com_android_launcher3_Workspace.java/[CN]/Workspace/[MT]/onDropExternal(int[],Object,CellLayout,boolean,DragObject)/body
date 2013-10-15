@@ -113,7 +113,7 @@ cellLayout.getShortcutsAndWidgets().measureChild(view);
 LauncherModel.addOrMoveItemInDatabase(mLauncher,info,container,screenId,lp.cellX,lp.cellY);
 if (d.dragView != null) {
 setFinalTransitionTransform(cellLayout);
-mLauncher.getDragLayer().animateViewIntoPosition(d.dragView,view,exitSpringLoadedRunnable);
+mLauncher.getDragLayer().animateViewIntoPosition(d.dragView,view,exitSpringLoadedRunnable,this);
 resetTransitionTransform(cellLayout);
 }
 }
