@@ -18,6 +18,7 @@
   mSharedPrefs=getSharedPreferences(LauncherAppState.getSharedPreferencesKey(),Context.MODE_PRIVATE);
   mModel=app.setLauncher(this);
   mIconCache=app.getIconCache();
+  mIconCache.flushInvalidIcons(grid);
   mDragController=new DragController(this);
   mInflater=getLayoutInflater();
   mStats=new Stats(this);
