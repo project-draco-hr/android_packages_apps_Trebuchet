@@ -1,0 +1,9 @@
+{
+  try {
+    WallpaperManager.getInstance(a).clear();
+  }
+ catch (  IOException e) {
+    Log.w("Setting wallpaper to default threw exception",e);
+  }
+  a.finish();
+}

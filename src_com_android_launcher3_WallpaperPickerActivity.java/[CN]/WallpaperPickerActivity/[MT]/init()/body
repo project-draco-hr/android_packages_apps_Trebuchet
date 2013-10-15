@@ -1,6 +1,7 @@
 {
   setContentView(R.layout.wallpaper_picker);
   mCropView=(CropView)findViewById(R.id.cropView);
+  mDefaultWallpaperView=(ImageView)findViewById(R.id.defaultWallpaperView);
   mWallpaperStrip=findViewById(R.id.wallpaper_strip);
   mCropView.setTouchCallback(new CropView.TouchCallback(){
     LauncherViewPropertyAnimator mAnim;
@@ -88,16 +89,16 @@
   ArrayList<ResourceWallpaperInfo> wallpapers=findBundledWallpapers();
   mWallpapersView=(LinearLayout)findViewById(R.id.wallpaper_list);
   BuiltInWallpapersAdapter ia=new BuiltInWallpapersAdapter(this,wallpapers);
-  populateWallpapersFromAdapter(mWallpapersView,ia,false,true);
+  populateWallpapersFromAdapter(mWallpapersView,ia,false);
   mSavedImages=new SavedWallpaperImages(this);
   mSavedImages.loadThumbnailsAndImageIdList();
-  populateWallpapersFromAdapter(mWallpapersView,mSavedImages,true,true);
+  populateWallpapersFromAdapter(mWallpapersView,mSavedImages,true);
   final LinearLayout liveWallpapersView=(LinearLayout)findViewById(R.id.live_wallpaper_list);
   final LiveWallpaperListAdapter a=new LiveWallpaperListAdapter(this);
   a.registerDataSetObserver(new DataSetObserver(){
     public void onChanged(){
       liveWallpapersView.removeAllViews();
-      populateWallpapersFromAdapter(liveWallpapersView,a,false,false);
+      populateWallpapersFromAdapter(liveWallpapersView,a,false);
       initializeScrollForRtl();
       updateTileIndices();
     }
@@ -105,7 +106,7 @@
 );
   final LinearLayout thirdPartyWallpapersView=(LinearLayout)findViewById(R.id.third_party_wallpaper_list);
   final ThirdPartyWallpaperPickerListAdapter ta=new ThirdPartyWallpaperPickerListAdapter(this);
-  populateWallpapersFromAdapter(thirdPartyWallpapersView,ta,false,false);
+  populateWallpapersFromAdapter(thirdPartyWallpapersView,ta,false);
   LinearLayout masterWallpaperList=(LinearLayout)findViewById(R.id.master_wallpaper_list);
   FrameLayout pickImageTile=(FrameLayout)getLayoutInflater().inflate(R.layout.wallpaper_picker_image_picker_item,masterWallpaperList,false);
   setWallpaperItemPaddingToZero(pickImageTile);
@@ -121,7 +122,26 @@
   pickImageTile.setTag(pickImageInfo);
   pickImageInfo.setView(pickImageTile);
   pickImageTile.setOnClickListener(mThumbnailOnClickListener);
-  pickImageInfo.setView(pickImageTile);
+  if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+    DefaultWallpaperInfo defaultWallpaperInfo=getDefaultWallpaper();
+    FrameLayout defaultWallpaperTile=(FrameLayout)createImageTileView(getLayoutInflater(),0,null,mWallpapersView,defaultWallpaperInfo.mThumb);
+    setWallpaperItemPaddingToZero(defaultWallpaperTile);
+    defaultWallpaperTile.setTag(defaultWallpaperInfo);
+    mWallpapersView.addView(defaultWallpaperTile,0);
+    defaultWallpaperTile.setOnClickListener(mThumbnailOnClickListener);
+    defaultWallpaperInfo.setView(defaultWallpaperTile);
+  }
+  mDefaultWallpaperView.addOnLayoutChangeListener(new OnLayoutChangeListener(){
+    @Override public void onLayoutChange(    View v,    int left,    int top,    int right,    int bottom,    int oldLeft,    int oldTop,    int oldRight,    int oldBottom){
+      if ((right - left) > 0 && (bottom - top) > 0) {
+        if (mWallpapersView.getChildCount() > 0) {
+          mThumbnailOnClickListener.onClick(mWallpapersView.getChildAt(0));
+        }
+        v.removeOnLayoutChangeListener(this);
+      }
+    }
+  }
+);
   updateTileIndices();
   initializeScrollForRtl();
   final LayoutTransition transitioner=new LayoutTransition();
