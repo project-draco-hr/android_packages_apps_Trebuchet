@@ -1,0 +1,10 @@
+{
+synchronized (mCache) {
+    for (    ComponentName cn : mCache.keySet()) {
+      final CacheEntry e=mCache.get(cn);
+      if (e.icon.getWidth() != grid.iconSizePx || e.icon.getHeight() != grid.iconSizePx) {
+        mCache.remove(cn);
+      }
+    }
+  }
+}
