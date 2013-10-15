@@ -31,7 +31,8 @@
       float fromTop=from.top + (initialScaleY - 1f) * height / 2;
       int x=(int)(fromLeft + Math.round(((to.left - fromLeft) * motionPercent)));
       int y=(int)(fromTop + Math.round(((to.top - fromTop) * motionPercent)));
-      int xPos=x - mDropView.getScrollX() + (mAnchorView != null ? (mAnchorViewInitialScrollX - mAnchorView.getScrollX()) : 0);
+      int anchorAdjust=mAnchorView == null ? 0 : (int)(mAnchorView.getScaleX() * (mAnchorViewInitialScrollX - mAnchorView.getScrollX()));
+      int xPos=x - mDropView.getScrollX() + anchorAdjust;
       int yPos=y - mDropView.getScrollY();
       mDropView.setTranslationX(xPos);
       mDropView.setTranslationY(yPos);
