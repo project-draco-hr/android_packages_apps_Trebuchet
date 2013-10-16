@@ -1,4 +1,6 @@
 {
+  boolean needToCancelOngoingAnimation=mQSBSearchBarAnim.isRunning() && !animated;
+  if (!mIsSearchBarHidden && !needToCancelOngoingAnimation)   return;
   if (animated) {
     prepareStartAnimation(mQSBSearchBar);
     mQSBSearchBarAnim.reverse();
