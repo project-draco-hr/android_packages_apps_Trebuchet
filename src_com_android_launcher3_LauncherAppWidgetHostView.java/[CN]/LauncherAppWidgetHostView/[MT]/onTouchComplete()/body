@@ -1,3 +1,5 @@
 {
-  mLongPressHelper.cancelLongPress();
+  if (!mLongPressHelper.hasPerformedLongPress()) {
+    mLongPressHelper.cancelLongPress();
+  }
 }
