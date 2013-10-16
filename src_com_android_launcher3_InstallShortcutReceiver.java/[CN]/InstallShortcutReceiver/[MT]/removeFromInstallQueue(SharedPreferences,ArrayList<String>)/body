@@ -1,4 +1,7 @@
 {
+  if (packageNames.isEmpty()) {
+    return;
+  }
 synchronized (sLock) {
     Set<String> strings=sharedPrefs.getStringSet(APPS_PENDING_INSTALL,null);
     if (strings != null) {
