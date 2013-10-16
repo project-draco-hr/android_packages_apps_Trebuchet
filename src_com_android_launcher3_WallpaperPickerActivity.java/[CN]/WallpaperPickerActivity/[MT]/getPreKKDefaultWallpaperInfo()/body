@@ -1,7 +1,7 @@
 {
   Resources sysRes=Resources.getSystem();
   int resId=sysRes.getIdentifier("default_wallpaper","drawable","android");
-  File defaultThumbFile=new File(getFilesDir(),"default_thumb.jpg");
+  File defaultThumbFile=new File(getFilesDir(),DEFAULT_WALLPAPER_THUMBNAIL_FILENAME);
   Bitmap thumb=null;
   boolean defaultWallpaperExists=false;
   if (defaultThumbFile.exists()) {
@@ -14,17 +14,7 @@
     int rotation=WallpaperCropActivity.getRotationFromExif(res,resId);
     thumb=createThumbnail(defaultThumbSize,this,null,null,sysRes,resId,rotation,false);
     if (thumb != null) {
-      try {
-        defaultThumbFile.createNewFile();
-        FileOutputStream thumbFileStream=openFileOutput(defaultThumbFile.getName(),Context.MODE_PRIVATE);
-        thumb.compress(Bitmap.CompressFormat.JPEG,95,thumbFileStream);
-        thumbFileStream.close();
-        defaultWallpaperExists=true;
-      }
- catch (      IOException e) {
-        Log.e(TAG,"Error while writing default wallpaper thumbnail to file " + e);
-        defaultThumbFile.delete();
-      }
+      defaultWallpaperExists=writeImageToFileAsJpeg(defaultThumbFile,thumb);
     }
   }
   if (defaultWallpaperExists) {

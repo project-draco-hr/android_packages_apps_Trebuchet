@@ -1,0 +1,29 @@
+{
+  File defaultThumbFile=new File(getFilesDir(),DEFAULT_WALLPAPER_THUMBNAIL_FILENAME);
+  Bitmap thumb=null;
+  boolean defaultWallpaperExists=false;
+  if (defaultThumbFile.exists()) {
+    thumb=BitmapFactory.decodeFile(defaultThumbFile.getAbsolutePath());
+    defaultWallpaperExists=true;
+  }
+ else {
+    Resources res=getResources();
+    Point defaultThumbSize=getDefaultThumbnailSize(res);
+    Paint p=new Paint();
+    p.setFilterBitmap(true);
+    Drawable wallpaperDrawable=WallpaperManager.getInstance(this).getBuiltInDrawable(defaultThumbSize.x,defaultThumbSize.y,true,0.5f,0.5f);
+    if (wallpaperDrawable != null) {
+      thumb=Bitmap.createBitmap(defaultThumbSize.x,defaultThumbSize.y,Bitmap.Config.ARGB_8888);
+      Canvas c=new Canvas(thumb);
+      wallpaperDrawable.draw(c);
+      c.setBitmap(null);
+    }
+    if (thumb != null) {
+      defaultWallpaperExists=writeImageToFileAsJpeg(defaultThumbFile,thumb);
+    }
+  }
+  if (defaultWallpaperExists) {
+    return new DefaultWallpaperInfo(new BitmapDrawable(thumb));
+  }
+  return null;
+}
