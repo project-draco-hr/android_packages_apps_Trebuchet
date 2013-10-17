@@ -1,0 +1,3 @@
+HashMap<ComponentName,AppInfo> appsMap
+ItemInfo info
+View child
