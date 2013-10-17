@@ -1,7 +1,3 @@
 {
-  if (mDelayedSnapToPageRunnable != null) {
-    mDelayedSnapToPageRunnable.run();
-  }
-  mDelayedSnapToPageRunnable=r;
-  snapToPage(whichPage,SLOW_PAGE_SNAP_ANIMATION_DURATION);
+  snapToPage(whichPage,SLOW_PAGE_SNAP_ANIMATION_DURATION,r);
 }

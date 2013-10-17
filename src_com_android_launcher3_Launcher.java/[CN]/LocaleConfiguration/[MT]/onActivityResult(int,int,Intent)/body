@@ -1,12 +1,19 @@
 {
   mWaitingForResult=false;
+  Runnable exitSpringLoaded=new Runnable(){
+    @Override public void run(){
+      exitSpringLoadedDragModeDelayed((resultCode != RESULT_CANCELED),EXIT_SPRINGLOADED_MODE_SHORT_TIMEOUT,null);
+    }
+  }
+;
   if (requestCode == REQUEST_BIND_APPWIDGET) {
-    int appWidgetId=data != null ? data.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,-1) : -1;
+    final int appWidgetId=data != null ? data.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,-1) : -1;
     if (resultCode == RESULT_CANCELED) {
       completeTwoStageWidgetDrop(RESULT_CANCELED,appWidgetId);
+      mWorkspace.removeExtraEmptyScreen(true,exitSpringLoaded,ON_ACTIVITY_RESULT_ANIMATION_DELAY,false);
     }
  else     if (resultCode == RESULT_OK) {
-      addAppWidgetImpl(appWidgetId,mPendingAddInfo,null,mPendingAddWidgetInfo);
+      addAppWidgetImpl(appWidgetId,mPendingAddInfo,null,mPendingAddWidgetInfo,ON_ACTIVITY_RESULT_ANIMATION_DELAY);
     }
     return;
   }
@@ -16,18 +23,32 @@
     }
     return;
   }
-  boolean delayExitSpringLoadedMode=false;
   boolean isWidgetDrop=(requestCode == REQUEST_PICK_APPWIDGET || requestCode == REQUEST_CREATE_APPWIDGET);
   if (isWidgetDrop) {
-    int appWidgetId=data != null ? data.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,-1) : -1;
+    final int appWidgetId=data != null ? data.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,-1) : -1;
+    final int result;
+    final Runnable onComplete;
     if (appWidgetId < 0) {
       Log.e(TAG,"Error: appWidgetId (EXTRA_APPWIDGET_ID) was not returned from the \\" + "widget configuration activity.");
-      completeTwoStageWidgetDrop(RESULT_CANCELED,appWidgetId);
-      mWorkspace.stripEmptyScreens();
+      result=RESULT_CANCELED;
+      completeTwoStageWidgetDrop(result,appWidgetId);
+      onComplete=new Runnable(){
+        @Override public void run(){
+          exitSpringLoadedDragModeDelayed(false,0,null);
+        }
+      }
+;
     }
  else {
-      completeTwoStageWidgetDrop(resultCode,appWidgetId);
+      result=resultCode;
+      onComplete=new Runnable(){
+        @Override public void run(){
+          completeTwoStageWidgetDrop(result,appWidgetId);
+        }
+      }
+;
     }
+    mWorkspace.removeExtraEmptyScreen(true,onComplete,ON_ACTIVITY_RESULT_ANIMATION_DELAY,false);
     return;
   }
   if (resultCode == RESULT_OK && mPendingAddInfo.container != ItemInfo.NO_ID) {
@@ -42,12 +63,12 @@
       sPendingAddList.add(args);
     }
  else {
-      delayExitSpringLoadedMode=completeAdd(args);
+      completeAdd(args);
     }
+    mWorkspace.removeExtraEmptyScreen(true,exitSpringLoaded,ON_ACTIVITY_RESULT_ANIMATION_DELAY,false);
   }
  else   if (resultCode == RESULT_CANCELED) {
-    mWorkspace.stripEmptyScreens();
+    mWorkspace.removeExtraEmptyScreen(true,exitSpringLoaded,ON_ACTIVITY_RESULT_ANIMATION_DELAY,false);
   }
   mDragLayer.clearAnimatedView();
-  exitSpringLoadedDragModeDelayed((resultCode != RESULT_CANCELED),delayExitSpringLoadedMode,null);
 }
