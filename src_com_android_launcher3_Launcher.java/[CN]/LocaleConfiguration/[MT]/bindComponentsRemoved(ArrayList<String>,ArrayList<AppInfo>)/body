@@ -1,20 +1,20 @@
 {
   Runnable r=new Runnable(){
     public void run(){
-      bindComponentsRemoved(packageNames,appInfos,packageRemoved);
+      bindComponentsRemoved(packageNames,appInfos);
     }
   }
 ;
   if (waitUntilResume(r)) {
     return;
   }
-  if (packageRemoved) {
+  if (!packageNames.isEmpty()) {
     mWorkspace.removeItemsByPackageName(packageNames);
   }
- else {
+  if (!appInfos.isEmpty()) {
     mWorkspace.removeItemsByApplicationInfo(appInfos);
   }
-  mDragController.onAppsRemoved(appInfos,this);
+  mDragController.onAppsRemoved(packageNames,appInfos);
   if (!AppsCustomizePagedView.DISABLE_ALL_APPS && mAppsCustomizeContent != null) {
     mAppsCustomizeContent.removeApps(appInfos);
   }

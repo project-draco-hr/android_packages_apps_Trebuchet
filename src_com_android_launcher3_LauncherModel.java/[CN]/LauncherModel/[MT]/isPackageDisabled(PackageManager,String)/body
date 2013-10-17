@@ -1,0 +1,9 @@
+{
+  try {
+    PackageInfo pi=pm.getPackageInfo(packageName,0);
+    return !pi.applicationInfo.enabled;
+  }
+ catch (  NameNotFoundException e) {
+  }
+  return false;
+}
