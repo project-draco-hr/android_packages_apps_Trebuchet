@@ -2,11 +2,11 @@
   if (cn == null) {
     return false;
   }
+  if (isPackageDisabled(pm,cn.getPackageName())) {
+    return false;
+  }
   try {
     PackageInfo pi=pm.getPackageInfo(cn.getPackageName(),0);
-    if (!pi.applicationInfo.enabled) {
-      return false;
-    }
     return (pm.getActivityInfo(cn,0) != null);
   }
  catch (  NameNotFoundException e) {
