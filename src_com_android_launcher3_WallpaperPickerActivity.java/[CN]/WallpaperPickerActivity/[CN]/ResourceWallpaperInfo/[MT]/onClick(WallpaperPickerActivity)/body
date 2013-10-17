@@ -1,6 +1,7 @@
 {
-  int rotation=WallpaperCropActivity.getRotationFromExif(mResources,mResId);
-  BitmapRegionTileSource source=new BitmapRegionTileSource(mResources,a,mResId,1024,rotation);
+  BitmapRegionTileSource.ResourceBitmapSource bitmapSource=new BitmapRegionTileSource.ResourceBitmapSource(mResources,mResId,1024);
+  bitmapSource.loadInBackground();
+  BitmapRegionTileSource source=new BitmapRegionTileSource(a,bitmapSource);
   CropView v=a.getCropView();
   a.getDefaultWallpaperView().setVisibility(View.INVISIBLE);
   v.setTileSource(source,null);
