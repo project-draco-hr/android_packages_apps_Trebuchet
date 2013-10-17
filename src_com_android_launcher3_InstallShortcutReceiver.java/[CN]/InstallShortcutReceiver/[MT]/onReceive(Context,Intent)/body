@@ -2,6 +2,7 @@
   if (!ACTION_INSTALL_SHORTCUT.equals(data.getAction())) {
     return;
   }
+  if (DBG)   Log.d(TAG,"Got INSTALL_SHORTCUT: " + data.toUri(0));
   Intent intent=data.getParcelableExtra(Intent.EXTRA_SHORTCUT_INTENT);
   if (intent == null) {
     return;

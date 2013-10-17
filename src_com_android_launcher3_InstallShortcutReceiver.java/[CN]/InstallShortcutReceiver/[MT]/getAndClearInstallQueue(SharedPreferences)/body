@@ -1,6 +1,7 @@
 {
 synchronized (sLock) {
     Set<String> strings=sharedPrefs.getStringSet(APPS_PENDING_INSTALL,null);
+    if (DBG)     Log.d(TAG,"Getting and clearing APPS_PENDING_INSTALL: " + strings);
     if (strings == null) {
       return new ArrayList<PendingInstallShortcutInfo>();
     }
@@ -30,10 +31,10 @@ synchronized (sLock) {
         infos.add(info);
       }
  catch (      org.json.JSONException e) {
-        Log.d("InstallShortcutReceiver","Exception reading shortcut to add: " + e);
+        Log.d(TAG,"Exception reading shortcut to add: " + e);
       }
 catch (      java.net.URISyntaxException e) {
-        Log.d("InstallShortcutReceiver","Exception reading shortcut to add: " + e);
+        Log.d(TAG,"Exception reading shortcut to add: " + e);
       }
     }
     sharedPrefs.edit().putStringSet(APPS_PENDING_INSTALL,new HashSet<String>()).commit();
