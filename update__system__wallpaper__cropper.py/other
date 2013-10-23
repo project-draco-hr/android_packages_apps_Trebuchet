@@ -1,0 +1,13 @@
+import os
+import sys
+files = '\nsrc/android/util/Pools.java\nsrc/com/android/gallery3d/util/IntArray.java\nsrc/com/android/gallery3d/common/Utils.java\nsrc/com/android/gallery3d/exif/ByteBufferInputStream.java\nsrc/com/android/gallery3d/exif/CountedDataInputStream.java\nsrc/com/android/gallery3d/exif/ExifData.java\nsrc/com/android/gallery3d/exif/ExifInterface.java\nsrc/com/android/gallery3d/exif/ExifInvalidFormatException.java\nsrc/com/android/gallery3d/exif/ExifModifier.java\nsrc/com/android/gallery3d/exif/ExifOutputStream.java\nsrc/com/android/gallery3d/exif/ExifParser.java\nsrc/com/android/gallery3d/exif/ExifReader.java\nsrc/com/android/gallery3d/exif/ExifTag.java\nsrc/com/android/gallery3d/exif/IfdData.java\nsrc/com/android/gallery3d/exif/IfdId.java\nsrc/com/android/gallery3d/exif/JpegHeader.java\nsrc/com/android/gallery3d/exif/OrderedDataOutputStream.java\nsrc/com/android/gallery3d/exif/Rational.java\nsrc/com/android/gallery3d/glrenderer/BasicTexture.java\nsrc/com/android/gallery3d/glrenderer/BitmapTexture.java\nsrc/com/android/gallery3d/glrenderer/GLCanvas.java\nsrc/com/android/gallery3d/glrenderer/GLES20Canvas.java\nsrc/com/android/gallery3d/glrenderer/GLES20IdImpl.java\nsrc/com/android/gallery3d/glrenderer/GLId.java\nsrc/com/android/gallery3d/glrenderer/GLPaint.java\nsrc/com/android/gallery3d/glrenderer/RawTexture.java\nsrc/com/android/gallery3d/glrenderer/Texture.java\nsrc/com/android/gallery3d/glrenderer/UploadedTexture.java\nsrc/com/android/photos/BitmapRegionTileSource.java\nsrc/com/android/photos/views/BlockingGLTextureView.java\nsrc/com/android/photos/views/TiledImageRenderer.java\nsrc/com/android/photos/views/TiledImageView.java\nsrc/com/android/gallery3d/common/BitmapUtils.java\nsrc/com/android/launcher3/CropView.java\nsrc/com/android/launcher3/WallpaperCropActivity.java\n'
+if (len(sys.argv) != 2):
+    print 'Usage: python update_sytem_wallpaper_cropper.py <framework_dir>'
+    exit()
+framework_dir = (sys.argv[1] + '/packages/WallpaperCropper')
+for file_path in files.split():
+    dir = os.path.dirname(file_path)
+    dir = dir.replace('launcher3', 'wallpapercropper')
+    cmd = ('cp %s %s/%s' % (file_path, framework_dir, dir))
+    print cmd
+    os.system(cmd)
