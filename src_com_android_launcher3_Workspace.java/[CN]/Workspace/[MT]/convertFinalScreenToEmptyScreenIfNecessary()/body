@@ -1,0 +1,12 @@
+{
+  if (hasExtraEmptyScreen() || mScreenOrder.size() == 0)   return;
+  long finalScreenId=mScreenOrder.get(mScreenOrder.size() - 1);
+  if (finalScreenId == CUSTOM_CONTENT_SCREEN_ID)   return;
+  CellLayout finalScreen=mWorkspaceScreens.get(finalScreenId);
+  if (finalScreen.getShortcutsAndWidgets().getChildCount() == 0) {
+    mWorkspaceScreens.remove(finalScreenId);
+    mScreenOrder.remove(finalScreenId);
+    mWorkspaceScreens.put(EXTRA_EMPTY_SCREEN_ID,finalScreen);
+    mScreenOrder.add(EXTRA_EMPTY_SCREEN_ID);
+  }
+}

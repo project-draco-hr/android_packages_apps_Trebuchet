@@ -1,0 +1,19 @@
+{
+  if (appWidgetInfo.configure != null) {
+    mPendingAddWidgetInfo=appWidgetInfo;
+    Intent intent=new Intent(AppWidgetManager.ACTION_APPWIDGET_CONFIGURE);
+    intent.setComponent(appWidgetInfo.configure);
+    intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,appWidgetId);
+    Utilities.startActivityForResultSafely(this,intent,REQUEST_CREATE_APPWIDGET);
+  }
+ else {
+    Runnable onComplete=new Runnable(){
+      @Override public void run(){
+        exitSpringLoadedDragModeDelayed(true,EXIT_SPRINGLOADED_MODE_SHORT_TIMEOUT,null);
+      }
+    }
+;
+    completeAddAppWidget(appWidgetId,info.container,info.screenId,boundWidget,appWidgetInfo);
+    mWorkspace.removeExtraEmptyScreen(true,onComplete,delay,false);
+  }
+}
