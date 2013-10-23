@@ -1,9 +1,7 @@
 {
-  a.getCropView().setTouchEnabled(false);
-  ImageView defaultWallpaperView=a.getDefaultWallpaperView();
-  defaultWallpaperView.setVisibility(View.VISIBLE);
-  Drawable defaultWallpaper=WallpaperManager.getInstance(a).getBuiltInDrawable(defaultWallpaperView.getWidth(),defaultWallpaperView.getHeight(),false,0.5f,0.5f);
-  if (defaultWallpaper != null) {
-    defaultWallpaperView.setBackgroundDrawable(defaultWallpaper);
-  }
+  CropView c=a.getCropView();
+  Drawable defaultWallpaper=WallpaperManager.getInstance(a).getBuiltInDrawable(c.getWidth(),c.getHeight(),false,0.5f,0.5f);
+  c.setTileSource(new DrawableTileSource(a,defaultWallpaper,DrawableTileSource.MAX_PREVIEW_SIZE),null);
+  c.setScale(1f);
+  c.setTouchEnabled(false);
 }

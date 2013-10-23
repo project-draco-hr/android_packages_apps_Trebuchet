@@ -1,0 +1,13 @@
+{
+  int tileSize=getTileSize();
+  if (bitmap == null) {
+    bitmap=Bitmap.createBitmap(tileSize,tileSize,Bitmap.Config.ARGB_8888);
+  }
+  Canvas c=new Canvas(bitmap);
+  Rect bounds=new Rect(0,0,getImageWidth(),getImageHeight());
+  bounds.offset(-x,-y);
+  mDrawable.setBounds(bounds);
+  mDrawable.draw(c);
+  c.setBitmap(null);
+  return bitmap;
+}

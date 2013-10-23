@@ -1,4 +1,3 @@
 {
-  getDefaultWallpaperView().setVisibility(View.INVISIBLE);
   super.setCropViewTileSource(bitmapSource,touchEnabled,moveToLeft);
 }
