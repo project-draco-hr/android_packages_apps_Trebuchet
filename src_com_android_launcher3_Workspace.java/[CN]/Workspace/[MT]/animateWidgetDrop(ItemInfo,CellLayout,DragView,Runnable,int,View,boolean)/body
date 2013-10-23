@@ -6,7 +6,7 @@
   boolean scalePreview=!(info instanceof PendingAddShortcutInfo);
   getFinalPositionForDropAnimation(finalPos,scaleXY,dragView,cellLayout,info,mTargetCell,external,scalePreview);
   Resources res=mLauncher.getResources();
-  int duration=res.getInteger(R.integer.config_dropAnimMaxDuration) - 200;
+  final int duration=res.getInteger(R.integer.config_dropAnimMaxDuration) - 200;
   if (finalView instanceof AppWidgetHostView && external) {
     Log.d(TAG,"6557954 Animate widget drop, final view is appWidgetHostView");
     mLauncher.getDragLayer().removeView(finalView);
