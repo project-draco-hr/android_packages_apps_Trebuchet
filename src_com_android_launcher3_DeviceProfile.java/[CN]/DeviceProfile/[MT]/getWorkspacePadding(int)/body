@@ -1,0 +1,18 @@
+{
+  Rect searchBarBounds=getSearchBarBounds(orientation);
+  Rect padding=new Rect();
+  if (orientation == CellLayout.LANDSCAPE && transposeLayoutWithOrientation) {
+    padding.set(searchBarBounds.right,edgeMarginPx,hotseatBarHeightPx,edgeMarginPx);
+  }
+ else {
+    if (isTablet()) {
+      int width=(orientation == CellLayout.LANDSCAPE) ? Math.max(widthPx,heightPx) : Math.min(widthPx,heightPx);
+      int gap=(int)((width - 2 * edgeMarginPx - (numColumns * cellWidthPx)) / (2 * (numColumns + 1)));
+      padding.set(edgeMarginPx + gap,searchBarBounds.bottom,edgeMarginPx + gap,hotseatBarHeightPx + pageIndicatorHeightPx);
+    }
+ else {
+      padding.set(desiredWorkspaceLeftRightMarginPx - defaultWidgetPadding.left,searchBarBounds.bottom,desiredWorkspaceLeftRightMarginPx - defaultWidgetPadding.right,hotseatBarHeightPx + pageIndicatorHeightPx);
+    }
+  }
+  return padding;
+}
