@@ -45,7 +45,7 @@
     lp.gravity=Gravity.RIGHT;
     lp.width=hotseatBarHeightPx;
     lp.height=LayoutParams.MATCH_PARENT;
-    hotseat.setPadding(0,2 * edgeMarginPx,2 * edgeMarginPx,2 * edgeMarginPx);
+    hotseat.findViewById(R.id.layout).setPadding(0,2 * edgeMarginPx,0,2 * edgeMarginPx);
   }
  else   if (isTablet()) {
     int gridGap=(int)((widthPx - 2 * edgeMarginPx - (numColumns * cellWidthPx)) / (2 * (numColumns + 1)));
