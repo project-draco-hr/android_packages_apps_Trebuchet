@@ -64,7 +64,7 @@
       if (immediate) {
         AsyncTaskPageData data=new AsyncTaskPageData(page,items,maxPreviewWidth,maxPreviewHeight,null,null,mWidgetPreviewLoader);
         loadWidgetPreviewsInBackground(null,data);
-        onSyncWidgetPageItems(data);
+        onSyncWidgetPageItems(data,immediate);
       }
  else {
         if (mInTransition) {
