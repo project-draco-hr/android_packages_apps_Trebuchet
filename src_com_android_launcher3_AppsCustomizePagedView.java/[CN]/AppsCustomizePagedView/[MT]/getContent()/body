@@ -1,3 +1,6 @@
 {
+  if (getChildCount() > 0) {
+    return getChildAt(0);
+  }
   return null;
 }
