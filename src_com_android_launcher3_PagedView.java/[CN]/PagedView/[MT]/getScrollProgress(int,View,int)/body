@@ -1,6 +1,7 @@
 {
   final int halfScreenSize=getViewportWidth() / 2;
-  int totalDistance=v.getMeasuredWidth() + mPageSpacing;
+  int offset=(getViewportWidth() - getChildWidth(page)) / 2;
+  int totalDistance=v.getMeasuredWidth() + offset;
   int delta=screenCenter - (getScrollForPage(page) + halfScreenSize);
   float scrollProgress=delta / (totalDistance * 1.0f);
   scrollProgress=Math.min(scrollProgress,getMaxScrollProgress());

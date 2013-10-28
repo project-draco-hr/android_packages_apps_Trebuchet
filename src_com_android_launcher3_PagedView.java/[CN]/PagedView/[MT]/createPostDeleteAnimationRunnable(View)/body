@@ -19,7 +19,8 @@
         int newX=0;
         if (slideFromLeft) {
           if (i == 0) {
-            oldX=getViewportOffsetX() + getChildOffset(i) - getChildWidth(i) - mPageSpacing;
+            int pageSpace=(getViewportWidth() - getChildWidth(i)) / 2;
+            oldX=getViewportOffsetX() + getChildOffset(i) - getChildWidth(i) - pageSpace;
           }
  else {
             oldX=getViewportOffsetX() + getChildOffset(i - 1);
