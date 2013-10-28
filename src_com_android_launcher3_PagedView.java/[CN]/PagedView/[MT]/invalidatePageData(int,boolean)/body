@@ -3,8 +3,7 @@
     return;
   }
   if (mContentIsRefreshable) {
-    mScroller.forceFinished(true);
-    mNextPage=INVALID_PAGE;
+    forceFinishScroller();
     syncPages();
     measure(MeasureSpec.makeMeasureSpec(getMeasuredWidth(),MeasureSpec.EXACTLY),MeasureSpec.makeMeasureSpec(getMeasuredHeight(),MeasureSpec.EXACTLY));
     if (currentPage > -1) {
