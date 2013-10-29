@@ -1,3 +1,0 @@
-{
-  super.setCropViewTileSource(bitmapSource,touchEnabled,moveToLeft);
-}
