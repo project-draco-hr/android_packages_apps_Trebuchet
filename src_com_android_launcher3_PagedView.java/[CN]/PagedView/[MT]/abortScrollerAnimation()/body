@@ -1,4 +1,0 @@
-{
-  mScroller.abortAnimation();
-  mNextPage=INVALID_PAGE;
-}
