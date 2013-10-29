@@ -1,0 +1,4 @@
+float scale
+int drawablePadding
+Resources resources
+DisplayMetrics dm

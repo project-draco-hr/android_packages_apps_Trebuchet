@@ -1,0 +1,3 @@
+{
+  return getWorkspacePadding(isLandscape ? CellLayout.LANDSCAPE : CellLayout.PORTRAIT);
+}

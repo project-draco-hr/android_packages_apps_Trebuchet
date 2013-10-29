@@ -1,0 +1,31 @@
+{
+  iconSizePx=(int)(DynamicGrid.pxFromDp(iconSize,dm) * scale);
+  iconTextSizePx=(int)(DynamicGrid.pxFromSp(iconTextSize,dm) * scale);
+  iconDrawablePaddingPx=drawablePadding;
+  hotseatIconSizePx=(int)(DynamicGrid.pxFromDp(hotseatIconSize,dm) * scale);
+  searchBarSpaceMaxWidthPx=resources.getDimensionPixelSize(R.dimen.dynamic_grid_search_bar_max_width);
+  searchBarHeightPx=resources.getDimensionPixelSize(R.dimen.dynamic_grid_search_bar_height);
+  searchBarSpaceWidthPx=Math.min(searchBarSpaceMaxWidthPx,widthPx);
+  searchBarSpaceHeightPx=searchBarHeightPx + 2 * edgeMarginPx;
+  Paint textPaint=new Paint();
+  textPaint.setTextSize(iconTextSizePx);
+  FontMetrics fm=textPaint.getFontMetrics();
+  cellWidthPx=iconSizePx;
+  cellHeightPx=iconSizePx + iconDrawablePaddingPx + (int)Math.ceil(fm.bottom - fm.top);
+  hotseatBarHeightPx=iconSizePx + 4 * edgeMarginPx;
+  hotseatCellWidthPx=iconSizePx;
+  hotseatCellHeightPx=iconSizePx;
+  folderCellWidthPx=cellWidthPx + 3 * edgeMarginPx;
+  folderCellHeightPx=cellHeightPx + edgeMarginPx;
+  folderBackgroundOffset=-edgeMarginPx;
+  folderIconSizePx=iconSizePx + 2 * -folderBackgroundOffset;
+  Rect padding=getWorkspacePadding(isLandscape ? CellLayout.LANDSCAPE : CellLayout.PORTRAIT);
+  int pageIndicatorOffset=resources.getDimensionPixelSize(R.dimen.apps_customize_page_indicator_offset);
+  if (isLandscape) {
+    allAppsNumRows=(availableHeightPx - pageIndicatorOffset - 4 * edgeMarginPx) / (iconSizePx + iconTextSizePx + 2 * edgeMarginPx);
+  }
+ else {
+    allAppsNumRows=(int)numRows + 1;
+  }
+  allAppsNumCols=(availableWidthPx - padding.left - padding.right- 2 * edgeMarginPx) / (iconSizePx + 2 * edgeMarginPx);
+}
