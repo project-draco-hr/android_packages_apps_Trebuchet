@@ -1,6 +1,6 @@
 {
   if (!mScroller.isFinished()) {
-    abortScrollerAnimation();
+    abortScrollerAnimation(true);
   }
   if (getChildCount() == 0) {
     return;
