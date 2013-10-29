@@ -1,0 +1,8 @@
+{
+  if (orientation == CellLayout.LANDSCAPE && transposeLayoutWithOrientation) {
+    return defaultPageSpacingPx;
+  }
+ else {
+    return getWorkspacePadding().left;
+  }
+}

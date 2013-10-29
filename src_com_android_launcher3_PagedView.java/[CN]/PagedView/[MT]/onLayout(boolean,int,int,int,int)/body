@@ -4,7 +4,6 @@
   }
   if (DEBUG)   Log.d(TAG,"PagedView.onLayout()");
   final int childCount=getChildCount();
-  int screenWidth=getViewportWidth();
   int offsetX=getViewportOffsetX();
   int offsetY=getViewportOffsetY();
   mViewport.offset(offsetX,offsetY);
@@ -13,14 +12,15 @@
   final int endIndex=isRtl ? -1 : childCount;
   final int delta=isRtl ? -1 : 1;
   int verticalPadding=getPaddingTop() + getPaddingBottom();
-  int childLeft=offsetX + (screenWidth - getChildWidth(startIndex)) / 2;
+  LayoutParams lp=(LayoutParams)getChildAt(startIndex).getLayoutParams();
+  int childLeft=offsetX + (lp.isFullScreenPage ? 0 : getPaddingLeft());
   if (mPageScrolls == null || getChildCount() != mChildCountOnLastLayout) {
     mPageScrolls=new int[getChildCount()];
   }
   for (int i=startIndex; i != endIndex; i+=delta) {
     final View child=getPageAt(i);
     if (child.getVisibility() != View.GONE) {
-      LayoutParams lp=(LayoutParams)child.getLayoutParams();
+      lp=(LayoutParams)child.getLayoutParams();
       int childTop;
       if (lp.isFullScreenPage) {
         childTop=offsetY;
@@ -35,13 +35,9 @@
       final int childHeight=child.getMeasuredHeight();
       if (DEBUG)       Log.d(TAG,"\tlayout-child" + i + ": "+ childLeft+ ", "+ childTop);
       child.layout(childLeft,childTop,childLeft + child.getMeasuredWidth(),childTop + childHeight);
-      int scrollOffset=(getViewportWidth() - childWidth) / 2;
-      mPageScrolls[i]=childLeft - scrollOffset - offsetX;
-      if (i != endIndex - delta) {
-        childLeft+=childWidth + scrollOffset;
-        int nextScrollOffset=(getViewportWidth() - getChildWidth(i + delta)) / 2;
-        childLeft+=nextScrollOffset;
-      }
+      int scrollOffsetLeft=lp.isFullScreenPage ? 0 : getPaddingLeft();
+      mPageScrolls[i]=childLeft - scrollOffsetLeft - offsetX;
+      childLeft+=childWidth + mPageSpacing;
     }
   }
   if (mFirstLayout && mCurrentPage >= 0 && mCurrentPage < getChildCount()) {
