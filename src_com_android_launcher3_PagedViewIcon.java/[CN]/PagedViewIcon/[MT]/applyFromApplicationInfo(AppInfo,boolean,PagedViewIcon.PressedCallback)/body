@@ -1,7 +1,10 @@
 {
+  LauncherAppState app=LauncherAppState.getInstance();
+  DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
   mIcon=info.iconBitmap;
   mPressedCallback=cb;
   setCompoundDrawables(null,Utilities.createIconDrawable(mIcon),null,null);
+  setCompoundDrawablePadding(grid.iconDrawablePaddingPx);
   setText(info.title);
   setTag(info);
 }

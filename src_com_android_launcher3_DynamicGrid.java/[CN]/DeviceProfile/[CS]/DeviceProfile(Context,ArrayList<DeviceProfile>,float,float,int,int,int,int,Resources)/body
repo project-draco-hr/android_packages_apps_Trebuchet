@@ -20,43 +20,26 @@
   numColumns=Math.round(invDistWeightedInterpolate(minWidth,minHeight,points));
   points.clear();
   for (  DeviceProfile p : profiles) {
+    points.add(new DeviceProfileQuery(p.minWidthDps,p.minHeightDps,p.numHotseatIcons));
+  }
+  numHotseatIcons=Math.round(invDistWeightedInterpolate(minWidth,minHeight,points));
+  hotseatAllAppsRank=(int)(numHotseatIcons / 2);
+  points.clear();
+  for (  DeviceProfile p : profiles) {
     points.add(new DeviceProfileQuery(p.minWidthDps,p.minHeightDps,p.iconSize));
   }
   iconSize=invDistWeightedInterpolate(minWidth,minHeight,points);
-  iconSizePx=DynamicGrid.pxFromDp(iconSize,dm);
   points.clear();
   for (  DeviceProfile p : profiles) {
     points.add(new DeviceProfileQuery(p.minWidthDps,p.minHeightDps,p.iconTextSize));
   }
   iconTextSize=invDistWeightedInterpolate(minWidth,minHeight,points);
-  iconTextSizePx=DynamicGrid.pxFromSp(iconTextSize,dm);
-  points.clear();
-  for (  DeviceProfile p : profiles) {
-    points.add(new DeviceProfileQuery(p.minWidthDps,p.minHeightDps,p.numHotseatIcons));
-  }
-  numHotseatIcons=Math.round(invDistWeightedInterpolate(minWidth,minHeight,points));
+  iconDrawablePaddingOriginalPx=resources.getDimensionPixelSize(R.dimen.dynamic_grid_icon_drawable_padding);
   points.clear();
   for (  DeviceProfile p : profiles) {
     points.add(new DeviceProfileQuery(p.minWidthDps,p.minHeightDps,p.hotseatIconSize));
   }
   hotseatIconSize=invDistWeightedInterpolate(minWidth,minHeight,points);
-  hotseatIconSizePx=DynamicGrid.pxFromDp(hotseatIconSize,dm);
-  hotseatAllAppsRank=(int)(numColumns / 2);
-  updateFromConfiguration(resources,wPx,hPx,awPx,ahPx);
-  searchBarSpaceMaxWidthPx=resources.getDimensionPixelSize(R.dimen.dynamic_grid_search_bar_max_width);
-  searchBarHeightPx=resources.getDimensionPixelSize(R.dimen.dynamic_grid_search_bar_height);
-  searchBarSpaceWidthPx=Math.min(searchBarSpaceMaxWidthPx,widthPx);
-  searchBarSpaceHeightPx=searchBarHeightPx + 2 * edgeMarginPx;
-  Paint textPaint=new Paint();
-  textPaint.setTextSize(iconTextSizePx);
-  FontMetrics fm=textPaint.getFontMetrics();
-  cellWidthPx=iconSizePx;
-  cellHeightPx=iconSizePx + (int)Math.ceil(fm.bottom - fm.top);
-  hotseatBarHeightPx=iconSizePx + 4 * edgeMarginPx;
-  hotseatCellWidthPx=iconSizePx;
-  hotseatCellHeightPx=iconSizePx;
-  folderCellWidthPx=cellWidthPx + 3 * edgeMarginPx;
-  folderCellHeightPx=cellHeightPx + (int)((3f / 2f) * edgeMarginPx);
-  folderBackgroundOffset=-edgeMarginPx;
-  folderIconSizePx=iconSizePx + 2 * -folderBackgroundOffset;
+  updateFromConfiguration(context,resources,wPx,hPx,awPx,ahPx);
+  updateAvailableDimensions(context);
 }
