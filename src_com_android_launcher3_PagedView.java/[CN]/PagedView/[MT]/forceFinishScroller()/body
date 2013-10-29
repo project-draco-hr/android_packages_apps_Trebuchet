@@ -1,3 +1,4 @@
 {
   mScroller.forceFinished(true);
+  mNextPage=INVALID_PAGE;
 }
