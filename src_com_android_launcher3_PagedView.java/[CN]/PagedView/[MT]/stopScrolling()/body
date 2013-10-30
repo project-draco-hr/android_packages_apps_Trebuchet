@@ -1,4 +1,4 @@
 {
-  mCurrentPage=mNextPage;
+  mCurrentPage=getNextPage();
   forceFinishScroller();
 }
