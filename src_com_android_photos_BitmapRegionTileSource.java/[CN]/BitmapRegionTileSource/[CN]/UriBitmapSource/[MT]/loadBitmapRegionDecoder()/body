@@ -1,8 +1,13 @@
 {
   try {
     InputStream is=regenerateInputStream();
-    BitmapRegionDecoder regionDecoder=BitmapRegionDecoder.newInstance(is,false);
+    SimpleBitmapRegionDecoder regionDecoder=SimpleBitmapRegionDecoderWrapper.newInstance(is,false);
     Utils.closeSilently(is);
+    if (regionDecoder == null) {
+      is=regenerateInputStream();
+      regionDecoder=DumbBitmapRegionDecoder.newInstance(is);
+      Utils.closeSilently(is);
+    }
     return regionDecoder;
   }
  catch (  FileNotFoundException e) {
