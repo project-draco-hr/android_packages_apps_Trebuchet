@@ -79,4 +79,32 @@
       pageIndicator.setLayoutParams(lp);
     }
   }
+  AppsCustomizeTabHost host=(AppsCustomizeTabHost)launcher.findViewById(R.id.apps_customize_pane);
+  if (host != null) {
+    int pageIndicatorHeight=(int)(pageIndicatorHeightPx * Math.min(1f,(allAppsIconSizePx / DynamicGrid.DEFAULT_ICON_SIZE_PX)));
+    pageIndicator=host.findViewById(R.id.apps_customize_page_indicator);
+    if (pageIndicator != null) {
+      lp=(FrameLayout.LayoutParams)pageIndicator.getLayoutParams();
+      lp.gravity=Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM;
+      lp.width=LayoutParams.WRAP_CONTENT;
+      lp.height=pageIndicatorHeight;
+      pageIndicator.setLayoutParams(lp);
+    }
+    AppsCustomizePagedView pagedView=(AppsCustomizePagedView)host.findViewById(R.id.apps_customize_pane_content);
+    padding=new Rect();
+    if (pagedView != null) {
+      int paddingLR=(availableWidthPx - (allAppsCellWidthPx * allAppsNumCols)) / (2 * (allAppsNumCols + 1));
+      int paddingTB=(availableHeightPx - (allAppsCellHeightPx * allAppsNumRows)) / (2 * (allAppsNumRows + 1));
+      paddingLR=Math.min(paddingLR,(int)((paddingLR + paddingTB) * 0.75f));
+      paddingTB=Math.min(paddingTB,(int)((paddingLR + paddingTB) * 0.75f));
+      int maxAllAppsWidth=(allAppsNumCols * (allAppsCellWidthPx + 2 * paddingLR));
+      int gridPaddingLR=(availableWidthPx - maxAllAppsWidth) / 2;
+      if (gridPaddingLR > (allAppsCellWidthPx / 4)) {
+        padding.left=padding.right=gridPaddingLR;
+      }
+      padding.bottom=Math.max(0,pageIndicatorHeight - paddingTB);
+      pagedView.setAllAppsPadding(padding);
+      pagedView.setWidgetsPageIndicatorPadding(pageIndicatorHeight);
+    }
+  }
 }
