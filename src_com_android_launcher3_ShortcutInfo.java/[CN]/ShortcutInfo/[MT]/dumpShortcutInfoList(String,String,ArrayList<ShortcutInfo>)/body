@@ -1,0 +1,6 @@
+{
+  Log.d(tag,label + " size=" + list.size());
+  for (  ShortcutInfo info : list) {
+    Log.d(tag,"   title=\"" + info.title + " icon="+ info.mIcon+ " customIcon="+ info.customIcon);
+  }
+}

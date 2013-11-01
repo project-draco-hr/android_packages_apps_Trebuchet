@@ -1,0 +1,7 @@
+{
+  if (getVisibility() == VISIBLE) {
+    mContent.setVisibility(VISIBLE);
+    mAppsCustomizePane.loadAssociatedPages(mAppsCustomizePane.getCurrentPage(),true);
+    mAppsCustomizePane.loadAssociatedPages(mAppsCustomizePane.getCurrentPage());
+  }
+}

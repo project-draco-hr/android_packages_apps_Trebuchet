@@ -1,0 +1,13 @@
+{
+  Log.d(TAG,"mCallbacks=" + mCallbacks);
+  AppInfo.dumpApplicationInfoList(TAG,"mAllAppsList.data",mBgAllAppsList.data);
+  AppInfo.dumpApplicationInfoList(TAG,"mAllAppsList.added",mBgAllAppsList.added);
+  AppInfo.dumpApplicationInfoList(TAG,"mAllAppsList.removed",mBgAllAppsList.removed);
+  AppInfo.dumpApplicationInfoList(TAG,"mAllAppsList.modified",mBgAllAppsList.modified);
+  if (mLoaderTask != null) {
+    mLoaderTask.dumpState();
+  }
+ else {
+    Log.d(TAG,"mLoaderTask=null");
+  }
+}

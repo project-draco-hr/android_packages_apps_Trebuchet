@@ -1,0 +1,10 @@
+{
+  Resources res=getResources();
+  if (visible) {
+    super.setTextColor(mTextColor);
+  }
+ else {
+    super.setTextColor(res.getColor(android.R.color.transparent));
+  }
+  mIsTextVisible=visible;
+}

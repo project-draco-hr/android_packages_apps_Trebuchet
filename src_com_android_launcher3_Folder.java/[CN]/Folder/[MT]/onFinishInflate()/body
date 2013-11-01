@@ -1,0 +1,22 @@
+{
+  super.onFinishInflate();
+  mScrollView=(ScrollView)findViewById(R.id.scroll_view);
+  mContent=(CellLayout)findViewById(R.id.folder_content);
+  LauncherAppState app=LauncherAppState.getInstance();
+  DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
+  mContent.setCellDimensions(grid.folderCellWidthPx,grid.folderCellHeightPx);
+  mContent.setGridSize(0,0);
+  mContent.getShortcutsAndWidgets().setMotionEventSplittingEnabled(false);
+  mContent.setInvertIfRtl(true);
+  mFolderName=(FolderEditText)findViewById(R.id.folder_name);
+  mFolderName.setFolder(this);
+  mFolderName.setOnFocusChangeListener(this);
+  int measureSpec=MeasureSpec.UNSPECIFIED;
+  mFolderName.measure(measureSpec,measureSpec);
+  mFolderNameHeight=mFolderName.getMeasuredHeight();
+  mFolderName.setCustomSelectionActionModeCallback(mActionModeCallback);
+  mFolderName.setOnEditorActionListener(this);
+  mFolderName.setSelectAllOnFocus(true);
+  mFolderName.setInputType(mFolderName.getInputType() | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS | InputType.TYPE_TEXT_FLAG_CAP_WORDS);
+  mAutoScrollHelper=new FolderAutoScrollHelper(mScrollView);
+}

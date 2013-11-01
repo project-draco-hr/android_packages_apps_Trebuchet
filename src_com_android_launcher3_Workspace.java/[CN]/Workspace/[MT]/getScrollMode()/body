@@ -1,0 +1,3 @@
+{
+  return SmoothPagedView.X_LARGE_MODE;
+}

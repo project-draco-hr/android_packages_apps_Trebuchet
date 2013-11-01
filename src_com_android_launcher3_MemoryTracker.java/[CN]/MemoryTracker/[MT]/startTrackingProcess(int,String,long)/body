@@ -1,0 +1,9 @@
+{
+synchronized (mLock) {
+    final Long lpid=new Long(pid);
+    if (mPids.contains(lpid))     return;
+    mPids.add(lpid);
+    updatePidsArrayL();
+    mData.put(pid,new ProcessMemInfo(pid,name,start));
+  }
+}

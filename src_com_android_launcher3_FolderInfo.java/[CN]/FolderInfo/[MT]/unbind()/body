@@ -1,0 +1,4 @@
+{
+  super.unbind();
+  listeners.clear();
+}

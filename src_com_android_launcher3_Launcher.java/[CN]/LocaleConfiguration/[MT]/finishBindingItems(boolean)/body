@@ -1,0 +1,36 @@
+{
+  Runnable r=new Runnable(){
+    public void run(){
+      finishBindingItems(upgradePath);
+    }
+  }
+;
+  if (waitUntilResume(r)) {
+    return;
+  }
+  if (mSavedState != null) {
+    if (!mWorkspace.hasFocus()) {
+      mWorkspace.getChildAt(mWorkspace.getCurrentPage()).requestFocus();
+    }
+    mSavedState=null;
+  }
+  mWorkspace.restoreInstanceStateForRemainingPages();
+  for (int i=0; i < sPendingAddList.size(); i++) {
+    completeAdd(sPendingAddList.get(i));
+  }
+  sPendingAddList.clear();
+  if (!DISABLE_MARKET_BUTTON) {
+    updateAppMarketIcon();
+  }
+  mWorkspaceLoading=false;
+  if (upgradePath) {
+    mWorkspace.getUniqueComponents(true,null);
+    mIntentsOnWorkspaceFromUpgradePath=mWorkspace.getUniqueComponents(true,null);
+  }
+  mWorkspace.post(new Runnable(){
+    @Override public void run(){
+      onFinishBindingItems();
+    }
+  }
+);
+}

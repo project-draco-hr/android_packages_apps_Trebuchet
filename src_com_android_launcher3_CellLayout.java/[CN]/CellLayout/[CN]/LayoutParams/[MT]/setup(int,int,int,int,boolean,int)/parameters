@@ -1,0 +1,6 @@
+int cellWidth
+int cellHeight
+int widthGap
+int heightGap
+boolean invertHorizontally
+int colCount

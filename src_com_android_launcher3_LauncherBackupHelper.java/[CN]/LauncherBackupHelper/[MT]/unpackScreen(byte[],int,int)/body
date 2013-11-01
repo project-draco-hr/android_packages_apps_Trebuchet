@@ -1,0 +1,5 @@
+{
+  Screen screen=new Screen();
+  MessageNano.mergeFrom(screen,readCheckedBytes(buffer,offset,dataSize));
+  return screen;
+}

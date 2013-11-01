@@ -1,0 +1,4 @@
+Launcher launcher
+int spanX
+int spanY
+Rect rect

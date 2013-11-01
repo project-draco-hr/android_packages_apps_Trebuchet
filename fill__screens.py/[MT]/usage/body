@@ -1,0 +1,2 @@
+def usage():
+    print 'usage: fill_screens.py -- fills up the launcher db'

@@ -1,0 +1,15 @@
+{
+  if ((flags & AppInfo.DOWNLOADED_FLAG) == 0) {
+    int messageId=R.string.uninstall_system_app_text;
+    Toast.makeText(this,messageId,Toast.LENGTH_SHORT).show();
+    return false;
+  }
+ else {
+    String packageName=componentName.getPackageName();
+    String className=componentName.getClassName();
+    Intent intent=new Intent(Intent.ACTION_DELETE,Uri.fromParts("package",packageName,className));
+    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+    startActivity(intent);
+    return true;
+  }
+}

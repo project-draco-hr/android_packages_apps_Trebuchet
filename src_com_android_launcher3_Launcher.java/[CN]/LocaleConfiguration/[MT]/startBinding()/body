@@ -1,0 +1,9 @@
+{
+  mBindOnResumeCallbacks.clear();
+  mWorkspace.clearDropTargets();
+  mWorkspace.removeAllWorkspaceScreens();
+  mWidgetsToAdvance.clear();
+  if (mHotseat != null) {
+    mHotseat.resetLayout();
+  }
+}

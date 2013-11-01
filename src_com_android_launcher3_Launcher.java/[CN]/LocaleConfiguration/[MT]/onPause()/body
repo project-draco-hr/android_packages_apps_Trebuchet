@@ -1,0 +1,10 @@
+{
+  InstallShortcutReceiver.enableInstallQueue();
+  super.onPause();
+  mPaused=true;
+  mDragController.cancelDrag();
+  mDragController.resetLastGestureUpTime();
+  if (mWorkspace.getCustomContentCallbacks() != null) {
+    mWorkspace.getCustomContentCallbacks().onHide();
+  }
+}

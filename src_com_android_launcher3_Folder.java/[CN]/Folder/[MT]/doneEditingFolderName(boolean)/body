@@ -1,0 +1,12 @@
+{
+  mFolderName.setHint(sHintText);
+  String newTitle=mFolderName.getText().toString();
+  mInfo.setTitle(newTitle);
+  LauncherModel.updateItemInDatabase(mLauncher,mInfo);
+  if (commit) {
+    sendCustomAccessibilityEvent(AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED,String.format(getContext().getString(R.string.folder_renamed),newTitle));
+  }
+  requestFocus();
+  Selection.setSelection((Spannable)mFolderName.getText(),0,0);
+  mIsEditingName=false;
+}

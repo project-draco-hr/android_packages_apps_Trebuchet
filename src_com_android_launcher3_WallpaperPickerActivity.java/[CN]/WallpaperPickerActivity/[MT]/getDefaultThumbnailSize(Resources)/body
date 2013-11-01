@@ -1,0 +1,3 @@
+{
+  return new Point(res.getDimensionPixelSize(R.dimen.wallpaperThumbnailWidth),res.getDimensionPixelSize(R.dimen.wallpaperThumbnailHeight));
+}

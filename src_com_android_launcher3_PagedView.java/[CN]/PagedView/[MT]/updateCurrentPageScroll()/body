@@ -1,0 +1,9 @@
+{
+  int newX=0;
+  if (0 <= mCurrentPage && mCurrentPage < getPageCount()) {
+    newX=getScrollForPage(mCurrentPage);
+  }
+  scrollTo(newX,0);
+  mScroller.setFinalX(newX);
+  mScroller.forceFinished(true);
+}

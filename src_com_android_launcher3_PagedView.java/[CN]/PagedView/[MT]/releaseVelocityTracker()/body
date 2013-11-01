@@ -1,0 +1,7 @@
+{
+  if (mVelocityTracker != null) {
+    mVelocityTracker.clear();
+    mVelocityTracker.recycle();
+    mVelocityTracker=null;
+  }
+}

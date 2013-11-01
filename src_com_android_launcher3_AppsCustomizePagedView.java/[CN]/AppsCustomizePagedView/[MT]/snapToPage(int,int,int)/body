@@ -1,0 +1,14 @@
+{
+  super.snapToPage(whichPage,delta,duration);
+  Iterator<AppsCustomizeAsyncTask> iter=mRunningTasks.iterator();
+  while (iter.hasNext()) {
+    AppsCustomizeAsyncTask task=(AppsCustomizeAsyncTask)iter.next();
+    int pageIndex=task.page;
+    if ((mNextPage > mCurrentPage && pageIndex >= mCurrentPage) || (mNextPage < mCurrentPage && pageIndex <= mCurrentPage)) {
+      task.setThreadPriority(getThreadPriorityForPage(pageIndex));
+    }
+ else {
+      task.setThreadPriority(Process.THREAD_PRIORITY_LOWEST);
+    }
+  }
+}

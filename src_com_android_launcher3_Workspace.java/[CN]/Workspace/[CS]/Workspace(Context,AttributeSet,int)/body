@@ -1,0 +1,24 @@
+{
+  super(context,attrs,defStyle);
+  mContentIsRefreshable=false;
+  mOutlineHelper=HolographicOutlineHelper.obtain(context);
+  mDragEnforcer=new DropTarget.DragEnforcer(context);
+  setDataIsReady();
+  mLauncher=(Launcher)context;
+  final Resources res=getResources();
+  mWorkspaceFadeInAdjacentScreens=res.getBoolean(R.bool.config_workspaceFadeAdjacentScreens);
+  mFadeInAdjacentScreens=false;
+  mWallpaperManager=WallpaperManager.getInstance(context);
+  TypedArray a=context.obtainStyledAttributes(attrs,R.styleable.Workspace,defStyle,0);
+  mSpringLoadedShrinkFactor=res.getInteger(R.integer.config_workspaceSpringLoadShrinkPercentage) / 100.0f;
+  mOverviewModeShrinkFactor=res.getInteger(R.integer.config_workspaceOverviewShrinkPercentage) / 100.0f;
+  mOverviewModePageOffset=res.getDimensionPixelSize(R.dimen.overview_mode_page_offset);
+  mCameraDistance=res.getInteger(R.integer.config_cameraDistance);
+  mOriginalDefaultPage=mDefaultPage=a.getInt(R.styleable.Workspace_defaultScreen,1);
+  a.recycle();
+  setOnHierarchyChangeListener(this);
+  setHapticFeedbackEnabled(false);
+  initWorkspace();
+  setMotionEventSplittingEnabled(true);
+  setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_YES);
+}

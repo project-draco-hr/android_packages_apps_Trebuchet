@@ -1,0 +1,5 @@
+{
+  mOriginalWidthGap=mWidthGap=widthGap;
+  mOriginalHeightGap=mHeightGap=heightGap;
+  mChildren.setGap(widthGap,heightGap);
+}

@@ -1,0 +1,13 @@
+{
+  if (!mDeferOnDragEnd) {
+    prepareStartAnimation(mDropTargetBar);
+    mDropTargetBarAnim.reverse();
+    if (!mIsSearchBarHidden) {
+      prepareStartAnimation(mQSBSearchBar);
+      mQSBSearchBarAnim.reverse();
+    }
+  }
+ else {
+    mDeferOnDragEnd=false;
+  }
+}

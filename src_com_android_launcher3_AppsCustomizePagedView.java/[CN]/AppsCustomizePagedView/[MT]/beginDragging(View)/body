@@ -1,0 +1,21 @@
+{
+  if (!super.beginDragging(v))   return false;
+  if (v instanceof PagedViewIcon) {
+    beginDraggingApplication(v);
+  }
+ else   if (v instanceof PagedViewWidget) {
+    if (!beginDraggingWidget(v)) {
+      return false;
+    }
+  }
+  postDelayed(new Runnable(){
+    @Override public void run(){
+      if (mLauncher.getDragController().isDragging()) {
+        resetDrawableState();
+        mLauncher.enterSpringLoadedDragMode();
+      }
+    }
+  }
+,150);
+  return true;
+}

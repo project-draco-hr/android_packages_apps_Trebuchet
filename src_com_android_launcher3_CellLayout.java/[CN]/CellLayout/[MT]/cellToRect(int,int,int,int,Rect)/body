@@ -1,0 +1,13 @@
+{
+  final int cellWidth=mCellWidth;
+  final int cellHeight=mCellHeight;
+  final int widthGap=mWidthGap;
+  final int heightGap=mHeightGap;
+  final int hStartPadding=getPaddingLeft();
+  final int vStartPadding=getPaddingTop();
+  int width=cellHSpan * cellWidth + ((cellHSpan - 1) * widthGap);
+  int height=cellVSpan * cellHeight + ((cellVSpan - 1) * heightGap);
+  int x=hStartPadding + cellX * (cellWidth + widthGap);
+  int y=vStartPadding + cellY * (cellHeight + heightGap);
+  resultRect.set(x,y,x + width,y + height);
+}

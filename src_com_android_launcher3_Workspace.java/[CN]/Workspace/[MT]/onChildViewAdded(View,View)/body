@@ -1,0 +1,10 @@
+{
+  if (!(child instanceof CellLayout)) {
+    throw new IllegalArgumentException("A Workspace can only have CellLayout children.");
+  }
+  CellLayout cl=((CellLayout)child);
+  cl.setOnInterceptTouchListener(this);
+  cl.setClickable(true);
+  cl.setImportantForAccessibility(ViewCompat.IMPORTANT_FOR_ACCESSIBILITY_NO);
+  super.onChildViewAdded(parent,child);
+}

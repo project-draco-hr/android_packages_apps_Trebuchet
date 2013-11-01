@@ -1,0 +1,28 @@
+{
+  if (getChildCount() <= 1) {
+    return 0;
+  }
+  int emptyExtraPages=numEmptyScreensToIgnore();
+  int firstIndex=numCustomPages();
+  int lastIndex=getChildCount() - 1 - emptyExtraPages;
+  if (isLayoutRtl()) {
+    int temp=firstIndex;
+    firstIndex=lastIndex;
+    lastIndex=temp;
+  }
+  int firstPageScrollX=getScrollForPage(firstIndex);
+  int scrollRange=getScrollForPage(lastIndex) - firstPageScrollX;
+  if (scrollRange == 0) {
+    return 0;
+  }
+ else {
+    int offsetForLayoutTransitionAnimation=isLayoutRtl() ? getPageAt(getChildCount() - 1).getLeft() - getFirstChildLeft() : 0;
+    int adjustedScroll=getScrollX() - firstPageScrollX - offsetForLayoutTransitionAnimation;
+    float offset=Math.min(1,adjustedScroll / (float)scrollRange);
+    offset=Math.max(0,offset);
+    int numScrollingPages=getNumScreensExcludingEmptyAndCustom();
+    int parallaxPageSpan=Math.max(MIN_PARALLAX_PAGE_SPAN,numScrollingPages - 1);
+    int padding=isLayoutRtl() ? parallaxPageSpan - numScrollingPages + 1 : 0;
+    return offset * (padding + numScrollingPages - 1) / parallaxPageSpan;
+  }
+}

@@ -1,0 +1,12 @@
+{
+  DragLayer dragLayer=mLauncher.getDragLayer();
+  int count=dragLayer.getChildCount();
+  for (int i=0; i < count; i++) {
+    View child=dragLayer.getChildAt(i);
+    if (child instanceof Folder) {
+      Folder folder=(Folder)child;
+      if (folder.getInfo().opened)       return folder;
+    }
+  }
+  return null;
+}

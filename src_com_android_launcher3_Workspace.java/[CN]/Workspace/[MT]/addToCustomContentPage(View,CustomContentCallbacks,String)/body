@@ -1,0 +1,18 @@
+{
+  if (getPageIndexForScreenId(CUSTOM_CONTENT_SCREEN_ID) < 0) {
+    throw new RuntimeException("Expected custom content screen to exist");
+  }
+  CellLayout customScreen=getScreenWithId(CUSTOM_CONTENT_SCREEN_ID);
+  int spanX=customScreen.getCountX();
+  int spanY=customScreen.getCountY();
+  CellLayout.LayoutParams lp=new CellLayout.LayoutParams(0,0,spanX,spanY);
+  lp.canReorder=false;
+  lp.isFullscreen=true;
+  if (customContent instanceof Insettable) {
+    ((Insettable)customContent).setInsets(mInsets);
+  }
+  customScreen.removeAllViews();
+  customScreen.addViewToCellLayout(customContent,0,0,lp,true);
+  mCustomContentDescription=description;
+  mCustomContentCallbacks=callbacks;
+}

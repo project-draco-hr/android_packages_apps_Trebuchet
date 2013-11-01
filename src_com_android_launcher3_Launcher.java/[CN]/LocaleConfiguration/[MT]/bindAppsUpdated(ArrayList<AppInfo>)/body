@@ -1,0 +1,17 @@
+{
+  Runnable r=new Runnable(){
+    public void run(){
+      bindAppsUpdated(apps);
+    }
+  }
+;
+  if (waitUntilResume(r)) {
+    return;
+  }
+  if (mWorkspace != null) {
+    mWorkspace.updateShortcuts(apps);
+  }
+  if (!AppsCustomizePagedView.DISABLE_ALL_APPS && mAppsCustomizeContent != null) {
+    mAppsCustomizeContent.updateApps(apps);
+  }
+}

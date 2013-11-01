@@ -1,0 +1,7 @@
+{
+  boolean searchVisible=updateGlobalSearchIcon();
+  boolean voiceVisible=updateVoiceSearchIcon(searchVisible);
+  if (mSearchDropTargetBar != null) {
+    mSearchDropTargetBar.onSearchPackagesChanged(searchVisible,voiceVisible);
+  }
+}

@@ -1,0 +1,15 @@
+{
+  final String packageName=info.activityInfo.applicationInfo.packageName;
+  this.componentName=new ComponentName(packageName,info.activityInfo.name);
+  this.container=ItemInfo.NO_ID;
+  this.setActivity(componentName,Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
+  try {
+    PackageInfo pi=pm.getPackageInfo(packageName,0);
+    flags=initFlags(pi);
+    firstInstallTime=initFirstInstallTime(pi);
+  }
+ catch (  NameNotFoundException e) {
+    Log.d(TAG,"PackageManager.getApplicationInfo failed for " + packageName);
+  }
+  iconCache.getTitleAndIcon(this,info,labelCache);
+}

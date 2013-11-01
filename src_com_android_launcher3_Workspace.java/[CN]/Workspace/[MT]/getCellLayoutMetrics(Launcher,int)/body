@@ -1,0 +1,34 @@
+{
+  LauncherAppState app=LauncherAppState.getInstance();
+  DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
+  Resources res=launcher.getResources();
+  Display display=launcher.getWindowManager().getDefaultDisplay();
+  Point smallestSize=new Point();
+  Point largestSize=new Point();
+  display.getCurrentSizeRange(smallestSize,largestSize);
+  int countX=(int)grid.numColumns;
+  int countY=(int)grid.numRows;
+  int constrainedLongEdge=largestSize.y;
+  int constrainedShortEdge=smallestSize.y;
+  if (orientation == CellLayout.LANDSCAPE) {
+    if (mLandscapeCellLayoutMetrics == null) {
+      Rect padding=grid.getWorkspacePadding(CellLayout.LANDSCAPE);
+      int width=constrainedLongEdge - padding.left - padding.right;
+      int height=constrainedShortEdge - padding.top - padding.bottom;
+      mLandscapeCellLayoutMetrics=new Rect();
+      mLandscapeCellLayoutMetrics.set(grid.calculateCellWidth(width,countX),grid.calculateCellHeight(height,countY),0,0);
+    }
+    return mLandscapeCellLayoutMetrics;
+  }
+ else   if (orientation == CellLayout.PORTRAIT) {
+    if (mPortraitCellLayoutMetrics == null) {
+      Rect padding=grid.getWorkspacePadding(CellLayout.PORTRAIT);
+      int width=constrainedShortEdge - padding.left - padding.right;
+      int height=constrainedLongEdge - padding.top - padding.bottom;
+      mPortraitCellLayoutMetrics=new Rect();
+      mPortraitCellLayoutMetrics.set(grid.calculateCellWidth(width,countX),grid.calculateCellHeight(height,countY),0,0);
+    }
+    return mPortraitCellLayoutMetrics;
+  }
+  return null;
+}

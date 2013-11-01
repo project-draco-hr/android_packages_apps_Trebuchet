@@ -1,0 +1,28 @@
+{
+  if (mNeutralAnimator != null) {
+    mNeutralAnimator.cancel();
+  }
+  mAcceptAnimator=LauncherAnimUtils.ofFloat(mCellLayout,0f,1f);
+  mAcceptAnimator.setDuration(CONSUMPTION_ANIMATION_DURATION);
+  final int previewSize=sPreviewSize;
+  mAcceptAnimator.addUpdateListener(new AnimatorUpdateListener(){
+    public void onAnimationUpdate(    ValueAnimator animation){
+      final float percent=(Float)animation.getAnimatedValue();
+      mOuterRingSize=(1 + percent * OUTER_RING_GROWTH_FACTOR) * previewSize;
+      mInnerRingSize=(1 + percent * INNER_RING_GROWTH_FACTOR) * previewSize;
+      if (mCellLayout != null) {
+        mCellLayout.invalidate();
+      }
+    }
+  }
+);
+  mAcceptAnimator.addListener(new AnimatorListenerAdapter(){
+    @Override public void onAnimationStart(    Animator animation){
+      if (mFolderIcon != null) {
+        mFolderIcon.mPreviewBackground.setVisibility(INVISIBLE);
+      }
+    }
+  }
+);
+  mAcceptAnimator.start();
+}

@@ -1,0 +1,10 @@
+{
+  mIsDragOccuring=false;
+  updateChildrenLayersEnabled(false);
+  mLauncher.unlockScreenOrientation(false);
+  InstallShortcutReceiver.disableAndFlushInstallQueue(getContext());
+  UninstallShortcutReceiver.disableAndFlushUninstallQueue(getContext());
+  removeExtraEmptyScreen();
+  mDragSourceInternal=null;
+  mLauncher.onInteractionEnd();
+}

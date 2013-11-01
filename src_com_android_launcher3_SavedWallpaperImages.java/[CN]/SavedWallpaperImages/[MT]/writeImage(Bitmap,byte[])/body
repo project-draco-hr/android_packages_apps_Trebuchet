@@ -1,0 +1,20 @@
+{
+  try {
+    File imageFile=File.createTempFile("wallpaper","",mContext.getFilesDir());
+    FileOutputStream imageFileStream=mContext.openFileOutput(imageFile.getName(),Context.MODE_PRIVATE);
+    imageFileStream.write(imageBytes);
+    imageFileStream.close();
+    File thumbFile=File.createTempFile("wallpaperthumb","",mContext.getFilesDir());
+    FileOutputStream thumbFileStream=mContext.openFileOutput(thumbFile.getName(),Context.MODE_PRIVATE);
+    thumbnail.compress(Bitmap.CompressFormat.JPEG,95,thumbFileStream);
+    thumbFileStream.close();
+    SQLiteDatabase db=mDb.getWritableDatabase();
+    ContentValues values=new ContentValues();
+    values.put(ImageDb.COLUMN_IMAGE_THUMBNAIL_FILENAME,thumbFile.getName());
+    values.put(ImageDb.COLUMN_IMAGE_FILENAME,imageFile.getName());
+    db.insert(ImageDb.TABLE_NAME,null,values);
+  }
+ catch (  IOException e) {
+    Log.e(TAG,"Failed writing images to storage " + e);
+  }
+}

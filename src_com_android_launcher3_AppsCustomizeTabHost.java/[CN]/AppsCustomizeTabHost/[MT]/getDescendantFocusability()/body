@@ -1,0 +1,6 @@
+{
+  if (getVisibility() != View.VISIBLE) {
+    return ViewGroup.FOCUS_BLOCK_DESCENDANTS;
+  }
+  return super.getDescendantFocusability();
+}

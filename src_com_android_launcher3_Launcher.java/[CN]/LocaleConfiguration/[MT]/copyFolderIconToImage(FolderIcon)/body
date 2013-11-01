@@ -1,0 +1,38 @@
+{
+  final int width=fi.getMeasuredWidth();
+  final int height=fi.getMeasuredHeight();
+  if (mFolderIconImageView == null) {
+    mFolderIconImageView=new ImageView(this);
+  }
+  if (mFolderIconBitmap == null || mFolderIconBitmap.getWidth() != width || mFolderIconBitmap.getHeight() != height) {
+    mFolderIconBitmap=Bitmap.createBitmap(width,height,Bitmap.Config.ARGB_8888);
+    mFolderIconCanvas=new Canvas(mFolderIconBitmap);
+  }
+  DragLayer.LayoutParams lp;
+  if (mFolderIconImageView.getLayoutParams() instanceof DragLayer.LayoutParams) {
+    lp=(DragLayer.LayoutParams)mFolderIconImageView.getLayoutParams();
+  }
+ else {
+    lp=new DragLayer.LayoutParams(width,height);
+  }
+  float scale=mDragLayer.getDescendantRectRelativeToSelf(fi,mRectForFolderAnimation);
+  lp.customPosition=true;
+  lp.x=mRectForFolderAnimation.left;
+  lp.y=mRectForFolderAnimation.top;
+  lp.width=(int)(scale * width);
+  lp.height=(int)(scale * height);
+  mFolderIconCanvas.drawColor(0,PorterDuff.Mode.CLEAR);
+  fi.draw(mFolderIconCanvas);
+  mFolderIconImageView.setImageBitmap(mFolderIconBitmap);
+  if (fi.getFolder() != null) {
+    mFolderIconImageView.setPivotX(fi.getFolder().getPivotXForIconAnimation());
+    mFolderIconImageView.setPivotY(fi.getFolder().getPivotYForIconAnimation());
+  }
+  if (mDragLayer.indexOfChild(mFolderIconImageView) != -1) {
+    mDragLayer.removeView(mFolderIconImageView);
+  }
+  mDragLayer.addView(mFolderIconImageView,lp);
+  if (fi.getFolder() != null) {
+    fi.getFolder().bringToFront();
+  }
+}

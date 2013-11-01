@@ -1,0 +1,5 @@
+int pixelX
+int pixelY
+int spanX
+int spanY
+int[] result

@@ -1,0 +1,6 @@
+{
+  final Context context=getContext();
+  mOpenHelper=new DatabaseHelper(context);
+  LauncherAppState.setLauncherProvider(this);
+  return true;
+}

@@ -1,0 +1,59 @@
+{
+  if (mIsInitialized) {
+    canvas.save();
+    if (mBackground == null) {
+      if (mDrawIdentifier.equals(WORKSPACE_CUSTOM)) {
+        mBackground=getResources().getDrawable(R.drawable.bg_cling5);
+      }
+    }
+    Bitmap eraseBg=null;
+    Canvas eraseCanvas=null;
+    if (mScrimView != null) {
+      mScrimView.setBackgroundColor(mBackgroundColor);
+    }
+ else     if (mBackground != null) {
+      mBackground.setBounds(0,0,getMeasuredWidth(),getMeasuredHeight());
+      mBackground.draw(canvas);
+    }
+ else     if (mDrawIdentifier.equals(WORKSPACE_PORTRAIT) || mDrawIdentifier.equals(WORKSPACE_LANDSCAPE) || mDrawIdentifier.equals(WORKSPACE_LARGE)) {
+      eraseBg=Bitmap.createBitmap(getMeasuredWidth(),getMeasuredHeight(),Bitmap.Config.ARGB_8888);
+      eraseCanvas=new Canvas(eraseBg);
+      eraseCanvas.drawColor(mBackgroundColor);
+    }
+ else {
+      canvas.drawColor(mBackgroundColor);
+    }
+    DisplayMetrics metrics=new DisplayMetrics();
+    mLauncher.getWindowManager().getDefaultDisplay().getMetrics(metrics);
+    float alpha=getAlpha();
+    View content=getContent();
+    if (content != null) {
+      alpha*=content.getAlpha();
+    }
+    if (mDrawIdentifier.equals(FIRST_RUN_PORTRAIT) || mDrawIdentifier.equals(FIRST_RUN_LANDSCAPE)) {
+      View bubbleContent=findViewById(R.id.bubble_content);
+      Rect bubbleRect=new Rect();
+      bubbleContent.getGlobalVisibleRect(bubbleRect);
+      mBubblePaint.setAlpha((int)(255 * alpha));
+      float buffer=DynamicGrid.pxFromDp(FIRST_RUN_CIRCLE_BUFFER_DPS,metrics);
+      canvas.drawCircle(metrics.widthPixels / 2,bubbleRect.centerY(),(bubbleContent.getMeasuredWidth() + buffer) / 2,mBubblePaint);
+    }
+ else     if (mDrawIdentifier.equals(WORKSPACE_PORTRAIT) || mDrawIdentifier.equals(WORKSPACE_LANDSCAPE) || mDrawIdentifier.equals(WORKSPACE_LARGE)) {
+      int offset=DynamicGrid.pxFromDp(WORKSPACE_CIRCLE_Y_OFFSET_DPS,metrics);
+      mErasePaint.setAlpha((int)(128));
+      eraseCanvas.drawCircle(metrics.widthPixels / 2,metrics.heightPixels / 2 - offset,DynamicGrid.pxFromDp(WORKSPACE_OUTER_CIRCLE_RADIUS_DPS,metrics),mErasePaint);
+      mErasePaint.setAlpha(0);
+      eraseCanvas.drawCircle(metrics.widthPixels / 2,metrics.heightPixels / 2 - offset,DynamicGrid.pxFromDp(WORKSPACE_INNER_CIRCLE_RADIUS_DPS,metrics),mErasePaint);
+      canvas.drawBitmap(eraseBg,0,0,null);
+      eraseCanvas.setBitmap(null);
+      eraseBg=null;
+      if (mFocusedHotseatAppBounds != null && mFocusedHotseatApp != null) {
+        mFocusedHotseatApp.setBounds(mFocusedHotseatAppBounds.left,mFocusedHotseatAppBounds.top,mFocusedHotseatAppBounds.right,mFocusedHotseatAppBounds.bottom);
+        mFocusedHotseatApp.setAlpha((int)(255 * alpha));
+        mFocusedHotseatApp.draw(canvas);
+      }
+    }
+    canvas.restore();
+  }
+  super.dispatchDraw(canvas);
+}

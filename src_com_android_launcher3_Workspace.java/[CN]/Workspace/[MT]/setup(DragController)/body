@@ -1,0 +1,6 @@
+{
+  mSpringLoadedDragController=new SpringLoadedDragController(mLauncher);
+  mDragController=dragController;
+  updateChildrenLayersEnabled(false);
+  setWallpaperDimension();
+}

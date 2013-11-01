@@ -1,0 +1,28 @@
+{
+  if (mWidgetPreviewLoader == null) {
+    mWidgetPreviewLoader=new WidgetPreviewLoader(mLauncher);
+  }
+  LauncherAppState app=LauncherAppState.getInstance();
+  DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
+  mWidgetSpacingLayout.setPadding(mPageLayoutPaddingLeft,mPageLayoutPaddingTop,mPageLayoutPaddingRight,mPageLayoutPaddingBottom);
+  mCellCountX=(int)grid.allAppsNumCols;
+  mCellCountY=(int)grid.allAppsNumRows;
+  updatePageCounts();
+  mContentWidth=getMeasuredWidth() - getPaddingLeft() - getPaddingRight();
+  mContentHeight=getMeasuredHeight() - getPaddingTop() - getPaddingBottom();
+  int widthSpec=MeasureSpec.makeMeasureSpec(mContentWidth,MeasureSpec.AT_MOST);
+  int heightSpec=MeasureSpec.makeMeasureSpec(mContentHeight,MeasureSpec.AT_MOST);
+  mWidgetSpacingLayout.measure(widthSpec,heightSpec);
+  AppsCustomizeTabHost host=(AppsCustomizeTabHost)getTabHost();
+  final boolean hostIsTransitioning=host.isTransitioning();
+  int page=getPageForComponent(mSaveInstanceStateItemIndex);
+  invalidatePageData(Math.max(0,page),hostIsTransitioning);
+  if (!hostIsTransitioning) {
+    post(new Runnable(){
+      @Override public void run(){
+        showAllAppsCling();
+      }
+    }
+);
+  }
+}

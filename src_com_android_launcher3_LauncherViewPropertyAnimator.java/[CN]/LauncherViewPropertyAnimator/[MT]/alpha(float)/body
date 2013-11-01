@@ -1,0 +1,5 @@
+{
+  mPropertiesToSet.add(Properties.ALPHA);
+  mAlpha=value;
+  return this;
+}

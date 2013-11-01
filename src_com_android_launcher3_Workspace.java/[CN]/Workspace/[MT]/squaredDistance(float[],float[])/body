@@ -1,0 +1,5 @@
+{
+  float distanceX=point1[0] - point2[0];
+  float distanceY=point2[1] - point2[1];
+  return distanceX * distanceX + distanceY * distanceY;
+}

@@ -1,0 +1,4 @@
+{
+  mActiveMarkerIndex=index;
+  offsetWindowCenterTo(index,false);
+}

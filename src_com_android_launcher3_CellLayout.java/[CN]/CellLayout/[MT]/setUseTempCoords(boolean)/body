@@ -1,0 +1,7 @@
+{
+  int childCount=mShortcutsAndWidgets.getChildCount();
+  for (int i=0; i < childCount; i++) {
+    LayoutParams lp=(LayoutParams)mShortcutsAndWidgets.getChildAt(i).getLayoutParams();
+    lp.useTmpCoords=useTempCoords;
+  }
+}

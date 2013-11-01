@@ -1,0 +1,4 @@
+{
+  frameLayout.setPadding(0,0,0,0);
+  frameLayout.setForeground(new ZeroPaddingDrawable(frameLayout.getForeground()));
+}

@@ -1,0 +1,4 @@
+View v
+Rect rectOccupiedByPotentialDrop
+int[] direction
+ItemConfiguration currentState

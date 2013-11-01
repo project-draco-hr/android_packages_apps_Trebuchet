@@ -1,0 +1,61 @@
+{
+  final String name=getObjectName(o);
+  final String packageName=getObjectPackage(o);
+  boolean packageValid=true;
+synchronized (sInvalidPackages) {
+    packageValid=!sInvalidPackages.contains(packageName);
+  }
+  if (!packageValid) {
+    return null;
+  }
+  if (packageValid) {
+synchronized (mLoadedPreviews) {
+      if (mLoadedPreviews.containsKey(name) && mLoadedPreviews.get(name).get() != null) {
+        return mLoadedPreviews.get(name).get();
+      }
+    }
+  }
+  Bitmap unusedBitmap=null;
+synchronized (mUnusedBitmaps) {
+    while ((unusedBitmap == null || !unusedBitmap.isMutable() || unusedBitmap.getWidth() != mPreviewBitmapWidth || unusedBitmap.getHeight() != mPreviewBitmapHeight) && mUnusedBitmaps.size() > 0) {
+      unusedBitmap=mUnusedBitmaps.remove(0).get();
+    }
+    if (unusedBitmap != null) {
+      final Canvas c=mCachedAppWidgetPreviewCanvas.get();
+      c.setBitmap(unusedBitmap);
+      c.drawColor(0,PorterDuff.Mode.CLEAR);
+      c.setBitmap(null);
+    }
+  }
+  if (unusedBitmap == null) {
+    unusedBitmap=Bitmap.createBitmap(mPreviewBitmapWidth,mPreviewBitmapHeight,Bitmap.Config.ARGB_8888);
+  }
+  Bitmap preview=null;
+  if (packageValid) {
+    preview=readFromDb(name,unusedBitmap);
+  }
+  if (preview != null) {
+synchronized (mLoadedPreviews) {
+      mLoadedPreviews.put(name,new WeakReference<Bitmap>(preview));
+    }
+    return preview;
+  }
+ else {
+    final Bitmap generatedPreview=generatePreview(o,unusedBitmap);
+    preview=generatedPreview;
+    if (preview != unusedBitmap) {
+      throw new RuntimeException("generatePreview is not recycling the bitmap " + o);
+    }
+synchronized (mLoadedPreviews) {
+      mLoadedPreviews.put(name,new WeakReference<Bitmap>(preview));
+    }
+    new AsyncTask<Void,Void,Void>(){
+      public Void doInBackground(      Void... args){
+        writeToDb(o,generatedPreview);
+        return null;
+      }
+    }
+.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,(Void)null);
+    return preview;
+  }
+}

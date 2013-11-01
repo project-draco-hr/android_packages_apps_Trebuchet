@@ -1,0 +1,10 @@
+{
+  scheduleUpdate();
+  mFinalOffset=Math.max(0f,Math.min(x,1.0f));
+  if (getNumScreensExcludingEmptyAndCustom() != mNumScreens) {
+    if (mNumScreens > 0) {
+      animateToFinal();
+    }
+    mNumScreens=getNumScreensExcludingEmptyAndCustom();
+  }
+}

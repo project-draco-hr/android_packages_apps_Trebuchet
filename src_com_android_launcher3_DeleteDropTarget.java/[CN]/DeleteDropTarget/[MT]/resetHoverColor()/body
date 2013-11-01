@@ -1,0 +1,4 @@
+{
+  mCurrentDrawable.resetTransition();
+  setTextColor(mOriginalTextColor);
+}

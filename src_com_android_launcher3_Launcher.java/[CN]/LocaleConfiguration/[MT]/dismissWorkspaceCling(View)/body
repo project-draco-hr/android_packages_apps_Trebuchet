@@ -1,0 +1,14 @@
+{
+  Cling cling=(Cling)findViewById(R.id.workspace_cling);
+  Runnable cb=null;
+  if (v == null) {
+    cb=new Runnable(){
+      public void run(){
+        mWorkspace.enterOverviewMode();
+      }
+    }
+;
+  }
+  dismissCling(cling,cb,Cling.WORKSPACE_CLING_DISMISSED_KEY,DISMISS_CLING_DURATION,true);
+  mSearchDropTargetBar.showSearchBar(true);
+}

@@ -1,0 +1,16 @@
+{
+  super(context,attrs);
+  ServiceConnection connection=new ServiceConnection(){
+    public void onServiceConnected(    ComponentName className,    IBinder service){
+      mMemoryService=((MemoryTracker.MemoryTrackerInterface)service).getService();
+      initViews();
+    }
+    public void onServiceDisconnected(    ComponentName className){
+      mMemoryService=null;
+    }
+  }
+;
+  context.bindService(new Intent(context,MemoryTracker.class),connection,Context.BIND_AUTO_CREATE);
+  setOrientation(LinearLayout.VERTICAL);
+  setBackgroundColor(BACKGROUND_COLOR);
+}

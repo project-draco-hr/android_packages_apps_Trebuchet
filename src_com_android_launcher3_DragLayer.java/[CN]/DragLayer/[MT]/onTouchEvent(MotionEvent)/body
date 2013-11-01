@@ -1,0 +1,32 @@
+{
+  boolean handled=false;
+  int action=ev.getAction();
+  int x=(int)ev.getX();
+  int y=(int)ev.getY();
+  if (action == MotionEvent.ACTION_DOWN) {
+    if (handleTouchDown(ev,false)) {
+      return true;
+    }
+  }
+ else   if (action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_CANCEL) {
+    if (mTouchCompleteListener != null) {
+      mTouchCompleteListener.onTouchComplete();
+    }
+    mTouchCompleteListener=null;
+  }
+  if (mCurrentResizeFrame != null) {
+    handled=true;
+switch (action) {
+case MotionEvent.ACTION_MOVE:
+      mCurrentResizeFrame.visualizeResizeForDelta(x - mXDown,y - mYDown);
+    break;
+case MotionEvent.ACTION_CANCEL:
+case MotionEvent.ACTION_UP:
+  mCurrentResizeFrame.visualizeResizeForDelta(x - mXDown,y - mYDown);
+mCurrentResizeFrame.onTouchUp();
+mCurrentResizeFrame=null;
+}
+}
+if (handled) return true;
+return mDragController.onTouchEvent(ev);
+}

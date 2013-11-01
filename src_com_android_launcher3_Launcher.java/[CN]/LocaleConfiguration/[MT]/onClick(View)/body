@@ -1,0 +1,62 @@
+{
+  if (v.getWindowToken() == null) {
+    return;
+  }
+  if (!mWorkspace.isFinishedSwitchingState()) {
+    return;
+  }
+  if (v instanceof Workspace) {
+    if (mWorkspace.isInOverviewMode()) {
+      mWorkspace.exitOverviewMode(true);
+    }
+    return;
+  }
+  if (v instanceof CellLayout) {
+    if (mWorkspace.isInOverviewMode()) {
+      mWorkspace.exitOverviewMode(mWorkspace.indexOfChild(v),true);
+    }
+  }
+  Object tag=v.getTag();
+  if (tag instanceof ShortcutInfo) {
+    final ShortcutInfo shortcut=(ShortcutInfo)tag;
+    final Intent intent=shortcut.intent;
+    if (intent.getComponent() != null) {
+      final String shortcutClass=intent.getComponent().getClassName();
+      if (shortcutClass.equals(WidgetAdder.class.getName())) {
+        showAllApps(true,AppsCustomizePagedView.ContentType.Widgets,true);
+        return;
+      }
+ else       if (shortcutClass.equals(MemoryDumpActivity.class.getName())) {
+        MemoryDumpActivity.startDump(this);
+        return;
+      }
+ else       if (shortcutClass.equals(ToggleWeightWatcher.class.getName())) {
+        toggleShowWeightWatcher();
+        return;
+      }
+    }
+    int[] pos=new int[2];
+    v.getLocationOnScreen(pos);
+    intent.setSourceBounds(new Rect(pos[0],pos[1],pos[0] + v.getWidth(),pos[1] + v.getHeight()));
+    boolean success=startActivitySafely(v,intent,tag);
+    mStats.recordLaunch(intent,shortcut);
+    if (success && v instanceof BubbleTextView) {
+      mWaitingForResume=(BubbleTextView)v;
+      mWaitingForResume.setStayPressed(true);
+    }
+  }
+ else   if (tag instanceof FolderInfo) {
+    if (v instanceof FolderIcon) {
+      FolderIcon fi=(FolderIcon)v;
+      handleFolderClick(fi);
+    }
+  }
+ else   if (v == mAllAppsButton) {
+    if (isAllAppsVisible()) {
+      showWorkspace(true);
+    }
+ else {
+      onClickAllAppsButton(v);
+    }
+  }
+}

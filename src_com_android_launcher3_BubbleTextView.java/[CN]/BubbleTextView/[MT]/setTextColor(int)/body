@@ -1,0 +1,4 @@
+{
+  mTextColor=color;
+  super.setTextColor(color);
+}

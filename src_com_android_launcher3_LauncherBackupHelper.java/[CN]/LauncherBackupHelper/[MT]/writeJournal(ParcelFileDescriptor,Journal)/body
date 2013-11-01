@@ -1,0 +1,11 @@
+{
+  FileOutputStream outStream=null;
+  try {
+    outStream=new FileOutputStream(newState.getFileDescriptor());
+    outStream.write(writeCheckedBytes(journal));
+    outStream.close();
+  }
+ catch (  IOException e) {
+    Log.d(TAG,"failed to write backup journal",e);
+  }
+}

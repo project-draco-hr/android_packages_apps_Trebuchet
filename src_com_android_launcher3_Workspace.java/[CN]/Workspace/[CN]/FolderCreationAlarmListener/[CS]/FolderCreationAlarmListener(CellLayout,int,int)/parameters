@@ -1,0 +1,3 @@
+CellLayout layout
+int cellX
+int cellY

@@ -1,0 +1,6 @@
+{
+  if (mDragFolderRingAnimator != null) {
+    mDragFolderRingAnimator.animateToNaturalState();
+  }
+  mFolderCreationAlarm.cancelAlarm();
+}

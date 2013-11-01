@@ -1,0 +1,9 @@
+{
+  this.dragViewCenter=dragViewCenter;
+  this.minSpanX=minSpanX;
+  this.minSpanY=minSpanY;
+  this.spanX=spanX;
+  this.spanY=spanY;
+  this.child=child;
+  this.dragView=dragView;
+}

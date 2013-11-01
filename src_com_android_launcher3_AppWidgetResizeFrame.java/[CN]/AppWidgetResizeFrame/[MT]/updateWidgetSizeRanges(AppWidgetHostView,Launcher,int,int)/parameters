@@ -1,0 +1,4 @@
+AppWidgetHostView widgetView
+Launcher launcher
+int spanX
+int spanY

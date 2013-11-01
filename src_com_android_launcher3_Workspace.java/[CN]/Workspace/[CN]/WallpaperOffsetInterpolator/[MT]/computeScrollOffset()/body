@@ -1,0 +1,20 @@
+{
+  final float oldOffset=mCurrentOffset;
+  if (mAnimating) {
+    long durationSinceAnimation=System.currentTimeMillis() - mAnimationStartTime;
+    float t0=durationSinceAnimation / (float)ANIMATION_DURATION;
+    float t1=mInterpolator.getInterpolation(t0);
+    mCurrentOffset=mAnimationStartOffset + (mFinalOffset - mAnimationStartOffset) * t1;
+    mAnimating=durationSinceAnimation < ANIMATION_DURATION;
+  }
+ else {
+    mCurrentOffset=mFinalOffset;
+  }
+  if (Math.abs(mCurrentOffset - mFinalOffset) > 0.0000001f) {
+    scheduleUpdate();
+  }
+  if (Math.abs(oldOffset - mCurrentOffset) > 0.0000001f) {
+    return true;
+  }
+  return false;
+}

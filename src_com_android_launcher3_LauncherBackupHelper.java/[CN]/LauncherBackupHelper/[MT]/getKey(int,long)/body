@@ -1,0 +1,7 @@
+{
+  Key key=new Key();
+  key.type=type;
+  key.id=id;
+  key.checksum=checkKey(key);
+  return key;
+}

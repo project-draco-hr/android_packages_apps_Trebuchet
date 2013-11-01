@@ -1,0 +1,41 @@
+{
+  DragLayer.LayoutParams lp=(DragLayer.LayoutParams)getLayoutParams();
+  DragLayer parent=(DragLayer)mLauncher.findViewById(R.id.drag_layer);
+  int width=getPaddingLeft() + getPaddingRight() + mContent.getDesiredWidth();
+  int height=getFolderHeight();
+  float scale=parent.getDescendantRectRelativeToSelf(mFolderIcon,mTempRect);
+  LauncherAppState app=LauncherAppState.getInstance();
+  DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
+  int centerX=(int)(mTempRect.left + mTempRect.width() * scale / 2);
+  int centerY=(int)(mTempRect.top + mTempRect.height() * scale / 2);
+  int centeredLeft=centerX - width / 2;
+  int centeredTop=centerY - height / 2;
+  int currentPage=mLauncher.getWorkspace().getNextPage();
+  mLauncher.getWorkspace().setFinalScrollForPageChange(currentPage);
+  CellLayout currentLayout=(CellLayout)mLauncher.getWorkspace().getChildAt(currentPage);
+  ShortcutAndWidgetContainer boundingLayout=currentLayout.getShortcutsAndWidgets();
+  Rect bounds=new Rect();
+  parent.getDescendantRectRelativeToSelf(boundingLayout,bounds);
+  mLauncher.getWorkspace().resetFinalScrollForPageChange(currentPage);
+  int left=Math.min(Math.max(bounds.left,centeredLeft),bounds.left + bounds.width() - width);
+  int top=Math.min(Math.max(bounds.top,centeredTop),bounds.top + bounds.height() - height);
+  if (grid.isPhone() && (grid.availableWidthPx - width) < grid.iconSizePx) {
+    left=(grid.availableWidthPx - width) / 2;
+  }
+ else   if (width >= bounds.width()) {
+    left=bounds.left + (bounds.width() - width) / 2;
+  }
+  if (height >= bounds.height()) {
+    top=bounds.top + (bounds.height() - height) / 2;
+  }
+  int folderPivotX=width / 2 + (centeredLeft - left);
+  int folderPivotY=height / 2 + (centeredTop - top);
+  setPivotX(folderPivotX);
+  setPivotY(folderPivotY);
+  mFolderIconPivotX=(int)(mFolderIcon.getMeasuredWidth() * (1.0f * folderPivotX / width));
+  mFolderIconPivotY=(int)(mFolderIcon.getMeasuredHeight() * (1.0f * folderPivotY / height));
+  lp.width=width;
+  lp.height=height;
+  lp.x=left;
+  lp.y=top;
+}

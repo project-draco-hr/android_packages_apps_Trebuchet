@@ -1,0 +1,7 @@
+{
+  if (!DISABLE_ALL_APPS) {
+    mApps=list;
+    Collections.sort(mApps,LauncherModel.getAppNameComparator());
+    updatePageCountsAndInvalidateData();
+  }
+}

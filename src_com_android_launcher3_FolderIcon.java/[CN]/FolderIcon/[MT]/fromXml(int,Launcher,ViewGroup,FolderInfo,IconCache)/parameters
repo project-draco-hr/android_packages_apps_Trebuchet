@@ -1,0 +1,5 @@
+int resId
+Launcher launcher
+ViewGroup group
+FolderInfo folderInfo
+IconCache iconCache

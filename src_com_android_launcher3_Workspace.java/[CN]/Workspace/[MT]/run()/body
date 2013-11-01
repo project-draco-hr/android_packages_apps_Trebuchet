@@ -1,0 +1,8 @@
+{
+  mAnimatingViewIntoPlace=false;
+  updateChildrenLayersEnabled(false);
+  if (finalResizeRunnable != null) {
+    finalResizeRunnable.run();
+  }
+  stripEmptyScreens();
+}

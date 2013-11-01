@@ -1,0 +1,5 @@
+{
+  super.onPageEndMoving();
+  mForceDrawAllChildrenNextFrame=true;
+  mSaveInstanceStateItemIndex=-1;
+}

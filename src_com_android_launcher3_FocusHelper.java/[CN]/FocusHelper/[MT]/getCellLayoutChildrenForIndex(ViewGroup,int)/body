@@ -1,0 +1,4 @@
+{
+  ViewGroup parent=(ViewGroup)container.getChildAt(i);
+  return (ShortcutAndWidgetContainer)parent.getChildAt(0);
+}

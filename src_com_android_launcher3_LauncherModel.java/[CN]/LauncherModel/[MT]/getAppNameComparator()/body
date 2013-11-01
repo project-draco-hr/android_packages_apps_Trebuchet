@@ -1,0 +1,13 @@
+{
+  final Collator collator=Collator.getInstance();
+  return new Comparator<AppInfo>(){
+    public final int compare(    AppInfo a,    AppInfo b){
+      int result=collator.compare(a.title.toString().trim(),b.title.toString().trim());
+      if (result == 0) {
+        result=a.componentName.compareTo(b.componentName);
+      }
+      return result;
+    }
+  }
+;
+}

@@ -1,0 +1,29 @@
+{
+  ShortcutInfo item;
+  if (d.dragInfo instanceof AppInfo) {
+    item=((AppInfo)d.dragInfo).makeShortcut();
+    item.spanX=1;
+    item.spanY=1;
+  }
+ else {
+    item=(ShortcutInfo)d.dragInfo;
+  }
+  if (item == mCurrentDragInfo) {
+    ShortcutInfo si=(ShortcutInfo)mCurrentDragView.getTag();
+    CellLayout.LayoutParams lp=(CellLayout.LayoutParams)mCurrentDragView.getLayoutParams();
+    si.cellX=lp.cellX=mEmptyCell[0];
+    si.cellX=lp.cellY=mEmptyCell[1];
+    mContent.addViewToCellLayout(mCurrentDragView,-1,(int)item.id,lp,true);
+    if (d.dragView.hasDrawn()) {
+      mLauncher.getDragLayer().animateViewIntoPosition(d.dragView,mCurrentDragView);
+    }
+ else {
+      d.deferDragViewCleanupPostAnimation=false;
+      mCurrentDragView.setVisibility(VISIBLE);
+    }
+    mItemsInvalidated=true;
+    setupContentDimensions(getItemCount());
+    mSuppressOnAdd=true;
+  }
+  mInfo.add(item);
+}

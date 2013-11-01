@@ -1,0 +1,4 @@
+{
+  mComponentName=info.componentName;
+  mType=Type.ApplicationInfoKey;
+}

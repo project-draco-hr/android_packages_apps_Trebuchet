@@ -1,0 +1,6 @@
+def pull_file(fn):
+    print ('pull_file: ' + fn)
+    rv = os.system(((('adb pull' + ' /data/data/com.android.launcher/databases/launcher.db') + ' ') + fn))
+    if (rv != 0):
+        print 'adb pull failed'
+        sys.exit(1)

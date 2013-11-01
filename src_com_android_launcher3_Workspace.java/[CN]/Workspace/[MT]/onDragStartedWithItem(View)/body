@@ -1,0 +1,4 @@
+{
+  final Canvas canvas=new Canvas();
+  mDragOutline=createDragOutline(v,canvas,DRAG_BITMAP_PADDING);
+}

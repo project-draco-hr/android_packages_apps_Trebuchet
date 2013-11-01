@@ -1,0 +1,20 @@
+{
+  boolean horizontalActive=(mResizeMode & AppWidgetProviderInfo.RESIZE_HORIZONTAL) != 0;
+  boolean verticalActive=(mResizeMode & AppWidgetProviderInfo.RESIZE_VERTICAL) != 0;
+  mLeftBorderActive=(x < mTouchTargetWidth) && horizontalActive;
+  mRightBorderActive=(x > getWidth() - mTouchTargetWidth) && horizontalActive;
+  mTopBorderActive=(y < mTouchTargetWidth + mTopTouchRegionAdjustment) && verticalActive;
+  mBottomBorderActive=(y > getHeight() - mTouchTargetWidth + mBottomTouchRegionAdjustment) && verticalActive;
+  boolean anyBordersActive=mLeftBorderActive || mRightBorderActive || mTopBorderActive|| mBottomBorderActive;
+  mBaselineWidth=getMeasuredWidth();
+  mBaselineHeight=getMeasuredHeight();
+  mBaselineX=getLeft();
+  mBaselineY=getTop();
+  if (anyBordersActive) {
+    mLeftHandle.setAlpha(mLeftBorderActive ? 1.0f : DIMMED_HANDLE_ALPHA);
+    mRightHandle.setAlpha(mRightBorderActive ? 1.0f : DIMMED_HANDLE_ALPHA);
+    mTopHandle.setAlpha(mTopBorderActive ? 1.0f : DIMMED_HANDLE_ALPHA);
+    mBottomHandle.setAlpha(mBottomBorderActive ? 1.0f : DIMMED_HANDLE_ALPHA);
+  }
+  return anyBordersActive;
+}

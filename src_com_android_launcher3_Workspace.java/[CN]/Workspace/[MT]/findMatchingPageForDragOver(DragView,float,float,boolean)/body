@@ -1,0 +1,31 @@
+{
+  final int screenCount=getChildCount();
+  CellLayout bestMatchingScreen=null;
+  float smallestDistSoFar=Float.MAX_VALUE;
+  for (int i=0; i < screenCount; i++) {
+    if (mScreenOrder.get(i) == CUSTOM_CONTENT_SCREEN_ID) {
+      continue;
+    }
+    CellLayout cl=(CellLayout)getChildAt(i);
+    final float[] touchXy={originX,originY};
+    cl.getMatrix().invert(mTempInverseMatrix);
+    mapPointFromSelfToChild(cl,touchXy,mTempInverseMatrix);
+    if (touchXy[0] >= 0 && touchXy[0] <= cl.getWidth() && touchXy[1] >= 0 && touchXy[1] <= cl.getHeight()) {
+      return cl;
+    }
+    if (!exact) {
+      final float[] cellLayoutCenter=mTempCellLayoutCenterCoordinates;
+      cellLayoutCenter[0]=cl.getWidth() / 2;
+      cellLayoutCenter[1]=cl.getHeight() / 2;
+      mapPointFromChildToSelf(cl,cellLayoutCenter);
+      touchXy[0]=originX;
+      touchXy[1]=originY;
+      float dist=squaredDistance(touchXy,cellLayoutCenter);
+      if (dist < smallestDistSoFar) {
+        smallestDistSoFar=dist;
+        bestMatchingScreen=cl;
+      }
+    }
+  }
+  return bestMatchingScreen;
+}

@@ -1,0 +1,5 @@
+{
+  Favorite favorite=new Favorite();
+  MessageNano.mergeFrom(favorite,readCheckedBytes(buffer,offset,dataSize));
+  return favorite;
+}

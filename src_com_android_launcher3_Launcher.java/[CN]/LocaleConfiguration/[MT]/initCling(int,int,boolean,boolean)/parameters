@@ -1,0 +1,4 @@
+int clingId
+int scrimId
+boolean animate
+boolean dimNavBarVisibilty

@@ -1,0 +1,39 @@
+{
+  final boolean isRtl=isLayoutRtl();
+  super.screenScrolled(screenCenter);
+  updatePageAlphaValues(screenCenter);
+  updateStateForCustomContent(screenCenter);
+  enableHwLayersOnVisiblePages();
+  boolean shouldOverScroll=(mOverScrollX < 0 && (!hasCustomContent() || isLayoutRtl())) || (mOverScrollX > mMaxScrollX && (!hasCustomContent() || !isLayoutRtl()));
+  if (shouldOverScroll) {
+    int index=0;
+    float pivotX=0f;
+    final float leftBiasedPivot=0.25f;
+    final float rightBiasedPivot=0.75f;
+    final int lowerIndex=0;
+    final int upperIndex=getChildCount() - 1;
+    final boolean isLeftPage=mOverScrollX < 0;
+    index=(!isRtl && isLeftPage) || (isRtl && !isLeftPage) ? lowerIndex : upperIndex;
+    pivotX=isLeftPage ? rightBiasedPivot : leftBiasedPivot;
+    CellLayout cl=(CellLayout)getChildAt(index);
+    float scrollProgress=getScrollProgress(screenCenter,cl,index);
+    cl.setOverScrollAmount(Math.abs(scrollProgress),isLeftPage);
+    float rotation=-WORKSPACE_OVERSCROLL_ROTATION * scrollProgress;
+    cl.setRotationY(rotation);
+    if (!mOverscrollTransformsSet || Float.compare(mLastOverscrollPivotX,pivotX) != 0) {
+      mOverscrollTransformsSet=true;
+      mLastOverscrollPivotX=pivotX;
+      cl.setCameraDistance(mDensity * mCameraDistance);
+      cl.setPivotX(cl.getMeasuredWidth() * pivotX);
+      cl.setPivotY(cl.getMeasuredHeight() * 0.5f);
+      cl.setOverscrollTransformsDirty(true);
+    }
+  }
+ else {
+    if (mOverscrollTransformsSet) {
+      mOverscrollTransformsSet=false;
+      ((CellLayout)getChildAt(0)).resetOverscrollTransforms();
+      ((CellLayout)getChildAt(getChildCount() - 1)).resetOverscrollTransforms();
+    }
+  }
+}

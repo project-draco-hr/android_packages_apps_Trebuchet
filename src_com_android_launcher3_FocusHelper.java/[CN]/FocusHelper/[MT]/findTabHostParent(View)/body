@@ -1,0 +1,7 @@
+{
+  ViewParent p=v.getParent();
+  while (p != null && !(p instanceof TabHost)) {
+    p=p.getParent();
+  }
+  return (TabHost)p;
+}

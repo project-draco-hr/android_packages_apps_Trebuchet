@@ -1,0 +1,51 @@
+{
+  final long loadTime=DEBUG_LOADERS ? SystemClock.uptimeMillis() : 0;
+  final Callbacks oldCallbacks=mCallbacks.get();
+  if (oldCallbacks == null) {
+    Log.w(TAG,"LoaderTask running with no launcher (loadAllApps)");
+    return;
+  }
+  final PackageManager packageManager=mContext.getPackageManager();
+  final Intent mainIntent=new Intent(Intent.ACTION_MAIN,null);
+  mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
+  mBgAllAppsList.clear();
+  final long qiaTime=DEBUG_LOADERS ? SystemClock.uptimeMillis() : 0;
+  List<ResolveInfo> apps=packageManager.queryIntentActivities(mainIntent,0);
+  if (DEBUG_LOADERS) {
+    Log.d(TAG,"queryIntentActivities took " + (SystemClock.uptimeMillis() - qiaTime) + "ms");
+    Log.d(TAG,"queryIntentActivities got " + apps.size() + " apps");
+  }
+  if (apps == null || apps.isEmpty()) {
+    return;
+  }
+  final long sortTime=DEBUG_LOADERS ? SystemClock.uptimeMillis() : 0;
+  Collections.sort(apps,new LauncherModel.ShortcutNameComparator(packageManager,mLabelCache));
+  if (DEBUG_LOADERS) {
+    Log.d(TAG,"sort took " + (SystemClock.uptimeMillis() - sortTime) + "ms");
+  }
+  for (int i=0; i < apps.size(); i++) {
+    ResolveInfo app=apps.get(i);
+    mBgAllAppsList.add(new AppInfo(packageManager,app,mIconCache,mLabelCache));
+  }
+  final ArrayList<AppInfo> added=mBgAllAppsList.added;
+  mBgAllAppsList.added=new ArrayList<AppInfo>();
+  mHandler.post(new Runnable(){
+    public void run(){
+      final long bindTime=SystemClock.uptimeMillis();
+      final Callbacks callbacks=tryGetCallbacks(oldCallbacks);
+      if (callbacks != null) {
+        callbacks.bindAllApplications(added);
+        if (DEBUG_LOADERS) {
+          Log.d(TAG,"bound " + added.size() + " apps in "+ (SystemClock.uptimeMillis() - bindTime)+ "ms");
+        }
+      }
+ else {
+        Log.i(TAG,"not binding apps: no Launcher activity");
+      }
+    }
+  }
+);
+  if (DEBUG_LOADERS) {
+    Log.d(TAG,"Icons processed in " + (SystemClock.uptimeMillis() - loadTime) + "ms");
+  }
+}

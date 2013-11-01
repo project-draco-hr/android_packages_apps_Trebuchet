@@ -1,0 +1,15 @@
+{
+  if (AppsCustomizePagedView.DISABLE_ALL_APPS) {
+    if (mIntentsOnWorkspaceFromUpgradePath != null) {
+      if (LauncherModel.UPGRADE_USE_MORE_APPS_FOLDER) {
+        getHotseat().addAllAppsFolder(mIconCache,apps,mIntentsOnWorkspaceFromUpgradePath,Launcher.this,mWorkspace);
+      }
+      mIntentsOnWorkspaceFromUpgradePath=null;
+    }
+  }
+ else {
+    if (mAppsCustomizeContent != null) {
+      mAppsCustomizeContent.setApps(apps);
+    }
+  }
+}

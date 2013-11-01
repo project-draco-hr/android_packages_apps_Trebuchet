@@ -1,0 +1,3 @@
+{
+  computePreviewDrawingParams(d.getIntrinsicWidth(),getMeasuredWidth());
+}

@@ -1,0 +1,21 @@
+{
+  view.getViewTreeObserver().addOnDrawListener(new ViewTreeObserver.OnDrawListener(){
+    private boolean mStarted=false;
+    public void onDraw(){
+      if (mStarted)       return;
+      mStarted=true;
+      if (animator.getDuration() == 0) {
+        return;
+      }
+      animator.start();
+      final ViewTreeObserver.OnDrawListener listener=this;
+      view.post(new Runnable(){
+        public void run(){
+          view.getViewTreeObserver().removeOnDrawListener(listener);
+        }
+      }
+);
+    }
+  }
+);
+}

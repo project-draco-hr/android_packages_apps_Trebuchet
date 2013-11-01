@@ -1,0 +1,9 @@
+{
+  super.onStart();
+  startDump(this,new Runnable(){
+    @Override public void run(){
+      finish();
+    }
+  }
+);
+}

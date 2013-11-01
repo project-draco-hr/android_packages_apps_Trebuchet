@@ -1,0 +1,4 @@
+{
+  mAlarmTriggerTime=0;
+  mAlarmPending=false;
+}

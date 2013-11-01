@@ -1,0 +1,11 @@
+{
+  System.err.println("DecoderRing type [input]");
+  System.err.println("\t-k\tdecode a key");
+  System.err.println("\t-f\tdecode a favorite");
+  System.err.println("\t-i\tdecode a icon");
+  System.err.println("\t-s\tdecode a screen");
+  System.err.println("\t-w\tdecode a widget");
+  System.err.println("\t-s b\tskip b bytes");
+  System.err.println("\tfilename\tread from filename, not stdin");
+  System.exit(1);
+}

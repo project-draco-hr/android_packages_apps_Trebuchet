@@ -1,0 +1,4 @@
+{
+  mUseInstallQueue=false;
+  flushInstallQueue(context);
+}

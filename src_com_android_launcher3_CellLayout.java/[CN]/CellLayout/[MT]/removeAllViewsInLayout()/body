@@ -1,0 +1,6 @@
+{
+  if (mShortcutsAndWidgets.getChildCount() > 0) {
+    clearOccupiedCells();
+    mShortcutsAndWidgets.removeAllViewsInLayout();
+  }
+}

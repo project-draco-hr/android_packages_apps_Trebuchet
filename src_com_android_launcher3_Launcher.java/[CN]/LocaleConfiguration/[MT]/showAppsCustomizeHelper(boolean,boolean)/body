@@ -1,0 +1,4 @@
+{
+  AppsCustomizePagedView.ContentType contentType=mAppsCustomizeContent.getContentType();
+  showAppsCustomizeHelper(animated,springLoaded,contentType);
+}

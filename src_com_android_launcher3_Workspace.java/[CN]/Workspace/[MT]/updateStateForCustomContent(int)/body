@@ -1,0 +1,30 @@
+{
+  float translationX=0;
+  float progress=0;
+  if (hasCustomContent()) {
+    int index=mScreenOrder.indexOf(CUSTOM_CONTENT_SCREEN_ID);
+    int scrollDelta=getScrollX() - getScrollForPage(index) - getLayoutTransitionOffsetForPage(index);
+    float scrollRange=getScrollForPage(index + 1) - getScrollForPage(index);
+    translationX=scrollRange - scrollDelta;
+    progress=(scrollRange - scrollDelta) / scrollRange;
+    if (isLayoutRtl()) {
+      translationX=Math.min(0,translationX);
+    }
+ else {
+      translationX=Math.max(0,translationX);
+    }
+    progress=Math.max(0,progress);
+  }
+  if (Float.compare(progress,mLastCustomContentScrollProgress) == 0)   return;
+  mLastCustomContentScrollProgress=progress;
+  setBackgroundAlpha(progress * 0.8f);
+  if (mLauncher.getHotseat() != null) {
+    mLauncher.getHotseat().setTranslationX(translationX);
+  }
+  if (getPageIndicator() != null) {
+    getPageIndicator().setTranslationX(translationX);
+  }
+  if (mCustomContentCallbacks != null) {
+    mCustomContentCallbacks.onScrollProgressChanged(progress);
+  }
+}

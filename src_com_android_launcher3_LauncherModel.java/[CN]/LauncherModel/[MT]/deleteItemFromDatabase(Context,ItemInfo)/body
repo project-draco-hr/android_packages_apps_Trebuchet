@@ -1,0 +1,34 @@
+{
+  final ContentResolver cr=context.getContentResolver();
+  final Uri uriToDelete=LauncherSettings.Favorites.getContentUri(item.id,false);
+  Runnable r=new Runnable(){
+    public void run(){
+      cr.delete(uriToDelete,null,null);
+synchronized (sBgLock) {
+switch (item.itemType) {
+case LauncherSettings.Favorites.ITEM_TYPE_FOLDER:
+          sBgFolders.remove(item.id);
+        for (        ItemInfo info : sBgItemsIdMap.values()) {
+          if (info.container == item.id) {
+            String msg="deleting a folder (" + item + ") which still "+ "contains items ("+ info+ ")";
+            Log.e(TAG,msg);
+          }
+        }
+      sBgWorkspaceItems.remove(item);
+    break;
+case LauncherSettings.Favorites.ITEM_TYPE_APPLICATION:
+case LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT:
+  sBgWorkspaceItems.remove(item);
+break;
+case LauncherSettings.Favorites.ITEM_TYPE_APPWIDGET:
+sBgAppWidgets.remove((LauncherAppWidgetInfo)item);
+break;
+}
+sBgItemsIdMap.remove(item.id);
+sBgDbIconCache.remove(item);
+}
+}
+}
+;
+runOnWorkerThread(r);
+}

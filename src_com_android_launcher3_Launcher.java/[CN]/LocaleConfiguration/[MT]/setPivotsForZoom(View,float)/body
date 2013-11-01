@@ -1,0 +1,4 @@
+{
+  view.setPivotX(view.getWidth() / 2.0f);
+  view.setPivotY(view.getHeight() / 2.0f);
+}

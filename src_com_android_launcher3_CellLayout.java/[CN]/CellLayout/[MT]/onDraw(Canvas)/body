@@ -1,0 +1,100 @@
+{
+  if (mBackgroundAlpha > 0.0f) {
+    Drawable bg;
+    if (mUseActiveGlowBackground) {
+      bg=mActiveGlowBackground;
+    }
+ else {
+      bg=mNormalBackground;
+    }
+    bg.setAlpha((int)(mBackgroundAlpha * mBackgroundAlphaMultiplier * 255));
+    bg.setBounds(mBackgroundRect);
+    bg.draw(canvas);
+  }
+  final Paint paint=mDragOutlinePaint;
+  for (int i=0; i < mDragOutlines.length; i++) {
+    final float alpha=mDragOutlineAlphas[i];
+    if (alpha > 0) {
+      final Rect r=mDragOutlines[i];
+      mTempRect.set(r);
+      Utilities.scaleRectAboutCenter(mTempRect,getChildrenScale());
+      final Bitmap b=(Bitmap)mDragOutlineAnims[i].getTag();
+      paint.setAlpha((int)(alpha + .5f));
+      canvas.drawBitmap(b,null,mTempRect,paint);
+    }
+  }
+  if (mPressedOrFocusedIcon != null) {
+    final int padding=mPressedOrFocusedIcon.getPressedOrFocusedBackgroundPadding();
+    final Bitmap b=mPressedOrFocusedIcon.getPressedOrFocusedBackground();
+    if (b != null) {
+      int offset=getMeasuredWidth() - getPaddingLeft() - getPaddingRight()- (mCountX * mCellWidth);
+      int left=getPaddingLeft() + (int)Math.ceil(offset / 2f);
+      int top=getPaddingTop();
+      canvas.drawBitmap(b,mPressedOrFocusedIcon.getLeft() + left - padding,mPressedOrFocusedIcon.getTop() + top - padding,null);
+    }
+  }
+  if (DEBUG_VISUALIZE_OCCUPIED) {
+    int[] pt=new int[2];
+    ColorDrawable cd=new ColorDrawable(Color.RED);
+    cd.setBounds(0,0,mCellWidth,mCellHeight);
+    for (int i=0; i < mCountX; i++) {
+      for (int j=0; j < mCountY; j++) {
+        if (mOccupied[i][j]) {
+          cellToPoint(i,j,pt);
+          canvas.save();
+          canvas.translate(pt[0],pt[1]);
+          cd.draw(canvas);
+          canvas.restore();
+        }
+      }
+    }
+  }
+  int previewOffset=FolderRingAnimator.sPreviewSize;
+  LauncherAppState app=LauncherAppState.getInstance();
+  DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
+  for (int i=0; i < mFolderOuterRings.size(); i++) {
+    FolderRingAnimator fra=mFolderOuterRings.get(i);
+    Drawable d;
+    int width, height;
+    cellToPoint(fra.mCellX,fra.mCellY,mTempLocation);
+    View child=getChildAt(fra.mCellX,fra.mCellY);
+    if (child != null) {
+      int centerX=mTempLocation[0] + mCellWidth / 2;
+      int centerY=mTempLocation[1] + previewOffset / 2 + child.getPaddingTop() + grid.folderBackgroundOffset;
+      if (FolderIcon.HAS_OUTER_RING) {
+        d=FolderRingAnimator.sSharedOuterRingDrawable;
+        width=(int)(fra.getOuterRingSize() * getChildrenScale());
+        height=width;
+        canvas.save();
+        canvas.translate(centerX - width / 2,centerY - height / 2);
+        d.setBounds(0,0,width,height);
+        d.draw(canvas);
+        canvas.restore();
+      }
+      d=FolderRingAnimator.sSharedInnerRingDrawable;
+      width=(int)(fra.getInnerRingSize() * getChildrenScale());
+      height=width;
+      canvas.save();
+      canvas.translate(centerX - width / 2,centerY - width / 2);
+      d.setBounds(0,0,width,height);
+      d.draw(canvas);
+      canvas.restore();
+    }
+  }
+  if (mFolderLeaveBehindCell[0] >= 0 && mFolderLeaveBehindCell[1] >= 0) {
+    Drawable d=FolderIcon.sSharedFolderLeaveBehind;
+    int width=d.getIntrinsicWidth();
+    int height=d.getIntrinsicHeight();
+    cellToPoint(mFolderLeaveBehindCell[0],mFolderLeaveBehindCell[1],mTempLocation);
+    View child=getChildAt(mFolderLeaveBehindCell[0],mFolderLeaveBehindCell[1]);
+    if (child != null) {
+      int centerX=mTempLocation[0] + mCellWidth / 2;
+      int centerY=mTempLocation[1] + previewOffset / 2 + child.getPaddingTop() + grid.folderBackgroundOffset;
+      canvas.save();
+      canvas.translate(centerX - width / 2,centerY - width / 2);
+      d.setBounds(0,0,width,height);
+      d.draw(canvas);
+      canvas.restore();
+    }
+  }
+}

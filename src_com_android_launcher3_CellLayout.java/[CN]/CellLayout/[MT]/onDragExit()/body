@@ -1,0 +1,11 @@
+{
+  mDragEnforcer.onDragExit();
+  if (mDragging) {
+    mDragging=false;
+  }
+  mDragCell[0]=mDragCell[1]=-1;
+  mDragOutlineAnims[mDragOutlineCurrent].animateOut();
+  mDragOutlineCurrent=(mDragOutlineCurrent + 1) % mDragOutlineAnims.length;
+  revertTempState();
+  setIsDragOverlapping(false);
+}

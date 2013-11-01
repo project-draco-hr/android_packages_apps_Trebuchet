@@ -1,0 +1,15 @@
+{
+  View child=cellInfo.cell;
+  if (!child.isInTouchMode()) {
+    return;
+  }
+  mDragInfo=cellInfo;
+  child.setVisibility(INVISIBLE);
+  CellLayout layout=(CellLayout)child.getParent().getParent();
+  layout.prepareChildForDrag(child);
+  child.clearFocus();
+  child.setPressed(false);
+  final Canvas canvas=new Canvas();
+  mDragOutline=createDragOutline(child,canvas,DRAG_BITMAP_PADDING);
+  beginDragShared(child,this);
+}

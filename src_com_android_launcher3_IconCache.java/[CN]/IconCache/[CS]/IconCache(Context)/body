@@ -1,0 +1,7 @@
+{
+  ActivityManager activityManager=(ActivityManager)context.getSystemService(Context.ACTIVITY_SERVICE);
+  mContext=context;
+  mPackageManager=context.getPackageManager();
+  mIconDpi=activityManager.getLauncherLargeIconDensity();
+  mDefaultIcon=makeDefaultIcon();
+}

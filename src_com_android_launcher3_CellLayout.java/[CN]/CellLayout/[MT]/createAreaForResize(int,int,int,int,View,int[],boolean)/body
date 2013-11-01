@@ -1,0 +1,21 @@
+{
+  int[] pixelXY=new int[2];
+  regionToCenterPoint(cellX,cellY,spanX,spanY,pixelXY);
+  ItemConfiguration swapSolution=simpleSwap(pixelXY[0],pixelXY[1],spanX,spanY,spanX,spanY,direction,dragView,true,new ItemConfiguration());
+  setUseTempCoords(true);
+  if (swapSolution != null && swapSolution.isSolution) {
+    copySolutionToTempState(swapSolution,dragView);
+    setItemPlacementDirty(true);
+    animateItemsToSolution(swapSolution,dragView,commit);
+    if (commit) {
+      commitTempPlacement();
+      completeAndClearReorderHintAnimations();
+      setItemPlacementDirty(false);
+    }
+ else {
+      beginOrAdjustHintAnimations(swapSolution,dragView,REORDER_ANIMATION_DURATION);
+    }
+    mShortcutsAndWidgets.requestLayout();
+  }
+  return swapSolution.isSolution;
+}

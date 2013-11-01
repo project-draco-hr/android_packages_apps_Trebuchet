@@ -1,0 +1,3 @@
+def adb_root_remount():
+    os.system('adb root')
+    os.system('adb remount')

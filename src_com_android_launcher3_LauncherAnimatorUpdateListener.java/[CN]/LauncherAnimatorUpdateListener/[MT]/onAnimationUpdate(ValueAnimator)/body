@@ -1,0 +1,5 @@
+{
+  final float b=(Float)animation.getAnimatedValue();
+  final float a=1f - b;
+  onAnimationUpdate(a,b);
+}

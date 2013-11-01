@@ -1,0 +1,7 @@
+{
+  if (cancelAlarm) {
+    mReorderAlarm.cancelAlarm();
+  }
+  mLastReorderX=-1;
+  mLastReorderY=-1;
+}

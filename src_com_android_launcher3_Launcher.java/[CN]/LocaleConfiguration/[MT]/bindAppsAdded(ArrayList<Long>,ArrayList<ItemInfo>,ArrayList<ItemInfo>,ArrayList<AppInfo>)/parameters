@@ -1,0 +1,4 @@
+ArrayList<Long> newScreens
+ArrayList<ItemInfo> addNotAnimated
+ArrayList<ItemInfo> addAnimated
+ArrayList<AppInfo> addedApps

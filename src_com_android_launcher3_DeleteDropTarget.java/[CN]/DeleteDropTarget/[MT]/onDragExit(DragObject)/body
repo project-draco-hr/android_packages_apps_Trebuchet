@@ -1,0 +1,9 @@
+{
+  super.onDragExit(d);
+  if (!d.dragComplete) {
+    resetHoverColor();
+  }
+ else {
+    d.dragView.setColor(mHoverColor);
+  }
+}

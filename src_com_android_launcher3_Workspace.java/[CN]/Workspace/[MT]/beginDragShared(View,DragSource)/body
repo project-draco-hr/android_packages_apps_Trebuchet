@@ -1,0 +1,35 @@
+{
+  final Bitmap b=createDragBitmap(child,new Canvas(),DRAG_BITMAP_PADDING);
+  final int bmpWidth=b.getWidth();
+  final int bmpHeight=b.getHeight();
+  float scale=mLauncher.getDragLayer().getLocationInDragLayer(child,mTempXY);
+  int dragLayerX=Math.round(mTempXY[0] - (bmpWidth - scale * child.getWidth()) / 2);
+  int dragLayerY=Math.round(mTempXY[1] - (bmpHeight - scale * bmpHeight) / 2 - DRAG_BITMAP_PADDING / 2);
+  LauncherAppState app=LauncherAppState.getInstance();
+  DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
+  Point dragVisualizeOffset=null;
+  Rect dragRect=null;
+  if (child instanceof BubbleTextView || child instanceof PagedViewIcon) {
+    int iconSize=grid.iconSizePx;
+    int top=child.getPaddingTop();
+    int left=(bmpWidth - iconSize) / 2;
+    int right=left + iconSize;
+    int bottom=top + iconSize;
+    dragLayerY+=top;
+    dragVisualizeOffset=new Point(-DRAG_BITMAP_PADDING / 2,DRAG_BITMAP_PADDING / 2);
+    dragRect=new Rect(left,top,right,bottom);
+  }
+ else   if (child instanceof FolderIcon) {
+    int previewSize=grid.folderIconSizePx;
+    dragRect=new Rect(0,child.getPaddingTop(),child.getWidth(),previewSize);
+  }
+  if (child instanceof BubbleTextView) {
+    BubbleTextView icon=(BubbleTextView)child;
+    icon.clearPressedOrFocusedBackground();
+  }
+  mDragController.startDrag(b,dragLayerX,dragLayerY,source,child.getTag(),DragController.DRAG_ACTION_MOVE,dragVisualizeOffset,dragRect,scale);
+  if (child.getParent() instanceof ShortcutAndWidgetContainer) {
+    mDragSourceInternal=(ShortcutAndWidgetContainer)child.getParent();
+  }
+  b.recycle();
+}

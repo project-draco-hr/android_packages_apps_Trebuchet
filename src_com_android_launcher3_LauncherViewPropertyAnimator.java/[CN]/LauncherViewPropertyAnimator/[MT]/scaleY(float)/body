@@ -1,0 +1,5 @@
+{
+  mPropertiesToSet.add(Properties.SCALE_Y);
+  mScaleY=value;
+  return this;
+}

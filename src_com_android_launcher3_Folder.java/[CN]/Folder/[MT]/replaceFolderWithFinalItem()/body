@@ -1,0 +1,30 @@
+{
+  Runnable onCompleteRunnable=new Runnable(){
+    @Override public void run(){
+      CellLayout cellLayout=mLauncher.getCellLayout(mInfo.container,mInfo.screenId);
+      View child=null;
+      if (getItemCount() == 1) {
+        ShortcutInfo finalItem=mInfo.contents.get(0);
+        child=mLauncher.createShortcut(R.layout.application,cellLayout,finalItem);
+        LauncherModel.addOrMoveItemInDatabase(mLauncher,finalItem,mInfo.container,mInfo.screenId,mInfo.cellX,mInfo.cellY);
+      }
+      if (getItemCount() <= 1) {
+        LauncherModel.deleteItemFromDatabase(mLauncher,mInfo);
+        cellLayout.removeView(mFolderIcon);
+        if (mFolderIcon instanceof DropTarget) {
+          mDragController.removeDropTarget((DropTarget)mFolderIcon);
+        }
+        mLauncher.removeFolder(mInfo);
+      }
+      if (child != null) {
+        mLauncher.getWorkspace().addInScreenFromBind(child,mInfo.container,mInfo.screenId,mInfo.cellX,mInfo.cellY,mInfo.spanX,mInfo.spanY);
+      }
+    }
+  }
+;
+  View finalChild=getItemAt(0);
+  if (finalChild != null) {
+    mFolderIcon.performDestroyAnimation(finalChild,onCompleteRunnable);
+  }
+  mDestroyed=true;
+}

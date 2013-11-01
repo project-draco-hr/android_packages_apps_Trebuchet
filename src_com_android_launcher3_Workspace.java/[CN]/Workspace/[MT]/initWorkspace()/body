@@ -1,0 +1,25 @@
+{
+  Context context=getContext();
+  mCurrentPage=mDefaultPage;
+  Launcher.setScreen(mCurrentPage);
+  LauncherAppState app=LauncherAppState.getInstance();
+  DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
+  mIconCache=app.getIconCache();
+  setWillNotDraw(false);
+  setClipChildren(false);
+  setClipToPadding(false);
+  setChildrenDrawnWithCacheEnabled(true);
+  setMinScale(mOverviewModeShrinkFactor - 0.2f);
+  setupLayoutTransition();
+  final Resources res=getResources();
+  try {
+    mBackground=res.getDrawable(R.drawable.apps_customize_bg);
+  }
+ catch (  Resources.NotFoundException e) {
+  }
+  mWallpaperOffset=new WallpaperOffsetInterpolator();
+  Display display=mLauncher.getWindowManager().getDefaultDisplay();
+  display.getSize(mDisplaySize);
+  mMaxDistanceForFolderCreation=(0.55f * grid.iconSizePx);
+  mFlingThresholdVelocity=(int)(FLING_THRESHOLD_VELOCITY * mDensity);
+}

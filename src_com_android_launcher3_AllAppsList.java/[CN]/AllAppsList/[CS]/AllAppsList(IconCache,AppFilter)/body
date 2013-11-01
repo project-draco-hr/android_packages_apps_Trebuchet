@@ -1,0 +1,4 @@
+{
+  mIconCache=iconCache;
+  mAppFilter=appFilter;
+}

@@ -1,0 +1,3 @@
+boolean successfulDrop
+boolean extendedDelay
+Runnable onCompleteRunnable

@@ -1,0 +1,3 @@
+{
+  if (getNextPage() < getChildCount() - 1)   snapToPage(getNextPage() + 1);
+}

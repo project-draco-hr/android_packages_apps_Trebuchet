@@ -1,0 +1,6 @@
+{
+  if (sContext != null) {
+    Log.w(Launcher.TAG,"setApplicationContext called twice! old=" + sContext + " new="+ context);
+  }
+  sContext=context.getApplicationContext();
+}

@@ -1,0 +1,7 @@
+{
+  mDeferDropAfterUninstall=false;
+  mUninstallSuccessful=success;
+  if (mDeferredAction != null) {
+    mDeferredAction.run();
+  }
+}

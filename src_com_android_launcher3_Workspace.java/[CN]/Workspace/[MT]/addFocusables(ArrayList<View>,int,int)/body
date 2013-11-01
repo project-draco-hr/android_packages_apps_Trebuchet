@@ -1,0 +1,11 @@
+{
+  if (!mLauncher.isAllAppsVisible()) {
+    final Folder openFolder=getOpenFolder();
+    if (openFolder != null) {
+      openFolder.addFocusables(views,direction);
+    }
+ else {
+      super.addFocusables(views,direction,focusableMode);
+    }
+  }
+}

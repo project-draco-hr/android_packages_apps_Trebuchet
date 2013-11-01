@@ -1,0 +1,4 @@
+{
+  handleMessage(null);
+  return false;
+}

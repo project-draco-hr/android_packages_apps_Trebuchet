@@ -1,0 +1,3 @@
+{
+  sLauncherProvider=new WeakReference<LauncherProvider>(provider);
+}

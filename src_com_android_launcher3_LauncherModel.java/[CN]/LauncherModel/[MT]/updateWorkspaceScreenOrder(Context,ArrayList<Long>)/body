@@ -1,0 +1,33 @@
+{
+  final ArrayList<Long> screensCopy=new ArrayList<Long>(screens);
+  final ContentResolver cr=context.getContentResolver();
+  final Uri uri=LauncherSettings.WorkspaceScreens.CONTENT_URI;
+  Iterator<Long> iter=screensCopy.iterator();
+  while (iter.hasNext()) {
+    long id=iter.next();
+    if (id < 0) {
+      iter.remove();
+    }
+  }
+  Runnable r=new Runnable(){
+    @Override public void run(){
+      cr.delete(uri,null,null);
+      int count=screensCopy.size();
+      ContentValues[] values=new ContentValues[count];
+      for (int i=0; i < count; i++) {
+        ContentValues v=new ContentValues();
+        long screenId=screensCopy.get(i);
+        v.put(LauncherSettings.WorkspaceScreens._ID,screenId);
+        v.put(LauncherSettings.WorkspaceScreens.SCREEN_RANK,i);
+        values[i]=v;
+      }
+      cr.bulkInsert(uri,values);
+synchronized (sBgLock) {
+        sBgWorkspaceScreens.clear();
+        sBgWorkspaceScreens.addAll(screensCopy);
+      }
+    }
+  }
+;
+  runOnWorkerThread(r);
+}

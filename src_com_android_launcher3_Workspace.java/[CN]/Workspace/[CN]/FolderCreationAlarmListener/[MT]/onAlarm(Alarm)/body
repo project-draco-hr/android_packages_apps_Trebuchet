@@ -1,0 +1,11 @@
+{
+  if (mDragFolderRingAnimator == null) {
+    mDragFolderRingAnimator=new FolderRingAnimator(mLauncher,null);
+  }
+  mDragFolderRingAnimator.setCell(cellX,cellY);
+  mDragFolderRingAnimator.setCellLayout(layout);
+  mDragFolderRingAnimator.animateToAcceptState();
+  layout.showFolderAccept(mDragFolderRingAnimator);
+  layout.clearDragOutlines();
+  setDragMode(DRAG_MODE_CREATE_FOLDER);
+}

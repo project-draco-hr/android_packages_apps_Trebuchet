@@ -1,0 +1,9 @@
+{
+  final float pivot=0.95f;
+  if (r < pivot) {
+    return (float)Math.pow(r / pivot,1.5f);
+  }
+ else {
+    return 1.0f;
+  }
+}

@@ -1,0 +1,5 @@
+{
+  super(c,attrs);
+  cellHSpan=1;
+  cellVSpan=1;
+}

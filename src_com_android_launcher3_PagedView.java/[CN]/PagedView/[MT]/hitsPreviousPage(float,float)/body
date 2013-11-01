@@ -1,0 +1,7 @@
+{
+  int offset=(getViewportWidth() - getChildWidth(mCurrentPage)) / 2;
+  if (isLayoutRtl()) {
+    return (x > (getViewportOffsetX() + getViewportWidth() - offset + mPageSpacing));
+  }
+  return (x < getViewportOffsetX() + offset - mPageSpacing);
+}

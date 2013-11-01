@@ -1,0 +1,5 @@
+{
+  mResources=res;
+  mResId=resId;
+  mThumb=thumb;
+}

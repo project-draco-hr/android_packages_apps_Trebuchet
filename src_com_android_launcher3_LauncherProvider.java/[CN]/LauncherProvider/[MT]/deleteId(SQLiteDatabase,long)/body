@@ -1,0 +1,5 @@
+{
+  Uri uri=LauncherSettings.Favorites.getContentUri(id,false);
+  SqlArguments args=new SqlArguments(uri,null,null);
+  db.delete(args.table,args.where,args.args);
+}

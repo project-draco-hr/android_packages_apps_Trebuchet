@@ -1,0 +1,40 @@
+{
+  if (mDeferDropAfterUninstall) {
+    mDeferredAction=new Runnable(){
+      public void run(){
+        onDropCompleted(target,d,isFlingToDelete,success);
+        mDeferredAction=null;
+      }
+    }
+;
+    return;
+  }
+  boolean beingCalledAfterUninstall=mDeferredAction != null;
+  if (success && !(beingCalledAfterUninstall && !mUninstallSuccessful)) {
+    if (target != this && mDragInfo != null) {
+      CellLayout parentCell=getParentCellLayoutForView(mDragInfo.cell);
+      if (parentCell != null) {
+        parentCell.removeView(mDragInfo.cell);
+      }
+      if (mDragInfo.cell instanceof DropTarget) {
+        mDragController.removeDropTarget((DropTarget)mDragInfo.cell);
+      }
+      stripEmptyScreens();
+    }
+  }
+ else   if (mDragInfo != null) {
+    CellLayout cellLayout;
+    if (mLauncher.isHotseatLayout(target)) {
+      cellLayout=mLauncher.getHotseat().getLayout();
+    }
+ else {
+      cellLayout=getScreenWithId(mDragInfo.screenId);
+    }
+    cellLayout.onDropChild(mDragInfo.cell);
+  }
+  if ((d.cancelled || (beingCalledAfterUninstall && !mUninstallSuccessful)) && mDragInfo.cell != null) {
+    mDragInfo.cell.setVisibility(VISIBLE);
+  }
+  mDragOutline=null;
+  mDragInfo=null;
+}

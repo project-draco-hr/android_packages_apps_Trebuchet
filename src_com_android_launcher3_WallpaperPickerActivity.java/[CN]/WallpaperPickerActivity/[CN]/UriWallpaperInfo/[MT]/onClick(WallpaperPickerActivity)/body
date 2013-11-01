@@ -1,0 +1,6 @@
+{
+  CropView v=a.getCropView();
+  int rotation=WallpaperCropActivity.getRotationFromExif(a,mUri);
+  v.setTileSource(new BitmapRegionTileSource(a,mUri,1024,rotation),null);
+  v.setTouchEnabled(true);
+}

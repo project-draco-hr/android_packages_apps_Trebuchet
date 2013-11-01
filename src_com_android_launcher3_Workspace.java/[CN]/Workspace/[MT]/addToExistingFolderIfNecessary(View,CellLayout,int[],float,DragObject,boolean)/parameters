@@ -1,0 +1,6 @@
+View newView
+CellLayout target
+int[] targetCell
+float distance
+DragObject d
+boolean external

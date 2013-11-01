@@ -1,0 +1,3 @@
+int cellX
+int cellY
+int[] result

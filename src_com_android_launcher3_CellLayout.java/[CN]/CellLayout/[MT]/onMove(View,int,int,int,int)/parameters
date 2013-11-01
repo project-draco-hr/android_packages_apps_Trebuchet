@@ -1,0 +1,5 @@
+View view
+int newCellX
+int newCellY
+int newSpanX
+int newSpanY

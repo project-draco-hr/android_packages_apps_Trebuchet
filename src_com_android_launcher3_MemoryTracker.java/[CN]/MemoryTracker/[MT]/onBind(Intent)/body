@@ -1,0 +1,4 @@
+{
+  mHandler.sendEmptyMessage(MSG_START);
+  return mBinder;
+}

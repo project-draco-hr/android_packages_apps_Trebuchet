@@ -1,0 +1,3 @@
+{
+  markCellsAsUnoccupiedForView(child);
+}

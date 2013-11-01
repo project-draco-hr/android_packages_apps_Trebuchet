@@ -1,0 +1,5 @@
+{
+  removeAllViews();
+  mOnLayoutListener=null;
+  setLayerType(LAYER_TYPE_NONE,null);
+}

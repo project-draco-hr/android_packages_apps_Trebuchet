@@ -1,0 +1,62 @@
+{
+  final DragLayer.LayoutParams lp=(DragLayer.LayoutParams)getLayoutParams();
+  int newWidth=mWidgetView.getWidth() + 2 * mBackgroundPadding - mWidgetPaddingLeft - mWidgetPaddingRight;
+  int newHeight=mWidgetView.getHeight() + 2 * mBackgroundPadding - mWidgetPaddingTop - mWidgetPaddingBottom;
+  mTmpPt[0]=mWidgetView.getLeft();
+  mTmpPt[1]=mWidgetView.getTop();
+  mDragLayer.getDescendantCoordRelativeToSelf(mCellLayout.getShortcutsAndWidgets(),mTmpPt);
+  int newX=mTmpPt[0] - mBackgroundPadding + mWidgetPaddingLeft;
+  int newY=mTmpPt[1] - mBackgroundPadding + mWidgetPaddingTop;
+  if (newY < 0) {
+    mTopTouchRegionAdjustment=-newY;
+  }
+ else {
+    mTopTouchRegionAdjustment=0;
+  }
+  if (newY + newHeight > mDragLayer.getHeight()) {
+    mBottomTouchRegionAdjustment=-(newY + newHeight - mDragLayer.getHeight());
+  }
+ else {
+    mBottomTouchRegionAdjustment=0;
+  }
+  if (!animate) {
+    lp.width=newWidth;
+    lp.height=newHeight;
+    lp.x=newX;
+    lp.y=newY;
+    mLeftHandle.setAlpha(1.0f);
+    mRightHandle.setAlpha(1.0f);
+    mTopHandle.setAlpha(1.0f);
+    mBottomHandle.setAlpha(1.0f);
+    requestLayout();
+  }
+ else {
+    PropertyValuesHolder width=PropertyValuesHolder.ofInt("width",lp.width,newWidth);
+    PropertyValuesHolder height=PropertyValuesHolder.ofInt("height",lp.height,newHeight);
+    PropertyValuesHolder x=PropertyValuesHolder.ofInt("x",lp.x,newX);
+    PropertyValuesHolder y=PropertyValuesHolder.ofInt("y",lp.y,newY);
+    ObjectAnimator oa=LauncherAnimUtils.ofPropertyValuesHolder(lp,this,width,height,x,y);
+    ObjectAnimator leftOa=LauncherAnimUtils.ofFloat(mLeftHandle,"alpha",1.0f);
+    ObjectAnimator rightOa=LauncherAnimUtils.ofFloat(mRightHandle,"alpha",1.0f);
+    ObjectAnimator topOa=LauncherAnimUtils.ofFloat(mTopHandle,"alpha",1.0f);
+    ObjectAnimator bottomOa=LauncherAnimUtils.ofFloat(mBottomHandle,"alpha",1.0f);
+    oa.addUpdateListener(new AnimatorUpdateListener(){
+      public void onAnimationUpdate(      ValueAnimator animation){
+        requestLayout();
+      }
+    }
+);
+    AnimatorSet set=LauncherAnimUtils.createAnimatorSet();
+    if (mResizeMode == AppWidgetProviderInfo.RESIZE_VERTICAL) {
+      set.playTogether(oa,topOa,bottomOa);
+    }
+ else     if (mResizeMode == AppWidgetProviderInfo.RESIZE_HORIZONTAL) {
+      set.playTogether(oa,leftOa,rightOa);
+    }
+ else {
+      set.playTogether(oa,leftOa,rightOa,topOa,bottomOa);
+    }
+    set.setDuration(SNAP_DURATION);
+    set.start();
+  }
+}

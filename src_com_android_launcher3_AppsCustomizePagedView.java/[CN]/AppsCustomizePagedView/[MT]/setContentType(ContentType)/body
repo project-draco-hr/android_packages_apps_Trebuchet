@@ -1,0 +1,8 @@
+{
+  int page=getCurrentPage();
+  if (mContentType != type) {
+    page=0;
+  }
+  mContentType=type;
+  invalidatePageData(page,true);
+}

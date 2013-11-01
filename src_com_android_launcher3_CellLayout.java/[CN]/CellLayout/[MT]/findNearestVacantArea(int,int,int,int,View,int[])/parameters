@@ -1,0 +1,6 @@
+int pixelX
+int pixelY
+int spanX
+int spanY
+View ignoreView
+int[] result

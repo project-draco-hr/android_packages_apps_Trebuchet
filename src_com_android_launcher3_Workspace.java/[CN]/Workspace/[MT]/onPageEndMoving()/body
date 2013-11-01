@@ -1,0 +1,31 @@
+{
+  super.onPageEndMoving();
+  if (isHardwareAccelerated()) {
+    updateChildrenLayersEnabled(false);
+  }
+ else {
+    clearChildrenCache();
+  }
+  if (mDragController.isDragging()) {
+    if (isSmall()) {
+      mDragController.forceTouchMove();
+    }
+  }
+ else {
+    if (LauncherAppState.getInstance().isScreenLarge()) {
+      hideOutlines();
+    }
+  }
+  if (mDelayedResizeRunnable != null) {
+    mDelayedResizeRunnable.run();
+    mDelayedResizeRunnable=null;
+  }
+  if (mDelayedSnapToPageRunnable != null) {
+    mDelayedSnapToPageRunnable.run();
+    mDelayedSnapToPageRunnable=null;
+  }
+  if (mStripScreensOnPageStopMoving) {
+    stripEmptyScreens();
+    mStripScreensOnPageStopMoving=false;
+  }
+}

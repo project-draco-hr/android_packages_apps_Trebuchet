@@ -1,0 +1,9 @@
+{
+  int rows=0;
+  for (  String deleted : deletedIds) {
+    Log.v(TAG,"dropping icon " + deleted);
+    data.writeEntityHeader(deleted,-1);
+    rows++;
+  }
+  return rows;
+}

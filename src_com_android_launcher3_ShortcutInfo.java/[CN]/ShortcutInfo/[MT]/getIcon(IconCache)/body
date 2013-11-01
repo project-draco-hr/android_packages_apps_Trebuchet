@@ -1,0 +1,6 @@
+{
+  if (mIcon == null) {
+    updateIcon(iconCache);
+  }
+  return mIcon;
+}

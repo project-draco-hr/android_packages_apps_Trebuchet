@@ -1,0 +1,6 @@
+{
+  if (mSaveInstanceStateItemIndex == -1) {
+    mSaveInstanceStateItemIndex=getMiddleComponentIndexOnCurrentPage();
+  }
+  return mSaveInstanceStateItemIndex;
+}

@@ -1,0 +1,10 @@
+{
+  if (mPageIndicator != null && !isReordering(false)) {
+    int pageIndex=indexOfChild(child);
+    mPageIndicator.addMarker(pageIndex,getPageIndicatorMarker(pageIndex),mAllowPagedViewAnimations);
+  }
+  mForceScreenScrolled=true;
+  mRecomputePageSpacing=true;
+  updateFreescrollBounds();
+  invalidate();
+}

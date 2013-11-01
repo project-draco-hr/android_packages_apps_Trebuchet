@@ -1,0 +1,30 @@
+{
+  positionAndSizeAsIcon();
+  if (!(getParent() instanceof DragLayer))   return;
+  centerAboutIcon();
+  PropertyValuesHolder alpha=PropertyValuesHolder.ofFloat("alpha",1);
+  PropertyValuesHolder scaleX=PropertyValuesHolder.ofFloat("scaleX",1.0f);
+  PropertyValuesHolder scaleY=PropertyValuesHolder.ofFloat("scaleY",1.0f);
+  final ObjectAnimator oa=LauncherAnimUtils.ofPropertyValuesHolder(this,alpha,scaleX,scaleY);
+  oa.addListener(new AnimatorListenerAdapter(){
+    @Override public void onAnimationStart(    Animator animation){
+      sendCustomAccessibilityEvent(AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED,String.format(getContext().getString(R.string.folder_opened),mContent.getCountX(),mContent.getCountY()));
+      mState=STATE_ANIMATING;
+    }
+    @Override public void onAnimationEnd(    Animator animation){
+      mState=STATE_OPEN;
+      setLayerType(LAYER_TYPE_NONE,null);
+      Cling cling=mLauncher.showFirstRunFoldersCling();
+      if (cling != null) {
+        cling.bringScrimToFront();
+        bringToFront();
+        cling.bringToFront();
+      }
+      setFocusOnFirstChild();
+    }
+  }
+);
+  oa.setDuration(mExpandDuration);
+  setLayerType(LAYER_TYPE_HARDWARE,null);
+  oa.start();
+}

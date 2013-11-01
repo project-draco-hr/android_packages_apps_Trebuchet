@@ -1,0 +1,7 @@
+{
+  if (ev.getAction() == MotionEvent.ACTION_DOWN) {
+    mTouchDownPt[0]=(int)ev.getX();
+    mTouchDownPt[1]=(int)ev.getY();
+  }
+  return false;
+}

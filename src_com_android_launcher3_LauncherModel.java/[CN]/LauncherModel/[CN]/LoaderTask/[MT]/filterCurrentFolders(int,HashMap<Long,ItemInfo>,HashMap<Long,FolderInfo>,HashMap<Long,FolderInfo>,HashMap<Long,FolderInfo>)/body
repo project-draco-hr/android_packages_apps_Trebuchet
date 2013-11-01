@@ -1,0 +1,16 @@
+{
+  if (currentScreen < 0) {
+    currentScreenFolders.putAll(folders);
+  }
+  for (  long id : folders.keySet()) {
+    ItemInfo info=itemsIdMap.get(id);
+    FolderInfo folder=folders.get(id);
+    if (info == null || folder == null)     continue;
+    if (info.container == LauncherSettings.Favorites.CONTAINER_DESKTOP && info.screenId == currentScreen) {
+      currentScreenFolders.put(id,folder);
+    }
+ else {
+      otherScreenFolders.put(id,folder);
+    }
+  }
+}

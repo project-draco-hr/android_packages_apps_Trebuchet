@@ -1,0 +1,8 @@
+{
+  if (AppsCustomizePagedView.DISABLE_ALL_APPS) {
+    return false;
+  }
+ else {
+    return rank == mAllAppsButtonRank;
+  }
+}

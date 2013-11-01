@@ -1,0 +1,7 @@
+{
+  super.onAttachedToWindow();
+  if (getParent() instanceof Workspace) {
+    Workspace workspace=(Workspace)getParent();
+    mCellInfo.screenId=workspace.getIdForScreen(this);
+  }
+}

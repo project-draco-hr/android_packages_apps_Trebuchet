@@ -1,0 +1,4 @@
+{
+  int accessible=mState == State.NORMAL ? ViewCompat.IMPORTANT_FOR_ACCESSIBILITY_YES : ViewCompat.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS;
+  setImportantForAccessibility(accessible);
+}

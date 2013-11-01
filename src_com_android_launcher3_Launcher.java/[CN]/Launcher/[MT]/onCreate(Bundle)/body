@@ -1,0 +1,60 @@
+{
+  if (DEBUG_STRICT_MODE) {
+    StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().detectDiskReads().detectDiskWrites().detectNetwork().penaltyLog().build());
+    StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder().detectLeakedSqlLiteObjects().detectLeakedClosableObjects().penaltyLog().penaltyDeath().build());
+  }
+  super.onCreate(savedInstanceState);
+  LauncherAppState.setApplicationContext(getApplicationContext());
+  LauncherAppState app=LauncherAppState.getInstance();
+  Point smallestSize=new Point();
+  Point largestSize=new Point();
+  Point realSize=new Point();
+  Display display=getWindowManager().getDefaultDisplay();
+  display.getCurrentSizeRange(smallestSize,largestSize);
+  display.getRealSize(realSize);
+  DisplayMetrics dm=new DisplayMetrics();
+  display.getMetrics(dm);
+  DeviceProfile grid=app.initDynamicGrid(this,Math.min(smallestSize.x,smallestSize.y),Math.min(largestSize.x,largestSize.y),realSize.x,realSize.y,dm.widthPixels,dm.heightPixels);
+  mSharedPrefs=getSharedPreferences(LauncherAppState.getSharedPreferencesKey(),Context.MODE_PRIVATE);
+  mModel=app.setLauncher(this);
+  mIconCache=app.getIconCache();
+  mDragController=new DragController(this);
+  mInflater=getLayoutInflater();
+  mStats=new Stats(this);
+  mAppWidgetManager=AppWidgetManager.getInstance(this);
+  mAppWidgetHost=new LauncherAppWidgetHost(this,APPWIDGET_HOST_ID);
+  mAppWidgetHost.startListening();
+  mPaused=false;
+  if (PROFILE_STARTUP) {
+    android.os.Debug.startMethodTracing(Environment.getExternalStorageDirectory() + "/launcher");
+  }
+  checkForLocaleChange();
+  setContentView(R.layout.launcher);
+  setupViews();
+  grid.layout(this);
+  registerContentObservers();
+  lockAllApps();
+  mSavedState=savedInstanceState;
+  restoreState(mSavedState);
+  if (mAppsCustomizeContent != null) {
+    mAppsCustomizeContent.onPackagesUpdated(LauncherModel.getSortedWidgetsAndShortcuts(this));
+  }
+  if (PROFILE_STARTUP) {
+    android.os.Debug.stopMethodTracing();
+  }
+  if (!mRestoring) {
+    if (sPausedFromUserAction) {
+      mModel.startLoader(true,-1);
+    }
+ else {
+      mModel.startLoader(true,mWorkspace.getCurrentPage());
+    }
+  }
+  mDefaultKeySsb=new SpannableStringBuilder();
+  Selection.setSelection(mDefaultKeySsb,0);
+  IntentFilter filter=new IntentFilter(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
+  registerReceiver(mCloseSystemDialogsReceiver,filter);
+  updateGlobalIcons();
+  unlockScreenOrientation(true);
+  showFirstRunCling();
+}

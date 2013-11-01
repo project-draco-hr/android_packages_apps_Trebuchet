@@ -1,0 +1,43 @@
+{
+  if (!isDraggingEnabled())   return false;
+  if (isWorkspaceLocked())   return false;
+  if (mState != State.WORKSPACE)   return false;
+  if (v instanceof Workspace) {
+    if (!mWorkspace.isInOverviewMode()) {
+      if (mWorkspace.enterOverviewMode()) {
+        mWorkspace.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS,HapticFeedbackConstants.FLAG_IGNORE_VIEW_SETTING);
+        return true;
+      }
+ else {
+        return false;
+      }
+    }
+  }
+  if (!(v instanceof CellLayout)) {
+    v=(View)v.getParent().getParent();
+  }
+  resetAddInfo();
+  CellLayout.CellInfo longClickCellInfo=(CellLayout.CellInfo)v.getTag();
+  if (longClickCellInfo == null) {
+    return true;
+  }
+  final View itemUnderLongClick=longClickCellInfo.cell;
+  boolean allowLongPress=isHotseatLayout(v) || mWorkspace.allowLongPress();
+  if (allowLongPress && !mDragController.isDragging()) {
+    if (itemUnderLongClick == null) {
+      mWorkspace.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS,HapticFeedbackConstants.FLAG_IGNORE_VIEW_SETTING);
+      if (mWorkspace.isInOverviewMode()) {
+        mWorkspace.startReordering(v);
+      }
+ else {
+        mWorkspace.enterOverviewMode();
+      }
+    }
+ else {
+      if (!(itemUnderLongClick instanceof Folder)) {
+        mWorkspace.startDrag(longClickCellInfo);
+      }
+    }
+  }
+  return true;
+}

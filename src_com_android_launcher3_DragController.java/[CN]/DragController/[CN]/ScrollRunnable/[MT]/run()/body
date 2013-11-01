@@ -1,0 +1,17 @@
+{
+  if (mDragScroller != null) {
+    if (mDirection == SCROLL_LEFT) {
+      mDragScroller.scrollLeft();
+    }
+ else {
+      mDragScroller.scrollRight();
+    }
+    mScrollState=SCROLL_OUTSIDE_ZONE;
+    mDistanceSinceScroll=0;
+    mDragScroller.onExitScrollArea();
+    mLauncher.getDragLayer().onExitScrollArea();
+    if (isDragging()) {
+      checkScrollState(mLastTouch[0],mLastTouch[1]);
+    }
+  }
+}

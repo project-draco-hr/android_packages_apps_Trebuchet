@@ -1,0 +1,19 @@
+{
+  if (mLongPressHelper.hasPerformedLongPress()) {
+    mLongPressHelper.cancelLongPress();
+    return true;
+  }
+switch (ev.getAction()) {
+case MotionEvent.ACTION_DOWN:
+{
+      mLongPressHelper.postCheckForLongPress();
+      mDragLayer.setTouchCompleteListener(this);
+      break;
+    }
+case MotionEvent.ACTION_UP:
+case MotionEvent.ACTION_CANCEL:
+  mLongPressHelper.cancelLongPress();
+break;
+}
+return false;
+}

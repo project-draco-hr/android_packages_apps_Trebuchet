@@ -1,0 +1,8 @@
+{
+  dragView.remove();
+  if (mDragObject.deferDragViewCleanupPostAnimation) {
+    for (    DragListener listener : mListeners) {
+      listener.onDragEnd();
+    }
+  }
+}

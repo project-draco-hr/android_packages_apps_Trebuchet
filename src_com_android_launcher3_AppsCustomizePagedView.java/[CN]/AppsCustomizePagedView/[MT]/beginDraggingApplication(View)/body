@@ -1,0 +1,4 @@
+{
+  mLauncher.getWorkspace().onDragStartedWithItem(v);
+  mLauncher.getWorkspace().beginDragShared(v,this);
+}

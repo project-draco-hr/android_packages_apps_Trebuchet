@@ -1,0 +1,3 @@
+{
+  if (!mIsDragging)   super.determineScrollingStart(ev);
+}

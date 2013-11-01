@@ -1,0 +1,17 @@
+{
+  ArrayList<ResourceWallpaperInfo> bundledWallpapers=new ArrayList<ResourceWallpaperInfo>(24);
+  Pair<ApplicationInfo,Integer> r=getWallpaperArrayResourceId();
+  if (r != null) {
+    try {
+      Resources wallpaperRes=getPackageManager().getResourcesForApplication(r.first);
+      bundledWallpapers=addWallpapers(wallpaperRes,r.first.packageName,r.second);
+    }
+ catch (    PackageManager.NameNotFoundException e) {
+    }
+  }
+  ResourceWallpaperInfo defaultWallpaperInfo=getDefaultWallpaperInfo();
+  if (defaultWallpaperInfo != null) {
+    bundledWallpapers.add(0,defaultWallpaperInfo);
+  }
+  return bundledWallpapers;
+}

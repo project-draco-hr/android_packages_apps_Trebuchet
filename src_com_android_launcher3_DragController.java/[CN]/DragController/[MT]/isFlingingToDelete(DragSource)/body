@@ -1,0 +1,15 @@
+{
+  if (mFlingToDeleteDropTarget == null)   return null;
+  if (!source.supportsFlingToDelete())   return null;
+  ViewConfiguration config=ViewConfiguration.get(mLauncher);
+  mVelocityTracker.computeCurrentVelocity(1000,config.getScaledMaximumFlingVelocity());
+  if (mVelocityTracker.getYVelocity() < mFlingToDeleteThresholdVelocity) {
+    PointF vel=new PointF(mVelocityTracker.getXVelocity(),mVelocityTracker.getYVelocity());
+    PointF upVec=new PointF(0f,-1f);
+    float theta=(float)Math.acos(((vel.x * upVec.x) + (vel.y * upVec.y)) / (vel.length() * upVec.length()));
+    if (theta <= Math.toRadians(MAX_FLING_DEGREES)) {
+      return vel;
+    }
+  }
+  return null;
+}

@@ -1,0 +1,35 @@
+{
+  if (mDropAnim != null)   mDropAnim.cancel();
+  if (mFadeOutAnim != null)   mFadeOutAnim.cancel();
+  mDropView=view;
+  mDropView.cancelAnimation();
+  mDropView.resetLayoutParams();
+  if (anchorView != null) {
+    mAnchorViewInitialScrollX=anchorView.getScrollX();
+  }
+  mAnchorView=anchorView;
+  mDropAnim=new ValueAnimator();
+  mDropAnim.setInterpolator(interpolator);
+  mDropAnim.setDuration(duration);
+  mDropAnim.setFloatValues(0f,1f);
+  mDropAnim.addUpdateListener(updateCb);
+  mDropAnim.addListener(new AnimatorListenerAdapter(){
+    public void onAnimationEnd(    Animator animation){
+      if (onCompleteRunnable != null) {
+        onCompleteRunnable.run();
+      }
+switch (animationEndStyle) {
+case ANIMATION_END_DISAPPEAR:
+        clearAnimatedView();
+      break;
+case ANIMATION_END_FADE_OUT:
+    fadeOutDragView();
+  break;
+case ANIMATION_END_REMAIN_VISIBLE:
+break;
+}
+}
+}
+);
+mDropAnim.start();
+}

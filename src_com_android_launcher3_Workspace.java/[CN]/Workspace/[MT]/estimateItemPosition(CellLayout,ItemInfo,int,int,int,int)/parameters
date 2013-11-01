@@ -1,0 +1,6 @@
+CellLayout cl
+ItemInfo pendingInfo
+int hCell
+int vCell
+int hSpan
+int vSpan

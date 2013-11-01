@@ -1,0 +1,60 @@
+{
+  LauncherAppState app=LauncherAppState.getInstance();
+  DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
+  int widthSpecMode=MeasureSpec.getMode(widthMeasureSpec);
+  int heightSpecMode=MeasureSpec.getMode(heightMeasureSpec);
+  int widthSize=MeasureSpec.getSize(widthMeasureSpec);
+  int heightSize=MeasureSpec.getSize(heightMeasureSpec);
+  int childWidthSize=widthSize - (getPaddingLeft() + getPaddingRight());
+  int childHeightSize=heightSize - (getPaddingTop() + getPaddingBottom());
+  if (mFixedCellWidth < 0 || mFixedCellHeight < 0) {
+    int cw=grid.calculateCellWidth(childWidthSize,mCountX);
+    int ch=grid.calculateCellHeight(childHeightSize,mCountY);
+    if (cw != mCellWidth || ch != mCellHeight) {
+      mCellWidth=cw;
+      mCellHeight=ch;
+      mShortcutsAndWidgets.setCellDimensions(mCellWidth,mCellHeight,mWidthGap,mHeightGap,mCountX,mCountY);
+    }
+  }
+  int newWidth=childWidthSize;
+  int newHeight=childHeightSize;
+  if (mFixedWidth > 0 && mFixedHeight > 0) {
+    newWidth=mFixedWidth;
+    newHeight=mFixedHeight;
+  }
+ else   if (widthSpecMode == MeasureSpec.UNSPECIFIED || heightSpecMode == MeasureSpec.UNSPECIFIED) {
+    throw new RuntimeException("CellLayout cannot have UNSPECIFIED dimensions");
+  }
+  int numWidthGaps=mCountX - 1;
+  int numHeightGaps=mCountY - 1;
+  if (mOriginalWidthGap < 0 || mOriginalHeightGap < 0) {
+    int hSpace=childWidthSize;
+    int vSpace=childHeightSize;
+    int hFreeSpace=hSpace - (mCountX * mCellWidth);
+    int vFreeSpace=vSpace - (mCountY * mCellHeight);
+    mWidthGap=Math.min(mMaxGap,numWidthGaps > 0 ? (hFreeSpace / numWidthGaps) : 0);
+    mHeightGap=Math.min(mMaxGap,numHeightGaps > 0 ? (vFreeSpace / numHeightGaps) : 0);
+    mShortcutsAndWidgets.setCellDimensions(mCellWidth,mCellHeight,mWidthGap,mHeightGap,mCountX,mCountY);
+  }
+ else {
+    mWidthGap=mOriginalWidthGap;
+    mHeightGap=mOriginalHeightGap;
+  }
+  int count=getChildCount();
+  int maxWidth=0;
+  int maxHeight=0;
+  for (int i=0; i < count; i++) {
+    View child=getChildAt(i);
+    int childWidthMeasureSpec=MeasureSpec.makeMeasureSpec(newWidth,MeasureSpec.EXACTLY);
+    int childheightMeasureSpec=MeasureSpec.makeMeasureSpec(newHeight,MeasureSpec.EXACTLY);
+    child.measure(childWidthMeasureSpec,childheightMeasureSpec);
+    maxWidth=Math.max(maxWidth,child.getMeasuredWidth());
+    maxHeight=Math.max(maxHeight,child.getMeasuredHeight());
+  }
+  if (mFixedWidth > 0 && mFixedHeight > 0) {
+    setMeasuredDimension(maxWidth,maxHeight);
+  }
+ else {
+    setMeasuredDimension(widthSize,heightSize);
+  }
+}

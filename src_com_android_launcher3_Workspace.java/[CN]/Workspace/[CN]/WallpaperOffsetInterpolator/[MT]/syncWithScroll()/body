@@ -1,0 +1,5 @@
+{
+  float offset=wallpaperOffsetForCurrentScroll();
+  mWallpaperOffset.setFinalX(offset);
+  updateOffset(true);
+}

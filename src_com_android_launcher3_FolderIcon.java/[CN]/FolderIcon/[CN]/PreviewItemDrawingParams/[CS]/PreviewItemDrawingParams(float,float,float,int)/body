@@ -1,0 +1,6 @@
+{
+  this.transX=transX;
+  this.transY=transY;
+  this.scale=scale;
+  this.overlayAlpha=overlayAlpha;
+}

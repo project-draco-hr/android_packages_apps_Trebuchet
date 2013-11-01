@@ -1,0 +1,6 @@
+{
+  BubbleTextView favorite=(BubbleTextView)mInflater.inflate(layoutResId,parent,false);
+  favorite.applyFromShortcutInfo(info,mIconCache);
+  favorite.setOnClickListener(this);
+  return favorite;
+}

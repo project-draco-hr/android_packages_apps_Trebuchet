@@ -1,0 +1,8 @@
+{
+  mFirstFrameHelper.onAnimationStart(animation);
+  for (int i=0; i < mListeners.size(); i++) {
+    Animator.AnimatorListener listener=mListeners.get(i);
+    listener.onAnimationStart(this);
+  }
+  mRunning=true;
+}

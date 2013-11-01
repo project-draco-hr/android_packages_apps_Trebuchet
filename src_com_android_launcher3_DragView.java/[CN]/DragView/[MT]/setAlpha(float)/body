@@ -1,0 +1,5 @@
+{
+  super.setAlpha(alpha);
+  mPaint.setAlpha((int)(255 * alpha));
+  invalidate();
+}

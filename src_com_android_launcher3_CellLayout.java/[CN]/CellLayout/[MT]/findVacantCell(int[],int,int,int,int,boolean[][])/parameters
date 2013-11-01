@@ -1,0 +1,6 @@
+int[] vacant
+int spanX
+int spanY
+int xCount
+int yCount
+boolean[][] occupied

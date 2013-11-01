@@ -1,0 +1,4 @@
+Workspace.State toState
+boolean animated
+boolean springLoaded
+Runnable onCompleteRunnable

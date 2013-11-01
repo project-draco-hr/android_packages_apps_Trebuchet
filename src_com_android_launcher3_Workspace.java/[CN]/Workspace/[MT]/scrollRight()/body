@@ -1,0 +1,9 @@
+{
+  if (!isSmall() && !mIsSwitchingState) {
+    super.scrollRight();
+  }
+  Folder openFolder=getOpenFolder();
+  if (openFolder != null) {
+    openFolder.completeDragExit();
+  }
+}

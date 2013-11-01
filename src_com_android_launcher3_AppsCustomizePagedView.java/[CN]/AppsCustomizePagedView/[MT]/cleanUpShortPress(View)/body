@@ -1,0 +1,5 @@
+{
+  if (!mDraggingWidget) {
+    cleanupWidgetPreloading(false);
+  }
+}

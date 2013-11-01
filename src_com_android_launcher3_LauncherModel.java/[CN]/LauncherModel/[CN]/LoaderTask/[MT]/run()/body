@@ -1,0 +1,48 @@
+{
+  boolean isUpgrade=false;
+synchronized (mLock) {
+    mIsLoaderTaskRunning=true;
+  }
+  keep_running: {
+synchronized (mLock) {
+      if (DEBUG_LOADERS)       Log.d(TAG,"Setting thread priority to " + (mIsLaunching ? "DEFAULT" : "BACKGROUND"));
+      android.os.Process.setThreadPriority(mIsLaunching ? Process.THREAD_PRIORITY_DEFAULT : Process.THREAD_PRIORITY_BACKGROUND);
+    }
+    if (DEBUG_LOADERS)     Log.d(TAG,"step 1: loading workspace");
+    isUpgrade=loadAndBindWorkspace();
+    if (mStopped) {
+      break keep_running;
+    }
+synchronized (mLock) {
+      if (mIsLaunching) {
+        if (DEBUG_LOADERS)         Log.d(TAG,"Setting thread priority to BACKGROUND");
+        android.os.Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);
+      }
+    }
+    waitForIdle();
+    if (DEBUG_LOADERS)     Log.d(TAG,"step 2: loading all apps");
+    loadAndBindAllApps();
+synchronized (mLock) {
+      android.os.Process.setThreadPriority(Process.THREAD_PRIORITY_DEFAULT);
+    }
+  }
+  if (DEBUG_LOADERS)   Log.d(TAG,"Comparing loaded icons to database icons");
+synchronized (sBgLock) {
+    for (    Object key : sBgDbIconCache.keySet()) {
+      updateSavedIcon(mContext,(ShortcutInfo)key,sBgDbIconCache.get(key));
+    }
+    sBgDbIconCache.clear();
+  }
+  if (AppsCustomizePagedView.DISABLE_ALL_APPS) {
+    if (!UPGRADE_USE_MORE_APPS_FOLDER || !isUpgrade) {
+      verifyApplications();
+    }
+  }
+  mContext=null;
+synchronized (mLock) {
+    if (mLoaderTask == this) {
+      mLoaderTask=null;
+    }
+    mIsLoaderTaskRunning=false;
+  }
+}

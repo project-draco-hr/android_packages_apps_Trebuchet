@@ -1,0 +1,13 @@
+{
+  ArrayList<ShortcutAndWidgetContainer> childrenLayouts=getAllShortcutAndWidgetContainers();
+  for (  ShortcutAndWidgetContainer layout : childrenLayouts) {
+    int count=layout.getChildCount();
+    for (int i=0; i < count; i++) {
+      View child=layout.getChildAt(i);
+      if (child.getTag() == tag) {
+        return child;
+      }
+    }
+  }
+  return null;
+}

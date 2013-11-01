@@ -1,0 +1,15 @@
+{
+  final ServiceConnection connection=new ServiceConnection(){
+    public void onServiceConnected(    ComponentName className,    IBinder service){
+      Log.v(TAG,"service connected, dumping...");
+      dumpHprofAndShare(context,((MemoryTracker.MemoryTrackerInterface)service).getService());
+      context.unbindService(this);
+      if (andThen != null)       andThen.run();
+    }
+    public void onServiceDisconnected(    ComponentName className){
+    }
+  }
+;
+  Log.v(TAG,"attempting to bind to memory tracker");
+  context.bindService(new Intent(context,MemoryTracker.class),connection,Context.BIND_AUTO_CREATE);
+}

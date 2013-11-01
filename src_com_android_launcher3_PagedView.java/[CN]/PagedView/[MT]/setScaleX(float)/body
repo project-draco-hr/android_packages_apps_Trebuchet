@@ -1,0 +1,9 @@
+{
+  super.setScaleX(scaleX);
+  if (isReordering(true)) {
+    float[] p=mapPointFromParentToView(this,mParentDownMotionX,mParentDownMotionY);
+    mLastMotionX=p[0];
+    mLastMotionY=p[1];
+    updateDragViewTranslationDuringDrag();
+  }
+}

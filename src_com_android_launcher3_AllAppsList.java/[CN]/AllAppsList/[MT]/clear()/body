@@ -1,0 +1,6 @@
+{
+  data.clear();
+  added.clear();
+  removed.clear();
+  modified.clear();
+}

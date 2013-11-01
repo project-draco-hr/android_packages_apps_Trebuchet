@@ -1,0 +1,6 @@
+{
+  int count=orderedScreenIds.size();
+  for (int i=0; i < count; i++) {
+    mWorkspace.insertNewWorkspaceScreenBeforeEmptyScreen(orderedScreenIds.get(i));
+  }
+}

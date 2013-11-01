@@ -1,0 +1,4 @@
+{
+  Callbacks cb=mCallbacks != null ? mCallbacks.get() : null;
+  addAndBindAddedApps(context,workspaceApps,cb,allAppsApps);
+}

@@ -1,0 +1,19 @@
+{
+  boolean isInOverscroll=mOverScrollX < 0 || mOverScrollX > mMaxScrollX;
+  if (mWorkspaceFadeInAdjacentScreens && mState == State.NORMAL && !mIsSwitchingState && !isInOverscroll) {
+    for (int i=0; i < getChildCount(); i++) {
+      CellLayout child=(CellLayout)getChildAt(i);
+      if (child != null) {
+        float scrollProgress=getScrollProgress(screenCenter,child,i);
+        float alpha=1 - Math.abs(scrollProgress);
+        child.getShortcutsAndWidgets().setAlpha(alpha);
+        if (!mIsDragOccuring) {
+          child.setBackgroundAlphaMultiplier(backgroundAlphaInterpolator(Math.abs(scrollProgress)));
+        }
+ else {
+          child.setBackgroundAlphaMultiplier(1f);
+        }
+      }
+    }
+  }
+}

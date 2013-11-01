@@ -1,0 +1,7 @@
+{
+  super.onPrepareOptionsMenu(menu);
+  if (!mWorkspace.isInOverviewMode()) {
+    mWorkspace.enterOverviewMode();
+  }
+  return false;
+}

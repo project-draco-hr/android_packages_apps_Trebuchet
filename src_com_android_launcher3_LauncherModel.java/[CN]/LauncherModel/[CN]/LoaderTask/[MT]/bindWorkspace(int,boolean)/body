@@ -1,0 +1,80 @@
+{
+  final long t=SystemClock.uptimeMillis();
+  Runnable r;
+  final Callbacks oldCallbacks=mCallbacks.get();
+  if (oldCallbacks == null) {
+    Log.w(TAG,"LoaderTask running with no launcher");
+    return;
+  }
+  final boolean isLoadingSynchronously=(synchronizeBindPage > -1);
+  final int currentScreen=isLoadingSynchronously ? synchronizeBindPage : oldCallbacks.getCurrentWorkspaceScreen();
+  unbindWorkspaceItemsOnMainThread();
+  ArrayList<ItemInfo> workspaceItems=new ArrayList<ItemInfo>();
+  ArrayList<LauncherAppWidgetInfo> appWidgets=new ArrayList<LauncherAppWidgetInfo>();
+  HashMap<Long,FolderInfo> folders=new HashMap<Long,FolderInfo>();
+  HashMap<Long,ItemInfo> itemsIdMap=new HashMap<Long,ItemInfo>();
+  ArrayList<Long> orderedScreenIds=new ArrayList<Long>();
+synchronized (sBgLock) {
+    workspaceItems.addAll(sBgWorkspaceItems);
+    appWidgets.addAll(sBgAppWidgets);
+    folders.putAll(sBgFolders);
+    itemsIdMap.putAll(sBgItemsIdMap);
+    orderedScreenIds.addAll(sBgWorkspaceScreens);
+  }
+  ArrayList<ItemInfo> currentWorkspaceItems=new ArrayList<ItemInfo>();
+  ArrayList<ItemInfo> otherWorkspaceItems=new ArrayList<ItemInfo>();
+  ArrayList<LauncherAppWidgetInfo> currentAppWidgets=new ArrayList<LauncherAppWidgetInfo>();
+  ArrayList<LauncherAppWidgetInfo> otherAppWidgets=new ArrayList<LauncherAppWidgetInfo>();
+  HashMap<Long,FolderInfo> currentFolders=new HashMap<Long,FolderInfo>();
+  HashMap<Long,FolderInfo> otherFolders=new HashMap<Long,FolderInfo>();
+  filterCurrentWorkspaceItems(currentScreen,workspaceItems,currentWorkspaceItems,otherWorkspaceItems);
+  filterCurrentAppWidgets(currentScreen,appWidgets,currentAppWidgets,otherAppWidgets);
+  filterCurrentFolders(currentScreen,itemsIdMap,folders,currentFolders,otherFolders);
+  sortWorkspaceItemsSpatially(currentWorkspaceItems);
+  sortWorkspaceItemsSpatially(otherWorkspaceItems);
+  r=new Runnable(){
+    public void run(){
+      Callbacks callbacks=tryGetCallbacks(oldCallbacks);
+      if (callbacks != null) {
+        callbacks.startBinding();
+      }
+    }
+  }
+;
+  runOnMainThread(r,MAIN_THREAD_BINDING_RUNNABLE);
+  bindWorkspaceScreens(oldCallbacks,orderedScreenIds);
+  bindWorkspaceItems(oldCallbacks,currentWorkspaceItems,currentAppWidgets,currentFolders,null);
+  if (isLoadingSynchronously) {
+    r=new Runnable(){
+      public void run(){
+        Callbacks callbacks=tryGetCallbacks(oldCallbacks);
+        if (callbacks != null) {
+          callbacks.onPageBoundSynchronously(currentScreen);
+        }
+      }
+    }
+;
+    runOnMainThread(r,MAIN_THREAD_BINDING_RUNNABLE);
+  }
+  mDeferredBindRunnables.clear();
+  bindWorkspaceItems(oldCallbacks,otherWorkspaceItems,otherAppWidgets,otherFolders,(isLoadingSynchronously ? mDeferredBindRunnables : null));
+  r=new Runnable(){
+    public void run(){
+      Callbacks callbacks=tryGetCallbacks(oldCallbacks);
+      if (callbacks != null) {
+        callbacks.finishBindingItems(isUpgradePath);
+      }
+      if (DEBUG_LOADERS) {
+        Log.d(TAG,"bound workspace in " + (SystemClock.uptimeMillis() - t) + "ms");
+      }
+      mIsLoadingAndBindingWorkspace=false;
+    }
+  }
+;
+  if (isLoadingSynchronously) {
+    mDeferredBindRunnables.add(r);
+  }
+ else {
+    runOnMainThread(r,MAIN_THREAD_BINDING_RUNNABLE);
+  }
+}

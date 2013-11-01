@@ -1,0 +1,21 @@
+{
+  if (mWorkspace.isInOverviewMode()) {
+    mWorkspace.exitOverviewMode(animated);
+  }
+  if (mState != State.WORKSPACE) {
+    boolean wasInSpringLoadedMode=(mState != State.WORKSPACE);
+    mWorkspace.setVisibility(View.VISIBLE);
+    hideAppsCustomizeHelper(Workspace.State.NORMAL,animated,false,onCompleteRunnable);
+    if (mSearchDropTargetBar != null) {
+      mSearchDropTargetBar.showSearchBar(animated && wasInSpringLoadedMode);
+    }
+    if (mAllAppsButton != null) {
+      mAllAppsButton.requestFocus();
+    }
+  }
+  mState=State.WORKSPACE;
+  mUserPresent=true;
+  updateRunning();
+  getWindow().getDecorView().sendAccessibilityEvent(AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED);
+  onWorkspaceShown(animated);
+}

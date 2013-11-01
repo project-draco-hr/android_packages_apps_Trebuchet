@@ -1,0 +1,20 @@
+{
+  boolean isVisible=true;
+  boolean useUninstallLabel=!AppsCustomizePagedView.DISABLE_ALL_APPS && isAllAppsApplication(source,info);
+  if (!willAcceptDrop(info) || isAllAppsWidget(source,info)) {
+    isVisible=false;
+  }
+  if (useUninstallLabel) {
+    setCompoundDrawablesRelativeWithIntrinsicBounds(mUninstallDrawable,null,null,null);
+  }
+ else {
+    setCompoundDrawablesRelativeWithIntrinsicBounds(mRemoveDrawable,null,null,null);
+  }
+  mCurrentDrawable=(TransitionDrawable)getCurrentDrawable();
+  mActive=isVisible;
+  resetHoverColor();
+  ((ViewGroup)getParent()).setVisibility(isVisible ? View.VISIBLE : View.GONE);
+  if (getText().length() > 0) {
+    setText(useUninstallLabel ? R.string.delete_target_uninstall_label : R.string.delete_target_label);
+  }
+}

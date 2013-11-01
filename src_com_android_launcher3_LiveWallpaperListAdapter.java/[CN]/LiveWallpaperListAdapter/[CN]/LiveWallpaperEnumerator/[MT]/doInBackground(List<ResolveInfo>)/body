@@ -1,0 +1,35 @@
+{
+  final PackageManager packageManager=mContext.getPackageManager();
+  List<ResolveInfo> list=params[0];
+  Collections.sort(list,new Comparator<ResolveInfo>(){
+    final Collator mCollator;
+{
+      mCollator=Collator.getInstance();
+    }
+    public int compare(    ResolveInfo info1,    ResolveInfo info2){
+      return mCollator.compare(info1.loadLabel(packageManager),info2.loadLabel(packageManager));
+    }
+  }
+);
+  for (  ResolveInfo resolveInfo : list) {
+    WallpaperInfo info=null;
+    try {
+      info=new WallpaperInfo(mContext,resolveInfo);
+    }
+ catch (    XmlPullParserException e) {
+      Log.w(LOG_TAG,"Skipping wallpaper " + resolveInfo.serviceInfo,e);
+      continue;
+    }
+catch (    IOException e) {
+      Log.w(LOG_TAG,"Skipping wallpaper " + resolveInfo.serviceInfo,e);
+      continue;
+    }
+    Drawable thumb=info.loadThumbnail(packageManager);
+    Intent launchIntent=new Intent(WallpaperService.SERVICE_INTERFACE);
+    launchIntent.setClassName(info.getPackageName(),info.getServiceName());
+    LiveWallpaperTile wallpaper=new LiveWallpaperTile(thumb,info,launchIntent);
+    publishProgress(wallpaper);
+  }
+  publishProgress((LiveWallpaperTile)null);
+  return null;
+}

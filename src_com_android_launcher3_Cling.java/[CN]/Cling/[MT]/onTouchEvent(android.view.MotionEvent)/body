@@ -1,0 +1,13 @@
+{
+  if (mDrawIdentifier.equals(FOLDER_PORTRAIT) || mDrawIdentifier.equals(FOLDER_LANDSCAPE) || mDrawIdentifier.equals(FOLDER_LARGE)) {
+    Folder f=mLauncher.getWorkspace().getOpenFolder();
+    if (f != null) {
+      Rect r=new Rect();
+      f.getHitRect(r);
+      if (r.contains((int)event.getX(),(int)event.getY())) {
+        return false;
+      }
+    }
+  }
+  return super.onTouchEvent(event);
+}

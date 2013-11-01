@@ -1,0 +1,3 @@
+{
+  return getSpanForWidget(context,info.componentName,info.minResizeWidth,info.minResizeHeight);
+}

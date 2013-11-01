@@ -1,0 +1,6 @@
+{
+  boolean hide=mState != Workspace.State.NORMAL;
+  if (hide && hasCustomContent()) {
+    mWorkspaceScreens.get(CUSTOM_CONTENT_SCREEN_ID).setVisibility(INVISIBLE);
+  }
+}

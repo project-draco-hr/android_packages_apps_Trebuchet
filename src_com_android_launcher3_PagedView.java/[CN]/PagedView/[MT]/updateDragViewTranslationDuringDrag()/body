@@ -1,0 +1,9 @@
+{
+  if (mDragView != null) {
+    float x=(mLastMotionX - mDownMotionX) + (getScrollX() - mDownScrollX) + (mDragViewBaselineLeft - mDragView.getLeft());
+    float y=mLastMotionY - mDownMotionY;
+    mDragView.setTranslationX(x);
+    mDragView.setTranslationY(y);
+    if (DEBUG)     Log.d(TAG,"PagedView.updateDragViewTranslationDuringDrag(): " + x + ", "+ y);
+  }
+}

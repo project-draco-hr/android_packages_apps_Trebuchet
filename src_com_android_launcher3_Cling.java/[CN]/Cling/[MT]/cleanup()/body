@@ -1,0 +1,4 @@
+{
+  mBackground=null;
+  mIsInitialized=false;
+}

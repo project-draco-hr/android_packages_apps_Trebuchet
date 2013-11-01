@@ -1,0 +1,6 @@
+{
+  super.onRestoreInstanceState(state);
+  for (  int page : mSynchronouslyBoundPages) {
+    mWorkspace.restoreInstanceStateForChild(page);
+  }
+}

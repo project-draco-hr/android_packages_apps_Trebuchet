@@ -1,0 +1,21 @@
+{
+  if (event.getAction() == KeyEvent.ACTION_DOWN) {
+switch (event.getKeyCode()) {
+case KeyEvent.KEYCODE_HOME:
+      return true;
+case KeyEvent.KEYCODE_VOLUME_DOWN:
+    if (isPropertyEnabled(DUMP_STATE_PROPERTY)) {
+      dumpState();
+      return true;
+    }
+  break;
+}
+}
+ else if (event.getAction() == KeyEvent.ACTION_UP) {
+switch (event.getKeyCode()) {
+case KeyEvent.KEYCODE_HOME:
+return true;
+}
+}
+return super.dispatchKeyEvent(event);
+}

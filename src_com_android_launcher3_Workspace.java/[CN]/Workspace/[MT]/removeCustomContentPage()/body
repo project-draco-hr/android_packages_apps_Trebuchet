@@ -1,0 +1,22 @@
+{
+  CellLayout customScreen=getScreenWithId(CUSTOM_CONTENT_SCREEN_ID);
+  if (customScreen == null) {
+    throw new RuntimeException("Expected custom content screen to exist");
+  }
+  mWorkspaceScreens.remove(CUSTOM_CONTENT_SCREEN_ID);
+  mScreenOrder.remove(CUSTOM_CONTENT_SCREEN_ID);
+  removeView(customScreen);
+  if (mCustomContentCallbacks != null) {
+    mCustomContentCallbacks.onScrollProgressChanged(0);
+    mCustomContentCallbacks.onHide();
+  }
+  mCustomContentCallbacks=null;
+  mDefaultPage=mOriginalDefaultPage - 1;
+  mLauncher.updateCustomContentHintVisibility();
+  if (mRestorePage != INVALID_RESTORE_PAGE) {
+    mRestorePage=mRestorePage - 1;
+  }
+ else {
+    setCurrentPage(getCurrentPage() - 1);
+  }
+}

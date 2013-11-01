@@ -1,0 +1,27 @@
+{
+  final LauncherAppState app=LauncherAppState.getInstance();
+  final DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
+  final int cellWidth=mCellWidth;
+  final int cellHeight=mCellHeight;
+  CellLayout.LayoutParams lp=(CellLayout.LayoutParams)child.getLayoutParams();
+  if (!lp.isFullscreen) {
+    lp.setup(cellWidth,cellHeight,mWidthGap,mHeightGap,invertLayoutHorizontally(),mCountX);
+    if (child instanceof LauncherAppWidgetHostView) {
+    }
+ else {
+      int cHeight=getCellContentHeight();
+      int cellPaddingY=(int)Math.max(0,((lp.height - cHeight) / 2f));
+      int cellPaddingX=(int)(grid.edgeMarginPx / 2f);
+      child.setPadding(cellPaddingX,cellPaddingY,cellPaddingX,0);
+    }
+  }
+ else {
+    lp.x=0;
+    lp.y=0;
+    lp.width=getMeasuredWidth();
+    lp.height=getMeasuredHeight();
+  }
+  int childWidthMeasureSpec=MeasureSpec.makeMeasureSpec(lp.width,MeasureSpec.EXACTLY);
+  int childheightMeasureSpec=MeasureSpec.makeMeasureSpec(lp.height,MeasureSpec.EXACTLY);
+  child.measure(childWidthMeasureSpec,childheightMeasureSpec);
+}

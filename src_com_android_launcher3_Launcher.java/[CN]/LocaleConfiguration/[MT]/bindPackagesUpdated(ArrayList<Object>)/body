@@ -1,0 +1,9 @@
+{
+  if (waitUntilResume(mBindPackagesUpdatedRunnable,true)) {
+    mWidgetsAndShortcuts=widgetsAndShortcuts;
+    return;
+  }
+  if (!AppsCustomizePagedView.DISABLE_ALL_APPS && mAppsCustomizeContent != null) {
+    mAppsCustomizeContent.onPackagesUpdated(widgetsAndShortcuts);
+  }
+}

@@ -1,0 +1,4 @@
+{
+  mChoreographer=Choreographer.getInstance();
+  mInterpolator=new DecelerateInterpolator(1.5f);
+}

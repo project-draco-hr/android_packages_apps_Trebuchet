@@ -1,0 +1,5 @@
+{
+  AnimatorSet anim=new AnimatorSet();
+  cancelOnDestroyActivity(anim);
+  return anim;
+}

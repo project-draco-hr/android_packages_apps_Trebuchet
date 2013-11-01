@@ -1,0 +1,5 @@
+DragLayer dragLayer
+PointF vel
+Rect from
+long startTime
+float friction

@@ -1,0 +1,80 @@
+{
+  FrameLayout.LayoutParams lp;
+  Resources res=launcher.getResources();
+  boolean hasVerticalBarLayout=isVerticalBarLayout();
+  View searchBar=launcher.getSearchBar();
+  lp=(FrameLayout.LayoutParams)searchBar.getLayoutParams();
+  if (hasVerticalBarLayout) {
+    lp.gravity=Gravity.TOP | Gravity.LEFT;
+    lp.width=searchBarSpaceHeightPx;
+    lp.height=LayoutParams.MATCH_PARENT;
+    searchBar.setPadding(0,2 * edgeMarginPx,0,2 * edgeMarginPx);
+  }
+ else {
+    lp.gravity=Gravity.TOP | Gravity.CENTER_HORIZONTAL;
+    lp.width=searchBarSpaceWidthPx;
+    lp.height=searchBarSpaceHeightPx;
+    searchBar.setPadding(2 * edgeMarginPx,2 * edgeMarginPx,2 * edgeMarginPx,0);
+  }
+  searchBar.setLayoutParams(lp);
+  View qsbBar=launcher.getQsbBar();
+  LayoutParams vglp=qsbBar.getLayoutParams();
+  vglp.width=LayoutParams.MATCH_PARENT;
+  vglp.height=LayoutParams.MATCH_PARENT;
+  qsbBar.setLayoutParams(vglp);
+  View voiceButtonProxy=launcher.findViewById(R.id.voice_button_proxy);
+  if (voiceButtonProxy != null) {
+    if (hasVerticalBarLayout) {
+    }
+ else {
+      lp=(FrameLayout.LayoutParams)voiceButtonProxy.getLayoutParams();
+      lp.gravity=Gravity.TOP | Gravity.END;
+      lp.width=(widthPx - searchBarSpaceWidthPx) / 2 + 2 * iconSizePx;
+      lp.height=searchBarSpaceHeightPx;
+    }
+  }
+  View workspace=launcher.findViewById(R.id.workspace);
+  lp=(FrameLayout.LayoutParams)workspace.getLayoutParams();
+  lp.gravity=Gravity.CENTER;
+  Rect padding=getWorkspacePadding(isLandscape ? CellLayout.LANDSCAPE : CellLayout.PORTRAIT);
+  workspace.setPadding(padding.left,padding.top,padding.right,padding.bottom);
+  workspace.setLayoutParams(lp);
+  View hotseat=launcher.findViewById(R.id.hotseat);
+  lp=(FrameLayout.LayoutParams)hotseat.getLayoutParams();
+  if (hasVerticalBarLayout) {
+    lp.gravity=Gravity.RIGHT;
+    lp.width=hotseatBarHeightPx;
+    lp.height=LayoutParams.MATCH_PARENT;
+    hotseat.setPadding(0,2 * edgeMarginPx,2 * edgeMarginPx,2 * edgeMarginPx);
+  }
+ else   if (isTablet()) {
+    int gridGap=(int)((widthPx - 2 * edgeMarginPx - (numColumns * cellWidthPx)) / (2 * (numColumns + 1)));
+    int gridWidth=(int)((numColumns * cellWidthPx) + ((numColumns - 1) * gridGap));
+    int hotseatGap=(int)Math.max(0,(gridWidth - (numHotseatIcons * hotseatCellWidthPx)) / (numHotseatIcons - 1));
+    lp.gravity=Gravity.BOTTOM;
+    lp.width=LayoutParams.MATCH_PARENT;
+    lp.height=hotseatBarHeightPx;
+    hotseat.setPadding(2 * edgeMarginPx + gridGap + hotseatGap,0,2 * edgeMarginPx + gridGap + hotseatGap,2 * edgeMarginPx);
+  }
+ else {
+    lp.gravity=Gravity.BOTTOM;
+    lp.width=LayoutParams.MATCH_PARENT;
+    lp.height=hotseatBarHeightPx;
+    hotseat.findViewById(R.id.layout).setPadding(2 * edgeMarginPx,0,2 * edgeMarginPx,0);
+  }
+  hotseat.setLayoutParams(lp);
+  View pageIndicator=launcher.findViewById(R.id.page_indicator);
+  if (pageIndicator != null) {
+    if (hasVerticalBarLayout) {
+      pageIndicator.setVisibility(View.GONE);
+    }
+ else {
+      lp=(FrameLayout.LayoutParams)pageIndicator.getLayoutParams();
+      lp.gravity=Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM;
+      lp.width=LayoutParams.WRAP_CONTENT;
+      lp.height=LayoutParams.WRAP_CONTENT;
+      lp.bottomMargin=hotseatBarHeightPx;
+      pageIndicator.setLayoutParams(lp);
+    }
+  }
+}

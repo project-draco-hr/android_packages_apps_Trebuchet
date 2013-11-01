@@ -1,0 +1,3 @@
+{
+  return "AppWidget(id=" + Integer.toString(appWidgetId) + ")";
+}

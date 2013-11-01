@@ -1,0 +1,9 @@
+{
+  mCountX=x;
+  mCountY=y;
+  mOccupied=new boolean[mCountX][mCountY];
+  mTmpOccupied=new boolean[mCountX][mCountY];
+  mTempRectStack.clear();
+  mShortcutsAndWidgets.setCellDimensions(mCellWidth,mCellHeight,mWidthGap,mHeightGap,mCountX,mCountY);
+  requestLayout();
+}

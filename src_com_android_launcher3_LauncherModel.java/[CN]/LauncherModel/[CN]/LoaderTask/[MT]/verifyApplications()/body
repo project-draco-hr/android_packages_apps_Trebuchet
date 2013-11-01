@@ -1,0 +1,18 @@
+{
+  final Context context=mApp.getContext();
+  ArrayList<ItemInfo> tmpInfos;
+  ArrayList<ItemInfo> added=new ArrayList<ItemInfo>();
+synchronized (sBgLock) {
+    for (    AppInfo app : mBgAllAppsList.data) {
+      tmpInfos=getItemInfoForComponentName(app.componentName);
+      if (tmpInfos.isEmpty()) {
+        added.add(app);
+        Log.e(TAG,"Missing Application on load: " + app);
+      }
+    }
+  }
+  if (!added.isEmpty()) {
+    Callbacks cb=mCallbacks != null ? mCallbacks.get() : null;
+    addAndBindAddedApps(context,added,cb,null);
+  }
+}

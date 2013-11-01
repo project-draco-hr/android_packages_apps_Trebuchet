@@ -1,0 +1,23 @@
+{
+  super.notifyPageSwitchListener();
+  Launcher.setScreen(mCurrentPage);
+  if (hasCustomContent() && getNextPage() == 0 && !mCustomContentShowing) {
+    mCustomContentShowing=true;
+    if (mCustomContentCallbacks != null) {
+      mCustomContentCallbacks.onShow();
+      mCustomContentShowTime=System.currentTimeMillis();
+      mLauncher.updateVoiceButtonProxyVisible(false);
+    }
+  }
+ else   if (hasCustomContent() && getNextPage() != 0 && mCustomContentShowing) {
+    mCustomContentShowing=false;
+    if (mCustomContentCallbacks != null) {
+      mCustomContentCallbacks.onHide();
+      mLauncher.resetQSBScroll();
+      mLauncher.updateVoiceButtonProxyVisible(false);
+    }
+  }
+  if (getPageIndicator() != null) {
+    getPageIndicator().setContentDescription(getPageIndicatorDescription());
+  }
+}

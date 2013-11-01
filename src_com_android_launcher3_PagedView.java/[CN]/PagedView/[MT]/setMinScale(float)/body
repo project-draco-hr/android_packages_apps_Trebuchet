@@ -1,0 +1,5 @@
+{
+  mMinScale=f;
+  mUseMinScale=true;
+  requestLayout();
+}

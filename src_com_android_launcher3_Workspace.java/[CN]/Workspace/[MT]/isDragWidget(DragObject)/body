@@ -1,0 +1,3 @@
+{
+  return (d.dragInfo instanceof LauncherAppWidgetInfo || d.dragInfo instanceof PendingAddWidgetInfo);
+}

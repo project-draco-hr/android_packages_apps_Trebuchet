@@ -1,0 +1,29 @@
+{
+  if (mDrawIdentifier.equals(FIRST_RUN_PORTRAIT) || mDrawIdentifier.equals(FIRST_RUN_LANDSCAPE)) {
+    View content=getContent();
+    content.animate().alpha(0f).setDuration(duration).setListener(new AnimatorListenerAdapter(){
+      public void onAnimationEnd(      Animator animation){
+        setVisibility(View.GONE);
+        postCb.run();
+      }
+    }
+).start();
+  }
+ else {
+    animate().alpha(0f).setDuration(duration).setListener(new AnimatorListenerAdapter(){
+      public void onAnimationEnd(      Animator animation){
+        setVisibility(View.GONE);
+        postCb.run();
+      }
+    }
+).start();
+  }
+  if (mScrimView != null) {
+    mScrimView.animate().alpha(0f).setDuration(duration).setListener(new AnimatorListenerAdapter(){
+      public void onAnimationEnd(      Animator animation){
+        mScrimView.setVisibility(View.GONE);
+      }
+    }
+).start();
+  }
+}

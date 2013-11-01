@@ -1,0 +1,28 @@
+{
+  if (!isFinishedSwitchingState())   return;
+  float deltaX=ev.getX() - mXDown;
+  float absDeltaX=Math.abs(deltaX);
+  float absDeltaY=Math.abs(ev.getY() - mYDown);
+  if (Float.compare(absDeltaX,0f) == 0)   return;
+  float slope=absDeltaY / absDeltaX;
+  float theta=(float)Math.atan(slope);
+  if (absDeltaX > mTouchSlop || absDeltaY > mTouchSlop) {
+    cancelCurrentPageLongPress();
+  }
+  boolean passRightSwipesToCustomContent=(mTouchDownTime - mCustomContentShowTime) > CUSTOM_CONTENT_GESTURE_DELAY;
+  boolean swipeInIgnoreDirection=isLayoutRtl() ? deltaX < 0 : deltaX > 0;
+  if (swipeInIgnoreDirection && getScreenIdForPageIndex(getCurrentPage()) == CUSTOM_CONTENT_SCREEN_ID && passRightSwipesToCustomContent) {
+    return;
+  }
+  if (theta > MAX_SWIPE_ANGLE) {
+    return;
+  }
+ else   if (theta > START_DAMPING_TOUCH_SLOP_ANGLE) {
+    theta-=START_DAMPING_TOUCH_SLOP_ANGLE;
+    float extraRatio=(float)Math.sqrt((theta / (MAX_SWIPE_ANGLE - START_DAMPING_TOUCH_SLOP_ANGLE)));
+    super.determineScrollingStart(ev,1 + TOUCH_SLOP_DAMPING_FACTOR * extraRatio);
+  }
+ else {
+    super.determineScrollingStart(ev);
+  }
+}

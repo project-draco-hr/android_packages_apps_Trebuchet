@@ -1,0 +1,6 @@
+{
+  if (bitmap != null) {
+    byte[] data=flattenBitmap(bitmap);
+    values.put(LauncherSettings.Favorites.ICON,data);
+  }
+}

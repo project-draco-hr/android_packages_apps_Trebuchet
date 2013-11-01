@@ -1,0 +1,3 @@
+AppInfo info
+boolean scaleUp
+PagedViewIcon.PressedCallback cb

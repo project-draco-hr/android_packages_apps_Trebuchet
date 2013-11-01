@@ -1,0 +1,23 @@
+{
+  final FolderInfo info=folderIcon.getFolderInfo();
+  Folder openFolder=mWorkspace.getFolderForTag(info);
+  if (info.opened && openFolder == null) {
+    Log.d(TAG,"Folder info marked as open, but associated folder is not open. Screen: " + info.screenId + " ("+ info.cellX+ ", "+ info.cellY+ ")");
+    info.opened=false;
+  }
+  if (!info.opened && !folderIcon.getFolder().isDestroyed()) {
+    closeFolder();
+    openFolder(folderIcon);
+  }
+ else {
+    int folderScreen;
+    if (openFolder != null) {
+      folderScreen=mWorkspace.getPageForView(openFolder);
+      closeFolder(openFolder);
+      if (folderScreen != mWorkspace.getCurrentPage()) {
+        closeFolder();
+        openFolder(folderIcon);
+      }
+    }
+  }
+}

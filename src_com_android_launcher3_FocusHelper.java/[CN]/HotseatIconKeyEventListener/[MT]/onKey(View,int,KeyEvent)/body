@@ -1,0 +1,4 @@
+{
+  final Configuration configuration=v.getResources().getConfiguration();
+  return FocusHelper.handleHotseatButtonKeyEvent(v,keyCode,event,configuration.orientation);
+}

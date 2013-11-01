@@ -1,0 +1,10 @@
+{
+  final String className=component.getClassName();
+  for (  ResolveInfo info : apps) {
+    final ActivityInfo activityInfo=info.activityInfo;
+    if (activityInfo.name.equals(className)) {
+      return true;
+    }
+  }
+  return false;
+}

@@ -1,0 +1,5 @@
+{
+  setOnTabChangedListener(null);
+  setCurrentTabByTag(getTabTagForContentType(type));
+  setOnTabChangedListener(this);
+}

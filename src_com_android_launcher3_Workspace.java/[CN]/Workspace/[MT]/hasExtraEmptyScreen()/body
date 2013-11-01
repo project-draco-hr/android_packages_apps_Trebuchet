@@ -1,0 +1,5 @@
+{
+  int nScreens=getChildCount();
+  nScreens=nScreens - numCustomPages();
+  return mWorkspaceScreens.containsKey(EXTRA_EMPTY_SCREEN_ID) && nScreens > 1;
+}

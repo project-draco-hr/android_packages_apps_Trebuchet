@@ -1,0 +1,4 @@
+{
+  resetLoadedState(true,true);
+  startLoaderFromBackground();
+}

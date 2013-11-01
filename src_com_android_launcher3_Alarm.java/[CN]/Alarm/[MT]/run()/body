@@ -1,0 +1,16 @@
+{
+  mWaitingForCallback=false;
+  if (mAlarmTriggerTime != 0) {
+    long currentTime=System.currentTimeMillis();
+    if (mAlarmTriggerTime > currentTime) {
+      mHandler.postDelayed(this,Math.max(0,mAlarmTriggerTime - currentTime));
+      mWaitingForCallback=true;
+    }
+ else {
+      mAlarmPending=false;
+      if (mAlarmListener != null) {
+        mAlarmListener.onAlarm(this);
+      }
+    }
+  }
+}

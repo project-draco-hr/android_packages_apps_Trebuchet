@@ -1,0 +1,22 @@
+{
+  super(context,attrs);
+  LauncherAppState app=LauncherAppState.getInstance();
+  DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
+  setAlwaysDrawnWithCacheEnabled(false);
+  mInflater=LayoutInflater.from(context);
+  mIconCache=app.getIconCache();
+  Resources res=getResources();
+  mMaxCountX=(int)grid.numColumns;
+  mMaxCountY=(int)grid.numRows;
+  mMaxNumItems=mMaxCountX * mMaxCountY;
+  mInputMethodManager=(InputMethodManager)getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+  mExpandDuration=res.getInteger(R.integer.config_folderAnimDuration);
+  if (sDefaultFolderName == null) {
+    sDefaultFolderName=res.getString(R.string.folder_name);
+  }
+  if (sHintText == null) {
+    sHintText=res.getString(R.string.folder_hint_text);
+  }
+  mLauncher=(Launcher)context;
+  setFocusableInTouchMode(true);
+}

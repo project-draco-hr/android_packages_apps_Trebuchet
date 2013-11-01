@@ -1,0 +1,6 @@
+{
+synchronized (LoaderTask.this) {
+    mStopped=true;
+    this.notify();
+  }
+}

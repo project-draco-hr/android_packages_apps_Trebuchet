@@ -1,0 +1,6 @@
+{
+  mHandler.removeMessages(ADVANCE_MSG);
+  Message msg=mHandler.obtainMessage(ADVANCE_MSG);
+  mHandler.sendMessageDelayed(msg,delay);
+  mAutoAdvanceSentTime=System.currentTimeMillis();
+}

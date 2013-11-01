@@ -1,0 +1,4 @@
+{
+  getWindow().closeAllPanels();
+  mWaitingForResult=false;
+}

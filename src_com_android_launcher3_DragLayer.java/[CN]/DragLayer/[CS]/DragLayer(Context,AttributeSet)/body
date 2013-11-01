@@ -1,0 +1,8 @@
+{
+  super(context,attrs);
+  setMotionEventSplittingEnabled(false);
+  setChildrenDrawingOrderEnabled(true);
+  setOnHierarchyChangeListener(this);
+  mLeftHoverDrawable=getResources().getDrawable(R.drawable.page_hover_left_holo);
+  mRightHoverDrawable=getResources().getDrawable(R.drawable.page_hover_right_holo);
+}

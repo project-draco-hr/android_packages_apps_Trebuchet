@@ -1,0 +1,71 @@
+{
+  final AppsCustomizePagedView.ContentType type=getContentTypeForTabTag(tabId);
+  final Resources res=getResources();
+  final int duration=res.getInteger(R.integer.config_tabTransitionDuration);
+  post(new Runnable(){
+    @Override public void run(){
+      if (mAppsCustomizePane.getMeasuredWidth() <= 0 || mAppsCustomizePane.getMeasuredHeight() <= 0) {
+        reloadCurrentPage();
+        return;
+      }
+      int[] visiblePageRange=new int[2];
+      mAppsCustomizePane.getVisiblePages(visiblePageRange);
+      if (visiblePageRange[0] == -1 && visiblePageRange[1] == -1) {
+        reloadCurrentPage();
+        return;
+      }
+      ArrayList<View> visiblePages=new ArrayList<View>();
+      for (int i=visiblePageRange[0]; i <= visiblePageRange[1]; i++) {
+        visiblePages.add(mAppsCustomizePane.getPageAt(i));
+      }
+      mAnimationBuffer.scrollTo(mAppsCustomizePane.getScrollX(),0);
+      for (int i=visiblePages.size() - 1; i >= 0; i--) {
+        View child=visiblePages.get(i);
+        if (child instanceof AppsCustomizeCellLayout) {
+          ((AppsCustomizeCellLayout)child).resetChildrenOnKeyListeners();
+        }
+ else         if (child instanceof PagedViewGridLayout) {
+          ((PagedViewGridLayout)child).resetChildrenOnKeyListeners();
+        }
+        PagedViewWidget.setDeletePreviewsWhenDetachedFromWindow(false);
+        mAppsCustomizePane.removeView(child);
+        PagedViewWidget.setDeletePreviewsWhenDetachedFromWindow(true);
+        mAnimationBuffer.setAlpha(1f);
+        mAnimationBuffer.setVisibility(View.VISIBLE);
+        LayoutParams p=new FrameLayout.LayoutParams(child.getMeasuredWidth(),child.getMeasuredHeight());
+        p.setMargins((int)child.getLeft(),(int)child.getTop(),0,0);
+        mAnimationBuffer.addView(child,p);
+      }
+      onTabChangedStart();
+      onTabChangedEnd(type);
+      ObjectAnimator outAnim=LauncherAnimUtils.ofFloat(mAnimationBuffer,"alpha",0f);
+      outAnim.addListener(new AnimatorListenerAdapter(){
+        private void clearAnimationBuffer(){
+          mAnimationBuffer.setVisibility(View.GONE);
+          PagedViewWidget.setRecyclePreviewsWhenDetachedFromWindow(false);
+          mAnimationBuffer.removeAllViews();
+          PagedViewWidget.setRecyclePreviewsWhenDetachedFromWindow(true);
+        }
+        @Override public void onAnimationEnd(        Animator animation){
+          clearAnimationBuffer();
+        }
+        @Override public void onAnimationCancel(        Animator animation){
+          clearAnimationBuffer();
+        }
+      }
+);
+      ObjectAnimator inAnim=LauncherAnimUtils.ofFloat(mAppsCustomizePane,"alpha",1f);
+      inAnim.addListener(new AnimatorListenerAdapter(){
+        @Override public void onAnimationEnd(        Animator animation){
+          reloadCurrentPage();
+        }
+      }
+);
+      final AnimatorSet animSet=LauncherAnimUtils.createAnimatorSet();
+      animSet.playTogether(outAnim,inAnim);
+      animSet.setDuration(duration);
+      animSet.start();
+    }
+  }
+);
+}

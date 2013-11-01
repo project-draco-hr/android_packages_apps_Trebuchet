@@ -1,0 +1,15 @@
+{
+  final long currentTime=AnimationUtils.currentAnimationTimeMillis();
+  final long elapsedSinceStart=currentTime - mStartTime;
+  final float scale;
+  if (elapsedSinceStart < mRampUpTime) {
+    scale=mInterpolator.getInterpolation((float)elapsedSinceStart / mRampUpTime);
+  }
+ else {
+    scale=1f;
+  }
+  final long elapsedSinceDelta=currentTime - mDeltaTime;
+  mDeltaTime=currentTime;
+  mDeltaX=(int)(elapsedSinceDelta * scale * mTargetVelocityX);
+  mDeltaY=(int)(elapsedSinceDelta * scale * mTargetVelocityY);
+}

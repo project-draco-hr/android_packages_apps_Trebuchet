@@ -1,0 +1,4 @@
+{
+  super(launcher,hostId);
+  mLauncher=launcher;
+}

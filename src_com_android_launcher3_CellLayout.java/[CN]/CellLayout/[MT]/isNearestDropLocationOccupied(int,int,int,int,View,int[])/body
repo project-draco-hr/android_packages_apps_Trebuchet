@@ -1,0 +1,5 @@
+{
+  result=findNearestArea(pixelX,pixelY,spanX,spanY,result);
+  getViewsIntersectingRegion(result[0],result[1],spanX,spanY,dragView,null,mIntersectingViews);
+  return !mIntersectingViews.isEmpty();
+}

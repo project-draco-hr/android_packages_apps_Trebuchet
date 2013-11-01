@@ -1,0 +1,12 @@
+{
+  mAnimator=LauncherAnimUtils.ofFloat(view,fromValue,toValue).setDuration(duration);
+  mOriginalDuration=duration;
+  mOriginalFromValue=fromValue;
+  mOriginalToValue=toValue;
+  mAnimator.addListener(new AnimatorListenerAdapter(){
+    @Override public void onAnimationEnd(    Animator animation){
+      mDirection=STOPPED;
+    }
+  }
+);
+}

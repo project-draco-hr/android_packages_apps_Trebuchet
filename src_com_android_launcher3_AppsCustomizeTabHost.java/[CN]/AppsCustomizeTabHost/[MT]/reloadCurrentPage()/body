@@ -1,0 +1,4 @@
+{
+  mAppsCustomizePane.loadAssociatedPages(mAppsCustomizePane.getCurrentPage());
+  mAppsCustomizePane.requestFocus();
+}

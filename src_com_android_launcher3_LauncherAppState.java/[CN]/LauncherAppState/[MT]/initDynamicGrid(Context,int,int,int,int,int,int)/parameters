@@ -1,0 +1,7 @@
+Context context
+int minWidth
+int minHeight
+int width
+int height
+int availableWidth
+int availableHeight

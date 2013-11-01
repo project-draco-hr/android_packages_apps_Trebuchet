@@ -1,0 +1,7 @@
+{
+  final int[] drawableState=super.onCreateDrawableState(extraSpace + 1);
+  if (isHotwordOn()) {
+    mergeDrawableStates(drawableState,new int[]{R.attr.stateHotwordOn});
+  }
+  return drawableState;
+}

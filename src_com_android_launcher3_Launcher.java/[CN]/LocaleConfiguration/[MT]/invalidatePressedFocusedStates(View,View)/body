@@ -1,0 +1,10 @@
+{
+  if (container instanceof HolographicLinearLayout) {
+    HolographicLinearLayout layout=(HolographicLinearLayout)container;
+    layout.invalidatePressedFocusedStates();
+  }
+ else   if (button instanceof HolographicImageView) {
+    HolographicImageView view=(HolographicImageView)button;
+    view.invalidatePressedFocusedStates();
+  }
+}

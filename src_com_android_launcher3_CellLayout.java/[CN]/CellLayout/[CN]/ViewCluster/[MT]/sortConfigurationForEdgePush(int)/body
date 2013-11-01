@@ -1,0 +1,4 @@
+{
+  comparator.whichEdge=edge;
+  Collections.sort(config.sortedViews,comparator);
+}

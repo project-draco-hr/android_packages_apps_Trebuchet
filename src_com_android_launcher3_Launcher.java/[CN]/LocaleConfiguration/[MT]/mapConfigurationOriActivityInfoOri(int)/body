@@ -1,0 +1,20 @@
+{
+  final Display d=getWindowManager().getDefaultDisplay();
+  int naturalOri=Configuration.ORIENTATION_LANDSCAPE;
+switch (d.getRotation()) {
+case Surface.ROTATION_0:
+case Surface.ROTATION_180:
+    naturalOri=configOri;
+  break;
+case Surface.ROTATION_90:
+case Surface.ROTATION_270:
+naturalOri=(configOri == Configuration.ORIENTATION_LANDSCAPE) ? Configuration.ORIENTATION_PORTRAIT : Configuration.ORIENTATION_LANDSCAPE;
+break;
+}
+int[] oriMap={ActivityInfo.SCREEN_ORIENTATION_PORTRAIT,ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE,ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT,ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE};
+int indexOffset=0;
+if (naturalOri == Configuration.ORIENTATION_LANDSCAPE) {
+indexOffset=1;
+}
+return oriMap[(d.getRotation() + indexOffset) % 4];
+}

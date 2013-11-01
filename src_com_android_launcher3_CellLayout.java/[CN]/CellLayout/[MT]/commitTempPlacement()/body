@@ -1,0 +1,23 @@
+{
+  for (int i=0; i < mCountX; i++) {
+    for (int j=0; j < mCountY; j++) {
+      mOccupied[i][j]=mTmpOccupied[i][j];
+    }
+  }
+  int childCount=mShortcutsAndWidgets.getChildCount();
+  for (int i=0; i < childCount; i++) {
+    View child=mShortcutsAndWidgets.getChildAt(i);
+    LayoutParams lp=(LayoutParams)child.getLayoutParams();
+    ItemInfo info=(ItemInfo)child.getTag();
+    if (info != null) {
+      if (info.cellX != lp.tmpCellX || info.cellY != lp.tmpCellY || info.spanX != lp.cellHSpan || info.spanY != lp.cellVSpan) {
+        info.requiresDbUpdate=true;
+      }
+      info.cellX=lp.cellX=lp.tmpCellX;
+      info.cellY=lp.cellY=lp.tmpCellY;
+      info.spanX=lp.cellHSpan;
+      info.spanY=lp.cellVSpan;
+    }
+  }
+  mLauncher.getWorkspace().updateItemLocationsInDatabase(this);
+}

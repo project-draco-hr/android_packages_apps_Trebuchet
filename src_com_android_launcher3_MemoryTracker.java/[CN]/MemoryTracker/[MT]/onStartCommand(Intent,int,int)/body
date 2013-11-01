@@ -1,0 +1,13 @@
+{
+  Log.v(TAG,"Received start id " + startId + ": "+ intent);
+  if (intent != null) {
+    if (ACTION_START_TRACKING.equals(intent.getAction())) {
+      final int pid=intent.getIntExtra("pid",-1);
+      final String name=intent.getStringExtra("name");
+      final long start=intent.getLongExtra("start",System.currentTimeMillis());
+      startTrackingProcess(pid,name,start);
+    }
+  }
+  mHandler.sendEmptyMessage(MSG_START);
+  return START_STICKY;
+}

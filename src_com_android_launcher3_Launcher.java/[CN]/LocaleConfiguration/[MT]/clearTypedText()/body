@@ -1,0 +1,5 @@
+{
+  mDefaultKeySsb.clear();
+  mDefaultKeySsb.clearSpans();
+  Selection.setSelection(mDefaultKeySsb,0);
+}

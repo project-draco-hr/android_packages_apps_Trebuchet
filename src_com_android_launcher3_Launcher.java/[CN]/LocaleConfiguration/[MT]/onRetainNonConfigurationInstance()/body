@@ -1,0 +1,7 @@
+{
+  mModel.stopLoader();
+  if (mAppsCustomizeContent != null) {
+    mAppsCustomizeContent.surrender();
+  }
+  return Boolean.TRUE;
+}

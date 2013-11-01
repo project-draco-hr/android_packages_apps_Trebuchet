@@ -1,0 +1,16 @@
+{
+synchronized (sInvalidPackages) {
+    sInvalidPackages.add(packageName);
+  }
+  new AsyncTask<Void,Void,Void>(){
+    public Void doInBackground(    Void... args){
+      SQLiteDatabase db=cacheDb.getWritableDatabase();
+      db.delete(CacheDb.TABLE_NAME,CacheDb.COLUMN_NAME + " LIKE ? OR " + CacheDb.COLUMN_NAME+ " LIKE ?",new String[]{WIDGET_PREFIX + packageName + "/%",SHORTCUT_PREFIX + packageName + "/%"});
+synchronized (sInvalidPackages) {
+        sInvalidPackages.remove(packageName);
+      }
+      return null;
+    }
+  }
+.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,(Void)null);
+}

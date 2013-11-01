@@ -1,0 +1,3 @@
+{
+  return hasVerticalHotseat() ? 0 : rank;
+}

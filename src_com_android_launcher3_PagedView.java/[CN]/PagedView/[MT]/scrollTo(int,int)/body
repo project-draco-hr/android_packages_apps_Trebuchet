@@ -1,0 +1,44 @@
+{
+  if (mFreeScroll) {
+    x=Math.min(x,mFreeScrollMaxScrollX);
+    x=Math.max(x,mFreeScrollMinScrollX);
+  }
+  final boolean isRtl=isLayoutRtl();
+  mUnboundedScrollX=x;
+  boolean isXBeforeFirstPage=isRtl ? (x > mMaxScrollX) : (x < 0);
+  boolean isXAfterLastPage=isRtl ? (x < 0) : (x > mMaxScrollX);
+  if (isXBeforeFirstPage) {
+    super.scrollTo(0,y);
+    if (mAllowOverScroll) {
+      if (isRtl) {
+        overScroll(x - mMaxScrollX);
+      }
+ else {
+        overScroll(x);
+      }
+    }
+  }
+ else   if (isXAfterLastPage) {
+    super.scrollTo(mMaxScrollX,y);
+    if (mAllowOverScroll) {
+      if (isRtl) {
+        overScroll(x);
+      }
+ else {
+        overScroll(x - mMaxScrollX);
+      }
+    }
+  }
+ else {
+    mOverScrollX=x;
+    super.scrollTo(x,y);
+  }
+  mTouchX=x;
+  mSmoothingTime=System.nanoTime() / NANOTIME_DIV;
+  if (isReordering(true)) {
+    float[] p=mapPointFromParentToView(this,mParentDownMotionX,mParentDownMotionY);
+    mLastMotionX=p[0];
+    mLastMotionY=p[1];
+    updateDragViewTranslationDuringDrag();
+  }
+}

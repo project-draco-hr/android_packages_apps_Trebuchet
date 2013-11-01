@@ -1,0 +1,15 @@
+{
+  if (isLockedToGrid) {
+    final int myCellHSpan=cellHSpan;
+    final int myCellVSpan=cellVSpan;
+    int myCellX=useTmpCoords ? tmpCellX : cellX;
+    int myCellY=useTmpCoords ? tmpCellY : cellY;
+    if (invertHorizontally) {
+      myCellX=colCount - myCellX - cellHSpan;
+    }
+    width=myCellHSpan * cellWidth + ((myCellHSpan - 1) * widthGap) - leftMargin - rightMargin;
+    height=myCellVSpan * cellHeight + ((myCellVSpan - 1) * heightGap) - topMargin - bottomMargin;
+    x=(int)(myCellX * (cellWidth + widthGap) + leftMargin);
+    y=(int)(myCellY * (cellHeight + heightGap) + topMargin);
+  }
+}

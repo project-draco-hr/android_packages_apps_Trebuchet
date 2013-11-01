@@ -1,0 +1,43 @@
+{
+  super(launcher);
+  mDragLayer=launcher.getDragLayer();
+  mInitialScale=initialScale;
+  final Resources res=getResources();
+  final float offsetX=res.getDimensionPixelSize(R.dimen.dragViewOffsetX);
+  final float offsetY=res.getDimensionPixelSize(R.dimen.dragViewOffsetY);
+  final float scaleDps=res.getDimensionPixelSize(R.dimen.dragViewScale);
+  final float scale=(width + scaleDps) / width;
+  setScaleX(initialScale);
+  setScaleY(initialScale);
+  mAnim=LauncherAnimUtils.ofFloat(this,0f,1f);
+  mAnim.setDuration(150);
+  mAnim.addUpdateListener(new AnimatorUpdateListener(){
+    @Override public void onAnimationUpdate(    ValueAnimator animation){
+      final float value=(Float)animation.getAnimatedValue();
+      final int deltaX=(int)((value * offsetX) - mOffsetX);
+      final int deltaY=(int)((value * offsetY) - mOffsetY);
+      mOffsetX+=deltaX;
+      mOffsetY+=deltaY;
+      setScaleX(initialScale + (value * (scale - initialScale)));
+      setScaleY(initialScale + (value * (scale - initialScale)));
+      if (sDragAlpha != 1f) {
+        setAlpha(sDragAlpha * value + (1f - value));
+      }
+      if (getParent() == null) {
+        animation.cancel();
+      }
+ else {
+        setTranslationX(getTranslationX() + deltaX);
+        setTranslationY(getTranslationY() + deltaY);
+      }
+    }
+  }
+);
+  mBitmap=Bitmap.createBitmap(bitmap,left,top,width,height);
+  setDragRegion(new Rect(0,0,width,height));
+  mRegistrationX=registrationX;
+  mRegistrationY=registrationY;
+  int ms=View.MeasureSpec.makeMeasureSpec(0,View.MeasureSpec.UNSPECIFIED);
+  measure(ms,ms);
+  mPaint=new Paint(Paint.FILTER_BITMAP_FLAG);
+}

@@ -1,0 +1,9 @@
+{
+  ObjectAnimator anim=new ObjectAnimator();
+  anim.setTarget(target);
+  anim.setPropertyName(propertyName);
+  anim.setFloatValues(values);
+  cancelOnDestroyActivity(anim);
+  new FirstFrameAnimatorHelper(anim,target);
+  return anim;
+}

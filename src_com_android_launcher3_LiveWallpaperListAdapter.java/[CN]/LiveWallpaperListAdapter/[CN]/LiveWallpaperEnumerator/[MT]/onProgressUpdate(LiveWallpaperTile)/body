@@ -1,0 +1,16 @@
+{
+  for (  LiveWallpaperTile info : infos) {
+    if (info == null) {
+      LiveWallpaperListAdapter.this.notifyDataSetChanged();
+      break;
+    }
+    info.mThumbnail.setDither(true);
+    if (mWallpaperPosition < mWallpapers.size()) {
+      mWallpapers.set(mWallpaperPosition,info);
+    }
+ else {
+      mWallpapers.add(info);
+    }
+    mWallpaperPosition++;
+  }
+}

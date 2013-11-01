@@ -1,0 +1,53 @@
+{
+  mWaitingForResult=false;
+  if (requestCode == REQUEST_BIND_APPWIDGET) {
+    int appWidgetId=data != null ? data.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,-1) : -1;
+    if (resultCode == RESULT_CANCELED) {
+      completeTwoStageWidgetDrop(RESULT_CANCELED,appWidgetId);
+    }
+ else     if (resultCode == RESULT_OK) {
+      addAppWidgetImpl(appWidgetId,mPendingAddInfo,null,mPendingAddWidgetInfo);
+    }
+    return;
+  }
+ else   if (requestCode == REQUEST_PICK_WALLPAPER) {
+    if (resultCode == RESULT_OK && mWorkspace.isInOverviewMode()) {
+      mWorkspace.exitOverviewMode(false);
+    }
+    return;
+  }
+  boolean delayExitSpringLoadedMode=false;
+  boolean isWidgetDrop=(requestCode == REQUEST_PICK_APPWIDGET || requestCode == REQUEST_CREATE_APPWIDGET);
+  if (isWidgetDrop) {
+    int appWidgetId=data != null ? data.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,-1) : -1;
+    if (appWidgetId < 0) {
+      Log.e(TAG,"Error: appWidgetId (EXTRA_APPWIDGET_ID) was not returned from the \\" + "widget configuration activity.");
+      completeTwoStageWidgetDrop(RESULT_CANCELED,appWidgetId);
+      mWorkspace.stripEmptyScreens();
+    }
+ else {
+      completeTwoStageWidgetDrop(resultCode,appWidgetId);
+    }
+    return;
+  }
+  if (resultCode == RESULT_OK && mPendingAddInfo.container != ItemInfo.NO_ID) {
+    final PendingAddArguments args=new PendingAddArguments();
+    args.requestCode=requestCode;
+    args.intent=data;
+    args.container=mPendingAddInfo.container;
+    args.screenId=mPendingAddInfo.screenId;
+    args.cellX=mPendingAddInfo.cellX;
+    args.cellY=mPendingAddInfo.cellY;
+    if (isWorkspaceLocked()) {
+      sPendingAddList.add(args);
+    }
+ else {
+      delayExitSpringLoadedMode=completeAdd(args);
+    }
+  }
+ else   if (resultCode == RESULT_CANCELED) {
+    mWorkspace.stripEmptyScreens();
+  }
+  mDragLayer.clearAnimatedView();
+  exitSpringLoadedDragModeDelayed((resultCode != RESULT_CANCELED),delayExitSpringLoadedMode,null);
+}

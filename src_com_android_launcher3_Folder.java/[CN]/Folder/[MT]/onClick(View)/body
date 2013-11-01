@@ -1,0 +1,6 @@
+{
+  Object tag=v.getTag();
+  if (tag instanceof ShortcutInfo) {
+    mLauncher.onClick(v);
+  }
+}

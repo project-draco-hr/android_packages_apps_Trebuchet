@@ -1,0 +1,3 @@
+{
+  return mState == State.SMALL || mState == State.SPRING_LOADED || mState == State.OVERVIEW;
+}

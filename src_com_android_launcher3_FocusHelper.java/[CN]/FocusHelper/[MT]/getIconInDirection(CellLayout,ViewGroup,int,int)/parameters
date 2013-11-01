@@ -1,0 +1,4 @@
+CellLayout layout
+ViewGroup parent
+int i
+int delta

@@ -1,0 +1,5 @@
+{
+  mPropertiesToSet.add(Properties.DURATION);
+  mDuration=duration;
+  return this;
+}

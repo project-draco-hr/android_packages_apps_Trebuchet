@@ -1,0 +1,6 @@
+Bitmap srcDst
+Canvas srcDstCanvas
+int color
+int outlineColor
+boolean clipAlpha
+int thickness

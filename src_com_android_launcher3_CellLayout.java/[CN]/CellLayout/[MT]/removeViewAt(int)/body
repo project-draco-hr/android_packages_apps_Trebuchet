@@ -1,0 +1,4 @@
+{
+  markCellsAsUnoccupiedForView(mShortcutsAndWidgets.getChildAt(index));
+  mShortcutsAndWidgets.removeViewAt(index);
+}

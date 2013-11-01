@@ -1,0 +1,6 @@
+{
+  int widthSpec=MeasureSpec.makeMeasureSpec(mContentWidth,MeasureSpec.AT_MOST);
+  int heightSpec=MeasureSpec.makeMeasureSpec(mContentHeight,MeasureSpec.AT_MOST);
+  layout.setMinimumWidth(getPageContentWidth());
+  layout.measure(widthSpec,heightSpec);
+}

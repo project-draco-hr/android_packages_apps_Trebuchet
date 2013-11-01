@@ -1,0 +1,8 @@
+{
+  final PackageManager packageManager=context.getPackageManager();
+  final Intent mainIntent=new Intent(Intent.ACTION_MAIN,null);
+  mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
+  mainIntent.setPackage(packageName);
+  final List<ResolveInfo> apps=packageManager.queryIntentActivities(mainIntent,0);
+  return apps != null ? apps : new ArrayList<ResolveInfo>();
+}

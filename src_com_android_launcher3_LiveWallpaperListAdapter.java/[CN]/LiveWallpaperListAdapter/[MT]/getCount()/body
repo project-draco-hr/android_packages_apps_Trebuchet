@@ -1,0 +1,6 @@
+{
+  if (mWallpapers == null) {
+    return 0;
+  }
+  return mWallpapers.size();
+}

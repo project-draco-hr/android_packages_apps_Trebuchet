@@ -1,0 +1,73 @@
+{
+  if (!mIsDataReady || getChildCount() == 0) {
+    return;
+  }
+  if (DEBUG)   Log.d(TAG,"PagedView.onLayout()");
+  final int childCount=getChildCount();
+  int screenWidth=getViewportWidth();
+  int offsetX=getViewportOffsetX();
+  int offsetY=getViewportOffsetY();
+  mViewport.offset(offsetX,offsetY);
+  final boolean isRtl=isLayoutRtl();
+  final int startIndex=isRtl ? childCount - 1 : 0;
+  final int endIndex=isRtl ? -1 : childCount;
+  final int delta=isRtl ? -1 : 1;
+  int verticalPadding=getPaddingTop() + getPaddingBottom();
+  int childLeft=mFirstChildLeft=offsetX + (screenWidth - getChildWidth(startIndex)) / 2;
+  if (mPageScrolls == null || getChildCount() != mChildCountOnLastLayout) {
+    mPageScrolls=new int[getChildCount()];
+  }
+  for (int i=startIndex; i != endIndex; i+=delta) {
+    final View child=getPageAt(i);
+    if (child.getVisibility() != View.GONE) {
+      LayoutParams lp=(LayoutParams)child.getLayoutParams();
+      int childTop;
+      if (lp.isFullScreenPage) {
+        childTop=offsetY;
+      }
+ else {
+        childTop=offsetY + getPaddingTop() + mInsets.top;
+        if (mCenterPagesVertically) {
+          childTop+=(getViewportHeight() - mInsets.top - mInsets.bottom- verticalPadding- child.getMeasuredHeight()) / 2;
+        }
+      }
+      final int childWidth=child.getMeasuredWidth();
+      final int childHeight=child.getMeasuredHeight();
+      if (DEBUG)       Log.d(TAG,"\tlayout-child" + i + ": "+ childLeft+ ", "+ childTop);
+      child.layout(childLeft,childTop,childLeft + child.getMeasuredWidth(),childTop + childHeight);
+      int scrollOffset=(getViewportWidth() - childWidth) / 2;
+      mPageScrolls[i]=childLeft - scrollOffset - offsetX;
+      if (i != endIndex - delta) {
+        childLeft+=childWidth + scrollOffset;
+        int nextScrollOffset=(getViewportWidth() - getChildWidth(i + delta)) / 2;
+        childLeft+=nextScrollOffset;
+      }
+    }
+  }
+  if (mFirstLayout && mCurrentPage >= 0 && mCurrentPage < getChildCount()) {
+    setHorizontalScrollBarEnabled(false);
+    updateCurrentPageScroll();
+    setHorizontalScrollBarEnabled(true);
+    mFirstLayout=false;
+  }
+  if (childCount > 0) {
+    final int index=isLayoutRtl() ? 0 : childCount - 1;
+    mMaxScrollX=getScrollForPage(index);
+  }
+ else {
+    mMaxScrollX=0;
+  }
+  if (mScroller.isFinished() && mChildCountOnLastLayout != getChildCount() && !mDeferringForDelete) {
+    if (mRestorePage != INVALID_RESTORE_PAGE) {
+      setCurrentPage(mRestorePage);
+      mRestorePage=INVALID_RESTORE_PAGE;
+    }
+ else {
+      setCurrentPage(getNextPage());
+    }
+  }
+  mChildCountOnLastLayout=getChildCount();
+  if (isReordering(true)) {
+    updateDragViewTranslationDuringDrag();
+  }
+}

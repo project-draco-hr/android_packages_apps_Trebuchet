@@ -1,0 +1,4 @@
+{
+  removeMarkerForView(indexOfChild(v));
+  super.removeView(v);
+}

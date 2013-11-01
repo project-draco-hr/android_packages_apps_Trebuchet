@@ -1,0 +1,5 @@
+{
+  super.onStartReordering();
+  showOutlines();
+  disableLayoutTransitions();
+}

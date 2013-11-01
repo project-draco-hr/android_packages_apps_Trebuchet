@@ -1,0 +1,49 @@
+{
+  if (!mDragging) {
+    return false;
+  }
+  acquireVelocityTrackerAndAddMovement(ev);
+  final int action=ev.getAction();
+  final int[] dragLayerPos=getClampedDragLayerPos(ev.getX(),ev.getY());
+  final int dragLayerX=dragLayerPos[0];
+  final int dragLayerY=dragLayerPos[1];
+switch (action) {
+case MotionEvent.ACTION_DOWN:
+    mMotionDownX=dragLayerX;
+  mMotionDownY=dragLayerY;
+if ((dragLayerX < mScrollZone) || (dragLayerX > mScrollView.getWidth() - mScrollZone)) {
+  mScrollState=SCROLL_WAITING_IN_ZONE;
+  mHandler.postDelayed(mScrollRunnable,SCROLL_DELAY);
+}
+ else {
+  mScrollState=SCROLL_OUTSIDE_ZONE;
+}
+handleMoveEvent(dragLayerX,dragLayerY);
+break;
+case MotionEvent.ACTION_MOVE:
+handleMoveEvent(dragLayerX,dragLayerY);
+break;
+case MotionEvent.ACTION_UP:
+handleMoveEvent(dragLayerX,dragLayerY);
+mHandler.removeCallbacks(mScrollRunnable);
+if (mDragging) {
+PointF vec=isFlingingToDelete(mDragObject.dragSource);
+if (!DeleteDropTarget.willAcceptDrop(mDragObject.dragInfo)) {
+vec=null;
+}
+if (vec != null) {
+dropOnFlingToDeleteTarget(dragLayerX,dragLayerY,vec);
+}
+ else {
+drop(dragLayerX,dragLayerY);
+}
+}
+endDrag();
+break;
+case MotionEvent.ACTION_CANCEL:
+mHandler.removeCallbacks(mScrollRunnable);
+cancelDrag();
+break;
+}
+return true;
+}

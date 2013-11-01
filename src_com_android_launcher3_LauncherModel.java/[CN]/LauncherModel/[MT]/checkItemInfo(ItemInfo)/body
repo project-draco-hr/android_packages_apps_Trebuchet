@@ -1,0 +1,13 @@
+{
+  final StackTraceElement[] stackTrace=new Throwable().getStackTrace();
+  final long itemId=item.id;
+  Runnable r=new Runnable(){
+    public void run(){
+synchronized (sBgLock) {
+        checkItemInfoLocked(itemId,item,stackTrace);
+      }
+    }
+  }
+;
+  runOnWorkerThread(r);
+}

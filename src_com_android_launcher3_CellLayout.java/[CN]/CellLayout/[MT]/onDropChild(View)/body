@@ -1,0 +1,7 @@
+{
+  if (child != null) {
+    LayoutParams lp=(LayoutParams)child.getLayoutParams();
+    lp.dropped=true;
+    child.requestLayout();
+  }
+}

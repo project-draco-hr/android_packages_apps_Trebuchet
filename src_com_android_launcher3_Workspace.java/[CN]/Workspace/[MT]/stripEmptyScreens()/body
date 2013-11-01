@@ -1,0 +1,37 @@
+{
+  if (isPageMoving()) {
+    mStripScreensOnPageStopMoving=true;
+    return;
+  }
+  int currentPage=getNextPage();
+  ArrayList<Long> removeScreens=new ArrayList<Long>();
+  for (  Long id : mWorkspaceScreens.keySet()) {
+    CellLayout cl=mWorkspaceScreens.get(id);
+    if (id >= 0 && cl.getShortcutsAndWidgets().getChildCount() == 0) {
+      removeScreens.add(id);
+    }
+  }
+  int minScreens=1 + numCustomPages();
+  int pageShift=0;
+  for (  Long id : removeScreens) {
+    CellLayout cl=mWorkspaceScreens.get(id);
+    mWorkspaceScreens.remove(id);
+    mScreenOrder.remove(id);
+    if (getChildCount() > minScreens) {
+      if (indexOfChild(cl) < currentPage) {
+        pageShift++;
+      }
+      removeView(cl);
+    }
+ else {
+      mWorkspaceScreens.put(EXTRA_EMPTY_SCREEN_ID,cl);
+      mScreenOrder.add(EXTRA_EMPTY_SCREEN_ID);
+    }
+  }
+  if (!removeScreens.isEmpty()) {
+    mLauncher.getModel().updateWorkspaceScreenOrder(mLauncher,mScreenOrder);
+  }
+  if (pageShift >= 0) {
+    setCurrentPage(currentPage - pageShift);
+  }
+}

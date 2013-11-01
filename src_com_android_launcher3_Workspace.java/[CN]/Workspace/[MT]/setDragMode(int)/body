@@ -1,0 +1,22 @@
+{
+  if (dragMode != mDragMode) {
+    if (dragMode == DRAG_MODE_NONE) {
+      cleanupAddToFolder();
+      cleanupReorder(false);
+      cleanupFolderCreation();
+    }
+ else     if (dragMode == DRAG_MODE_ADD_TO_FOLDER) {
+      cleanupReorder(true);
+      cleanupFolderCreation();
+    }
+ else     if (dragMode == DRAG_MODE_CREATE_FOLDER) {
+      cleanupAddToFolder();
+      cleanupReorder(true);
+    }
+ else     if (dragMode == DRAG_MODE_REORDER) {
+      cleanupAddToFolder();
+      cleanupFolderCreation();
+    }
+    mDragMode=dragMode;
+  }
+}

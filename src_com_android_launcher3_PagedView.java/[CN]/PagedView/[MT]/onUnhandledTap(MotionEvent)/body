@@ -1,0 +1,3 @@
+{
+  ((Launcher)getContext()).onClick(this);
+}

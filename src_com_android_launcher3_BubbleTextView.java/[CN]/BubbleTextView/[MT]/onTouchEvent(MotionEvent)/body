@@ -1,0 +1,26 @@
+{
+  boolean result=super.onTouchEvent(event);
+switch (event.getAction()) {
+case MotionEvent.ACTION_DOWN:
+    if (mPressedOrFocusedBackground == null) {
+      mPressedOrFocusedBackground=createGlowingOutline(mTempCanvas,mPressedGlowColor,mPressedOutlineColor);
+    }
+  if (isPressed()) {
+    mDidInvalidateForPressedState=true;
+    setCellLayoutPressedOrFocusedIcon();
+  }
+ else {
+    mDidInvalidateForPressedState=false;
+  }
+mLongPressHelper.postCheckForLongPress();
+break;
+case MotionEvent.ACTION_CANCEL:
+case MotionEvent.ACTION_UP:
+if (!isPressed()) {
+mPressedOrFocusedBackground=null;
+}
+mLongPressHelper.cancelLongPress();
+break;
+}
+return result;
+}

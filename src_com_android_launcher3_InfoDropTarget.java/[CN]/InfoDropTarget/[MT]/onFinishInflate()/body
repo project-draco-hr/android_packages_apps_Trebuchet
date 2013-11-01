@@ -1,0 +1,16 @@
+{
+  super.onFinishInflate();
+  mOriginalTextColor=getTextColors();
+  Resources r=getResources();
+  mHoverColor=r.getColor(R.color.info_target_hover_tint);
+  mDrawable=(TransitionDrawable)getCurrentDrawable();
+  if (null != mDrawable) {
+    mDrawable.setCrossFadeEnabled(true);
+  }
+  int orientation=getResources().getConfiguration().orientation;
+  if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+    if (!LauncherAppState.getInstance().isScreenLarge()) {
+      setText("");
+    }
+  }
+}

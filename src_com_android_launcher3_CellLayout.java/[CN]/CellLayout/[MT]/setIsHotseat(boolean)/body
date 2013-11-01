@@ -1,0 +1,4 @@
+{
+  mIsHotseat=isHotseat;
+  mShortcutsAndWidgets.setIsHotseat(isHotseat);
+}

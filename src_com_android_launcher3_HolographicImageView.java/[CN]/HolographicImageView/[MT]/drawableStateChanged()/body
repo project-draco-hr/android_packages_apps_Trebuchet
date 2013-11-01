@@ -1,0 +1,10 @@
+{
+  super.drawableStateChanged();
+  mHolographicHelper.generatePressedFocusedStates(this);
+  Drawable d=getDrawable();
+  if (d instanceof StateListDrawable) {
+    StateListDrawable sld=(StateListDrawable)d;
+    sld.setState(getDrawableState());
+    sld.invalidateSelf();
+  }
+}

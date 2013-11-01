@@ -1,0 +1,12 @@
+{
+  mWaitingForUninstall=false;
+  if (isUninstallFromWorkspace(d)) {
+    if (d.dragSource instanceof Folder) {
+      ((Folder)d.dragSource).deferCompleteDropAfterUninstallActivity();
+    }
+ else     if (d.dragSource instanceof Workspace) {
+      ((Workspace)d.dragSource).deferCompleteDropAfterUninstallActivity();
+    }
+    mWaitingForUninstall=true;
+  }
+}

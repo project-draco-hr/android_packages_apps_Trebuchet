@@ -1,0 +1,37 @@
+{
+  setup();
+  final ViewGroup tabsContainer=(ViewGroup)findViewById(R.id.tabs_container);
+  final TabWidget tabs=getTabWidget();
+  final AppsCustomizePagedView appsCustomizePane=(AppsCustomizePagedView)findViewById(R.id.apps_customize_pane_content);
+  mTabs=tabs;
+  mTabsContainer=tabsContainer;
+  mAppsCustomizePane=appsCustomizePane;
+  mAnimationBuffer=(FrameLayout)findViewById(R.id.animation_buffer);
+  mContent=(LinearLayout)findViewById(R.id.apps_customize_content);
+  if (tabs == null || mAppsCustomizePane == null)   throw new Resources.NotFoundException();
+  TabContentFactory contentFactory=new TabContentFactory(){
+    public View createTabContent(    String tag){
+      return appsCustomizePane;
+    }
+  }
+;
+  TextView tabView;
+  String label;
+  label=getContext().getString(R.string.all_apps_button_label);
+  tabView=(TextView)mLayoutInflater.inflate(R.layout.tab_widget_indicator,tabs,false);
+  tabView.setText(label);
+  tabView.setContentDescription(label);
+  addTab(newTabSpec(APPS_TAB_TAG).setIndicator(tabView).setContent(contentFactory));
+  label=getContext().getString(R.string.widgets_tab_label);
+  tabView=(TextView)mLayoutInflater.inflate(R.layout.tab_widget_indicator,tabs,false);
+  tabView.setText(label);
+  tabView.setContentDescription(label);
+  addTab(newTabSpec(WIDGETS_TAB_TAG).setIndicator(tabView).setContent(contentFactory));
+  setOnTabChangedListener(this);
+  AppsCustomizeTabKeyEventListener keyListener=new AppsCustomizeTabKeyEventListener();
+  View lastTab=tabs.getChildTabViewAt(tabs.getTabCount() - 1);
+  lastTab.setOnKeyListener(keyListener);
+  View shopButton=findViewById(R.id.market_button);
+  shopButton.setOnKeyListener(keyListener);
+  mTabsContainer.setAlpha(0f);
+}

@@ -1,0 +1,4 @@
+AppWidgetProviderInfo info
+int maxWidth
+int[] cellSpan
+WidgetPreviewLoader loader

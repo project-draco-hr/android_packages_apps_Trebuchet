@@ -1,0 +1,17 @@
+{
+  if (DEBUG_LOADERS) {
+    Log.d(TAG,"loadAndBindAllApps mAllAppsLoaded=" + mAllAppsLoaded);
+  }
+  if (!mAllAppsLoaded) {
+    loadAllApps();
+synchronized (LoaderTask.this) {
+      if (mStopped) {
+        return;
+      }
+      mAllAppsLoaded=true;
+    }
+  }
+ else {
+    onlyBindAllApps();
+  }
+}

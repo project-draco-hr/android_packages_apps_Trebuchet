@@ -1,0 +1,4 @@
+{
+  String settings=getResources().getString(R.string.settings_button_text);
+  return getCurrentPageDescription() + ", " + settings;
+}

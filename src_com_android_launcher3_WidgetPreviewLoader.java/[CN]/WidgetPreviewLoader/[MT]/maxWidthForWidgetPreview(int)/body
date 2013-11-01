@@ -1,0 +1,3 @@
+{
+  return Math.min(mPreviewBitmapWidth,mWidgetSpacingLayout.estimateCellWidth(spanX));
+}

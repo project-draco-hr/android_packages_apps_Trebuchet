@@ -1,0 +1,3 @@
+{
+  return Base64.encodeToString(Key.toByteArray(key),Base64.NO_WRAP);
+}

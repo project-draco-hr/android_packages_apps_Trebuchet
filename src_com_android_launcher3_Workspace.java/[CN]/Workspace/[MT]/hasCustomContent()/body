@@ -1,0 +1,3 @@
+{
+  return (mScreenOrder.size() > 0 && mScreenOrder.get(0) == CUSTOM_CONTENT_SCREEN_ID);
+}

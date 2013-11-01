@@ -1,0 +1,5 @@
+{
+  mPropertiesToSet.add(Properties.ROTATION_Y);
+  mRotationY=value;
+  return this;
+}

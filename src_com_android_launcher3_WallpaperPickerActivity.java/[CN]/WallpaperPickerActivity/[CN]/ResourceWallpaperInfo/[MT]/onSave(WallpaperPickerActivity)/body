@@ -1,0 +1,4 @@
+{
+  boolean finishActivityWhenDone=true;
+  a.cropImageAndSetWallpaper(mResources,mResId,finishActivityWhenDone);
+}

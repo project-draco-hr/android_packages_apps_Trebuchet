@@ -1,0 +1,5 @@
+{
+  mLauncher=launcher;
+  mAlarm=new Alarm();
+  mAlarm.setOnAlarmListener(this);
+}

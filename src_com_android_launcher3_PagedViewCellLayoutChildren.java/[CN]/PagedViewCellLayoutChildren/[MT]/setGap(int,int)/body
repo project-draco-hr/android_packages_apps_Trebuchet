@@ -1,0 +1,5 @@
+{
+  mWidthGap=widthGap;
+  mHeightGap=heightGap;
+  requestLayout();
+}

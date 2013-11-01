@@ -1,0 +1,3 @@
+def print_intent(out, id, i, cell):
+    if cell:
+        out.write(('<span class="intent" title="%s">shortcut</span>' % cgi.escape(cell, True)))

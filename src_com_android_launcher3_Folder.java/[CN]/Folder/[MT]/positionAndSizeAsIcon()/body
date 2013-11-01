@@ -1,0 +1,7 @@
+{
+  if (!(getParent() instanceof DragLayer))   return;
+  setScaleX(0.8f);
+  setScaleY(0.8f);
+  setAlpha(0f);
+  mState=STATE_SMALL;
+}

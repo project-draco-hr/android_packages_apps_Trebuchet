@@ -1,0 +1,9 @@
+{
+  int numScrollingPages=getChildCount() - numCustomPages();
+  if (numScrollingPages >= MIN_PARALLAX_PAGE_SPAN && hasExtraEmptyScreen()) {
+    return 1;
+  }
+ else {
+    return 0;
+  }
+}

@@ -1,0 +1,27 @@
+{
+  int[] targetDestination=new int[2];
+  findNearestArea(dragViewCenterX,dragViewCenterY,spanX,spanY,targetDestination);
+  Rect dragRect=new Rect();
+  regionToRect(targetDestination[0],targetDestination[1],spanX,spanY,dragRect);
+  dragRect.offset(dragViewCenterX - dragRect.centerX(),dragViewCenterY - dragRect.centerY());
+  Rect dropRegionRect=new Rect();
+  getViewsIntersectingRegion(targetDestination[0],targetDestination[1],spanX,spanY,dragView,dropRegionRect,mIntersectingViews);
+  int dropRegionSpanX=dropRegionRect.width();
+  int dropRegionSpanY=dropRegionRect.height();
+  regionToRect(dropRegionRect.left,dropRegionRect.top,dropRegionRect.width(),dropRegionRect.height(),dropRegionRect);
+  int deltaX=(dropRegionRect.centerX() - dragViewCenterX) / spanX;
+  int deltaY=(dropRegionRect.centerY() - dragViewCenterY) / spanY;
+  if (dropRegionSpanX == mCountX || spanX == mCountX) {
+    deltaX=0;
+  }
+  if (dropRegionSpanY == mCountY || spanY == mCountY) {
+    deltaY=0;
+  }
+  if (deltaX == 0 && deltaY == 0) {
+    resultDirection[0]=1;
+    resultDirection[1]=0;
+  }
+ else {
+    computeDirectionVector(deltaX,deltaY,resultDirection);
+  }
+}

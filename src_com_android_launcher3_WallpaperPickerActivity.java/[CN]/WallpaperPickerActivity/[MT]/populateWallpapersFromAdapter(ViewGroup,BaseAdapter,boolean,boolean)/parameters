@@ -1,0 +1,4 @@
+ViewGroup parent
+BaseAdapter adapter
+boolean addLongPressHandler
+boolean selectFirstTile

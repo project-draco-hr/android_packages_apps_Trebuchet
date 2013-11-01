@@ -1,0 +1,6 @@
+{
+  if (mFolderOuterRings.contains(fra)) {
+    mFolderOuterRings.remove(fra);
+  }
+  invalidate();
+}

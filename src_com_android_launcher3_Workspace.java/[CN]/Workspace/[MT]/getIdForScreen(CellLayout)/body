@@ -1,0 +1,10 @@
+{
+  Iterator<Long> iter=mWorkspaceScreens.keySet().iterator();
+  while (iter.hasNext()) {
+    long id=iter.next();
+    if (mWorkspaceScreens.get(id) == layout) {
+      return id;
+    }
+  }
+  return -1;
+}

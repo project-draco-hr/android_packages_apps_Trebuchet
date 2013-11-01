@@ -1,0 +1,216 @@
+{
+  if (DISABLE_TOUCH_INTERACTION) {
+    return false;
+  }
+  super.onTouchEvent(ev);
+  if (getChildCount() <= 0)   return super.onTouchEvent(ev);
+  acquireVelocityTrackerAndAddMovement(ev);
+  final int action=ev.getAction();
+switch (action & MotionEvent.ACTION_MASK) {
+case MotionEvent.ACTION_DOWN:
+    if (!mScroller.isFinished()) {
+      mScroller.abortAnimation();
+    }
+  mDownMotionX=mLastMotionX=ev.getX();
+mDownMotionY=mLastMotionY=ev.getY();
+mDownScrollX=getScrollX();
+float[] p=mapPointFromViewToParent(this,mLastMotionX,mLastMotionY);
+mParentDownMotionX=p[0];
+mParentDownMotionY=p[1];
+mLastMotionXRemainder=0;
+mTotalMotionX=0;
+mActivePointerId=ev.getPointerId(0);
+if (mTouchState == TOUCH_STATE_SCROLLING) {
+pageBeginMoving();
+}
+break;
+case MotionEvent.ACTION_MOVE:
+if (mTouchState == TOUCH_STATE_SCROLLING) {
+final int pointerIndex=ev.findPointerIndex(mActivePointerId);
+if (pointerIndex == -1) return true;
+final float x=ev.getX(pointerIndex);
+final float deltaX=mLastMotionX + mLastMotionXRemainder - x;
+mTotalMotionX+=Math.abs(deltaX);
+if (Math.abs(deltaX) >= 1.0f) {
+mTouchX+=deltaX;
+mSmoothingTime=System.nanoTime() / NANOTIME_DIV;
+if (!mDeferScrollUpdate) {
+scrollBy((int)deltaX,0);
+if (DEBUG) Log.d(TAG,"onTouchEvent().Scrolling: " + deltaX);
+}
+ else {
+invalidate();
+}
+mLastMotionX=x;
+mLastMotionXRemainder=deltaX - (int)deltaX;
+}
+ else {
+awakenScrollBars();
+}
+}
+ else if (mTouchState == TOUCH_STATE_REORDERING) {
+mLastMotionX=ev.getX();
+mLastMotionY=ev.getY();
+float[] pt=mapPointFromViewToParent(this,mLastMotionX,mLastMotionY);
+mParentDownMotionX=pt[0];
+mParentDownMotionY=pt[1];
+updateDragViewTranslationDuringDrag();
+final int dragViewIndex=indexOfChild(mDragView);
+boolean isHoveringOverDelete=isHoveringOverDeleteDropTarget((int)mParentDownMotionX,(int)mParentDownMotionY);
+setPageHoveringOverDeleteDropTarget(dragViewIndex,isHoveringOverDelete);
+if (DEBUG) Log.d(TAG,"mLastMotionX: " + mLastMotionX);
+if (DEBUG) Log.d(TAG,"mLastMotionY: " + mLastMotionY);
+if (DEBUG) Log.d(TAG,"mParentDownMotionX: " + mParentDownMotionX);
+if (DEBUG) Log.d(TAG,"mParentDownMotionY: " + mParentDownMotionY);
+final int pageUnderPointIndex=getNearestHoverOverPageIndex();
+if (pageUnderPointIndex > -1 && pageUnderPointIndex != indexOfChild(mDragView) && !isHoveringOverDelete) {
+mTempVisiblePagesRange[0]=0;
+mTempVisiblePagesRange[1]=getPageCount() - 1;
+getOverviewModePages(mTempVisiblePagesRange);
+if (mTempVisiblePagesRange[0] <= pageUnderPointIndex && pageUnderPointIndex <= mTempVisiblePagesRange[1] && pageUnderPointIndex != mSidePageHoverIndex && mScroller.isFinished()) {
+mSidePageHoverIndex=pageUnderPointIndex;
+mSidePageHoverRunnable=new Runnable(){
+@Override public void run(){
+snapToPage(pageUnderPointIndex);
+int shiftDelta=(dragViewIndex < pageUnderPointIndex) ? -1 : 1;
+int lowerIndex=(dragViewIndex < pageUnderPointIndex) ? dragViewIndex + 1 : pageUnderPointIndex;
+int upperIndex=(dragViewIndex > pageUnderPointIndex) ? dragViewIndex - 1 : pageUnderPointIndex;
+for (int i=lowerIndex; i <= upperIndex; ++i) {
+View v=getChildAt(i);
+int oldX=getViewportOffsetX() + getChildOffset(i);
+int newX=getViewportOffsetX() + getChildOffset(i + shiftDelta);
+AnimatorSet anim=(AnimatorSet)v.getTag(ANIM_TAG_KEY);
+if (anim != null) {
+anim.cancel();
+}
+v.setTranslationX(oldX - newX);
+anim=new AnimatorSet();
+anim.setDuration(REORDERING_REORDER_REPOSITION_DURATION);
+anim.playTogether(ObjectAnimator.ofFloat(v,"translationX",0f));
+anim.start();
+v.setTag(anim);
+}
+removeView(mDragView);
+onRemoveView(mDragView,false);
+addView(mDragView,pageUnderPointIndex);
+onAddView(mDragView,pageUnderPointIndex);
+mSidePageHoverIndex=-1;
+mPageIndicator.setActiveMarker(getNextPage());
+}
+}
+;
+postDelayed(mSidePageHoverRunnable,REORDERING_SIDE_PAGE_HOVER_TIMEOUT);
+}
+}
+ else {
+removeCallbacks(mSidePageHoverRunnable);
+mSidePageHoverIndex=-1;
+}
+}
+ else {
+determineScrollingStart(ev);
+}
+break;
+case MotionEvent.ACTION_UP:
+if (mTouchState == TOUCH_STATE_SCROLLING) {
+final int activePointerId=mActivePointerId;
+final int pointerIndex=ev.findPointerIndex(activePointerId);
+final float x=ev.getX(pointerIndex);
+final VelocityTracker velocityTracker=mVelocityTracker;
+velocityTracker.computeCurrentVelocity(1000,mMaximumVelocity);
+int velocityX=(int)velocityTracker.getXVelocity(activePointerId);
+final int deltaX=(int)(x - mDownMotionX);
+final int pageWidth=getPageAt(mCurrentPage).getMeasuredWidth();
+boolean isSignificantMove=Math.abs(deltaX) > pageWidth * SIGNIFICANT_MOVE_THRESHOLD;
+mTotalMotionX+=Math.abs(mLastMotionX + mLastMotionXRemainder - x);
+boolean isFling=mTotalMotionX > MIN_LENGTH_FOR_FLING && Math.abs(velocityX) > mFlingThresholdVelocity;
+if (!mFreeScroll) {
+boolean returnToOriginalPage=false;
+if (Math.abs(deltaX) > pageWidth * RETURN_TO_ORIGINAL_PAGE_THRESHOLD && Math.signum(velocityX) != Math.signum(deltaX) && isFling) {
+returnToOriginalPage=true;
+}
+int finalPage;
+final boolean isRtl=isLayoutRtl();
+boolean isDeltaXLeft=isRtl ? deltaX > 0 : deltaX < 0;
+boolean isVelocityXLeft=isRtl ? velocityX > 0 : velocityX < 0;
+if (((isSignificantMove && !isDeltaXLeft && !isFling) || (isFling && !isVelocityXLeft)) && mCurrentPage > 0) {
+finalPage=returnToOriginalPage ? mCurrentPage : mCurrentPage - 1;
+snapToPageWithVelocity(finalPage,velocityX);
+}
+ else if (((isSignificantMove && isDeltaXLeft && !isFling) || (isFling && isVelocityXLeft)) && mCurrentPage < getChildCount() - 1) {
+finalPage=returnToOriginalPage ? mCurrentPage : mCurrentPage + 1;
+snapToPageWithVelocity(finalPage,velocityX);
+}
+ else {
+snapToDestination();
+}
+}
+ else if (mTouchState == TOUCH_STATE_PREV_PAGE) {
+int nextPage=Math.max(0,mCurrentPage - 1);
+if (nextPage != mCurrentPage) {
+snapToPage(nextPage);
+}
+ else {
+snapToDestination();
+}
+}
+ else {
+if (!mScroller.isFinished()) {
+mScroller.abortAnimation();
+}
+float scaleX=getScaleX();
+int vX=(int)(-velocityX * scaleX);
+int initialScrollX=(int)(getScrollX() * scaleX);
+mScroller.fling(initialScrollX,getScrollY(),vX,0,Integer.MIN_VALUE,Integer.MAX_VALUE,0,0);
+invalidate();
+}
+}
+ else if (mTouchState == TOUCH_STATE_NEXT_PAGE) {
+int nextPage=Math.min(getChildCount() - 1,mCurrentPage + 1);
+if (nextPage != mCurrentPage) {
+snapToPage(nextPage);
+}
+ else {
+snapToDestination();
+}
+}
+ else if (mTouchState == TOUCH_STATE_REORDERING) {
+mLastMotionX=ev.getX();
+mLastMotionY=ev.getY();
+float[] pt=mapPointFromViewToParent(this,mLastMotionX,mLastMotionY);
+mParentDownMotionX=pt[0];
+mParentDownMotionY=pt[1];
+updateDragViewTranslationDuringDrag();
+boolean handledFling=false;
+if (!DISABLE_FLING_TO_DELETE) {
+PointF flingToDeleteVector=isFlingingToDelete();
+if (flingToDeleteVector != null) {
+onFlingToDelete(flingToDeleteVector);
+handledFling=true;
+}
+}
+if (!handledFling && isHoveringOverDeleteDropTarget((int)mParentDownMotionX,(int)mParentDownMotionY)) {
+onDropToDelete();
+}
+}
+ else {
+if (!mCancelTap) {
+onUnhandledTap(ev);
+}
+}
+removeCallbacks(mSidePageHoverRunnable);
+resetTouchState();
+break;
+case MotionEvent.ACTION_CANCEL:
+if (mTouchState == TOUCH_STATE_SCROLLING) {
+snapToDestination();
+}
+resetTouchState();
+break;
+case MotionEvent.ACTION_POINTER_UP:
+onSecondaryPointerUp(ev);
+releaseVelocityTracker();
+break;
+}
+return true;
+}

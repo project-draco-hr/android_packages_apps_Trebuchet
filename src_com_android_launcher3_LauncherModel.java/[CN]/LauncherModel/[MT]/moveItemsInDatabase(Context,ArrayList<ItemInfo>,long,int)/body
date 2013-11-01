@@ -1,0 +1,21 @@
+{
+  ArrayList<ContentValues> contentValues=new ArrayList<ContentValues>();
+  int count=items.size();
+  for (int i=0; i < count; i++) {
+    ItemInfo item=items.get(i);
+    item.container=container;
+    if (context instanceof Launcher && screen < 0 && container == LauncherSettings.Favorites.CONTAINER_HOTSEAT) {
+      item.screenId=((Launcher)context).getHotseat().getOrderInHotseat(item.cellX,item.cellY);
+    }
+ else {
+      item.screenId=screen;
+    }
+    final ContentValues values=new ContentValues();
+    values.put(LauncherSettings.Favorites.CONTAINER,item.container);
+    values.put(LauncherSettings.Favorites.CELLX,item.cellX);
+    values.put(LauncherSettings.Favorites.CELLY,item.cellY);
+    values.put(LauncherSettings.Favorites.SCREEN,item.screenId);
+    contentValues.add(values);
+  }
+  updateItemsInDatabaseHelper(context,contentValues,items,"moveItemInDatabase");
+}

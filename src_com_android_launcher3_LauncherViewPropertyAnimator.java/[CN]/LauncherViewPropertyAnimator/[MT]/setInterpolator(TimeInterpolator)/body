@@ -1,0 +1,4 @@
+{
+  mPropertiesToSet.add(Properties.INTERPOLATOR);
+  mInterpolator=value;
+}

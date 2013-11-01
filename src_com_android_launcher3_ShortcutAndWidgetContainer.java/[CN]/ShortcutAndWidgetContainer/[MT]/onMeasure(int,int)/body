@@ -1,0 +1,12 @@
+{
+  int count=getChildCount();
+  int widthSpecSize=MeasureSpec.getSize(widthMeasureSpec);
+  int heightSpecSize=MeasureSpec.getSize(heightMeasureSpec);
+  setMeasuredDimension(widthSpecSize,heightSpecSize);
+  for (int i=0; i < count; i++) {
+    View child=getChildAt(i);
+    if (child.getVisibility() != GONE) {
+      measureChild(child);
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  super.dispatchDraw(canvas);
+  if (mInScrollArea && !LauncherAppState.getInstance().isScreenLarge()) {
+    Workspace workspace=mLauncher.getWorkspace();
+    int width=getMeasuredWidth();
+    Rect childRect=new Rect();
+    getDescendantRectRelativeToSelf(workspace.getChildAt(0),childRect);
+    int page=workspace.getNextPage();
+    final boolean isRtl=isLayoutRtl();
+    CellLayout leftPage=(CellLayout)workspace.getChildAt(isRtl ? page + 1 : page - 1);
+    CellLayout rightPage=(CellLayout)workspace.getChildAt(isRtl ? page - 1 : page + 1);
+    if (leftPage != null && leftPage.getIsDragOverlapping()) {
+      mLeftHoverDrawable.setBounds(0,childRect.top,mLeftHoverDrawable.getIntrinsicWidth(),childRect.bottom);
+      mLeftHoverDrawable.draw(canvas);
+    }
+ else     if (rightPage != null && rightPage.getIsDragOverlapping()) {
+      mRightHoverDrawable.setBounds(width - mRightHoverDrawable.getIntrinsicWidth(),childRect.top,width,childRect.bottom);
+      mRightHoverDrawable.draw(canvas);
+    }
+  }
+}

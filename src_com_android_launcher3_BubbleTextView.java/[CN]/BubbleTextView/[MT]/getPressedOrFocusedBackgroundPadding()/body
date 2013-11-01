@@ -1,0 +1,3 @@
+{
+  return mOutlineHelper.mMaxOuterBlurRadius / 2;
+}

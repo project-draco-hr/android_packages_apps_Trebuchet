@@ -1,0 +1,17 @@
+{
+  if (dropTarget != null) {
+    if (mLastDropTarget != dropTarget) {
+      if (mLastDropTarget != null) {
+        mLastDropTarget.onDragExit(mDragObject);
+      }
+      dropTarget.onDragEnter(mDragObject);
+    }
+    dropTarget.onDragOver(mDragObject);
+  }
+ else {
+    if (mLastDropTarget != null) {
+      mLastDropTarget.onDragExit(mDragObject);
+    }
+  }
+  mLastDropTarget=dropTarget;
+}

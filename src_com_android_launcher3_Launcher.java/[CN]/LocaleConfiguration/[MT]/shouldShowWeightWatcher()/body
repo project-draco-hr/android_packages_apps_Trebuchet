@@ -1,0 +1,6 @@
+{
+  String spKey=LauncherAppState.getSharedPreferencesKey();
+  SharedPreferences sp=getSharedPreferences(spKey,Context.MODE_PRIVATE);
+  boolean show=sp.getBoolean(SHOW_WEIGHT_WATCHER,SHOW_WEIGHT_WATCHER_DEFAULT);
+  return show;
+}

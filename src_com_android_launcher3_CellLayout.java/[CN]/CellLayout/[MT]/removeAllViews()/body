@@ -1,0 +1,4 @@
+{
+  clearOccupiedCells();
+  mShortcutsAndWidgets.removeAllViews();
+}

@@ -1,0 +1,23 @@
+{
+  if (!mIsInitialized) {
+    mLauncher=l;
+    mScrimView=scrim;
+    mBackgroundColor=0xdd000000;
+    setOnLongClickListener(this);
+    setOnClickListener(this);
+    setOnTouchListener(this);
+    mErasePaint=new Paint();
+    mErasePaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.MULTIPLY));
+    mErasePaint.setColor(0xFFFFFF);
+    mErasePaint.setAlpha(0);
+    mErasePaint.setAntiAlias(true);
+    int circleColor=getResources().getColor(R.color.first_run_cling_circle_background_color);
+    mBubblePaint=new Paint();
+    mBubblePaint.setColor(circleColor);
+    mBubblePaint.setAntiAlias(true);
+    mDotPaint=new Paint();
+    mDotPaint.setColor(0x72BBED);
+    mDotPaint.setAntiAlias(true);
+    mIsInitialized=true;
+  }
+}

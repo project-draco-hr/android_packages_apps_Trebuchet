@@ -1,0 +1,4 @@
+{
+  mAnimator.end();
+  mDirection=STOPPED;
+}

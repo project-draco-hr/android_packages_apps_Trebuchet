@@ -1,0 +1,8 @@
+def get_favorites(conn):
+    c = conn.cursor()
+    c.execute('SELECT * FROM favorites')
+    columns = [d[0] for d in c.description]
+    rows = []
+    for row in c:
+        rows.append(row)
+    return (columns, rows)

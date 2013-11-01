@@ -1,0 +1,9 @@
+{
+  super(context,attrs);
+  pssPaint=new Paint();
+  pssPaint.setColor(RAM_GRAPH_PSS_COLOR);
+  ussPaint=new Paint();
+  ussPaint.setColor(RAM_GRAPH_RSS_COLOR);
+  headPaint=new Paint();
+  headPaint.setColor(Color.WHITE);
+}

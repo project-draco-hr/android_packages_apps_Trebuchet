@@ -1,0 +1,6 @@
+{
+  if (isSmall() || !isFinishedSwitchingState()) {
+    return false;
+  }
+  return super.dispatchUnhandledMove(focused,direction);
+}

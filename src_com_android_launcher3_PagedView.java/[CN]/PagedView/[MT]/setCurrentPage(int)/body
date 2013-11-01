@@ -1,0 +1,14 @@
+{
+  if (!mScroller.isFinished()) {
+    mScroller.abortAnimation();
+    mNextPage=INVALID_PAGE;
+  }
+  if (getChildCount() == 0) {
+    return;
+  }
+  mForceScreenScrolled=true;
+  mCurrentPage=Math.max(0,Math.min(currentPage,getPageCount() - 1));
+  updateCurrentPageScroll();
+  notifyPageSwitchListener();
+  invalidate();
+}

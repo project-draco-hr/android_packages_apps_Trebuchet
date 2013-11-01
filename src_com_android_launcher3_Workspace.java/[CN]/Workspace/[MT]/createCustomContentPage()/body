@@ -1,0 +1,15 @@
+{
+  CellLayout customScreen=(CellLayout)mLauncher.getLayoutInflater().inflate(R.layout.workspace_screen,null);
+  mWorkspaceScreens.put(CUSTOM_CONTENT_SCREEN_ID,customScreen);
+  mScreenOrder.add(0,CUSTOM_CONTENT_SCREEN_ID);
+  customScreen.setPadding(0,0,0,0);
+  addFullScreenPage(customScreen);
+  mDefaultPage=mOriginalDefaultPage + 1;
+  mLauncher.updateCustomContentHintVisibility();
+  if (mRestorePage != INVALID_RESTORE_PAGE) {
+    mRestorePage=mRestorePage + 1;
+  }
+ else {
+    setCurrentPage(getCurrentPage() + 1);
+  }
+}

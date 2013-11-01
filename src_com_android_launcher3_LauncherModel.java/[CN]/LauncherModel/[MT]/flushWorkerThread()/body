@@ -1,0 +1,29 @@
+{
+  mFlushingWorkerThread=true;
+  Runnable waiter=new Runnable(){
+    public void run(){
+synchronized (this) {
+        notifyAll();
+        mFlushingWorkerThread=false;
+      }
+    }
+  }
+;
+synchronized (waiter) {
+    runOnWorkerThread(waiter);
+    if (mLoaderTask != null) {
+synchronized (mLoaderTask) {
+        mLoaderTask.notify();
+      }
+    }
+    boolean success=false;
+    while (!success) {
+      try {
+        waiter.wait();
+        success=true;
+      }
+ catch (      InterruptedException e) {
+      }
+    }
+  }
+}

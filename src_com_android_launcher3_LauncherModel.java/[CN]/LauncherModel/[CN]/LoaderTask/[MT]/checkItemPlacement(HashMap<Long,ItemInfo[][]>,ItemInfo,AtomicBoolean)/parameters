@@ -1,0 +1,3 @@
+HashMap<Long,ItemInfo[][]> occupied
+ItemInfo item
+AtomicBoolean deleteOnItemOverlap

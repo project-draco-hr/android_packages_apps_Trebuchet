@@ -1,0 +1,4 @@
+{
+  setCurrentDragOverlappingLayout(null);
+  mInScrollArea=false;
+}

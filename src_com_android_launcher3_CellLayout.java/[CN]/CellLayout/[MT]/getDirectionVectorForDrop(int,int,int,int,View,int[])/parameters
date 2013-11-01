@@ -1,0 +1,6 @@
+int dragViewCenterX
+int dragViewCenterY
+int spanX
+int spanY
+View dragView
+int[] resultDirection

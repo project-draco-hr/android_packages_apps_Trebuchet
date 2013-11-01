@@ -1,0 +1,4 @@
+{
+  removeWidgetToAutoAdvance(launcherInfo.hostView);
+  launcherInfo.hostView=null;
+}

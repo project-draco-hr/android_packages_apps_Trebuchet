@@ -1,0 +1,8 @@
+{
+  if (mWorkspace != null) {
+    return mWorkspace.getCurrentPage();
+  }
+ else {
+    return SCREEN_COUNT / 2;
+  }
+}

@@ -1,0 +1,11 @@
+{
+  State state=State.WORKSPACE;
+  final State[] stateValues=State.values();
+  for (int i=0; i < stateValues.length; i++) {
+    if (stateValues[i].ordinal() == stateOrdinal) {
+      state=stateValues[i];
+      break;
+    }
+  }
+  return state;
+}

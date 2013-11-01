@@ -1,0 +1,4 @@
+{
+  DragLayer dragLayer=mLauncher.getDragLayer();
+  dragLayer.clearAllResizeFrames();
+}

@@ -1,0 +1,3 @@
+{
+  return getPaddingLeft() + getPaddingRight() + (mCountX * mCellWidth)+ (Math.max((mCountX - 1),0) * mWidthGap);
+}

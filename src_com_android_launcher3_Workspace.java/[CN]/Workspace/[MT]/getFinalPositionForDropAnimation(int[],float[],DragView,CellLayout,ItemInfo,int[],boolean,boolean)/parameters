@@ -1,0 +1,8 @@
+int[] loc
+float[] scaleXY
+DragView dragView
+CellLayout layout
+ItemInfo info
+int[] targetCell
+boolean external
+boolean scale

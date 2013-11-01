@@ -1,0 +1,10 @@
+{
+  CRC32 checksum=new CRC32();
+  checksum.update(key.type);
+  checksum.update((int)(key.id & 0xffff));
+  checksum.update((int)((key.id >> 32) & 0xffff));
+  if (!TextUtils.isEmpty(key.name)) {
+    checksum.update(key.name.getBytes());
+  }
+  return checksum.getValue();
+}

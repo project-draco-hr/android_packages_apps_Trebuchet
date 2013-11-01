@@ -1,0 +1,12 @@
+{
+  mAppsCustomizePane.onLauncherTransitionEnd(l,animated,toWorkspace);
+  mInTransition=false;
+  if (animated) {
+    setLayerType(LAYER_TYPE_NONE,null);
+  }
+  if (!toWorkspace) {
+    mAppsCustomizePane.showAllAppsCling();
+    mAppsCustomizePane.loadAssociatedPages(mAppsCustomizePane.getCurrentPage());
+    setVisibilityOfSiblingsWithLowerZOrder(INVISIBLE);
+  }
+}

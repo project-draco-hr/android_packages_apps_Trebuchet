@@ -1,0 +1,6 @@
+{
+  if (mPressedIcon != null) {
+    mPressedIcon.resetDrawableState();
+  }
+  mPressedIcon=icon;
+}

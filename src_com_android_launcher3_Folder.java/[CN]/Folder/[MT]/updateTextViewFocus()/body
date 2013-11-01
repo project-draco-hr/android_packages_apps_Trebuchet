@@ -1,0 +1,10 @@
+{
+  View lastChild=getItemAt(getItemCount() - 1);
+  getItemAt(getItemCount() - 1);
+  if (lastChild != null) {
+    mFolderName.setNextFocusDownId(lastChild.getId());
+    mFolderName.setNextFocusRightId(lastChild.getId());
+    mFolderName.setNextFocusLeftId(lastChild.getId());
+    mFolderName.setNextFocusUpId(lastChild.getId());
+  }
+}

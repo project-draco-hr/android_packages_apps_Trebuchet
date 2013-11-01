@@ -1,0 +1,5 @@
+ArrayList<View> views
+Rect rectOccupiedByPotentialDrop
+int[] direction
+View dragView
+ItemConfiguration currentState

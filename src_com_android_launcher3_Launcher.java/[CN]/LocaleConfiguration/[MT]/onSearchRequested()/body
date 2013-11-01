@@ -1,0 +1,4 @@
+{
+  startSearch(null,false,null,true);
+  return true;
+}

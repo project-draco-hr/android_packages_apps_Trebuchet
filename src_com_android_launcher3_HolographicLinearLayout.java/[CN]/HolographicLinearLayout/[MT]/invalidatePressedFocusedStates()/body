@@ -1,0 +1,4 @@
+{
+  mHolographicHelper.invalidatePressedFocusedStates(mImageView);
+  invalidate();
+}

@@ -1,0 +1,7 @@
+{
+synchronized (mLock) {
+    stopLoaderLocked();
+    if (resetAllAppsLoaded)     mAllAppsLoaded=false;
+    if (resetWorkspaceLoaded)     mWorkspaceLoaded=false;
+  }
+}

@@ -1,0 +1,11 @@
+{
+  boolean success=false;
+  try {
+    success=startActivity(v,intent,tag);
+  }
+ catch (  ActivityNotFoundException e) {
+    Toast.makeText(this,R.string.activity_not_found,Toast.LENGTH_SHORT).show();
+    Log.e(TAG,"Unable to launch. tag=" + tag + " intent="+ intent,e);
+  }
+  return success;
+}

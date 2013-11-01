@@ -1,0 +1,5 @@
+{
+  mShadowsEnabled=enabled;
+  getPaint().clearShadowLayer();
+  invalidate();
+}

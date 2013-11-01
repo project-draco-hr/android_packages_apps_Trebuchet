@@ -1,0 +1,4 @@
+{
+  mText.setText("(" + mPid + (mPid == android.os.Process.myPid() ? "/A" : "/S")+ ") up "+ getUptimeString()+ " P="+ mMemInfo.currentPss+ " U="+ mMemInfo.currentUss);
+  mRamGraph.invalidate();
+}

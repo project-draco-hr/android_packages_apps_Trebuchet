@@ -1,0 +1,4 @@
+int viewWidth
+int viewHeight
+int drawableWidth
+int drawableHeight

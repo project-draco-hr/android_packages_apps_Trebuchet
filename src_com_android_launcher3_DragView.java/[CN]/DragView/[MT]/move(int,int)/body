@@ -1,0 +1,4 @@
+{
+  setTranslationX(touchX - mRegistrationX + (int)mOffsetX);
+  setTranslationY(touchY - mRegistrationY + (int)mOffsetY);
+}

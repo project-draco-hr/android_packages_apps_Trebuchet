@@ -1,0 +1,4 @@
+{
+  mNumWidgetPages=(int)Math.ceil(mWidgets.size() / (float)(mWidgetCountX * mWidgetCountY));
+  mNumAppsPages=(int)Math.ceil((float)mApps.size() / (mCellCountX * mCellCountY));
+}

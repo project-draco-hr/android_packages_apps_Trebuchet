@@ -1,0 +1,9 @@
+{
+  if (getParent() instanceof ShortcutAndWidgetContainer) {
+    ShortcutAndWidgetContainer parent=(ShortcutAndWidgetContainer)getParent();
+    if (parent != null) {
+      CellLayout layout=(CellLayout)parent.getParent();
+      layout.setPressedOrFocusedIcon((mPressedOrFocusedBackground != null) ? this : null);
+    }
+  }
+}

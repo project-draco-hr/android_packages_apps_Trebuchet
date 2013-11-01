@@ -1,0 +1,6 @@
+{
+  if (alpha != mBackgroundAlpha) {
+    mBackgroundAlpha=alpha;
+    invalidate();
+  }
+}

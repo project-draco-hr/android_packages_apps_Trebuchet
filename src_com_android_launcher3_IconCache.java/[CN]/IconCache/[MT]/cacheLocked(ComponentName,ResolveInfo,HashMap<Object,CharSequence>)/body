@@ -1,0 +1,22 @@
+{
+  CacheEntry entry=mCache.get(componentName);
+  if (entry == null) {
+    entry=new CacheEntry();
+    mCache.put(componentName,entry);
+    ComponentName key=LauncherModel.getComponentNameFromResolveInfo(info);
+    if (labelCache != null && labelCache.containsKey(key)) {
+      entry.title=labelCache.get(key).toString();
+    }
+ else {
+      entry.title=info.loadLabel(mPackageManager).toString();
+      if (labelCache != null) {
+        labelCache.put(key,entry.title);
+      }
+    }
+    if (entry.title == null) {
+      entry.title=info.activityInfo.name;
+    }
+    entry.icon=Utilities.createIconBitmap(getFullResIcon(info),mContext);
+  }
+  return entry;
+}

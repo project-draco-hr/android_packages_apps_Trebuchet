@@ -1,0 +1,3 @@
+{
+  mWallpaperManager.setWallpaperOffsetSteps(1.0f / (getChildCount() - 1),1.0f);
+}

@@ -1,0 +1,21 @@
+{
+  boolean[][] occupied=DESTRUCTIVE_REORDER ? mOccupied : mTmpOccupied;
+  for (int i=0; i < mCountX; i++) {
+    for (int j=0; j < mCountY; j++) {
+      occupied[i][j]=false;
+    }
+  }
+  int childCount=mShortcutsAndWidgets.getChildCount();
+  for (int i=0; i < childCount; i++) {
+    View child=mShortcutsAndWidgets.getChildAt(i);
+    if (child == dragView)     continue;
+    CellAndSpan c=solution.map.get(child);
+    if (c != null) {
+      animateChildToPosition(child,c.x,c.y,REORDER_ANIMATION_DURATION,0,DESTRUCTIVE_REORDER,false);
+      markCellsForView(c.x,c.y,c.spanX,c.spanY,occupied,true);
+    }
+  }
+  if (commitDragView) {
+    markCellsForView(solution.dragViewX,solution.dragViewY,solution.dragViewSpanX,solution.dragViewSpanY,occupied,true);
+  }
+}

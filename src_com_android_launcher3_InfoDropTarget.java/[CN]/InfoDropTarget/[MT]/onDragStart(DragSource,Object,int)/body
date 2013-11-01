@@ -1,0 +1,10 @@
+{
+  boolean isVisible=true;
+  if (!isFromAllApps(source)) {
+    isVisible=false;
+  }
+  mActive=isVisible;
+  mDrawable.resetTransition();
+  setTextColor(mOriginalTextColor);
+  ((ViewGroup)getParent()).setVisibility(isVisible ? View.VISIBLE : View.GONE);
+}

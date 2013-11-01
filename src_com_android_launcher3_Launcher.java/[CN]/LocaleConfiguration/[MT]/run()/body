@@ -1,0 +1,3 @@
+{
+  exitSpringLoadedDragModeDelayed((resultCode != RESULT_CANCELED),false,null);
+}

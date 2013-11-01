@@ -1,0 +1,3 @@
+{
+  return mInflater.inflate(R.layout.appwidget_error,this,false);
+}

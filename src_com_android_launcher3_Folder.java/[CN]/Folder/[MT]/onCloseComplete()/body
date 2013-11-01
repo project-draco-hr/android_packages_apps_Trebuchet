@@ -1,0 +1,22 @@
+{
+  DragLayer parent=(DragLayer)getParent();
+  if (parent != null) {
+    parent.removeView(this);
+  }
+  mDragController.removeDropTarget((DropTarget)this);
+  clearFocus();
+  mFolderIcon.requestFocus();
+  if (mRearrangeOnClose) {
+    setupContentForNumItems(getItemCount());
+    mRearrangeOnClose=false;
+  }
+  if (getItemCount() <= 1) {
+    if (!mDragInProgress && !mSuppressFolderDeletion) {
+      replaceFolderWithFinalItem();
+    }
+ else     if (mDragInProgress) {
+      mDeleteFolderOnDropCompleted=true;
+    }
+  }
+  mSuppressFolderDeletion=false;
+}

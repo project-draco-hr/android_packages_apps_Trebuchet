@@ -1,0 +1,17 @@
+{
+  int dragViewIndex=indexOfChild(v);
+  if (mTouchState != TOUCH_STATE_REST)   return false;
+  mTempVisiblePagesRange[0]=0;
+  mTempVisiblePagesRange[1]=getPageCount() - 1;
+  getOverviewModePages(mTempVisiblePagesRange);
+  mReorderingStarted=true;
+  if (mTempVisiblePagesRange[0] <= dragViewIndex && dragViewIndex <= mTempVisiblePagesRange[1]) {
+    mDragView=getChildAt(dragViewIndex);
+    mDragView.animate().scaleX(1.15f).scaleY(1.15f).setDuration(100).start();
+    mDragViewBaselineLeft=mDragView.getLeft();
+    disableFreeScroll(-1);
+    onStartReordering();
+    return true;
+  }
+  return false;
+}

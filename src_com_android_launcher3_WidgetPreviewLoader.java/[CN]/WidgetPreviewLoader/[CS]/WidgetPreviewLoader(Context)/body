@@ -1,0 +1,11 @@
+{
+  LauncherAppState app=LauncherAppState.getInstance();
+  DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
+  mContext=context;
+  mPackageManager=mContext.getPackageManager();
+  mAppIconSize=grid.iconSizePx;
+  mIconCache=app.getIconCache();
+  mDb=app.getWidgetPreviewCacheDb();
+  mLoadedPreviews=new HashMap<String,WeakReference<Bitmap>>();
+  mUnusedBitmaps=new ArrayList<SoftReference<Bitmap>>();
+}

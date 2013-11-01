@@ -1,0 +1,6 @@
+PendingAddWidgetInfo info
+long container
+long screenId
+int[] cell
+int[] span
+int[] loc

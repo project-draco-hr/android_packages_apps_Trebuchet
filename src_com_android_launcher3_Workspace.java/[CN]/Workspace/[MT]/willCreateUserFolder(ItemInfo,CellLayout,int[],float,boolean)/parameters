@@ -1,0 +1,5 @@
+ItemInfo info
+CellLayout target
+int[] targetCell
+float distance
+boolean considerTimeout

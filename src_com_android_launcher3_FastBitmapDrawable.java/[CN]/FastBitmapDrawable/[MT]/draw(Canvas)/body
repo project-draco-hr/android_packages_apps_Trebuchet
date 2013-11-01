@@ -1,0 +1,4 @@
+{
+  final Rect r=getBounds();
+  canvas.drawBitmap(mBitmap,null,r,mPaint);
+}

@@ -1,0 +1,3 @@
+{
+  return mHotseat != null && layout != null && (layout instanceof CellLayout) && (layout == mHotseat.getLayout());
+}

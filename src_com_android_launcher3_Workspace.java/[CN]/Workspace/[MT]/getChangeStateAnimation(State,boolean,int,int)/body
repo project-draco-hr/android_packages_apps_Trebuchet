@@ -1,0 +1,171 @@
+{
+  if (mState == state) {
+    return null;
+  }
+  initAnimationArrays();
+  AnimatorSet anim=animated ? LauncherAnimUtils.createAnimatorSet() : null;
+  final State oldState=mState;
+  final boolean oldStateIsNormal=(oldState == State.NORMAL);
+  final boolean oldStateIsSpringLoaded=(oldState == State.SPRING_LOADED);
+  final boolean oldStateIsSmall=(oldState == State.SMALL);
+  final boolean oldStateIsOverview=(oldState == State.OVERVIEW);
+  setState(state);
+  final boolean stateIsNormal=(state == State.NORMAL);
+  final boolean stateIsSpringLoaded=(state == State.SPRING_LOADED);
+  final boolean stateIsSmall=(state == State.SMALL);
+  final boolean stateIsOverview=(state == State.OVERVIEW);
+  float finalBackgroundAlpha=(stateIsSpringLoaded || stateIsOverview) ? 1.0f : 0f;
+  float finalHotseatAndPageIndicatorAlpha=(stateIsOverview || stateIsSmall) ? 0f : 1f;
+  float finalOverviewPanelAlpha=stateIsOverview ? 1f : 0f;
+  float finalSearchBarAlpha=!stateIsNormal ? 0f : 1f;
+  float finalWorkspaceTranslationY=stateIsOverview ? getOverviewModeTranslationY() : 0;
+  boolean workspaceToAllApps=(oldStateIsNormal && stateIsSmall);
+  boolean allAppsToWorkspace=(oldStateIsSmall && stateIsNormal);
+  boolean workspaceToOverview=(oldStateIsNormal && stateIsOverview);
+  boolean overviewToWorkspace=(oldStateIsOverview && stateIsNormal);
+  mNewScale=1.0f;
+  if (oldStateIsOverview) {
+    disableFreeScroll(snapPage);
+  }
+ else   if (stateIsOverview) {
+    enableFreeScroll();
+  }
+  if (state != State.NORMAL) {
+    if (stateIsSpringLoaded) {
+      mNewScale=mSpringLoadedShrinkFactor;
+    }
+ else     if (stateIsOverview) {
+      mNewScale=mOverviewModeShrinkFactor;
+    }
+ else     if (stateIsSmall) {
+      mNewScale=mOverviewModeShrinkFactor - 0.3f;
+    }
+    if (workspaceToAllApps) {
+      updateChildrenLayersEnabled(false);
+    }
+  }
+  final int duration;
+  if (workspaceToAllApps) {
+    duration=getResources().getInteger(R.integer.config_workspaceUnshrinkTime);
+  }
+ else   if (workspaceToOverview || overviewToWorkspace) {
+    duration=getResources().getInteger(R.integer.config_overviewTransitionTime);
+  }
+ else {
+    duration=getResources().getInteger(R.integer.config_appsCustomizeWorkspaceShrinkTime);
+  }
+  for (int i=0; i < getChildCount(); i++) {
+    final CellLayout cl=(CellLayout)getChildAt(i);
+    boolean isCurrentPage=(i == getNextPage());
+    float initialAlpha=cl.getShortcutsAndWidgets().getAlpha();
+    float finalAlpha=stateIsSmall ? 0f : 1f;
+    if (!mIsSwitchingState) {
+      if (workspaceToAllApps || allAppsToWorkspace) {
+        if (allAppsToWorkspace && isCurrentPage) {
+          initialAlpha=0f;
+        }
+ else         if (!isCurrentPage) {
+          initialAlpha=finalAlpha=0f;
+        }
+        cl.setShortcutAndWidgetAlpha(initialAlpha);
+      }
+    }
+    mOldAlphas[i]=initialAlpha;
+    mNewAlphas[i]=finalAlpha;
+    if (animated) {
+      mOldBackgroundAlphas[i]=cl.getBackgroundAlpha();
+      mNewBackgroundAlphas[i]=finalBackgroundAlpha;
+    }
+ else {
+      cl.setBackgroundAlpha(finalBackgroundAlpha);
+      cl.setShortcutAndWidgetAlpha(finalAlpha);
+    }
+  }
+  final View searchBar=mLauncher.getQsbBar();
+  final View overviewPanel=mLauncher.getOverviewPanel();
+  final View hotseat=mLauncher.getHotseat();
+  if (animated) {
+    anim.setDuration(duration);
+    LauncherViewPropertyAnimator scale=new LauncherViewPropertyAnimator(this);
+    scale.scaleX(mNewScale).scaleY(mNewScale).translationY(finalWorkspaceTranslationY).setInterpolator(mZoomInInterpolator);
+    anim.play(scale);
+    for (int index=0; index < getChildCount(); index++) {
+      final int i=index;
+      final CellLayout cl=(CellLayout)getChildAt(i);
+      float currentAlpha=cl.getShortcutsAndWidgets().getAlpha();
+      if (mOldAlphas[i] == 0 && mNewAlphas[i] == 0) {
+        cl.setBackgroundAlpha(mNewBackgroundAlphas[i]);
+        cl.setShortcutAndWidgetAlpha(mNewAlphas[i]);
+      }
+ else {
+        if (mOldAlphas[i] != mNewAlphas[i] || currentAlpha != mNewAlphas[i]) {
+          LauncherViewPropertyAnimator alphaAnim=new LauncherViewPropertyAnimator(cl.getShortcutsAndWidgets());
+          alphaAnim.alpha(mNewAlphas[i]).setInterpolator(mZoomInInterpolator);
+          anim.play(alphaAnim);
+        }
+        if (mOldBackgroundAlphas[i] != 0 || mNewBackgroundAlphas[i] != 0) {
+          ValueAnimator bgAnim=LauncherAnimUtils.ofFloat(cl,0f,1f);
+          bgAnim.setInterpolator(mZoomInInterpolator);
+          bgAnim.addUpdateListener(new LauncherAnimatorUpdateListener(){
+            public void onAnimationUpdate(            float a,            float b){
+              cl.setBackgroundAlpha(a * mOldBackgroundAlphas[i] + b * mNewBackgroundAlphas[i]);
+            }
+          }
+);
+          anim.play(bgAnim);
+        }
+      }
+    }
+    ObjectAnimator pageIndicatorAlpha=null;
+    if (getPageIndicator() != null) {
+      pageIndicatorAlpha=ObjectAnimator.ofFloat(getPageIndicator(),"alpha",finalHotseatAndPageIndicatorAlpha);
+    }
+    ObjectAnimator hotseatAlpha=ObjectAnimator.ofFloat(hotseat,"alpha",finalHotseatAndPageIndicatorAlpha);
+    ObjectAnimator searchBarAlpha=ObjectAnimator.ofFloat(searchBar,"alpha",finalSearchBarAlpha);
+    ObjectAnimator overviewPanelAlpha=ObjectAnimator.ofFloat(overviewPanel,"alpha",finalOverviewPanelAlpha);
+    overviewPanelAlpha.addListener(new AlphaUpdateListener(overviewPanel));
+    hotseatAlpha.addListener(new AlphaUpdateListener(hotseat));
+    searchBarAlpha.addListener(new AlphaUpdateListener(searchBar));
+    if (workspaceToOverview) {
+      hotseatAlpha.setInterpolator(new DecelerateInterpolator(2));
+    }
+ else     if (overviewToWorkspace) {
+      overviewPanelAlpha.setInterpolator(new DecelerateInterpolator(2));
+    }
+    if (getPageIndicator() != null) {
+      pageIndicatorAlpha.addListener(new AlphaUpdateListener(getPageIndicator()));
+    }
+    anim.play(overviewPanelAlpha);
+    anim.play(hotseatAlpha);
+    anim.play(searchBarAlpha);
+    anim.play(pageIndicatorAlpha);
+    anim.setStartDelay(delay);
+  }
+ else {
+    overviewPanel.setAlpha(finalOverviewPanelAlpha);
+    AlphaUpdateListener.updateVisibility(overviewPanel);
+    hotseat.setAlpha(finalHotseatAndPageIndicatorAlpha);
+    AlphaUpdateListener.updateVisibility(hotseat);
+    if (getPageIndicator() != null) {
+      getPageIndicator().setAlpha(finalHotseatAndPageIndicatorAlpha);
+      AlphaUpdateListener.updateVisibility(getPageIndicator());
+    }
+    searchBar.setAlpha(finalSearchBarAlpha);
+    AlphaUpdateListener.updateVisibility(searchBar);
+    updateCustomContentVisibility();
+    setScaleX(mNewScale);
+    setScaleY(mNewScale);
+    setTranslationY(finalWorkspaceTranslationY);
+  }
+  mLauncher.updateVoiceButtonProxyVisible(false);
+  if (stateIsSpringLoaded) {
+    animateBackgroundGradient(getResources().getInteger(R.integer.config_appsCustomizeSpringLoadedBgAlpha) / 100f,false);
+  }
+ else   if (stateIsOverview) {
+    animateBackgroundGradient(getResources().getInteger(R.integer.config_appsCustomizeSpringLoadedBgAlpha) / 100f,true);
+  }
+ else {
+    animateBackgroundGradient(0f,animated);
+  }
+  return anim;
+}

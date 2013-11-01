@@ -1,0 +1,12 @@
+{
+  if (mPaint == null) {
+    mPaint=new Paint(Paint.FILTER_BITMAP_FLAG);
+  }
+  if (color != 0) {
+    mPaint.setColorFilter(new PorterDuffColorFilter(color,PorterDuff.Mode.SRC_ATOP));
+  }
+ else {
+    mPaint.setColorFilter(null);
+  }
+  invalidate();
+}

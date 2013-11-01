@@ -1,0 +1,4 @@
+Context context
+ArrayList<ItemInfo> workspaceApps
+Callbacks callbacks
+ArrayList<AppInfo> allAppsApps

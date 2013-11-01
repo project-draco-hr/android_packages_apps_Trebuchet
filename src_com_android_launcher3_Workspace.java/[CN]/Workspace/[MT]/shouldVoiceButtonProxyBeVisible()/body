@@ -1,0 +1,9 @@
+{
+  if (isOnOrMovingToCustomContent()) {
+    return false;
+  }
+  if (mState != State.NORMAL) {
+    return false;
+  }
+  return true;
+}

@@ -1,0 +1,30 @@
+{
+  @SuppressWarnings("all") final boolean error=INITIAL_ITEM_ANIMATION_DURATION >= DROP_IN_ANIMATION_DURATION;
+  if (error) {
+    throw new IllegalStateException("DROP_IN_ANIMATION_DURATION must be greater than " + "INITIAL_ITEM_ANIMATION_DURATION, as sequencing of adding first two items " + "is dependent on this");
+  }
+  FolderIcon icon=(FolderIcon)LayoutInflater.from(launcher).inflate(resId,group,false);
+  icon.setClipToPadding(false);
+  icon.mFolderName=(BubbleTextView)icon.findViewById(R.id.folder_icon_name);
+  icon.mFolderName.setText(folderInfo.title);
+  icon.mPreviewBackground=(ImageView)icon.findViewById(R.id.preview_background);
+  LauncherAppState app=LauncherAppState.getInstance();
+  DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
+  LinearLayout.LayoutParams lp=(LinearLayout.LayoutParams)icon.mPreviewBackground.getLayoutParams();
+  lp.topMargin=grid.folderBackgroundOffset;
+  lp.width=grid.folderIconSizePx;
+  lp.height=grid.folderIconSizePx;
+  icon.setTag(folderInfo);
+  icon.setOnClickListener(launcher);
+  icon.mInfo=folderInfo;
+  icon.mLauncher=launcher;
+  icon.setContentDescription(String.format(launcher.getString(R.string.folder_name_format),folderInfo.title));
+  Folder folder=Folder.fromXml(launcher);
+  folder.setDragController(launcher.getDragController());
+  folder.setFolderIcon(icon);
+  folder.bind(folderInfo);
+  icon.mFolder=folder;
+  icon.mFolderRingAnimator=new FolderRingAnimator(launcher,icon);
+  folderInfo.addListener(icon);
+  return icon;
+}

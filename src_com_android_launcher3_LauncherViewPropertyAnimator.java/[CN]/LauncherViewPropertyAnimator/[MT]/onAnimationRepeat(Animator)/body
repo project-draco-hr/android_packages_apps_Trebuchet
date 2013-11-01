@@ -1,0 +1,6 @@
+{
+  for (int i=0; i < mListeners.size(); i++) {
+    Animator.AnimatorListener listener=mListeners.get(i);
+    listener.onAnimationRepeat(this);
+  }
+}

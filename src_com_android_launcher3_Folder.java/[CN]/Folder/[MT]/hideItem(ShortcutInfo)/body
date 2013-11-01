@@ -1,0 +1,4 @@
+{
+  View v=getViewForInfo(info);
+  v.setVisibility(INVISIBLE);
+}

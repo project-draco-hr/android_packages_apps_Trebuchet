@@ -1,0 +1,4 @@
+Context context
+ComponentName component
+int minWidth
+int minHeight

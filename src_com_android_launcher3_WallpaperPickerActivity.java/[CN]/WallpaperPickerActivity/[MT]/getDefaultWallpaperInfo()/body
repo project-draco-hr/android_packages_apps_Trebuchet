@@ -1,0 +1,34 @@
+{
+  Resources sysRes=Resources.getSystem();
+  int resId=sysRes.getIdentifier("default_wallpaper","drawable","android");
+  File defaultThumbFile=new File(getFilesDir(),"default_thumb.jpg");
+  Bitmap thumb=null;
+  boolean defaultWallpaperExists=false;
+  if (defaultThumbFile.exists()) {
+    thumb=BitmapFactory.decodeFile(defaultThumbFile.getAbsolutePath());
+    defaultWallpaperExists=true;
+  }
+ else {
+    Resources res=getResources();
+    Point defaultThumbSize=getDefaultThumbnailSize(res);
+    int rotation=WallpaperCropActivity.getRotationFromExif(res,resId);
+    thumb=createThumbnail(defaultThumbSize,this,null,null,sysRes,resId,rotation,false);
+    if (thumb != null) {
+      try {
+        defaultThumbFile.createNewFile();
+        FileOutputStream thumbFileStream=openFileOutput(defaultThumbFile.getName(),Context.MODE_PRIVATE);
+        thumb.compress(Bitmap.CompressFormat.JPEG,95,thumbFileStream);
+        thumbFileStream.close();
+        defaultWallpaperExists=true;
+      }
+ catch (      IOException e) {
+        Log.e(TAG,"Error while writing default wallpaper thumbnail to file " + e);
+        defaultThumbFile.delete();
+      }
+    }
+  }
+  if (defaultWallpaperExists) {
+    return new ResourceWallpaperInfo(sysRes,resId,new BitmapDrawable(thumb));
+  }
+  return null;
+}
