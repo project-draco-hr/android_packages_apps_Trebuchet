@@ -11,11 +11,11 @@
     DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
     mBarHeight=grid.searchBarSpaceHeightPx;
     mDropTargetBar.setTranslationY(-mBarHeight);
-    mDropTargetBarAnim=LauncherAnimUtils.ofFloat(mDropTargetBar,"translationY",-mBarHeight,0f);
+    mDropTargetBarAnim=ObjectAnimator.ofFloat(mDropTargetBar,"translationY",-mBarHeight,0f);
   }
  else {
     mDropTargetBar.setAlpha(0f);
-    mDropTargetBarAnim=LauncherAnimUtils.ofFloat(mDropTargetBar,"alpha",0f,1f);
+    mDropTargetBarAnim=ObjectAnimator.ofFloat(mDropTargetBar,"alpha",0f,1f);
   }
   setupAnimation(mDropTargetBarAnim,mDropTargetBar);
 }
