@@ -8,12 +8,11 @@
   int heightMode=MeasureSpec.getMode(heightMeasureSpec);
   int heightSize=MeasureSpec.getSize(heightMeasureSpec);
   DisplayMetrics dm=getResources().getDisplayMetrics();
-  int maxSize=Math.max(dm.widthPixels,dm.heightPixels + mInsets.top + mInsets.bottom);
-  int parentWidthSize, parentHeightSize;
+  int maxSize=Math.max(dm.widthPixels + mInsets.left + mInsets.right,dm.heightPixels + mInsets.top + mInsets.bottom);
+  int parentWidthSize=(int)(1.5f * maxSize);
+  int parentHeightSize=maxSize;
   int scaledWidthSize, scaledHeightSize;
   if (mUseMinScale) {
-    parentWidthSize=(int)(1.5f * maxSize);
-    parentHeightSize=maxSize;
     scaledWidthSize=(int)(parentWidthSize / mMinScale);
     scaledHeightSize=(int)(parentHeightSize / mMinScale);
   }
@@ -59,21 +58,15 @@
  else {
           childHeightMode=MeasureSpec.EXACTLY;
         }
-        childWidth=widthSize - horizontalPadding;
-        childHeight=heightSize - verticalPadding - mInsets.top- mInsets.bottom;
+        childWidth=getViewportWidth() - horizontalPadding - mInsets.left- mInsets.right;
+        childHeight=getViewportHeight() - verticalPadding - mInsets.top- mInsets.bottom;
         mNormalChildHeight=childHeight;
       }
  else {
         childWidthMode=MeasureSpec.EXACTLY;
         childHeightMode=MeasureSpec.EXACTLY;
-        if (mUseMinScale) {
-          childWidth=getViewportWidth();
-          childHeight=getViewportHeight();
-        }
- else {
-          childWidth=widthSize - getPaddingLeft() - getPaddingRight();
-          childHeight=heightSize - getPaddingTop() - getPaddingBottom();
-        }
+        childWidth=getViewportWidth() - mInsets.left - mInsets.right;
+        childHeight=getViewportHeight();
       }
       final int childWidthMeasureSpec=MeasureSpec.makeMeasureSpec(childWidth,childWidthMode);
       final int childHeightMeasureSpec=MeasureSpec.makeMeasureSpec(childHeight,childHeightMode);
