@@ -1,0 +1,4 @@
+{
+  SQLiteDatabase db=mDb.getWritableDatabase();
+  db.delete(CacheDb.TABLE_NAME,null,null);
+}
