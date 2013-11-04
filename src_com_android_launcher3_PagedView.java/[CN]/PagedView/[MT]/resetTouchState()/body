@@ -2,6 +2,7 @@
   releaseVelocityTracker();
   endReordering();
   mCancelTap=false;
+  mScrollAbortedFromIntercept=false;
   mTouchState=TOUCH_STATE_REST;
   mActivePointerId=INVALID_POINTER;
 }
