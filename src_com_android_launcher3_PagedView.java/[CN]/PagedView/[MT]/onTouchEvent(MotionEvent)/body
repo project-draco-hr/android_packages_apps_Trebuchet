@@ -145,15 +145,6 @@ snapToPageWithVelocity(finalPage,velocityX);
 snapToDestination();
 }
 }
- else if (mTouchState == TOUCH_STATE_PREV_PAGE) {
-int nextPage=Math.max(0,mCurrentPage - 1);
-if (nextPage != mCurrentPage) {
-snapToPage(nextPage);
-}
- else {
-snapToDestination();
-}
-}
  else {
 if (!mScroller.isFinished()) {
 abortScrollerAnimation(true);
@@ -163,6 +154,15 @@ int vX=(int)(-velocityX * scaleX);
 int initialScrollX=(int)(getScrollX() * scaleX);
 mScroller.fling(initialScrollX,getScrollY(),vX,0,Integer.MIN_VALUE,Integer.MAX_VALUE,0,0);
 invalidate();
+}
+}
+ else if (mTouchState == TOUCH_STATE_PREV_PAGE) {
+int nextPage=Math.max(0,mCurrentPage - 1);
+if (nextPage != mCurrentPage) {
+snapToPage(nextPage);
+}
+ else {
+snapToDestination();
 }
 }
  else if (mTouchState == TOUCH_STATE_NEXT_PAGE) {
