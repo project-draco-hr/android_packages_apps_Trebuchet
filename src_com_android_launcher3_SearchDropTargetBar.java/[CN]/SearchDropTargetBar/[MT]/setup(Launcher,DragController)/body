@@ -9,10 +9,10 @@
   mDeleteDropTarget.setLauncher(launcher);
   mQSBSearchBar=launcher.getQsbBar();
   if (mEnableDropDownDropTargets) {
-    mQSBSearchBarAnim=LauncherAnimUtils.ofFloat(mQSBSearchBar,"translationY",0,-mBarHeight);
+    mQSBSearchBarAnim=ObjectAnimator.ofFloat(mQSBSearchBar,"translationY",0f,-mBarHeight);
   }
  else {
-    mQSBSearchBarAnim=LauncherAnimUtils.ofFloat(mQSBSearchBar,"alpha",1f,0f);
+    mQSBSearchBarAnim=ObjectAnimator.ofFloat(mQSBSearchBar,"alpha",1f,0f);
   }
   setupAnimation(mQSBSearchBarAnim,mQSBSearchBar);
 }
