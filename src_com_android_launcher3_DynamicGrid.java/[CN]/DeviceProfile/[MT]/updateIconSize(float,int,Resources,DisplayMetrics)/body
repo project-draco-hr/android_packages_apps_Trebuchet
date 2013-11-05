@@ -21,11 +21,15 @@
   folderIconSizePx=iconSizePx + 2 * -folderBackgroundOffset;
   Rect padding=getWorkspacePadding(isLandscape ? CellLayout.LANDSCAPE : CellLayout.PORTRAIT);
   int pageIndicatorOffset=resources.getDimensionPixelSize(R.dimen.apps_customize_page_indicator_offset);
-  if (isLandscape) {
-    allAppsNumRows=(availableHeightPx - pageIndicatorOffset - 4 * edgeMarginPx) / (iconSizePx + iconTextSizePx + 2 * edgeMarginPx);
-  }
- else {
-    allAppsNumRows=(int)numRows + 1;
-  }
-  allAppsNumCols=(availableWidthPx - padding.left - padding.right- 2 * edgeMarginPx) / (iconSizePx + 2 * edgeMarginPx);
+  allAppsCellWidthPx=allAppsIconSizePx;
+  allAppsCellHeightPx=allAppsIconSizePx + drawablePadding + iconTextSizePx;
+  int maxLongEdgeCellCount=resources.getInteger(R.integer.config_dynamic_grid_max_long_edge_cell_count);
+  int maxShortEdgeCellCount=resources.getInteger(R.integer.config_dynamic_grid_max_short_edge_cell_count);
+  int minEdgeCellCount=resources.getInteger(R.integer.config_dynamic_grid_min_edge_cell_count);
+  int maxRows=(isLandscape ? maxShortEdgeCellCount : maxLongEdgeCellCount);
+  int maxCols=(isLandscape ? maxLongEdgeCellCount : maxShortEdgeCellCount);
+  allAppsNumRows=(availableHeightPx - pageIndicatorHeightPx) / (allAppsCellHeightPx + allAppsCellPaddingPx);
+  allAppsNumRows=Math.max(minEdgeCellCount,Math.min(maxRows,allAppsNumRows));
+  allAppsNumCols=(availableWidthPx) / (allAppsCellWidthPx + allAppsCellPaddingPx);
+  allAppsNumCols=Math.max(minEdgeCellCount,Math.min(maxCols,allAppsNumCols));
 }
