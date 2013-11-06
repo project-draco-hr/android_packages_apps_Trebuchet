@@ -9,7 +9,7 @@
   setClipChildren(false);
   setClipToPadding(false);
   setChildrenDrawnWithCacheEnabled(true);
-  setMinScale(mOverviewModeShrinkFactor - 0.2f);
+  setMinScale(mOverviewModeShrinkFactor);
   setupLayoutTransition();
   final Resources res=getResources();
   try {
