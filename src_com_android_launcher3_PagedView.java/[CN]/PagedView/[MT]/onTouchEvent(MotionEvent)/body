@@ -95,7 +95,9 @@ onRemoveView(mDragView,false);
 addView(mDragView,pageUnderPointIndex);
 onAddView(mDragView,pageUnderPointIndex);
 mSidePageHoverIndex=-1;
+if (mPageIndicator != null) {
 mPageIndicator.setActiveMarker(getNextPage());
+}
 }
 }
 ;
