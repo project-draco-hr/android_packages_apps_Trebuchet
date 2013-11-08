@@ -1,3 +1,3 @@
 {
-  setEnableFreeScroll(true,-1);
+  setEnableFreeScroll(true);
 }

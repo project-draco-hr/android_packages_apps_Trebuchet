@@ -1,4 +1,0 @@
-{
-  mInterpolator=new AccelerateInterpolator();
-  mRampUpTime=rampUpTime;
-}

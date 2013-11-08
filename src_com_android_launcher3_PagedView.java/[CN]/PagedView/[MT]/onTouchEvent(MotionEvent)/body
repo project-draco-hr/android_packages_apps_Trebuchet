@@ -154,6 +154,7 @@ abortScrollerAnimation(true);
 float scaleX=getScaleX();
 int vX=(int)(-velocityX * scaleX);
 int initialScrollX=(int)(getScrollX() * scaleX);
+mScroller.setInterpolator(mDefaultInterpolator);
 mScroller.fling(initialScrollX,getScrollY(),vX,0,Integer.MIN_VALUE,Integer.MAX_VALUE,0,0);
 invalidate();
 }
