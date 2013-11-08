@@ -1,0 +1,3 @@
+View child
+int index
+android.view.ViewGroup.LayoutParams params
