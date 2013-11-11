@@ -15,7 +15,9 @@
   View widgetButton=findViewById(R.id.widget_button);
   widgetButton.setOnClickListener(new OnClickListener(){
     @Override public void onClick(    View arg0){
-      showAllApps(true,AppsCustomizePagedView.ContentType.Widgets,true);
+      if (!mWorkspace.isSwitchingState()) {
+        showAllApps(true,AppsCustomizePagedView.ContentType.Widgets,true);
+      }
     }
   }
 );
@@ -23,7 +25,9 @@
   View wallpaperButton=findViewById(R.id.wallpaper_button);
   wallpaperButton.setOnClickListener(new OnClickListener(){
     @Override public void onClick(    View arg0){
-      startWallpaper();
+      if (!mWorkspace.isSwitchingState()) {
+        startWallpaper();
+      }
     }
   }
 );
@@ -31,7 +35,9 @@
   View settingsButton=findViewById(R.id.settings_button);
   settingsButton.setOnClickListener(new OnClickListener(){
     @Override public void onClick(    View arg0){
-      startSettings();
+      if (!mWorkspace.isSwitchingState()) {
+        startSettings();
+      }
     }
   }
 );
