@@ -30,6 +30,9 @@
       completeDragExit();
     }
   }
+ else {
+    mLauncher.getWorkspace().removeExtraEmptyScreen(true,null);
+  }
   mDeleteFolderOnDropCompleted=false;
   mDragInProgress=false;
   mItemAddedBackToSelfViaIcon=false;
