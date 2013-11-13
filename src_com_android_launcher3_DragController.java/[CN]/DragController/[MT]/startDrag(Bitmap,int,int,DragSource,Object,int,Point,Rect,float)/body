@@ -30,4 +30,5 @@
   mLauncher.getDragLayer().performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
   dragView.show(mMotionDownX,mMotionDownY);
   handleMoveEvent(mMotionDownX,mMotionDownY);
+  return dragView;
 }
