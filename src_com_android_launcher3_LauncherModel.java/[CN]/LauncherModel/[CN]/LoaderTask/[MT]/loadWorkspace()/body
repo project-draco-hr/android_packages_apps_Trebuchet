@@ -1,4 +1,5 @@
 {
+  Launcher.addDumpLog(TAG,"11683562 - loadWorkspace()",true);
   final long t=DEBUG_LOADERS ? SystemClock.uptimeMillis() : 0;
   final Context context=mContext;
   final ContentResolver contentResolver=context.getContentResolver();
@@ -11,6 +12,7 @@
   int countY=(int)grid.numRows;
   LauncherAppState.getLauncherProvider().loadDefaultFavoritesIfNecessary(0);
   boolean loadedOldDb=LauncherAppState.getLauncherProvider().justLoadedOldDb();
+  Launcher.addDumpLog(TAG,"11683562 -   loadedOldDb: " + loadedOldDb,true);
 synchronized (sBgLock) {
     clearSBgDataStructures();
     final ArrayList<Long> itemsToRemove=new ArrayList<Long>();
@@ -246,6 +248,8 @@ maxScreenId=screenId;
 }
 }
 Collections.sort(sBgWorkspaceScreens);
+Launcher.addDumpLog(TAG,"11683562 -   maxScreenId: " + maxScreenId,true);
+Launcher.addDumpLog(TAG,"11683562 -   sBgWorkspaceScreens: " + TextUtils.join(", ",sBgWorkspaceScreens),true);
 LauncherAppState.getLauncherProvider().updateMaxScreenId(maxScreenId);
 updateWorkspaceScreenOrder(context,sBgWorkspaceScreens);
 long maxItemId=0;
@@ -259,6 +263,7 @@ TreeMap<Integer,Long> orderedScreens=loadWorkspaceScreensDb(mContext);
 for (Integer i : orderedScreens.keySet()) {
 sBgWorkspaceScreens.add(orderedScreens.get(i));
 }
+Launcher.addDumpLog(TAG,"11683562 -   sBgWorkspaceScreens: " + TextUtils.join(", ",sBgWorkspaceScreens),true);
 ArrayList<Long> unusedScreens=new ArrayList<Long>(sBgWorkspaceScreens);
 for (ItemInfo item : sBgItemsIdMap.values()) {
 long screenId=item.screenId;
@@ -267,6 +272,7 @@ unusedScreens.remove(screenId);
 }
 }
 if (unusedScreens.size() != 0) {
+Launcher.addDumpLog(TAG,"11683562 -   unusedScreens (to be removed): " + TextUtils.join(", ",unusedScreens),true);
 sBgWorkspaceScreens.removeAll(unusedScreens);
 updateWorkspaceScreenOrder(context,sBgWorkspaceScreens);
 }
