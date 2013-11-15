@@ -11,5 +11,6 @@
   if (id == -1) {
     throw new RuntimeException("Error: could not query max screen id");
   }
+  Launcher.addDumpLog(TAG,"11683562 - initializeMaxScreenId(): " + id,true);
   return id;
 }
