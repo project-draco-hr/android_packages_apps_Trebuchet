@@ -1,4 +1,7 @@
 {
+  if (workspaceApps == null || allAppsApps == null) {
+    throw new RuntimeException("workspaceApps and allAppsApps must not be null");
+  }
   if (workspaceApps.isEmpty() && allAppsApps.isEmpty()) {
     return;
   }
