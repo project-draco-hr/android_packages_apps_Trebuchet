@@ -1,0 +1,3 @@
+{
+  return getSearchBarBounds(isLandscape ? CellLayout.LANDSCAPE : CellLayout.PORTRAIT);
+}
