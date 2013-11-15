@@ -12,10 +12,12 @@
   scale*=childScale;
   int toX=coord[0];
   int toY=coord[1];
+  float toScale=scale;
   if (child instanceof TextView) {
     TextView tv=(TextView)child;
-    toY+=Math.round(scale * tv.getPaddingTop());
-    toY-=dragView.getMeasuredHeight() * (1 - scale) / 2;
+    toScale=scale / dragView.getIntrinsicIconScaleFactor();
+    toY+=Math.round(toScale * tv.getPaddingTop());
+    toY-=dragView.getMeasuredHeight() * (1 - toScale) / 2;
     toX-=(dragView.getMeasuredWidth() - Math.round(scale * child.getMeasuredWidth())) / 2;
   }
  else   if (child instanceof FolderIcon) {
@@ -40,5 +42,5 @@
     }
   }
 ;
-  animateViewIntoPosition(dragView,fromX,fromY,toX,toY,1,1,1,scale,scale,onCompleteRunnable,ANIMATION_END_DISAPPEAR,duration,anchorView);
+  animateViewIntoPosition(dragView,fromX,fromY,toX,toY,1,1,1,toScale,toScale,onCompleteRunnable,ANIMATION_END_DISAPPEAR,duration,anchorView);
 }
