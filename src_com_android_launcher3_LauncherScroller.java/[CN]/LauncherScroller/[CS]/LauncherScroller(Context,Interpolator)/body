@@ -1,0 +1,3 @@
+{
+  this(context,interpolator,context.getApplicationInfo().targetSdkVersion >= Build.VERSION_CODES.HONEYCOMB);
+}
