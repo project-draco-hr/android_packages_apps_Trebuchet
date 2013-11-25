@@ -6,4 +6,5 @@
     }
   }
   mRestoredPages.clear();
+  mSavedStates=null;
 }
