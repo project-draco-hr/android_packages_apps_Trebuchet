@@ -1,3 +1,3 @@
 {
-  return (source instanceof AppsCustomizePagedView) && (info instanceof AppInfo);
+  return source.supportsAppInfoDropTarget() && (info instanceof AppInfo);
 }
