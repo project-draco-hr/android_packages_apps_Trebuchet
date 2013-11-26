@@ -97,6 +97,7 @@
   final View searchBar=mLauncher.getQsbBar();
   final View overviewPanel=mLauncher.getOverviewPanel();
   final View hotseat=mLauncher.getHotseat();
+  final View pageIndicator=getPageIndicator();
   if (animated) {
     anim.setDuration(duration);
     LauncherViewPropertyAnimator scale=new LauncherViewPropertyAnimator(this);
@@ -129,25 +130,31 @@
         }
       }
     }
-    ObjectAnimator pageIndicatorAlpha=null;
-    if (getPageIndicator() != null) {
-      pageIndicatorAlpha=ObjectAnimator.ofFloat(getPageIndicator(),"alpha",finalHotseatAndPageIndicatorAlpha);
+    Animator pageIndicatorAlpha=null;
+    if (pageIndicator != null) {
+      pageIndicatorAlpha=new LauncherViewPropertyAnimator(pageIndicator).alpha(finalHotseatAndPageIndicatorAlpha).withLayer();
     }
-    ObjectAnimator hotseatAlpha=ObjectAnimator.ofFloat(hotseat,"alpha",finalHotseatAndPageIndicatorAlpha);
-    ObjectAnimator searchBarAlpha=ObjectAnimator.ofFloat(searchBar,"alpha",finalSearchBarAlpha);
-    ObjectAnimator overviewPanelAlpha=ObjectAnimator.ofFloat(overviewPanel,"alpha",finalOverviewPanelAlpha);
-    overviewPanelAlpha.addListener(new AlphaUpdateListener(overviewPanel));
+ else {
+      pageIndicatorAlpha=ValueAnimator.ofFloat(0,0);
+    }
+    Animator hotseatAlpha=new LauncherViewPropertyAnimator(hotseat).alpha(finalHotseatAndPageIndicatorAlpha).withLayer();
+    Animator searchBarAlpha=new LauncherViewPropertyAnimator(searchBar).alpha(finalSearchBarAlpha).withLayer();
+    Animator overviewPanelAlpha=new LauncherViewPropertyAnimator(overviewPanel).alpha(finalOverviewPanelAlpha).withLayer();
+    pageIndicatorAlpha.addListener(new AlphaUpdateListener(pageIndicator));
     hotseatAlpha.addListener(new AlphaUpdateListener(hotseat));
     searchBarAlpha.addListener(new AlphaUpdateListener(searchBar));
+    overviewPanelAlpha.addListener(new AlphaUpdateListener(overviewPanel));
     if (workspaceToOverview) {
+      pageIndicatorAlpha.setInterpolator(new DecelerateInterpolator(2));
       hotseatAlpha.setInterpolator(new DecelerateInterpolator(2));
+      overviewPanelAlpha.setInterpolator(null);
     }
  else     if (overviewToWorkspace) {
+      pageIndicatorAlpha.setInterpolator(null);
+      hotseatAlpha.setInterpolator(null);
       overviewPanelAlpha.setInterpolator(new DecelerateInterpolator(2));
     }
-    if (getPageIndicator() != null) {
-      pageIndicatorAlpha.addListener(new AlphaUpdateListener(getPageIndicator()));
-    }
+    searchBarAlpha.setInterpolator(null);
     anim.play(overviewPanelAlpha);
     anim.play(hotseatAlpha);
     anim.play(searchBarAlpha);
@@ -159,9 +166,9 @@
     AlphaUpdateListener.updateVisibility(overviewPanel);
     hotseat.setAlpha(finalHotseatAndPageIndicatorAlpha);
     AlphaUpdateListener.updateVisibility(hotseat);
-    if (getPageIndicator() != null) {
-      getPageIndicator().setAlpha(finalHotseatAndPageIndicatorAlpha);
-      AlphaUpdateListener.updateVisibility(getPageIndicator());
+    if (pageIndicator != null) {
+      pageIndicator.setAlpha(finalHotseatAndPageIndicatorAlpha);
+      AlphaUpdateListener.updateVisibility(pageIndicator);
     }
     searchBar.setAlpha(finalSearchBarAlpha);
     AlphaUpdateListener.updateVisibility(searchBar);
