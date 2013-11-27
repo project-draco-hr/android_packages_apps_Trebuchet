@@ -6,9 +6,6 @@
       iter.remove();
     }
   }
-  if (currentScreenId < 0) {
-    throw new RuntimeException("Unexpected screen id");
-  }
   Set<Long> itemsOnScreen=new HashSet<Long>();
   Collections.sort(allWorkspaceItems,new Comparator<ItemInfo>(){
     @Override public int compare(    ItemInfo lhs,    ItemInfo rhs){
