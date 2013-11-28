@@ -1,7 +1,4 @@
 {
-  if (currentScreenId < 0) {
-    throw new RuntimeException("Unexpected screen id");
-  }
   for (  long id : folders.keySet()) {
     ItemInfo info=itemsIdMap.get(id);
     FolderInfo folder=folders.get(id);
