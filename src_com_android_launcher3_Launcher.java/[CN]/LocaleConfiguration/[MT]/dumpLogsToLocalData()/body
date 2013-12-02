@@ -1,7 +1,7 @@
 {
   if (DEBUG_DUMP_LOG) {
-    new Thread("DumpLogsToLocalData"){
-      @Override public void run(){
+    new AsyncTask<Void,Void,Void>(){
+      public Void doInBackground(      Void... args){
         boolean success=false;
         sDateStamp.setTime(sRunStart);
         String FILENAME=sDateStamp.getMonth() + "-" + sDateStamp.getDay()+ "_"+ sDateStamp.getHours()+ "-"+ sDateStamp.getMinutes()+ "_"+ sDateStamp.getSeconds()+ ".txt";
@@ -35,8 +35,9 @@ synchronized (sDumpLogs) {
  catch (        IOException e) {
           e.printStackTrace();
         }
+        return null;
       }
     }
-.start();
+.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,(Void)null);
   }
 }
