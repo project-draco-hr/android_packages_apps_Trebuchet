@@ -8,7 +8,7 @@
     mAppWidgetHost.deleteHost();
     sendAppWidgetResetNotify();
   }
-  if (IMPORT_LAUNCHER2_DATABASE) {
+  if (shouldImportLauncher2Database(mContext)) {
     ContentValuesCallback permuteScreensCb=new ContentValuesCallback(){
       public void onRow(      ContentValues values){
         int container=values.getAsInteger(LauncherSettings.Favorites.CONTAINER);
