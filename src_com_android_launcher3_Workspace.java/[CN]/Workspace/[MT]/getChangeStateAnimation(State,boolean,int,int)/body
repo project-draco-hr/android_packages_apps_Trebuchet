@@ -133,16 +133,16 @@
     Animator pageIndicatorAlpha=null;
     if (pageIndicator != null) {
       pageIndicatorAlpha=new LauncherViewPropertyAnimator(pageIndicator).alpha(finalHotseatAndPageIndicatorAlpha).withLayer();
+      pageIndicatorAlpha.addListener(new AlphaUpdateListener(pageIndicator));
     }
  else {
       pageIndicatorAlpha=ValueAnimator.ofFloat(0,0);
     }
     Animator hotseatAlpha=new LauncherViewPropertyAnimator(hotseat).alpha(finalHotseatAndPageIndicatorAlpha).withLayer();
-    Animator searchBarAlpha=new LauncherViewPropertyAnimator(searchBar).alpha(finalSearchBarAlpha).withLayer();
-    Animator overviewPanelAlpha=new LauncherViewPropertyAnimator(overviewPanel).alpha(finalOverviewPanelAlpha).withLayer();
-    pageIndicatorAlpha.addListener(new AlphaUpdateListener(pageIndicator));
     hotseatAlpha.addListener(new AlphaUpdateListener(hotseat));
+    Animator searchBarAlpha=new LauncherViewPropertyAnimator(searchBar).alpha(finalSearchBarAlpha).withLayer();
     searchBarAlpha.addListener(new AlphaUpdateListener(searchBar));
+    Animator overviewPanelAlpha=new LauncherViewPropertyAnimator(overviewPanel).alpha(finalOverviewPanelAlpha).withLayer();
     overviewPanelAlpha.addListener(new AlphaUpdateListener(overviewPanel));
     if (workspaceToOverview) {
       pageIndicatorAlpha.setInterpolator(new DecelerateInterpolator(2));
