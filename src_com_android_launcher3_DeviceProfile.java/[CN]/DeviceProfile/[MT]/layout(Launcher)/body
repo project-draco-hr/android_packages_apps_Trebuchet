@@ -14,7 +14,7 @@
     lp.gravity=Gravity.TOP | Gravity.CENTER_HORIZONTAL;
     lp.width=searchBarSpaceWidthPx;
     lp.height=searchBarSpaceHeightPx;
-    searchBar.setPadding(2 * edgeMarginPx,2 * edgeMarginPx,2 * edgeMarginPx,0);
+    searchBar.setPadding(2 * edgeMarginPx,getSearchBarTopOffset(),2 * edgeMarginPx,0);
   }
   searchBar.setLayoutParams(lp);
   View qsbBar=launcher.getQsbBar();

@@ -6,7 +6,7 @@
   searchBarSpaceMaxWidthPx=resources.getDimensionPixelSize(R.dimen.dynamic_grid_search_bar_max_width);
   searchBarHeightPx=resources.getDimensionPixelSize(R.dimen.dynamic_grid_search_bar_height);
   searchBarSpaceWidthPx=Math.min(searchBarSpaceMaxWidthPx,widthPx);
-  searchBarSpaceHeightPx=searchBarHeightPx + 2 * edgeMarginPx;
+  searchBarSpaceHeightPx=searchBarHeightPx + getSearchBarTopOffset();
   Paint textPaint=new Paint();
   textPaint.setTextSize(iconTextSizePx);
   FontMetrics fm=textPaint.getFontMetrics();
