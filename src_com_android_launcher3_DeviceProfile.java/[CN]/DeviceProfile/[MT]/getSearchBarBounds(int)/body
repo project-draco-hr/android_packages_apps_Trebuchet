@@ -7,10 +7,10 @@
     if (isTablet()) {
       int width=(orientation == CellLayout.LANDSCAPE) ? Math.max(widthPx,heightPx) : Math.min(widthPx,heightPx);
       int gap=(int)((width - 2 * edgeMarginPx - (numColumns * cellWidthPx)) / (2 * (numColumns + 1)));
-      bounds.set(edgeMarginPx + gap,0,availableWidthPx - (edgeMarginPx + gap),searchBarSpaceHeightPx);
+      bounds.set(edgeMarginPx + gap,getSearchBarTopOffset(),availableWidthPx - (edgeMarginPx + gap),searchBarSpaceHeightPx);
     }
  else {
-      bounds.set(desiredWorkspaceLeftRightMarginPx - defaultWidgetPadding.left,0,availableWidthPx - (desiredWorkspaceLeftRightMarginPx - defaultWidgetPadding.right),searchBarSpaceHeightPx);
+      bounds.set(desiredWorkspaceLeftRightMarginPx - defaultWidgetPadding.left,getSearchBarTopOffset(),availableWidthPx - (desiredWorkspaceLeftRightMarginPx - defaultWidgetPadding.right),searchBarSpaceHeightPx);
     }
   }
   return bounds;
