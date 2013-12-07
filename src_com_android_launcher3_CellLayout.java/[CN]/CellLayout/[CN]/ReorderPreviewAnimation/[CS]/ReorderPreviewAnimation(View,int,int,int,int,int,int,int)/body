@@ -9,21 +9,23 @@
   final int dY=y1 - y0;
   finalDeltaX=0;
   finalDeltaY=0;
+  int dir=mode == MODE_HINT ? -1 : 1;
   if (dX == dY && dX == 0) {
   }
  else {
     if (dY == 0) {
-      finalDeltaX=-Math.signum(dX) * mReorderHintAnimationMagnitude;
+      finalDeltaX=-dir * Math.signum(dX) * mReorderPreviewAnimationMagnitude;
     }
  else     if (dX == 0) {
-      finalDeltaY=-Math.signum(dY) * mReorderHintAnimationMagnitude;
+      finalDeltaY=-dir * Math.signum(dY) * mReorderPreviewAnimationMagnitude;
     }
  else {
       double angle=Math.atan((float)(dY) / dX);
-      finalDeltaX=(int)(-Math.signum(dX) * Math.abs(Math.cos(angle) * mReorderHintAnimationMagnitude));
-      finalDeltaY=(int)(-Math.signum(dY) * Math.abs(Math.sin(angle) * mReorderHintAnimationMagnitude));
+      finalDeltaX=(int)(-dir * Math.signum(dX) * Math.abs(Math.cos(angle) * mReorderPreviewAnimationMagnitude));
+      finalDeltaY=(int)(-dir * Math.signum(dY) * Math.abs(Math.sin(angle) * mReorderPreviewAnimationMagnitude));
     }
   }
+  this.mode=mode;
   initDeltaX=child.getTranslationX();
   initDeltaY=child.getTranslationY();
   finalScale=getChildrenScale() - 4.0f / child.getWidth();
