@@ -1,8 +1,0 @@
-{
-  if (AppsCustomizePagedView.DISABLE_ALL_APPS) {
-    return R.xml.default_workspace_no_all_apps;
-  }
- else {
-    return R.xml.default_workspace;
-  }
-}
