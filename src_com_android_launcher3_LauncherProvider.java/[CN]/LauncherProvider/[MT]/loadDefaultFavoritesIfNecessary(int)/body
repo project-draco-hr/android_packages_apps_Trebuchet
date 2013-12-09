@@ -4,7 +4,7 @@
   if (sp.getBoolean(EMPTY_DATABASE_CREATED,false)) {
     int workspaceResId=origWorkspaceResId;
     if (workspaceResId == 0) {
-      workspaceResId=sp.getInt(DEFAULT_WORKSPACE_RESOURCE_ID,getDefaultWorkspaceResourceId());
+      workspaceResId=sp.getInt(DEFAULT_WORKSPACE_RESOURCE_ID,R.xml.default_workspace);
     }
     SharedPreferences.Editor editor=sp.edit();
     editor.remove(EMPTY_DATABASE_CREATED);
