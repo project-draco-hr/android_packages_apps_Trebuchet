@@ -1,7 +1,7 @@
 {
   Journal out=new Journal();
   out.t=0;
-  out.key=mKeys.toArray(BackupProtos.Key.EMPTY_ARRAY);
+  out.key=mKeys.toArray(BackupProtos.Key.emptyArray());
   writeJournal(newState,out);
   Log.v(TAG,"onRestore: read " + mKeys.size() + " rows");
   mKeys.clear();
