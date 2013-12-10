@@ -12,6 +12,8 @@
   FontMetrics fm=textPaint.getFontMetrics();
   cellWidthPx=iconSizePx;
   cellHeightPx=iconSizePx + iconDrawablePaddingPx + (int)Math.ceil(fm.bottom - fm.top);
+  final float scaleDps=resources.getDimensionPixelSize(R.dimen.dragViewScale);
+  dragViewScale=(iconSizePx + scaleDps) / iconSizePx;
   hotseatBarHeightPx=iconSizePx + 4 * edgeMarginPx;
   hotseatCellWidthPx=iconSizePx;
   hotseatCellHeightPx=iconSizePx;
