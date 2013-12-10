@@ -8,7 +8,7 @@
   }
   mIsScreenLarge=isScreenLarge(sContext.getResources());
   mScreenDensity=sContext.getResources().getDisplayMetrics().density;
-  mWidgetPreviewCacheDb=new WidgetPreviewLoader.CacheDb(sContext);
+  recreateWidgetPreviewDb();
   mIconCache=new IconCache(sContext);
   mAppFilter=AppFilter.loadByName(sContext.getString(R.string.app_filter_class));
   mModel=new LauncherModel(this,mIconCache,mAppFilter);
