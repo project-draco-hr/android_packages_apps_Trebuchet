@@ -26,8 +26,5 @@
   if (finalChild != null) {
     mFolderIcon.performDestroyAnimation(finalChild,onCompleteRunnable);
   }
- else {
-    onCompleteRunnable.run();
-  }
   mDestroyed=true;
 }
