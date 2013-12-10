@@ -1,5 +1,5 @@
 {
-  if (synchronousBindPage < 0) {
+  if (synchronousBindPage == PagedView.INVALID_RESTORE_PAGE) {
     throw new RuntimeException("Should not call runBindSynchronousPage() without " + "valid page index");
   }
   if (!mAllAppsLoaded || !mWorkspaceLoaded) {

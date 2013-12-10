@@ -7,7 +7,7 @@ synchronized (mLock) {
     if (mCallbacks != null && mCallbacks.get() != null) {
       isLaunching=isLaunching || stopLoaderLocked();
       mLoaderTask=new LoaderTask(mApp.getContext(),isLaunching);
-      if (synchronousBindPage > -1 && mAllAppsLoaded && mWorkspaceLoaded) {
+      if (synchronousBindPage != PagedView.INVALID_RESTORE_PAGE && mAllAppsLoaded && mWorkspaceLoaded) {
         mLoaderTask.runBindSynchronousPage(synchronousBindPage);
       }
  else {
