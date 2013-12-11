@@ -1,15 +1,16 @@
 {
-  if (!isItemPlacementDirty() || DESTRUCTIVE_REORDER)   return;
-  final int count=mShortcutsAndWidgets.getChildCount();
-  for (int i=0; i < count; i++) {
-    View child=mShortcutsAndWidgets.getChildAt(i);
-    LayoutParams lp=(LayoutParams)child.getLayoutParams();
-    if (lp.tmpCellX != lp.cellX || lp.tmpCellY != lp.cellY) {
-      lp.tmpCellX=lp.cellX;
-      lp.tmpCellY=lp.cellY;
-      animateChildToPosition(child,lp.cellX,lp.cellY,REORDER_ANIMATION_DURATION,0,false,false);
+  completeAndClearReorderPreviewAnimations();
+  if (isItemPlacementDirty() && !DESTRUCTIVE_REORDER) {
+    final int count=mShortcutsAndWidgets.getChildCount();
+    for (int i=0; i < count; i++) {
+      View child=mShortcutsAndWidgets.getChildAt(i);
+      LayoutParams lp=(LayoutParams)child.getLayoutParams();
+      if (lp.tmpCellX != lp.cellX || lp.tmpCellY != lp.cellY) {
+        lp.tmpCellX=lp.cellX;
+        lp.tmpCellY=lp.cellY;
+        animateChildToPosition(child,lp.cellX,lp.cellY,REORDER_ANIMATION_DURATION,0,false,false);
+      }
     }
+    setItemPlacementDirty(false);
   }
-  completeAndClearReorderHintAnimations();
-  setItemPlacementDirty(false);
 }

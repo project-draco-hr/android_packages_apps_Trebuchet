@@ -1,7 +1,7 @@
 {
   int[] pixelXY=new int[2];
   regionToCenterPoint(cellX,cellY,spanX,spanY,pixelXY);
-  ItemConfiguration swapSolution=simpleSwap(pixelXY[0],pixelXY[1],spanX,spanY,spanX,spanY,direction,dragView,true,new ItemConfiguration());
+  ItemConfiguration swapSolution=findReorderSolution(pixelXY[0],pixelXY[1],spanX,spanY,spanX,spanY,direction,dragView,true,new ItemConfiguration());
   setUseTempCoords(true);
   if (swapSolution != null && swapSolution.isSolution) {
     copySolutionToTempState(swapSolution,dragView);
@@ -9,11 +9,11 @@
     animateItemsToSolution(swapSolution,dragView,commit);
     if (commit) {
       commitTempPlacement();
-      completeAndClearReorderHintAnimations();
+      completeAndClearReorderPreviewAnimations();
       setItemPlacementDirty(false);
     }
  else {
-      beginOrAdjustHintAnimations(swapSolution,dragView,REORDER_ANIMATION_DURATION);
+      beginOrAdjustReorderPreviewAnimations(swapSolution,dragView,REORDER_ANIMATION_DURATION,ReorderPreviewAnimation.MODE_PREVIEW);
     }
     mShortcutsAndWidgets.requestLayout();
   }
