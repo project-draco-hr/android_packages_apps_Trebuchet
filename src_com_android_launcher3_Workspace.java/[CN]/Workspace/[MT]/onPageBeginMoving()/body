@@ -11,9 +11,6 @@
       enableChildrenCache(mCurrentPage - 1,mCurrentPage + 1);
     }
   }
-  if (LauncherAppState.getInstance().isScreenLarge()) {
-    showOutlines();
-  }
   if (!mWorkspaceFadeInAdjacentScreens) {
     for (int i=0; i < getChildCount(); ++i) {
       ((CellLayout)getPageAt(i)).setShortcutAndWidgetAlpha(1f);
