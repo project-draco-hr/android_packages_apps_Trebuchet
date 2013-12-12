@@ -44,7 +44,7 @@ synchronized (sBgLock) {
       long id;
       Intent intent;
       while (!mStopped && c.moveToNext()) {
-        AtomicBoolean deleteOnItemOverlap=new AtomicBoolean(false);
+        AtomicBoolean deleteOnInvalidPlacement=new AtomicBoolean(false);
         try {
           int itemType=c.getInt(itemTypeIndex);
 switch (itemType) {
@@ -89,15 +89,9 @@ case LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT:
       info.cellY=c.getInt(cellYIndex);
       info.spanX=1;
       info.spanY=1;
-      if (container == LauncherSettings.Favorites.CONTAINER_DESKTOP) {
-        if (checkItemDimensions(info)) {
-          Launcher.addDumpLog(TAG,"Skipped loading out of bounds shortcut: " + info + ", "+ grid.numColumns+ "x"+ grid.numRows,true);
-          continue;
-        }
-      }
-      deleteOnItemOverlap.set(false);
-      if (!checkItemPlacement(occupied,info,deleteOnItemOverlap)) {
-        if (deleteOnItemOverlap.get()) {
+      deleteOnInvalidPlacement.set(false);
+      if (!checkItemPlacement(occupied,info,deleteOnInvalidPlacement)) {
+        if (deleteOnInvalidPlacement.get()) {
           itemsToRemove.add(id);
         }
         break;
@@ -131,15 +125,9 @@ folderInfo.cellX=c.getInt(cellXIndex);
 folderInfo.cellY=c.getInt(cellYIndex);
 folderInfo.spanX=1;
 folderInfo.spanY=1;
-if (container == LauncherSettings.Favorites.CONTAINER_DESKTOP) {
-if (checkItemDimensions(folderInfo)) {
-Log.d(TAG,"Skipped loading out of bounds folder");
-continue;
-}
-}
-deleteOnItemOverlap.set(false);
-if (!checkItemPlacement(occupied,folderInfo,deleteOnItemOverlap)) {
-if (deleteOnItemOverlap.get()) {
+deleteOnInvalidPlacement.set(false);
+if (!checkItemPlacement(occupied,folderInfo,deleteOnInvalidPlacement)) {
+if (deleteOnInvalidPlacement.get()) {
 itemsToRemove.add(id);
 }
 break;
@@ -181,15 +169,9 @@ Log.e(TAG,"Widget found where container != " + "CONTAINER_DESKTOP nor CONTAINER_
 continue;
 }
 appWidgetInfo.container=c.getInt(containerIndex);
-if (container == LauncherSettings.Favorites.CONTAINER_DESKTOP) {
-if (checkItemDimensions(appWidgetInfo)) {
-Log.d(TAG,"Skipped loading out of bounds app widget");
-continue;
-}
-}
-deleteOnItemOverlap.set(false);
-if (!checkItemPlacement(occupied,appWidgetInfo,deleteOnItemOverlap)) {
-if (deleteOnItemOverlap.get()) {
+deleteOnInvalidPlacement.set(false);
+if (!checkItemPlacement(occupied,appWidgetInfo,deleteOnInvalidPlacement)) {
+if (deleteOnInvalidPlacement.get()) {
 itemsToRemove.add(id);
 }
 break;
