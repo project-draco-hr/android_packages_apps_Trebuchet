@@ -3,7 +3,7 @@
     mWidgetsAndShortcuts=widgetsAndShortcuts;
     return;
   }
-  if (!AppsCustomizePagedView.DISABLE_ALL_APPS && mAppsCustomizeContent != null) {
+  if (mAppsCustomizeContent != null) {
     mAppsCustomizeContent.onPackagesUpdated(widgetsAndShortcuts);
   }
 }
