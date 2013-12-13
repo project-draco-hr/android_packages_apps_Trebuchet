@@ -1,4 +1,5 @@
 {
   mCurrentPage=getNextPage();
+  notifyPageSwitchListener();
   forceFinishScroller();
 }

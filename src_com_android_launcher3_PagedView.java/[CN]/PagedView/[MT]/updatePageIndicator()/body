@@ -1,0 +1,5 @@
+{
+  if (mPageIndicator != null && !isReordering(false)) {
+    mPageIndicator.setActiveMarker(getNextPage());
+  }
+}
