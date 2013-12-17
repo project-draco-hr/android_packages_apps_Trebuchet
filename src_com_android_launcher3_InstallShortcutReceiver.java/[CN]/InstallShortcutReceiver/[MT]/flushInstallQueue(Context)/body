@@ -11,6 +11,10 @@
       final PendingInstallShortcutInfo pendingInfo=iter.next();
       final Intent intent=pendingInfo.launchIntent;
       final String name=pendingInfo.name;
+      if (AppsCustomizePagedView.DISABLE_ALL_APPS && !isValidShortcutLaunchIntent(intent)) {
+        if (DBG)         Log.d(TAG,"Ignoring shortcut with launchIntent:" + intent);
+        continue;
+      }
       final boolean exists=LauncherModel.shortcutExists(context,name,intent);
       if (!exists) {
         ShortcutInfo info=getShortcutInfo(context,pendingInfo.data,pendingInfo.launchIntent);
