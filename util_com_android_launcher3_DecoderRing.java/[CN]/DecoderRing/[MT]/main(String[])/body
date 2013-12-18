@@ -1,26 +1,27 @@
 {
-  File source=null;
-  Class type=null;
+  Class defaultType=null;
   boolean extractImages=false;
+  boolean fromLogs=false;
   int skip=0;
+  List<File> files=new LinkedList<File>();
   for (int i=0; i < args.length; i++) {
     if ("-k".equals(args[i])) {
-      type=Key.class;
+      defaultType=Key.class;
     }
  else     if ("-f".equals(args[i])) {
-      type=Favorite.class;
+      defaultType=Favorite.class;
     }
  else     if ("-j".equals(args[i])) {
-      type=Journal.class;
+      defaultType=Journal.class;
     }
  else     if ("-i".equals(args[i])) {
-      type=Resource.class;
+      defaultType=Resource.class;
     }
  else     if ("-s".equals(args[i])) {
-      type=Screen.class;
+      defaultType=Screen.class;
     }
  else     if ("-w".equals(args[i])) {
-      type=Widget.class;
+      defaultType=Widget.class;
     }
  else     if ("-S".equals(args[i])) {
       if ((i + 1) < args.length) {
@@ -33,142 +34,102 @@
  else     if ("-x".equals(args[i])) {
       extractImages=true;
     }
+ else     if ("-L".equals(args[i])) {
+      fromLogs=true;
+    }
  else     if (args[i] != null && !args[i].startsWith("-")) {
-      source=new File(args[i]);
+      files.add(new File(args[i]));
     }
  else {
       System.err.println("Unsupported flag: " + args[i]);
       usage(args);
     }
   }
-  if (type == null) {
-    if (source == null) {
-      usage(args);
-    }
- else {
-      Key key=new Key();
-      try {
-        byte[] rawKey=DatatypeConverter.parseBase64Binary(source.getName());
-        if (rawKey[0] != 'L' || rawKey[1] != ':') {
-          System.err.println("you must specify the payload type. " + source.getName() + " is not a launcher backup key.");
-          System.exit(1);
-        }
-        String encodedPayload=new String(rawKey,2,rawKey.length - 2);
-        byte[] keyProtoData=DatatypeConverter.parseBase64Binary(encodedPayload);
-        key=Key.parseFrom(keyProtoData);
-      }
- catch (      InvalidProtocolBufferNanoException protoException) {
-        System.err.println("failed to extract key from filename: " + protoException);
-        System.exit(1);
-      }
-catch (      IllegalArgumentException base64Exception) {
-        System.err.println("failed to extract key from filename: " + base64Exception);
-        System.exit(1);
-      }
-      if (key.checksum != checkKey(key)) {
-        System.err.println("key ckecksum failed");
-        System.exit(1);
-      }
+  if (defaultType == null && files.isEmpty()) {
+    usage(args);
+  }
+  if (files.size() > 1) {
+    System.err.println("Explicit type ignored for multiple files.");
+    defaultType=null;
+  }
+  if (files.isEmpty()) {
+    files.add(new File(STANDARD_IN));
+  }
+  for (  File source : files) {
+    Class type=null;
+    if (defaultType == null) {
+      Key key=decodeKey(source.getName().getBytes(),fromLogs);
       type=TYPES[key.type];
       System.err.println("This is a " + type.getSimpleName() + " backup");
     }
-  }
-  ByteArrayOutputStream byteStream=new ByteArrayOutputStream();
-  BufferedInputStream input=null;
-  if (source == null) {
-    input=new BufferedInputStream(System.in);
-  }
  else {
-    try {
-      input=new BufferedInputStream(new FileInputStream(source));
+      type=defaultType;
     }
- catch (    FileNotFoundException e) {
-      System.err.println("failed to open file: " + source + ", "+ e);
-      System.exit(1);
+    ByteArrayOutputStream byteStream=new ByteArrayOutputStream();
+    BufferedInputStream input=null;
+    if (source.getName() == STANDARD_IN) {
+      input=new BufferedInputStream(System.in);
     }
-  }
-  byte[] buffer=new byte[1024];
-  try {
-    while (input.available() > 0) {
-      int n=input.read(buffer);
-      int offset=0;
-      if (skip > 0) {
-        offset=Math.min(skip,n);
-        n-=offset;
-        skip-=offset;
-      }
-      if (n > 0) {
-        byteStream.write(buffer,offset,n);
-      }
-    }
-  }
- catch (  IOException e) {
-    System.err.println("failed to read input: " + e);
-    System.exit(1);
-  }
-  MessageNano proto=null;
-  if (type == Key.class) {
-    Key key=new Key();
-    try {
-      key=Key.parseFrom(byteStream.toByteArray());
-    }
- catch (    InvalidProtocolBufferNanoException e) {
-      System.err.println("failed to parse proto: " + e);
-      System.exit(1);
-    }
-    if (key.checksum != checkKey(key)) {
-      System.err.println("key checksum failed");
-      System.exit(1);
-    }
-    proto=key;
-  }
  else {
-    CheckedMessage wrapper=new CheckedMessage();
-    try {
-      MessageNano.mergeFrom(wrapper,byteStream.toByteArray());
-    }
- catch (    InvalidProtocolBufferNanoException e) {
-      System.err.println("failed to parse wrapper: " + e);
-      System.exit(1);
-    }
-    CRC32 checksum=new CRC32();
-    checksum.update(wrapper.payload);
-    if (wrapper.checksum != checksum.getValue()) {
-      System.err.println("wrapper checksum failed");
-      System.exit(1);
-    }
-    proto=(MessageNano)type.newInstance();
-    try {
-      MessageNano.mergeFrom(proto,wrapper.payload);
-    }
- catch (    InvalidProtocolBufferNanoException e) {
-      System.err.println("failed to parse proto: " + e);
-      System.exit(1);
-    }
-  }
-  System.out.println(proto.toString());
-  if (extractImages) {
-    String prefix="stdin";
-    if (source != null) {
-      prefix=source.getName();
-    }
-    if (proto instanceof Resource) {
-      Resource icon=(Resource)proto;
-      writeImageData(icon.data,prefix + ".png");
-    }
-    if (proto instanceof Favorite) {
-      Favorite favorite=(Favorite)proto;
-      if (favorite.iconType == ICON_TYPE_BITMAP) {
-        writeImageData(favorite.icon,prefix + ".png");
+      try {
+        input=new BufferedInputStream(new FileInputStream(source));
+      }
+ catch (      FileNotFoundException e) {
+        System.err.println("failed to open file: " + source + ", "+ e);
+        System.exit(1);
       }
     }
-    if (proto instanceof Widget) {
-      Widget widget=(Widget)proto;
-      if (widget.icon != null) {
-        writeImageData(widget.icon.data,prefix + "_icon.png");
+    byte[] buffer=new byte[1024];
+    try {
+      while (input.available() > 0) {
+        int n=input.read(buffer);
+        int offset=0;
+        if (skip > 0) {
+          offset=Math.min(skip,n);
+          n-=offset;
+          skip-=offset;
+        }
+        if (n > 0) {
+          byteStream.write(buffer,offset,n);
+        }
       }
-      if (widget.preview != null) {
-        writeImageData(widget.preview.data,prefix + "_preview.png");
+    }
+ catch (    IOException e) {
+      System.err.println("failed to read input: " + e);
+      System.exit(1);
+    }
+    MessageNano proto=null;
+    byte[] payload=byteStream.toByteArray();
+    if (type == Key.class) {
+      proto=decodeKey(payload,fromLogs);
+    }
+ else {
+      proto=decodeBackupData(payload,type,fromLogs);
+    }
+    System.out.println(proto.toString());
+    if (extractImages) {
+      String prefix="stdin";
+      if (source != null) {
+        prefix=source.getName();
+      }
+      if (proto instanceof Resource) {
+        Resource icon=(Resource)proto;
+        writeImageData(icon.data,prefix + ".png");
+      }
+      if (proto instanceof Favorite) {
+        Favorite favorite=(Favorite)proto;
+        if (favorite.iconType == ICON_TYPE_BITMAP) {
+          writeImageData(favorite.icon,prefix + ".png");
+        }
+      }
+      if (proto instanceof Widget) {
+        Widget widget=(Widget)proto;
+        if (widget.icon != null) {
+          writeImageData(widget.icon.data,prefix + "_icon.png");
+        }
+        if (widget.preview != null) {
+          writeImageData(widget.preview.data,prefix + "_preview.png");
+        }
       }
     }
   }
