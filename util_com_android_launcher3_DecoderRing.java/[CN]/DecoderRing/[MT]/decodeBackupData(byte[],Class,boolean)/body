@@ -1,0 +1,29 @@
+{
+  MessageNano proto;
+  CheckedMessage wrapper=new CheckedMessage();
+  try {
+    if (fromLogs) {
+      payload=DatatypeConverter.parseBase64Binary(new String(payload));
+    }
+    MessageNano.mergeFrom(wrapper,payload);
+  }
+ catch (  InvalidProtocolBufferNanoException e) {
+    System.err.println("failed to parse wrapper: " + e);
+    System.exit(1);
+  }
+  CRC32 checksum=new CRC32();
+  checksum.update(wrapper.payload);
+  if (wrapper.checksum != checksum.getValue()) {
+    System.err.println("wrapper checksum failed");
+    System.exit(1);
+  }
+  proto=(MessageNano)type.newInstance();
+  try {
+    MessageNano.mergeFrom(proto,wrapper.payload);
+  }
+ catch (  InvalidProtocolBufferNanoException e) {
+    System.err.println("failed to parse proto: " + e);
+    System.exit(1);
+  }
+  return proto;
+}
