@@ -1,0 +1,9 @@
+{
+  long id=values.getAsLong(LauncherSettings.BaseLauncherColumns._ID);
+  if (table == LauncherProvider.TABLE_WORKSPACE_SCREENS) {
+    mMaxScreenId=Math.max(id,mMaxScreenId);
+  }
+ else {
+    mMaxItemId=Math.max(id,mMaxItemId);
+  }
+}

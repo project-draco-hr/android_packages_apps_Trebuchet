@@ -1,5 +1,9 @@
 {
   Screen screen=new Screen();
   MessageNano.mergeFrom(screen,readCheckedBytes(buffer,offset,dataSize));
-  return screen;
+  if (DEBUG)   Log.d(TAG,"unpacked " + screen.id + "/"+ screen.rank);
+  ContentValues values=new ContentValues();
+  values.put(WorkspaceScreens._ID,screen.id);
+  values.put(WorkspaceScreens.SCREEN_RANK,screen.rank);
+  return values;
 }
