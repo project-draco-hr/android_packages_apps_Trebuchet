@@ -1,4 +1,5 @@
 {
+  ImageDb.moveFromCacheDirectoryIfNecessary(context);
   mDb=new ImageDb(context);
   mContext=context;
   mLayoutInflater=context.getLayoutInflater();
