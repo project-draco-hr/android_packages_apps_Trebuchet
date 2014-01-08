@@ -19,25 +19,19 @@ case MotionEvent.ACTION_HOVER_ENTER:
         mHoverPointClosesFolder=true;
         return true;
       }
- else       if (isOverFolder) {
-        mHoverPointClosesFolder=false;
-      }
- else {
-        return true;
-      }
-case MotionEvent.ACTION_HOVER_MOVE:
-    isOverFolder=isEventOverFolder(currentFolder,ev);
-  if (!isOverFolder && !mHoverPointClosesFolder) {
-    sendTapOutsideFolderAccessibilityEvent(currentFolder.isEditingName());
-    mHoverPointClosesFolder=true;
-    return true;
-  }
- else   if (isOverFolder) {
     mHoverPointClosesFolder=false;
-  }
- else {
-    return true;
-  }
+  break;
+case MotionEvent.ACTION_HOVER_MOVE:
+isOverFolder=isEventOverFolder(currentFolder,ev);
+if (!isOverFolder && !mHoverPointClosesFolder) {
+sendTapOutsideFolderAccessibilityEvent(currentFolder.isEditingName());
+mHoverPointClosesFolder=true;
+return true;
+}
+ else if (!isOverFolder) {
+return true;
+}
+mHoverPointClosesFolder=false;
 }
 }
 }
