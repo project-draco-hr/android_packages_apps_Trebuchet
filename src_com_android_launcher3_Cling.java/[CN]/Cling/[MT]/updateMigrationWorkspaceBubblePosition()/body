@@ -1,0 +1,11 @@
+{
+  DisplayMetrics metrics=new DisplayMetrics();
+  mLauncher.getWindowManager().getDefaultDisplay().getMetrics(metrics);
+  LauncherAppState app=LauncherAppState.getInstance();
+  DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
+  Rect pageIndicatorBounds=grid.getWorkspacePageIndicatorBounds(mInsets);
+  View bubble=findViewById(R.id.migration_workspace_cling_bubble);
+  FrameLayout.LayoutParams lp=(FrameLayout.LayoutParams)bubble.getLayoutParams();
+  lp.bottomMargin=grid.heightPx - pageIndicatorBounds.top;
+  bubble.requestLayout();
+}

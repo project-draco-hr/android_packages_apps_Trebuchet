@@ -6,7 +6,7 @@
   customScreen.setPadding(0,0,0,0);
   addFullScreenPage(customScreen);
   mDefaultPage=mOriginalDefaultPage + 1;
-  mLauncher.updateCustomContentHintVisibility();
+  mLauncher.getLauncherClings().updateCustomContentHintVisibility();
   if (mRestorePage != INVALID_RESTORE_PAGE) {
     mRestorePage=mRestorePage + 1;
   }
