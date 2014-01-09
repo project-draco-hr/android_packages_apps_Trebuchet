@@ -6,7 +6,7 @@
       byte[] rawKey=DatatypeConverter.parseBase64Binary(encodedKey);
       if (rawKey[0] != 'L' || rawKey[1] != ':') {
         System.err.println(encodedKey + " is not a launcher backup key.");
-        System.exit(1);
+        return null;
       }
       encodedKey=new String(rawKey,2,rawKey.length - 2);
     }
@@ -15,15 +15,15 @@
   }
  catch (  InvalidProtocolBufferNanoException protoException) {
     System.err.println("failed to extract key from filename: " + protoException);
-    System.exit(1);
+    return null;
   }
 catch (  IllegalArgumentException base64Exception) {
     System.err.println("failed to extract key from filename: " + base64Exception);
-    System.exit(1);
+    return null;
   }
   if (key.checksum != checkKey(key)) {
     System.err.println("key ckecksum failed");
-    System.exit(1);
+    return null;
   }
   return key;
 }
