@@ -3,7 +3,7 @@
   int height=getFolderHeight();
   int contentAreaWidthSpec=MeasureSpec.makeMeasureSpec(getContentAreaWidth(),MeasureSpec.EXACTLY);
   int contentAreaHeightSpec=MeasureSpec.makeMeasureSpec(getContentAreaHeight(),MeasureSpec.EXACTLY);
-  if (AppsCustomizePagedView.DISABLE_ALL_APPS) {
+  if (LauncherAppState.isDisableAllApps()) {
     mContent.setFixedSize(getContentAreaWidth(),mContent.getDesiredHeight());
   }
  else {

@@ -7,7 +7,7 @@
   mIconCache=app.getIconCache();
   Resources res=getResources();
   mMaxCountX=(int)grid.numColumns;
-  if (AppsCustomizePagedView.DISABLE_ALL_APPS) {
+  if (LauncherAppState.isDisableAllApps()) {
     mMaxCountY=mMaxNumItems=Integer.MAX_VALUE;
   }
  else {
