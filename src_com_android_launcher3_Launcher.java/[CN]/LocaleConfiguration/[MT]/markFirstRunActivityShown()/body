@@ -1,0 +1,5 @@
+{
+  SharedPreferences.Editor editor=mSharedPrefs.edit();
+  editor.putBoolean(FIRST_RUN_ACTIVITY_DISPLAYED,true);
+  editor.apply();
+}
