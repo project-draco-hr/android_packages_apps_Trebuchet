@@ -15,7 +15,7 @@
     mWorkspace.removeItemsByApplicationInfo(appInfos);
   }
   mDragController.onAppsRemoved(packageNames,appInfos);
-  if (!AppsCustomizePagedView.DISABLE_ALL_APPS && mAppsCustomizeContent != null) {
+  if (!LauncherAppState.isDisableAllApps() && mAppsCustomizeContent != null) {
     mAppsCustomizeContent.removeApps(appInfos);
   }
 }
