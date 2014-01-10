@@ -1,4 +1,7 @@
 {
+  if (values == null) {
+    throw new RuntimeException("Error: attempting to insert null values");
+  }
   if (!values.containsKey(LauncherSettings.Favorites._ID)) {
     throw new RuntimeException("Error: attempting to add item without specifying an id");
   }
