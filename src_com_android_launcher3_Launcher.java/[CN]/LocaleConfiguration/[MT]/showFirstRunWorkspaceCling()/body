@@ -1,9 +1,0 @@
-{
-  if (isClingsEnabled() && !mSharedPrefs.getBoolean(Cling.WORKSPACE_CLING_DISMISSED_KEY,false)) {
-    Cling c=initCling(R.id.workspace_cling,0,false,true);
-    c.setFocusedHotseatApp(getFirstRunFocusedHotseatAppDrawableId(),getFirstRunFocusedHotseatAppRank(),getFirstRunFocusedHotseatAppComponentName(),getFirstRunFocusedHotseatAppBubbleTitle(),getFirstRunFocusedHotseatAppBubbleDescription());
-  }
- else {
-    removeCling(R.id.workspace_cling);
-  }
-}

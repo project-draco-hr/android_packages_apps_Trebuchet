@@ -1,0 +1,9 @@
+{
+  LauncherModel model=mLauncher.getModel();
+  String spKey=LauncherAppState.getSharedPreferencesKey();
+  SharedPreferences sp=mLauncher.getSharedPreferences(spKey,Context.MODE_PRIVATE);
+  SharedPreferences.Editor editor=sp.edit();
+  editor.putBoolean(Launcher.USER_HAS_MIGRATED,true);
+  editor.apply();
+  dismissMigrationCling();
+}

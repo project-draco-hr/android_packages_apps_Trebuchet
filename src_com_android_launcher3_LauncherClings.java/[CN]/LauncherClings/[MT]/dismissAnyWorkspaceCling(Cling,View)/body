@@ -1,0 +1,13 @@
+{
+  Runnable cb=null;
+  if (v == null) {
+    cb=new Runnable(){
+      public void run(){
+        mLauncher.getWorkspace().enterOverviewMode();
+      }
+    }
+;
+  }
+  dismissCling(cling,cb,WORKSPACE_CLING_DISMISSED_KEY,DISMISS_CLING_DURATION,true);
+  mLauncher.getSearchBar().showSearchBar(true);
+}

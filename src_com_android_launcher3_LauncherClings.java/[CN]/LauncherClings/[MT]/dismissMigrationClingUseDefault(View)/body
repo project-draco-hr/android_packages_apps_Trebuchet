@@ -1,0 +1,4 @@
+{
+  LauncherModel model=mLauncher.getModel();
+  dismissMigrationCling();
+}
