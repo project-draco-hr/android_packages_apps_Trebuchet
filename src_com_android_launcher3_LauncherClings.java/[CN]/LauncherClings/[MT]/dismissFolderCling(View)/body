@@ -1,0 +1,4 @@
+{
+  Cling cling=(Cling)mLauncher.findViewById(R.id.folder_cling);
+  dismissCling(cling,null,FOLDER_CLING_DISMISSED_KEY,DISMISS_CLING_DURATION,true);
+}

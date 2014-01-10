@@ -1,6 +1,9 @@
 {
   if (mIsInitialized) {
     canvas.save();
+    LauncherAppState app=LauncherAppState.getInstance();
+    DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
+    Rect pageIndicatorBounds=grid.getWorkspacePageIndicatorBounds(mInsets);
     if (mBackground == null) {
       if (mDrawIdentifier.equals(WORKSPACE_CUSTOM)) {
         mBackground=getResources().getDrawable(R.drawable.bg_cling5);
@@ -15,7 +18,7 @@
       mBackground.setBounds(0,0,getMeasuredWidth(),getMeasuredHeight());
       mBackground.draw(canvas);
     }
- else     if (mDrawIdentifier.equals(WORKSPACE_PORTRAIT) || mDrawIdentifier.equals(WORKSPACE_LANDSCAPE) || mDrawIdentifier.equals(WORKSPACE_LARGE)) {
+ else     if (mDrawIdentifier.equals(WORKSPACE_PORTRAIT) || mDrawIdentifier.equals(WORKSPACE_LANDSCAPE) || mDrawIdentifier.equals(WORKSPACE_LARGE)|| mDrawIdentifier.equals(MIGRATION_WORKSPACE_PORTRAIT)|| mDrawIdentifier.equals(MIGRATION_WORKSPACE_LANDSCAPE)) {
       eraseBg=Bitmap.createBitmap(getMeasuredWidth(),getMeasuredHeight(),Bitmap.Config.ARGB_8888);
       eraseCanvas=new Canvas(eraseBg);
       eraseCanvas.drawColor(mBackgroundColor);
@@ -40,7 +43,7 @@
     }
  else     if (mDrawIdentifier.equals(WORKSPACE_PORTRAIT) || mDrawIdentifier.equals(WORKSPACE_LANDSCAPE) || mDrawIdentifier.equals(WORKSPACE_LARGE)) {
       int offset=DynamicGrid.pxFromDp(WORKSPACE_CIRCLE_Y_OFFSET_DPS,metrics);
-      mErasePaint.setAlpha((int)(128));
+      mErasePaint.setAlpha(128);
       eraseCanvas.drawCircle(metrics.widthPixels / 2,metrics.heightPixels / 2 - offset,DynamicGrid.pxFromDp(WORKSPACE_OUTER_CIRCLE_RADIUS_DPS,metrics),mErasePaint);
       mErasePaint.setAlpha(0);
       eraseCanvas.drawCircle(metrics.widthPixels / 2,metrics.heightPixels / 2 - offset,DynamicGrid.pxFromDp(WORKSPACE_INNER_CIRCLE_RADIUS_DPS,metrics),mErasePaint);
@@ -52,6 +55,15 @@
         mFocusedHotseatApp.setAlpha((int)(255 * alpha));
         mFocusedHotseatApp.draw(canvas);
       }
+    }
+ else     if (mDrawIdentifier.equals(MIGRATION_WORKSPACE_PORTRAIT) || mDrawIdentifier.equals(MIGRATION_WORKSPACE_LANDSCAPE)) {
+      int offset=DynamicGrid.pxFromDp(WORKSPACE_CIRCLE_Y_OFFSET_DPS,metrics);
+      eraseCanvas.drawCircle(pageIndicatorBounds.centerX(),pageIndicatorBounds.centerY(),DynamicGrid.pxFromDp(MIGRATION_WORKSPACE_OUTER_CIRCLE_RADIUS_DPS,metrics),mBorderPaint);
+      mErasePaint.setAlpha(0);
+      eraseCanvas.drawCircle(pageIndicatorBounds.centerX(),pageIndicatorBounds.centerY(),DynamicGrid.pxFromDp(MIGRATION_WORKSPACE_INNER_CIRCLE_RADIUS_DPS,metrics),mErasePaint);
+      canvas.drawBitmap(eraseBg,0,0,null);
+      eraseCanvas.setBitmap(null);
+      eraseBg=null;
     }
     canvas.restore();
   }
