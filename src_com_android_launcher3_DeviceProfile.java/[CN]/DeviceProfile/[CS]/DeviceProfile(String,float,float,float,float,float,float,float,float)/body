@@ -1,5 +1,5 @@
 {
-  if (!AppsCustomizePagedView.DISABLE_ALL_APPS && hs % 2 == 0) {
+  if (!LauncherAppState.isDisableAllApps() && hs % 2 == 0) {
     throw new RuntimeException("All Device Profiles must have an odd number of hotseat spaces");
   }
   name=n;

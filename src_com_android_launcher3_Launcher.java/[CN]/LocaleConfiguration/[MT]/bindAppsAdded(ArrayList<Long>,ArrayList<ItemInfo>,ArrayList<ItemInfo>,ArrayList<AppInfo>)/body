@@ -16,7 +16,7 @@
     bindItems(addAnimated,0,addAnimated.size(),true);
   }
   mWorkspace.removeExtraEmptyScreen(false,null);
-  if (!AppsCustomizePagedView.DISABLE_ALL_APPS && addedApps != null && mAppsCustomizeContent != null) {
+  if (!LauncherAppState.isDisableAllApps() && addedApps != null && mAppsCustomizeContent != null) {
     mAppsCustomizeContent.addApps(addedApps);
   }
 }

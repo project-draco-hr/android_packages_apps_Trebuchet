@@ -1,5 +1,5 @@
 {
-  if (AppsCustomizePagedView.DISABLE_ALL_APPS) {
+  if (LauncherAppState.isDisableAllApps()) {
     View v=mContent.getChildAt(getCellXFromOrder(mAllAppsButtonRank),getCellYFromOrder(mAllAppsButtonRank));
     FolderIcon fi=null;
     if (v instanceof FolderIcon) {

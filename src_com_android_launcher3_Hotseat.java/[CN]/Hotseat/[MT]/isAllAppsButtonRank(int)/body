@@ -1,5 +1,5 @@
 {
-  if (AppsCustomizePagedView.DISABLE_ALL_APPS) {
+  if (LauncherAppState.isDisableAllApps()) {
     return false;
   }
  else {

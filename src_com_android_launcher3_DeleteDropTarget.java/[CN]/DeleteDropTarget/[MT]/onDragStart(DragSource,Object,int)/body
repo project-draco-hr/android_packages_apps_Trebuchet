@@ -1,6 +1,6 @@
 {
   boolean isVisible=true;
-  boolean useUninstallLabel=!AppsCustomizePagedView.DISABLE_ALL_APPS && isAllAppsApplication(source,info);
+  boolean useUninstallLabel=!LauncherAppState.isDisableAllApps() && isAllAppsApplication(source,info);
   boolean useDeleteLabel=!useUninstallLabel && source.supportsDeleteDropTarget();
   if (!willAcceptDrop(info) || isAllAppsWidget(source,info)) {
     isVisible=false;
