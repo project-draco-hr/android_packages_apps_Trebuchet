@@ -2,7 +2,9 @@
   FileOutputStream outStream=null;
   try {
     outStream=new FileOutputStream(newState.getFileDescriptor());
-    outStream.write(writeCheckedBytes(journal));
+    final byte[] journalBytes=writeCheckedBytes(journal);
+    if (DEBUG)     Log.d(TAG,"writing " + journalBytes.length + " bytes of journal");
+    outStream.write(journalBytes);
     outStream.close();
   }
  catch (  IOException e) {
