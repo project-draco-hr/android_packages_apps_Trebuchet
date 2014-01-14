@@ -10,7 +10,18 @@
   DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
   int countX=(int)grid.numColumns;
   int countY=(int)grid.numRows;
-  LauncherAppState.getLauncherProvider().loadDefaultFavoritesIfNecessary(0);
+  if ((mFlags & LOADER_FLAG_CLEAR_WORKSPACE) != 0) {
+    Launcher.addDumpLog(TAG,"loadWorkspace: resetting launcher database",true);
+    LauncherAppState.getLauncherProvider().deleteDatabase();
+  }
+  if ((mFlags & LOADER_FLAG_MIGRATE_SHORTCUTS) != 0) {
+    Launcher.addDumpLog(TAG,"loadWorkspace: migrating from launcher2",true);
+    LauncherAppState.getLauncherProvider().migrateLauncher2Shortcuts();
+  }
+ else {
+    Launcher.addDumpLog(TAG,"loadWorkspace: loading default favorites",false);
+    LauncherAppState.getLauncherProvider().loadDefaultFavoritesIfNecessary(0);
+  }
   boolean loadedOldDb=LauncherAppState.getLauncherProvider().justLoadedOldDb();
   Launcher.addDumpLog(TAG,"11683562 -   loadedOldDb: " + loadedOldDb,true);
 synchronized (sBgLock) {

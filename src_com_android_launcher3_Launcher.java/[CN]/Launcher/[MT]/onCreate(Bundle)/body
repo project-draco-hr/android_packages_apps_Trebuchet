@@ -20,6 +20,7 @@
   mIconCache=app.getIconCache();
   mIconCache.flushInvalidIcons(grid);
   mDragController=new DragController(this);
+  mLauncherClings=new LauncherClings(this);
   mInflater=getLayoutInflater();
   mStats=new Stats(this);
   mAppWidgetManager=AppWidgetManager.getInstance(this);
@@ -55,5 +56,10 @@
   updateGlobalIcons();
   unlockScreenOrientation(true);
   showFirstRunActivity();
-  showFirstRunCling();
+  if (mModel.canMigrateFromOldLauncherDb()) {
+    mLauncherClings.showMigrationCling();
+  }
+ else {
+    mLauncherClings.showFirstRunCling();
+  }
 }

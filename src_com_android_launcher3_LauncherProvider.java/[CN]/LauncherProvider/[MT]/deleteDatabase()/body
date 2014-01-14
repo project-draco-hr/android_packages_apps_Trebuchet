@@ -1,0 +1,7 @@
+{
+  final SQLiteDatabase db=mOpenHelper.getWritableDatabase();
+  final String dbFile=db.getPath();
+  mOpenHelper.close();
+  SQLiteDatabase.deleteDatabase(new File(dbFile));
+  mOpenHelper=new DatabaseHelper(getContext());
+}

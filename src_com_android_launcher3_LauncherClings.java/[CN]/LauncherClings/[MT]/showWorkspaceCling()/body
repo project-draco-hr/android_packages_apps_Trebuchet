@@ -1,0 +1,9 @@
+{
+  if (isClingsEnabled() && !mLauncher.getSharedPrefs().getBoolean(WORKSPACE_CLING_DISMISSED_KEY,false)) {
+    Cling c=initCling(R.id.workspace_cling,0,false,true);
+    c.setFocusedHotseatApp(mLauncher.getFirstRunFocusedHotseatAppDrawableId(),mLauncher.getFirstRunFocusedHotseatAppRank(),mLauncher.getFirstRunFocusedHotseatAppComponentName(),mLauncher.getFirstRunFocusedHotseatAppBubbleTitle(),mLauncher.getFirstRunFocusedHotseatAppBubbleDescription());
+  }
+ else {
+    removeCling(R.id.workspace_cling);
+  }
+}
