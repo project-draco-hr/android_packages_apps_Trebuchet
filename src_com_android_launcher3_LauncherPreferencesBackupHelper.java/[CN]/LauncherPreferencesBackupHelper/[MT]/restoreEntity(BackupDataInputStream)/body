@@ -1,0 +1,5 @@
+{
+  if (mRestoreEnabled) {
+    super.restoreEntity(data);
+  }
+}

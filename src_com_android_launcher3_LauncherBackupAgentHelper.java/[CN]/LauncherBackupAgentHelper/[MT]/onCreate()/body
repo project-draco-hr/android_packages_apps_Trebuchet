@@ -1,4 +1,5 @@
 {
-  addHelper(LauncherBackupHelper.LAUNCHER_PREFS_PREFIX,new SharedPreferencesBackupHelper(this,LauncherAppState.getSharedPreferencesKey()));
-  addHelper(LauncherBackupHelper.LAUNCHER_PREFIX,new LauncherBackupHelper(this));
+  boolean restoreEnabled=0 != Settings.Secure.getInt(getContentResolver(),SETTING_RESTORE_ENABLED,0);
+  addHelper(LauncherBackupHelper.LAUNCHER_PREFS_PREFIX,new LauncherPreferencesBackupHelper(this,LauncherAppState.getSharedPreferencesKey(),restoreEnabled));
+  addHelper(LauncherBackupHelper.LAUNCHER_PREFIX,new LauncherBackupHelper(this,restoreEnabled));
 }
