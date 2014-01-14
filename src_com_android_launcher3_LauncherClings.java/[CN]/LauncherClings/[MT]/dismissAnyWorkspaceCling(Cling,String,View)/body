@@ -8,6 +8,6 @@
     }
 ;
   }
-  dismissCling(cling,cb,WORKSPACE_CLING_DISMISSED_KEY,DISMISS_CLING_DURATION,true);
+  dismissCling(cling,cb,key,DISMISS_CLING_DURATION,true);
   mLauncher.getSearchBar().showSearchBar(true);
 }
