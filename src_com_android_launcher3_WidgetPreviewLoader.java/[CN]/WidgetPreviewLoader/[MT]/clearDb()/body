@@ -1,4 +1,8 @@
 {
   SQLiteDatabase db=mDb.getWritableDatabase();
-  db.delete(CacheDb.TABLE_NAME,null,null);
+  try {
+    db.delete(CacheDb.TABLE_NAME,null,null);
+  }
+ catch (  SQLiteDiskIOException e) {
+  }
 }
