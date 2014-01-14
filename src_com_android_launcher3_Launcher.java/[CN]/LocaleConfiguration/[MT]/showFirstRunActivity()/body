@@ -1,5 +1,5 @@
 {
-  if (shouldRunFirstRunActivity() && hasFirstRunActivity() && !mSharedPrefs.getBoolean(FIRST_RUN_ACTIVITY_DISPLAYED,false)) {
+  if (shouldRunFirstRunActivity() && hasFirstRunActivity()) {
     Intent firstRunIntent=getFirstRunActivity();
     if (firstRunIntent != null) {
       startActivity(firstRunIntent);
