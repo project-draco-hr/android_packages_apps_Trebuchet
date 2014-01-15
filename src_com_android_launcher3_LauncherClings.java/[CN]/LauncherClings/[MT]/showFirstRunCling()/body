@@ -1,6 +1,6 @@
 {
-  SharedPreferences sharedPrefs=mLauncher.getSharedPrefs();
-  if (isClingsEnabled() && !sharedPrefs.getBoolean(FIRST_RUN_CLING_DISMISSED_KEY,false) && !skipCustomClingIfNoAccounts()) {
+  if (!skipCustomClingIfNoAccounts()) {
+    SharedPreferences sharedPrefs=mLauncher.getSharedPrefs();
     if (!DISABLE_CUSTOM_CLINGS) {
       if (sharedPrefs.getInt(LauncherProvider.DEFAULT_WORKSPACE_RESOURCE_ID,0) != 0 && mLauncher.getResources().getBoolean(R.bool.config_useCustomClings)) {
         View cling=mLauncher.findViewById(R.id.workspace_cling);
@@ -26,6 +26,6 @@
     initCling(R.id.first_run_cling,0,false,true);
   }
  else {
-    removeCling(R.id.first_run_cling);
+    removeFirstRunAndMigrationClings();
   }
 }

@@ -1,11 +1,6 @@
 {
-  if (isClingsEnabled() && !mLauncher.getSharedPrefs().getBoolean(MIGRATION_CLING_DISMISSED_KEY,false)) {
-    mLauncher.hideWorkspaceSearchAndHotseat();
-    Cling c=initCling(R.id.migration_cling,0,false,true);
-    c.bringScrimToFront();
-    c.bringToFront();
-  }
- else {
-    removeCling(R.id.migration_cling);
-  }
+  mLauncher.hideWorkspaceSearchAndHotseat();
+  Cling c=initCling(R.id.migration_cling,0,false,true);
+  c.bringScrimToFront();
+  c.bringToFront();
 }
