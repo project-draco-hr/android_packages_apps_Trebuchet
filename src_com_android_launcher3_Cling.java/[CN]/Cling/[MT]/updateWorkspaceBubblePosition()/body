@@ -1,0 +1,13 @@
+{
+  DisplayMetrics metrics=new DisplayMetrics();
+  mLauncher.getWindowManager().getDefaultDisplay().getMetrics(metrics);
+  LauncherAppState app=LauncherAppState.getInstance();
+  DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
+  Rect cutOutBounds=getWorkspaceCutOutBounds(metrics);
+  if (mDrawIdentifier.equals(WORKSPACE_LARGE)) {
+    View bubble=findViewById(R.id.workspace_cling_bubble);
+    ViewGroup.MarginLayoutParams lp=(ViewGroup.MarginLayoutParams)bubble.getLayoutParams();
+    lp.bottomMargin=grid.heightPx - cutOutBounds.top - mInsets.bottom;
+    bubble.requestLayout();
+  }
+}
