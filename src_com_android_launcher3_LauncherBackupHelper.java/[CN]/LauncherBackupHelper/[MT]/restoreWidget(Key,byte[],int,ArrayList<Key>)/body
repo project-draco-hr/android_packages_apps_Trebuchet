@@ -1,5 +1,5 @@
 {
-  Log.v(TAG,"unpacking widget " + key.id);
+  if (VERBOSE)   Log.v(TAG,"unpacking widget " + key.id);
   if (DEBUG)   Log.d(TAG,"read (" + buffer.length + "): "+ Base64.encodeToString(buffer,0,dataSize,Base64.NO_WRAP));
   try {
     Widget widget=unpackWidget(buffer,0,dataSize);
@@ -11,13 +11,13 @@
       }
     }
     if (!mRestoreEnabled) {
-      if (DEBUG)       Log.v(TAG,"restore not enabled: skipping database mutation");
+      if (VERBOSE)       Log.v(TAG,"restore not enabled: skipping database mutation");
       return;
     }
  else {
     }
   }
  catch (  InvalidProtocolBufferNanoException e) {
-    Log.w(TAG,"failed to decode proto",e);
+    Log.e(TAG,"failed to decode widget",e);
   }
 }

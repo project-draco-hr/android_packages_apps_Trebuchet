@@ -1,7 +1,7 @@
 {
   Favorite favorite=new Favorite();
   MessageNano.mergeFrom(favorite,readCheckedBytes(buffer,offset,dataSize));
-  if (DEBUG)   Log.d(TAG,"unpacked " + favorite.itemType + ", "+ favorite.id);
+  if (VERBOSE)   Log.v(TAG,"unpacked favorite " + favorite.itemType + ", "+ (TextUtils.isEmpty(favorite.title) ? favorite.id : favorite.title));
   ContentValues values=new ContentValues();
   values.put(Favorites._ID,favorite.id);
   values.put(Favorites.SCREEN,favorite.screen);
