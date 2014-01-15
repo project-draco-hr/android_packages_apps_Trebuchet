@@ -11,6 +11,7 @@
       byte[] buffer=new byte[availableBytes];
       int bytesRead=0;
       boolean valid=false;
+      InvalidProtocolBufferNanoException lastProtoException=null;
       while (availableBytes > 0) {
         try {
           int result=inStream.read(buffer,bytesRead,1);
@@ -27,7 +28,6 @@
           }
         }
  catch (        IOException e) {
-          Log.e(TAG,"failed to read the journal",e);
           buffer=null;
           availableBytes=0;
         }
@@ -35,26 +35,28 @@
           MessageNano.mergeFrom(journal,readCheckedBytes(buffer,0,bytesRead));
           valid=true;
           availableBytes=0;
+          if (VERBOSE)           Log.v(TAG,"read " + bytesRead + " bytes of journal");
         }
  catch (        InvalidProtocolBufferNanoException e) {
+          lastProtoException=e;
           journal.clear();
         }
       }
       if (DEBUG)       Log.d(TAG,"journal bytes read: " + bytesRead);
       if (!valid) {
-        Log.w(TAG,"failed to read the journal: could not find a valid journal");
+        Log.w(TAG,"could not find a valid journal",lastProtoException);
       }
     }
   }
  catch (  IOException e) {
-    Log.d(TAG,"failed to close the journal",e);
+    Log.w(TAG,"failed to close the journal",e);
   }
  finally {
     try {
       inStream.close();
     }
  catch (    IOException e) {
-      Log.d(TAG,"failed to close the journal",e);
+      Log.w(TAG,"failed to close the journal",e);
     }
   }
   return journal;
