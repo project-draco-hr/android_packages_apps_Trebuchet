@@ -12,7 +12,7 @@
     mHotseat.setup(this);
     mHotseat.setOnLongClickListener(this);
   }
-  mOverviewPanel=findViewById(R.id.overview_panel);
+  mOverviewPanel=(ViewGroup)findViewById(R.id.overview_panel);
   View widgetButton=findViewById(R.id.widget_button);
   widgetButton.setOnClickListener(new OnClickListener(){
     @Override public void onClick(    View arg0){
@@ -34,15 +34,23 @@
 );
   wallpaperButton.setOnTouchListener(getHapticFeedbackTouchListener());
   View settingsButton=findViewById(R.id.settings_button);
-  settingsButton.setOnClickListener(new OnClickListener(){
-    @Override public void onClick(    View arg0){
-      if (!mWorkspace.isSwitchingState()) {
-        startSettings();
+  if (hasSettings()) {
+    settingsButton.setOnClickListener(new OnClickListener(){
+      @Override public void onClick(      View arg0){
+        if (!mWorkspace.isSwitchingState()) {
+          startSettings();
+        }
       }
     }
-  }
 );
-  settingsButton.setOnTouchListener(getHapticFeedbackTouchListener());
+    settingsButton.setOnTouchListener(getHapticFeedbackTouchListener());
+  }
+ else {
+    settingsButton.setVisibility(View.GONE);
+    FrameLayout.LayoutParams lp=(FrameLayout.LayoutParams)widgetButton.getLayoutParams();
+    lp.gravity=Gravity.END | Gravity.TOP;
+    widgetButton.requestLayout();
+  }
   mOverviewPanel.setAlpha(0f);
   mWorkspace.setHapticFeedbackEnabled(false);
   mWorkspace.setOnLongClickListener(this);
