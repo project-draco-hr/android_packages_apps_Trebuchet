@@ -8,7 +8,6 @@
     onLoad=new Runnable(){
       public void run(){
         if (mBitmapSource != null && mBitmapSource.getLoadingState() == BitmapSource.State.LOADED) {
-          mView.setVisibility(View.VISIBLE);
           a.selectTile(mView);
         }
  else {
