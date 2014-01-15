@@ -1,0 +1,3 @@
+{
+  return mOldContentProviderExists && !launcher.isLauncherPreinstalled();
+}
