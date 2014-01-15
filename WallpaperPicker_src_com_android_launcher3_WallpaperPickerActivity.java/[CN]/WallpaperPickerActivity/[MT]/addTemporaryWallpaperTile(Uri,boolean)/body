@@ -17,6 +17,7 @@
         image.setImageBitmap(thumb);
         Drawable thumbDrawable=image.getDrawable();
         thumbDrawable.setDither(true);
+        pickedImageThumbnail.setVisibility(View.VISIBLE);
       }
  else {
         Log.e(TAG,"Error loading thumbnail for uri=" + uri);
@@ -30,5 +31,7 @@
   addLongPressHandler(pickedImageThumbnail);
   updateTileIndices();
   pickedImageThumbnail.setOnClickListener(mThumbnailOnClickListener);
-  mThumbnailOnClickListener.onClick(pickedImageThumbnail);
+  if (!fromRestore) {
+    mThumbnailOnClickListener.onClick(pickedImageThumbnail);
+  }
 }
