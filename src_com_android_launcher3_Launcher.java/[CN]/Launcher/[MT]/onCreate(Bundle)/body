@@ -56,10 +56,15 @@
   updateGlobalIcons();
   unlockScreenOrientation(true);
   showFirstRunActivity();
-  if (mModel.canMigrateFromOldLauncherDb()) {
-    mLauncherClings.showMigrationCling();
+  if (mLauncherClings.shouldShowFirstRunOrMigrationClings()) {
+    if (mModel.canMigrateFromOldLauncherDb(this)) {
+      mLauncherClings.showMigrationCling();
+    }
+ else {
+      mLauncherClings.showFirstRunCling();
+    }
   }
  else {
-    mLauncherClings.showFirstRunCling();
+    mLauncherClings.removeFirstRunAndMigrationClings();
   }
 }
