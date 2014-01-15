@@ -9,6 +9,12 @@
     if (icon == null) {
       Log.w(TAG,"failed to unpack icon for " + key.name);
     }
+    if (!mRestoreEnabled) {
+      if (DEBUG)       Log.v(TAG,"restore not enabled: skipping database mutation");
+      return;
+    }
+ else {
+    }
   }
  catch (  InvalidProtocolBufferNanoException e) {
     Log.w(TAG,"failed to decode proto",e);

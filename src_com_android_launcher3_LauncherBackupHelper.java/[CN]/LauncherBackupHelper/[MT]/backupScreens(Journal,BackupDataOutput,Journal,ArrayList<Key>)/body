@@ -6,6 +6,7 @@
   Set<String> currentIds=new HashSet<String>(cursor.getCount());
   try {
     cursor.moveToPosition(-1);
+    Log.d(TAG,"dumping screens after: " + in.t);
     while (cursor.moveToNext()) {
       final long id=cursor.getLong(ID_INDEX);
       final long updateTime=cursor.getLong(ID_MODIFIED);
@@ -16,6 +17,10 @@
       if (!savedIds.contains(backupKey) || updateTime >= in.t) {
         byte[] blob=packScreen(cursor);
         writeRowToBackup(key,blob,out,data);
+        if (DEBUG)         Log.d(TAG,"wrote screen " + id);
+      }
+ else {
+        if (DEBUG)         Log.d(TAG,"screen " + id + " was too old: "+ updateTime);
       }
     }
   }
