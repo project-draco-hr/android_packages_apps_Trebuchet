@@ -17,6 +17,9 @@
         byte[] blob=packFavorite(cursor);
         writeRowToBackup(key,blob,out,data);
       }
+ else {
+        if (VERBOSE)         Log.v(TAG,"favorite " + id + " was too old: "+ updateTime);
+      }
     }
   }
   finally {

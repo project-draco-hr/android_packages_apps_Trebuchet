@@ -1,8 +1,8 @@
 {
-  Log.v(TAG,"unpacking favorite " + key.id + " ("+ dataSize+ " bytes)");
+  if (VERBOSE)   Log.v(TAG,"unpacking favorite " + key.id);
   if (DEBUG)   Log.d(TAG,"read (" + buffer.length + "): "+ Base64.encodeToString(buffer,0,dataSize,Base64.NO_WRAP));
   if (!mRestoreEnabled) {
-    if (DEBUG)     Log.v(TAG,"restore not enabled: skipping database mutation");
+    if (VERBOSE)     Log.v(TAG,"restore not enabled: skipping database mutation");
     return;
   }
   try {
@@ -11,6 +11,6 @@
     cr.insert(Favorites.CONTENT_URI,values);
   }
  catch (  InvalidProtocolBufferNanoException e) {
-    Log.w(TAG,"failed to decode proto",e);
+    Log.e(TAG,"failed to decode favorite",e);
   }
 }
