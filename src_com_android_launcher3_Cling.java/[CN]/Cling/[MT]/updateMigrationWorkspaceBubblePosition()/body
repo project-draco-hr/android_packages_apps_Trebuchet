@@ -4,8 +4,27 @@
   LauncherAppState app=LauncherAppState.getInstance();
   DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
   Rect pageIndicatorBounds=grid.getWorkspacePageIndicatorBounds(mInsets);
-  View bubble=findViewById(R.id.migration_workspace_cling_bubble);
-  FrameLayout.LayoutParams lp=(FrameLayout.LayoutParams)bubble.getLayoutParams();
-  lp.bottomMargin=grid.heightPx - pageIndicatorBounds.top;
-  bubble.requestLayout();
+  if (mDrawIdentifier.equals(MIGRATION_WORKSPACE_PORTRAIT)) {
+    View bubble=findViewById(R.id.migration_workspace_cling_bubble);
+    ViewGroup.MarginLayoutParams lp=(ViewGroup.MarginLayoutParams)bubble.getLayoutParams();
+    lp.bottomMargin=grid.heightPx - pageIndicatorBounds.top;
+    bubble.requestLayout();
+  }
+ else   if (mDrawIdentifier.equals(MIGRATION_WORKSPACE_LARGE_PORTRAIT)) {
+    View bubble=findViewById(R.id.content);
+    ViewGroup.MarginLayoutParams lp=(ViewGroup.MarginLayoutParams)bubble.getLayoutParams();
+    lp.bottomMargin=grid.heightPx - pageIndicatorBounds.top;
+    bubble.requestLayout();
+  }
+ else   if (mDrawIdentifier.equals(MIGRATION_WORKSPACE_LANDSCAPE)) {
+    View bubble=findViewById(R.id.content);
+    ViewGroup.MarginLayoutParams lp=(ViewGroup.MarginLayoutParams)bubble.getLayoutParams();
+    if (grid.isLayoutRtl) {
+      lp.leftMargin=pageIndicatorBounds.right;
+    }
+ else {
+      lp.rightMargin=(grid.widthPx - pageIndicatorBounds.left);
+    }
+    bubble.requestLayout();
+  }
 }
