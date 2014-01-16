@@ -9,7 +9,6 @@
     mLauncher.getLauncherClings().dismissFolderCling(null);
     mLauncher.getWorkspace().onDragStartedWithItem(v);
     mLauncher.getWorkspace().beginDragShared(v,this);
-    mIconDrawable=((TextView)v).getCompoundDrawables()[1];
     mCurrentDragInfo=item;
     mEmptyCell[0]=item.cellX;
     mEmptyCell[1]=item.cellY;

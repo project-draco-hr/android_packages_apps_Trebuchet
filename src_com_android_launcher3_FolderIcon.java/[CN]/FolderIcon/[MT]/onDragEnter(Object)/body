@@ -6,4 +6,9 @@
   mFolderRingAnimator.setCellLayout(layout);
   mFolderRingAnimator.animateToAcceptState();
   layout.showFolderAccept(mFolderRingAnimator);
+  mOpenAlarm.setOnAlarmListener(mOnOpenListener);
+  if (SPRING_LOADING_ENABLED) {
+    mOpenAlarm.setAlarm(ON_OPEN_DELAY);
+  }
+  mDragInfo=(ItemInfo)dragInfo;
 }

@@ -1,29 +1,56 @@
 {
-  ShortcutInfo item;
-  if (d.dragInfo instanceof AppInfo) {
-    item=((AppInfo)d.dragInfo).makeShortcut();
-    item.spanX=1;
-    item.spanY=1;
+  Runnable cleanUpRunnable=null;
+  if (d.dragSource != mLauncher.getWorkspace() && !(d.dragSource instanceof Folder)) {
+    cleanUpRunnable=new Runnable(){
+      @Override public void run(){
+        mLauncher.getWorkspace().removeExtraEmptyScreen(false,new Runnable(){
+          @Override public void run(){
+            mLauncher.closeFolder();
+            mLauncher.exitSpringLoadedDragModeDelayed(true,Launcher.EXIT_SPRINGLOADED_MODE_SHORT_TIMEOUT_FOLDER_CLOSE,null);
+          }
+        }
+,CLOSE_FOLDER_DELAY_MS,false);
+      }
+    }
+;
+  }
+  View currentDragView;
+  ShortcutInfo si=mCurrentDragInfo;
+  if (mIsExternalDrag) {
+    si.cellX=mEmptyCell[0];
+    si.cellY=mEmptyCell[1];
+    currentDragView=createAndAddShortcut(si);
   }
  else {
-    item=(ShortcutInfo)d.dragInfo;
-  }
-  if (item == mCurrentDragInfo) {
-    ShortcutInfo si=(ShortcutInfo)mCurrentDragView.getTag();
-    CellLayout.LayoutParams lp=(CellLayout.LayoutParams)mCurrentDragView.getLayoutParams();
+    currentDragView=mCurrentDragView;
+    CellLayout.LayoutParams lp=(CellLayout.LayoutParams)currentDragView.getLayoutParams();
     si.cellX=lp.cellX=mEmptyCell[0];
     si.cellX=lp.cellY=mEmptyCell[1];
-    mContent.addViewToCellLayout(mCurrentDragView,-1,(int)item.id,lp,true);
-    if (d.dragView.hasDrawn()) {
-      mLauncher.getDragLayer().animateViewIntoPosition(d.dragView,mCurrentDragView);
-    }
- else {
-      d.deferDragViewCleanupPostAnimation=false;
-      mCurrentDragView.setVisibility(VISIBLE);
-    }
-    mItemsInvalidated=true;
-    setupContentDimensions(getItemCount());
-    mSuppressOnAdd=true;
+    mContent.addViewToCellLayout(currentDragView,-1,(int)si.id,lp,true);
   }
-  mInfo.add(item);
+  if (d.dragView.hasDrawn()) {
+    float scaleX=getScaleX();
+    float scaleY=getScaleY();
+    setScaleX(1.0f);
+    setScaleY(1.0f);
+    mLauncher.getDragLayer().animateViewIntoPosition(d.dragView,currentDragView,cleanUpRunnable,null);
+    setScaleX(scaleX);
+    setScaleY(scaleY);
+  }
+ else {
+    d.deferDragViewCleanupPostAnimation=false;
+    currentDragView.setVisibility(VISIBLE);
+  }
+  mItemsInvalidated=true;
+  setupContentDimensions(getItemCount());
+  if (mIsExternalDrag) {
+    LauncherModel.addOrMoveItemInDatabase(mLauncher,si,mInfo.id,0,si.cellX,si.cellY);
+    if (d.dragSource != this) {
+      updateItemLocationsInDatabaseBatch();
+    }
+    mIsExternalDrag=false;
+  }
+  mSuppressOnAdd=true;
+  mInfo.add(si);
+  mSuppressOnAdd=false;
 }
