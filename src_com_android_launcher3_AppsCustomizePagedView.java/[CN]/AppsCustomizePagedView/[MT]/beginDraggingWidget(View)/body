@@ -25,8 +25,8 @@
     maxWidth=Math.min((int)(previewDrawable.getIntrinsicWidth() * minScale),size[0]);
     maxHeight=Math.min((int)(previewDrawable.getIntrinsicHeight() * minScale),size[1]);
     int[] previewSizeBeforeScale=new int[1];
-    preview=mWidgetPreviewLoader.generateWidgetPreview(createWidgetInfo.componentName,createWidgetInfo.previewImage,createWidgetInfo.icon,spanX,spanY,maxWidth,maxHeight,null,previewSizeBeforeScale);
-    int previewWidthInAppsCustomize=Math.min(previewSizeBeforeScale[0],mWidgetPreviewLoader.maxWidthForWidgetPreview(spanX));
+    preview=getWidgetPreviewLoader().generateWidgetPreview(createWidgetInfo.componentName,createWidgetInfo.previewImage,createWidgetInfo.icon,spanX,spanY,maxWidth,maxHeight,null,previewSizeBeforeScale);
+    int previewWidthInAppsCustomize=Math.min(previewSizeBeforeScale[0],getWidgetPreviewLoader().maxWidthForWidgetPreview(spanX));
     scale=previewWidthInAppsCustomize / (float)preview.getWidth();
     if (previewWidthInAppsCustomize < previewDrawable.getIntrinsicWidth()) {
       int padding=(previewDrawable.getIntrinsicWidth() - previewWidthInAppsCustomize) / 2;
