@@ -3,7 +3,8 @@
   if (orderedScreenIds.size() == 0) {
     mWorkspace.addExtraEmptyScreen();
   }
-  if (!mWorkspace.hasCustomContent() && hasCustomContentToLeft()) {
-    mWorkspace.createCustomContentPage();
+  if (hasCustomContentToLeft()) {
+    mWorkspace.createCustomContentContainer();
+    populateCustomContentContainer();
   }
 }
