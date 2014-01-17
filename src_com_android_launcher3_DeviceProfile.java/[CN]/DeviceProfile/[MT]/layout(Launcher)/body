@@ -7,8 +7,10 @@
   if (hasVerticalBarLayout) {
     lp.gravity=Gravity.TOP | Gravity.LEFT;
     lp.width=searchBarSpaceHeightPx;
-    lp.height=LayoutParams.MATCH_PARENT;
+    lp.height=LayoutParams.WRAP_CONTENT;
     searchBar.setPadding(0,2 * edgeMarginPx,0,2 * edgeMarginPx);
+    LinearLayout targets=(LinearLayout)searchBar.findViewById(R.id.drag_target_bar);
+    targets.setOrientation(LinearLayout.VERTICAL);
   }
  else {
     lp.gravity=Gravity.TOP | Gravity.CENTER_HORIZONTAL;
@@ -17,11 +19,6 @@
     searchBar.setPadding(2 * edgeMarginPx,getSearchBarTopOffset(),2 * edgeMarginPx,0);
   }
   searchBar.setLayoutParams(lp);
-  View qsbBar=launcher.getQsbBar();
-  LayoutParams vglp=qsbBar.getLayoutParams();
-  vglp.width=LayoutParams.MATCH_PARENT;
-  vglp.height=LayoutParams.MATCH_PARENT;
-  qsbBar.setLayoutParams(vglp);
   View voiceButtonProxy=launcher.findViewById(R.id.voice_button_proxy);
   if (voiceButtonProxy != null) {
     if (hasVerticalBarLayout) {
@@ -104,12 +101,12 @@
       pagedView.setWidgetsPageIndicatorPadding(pageIndicatorHeight);
     }
   }
-  View overviewMode=launcher.getOverviewPanel();
+  ViewGroup overviewMode=launcher.getOverviewPanel();
   if (overviewMode != null) {
     Rect r=getOverviewModeButtonBarRect();
     lp=(FrameLayout.LayoutParams)overviewMode.getLayoutParams();
     lp.gravity=Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM;
-    lp.width=Math.min(availableWidthPx,overviewModeMaxBarWidthPx);
+    lp.width=Math.min(availableWidthPx,calculateOverviewModeWidth(getVisibleChildCount(overviewMode)));
     lp.height=r.height();
     overviewMode.setLayoutParams(lp);
   }

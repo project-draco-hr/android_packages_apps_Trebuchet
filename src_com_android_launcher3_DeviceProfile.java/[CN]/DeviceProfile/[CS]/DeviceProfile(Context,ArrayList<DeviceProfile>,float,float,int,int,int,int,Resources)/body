@@ -13,7 +13,8 @@
   allAppsCellPaddingPx=res.getDimensionPixelSize(R.dimen.dynamic_grid_all_apps_cell_padding);
   overviewModeMinIconZoneHeightPx=res.getDimensionPixelSize(R.dimen.dynamic_grid_overview_min_icon_zone_height);
   overviewModeMaxIconZoneHeightPx=res.getDimensionPixelSize(R.dimen.dynamic_grid_overview_max_icon_zone_height);
-  overviewModeMaxBarWidthPx=res.getDimensionPixelSize(R.dimen.dynamic_grid_overview_bar_max_width);
+  overviewModeBarItemWidthPx=res.getDimensionPixelSize(R.dimen.dynamic_grid_overview_bar_item_width);
+  overviewModeBarSpacerWidthPx=res.getDimensionPixelSize(R.dimen.dynamic_grid_overview_bar_spacer_width);
   overviewModeIconZoneRatio=res.getInteger(R.integer.config_dynamic_grid_overview_icon_zone_percentage) / 100f;
   overviewModeScaleFactor=res.getInteger(R.integer.config_dynamic_grid_overview_scale_percentage) / 100f;
   for (  DeviceProfile p : profiles) {

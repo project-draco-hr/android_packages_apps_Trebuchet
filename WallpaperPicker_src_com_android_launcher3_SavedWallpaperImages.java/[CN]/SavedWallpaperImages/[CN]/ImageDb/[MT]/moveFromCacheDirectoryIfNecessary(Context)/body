@@ -1,0 +1,7 @@
+{
+  File oldSavedImagesFile=new File(context.getCacheDir(),ImageDb.DB_NAME);
+  File savedImagesFile=context.getDatabasePath(ImageDb.DB_NAME);
+  if (oldSavedImagesFile.exists()) {
+    oldSavedImagesFile.renameTo(savedImagesFile);
+  }
+}

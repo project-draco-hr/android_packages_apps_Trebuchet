@@ -2,7 +2,7 @@
   if (!mIsInitialized) {
     mLauncher=l;
     mScrimView=scrim;
-    mBackgroundColor=0xdd000000;
+    mBackgroundColor=0xcc000000;
     setOnLongClickListener(this);
     setOnClickListener(this);
     setOnTouchListener(this);
