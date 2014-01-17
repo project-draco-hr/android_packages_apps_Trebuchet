@@ -3,6 +3,6 @@
     return defaultPageSpacingPx;
   }
  else {
-    return 2 * getWorkspacePadding().left;
+    return Math.max(defaultPageSpacingPx,2 * getWorkspacePadding().left);
   }
 }
