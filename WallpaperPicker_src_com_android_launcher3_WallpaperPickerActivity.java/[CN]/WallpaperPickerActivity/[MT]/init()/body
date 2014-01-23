@@ -147,6 +147,7 @@
     }
   }
 );
+  mSetWallpaperButton=findViewById(R.id.set_wallpaper_button);
   mActionModeCallback=new ActionMode.Callback(){
     @Override public boolean onCreateActionMode(    ActionMode mode,    Menu menu){
       MenuInflater inflater=mode.getMenuInflater();
