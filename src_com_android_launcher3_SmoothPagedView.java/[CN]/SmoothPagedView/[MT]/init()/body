@@ -5,6 +5,6 @@
     mBaseLineFlingVelocity=2500.0f;
     mFlingVelocityInfluence=0.4f;
     mScrollInterpolator=new OvershootInterpolator();
-    mScroller=new Scroller(getContext(),mScrollInterpolator);
+    setDefaultInterpolator(mScrollInterpolator);
   }
 }

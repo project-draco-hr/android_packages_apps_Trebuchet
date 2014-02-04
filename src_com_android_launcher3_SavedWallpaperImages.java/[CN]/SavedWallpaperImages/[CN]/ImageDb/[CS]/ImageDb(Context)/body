@@ -1,4 +1,0 @@
-{
-  super(context,new File(context.getCacheDir(),DB_NAME).getPath(),null,DB_VERSION);
-  mContext=context;
-}

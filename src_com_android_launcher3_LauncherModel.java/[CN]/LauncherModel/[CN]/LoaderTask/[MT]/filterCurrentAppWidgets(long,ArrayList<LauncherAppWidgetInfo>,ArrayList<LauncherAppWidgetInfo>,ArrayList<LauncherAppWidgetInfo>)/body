@@ -1,0 +1,11 @@
+{
+  for (  LauncherAppWidgetInfo widget : appWidgets) {
+    if (widget == null)     continue;
+    if (widget.container == LauncherSettings.Favorites.CONTAINER_DESKTOP && widget.screenId == currentScreenId) {
+      currentScreenWidgets.add(widget);
+    }
+ else {
+      otherScreenWidgets.add(widget);
+    }
+  }
+}

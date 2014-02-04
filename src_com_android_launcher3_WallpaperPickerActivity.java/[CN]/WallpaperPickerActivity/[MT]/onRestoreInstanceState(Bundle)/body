@@ -1,6 +1,0 @@
-{
-  ArrayList<Uri> uris=savedInstanceState.getParcelableArrayList(TEMP_WALLPAPER_TILES);
-  for (  Uri uri : uris) {
-    addTemporaryWallpaperTile(uri);
-  }
-}

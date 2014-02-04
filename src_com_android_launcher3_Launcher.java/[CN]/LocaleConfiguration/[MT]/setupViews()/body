@@ -3,6 +3,7 @@
   mLauncherView=findViewById(R.id.launcher);
   mDragLayer=(DragLayer)findViewById(R.id.drag_layer);
   mWorkspace=(Workspace)mDragLayer.findViewById(R.id.workspace);
+  mPageIndicators=mDragLayer.findViewById(R.id.page_indicator);
   mLauncherView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
   mWorkspaceBackgroundDrawable=getResources().getDrawable(R.drawable.workspace_bg);
   mDragLayer.setup(this,dragController);
@@ -11,11 +12,13 @@
     mHotseat.setup(this);
     mHotseat.setOnLongClickListener(this);
   }
-  mOverviewPanel=findViewById(R.id.overview_panel);
+  mOverviewPanel=(ViewGroup)findViewById(R.id.overview_panel);
   View widgetButton=findViewById(R.id.widget_button);
   widgetButton.setOnClickListener(new OnClickListener(){
     @Override public void onClick(    View arg0){
-      showAllApps(true,AppsCustomizePagedView.ContentType.Widgets,true);
+      if (!mWorkspace.isSwitchingState()) {
+        showAllApps(true,AppsCustomizePagedView.ContentType.Widgets,true);
+      }
     }
   }
 );
@@ -23,25 +26,37 @@
   View wallpaperButton=findViewById(R.id.wallpaper_button);
   wallpaperButton.setOnClickListener(new OnClickListener(){
     @Override public void onClick(    View arg0){
-      startWallpaper();
+      if (!mWorkspace.isSwitchingState()) {
+        startWallpaper();
+      }
     }
   }
 );
   wallpaperButton.setOnTouchListener(getHapticFeedbackTouchListener());
   View settingsButton=findViewById(R.id.settings_button);
-  settingsButton.setOnClickListener(new OnClickListener(){
-    @Override public void onClick(    View arg0){
-      startSettings();
+  if (hasSettings()) {
+    settingsButton.setOnClickListener(new OnClickListener(){
+      @Override public void onClick(      View arg0){
+        if (!mWorkspace.isSwitchingState()) {
+          startSettings();
+        }
+      }
     }
-  }
 );
-  settingsButton.setOnTouchListener(getHapticFeedbackTouchListener());
+    settingsButton.setOnTouchListener(getHapticFeedbackTouchListener());
+  }
+ else {
+    settingsButton.setVisibility(View.GONE);
+    FrameLayout.LayoutParams lp=(FrameLayout.LayoutParams)widgetButton.getLayoutParams();
+    lp.gravity=Gravity.END | Gravity.TOP;
+    widgetButton.requestLayout();
+  }
   mOverviewPanel.setAlpha(0f);
   mWorkspace.setHapticFeedbackEnabled(false);
   mWorkspace.setOnLongClickListener(this);
   mWorkspace.setup(dragController);
   dragController.addDragListener(mWorkspace);
-  mSearchDropTargetBar=(SearchDropTargetBar)mDragLayer.findViewById(R.id.qsb_bar);
+  mSearchDropTargetBar=(SearchDropTargetBar)mDragLayer.findViewById(R.id.search_drop_target_bar);
   mAppsCustomizeTabHost=(AppsCustomizeTabHost)findViewById(R.id.apps_customize_pane);
   mAppsCustomizeContent=(AppsCustomizePagedView)mAppsCustomizeTabHost.findViewById(R.id.apps_customize_pane_content);
   mAppsCustomizeContent.setup(this,dragController);

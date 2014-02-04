@@ -13,7 +13,7 @@
   final int startDelay=res.getInteger(R.integer.config_workspaceAppsCustomizeAnimationStagger);
   setPivotsForZoom(toView,scale);
   Animator workspaceAnim=mWorkspace.getChangeStateAnimation(Workspace.State.SMALL,animated);
-  if (!AppsCustomizePagedView.DISABLE_ALL_APPS) {
+  if (!LauncherAppState.isDisableAllApps() || contentType == AppsCustomizePagedView.ContentType.Widgets) {
     mAppsCustomizeTabHost.setContentTypeImmediate(contentType);
   }
   if (animated) {

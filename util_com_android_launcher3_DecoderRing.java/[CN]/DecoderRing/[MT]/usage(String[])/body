@@ -1,11 +1,14 @@
 {
-  System.err.println("DecoderRing type [input]");
+  System.err.println("launcher_protoutil [-x] [-S b] [-k|-f|-i|-s|-w] [filename]");
   System.err.println("\t-k\tdecode a key");
   System.err.println("\t-f\tdecode a favorite");
   System.err.println("\t-i\tdecode a icon");
   System.err.println("\t-s\tdecode a screen");
   System.err.println("\t-w\tdecode a widget");
-  System.err.println("\t-s b\tskip b bytes");
+  System.err.println("\t-S b\tskip b bytes");
+  System.err.println("\t-x\textract image data to files");
+  System.err.println("\t-v\tprint key type data, as well as payload");
+  System.err.println("\t-l\texpect data from logcat, instead of the local transport");
   System.err.println("\tfilename\tread from filename, not stdin");
   System.exit(1);
 }

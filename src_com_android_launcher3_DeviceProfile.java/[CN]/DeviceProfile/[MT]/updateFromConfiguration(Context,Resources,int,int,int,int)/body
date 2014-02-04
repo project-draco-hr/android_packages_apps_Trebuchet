@@ -1,0 +1,12 @@
+{
+  Configuration configuration=resources.getConfiguration();
+  isLandscape=(configuration.orientation == Configuration.ORIENTATION_LANDSCAPE);
+  isTablet=resources.getBoolean(R.bool.is_tablet);
+  isLargeTablet=resources.getBoolean(R.bool.is_large_tablet);
+  isLayoutRtl=(configuration.getLayoutDirection() == View.LAYOUT_DIRECTION_RTL);
+  widthPx=wPx;
+  heightPx=hPx;
+  availableWidthPx=awPx;
+  availableHeightPx=ahPx;
+  updateAvailableDimensions(context);
+}

@@ -1,0 +1,214 @@
+{
+  setContentView(R.layout.wallpaper_picker);
+  mCropView=(CropView)findViewById(R.id.cropView);
+  mWallpaperStrip=findViewById(R.id.wallpaper_strip);
+  mCropView.setTouchCallback(new CropView.TouchCallback(){
+    ViewPropertyAnimator mAnim;
+    @Override public void onTouchDown(){
+      if (mAnim != null) {
+        mAnim.cancel();
+      }
+      if (mWallpaperStrip.getAlpha() == 1f) {
+        mIgnoreNextTap=true;
+      }
+      mAnim=mWallpaperStrip.animate();
+      mAnim.alpha(0f).setDuration(150).withEndAction(new Runnable(){
+        public void run(){
+          mWallpaperStrip.setVisibility(View.INVISIBLE);
+        }
+      }
+);
+      mAnim.setInterpolator(new AccelerateInterpolator(0.75f));
+      mAnim.start();
+    }
+    @Override public void onTouchUp(){
+      mIgnoreNextTap=false;
+    }
+    @Override public void onTap(){
+      boolean ignoreTap=mIgnoreNextTap;
+      mIgnoreNextTap=false;
+      if (!ignoreTap) {
+        if (mAnim != null) {
+          mAnim.cancel();
+        }
+        mWallpaperStrip.setVisibility(View.VISIBLE);
+        mAnim=mWallpaperStrip.animate();
+        mAnim.alpha(1f).setDuration(150).setInterpolator(new DecelerateInterpolator(0.75f));
+        mAnim.start();
+      }
+    }
+  }
+);
+  mThumbnailOnClickListener=new OnClickListener(){
+    public void onClick(    View v){
+      if (mActionMode != null) {
+        if (v.isLongClickable()) {
+          mLongClickListener.onLongClick(v);
+        }
+        return;
+      }
+      WallpaperTileInfo info=(WallpaperTileInfo)v.getTag();
+      if (info.isSelectable() && v.getVisibility() == View.VISIBLE) {
+        selectTile(v);
+      }
+      info.onClick(WallpaperPickerActivity.this);
+    }
+  }
+;
+  mLongClickListener=new View.OnLongClickListener(){
+    public boolean onLongClick(    View view){
+      CheckableFrameLayout c=(CheckableFrameLayout)view;
+      c.toggle();
+      if (mActionMode != null) {
+        mActionMode.invalidate();
+      }
+ else {
+        mActionMode=startActionMode(mActionModeCallback);
+        int childCount=mWallpapersView.getChildCount();
+        for (int i=0; i < childCount; i++) {
+          mWallpapersView.getChildAt(i).setSelected(false);
+        }
+      }
+      return true;
+    }
+  }
+;
+  ArrayList<ResourceWallpaperInfo> wallpapers=findBundledWallpapers();
+  mWallpapersView=(LinearLayout)findViewById(R.id.wallpaper_list);
+  BuiltInWallpapersAdapter ia=new BuiltInWallpapersAdapter(this,wallpapers);
+  populateWallpapersFromAdapter(mWallpapersView,ia,false);
+  mSavedImages=new SavedWallpaperImages(this);
+  mSavedImages.loadThumbnailsAndImageIdList();
+  populateWallpapersFromAdapter(mWallpapersView,mSavedImages,true);
+  final LinearLayout liveWallpapersView=(LinearLayout)findViewById(R.id.live_wallpaper_list);
+  final LiveWallpaperListAdapter a=new LiveWallpaperListAdapter(this);
+  a.registerDataSetObserver(new DataSetObserver(){
+    public void onChanged(){
+      liveWallpapersView.removeAllViews();
+      populateWallpapersFromAdapter(liveWallpapersView,a,false);
+      initializeScrollForRtl();
+      updateTileIndices();
+    }
+  }
+);
+  final LinearLayout thirdPartyWallpapersView=(LinearLayout)findViewById(R.id.third_party_wallpaper_list);
+  final ThirdPartyWallpaperPickerListAdapter ta=new ThirdPartyWallpaperPickerListAdapter(this);
+  populateWallpapersFromAdapter(thirdPartyWallpapersView,ta,false);
+  LinearLayout masterWallpaperList=(LinearLayout)findViewById(R.id.master_wallpaper_list);
+  FrameLayout pickImageTile=(FrameLayout)getLayoutInflater().inflate(R.layout.wallpaper_picker_image_picker_item,masterWallpaperList,false);
+  setWallpaperItemPaddingToZero(pickImageTile);
+  masterWallpaperList.addView(pickImageTile,0);
+  Bitmap lastPhoto=getThumbnailOfLastPhoto();
+  if (lastPhoto != null) {
+    ImageView galleryThumbnailBg=(ImageView)pickImageTile.findViewById(R.id.wallpaper_image);
+    galleryThumbnailBg.setImageBitmap(getThumbnailOfLastPhoto());
+    int colorOverlay=getResources().getColor(R.color.wallpaper_picker_translucent_gray);
+    galleryThumbnailBg.setColorFilter(colorOverlay,PorterDuff.Mode.SRC_ATOP);
+  }
+  PickImageInfo pickImageInfo=new PickImageInfo();
+  pickImageTile.setTag(pickImageInfo);
+  pickImageInfo.setView(pickImageTile);
+  pickImageTile.setOnClickListener(mThumbnailOnClickListener);
+  if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+    DefaultWallpaperInfo defaultWallpaperInfo=getDefaultWallpaper();
+    FrameLayout defaultWallpaperTile=(FrameLayout)createImageTileView(getLayoutInflater(),0,null,mWallpapersView,defaultWallpaperInfo.mThumb);
+    setWallpaperItemPaddingToZero(defaultWallpaperTile);
+    defaultWallpaperTile.setTag(defaultWallpaperInfo);
+    mWallpapersView.addView(defaultWallpaperTile,0);
+    defaultWallpaperTile.setOnClickListener(mThumbnailOnClickListener);
+    defaultWallpaperInfo.setView(defaultWallpaperTile);
+  }
+  mCropView.addOnLayoutChangeListener(new OnLayoutChangeListener(){
+    @Override public void onLayoutChange(    View v,    int left,    int top,    int right,    int bottom,    int oldLeft,    int oldTop,    int oldRight,    int oldBottom){
+      if ((right - left) > 0 && (bottom - top) > 0) {
+        if (mSelectedIndex >= 0 && mSelectedIndex < mWallpapersView.getChildCount()) {
+          mThumbnailOnClickListener.onClick(mWallpapersView.getChildAt(mSelectedIndex));
+        }
+        v.removeOnLayoutChangeListener(this);
+      }
+    }
+  }
+);
+  updateTileIndices();
+  initializeScrollForRtl();
+  final LayoutTransition transitioner=new LayoutTransition();
+  transitioner.setDuration(200);
+  transitioner.setStartDelay(LayoutTransition.CHANGE_DISAPPEARING,0);
+  transitioner.setAnimator(LayoutTransition.DISAPPEARING,null);
+  mWallpapersView.setLayoutTransition(transitioner);
+  final ActionBar actionBar=getActionBar();
+  actionBar.setCustomView(R.layout.actionbar_set_wallpaper);
+  actionBar.getCustomView().setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      if (mSelectedTile != null) {
+        WallpaperTileInfo info=(WallpaperTileInfo)mSelectedTile.getTag();
+        info.onSave(WallpaperPickerActivity.this);
+      }
+    }
+  }
+);
+  mSetWallpaperButton=findViewById(R.id.set_wallpaper_button);
+  mActionModeCallback=new ActionMode.Callback(){
+    @Override public boolean onCreateActionMode(    ActionMode mode,    Menu menu){
+      MenuInflater inflater=mode.getMenuInflater();
+      inflater.inflate(R.menu.cab_delete_wallpapers,menu);
+      return true;
+    }
+    private int numCheckedItems(){
+      int childCount=mWallpapersView.getChildCount();
+      int numCheckedItems=0;
+      for (int i=0; i < childCount; i++) {
+        CheckableFrameLayout c=(CheckableFrameLayout)mWallpapersView.getChildAt(i);
+        if (c.isChecked()) {
+          numCheckedItems++;
+        }
+      }
+      return numCheckedItems;
+    }
+    @Override public boolean onPrepareActionMode(    ActionMode mode,    Menu menu){
+      int numCheckedItems=numCheckedItems();
+      if (numCheckedItems == 0) {
+        mode.finish();
+        return true;
+      }
+ else {
+        mode.setTitle(getResources().getQuantityString(R.plurals.number_of_items_selected,numCheckedItems,numCheckedItems));
+        return true;
+      }
+    }
+    @Override public boolean onActionItemClicked(    ActionMode mode,    MenuItem item){
+      int itemId=item.getItemId();
+      if (itemId == R.id.menu_delete) {
+        int childCount=mWallpapersView.getChildCount();
+        ArrayList<View> viewsToRemove=new ArrayList<View>();
+        for (int i=0; i < childCount; i++) {
+          CheckableFrameLayout c=(CheckableFrameLayout)mWallpapersView.getChildAt(i);
+          if (c.isChecked()) {
+            WallpaperTileInfo info=(WallpaperTileInfo)c.getTag();
+            info.onDelete(WallpaperPickerActivity.this);
+            viewsToRemove.add(c);
+          }
+        }
+        for (        View v : viewsToRemove) {
+          mWallpapersView.removeView(v);
+        }
+        updateTileIndices();
+        mode.finish();
+        return true;
+      }
+ else {
+        return false;
+      }
+    }
+    @Override public void onDestroyActionMode(    ActionMode mode){
+      int childCount=mWallpapersView.getChildCount();
+      for (int i=0; i < childCount; i++) {
+        CheckableFrameLayout c=(CheckableFrameLayout)mWallpapersView.getChildAt(i);
+        c.setChecked(false);
+      }
+      mSelectedTile.setSelected(true);
+      mActionMode=null;
+    }
+  }
+;
+}

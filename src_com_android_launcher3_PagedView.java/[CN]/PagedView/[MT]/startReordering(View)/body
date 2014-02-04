@@ -9,7 +9,8 @@
     mDragView=getChildAt(dragViewIndex);
     mDragView.animate().scaleX(1.15f).scaleY(1.15f).setDuration(100).start();
     mDragViewBaselineLeft=mDragView.getLeft();
-    disableFreeScroll(-1);
+    snapToPage(getPageNearestToCenterOfScreen());
+    disableFreeScroll();
     onStartReordering();
     return true;
   }

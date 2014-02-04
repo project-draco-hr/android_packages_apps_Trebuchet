@@ -1,5 +1,0 @@
-{
-  if (mWorkspace != null && hasCustomContentToLeft() && mWorkspace.hasCustomContent()) {
-    addCustomContentToLeft();
-  }
-}

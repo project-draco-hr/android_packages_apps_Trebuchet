@@ -1,9 +1,0 @@
-{
-  if (mSelectedTile != null) {
-    mSelectedTile.setSelected(false);
-    mSelectedTile=null;
-  }
-  mSelectedTile=v;
-  v.setSelected(true);
-  v.announceForAccessibility(getString(R.string.announce_selection,v.getContentDescription()));
-}

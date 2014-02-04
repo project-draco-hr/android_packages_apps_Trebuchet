@@ -6,15 +6,20 @@
   Set<String> currentIds=new HashSet<String>(cursor.getCount());
   try {
     cursor.moveToPosition(-1);
+    if (DEBUG)     Log.d(TAG,"dumping screens after: " + in.t);
     while (cursor.moveToNext()) {
       final long id=cursor.getLong(ID_INDEX);
       final long updateTime=cursor.getLong(ID_MODIFIED);
       Key key=getKey(Key.SCREEN,id);
       keys.add(key);
-      currentIds.add(keyToBackupKey(key));
-      if (updateTime > in.t) {
+      final String backupKey=keyToBackupKey(key);
+      currentIds.add(backupKey);
+      if (!savedIds.contains(backupKey) || updateTime >= in.t) {
         byte[] blob=packScreen(cursor);
         writeRowToBackup(key,blob,out,data);
+      }
+ else {
+        if (VERBOSE)         Log.v(TAG,"screen " + id + " was too old: "+ updateTime);
       }
     }
   }

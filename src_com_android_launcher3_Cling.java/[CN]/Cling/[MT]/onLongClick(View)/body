@@ -1,6 +1,10 @@
 {
   if (mDrawIdentifier.equals(WORKSPACE_PORTRAIT) || mDrawIdentifier.equals(WORKSPACE_LANDSCAPE) || mDrawIdentifier.equals(WORKSPACE_LARGE)) {
-    mLauncher.dismissWorkspaceCling(null);
+    mLauncher.getLauncherClings().dismissWorkspaceCling(null);
+    return true;
+  }
+ else   if (mDrawIdentifier.equals(MIGRATION_WORKSPACE_PORTRAIT) || mDrawIdentifier.equals(MIGRATION_WORKSPACE_LARGE_PORTRAIT) || mDrawIdentifier.equals(MIGRATION_WORKSPACE_LANDSCAPE)) {
+    mLauncher.getLauncherClings().dismissMigrationWorkspaceCling(null);
     return true;
   }
   return false;

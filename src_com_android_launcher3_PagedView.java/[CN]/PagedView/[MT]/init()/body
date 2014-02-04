@@ -1,7 +1,8 @@
 {
   mDirtyPageContent=new ArrayList<Boolean>();
   mDirtyPageContent.ensureCapacity(32);
-  mScroller=new Scroller(getContext(),new ScrollInterpolator());
+  mScroller=new LauncherScroller(getContext());
+  setDefaultInterpolator(new ScrollInterpolator());
   mCurrentPage=0;
   mCenterPagesVertically=true;
   final ViewConfiguration configuration=ViewConfiguration.get(getContext());

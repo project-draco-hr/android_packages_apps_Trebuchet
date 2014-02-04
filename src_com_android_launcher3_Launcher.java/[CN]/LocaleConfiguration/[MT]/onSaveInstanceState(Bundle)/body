@@ -1,6 +1,6 @@
 {
   if (mWorkspace.getChildCount() > 0) {
-    outState.putInt(RUNTIME_STATE_CURRENT_SCREEN,mWorkspace.getRestorePage());
+    outState.putInt(RUNTIME_STATE_CURRENT_SCREEN,mWorkspace.getCurrentPageOffsetFromCustomContent());
   }
   super.onSaveInstanceState(outState);
   outState.putInt(RUNTIME_STATE,mState.ordinal());
@@ -28,4 +28,5 @@
     int currentIndex=mAppsCustomizeContent.getSaveInstanceStateIndex();
     outState.putInt("apps_customize_currentIndex",currentIndex);
   }
+  outState.putSerializable(RUNTIME_STATE_VIEW_IDS,mItemIdToViewId);
 }

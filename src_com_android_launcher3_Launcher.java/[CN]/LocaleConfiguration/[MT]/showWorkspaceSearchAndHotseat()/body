@@ -1,0 +1,6 @@
+{
+  if (mWorkspace != null)   mWorkspace.setAlpha(1f);
+  if (mHotseat != null)   mHotseat.setAlpha(1f);
+  if (mPageIndicators != null)   mPageIndicators.setAlpha(1f);
+  if (mSearchDropTargetBar != null)   mSearchDropTargetBar.showSearchBar(false);
+}

@@ -1,25 +1,28 @@
 {
-  File source=null;
-  Class type=Key.class;
+  Class defaultType=null;
+  boolean extractImages=false;
+  boolean fromLogs=false;
   int skip=0;
+  List<File> files=new LinkedList<File>();
+  boolean verbose=false;
   for (int i=0; i < args.length; i++) {
     if ("-k".equals(args[i])) {
-      type=Key.class;
+      defaultType=Key.class;
     }
  else     if ("-f".equals(args[i])) {
-      type=Favorite.class;
+      defaultType=Favorite.class;
     }
  else     if ("-j".equals(args[i])) {
-      type=Journal.class;
+      defaultType=Journal.class;
     }
  else     if ("-i".equals(args[i])) {
-      type=Resource.class;
+      defaultType=Resource.class;
     }
  else     if ("-s".equals(args[i])) {
-      type=Screen.class;
+      defaultType=Screen.class;
     }
  else     if ("-w".equals(args[i])) {
-      type=Widget.class;
+      defaultType=Widget.class;
     }
  else     if ("-S".equals(args[i])) {
       if ((i + 1) < args.length) {
@@ -29,112 +32,116 @@
         usage(args);
       }
     }
+ else     if ("-x".equals(args[i])) {
+      extractImages=true;
+    }
+ else     if ("-v".equals(args[i])) {
+      verbose=true;
+    }
+ else     if ("-L".equals(args[i])) {
+      fromLogs=true;
+    }
  else     if (args[i] != null && !args[i].startsWith("-")) {
-      source=new File(args[i]);
+      files.add(new File(args[i]));
     }
  else {
       System.err.println("Unsupported flag: " + args[i]);
       usage(args);
     }
   }
-  ByteArrayOutputStream byteStream=new ByteArrayOutputStream();
-  BufferedInputStream input=null;
-  if (source == null) {
-    input=new BufferedInputStream(System.in);
+  if (defaultType == null && files.isEmpty()) {
+    usage(args);
   }
- else {
-    try {
-      input=new BufferedInputStream(new FileInputStream(source));
-    }
- catch (    FileNotFoundException e) {
-      System.err.println("failed to open file: " + source + ", "+ e);
-      System.exit(1);
-    }
+  if (files.size() > 1 && defaultType != null) {
+    System.err.println("Explicit type ignored for multiple files.");
+    defaultType=null;
   }
-  byte[] buffer=new byte[1024];
-  try {
-    while (input.available() > 0) {
-      int n=input.read(buffer);
-      int offset=0;
-      if (skip > 0) {
-        offset=Math.min(skip,n);
-        n-=offset;
-        skip-=offset;
-      }
-      if (n > 0) {
-        byteStream.write(buffer,offset,n);
+  if (files.isEmpty()) {
+    files.add(new File(STANDARD_IN));
+  }
+  for (  File source : files) {
+    Class type=null;
+    if (defaultType == null) {
+      Key key=decodeKey(source.getName().getBytes(),fromLogs);
+      if (key != null) {
+        type=TYPES[key.type];
+        if (verbose) {
+          System.err.println(source.getName() + " is a " + type.getSimpleName());
+          System.out.println(key.toString());
+        }
       }
     }
-  }
- catch (  IOException e) {
-    System.err.println("failed to read input: " + e);
-    System.exit(1);
-  }
-  System.err.println("read this many bytes: " + byteStream.size());
-  MessageNano proto=null;
-  if (type == Key.class) {
-    Key key=new Key();
-    try {
-      key=Key.parseFrom(byteStream.toByteArray());
-    }
- catch (    InvalidProtocolBufferNanoException e) {
-      System.err.println("failed to parse proto: " + e);
-      System.exit(1);
-    }
-    if (key.checksum != checkKey(key)) {
-      System.err.println("key ckecksum failed");
-      System.exit(1);
-    }
-    proto=key;
-  }
  else {
-    CheckedMessage wrapper=new CheckedMessage();
+      type=defaultType;
+    }
+    ByteArrayOutputStream byteStream=new ByteArrayOutputStream();
+    BufferedInputStream input=null;
+    if (source.getName() == STANDARD_IN) {
+      input=new BufferedInputStream(System.in);
+    }
+ else {
+      try {
+        input=new BufferedInputStream(new FileInputStream(source));
+      }
+ catch (      FileNotFoundException e) {
+        System.err.println("failed to open file: " + source + ", "+ e);
+        System.exit(1);
+      }
+    }
+    byte[] buffer=new byte[1024];
     try {
-      MessageNano.mergeFrom(wrapper,byteStream.toByteArray());
+      while (input.available() > 0) {
+        int n=input.read(buffer);
+        int offset=0;
+        if (skip > 0) {
+          offset=Math.min(skip,n);
+          n-=offset;
+          skip-=offset;
+        }
+        if (n > 0) {
+          byteStream.write(buffer,offset,n);
+        }
+      }
     }
- catch (    InvalidProtocolBufferNanoException e) {
-      System.err.println("failed to parse wrapper: " + e);
+ catch (    IOException e) {
+      System.err.println("failed to read input: " + e);
       System.exit(1);
     }
-    CRC32 checksum=new CRC32();
-    checksum.update(wrapper.payload);
-    if (wrapper.checksum != checksum.getValue()) {
-      System.err.println("wrapper ckecksum failed");
-      System.exit(1);
+    MessageNano proto=null;
+    byte[] payload=byteStream.toByteArray();
+    if (type == Key.class) {
+      proto=decodeKey(payload,fromLogs);
     }
-    proto=(MessageNano)type.newInstance();
-    try {
-      MessageNano.mergeFrom(proto,wrapper.payload);
+ else     if (type != null) {
+      proto=decodeBackupData(payload,type,fromLogs);
     }
- catch (    InvalidProtocolBufferNanoException e) {
-      System.err.println("failed to parse proto: " + e);
-      System.exit(1);
+    if (proto != null) {
+      System.out.println(proto.toString());
     }
-  }
-  System.out.println(proto.toString());
-  if (proto instanceof Resource) {
-    Resource icon=(Resource)proto;
-    final String path="icon.webp";
-    FileOutputStream iconFile=new FileOutputStream(path);
-    iconFile.write(icon.data);
-    iconFile.close();
-    System.err.println("wrote " + path);
-  }
-  if (proto instanceof Widget) {
-    Widget widget=(Widget)proto;
-    if (widget.icon != null) {
-      final String path="widget_icon.webp";
-      FileOutputStream iconFile=new FileOutputStream(path);
-      iconFile.write(widget.icon.data);
-      iconFile.close();
-      System.err.println("wrote " + path);
-    }
-    if (widget.preview != null) {
-      final String path="widget_preview.webp";
-      FileOutputStream iconFile=new FileOutputStream(path);
-      iconFile.write(widget.preview.data);
-      iconFile.close();
-      System.err.println("wrote " + path);
+    if (extractImages) {
+      String prefix="stdin";
+      if (source != null) {
+        prefix=source.getName();
+      }
+      if (proto instanceof Resource) {
+        Resource icon=(Resource)proto;
+        writeImageData(icon.data,prefix + ".png");
+      }
+      if (proto instanceof Favorite) {
+        Favorite favorite=(Favorite)proto;
+        if (favorite.iconType == ICON_TYPE_BITMAP) {
+          writeImageData(favorite.icon,prefix + ".png");
+        }
+      }
+      if (proto instanceof Widget) {
+        Widget widget=(Widget)proto;
+        if (widget.icon != null) {
+          writeImageData(widget.icon.data,prefix + "_icon.png");
+        }
+        if (widget.preview != null) {
+          writeImageData(widget.preview.data,prefix + "_preview.png");
+        }
+      }
     }
   }
   System.exit(0);

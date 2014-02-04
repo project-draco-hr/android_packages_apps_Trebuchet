@@ -1,4 +1,5 @@
 {
+  Launcher.addDumpLog(TAG,"11683562 - loadWorkspace()",true);
   final long t=DEBUG_LOADERS ? SystemClock.uptimeMillis() : 0;
   final Context context=mContext;
   final ContentResolver contentResolver=context.getContentResolver();
@@ -9,11 +10,24 @@
   DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
   int countX=(int)grid.numColumns;
   int countY=(int)grid.numRows;
-  LauncherAppState.getLauncherProvider().loadDefaultFavoritesIfNecessary(0);
+  if ((mFlags & LOADER_FLAG_CLEAR_WORKSPACE) != 0) {
+    Launcher.addDumpLog(TAG,"loadWorkspace: resetting launcher database",true);
+    LauncherAppState.getLauncherProvider().deleteDatabase();
+  }
+  if ((mFlags & LOADER_FLAG_MIGRATE_SHORTCUTS) != 0) {
+    Launcher.addDumpLog(TAG,"loadWorkspace: migrating from launcher2",true);
+    LauncherAppState.getLauncherProvider().migrateLauncher2Shortcuts();
+  }
+ else {
+    Launcher.addDumpLog(TAG,"loadWorkspace: loading default favorites",false);
+    LauncherAppState.getLauncherProvider().loadDefaultFavoritesIfNecessary(0);
+  }
   boolean loadedOldDb=LauncherAppState.getLauncherProvider().justLoadedOldDb();
+  Launcher.addDumpLog(TAG,"11683562 -   loadedOldDb: " + loadedOldDb,true);
 synchronized (sBgLock) {
     clearSBgDataStructures();
     final ArrayList<Long> itemsToRemove=new ArrayList<Long>();
+    final ArrayList<Long> restoredRows=new ArrayList<Long>();
     final Uri contentUri=LauncherSettings.Favorites.CONTENT_URI;
     if (DEBUG_LOADERS)     Log.d(TAG,"loading model from " + contentUri);
     final Cursor c=contentResolver.query(contentUri,null,null,null,null);
@@ -35,6 +49,7 @@ synchronized (sBgLock) {
       final int cellYIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.CELLY);
       final int spanXIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.SPANX);
       final int spanYIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.SPANY);
+      final int restoredIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.RESTORED);
       ShortcutInfo info;
       String intentDescription;
       LauncherAppWidgetInfo appWidgetInfo;
@@ -42,9 +57,10 @@ synchronized (sBgLock) {
       long id;
       Intent intent;
       while (!mStopped && c.moveToNext()) {
-        AtomicBoolean deleteOnItemOverlap=new AtomicBoolean(false);
+        AtomicBoolean deleteOnInvalidPlacement=new AtomicBoolean(false);
         try {
           int itemType=c.getInt(itemTypeIndex);
+          boolean restored=0 != c.getInt(restoredIndex);
 switch (itemType) {
 case LauncherSettings.Favorites.ITEM_TYPE_APPLICATION:
 case LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT:
@@ -54,21 +70,35 @@ case LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT:
           intent=Intent.parseUri(intentDescription,0);
           ComponentName cn=intent.getComponent();
           if (cn != null && !isValidPackageComponent(manager,cn)) {
-            if (!mAppsCanBeOnRemoveableStorage) {
-              Launcher.addDumpLog(TAG,"Invalid package removed: " + cn,true);
-              itemsToRemove.add(id);
+            if (restored) {
+              Launcher.addDumpLog(TAG,"package not yet restored: " + cn,true);
             }
  else {
-              Launcher.addDumpLog(TAG,"Invalid package found: " + cn,true);
+              if (!mAppsCanBeOnRemoveableStorage) {
+                Launcher.addDumpLog(TAG,"Invalid package removed: " + cn,true);
+                itemsToRemove.add(id);
+              }
+ else {
+                Launcher.addDumpLog(TAG,"Invalid package found: " + cn,true);
+              }
+              continue;
             }
-            continue;
+          }
+ else           if (restored) {
+            restoredRows.add(id);
+            restored=false;
           }
         }
  catch (        URISyntaxException e) {
           Launcher.addDumpLog(TAG,"Invalid uri: " + intentDescription,true);
           continue;
         }
-      if (itemType == LauncherSettings.Favorites.ITEM_TYPE_APPLICATION) {
+      if (restored) {
+        Launcher.addDumpLog(TAG,"constructing info for partially restored package",true);
+        info=getRestoredItemInfo(c,titleIndex);
+        intent=getRestoredItemIntent(c,context,intent);
+      }
+ else       if (itemType == LauncherSettings.Favorites.ITEM_TYPE_APPLICATION) {
         info=getShortcutInfo(manager,intent,context,c,iconIndex,titleIndex,mLabelCache);
       }
  else {
@@ -87,15 +117,9 @@ case LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT:
       info.cellY=c.getInt(cellYIndex);
       info.spanX=1;
       info.spanY=1;
-      if (container == LauncherSettings.Favorites.CONTAINER_DESKTOP) {
-        if (checkItemDimensions(info)) {
-          Launcher.addDumpLog(TAG,"Skipped loading out of bounds shortcut: " + info + ", "+ grid.numColumns+ "x"+ grid.numRows,true);
-          continue;
-        }
-      }
-      deleteOnItemOverlap.set(false);
-      if (!checkItemPlacement(occupied,info,deleteOnItemOverlap)) {
-        if (deleteOnItemOverlap.get()) {
+      deleteOnInvalidPlacement.set(false);
+      if (!checkItemPlacement(occupied,info,deleteOnInvalidPlacement)) {
+        if (deleteOnInvalidPlacement.get()) {
           itemsToRemove.add(id);
         }
         break;
@@ -129,15 +153,9 @@ folderInfo.cellX=c.getInt(cellXIndex);
 folderInfo.cellY=c.getInt(cellYIndex);
 folderInfo.spanX=1;
 folderInfo.spanY=1;
-if (container == LauncherSettings.Favorites.CONTAINER_DESKTOP) {
-if (checkItemDimensions(folderInfo)) {
-Log.d(TAG,"Skipped loading out of bounds folder");
-continue;
-}
-}
-deleteOnItemOverlap.set(false);
-if (!checkItemPlacement(occupied,folderInfo,deleteOnItemOverlap)) {
-if (deleteOnItemOverlap.get()) {
+deleteOnInvalidPlacement.set(false);
+if (!checkItemPlacement(occupied,folderInfo,deleteOnInvalidPlacement)) {
+if (deleteOnInvalidPlacement.get()) {
 itemsToRemove.add(id);
 }
 break;
@@ -147,6 +165,9 @@ case LauncherSettings.Favorites.CONTAINER_DESKTOP:
 case LauncherSettings.Favorites.CONTAINER_HOTSEAT:
 sBgWorkspaceItems.add(folderInfo);
 break;
+}
+if (restored) {
+restoredRows.add(id);
 }
 sBgItemsIdMap.put(folderInfo.id,folderInfo);
 sBgFolders.put(folderInfo.id,folderInfo);
@@ -179,15 +200,9 @@ Log.e(TAG,"Widget found where container != " + "CONTAINER_DESKTOP nor CONTAINER_
 continue;
 }
 appWidgetInfo.container=c.getInt(containerIndex);
-if (container == LauncherSettings.Favorites.CONTAINER_DESKTOP) {
-if (checkItemDimensions(appWidgetInfo)) {
-Log.d(TAG,"Skipped loading out of bounds app widget");
-continue;
-}
-}
-deleteOnItemOverlap.set(false);
-if (!checkItemPlacement(occupied,appWidgetInfo,deleteOnItemOverlap)) {
-if (deleteOnItemOverlap.get()) {
+deleteOnInvalidPlacement.set(false);
+if (!checkItemPlacement(occupied,appWidgetInfo,deleteOnInvalidPlacement)) {
+if (deleteOnInvalidPlacement.get()) {
 itemsToRemove.add(id);
 }
 break;
@@ -207,7 +222,7 @@ break;
 }
 }
  catch (Exception e) {
-Launcher.addDumpLog(TAG,"Desktop items loading interrupted: " + e,true);
+Launcher.addDumpLog(TAG,"Desktop items loading interrupted",e,true);
 }
 }
 }
@@ -234,6 +249,22 @@ Log.w(TAG,"Could not remove id = " + id);
 }
 }
 }
+if (restoredRows.size() > 0) {
+ContentProviderClient updater=contentResolver.acquireContentProviderClient(LauncherSettings.Favorites.CONTENT_URI);
+try {
+StringBuilder selectionBuilder=new StringBuilder();
+selectionBuilder.append(LauncherSettings.Favorites._ID);
+selectionBuilder.append(" IN (");
+selectionBuilder.append(TextUtils.join(", ",restoredRows));
+selectionBuilder.append(")");
+ContentValues values=new ContentValues();
+values.put(LauncherSettings.Favorites.RESTORED,0);
+updater.update(LauncherSettings.Favorites.CONTENT_URI,values,selectionBuilder.toString(),null);
+}
+ catch (RemoteException e) {
+Log.w(TAG,"Could not update restored rows");
+}
+}
 if (loadedOldDb) {
 long maxScreenId=0;
 for (ItemInfo item : sBgItemsIdMap.values()) {
@@ -246,6 +277,8 @@ maxScreenId=screenId;
 }
 }
 Collections.sort(sBgWorkspaceScreens);
+Launcher.addDumpLog(TAG,"11683562 -   maxScreenId: " + maxScreenId,true);
+Launcher.addDumpLog(TAG,"11683562 -   sBgWorkspaceScreens: " + TextUtils.join(", ",sBgWorkspaceScreens),true);
 LauncherAppState.getLauncherProvider().updateMaxScreenId(maxScreenId);
 updateWorkspaceScreenOrder(context,sBgWorkspaceScreens);
 long maxItemId=0;
@@ -259,6 +292,7 @@ TreeMap<Integer,Long> orderedScreens=loadWorkspaceScreensDb(mContext);
 for (Integer i : orderedScreens.keySet()) {
 sBgWorkspaceScreens.add(orderedScreens.get(i));
 }
+Launcher.addDumpLog(TAG,"11683562 -   sBgWorkspaceScreens: " + TextUtils.join(", ",sBgWorkspaceScreens),true);
 ArrayList<Long> unusedScreens=new ArrayList<Long>(sBgWorkspaceScreens);
 for (ItemInfo item : sBgItemsIdMap.values()) {
 long screenId=item.screenId;
@@ -267,6 +301,7 @@ unusedScreens.remove(screenId);
 }
 }
 if (unusedScreens.size() != 0) {
+Launcher.addDumpLog(TAG,"11683562 -   unusedScreens (to be removed): " + TextUtils.join(", ",unusedScreens),true);
 sBgWorkspaceScreens.removeAll(unusedScreens);
 updateWorkspaceScreenOrder(context,sBgWorkspaceScreens);
 }

@@ -2,30 +2,37 @@
   if (LOGD)   Log.d(TAG,"creating new launcher database");
   mMaxItemId=1;
   mMaxScreenId=0;
-  db.execSQL("CREATE TABLE favorites (" + "_id INTEGER PRIMARY KEY," + "title TEXT,"+ "intent TEXT,"+ "container INTEGER,"+ "screen INTEGER,"+ "cellX INTEGER,"+ "cellY INTEGER,"+ "spanX INTEGER,"+ "spanY INTEGER,"+ "itemType INTEGER,"+ "appWidgetId INTEGER NOT NULL DEFAULT -1,"+ "isShortcut INTEGER,"+ "iconType INTEGER,"+ "iconPackage TEXT,"+ "iconResource TEXT,"+ "icon BLOB,"+ "uri TEXT,"+ "displayMode INTEGER,"+ "appWidgetProvider TEXT,"+ "modified INTEGER NOT NULL DEFAULT 0"+ ");");
+  mNewDbCreated=true;
+  db.execSQL("CREATE TABLE favorites (" + "_id INTEGER PRIMARY KEY," + "title TEXT,"+ "intent TEXT,"+ "container INTEGER,"+ "screen INTEGER,"+ "cellX INTEGER,"+ "cellY INTEGER,"+ "spanX INTEGER,"+ "spanY INTEGER,"+ "itemType INTEGER,"+ "appWidgetId INTEGER NOT NULL DEFAULT -1,"+ "isShortcut INTEGER,"+ "iconType INTEGER,"+ "iconPackage TEXT,"+ "iconResource TEXT,"+ "icon BLOB,"+ "uri TEXT,"+ "displayMode INTEGER,"+ "appWidgetProvider TEXT,"+ "modified INTEGER NOT NULL DEFAULT 0,"+ "restored INTEGER NOT NULL DEFAULT 0"+ ");");
   addWorkspacesTable(db);
   if (mAppWidgetHost != null) {
     mAppWidgetHost.deleteHost();
     sendAppWidgetResetNotify();
   }
-  ContentValuesCallback permuteScreensCb=new ContentValuesCallback(){
-    public void onRow(    ContentValues values){
-      int container=values.getAsInteger(LauncherSettings.Favorites.CONTAINER);
-      if (container == Favorites.CONTAINER_DESKTOP) {
-        int screen=values.getAsInteger(LauncherSettings.Favorites.SCREEN);
-        screen=(int)upgradeLauncherDb_permuteScreens(screen);
-        values.put(LauncherSettings.Favorites.SCREEN,screen);
+  if (shouldImportLauncher2Database(mContext)) {
+    ContentValuesCallback permuteScreensCb=new ContentValuesCallback(){
+      public void onRow(      ContentValues values){
+        int container=values.getAsInteger(LauncherSettings.Favorites.CONTAINER);
+        if (container == Favorites.CONTAINER_DESKTOP) {
+          int screen=values.getAsInteger(LauncherSettings.Favorites.SCREEN);
+          screen=(int)upgradeLauncherDb_permuteScreens(screen);
+          values.put(LauncherSettings.Favorites.SCREEN,screen);
+        }
       }
     }
-  }
 ;
-  Uri uri=Uri.parse("content://" + Settings.AUTHORITY + "/old_favorites?notify=true");
-  if (!convertDatabase(db,uri,permuteScreensCb,true)) {
-    uri=LauncherSettings.Favorites.OLD_CONTENT_URI;
-    if (!convertDatabase(db,uri,permuteScreensCb,false)) {
-      setFlagEmptyDbCreated();
-      return;
+    Uri uri=Uri.parse("content://" + Settings.AUTHORITY + "/old_favorites?notify=true");
+    if (!convertDatabase(db,uri,permuteScreensCb,true)) {
+      uri=LauncherSettings.Favorites.OLD_CONTENT_URI;
+      if (!convertDatabase(db,uri,permuteScreensCb,false)) {
+        setFlagEmptyDbCreated();
+        return;
+      }
     }
+    setFlagJustLoadedOldDb();
   }
-  setFlagJustLoadedOldDb();
+ else {
+    mMaxItemId=initializeMaxItemId(db);
+    setFlagEmptyDbCreated();
+  }
 }

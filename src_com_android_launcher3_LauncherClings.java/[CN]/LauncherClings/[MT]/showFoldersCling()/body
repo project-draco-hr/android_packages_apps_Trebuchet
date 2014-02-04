@@ -1,0 +1,18 @@
+{
+  SharedPreferences sharedPrefs=mLauncher.getSharedPrefs();
+  if (areClingsEnabled() && !sharedPrefs.getBoolean(FOLDER_CLING_DISMISSED_KEY,false) && !sharedPrefs.getBoolean(Launcher.USER_HAS_MIGRATED,false)) {
+    Cling cling=initCling(R.id.folder_cling,R.id.cling_scrim,true,true);
+    Folder openFolder=mLauncher.getWorkspace().getOpenFolder();
+    if (openFolder != null) {
+      Rect openFolderRect=new Rect();
+      openFolder.getHitRect(openFolderRect);
+      cling.setOpenFolderRect(openFolderRect);
+      openFolder.bringToFront();
+    }
+    return cling;
+  }
+ else {
+    removeCling(R.id.folder_cling);
+    return null;
+  }
+}

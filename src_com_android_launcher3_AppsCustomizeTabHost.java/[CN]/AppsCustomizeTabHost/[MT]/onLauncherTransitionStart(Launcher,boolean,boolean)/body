@@ -3,5 +3,5 @@
   if (animated) {
     enableAndBuildHardwareLayer();
   }
-  l.dismissWorkspaceCling(null);
+  l.getLauncherClings().dismissWorkspaceCling(null);
 }

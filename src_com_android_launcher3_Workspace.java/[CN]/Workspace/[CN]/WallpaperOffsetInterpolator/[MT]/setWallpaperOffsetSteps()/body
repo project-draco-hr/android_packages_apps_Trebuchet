@@ -1,3 +1,7 @@
 {
-  mWallpaperManager.setWallpaperOffsetSteps(1.0f / (getChildCount() - 1),1.0f);
+  float xOffset=1.0f / mNumPagesForWallpaperParallax;
+  if (xOffset != mLastSetWallpaperOffsetSteps) {
+    mWallpaperManager.setWallpaperOffsetSteps(xOffset,1.0f);
+    mLastSetWallpaperOffsetSteps=xOffset;
+  }
 }

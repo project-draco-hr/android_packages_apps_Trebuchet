@@ -1,0 +1,15 @@
+{
+  Cling cling=(Cling)mLauncher.findViewById(clingId);
+  View scrim=null;
+  if (scrimId > 0) {
+    scrim=mLauncher.findViewById(scrimId);
+  }
+  if (cling != null) {
+    cling.init(mLauncher,scrim);
+    cling.show(animate,SHOW_CLING_DURATION);
+    if (dimNavBarVisibilty) {
+      cling.setSystemUiVisibility(cling.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LOW_PROFILE);
+    }
+  }
+  return cling;
+}

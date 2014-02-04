@@ -1,8 +1,6 @@
 {
   if (mPageSwitchListener != null) {
-    mPageSwitchListener.onPageSwitch(getPageAt(mCurrentPage),mCurrentPage);
+    mPageSwitchListener.onPageSwitch(getPageAt(getNextPage()),getNextPage());
   }
-  if (mPageIndicator != null && !isReordering(false)) {
-    mPageIndicator.setActiveMarker(getNextPage());
-  }
+  updatePageIndicator();
 }

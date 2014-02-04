@@ -1,0 +1,45 @@
+{
+  if (mShakeAnimators.containsKey(child)) {
+    ReorderPreviewAnimation oldAnimation=mShakeAnimators.get(child);
+    oldAnimation.cancel();
+    mShakeAnimators.remove(child);
+    if (finalDeltaX == 0 && finalDeltaY == 0) {
+      completeAnimationImmediately();
+      return;
+    }
+  }
+  if (finalDeltaX == 0 && finalDeltaY == 0) {
+    return;
+  }
+  ValueAnimator va=LauncherAnimUtils.ofFloat(child,0f,1f);
+  a=va;
+  va.setRepeatMode(ValueAnimator.REVERSE);
+  va.setRepeatCount(ValueAnimator.INFINITE);
+  va.setDuration(mode == MODE_HINT ? HINT_DURATION : PREVIEW_DURATION);
+  va.setStartDelay((int)(Math.random() * 60));
+  va.addUpdateListener(new AnimatorUpdateListener(){
+    @Override public void onAnimationUpdate(    ValueAnimator animation){
+      float r=((Float)animation.getAnimatedValue()).floatValue();
+      float r1=(mode == MODE_HINT && repeating) ? 1.0f : r;
+      float x=r1 * finalDeltaX + (1 - r1) * initDeltaX;
+      float y=r1 * finalDeltaY + (1 - r1) * initDeltaY;
+      child.setTranslationX(x);
+      child.setTranslationY(y);
+      float s=r * finalScale + (1 - r) * initScale;
+      child.setScaleX(s);
+      child.setScaleY(s);
+    }
+  }
+);
+  va.addListener(new AnimatorListenerAdapter(){
+    public void onAnimationRepeat(    Animator animation){
+      initDeltaX=0;
+      initDeltaY=0;
+      initScale=getChildrenScale();
+      repeating=true;
+    }
+  }
+);
+  mShakeAnimators.put(child,this);
+  va.start();
+}

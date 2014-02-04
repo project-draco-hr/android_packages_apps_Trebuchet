@@ -20,6 +20,7 @@
   mIconCache=app.getIconCache();
   mIconCache.flushInvalidIcons(grid);
   mDragController=new DragController(this);
+  mLauncherClings=new LauncherClings(this);
   mInflater=getLayoutInflater();
   mStats=new Stats(this);
   mAppWidgetManager=AppWidgetManager.getInstance(this);
@@ -42,10 +43,10 @@
   }
   if (!mRestoring) {
     if (DISABLE_SYNCHRONOUS_BINDING_CURRENT_PAGE || sPausedFromUserAction) {
-      mModel.startLoader(true,-1);
+      mModel.startLoader(true,PagedView.INVALID_RESTORE_PAGE);
     }
  else {
-      mModel.startLoader(true,mWorkspace.getCurrentPage());
+      mModel.startLoader(true,mWorkspace.getRestorePage());
     }
   }
   mDefaultKeySsb=new SpannableStringBuilder();
@@ -54,5 +55,16 @@
   registerReceiver(mCloseSystemDialogsReceiver,filter);
   updateGlobalIcons();
   unlockScreenOrientation(true);
-  showFirstRunCling();
+  showFirstRunActivity();
+  if (mLauncherClings.shouldShowFirstRunOrMigrationClings()) {
+    if (mModel.canMigrateFromOldLauncherDb(this)) {
+      mLauncherClings.showMigrationCling();
+    }
+ else {
+      mLauncherClings.showFirstRunCling();
+    }
+  }
+ else {
+    mLauncherClings.removeFirstRunAndMigrationClings();
+  }
 }

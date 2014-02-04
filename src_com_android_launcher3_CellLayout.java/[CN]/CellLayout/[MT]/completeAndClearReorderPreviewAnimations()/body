@@ -1,0 +1,6 @@
+{
+  for (  ReorderPreviewAnimation a : mShakeAnimators.values()) {
+    a.completeAnimationImmediately();
+  }
+  mShakeAnimators.clear();
+}

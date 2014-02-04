@@ -1,0 +1,10 @@
+{
+  if (mDrawIdentifier.equals(FOLDER_LANDSCAPE) || mDrawIdentifier.equals(FOLDER_LARGE)) {
+    ViewGroup vg=(ViewGroup)findViewById(R.id.folder_bubble);
+    ViewGroup.MarginLayoutParams lp=(ViewGroup.MarginLayoutParams)vg.getLayoutParams();
+    lp.topMargin=r.top - mInsets.bottom;
+    lp.leftMargin=r.right;
+    vg.setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
+    vg.requestLayout();
+  }
+}

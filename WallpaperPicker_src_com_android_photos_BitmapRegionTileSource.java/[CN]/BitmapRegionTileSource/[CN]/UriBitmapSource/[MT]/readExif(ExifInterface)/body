@@ -1,0 +1,24 @@
+{
+  InputStream is=null;
+  try {
+    is=regenerateInputStream();
+    ei.readExif(is);
+    Utils.closeSilently(is);
+    return true;
+  }
+ catch (  FileNotFoundException e) {
+    Log.e("BitmapRegionTileSource","Failed to load URI " + mUri,e);
+    return false;
+  }
+catch (  IOException e) {
+    Log.e("BitmapRegionTileSource","Failed to load URI " + mUri,e);
+    return false;
+  }
+catch (  NullPointerException e) {
+    Log.e("BitmapRegionTileSource","Failed to read EXIF for URI " + mUri,e);
+    return false;
+  }
+ finally {
+    Utils.closeSilently(is);
+  }
+}

@@ -1,0 +1,9 @@
+{
+  if (shouldRunFirstRunActivity() && hasFirstRunActivity()) {
+    Intent firstRunIntent=getFirstRunActivity();
+    if (firstRunIntent != null) {
+      startActivity(firstRunIntent);
+      markFirstRunActivityShown();
+    }
+  }
+}

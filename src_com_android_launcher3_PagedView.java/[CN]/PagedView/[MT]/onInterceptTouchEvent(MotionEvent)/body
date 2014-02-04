@@ -32,12 +32,12 @@ case MotionEvent.ACTION_DOWN:
     mTotalMotionX=0;
     mActivePointerId=ev.getPointerId(0);
     final int xDist=Math.abs(mScroller.getFinalX() - mScroller.getCurrX());
-    final boolean finishedScrolling=(mScroller.isFinished() || xDist < mTouchSlop);
+    final boolean finishedScrolling=(mScroller.isFinished() || xDist < mTouchSlop / 3);
     if (finishedScrolling) {
       mTouchState=TOUCH_STATE_REST;
-      if (!mScroller.isFinished()) {
-        mScrollAbortedFromIntercept=true;
-        abortScrollerAnimation(false);
+      if (!mScroller.isFinished() && !mFreeScroll) {
+        setCurrentPage(getNextPage());
+        pageEndMoving();
       }
     }
  else {
@@ -64,9 +64,6 @@ case MotionEvent.ACTION_DOWN:
   }
 case MotionEvent.ACTION_UP:
 case MotionEvent.ACTION_CANCEL:
-if (mScrollAbortedFromIntercept) {
-  snapToDestination();
-}
 resetTouchState();
 break;
 case MotionEvent.ACTION_POINTER_UP:

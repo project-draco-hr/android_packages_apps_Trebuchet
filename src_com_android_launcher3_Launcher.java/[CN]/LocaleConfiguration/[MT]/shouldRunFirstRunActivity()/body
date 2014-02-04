@@ -1,0 +1,3 @@
+{
+  return !ActivityManager.isRunningInTestHarness() && !mSharedPrefs.getBoolean(FIRST_RUN_ACTIVITY_DISPLAYED,false);
+}

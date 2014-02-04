@@ -38,20 +38,20 @@
         Log.w(TAG,"empty intent on appwidget: " + id);
       }
       if (savedIds.contains(backupKey)) {
-        if (DEBUG)         Log.d(TAG,"already saved widget " + backupKey);
+        if (VERBOSE)         Log.v(TAG,"already saved widget " + backupKey);
         keys.add(key);
       }
  else       if (backupKey != null) {
         if (DEBUG)         Log.d(TAG,"I can count this high: " + out.rows);
         if ((out.rows - startRows) < MAX_WIDGETS_PER_PASS) {
-          if (DEBUG)           Log.d(TAG,"saving widget " + backupKey);
+          if (VERBOSE)           Log.v(TAG,"saving widget " + backupKey);
           previewLoader.setPreviewSize(spanX * profile.cellWidthPx,spanY * profile.cellHeightPx,widgetSpacingLayout);
           byte[] blob=packWidget(dpi,previewLoader,iconCache,provider);
           keys.add(key);
           writeRowToBackup(key,blob,out,data);
         }
  else {
-          if (DEBUG)           Log.d(TAG,"scheduling another run for widget " + backupKey);
+          if (VERBOSE)           Log.d(TAG,"deferring widget backup " + backupKey);
           dataChanged();
         }
       }

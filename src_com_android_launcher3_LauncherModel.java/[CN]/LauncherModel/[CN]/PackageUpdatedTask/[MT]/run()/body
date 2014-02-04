@@ -47,7 +47,7 @@ return;
 }
 if (added != null) {
 Callbacks cb=mCallbacks != null ? mCallbacks.get() : null;
-if (!AppsCustomizePagedView.DISABLE_ALL_APPS) {
+if (!LauncherAppState.isDisableAllApps()) {
 addAndBindAddedApps(context,new ArrayList<ItemInfo>(),cb,added);
 }
  else {

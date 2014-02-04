@@ -1,0 +1,4 @@
+long currentScreenId
+ArrayList<ItemInfo> allWorkspaceItems
+ArrayList<ItemInfo> currentScreenItems
+ArrayList<ItemInfo> otherScreenItems

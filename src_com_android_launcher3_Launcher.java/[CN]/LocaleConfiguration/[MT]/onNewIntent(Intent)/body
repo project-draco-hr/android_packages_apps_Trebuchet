@@ -12,7 +12,7 @@
     }
     Folder openFolder=mWorkspace.getOpenFolder();
     mWorkspace.exitWidgetResizeMode();
-    if (alreadyOnHome && mState == State.WORKSPACE && !mWorkspace.isTouchActive() && openFolder == null) {
+    if (alreadyOnHome && mState == State.WORKSPACE && !mWorkspace.isTouchActive() && openFolder == null && shouldMoveToDefaultScreenOnHomeIntent()) {
       mWorkspace.moveToDefaultScreen(true);
     }
     closeFolder();
@@ -28,9 +28,10 @@
       InputMethodManager imm=(InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
       imm.hideSoftInputFromWindow(v.getWindowToken(),0);
     }
-    if (mAppsCustomizeTabHost != null) {
+    if (!alreadyOnHome && mAppsCustomizeTabHost != null) {
       mAppsCustomizeTabHost.reset();
     }
+    onHomeIntent();
   }
   if (DEBUG_RESUME_TIME) {
     Log.d(TAG,"Time spent in onNewIntent: " + (System.currentTimeMillis() - startTime));

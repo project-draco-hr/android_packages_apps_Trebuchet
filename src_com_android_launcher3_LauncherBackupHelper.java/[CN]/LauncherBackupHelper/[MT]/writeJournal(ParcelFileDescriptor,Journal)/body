@@ -2,10 +2,12 @@
   FileOutputStream outStream=null;
   try {
     outStream=new FileOutputStream(newState.getFileDescriptor());
-    outStream.write(writeCheckedBytes(journal));
+    final byte[] journalBytes=writeCheckedBytes(journal);
+    outStream.write(journalBytes);
     outStream.close();
+    if (VERBOSE)     Log.v(TAG,"wrote " + journalBytes.length + " bytes of journal");
   }
  catch (  IOException e) {
-    Log.d(TAG,"failed to write backup journal",e);
+    Log.w(TAG,"failed to write backup journal",e);
   }
 }

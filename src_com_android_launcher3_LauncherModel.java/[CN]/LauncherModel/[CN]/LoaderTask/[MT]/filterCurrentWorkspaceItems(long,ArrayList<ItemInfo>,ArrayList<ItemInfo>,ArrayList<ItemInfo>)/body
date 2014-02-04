@@ -1,0 +1,40 @@
+{
+  Iterator<ItemInfo> iter=allWorkspaceItems.iterator();
+  while (iter.hasNext()) {
+    ItemInfo i=iter.next();
+    if (i == null) {
+      iter.remove();
+    }
+  }
+  Set<Long> itemsOnScreen=new HashSet<Long>();
+  Collections.sort(allWorkspaceItems,new Comparator<ItemInfo>(){
+    @Override public int compare(    ItemInfo lhs,    ItemInfo rhs){
+      return (int)(lhs.container - rhs.container);
+    }
+  }
+);
+  for (  ItemInfo info : allWorkspaceItems) {
+    if (info.container == LauncherSettings.Favorites.CONTAINER_DESKTOP) {
+      if (info.screenId == currentScreenId) {
+        currentScreenItems.add(info);
+        itemsOnScreen.add(info.id);
+      }
+ else {
+        otherScreenItems.add(info);
+      }
+    }
+ else     if (info.container == LauncherSettings.Favorites.CONTAINER_HOTSEAT) {
+      currentScreenItems.add(info);
+      itemsOnScreen.add(info.id);
+    }
+ else {
+      if (itemsOnScreen.contains(info.container)) {
+        currentScreenItems.add(info);
+        itemsOnScreen.add(info.id);
+      }
+ else {
+        otherScreenItems.add(info);
+      }
+    }
+  }
+}

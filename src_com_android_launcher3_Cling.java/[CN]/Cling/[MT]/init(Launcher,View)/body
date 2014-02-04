@@ -2,7 +2,7 @@
   if (!mIsInitialized) {
     mLauncher=l;
     mScrimView=scrim;
-    mBackgroundColor=0xdd000000;
+    mBackgroundColor=0xcc000000;
     setOnLongClickListener(this);
     setOnClickListener(this);
     setOnTouchListener(this);
@@ -11,6 +11,9 @@
     mErasePaint.setColor(0xFFFFFF);
     mErasePaint.setAlpha(0);
     mErasePaint.setAntiAlias(true);
+    mBorderPaint=new Paint();
+    mBorderPaint.setColor(0xFFFFFFFF);
+    mBorderPaint.setAntiAlias(true);
     int circleColor=getResources().getColor(R.color.first_run_cling_circle_background_color);
     mBubblePaint=new Paint();
     mBubblePaint.setColor(circleColor);

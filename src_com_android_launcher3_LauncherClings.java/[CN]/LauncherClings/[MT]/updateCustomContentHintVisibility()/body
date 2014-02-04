@@ -1,0 +1,14 @@
+{
+  Cling cling=(Cling)mLauncher.findViewById(R.id.first_run_cling);
+  String ccHintStr=mLauncher.getFirstRunCustomContentHint();
+  if (mLauncher.getWorkspace().hasCustomContent()) {
+    if (cling != null) {
+      setCustomContentHintVisibility(cling,ccHintStr,true,true);
+    }
+  }
+ else {
+    if (cling != null) {
+      setCustomContentHintVisibility(cling,ccHintStr,false,true);
+    }
+  }
+}

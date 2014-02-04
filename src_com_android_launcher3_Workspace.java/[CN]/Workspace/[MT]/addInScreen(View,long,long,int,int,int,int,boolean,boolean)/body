@@ -46,7 +46,8 @@
   if (spanX < 0 && spanY < 0) {
     lp.isLockedToGrid=false;
   }
-  int childId=LauncherModel.getCellLayoutChildId(container,screenId,x,y,spanX,spanY);
+  ItemInfo info=(ItemInfo)child.getTag();
+  int childId=mLauncher.getViewIdForItem(info);
   boolean markCellsAsOccupied=!(child instanceof Folder);
   if (!layout.addViewToCellLayout(child,insert ? 0 : -1,childId,lp,markCellsAsOccupied)) {
     Launcher.addDumpLog(TAG,"Failed to add to item at (" + lp.cellX + ","+ lp.cellY+ ") to CellLayout",true);

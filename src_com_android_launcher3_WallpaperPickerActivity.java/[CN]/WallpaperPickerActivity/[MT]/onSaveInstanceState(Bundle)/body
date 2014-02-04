@@ -1,3 +1,0 @@
-{
-  outState.putParcelableArrayList(TEMP_WALLPAPER_TILES,mTempWallpaperTiles);
-}

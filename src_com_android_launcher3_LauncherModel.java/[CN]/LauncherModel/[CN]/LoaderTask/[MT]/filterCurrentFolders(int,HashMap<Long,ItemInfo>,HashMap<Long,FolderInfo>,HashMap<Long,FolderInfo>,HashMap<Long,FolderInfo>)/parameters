@@ -1,5 +1,0 @@
-int currentScreen
-HashMap<Long,ItemInfo> itemsIdMap
-HashMap<Long,FolderInfo> folders
-HashMap<Long,FolderInfo> currentScreenFolders
-HashMap<Long,FolderInfo> otherScreenFolders

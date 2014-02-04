@@ -1,7 +1,7 @@
 {
   setVisibility(View.VISIBLE);
   setLayerType(View.LAYER_TYPE_HARDWARE,null);
-  if (mDrawIdentifier.equals(WORKSPACE_PORTRAIT) || mDrawIdentifier.equals(WORKSPACE_LANDSCAPE) || mDrawIdentifier.equals(WORKSPACE_LARGE)|| mDrawIdentifier.equals(WORKSPACE_CUSTOM)) {
+  if (mDrawIdentifier.equals(WORKSPACE_PORTRAIT) || mDrawIdentifier.equals(WORKSPACE_LANDSCAPE) || mDrawIdentifier.equals(WORKSPACE_LARGE)|| mDrawIdentifier.equals(WORKSPACE_CUSTOM)|| mDrawIdentifier.equals(MIGRATION_WORKSPACE_PORTRAIT)|| mDrawIdentifier.equals(MIGRATION_WORKSPACE_LARGE_PORTRAIT)|| mDrawIdentifier.equals(MIGRATION_WORKSPACE_LANDSCAPE)) {
     View content=getContent();
     content.setAlpha(0f);
     content.animate().alpha(1f).setDuration(duration).setListener(null).start();

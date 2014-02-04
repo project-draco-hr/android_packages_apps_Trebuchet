@@ -1,0 +1,5 @@
+{
+  String spKey=LauncherAppState.getSharedPreferencesKey();
+  SharedPreferences sp=getSharedPreferences(spKey,Context.MODE_MULTI_PROCESS);
+  super.onDestroy();
+}

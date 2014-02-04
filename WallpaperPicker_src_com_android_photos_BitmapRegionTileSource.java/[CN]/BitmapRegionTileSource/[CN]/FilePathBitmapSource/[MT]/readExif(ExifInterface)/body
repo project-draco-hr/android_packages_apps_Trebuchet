@@ -1,0 +1,14 @@
+{
+  try {
+    ei.readExif(mPath);
+    return true;
+  }
+ catch (  NullPointerException e) {
+    Log.w("BitmapRegionTileSource","reading exif failed",e);
+    return false;
+  }
+catch (  IOException e) {
+    Log.w("BitmapRegionTileSource","getting decoder failed",e);
+    return false;
+  }
+}

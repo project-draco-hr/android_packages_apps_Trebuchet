@@ -1,5 +1,11 @@
 {
-  String spKey=WallpaperCropActivity.getSharedPreferencesKey();
-  SharedPreferences sp=mLauncher.getSharedPreferences(spKey,Context.MODE_MULTI_PROCESS);
-  WallpaperPickerActivity.suggestWallpaperDimension(mLauncher.getResources(),sp,mLauncher.getWindowManager(),mWallpaperManager);
+  new AsyncTask<Void,Void,Void>(){
+    public Void doInBackground(    Void... args){
+      String spKey=WallpaperCropActivity.getSharedPreferencesKey();
+      SharedPreferences sp=mLauncher.getSharedPreferences(spKey,Context.MODE_MULTI_PROCESS);
+      LauncherWallpaperPickerActivity.suggestWallpaperDimension(mLauncher.getResources(),sp,mLauncher.getWindowManager(),mWallpaperManager);
+      return null;
+    }
+  }
+.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,(Void)null);
 }

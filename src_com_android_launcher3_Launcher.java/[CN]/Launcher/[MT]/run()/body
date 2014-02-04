@@ -1,3 +1,0 @@
-{
-  writeConfiguration(Launcher.this,localeConfiguration);
-}

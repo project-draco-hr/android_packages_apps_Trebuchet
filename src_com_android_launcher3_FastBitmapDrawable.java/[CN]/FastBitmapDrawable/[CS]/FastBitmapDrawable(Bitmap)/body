@@ -1,11 +1,5 @@
 {
   mAlpha=255;
   mBitmap=b;
-  if (b != null) {
-    mWidth=mBitmap.getWidth();
-    mHeight=mBitmap.getHeight();
-  }
- else {
-    mWidth=mHeight=0;
-  }
+  setBounds(0,0,b.getWidth(),b.getHeight());
 }

@@ -20,5 +20,11 @@
   finally {
     sc.close();
   }
+  Launcher.addDumpLog(TAG,"11683562 - loadWorkspaceScreensDb()",true);
+  ArrayList<String> orderedScreensPairs=new ArrayList<String>();
+  for (  Integer i : orderedScreens.keySet()) {
+    orderedScreensPairs.add("{ " + i + ": "+ orderedScreens.get(i)+ " }");
+  }
+  Launcher.addDumpLog(TAG,"11683562 -   screens: " + TextUtils.join(", ",orderedScreensPairs),true);
   return orderedScreens;
 }

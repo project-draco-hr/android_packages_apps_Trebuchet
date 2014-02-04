@@ -1,4 +1,5 @@
 {
+  Launcher.addDumpLog(TAG,"11683562 - removeExtraEmptyScreen()",true);
   if (delay > 0) {
     postDelayed(new Runnable(){
       @Override public void run(){
@@ -19,6 +20,9 @@
       fadeAndRemoveEmptyScreen(0,FADE_EMPTY_SCREEN_DURATION,onComplete,stripEmptyScreens);
     }
     return;
+  }
+ else   if (stripEmptyScreens) {
+    stripEmptyScreens();
   }
   if (onComplete != null) {
     onComplete.run();

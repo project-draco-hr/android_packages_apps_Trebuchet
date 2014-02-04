@@ -1,10 +1,10 @@
 {
-  Folder folder=mWorkspace.getOpenFolder();
+  Folder folder=mWorkspace != null ? mWorkspace.getOpenFolder() : null;
   if (folder != null) {
     if (folder.isEditingName()) {
       folder.dismissEditingName();
     }
     closeFolder(folder);
-    dismissFolderCling(null);
+    mLauncherClings.dismissFolderCling(null);
   }
 }

@@ -1,0 +1,5 @@
+{
+  LauncherAppState.setApplicationContext(context.getApplicationContext());
+  LauncherAppState appState=LauncherAppState.getInstance();
+  appState.onWallpaperChanged();
+}

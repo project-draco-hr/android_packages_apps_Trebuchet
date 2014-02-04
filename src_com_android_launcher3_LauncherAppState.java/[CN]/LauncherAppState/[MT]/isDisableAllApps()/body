@@ -1,0 +1,3 @@
+{
+  return getInstance().mBuildInfo.isDogfoodBuild() && Launcher.isPropertyEnabled(Launcher.DISABLE_ALL_APPS_PROPERTY);
+}

@@ -11,6 +11,10 @@
       final PendingInstallShortcutInfo pendingInfo=iter.next();
       final Intent intent=pendingInfo.launchIntent;
       final String name=pendingInfo.name;
+      if (LauncherAppState.isDisableAllApps() && !isValidShortcutLaunchIntent(intent)) {
+        if (DBG)         Log.d(TAG,"Ignoring shortcut with launchIntent:" + intent);
+        continue;
+      }
       final boolean exists=LauncherModel.shortcutExists(context,name,intent);
       if (!exists) {
         ShortcutInfo info=getShortcutInfo(context,pendingInfo.data,pendingInfo.launchIntent);
@@ -22,7 +26,7 @@
     }
     if (!addShortcuts.isEmpty()) {
       LauncherAppState app=LauncherAppState.getInstance();
-      app.getModel().addAndBindAddedApps(context,addShortcuts,null);
+      app.getModel().addAndBindAddedApps(context,addShortcuts,new ArrayList<AppInfo>());
     }
   }
 }

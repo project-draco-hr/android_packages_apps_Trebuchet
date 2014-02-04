@@ -1,4 +1,5 @@
 {
+  Launcher.addDumpLog(TAG,"11683562 - addExtraEmptyScreen()",true);
   if (!mWorkspaceScreens.containsKey(EXTRA_EMPTY_SCREEN_ID)) {
     insertNewWorkspaceScreen(EXTRA_EMPTY_SCREEN_ID);
     return true;
