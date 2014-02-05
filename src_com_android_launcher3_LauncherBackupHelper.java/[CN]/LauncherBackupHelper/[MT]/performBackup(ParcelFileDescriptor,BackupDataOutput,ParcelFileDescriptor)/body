@@ -17,7 +17,7 @@
  catch (  IOException e) {
     Log.e(TAG,"launcher backup has failed",e);
   }
-  out.key=keys.toArray(BackupProtos.Key.EMPTY_ARRAY);
+  out.key=keys.toArray(new BackupProtos.Key[keys.size()]);
   writeJournal(newState,out);
   Log.v(TAG,"onBackup: wrote " + out.bytes + "b in "+ out.rows+ " rows.");
 }
