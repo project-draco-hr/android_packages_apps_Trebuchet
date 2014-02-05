@@ -1,8 +1,9 @@
 {
-  if (workspaceApps == null || allAppsApps == null) {
+  final Callbacks callbacks=mCallbacks != null ? mCallbacks.get() : null;
+  if (workspaceApps == null) {
     throw new RuntimeException("workspaceApps and allAppsApps must not be null");
   }
-  if (workspaceApps.isEmpty() && allAppsApps.isEmpty()) {
+  if (workspaceApps.isEmpty()) {
     return;
   }
   Runnable r=new Runnable(){
@@ -55,7 +56,7 @@ synchronized (sBgLock) {
         }
       }
       updateWorkspaceScreenOrder(context,workspaceScreens);
-      if (!addedShortcutsFinal.isEmpty() || !allAppsApps.isEmpty()) {
+      if (!addedShortcutsFinal.isEmpty()) {
         runOnMainThread(new Runnable(){
           public void run(){
             Callbacks cb=mCallbacks != null ? mCallbacks.get() : null;
@@ -74,7 +75,7 @@ synchronized (sBgLock) {
                   }
                 }
               }
-              callbacks.bindAppsAdded(addedWorkspaceScreensFinal,addNotAnimated,addAnimated,allAppsApps);
+              callbacks.bindAppsAdded(addedWorkspaceScreensFinal,addNotAnimated,addAnimated,null);
             }
           }
         }
