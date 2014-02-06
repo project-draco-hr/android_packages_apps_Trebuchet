@@ -1,0 +1,19 @@
+{
+  final ContentResolver cr=context.getContentResolver();
+  final ComponentName component=intent.getComponent();
+  if (component == null) {
+    return false;
+  }
+  String componentName=component.flattenToString();
+  final String where="intent glob \"*component=" + componentName + "*\" and restored = 1";
+  Cursor c=cr.query(LauncherSettings.Favorites.CONTENT_URI,new String[]{"intent","restored"},where,null,null);
+  boolean result=false;
+  try {
+    result=c.moveToFirst();
+  }
+  finally {
+    c.close();
+  }
+  Log.d(TAG,"shortcutWasRestored is " + result + " for "+ componentName);
+  return result;
+}

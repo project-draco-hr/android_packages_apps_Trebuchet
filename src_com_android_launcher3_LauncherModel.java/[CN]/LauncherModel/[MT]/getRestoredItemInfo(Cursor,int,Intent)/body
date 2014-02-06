@@ -9,5 +9,6 @@
     info.title="";
   }
   info.itemType=LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT;
+  info.restoredIntent=intent;
   return info;
 }

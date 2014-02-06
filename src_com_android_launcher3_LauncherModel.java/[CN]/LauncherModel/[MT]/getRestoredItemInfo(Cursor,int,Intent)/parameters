@@ -1,2 +1,3 @@
 Cursor cursor
 int titleIndex
+Intent intent
