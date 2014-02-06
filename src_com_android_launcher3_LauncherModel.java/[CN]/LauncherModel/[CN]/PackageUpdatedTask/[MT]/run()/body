@@ -46,13 +46,12 @@ Log.w(TAG,"Nobody to tell about the new app.  Launcher is probably loading.");
 return;
 }
 if (added != null) {
-Callbacks cb=mCallbacks != null ? mCallbacks.get() : null;
-if (!LauncherAppState.isDisableAllApps()) {
-addAndBindAddedApps(context,new ArrayList<ItemInfo>(),cb,added);
+if (LauncherAppState.isDisableAllApps()) {
+final ArrayList<ItemInfo> addedInfos=new ArrayList<ItemInfo>(added);
+addAndBindAddedWorkspaceApps(context,addedInfos);
 }
  else {
-final ArrayList<ItemInfo> addedInfos=new ArrayList<ItemInfo>(added);
-addAndBindAddedApps(context,addedInfos,cb,added);
+addAppsToAllApps(context,added);
 }
 }
 if (modified != null) {
