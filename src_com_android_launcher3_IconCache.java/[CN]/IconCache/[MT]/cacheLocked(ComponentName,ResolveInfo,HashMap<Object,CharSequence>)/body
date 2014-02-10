@@ -3,20 +3,34 @@
   if (entry == null) {
     entry=new CacheEntry();
     mCache.put(componentName,entry);
-    ComponentName key=LauncherModel.getComponentNameFromResolveInfo(info);
-    if (labelCache != null && labelCache.containsKey(key)) {
-      entry.title=labelCache.get(key).toString();
+    if (info != null) {
+      ComponentName key=LauncherModel.getComponentNameFromResolveInfo(info);
+      if (labelCache != null && labelCache.containsKey(key)) {
+        entry.title=labelCache.get(key).toString();
+      }
+ else {
+        entry.title=info.loadLabel(mPackageManager).toString();
+        if (labelCache != null) {
+          labelCache.put(key,entry.title);
+        }
+      }
+      if (entry.title == null) {
+        entry.title=info.activityInfo.name;
+      }
+      entry.icon=Utilities.createIconBitmap(getFullResIcon(info),mContext);
     }
  else {
-      entry.title=info.loadLabel(mPackageManager).toString();
-      if (labelCache != null) {
-        labelCache.put(key,entry.title);
+      entry.title="";
+      Bitmap preloaded=getPreloadedIcon(componentName);
+      if (preloaded != null) {
+        if (DEBUG)         Log.d(TAG,"using preloaded icon for " + componentName.toShortString());
+        entry.icon=preloaded;
+      }
+ else {
+        if (DEBUG)         Log.d(TAG,"using default icon for " + componentName.toShortString());
+        entry.icon=mDefaultIcon;
       }
     }
-    if (entry.title == null) {
-      entry.title=info.activityInfo.name;
-    }
-    entry.icon=Utilities.createIconBitmap(getFullResIcon(info),mContext);
   }
   return entry;
 }
