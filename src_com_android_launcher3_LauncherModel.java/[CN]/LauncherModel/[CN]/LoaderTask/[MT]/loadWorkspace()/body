@@ -95,7 +95,7 @@ case LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT:
         }
       if (restored) {
         Launcher.addDumpLog(TAG,"constructing info for partially restored package",true);
-        info=getRestoredItemInfo(c,titleIndex);
+        info=getRestoredItemInfo(c,titleIndex,intent);
         intent=getRestoredItemIntent(c,context,intent);
       }
  else       if (itemType == LauncherSettings.Favorites.ITEM_TYPE_APPLICATION) {

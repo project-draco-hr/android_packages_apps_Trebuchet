@@ -10,6 +10,7 @@
     public void run(){
       final ArrayList<ItemInfo> addedShortcutsFinal=new ArrayList<ItemInfo>();
       final ArrayList<Long> addedWorkspaceScreensFinal=new ArrayList<Long>();
+      final ArrayList<AppInfo> restoredAppsFinal=new ArrayList<AppInfo>();
       ArrayList<Long> workspaceScreens=new ArrayList<Long>();
       TreeMap<Integer,Long> orderedScreens=loadWorkspaceScreensDb(context);
       for (      Integer i : orderedScreens.keySet()) {
@@ -23,6 +24,9 @@ synchronized (sBgLock) {
           final String name=a.title.toString();
           final Intent launchIntent=a.getIntent();
           if (LauncherModel.shortcutExists(context,name,launchIntent)) {
+            if (a instanceof AppInfo && LauncherModel.appWasRestored(context,launchIntent)) {
+              restoredAppsFinal.add((AppInfo)a);
+            }
             continue;
           }
           int startSearchPageIndex=workspaceScreens.isEmpty() ? 0 : 1;
@@ -76,6 +80,9 @@ synchronized (sBgLock) {
                 }
               }
               callbacks.bindAppsAdded(addedWorkspaceScreensFinal,addNotAnimated,addAnimated,null);
+              if (!restoredAppsFinal.isEmpty()) {
+                callbacks.bindAppsUpdated(restoredAppsFinal);
+              }
             }
           }
         }
