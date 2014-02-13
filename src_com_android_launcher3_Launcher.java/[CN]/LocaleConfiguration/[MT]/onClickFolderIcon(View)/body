@@ -1,4 +1,9 @@
 {
+  if (LOGD)   Log.d(TAG,"onClickFolder");
+  if (!(v instanceof FolderIcon)) {
+    throw new IllegalArgumentException("Input must be a FolderIcon");
+  }
+  FolderIcon folderIcon=(FolderIcon)v;
   final FolderInfo info=folderIcon.getFolderInfo();
   Folder openFolder=mWorkspace.getFolderForTag(info);
   if (info.opened && openFolder == null) {

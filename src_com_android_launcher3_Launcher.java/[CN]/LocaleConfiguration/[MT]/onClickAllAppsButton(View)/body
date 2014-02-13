@@ -1,3 +1,9 @@
 {
-  showAllApps(true,AppsCustomizePagedView.ContentType.Applications,false);
+  if (LOGD)   Log.d(TAG,"onClickAllAppsButton");
+  if (isAllAppsVisible()) {
+    showWorkspace(true);
+  }
+ else {
+    showAllApps(true,AppsCustomizePagedView.ContentType.Applications,false);
+  }
 }

@@ -17,7 +17,7 @@
   widgetButton.setOnClickListener(new OnClickListener(){
     @Override public void onClick(    View arg0){
       if (!mWorkspace.isSwitchingState()) {
-        showAllApps(true,AppsCustomizePagedView.ContentType.Widgets,true);
+        onClickAddWidgetButton();
       }
     }
   }
@@ -27,7 +27,7 @@
   wallpaperButton.setOnClickListener(new OnClickListener(){
     @Override public void onClick(    View arg0){
       if (!mWorkspace.isSwitchingState()) {
-        startWallpaper();
+        onClickWallpaperPicker();
       }
     }
   }
@@ -38,7 +38,7 @@
     settingsButton.setOnClickListener(new OnClickListener(){
       @Override public void onClick(      View arg0){
         if (!mWorkspace.isSwitchingState()) {
-          startSettings();
+          onClickSettingsButton();
         }
       }
     }
