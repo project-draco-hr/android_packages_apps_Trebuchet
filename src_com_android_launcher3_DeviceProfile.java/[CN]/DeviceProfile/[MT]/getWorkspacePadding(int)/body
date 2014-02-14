@@ -2,7 +2,12 @@
   Rect searchBarBounds=getSearchBarBounds(orientation);
   Rect padding=new Rect();
   if (orientation == CellLayout.LANDSCAPE && transposeLayoutWithOrientation) {
-    padding.set(searchBarBounds.right,edgeMarginPx,hotseatBarHeightPx,edgeMarginPx);
+    if (isLayoutRtl) {
+      padding.set(hotseatBarHeightPx,edgeMarginPx,searchBarBounds.width(),edgeMarginPx);
+    }
+ else {
+      padding.set(searchBarBounds.width(),edgeMarginPx,hotseatBarHeightPx,edgeMarginPx);
+    }
   }
  else {
     if (isTablet()) {
