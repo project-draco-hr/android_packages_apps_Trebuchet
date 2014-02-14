@@ -1,6 +1,6 @@
 {
   File source=null;
-  Class type=Key.class;
+  Class type=null;
   int skip=0;
   for (int i=0; i < args.length; i++) {
     if ("-k".equals(args[i])) {
@@ -36,6 +36,9 @@
       System.err.println("Unsupported flag: " + args[i]);
       usage(args);
     }
+  }
+  if (type == null) {
+    usage(args);
   }
   ByteArrayOutputStream byteStream=new ByteArrayOutputStream();
   BufferedInputStream input=null;
