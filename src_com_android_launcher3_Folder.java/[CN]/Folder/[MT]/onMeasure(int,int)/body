@@ -3,7 +3,12 @@
   int height=getFolderHeight();
   int contentAreaWidthSpec=MeasureSpec.makeMeasureSpec(getContentAreaWidth(),MeasureSpec.EXACTLY);
   int contentAreaHeightSpec=MeasureSpec.makeMeasureSpec(getContentAreaHeight(),MeasureSpec.EXACTLY);
-  mContent.setFixedSize(getContentAreaWidth(),getContentAreaHeight());
+  if (AppsCustomizePagedView.DISABLE_ALL_APPS) {
+    mContent.setFixedSize(getContentAreaWidth(),mContent.getDesiredHeight());
+  }
+ else {
+    mContent.setFixedSize(getContentAreaWidth(),getContentAreaHeight());
+  }
   mScrollView.measure(contentAreaWidthSpec,contentAreaHeightSpec);
   mFolderName.measure(contentAreaWidthSpec,MeasureSpec.makeMeasureSpec(mFolderNameHeight,MeasureSpec.EXACTLY));
   setMeasuredDimension(width,height);
