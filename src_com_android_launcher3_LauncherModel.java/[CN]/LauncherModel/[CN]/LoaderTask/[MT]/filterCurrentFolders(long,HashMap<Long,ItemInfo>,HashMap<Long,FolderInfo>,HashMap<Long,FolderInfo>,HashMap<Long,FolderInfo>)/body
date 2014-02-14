@@ -1,12 +1,12 @@
 {
-  if (currentScreen < 0) {
-    currentScreenFolders.putAll(folders);
+  if (currentScreenId < 0) {
+    throw new RuntimeException("Unexpected screen id");
   }
   for (  long id : folders.keySet()) {
     ItemInfo info=itemsIdMap.get(id);
     FolderInfo folder=folders.get(id);
     if (info == null || folder == null)     continue;
-    if (info.container == LauncherSettings.Favorites.CONTAINER_DESKTOP && info.screenId == currentScreen) {
+    if (info.container == LauncherSettings.Favorites.CONTAINER_DESKTOP && info.screenId == currentScreenId) {
       currentScreenFolders.put(id,folder);
     }
  else {

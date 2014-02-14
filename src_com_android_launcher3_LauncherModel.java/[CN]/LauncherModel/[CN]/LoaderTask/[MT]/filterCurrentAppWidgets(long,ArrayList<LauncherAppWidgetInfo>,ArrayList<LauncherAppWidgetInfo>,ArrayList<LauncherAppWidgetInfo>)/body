@@ -1,10 +1,10 @@
 {
-  if (currentScreen < 0) {
-    currentScreenWidgets.addAll(appWidgets);
+  if (currentScreenId < 0) {
+    throw new RuntimeException("Unexpected screen id");
   }
   for (  LauncherAppWidgetInfo widget : appWidgets) {
     if (widget == null)     continue;
-    if (widget.container == LauncherSettings.Favorites.CONTAINER_DESKTOP && widget.screenId == currentScreen) {
+    if (widget.container == LauncherSettings.Favorites.CONTAINER_DESKTOP && widget.screenId == currentScreenId) {
       currentScreenWidgets.add(widget);
     }
  else {
