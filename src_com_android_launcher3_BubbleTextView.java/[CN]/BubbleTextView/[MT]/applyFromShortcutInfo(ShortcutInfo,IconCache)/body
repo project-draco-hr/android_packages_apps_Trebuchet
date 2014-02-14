@@ -2,8 +2,12 @@
   Bitmap b=info.getIcon(iconCache);
   LauncherAppState app=LauncherAppState.getInstance();
   DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
-  setCompoundDrawables(null,Utilities.createIconDrawable(b),null,null);
+  Drawable iconDrawable=Utilities.createIconDrawable(b);
+  setCompoundDrawables(null,iconDrawable,null,null);
   setCompoundDrawablePadding(grid.iconDrawablePaddingPx);
   setText(info.title);
   setTag(info);
+  if (info.isPromise()) {
+    setState(ShortcutInfo.PACKAGE_STATE_UNKNOWN);
+  }
 }

@@ -3,24 +3,16 @@
   for (  AppInfo ai : apps) {
     appsMap.put(ai.componentName,ai);
   }
-  ArrayList<ShortcutAndWidgetContainer> childrenLayouts=getAllShortcutAndWidgetContainers();
-  for (  ShortcutAndWidgetContainer layout : childrenLayouts) {
-    final HashMap<ItemInfo,View> children=new HashMap<ItemInfo,View>();
-    for (int j=0; j < layout.getChildCount(); j++) {
-      View v=layout.getChildAt(j);
-      ItemInfo info=(ItemInfo)v.getTag();
-      if (info instanceof FolderInfo && v instanceof FolderIcon) {
-        FolderIcon folder=(FolderIcon)v;
-        ArrayList<View> folderChildren=folder.getFolder().getItemsInReadingOrder();
-        for (        View fv : folderChildren) {
-          info=(ItemInfo)fv.getTag();
-          updateShortcut(appsMap,info,fv);
-        }
-        folder.invalidate();
-      }
- else       if (info instanceof ShortcutInfo) {
+  mapOverShortcuts(MAP_RECURSE,new ShortcutOperator(){
+    @Override public boolean evaluate(    ItemInfo info,    View v,    View parent){
+      if (info instanceof ShortcutInfo) {
         updateShortcut(appsMap,info,v);
+        if (parent != null) {
+          parent.invalidate();
+        }
       }
+      return false;
     }
   }
+);
 }

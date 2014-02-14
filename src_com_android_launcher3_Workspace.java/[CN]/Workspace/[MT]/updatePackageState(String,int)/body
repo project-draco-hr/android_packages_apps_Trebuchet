@@ -1,0 +1,11 @@
+{
+  mapOverShortcuts(MAP_RECURSE,new ShortcutOperator(){
+    @Override public boolean evaluate(    ItemInfo info,    View v,    View parent){
+      if (info instanceof ShortcutInfo && ((ShortcutInfo)info).isPromiseFor(pkgName) && v instanceof BubbleTextView) {
+        ((BubbleTextView)v).setState(state);
+      }
+      return false;
+    }
+  }
+);
+}

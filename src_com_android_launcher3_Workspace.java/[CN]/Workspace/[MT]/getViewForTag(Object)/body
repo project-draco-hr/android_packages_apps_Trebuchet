@@ -1,13 +1,14 @@
 {
-  ArrayList<ShortcutAndWidgetContainer> childrenLayouts=getAllShortcutAndWidgetContainers();
-  for (  ShortcutAndWidgetContainer layout : childrenLayouts) {
-    int count=layout.getChildCount();
-    for (int i=0; i < count; i++) {
-      View child=layout.getChildAt(i);
-      if (child.getTag() == tag) {
-        return child;
+  final View[] value=new View[1];
+  mapOverShortcuts(MAP_NO_RECURSE,new ShortcutOperator(){
+    @Override public boolean evaluate(    ItemInfo info,    View v,    View parent){
+      if (v.getTag() == tag) {
+        value[0]=v;
+        return true;
       }
+      return false;
     }
   }
-  return null;
+);
+  return value[0];
 }
