@@ -23,6 +23,7 @@
       mIntersectingViews.add(child);
     }
   }
+  solution.intersectingViews=new ArrayList<View>(mIntersectingViews);
   if (attemptPushInDirection(mIntersectingViews,mOccupiedRect,direction,ignoreView,solution)) {
     return true;
   }

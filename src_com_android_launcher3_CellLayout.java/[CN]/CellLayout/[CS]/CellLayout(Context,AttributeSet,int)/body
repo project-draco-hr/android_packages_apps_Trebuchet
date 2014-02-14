@@ -27,7 +27,7 @@
   mOverScrollLeft=res.getDrawable(R.drawable.overscroll_glow_left);
   mOverScrollRight=res.getDrawable(R.drawable.overscroll_glow_right);
   mForegroundPadding=res.getDimensionPixelSize(R.dimen.workspace_overscroll_drawable_padding);
-  mReorderHintAnimationMagnitude=(REORDER_HINT_MAGNITUDE * grid.iconSizePx);
+  mReorderPreviewAnimationMagnitude=(REORDER_PREVIEW_MAGNITUDE * grid.iconSizePx);
   mNormalBackground.setFilterBitmap(true);
   mActiveGlowBackground.setFilterBitmap(true);
   mEaseOutInterpolator=new DecelerateInterpolator(2.5f);

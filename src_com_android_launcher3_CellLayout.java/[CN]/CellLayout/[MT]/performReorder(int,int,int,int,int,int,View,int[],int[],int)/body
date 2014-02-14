@@ -16,7 +16,7 @@
     mPreviousReorderDirection[0]=mDirectionVector[0];
     mPreviousReorderDirection[1]=mDirectionVector[1];
   }
-  ItemConfiguration swapSolution=simpleSwap(pixelX,pixelY,minSpanX,minSpanY,spanX,spanY,mDirectionVector,dragView,true,new ItemConfiguration());
+  ItemConfiguration swapSolution=findReorderSolution(pixelX,pixelY,minSpanX,minSpanY,spanX,spanY,mDirectionVector,dragView,true,new ItemConfiguration());
   ItemConfiguration noShuffleSolution=findConfigurationNoShuffle(pixelX,pixelY,minSpanX,minSpanY,spanX,spanY,dragView,new ItemConfiguration());
   ItemConfiguration finalSolution=null;
   if (swapSolution.isSolution && swapSolution.area() >= noShuffleSolution.area()) {
@@ -24,6 +24,19 @@
   }
  else   if (noShuffleSolution.isSolution) {
     finalSolution=noShuffleSolution;
+  }
+  if (mode == MODE_SHOW_REORDER_HINT) {
+    beginOrAdjustReorderPreviewAnimations(finalSolution,dragView,0,ReorderPreviewAnimation.MODE_HINT);
+    if (finalSolution != null) {
+      result[0]=finalSolution.dragViewX;
+      result[1]=finalSolution.dragViewY;
+      resultSpan[0]=finalSolution.dragViewSpanX;
+      resultSpan[1]=finalSolution.dragViewSpanY;
+    }
+ else {
+      result[0]=result[1]=resultSpan[0]=resultSpan[1]=-1;
+    }
+    return result;
   }
   boolean foundSolution=true;
   if (!DESTRUCTIVE_REORDER) {
@@ -42,11 +55,11 @@
       animateItemsToSolution(finalSolution,dragView,mode == MODE_ON_DROP);
       if (!DESTRUCTIVE_REORDER && (mode == MODE_ON_DROP || mode == MODE_ON_DROP_EXTERNAL)) {
         commitTempPlacement();
-        completeAndClearReorderHintAnimations();
+        completeAndClearReorderPreviewAnimations();
         setItemPlacementDirty(false);
       }
  else {
-        beginOrAdjustHintAnimations(finalSolution,dragView,REORDER_ANIMATION_DURATION);
+        beginOrAdjustReorderPreviewAnimations(finalSolution,dragView,REORDER_ANIMATION_DURATION,ReorderPreviewAnimation.MODE_PREVIEW);
       }
     }
   }
