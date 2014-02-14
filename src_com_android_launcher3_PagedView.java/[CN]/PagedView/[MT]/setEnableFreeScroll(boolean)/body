@@ -1,0 +1,14 @@
+{
+  mFreeScroll=freeScroll;
+  if (mFreeScroll) {
+    updateFreescrollBounds();
+    getOverviewModePages(mTempVisiblePagesRange);
+    if (getCurrentPage() < mTempVisiblePagesRange[0]) {
+      setCurrentPage(mTempVisiblePagesRange[0]);
+    }
+ else     if (getCurrentPage() > mTempVisiblePagesRange[1]) {
+      setCurrentPage(mTempVisiblePagesRange[1]);
+    }
+  }
+  setEnableOverscroll(!freeScroll);
+}
