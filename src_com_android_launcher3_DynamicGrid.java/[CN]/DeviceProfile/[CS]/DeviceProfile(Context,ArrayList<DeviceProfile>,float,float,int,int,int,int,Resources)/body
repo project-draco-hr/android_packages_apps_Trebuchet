@@ -11,6 +11,11 @@
   pageIndicatorHeightPx=res.getDimensionPixelSize(R.dimen.dynamic_grid_page_indicator_height);
   defaultPageSpacingPx=res.getDimensionPixelSize(R.dimen.dynamic_grid_workspace_page_spacing);
   allAppsCellPaddingPx=res.getDimensionPixelSize(R.dimen.dynamic_grid_all_apps_cell_padding);
+  overviewModeMinIconZoneHeightPx=res.getDimensionPixelSize(R.dimen.dynamic_grid_overview_min_icon_zone_height);
+  overviewModeMaxIconZoneHeightPx=res.getDimensionPixelSize(R.dimen.dynamic_grid_overview_max_icon_zone_height);
+  overviewModeMaxBarWidthPx=res.getDimensionPixelSize(R.dimen.dynamic_grid_overview_bar_max_width);
+  overviewModeIconZoneRatio=res.getInteger(R.integer.config_dynamic_grid_overview_icon_zone_percentage) / 100f;
+  overviewModeScaleFactor=res.getInteger(R.integer.config_dynamic_grid_overview_scale_percentage) / 100f;
   for (  DeviceProfile p : profiles) {
     points.add(new DeviceProfileQuery(p.minWidthDps,p.minHeightDps,p.numRows));
   }

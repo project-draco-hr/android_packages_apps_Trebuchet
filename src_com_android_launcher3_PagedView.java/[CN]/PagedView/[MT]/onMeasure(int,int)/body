@@ -9,8 +9,8 @@
   int heightSize=MeasureSpec.getSize(heightMeasureSpec);
   DisplayMetrics dm=getResources().getDisplayMetrics();
   int maxSize=Math.max(dm.widthPixels + mInsets.left + mInsets.right,dm.heightPixels + mInsets.top + mInsets.bottom);
-  int parentWidthSize=(int)(1.5f * maxSize);
-  int parentHeightSize=maxSize;
+  int parentWidthSize=(int)(2f * maxSize);
+  int parentHeightSize=(int)(2f * maxSize);
   int scaledWidthSize, scaledHeightSize;
   if (mUseMinScale) {
     scaledWidthSize=(int)(parentWidthSize / mMinScale);
