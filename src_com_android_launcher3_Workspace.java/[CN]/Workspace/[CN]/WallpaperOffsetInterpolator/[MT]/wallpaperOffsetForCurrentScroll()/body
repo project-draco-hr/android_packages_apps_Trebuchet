@@ -16,8 +16,7 @@
     return 0;
   }
  else {
-    int offsetForLayoutTransitionAnimation=isLayoutRtl() ? getPageAt(getChildCount() - 1).getLeft() - getFirstChildLeft() : 0;
-    int adjustedScroll=getScrollX() - firstPageScrollX - offsetForLayoutTransitionAnimation;
+    int adjustedScroll=getScrollX() - firstPageScrollX - getLayoutTransitionOffsetForPage(0);
     float offset=Math.min(1,adjustedScroll / (float)scrollRange);
     offset=Math.max(0,offset);
     int numScrollingPages=getNumScreensExcludingEmptyAndCustom();
