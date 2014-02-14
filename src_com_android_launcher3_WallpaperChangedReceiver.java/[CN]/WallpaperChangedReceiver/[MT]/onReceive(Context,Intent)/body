@@ -1,0 +1,4 @@
+{
+  LauncherAppState appState=LauncherAppState.getInstance();
+  appState.onWallpaperChanged();
+}
