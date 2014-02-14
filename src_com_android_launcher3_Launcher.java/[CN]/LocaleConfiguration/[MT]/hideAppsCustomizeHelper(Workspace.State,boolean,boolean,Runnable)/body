@@ -36,7 +36,7 @@
     mStateAnimation=LauncherAnimUtils.createAnimatorSet();
     dispatchOnLauncherTransitionPrepare(fromView,animated,true);
     dispatchOnLauncherTransitionPrepare(toView,animated,true);
-    mAppsCustomizeContent.pauseScrolling();
+    mAppsCustomizeContent.stopScrolling();
     mStateAnimation.addListener(new AnimatorListenerAdapter(){
       @Override public void onAnimationEnd(      Animator animation){
         fromView.setVisibility(View.GONE);
@@ -46,7 +46,6 @@
           onCompleteRunnable.run();
         }
         mAppsCustomizeContent.updateCurrentPageScroll();
-        mAppsCustomizeContent.resumeScrolling();
       }
     }
 );

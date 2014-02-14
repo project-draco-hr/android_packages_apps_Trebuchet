@@ -1,7 +1,6 @@
 {
   if (!mScroller.isFinished()) {
-    mScroller.abortAnimation();
-    mNextPage=INVALID_PAGE;
+    abortScrollerAnimation();
   }
   if (getChildCount() == 0) {
     return;
