@@ -37,14 +37,11 @@
   lockAllApps();
   mSavedState=savedInstanceState;
   restoreState(mSavedState);
-  if (mAppsCustomizeContent != null) {
-    mAppsCustomizeContent.onPackagesUpdated(LauncherModel.getSortedWidgetsAndShortcuts(this));
-  }
   if (PROFILE_STARTUP) {
     android.os.Debug.stopMethodTracing();
   }
   if (!mRestoring) {
-    if (sPausedFromUserAction) {
+    if (DISABLE_SYNCHRONOUS_BINDING_CURRENT_PAGE || sPausedFromUserAction) {
       mModel.startLoader(true,-1);
     }
  else {
