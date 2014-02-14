@@ -54,5 +54,6 @@
   registerReceiver(mCloseSystemDialogsReceiver,filter);
   updateGlobalIcons();
   unlockScreenOrientation(true);
+  showFirstRunActivity();
   showFirstRunCling();
 }

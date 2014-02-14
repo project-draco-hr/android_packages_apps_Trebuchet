@@ -3,15 +3,9 @@
     final Runnable cleanUpClingCb=new Runnable(){
       public void run(){
         cling.cleanup();
-        new AsyncTask<Void,Void,Void>(){
-          public Void doInBackground(          Void... args){
-            SharedPreferences.Editor editor=mSharedPrefs.edit();
-            editor.putBoolean(flag,true);
-            editor.commit();
-            return null;
-          }
-        }
-.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,(Void)null);
+        SharedPreferences.Editor editor=mSharedPrefs.edit();
+        editor.putBoolean(flag,true);
+        editor.apply();
         if (postAnimationCb != null) {
           postAnimationCb.run();
         }
