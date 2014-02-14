@@ -13,5 +13,6 @@
     if (stackTrace != null) {
       e.setStackTrace(stackTrace);
     }
+    throw e;
   }
 }
