@@ -1,0 +1,16 @@
+{
+  if (debugLog) {
+    if (e != null) {
+      Log.d(tag,log,e);
+    }
+ else {
+      Log.d(tag,log);
+    }
+  }
+  if (DEBUG_DUMP_LOG) {
+    sDateStamp.setTime(System.currentTimeMillis());
+synchronized (sDumpLogs) {
+      sDumpLogs.add(sDateFormat.format(sDateStamp) + ": " + tag+ ", "+ log+ (e == null ? "" : (", Exception: " + e)));
+    }
+  }
+}
