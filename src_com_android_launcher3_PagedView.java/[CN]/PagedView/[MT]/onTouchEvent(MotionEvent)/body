@@ -9,7 +9,7 @@
 switch (action & MotionEvent.ACTION_MASK) {
 case MotionEvent.ACTION_DOWN:
     if (!mScroller.isFinished()) {
-      abortScrollerAnimation();
+      abortScrollerAnimation(false);
     }
   mDownMotionX=mLastMotionX=ev.getX();
 mDownMotionY=mLastMotionY=ev.getY();
@@ -156,7 +156,7 @@ snapToDestination();
 }
  else {
 if (!mScroller.isFinished()) {
-abortScrollerAnimation();
+abortScrollerAnimation(true);
 }
 float scaleX=getScaleX();
 int vX=(int)(-velocityX * scaleX);

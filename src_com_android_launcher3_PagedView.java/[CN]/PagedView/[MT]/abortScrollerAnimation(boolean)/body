@@ -1,0 +1,6 @@
+{
+  mScroller.abortAnimation();
+  if (resetNextPage) {
+    mNextPage=INVALID_PAGE;
+  }
+}
