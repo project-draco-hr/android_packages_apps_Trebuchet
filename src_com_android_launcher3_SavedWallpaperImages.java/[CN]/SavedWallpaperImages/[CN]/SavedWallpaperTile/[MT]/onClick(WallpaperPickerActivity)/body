@@ -2,5 +2,5 @@
   String imageFilename=a.getSavedImages().getImageFilename(mDbId);
   File file=new File(a.getFilesDir(),imageFilename);
   BitmapRegionTileSource.FilePathBitmapSource bitmapSource=new BitmapRegionTileSource.FilePathBitmapSource(file.getAbsolutePath(),1024);
-  a.setCropViewTileSource(bitmapSource,false,true);
+  a.setCropViewTileSource(bitmapSource,false,true,null);
 }

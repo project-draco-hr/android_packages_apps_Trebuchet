@@ -54,14 +54,8 @@
         return;
       }
       WallpaperTileInfo info=(WallpaperTileInfo)v.getTag();
-      if (info.isSelectable()) {
-        if (mSelectedThumb != null) {
-          mSelectedThumb.setSelected(false);
-          mSelectedThumb=null;
-        }
-        mSelectedThumb=v;
-        v.setSelected(true);
-        v.announceForAccessibility(getString(R.string.announce_selection,v.getContentDescription()));
+      if (info.isSelectable() && v.getVisibility() == View.VISIBLE) {
+        selectTile(v);
       }
       info.onClick(WallpaperPickerActivity.this);
     }
@@ -152,8 +146,8 @@
   actionBar.setCustomView(R.layout.actionbar_set_wallpaper);
   actionBar.getCustomView().setOnClickListener(new View.OnClickListener(){
     @Override public void onClick(    View v){
-      if (mSelectedThumb != null) {
-        WallpaperTileInfo info=(WallpaperTileInfo)mSelectedThumb.getTag();
+      if (mSelectedTile != null) {
+        WallpaperTileInfo info=(WallpaperTileInfo)mSelectedTile.getTag();
         info.onSave(WallpaperPickerActivity.this);
       }
     }
@@ -217,7 +211,7 @@
         CheckableFrameLayout c=(CheckableFrameLayout)mWallpapersView.getChildAt(i);
         c.setChecked(false);
       }
-      mSelectedThumb.setSelected(true);
+      mSelectedTile.setSelected(true);
       mActionMode=null;
     }
   }
