@@ -24,7 +24,6 @@
         if (resId != 0 && resId != workspaceResourceId) {
           i+=loadFavorites(db,resId);
           added=false;
-          mMaxItemId=-1;
         }
  else {
           Log.w(TAG,String.format("Skipping <include workspace=0x%08x>",resId));
