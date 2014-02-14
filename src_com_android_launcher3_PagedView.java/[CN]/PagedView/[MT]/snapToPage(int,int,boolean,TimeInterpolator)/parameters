@@ -1,0 +1,4 @@
+int whichPage
+int duration
+boolean immediate
+TimeInterpolator interpolator
