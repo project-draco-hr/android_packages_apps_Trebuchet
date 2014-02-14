@@ -1,0 +1,21 @@
+{
+  FileOutputStream iconFile=null;
+  try {
+    iconFile=new FileOutputStream(path);
+    iconFile.write(data);
+    System.err.println("wrote " + path);
+  }
+ catch (  IOException e) {
+    System.err.println("failed to write image file: " + e);
+  }
+ finally {
+    if (iconFile != null) {
+      try {
+        iconFile.close();
+      }
+ catch (      IOException e) {
+        System.err.println("failed to close the image file: " + e);
+      }
+    }
+  }
+}
