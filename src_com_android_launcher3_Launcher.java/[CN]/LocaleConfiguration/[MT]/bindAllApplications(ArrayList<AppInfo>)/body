@@ -6,6 +6,9 @@
       }
       mIntentsOnWorkspaceFromUpgradePath=null;
     }
+    if (mAppsCustomizeContent != null) {
+      mAppsCustomizeContent.onPackagesUpdated(LauncherModel.getSortedWidgetsAndShortcuts(this));
+    }
   }
  else {
     if (mAppsCustomizeContent != null) {
