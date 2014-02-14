@@ -1,0 +1,20 @@
+{
+  if (mPreviewSize == 0) {
+    return null;
+  }
+  if (mPreview == null) {
+    float width=getImageWidth();
+    float height=getImageHeight();
+    while (width > MAX_PREVIEW_SIZE || height > MAX_PREVIEW_SIZE) {
+      width/=2;
+      height/=2;
+    }
+    Bitmap b=Bitmap.createBitmap((int)width,(int)height,Bitmap.Config.ARGB_8888);
+    Canvas c=new Canvas(b);
+    mDrawable.setBounds(new Rect(0,0,(int)width,(int)height));
+    mDrawable.draw(c);
+    c.setBitmap(null);
+    mPreview=new BitmapTexture(b);
+  }
+  return mPreview;
+}
