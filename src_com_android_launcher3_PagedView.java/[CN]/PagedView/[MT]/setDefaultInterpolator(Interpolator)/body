@@ -1,0 +1,4 @@
+{
+  mDefaultInterpolator=interpolator;
+  mScroller.setInterpolator(mDefaultInterpolator);
+}
