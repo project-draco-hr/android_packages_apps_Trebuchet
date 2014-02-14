@@ -13,7 +13,7 @@
   final int endIndex=isRtl ? -1 : childCount;
   final int delta=isRtl ? -1 : 1;
   int verticalPadding=getPaddingTop() + getPaddingBottom();
-  int childLeft=mFirstChildLeft=offsetX + (screenWidth - getChildWidth(startIndex)) / 2;
+  int childLeft=offsetX + (screenWidth - getChildWidth(startIndex)) / 2;
   if (mPageScrolls == null || getChildCount() != mChildCountOnLastLayout) {
     mPageScrolls=new int[getChildCount()];
   }
