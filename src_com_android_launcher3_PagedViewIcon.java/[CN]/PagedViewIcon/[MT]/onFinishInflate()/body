@@ -2,5 +2,5 @@
   super.onFinishInflate();
   LauncherAppState app=LauncherAppState.getInstance();
   DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
-  setTextSize(TypedValue.COMPLEX_UNIT_PX,grid.iconTextSizePx);
+  setTextSize(TypedValue.COMPLEX_UNIT_PX,grid.allAppsIconTextSizePx);
 }
