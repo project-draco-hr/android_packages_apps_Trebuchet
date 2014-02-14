@@ -58,7 +58,16 @@
     final CellLayout cl=(CellLayout)getChildAt(i);
     boolean isCurrentPage=(i == getNextPage());
     float initialAlpha=cl.getShortcutsAndWidgets().getAlpha();
-    float finalAlpha=stateIsSmall ? 0f : 1f;
+    float finalAlpha;
+    if (stateIsSmall) {
+      finalAlpha=0f;
+    }
+ else     if (stateIsNormal && mWorkspaceFadeInAdjacentScreens) {
+      finalAlpha=i == getNextPage() ? 1f : 0f;
+    }
+ else {
+      finalAlpha=1f;
+    }
     if (!mIsSwitchingState) {
       if (workspaceToAllApps || allAppsToWorkspace) {
         if (allAppsToWorkspace && isCurrentPage) {
