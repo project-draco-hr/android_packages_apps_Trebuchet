@@ -77,33 +77,39 @@ callbacks.bindAppsUpdated(modifiedFinal);
 }
 );
 }
-if (mOp == OP_REMOVE || !removedApps.isEmpty()) {
-final boolean packageRemoved=(mOp == OP_REMOVE);
-final ArrayList<String> removedPackageNames=new ArrayList<String>(Arrays.asList(packages));
-if (packageRemoved) {
+final ArrayList<String> removedPackageNames=new ArrayList<String>();
+if (mOp == OP_REMOVE) {
+removedPackageNames.addAll(Arrays.asList(packages));
+}
+ else if (mOp == OP_UPDATE) {
+final PackageManager pm=context.getPackageManager();
+for (int i=0; i < N; i++) {
+if (isPackageDisabled(pm,packages[i])) {
+removedPackageNames.add(packages[i]);
+}
+}
+}
 for (String pn : removedPackageNames) {
 ArrayList<ItemInfo> infos=getItemInfoForPackageName(pn);
 for (ItemInfo i : infos) {
 deleteItemFromDatabase(context,i);
 }
 }
-String spKey=LauncherAppState.getSharedPreferencesKey();
-SharedPreferences sp=context.getSharedPreferences(spKey,Context.MODE_PRIVATE);
-InstallShortcutReceiver.removeFromInstallQueue(sp,removedPackageNames);
-}
- else {
 for (AppInfo a : removedApps) {
 ArrayList<ItemInfo> infos=getItemInfoForComponentName(a.componentName);
 for (ItemInfo i : infos) {
 deleteItemFromDatabase(context,i);
 }
 }
-}
+if (!removedPackageNames.isEmpty() || !removedApps.isEmpty()) {
+String spKey=LauncherAppState.getSharedPreferencesKey();
+SharedPreferences sp=context.getSharedPreferences(spKey,Context.MODE_PRIVATE);
+InstallShortcutReceiver.removeFromInstallQueue(sp,removedPackageNames);
 mHandler.post(new Runnable(){
 public void run(){
 Callbacks cb=mCallbacks != null ? mCallbacks.get() : null;
 if (callbacks == cb && cb != null) {
-callbacks.bindComponentsRemoved(removedPackageNames,removedApps,packageRemoved);
+callbacks.bindComponentsRemoved(removedPackageNames,removedApps);
 }
 }
 }
