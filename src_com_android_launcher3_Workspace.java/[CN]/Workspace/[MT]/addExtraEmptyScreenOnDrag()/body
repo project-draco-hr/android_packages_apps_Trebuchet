@@ -1,4 +1,5 @@
 {
+  Launcher.addDumpLog(TAG,"11683562 - addExtraEmptyScreenOnDrag()",true);
   boolean lastChildOnScreen=false;
   boolean childOnFinalScreen=false;
   mRemoveEmptyScreenRunnable=null;
