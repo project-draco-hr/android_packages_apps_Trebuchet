@@ -1,5 +1,5 @@
 {
-  if (mInTransition) {
+  if (!immediatelySyncItems && mInTransition) {
     mDeferredSyncWidgetPageItems.add(data);
     return;
   }
