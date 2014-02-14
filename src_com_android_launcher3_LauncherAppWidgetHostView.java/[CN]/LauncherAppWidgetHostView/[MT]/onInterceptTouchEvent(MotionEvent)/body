@@ -1,4 +1,7 @@
 {
+  if (ev.getAction() == MotionEvent.ACTION_DOWN) {
+    mLongPressHelper.cancelLongPress();
+  }
   if (mLongPressHelper.hasPerformedLongPress()) {
     mLongPressHelper.cancelLongPress();
     return true;
