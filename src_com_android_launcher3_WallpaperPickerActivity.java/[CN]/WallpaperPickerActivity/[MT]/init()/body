@@ -1,7 +1,6 @@
 {
   setContentView(R.layout.wallpaper_picker);
   mCropView=(CropView)findViewById(R.id.cropView);
-  mDefaultWallpaperView=(ImageView)findViewById(R.id.defaultWallpaperView);
   mWallpaperStrip=findViewById(R.id.wallpaper_strip);
   mCropView.setTouchCallback(new CropView.TouchCallback(){
     LauncherViewPropertyAnimator mAnim;
@@ -131,7 +130,7 @@
     defaultWallpaperTile.setOnClickListener(mThumbnailOnClickListener);
     defaultWallpaperInfo.setView(defaultWallpaperTile);
   }
-  mDefaultWallpaperView.addOnLayoutChangeListener(new OnLayoutChangeListener(){
+  mCropView.addOnLayoutChangeListener(new OnLayoutChangeListener(){
     @Override public void onLayoutChange(    View v,    int left,    int top,    int right,    int bottom,    int oldLeft,    int oldTop,    int oldRight,    int oldBottom){
       if ((right - left) > 0 && (bottom - top) > 0) {
         if (mWallpapersView.getChildCount() > 0) {

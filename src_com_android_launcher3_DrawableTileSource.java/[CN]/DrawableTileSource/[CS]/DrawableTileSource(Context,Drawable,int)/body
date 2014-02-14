@@ -1,0 +1,5 @@
+{
+  mTileSize=TiledImageRenderer.suggestedTileSize(context);
+  mDrawable=d;
+  mPreviewSize=Math.min(previewSize,MAX_PREVIEW_SIZE);
+}
