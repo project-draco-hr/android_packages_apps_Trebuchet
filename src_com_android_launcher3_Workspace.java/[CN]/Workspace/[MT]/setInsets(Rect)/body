@@ -1,3 +1,10 @@
 {
   mInsets.set(insets);
+  CellLayout customScreen=getScreenWithId(CUSTOM_CONTENT_SCREEN_ID);
+  if (customScreen != null) {
+    View customContent=customScreen.getShortcutsAndWidgets().getChildAt(0);
+    if (customContent instanceof Insettable) {
+      ((Insettable)customContent).setInsets(mInsets);
+    }
+  }
 }
