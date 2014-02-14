@@ -8,24 +8,30 @@
     mAppWidgetHost.deleteHost();
     sendAppWidgetResetNotify();
   }
-  ContentValuesCallback permuteScreensCb=new ContentValuesCallback(){
-    public void onRow(    ContentValues values){
-      int container=values.getAsInteger(LauncherSettings.Favorites.CONTAINER);
-      if (container == Favorites.CONTAINER_DESKTOP) {
-        int screen=values.getAsInteger(LauncherSettings.Favorites.SCREEN);
-        screen=(int)upgradeLauncherDb_permuteScreens(screen);
-        values.put(LauncherSettings.Favorites.SCREEN,screen);
+  if (IMPORT_LAUNCHER2_DATABASE) {
+    ContentValuesCallback permuteScreensCb=new ContentValuesCallback(){
+      public void onRow(      ContentValues values){
+        int container=values.getAsInteger(LauncherSettings.Favorites.CONTAINER);
+        if (container == Favorites.CONTAINER_DESKTOP) {
+          int screen=values.getAsInteger(LauncherSettings.Favorites.SCREEN);
+          screen=(int)upgradeLauncherDb_permuteScreens(screen);
+          values.put(LauncherSettings.Favorites.SCREEN,screen);
+        }
       }
     }
-  }
 ;
-  Uri uri=Uri.parse("content://" + Settings.AUTHORITY + "/old_favorites?notify=true");
-  if (!convertDatabase(db,uri,permuteScreensCb,true)) {
-    uri=LauncherSettings.Favorites.OLD_CONTENT_URI;
-    if (!convertDatabase(db,uri,permuteScreensCb,false)) {
-      setFlagEmptyDbCreated();
-      return;
+    Uri uri=Uri.parse("content://" + Settings.AUTHORITY + "/old_favorites?notify=true");
+    if (!convertDatabase(db,uri,permuteScreensCb,true)) {
+      uri=LauncherSettings.Favorites.OLD_CONTENT_URI;
+      if (!convertDatabase(db,uri,permuteScreensCb,false)) {
+        setFlagEmptyDbCreated();
+        return;
+      }
     }
+    setFlagJustLoadedOldDb();
   }
-  setFlagJustLoadedOldDb();
+ else {
+    mMaxItemId=initializeMaxItemId(db);
+    setFlagEmptyDbCreated();
+  }
 }
