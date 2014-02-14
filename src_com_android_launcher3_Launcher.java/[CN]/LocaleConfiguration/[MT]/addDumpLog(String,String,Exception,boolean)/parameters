@@ -1,0 +1,4 @@
+String tag
+String log
+Exception e
+boolean debugLog
