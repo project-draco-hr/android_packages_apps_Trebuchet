@@ -4,7 +4,6 @@
     mPageIndicator.addMarker(pageIndex,getPageIndicatorMarker(pageIndex),mAllowPagedViewAnimations);
   }
   mForceScreenScrolled=true;
-  mRecomputePageSpacing=true;
   updateFreescrollBounds();
   invalidate();
 }
