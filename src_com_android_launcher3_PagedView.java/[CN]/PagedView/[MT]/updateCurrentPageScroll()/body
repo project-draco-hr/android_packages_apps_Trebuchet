@@ -5,5 +5,5 @@
   }
   scrollTo(newX,0);
   mScroller.setFinalX(newX);
-  mScroller.forceFinished(true);
+  forceFinishScroller();
 }
