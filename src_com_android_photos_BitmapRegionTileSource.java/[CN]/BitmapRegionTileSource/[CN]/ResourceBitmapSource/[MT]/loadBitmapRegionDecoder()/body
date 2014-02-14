@@ -1,6 +1,9 @@
 {
   try {
-    return BitmapRegionDecoder.newInstance(regenerateInputStream(),true);
+    InputStream is=regenerateInputStream();
+    BitmapRegionDecoder regionDecoder=BitmapRegionDecoder.newInstance(is,true);
+    Utils.closeSilently(is);
+    return regionDecoder;
   }
  catch (  IOException e) {
     Log.e("BitmapRegionTileSource","Error reading resource",e);

@@ -1,6 +1,7 @@
 {
   mTempWallpaperTiles.add(uri);
-  FrameLayout pickedImageThumbnail=(FrameLayout)getLayoutInflater().inflate(R.layout.wallpaper_picker_item,mWallpapersView,false);
+  final FrameLayout pickedImageThumbnail=(FrameLayout)getLayoutInflater().inflate(R.layout.wallpaper_picker_item,mWallpapersView,false);
+  pickedImageThumbnail.setVisibility(View.GONE);
   setWallpaperItemPaddingToZero(pickedImageThumbnail);
   mWallpapersView.addView(pickedImageThumbnail,0);
   final ImageView image=(ImageView)pickedImageThumbnail.findViewById(R.id.wallpaper_image);
