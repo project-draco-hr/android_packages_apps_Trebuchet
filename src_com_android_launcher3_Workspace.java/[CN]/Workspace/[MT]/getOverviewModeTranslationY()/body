@@ -1,8 +1,10 @@
 {
-  int childHeight=getNormalChildHeight();
-  int viewPortHeight=getViewportHeight();
-  int scaledChildHeight=(int)(mOverviewModeShrinkFactor * childHeight);
-  int offset=(viewPortHeight - scaledChildHeight) / 2;
-  int offsetDelta=mOverviewModePageOffset - offset + mInsets.top;
-  return offsetDelta;
+  LauncherAppState app=LauncherAppState.getInstance();
+  DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
+  Rect overviewBar=grid.getOverviewModeButtonBarRect();
+  int availableHeight=getViewportHeight();
+  int scaledHeight=(int)(mOverviewModeShrinkFactor * getNormalChildHeight());
+  int offsetFromTopEdge=(availableHeight - scaledHeight) / 2;
+  int offsetToCenterInOverview=(availableHeight - mInsets.top - overviewBar.height()- scaledHeight) / 2;
+  return -offsetFromTopEdge + mInsets.top + offsetToCenterInOverview;
 }
