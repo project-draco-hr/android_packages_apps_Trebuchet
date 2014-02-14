@@ -1,0 +1,4 @@
+{
+  boolean isTablet=context.getResources().getBoolean(R.bool.is_tablet);
+  return !isTablet && IMPORT_LAUNCHER2_DATABASE;
+}
