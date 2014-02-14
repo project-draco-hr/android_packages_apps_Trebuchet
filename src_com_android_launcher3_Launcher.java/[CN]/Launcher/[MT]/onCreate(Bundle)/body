@@ -45,7 +45,7 @@
       mModel.startLoader(true,-1);
     }
  else {
-      mModel.startLoader(true,mWorkspace.getCurrentPage());
+      mModel.startLoader(true,mWorkspace.getRestorePage());
     }
   }
   mDefaultKeySsb=new SpannableStringBuilder();
