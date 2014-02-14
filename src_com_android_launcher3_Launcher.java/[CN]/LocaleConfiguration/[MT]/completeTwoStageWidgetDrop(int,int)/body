@@ -16,6 +16,7 @@
 ;
   }
  else   if (resultCode == RESULT_CANCELED) {
+    mAppWidgetHost.deleteAppWidgetId(appWidgetId);
     animationType=Workspace.CANCEL_TWO_STAGE_WIDGET_DROP_ANIMATION;
   }
   if (mDragLayer.getAnimatedView() != null) {
