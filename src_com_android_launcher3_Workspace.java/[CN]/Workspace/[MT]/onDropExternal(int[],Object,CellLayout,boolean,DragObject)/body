@@ -1,7 +1,12 @@
 {
   final Runnable exitSpringLoadedRunnable=new Runnable(){
     @Override public void run(){
-      mLauncher.exitSpringLoadedDragModeDelayed(true,false,null);
+      removeExtraEmptyScreen(false,new Runnable(){
+        @Override public void run(){
+          mLauncher.exitSpringLoadedDragModeDelayed(true,Launcher.EXIT_SPRINGLOADED_MODE_SHORT_TIMEOUT,null);
+        }
+      }
+);
     }
   }
 ;

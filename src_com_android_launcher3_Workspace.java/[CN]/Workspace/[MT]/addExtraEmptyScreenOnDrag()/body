@@ -1,6 +1,7 @@
 {
   boolean lastChildOnScreen=false;
   boolean childOnFinalScreen=false;
+  mRemoveEmptyScreenRunnable=null;
   if (mDragSourceInternal != null) {
     if (mDragSourceInternal.getChildCount() == 1) {
       lastChildOnScreen=true;
