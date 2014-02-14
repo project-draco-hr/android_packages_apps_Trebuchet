@@ -27,12 +27,13 @@
   }
   if (!foundCellSpan) {
     if (appWidgetId != -1) {
-      new Thread("deleteAppWidgetId"){
-        public void run(){
+      new AsyncTask<Void,Void,Void>(){
+        public Void doInBackground(        Void... args){
           mAppWidgetHost.deleteAppWidgetId(appWidgetId);
+          return null;
         }
       }
-.start();
+.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,(Void)null);
     }
     showOutOfSpaceMessage(isHotseatLayout(layout));
     return;
