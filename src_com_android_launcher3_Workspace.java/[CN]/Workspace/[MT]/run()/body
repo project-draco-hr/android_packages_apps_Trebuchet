@@ -4,5 +4,5 @@
   if (finalResizeRunnable != null) {
     finalResizeRunnable.run();
   }
-  stripEmptyScreens();
+  removeExtraEmptyScreen(true,null,0,true);
 }

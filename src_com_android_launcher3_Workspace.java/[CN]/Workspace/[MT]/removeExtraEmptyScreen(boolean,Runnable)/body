@@ -1,0 +1,3 @@
+{
+  removeExtraEmptyScreen(animate,onComplete,0,false);
+}

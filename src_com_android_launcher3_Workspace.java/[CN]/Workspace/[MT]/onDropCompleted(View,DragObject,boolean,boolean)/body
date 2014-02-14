@@ -19,7 +19,7 @@
       if (mDragInfo.cell instanceof DropTarget) {
         mDragController.removeDropTarget((DropTarget)mDragInfo.cell);
       }
-      stripEmptyScreens();
+      removeExtraEmptyScreen(true,null,0,true);
     }
   }
  else   if (mDragInfo != null) {

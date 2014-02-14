@@ -1,0 +1,33 @@
+{
+  PropertyValuesHolder alpha=PropertyValuesHolder.ofFloat("alpha",0f);
+  PropertyValuesHolder bgAlpha=PropertyValuesHolder.ofFloat("backgroundAlpha",0f);
+  final CellLayout cl=mWorkspaceScreens.get(EXTRA_EMPTY_SCREEN_ID);
+  mRemoveEmptyScreenRunnable=new Runnable(){
+    @Override public void run(){
+      if (hasExtraEmptyScreen()) {
+        mWorkspaceScreens.remove(EXTRA_EMPTY_SCREEN_ID);
+        mScreenOrder.remove(EXTRA_EMPTY_SCREEN_ID);
+        removeView(cl);
+        if (stripEmptyScreens) {
+          stripEmptyScreens();
+        }
+      }
+    }
+  }
+;
+  ObjectAnimator oa=ObjectAnimator.ofPropertyValuesHolder(cl,alpha,bgAlpha);
+  oa.setDuration(duration);
+  oa.setStartDelay(delay);
+  oa.addListener(new AnimatorListenerAdapter(){
+    @Override public void onAnimationEnd(    Animator animation){
+      if (mRemoveEmptyScreenRunnable != null) {
+        mRemoveEmptyScreenRunnable.run();
+      }
+      if (onComplete != null) {
+        onComplete.run();
+      }
+    }
+  }
+);
+  oa.start();
+}
