@@ -1,0 +1,13 @@
+{
+  ComponentName cn=info.getIntent().getComponent();
+  if (cn != null) {
+    AppInfo appInfo=appsMap.get(info.getIntent().getComponent());
+    if ((appInfo != null) && LauncherModel.isShortcutInfoUpdateable(info)) {
+      ShortcutInfo shortcutInfo=(ShortcutInfo)info;
+      BubbleTextView shortcut=(BubbleTextView)child;
+      shortcutInfo.updateIcon(mIconCache);
+      shortcutInfo.title=appInfo.title.toString();
+      shortcut.applyFromShortcutInfo(shortcutInfo,mIconCache);
+    }
+  }
+}
