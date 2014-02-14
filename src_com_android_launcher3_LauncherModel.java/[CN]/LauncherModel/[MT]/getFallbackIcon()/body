@@ -1,3 +1,7 @@
 {
+  if (mDefaultIcon == null) {
+    final Context context=LauncherAppState.getInstance().getContext();
+    mDefaultIcon=Utilities.createIconBitmap(mIconCache.getFullResDefaultActivityIcon(),context);
+  }
   return Bitmap.createBitmap(mDefaultIcon);
 }
