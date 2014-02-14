@@ -21,7 +21,7 @@
   a.recycle();
   setAlwaysDrawnWithCacheEnabled(false);
   final Resources res=getResources();
-  mHotseatScale=(float)grid.hotseatIconSize / grid.iconSize;
+  mHotseatScale=(float)grid.hotseatIconSizePx / grid.iconSizePx;
   mNormalBackground=res.getDrawable(R.drawable.screenpanel);
   mActiveGlowBackground=res.getDrawable(R.drawable.screenpanel_hover);
   mOverScrollLeft=res.getDrawable(R.drawable.overscroll_glow_left);
