@@ -1,3 +1,0 @@
-{
-  animateViewIntoPosition(dragView,child,-1,onFinishAnimationRunnable,null);
-}
