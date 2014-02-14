@@ -50,13 +50,10 @@
     hotseat.findViewById(R.id.layout).setPadding(0,2 * edgeMarginPx,0,2 * edgeMarginPx);
   }
  else   if (isTablet()) {
-    int gridGap=(int)((widthPx - 2 * edgeMarginPx - (numColumns * cellWidthPx)) / (2 * (numColumns + 1)));
-    int gridWidth=(int)((numColumns * cellWidthPx) + ((numColumns - 1) * gridGap));
-    int hotseatGap=(int)Math.max(0,(gridWidth - (numHotseatIcons * hotseatCellWidthPx)) / (numHotseatIcons - 1));
     lp.gravity=Gravity.BOTTOM;
     lp.width=LayoutParams.MATCH_PARENT;
     lp.height=hotseatBarHeightPx;
-    hotseat.setPadding(2 * edgeMarginPx + gridGap + hotseatGap,0,2 * edgeMarginPx + gridGap + hotseatGap,2 * edgeMarginPx);
+    hotseat.setPadding(edgeMarginPx + padding.left,0,edgeMarginPx + padding.right,2 * edgeMarginPx);
   }
  else {
     lp.gravity=Gravity.BOTTOM;

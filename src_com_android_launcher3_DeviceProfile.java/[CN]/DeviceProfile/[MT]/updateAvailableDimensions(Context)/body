@@ -16,11 +16,11 @@
  else {
     availableHeightPx=largestSize.y;
   }
-  Rect workspacePadding=getWorkspacePadding();
   float scale=1f;
   int drawablePadding=iconDrawablePaddingOriginalPx;
   updateIconSize(1f,drawablePadding,resources,dm);
   float usedHeight=(cellHeightPx * numRows);
+  Rect workspacePadding=getWorkspacePadding();
   int maxHeight=(availableHeightPx - workspacePadding.top - workspacePadding.bottom);
   if (usedHeight > maxHeight) {
     scale=maxHeight / usedHeight;
