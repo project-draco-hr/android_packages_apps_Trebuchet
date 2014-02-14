@@ -33,7 +33,7 @@
     @Override public void run(    AppsCustomizeAsyncTask task,    AsyncTaskPageData data){
       mRunningTasks.remove(task);
       if (task.isCancelled())       return;
-      onSyncWidgetPageItems(data);
+      onSyncWidgetPageItems(data,false);
     }
   }
 ,mWidgetPreviewLoader);

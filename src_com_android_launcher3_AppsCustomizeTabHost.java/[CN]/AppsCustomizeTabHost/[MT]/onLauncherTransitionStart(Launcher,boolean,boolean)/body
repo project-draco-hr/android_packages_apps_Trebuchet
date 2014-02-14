@@ -1,4 +1,5 @@
 {
+  mAppsCustomizePane.onLauncherTransitionStart(l,animated,toWorkspace);
   if (animated) {
     enableAndBuildHardwareLayer();
   }
