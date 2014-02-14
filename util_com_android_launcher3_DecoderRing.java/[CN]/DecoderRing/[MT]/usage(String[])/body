@@ -7,6 +7,7 @@
   System.err.println("\t-w\tdecode a widget");
   System.err.println("\t-S b\tskip b bytes");
   System.err.println("\t-x\textract image data to files");
+  System.err.println("\t-v\tprint key type data, as well as payload");
   System.err.println("\t-l\texpect data from logcat, instead of the local transport");
   System.err.println("\tfilename\tread from filename, not stdin");
   System.exit(1);
