@@ -1,7 +1,4 @@
 {
-  if (currentScreenId < 0) {
-    throw new RuntimeException("Unexpected screen id");
-  }
   for (  LauncherAppWidgetInfo widget : appWidgets) {
     if (widget == null)     continue;
     if (widget.container == LauncherSettings.Favorites.CONTAINER_DESKTOP && widget.screenId == currentScreenId) {
