@@ -29,4 +29,12 @@
     mFolderName.setText("");
   }
   updateItemLocationsInDatabase();
+  mFolderIcon.post(new Runnable(){
+    public void run(){
+      if (getItemCount() <= 1) {
+        replaceFolderWithFinalItem();
+      }
+    }
+  }
+);
 }
