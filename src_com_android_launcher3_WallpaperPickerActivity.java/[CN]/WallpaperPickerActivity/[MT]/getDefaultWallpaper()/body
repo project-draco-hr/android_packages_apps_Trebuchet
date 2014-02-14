@@ -7,14 +7,14 @@
     defaultWallpaperExists=true;
   }
  else {
+    new File(getFilesDir(),OLD_DEFAULT_WALLPAPER_THUMBNAIL_FILENAME).delete();
     Resources res=getResources();
     Point defaultThumbSize=getDefaultThumbnailSize(res);
-    Paint p=new Paint();
-    p.setFilterBitmap(true);
     Drawable wallpaperDrawable=WallpaperManager.getInstance(this).getBuiltInDrawable(defaultThumbSize.x,defaultThumbSize.y,true,0.5f,0.5f);
     if (wallpaperDrawable != null) {
       thumb=Bitmap.createBitmap(defaultThumbSize.x,defaultThumbSize.y,Bitmap.Config.ARGB_8888);
       Canvas c=new Canvas(thumb);
+      wallpaperDrawable.setBounds(0,0,defaultThumbSize.x,defaultThumbSize.y);
       wallpaperDrawable.draw(c);
       c.setBitmap(null);
     }
