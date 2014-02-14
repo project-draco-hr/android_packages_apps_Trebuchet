@@ -10,6 +10,7 @@
  else {
     if (mAppsCustomizeContent != null) {
       mAppsCustomizeContent.setApps(apps);
+      mAppsCustomizeContent.onPackagesUpdated(LauncherModel.getSortedWidgetsAndShortcuts(this));
     }
   }
 }

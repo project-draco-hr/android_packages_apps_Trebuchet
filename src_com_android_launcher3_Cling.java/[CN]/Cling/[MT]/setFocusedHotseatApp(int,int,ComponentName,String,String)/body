@@ -11,7 +11,7 @@
     mFocusedHotseatApp=getResources().getDrawable(appIconId);
     mFocusedHotseatAppComponent=cn;
     mFocusedHotseatAppBounds=new Rect(pos.left,pos.top,pos.left + Utilities.sIconTextureWidth,pos.top + Utilities.sIconTextureHeight);
-    Utilities.scaleRectAboutCenter(mFocusedHotseatAppBounds,(grid.hotseatIconSize / grid.iconSize));
+    Utilities.scaleRectAboutCenter(mFocusedHotseatAppBounds,((float)grid.hotseatIconSizePx / grid.iconSizePx));
     TextView v=(TextView)findViewById(R.id.focused_hotseat_app_title);
     if (v != null) {
       v.setText(title);

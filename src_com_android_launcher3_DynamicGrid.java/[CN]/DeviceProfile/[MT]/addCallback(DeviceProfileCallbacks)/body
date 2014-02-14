@@ -1,0 +1,4 @@
+{
+  mCallbacks.add(cb);
+  cb.onAvailableSizeChanged(this);
+}
