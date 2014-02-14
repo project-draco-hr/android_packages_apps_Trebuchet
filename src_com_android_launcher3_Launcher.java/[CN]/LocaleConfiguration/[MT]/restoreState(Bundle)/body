@@ -39,4 +39,5 @@
     int currentIndex=savedState.getInt("apps_customize_currentIndex");
     mAppsCustomizeContent.restorePageForIndex(currentIndex);
   }
+  mItemIdToViewId=(HashMap<Integer,Integer>)savedState.getSerializable(RUNTIME_STATE_VIEW_IDS);
 }
