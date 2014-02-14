@@ -1,5 +1,7 @@
 {
   mWaitingForResult=false;
+  int pendingAddWidgetId=mPendingAddWidgetId;
+  mPendingAddWidgetId=-1;
   Runnable exitSpringLoaded=new Runnable(){
     @Override public void run(){
       exitSpringLoadedDragModeDelayed((resultCode != RESULT_CANCELED),EXIT_SPRINGLOADED_MODE_SHORT_TIMEOUT,null);
@@ -25,7 +27,14 @@
   }
   boolean isWidgetDrop=(requestCode == REQUEST_PICK_APPWIDGET || requestCode == REQUEST_CREATE_APPWIDGET);
   if (isWidgetDrop) {
-    final int appWidgetId=data != null ? data.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,-1) : -1;
+    final int appWidgetId;
+    int widgetId=data != null ? data.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,-1) : -1;
+    if (widgetId < 0) {
+      appWidgetId=pendingAddWidgetId;
+    }
+ else {
+      appWidgetId=widgetId;
+    }
     final int result;
     final Runnable onComplete;
     if (appWidgetId < 0 || resultCode == RESULT_CANCELED) {
