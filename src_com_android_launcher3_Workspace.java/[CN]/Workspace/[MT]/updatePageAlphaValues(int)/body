@@ -7,12 +7,6 @@
         float scrollProgress=getScrollProgress(screenCenter,child,i);
         float alpha=1 - Math.abs(scrollProgress);
         child.getShortcutsAndWidgets().setAlpha(alpha);
-        if (!mIsDragOccuring) {
-          child.setBackgroundAlphaMultiplier(backgroundAlphaInterpolator(Math.abs(scrollProgress)));
-        }
- else {
-          child.setBackgroundAlphaMultiplier(1f);
-        }
       }
     }
   }
