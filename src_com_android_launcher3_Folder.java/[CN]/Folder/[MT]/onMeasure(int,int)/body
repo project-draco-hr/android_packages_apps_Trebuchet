@@ -1,9 +1,9 @@
 {
   int width=getPaddingLeft() + getPaddingRight() + mContent.getDesiredWidth();
   int height=getFolderHeight();
-  int contentAreaWidthSpec=MeasureSpec.makeMeasureSpec(mContent.getDesiredWidth(),MeasureSpec.EXACTLY);
+  int contentAreaWidthSpec=MeasureSpec.makeMeasureSpec(getContentAreaWidth(),MeasureSpec.EXACTLY);
   int contentAreaHeightSpec=MeasureSpec.makeMeasureSpec(getContentAreaHeight(),MeasureSpec.EXACTLY);
-  mContent.setFixedSize(mContent.getDesiredWidth(),mContent.getDesiredHeight());
+  mContent.setFixedSize(getContentAreaWidth(),getContentAreaHeight());
   mScrollView.measure(contentAreaWidthSpec,contentAreaHeightSpec);
   mFolderName.measure(contentAreaWidthSpec,MeasureSpec.makeMeasureSpec(mFolderNameHeight,MeasureSpec.EXACTLY));
   setMeasuredDimension(width,height);
