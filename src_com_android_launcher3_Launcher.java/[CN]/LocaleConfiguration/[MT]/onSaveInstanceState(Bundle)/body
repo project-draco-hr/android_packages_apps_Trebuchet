@@ -20,7 +20,8 @@
     outState.putLong(RUNTIME_STATE_PENDING_FOLDER_RENAME_ID,mFolderInfo.id);
   }
   if (mAppsCustomizeTabHost != null) {
-    String currentTabTag=mAppsCustomizeTabHost.getCurrentTabTag();
+    AppsCustomizePagedView.ContentType type=mAppsCustomizeContent.getContentType();
+    String currentTabTag=mAppsCustomizeTabHost.getTabTagForContentType(type);
     if (currentTabTag != null) {
       outState.putString("apps_customize_currentTab",currentTabTag);
     }
