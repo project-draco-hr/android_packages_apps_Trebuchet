@@ -7,10 +7,10 @@
   success=rearrangementExists(result[0],result[1],spanX,spanY,direction,dragView,solution);
   if (!success) {
     if (spanX > minSpanX && (minSpanY == spanY || decX)) {
-      return simpleSwap(pixelX,pixelY,minSpanX,minSpanY,spanX - 1,spanY,direction,dragView,false,solution);
+      return findReorderSolution(pixelX,pixelY,minSpanX,minSpanY,spanX - 1,spanY,direction,dragView,false,solution);
     }
  else     if (spanY > minSpanY) {
-      return simpleSwap(pixelX,pixelY,minSpanX,minSpanY,spanX,spanY - 1,direction,dragView,true,solution);
+      return findReorderSolution(pixelX,pixelY,minSpanX,minSpanY,spanX,spanY - 1,direction,dragView,true,solution);
     }
     solution.isSolution=false;
   }

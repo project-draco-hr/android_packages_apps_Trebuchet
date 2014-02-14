@@ -69,6 +69,8 @@
       mDragTargetLayout.visualizeDropLocation(child,mDragOutline,(int)mDragViewVisualCenter[0],(int)mDragViewVisualCenter[1],mTargetCell[0],mTargetCell[1],item.spanX,item.spanY,false,d.dragView.getDragVisualizeOffset(),d.dragView.getDragRegion());
     }
  else     if ((mDragMode == DRAG_MODE_NONE || mDragMode == DRAG_MODE_REORDER) && !mReorderAlarm.alarmPending() && (mLastReorderX != reorderX || mLastReorderY != reorderY)) {
+      int[] resultSpan=new int[2];
+      mDragTargetLayout.performReorder((int)mDragViewVisualCenter[0],(int)mDragViewVisualCenter[1],minSpanX,minSpanY,item.spanX,item.spanY,child,mTargetCell,resultSpan,CellLayout.MODE_SHOW_REORDER_HINT);
       ReorderAlarmListener listener=new ReorderAlarmListener(mDragViewVisualCenter,minSpanX,minSpanY,item.spanX,item.spanY,d.dragView,child);
       mReorderAlarm.setOnAlarmListener(listener);
       mReorderAlarm.setAlarm(REORDER_TIMEOUT);

@@ -4,9 +4,10 @@
     View child=mShortcutsAndWidgets.getChildAt(i);
     if (child == dragView)     continue;
     CellAndSpan c=solution.map.get(child);
+    boolean skip=mode == ReorderPreviewAnimation.MODE_HINT && solution.intersectingViews != null && !solution.intersectingViews.contains(child);
     LayoutParams lp=(LayoutParams)child.getLayoutParams();
-    if (c != null) {
-      ReorderHintAnimation rha=new ReorderHintAnimation(child,lp.cellX,lp.cellY,c.x,c.y,c.spanX,c.spanY);
+    if (c != null && !skip) {
+      ReorderPreviewAnimation rha=new ReorderPreviewAnimation(child,mode,lp.cellX,lp.cellY,c.x,c.y,c.spanX,c.spanY);
       rha.animate();
     }
   }

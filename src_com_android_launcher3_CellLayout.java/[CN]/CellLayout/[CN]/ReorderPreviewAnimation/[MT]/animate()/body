@@ -1,6 +1,6 @@
 {
   if (mShakeAnimators.containsKey(child)) {
-    ReorderHintAnimation oldAnimation=mShakeAnimators.get(child);
+    ReorderPreviewAnimation oldAnimation=mShakeAnimators.get(child);
     oldAnimation.cancel();
     mShakeAnimators.remove(child);
     if (finalDeltaX == 0 && finalDeltaY == 0) {
@@ -15,13 +15,14 @@
   a=va;
   va.setRepeatMode(ValueAnimator.REVERSE);
   va.setRepeatCount(ValueAnimator.INFINITE);
-  va.setDuration(DURATION);
+  va.setDuration(mode == MODE_HINT ? HINT_DURATION : PREVIEW_DURATION);
   va.setStartDelay((int)(Math.random() * 60));
   va.addUpdateListener(new AnimatorUpdateListener(){
     @Override public void onAnimationUpdate(    ValueAnimator animation){
       float r=((Float)animation.getAnimatedValue()).floatValue();
-      float x=r * finalDeltaX + (1 - r) * initDeltaX;
-      float y=r * finalDeltaY + (1 - r) * initDeltaY;
+      float r1=(mode == MODE_HINT && repeating) ? 1.0f : r;
+      float x=r1 * finalDeltaX + (1 - r1) * initDeltaX;
+      float y=r1 * finalDeltaY + (1 - r1) * initDeltaY;
       child.setTranslationX(x);
       child.setTranslationY(y);
       float s=r * finalScale + (1 - r) * initScale;
@@ -35,6 +36,7 @@
       initDeltaX=0;
       initDeltaY=0;
       initScale=getChildrenScale();
+      repeating=true;
     }
   }
 );
