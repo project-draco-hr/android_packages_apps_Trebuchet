@@ -7,5 +7,11 @@
       cl.setShortcutAndWidgetAlpha(1f);
     }
   }
+ else {
+    for (int i=0; i < numCustomPages(); i++) {
+      final CellLayout cl=(CellLayout)getChildAt(i);
+      cl.setShortcutAndWidgetAlpha(1f);
+    }
+  }
   showCustomContentIfNecessary();
 }
