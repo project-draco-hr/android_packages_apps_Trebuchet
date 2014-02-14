@@ -99,7 +99,7 @@
       paddingTB=Math.min(paddingTB,(int)((paddingLR + paddingTB) * 0.75f));
       int maxAllAppsWidth=(allAppsNumCols * (allAppsCellWidthPx + 2 * paddingLR));
       int gridPaddingLR=(availableWidthPx - maxAllAppsWidth) / 2;
-      if (gridPaddingLR > (allAppsCellWidthPx / 4)) {
+      if ((isTablet() || isLandscape) && gridPaddingLR > (allAppsCellWidthPx / 4)) {
         padding.left=padding.right=gridPaddingLR;
       }
       padding.bottom=Math.max(0,pageIndicatorHeight - paddingTB);
