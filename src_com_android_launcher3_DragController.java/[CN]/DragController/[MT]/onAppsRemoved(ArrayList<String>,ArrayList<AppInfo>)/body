@@ -5,7 +5,8 @@
       ShortcutInfo dragInfo=(ShortcutInfo)rawDragInfo;
       for (      AppInfo info : appInfos) {
         if (dragInfo != null && dragInfo.intent != null) {
-          boolean isSameComponent=dragInfo.intent.getComponent().equals(info.componentName);
+          ComponentName cn=dragInfo.intent.getComponent();
+          boolean isSameComponent=cn.equals(info.componentName) || packageNames.contains(cn.getPackageName());
           if (isSameComponent) {
             cancelDrag();
             return;
