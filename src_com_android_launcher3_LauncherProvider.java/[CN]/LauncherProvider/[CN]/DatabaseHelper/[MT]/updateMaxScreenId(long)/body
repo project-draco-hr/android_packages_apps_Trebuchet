@@ -1,3 +1,4 @@
 {
+  Launcher.addDumpLog(TAG,"11683562 - updateMaxScreenId(): " + maxScreenId,true);
   mMaxScreenId=maxScreenId;
 }

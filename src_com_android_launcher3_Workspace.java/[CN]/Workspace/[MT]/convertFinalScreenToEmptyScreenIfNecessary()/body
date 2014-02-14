@@ -1,4 +1,5 @@
 {
+  Launcher.addDumpLog(TAG,"11683562 - convertFinalScreenToEmptyScreenIfNecessary()",true);
   if (hasExtraEmptyScreen() || mScreenOrder.size() == 0)   return;
   long finalScreenId=mScreenOrder.get(mScreenOrder.size() - 1);
   if (finalScreenId == CUSTOM_CONTENT_SCREEN_ID)   return;
@@ -8,5 +9,6 @@
     mScreenOrder.remove(finalScreenId);
     mWorkspaceScreens.put(EXTRA_EMPTY_SCREEN_ID,finalScreen);
     mScreenOrder.add(EXTRA_EMPTY_SCREEN_ID);
+    Launcher.addDumpLog(TAG,"11683562 -   extra empty screen: " + finalScreenId,true);
   }
 }
