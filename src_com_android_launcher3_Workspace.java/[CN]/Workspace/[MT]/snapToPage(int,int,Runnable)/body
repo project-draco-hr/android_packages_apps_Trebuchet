@@ -1,0 +1,7 @@
+{
+  if (mDelayedSnapToPageRunnable != null) {
+    mDelayedSnapToPageRunnable.run();
+  }
+  mDelayedSnapToPageRunnable=r;
+  snapToPage(whichPage,duration);
+}

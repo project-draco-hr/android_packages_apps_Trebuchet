@@ -24,6 +24,7 @@
       removeView(cl);
     }
  else {
+      mRemoveEmptyScreenRunnable=null;
       mWorkspaceScreens.put(EXTRA_EMPTY_SCREEN_ID,cl);
       mScreenOrder.add(EXTRA_EMPTY_SCREEN_ID);
     }

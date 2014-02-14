@@ -1,2 +1,27 @@
 {
+  CellLayout cellLayout=(CellLayout)mWorkspace.getScreenWithId(mPendingAddInfo.screenId);
+  Runnable onCompleteRunnable=null;
+  int animationType=0;
+  AppWidgetHostView boundWidget=null;
+  if (resultCode == RESULT_OK) {
+    animationType=Workspace.COMPLETE_TWO_STAGE_WIDGET_DROP_ANIMATION;
+    final AppWidgetHostView layout=mAppWidgetHost.createView(this,appWidgetId,mPendingAddWidgetInfo);
+    boundWidget=layout;
+    onCompleteRunnable=new Runnable(){
+      @Override public void run(){
+        completeAddAppWidget(appWidgetId,mPendingAddInfo.container,mPendingAddInfo.screenId,layout,null);
+        exitSpringLoadedDragModeDelayed((resultCode != RESULT_CANCELED),EXIT_SPRINGLOADED_MODE_SHORT_TIMEOUT,null);
+      }
+    }
+;
+  }
+ else   if (resultCode == RESULT_CANCELED) {
+    animationType=Workspace.CANCEL_TWO_STAGE_WIDGET_DROP_ANIMATION;
+  }
+  if (mDragLayer.getAnimatedView() != null) {
+    mWorkspace.animateWidgetDrop(mPendingAddInfo,cellLayout,(DragView)mDragLayer.getAnimatedView(),onCompleteRunnable,animationType,boundWidget,true);
+  }
+ else   if (onCompleteRunnable != null) {
+    onCompleteRunnable.run();
+  }
 }

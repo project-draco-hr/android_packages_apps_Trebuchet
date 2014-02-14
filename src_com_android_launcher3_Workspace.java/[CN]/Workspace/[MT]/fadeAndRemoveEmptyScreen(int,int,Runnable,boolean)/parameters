@@ -1,0 +1,4 @@
+int delay
+int duration
+Runnable onComplete
+boolean stripEmptyScreens
