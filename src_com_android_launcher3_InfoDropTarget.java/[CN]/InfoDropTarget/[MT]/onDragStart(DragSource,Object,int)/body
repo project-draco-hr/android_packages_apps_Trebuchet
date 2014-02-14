@@ -1,6 +1,6 @@
 {
   boolean isVisible=true;
-  if (!isFromAllApps(source)) {
+  if (!source.supportsAppInfoDropTarget()) {
     isVisible=false;
   }
   mActive=isVisible;
