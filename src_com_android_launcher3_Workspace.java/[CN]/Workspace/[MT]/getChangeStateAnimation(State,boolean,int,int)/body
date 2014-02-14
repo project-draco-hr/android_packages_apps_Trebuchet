@@ -63,7 +63,7 @@
       finalAlpha=0f;
     }
  else     if (stateIsNormal && mWorkspaceFadeInAdjacentScreens) {
-      finalAlpha=i == getNextPage() ? 1f : 0f;
+      finalAlpha=(i == getNextPage() || i < numCustomPages()) ? 1f : 0f;
     }
  else {
       finalAlpha=1f;
