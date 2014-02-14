@@ -5,5 +5,6 @@
   int heightSpec=MeasureSpec.makeMeasureSpec(mContentHeight,MeasureSpec.AT_MOST);
   layout.setMinimumWidth(getPageContentWidth());
   layout.measure(widthSpec,heightSpec);
+  layout.setPadding(mAllAppsPadding.left,mAllAppsPadding.top,mAllAppsPadding.right,mAllAppsPadding.bottom);
   setVisibilityOnChildren(layout,View.VISIBLE);
 }
