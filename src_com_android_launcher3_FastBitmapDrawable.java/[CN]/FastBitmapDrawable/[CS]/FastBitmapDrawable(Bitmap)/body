@@ -1,4 +1,5 @@
 {
   mAlpha=255;
   mBitmap=b;
+  setBounds(0,0,b.getWidth(),b.getHeight());
 }
