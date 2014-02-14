@@ -9,8 +9,5 @@
       addLongPressHandler(thumbnail);
     }
     thumbnail.setOnClickListener(mThumbnailOnClickListener);
-    if (i == 0 && selectFirstTile) {
-      mThumbnailOnClickListener.onClick(thumbnail);
-    }
   }
 }
