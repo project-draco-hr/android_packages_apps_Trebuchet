@@ -20,6 +20,9 @@
     }
     return;
   }
+ else   if (stripEmptyScreens) {
+    stripEmptyScreens();
+  }
   if (onComplete != null) {
     onComplete.run();
   }
