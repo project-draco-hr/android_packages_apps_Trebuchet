@@ -4,14 +4,15 @@
     mStartFrame=sGlobalFrameCounter;
     mStartTime=currentTime;
   }
-  if (!mHandlingOnAnimationUpdate && sVisible && animation.getCurrentPlayTime() < animation.getDuration()) {
+  final long currentPlayTime=animation.getCurrentPlayTime();
+  if (!mHandlingOnAnimationUpdate && sVisible && currentPlayTime < animation.getDuration()) {
     mHandlingOnAnimationUpdate=true;
     long frameNum=sGlobalFrameCounter - mStartFrame;
-    if (frameNum == 0 && currentTime < mStartTime + MAX_DELAY) {
+    if (frameNum == 0 && currentTime < mStartTime + MAX_DELAY && currentPlayTime > 0) {
       mTarget.getRootView().invalidate();
       animation.setCurrentPlayTime(0);
     }
- else     if (frameNum == 1 && currentTime < mStartTime + MAX_DELAY && !mAdjustedSecondFrameTime && currentTime > mStartTime + IDEAL_FRAME_DURATION) {
+ else     if (frameNum == 1 && currentTime < mStartTime + MAX_DELAY && !mAdjustedSecondFrameTime && currentTime > mStartTime + IDEAL_FRAME_DURATION && currentPlayTime > IDEAL_FRAME_DURATION) {
       animation.setCurrentPlayTime(IDEAL_FRAME_DURATION);
       mAdjustedSecondFrameTime=true;
     }
