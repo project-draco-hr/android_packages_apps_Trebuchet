@@ -1,3 +1,4 @@
 {
+  addHelper(LauncherBackupHelper.LAUNCHER_PREFS_PREFIX,new SharedPreferencesBackupHelper(this,LauncherAppState.getSharedPreferencesKey()));
   addHelper(LauncherBackupHelper.LAUNCHER_PREFIX,new LauncherBackupHelper(this));
 }
