@@ -13,6 +13,7 @@
     outState.putInt(RUNTIME_STATE_PENDING_ADD_SPAN_X,mPendingAddInfo.spanX);
     outState.putInt(RUNTIME_STATE_PENDING_ADD_SPAN_Y,mPendingAddInfo.spanY);
     outState.putParcelable(RUNTIME_STATE_PENDING_ADD_WIDGET_INFO,mPendingAddWidgetInfo);
+    outState.putInt(RUNTIME_STATE_PENDING_ADD_WIDGET_ID,mPendingAddWidgetId);
   }
   if (mFolderInfo != null && mWaitingForResult) {
     outState.putBoolean(RUNTIME_STATE_PENDING_FOLDER_RENAME,true);
