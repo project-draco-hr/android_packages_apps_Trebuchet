@@ -13,6 +13,7 @@
   final int delta=isRtl ? -1 : 1;
   int verticalPadding=getPaddingTop() + getPaddingBottom();
   LayoutParams lp=(LayoutParams)getChildAt(startIndex).getLayoutParams();
+  LayoutParams nextLp;
   int childLeft=offsetX + (lp.isFullScreenPage ? 0 : getPaddingLeft());
   if (mPageScrolls == null || getChildCount() != mChildCountOnLastLayout) {
     mPageScrolls=new int[getChildCount()];
@@ -37,7 +38,21 @@
       child.layout(childLeft,childTop,childLeft + child.getMeasuredWidth(),childTop + childHeight);
       int scrollOffsetLeft=lp.isFullScreenPage ? 0 : getPaddingLeft();
       mPageScrolls[i]=childLeft - scrollOffsetLeft - offsetX;
-      childLeft+=childWidth + mPageSpacing;
+      int pageGap=mPageSpacing;
+      int next=i + delta;
+      if (next != endIndex) {
+        nextLp=(LayoutParams)getPageAt(next).getLayoutParams();
+      }
+ else {
+        nextLp=null;
+      }
+      if (lp.isFullScreenPage) {
+        pageGap=getPaddingLeft();
+      }
+ else       if (nextLp != null && nextLp.isFullScreenPage) {
+        pageGap=getPaddingRight();
+      }
+      childLeft+=childWidth + pageGap;
     }
   }
   if (mFirstLayout && mCurrentPage >= 0 && mCurrentPage < getChildCount()) {
