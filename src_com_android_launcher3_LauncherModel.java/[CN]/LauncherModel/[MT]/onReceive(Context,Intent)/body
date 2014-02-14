@@ -29,13 +29,24 @@
     }
   }
  else   if (Intent.ACTION_EXTERNAL_APPLICATIONS_AVAILABLE.equals(action)) {
+    final boolean replacing=intent.getBooleanExtra(Intent.EXTRA_REPLACING,false);
     String[] packages=intent.getStringArrayExtra(Intent.EXTRA_CHANGED_PACKAGE_LIST);
-    enqueuePackageUpdated(new PackageUpdatedTask(PackageUpdatedTask.OP_ADD,packages));
-    startLoaderFromBackground();
+    if (!replacing) {
+      enqueuePackageUpdated(new PackageUpdatedTask(PackageUpdatedTask.OP_ADD,packages));
+      if (mAppsCanBeOnRemoveableStorage) {
+        startLoaderFromBackground();
+      }
+    }
+ else {
+      enqueuePackageUpdated(new PackageUpdatedTask(PackageUpdatedTask.OP_UPDATE,packages));
+    }
   }
  else   if (Intent.ACTION_EXTERNAL_APPLICATIONS_UNAVAILABLE.equals(action)) {
-    String[] packages=intent.getStringArrayExtra(Intent.EXTRA_CHANGED_PACKAGE_LIST);
-    enqueuePackageUpdated(new PackageUpdatedTask(PackageUpdatedTask.OP_UNAVAILABLE,packages));
+    final boolean replacing=intent.getBooleanExtra(Intent.EXTRA_REPLACING,false);
+    if (!replacing) {
+      String[] packages=intent.getStringArrayExtra(Intent.EXTRA_CHANGED_PACKAGE_LIST);
+      enqueuePackageUpdated(new PackageUpdatedTask(PackageUpdatedTask.OP_UNAVAILABLE,packages));
+    }
   }
  else   if (Intent.ACTION_LOCALE_CHANGED.equals(action)) {
     forceReload();
