@@ -1,0 +1,9 @@
+{
+  a.getCropView().setTouchEnabled(false);
+  ImageView defaultWallpaperView=a.getDefaultWallpaperView();
+  defaultWallpaperView.setVisibility(View.VISIBLE);
+  Drawable defaultWallpaper=WallpaperManager.getInstance(a).getBuiltInDrawable(defaultWallpaperView.getWidth(),defaultWallpaperView.getHeight(),false,0.5f,0.5f);
+  if (defaultWallpaper != null) {
+    defaultWallpaperView.setBackgroundDrawable(defaultWallpaper);
+  }
+}
