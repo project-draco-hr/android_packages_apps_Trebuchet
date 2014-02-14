@@ -9,9 +9,11 @@
  catch (    PackageManager.NameNotFoundException e) {
     }
   }
-  ResourceWallpaperInfo defaultWallpaperInfo=getDefaultWallpaperInfo();
-  if (defaultWallpaperInfo != null) {
-    bundledWallpapers.add(0,defaultWallpaperInfo);
+  if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
+    ResourceWallpaperInfo defaultWallpaperInfo=getPreKKDefaultWallpaperInfo();
+    if (defaultWallpaperInfo != null) {
+      bundledWallpapers.add(0,defaultWallpaperInfo);
+    }
   }
   return bundledWallpapers;
 }

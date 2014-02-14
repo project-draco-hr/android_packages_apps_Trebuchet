@@ -2,6 +2,7 @@
   int rotation=WallpaperCropActivity.getRotationFromExif(mResources,mResId);
   BitmapRegionTileSource source=new BitmapRegionTileSource(mResources,a,mResId,1024,rotation);
   CropView v=a.getCropView();
+  a.getDefaultWallpaperView().setVisibility(View.INVISIBLE);
   v.setTileSource(source,null);
   Point wallpaperSize=WallpaperCropActivity.getDefaultWallpaperSize(a.getResources(),a.getWindowManager());
   RectF crop=WallpaperCropActivity.getMaxCropRect(source.getImageWidth(),source.getImageHeight(),wallpaperSize.x,wallpaperSize.y,false);
