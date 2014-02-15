@@ -10,7 +10,9 @@
       }
       if (getItemCount() <= 1) {
         LauncherModel.deleteItemFromDatabase(mLauncher,mInfo);
-        cellLayout.removeView(mFolderIcon);
+        if (cellLayout != null) {
+          cellLayout.removeView(mFolderIcon);
+        }
         if (mFolderIcon instanceof DropTarget) {
           mDragController.removeDropTarget((DropTarget)mFolderIcon);
         }

@@ -1,6 +1,6 @@
 {
   mContent.removeAllViewsInLayout();
-  if (!AppsCustomizePagedView.DISABLE_ALL_APPS) {
+  if (!LauncherAppState.isDisableAllApps()) {
     Context context=getContext();
     LayoutInflater inflater=LayoutInflater.from(context);
     TextView allAppsButton=(TextView)inflater.inflate(R.layout.all_apps_button,mContent,false);

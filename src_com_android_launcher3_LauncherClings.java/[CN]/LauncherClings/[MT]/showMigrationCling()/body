@@ -1,0 +1,6 @@
+{
+  mLauncher.hideWorkspaceSearchAndHotseat();
+  Cling c=initCling(R.id.migration_cling,0,false,true);
+  c.bringScrimToFront();
+  c.bringToFront();
+}

@@ -1,0 +1,11 @@
+{
+  Cling cling=(Cling)mLauncher.findViewById(R.id.first_run_cling);
+  Runnable cb=new Runnable(){
+    public void run(){
+      showWorkspaceCling();
+    }
+  }
+;
+  dismissCling(cling,cb,FIRST_RUN_CLING_DISMISSED_KEY,DISMISS_CLING_DURATION,false);
+  mLauncher.getSearchBar().hideSearchBar(true);
+}

@@ -1,5 +1,5 @@
 {
-  if (mDrawIdentifier.equals(FIRST_RUN_PORTRAIT) || mDrawIdentifier.equals(FIRST_RUN_LANDSCAPE)) {
+  if (mDrawIdentifier.equals(FIRST_RUN_PORTRAIT) || mDrawIdentifier.equals(FIRST_RUN_LANDSCAPE) || mDrawIdentifier.equals(MIGRATION_PORTRAIT)|| mDrawIdentifier.equals(MIGRATION_LANDSCAPE)) {
     View content=getContent();
     content.animate().alpha(0f).setDuration(duration).setListener(new AnimatorListenerAdapter(){
       public void onAnimationEnd(      Animator animation){

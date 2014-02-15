@@ -4,15 +4,15 @@
     if (item.itemType == LauncherSettings.Favorites.ITEM_TYPE_APPWIDGET || item.itemType == LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT) {
       return true;
     }
-    if (!AppsCustomizePagedView.DISABLE_ALL_APPS && item.itemType == LauncherSettings.Favorites.ITEM_TYPE_FOLDER) {
+    if (!LauncherAppState.isDisableAllApps() && item.itemType == LauncherSettings.Favorites.ITEM_TYPE_FOLDER) {
       return true;
     }
-    if (!AppsCustomizePagedView.DISABLE_ALL_APPS && item.itemType == LauncherSettings.Favorites.ITEM_TYPE_APPLICATION && item instanceof AppInfo) {
+    if (!LauncherAppState.isDisableAllApps() && item.itemType == LauncherSettings.Favorites.ITEM_TYPE_APPLICATION && item instanceof AppInfo) {
       AppInfo appInfo=(AppInfo)info;
       return (appInfo.flags & AppInfo.DOWNLOADED_FLAG) != 0;
     }
     if (item.itemType == LauncherSettings.Favorites.ITEM_TYPE_APPLICATION && item instanceof ShortcutInfo) {
-      if (AppsCustomizePagedView.DISABLE_ALL_APPS) {
+      if (LauncherAppState.isDisableAllApps()) {
         ShortcutInfo shortcutInfo=(ShortcutInfo)info;
         return (shortcutInfo.flags & AppInfo.DOWNLOADED_FLAG) != 0;
       }

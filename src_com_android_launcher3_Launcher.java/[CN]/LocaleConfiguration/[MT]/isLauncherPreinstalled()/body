@@ -1,0 +1,16 @@
+{
+  PackageManager pm=getPackageManager();
+  try {
+    ApplicationInfo ai=pm.getApplicationInfo(getComponentName().getPackageName(),0);
+    if ((ai.flags & ApplicationInfo.FLAG_SYSTEM) != 0) {
+      return true;
+    }
+ else {
+      return false;
+    }
+  }
+ catch (  NameNotFoundException e) {
+    e.printStackTrace();
+    return false;
+  }
+}

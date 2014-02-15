@@ -1,0 +1,4 @@
+{
+  removeCling(R.id.first_run_cling);
+  removeCling(R.id.migration_cling);
+}
