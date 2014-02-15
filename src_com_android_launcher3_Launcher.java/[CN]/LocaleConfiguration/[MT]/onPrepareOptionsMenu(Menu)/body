@@ -1,5 +1,12 @@
 {
   super.onPrepareOptionsMenu(menu);
-  showOverviewMode(true);
+  closeFolder();
+  mWorkspace.exitWidgetResizeMode();
+  if (!mWorkspace.isInOverviewMode()) {
+    showOverviewMode(true);
+  }
+ else {
+    showWorkspace(true);
+  }
   return false;
 }
