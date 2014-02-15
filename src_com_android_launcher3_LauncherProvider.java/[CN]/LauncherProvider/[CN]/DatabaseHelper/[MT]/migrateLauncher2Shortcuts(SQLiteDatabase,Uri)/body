@@ -33,8 +33,10 @@
         final int width=(int)grid.numColumns;
         final int height=(int)grid.numRows;
         final int hotseatWidth=(int)grid.numHotseatIcons;
+        PackageManager pm=mContext.getPackageManager();
         final HashSet<String> seenIntents=new HashSet<String>(c.getCount());
-        final ContentValues[] rows=new ContentValues[c.getCount()];
+        final ArrayList<ContentValues> shortcuts=new ArrayList<ContentValues>();
+        final ArrayList<ContentValues> folders=new ArrayList<ContentValues>();
         while (c.moveToNext()) {
           final int itemType=c.getInt(itemTypeIndex);
           if (itemType != Favorites.ITEM_TYPE_APPLICATION && itemType != Favorites.ITEM_TYPE_SHORTCUT && itemType != Favorites.ITEM_TYPE_FOLDER) {
@@ -47,26 +49,33 @@
           final String intentStr=c.getString(intentIndex);
           Launcher.addDumpLog(TAG,"migrating \"" + c.getString(titleIndex) + "\": "+ intentStr,true);
           if (itemType != Favorites.ITEM_TYPE_FOLDER) {
+            final Intent intent;
+            final ComponentName cn;
+            try {
+              intent=Intent.parseUri(intentStr,0);
+            }
+ catch (            URISyntaxException e) {
+              Launcher.addDumpLog(TAG,"skipping invalid intent uri",true);
+              continue;
+            }
+            cn=intent.getComponent();
             if (TextUtils.isEmpty(intentStr)) {
               Launcher.addDumpLog(TAG,"skipping empty intent",true);
               continue;
             }
- else {
-              try {
-                final Intent intent=Intent.parseUri(intentStr,0);
-                intent.setPackage(null);
-                final String key=intent.toUri(0);
-                if (seenIntents.contains(key)) {
-                  Launcher.addDumpLog(TAG,"skipping duplicate",true);
-                  continue;
-                }
- else {
-                  seenIntents.add(key);
-                }
-              }
- catch (              URISyntaxException e) {
-                Launcher.addDumpLog(TAG,"skipping invalid intent uri",true);
+ else             if (cn != null && !LauncherModel.isValidPackageComponent(pm,cn)) {
+              Launcher.addDumpLog(TAG,"skipping item whose component " + "no longer exists.",true);
+              continue;
+            }
+ else             if (container == LauncherSettings.Favorites.CONTAINER_DESKTOP) {
+              intent.setPackage(null);
+              final String key=intent.toUri(0);
+              if (seenIntents.contains(key)) {
+                Launcher.addDumpLog(TAG,"skipping duplicate",true);
                 continue;
+              }
+ else {
+                seenIntents.add(key);
               }
             }
           }
@@ -82,7 +91,7 @@
           values.put(LauncherSettings.Favorites.APPWIDGET_ID,-1);
           values.put(LauncherSettings.Favorites.URI,c.getString(uriIndex));
           values.put(LauncherSettings.Favorites.DISPLAY_MODE,c.getInt(displayModeIndex));
-          if (container == LauncherSettings.Favorites.CONTAINER_HOTSEAT && screen >= hotseatWidth) {
+          if (container == LauncherSettings.Favorites.CONTAINER_HOTSEAT && (screen >= hotseatWidth || screen == grid.hotseatAllAppsRank)) {
             container=Favorites.CONTAINER_DESKTOP;
           }
           if (container != LauncherSettings.Favorites.CONTAINER_DESKTOP) {
@@ -91,28 +100,40 @@
             values.put(LauncherSettings.Favorites.CELLY,cellY);
           }
  else {
-            values.put(LauncherSettings.Favorites.SCREEN,curScreen);
-            values.put(LauncherSettings.Favorites.CELLX,curX);
-            values.put(LauncherSettings.Favorites.CELLY,curY);
-            curX=(curX + 1) % width;
-            if (curX == 0) {
-              curY=(curY + 1);
-            }
-            if (curScreen == 0 && curY == height - 1 || curY == height) {
-              curScreen=(int)generateNewScreenId();
-              curY=0;
-            }
           }
           values.put(LauncherSettings.Favorites.CONTAINER,container);
-          rows[i++]=values;
+          if (itemType != Favorites.ITEM_TYPE_FOLDER) {
+            shortcuts.add(values);
+          }
+ else {
+            folders.add(values);
+          }
         }
-        if (i > 0) {
+        final ArrayList<ContentValues> allItems=new ArrayList<ContentValues>();
+        allItems.addAll(folders);
+        allItems.addAll(shortcuts);
+        for (        ContentValues values : allItems) {
+          if (values.getAsInteger(LauncherSettings.Favorites.CONTAINER) != LauncherSettings.Favorites.CONTAINER_DESKTOP) {
+            continue;
+          }
+          values.put(LauncherSettings.Favorites.SCREEN,curScreen);
+          values.put(LauncherSettings.Favorites.CELLX,curX);
+          values.put(LauncherSettings.Favorites.CELLY,curY);
+          curX=(curX + 1) % width;
+          if (curX == 0) {
+            curY=(curY + 1);
+          }
+          if (curY == height - 1) {
+            curScreen=(int)generateNewScreenId();
+            curY=0;
+          }
+        }
+        if (allItems.size() > 0) {
           db.beginTransaction();
           try {
-            final int N=rows.length;
-            for (i=0; i < N; i++) {
-              if (rows[i] == null)               continue;
-              if (dbInsertAndCheck(this,db,TABLE_FAVORITES,null,rows[i]) < 0) {
+            for (            ContentValues row : allItems) {
+              if (row == null)               continue;
+              if (dbInsertAndCheck(this,db,TABLE_FAVORITES,null,row) < 0) {
                 return;
               }
  else {

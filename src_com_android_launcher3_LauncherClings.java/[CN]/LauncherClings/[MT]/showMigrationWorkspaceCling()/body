@@ -1,5 +1,5 @@
 {
-  if (isClingsEnabled() && !mLauncher.getSharedPrefs().getBoolean(MIGRATION_WORKSPACE_CLING_DISMISSED_KEY,false)) {
+  if (areClingsEnabled() && !mLauncher.getSharedPrefs().getBoolean(MIGRATION_WORKSPACE_CLING_DISMISSED_KEY,false)) {
     Cling c=initCling(R.id.migration_workspace_cling,0,false,true);
     c.updateMigrationWorkspaceBubblePosition();
     c.bringScrimToFront();

@@ -1,5 +1,5 @@
 {
-  Log.v(TAG,"restoreEntity");
+  if (VERBOSE)   Log.v(TAG,"restoreEntity");
   if (mKeys == null) {
     mKeys=new ArrayList<Key>();
   }
@@ -16,10 +16,11 @@
     if (DEBUG)     Log.d(TAG,"read " + bytesRead + " of "+ dataSize+ " available");
   }
  catch (  IOException e) {
-    Log.d(TAG,"failed to read entity from restore data",e);
+    Log.e(TAG,"failed to read entity from restore data",e);
   }
   try {
     key=backupKeyToKey(backupKey);
+    mKeys.add(key);
 switch (key.type) {
 case Key.FAVORITE:
       restoreFavorite(key,buffer,dataSize,mKeys);

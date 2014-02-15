@@ -10,6 +10,6 @@
       if (task.isCancelled())       break;
       task.syncThreadPriority();
     }
-    images.add(mWidgetPreviewLoader.getPreview(items.get(i)));
+    images.add(getWidgetPreviewLoader().getPreview(items.get(i)));
   }
 }
