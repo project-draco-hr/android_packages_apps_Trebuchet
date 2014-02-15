@@ -1,0 +1,9 @@
+{
+  int visibleChildren=0;
+  for (int i=0; i < parent.getChildCount(); i++) {
+    if (parent.getChildAt(i).getVisibility() != View.GONE) {
+      visibleChildren++;
+    }
+  }
+  return visibleChildren;
+}

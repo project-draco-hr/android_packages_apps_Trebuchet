@@ -2,7 +2,11 @@
   new AsyncTask<Void,Void,Void>(){
     public Void doInBackground(    Void... args){
       SQLiteDatabase db=cacheDb.getWritableDatabase();
-      db.delete(CacheDb.TABLE_NAME,CacheDb.COLUMN_NAME + " = ? ",new String[]{objectName});
+      try {
+        db.delete(CacheDb.TABLE_NAME,CacheDb.COLUMN_NAME + " = ? ",new String[]{objectName});
+      }
+ catch (      SQLiteDiskIOException e) {
+      }
       return null;
     }
   }

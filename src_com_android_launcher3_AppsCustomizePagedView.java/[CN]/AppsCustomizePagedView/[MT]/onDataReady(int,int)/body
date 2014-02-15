@@ -1,7 +1,4 @@
 {
-  if (mWidgetPreviewLoader == null) {
-    mWidgetPreviewLoader=new WidgetPreviewLoader(mLauncher);
-  }
   LauncherAppState app=LauncherAppState.getInstance();
   DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
   mWidgetSpacingLayout.setPadding(mPageLayoutPaddingLeft,mPageLayoutPaddingTop,mPageLayoutPaddingRight,mPageLayoutPaddingBottom);

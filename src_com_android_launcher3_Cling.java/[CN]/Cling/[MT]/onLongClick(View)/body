@@ -3,7 +3,7 @@
     mLauncher.getLauncherClings().dismissWorkspaceCling(null);
     return true;
   }
- else   if (mDrawIdentifier.equals(MIGRATION_WORKSPACE_PORTRAIT) || mDrawIdentifier.equals(MIGRATION_WORKSPACE_LANDSCAPE)) {
+ else   if (mDrawIdentifier.equals(MIGRATION_WORKSPACE_PORTRAIT) || mDrawIdentifier.equals(MIGRATION_WORKSPACE_LARGE_PORTRAIT) || mDrawIdentifier.equals(MIGRATION_WORKSPACE_LANDSCAPE)) {
     mLauncher.getLauncherClings().dismissMigrationWorkspaceCling(null);
     return true;
   }

@@ -5,7 +5,11 @@ synchronized (sInvalidPackages) {
   new AsyncTask<Void,Void,Void>(){
     public Void doInBackground(    Void... args){
       SQLiteDatabase db=cacheDb.getWritableDatabase();
-      db.delete(CacheDb.TABLE_NAME,CacheDb.COLUMN_NAME + " LIKE ? OR " + CacheDb.COLUMN_NAME+ " LIKE ?",new String[]{WIDGET_PREFIX + packageName + "/%",SHORTCUT_PREFIX + packageName + "/%"});
+      try {
+        db.delete(CacheDb.TABLE_NAME,CacheDb.COLUMN_NAME + " LIKE ? OR " + CacheDb.COLUMN_NAME+ " LIKE ?",new String[]{WIDGET_PREFIX + packageName + "/%",SHORTCUT_PREFIX + packageName + "/%"});
+      }
+ catch (      SQLiteDiskIOException e) {
+      }
 synchronized (sInvalidPackages) {
         sInvalidPackages.remove(packageName);
       }
