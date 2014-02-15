@@ -2,7 +2,7 @@
   if (requestCode == IMAGE_PICK && resultCode == RESULT_OK) {
     if (data != null && data.getData() != null) {
       Uri uri=data.getData();
-      addTemporaryWallpaperTile(uri);
+      addTemporaryWallpaperTile(uri,false);
     }
   }
  else   if (requestCode == PICK_WALLPAPER_THIRD_PARTY_ACTIVITY) {

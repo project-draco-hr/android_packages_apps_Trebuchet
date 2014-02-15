@@ -2,6 +2,7 @@
   String spKey=LauncherAppState.getSharedPreferencesKey();
   SharedPreferences sp=getContext().getSharedPreferences(spKey,Context.MODE_PRIVATE);
   if (sp.getBoolean(EMPTY_DATABASE_CREATED,false)) {
+    Log.d(TAG,"loading default workspace");
     int workspaceResId=origWorkspaceResId;
     if (workspaceResId == 0) {
       workspaceResId=sp.getInt(DEFAULT_WORKSPACE_RESOURCE_ID,getDefaultWorkspaceResourceId());

@@ -1,12 +1,12 @@
 {
-  Log.v(TAG,"onBackup");
+  if (VERBOSE)   Log.v(TAG,"onBackup");
   Journal in=readJournal(oldState);
   Journal out=new Journal();
   long lastBackupTime=in.t;
   out.t=System.currentTimeMillis();
   out.rows=0;
   out.bytes=0;
-  Log.v(TAG,"lastBackupTime=" + lastBackupTime);
+  Log.v(TAG,"lastBackupTime = " + lastBackupTime);
   ArrayList<Key> keys=new ArrayList<Key>();
   try {
     backupFavorites(in,data,out,keys);

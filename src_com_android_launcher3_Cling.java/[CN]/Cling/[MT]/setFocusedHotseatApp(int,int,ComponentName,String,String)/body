@@ -2,7 +2,7 @@
   Resources r=getResources();
   int appIconId=drawableId;
   Hotseat hotseat=mLauncher.getHotseat();
-  if (hotseat != null && appIconId > -1 && appRank > -1 && !title.isEmpty() && !description.isEmpty()) {
+  if (!mDrawIdentifier.equals(WORKSPACE_LARGE) && hotseat != null && appIconId > -1 && appRank > -1 && !title.isEmpty() && !description.isEmpty()) {
     int x=hotseat.getCellXFromOrder(appRank);
     int y=hotseat.getCellYFromOrder(appRank);
     Rect pos=hotseat.getCellCoordinates(x,y);

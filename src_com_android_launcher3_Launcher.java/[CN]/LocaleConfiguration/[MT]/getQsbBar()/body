@@ -1,7 +1,7 @@
 {
-  if (mQsbBar == null) {
-    mQsbBar=mInflater.inflate(R.layout.search_bar,mSearchDropTargetBar,false);
-    mSearchDropTargetBar.addView(mQsbBar);
+  if (mQsb == null) {
+    mQsb=mInflater.inflate(R.layout.qsb,mSearchDropTargetBar,false);
+    mSearchDropTargetBar.addView(mQsb);
   }
-  return mQsbBar;
+  return mQsb;
 }
