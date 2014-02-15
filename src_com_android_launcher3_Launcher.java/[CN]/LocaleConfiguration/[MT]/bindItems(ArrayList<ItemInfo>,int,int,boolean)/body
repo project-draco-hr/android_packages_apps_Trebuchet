@@ -60,8 +60,10 @@ anim.start();
 if (newShortcutsScreenId != currentScreenId) {
 mWorkspace.postDelayed(new Runnable(){
 public void run(){
+if (mWorkspace != null) {
 mWorkspace.snapToPage(newScreenIndex);
 mWorkspace.postDelayed(startBounceAnimRunnable,NEW_APPS_ANIMATION_DELAY);
+}
 }
 }
 ,NEW_APPS_PAGE_MOVE_DELAY);
