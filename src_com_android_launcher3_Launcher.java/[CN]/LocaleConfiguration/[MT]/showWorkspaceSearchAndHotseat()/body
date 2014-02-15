@@ -1,0 +1,6 @@
+{
+  mWorkspace.setAlpha(1f);
+  mHotseat.setAlpha(1f);
+  mPageIndicators.setAlpha(1f);
+  mSearchDropTargetBar.showSearchBar(false);
+}

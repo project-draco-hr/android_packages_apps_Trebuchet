@@ -33,7 +33,7 @@ synchronized (sBgLock) {
     }
     sBgDbIconCache.clear();
   }
-  if (AppsCustomizePagedView.DISABLE_ALL_APPS) {
+  if (LauncherAppState.isDisableAllApps()) {
     if (!UPGRADE_USE_MORE_APPS_FOLDER || !isUpgrade) {
       verifyApplications();
     }

@@ -1,0 +1,4 @@
+{
+  Cling cling=(Cling)mLauncher.findViewById(R.id.workspace_cling);
+  dismissAnyWorkspaceCling(cling,v);
+}

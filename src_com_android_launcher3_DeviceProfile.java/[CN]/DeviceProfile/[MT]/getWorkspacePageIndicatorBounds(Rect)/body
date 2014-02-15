@@ -1,0 +1,5 @@
+{
+  Rect workspacePadding=getWorkspacePadding();
+  int pageIndicatorTop=heightPx - insets.bottom - workspacePadding.bottom;
+  return new Rect(workspacePadding.left,pageIndicatorTop,widthPx - workspacePadding.right,pageIndicatorTop + pageIndicatorHeightPx);
+}

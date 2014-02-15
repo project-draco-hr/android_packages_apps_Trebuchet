@@ -1,7 +1,7 @@
 {
   DisplayMetrics dm=resources.getDisplayMetrics();
   ArrayList<DeviceProfile> deviceProfiles=new ArrayList<DeviceProfile>();
-  boolean hasAA=!AppsCustomizePagedView.DISABLE_ALL_APPS;
+  boolean hasAA=!LauncherAppState.isDisableAllApps();
   DEFAULT_ICON_SIZE_PX=pxFromDp(DEFAULT_ICON_SIZE_DP,dm);
   deviceProfiles.add(new DeviceProfile("Super Short Stubby",255,300,2,3,48,13,(hasAA ? 5 : 5),48));
   deviceProfiles.add(new DeviceProfile("Shorter Stubby",255,400,3,3,48,13,(hasAA ? 5 : 5),48));
