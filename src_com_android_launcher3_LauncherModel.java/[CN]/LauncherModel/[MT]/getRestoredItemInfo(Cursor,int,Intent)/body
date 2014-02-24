@@ -1,13 +1,12 @@
 {
   final ShortcutInfo info=new ShortcutInfo();
-  info.usingFallbackIcon=true;
-  info.setIcon(getFallbackIcon());
   if (cursor != null) {
     info.title=cursor.getString(titleIndex);
   }
  else {
     info.title="";
   }
+  info.setIcon(mIconCache.getIcon(intent,info.title.toString()));
   info.itemType=LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT;
   info.restoredIntent=intent;
   return info;

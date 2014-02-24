@@ -1,14 +1,12 @@
 {
   final LauncherAppState appState=LauncherAppState.getInstanceNoCreate();
-  if (appState == null) {
-    dataChanged();
-    if (DEBUG)     Log.d(TAG,"Launcher is not initialized, delaying widget backup");
+  if (appState == null || !initializeIconCache()) {
+    Log.w(TAG,"Failed to get icon cache during restore");
     return;
   }
   final ContentResolver cr=mContext.getContentResolver();
   final WidgetPreviewLoader previewLoader=new WidgetPreviewLoader(mContext);
   final PagedViewCellLayout widgetSpacingLayout=new PagedViewCellLayout(mContext);
-  final IconCache iconCache=appState.getIconCache();
   final int dpi=mContext.getResources().getDisplayMetrics().densityDpi;
   final DeviceProfile profile=appState.getDynamicGrid().getDeviceProfile();
   if (DEBUG)   Log.d(TAG,"cellWidthPx: " + profile.cellWidthPx);
@@ -46,7 +44,7 @@
         if ((out.rows - startRows) < MAX_WIDGETS_PER_PASS) {
           if (VERBOSE)           Log.v(TAG,"saving widget " + backupKey);
           previewLoader.setPreviewSize(spanX * profile.cellWidthPx,spanY * profile.cellHeightPx,widgetSpacingLayout);
-          byte[] blob=packWidget(dpi,previewLoader,iconCache,provider);
+          byte[] blob=packWidget(dpi,previewLoader,mIconCache,provider);
           keys.add(key);
           writeRowToBackup(key,blob,out,data);
         }
