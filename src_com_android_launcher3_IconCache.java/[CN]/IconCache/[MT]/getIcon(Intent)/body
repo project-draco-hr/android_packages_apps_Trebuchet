@@ -1,11 +1,3 @@
 {
-synchronized (mCache) {
-    final ResolveInfo resolveInfo=mPackageManager.resolveActivity(intent,0);
-    ComponentName component=intent.getComponent();
-    if (resolveInfo == null || component == null) {
-      return mDefaultIcon;
-    }
-    CacheEntry entry=cacheLocked(component,resolveInfo,null);
-    return entry.icon;
-  }
+  return getIcon(intent,null);
 }
