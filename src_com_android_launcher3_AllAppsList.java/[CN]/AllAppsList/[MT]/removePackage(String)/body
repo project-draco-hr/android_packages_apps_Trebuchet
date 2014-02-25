@@ -8,5 +8,5 @@
       data.remove(i);
     }
   }
-  mIconCache.flush();
+  mIconCache.remove(packageName);
 }
