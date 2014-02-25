@@ -6,6 +6,7 @@ switch (mOp) {
 case OP_ADD:
     for (int i=0; i < N; i++) {
       if (DEBUG_LOADERS)       Log.d(TAG,"mAllAppsList.addPackage " + packages[i]);
+      mIconCache.remove(packages[i]);
       mBgAllAppsList.addPackage(context,packages[i]);
     }
   break;
