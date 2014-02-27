@@ -1,0 +1,13 @@
+{
+  ContentResolver cr=mContext.getContentResolver();
+  Cursor cursor=cr.query(Favorites.CONTENT_URI,FAVORITE_PROJECTION,null,null,null);
+  if (cursor == null) {
+    return false;
+  }
+  cursor.close();
+  if (!initializeIconCache()) {
+    dataChanged();
+    return false;
+  }
+  return true;
+}
