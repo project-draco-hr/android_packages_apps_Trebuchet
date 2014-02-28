@@ -5,12 +5,12 @@
   }
  else {
     mFirstClick=false;
-    a.mSetWallpaperButton.setVisibility(View.INVISIBLE);
+    a.mSetWallpaperButton.setEnabled(false);
     onLoad=new Runnable(){
       public void run(){
         if (mBitmapSource != null && mBitmapSource.getLoadingState() == BitmapSource.State.LOADED) {
           a.selectTile(mView);
-          a.mSetWallpaperButton.setVisibility(View.VISIBLE);
+          a.mSetWallpaperButton.setEnabled(true);
         }
  else {
           ViewGroup parent=(ViewGroup)mView.getParent();

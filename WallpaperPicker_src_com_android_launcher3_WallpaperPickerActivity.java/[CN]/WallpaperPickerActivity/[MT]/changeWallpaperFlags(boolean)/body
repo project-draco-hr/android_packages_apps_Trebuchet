@@ -1,0 +1,7 @@
+{
+  int desiredWallpaperFlag=visible ? WindowManager.LayoutParams.FLAG_SHOW_WALLPAPER : 0;
+  int currentWallpaperFlag=getWindow().getAttributes().flags & WindowManager.LayoutParams.FLAG_SHOW_WALLPAPER;
+  if (desiredWallpaperFlag != currentWallpaperFlag) {
+    getWindow().setFlags(desiredWallpaperFlag,WindowManager.LayoutParams.FLAG_SHOW_WALLPAPER);
+  }
+}
