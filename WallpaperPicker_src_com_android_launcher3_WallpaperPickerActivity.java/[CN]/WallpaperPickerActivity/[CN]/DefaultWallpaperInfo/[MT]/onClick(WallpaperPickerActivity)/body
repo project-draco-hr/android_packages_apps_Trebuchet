@@ -9,4 +9,5 @@
   c.setTileSource(new DrawableTileSource(a,defaultWallpaper,DrawableTileSource.MAX_PREVIEW_SIZE),null);
   c.setScale(1f);
   c.setTouchEnabled(false);
+  a.setSystemWallpaperVisiblity(false);
 }
