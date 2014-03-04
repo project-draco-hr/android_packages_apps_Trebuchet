@@ -9,6 +9,7 @@
 );
   }
  else {
+    mLauncher.getWorkspace().removeExtraEmptyScreen(true,null);
     mLauncher.unlockScreenOrientation(false);
   }
 }
