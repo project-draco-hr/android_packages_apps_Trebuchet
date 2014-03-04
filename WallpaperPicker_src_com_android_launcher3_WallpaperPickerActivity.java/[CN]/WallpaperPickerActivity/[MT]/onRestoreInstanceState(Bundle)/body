@@ -3,5 +3,5 @@
   for (  Uri uri : uris) {
     addTemporaryWallpaperTile(uri,true);
   }
-  mSelectedIndex=savedInstanceState.getInt(SELECTED_INDEX,0);
+  mSelectedIndex=savedInstanceState.getInt(SELECTED_INDEX,-1);
 }

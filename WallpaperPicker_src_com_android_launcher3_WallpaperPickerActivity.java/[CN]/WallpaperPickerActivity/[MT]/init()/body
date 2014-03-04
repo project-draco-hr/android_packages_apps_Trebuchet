@@ -1,6 +1,7 @@
 {
   setContentView(R.layout.wallpaper_picker);
   mCropView=(CropView)findViewById(R.id.cropView);
+  mCropView.setVisibility(View.INVISIBLE);
   mWallpaperStrip=findViewById(R.id.wallpaper_strip);
   mCropView.setTouchCallback(new CropView.TouchCallback(){
     ViewPropertyAnimator mAnim;
@@ -47,7 +48,7 @@
         }
         return;
       }
-      mSetWallpaperButton.setVisibility(View.VISIBLE);
+      mSetWallpaperButton.setEnabled(true);
       WallpaperTileInfo info=(WallpaperTileInfo)v.getTag();
       if (info.isSelectable() && v.getVisibility() == View.VISIBLE) {
         selectTile(v);
@@ -126,6 +127,7 @@
       if ((right - left) > 0 && (bottom - top) > 0) {
         if (mSelectedIndex >= 0 && mSelectedIndex < mWallpapersView.getChildCount()) {
           mThumbnailOnClickListener.onClick(mWallpapersView.getChildAt(mSelectedIndex));
+          setSystemWallpaperVisiblity(false);
         }
         v.removeOnLayoutChangeListener(this);
       }
@@ -146,6 +148,10 @@
       if (mSelectedTile != null) {
         WallpaperTileInfo info=(WallpaperTileInfo)mSelectedTile.getTag();
         info.onSave(WallpaperPickerActivity.this);
+      }
+ else {
+        setResult(Activity.RESULT_OK);
+        finish();
       }
     }
   }
@@ -184,16 +190,25 @@
       if (itemId == R.id.menu_delete) {
         int childCount=mWallpapersView.getChildCount();
         ArrayList<View> viewsToRemove=new ArrayList<View>();
+        boolean selectedTileRemoved=false;
         for (int i=0; i < childCount; i++) {
           CheckableFrameLayout c=(CheckableFrameLayout)mWallpapersView.getChildAt(i);
           if (c.isChecked()) {
             WallpaperTileInfo info=(WallpaperTileInfo)c.getTag();
             info.onDelete(WallpaperPickerActivity.this);
             viewsToRemove.add(c);
+            if (i == mSelectedIndex) {
+              selectedTileRemoved=true;
+            }
           }
         }
         for (        View v : viewsToRemove) {
           mWallpapersView.removeView(v);
+        }
+        if (selectedTileRemoved) {
+          mSelectedIndex=-1;
+          mSelectedTile=null;
+          setSystemWallpaperVisiblity(true);
         }
         updateTileIndices();
         mode.finish();
@@ -209,7 +224,9 @@
         CheckableFrameLayout c=(CheckableFrameLayout)mWallpapersView.getChildAt(i);
         c.setChecked(false);
       }
-      mSelectedTile.setSelected(true);
+      if (mSelectedTile != null) {
+        mSelectedTile.setSelected(true);
+      }
       mActionMode=null;
     }
   }
