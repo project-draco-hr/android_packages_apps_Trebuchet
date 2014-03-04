@@ -1,0 +1,9 @@
+{
+  super.setVisibility(visibility);
+  if (USE_TEXTURE_VIEW) {
+    mTextureView.setVisibility(visibility);
+  }
+ else {
+    mGLSurfaceView.setVisibility(visibility);
+  }
+}

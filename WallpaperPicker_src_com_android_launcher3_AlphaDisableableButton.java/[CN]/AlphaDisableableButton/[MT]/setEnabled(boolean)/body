@@ -1,0 +1,9 @@
+{
+  super.setEnabled(enabled);
+  if (enabled) {
+    setAlpha(1.0f);
+  }
+ else {
+    setAlpha(DISABLED_ALPHA_VALUE);
+  }
+}

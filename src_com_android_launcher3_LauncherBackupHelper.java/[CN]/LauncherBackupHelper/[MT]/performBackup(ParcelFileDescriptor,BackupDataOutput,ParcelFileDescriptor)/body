@@ -8,16 +8,21 @@
   out.bytes=0;
   Log.v(TAG,"lastBackupTime = " + lastBackupTime);
   ArrayList<Key> keys=new ArrayList<Key>();
-  try {
-    backupFavorites(in,data,out,keys);
-    backupScreens(in,data,out,keys);
-    backupIcons(in,data,out,keys);
-    backupWidgets(in,data,out,keys);
+  if (launcherIsReady()) {
+    try {
+      backupFavorites(in,data,out,keys);
+      backupScreens(in,data,out,keys);
+      backupIcons(in,data,out,keys);
+      backupWidgets(in,data,out,keys);
+    }
+ catch (    IOException e) {
+      Log.e(TAG,"launcher backup has failed",e);
+    }
+    out.key=keys.toArray(new BackupProtos.Key[keys.size()]);
   }
- catch (  IOException e) {
-    Log.e(TAG,"launcher backup has failed",e);
+ else {
+    out=in;
   }
-  out.key=keys.toArray(new BackupProtos.Key[keys.size()]);
   writeJournal(newState,out);
   Log.v(TAG,"onBackup: wrote " + out.bytes + "b in "+ out.rows+ " rows.");
 }

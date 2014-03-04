@@ -1,5 +1,9 @@
 {
   Launcher.addDumpLog(TAG,"11683562 - stripEmptyScreens()",true);
+  if (mLauncher.isWorkspaceLoading()) {
+    Launcher.addDumpLog(TAG,"    - workspace loading, skip",true);
+    return;
+  }
   if (isPageMoving()) {
     mStripScreensOnPageStopMoving=true;
     return;
