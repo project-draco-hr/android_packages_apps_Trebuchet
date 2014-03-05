@@ -18,7 +18,7 @@
   widgetButton.setOnClickListener(new OnClickListener(){
     @Override public void onClick(    View arg0){
       if (!mWorkspace.isSwitchingState()) {
-        onClickAddWidgetButton();
+        onClickAddWidgetButton(arg0);
       }
     }
   }
@@ -28,7 +28,7 @@
   wallpaperButton.setOnClickListener(new OnClickListener(){
     @Override public void onClick(    View arg0){
       if (!mWorkspace.isSwitchingState()) {
-        onClickWallpaperPicker();
+        onClickWallpaperPicker(arg0);
       }
     }
   }
@@ -39,7 +39,7 @@
     settingsButton.setOnClickListener(new OnClickListener(){
       @Override public void onClick(      View arg0){
         if (!mWorkspace.isSwitchingState()) {
-          onClickSettingsButton();
+          onClickSettingsButton(arg0);
         }
       }
     }
