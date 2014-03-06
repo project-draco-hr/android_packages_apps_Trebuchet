@@ -1,0 +1,5 @@
+{
+  SharedPreferences.Editor editor=mLauncher.getSharedPrefs().edit();
+  editor.putBoolean(LauncherClings.FOLDER_CLING_DISMISSED_KEY,true);
+  editor.apply();
+}
