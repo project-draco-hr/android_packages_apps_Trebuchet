@@ -4,7 +4,6 @@
   final Context context=mContext;
   final ContentResolver contentResolver=context.getContentResolver();
   final PackageManager manager=context.getPackageManager();
-  final AppWidgetManager widgets=AppWidgetManager.getInstance(context);
   final boolean isSafeMode=manager.isSafeMode();
   final LauncherAppsCompat launcherApps=LauncherAppsCompat.getInstance(context);
   final boolean isSdCardReady=context.registerReceiver(null,new IntentFilter(StartupReceiver.SYSTEM_READY)) != null;
@@ -245,6 +244,8 @@ sBgItemsIdMap.put(folderInfo.id,folderInfo);
 sBgFolders.put(folderInfo.id,folderInfo);
 break;
 case LauncherSettings.Favorites.ITEM_TYPE_APPWIDGET:
+case LauncherSettings.Favorites.ITEM_TYPE_CUSTOM_APPWIDGET:
+boolean customWidget=itemType == LauncherSettings.Favorites.ITEM_TYPE_CUSTOM_APPWIDGET;
 int appWidgetId=c.getInt(appWidgetIdIndex);
 String savedProvider=c.getString(appWidgetProviderIndex);
 id=c.getLong(idIndex);
@@ -252,9 +253,9 @@ final ComponentName component=ComponentName.unflattenFromString(savedProvider);
 final int restoreStatus=c.getInt(restoredIndex);
 final boolean isIdValid=(restoreStatus & LauncherAppWidgetInfo.FLAG_ID_NOT_VALID) == 0;
 final boolean wasProviderReady=(restoreStatus & LauncherAppWidgetInfo.FLAG_PROVIDER_NOT_READY) == 0;
-final AppWidgetProviderInfo provider=isIdValid ? widgets.getAppWidgetInfo(appWidgetId) : findAppWidgetProviderInfoWithComponent(context,component);
+final LauncherAppWidgetProviderInfo provider=LauncherModel.getProviderInfo(context,ComponentName.unflattenFromString(savedProvider));
 final boolean isProviderReady=isValidProvider(provider);
-if (!isSafeMode && wasProviderReady && !isProviderReady) {
+if (!isSafeMode && !customWidget && wasProviderReady&& !isProviderReady) {
 String log="Deleting widget that isn't installed anymore: " + "id=" + id + " appWidgetId="+ appWidgetId;
 Log.e(TAG,log);
 Launcher.addDumpLog(TAG,log,false);
@@ -263,9 +264,11 @@ itemsToRemove.add(id);
  else {
 if (isProviderReady) {
 appWidgetInfo=new LauncherAppWidgetInfo(appWidgetId,provider.provider);
+if (!customWidget) {
 int[] minSpan=Launcher.getMinSpanForWidget(context,provider);
 appWidgetInfo.minSpanX=minSpan[0];
 appWidgetInfo.minSpanY=minSpan[1];
+}
 int status=restoreStatus;
 if (!wasProviderReady) {
 if (isIdValid) {
@@ -298,6 +301,11 @@ appWidgetInfo.cellX=c.getInt(cellXIndex);
 appWidgetInfo.cellY=c.getInt(cellYIndex);
 appWidgetInfo.spanX=c.getInt(spanXIndex);
 appWidgetInfo.spanY=c.getInt(spanYIndex);
+if (!customWidget) {
+int[] minSpan=Launcher.getMinSpanForWidget(context,provider);
+appWidgetInfo.minSpanX=minSpan[0];
+appWidgetInfo.minSpanY=minSpan[1];
+}
 container=c.getInt(containerIndex);
 if (container != LauncherSettings.Favorites.CONTAINER_DESKTOP && container != LauncherSettings.Favorites.CONTAINER_HOTSEAT) {
 Log.e(TAG,"Widget found where container != " + "CONTAINER_DESKTOP nor CONTAINER_HOTSEAT - ignoring!");
@@ -308,6 +316,7 @@ if (!checkItemPlacement(occupied,appWidgetInfo)) {
 itemsToRemove.add(id);
 break;
 }
+if (!customWidget) {
 String providerName=appWidgetInfo.providerName.flattenToString();
 if (!providerName.equals(savedProvider) || (appWidgetInfo.restoreStatus != restoreStatus)) {
 ContentValues values=new ContentValues();
@@ -316,6 +325,7 @@ values.put(LauncherSettings.Favorites.RESTORED,appWidgetInfo.restoreStatus);
 String where=BaseColumns._ID + "= ?";
 String[] args={Long.toString(id)};
 contentResolver.update(contentUri,values,where,args);
+}
 }
 sBgItemsIdMap.put(appWidgetInfo.id,appWidgetInfo);
 sBgAppWidgets.add(appWidgetInfo);

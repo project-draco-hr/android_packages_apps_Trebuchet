@@ -1,0 +1,13 @@
+{
+  isCustomWidget=true;
+  provider=new ComponentName(context,widget.getClass().getName());
+  icon=widget.getIcon();
+  label=widget.getLabel();
+  previewImage=widget.getPreviewImage();
+  initialLayout=widget.getWidgetLayout();
+  resizeMode=widget.getResizeMode();
+  spanX=widget.getSpanX();
+  spanY=widget.getSpanY();
+  minSpanX=widget.getMinSpanX();
+  minSpanY=widget.getMinSpanY();
+}

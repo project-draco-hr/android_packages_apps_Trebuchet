@@ -1,0 +1,6 @@
+{
+  if (isCustomWidget) {
+    return "LauncherAppWidgetProviderInfo(" + provider + ")";
+  }
+  return super.toString();
+}

@@ -7,8 +7,6 @@
   icon=copy.icon;
   info=copy.info;
   boundWidget=copy.boundWidget;
-  mimeType=copy.mimeType;
-  configurationData=copy.configurationData;
   componentName=copy.componentName;
   itemType=copy.itemType;
   spanX=copy.spanX;

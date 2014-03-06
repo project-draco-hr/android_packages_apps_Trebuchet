@@ -1,0 +1,31 @@
+{
+  ItemInfo info=mPendingAddInfo;
+  if (appWidgetInfo == null) {
+    appWidgetInfo=LauncherAppWidgetProviderInfo.fromProviderInfo(this,mAppWidgetManager.getAppWidgetInfo(appWidgetId));
+  }
+  if (appWidgetInfo.isCustomWidget) {
+    appWidgetId=LauncherAppWidgetInfo.CUSTOM_WIDGET_ID;
+  }
+  LauncherAppWidgetInfo launcherInfo;
+  launcherInfo=new LauncherAppWidgetInfo(appWidgetId,appWidgetInfo.provider);
+  launcherInfo.spanX=info.spanX;
+  launcherInfo.spanY=info.spanY;
+  launcherInfo.minSpanX=info.minSpanX;
+  launcherInfo.minSpanY=info.minSpanY;
+  launcherInfo.user=mAppWidgetManager.getUser(appWidgetInfo);
+  LauncherModel.addItemToDatabase(this,launcherInfo,container,screenId,info.cellX,info.cellY,false);
+  if (!mRestoring) {
+    if (hostView == null) {
+      launcherInfo.hostView=mAppWidgetHost.createView(this,appWidgetId,appWidgetInfo);
+    }
+ else {
+      launcherInfo.hostView=hostView;
+    }
+    launcherInfo.hostView.setTag(launcherInfo);
+    launcherInfo.hostView.setVisibility(View.VISIBLE);
+    launcherInfo.notifyWidgetSizeChanged(this);
+    mWorkspace.addInScreen(launcherInfo.hostView,container,screenId,info.cellX,info.cellY,launcherInfo.spanX,launcherInfo.spanY,isWorkspaceLocked());
+    addWidgetToAutoAdvanceIfNeeded(launcherInfo.hostView,appWidgetInfo);
+  }
+  resetAddInfo();
+}

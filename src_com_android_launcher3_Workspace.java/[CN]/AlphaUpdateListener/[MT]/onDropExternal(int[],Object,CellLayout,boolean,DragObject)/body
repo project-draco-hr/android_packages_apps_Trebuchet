@@ -48,6 +48,7 @@
       @Override public void run(){
         deferRemoveExtraEmptyScreen();
 switch (pendingInfo.itemType) {
+case LauncherSettings.Favorites.ITEM_TYPE_CUSTOM_APPWIDGET:
 case LauncherSettings.Favorites.ITEM_TYPE_APPWIDGET:
           int span[]=new int[2];
         span[0]=item.spanX;
@@ -63,13 +64,14 @@ throw new IllegalStateException("Unknown item type: " + pendingInfo.itemType);
 }
 }
 ;
-View finalView=pendingInfo.itemType == LauncherSettings.Favorites.ITEM_TYPE_APPWIDGET ? ((PendingAddWidgetInfo)pendingInfo).boundWidget : null;
+boolean isWidget=pendingInfo.itemType == LauncherSettings.Favorites.ITEM_TYPE_APPWIDGET || pendingInfo.itemType == LauncherSettings.Favorites.ITEM_TYPE_CUSTOM_APPWIDGET;
+View finalView=isWidget ? ((PendingAddWidgetInfo)pendingInfo).boundWidget : null;
 if (finalView instanceof AppWidgetHostView && updateWidgetSize) {
 AppWidgetHostView awhv=(AppWidgetHostView)finalView;
 AppWidgetResizeFrame.updateWidgetSizeRanges(awhv,mLauncher,item.spanX,item.spanY);
 }
 int animationStyle=ANIMATE_INTO_POSITION_AND_DISAPPEAR;
-if (pendingInfo.itemType == LauncherSettings.Favorites.ITEM_TYPE_APPWIDGET && ((PendingAddWidgetInfo)pendingInfo).info.configure != null) {
+if (isWidget && ((PendingAddWidgetInfo)pendingInfo).info != null && ((PendingAddWidgetInfo)pendingInfo).info.configure != null) {
 animationStyle=ANIMATE_INTO_POSITION_AND_REMAIN;
 }
 animateWidgetDrop(info,cellLayout,d.dragView,onAnimationCompleteRunnable,animationStyle,finalView,true);

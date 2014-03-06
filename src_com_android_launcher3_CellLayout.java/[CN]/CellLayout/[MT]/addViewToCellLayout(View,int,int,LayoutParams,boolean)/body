@@ -1,18 +1,3 @@
 {
-  final LayoutParams lp=params;
-  if (child instanceof BubbleTextView) {
-    BubbleTextView bubbleChild=(BubbleTextView)child;
-    bubbleChild.setTextVisibility(!mIsHotseat);
-  }
-  child.setScaleX(getChildrenScale());
-  child.setScaleY(getChildrenScale());
-  if (lp.cellX >= 0 && lp.cellX <= mCountX - 1 && lp.cellY >= 0 && lp.cellY <= mCountY - 1) {
-    if (lp.cellHSpan < 0)     lp.cellHSpan=mCountX;
-    if (lp.cellVSpan < 0)     lp.cellVSpan=mCountY;
-    child.setId(childId);
-    mShortcutsAndWidgets.addView(child,index,lp);
-    if (markCells)     markCellsAsOccupiedForView(child);
-    return true;
-  }
-  return false;
+  return addViewToCellLayout(child,index,childId,params,markCells,false);
 }

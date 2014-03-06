@@ -8,7 +8,7 @@
     int widgetId=info.appWidgetId;
     AppWidgetProviderInfo appWidgetInfo=mAppWidgetManager.getAppWidgetInfo(widgetId);
     if (appWidgetInfo != null) {
-      mPendingAddWidgetInfo=appWidgetInfo;
+      mPendingAddWidgetInfo=LauncherAppWidgetProviderInfo.fromProviderInfo(this,appWidgetInfo);
       mPendingAddInfo.copyFrom(info);
       mPendingAddWidgetId=widgetId;
       AppWidgetManagerCompat.getInstance(this).startConfigActivity(appWidgetInfo,info.appWidgetId,this,mAppWidgetHost,REQUEST_RECONFIGURE_APPWIDGET);

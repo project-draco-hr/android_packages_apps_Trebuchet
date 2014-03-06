@@ -15,16 +15,10 @@
     Object rawInfo=items.get(i);
     PendingAddItemInfo createItemInfo=null;
     PagedViewWidget widget=(PagedViewWidget)mLayoutInflater.inflate(R.layout.apps_customize_widget,layout,false);
-    if (rawInfo instanceof AppWidgetProviderInfo) {
-      AppWidgetProviderInfo info=(AppWidgetProviderInfo)rawInfo;
-      createItemInfo=new PendingAddWidgetInfo(info,null,null);
-      int[] spanXY=Launcher.getSpanForWidget(mLauncher,info);
-      createItemInfo.spanX=spanXY[0];
-      createItemInfo.spanY=spanXY[1];
-      int[] minSpanXY=Launcher.getMinSpanForWidget(mLauncher,info);
-      createItemInfo.minSpanX=minSpanXY[0];
-      createItemInfo.minSpanY=minSpanXY[1];
-      widget.applyFromAppWidgetProviderInfo(info,-1,spanXY,getWidgetPreviewLoader());
+    if (rawInfo instanceof LauncherAppWidgetProviderInfo) {
+      LauncherAppWidgetProviderInfo info=(LauncherAppWidgetProviderInfo)rawInfo;
+      createItemInfo=new PendingAddWidgetInfo(info,null);
+      widget.applyFromAppWidgetProviderInfo(info,-1,getWidgetPreviewLoader());
       widget.setTag(createItemInfo);
       widget.setShortPressListener(this);
     }

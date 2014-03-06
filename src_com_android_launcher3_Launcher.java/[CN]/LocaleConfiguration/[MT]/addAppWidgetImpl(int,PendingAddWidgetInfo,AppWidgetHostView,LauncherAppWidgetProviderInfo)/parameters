@@ -1,0 +1,4 @@
+int appWidgetId
+PendingAddWidgetInfo info
+AppWidgetHostView boundWidget
+LauncherAppWidgetProviderInfo appWidgetInfo

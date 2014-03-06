@@ -3,12 +3,12 @@
   DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
   mWidgets.clear();
   for (  Object o : widgetsAndShortcuts) {
-    if (o instanceof AppWidgetProviderInfo) {
-      AppWidgetProviderInfo widget=(AppWidgetProviderInfo)o;
-      if (!app.shouldShowAppOrWidgetProvider(widget.provider)) {
+    if (o instanceof LauncherAppWidgetProviderInfo) {
+      LauncherAppWidgetProviderInfo widget=(LauncherAppWidgetProviderInfo)o;
+      if (!app.shouldShowAppOrWidgetProvider(widget.provider) && !widget.isCustomWidget) {
         continue;
       }
-      if (widget.minWidth > 0 && widget.minHeight > 0) {
+      if (widget.minSpanX > 0 && widget.minSpanY > 0) {
         int[] spanXY=Launcher.getSpanForWidget(mLauncher,widget);
         int[] minSpanXY=Launcher.getMinSpanForWidget(mLauncher,widget);
         int minSpanX=Math.min(spanXY[0],minSpanXY[0]);

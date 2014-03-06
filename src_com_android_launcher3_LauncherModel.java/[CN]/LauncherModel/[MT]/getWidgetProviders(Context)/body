@@ -1,0 +1,21 @@
+{
+synchronized (sBgLock) {
+    if (sBgWidgetProviders != null && !sWidgetProvidersDirty) {
+      return new ArrayList<LauncherAppWidgetProviderInfo>(sBgWidgetProviders.values());
+    }
+    sBgWidgetProviders=new HashMap<ComponentName,LauncherAppWidgetProviderInfo>();
+    List<AppWidgetProviderInfo> widgets=AppWidgetManagerCompat.getInstance(context).getAllProviders();
+    LauncherAppWidgetProviderInfo info;
+    for (    AppWidgetProviderInfo pInfo : widgets) {
+      info=LauncherAppWidgetProviderInfo.fromProviderInfo(context,pInfo);
+      sBgWidgetProviders.put(info.provider,info);
+    }
+    Collection<CustomAppWidget> customWidgets=Launcher.getCustomAppWidgets().values();
+    for (    CustomAppWidget widget : customWidgets) {
+      info=new LauncherAppWidgetProviderInfo(context,widget);
+      sBgWidgetProviders.put(info.provider,info);
+    }
+    sWidgetProvidersDirty=false;
+    return new ArrayList<LauncherAppWidgetProviderInfo>(sBgWidgetProviders.values());
+  }
+}

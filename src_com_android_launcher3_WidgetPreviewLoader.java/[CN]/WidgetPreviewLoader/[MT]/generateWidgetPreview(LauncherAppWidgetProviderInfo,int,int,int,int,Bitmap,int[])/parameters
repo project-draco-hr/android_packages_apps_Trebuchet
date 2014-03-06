@@ -1,0 +1,7 @@
+LauncherAppWidgetProviderInfo info
+int cellHSpan
+int cellVSpan
+int maxPreviewWidth
+int maxPreviewHeight
+Bitmap preview
+int[] preScaledWidthOut

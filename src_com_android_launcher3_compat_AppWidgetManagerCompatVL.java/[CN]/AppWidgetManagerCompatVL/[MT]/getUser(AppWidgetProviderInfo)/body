@@ -1,3 +1,0 @@
-{
-  return UserHandleCompat.fromUser(info.getProfile());
-}
