@@ -37,6 +37,7 @@
         final HashSet<String> seenIntents=new HashSet<String>(c.getCount());
         final ArrayList<ContentValues> shortcuts=new ArrayList<ContentValues>();
         final ArrayList<ContentValues> folders=new ArrayList<ContentValues>();
+        final SparseArray<ContentValues> hotseat=new SparseArray<ContentValues>();
         while (c.moveToNext()) {
           final int itemType=c.getInt(itemTypeIndex);
           if (itemType != Favorites.ITEM_TYPE_APPLICATION && itemType != Favorites.ITEM_TYPE_SHORTCUT && itemType != Favorites.ITEM_TYPE_FOLDER) {
@@ -47,7 +48,7 @@
           final int screen=c.getInt(screenIndex);
           int container=c.getInt(containerIndex);
           final String intentStr=c.getString(intentIndex);
-          Launcher.addDumpLog(TAG,"migrating \"" + c.getString(titleIndex) + "\": "+ intentStr,true);
+          Launcher.addDumpLog(TAG,"migrating \"" + c.getString(titleIndex) + "\" ("+ cellX+ ","+ cellY+ "@"+ LauncherSettings.Favorites.containerToString(container)+ "/"+ screen+ "): "+ intentStr,true);
           if (itemType != Favorites.ITEM_TYPE_FOLDER) {
             final Intent intent;
             final ComponentName cn;
@@ -91,8 +92,8 @@
           values.put(LauncherSettings.Favorites.APPWIDGET_ID,-1);
           values.put(LauncherSettings.Favorites.URI,c.getString(uriIndex));
           values.put(LauncherSettings.Favorites.DISPLAY_MODE,c.getInt(displayModeIndex));
-          if (container == LauncherSettings.Favorites.CONTAINER_HOTSEAT && (screen >= hotseatWidth || screen == grid.hotseatAllAppsRank)) {
-            container=Favorites.CONTAINER_DESKTOP;
+          if (container == LauncherSettings.Favorites.CONTAINER_HOTSEAT) {
+            hotseat.put(screen,values);
           }
           if (container != LauncherSettings.Favorites.CONTAINER_DESKTOP) {
             values.put(LauncherSettings.Favorites.SCREEN,screen);
@@ -107,6 +108,22 @@
           }
  else {
             folders.add(values);
+          }
+        }
+        final int N=hotseat.size();
+        for (int idx=0; idx < N; idx++) {
+          int hotseatX=hotseat.keyAt(idx);
+          ContentValues values=hotseat.valueAt(idx);
+          if (hotseatX == grid.hotseatAllAppsRank) {
+            while (++hotseatX < hotseatWidth) {
+              if (hotseat.get(hotseatX) == null) {
+                values.put(LauncherSettings.Favorites.SCREEN,hotseatX);
+                break;
+              }
+            }
+          }
+          if (hotseatX >= hotseatWidth) {
+            values.put(LauncherSettings.Favorites.CONTAINER,Favorites.CONTAINER_DESKTOP);
           }
         }
         final ArrayList<ContentValues> allItems=new ArrayList<ContentValues>();
