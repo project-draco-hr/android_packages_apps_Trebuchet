@@ -1,0 +1,10 @@
+{
+switch (container) {
+case CONTAINER_DESKTOP:
+    return "desktop";
+case CONTAINER_HOTSEAT:
+  return "hotseat";
+default :
+return String.valueOf(container);
+}
+}
