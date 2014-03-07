@@ -61,7 +61,7 @@
   }
   if (mWorkspace.getCustomContentCallbacks() != null) {
     if (mWorkspace.isOnOrMovingToCustomContent()) {
-      mWorkspace.getCustomContentCallbacks().onShow();
+      mWorkspace.getCustomContentCallbacks().onShow(true);
     }
   }
   mWorkspace.updateInteractionForState();
