@@ -68,6 +68,27 @@
         long id=addUriShortcut(db,values,a);
         added=id >= 0;
       }
+ else       if (TAG_RESOLVE.equals(name)) {
+        added=false;
+        final int groupDepth=parser.getDepth();
+        while ((type=parser.next()) != XmlPullParser.END_TAG || parser.getDepth() > groupDepth) {
+          if (type != XmlPullParser.START_TAG) {
+            continue;
+          }
+          final String fallback_item_name=parser.getName();
+          final TypedArray ar=mContext.obtainStyledAttributes(attrs,R.styleable.Favorite);
+          if (!added) {
+            if (TAG_FAVORITE.equals(fallback_item_name)) {
+              final long id=addAppShortcut(db,values,ar,packageManager,intent);
+              added=id >= 0;
+            }
+ else {
+              Log.e(TAG,"Fallback groups can contain only favorites " + ar.toString());
+            }
+          }
+          ar.recycle();
+        }
+      }
  else       if (TAG_FOLDER.equals(name)) {
         String title;
         int titleResId=a.getResourceId(R.styleable.Favorite_title,-1);
