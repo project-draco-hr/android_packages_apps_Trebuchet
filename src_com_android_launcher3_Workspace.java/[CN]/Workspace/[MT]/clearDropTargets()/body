@@ -1,12 +1,11 @@
 {
-  ArrayList<ShortcutAndWidgetContainer> childrenLayouts=getAllShortcutAndWidgetContainers();
-  for (  ShortcutAndWidgetContainer layout : childrenLayouts) {
-    int childCount=layout.getChildCount();
-    for (int j=0; j < childCount; j++) {
-      View v=layout.getChildAt(j);
+  mapOverShortcuts(MAP_NO_RECURSE,new ShortcutOperator(){
+    @Override public boolean evaluate(    ItemInfo info,    View v,    View parent){
       if (v instanceof DropTarget) {
         mDragController.removeDropTarget((DropTarget)v);
       }
+      return false;
     }
   }
+);
 }

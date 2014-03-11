@@ -1,0 +1,7 @@
+{
+  if (mState == ShortcutInfo.PACKAGE_STATE_DEFAULT && mState != state) {
+    mDefaultText=getText();
+  }
+  mState=state;
+  applyState();
+}
