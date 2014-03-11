@@ -319,7 +319,13 @@ if (screenId > 0) {
 line+=" | ";
 }
 for (int x=0; x < countX; x++) {
-line+=((occupied.get(screenId)[x][y] != null) ? "#" : ".");
+ItemInfo[][] screen=occupied.get(screenId);
+if (x < screen.length && y < screen[x].length) {
+line+=(screen[x][y] != null) ? "#" : ".";
+}
+ else {
+line+="!";
+}
 }
 }
 Log.d(TAG,"[ " + line + " ]");

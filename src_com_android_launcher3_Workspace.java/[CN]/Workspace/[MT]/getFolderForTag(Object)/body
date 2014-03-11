@@ -1,16 +1,17 @@
 {
-  ArrayList<ShortcutAndWidgetContainer> childrenLayouts=getAllShortcutAndWidgetContainers();
-  for (  ShortcutAndWidgetContainer layout : childrenLayouts) {
-    int count=layout.getChildCount();
-    for (int i=0; i < count; i++) {
-      View child=layout.getChildAt(i);
-      if (child instanceof Folder) {
-        Folder f=(Folder)child;
+  final Folder[] value=new Folder[1];
+  mapOverShortcuts(MAP_NO_RECURSE,new ShortcutOperator(){
+    @Override public boolean evaluate(    ItemInfo info,    View v,    View parent){
+      if (v instanceof Folder) {
+        Folder f=(Folder)v;
         if (f.getInfo() == tag && f.getInfo().opened) {
-          return f;
+          value[0]=f;
+          return true;
         }
       }
+      return false;
     }
   }
-  return null;
+);
+  return value[0];
 }
