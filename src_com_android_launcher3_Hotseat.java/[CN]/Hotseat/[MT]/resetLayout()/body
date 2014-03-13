@@ -10,15 +10,9 @@
     allAppsButton.setContentDescription(context.getString(R.string.all_apps_button_label));
     if (mLauncher != null) {
       allAppsButton.setOnTouchListener(mLauncher.getHapticFeedbackTouchListener());
+      mLauncher.setAllAppsButton(allAppsButton);
+      allAppsButton.setOnClickListener(mLauncher);
     }
-    allAppsButton.setOnClickListener(new View.OnClickListener(){
-      @Override public void onClick(      android.view.View v){
-        if (mLauncher != null) {
-          mLauncher.onClickAllAppsButton(v);
-        }
-      }
-    }
-);
     int x=getCellXFromOrder(mAllAppsButtonRank);
     int y=getCellYFromOrder(mAllAppsButtonRank);
     CellLayout.LayoutParams lp=new CellLayout.LayoutParams(x,y,1,1);
