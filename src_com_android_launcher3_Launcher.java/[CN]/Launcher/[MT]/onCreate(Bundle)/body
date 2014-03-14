@@ -56,7 +56,12 @@
   registerReceiver(mCloseSystemDialogsReceiver,filter);
   updateGlobalIcons();
   unlockScreenOrientation(true);
-  showFirstRunActivity();
+  if (shouldShowIntroScreen()) {
+    showIntroScreen();
+  }
+ else {
+    showFirstRunActivity();
+  }
   if (mLauncherClings.shouldShowFirstRunOrMigrationClings()) {
     if (mModel.canMigrateFromOldLauncherDb(this)) {
       mLauncherClings.showMigrationCling();

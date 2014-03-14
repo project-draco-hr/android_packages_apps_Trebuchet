@@ -4,6 +4,8 @@
     if (firstRunIntent != null) {
       startActivity(firstRunIntent);
       markFirstRunActivityShown();
+      return true;
     }
   }
+  return false;
 }
