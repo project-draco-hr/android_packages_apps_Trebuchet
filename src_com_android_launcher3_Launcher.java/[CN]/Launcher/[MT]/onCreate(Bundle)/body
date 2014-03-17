@@ -6,6 +6,7 @@
   super.onCreate(savedInstanceState);
   LauncherAppState.setApplicationContext(getApplicationContext());
   LauncherAppState app=LauncherAppState.getInstance();
+  LauncherAppState.getLauncherProvider().setLauncherProviderChangeListener(this);
   Point smallestSize=new Point();
   Point largestSize=new Point();
   Point realSize=new Point();
