@@ -4,4 +4,7 @@
     getContext().getContentResolver().notifyChange(uri,null);
   }
   LauncherBackupAgentHelper.dataChanged(getContext());
+  if (mListener != null) {
+    mListener.onLauncherProviderChange();
+  }
 }
