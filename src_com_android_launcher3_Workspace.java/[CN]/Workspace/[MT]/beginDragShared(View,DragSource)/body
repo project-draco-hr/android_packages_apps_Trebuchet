@@ -1,4 +1,5 @@
 {
+  mLauncher.onDragStarted(child);
   final Bitmap b=createDragBitmap(child,new Canvas(),DRAG_BITMAP_PADDING);
   final int bmpWidth=b.getWidth();
   final int bmpHeight=b.getHeight();
