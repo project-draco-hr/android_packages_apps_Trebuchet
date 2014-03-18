@@ -1,24 +1,28 @@
 {
   final String name=getObjectName(o);
   final String packageName=getObjectPackage(o);
-  boolean packageValid=true;
 synchronized (sInvalidPackages) {
-    packageValid=!sInvalidPackages.contains(packageName);
+    boolean packageValid=!sInvalidPackages.contains(packageName);
+    if (!packageValid) {
+      return null;
+    }
   }
-  if (!packageValid) {
-    return null;
-  }
-  if (packageValid) {
 synchronized (mLoadedPreviews) {
-      if (mLoadedPreviews.containsKey(name) && mLoadedPreviews.get(name).get() != null) {
-        return mLoadedPreviews.get(name).get();
+    if (mLoadedPreviews.containsKey(name)) {
+      WeakReference<Bitmap> bitmapReference=mLoadedPreviews.get(name);
+      Bitmap bitmap=bitmapReference.get();
+      if (bitmap != null) {
+        return bitmap;
       }
     }
   }
   Bitmap unusedBitmap=null;
 synchronized (mUnusedBitmaps) {
-    while ((unusedBitmap == null || !unusedBitmap.isMutable() || unusedBitmap.getWidth() != mPreviewBitmapWidth || unusedBitmap.getHeight() != mPreviewBitmapHeight) && mUnusedBitmaps.size() > 0) {
-      unusedBitmap=mUnusedBitmaps.remove(0).get();
+    while (unusedBitmap == null && mUnusedBitmaps.size() > 0) {
+      Bitmap candidate=mUnusedBitmaps.remove(0).get();
+      if (candidate != null && candidate.isMutable() && candidate.getWidth() == mPreviewBitmapWidth && candidate.getHeight() == mPreviewBitmapHeight) {
+        unusedBitmap=candidate;
+      }
     }
     if (unusedBitmap != null) {
       final Canvas c=mCachedAppWidgetPreviewCanvas.get();
@@ -30,10 +34,7 @@ synchronized (mUnusedBitmaps) {
   if (unusedBitmap == null) {
     unusedBitmap=Bitmap.createBitmap(mPreviewBitmapWidth,mPreviewBitmapHeight,Bitmap.Config.ARGB_8888);
   }
-  Bitmap preview=null;
-  if (packageValid) {
-    preview=readFromDb(name,unusedBitmap);
-  }
+  Bitmap preview=readFromDb(name,unusedBitmap);
   if (preview != null) {
 synchronized (mLoadedPreviews) {
       mLoadedPreviews.put(name,new WeakReference<Bitmap>(preview));
