@@ -5,8 +5,7 @@
     if (mPressedIcon != null) {
       mPressedIcon.lockDrawableState();
     }
-    mLauncher.startActivitySafely(v,appInfo.intent,appInfo);
-    mLauncher.getStats().recordLaunch(appInfo.intent);
+    mLauncher.onClickPagedViewIcon(v,appInfo);
   }
  else   if (v instanceof PagedViewWidget) {
     if (mWidgetInstructionToast != null) {
