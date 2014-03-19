@@ -28,9 +28,15 @@
     defaultPreview=Bitmap.createBitmap(previewWidth,previewHeight,Config.ARGB_8888);
     final Canvas c=mCachedAppWidgetPreviewCanvas.get();
     c.setBitmap(defaultPreview);
-    previewDrawable.setBounds(0,0,previewWidth,previewHeight);
-    previewDrawable.setTileModeXY(Shader.TileMode.REPEAT,Shader.TileMode.REPEAT);
-    previewDrawable.draw(c);
+    Paint p=mDefaultAppWidgetPreviewPaint.get();
+    if (p == null) {
+      p=new Paint();
+      p.setShader(new BitmapShader(previewDrawable.getBitmap(),Shader.TileMode.REPEAT,Shader.TileMode.REPEAT));
+      mDefaultAppWidgetPreviewPaint.set(p);
+    }
+    final Rect dest=mCachedAppWidgetPreviewDestRect.get();
+    dest.set(0,0,previewWidth,previewHeight);
+    c.drawRect(dest,p);
     c.setBitmap(null);
     int minOffset=(int)(mAppIconSize * sWidgetPreviewIconPaddingPercentage);
     int smallestSide=Math.min(previewWidth,previewHeight);
