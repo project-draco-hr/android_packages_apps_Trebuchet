@@ -1,0 +1,12 @@
+{
+  SQLiteDatabase db=mOpenHelper.getWritableDatabase();
+  db.beginTransaction();
+  try {
+    ContentProviderResult[] result=super.applyBatch(operations);
+    db.setTransactionSuccessful();
+    return result;
+  }
+  finally {
+    db.endTransaction();
+  }
+}

@@ -1,3 +1,4 @@
 {
   mFolderRingAnimator.animateToNaturalState();
+  mOpenAlarm.cancelAlarm();
 }

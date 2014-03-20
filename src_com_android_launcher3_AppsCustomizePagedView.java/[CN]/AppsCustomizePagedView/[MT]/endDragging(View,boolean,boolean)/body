@@ -1,5 +1,5 @@
 {
-  if (isFlingToDelete || !success || (target != mLauncher.getWorkspace() && !(target instanceof DeleteDropTarget))) {
+  if (isFlingToDelete || !success || (target != mLauncher.getWorkspace() && !(target instanceof DeleteDropTarget) && !(target instanceof Folder))) {
     mLauncher.getWorkspace().removeExtraEmptyScreen(true,new Runnable(){
       @Override public void run(){
         mLauncher.exitSpringLoadedDragMode();
