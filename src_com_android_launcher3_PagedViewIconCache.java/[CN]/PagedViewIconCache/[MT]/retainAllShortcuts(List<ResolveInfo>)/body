@@ -1,7 +1,0 @@
-{
-  HashSet<Key> keysSet=new HashSet<Key>();
-  for (  ResolveInfo info : keys) {
-    keysSet.add(new Key(info));
-  }
-  retainAll(keysSet,Key.Type.ResolveInfoKey);
-}

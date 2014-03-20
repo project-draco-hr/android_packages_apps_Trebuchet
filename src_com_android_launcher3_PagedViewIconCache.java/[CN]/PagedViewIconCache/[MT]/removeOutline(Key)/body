@@ -1,6 +1,0 @@
-{
-  if (mIconOutlineCache.containsKey(key)) {
-    mIconOutlineCache.get(key).recycle();
-    mIconOutlineCache.remove(key);
-  }
-}

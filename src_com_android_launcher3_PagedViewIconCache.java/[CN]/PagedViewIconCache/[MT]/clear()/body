@@ -1,6 +1,0 @@
-{
-  for (  Key key : mIconOutlineCache.keySet()) {
-    mIconOutlineCache.get(key).recycle();
-  }
-  mIconOutlineCache.clear();
-}
