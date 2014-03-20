@@ -11,12 +11,12 @@
   if (mContent.getChildAt(item.cellX,item.cellY) != null || item.cellX < 0 || item.cellY < 0 || item.cellX >= mContent.getCountX() || item.cellY >= mContent.getCountY()) {
     Log.e(TAG,"Folder order not properly persisted during bind");
     if (!findAndSetEmptyCells(item)) {
-      return false;
+      return null;
     }
   }
   CellLayout.LayoutParams lp=new CellLayout.LayoutParams(item.cellX,item.cellY,item.spanX,item.spanY);
   boolean insert=false;
   textView.setOnKeyListener(new FolderKeyEventListener());
   mContent.addViewToCellLayout(textView,insert ? 0 : -1,(int)item.id,lp,true);
-  return true;
+  return textView;
 }

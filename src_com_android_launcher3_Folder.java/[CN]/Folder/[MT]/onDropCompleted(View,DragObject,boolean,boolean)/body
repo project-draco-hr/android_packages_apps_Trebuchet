@@ -13,7 +13,7 @@
   boolean beingCalledAfterUninstall=mDeferredAction != null;
   boolean successfulDrop=success && (!beingCalledAfterUninstall || mUninstallSuccessful);
   if (successfulDrop) {
-    if (mDeleteFolderOnDropCompleted && !mItemAddedBackToSelfViaIcon) {
+    if (mDeleteFolderOnDropCompleted && !mItemAddedBackToSelfViaIcon && target != this) {
       replaceFolderWithFinalItem();
     }
   }
