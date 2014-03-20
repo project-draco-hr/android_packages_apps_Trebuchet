@@ -1,0 +1,6 @@
+{
+  if (restoredIntent != null) {
+    intent=restoredIntent;
+    restoredIntent=null;
+  }
+}

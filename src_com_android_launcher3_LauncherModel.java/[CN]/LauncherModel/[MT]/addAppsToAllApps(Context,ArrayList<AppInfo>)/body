@@ -6,6 +6,14 @@
   if (allAppsApps.isEmpty()) {
     return;
   }
+  final ArrayList<AppInfo> restoredAppsFinal=new ArrayList<AppInfo>();
+  Iterator<AppInfo> iter=allAppsApps.iterator();
+  while (iter.hasNext()) {
+    ItemInfo a=iter.next();
+    if (LauncherModel.appWasRestored(ctx,a.getIntent())) {
+      restoredAppsFinal.add((AppInfo)a);
+    }
+  }
   Runnable r=new Runnable(){
     public void run(){
       runOnMainThread(new Runnable(){
@@ -13,6 +21,9 @@
           Callbacks cb=mCallbacks != null ? mCallbacks.get() : null;
           if (callbacks == cb && cb != null) {
             callbacks.bindAppsAdded(null,null,null,allAppsApps);
+            if (!restoredAppsFinal.isEmpty()) {
+              callbacks.bindAppsUpdated(restoredAppsFinal);
+            }
           }
         }
       }
