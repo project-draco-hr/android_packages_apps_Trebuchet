@@ -1,12 +1,14 @@
 {
   super.onPrepareOptionsMenu(menu);
-  closeFolder();
-  mWorkspace.exitWidgetResizeMode();
-  if (!mWorkspace.isInOverviewMode()) {
-    showOverviewMode(true);
-  }
+  if (!isOnCustomContent()) {
+    closeFolder();
+    mWorkspace.exitWidgetResizeMode();
+    if (!mWorkspace.isInOverviewMode()) {
+      showOverviewMode(true);
+    }
  else {
-    showWorkspace(true);
+      showWorkspace(true);
+    }
   }
   return false;
 }
