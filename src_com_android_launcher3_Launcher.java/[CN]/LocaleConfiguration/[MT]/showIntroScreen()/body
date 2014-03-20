@@ -1,0 +1,7 @@
+{
+  View introScreen=getIntroScreen();
+  changeWallpaperVisiblity(false);
+  if (introScreen != null) {
+    mDragLayer.showOverlayView(introScreen);
+  }
+}
