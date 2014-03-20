@@ -1,0 +1,12 @@
+{
+  Runnable showPostExecuteRunnable=new Runnable(){
+    @Override public void run(){
+      if (postExecute != null) {
+        postExecute.run();
+      }
+      setSystemWallpaperVisiblity(false);
+    }
+  }
+;
+  super.setCropViewTileSource(bitmapSource,touchEnabled,moveToLeft,showPostExecuteRunnable);
+}

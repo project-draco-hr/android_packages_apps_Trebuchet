@@ -1,3 +1,4 @@
 {
+  mLastClickedLiveWallpaperInfo=info;
   mLiveWallpaperInfoOnPickerLaunch=WallpaperManager.getInstance(this).getWallpaperInfo();
 }
