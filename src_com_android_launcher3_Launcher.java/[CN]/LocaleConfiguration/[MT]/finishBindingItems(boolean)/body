@@ -27,10 +27,4 @@
     mWorkspace.getUniqueComponents(true,null);
     mIntentsOnWorkspaceFromUpgradePath=mWorkspace.getUniqueComponents(true,null);
   }
-  mWorkspace.post(new Runnable(){
-    @Override public void run(){
-      onFinishBindingItems();
-    }
-  }
-);
 }
