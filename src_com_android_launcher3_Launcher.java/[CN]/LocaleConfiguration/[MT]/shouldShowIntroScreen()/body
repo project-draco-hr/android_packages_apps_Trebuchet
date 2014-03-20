@@ -1,0 +1,3 @@
+{
+  return hasDismissableIntroScreen() && !mSharedPrefs.getBoolean(INTRO_SCREEN_DISMISSED,false);
+}

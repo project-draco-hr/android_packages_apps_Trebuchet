@@ -1,0 +1,4 @@
+{
+  super.bringChildToFront(child);
+  updateChildIndices();
+}
