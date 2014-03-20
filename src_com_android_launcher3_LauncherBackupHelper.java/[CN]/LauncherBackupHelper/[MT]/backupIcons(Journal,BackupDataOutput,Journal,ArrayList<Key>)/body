@@ -1,12 +1,10 @@
 {
-  final LauncherAppState appState=LauncherAppState.getInstanceNoCreate();
-  if (appState == null) {
+  if (!initializeIconCache()) {
     dataChanged();
     if (DEBUG)     Log.d(TAG,"Launcher is not initialized, delaying icon backup");
     return;
   }
   final ContentResolver cr=mContext.getContentResolver();
-  final IconCache iconCache=appState.getIconCache();
   final int dpi=mContext.getResources().getDisplayMetrics().densityDpi;
   Set<String> savedIds=getSavedIdsByType(Key.ICON,in);
   if (DEBUG)   Log.d(TAG,"icon savedIds.size()=" + savedIds.size());
@@ -41,9 +39,9 @@
           if (DEBUG)           Log.d(TAG,"I can count this high: " + out.rows);
           if ((out.rows - startRows) < MAX_ICONS_PER_PASS) {
             if (VERBOSE)             Log.v(TAG,"saving icon " + backupKey);
-            Bitmap icon=iconCache.getIcon(intent);
+            Bitmap icon=mIconCache.getIcon(intent);
             keys.add(key);
-            if (icon != null && !iconCache.isDefaultIcon(icon)) {
+            if (icon != null && !mIconCache.isDefaultIcon(icon)) {
               byte[] blob=packIcon(dpi,icon);
               writeRowToBackup(key,blob,out,data);
             }
