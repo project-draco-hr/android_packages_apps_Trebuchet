@@ -1,0 +1,5 @@
+{
+  SharedPreferences.Editor editor=mSharedPrefs.edit();
+  editor.putBoolean(INTRO_SCREEN_DISMISSED,true);
+  editor.apply();
+}
