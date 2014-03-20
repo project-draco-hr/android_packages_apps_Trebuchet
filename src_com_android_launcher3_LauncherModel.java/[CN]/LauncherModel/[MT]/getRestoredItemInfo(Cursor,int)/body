@@ -1,0 +1,13 @@
+{
+  final ShortcutInfo info=new ShortcutInfo();
+  info.usingFallbackIcon=true;
+  info.setIcon(getFallbackIcon());
+  if (cursor != null) {
+    info.title=cursor.getString(titleIndex);
+  }
+ else {
+    info.title="";
+  }
+  info.itemType=LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT;
+  return info;
+}

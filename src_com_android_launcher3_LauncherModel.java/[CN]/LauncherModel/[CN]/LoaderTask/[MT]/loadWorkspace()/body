@@ -27,6 +27,7 @@
 synchronized (sBgLock) {
     clearSBgDataStructures();
     final ArrayList<Long> itemsToRemove=new ArrayList<Long>();
+    final ArrayList<Long> restoredRows=new ArrayList<Long>();
     final Uri contentUri=LauncherSettings.Favorites.CONTENT_URI;
     if (DEBUG_LOADERS)     Log.d(TAG,"loading model from " + contentUri);
     final Cursor c=contentResolver.query(contentUri,null,null,null,null);
@@ -48,6 +49,7 @@ synchronized (sBgLock) {
       final int cellYIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.CELLY);
       final int spanXIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.SPANX);
       final int spanYIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.SPANY);
+      final int restoredIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.RESTORED);
       ShortcutInfo info;
       String intentDescription;
       LauncherAppWidgetInfo appWidgetInfo;
@@ -58,6 +60,7 @@ synchronized (sBgLock) {
         AtomicBoolean deleteOnInvalidPlacement=new AtomicBoolean(false);
         try {
           int itemType=c.getInt(itemTypeIndex);
+          boolean restored=0 != c.getInt(restoredIndex);
 switch (itemType) {
 case LauncherSettings.Favorites.ITEM_TYPE_APPLICATION:
 case LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT:
@@ -67,21 +70,35 @@ case LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT:
           intent=Intent.parseUri(intentDescription,0);
           ComponentName cn=intent.getComponent();
           if (cn != null && !isValidPackageComponent(manager,cn)) {
-            if (!mAppsCanBeOnRemoveableStorage) {
-              Launcher.addDumpLog(TAG,"Invalid package removed: " + cn,true);
-              itemsToRemove.add(id);
+            if (restored) {
+              Launcher.addDumpLog(TAG,"package not yet restored: " + cn,true);
             }
  else {
-              Launcher.addDumpLog(TAG,"Invalid package found: " + cn,true);
+              if (!mAppsCanBeOnRemoveableStorage) {
+                Launcher.addDumpLog(TAG,"Invalid package removed: " + cn,true);
+                itemsToRemove.add(id);
+              }
+ else {
+                Launcher.addDumpLog(TAG,"Invalid package found: " + cn,true);
+              }
+              continue;
             }
-            continue;
+          }
+ else           if (restored) {
+            restoredRows.add(id);
+            restored=false;
           }
         }
  catch (        URISyntaxException e) {
           Launcher.addDumpLog(TAG,"Invalid uri: " + intentDescription,true);
           continue;
         }
-      if (itemType == LauncherSettings.Favorites.ITEM_TYPE_APPLICATION) {
+      if (restored) {
+        Launcher.addDumpLog(TAG,"constructing info for partially restored package",true);
+        info=getRestoredItemInfo(c,titleIndex);
+        intent=getRestoredItemIntent(c,context,intent);
+      }
+ else       if (itemType == LauncherSettings.Favorites.ITEM_TYPE_APPLICATION) {
         info=getShortcutInfo(manager,intent,context,c,iconIndex,titleIndex,mLabelCache);
       }
  else {
@@ -148,6 +165,9 @@ case LauncherSettings.Favorites.CONTAINER_DESKTOP:
 case LauncherSettings.Favorites.CONTAINER_HOTSEAT:
 sBgWorkspaceItems.add(folderInfo);
 break;
+}
+if (restored) {
+restoredRows.add(id);
 }
 sBgItemsIdMap.put(folderInfo.id,folderInfo);
 sBgFolders.put(folderInfo.id,folderInfo);
@@ -227,6 +247,22 @@ client.delete(LauncherSettings.Favorites.getContentUri(id,false),null,null);
  catch (RemoteException e) {
 Log.w(TAG,"Could not remove id = " + id);
 }
+}
+}
+if (restoredRows.size() > 0) {
+ContentProviderClient updater=contentResolver.acquireContentProviderClient(LauncherSettings.Favorites.CONTENT_URI);
+try {
+StringBuilder selectionBuilder=new StringBuilder();
+selectionBuilder.append(LauncherSettings.Favorites._ID);
+selectionBuilder.append(" IN (");
+selectionBuilder.append(TextUtils.join(", ",restoredRows));
+selectionBuilder.append(")");
+ContentValues values=new ContentValues();
+values.put(LauncherSettings.Favorites.RESTORED,0);
+updater.update(LauncherSettings.Favorites.CONTENT_URI,values,selectionBuilder.toString(),null);
+}
+ catch (RemoteException e) {
+Log.w(TAG,"Could not update restored rows");
 }
 }
 if (loadedOldDb) {

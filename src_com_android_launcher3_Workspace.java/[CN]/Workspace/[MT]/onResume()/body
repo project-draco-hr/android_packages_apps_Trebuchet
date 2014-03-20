@@ -10,4 +10,6 @@
   if (LauncherAppState.getInstance().hasWallpaperChangedSinceLastCheck()) {
     setWallpaperDimension();
   }
+  mWallpaperIsLiveWallpaper=mWallpaperManager.getWallpaperInfo() != null;
+  mLastSetWallpaperOffsetSteps=0f;
 }

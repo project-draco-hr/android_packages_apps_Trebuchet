@@ -34,5 +34,6 @@
     }
     values.put(Favorites.APPWIDGET_ID,favorite.appWidgetId);
   }
+  values.put(LauncherSettings.Favorites.RESTORED,1);
   return values;
 }
