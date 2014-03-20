@@ -8,11 +8,13 @@
   if (waitUntilResume(r)) {
     return;
   }
-  bindAddScreens(newScreens);
-  if (!addNotAnimated.isEmpty()) {
+  if (newScreens != null) {
+    bindAddScreens(newScreens);
+  }
+  if (addNotAnimated != null && !addNotAnimated.isEmpty()) {
     bindItems(addNotAnimated,0,addNotAnimated.size(),false);
   }
-  if (!addAnimated.isEmpty()) {
+  if (addAnimated != null && !addAnimated.isEmpty()) {
     bindItems(addAnimated,0,addAnimated.size(),true);
   }
   mWorkspace.removeExtraEmptyScreen(false,null);
