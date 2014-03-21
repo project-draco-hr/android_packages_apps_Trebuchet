@@ -2,7 +2,7 @@
   Context context=app.getContext();
   ContentResolver contentResolver=context.getContentResolver();
   mAppsCanBeOnRemoveableStorage=Environment.isExternalStorageRemovable();
-  ContentProviderClient client=contentResolver.acquireContentProviderClient(LauncherSettings.Favorites.OLD_CONTENT_URI);
+  ContentProviderClient client=contentResolver.acquireContentProviderClient(Uri.parse(context.getString(R.string.old_launcher_provider_uri)));
   mOldContentProviderExists=(client != null);
   if (client != null) {
     client.release();
