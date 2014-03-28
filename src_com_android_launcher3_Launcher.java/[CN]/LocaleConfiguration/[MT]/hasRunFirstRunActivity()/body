@@ -1,0 +1,3 @@
+{
+  return mSharedPrefs.getBoolean(FIRST_RUN_ACTIVITY_DISPLAYED,false);
+}
