@@ -1,5 +1,9 @@
 {
   Launcher.addDumpLog(TAG,"11683562 - commitExtraEmptyScreen()",true);
+  if (mLauncher.isWorkspaceLoading()) {
+    Launcher.addDumpLog(TAG,"    - workspace loading, skip",true);
+    return -1;
+  }
   int index=getPageIndexForScreenId(EXTRA_EMPTY_SCREEN_ID);
   CellLayout cl=mWorkspaceScreens.get(EXTRA_EMPTY_SCREEN_ID);
   mWorkspaceScreens.remove(EXTRA_EMPTY_SCREEN_ID);
