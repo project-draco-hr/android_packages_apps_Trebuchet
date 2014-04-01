@@ -1,5 +1,9 @@
 {
   Launcher.addDumpLog(TAG,"11683562 - removeExtraEmptyScreen()",true);
+  if (mLauncher.isWorkspaceLoading()) {
+    Launcher.addDumpLog(TAG,"    - workspace loading, skip",true);
+    return;
+  }
   if (delay > 0) {
     postDelayed(new Runnable(){
       @Override public void run(){
