@@ -1,4 +1,7 @@
 {
+  if (mChildCountOnLastUpdate != childCount) {
+    updateChildIndices();
+  }
   if (mTopViewIndex == -1) {
     return i;
   }
