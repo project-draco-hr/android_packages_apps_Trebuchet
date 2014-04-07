@@ -3,13 +3,7 @@
     mDropAnim.cancel();
   }
   if (mDropView != null) {
-    final DragView dropView=mDropView;
-    post(new Runnable(){
-      @Override public void run(){
-        mDragController.onDeferredEndDrag(dropView);
-      }
-    }
-);
+    mDragController.onDeferredEndDrag(mDropView);
   }
   mDropView=null;
   invalidate();
