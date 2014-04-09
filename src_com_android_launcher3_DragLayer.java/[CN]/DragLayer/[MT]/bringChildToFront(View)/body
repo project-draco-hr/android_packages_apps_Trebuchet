@@ -1,4 +1,7 @@
 {
   super.bringChildToFront(child);
+  if (child != mOverlayView && mOverlayView != null) {
+    mOverlayView.bringToFront();
+  }
   updateChildIndices();
 }
