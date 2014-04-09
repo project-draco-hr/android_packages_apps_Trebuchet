@@ -1,5 +1,6 @@
 {
   LayoutParams lp=new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT);
-  mOverlayView=introScreen;
-  addView(introScreen,lp);
+  mOverlayView=overlayView;
+  addView(overlayView,lp);
+  mOverlayView.bringToFront();
 }
