@@ -110,7 +110,6 @@
     version=17;
   }
   if (version < 18) {
-    removeOrphanedItems(db);
     version=18;
   }
   if (version != DATABASE_VERSION) {
