@@ -1,5 +1,0 @@
-SQLiteDatabase db
-ContentValues values
-TypedArray a
-PackageManager packageManager
-Intent intent
