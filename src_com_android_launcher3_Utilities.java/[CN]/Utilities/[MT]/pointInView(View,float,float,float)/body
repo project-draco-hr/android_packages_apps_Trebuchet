@@ -1,0 +1,3 @@
+{
+  return localX >= -slop && localY >= -slop && localX < (v.getWidth() + slop) && localY < (v.getHeight() + slop);
+}

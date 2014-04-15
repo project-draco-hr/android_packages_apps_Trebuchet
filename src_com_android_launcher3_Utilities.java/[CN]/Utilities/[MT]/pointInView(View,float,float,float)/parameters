@@ -1,0 +1,4 @@
+View v
+float localX
+float localY
+float slop
