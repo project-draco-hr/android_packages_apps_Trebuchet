@@ -1,5 +1,5 @@
 {
   dragView.setTag(dragInfo);
-  mWorkspace.onDragStartedWithItem(dragView);
-  mWorkspace.beginDragShared(dragView,source);
+  mWorkspace.onExternalDragStartedWithItem(dragView);
+  mWorkspace.beginExternalDragShared(dragView,source);
 }
