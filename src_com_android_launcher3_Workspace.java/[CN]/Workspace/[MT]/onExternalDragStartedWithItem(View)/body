@@ -1,0 +1,19 @@
+{
+  final Canvas canvas=new Canvas();
+  LauncherAppState app=LauncherAppState.getInstance();
+  DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
+  int iconSize=grid.iconSizePx;
+  int bmpWidth=v.getMeasuredWidth();
+  int bmpHeight=v.getMeasuredHeight();
+  if (v instanceof TextView) {
+    TextView tv=(TextView)v;
+    Drawable d=tv.getCompoundDrawables()[1];
+    bmpWidth=d.getIntrinsicWidth();
+    bmpHeight=d.getIntrinsicHeight();
+  }
+  Bitmap b=Bitmap.createBitmap(bmpWidth,bmpHeight,Bitmap.Config.ARGB_8888);
+  Canvas c=new Canvas(b);
+  drawDragView(v,c,0,true);
+  c.setBitmap(null);
+  mDragOutline=createDragOutline(b,canvas,DRAG_BITMAP_PADDING,iconSize,iconSize,true);
+}
