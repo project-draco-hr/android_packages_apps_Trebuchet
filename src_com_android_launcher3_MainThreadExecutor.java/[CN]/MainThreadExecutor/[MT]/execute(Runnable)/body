@@ -1,0 +1,8 @@
+{
+  if (Looper.getMainLooper() == Looper.myLooper()) {
+    runnable.run();
+  }
+ else {
+    mHandler.post(runnable);
+  }
+}

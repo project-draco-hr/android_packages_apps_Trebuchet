@@ -1,0 +1,17 @@
+{
+  try {
+    return mMainThreadExecutor.submit(new Callable<Drawable>(){
+      @Override public Drawable call() throws Exception {
+        return drawable.mutate();
+      }
+    }
+).get();
+  }
+ catch (  InterruptedException e) {
+    Thread.currentThread().interrupt();
+    throw new RuntimeException(e);
+  }
+catch (  ExecutionException e) {
+    throw new RuntimeException(e);
+  }
+}
