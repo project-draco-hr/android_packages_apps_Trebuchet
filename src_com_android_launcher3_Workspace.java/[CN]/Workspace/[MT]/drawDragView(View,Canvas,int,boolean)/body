@@ -5,7 +5,8 @@
   destCanvas.save();
   if (v instanceof TextView && pruneToDrawable) {
     Drawable d=((TextView)v).getCompoundDrawables()[1];
-    clipRect.set(0,0,d.getIntrinsicWidth() + padding,d.getIntrinsicHeight() + padding);
+    Rect bounds=getDrawableBounds(d);
+    clipRect.set(0,0,bounds.width() + padding,bounds.height() + padding);
     destCanvas.translate(padding / 2,padding / 2);
     d.draw(destCanvas);
   }
