@@ -2,7 +2,8 @@
   Bitmap b;
   if (v instanceof TextView) {
     Drawable d=((TextView)v).getCompoundDrawables()[1];
-    b=Bitmap.createBitmap(d.getIntrinsicWidth() + padding,d.getIntrinsicHeight() + padding,Bitmap.Config.ARGB_8888);
+    Rect bounds=getDrawableBounds(d);
+    b=Bitmap.createBitmap(bounds.width() + padding,bounds.height() + padding,Bitmap.Config.ARGB_8888);
   }
  else {
     b=Bitmap.createBitmap(v.getWidth() + padding,v.getHeight() + padding,Bitmap.Config.ARGB_8888);
