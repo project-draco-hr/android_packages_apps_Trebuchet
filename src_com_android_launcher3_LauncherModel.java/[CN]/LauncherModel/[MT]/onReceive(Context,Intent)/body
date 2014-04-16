@@ -1,5 +1,5 @@
 {
-  if (DEBUG_LOADERS)   Log.d(TAG,"onReceive intent=" + intent);
+  if (DEBUG_RECEIVER)   Log.d(TAG,"onReceive intent=" + intent);
   final String action=intent.getAction();
   if (Intent.ACTION_PACKAGE_CHANGED.equals(action) || Intent.ACTION_PACKAGE_REMOVED.equals(action) || Intent.ACTION_PACKAGE_ADDED.equals(action)) {
     final String packageName=intent.getData().getSchemeSpecificPart();
