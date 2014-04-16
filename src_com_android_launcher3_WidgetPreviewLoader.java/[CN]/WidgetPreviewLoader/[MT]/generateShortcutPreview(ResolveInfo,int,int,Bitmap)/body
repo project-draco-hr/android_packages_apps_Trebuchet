@@ -10,7 +10,7 @@
     c.drawColor(0,PorterDuff.Mode.CLEAR);
     c.setBitmap(null);
   }
-  Drawable icon=mIconCache.getFullResIcon(info);
+  Drawable icon=mutateOnMainThread(mIconCache.getFullResIcon(info));
   int paddingTop=mContext.getResources().getDimensionPixelOffset(R.dimen.shortcut_preview_padding_top);
   int paddingLeft=mContext.getResources().getDimensionPixelOffset(R.dimen.shortcut_preview_padding_left);
   int paddingRight=mContext.getResources().getDimensionPixelOffset(R.dimen.shortcut_preview_padding_right);
