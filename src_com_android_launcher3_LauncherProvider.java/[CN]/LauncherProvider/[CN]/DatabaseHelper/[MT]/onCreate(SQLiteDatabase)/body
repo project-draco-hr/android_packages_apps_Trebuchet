@@ -23,7 +23,7 @@
 ;
     Uri uri=Uri.parse("content://" + Settings.AUTHORITY + "/old_favorites?notify=true");
     if (!convertDatabase(db,uri,permuteScreensCb,true)) {
-      uri=LauncherSettings.Favorites.OLD_CONTENT_URI;
+      uri=Uri.parse(mContext.getString(R.string.old_launcher_provider_uri));
       if (!convertDatabase(db,uri,permuteScreensCb,false)) {
         setFlagEmptyDbCreated();
         return;
