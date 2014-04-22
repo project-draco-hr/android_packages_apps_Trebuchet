@@ -1,0 +1,60 @@
+{
+  final String title;
+  final int titleResId=getAttributeResourceValue(parser,ATTR_TITLE,0);
+  if (titleResId != 0) {
+    title=res.getString(titleResId);
+  }
+ else {
+    title=mContext.getResources().getString(R.string.folder_name);
+  }
+  values.put(LauncherSettings.Favorites.TITLE,title);
+  long folderId=addFolder(db,values);
+  boolean added=folderId >= 0;
+  ArrayList<Long> folderItems=new ArrayList<Long>();
+  int type;
+  int folderDepth=parser.getDepth();
+  while ((type=parser.next()) != XmlPullParser.END_TAG || parser.getDepth() > folderDepth) {
+    if (type != XmlPullParser.START_TAG) {
+      continue;
+    }
+    final String tag=parser.getName();
+    final ContentValues childValues=new ContentValues();
+    childValues.put(LauncherSettings.Favorites.CONTAINER,folderId);
+    if (LOGD) {
+      final String pkg=getAttributeValue(parser,ATTR_PACKAGE_NAME);
+      final String uri=getAttributeValue(parser,ATTR_URI);
+      Log.v(TAG,String.format(("%" + (2 * (folderDepth + 1)) + "s<%s \"%s\">"),"",tag,uri != null ? uri : pkg));
+    }
+    if (TAG_FAVORITE.equals(tag) && folderId >= 0) {
+      final long id=addAppShortcut(db,childValues,parser);
+      if (id >= 0) {
+        folderItems.add(id);
+      }
+    }
+ else     if (TAG_SHORTCUT.equals(tag) && folderId >= 0) {
+      final long id=addUriShortcut(db,childValues,res,parser);
+      if (id >= 0) {
+        folderItems.add(id);
+      }
+    }
+ else {
+      throw new RuntimeException("Folders can contain only shortcuts");
+    }
+  }
+  if (folderItems.size() < 2 && folderId >= 0) {
+    deleteId(db,folderId);
+    if (folderItems.size() == 1) {
+      final ContentValues childValues=new ContentValues();
+      copyInteger(values,childValues,LauncherSettings.Favorites.CONTAINER);
+      copyInteger(values,childValues,LauncherSettings.Favorites.SCREEN);
+      copyInteger(values,childValues,LauncherSettings.Favorites.CELLX);
+      copyInteger(values,childValues,LauncherSettings.Favorites.CELLY);
+      final long id=folderItems.get(0);
+      db.update(TABLE_FAVORITES,childValues,LauncherSettings.Favorites._ID + "=" + id,null);
+    }
+ else {
+      added=false;
+    }
+  }
+  return added;
+}

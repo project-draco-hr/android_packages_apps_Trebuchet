@@ -1,0 +1,20 @@
+{
+  if (!sSearched) {
+    final Intent intent=new Intent(ACTION_PARTNER_CUSTOMIZATION);
+    for (    ResolveInfo info : pm.queryBroadcastReceivers(intent,0)) {
+      if (info.activityInfo != null && (info.activityInfo.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0) {
+        final String packageName=info.activityInfo.packageName;
+        try {
+          final Resources res=pm.getResourcesForApplication(packageName);
+          sPartner=new Partner(packageName,res);
+          break;
+        }
+ catch (        NameNotFoundException e) {
+          Log.w(TAG,"Failed to find resources for " + packageName);
+        }
+      }
+    }
+    sSearched=true;
+  }
+  return sPartner;
+}
