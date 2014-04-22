@@ -1,0 +1,7 @@
+{
+  int value=parser.getAttributeResourceValue("http://schemas.android.com/apk/res-auto/com.android.launcher3",attribute,defaultValue);
+  if (value == defaultValue) {
+    value=parser.getAttributeResourceValue(null,attribute,defaultValue);
+  }
+  return value;
+}
