@@ -14,7 +14,9 @@
     }
 ;
     if (postOnMainThread) {
-      deferredBindRunnables.add(r);
+synchronized (deferredBindRunnables) {
+        deferredBindRunnables.add(r);
+      }
     }
  else {
       runOnMainThread(r,MAIN_THREAD_BINDING_RUNNABLE);
@@ -31,7 +33,9 @@
     }
 ;
     if (postOnMainThread) {
-      deferredBindRunnables.add(r);
+synchronized (deferredBindRunnables) {
+        deferredBindRunnables.add(r);
+      }
     }
  else {
       runOnMainThread(r,MAIN_THREAD_BINDING_RUNNABLE);

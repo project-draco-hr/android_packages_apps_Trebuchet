@@ -2,7 +2,9 @@
   if (sWorkerThread.getThreadId() == Process.myTid()) {
     throw new RuntimeException("Expected unbindLauncherItemInfos() to be called from the " + "main thread");
   }
-  mDeferredBindRunnables.clear();
+synchronized (mDeferredBindRunnables) {
+    mDeferredBindRunnables.clear();
+  }
   mHandler.cancelAllRunnablesOfType(MAIN_THREAD_BINDING_RUNNABLE);
   unbindWorkspaceItemsOnMainThread();
 }
