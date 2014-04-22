@@ -1,3 +1,3 @@
 {
-  mOpenHelper.migrateLauncher2Shortcuts(mOpenHelper.getWritableDatabase(),LauncherSettings.Favorites.OLD_CONTENT_URI);
+  mOpenHelper.migrateLauncher2Shortcuts(mOpenHelper.getWritableDatabase(),Uri.parse(getContext().getString(R.string.old_launcher_provider_uri)));
 }
