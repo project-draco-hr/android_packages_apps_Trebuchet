@@ -17,6 +17,11 @@ case MotionEvent.ACTION_UP:
 case MotionEvent.ACTION_CANCEL:
   mLongPressHelper.cancelLongPress();
 break;
+case MotionEvent.ACTION_MOVE:
+if (!Utilities.pointInView(this,ev.getX(),ev.getY(),mSlop)) {
+mLongPressHelper.cancelLongPress();
+}
+break;
 }
 return false;
 }

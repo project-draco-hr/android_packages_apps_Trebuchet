@@ -1,5 +1,4 @@
 {
   super.onAttachedToWindow();
-  if (mBackground != null)   mBackground.setCallback(this);
   mSlop=ViewConfiguration.get(getContext()).getScaledTouchSlop();
 }

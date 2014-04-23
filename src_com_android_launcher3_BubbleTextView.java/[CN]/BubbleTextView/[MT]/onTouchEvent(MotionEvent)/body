@@ -21,6 +21,11 @@ mPressedOrFocusedBackground=null;
 }
 mLongPressHelper.cancelLongPress();
 break;
+case MotionEvent.ACTION_MOVE:
+if (!Utilities.pointInView(this,event.getX(),event.getY(),mSlop)) {
+mLongPressHelper.cancelLongPress();
+}
+break;
 }
 return result;
 }
