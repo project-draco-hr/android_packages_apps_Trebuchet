@@ -61,7 +61,9 @@ synchronized (sBgLock) {
 ;
     runOnMainThread(r,MAIN_THREAD_BINDING_RUNNABLE);
   }
-  mDeferredBindRunnables.clear();
+synchronized (mDeferredBindRunnables) {
+    mDeferredBindRunnables.clear();
+  }
   bindWorkspaceItems(oldCallbacks,otherWorkspaceItems,otherAppWidgets,otherFolders,(isLoadingSynchronously ? mDeferredBindRunnables : null));
   r=new Runnable(){
     public void run(){
@@ -77,7 +79,9 @@ synchronized (sBgLock) {
   }
 ;
   if (isLoadingSynchronously) {
-    mDeferredBindRunnables.add(r);
+synchronized (mDeferredBindRunnables) {
+      mDeferredBindRunnables.add(r);
+    }
   }
  else {
     runOnMainThread(r,MAIN_THREAD_BINDING_RUNNABLE);
