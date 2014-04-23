@@ -1,8 +1,12 @@
 {
   if (!mDeferredBindRunnables.isEmpty()) {
-    for (    final Runnable r : mDeferredBindRunnables) {
+    Runnable[] deferredBindRunnables=null;
+synchronized (mDeferredBindRunnables) {
+      deferredBindRunnables=mDeferredBindRunnables.toArray(new Runnable[mDeferredBindRunnables.size()]);
+      mDeferredBindRunnables.clear();
+    }
+    for (    final Runnable r : deferredBindRunnables) {
       mHandler.post(r,MAIN_THREAD_BINDING_RUNNABLE);
     }
-    mDeferredBindRunnables.clear();
   }
 }
