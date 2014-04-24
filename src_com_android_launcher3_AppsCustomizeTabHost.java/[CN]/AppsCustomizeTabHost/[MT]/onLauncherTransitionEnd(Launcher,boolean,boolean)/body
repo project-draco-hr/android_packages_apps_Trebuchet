@@ -7,6 +7,10 @@
   if (!toWorkspace) {
     mAppsCustomizePane.showAllAppsCling();
     mAppsCustomizePane.loadAssociatedPages(mAppsCustomizePane.getCurrentPage());
+    AccessibilityManager am=(AccessibilityManager)getContext().getSystemService(Context.ACCESSIBILITY_SERVICE);
+    if (am.isEnabled()) {
+      announceForAccessibility(mAppsCustomizePane.getCurrentPageDescription());
+    }
     setVisibilityOfSiblingsWithLowerZOrder(INVISIBLE);
   }
 }
