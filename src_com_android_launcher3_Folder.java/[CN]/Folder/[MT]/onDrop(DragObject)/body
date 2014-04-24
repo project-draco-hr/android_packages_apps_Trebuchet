@@ -5,7 +5,6 @@
       @Override public void run(){
         mLauncher.getWorkspace().removeExtraEmptyScreen(false,new Runnable(){
           @Override public void run(){
-            mLauncher.closeFolder();
             mLauncher.exitSpringLoadedDragModeDelayed(true,Launcher.EXIT_SPRINGLOADED_MODE_SHORT_TIMEOUT_FOLDER_CLOSE,null);
           }
         }
