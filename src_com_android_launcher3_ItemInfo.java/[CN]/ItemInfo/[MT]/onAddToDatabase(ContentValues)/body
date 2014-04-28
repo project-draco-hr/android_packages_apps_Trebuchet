@@ -6,4 +6,7 @@
   values.put(LauncherSettings.Favorites.CELLY,cellY);
   values.put(LauncherSettings.Favorites.SPANX,spanX);
   values.put(LauncherSettings.Favorites.SPANY,spanY);
+  if (screenId == Workspace.EXTRA_EMPTY_SCREEN_ID) {
+    throw new RuntimeException("Screen id should not be EXTRA_EMPTY_SCREEN_ID");
+  }
 }
