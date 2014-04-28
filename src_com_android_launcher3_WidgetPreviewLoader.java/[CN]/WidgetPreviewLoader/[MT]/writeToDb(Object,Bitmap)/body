@@ -13,4 +13,8 @@
  catch (  SQLiteDiskIOException e) {
     recreateDb();
   }
+catch (  SQLiteCantOpenDatabaseException e) {
+    dumpOpenFiles();
+    throw e;
+  }
 }

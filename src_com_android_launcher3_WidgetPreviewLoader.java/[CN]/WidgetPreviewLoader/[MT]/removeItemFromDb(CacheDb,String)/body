@@ -7,6 +7,10 @@
       }
  catch (      SQLiteDiskIOException e) {
       }
+catch (      SQLiteCantOpenDatabaseException e) {
+        dumpOpenFiles();
+        throw e;
+      }
       return null;
     }
   }

@@ -11,6 +11,10 @@
     recreateDb();
     return null;
   }
+catch (  SQLiteCantOpenDatabaseException e) {
+    dumpOpenFiles();
+    throw e;
+  }
   if (result.getCount() > 0) {
     result.moveToFirst();
     byte[] blob=result.getBlob(0);
