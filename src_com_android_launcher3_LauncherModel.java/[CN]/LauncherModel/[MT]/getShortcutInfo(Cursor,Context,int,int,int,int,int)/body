@@ -1,6 +1,7 @@
 {
   Bitmap icon=null;
   final ShortcutInfo info=new ShortcutInfo();
+  info.user=UserHandleCompat.myUserHandle();
   info.itemType=LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT;
   info.title=c.getString(titleIndex);
   int iconType=c.getInt(iconTypeIndex);
@@ -23,14 +24,14 @@ if (icon == null) {
 icon=getIconFromCursor(c,iconIndex,context);
 }
 if (icon == null) {
-icon=getFallbackIcon();
+icon=mIconCache.getDefaultIcon(info.user);
 info.usingFallbackIcon=true;
 }
 break;
 case LauncherSettings.Favorites.ICON_TYPE_BITMAP:
 icon=getIconFromCursor(c,iconIndex,context);
 if (icon == null) {
-icon=getFallbackIcon();
+icon=mIconCache.getDefaultIcon(info.user);
 info.customIcon=false;
 info.usingFallbackIcon=true;
 }
@@ -39,7 +40,7 @@ info.customIcon=true;
 }
 break;
 default :
-icon=getFallbackIcon();
+icon=mIconCache.getDefaultIcon(info.user);
 info.usingFallbackIcon=true;
 info.customIcon=false;
 break;

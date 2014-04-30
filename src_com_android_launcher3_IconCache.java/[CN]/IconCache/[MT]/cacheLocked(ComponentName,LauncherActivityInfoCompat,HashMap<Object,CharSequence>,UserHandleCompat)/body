@@ -1,0 +1,34 @@
+{
+  CacheKey cacheKey=new CacheKey(componentName,user);
+  CacheEntry entry=mCache.get(cacheKey);
+  if (entry == null) {
+    entry=new CacheEntry();
+    mCache.put(cacheKey,entry);
+    if (info != null) {
+      ComponentName labelKey=info.getComponentName();
+      if (labelCache != null && labelCache.containsKey(labelKey)) {
+        entry.title=labelCache.get(labelKey).toString();
+      }
+ else {
+        entry.title=info.getLabel().toString();
+        if (labelCache != null) {
+          labelCache.put(labelKey,entry.title);
+        }
+      }
+      entry.icon=Utilities.createIconBitmap(info.getBadgedIcon(mIconDpi),mContext);
+    }
+ else {
+      entry.title="";
+      Bitmap preloaded=getPreloadedIcon(componentName,user);
+      if (preloaded != null) {
+        if (DEBUG)         Log.d(TAG,"using preloaded icon for " + componentName.toShortString());
+        entry.icon=preloaded;
+      }
+ else {
+        if (DEBUG)         Log.d(TAG,"using default icon for " + componentName.toShortString());
+        entry.icon=getDefaultIcon(user);
+      }
+    }
+  }
+  return entry;
+}

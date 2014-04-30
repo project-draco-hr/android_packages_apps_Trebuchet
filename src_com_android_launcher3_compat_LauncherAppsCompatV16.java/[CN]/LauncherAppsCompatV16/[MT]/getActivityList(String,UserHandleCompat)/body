@@ -1,0 +1,11 @@
+{
+  final Intent mainIntent=new Intent(Intent.ACTION_MAIN,null);
+  mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
+  mainIntent.setPackage(packageName);
+  List<ResolveInfo> infos=mPm.queryIntentActivities(mainIntent,0);
+  List<LauncherActivityInfoCompat> list=new ArrayList<LauncherActivityInfoCompat>(infos.size());
+  for (  ResolveInfo info : infos) {
+    list.add(new LauncherActivityInfoCompatV16(mContext,info));
+  }
+  return list;
+}

@@ -2,7 +2,7 @@
   if (mAppFilter != null && !mAppFilter.shouldShowApp(info.componentName)) {
     return;
   }
-  if (findActivity(data,info.componentName)) {
+  if (findActivity(data,info.componentName,info.user)) {
     return;
   }
   data.add(info);

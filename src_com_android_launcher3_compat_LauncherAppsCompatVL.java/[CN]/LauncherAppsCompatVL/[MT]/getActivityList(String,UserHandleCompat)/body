@@ -1,0 +1,11 @@
+{
+  List<Object> list=(List<Object>)ReflectUtils.invokeMethod(mLauncherApps,mGetActivityList,packageName,user.getUser());
+  if (list.size() == 0) {
+    return Collections.EMPTY_LIST;
+  }
+  ArrayList<LauncherActivityInfoCompat> compatList=new ArrayList<LauncherActivityInfoCompat>(list.size());
+  for (  Object info : list) {
+    compatList.add(new LauncherActivityInfoCompatVL(info));
+  }
+  return compatList;
+}

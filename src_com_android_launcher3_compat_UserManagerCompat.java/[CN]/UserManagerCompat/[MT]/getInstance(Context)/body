@@ -1,0 +1,11 @@
+{
+  if ("L".equals(Build.VERSION.CODENAME)) {
+    return new UserManagerCompatVL(context);
+  }
+ else   if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+    return new UserManagerCompatV17(context);
+  }
+ else {
+    return new UserManagerCompatV16();
+  }
+}

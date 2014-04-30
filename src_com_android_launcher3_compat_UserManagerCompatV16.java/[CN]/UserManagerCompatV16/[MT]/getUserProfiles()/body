@@ -1,0 +1,5 @@
+{
+  List<UserHandleCompat> profiles=new ArrayList<UserHandleCompat>(1);
+  profiles.add(UserHandleCompat.myUserHandle());
+  return profiles;
+}

@@ -6,14 +6,14 @@ switch (mOp) {
 case OP_ADD:
     for (int i=0; i < N; i++) {
       if (DEBUG_LOADERS)       Log.d(TAG,"mAllAppsList.addPackage " + packages[i]);
-      mIconCache.remove(packages[i]);
-      mBgAllAppsList.addPackage(context,packages[i]);
+      mIconCache.remove(packages[i],mUser);
+      mBgAllAppsList.addPackage(context,packages[i],mUser);
     }
   break;
 case OP_UPDATE:
 for (int i=0; i < N; i++) {
   if (DEBUG_LOADERS)   Log.d(TAG,"mAllAppsList.updatePackage " + packages[i]);
-  mBgAllAppsList.updatePackage(context,packages[i]);
+  mBgAllAppsList.updatePackage(context,packages[i],mUser);
   WidgetPreviewLoader.removePackageFromDb(mApp.getWidgetPreviewCacheDb(),packages[i]);
 }
 break;
@@ -21,7 +21,7 @@ case OP_REMOVE:
 case OP_UNAVAILABLE:
 for (int i=0; i < N; i++) {
 if (DEBUG_LOADERS) Log.d(TAG,"mAllAppsList.removePackage " + packages[i]);
-mBgAllAppsList.removePackage(packages[i]);
+mBgAllAppsList.removePackage(packages[i],mUser);
 WidgetPreviewLoader.removePackageFromDb(mApp.getWidgetPreviewCacheDb(),packages[i]);
 }
 break;
@@ -58,7 +58,7 @@ addAppsToAllApps(context,added);
 if (modified != null) {
 final ArrayList<AppInfo> modifiedFinal=modified;
 for (AppInfo a : modifiedFinal) {
-ArrayList<ItemInfo> infos=getItemInfoForComponentName(a.componentName);
+ArrayList<ItemInfo> infos=getItemInfoForComponentName(a.componentName,mUser);
 for (ItemInfo i : infos) {
 if (isShortcutInfoUpdateable(i)) {
 ShortcutInfo info=(ShortcutInfo)i;
@@ -84,19 +84,19 @@ removedPackageNames.addAll(Arrays.asList(packages));
  else if (mOp == OP_UPDATE) {
 final PackageManager pm=context.getPackageManager();
 for (int i=0; i < N; i++) {
-if (isPackageDisabled(pm,packages[i])) {
+if (isPackageDisabled(context,packages[i],mUser)) {
 removedPackageNames.add(packages[i]);
 }
 }
 }
 for (String pn : removedPackageNames) {
-ArrayList<ItemInfo> infos=getItemInfoForPackageName(pn);
+ArrayList<ItemInfo> infos=getItemInfoForPackageName(pn,mUser);
 for (ItemInfo i : infos) {
 deleteItemFromDatabase(context,i);
 }
 }
 for (AppInfo a : removedApps) {
-ArrayList<ItemInfo> infos=getItemInfoForComponentName(a.componentName);
+ArrayList<ItemInfo> infos=getItemInfoForComponentName(a.componentName,mUser);
 for (ItemInfo i : infos) {
 deleteItemFromDatabase(context,i);
 }
@@ -109,7 +109,7 @@ mHandler.post(new Runnable(){
 public void run(){
 Callbacks cb=mCallbacks != null ? mCallbacks.get() : null;
 if (callbacks == cb && cb != null) {
-callbacks.bindComponentsRemoved(removedPackageNames,removedApps);
+callbacks.bindComponentsRemoved(removedPackageNames,removedApps,mUser);
 }
 }
 }

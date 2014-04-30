@@ -1,0 +1,8 @@
+{
+  if (user == null) {
+    return null;
+  }
+ else {
+    return new UserHandleCompat(user);
+  }
+}

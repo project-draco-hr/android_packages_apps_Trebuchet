@@ -5,4 +5,5 @@
   intent=new Intent(info.intent);
   flags=info.flags;
   firstInstallTime=info.firstInstallTime;
+  iconBitmap=info.iconBitmap;
 }

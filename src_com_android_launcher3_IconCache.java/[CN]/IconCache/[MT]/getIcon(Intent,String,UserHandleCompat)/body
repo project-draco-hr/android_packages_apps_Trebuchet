@@ -1,0 +1,14 @@
+{
+synchronized (mCache) {
+    final LauncherActivityInfoCompat launcherActInfo=mLauncherApps.resolveActivity(intent,user);
+    ComponentName component=intent.getComponent();
+    if (launcherActInfo == null || component == null) {
+      return getDefaultIcon(user);
+    }
+    CacheEntry entry=cacheLocked(component,launcherActInfo,null,user);
+    if (title != null) {
+      entry.title=title;
+    }
+    return entry.icon;
+  }
+}

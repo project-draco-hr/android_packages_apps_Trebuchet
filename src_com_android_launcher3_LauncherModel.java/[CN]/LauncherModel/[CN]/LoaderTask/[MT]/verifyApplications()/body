@@ -4,7 +4,7 @@
   ArrayList<ItemInfo> added=new ArrayList<ItemInfo>();
 synchronized (sBgLock) {
     for (    AppInfo app : mBgAllAppsList.data) {
-      tmpInfos=getItemInfoForComponentName(app.componentName);
+      tmpInfos=getItemInfoForComponentName(app.componentName,app.user);
       if (tmpInfos.isEmpty()) {
         added.add(app);
         Log.e(TAG,"Missing Application on load: " + app);

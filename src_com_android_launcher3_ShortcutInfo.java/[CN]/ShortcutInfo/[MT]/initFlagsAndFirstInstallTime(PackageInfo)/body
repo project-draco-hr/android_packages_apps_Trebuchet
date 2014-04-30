@@ -1,4 +1,0 @@
-{
-  flags=AppInfo.initFlags(pi);
-  firstInstallTime=AppInfo.initFirstInstallTime(pi);
-}

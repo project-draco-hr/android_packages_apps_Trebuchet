@@ -1,0 +1,9 @@
+{
+  try {
+    ActivityInfo info=mPm.getActivityInfo(component,0);
+    return info != null && info.isEnabled();
+  }
+ catch (  NameNotFoundException e) {
+    return false;
+  }
+}

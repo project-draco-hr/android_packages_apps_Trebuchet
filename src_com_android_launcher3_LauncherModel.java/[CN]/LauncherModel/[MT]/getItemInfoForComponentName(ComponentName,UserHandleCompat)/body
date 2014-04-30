@@ -1,0 +1,14 @@
+{
+  ItemInfoFilter filter=new ItemInfoFilter(){
+    @Override public boolean filterItem(    ItemInfo parent,    ItemInfo info,    ComponentName cn){
+      if (info.user == null) {
+        return cn.equals(cname);
+      }
+ else {
+        return cn.equals(cname) && info.user.equals(user);
+      }
+    }
+  }
+;
+  return filterItemInfos(sBgItemsIdMap.values(),filter);
+}

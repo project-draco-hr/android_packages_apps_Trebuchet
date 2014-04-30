@@ -1,0 +1,3 @@
+{
+  return (Long)ReflectUtils.invokeMethod(mLauncherActivityInfo,mGetFirstInstallTime);
+}

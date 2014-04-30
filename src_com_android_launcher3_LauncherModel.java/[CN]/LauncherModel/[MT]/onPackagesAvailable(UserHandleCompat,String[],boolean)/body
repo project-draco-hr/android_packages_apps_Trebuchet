@@ -1,0 +1,11 @@
+{
+  if (!replacing) {
+    enqueuePackageUpdated(new PackageUpdatedTask(PackageUpdatedTask.OP_ADD,packageNames,user));
+    if (mAppsCanBeOnRemoveableStorage) {
+      startLoaderFromBackground();
+    }
+  }
+ else {
+    enqueuePackageUpdated(new PackageUpdatedTask(PackageUpdatedTask.OP_UPDATE,packageNames,user));
+  }
+}

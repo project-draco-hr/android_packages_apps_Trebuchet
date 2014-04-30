@@ -1,9 +1,0 @@
-{
-  for (  AppInfo info : data) {
-    final ComponentName component=info.intent.getComponent();
-    if (packageName.equals(component.getPackageName()) && className.equals(component.getClassName())) {
-      return info;
-    }
-  }
-  return null;
-}

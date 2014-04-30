@@ -1,4 +1,4 @@
 {
-  mIcon=iconCache.getIcon(intent);
-  usingFallbackIcon=iconCache.isDefaultIcon(mIcon);
+  mIcon=iconCache.getIcon(intent,user);
+  usingFallbackIcon=iconCache.isDefaultIcon(mIcon,user);
 }

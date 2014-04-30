@@ -1,0 +1,14 @@
+{
+  values.put(LauncherSettings.BaseLauncherColumns.ITEM_TYPE,itemType);
+  values.put(LauncherSettings.Favorites.CONTAINER,container);
+  values.put(LauncherSettings.Favorites.SCREEN,screenId);
+  values.put(LauncherSettings.Favorites.CELLX,cellX);
+  values.put(LauncherSettings.Favorites.CELLY,cellY);
+  values.put(LauncherSettings.Favorites.SPANX,spanX);
+  values.put(LauncherSettings.Favorites.SPANY,spanY);
+  long serialNumber=UserManagerCompat.getInstance(context).getSerialNumberForUser(user);
+  values.put(LauncherSettings.Favorites.PROFILE_ID,serialNumber);
+  if (screenId == Workspace.EXTRA_EMPTY_SCREEN_ID) {
+    throw new RuntimeException("Screen id should not be EXTRA_EMPTY_SCREEN_ID");
+  }
+}

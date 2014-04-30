@@ -10,7 +10,7 @@
   }
   final ContentValues values=new ContentValues();
   final ContentResolver cr=context.getContentResolver();
-  item.onAddToDatabase(values);
+  item.onAddToDatabase(context,values);
   item.id=LauncherAppState.getLauncherProvider().generateNewItemId();
   values.put(LauncherSettings.Favorites._ID,item.id);
   item.updateValuesWithCoordinates(values,item.cellX,item.cellY);

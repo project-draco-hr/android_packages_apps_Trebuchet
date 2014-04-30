@@ -1,0 +1,9 @@
+{
+  try {
+    return clazz.getMethod(method);
+  }
+ catch (  NoSuchMethodException e) {
+    Log.e(TAG,"Couldn't find methid " + clazz.getName() + " "+ method,e);
+    return null;
+  }
+}

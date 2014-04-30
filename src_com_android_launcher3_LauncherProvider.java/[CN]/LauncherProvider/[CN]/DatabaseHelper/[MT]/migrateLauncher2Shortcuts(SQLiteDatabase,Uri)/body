@@ -25,6 +25,7 @@
         final int cellYIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.CELLY);
         final int uriIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.URI);
         final int displayModeIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.DISPLAY_MODE);
+        final int profileIndex=c.getColumnIndex(LauncherSettings.Favorites.PROFILE_ID);
         int i=0;
         int curX=0;
         int curY=0;
@@ -48,6 +49,17 @@
           final int screen=c.getInt(screenIndex);
           int container=c.getInt(containerIndex);
           final String intentStr=c.getString(intentIndex);
+          UserManagerCompat userManager=UserManagerCompat.getInstance(mContext);
+          UserHandleCompat userHandle;
+          final long userSerialNumber;
+          if (profileIndex != -1 && !c.isNull(profileIndex)) {
+            userSerialNumber=c.getInt(profileIndex);
+            userHandle=userManager.getUserForSerialNumber(userSerialNumber);
+          }
+ else {
+            userHandle=UserHandleCompat.myUserHandle();
+            userSerialNumber=userManager.getSerialNumberForUser(userHandle);
+          }
           Launcher.addDumpLog(TAG,"migrating \"" + c.getString(titleIndex) + "\" ("+ cellX+ ","+ cellY+ "@"+ LauncherSettings.Favorites.containerToString(container)+ "/"+ screen+ "): "+ intentStr,true);
           if (itemType != Favorites.ITEM_TYPE_FOLDER) {
             final Intent intent;
@@ -64,7 +76,7 @@
               Launcher.addDumpLog(TAG,"skipping empty intent",true);
               continue;
             }
- else             if (cn != null && !LauncherModel.isValidPackageComponent(pm,cn)) {
+ else             if (cn != null && !LauncherModel.isValidPackageActivity(mContext,cn,userHandle)) {
               Launcher.addDumpLog(TAG,"skipping item whose component " + "no longer exists.",true);
               continue;
             }
@@ -92,6 +104,7 @@
           values.put(LauncherSettings.Favorites.APPWIDGET_ID,-1);
           values.put(LauncherSettings.Favorites.URI,c.getString(uriIndex));
           values.put(LauncherSettings.Favorites.DISPLAY_MODE,c.getInt(displayModeIndex));
+          values.put(LauncherSettings.Favorites.PROFILE_ID,userSerialNumber);
           if (container == LauncherSettings.Favorites.CONTAINER_HOTSEAT) {
             hotseat.put(screen,values);
           }

@@ -2,6 +2,9 @@
   ActivityManager activityManager=(ActivityManager)context.getSystemService(Context.ACTIVITY_SERVICE);
   mContext=context;
   mPackageManager=context.getPackageManager();
+  mUserManager=UserManagerCompat.getInstance(mContext);
+  mLauncherApps=LauncherAppsCompat.getInstance(mContext);
   mIconDpi=activityManager.getLauncherLargeIconDensity();
-  mDefaultIcon=makeDefaultIcon();
+  UserHandleCompat myUser=UserHandleCompat.myUserHandle();
+  mDefaultIcons.put(myUser,makeDefaultIcon(myUser));
 }

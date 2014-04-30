@@ -1,0 +1,7 @@
+{
+  ResolveInfo info=mPm.resolveActivity(intent,0);
+  if (info != null) {
+    return new LauncherActivityInfoCompatV16(mContext,info);
+  }
+  return null;
+}

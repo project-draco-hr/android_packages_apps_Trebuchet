@@ -1,0 +1,10 @@
+{
+  Method method=ReflectUtils.getMethod(mUserManager.getClass(),"getBadgedDrawableForUser",Drawable.class,UserHandle.class);
+  if (method != null) {
+    Drawable d=(Drawable)ReflectUtils.invokeMethod(mUserManager,method,unbadged,user.getUser());
+    if (d != null) {
+      return d;
+    }
+  }
+  return super.getBadgedDrawableForUser(unbadged,user);
+}

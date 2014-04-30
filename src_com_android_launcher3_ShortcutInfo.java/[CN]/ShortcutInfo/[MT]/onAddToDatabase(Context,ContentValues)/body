@@ -1,0 +1,21 @@
+{
+  super.onAddToDatabase(context,values);
+  String titleStr=title != null ? title.toString() : null;
+  values.put(LauncherSettings.BaseLauncherColumns.TITLE,titleStr);
+  String uri=intent != null ? intent.toUri(0) : null;
+  values.put(LauncherSettings.BaseLauncherColumns.INTENT,uri);
+  if (customIcon) {
+    values.put(LauncherSettings.BaseLauncherColumns.ICON_TYPE,LauncherSettings.BaseLauncherColumns.ICON_TYPE_BITMAP);
+    writeBitmap(values,mIcon);
+  }
+ else {
+    if (!usingFallbackIcon) {
+      writeBitmap(values,mIcon);
+    }
+    values.put(LauncherSettings.BaseLauncherColumns.ICON_TYPE,LauncherSettings.BaseLauncherColumns.ICON_TYPE_RESOURCE);
+    if (iconResource != null) {
+      values.put(LauncherSettings.BaseLauncherColumns.ICON_PACKAGE,iconResource.packageName);
+      values.put(LauncherSettings.BaseLauncherColumns.ICON_RESOURCE,iconResource.resourceName);
+    }
+  }
+}

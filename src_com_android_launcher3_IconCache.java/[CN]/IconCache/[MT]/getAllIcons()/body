@@ -1,9 +1,9 @@
 {
 synchronized (mCache) {
     HashMap<ComponentName,Bitmap> set=new HashMap<ComponentName,Bitmap>();
-    for (    ComponentName cn : mCache.keySet()) {
-      final CacheEntry e=mCache.get(cn);
-      set.put(cn,e.icon);
+    for (    CacheKey ck : mCache.keySet()) {
+      final CacheEntry e=mCache.get(ck);
+      set.put(ck.componentName,e.icon);
     }
     return set;
   }

@@ -7,5 +7,6 @@
   screenId=info.screenId;
   itemType=info.itemType;
   container=info.container;
+  user=info.user;
   LauncherModel.checkItemInfo(this);
 }
