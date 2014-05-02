@@ -22,7 +22,7 @@
   if (!DISABLE_MARKET_BUTTON) {
     updateAppMarketIcon();
   }
-  mWorkspaceLoading=false;
+  setWorkspaceLoading(false);
   if (upgradePath) {
     mWorkspace.getUniqueComponents(true,null);
     mIntentsOnWorkspaceFromUpgradePath=mWorkspace.getUniqueComponents(true,null);

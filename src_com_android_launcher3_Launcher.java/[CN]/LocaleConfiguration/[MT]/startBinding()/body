@@ -1,5 +1,5 @@
 {
-  mWorkspaceLoading=true;
+  setWorkspaceLoading(true);
   mBindOnResumeCallbacks.clear();
   mWorkspace.clearDropTargets();
   mWorkspace.removeAllWorkspaceScreens();

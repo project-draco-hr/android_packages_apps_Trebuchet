@@ -16,7 +16,7 @@
   mPaused=false;
   sPausedFromUserAction=false;
   if (mRestoring || mOnResumeNeedsLoad) {
-    mWorkspaceLoading=true;
+    setWorkspaceLoading(true);
     mModel.startLoader(true,PagedView.INVALID_RESTORE_PAGE);
     mRestoring=false;
     mOnResumeNeedsLoad=false;

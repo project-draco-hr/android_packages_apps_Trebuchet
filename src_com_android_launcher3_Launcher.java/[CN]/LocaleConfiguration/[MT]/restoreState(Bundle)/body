@@ -21,7 +21,7 @@
     mPendingAddInfo.spanY=savedState.getInt(RUNTIME_STATE_PENDING_ADD_SPAN_Y);
     mPendingAddWidgetInfo=savedState.getParcelable(RUNTIME_STATE_PENDING_ADD_WIDGET_INFO);
     mPendingAddWidgetId=savedState.getInt(RUNTIME_STATE_PENDING_ADD_WIDGET_ID);
-    mWaitingForResult=true;
+    setWaitingForResult(true);
     mRestoring=true;
   }
   boolean renameFolder=savedState.getBoolean(RUNTIME_STATE_PENDING_FOLDER_RENAME,false);
