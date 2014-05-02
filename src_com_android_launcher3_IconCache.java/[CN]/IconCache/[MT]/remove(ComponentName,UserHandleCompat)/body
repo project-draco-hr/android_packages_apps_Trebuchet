@@ -1,0 +1,5 @@
+{
+synchronized (mCache) {
+    mCache.remove(new CacheKey(componentName,user));
+  }
+}

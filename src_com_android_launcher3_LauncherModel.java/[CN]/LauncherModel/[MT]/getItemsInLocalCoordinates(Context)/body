@@ -1,7 +1,7 @@
 {
   ArrayList<ItemInfo> items=new ArrayList<ItemInfo>();
   final ContentResolver cr=context.getContentResolver();
-  Cursor c=cr.query(LauncherSettings.Favorites.CONTENT_URI,new String[]{LauncherSettings.Favorites.ITEM_TYPE,LauncherSettings.Favorites.CONTAINER,LauncherSettings.Favorites.SCREEN,LauncherSettings.Favorites.CELLX,LauncherSettings.Favorites.CELLY,LauncherSettings.Favorites.SPANX,LauncherSettings.Favorites.SPANY},null,null,null);
+  Cursor c=cr.query(LauncherSettings.Favorites.CONTENT_URI,new String[]{LauncherSettings.Favorites.ITEM_TYPE,LauncherSettings.Favorites.CONTAINER,LauncherSettings.Favorites.SCREEN,LauncherSettings.Favorites.CELLX,LauncherSettings.Favorites.CELLY,LauncherSettings.Favorites.SPANX,LauncherSettings.Favorites.SPANY,LauncherSettings.Favorites.PROFILE_ID},null,null,null);
   final int itemTypeIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.ITEM_TYPE);
   final int containerIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.CONTAINER);
   final int screenIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.SCREEN);
@@ -9,6 +9,8 @@
   final int cellYIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.CELLY);
   final int spanXIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.SPANX);
   final int spanYIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.SPANY);
+  final int profileIdIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.PROFILE_ID);
+  UserManagerCompat userManager=UserManagerCompat.getInstance(context);
   try {
     while (c.moveToNext()) {
       ItemInfo item=new ItemInfo();
@@ -19,7 +21,11 @@
       item.container=c.getInt(containerIndex);
       item.itemType=c.getInt(itemTypeIndex);
       item.screenId=c.getInt(screenIndex);
-      items.add(item);
+      int serialNumber=c.getInt(profileIdIndex);
+      item.user=userManager.getUserForSerialNumber(serialNumber);
+      if (item.user != null) {
+        items.add(item);
+      }
     }
   }
  catch (  Exception e) {

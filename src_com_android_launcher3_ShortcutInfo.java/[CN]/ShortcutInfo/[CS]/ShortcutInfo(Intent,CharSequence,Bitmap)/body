@@ -1,6 +1,0 @@
-{
-  this();
-  this.intent=intent;
-  this.title=title;
-  mIcon=icon;
-}

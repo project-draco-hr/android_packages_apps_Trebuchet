@@ -1,2 +1,0 @@
-PackageManager pm
-HashMap<Object,CharSequence> labelCache

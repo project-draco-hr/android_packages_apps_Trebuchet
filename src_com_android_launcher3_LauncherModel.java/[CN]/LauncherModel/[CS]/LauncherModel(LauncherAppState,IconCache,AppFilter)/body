@@ -13,4 +13,6 @@
   final Resources res=context.getResources();
   Configuration config=res.getConfiguration();
   mPreviousConfigMcc=config.mcc;
+  mLauncherApps=LauncherAppsCompat.getInstance(context);
+  mUserManager=UserManagerCompat.getInstance(context);
 }

@@ -1,0 +1,4 @@
+{
+  int op=PackageUpdatedTask.OP_ADD;
+  enqueuePackageUpdated(new PackageUpdatedTask(op,new String[]{packageName},user));
+}

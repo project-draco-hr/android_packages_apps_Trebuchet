@@ -10,7 +10,7 @@
   Iterator<AppInfo> iter=allAppsApps.iterator();
   while (iter.hasNext()) {
     ItemInfo a=iter.next();
-    if (LauncherModel.appWasRestored(ctx,a.getIntent())) {
+    if (LauncherModel.appWasRestored(ctx,a.getIntent(),a.user)) {
       restoredAppsFinal.add((AppInfo)a);
     }
   }
@@ -24,7 +24,7 @@
               for (              AppInfo info : restoredAppsFinal) {
                 final Intent intent=info.getIntent();
                 if (intent != null) {
-                  mIconCache.deletePreloadedIcon(intent.getComponent());
+                  mIconCache.deletePreloadedIcon(intent.getComponent(),info.user);
                 }
               }
               callbacks.bindAppsUpdated(restoredAppsFinal);

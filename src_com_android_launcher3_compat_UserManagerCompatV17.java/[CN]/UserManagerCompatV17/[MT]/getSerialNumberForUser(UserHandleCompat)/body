@@ -1,0 +1,3 @@
+{
+  return mUserManager.getSerialNumberForUser(user.getUser());
+}

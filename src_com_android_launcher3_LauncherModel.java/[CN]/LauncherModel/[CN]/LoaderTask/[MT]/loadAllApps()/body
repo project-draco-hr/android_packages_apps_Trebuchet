@@ -5,27 +5,29 @@
     Log.w(TAG,"LoaderTask running with no launcher (loadAllApps)");
     return;
   }
-  final PackageManager packageManager=mContext.getPackageManager();
   final Intent mainIntent=new Intent(Intent.ACTION_MAIN,null);
   mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
+  final List<UserHandleCompat> profiles=mUserManager.getUserProfiles();
   mBgAllAppsList.clear();
-  final long qiaTime=DEBUG_LOADERS ? SystemClock.uptimeMillis() : 0;
-  List<ResolveInfo> apps=packageManager.queryIntentActivities(mainIntent,0);
-  if (DEBUG_LOADERS) {
-    Log.d(TAG,"queryIntentActivities took " + (SystemClock.uptimeMillis() - qiaTime) + "ms");
-    Log.d(TAG,"queryIntentActivities got " + apps.size() + " apps");
-  }
-  if (apps == null || apps.isEmpty()) {
-    return;
-  }
-  final long sortTime=DEBUG_LOADERS ? SystemClock.uptimeMillis() : 0;
-  Collections.sort(apps,new LauncherModel.ShortcutNameComparator(packageManager,mLabelCache));
-  if (DEBUG_LOADERS) {
-    Log.d(TAG,"sort took " + (SystemClock.uptimeMillis() - sortTime) + "ms");
-  }
-  for (int i=0; i < apps.size(); i++) {
-    ResolveInfo app=apps.get(i);
-    mBgAllAppsList.add(new AppInfo(packageManager,app,mIconCache,mLabelCache));
+  for (  UserHandleCompat user : profiles) {
+    final long qiaTime=DEBUG_LOADERS ? SystemClock.uptimeMillis() : 0;
+    List<LauncherActivityInfoCompat> apps=mLauncherApps.getActivityList(null,user);
+    if (DEBUG_LOADERS) {
+      Log.d(TAG,"getActivityList took " + (SystemClock.uptimeMillis() - qiaTime) + "ms for user "+ user);
+      Log.d(TAG,"getActivityList got " + apps.size() + " apps for user "+ user);
+    }
+    if (apps == null || apps.isEmpty()) {
+      return;
+    }
+    final long sortTime=DEBUG_LOADERS ? SystemClock.uptimeMillis() : 0;
+    Collections.sort(apps,new LauncherModel.ShortcutNameComparator(mLabelCache));
+    if (DEBUG_LOADERS) {
+      Log.d(TAG,"sort took " + (SystemClock.uptimeMillis() - sortTime) + "ms");
+    }
+    for (int i=0; i < apps.size(); i++) {
+      LauncherActivityInfoCompat app=apps.get(i);
+      mBgAllAppsList.add(new AppInfo(mContext,app,user,mIconCache,mLabelCache));
+    }
   }
   final ArrayList<AppInfo> added=mBgAllAppsList.added;
   mBgAllAppsList.added=new ArrayList<AppInfo>();

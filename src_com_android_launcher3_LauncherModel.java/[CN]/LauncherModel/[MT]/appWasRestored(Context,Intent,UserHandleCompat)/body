@@ -1,0 +1,20 @@
+{
+  final ContentResolver cr=context.getContentResolver();
+  final ComponentName component=intent.getComponent();
+  if (component == null) {
+    return false;
+  }
+  String componentName=component.flattenToString();
+  long serialNumber=UserManagerCompat.getInstance(context).getSerialNumberForUser(user);
+  final String where="intent glob \"*component=" + componentName + "*\" and restored = 1"+ " and profileId = "+ serialNumber;
+  Cursor c=cr.query(LauncherSettings.Favorites.CONTENT_URI,new String[]{"intent","restored","profileId"},where,null,null);
+  boolean result=false;
+  try {
+    result=c.moveToFirst();
+  }
+  finally {
+    c.close();
+  }
+  Log.d(TAG,"shortcutWasRestored is " + result + " for "+ componentName);
+  return result;
+}

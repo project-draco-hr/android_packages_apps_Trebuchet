@@ -1,0 +1,9 @@
+{
+synchronized (mCache) {
+    if (info == null || component == null) {
+      return null;
+    }
+    CacheEntry entry=cacheLocked(component,info,labelCache,info.getUser());
+    return entry.icon;
+  }
+}

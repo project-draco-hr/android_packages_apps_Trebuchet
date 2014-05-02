@@ -1,0 +1,3 @@
+ArrayList<AppInfo> apps
+ComponentName component
+UserHandleCompat user

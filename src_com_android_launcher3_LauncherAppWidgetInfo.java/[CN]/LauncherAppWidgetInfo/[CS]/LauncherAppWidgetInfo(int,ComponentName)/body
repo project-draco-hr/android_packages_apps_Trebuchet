@@ -4,4 +4,5 @@
   this.providerName=providerName;
   spanX=-1;
   spanY=-1;
+  user=UserHandleCompat.myUserHandle();
 }

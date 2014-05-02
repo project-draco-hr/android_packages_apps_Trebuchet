@@ -1,7 +1,9 @@
 {
-  ResolveInfo ri=getPackageManager().resolveActivity(appLaunchIntent,0);
-  if (ri == null) {
+  final UserHandleCompat myUser=UserHandleCompat.myUserHandle();
+  LauncherAppsCompat launcherApps=LauncherAppsCompat.getInstance(this);
+  LauncherActivityInfoCompat activityInfo=launcherApps.resolveActivity(appLaunchIntent,myUser);
+  if (activityInfo == null) {
     return null;
   }
-  return new AppInfo(getPackageManager(),ri,mIconCache,null);
+  return new AppInfo(this,activityInfo,myUser,mIconCache,null);
 }

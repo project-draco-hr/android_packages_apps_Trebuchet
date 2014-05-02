@@ -50,12 +50,14 @@ synchronized (sBgLock) {
       final int spanXIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.SPANX);
       final int spanYIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.SPANY);
       final int restoredIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.RESTORED);
+      final int profileIdIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.PROFILE_ID);
       ShortcutInfo info;
       String intentDescription;
       LauncherAppWidgetInfo appWidgetInfo;
       int container;
       long id;
       Intent intent;
+      UserHandleCompat user;
       while (!mStopped && c.moveToNext()) {
         AtomicBoolean deleteOnInvalidPlacement=new AtomicBoolean(false);
         try {
@@ -66,72 +68,85 @@ case LauncherSettings.Favorites.ITEM_TYPE_APPLICATION:
 case LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT:
             id=c.getLong(idIndex);
           intentDescription=c.getString(intentIndex);
-        try {
-          intent=Intent.parseUri(intentDescription,0);
-          ComponentName cn=intent.getComponent();
-          if (cn != null && !isValidPackageComponent(manager,cn)) {
-            if (restored) {
-              Launcher.addDumpLog(TAG,"package not yet restored: " + cn,true);
-            }
- else {
-              if (!mAppsCanBeOnRemoveableStorage) {
-                Launcher.addDumpLog(TAG,"Invalid package removed: " + cn,true);
-                itemsToRemove.add(id);
-              }
- else {
-                Launcher.addDumpLog(TAG,"Invalid package found: " + cn,true);
-              }
-              continue;
-            }
-          }
- else           if (restored) {
-            restoredRows.add(id);
-            restored=false;
-          }
-        }
- catch (        URISyntaxException e) {
-          Launcher.addDumpLog(TAG,"Invalid uri: " + intentDescription,true);
-          continue;
-        }
+        int serialNumber=c.getInt(profileIdIndex);
+      user=mUserManager.getUserForSerialNumber(serialNumber);
+    if (user == null) {
+      itemsToRemove.add(id);
+      continue;
+    }
+  try {
+    intent=Intent.parseUri(intentDescription,0);
+    ComponentName cn=intent.getComponent();
+    if (cn != null && !isValidPackageActivity(context,cn,user)) {
       if (restored) {
-        Launcher.addDumpLog(TAG,"constructing info for partially restored package",true);
-        info=getRestoredItemInfo(c,titleIndex,intent);
-        intent=getRestoredItemIntent(c,context,intent);
-      }
- else       if (itemType == LauncherSettings.Favorites.ITEM_TYPE_APPLICATION) {
-        info=getShortcutInfo(manager,intent,context,c,iconIndex,titleIndex,mLabelCache);
+        Launcher.addDumpLog(TAG,"package not yet restored: " + cn,true);
       }
  else {
-        info=getShortcutInfo(c,context,iconTypeIndex,iconPackageIndex,iconResourceIndex,iconIndex,titleIndex);
-        if (intent.getAction() != null && intent.getCategories() != null && intent.getAction().equals(Intent.ACTION_MAIN) && intent.getCategories().contains(Intent.CATEGORY_LAUNCHER)) {
-          intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
-        }
-      }
-    if (info != null) {
-      info.id=id;
-      info.intent=intent;
-      container=c.getInt(containerIndex);
-      info.container=container;
-      info.screenId=c.getInt(screenIndex);
-      info.cellX=c.getInt(cellXIndex);
-      info.cellY=c.getInt(cellYIndex);
-      info.spanX=1;
-      info.spanY=1;
-      deleteOnInvalidPlacement.set(false);
-      if (!checkItemPlacement(occupied,info,deleteOnInvalidPlacement)) {
-        if (deleteOnInvalidPlacement.get()) {
+        if (!mAppsCanBeOnRemoveableStorage) {
+          Launcher.addDumpLog(TAG,"Invalid package removed: " + cn,true);
           itemsToRemove.add(id);
         }
-        break;
+ else {
+          Launcher.addDumpLog(TAG,"Invalid package found: " + cn,true);
+        }
+        continue;
       }
+    }
+ else     if (restored) {
+      restoredRows.add(id);
+      restored=false;
+    }
+  }
+ catch (  URISyntaxException e) {
+    Launcher.addDumpLog(TAG,"Invalid uri: " + intentDescription,true);
+    continue;
+  }
+if (restored) {
+  if (user.equals(UserHandleCompat.myUserHandle())) {
+    Launcher.addDumpLog(TAG,"constructing info for partially restored package",true);
+    info=getRestoredItemInfo(c,titleIndex,intent);
+    intent=getRestoredItemIntent(c,context,intent);
+  }
+ else {
+    itemsToRemove.add(id);
+    continue;
+  }
+}
+ else if (itemType == LauncherSettings.Favorites.ITEM_TYPE_APPLICATION) {
+  info=getShortcutInfo(manager,intent,user,context,c,iconIndex,titleIndex,mLabelCache);
+}
+ else {
+  info=getShortcutInfo(c,context,iconTypeIndex,iconPackageIndex,iconResourceIndex,iconIndex,titleIndex);
+  if (intent.getAction() != null && intent.getCategories() != null && intent.getAction().equals(Intent.ACTION_MAIN) && intent.getCategories().contains(Intent.CATEGORY_LAUNCHER)) {
+    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
+  }
+}
+if (info != null) {
+info.id=id;
+info.intent=intent;
+container=c.getInt(containerIndex);
+info.container=container;
+info.screenId=c.getInt(screenIndex);
+info.cellX=c.getInt(cellXIndex);
+info.cellY=c.getInt(cellYIndex);
+info.spanX=1;
+info.spanY=1;
+info.intent.putExtra(ItemInfo.EXTRA_PROFILE,serialNumber);
+deleteOnInvalidPlacement.set(false);
+if (!checkItemPlacement(occupied,info,deleteOnInvalidPlacement)) {
+  if (deleteOnInvalidPlacement.get()) {
+    itemsToRemove.add(id);
+  }
+  break;
+}
 switch (container) {
 case LauncherSettings.Favorites.CONTAINER_DESKTOP:
 case LauncherSettings.Favorites.CONTAINER_HOTSEAT:
-        sBgWorkspaceItems.add(info);
-      break;
+  sBgWorkspaceItems.add(info);
+break;
 default :
-    FolderInfo folderInfo=findOrMakeFolder(sBgFolders,container);
-  folderInfo.add(info);
+FolderInfo folderInfo=findOrMakeFolder(sBgFolders,container);
+folderInfo.add(info);
 break;
 }
 sBgItemsIdMap.put(info.id,info);

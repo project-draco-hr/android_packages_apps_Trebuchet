@@ -1,0 +1,4 @@
+Intent intent
+CharSequence title
+Bitmap icon
+UserHandleCompat user

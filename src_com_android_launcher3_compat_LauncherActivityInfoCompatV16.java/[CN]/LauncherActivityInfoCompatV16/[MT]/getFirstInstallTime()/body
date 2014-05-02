@@ -1,0 +1,9 @@
+{
+  try {
+    PackageInfo info=mPm.getPackageInfo(mActivityInfo.packageName,0);
+    return info != null ? info.firstInstallTime : 0;
+  }
+ catch (  NameNotFoundException e) {
+    return 0;
+  }
+}

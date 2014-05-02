@@ -4,22 +4,22 @@
   mWaitingForUninstall=false;
   if (isAllAppsApplication(d.dragSource,item)) {
     AppInfo appInfo=(AppInfo)item;
-    mLauncher.startApplicationUninstallActivity(appInfo.componentName,appInfo.flags);
+    if (item.user.equals(UserHandleCompat.myUserHandle())) {
+      mLauncher.startApplicationUninstallActivity(appInfo.componentName,appInfo.flags);
+    }
   }
  else   if (isUninstallFromWorkspace(d)) {
     ShortcutInfo shortcut=(ShortcutInfo)item;
-    if (shortcut.intent != null && shortcut.intent.getComponent() != null) {
+    if (shortcut.intent != null && shortcut.intent.getComponent() != null && shortcut.user.equals(UserHandleCompat.myUserHandle())) {
       final ComponentName componentName=shortcut.intent.getComponent();
       final DragSource dragSource=d.dragSource;
-      int flags=AppInfo.initFlags(ShortcutInfo.getPackageInfo(getContext(),componentName.getPackageName()));
-      mWaitingForUninstall=mLauncher.startApplicationUninstallActivity(componentName,flags);
+      mWaitingForUninstall=mLauncher.startApplicationUninstallActivity(componentName,shortcut.flags);
       if (mWaitingForUninstall) {
         final Runnable checkIfUninstallWasSuccess=new Runnable(){
           @Override public void run(){
             mWaitingForUninstall=false;
             String packageName=componentName.getPackageName();
-            List<ResolveInfo> activities=AllAppsList.findActivitiesForPackage(getContext(),packageName);
-            boolean uninstallSuccessful=activities.size() == 0;
+            boolean uninstallSuccessful=!AllAppsList.packageHasActivities(getContext(),packageName,UserHandleCompat.myUserHandle());
             if (dragSource instanceof Folder) {
               ((Folder)dragSource).onUninstallActivityReturned(uninstallSuccessful);
             }

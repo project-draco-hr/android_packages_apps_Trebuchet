@@ -1,3 +1,4 @@
 {
   itemType=LauncherSettings.Favorites.ITEM_TYPE_FOLDER;
+  user=UserHandleCompat.myUserHandle();
 }

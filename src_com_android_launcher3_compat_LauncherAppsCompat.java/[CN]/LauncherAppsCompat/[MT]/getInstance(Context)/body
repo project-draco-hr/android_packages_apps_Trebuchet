@@ -1,0 +1,12 @@
+{
+  if ("L".equals(Build.VERSION.CODENAME)) {
+    Object launcherApps=context.getSystemService("launcherapps");
+    if (launcherApps != null) {
+      LauncherAppsCompatVL compat=LauncherAppsCompatVL.build(context,launcherApps);
+      if (compat != null) {
+        return compat;
+      }
+    }
+  }
+  return new LauncherAppsCompatV16(context);
+}

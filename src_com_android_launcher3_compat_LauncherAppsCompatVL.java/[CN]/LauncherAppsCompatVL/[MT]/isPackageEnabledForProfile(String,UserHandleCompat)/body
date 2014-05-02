@@ -1,0 +1,3 @@
+{
+  return (Boolean)ReflectUtils.invokeMethod(mLauncherApps,mIsPackageEnabledForProfile,packageName,user.getUser());
+}

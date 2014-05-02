@@ -1,0 +1,5 @@
+{
+  if (!replacing) {
+    enqueuePackageUpdated(new PackageUpdatedTask(PackageUpdatedTask.OP_UNAVAILABLE,packageNames,user));
+  }
+}

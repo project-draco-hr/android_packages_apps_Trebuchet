@@ -1,0 +1,3 @@
+{
+  return (Boolean)ReflectUtils.invokeMethod(mLauncherApps,mIsActivityEnabledForProfile,component,user.getUser());
+}

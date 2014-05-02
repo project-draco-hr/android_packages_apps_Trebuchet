@@ -1,0 +1,4 @@
+{
+  final LauncherAppsCompat launcherApps=LauncherAppsCompat.getInstance(context);
+  return launcherApps.getActivityList(packageName,user).size() > 0;
+}

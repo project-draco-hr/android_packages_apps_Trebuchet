@@ -1,0 +1,21 @@
+{
+  Runnable r=new Runnable(){
+    public void run(){
+      bindComponentsRemoved(packageNames,appInfos,user);
+    }
+  }
+;
+  if (waitUntilResume(r)) {
+    return;
+  }
+  if (!packageNames.isEmpty()) {
+    mWorkspace.removeItemsByPackageName(packageNames,user);
+  }
+  if (!appInfos.isEmpty()) {
+    mWorkspace.removeItemsByApplicationInfo(appInfos,user);
+  }
+  mDragController.onAppsRemoved(packageNames,appInfos);
+  if (!LauncherAppState.isDisableAllApps() && mAppsCustomizeContent != null) {
+    mAppsCustomizeContent.removeApps(appInfos);
+  }
+}

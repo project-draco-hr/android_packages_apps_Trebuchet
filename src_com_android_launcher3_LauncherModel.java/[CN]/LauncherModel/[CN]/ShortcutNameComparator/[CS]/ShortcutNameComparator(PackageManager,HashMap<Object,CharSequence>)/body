@@ -1,5 +1,0 @@
-{
-  mPackageManager=pm;
-  mLabelCache=labelCache;
-  mCollator=Collator.getInstance();
-}

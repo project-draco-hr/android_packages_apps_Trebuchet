@@ -1,0 +1,5 @@
+{
+  mPm=context.getPackageManager();
+  mContext=context;
+  mPackageMonitor=new PackageMonitor();
+}

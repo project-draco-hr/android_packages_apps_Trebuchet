@@ -1,0 +1,6 @@
+{
+  if (!mDefaultIcons.containsKey(user)) {
+    mDefaultIcons.put(user,makeDefaultIcon(user));
+  }
+  return mDefaultIcons.get(user);
+}

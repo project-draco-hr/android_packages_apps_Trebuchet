@@ -1,0 +1,10 @@
+{
+  if (cn == null) {
+    return false;
+  }
+  final LauncherAppsCompat launcherApps=LauncherAppsCompat.getInstance(context);
+  if (!launcherApps.isPackageEnabledForProfile(cn.getPackageName(),user)) {
+    return false;
+  }
+  return launcherApps.isActivityEnabledForProfile(cn,user);
+}

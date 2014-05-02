@@ -1,0 +1,13 @@
+{
+  this.componentName=info.getComponentName();
+  this.container=ItemInfo.NO_ID;
+  flags=initFlags(info);
+  firstInstallTime=info.getFirstInstallTime();
+  iconCache.getTitleAndIcon(this,info,labelCache);
+  intent=new Intent(Intent.ACTION_MAIN);
+  intent.addCategory(Intent.CATEGORY_LAUNCHER);
+  intent.setComponent(info.getComponentName());
+  long serialNumber=UserManagerCompat.getInstance(context).getSerialNumberForUser(user);
+  intent.putExtra(EXTRA_PROFILE,serialNumber);
+  this.user=user;
+}

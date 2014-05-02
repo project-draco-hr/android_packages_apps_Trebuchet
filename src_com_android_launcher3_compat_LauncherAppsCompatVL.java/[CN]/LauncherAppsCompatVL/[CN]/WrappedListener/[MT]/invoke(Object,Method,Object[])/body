@@ -1,0 +1,23 @@
+{
+  try {
+    String methodName=m.getName();
+    if ("onPackageRemoved".equals(methodName)) {
+      onPackageRemoved((UserHandle)args[0],(String)args[1]);
+    }
+ else     if ("onPackageAdded".equals(methodName)) {
+      onPackageAdded((UserHandle)args[0],(String)args[1]);
+    }
+ else     if ("onPackageChanged".equals(methodName)) {
+      onPackageChanged((UserHandle)args[0],(String)args[1]);
+    }
+ else     if ("onPackagesAvailable".equals(methodName)) {
+      onPackagesAvailable((UserHandle)args[0],(String[])args[1],(Boolean)args[2]);
+    }
+ else     if ("onPackagesUnavailable".equals(methodName)) {
+      onPackagesUnavailable((UserHandle)args[0],(String[])args[1],(Boolean)args[2]);
+    }
+  }
+  finally {
+    return null;
+  }
+}

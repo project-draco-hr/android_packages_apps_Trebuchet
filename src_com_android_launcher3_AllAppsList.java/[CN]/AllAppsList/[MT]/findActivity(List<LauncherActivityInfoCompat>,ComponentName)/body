@@ -1,0 +1,8 @@
+{
+  for (  LauncherActivityInfoCompat info : apps) {
+    if (info.getComponentName().equals(component)) {
+      return true;
+    }
+  }
+  return false;
+}

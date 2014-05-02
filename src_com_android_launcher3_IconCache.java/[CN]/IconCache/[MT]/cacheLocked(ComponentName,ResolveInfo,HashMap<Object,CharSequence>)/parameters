@@ -1,3 +1,0 @@
-ComponentName componentName
-ResolveInfo info
-HashMap<Object,CharSequence> labelCache

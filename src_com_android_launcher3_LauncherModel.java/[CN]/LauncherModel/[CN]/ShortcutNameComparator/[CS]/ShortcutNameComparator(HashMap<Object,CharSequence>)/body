@@ -1,0 +1,4 @@
+{
+  mLabelCache=labelCache;
+  mCollator=Collator.getInstance();
+}
