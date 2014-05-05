@@ -1,5 +1,5 @@
 {
-  mWaitingForResult=false;
+  setWaitingForResult(false);
   int pendingAddWidgetId=mPendingAddWidgetId;
   mPendingAddWidgetId=-1;
   Runnable exitSpringLoaded=new Runnable(){
