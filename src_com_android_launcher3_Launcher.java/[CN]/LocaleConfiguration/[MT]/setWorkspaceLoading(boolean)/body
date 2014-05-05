@@ -1,0 +1,7 @@
+{
+  boolean isLocked=isWorkspaceLocked();
+  mWorkspaceLoading=value;
+  if (isLocked != isWorkspaceLocked()) {
+    onWorkspaceLockedChanged();
+  }
+}
