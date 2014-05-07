@@ -10,6 +10,10 @@ synchronized (sInvalidPackages) {
       }
  catch (      SQLiteDiskIOException e) {
       }
+catch (      SQLiteCantOpenDatabaseException e) {
+        dumpOpenFiles();
+        throw e;
+      }
 synchronized (sInvalidPackages) {
         sInvalidPackages.remove(packageName);
       }
