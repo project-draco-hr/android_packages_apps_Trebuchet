@@ -21,7 +21,7 @@
       item.container=c.getInt(containerIndex);
       item.itemType=c.getInt(itemTypeIndex);
       item.screenId=c.getInt(screenIndex);
-      int serialNumber=c.getInt(profileIdIndex);
+      long serialNumber=c.getInt(profileIdIndex);
       item.user=userManager.getUserForSerialNumber(serialNumber);
       if (item.user != null) {
         items.add(item);
