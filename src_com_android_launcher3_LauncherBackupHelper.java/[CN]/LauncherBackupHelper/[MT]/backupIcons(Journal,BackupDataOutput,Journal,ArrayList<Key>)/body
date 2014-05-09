@@ -12,7 +12,7 @@
   long userSerialNumber=UserManagerCompat.getInstance(mContext).getSerialNumberForUser(myUserHandle);
   int startRows=out.rows;
   if (DEBUG)   Log.d(TAG,"starting here: " + startRows);
-  String where="(" + Favorites.ITEM_TYPE + "="+ Favorites.ITEM_TYPE_APPLICATION+ " OR "+ Favorites.ITEM_TYPE+ "="+ Favorites.ITEM_TYPE_SHORTCUT+ ") AND"+ Favorites.PROFILE_ID+ "="+ userSerialNumber;
+  String where="(" + Favorites.ITEM_TYPE + "="+ Favorites.ITEM_TYPE_APPLICATION+ " OR "+ Favorites.ITEM_TYPE+ "="+ Favorites.ITEM_TYPE_SHORTCUT+ ") AND "+ Favorites.PROFILE_ID+ "="+ userSerialNumber;
   Cursor cursor=cr.query(Favorites.CONTENT_URI,FAVORITE_PROJECTION,where,null,null);
   Set<String> currentIds=new HashSet<String>(cursor.getCount());
   try {
