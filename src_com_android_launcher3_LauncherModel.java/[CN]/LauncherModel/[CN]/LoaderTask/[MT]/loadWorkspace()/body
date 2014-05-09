@@ -68,7 +68,7 @@ case LauncherSettings.Favorites.ITEM_TYPE_APPLICATION:
 case LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT:
             id=c.getLong(idIndex);
           intentDescription=c.getString(intentIndex);
-        int serialNumber=c.getInt(profileIdIndex);
+        long serialNumber=c.getInt(profileIdIndex);
       user=mUserManager.getUserForSerialNumber(serialNumber);
     if (user == null) {
       itemsToRemove.add(id);
