@@ -1,12 +1,7 @@
 {
   final Runnable exitSpringLoadedRunnable=new Runnable(){
     @Override public void run(){
-      removeExtraEmptyScreen(false,new Runnable(){
-        @Override public void run(){
-          mLauncher.exitSpringLoadedDragModeDelayed(true,Launcher.EXIT_SPRINGLOADED_MODE_SHORT_TIMEOUT,null);
-        }
-      }
-);
+      mLauncher.exitSpringLoadedDragModeDelayed(true,Launcher.EXIT_SPRINGLOADED_MODE_SHORT_TIMEOUT,null);
     }
   }
 ;
@@ -51,6 +46,7 @@
     }
     Runnable onAnimationCompleteRunnable=new Runnable(){
       @Override public void run(){
+        deferRemoveExtraEmptyScreen();
 switch (pendingInfo.itemType) {
 case LauncherSettings.Favorites.ITEM_TYPE_APPWIDGET:
           int span[]=new int[2];

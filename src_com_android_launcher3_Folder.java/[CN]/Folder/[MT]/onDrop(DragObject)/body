@@ -3,12 +3,7 @@
   if (d.dragSource != mLauncher.getWorkspace() && !(d.dragSource instanceof Folder)) {
     cleanUpRunnable=new Runnable(){
       @Override public void run(){
-        mLauncher.getWorkspace().removeExtraEmptyScreen(false,new Runnable(){
-          @Override public void run(){
-            mLauncher.exitSpringLoadedDragModeDelayed(true,Launcher.EXIT_SPRINGLOADED_MODE_SHORT_TIMEOUT_FOLDER_CLOSE,null);
-          }
-        }
-,CLOSE_FOLDER_DELAY_MS,false);
+        mLauncher.exitSpringLoadedDragModeDelayed(true,Launcher.EXIT_SPRINGLOADED_MODE_SHORT_TIMEOUT,null);
       }
     }
 ;
