@@ -12,7 +12,7 @@
     final int appWidgetId=data != null ? data.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,-1) : -1;
     if (resultCode == RESULT_CANCELED) {
       completeTwoStageWidgetDrop(RESULT_CANCELED,appWidgetId);
-      mWorkspace.removeExtraEmptyScreen(true,exitSpringLoaded,ON_ACTIVITY_RESULT_ANIMATION_DELAY,false);
+      mWorkspace.removeExtraEmptyScreenDelayed(true,exitSpringLoaded,ON_ACTIVITY_RESULT_ANIMATION_DELAY,false);
     }
  else     if (resultCode == RESULT_OK) {
       addAppWidgetImpl(appWidgetId,mPendingAddInfo,null,mPendingAddWidgetInfo,ON_ACTIVITY_RESULT_ANIMATION_DELAY);
@@ -60,7 +60,7 @@
       }
 ;
     }
-    mWorkspace.removeExtraEmptyScreen(true,onComplete,ON_ACTIVITY_RESULT_ANIMATION_DELAY,false);
+    mWorkspace.removeExtraEmptyScreenDelayed(true,onComplete,ON_ACTIVITY_RESULT_ANIMATION_DELAY,false);
     return;
   }
   if (resultCode == RESULT_OK && mPendingAddInfo.container != ItemInfo.NO_ID) {
@@ -77,10 +77,10 @@
  else {
       completeAdd(args);
     }
-    mWorkspace.removeExtraEmptyScreen(true,exitSpringLoaded,ON_ACTIVITY_RESULT_ANIMATION_DELAY,false);
+    mWorkspace.removeExtraEmptyScreenDelayed(true,exitSpringLoaded,ON_ACTIVITY_RESULT_ANIMATION_DELAY,false);
   }
  else   if (resultCode == RESULT_CANCELED) {
-    mWorkspace.removeExtraEmptyScreen(true,exitSpringLoaded,ON_ACTIVITY_RESULT_ANIMATION_DELAY,false);
+    mWorkspace.removeExtraEmptyScreenDelayed(true,exitSpringLoaded,ON_ACTIVITY_RESULT_ANIMATION_DELAY,false);
   }
   mDragLayer.clearAnimatedView();
 }

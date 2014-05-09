@@ -9,6 +9,7 @@
   post(new Runnable(){
     @Override public void run(){
       if (mIsDragOccuring) {
+        mDeferRemoveExtraEmptyScreen=false;
         addExtraEmptyScreenOnDrag();
       }
     }

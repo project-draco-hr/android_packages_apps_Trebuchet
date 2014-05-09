@@ -15,6 +15,6 @@
     }
 ;
     completeAddAppWidget(appWidgetId,info.container,info.screenId,boundWidget,appWidgetInfo);
-    mWorkspace.removeExtraEmptyScreen(true,onComplete,delay,false);
+    mWorkspace.removeExtraEmptyScreenDelayed(true,onComplete,delay,false);
   }
 }

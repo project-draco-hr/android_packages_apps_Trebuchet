@@ -1,12 +1,7 @@
 {
   if (isFlingToDelete || !success || (target != mLauncher.getWorkspace() && !(target instanceof DeleteDropTarget) && !(target instanceof Folder))) {
-    mLauncher.getWorkspace().removeExtraEmptyScreen(true,new Runnable(){
-      @Override public void run(){
-        mLauncher.exitSpringLoadedDragMode();
-        mLauncher.unlockScreenOrientation(false);
-      }
-    }
-);
+    mLauncher.exitSpringLoadedDragMode();
+    mLauncher.unlockScreenOrientation(false);
   }
  else {
     mLauncher.unlockScreenOrientation(false);
