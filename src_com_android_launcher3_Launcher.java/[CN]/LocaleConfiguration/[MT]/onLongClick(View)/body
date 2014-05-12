@@ -13,15 +13,15 @@
       }
     }
   }
-  if (!(v instanceof CellLayout)) {
-    v=(View)v.getParent().getParent();
+  CellLayout.CellInfo longClickCellInfo=null;
+  View itemUnderLongClick=null;
+  if (v.getTag() instanceof ItemInfo) {
+    ItemInfo info=(ItemInfo)v.getTag();
+    longClickCellInfo=new CellLayout.CellInfo(v,info);
+    ;
+    itemUnderLongClick=longClickCellInfo.cell;
+    resetAddInfo();
   }
-  resetAddInfo();
-  CellLayout.CellInfo longClickCellInfo=(CellLayout.CellInfo)v.getTag();
-  if (longClickCellInfo == null) {
-    return true;
-  }
-  final View itemUnderLongClick=longClickCellInfo.cell;
   final boolean inHotseat=isHotseatLayout(v);
   boolean allowLongPress=inHotseat || mWorkspace.allowLongPress();
   if (allowLongPress && !mDragController.isDragging()) {
