@@ -1,0 +1,9 @@
+{
+  cell=v;
+  cellX=info.cellX;
+  cellY=info.cellY;
+  spanX=info.spanX;
+  spanY=info.spanY;
+  screenId=info.screenId;
+  container=info.container;
+}

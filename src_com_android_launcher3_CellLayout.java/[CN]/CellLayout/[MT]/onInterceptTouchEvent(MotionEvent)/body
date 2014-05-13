@@ -1,13 +1,7 @@
 {
   final int action=ev.getAction();
-  if (action == MotionEvent.ACTION_DOWN) {
-    clearTagCellInfo();
-  }
   if (mInterceptTouchListener != null && mInterceptTouchListener.onTouch(this,ev)) {
     return true;
-  }
-  if (action == MotionEvent.ACTION_DOWN) {
-    setTagToCellInfoForPoint((int)ev.getX(),(int)ev.getY());
   }
   return false;
 }
