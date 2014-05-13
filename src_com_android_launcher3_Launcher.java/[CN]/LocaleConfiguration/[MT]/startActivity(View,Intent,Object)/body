@@ -1,5 +1,5 @@
 {
-  intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
+  intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
   try {
     boolean useLaunchAnimation=(v != null) && !intent.hasExtra(INTENT_EXTRA_IGNORE_LAUNCH_ANIMATION);
     LauncherAppsCompat launcherApps=LauncherAppsCompat.getInstance(this);
