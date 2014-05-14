@@ -2,12 +2,6 @@
 synchronized (mCache) {
     LauncherActivityInfoCompat launcherActInfo=mLauncherApps.resolveActivity(intent,user);
     ComponentName component=intent.getComponent();
-    try {
-      launcherActInfo.getComponentName();
-    }
- catch (    NullPointerException e) {
-      launcherActInfo=null;
-    }
     if (launcherActInfo == null && component == null) {
       return getDefaultIcon(user);
     }
