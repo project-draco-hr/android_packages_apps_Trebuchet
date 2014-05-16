@@ -1,0 +1,7 @@
+{
+  widthDps=p.minWidthDps;
+  heightDps=p.minHeightDps;
+  value=v;
+  dimens=new PointF(widthDps,heightDps);
+  profile=p;
+}
