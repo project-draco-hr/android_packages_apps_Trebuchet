@@ -11,6 +11,4 @@
   iconTextSize=its;
   numHotseatIcons=hs;
   hotseatIconSize=his;
-  defaultLayoutId=dlId;
-  defaultNoAllAppsLayoutId=dnalId;
 }
