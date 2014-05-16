@@ -1,0 +1,124 @@
+{
+  ContentValues values=new ContentValues();
+  if (LOGD)   Log.v(TAG,String.format("Loading favorites from resid=0x%08x",workspaceResourceId));
+  int count=0;
+  try {
+    XmlResourceParser parser=mContext.getResources().getXml(workspaceResourceId);
+    AttributeSet attrs=Xml.asAttributeSet(parser);
+    beginDocument(parser,TAG_FAVORITES);
+    final int depth=parser.getDepth();
+    int type;
+    while (((type=parser.next()) != XmlPullParser.END_TAG || parser.getDepth() > depth) && type != XmlPullParser.END_DOCUMENT) {
+      if (type != XmlPullParser.START_TAG) {
+        continue;
+      }
+      boolean added=false;
+      final String name=parser.getName();
+      if (TAG_INCLUDE.equals(name)) {
+        final TypedArray a=mContext.obtainStyledAttributes(attrs,R.styleable.Include);
+        final int resId=a.getResourceId(R.styleable.Include_workspace,0);
+        if (LOGD)         Log.v(TAG,String.format(("%" + (2 * (depth + 1)) + "s<include workspace=%08x>"),"",resId));
+        if (resId != 0 && resId != workspaceResourceId) {
+          count+=loadFavoritesRecursive(db,resId,screenIds);
+          added=false;
+        }
+ else {
+          Log.w(TAG,String.format("Skipping <include workspace=0x%08x>",resId));
+        }
+        a.recycle();
+        if (LOGD)         Log.v(TAG,String.format(("%" + (2 * (depth + 1)) + "s</include>"),""));
+        continue;
+      }
+      TypedArray a=mContext.obtainStyledAttributes(attrs,R.styleable.Favorite);
+      long container=LauncherSettings.Favorites.CONTAINER_DESKTOP;
+      if (a.hasValue(R.styleable.Favorite_container)) {
+        container=Long.valueOf(a.getString(R.styleable.Favorite_container));
+      }
+      String screen=a.getString(R.styleable.Favorite_screen);
+      String x=a.getString(R.styleable.Favorite_x);
+      String y=a.getString(R.styleable.Favorite_y);
+      values.clear();
+      values.put(LauncherSettings.Favorites.CONTAINER,container);
+      values.put(LauncherSettings.Favorites.SCREEN,screen);
+      values.put(LauncherSettings.Favorites.CELLX,x);
+      values.put(LauncherSettings.Favorites.CELLY,y);
+      if (LOGD) {
+        final String title=a.getString(R.styleable.Favorite_title);
+        final String pkg=a.getString(R.styleable.Favorite_packageName);
+        final String something=title != null ? title : pkg;
+        Log.v(TAG,String.format(("%" + (2 * (depth + 1)) + "s<%s%s c=%d s=%s x=%s y=%s>"),"",name,(something == null ? "" : (" \"" + something + "\"")),container,screen,x,y));
+      }
+      if (TAG_FAVORITE.equals(name)) {
+        long id=addAppShortcut(db,values,parser);
+        added=id >= 0;
+      }
+ else       if (TAG_SEARCH.equals(name)) {
+        added=addSearchWidget(db,values);
+      }
+ else       if (TAG_CLOCK.equals(name)) {
+        added=addClockWidget(db,values);
+      }
+ else       if (TAG_APPWIDGET.equals(name)) {
+        added=addAppWidget(parser,attrs,type,db,values,a);
+      }
+ else       if (TAG_SHORTCUT.equals(name)) {
+        long id=addUriShortcut(db,values,mContext.getResources(),parser);
+        added=id >= 0;
+      }
+ else       if (TAG_RESOLVE.equals(name)) {
+        added=false;
+        final int groupDepth=parser.getDepth();
+        while ((type=parser.next()) != XmlPullParser.END_TAG || parser.getDepth() > groupDepth) {
+          if (type != XmlPullParser.START_TAG) {
+            continue;
+          }
+          final String fallback_item_name=parser.getName();
+          final TypedArray ar=mContext.obtainStyledAttributes(attrs,R.styleable.Favorite);
+          if (!added) {
+            if (TAG_FAVORITE.equals(fallback_item_name)) {
+              final long id=addAppShortcut(db,values,parser);
+              added=id >= 0;
+            }
+ else {
+              Log.e(TAG,"Fallback groups can contain only favorites " + ar.toString());
+            }
+          }
+          ar.recycle();
+        }
+      }
+ else       if (TAG_FOLDER.equals(name)) {
+        added=loadFolder(db,values,mContext.getResources(),parser);
+      }
+ else       if (TAG_PARTNER_FOLDER.equals(name)) {
+        final Partner partner=Partner.get(mPackageManager);
+        if (partner != null) {
+          final Resources partnerRes=partner.getResources();
+          final int resId=partnerRes.getIdentifier(Partner.RESOURCE_FOLDER,"xml",partner.getPackageName());
+          if (resId != 0) {
+            final XmlResourceParser partnerParser=partnerRes.getXml(resId);
+            beginDocument(partnerParser,TAG_FOLDER);
+            added=loadFolder(db,values,partnerRes,partnerParser);
+          }
+        }
+      }
+      if (added) {
+        long screenId=Long.parseLong(screen);
+        if (!screenIds.contains(screenId) && container == LauncherSettings.Favorites.CONTAINER_DESKTOP) {
+          screenIds.add(screenId);
+        }
+        count++;
+      }
+      a.recycle();
+    }
+  }
+ catch (  XmlPullParserException e) {
+    Log.w(TAG,"Got exception parsing favorites.",e);
+  }
+catch (  IOException e) {
+    Log.w(TAG,"Got exception parsing favorites.",e);
+  }
+catch (  RuntimeException e) {
+    Log.w(TAG,"Got exception parsing favorites.",e);
+  }
+  return count;
+}

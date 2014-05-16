@@ -22,7 +22,7 @@
     Launcher.addDumpLog(TAG,"loadWorkspace: loading default favorites",false);
     LauncherAppState.getLauncherProvider().loadDefaultFavoritesIfNecessary(0);
   }
-  boolean loadedOldDb=LauncherAppState.getLauncherProvider().justLoadedOldDb();
+  boolean loadedOldDb=false;
   Launcher.addDumpLog(TAG,"11683562 -   loadedOldDb: " + loadedOldDb,true);
 synchronized (sBgLock) {
     clearSBgDataStructures();

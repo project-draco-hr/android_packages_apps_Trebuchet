@@ -13,7 +13,6 @@
       editor.putInt(DEFAULT_WORKSPACE_RESOURCE_ID,origWorkspaceResId);
     }
     mOpenHelper.loadFavorites(mOpenHelper.getWritableDatabase(),workspaceResId);
-    mOpenHelper.setFlagJustLoadedOldDb();
     editor.commit();
   }
 }
