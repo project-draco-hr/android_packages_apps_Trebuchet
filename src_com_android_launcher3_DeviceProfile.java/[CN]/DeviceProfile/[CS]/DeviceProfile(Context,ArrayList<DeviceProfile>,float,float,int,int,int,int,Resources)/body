@@ -18,36 +18,31 @@
   overviewModeIconZoneRatio=res.getInteger(R.integer.config_dynamic_grid_overview_icon_zone_percentage) / 100f;
   overviewModeScaleFactor=res.getInteger(R.integer.config_dynamic_grid_overview_scale_percentage) / 100f;
   for (  DeviceProfile p : profiles) {
-    points.add(new DeviceProfileQuery(p.minWidthDps,p.minHeightDps,p.numRows));
+    points.add(new DeviceProfileQuery(p,0f));
   }
-  numRows=Math.round(invDistWeightedInterpolate(minWidth,minHeight,points));
-  points.clear();
-  for (  DeviceProfile p : profiles) {
-    points.add(new DeviceProfileQuery(p.minWidthDps,p.minHeightDps,p.numColumns));
-  }
-  numColumns=Math.round(invDistWeightedInterpolate(minWidth,minHeight,points));
-  points.clear();
-  for (  DeviceProfile p : profiles) {
-    points.add(new DeviceProfileQuery(p.minWidthDps,p.minHeightDps,p.numHotseatIcons));
-  }
-  numHotseatIcons=Math.round(invDistWeightedInterpolate(minWidth,minHeight,points));
+  DeviceProfile closestProfile=findClosestDeviceProfile(minWidth,minHeight,points);
+  numRows=closestProfile.numRows;
+  numColumns=closestProfile.numColumns;
+  numHotseatIcons=closestProfile.numHotseatIcons;
   hotseatAllAppsRank=(int)(numHotseatIcons / 2);
+  defaultLayoutId=closestProfile.defaultLayoutId;
+  defaultNoAllAppsLayoutId=closestProfile.defaultNoAllAppsLayoutId;
   points.clear();
   for (  DeviceProfile p : profiles) {
-    points.add(new DeviceProfileQuery(p.minWidthDps,p.minHeightDps,p.iconSize));
+    points.add(new DeviceProfileQuery(p,p.iconSize));
   }
   iconSize=invDistWeightedInterpolate(minWidth,minHeight,points);
   allAppsIconSizePx=DynamicGrid.pxFromDp(iconSize,dm);
   points.clear();
   for (  DeviceProfile p : profiles) {
-    points.add(new DeviceProfileQuery(p.minWidthDps,p.minHeightDps,p.iconTextSize));
+    points.add(new DeviceProfileQuery(p,p.iconTextSize));
   }
   iconTextSize=invDistWeightedInterpolate(minWidth,minHeight,points);
   iconDrawablePaddingOriginalPx=res.getDimensionPixelSize(R.dimen.dynamic_grid_icon_drawable_padding);
   allAppsIconTextSizePx=DynamicGrid.pxFromDp(iconTextSize,dm);
   points.clear();
   for (  DeviceProfile p : profiles) {
-    points.add(new DeviceProfileQuery(p.minWidthDps,p.minHeightDps,p.hotseatIconSize));
+    points.add(new DeviceProfileQuery(p,p.hotseatIconSize));
   }
   hotseatIconSize=invDistWeightedInterpolate(minWidth,minHeight,points);
   updateFromConfiguration(context,res,wPx,hPx,awPx,ahPx);
