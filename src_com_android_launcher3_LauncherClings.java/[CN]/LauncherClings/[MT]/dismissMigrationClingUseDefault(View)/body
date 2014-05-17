@@ -1,6 +1,3 @@
 {
-  LauncherModel model=mLauncher.getModel();
-  model.resetLoadedState(false,true);
-  model.startLoader(false,PagedView.INVALID_RESTORE_PAGE,LauncherModel.LOADER_FLAG_CLEAR_WORKSPACE);
   dismissMigrationCling();
 }
