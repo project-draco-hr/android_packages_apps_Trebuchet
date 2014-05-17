@@ -11,6 +11,7 @@
   }
   registerReceiver(mReceiver,filter);
   FirstFrameAnimatorHelper.initializeDrawListener(getWindow().getDecorView());
+  setupTransparentSystemBarsForLmp();
   mAttached=true;
   mVisible=true;
 }
