@@ -7,7 +7,7 @@
   mFolderRingAnimator.animateToAcceptState();
   layout.showFolderAccept(mFolderRingAnimator);
   mOpenAlarm.setOnAlarmListener(mOnOpenListener);
-  if (SPRING_LOADING_ENABLED) {
+  if (SPRING_LOADING_ENABLED && ((dragInfo instanceof AppInfo) || (dragInfo instanceof ShortcutInfo))) {
     mOpenAlarm.setAlarm(ON_OPEN_DELAY);
   }
   mDragInfo=(ItemInfo)dragInfo;
