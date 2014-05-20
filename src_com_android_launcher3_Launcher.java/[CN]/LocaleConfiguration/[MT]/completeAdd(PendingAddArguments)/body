@@ -1,19 +1,13 @@
 {
-  boolean result=false;
+  long screenId=ensurePendingDropLayoutExists(args.screenId);
 switch (args.requestCode) {
-case REQUEST_PICK_SHORTCUT:
-    processShortcut(args.intent);
-  break;
 case REQUEST_CREATE_SHORTCUT:
-completeAddShortcut(args.intent,args.container,args.screenId,args.cellX,args.cellY);
-result=true;
-break;
+    completeAddShortcut(args.intent,args.container,screenId,args.cellX,args.cellY);
+  break;
 case REQUEST_CREATE_APPWIDGET:
-int appWidgetId=args.intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,-1);
-completeAddAppWidget(appWidgetId,args.container,args.screenId,null,null);
-result=true;
+completeAddAppWidget(args.appWidgetId,args.container,screenId,null,null);
 break;
 }
 resetAddInfo();
-return result;
+return screenId;
 }
