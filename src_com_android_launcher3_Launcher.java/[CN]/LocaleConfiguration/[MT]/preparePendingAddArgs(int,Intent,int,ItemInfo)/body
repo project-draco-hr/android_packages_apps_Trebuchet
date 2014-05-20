@@ -1,0 +1,11 @@
+{
+  PendingAddArguments args=new PendingAddArguments();
+  args.requestCode=requestCode;
+  args.intent=data;
+  args.container=info.container;
+  args.screenId=info.screenId;
+  args.cellX=info.cellX;
+  args.cellY=info.cellY;
+  args.appWidgetId=appWidgetId;
+  return args;
+}

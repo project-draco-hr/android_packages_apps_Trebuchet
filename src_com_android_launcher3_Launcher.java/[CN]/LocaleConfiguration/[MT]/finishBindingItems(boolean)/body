@@ -15,14 +15,20 @@
     mSavedState=null;
   }
   mWorkspace.restoreInstanceStateForRemainingPages();
-  for (int i=0; i < sPendingAddList.size(); i++) {
-    completeAdd(sPendingAddList.get(i));
-  }
-  sPendingAddList.clear();
   if (!DISABLE_MARKET_BUTTON) {
     updateAppMarketIcon();
   }
   setWorkspaceLoading(false);
+  if (sPendingAddItem != null) {
+    final long screenId=completeAdd(sPendingAddItem);
+    mWorkspace.post(new Runnable(){
+      @Override public void run(){
+        mWorkspace.snapToScreenId(screenId);
+      }
+    }
+);
+    sPendingAddItem=null;
+  }
   if (upgradePath) {
     mWorkspace.getUniqueComponents(true,null);
     mIntentsOnWorkspaceFromUpgradePath=mWorkspace.getUniqueComponents(true,null);

@@ -1,0 +1,4 @@
+int requestCode
+Intent data
+int appWidgetId
+ItemInfo info
