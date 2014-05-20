@@ -1,0 +1,10 @@
+{
+  CellLayout dropLayout=(CellLayout)mWorkspace.getScreenWithId(screenId);
+  if (dropLayout == null) {
+    mWorkspace.addExtraEmptyScreen();
+    return mWorkspace.commitExtraEmptyScreen();
+  }
+ else {
+    return screenId;
+  }
+}
