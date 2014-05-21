@@ -1,0 +1,7 @@
+{
+  if (packageName == null) {
+    return false;
+  }
+  final LauncherAppsCompat launcherApps=LauncherAppsCompat.getInstance(context);
+  return launcherApps.isPackageEnabledForProfile(packageName,user);
+}
