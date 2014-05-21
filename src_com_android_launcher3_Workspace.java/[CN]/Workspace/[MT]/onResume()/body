@@ -8,6 +8,7 @@
   AccessibilityManager am=(AccessibilityManager)getContext().getSystemService(Context.ACCESSIBILITY_SERVICE);
   sAccessibilityEnabled=am.isEnabled();
   if (LauncherAppState.getInstance().hasWallpaperChangedSinceLastCheck()) {
+    setWallpaperDimension();
   }
   mWallpaperIsLiveWallpaper=mWallpaperManager.getWallpaperInfo() != null;
   mLastSetWallpaperOffsetSteps=0f;
