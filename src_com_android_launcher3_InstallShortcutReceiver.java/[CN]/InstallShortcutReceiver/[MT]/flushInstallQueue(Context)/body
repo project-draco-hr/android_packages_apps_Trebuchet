@@ -16,6 +16,17 @@
         continue;
       }
       final boolean exists=LauncherModel.shortcutExists(context,name,intent);
+      String packageName=intent.getPackage();
+      if (packageName == null) {
+        packageName=intent.getComponent() == null ? null : intent.getComponent().getPackageName();
+      }
+      if (packageName != null && !packageName.isEmpty()) {
+        UserHandleCompat myUserHandle=UserHandleCompat.myUserHandle();
+        if (!LauncherModel.isValidPackage(context,packageName,myUserHandle)) {
+          if (DBG)           Log.d(TAG,"Ignoring shortcut for absent package:" + intent);
+          continue;
+        }
+      }
       if (!exists) {
         ShortcutInfo info=getShortcutInfo(context,pendingInfo.data,pendingInfo.launchIntent);
         addShortcuts.add(info);
