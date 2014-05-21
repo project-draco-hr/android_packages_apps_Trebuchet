@@ -22,5 +22,4 @@
   display.getSize(mDisplaySize);
   mMaxDistanceForFolderCreation=(0.55f * grid.iconSizePx);
   mFlingThresholdVelocity=(int)(FLING_THRESHOLD_VELOCITY * mDensity);
-  setWallpaperDimension();
 }
