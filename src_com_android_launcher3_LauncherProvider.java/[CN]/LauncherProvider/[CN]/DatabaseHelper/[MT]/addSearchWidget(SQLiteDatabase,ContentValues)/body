@@ -1,4 +1,0 @@
-{
-  ComponentName cn=getSearchWidgetProvider();
-  return addAppWidget(db,values,cn,4,1,null);
-}

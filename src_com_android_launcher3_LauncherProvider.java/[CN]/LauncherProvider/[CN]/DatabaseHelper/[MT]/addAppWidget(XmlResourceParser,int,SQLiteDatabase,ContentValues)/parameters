@@ -1,6 +1,4 @@
 XmlResourceParser parser
-AttributeSet attrs
 int type
 SQLiteDatabase db
 ContentValues values
-TypedArray a

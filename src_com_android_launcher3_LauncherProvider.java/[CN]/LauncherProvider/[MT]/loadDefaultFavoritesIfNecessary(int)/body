@@ -3,7 +3,16 @@
   SharedPreferences sp=getContext().getSharedPreferences(spKey,Context.MODE_PRIVATE);
   if (sp.getBoolean(EMPTY_DATABASE_CREATED,false)) {
     Log.d(TAG,"loading default workspace");
+    Resources res=getContext().getResources();
     int workspaceResId=origWorkspaceResId;
+    if (workspaceResId == 0) {
+      final Partner partner=Partner.get(getContext().getPackageManager());
+      if (partner != null && partner.hasDefaultLayout()) {
+        final Resources partnerRes=partner.getResources();
+        workspaceResId=partnerRes.getIdentifier(Partner.RESOURCE_DEFAULT_LAYOUT,"xml",partner.getPackageName());
+        res=partnerRes;
+      }
+    }
     if (workspaceResId == 0) {
       workspaceResId=sp.getInt(DEFAULT_WORKSPACE_RESOURCE_ID,getDefaultWorkspaceResourceId());
     }
@@ -12,7 +21,7 @@
     if (origWorkspaceResId != 0) {
       editor.putInt(DEFAULT_WORKSPACE_RESOURCE_ID,origWorkspaceResId);
     }
-    mOpenHelper.loadFavorites(mOpenHelper.getWritableDatabase(),workspaceResId);
+    mOpenHelper.loadFavorites(mOpenHelper.getWritableDatabase(),res,workspaceResId);
     editor.commit();
   }
 }

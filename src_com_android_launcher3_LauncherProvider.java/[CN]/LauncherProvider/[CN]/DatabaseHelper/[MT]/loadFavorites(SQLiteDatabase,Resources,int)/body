@@ -1,6 +1,6 @@
 {
   ArrayList<Long> screenIds=new ArrayList<Long>();
-  int count=loadFavoritesRecursive(db,workspaceResourceId,screenIds);
+  int count=loadFavoritesRecursive(db,res,workspaceResourceId,screenIds);
   Collections.sort(screenIds);
   int rank=0;
   ContentValues values=new ContentValues();

@@ -1,6 +1,6 @@
 {
-  String packageName=a.getString(R.styleable.Favorite_packageName);
-  String className=a.getString(R.styleable.Favorite_className);
+  String packageName=getAttributeValue(parser,ATTR_PACKAGE_NAME);
+  String className=getAttributeValue(parser,ATTR_CLASS_NAME);
   if (packageName == null || className == null) {
     return false;
   }
@@ -16,22 +16,24 @@
       mPackageManager.getReceiverInfo(cn,0);
     }
  catch (    Exception e1) {
+      System.out.println("Can't find widget provider: " + className);
       hasPackage=false;
     }
   }
   if (hasPackage) {
-    int spanX=a.getInt(R.styleable.Favorite_spanX,0);
-    int spanY=a.getInt(R.styleable.Favorite_spanY,0);
+    String spanX=getAttributeValue(parser,ATTR_SPAN_X);
+    String spanY=getAttributeValue(parser,ATTR_SPAN_Y);
+    values.put(Favorites.SPANX,spanX);
+    values.put(Favorites.SPANY,spanY);
     Bundle extras=new Bundle();
     int widgetDepth=parser.getDepth();
     while ((type=parser.next()) != XmlPullParser.END_TAG || parser.getDepth() > widgetDepth) {
       if (type != XmlPullParser.START_TAG) {
         continue;
       }
-      TypedArray ar=mContext.obtainStyledAttributes(attrs,R.styleable.Extra);
       if (TAG_EXTRA.equals(parser.getName())) {
-        String key=ar.getString(R.styleable.Extra_key);
-        String value=ar.getString(R.styleable.Extra_value);
+        String key=getAttributeValue(parser,ATTR_KEY);
+        String value=getAttributeValue(parser,ATTR_VALUE);
         if (key != null && value != null) {
           extras.putString(key,value);
         }
@@ -42,9 +44,8 @@
  else {
         throw new RuntimeException("Widgets can contain only extras");
       }
-      ar.recycle();
     }
-    return addAppWidget(db,values,cn,spanX,spanY,extras);
+    return addAppWidget(db,values,cn,extras);
   }
   return false;
 }

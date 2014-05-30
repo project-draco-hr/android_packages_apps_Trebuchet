@@ -1,4 +1,0 @@
-{
-  ComponentName cn=new ComponentName("com.android.alarmclock","com.android.alarmclock.AnalogAppWidgetProvider");
-  return addAppWidget(db,values,cn,2,2,null);
-}
