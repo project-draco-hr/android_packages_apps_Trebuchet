@@ -5,6 +5,5 @@
       return drawables[i];
     }
   }
-  System.out.println("No drawable, returning null " + this);
   return null;
 }

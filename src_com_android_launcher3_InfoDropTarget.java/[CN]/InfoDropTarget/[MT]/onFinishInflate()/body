@@ -4,15 +4,6 @@
   Resources r=getResources();
   mHoverColor=r.getColor(R.color.info_target_hover_tint);
   mDrawable=(TransitionDrawable)getCurrentDrawable();
-  if (mDrawable == null) {
-    System.out.println("onFinishInflate -- drawable null");
-  }
-  Drawable normal=r.getDrawable(R.drawable.ic_launcher_info_normal_holo);
-  Drawable active=r.getDrawable(R.drawable.ic_launcher_info_active_holo);
-  Drawable selector=r.getDrawable(R.drawable.info_target_selector);
-  System.out.println("Normal: " + normal);
-  System.out.println("Active: " + active);
-  System.out.println("Selector: " + selector);
   if (null != mDrawable) {
     mDrawable.setCrossFadeEnabled(true);
   }
