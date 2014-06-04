@@ -1,5 +1,7 @@
 {
   super.onDragEnter(d);
-  mDrawable.startTransition(mTransitionDuration);
+  if (mDrawable != null) {
+    mDrawable.startTransition(mTransitionDuration);
+  }
   setTextColor(mHoverColor);
 }
