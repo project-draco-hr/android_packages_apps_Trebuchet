@@ -3,13 +3,8 @@
   if (!source.supportsAppInfoDropTarget()) {
     isVisible=false;
   }
-  if (mDrawable == null) {
-    System.out.println("onDragStart -- drawable null");
-  }
   mActive=isVisible;
-  if (mDrawable != null) {
-    mDrawable.resetTransition();
-  }
+  mDrawable.resetTransition();
   setTextColor(mOriginalTextColor);
   ((ViewGroup)getParent()).setVisibility(isVisible ? View.VISIBLE : View.GONE);
 }
