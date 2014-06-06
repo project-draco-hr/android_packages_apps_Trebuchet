@@ -12,6 +12,9 @@
         return false;
       }
     }
+ else {
+      return false;
+    }
   }
   CellLayout.CellInfo longClickCellInfo=null;
   View itemUnderLongClick=null;
