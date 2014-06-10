@@ -1,0 +1,7 @@
+{
+  mCache.clear();
+  if (mIconDb != null) {
+    mIconDb.close();
+  }
+  mIconDb=new IconDB(mContext);
+}

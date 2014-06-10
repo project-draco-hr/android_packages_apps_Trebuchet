@@ -1,0 +1,6 @@
+{
+  if (mDb != null) {
+    mDb.close();
+  }
+  mDb=new CacheDb(mContext);
+}

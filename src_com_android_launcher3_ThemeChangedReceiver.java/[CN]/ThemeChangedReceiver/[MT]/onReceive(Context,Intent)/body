@@ -1,0 +1,11 @@
+{
+  ArrayList<String> components=intent.getStringArrayListExtra(EXTRA_COMPONENTS);
+  if (isInterestingThemeChange(components)) {
+    LauncherAppState app=LauncherAppState.getInstance();
+    clearAppIconCache(context);
+    clearWidgetPreviewCache(context);
+    app.recreateWidgetPreviewDb();
+    app.getIconCache().flush();
+    app.getModel().forceReload();
+  }
+}

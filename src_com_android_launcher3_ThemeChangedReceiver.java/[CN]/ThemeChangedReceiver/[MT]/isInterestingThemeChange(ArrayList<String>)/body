@@ -1,0 +1,10 @@
+{
+  if (components != null) {
+    for (    String component : components) {
+      if (component.equals(MODIFIES_ICONS) || component.equals(MODIFIES_FONTS) || component.equals(MODIFIES_OVERLAYS)) {
+        return true;
+      }
+    }
+  }
+  return false;
+}
