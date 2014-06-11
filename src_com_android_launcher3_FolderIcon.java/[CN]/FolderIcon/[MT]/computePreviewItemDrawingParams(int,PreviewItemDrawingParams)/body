@@ -9,6 +9,9 @@
   float transX=offset + scaleOffsetCorrection;
   float totalScale=mBaselineIconScale * scale;
   final int overlayAlpha=(int)(80 * (1 - r));
+  if (Utilities.isLmp()) {
+    transX=(mAvailableSpaceInPreview - scaledSize) / 2;
+  }
   if (params == null) {
     params=new PreviewItemDrawingParams(transX,transY,totalScale,overlayAlpha);
   }
