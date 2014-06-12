@@ -1,5 +1,5 @@
 {
-  getOverviewModePages(mTempVisiblePagesRange);
+  getFreeScrollPageRange(mTempVisiblePagesRange);
   if (isLayoutRtl()) {
     mFreeScrollMinScrollX=getScrollForPage(mTempVisiblePagesRange[1]);
     mFreeScrollMaxScrollX=getScrollForPage(mTempVisiblePagesRange[0]);

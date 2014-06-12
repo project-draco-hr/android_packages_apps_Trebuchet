@@ -3,7 +3,7 @@
   if (mTouchState != TOUCH_STATE_REST || dragViewIndex == -1)   return false;
   mTempVisiblePagesRange[0]=0;
   mTempVisiblePagesRange[1]=getPageCount() - 1;
-  getOverviewModePages(mTempVisiblePagesRange);
+  getFreeScrollPageRange(mTempVisiblePagesRange);
   mReorderingStarted=true;
   if (mTempVisiblePagesRange[0] <= dragViewIndex && dragViewIndex <= mTempVisiblePagesRange[1]) {
     mDragView=getChildAt(dragViewIndex);

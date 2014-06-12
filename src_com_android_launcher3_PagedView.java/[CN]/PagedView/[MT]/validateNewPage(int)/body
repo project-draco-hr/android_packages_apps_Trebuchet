@@ -1,0 +1,9 @@
+{
+  int validatedPage=newPage;
+  if (mFreeScroll) {
+    getFreeScrollPageRange(mTempVisiblePagesRange);
+    validatedPage=Math.max(mTempVisiblePagesRange[0],Math.min(newPage,mTempVisiblePagesRange[1]));
+  }
+  validatedPage=Math.max(0,Math.min(validatedPage,getPageCount() - 1));
+  return validatedPage;
+}

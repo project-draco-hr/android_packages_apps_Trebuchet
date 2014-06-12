@@ -10,7 +10,7 @@
   }
  else   if (mNextPage != INVALID_PAGE) {
     sendScrollAccessibilityEvent();
-    mCurrentPage=Math.max(0,Math.min(mNextPage,getPageCount() - 1));
+    mCurrentPage=validateNewPage(mNextPage);
     mNextPage=INVALID_PAGE;
     notifyPageSwitchListener();
     if (mDeferLoadAssociatedPagesUntilScrollCompletes) {

@@ -1,4 +1,5 @@
 {
+  whichPage=validateNewPage(whichPage);
   mNextPage=whichPage;
   View focusedChild=getFocusedChild();
   if (focusedChild != null && whichPage != mCurrentPage && focusedChild == getPageAt(mCurrentPage)) {
