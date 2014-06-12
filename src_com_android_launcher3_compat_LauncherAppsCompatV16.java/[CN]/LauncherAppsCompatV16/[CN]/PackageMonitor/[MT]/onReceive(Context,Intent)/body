@@ -8,26 +8,26 @@
       return;
     }
     if (Intent.ACTION_PACKAGE_CHANGED.equals(action)) {
-      for (      OnAppsChangedListenerCompat listener : getListeners()) {
-        listener.onPackageChanged(user,packageName);
+      for (      OnAppsChangedCallbackCompat callback : getCallbacks()) {
+        callback.onPackageChanged(packageName,user);
       }
     }
  else     if (Intent.ACTION_PACKAGE_REMOVED.equals(action)) {
       if (!replacing) {
-        for (        OnAppsChangedListenerCompat listener : getListeners()) {
-          listener.onPackageRemoved(user,packageName);
+        for (        OnAppsChangedCallbackCompat callback : getCallbacks()) {
+          callback.onPackageRemoved(packageName,user);
         }
       }
     }
  else     if (Intent.ACTION_PACKAGE_ADDED.equals(action)) {
       if (!replacing) {
-        for (        OnAppsChangedListenerCompat listener : getListeners()) {
-          listener.onPackageAdded(user,packageName);
+        for (        OnAppsChangedCallbackCompat callback : getCallbacks()) {
+          callback.onPackageAdded(packageName,user);
         }
       }
  else {
-        for (        OnAppsChangedListenerCompat listener : getListeners()) {
-          listener.onPackageChanged(user,packageName);
+        for (        OnAppsChangedCallbackCompat callback : getCallbacks()) {
+          callback.onPackageChanged(packageName,user);
         }
       }
     }
@@ -35,15 +35,15 @@
  else   if (Intent.ACTION_EXTERNAL_APPLICATIONS_AVAILABLE.equals(action)) {
     final boolean replacing=intent.getBooleanExtra(Intent.EXTRA_REPLACING,false);
     String[] packages=intent.getStringArrayExtra(Intent.EXTRA_CHANGED_PACKAGE_LIST);
-    for (    OnAppsChangedListenerCompat listener : getListeners()) {
-      listener.onPackagesAvailable(user,packages,replacing);
+    for (    OnAppsChangedCallbackCompat callback : getCallbacks()) {
+      callback.onPackagesAvailable(packages,user,replacing);
     }
   }
  else   if (Intent.ACTION_EXTERNAL_APPLICATIONS_UNAVAILABLE.equals(action)) {
     final boolean replacing=intent.getBooleanExtra(Intent.EXTRA_REPLACING,false);
     String[] packages=intent.getStringArrayExtra(Intent.EXTRA_CHANGED_PACKAGE_LIST);
-    for (    OnAppsChangedListenerCompat listener : getListeners()) {
-      listener.onPackagesUnavailable(user,packages,replacing);
+    for (    OnAppsChangedCallbackCompat callback : getCallbacks()) {
+      callback.onPackagesUnavailable(packages,user,replacing);
     }
   }
 }

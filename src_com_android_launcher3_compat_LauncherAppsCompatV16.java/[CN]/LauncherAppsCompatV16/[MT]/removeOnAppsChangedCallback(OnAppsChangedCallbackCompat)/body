@@ -1,0 +1,6 @@
+{
+  mCallbacks.remove(callback);
+  if (mCallbacks.size() == 0) {
+    unregisterForPackageIntents();
+  }
+}

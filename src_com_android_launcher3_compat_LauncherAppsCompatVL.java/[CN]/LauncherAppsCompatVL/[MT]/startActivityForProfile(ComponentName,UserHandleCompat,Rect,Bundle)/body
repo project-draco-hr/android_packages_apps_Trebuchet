@@ -1,0 +1,3 @@
+{
+  mLauncherApps.startActivityForProfile(component,user.getUser(),sourceBounds,opts);
+}

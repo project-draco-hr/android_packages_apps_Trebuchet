@@ -1,9 +1,0 @@
-{
-  Object wrappedListener=null;
-synchronized (mListeners) {
-    wrappedListener=mListeners.remove(listener);
-  }
-  if (wrappedListener != null) {
-    ReflectUtils.invokeMethod(mLauncherApps,mRemoveOnAppsChangedListener,wrappedListener);
-  }
-}

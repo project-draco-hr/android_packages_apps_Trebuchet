@@ -1,7 +1,0 @@
-{
-  Object wrappedListener=Proxy.newProxyInstance(mListenerClass.getClassLoader(),new Class[]{mListenerClass},new WrappedListener(listener));
-synchronized (mListeners) {
-    mListeners.put(listener,wrappedListener);
-  }
-  ReflectUtils.invokeMethod(mLauncherApps,mAddOnAppsChangedListener,wrappedListener);
-}

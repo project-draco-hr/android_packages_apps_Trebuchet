@@ -1,3 +1,3 @@
 {
-  return (ComponentName)ReflectUtils.invokeMethod(mLauncherActivityInfo,mGetComponentName);
+  return mLauncherActivityInfo.getComponentName();
 }
