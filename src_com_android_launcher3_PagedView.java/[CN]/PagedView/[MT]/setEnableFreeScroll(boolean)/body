@@ -2,7 +2,7 @@
   mFreeScroll=freeScroll;
   if (mFreeScroll) {
     updateFreescrollBounds();
-    getOverviewModePages(mTempVisiblePagesRange);
+    getFreeScrollPageRange(mTempVisiblePagesRange);
     if (getCurrentPage() < mTempVisiblePagesRange[0]) {
       setCurrentPage(mTempVisiblePagesRange[0]);
     }

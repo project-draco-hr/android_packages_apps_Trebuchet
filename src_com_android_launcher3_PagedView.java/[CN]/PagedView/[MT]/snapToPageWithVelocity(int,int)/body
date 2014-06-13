@@ -1,5 +1,5 @@
 {
-  whichPage=Math.max(0,Math.min(whichPage,getChildCount() - 1));
+  whichPage=validateNewPage(whichPage);
   int halfScreenSize=getViewportWidth() / 2;
   final int newX=getScrollForPage(whichPage);
   int delta=newX - mUnboundedScrollX;
