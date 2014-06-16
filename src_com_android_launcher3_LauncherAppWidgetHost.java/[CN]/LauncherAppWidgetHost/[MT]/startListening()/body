@@ -1,0 +1,12 @@
+{
+  try {
+    super.startListening();
+  }
+ catch (  Exception e) {
+    if (e.getCause() instanceof TransactionTooLargeException) {
+    }
+ else {
+      throw new RuntimeException(e);
+    }
+  }
+}
