@@ -43,7 +43,7 @@
     android.os.Debug.stopMethodTracing();
   }
   if (!mRestoring) {
-    if (DISABLE_SYNCHRONOUS_BINDING_CURRENT_PAGE || sPausedFromUserAction) {
+    if (DISABLE_SYNCHRONOUS_BINDING_CURRENT_PAGE) {
       mModel.startLoader(true,PagedView.INVALID_RESTORE_PAGE);
     }
  else {

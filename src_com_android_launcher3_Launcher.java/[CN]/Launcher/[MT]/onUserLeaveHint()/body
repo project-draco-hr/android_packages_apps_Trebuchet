@@ -1,4 +1,0 @@
-{
-  super.onUserLeaveHint();
-  sPausedFromUserAction=true;
-}
