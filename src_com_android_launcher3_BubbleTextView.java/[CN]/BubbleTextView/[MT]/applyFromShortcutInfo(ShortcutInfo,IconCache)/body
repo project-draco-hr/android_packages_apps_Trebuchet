@@ -6,6 +6,9 @@
   setCompoundDrawables(null,iconDrawable,null,null);
   setCompoundDrawablePadding(grid.iconDrawablePaddingPx);
   setText(info.title);
+  if (info.contentDescription != null) {
+    setContentDescription(info.contentDescription);
+  }
   setTag(info);
   if (info.isPromise()) {
     setState(ShortcutInfo.PACKAGE_STATE_UNKNOWN);
