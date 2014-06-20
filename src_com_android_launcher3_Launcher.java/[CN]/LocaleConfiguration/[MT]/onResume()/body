@@ -14,7 +14,6 @@
   mOnResumeState=State.NONE;
   setWorkspaceBackground(mState == State.WORKSPACE);
   mPaused=false;
-  sPausedFromUserAction=false;
   if (mRestoring || mOnResumeNeedsLoad) {
     setWorkspaceLoading(true);
     mModel.startLoader(true,PagedView.INVALID_RESTORE_PAGE);
