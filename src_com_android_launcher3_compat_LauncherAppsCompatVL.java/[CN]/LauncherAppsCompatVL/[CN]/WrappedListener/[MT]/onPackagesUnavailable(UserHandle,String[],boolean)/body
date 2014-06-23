@@ -1,3 +1,0 @@
-{
-  mListener.onPackagesUnavailable(UserHandleCompat.fromUser(user),packageNames,replacing);
-}

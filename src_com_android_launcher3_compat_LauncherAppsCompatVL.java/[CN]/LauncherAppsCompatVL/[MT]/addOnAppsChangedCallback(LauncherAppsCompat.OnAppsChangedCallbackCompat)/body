@@ -1,0 +1,7 @@
+{
+  WrappedCallback wrappedCallback=new WrappedCallback(callback);
+synchronized (mCallbacks) {
+    mCallbacks.put(callback,wrappedCallback);
+  }
+  mLauncherApps.addOnAppsChangedCallback(wrappedCallback);
+}

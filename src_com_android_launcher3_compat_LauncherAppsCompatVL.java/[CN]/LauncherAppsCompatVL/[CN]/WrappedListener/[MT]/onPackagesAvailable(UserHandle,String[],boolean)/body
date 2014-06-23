@@ -1,3 +1,0 @@
-{
-  mListener.onPackagesAvailable(UserHandleCompat.fromUser(user),packageNames,replacing);
-}

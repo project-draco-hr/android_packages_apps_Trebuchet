@@ -1,9 +1,0 @@
-{
-  try {
-    return Class.forName(className);
-  }
- catch (  ClassNotFoundException e) {
-    Log.e(TAG,"Couldn't find class " + className,e);
-    return null;
-  }
-}

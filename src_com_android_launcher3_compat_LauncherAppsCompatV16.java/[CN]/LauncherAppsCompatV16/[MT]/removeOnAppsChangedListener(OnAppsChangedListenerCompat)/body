@@ -1,6 +1,0 @@
-{
-  mListeners.remove(listener);
-  if (mListeners.size() == 0) {
-    unregisterForPackageIntents();
-  }
-}

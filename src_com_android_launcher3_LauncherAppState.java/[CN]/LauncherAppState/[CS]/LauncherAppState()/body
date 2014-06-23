@@ -14,7 +14,7 @@
   mBuildInfo=BuildInfo.loadByName(sContext.getString(R.string.build_info_class));
   mModel=new LauncherModel(this,mIconCache,mAppFilter);
   final LauncherAppsCompat launcherApps=LauncherAppsCompat.getInstance(sContext);
-  launcherApps.addOnAppsChangedListener(mModel);
+  launcherApps.addOnAppsChangedCallback(mModel);
   IntentFilter filter=new IntentFilter();
   filter.addAction(Intent.ACTION_LOCALE_CHANGED);
   filter.addAction(Intent.ACTION_CONFIGURATION_CHANGED);
