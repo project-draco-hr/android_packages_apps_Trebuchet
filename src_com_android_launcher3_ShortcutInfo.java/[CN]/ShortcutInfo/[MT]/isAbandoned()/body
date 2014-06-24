@@ -1,0 +1,3 @@
+{
+  return isPromise() && (mState == ShortcutInfo.PACKAGE_STATE_ERROR || mState == ShortcutInfo.PACKAGE_STATE_UNKNOWN);
+}

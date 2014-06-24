@@ -4,6 +4,9 @@
     if (i instanceof ShortcutInfo) {
       ShortcutInfo info=(ShortcutInfo)i;
       ComponentName cn=info.intent.getComponent();
+      if (info.restoredIntent != null) {
+        cn=info.restoredIntent.getComponent();
+      }
       if (cn != null && f.filterItem(null,info,cn)) {
         filtered.add(info);
       }
@@ -12,6 +15,9 @@
       FolderInfo info=(FolderInfo)i;
       for (      ShortcutInfo s : info.contents) {
         ComponentName cn=s.intent.getComponent();
+        if (s.restoredIntent != null) {
+          cn=s.restoredIntent.getComponent();
+        }
         if (cn != null && f.filterItem(info,s,cn)) {
           filtered.add(s);
         }

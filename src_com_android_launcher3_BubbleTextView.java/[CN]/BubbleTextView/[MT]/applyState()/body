@@ -1,7 +1,8 @@
 {
   int alpha=getResources().getInteger(R.integer.promise_icon_alpha);
-  if (DEBUG)   Log.d(TAG,"applying icon state: " + mState);
-switch (mState) {
+  final int state=getState();
+  if (DEBUG)   Log.d(TAG,"applying icon state: " + state);
+switch (state) {
 case ShortcutInfo.PACKAGE_STATE_DEFAULT:
     super.setText(mDefaultText);
   alpha=255;

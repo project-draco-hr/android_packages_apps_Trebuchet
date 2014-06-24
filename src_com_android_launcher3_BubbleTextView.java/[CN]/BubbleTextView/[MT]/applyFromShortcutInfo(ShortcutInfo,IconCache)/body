@@ -5,9 +5,8 @@
   Drawable iconDrawable=Utilities.createIconDrawable(b);
   setCompoundDrawables(null,iconDrawable,null,null);
   setCompoundDrawablePadding(grid.iconDrawablePaddingPx);
-  setText(info.title);
   setTag(info);
   if (info.isPromise()) {
-    setState(ShortcutInfo.PACKAGE_STATE_UNKNOWN);
+    applyState();
   }
 }

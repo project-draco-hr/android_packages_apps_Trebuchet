@@ -1,0 +1,5 @@
+{
+  ArrayList<BubbleTextView> views=new ArrayList<BubbleTextView>(1);
+  views.add(view);
+  removeAbandonedPromises(views,user);
+}

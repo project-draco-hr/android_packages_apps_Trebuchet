@@ -2,5 +2,6 @@
   if (restoredIntent != null) {
     intent=restoredIntent;
     restoredIntent=null;
+    mState=PACKAGE_STATE_DEFAULT;
   }
 }

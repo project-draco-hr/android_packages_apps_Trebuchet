@@ -1,0 +1,12 @@
+{
+  mapOverShortcuts(Workspace.MAP_RECURSE,new Workspace.ShortcutOperator(){
+    @Override public boolean evaluate(    ItemInfo info,    View view,    View parent){
+      if (info instanceof ShortcutInfo && ((ShortcutInfo)info).isAbandoned() && view instanceof BubbleTextView) {
+        abandoned.add((BubbleTextView)view);
+      }
+      return false;
+    }
+  }
+);
+  return abandoned;
+}
