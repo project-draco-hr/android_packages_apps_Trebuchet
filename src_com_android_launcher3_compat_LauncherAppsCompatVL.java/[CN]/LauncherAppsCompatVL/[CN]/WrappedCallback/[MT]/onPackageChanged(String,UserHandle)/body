@@ -1,3 +1,0 @@
-{
-  mCallback.onPackageChanged(packageName,UserHandleCompat.fromUser(user));
-}

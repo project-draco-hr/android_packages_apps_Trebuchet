@@ -1,0 +1,8 @@
+{
+  if (listener != null && !mListeners.contains(listener)) {
+    mListeners.add(listener);
+    if (mListeners.size() == 1) {
+      registerForPackageIntents();
+    }
+  }
+}

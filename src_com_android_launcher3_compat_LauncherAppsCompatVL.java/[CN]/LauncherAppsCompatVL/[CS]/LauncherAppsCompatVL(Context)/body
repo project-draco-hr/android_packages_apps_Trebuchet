@@ -1,4 +1,0 @@
-{
-  super();
-  mLauncherApps=(LauncherApps)context.getSystemService("launcherapps");
-}

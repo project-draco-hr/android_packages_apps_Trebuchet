@@ -7,7 +7,6 @@
     info.title="";
   }
   info.user=UserHandleCompat.myUserHandle();
-  info.contentDescription=mUserManager.getBadgedLabelForUser(info.title.toString(),info.user);
   info.setIcon(mIconCache.getIcon(intent,info.title.toString(),info.user));
   info.itemType=LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT;
   info.restoredIntent=intent;

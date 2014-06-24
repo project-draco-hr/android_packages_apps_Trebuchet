@@ -3,6 +3,5 @@ synchronized (mCache) {
     CacheEntry entry=cacheLocked(application.componentName,info,labelCache,info.getUser());
     application.title=entry.title;
     application.iconBitmap=entry.icon;
-    application.contentDescription=entry.contentDescription;
   }
 }

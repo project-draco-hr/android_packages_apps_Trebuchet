@@ -1,3 +1,3 @@
 {
-  return mLauncherActivityInfo.getBadgedIcon(density);
+  return (Drawable)ReflectUtils.invokeMethod(mLauncherActivityInfo,mGetBadgedIcon,density);
 }

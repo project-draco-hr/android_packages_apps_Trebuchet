@@ -22,7 +22,7 @@
       startActivity(intent,optsBundle);
     }
  else {
-      launcherApps.startActivityForProfile(intent.getComponent(),user,intent.getSourceBounds(),optsBundle);
+      launcherApps.startActivityForProfile(intent.getComponent(),intent.getSourceBounds(),optsBundle,user);
     }
     return true;
   }

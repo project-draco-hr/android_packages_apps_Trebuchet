@@ -1,9 +1,0 @@
-{
-  WrappedCallback wrappedCallback=null;
-synchronized (mCallbacks) {
-    wrappedCallback=mCallbacks.remove(callback);
-  }
-  if (wrappedCallback != null) {
-    mLauncherApps.removeOnAppsChangedCallback(wrappedCallback);
-  }
-}

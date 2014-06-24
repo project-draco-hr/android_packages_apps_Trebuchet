@@ -63,7 +63,6 @@ for (ItemInfo i : infos) {
 if (isShortcutInfoUpdateable(i)) {
 ShortcutInfo info=(ShortcutInfo)i;
 info.title=a.title.toString();
-info.contentDescription=a.contentDescription;
 updateItemInDatabase(context,info);
 }
 }

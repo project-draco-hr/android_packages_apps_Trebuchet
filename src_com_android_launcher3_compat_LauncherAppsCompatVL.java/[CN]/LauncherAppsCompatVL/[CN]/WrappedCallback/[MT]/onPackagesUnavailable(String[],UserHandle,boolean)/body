@@ -1,3 +1,0 @@
-{
-  mCallback.onPackagesUnavailable(packageNames,UserHandleCompat.fromUser(user),replacing);
-}
