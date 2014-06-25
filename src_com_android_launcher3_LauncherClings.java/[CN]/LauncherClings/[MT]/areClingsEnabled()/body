@@ -16,5 +16,8 @@
       return false;
     }
   }
+  if (Settings.Secure.getInt(mLauncher.getContentResolver(),SKIP_FIRST_USE_HINTS,0) == 1) {
+    return false;
+  }
   return true;
 }
