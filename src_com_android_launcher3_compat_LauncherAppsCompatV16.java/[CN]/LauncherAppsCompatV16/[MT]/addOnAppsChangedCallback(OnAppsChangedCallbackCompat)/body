@@ -1,0 +1,8 @@
+{
+  if (callback != null && !mCallbacks.contains(callback)) {
+    mCallbacks.add(callback);
+    if (mCallbacks.size() == 1) {
+      registerForPackageIntents();
+    }
+  }
+}

@@ -1,14 +1,11 @@
 {
-  Method method=ReflectUtils.getMethod(mUserManager.getClass(),"getUserProfiles");
-  if (method != null) {
-    List<UserHandle> users=(List<UserHandle>)ReflectUtils.invokeMethod(mUserManager,method);
-    if (users != null) {
-      ArrayList<UserHandleCompat> compatUsers=new ArrayList<UserHandleCompat>(users.size());
-      for (      UserHandle user : users) {
-        compatUsers.add(UserHandleCompat.fromUser(user));
-      }
-      return compatUsers;
-    }
+  List<UserHandle> users=mUserManager.getUserProfiles();
+  if (users == null) {
+    return Collections.EMPTY_LIST;
   }
-  return super.getUserProfiles();
+  ArrayList<UserHandleCompat> compatUsers=new ArrayList<UserHandleCompat>(users.size());
+  for (  UserHandle user : users) {
+    compatUsers.add(UserHandleCompat.fromUser(user));
+  }
+  return compatUsers;
 }

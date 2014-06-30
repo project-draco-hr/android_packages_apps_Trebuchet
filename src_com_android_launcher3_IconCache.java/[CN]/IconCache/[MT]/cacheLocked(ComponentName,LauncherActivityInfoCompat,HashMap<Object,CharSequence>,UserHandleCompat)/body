@@ -15,6 +15,7 @@
           labelCache.put(labelKey,entry.title);
         }
       }
+      entry.contentDescription=mUserManager.getBadgedLabelForUser(entry.title,user);
       entry.icon=Utilities.createIconBitmap(info.getBadgedIcon(mIconDpi),mContext);
     }
  else {

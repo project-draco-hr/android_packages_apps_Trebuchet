@@ -1,5 +1,5 @@
 {
-  Object activity=ReflectUtils.invokeMethod(mLauncherApps,mResolveActivity,intent,user.getUser());
+  LauncherActivityInfo activity=mLauncherApps.resolveActivity(intent,user.getUser());
   if (activity != null) {
     return new LauncherActivityInfoCompatVL(activity);
   }
