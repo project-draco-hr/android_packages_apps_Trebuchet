@@ -9,7 +9,7 @@
     return;
   }
   if (mWorkspace != null) {
-    mWorkspace.updateShortcuts(apps);
+    mWorkspace.updateShortcutsAndWidgets(apps);
   }
   if (!LauncherAppState.isDisableAllApps() && mAppsCustomizeContent != null) {
     mAppsCustomizeContent.updateApps(apps);

@@ -1,6 +1,6 @@
 {
   final Folder[] value=new Folder[1];
-  mapOverShortcuts(MAP_NO_RECURSE,new ShortcutOperator(){
+  mapOverItems(MAP_NO_RECURSE,new ItemOperator(){
     @Override public boolean evaluate(    ItemInfo info,    View v,    View parent){
       if (v instanceof Folder) {
         Folder f=(Folder)v;

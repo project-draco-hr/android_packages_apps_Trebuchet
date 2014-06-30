@@ -1,0 +1,12 @@
+{
+  if (AppWidgetManager.ACTION_APPWIDGET_HOST_RESTORED.equals(intent.getAction())) {
+    int[] oldIds=intent.getIntArrayExtra(AppWidgetManager.EXTRA_APPWIDGET_OLD_IDS);
+    int[] newIds=intent.getIntArrayExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS);
+    if (oldIds.length == newIds.length) {
+      restoreAppWidgetIds(context,oldIds,newIds);
+    }
+ else {
+      Log.e(TAG,"Invalid host restored received");
+    }
+  }
+}

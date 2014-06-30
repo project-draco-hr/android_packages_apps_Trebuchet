@@ -1,0 +1,5 @@
+{
+  if (mWidgetReady) {
+    super.updateAppWidgetSize(newOptions,minWidth,minHeight,maxWidth,maxHeight);
+  }
+}
