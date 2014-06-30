@@ -5,9 +5,6 @@
   if (!willAcceptDrop(info) || isAllAppsWidget(source,info)) {
     isVisible=false;
   }
-  if (useUninstallLabel && !(((ItemInfo)info).user.equals(UserHandleCompat.myUserHandle()))) {
-    isVisible=false;
-  }
   if (useUninstallLabel) {
     setCompoundDrawablesRelativeWithIntrinsicBounds(mUninstallDrawable,null,null,null);
   }

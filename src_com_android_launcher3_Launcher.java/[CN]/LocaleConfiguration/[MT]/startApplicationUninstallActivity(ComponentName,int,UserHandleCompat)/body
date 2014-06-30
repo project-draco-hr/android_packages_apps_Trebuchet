@@ -9,6 +9,9 @@
     String className=componentName.getClassName();
     Intent intent=new Intent(Intent.ACTION_DELETE,Uri.fromParts("package",packageName,className));
     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+    if (user != null) {
+      user.addToIntent(intent,Intent.EXTRA_USER);
+    }
     startActivity(intent);
     return true;
   }
