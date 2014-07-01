@@ -1,5 +1,11 @@
 {
-  ArrayList<BubbleTextView> views=new ArrayList<BubbleTextView>(1);
-  views.add(view);
-  removeAbandonedPromises(views,user);
+  if (abandonedIcon.getTag() != null && abandonedIcon.getTag() instanceof ShortcutInfo) {
+    final ShortcutInfo shortcut=(ShortcutInfo)abandonedIcon.getTag();
+    if (shortcut.isAbandoned()) {
+      HashSet<ComponentName> cns=new HashSet<ComponentName>(1);
+      cns.add(shortcut.getRestoredIntent().getComponent());
+      LauncherModel.deleteItemFromDatabase(mLauncher,shortcut);
+      removeItemsByComponentName(cns,user);
+    }
+  }
 }
