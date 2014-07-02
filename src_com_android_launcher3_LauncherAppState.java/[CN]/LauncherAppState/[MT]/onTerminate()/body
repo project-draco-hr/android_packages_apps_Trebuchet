@@ -1,7 +1,7 @@
 {
   sContext.unregisterReceiver(mModel);
   final LauncherAppsCompat launcherApps=LauncherAppsCompat.getInstance(sContext);
-  launcherApps.removeOnAppsChangedListener(mModel);
+  launcherApps.removeOnAppsChangedCallback(mModel);
   ContentResolver resolver=sContext.getContentResolver();
   resolver.unregisterContentObserver(mFavoritesObserver);
 }

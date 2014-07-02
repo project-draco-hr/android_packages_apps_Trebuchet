@@ -1,0 +1,8 @@
+{
+  this();
+  this.intent=intent;
+  this.title=title;
+  this.contentDescription=contentDescription;
+  mIcon=icon;
+  this.user=user;
+}

@@ -1,3 +1,0 @@
-{
-  mListener.onPackageChanged(UserHandleCompat.fromUser(user),packageName);
-}

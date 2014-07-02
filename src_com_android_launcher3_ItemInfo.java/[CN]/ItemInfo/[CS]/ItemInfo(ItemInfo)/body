@@ -8,5 +8,6 @@
   itemType=info.itemType;
   container=info.container;
   user=info.user;
+  contentDescription=info.contentDescription;
   LauncherModel.checkItemInfo(this);
 }

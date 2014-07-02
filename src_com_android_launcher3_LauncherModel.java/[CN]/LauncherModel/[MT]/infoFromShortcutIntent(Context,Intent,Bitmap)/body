@@ -41,6 +41,7 @@
   }
   info.setIcon(icon);
   info.title=name;
+  info.contentDescription=mUserManager.getBadgedLabelForUser(info.title.toString(),info.user);
   info.intent=intent;
   info.customIcon=customIcon;
   info.iconResource=iconResource;

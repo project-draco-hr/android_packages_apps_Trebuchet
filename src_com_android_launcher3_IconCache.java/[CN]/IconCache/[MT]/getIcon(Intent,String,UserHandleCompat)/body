@@ -8,6 +8,7 @@ synchronized (mCache) {
     CacheEntry entry=cacheLocked(component,launcherActInfo,null,user);
     if (title != null) {
       entry.title=title;
+      entry.contentDescription=mUserManager.getBadgedLabelForUser(title,user);
     }
     return entry.icon;
   }
