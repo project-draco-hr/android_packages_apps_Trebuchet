@@ -7,4 +7,6 @@
   layout.measure(widthSpec,heightSpec);
   layout.setPadding(mAllAppsPadding.left,mAllAppsPadding.top,mAllAppsPadding.right,mAllAppsPadding.bottom);
   setVisibilityOnChildren(layout,View.VISIBLE);
+  Resources res=getContext().getResources();
+  layout.setBackground(res.getDrawable(R.drawable.quantum_panel));
 }

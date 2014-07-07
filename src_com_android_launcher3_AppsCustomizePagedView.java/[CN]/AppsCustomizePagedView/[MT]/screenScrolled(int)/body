@@ -55,6 +55,9 @@
           v.setRotationY(0f);
         }
       }
+      alpha=1;
+      translationX=0;
+      scale=1;
       v.setTranslationX(translationX);
       v.setScaleX(scale);
       v.setScaleY(scale);

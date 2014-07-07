@@ -9,15 +9,9 @@
     mAvailableSpaceInPreview=(previewSize - 2 * previewPadding);
     int adjustedAvailableSpace=(int)((mAvailableSpaceInPreview / 2) * (1 + 0.8f));
     int unscaledHeight=(int)(mIntrinsicIconSize * (1 + PERSPECTIVE_SHIFT_FACTOR));
-    if (Utilities.isLmp()) {
-      unscaledHeight=(int)(mIntrinsicIconSize * (1 + PERSPECTIVE_SHIFT_FACTOR_L));
-    }
     mBaselineIconScale=(1.0f * adjustedAvailableSpace / unscaledHeight);
     mBaselineIconSize=(int)(mIntrinsicIconSize * mBaselineIconScale);
     mMaxPerspectiveShift=mBaselineIconSize * PERSPECTIVE_SHIFT_FACTOR;
-    if (Utilities.isLmp()) {
-      mMaxPerspectiveShift=mBaselineIconSize * PERSPECTIVE_SHIFT_FACTOR_L;
-    }
     mPreviewOffsetX=(mTotalWidth - mAvailableSpaceInPreview) / 2;
     mPreviewOffsetY=previewPadding + grid.folderBackgroundOffset;
   }

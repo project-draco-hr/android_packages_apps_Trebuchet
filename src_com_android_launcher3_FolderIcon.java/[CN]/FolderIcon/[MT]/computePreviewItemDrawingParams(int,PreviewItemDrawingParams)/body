@@ -6,12 +6,9 @@
   float scaledSize=scale * mBaselineIconSize;
   float scaleOffsetCorrection=(1 - scale) * mBaselineIconSize;
   float transY=mAvailableSpaceInPreview - (offset + scaledSize + scaleOffsetCorrection) + getPaddingTop();
-  float transX=offset + scaleOffsetCorrection;
+  float transX=(mAvailableSpaceInPreview - scaledSize) / 2;
   float totalScale=mBaselineIconScale * scale;
   final int overlayAlpha=(int)(80 * (1 - r));
-  if (Utilities.isLmp()) {
-    transX=(mAvailableSpaceInPreview - scaledSize) / 2;
-  }
   if (params == null) {
     params=new PreviewItemDrawingParams(transX,transY,totalScale,overlayAlpha);
   }
