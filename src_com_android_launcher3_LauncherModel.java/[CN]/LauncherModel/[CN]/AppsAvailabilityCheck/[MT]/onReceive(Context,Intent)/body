@@ -1,0 +1,20 @@
+{
+synchronized (sBgLock) {
+    final LauncherAppsCompat launcherApps=LauncherAppsCompat.getInstance(mApp.getContext());
+    ArrayList<String> packagesRemoved;
+    for (    Entry<UserHandleCompat,HashSet<String>> entry : sPendingPackages.entrySet()) {
+      UserHandleCompat user=entry.getKey();
+      packagesRemoved=new ArrayList<>();
+      for (      String pkg : entry.getValue()) {
+        if (!launcherApps.isPackageEnabledForProfile(pkg,user)) {
+          Launcher.addDumpLog(TAG,"Package not found: " + pkg,true);
+          packagesRemoved.add(pkg);
+        }
+      }
+      if (!packagesRemoved.isEmpty()) {
+        enqueuePackageUpdated(new PackageUpdatedTask(PackageUpdatedTask.OP_REMOVE,packagesRemoved.toArray(new String[packagesRemoved.size()]),user));
+      }
+    }
+    sPendingPackages.clear();
+  }
+}

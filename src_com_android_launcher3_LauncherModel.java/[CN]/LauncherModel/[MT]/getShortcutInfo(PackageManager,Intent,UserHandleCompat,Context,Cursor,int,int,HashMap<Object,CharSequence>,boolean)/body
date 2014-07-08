@@ -12,7 +12,7 @@
   newIntent.addCategory(Intent.CATEGORY_LAUNCHER);
   newIntent.setComponent(componentName);
   LauncherActivityInfoCompat lai=mLauncherApps.resolveActivity(newIntent,user);
-  if (lai == null) {
+  if ((lai == null) && !allowMissingTarget) {
     Log.d(TAG,"Missing activity found in getShortcutInfo: " + componentName);
     return null;
   }
