@@ -5,5 +5,12 @@
   setGlowColor(a.getColor(R.styleable.BubbleTextView_glowColor,res.getColor(R.color.outline_color)));
   mCustomShadowsEnabled=a.getBoolean(R.styleable.BubbleTextView_customShadows,true);
   a.recycle();
+  if (mCustomShadowsEnabled) {
+    mBackground=getBackground();
+    setBackground(null);
+  }
+ else {
+    mBackground=null;
+  }
   init();
 }
