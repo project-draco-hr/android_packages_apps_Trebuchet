@@ -1,7 +1,8 @@
 {
   if (mWaitingForUpdate || force) {
     mWaitingForUpdate=false;
-    if (computeScrollOffset() && mWindowToken != null) {
+    if ((!mCompletedInitialOffset || computeScrollOffset()) && mWindowToken != null) {
+      mCompletedInitialOffset=true;
       try {
         mWallpaperManager.setWallpaperOffsets(mWindowToken,mWallpaperOffset.getCurrX(),0.5f);
         setWallpaperOffsetSteps();
