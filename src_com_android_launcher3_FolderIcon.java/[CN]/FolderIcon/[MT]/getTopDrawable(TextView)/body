@@ -1,0 +1,4 @@
+{
+  Drawable d=v.getCompoundDrawables()[1];
+  return (d instanceof PreloadIconDrawable) ? ((PreloadIconDrawable)d).mIcon : d;
+}

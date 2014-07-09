@@ -1,0 +1,6 @@
+{
+  if (progress != mAnimationProgress) {
+    mAnimationProgress=progress;
+    invalidateSelf();
+  }
+}

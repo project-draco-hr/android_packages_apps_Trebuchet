@@ -1,0 +1,42 @@
+{
+  final Rect r=getBounds();
+  if (canvas.getClipBounds(mCanvasClipRect) && !Rect.intersects(mCanvasClipRect,r)) {
+    return;
+  }
+  final float iconScale;
+  if ((mAnimationProgress >= ANIMATION_PROGRESS_STARTED) && (mAnimationProgress < ANIMATION_PROGRESS_COMPLETED)) {
+    mPaint.setAlpha((int)((1 - mAnimationProgress) * 255));
+    canvas.drawBitmap(sProgressBg,null,r,mPaint);
+    canvas.drawBitmap(sProgressFill,null,r,mPaint);
+    iconScale=ICON_SCALE_FACTOR + (1 - ICON_SCALE_FACTOR) * mAnimationProgress;
+  }
+ else   if (mAnimationProgress == ANIMATION_PROGRESS_STOPPED) {
+    mPaint.setAlpha(255);
+    iconScale=ICON_SCALE_FACTOR;
+    canvas.drawBitmap(sProgressBg,null,r,mPaint);
+    if (mProgress >= 100) {
+      canvas.drawBitmap(sProgressFill,null,r,mPaint);
+    }
+ else     if (mProgress > 0) {
+      if (mPathChanged) {
+        mProgressPath.reset();
+        mProgressPath.moveTo(r.exactCenterX(),r.centerY());
+        mRect.set(r);
+        mProgressPath.arcTo(mRect,-90,mProgress * 3.6f);
+        mProgressPath.close();
+        mPathChanged=false;
+      }
+      canvas.save();
+      canvas.clipPath(mProgressPath);
+      canvas.drawBitmap(sProgressFill,null,r,mPaint);
+      canvas.restore();
+    }
+  }
+ else {
+    iconScale=1;
+  }
+  canvas.save();
+  canvas.scale(iconScale,iconScale,r.exactCenterX(),r.exactCenterY());
+  mIcon.draw(canvas);
+  canvas.restore();
+}

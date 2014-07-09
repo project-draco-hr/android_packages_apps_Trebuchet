@@ -1,0 +1,4 @@
+{
+  mIcon.setBounds(bounds);
+  mPathChanged=true;
+}

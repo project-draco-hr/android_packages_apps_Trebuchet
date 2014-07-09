@@ -1,0 +1,11 @@
+{
+  mIcon=icon;
+  setBounds(icon.getBounds());
+  mPathChanged=false;
+  if (sProgressBg == null) {
+    sProgressBg=BitmapFactory.decodeResource(res,R.drawable.bg_preloader);
+  }
+  if (sProgressFill == null) {
+    sProgressFill=BitmapFactory.decodeResource(res,R.drawable.bg_preloader_progress);
+  }
+}

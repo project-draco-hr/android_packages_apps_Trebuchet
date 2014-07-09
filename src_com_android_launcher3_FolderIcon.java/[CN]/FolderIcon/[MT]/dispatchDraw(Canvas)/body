@@ -10,7 +10,7 @@
   }
  else {
     v=(TextView)items.get(0);
-    d=v.getCompoundDrawables()[1];
+    d=getTopDrawable(v);
     computePreviewDrawingParams(d);
   }
   int nItemsInPreview=Math.min(items.size(),NUM_ITEMS_IN_PREVIEW);
@@ -18,7 +18,7 @@
     for (int i=nItemsInPreview - 1; i >= 0; i--) {
       v=(TextView)items.get(i);
       if (!mHiddenItems.contains(v.getTag())) {
-        d=v.getCompoundDrawables()[1];
+        d=getTopDrawable(v);
         mParams=computePreviewItemDrawingParams(i,mParams);
         mParams.drawable=d;
         drawPreviewItem(canvas,mParams);

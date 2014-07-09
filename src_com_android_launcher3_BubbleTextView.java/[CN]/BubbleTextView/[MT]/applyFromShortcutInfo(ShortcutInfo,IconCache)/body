@@ -9,7 +9,7 @@
     setContentDescription(info.contentDescription);
   }
   setTag(info);
-  if (info.isPromise()) {
+  if (info.wasPromise) {
     applyState();
   }
 }

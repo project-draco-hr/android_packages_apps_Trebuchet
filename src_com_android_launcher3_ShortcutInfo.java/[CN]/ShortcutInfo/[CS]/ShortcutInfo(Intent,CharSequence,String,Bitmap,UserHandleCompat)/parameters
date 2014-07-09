@@ -1,5 +1,5 @@
 Intent intent
 CharSequence title
-String contentDescrition
+String contentDescription
 Bitmap icon
 UserHandleCompat user

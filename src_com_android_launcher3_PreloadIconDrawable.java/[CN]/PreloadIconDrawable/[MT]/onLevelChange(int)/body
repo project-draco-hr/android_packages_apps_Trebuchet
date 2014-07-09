@@ -1,0 +1,11 @@
+{
+  mProgress=level;
+  mPathChanged=true;
+  if (mAnimator != null) {
+    mAnimator.cancel();
+    mAnimator=null;
+  }
+  mAnimationProgress=ANIMATION_PROGRESS_STOPPED;
+  invalidateSelf();
+  return true;
+}
