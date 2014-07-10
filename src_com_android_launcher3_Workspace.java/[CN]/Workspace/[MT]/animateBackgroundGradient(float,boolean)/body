@@ -1,5 +1,5 @@
 {
-  if (mBackground == null)   return;
+  final DragLayer dragLayer=mLauncher.getDragLayer();
   if (mBackgroundFadeInAnimation != null) {
     mBackgroundFadeInAnimation.cancel();
     mBackgroundFadeInAnimation=null;
@@ -8,13 +8,13 @@
     mBackgroundFadeOutAnimation.cancel();
     mBackgroundFadeOutAnimation=null;
   }
-  float startAlpha=getBackgroundAlpha();
+  float startAlpha=dragLayer.getBackgroundAlpha();
   if (finalAlpha != startAlpha) {
     if (animated) {
       mBackgroundFadeOutAnimation=LauncherAnimUtils.ofFloat(this,startAlpha,finalAlpha);
       mBackgroundFadeOutAnimation.addUpdateListener(new AnimatorUpdateListener(){
         public void onAnimationUpdate(        ValueAnimator animation){
-          setBackgroundAlpha(((Float)animation.getAnimatedValue()).floatValue());
+          dragLayer.setBackgroundAlpha(((Float)animation.getAnimatedValue()).floatValue());
         }
       }
 );
@@ -23,7 +23,7 @@
       mBackgroundFadeOutAnimation.start();
     }
  else {
-      setBackgroundAlpha(finalAlpha);
+      dragLayer.setBackgroundAlpha(finalAlpha);
     }
   }
 }

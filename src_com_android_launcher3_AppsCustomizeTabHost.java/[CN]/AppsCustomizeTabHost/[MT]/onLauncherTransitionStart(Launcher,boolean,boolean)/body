@@ -1,7 +1,6 @@
 {
-  mAppsCustomizePane.onLauncherTransitionStart(l,animated,toWorkspace);
-  if (animated) {
+  mPagedView.onLauncherTransitionStart(l,animated,toWorkspace);
+  if (animated && !Utilities.isLmp()) {
     enableAndBuildHardwareLayer();
   }
-  l.getLauncherClings().dismissWorkspaceCling(null);
 }

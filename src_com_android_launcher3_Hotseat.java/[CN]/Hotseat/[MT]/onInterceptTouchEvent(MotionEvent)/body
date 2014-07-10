@@ -1,5 +1,5 @@
 {
-  if (mLauncher.getWorkspace().isSmall()) {
+  if (mLauncher.getWorkspace().workspaceInModalState()) {
     return true;
   }
   return false;

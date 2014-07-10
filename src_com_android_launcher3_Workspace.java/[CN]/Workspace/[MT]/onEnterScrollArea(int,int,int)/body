@@ -8,7 +8,7 @@
     }
   }
   boolean result=false;
-  if (!isSmall() && !mIsSwitchingState && getOpenFolder() == null) {
+  if (!workspaceInModalState() && !mIsSwitchingState && getOpenFolder() == null) {
     mInScrollArea=true;
     final int page=getNextPage() + (direction == DragController.SCROLL_LEFT ? -1 : 1);
     setCurrentDropLayout(null);

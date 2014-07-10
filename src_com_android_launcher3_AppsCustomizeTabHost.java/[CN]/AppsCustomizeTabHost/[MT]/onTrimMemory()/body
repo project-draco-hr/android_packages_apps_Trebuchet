@@ -1,4 +1,4 @@
 {
   mContent.setVisibility(GONE);
-  mAppsCustomizePane.clearAllWidgetPages();
+  mPagedView.clearAllWidgetPages();
 }

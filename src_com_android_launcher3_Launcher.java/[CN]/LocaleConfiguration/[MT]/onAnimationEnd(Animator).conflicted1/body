@@ -1,0 +1,9 @@
+{
+  fromView.setVisibility(View.GONE);
+  dispatchOnLauncherTransitionEnd(fromView,animated,true);
+  dispatchOnLauncherTransitionEnd(toView,animated,true);
+  if (onCompleteRunnable != null) {
+    onCompleteRunnable.run();
+  }
+  mAppsCustomizeContent.updateCurrentPageScroll();
+}

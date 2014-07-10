@@ -1,3 +1,3 @@
 {
-  return (isSmall() || !isFinishedSwitchingState()) || (!isSmall() && indexOfChild(v) != mCurrentPage);
+  return (workspaceInModalState() || !isFinishedSwitchingState()) || (!workspaceInModalState() && indexOfChild(v) != mCurrentPage);
 }
