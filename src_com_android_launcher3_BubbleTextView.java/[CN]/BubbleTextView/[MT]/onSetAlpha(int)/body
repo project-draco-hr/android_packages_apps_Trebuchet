@@ -1,7 +1,3 @@
 {
-  if (mPrevAlpha != alpha) {
-    mPrevAlpha=alpha;
-    super.onSetAlpha(alpha);
-  }
   return true;
 }

@@ -17,6 +17,7 @@
   display.getMetrics(dm);
   DeviceProfile grid=app.initDynamicGrid(this,Math.min(smallestSize.x,smallestSize.y),Math.min(largestSize.x,largestSize.y),realSize.x,realSize.y,dm.widthPixels,dm.heightPixels);
   mSharedPrefs=getSharedPreferences(LauncherAppState.getSharedPreferencesKey(),Context.MODE_PRIVATE);
+  mIsSafeModeEnabled=getPackageManager().isSafeMode();
   mModel=app.setLauncher(this);
   mIconCache=app.getIconCache();
   mIconCache.flushInvalidIcons(grid);

@@ -1,0 +1,21 @@
+{
+  Bitmap b=info.getIcon(iconCache);
+  LauncherAppState app=LauncherAppState.getInstance();
+  FastBitmapDrawable iconDrawable=Utilities.createIconDrawable(b);
+  if (info.isDisabled) {
+    iconDrawable.setSaturation(0);
+    iconDrawable.setBrightness(20);
+  }
+  setCompoundDrawables(null,iconDrawable,null,null);
+  if (setDefaultPadding) {
+    DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
+    setCompoundDrawablePadding(grid.iconDrawablePaddingPx);
+  }
+  if (info.contentDescription != null) {
+    setContentDescription(info.contentDescription);
+  }
+  setTag(info);
+  if (info.wasPromise) {
+    applyState();
+  }
+}

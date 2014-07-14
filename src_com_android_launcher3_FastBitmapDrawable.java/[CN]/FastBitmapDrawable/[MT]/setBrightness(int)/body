@@ -1,0 +1,4 @@
+{
+  mBrightness=brightness;
+  updateFilter();
+}

@@ -1,0 +1,18 @@
+{
+  if (mSatutation != 1 || mBrightness != 0) {
+    sTempSaturationMatrix.setSaturation(mSatutation);
+    if (mBrightness != 0) {
+      float scale=1 - mBrightness / 255.0f;
+      sTempBrightnessMatrix.setScale(scale,scale,scale,1);
+      float[] array=sTempBrightnessMatrix.getArray();
+      array[4]=mBrightness;
+      array[9]=mBrightness;
+      array[14]=mBrightness;
+      sTempSaturationMatrix.preConcat(sTempBrightnessMatrix);
+    }
+    mPaint.setColorFilter(new ColorMatrixColorFilter(sTempSaturationMatrix));
+  }
+ else {
+    mPaint.setColorFilter(null);
+  }
+}
