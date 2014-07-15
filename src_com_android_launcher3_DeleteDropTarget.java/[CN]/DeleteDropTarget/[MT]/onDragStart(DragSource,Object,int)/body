@@ -6,6 +6,12 @@
     isVisible=false;
   }
   if (useUninstallLabel) {
+    UserManager userManager=(UserManager)getContext().getSystemService(Context.USER_SERVICE);
+    if (userManager.hasUserRestriction(UserManager.DISALLOW_APPS_CONTROL) || userManager.hasUserRestriction(UserManager.DISALLOW_UNINSTALL_APPS)) {
+      isVisible=false;
+    }
+  }
+  if (useUninstallLabel) {
     setCompoundDrawablesRelativeWithIntrinsicBounds(mUninstallDrawable,null,null,null);
   }
  else   if (useDeleteLabel) {
