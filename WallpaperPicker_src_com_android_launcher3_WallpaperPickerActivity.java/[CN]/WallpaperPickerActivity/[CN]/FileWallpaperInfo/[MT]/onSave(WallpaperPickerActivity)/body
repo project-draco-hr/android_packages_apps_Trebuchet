@@ -1,0 +1,3 @@
+{
+  a.setWallpaper(Uri.fromFile(mFile),true);
+}

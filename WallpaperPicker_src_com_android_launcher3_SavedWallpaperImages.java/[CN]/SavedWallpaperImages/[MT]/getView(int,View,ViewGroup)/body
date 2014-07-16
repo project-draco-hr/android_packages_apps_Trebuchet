@@ -3,5 +3,5 @@
   if (thumbDrawable == null) {
     Log.e(TAG,"Error decoding thumbnail for wallpaper #" + position);
   }
-  return WallpaperPickerActivity.createImageTileView(mLayoutInflater,position,convertView,parent,thumbDrawable);
+  return WallpaperPickerActivity.createImageTileView(mLayoutInflater,convertView,parent,thumbDrawable);
 }

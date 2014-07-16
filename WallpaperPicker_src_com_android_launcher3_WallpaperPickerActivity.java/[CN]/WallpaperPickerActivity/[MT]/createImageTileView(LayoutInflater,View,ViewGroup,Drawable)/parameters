@@ -1,0 +1,4 @@
+LayoutInflater layoutInflater
+View convertView
+ViewGroup parent
+Drawable thumb

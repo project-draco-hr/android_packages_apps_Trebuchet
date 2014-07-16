@@ -1,7 +1,0 @@
-{
-  Pair<String,String> filenames=getImageFilenames(id);
-  if (filenames != null) {
-    return filenames.second;
-  }
-  return null;
-}

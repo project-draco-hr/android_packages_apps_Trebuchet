@@ -1,5 +1,0 @@
-{
-  boolean finishActivityWhenDone=true;
-  String imageFilename=a.getSavedImages().getImageFilename(mDbId);
-  a.setWallpaper(imageFilename,finishActivityWhenDone);
-}

@@ -75,9 +75,9 @@
     }
   }
 ;
-  ArrayList<ResourceWallpaperInfo> wallpapers=findBundledWallpapers();
+  ArrayList<WallpaperTileInfo> wallpapers=findBundledWallpapers();
   mWallpapersView=(LinearLayout)findViewById(R.id.wallpaper_list);
-  BuiltInWallpapersAdapter ia=new BuiltInWallpapersAdapter(this,wallpapers);
+  SimpleWallpapersAdapter ia=new SimpleWallpapersAdapter(this,wallpapers);
   populateWallpapersFromAdapter(mWallpapersView,ia,false);
   mSavedImages=new SavedWallpaperImages(this);
   mSavedImages.loadThumbnailsAndImageIdList();
@@ -111,17 +111,6 @@
   pickImageTile.setTag(pickImageInfo);
   pickImageInfo.setView(pickImageTile);
   pickImageTile.setOnClickListener(mThumbnailOnClickListener);
-  if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-    DefaultWallpaperInfo defaultWallpaperInfo=getDefaultWallpaper();
-    if (defaultWallpaperInfo != null) {
-      FrameLayout defaultWallpaperTile=(FrameLayout)createImageTileView(getLayoutInflater(),0,null,mWallpapersView,defaultWallpaperInfo.mThumb);
-      setWallpaperItemPaddingToZero(defaultWallpaperTile);
-      defaultWallpaperTile.setTag(defaultWallpaperInfo);
-      mWallpapersView.addView(defaultWallpaperTile,0);
-      defaultWallpaperTile.setOnClickListener(mThumbnailOnClickListener);
-      defaultWallpaperInfo.setView(defaultWallpaperTile);
-    }
-  }
   mCropView.addOnLayoutChangeListener(new OnLayoutChangeListener(){
     @Override public void onLayoutChange(    View v,    int left,    int top,    int right,    int bottom,    int oldLeft,    int oldTop,    int oldRight,    int oldBottom){
       if ((right - left) > 0 && (bottom - top) > 0) {

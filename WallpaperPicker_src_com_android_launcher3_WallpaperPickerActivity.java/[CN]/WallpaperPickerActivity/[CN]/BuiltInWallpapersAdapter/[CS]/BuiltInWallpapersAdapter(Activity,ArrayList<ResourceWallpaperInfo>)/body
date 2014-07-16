@@ -1,4 +1,0 @@
-{
-  mLayoutInflater=activity.getLayoutInflater();
-  mWallpapers=wallpapers;
-}
