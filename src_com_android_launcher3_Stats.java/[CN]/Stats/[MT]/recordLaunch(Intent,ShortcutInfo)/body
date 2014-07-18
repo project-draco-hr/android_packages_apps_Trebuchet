@@ -6,7 +6,7 @@
   if (shortcut != null) {
     broadcastIntent.putExtra(EXTRA_CONTAINER,shortcut.container).putExtra(EXTRA_SCREEN,shortcut.screenId).putExtra(EXTRA_CELLX,shortcut.cellX).putExtra(EXTRA_CELLY,shortcut.cellY);
   }
-  mLauncher.sendBroadcast(broadcastIntent,PERM_LAUNCH);
+  mLauncher.sendBroadcast(broadcastIntent,mLaunchBroadcastPermission);
   incrementLaunch(flat);
   if (FLUSH_IMMEDIATELY) {
     saveStats();

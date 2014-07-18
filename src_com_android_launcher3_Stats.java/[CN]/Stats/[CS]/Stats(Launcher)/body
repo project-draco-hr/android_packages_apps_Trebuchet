@@ -1,5 +1,6 @@
 {
   mLauncher=launcher;
+  mLaunchBroadcastPermission=launcher.getResources().getString(R.string.receive_launch_broadcasts_permission);
   loadStats();
   if (LOCAL_LAUNCH_LOG) {
     try {
@@ -22,6 +23,6 @@ catch (    IOException e) {
         android.util.Log.v("Stats","got broadcast: " + intent + " for launched intent: "+ intent.getStringExtra(EXTRA_INTENT));
       }
     }
-,new IntentFilter(ACTION_LAUNCH),PERM_LAUNCH,null);
+,new IntentFilter(ACTION_LAUNCH),mLaunchBroadcastPermission,null);
   }
 }
