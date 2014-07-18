@@ -149,6 +149,7 @@ info.cellY=c.getInt(cellYIndex);
 info.spanX=1;
 info.spanY=1;
 info.intent.putExtra(ItemInfo.EXTRA_PROFILE,serialNumber);
+info.isDisabled=isSafeMode && !Utilities.isSystemApp(context,intent);
 deleteOnInvalidPlacement.set(false);
 if (!checkItemPlacement(occupied,info,deleteOnInvalidPlacement)) {
   if (deleteOnInvalidPlacement.get()) {
