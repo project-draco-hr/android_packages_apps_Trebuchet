@@ -1,6 +1,0 @@
-{
-  if (mInTransition && mTransitioningToWorkspace) {
-    return true;
-  }
-  return super.onInterceptTouchEvent(ev);
-}

@@ -11,12 +11,6 @@
   setChildrenDrawnWithCacheEnabled(true);
   setMinScale(mOverviewModeShrinkFactor);
   setupLayoutTransition();
-  final Resources res=getResources();
-  try {
-    mBackground=res.getDrawable(R.drawable.apps_customize_bg);
-  }
- catch (  Resources.NotFoundException e) {
-  }
   mWallpaperOffset=new WallpaperOffsetInterpolator();
   Display display=mLauncher.getWindowManager().getDefaultDisplay();
   display.getSize(mDisplaySize);

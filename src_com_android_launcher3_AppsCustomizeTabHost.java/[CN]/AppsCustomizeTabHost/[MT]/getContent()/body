@@ -1,7 +1,3 @@
 {
-  View appsCustomizeContent=mAppsCustomizePane.getContent();
-  if (appsCustomizeContent != null) {
-    return appsCustomizeContent;
-  }
-  return mContent;
+  return mPagedView;
 }

@@ -7,7 +7,7 @@
     clearChildrenCache();
   }
   if (mDragController.isDragging()) {
-    if (isSmall()) {
+    if (workspaceInModalState()) {
       mDragController.forceTouchMove();
     }
   }

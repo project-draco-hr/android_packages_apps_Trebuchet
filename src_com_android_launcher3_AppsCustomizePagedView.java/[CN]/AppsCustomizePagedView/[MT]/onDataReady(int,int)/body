@@ -10,8 +10,7 @@
   int widthSpec=MeasureSpec.makeMeasureSpec(mContentWidth,MeasureSpec.AT_MOST);
   int heightSpec=MeasureSpec.makeMeasureSpec(mContentHeight,MeasureSpec.AT_MOST);
   mWidgetSpacingLayout.measure(widthSpec,heightSpec);
-  AppsCustomizeTabHost host=(AppsCustomizeTabHost)getTabHost();
-  final boolean hostIsTransitioning=host.isTransitioning();
+  final boolean hostIsTransitioning=getTabHost().isInTransition();
   int page=getPageForComponent(mSaveInstanceStateItemIndex);
   invalidatePageData(Math.max(0,page),hostIsTransitioning);
   if (!hostIsTransitioning) {

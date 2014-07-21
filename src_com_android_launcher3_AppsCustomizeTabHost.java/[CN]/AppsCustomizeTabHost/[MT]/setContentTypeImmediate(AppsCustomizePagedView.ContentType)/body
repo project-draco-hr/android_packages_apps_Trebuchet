@@ -1,7 +1,3 @@
 {
-  setOnTabChangedListener(null);
-  onTabChangedStart();
-  onTabChangedEnd(type);
-  setCurrentTabByTag(getTabTagForContentType(type));
-  setOnTabChangedListener(this);
+  mPagedView.setContentType(type);
 }

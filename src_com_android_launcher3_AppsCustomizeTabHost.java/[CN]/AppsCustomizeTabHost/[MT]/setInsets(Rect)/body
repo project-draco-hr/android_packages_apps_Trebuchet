@@ -1,6 +1,6 @@
 {
   mInsets.set(insets);
-  FrameLayout.LayoutParams flp=(LayoutParams)mContent.getLayoutParams();
+  LayoutParams flp=(LayoutParams)mContent.getLayoutParams();
   flp.topMargin=insets.top;
   flp.bottomMargin=insets.bottom;
   flp.leftMargin=insets.left;

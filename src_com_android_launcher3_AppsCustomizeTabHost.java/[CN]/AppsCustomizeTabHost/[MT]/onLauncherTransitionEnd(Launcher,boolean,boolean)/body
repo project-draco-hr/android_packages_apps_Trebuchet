@@ -1,15 +1,14 @@
 {
-  mAppsCustomizePane.onLauncherTransitionEnd(l,animated,toWorkspace);
+  mPagedView.onLauncherTransitionEnd(l,animated,toWorkspace);
   mInTransition=false;
-  if (animated) {
+  if (animated && !Utilities.isLmp()) {
     setLayerType(LAYER_TYPE_NONE,null);
   }
   if (!toWorkspace) {
-    mAppsCustomizePane.showAllAppsCling();
-    mAppsCustomizePane.loadAssociatedPages(mAppsCustomizePane.getCurrentPage());
+    mPagedView.loadAssociatedPages(mPagedView.getCurrentPage());
     AccessibilityManager am=(AccessibilityManager)getContext().getSystemService(Context.ACCESSIBILITY_SERVICE);
     if (am.isEnabled()) {
-      announceForAccessibility(mAppsCustomizePane.getCurrentPageDescription());
+      announceForAccessibility(mPagedView.getCurrentPageDescription());
     }
     setVisibilityOfSiblingsWithLowerZOrder(INVISIBLE);
   }

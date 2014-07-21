@@ -1,12 +1,12 @@
 {
-  if (mInScrollArea || mIsSwitchingState || mState == State.SMALL)   return;
+  if (mInScrollArea || !transitionStateShouldAllowDrop())   return;
   Rect r=new Rect();
   CellLayout layout=null;
   ItemInfo item=(ItemInfo)d.dragInfo;
   if (item.spanX < 0 || item.spanY < 0)   throw new RuntimeException("Improper spans found");
   mDragViewVisualCenter=getDragViewVisualCenter(d.x,d.y,d.xOffset,d.yOffset,d.dragView,mDragViewVisualCenter);
   final View child=(mDragInfo == null) ? null : mDragInfo.cell;
-  if (isSmall()) {
+  if (workspaceInModalState()) {
     if (mLauncher.getHotseat() != null && !isExternalDragWidget(d)) {
       if (isPointInSelfOverHotseat(d.x,d.y,r)) {
         layout=mLauncher.getHotseat().getLayout();

@@ -1,10 +1,4 @@
 {
-  if (mBackground != null && mBackgroundAlpha > 0.0f && mDrawBackground) {
-    int alpha=(int)(mBackgroundAlpha * 255);
-    mBackground.setAlpha(alpha);
-    mBackground.setBounds(getScrollX(),0,getScrollX() + getMeasuredWidth(),getMeasuredHeight());
-    mBackground.draw(canvas);
-  }
   super.onDraw(canvas);
   post(mBindPages);
 }

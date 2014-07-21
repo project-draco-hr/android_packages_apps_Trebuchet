@@ -1,5 +1,5 @@
 {
-  if (!isSmall()) {
+  if (!workspaceInModalState()) {
     if (animate) {
       snapToPage(page);
     }

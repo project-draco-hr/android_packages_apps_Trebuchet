@@ -3,6 +3,8 @@
   setMotionEventSplittingEnabled(false);
   setChildrenDrawingOrderEnabled(true);
   setOnHierarchyChangeListener(this);
-  mLeftHoverDrawable=getResources().getDrawable(R.drawable.page_hover_left_holo);
-  mRightHoverDrawable=getResources().getDrawable(R.drawable.page_hover_right_holo);
+  final Resources res=getResources();
+  mLeftHoverDrawable=res.getDrawable(R.drawable.page_hover_left_holo);
+  mRightHoverDrawable=res.getDrawable(R.drawable.page_hover_right_holo);
+  mBackground=res.getDrawable(R.drawable.apps_customize_bg);
 }
