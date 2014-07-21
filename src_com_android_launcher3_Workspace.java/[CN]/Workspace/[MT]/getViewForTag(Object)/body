@@ -1,6 +1,6 @@
 {
   final View[] value=new View[1];
-  mapOverShortcuts(MAP_NO_RECURSE,new ShortcutOperator(){
+  mapOverItems(MAP_NO_RECURSE,new ItemOperator(){
     @Override public boolean evaluate(    ItemInfo info,    View v,    View parent){
       if (v.getTag() == tag) {
         value[0]=v;

@@ -1,0 +1,3 @@
+{
+  return restoreStatus != RESTORE_REMAP_PENDING;
+}

@@ -1,5 +1,5 @@
 {
-  mapOverShortcuts(MAP_RECURSE,new ShortcutOperator(){
+  mapOverItems(MAP_RECURSE,new ItemOperator(){
     @Override public boolean evaluate(    ItemInfo info,    View v,    View parent){
       if (info instanceof ShortcutInfo && ((ShortcutInfo)info).isPromiseFor(pkgName) && v instanceof BubbleTextView) {
         ((ShortcutInfo)info).setState(state);
@@ -9,4 +9,9 @@
     }
   }
 );
+  if (state == ShortcutInfo.PACKAGE_STATE_DEFAULT) {
+    HashSet<String> packages=new HashSet<>();
+    packages.add(pkgName);
+    restorePendingWidgets(packages);
+  }
 }

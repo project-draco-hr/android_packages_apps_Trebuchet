@@ -1,0 +1,38 @@
+{
+  final ContentResolver cr=context.getContentResolver();
+  final List<Integer> idsToRemove=new ArrayList<>();
+  final AppWidgetManager widgets=AppWidgetManager.getInstance(context);
+  for (int i=0; i < oldWidgetIds.length; i++) {
+    Log.i(TAG,"Widget state restore id " + oldWidgetIds[i] + " => "+ newWidgetIds[i]);
+    final AppWidgetProviderInfo provider=widgets.getAppWidgetInfo(newWidgetIds[i]);
+    ContentValues values=new ContentValues();
+    values.put(LauncherSettings.Favorites.APPWIDGET_ID,newWidgetIds[i]);
+    values.put(LauncherSettings.Favorites.RESTORED,LauncherModel.isValidProvider(provider) ? LauncherAppWidgetInfo.RESTORE_COMPLETED : LauncherAppWidgetInfo.RESTORE_PROVIDER_PENDING);
+    String[] widgetIdParams=new String[]{Integer.toString(oldWidgetIds[i])};
+    int result=cr.update(Favorites.CONTENT_URI,values,"appWidgetId=? and restored=1",widgetIdParams);
+    if (result == 0) {
+      Cursor cursor=cr.query(Favorites.CONTENT_URI,new String[]{Favorites.APPWIDGET_ID},"appWidgetId=?",widgetIdParams,null);
+      try {
+        if (!cursor.moveToFirst()) {
+          idsToRemove.add(newWidgetIds[i]);
+        }
+      }
+  finally {
+        cursor.close();
+      }
+    }
+  }
+  if (!idsToRemove.isEmpty()) {
+    final AppWidgetHost appWidgetHost=new AppWidgetHost(context,Launcher.APPWIDGET_HOST_ID);
+    new AsyncTask<Void,Void,Void>(){
+      public Void doInBackground(      Void... args){
+        for (        Integer id : idsToRemove) {
+          appWidgetHost.deleteAppWidgetId(id);
+          Log.e(TAG,"Widget no longer present, appWidgetId=" + id);
+        }
+        return null;
+      }
+    }
+.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,(Void)null);
+  }
+}

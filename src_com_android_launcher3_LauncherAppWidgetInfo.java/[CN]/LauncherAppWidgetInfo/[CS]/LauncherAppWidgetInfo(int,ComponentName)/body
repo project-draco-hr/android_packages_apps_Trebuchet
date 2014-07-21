@@ -5,4 +5,5 @@
   spanX=-1;
   spanY=-1;
   user=UserHandleCompat.myUserHandle();
+  restoreStatus=RESTORE_COMPLETED;
 }

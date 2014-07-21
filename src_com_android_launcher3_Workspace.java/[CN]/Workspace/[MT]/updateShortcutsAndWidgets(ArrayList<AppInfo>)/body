@@ -1,9 +1,11 @@
 {
   final HashMap<ComponentName,AppInfo> appsMap=new HashMap<ComponentName,AppInfo>();
+  final HashSet<String> pkgNames=new HashSet<>();
   for (  AppInfo ai : apps) {
     appsMap.put(ai.componentName,ai);
+    pkgNames.add(ai.componentName.getPackageName());
   }
-  mapOverShortcuts(MAP_RECURSE,new ShortcutOperator(){
+  mapOverItems(MAP_RECURSE,new ItemOperator(){
     @Override public boolean evaluate(    ItemInfo info,    View v,    View parent){
       if (info instanceof ShortcutInfo) {
         updateShortcut(appsMap,info,v);
@@ -15,4 +17,5 @@
     }
   }
 );
+  restorePendingWidgets(pkgNames);
 }

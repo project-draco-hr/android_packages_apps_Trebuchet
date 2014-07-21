@@ -1,0 +1,8 @@
+{
+  if (mWidgetReady) {
+    return super.getDefaultView();
+  }
+ else {
+    return mInflater.inflate(R.layout.appwidget_not_ready,this,false);
+  }
+}
