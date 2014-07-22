@@ -3,6 +3,12 @@
   Rect r=new Rect();
   CellLayout layout=null;
   ItemInfo item=(ItemInfo)d.dragInfo;
+  if (item == null) {
+    if (LauncherAppState.isDogfoodBuild()) {
+      throw new NullPointerException("DragObject has null info");
+    }
+    return;
+  }
   if (item.spanX < 0 || item.spanY < 0)   throw new RuntimeException("Improper spans found");
   mDragViewVisualCenter=getDragViewVisualCenter(d.x,d.y,d.xOffset,d.yOffset,d.dragView,mDragViewVisualCenter);
   final View child=(mDragInfo == null) ? null : mDragInfo.cell;

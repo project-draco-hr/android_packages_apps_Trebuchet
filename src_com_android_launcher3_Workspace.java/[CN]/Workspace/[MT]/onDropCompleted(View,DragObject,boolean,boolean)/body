@@ -16,6 +16,9 @@
       if (parentCell != null) {
         parentCell.removeView(mDragInfo.cell);
       }
+ else       if (LauncherAppState.isDogfoodBuild()) {
+        throw new NullPointerException("mDragInfo.cell has null parent");
+      }
       if (mDragInfo.cell instanceof DropTarget) {
         mDragController.removeDropTarget((DropTarget)mDragInfo.cell);
       }
