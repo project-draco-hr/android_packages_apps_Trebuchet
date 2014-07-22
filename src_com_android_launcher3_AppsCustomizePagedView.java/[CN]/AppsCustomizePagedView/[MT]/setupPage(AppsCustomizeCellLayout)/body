@@ -5,8 +5,11 @@
   int heightSpec=MeasureSpec.makeMeasureSpec(mContentHeight,MeasureSpec.AT_MOST);
   layout.setMinimumWidth(getPageContentWidth());
   layout.measure(widthSpec,heightSpec);
-  layout.setPadding(mAllAppsPadding.left,mAllAppsPadding.top,mAllAppsPadding.right,mAllAppsPadding.bottom);
-  setVisibilityOnChildren(layout,View.VISIBLE);
   Resources res=getContext().getResources();
-  layout.setBackground(res.getDrawable(R.drawable.quantum_panel));
+  Drawable bg=res.getDrawable(R.drawable.quantum_panel);
+  if (bg != null) {
+    layout.setBackground(bg);
+    bg.setVisible(mPageBackgroundsVisible,false);
+  }
+  setVisibilityOnChildren(layout,View.VISIBLE);
 }

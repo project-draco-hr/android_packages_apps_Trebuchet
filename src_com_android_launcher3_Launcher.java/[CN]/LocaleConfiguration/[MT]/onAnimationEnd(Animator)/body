@@ -5,5 +5,8 @@
   if (onCompleteRunnable != null) {
     onCompleteRunnable.run();
   }
+  revealView.setLayerType(View.LAYER_TYPE_NONE,null);
+  page.setLayerType(View.LAYER_TYPE_NONE,null);
+  content.setPageBackgroundsVisible(true);
   mAppsCustomizeContent.updateCurrentPageScroll();
 }

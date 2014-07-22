@@ -84,6 +84,8 @@
       pageIndicator.setLayoutParams(lllp);
     }
     AppsCustomizePagedView pagedView=(AppsCustomizePagedView)host.findViewById(R.id.apps_customize_pane_content);
+    FrameLayout fakePageContainer=(FrameLayout)host.findViewById(R.id.fake_page_container);
+    FrameLayout fakePage=(FrameLayout)host.findViewById(R.id.fake_page);
     padding=new Rect();
     if (pagedView != null) {
       int paddingLR=(availableWidthPx - (allAppsCellWidthPx * allAppsNumCols)) / (2 * (allAppsNumCols + 1));
@@ -96,10 +98,13 @@
         padding.left=padding.right=gridPaddingLR;
       }
       padding.bottom=Math.max(0,pageIndicatorHeight - paddingTB);
-      pagedView.setAllAppsPadding(padding);
       pagedView.setWidgetsPageIndicatorPadding(pageIndicatorHeight);
-      int pagedViewPadding=res.getDimensionPixelSize(R.dimen.apps_customize_horizontal_padding);
-      pagedView.setPadding(pagedViewPadding,0,pagedViewPadding,0);
+      fakePage.setBackground(res.getDrawable(R.drawable.quantum_panel));
+      int pagedFixedViewPadding=res.getDimensionPixelSize(R.dimen.apps_customize_horizontal_padding);
+      padding.left+=pagedFixedViewPadding;
+      padding.right+=pagedFixedViewPadding;
+      pagedView.setPadding(padding.left,padding.top,padding.right,padding.bottom);
+      fakePageContainer.setPadding(padding.left,padding.top,padding.right,padding.bottom);
     }
   }
   ViewGroup overviewMode=launcher.getOverviewPanel();
