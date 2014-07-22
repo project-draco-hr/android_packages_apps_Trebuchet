@@ -1,0 +1,28 @@
+{
+  if (DEBUG)   Log.d(TAG,"updates resumed");
+  if (!mResumed || !mBound) {
+    return;
+  }
+  if ((mPendingReplays.size() == 0) && (newInfo == null)) {
+    return;
+  }
+  LauncherAppState app=LauncherAppState.getInstanceNoCreate();
+  if (app == null) {
+    if (DEBUG)     Log.d(TAG,"app is null, delaying send");
+    return;
+  }
+  ArrayList<PackageInstallInfo> updates=new ArrayList<>();
+  if (newInfo != null) {
+    updates.add(newInfo);
+  }
+  for (int i=mPendingReplays.size() - 1; i > 0; i--) {
+    InstallSessionInfo session=mPendingReplays.valueAt(i);
+    if (session.getAppPackageName() != null) {
+      updates.add(new PackageInstallInfo(session.getAppPackageName(),ShortcutInfo.PACKAGE_STATE_INSTALLING,(int)(session.getProgress() * 100)));
+    }
+  }
+  mPendingReplays.clear();
+  if (!updates.isEmpty()) {
+    app.setPackageState(updates);
+  }
+}

@@ -1,0 +1,3 @@
+{
+  mPrefs=context.getSharedPreferences(PREFS,Context.MODE_PRIVATE);
+}

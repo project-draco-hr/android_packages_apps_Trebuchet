@@ -1,0 +1,9 @@
+{
+  mInstaller=context.getPackageManager().getPackageInstaller();
+  mResumed=false;
+  mBound=false;
+  mInstaller.addSessionCallback(mCallback);
+  for (  InstallSessionInfo info : mInstaller.getAllSessions()) {
+    mPendingReplays.append(info.getSessionId(),info);
+  }
+}

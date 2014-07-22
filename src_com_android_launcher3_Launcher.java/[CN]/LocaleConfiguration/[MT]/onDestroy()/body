@@ -25,5 +25,6 @@
   mWorkspace.removeAllWorkspaceScreens();
   mWorkspace=null;
   mDragController=null;
+  PackageInstallerCompat.getInstance(this).onStop();
   LauncherAnimUtils.onDestroyActivity();
 }

@@ -1,0 +1,12 @@
+{
+  Runnable r=new Runnable(){
+    public void run(){
+      Callbacks callbacks=mCallbacks != null ? mCallbacks.get() : null;
+      if (callbacks != null) {
+        callbacks.updatePackageState(installInfo);
+      }
+    }
+  }
+;
+  mHandler.post(r);
+}

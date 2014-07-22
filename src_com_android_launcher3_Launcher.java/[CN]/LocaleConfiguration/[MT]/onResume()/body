@@ -65,4 +65,5 @@
   }
   mWorkspace.updateInteractionForState();
   mWorkspace.onResume();
+  PackageInstallerCompat.getInstance(this).onResume();
 }
