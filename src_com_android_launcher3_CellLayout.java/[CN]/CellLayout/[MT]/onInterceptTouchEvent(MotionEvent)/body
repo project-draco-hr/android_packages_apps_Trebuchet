@@ -1,5 +1,4 @@
 {
-  final int action=ev.getAction();
   if (mInterceptTouchListener != null && mInterceptTouchListener.onTouch(this,ev)) {
     return true;
   }

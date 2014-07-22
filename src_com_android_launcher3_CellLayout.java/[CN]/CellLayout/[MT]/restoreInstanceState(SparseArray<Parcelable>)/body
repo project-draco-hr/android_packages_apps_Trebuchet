@@ -1,3 +1,11 @@
 {
-  dispatchRestoreInstanceState(states);
+  try {
+    dispatchRestoreInstanceState(states);
+  }
+ catch (  IllegalArgumentException ex) {
+    if (LauncherAppState.isDogfoodBuild()) {
+      throw ex;
+    }
+    Log.e(TAG,"Ignoring an error while restoring a view instance state",ex);
+  }
 }
