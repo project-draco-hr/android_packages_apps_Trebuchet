@@ -1,0 +1,22 @@
+{
+  long id=generateNewItemId();
+  values.put(LauncherSettings.Favorites._ID,id);
+  Integer itemType=values.getAsInteger(LauncherSettings.Favorites.ITEM_TYPE);
+  if (itemType != null && itemType.intValue() == LauncherSettings.Favorites.ITEM_TYPE_APPWIDGET && !values.containsKey(LauncherSettings.Favorites.APPWIDGET_ID)) {
+    final AppWidgetManager appWidgetManager=AppWidgetManager.getInstance(mContext);
+    ComponentName cn=ComponentName.unflattenFromString(values.getAsString(Favorites.APPWIDGET_PROVIDER));
+    if (cn != null) {
+      try {
+        int appWidgetId=mAppWidgetHost.allocateAppWidgetId();
+        if (!appWidgetManager.bindAppWidgetIdIfAllowed(appWidgetId,cn)) {
+          return false;
+        }
+      }
+ catch (      RuntimeException e) {
+        Log.e(TAG,"Failed to initialize external widget",e);
+        return false;
+      }
+    }
+  }
+  return true;
+}

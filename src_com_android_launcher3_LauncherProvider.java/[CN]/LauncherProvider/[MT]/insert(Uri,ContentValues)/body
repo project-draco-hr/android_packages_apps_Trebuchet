@@ -1,5 +1,11 @@
 {
   SqlArguments args=new SqlArguments(uri);
+  String externalAdd=uri.getQueryParameter(URI_PARAM_IS_EXTERNAL_ADD);
+  if (externalAdd != null && "true".equals(externalAdd)) {
+    if (!mOpenHelper.initializeExternalAdd(initialValues)) {
+      return null;
+    }
+  }
   SQLiteDatabase db=mOpenHelper.getWritableDatabase();
   addModifiedTime(initialValues);
   final long rowId=dbInsertAndCheck(mOpenHelper,db,args.table,null,initialValues);
