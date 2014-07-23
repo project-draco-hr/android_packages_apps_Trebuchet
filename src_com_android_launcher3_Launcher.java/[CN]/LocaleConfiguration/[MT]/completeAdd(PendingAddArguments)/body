@@ -7,6 +7,9 @@ case REQUEST_CREATE_SHORTCUT:
 case REQUEST_CREATE_APPWIDGET:
 completeAddAppWidget(args.appWidgetId,args.container,screenId,null,null);
 break;
+case REQUEST_RECONFIGURE_APPWIDGET:
+completeRestoreAppWidget(args.appWidgetId);
+break;
 }
 resetAddInfo();
 return screenId;

@@ -6,10 +6,10 @@
     final int itemCount=swc.getChildCount();
     for (int j=0; j < itemCount; j++) {
       View v=swc.getChildAt(j);
-      if (v.getTag() instanceof LauncherAppWidgetInfo) {
+      if (v != null && v.getTag() instanceof LauncherAppWidgetInfo) {
         LauncherAppWidgetInfo info=(LauncherAppWidgetInfo)v.getTag();
         LauncherAppWidgetHostView lahv=(LauncherAppWidgetHostView)info.hostView;
-        if (lahv != null && lahv.orientationChangedSincedInflation()) {
+        if (lahv != null && lahv.isReinflateRequired()) {
           mLauncher.removeAppWidget(info);
           cl.removeView(lahv);
           mLauncher.bindAppWidget(info);

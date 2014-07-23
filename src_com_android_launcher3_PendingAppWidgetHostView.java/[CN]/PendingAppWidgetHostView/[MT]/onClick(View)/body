@@ -1,0 +1,5 @@
+{
+  if (mClickListener != null) {
+    mClickListener.onClick(this);
+  }
+}

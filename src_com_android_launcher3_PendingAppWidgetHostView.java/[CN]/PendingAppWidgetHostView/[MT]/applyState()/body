@@ -1,0 +1,10 @@
+{
+  if (mDefaultView != null) {
+    if (isReadyForClickSetup()) {
+      mDefaultView.setText(R.string.gadget_setup_text);
+    }
+ else {
+      mDefaultView.setText(R.string.gadget_pending_text);
+    }
+  }
+}

@@ -28,4 +28,9 @@
  else   if (v == mAllAppsButton) {
     onClickAllAppsButton(v);
   }
+ else   if (tag instanceof LauncherAppWidgetInfo) {
+    if (v instanceof PendingAppWidgetHostView) {
+      onClickPendingWidget((PendingAppWidgetHostView)v);
+    }
+  }
 }

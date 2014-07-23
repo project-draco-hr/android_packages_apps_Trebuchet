@@ -1,0 +1,13 @@
+{
+  LauncherAppWidgetHostView view=mWorkspace.getWidgetForAppWidgetId(appWidgetId);
+  if ((view == null) || !(view instanceof PendingAppWidgetHostView)) {
+    Log.e(TAG,"Widget update called, when the widget no longer exists.");
+    return;
+  }
+  PendingAppWidgetHostView pendingView=(PendingAppWidgetHostView)view;
+  pendingView.setStatus(LauncherAppWidgetInfo.RESTORE_COMPLETED);
+  LauncherAppWidgetInfo info=(LauncherAppWidgetInfo)pendingView.getTag();
+  info.restoreStatus=LauncherAppWidgetInfo.RESTORE_COMPLETED;
+  mWorkspace.reinflateWidgetsIfNecessary();
+  LauncherModel.updateItemInDatabase(this,info);
+}
