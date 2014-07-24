@@ -19,6 +19,7 @@
     updateAppMarketIcon();
   }
   setWorkspaceLoading(false);
+  sendLoadingCompleteBroadcastIfNecessary();
   if (sPendingAddItem != null) {
     final long screenId=completeAdd(sPendingAddItem);
     mWorkspace.post(new Runnable(){

@@ -1,0 +1,10 @@
+{
+  if (!mSharedPrefs.getBoolean(FIRST_LOAD_COMPLETE,false)) {
+    String permission=getResources().getString(R.string.receive_first_load_broadcast_permission);
+    Intent intent=new Intent(ACTION_FIRST_LOAD_COMPLETE);
+    sendBroadcast(intent,permission);
+    SharedPreferences.Editor editor=mSharedPrefs.edit();
+    editor.putBoolean(FIRST_LOAD_COMPLETE,true);
+    editor.apply();
+  }
+}
