@@ -1,12 +1,35 @@
 {
   final PackageManager pm=getPackageManager();
-  final ArrayList<ResourceWallpaperInfo> bundled=new ArrayList<ResourceWallpaperInfo>(24);
+  final ArrayList<WallpaperTileInfo> bundled=new ArrayList<WallpaperTileInfo>(24);
   Partner partner=Partner.get(pm);
   if (partner != null) {
     final Resources partnerRes=partner.getResources();
     final int resId=partnerRes.getIdentifier(Partner.RESOURCE_WALLPAPERS,"array",partner.getPackageName());
     if (resId != 0) {
       addWallpapers(bundled,partnerRes,partner.getPackageName(),resId);
+    }
+    File systemDir=partner.getWallpaperDirectory();
+    if (systemDir != null && systemDir.isDirectory()) {
+      for (      File file : systemDir.listFiles()) {
+        if (!file.isFile()) {
+          continue;
+        }
+        String name=file.getName();
+        int dotPos=name.lastIndexOf('.');
+        String extension="";
+        if (dotPos >= -1) {
+          extension=name.substring(dotPos);
+          name=name.substring(0,dotPos);
+        }
+        if (name.endsWith("_small")) {
+          continue;
+        }
+        File thumbnail=new File(systemDir,name + "_small" + extension);
+        Bitmap thumb=BitmapFactory.decodeFile(thumbnail.getAbsolutePath());
+        if (thumb != null) {
+          bundled.add(new FileWallpaperInfo(file,new BitmapDrawable(thumb)));
+        }
+      }
     }
   }
   Pair<ApplicationInfo,Integer> r=getWallpaperArrayResourceId();
@@ -18,8 +41,8 @@
  catch (    PackageManager.NameNotFoundException e) {
     }
   }
-  if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
-    ResourceWallpaperInfo defaultWallpaperInfo=getPreKKDefaultWallpaperInfo();
+  if (partner == null || !partner.hideDefaultWallpaper()) {
+    WallpaperTileInfo defaultWallpaperInfo=(Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) ? getPreKKDefaultWallpaperInfo() : getDefaultWallpaper();
     if (defaultWallpaperInfo != null) {
       bundled.add(0,defaultWallpaperInfo);
     }

@@ -1,4 +1,0 @@
-ArrayList<ResourceWallpaperInfo> known
-Resources res
-String packageName
-int listResId

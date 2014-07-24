@@ -1,0 +1,7 @@
+{
+  Drawable thumb=getItem(position).mThumb;
+  if (thumb == null) {
+    Log.e(TAG,"Error decoding thumbnail for wallpaper #" + position);
+  }
+  return createImageTileView(mLayoutInflater,convertView,parent,thumb);
+}
