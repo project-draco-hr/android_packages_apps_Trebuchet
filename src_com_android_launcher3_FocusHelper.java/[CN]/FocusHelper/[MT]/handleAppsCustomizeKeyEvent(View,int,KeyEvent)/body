@@ -15,8 +15,7 @@
     countY=((PagedViewGridLayout)parentLayout).getCellCountY();
   }
   final PagedView container=(PagedView)parentLayout.getParent();
-  final TabHost tabHost=findTabHostParent(container);
-  final TabWidget tabs=tabHost.getTabWidget();
+  final AppsCustomizeTabHost tabHost=findTabHostParent(container);
   final int iconIndex=itemContainer.indexOfChild(v);
   final int itemCount=itemContainer.getChildCount();
   final int pageIndex=((PagedView)container).indexToPage(container.indexOfChild(parentLayout));
@@ -70,9 +69,6 @@ if (handleKeyEvent) {
 if (y > 0) {
 int newiconIndex=((y - 1) * countX) + x;
 itemContainer.getChildAt(newiconIndex).requestFocus();
-}
- else {
-tabs.requestFocus();
 }
 }
 wasHandled=true;

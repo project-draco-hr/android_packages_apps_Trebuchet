@@ -1,7 +1,7 @@
 {
   ViewParent p=v.getParent();
-  while (p != null && !(p instanceof TabHost)) {
+  while (p != null && !(p instanceof AppsCustomizeTabHost)) {
     p=p.getParent();
   }
-  return (TabHost)p;
+  return (AppsCustomizeTabHost)p;
 }

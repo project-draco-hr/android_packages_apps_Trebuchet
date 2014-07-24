@@ -1,8 +1,7 @@
 {
   final PagedViewGridLayout parent=(PagedViewGridLayout)w.getParent();
   final PagedView container=(PagedView)parent.getParent();
-  final TabHost tabHost=findTabHostParent(container);
-  final TabWidget tabs=tabHost.getTabWidget();
+  final AppsCustomizeTabHost tabHost=findTabHostParent(container);
   final int widgetIndex=parent.indexOfChild(w);
   final int widgetCount=parent.getChildCount();
   final int pageIndex=((PagedView)container).indexToPage(container.indexOfChild(parent));
@@ -57,9 +56,6 @@ if (y > 0) {
 int newWidgetIndex=((y - 1) * cellCountX) + x;
 child=parent.getChildAt(newWidgetIndex);
 if (child != null) child.requestFocus();
-}
- else {
-tabs.requestFocus();
 }
 }
 wasHandled=true;
