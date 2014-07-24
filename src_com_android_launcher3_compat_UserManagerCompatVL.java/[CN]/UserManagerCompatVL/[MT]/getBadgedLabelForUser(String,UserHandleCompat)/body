@@ -1,6 +1,0 @@
-{
-  if (user == null) {
-    return label;
-  }
-  return mUserManager.getBadgedLabelForUser(label,user.getUser());
-}
