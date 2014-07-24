@@ -9,11 +9,22 @@
   final Context context=this;
   new AsyncTask<Void,Bitmap,Bitmap>(){
     protected Bitmap doInBackground(    Void... args){
-      int rotation=WallpaperCropActivity.getRotationFromExif(context,uri);
-      return createThumbnail(defaultSize,context,uri,null,null,0,rotation,false);
+      try {
+        int rotation=WallpaperCropActivity.getRotationFromExif(context,uri);
+        return createThumbnail(defaultSize,context,uri,null,null,0,rotation,false);
+      }
+ catch (      SecurityException securityException) {
+        if (isDestroyed()) {
+          cancel(false);
+        }
+ else {
+          throw securityException;
+        }
+        return null;
+      }
     }
     protected void onPostExecute(    Bitmap thumb){
-      if (thumb != null) {
+      if (!isCancelled() && thumb != null) {
         image.setImageBitmap(thumb);
         Drawable thumbDrawable=image.getDrawable();
         thumbDrawable.setDither(true);
