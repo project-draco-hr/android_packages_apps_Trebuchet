@@ -76,7 +76,7 @@
         }
       }
  else       if (TAG_FOLDER.equals(name)) {
-        added=loadFolder(db,values,mContext.getResources(),parser);
+        added=loadFolder(db,values,res,parser);
       }
  else       if (TAG_PARTNER_FOLDER.equals(name)) {
         final Partner partner=Partner.get(mPackageManager);
