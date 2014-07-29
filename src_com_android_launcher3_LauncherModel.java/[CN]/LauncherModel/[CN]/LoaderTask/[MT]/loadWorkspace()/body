@@ -7,7 +7,7 @@
   final AppWidgetManager widgets=AppWidgetManager.getInstance(context);
   final boolean isSafeMode=manager.isSafeMode();
   final LauncherAppsCompat launcherApps=LauncherAppsCompat.getInstance(context);
-  final boolean isSdCardReady=context.registerReceiver(null,new IntentFilter(StartupReceiver.SYESTEM_READY)) != null;
+  final boolean isSdCardReady=context.registerReceiver(null,new IntentFilter(StartupReceiver.SYSTEM_READY)) != null;
   LauncherAppState app=LauncherAppState.getInstance();
   DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
   int countX=(int)grid.numColumns;
@@ -313,7 +313,7 @@ Log.w(TAG,"Could not update restored rows");
 }
 }
 if (!isSdCardReady && !sPendingPackages.isEmpty()) {
-context.registerReceiver(new AppsAvailabilityCheck(),new IntentFilter(StartupReceiver.SYESTEM_READY),null,sWorker);
+context.registerReceiver(new AppsAvailabilityCheck(),new IntentFilter(StartupReceiver.SYSTEM_READY),null,sWorker);
 }
 if (loadedOldDb) {
 long maxScreenId=0;
