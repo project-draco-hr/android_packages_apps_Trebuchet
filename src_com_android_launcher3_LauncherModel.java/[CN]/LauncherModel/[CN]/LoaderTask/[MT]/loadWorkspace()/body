@@ -106,7 +106,7 @@ case LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT:
         Launcher.addDumpLog(TAG,"Invalid package: " + cn + " (check again later)",true);
         HashSet<String> pkgs=sPendingPackages.get(user);
         if (pkgs == null) {
-          pkgs=new HashSet<>();
+          pkgs=new HashSet<String>();
           sPendingPackages.put(user,pkgs);
         }
         pkgs.add(cn.getPackageName());

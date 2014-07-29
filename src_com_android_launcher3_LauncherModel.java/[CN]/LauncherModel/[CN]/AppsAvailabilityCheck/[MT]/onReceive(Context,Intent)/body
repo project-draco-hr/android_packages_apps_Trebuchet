@@ -4,7 +4,7 @@ synchronized (sBgLock) {
     ArrayList<String> packagesRemoved;
     for (    Entry<UserHandleCompat,HashSet<String>> entry : sPendingPackages.entrySet()) {
       UserHandleCompat user=entry.getKey();
-      packagesRemoved=new ArrayList<>();
+      packagesRemoved=new ArrayList<String>();
       for (      String pkg : entry.getValue()) {
         if (!launcherApps.isPackageEnabledForProfile(pkg,user)) {
           Launcher.addDumpLog(TAG,"Package not found: " + pkg,true);

@@ -10,7 +10,7 @@
   }
 );
   if (state == ShortcutInfo.PACKAGE_STATE_DEFAULT) {
-    HashSet<String> packages=new HashSet<>();
+    HashSet<String> packages=new HashSet<String>();
     packages.add(pkgName);
     restorePendingWidgets(packages);
   }

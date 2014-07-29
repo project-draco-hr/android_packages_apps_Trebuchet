@@ -1,6 +1,6 @@
 {
   final HashMap<ComponentName,AppInfo> appsMap=new HashMap<ComponentName,AppInfo>();
-  final HashSet<String> pkgNames=new HashSet<>();
+  final HashSet<String> pkgNames=new HashSet<String>();
   for (  AppInfo ai : apps) {
     appsMap.put(ai.componentName,ai);
     pkgNames.add(ai.componentName.getPackageName());
