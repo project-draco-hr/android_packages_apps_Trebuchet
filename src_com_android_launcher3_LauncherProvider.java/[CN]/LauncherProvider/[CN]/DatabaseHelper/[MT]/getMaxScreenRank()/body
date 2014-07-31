@@ -1,0 +1,13 @@
+{
+  SQLiteDatabase db=getWritableDatabase();
+  Cursor c=db.rawQuery("SELECT MAX(" + LauncherSettings.WorkspaceScreens.SCREEN_RANK + ") FROM "+ TABLE_WORKSPACE_SCREENS,null);
+  final int maxRankIndex=0;
+  int rank=-1;
+  if (c != null && c.moveToNext()) {
+    rank=c.getInt(maxRankIndex);
+  }
+  if (c != null) {
+    c.close();
+  }
+  return rank;
+}

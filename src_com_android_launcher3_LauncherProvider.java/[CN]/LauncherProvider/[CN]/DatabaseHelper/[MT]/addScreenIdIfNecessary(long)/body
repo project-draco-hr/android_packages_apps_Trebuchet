@@ -1,0 +1,12 @@
+{
+  if (!hasScreenId(screenId)) {
+    int rank=getMaxScreenRank() + 1;
+    ContentValues v=new ContentValues();
+    v.put(LauncherSettings.WorkspaceScreens._ID,screenId);
+    v.put(LauncherSettings.WorkspaceScreens.SCREEN_RANK,rank);
+    if (dbInsertAndCheck(this,getWritableDatabase(),TABLE_WORKSPACE_SCREENS,null,v) < 0) {
+      return false;
+    }
+  }
+  return true;
+}
