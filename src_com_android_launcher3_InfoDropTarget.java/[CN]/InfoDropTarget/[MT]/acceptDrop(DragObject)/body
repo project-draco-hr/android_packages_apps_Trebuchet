@@ -9,8 +9,15 @@
  else   if (d.dragInfo instanceof PendingAddItemInfo) {
     componentName=((PendingAddItemInfo)d.dragInfo).componentName;
   }
+  final UserHandleCompat user;
+  if (d.dragInfo instanceof ItemInfo) {
+    user=((ItemInfo)d.dragInfo).user;
+  }
+ else {
+    user=UserHandleCompat.myUserHandle();
+  }
   if (componentName != null) {
-    mLauncher.startApplicationDetailsActivity(componentName);
+    mLauncher.startApplicationDetailsActivity(componentName,user);
   }
   d.deferDragViewCleanupPostAnimation=false;
   return false;

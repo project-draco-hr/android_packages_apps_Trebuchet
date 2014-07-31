@@ -1,0 +1,3 @@
+{
+  mLauncherApps.showAppDetailsForProfile(component,user.getUser(),null,null);
+}
