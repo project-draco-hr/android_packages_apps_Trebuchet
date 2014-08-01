@@ -1,0 +1,26 @@
+{
+  SharedPreferences.Editor editor=mPrefs.edit();
+  PackageInstallInfo installInfo=new PackageInstallInfo(packageName);
+  installInfo.progress=progress;
+  installInfo.state=state;
+  if (state == ShortcutInfo.PACKAGE_STATE_DEFAULT) {
+    editor.remove(packageName);
+    if (DEBUG)     Log.d(TAG,"no longer tracking " + packageName);
+  }
+ else {
+    editor.putString(packageName,infoToJson(installInfo));
+    if (DEBUG)     Log.d(TAG,"saved state: " + infoToJson(installInfo) + " for package: "+ packageName);
+  }
+  editor.commit();
+  if (!mUseQueue) {
+    if (mReplayPending) {
+      replayUpdates();
+    }
+ else {
+      LauncherAppState app=LauncherAppState.getInstanceNoCreate();
+      ArrayList<PackageInstallInfo> update=new ArrayList<>();
+      update.add(installInfo);
+      sendUpdate(app,update);
+    }
+  }
+}

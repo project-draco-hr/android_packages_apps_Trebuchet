@@ -34,4 +34,5 @@
     mWorkspace.getUniqueComponents(true,null);
     mIntentsOnWorkspaceFromUpgradePath=mWorkspace.getUniqueComponents(true,null);
   }
+  PackageInstallerCompat.getInstance(this).onFinishBind();
 }

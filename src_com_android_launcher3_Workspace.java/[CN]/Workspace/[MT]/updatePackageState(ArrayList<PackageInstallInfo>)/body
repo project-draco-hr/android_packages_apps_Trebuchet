@@ -1,0 +1,22 @@
+{
+  HashSet<String> completedPackages=new HashSet<>();
+  for (  final PackageInstallInfo installInfo : installInfos) {
+    mapOverItems(MAP_RECURSE,new ItemOperator(){
+      @Override public boolean evaluate(      ItemInfo info,      View v,      View parent){
+        if (info instanceof ShortcutInfo && ((ShortcutInfo)info).isPromiseFor(installInfo.packageName) && v instanceof BubbleTextView) {
+          ((ShortcutInfo)info).setProgress(installInfo.progress);
+          ((ShortcutInfo)info).setState(installInfo.state);
+          ((BubbleTextView)v).applyState();
+        }
+        return false;
+      }
+    }
+);
+    if (installInfo.state == ShortcutInfo.PACKAGE_STATE_DEFAULT) {
+      completedPackages.add(installInfo.packageName);
+    }
+  }
+  if (!completedPackages.isEmpty()) {
+    restorePendingWidgets(completedPackages);
+  }
+}

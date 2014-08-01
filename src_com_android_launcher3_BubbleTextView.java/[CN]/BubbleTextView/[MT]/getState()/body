@@ -1,9 +1,0 @@
-{
-  if (!(getTag() instanceof ShortcutInfo)) {
-    return ShortcutInfo.PACKAGE_STATE_DEFAULT;
-  }
- else {
-    ShortcutInfo info=(ShortcutInfo)getTag();
-    return info.getState();
-  }
-}

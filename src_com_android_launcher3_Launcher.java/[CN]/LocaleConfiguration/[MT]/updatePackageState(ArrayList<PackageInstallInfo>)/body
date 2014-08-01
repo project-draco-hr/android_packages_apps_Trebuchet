@@ -1,0 +1,5 @@
+{
+  if (mWorkspace != null) {
+    mWorkspace.updatePackageState(installInfo);
+  }
+}

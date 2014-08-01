@@ -1,4 +1,0 @@
-{
-  if (DEBUG)   Log.d(TAG,"setPackageState(" + pkgName + ", "+ state+ ")");
-  mModel.setPackageState(pkgName,state);
-}
