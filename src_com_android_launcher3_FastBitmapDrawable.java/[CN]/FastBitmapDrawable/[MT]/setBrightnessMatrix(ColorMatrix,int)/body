@@ -1,0 +1,8 @@
+{
+  float scale=1 - brightness / 255.0f;
+  matrix.setScale(scale,scale,scale,1);
+  float[] array=matrix.getArray();
+  array[4]=brightness;
+  array[9]=brightness;
+  array[14]=brightness;
+}

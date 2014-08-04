@@ -1,4 +1,9 @@
 {
   mIcon.setBounds(bounds);
-  mPathChanged=true;
+  if (mBgDrawable != null) {
+    sTempRect.set(bounds);
+    sTempRect.inset(-mRingOutset,-mRingOutset);
+    mBgDrawable.setBounds(sTempRect);
+  }
+  mIndicatorRectDirty=true;
 }

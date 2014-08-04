@@ -13,6 +13,11 @@
   if (mIsExternalDrag) {
     si.cellX=mEmptyCell[0];
     si.cellY=mEmptyCell[1];
+    LauncherModel.addOrMoveItemInDatabase(mLauncher,si,mInfo.id,0,si.cellX,si.cellY);
+    if (d.dragSource != this) {
+      updateItemLocationsInDatabaseBatch();
+    }
+    mIsExternalDrag=false;
     currentDragView=createAndAddShortcut(si);
   }
  else {
@@ -37,13 +42,6 @@
   }
   mItemsInvalidated=true;
   setupContentDimensions(getItemCount());
-  if (mIsExternalDrag) {
-    LauncherModel.addOrMoveItemInDatabase(mLauncher,si,mInfo.id,0,si.cellX,si.cellY);
-    if (d.dragSource != this) {
-      updateItemLocationsInDatabaseBatch();
-    }
-    mIsExternalDrag=false;
-  }
   mSuppressOnAdd=true;
   mInfo.add(si);
   mSuppressOnAdd=false;

@@ -1,0 +1,57 @@
+{
+  final int height=bitmap.getHeight();
+  final int width=bitmap.getWidth();
+  int sampleStride=(int)Math.sqrt((height * width) / samples);
+  if (sampleStride < 1) {
+    sampleStride=1;
+  }
+  float[] hsv=new float[3];
+  float[] hueScoreHistogram=new float[360];
+  float highScore=-1;
+  int bestHue=-1;
+  for (int y=0; y < height; y+=sampleStride) {
+    for (int x=0; x < width; x+=sampleStride) {
+      int argb=bitmap.getPixel(x,y);
+      int alpha=0xFF & (argb >> 24);
+      if (alpha < 0x80) {
+        continue;
+      }
+      int rgb=argb | 0xFF000000;
+      Color.colorToHSV(rgb,hsv);
+      int hue=(int)hsv[0];
+      if (hue < 0 || hue >= hueScoreHistogram.length) {
+        continue;
+      }
+      float score=hsv[1] * hsv[2];
+      hueScoreHistogram[hue]+=score;
+      if (hueScoreHistogram[hue] > highScore) {
+        highScore=hueScoreHistogram[hue];
+        bestHue=hue;
+      }
+    }
+  }
+  SparseArray<Float> rgbScores=new SparseArray<Float>();
+  int bestColor=0xff000000;
+  highScore=-1;
+  for (int y=0; y < height; y+=sampleStride) {
+    for (int x=0; x < width; x+=sampleStride) {
+      int rgb=bitmap.getPixel(x,y) | 0xff000000;
+      Color.colorToHSV(rgb,hsv);
+      int hue=(int)hsv[0];
+      if (hue == bestHue) {
+        float s=hsv[1];
+        float v=hsv[2];
+        int bucket=(int)(s * 100) + (int)(v * 10000);
+        float score=s * v;
+        Float oldTotal=rgbScores.get(bucket);
+        float newTotal=oldTotal == null ? score : oldTotal + score;
+        rgbScores.put(bucket,newTotal);
+        if (newTotal > highScore) {
+          highScore=newTotal;
+          bestColor=rgb;
+        }
+      }
+    }
+  }
+  return bestColor;
+}

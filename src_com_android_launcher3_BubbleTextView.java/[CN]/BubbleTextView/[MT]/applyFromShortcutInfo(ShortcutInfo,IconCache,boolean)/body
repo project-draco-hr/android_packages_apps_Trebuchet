@@ -2,10 +2,7 @@
   Bitmap b=info.getIcon(iconCache);
   LauncherAppState app=LauncherAppState.getInstance();
   FastBitmapDrawable iconDrawable=Utilities.createIconDrawable(b);
-  if (info.isDisabled) {
-    iconDrawable.setSaturation(0);
-    iconDrawable.setBrightness(20);
-  }
+  iconDrawable.setGhostModeEnabled(info.isDisabled);
   setCompoundDrawables(null,iconDrawable,null,null);
   if (setDefaultPadding) {
     DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();

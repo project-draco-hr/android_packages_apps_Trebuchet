@@ -1,5 +1,5 @@
 {
-  if (getParent() instanceof ShortcutAndWidgetContainer) {
+  if ((getParent() instanceof ShortcutAndWidgetContainer) && !(getCompoundDrawables()[1] instanceof PreloadIconDrawable)) {
     ShortcutAndWidgetContainer parent=(ShortcutAndWidgetContainer)getParent();
     if (parent != null) {
       CellLayout layout=(CellLayout)parent.getParent();

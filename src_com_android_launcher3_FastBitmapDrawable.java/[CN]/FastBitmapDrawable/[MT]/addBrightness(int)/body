@@ -1,4 +1,3 @@
 {
-  mBrightness+=amount;
-  updateFilter();
+  setBrightness(mBrightness + amount);
 }

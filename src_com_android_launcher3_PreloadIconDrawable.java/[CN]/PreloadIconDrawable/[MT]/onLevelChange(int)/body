@@ -1,11 +1,16 @@
 {
   mProgress=level;
-  mPathChanged=true;
   if (mAnimator != null) {
     mAnimator.cancel();
     mAnimator=null;
   }
   mAnimationProgress=ANIMATION_PROGRESS_STOPPED;
+  if (level > 0) {
+    mPaint.setColor(getIndicatorColor());
+  }
+  if (mIcon instanceof FastBitmapDrawable) {
+    ((FastBitmapDrawable)mIcon).setGhostModeEnabled(level <= 0);
+  }
   invalidateSelf();
   return true;
 }

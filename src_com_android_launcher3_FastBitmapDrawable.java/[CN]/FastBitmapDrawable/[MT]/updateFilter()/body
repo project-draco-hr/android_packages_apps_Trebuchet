@@ -1,16 +1,24 @@
 {
-  if (mSatutation != 1 || mBrightness != 0) {
-    sTempSaturationMatrix.setSaturation(mSatutation);
-    if (mBrightness != 0) {
-      float scale=1 - mBrightness / 255.0f;
-      sTempBrightnessMatrix.setScale(scale,scale,scale,1);
-      float[] array=sTempBrightnessMatrix.getArray();
-      array[4]=mBrightness;
-      array[9]=mBrightness;
-      array[14]=mBrightness;
-      sTempSaturationMatrix.preConcat(sTempBrightnessMatrix);
+  if (mGhostModeEnabled) {
+    if (sGhostModeMatrix == null) {
+      sGhostModeMatrix=new ColorMatrix();
+      sGhostModeMatrix.setSaturation(0);
+      float range=(255 - GHOST_MODE_MIN_COLOR_RANGE) / 255.0f;
+      sTempMatrix.set(new float[]{range,0,0,0,GHOST_MODE_MIN_COLOR_RANGE,0,range,0,0,GHOST_MODE_MIN_COLOR_RANGE,0,0,range,0,GHOST_MODE_MIN_COLOR_RANGE,0,0,0,1,0});
+      sGhostModeMatrix.preConcat(sTempMatrix);
     }
-    mPaint.setColorFilter(new ColorMatrixColorFilter(sTempSaturationMatrix));
+    if (mBrightness == 0) {
+      mPaint.setColorFilter(new ColorMatrixColorFilter(sGhostModeMatrix));
+    }
+ else {
+      setBrightnessMatrix(sTempMatrix,mBrightness);
+      sTempMatrix.postConcat(sGhostModeMatrix);
+      mPaint.setColorFilter(new ColorMatrixColorFilter(sTempMatrix));
+    }
+  }
+ else   if (mBrightness != 0) {
+    setBrightnessMatrix(sTempMatrix,mBrightness);
+    mPaint.setColorFilter(new ColorMatrixColorFilter(sTempMatrix));
   }
  else {
     mPaint.setColorFilter(null);
