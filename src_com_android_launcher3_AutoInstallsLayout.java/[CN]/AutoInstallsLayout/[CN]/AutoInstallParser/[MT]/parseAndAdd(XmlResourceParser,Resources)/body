@@ -1,0 +1,11 @@
+{
+  final String packageName=getAttributeValue(parser,ATTR_PACKAGE_NAME);
+  final String className=getAttributeValue(parser,ATTR_CLASS_NAME);
+  if (TextUtils.isEmpty(packageName) || TextUtils.isEmpty(className)) {
+    if (LOGD)     Log.d(TAG,"Skipping invalid <favorite> with no component");
+    return -1;
+  }
+  mValues.put(Favorites.RESTORED,1);
+  final Intent intent=new Intent(Intent.ACTION_MAIN,null).addCategory(Intent.CATEGORY_LAUNCHER).setComponent(new ComponentName(packageName,className)).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
+  return addShortcut(mContext.getString(R.string.package_state_unknown),intent,Favorites.ITEM_TYPE_APPLICATION);
+}

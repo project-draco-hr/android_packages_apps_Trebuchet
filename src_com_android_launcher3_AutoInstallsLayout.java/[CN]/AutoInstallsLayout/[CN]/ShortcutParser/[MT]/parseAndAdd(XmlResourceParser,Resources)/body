@@ -1,0 +1,21 @@
+{
+  final String url=getAttributeValue(parser,ATTR_URL);
+  final int titleResId=getAttributeResourceValue(parser,ATTR_TITLE,0);
+  final int iconId=getAttributeResourceValue(parser,ATTR_ICON,0);
+  if (titleResId == 0 || iconId == 0) {
+    if (LOGD)     Log.d(TAG,"Ignoring shortcut");
+    return -1;
+  }
+  if (TextUtils.isEmpty(url) || !Patterns.WEB_URL.matcher(url).matches()) {
+    if (LOGD)     Log.d(TAG,"Ignoring shortcut, invalid url: " + url);
+    return -1;
+  }
+  Drawable icon=res.getDrawable(iconId);
+  if (icon == null) {
+    if (LOGD)     Log.d(TAG,"Ignoring shortcut, can't load icon");
+    return -1;
+  }
+  ItemInfo.writeBitmap(mValues,Utilities.createIconBitmap(icon,mContext));
+  final Intent intent=new Intent(Intent.ACTION_VIEW,null).setData(Uri.parse(url)).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
+  return addShortcut(res.getString(titleResId),intent,Favorites.ITEM_TYPE_SHORTCUT);
+}

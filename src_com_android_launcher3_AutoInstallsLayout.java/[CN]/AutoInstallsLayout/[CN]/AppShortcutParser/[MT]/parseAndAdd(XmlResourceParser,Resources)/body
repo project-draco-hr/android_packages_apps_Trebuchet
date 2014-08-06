@@ -1,0 +1,29 @@
+{
+  final String packageName=getAttributeValue(parser,ATTR_PACKAGE_NAME);
+  final String className=getAttributeValue(parser,ATTR_CLASS_NAME);
+  if (!TextUtils.isEmpty(packageName) && !TextUtils.isEmpty(className)) {
+    ActivityInfo info;
+    try {
+      ComponentName cn;
+      try {
+        cn=new ComponentName(packageName,className);
+        info=mPackageManager.getActivityInfo(cn,0);
+      }
+ catch (      PackageManager.NameNotFoundException nnfe) {
+        String[] packages=mPackageManager.currentToCanonicalPackageNames(new String[]{packageName});
+        cn=new ComponentName(packages[0],className);
+        info=mPackageManager.getActivityInfo(cn,0);
+      }
+      final Intent intent=new Intent(Intent.ACTION_MAIN,null).addCategory(Intent.CATEGORY_LAUNCHER).setComponent(cn).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
+      return addShortcut(info.loadLabel(mPackageManager).toString(),intent,Favorites.ITEM_TYPE_APPLICATION);
+    }
+ catch (    PackageManager.NameNotFoundException e) {
+      Log.w(TAG,"Unable to add favorite: " + packageName + "/"+ className,e);
+    }
+    return -1;
+  }
+ else {
+    if (LOGD)     Log.d(TAG,"Skipping invalid <favorite> with no component or uri");
+    return -1;
+  }
+}

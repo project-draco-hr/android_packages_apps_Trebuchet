@@ -22,7 +22,7 @@
   }
  else {
     Launcher.addDumpLog(TAG,"loadWorkspace: loading default favorites",false);
-    LauncherAppState.getLauncherProvider().loadDefaultFavoritesIfNecessary(0);
+    LauncherAppState.getLauncherProvider().loadDefaultFavoritesIfNecessary();
   }
   boolean loadedOldDb=false;
   Launcher.addDumpLog(TAG,"11683562 -   loadedOldDb: " + loadedOldDb,true);

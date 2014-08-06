@@ -1,0 +1,14 @@
+{
+  Pair<String,Resources> customizationApkInfo=Utilities.findSystemApk(ACTION_LAUNCHER_CUSTOMIZATION,context.getPackageManager());
+  if (customizationApkInfo == null) {
+    return null;
+  }
+  String pkg=customizationApkInfo.first;
+  Resources res=customizationApkInfo.second;
+  int layoutId=res.getIdentifier(LAYOUT_RES,"xml",pkg);
+  if (layoutId == 0) {
+    Log.e(TAG,"Layout definition not found in package: " + pkg);
+    return null;
+  }
+  return new AutoInstallsLayout(context,appWidgetHost,callback,pkg,res,layoutId);
+}

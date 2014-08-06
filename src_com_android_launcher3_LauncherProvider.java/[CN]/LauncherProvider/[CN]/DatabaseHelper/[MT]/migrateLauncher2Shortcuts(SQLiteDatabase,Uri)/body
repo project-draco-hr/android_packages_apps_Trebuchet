@@ -34,7 +34,6 @@
         final int width=(int)grid.numColumns;
         final int height=(int)grid.numRows;
         final int hotseatWidth=(int)grid.numHotseatIcons;
-        PackageManager pm=mContext.getPackageManager();
         final HashSet<String> seenIntents=new HashSet<String>(c.getCount());
         final ArrayList<ContentValues> shortcuts=new ArrayList<ContentValues>();
         final ArrayList<ContentValues> folders=new ArrayList<ContentValues>();

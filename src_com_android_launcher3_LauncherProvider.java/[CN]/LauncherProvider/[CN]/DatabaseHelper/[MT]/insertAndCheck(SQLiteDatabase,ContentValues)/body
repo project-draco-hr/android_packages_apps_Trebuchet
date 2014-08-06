@@ -1,0 +1,3 @@
+{
+  return dbInsertAndCheck(this,db,TABLE_FAVORITES,null,values);
+}

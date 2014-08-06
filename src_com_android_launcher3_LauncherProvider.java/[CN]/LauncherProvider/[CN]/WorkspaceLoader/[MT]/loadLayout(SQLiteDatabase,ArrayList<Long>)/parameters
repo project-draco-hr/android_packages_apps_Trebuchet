@@ -1,0 +1,2 @@
+SQLiteDatabase db
+ArrayList<Long> screenIds
