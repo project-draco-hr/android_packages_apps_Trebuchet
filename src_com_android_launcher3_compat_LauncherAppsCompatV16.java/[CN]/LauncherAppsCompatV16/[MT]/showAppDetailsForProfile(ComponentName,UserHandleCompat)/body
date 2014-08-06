@@ -1,6 +1,6 @@
 {
-  String packageName=componentName.getPackageName();
+  String packageName=component.getPackageName();
   Intent intent=new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS,Uri.fromParts("package",packageName,null));
   intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
-  startActivitySafely(null,intent,"startApplicationDetailsActivity");
+  mContext.startActivity(intent,null);
 }

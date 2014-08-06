@@ -1,0 +1,16 @@
+{
+  String packageName=componentName.getPackageName();
+  try {
+    LauncherAppsCompat launcherApps=LauncherAppsCompat.getInstance(this);
+    UserManagerCompat userManager=UserManagerCompat.getInstance(this);
+    launcherApps.showAppDetailsForProfile(componentName,user);
+  }
+ catch (  SecurityException e) {
+    Toast.makeText(this,R.string.activity_not_found,Toast.LENGTH_SHORT).show();
+    Log.e(TAG,"Launcher does not have permission to launch settings");
+  }
+catch (  ActivityNotFoundException e) {
+    Toast.makeText(this,R.string.activity_not_found,Toast.LENGTH_SHORT).show();
+    Log.e(TAG,"Unable to launch settings");
+  }
+}
