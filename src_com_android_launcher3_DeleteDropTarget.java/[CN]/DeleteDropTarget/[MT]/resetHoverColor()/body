@@ -1,4 +1,6 @@
 {
-  mCurrentDrawable.resetTransition();
+  if (mCurrentDrawable != null) {
+    mCurrentDrawable.resetTransition();
+  }
   setTextColor(mOriginalTextColor);
 }
