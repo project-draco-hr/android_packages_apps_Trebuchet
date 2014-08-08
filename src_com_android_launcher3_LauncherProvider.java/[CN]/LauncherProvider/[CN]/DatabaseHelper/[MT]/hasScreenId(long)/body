@@ -1,0 +1,12 @@
+{
+  SQLiteDatabase db=getWritableDatabase();
+  Cursor c=db.rawQuery("SELECT * FROM " + TABLE_WORKSPACE_SCREENS + " WHERE "+ LauncherSettings.WorkspaceScreens._ID+ " = "+ screenId,null);
+  if (c != null) {
+    int count=c.getCount();
+    c.close();
+    return count > 0;
+  }
+ else {
+    return false;
+  }
+}
