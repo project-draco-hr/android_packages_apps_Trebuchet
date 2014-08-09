@@ -11,7 +11,7 @@
     if (DEBUG)     Log.d(TAG,"app is null, delaying send");
     return;
   }
-  ArrayList<PackageInstallInfo> updates=new ArrayList<>();
+  ArrayList<PackageInstallInfo> updates=new ArrayList<PackageInstallInfo>();
   if (newInfo != null) {
     updates.add(newInfo);
   }

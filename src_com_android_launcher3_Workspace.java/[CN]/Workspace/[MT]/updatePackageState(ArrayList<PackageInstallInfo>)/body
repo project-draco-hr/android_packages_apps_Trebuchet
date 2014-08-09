@@ -1,5 +1,5 @@
 {
-  HashSet<String> completedPackages=new HashSet<>();
+  HashSet<String> completedPackages=new HashSet<String>();
   for (  final PackageInstallInfo installInfo : installInfos) {
     mapOverItems(MAP_RECURSE,new ItemOperator(){
       @Override public boolean evaluate(      ItemInfo info,      View v,      View parent){
