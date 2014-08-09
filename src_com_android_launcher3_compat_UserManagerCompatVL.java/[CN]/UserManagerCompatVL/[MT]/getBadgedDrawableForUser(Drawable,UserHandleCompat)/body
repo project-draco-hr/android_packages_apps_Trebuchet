@@ -1,3 +1,8 @@
 {
-  return mUserManager.getBadgedIconForUser(unbadged,user.getUser());
+  try {
+    return mUserManager.getBadgedIconForUser(unbadged,user.getUser());
+  }
+ catch (  Throwable t) {
+    return unbadged;
+  }
 }
