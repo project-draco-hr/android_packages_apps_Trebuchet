@@ -1,7 +1,6 @@
 {
   LauncherAppState app=LauncherAppState.getInstance();
   DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
-  mWidgetSpacingLayout.setPadding(mPageLayoutPaddingLeft,mPageLayoutPaddingTop,mPageLayoutPaddingRight,mPageLayoutPaddingBottom);
   mCellCountX=(int)grid.allAppsNumCols;
   mCellCountY=(int)grid.allAppsNumRows;
   updatePageCounts();
