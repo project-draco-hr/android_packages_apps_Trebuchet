@@ -1,19 +1,18 @@
 {
-  final ContentResolver contentResolver=getContext().getContentResolver();
+  final AtomicBoolean widgetsChanged=new AtomicBoolean(false);
   mapOverItems(MAP_NO_RECURSE,new ItemOperator(){
     @Override public boolean evaluate(    ItemInfo info,    View v,    View parent){
       if (info instanceof LauncherAppWidgetInfo) {
         LauncherAppWidgetInfo widgetInfo=(LauncherAppWidgetInfo)info;
-        if (widgetInfo.restoreStatus == LauncherAppWidgetInfo.RESTORE_PROVIDER_PENDING && installedPackaged.contains(widgetInfo.providerName.getPackageName())) {
-          ContentValues values=new ContentValues();
-          values.put(LauncherSettings.Favorites.RESTORED,LauncherAppWidgetInfo.RESTORE_COMPLETED);
-          String where=BaseColumns._ID + "= ?";
-          String[] args={Long.toString(widgetInfo.id)};
-          contentResolver.update(LauncherSettings.Favorites.CONTENT_URI,values,where,args);
+        if (widgetInfo.hasRestoreFlag(LauncherAppWidgetInfo.FLAG_PROVIDER_NOT_READY) && installedPackaged.contains(widgetInfo.providerName.getPackageName())) {
+          widgetsChanged.set(true);
         }
       }
       return false;
     }
   }
 );
+  if (widgetsChanged.get()) {
+    getContext().getContentResolver().notifyChange(LauncherSettings.Favorites.CONTENT_URI,null);
+  }
 }

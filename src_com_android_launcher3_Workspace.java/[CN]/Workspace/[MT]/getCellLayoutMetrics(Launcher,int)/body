@@ -1,7 +1,6 @@
 {
   LauncherAppState app=LauncherAppState.getInstance();
   DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
-  Resources res=launcher.getResources();
   Display display=launcher.getWindowManager().getDefaultDisplay();
   Point smallestSize=new Point();
   Point largestSize=new Point();

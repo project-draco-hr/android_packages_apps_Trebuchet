@@ -1,14 +1,8 @@
 {
-  final View[] value=new View[1];
-  mapOverItems(MAP_NO_RECURSE,new ItemOperator(){
+  return getFirstMatch(new ItemOperator(){
     @Override public boolean evaluate(    ItemInfo info,    View v,    View parent){
-      if (v.getTag() == tag) {
-        value[0]=v;
-        return true;
-      }
-      return false;
+      return info == tag;
     }
   }
 );
-  return value[0];
 }

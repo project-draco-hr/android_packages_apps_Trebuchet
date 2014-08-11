@@ -1,8 +1,0 @@
-{
-  super(context);
-  mContext=context;
-  mLongPressHelper=new CheckLongPressHelper(this);
-  mInflater=(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-  mDragLayer=((Launcher)context).getDragLayer();
-  mWidgetReady=widgetReady;
-}

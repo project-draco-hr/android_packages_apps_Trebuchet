@@ -13,7 +13,42 @@
     Log.d(TAG,"bindAppWidget: " + item);
   }
   final Workspace workspace=mWorkspace;
-  final AppWidgetProviderInfo appWidgetInfo;
+  AppWidgetProviderInfo appWidgetInfo;
+  if (((item.restoreStatus & LauncherAppWidgetInfo.FLAG_PROVIDER_NOT_READY) == 0) && ((item.restoreStatus & LauncherAppWidgetInfo.FLAG_ID_NOT_VALID) != 0)) {
+    appWidgetInfo=mModel.findAppWidgetProviderInfoWithComponent(this,item.providerName);
+    if (appWidgetInfo == null) {
+      if (DEBUG_WIDGETS) {
+        Log.d(TAG,"Removing restored widget: id=" + item.appWidgetId + " belongs to component "+ item.providerName+ ", as the povider is null");
+      }
+      LauncherModel.deleteItemFromDatabase(this,item);
+      return;
+    }
+    PendingAddWidgetInfo pendingInfo=new PendingAddWidgetInfo(appWidgetInfo,null,null);
+    pendingInfo.spanX=item.spanX;
+    pendingInfo.spanY=item.spanY;
+    pendingInfo.minSpanX=item.minSpanX;
+    pendingInfo.minSpanY=item.minSpanY;
+    Bundle options=AppsCustomizePagedView.getDefaultOptionsForWidget(this,pendingInfo);
+    boolean success=false;
+    int newWidgetId=mAppWidgetHost.allocateAppWidgetId();
+    if (options != null) {
+      success=mAppWidgetManager.bindAppWidgetIdIfAllowed(newWidgetId,appWidgetInfo.provider,options);
+    }
+ else {
+      success=mAppWidgetManager.bindAppWidgetIdIfAllowed(newWidgetId,appWidgetInfo.provider);
+    }
+    if (!success) {
+      mAppWidgetHost.deleteAppWidgetId(newWidgetId);
+      if (DEBUG_WIDGETS) {
+        Log.d(TAG,"Removing restored widget: id=" + item.appWidgetId + " belongs to component "+ item.providerName+ ", as the launcher is unable to bing a new widget id");
+      }
+      LauncherModel.deleteItemFromDatabase(this,item);
+      return;
+    }
+    item.appWidgetId=newWidgetId;
+    item.restoreStatus=(appWidgetInfo.configure == null) ? LauncherAppWidgetInfo.RESTORE_COMPLETED : LauncherAppWidgetInfo.FLAG_UI_NOT_READY;
+    LauncherModel.updateItemInDatabase(this,item);
+  }
   if (item.restoreStatus == LauncherAppWidgetInfo.RESTORE_COMPLETED) {
     final int appWidgetId=item.appWidgetId;
     appWidgetInfo=mAppWidgetManager.getAppWidgetInfo(appWidgetId);
@@ -24,8 +59,9 @@
   }
  else {
     appWidgetInfo=null;
-    item.hostView=new LauncherAppWidgetHostView(this,false);
+    item.hostView=new PendingAppWidgetHostView(this,item.restoreStatus);
     item.hostView.updateAppWidget(null);
+    item.hostView.setOnClickListener(this);
   }
   item.hostView.setTag(item);
   item.onBindAppWidget(this);
