@@ -3,11 +3,11 @@
   v.getDrawingRect(clipRect);
   boolean textVisible=false;
   destCanvas.save();
-  if (v instanceof TextView && pruneToDrawable) {
+  if (v instanceof TextView) {
     Drawable d=((TextView)v).getCompoundDrawables()[1];
     Rect bounds=getDrawableBounds(d);
     clipRect.set(0,0,bounds.width() + padding,bounds.height() + padding);
-    destCanvas.translate(padding / 2,padding / 2);
+    destCanvas.translate(padding / 2 - bounds.left,padding / 2 - bounds.top);
     d.draw(destCanvas);
   }
  else {
@@ -16,14 +16,6 @@
         ((FolderIcon)v).setTextVisible(false);
         textVisible=true;
       }
-    }
- else     if (v instanceof BubbleTextView) {
-      final BubbleTextView tv=(BubbleTextView)v;
-      clipRect.bottom=tv.getExtendedPaddingTop() - (int)BubbleTextView.PADDING_V + tv.getLayout().getLineTop(0);
-    }
- else     if (v instanceof TextView) {
-      final TextView tv=(TextView)v;
-      clipRect.bottom=tv.getExtendedPaddingTop() - tv.getCompoundDrawablePadding() + tv.getLayout().getLineTop(0);
     }
     destCanvas.translate(-v.getScrollX() + padding / 2,-v.getScrollY() + padding / 2);
     destCanvas.clipRect(clipRect,Op.REPLACE);

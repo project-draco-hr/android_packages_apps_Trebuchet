@@ -27,7 +27,7 @@ if (top instanceof PreloadIconDrawable) {
 preloadDrawable=(PreloadIconDrawable)top;
 }
  else {
-preloadDrawable=new PreloadIconDrawable(top,getResources());
+preloadDrawable=new PreloadIconDrawable(top,getPreloaderTheme());
 setCompoundDrawables(drawables[0],preloadDrawable,drawables[2],drawables[3]);
 }
 preloadDrawable.setLevel(progressLevel);

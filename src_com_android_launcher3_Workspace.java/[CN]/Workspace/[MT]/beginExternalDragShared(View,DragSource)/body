@@ -3,7 +3,8 @@
   DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
   int iconSize=grid.iconSizePx;
   mLauncher.onDragStarted(child);
-  final Bitmap tmpB=createDragBitmap(child,new Canvas(),DRAG_BITMAP_PADDING);
+  AtomicInteger padding=new AtomicInteger(DRAG_BITMAP_PADDING);
+  final Bitmap tmpB=createDragBitmap(child,new Canvas(),padding);
   Bitmap b=Bitmap.createBitmap(iconSize,iconSize,Bitmap.Config.ARGB_8888);
   Paint p=new Paint();
   p.setFilterBitmap(true);
@@ -15,7 +16,7 @@
   float scale=mLauncher.getDragLayer().getLocationInDragLayer(child,mTempXY) * iconScale;
   int dragLayerX=Math.round(mTempXY[0] - (bmpWidth - scale * child.getWidth()) / 2);
   int dragLayerY=Math.round(mTempXY[1]);
-  Point dragVisualizeOffset=new Point(-DRAG_BITMAP_PADDING / 2,DRAG_BITMAP_PADDING / 2);
+  Point dragVisualizeOffset=new Point(-padding.get() / 2,padding.get() / 2);
   Rect dragRect=new Rect(0,0,iconSize,iconSize);
   if (child.getTag() == null || !(child.getTag() instanceof ItemInfo)) {
     String msg="Drag started with a view that has no tag set. This " + "will cause a crash (issue 11627249) down the line. " + "View: " + child + "  tag: "+ child.getTag();

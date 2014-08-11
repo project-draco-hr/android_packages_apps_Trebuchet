@@ -14,7 +14,7 @@
   }
   Bitmap b=Bitmap.createBitmap(bmpWidth,bmpHeight,Bitmap.Config.ARGB_8888);
   Canvas c=new Canvas(b);
-  drawDragView(v,c,0,true);
+  drawDragView(v,c,0);
   c.setBitmap(null);
   mDragOutline=createDragOutline(b,canvas,DRAG_BITMAP_PADDING,iconSize,iconSize,true);
 }

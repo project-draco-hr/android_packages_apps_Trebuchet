@@ -1,0 +1,11 @@
+{
+  Object tag=getTag();
+  int style=((tag != null) && (tag instanceof ShortcutInfo) && (((ShortcutInfo)tag).container >= 0)) ? R.style.PreloadIcon_Folder : R.style.PreloadIcon;
+  Theme theme=sPreloaderThemes.get(style);
+  if (theme == null) {
+    theme=getResources().newTheme();
+    theme.applyStyle(style,true);
+    sPreloaderThemes.put(style,theme);
+  }
+  return theme;
+}

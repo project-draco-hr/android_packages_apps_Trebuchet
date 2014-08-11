@@ -108,11 +108,10 @@ mTargetCell=cellLayout.performReorder((int)mDragViewVisualCenter[0],(int)mDragVi
  else {
 cellLayout.findCellForSpan(mTargetCell,1,1);
 }
+LauncherModel.addOrMoveItemInDatabase(mLauncher,info,container,screenId,mTargetCell[0],mTargetCell[1]);
 addInScreen(view,container,screenId,mTargetCell[0],mTargetCell[1],info.spanX,info.spanY,insertAtFirst);
 cellLayout.onDropChild(view);
-CellLayout.LayoutParams lp=(CellLayout.LayoutParams)view.getLayoutParams();
 cellLayout.getShortcutsAndWidgets().measureChild(view);
-LauncherModel.addOrMoveItemInDatabase(mLauncher,info,container,screenId,lp.cellX,lp.cellY);
 if (d.dragView != null) {
 setFinalTransitionTransform(cellLayout);
 mLauncher.getDragLayer().animateViewIntoPosition(d.dragView,view,exitSpringLoadedRunnable,this);

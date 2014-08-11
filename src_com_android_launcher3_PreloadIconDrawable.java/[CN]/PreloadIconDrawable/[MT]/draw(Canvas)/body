@@ -1,35 +1,29 @@
 {
-  final Rect r=getBounds();
-  if (canvas.getClipBounds(mCanvasClipRect) && !Rect.intersects(mCanvasClipRect,r)) {
+  final Rect r=new Rect(getBounds());
+  if (canvas.getClipBounds(sTempRect) && !Rect.intersects(sTempRect,r)) {
     return;
+  }
+  if (mIndicatorRectDirty) {
+    initIndicatorRect();
   }
   final float iconScale;
   if ((mAnimationProgress >= ANIMATION_PROGRESS_STARTED) && (mAnimationProgress < ANIMATION_PROGRESS_COMPLETED)) {
     mPaint.setAlpha((int)((1 - mAnimationProgress) * 255));
-    canvas.drawBitmap(sProgressBg,null,r,mPaint);
-    canvas.drawBitmap(sProgressFill,null,r,mPaint);
+    mBgDrawable.setAlpha(mPaint.getAlpha());
+    mBgDrawable.draw(canvas);
+    canvas.drawOval(mIndicatorRect,mPaint);
     iconScale=ICON_SCALE_FACTOR + (1 - ICON_SCALE_FACTOR) * mAnimationProgress;
   }
  else   if (mAnimationProgress == ANIMATION_PROGRESS_STOPPED) {
     mPaint.setAlpha(255);
     iconScale=ICON_SCALE_FACTOR;
-    canvas.drawBitmap(sProgressBg,null,r,mPaint);
+    mBgDrawable.setAlpha(255);
+    mBgDrawable.draw(canvas);
     if (mProgress >= 100) {
-      canvas.drawBitmap(sProgressFill,null,r,mPaint);
+      canvas.drawOval(mIndicatorRect,mPaint);
     }
  else     if (mProgress > 0) {
-      if (mPathChanged) {
-        mProgressPath.reset();
-        mProgressPath.moveTo(r.exactCenterX(),r.centerY());
-        mRect.set(r);
-        mProgressPath.arcTo(mRect,-90,mProgress * 3.6f);
-        mProgressPath.close();
-        mPathChanged=false;
-      }
-      canvas.save();
-      canvas.clipPath(mProgressPath);
-      canvas.drawBitmap(sProgressFill,null,r,mPaint);
-      canvas.restore();
+      canvas.drawArc(mIndicatorRect,-90,mProgress * 3.6f,false,mPaint);
     }
   }
  else {
