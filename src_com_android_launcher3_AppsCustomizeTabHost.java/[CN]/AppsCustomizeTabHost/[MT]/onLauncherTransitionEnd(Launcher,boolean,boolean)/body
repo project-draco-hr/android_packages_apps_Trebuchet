@@ -1,9 +1,6 @@
 {
   mPagedView.onLauncherTransitionEnd(l,animated,toWorkspace);
   mInTransition=false;
-  if (animated && !Utilities.isLmp()) {
-    setLayerType(LAYER_TYPE_NONE,null);
-  }
   if (!toWorkspace) {
     mPagedView.loadAssociatedPages(mPagedView.getCurrentPage());
     AccessibilityManager am=(AccessibilityManager)getContext().getSystemService(Context.ACCESSIBILITY_SERVICE);

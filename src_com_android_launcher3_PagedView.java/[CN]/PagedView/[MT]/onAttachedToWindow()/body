@@ -1,8 +1,9 @@
 {
   super.onAttachedToWindow();
   ViewGroup parent=(ViewGroup)getParent();
+  ViewGroup grandParent=(ViewGroup)parent.getParent();
   if (mPageIndicator == null && mPageIndicatorViewId > -1) {
-    mPageIndicator=(PageIndicator)parent.findViewById(mPageIndicatorViewId);
+    mPageIndicator=(PageIndicator)grandParent.findViewById(mPageIndicatorViewId);
     mPageIndicator.removeAllMarkers(mAllowPagedViewAnimations);
     ArrayList<PageIndicator.PageMarkerResources> markers=new ArrayList<PageIndicator.PageMarkerResources>();
     for (int i=0; i < getChildCount(); ++i) {

@@ -55,19 +55,6 @@
           v.setRotationY(0f);
         }
       }
-      alpha=1;
-      translationX=0;
-      scale=1;
-      v.setTranslationX(translationX);
-      v.setScaleX(scale);
-      v.setScaleY(scale);
-      v.setAlpha(alpha);
-      if (alpha == 0) {
-        v.setVisibility(INVISIBLE);
-      }
- else       if (v.getVisibility() != VISIBLE) {
-        v.setVisibility(VISIBLE);
-      }
     }
   }
   enableHwLayersOnVisiblePages();
