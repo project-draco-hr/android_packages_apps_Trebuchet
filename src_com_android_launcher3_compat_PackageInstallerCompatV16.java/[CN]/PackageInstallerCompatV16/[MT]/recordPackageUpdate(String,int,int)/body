@@ -18,7 +18,7 @@
     }
  else {
       LauncherAppState app=LauncherAppState.getInstanceNoCreate();
-      ArrayList<PackageInstallInfo> update=new ArrayList<>();
+      ArrayList<PackageInstallInfo> update=new ArrayList<PackageInstallInfo>();
       update.add(installInfo);
       sendUpdate(app,update);
     }
