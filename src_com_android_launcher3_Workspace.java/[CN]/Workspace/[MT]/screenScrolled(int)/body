@@ -14,11 +14,18 @@
     final int upperIndex=getChildCount() - 1;
     final boolean isLeftPage=mOverScrollX < 0;
     index=(!isRtl && isLeftPage) || (isRtl && !isLeftPage) ? lowerIndex : upperIndex;
+    pivotX=isLeftPage ? rightBiasedPivot : leftBiasedPivot;
     CellLayout cl=(CellLayout)getChildAt(index);
     float scrollProgress=getScrollProgress(screenCenter,cl,index);
     cl.setOverScrollAmount(Math.abs(scrollProgress),isLeftPage);
-    if (!mOverscrollTransformsSet) {
+    float rotation=-WORKSPACE_OVERSCROLL_ROTATION * scrollProgress;
+    cl.setRotationY(rotation);
+    if (!mOverscrollTransformsSet || Float.compare(mLastOverscrollPivotX,pivotX) != 0) {
       mOverscrollTransformsSet=true;
+      mLastOverscrollPivotX=pivotX;
+      cl.setCameraDistance(mDensity * mCameraDistance);
+      cl.setPivotX(cl.getMeasuredWidth() * pivotX);
+      cl.setPivotY(cl.getMeasuredHeight() * 0.5f);
       cl.setOverscrollTransformsDirty(true);
     }
   }
