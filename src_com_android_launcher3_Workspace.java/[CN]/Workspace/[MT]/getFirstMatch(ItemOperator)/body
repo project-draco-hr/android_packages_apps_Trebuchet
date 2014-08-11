@@ -1,0 +1,14 @@
+{
+  final View[] value=new View[1];
+  mapOverItems(MAP_NO_RECURSE,new ItemOperator(){
+    @Override public boolean evaluate(    ItemInfo info,    View v,    View parent){
+      if (operator.evaluate(info,v,parent)) {
+        value[0]=v;
+        return true;
+      }
+      return false;
+    }
+  }
+);
+  return value[0];
+}

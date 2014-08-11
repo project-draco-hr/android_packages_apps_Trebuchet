@@ -1,17 +1,8 @@
 {
-  final Folder[] value=new Folder[1];
-  mapOverItems(MAP_NO_RECURSE,new ItemOperator(){
+  return (Folder)getFirstMatch(new ItemOperator(){
     @Override public boolean evaluate(    ItemInfo info,    View v,    View parent){
-      if (v instanceof Folder) {
-        Folder f=(Folder)v;
-        if (f.getInfo() == tag && f.getInfo().opened) {
-          value[0]=f;
-          return true;
-        }
-      }
-      return false;
+      return (v instanceof Folder) && (((Folder)v).getInfo() == tag) && ((Folder)v).getInfo().opened;
     }
   }
 );
-  return value[0];
 }

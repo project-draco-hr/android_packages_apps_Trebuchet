@@ -75,6 +75,18 @@
     }
     return;
   }
+  if (requestCode == REQUEST_RECONFIGURE_APPWIDGET) {
+    if (resultCode == RESULT_OK) {
+      PendingAddArguments args=preparePendingAddArgs(requestCode,data,pendingAddWidgetId,mPendingAddInfo);
+      if (workspaceLocked) {
+        sPendingAddItem=args;
+      }
+ else {
+        completeAdd(args);
+      }
+    }
+    return;
+  }
   if (resultCode == RESULT_OK && mPendingAddInfo.container != ItemInfo.NO_ID) {
     final PendingAddArguments args=preparePendingAddArgs(requestCode,data,-1,mPendingAddInfo);
     if (isWorkspaceLocked()) {

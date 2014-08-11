@@ -1,13 +1,4 @@
 {
-  id=info.id;
-  cellX=info.cellX;
-  cellY=info.cellY;
-  spanX=info.spanX;
-  spanY=info.spanY;
-  screenId=info.screenId;
-  itemType=info.itemType;
-  container=info.container;
-  user=info.user;
-  contentDescription=info.contentDescription;
+  copyFrom(info);
   LauncherModel.checkItemInfo(this);
 }
