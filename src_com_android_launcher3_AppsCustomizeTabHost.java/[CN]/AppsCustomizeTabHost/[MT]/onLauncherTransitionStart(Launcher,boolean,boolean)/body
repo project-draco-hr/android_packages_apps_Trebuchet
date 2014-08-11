@@ -1,6 +1,3 @@
 {
   mPagedView.onLauncherTransitionStart(l,animated,toWorkspace);
-  if (animated && !Utilities.isLmp()) {
-    enableAndBuildHardwareLayer();
-  }
 }
