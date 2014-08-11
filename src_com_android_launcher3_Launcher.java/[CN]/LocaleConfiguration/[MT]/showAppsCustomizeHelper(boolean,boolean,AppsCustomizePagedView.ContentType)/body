@@ -24,12 +24,6 @@
     final AppsCustomizePagedView content=(AppsCustomizePagedView)toView.findViewById(R.id.apps_customize_pane_content);
     final View page=content.getPageAt(content.getCurrentPage());
     final View revealView=toView.findViewById(R.id.fake_page);
-    if (contentType == AppsCustomizePagedView.ContentType.Widgets) {
-      revealView.setBackground(res.getDrawable(R.drawable.quantum_panel_dark));
-    }
- else {
-      revealView.setBackground(res.getDrawable(R.drawable.quantum_panel));
-    }
     revealView.setVisibility(View.VISIBLE);
     content.setPageBackgroundsVisible(false);
     int width=revealView.getMeasuredWidth();
@@ -43,22 +37,19 @@
     panelAlphaAndDrift.setDuration(revealDuration);
     panelAlphaAndDrift.setInterpolator(new LogDecelerateInterpolator(100,0));
     mStateAnimation.play(panelAlphaAndDrift);
-    if (page != null) {
-      page.setVisibility(View.VISIBLE);
-      page.setLayerType(View.LAYER_TYPE_HARDWARE,null);
-      ObjectAnimator pageDrift=ObjectAnimator.ofFloat(page,"translationY",yDrift,0);
-      pageDrift.setDuration(revealDuration);
-      pageDrift.setInterpolator(new LogDecelerateInterpolator(100,0));
-      mStateAnimation.play(pageDrift);
-      page.setAlpha(0.01f);
-      ObjectAnimator itemsAlpha=ObjectAnimator.ofFloat(page,"alpha",0.01f,1f);
-      itemsAlpha.setDuration(revealDuration);
-      itemsAlpha.setInterpolator(new AccelerateInterpolator(1.5f));
-      itemsAlpha.setStartDelay(itemsAlphaStagger);
-      mStateAnimation.play(itemsAlpha);
-    }
-    View pageIndicators=toView.findViewById(R.id.apps_customize_page_indicator);
-    pageIndicators.setAlpha(0.01f);
+    page.setVisibility(View.VISIBLE);
+    page.setLayerType(View.LAYER_TYPE_HARDWARE,null);
+    ObjectAnimator pageDrift=ObjectAnimator.ofFloat(page,"translationY",yDrift,0);
+    pageDrift.setDuration(revealDuration);
+    pageDrift.setInterpolator(new LogDecelerateInterpolator(100,0));
+    mStateAnimation.play(pageDrift);
+    page.setAlpha(0.01f);
+    ObjectAnimator itemsAlpha=ObjectAnimator.ofFloat(page,"alpha",0.01f,1f);
+    itemsAlpha.setDuration(revealDuration);
+    itemsAlpha.setInterpolator(new AccelerateInterpolator(1.5f));
+    itemsAlpha.setStartDelay(itemsAlphaStagger);
+    mStateAnimation.play(itemsAlpha);
+    View pageIndicators=fromView.findViewById(R.id.apps_customize_page_indicator);
     ObjectAnimator indicatorsAlpha=ObjectAnimator.ofFloat(pageIndicators,"alpha",1f);
     indicatorsAlpha.setDuration(revealDuration);
     mStateAnimation.play(indicatorsAlpha);
@@ -74,9 +65,7 @@
         dispatchOnLauncherTransitionEnd(toView,animated,false);
         revealView.setVisibility(View.INVISIBLE);
         revealView.setLayerType(View.LAYER_TYPE_NONE,null);
-        if (page != null) {
-          page.setLayerType(View.LAYER_TYPE_NONE,null);
-        }
+        page.setLayerType(View.LAYER_TYPE_NONE,null);
         content.setPageBackgroundsVisible(true);
         if (mSearchDropTargetBar != null) {
           mSearchDropTargetBar.hideSearchBar(false);
