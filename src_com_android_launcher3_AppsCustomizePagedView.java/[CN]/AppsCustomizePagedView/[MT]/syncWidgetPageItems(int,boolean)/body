@@ -1,15 +1,15 @@
 {
   int numItemsPerPage=mWidgetCountX * mWidgetCountY;
+  final PagedViewGridLayout layout=(PagedViewGridLayout)getPageAt(page);
   final ArrayList<Object> items=new ArrayList<Object>();
-  int contentWidth=mContentWidth;
-  final int cellWidth=((contentWidth - mPageLayoutPaddingLeft - mPageLayoutPaddingRight- ((mWidgetCountX - 1) * mWidgetWidthGap)) / mWidgetCountX);
-  int contentHeight=mContentHeight;
-  final int cellHeight=((contentHeight - mPageLayoutPaddingTop - mPageLayoutPaddingBottom- ((mWidgetCountY - 1) * mWidgetHeightGap)) / mWidgetCountY);
+  int contentWidth=mContentWidth - getPaddingLeft() - getPaddingRight()- layout.getPaddingLeft()- layout.getPaddingRight();
+  final int cellWidth=contentWidth / mWidgetCountX;
+  int contentHeight=mContentHeight - getPaddingTop() - getPaddingBottom()- layout.getPaddingTop()- layout.getPaddingBottom();
+  final int cellHeight=contentHeight / mWidgetCountY;
   int offset=page * numItemsPerPage;
   for (int i=offset; i < Math.min(offset + numItemsPerPage,mWidgets.size()); ++i) {
     items.add(mWidgets.get(i));
   }
-  final PagedViewGridLayout layout=(PagedViewGridLayout)getPageAt(page);
   layout.setColumnCount(layout.getCellCountX());
   for (int i=0; i < items.size(); ++i) {
     Object rawInfo=items.get(i);
@@ -42,12 +42,18 @@
     widget.setOnKeyListener(this);
     int ix=i % mWidgetCountX;
     int iy=i / mWidgetCountX;
+    if (ix > 0) {
+      View border=widget.findViewById(R.id.left_border);
+      border.setVisibility(View.VISIBLE);
+    }
+    if (ix < mWidgetCountX - 1) {
+      View border=widget.findViewById(R.id.right_border);
+      border.setVisibility(View.VISIBLE);
+    }
     GridLayout.LayoutParams lp=new GridLayout.LayoutParams(GridLayout.spec(iy,GridLayout.START),GridLayout.spec(ix,GridLayout.TOP));
     lp.width=cellWidth;
     lp.height=cellHeight;
     lp.setGravity(Gravity.TOP | Gravity.START);
-    if (ix > 0)     lp.leftMargin=mWidgetWidthGap;
-    if (iy > 0)     lp.topMargin=mWidgetHeightGap;
     layout.addView(widget,lp);
   }
   layout.setOnLayoutListener(new Runnable(){
