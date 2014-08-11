@@ -1,5 +1,5 @@
 {
-  Drawable animateDrawable=((TextView)destView).getCompoundDrawables()[1];
+  Drawable animateDrawable=getTopDrawable((TextView)destView);
   computePreviewDrawingParams(animateDrawable.getIntrinsicWidth(),destView.getMeasuredWidth());
   animateFirstItem(animateDrawable,INITIAL_ITEM_ANIMATION_DURATION,false,null);
   addItem(destInfo);

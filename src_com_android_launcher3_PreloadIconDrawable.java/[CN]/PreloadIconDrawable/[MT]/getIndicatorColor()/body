@@ -1,0 +1,19 @@
+{
+  if (mIndicatorColor != 0) {
+    return mIndicatorColor;
+  }
+  if (!(mIcon instanceof FastBitmapDrawable)) {
+    mIndicatorColor=DEFAULT_COLOR;
+    return mIndicatorColor;
+  }
+  mIndicatorColor=Utilities.findDominantColorByHue(((FastBitmapDrawable)mIcon).getBitmap(),20);
+  float[] hsv=new float[3];
+  Color.colorToHSV(mIndicatorColor,hsv);
+  if (hsv[1] < MIN_SATUNATION) {
+    mIndicatorColor=DEFAULT_COLOR;
+    return mIndicatorColor;
+  }
+  hsv[2]=Math.max(MIN_LIGHTNESS,hsv[2]);
+  mIndicatorColor=Color.HSVToColor(hsv);
+  return mIndicatorColor;
+}

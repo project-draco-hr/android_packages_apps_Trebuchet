@@ -1,0 +1,9 @@
+{
+  mIcon=icon;
+  mPaint=new Paint(Paint.ANTI_ALIAS_FLAG);
+  mPaint.setStyle(Paint.Style.STROKE);
+  mPaint.setStrokeCap(Paint.Cap.ROUND);
+  setBounds(icon.getBounds());
+  applyTheme(theme);
+  onLevelChange(0);
+}

@@ -1,4 +1,6 @@
 {
-  mBrightness=brightness;
-  updateFilter();
+  if (mBrightness != brightness) {
+    mBrightness=brightness;
+    updateFilter();
+  }
 }

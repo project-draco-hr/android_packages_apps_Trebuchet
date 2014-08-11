@@ -1,0 +1,11 @@
+{
+  Drawable d=mBgDrawable;
+  Rect bounds=d.getBounds();
+  d.getPadding(sTempRect);
+  float paddingScaleX=((float)bounds.width()) / d.getIntrinsicWidth();
+  float paddingScaleY=((float)bounds.height()) / d.getIntrinsicHeight();
+  mIndicatorRect.set(bounds.left + sTempRect.left * paddingScaleX,bounds.top + sTempRect.top * paddingScaleY,bounds.right - sTempRect.right * paddingScaleX,bounds.bottom - sTempRect.bottom * paddingScaleY);
+  float inset=mPaint.getStrokeWidth() / 2;
+  mIndicatorRect.inset(inset,inset);
+  mIndicatorRectDirty=false;
+}

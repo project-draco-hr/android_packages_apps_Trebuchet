@@ -1,4 +1,3 @@
 View v
 Canvas destCanvas
 int padding
-boolean pruneToDrawable

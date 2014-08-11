@@ -1,0 +1,6 @@
+{
+  if (mGhostModeEnabled != enabled) {
+    mGhostModeEnabled=enabled;
+    updateFilter();
+  }
+}
