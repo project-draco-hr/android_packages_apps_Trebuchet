@@ -29,5 +29,6 @@
   icon.mFolder=folder;
   icon.mFolderRingAnimator=new FolderRingAnimator(launcher,icon);
   folderInfo.addListener(icon);
+  icon.setOnFocusChangeListener(launcher.mFocusHandler);
   return icon;
 }

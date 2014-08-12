@@ -1,0 +1,38 @@
+{
+  mPendingCall=null;
+  if (!mInitiated && (getWidth() == 0)) {
+    mPendingCall=Pair.create(v,hasFocus);
+    invalidate();
+    return;
+  }
+  if (!mInitiated) {
+    getLocationRelativeToParentPagedView(this,mIndicatorPos);
+    mInitiated=true;
+  }
+  if (hasFocus) {
+    int indicatorWidth=getWidth();
+    int indicatorHeight=getHeight();
+    float scaleX=v.getScaleX() * v.getWidth() / indicatorWidth;
+    float scaleY=v.getScaleY() * v.getHeight() / indicatorHeight;
+    getLocationRelativeToParentPagedView(v,mTargetViewPos);
+    float x=mTargetViewPos[0] - mIndicatorPos[0] - (1 - scaleX) * indicatorWidth / 2;
+    float y=mTargetViewPos[1] - mIndicatorPos[1] - (1 - scaleY) * indicatorHeight / 2;
+    if (getAlpha() > MIN_VISIBLE_ALPHA) {
+      animate().translationX(x).translationY(y).scaleX(scaleX).scaleY(scaleY).alpha(1);
+    }
+ else {
+      setTranslationX(x);
+      setTranslationY(y);
+      setScaleX(scaleX);
+      setScaleY(scaleY);
+      animate().alpha(1);
+    }
+    mLastFocusedView=v;
+  }
+ else {
+    if (mLastFocusedView == v) {
+      mLastFocusedView=null;
+      animate().alpha(0);
+    }
+  }
+}
