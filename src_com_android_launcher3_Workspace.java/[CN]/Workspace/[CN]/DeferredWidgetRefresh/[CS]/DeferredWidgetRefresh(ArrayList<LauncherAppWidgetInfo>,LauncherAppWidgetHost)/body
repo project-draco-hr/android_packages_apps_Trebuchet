@@ -1,0 +1,8 @@
+{
+  mInfos=infos;
+  mHost=host;
+  mHandler=new Handler();
+  mRefreshPending=true;
+  mHost.addProviderChangeListener(this);
+  mHandler.postDelayed(this,10000);
+}

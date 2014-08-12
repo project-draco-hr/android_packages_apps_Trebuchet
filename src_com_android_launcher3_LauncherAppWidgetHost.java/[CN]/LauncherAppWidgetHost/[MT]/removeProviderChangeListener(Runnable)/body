@@ -1,0 +1,3 @@
+{
+  mProviderChangeListeners.remove(callback);
+}

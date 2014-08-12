@@ -1,0 +1,8 @@
+{
+  super(context);
+  mInfo=info;
+  mStartState=info.restoreStatus;
+  mIconLookupIntent=new Intent().setComponent(info.providerName);
+  setBackgroundResource(R.drawable.quantum_panel_dark);
+  setWillNotDraw(false);
+}

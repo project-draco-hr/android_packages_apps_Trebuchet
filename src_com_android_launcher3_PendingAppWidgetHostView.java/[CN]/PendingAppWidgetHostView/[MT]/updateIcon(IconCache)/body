@@ -1,0 +1,28 @@
+{
+  Bitmap icon=cache.getIcon(mIconLookupIntent,mInfo.user);
+  if (mIcon == icon) {
+    return;
+  }
+  mIcon=icon;
+  if (mDrawable != null) {
+    mDrawable.setCallback(null);
+    mDrawable=null;
+  }
+  if (mIcon != null) {
+    if (isReadyForClickSetup()) {
+      mCenterDrawable=getResources().getDrawable(R.drawable.ic_setting);
+      mTopCornerDrawable=new FastBitmapDrawable(mIcon);
+    }
+ else {
+      if (sPreloaderTheme == null) {
+        sPreloaderTheme=getResources().newTheme();
+        sPreloaderTheme.applyStyle(R.style.PreloadIcon,true);
+      }
+      FastBitmapDrawable drawable=Utilities.createIconDrawable(mIcon);
+      mDrawable=new PreloadIconDrawable(drawable,sPreloaderTheme);
+      mDrawable.setCallback(this);
+      applyState();
+    }
+    mDrawableSizeChanged=true;
+  }
+}

@@ -1,3 +1,3 @@
 {
-  return mRestoreStatus == LauncherAppWidgetInfo.RESTORE_COMPLETED;
+  return mStartState != mInfo.restoreStatus;
 }
