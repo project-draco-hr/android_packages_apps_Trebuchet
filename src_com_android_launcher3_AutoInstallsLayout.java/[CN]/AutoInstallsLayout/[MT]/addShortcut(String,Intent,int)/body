@@ -1,0 +1,15 @@
+{
+  long id=mCallback.generateNewItemId();
+  mValues.put(Favorites.INTENT,intent.toUri(0));
+  mValues.put(Favorites.TITLE,title);
+  mValues.put(Favorites.ITEM_TYPE,type);
+  mValues.put(Favorites.SPANX,1);
+  mValues.put(Favorites.SPANY,1);
+  mValues.put(Favorites._ID,id);
+  if (mCallback.insertAndCheck(mDb,mValues) < 0) {
+    return -1;
+  }
+ else {
+    return id;
+  }
+}

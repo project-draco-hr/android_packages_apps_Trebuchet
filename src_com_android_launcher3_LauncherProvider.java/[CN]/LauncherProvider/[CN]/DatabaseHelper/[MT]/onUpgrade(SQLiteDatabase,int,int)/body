@@ -49,7 +49,7 @@
     if (mMaxItemId == -1) {
       mMaxItemId=initializeMaxItemId(db);
     }
-    loadFavorites(db,mContext.getResources(),R.xml.update_workspace);
+    loadFavorites(db,new SimpleWorkspaceLoader(this,mContext.getResources(),R.xml.update_workspace));
     version=9;
   }
   if (version < 12) {

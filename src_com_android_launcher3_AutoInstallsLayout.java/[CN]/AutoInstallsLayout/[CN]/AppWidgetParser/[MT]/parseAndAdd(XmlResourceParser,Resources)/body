@@ -1,0 +1,75 @@
+{
+  final String packageName=getAttributeValue(parser,ATTR_PACKAGE_NAME);
+  final String className=getAttributeValue(parser,ATTR_CLASS_NAME);
+  if (TextUtils.isEmpty(packageName) || TextUtils.isEmpty(className)) {
+    if (LOGD)     Log.d(TAG,"Skipping invalid <favorite> with no component");
+    return -1;
+  }
+  ComponentName cn=new ComponentName(packageName,className);
+  try {
+    mPackageManager.getReceiverInfo(cn,0);
+  }
+ catch (  Exception e) {
+    String[] packages=mPackageManager.currentToCanonicalPackageNames(new String[]{packageName});
+    cn=new ComponentName(packages[0],className);
+    try {
+      mPackageManager.getReceiverInfo(cn,0);
+    }
+ catch (    Exception e1) {
+      if (LOGD)       Log.d(TAG,"Can't find widget provider: " + className);
+      return -1;
+    }
+  }
+  mValues.put(Favorites.SPANX,getAttributeValue(parser,ATTR_SPAN_X));
+  mValues.put(Favorites.SPANY,getAttributeValue(parser,ATTR_SPAN_Y));
+  Bundle extras=new Bundle();
+  int widgetDepth=parser.getDepth();
+  int type;
+  while ((type=parser.next()) != XmlPullParser.END_TAG || parser.getDepth() > widgetDepth) {
+    if (type != XmlPullParser.START_TAG) {
+      continue;
+    }
+    if (TAG_EXTRA.equals(parser.getName())) {
+      String key=getAttributeValue(parser,ATTR_KEY);
+      String value=getAttributeValue(parser,ATTR_VALUE);
+      if (key != null && value != null) {
+        extras.putString(key,value);
+      }
+ else {
+        throw new RuntimeException("Widget extras must have a key and value");
+      }
+    }
+ else {
+      throw new RuntimeException("Widgets can contain only extras");
+    }
+  }
+  final AppWidgetManager appWidgetManager=AppWidgetManager.getInstance(mContext);
+  long insertedId=-1;
+  try {
+    int appWidgetId=mAppWidgetHost.allocateAppWidgetId();
+    if (!appWidgetManager.bindAppWidgetIdIfAllowed(appWidgetId,cn)) {
+      if (LOGD)       Log.e(TAG,"Unable to bind app widget id " + cn);
+      return -1;
+    }
+    mValues.put(Favorites.ITEM_TYPE,Favorites.ITEM_TYPE_APPWIDGET);
+    mValues.put(Favorites.APPWIDGET_ID,appWidgetId);
+    mValues.put(Favorites.APPWIDGET_PROVIDER,cn.flattenToString());
+    mValues.put(Favorites._ID,mCallback.generateNewItemId());
+    insertedId=mCallback.insertAndCheck(mDb,mValues);
+    if (insertedId < 0) {
+      mAppWidgetHost.deleteAppWidgetId(appWidgetId);
+      return insertedId;
+    }
+    if (!extras.isEmpty()) {
+      Intent intent=new Intent(ACTION_APPWIDGET_DEFAULT_WORKSPACE_CONFIGURE);
+      intent.setComponent(cn);
+      intent.putExtras(extras);
+      intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,appWidgetId);
+      mContext.sendBroadcast(intent);
+    }
+  }
+ catch (  RuntimeException ex) {
+    if (LOGD)     Log.e(TAG,"Problem allocating appWidgetId",ex);
+  }
+  return insertedId;
+}
