@@ -8,6 +8,10 @@
           ((ShortcutInfo)info).setState(installInfo.state);
           ((BubbleTextView)v).applyState();
         }
+ else         if (v instanceof PendingAppWidgetHostView && info instanceof LauncherAppWidgetInfo && ((LauncherAppWidgetInfo)info).providerName.getPackageName().equals(installInfo.packageName)) {
+          ((LauncherAppWidgetInfo)info).installProgress=installInfo.progress;
+          ((PendingAppWidgetHostView)v).applyState();
+        }
         return false;
       }
     }

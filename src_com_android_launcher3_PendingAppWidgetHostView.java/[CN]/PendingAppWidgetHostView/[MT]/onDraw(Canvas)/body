@@ -1,0 +1,30 @@
+{
+  if (mDrawable != null) {
+    if (mDrawableSizeChanged) {
+      int maxSize=LauncherAppState.getInstance().getDynamicGrid().getDeviceProfile().iconSizePx + 2 * mDrawable.getOutset();
+      int size=Math.min(maxSize,Math.min(getWidth() - getPaddingLeft() - getPaddingRight(),getHeight() - getPaddingTop() - getPaddingBottom()));
+      mRect.set(0,0,size,size);
+      mRect.inset(mDrawable.getOutset(),mDrawable.getOutset());
+      mRect.offsetTo((getWidth() - mRect.width()) / 2,(getHeight() - mRect.height()) / 2);
+      mDrawable.setBounds(mRect);
+      mDrawableSizeChanged=false;
+    }
+    mDrawable.draw(canvas);
+  }
+ else   if ((mCenterDrawable != null) && (mTopCornerDrawable != null)) {
+    if (mDrawableSizeChanged) {
+      int iconSize=getResources().getDimensionPixelSize(R.dimen.app_icon_size);
+      int paddingTop=getPaddingTop();
+      int paddingLeft=getPaddingLeft();
+      int size=Math.min(iconSize,Math.min(getWidth() - paddingLeft - getPaddingRight(),getHeight() - paddingTop - getPaddingBottom()));
+      mRect.set(0,0,size,size);
+      mRect.offsetTo((getWidth() - mRect.width()) / 2,(getHeight() - mRect.height()) / 2);
+      mCenterDrawable.setBounds(mRect);
+      size=Math.min(size / 2,Math.max(mRect.top - paddingTop,mRect.left - paddingLeft));
+      mTopCornerDrawable.setBounds(paddingLeft,paddingTop,paddingLeft + size,paddingTop + size);
+      mDrawableSizeChanged=false;
+    }
+    mCenterDrawable.draw(canvas);
+    mTopCornerDrawable.draw(canvas);
+  }
+}

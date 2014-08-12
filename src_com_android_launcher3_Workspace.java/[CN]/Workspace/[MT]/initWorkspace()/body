@@ -1,5 +1,4 @@
 {
-  Context context=getContext();
   mCurrentPage=mDefaultPage;
   Launcher.setScreen(mCurrentPage);
   LauncherAppState app=LauncherAppState.getInstance();

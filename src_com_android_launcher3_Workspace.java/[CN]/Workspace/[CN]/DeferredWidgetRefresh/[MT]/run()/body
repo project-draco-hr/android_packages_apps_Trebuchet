@@ -1,0 +1,17 @@
+{
+  mHost.removeProviderChangeListener(this);
+  mHandler.removeCallbacks(this);
+  if (!mRefreshPending) {
+    return;
+  }
+  mRefreshPending=false;
+  for (  LauncherAppWidgetInfo info : mInfos) {
+    if (info.hostView instanceof PendingAppWidgetHostView) {
+      PendingAppWidgetHostView view=(PendingAppWidgetHostView)info.hostView;
+      mLauncher.removeAppWidget(info);
+      CellLayout cl=(CellLayout)view.getParent().getParent();
+      cl.removeView(view);
+      mLauncher.bindAppWidget(info);
+    }
+  }
+}

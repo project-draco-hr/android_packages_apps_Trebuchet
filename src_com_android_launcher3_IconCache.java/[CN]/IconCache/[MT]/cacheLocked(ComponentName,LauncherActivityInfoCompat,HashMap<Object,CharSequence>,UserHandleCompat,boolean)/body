@@ -26,8 +26,17 @@
         entry.icon=preloaded;
       }
  else {
-        if (DEBUG)         Log.d(TAG,"using default icon for " + componentName.toShortString());
-        entry.icon=getDefaultIcon(user);
+        if (usePackageIcon) {
+          CacheEntry packageEntry=getEntryForPackage(componentName.getPackageName(),user);
+          if (packageEntry != null && packageEntry.icon != null) {
+            if (DEBUG)             Log.d(TAG,"using package default icon for " + componentName.toShortString());
+            entry.icon=packageEntry.icon;
+          }
+        }
+        if (entry.icon == null) {
+          if (DEBUG)           Log.d(TAG,"using default icon for " + componentName.toShortString());
+          entry.icon=getDefaultIcon(user);
+        }
       }
     }
   }

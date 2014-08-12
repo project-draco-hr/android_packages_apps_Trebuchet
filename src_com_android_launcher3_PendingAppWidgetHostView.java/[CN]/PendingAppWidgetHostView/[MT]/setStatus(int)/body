@@ -1,6 +1,0 @@
-{
-  if (mRestoreStatus != status) {
-    mRestoreStatus=status;
-    applyState();
-  }
-}
