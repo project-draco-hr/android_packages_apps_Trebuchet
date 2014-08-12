@@ -47,4 +47,5 @@
   hotseatIconSize=invDistWeightedInterpolate(minWidth,minHeight,points);
   updateFromConfiguration(context,res,wPx,hPx,awPx,ahPx);
   updateAvailableDimensions(context);
+  computeAllAppsButtonSize(context);
 }

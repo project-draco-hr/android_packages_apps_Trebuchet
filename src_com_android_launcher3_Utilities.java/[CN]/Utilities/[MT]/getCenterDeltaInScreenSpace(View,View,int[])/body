@@ -1,0 +1,14 @@
+{
+  v0.getLocationInWindow(sLoc0);
+  v1.getLocationInWindow(sLoc1);
+  sLoc0[0]+=(v0.getMeasuredWidth() * v0.getScaleX()) / 2;
+  sLoc0[1]+=(v0.getMeasuredHeight() * v0.getScaleY()) / 2;
+  sLoc1[0]+=(v1.getMeasuredWidth() * v1.getScaleX()) / 2;
+  sLoc1[1]+=(v1.getMeasuredHeight() * v1.getScaleY()) / 2;
+  if (delta == null) {
+    delta=new int[2];
+  }
+  delta[0]=sLoc1[0] - sLoc0[0];
+  delta[1]=sLoc1[1] - sLoc0[1];
+  return delta;
+}

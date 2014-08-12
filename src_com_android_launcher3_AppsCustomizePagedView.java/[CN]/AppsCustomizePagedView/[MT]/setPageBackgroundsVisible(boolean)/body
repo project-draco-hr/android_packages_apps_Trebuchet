@@ -4,7 +4,7 @@
   for (int i=0; i < childCount; ++i) {
     Drawable bg=getChildAt(i).getBackground();
     if (bg != null) {
-      bg.setVisible(visible,false);
+      bg.setAlpha(visible ? 255 : 0);
     }
   }
 }
