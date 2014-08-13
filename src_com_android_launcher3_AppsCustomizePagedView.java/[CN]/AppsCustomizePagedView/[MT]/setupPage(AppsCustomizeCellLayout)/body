@@ -6,8 +6,8 @@
   layout.measure(widthSpec,heightSpec);
   Drawable bg=getContext().getResources().getDrawable(R.drawable.quantum_panel);
   if (bg != null) {
+    bg.setAlpha(mPageBackgroundsVisible ? 255 : 0);
     layout.setBackground(bg);
-    bg.setVisible(mPageBackgroundsVisible,false);
   }
   setVisibilityOnChildren(layout,View.VISIBLE);
 }
