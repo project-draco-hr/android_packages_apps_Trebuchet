@@ -3,9 +3,4 @@
     LauncherModel.checkItemInfo((ItemInfo)tag);
   }
   super.setTag(tag);
-  if (tag instanceof ShortcutInfo) {
-    final ShortcutInfo info=(ShortcutInfo)tag;
-    mDefaultText=info.title;
-    setText(mDefaultText);
-  }
 }

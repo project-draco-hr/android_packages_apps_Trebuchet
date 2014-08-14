@@ -4,13 +4,13 @@
   int iconSize=grid.iconSizePx;
   mLauncher.onDragStarted(child);
   AtomicInteger padding=new AtomicInteger(DRAG_BITMAP_PADDING);
-  final Bitmap tmpB=createDragBitmap(child,new Canvas(),padding);
+  final Bitmap tmpB=createDragBitmap(child,padding);
   Bitmap b=Bitmap.createBitmap(iconSize,iconSize,Bitmap.Config.ARGB_8888);
   Paint p=new Paint();
   p.setFilterBitmap(true);
-  Canvas c=new Canvas(b);
-  c.drawBitmap(tmpB,new Rect(0,0,tmpB.getWidth(),tmpB.getHeight()),new Rect(0,0,iconSize,iconSize),p);
-  c.setBitmap(null);
+  mCanvas.setBitmap(b);
+  mCanvas.drawBitmap(tmpB,new Rect(0,0,tmpB.getWidth(),tmpB.getHeight()),new Rect(0,0,iconSize,iconSize),p);
+  mCanvas.setBitmap(null);
   int bmpWidth=tmpB.getWidth();
   float iconScale=(float)bmpWidth / iconSize;
   float scale=mLauncher.getDragLayer().getLocationInDragLayer(child,mTempXY) * iconScale;

@@ -1,4 +1,8 @@
 {
+  final int action=e.getAction();
+  if (((action == KeyEvent.ACTION_DOWN) && v.onKeyDown(keyCode,e)) || ((action == KeyEvent.ACTION_UP) && v.onKeyUp(keyCode,e))) {
+    return true;
+  }
   ViewGroup parentLayout;
   ViewGroup itemContainer;
   int countX;
@@ -15,14 +19,12 @@
     countY=((PagedViewGridLayout)parentLayout).getCellCountY();
   }
   final PagedView container=(PagedView)parentLayout.getParent();
-  final AppsCustomizeTabHost tabHost=findTabHostParent(container);
   final int iconIndex=itemContainer.indexOfChild(v);
   final int itemCount=itemContainer.getChildCount();
   final int pageIndex=((PagedView)container).indexToPage(container.indexOfChild(parentLayout));
   final int pageCount=container.getChildCount();
   final int x=iconIndex % countX;
   final int y=iconIndex / countX;
-  final int action=e.getAction();
   final boolean handleKeyEvent=(action != KeyEvent.ACTION_UP);
   ViewGroup newParent=null;
   View child=null;
@@ -79,14 +81,6 @@ if (y < (countY - 1)) {
 int newiconIndex=Math.min(itemCount - 1,((y + 1) * countX) + x);
 itemContainer.getChildAt(newiconIndex).requestFocus();
 }
-}
-wasHandled=true;
-break;
-case KeyEvent.KEYCODE_ENTER:
-case KeyEvent.KEYCODE_DPAD_CENTER:
-if (handleKeyEvent) {
-View.OnClickListener clickListener=(View.OnClickListener)container;
-clickListener.onClick(v);
 }
 wasHandled=true;
 break;

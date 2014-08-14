@@ -1,0 +1,6 @@
+{
+  super.setPressed(pressed);
+  if (!mIgnorePressedStateChange) {
+    updateIconState();
+  }
+}

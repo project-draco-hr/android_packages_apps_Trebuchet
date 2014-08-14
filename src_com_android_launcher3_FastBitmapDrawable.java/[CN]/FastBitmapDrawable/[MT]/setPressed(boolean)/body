@@ -1,0 +1,15 @@
+{
+  if (mPressed != pressed) {
+    mPressed=pressed;
+    if (mPressed) {
+      mPressedAnimator=ObjectAnimator.ofInt(this,"brightness",PRESSED_BRIGHTNESS).setDuration(CLICK_FEEDBACK_DURATION);
+      mPressedAnimator.setInterpolator(CLICK_FEEDBACK_INTERPOLATOR);
+      mPressedAnimator.start();
+    }
+ else     if (mPressedAnimator != null) {
+      mPressedAnimator.cancel();
+      setBrightness(0);
+    }
+  }
+  invalidateSelf();
+}

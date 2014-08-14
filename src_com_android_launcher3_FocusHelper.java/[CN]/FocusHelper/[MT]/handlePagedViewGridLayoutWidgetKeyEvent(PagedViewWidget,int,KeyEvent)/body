@@ -1,7 +1,6 @@
 {
   final PagedViewGridLayout parent=(PagedViewGridLayout)w.getParent();
   final PagedView container=(PagedView)parent.getParent();
-  final AppsCustomizeTabHost tabHost=findTabHostParent(container);
   final int widgetIndex=parent.indexOfChild(w);
   final int widgetCount=parent.getChildCount();
   final int pageIndex=((PagedView)container).indexToPage(container.indexOfChild(parent));

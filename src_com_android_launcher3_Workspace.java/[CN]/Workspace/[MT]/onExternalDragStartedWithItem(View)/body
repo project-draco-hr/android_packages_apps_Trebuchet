@@ -1,5 +1,4 @@
 {
-  final Canvas canvas=new Canvas();
   LauncherAppState app=LauncherAppState.getInstance();
   DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
   int iconSize=grid.iconSizePx;
@@ -13,8 +12,8 @@
     bmpHeight=bounds.height();
   }
   Bitmap b=Bitmap.createBitmap(bmpWidth,bmpHeight,Bitmap.Config.ARGB_8888);
-  Canvas c=new Canvas(b);
-  drawDragView(v,c,0);
-  c.setBitmap(null);
-  mDragOutline=createDragOutline(b,canvas,DRAG_BITMAP_PADDING,iconSize,iconSize,true);
+  mCanvas.setBitmap(b);
+  drawDragView(v,mCanvas,0);
+  mCanvas.setBitmap(null);
+  mDragOutline=createDragOutline(b,DRAG_BITMAP_PADDING,iconSize,iconSize,true);
 }
