@@ -15,9 +15,6 @@
     mSavedState=null;
   }
   mWorkspace.restoreInstanceStateForRemainingPages();
-  if (!DISABLE_MARKET_BUTTON) {
-    updateAppMarketIcon();
-  }
   setWorkspaceLoading(false);
   sendLoadingCompleteBroadcastIfNecessary();
   if (sPendingAddItem != null) {

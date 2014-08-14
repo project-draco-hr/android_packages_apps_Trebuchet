@@ -2,9 +2,9 @@
   int numItemsPerPage=mWidgetCountX * mWidgetCountY;
   final PagedViewGridLayout layout=(PagedViewGridLayout)getPageAt(page);
   final ArrayList<Object> items=new ArrayList<Object>();
-  int contentWidth=mContentWidth - getPaddingLeft() - getPaddingRight()- layout.getPaddingLeft()- layout.getPaddingRight();
+  int contentWidth=mContentWidth - layout.getPaddingLeft() - layout.getPaddingRight();
   final int cellWidth=contentWidth / mWidgetCountX;
-  int contentHeight=mContentHeight - getPaddingTop() - getPaddingBottom()- layout.getPaddingTop()- layout.getPaddingBottom();
+  int contentHeight=mContentHeight - layout.getPaddingTop() - layout.getPaddingBottom();
   final int cellHeight=contentHeight / mWidgetCountY;
   int offset=page * numItemsPerPage;
   for (int i=offset; i < Math.min(offset + numItemsPerPage,mWidgets.size()); ++i) {
