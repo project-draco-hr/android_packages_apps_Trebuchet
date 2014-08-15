@@ -12,12 +12,4 @@
   final boolean hostIsTransitioning=getTabHost().isInTransition();
   int page=getPageForComponent(mSaveInstanceStateItemIndex);
   invalidatePageData(Math.max(0,page),hostIsTransitioning);
-  if (!hostIsTransitioning) {
-    post(new Runnable(){
-      @Override public void run(){
-        showAllAppsCling();
-      }
-    }
-);
-  }
 }
