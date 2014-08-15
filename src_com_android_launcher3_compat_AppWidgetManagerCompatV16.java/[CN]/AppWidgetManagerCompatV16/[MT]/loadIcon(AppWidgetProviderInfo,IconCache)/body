@@ -1,0 +1,3 @@
+{
+  return cache.getFullResIcon(info.provider.getPackageName(),info.icon);
+}

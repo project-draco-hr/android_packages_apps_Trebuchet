@@ -1,0 +1,7 @@
+{
+  ArrayList<AppWidgetProviderInfo> providers=new ArrayList<AppWidgetProviderInfo>();
+  for (  UserHandle user : mUserManager.getUserProfiles()) {
+    providers.addAll(mAppWidgetManager.getInstalledProvidersForProfile(user));
+  }
+  return providers;
+}

@@ -2,12 +2,10 @@
   LauncherAppState app=LauncherAppState.getInstance();
   DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
   mContext=context;
-  mPackageManager=mContext.getPackageManager();
   mAppIconSize=grid.iconSizePx;
   mIconCache=app.getIconCache();
+  mManager=AppWidgetManagerCompat.getInstance(context);
   mDb=app.getWidgetPreviewCacheDb();
-  mLoadedPreviews=new HashMap<String,WeakReference<Bitmap>>();
-  mUnusedBitmaps=new ArrayList<SoftReference<Bitmap>>();
   SharedPreferences sp=context.getSharedPreferences(LauncherAppState.getSharedPreferencesKey(),Context.MODE_PRIVATE);
   final String lastVersionName=sp.getString(ANDROID_INCREMENTAL_VERSION_NAME_KEY,null);
   final String versionName=android.os.Build.VERSION.INCREMENTAL;

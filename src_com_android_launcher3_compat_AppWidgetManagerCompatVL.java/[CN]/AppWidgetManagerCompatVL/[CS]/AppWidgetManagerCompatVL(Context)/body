@@ -1,0 +1,5 @@
+{
+  super(context);
+  mPm=context.getPackageManager();
+  mUserManager=(UserManager)context.getSystemService(Context.USER_SERVICE);
+}

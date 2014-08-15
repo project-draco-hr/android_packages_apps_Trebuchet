@@ -25,7 +25,7 @@
   mLauncherClings=new LauncherClings(this);
   mInflater=getLayoutInflater();
   mStats=new Stats(this);
-  mAppWidgetManager=AppWidgetManager.getInstance(this);
+  mAppWidgetManager=AppWidgetManagerCompat.getInstance(this);
   mAppWidgetHost=new LauncherAppWidgetHost(this,APPWIDGET_HOST_ID);
   mAppWidgetHost.startListening();
   mPaused=false;
