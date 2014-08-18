@@ -1,3 +1,4 @@
 {
-  acceleratedOverScroll(amount);
+  computeOverScrollEffect(amount);
+  dampedOverScroll(amount);
 }
