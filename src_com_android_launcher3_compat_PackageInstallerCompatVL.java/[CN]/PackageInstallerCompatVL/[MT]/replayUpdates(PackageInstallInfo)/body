@@ -16,7 +16,7 @@
     updates.add(newInfo);
   }
   for (int i=mPendingReplays.size() - 1; i > 0; i--) {
-    InstallSessionInfo session=mPendingReplays.valueAt(i);
+    SessionInfo session=mPendingReplays.valueAt(i);
     if (session.getAppPackageName() != null) {
       updates.add(new PackageInstallInfo(session.getAppPackageName(),ShortcutInfo.PACKAGE_STATE_INSTALLING,(int)(session.getProgress() * 100)));
     }
