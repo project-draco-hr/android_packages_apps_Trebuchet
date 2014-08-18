@@ -31,6 +31,7 @@
   }
   final int verticalPadding=getPaddingTop() + getPaddingBottom();
   final int horizontalPadding=getPaddingLeft() + getPaddingRight();
+  int referenceChildWidth=0;
   if (DEBUG)   Log.d(TAG,"PagedView.onMeasure(): " + widthSize + ", "+ heightSize);
   if (DEBUG)   Log.d(TAG,"PagedView.scaledSize: " + scaledWidthSize + ", "+ scaledHeightSize);
   if (DEBUG)   Log.d(TAG,"PagedView.parentSize: " + parentWidthSize + ", "+ parentHeightSize);
@@ -68,10 +69,20 @@
         childWidth=getViewportWidth() - mInsets.left - mInsets.right;
         childHeight=getViewportHeight();
       }
+      if (referenceChildWidth == 0) {
+        referenceChildWidth=childWidth;
+      }
       final int childWidthMeasureSpec=MeasureSpec.makeMeasureSpec(childWidth,childWidthMode);
       final int childHeightMeasureSpec=MeasureSpec.makeMeasureSpec(childHeight,childHeightMode);
       child.measure(childWidthMeasureSpec,childHeightMeasureSpec);
     }
+  }
+  if (mSpacePagesAutomatically) {
+    int spacing=(getViewportWidth() - mInsets.left - mInsets.right- referenceChildWidth) / 2;
+    if (spacing >= 0) {
+      setPageSpacing(spacing);
+    }
+    mSpacePagesAutomatically=false;
   }
   setMeasuredDimension(scaledWidthSize,scaledHeightSize);
 }
