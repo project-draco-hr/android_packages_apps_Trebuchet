@@ -1,0 +1,3 @@
+{
+  return new File(getFilesDir(),Build.VERSION.SDK_INT + "_" + DEFAULT_WALLPAPER_THUMBNAIL_FILENAME);
+}
