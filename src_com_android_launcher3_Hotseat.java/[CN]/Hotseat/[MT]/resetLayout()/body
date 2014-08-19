@@ -12,6 +12,7 @@
       allAppsButton.setOnTouchListener(mLauncher.getHapticFeedbackTouchListener());
       mLauncher.setAllAppsButton(allAppsButton);
       allAppsButton.setOnClickListener(mLauncher);
+      allAppsButton.setOnFocusChangeListener(mLauncher.mFocusHandler);
     }
     int x=getCellXFromOrder(mAllAppsButtonRank);
     int y=getCellYFromOrder(mAllAppsButtonRank);

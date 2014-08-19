@@ -15,6 +15,7 @@
     icon.setOnLongClickListener(this);
     icon.setOnTouchListener(this);
     icon.setOnKeyListener(this);
+    icon.setOnFocusChangeListener(layout.mFocusHandlerView);
     int index=i - startIndex;
     int x=index % mCellCountX;
     int y=index / mCellCountX;

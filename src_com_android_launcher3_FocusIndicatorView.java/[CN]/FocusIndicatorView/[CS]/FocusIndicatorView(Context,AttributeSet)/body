@@ -1,0 +1,5 @@
+{
+  super(context,attrs);
+  setAlpha(0);
+  setBackgroundColor(getResources().getColor(R.color.focused_background));
+}

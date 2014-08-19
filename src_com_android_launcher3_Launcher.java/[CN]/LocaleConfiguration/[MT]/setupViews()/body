@@ -1,6 +1,7 @@
 {
   final DragController dragController=mDragController;
   mLauncherView=findViewById(R.id.launcher);
+  mFocusHandler=(FocusIndicatorView)findViewById(R.id.focus_indicator);
   mDragLayer=(DragLayer)findViewById(R.id.drag_layer);
   mWorkspace=(Workspace)mDragLayer.findViewById(R.id.workspace);
   mWorkspace.setPageSwitchListener(this);

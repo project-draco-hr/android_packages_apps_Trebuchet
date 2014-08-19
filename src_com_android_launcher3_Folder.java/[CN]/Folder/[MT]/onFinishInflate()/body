@@ -2,6 +2,10 @@
   super.onFinishInflate();
   mScrollView=(ScrollView)findViewById(R.id.scroll_view);
   mContent=(CellLayout)findViewById(R.id.folder_content);
+  mFocusIndicatorHandler=new FocusIndicatorView(getContext());
+  mContent.addView(mFocusIndicatorHandler,0);
+  mFocusIndicatorHandler.getLayoutParams().height=FocusIndicatorView.DEFAULT_LAYOUT_SIZE;
+  mFocusIndicatorHandler.getLayoutParams().width=FocusIndicatorView.DEFAULT_LAYOUT_SIZE;
   LauncherAppState app=LauncherAppState.getInstance();
   DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
   mContent.setCellDimensions(grid.folderCellWidthPx,grid.folderCellHeightPx);
