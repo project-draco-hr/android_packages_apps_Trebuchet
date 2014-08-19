@@ -1,5 +1,5 @@
 {
-  File defaultThumbFile=new File(getFilesDir(),DEFAULT_WALLPAPER_THUMBNAIL_FILENAME);
+  File defaultThumbFile=getDefaultThumbFile();
   Bitmap thumb=null;
   boolean defaultWallpaperExists=false;
   if (defaultThumbFile.exists()) {
@@ -7,7 +7,6 @@
     defaultWallpaperExists=true;
   }
  else {
-    new File(getFilesDir(),OLD_DEFAULT_WALLPAPER_THUMBNAIL_FILENAME).delete();
     Resources res=getResources();
     Point defaultThumbSize=getDefaultThumbnailSize(res);
     Drawable wallpaperDrawable=WallpaperManager.getInstance(this).getBuiltInDrawable(defaultThumbSize.x,defaultThumbSize.y,true,0.5f,0.5f);
@@ -19,7 +18,7 @@
       c.setBitmap(null);
     }
     if (thumb != null) {
-      defaultWallpaperExists=writeImageToFileAsJpeg(defaultThumbFile,thumb);
+      defaultWallpaperExists=saveDefaultWallpaperThumb(thumb);
     }
   }
   if (defaultWallpaperExists) {
