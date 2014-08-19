@@ -1,0 +1,3 @@
+{
+  mOverScrollEffect=acceleratedOverFactor(amount);
+}

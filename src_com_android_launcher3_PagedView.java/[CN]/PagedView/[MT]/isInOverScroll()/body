@@ -1,0 +1,3 @@
+{
+  return (mOverScrollX > mMaxScrollX || mOverScrollX < 0);
+}

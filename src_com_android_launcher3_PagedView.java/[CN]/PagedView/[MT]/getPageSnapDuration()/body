@@ -1,0 +1,6 @@
+{
+  if (isInOverScroll()) {
+    return OVER_SCROLL_PAGE_SNAP_ANIMATION_DURATION;
+  }
+  return PAGE_SNAP_ANIMATION_DURATION;
+}
