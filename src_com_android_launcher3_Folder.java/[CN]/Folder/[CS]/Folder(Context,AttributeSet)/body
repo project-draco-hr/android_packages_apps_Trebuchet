@@ -15,7 +15,9 @@
     mMaxNumItems=mMaxCountX * mMaxCountY;
   }
   mInputMethodManager=(InputMethodManager)getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-  mExpandDuration=res.getInteger(R.integer.config_folderAnimDuration);
+  mExpandDuration=res.getInteger(R.integer.config_folderExpandDuration);
+  mMaterialExpandDuration=res.getInteger(R.integer.config_materialFolderExpandDuration);
+  mMaterialExpandStagger=res.getInteger(R.integer.config_materialFolderExpandStagger);
   if (sDefaultFolderName == null) {
     sDefaultFolderName=res.getString(R.string.folder_name);
   }
