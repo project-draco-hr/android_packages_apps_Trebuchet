@@ -7,7 +7,7 @@
   mDragLayer.removeView(mFolderIconImageView);
   copyFolderIconToImage(fi);
   ObjectAnimator oa=LauncherAnimUtils.ofPropertyValuesHolder(mFolderIconImageView,alpha,scaleX,scaleY);
-  oa.setDuration(getResources().getInteger(R.integer.config_folderAnimDuration));
+  oa.setDuration(getResources().getInteger(R.integer.config_folderExpandDuration));
   oa.addListener(new AnimatorListenerAdapter(){
     @Override public void onAnimationEnd(    Animator animation){
       if (cl != null) {
