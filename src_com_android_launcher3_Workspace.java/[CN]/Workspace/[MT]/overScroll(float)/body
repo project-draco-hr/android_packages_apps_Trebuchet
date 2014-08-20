@@ -1,4 +1,10 @@
 {
-  computeOverScrollEffect(amount);
-  dampedOverScroll(amount);
+  boolean shouldOverScroll=(amount < 0 && (!hasCustomContent() || isLayoutRtl())) || (amount > 0 && (!hasCustomContent() || !isLayoutRtl()));
+  if (shouldOverScroll) {
+    dampedOverScroll(amount);
+    mOverScrollEffect=acceleratedOverFactor(amount);
+  }
+ else {
+    mOverScrollEffect=0;
+  }
 }

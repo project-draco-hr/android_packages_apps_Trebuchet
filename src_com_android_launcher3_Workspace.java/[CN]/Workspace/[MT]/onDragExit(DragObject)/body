@@ -24,4 +24,5 @@
   if (!mIsPageMoving) {
     hideOutlines();
   }
+  mLauncher.getDragLayer().hidePageHints();
 }
