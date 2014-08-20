@@ -13,6 +13,7 @@ case KeyEvent.KEYCODE_DPAD_LEFT:
       View newIcon=getIconInDirection(layout,parent,v,-1);
       if (newIcon != null) {
         newIcon.requestFocus();
+        v.playSoundEffect(SoundEffectConstants.NAVIGATION_LEFT);
       }
     }
   wasHandled=true;
@@ -26,6 +27,7 @@ if (newIcon != null) {
  else {
   title.requestFocus();
 }
+v.playSoundEffect(SoundEffectConstants.NAVIGATION_RIGHT);
 }
 wasHandled=true;
 break;
@@ -34,6 +36,7 @@ if (handleKeyEvent) {
 View newIcon=getClosestIconOnLine(layout,parent,v,-1);
 if (newIcon != null) {
 newIcon.requestFocus();
+v.playSoundEffect(SoundEffectConstants.NAVIGATION_UP);
 }
 }
 wasHandled=true;
@@ -47,6 +50,7 @@ newIcon.requestFocus();
  else {
 title.requestFocus();
 }
+v.playSoundEffect(SoundEffectConstants.NAVIGATION_DOWN);
 }
 wasHandled=true;
 break;
@@ -55,6 +59,7 @@ if (handleKeyEvent) {
 View newIcon=getIconInDirection(layout,parent,-1,1);
 if (newIcon != null) {
 newIcon.requestFocus();
+v.playSoundEffect(SoundEffectConstants.NAVIGATION_UP);
 }
 }
 wasHandled=true;
@@ -64,6 +69,7 @@ if (handleKeyEvent) {
 View newIcon=getIconInDirection(layout,parent,parent.getChildCount(),-1);
 if (newIcon != null) {
 newIcon.requestFocus();
+v.playSoundEffect(SoundEffectConstants.NAVIGATION_DOWN);
 }
 }
 wasHandled=true;
