@@ -23,16 +23,6 @@
       canvas.drawBitmap(b,null,mTempRect,paint);
     }
   }
-  if (mPressedOrFocusedIcon != null) {
-    final int padding=mPressedOrFocusedIcon.getPressedOrFocusedBackgroundPadding();
-    final Bitmap b=mPressedOrFocusedIcon.getPressedOrFocusedBackground();
-    if (b != null) {
-      int offset=getMeasuredWidth() - getPaddingLeft() - getPaddingRight()- (mCountX * mCellWidth);
-      int left=getPaddingLeft() + (int)Math.ceil(offset / 2f);
-      int top=getPaddingTop();
-      canvas.drawBitmap(b,mPressedOrFocusedIcon.getLeft() + left - padding,mPressedOrFocusedIcon.getTop() + top - padding,null);
-    }
-  }
   if (DEBUG_VISUALIZE_OCCUPIED) {
     int[] pt=new int[2];
     ColorDrawable cd=new ColorDrawable(Color.RED);

@@ -1,7 +1,10 @@
 {
+  child.clearFocus();
+  child.setPressed(false);
+  mDragOutline=createDragOutline(child,DRAG_BITMAP_PADDING);
   mLauncher.onDragStarted(child);
   AtomicInteger padding=new AtomicInteger(DRAG_BITMAP_PADDING);
-  final Bitmap b=createDragBitmap(child,new Canvas(),padding);
+  final Bitmap b=createDragBitmap(child,padding);
   final int bmpWidth=b.getWidth();
   final int bmpHeight=b.getHeight();
   float scale=mLauncher.getDragLayer().getLocationInDragLayer(child,mTempXY);
@@ -11,7 +14,7 @@
   DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
   Point dragVisualizeOffset=null;
   Rect dragRect=null;
-  if (child instanceof BubbleTextView || child instanceof PagedViewIcon) {
+  if (child instanceof BubbleTextView) {
     int iconSize=grid.iconSizePx;
     int top=child.getPaddingTop();
     int left=(bmpWidth - iconSize) / 2;
@@ -27,7 +30,7 @@
   }
   if (child instanceof BubbleTextView) {
     BubbleTextView icon=(BubbleTextView)child;
-    icon.clearPressedOrFocusedBackground();
+    icon.clearPressedBackground();
   }
  else   if (child instanceof FolderIcon) {
     mLauncher.markFolderClingDismissedIfNecessary();

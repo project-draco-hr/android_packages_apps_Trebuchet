@@ -1,0 +1,13 @@
+{
+  if (b != mBitmap) {
+    if (mBitmap != null) {
+      invalidate(0,0,mBitmap.getWidth(),mBitmap.getHeight());
+    }
+    mBitmap=b;
+    if (mBitmap != null) {
+      invalidate(0,0,mBitmap.getWidth(),mBitmap.getHeight());
+    }
+    return true;
+  }
+  return false;
+}

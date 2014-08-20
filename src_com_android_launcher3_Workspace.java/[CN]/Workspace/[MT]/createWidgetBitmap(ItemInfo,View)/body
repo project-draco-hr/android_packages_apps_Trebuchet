@@ -5,11 +5,11 @@
   int width=MeasureSpec.makeMeasureSpec(unScaledSize[0],MeasureSpec.EXACTLY);
   int height=MeasureSpec.makeMeasureSpec(unScaledSize[1],MeasureSpec.EXACTLY);
   Bitmap b=Bitmap.createBitmap(unScaledSize[0],unScaledSize[1],Bitmap.Config.ARGB_8888);
-  Canvas c=new Canvas(b);
+  mCanvas.setBitmap(b);
   layout.measure(width,height);
   layout.layout(0,0,unScaledSize[0],unScaledSize[1]);
-  layout.draw(c);
-  c.setBitmap(null);
+  layout.draw(mCanvas);
+  mCanvas.setBitmap(null);
   layout.setVisibility(visibility);
   return b;
 }

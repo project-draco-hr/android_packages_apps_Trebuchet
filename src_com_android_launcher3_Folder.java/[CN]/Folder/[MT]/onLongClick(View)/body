@@ -7,7 +7,6 @@
       return false;
     }
     mLauncher.getLauncherClings().dismissFolderCling(null);
-    mLauncher.getWorkspace().onDragStartedWithItem(v);
     mLauncher.getWorkspace().beginDragShared(v,this);
     mCurrentDragInfo=item;
     mEmptyCell[0]=item.cellX;

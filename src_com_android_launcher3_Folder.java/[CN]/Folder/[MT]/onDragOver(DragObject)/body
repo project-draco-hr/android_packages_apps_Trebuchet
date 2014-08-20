@@ -25,10 +25,6 @@
       mReorderAlarm.setAlarm(REORDER_DELAY);
       mPreviousTargetCell[0]=mTargetCell[0];
       mPreviousTargetCell[1]=mTargetCell[1];
-      mDragMode=DRAG_MODE_REORDER;
-    }
- else {
-      mDragMode=DRAG_MODE_NONE;
     }
   }
 }

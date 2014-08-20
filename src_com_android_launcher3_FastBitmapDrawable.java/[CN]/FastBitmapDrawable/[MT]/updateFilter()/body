@@ -17,8 +17,12 @@
     }
   }
  else   if (mBrightness != 0) {
-    setBrightnessMatrix(sTempMatrix,mBrightness);
-    mPaint.setColorFilter(new ColorMatrixColorFilter(sTempMatrix));
+    ColorFilter filter=sCachedBrightnessFilter.get(mBrightness);
+    if (filter == null) {
+      filter=new PorterDuffColorFilter(Color.argb(mBrightness,255,255,255),PorterDuff.Mode.SRC_ATOP);
+      sCachedBrightnessFilter.put(mBrightness,filter);
+    }
+    mPaint.setColorFilter(filter);
   }
  else {
     mPaint.setColorFilter(null);

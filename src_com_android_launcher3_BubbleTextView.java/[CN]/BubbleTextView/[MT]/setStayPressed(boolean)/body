@@ -1,7 +1,11 @@
 {
   mStayPressed=stayPressed;
   if (!stayPressed) {
-    mPressedOrFocusedBackground=null;
+    mPressedBackground=null;
   }
-  setCellLayoutPressedOrFocusedIcon();
+  if (getParent() instanceof ShortcutAndWidgetContainer) {
+    CellLayout layout=(CellLayout)getParent().getParent();
+    layout.setPressedIcon(this,mPressedBackground,mOutlineHelper.shadowBitmapPadding);
+  }
+  updateIconState();
 }

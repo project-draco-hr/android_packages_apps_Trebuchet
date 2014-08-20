@@ -1,9 +1,0 @@
-{
-  if ((getParent() instanceof ShortcutAndWidgetContainer) && !(getCompoundDrawables()[1] instanceof PreloadIconDrawable)) {
-    ShortcutAndWidgetContainer parent=(ShortcutAndWidgetContainer)getParent();
-    if (parent != null) {
-      CellLayout layout=(CellLayout)parent.getParent();
-      layout.setPressedOrFocusedIcon((mPressedOrFocusedBackground != null) ? this : null);
-    }
-  }
-}

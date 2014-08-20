@@ -1,0 +1,9 @@
+{
+  if (super.onKeyDown(keyCode,event)) {
+    if (mPressedBackground == null) {
+      mPressedBackground=mOutlineHelper.createMediumDropShadow(this);
+    }
+    return true;
+  }
+  return false;
+}
