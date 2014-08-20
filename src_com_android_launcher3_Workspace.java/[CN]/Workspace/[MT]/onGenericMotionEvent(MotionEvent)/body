@@ -1,0 +1,6 @@
+{
+  if ((getScreenIdForPageIndex(getCurrentPage()) == CUSTOM_CONTENT_SCREEN_ID) && (mCustomContentCallbacks != null) && !mCustomContentCallbacks.isScrollingAllowed()) {
+    return false;
+  }
+  return super.onGenericMotionEvent(event);
+}
