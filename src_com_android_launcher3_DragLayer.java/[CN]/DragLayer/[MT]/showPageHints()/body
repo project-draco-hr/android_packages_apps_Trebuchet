@@ -1,0 +1,4 @@
+{
+  mShowPageHints=true;
+  invalidate();
+}

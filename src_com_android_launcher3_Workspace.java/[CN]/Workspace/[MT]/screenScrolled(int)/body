@@ -4,7 +4,7 @@
   updatePageAlphaValues(screenCenter);
   updateStateForCustomContent(screenCenter);
   enableHwLayersOnVisiblePages();
-  boolean shouldOverScroll=(mOverScrollEffect < 0 && (!hasCustomContent() || isLayoutRtl())) || (mOverScrollEffect > 0 && (!hasCustomContent() || !isLayoutRtl()));
+  boolean shouldOverScroll=mOverScrollX < 0 || mOverScrollX > mMaxScrollX;
   if (shouldOverScroll) {
     int index=0;
     final int lowerIndex=0;
