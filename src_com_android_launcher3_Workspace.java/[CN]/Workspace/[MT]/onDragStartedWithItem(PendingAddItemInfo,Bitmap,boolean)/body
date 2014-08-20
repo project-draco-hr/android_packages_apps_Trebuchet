@@ -1,5 +1,4 @@
 {
-  final Canvas canvas=new Canvas();
   int[] size=estimateItemSize(info.spanX,info.spanY,info,false);
-  mDragOutline=createDragOutline(b,canvas,DRAG_BITMAP_PADDING,size[0],size[1],clipAlpha);
+  mDragOutline=createDragOutline(b,DRAG_BITMAP_PADDING,size[0],size[1],clipAlpha);
 }

@@ -1,3 +1,0 @@
-{
-  applyExpensiveOutlineWithBlur(srcDst,srcDstCanvas,color,outlineColor,EXTRA_THICK);
-}

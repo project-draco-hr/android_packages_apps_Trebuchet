@@ -1,6 +1,6 @@
 {
   if (!super.beginDragging(v))   return false;
-  if (v instanceof PagedViewIcon) {
+  if (v instanceof BubbleTextView) {
     beginDraggingApplication(v);
   }
  else   if (v instanceof PagedViewWidget) {
@@ -11,7 +11,6 @@
   postDelayed(new Runnable(){
     @Override public void run(){
       if (mLauncher.getDragController().isDragging()) {
-        resetDrawableState();
         mLauncher.enterSpringLoadedDragMode();
       }
     }

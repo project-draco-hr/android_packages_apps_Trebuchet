@@ -1,0 +1,5 @@
+Bitmap orig
+int padding
+int w
+int h
+boolean clipAlpha

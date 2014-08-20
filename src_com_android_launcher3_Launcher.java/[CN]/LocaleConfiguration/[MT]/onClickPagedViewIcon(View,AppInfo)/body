@@ -1,5 +1,0 @@
-{
-  if (LOGD)   Log.d(TAG,"onClickPagedViewIcon");
-  startActivitySafely(v,appInfo.intent,appInfo);
-  getStats().recordLaunch(appInfo.intent);
-}

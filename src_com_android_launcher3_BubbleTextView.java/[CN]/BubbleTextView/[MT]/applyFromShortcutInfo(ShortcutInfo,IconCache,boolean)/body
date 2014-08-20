@@ -11,6 +11,7 @@
   if (info.contentDescription != null) {
     setContentDescription(info.contentDescription);
   }
+  setText(info.title);
   setTag(info);
   if (info.wasPromise) {
     applyState();

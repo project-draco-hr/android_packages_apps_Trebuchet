@@ -1,0 +1,8 @@
+{
+  mIgnorePressedStateChange=true;
+  boolean result=super.onKeyUp(keyCode,event);
+  mPressedBackground=null;
+  mIgnorePressedStateChange=false;
+  updateIconState();
+  return result;
+}

@@ -23,7 +23,7 @@
     builder.setMessage(R.string.abandoned_promise_explanation);
     builder.setPositiveButton(R.string.abandoned_search,new DialogInterface.OnClickListener(){
       public void onClick(      DialogInterface dialog,      int id){
-        startAppShortcutActivity(v);
+        startAppShortcutOrInfoActivity(v);
       }
     }
 );
@@ -38,5 +38,5 @@
     builder.create().show();
     return;
   }
-  startAppShortcutActivity(v);
+  startAppShortcutOrInfoActivity(v);
 }

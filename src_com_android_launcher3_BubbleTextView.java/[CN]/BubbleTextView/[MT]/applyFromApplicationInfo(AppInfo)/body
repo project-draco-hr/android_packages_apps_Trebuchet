@@ -1,0 +1,13 @@
+{
+  LauncherAppState app=LauncherAppState.getInstance();
+  DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
+  Drawable topDrawable=Utilities.createIconDrawable(info.iconBitmap);
+  topDrawable.setBounds(0,0,grid.allAppsIconSizePx,grid.allAppsIconSizePx);
+  setCompoundDrawables(null,topDrawable,null,null);
+  setCompoundDrawablePadding(grid.iconDrawablePaddingPx);
+  setText(info.title);
+  if (info.contentDescription != null) {
+    setContentDescription(info.contentDescription);
+  }
+  setTag(info);
+}

@@ -48,9 +48,6 @@
   if (mWaitingForResume != null) {
     mWaitingForResume.setStayPressed(false);
   }
-  if (mAppsCustomizeContent != null) {
-    mAppsCustomizeContent.resetDrawableState();
-  }
   getWorkspace().reinflateWidgetsIfNecessary();
   InstallShortcutReceiver.disableAndFlushInstallQueue(this);
   updateVoiceButtonProxyVisible(false);

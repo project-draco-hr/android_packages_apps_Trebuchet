@@ -1,0 +1,41 @@
+{
+  if (clipAlpha) {
+    int[] srcBuffer=new int[srcDst.getWidth() * srcDst.getHeight()];
+    srcDst.getPixels(srcBuffer,0,srcDst.getWidth(),0,0,srcDst.getWidth(),srcDst.getHeight());
+    for (int i=0; i < srcBuffer.length; i++) {
+      final int alpha=srcBuffer[i] >>> 24;
+      if (alpha < 188) {
+        srcBuffer[i]=0;
+      }
+    }
+    srcDst.setPixels(srcBuffer,0,srcDst.getWidth(),0,0,srcDst.getWidth(),srcDst.getHeight());
+  }
+  Bitmap glowShape=srcDst.extractAlpha();
+  mBlurPaint.setMaskFilter(mMediumOuterBlurMaskFilter);
+  int[] outerBlurOffset=new int[2];
+  Bitmap thickOuterBlur=glowShape.extractAlpha(mBlurPaint,outerBlurOffset);
+  mBlurPaint.setMaskFilter(mThinOuterBlurMaskFilter);
+  int[] brightOutlineOffset=new int[2];
+  Bitmap brightOutline=glowShape.extractAlpha(mBlurPaint,brightOutlineOffset);
+  srcDstCanvas.setBitmap(glowShape);
+  srcDstCanvas.drawColor(0xFF000000,PorterDuff.Mode.SRC_OUT);
+  mBlurPaint.setMaskFilter(mMediumInnerBlurMaskFilter);
+  int[] thickInnerBlurOffset=new int[2];
+  Bitmap thickInnerBlur=glowShape.extractAlpha(mBlurPaint,thickInnerBlurOffset);
+  srcDstCanvas.setBitmap(thickInnerBlur);
+  srcDstCanvas.drawBitmap(glowShape,-thickInnerBlurOffset[0],-thickInnerBlurOffset[1],mErasePaint);
+  srcDstCanvas.drawRect(0,0,-thickInnerBlurOffset[0],thickInnerBlur.getHeight(),mErasePaint);
+  srcDstCanvas.drawRect(0,0,thickInnerBlur.getWidth(),-thickInnerBlurOffset[1],mErasePaint);
+  srcDstCanvas.setBitmap(srcDst);
+  srcDstCanvas.drawColor(0,PorterDuff.Mode.CLEAR);
+  mDrawPaint.setColor(color);
+  srcDstCanvas.drawBitmap(thickInnerBlur,thickInnerBlurOffset[0],thickInnerBlurOffset[1],mDrawPaint);
+  srcDstCanvas.drawBitmap(thickOuterBlur,outerBlurOffset[0],outerBlurOffset[1],mDrawPaint);
+  mDrawPaint.setColor(outlineColor);
+  srcDstCanvas.drawBitmap(brightOutline,brightOutlineOffset[0],brightOutlineOffset[1],mDrawPaint);
+  srcDstCanvas.setBitmap(null);
+  brightOutline.recycle();
+  thickOuterBlur.recycle();
+  thickInnerBlur.recycle();
+  glowShape.recycle();
+}

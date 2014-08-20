@@ -5,5 +5,4 @@
     mOnExitAlarm.setAlarm(ON_EXIT_CLOSE_DELAY);
   }
   mReorderAlarm.cancelAlarm();
-  mDragMode=DRAG_MODE_NONE;
 }

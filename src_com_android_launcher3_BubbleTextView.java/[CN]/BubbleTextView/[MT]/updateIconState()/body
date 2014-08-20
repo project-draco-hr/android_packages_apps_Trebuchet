@@ -1,0 +1,6 @@
+{
+  Drawable top=getCompoundDrawables()[1];
+  if (top instanceof FastBitmapDrawable) {
+    ((FastBitmapDrawable)top).setPressed(isPressed() || mStayPressed);
+  }
+}
