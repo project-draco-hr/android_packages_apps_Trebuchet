@@ -1,0 +1,3 @@
+{
+  return Favorites.PROFILE_ID + '=' + UserManagerCompat.getInstance(mContext).getSerialNumberForUser(UserHandleCompat.myUserHandle());
+}

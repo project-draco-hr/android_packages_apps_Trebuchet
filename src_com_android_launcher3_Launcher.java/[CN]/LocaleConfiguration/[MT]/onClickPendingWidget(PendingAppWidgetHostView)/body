@@ -7,10 +7,7 @@
       mPendingAddWidgetInfo=appWidgetInfo;
       mPendingAddInfo.copyFrom(info);
       mPendingAddWidgetId=widgetId;
-      Intent intent=new Intent(AppWidgetManager.ACTION_APPWIDGET_CONFIGURE);
-      intent.setComponent(appWidgetInfo.configure);
-      intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,info.appWidgetId);
-      Utilities.startActivityForResultSafely(this,intent,REQUEST_RECONFIGURE_APPWIDGET);
+      AppWidgetManagerCompat.getInstance(this).startConfigActivity(appWidgetInfo,info.appWidgetId,this,mAppWidgetHost,REQUEST_RECONFIGURE_APPWIDGET);
     }
   }
 }

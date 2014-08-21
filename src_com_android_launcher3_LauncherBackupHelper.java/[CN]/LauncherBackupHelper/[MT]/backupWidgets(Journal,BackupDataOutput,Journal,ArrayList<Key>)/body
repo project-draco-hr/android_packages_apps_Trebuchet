@@ -14,7 +14,7 @@
   if (DEBUG)   Log.d(TAG,"widgets savedIds.size()=" + savedIds.size());
   int startRows=out.rows;
   if (DEBUG)   Log.d(TAG,"starting here: " + startRows);
-  String where=Favorites.ITEM_TYPE + "=" + Favorites.ITEM_TYPE_APPWIDGET;
+  String where=Favorites.ITEM_TYPE + "=" + Favorites.ITEM_TYPE_APPWIDGET+ " AND "+ getUserSelectionArg();
   Cursor cursor=cr.query(Favorites.CONTENT_URI,FAVORITE_PROJECTION,where,null,null);
   Set<String> currentIds=new HashSet<String>(cursor.getCount());
   try {

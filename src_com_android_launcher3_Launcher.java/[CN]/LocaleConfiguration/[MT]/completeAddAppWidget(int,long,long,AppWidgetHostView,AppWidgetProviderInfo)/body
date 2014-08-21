@@ -43,6 +43,7 @@
   launcherInfo.spanY=spanXY[1];
   launcherInfo.minSpanX=mPendingAddInfo.minSpanX;
   launcherInfo.minSpanY=mPendingAddInfo.minSpanY;
+  launcherInfo.user=mAppWidgetManager.getUser(appWidgetInfo);
   LauncherModel.addItemToDatabase(this,launcherInfo,container,screenId,cellXY[0],cellXY[1],false);
   if (!mRestoring) {
     if (hostView == null) {

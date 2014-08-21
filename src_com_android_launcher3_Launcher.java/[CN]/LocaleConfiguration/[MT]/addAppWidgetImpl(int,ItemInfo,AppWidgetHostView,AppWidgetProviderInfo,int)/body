@@ -2,10 +2,7 @@
   if (appWidgetInfo.configure != null) {
     mPendingAddWidgetInfo=appWidgetInfo;
     mPendingAddWidgetId=appWidgetId;
-    Intent intent=new Intent(AppWidgetManager.ACTION_APPWIDGET_CONFIGURE);
-    intent.setComponent(appWidgetInfo.configure);
-    intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,appWidgetId);
-    Utilities.startActivityForResultSafely(this,intent,REQUEST_CREATE_APPWIDGET);
+    mAppWidgetManager.startConfigActivity(appWidgetInfo,appWidgetId,this,mAppWidgetHost,REQUEST_CREATE_APPWIDGET);
   }
  else {
     Runnable onComplete=new Runnable(){

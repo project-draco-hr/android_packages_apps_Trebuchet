@@ -1,0 +1,6 @@
+{
+  Intent intent=new Intent(AppWidgetManager.ACTION_APPWIDGET_CONFIGURE);
+  intent.setComponent(info.configure);
+  intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,widgetId);
+  Utilities.startActivityForResultSafely(activity,intent,requestCode);
+}

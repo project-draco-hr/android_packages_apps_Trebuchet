@@ -1,0 +1,13 @@
+{
+synchronized (sInstanceLock) {
+    if (sInstance == null) {
+      if (Utilities.isLmp()) {
+        sInstance=new AppWidgetManagerCompatVL(context);
+      }
+ else {
+        sInstance=new AppWidgetManagerCompatV16(context);
+      }
+    }
+    return sInstance;
+  }
+}

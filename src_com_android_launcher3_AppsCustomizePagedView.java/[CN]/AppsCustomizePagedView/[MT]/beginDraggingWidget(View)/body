@@ -25,7 +25,7 @@
     maxWidth=Math.min((int)(previewDrawable.getIntrinsicWidth() * minScale),size[0]);
     maxHeight=Math.min((int)(previewDrawable.getIntrinsicHeight() * minScale),size[1]);
     int[] previewSizeBeforeScale=new int[1];
-    preview=getWidgetPreviewLoader().generateWidgetPreview(createWidgetInfo.componentName,createWidgetInfo.previewImage,createWidgetInfo.icon,spanX,spanY,maxWidth,maxHeight,null,previewSizeBeforeScale);
+    preview=getWidgetPreviewLoader().generateWidgetPreview(createWidgetInfo.info,spanX,spanY,maxWidth,maxHeight,null,previewSizeBeforeScale);
     int previewWidthInAppsCustomize=Math.min(previewSizeBeforeScale[0],getWidgetPreviewLoader().maxWidthForWidgetPreview(spanX));
     scale=previewWidthInAppsCustomize / (float)preview.getWidth();
     if (previewWidthInAppsCustomize < previewDrawable.getIntrinsicWidth()) {
@@ -36,12 +36,7 @@
  else {
     PendingAddShortcutInfo createShortcutInfo=(PendingAddShortcutInfo)v.getTag();
     Drawable icon=mIconCache.getFullResIcon(createShortcutInfo.shortcutActivityInfo);
-    preview=Bitmap.createBitmap(icon.getIntrinsicWidth(),icon.getIntrinsicHeight(),Bitmap.Config.ARGB_8888);
-    mCanvas.setBitmap(preview);
-    mCanvas.save();
-    WidgetPreviewLoader.renderDrawableToBitmap(icon,preview,0,0,icon.getIntrinsicWidth(),icon.getIntrinsicHeight());
-    mCanvas.restore();
-    mCanvas.setBitmap(null);
+    preview=Utilities.createIconBitmap(icon,mLauncher);
     createItemInfo.spanX=createItemInfo.spanY=1;
   }
   boolean clipAlpha=!(createItemInfo instanceof PendingAddWidgetInfo && (((PendingAddWidgetInfo)createItemInfo).previewImage == 0));

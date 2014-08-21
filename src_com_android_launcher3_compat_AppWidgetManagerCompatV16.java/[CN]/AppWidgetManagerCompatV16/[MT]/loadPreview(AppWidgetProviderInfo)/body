@@ -1,0 +1,3 @@
+{
+  return mContext.getPackageManager().getDrawable(info.provider.getPackageName(),info.previewImage,null);
+}
