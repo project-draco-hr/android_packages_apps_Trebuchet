@@ -1,0 +1,9 @@
+{
+  Runnable dismissCb=new Runnable(){
+    public void run(){
+      dismissCling(mLauncher.findViewById(R.id.longpress_cling),null,WORKSPACE_CLING_DISMISSED_KEY,DISMISS_CLING_DURATION);
+    }
+  }
+;
+  mLauncher.getWorkspace().post(dismissCb);
+}

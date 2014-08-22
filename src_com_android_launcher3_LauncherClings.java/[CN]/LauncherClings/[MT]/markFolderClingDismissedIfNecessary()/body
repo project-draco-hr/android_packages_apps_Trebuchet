@@ -1,8 +1,0 @@
-{
-  SharedPreferences prefs=mLauncher.getSharedPrefs();
-  if (!prefs.getBoolean(FOLDER_CLING_DISMISSED_KEY,false)) {
-    SharedPreferences.Editor editor=prefs.edit();
-    editor.putBoolean(FOLDER_CLING_DISMISSED_KEY,true);
-    editor.apply();
-  }
-}

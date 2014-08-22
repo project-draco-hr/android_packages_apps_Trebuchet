@@ -1,5 +1,0 @@
-{
-  if (mScrimView != null) {
-    mScrimView.bringToFront();
-  }
-}

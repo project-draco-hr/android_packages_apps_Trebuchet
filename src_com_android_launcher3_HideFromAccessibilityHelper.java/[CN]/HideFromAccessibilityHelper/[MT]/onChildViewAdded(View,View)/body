@@ -1,5 +1,0 @@
-{
-  if (mHide && includeView(child)) {
-    setImportantForAccessibilityToNoHelper(child);
-  }
-}

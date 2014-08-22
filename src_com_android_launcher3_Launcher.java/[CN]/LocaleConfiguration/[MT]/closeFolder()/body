@@ -5,6 +5,5 @@
       folder.dismissEditingName();
     }
     closeFolder(folder);
-    mLauncherClings.dismissFolderCling(null);
   }
 }

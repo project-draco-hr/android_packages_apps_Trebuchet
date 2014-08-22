@@ -1,0 +1,14 @@
+{
+  mLauncher=launcher;
+  mMetrics=new DisplayMetrics();
+  launcher.getWindowManager().getDefaultDisplay().getMetrics(mMetrics);
+  if (mHoleLocation.endsWith(HOLE_LOCATION_PAGE_INDICATOR)) {
+    LauncherAppState app=LauncherAppState.getInstance();
+    DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
+    Rect indicator=grid.getWorkspacePageIndicatorBounds(new Rect());
+    mHoleCenter=new Point(indicator.centerX(),indicator.centerY());
+  }
+ else   if (mHoleLocation.endsWith(HOLE_LOCATION_CENTER_SCREEN)) {
+    mHoleCenter=new Point(mMetrics.widthPixels / 2,mMetrics.heightPixels / 2);
+  }
+}
