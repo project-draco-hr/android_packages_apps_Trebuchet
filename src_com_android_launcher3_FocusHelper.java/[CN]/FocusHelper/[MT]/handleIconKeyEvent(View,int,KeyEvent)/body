@@ -16,6 +16,7 @@ case KeyEvent.KEYCODE_DPAD_LEFT:
       View newIcon=getIconInDirection(layout,parent,v,-1);
       if (newIcon != null) {
         newIcon.requestFocus();
+        v.playSoundEffect(SoundEffectConstants.NAVIGATION_LEFT);
       }
  else {
         if (pageIndex > 0) {
@@ -27,6 +28,7 @@ case KeyEvent.KEYCODE_DPAD_LEFT:
  else {
             workspace.snapToPage(pageIndex - 1);
           }
+          v.playSoundEffect(SoundEffectConstants.NAVIGATION_LEFT);
         }
       }
     }
@@ -37,6 +39,7 @@ if (handleKeyEvent) {
 View newIcon=getIconInDirection(layout,parent,v,1);
 if (newIcon != null) {
   newIcon.requestFocus();
+  v.playSoundEffect(SoundEffectConstants.NAVIGATION_RIGHT);
 }
  else {
   if (pageIndex < (pageCount - 1)) {
@@ -48,6 +51,7 @@ if (newIcon != null) {
  else {
       workspace.snapToPage(pageIndex + 1);
     }
+    v.playSoundEffect(SoundEffectConstants.NAVIGATION_RIGHT);
   }
 }
 }
@@ -63,6 +67,7 @@ wasHandled=true;
  else {
 tabs.requestFocus();
 }
+v.playSoundEffect(SoundEffectConstants.NAVIGATION_UP);
 }
 break;
 case KeyEvent.KEYCODE_DPAD_DOWN:
@@ -70,10 +75,12 @@ if (handleKeyEvent) {
 View newIcon=getClosestIconOnLine(layout,parent,v,1);
 if (newIcon != null) {
 newIcon.requestFocus();
+v.playSoundEffect(SoundEffectConstants.NAVIGATION_DOWN);
 wasHandled=true;
 }
  else if (hotseat != null) {
 hotseat.requestFocus();
+v.playSoundEffect(SoundEffectConstants.NAVIGATION_DOWN);
 }
 }
 break;
@@ -88,11 +95,13 @@ newIcon.requestFocus();
  else {
 workspace.snapToPage(pageIndex - 1);
 }
+v.playSoundEffect(SoundEffectConstants.NAVIGATION_UP);
 }
  else {
 View newIcon=getIconInDirection(layout,parent,-1,1);
 if (newIcon != null) {
 newIcon.requestFocus();
+v.playSoundEffect(SoundEffectConstants.NAVIGATION_UP);
 }
 }
 }
@@ -109,11 +118,13 @@ newIcon.requestFocus();
  else {
 workspace.snapToPage(pageIndex + 1);
 }
+v.playSoundEffect(SoundEffectConstants.NAVIGATION_DOWN);
 }
  else {
 View newIcon=getIconInDirection(layout,parent,parent.getChildCount(),-1);
 if (newIcon != null) {
 newIcon.requestFocus();
+v.playSoundEffect(SoundEffectConstants.NAVIGATION_DOWN);
 }
 }
 }
@@ -124,6 +135,7 @@ if (handleKeyEvent) {
 View newIcon=getIconInDirection(layout,parent,-1,1);
 if (newIcon != null) {
 newIcon.requestFocus();
+v.playSoundEffect(SoundEffectConstants.NAVIGATION_UP);
 }
 }
 wasHandled=true;
@@ -133,6 +145,7 @@ if (handleKeyEvent) {
 View newIcon=getIconInDirection(layout,parent,parent.getChildCount(),-1);
 if (newIcon != null) {
 newIcon.requestFocus();
+v.playSoundEffect(SoundEffectConstants.NAVIGATION_DOWN);
 }
 }
 wasHandled=true;
