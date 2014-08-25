@@ -12,7 +12,7 @@
   final CellLayout layout;
   if (container == LauncherSettings.Favorites.CONTAINER_HOTSEAT) {
     layout=mLauncher.getHotseat().getLayout();
-    child.setOnKeyListener(null);
+    child.setOnKeyListener(new HotseatIconKeyEventListener());
     if (child instanceof FolderIcon) {
       ((FolderIcon)child).setTextVisible(false);
     }
