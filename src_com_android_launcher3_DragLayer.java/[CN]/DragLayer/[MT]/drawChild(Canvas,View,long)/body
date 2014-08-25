@@ -1,0 +1,7 @@
+{
+  boolean ret=super.drawChild(canvas,child,drawingTime);
+  if (child instanceof Workspace) {
+    drawPageHints(canvas);
+  }
+  return ret;
+}
