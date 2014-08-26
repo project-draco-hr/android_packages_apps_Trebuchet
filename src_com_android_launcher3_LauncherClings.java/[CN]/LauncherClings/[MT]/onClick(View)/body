@@ -1,0 +1,20 @@
+{
+  int id=v.getId();
+  if (id == R.id.cling_dismiss_migration_use_default) {
+    dismissMigrationCling();
+  }
+ else   if (id == R.id.cling_dismiss_migration_copy_apps) {
+    LauncherModel model=mLauncher.getModel();
+    model.resetLoadedState(false,true);
+    model.startLoader(false,PagedView.INVALID_RESTORE_PAGE,LauncherModel.LOADER_FLAG_CLEAR_WORKSPACE | LauncherModel.LOADER_FLAG_MIGRATE_SHORTCUTS);
+    String spKey=LauncherAppState.getSharedPreferencesKey();
+    SharedPreferences sp=mLauncher.getSharedPreferences(spKey,Context.MODE_PRIVATE);
+    SharedPreferences.Editor editor=sp.edit();
+    editor.putBoolean(Launcher.USER_HAS_MIGRATED,true);
+    editor.apply();
+    dismissMigrationCling();
+  }
+ else   if (id == R.id.cling_dismiss_longpress_info) {
+    dismissLongPressCling();
+  }
+}

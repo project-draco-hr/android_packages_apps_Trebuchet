@@ -1,0 +1,9 @@
+{
+  if (mHoleCenter == null) {
+    canvas.drawColor(BACKGROUND_COLOR);
+  }
+ else {
+    drawHole(canvas);
+  }
+  super.dispatchDraw(canvas);
+}

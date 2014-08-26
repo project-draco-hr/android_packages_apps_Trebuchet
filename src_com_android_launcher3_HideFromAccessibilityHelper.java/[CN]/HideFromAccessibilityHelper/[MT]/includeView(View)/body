@@ -1,3 +1,0 @@
-{
-  return !hasAncestorOfType(v,Cling.class) && (!mOnlyAllApps || hasAncestorOfType(v,AppsCustomizeTabHost.class));
-}

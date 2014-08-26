@@ -1,6 +1,7 @@
 {
   mLauncher.hideWorkspaceSearchAndHotseat();
-  Cling c=initCling(R.id.migration_cling,0,false,true);
-  c.bringScrimToFront();
-  c.bringToFront();
+  ViewGroup root=(ViewGroup)mLauncher.findViewById(R.id.launcher);
+  View inflated=mInflater.inflate(R.layout.migration_cling,root);
+  inflated.findViewById(R.id.cling_dismiss_migration_copy_apps).setOnClickListener(this);
+  inflated.findViewById(R.id.cling_dismiss_migration_use_default).setOnClickListener(this);
 }

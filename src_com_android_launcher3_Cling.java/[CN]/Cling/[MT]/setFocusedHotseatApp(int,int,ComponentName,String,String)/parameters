@@ -1,5 +1,0 @@
-int drawableId
-int appRank
-ComponentName cn
-String title
-String description

@@ -1,0 +1,13 @@
+{
+  Bitmap eraseBg=Bitmap.createBitmap(getMeasuredWidth(),getMeasuredHeight(),Bitmap.Config.ARGB_8888);
+  Canvas eraseCanvas=new Canvas(eraseBg);
+  eraseCanvas.drawColor(BACKGROUND_COLOR);
+  Rect insets=mLauncher.getDragLayer().getInsets();
+  float x=mHoleCenter.x - insets.left;
+  float y=mHoleCenter.y - insets.top;
+  eraseCanvas.drawCircle(x,y,DynamicGrid.pxFromDp(MIGRATION_WORKSPACE_OUTER_CIRCLE_RADIUS_DPS,mMetrics),mBorderPaint);
+  eraseCanvas.drawCircle(x,y,DynamicGrid.pxFromDp(MIGRATION_WORKSPACE_INNER_CIRCLE_RADIUS_DPS,mMetrics),mErasePaint);
+  canvas.drawBitmap(eraseBg,0,0,null);
+  eraseCanvas.setBitmap(null);
+  eraseBg.recycle();
+}

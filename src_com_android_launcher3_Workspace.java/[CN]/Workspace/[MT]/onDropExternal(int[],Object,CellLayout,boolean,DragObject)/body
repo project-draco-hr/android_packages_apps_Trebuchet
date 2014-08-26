@@ -95,7 +95,6 @@ mTargetCell=findNearestArea((int)touchXY[0],(int)touchXY[1],spanX,spanY,cellLayo
 float distance=cellLayout.getDistanceFromCell(mDragViewVisualCenter[0],mDragViewVisualCenter[1],mTargetCell);
 d.postAnimationRunnable=exitSpringLoadedRunnable;
 if (createUserFolderIfNecessary(view,container,cellLayout,mTargetCell,distance,true,d.dragView,d.postAnimationRunnable)) {
-mLauncher.markFolderClingDismissedIfNecessary();
 return;
 }
 if (addToExistingFolderIfNecessary(view,cellLayout,mTargetCell,distance,d,true)) {
