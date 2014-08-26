@@ -1,0 +1,3 @@
+{
+  mChild.setBounds(bounds.left + mBoundsShift.left,bounds.top + mBoundsShift.top,bounds.right + mBoundsShift.right,bounds.bottom + mBoundsShift.bottom);
+}
