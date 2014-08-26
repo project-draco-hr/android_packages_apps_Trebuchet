@@ -2,14 +2,13 @@
   mLauncher.showWorkspaceSearchAndHotseat();
   Runnable dismissCb=new Runnable(){
     public void run(){
-      Cling cling=(Cling)mLauncher.findViewById(R.id.migration_cling);
       Runnable cb=new Runnable(){
         public void run(){
-          showMigrationWorkspaceCling();
+          showLongPressCling(false);
         }
       }
 ;
-      dismissCling(cling,cb,MIGRATION_CLING_DISMISSED_KEY,DISMISS_CLING_DURATION,true);
+      dismissCling(mLauncher.findViewById(R.id.migration_cling),cb,MIGRATION_CLING_DISMISSED_KEY,DISMISS_CLING_DURATION);
     }
   }
 ;

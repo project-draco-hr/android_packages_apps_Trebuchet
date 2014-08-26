@@ -1,6 +1,0 @@
-{
-  if (mHide) {
-    restoreImportantForAccessibilityHelper(v);
-  }
-  mHide=false;
-}

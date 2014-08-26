@@ -74,14 +74,6 @@
       if (onCompleteRunnable != null) {
         onCompleteRunnable.run();
       }
-      if (!mDragController.isDragging()) {
-        Cling cling=mLauncher.getLauncherClings().showFoldersCling();
-        if (cling != null) {
-          cling.bringScrimToFront();
-          bringToFront();
-          cling.bringToFront();
-        }
-      }
       setFocusOnFirstChild();
     }
   }
