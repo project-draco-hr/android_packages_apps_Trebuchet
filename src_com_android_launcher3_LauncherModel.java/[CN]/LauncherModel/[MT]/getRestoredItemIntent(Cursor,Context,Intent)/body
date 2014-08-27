@@ -1,9 +1,4 @@
 {
-  final boolean debug=false;
   ComponentName componentName=intent.getComponent();
-  Intent marketIntent=new Intent(Intent.ACTION_VIEW);
-  Uri marketUri=new Uri.Builder().scheme("market").authority("details").appendQueryParameter("id",componentName.getPackageName()).build();
-  if (debug)   Log.d(TAG,"manufactured intent uri: " + marketUri.toString());
-  marketIntent.setData(marketUri);
-  return marketIntent;
+  return getMarketIntent(componentName.getPackageName());
 }

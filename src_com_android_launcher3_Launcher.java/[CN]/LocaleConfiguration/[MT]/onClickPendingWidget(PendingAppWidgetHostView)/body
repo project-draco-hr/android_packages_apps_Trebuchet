@@ -1,6 +1,6 @@
 {
+  final LauncherAppWidgetInfo info=(LauncherAppWidgetInfo)v.getTag();
   if (v.isReadyForClickSetup()) {
-    LauncherAppWidgetInfo info=(LauncherAppWidgetInfo)v.getTag();
     int widgetId=info.appWidgetId;
     AppWidgetProviderInfo appWidgetInfo=mAppWidgetManager.getAppWidgetInfo(widgetId);
     if (appWidgetInfo != null) {
@@ -9,5 +9,18 @@
       mPendingAddWidgetId=widgetId;
       AppWidgetManagerCompat.getInstance(this).startConfigActivity(appWidgetInfo,info.appWidgetId,this,mAppWidgetHost,REQUEST_RECONFIGURE_APPWIDGET);
     }
+  }
+ else   if (info.installProgress < 0) {
+    final String packageName=info.providerName.getPackageName();
+    showBrokenAppInstallDialog(packageName,new DialogInterface.OnClickListener(){
+      public void onClick(      DialogInterface dialog,      int id){
+        startActivitySafely(v,LauncherModel.getMarketIntent(packageName),info);
+      }
+    }
+);
+  }
+ else {
+    final String packageName=info.providerName.getPackageName();
+    startActivitySafely(v,LauncherModel.getMarketIntent(packageName),info);
   }
 }

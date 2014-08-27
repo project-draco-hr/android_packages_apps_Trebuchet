@@ -91,16 +91,11 @@ removedPackageNames.add(packages[i]);
 }
 }
 for (String pn : removedPackageNames) {
-ArrayList<ItemInfo> infos=getItemInfoForPackageName(pn,mUser);
-for (ItemInfo i : infos) {
-deleteItemFromDatabase(context,i);
-}
+deletePackageFromDatabase(context,pn,mUser);
 }
 for (AppInfo a : removedApps) {
 ArrayList<ItemInfo> infos=getItemInfoForComponentName(a.componentName,mUser);
-for (ItemInfo i : infos) {
-deleteItemFromDatabase(context,i);
-}
+deleteItemsFromDatabase(context,infos);
 }
 if (!removedPackageNames.isEmpty() || !removedApps.isEmpty()) {
 String spKey=LauncherAppState.getSharedPreferencesKey();

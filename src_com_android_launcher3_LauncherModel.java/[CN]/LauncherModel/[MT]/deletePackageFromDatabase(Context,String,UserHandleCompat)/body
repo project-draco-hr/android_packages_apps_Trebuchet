@@ -5,5 +5,6 @@
     }
   }
 ;
-  return filterItemInfos(sBgItemsIdMap.values(),filter);
+  ArrayList<ItemInfo> infos=filterItemInfos(sBgItemsIdMap.values(),filter);
+  deleteItemsFromDatabase(context,infos);
 }

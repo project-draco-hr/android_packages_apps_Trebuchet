@@ -1,0 +1,10 @@
+{
+  new AlertDialog.Builder(this).setTitle(R.string.abandoned_promises_title).setMessage(R.string.abandoned_promise_explanation).setPositiveButton(R.string.abandoned_search,onSearchClickListener).setNeutralButton(R.string.abandoned_clean_this,new DialogInterface.OnClickListener(){
+    public void onClick(    DialogInterface dialog,    int id){
+      final UserHandleCompat user=UserHandleCompat.myUserHandle();
+      mWorkspace.removeAbandonedPromise(packageName,user);
+    }
+  }
+).create().show();
+  return;
+}
