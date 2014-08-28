@@ -25,6 +25,7 @@
     }
  else {
       showWorkspace(true);
+      setWorkspaceBackground(mState == State.WORKSPACE ? WORKSPACE_BACKGROUND_GRADIENT : WORKSPACE_BACKGROUND_TRANSPARENT);
     }
   }
  else   if (mWorkspace.getOpenFolder() != null) {
