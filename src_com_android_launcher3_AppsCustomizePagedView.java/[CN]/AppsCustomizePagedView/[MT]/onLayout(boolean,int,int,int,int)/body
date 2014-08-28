@@ -2,8 +2,13 @@
   super.onLayout(changed,l,t,r,b);
   if (!isDataReady()) {
     if ((LauncherAppState.isDisableAllApps() || !mApps.isEmpty()) && !mWidgets.isEmpty()) {
-      setDataIsReady();
-      onDataReady(getMeasuredWidth(),getMeasuredHeight());
+      post(new Runnable(){
+        public void run(){
+          setDataIsReady();
+          onDataReady(getMeasuredWidth(),getMeasuredHeight());
+        }
+      }
+);
     }
   }
 }
