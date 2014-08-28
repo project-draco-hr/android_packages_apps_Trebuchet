@@ -1,0 +1,3 @@
+{
+  return new Intent(Intent.ACTION_VIEW).setData(new Uri.Builder().scheme("market").authority("details").appendQueryParameter("id",packageName).build());
+}
