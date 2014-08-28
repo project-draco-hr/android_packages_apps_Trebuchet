@@ -1,0 +1,4 @@
+{
+  padding.set(mPadding);
+  return (padding.left | padding.top | padding.right| padding.bottom) != 0;
+}
