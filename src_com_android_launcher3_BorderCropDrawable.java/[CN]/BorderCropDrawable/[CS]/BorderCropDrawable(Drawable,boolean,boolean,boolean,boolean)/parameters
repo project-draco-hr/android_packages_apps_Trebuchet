@@ -1,0 +1,5 @@
+Drawable child
+boolean cropLeft
+boolean cropTop
+boolean cropRight
+boolean cropBottom
