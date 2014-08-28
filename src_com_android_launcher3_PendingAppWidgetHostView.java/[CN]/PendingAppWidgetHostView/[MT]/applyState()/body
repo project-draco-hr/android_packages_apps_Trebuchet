@@ -1,5 +1,5 @@
 {
   if (mDrawable != null) {
-    mDrawable.setLevel(mInfo.installProgress);
+    mDrawable.setLevel(Math.max(mInfo.installProgress,0));
   }
 }

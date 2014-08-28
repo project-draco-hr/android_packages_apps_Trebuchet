@@ -18,24 +18,12 @@
     }
   }
   if (shortcut.isAbandoned() && v instanceof BubbleTextView) {
-    AlertDialog.Builder builder=new AlertDialog.Builder(this);
-    builder.setTitle(R.string.abandoned_promises_title);
-    builder.setMessage(R.string.abandoned_promise_explanation);
-    builder.setPositiveButton(R.string.abandoned_search,new DialogInterface.OnClickListener(){
+    showBrokenAppInstallDialog(shortcut.getRestoredIntent().getComponent().getPackageName(),new DialogInterface.OnClickListener(){
       public void onClick(      DialogInterface dialog,      int id){
         startAppShortcutOrInfoActivity(v);
       }
     }
 );
-    builder.setNeutralButton(R.string.abandoned_clean_this,new DialogInterface.OnClickListener(){
-      public void onClick(      DialogInterface dialog,      int id){
-        final BubbleTextView bubble=(BubbleTextView)v;
-        final UserHandleCompat user=UserHandleCompat.myUserHandle();
-        mWorkspace.removeAbandonedPromise(bubble,user);
-      }
-    }
-);
-    builder.create().show();
     return;
   }
   startAppShortcutOrInfoActivity(v);

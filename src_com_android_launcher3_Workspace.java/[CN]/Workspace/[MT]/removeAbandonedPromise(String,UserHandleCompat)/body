@@ -1,0 +1,6 @@
+{
+  ArrayList<String> packages=new ArrayList<String>(1);
+  packages.add(packageName);
+  LauncherModel.deletePackageFromDatabase(mLauncher,packageName,user);
+  removeItemsByPackageName(packages,user);
+}
