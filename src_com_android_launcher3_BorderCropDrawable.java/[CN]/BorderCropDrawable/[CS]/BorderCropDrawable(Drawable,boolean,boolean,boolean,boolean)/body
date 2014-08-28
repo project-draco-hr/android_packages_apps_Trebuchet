@@ -1,0 +1,22 @@
+{
+  mChild=child;
+  mBoundsShift=new Rect();
+  mPadding=new Rect();
+  mChild.getPadding(mPadding);
+  if (cropLeft) {
+    mBoundsShift.left=-mPadding.left;
+    mPadding.left=0;
+  }
+  if (cropTop) {
+    mBoundsShift.top=-mPadding.top;
+    mPadding.top=0;
+  }
+  if (cropRight) {
+    mBoundsShift.right=mPadding.right;
+    mPadding.right=0;
+  }
+  if (cropBottom) {
+    mBoundsShift.bottom=mPadding.bottom;
+    mPadding.bottom=0;
+  }
+}
