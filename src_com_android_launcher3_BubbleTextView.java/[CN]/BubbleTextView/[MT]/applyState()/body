@@ -31,8 +31,8 @@ preloadDrawable=new PreloadIconDrawable(top,getPreloaderTheme());
 setCompoundDrawables(drawables[0],preloadDrawable,drawables[2],drawables[3]);
 }
 preloadDrawable.setLevel(progressLevel);
-if (state == ShortcutInfo.PACKAGE_STATE_DEFAULT) {
-preloadDrawable.maybePerformFinishedAnimation();
+if ((state == ShortcutInfo.PACKAGE_STATE_DEFAULT) && info.wasPromise) {
+info.wasPromise=!preloadDrawable.maybePerformFinishedAnimation();
 }
 }
 }
