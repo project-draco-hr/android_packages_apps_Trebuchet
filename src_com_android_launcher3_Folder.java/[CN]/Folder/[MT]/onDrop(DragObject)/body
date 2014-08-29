@@ -45,4 +45,5 @@
   mSuppressOnAdd=true;
   mInfo.add(si);
   mSuppressOnAdd=false;
+  mCurrentDragInfo=null;
 }
