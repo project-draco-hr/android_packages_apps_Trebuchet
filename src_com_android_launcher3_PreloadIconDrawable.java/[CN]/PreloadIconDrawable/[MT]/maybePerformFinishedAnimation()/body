@@ -1,6 +1,6 @@
 {
   if (mAnimationProgress > ANIMATION_PROGRESS_STOPPED) {
-    return;
+    return false;
   }
   if (mAnimator != null) {
     mAnimator.cancel();
@@ -8,4 +8,5 @@
   setAnimationProgress(ANIMATION_PROGRESS_STARTED);
   mAnimator=ObjectAnimator.ofFloat(this,"animationProgress",ANIMATION_PROGRESS_STARTED,ANIMATION_PROGRESS_COMPLETED);
   mAnimator.start();
+  return true;
 }
