@@ -17,8 +17,8 @@
       return;
     }
   }
-  if (shortcut.isAbandoned() && v instanceof BubbleTextView) {
-    showBrokenAppInstallDialog(shortcut.getRestoredIntent().getComponent().getPackageName(),new DialogInterface.OnClickListener(){
+  if ((v instanceof BubbleTextView) && shortcut.isPromise() && !shortcut.hasStatusFlag(ShortcutInfo.FLAG_INSTALL_SESSION_ACTIVE)) {
+    showBrokenAppInstallDialog(shortcut.getTargetComponent().getPackageName(),new DialogInterface.OnClickListener(){
       public void onClick(      DialogInterface dialog,      int id){
         startAppShortcutOrInfoActivity(v);
       }

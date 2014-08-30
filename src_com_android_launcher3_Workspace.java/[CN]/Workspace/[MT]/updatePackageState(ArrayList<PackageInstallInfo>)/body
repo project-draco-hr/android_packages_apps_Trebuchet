@@ -3,10 +3,16 @@
   for (  final PackageInstallInfo installInfo : installInfos) {
     mapOverItems(MAP_RECURSE,new ItemOperator(){
       @Override public boolean evaluate(      ItemInfo info,      View v,      View parent){
-        if (info instanceof ShortcutInfo && ((ShortcutInfo)info).isPromiseFor(installInfo.packageName) && v instanceof BubbleTextView) {
-          ((ShortcutInfo)info).setProgress(installInfo.progress);
-          ((ShortcutInfo)info).setState(installInfo.state);
-          ((BubbleTextView)v).applyState();
+        if (info instanceof ShortcutInfo && v instanceof BubbleTextView) {
+          ShortcutInfo si=(ShortcutInfo)info;
+          ComponentName cn=si.getTargetComponent();
+          if (si.isPromise() && (cn != null) && installInfo.packageName.equals(cn.getPackageName())) {
+            si.setInstallProgress(installInfo.progress);
+            if (installInfo.state == PackageInstallerCompat.STATUS_FAILED) {
+              si.status&=~ShortcutInfo.FLAG_INSTALL_SESSION_ACTIVE;
+            }
+            ((BubbleTextView)v).applyState(false);
+          }
         }
  else         if (v instanceof PendingAppWidgetHostView && info instanceof LauncherAppWidgetInfo && ((LauncherAppWidgetInfo)info).providerName.getPackageName().equals(installInfo.packageName)) {
           ((LauncherAppWidgetInfo)info).installProgress=installInfo.progress;
@@ -16,7 +22,7 @@
       }
     }
 );
-    if (installInfo.state == ShortcutInfo.PACKAGE_STATE_DEFAULT) {
+    if (installInfo.state == PackageInstallerCompat.STATUS_INSTALLED) {
       completedPackages.add(installInfo.packageName);
     }
   }

@@ -1,0 +1,23 @@
+{
+  if (getTag() instanceof ShortcutInfo) {
+    ShortcutInfo info=(ShortcutInfo)getTag();
+    final boolean isPromise=info.isPromise();
+    final int progressLevel=isPromise ? ((info.hasStatusFlag(ShortcutInfo.FLAG_INSTALL_SESSION_ACTIVE) ? info.getInstallProgress() : 0)) : 100;
+    Drawable[] drawables=getCompoundDrawables();
+    Drawable top=drawables[1];
+    if (top != null) {
+      final PreloadIconDrawable preloadDrawable;
+      if (top instanceof PreloadIconDrawable) {
+        preloadDrawable=(PreloadIconDrawable)top;
+      }
+ else {
+        preloadDrawable=new PreloadIconDrawable(top,getPreloaderTheme());
+        setCompoundDrawables(drawables[0],preloadDrawable,drawables[2],drawables[3]);
+      }
+      preloadDrawable.setLevel(progressLevel);
+      if (promiseStateChanged) {
+        preloadDrawable.maybePerformFinishedAnimation();
+      }
+    }
+  }
+}

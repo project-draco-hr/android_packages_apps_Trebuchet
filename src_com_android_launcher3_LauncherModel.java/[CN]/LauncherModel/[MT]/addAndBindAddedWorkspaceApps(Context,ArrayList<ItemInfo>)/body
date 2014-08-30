@@ -24,7 +24,7 @@ synchronized (sBgLock) {
           final String name=a.title.toString();
           final Intent launchIntent=a.getIntent();
           if (LauncherModel.shortcutExists(context,name,launchIntent)) {
-            if (a instanceof AppInfo && LauncherModel.appWasRestored(context,launchIntent,a.user)) {
+            if (a instanceof AppInfo && LauncherModel.appWasPromise(context,launchIntent,a.user)) {
               restoredAppsFinal.add((AppInfo)a);
             }
             continue;

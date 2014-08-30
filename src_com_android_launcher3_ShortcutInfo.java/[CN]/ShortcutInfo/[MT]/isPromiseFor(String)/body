@@ -1,3 +1,0 @@
-{
-  return restoredIntent != null && pkgName != null && pkgName.equals(restoredIntent.getComponent().getPackageName());
-}

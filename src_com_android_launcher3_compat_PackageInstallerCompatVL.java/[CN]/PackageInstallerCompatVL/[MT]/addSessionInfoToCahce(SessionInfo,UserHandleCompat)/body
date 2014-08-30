@@ -1,0 +1,6 @@
+{
+  String packageName=info.getAppPackageName();
+  if (packageName != null) {
+    mCache.cachePackageInstallInfo(packageName,user,info.getAppIcon(),info.getAppLabel());
+  }
+}
