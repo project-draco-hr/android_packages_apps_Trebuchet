@@ -1,3 +1,4 @@
 {
   startGlobalSearch(initialQuery,selectInitialQuery,appSearchData,sourceBounds);
+  return false;
 }
