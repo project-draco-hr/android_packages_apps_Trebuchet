@@ -1,3 +1,3 @@
 {
-  return mLauncherApps.isPackageEnabledForProfile(packageName,user.getUser());
+  return mLauncherApps.isPackageEnabled(packageName,user.getUser());
 }

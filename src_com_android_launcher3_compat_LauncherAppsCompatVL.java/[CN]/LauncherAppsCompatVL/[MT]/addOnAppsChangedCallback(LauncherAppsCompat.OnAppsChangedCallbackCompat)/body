@@ -3,5 +3,5 @@
 synchronized (mCallbacks) {
     mCallbacks.put(callback,wrappedCallback);
   }
-  mLauncherApps.addOnAppsChangedCallback(wrappedCallback);
+  mLauncherApps.addCallback(wrappedCallback);
 }
