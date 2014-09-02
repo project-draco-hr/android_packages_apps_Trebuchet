@@ -11,5 +11,8 @@
   if (mSearchDropTargetBar != null) {
     sourceBounds=mSearchDropTargetBar.getSearchBarBounds();
   }
-  startSearch(initialQuery,selectInitialQuery,appSearchData,sourceBounds);
+  boolean clearTextImmediately=startSearch(initialQuery,selectInitialQuery,appSearchData,sourceBounds);
+  if (clearTextImmediately) {
+    clearTypedText();
+  }
 }
