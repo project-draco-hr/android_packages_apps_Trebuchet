@@ -1,0 +1,4 @@
+{
+  int resId=getResources().getIdentifier(RES_SYSTEM_WALLPAPER_DIR,"string",getPackageName());
+  return (resId != 0) ? new File(getResources().getString(resId)) : null;
+}

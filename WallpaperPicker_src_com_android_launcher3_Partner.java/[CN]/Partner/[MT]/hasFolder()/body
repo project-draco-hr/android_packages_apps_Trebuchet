@@ -1,4 +1,0 @@
-{
-  int folder=getResources().getIdentifier(Partner.RESOURCE_FOLDER,"xml",getPackageName());
-  return folder != 0;
-}

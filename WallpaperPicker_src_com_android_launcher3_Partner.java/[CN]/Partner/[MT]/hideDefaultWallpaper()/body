@@ -1,4 +1,0 @@
-{
-  int resId=getResources().getIdentifier(RESOURCE_DEFAULT_WALLPAPER_HIDDEN,"bool",getPackageName());
-  return resId != 0 && getResources().getBoolean(resId);
-}

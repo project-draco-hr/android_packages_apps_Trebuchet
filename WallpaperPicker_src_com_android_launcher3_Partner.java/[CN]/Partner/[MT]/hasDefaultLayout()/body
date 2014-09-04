@@ -1,4 +1,0 @@
-{
-  int defaultLayout=getResources().getIdentifier(Partner.RESOURCE_DEFAULT_LAYOUT,"xml",getPackageName());
-  return defaultLayout != 0;
-}

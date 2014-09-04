@@ -30,8 +30,14 @@
   int minEdgeCellCount=resources.getInteger(R.integer.config_dynamic_grid_min_edge_cell_count);
   int maxRows=(isLandscape ? maxShortEdgeCellCount : maxLongEdgeCellCount);
   int maxCols=(isLandscape ? maxLongEdgeCellCount : maxShortEdgeCellCount);
-  allAppsNumRows=(availableHeightPx - pageIndicatorHeightPx) / (allAppsCellHeightPx + allAppsCellPaddingPx);
-  allAppsNumRows=Math.max(minEdgeCellCount,Math.min(maxRows,allAppsNumRows));
-  allAppsNumCols=(availableWidthPx) / (allAppsCellWidthPx + allAppsCellPaddingPx);
-  allAppsNumCols=Math.max(minEdgeCellCount,Math.min(maxCols,allAppsNumCols));
+  if (allAppsShortEdgeCount > 0 && allAppsLongEdgeCount > 0) {
+    allAppsNumRows=isLandscape ? allAppsShortEdgeCount : allAppsLongEdgeCount;
+    allAppsNumCols=isLandscape ? allAppsLongEdgeCount : allAppsShortEdgeCount;
+  }
+ else {
+    allAppsNumRows=(availableHeightPx - pageIndicatorHeightPx) / (allAppsCellHeightPx + allAppsCellPaddingPx);
+    allAppsNumRows=Math.max(minEdgeCellCount,Math.min(maxRows,allAppsNumRows));
+    allAppsNumCols=(availableWidthPx) / (allAppsCellWidthPx + allAppsCellPaddingPx);
+    allAppsNumCols=Math.max(minEdgeCellCount,Math.min(maxCols,allAppsNumCols));
+  }
 }
