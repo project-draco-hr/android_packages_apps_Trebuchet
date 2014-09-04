@@ -4,8 +4,10 @@
     if ((LauncherAppState.isDisableAllApps() || !mApps.isEmpty()) && !mWidgets.isEmpty()) {
       post(new Runnable(){
         public void run(){
-          setDataIsReady();
-          onDataReady(getMeasuredWidth(),getMeasuredHeight());
+          if (isAttachedToWindow()) {
+            setDataIsReady();
+            onDataReady(getMeasuredWidth(),getMeasuredHeight());
+          }
         }
       }
 );
