@@ -10,7 +10,7 @@
   Iterator<AppInfo> iter=allAppsApps.iterator();
   while (iter.hasNext()) {
     ItemInfo a=iter.next();
-    if (LauncherModel.appWasRestored(ctx,a.getIntent(),a.user)) {
+    if (LauncherModel.appWasPromise(ctx,a.getIntent(),a.user)) {
       restoredAppsFinal.add((AppInfo)a);
     }
   }

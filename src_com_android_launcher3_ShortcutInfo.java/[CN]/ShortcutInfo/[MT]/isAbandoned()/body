@@ -1,3 +1,0 @@
-{
-  return isPromise() && (mState == PACKAGE_STATE_ERROR || mState == PACKAGE_STATE_UNKNOWN);
-}
