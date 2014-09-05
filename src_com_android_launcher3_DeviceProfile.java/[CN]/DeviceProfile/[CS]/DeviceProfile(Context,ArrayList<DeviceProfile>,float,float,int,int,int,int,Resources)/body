@@ -45,6 +45,7 @@
     points.add(new DeviceProfileQuery(p,p.hotseatIconSize));
   }
   hotseatIconSize=invDistWeightedInterpolate(minWidth,minHeight,points);
+  applyPartnerDeviceProfileOverrides(context,dm);
   updateFromConfiguration(context,res,wPx,hPx,awPx,ahPx);
   updateAvailableDimensions(context);
   computeAllAppsButtonSize(context);
