@@ -1,0 +1,4 @@
+{
+  int resId=getResources().getIdentifier(RES_REQUIRE_FIRST_RUN_FLOW,"bool",getPackageName());
+  return resId != 0 && getResources().getBoolean(resId);
+}
