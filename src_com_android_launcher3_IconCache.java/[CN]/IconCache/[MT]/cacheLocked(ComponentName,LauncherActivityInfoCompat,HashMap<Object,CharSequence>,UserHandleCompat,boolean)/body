@@ -28,9 +28,10 @@
  else {
         if (usePackageIcon) {
           CacheEntry packageEntry=getEntryForPackage(componentName.getPackageName(),user);
-          if (packageEntry != null && packageEntry.icon != null) {
+          if (packageEntry != null) {
             if (DEBUG)             Log.d(TAG,"using package default icon for " + componentName.toShortString());
             entry.icon=packageEntry.icon;
+            entry.title=packageEntry.title;
           }
         }
         if (entry.icon == null) {

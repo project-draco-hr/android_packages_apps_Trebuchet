@@ -1,0 +1,3 @@
+{
+  return promisedIntent != null ? promisedIntent.getComponent() : intent.getComponent();
+}

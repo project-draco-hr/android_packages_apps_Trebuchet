@@ -3,7 +3,7 @@
   PackageInstallInfo installInfo=new PackageInstallInfo(packageName);
   installInfo.progress=progress;
   installInfo.state=state;
-  if (state == ShortcutInfo.PACKAGE_STATE_DEFAULT) {
+  if (state == STATUS_INSTALLED) {
     editor.remove(packageName);
     if (DEBUG)     Log.d(TAG,"no longer tracking " + packageName);
   }
@@ -16,7 +16,7 @@
     if (mReplayPending) {
       replayUpdates();
     }
- else {
+ else     if (state != STATUS_INSTALLED) {
       LauncherAppState app=LauncherAppState.getInstanceNoCreate();
       ArrayList<PackageInstallInfo> update=new ArrayList<PackageInstallInfo>();
       update.add(installInfo);

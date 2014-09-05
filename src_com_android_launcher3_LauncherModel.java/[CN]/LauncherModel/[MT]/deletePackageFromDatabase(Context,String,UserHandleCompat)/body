@@ -1,10 +1,3 @@
 {
-  ItemInfoFilter filter=new ItemInfoFilter(){
-    @Override public boolean filterItem(    ItemInfo parent,    ItemInfo info,    ComponentName cn){
-      return cn.getPackageName().equals(pn) && info.user.equals(user);
-    }
-  }
-;
-  ArrayList<ItemInfo> infos=filterItemInfos(sBgItemsIdMap.values(),filter);
-  deleteItemsFromDatabase(context,infos);
+  deleteItemsFromDatabase(context,getItemsByPackageName(pn,user));
 }

@@ -1,0 +1,4 @@
+{
+  mInstallProgress=progress;
+  status|=FLAG_INSTALL_SESSION_ACTIVE;
+}

@@ -6,7 +6,7 @@
     if (info.itemType == LauncherSettings.Favorites.ITEM_TYPE_APPLICATION && Intent.ACTION_MAIN.equals(intent.getAction()) && name != null) {
       return true;
     }
-    if (info.getRestoredIntent() != null) {
+    if (info.isPromise()) {
       return true;
     }
   }

@@ -1,0 +1,7 @@
+{
+  final ComponentName component=intent.getComponent();
+  if (component == null) {
+    return false;
+  }
+  return !getItemsByPackageName(component.getPackageName(),user).isEmpty();
+}

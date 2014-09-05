@@ -1,10 +1,10 @@
 {
 synchronized (mCache) {
-    LauncherActivityInfoCompat launcherActInfo=mLauncherApps.resolveActivity(intent,user);
     ComponentName component=intent.getComponent();
     if (component == null) {
       return getDefaultIcon(user);
     }
+    LauncherActivityInfoCompat launcherActInfo=mLauncherApps.resolveActivity(intent,user);
     CacheEntry entry=cacheLocked(component,launcherActInfo,null,user,usePkgIcon);
     if (title != null) {
       entry.title=title;

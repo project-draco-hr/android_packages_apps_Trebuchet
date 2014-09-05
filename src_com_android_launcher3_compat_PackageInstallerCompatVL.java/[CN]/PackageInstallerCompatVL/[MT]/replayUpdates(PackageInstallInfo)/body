@@ -12,13 +12,13 @@
     return;
   }
   ArrayList<PackageInstallInfo> updates=new ArrayList<PackageInstallInfo>();
-  if (newInfo != null) {
+  if ((newInfo != null) && (newInfo.state != STATUS_INSTALLED)) {
     updates.add(newInfo);
   }
-  for (int i=mPendingReplays.size() - 1; i > 0; i--) {
+  for (int i=mPendingReplays.size() - 1; i >= 0; i--) {
     SessionInfo session=mPendingReplays.valueAt(i);
     if (session.getAppPackageName() != null) {
-      updates.add(new PackageInstallInfo(session.getAppPackageName(),ShortcutInfo.PACKAGE_STATE_INSTALLING,(int)(session.getProgress() * 100)));
+      updates.add(new PackageInstallInfo(session.getAppPackageName(),STATUS_INSTALLING,(int)(session.getProgress() * 100)));
     }
   }
   mPendingReplays.clear();
