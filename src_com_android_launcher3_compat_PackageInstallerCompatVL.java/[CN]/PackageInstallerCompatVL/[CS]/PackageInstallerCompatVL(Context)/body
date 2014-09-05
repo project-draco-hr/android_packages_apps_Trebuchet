@@ -3,7 +3,7 @@
   mCache=LauncherAppState.getInstance().getIconCache();
   mResumed=false;
   mBound=false;
-  mInstaller.addSessionCallback(mCallback);
+  mInstaller.registerSessionCallback(mCallback);
   for (  SessionInfo info : mInstaller.getAllSessions()) {
     mPendingReplays.append(info.getSessionId(),info);
   }
