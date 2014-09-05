@@ -1,5 +1,8 @@
 {
-  if (mPageIndicator != null && !isReordering(false)) {
-    mPageIndicator.setActiveMarker(getNextPage());
+  if (mPageIndicator != null) {
+    mPageIndicator.setContentDescription(getPageIndicatorDescription());
+    if (!isReordering(false)) {
+      mPageIndicator.setActiveMarker(getNextPage());
+    }
   }
 }
