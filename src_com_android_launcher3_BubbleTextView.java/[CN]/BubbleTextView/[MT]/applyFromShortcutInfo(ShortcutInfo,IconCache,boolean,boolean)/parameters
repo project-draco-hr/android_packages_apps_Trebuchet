@@ -1,0 +1,4 @@
+ShortcutInfo info
+IconCache iconCache
+boolean setDefaultPadding
+boolean promiseStateChanged

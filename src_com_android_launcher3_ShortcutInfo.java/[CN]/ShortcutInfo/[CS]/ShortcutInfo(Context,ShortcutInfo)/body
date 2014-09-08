@@ -12,4 +12,5 @@
   flags=info.flags;
   firstInstallTime=info.firstInstallTime;
   user=info.user;
+  status=info.status;
 }

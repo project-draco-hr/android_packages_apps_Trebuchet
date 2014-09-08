@@ -4,6 +4,7 @@
   CacheEntry entry=mCache.get(cacheKey);
   if (entry == null) {
     entry=new CacheEntry();
+    entry.title="";
     mCache.put(cacheKey,entry);
     try {
       ApplicationInfo info=mPackageManager.getApplicationInfo(packageName,0);

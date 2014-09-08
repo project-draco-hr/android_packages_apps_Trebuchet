@@ -1,3 +1,3 @@
 {
-  return restoredIntent != null;
+  return hasStatusFlag(FLAG_RESTORED_ICON | FLAG_AUTOINTALL_ICON);
 }

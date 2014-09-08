@@ -1,5 +1,6 @@
 {
   mInstaller=context.getPackageManager().getPackageInstaller();
+  mCache=LauncherAppState.getInstance().getIconCache();
   mResumed=false;
   mBound=false;
   mInstaller.addSessionCallback(mCallback);

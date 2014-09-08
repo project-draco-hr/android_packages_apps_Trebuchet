@@ -1,0 +1,9 @@
+{
+  CacheEntry entry=getEntryForPackage(packageName,user);
+  if (!TextUtils.isEmpty(title)) {
+    entry.title=title;
+  }
+  if (icon != null) {
+    entry.icon=Utilities.createIconBitmap(icon,mContext);
+  }
+}
