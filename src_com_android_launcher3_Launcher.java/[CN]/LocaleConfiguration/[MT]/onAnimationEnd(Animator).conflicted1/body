@@ -10,5 +10,14 @@
     page.setLayerType(View.LAYER_TYPE_NONE,null);
   }
   content.setPageBackgroundsVisible(true);
+  int count=content.getChildCount();
+  for (int i=0; i < count; i++) {
+    View child=content.getChildAt(i);
+    child.setVisibility(View.VISIBLE);
+  }
+  page.setTranslationX(0);
+  page.setTranslationY(0);
+  page.setAlpha(1);
+  content.setCurrentPage(content.getNextPage());
   mAppsCustomizeContent.updateCurrentPageScroll();
 }
