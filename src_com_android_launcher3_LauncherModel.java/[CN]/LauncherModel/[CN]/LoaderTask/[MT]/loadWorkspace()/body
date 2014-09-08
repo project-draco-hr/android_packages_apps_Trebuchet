@@ -132,6 +132,10 @@ try {
       allowMissingTarget=true;
     }
   }
+ else   if (cn == null) {
+    restoredRows.add(id);
+    restored=false;
+  }
 }
  catch (URISyntaxException e) {
   Launcher.addDumpLog(TAG,"Invalid uri: " + intentDescription,true);
