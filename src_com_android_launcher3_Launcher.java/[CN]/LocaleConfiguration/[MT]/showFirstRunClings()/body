@@ -1,0 +1,11 @@
+{
+  LauncherClings launcherClings=new LauncherClings(this);
+  if (launcherClings.shouldShowFirstRunOrMigrationClings()) {
+    if (mModel.canMigrateFromOldLauncherDb(this)) {
+      launcherClings.showMigrationCling();
+    }
+ else {
+      launcherClings.showLongPressCling(false);
+    }
+  }
+}
