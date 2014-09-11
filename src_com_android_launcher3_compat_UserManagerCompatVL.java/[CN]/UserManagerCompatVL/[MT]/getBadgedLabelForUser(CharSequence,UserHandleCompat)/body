@@ -5,7 +5,7 @@
   try {
     return mPm.getUserBadgedLabel(label,user.getUser());
   }
- catch (  Exception e) {
+ catch (  Throwable e) {
     return label;
   }
 }
