@@ -4,7 +4,11 @@
     if ((LauncherAppState.isDisableAllApps() || !mApps.isEmpty()) && !mWidgets.isEmpty()) {
       post(new Runnable(){
         public void run(){
-          if (isAttachedToWindow()) {
+          boolean attached=true;
+          if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            attached=isAttachedToWindow();
+          }
+          if (attached) {
             setDataIsReady();
             onDataReady(getMeasuredWidth(),getMeasuredHeight());
           }
