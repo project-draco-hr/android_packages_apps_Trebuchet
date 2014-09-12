@@ -4,12 +4,14 @@
     mWorkspace.postDelayed(new Runnable(){
       @Override public void run(){
         mDragLayer.dismissOverlayView();
+        showFirstRunClings();
       }
     }
 ,ACTIVITY_START_DELAY);
   }
  else {
     mDragLayer.dismissOverlayView();
+    showFirstRunClings();
   }
   changeWallpaperVisiblity(true);
 }
