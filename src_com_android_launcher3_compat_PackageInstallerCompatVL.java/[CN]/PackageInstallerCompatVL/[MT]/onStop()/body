@@ -1,3 +1,7 @@
 {
-  mInstaller.unregisterSessionCallback(mCallback);
+  try {
+    mInstaller.unregisterSessionCallback(mCallback);
+  }
+ catch (  Throwable e) {
+  }
 }
