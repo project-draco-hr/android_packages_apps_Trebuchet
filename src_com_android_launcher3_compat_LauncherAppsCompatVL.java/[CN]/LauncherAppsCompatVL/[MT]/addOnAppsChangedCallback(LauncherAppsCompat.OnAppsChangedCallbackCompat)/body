@@ -3,5 +3,9 @@
 synchronized (mCallbacks) {
     mCallbacks.put(callback,wrappedCallback);
   }
-  mLauncherApps.addCallback(wrappedCallback);
+  try {
+    mLauncherApps.registerCallback(wrappedCallback);
+  }
+ catch (  Throwable e) {
+  }
 }
