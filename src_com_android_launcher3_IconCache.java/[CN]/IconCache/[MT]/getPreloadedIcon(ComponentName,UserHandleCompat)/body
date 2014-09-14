@@ -22,7 +22,7 @@
     }
   }
  catch (  FileNotFoundException e) {
-    if (DEBUG)     Log.d(TAG,"there is no restored icon for: " + key,e);
+    if (DEBUG)     Log.d(TAG,"there is no restored icon for: " + key);
   }
 catch (  IOException e) {
     Log.w(TAG,"failed to read pre-load icon for: " + key,e);
