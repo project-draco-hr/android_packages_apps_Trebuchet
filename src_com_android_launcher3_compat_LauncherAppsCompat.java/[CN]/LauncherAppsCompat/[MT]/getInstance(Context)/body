@@ -1,7 +1,7 @@
 {
 synchronized (sInstanceLock) {
     if (sInstance == null) {
-      if ("L".equals(Build.VERSION.CODENAME)) {
+      if (Utilities.isLmpOrAbove()) {
         sInstance=new LauncherAppsCompatVL(context.getApplicationContext());
       }
  else {
