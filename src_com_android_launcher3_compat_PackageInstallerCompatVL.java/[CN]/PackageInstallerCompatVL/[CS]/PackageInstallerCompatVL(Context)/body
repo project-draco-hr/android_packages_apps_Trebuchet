@@ -1,5 +1,6 @@
 {
   mInstaller=context.getPackageManager().getPackageInstaller();
+  LauncherAppState.setApplicationContext(context.getApplicationContext());
   mCache=LauncherAppState.getInstance().getIconCache();
   mResumed=false;
   mBound=false;
