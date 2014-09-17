@@ -2,10 +2,5 @@
   if (user == null) {
     return label;
   }
-  try {
-    return mPm.getUserBadgedLabel(label,user.getUser());
-  }
- catch (  Throwable e) {
-    return label;
-  }
+  return mPm.getUserBadgedLabel(label,user.getUser());
 }
