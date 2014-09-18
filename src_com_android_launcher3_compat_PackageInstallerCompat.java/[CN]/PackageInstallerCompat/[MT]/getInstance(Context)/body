@@ -1,7 +1,7 @@
 {
 synchronized (sInstanceLock) {
     if (sInstance == null) {
-      if (Utilities.isLmp()) {
+      if (Utilities.isLmpOrAbove()) {
         sInstance=new PackageInstallerCompatVL(context);
       }
  else {

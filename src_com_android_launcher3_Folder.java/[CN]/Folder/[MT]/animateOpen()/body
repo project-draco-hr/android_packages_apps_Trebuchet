@@ -2,7 +2,7 @@
   if (!(getParent() instanceof DragLayer))   return;
   Animator openFolderAnim=null;
   final Runnable onCompleteRunnable;
-  if (!Utilities.isLmp()) {
+  if (!Utilities.isLmpOrAbove()) {
     positionAndSizeAsIcon();
     centerAboutIcon();
     PropertyValuesHolder alpha=PropertyValuesHolder.ofFloat("alpha",1);
