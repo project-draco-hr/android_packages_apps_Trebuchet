@@ -4,10 +4,6 @@ synchronized (mCallbacks) {
     wrappedCallback=mCallbacks.remove(callback);
   }
   if (wrappedCallback != null) {
-    try {
-      mLauncherApps.unregisterCallback(wrappedCallback);
-    }
- catch (    Throwable e) {
-    }
+    mLauncherApps.unregisterCallback(wrappedCallback);
   }
 }
