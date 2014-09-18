@@ -1,5 +1,5 @@
 {
-  if ("L".equals(Build.VERSION.CODENAME)) {
+  if (Utilities.isLmpOrAbove()) {
     return new UserManagerCompatVL(context);
   }
  else   if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
