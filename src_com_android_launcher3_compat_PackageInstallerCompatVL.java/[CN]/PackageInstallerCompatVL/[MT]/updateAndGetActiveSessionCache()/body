@@ -1,0 +1,11 @@
+{
+  HashSet<String> activePackages=new HashSet<String>();
+  UserHandleCompat user=UserHandleCompat.myUserHandle();
+  for (  SessionInfo info : mInstaller.getAllSessions()) {
+    addSessionInfoToCahce(info,user);
+    if (info.getAppPackageName() != null) {
+      activePackages.add(info.getAppPackageName());
+    }
+  }
+  return activePackages;
+}
