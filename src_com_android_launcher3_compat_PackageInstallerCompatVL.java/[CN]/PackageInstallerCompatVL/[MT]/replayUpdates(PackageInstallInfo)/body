@@ -25,4 +25,10 @@
   if (!updates.isEmpty()) {
     app.setPackageState(updates);
   }
+  if (!mPendingBadgeUpdates.isEmpty()) {
+    for (    String pkg : mPendingBadgeUpdates) {
+      app.updatePackageBadge(pkg);
+    }
+    mPendingBadgeUpdates.clear();
+  }
 }
