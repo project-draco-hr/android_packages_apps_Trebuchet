@@ -1,6 +1,0 @@
-{
-  UserHandleCompat user=UserHandleCompat.myUserHandle();
-  for (  SessionInfo info : mInstaller.getAllSessions()) {
-    addSessionInfoToCahce(info,user);
-  }
-}
