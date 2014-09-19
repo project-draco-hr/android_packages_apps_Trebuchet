@@ -5,7 +5,7 @@
       launcherClings.showMigrationCling();
     }
  else {
-      launcherClings.showLongPressCling(false);
+      launcherClings.showLongPressCling(true);
     }
   }
 }
