@@ -1,5 +1,7 @@
 {
-  mModel.stopLoader();
+  if (mModel.isCurrentCallbacks(this)) {
+    mModel.stopLoader();
+  }
   if (mAppsCustomizeContent != null) {
     mAppsCustomizeContent.surrender();
   }
