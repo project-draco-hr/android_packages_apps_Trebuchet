@@ -1,0 +1,6 @@
+{
+  HashMap<String,TagParser> parsers=new HashMap<String,TagParser>();
+  parsers.put(TAG_FAVORITE,new AppShortcutWithUriParser());
+  parsers.put(TAG_SHORTCUT,new UriShortcutParser(res));
+  return parsers;
+}

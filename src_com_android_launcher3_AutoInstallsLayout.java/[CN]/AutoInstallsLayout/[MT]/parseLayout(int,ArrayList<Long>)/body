@@ -1,0 +1,15 @@
+{
+  XmlResourceParser parser=mSourceRes.getXml(layoutId);
+  beginDocument(parser,mRootTag);
+  final int depth=parser.getDepth();
+  int type;
+  HashMap<String,TagParser> tagParserMap=getLayoutElementsMap();
+  int count=0;
+  while (((type=parser.next()) != XmlPullParser.END_TAG || parser.getDepth() > depth) && type != XmlPullParser.END_DOCUMENT) {
+    if (type != XmlPullParser.START_TAG) {
+      continue;
+    }
+    count+=parseAndAddNode(parser,tagParserMap,screenIds);
+  }
+  return count;
+}

@@ -1,4 +1,0 @@
-SQLiteDatabase db
-ContentValues values
-String title
-Intent intent

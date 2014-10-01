@@ -1,0 +1,11 @@
+{
+  if (HOTSEAT_CONTAINER_NAME.equals(getAttributeValue(parser,ATTR_CONTAINER))) {
+    out[0]=Favorites.CONTAINER_HOTSEAT;
+    long rank=Long.parseLong(getAttributeValue(parser,ATTR_RANK));
+    out[1]=(rank < mHotseatAllAppsRank) ? rank : (rank + 1);
+  }
+ else {
+    out[0]=Favorites.CONTAINER_DESKTOP;
+    out[1]=Long.parseLong(getAttributeValue(parser,ATTR_SCREEN));
+  }
+}

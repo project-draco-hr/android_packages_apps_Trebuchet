@@ -1,0 +1,8 @@
+{
+  final int resId=getAttributeResourceValue(parser,ATTR_FOLDER_ITEMS,0);
+  if (resId != 0) {
+    parser=mSourceRes.getXml(resId);
+    beginDocument(parser,TAG_FOLDER);
+  }
+  return super.parseAndAdd(parser);
+}

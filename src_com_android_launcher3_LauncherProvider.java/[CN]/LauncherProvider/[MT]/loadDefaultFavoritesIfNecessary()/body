@@ -3,19 +3,19 @@
   SharedPreferences sp=getContext().getSharedPreferences(spKey,Context.MODE_PRIVATE);
   if (sp.getBoolean(EMPTY_DATABASE_CREATED,false)) {
     Log.d(TAG,"loading default workspace");
-    WorkspaceLoader loader=AutoInstallsLayout.get(getContext(),mOpenHelper.mAppWidgetHost,mOpenHelper);
+    AutoInstallsLayout loader=AutoInstallsLayout.get(getContext(),mOpenHelper.mAppWidgetHost,mOpenHelper);
     if (loader == null) {
       final Partner partner=Partner.get(getContext().getPackageManager());
       if (partner != null && partner.hasDefaultLayout()) {
         final Resources partnerRes=partner.getResources();
         int workspaceResId=partnerRes.getIdentifier(Partner.RES_DEFAULT_LAYOUT,"xml",partner.getPackageName());
         if (workspaceResId != 0) {
-          loader=new SimpleWorkspaceLoader(mOpenHelper,partnerRes,workspaceResId);
+          loader=new DefaultLayoutParser(getContext(),mOpenHelper.mAppWidgetHost,mOpenHelper,partnerRes,workspaceResId);
         }
       }
     }
     if (loader == null) {
-      loader=new SimpleWorkspaceLoader(mOpenHelper,getContext().getResources(),getDefaultWorkspaceResourceId());
+      loader=new DefaultLayoutParser(getContext(),mOpenHelper.mAppWidgetHost,mOpenHelper,getContext().getResources(),getDefaultWorkspaceResourceId());
     }
     SharedPreferences.Editor editor=sp.edit().remove(EMPTY_DATABASE_CREATED);
     mOpenHelper.loadFavorites(mOpenHelper.getWritableDatabase(),loader);

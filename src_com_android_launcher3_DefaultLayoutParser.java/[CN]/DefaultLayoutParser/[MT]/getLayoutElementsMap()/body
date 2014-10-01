@@ -1,0 +1,10 @@
+{
+  HashMap<String,TagParser> parsers=new HashMap<String,TagParser>();
+  parsers.put(TAG_FAVORITE,new AppShortcutWithUriParser());
+  parsers.put(TAG_APPWIDGET,new AppWidgetParser());
+  parsers.put(TAG_SHORTCUT,new UriShortcutParser(mSourceRes));
+  parsers.put(TAG_RESOLVE,new ResolveParser());
+  parsers.put(TAG_FOLDER,new MyFolderParser());
+  parsers.put(TAG_PARTNER_FOLDER,new PartnerFolderParser());
+  return parsers;
+}

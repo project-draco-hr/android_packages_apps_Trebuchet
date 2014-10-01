@@ -1,4 +1,0 @@
-SQLiteDatabase db
-Resources res
-int workspaceResourceId
-ArrayList<Long> screenIds

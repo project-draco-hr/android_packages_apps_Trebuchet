@@ -1,0 +1,14 @@
+{
+  final Partner partner=Partner.get(mPackageManager);
+  if (partner != null) {
+    final Resources partnerRes=partner.getResources();
+    final int resId=partnerRes.getIdentifier(Partner.RES_FOLDER,"xml",partner.getPackageName());
+    if (resId != 0) {
+      final XmlResourceParser partnerParser=partnerRes.getXml(resId);
+      beginDocument(partnerParser,TAG_FOLDER);
+      FolderParser folderParser=new FolderParser(getFolderElementsMap(partnerRes));
+      return folderParser.parseAndAdd(partnerParser);
+    }
+  }
+  return -1;
+}

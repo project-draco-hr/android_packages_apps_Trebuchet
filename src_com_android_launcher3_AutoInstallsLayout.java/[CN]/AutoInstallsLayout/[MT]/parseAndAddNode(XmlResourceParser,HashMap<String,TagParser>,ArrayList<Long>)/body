@@ -1,0 +1,23 @@
+{
+  mValues.clear();
+  parseContainerAndScreen(parser,mTemp);
+  final long container=mTemp[0];
+  final long screenId=mTemp[1];
+  mValues.put(Favorites.CONTAINER,container);
+  mValues.put(Favorites.SCREEN,screenId);
+  mValues.put(Favorites.CELLX,getAttributeValue(parser,ATTR_X));
+  mValues.put(Favorites.CELLY,getAttributeValue(parser,ATTR_Y));
+  TagParser tagParser=tagParserMap.get(parser.getName());
+  if (tagParser == null) {
+    if (LOGD)     Log.d(TAG,"Ignoring unknown element tag: " + parser.getName());
+    return 0;
+  }
+  long newElementId=tagParser.parseAndAdd(parser);
+  if (newElementId >= 0) {
+    if (!screenIds.contains(screenId) && container == Favorites.CONTAINER_DESKTOP) {
+      screenIds.add(screenId);
+    }
+    return 1;
+  }
+  return 0;
+}

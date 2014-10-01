@@ -1,0 +1,11 @@
+{
+  String uri=null;
+  try {
+    uri=getAttributeValue(parser,ATTR_URI);
+    return Intent.parseUri(uri,0);
+  }
+ catch (  URISyntaxException e) {
+    Log.w(TAG,"Shortcut has malformed uri: " + uri);
+    return null;
+  }
+}

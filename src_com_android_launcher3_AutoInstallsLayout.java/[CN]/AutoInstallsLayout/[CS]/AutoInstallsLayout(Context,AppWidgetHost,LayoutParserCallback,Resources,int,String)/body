@@ -1,0 +1,11 @@
+{
+  mContext=context;
+  mAppWidgetHost=appWidgetHost;
+  mCallback=callback;
+  mPackageManager=context.getPackageManager();
+  mValues=new ContentValues();
+  mRootTag=rootTag;
+  mSourceRes=res;
+  mLayoutId=layoutId;
+  mHotseatAllAppsRank=LauncherAppState.getInstance().getDynamicGrid().getDeviceProfile().hotseatAllAppsRank;
+}

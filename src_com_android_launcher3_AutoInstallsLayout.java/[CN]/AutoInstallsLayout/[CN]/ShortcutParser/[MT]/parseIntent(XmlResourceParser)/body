@@ -1,0 +1,8 @@
+{
+  final String url=getAttributeValue(parser,ATTR_URL);
+  if (TextUtils.isEmpty(url) || !Patterns.WEB_URL.matcher(url).matches()) {
+    if (LOGD)     Log.d(TAG,"Ignoring shortcut, invalid url: " + url);
+    return null;
+  }
+  return new Intent(Intent.ACTION_VIEW,null).setData(Uri.parse(url));
+}

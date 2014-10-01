@@ -10,5 +10,5 @@
     Log.e(TAG,"Layout definition not found in package: " + pkg);
     return null;
   }
-  return new AutoInstallsLayout(context,appWidgetHost,callback,pkg,res,layoutId);
+  return new AutoInstallsLayout(context,appWidgetHost,callback,res,layoutId,TAG_WORKSPACE);
 }

@@ -1,0 +1,23 @@
+{
+  final int titleResId=getAttributeResourceValue(parser,ATTR_TITLE,0);
+  final int iconId=getAttributeResourceValue(parser,ATTR_ICON,0);
+  if (titleResId == 0 || iconId == 0) {
+    if (LOGD)     Log.d(TAG,"Ignoring shortcut");
+    return -1;
+  }
+  final Intent intent=parseIntent(parser);
+  if (intent == null) {
+    return -1;
+  }
+  Drawable icon=mIconRes.getDrawable(iconId);
+  if (icon == null) {
+    if (LOGD)     Log.d(TAG,"Ignoring shortcut, can't load icon");
+    return -1;
+  }
+  ItemInfo.writeBitmap(mValues,Utilities.createIconBitmap(icon,mContext));
+  mValues.put(Favorites.ICON_TYPE,Favorites.ICON_TYPE_RESOURCE);
+  mValues.put(Favorites.ICON_PACKAGE,mIconRes.getResourcePackageName(iconId));
+  mValues.put(Favorites.ICON_RESOURCE,mIconRes.getResourceName(iconId));
+  intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
+  return addShortcut(mSourceRes.getString(titleResId),intent,Favorites.ITEM_TYPE_SHORTCUT);
+}

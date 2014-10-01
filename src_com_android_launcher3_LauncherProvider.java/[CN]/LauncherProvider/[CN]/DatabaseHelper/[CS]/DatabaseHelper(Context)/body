@@ -1,7 +1,6 @@
 {
   super(context,LauncherFiles.LAUNCHER_DB,null,DATABASE_VERSION);
   mContext=context;
-  mPackageManager=context.getPackageManager();
   mAppWidgetHost=new AppWidgetHost(context,Launcher.APPWIDGET_HOST_ID);
   if (mMaxItemId == -1) {
     mMaxItemId=initializeMaxItemId(getWritableDatabase());
