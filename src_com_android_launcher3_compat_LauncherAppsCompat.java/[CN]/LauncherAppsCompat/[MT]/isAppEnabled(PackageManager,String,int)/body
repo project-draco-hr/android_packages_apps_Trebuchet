@@ -1,0 +1,9 @@
+{
+  try {
+    ApplicationInfo info=pm.getApplicationInfo(packageName,flags);
+    return info != null && info.enabled;
+  }
+ catch (  NameNotFoundException e) {
+    return false;
+  }
+}
