@@ -5,7 +5,7 @@
   mDragObject.x=coordinates[0];
   mDragObject.y=coordinates[1];
   checkTouchMove(dropTarget);
-  mDistanceSinceScroll+=Math.sqrt(Math.pow(mLastTouch[0] - x,2) + Math.pow(mLastTouch[1] - y,2));
+  mDistanceSinceScroll+=Math.hypot(mLastTouch[0] - x,mLastTouch[1] - y);
   mLastTouch[0]=x;
   mLastTouch[1]=y;
   checkScrollState(x,y);
