@@ -1,0 +1,4 @@
+String packageName
+String resourceName
+IconCache cache
+Context context

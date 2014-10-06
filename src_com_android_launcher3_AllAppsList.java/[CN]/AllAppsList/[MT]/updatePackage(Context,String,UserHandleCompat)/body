@@ -13,9 +13,7 @@
         }
       }
     }
-    int count=matches.size();
-    for (int i=0; i < count; i++) {
-      final LauncherActivityInfoCompat info=matches.get(i);
+    for (    final LauncherActivityInfoCompat info : matches) {
       AppInfo applicationInfo=findApplicationInfoLocked(info.getComponentName().getPackageName(),user,info.getComponentName().getClassName());
       if (applicationInfo == null) {
         add(new AppInfo(context,info,user,mIconCache,null));

@@ -78,6 +78,37 @@ callbacks.bindAppsUpdated(modifiedFinal);
 }
 );
 }
+if (mOp == OP_ADD || mOp == OP_UPDATE) {
+final ArrayList<ShortcutInfo> iconsChanged=new ArrayList<ShortcutInfo>();
+HashSet<String> packageSet=new HashSet<String>(Arrays.asList(packages));
+synchronized (sBgLock) {
+for (ItemInfo info : sBgWorkspaceItems) {
+if (info instanceof ShortcutInfo && mUser.equals(info.user)) {
+ShortcutInfo si=(ShortcutInfo)info;
+if ((si.iconResource != null) && packageSet.contains(si.getTargetComponent().getPackageName())) {
+Bitmap icon=Utilities.createIconBitmap(si.iconResource.packageName,si.iconResource.resourceName,mIconCache,context);
+if (icon != null) {
+  si.setIcon(icon);
+  si.usingFallbackIcon=false;
+  iconsChanged.add(si);
+  updateItemInDatabase(context,si);
+}
+}
+}
+}
+}
+if (!iconsChanged.isEmpty()) {
+mHandler.post(new Runnable(){
+public void run(){
+Callbacks cb=mCallbacks != null ? mCallbacks.get() : null;
+if (callbacks == cb && cb != null) {
+callbacks.bindShortcutsUpdated(iconsChanged);
+}
+}
+}
+);
+}
+}
 final ArrayList<String> removedPackageNames=new ArrayList<String>();
 if (mOp == OP_REMOVE) {
 removedPackageNames.addAll(Arrays.asList(packages));
