@@ -5,6 +5,6 @@
     entry.title=title;
   }
   if (icon != null) {
-    entry.icon=Utilities.createIconBitmap(new BitmapDrawable(mContext.getResources(),icon),mContext);
+    entry.icon=Utilities.createIconBitmap(icon,mContext);
   }
 }

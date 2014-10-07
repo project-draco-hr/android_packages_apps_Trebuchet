@@ -1,5 +1,4 @@
 {
   final Resources resources=context.getResources();
   sIconWidth=sIconHeight=(int)resources.getDimension(R.dimen.app_icon_size);
-  sIconTextureWidth=sIconTextureHeight=sIconWidth;
 }
