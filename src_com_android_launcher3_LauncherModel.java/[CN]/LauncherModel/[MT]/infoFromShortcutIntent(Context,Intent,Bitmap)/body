@@ -15,17 +15,9 @@
   }
  else {
     Parcelable extra=data.getParcelableExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE);
-    if (extra != null && extra instanceof ShortcutIconResource) {
-      try {
-        iconResource=(ShortcutIconResource)extra;
-        final PackageManager packageManager=context.getPackageManager();
-        Resources resources=packageManager.getResourcesForApplication(iconResource.packageName);
-        final int id=resources.getIdentifier(iconResource.resourceName,null,null);
-        icon=Utilities.createIconBitmap(mIconCache.getFullResIcon(resources,id),context);
-      }
- catch (      Exception e) {
-        Log.w(TAG,"Could not load shortcut icon: " + extra);
-      }
+    if (extra instanceof ShortcutIconResource) {
+      iconResource=(ShortcutIconResource)extra;
+      icon=Utilities.createIconBitmap(iconResource.packageName,iconResource.resourceName,mIconCache,context);
     }
   }
   final ShortcutInfo info=new ShortcutInfo();
