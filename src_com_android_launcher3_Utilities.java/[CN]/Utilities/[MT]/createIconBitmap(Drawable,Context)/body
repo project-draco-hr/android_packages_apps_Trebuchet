@@ -28,8 +28,8 @@ synchronized (sCanvas) {
         width=(int)(height * ratio);
       }
     }
-    int textureWidth=sIconTextureWidth;
-    int textureHeight=sIconTextureHeight;
+    int textureWidth=sIconWidth;
+    int textureHeight=sIconHeight;
     final Bitmap bitmap=Bitmap.createBitmap(textureWidth,textureHeight,Bitmap.Config.ARGB_8888);
     final Canvas canvas=sCanvas;
     canvas.setBitmap(bitmap);

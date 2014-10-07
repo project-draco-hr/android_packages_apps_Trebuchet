@@ -13,7 +13,7 @@
       long id=c.getLong(idIndex);
       byte[] data=c.getBlob(iconIndex);
       try {
-        Bitmap bitmap=Utilities.resampleIconBitmap(BitmapFactory.decodeByteArray(data,0,data.length),mContext);
+        Bitmap bitmap=Utilities.createIconBitmap(BitmapFactory.decodeByteArray(data,0,data.length),mContext);
         if (bitmap != null) {
           update.bindLong(1,id);
           data=ItemInfo.flattenBitmap(bitmap);
