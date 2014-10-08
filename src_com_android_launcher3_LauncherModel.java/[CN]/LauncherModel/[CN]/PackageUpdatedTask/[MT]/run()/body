@@ -19,9 +19,10 @@ for (int i=0; i < N; i++) {
 break;
 case OP_REMOVE:
 case OP_UNAVAILABLE:
+boolean clearCache=mOp == OP_REMOVE;
 for (int i=0; i < N; i++) {
 if (DEBUG_LOADERS) Log.d(TAG,"mAllAppsList.removePackage " + packages[i]);
-mBgAllAppsList.removePackage(packages[i],mUser);
+mBgAllAppsList.removePackage(packages[i],mUser,clearCache);
 WidgetPreviewLoader.removePackageFromDb(mApp.getWidgetPreviewCacheDb(),packages[i]);
 }
 break;
@@ -60,7 +61,7 @@ final ArrayList<AppInfo> modifiedFinal=modified;
 for (AppInfo a : modifiedFinal) {
 ArrayList<ItemInfo> infos=getItemInfoForComponentName(a.componentName,mUser);
 for (ItemInfo i : infos) {
-if (isShortcutInfoUpdateable(i)) {
+if (i instanceof ShortcutInfo && isShortcutAppTarget((ShortcutInfo)i)) {
 ShortcutInfo info=(ShortcutInfo)i;
 info.title=a.title.toString();
 info.contentDescription=a.contentDescription;
@@ -88,10 +89,10 @@ ShortcutInfo si=(ShortcutInfo)info;
 if ((si.iconResource != null) && packageSet.contains(si.getTargetComponent().getPackageName())) {
 Bitmap icon=Utilities.createIconBitmap(si.iconResource.packageName,si.iconResource.resourceName,mIconCache,context);
 if (icon != null) {
-  si.setIcon(icon);
-  si.usingFallbackIcon=false;
-  iconsChanged.add(si);
-  updateItemInDatabase(context,si);
+si.setIcon(icon);
+si.usingFallbackIcon=false;
+iconsChanged.add(si);
+updateItemInDatabase(context,si);
 }
 }
 }
@@ -110,17 +111,22 @@ callbacks.bindShortcutsUpdated(iconsChanged);
 }
 }
 final ArrayList<String> removedPackageNames=new ArrayList<String>();
-if (mOp == OP_REMOVE) {
+if (mOp == OP_REMOVE || mOp == OP_UNAVAILABLE) {
 removedPackageNames.addAll(Arrays.asList(packages));
 }
  else if (mOp == OP_UPDATE) {
-final PackageManager pm=context.getPackageManager();
 for (int i=0; i < N; i++) {
 if (isPackageDisabled(context,packages[i],mUser)) {
 removedPackageNames.add(packages[i]);
 }
 }
 }
+if (!removedPackageNames.isEmpty() || !removedApps.isEmpty()) {
+final int removeReason;
+if (mOp == OP_UNAVAILABLE) {
+removeReason=ShortcutInfo.FLAG_DISABLED_NOT_AVAILABLE;
+}
+ else {
 for (String pn : removedPackageNames) {
 deletePackageFromDatabase(context,pn,mUser);
 }
@@ -128,7 +134,8 @@ for (AppInfo a : removedApps) {
 ArrayList<ItemInfo> infos=getItemInfoForComponentName(a.componentName,mUser);
 deleteItemsFromDatabase(context,infos);
 }
-if (!removedPackageNames.isEmpty() || !removedApps.isEmpty()) {
+removeReason=0;
+}
 String spKey=LauncherAppState.getSharedPreferencesKey();
 SharedPreferences sp=context.getSharedPreferences(spKey,Context.MODE_PRIVATE);
 InstallShortcutReceiver.removeFromInstallQueue(sp,removedPackageNames);
@@ -136,7 +143,7 @@ mHandler.post(new Runnable(){
 public void run(){
 Callbacks cb=mCallbacks != null ? mCallbacks.get() : null;
 if (callbacks == cb && cb != null) {
-callbacks.bindComponentsRemoved(removedPackageNames,removedApps,mUser);
+callbacks.bindComponentsRemoved(removedPackageNames,removedApps,mUser,removeReason);
 }
 }
 }

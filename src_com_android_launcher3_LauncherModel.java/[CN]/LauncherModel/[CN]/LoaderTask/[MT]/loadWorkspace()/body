@@ -75,96 +75,101 @@ case LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT:
         long serialNumber=c.getInt(profileIdIndex);
       user=mUserManager.getUserForSerialNumber(serialNumber);
     int promiseType=c.getInt(restoredIndex);
-  if (user == null) {
-    itemsToRemove.add(id);
-    continue;
-  }
+  int disabledState=0;
+if (user == null) {
+  itemsToRemove.add(id);
+  continue;
+}
 try {
-  intent=Intent.parseUri(intentDescription,0);
-  ComponentName cn=intent.getComponent();
-  if (cn != null && cn.getPackageName() != null) {
-    boolean validPkg=launcherApps.isPackageEnabledForProfile(cn.getPackageName(),user);
-    boolean validComponent=validPkg && launcherApps.isActivityEnabledForProfile(cn,user);
-    if (validComponent) {
-      if (restored) {
-        restoredRows.add(id);
-        restored=false;
-      }
+intent=Intent.parseUri(intentDescription,0);
+ComponentName cn=intent.getComponent();
+if (cn != null && cn.getPackageName() != null) {
+  boolean validPkg=launcherApps.isPackageEnabledForProfile(cn.getPackageName(),user);
+  boolean validComponent=validPkg && launcherApps.isActivityEnabledForProfile(cn,user);
+  if (validComponent) {
+    if (restored) {
+      restoredRows.add(id);
+      restored=false;
     }
- else     if (validPkg) {
-      intent=null;
-      if ((promiseType & ShortcutInfo.FLAG_AUTOINTALL_ICON) != 0) {
-        intent=manager.getLaunchIntentForPackage(cn.getPackageName());
-        if (intent != null) {
-          ContentValues values=new ContentValues();
-          values.put(LauncherSettings.Favorites.INTENT,intent.toUri(0));
-          String where=BaseColumns._ID + "= ?";
-          String[] args={Long.toString(id)};
-          contentResolver.update(contentUri,values,where,args);
-        }
-      }
-      if (intent == null) {
-        Launcher.addDumpLog(TAG,"Invalid component removed: " + cn,true);
-        itemsToRemove.add(id);
-        continue;
-      }
- else {
-        restoredRows.add(id);
-        restored=false;
-      }
-    }
- else     if (restored) {
-      Launcher.addDumpLog(TAG,"package not yet restored: " + cn,true);
-      if ((promiseType & ShortcutInfo.FLAG_RESTORE_STARTED) != 0) {
-      }
- else       if (installingPkgs.contains(cn.getPackageName())) {
-        promiseType|=ShortcutInfo.FLAG_RESTORE_STARTED;
+  }
+ else   if (validPkg) {
+    intent=null;
+    if ((promiseType & ShortcutInfo.FLAG_AUTOINTALL_ICON) != 0) {
+      intent=manager.getLaunchIntentForPackage(cn.getPackageName());
+      if (intent != null) {
         ContentValues values=new ContentValues();
-        values.put(LauncherSettings.Favorites.RESTORED,promiseType);
+        values.put(LauncherSettings.Favorites.INTENT,intent.toUri(0));
         String where=BaseColumns._ID + "= ?";
         String[] args={Long.toString(id)};
         contentResolver.update(contentUri,values,where,args);
       }
- else       if (REMOVE_UNRESTORED_ICONS) {
-        Launcher.addDumpLog(TAG,"Unrestored package removed: " + cn,true);
-        itemsToRemove.add(id);
-        continue;
-      }
     }
- else     if (isSdCardReady) {
-      Launcher.addDumpLog(TAG,"Invalid package removed: " + cn,true);
+    if (intent == null) {
+      Launcher.addDumpLog(TAG,"Invalid component removed: " + cn,true);
       itemsToRemove.add(id);
       continue;
     }
  else {
-      Launcher.addDumpLog(TAG,"Invalid package: " + cn + " (check again later)",true);
-      HashSet<String> pkgs=sPendingPackages.get(user);
-      if (pkgs == null) {
-        pkgs=new HashSet<String>();
-        sPendingPackages.put(user,pkgs);
-      }
-      pkgs.add(cn.getPackageName());
-      allowMissingTarget=true;
+      restoredRows.add(id);
+      restored=false;
     }
   }
- else   if (cn == null) {
-    restoredRows.add(id);
-    restored=false;
+ else   if (restored) {
+    Launcher.addDumpLog(TAG,"package not yet restored: " + cn,true);
+    if ((promiseType & ShortcutInfo.FLAG_RESTORE_STARTED) != 0) {
+    }
+ else     if (installingPkgs.contains(cn.getPackageName())) {
+      promiseType|=ShortcutInfo.FLAG_RESTORE_STARTED;
+      ContentValues values=new ContentValues();
+      values.put(LauncherSettings.Favorites.RESTORED,promiseType);
+      String where=BaseColumns._ID + "= ?";
+      String[] args={Long.toString(id)};
+      contentResolver.update(contentUri,values,where,args);
+    }
+ else     if (REMOVE_UNRESTORED_ICONS) {
+      Launcher.addDumpLog(TAG,"Unrestored package removed: " + cn,true);
+      itemsToRemove.add(id);
+      continue;
+    }
+  }
+ else   if (launcherApps.isAppEnabled(manager,cn.getPackageName(),PackageManager.GET_UNINSTALLED_PACKAGES)) {
+    allowMissingTarget=true;
+    disabledState=ShortcutInfo.FLAG_DISABLED_NOT_AVAILABLE;
+  }
+ else   if (!isSdCardReady) {
+    Launcher.addDumpLog(TAG,"Invalid package: " + cn + " (check again later)",true);
+    HashSet<String> pkgs=sPendingPackages.get(user);
+    if (pkgs == null) {
+      pkgs=new HashSet<String>();
+      sPendingPackages.put(user,pkgs);
+    }
+    pkgs.add(cn.getPackageName());
+    allowMissingTarget=true;
+  }
+ else {
+    Launcher.addDumpLog(TAG,"Invalid package removed: " + cn,true);
+    itemsToRemove.add(id);
+    continue;
   }
 }
+ else if (cn == null) {
+  restoredRows.add(id);
+  restored=false;
+}
+}
  catch (URISyntaxException e) {
-  Launcher.addDumpLog(TAG,"Invalid uri: " + intentDescription,true);
-  continue;
+Launcher.addDumpLog(TAG,"Invalid uri: " + intentDescription,true);
+continue;
 }
 if (restored) {
 if (user.equals(UserHandleCompat.myUserHandle())) {
-  Launcher.addDumpLog(TAG,"constructing info for partially restored package",true);
-  info=getRestoredItemInfo(c,titleIndex,intent,promiseType);
-  intent=getRestoredItemIntent(c,context,intent);
+Launcher.addDumpLog(TAG,"constructing info for partially restored package",true);
+info=getRestoredItemInfo(c,titleIndex,intent,promiseType);
+intent=getRestoredItemIntent(c,context,intent);
 }
  else {
-  itemsToRemove.add(id);
-  continue;
+itemsToRemove.add(id);
+continue;
 }
 }
  else if (itemType == LauncherSettings.Favorites.ITEM_TYPE_APPLICATION) {
@@ -173,7 +178,7 @@ info=getShortcutInfo(manager,intent,user,context,c,iconIndex,titleIndex,mLabelCa
  else {
 info=getShortcutInfo(c,context,iconTypeIndex,iconPackageIndex,iconResourceIndex,iconIndex,titleIndex);
 if (intent.getAction() != null && intent.getCategories() != null && intent.getAction().equals(Intent.ACTION_MAIN) && intent.getCategories().contains(Intent.CATEGORY_LAUNCHER)) {
-  intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
+intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
 }
 }
 if (info != null) {
@@ -187,11 +192,14 @@ info.cellY=c.getInt(cellYIndex);
 info.spanX=1;
 info.spanY=1;
 info.intent.putExtra(ItemInfo.EXTRA_PROFILE,serialNumber);
-info.isDisabled=isSafeMode && !Utilities.isSystemApp(context,intent);
+info.isDisabled=disabledState;
+if (isSafeMode && !Utilities.isSystemApp(context,intent)) {
+info.isDisabled|=ShortcutInfo.FLAG_DISABLED_SAFEMODE;
+}
 deleteOnInvalidPlacement.set(false);
 if (!checkItemPlacement(occupied,info,deleteOnInvalidPlacement)) {
 if (deleteOnInvalidPlacement.get()) {
-  itemsToRemove.add(id);
+itemsToRemove.add(id);
 }
 break;
 }

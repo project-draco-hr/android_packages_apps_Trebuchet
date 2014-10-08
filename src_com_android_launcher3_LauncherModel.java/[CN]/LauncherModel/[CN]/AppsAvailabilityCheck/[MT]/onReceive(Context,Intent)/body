@@ -1,18 +1,31 @@
 {
 synchronized (sBgLock) {
     final LauncherAppsCompat launcherApps=LauncherAppsCompat.getInstance(mApp.getContext());
-    ArrayList<String> packagesRemoved;
+    final PackageManager manager=context.getPackageManager();
+    final ArrayList<String> packagesRemoved=new ArrayList<String>();
+    final ArrayList<String> packagesUnavailable=new ArrayList<String>();
     for (    Entry<UserHandleCompat,HashSet<String>> entry : sPendingPackages.entrySet()) {
       UserHandleCompat user=entry.getKey();
-      packagesRemoved=new ArrayList<String>();
+      packagesRemoved.clear();
+      packagesUnavailable.clear();
       for (      String pkg : entry.getValue()) {
         if (!launcherApps.isPackageEnabledForProfile(pkg,user)) {
-          Launcher.addDumpLog(TAG,"Package not found: " + pkg,true);
-          packagesRemoved.add(pkg);
+          boolean packageOnSdcard=launcherApps.isAppEnabled(manager,pkg,PackageManager.GET_UNINSTALLED_PACKAGES);
+          if (packageOnSdcard) {
+            Launcher.addDumpLog(TAG,"Package found on sd-card: " + pkg,true);
+            packagesUnavailable.add(pkg);
+          }
+ else {
+            Launcher.addDumpLog(TAG,"Package not found: " + pkg,true);
+            packagesRemoved.add(pkg);
+          }
         }
       }
       if (!packagesRemoved.isEmpty()) {
         enqueuePackageUpdated(new PackageUpdatedTask(PackageUpdatedTask.OP_REMOVE,packagesRemoved.toArray(new String[packagesRemoved.size()]),user));
+      }
+      if (!packagesUnavailable.isEmpty()) {
+        enqueuePackageUpdated(new PackageUpdatedTask(PackageUpdatedTask.OP_UNAVAILABLE,packagesUnavailable.toArray(new String[packagesUnavailable.size()]),user));
       }
     }
     sPendingPackages.clear();

@@ -5,6 +5,14 @@
     throw new IllegalArgumentException("Input must be a Shortcut");
   }
   final ShortcutInfo shortcut=(ShortcutInfo)tag;
+  if (shortcut.isDisabled != 0) {
+    int error=R.string.activity_not_available;
+    if ((shortcut.isDisabled & ShortcutInfo.FLAG_DISABLED_SAFEMODE) != 0) {
+      error=R.string.safemode_shortcut_error;
+    }
+    Toast.makeText(this,error,Toast.LENGTH_SHORT).show();
+    return;
+  }
   final Intent intent=shortcut.intent;
   if (intent.getComponent() != null) {
     final String shortcutClass=intent.getComponent().getClassName();

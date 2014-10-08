@@ -1,0 +1,26 @@
+{
+  Runnable r=new Runnable(){
+    public void run(){
+      bindComponentsRemoved(packageNames,appInfos,user,reason);
+    }
+  }
+;
+  if (waitUntilResume(r)) {
+    return;
+  }
+  if (reason == 0) {
+    if (!packageNames.isEmpty()) {
+      mWorkspace.removeItemsByPackageName(packageNames,user);
+    }
+    if (!appInfos.isEmpty()) {
+      mWorkspace.removeItemsByApplicationInfo(appInfos,user);
+    }
+  }
+ else {
+    mWorkspace.disableShortcutsByPackageName(packageNames,user,reason);
+  }
+  mDragController.onAppsRemoved(packageNames,appInfos);
+  if (!LauncherAppState.isDisableAllApps() && mAppsCustomizeContent != null) {
+    mAppsCustomizeContent.removeApps(appInfos);
+  }
+}
