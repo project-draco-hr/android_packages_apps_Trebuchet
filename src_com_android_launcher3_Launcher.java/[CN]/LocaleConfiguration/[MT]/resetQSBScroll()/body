@@ -1,4 +1,0 @@
-{
-  mSearchDropTargetBar.animate().translationY(0).start();
-  getQsbBar().animate().translationY(0).start();
-}

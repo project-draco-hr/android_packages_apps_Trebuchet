@@ -25,4 +25,7 @@
       }
     }
   }
+  if (mLauncherCallbacks != null) {
+    mLauncherCallbacks.onClickFolderIcon(v);
+  }
 }

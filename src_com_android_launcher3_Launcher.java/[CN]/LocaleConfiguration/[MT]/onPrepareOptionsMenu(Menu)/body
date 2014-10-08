@@ -10,5 +10,8 @@
       showWorkspace(true);
     }
   }
+  if (mLauncherCallbacks != null) {
+    return mLauncherCallbacks.onPrepareOptionsMenu(menu);
+  }
   return false;
 }

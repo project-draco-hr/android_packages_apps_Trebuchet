@@ -1,3 +1,6 @@
 {
   startAppShortcutOrInfoActivity(v);
+  if (mLauncherCallbacks != null) {
+    mLauncherCallbacks.onClickPagedViewIcon(v);
+  }
 }

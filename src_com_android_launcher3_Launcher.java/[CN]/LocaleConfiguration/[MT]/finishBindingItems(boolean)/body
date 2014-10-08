@@ -32,4 +32,7 @@
     mIntentsOnWorkspaceFromUpgradePath=mWorkspace.getUniqueComponents(true,null);
   }
   PackageInstallerCompat.getInstance(this).onFinishBind();
+  if (mLauncherCallbacks != null) {
+    mLauncherCallbacks.finishBindingItems(upgradePath);
+  }
 }

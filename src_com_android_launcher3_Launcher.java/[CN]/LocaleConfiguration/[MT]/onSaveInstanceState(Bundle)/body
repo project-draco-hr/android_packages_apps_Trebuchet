@@ -29,4 +29,7 @@
     outState.putInt("apps_customize_currentIndex",currentIndex);
   }
   outState.putSerializable(RUNTIME_STATE_VIEW_IDS,mItemIdToViewId);
+  if (mLauncherCallbacks != null) {
+    mLauncherCallbacks.onSaveInstanceState(outState);
+  }
 }

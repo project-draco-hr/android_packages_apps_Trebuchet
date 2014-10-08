@@ -1,4 +1,7 @@
 {
   super.onWindowFocusChanged(hasFocus);
   mHasFocus=hasFocus;
+  if (mLauncherCallbacks != null) {
+    mLauncherCallbacks.onWindowFocusChanged(hasFocus);
+  }
 }
