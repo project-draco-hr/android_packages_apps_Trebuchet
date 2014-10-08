@@ -1,4 +1,4 @@
 {
   mLauncher=launcher;
-  mInflater=LayoutInflater.from(new ContextThemeWrapper(mLauncher,android.R.style.Theme_DeviceDefault));
+  mInflater=LayoutInflater.from(mLauncher);
 }
