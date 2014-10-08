@@ -1,9 +1,3 @@
 {
-  try {
-    PackageInfo info=mPm.getPackageInfo(packageName,0);
-    return info != null && info.applicationInfo.enabled;
-  }
- catch (  NameNotFoundException e) {
-    return false;
-  }
+  return isAppEnabled(mPm,packageName,0);
 }

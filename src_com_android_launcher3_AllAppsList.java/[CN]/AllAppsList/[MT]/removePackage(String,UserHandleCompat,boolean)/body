@@ -8,5 +8,7 @@
       data.remove(i);
     }
   }
-  mIconCache.remove(packageName,user);
+  if (clearCache) {
+    mIconCache.remove(packageName,user);
+  }
 }

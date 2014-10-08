@@ -40,7 +40,7 @@
     }
   }
  else   if (Intent.ACTION_EXTERNAL_APPLICATIONS_UNAVAILABLE.equals(action)) {
-    final boolean replacing=intent.getBooleanExtra(Intent.EXTRA_REPLACING,Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT);
+    final boolean replacing=intent.getBooleanExtra(Intent.EXTRA_REPLACING,false);
     String[] packages=intent.getStringArrayExtra(Intent.EXTRA_CHANGED_PACKAGE_LIST);
     for (    OnAppsChangedCallbackCompat callback : getCallbacks()) {
       callback.onPackagesUnavailable(packages,user,replacing);
