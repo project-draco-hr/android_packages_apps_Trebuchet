@@ -1,17 +1,21 @@
 {
-  if (mDrawable != null) {
+  if (mCenterDrawable == null) {
+    return;
+  }
+  if (mTopCornerDrawable == null) {
     if (mDrawableSizeChanged) {
-      int maxSize=LauncherAppState.getInstance().getDynamicGrid().getDeviceProfile().iconSizePx + 2 * mDrawable.getOutset();
+      int outset=(mCenterDrawable instanceof PreloadIconDrawable) ? ((PreloadIconDrawable)mCenterDrawable).getOutset() : 0;
+      int maxSize=LauncherAppState.getInstance().getDynamicGrid().getDeviceProfile().iconSizePx + 2 * outset;
       int size=Math.min(maxSize,Math.min(getWidth() - getPaddingLeft() - getPaddingRight(),getHeight() - getPaddingTop() - getPaddingBottom()));
       mRect.set(0,0,size,size);
-      mRect.inset(mDrawable.getOutset(),mDrawable.getOutset());
+      mRect.inset(outset,outset);
       mRect.offsetTo((getWidth() - mRect.width()) / 2,(getHeight() - mRect.height()) / 2);
-      mDrawable.setBounds(mRect);
+      mCenterDrawable.setBounds(mRect);
       mDrawableSizeChanged=false;
     }
-    mDrawable.draw(canvas);
+    mCenterDrawable.draw(canvas);
   }
- else   if ((mCenterDrawable != null) && (mTopCornerDrawable != null)) {
+ else {
     if (mDrawableSizeChanged) {
       DeviceProfile grid=getDeviceProfile();
       int iconSize=grid.iconSizePx;

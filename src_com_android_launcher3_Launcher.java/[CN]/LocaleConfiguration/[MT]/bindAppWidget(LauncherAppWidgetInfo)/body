@@ -14,7 +14,7 @@
   }
   final Workspace workspace=mWorkspace;
   AppWidgetProviderInfo appWidgetInfo;
-  if (((item.restoreStatus & LauncherAppWidgetInfo.FLAG_PROVIDER_NOT_READY) == 0) && ((item.restoreStatus & LauncherAppWidgetInfo.FLAG_ID_NOT_VALID) != 0)) {
+  if (!mIsSafeModeEnabled && ((item.restoreStatus & LauncherAppWidgetInfo.FLAG_PROVIDER_NOT_READY) == 0) && ((item.restoreStatus & LauncherAppWidgetInfo.FLAG_ID_NOT_VALID) != 0)) {
     appWidgetInfo=mModel.findAppWidgetProviderInfoWithComponent(this,item.providerName);
     if (appWidgetInfo == null) {
       if (DEBUG_WIDGETS) {
@@ -43,7 +43,7 @@
     item.restoreStatus=(appWidgetInfo.configure == null) ? LauncherAppWidgetInfo.RESTORE_COMPLETED : LauncherAppWidgetInfo.FLAG_UI_NOT_READY;
     LauncherModel.updateItemInDatabase(this,item);
   }
-  if (item.restoreStatus == LauncherAppWidgetInfo.RESTORE_COMPLETED) {
+  if (!mIsSafeModeEnabled && item.restoreStatus == LauncherAppWidgetInfo.RESTORE_COMPLETED) {
     final int appWidgetId=item.appWidgetId;
     appWidgetInfo=mAppWidgetManager.getAppWidgetInfo(appWidgetId);
     if (DEBUG_WIDGETS) {
@@ -53,7 +53,7 @@
   }
  else {
     appWidgetInfo=null;
-    PendingAppWidgetHostView view=new PendingAppWidgetHostView(this,item);
+    PendingAppWidgetHostView view=new PendingAppWidgetHostView(this,item,mIsSafeModeEnabled);
     view.updateIcon(mIconCache);
     item.hostView=view;
     item.hostView.updateAppWidget(null);
