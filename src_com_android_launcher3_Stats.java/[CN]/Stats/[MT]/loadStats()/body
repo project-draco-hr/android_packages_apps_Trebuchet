@@ -3,7 +3,7 @@
   mHistogram=new ArrayList<Integer>(INITIAL_STATS_SIZE);
   DataInputStream stats=null;
   try {
-    stats=new DataInputStream(mLauncher.openFileInput(STATS_FILE_NAME));
+    stats=new DataInputStream(mLauncher.openFileInput(LauncherFiles.STATS_LOG));
     final int version=stats.readInt();
     if (version == STATS_VERSION) {
       final int N=stats.readInt();

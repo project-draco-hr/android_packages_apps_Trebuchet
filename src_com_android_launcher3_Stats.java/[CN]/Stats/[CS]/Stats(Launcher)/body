@@ -4,7 +4,7 @@
   loadStats();
   if (LOCAL_LAUNCH_LOG) {
     try {
-      mLog=new DataOutputStream(mLauncher.openFileOutput(LOG_FILE_NAME,Context.MODE_APPEND));
+      mLog=new DataOutputStream(mLauncher.openFileOutput(LauncherFiles.LAUNCHES_LOG,Context.MODE_APPEND));
       mLog.writeInt(LOG_TAG_VERSION);
       mLog.writeInt(LOG_VERSION);
     }
