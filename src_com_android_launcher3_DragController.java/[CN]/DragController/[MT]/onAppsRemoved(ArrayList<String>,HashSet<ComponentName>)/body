@@ -3,10 +3,10 @@
     Object rawDragInfo=mDragObject.dragInfo;
     if (rawDragInfo instanceof ShortcutInfo) {
       ShortcutInfo dragInfo=(ShortcutInfo)rawDragInfo;
-      for (      AppInfo info : appInfos) {
-        if (dragInfo != null && dragInfo.intent != null && info != null) {
+      for (      ComponentName componentName : cns) {
+        if (dragInfo != null && dragInfo.intent != null) {
           ComponentName cn=dragInfo.intent.getComponent();
-          boolean isSameComponent=cn != null && (cn.equals(info.componentName) || packageNames.contains(cn.getPackageName()));
+          boolean isSameComponent=cn != null && (cn.equals(componentName) || packageNames.contains(cn.getPackageName()));
           if (isSameComponent) {
             cancelDrag();
             return;

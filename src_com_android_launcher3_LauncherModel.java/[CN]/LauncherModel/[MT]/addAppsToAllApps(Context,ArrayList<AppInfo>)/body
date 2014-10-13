@@ -6,29 +6,12 @@
   if (allAppsApps.isEmpty()) {
     return;
   }
-  final ArrayList<AppInfo> restoredAppsFinal=new ArrayList<AppInfo>();
-  Iterator<AppInfo> iter=allAppsApps.iterator();
-  while (iter.hasNext()) {
-    ItemInfo a=iter.next();
-    if (LauncherModel.appWasPromise(ctx,a.getIntent(),a.user)) {
-      restoredAppsFinal.add((AppInfo)a);
-    }
-  }
   Runnable r=new Runnable(){
     public void run(){
       runOnMainThread(new Runnable(){
         public void run(){
           Callbacks cb=mCallbacks != null ? mCallbacks.get() : null;
           if (callbacks == cb && cb != null) {
-            if (!restoredAppsFinal.isEmpty()) {
-              for (              AppInfo info : restoredAppsFinal) {
-                final Intent intent=info.getIntent();
-                if (intent != null) {
-                  mIconCache.deletePreloadedIcon(intent.getComponent(),info.user);
-                }
-              }
-              callbacks.bindAppsUpdated(restoredAppsFinal);
-            }
             callbacks.bindAppsAdded(null,null,null,allAppsApps);
           }
         }

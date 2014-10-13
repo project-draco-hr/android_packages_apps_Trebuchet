@@ -1,2 +1,2 @@
 ArrayList<String> packageNames
-ArrayList<AppInfo> appInfos
+HashSet<ComponentName> cns

@@ -3,9 +3,10 @@
   mapOverItems(MAP_RECURSE,new ItemOperator(){
     @Override public boolean evaluate(    ItemInfo info,    View v,    View parent){
       if (info instanceof ShortcutInfo && v instanceof BubbleTextView && updates.contains(info)) {
-        ShortcutInfo shortcutInfo=(ShortcutInfo)info;
+        ShortcutInfo si=(ShortcutInfo)info;
         BubbleTextView shortcut=(BubbleTextView)v;
-        shortcut.applyFromShortcutInfo(shortcutInfo,mIconCache,true,false);
+        boolean oldPromiseState=shortcut.getCompoundDrawables()[1] instanceof PreloadIconDrawable;
+        shortcut.applyFromShortcutInfo(si,mIconCache,true,si.isPromise() != oldPromiseState);
         if (parent != null) {
           parent.invalidate();
         }

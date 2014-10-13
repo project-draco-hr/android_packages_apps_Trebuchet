@@ -8,9 +8,6 @@
   if (waitUntilResume(r)) {
     return;
   }
-  if (mWorkspace != null) {
-    mWorkspace.updateShortcutsAndWidgets(apps);
-  }
   if (!LauncherAppState.isDisableAllApps() && mAppsCustomizeContent != null) {
     mAppsCustomizeContent.updateApps(apps);
   }
