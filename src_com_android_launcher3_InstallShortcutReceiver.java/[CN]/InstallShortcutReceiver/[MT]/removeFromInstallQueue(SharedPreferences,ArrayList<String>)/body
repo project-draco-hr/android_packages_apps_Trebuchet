@@ -17,6 +17,9 @@ synchronized (sLock) {
           Intent launchIntent=Intent.parseUri(object.getString(LAUNCH_INTENT_KEY),0);
           String pn=launchIntent.getPackage();
           if (pn == null) {
+            if (launchIntent.getComponent() == null) {
+              continue;
+            }
             pn=launchIntent.getComponent().getPackageName();
           }
           if (packageNames.contains(pn)) {

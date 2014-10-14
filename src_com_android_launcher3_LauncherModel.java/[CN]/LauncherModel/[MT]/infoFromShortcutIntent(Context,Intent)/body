@@ -23,13 +23,8 @@
   final ShortcutInfo info=new ShortcutInfo();
   info.user=UserHandleCompat.myUserHandle();
   if (icon == null) {
-    if (fallbackIcon != null) {
-      icon=fallbackIcon;
-    }
- else {
-      icon=mIconCache.getDefaultIcon(info.user);
-      info.usingFallbackIcon=true;
-    }
+    icon=mIconCache.getDefaultIcon(info.user);
+    info.usingFallbackIcon=true;
   }
   info.setIcon(icon);
   info.title=name;

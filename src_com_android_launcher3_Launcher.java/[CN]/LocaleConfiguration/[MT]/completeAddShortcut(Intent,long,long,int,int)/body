@@ -3,7 +3,7 @@
   int[] touchXY=mPendingAddInfo.dropPos;
   CellLayout layout=getCellLayout(container,screenId);
   boolean foundCellSpan=false;
-  ShortcutInfo info=mModel.infoFromShortcutIntent(this,data,null);
+  ShortcutInfo info=mModel.infoFromShortcutIntent(this,data);
   if (info == null) {
     return;
   }
