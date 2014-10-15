@@ -1,7 +1,7 @@
 {
   Set<String> strings=sharedPrefs.getStringSet(key,null);
   if (strings == null) {
-    strings=new HashSet<String>(0);
+    strings=new HashSet<String>(1);
   }
  else {
     strings=new HashSet<String>(strings);
