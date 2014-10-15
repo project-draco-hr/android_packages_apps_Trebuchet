@@ -3,6 +3,9 @@
     StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().detectDiskReads().detectDiskWrites().detectNetwork().penaltyLog().build());
     StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder().detectLeakedSqlLiteObjects().detectLeakedClosableObjects().penaltyLog().penaltyDeath().build());
   }
+  if (mLauncherCallbacks != null) {
+    mLauncherCallbacks.preOnCreate();
+  }
   super.onCreate(savedInstanceState);
   LauncherAppState.setApplicationContext(getApplicationContext());
   LauncherAppState app=LauncherAppState.getInstance();
@@ -62,5 +65,8 @@
  else {
     showFirstRunActivity();
     showFirstRunClings();
+  }
+  if (mLauncherCallbacks != null) {
+    mLauncherCallbacks.onCreate(savedInstanceState);
   }
 }

@@ -8,4 +8,7 @@
   if (mWorkspace.getCustomContentCallbacks() != null) {
     mWorkspace.getCustomContentCallbacks().onHide();
   }
+  if (mLauncherCallbacks != null) {
+    mLauncherCallbacks.onPause();
+  }
 }

@@ -1,4 +1,7 @@
 {
+  if (mLauncherCallbacks != null && mLauncherCallbacks.handleBackPressed()) {
+    return;
+  }
   if (isAllAppsVisible()) {
     if (mAppsCustomizeContent.getContentType() == AppsCustomizePagedView.ContentType.Applications) {
       showWorkspace(true);

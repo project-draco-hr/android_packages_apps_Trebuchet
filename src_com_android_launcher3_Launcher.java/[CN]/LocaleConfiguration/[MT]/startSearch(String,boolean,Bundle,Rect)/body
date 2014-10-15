@@ -1,4 +1,7 @@
 {
+  if (mLauncherCallbacks != null && mLauncherCallbacks.providesSearch()) {
+    return mLauncherCallbacks.startSearch(initialQuery,selectInitialQuery,appSearchData,sourceBounds);
+  }
   startGlobalSearch(initialQuery,selectInitialQuery,appSearchData,sourceBounds);
   return false;
 }

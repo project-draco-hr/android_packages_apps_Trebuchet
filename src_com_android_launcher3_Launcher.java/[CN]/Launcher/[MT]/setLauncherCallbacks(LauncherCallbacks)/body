@@ -1,0 +1,4 @@
+{
+  mLauncherCallbacks=callbacks;
+  return true;
+}

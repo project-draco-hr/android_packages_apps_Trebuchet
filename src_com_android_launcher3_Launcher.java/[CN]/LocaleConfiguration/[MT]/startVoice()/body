@@ -1,4 +1,8 @@
 {
+  if (mLauncherCallbacks != null && mLauncherCallbacks.providesSearch()) {
+    mLauncherCallbacks.startVoice();
+    return;
+  }
   try {
     final SearchManager searchManager=(SearchManager)getSystemService(Context.SEARCH_SERVICE);
     ComponentName activityName=searchManager.getGlobalSearchActivity();

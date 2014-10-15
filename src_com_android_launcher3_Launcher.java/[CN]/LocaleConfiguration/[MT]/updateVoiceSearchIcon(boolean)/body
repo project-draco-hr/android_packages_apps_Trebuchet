@@ -1,4 +1,7 @@
 {
+  if (mLauncherCallbacks != null && mLauncherCallbacks.providesSearch()) {
+    return true;
+  }
   final View voiceButtonContainer=findViewById(R.id.voice_button_container);
   final View voiceButton=findViewById(R.id.voice_button);
   final SearchManager searchManager=(SearchManager)getSystemService(Context.SEARCH_SERVICE);

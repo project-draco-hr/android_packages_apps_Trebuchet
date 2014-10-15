@@ -6,4 +6,7 @@
  else {
     showAllApps(true,AppsCustomizePagedView.ContentType.Applications,false);
   }
+  if (mLauncherCallbacks != null) {
+    mLauncherCallbacks.onClickAllAppsButton(v);
+  }
 }
