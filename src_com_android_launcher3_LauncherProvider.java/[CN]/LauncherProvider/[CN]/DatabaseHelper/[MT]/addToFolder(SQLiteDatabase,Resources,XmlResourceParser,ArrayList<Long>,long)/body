@@ -26,7 +26,10 @@
       }
     }
  else     if (TAG_INCLUDE.equals(tag) && folderId >= 0) {
-      addToFolder(db,res,parser,folderItems,folderId);
+      final int resId=getAttributeResourceValue(parser,ATTR_FOLDER_ITEMS,0);
+      XmlResourceParser itemsParser=res.getXml(resId);
+      beginDocument(itemsParser,TAG_FOLDER_ITEMS);
+      addToFolder(db,res,itemsParser,folderItems,folderId);
     }
  else {
       throw new RuntimeException("Folders can contain only shortcuts");
