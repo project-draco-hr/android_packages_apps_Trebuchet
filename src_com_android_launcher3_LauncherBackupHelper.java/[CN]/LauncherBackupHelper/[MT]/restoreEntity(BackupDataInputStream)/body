@@ -1,4 +1,7 @@
 {
+  if (!restoreSuccessful) {
+    return;
+  }
   int dataSize=data.size();
   if (mBuffer.length < dataSize) {
     mBuffer=new byte[dataSize];
@@ -7,6 +10,23 @@
     int bytesRead=data.read(mBuffer,0,dataSize);
     if (DEBUG)     Log.d(TAG,"read " + bytesRead + " of "+ dataSize+ " available");
     String backupKey=data.getKey();
+    if (JOURNAL_KEY.equals(backupKey)) {
+      if (VERBOSE)       Log.v(TAG,"Journal entry restored");
+      if (!mKeys.isEmpty()) {
+        Log.wtf(TAG,keyToBackupKey(mKeys.get(0)) + " received after " + JOURNAL_KEY);
+        restoreSuccessful=false;
+        return;
+      }
+      Journal journal=new Journal();
+      MessageNano.mergeFrom(journal,readCheckedBytes(mBuffer,dataSize));
+      applyJournal(journal);
+      restoreSuccessful=isBackupCompatible(journal);
+      return;
+    }
+    if (!mExistingKeys.isEmpty() && !mExistingKeys.contains(backupKey)) {
+      if (DEBUG)       Log.e(TAG,"Ignoring key not present in the backup state " + backupKey);
+      return;
+    }
     Key key=backupKeyToKey(backupKey);
     mKeys.add(key);
 switch (key.type) {
