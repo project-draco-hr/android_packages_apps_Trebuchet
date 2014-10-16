@@ -1,0 +1,7 @@
+{
+  if (mLauncherOverlay.isOverlayPanelShowing()) {
+    mLauncherOverlay.hideOverlayPanel();
+    return true;
+  }
+  return false;
+}

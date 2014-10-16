@@ -1,0 +1,8 @@
+{
+  if (mLauncherOverlayCallbacks.canEnterFullImmersion()) {
+    mShowOverlayFeedback=true;
+    updatePanelOffset(0);
+    mSearchOverlay.setVisibility(View.VISIBLE);
+    mSearchOverlay.setLayerType(View.LAYER_TYPE_HARDWARE,null);
+  }
+}

@@ -1,6 +1,19 @@
 {
-  boolean shouldOverScroll=(amount < 0 && (!hasCustomContent() || isLayoutRtl())) || (amount > 0 && (!hasCustomContent() || !isLayoutRtl()));
-  if (shouldOverScroll) {
+  boolean isRtl=isLayoutRtl();
+  boolean shouldOverScroll=(amount <= 0 && (!hasCustomContent() || isRtl)) || (amount >= 0 && (!hasCustomContent() || !isRtl));
+  boolean shouldScrollOverlay=(amount <= 0 && mLauncherOverlay != null && !isRtl) || (amount >= 0 && mLauncherOverlay != null && isRtl);
+  if (shouldScrollOverlay) {
+    if (!mStartedSendingScrollEvents && mScrollInteractionBegan) {
+      mStartedSendingScrollEvents=true;
+      mLauncherOverlay.onScrollInteractionBegin();
+      mShouldSendPageSettled=true;
+    }
+    int screenSize=getViewportWidth();
+    float f=(amount / screenSize);
+    int progress=(int)Math.abs((f * 100));
+    mLauncherOverlay.onScrollChange(progress,isRtl);
+  }
+ else   if (shouldOverScroll) {
     dampedOverScroll(amount);
     mOverScrollEffect=acceleratedOverFactor(amount);
   }

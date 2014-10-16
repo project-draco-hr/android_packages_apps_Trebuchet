@@ -1,0 +1,8 @@
+{
+  super.onScrollInteractionEnd();
+  mScrollInteractionBegan=false;
+  if (mStartedSendingScrollEvents) {
+    mStartedSendingScrollEvents=false;
+    mLauncherOverlay.onScrollInteractionEnd();
+  }
+}

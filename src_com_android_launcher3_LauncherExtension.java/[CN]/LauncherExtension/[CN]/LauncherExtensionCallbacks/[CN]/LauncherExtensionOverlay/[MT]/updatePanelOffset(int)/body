@@ -1,0 +1,5 @@
+{
+  int panelWidth=mSearchOverlay.getMeasuredWidth();
+  int offset=(int)((progress / 100f) * panelWidth);
+  mSearchOverlay.setTranslationX(-panelWidth + offset);
+}

@@ -2,6 +2,9 @@
   Rect hitRect=new Rect();
   int x=(int)ev.getX();
   int y=(int)ev.getY();
+  if (mBlockTouches) {
+    return true;
+  }
   for (  AppWidgetResizeFrame child : mResizeFrames) {
     child.getHitRect(hitRect);
     if (hitRect.contains(x,y)) {
