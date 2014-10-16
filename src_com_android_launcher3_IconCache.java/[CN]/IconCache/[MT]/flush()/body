@@ -1,5 +1,3 @@
 {
-synchronized (mCache) {
-    mCache.clear();
-  }
+  mCache.clear();
 }

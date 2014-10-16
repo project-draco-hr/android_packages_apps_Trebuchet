@@ -1,14 +1,8 @@
 {
-  if (!user.equals(UserHandleCompat.myUserHandle())) {
-    return false;
+  if (!user.equals(UserHandleCompat.myUserHandle()) || componentName == null) {
+    return;
   }
-  if (componentName == null) {
-    return false;
-  }
-  if (mCache.remove(componentName) != null) {
-    if (DEBUG)     Log.d(TAG,"removed pre-loaded icon from the in-memory cache");
-  }
+  remove(componentName,user);
   boolean success=mContext.deleteFile(getResourceFilename(componentName));
   if (DEBUG && success)   Log.d(TAG,"removed pre-loaded icon from persistent cache");
-  return success;
 }

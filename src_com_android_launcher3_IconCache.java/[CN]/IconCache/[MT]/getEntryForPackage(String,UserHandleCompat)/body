@@ -1,5 +1,6 @@
 {
-  ComponentName cn=getPackageComponent(packageName);
+  ComponentName cn=new ComponentName(packageName,EMPTY_CLASS_NAME);
+  ;
   CacheKey cacheKey=new CacheKey(cn,user);
   CacheEntry entry=mCache.get(cacheKey);
   if (entry == null) {

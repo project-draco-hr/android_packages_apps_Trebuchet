@@ -1,3 +1,0 @@
-{
-  return getFullResIcon(info.activityInfo);
-}
