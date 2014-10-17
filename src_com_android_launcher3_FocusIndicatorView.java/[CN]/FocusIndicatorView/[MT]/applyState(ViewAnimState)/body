@@ -1,0 +1,6 @@
+{
+  setTranslationX(state.x);
+  setTranslationY(state.y);
+  setScaleX(state.scaleX);
+  setScaleY(state.scaleY);
+}

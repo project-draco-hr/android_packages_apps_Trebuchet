@@ -1,0 +1,10 @@
+{
+  if (mCurrentAnimation != null) {
+    mCurrentAnimation.cancel();
+    mCurrentAnimation=null;
+  }
+  if (mTargetState != null) {
+    applyState(mTargetState);
+    mTargetState=null;
+  }
+}
