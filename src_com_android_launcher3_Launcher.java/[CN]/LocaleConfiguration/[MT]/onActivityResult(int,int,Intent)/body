@@ -56,7 +56,9 @@
     }
  else {
       if (!workspaceLocked) {
-        mPendingAddInfo.screenId=ensurePendingDropLayoutExists(mPendingAddInfo.screenId);
+        if (mPendingAddInfo.container == LauncherSettings.Favorites.CONTAINER_DESKTOP) {
+          mPendingAddInfo.screenId=ensurePendingDropLayoutExists(mPendingAddInfo.screenId);
+        }
         final CellLayout dropLayout=mWorkspace.getScreenWithId(mPendingAddInfo.screenId);
         dropLayout.setDropPending(true);
         final Runnable onComplete=new Runnable(){
