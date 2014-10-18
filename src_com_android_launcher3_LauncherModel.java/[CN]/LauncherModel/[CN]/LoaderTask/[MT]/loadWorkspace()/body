@@ -28,7 +28,7 @@
   Launcher.addDumpLog(TAG,"11683562 -   loadedOldDb: " + loadedOldDb,true);
 synchronized (sBgLock) {
     clearSBgDataStructures();
-    PackageInstallerCompat.getInstance(mContext).updateActiveSessionCache();
+    final HashSet<String> installingPkgs=PackageInstallerCompat.getInstance(mContext).updateAndGetActiveSessionCache();
     final ArrayList<Long> itemsToRemove=new ArrayList<Long>();
     final ArrayList<Long> restoredRows=new ArrayList<Long>();
     final Uri contentUri=LauncherSettings.Favorites.CONTENT_URI;
@@ -115,6 +115,21 @@ try {
     }
  else     if (restored) {
       Launcher.addDumpLog(TAG,"package not yet restored: " + cn,true);
+      if ((promiseType & ShortcutInfo.FLAG_RESTORE_STARTED) != 0) {
+      }
+ else       if (installingPkgs.contains(cn.getPackageName())) {
+        promiseType|=ShortcutInfo.FLAG_RESTORE_STARTED;
+        ContentValues values=new ContentValues();
+        values.put(LauncherSettings.Favorites.RESTORED,promiseType);
+        String where=BaseColumns._ID + "= ?";
+        String[] args={Long.toString(id)};
+        contentResolver.update(contentUri,values,where,args);
+      }
+ else       if (REMOVE_UNRESTORED_ICONS) {
+        Launcher.addDumpLog(TAG,"Unrestored package removed: " + cn,true);
+        itemsToRemove.add(id);
+        continue;
+      }
     }
  else     if (isSdCardReady) {
       Launcher.addDumpLog(TAG,"Invalid package removed: " + cn,true);
@@ -265,6 +280,16 @@ appWidgetInfo.restoreStatus=status;
 Log.v(TAG,"Widget restore pending id=" + id + " appWidgetId="+ appWidgetId+ " status ="+ restoreStatus);
 appWidgetInfo=new LauncherAppWidgetInfo(appWidgetId,component);
 appWidgetInfo.restoreStatus=restoreStatus;
+if ((restoreStatus & LauncherAppWidgetInfo.FLAG_RESTORE_STARTED) != 0) {
+}
+ else if (installingPkgs.contains(component.getPackageName())) {
+appWidgetInfo.restoreStatus|=LauncherAppWidgetInfo.FLAG_RESTORE_STARTED;
+}
+ else if (REMOVE_UNRESTORED_ICONS) {
+Launcher.addDumpLog(TAG,"Unrestored package removed: " + component,true);
+itemsToRemove.add(id);
+continue;
+}
 }
 appWidgetInfo.id=id;
 appWidgetInfo.screenId=c.getInt(screenIndex);
@@ -285,8 +310,7 @@ itemsToRemove.add(id);
 }
 break;
 }
-if (isProviderReady) {
-String providerName=provider.provider.flattenToString();
+String providerName=appWidgetInfo.providerName.flattenToString();
 if (!providerName.equals(savedProvider) || (appWidgetInfo.restoreStatus != restoreStatus)) {
 ContentValues values=new ContentValues();
 values.put(LauncherSettings.Favorites.APPWIDGET_PROVIDER,providerName);
@@ -294,7 +318,6 @@ values.put(LauncherSettings.Favorites.RESTORED,appWidgetInfo.restoreStatus);
 String where=BaseColumns._ID + "= ?";
 String[] args={Long.toString(id)};
 contentResolver.update(contentUri,values,where,args);
-}
 }
 sBgItemsIdMap.put(appWidgetInfo.id,appWidgetInfo);
 sBgAppWidgets.add(appWidgetInfo);
