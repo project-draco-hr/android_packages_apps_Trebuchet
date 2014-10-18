@@ -4,8 +4,10 @@
   mHandler.removeMessages(0);
   mWorkspace.removeCallbacks(mBuildLayersRunnable);
   LauncherAppState app=(LauncherAppState.getInstance());
-  mModel.stopLoader();
-  app.setLauncher(null);
+  if (mModel.isCurrentCallbacks(this)) {
+    mModel.stopLoader();
+    app.setLauncher(null);
+  }
   try {
     mAppWidgetHost.stopListening();
   }
