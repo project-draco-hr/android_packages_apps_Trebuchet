@@ -1,6 +1,4 @@
 {
   Log.w(TAG,"Database version downgrade from: " + oldVersion + " to "+ newVersion+ ". Wiping databse.");
-  db.execSQL("DROP TABLE IF EXISTS " + TABLE_FAVORITES);
-  db.execSQL("DROP TABLE IF EXISTS " + TABLE_WORKSPACE_SCREENS);
-  onCreate(db);
+  createEmptyDB(db);
 }
