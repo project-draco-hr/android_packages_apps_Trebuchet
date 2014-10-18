@@ -31,7 +31,7 @@ synchronized (sBgLock) {
     final HashSet<String> installingPkgs=PackageInstallerCompat.getInstance(mContext).updateAndGetActiveSessionCache();
     final ArrayList<Long> itemsToRemove=new ArrayList<Long>();
     final ArrayList<Long> restoredRows=new ArrayList<Long>();
-    final Uri contentUri=LauncherSettings.Favorites.CONTENT_URI;
+    final Uri contentUri=LauncherSettings.Favorites.CONTENT_URI_NO_NOTIFICATION;
     if (DEBUG_LOADERS)     Log.d(TAG,"loading model from " + contentUri);
     final Cursor c=contentResolver.query(contentUri,null,null,null,null);
     final HashMap<Long,ItemInfo[][]> occupied=new HashMap<Long,ItemInfo[][]>();
@@ -286,7 +286,7 @@ if ((restoreStatus & LauncherAppWidgetInfo.FLAG_RESTORE_STARTED) != 0) {
 appWidgetInfo.restoreStatus|=LauncherAppWidgetInfo.FLAG_RESTORE_STARTED;
 }
  else if (REMOVE_UNRESTORED_ICONS) {
-Launcher.addDumpLog(TAG,"Unrestored package removed: " + component,true);
+Launcher.addDumpLog(TAG,"Unrestored widget removed: " + component,true);
 itemsToRemove.add(id);
 continue;
 }
@@ -340,7 +340,7 @@ clearSBgDataStructures();
 return false;
 }
 if (itemsToRemove.size() > 0) {
-ContentProviderClient client=contentResolver.acquireContentProviderClient(LauncherSettings.Favorites.CONTENT_URI);
+ContentProviderClient client=contentResolver.acquireContentProviderClient(contentUri);
 for (long id : itemsToRemove) {
 if (DEBUG_LOADERS) {
 Log.d(TAG,"Removed id = " + id);
@@ -354,7 +354,7 @@ Log.w(TAG,"Could not remove id = " + id);
 }
 }
 if (restoredRows.size() > 0) {
-ContentProviderClient updater=contentResolver.acquireContentProviderClient(LauncherSettings.Favorites.CONTENT_URI);
+ContentProviderClient updater=contentResolver.acquireContentProviderClient(contentUri);
 try {
 StringBuilder selectionBuilder=new StringBuilder();
 selectionBuilder.append(LauncherSettings.Favorites._ID);
