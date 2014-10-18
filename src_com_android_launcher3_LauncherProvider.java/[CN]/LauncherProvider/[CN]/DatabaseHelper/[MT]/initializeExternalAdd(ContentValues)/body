@@ -10,6 +10,7 @@
         int appWidgetId=mAppWidgetHost.allocateAppWidgetId();
         values.put(LauncherSettings.Favorites.APPWIDGET_ID,appWidgetId);
         if (!appWidgetManager.bindAppWidgetIdIfAllowed(appWidgetId,cn)) {
+          return false;
         }
       }
  catch (      RuntimeException e) {
