@@ -3,7 +3,7 @@
   if (!mResumed || !mBound) {
     return;
   }
-  if ((mPendingReplays.size() == 0) && (newInfo == null)) {
+  if ((mPendingReplays.size() == 0) && (newInfo == null) && mPendingBadgeUpdates.isEmpty()) {
     return;
   }
   LauncherAppState app=LauncherAppState.getInstanceNoCreate();
