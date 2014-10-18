@@ -1,0 +1,14 @@
+{
+  Runnable r=new Runnable(){
+    public void run(){
+      bindAppsRestored(apps);
+    }
+  }
+;
+  if (waitUntilResume(r)) {
+    return;
+  }
+  if (mWorkspace != null) {
+    mWorkspace.updateShortcutsAndWidgets(apps);
+  }
+}

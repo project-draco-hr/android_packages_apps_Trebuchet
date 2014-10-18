@@ -1,3 +1,2 @@
 {
-  mInstaller.unregisterSessionCallback(mCallback);
 }
