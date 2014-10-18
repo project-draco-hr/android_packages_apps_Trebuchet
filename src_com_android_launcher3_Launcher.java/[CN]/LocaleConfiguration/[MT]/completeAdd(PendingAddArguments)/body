@@ -1,5 +1,8 @@
 {
-  long screenId=ensurePendingDropLayoutExists(args.screenId);
+  long screenId=args.screenId;
+  if (args.container == LauncherSettings.Favorites.CONTAINER_DESKTOP) {
+    screenId=ensurePendingDropLayoutExists(args.screenId);
+  }
 switch (args.requestCode) {
 case REQUEST_CREATE_SHORTCUT:
     completeAddShortcut(args.intent,args.container,screenId,args.cellX,args.cellY);
