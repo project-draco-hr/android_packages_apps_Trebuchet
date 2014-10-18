@@ -1,0 +1,5 @@
+{
+  db.execSQL("DROP TABLE IF EXISTS " + TABLE_FAVORITES);
+  db.execSQL("DROP TABLE IF EXISTS " + TABLE_WORKSPACE_SCREENS);
+  onCreate(db);
+}

@@ -1,4 +1,5 @@
 {
   mContext=context;
   mRestoreEnabled=restoreEnabled;
+  mKeys=new ArrayList<Key>();
 }
