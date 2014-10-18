@@ -1,5 +1,5 @@
 {
-  if ("L".equals(Build.VERSION.CODENAME) && mUser != null) {
+  if (Utilities.isLmpOrAbove() && mUser != null) {
     intent.putExtra(name,mUser);
   }
 }
