@@ -3,6 +3,7 @@
   mInfo=info;
   mStartState=info.restoreStatus;
   mIconLookupIntent=new Intent().setComponent(info.providerName);
+  mDisabledForSafeMode=disabledForSafeMode;
   mPaint=new TextPaint();
   mPaint.setColor(0xFFFFFFFF);
   mPaint.setTextSize(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_PX,getDeviceProfile().iconTextSizePx,getResources().getDisplayMetrics()));

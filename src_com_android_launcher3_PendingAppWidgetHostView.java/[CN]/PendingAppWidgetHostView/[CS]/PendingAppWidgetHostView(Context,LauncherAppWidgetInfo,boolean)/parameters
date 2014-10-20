@@ -1,2 +1,3 @@
 Context context
 LauncherAppWidgetInfo info
+boolean disabledForSafeMode
