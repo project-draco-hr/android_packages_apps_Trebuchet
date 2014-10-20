@@ -1,3 +1,0 @@
-{
-  return new ComponentName(packageName,EMPTY_CLASS_NAME);
-}

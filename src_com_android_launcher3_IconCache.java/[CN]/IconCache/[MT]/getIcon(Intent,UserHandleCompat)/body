@@ -1,3 +1,9 @@
 {
-  return getIcon(intent,null,user,true);
+  ComponentName component=intent.getComponent();
+  if (component == null) {
+    return getDefaultIcon(user);
+  }
+  LauncherActivityInfoCompat launcherActInfo=mLauncherApps.resolveActivity(intent,user);
+  CacheEntry entry=cacheLocked(component,launcherActInfo,null,user,true);
+  return entry.icon;
 }
