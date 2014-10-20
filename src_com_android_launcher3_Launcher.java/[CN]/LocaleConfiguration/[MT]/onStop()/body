@@ -1,4 +1,7 @@
 {
   super.onStop();
   FirstFrameAnimatorHelper.setIsVisible(false);
+  if (mLauncherCallbacks != null) {
+    mLauncherCallbacks.onStop();
+  }
 }

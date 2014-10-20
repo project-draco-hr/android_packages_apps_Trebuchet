@@ -35,4 +35,7 @@
     return;
   }
   startAppShortcutOrInfoActivity(v);
+  if (mLauncherCallbacks != null) {
+    mLauncherCallbacks.onClickAppShortcut(v);
+  }
 }

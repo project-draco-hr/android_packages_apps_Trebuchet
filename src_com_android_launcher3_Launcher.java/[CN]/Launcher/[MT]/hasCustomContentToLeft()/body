@@ -1,3 +1,6 @@
 {
+  if (mLauncherCallbacks != null) {
+    return mLauncherCallbacks.hasCustomContentToLeft();
+  }
   return false;
 }

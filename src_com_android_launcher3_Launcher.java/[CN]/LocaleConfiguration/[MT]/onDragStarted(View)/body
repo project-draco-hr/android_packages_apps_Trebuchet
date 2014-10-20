@@ -1,2 +1,8 @@
 {
+  if (isOnCustomContent()) {
+    moveWorkspaceToDefaultScreen();
+  }
+  if (mLauncherCallbacks != null) {
+    mLauncherCallbacks.onDragStarted(view);
+  }
 }

@@ -4,6 +4,9 @@
     startTime=System.currentTimeMillis();
     Log.v(TAG,"Launcher.onResume()");
   }
+  if (mLauncherCallbacks != null) {
+    mLauncherCallbacks.preOnResume();
+  }
   super.onResume();
   if (mOnResumeState == State.WORKSPACE) {
     showWorkspace(false);
@@ -63,4 +66,7 @@
   mWorkspace.updateInteractionForState();
   mWorkspace.onResume();
   PackageInstallerCompat.getInstance(this).onResume();
+  if (mLauncherCallbacks != null) {
+    mLauncherCallbacks.onResume();
+  }
 }

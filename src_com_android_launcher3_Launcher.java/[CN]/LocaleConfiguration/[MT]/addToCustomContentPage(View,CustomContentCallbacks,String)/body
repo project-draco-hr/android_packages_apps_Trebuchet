@@ -1,4 +1,3 @@
 {
   mWorkspace.addToCustomContentPage(customContent,callbacks,description);
-  return mQsbScroller;
 }

@@ -1,4 +1,10 @@
 {
+  if (mLauncherCallbacks != null) {
+    View qsb=mLauncherCallbacks.getQsbBar();
+    if (qsb != null) {
+      return qsb;
+    }
+  }
   if (mQsb == null) {
     mQsb=mInflater.inflate(R.layout.qsb,mSearchDropTargetBar,false);
     mSearchDropTargetBar.addView(mQsb);

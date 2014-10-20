@@ -1,4 +1,7 @@
 {
+  if (mLauncherCallbacks != null) {
+    return mLauncherCallbacks.isLauncherPreinstalled();
+  }
   PackageManager pm=getPackageManager();
   try {
     ApplicationInfo ai=pm.getApplicationInfo(getComponentName().getPackageName(),0);

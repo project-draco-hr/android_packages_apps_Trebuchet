@@ -1,4 +1,7 @@
 {
   if (LOGD)   Log.d(TAG,"onClickAddWidgetButton");
   showAllApps(true,AppsCustomizePagedView.ContentType.Widgets,true);
+  if (mLauncherCallbacks != null) {
+    mLauncherCallbacks.onClickAddWidgetButton(view);
+  }
 }

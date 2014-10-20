@@ -1,0 +1,6 @@
+{
+  super.onPostCreate(savedInstanceState);
+  if (mLauncherCallbacks != null) {
+    mLauncherCallbacks.onPostCreate(savedInstanceState);
+  }
+}

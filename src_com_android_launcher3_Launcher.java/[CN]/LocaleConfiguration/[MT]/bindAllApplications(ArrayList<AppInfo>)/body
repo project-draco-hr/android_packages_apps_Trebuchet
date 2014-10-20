@@ -16,4 +16,7 @@
       mAppsCustomizeContent.onPackagesUpdated(LauncherModel.getSortedWidgetsAndShortcuts(this));
     }
   }
+  if (mLauncherCallbacks != null) {
+    mLauncherCallbacks.bindAllApplications(apps);
+  }
 }
