@@ -6,7 +6,7 @@
     launchIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
   }
   LauncherAppState app=LauncherAppState.getInstance();
-  ShortcutInfo info=app.getModel().infoFromShortcutIntent(context,data,null);
+  ShortcutInfo info=app.getModel().infoFromShortcutIntent(context,data);
   info.title=ensureValidName(context,launchIntent,info.title);
   return info;
 }
