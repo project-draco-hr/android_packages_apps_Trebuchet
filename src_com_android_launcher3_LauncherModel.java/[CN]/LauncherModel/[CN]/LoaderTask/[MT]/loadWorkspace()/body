@@ -293,7 +293,7 @@ if ((restoreStatus & LauncherAppWidgetInfo.FLAG_RESTORE_STARTED) != 0) {
  else if (installingPkgs.contains(component.getPackageName())) {
 appWidgetInfo.restoreStatus|=LauncherAppWidgetInfo.FLAG_RESTORE_STARTED;
 }
- else if (REMOVE_UNRESTORED_ICONS) {
+ else if (REMOVE_UNRESTORED_ICONS && !isSafeMode) {
 Launcher.addDumpLog(TAG,"Unrestored widget removed: " + component,true);
 itemsToRemove.add(id);
 continue;

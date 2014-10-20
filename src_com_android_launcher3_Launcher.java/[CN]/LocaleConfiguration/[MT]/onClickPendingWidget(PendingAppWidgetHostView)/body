@@ -1,4 +1,8 @@
 {
+  if (mIsSafeModeEnabled) {
+    Toast.makeText(this,R.string.safemode_widget_error,Toast.LENGTH_SHORT).show();
+    return;
+  }
   final LauncherAppWidgetInfo info=(LauncherAppWidgetInfo)v.getTag();
   if (v.isReadyForClickSetup()) {
     int widgetId=info.appWidgetId;

@@ -4,12 +4,18 @@
     return;
   }
   mIcon=icon;
-  if (mDrawable != null) {
-    mDrawable.setCallback(null);
-    mDrawable=null;
+  if (mCenterDrawable != null) {
+    mCenterDrawable.setCallback(null);
+    mCenterDrawable=null;
   }
   if (mIcon != null) {
-    if (isReadyForClickSetup()) {
+    if (mDisabledForSafeMode) {
+      FastBitmapDrawable disabledIcon=Utilities.createIconDrawable(mIcon);
+      disabledIcon.setGhostModeEnabled(true);
+      mCenterDrawable=disabledIcon;
+      mTopCornerDrawable=null;
+    }
+ else     if (isReadyForClickSetup()) {
       mCenterDrawable=getResources().getDrawable(R.drawable.ic_setting);
       mTopCornerDrawable=new FastBitmapDrawable(mIcon);
     }
@@ -19,8 +25,9 @@
         sPreloaderTheme.applyStyle(R.style.PreloadIcon,true);
       }
       FastBitmapDrawable drawable=Utilities.createIconDrawable(mIcon);
-      mDrawable=new PreloadIconDrawable(drawable,sPreloaderTheme);
-      mDrawable.setCallback(this);
+      mCenterDrawable=new PreloadIconDrawable(drawable,sPreloaderTheme);
+      mCenterDrawable.setCallback(this);
+      mTopCornerDrawable=null;
       applyState();
     }
     mDrawableSizeChanged=true;
