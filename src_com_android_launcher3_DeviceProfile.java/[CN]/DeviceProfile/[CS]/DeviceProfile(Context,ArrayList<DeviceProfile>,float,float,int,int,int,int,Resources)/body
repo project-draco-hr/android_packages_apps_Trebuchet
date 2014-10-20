@@ -26,7 +26,6 @@
   numHotseatIcons=closestProfile.numHotseatIcons;
   hotseatAllAppsRank=(int)(numHotseatIcons / 2);
   defaultLayoutId=closestProfile.defaultLayoutId;
-  defaultNoAllAppsLayoutId=closestProfile.defaultNoAllAppsLayoutId;
   points.clear();
   for (  DeviceProfile p : profiles) {
     points.add(new DeviceProfileQuery(p,p.iconSize));

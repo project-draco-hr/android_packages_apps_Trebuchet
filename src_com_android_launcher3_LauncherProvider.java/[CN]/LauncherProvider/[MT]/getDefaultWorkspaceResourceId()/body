@@ -1,10 +1,5 @@
 {
   LauncherAppState app=LauncherAppState.getInstance();
   DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
-  if (LauncherAppState.isDisableAllApps()) {
-    return grid.defaultNoAllAppsLayoutId;
-  }
- else {
-    return grid.defaultLayoutId;
-  }
+  return grid.defaultLayoutId;
 }
