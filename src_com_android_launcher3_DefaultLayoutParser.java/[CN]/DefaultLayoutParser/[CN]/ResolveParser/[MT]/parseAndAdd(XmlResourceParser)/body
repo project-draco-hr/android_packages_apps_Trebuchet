@@ -1,0 +1,18 @@
+{
+  final int groupDepth=parser.getDepth();
+  int type;
+  long addedId=-1;
+  while ((type=parser.next()) != XmlPullParser.END_TAG || parser.getDepth() > groupDepth) {
+    if (type != XmlPullParser.START_TAG || addedId > -1) {
+      continue;
+    }
+    final String fallback_item_name=parser.getName();
+    if (TAG_FAVORITE.equals(fallback_item_name)) {
+      addedId=mChildParser.parseAndAdd(parser);
+    }
+ else {
+      Log.e(TAG,"Fallback groups can contain only favorites, found " + fallback_item_name);
+    }
+  }
+  return addedId;
+}

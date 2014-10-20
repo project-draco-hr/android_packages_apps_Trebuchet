@@ -1,3 +1,0 @@
-Resources res
-int layoutId
-ArrayList<Long> screenIds

@@ -1,4 +1,0 @@
-XmlResourceParser parser
-int type
-SQLiteDatabase db
-ContentValues values

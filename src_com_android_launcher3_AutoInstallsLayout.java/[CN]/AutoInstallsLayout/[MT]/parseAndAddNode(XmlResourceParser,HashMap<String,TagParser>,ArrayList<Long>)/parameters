@@ -1,0 +1,3 @@
+XmlResourceParser parser
+HashMap<String,TagParser> tagParserMap
+ArrayList<Long> screenIds

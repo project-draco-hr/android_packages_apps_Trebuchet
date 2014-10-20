@@ -1,7 +1,7 @@
 {
   mDb=db;
   try {
-    return parseLayout(mRes,mLayoutId,screenIds);
+    return parseLayout(mLayoutId,screenIds);
   }
  catch (  Exception e) {
     Log.w(TAG,"Got exception parsing layout.",e);

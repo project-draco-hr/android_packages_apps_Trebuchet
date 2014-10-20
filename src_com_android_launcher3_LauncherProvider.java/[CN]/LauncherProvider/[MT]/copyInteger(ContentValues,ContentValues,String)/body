@@ -1,3 +1,0 @@
-{
-  to.put(key,from.getAsInteger(key));
-}

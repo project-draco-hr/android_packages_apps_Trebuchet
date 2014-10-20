@@ -1,0 +1,32 @@
+{
+  final String uri=getAttributeValue(parser,ATTR_URI);
+  if (TextUtils.isEmpty(uri)) {
+    Log.e(TAG,"Skipping invalid <favorite> with no component or uri");
+    return -1;
+  }
+  final Intent metaIntent;
+  try {
+    metaIntent=Intent.parseUri(uri,0);
+  }
+ catch (  URISyntaxException e) {
+    Log.e(TAG,"Unable to add meta-favorite: " + uri,e);
+    return -1;
+  }
+  ResolveInfo resolved=mPackageManager.resolveActivity(metaIntent,PackageManager.MATCH_DEFAULT_ONLY);
+  final List<ResolveInfo> appList=mPackageManager.queryIntentActivities(metaIntent,PackageManager.MATCH_DEFAULT_ONLY);
+  if (wouldLaunchResolverActivity(resolved,appList)) {
+    final ResolveInfo systemApp=getSingleSystemActivity(appList);
+    if (systemApp == null) {
+      Log.w(TAG,"No preference or single system activity found for " + metaIntent.toString());
+      return -1;
+    }
+    resolved=systemApp;
+  }
+  final ActivityInfo info=resolved.activityInfo;
+  final Intent intent=mPackageManager.getLaunchIntentForPackage(info.packageName);
+  if (intent == null) {
+    return -1;
+  }
+  intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
+  return addShortcut(info.loadLabel(mPackageManager).toString(),intent,Favorites.ITEM_TYPE_APPLICATION);
+}

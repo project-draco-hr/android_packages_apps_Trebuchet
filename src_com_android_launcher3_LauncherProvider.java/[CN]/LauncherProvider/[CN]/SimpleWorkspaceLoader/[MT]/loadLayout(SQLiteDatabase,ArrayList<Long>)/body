@@ -1,3 +1,0 @@
-{
-  return mHelper.loadFavoritesRecursive(db,mRes,mWorkspaceId,screenIds);
-}

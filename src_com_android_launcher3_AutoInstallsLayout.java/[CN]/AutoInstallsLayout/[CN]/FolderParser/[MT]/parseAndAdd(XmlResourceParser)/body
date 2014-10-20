@@ -1,0 +1,58 @@
+{
+  final String title;
+  final int titleResId=getAttributeResourceValue(parser,ATTR_TITLE,0);
+  if (titleResId != 0) {
+    title=mSourceRes.getString(titleResId);
+  }
+ else {
+    title=mContext.getResources().getString(R.string.folder_name);
+  }
+  mValues.put(Favorites.TITLE,title);
+  mValues.put(Favorites.ITEM_TYPE,Favorites.ITEM_TYPE_FOLDER);
+  mValues.put(Favorites.SPANX,1);
+  mValues.put(Favorites.SPANY,1);
+  mValues.put(Favorites._ID,mCallback.generateNewItemId());
+  long folderId=mCallback.insertAndCheck(mDb,mValues);
+  if (folderId < 0) {
+    if (LOGD)     Log.e(TAG,"Unable to add folder");
+    return -1;
+  }
+  final ContentValues myValues=new ContentValues(mValues);
+  ArrayList<Long> folderItems=new ArrayList<Long>();
+  int type;
+  int folderDepth=parser.getDepth();
+  while ((type=parser.next()) != XmlPullParser.END_TAG || parser.getDepth() > folderDepth) {
+    if (type != XmlPullParser.START_TAG) {
+      continue;
+    }
+    mValues.clear();
+    mValues.put(Favorites.CONTAINER,folderId);
+    TagParser tagParser=mFolderElements.get(parser.getName());
+    if (tagParser != null) {
+      final long id=tagParser.parseAndAdd(parser);
+      if (id >= 0) {
+        folderItems.add(id);
+      }
+    }
+ else {
+      throw new RuntimeException("Invalid folder item " + parser.getName());
+    }
+  }
+  long addedId=folderId;
+  if (folderItems.size() < 2) {
+    Uri uri=Favorites.getContentUri(folderId,false);
+    SqlArguments args=new SqlArguments(uri,null,null);
+    mDb.delete(args.table,args.where,args.args);
+    addedId=-1;
+    if (folderItems.size() == 1) {
+      final ContentValues childValues=new ContentValues();
+      copyInteger(myValues,childValues,Favorites.CONTAINER);
+      copyInteger(myValues,childValues,Favorites.SCREEN);
+      copyInteger(myValues,childValues,Favorites.CELLX);
+      copyInteger(myValues,childValues,Favorites.CELLY);
+      addedId=folderItems.get(0);
+      mDb.update(LauncherProvider.TABLE_FAVORITES,childValues,Favorites._ID + "=" + addedId,null);
+    }
+  }
+  return addedId;
+}
