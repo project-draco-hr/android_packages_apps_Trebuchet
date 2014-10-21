@@ -1,0 +1,12 @@
+{
+  Runnable r=new Runnable(){
+    public void run(){
+      bindWidgetsRestored(widgets);
+    }
+  }
+;
+  if (waitUntilResume(r)) {
+    return;
+  }
+  mWorkspace.widgetsRestored(widgets);
+}

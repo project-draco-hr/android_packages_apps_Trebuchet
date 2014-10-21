@@ -9,17 +9,21 @@
     return;
   }
   if (reason == 0) {
+    HashSet<ComponentName> removedComponents=new HashSet<ComponentName>();
+    for (    AppInfo info : appInfos) {
+      removedComponents.add(info.componentName);
+    }
     if (!packageNames.isEmpty()) {
       mWorkspace.removeItemsByPackageName(packageNames,user);
     }
-    if (!appInfos.isEmpty()) {
-      mWorkspace.removeItemsByApplicationInfo(appInfos,user);
+    if (!removedComponents.isEmpty()) {
+      mWorkspace.removeItemsByComponentName(removedComponents,user);
     }
+    mDragController.onAppsRemoved(packageNames,removedComponents);
   }
  else {
     mWorkspace.disableShortcutsByPackageName(packageNames,user,reason);
   }
-  mDragController.onAppsRemoved(packageNames,appInfos);
   if (!LauncherAppState.isDisableAllApps() && mAppsCustomizeContent != null) {
     mAppsCustomizeContent.removeApps(appInfos);
   }
