@@ -1,5 +1,0 @@
-{
-  Intent intent=info.promisedIntent != null ? info.promisedIntent : info.intent;
-  ComponentName name=intent.getComponent();
-  return info.itemType == LauncherSettings.Favorites.ITEM_TYPE_APPLICATION && Intent.ACTION_MAIN.equals(intent.getAction()) && name != null;
-}

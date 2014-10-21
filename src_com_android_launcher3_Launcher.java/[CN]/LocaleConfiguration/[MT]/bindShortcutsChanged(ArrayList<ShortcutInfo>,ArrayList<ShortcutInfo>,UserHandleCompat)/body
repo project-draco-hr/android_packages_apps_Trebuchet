@@ -1,0 +1,22 @@
+{
+  Runnable r=new Runnable(){
+    public void run(){
+      bindShortcutsChanged(updated,removed,user);
+    }
+  }
+;
+  if (waitUntilResume(r)) {
+    return;
+  }
+  if (!updated.isEmpty()) {
+    mWorkspace.updateShortcuts(updated);
+  }
+  if (!removed.isEmpty()) {
+    HashSet<ComponentName> removedComponents=new HashSet<ComponentName>();
+    for (    ShortcutInfo si : removed) {
+      removedComponents.add(si.getTargetComponent());
+    }
+    mWorkspace.removeItemsByComponentName(removedComponents,user);
+    mDragController.onAppsRemoved(new ArrayList<String>(),removedComponents);
+  }
+}

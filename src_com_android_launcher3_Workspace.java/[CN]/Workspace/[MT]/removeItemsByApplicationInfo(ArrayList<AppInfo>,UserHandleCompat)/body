@@ -1,7 +1,0 @@
-{
-  HashSet<ComponentName> cns=new HashSet<ComponentName>();
-  for (  AppInfo info : appInfos) {
-    cns.add(info.componentName);
-  }
-  removeItemsByComponentName(cns,user);
-}

@@ -1,6 +1,8 @@
 {
-  HashSet<String> completedPackages=new HashSet<String>();
   for (  final PackageInstallInfo installInfo : installInfos) {
+    if (installInfo.state == PackageInstallerCompat.STATUS_INSTALLED) {
+      continue;
+    }
     mapOverItems(MAP_RECURSE,new ItemOperator(){
       @Override public boolean evaluate(      ItemInfo info,      View v,      View parent){
         if (info instanceof ShortcutInfo && v instanceof BubbleTextView) {
@@ -22,11 +24,5 @@
       }
     }
 );
-    if (installInfo.state == PackageInstallerCompat.STATUS_INSTALLED) {
-      completedPackages.add(installInfo.packageName);
-    }
-  }
-  if (!completedPackages.isEmpty()) {
-    restorePendingWidgets(completedPackages);
   }
 }
