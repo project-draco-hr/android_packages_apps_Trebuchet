@@ -1,5 +1,5 @@
 {
   cellToCenterPoint(cell[0],cell[1],mTmpPoint);
-  float distance=(float)Math.sqrt(Math.pow(x - mTmpPoint[0],2) + Math.pow(y - mTmpPoint[1],2));
+  float distance=(float)Math.hypot(x - mTmpPoint[0],y - mTmpPoint[1]);
   return distance;
 }
