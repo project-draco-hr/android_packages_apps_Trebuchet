@@ -23,5 +23,5 @@
       widget.preview.dpi=dpi;
     }
   }
-  return writeCheckedBytes(widget);
+  return widget;
 }

@@ -1,28 +1,33 @@
 {
   if (VERBOSE)   Log.v(TAG,"onBackup");
   Journal in=readJournal(oldState);
-  Journal out=new Journal();
-  long lastBackupTime=in.t;
-  out.t=System.currentTimeMillis();
-  out.rows=0;
-  out.bytes=0;
-  Log.v(TAG,"lastBackupTime = " + lastBackupTime);
-  ArrayList<Key> keys=new ArrayList<Key>();
-  if (launcherIsReady()) {
-    try {
-      backupFavorites(in,data,out,keys);
-      backupScreens(in,data,out,keys);
-      backupIcons(in,data,out,keys);
-      backupWidgets(in,data,out,keys);
-    }
- catch (    IOException e) {
-      Log.e(TAG,"launcher backup has failed",e);
-    }
-    out.key=keys.toArray(new BackupProtos.Key[keys.size()]);
+  if (!launcherIsReady()) {
+    writeJournal(newState,in);
+    return;
   }
- else {
-    out=in;
+  Log.v(TAG,"lastBackupTime = " + in.t);
+  mKeys.clear();
+  applyJournal(in);
+  long newBackupTime=System.currentTimeMillis();
+  try {
+    backupFavorites(data);
+    backupScreens(data);
+    backupIcons(data);
+    backupWidgets(data);
+    HashSet<String> validKeys=new HashSet<String>();
+    for (    Key key : mKeys) {
+      validKeys.add(keyToBackupKey(key));
+    }
+    mExistingKeys.removeAll(validKeys);
+    for (    String deleted : mExistingKeys) {
+      if (VERBOSE)       Log.v(TAG,"dropping deleted item " + deleted);
+      data.writeEntityHeader(deleted,-1);
+    }
+    mExistingKeys.clear();
+    mLastBackupRestoreTime=newBackupTime;
   }
-  writeJournal(newState,out);
-  Log.v(TAG,"onBackup: wrote " + out.bytes + "b in "+ out.rows+ " rows.");
+ catch (  IOException e) {
+    Log.e(TAG,"launcher backup has failed",e);
+  }
+  writeNewStateDescription(newState);
 }

@@ -1,0 +1,23 @@
+{
+  ContentResolver cr=mContext.getContentResolver();
+  Cursor cursor=cr.query(Favorites.CONTENT_URI,FAVORITE_PROJECTION,getUserSelectionArg(),null,null);
+  try {
+    cursor.moveToPosition(-1);
+    while (cursor.moveToNext()) {
+      final long id=cursor.getLong(ID_INDEX);
+      final long updateTime=cursor.getLong(ID_MODIFIED);
+      Key key=getKey(Key.FAVORITE,id);
+      mKeys.add(key);
+      final String backupKey=keyToBackupKey(key);
+      if (!mExistingKeys.contains(backupKey) || updateTime >= mLastBackupRestoreTime) {
+        writeRowToBackup(key,packFavorite(cursor),data);
+      }
+ else {
+        if (DEBUG)         Log.d(TAG,"favorite already backup up: " + id);
+      }
+    }
+  }
+  finally {
+    cursor.close();
+  }
+}

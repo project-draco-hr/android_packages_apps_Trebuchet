@@ -1,0 +1,7 @@
+{
+  Journal journal=new Journal();
+  journal.t=mLastBackupRestoreTime;
+  journal.key=mKeys.toArray(new BackupProtos.Key[mKeys.size()]);
+  journal.appVersion=getAppVersion();
+  return journal;
+}

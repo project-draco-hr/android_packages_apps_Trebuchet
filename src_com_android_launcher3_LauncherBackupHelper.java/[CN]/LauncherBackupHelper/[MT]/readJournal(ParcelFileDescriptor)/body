@@ -18,9 +18,6 @@
           if (result > 0) {
             availableBytes-=result;
             bytesRead+=result;
-            if (DEBUG && (bytesRead % 100 == 0)) {
-              Log.d(TAG,"read some bytes: " + bytesRead);
-            }
           }
  else {
             Log.w(TAG,"unexpected end of file while reading journal.");
@@ -32,7 +29,7 @@
           availableBytes=0;
         }
         try {
-          MessageNano.mergeFrom(journal,readCheckedBytes(buffer,0,bytesRead));
+          MessageNano.mergeFrom(journal,readCheckedBytes(buffer,bytesRead));
           valid=true;
           availableBytes=0;
           if (VERBOSE)           Log.v(TAG,"read " + bytesRead + " bytes of journal");

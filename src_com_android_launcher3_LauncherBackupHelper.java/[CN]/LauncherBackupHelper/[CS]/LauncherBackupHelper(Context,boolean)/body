@@ -1,5 +1,5 @@
 {
   mContext=context;
-  mRestoreEnabled=restoreEnabled;
+  mExistingKeys=new HashSet<String>();
   mKeys=new ArrayList<Key>();
 }

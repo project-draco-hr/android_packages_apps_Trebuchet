@@ -1,0 +1,24 @@
+{
+  ContentResolver cr=mContext.getContentResolver();
+  Cursor cursor=cr.query(WorkspaceScreens.CONTENT_URI,SCREEN_PROJECTION,null,null,null);
+  try {
+    cursor.moveToPosition(-1);
+    if (DEBUG)     Log.d(TAG,"dumping screens after: " + mLastBackupRestoreTime);
+    while (cursor.moveToNext()) {
+      final long id=cursor.getLong(ID_INDEX);
+      final long updateTime=cursor.getLong(ID_MODIFIED);
+      Key key=getKey(Key.SCREEN,id);
+      mKeys.add(key);
+      final String backupKey=keyToBackupKey(key);
+      if (!mExistingKeys.contains(backupKey) || updateTime >= mLastBackupRestoreTime) {
+        writeRowToBackup(key,packScreen(cursor),data);
+      }
+ else {
+        if (VERBOSE)         Log.v(TAG,"screen already backup up " + id);
+      }
+    }
+  }
+  finally {
+    cursor.close();
+  }
+}

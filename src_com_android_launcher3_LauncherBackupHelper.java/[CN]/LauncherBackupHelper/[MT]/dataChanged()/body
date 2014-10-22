@@ -1,6 +1,6 @@
 {
-  if (sBackupManager == null) {
-    sBackupManager=new BackupManager(mContext);
+  if (mBackupManager == null) {
+    mBackupManager=new BackupManager(mContext);
   }
-  sBackupManager.dataChanged();
+  mBackupManager.dataChanged();
 }

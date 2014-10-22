@@ -5,5 +5,5 @@
   if (icon.compress(IMAGE_FORMAT,IMAGE_COMPRESSION_QUALITY,os)) {
     res.data=os.toByteArray();
   }
-  return writeCheckedBytes(res);
+  return res;
 }

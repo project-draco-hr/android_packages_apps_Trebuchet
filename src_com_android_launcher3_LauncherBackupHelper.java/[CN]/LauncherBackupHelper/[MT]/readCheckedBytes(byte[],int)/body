@@ -1,0 +1,10 @@
+{
+  CheckedMessage wrapper=new CheckedMessage();
+  MessageNano.mergeFrom(wrapper,buffer,0,dataSize);
+  CRC32 checksum=new CRC32();
+  checksum.update(wrapper.payload);
+  if (wrapper.checksum != checksum.getValue()) {
+    throw new InvalidProtocolBufferNanoException("checksum does not match");
+  }
+  return wrapper.payload;
+}

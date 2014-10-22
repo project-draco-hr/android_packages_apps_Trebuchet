@@ -1,6 +1,0 @@
-{
-  Resource res=new Resource();
-  MessageNano.mergeFrom(res,readCheckedBytes(buffer,offset,dataSize));
-  if (VERBOSE)   Log.v(TAG,"unpacked icon " + res.dpi + "/"+ res.data.length);
-  return res;
-}

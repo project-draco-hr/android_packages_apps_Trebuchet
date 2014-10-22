@@ -1,0 +1,8 @@
+{
+  try {
+    return mContext.getPackageManager().getPackageInfo(mContext.getPackageName(),0).versionCode;
+  }
+ catch (  NameNotFoundException e) {
+    return 0;
+  }
+}

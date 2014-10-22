@@ -47,5 +47,5 @@
       favorite.appWidgetProvider=appWidgetProvider;
     }
   }
-  return writeCheckedBytes(favorite);
+  return favorite;
 }
