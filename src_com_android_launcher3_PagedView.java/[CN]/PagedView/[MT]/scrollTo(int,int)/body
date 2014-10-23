@@ -10,6 +10,7 @@
   if (isXBeforeFirstPage) {
     super.scrollTo(0,y);
     if (mAllowOverScroll) {
+      mWasInOverscroll=true;
       if (isRtl) {
         overScroll(x - mMaxScrollX);
       }
@@ -21,6 +22,7 @@
  else   if (isXAfterLastPage) {
     super.scrollTo(mMaxScrollX,y);
     if (mAllowOverScroll) {
+      mWasInOverscroll=true;
       if (isRtl) {
         overScroll(x);
       }
@@ -30,6 +32,10 @@
     }
   }
  else {
+    if (mWasInOverscroll) {
+      overScroll(0);
+      mWasInOverscroll=false;
+    }
     mOverScrollX=x;
     super.scrollTo(x,y);
   }

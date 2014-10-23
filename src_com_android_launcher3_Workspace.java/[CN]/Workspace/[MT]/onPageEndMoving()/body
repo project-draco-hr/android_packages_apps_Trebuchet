@@ -23,4 +23,8 @@
     stripEmptyScreens();
     mStripScreensOnPageStopMoving=false;
   }
+  if (mShouldSendPageSettled) {
+    mLauncherOverlay.onScrollSettled();
+    mShouldSendPageSettled=false;
+  }
 }

@@ -1,0 +1,6 @@
+{
+  mProgress=progress;
+  if (mShowOverlayFeedback) {
+    updatePanelOffset(progress);
+  }
+}

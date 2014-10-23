@@ -1,0 +1,7 @@
+{
+  if (mState == State.WORKSPACE) {
+    mDragLayer.setBlockTouch(true);
+    return true;
+  }
+  return false;
+}

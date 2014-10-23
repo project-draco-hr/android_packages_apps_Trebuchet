@@ -1,0 +1,5 @@
+{
+  mLauncherOverlayCallbacks.exitFullImmersion();
+  mSearchOverlay.setVisibility(View.INVISIBLE);
+  mOverlayPanelShowing=false;
+}

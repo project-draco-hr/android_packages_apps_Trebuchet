@@ -21,6 +21,7 @@ mLastMotionXRemainder=0;
 mTotalMotionX=0;
 mActivePointerId=ev.getPointerId(0);
 if (mTouchState == TOUCH_STATE_SCROLLING) {
+onScrollInteractionBegin();
 pageBeginMoving();
 }
 break;
@@ -158,6 +159,7 @@ mScroller.setInterpolator(mDefaultInterpolator);
 mScroller.fling(initialScrollX,getScrollY(),vX,0,Integer.MIN_VALUE,Integer.MAX_VALUE,0,0);
 invalidate();
 }
+onScrollInteractionEnd();
 }
  else if (mTouchState == TOUCH_STATE_PREV_PAGE) {
 int nextPage=Math.max(0,mCurrentPage - 1);

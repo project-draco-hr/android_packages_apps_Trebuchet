@@ -68,5 +68,11 @@
   }
   if (mLauncherCallbacks != null) {
     mLauncherCallbacks.onCreate(savedInstanceState);
+    if (mLauncherCallbacks.hasLauncherOverlay()) {
+      ViewStub stub=(ViewStub)findViewById(R.id.launcher_overlay_stub);
+      mLauncherOverlayView=(ViewGroup)stub.inflate();
+      mLauncherOverlay=mLauncherCallbacks.setLauncherOverlayView(mLauncherOverlayView,mLauncherOverlayCallbacks);
+      mWorkspace.setLauncherOverlay(mLauncherOverlay);
+    }
   }
 }
