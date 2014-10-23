@@ -1,4 +1,9 @@
 {
+  if (!Utilities.isLmpOrAbove()) {
+    Log.i(TAG,"You shall not pass!!!");
+    Log.d(TAG,"Restore is only supported on devices running Lollipop and above.");
+    return;
+  }
   super.onRestore(data,appVersionCode,newState);
   final Cursor c=getContentResolver().query(LauncherSettings.Favorites.CONTENT_URI_NO_NOTIFICATION,null,null,null,null);
   boolean hasData=c.moveToNext();
