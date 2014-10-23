@@ -70,7 +70,7 @@
         }
       }
       validRegions.push(currentRect);
-      double distance=Math.sqrt(Math.pow(cellXY[0] - pixelX,2) + Math.pow(cellXY[1] - pixelY,2));
+      double distance=Math.hypot(cellXY[0] - pixelX,cellXY[1] - pixelY);
       if ((distance <= bestDistance && !contained) || currentRect.contains(bestRect)) {
         bestDistance=distance;
         bestXY[0]=x;
