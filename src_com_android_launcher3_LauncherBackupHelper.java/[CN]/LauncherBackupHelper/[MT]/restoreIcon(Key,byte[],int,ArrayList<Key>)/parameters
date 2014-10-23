@@ -1,4 +1,0 @@
-Key key
-byte[] buffer
-int dataSize
-ArrayList<Key> keys

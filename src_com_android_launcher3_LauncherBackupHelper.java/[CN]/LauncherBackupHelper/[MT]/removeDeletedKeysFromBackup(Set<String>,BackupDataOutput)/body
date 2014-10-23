@@ -1,9 +1,0 @@
-{
-  int rows=0;
-  for (  String deleted : deletedIds) {
-    if (VERBOSE)     Log.v(TAG,"dropping deleted item " + deleted);
-    data.writeEntityHeader(deleted,-1);
-    rows++;
-  }
-  return rows;
-}

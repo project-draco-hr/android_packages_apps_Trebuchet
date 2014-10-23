@@ -1,8 +1,3 @@
 {
-  Journal out=new Journal();
-  out.t=0;
-  out.key=mKeys.toArray(new BackupProtos.Key[mKeys.size()]);
-  writeJournal(newState,out);
-  Log.v(TAG,"onRestore: read " + mKeys.size() + " rows");
-  mKeys.clear();
+  writeJournal(newState,getCurrentStateJournal());
 }

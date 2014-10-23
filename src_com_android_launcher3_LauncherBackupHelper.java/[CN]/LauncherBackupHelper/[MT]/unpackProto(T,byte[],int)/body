@@ -1,0 +1,5 @@
+{
+  MessageNano.mergeFrom(proto,readCheckedBytes(buffer,dataSize));
+  if (DEBUG)   Log.d(TAG,"unpacked proto " + proto);
+  return proto;
+}

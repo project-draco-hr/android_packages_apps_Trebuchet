@@ -1,0 +1,7 @@
+{
+  Screen screen=unpackProto(new Screen(),buffer,dataSize);
+  ContentValues values=new ContentValues();
+  values.put(WorkspaceScreens._ID,screen.id);
+  values.put(WorkspaceScreens.SCREEN_RANK,screen.rank);
+  return values;
+}

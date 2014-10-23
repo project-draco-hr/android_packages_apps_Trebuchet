@@ -2,5 +2,5 @@
   Screen screen=new Screen();
   screen.id=c.getLong(ID_INDEX);
   screen.rank=c.getInt(SCREEN_RANK_INDEX);
-  return writeCheckedBytes(screen);
+  return screen;
 }

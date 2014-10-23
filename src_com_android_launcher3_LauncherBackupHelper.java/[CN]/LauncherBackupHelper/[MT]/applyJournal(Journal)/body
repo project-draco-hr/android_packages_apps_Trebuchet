@@ -1,0 +1,9 @@
+{
+  mLastBackupRestoreTime=journal.t;
+  mExistingKeys.clear();
+  if (journal.key != null) {
+    for (    Key key : journal.key) {
+      mExistingKeys.add(keyToBackupKey(key));
+    }
+  }
+}

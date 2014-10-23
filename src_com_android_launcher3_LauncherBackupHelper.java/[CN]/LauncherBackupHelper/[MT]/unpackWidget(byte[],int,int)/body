@@ -1,6 +1,0 @@
-{
-  Widget widget=new Widget();
-  MessageNano.mergeFrom(widget,readCheckedBytes(buffer,offset,dataSize));
-  if (VERBOSE)   Log.v(TAG,"unpacked widget " + widget.provider);
-  return widget;
-}

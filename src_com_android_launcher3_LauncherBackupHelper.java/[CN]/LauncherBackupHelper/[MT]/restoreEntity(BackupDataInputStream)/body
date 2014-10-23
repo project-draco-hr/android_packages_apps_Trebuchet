@@ -1,42 +1,34 @@
 {
-  if (VERBOSE)   Log.v(TAG,"restoreEntity");
-  byte[] buffer=new byte[512];
-  String backupKey=data.getKey();
   int dataSize=data.size();
-  if (buffer.length < dataSize) {
-    buffer=new byte[dataSize];
+  if (mBuffer.length < dataSize) {
+    mBuffer=new byte[dataSize];
   }
-  Key key=null;
-  int bytesRead=0;
   try {
-    bytesRead=data.read(buffer,0,dataSize);
+    int bytesRead=data.read(mBuffer,0,dataSize);
     if (DEBUG)     Log.d(TAG,"read " + bytesRead + " of "+ dataSize+ " available");
-  }
- catch (  IOException e) {
-    Log.e(TAG,"failed to read entity from restore data",e);
-  }
-  try {
-    key=backupKeyToKey(backupKey);
+    String backupKey=data.getKey();
+    Key key=backupKeyToKey(backupKey);
     mKeys.add(key);
 switch (key.type) {
 case Key.FAVORITE:
-      restoreFavorite(key,buffer,dataSize,mKeys);
+      restoreFavorite(key,mBuffer,dataSize);
     break;
 case Key.SCREEN:
-  restoreScreen(key,buffer,dataSize,mKeys);
+  restoreScreen(key,mBuffer,dataSize);
 break;
 case Key.ICON:
-restoreIcon(key,buffer,dataSize,mKeys);
+restoreIcon(key,mBuffer,dataSize);
 break;
 case Key.WIDGET:
-restoreWidget(key,buffer,dataSize,mKeys);
+restoreWidget(key,mBuffer,dataSize);
 break;
 default :
 Log.w(TAG,"unknown restore entity type: " + key.type);
+mKeys.remove(key);
 break;
 }
 }
- catch (KeyParsingException e) {
-Log.w(TAG,"ignoring unparsable backup key: " + backupKey);
+ catch (IOException e) {
+Log.w(TAG,"ignoring unparsable backup entry",e);
 }
 }

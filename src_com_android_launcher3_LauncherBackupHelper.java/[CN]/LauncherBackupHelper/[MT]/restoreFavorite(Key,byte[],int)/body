@@ -1,0 +1,7 @@
+{
+  if (VERBOSE)   Log.v(TAG,"unpacking favorite " + key.id);
+  if (DEBUG)   Log.d(TAG,"read (" + buffer.length + "): "+ Base64.encodeToString(buffer,0,dataSize,Base64.NO_WRAP));
+  ContentResolver cr=mContext.getContentResolver();
+  ContentValues values=unpackFavorite(buffer,dataSize);
+  cr.insert(Favorites.CONTENT_URI_NO_NOTIFICATION,values);
+}

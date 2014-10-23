@@ -1,0 +1,3 @@
+{
+  writeRowToBackup(keyToBackupKey(key),proto,data);
+}

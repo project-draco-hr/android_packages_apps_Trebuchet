@@ -1,0 +1,62 @@
+{
+  if (!initializeIconCache()) {
+    dataChanged();
+    if (DEBUG)     Log.d(TAG,"Launcher is not initialized, delaying icon backup");
+    return;
+  }
+  final ContentResolver cr=mContext.getContentResolver();
+  final int dpi=mContext.getResources().getDisplayMetrics().densityDpi;
+  final UserHandleCompat myUserHandle=UserHandleCompat.myUserHandle();
+  int backupUpIconCount=0;
+  String where="(" + Favorites.ITEM_TYPE + "="+ Favorites.ITEM_TYPE_APPLICATION+ " OR "+ Favorites.ITEM_TYPE+ "="+ Favorites.ITEM_TYPE_SHORTCUT+ ") AND "+ getUserSelectionArg();
+  Cursor cursor=cr.query(Favorites.CONTENT_URI,FAVORITE_PROJECTION,where,null,null);
+  try {
+    cursor.moveToPosition(-1);
+    while (cursor.moveToNext()) {
+      final long id=cursor.getLong(ID_INDEX);
+      final String intentDescription=cursor.getString(INTENT_INDEX);
+      try {
+        Intent intent=Intent.parseUri(intentDescription,0);
+        ComponentName cn=intent.getComponent();
+        Key key=null;
+        String backupKey=null;
+        if (cn != null) {
+          key=getKey(Key.ICON,cn.flattenToShortString());
+          backupKey=keyToBackupKey(key);
+        }
+ else {
+          Log.w(TAG,"empty intent on application favorite: " + id);
+        }
+        if (mExistingKeys.contains(backupKey)) {
+          if (DEBUG)           Log.d(TAG,"already saved icon " + backupKey);
+          mKeys.add(key);
+        }
+ else         if (backupKey != null) {
+          if (DEBUG)           Log.d(TAG,"I can count this high: " + backupUpIconCount);
+          if (backupUpIconCount < MAX_ICONS_PER_PASS) {
+            if (DEBUG)             Log.d(TAG,"saving icon " + backupKey);
+            Bitmap icon=mIconCache.getIcon(intent,myUserHandle);
+            if (icon != null && !mIconCache.isDefaultIcon(icon,myUserHandle)) {
+              writeRowToBackup(key,packIcon(dpi,icon),data);
+              mKeys.add(key);
+              backupUpIconCount++;
+            }
+          }
+ else {
+            if (VERBOSE)             Log.v(TAG,"deferring icon backup " + backupKey);
+            dataChanged();
+          }
+        }
+      }
+ catch (      URISyntaxException e) {
+        Log.e(TAG,"invalid URI on application favorite: " + id);
+      }
+catch (      IOException e) {
+        Log.e(TAG,"unable to save application icon for favorite: " + id);
+      }
+    }
+  }
+  finally {
+    cursor.close();
+  }
+}

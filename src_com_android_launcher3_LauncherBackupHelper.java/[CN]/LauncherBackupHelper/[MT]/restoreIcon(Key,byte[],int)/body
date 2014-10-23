@@ -1,0 +1,14 @@
+{
+  if (VERBOSE)   Log.v(TAG,"unpacking icon " + key.id);
+  if (DEBUG)   Log.d(TAG,"read (" + buffer.length + "): "+ Base64.encodeToString(buffer,0,dataSize,Base64.NO_WRAP));
+  Resource res=unpackProto(new Resource(),buffer,dataSize);
+  if (DEBUG) {
+    Log.d(TAG,"unpacked " + res.dpi + " dpi icon");
+  }
+  Bitmap icon=BitmapFactory.decodeByteArray(res.data,0,res.data.length);
+  if (icon == null) {
+    Log.w(TAG,"failed to unpack icon for " + key.name);
+  }
+  if (VERBOSE)   Log.v(TAG,"saving restored icon as: " + key.name);
+  IconCache.preloadIcon(mContext,ComponentName.unflattenFromString(key.name),icon,res.dpi);
+}
