@@ -62,7 +62,6 @@ synchronized (sBgLock) {
       Intent intent;
       UserHandleCompat user;
       while (!mStopped && c.moveToNext()) {
-        AtomicBoolean deleteOnInvalidPlacement=new AtomicBoolean(false);
         try {
           int itemType=c.getInt(itemTypeIndex);
           boolean restored=0 != c.getInt(restoredIndex);
@@ -196,11 +195,8 @@ info.isDisabled=disabledState;
 if (isSafeMode && !Utilities.isSystemApp(context,intent)) {
 info.isDisabled|=ShortcutInfo.FLAG_DISABLED_SAFEMODE;
 }
-deleteOnInvalidPlacement.set(false);
-if (!checkItemPlacement(occupied,info,deleteOnInvalidPlacement)) {
-if (deleteOnInvalidPlacement.get()) {
+if (!checkItemPlacement(occupied,info)) {
 itemsToRemove.add(id);
-}
 break;
 }
 switch (container) {
@@ -232,11 +228,8 @@ folderInfo.cellX=c.getInt(cellXIndex);
 folderInfo.cellY=c.getInt(cellYIndex);
 folderInfo.spanX=1;
 folderInfo.spanY=1;
-deleteOnInvalidPlacement.set(false);
-if (!checkItemPlacement(occupied,folderInfo,deleteOnInvalidPlacement)) {
-if (deleteOnInvalidPlacement.get()) {
+if (!checkItemPlacement(occupied,folderInfo)) {
 itemsToRemove.add(id);
-}
 break;
 }
 switch (container) {
@@ -311,11 +304,8 @@ Log.e(TAG,"Widget found where container != " + "CONTAINER_DESKTOP nor CONTAINER_
 continue;
 }
 appWidgetInfo.container=c.getInt(containerIndex);
-deleteOnInvalidPlacement.set(false);
-if (!checkItemPlacement(occupied,appWidgetInfo,deleteOnInvalidPlacement)) {
-if (deleteOnInvalidPlacement.get()) {
+if (!checkItemPlacement(occupied,appWidgetInfo)) {
 itemsToRemove.add(id);
-}
 break;
 }
 String providerName=appWidgetInfo.providerName.flattenToString();
