@@ -1,3 +1,0 @@
-{
-  return FocusHelper.handleTabKeyEvent(this,keyCode,event) || super.onKeyUp(keyCode,event);
-}
