@@ -1,0 +1,8 @@
+{
+  if (mShowOverlayFeedback) {
+    mSearchOverlay.setVisibility(View.INVISIBLE);
+    mSearchOverlay.setLayerType(View.LAYER_TYPE_NONE,null);
+  }
+  mShowOverlayFeedback=false;
+  mProgress=0;
+}

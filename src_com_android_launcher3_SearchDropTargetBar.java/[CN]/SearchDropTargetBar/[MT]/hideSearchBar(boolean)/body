@@ -7,10 +7,10 @@
   }
  else {
     mQSBSearchBarAnim.cancel();
-    if (mEnableDropDownDropTargets) {
+    if (mQSBSearchBar != null && mEnableDropDownDropTargets) {
       mQSBSearchBar.setTranslationY(-mBarHeight);
     }
- else {
+ else     if (mQSBSearchBar != null) {
       mQSBSearchBar.setAlpha(0f);
     }
   }

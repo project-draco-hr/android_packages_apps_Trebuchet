@@ -1,0 +1,5 @@
+{
+  mLauncherOverlay.setOverlayCallbacks(callbacks);
+  mLauncherOverlay.setOverlayView(overlayView);
+  return mLauncherOverlay;
+}

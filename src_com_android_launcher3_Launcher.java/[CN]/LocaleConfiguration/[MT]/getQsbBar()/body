@@ -1,9 +1,6 @@
 {
-  if (mLauncherCallbacks != null) {
-    View qsb=mLauncherCallbacks.getQsbBar();
-    if (qsb != null) {
-      return qsb;
-    }
+  if (mLauncherCallbacks != null && mLauncherCallbacks.providesSearch()) {
+    return mLauncherCallbacks.getQsbBar();
   }
   if (mQsb == null) {
     mQsb=mInflater.inflate(R.layout.qsb,mSearchDropTargetBar,false);

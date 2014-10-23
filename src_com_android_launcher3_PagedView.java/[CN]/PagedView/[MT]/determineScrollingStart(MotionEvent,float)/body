@@ -18,6 +18,7 @@
       mLastMotionXRemainder=0;
       mTouchX=getViewportOffsetX() + getScrollX();
       mSmoothingTime=System.nanoTime() / NANOTIME_DIV;
+      onScrollInteractionBegin();
       pageBeginMoving();
     }
   }

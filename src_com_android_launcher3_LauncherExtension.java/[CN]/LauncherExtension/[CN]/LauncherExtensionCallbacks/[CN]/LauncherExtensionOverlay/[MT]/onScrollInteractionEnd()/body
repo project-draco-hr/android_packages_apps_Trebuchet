@@ -1,0 +1,14 @@
+{
+  if (mProgress > 25 && mLauncherOverlayCallbacks.enterFullImmersion()) {
+    ObjectAnimator oa=LauncherAnimUtils.ofFloat(mSearchOverlay,"translationX",0);
+    oa.addListener(new AnimatorListenerAdapter(){
+      @Override public void onAnimationEnd(      Animator arg0){
+        mSearchOverlay.setLayerType(View.LAYER_TYPE_NONE,null);
+      }
+    }
+);
+    oa.start();
+    mOverlayPanelShowing=true;
+    mShowOverlayFeedback=false;
+  }
+}

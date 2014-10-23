@@ -1,0 +1,4 @@
+{
+  setLauncherCallbacks(new LauncherExtensionCallbacks());
+  super.onCreate(savedInstanceState);
+}
