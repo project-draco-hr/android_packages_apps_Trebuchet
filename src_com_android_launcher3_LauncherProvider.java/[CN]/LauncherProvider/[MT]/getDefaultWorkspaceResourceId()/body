@@ -1,5 +1,0 @@
-{
-  LauncherAppState app=LauncherAppState.getInstance();
-  DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
-  return grid.defaultLayoutId;
-}
