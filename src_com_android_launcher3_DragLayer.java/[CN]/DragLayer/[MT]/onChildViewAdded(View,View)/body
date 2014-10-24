@@ -1,4 +1,5 @@
 {
+  super.onChildViewAdded(parent,child);
   if (mOverlayView != null) {
     mOverlayView.bringToFront();
   }

@@ -1,4 +1,0 @@
-{
-  super.addView(child,index,params);
-  setInsets(child,mInsets,new Rect());
-}

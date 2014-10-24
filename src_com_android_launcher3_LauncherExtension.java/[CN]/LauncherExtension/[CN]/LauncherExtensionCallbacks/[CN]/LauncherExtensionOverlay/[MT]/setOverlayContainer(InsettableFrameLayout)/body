@@ -1,5 +1,5 @@
 {
-  mOverlayView=(ViewGroup)getLayoutInflater().inflate(R.layout.launcher_overlay_example,overlayView);
+  mOverlayView=(ViewGroup)getLayoutInflater().inflate(R.layout.launcher_overlay_example,container);
   mSearchOverlay=mOverlayView.findViewById(R.id.search_overlay);
   mSearchBox=mOverlayView.findViewById(R.id.search_box);
 }
