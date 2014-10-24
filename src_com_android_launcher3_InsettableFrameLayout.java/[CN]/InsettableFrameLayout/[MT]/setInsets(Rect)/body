@@ -2,8 +2,7 @@
   final int n=getChildCount();
   for (int i=0; i < n; i++) {
     final View child=getChildAt(i);
-    setInsets(child,insets,mInsets);
+    setFrameLayoutChildInsets(child,insets,mInsets);
   }
   mInsets.set(insets);
-  return true;
 }
