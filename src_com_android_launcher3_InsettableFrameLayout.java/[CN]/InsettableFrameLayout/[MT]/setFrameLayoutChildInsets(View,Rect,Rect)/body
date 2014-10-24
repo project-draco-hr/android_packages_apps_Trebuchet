@@ -1,13 +1,13 @@
 {
-  final FrameLayout.LayoutParams flp=(FrameLayout.LayoutParams)child.getLayoutParams();
+  final LayoutParams lp=(LayoutParams)child.getLayoutParams();
   if (child instanceof Insettable) {
     ((Insettable)child).setInsets(newInsets);
   }
- else {
-    flp.topMargin+=(newInsets.top - oldInsets.top);
-    flp.leftMargin+=(newInsets.left - oldInsets.left);
-    flp.rightMargin+=(newInsets.right - oldInsets.right);
-    flp.bottomMargin+=(newInsets.bottom - oldInsets.bottom);
+ else   if (!lp.ignoreInsets) {
+    lp.topMargin+=(newInsets.top - oldInsets.top);
+    lp.leftMargin+=(newInsets.left - oldInsets.left);
+    lp.rightMargin+=(newInsets.right - oldInsets.right);
+    lp.bottomMargin+=(newInsets.bottom - oldInsets.bottom);
   }
-  child.setLayoutParams(flp);
+  child.setLayoutParams(lp);
 }
