@@ -1,2 +1,2 @@
-ViewGroup overlayView
+InsettableFrameLayout container
 LauncherOverlayCallbacks callbacks
