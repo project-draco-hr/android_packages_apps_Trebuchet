@@ -29,15 +29,32 @@
   UserHandleCompat myUserHandle=UserHandleCompat.myUserHandle();
   long userSerialNumber=UserManagerCompat.getInstance(mContext).getSerialNumberForUser(myUserHandle);
   values.put(LauncherSettings.Favorites.PROFILE_ID,userSerialNumber);
+  DeviceProfieData currentProfile=getDeviceProfieData();
   if (favorite.itemType == Favorites.ITEM_TYPE_APPWIDGET) {
     if (!TextUtils.isEmpty(favorite.appWidgetProvider)) {
       values.put(Favorites.APPWIDGET_PROVIDER,favorite.appWidgetProvider);
     }
     values.put(Favorites.APPWIDGET_ID,favorite.appWidgetId);
     values.put(LauncherSettings.Favorites.RESTORED,LauncherAppWidgetInfo.FLAG_ID_NOT_VALID | LauncherAppWidgetInfo.FLAG_PROVIDER_NOT_READY | LauncherAppWidgetInfo.FLAG_UI_NOT_READY);
+    if (((favorite.cellX + favorite.spanX) > currentProfile.desktopCols) || ((favorite.cellY + favorite.spanY) > currentProfile.desktopRows)) {
+      restoreSuccessful=false;
+      throw new InvalidBackupException("Widget not in screen bounds, aborting restore");
+    }
   }
  else {
     values.put(LauncherSettings.Favorites.RESTORED,1);
+    if (favorite.container == Favorites.CONTAINER_HOTSEAT) {
+      if ((favorite.screen >= currentProfile.hotseatCount) || (favorite.screen == currentProfile.allappsRank)) {
+        restoreSuccessful=false;
+        throw new InvalidBackupException("Item not in hotseat bounds, aborting restore");
+      }
+    }
+ else {
+      if ((favorite.cellX >= currentProfile.desktopCols) || (favorite.cellY >= currentProfile.desktopRows)) {
+        restoreSuccessful=false;
+        throw new InvalidBackupException("Item not in desktop bounds, aborting restore");
+      }
+    }
   }
   return values;
 }

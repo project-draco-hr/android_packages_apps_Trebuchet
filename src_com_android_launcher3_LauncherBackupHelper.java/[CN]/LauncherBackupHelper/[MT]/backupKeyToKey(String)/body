@@ -3,14 +3,14 @@
     Key key=Key.parseFrom(Base64.decode(backupKey,Base64.DEFAULT));
     if (key.checksum != checkKey(key)) {
       key=null;
-      throw new KeyParsingException("invalid key read from stream" + backupKey);
+      throw new InvalidBackupException("invalid key read from stream" + backupKey);
     }
     return key;
   }
  catch (  InvalidProtocolBufferNanoException e) {
-    throw new KeyParsingException(e);
+    throw new InvalidBackupException(e);
   }
 catch (  IllegalArgumentException e) {
-    throw new KeyParsingException(e);
+    throw new InvalidBackupException(e);
   }
 }

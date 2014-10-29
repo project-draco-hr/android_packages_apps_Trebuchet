@@ -1,4 +1,7 @@
 {
+  if (mCurrentProfile != null) {
+    return mCurrentProfile;
+  }
   LauncherAppState.setApplicationContext(mContext.getApplicationContext());
   LauncherAppState app=LauncherAppState.getInstance();
   DeviceProfile profile;
@@ -8,10 +11,10 @@
  else {
     profile=app.getDynamicGrid().getDeviceProfile();
   }
-  DeviceProfieData data=new DeviceProfieData();
-  data.desktopRows=profile.numRows;
-  data.desktopCols=profile.numColumns;
-  data.hotseatCount=profile.numHotseatIcons;
-  data.allappsRank=profile.hotseatAllAppsRank;
-  return data;
+  mCurrentProfile=new DeviceProfieData();
+  mCurrentProfile.desktopRows=profile.numRows;
+  mCurrentProfile.desktopCols=profile.numColumns;
+  mCurrentProfile.hotseatCount=profile.numHotseatIcons;
+  mCurrentProfile.allappsRank=profile.hotseatAllAppsRank;
+  return mCurrentProfile;
 }

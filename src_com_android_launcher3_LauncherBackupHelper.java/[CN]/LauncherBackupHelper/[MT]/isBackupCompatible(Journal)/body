@@ -1,3 +1,15 @@
 {
-  return true;
+  DeviceProfieData currentProfile=getDeviceProfieData();
+  DeviceProfieData oldProfile=oldState.profile;
+  if (oldProfile == null || oldProfile.desktopCols == 0) {
+    return true;
+  }
+  boolean isHotsetCompatible=false;
+  if (currentProfile.allappsRank >= oldProfile.hotseatCount) {
+    isHotsetCompatible=true;
+  }
+  if ((currentProfile.hotseatCount >= oldProfile.hotseatCount) && (currentProfile.allappsRank == oldProfile.allappsRank)) {
+    isHotsetCompatible=true;
+  }
+  return isHotsetCompatible && (currentProfile.desktopCols >= oldProfile.desktopCols) && (currentProfile.desktopRows >= oldProfile.desktopRows);
 }
