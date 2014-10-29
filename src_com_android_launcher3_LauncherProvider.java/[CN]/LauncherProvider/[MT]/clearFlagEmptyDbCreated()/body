@@ -1,0 +1,4 @@
+{
+  String spKey=LauncherAppState.getSharedPreferencesKey();
+  getContext().getSharedPreferences(spKey,Context.MODE_PRIVATE).edit().remove(EMPTY_DATABASE_CREATED).commit();
+}

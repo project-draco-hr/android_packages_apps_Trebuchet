@@ -22,6 +22,6 @@
       createEmptyDB();
       mOpenHelper.loadFavorites(mOpenHelper.getWritableDatabase(),getDefaultLayoutParser());
     }
-    sp.edit().remove(EMPTY_DATABASE_CREATED).commit();
+    clearFlagEmptyDbCreated();
   }
 }

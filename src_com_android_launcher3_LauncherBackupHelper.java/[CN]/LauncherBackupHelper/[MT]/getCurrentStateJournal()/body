@@ -3,5 +3,7 @@
   journal.t=mLastBackupRestoreTime;
   journal.key=mKeys.toArray(new BackupProtos.Key[mKeys.size()]);
   journal.appVersion=getAppVersion();
+  journal.backupVersion=BACKUP_VERSION;
+  journal.profile=getDeviceProfieData();
   return journal;
 }

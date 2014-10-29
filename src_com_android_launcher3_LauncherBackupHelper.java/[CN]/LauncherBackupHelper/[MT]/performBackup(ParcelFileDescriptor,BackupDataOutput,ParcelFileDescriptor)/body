@@ -25,6 +25,8 @@
     }
     mExistingKeys.clear();
     mLastBackupRestoreTime=newBackupTime;
+    Journal state=getCurrentStateJournal();
+    writeRowToBackup(JOURNAL_KEY,state,data);
   }
  catch (  IOException e) {
     Log.e(TAG,"launcher backup has failed",e);
