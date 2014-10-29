@@ -10,15 +10,7 @@
   LauncherAppState.setApplicationContext(getApplicationContext());
   LauncherAppState app=LauncherAppState.getInstance();
   LauncherAppState.getLauncherProvider().setLauncherProviderChangeListener(this);
-  Point smallestSize=new Point();
-  Point largestSize=new Point();
-  Point realSize=new Point();
-  Display display=getWindowManager().getDefaultDisplay();
-  display.getCurrentSizeRange(smallestSize,largestSize);
-  display.getRealSize(realSize);
-  DisplayMetrics dm=new DisplayMetrics();
-  display.getMetrics(dm);
-  DeviceProfile grid=app.initDynamicGrid(this,Math.min(smallestSize.x,smallestSize.y),Math.min(largestSize.x,largestSize.y),realSize.x,realSize.y,dm.widthPixels,dm.heightPixels);
+  DeviceProfile grid=app.initDynamicGrid(this);
   mSharedPrefs=getSharedPreferences(LauncherAppState.getSharedPreferencesKey(),Context.MODE_PRIVATE);
   mIsSafeModeEnabled=getPackageManager().isSafeMode();
   mModel=app.setLauncher(this);

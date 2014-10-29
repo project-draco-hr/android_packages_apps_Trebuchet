@@ -1,6 +1,0 @@
-{
-  if (mRestoreEnabled) {
-    if (VERBOSE)     Log.v(TAG,"restoring preferences");
-    super.restoreEntity(data);
-  }
-}

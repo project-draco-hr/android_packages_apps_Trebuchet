@@ -1,0 +1,17 @@
+{
+  LauncherAppState.setApplicationContext(mContext.getApplicationContext());
+  LauncherAppState app=LauncherAppState.getInstance();
+  DeviceProfile profile;
+  if (app.getDynamicGrid() == null) {
+    profile=app.initDynamicGrid(mContext);
+  }
+ else {
+    profile=app.getDynamicGrid().getDeviceProfile();
+  }
+  DeviceProfieData data=new DeviceProfieData();
+  data.desktopRows=profile.numRows;
+  data.desktopCols=profile.numColumns;
+  data.hotseatCount=profile.numHotseatIcons;
+  data.allappsRank=profile.hotseatAllAppsRank;
+  return data;
+}

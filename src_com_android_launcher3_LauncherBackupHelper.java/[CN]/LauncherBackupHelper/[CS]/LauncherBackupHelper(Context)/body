@@ -2,4 +2,5 @@
   mContext=context;
   mExistingKeys=new HashSet<String>();
   mKeys=new ArrayList<Key>();
+  restoreSuccessful=true;
 }

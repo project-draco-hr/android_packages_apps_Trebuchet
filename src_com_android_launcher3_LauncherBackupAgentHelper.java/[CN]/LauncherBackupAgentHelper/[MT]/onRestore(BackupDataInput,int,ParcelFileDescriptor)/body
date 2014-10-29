@@ -8,7 +8,11 @@
   final Cursor c=getContentResolver().query(LauncherSettings.Favorites.CONTENT_URI_NO_NOTIFICATION,null,null,null,null);
   boolean hasData=c.moveToNext();
   c.close();
-  if (!hasData) {
+  if (hasData && mHelper.restoreSuccessful) {
+    LauncherAppState.getLauncherProvider().clearFlagEmptyDbCreated();
+    LauncherClings.synchonouslyMarkFirstRunClingDismissed(this);
+  }
+ else {
     if (VERBOSE)     Log.v(TAG,"Nothing was restored, clearing DB");
     LauncherAppState.getLauncherProvider().createEmptyDB();
   }
