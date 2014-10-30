@@ -1,4 +1,4 @@
 {
   mBound=true;
-  replayUpdates(null);
+  mWorker.post(this);
 }
