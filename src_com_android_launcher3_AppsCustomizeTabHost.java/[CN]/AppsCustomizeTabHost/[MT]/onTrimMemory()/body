@@ -1,4 +1,0 @@
-{
-  mContent.setVisibility(GONE);
-  mPagedView.clearAllWidgetPages();
-}
