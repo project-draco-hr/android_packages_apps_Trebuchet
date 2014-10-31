@@ -10,4 +10,5 @@
   if (mSearchDropTargetBar != null) {
     mSearchDropTargetBar.hideSearchBar(false);
   }
+  mStateAnimation=null;
 }
