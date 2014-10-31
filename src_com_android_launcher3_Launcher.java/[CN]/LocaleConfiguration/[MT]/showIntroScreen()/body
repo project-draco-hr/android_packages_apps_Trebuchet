@@ -4,4 +4,7 @@
   if (introScreen != null) {
     mDragLayer.showOverlayView(introScreen);
   }
+  if (mLauncherOverlayContainer != null) {
+    mLauncherOverlayContainer.setVisibility(View.INVISIBLE);
+  }
 }

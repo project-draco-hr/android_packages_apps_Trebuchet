@@ -51,13 +51,6 @@
   registerReceiver(mCloseSystemDialogsReceiver,filter);
   updateGlobalIcons();
   unlockScreenOrientation(true);
-  if (shouldShowIntroScreen()) {
-    showIntroScreen();
-  }
- else {
-    showFirstRunActivity();
-    showFirstRunClings();
-  }
   if (mLauncherCallbacks != null) {
     mLauncherCallbacks.onCreate(savedInstanceState);
     if (mLauncherCallbacks.hasLauncherOverlay()) {
@@ -66,5 +59,12 @@
       mLauncherOverlay=mLauncherCallbacks.setLauncherOverlayView(mLauncherOverlayContainer,mLauncherOverlayCallbacks);
       mWorkspace.setLauncherOverlay(mLauncherOverlay);
     }
+  }
+  if (shouldShowIntroScreen()) {
+    showIntroScreen();
+  }
+ else {
+    showFirstRunActivity();
+    showFirstRunClings();
   }
 }

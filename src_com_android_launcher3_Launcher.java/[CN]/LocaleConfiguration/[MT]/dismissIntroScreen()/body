@@ -4,6 +4,9 @@
     mWorkspace.postDelayed(new Runnable(){
       @Override public void run(){
         mDragLayer.dismissOverlayView();
+        if (mLauncherOverlayContainer != null) {
+          mLauncherOverlayContainer.setVisibility(View.VISIBLE);
+        }
         showFirstRunClings();
       }
     }
@@ -11,6 +14,9 @@
   }
  else {
     mDragLayer.dismissOverlayView();
+    if (mLauncherOverlayContainer != null) {
+      mLauncherOverlayContainer.setVisibility(View.VISIBLE);
+    }
     showFirstRunClings();
   }
   changeWallpaperVisiblity(true);
