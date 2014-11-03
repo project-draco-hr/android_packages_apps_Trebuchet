@@ -1,4 +1,4 @@
 {
   mResumed=true;
-  replayUpdates(null);
+  mWorker.post(this);
 }
