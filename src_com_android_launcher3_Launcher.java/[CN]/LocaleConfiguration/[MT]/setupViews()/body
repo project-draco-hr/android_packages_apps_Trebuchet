@@ -65,6 +65,7 @@
   dragController.addDropTarget(mWorkspace);
   if (mSearchDropTargetBar != null) {
     mSearchDropTargetBar.setup(this,dragController);
+    mSearchDropTargetBar.setQsbSearchBar(getQsbBar());
   }
   if (getResources().getBoolean(R.bool.debug_memory_enabled)) {
     Log.v(TAG,"adding WeightWatcher");

@@ -1,6 +1,4 @@
 {
-  SearchManager searchManager=(SearchManager)mContext.getSystemService(Context.SEARCH_SERVICE);
-  ComponentName searchComponent=searchManager.getGlobalSearchActivity();
-  if (searchComponent == null)   return null;
-  return getProviderInPackage(searchComponent.getPackageName());
+  AppWidgetProviderInfo searchProvider=Utilities.getSearchWidgetProvider(mContext);
+  return (searchProvider == null) ? null : searchProvider.provider;
 }

@@ -1,7 +1,0 @@
-{
-  super.onDraw(canvas);
-  if (mImageView == null) {
-    mImageView=(ImageView)findViewById(mImageViewId);
-  }
-  mHolographicHelper.generatePressedFocusedStates(mImageView);
-}

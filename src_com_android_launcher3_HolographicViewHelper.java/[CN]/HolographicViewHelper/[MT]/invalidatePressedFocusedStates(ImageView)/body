@@ -1,6 +1,0 @@
-{
-  mStatesUpdated=false;
-  if (v != null) {
-    v.invalidate();
-  }
-}
