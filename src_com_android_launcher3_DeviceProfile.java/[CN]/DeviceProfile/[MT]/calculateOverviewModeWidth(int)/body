@@ -1,3 +1,0 @@
-{
-  return visibleChildCount * overviewModeBarItemWidthPx + (visibleChildCount - 1) * overviewModeBarSpacerWidthPx;
-}
