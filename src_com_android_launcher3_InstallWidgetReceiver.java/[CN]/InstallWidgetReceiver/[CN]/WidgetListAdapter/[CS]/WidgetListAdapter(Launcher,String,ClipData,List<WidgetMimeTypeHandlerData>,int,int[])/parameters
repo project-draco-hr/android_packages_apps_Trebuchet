@@ -1,6 +1,0 @@
-Launcher l
-String mimeType
-ClipData data
-List<WidgetMimeTypeHandlerData> list
-int targetScreen
-int[] targetPos
