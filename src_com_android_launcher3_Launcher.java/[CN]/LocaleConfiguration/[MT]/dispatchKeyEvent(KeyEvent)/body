@@ -4,7 +4,7 @@ switch (event.getKeyCode()) {
 case KeyEvent.KEYCODE_HOME:
       return true;
 case KeyEvent.KEYCODE_VOLUME_DOWN:
-    if (isPropertyEnabled(DUMP_STATE_PROPERTY)) {
+    if (Utilities.isPropertyEnabled(DUMP_STATE_PROPERTY)) {
       dumpState();
       return true;
     }
