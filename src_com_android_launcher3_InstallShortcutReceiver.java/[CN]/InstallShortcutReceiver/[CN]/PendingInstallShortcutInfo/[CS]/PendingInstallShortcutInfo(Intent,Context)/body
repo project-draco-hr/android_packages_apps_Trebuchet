@@ -1,0 +1,8 @@
+{
+  this.data=data;
+  mContext=context;
+  launchIntent=data.getParcelableExtra(Intent.EXTRA_SHORTCUT_INTENT);
+  label=data.getStringExtra(Intent.EXTRA_SHORTCUT_NAME);
+  user=UserHandleCompat.myUserHandle();
+  activityInfo=null;
+}

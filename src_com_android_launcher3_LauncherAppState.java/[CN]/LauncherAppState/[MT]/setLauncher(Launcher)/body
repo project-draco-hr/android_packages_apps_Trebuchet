@@ -1,7 +1,4 @@
 {
-  if (mModel == null) {
-    throw new IllegalStateException("setLauncher() called before init()");
-  }
   mModel.initialize(launcher);
   return mModel;
 }

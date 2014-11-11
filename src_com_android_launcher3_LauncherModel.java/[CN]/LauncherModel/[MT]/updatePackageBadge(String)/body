@@ -1,7 +1,7 @@
 {
   Runnable r=new Runnable(){
     public void run(){
-      Callbacks callbacks=mCallbacks != null ? mCallbacks.get() : null;
+      Callbacks callbacks=getCallback();
       if (callbacks != null) {
         callbacks.updatePackageBadge(packageName);
       }

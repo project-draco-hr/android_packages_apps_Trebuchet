@@ -1,0 +1,11 @@
+{
+  LauncherAppState.setApplicationContext(context.getApplicationContext());
+  LauncherAppState app=LauncherAppState.getInstance();
+  boolean launcherNotLoaded=app.getModel().getCallback() == null;
+  String spKey=LauncherAppState.getSharedPreferencesKey();
+  SharedPreferences sp=context.getSharedPreferences(spKey,Context.MODE_PRIVATE);
+  addToInstallQueue(sp,info);
+  if (!mUseInstallQueue && !launcherNotLoaded) {
+    flushInstallQueue(context);
+  }
+}

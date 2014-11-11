@@ -1,39 +1,29 @@
 {
   String spKey=LauncherAppState.getSharedPreferencesKey();
   SharedPreferences sp=context.getSharedPreferences(spKey,Context.MODE_PRIVATE);
-  ArrayList<PendingInstallShortcutInfo> installQueue=getAndClearInstallQueue(sp);
+  ArrayList<PendingInstallShortcutInfo> installQueue=getAndClearInstallQueue(sp,context);
   if (!installQueue.isEmpty()) {
     Iterator<PendingInstallShortcutInfo> iter=installQueue.iterator();
     ArrayList<ItemInfo> addShortcuts=new ArrayList<ItemInfo>();
-    int result=INSTALL_SHORTCUT_SUCCESSFUL;
-    String duplicateName="";
     while (iter.hasNext()) {
       final PendingInstallShortcutInfo pendingInfo=iter.next();
       final Intent intent=pendingInfo.launchIntent;
-      final String name=pendingInfo.name;
       if (LauncherAppState.isDisableAllApps() && !isValidShortcutLaunchIntent(intent)) {
         if (DBG)         Log.d(TAG,"Ignoring shortcut with launchIntent:" + intent);
         continue;
       }
-      final boolean exists=LauncherModel.shortcutExists(context,name,intent);
-      String packageName=intent.getPackage();
-      if (packageName == null) {
-        packageName=intent.getComponent() == null ? null : intent.getComponent().getPackageName();
-      }
-      if (packageName != null && !packageName.isEmpty()) {
+      String packageName=pendingInfo.getTargetPackage();
+      if (TextUtils.isEmpty(packageName)) {
         UserHandleCompat myUserHandle=UserHandleCompat.myUserHandle();
         if (!LauncherModel.isValidPackage(context,packageName,myUserHandle)) {
           if (DBG)           Log.d(TAG,"Ignoring shortcut for absent package:" + intent);
           continue;
         }
       }
+      final boolean exists=LauncherModel.shortcutExists(context,pendingInfo.label,intent,pendingInfo.user);
       if (!exists) {
-        ShortcutInfo info=getShortcutInfo(context,pendingInfo.data,pendingInfo.launchIntent);
-        addShortcuts.add(info);
+        addShortcuts.add(pendingInfo.getShortcutInfo());
       }
-    }
-    if (result == INSTALL_SHORTCUT_IS_DUPLICATE) {
-      Toast.makeText(context,context.getString(R.string.shortcut_duplicate,duplicateName),Toast.LENGTH_SHORT).show();
     }
     if (!addShortcuts.isEmpty()) {
       LauncherAppState app=LauncherAppState.getInstance();

@@ -9,6 +9,7 @@
   mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
   final List<UserHandleCompat> profiles=mUserManager.getUserProfiles();
   mBgAllAppsList.clear();
+  SharedPreferences prefs=mContext.getSharedPreferences(LauncherAppState.getSharedPreferencesKey(),Context.MODE_PRIVATE);
   for (  UserHandleCompat user : profiles) {
     final long qiaTime=DEBUG_LOADERS ? SystemClock.uptimeMillis() : 0;
     List<LauncherActivityInfoCompat> apps=mLauncherApps.getActivityList(null,user);
@@ -27,6 +28,19 @@
     for (int i=0; i < apps.size(); i++) {
       LauncherActivityInfoCompat app=apps.get(i);
       mBgAllAppsList.add(new AppInfo(mContext,app,user,mIconCache,mLabelCache));
+    }
+    if (!user.equals(UserHandleCompat.myUserHandle())) {
+      String shortcutsSetKey=INSTALLED_SHORTCUTS_SET_PREFIX + mUserManager.getSerialNumberForUser(user);
+      Set<String> packagesAdded=prefs.getStringSet(shortcutsSetKey,Collections.EMPTY_SET);
+      HashSet<String> newPackageSet=new HashSet<String>();
+      for (      LauncherActivityInfoCompat info : apps) {
+        String packageName=info.getComponentName().getPackageName();
+        if (!packagesAdded.contains(packageName) && !newPackageSet.contains(packageName)) {
+          InstallShortcutReceiver.queueInstallShortcut(info,mContext);
+        }
+        newPackageSet.add(packageName);
+      }
+      prefs.edit().putStringSet(shortcutsSetKey,newPackageSet).commit();
     }
   }
   final ArrayList<AppInfo> added=mBgAllAppsList.added;

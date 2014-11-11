@@ -1,0 +1,3 @@
+{
+  return mCallbacks != null ? mCallbacks.get() : null;
+}
