@@ -1,4 +1,0 @@
-{
-  boolean enableRotation=sForceEnableRotation || getResources().getBoolean(R.bool.allow_rotation);
-  return enableRotation;
-}
