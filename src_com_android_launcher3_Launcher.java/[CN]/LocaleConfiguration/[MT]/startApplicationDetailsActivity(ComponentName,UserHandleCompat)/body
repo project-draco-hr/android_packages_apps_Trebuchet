@@ -1,8 +1,6 @@
 {
-  String packageName=componentName.getPackageName();
   try {
     LauncherAppsCompat launcherApps=LauncherAppsCompat.getInstance(this);
-    UserManagerCompat userManager=UserManagerCompat.getInstance(this);
     launcherApps.showAppDetailsForProfile(componentName,user);
   }
  catch (  SecurityException e) {

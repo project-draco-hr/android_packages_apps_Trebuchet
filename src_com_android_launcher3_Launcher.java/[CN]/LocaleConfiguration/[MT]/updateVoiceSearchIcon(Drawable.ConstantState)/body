@@ -1,9 +1,0 @@
-{
-  if (mLauncherCallbacks != null && mLauncherCallbacks.providesSearch()) {
-    return;
-  }
-  final View voiceButtonContainer=findViewById(R.id.voice_button_container);
-  final View voiceButton=findViewById(R.id.voice_button);
-  updateButtonWithDrawable(R.id.voice_button,d);
-  invalidatePressedFocusedStates(voiceButtonContainer,voiceButton);
-}

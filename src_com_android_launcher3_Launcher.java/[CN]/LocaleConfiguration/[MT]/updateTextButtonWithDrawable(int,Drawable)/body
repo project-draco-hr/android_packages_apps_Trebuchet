@@ -1,4 +1,0 @@
-{
-  TextView button=(TextView)findViewById(buttonId);
-  button.setCompoundDrawables(d,null,null,null);
-}

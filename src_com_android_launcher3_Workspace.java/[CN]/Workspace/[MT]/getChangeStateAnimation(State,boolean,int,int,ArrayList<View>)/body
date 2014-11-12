@@ -192,7 +192,6 @@
     setScaleY(mNewScale);
     setTranslationY(finalWorkspaceTranslationY);
   }
-  mLauncher.updateVoiceButtonProxyVisible(false);
   if (stateIsNormal) {
     animateBackgroundGradient(0f,animated);
   }

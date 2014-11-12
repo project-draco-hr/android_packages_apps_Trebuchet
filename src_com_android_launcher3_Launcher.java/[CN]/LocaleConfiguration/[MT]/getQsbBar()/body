@@ -3,8 +3,32 @@
     return mLauncherCallbacks.getQsbBar();
   }
   if (mQsb == null) {
-    mQsb=mInflater.inflate(R.layout.qsb,mSearchDropTargetBar,false);
-    mSearchDropTargetBar.addView(mQsb);
+    AppWidgetProviderInfo searchProvider=Utilities.getSearchWidgetProvider(this);
+    if (searchProvider == null) {
+      return null;
+    }
+    Bundle opts=new Bundle();
+    opts.putInt(AppWidgetManager.OPTION_APPWIDGET_HOST_CATEGORY,AppWidgetProviderInfo.WIDGET_CATEGORY_SEARCHBOX);
+    SharedPreferences sp=getSharedPreferences(LauncherAppState.getSharedPreferencesKey(),MODE_PRIVATE);
+    int widgetId=sp.getInt(QSB_WIDGET_ID,-1);
+    if (!searchProvider.provider.flattenToString().equals(sp.getString(QSB_WIDGET_PROVIDER,null)) || (widgetId == -1) || !mAppWidgetManager.getAppWidgetInfo(widgetId).provider.equals(searchProvider.provider)) {
+      if (widgetId > -1) {
+        mAppWidgetHost.deleteAppWidgetId(widgetId);
+        widgetId=-1;
+      }
+      widgetId=mAppWidgetHost.allocateAppWidgetId();
+      if (!AppWidgetManagerCompat.getInstance(this).bindAppWidgetIdIfAllowed(widgetId,searchProvider,opts)) {
+        mAppWidgetHost.deleteAppWidgetId(widgetId);
+        widgetId=-1;
+      }
+      sp.edit().putInt(QSB_WIDGET_ID,widgetId).putString(QSB_WIDGET_PROVIDER,searchProvider.provider.flattenToString()).commit();
+    }
+    if (widgetId != -1) {
+      mQsb=mAppWidgetHost.createView(this,widgetId,searchProvider);
+      mQsb.updateAppWidgetOptions(opts);
+      mQsb.setPadding(0,0,0,0);
+      mSearchDropTargetBar.addView(mQsb);
+    }
   }
   return mQsb;
 }

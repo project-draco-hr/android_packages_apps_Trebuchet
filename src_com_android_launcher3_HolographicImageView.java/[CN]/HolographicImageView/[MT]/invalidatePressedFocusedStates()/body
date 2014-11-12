@@ -1,3 +1,0 @@
-{
-  mHolographicHelper.invalidatePressedFocusedStates(this);
-}
