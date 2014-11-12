@@ -1,0 +1,36 @@
+{
+  try {
+    JSONObject object=(JSONObject)new JSONTokener(encoded).nextValue();
+    Intent launcherIntent=Intent.parseUri(object.getString(LAUNCH_INTENT_KEY),0);
+    if (object.optBoolean(APP_SHORTCUT_TYPE_KEY)) {
+      UserHandleCompat user=UserManagerCompat.getInstance(context).getUserForSerialNumber(object.getLong(USER_HANDLE_KEY));
+      LauncherActivityInfoCompat info=LauncherAppsCompat.getInstance(context).resolveActivity(launcherIntent,user);
+      return info == null ? null : new PendingInstallShortcutInfo(info,context);
+    }
+    Intent data=new Intent();
+    data.putExtra(Intent.EXTRA_SHORTCUT_INTENT,launcherIntent);
+    data.putExtra(Intent.EXTRA_SHORTCUT_NAME,object.getString(NAME_KEY));
+    String iconBase64=object.optString(ICON_KEY);
+    String iconResourceName=object.optString(ICON_RESOURCE_NAME_KEY);
+    String iconResourcePackageName=object.optString(ICON_RESOURCE_PACKAGE_NAME_KEY);
+    if (iconBase64 != null && !iconBase64.isEmpty()) {
+      byte[] iconArray=Base64.decode(iconBase64,Base64.DEFAULT);
+      Bitmap b=BitmapFactory.decodeByteArray(iconArray,0,iconArray.length);
+      data.putExtra(Intent.EXTRA_SHORTCUT_ICON,b);
+    }
+ else     if (iconResourceName != null && !iconResourceName.isEmpty()) {
+      Intent.ShortcutIconResource iconResource=new Intent.ShortcutIconResource();
+      iconResource.resourceName=iconResourceName;
+      iconResource.packageName=iconResourcePackageName;
+      data.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE,iconResource);
+    }
+    return new PendingInstallShortcutInfo(data,context);
+  }
+ catch (  JSONException e) {
+    Log.d(TAG,"Exception reading shortcut to add: " + e);
+  }
+catch (  URISyntaxException e) {
+    Log.d(TAG,"Exception reading shortcut to add: " + e);
+  }
+  return null;
+}

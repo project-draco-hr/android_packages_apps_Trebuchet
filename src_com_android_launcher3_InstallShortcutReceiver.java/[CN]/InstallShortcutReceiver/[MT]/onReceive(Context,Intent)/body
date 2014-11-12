@@ -3,23 +3,6 @@
     return;
   }
   if (DBG)   Log.d(TAG,"Got INSTALL_SHORTCUT: " + data.toUri(0));
-  Intent intent=data.getParcelableExtra(Intent.EXTRA_SHORTCUT_INTENT);
-  if (intent == null) {
-    return;
-  }
-  String name=ensureValidName(context,intent,data.getStringExtra(Intent.EXTRA_SHORTCUT_NAME)).toString();
-  Bitmap icon=data.getParcelableExtra(Intent.EXTRA_SHORTCUT_ICON);
-  Intent.ShortcutIconResource iconResource=data.getParcelableExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE);
-  LauncherAppState.setApplicationContext(context.getApplicationContext());
-  LauncherAppState app=LauncherAppState.getInstance();
-  boolean launcherNotLoaded=(app.getDynamicGrid() == null);
-  PendingInstallShortcutInfo info=new PendingInstallShortcutInfo(data,name,intent);
-  info.icon=icon;
-  info.iconResource=iconResource;
-  String spKey=LauncherAppState.getSharedPreferencesKey();
-  SharedPreferences sp=context.getSharedPreferences(spKey,Context.MODE_PRIVATE);
-  addToInstallQueue(sp,info);
-  if (!mUseInstallQueue && !launcherNotLoaded) {
-    flushInstallQueue(context);
-  }
+  PendingInstallShortcutInfo info=new PendingInstallShortcutInfo(data,context);
+  queuePendingShortcutInfo(info,context);
 }

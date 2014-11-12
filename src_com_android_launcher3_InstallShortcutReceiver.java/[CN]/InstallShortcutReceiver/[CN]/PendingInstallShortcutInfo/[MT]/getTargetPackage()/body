@@ -1,0 +1,7 @@
+{
+  String packageName=launchIntent.getPackage();
+  if (packageName == null) {
+    packageName=launchIntent.getComponent() == null ? null : launchIntent.getComponent().getPackageName();
+  }
+  return packageName;
+}

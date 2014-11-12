@@ -1,0 +1,17 @@
+{
+  if (activityInfo != null) {
+    final ShortcutInfo info=new ShortcutInfo();
+    info.user=user;
+    info.title=label;
+    info.contentDescription=label;
+    info.customIcon=false;
+    info.intent=launchIntent;
+    info.itemType=LauncherSettings.Favorites.ITEM_TYPE_APPLICATION;
+    info.flags=AppInfo.initFlags(activityInfo);
+    info.firstInstallTime=activityInfo.getFirstInstallTime();
+    return info;
+  }
+ else {
+    return LauncherAppState.getInstance().getModel().infoFromShortcutIntent(mContext,data);
+  }
+}

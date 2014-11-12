@@ -1,0 +1,8 @@
+{
+  this.data=null;
+  mContext=context;
+  activityInfo=info;
+  user=info.getUser();
+  launchIntent=AppInfo.makeLaunchIntent(context,info,user);
+  label=info.getLabel().toString();
+}

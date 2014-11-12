@@ -1,5 +1,5 @@
 {
-  final Callbacks callbacks=mCallbacks != null ? mCallbacks.get() : null;
+  final Callbacks callbacks=getCallback();
   if (workspaceApps == null) {
     throw new RuntimeException("workspaceApps and allAppsApps must not be null");
   }
@@ -22,7 +22,7 @@ synchronized (sBgLock) {
           ItemInfo a=iter.next();
           final String name=a.title.toString();
           final Intent launchIntent=a.getIntent();
-          if (shortcutExists(context,name,launchIntent)) {
+          if (shortcutExists(context,name,launchIntent,a.user)) {
             continue;
           }
           int startSearchPageIndex=workspaceScreens.isEmpty() ? 0 : 1;
@@ -59,7 +59,7 @@ synchronized (sBgLock) {
       if (!addedShortcutsFinal.isEmpty()) {
         runOnMainThread(new Runnable(){
           public void run(){
-            Callbacks cb=mCallbacks != null ? mCallbacks.get() : null;
+            Callbacks cb=getCallback();
             if (callbacks == cb && cb != null) {
               final ArrayList<ItemInfo> addAnimated=new ArrayList<ItemInfo>();
               final ArrayList<ItemInfo> addNotAnimated=new ArrayList<ItemInfo>();

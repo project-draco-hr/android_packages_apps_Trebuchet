@@ -1,5 +1,5 @@
 {
-  final Callbacks callbacks=mCallbacks != null ? mCallbacks.get() : null;
+  final Callbacks callbacks=getCallback();
   if (allAppsApps == null) {
     throw new RuntimeException("allAppsApps must not be null");
   }
@@ -10,7 +10,7 @@
     public void run(){
       runOnMainThread(new Runnable(){
         public void run(){
-          Callbacks cb=mCallbacks != null ? mCallbacks.get() : null;
+          Callbacks cb=getCallback();
           if (callbacks == cb && cb != null) {
             callbacks.bindAppsAdded(null,null,null,allAppsApps);
           }

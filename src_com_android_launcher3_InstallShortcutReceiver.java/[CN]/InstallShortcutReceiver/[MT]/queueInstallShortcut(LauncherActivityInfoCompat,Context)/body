@@ -1,0 +1,3 @@
+{
+  queuePendingShortcutInfo(new PendingInstallShortcutInfo(info,context),context);
+}

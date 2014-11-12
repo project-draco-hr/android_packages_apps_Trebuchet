@@ -1,0 +1,18 @@
+{
+synchronized (sLock) {
+    Set<String> strings=sharedPrefs.getStringSet(APPS_PENDING_INSTALL,null);
+    if (DBG)     Log.d(TAG,"Getting and clearing APPS_PENDING_INSTALL: " + strings);
+    if (strings == null) {
+      return new ArrayList<PendingInstallShortcutInfo>();
+    }
+    ArrayList<PendingInstallShortcutInfo> infos=new ArrayList<PendingInstallShortcutInfo>();
+    for (    String encoded : strings) {
+      PendingInstallShortcutInfo info=decode(encoded,context);
+      if (info != null) {
+        infos.add(info);
+      }
+    }
+    sharedPrefs.edit().putStringSet(APPS_PENDING_INSTALL,new HashSet<String>()).commit();
+    return infos;
+  }
+}

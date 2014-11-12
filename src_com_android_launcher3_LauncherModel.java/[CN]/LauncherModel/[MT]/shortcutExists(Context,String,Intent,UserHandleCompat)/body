@@ -15,13 +15,12 @@
     intentWithPkg=intent;
     intentWithoutPkg=intent;
   }
-  Cursor c=cr.query(LauncherSettings.Favorites.CONTENT_URI,new String[]{"title","intent"},"title=? and (intent=? or intent=?)",new String[]{title,intentWithPkg.toUri(0),intentWithoutPkg.toUri(0)},null);
-  boolean result=false;
+  String userSerial=Long.toString(UserManagerCompat.getInstance(context).getSerialNumberForUser(user));
+  Cursor c=cr.query(LauncherSettings.Favorites.CONTENT_URI,new String[]{"title","intent","profileId"},"title=? and (intent=? or intent=?) and profileId=?",new String[]{title,intentWithPkg.toUri(0),intentWithoutPkg.toUri(0),userSerial},null);
   try {
-    result=c.moveToFirst();
+    return c.moveToFirst();
   }
   finally {
     c.close();
   }
-  return result;
 }

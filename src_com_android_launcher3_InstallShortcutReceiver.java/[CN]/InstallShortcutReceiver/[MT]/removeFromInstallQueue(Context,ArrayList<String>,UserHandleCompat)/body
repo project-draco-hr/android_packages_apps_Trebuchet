@@ -1,0 +1,25 @@
+{
+  if (packageNames.isEmpty()) {
+    return;
+  }
+  String spKey=LauncherAppState.getSharedPreferencesKey();
+  SharedPreferences sp=context.getSharedPreferences(spKey,Context.MODE_PRIVATE);
+synchronized (sLock) {
+    Set<String> strings=sp.getStringSet(APPS_PENDING_INSTALL,null);
+    if (DBG) {
+      Log.d(TAG,"APPS_PENDING_INSTALL: " + strings + ", removing packages: "+ packageNames);
+    }
+    if (strings != null) {
+      Set<String> newStrings=new HashSet<String>(strings);
+      Iterator<String> newStringsIter=newStrings.iterator();
+      while (newStringsIter.hasNext()) {
+        String encoded=newStringsIter.next();
+        PendingInstallShortcutInfo info=decode(encoded,context);
+        if (info == null || (packageNames.contains(info.getTargetPackage()) && user.equals(info.user))) {
+          newStringsIter.remove();
+        }
+      }
+      sp.edit().putStringSet(APPS_PENDING_INSTALL,newStrings).commit();
+    }
+  }
+}
