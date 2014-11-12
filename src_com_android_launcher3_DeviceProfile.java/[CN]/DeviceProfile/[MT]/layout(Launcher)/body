@@ -8,7 +8,6 @@
     lp.gravity=Gravity.TOP | Gravity.LEFT;
     lp.width=searchBarSpaceHeightPx;
     lp.height=LayoutParams.WRAP_CONTENT;
-    searchBar.setPadding(0,2 * edgeMarginPx,0,2 * edgeMarginPx);
     LinearLayout targets=(LinearLayout)searchBar.findViewById(R.id.drag_target_bar);
     targets.setOrientation(LinearLayout.VERTICAL);
   }
@@ -16,20 +15,8 @@
     lp.gravity=Gravity.TOP | Gravity.CENTER_HORIZONTAL;
     lp.width=searchBarSpaceWidthPx;
     lp.height=searchBarSpaceHeightPx;
-    searchBar.setPadding(2 * edgeMarginPx,getSearchBarTopOffset(),2 * edgeMarginPx,0);
   }
   searchBar.setLayoutParams(lp);
-  View voiceButtonProxy=launcher.findViewById(R.id.voice_button_proxy);
-  if (voiceButtonProxy != null) {
-    if (hasVerticalBarLayout) {
-    }
- else {
-      lp=(FrameLayout.LayoutParams)voiceButtonProxy.getLayoutParams();
-      lp.gravity=Gravity.TOP | Gravity.END;
-      lp.width=(widthPx - searchBarSpaceWidthPx) / 2 + 2 * iconSizePx;
-      lp.height=searchBarSpaceHeightPx;
-    }
-  }
   PagedView workspace=(PagedView)launcher.findViewById(R.id.workspace);
   lp=(FrameLayout.LayoutParams)workspace.getLayoutParams();
   lp.gravity=Gravity.CENTER;

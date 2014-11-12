@@ -3,10 +3,8 @@
   iconTextSizePx=(int)(DynamicGrid.pxFromSp(iconTextSize,dm) * scale);
   iconDrawablePaddingPx=drawablePadding;
   hotseatIconSizePx=(int)(DynamicGrid.pxFromDp(hotseatIconSize,dm) * scale);
-  searchBarSpaceMaxWidthPx=resources.getDimensionPixelSize(R.dimen.dynamic_grid_search_bar_max_width);
-  searchBarHeightPx=resources.getDimensionPixelSize(R.dimen.dynamic_grid_search_bar_height);
-  searchBarSpaceWidthPx=Math.min(searchBarSpaceMaxWidthPx,widthPx);
-  searchBarSpaceHeightPx=searchBarHeightPx + getSearchBarTopOffset();
+  searchBarSpaceWidthPx=Math.min(widthPx,resources.getDimensionPixelSize(R.dimen.dynamic_grid_search_bar_max_width));
+  searchBarSpaceHeightPx=getSearchBarTopOffset() + resources.getDimensionPixelSize(R.dimen.dynamic_grid_search_bar_height);
   Paint textPaint=new Paint();
   textPaint.setTextSize(iconTextSizePx);
   FontMetrics fm=textPaint.getFontMetrics();
@@ -21,8 +19,6 @@
   folderCellHeightPx=cellHeightPx + edgeMarginPx;
   folderBackgroundOffset=-edgeMarginPx;
   folderIconSizePx=iconSizePx + 2 * -folderBackgroundOffset;
-  Rect padding=getWorkspacePadding(isLandscape ? CellLayout.LANDSCAPE : CellLayout.PORTRAIT);
-  int pageIndicatorOffset=resources.getDimensionPixelSize(R.dimen.apps_customize_page_indicator_offset);
   allAppsCellWidthPx=allAppsIconSizePx;
   allAppsCellHeightPx=allAppsIconSizePx + drawablePadding + iconTextSizePx;
   int maxLongEdgeCellCount=resources.getInteger(R.integer.config_dynamic_grid_max_long_edge_cell_count);

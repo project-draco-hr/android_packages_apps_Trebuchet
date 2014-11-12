@@ -1,8 +1,0 @@
-{
-switch (getResources().getConfiguration().orientation) {
-case Configuration.ORIENTATION_LANDSCAPE:
-    return 1;
-default :
-  return 0;
-}
-}

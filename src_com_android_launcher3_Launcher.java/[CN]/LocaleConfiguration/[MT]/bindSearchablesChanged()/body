@@ -1,7 +1,10 @@
 {
-  boolean searchVisible=updateGlobalSearchIcon();
-  boolean voiceVisible=updateVoiceSearchIcon(searchVisible);
-  if (mSearchDropTargetBar != null) {
-    mSearchDropTargetBar.onSearchPackagesChanged(searchVisible,voiceVisible);
+  if (mSearchDropTargetBar == null) {
+    return;
   }
+  if (mQsb != null) {
+    mSearchDropTargetBar.removeView(mQsb);
+    mQsb=null;
+  }
+  mSearchDropTargetBar.setQsbSearchBar(getQsbBar());
 }
