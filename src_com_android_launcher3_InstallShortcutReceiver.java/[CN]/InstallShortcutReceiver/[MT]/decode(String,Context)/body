@@ -4,6 +4,9 @@
     Intent launcherIntent=Intent.parseUri(object.getString(LAUNCH_INTENT_KEY),0);
     if (object.optBoolean(APP_SHORTCUT_TYPE_KEY)) {
       UserHandleCompat user=UserManagerCompat.getInstance(context).getUserForSerialNumber(object.getLong(USER_HANDLE_KEY));
+      if (user == null) {
+        return null;
+      }
       LauncherActivityInfoCompat info=LauncherAppsCompat.getInstance(context).resolveActivity(launcherIntent,user);
       return info == null ? null : new PendingInstallShortcutInfo(info,context);
     }
