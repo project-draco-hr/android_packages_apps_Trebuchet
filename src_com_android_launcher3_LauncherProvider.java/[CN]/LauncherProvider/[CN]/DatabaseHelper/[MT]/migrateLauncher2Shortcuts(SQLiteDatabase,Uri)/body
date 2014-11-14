@@ -59,6 +59,10 @@
             userHandle=UserHandleCompat.myUserHandle();
             userSerialNumber=userManager.getSerialNumberForUser(userHandle);
           }
+          if (userHandle == null) {
+            Launcher.addDumpLog(TAG,"skipping deleted user",true);
+            continue;
+          }
           Launcher.addDumpLog(TAG,"migrating \"" + c.getString(titleIndex) + "\" ("+ cellX+ ","+ cellY+ "@"+ LauncherSettings.Favorites.containerToString(container)+ "/"+ screen+ "): "+ intentStr,true);
           if (itemType != Favorites.ITEM_TYPE_FOLDER) {
             final Intent intent;
