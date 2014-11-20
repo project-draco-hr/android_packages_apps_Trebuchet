@@ -3,7 +3,7 @@
   if (level >= ComponentCallbacks2.TRIM_MEMORY_UI_HIDDEN) {
     SQLiteDatabase.releaseMemory();
     if (mAppsCustomizeTabHost != null) {
-      mAppsCustomizeTabHost.reset();
+      mAppsCustomizeTabHost.trimMemory();
     }
   }
 }

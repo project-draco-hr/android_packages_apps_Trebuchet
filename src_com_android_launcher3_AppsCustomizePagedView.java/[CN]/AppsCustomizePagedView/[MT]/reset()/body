@@ -1,5 +1,4 @@
 {
-  super.reset();
   mSaveInstanceStateItemIndex=-1;
   if (mContentType != ContentType.Applications) {
     setContentType(ContentType.Applications);
