@@ -8,6 +8,7 @@
     }
   }
   mState=State.WORKSPACE;
+  setWorkspaceBackground(mState == State.WORKSPACE ? WORKSPACE_BACKGROUND_GRADIENT : WORKSPACE_BACKGROUND_TRANSPARENT);
   mUserPresent=true;
   updateAutoAdvanceState();
   if (changed) {
