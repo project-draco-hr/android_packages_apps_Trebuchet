@@ -9,7 +9,7 @@ case OP_ADD:
       mIconCache.remove(packages[i],mUser);
       mBgAllAppsList.addPackage(context,packages[i],mUser);
     }
-  if (!UserHandleCompat.myUserHandle().equals(mUser)) {
+  if (ADD_MANAGED_PROFILE_SHORTCUTS && !UserHandleCompat.myUserHandle().equals(mUser)) {
     SharedPreferences prefs=context.getSharedPreferences(LauncherAppState.getSharedPreferencesKey(),Context.MODE_PRIVATE);
     String shortcutsSetKey=INSTALLED_SHORTCUTS_SET_PREFIX + mUserManager.getSerialNumberForUser(mUser);
     Set<String> shortcutSet=new HashSet<String>(prefs.getStringSet(shortcutsSetKey,Collections.EMPTY_SET));
@@ -33,7 +33,7 @@ WidgetPreviewLoader.removePackageFromDb(mApp.getWidgetPreviewCacheDb(),packages[
 }
 break;
 case OP_REMOVE:
-if (!UserHandleCompat.myUserHandle().equals(mUser)) {
+if (ADD_MANAGED_PROFILE_SHORTCUTS && !UserHandleCompat.myUserHandle().equals(mUser)) {
 SharedPreferences prefs=context.getSharedPreferences(LauncherAppState.getSharedPreferencesKey(),Context.MODE_PRIVATE);
 String shortcutsSetKey=INSTALLED_SHORTCUTS_SET_PREFIX + mUserManager.getSerialNumberForUser(mUser);
 HashSet<String> shortcutSet=new HashSet<String>(prefs.getStringSet(shortcutsSetKey,Collections.EMPTY_SET));
