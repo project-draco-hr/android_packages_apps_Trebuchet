@@ -29,7 +29,7 @@
       LauncherActivityInfoCompat app=apps.get(i);
       mBgAllAppsList.add(new AppInfo(mContext,app,user,mIconCache,mLabelCache));
     }
-    if (!user.equals(UserHandleCompat.myUserHandle())) {
+    if (ADD_MANAGED_PROFILE_SHORTCUTS && !user.equals(UserHandleCompat.myUserHandle())) {
       String shortcutsSetKey=INSTALLED_SHORTCUTS_SET_PREFIX + mUserManager.getSerialNumberForUser(user);
       Set<String> packagesAdded=prefs.getStringSet(shortcutsSetKey,Collections.EMPTY_SET);
       HashSet<String> newPackageSet=new HashSet<String>();
