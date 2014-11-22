@@ -11,30 +11,6 @@
     mAppWidgetHost.deleteHost();
     sendAppWidgetResetNotify();
   }
-  if (shouldImportLauncher2Database(mContext)) {
-    ContentValuesCallback permuteScreensCb=new ContentValuesCallback(){
-      public void onRow(      ContentValues values){
-        int container=values.getAsInteger(LauncherSettings.Favorites.CONTAINER);
-        if (container == Favorites.CONTAINER_DESKTOP) {
-          int screen=values.getAsInteger(LauncherSettings.Favorites.SCREEN);
-          screen=(int)upgradeLauncherDb_permuteScreens(screen);
-          values.put(LauncherSettings.Favorites.SCREEN,screen);
-        }
-      }
-    }
-;
-    Uri uri=Uri.parse("content://" + Settings.AUTHORITY + "/old_favorites?notify=true");
-    if (!convertDatabase(db,uri,permuteScreensCb,true)) {
-      uri=Uri.parse(mContext.getString(R.string.old_launcher_provider_uri));
-      if (!convertDatabase(db,uri,permuteScreensCb,false)) {
-        setFlagEmptyDbCreated();
-        return;
-      }
-    }
-    setFlagJustLoadedOldDb();
-  }
- else {
-    mMaxItemId=initializeMaxItemId(db);
-    setFlagEmptyDbCreated();
-  }
+  mMaxItemId=initializeMaxItemId(db);
+  setFlagEmptyDbCreated();
 }
