@@ -5,7 +5,8 @@
     mStartTime=currentTime;
   }
   final long currentPlayTime=animation.getCurrentPlayTime();
-  if (!mHandlingOnAnimationUpdate && sVisible && currentPlayTime < animation.getDuration()) {
+  boolean isFinalFrame=Float.compare(1f,animation.getAnimatedFraction()) == 0;
+  if (!mHandlingOnAnimationUpdate && sVisible && currentPlayTime < animation.getDuration() && !isFinalFrame) {
     mHandlingOnAnimationUpdate=true;
     long frameNum=sGlobalFrameCounter - mStartFrame;
     if (frameNum == 0 && currentTime < mStartTime + MAX_DELAY && currentPlayTime > 0) {
