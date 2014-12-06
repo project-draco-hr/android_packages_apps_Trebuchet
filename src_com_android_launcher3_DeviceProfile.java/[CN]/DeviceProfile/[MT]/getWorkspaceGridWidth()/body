@@ -1,0 +1,4 @@
+{
+  Rect p=getWorkspacePadding();
+  return availableWidthPx - p.left - p.right;
+}

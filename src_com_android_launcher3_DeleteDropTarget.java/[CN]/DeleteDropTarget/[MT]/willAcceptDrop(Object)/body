@@ -1,7 +1,7 @@
 {
   if (info instanceof ItemInfo) {
     ItemInfo item=(ItemInfo)info;
-    if (item.itemType == LauncherSettings.Favorites.ITEM_TYPE_APPWIDGET || item.itemType == LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT) {
+    if (item.itemType == LauncherSettings.Favorites.ITEM_TYPE_APPWIDGET || item.itemType == LauncherSettings.Favorites.ITEM_TYPE_CUSTOM_APPWIDGET || item.itemType == LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT) {
       return true;
     }
     if (!LauncherAppState.isDisableAllApps() && item.itemType == LauncherSettings.Favorites.ITEM_TYPE_FOLDER) {

@@ -1,5 +1,10 @@
 {
-  itemType=LauncherSettings.Favorites.ITEM_TYPE_APPWIDGET;
+  if (appWidgetId == CUSTOM_WIDGET_ID) {
+    itemType=LauncherSettings.Favorites.ITEM_TYPE_CUSTOM_APPWIDGET;
+  }
+ else {
+    itemType=LauncherSettings.Favorites.ITEM_TYPE_APPWIDGET;
+  }
   this.appWidgetId=appWidgetId;
   this.providerName=providerName;
   spanX=-1;

@@ -1,0 +1,19 @@
+{
+  LauncherAppState app=LauncherAppState.getInstance();
+  DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
+  mIsAppWidget=true;
+  mInfo=info;
+  final ImageView image=(ImageView)findViewById(R.id.widget_preview);
+  if (maxWidth > -1) {
+    image.setMaxWidth(maxWidth);
+  }
+  final TextView name=(TextView)findViewById(R.id.widget_name);
+  name.setText(AppWidgetManagerCompat.getInstance(getContext()).loadLabel(info));
+  final TextView dims=(TextView)findViewById(R.id.widget_dims);
+  if (dims != null) {
+    int hSpan=Math.min(info.spanX,(int)grid.numColumns);
+    int vSpan=Math.min(info.spanY,(int)grid.numRows);
+    dims.setText(String.format(mDimensionsFormatString,hSpan,vSpan));
+  }
+  mWidgetPreviewLoader=loader;
+}

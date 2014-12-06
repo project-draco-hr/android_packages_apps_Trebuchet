@@ -7,13 +7,13 @@
       removeCallbacks(mInflateWidgetRunnable);
     }
  else     if (mWidgetCleanupState == WIDGET_BOUND) {
-      if (mWidgetLoadingId != -1) {
+      if (mWidgetLoadingId != -1 && !info.isCustomWidget()) {
         mLauncher.getAppWidgetHost().deleteAppWidgetId(mWidgetLoadingId);
       }
       removeCallbacks(mInflateWidgetRunnable);
     }
  else     if (mWidgetCleanupState == WIDGET_INFLATED) {
-      if (mWidgetLoadingId != -1) {
+      if (mWidgetLoadingId != -1 && !info.isCustomWidget()) {
         mLauncher.getAppWidgetHost().deleteAppWidgetId(mWidgetLoadingId);
       }
       AppWidgetHostView widget=info.boundWidget;

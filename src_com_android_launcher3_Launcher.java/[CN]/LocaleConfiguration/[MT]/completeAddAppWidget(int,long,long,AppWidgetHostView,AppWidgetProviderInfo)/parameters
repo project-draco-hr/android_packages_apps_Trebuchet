@@ -1,5 +1,0 @@
-int appWidgetId
-long container
-long screenId
-AppWidgetHostView hostView
-AppWidgetProviderInfo appWidgetInfo

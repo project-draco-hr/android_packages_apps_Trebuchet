@@ -1,9 +1,0 @@
-{
-  List<AppWidgetProviderInfo> widgets=AppWidgetManager.getInstance(context).getInstalledProviders();
-  for (  AppWidgetProviderInfo info : widgets) {
-    if (info.provider.equals(component)) {
-      return info;
-    }
-  }
-  return null;
-}

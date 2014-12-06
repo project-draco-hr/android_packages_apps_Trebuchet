@@ -1,0 +1,4 @@
+{
+  LauncherAppWidgetProviderInfo info=LauncherAppWidgetProviderInfo.fromProviderInfo(mLauncher,appWidget);
+  super.onProviderChanged(appWidgetId,info);
+}
