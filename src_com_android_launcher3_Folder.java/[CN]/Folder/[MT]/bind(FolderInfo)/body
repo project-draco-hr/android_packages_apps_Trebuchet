@@ -2,19 +2,23 @@
   mInfo=info;
   ArrayList<ShortcutInfo> children=info.contents;
   ArrayList<ShortcutInfo> overflow=new ArrayList<ShortcutInfo>();
-  setupContentForNumItems(children.size());
-  placeInReadingOrder(children);
-  int count=0;
+  final int totalChildren=children.size();
+  setupContentForNumItems(totalChildren);
+  Collections.sort(children,Utilities.RANK_COMPARATOR);
+  final int countX=mContent.getCountX();
+  int visibleChildren=0;
   for (int i=0; i < children.size(); i++) {
-    ShortcutInfo child=(ShortcutInfo)children.get(i);
+    ShortcutInfo child=children.get(i);
+    child.cellX=i % countX;
+    child.cellY=i / countX;
     if (createAndAddShortcut(child) == null) {
       overflow.add(child);
     }
  else {
-      count++;
+      visibleChildren++;
     }
   }
-  setupContentForNumItems(count);
+  setupContentForNumItems(visibleChildren);
   for (  ShortcutInfo item : overflow) {
     mInfo.remove(item);
     LauncherModel.deleteItemFromDatabase(mLauncher,item);
@@ -28,7 +32,6 @@
  else {
     mFolderName.setText("");
   }
-  updateItemLocationsInDatabase();
   mFolderIcon.post(new Runnable(){
     public void run(){
       if (getItemCount() <= 1) {

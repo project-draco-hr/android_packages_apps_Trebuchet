@@ -1,0 +1,22 @@
+{
+  db.beginTransaction();
+  try {
+    if (addRankColumn) {
+      db.execSQL("ALTER TABLE favorites ADD COLUMN rank INTEGER NOT NULL DEFAULT 0;");
+    }
+    Cursor c=db.rawQuery("SELECT container, MAX(cellX) FROM favorites" + " WHERE container IN (SELECT _id FROM favorites WHERE itemType = ?)" + " GROUP BY container;",new String[]{Integer.toString(LauncherSettings.Favorites.ITEM_TYPE_FOLDER)});
+    while (c.moveToNext()) {
+      db.execSQL("UPDATE favorites SET rank=cellX+(cellY*?) WHERE container=?;",new Object[]{c.getLong(1) + 1,c.getLong(0)});
+    }
+    c.close();
+    db.setTransactionSuccessful();
+  }
+ catch (  SQLException ex) {
+    Log.e(TAG,ex.getMessage(),ex);
+    return false;
+  }
+ finally {
+    db.endTransaction();
+  }
+  return true;
+}

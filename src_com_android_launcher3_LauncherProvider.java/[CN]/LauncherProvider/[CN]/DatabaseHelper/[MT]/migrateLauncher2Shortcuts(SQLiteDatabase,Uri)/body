@@ -197,6 +197,7 @@
   finally {
           db.endTransaction();
         }
+        updateFolderItemsRank(db,false);
       }
     }
   finally {

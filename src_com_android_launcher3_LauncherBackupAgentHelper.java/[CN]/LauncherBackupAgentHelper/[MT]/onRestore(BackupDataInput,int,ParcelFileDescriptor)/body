@@ -19,6 +19,9 @@
   if (hasData && mHelper.restoreSuccessful) {
     LauncherAppState.getLauncherProvider().clearFlagEmptyDbCreated();
     LauncherClings.synchonouslyMarkFirstRunClingDismissed(this);
+    if (mHelper.restoredBackupVersion <= 2) {
+      LauncherAppState.getLauncherProvider().updateFolderItemsRank();
+    }
   }
  else {
     if (VERBOSE)     Log.v(TAG,"Nothing was restored, clearing DB");
