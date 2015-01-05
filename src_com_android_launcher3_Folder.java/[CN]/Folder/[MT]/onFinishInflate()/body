@@ -22,5 +22,4 @@
   mFolderName.setOnEditorActionListener(this);
   mFolderName.setSelectAllOnFocus(true);
   mFolderName.setInputType(mFolderName.getInputType() | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS | InputType.TYPE_TEXT_FLAG_CAP_WORDS);
-  mAutoScrollHelper=new FolderAutoScrollHelper(mScrollView);
 }
