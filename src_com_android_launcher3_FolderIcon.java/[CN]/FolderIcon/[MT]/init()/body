@@ -1,3 +1,4 @@
 {
   mLongPressHelper=new CheckLongPressHelper(this);
+  setAccessibilityDelegate(LauncherAppState.getInstance().getAccessibilityDelegate());
 }

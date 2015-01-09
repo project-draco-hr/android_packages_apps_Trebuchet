@@ -1,6 +1,5 @@
 {
   mCurrentPage=mDefaultPage;
-  Launcher.setScreen(mCurrentPage);
   LauncherAppState app=LauncherAppState.getInstance();
   DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
   mIconCache=app.getIconCache();

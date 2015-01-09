@@ -13,7 +13,7 @@ synchronized (LoaderTask.this) {
       }
     }
 );
-    while (!mStopped && !mLoadAndBindStepFinished && !mFlushingWorkerThread) {
+    while (!mStopped && !mLoadAndBindStepFinished) {
       try {
         this.wait(1000);
       }

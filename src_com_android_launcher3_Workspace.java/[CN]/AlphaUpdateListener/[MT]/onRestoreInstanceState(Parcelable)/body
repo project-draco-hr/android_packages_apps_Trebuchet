@@ -1,4 +1,0 @@
-{
-  super.onRestoreInstanceState(state);
-  Launcher.setScreen(mCurrentPage);
-}
