@@ -1,81 +1,83 @@
 {
   if (LOGD)   Log.d(TAG,"onUpgrade triggered: " + oldVersion);
-  int version=oldVersion;
-  if (version < MIN_DATABASE_VERSION) {
-    createEmptyDB(db);
-    version=DATABASE_VERSION;
-  }
-  if (version < 13) {
-    mMaxScreenId=0;
-    addWorkspacesTable(db);
-    version=13;
-  }
-  if (version < 14) {
+switch (oldVersion) {
+case 12:
+{
+      mMaxScreenId=0;
+      addWorkspacesTable(db);
+    }
+case 13:
+{
     db.beginTransaction();
     try {
       db.execSQL("ALTER TABLE favorites " + "ADD COLUMN appWidgetProvider TEXT;");
       db.setTransactionSuccessful();
-      version=14;
     }
  catch (    SQLException ex) {
       Log.e(TAG,ex.getMessage(),ex);
+      break;
     }
  finally {
       db.endTransaction();
     }
   }
-  if (version < 15) {
-    db.beginTransaction();
-    try {
-      db.execSQL("ALTER TABLE favorites " + "ADD COLUMN modified INTEGER NOT NULL DEFAULT 0;");
-      db.execSQL("ALTER TABLE workspaceScreens " + "ADD COLUMN modified INTEGER NOT NULL DEFAULT 0;");
-      db.setTransactionSuccessful();
-      version=15;
-    }
- catch (    SQLException ex) {
-      Log.e(TAG,ex.getMessage(),ex);
-    }
+case 14:
+{
+  db.beginTransaction();
+  try {
+    db.execSQL("ALTER TABLE favorites " + "ADD COLUMN modified INTEGER NOT NULL DEFAULT 0;");
+    db.execSQL("ALTER TABLE workspaceScreens " + "ADD COLUMN modified INTEGER NOT NULL DEFAULT 0;");
+    db.setTransactionSuccessful();
+  }
+ catch (  SQLException ex) {
+    Log.e(TAG,ex.getMessage(),ex);
+    break;
+  }
  finally {
-      db.endTransaction();
-    }
+    db.endTransaction();
   }
-  if (version < 16) {
-    db.beginTransaction();
-    try {
-      db.execSQL("ALTER TABLE favorites " + "ADD COLUMN restored INTEGER NOT NULL DEFAULT 0;");
-      db.setTransactionSuccessful();
-      version=16;
-    }
- catch (    SQLException ex) {
-      Log.e(TAG,ex.getMessage(),ex);
-    }
+}
+case 15:
+{
+db.beginTransaction();
+try {
+  db.execSQL("ALTER TABLE favorites " + "ADD COLUMN restored INTEGER NOT NULL DEFAULT 0;");
+  db.setTransactionSuccessful();
+}
+ catch (SQLException ex) {
+  Log.e(TAG,ex.getMessage(),ex);
+  break;
+}
  finally {
-      db.endTransaction();
-    }
-  }
-  if (version < 17) {
-    LauncherClings.synchonouslyMarkFirstRunClingDismissed(mContext);
-    version=17;
-  }
-  if (version < 18) {
-    version=18;
-  }
-  if (version < 19) {
-    removeOrphanedItems(db);
-    version=19;
-  }
-  if (version < 20) {
-    if (addProfileColumn(db)) {
-      version=20;
-    }
-  }
-  if (version < 21) {
-    if (updateFolderItemsRank(db,true)) {
-      version=21;
-    }
-  }
-  if (version != DATABASE_VERSION) {
-    Log.w(TAG,"Destroying all old data.");
-    createEmptyDB(db);
-  }
+  db.endTransaction();
+}
+}
+case 16:
+{
+LauncherClings.synchonouslyMarkFirstRunClingDismissed(mContext);
+}
+case 17:
+{
+}
+case 18:
+{
+removeOrphanedItems(db);
+}
+case 19:
+{
+if (!addProfileColumn(db)) {
+break;
+}
+}
+case 20:
+if (!updateFolderItemsRank(db,true)) {
+break;
+}
+case 21:
+{
+return;
+}
+}
+Log.w(TAG,"Destroying all old data.");
+createEmptyDB(db);
 }
