@@ -1,0 +1,5 @@
+{
+  mItemId=itemId;
+  mContext=context;
+  mResId=getResourceForItemType(itemType);
+}

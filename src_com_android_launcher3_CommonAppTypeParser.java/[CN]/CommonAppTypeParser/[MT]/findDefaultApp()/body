@@ -1,0 +1,9 @@
+{
+  if (mResId == 0) {
+    return false;
+  }
+  parsedIntent=null;
+  parsedValues=null;
+  new MyLayoutParser().parseValues();
+  return (parsedValues != null) && (parsedIntent != null);
+}

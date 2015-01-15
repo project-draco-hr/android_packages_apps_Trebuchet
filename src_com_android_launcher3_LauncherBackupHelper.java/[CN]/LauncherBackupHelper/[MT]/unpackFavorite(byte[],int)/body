@@ -42,7 +42,13 @@
     }
   }
  else {
-    values.put(LauncherSettings.Favorites.RESTORED,1);
+    if (isReplaceableHotseatItem(favorite) && favorite.targetType != Favorite.TARGET_NONE && favorite.targetType < CommonAppTypeParser.SUPPORTED_TYPE_COUNT) {
+      Log.e(TAG,"Added item type flag");
+      values.put(LauncherSettings.Favorites.RESTORED,1 | CommonAppTypeParser.encodeItemTypeToFlag(favorite.targetType));
+    }
+ else {
+      values.put(LauncherSettings.Favorites.RESTORED,1);
+    }
     if (favorite.container == Favorites.CONTAINER_HOTSEAT) {
       if ((favorite.screen >= currentProfile.hotseatCount) || (favorite.screen == currentProfile.allappsRank)) {
         restoreSuccessful=false;

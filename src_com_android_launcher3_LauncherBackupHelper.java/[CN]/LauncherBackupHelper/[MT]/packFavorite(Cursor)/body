@@ -29,9 +29,10 @@
     favorite.title=title;
   }
   String intentDescription=c.getString(INTENT_INDEX);
+  Intent intent=null;
   if (!TextUtils.isEmpty(intentDescription)) {
     try {
-      Intent intent=Intent.parseUri(intentDescription,0);
+      intent=Intent.parseUri(intentDescription,0);
       intent.removeExtra(ItemInfo.EXTRA_PROFILE);
       favorite.intent=intent.toUri(0);
     }
@@ -45,6 +46,31 @@
     String appWidgetProvider=c.getString(APPWIDGET_PROVIDER_INDEX);
     if (!TextUtils.isEmpty(appWidgetProvider)) {
       favorite.appWidgetProvider=appWidgetProvider;
+    }
+  }
+  if (isReplaceableHotseatItem(favorite)) {
+    if (intent != null && intent.getComponent() != null) {
+      PackageManager pm=mContext.getPackageManager();
+      ActivityInfo activity=null;
+      ;
+      try {
+        activity=pm.getActivityInfo(intent.getComponent(),0);
+      }
+ catch (      NameNotFoundException e) {
+        Log.e(TAG,"Target not found",e);
+      }
+      if (activity == null) {
+        return favorite;
+      }
+      for (int i=0; i < mItemTypeMatchers.length; i++) {
+        if (mItemTypeMatchers[i] == null) {
+          mItemTypeMatchers[i]=new ItemTypeMatcher(CommonAppTypeParser.getResourceForItemType(i));
+        }
+        if (mItemTypeMatchers[i].matches(activity,pm)) {
+          favorite.targetType=i;
+          break;
+        }
+      }
     }
   }
   return favorite;
