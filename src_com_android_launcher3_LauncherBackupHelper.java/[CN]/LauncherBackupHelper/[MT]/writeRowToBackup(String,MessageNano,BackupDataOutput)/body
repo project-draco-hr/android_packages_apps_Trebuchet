@@ -2,5 +2,6 @@
   byte[] blob=writeCheckedBytes(proto);
   data.writeEntityHeader(backupKey,blob.length);
   data.writeEntityData(blob,blob.length);
+  mBackupDataWasUpdated=true;
   if (VERBOSE)   Log.v(TAG,"Writing New entry " + backupKey);
 }
