@@ -7,12 +7,7 @@
     public void run(){
       final ArrayList<ItemInfo> addedShortcutsFinal=new ArrayList<ItemInfo>();
       final ArrayList<Long> addedWorkspaceScreensFinal=new ArrayList<Long>();
-      ArrayList<Long> workspaceScreens=new ArrayList<Long>();
-      TreeMap<Integer,Long> orderedScreens=loadWorkspaceScreensDb(context);
-      for (      Integer i : orderedScreens.keySet()) {
-        long screenId=orderedScreens.get(i);
-        workspaceScreens.add(screenId);
-      }
+      ArrayList<Long> workspaceScreens=loadWorkspaceScreensDb(context);
 synchronized (sBgLock) {
         for (        ItemInfo item : workspaceApps) {
           if (!allowDuplicate) {

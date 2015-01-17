@@ -405,10 +405,7 @@ maxItemId=Math.max(maxItemId,item.id);
 LauncherAppState.getLauncherProvider().updateMaxItemId(maxItemId);
 }
  else {
-TreeMap<Integer,Long> orderedScreens=loadWorkspaceScreensDb(mContext);
-for (Integer i : orderedScreens.keySet()) {
-sBgWorkspaceScreens.add(orderedScreens.get(i));
-}
+sBgWorkspaceScreens.addAll(loadWorkspaceScreensDb(mContext));
 Launcher.addDumpLog(TAG,"11683562 -   sBgWorkspaceScreens: " + TextUtils.join(", ",sBgWorkspaceScreens),true);
 ArrayList<Long> unusedScreens=new ArrayList<Long>(sBgWorkspaceScreens);
 for (ItemInfo item : sBgItemsIdMap.values()) {

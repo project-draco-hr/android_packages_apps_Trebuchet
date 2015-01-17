@@ -3,12 +3,7 @@
   Runnable r=new Runnable(){
     public void run(){
       final ArrayList<Long> addedWorkspaceScreensFinal=new ArrayList<Long>();
-      ArrayList<Long> workspaceScreens=new ArrayList<Long>();
-      TreeMap<Integer,Long> orderedScreens=loadWorkspaceScreensDb(context);
-      for (      Integer i : orderedScreens.keySet()) {
-        long screenId=orderedScreens.get(i);
-        workspaceScreens.add(screenId);
-      }
+      ArrayList<Long> workspaceScreens=loadWorkspaceScreensDb(context);
       Pair<Long,int[]> coords=findSpaceForItem(context,preferredScreen,fallbackStartScreen,workspaceScreens,addedWorkspaceScreensFinal,addInfo.spanX,addInfo.spanY);
       final long screenId=coords.first;
       final int[] cordinates=coords.second;
