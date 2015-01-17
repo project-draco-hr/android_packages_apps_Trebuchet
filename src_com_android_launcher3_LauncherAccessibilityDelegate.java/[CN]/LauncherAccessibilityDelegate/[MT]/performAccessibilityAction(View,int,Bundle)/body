@@ -1,0 +1,6 @@
+{
+  if ((host.getTag() instanceof ItemInfo) && performAction(host,(ItemInfo)host.getTag(),action)) {
+    return true;
+  }
+  return super.performAccessibilityAction(host,action,args);
+}

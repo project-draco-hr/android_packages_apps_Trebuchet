@@ -1,0 +1,22 @@
+{
+  ComponentName componentName=null;
+  if (info instanceof AppInfo) {
+    componentName=((AppInfo)info).componentName;
+  }
+ else   if (info instanceof ShortcutInfo) {
+    componentName=((ShortcutInfo)info).intent.getComponent();
+  }
+ else   if (info instanceof PendingAddItemInfo) {
+    componentName=((PendingAddItemInfo)info).componentName;
+  }
+  final UserHandleCompat user;
+  if (info instanceof ItemInfo) {
+    user=((ItemInfo)info).user;
+  }
+ else {
+    user=UserHandleCompat.myUserHandle();
+  }
+  if (componentName != null) {
+    launcher.startApplicationDetailsActivity(componentName,user);
+  }
+}

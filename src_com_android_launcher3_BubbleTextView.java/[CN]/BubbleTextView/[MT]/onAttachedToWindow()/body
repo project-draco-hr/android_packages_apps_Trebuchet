@@ -3,7 +3,7 @@
   if (mBackground != null)   mBackground.setCallback(this);
   Drawable top=getCompoundDrawables()[1];
   if (top instanceof PreloadIconDrawable) {
-    ((PreloadIconDrawable)top).applyTheme(getPreloaderTheme());
+    ((PreloadIconDrawable)top).applyPreloaderTheme(getPreloaderTheme());
   }
   mSlop=ViewConfiguration.get(getContext()).getScaledTouchSlop();
 }

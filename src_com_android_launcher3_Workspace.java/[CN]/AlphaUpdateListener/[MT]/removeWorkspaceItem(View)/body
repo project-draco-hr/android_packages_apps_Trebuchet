@@ -1,0 +1,12 @@
+{
+  CellLayout parentCell=getParentCellLayoutForView(v);
+  if (parentCell != null) {
+    parentCell.removeView(v);
+  }
+ else   if (LauncherAppState.isDogfoodBuild()) {
+    throw new NullPointerException("mDragInfo.cell has null parent");
+  }
+  if (v instanceof DropTarget) {
+    mDragController.removeDropTarget((DropTarget)v);
+  }
+}

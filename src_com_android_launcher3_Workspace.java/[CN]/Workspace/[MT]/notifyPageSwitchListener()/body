@@ -1,6 +1,5 @@
 {
   super.notifyPageSwitchListener();
-  Launcher.setScreen(getNextPage());
   if (hasCustomContent() && getNextPage() == 0 && !mCustomContentShowing) {
     mCustomContentShowing=true;
     if (mCustomContentCallbacks != null) {

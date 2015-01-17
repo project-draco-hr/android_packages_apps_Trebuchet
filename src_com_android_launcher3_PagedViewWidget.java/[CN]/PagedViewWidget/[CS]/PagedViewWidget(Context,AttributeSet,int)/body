@@ -4,4 +4,5 @@
   mDimensionsFormatString=r.getString(R.string.widget_dims_format);
   setWillNotDraw(false);
   setClipToPadding(false);
+  setAccessibilityDelegate(LauncherAppState.getInstance().getAccessibilityDelegate());
 }
