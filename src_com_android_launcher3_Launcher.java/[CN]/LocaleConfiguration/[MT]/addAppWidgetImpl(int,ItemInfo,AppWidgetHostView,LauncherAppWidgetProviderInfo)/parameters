@@ -1,5 +1,4 @@
 int appWidgetId
-PendingAddWidgetInfo info
+ItemInfo info
 AppWidgetHostView boundWidget
 LauncherAppWidgetProviderInfo appWidgetInfo
-int delay
