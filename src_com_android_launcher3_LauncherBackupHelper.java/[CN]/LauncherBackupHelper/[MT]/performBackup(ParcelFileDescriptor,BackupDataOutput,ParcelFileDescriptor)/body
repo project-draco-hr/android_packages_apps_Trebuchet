@@ -9,6 +9,7 @@
   mKeys.clear();
   applyJournal(in);
   long newBackupTime=System.currentTimeMillis();
+  mBackupDataWasUpdated=false;
   try {
     backupFavorites(data);
     backupScreens(data);
@@ -22,11 +23,20 @@
     for (    String deleted : mExistingKeys) {
       if (VERBOSE)       Log.v(TAG,"dropping deleted item " + deleted);
       data.writeEntityHeader(deleted,-1);
+      mBackupDataWasUpdated=true;
     }
     mExistingKeys.clear();
-    mLastBackupRestoreTime=newBackupTime;
-    Journal state=getCurrentStateJournal();
-    writeRowToBackup(JOURNAL_KEY,state,data);
+    if (!mBackupDataWasUpdated) {
+      mBackupDataWasUpdated=(in.profile == null) || !Arrays.equals(DeviceProfieData.toByteArray(in.profile),DeviceProfieData.toByteArray(getDeviceProfieData())) || (in.backupVersion != BACKUP_VERSION)|| (in.appVersion != getAppVersion());
+    }
+    if (mBackupDataWasUpdated) {
+      mLastBackupRestoreTime=newBackupTime;
+      Journal state=getCurrentStateJournal();
+      writeRowToBackup(JOURNAL_KEY,state,data);
+    }
+ else {
+      if (DEBUG)       Log.d(TAG,"Nothing was written during backup");
+    }
   }
  catch (  IOException e) {
     Log.e(TAG,"launcher backup has failed",e);
