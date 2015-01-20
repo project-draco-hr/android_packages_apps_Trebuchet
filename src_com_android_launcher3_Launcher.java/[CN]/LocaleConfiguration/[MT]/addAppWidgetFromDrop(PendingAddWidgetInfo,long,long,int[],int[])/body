@@ -1,0 +1,38 @@
+{
+  resetAddInfo();
+  mPendingAddInfo.container=info.container=container;
+  mPendingAddInfo.screenId=info.screenId=screenId;
+  mPendingAddInfo.dropPos=null;
+  mPendingAddInfo.minSpanX=info.minSpanX;
+  mPendingAddInfo.minSpanY=info.minSpanY;
+  if (cell != null) {
+    mPendingAddInfo.cellX=cell[0];
+    mPendingAddInfo.cellY=cell[1];
+  }
+  if (span != null) {
+    mPendingAddInfo.spanX=span[0];
+    mPendingAddInfo.spanY=span[1];
+  }
+  AppWidgetHostView hostView=info.boundWidget;
+  int appWidgetId;
+  if (hostView != null) {
+    appWidgetId=hostView.getAppWidgetId();
+    addAppWidgetImpl(appWidgetId,info,hostView,info.info);
+  }
+ else {
+    appWidgetId=getAppWidgetHost().allocateAppWidgetId();
+    Bundle options=info.bindOptions;
+    boolean success=mAppWidgetManager.bindAppWidgetIdIfAllowed(appWidgetId,info.info,options);
+    if (success) {
+      addAppWidgetImpl(appWidgetId,info,null,info.info);
+    }
+ else {
+      mPendingAddWidgetInfo=info.info;
+      Intent intent=new Intent(AppWidgetManager.ACTION_APPWIDGET_BIND);
+      intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,appWidgetId);
+      intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_PROVIDER,info.componentName);
+      mAppWidgetManager.getUser(mPendingAddWidgetInfo).addToIntent(intent,AppWidgetManager.EXTRA_APPWIDGET_PROVIDER_PROFILE);
+      startActivityForResult(intent,REQUEST_BIND_APPWIDGET);
+    }
+  }
+}

@@ -3,8 +3,7 @@
   boolean wasWaitingForUninstall=mWaitingForUninstall;
   mWaitingForUninstall=false;
   if (isAllAppsApplication(d.dragSource,item)) {
-    AppInfo appInfo=(AppInfo)item;
-    mLauncher.startApplicationUninstallActivity(appInfo.componentName,appInfo.flags,appInfo.user);
+    uninstallApp(mLauncher,(AppInfo)item);
   }
  else   if (isUninstallFromWorkspace(d)) {
     ShortcutInfo shortcut=(ShortcutInfo)item;
@@ -32,28 +31,8 @@
       }
     }
   }
- else   if (isWorkspaceOrFolderApplication(d)) {
-    LauncherModel.deleteItemFromDatabase(mLauncher,item);
-  }
- else   if (isWorkspaceFolder(d)) {
-    FolderInfo folderInfo=(FolderInfo)item;
-    mLauncher.removeFolder(folderInfo);
-    LauncherModel.deleteFolderContentsFromDatabase(mLauncher,folderInfo);
-  }
- else   if (isWorkspaceOrFolderWidget(d)) {
-    mLauncher.removeAppWidget((LauncherAppWidgetInfo)item);
-    LauncherModel.deleteItemFromDatabase(mLauncher,item);
-    final LauncherAppWidgetInfo launcherAppWidgetInfo=(LauncherAppWidgetInfo)item;
-    final LauncherAppWidgetHost appWidgetHost=mLauncher.getAppWidgetHost();
-    if (appWidgetHost != null && !launcherAppWidgetInfo.isCustomWidget() && launcherAppWidgetInfo.isWidgetIdValid()) {
-      new AsyncTask<Void,Void,Void>(){
-        public Void doInBackground(        Void... args){
-          appWidgetHost.deleteAppWidgetId(launcherAppWidgetInfo.appWidgetId);
-          return null;
-        }
-      }
-.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,(Void)null);
-    }
+ else   if (isDragSourceWorkspaceOrFolder(d)) {
+    removeWorkspaceOrFolderItem(mLauncher,item,null);
   }
   if (wasWaitingForUninstall && !mWaitingForUninstall) {
     if (d.dragSource instanceof Folder) {

@@ -47,45 +47,32 @@
     Runnable onAnimationCompleteRunnable=new Runnable(){
       @Override public void run(){
         deferRemoveExtraEmptyScreen();
-switch (pendingInfo.itemType) {
-case LauncherSettings.Favorites.ITEM_TYPE_CUSTOM_APPWIDGET:
-case LauncherSettings.Favorites.ITEM_TYPE_APPWIDGET:
-          int span[]=new int[2];
-        span[0]=item.spanX;
-      span[1]=item.spanY;
-    mLauncher.addAppWidgetFromDrop((PendingAddWidgetInfo)pendingInfo,container,screenId,mTargetCell,span,null);
-  break;
-case LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT:
-mLauncher.processShortcutFromDrop(pendingInfo.componentName,container,screenId,mTargetCell,null);
-break;
-default :
-throw new IllegalStateException("Unknown item type: " + pendingInfo.itemType);
-}
-}
-}
+        mLauncher.addPendingItem(pendingInfo,container,screenId,mTargetCell,item.spanX,item.spanY);
+      }
+    }
 ;
-boolean isWidget=pendingInfo.itemType == LauncherSettings.Favorites.ITEM_TYPE_APPWIDGET || pendingInfo.itemType == LauncherSettings.Favorites.ITEM_TYPE_CUSTOM_APPWIDGET;
-View finalView=isWidget ? ((PendingAddWidgetInfo)pendingInfo).boundWidget : null;
-if (finalView instanceof AppWidgetHostView && updateWidgetSize) {
-AppWidgetHostView awhv=(AppWidgetHostView)finalView;
-AppWidgetResizeFrame.updateWidgetSizeRanges(awhv,mLauncher,item.spanX,item.spanY);
-}
-int animationStyle=ANIMATE_INTO_POSITION_AND_DISAPPEAR;
-if (isWidget && ((PendingAddWidgetInfo)pendingInfo).info != null && ((PendingAddWidgetInfo)pendingInfo).info.configure != null) {
-animationStyle=ANIMATE_INTO_POSITION_AND_REMAIN;
-}
-animateWidgetDrop(info,cellLayout,d.dragView,onAnimationCompleteRunnable,animationStyle,finalView,true);
-}
+    boolean isWidget=pendingInfo.itemType == LauncherSettings.Favorites.ITEM_TYPE_APPWIDGET || pendingInfo.itemType == LauncherSettings.Favorites.ITEM_TYPE_CUSTOM_APPWIDGET;
+    View finalView=isWidget ? ((PendingAddWidgetInfo)pendingInfo).boundWidget : null;
+    if (finalView instanceof AppWidgetHostView && updateWidgetSize) {
+      AppWidgetHostView awhv=(AppWidgetHostView)finalView;
+      AppWidgetResizeFrame.updateWidgetSizeRanges(awhv,mLauncher,item.spanX,item.spanY);
+    }
+    int animationStyle=ANIMATE_INTO_POSITION_AND_DISAPPEAR;
+    if (isWidget && ((PendingAddWidgetInfo)pendingInfo).info != null && ((PendingAddWidgetInfo)pendingInfo).info.configure != null) {
+      animationStyle=ANIMATE_INTO_POSITION_AND_REMAIN;
+    }
+    animateWidgetDrop(info,cellLayout,d.dragView,onAnimationCompleteRunnable,animationStyle,finalView,true);
+  }
  else {
-View view=null;
+    View view=null;
 switch (info.itemType) {
 case LauncherSettings.Favorites.ITEM_TYPE_APPLICATION:
 case LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT:
-if (info.container == NO_ID && info instanceof AppInfo) {
-info=new ShortcutInfo((AppInfo)info);
-}
-view=mLauncher.createShortcut(R.layout.application,cellLayout,(ShortcutInfo)info);
-break;
+      if (info.container == NO_ID && info instanceof AppInfo) {
+        info=((AppInfo)info).makeShortcut();
+      }
+    view=mLauncher.createShortcut(R.layout.application,cellLayout,(ShortcutInfo)info);
+  break;
 case LauncherSettings.Favorites.ITEM_TYPE_FOLDER:
 view=FolderIcon.fromXml(R.layout.folder_icon,mLauncher,cellLayout,(FolderInfo)info,mIconCache);
 break;

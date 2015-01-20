@@ -1,0 +1,59 @@
+{
+  final ContentResolver cr=context.getContentResolver();
+  Cursor c=cr.query(LauncherSettings.Favorites.CONTENT_URI,new String[]{LauncherSettings.Favorites.SCREEN,LauncherSettings.Favorites.CELLX,LauncherSettings.Favorites.CELLY,LauncherSettings.Favorites.SPANX,LauncherSettings.Favorites.SPANY,LauncherSettings.Favorites.CONTAINER},"container=?",new String[]{Integer.toString(LauncherSettings.Favorites.CONTAINER_DESKTOP)},null);
+  final int screenIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.SCREEN);
+  final int cellXIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.CELLX);
+  final int cellYIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.CELLY);
+  final int spanXIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.SPANX);
+  final int spanYIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.SPANY);
+  LongSparseArray<ArrayList<Rect>> screenItems=new LongSparseArray<ArrayList<Rect>>();
+  try {
+    while (c.moveToNext()) {
+      Rect rect=new Rect();
+      rect.left=c.getInt(cellXIndex);
+      rect.top=c.getInt(cellYIndex);
+      rect.right=rect.left + Math.max(1,c.getInt(spanXIndex));
+      rect.bottom=rect.top + Math.max(1,c.getInt(spanYIndex));
+      long screenId=c.getInt(screenIndex);
+      ArrayList<Rect> items=screenItems.get(screenId);
+      if (items == null) {
+        items=new ArrayList<Rect>();
+        screenItems.put(screenId,items);
+      }
+      items.add(rect);
+    }
+  }
+ catch (  Exception e) {
+    screenItems.clear();
+  }
+ finally {
+    c.close();
+  }
+  long screenId=0;
+  int[] cordinates=new int[2];
+  boolean found=false;
+  int screenCount=workspaceScreens.size();
+  int preferredScreenIndex=preferredScreen.getScreenIndex(workspaceScreens);
+  if (preferredScreenIndex < screenCount) {
+    screenId=workspaceScreens.get(preferredScreenIndex);
+    found=findNextAvailableIconSpaceInScreen(screenItems.get(screenId),cordinates,spanX,spanY);
+  }
+  if (!found) {
+    for (int screen=fallbackStartScreen; screen < screenCount; screen++) {
+      screenId=workspaceScreens.get(screen);
+      if (findNextAvailableIconSpaceInScreen(screenItems.get(screenId),cordinates,spanX,spanY)) {
+        found=true;
+        break;
+      }
+    }
+  }
+  if (!found) {
+    screenId=LauncherAppState.getLauncherProvider().generateNewScreenId();
+    workspaceScreens.add(screenId);
+    addedWorkspaceScreensFinal.add(screenId);
+    if (!findNextAvailableIconSpaceInScreen(screenItems.get(screenId),cordinates,spanX,spanY)) {
+      throw new RuntimeException("Can't find space to add the item");
+    }
+  }
+  return Pair.create(screenId,cordinates);
+}

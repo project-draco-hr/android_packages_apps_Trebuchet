@@ -1,0 +1,5 @@
+Context context
+ArrayList<ItemInfo> workspaceApps
+ScreenPosProvider preferredScreen
+int fallbackStartScreen
+boolean allowDuplicate

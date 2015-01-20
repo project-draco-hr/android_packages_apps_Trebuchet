@@ -1,0 +1,15 @@
+{
+  super.onInitializeAccessibilityNodeInfo(host,info);
+  if (!(host.getTag() instanceof ItemInfo))   return;
+  ItemInfo item=(ItemInfo)host.getTag();
+  if ((item instanceof ShortcutInfo) || (item instanceof LauncherAppWidgetInfo) || (item instanceof FolderInfo)) {
+    info.addAction(mActions.get(REMOVE));
+  }
+ else   if ((item instanceof AppInfo) || (item instanceof PendingAddItemInfo)) {
+    if (item instanceof AppInfo) {
+      info.addAction(mActions.get(UNINSTALL));
+    }
+    info.addAction(mActions.get(INFO));
+    info.addAction(mActions.get(ADD_TO_WORKSPACE));
+  }
+}

@@ -1,0 +1,38 @@
+{
+  if (action == REMOVE) {
+    return DeleteDropTarget.removeWorkspaceOrFolderItem(mLauncher,item,host);
+  }
+ else   if (action == INFO) {
+    InfoDropTarget.startDetailsActivityForInfo(item,mLauncher);
+    return true;
+  }
+ else   if (action == UNINSTALL) {
+    DeleteDropTarget.uninstallApp(mLauncher,(AppInfo)item);
+    return true;
+  }
+ else   if (action == ADD_TO_WORKSPACE) {
+    final int preferredPage=mLauncher.getWorkspace().getCurrentPage();
+    final ScreenPosProvider screenProvider=new ScreenPosProvider(){
+      @Override public int getScreenIndex(      ArrayList<Long> screenIDs){
+        return preferredPage;
+      }
+    }
+;
+    if (item instanceof AppInfo) {
+      final ArrayList<ItemInfo> addShortcuts=new ArrayList<ItemInfo>();
+      addShortcuts.add(((AppInfo)item).makeShortcut());
+      mLauncher.showWorkspace(true,new Runnable(){
+        @Override public void run(){
+          mLauncher.getModel().addAndBindAddedWorkspaceApps(mLauncher,addShortcuts,screenProvider,0,true);
+        }
+      }
+);
+      return true;
+    }
+ else     if (item instanceof PendingAddItemInfo) {
+      mLauncher.getModel().addAndBindPendingItem(mLauncher,(PendingAddItemInfo)item,screenProvider,0);
+      return true;
+    }
+  }
+  return false;
+}
