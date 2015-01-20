@@ -1,6 +1,5 @@
 {
   final ContentValues values=new ContentValues();
   item.onAddToDatabase(context,values);
-  item.updateValuesWithCoordinates(values,item.cellX,item.cellY);
   updateItemInDatabaseHelper(context,values,item,"updateItemInDatabase");
 }

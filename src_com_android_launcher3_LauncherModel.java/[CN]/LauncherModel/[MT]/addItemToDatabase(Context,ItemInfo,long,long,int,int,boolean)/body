@@ -13,7 +13,6 @@
   item.onAddToDatabase(context,values);
   item.id=LauncherAppState.getLauncherProvider().generateNewItemId();
   values.put(LauncherSettings.Favorites._ID,item.id);
-  item.updateValuesWithCoordinates(values,item.cellX,item.cellY);
   final StackTraceElement[] stackTrace=new Throwable().getStackTrace();
   Runnable r=new Runnable(){
     public void run(){

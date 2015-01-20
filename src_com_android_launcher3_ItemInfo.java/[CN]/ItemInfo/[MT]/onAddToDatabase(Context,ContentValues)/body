@@ -6,6 +6,7 @@
   values.put(LauncherSettings.Favorites.CELLY,cellY);
   values.put(LauncherSettings.Favorites.SPANX,spanX);
   values.put(LauncherSettings.Favorites.SPANY,spanY);
+  values.put(LauncherSettings.Favorites.RANK,rank);
   long serialNumber=UserManagerCompat.getInstance(context).getSerialNumberForUser(user);
   values.put(LauncherSettings.Favorites.PROFILE_ID,serialNumber);
   if (screenId == Workspace.EXTRA_EMPTY_SCREEN_ID) {
