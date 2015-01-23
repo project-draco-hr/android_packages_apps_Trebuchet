@@ -1,0 +1,7 @@
+{
+  if (type == Favorites.ITEM_TYPE_APPLICATION) {
+    parsedIntent=intent;
+    parsedTitle=title;
+  }
+  return super.addShortcut(title,intent,type);
+}

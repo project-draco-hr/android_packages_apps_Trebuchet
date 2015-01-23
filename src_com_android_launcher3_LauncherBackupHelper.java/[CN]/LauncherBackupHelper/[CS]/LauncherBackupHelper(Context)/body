@@ -3,4 +3,5 @@
   mExistingKeys=new HashSet<String>();
   mKeys=new ArrayList<Key>();
   restoreSuccessful=true;
+  mItemTypeMatchers=new ItemTypeMatcher[CommonAppTypeParser.SUPPORTED_TYPE_COUNT];
 }

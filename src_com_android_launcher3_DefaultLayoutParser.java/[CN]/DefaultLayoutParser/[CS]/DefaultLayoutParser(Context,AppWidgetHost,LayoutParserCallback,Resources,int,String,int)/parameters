@@ -1,0 +1,7 @@
+Context context
+AppWidgetHost appWidgetHost
+LayoutParserCallback callback
+Resources sourceRes
+int layoutId
+String rootTag
+int hotseatAllAppsRank

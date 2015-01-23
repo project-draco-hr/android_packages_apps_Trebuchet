@@ -1,4 +1,3 @@
 {
   super(context,appWidgetHost,callback,sourceRes,layoutId,TAG_FAVORITES);
-  Log.e(TAG,"Default layout parser initialized");
 }

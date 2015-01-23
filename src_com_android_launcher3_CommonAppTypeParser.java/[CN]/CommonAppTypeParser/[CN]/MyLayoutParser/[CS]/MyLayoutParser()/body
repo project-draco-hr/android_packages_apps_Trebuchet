@@ -1,0 +1,3 @@
+{
+  super(mContext,null,CommonAppTypeParser.this,mContext.getResources(),mResId,TAG_RESOLVE,0);
+}
