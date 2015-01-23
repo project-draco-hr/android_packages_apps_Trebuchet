@@ -1,4 +1,13 @@
 {
+  if (TAG_INCLUDE.equals(parser.getName())) {
+    final int resId=getAttributeResourceValue(parser,ATTR_WORKSPACE,0);
+    if (resId != 0) {
+      return parseLayout(resId,screenIds);
+    }
+ else {
+      return 0;
+    }
+  }
   mValues.clear();
   parseContainerAndScreen(parser,mTemp);
   final long container=mTemp[0];
