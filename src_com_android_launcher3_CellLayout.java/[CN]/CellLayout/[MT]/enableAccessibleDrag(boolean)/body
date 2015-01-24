@@ -1,0 +1,18 @@
+{
+  mUseTouchHelper=enable;
+  if (!enable) {
+    ViewCompat.setAccessibilityDelegate(this,null);
+    setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_NO);
+    getShortcutsAndWidgets().setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_NO);
+    setOnClickListener(mLauncher);
+  }
+ else {
+    ViewCompat.setAccessibilityDelegate(this,mTouchHelper);
+    setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_YES);
+    getShortcutsAndWidgets().setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_YES);
+    setOnClickListener(mTouchHelper);
+  }
+  if (getParent() != null) {
+    getParent().notifySubtreeAccessibilityStateChanged(this,this,AccessibilityEvent.CONTENT_CHANGE_TYPE_SUBTREE);
+  }
+}

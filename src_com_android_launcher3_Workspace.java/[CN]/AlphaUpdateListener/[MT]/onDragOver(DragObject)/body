@@ -69,7 +69,7 @@
     setCurrentDropOverCell(mTargetCell[0],mTargetCell[1]);
     float targetCellDistance=mDragTargetLayout.getDistanceFromCell(mDragViewVisualCenter[0],mDragViewVisualCenter[1],mTargetCell);
     final View dragOverView=mDragTargetLayout.getChildAt(mTargetCell[0],mTargetCell[1]);
-    manageFolderFeedback(info,mDragTargetLayout,mTargetCell,targetCellDistance,dragOverView);
+    manageFolderFeedback(info,mDragTargetLayout,mTargetCell,targetCellDistance,dragOverView,d.accessibleDrag);
     boolean nearestDropOccupied=mDragTargetLayout.isNearestDropLocationOccupied((int)mDragViewVisualCenter[0],(int)mDragViewVisualCenter[1],item.spanX,item.spanY,child,mTargetCell);
     if (!nearestDropOccupied) {
       mDragTargetLayout.visualizeDropLocation(child,mDragOutline,(int)mDragViewVisualCenter[0],(int)mDragViewVisualCenter[1],mTargetCell[0],mTargetCell[1],item.spanX,item.spanY,false,d.dragView.getDragVisualizeOffset(),d.dragView.getDragRegion());

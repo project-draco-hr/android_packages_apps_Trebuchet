@@ -1,0 +1,3 @@
+{
+  mLauncher.getDragLayer().announceForAccessibility(confirmation);
+}

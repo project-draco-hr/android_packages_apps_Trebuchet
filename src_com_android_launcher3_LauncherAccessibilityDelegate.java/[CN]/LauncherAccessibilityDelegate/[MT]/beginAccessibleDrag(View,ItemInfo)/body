@@ -1,0 +1,18 @@
+{
+  mDragInfo=new DragInfo();
+  mDragInfo.info=info;
+  mDragInfo.item=item;
+  mDragInfo.dragType=DragType.ICON;
+  if (info instanceof FolderInfo) {
+    mDragInfo.dragType=DragType.FOLDER;
+  }
+ else   if (info instanceof LauncherAppWidgetInfo) {
+    mDragInfo.dragType=DragType.WIDGET;
+  }
+  CellLayout.CellInfo cellInfo=new CellLayout.CellInfo(item,info);
+  Rect pos=new Rect();
+  mLauncher.getDragLayer().getDescendantRectRelativeToSelf(item,pos);
+  mLauncher.getDragController().prepareAccessibleDrag(pos.centerX(),pos.centerY());
+  mLauncher.getWorkspace().enableAccessibleDrag(true);
+  mLauncher.getWorkspace().startDrag(cellInfo,true);
+}

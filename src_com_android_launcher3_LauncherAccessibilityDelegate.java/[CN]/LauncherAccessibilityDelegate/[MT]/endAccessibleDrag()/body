@@ -1,0 +1,4 @@
+{
+  mDragInfo=null;
+  mLauncher.getWorkspace().enableAccessibleDrag(false);
+}

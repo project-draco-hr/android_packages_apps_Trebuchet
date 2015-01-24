@@ -7,3 +7,4 @@ int dragAction
 Point dragOffset
 Rect dragRegion
 float initialDragViewScale
+boolean accessible

@@ -1,0 +1,3 @@
+CellLayout targetContainer
+Rect dropLocation
+String confirmation

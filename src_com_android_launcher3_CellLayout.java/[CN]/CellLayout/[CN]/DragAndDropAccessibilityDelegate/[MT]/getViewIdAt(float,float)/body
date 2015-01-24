@@ -1,0 +1,9 @@
+{
+  if (x < 0 || y < 0 || x > getMeasuredWidth() || y > getMeasuredHeight()) {
+    return ExploreByTouchHelper.INVALID_ID;
+  }
+  int cellX=(int)Math.floor(x / (mCellWidth + mWidthGap));
+  int cellY=(int)Math.floor(y / (mCellHeight + mHeightGap));
+  int id=cellX * mCountY + cellY;
+  return id;
+}

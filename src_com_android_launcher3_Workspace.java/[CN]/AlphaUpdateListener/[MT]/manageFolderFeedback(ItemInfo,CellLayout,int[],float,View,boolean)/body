@@ -1,8 +1,14 @@
 {
   boolean userFolderPending=willCreateUserFolder(info,targetLayout,targetCell,distance,false);
   if (mDragMode == DRAG_MODE_NONE && userFolderPending && !mFolderCreationAlarm.alarmPending()) {
-    mFolderCreationAlarm.setOnAlarmListener(new FolderCreationAlarmListener(targetLayout,targetCell[0],targetCell[1]));
-    mFolderCreationAlarm.setAlarm(FOLDER_CREATION_TIMEOUT);
+    FolderCreationAlarmListener listener=new FolderCreationAlarmListener(targetLayout,targetCell[0],targetCell[1]);
+    if (!accessibleDrag) {
+      mFolderCreationAlarm.setOnAlarmListener(listener);
+      mFolderCreationAlarm.setAlarm(FOLDER_CREATION_TIMEOUT);
+    }
+ else {
+      listener.onAlarm(mFolderCreationAlarm);
+    }
     return;
   }
   boolean willAddToFolder=willAddToExistingUserFolder(info,targetLayout,targetCell,distance);

@@ -1,0 +1,4 @@
+{
+  mLauncher.getDragController().cancelDrag();
+  endAccessibleDrag();
+}

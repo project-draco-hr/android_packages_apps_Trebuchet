@@ -2,6 +2,9 @@
   if (mLauncherCallbacks != null && mLauncherCallbacks.handleBackPressed()) {
     return;
   }
+  if (LauncherAppState.getInstance().getAccessibilityDelegate().onBackPressed()) {
+    return;
+  }
   if (isAllAppsVisible()) {
     if (mAppsCustomizeContent.getContentType() == AppsCustomizePagedView.ContentType.Applications) {
       showWorkspace(true);

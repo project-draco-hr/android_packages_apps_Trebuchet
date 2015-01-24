@@ -1,0 +1,21 @@
+{
+  LauncherAccessibilityDelegate delegate=LauncherAppState.getInstance().getAccessibilityDelegate();
+  LauncherAccessibilityDelegate.DragInfo dragInfo=delegate.getDragInfo();
+  int y=id % mCountY;
+  int x=id / mCountY;
+  Resources res=getContext().getResources();
+  View child=getChildAt(x,y);
+  if (child == null || child == dragInfo.item) {
+    return res.getString(R.string.item_moved);
+  }
+ else {
+    ItemInfo info=(ItemInfo)child.getTag();
+    if (info instanceof AppInfo || info instanceof ShortcutInfo) {
+      return res.getString(R.string.folder_created);
+    }
+ else     if (info instanceof FolderInfo) {
+      return res.getString(R.string.added_to_folder);
+    }
+  }
+  return "";
+}
