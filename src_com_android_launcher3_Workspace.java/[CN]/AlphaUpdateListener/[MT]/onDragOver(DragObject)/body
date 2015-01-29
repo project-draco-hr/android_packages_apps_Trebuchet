@@ -10,7 +10,7 @@
     return;
   }
   if (item.spanX < 0 || item.spanY < 0)   throw new RuntimeException("Improper spans found");
-  mDragViewVisualCenter=getDragViewVisualCenter(d.x,d.y,d.xOffset,d.yOffset,d.dragView,mDragViewVisualCenter);
+  mDragViewVisualCenter=d.getVisualCenter(mDragViewVisualCenter);
   final View child=(mDragInfo == null) ? null : mDragInfo.cell;
   if (workspaceInModalState()) {
     if (mLauncher.getHotseat() != null && !isExternalDragWidget(d)) {
