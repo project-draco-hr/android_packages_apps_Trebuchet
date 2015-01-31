@@ -9,8 +9,8 @@
   Bitmap icon=null;
   boolean customIcon=false;
   ShortcutIconResource iconResource=null;
-  if (bitmap != null && bitmap instanceof Bitmap) {
-    icon=Utilities.createIconBitmap(new FastBitmapDrawable((Bitmap)bitmap),context);
+  if (bitmap instanceof Bitmap) {
+    icon=Utilities.createIconBitmap((Bitmap)bitmap,context);
     customIcon=true;
   }
  else {

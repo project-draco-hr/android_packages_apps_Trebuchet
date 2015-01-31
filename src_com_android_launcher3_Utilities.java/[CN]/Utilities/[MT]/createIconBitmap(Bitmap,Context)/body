@@ -1,16 +1,11 @@
 {
-  int textureWidth=sIconTextureWidth;
-  int textureHeight=sIconTextureHeight;
-  int sourceWidth=icon.getWidth();
-  int sourceHeight=icon.getHeight();
-  if (sourceWidth > textureWidth && sourceHeight > textureHeight) {
-    return Bitmap.createBitmap(icon,(sourceWidth - textureWidth) / 2,(sourceHeight - textureHeight) / 2,textureWidth,textureHeight);
+synchronized (sCanvas) {
+    if (sIconWidth == -1) {
+      initStatics(context);
+    }
   }
- else   if (sourceWidth == textureWidth && sourceHeight == textureHeight) {
+  if (sIconWidth == icon.getWidth() && sIconHeight == icon.getHeight()) {
     return icon;
   }
- else {
-    final Resources resources=context.getResources();
-    return createIconBitmap(new BitmapDrawable(resources,icon),context);
-  }
+  return createIconBitmap(new BitmapDrawable(context.getResources(),icon),context);
 }
