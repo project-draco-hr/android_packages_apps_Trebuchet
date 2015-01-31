@@ -1,6 +1,6 @@
 {
-  File oldSavedImagesFile=new File(context.getCacheDir(),ImageDb.DB_NAME);
-  File savedImagesFile=context.getDatabasePath(ImageDb.DB_NAME);
+  File oldSavedImagesFile=new File(context.getCacheDir(),LauncherFiles.WALLPAPER_IMAGES_DB);
+  File savedImagesFile=context.getDatabasePath(LauncherFiles.WALLPAPER_IMAGES_DB);
   if (oldSavedImagesFile.exists()) {
     oldSavedImagesFile.renameTo(savedImagesFile);
   }

@@ -1,7 +1,7 @@
 {
   DataInputStream in=null;
   try {
-    in=new DataInputStream(context.openFileInput(PREFERENCES));
+    in=new DataInputStream(context.openFileInput(LauncherFiles.LAUNCHER_PREFS));
     configuration.locale=in.readUTF();
     configuration.mcc=in.readInt();
     configuration.mnc=in.readInt();
