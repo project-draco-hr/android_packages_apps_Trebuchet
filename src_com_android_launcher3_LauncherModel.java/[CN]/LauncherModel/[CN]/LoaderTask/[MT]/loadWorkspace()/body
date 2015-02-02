@@ -23,8 +23,6 @@
     Launcher.addDumpLog(TAG,"loadWorkspace: loading default favorites",false);
     LauncherAppState.getLauncherProvider().loadDefaultFavoritesIfNecessary();
   }
-  boolean loadedOldDb=false;
-  Launcher.addDumpLog(TAG,"11683562 -   loadedOldDb: " + loadedOldDb,true);
 synchronized (sBgLock) {
     clearSBgDataStructures();
     final HashSet<String> installingPkgs=PackageInstallerCompat.getInstance(mContext).updateAndGetActiveSessionCache();
@@ -369,7 +367,7 @@ c.close();
 }
 if (mStopped) {
 clearSBgDataStructures();
-return false;
+return;
 }
 if (itemsToRemove.size() > 0) {
 ContentProviderClient client=contentResolver.acquireContentProviderClient(contentUri);
@@ -404,29 +402,6 @@ Log.w(TAG,"Could not update restored rows");
 if (!isSdCardReady && !sPendingPackages.isEmpty()) {
 context.registerReceiver(new AppsAvailabilityCheck(),new IntentFilter(StartupReceiver.SYSTEM_READY),null,sWorker);
 }
-if (loadedOldDb) {
-long maxScreenId=0;
-for (ItemInfo item : sBgItemsIdMap.values()) {
-long screenId=item.screenId;
-if (item.container == LauncherSettings.Favorites.CONTAINER_DESKTOP && !sBgWorkspaceScreens.contains(screenId)) {
-sBgWorkspaceScreens.add(screenId);
-if (screenId > maxScreenId) {
-maxScreenId=screenId;
-}
-}
-}
-Collections.sort(sBgWorkspaceScreens);
-Launcher.addDumpLog(TAG,"11683562 -   maxScreenId: " + maxScreenId,true);
-Launcher.addDumpLog(TAG,"11683562 -   sBgWorkspaceScreens: " + TextUtils.join(", ",sBgWorkspaceScreens),true);
-LauncherAppState.getLauncherProvider().updateMaxScreenId(maxScreenId);
-updateWorkspaceScreenOrder(context,sBgWorkspaceScreens);
-long maxItemId=0;
-for (ItemInfo item : sBgItemsIdMap.values()) {
-maxItemId=Math.max(maxItemId,item.id);
-}
-LauncherAppState.getLauncherProvider().updateMaxItemId(maxItemId);
-}
- else {
 sBgWorkspaceScreens.addAll(loadWorkspaceScreensDb(mContext));
 Launcher.addDumpLog(TAG,"11683562 -   sBgWorkspaceScreens: " + TextUtils.join(", ",sBgWorkspaceScreens),true);
 ArrayList<Long> unusedScreens=new ArrayList<Long>(sBgWorkspaceScreens);
@@ -440,7 +415,6 @@ if (unusedScreens.size() != 0) {
 Launcher.addDumpLog(TAG,"11683562 -   unusedScreens (to be removed): " + TextUtils.join(", ",unusedScreens),true);
 sBgWorkspaceScreens.removeAll(unusedScreens);
 updateWorkspaceScreenOrder(context,sBgWorkspaceScreens);
-}
 }
 if (DEBUG_LOADERS) {
 Log.d(TAG,"loaded workspace in " + (SystemClock.uptimeMillis() - t) + "ms");
@@ -468,5 +442,4 @@ Log.d(TAG,"[ " + line + " ]");
 }
 }
 }
-return loadedOldDb;
 }

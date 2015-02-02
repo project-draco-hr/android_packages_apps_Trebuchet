@@ -1,11 +1,5 @@
 {
   if (LauncherAppState.isDisableAllApps()) {
-    if (mIntentsOnWorkspaceFromUpgradePath != null) {
-      if (LauncherModel.UPGRADE_USE_MORE_APPS_FOLDER) {
-        getHotseat().addAllAppsFolder(mIconCache,apps,mIntentsOnWorkspaceFromUpgradePath,Launcher.this,mWorkspace);
-      }
-      mIntentsOnWorkspaceFromUpgradePath=null;
-    }
     if (mAppsCustomizeContent != null) {
       mAppsCustomizeContent.onPackagesUpdated(LauncherModel.getSortedWidgetsAndShortcuts(this));
     }

@@ -1,5 +1,4 @@
 {
-  boolean isUpgrade=false;
 synchronized (mLock) {
     mIsLoaderTaskRunning=true;
   }
@@ -9,7 +8,7 @@ synchronized (mLock) {
       android.os.Process.setThreadPriority(mIsLaunching ? Process.THREAD_PRIORITY_DEFAULT : Process.THREAD_PRIORITY_BACKGROUND);
     }
     if (DEBUG_LOADERS)     Log.d(TAG,"step 1: loading workspace");
-    isUpgrade=loadAndBindWorkspace();
+    loadAndBindWorkspace();
     if (mStopped) {
       break keep_running;
     }
@@ -34,9 +33,7 @@ synchronized (sBgLock) {
     sBgDbIconCache.clear();
   }
   if (LauncherAppState.isDisableAllApps()) {
-    if (!UPGRADE_USE_MORE_APPS_FOLDER || !isUpgrade) {
-      verifyApplications();
-    }
+    verifyApplications();
   }
   mContext=null;
 synchronized (mLock) {
