@@ -1,0 +1,6 @@
+{
+  super.onLoadRequestComplete(req,success);
+  if (success) {
+    setSystemWallpaperVisiblity(false);
+  }
+}

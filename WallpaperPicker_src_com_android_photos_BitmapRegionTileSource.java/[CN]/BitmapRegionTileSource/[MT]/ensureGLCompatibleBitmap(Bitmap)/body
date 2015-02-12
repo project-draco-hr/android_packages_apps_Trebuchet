@@ -1,8 +1,0 @@
-{
-  if (bitmap == null || bitmap.getConfig() != null) {
-    return bitmap;
-  }
-  Bitmap newBitmap=bitmap.copy(Config.ARGB_8888,false);
-  bitmap.recycle();
-  return newBitmap;
-}

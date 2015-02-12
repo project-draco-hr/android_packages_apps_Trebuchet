@@ -1,0 +1,21 @@
+{
+  mCurrentLoadRequest=null;
+  if (success) {
+    TileSource oldSrc=mCropView.getTileSource();
+    mCropView.setTileSource(req.result,null);
+    mCropView.setTouchEnabled(req.touchEnabled);
+    if (req.moveToLeft) {
+      mCropView.moveToLeft();
+    }
+    if (req.scaleProvider != null) {
+      mCropView.setScale(req.scaleProvider.getScale(req.result));
+    }
+    if (oldSrc != null) {
+      oldSrc.getPreview().yield();
+    }
+    addReusableBitmap(oldSrc);
+  }
+  if (req.postExecute != null) {
+    req.postExecute.run();
+  }
+}

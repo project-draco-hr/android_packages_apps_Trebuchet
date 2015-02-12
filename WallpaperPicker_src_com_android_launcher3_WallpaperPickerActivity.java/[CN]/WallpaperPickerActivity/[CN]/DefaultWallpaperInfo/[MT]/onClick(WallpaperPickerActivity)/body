@@ -6,8 +6,15 @@
     c.setTileSource(null,null);
     return;
   }
-  c.setTileSource(new DrawableTileSource(a,defaultWallpaper,DrawableTileSource.MAX_PREVIEW_SIZE),null);
-  c.setScale(1f);
-  c.setTouchEnabled(false);
-  a.setSystemWallpaperVisiblity(false);
+  LoadRequest req=new LoadRequest();
+  req.moveToLeft=false;
+  req.touchEnabled=false;
+  req.scaleProvider=new CropViewScaleProvider(){
+    @Override public float getScale(    TileSource src){
+      return 1f;
+    }
+  }
+;
+  req.result=new DrawableTileSource(a,defaultWallpaper,DrawableTileSource.MAX_PREVIEW_SIZE);
+  a.onLoadRequestComplete(req,true);
 }

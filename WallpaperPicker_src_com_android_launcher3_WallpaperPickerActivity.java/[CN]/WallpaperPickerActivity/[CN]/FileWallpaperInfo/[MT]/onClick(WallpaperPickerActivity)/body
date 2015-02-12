@@ -1,4 +1,4 @@
 {
   BitmapRegionTileSource.UriBitmapSource bitmapSource=new BitmapRegionTileSource.UriBitmapSource(a,Uri.fromFile(mFile),1024);
-  a.setCropViewTileSource(bitmapSource,false,true,null);
+  a.setCropViewTileSource(bitmapSource,false,true,null,null);
 }

@@ -1,8 +1,5 @@
 {
   int tileSize=getTileSize();
-  if (!REUSE_BITMAP) {
-    return getTileWithoutReusingBitmap(level,x,y,tileSize);
-  }
   int t=tileSize << level;
   mWantRegion.set(x,y,x + t,y + t);
   if (bitmap == null) {

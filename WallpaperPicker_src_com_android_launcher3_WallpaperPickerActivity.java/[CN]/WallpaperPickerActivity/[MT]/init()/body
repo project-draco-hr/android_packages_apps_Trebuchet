@@ -2,6 +2,7 @@
   setContentView(R.layout.wallpaper_picker);
   mCropView=(CropView)findViewById(R.id.cropView);
   mCropView.setVisibility(View.INVISIBLE);
+  mProgressView=findViewById(R.id.loading);
   mWallpaperStrip=findViewById(R.id.wallpaper_strip);
   mCropView.setTouchCallback(new CropView.TouchCallback(){
     ViewPropertyAnimator mAnim;

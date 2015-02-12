@@ -1,6 +1,7 @@
 {
   setContentView(R.layout.wallpaper_cropper);
   mCropView=(CropView)findViewById(R.id.cropView);
+  mProgressView=findViewById(R.id.loading);
   Intent cropIntent=getIntent();
   final Uri imageUri=cropIntent.getData();
   if (imageUri == null) {
@@ -32,5 +33,5 @@
     }
   }
 ;
-  setCropViewTileSource(bitmapSource,true,false,onLoad);
+  setCropViewTileSource(bitmapSource,true,false,null,onLoad);
 }
