@@ -1,7 +1,7 @@
 {
   Runnable r=new Runnable(){
     public void run(){
-      finishBindingItems(upgradePath);
+      finishBindingItems();
     }
   }
 ;
@@ -27,12 +27,8 @@
 );
     sPendingAddItem=null;
   }
-  if (upgradePath) {
-    mWorkspace.getUniqueComponents(true,null);
-    mIntentsOnWorkspaceFromUpgradePath=mWorkspace.getUniqueComponents(true,null);
-  }
   PackageInstallerCompat.getInstance(this).onFinishBind();
   if (mLauncherCallbacks != null) {
-    mLauncherCallbacks.finishBindingItems(upgradePath);
+    mLauncherCallbacks.finishBindingItems(false);
   }
 }

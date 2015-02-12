@@ -69,7 +69,7 @@ synchronized (mDeferredBindRunnables) {
     public void run(){
       Callbacks callbacks=tryGetCallbacks(oldCallbacks);
       if (callbacks != null) {
-        callbacks.finishBindingItems(isUpgradePath);
+        callbacks.finishBindingItems();
       }
       if (DEBUG_LOADERS) {
         Log.d(TAG,"bound workspace in " + (SystemClock.uptimeMillis() - t) + "ms");
