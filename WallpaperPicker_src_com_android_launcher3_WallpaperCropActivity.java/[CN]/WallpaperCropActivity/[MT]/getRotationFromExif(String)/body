@@ -1,3 +1,0 @@
-{
-  return getRotationFromExifHelper(path,null,0,null,null);
-}

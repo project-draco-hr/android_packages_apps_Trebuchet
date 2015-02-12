@@ -1,8 +1,8 @@
 {
-  int rotation=getRotationFromExif(res,resId);
+  int rotation=BitmapUtils.getRotationFromExif(res,resId);
   Point inSize=mCropView.getSourceDimensions();
-  Point outSize=getDefaultWallpaperSize(getResources(),getWindowManager());
-  RectF crop=getMaxCropRect(inSize.x,inSize.y,outSize.x,outSize.y,false);
+  Point outSize=BitmapUtils.getDefaultWallpaperSize(getResources(),getWindowManager());
+  RectF crop=Utils.getMaxCropRect(inSize.x,inSize.y,outSize.x,outSize.y,false);
   Runnable onEndCrop=new Runnable(){
     public void run(){
       updateWallpaperDimensions(0,0);

@@ -1,5 +1,5 @@
 {
-  int rotation=getRotationFromExif(this,uri);
+  int rotation=BitmapUtils.getRotationFromExif(this,uri);
   BitmapCropTask cropTask=new BitmapCropTask(this,uri,null,rotation,0,0,true,false,null);
   final Point bounds=cropTask.getImageBounds();
   Runnable onEndCrop=new Runnable(){
