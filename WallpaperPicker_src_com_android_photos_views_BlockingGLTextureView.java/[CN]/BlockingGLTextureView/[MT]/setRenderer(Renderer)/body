@@ -1,6 +1,0 @@
-{
-  if (mRenderThread != null) {
-    throw new IllegalArgumentException("Renderer already set");
-  }
-  mRenderThread=new RenderThread(renderer);
-}

@@ -1,7 +1,4 @@
 {
-  if (!IS_SUPPORTED) {
-    return;
-  }
 synchronized (mLock) {
     mRenderer.source=source;
     mRenderer.isReadyCallback=isReadyCallback;
