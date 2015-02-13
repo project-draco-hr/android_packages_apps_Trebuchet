@@ -1,8 +1,8 @@
 {
   super.onStop();
-  mWallpaperStrip=findViewById(R.id.wallpaper_strip);
-  if (mWallpaperStrip.getAlpha() < 1f) {
-    mWallpaperStrip.setAlpha(1f);
-    mWallpaperStrip.setVisibility(View.VISIBLE);
+  mWallpaperScrollContainer=(HorizontalScrollView)findViewById(R.id.wallpaper_scroll_container);
+  if (mWallpaperScrollContainer.getAlpha() < 1f) {
+    mWallpaperScrollContainer.setAlpha(1f);
+    mWallpaperScrollContainer.setVisibility(View.VISIBLE);
   }
 }
