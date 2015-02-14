@@ -5,9 +5,10 @@
   if (onCompleteRunnable != null) {
     onCompleteRunnable.run();
   }
-  revealView.setLayerType(View.LAYER_TYPE_NONE,null);
-  if (page != null) {
-    page.setLayerType(View.LAYER_TYPE_NONE,null);
+  for (  View v : layerViews.keySet()) {
+    if (layerViews.get(v) == BUILD_AND_SET_LAYER) {
+      v.setLayerType(View.LAYER_TYPE_NONE,null);
+    }
   }
   content.setPageBackgroundsVisible(true);
   int count=content.getChildCount();
