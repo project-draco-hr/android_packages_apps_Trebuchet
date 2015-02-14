@@ -2,4 +2,4 @@ State state
 boolean animated
 int delay
 int snapPage
-ArrayList<View> layerViews
+HashMap<View,Integer> layerViews
