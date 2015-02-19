@@ -1,7 +1,7 @@
 {
   final ShortcutInfo info=new ShortcutInfo();
   info.user=UserHandleCompat.myUserHandle();
-  mIconCache.getTitleAndIcon(info,intent,info.user,true);
+  mIconCache.getTitleAndIcon(info,intent,info.user);
   if ((promiseType & ShortcutInfo.FLAG_RESTORED_ICON) != 0) {
     String title=(cursor != null) ? cursor.getString(titleIndex) : null;
     if (!TextUtils.isEmpty(title)) {

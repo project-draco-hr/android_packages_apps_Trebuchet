@@ -6,7 +6,7 @@
         ComponentName cn=shortcutInfo.getTargetComponent();
         if (user.equals(shortcutInfo.user) && cn != null && shortcutInfo.isPromise() && packageName.equals(cn.getPackageName())) {
           if (shortcutInfo.hasStatusFlag(ShortcutInfo.FLAG_AUTOINTALL_ICON)) {
-            mIconCache.getTitleAndIcon(shortcutInfo,shortcutInfo.promisedIntent,user,true);
+            mIconCache.getTitleAndIcon(shortcutInfo,shortcutInfo.promisedIntent,user);
           }
  else {
             shortcutInfo.updateIcon(mIconCache);

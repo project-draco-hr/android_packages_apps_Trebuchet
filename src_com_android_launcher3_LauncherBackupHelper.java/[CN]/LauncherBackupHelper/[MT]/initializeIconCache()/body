@@ -4,9 +4,11 @@
   }
   final LauncherAppState appState=LauncherAppState.getInstanceNoCreate();
   if (appState == null) {
-    Throwable stackTrace=new Throwable();
-    stackTrace.fillInStackTrace();
-    Log.w(TAG,"Failed to get app state during backup/restore",stackTrace);
+    if (DEBUG) {
+      Throwable stackTrace=new Throwable();
+      stackTrace.fillInStackTrace();
+      Log.w(TAG,"Failed to get app state during backup/restore",stackTrace);
+    }
     return false;
   }
   mIconCache=appState.getIconCache();

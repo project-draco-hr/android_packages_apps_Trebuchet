@@ -1,3 +1,0 @@
-{
-  return getShortcutInfo(manager,intent,user,context,null,-1,-1,null,false);
-}

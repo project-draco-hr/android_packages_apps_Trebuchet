@@ -6,17 +6,16 @@
   if (entry == null) {
     entry=new CacheEntry();
     entry.title="";
+    entry.contentDescription="";
     mCache.put(cacheKey,entry);
     try {
       ApplicationInfo info=mPackageManager.getApplicationInfo(packageName,0);
-      entry.title=info.loadLabel(mPackageManager);
       entry.icon=Utilities.createIconBitmap(info.loadIcon(mPackageManager),mContext);
+      entry.title=info.loadLabel(mPackageManager);
+      entry.contentDescription=mUserManager.getBadgedLabelForUser(entry.title,user);
     }
  catch (    NameNotFoundException e) {
       if (DEBUG)       Log.d(TAG,"Application not installed " + packageName);
-    }
-    if (entry.icon == null) {
-      entry.icon=getPreloadedIcon(cn,user);
     }
   }
   return entry;

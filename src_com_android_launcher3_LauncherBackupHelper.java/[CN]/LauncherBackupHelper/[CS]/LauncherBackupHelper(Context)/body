@@ -4,4 +4,6 @@
   mKeys=new ArrayList<Key>();
   restoreSuccessful=true;
   mItemTypeMatchers=new ItemTypeMatcher[CommonAppTypeParser.SUPPORTED_TYPE_COUNT];
+  UserManagerCompat userManager=UserManagerCompat.getInstance(mContext);
+  mUserSerial=userManager.getSerialNumberForUser(UserHandleCompat.myUserHandle());
 }

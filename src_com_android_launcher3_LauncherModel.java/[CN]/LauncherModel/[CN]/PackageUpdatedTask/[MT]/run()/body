@@ -6,7 +6,7 @@ switch (mOp) {
 case OP_ADD:
     for (int i=0; i < N; i++) {
       if (DEBUG_LOADERS)       Log.d(TAG,"mAllAppsList.addPackage " + packages[i]);
-      mIconCache.remove(packages[i],mUser);
+      mIconCache.updateIconsForPkg(packages[i],mUser);
       mBgAllAppsList.addPackage(context,packages[i],mUser);
     }
   if (ADD_MANAGED_PROFILE_SHORTCUTS && !UserHandleCompat.myUserHandle().equals(mUser)) {
@@ -28,6 +28,7 @@ break;
 case OP_UPDATE:
 for (int i=0; i < N; i++) {
 if (DEBUG_LOADERS) Log.d(TAG,"mAllAppsList.updatePackage " + packages[i]);
+mIconCache.updateIconsForPkg(packages[i],mUser);
 mBgAllAppsList.updatePackage(context,packages[i],mUser);
 WidgetPreviewLoader.removePackageFromDb(mApp.getWidgetPreviewCacheDb(),packages[i]);
 }
@@ -40,11 +41,14 @@ HashSet<String> shortcutSet=new HashSet<String>(prefs.getStringSet(shortcutsSetK
 shortcutSet.removeAll(Arrays.asList(mPackages));
 prefs.edit().putStringSet(shortcutsSetKey,shortcutSet).commit();
 }
-case OP_UNAVAILABLE:
-boolean clearCache=mOp == OP_REMOVE;
 for (int i=0; i < N; i++) {
 if (DEBUG_LOADERS) Log.d(TAG,"mAllAppsList.removePackage " + packages[i]);
-mBgAllAppsList.removePackage(packages[i],mUser,clearCache);
+mIconCache.removeIconsForPkg(packages[i],mUser);
+}
+case OP_UNAVAILABLE:
+for (int i=0; i < N; i++) {
+if (DEBUG_LOADERS) Log.d(TAG,"mAllAppsList.removePackage " + packages[i]);
+mBgAllAppsList.removePackage(packages[i],mUser);
 WidgetPreviewLoader.removePackageFromDb(mApp.getWidgetPreviewCacheDb(),packages[i]);
 }
 break;
@@ -120,7 +124,6 @@ ComponentName cn=si.getTargetComponent();
 if (cn != null && packageSet.contains(cn.getPackageName())) {
 AppInfo appInfo=addedOrUpdatedApps.get(cn);
 if (si.isPromise()) {
-mIconCache.deletePreloadedIcon(cn,mUser);
 if (si.hasStatusFlag(ShortcutInfo.FLAG_AUTOINTALL_ICON)) {
 PackageManager pm=context.getPackageManager();
 ResolveInfo matched=pm.resolveActivity(new Intent(Intent.ACTION_MAIN).setComponent(cn).addCategory(Intent.CATEGORY_LAUNCHER),PackageManager.MATCH_DEFAULT_ONLY);

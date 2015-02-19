@@ -5,6 +5,5 @@
   mUserManager=UserManagerCompat.getInstance(mContext);
   mLauncherApps=LauncherAppsCompat.getInstance(mContext);
   mIconDpi=activityManager.getLauncherLargeIconDensity();
-  UserHandleCompat myUser=UserHandleCompat.myUserHandle();
-  mDefaultIcons.put(myUser,makeDefaultIcon(myUser));
+  mIconDb=new IconDB(context);
 }

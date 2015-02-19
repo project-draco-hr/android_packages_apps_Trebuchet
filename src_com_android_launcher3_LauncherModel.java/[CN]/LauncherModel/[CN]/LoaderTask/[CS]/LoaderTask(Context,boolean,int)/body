@@ -1,6 +1,5 @@
 {
   mContext=context;
   mIsLaunching=isLaunching;
-  mLabelCache=new HashMap<Object,CharSequence>();
   mFlags=flags;
 }

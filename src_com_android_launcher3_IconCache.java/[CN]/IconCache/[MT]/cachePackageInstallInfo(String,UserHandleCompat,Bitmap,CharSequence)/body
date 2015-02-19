@@ -1,5 +1,5 @@
 {
-  remove(packageName,user);
+  removeFromMemCacheLocked(packageName,user);
   CacheEntry entry=getEntryForPackage(packageName,user);
   if (!TextUtils.isEmpty(title)) {
     entry.title=title;

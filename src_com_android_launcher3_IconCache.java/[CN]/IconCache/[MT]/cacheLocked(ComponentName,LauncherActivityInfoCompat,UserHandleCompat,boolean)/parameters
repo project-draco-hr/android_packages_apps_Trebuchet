@@ -1,0 +1,4 @@
+ComponentName componentName
+LauncherActivityInfoCompat info
+UserHandleCompat user
+boolean usePackageIcon

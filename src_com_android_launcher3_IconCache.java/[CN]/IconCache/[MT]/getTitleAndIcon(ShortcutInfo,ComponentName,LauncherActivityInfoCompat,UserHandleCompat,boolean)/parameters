@@ -1,0 +1,5 @@
+ShortcutInfo shortcutInfo
+ComponentName component
+LauncherActivityInfoCompat info
+UserHandleCompat user
+boolean usePkgIcon

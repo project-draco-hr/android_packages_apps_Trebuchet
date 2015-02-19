@@ -1,0 +1,8 @@
+{
+  ContentValues values=updateCacheAndGetContentValues(app);
+  values.put(IconDB.COLUMN_COMPONENT,app.getComponentName().flattenToString());
+  values.put(IconDB.COLUMN_USER,userSerial);
+  values.put(IconDB.COLUMN_LAST_UPDATED,info.lastUpdateTime);
+  values.put(IconDB.COLUMN_VERSION,info.versionCode);
+  mIconDb.getWritableDatabase().insertWithOnConflict(IconDB.TABLE_NAME,null,values,SQLiteDatabase.CONFLICT_REPLACE);
+}
