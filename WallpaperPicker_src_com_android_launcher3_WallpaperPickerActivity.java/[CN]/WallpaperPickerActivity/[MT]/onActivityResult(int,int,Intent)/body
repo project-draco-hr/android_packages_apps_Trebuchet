@@ -5,18 +5,8 @@
       addTemporaryWallpaperTile(uri,false);
     }
   }
- else   if (requestCode == PICK_WALLPAPER_THIRD_PARTY_ACTIVITY) {
+ else   if (requestCode == PICK_WALLPAPER_THIRD_PARTY_ACTIVITY && resultCode == RESULT_OK) {
     setResult(RESULT_OK);
     finish();
-  }
- else   if (requestCode == PICK_LIVE_WALLPAPER) {
-    WallpaperManager wm=WallpaperManager.getInstance(this);
-    final WallpaperInfo oldLiveWallpaper=mLiveWallpaperInfoOnPickerLaunch;
-    final WallpaperInfo clickedWallpaper=mLastClickedLiveWallpaperInfo;
-    WallpaperInfo newLiveWallpaper=wm.getWallpaperInfo();
-    if (newLiveWallpaper != null && (oldLiveWallpaper == null || !oldLiveWallpaper.getComponent().equals(newLiveWallpaper.getComponent()) || clickedWallpaper.getComponent().equals(oldLiveWallpaper.getComponent()))) {
-      setResult(RESULT_OK);
-      finish();
-    }
   }
 }
