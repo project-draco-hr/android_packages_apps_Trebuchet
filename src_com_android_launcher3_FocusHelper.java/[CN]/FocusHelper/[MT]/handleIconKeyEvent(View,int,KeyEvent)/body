@@ -1,4 +1,12 @@
 {
+  boolean consume=FocusLogic.shouldConsume(keyCode);
+  if (e.getAction() == KeyEvent.ACTION_UP || !consume) {
+    return consume;
+  }
+  int orientation=v.getResources().getConfiguration().orientation;
+  if (DEBUG) {
+    Log.v(TAG,String.format("Handle WORKSPACE ICONS keyevent=[%s] orientation=%d",KeyEvent.keyCodeToString(keyCode),orientation));
+  }
   ShortcutAndWidgetContainer parent=(ShortcutAndWidgetContainer)v.getParent();
   final CellLayout layout=(CellLayout)parent.getParent();
   final Workspace workspace=(Workspace)layout.getParent();
@@ -7,151 +15,63 @@
   final ViewGroup hotseat=(ViewGroup)launcher.findViewById(R.id.hotseat);
   int pageIndex=workspace.indexOfChild(layout);
   int pageCount=workspace.getChildCount();
-  final int action=e.getAction();
-  final boolean handleKeyEvent=(action != KeyEvent.ACTION_UP);
-  boolean wasHandled=false;
-switch (keyCode) {
-case KeyEvent.KEYCODE_DPAD_LEFT:
-    if (handleKeyEvent) {
-      View newIcon=getIconInDirection(layout,parent,v,-1);
-      if (newIcon != null) {
-        newIcon.requestFocus();
-        v.playSoundEffect(SoundEffectConstants.NAVIGATION_LEFT);
-      }
- else {
-        if (pageIndex > 0) {
-          parent=getCellLayoutChildrenForIndex(workspace,pageIndex - 1);
-          newIcon=getIconInDirection(layout,parent,parent.getChildCount(),-1);
-          if (newIcon != null) {
-            newIcon.requestFocus();
-          }
- else {
-            workspace.snapToPage(pageIndex - 1);
-          }
-          v.playSoundEffect(SoundEffectConstants.NAVIGATION_LEFT);
-        }
-      }
-    }
-  wasHandled=true;
-break;
-case KeyEvent.KEYCODE_DPAD_RIGHT:
-if (handleKeyEvent) {
-View newIcon=getIconInDirection(layout,parent,v,1);
-if (newIcon != null) {
-  newIcon.requestFocus();
-  v.playSoundEffect(SoundEffectConstants.NAVIGATION_RIGHT);
-}
- else {
-  if (pageIndex < (pageCount - 1)) {
-    parent=getCellLayoutChildrenForIndex(workspace,pageIndex + 1);
-    newIcon=getIconInDirection(layout,parent,-1,1);
-    if (newIcon != null) {
-      newIcon.requestFocus();
-    }
- else {
-      workspace.snapToPage(pageIndex + 1);
-    }
-    v.playSoundEffect(SoundEffectConstants.NAVIGATION_RIGHT);
+  final int countX=layout.getCountX();
+  int countY=layout.getCountY();
+  final int iconIndex=findIndexOfView(parent,v);
+  CellLayout hotseatLayout=(CellLayout)hotseat.getChildAt(0);
+  ShortcutAndWidgetContainer hotseatParent=hotseatLayout.getShortcutsAndWidgets();
+  int[][] matrix;
+  if (keyCode == KeyEvent.KEYCODE_DPAD_DOWN && orientation == Configuration.ORIENTATION_PORTRAIT) {
+    matrix=FocusLogic.createSparseMatrix(layout,hotseatLayout,orientation);
+    countY=countY + 1;
   }
-}
-}
-wasHandled=true;
-break;
-case KeyEvent.KEYCODE_DPAD_UP:
-if (handleKeyEvent) {
-View newIcon=getClosestIconOnLine(layout,parent,v,-1);
-if (newIcon != null) {
-newIcon.requestFocus();
-wasHandled=true;
-}
+ else   if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT && orientation == Configuration.ORIENTATION_LANDSCAPE) {
+    matrix=FocusLogic.createSparseMatrix(layout,hotseatLayout,orientation);
+    countY=countY + 1;
+  }
  else {
-tabs.requestFocus();
-}
-v.playSoundEffect(SoundEffectConstants.NAVIGATION_UP);
-}
-break;
-case KeyEvent.KEYCODE_DPAD_DOWN:
-if (handleKeyEvent) {
-View newIcon=getClosestIconOnLine(layout,parent,v,1);
-if (newIcon != null) {
-newIcon.requestFocus();
-v.playSoundEffect(SoundEffectConstants.NAVIGATION_DOWN);
-wasHandled=true;
-}
- else if (hotseat != null) {
-hotseat.requestFocus();
-v.playSoundEffect(SoundEffectConstants.NAVIGATION_DOWN);
-}
-}
-break;
-case KeyEvent.KEYCODE_PAGE_UP:
-if (handleKeyEvent) {
-if (pageIndex > 0) {
+    matrix=FocusLogic.createSparseMatrix(layout);
+  }
+  int newIconIndex=FocusLogic.handleKeyEvent(keyCode,countX,countY,matrix,iconIndex,pageIndex,pageCount);
+  View newIcon=null;
+switch (newIconIndex) {
+case FocusLogic.NOOP:
+    if (keyCode == KeyEvent.KEYCODE_DPAD_UP) {
+      newIcon=tabs;
+    }
+  break;
+case FocusLogic.PREVIOUS_PAGE_FIRST_ITEM:
 parent=getCellLayoutChildrenForIndex(workspace,pageIndex - 1);
-View newIcon=getIconInDirection(layout,parent,-1,1);
-if (newIcon != null) {
-newIcon.requestFocus();
-}
- else {
+newIcon=parent.getChildAt(0);
 workspace.snapToPage(pageIndex - 1);
-}
-v.playSoundEffect(SoundEffectConstants.NAVIGATION_UP);
-}
- else {
-View newIcon=getIconInDirection(layout,parent,-1,1);
-if (newIcon != null) {
-newIcon.requestFocus();
-v.playSoundEffect(SoundEffectConstants.NAVIGATION_UP);
-}
-}
-}
-wasHandled=true;
+case FocusLogic.PREVIOUS_PAGE_LAST_ITEM:
+parent=getCellLayoutChildrenForIndex(workspace,pageIndex - 1);
+newIcon=parent.getChildAt(parent.getChildCount() - 1);
+workspace.snapToPage(pageIndex - 1);
 break;
-case KeyEvent.KEYCODE_PAGE_DOWN:
-if (handleKeyEvent) {
-if (pageIndex < (pageCount - 1)) {
+case FocusLogic.NEXT_PAGE_FIRST_ITEM:
 parent=getCellLayoutChildrenForIndex(workspace,pageIndex + 1);
-View newIcon=getIconInDirection(layout,parent,-1,1);
-if (newIcon != null) {
-newIcon.requestFocus();
-}
- else {
-workspace.snapToPage(pageIndex + 1);
-}
-v.playSoundEffect(SoundEffectConstants.NAVIGATION_DOWN);
-}
- else {
-View newIcon=getIconInDirection(layout,parent,parent.getChildCount(),-1);
-if (newIcon != null) {
-newIcon.requestFocus();
-v.playSoundEffect(SoundEffectConstants.NAVIGATION_DOWN);
-}
-}
-}
-wasHandled=true;
+newIcon=parent.getChildAt(0);
+workspace.snapToPage(pageIndex - 1);
 break;
-case KeyEvent.KEYCODE_MOVE_HOME:
-if (handleKeyEvent) {
-View newIcon=getIconInDirection(layout,parent,-1,1);
-if (newIcon != null) {
-newIcon.requestFocus();
-v.playSoundEffect(SoundEffectConstants.NAVIGATION_UP);
-}
-}
-wasHandled=true;
+case FocusLogic.CURRENT_PAGE_FIRST_ITEM:
+newIcon=parent.getChildAt(0);
 break;
-case KeyEvent.KEYCODE_MOVE_END:
-if (handleKeyEvent) {
-View newIcon=getIconInDirection(layout,parent,parent.getChildCount(),-1);
-if (newIcon != null) {
-newIcon.requestFocus();
-v.playSoundEffect(SoundEffectConstants.NAVIGATION_DOWN);
-}
-}
-wasHandled=true;
+case FocusLogic.CURRENT_PAGE_LAST_ITEM:
+newIcon=parent.getChildAt(parent.getChildCount() - 1);
 break;
 default :
+if (0 <= newIconIndex && newIconIndex < parent.getChildCount()) {
+newIcon=parent.getChildAt(newIconIndex);
+}
+ else if (parent.getChildCount() <= newIconIndex && newIconIndex < parent.getChildCount() + hotseatParent.getChildCount()) {
+newIcon=hotseatParent.getChildAt(newIconIndex - parent.getChildCount());
+}
 break;
 }
-return wasHandled;
+if (newIcon != null) {
+newIcon.requestFocus();
+playSoundEffect(keyCode,v);
+}
+return consume;
 }

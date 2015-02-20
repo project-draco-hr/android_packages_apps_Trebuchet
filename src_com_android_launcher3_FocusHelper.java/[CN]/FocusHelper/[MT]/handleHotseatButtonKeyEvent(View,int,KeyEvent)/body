@@ -1,0 +1,53 @@
+{
+  boolean consume=FocusLogic.shouldConsume(keyCode);
+  if (e.getAction() == KeyEvent.ACTION_UP || !consume) {
+    return consume;
+  }
+  int orientation=v.getResources().getConfiguration().orientation;
+  if (DEBUG) {
+    Log.v(TAG,String.format("Handle HOTSEAT BUTTONS keyevent=[%s] on hotseat buttons, orientation=%d",KeyEvent.keyCodeToString(keyCode),orientation));
+  }
+  final ShortcutAndWidgetContainer hotseatParent=(ShortcutAndWidgetContainer)v.getParent();
+  final CellLayout hotseatLayout=(CellLayout)hotseatParent.getParent();
+  Workspace workspace=(Workspace)v.getRootView().findViewById(R.id.workspace);
+  int pageIndex=workspace.getCurrentPage();
+  int pageCount=workspace.getChildCount();
+  int countX, countY;
+  int iconIndex=findIndexOfView(hotseatParent,v);
+  final CellLayout iconLayout=(CellLayout)workspace.getChildAt(pageIndex);
+  final ViewGroup iconParent=iconLayout.getShortcutsAndWidgets();
+  ViewGroup parent=null;
+  int[][] matrix;
+  if (keyCode == KeyEvent.KEYCODE_DPAD_UP && orientation == Configuration.ORIENTATION_PORTRAIT) {
+    matrix=FocusLogic.createSparseMatrix(iconLayout,hotseatLayout,orientation);
+    iconIndex+=iconParent.getChildCount();
+    countX=iconLayout.getCountX();
+    countY=iconLayout.getCountY() + hotseatLayout.getCountY();
+    parent=iconParent;
+  }
+ else   if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT && orientation == Configuration.ORIENTATION_LANDSCAPE) {
+    matrix=FocusLogic.createSparseMatrix(iconLayout,hotseatLayout,orientation);
+    iconIndex+=iconParent.getChildCount();
+    countX=iconLayout.getCountX() + hotseatLayout.getCountX();
+    countY=iconLayout.getCountY();
+    parent=iconParent;
+  }
+ else {
+    matrix=FocusLogic.createSparseMatrix(hotseatLayout);
+    parent=hotseatParent;
+    countX=hotseatLayout.getCountX();
+    countY=hotseatLayout.getCountY();
+  }
+  int newIconIndex=FocusLogic.handleKeyEvent(keyCode,countX,countY,matrix,iconIndex,pageIndex,pageCount);
+  if (iconParent.getChildCount() <= newIconIndex && newIconIndex < iconParent.getChildCount() + hotseatParent.getChildCount()) {
+    newIconIndex-=iconParent.getChildCount();
+  }
+  if (parent != null) {
+    View newIcon=parent.getChildAt(newIconIndex);
+    if (newIcon != null) {
+      newIcon.requestFocus();
+      playSoundEffect(keyCode,v);
+    }
+  }
+  return consume;
+}

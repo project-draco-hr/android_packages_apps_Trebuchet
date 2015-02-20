@@ -1,0 +1,3 @@
+CellLayout iconLayout
+CellLayout hotseatLayout
+int orientation

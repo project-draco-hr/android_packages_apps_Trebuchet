@@ -1,0 +1,44 @@
+{
+  if (DEBUG) {
+    Log.v(TAG,String.format("handleKeyEvent START: cntX=%d, cntY=%d, iconIdx=%d, pageIdx=%d, pageCnt=%d",cntX,cntY,iconIdx,pageIndex,pageCount));
+  }
+  int newIndex=NOOP;
+switch (keyCode) {
+case KeyEvent.KEYCODE_DPAD_LEFT:
+    newIndex=handleDpadHorizontal(iconIdx,cntX,cntY,map,-1);
+  if (newIndex == NOOP && pageIndex > 0) {
+    return PREVIOUS_PAGE_LAST_ITEM;
+  }
+break;
+case KeyEvent.KEYCODE_DPAD_RIGHT:
+newIndex=handleDpadHorizontal(iconIdx,cntX,cntY,map,1);
+if (newIndex == NOOP && pageIndex < pageCount - 1) {
+return NEXT_PAGE_FIRST_ITEM;
+}
+break;
+case KeyEvent.KEYCODE_DPAD_DOWN:
+newIndex=handleDpadVertical(iconIdx,cntX,cntY,map,1);
+break;
+case KeyEvent.KEYCODE_DPAD_UP:
+newIndex=handleDpadVertical(iconIdx,cntX,cntY,map,-1);
+break;
+case KeyEvent.KEYCODE_MOVE_HOME:
+newIndex=handleMoveHome();
+break;
+case KeyEvent.KEYCODE_MOVE_END:
+newIndex=handleMoveEnd();
+break;
+case KeyEvent.KEYCODE_PAGE_DOWN:
+newIndex=handlePageDown(pageIndex,pageCount);
+break;
+case KeyEvent.KEYCODE_PAGE_UP:
+newIndex=handlePageUp(pageIndex);
+break;
+default :
+break;
+}
+if (DEBUG) {
+Log.v(TAG,String.format("handleKeyEvent FINISH: index [%d -> %s]",iconIdx,getStringIndex(newIndex)));
+}
+return newIndex;
+}
