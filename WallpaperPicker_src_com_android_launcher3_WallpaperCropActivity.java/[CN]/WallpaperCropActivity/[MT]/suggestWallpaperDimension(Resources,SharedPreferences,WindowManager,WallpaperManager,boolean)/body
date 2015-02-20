@@ -1,5 +1,5 @@
 {
-  final Point defaultWallpaperSize=getDefaultWallpaperSize(res,windowManager);
+  final Point defaultWallpaperSize=BitmapUtils.getDefaultWallpaperSize(res,windowManager);
   int savedWidth=sharedPrefs.getInt(WALLPAPER_WIDTH_KEY,-1);
   int savedHeight=sharedPrefs.getInt(WALLPAPER_HEIGHT_KEY,-1);
   if (savedWidth == -1 || savedHeight == -1) {

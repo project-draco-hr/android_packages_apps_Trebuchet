@@ -10,7 +10,7 @@
   new AsyncTask<Void,Bitmap,Bitmap>(){
     protected Bitmap doInBackground(    Void... args){
       try {
-        int rotation=WallpaperCropActivity.getRotationFromExif(context,uri);
+        int rotation=BitmapUtils.getRotationFromExif(context,uri);
         return createThumbnail(defaultSize,context,uri,null,null,0,rotation,false);
       }
  catch (      SecurityException securityException) {

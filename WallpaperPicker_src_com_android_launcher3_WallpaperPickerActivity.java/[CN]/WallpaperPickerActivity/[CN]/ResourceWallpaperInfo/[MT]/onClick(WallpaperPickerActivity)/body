@@ -4,8 +4,8 @@
   BitmapRegionTileSource source=new BitmapRegionTileSource(a,bitmapSource);
   CropView v=a.getCropView();
   v.setTileSource(source,null);
-  Point wallpaperSize=WallpaperCropActivity.getDefaultWallpaperSize(a.getResources(),a.getWindowManager());
-  RectF crop=WallpaperCropActivity.getMaxCropRect(source.getImageWidth(),source.getImageHeight(),wallpaperSize.x,wallpaperSize.y,false);
+  Point wallpaperSize=BitmapUtils.getDefaultWallpaperSize(a.getResources(),a.getWindowManager());
+  RectF crop=Utils.getMaxCropRect(source.getImageWidth(),source.getImageHeight(),wallpaperSize.x,wallpaperSize.y,false);
   v.setScale(wallpaperSize.x / crop.width());
   v.setTouchEnabled(false);
   a.setSystemWallpaperVisiblity(false);

@@ -1,0 +1,3 @@
+{
+  return BitmapUtils.getRotationFromExifHelper(res,resId,null,null);
+}
