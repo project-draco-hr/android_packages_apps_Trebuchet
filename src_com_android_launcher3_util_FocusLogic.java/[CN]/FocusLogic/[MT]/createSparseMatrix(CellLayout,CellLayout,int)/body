@@ -1,0 +1,40 @@
+{
+  ViewGroup iconParent=iconLayout.getShortcutsAndWidgets();
+  ViewGroup hotseatParent=hotseatLayout.getShortcutsAndWidgets();
+  int m, n;
+  if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+    m=iconLayout.getCountX();
+    n=iconLayout.getCountY() + hotseatLayout.getCountY();
+  }
+ else   if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+    m=iconLayout.getCountX() + hotseatLayout.getCountX();
+    n=iconLayout.getCountY();
+  }
+ else {
+    throw new IllegalStateException(String.format("orientation type=%d is not supported for key board events.",orientation));
+  }
+  int[][] matrix=createFullMatrix(m,n,false);
+  for (int i=0; i < iconParent.getChildCount(); i++) {
+    int cx=((CellLayout.LayoutParams)iconParent.getChildAt(i).getLayoutParams()).cellX;
+    int cy=((CellLayout.LayoutParams)iconParent.getChildAt(i).getLayoutParams()).cellY;
+    matrix[cx][cy]=i;
+  }
+  for (int i=0; i < hotseatParent.getChildCount(); i++) {
+    if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+      int cx=((CellLayout.LayoutParams)hotseatParent.getChildAt(i).getLayoutParams()).cellX;
+      if (cx < iconLayout.getCountX()) {
+        matrix[cx][iconLayout.getCountY()]=iconParent.getChildCount() + i;
+      }
+    }
+ else     if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+      int cy=((CellLayout.LayoutParams)hotseatParent.getChildAt(i).getLayoutParams()).cellY;
+      if (cy < iconLayout.getCountY()) {
+        matrix[iconLayout.getCountX()][cy]=iconParent.getChildCount() + i;
+      }
+    }
+  }
+  if (DEBUG) {
+    printMatrix(matrix,m,n);
+  }
+  return matrix;
+}

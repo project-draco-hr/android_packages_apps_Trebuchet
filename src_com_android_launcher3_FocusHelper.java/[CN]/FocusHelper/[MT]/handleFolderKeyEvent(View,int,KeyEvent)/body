@@ -1,81 +1,47 @@
 {
+  boolean consume=FocusLogic.shouldConsume(keyCode);
+  if (e.getAction() == KeyEvent.ACTION_UP || !consume) {
+    return consume;
+  }
+  if (DEBUG) {
+    Log.v(TAG,String.format("Handle FOLDER keyevent=[%s].",KeyEvent.keyCodeToString(keyCode)));
+  }
   ShortcutAndWidgetContainer parent=(ShortcutAndWidgetContainer)v.getParent();
   final CellLayout layout=(CellLayout)parent.getParent();
   final ScrollView scrollView=(ScrollView)layout.getParent();
   final Folder folder=(Folder)scrollView.getParent();
   View title=folder.mFolderName;
-  final int action=e.getAction();
-  final boolean handleKeyEvent=(action != KeyEvent.ACTION_UP);
-  boolean wasHandled=false;
-switch (keyCode) {
-case KeyEvent.KEYCODE_DPAD_LEFT:
-    if (handleKeyEvent) {
-      View newIcon=getIconInDirection(layout,parent,v,-1);
-      if (newIcon != null) {
-        newIcon.requestFocus();
-        v.playSoundEffect(SoundEffectConstants.NAVIGATION_LEFT);
-      }
+  Workspace workspace=(Workspace)v.getRootView().findViewById(R.id.workspace);
+  final int countX=layout.getCountX();
+  final int countY=layout.getCountY();
+  final int iconIndex=findIndexOfView(parent,v);
+  int pageIndex=workspace.indexOfChild(layout);
+  int pageCount=workspace.getChildCount();
+  int[][] map=FocusLogic.createFullMatrix(countX,countY,true);
+  int newIconIndex=FocusLogic.handleKeyEvent(keyCode,countX,countY,map,iconIndex,pageIndex,pageCount);
+  View newIcon=null;
+switch (newIconIndex) {
+case FocusLogic.NOOP:
+    if (keyCode == KeyEvent.KEYCODE_DPAD_DOWN) {
+      newIcon=title;
     }
-  wasHandled=true;
-break;
-case KeyEvent.KEYCODE_DPAD_RIGHT:
-if (handleKeyEvent) {
-View newIcon=getIconInDirection(layout,parent,v,1);
-if (newIcon != null) {
-  newIcon.requestFocus();
+  break;
+case FocusLogic.PREVIOUS_PAGE_FIRST_ITEM:
+case FocusLogic.PREVIOUS_PAGE_LAST_ITEM:
+case FocusLogic.NEXT_PAGE_FIRST_ITEM:
+case FocusLogic.CURRENT_PAGE_FIRST_ITEM:
+case FocusLogic.CURRENT_PAGE_LAST_ITEM:
+if (DEBUG) {
+  Log.v(TAG,"Page advance handling not supported on folder icons.");
 }
- else {
-  title.requestFocus();
-}
-v.playSoundEffect(SoundEffectConstants.NAVIGATION_RIGHT);
-}
-wasHandled=true;
-break;
-case KeyEvent.KEYCODE_DPAD_UP:
-if (handleKeyEvent) {
-View newIcon=getClosestIconOnLine(layout,parent,v,-1);
-if (newIcon != null) {
-newIcon.requestFocus();
-v.playSoundEffect(SoundEffectConstants.NAVIGATION_UP);
-}
-}
-wasHandled=true;
-break;
-case KeyEvent.KEYCODE_DPAD_DOWN:
-if (handleKeyEvent) {
-View newIcon=getClosestIconOnLine(layout,parent,v,1);
-if (newIcon != null) {
-newIcon.requestFocus();
-}
- else {
-title.requestFocus();
-}
-v.playSoundEffect(SoundEffectConstants.NAVIGATION_DOWN);
-}
-wasHandled=true;
-break;
-case KeyEvent.KEYCODE_MOVE_HOME:
-if (handleKeyEvent) {
-View newIcon=getIconInDirection(layout,parent,-1,1);
-if (newIcon != null) {
-newIcon.requestFocus();
-v.playSoundEffect(SoundEffectConstants.NAVIGATION_UP);
-}
-}
-wasHandled=true;
-break;
-case KeyEvent.KEYCODE_MOVE_END:
-if (handleKeyEvent) {
-View newIcon=getIconInDirection(layout,parent,parent.getChildCount(),-1);
-if (newIcon != null) {
-newIcon.requestFocus();
-v.playSoundEffect(SoundEffectConstants.NAVIGATION_DOWN);
-}
-}
-wasHandled=true;
 break;
 default :
+newIcon=parent.getChildAt(newIconIndex);
 break;
 }
-return wasHandled;
+if (newIcon != null) {
+newIcon.requestFocus();
+playSoundEffect(keyCode,v);
+}
+return consume;
 }

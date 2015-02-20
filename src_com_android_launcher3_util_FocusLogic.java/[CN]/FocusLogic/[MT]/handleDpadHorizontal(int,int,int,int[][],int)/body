@@ -1,0 +1,44 @@
+{
+  if (matrix == null) {
+    throw new IllegalStateException("Dpad navigation requires a matrix.");
+  }
+  int newIconIndex=NOOP;
+  int xPos=-1;
+  int yPos=-1;
+  for (int i=0; i < cntX; i++) {
+    for (int j=0; j < cntY; j++) {
+      if (matrix[i][j] == iconIdx) {
+        xPos=i;
+        yPos=j;
+      }
+    }
+  }
+  if (DEBUG) {
+    Log.v(TAG,String.format("\thandleDpadHorizontal: \t[x, y]=[%d, %d] iconIndex=%d",xPos,yPos,iconIdx));
+  }
+  for (int i=xPos + increment; 0 <= i && i < cntX; i=i + increment) {
+    if (DEBUG) {
+      Log.v(TAG,String.format("\t\tsearch: \t[x, y]=[%d, %d] iconIndex=%d",i,yPos,matrix[i][yPos]));
+    }
+    if (matrix[i][yPos] != -1) {
+      newIconIndex=matrix[i][yPos];
+      return newIconIndex;
+    }
+  }
+  int nextYPos1;
+  int nextYPos2;
+  int i=-1;
+  for (int coeff=1; coeff < cntY; coeff++) {
+    nextYPos1=yPos + coeff * increment;
+    nextYPos2=yPos - coeff * increment;
+    for (i=xPos + increment * coeff; 0 <= i && i < cntX; i=i + increment) {
+      if ((newIconIndex=inspectMatrix(i,nextYPos1,cntX,cntY,matrix)) != NOOP) {
+        return newIconIndex;
+      }
+      if ((newIconIndex=inspectMatrix(i,nextYPos2,cntX,cntY,matrix)) != NOOP) {
+        return newIconIndex;
+      }
+    }
+  }
+  return newIconIndex;
+}
