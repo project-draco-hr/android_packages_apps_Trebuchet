@@ -17,11 +17,7 @@
     Log.v(TAG,String.format("\thandleDpadVertical: \t[x, y]=[%d, %d] iconIndex=%d",xPos,yPos,iconIndex));
   }
   for (int j=yPos + increment; 0 <= j && j < cntY && 0 <= j; j=j + increment) {
-    if (DEBUG) {
-      Log.v(TAG,String.format("\t\tsearch: \t[x, y]=[%d, %d] iconIndex=%d",xPos,j,matrix[xPos][j]));
-    }
-    if (matrix[xPos][j] != -1) {
-      newIconIndex=matrix[xPos][j];
+    if ((newIconIndex=inspectMatrix(xPos,j,cntX,cntY,matrix)) != NOOP) {
       return newIconIndex;
     }
   }

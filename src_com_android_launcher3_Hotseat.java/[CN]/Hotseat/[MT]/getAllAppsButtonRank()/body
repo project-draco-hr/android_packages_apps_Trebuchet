@@ -1,0 +1,8 @@
+{
+  if (LauncherAppState.isDisableAllApps()) {
+    return -1;
+  }
+ else {
+    return mAllAppsButtonRank;
+  }
+}
