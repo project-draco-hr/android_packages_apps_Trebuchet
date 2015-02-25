@@ -74,6 +74,10 @@ if (!updateFolderItemsRank(db,true)) {
 break;
 }
 case 21:
+if (!recreateWorkspaceTable(db)) {
+break;
+}
+case 22:
 {
 return;
 }
