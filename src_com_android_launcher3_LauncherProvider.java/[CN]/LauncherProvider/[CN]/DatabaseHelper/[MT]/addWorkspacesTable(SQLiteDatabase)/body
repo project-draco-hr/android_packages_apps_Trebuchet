@@ -1,3 +1,3 @@
 {
-  db.execSQL("CREATE TABLE " + TABLE_WORKSPACE_SCREENS + " ("+ LauncherSettings.WorkspaceScreens._ID+ " INTEGER,"+ LauncherSettings.WorkspaceScreens.SCREEN_RANK+ " INTEGER,"+ LauncherSettings.ChangeLogColumns.MODIFIED+ " INTEGER NOT NULL DEFAULT 0"+ ");");
+  db.execSQL("CREATE TABLE " + TABLE_WORKSPACE_SCREENS + " ("+ LauncherSettings.WorkspaceScreens._ID+ " INTEGER PRIMARY KEY,"+ LauncherSettings.WorkspaceScreens.SCREEN_RANK+ " INTEGER,"+ LauncherSettings.ChangeLogColumns.MODIFIED+ " INTEGER NOT NULL DEFAULT 0"+ ");");
 }
