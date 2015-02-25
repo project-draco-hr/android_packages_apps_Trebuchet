@@ -4,17 +4,21 @@
     try {
       req.src.loadInBackground(new InBitmapProvider(){
         @Override public Bitmap forPixelCount(        int count){
+          Bitmap bitmapToReuse=null;
 synchronized (mReusableBitmaps) {
-            Iterator<Bitmap> itr=mReusableBitmaps.iterator();
-            while (itr.hasNext()) {
-              Bitmap b=itr.next();
-              if (b.getWidth() * b.getHeight() >= count) {
-                itr.remove();
-                return b;
+            int currentBitmapSize=Integer.MAX_VALUE;
+            for (            Bitmap b : mReusableBitmaps) {
+              int bitmapSize=b.getWidth() * b.getHeight();
+              if ((bitmapSize >= count) && (bitmapSize < currentBitmapSize)) {
+                bitmapToReuse=b;
+                currentBitmapSize=bitmapSize;
               }
             }
+            if (bitmapToReuse != null) {
+              mReusableBitmaps.remove(bitmapToReuse);
+            }
           }
-          return null;
+          return bitmapToReuse;
         }
       }
 );
