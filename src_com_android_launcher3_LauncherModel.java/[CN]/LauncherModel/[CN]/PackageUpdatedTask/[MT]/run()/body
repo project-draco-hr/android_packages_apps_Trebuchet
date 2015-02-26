@@ -71,13 +71,7 @@ return;
 }
 final HashMap<ComponentName,AppInfo> addedOrUpdatedApps=new HashMap<ComponentName,AppInfo>();
 if (added != null) {
-if (LauncherAppState.isDisableAllApps()) {
-final ArrayList<ItemInfo> addedInfos=new ArrayList<ItemInfo>(added);
-addAndBindAddedWorkspaceApps(context,addedInfos);
-}
- else {
 addAppsToAllApps(context,added);
-}
 for (AppInfo ai : added) {
 addedOrUpdatedApps.put(ai.componentName,ai);
 }

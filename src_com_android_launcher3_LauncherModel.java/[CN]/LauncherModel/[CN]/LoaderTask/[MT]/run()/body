@@ -32,9 +32,6 @@ synchronized (sBgLock) {
     }
     sBgDbIconCache.clear();
   }
-  if (LauncherAppState.isDisableAllApps()) {
-    verifyApplications();
-  }
   mContext=null;
 synchronized (mLock) {
     if (mLoaderTask == this) {

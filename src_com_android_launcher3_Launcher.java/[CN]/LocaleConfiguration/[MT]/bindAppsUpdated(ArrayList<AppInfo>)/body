@@ -8,7 +8,7 @@
   if (waitUntilResume(r)) {
     return;
   }
-  if (!LauncherAppState.isDisableAllApps() && mAppsCustomizeContent != null) {
+  if (mAppsCustomizeContent != null) {
     mAppsCustomizeContent.updateApps(apps);
   }
 }

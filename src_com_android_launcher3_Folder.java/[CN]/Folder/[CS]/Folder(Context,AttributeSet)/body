@@ -7,13 +7,8 @@
   mIconCache=app.getIconCache();
   Resources res=getResources();
   mMaxCountX=(int)grid.numColumns;
-  if (LauncherAppState.isDisableAllApps()) {
-    mMaxCountY=mMaxNumItems=Integer.MAX_VALUE;
-  }
- else {
-    mMaxCountY=(int)grid.numRows;
-    mMaxNumItems=mMaxCountX * mMaxCountY;
-  }
+  mMaxCountY=(int)grid.numRows;
+  mMaxNumItems=mMaxCountX * mMaxCountY;
   mInputMethodManager=(InputMethodManager)getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
   mExpandDuration=res.getInteger(R.integer.config_folderExpandDuration);
   mMaterialExpandDuration=res.getInteger(R.integer.config_materialFolderExpandDuration);

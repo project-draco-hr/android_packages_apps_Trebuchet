@@ -8,10 +8,6 @@
     while (iter.hasNext()) {
       final PendingInstallShortcutInfo pendingInfo=iter.next();
       final Intent intent=pendingInfo.launchIntent;
-      if (LauncherAppState.isDisableAllApps() && !isValidShortcutLaunchIntent(intent)) {
-        if (DBG)         Log.d(TAG,"Ignoring shortcut with launchIntent:" + intent);
-        continue;
-      }
       String packageName=pendingInfo.getTargetPackage();
       if (!TextUtils.isEmpty(packageName)) {
         UserHandleCompat myUserHandle=UserHandleCompat.myUserHandle();
