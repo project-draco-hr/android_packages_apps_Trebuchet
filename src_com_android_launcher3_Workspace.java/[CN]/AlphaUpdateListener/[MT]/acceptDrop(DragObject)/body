@@ -5,7 +5,7 @@
       return false;
     }
     if (!transitionStateShouldAllowDrop())     return false;
-    mDragViewVisualCenter=getDragViewVisualCenter(d.x,d.y,d.xOffset,d.yOffset,d.dragView,mDragViewVisualCenter);
+    mDragViewVisualCenter=d.getVisualCenter(mDragViewVisualCenter);
     if (mLauncher.isHotseatLayout(dropTargetLayout)) {
       mapPointFromSelfToHotseatLayout(mLauncher.getHotseat(),mDragViewVisualCenter);
     }

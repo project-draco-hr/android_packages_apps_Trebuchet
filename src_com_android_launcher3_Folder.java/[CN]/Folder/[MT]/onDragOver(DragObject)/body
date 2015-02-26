@@ -1,12 +1,8 @@
 {
-  final DragView dragView=d.dragView;
   final int scrollOffset=mScrollView.getScrollY();
-  final float[] r=getDragViewVisualCenter(d.x,d.y,d.xOffset,d.yOffset,dragView,null);
+  final float[] r=d.getVisualCenter(null);
   r[0]-=getPaddingLeft();
   r[1]-=getPaddingTop();
-  final long downTime=SystemClock.uptimeMillis();
-  final MotionEvent translatedEv=MotionEvent.obtain(downTime,downTime,MotionEvent.ACTION_MOVE,d.x,d.y,0);
-  translatedEv.recycle();
   mTargetCell=mContent.findNearestArea((int)r[0],(int)r[1] + scrollOffset,1,1,mTargetCell);
   if (isLayoutRtl()) {
     mTargetCell[0]=mContent.getCountX() - mTargetCell[0] - 1;
