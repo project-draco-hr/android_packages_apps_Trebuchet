@@ -1,6 +1,0 @@
-{
-  if (v == this && hasFocus && getTabCount() > 0) {
-    getSelectedTab().requestFocus();
-    return;
-  }
-}

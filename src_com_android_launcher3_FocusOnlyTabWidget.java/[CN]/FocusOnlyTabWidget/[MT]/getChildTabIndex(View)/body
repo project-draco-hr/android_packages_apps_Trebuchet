@@ -1,9 +1,0 @@
-{
-  final int tabCount=getTabCount();
-  for (int i=0; i < tabCount; ++i) {
-    if (getChildTabViewAt(i) == v) {
-      return i;
-    }
-  }
-  return -1;
-}

@@ -7,7 +7,7 @@
   clearFocus();
   mFolderIcon.requestFocus();
   if (mRearrangeOnClose) {
-    setupContentForNumItems(getItemCount());
+    rearrangeChildren();
     mRearrangeOnClose=false;
   }
   if (getItemCount() <= 1) {

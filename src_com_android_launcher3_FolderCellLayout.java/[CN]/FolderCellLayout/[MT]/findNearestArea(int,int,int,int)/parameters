@@ -1,0 +1,4 @@
+int pixelX
+int pixelY
+int spanX
+int spanY

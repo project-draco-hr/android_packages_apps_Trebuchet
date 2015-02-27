@@ -1,5 +1,4 @@
 {
-  mPreviousTargetCell[0]=-1;
-  mPreviousTargetCell[1]=-1;
+  mPrevTargetRank=-1;
   mOnExitAlarm.cancelAlarm();
 }

@@ -7,7 +7,7 @@
     mRearrangeOnClose=true;
   }
  else {
-    setupContentForNumItems(getItemCount());
+    rearrangeChildren();
   }
   if (getItemCount() <= 1) {
     replaceFolderWithFinalItem();

@@ -1,9 +1,6 @@
 {
-  setupContentForNumItems(getItemCount() + 1);
-  findAndSetEmptyCells(item);
   mCurrentDragInfo=item;
-  mEmptyCell[0]=item.cellX;
-  mEmptyCell[1]=item.cellY;
+  mEmptyCellRank=mContent.allocateNewLastItemRank();
   mIsExternalDrag=true;
   mDragInProgress=true;
 }

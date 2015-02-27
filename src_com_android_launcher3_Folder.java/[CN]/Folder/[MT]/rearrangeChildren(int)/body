@@ -1,0 +1,5 @@
+{
+  ArrayList<View> views=getItemsInReadingOrder();
+  mContent.arrangeChildren(views,Math.max(itemCount,views.size()));
+  mItemsInvalidated=true;
+}

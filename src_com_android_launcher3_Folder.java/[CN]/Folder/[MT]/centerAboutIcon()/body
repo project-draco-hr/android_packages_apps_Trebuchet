@@ -3,11 +3,11 @@
   DragLayer parent=(DragLayer)mLauncher.findViewById(R.id.drag_layer);
   int width=getPaddingLeft() + getPaddingRight() + mContent.getDesiredWidth();
   int height=getFolderHeight();
-  float scale=parent.getDescendantRectRelativeToSelf(mFolderIcon,mTempRect);
+  float scale=parent.getDescendantRectRelativeToSelf(mFolderIcon,sTempRect);
   LauncherAppState app=LauncherAppState.getInstance();
   DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
-  int centerX=(int)(mTempRect.left + mTempRect.width() * scale / 2);
-  int centerY=(int)(mTempRect.top + mTempRect.height() * scale / 2);
+  int centerX=(int)(sTempRect.left + sTempRect.width() * scale / 2);
+  int centerY=(int)(sTempRect.top + sTempRect.height() * scale / 2);
   int centeredLeft=centerX - width / 2;
   int centeredTop=centerY - height / 2;
   int currentPage=mLauncher.getWorkspace().getNextPage();

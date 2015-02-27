@@ -8,8 +8,7 @@
   }
   ShortcutAndWidgetContainer parent=(ShortcutAndWidgetContainer)v.getParent();
   final CellLayout layout=(CellLayout)parent.getParent();
-  final ScrollView scrollView=(ScrollView)layout.getParent();
-  final Folder folder=(Folder)scrollView.getParent();
+  final Folder folder=(Folder)layout.getParent().getParent();
   View title=folder.mFolderName;
   Workspace workspace=(Workspace)v.getRootView().findViewById(R.id.workspace);
   final int countX=layout.getCountX();

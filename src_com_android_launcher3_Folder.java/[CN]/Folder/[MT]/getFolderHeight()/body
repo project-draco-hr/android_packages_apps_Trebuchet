@@ -1,4 +1,3 @@
 {
-  int height=getPaddingTop() + getPaddingBottom() + getContentAreaHeight()+ mFolderNameHeight;
-  return height;
+  return getFolderHeight(getContentAreaHeight());
 }

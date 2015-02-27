@@ -1,0 +1,23 @@
+{
+  setupContentDimensions(itemCount);
+  removeAllViews();
+  int newX, newY;
+  int rank=0;
+  int countX=getCountX();
+  for (  View v : list) {
+    CellLayout.LayoutParams lp=(CellLayout.LayoutParams)v.getLayoutParams();
+    newX=rank % countX;
+    newY=rank / countX;
+    ItemInfo info=(ItemInfo)v.getTag();
+    if (info.cellX != newX || info.cellY != newY || info.rank != rank) {
+      info.cellX=newX;
+      info.cellY=newY;
+      info.rank=rank;
+      LauncherModel.addOrMoveItemInDatabase(getContext(),info,mFolder.mInfo.id,0,info.cellX,info.cellY);
+    }
+    lp.cellX=info.cellX;
+    lp.cellY=info.cellY;
+    rank++;
+    addViewToCellLayout(v,-1,(int)info.id,lp,true);
+  }
+}

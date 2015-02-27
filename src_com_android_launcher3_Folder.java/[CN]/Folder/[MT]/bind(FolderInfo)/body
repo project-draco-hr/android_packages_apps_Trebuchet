@@ -1,28 +1,19 @@
 {
   mInfo=info;
   ArrayList<ShortcutInfo> children=info.contents;
-  ArrayList<ShortcutInfo> overflow=new ArrayList<ShortcutInfo>();
-  final int totalChildren=children.size();
-  setupContentForNumItems(totalChildren);
   Collections.sort(children,Utilities.RANK_COMPARATOR);
-  final int countX=mContent.getCountX();
-  int visibleChildren=0;
-  for (int i=0; i < children.size(); i++) {
-    ShortcutInfo child=children.get(i);
-    child.cellX=i % countX;
-    child.cellY=i / countX;
-    if (createAndAddShortcut(child) == null) {
-      overflow.add(child);
-    }
- else {
-      visibleChildren++;
-    }
-  }
-  setupContentForNumItems(visibleChildren);
+  ArrayList<ShortcutInfo> overflow=mContent.bindItems(children);
   for (  ShortcutInfo item : overflow) {
     mInfo.remove(item);
     LauncherModel.deleteItemFromDatabase(mLauncher,item);
   }
+  DragLayer.LayoutParams lp=(DragLayer.LayoutParams)getLayoutParams();
+  if (lp == null) {
+    lp=new DragLayer.LayoutParams(0,0);
+    lp.customPosition=true;
+    setLayoutParams(lp);
+  }
+  centerAboutIcon();
   mItemsInvalidated=true;
   updateTextViewFocus();
   mInfo.addListener(this);

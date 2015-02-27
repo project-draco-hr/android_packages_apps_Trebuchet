@@ -18,7 +18,7 @@
     }
   }
  else {
-    setupContentForNumItems(getItemCount());
+    rearrangeChildren();
     mFolderIcon.onDrop(d);
   }
   if (target != this) {

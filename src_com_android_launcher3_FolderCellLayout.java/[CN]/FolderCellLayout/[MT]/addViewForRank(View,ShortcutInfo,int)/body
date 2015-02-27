@@ -1,0 +1,7 @@
+{
+  updateItemXY(item,rank);
+  CellLayout.LayoutParams lp=(CellLayout.LayoutParams)view.getLayoutParams();
+  lp.cellX=item.cellX;
+  lp.cellY=item.cellY;
+  addViewToCellLayout(view,-1,(int)item.id,lp,true);
+}
