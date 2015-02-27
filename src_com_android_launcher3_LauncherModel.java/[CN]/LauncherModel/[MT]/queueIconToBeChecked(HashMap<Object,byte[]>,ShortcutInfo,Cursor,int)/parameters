@@ -1,4 +1,0 @@
-HashMap<Object,byte[]> cache
-ShortcutInfo info
-Cursor c
-int iconIndex

@@ -26,7 +26,6 @@ sBgAppWidgets.remove((LauncherAppWidgetInfo)item);
 break;
 }
 sBgItemsIdMap.remove(item.id);
-sBgDbIconCache.remove(item);
 }
 }
 }

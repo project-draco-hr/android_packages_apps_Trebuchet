@@ -1,0 +1,8 @@
+PackageManager manager
+Intent intent
+UserHandleCompat user
+Context context
+Cursor c
+int iconIndex
+int titleIndex
+boolean allowMissingTarget

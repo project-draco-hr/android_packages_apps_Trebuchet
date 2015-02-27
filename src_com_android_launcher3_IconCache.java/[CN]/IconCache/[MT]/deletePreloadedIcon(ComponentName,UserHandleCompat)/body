@@ -1,8 +1,0 @@
-{
-  if (!user.equals(UserHandleCompat.myUserHandle()) || componentName == null) {
-    return;
-  }
-  remove(componentName,user);
-  boolean success=mContext.deleteFile(getResourceFilename(componentName));
-  if (DEBUG && success)   Log.d(TAG,"removed pre-loaded icon from persistent cache");
-}

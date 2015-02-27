@@ -175,7 +175,7 @@ continue;
 }
 if (itemReplaced) {
 if (user.equals(UserHandleCompat.myUserHandle())) {
-info=getShortcutInfo(manager,intent,user,context,null,iconIndex,titleIndex,mLabelCache,false);
+info=getAppShortcutInfo(manager,intent,user,context,null,iconIndex,titleIndex,false);
 }
  else {
 itemsToRemove.add(id);
@@ -194,7 +194,7 @@ continue;
 }
 }
  else if (itemType == LauncherSettings.Favorites.ITEM_TYPE_APPLICATION) {
-info=getShortcutInfo(manager,intent,user,context,c,iconIndex,titleIndex,mLabelCache,allowMissingTarget);
+info=getAppShortcutInfo(manager,intent,user,context,c,iconIndex,titleIndex,allowMissingTarget);
 }
  else {
 info=getShortcutInfo(c,context,iconTypeIndex,iconPackageIndex,iconResourceIndex,iconIndex,titleIndex);
@@ -233,7 +233,6 @@ folderInfo.add(info);
 break;
 }
 sBgItemsIdMap.put(info.id,info);
-queueIconToBeChecked(sBgDbIconCache,info,c,iconIndex);
 }
  else {
 throw new RuntimeException("Unexpected null ShortcutInfo");

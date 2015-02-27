@@ -1,5 +1,0 @@
-ComponentName componentName
-LauncherActivityInfoCompat info
-HashMap<Object,CharSequence> labelCache
-UserHandleCompat user
-boolean usePackageIcon

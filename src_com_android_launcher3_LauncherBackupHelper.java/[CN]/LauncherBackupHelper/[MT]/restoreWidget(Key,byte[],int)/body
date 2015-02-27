@@ -9,7 +9,7 @@
       Log.w(TAG,"failed to unpack widget icon for " + key.name);
     }
  else {
-      IconCache.preloadIcon(mContext,ComponentName.unflattenFromString(widget.provider),icon,widget.icon.dpi);
+      mIconCache.preloadIcon(ComponentName.unflattenFromString(widget.provider),icon,widget.icon.dpi,widget.label,mUserSerial);
     }
   }
 }

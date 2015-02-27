@@ -1,0 +1,12 @@
+{
+  ComponentName component=intent.getComponent();
+  if (component == null) {
+    shortcutInfo.setIcon(getDefaultIcon(user));
+    shortcutInfo.title="";
+    shortcutInfo.usingFallbackIcon=true;
+  }
+ else {
+    LauncherActivityInfoCompat info=mLauncherApps.resolveActivity(intent,user);
+    getTitleAndIcon(shortcutInfo,component,info,user,true);
+  }
+}

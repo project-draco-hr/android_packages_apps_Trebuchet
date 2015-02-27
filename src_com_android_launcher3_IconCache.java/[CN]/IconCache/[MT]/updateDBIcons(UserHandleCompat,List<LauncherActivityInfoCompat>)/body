@@ -1,0 +1,56 @@
+{
+  long userSerial=mUserManager.getSerialNumberForUser(user);
+  PackageManager pm=mContext.getPackageManager();
+  HashMap<String,PackageInfo> pkgInfoMap=new HashMap<String,PackageInfo>();
+  for (  PackageInfo info : pm.getInstalledPackages(PackageManager.GET_UNINSTALLED_PACKAGES)) {
+    pkgInfoMap.put(info.packageName,info);
+  }
+  HashMap<ComponentName,LauncherActivityInfoCompat> componentMap=new HashMap<>();
+  for (  LauncherActivityInfoCompat app : apps) {
+    componentMap.put(app.getComponentName(),app);
+  }
+  Cursor c=mIconDb.getReadableDatabase().query(IconDB.TABLE_NAME,new String[]{IconDB.COLUMN_ROWID,IconDB.COLUMN_COMPONENT,IconDB.COLUMN_LAST_UPDATED,IconDB.COLUMN_VERSION},IconDB.COLUMN_USER + " = ? ",new String[]{Long.toString(userSerial)},null,null,null);
+  final int indexComponent=c.getColumnIndex(IconDB.COLUMN_COMPONENT);
+  final int indexLastUpdate=c.getColumnIndex(IconDB.COLUMN_LAST_UPDATED);
+  final int indexVersion=c.getColumnIndex(IconDB.COLUMN_VERSION);
+  final int rowIndex=c.getColumnIndex(IconDB.COLUMN_ROWID);
+  HashSet<Integer> itemsToRemove=new HashSet<Integer>();
+  HashSet<String> updatedPackages=new HashSet<String>();
+  while (c.moveToNext()) {
+    String cn=c.getString(indexComponent);
+    ComponentName component=ComponentName.unflattenFromString(cn);
+    PackageInfo info=pkgInfoMap.get(component.getPackageName());
+    if (info == null) {
+      itemsToRemove.add(c.getInt(rowIndex));
+      continue;
+    }
+    if ((info.applicationInfo.flags & ApplicationInfo.FLAG_IS_DATA_ONLY) != 0) {
+      continue;
+    }
+    long updateTime=c.getLong(indexLastUpdate);
+    int version=c.getInt(indexVersion);
+    LauncherActivityInfoCompat app=componentMap.remove(component);
+    if (version == info.versionCode && updateTime == info.lastUpdateTime) {
+      continue;
+    }
+    if (app == null) {
+      itemsToRemove.add(c.getInt(rowIndex));
+      continue;
+    }
+    ContentValues values=updateCacheAndGetContentValues(app);
+    mIconDb.getWritableDatabase().update(IconDB.TABLE_NAME,values,IconDB.COLUMN_COMPONENT + " = ?",new String[]{cn});
+    updatedPackages.add(component.getPackageName());
+  }
+  c.close();
+  if (!itemsToRemove.isEmpty()) {
+    mIconDb.getWritableDatabase().delete(IconDB.TABLE_NAME,IconDB.COLUMN_ROWID + " IN ( " + TextUtils.join(", ",itemsToRemove)+ " )",null);
+  }
+  for (  LauncherActivityInfoCompat app : componentMap.values()) {
+    PackageInfo info=pkgInfoMap.get(app.getComponentName().getPackageName());
+    if (info == null) {
+      continue;
+    }
+    addIconToDB(app,info,userSerial);
+  }
+  return updatedPackages;
+}

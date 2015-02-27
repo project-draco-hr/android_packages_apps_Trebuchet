@@ -1,0 +1,14 @@
+{
+  removeIconsForPkg(packageName,user);
+  try {
+    PackageInfo info=mPackageManager.getPackageInfo(packageName,PackageManager.GET_UNINSTALLED_PACKAGES);
+    long userSerial=mUserManager.getSerialNumberForUser(user);
+    for (    LauncherActivityInfoCompat app : mLauncherApps.getActivityList(packageName,user)) {
+      addIconToDB(app,info,userSerial);
+    }
+  }
+ catch (  NameNotFoundException e) {
+    Log.d(TAG,"Package not found",e);
+    return;
+  }
+}

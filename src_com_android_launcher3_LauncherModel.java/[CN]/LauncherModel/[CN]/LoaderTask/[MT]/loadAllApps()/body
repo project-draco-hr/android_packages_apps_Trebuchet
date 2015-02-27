@@ -20,14 +20,37 @@
     if (apps == null || apps.isEmpty()) {
       return;
     }
-    final long sortTime=DEBUG_LOADERS ? SystemClock.uptimeMillis() : 0;
-    Collections.sort(apps,new LauncherModel.ShortcutNameComparator(mLabelCache));
-    if (DEBUG_LOADERS) {
-      Log.d(TAG,"sort took " + (SystemClock.uptimeMillis() - sortTime) + "ms");
+    HashSet<String> updatedPackages=mIconCache.updateDBIcons(user,apps);
+    if (!updatedPackages.isEmpty()) {
+      final ArrayList<ShortcutInfo> updates=new ArrayList<ShortcutInfo>();
+synchronized (sBgLock) {
+        for (        ItemInfo info : sBgItemsIdMap.values()) {
+          if (info instanceof ShortcutInfo && user.equals(info.user) && info.itemType == LauncherSettings.Favorites.ITEM_TYPE_APPLICATION) {
+            ShortcutInfo si=(ShortcutInfo)info;
+            ComponentName cn=si.getTargetComponent();
+            if (cn != null && updatedPackages.contains(cn.getPackageName())) {
+              si.updateIcon(mIconCache);
+              updates.add(si);
+            }
+          }
+        }
+      }
+      if (!updates.isEmpty()) {
+        final UserHandleCompat userFinal=user;
+        mHandler.post(new Runnable(){
+          public void run(){
+            Callbacks cb=getCallback();
+            if (cb != null) {
+              cb.bindShortcutsChanged(updates,new ArrayList<ShortcutInfo>(),userFinal);
+            }
+          }
+        }
+);
+      }
     }
     for (int i=0; i < apps.size(); i++) {
       LauncherActivityInfoCompat app=apps.get(i);
-      mBgAllAppsList.add(new AppInfo(mContext,app,user,mIconCache,mLabelCache));
+      mBgAllAppsList.add(new AppInfo(mContext,app,user,mIconCache));
     }
     if (ADD_MANAGED_PROFILE_SHORTCUTS && !user.equals(UserHandleCompat.myUserHandle())) {
       String shortcutsSetKey=INSTALLED_SHORTCUTS_SET_PREFIX + mUserManager.getSerialNumberForUser(user);
