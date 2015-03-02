@@ -1,6 +1,6 @@
 {
   boolean isVisible=true;
-  boolean useUninstallLabel=!LauncherAppState.isDisableAllApps() && isAllAppsApplication(source,info);
+  boolean useUninstallLabel=isAllAppsApplication(source,info);
   boolean useDeleteLabel=!useUninstallLabel && source.supportsDeleteDropTarget();
   if (!willAcceptDrop(info) || isAllAppsWidget(source,info)) {
     isVisible=false;

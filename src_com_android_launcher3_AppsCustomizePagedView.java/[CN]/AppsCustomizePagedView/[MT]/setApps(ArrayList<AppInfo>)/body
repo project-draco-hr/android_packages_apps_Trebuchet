@@ -1,7 +1,5 @@
 {
-  if (!LauncherAppState.isDisableAllApps()) {
-    mApps=list;
-    Collections.sort(mApps,LauncherModel.getAppNameComparator());
-    updatePageCountsAndInvalidateData();
-  }
+  mApps=list;
+  Collections.sort(mApps,LauncherModel.getAppNameComparator());
+  updatePageCountsAndInvalidateData();
 }

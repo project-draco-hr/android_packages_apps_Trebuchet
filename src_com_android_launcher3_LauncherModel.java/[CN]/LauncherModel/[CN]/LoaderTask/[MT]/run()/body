@@ -25,9 +25,6 @@ synchronized (mLock) {
       android.os.Process.setThreadPriority(Process.THREAD_PRIORITY_DEFAULT);
     }
   }
-  if (LauncherAppState.isDisableAllApps()) {
-    verifyApplications();
-  }
   mContext=null;
 synchronized (mLock) {
     if (mLoaderTask == this) {

@@ -1,14 +1,7 @@
 {
-  if (LauncherAppState.isDisableAllApps()) {
-    if (mAppsCustomizeContent != null) {
-      mAppsCustomizeContent.onPackagesUpdated(LauncherModel.getSortedWidgetsAndShortcuts(this));
-    }
-  }
- else {
-    if (mAppsCustomizeContent != null) {
-      mAppsCustomizeContent.setApps(apps);
-      mAppsCustomizeContent.onPackagesUpdated(LauncherModel.getSortedWidgetsAndShortcuts(this));
-    }
+  if (mAppsCustomizeContent != null) {
+    mAppsCustomizeContent.setApps(apps);
+    mAppsCustomizeContent.onPackagesUpdated(LauncherModel.getSortedWidgetsAndShortcuts(this));
   }
   if (mLauncherCallbacks != null) {
     mLauncherCallbacks.bindAllApplications(apps);
