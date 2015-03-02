@@ -1,3 +1,0 @@
-{
-  mWallpaperStrip.setPadding(0,0,0,(int)offset);
-}
