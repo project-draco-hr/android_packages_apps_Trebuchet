@@ -1,0 +1,8 @@
+{
+  mList=(ListView)findViewById(R.id.apps_list);
+  mList.setFastScrollEnabled(true);
+  mList.setFastScrollAlwaysVisible(true);
+  mList.setItemsCanFocus(true);
+  mList.setAdapter(mAdapter);
+  mPadding.set(getPaddingLeft(),getPaddingTop(),getPaddingRight(),getPaddingBottom());
+}

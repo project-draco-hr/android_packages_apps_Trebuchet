@@ -2,7 +2,7 @@
   Bitmap b;
   int padding=expectedPadding.get();
   if (v instanceof TextView) {
-    Drawable d=((TextView)v).getCompoundDrawables()[1];
+    Drawable d=getTextViewIcon((TextView)v);
     Rect bounds=getDrawableBounds(d);
     b=Bitmap.createBitmap(bounds.width() + padding,bounds.height() + padding,Bitmap.Config.ARGB_8888);
     expectedPadding.set(padding - bounds.left - bounds.top);

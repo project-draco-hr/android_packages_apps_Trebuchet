@@ -8,11 +8,14 @@
     mLauncherCallbacks.preOnResume();
   }
   super.onResume();
-  if (mOnResumeState == State.WORKSPACE) {
+  if (mOnResumeState == State.WORKSPACE || mOnResumeState == State.NONE) {
     showWorkspace(false);
   }
- else   if (mOnResumeState == State.APPS_CUSTOMIZE) {
-    showAllApps(false,mAppsCustomizeContent.getContentType(),false);
+ else   if (mOnResumeState == State.APPS) {
+    showAppsView(false,false);
+  }
+ else   if (mOnResumeState == State.WIDGETS) {
+    showWidgetsView(false,false);
   }
   mOnResumeState=State.NONE;
   setWorkspaceBackground(mState == State.WORKSPACE);

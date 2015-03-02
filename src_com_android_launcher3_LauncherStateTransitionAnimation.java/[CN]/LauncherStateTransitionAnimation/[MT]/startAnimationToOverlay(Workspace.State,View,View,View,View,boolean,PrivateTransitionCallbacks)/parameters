@@ -1,0 +1,7 @@
+Workspace.State toWorkspaceState
+View toView
+View contentView
+View revealView
+View pageIndicatorsView
+boolean animated
+PrivateTransitionCallbacks pCb

@@ -1,0 +1,3 @@
+{
+  mApps.updateApps(apps);
+}

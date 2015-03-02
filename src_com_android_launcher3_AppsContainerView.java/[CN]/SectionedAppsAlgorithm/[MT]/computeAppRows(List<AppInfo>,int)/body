@@ -1,0 +1,27 @@
+{
+  List<AppsRow> rows=new ArrayList<>();
+  LinkedHashMap<String,List<AppInfo>> sections=computeSectionedApps(sortedApps);
+  int sectionId=0;
+  for (  Map.Entry<String,List<AppInfo>> sectionEntry : sections.entrySet()) {
+    String section=sectionEntry.getKey();
+    List<AppInfo> apps=sectionEntry.getValue();
+    int numRows=(int)Math.ceil((float)apps.size() / appsPerRow);
+    for (int i=0; i < numRows; i++) {
+      List<AppInfo> appsInRow=new ArrayList<>();
+      int offset=i * appsPerRow;
+      for (int j=0; j < appsPerRow; j++) {
+        if (offset + j < apps.size()) {
+          appsInRow.add(apps.get(offset + j));
+        }
+      }
+      if (i == 0) {
+        rows.add(new AppsRow(sectionId,section,appsInRow));
+      }
+ else {
+        rows.add(new AppsRow(sectionId,appsInRow));
+      }
+    }
+    sectionId++;
+  }
+  return rows;
+}

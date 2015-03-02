@@ -2,7 +2,7 @@
   if (mState != State.WORKSPACE || mWorkspace.getState() != Workspace.State.NORMAL) {
     boolean wasInSpringLoadedMode=(mState != State.WORKSPACE);
     mWorkspace.setVisibility(View.VISIBLE);
-    hideAppsCustomizeHelper(Workspace.State.NORMAL,animated,false,onCompleteRunnable);
+    mStateTransitionAnimation.startAnimationToWorkspace(mState,Workspace.State.NORMAL,animated,onCompleteRunnable);
     if (mSearchDropTargetBar != null) {
       mSearchDropTargetBar.showSearchBar(animated && wasInSpringLoadedMode);
     }
@@ -12,7 +12,7 @@
   }
   mState=State.WORKSPACE;
   mUserPresent=true;
-  updateRunning();
+  updateAutoAdvanceState();
   getWindow().getDecorView().sendAccessibilityEvent(AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED);
   onWorkspaceShown(animated);
 }

@@ -1,6 +1,6 @@
 {
   mWorkspace.setVisibility(View.VISIBLE);
-  hideAppsCustomizeHelper(Workspace.State.OVERVIEW,animated,false,null);
+  mStateTransitionAnimation.startAnimationToWorkspace(mState,Workspace.State.OVERVIEW,animated,null);
   mState=State.WORKSPACE;
   onWorkspaceShown(animated);
 }

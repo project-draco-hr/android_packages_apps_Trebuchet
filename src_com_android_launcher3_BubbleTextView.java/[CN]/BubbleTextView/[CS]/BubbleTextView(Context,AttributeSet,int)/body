@@ -1,7 +1,13 @@
 {
   super(context,attrs,defStyle);
+  LauncherAppState app=LauncherAppState.getInstance();
+  DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
   TypedArray a=context.obtainStyledAttributes(attrs,R.styleable.BubbleTextView,defStyle,0);
   mCustomShadowsEnabled=a.getBoolean(R.styleable.BubbleTextView_customShadows,true);
+  mLayoutHorizontal=a.getBoolean(R.styleable.BubbleTextView_layoutHorizontal,false);
+  mIconSize=a.getDimensionPixelSize(R.styleable.BubbleTextView_iconSizeOverride,grid.allAppsIconSizePx);
+  mIconPaddingSize=a.getDimensionPixelSize(R.styleable.BubbleTextView_iconPaddingOverride,grid.iconDrawablePaddingPx);
+  mTextSize=a.getDimensionPixelSize(R.styleable.BubbleTextView_textSizeOverride,grid.allAppsIconTextSizePx);
   a.recycle();
   if (mCustomShadowsEnabled) {
     mBackground=getBackground();
@@ -9,6 +15,9 @@
   }
  else {
     mBackground=null;
+  }
+  if (mLayoutHorizontal) {
+    setGravity(Gravity.CENTER_VERTICAL);
   }
   mLongPressHelper=new CheckLongPressHelper(this);
   mOutlineHelper=HolographicOutlineHelper.obtain(getContext());

@@ -1,7 +1,7 @@
 {
   Iterator<AppsCustomizeAsyncTask> iter=mRunningTasks.iterator();
   while (iter.hasNext()) {
-    AppsCustomizeAsyncTask task=(AppsCustomizeAsyncTask)iter.next();
+    AppsCustomizeAsyncTask task=iter.next();
     task.cancel(false);
     iter.remove();
     mDirtyPageContent.set(task.page,true);

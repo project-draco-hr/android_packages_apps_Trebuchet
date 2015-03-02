@@ -1,0 +1,3 @@
+{
+  return (mState == State.WIDGETS) || (mOnResumeState == State.WIDGETS);
+}

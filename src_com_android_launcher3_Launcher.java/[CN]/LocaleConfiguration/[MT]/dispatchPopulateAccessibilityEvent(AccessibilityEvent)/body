@@ -2,8 +2,11 @@
   final boolean result=super.dispatchPopulateAccessibilityEvent(event);
   final List<CharSequence> text=event.getText();
   text.clear();
-  if (mState == State.APPS_CUSTOMIZE) {
-    text.add(mAppsCustomizeTabHost.getContentTag());
+  if (mState == State.APPS) {
+    text.add("Apps");
+  }
+ else   if (mState == State.WIDGETS) {
+    text.add("Widgets");
   }
  else {
     text.add(getString(R.string.all_apps_home_button_label));

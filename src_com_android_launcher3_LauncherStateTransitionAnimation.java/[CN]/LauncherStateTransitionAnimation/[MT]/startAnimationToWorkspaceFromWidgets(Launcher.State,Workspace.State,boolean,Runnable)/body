@@ -1,0 +1,46 @@
+{
+  AppsCustomizeTabHost widgetsView=mLauncher.getWidgetsView();
+  PrivateTransitionCallbacks cb=new PrivateTransitionCallbacks(){
+    @Override public void onRevealViewVisible(    View revealView,    View contentView,    View allAppsButtonView){
+      AppsCustomizePagedView pagedView=((AppsCustomizePagedView)contentView);
+      pagedView.stopScrolling();
+      pagedView.setPageBackgroundsVisible(false);
+      revealView.setBackground(mLauncher.getDrawable(R.drawable.quantum_panel_dark));
+      final View currentPage=pagedView.getPageAt(pagedView.getNextPage());
+      int count=pagedView.getChildCount();
+      for (int i=0; i < count; i++) {
+        View child=pagedView.getChildAt(i);
+        if (child != currentPage) {
+          child.setVisibility(View.INVISIBLE);
+        }
+      }
+    }
+    @Override public void onAnimationComplete(    View revealView,    View contentView,    View allAppsButtonView){
+      AppsCustomizePagedView pagedView=((AppsCustomizePagedView)contentView);
+      pagedView.setPageBackgroundsVisible(true);
+      pagedView.setCurrentPage(pagedView.getNextPage());
+      pagedView.updateCurrentPageScroll();
+      int count=pagedView.getChildCount();
+      for (int i=0; i < count; i++) {
+        View child=pagedView.getChildAt(i);
+        child.setVisibility(View.VISIBLE);
+      }
+    }
+    @Override public float getMaterialRevealViewFinalYDrift(    View revealView){
+      return revealView.getMeasuredHeight() / 2;
+    }
+    @Override float getMaterialRevealViewFinalAlpha(    View revealView){
+      return 0.4f;
+    }
+    @Override public AnimatorListenerAdapter getMaterialRevealViewAnimatorListener(    final View revealView,    final View allAppsButtonView){
+      return new AnimatorListenerAdapter(){
+        public void onAnimationEnd(        Animator animation){
+          revealView.setVisibility(View.INVISIBLE);
+        }
+      }
+;
+    }
+  }
+;
+  startAnimationToWorkspaceFromOverlay(toWorkspaceState,widgetsView,widgetsView.getContentView(),widgetsView.getRevealView(),widgetsView.getPageIndicators(),animated,onCompleteRunnable,cb);
+}

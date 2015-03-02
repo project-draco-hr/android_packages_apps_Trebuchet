@@ -1,12 +1,12 @@
 {
   if (!super.beginDragging(v))   return false;
-  if (v instanceof BubbleTextView) {
-    beginDraggingApplication(v);
-  }
- else   if (v instanceof PagedViewWidget) {
+  if (v instanceof PagedViewWidget) {
     if (!beginDraggingWidget(v)) {
       return false;
     }
+  }
+ else {
+    Log.e(TAG,"Unexpected dragging view: " + v);
   }
   postDelayed(new Runnable(){
     @Override public void run(){

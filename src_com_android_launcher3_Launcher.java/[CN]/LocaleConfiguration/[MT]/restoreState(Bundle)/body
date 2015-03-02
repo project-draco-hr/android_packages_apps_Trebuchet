@@ -3,8 +3,8 @@
     return;
   }
   State state=intToState(savedState.getInt(RUNTIME_STATE,State.WORKSPACE.ordinal()));
-  if (state == State.APPS_CUSTOMIZE) {
-    mOnResumeState=State.APPS_CUSTOMIZE;
+  if (state == State.APPS || state == State.WIDGETS) {
+    mOnResumeState=state;
   }
   int currentScreen=savedState.getInt(RUNTIME_STATE_CURRENT_SCREEN,PagedView.INVALID_RESTORE_PAGE);
   if (currentScreen != PagedView.INVALID_RESTORE_PAGE) {

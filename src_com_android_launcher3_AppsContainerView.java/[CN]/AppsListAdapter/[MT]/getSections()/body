@@ -1,0 +1,11 @@
+{
+  ArrayList<Object> sections=new ArrayList<>();
+  int prevSectionId=-1;
+  for (  AppsRow row : mAppRows) {
+    if (row.sectionId != prevSectionId) {
+      sections.add(row.sectionDescription.toUpperCase());
+      prevSectionId=row.sectionId;
+    }
+  }
+  return sections.toArray();
+}

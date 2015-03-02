@@ -1,0 +1,7 @@
+{
+  if (mStateAnimation != null) {
+    mStateAnimation.setDuration(0);
+    mStateAnimation.cancel();
+    mStateAnimation=null;
+  }
+}

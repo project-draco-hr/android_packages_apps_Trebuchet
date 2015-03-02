@@ -1,7 +1,7 @@
 {
   Iterator<AppsCustomizeAsyncTask> iter=mRunningTasks.iterator();
   while (iter.hasNext()) {
-    AppsCustomizeAsyncTask task=(AppsCustomizeAsyncTask)iter.next();
+    AppsCustomizeAsyncTask task=iter.next();
     int taskPage=task.page;
     if (taskPage < getAssociatedLowerPageBound(mCurrentPage) || taskPage > getAssociatedUpperPageBound(mCurrentPage)) {
       task.cancel(false);

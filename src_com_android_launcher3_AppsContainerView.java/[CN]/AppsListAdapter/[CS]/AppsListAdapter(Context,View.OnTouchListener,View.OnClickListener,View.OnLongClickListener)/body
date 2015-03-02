@@ -1,0 +1,6 @@
+{
+  mLayoutInflater=LayoutInflater.from(context);
+  mTouchListener=touchListener;
+  mIconClickListener=iconClickListener;
+  mIconLongClickListener=iconLongClickListener;
+}

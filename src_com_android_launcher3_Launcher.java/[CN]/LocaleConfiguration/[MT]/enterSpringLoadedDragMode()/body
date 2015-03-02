@@ -1,6 +1,7 @@
 {
-  if (isAllAppsVisible()) {
-    hideAppsCustomizeHelper(Workspace.State.SPRING_LOADED,true,true,null);
-    mState=State.APPS_CUSTOMIZE_SPRING_LOADED;
+  if (mState == State.WORKSPACE || mState == State.APPS_SPRING_LOADED || mState == State.WIDGETS_SPRING_LOADED) {
+    return;
   }
+  mStateTransitionAnimation.startAnimationToWorkspace(mState,Workspace.State.SPRING_LOADED,true,null);
+  mState=isAppsViewVisible() ? State.APPS_SPRING_LOADED : State.WIDGETS_SPRING_LOADED;
 }

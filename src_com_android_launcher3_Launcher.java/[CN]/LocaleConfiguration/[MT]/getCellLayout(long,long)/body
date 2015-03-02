@@ -8,6 +8,6 @@
     }
   }
  else {
-    return (CellLayout)mWorkspace.getScreenWithId(screenId);
+    return mWorkspace.getScreenWithId(screenId);
   }
 }

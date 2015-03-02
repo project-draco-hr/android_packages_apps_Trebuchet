@@ -1,0 +1,13 @@
+{
+  LinkedHashMap<String,List<AppInfo>> sections=new LinkedHashMap<>();
+  for (  AppInfo info : sortedApps) {
+    String section=getSection(info);
+    List<AppInfo> sectionApps=sections.get(section);
+    if (sectionApps == null) {
+      sectionApps=new ArrayList<>();
+      sections.put(section,sectionApps);
+    }
+    sectionApps.add(info);
+  }
+  return sections;
+}

@@ -1,5 +1,0 @@
-{
-  mApps=list;
-  Collections.sort(mApps,LauncherModel.getAppNameComparator());
-  updatePageCountsAndInvalidateData();
-}

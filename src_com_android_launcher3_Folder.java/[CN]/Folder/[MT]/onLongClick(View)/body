@@ -6,7 +6,7 @@
     if (!v.isInTouchMode()) {
       return false;
     }
-    mLauncher.getWorkspace().beginDragShared(v,this);
+    mLauncher.getWorkspace().beginDragShared(v,new Point(),this,false);
     mCurrentDragInfo=item;
     mEmptyCellRank=item.rank;
     mCurrentDragView=v;

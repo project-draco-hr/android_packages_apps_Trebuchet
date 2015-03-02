@@ -24,7 +24,7 @@
  else {
     mWorkspace.disableShortcutsByPackageName(packageNames,user,reason);
   }
-  if (mAppsCustomizeContent != null) {
-    mAppsCustomizeContent.removeApps(appInfos);
+  if (mAppsView != null) {
+    mAppsView.removeApps(appInfos);
   }
 }

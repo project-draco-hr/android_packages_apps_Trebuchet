@@ -8,7 +8,7 @@
   if (waitUntilResume(r)) {
     return;
   }
-  if (mAppsCustomizeContent != null) {
-    mAppsCustomizeContent.updateApps(apps);
+  if (mAppsView != null) {
+    mAppsView.updateApps(apps);
   }
 }

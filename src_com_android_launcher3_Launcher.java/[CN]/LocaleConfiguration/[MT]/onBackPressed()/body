@@ -5,13 +5,11 @@
   if (LauncherAppState.getInstance().getAccessibilityDelegate().onBackPressed()) {
     return;
   }
-  if (isAllAppsVisible()) {
-    if (mAppsCustomizeContent.getContentType() == AppsCustomizePagedView.ContentType.Applications) {
-      showWorkspace(true);
-    }
- else {
-      showOverviewMode(true);
-    }
+  if (isAppsViewVisible()) {
+    showWorkspace(true);
+  }
+ else   if (isWidgetsViewVisible()) {
+    showOverviewMode(true);
   }
  else   if (mWorkspace.isInOverviewMode()) {
     mWorkspace.exitOverviewMode(true);

@@ -1,4 +1,3 @@
 {
-  AppInfo.dumpApplicationInfoList(TAG,"mApps",mApps);
   dumpAppWidgetProviderInfoList(TAG,"mWidgets",mWidgets);
 }

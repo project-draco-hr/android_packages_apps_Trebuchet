@@ -1,0 +1,9 @@
+{
+  for (  AppInfo info : apps) {
+    int removeIndex=findAppByComponent(mApps,info);
+    if (removeIndex != -1) {
+      mApps.remove(removeIndex);
+    }
+  }
+  mCb.onAppsUpdated();
+}

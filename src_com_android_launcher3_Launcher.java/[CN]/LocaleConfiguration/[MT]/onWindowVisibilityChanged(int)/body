@@ -1,6 +1,6 @@
 {
   mVisible=visibility == View.VISIBLE;
-  updateRunning();
+  updateAutoAdvanceState();
   if (mVisible) {
     mAppsCustomizeTabHost.onWindowVisible();
     if (!mWorkspaceLoading) {

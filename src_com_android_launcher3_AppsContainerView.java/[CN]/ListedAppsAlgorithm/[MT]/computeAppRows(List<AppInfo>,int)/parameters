@@ -1,0 +1,2 @@
+List<AppInfo> sortedApps
+int appsPerRow

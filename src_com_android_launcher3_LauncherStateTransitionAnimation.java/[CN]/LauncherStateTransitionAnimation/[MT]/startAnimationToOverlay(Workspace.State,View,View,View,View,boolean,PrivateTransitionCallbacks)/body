@@ -1,0 +1,134 @@
+{
+  final Resources res=mLauncher.getResources();
+  final boolean material=Utilities.isLmpOrAbove();
+  final int revealDuration=res.getInteger(R.integer.config_appsCustomizeRevealTime);
+  final int itemsAlphaStagger=res.getInteger(R.integer.config_appsCustomizeItemsAlphaStagger);
+  final View allAppsButtonView=mLauncher.getAllAppsButton();
+  final View fromView=mLauncher.getWorkspace();
+  final HashMap<View,Integer> layerViews=new HashMap<>();
+  boolean initialized=allAppsButtonView != null;
+  cancelAnimation();
+  Animator workspaceAnim=mLauncher.getWorkspace().getChangeStateAnimation(toWorkspaceState,animated,layerViews);
+  if (animated && initialized) {
+    mStateAnimation=LauncherAnimUtils.createAnimatorSet();
+    int width=revealView.getMeasuredWidth();
+    int height=revealView.getMeasuredHeight();
+    float revealRadius=(float)Math.sqrt((width * width) / 4 + (height * height) / 4);
+    revealView.setVisibility(View.VISIBLE);
+    revealView.setAlpha(0f);
+    revealView.setTranslationY(0f);
+    revealView.setTranslationX(0f);
+    pCb.onRevealViewVisible(revealView,contentView,allAppsButtonView);
+    final float revealViewToAlpha;
+    final float revealViewToXDrift;
+    final float revealViewToYDrift;
+    if (material) {
+      revealViewToAlpha=pCb.getMaterialRevealViewFinalAlpha(revealView);
+      revealViewToYDrift=pCb.getMaterialRevealViewFinalYDrift(revealView);
+      revealViewToXDrift=pCb.getMaterialRevealViewFinalXDrift(revealView);
+    }
+ else {
+      revealViewToAlpha=0f;
+      revealViewToYDrift=2 * height / 3;
+      revealViewToXDrift=0;
+    }
+    PropertyValuesHolder panelAlpha=PropertyValuesHolder.ofFloat("alpha",revealViewToAlpha,1f);
+    PropertyValuesHolder panelDriftY=PropertyValuesHolder.ofFloat("translationY",revealViewToYDrift,0);
+    PropertyValuesHolder panelDriftX=PropertyValuesHolder.ofFloat("translationX",revealViewToXDrift,0);
+    ObjectAnimator panelAlphaAndDrift=ObjectAnimator.ofPropertyValuesHolder(revealView,panelAlpha,panelDriftY,panelDriftX);
+    panelAlphaAndDrift.setDuration(revealDuration);
+    panelAlphaAndDrift.setInterpolator(new LogDecelerateInterpolator(100,0));
+    layerViews.put(revealView,BUILD_AND_SET_LAYER);
+    mStateAnimation.play(panelAlphaAndDrift);
+    if (pageIndicatorsView != null) {
+      pageIndicatorsView.setAlpha(0.01f);
+      ObjectAnimator indicatorsAlpha=ObjectAnimator.ofFloat(pageIndicatorsView,"alpha",1f);
+      indicatorsAlpha.setDuration(revealDuration);
+      mStateAnimation.play(indicatorsAlpha);
+    }
+    contentView.setVisibility(View.VISIBLE);
+    contentView.setAlpha(0f);
+    contentView.setTranslationY(revealViewToYDrift);
+    layerViews.put(contentView,BUILD_AND_SET_LAYER);
+    ObjectAnimator pageDrift=ObjectAnimator.ofFloat(contentView,"translationY",revealViewToYDrift,0);
+    pageDrift.setDuration(revealDuration);
+    pageDrift.setInterpolator(new LogDecelerateInterpolator(100,0));
+    pageDrift.setStartDelay(itemsAlphaStagger);
+    mStateAnimation.play(pageDrift);
+    ObjectAnimator itemsAlpha=ObjectAnimator.ofFloat(contentView,"alpha",0f,1f);
+    itemsAlpha.setDuration(revealDuration);
+    itemsAlpha.setInterpolator(new AccelerateInterpolator(1.5f));
+    itemsAlpha.setStartDelay(itemsAlphaStagger);
+    mStateAnimation.play(itemsAlpha);
+    if (material) {
+      float startRadius=pCb.getMaterialRevealViewStartFinalRadius();
+      AnimatorListenerAdapter listener=pCb.getMaterialRevealViewAnimatorListener(revealView,allAppsButtonView);
+      Animator reveal=ViewAnimationUtils.createCircularReveal(revealView,width / 2,height / 2,startRadius,revealRadius);
+      reveal.setDuration(revealDuration);
+      reveal.setInterpolator(new LogDecelerateInterpolator(100,0));
+      if (listener != null) {
+        reveal.addListener(listener);
+      }
+      mStateAnimation.play(reveal);
+    }
+    mStateAnimation.addListener(new AnimatorListenerAdapter(){
+      @Override public void onAnimationEnd(      Animator animation){
+        dispatchOnLauncherTransitionEnd(fromView,animated,false);
+        dispatchOnLauncherTransitionEnd(toView,animated,false);
+        revealView.setVisibility(View.INVISIBLE);
+        pCb.onAnimationComplete(revealView,contentView,allAppsButtonView);
+        for (        View v : layerViews.keySet()) {
+          if (layerViews.get(v) == BUILD_AND_SET_LAYER) {
+            v.setLayerType(View.LAYER_TYPE_NONE,null);
+          }
+        }
+        mCb.onStateTransitionHideSearchBar();
+        mStateAnimation=null;
+      }
+    }
+);
+    if (workspaceAnim != null) {
+      mStateAnimation.play(workspaceAnim);
+    }
+    dispatchOnLauncherTransitionPrepare(fromView,animated,false);
+    dispatchOnLauncherTransitionPrepare(toView,animated,false);
+    final AnimatorSet stateAnimation=mStateAnimation;
+    final Runnable startAnimRunnable=new Runnable(){
+      public void run(){
+        if (mStateAnimation != stateAnimation)         return;
+        dispatchOnLauncherTransitionStart(fromView,animated,false);
+        dispatchOnLauncherTransitionStart(toView,animated,false);
+        for (        View v : layerViews.keySet()) {
+          if (layerViews.get(v) == BUILD_AND_SET_LAYER) {
+            v.setLayerType(View.LAYER_TYPE_HARDWARE,null);
+          }
+          if (Utilities.isViewAttachedToWindow(v)) {
+            v.buildLayer();
+          }
+        }
+        toView.requestFocus();
+        mStateAnimation.start();
+      }
+    }
+;
+    toView.bringToFront();
+    toView.setVisibility(View.VISIBLE);
+    toView.post(startAnimRunnable);
+  }
+ else {
+    toView.setTranslationX(0.0f);
+    toView.setTranslationY(0.0f);
+    toView.setScaleX(1.0f);
+    toView.setScaleY(1.0f);
+    toView.setVisibility(View.VISIBLE);
+    toView.bringToFront();
+    contentView.setVisibility(View.VISIBLE);
+    mCb.onStateTransitionHideSearchBar();
+    dispatchOnLauncherTransitionPrepare(fromView,animated,false);
+    dispatchOnLauncherTransitionStart(fromView,animated,false);
+    dispatchOnLauncherTransitionEnd(fromView,animated,false);
+    dispatchOnLauncherTransitionPrepare(toView,animated,false);
+    dispatchOnLauncherTransitionStart(toView,animated,false);
+    dispatchOnLauncherTransitionEnd(toView,animated,false);
+  }
+}

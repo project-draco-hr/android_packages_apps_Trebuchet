@@ -1,8 +1,10 @@
 {
-  if (mState == State.APPS_CUSTOMIZE_SPRING_LOADED) {
-    final boolean animated=true;
-    final boolean springLoaded=true;
-    showAppsCustomizeHelper(animated,springLoaded);
-    mState=State.APPS_CUSTOMIZE;
+  if (mState == State.APPS_SPRING_LOADED) {
+    mStateTransitionAnimation.startAnimationToAllApps(true);
+    mState=State.APPS;
+  }
+ else   if (mState == State.WIDGETS_SPRING_LOADED) {
+    mStateTransitionAnimation.startAnimationToWidgets(true);
+    mState=State.WIDGETS;
   }
 }

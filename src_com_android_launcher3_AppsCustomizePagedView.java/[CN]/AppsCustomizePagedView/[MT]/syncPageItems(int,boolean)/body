@@ -3,6 +3,6 @@
     syncWidgetPageItems(page,immediate);
   }
  else {
-    syncAppsPageItems(page,immediate);
+    Log.e(TAG,"Unexpected ContentType");
   }
 }

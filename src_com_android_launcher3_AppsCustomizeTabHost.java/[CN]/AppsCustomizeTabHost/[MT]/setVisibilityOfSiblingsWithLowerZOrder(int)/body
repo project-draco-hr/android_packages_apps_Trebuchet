@@ -1,6 +1,7 @@
 {
   ViewGroup parent=(ViewGroup)getParent();
   if (parent == null)   return;
+  View appsView=((Launcher)getContext()).getAppsView();
   View overviewPanel=((Launcher)getContext()).getOverviewPanel();
   final int count=parent.getChildCount();
   if (!isChildrenDrawingOrderEnabled()) {
@@ -10,7 +11,7 @@
         break;
       }
  else {
-        if (child.getVisibility() == GONE || child == overviewPanel) {
+        if (child.getVisibility() == GONE || child == overviewPanel || child == appsView) {
           continue;
         }
         child.setVisibility(visibility);
