@@ -1,16 +1,3 @@
 {
-  Cursor c=db.rawQuery("SELECT MAX(" + LauncherSettings.WorkspaceScreens._ID + ") FROM "+ TABLE_WORKSPACE_SCREENS,null);
-  final int maxIdIndex=0;
-  long id=-1;
-  if (c != null && c.moveToNext()) {
-    id=c.getLong(maxIdIndex);
-  }
-  if (c != null) {
-    c.close();
-  }
-  if (id == -1) {
-    throw new RuntimeException("Error: could not query max screen id");
-  }
-  Launcher.addDumpLog(TAG,"11683562 - initializeMaxScreenId(): " + id,true);
-  return id;
+  return getMaxId(db,TABLE_WORKSPACE_SCREENS);
 }
