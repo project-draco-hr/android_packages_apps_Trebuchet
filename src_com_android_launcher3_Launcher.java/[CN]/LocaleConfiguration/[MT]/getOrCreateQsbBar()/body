@@ -29,6 +29,7 @@
       mQsb.updateAppWidgetOptions(opts);
       mQsb.setPadding(0,0,0,0);
       mSearchDropTargetBar.addView(mQsb);
+      mSearchDropTargetBar.setQsbSearchBar(mQsb);
     }
   }
   return mQsb;
