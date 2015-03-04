@@ -8,7 +8,7 @@
     Log.v(TAG,String.format("Handle WORKSPACE ICONS keyevent=[%s] orientation=%d",KeyEvent.keyCodeToString(keyCode),orientation));
   }
   ShortcutAndWidgetContainer parent=(ShortcutAndWidgetContainer)v.getParent();
-  final CellLayout iconLayout=(CellLayout)parent.getParent();
+  CellLayout iconLayout=(CellLayout)parent.getParent();
   final Workspace workspace=(Workspace)iconLayout.getParent();
   final ViewGroup launcher=(ViewGroup)workspace.getParent();
   final ViewGroup tabs=(ViewGroup)launcher.findViewById(R.id.search_drop_target_bar);
@@ -44,10 +44,21 @@ case FocusLogic.NOOP:
       newIcon=tabs;
     }
   break;
+case FocusLogic.PREVIOUS_PAGE_RIGHT_COLUMN:
+int row=FocusLogic.findRow(matrix,iconIndex);
+parent=getCellLayoutChildrenForIndex(workspace,pageIndex - 1);
+if (parent != null) {
+iconLayout=(CellLayout)parent.getParent();
+matrix=FocusLogic.createSparseMatrix(iconLayout,orientation,iconLayout.getCountX(),row);
+newIconIndex=FocusLogic.handleKeyEvent(keyCode,countX + 1,countY,matrix,FocusLogic.PIVOT,pageIndex - 1,pageCount);
+newIcon=parent.getChildAt(newIconIndex);
+}
+break;
 case FocusLogic.PREVIOUS_PAGE_FIRST_ITEM:
 parent=getCellLayoutChildrenForIndex(workspace,pageIndex - 1);
 newIcon=parent.getChildAt(0);
 workspace.snapToPage(pageIndex - 1);
+break;
 case FocusLogic.PREVIOUS_PAGE_LAST_ITEM:
 parent=getCellLayoutChildrenForIndex(workspace,pageIndex - 1);
 newIcon=parent.getChildAt(parent.getChildCount() - 1);
@@ -57,6 +68,16 @@ case FocusLogic.NEXT_PAGE_FIRST_ITEM:
 parent=getCellLayoutChildrenForIndex(workspace,pageIndex + 1);
 newIcon=parent.getChildAt(0);
 workspace.snapToPage(pageIndex + 1);
+break;
+case FocusLogic.NEXT_PAGE_LEFT_COLUMN:
+row=FocusLogic.findRow(matrix,iconIndex);
+parent=getCellLayoutChildrenForIndex(workspace,pageIndex + 1);
+if (parent != null) {
+iconLayout=(CellLayout)parent.getParent();
+matrix=FocusLogic.createSparseMatrix(iconLayout,orientation,-1,row);
+newIconIndex=FocusLogic.handleKeyEvent(keyCode,countX + 1,countY,matrix,FocusLogic.PIVOT,pageIndex,pageCount);
+newIcon=parent.getChildAt(newIconIndex);
+}
 break;
 case FocusLogic.CURRENT_PAGE_FIRST_ITEM:
 newIcon=parent.getChildAt(0);

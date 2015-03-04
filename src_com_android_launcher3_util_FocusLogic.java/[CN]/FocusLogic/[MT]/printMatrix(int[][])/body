@@ -1,5 +1,7 @@
 {
   Log.v(TAG,"\tprintMap:");
+  int m=matrix.length;
+  int n=matrix[0].length;
   for (int j=0; j < n; j++) {
     String colY="\t\t";
     for (int i=0; i < m; i++) {
