@@ -33,7 +33,7 @@
     widget.setOnClickListener(this);
     widget.setOnLongClickListener(this);
     widget.setOnTouchListener(this);
-    widget.setOnKeyListener(this);
+    widget.setOnKeyListener(mKeyListener);
     int ix=i % mWidgetCountX;
     int iy=i / mWidgetCountX;
     if (ix > 0) {

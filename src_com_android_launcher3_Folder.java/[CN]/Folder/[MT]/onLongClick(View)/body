@@ -10,7 +10,7 @@
     mCurrentDragInfo=item;
     mEmptyCellRank=item.rank;
     mCurrentDragView=v;
-    mContent.removeView(mCurrentDragView);
+    mContent.removeItem(mCurrentDragView);
     mInfo.remove(mCurrentDragInfo);
     mDragInProgress=true;
     mItemAddedBackToSelfViaIcon=false;

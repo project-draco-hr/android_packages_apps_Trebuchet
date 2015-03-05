@@ -1,0 +1,6 @@
+{
+  super.notifyPageSwitchListener();
+  if (mFolder != null) {
+    mFolder.updateTextViewFocus();
+  }
+}

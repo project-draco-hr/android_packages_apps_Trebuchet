@@ -1,0 +1,7 @@
+{
+  int pageNo=updateItemXY(item,rank);
+  CellLayout.LayoutParams lp=(CellLayout.LayoutParams)view.getLayoutParams();
+  lp.cellX=item.cellX;
+  lp.cellY=item.cellY;
+  getPageAt(pageNo).addViewToCellLayout(view,-1,mFolder.mLauncher.getViewIdForItem(item),lp,true);
+}

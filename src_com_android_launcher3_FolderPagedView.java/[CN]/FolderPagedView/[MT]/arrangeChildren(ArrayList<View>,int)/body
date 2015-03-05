@@ -1,0 +1,52 @@
+{
+  ArrayList<CellLayout> pages=new ArrayList<CellLayout>();
+  for (int i=0; i < getChildCount(); i++) {
+    CellLayout page=(CellLayout)getChildAt(i);
+    page.removeAllViews();
+    pages.add(page);
+  }
+  setupContentDimensions(itemCount);
+  Iterator<CellLayout> pageItr=pages.iterator();
+  CellLayout currentPage=null;
+  int position=0;
+  int newX, newY, rank;
+  rank=0;
+  for (  View v : list) {
+    if (currentPage == null || position >= mMaxItemsPerPage) {
+      if (pageItr.hasNext()) {
+        currentPage=pageItr.next();
+      }
+ else {
+        currentPage=newCellLayout();
+        addFullScreenPage(currentPage);
+      }
+      position=0;
+    }
+    CellLayout.LayoutParams lp=(CellLayout.LayoutParams)v.getLayoutParams();
+    newX=position % mGridCountX;
+    newY=position / mGridCountX;
+    ItemInfo info=(ItemInfo)v.getTag();
+    if (info.cellX != newX || info.cellY != newY || info.rank != rank) {
+      info.cellX=newX;
+      info.cellY=newY;
+      info.rank=rank;
+      LauncherModel.addOrMoveItemInDatabase(getContext(),info,mFolder.mInfo.id,0,info.cellX,info.cellY);
+    }
+    lp.cellX=info.cellX;
+    lp.cellY=info.cellY;
+    rank++;
+    position++;
+    currentPage.addViewToCellLayout(v,-1,mFolder.mLauncher.getViewIdForItem(info),lp,true);
+  }
+  boolean removed=false;
+  while (pageItr.hasNext()) {
+    CellLayout layout=pageItr.next();
+    if (layout != mFirstPage) {
+      removeView(layout);
+      removed=true;
+    }
+  }
+  if (removed) {
+    setCurrentPage(0);
+  }
+}

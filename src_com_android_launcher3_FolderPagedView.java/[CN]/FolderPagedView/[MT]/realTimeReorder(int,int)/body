@@ -1,0 +1,90 @@
+{
+  int delay=0;
+  float delayAmount=30;
+  int pageToAnimate=getNextPage();
+  int pageT=target / mMaxItemsPerPage;
+  int pagePosT=target % mMaxItemsPerPage;
+  if (pageT != pageToAnimate) {
+    Log.e(TAG,"Cannot animate when the target cell is invisible");
+  }
+  int pagePosE=empty % mMaxItemsPerPage;
+  int pageE=empty / mMaxItemsPerPage;
+  int startPos, endPos;
+  int moveStart, moveEnd;
+  int direction;
+  if (target == empty) {
+    return;
+  }
+ else   if (target > empty) {
+    direction=1;
+    if (pageE < pageToAnimate) {
+      moveStart=empty;
+      moveEnd=pageToAnimate * mMaxItemsPerPage;
+      startPos=0;
+    }
+ else {
+      moveStart=moveEnd=-1;
+      startPos=pagePosE;
+    }
+    endPos=pagePosT;
+  }
+ else {
+    direction=-1;
+    if (pageE > pageToAnimate) {
+      moveStart=empty;
+      moveEnd=(pageToAnimate + 1) * mMaxItemsPerPage - 1;
+      startPos=mMaxItemsPerPage - 1;
+    }
+ else {
+      moveStart=moveEnd=-1;
+      startPos=pagePosE;
+    }
+    endPos=pagePosT;
+  }
+  while (moveStart != moveEnd) {
+    int rankToMove=moveStart + direction;
+    int p=rankToMove / mMaxItemsPerPage;
+    int pagePos=rankToMove % mMaxItemsPerPage;
+    int x=pagePos % mGridCountX;
+    int y=pagePos / mGridCountX;
+    final CellLayout page=getPageAt(p);
+    final View v=page.getChildAt(x,y);
+    if (v != null) {
+      if (pageToAnimate != p) {
+        page.removeView(v);
+        addViewForRank(v,(ShortcutInfo)v.getTag(),moveStart);
+      }
+ else {
+        final int newRank=moveStart;
+        final float oldTranslateX=v.getTranslationX();
+        Runnable endAction=new Runnable(){
+          @Override public void run(){
+            mPageChangingViews.remove(v);
+            v.setTranslationX(oldTranslateX);
+            ((CellLayout)v.getParent().getParent()).removeView(v);
+            addViewForRank(v,(ShortcutInfo)v.getTag(),newRank);
+          }
+        }
+;
+        v.animate().translationXBy(direction > 0 ? -v.getWidth() : v.getWidth()).setDuration(REORDER_ANIMATION_DURATION).setStartDelay(0).withEndAction(endAction);
+        mPageChangingViews.put(v,endAction);
+      }
+    }
+    moveStart=rankToMove;
+  }
+  if ((endPos - startPos) * direction <= 0) {
+    return;
+  }
+  CellLayout page=getPageAt(pageToAnimate);
+  for (int i=startPos; i != endPos; i+=direction) {
+    int nextPos=i + direction;
+    View v=page.getChildAt(nextPos % mGridCountX,nextPos / mGridCountX);
+    if (v != null) {
+      ((ItemInfo)v.getTag()).rank-=direction;
+    }
+    if (page.animateChildToPosition(v,i % mGridCountX,i / mGridCountX,REORDER_ANIMATION_DURATION,delay,true,true)) {
+      delay+=delayAmount;
+      delayAmount*=0.9;
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  DeviceProfile grid=LauncherAppState.getInstance().getDynamicGrid().getDeviceProfile();
+  CellLayout layout=new CellLayout(getContext());
+  layout.setCellDimensions(grid.folderCellWidthPx,grid.folderCellHeightPx);
+  layout.getShortcutsAndWidgets().setMotionEventSplittingEnabled(false);
+  layout.setInvertIfRtl(true);
+  if (mFirstPage != null) {
+    layout.setGridSize(mFirstPage.getCountX(),mFirstPage.getCountY());
+  }
+  return layout;
+}

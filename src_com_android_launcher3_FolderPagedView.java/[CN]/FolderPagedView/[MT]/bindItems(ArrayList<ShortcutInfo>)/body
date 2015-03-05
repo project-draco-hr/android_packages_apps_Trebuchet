@@ -1,0 +1,27 @@
+{
+  final int count=items.size();
+  if (getPageCount() > 1) {
+    Log.d(TAG,"Binding items to an non-empty view");
+    removeAllViews();
+    addView(mFirstPage);
+    mFirstPage.removeAllViews();
+  }
+  setupContentDimensions(count);
+  CellLayout page=mFirstPage;
+  int pagePosition=0;
+  int rank=0;
+  for (  ShortcutInfo item : items) {
+    if (pagePosition >= mMaxItemsPerPage) {
+      pagePosition=0;
+      page=newCellLayout();
+      addFullScreenPage(page);
+    }
+    item.cellX=pagePosition % mGridCountX;
+    item.cellY=pagePosition / mGridCountX;
+    item.rank=rank;
+    addNewView(item,page);
+    rank++;
+    pagePosition++;
+  }
+  return new ArrayList<ShortcutInfo>();
+}
