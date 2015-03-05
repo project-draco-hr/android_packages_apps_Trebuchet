@@ -1,5 +1,5 @@
 {
-  View firstChild=mContent.getChildAt(0,0);
+  View firstChild=getChildAt(0,0);
   if (firstChild != null) {
     firstChild.requestFocus();
   }

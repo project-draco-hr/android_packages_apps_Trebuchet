@@ -1,5 +1,5 @@
 {
-  findNearestArea(pixelX,pixelY,spanX,spanY,null,false,sTempPosArray);
+  findNearestArea(pixelX,pixelY,1,1,null,false,sTempPosArray);
   if (mFolder.isLayoutRtl()) {
     sTempPosArray[0]=getCountX() - sTempPosArray[0] - 1;
   }

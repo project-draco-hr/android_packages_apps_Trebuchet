@@ -1,14 +1,8 @@
 {
   super.onFinishInflate();
   mContentWrapper=findViewById(R.id.folder_content_wrapper);
-  mContent=(FolderCellLayout)findViewById(R.id.folder_content);
+  mContent=(FolderContent)findViewById(R.id.folder_content);
   mContent.setFolder(this);
-  LauncherAppState app=LauncherAppState.getInstance();
-  DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
-  mContent.setCellDimensions(grid.folderCellWidthPx,grid.folderCellHeightPx);
-  mContent.setGridSize(0,0);
-  mContent.getShortcutsAndWidgets().setMotionEventSplittingEnabled(false);
-  mContent.setInvertIfRtl(true);
   mFolderName=(FolderEditText)findViewById(R.id.folder_name);
   mFolderName.setFolder(this);
   mFolderName.setOnFocusChangeListener(this);
