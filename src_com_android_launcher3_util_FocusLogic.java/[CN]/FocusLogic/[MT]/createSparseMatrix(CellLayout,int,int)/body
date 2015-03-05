@@ -1,0 +1,24 @@
+{
+  ViewGroup iconParent=iconLayout.getShortcutsAndWidgets();
+  int[][] matrix=createFullMatrix(iconLayout.getCountX() + 1,iconLayout.getCountY(),false);
+  for (int i=0; i < iconParent.getChildCount(); i++) {
+    int cx=((CellLayout.LayoutParams)iconParent.getChildAt(i).getLayoutParams()).cellX;
+    int cy=((CellLayout.LayoutParams)iconParent.getChildAt(i).getLayoutParams()).cellY;
+    if (pivotX < 0) {
+      matrix[cx - pivotX][cy]=i;
+    }
+ else {
+      matrix[cx][cy]=i;
+    }
+  }
+  if (pivotX < 0) {
+    matrix[0][pivotY]=PIVOT;
+  }
+ else {
+    matrix[pivotX][pivotY]=PIVOT;
+  }
+  if (DEBUG) {
+    printMatrix(matrix);
+  }
+  return matrix;
+}

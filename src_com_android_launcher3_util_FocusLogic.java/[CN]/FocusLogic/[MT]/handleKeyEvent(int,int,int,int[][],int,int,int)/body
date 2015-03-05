@@ -7,13 +7,13 @@ switch (keyCode) {
 case KeyEvent.KEYCODE_DPAD_LEFT:
     newIndex=handleDpadHorizontal(iconIdx,cntX,cntY,map,-1);
   if (newIndex == NOOP && pageIndex > 0) {
-    return PREVIOUS_PAGE_LAST_ITEM;
+    newIndex=PREVIOUS_PAGE_RIGHT_COLUMN;
   }
 break;
 case KeyEvent.KEYCODE_DPAD_RIGHT:
 newIndex=handleDpadHorizontal(iconIdx,cntX,cntY,map,1);
 if (newIndex == NOOP && pageIndex < pageCount - 1) {
-return NEXT_PAGE_FIRST_ITEM;
+newIndex=NEXT_PAGE_LEFT_COLUMN;
 }
 break;
 case KeyEvent.KEYCODE_DPAD_DOWN:

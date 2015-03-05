@@ -37,7 +37,7 @@
     }
   }
   if (DEBUG) {
-    printMatrix(matrix,m,n);
+    printMatrix(matrix);
   }
   return matrix;
 }
