@@ -6,7 +6,8 @@
     return;
   }
   if (!mInitiated) {
-    getLocationRelativeToParentPagedView(this,mIndicatorPos);
+    mCommonParent=(View)this.getParent();
+    computeLocationRelativeToParent(this,mCommonParent,mIndicatorPos);
     mInitiated=true;
   }
   if (hasFocus) {
@@ -16,7 +17,7 @@
     ViewAnimState nextState=new ViewAnimState();
     nextState.scaleX=v.getScaleX() * v.getWidth() / indicatorWidth;
     nextState.scaleY=v.getScaleY() * v.getHeight() / indicatorHeight;
-    getLocationRelativeToParentPagedView(v,mTargetViewPos);
+    computeLocationRelativeToParent(v,mCommonParent,mTargetViewPos);
     nextState.x=mTargetViewPos[0] - mIndicatorPos[0] - (1 - nextState.scaleX) * indicatorWidth / 2;
     nextState.y=mTargetViewPos[1] - mIndicatorPos[1] - (1 - nextState.scaleY) * indicatorHeight / 2;
     if (getAlpha() > MIN_VISIBLE_ALPHA) {
