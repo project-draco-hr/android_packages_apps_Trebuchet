@@ -1,0 +1,4 @@
+{
+  mFolder=folder;
+  mFocusIndicatorView=(FocusIndicatorView)folder.findViewById(R.id.focus_indicator);
+}

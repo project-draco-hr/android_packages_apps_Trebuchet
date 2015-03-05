@@ -1,11 +1,8 @@
 {
   super.onFinishInflate();
-  mScrollView=(ScrollView)findViewById(R.id.scroll_view);
-  mContent=(CellLayout)findViewById(R.id.folder_content);
-  mFocusIndicatorHandler=new FocusIndicatorView(getContext());
-  mContent.addView(mFocusIndicatorHandler,0);
-  mFocusIndicatorHandler.getLayoutParams().height=FocusIndicatorView.DEFAULT_LAYOUT_SIZE;
-  mFocusIndicatorHandler.getLayoutParams().width=FocusIndicatorView.DEFAULT_LAYOUT_SIZE;
+  mContentWrapper=findViewById(R.id.folder_content_wrapper);
+  mContent=(FolderCellLayout)findViewById(R.id.folder_content);
+  mContent.setFolder(this);
   LauncherAppState app=LauncherAppState.getInstance();
   DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
   mContent.setCellDimensions(grid.folderCellWidthPx,grid.folderCellHeightPx);
@@ -15,11 +12,12 @@
   mFolderName=(FolderEditText)findViewById(R.id.folder_name);
   mFolderName.setFolder(this);
   mFolderName.setOnFocusChangeListener(this);
-  int measureSpec=MeasureSpec.UNSPECIFIED;
-  mFolderName.measure(measureSpec,measureSpec);
-  mFolderNameHeight=mFolderName.getMeasuredHeight();
   mFolderName.setCustomSelectionActionModeCallback(mActionModeCallback);
   mFolderName.setOnEditorActionListener(this);
   mFolderName.setSelectAllOnFocus(true);
   mFolderName.setInputType(mFolderName.getInputType() | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS | InputType.TYPE_TEXT_FLAG_CAP_WORDS);
+  mBottomContent=mFolderName;
+  int measureSpec=MeasureSpec.UNSPECIFIED;
+  mBottomContent.measure(measureSpec,measureSpec);
+  mBottomContentHeight=mBottomContent.getMeasuredHeight();
 }

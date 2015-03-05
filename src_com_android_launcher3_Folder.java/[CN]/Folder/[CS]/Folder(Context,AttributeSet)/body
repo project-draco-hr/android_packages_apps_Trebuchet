@@ -1,15 +1,8 @@
 {
   super(context,attrs);
-  LauncherAppState app=LauncherAppState.getInstance();
-  DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
   setAlwaysDrawnWithCacheEnabled(false);
-  mInflater=LayoutInflater.from(context);
-  mIconCache=app.getIconCache();
-  Resources res=getResources();
-  mMaxCountX=(int)grid.numColumns;
-  mMaxCountY=(int)grid.numRows;
-  mMaxNumItems=mMaxCountX * mMaxCountY;
   mInputMethodManager=(InputMethodManager)getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+  Resources res=getResources();
   mExpandDuration=res.getInteger(R.integer.config_folderExpandDuration);
   mMaterialExpandDuration=res.getInteger(R.integer.config_materialFolderExpandDuration);
   mMaterialExpandStagger=res.getInteger(R.integer.config_materialFolderExpandStagger);

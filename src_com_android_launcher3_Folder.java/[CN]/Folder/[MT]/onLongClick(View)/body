@@ -8,8 +8,7 @@
     }
     mLauncher.getWorkspace().beginDragShared(v,this);
     mCurrentDragInfo=item;
-    mEmptyCell[0]=item.cellX;
-    mEmptyCell[1]=item.cellY;
+    mEmptyCellRank=item.rank;
     mCurrentDragView=v;
     mContent.removeView(mCurrentDragView);
     mInfo.remove(mCurrentDragInfo);

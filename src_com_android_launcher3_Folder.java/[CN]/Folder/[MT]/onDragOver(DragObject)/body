@@ -1,17 +1,12 @@
 {
-  final int scrollOffset=mScrollView.getScrollY();
   final float[] r=d.getVisualCenter(null);
   r[0]-=getPaddingLeft();
   r[1]-=getPaddingTop();
-  mTargetCell=mContent.findNearestArea((int)r[0],(int)r[1] + scrollOffset,1,1,mTargetCell);
-  if (isLayoutRtl()) {
-    mTargetCell[0]=mContent.getCountX() - mTargetCell[0] - 1;
-  }
-  if (mTargetCell[0] != mPreviousTargetCell[0] || mTargetCell[1] != mPreviousTargetCell[1]) {
+  mTargetRank=mContent.findNearestArea((int)r[0],(int)r[1],1,1);
+  if (mTargetRank != mPrevTargetRank) {
     mReorderAlarm.cancelAlarm();
     mReorderAlarm.setOnAlarmListener(mReorderAlarmListener);
     mReorderAlarm.setAlarm(REORDER_DELAY);
-    mPreviousTargetCell[0]=mTargetCell[0];
-    mPreviousTargetCell[1]=mTargetCell[1];
+    mPrevTargetRank=mTargetRank;
   }
 }

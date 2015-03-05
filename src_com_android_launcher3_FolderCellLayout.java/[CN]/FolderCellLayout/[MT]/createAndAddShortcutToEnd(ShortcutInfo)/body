@@ -1,0 +1,4 @@
+{
+  int rank=allocateNewLastItemRank();
+  return createAndAddViewForRank(item,rank);
+}

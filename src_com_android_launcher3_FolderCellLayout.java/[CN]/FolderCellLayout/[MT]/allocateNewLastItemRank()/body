@@ -1,0 +1,5 @@
+{
+  int rank=getItemCount();
+  mFolder.rearrangeChildren(rank + 1);
+  return rank;
+}

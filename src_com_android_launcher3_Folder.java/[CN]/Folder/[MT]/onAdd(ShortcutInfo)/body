@@ -1,10 +1,6 @@
 {
   mItemsInvalidated=true;
   if (mSuppressOnAdd)   return;
-  if (!findAndSetEmptyCells(item)) {
-    setupContentForNumItems(getItemCount() + 1);
-    findAndSetEmptyCells(item);
-  }
-  createAndAddShortcut(item);
+  mContent.createAndAddShortcutToEnd(item);
   LauncherModel.addOrMoveItemInDatabase(mLauncher,item,mInfo.id,0,item.cellX,item.cellY);
 }
