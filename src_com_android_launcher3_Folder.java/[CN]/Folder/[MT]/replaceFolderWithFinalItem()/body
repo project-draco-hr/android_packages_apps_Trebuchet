@@ -24,7 +24,7 @@
     }
   }
 ;
-  View finalChild=getItemAt(0);
+  View finalChild=mContent.getLastItem();
   if (finalChild != null) {
     mFolderIcon.performDestroyAnimation(finalChild,onCompleteRunnable);
   }

@@ -37,8 +37,8 @@
     Animator reveal=LauncherAnimUtils.createCircularReveal(this,(int)getPivotX(),(int)getPivotY(),0,radius);
     reveal.setDuration(mMaterialExpandDuration);
     reveal.setInterpolator(new LogDecelerateInterpolator(100,0));
-    mContent.setAlpha(0f);
-    Animator iconsAlpha=LauncherAnimUtils.ofFloat(mContent,"alpha",0f,1f);
+    mContentWrapper.setAlpha(0f);
+    Animator iconsAlpha=LauncherAnimUtils.ofFloat(mContentWrapper,"alpha",0f,1f);
     iconsAlpha.setDuration(mMaterialExpandDuration);
     iconsAlpha.setStartDelay(mMaterialExpandStagger);
     iconsAlpha.setInterpolator(new AccelerateInterpolator(1.5f));
@@ -56,17 +56,17 @@
     anim.play(textAlpha);
     anim.play(reveal);
     openFolderAnim=anim;
-    mContent.setLayerType(LAYER_TYPE_HARDWARE,null);
+    mContentWrapper.setLayerType(LAYER_TYPE_HARDWARE,null);
     onCompleteRunnable=new Runnable(){
       @Override public void run(){
-        mContent.setLayerType(LAYER_TYPE_NONE,null);
+        mContentWrapper.setLayerType(LAYER_TYPE_NONE,null);
       }
     }
 ;
   }
   openFolderAnim.addListener(new AnimatorListenerAdapter(){
     @Override public void onAnimationStart(    Animator animation){
-      sendCustomAccessibilityEvent(AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED,String.format(getContext().getString(R.string.folder_opened),mContent.getCountX(),mContent.getCountY()));
+      sendCustomAccessibilityEvent(AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED,mContent.getAccessibilityDescription());
       mState=STATE_ANIMATING;
     }
     @Override public void onAnimationEnd(    Animator animation){
@@ -74,7 +74,7 @@
       if (onCompleteRunnable != null) {
         onCompleteRunnable.run();
       }
-      setFocusOnFirstChild();
+      mContent.setFocusOnFirstChild();
     }
   }
 );

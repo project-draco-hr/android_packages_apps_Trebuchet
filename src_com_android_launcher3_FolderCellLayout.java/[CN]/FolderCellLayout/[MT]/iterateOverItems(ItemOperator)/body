@@ -1,0 +1,11 @@
+{
+  for (int j=0; j < getCountY(); j++) {
+    for (int i=0; i < getCountX(); i++) {
+      View v=getChildAt(i,j);
+      if ((v != null) && op.evaluate((ItemInfo)v.getTag(),v,this)) {
+        return v;
+      }
+    }
+  }
+  return null;
+}
