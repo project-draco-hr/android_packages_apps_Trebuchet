@@ -1,2 +1,3 @@
 View child
+View commonParent
 int[] shift
