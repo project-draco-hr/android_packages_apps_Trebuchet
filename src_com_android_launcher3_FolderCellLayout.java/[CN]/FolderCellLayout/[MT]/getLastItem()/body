@@ -1,4 +1,4 @@
 {
-  int total=getShortcutsAndWidgets().getChildCount();
-  return getShortcutsAndWidgets().getChildAt(total % getCountX(),total / getCountX());
+  int lastRank=getShortcutsAndWidgets().getChildCount() - 1;
+  return getShortcutsAndWidgets().getChildAt(lastRank % getCountX(),lastRank / getCountX());
 }

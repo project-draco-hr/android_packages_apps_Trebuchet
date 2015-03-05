@@ -18,6 +18,6 @@
     lp.cellX=info.cellX;
     lp.cellY=info.cellY;
     rank++;
-    addViewToCellLayout(v,-1,(int)info.id,lp,true);
+    addViewToCellLayout(v,-1,mFolder.mLauncher.getViewIdForItem(info),lp,true);
   }
 }

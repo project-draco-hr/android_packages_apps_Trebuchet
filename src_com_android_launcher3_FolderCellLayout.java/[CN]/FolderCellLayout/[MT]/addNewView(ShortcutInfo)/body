@@ -6,6 +6,6 @@
   textView.setOnFocusChangeListener(mFocusIndicatorView);
   textView.setOnKeyListener(mKeyListener);
   CellLayout.LayoutParams lp=new CellLayout.LayoutParams(item.cellX,item.cellY,item.spanX,item.spanY);
-  addViewToCellLayout(textView,-1,(int)item.id,lp,true);
+  addViewToCellLayout(textView,-1,mFolder.mLauncher.getViewIdForItem(item),lp,true);
   return textView;
 }
