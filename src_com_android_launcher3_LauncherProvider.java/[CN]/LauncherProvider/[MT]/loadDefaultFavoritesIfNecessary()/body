@@ -18,6 +18,7 @@
     if (loader == null) {
       loader=getDefaultLayoutParser();
     }
+    createEmptyDB();
     if ((mOpenHelper.loadFavorites(mOpenHelper.getWritableDatabase(),loader) <= 0) && usingExternallyProvidedLayout) {
       createEmptyDB();
       mOpenHelper.loadFavorites(mOpenHelper.getWritableDatabase(),getDefaultLayoutParser());
