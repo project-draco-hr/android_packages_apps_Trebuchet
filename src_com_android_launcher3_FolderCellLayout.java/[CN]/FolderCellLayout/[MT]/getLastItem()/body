@@ -1,4 +1,10 @@
 {
   int lastRank=getShortcutsAndWidgets().getChildCount() - 1;
-  return getShortcutsAndWidgets().getChildAt(lastRank % getCountX(),lastRank / getCountX());
+  int count=getCountX();
+  if (count > 0) {
+    return getShortcutsAndWidgets().getChildAt(lastRank % count,lastRank / count);
+  }
+ else {
+    return getShortcutsAndWidgets().getChildAt(lastRank);
+  }
 }
