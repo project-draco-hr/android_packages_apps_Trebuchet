@@ -2,7 +2,7 @@
   mItemsInvalidated=true;
   if (item == mCurrentDragInfo)   return;
   View v=getViewForInfo(item);
-  mContent.removeView(v);
+  mContent.removeItem(v);
   if (mState == STATE_ANIMATING) {
     mRearrangeOnClose=true;
   }

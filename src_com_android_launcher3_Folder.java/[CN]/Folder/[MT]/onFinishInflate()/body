@@ -10,8 +10,8 @@
   mFolderName.setOnEditorActionListener(this);
   mFolderName.setSelectAllOnFocus(true);
   mFolderName.setInputType(mFolderName.getInputType() | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS | InputType.TYPE_TEXT_FLAG_CAP_WORDS);
-  mBottomContent=mFolderName;
+  mFooter=ALLOW_FOLDER_SCROLL ? findViewById(R.id.folder_footer) : mFolderName;
   int measureSpec=MeasureSpec.UNSPECIFIED;
-  mBottomContent.measure(measureSpec,measureSpec);
-  mBottomContentHeight=mBottomContent.getMeasuredHeight();
+  mFooter.measure(measureSpec,measureSpec);
+  mFooterHeight=mFooter.getMeasuredHeight();
 }

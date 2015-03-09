@@ -1,0 +1,13 @@
+{
+  if (getChildCount() < 1) {
+    return null;
+  }
+  ShortcutAndWidgetContainer lastContainer=getCurrentCellLayout().getShortcutsAndWidgets();
+  int lastRank=lastContainer.getChildCount() - 1;
+  if (mGridCountX > 0) {
+    return lastContainer.getChildAt(lastRank % mGridCountX,lastRank / mGridCountX);
+  }
+ else {
+    return lastContainer.getChildAt(lastRank);
+  }
+}

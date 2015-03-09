@@ -16,13 +16,13 @@
     countX=((CellLayout)parentLayout).getCountX();
     countY=((CellLayout)parentLayout).getCountY();
   }
- else   if (v.getParent() instanceof ViewGroup) {
-    itemContainer=parentLayout=(ViewGroup)v.getParent();
-    countX=((PagedViewGridLayout)parentLayout).getCellCountX();
-    countY=((PagedViewGridLayout)parentLayout).getCellCountY();
-  }
  else {
-    throw new IllegalStateException("Parent of the focused item inside all apps screen is not a supported type.");
+    if (LauncherAppState.isDogfoodBuild()) {
+      throw new IllegalStateException("Parent of the focused item is not supported.");
+    }
+ else {
+      return false;
+    }
   }
   final int iconIndex=itemContainer.indexOfChild(v);
   final PagedView container=(PagedView)parentLayout.getParent();
@@ -33,6 +33,7 @@
   int[][] matrix=FocusLogic.createFullMatrix(countX,countY,true);
   int newIconIndex=FocusLogic.handleKeyEvent(keyCode,countX,countY,matrix,iconIndex,pageIndex,pageCount);
   if (newIconIndex == FocusLogic.NOOP) {
+    handleNoopKey(keyCode,v);
     return consume;
   }
 switch (newIconIndex) {
@@ -86,6 +87,9 @@ break;
 if (child != null) {
 child.requestFocus();
 playSoundEffect(keyCode,v);
+}
+ else {
+handleNoopKey(keyCode,v);
 }
 return consume;
 }

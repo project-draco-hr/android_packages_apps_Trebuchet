@@ -42,8 +42,8 @@
     iconsAlpha.setDuration(mMaterialExpandDuration);
     iconsAlpha.setStartDelay(mMaterialExpandStagger);
     iconsAlpha.setInterpolator(new AccelerateInterpolator(1.5f));
-    mBottomContent.setAlpha(0f);
-    Animator textAlpha=LauncherAnimUtils.ofFloat(mBottomContent,"alpha",0f,1f);
+    mFooter.setAlpha(0f);
+    Animator textAlpha=LauncherAnimUtils.ofFloat(mFooter,"alpha",0f,1f);
     textAlpha.setDuration(mMaterialExpandDuration);
     textAlpha.setStartDelay(mMaterialExpandStagger);
     textAlpha.setInterpolator(new AccelerateInterpolator(1.5f));

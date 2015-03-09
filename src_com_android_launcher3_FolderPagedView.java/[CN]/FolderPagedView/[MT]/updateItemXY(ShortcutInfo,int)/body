@@ -1,0 +1,7 @@
+{
+  item.rank=rank;
+  int pagePos=item.rank % mMaxItemsPerPage;
+  item.cellX=pagePos % mGridCountX;
+  item.cellY=pagePos / mGridCountX;
+  return item.rank / mMaxItemsPerPage;
+}

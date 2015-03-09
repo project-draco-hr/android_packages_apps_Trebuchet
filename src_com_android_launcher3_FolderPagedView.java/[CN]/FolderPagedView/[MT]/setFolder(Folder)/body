@@ -1,0 +1,5 @@
+{
+  mFolder=folder;
+  mFocusIndicatorView=(FocusIndicatorView)folder.findViewById(R.id.focus_indicator);
+  mKeyListener=new PagedFolderKeyEventListener(folder);
+}

@@ -1,0 +1,3 @@
+{
+  return new PageMarkerResources(R.drawable.ic_pageindicator_current_dark,R.drawable.ic_pageindicator_default_dark);
+}

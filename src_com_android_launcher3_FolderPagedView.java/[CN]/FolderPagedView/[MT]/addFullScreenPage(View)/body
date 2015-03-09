@@ -1,0 +1,5 @@
+{
+  LayoutParams lp=generateDefaultLayoutParams();
+  lp.isFullScreenPage=true;
+  super.addView(page,-1,lp);
+}
