@@ -1,6 +1,7 @@
 {
   if (mDragging) {
     mDragging=false;
+    mIsAccessibleDrag=false;
     clearScrollRunnable();
     boolean isDeferred=false;
     if (mDragObject.dragView != null) {

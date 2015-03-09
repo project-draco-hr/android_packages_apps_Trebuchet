@@ -1,6 +1,11 @@
 {
+  Resources res=mLauncher.getResources();
   if (action == REMOVE) {
-    return DeleteDropTarget.removeWorkspaceOrFolderItem(mLauncher,item,host);
+    if (DeleteDropTarget.removeWorkspaceOrFolderItem(mLauncher,item,host)) {
+      announceConfirmation(R.string.item_removed_from_workspace);
+      return true;
+    }
+    return false;
   }
  else   if (action == INFO) {
     InfoDropTarget.startDetailsActivityForInfo(item,mLauncher);
@@ -9,6 +14,9 @@
  else   if (action == UNINSTALL) {
     DeleteDropTarget.uninstallApp(mLauncher,(AppInfo)item);
     return true;
+  }
+ else   if (action == MOVE) {
+    beginAccessibleDrag(host,item);
   }
  else   if (action == ADD_TO_WORKSPACE) {
     final int preferredPage=mLauncher.getWorkspace().getCurrentPage();
@@ -24,6 +32,7 @@
       mLauncher.showWorkspace(true,new Runnable(){
         @Override public void run(){
           mLauncher.getModel().addAndBindAddedWorkspaceApps(mLauncher,addShortcuts,screenProvider,0,true);
+          announceConfirmation(R.string.item_added_to_workspace);
         }
       }
 );
@@ -31,6 +40,7 @@
     }
  else     if (item instanceof PendingAddItemInfo) {
       mLauncher.getModel().addAndBindPendingItem(mLauncher,(PendingAddItemInfo)item,screenProvider,0);
+      announceConfirmation(R.string.item_added_to_workspace);
       return true;
     }
   }

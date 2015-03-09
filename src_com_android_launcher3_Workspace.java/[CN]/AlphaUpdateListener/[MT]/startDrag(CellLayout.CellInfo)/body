@@ -1,11 +1,3 @@
 {
-  View child=cellInfo.cell;
-  if (!child.isInTouchMode()) {
-    return;
-  }
-  mDragInfo=cellInfo;
-  child.setVisibility(INVISIBLE);
-  CellLayout layout=(CellLayout)child.getParent().getParent();
-  layout.prepareChildForDrag(child);
-  beginDragShared(child,this);
+  startDrag(cellInfo,false);
 }

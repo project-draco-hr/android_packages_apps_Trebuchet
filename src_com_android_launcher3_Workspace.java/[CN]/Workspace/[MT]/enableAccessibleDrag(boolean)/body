@@ -1,0 +1,13 @@
+{
+  for (int i=0; i < getChildCount(); i++) {
+    CellLayout child=(CellLayout)getChildAt(i);
+    child.enableAccessibleDrag(enable);
+  }
+  if (enable) {
+    setOnClickListener(null);
+  }
+ else {
+    setOnClickListener(mLauncher);
+  }
+  mLauncher.getHotseat().getLayout().enableAccessibleDrag(enable);
+}

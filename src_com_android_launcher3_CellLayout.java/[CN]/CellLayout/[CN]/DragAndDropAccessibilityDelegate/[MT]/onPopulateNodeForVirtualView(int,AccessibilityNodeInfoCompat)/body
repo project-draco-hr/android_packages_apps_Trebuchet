@@ -1,0 +1,10 @@
+{
+  if (id == ExploreByTouchHelper.INVALID_ID) {
+    throw new IllegalArgumentException("Invalid virtual view id");
+  }
+  node.setContentDescription(getLocationDescriptionForIconDrop(id));
+  node.setBoundsInParent(getItemBounds(id));
+  node.addAction(AccessibilityNodeInfoCompat.ACTION_CLICK);
+  node.setClickable(true);
+  node.setFocusable(true);
+}

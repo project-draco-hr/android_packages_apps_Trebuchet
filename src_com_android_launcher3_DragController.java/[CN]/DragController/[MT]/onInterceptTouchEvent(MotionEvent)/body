@@ -3,6 +3,9 @@
   if (debug) {
     Log.d(Launcher.TAG,"DragController.onInterceptTouchEvent " + ev + " mDragging="+ mDragging);
   }
+  if (mIsAccessibleDrag) {
+    return false;
+  }
   acquireVelocityTrackerAndAddMovement(ev);
   final int action=ev.getAction();
   final int[] dragLayerPos=getClampedDragLayerPos(ev.getX(),ev.getY());

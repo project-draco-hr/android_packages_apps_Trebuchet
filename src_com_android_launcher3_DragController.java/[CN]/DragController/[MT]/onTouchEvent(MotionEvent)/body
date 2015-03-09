@@ -1,5 +1,5 @@
 {
-  if (!mDragging) {
+  if (!mDragging || mIsAccessibleDrag) {
     return false;
   }
   acquireVelocityTrackerAndAddMovement(ev);

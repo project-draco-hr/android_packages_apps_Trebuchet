@@ -21,7 +21,6 @@
   if (v.getTag() instanceof ItemInfo) {
     ItemInfo info=(ItemInfo)v.getTag();
     longClickCellInfo=new CellLayout.CellInfo(v,info);
-    ;
     itemUnderLongClick=longClickCellInfo.cell;
     resetAddInfo();
   }

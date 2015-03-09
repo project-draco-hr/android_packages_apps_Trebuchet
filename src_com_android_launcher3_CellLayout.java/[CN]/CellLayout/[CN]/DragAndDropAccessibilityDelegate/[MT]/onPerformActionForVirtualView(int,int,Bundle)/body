@@ -1,0 +1,8 @@
+{
+  if (action == AccessibilityNodeInfoCompat.ACTION_CLICK) {
+    String confirmation=getConfirmationForIconDrop(viewId);
+    LauncherAppState.getInstance().getAccessibilityDelegate().handleAccessibleDrop(CellLayout.this,getItemBounds(viewId),confirmation);
+    return true;
+  }
+  return false;
+}

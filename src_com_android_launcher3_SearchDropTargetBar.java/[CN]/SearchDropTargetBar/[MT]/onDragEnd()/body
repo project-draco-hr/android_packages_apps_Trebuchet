@@ -1,11 +1,6 @@
 {
   if (!mDeferOnDragEnd) {
-    prepareStartAnimation(mDropTargetBar);
-    mDropTargetBarAnim.reverse();
-    if (!mIsSearchBarHidden) {
-      prepareStartAnimation(mQSBSearchBar);
-      mQSBSearchBarAnim.reverse();
-    }
+    hideDeleteTarget();
   }
  else {
     mDeferOnDragEnd=false;

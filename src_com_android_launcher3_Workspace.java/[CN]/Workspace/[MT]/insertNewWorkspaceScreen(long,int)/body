@@ -9,5 +9,8 @@
   mWorkspaceScreens.put(screenId,newScreen);
   mScreenOrder.add(insertIndex,screenId);
   addView(newScreen,insertIndex);
+  if (LauncherAppState.getInstance().getAccessibilityDelegate().isInAccessibleDrag()) {
+    newScreen.enableAccessibleDrag(true);
+  }
   return screenId;
 }

@@ -1,0 +1,5 @@
+{
+  int viewId=getViewIdAt(mDownX,mDownY);
+  String confirmation=getConfirmationForIconDrop(viewId);
+  LauncherAppState.getInstance().getAccessibilityDelegate().handleAccessibleDrop(CellLayout.this,getItemBounds(viewId),confirmation);
+}

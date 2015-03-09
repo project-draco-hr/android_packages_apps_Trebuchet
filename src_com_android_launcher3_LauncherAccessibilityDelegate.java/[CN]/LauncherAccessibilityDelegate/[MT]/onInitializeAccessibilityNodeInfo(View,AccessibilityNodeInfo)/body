@@ -4,6 +4,7 @@
   ItemInfo item=(ItemInfo)host.getTag();
   if ((item instanceof ShortcutInfo) || (item instanceof LauncherAppWidgetInfo) || (item instanceof FolderInfo)) {
     info.addAction(mActions.get(REMOVE));
+    info.addAction(mActions.get(MOVE));
   }
  else   if ((item instanceof AppInfo) || (item instanceof PendingAddItemInfo)) {
     if (item instanceof AppInfo) {
