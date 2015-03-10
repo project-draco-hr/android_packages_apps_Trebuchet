@@ -52,6 +52,7 @@ synchronized (sBgLock) {
       final int rankIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.RANK);
       final int restoredIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.RESTORED);
       final int profileIdIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.PROFILE_ID);
+      final int optionsIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.OPTIONS);
       ShortcutInfo info;
       String intentDescription;
       LauncherAppWidgetInfo appWidgetInfo;
@@ -250,6 +251,7 @@ folderInfo.cellX=c.getInt(cellXIndex);
 folderInfo.cellY=c.getInt(cellYIndex);
 folderInfo.spanX=1;
 folderInfo.spanY=1;
+folderInfo.options=c.getInt(optionsIndex);
 if (!checkItemPlacement(occupied,folderInfo)) {
 itemsToRemove.add(id);
 break;

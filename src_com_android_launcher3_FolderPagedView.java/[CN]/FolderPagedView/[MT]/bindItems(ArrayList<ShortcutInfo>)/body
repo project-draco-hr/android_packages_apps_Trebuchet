@@ -1,4 +1,5 @@
 {
+  mIsSorted=mFolder.mInfo.hasOption(FolderInfo.FLAG_ITEMS_SORTED);
   ArrayList<View> icons=new ArrayList<View>();
   for (  ShortcutInfo item : items) {
     icons.add(createNewView(item));

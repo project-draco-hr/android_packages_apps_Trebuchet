@@ -5,7 +5,7 @@
   mNewDbCreated=true;
   UserManagerCompat userManager=UserManagerCompat.getInstance(mContext);
   long userSerialNumber=userManager.getSerialNumberForUser(UserHandleCompat.myUserHandle());
-  db.execSQL("CREATE TABLE favorites (" + "_id INTEGER PRIMARY KEY," + "title TEXT,"+ "intent TEXT,"+ "container INTEGER,"+ "screen INTEGER,"+ "cellX INTEGER,"+ "cellY INTEGER,"+ "spanX INTEGER,"+ "spanY INTEGER,"+ "itemType INTEGER,"+ "appWidgetId INTEGER NOT NULL DEFAULT -1,"+ "isShortcut INTEGER,"+ "iconType INTEGER,"+ "iconPackage TEXT,"+ "iconResource TEXT,"+ "icon BLOB,"+ "uri TEXT,"+ "displayMode INTEGER,"+ "appWidgetProvider TEXT,"+ "modified INTEGER NOT NULL DEFAULT 0,"+ "restored INTEGER NOT NULL DEFAULT 0,"+ "profileId INTEGER DEFAULT " + userSerialNumber + ","+ "rank INTEGER NOT NULL DEFAULT 0"+ ");");
+  db.execSQL("CREATE TABLE favorites (" + "_id INTEGER PRIMARY KEY," + "title TEXT,"+ "intent TEXT,"+ "container INTEGER,"+ "screen INTEGER,"+ "cellX INTEGER,"+ "cellY INTEGER,"+ "spanX INTEGER,"+ "spanY INTEGER,"+ "itemType INTEGER,"+ "appWidgetId INTEGER NOT NULL DEFAULT -1,"+ "isShortcut INTEGER,"+ "iconType INTEGER,"+ "iconPackage TEXT,"+ "iconResource TEXT,"+ "icon BLOB,"+ "uri TEXT,"+ "displayMode INTEGER,"+ "appWidgetProvider TEXT,"+ "modified INTEGER NOT NULL DEFAULT 0,"+ "restored INTEGER NOT NULL DEFAULT 0,"+ "profileId INTEGER DEFAULT " + userSerialNumber + ","+ "rank INTEGER NOT NULL DEFAULT 0,"+ "options INTEGER NOT NULL DEFAULT 0"+ ");");
   addWorkspacesTable(db);
   if (mAppWidgetHost != null) {
     mAppWidgetHost.deleteHost();

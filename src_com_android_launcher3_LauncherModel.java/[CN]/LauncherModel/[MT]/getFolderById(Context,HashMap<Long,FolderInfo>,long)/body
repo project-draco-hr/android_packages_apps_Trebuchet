@@ -9,6 +9,7 @@
       final int screenIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.SCREEN);
       final int cellXIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.CELLX);
       final int cellYIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.CELLY);
+      final int optionsIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.OPTIONS);
       FolderInfo folderInfo=null;
 switch (c.getInt(itemTypeIndex)) {
 case LauncherSettings.Favorites.ITEM_TYPE_FOLDER:
@@ -21,6 +22,7 @@ case LauncherSettings.Favorites.ITEM_TYPE_FOLDER:
   folderInfo.screenId=c.getInt(screenIndex);
   folderInfo.cellX=c.getInt(cellXIndex);
   folderInfo.cellY=c.getInt(cellYIndex);
+  folderInfo.options=c.getInt(optionsIndex);
   return folderInfo;
 }
 }

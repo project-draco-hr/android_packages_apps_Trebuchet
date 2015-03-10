@@ -27,6 +27,7 @@
       if (!successfulDrop) {
         mSuppressFolderDeletion=true;
       }
+      mScrollPauseAlarm.cancelAlarm();
       completeDragExit();
     }
   }

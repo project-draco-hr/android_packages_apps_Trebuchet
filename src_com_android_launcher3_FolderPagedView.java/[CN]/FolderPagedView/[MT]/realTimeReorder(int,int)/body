@@ -60,7 +60,7 @@
         final float oldTranslateX=v.getTranslationX();
         Runnable endAction=new Runnable(){
           @Override public void run(){
-            mPageChangingViews.remove(v);
+            mPendingAnimations.remove(v);
             v.setTranslationX(oldTranslateX);
             ((CellLayout)v.getParent().getParent()).removeView(v);
             addViewForRank(v,(ShortcutInfo)v.getTag(),newRank);
@@ -68,7 +68,7 @@
         }
 ;
         v.animate().translationXBy(direction > 0 ? -v.getWidth() : v.getWidth()).setDuration(REORDER_ANIMATION_DURATION).setStartDelay(0).withEndAction(endAction);
-        mPageChangingViews.put(v,endAction);
+        mPendingAnimations.put(v,endAction);
       }
     }
     moveStart=rankToMove;

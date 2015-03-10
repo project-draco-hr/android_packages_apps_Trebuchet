@@ -1,0 +1,12 @@
+{
+  int oldOptions=options;
+  if (isEnabled) {
+    options|=option;
+  }
+ else {
+    options&=~option;
+  }
+  if (context != null && oldOptions != options) {
+    LauncherModel.updateItemInDatabase(context,this);
+  }
+}

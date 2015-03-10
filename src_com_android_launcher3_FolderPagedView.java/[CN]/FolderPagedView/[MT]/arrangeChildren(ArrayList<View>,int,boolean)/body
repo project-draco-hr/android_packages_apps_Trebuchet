@@ -10,6 +10,9 @@
   CellLayout currentPage=null;
   int position=0;
   int newX, newY, rank;
+  boolean isSorted=mIsSorted;
+  ViewComparator comparator=new ViewComparator();
+  View lastView=null;
   rank=0;
   for (int i=0; i < itemCount; i++) {
     View v=list.size() > i ? list.get(i) : null;
@@ -23,6 +26,9 @@
       position=0;
     }
     if (v != null) {
+      if (lastView != null) {
+        isSorted&=comparator.compare(lastView,v) <= 0;
+      }
       CellLayout.LayoutParams lp=(CellLayout.LayoutParams)v.getLayoutParams();
       newX=position % mGridCountX;
       newY=position / mGridCountX;
@@ -39,6 +45,7 @@
       lp.cellY=info.cellY;
       currentPage.addViewToCellLayout(v,-1,mFolder.mLauncher.getViewIdForItem(info),lp,true);
     }
+    lastView=v;
     rank++;
     position++;
   }
@@ -49,5 +56,16 @@
   }
   if (removed) {
     setCurrentPage(0);
+  }
+  setIsSorted(isSorted,saveChanges);
+  if (getPageCount() > 1) {
+    mPageIndicator.setVisibility(View.VISIBLE);
+    mSortButton.setVisibility(View.VISIBLE);
+    mFolder.mFolderName.setGravity(Gravity.START);
+  }
+ else {
+    mPageIndicator.setVisibility(View.GONE);
+    mSortButton.setVisibility(View.GONE);
+    mFolder.mFolderName.setGravity(Gravity.CENTER_HORIZONTAL);
   }
 }

@@ -1,7 +1,10 @@
 {
   if (!(getParent() instanceof DragLayer))   return;
   if (ALLOW_FOLDER_SCROLL) {
-    mPagedView.snapToPageImmediately(0);
+    mPagedView.completePendingPageChanges();
+    if (!(mDragInProgress && mPagedView.mIsSorted)) {
+      mPagedView.snapToPageImmediately(0);
+    }
   }
   Animator openFolderAnim=null;
   final Runnable onCompleteRunnable;

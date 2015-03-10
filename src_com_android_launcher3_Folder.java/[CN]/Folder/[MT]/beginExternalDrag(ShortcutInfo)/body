@@ -1,6 +1,11 @@
 {
   mCurrentDragInfo=item;
-  mEmptyCellRank=mContent.allocateNewLastItemRank();
+  mEmptyCellRank=mContent.allocateRankForNewItem(item);
   mIsExternalDrag=true;
   mDragInProgress=true;
+  if (ALLOW_FOLDER_SCROLL && mPagedView.mIsSorted) {
+    mScrollPauseAlarm.setOnAlarmListener(null);
+    mScrollPauseAlarm.cancelAlarm();
+    mScrollPauseAlarm.setAlarm(SORTED_STICKY_REORDER_DELAY);
+  }
 }

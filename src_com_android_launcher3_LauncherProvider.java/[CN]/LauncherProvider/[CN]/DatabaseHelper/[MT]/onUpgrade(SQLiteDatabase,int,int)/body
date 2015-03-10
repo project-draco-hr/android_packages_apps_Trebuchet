@@ -39,17 +39,8 @@ case 14:
 }
 case 15:
 {
-db.beginTransaction();
-try {
-  db.execSQL("ALTER TABLE favorites " + "ADD COLUMN restored INTEGER NOT NULL DEFAULT 0;");
-  db.setTransactionSuccessful();
-}
- catch (SQLException ex) {
-  Log.e(TAG,ex.getMessage(),ex);
+if (!addIntegerColumn(db,Favorites.RESTORED,0)) {
   break;
-}
- finally {
-  db.endTransaction();
 }
 }
 case 16:
@@ -78,6 +69,12 @@ if (!recreateWorkspaceTable(db)) {
 break;
 }
 case 22:
+{
+if (!addIntegerColumn(db,Favorites.OPTIONS,0)) {
+break;
+}
+}
+case 23:
 {
 return;
 }

@@ -1,0 +1,19 @@
+{
+  int rank=getItemCount();
+  ArrayList<View> views=new ArrayList<View>(mFolder.getItemsInReadingOrder());
+  if (mIsSorted) {
+    View tmp=new View(getContext());
+    tmp.setTag(info);
+    int index=Collections.binarySearch(views,tmp,new ViewComparator());
+    if (index < 0) {
+      rank=-index - 1;
+    }
+ else {
+      rank=index;
+    }
+  }
+  views.add(rank,null);
+  arrangeChildren(views,views.size(),false);
+  setCurrentPage(rank / mMaxItemsPerPage);
+  return rank;
+}

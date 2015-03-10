@@ -1,7 +1,0 @@
-{
-  int rank=getItemCount();
-  int total=rank + 1;
-  mFolder.rearrangeChildren(total);
-  setCurrentPage(getChildCount() - 1);
-  return rank;
-}
