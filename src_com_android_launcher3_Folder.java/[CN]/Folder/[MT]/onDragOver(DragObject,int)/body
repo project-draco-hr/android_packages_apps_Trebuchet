@@ -1,0 +1,54 @@
+{
+  if (ALLOW_FOLDER_SCROLL && mScrollPauseAlarm.alarmPending()) {
+    return;
+  }
+  final float[] r=new float[2];
+  mTargetRank=getTargetRank(d,r);
+  if (mTargetRank != mPrevTargetRank) {
+    mReorderAlarm.cancelAlarm();
+    mReorderAlarm.setOnAlarmListener(mReorderAlarmListener);
+    mReorderAlarm.setAlarm(REORDER_DELAY);
+    mPrevTargetRank=mTargetRank;
+  }
+  if (!ALLOW_FOLDER_SCROLL) {
+    return;
+  }
+  float x=r[0];
+  int currentPage=mPagedView.getNextPage();
+  int cellWidth=mPagedView.getCurrentCellLayout().getCellWidth();
+  if (currentPage > 0 && x < cellWidth * ICON_OVERSCROLL_WIDTH_FACTOR) {
+    if (mScrollHintDir != DragController.SCROLL_LEFT) {
+      mPagedView.showScrollHint(-SCROLL_HINT_FRACTION);
+      mScrollHintDir=DragController.SCROLL_LEFT;
+    }
+    if (!mOnScrollHintAlarm.alarmPending() || mCurrentScrollDir != DragController.SCROLL_LEFT) {
+      mCurrentScrollDir=DragController.SCROLL_LEFT;
+      mOnScrollHintAlarm.cancelAlarm();
+      mOnScrollHintAlarm.setOnAlarmListener(new OnScrollHintListener(d));
+      mOnScrollHintAlarm.setAlarm(SCROLL_HINT_DURATION);
+      mReorderAlarm.cancelAlarm();
+      mTargetRank=mEmptyCellRank;
+    }
+  }
+ else   if (currentPage < (mPagedView.getPageCount() - 1) && (x > (getWidth() - cellWidth * ICON_OVERSCROLL_WIDTH_FACTOR))) {
+    if (mScrollHintDir != DragController.SCROLL_RIGHT) {
+      mPagedView.showScrollHint(SCROLL_HINT_FRACTION);
+      mScrollHintDir=DragController.SCROLL_RIGHT;
+    }
+    if (!mOnScrollHintAlarm.alarmPending() || mCurrentScrollDir != DragController.SCROLL_RIGHT) {
+      mCurrentScrollDir=DragController.SCROLL_RIGHT;
+      mOnScrollHintAlarm.cancelAlarm();
+      mOnScrollHintAlarm.setOnAlarmListener(new OnScrollHintListener(d));
+      mOnScrollHintAlarm.setAlarm(SCROLL_HINT_DURATION);
+      mReorderAlarm.cancelAlarm();
+      mTargetRank=mEmptyCellRank;
+    }
+  }
+ else {
+    mOnScrollHintAlarm.cancelAlarm();
+    if (mScrollHintDir != DragController.SCROLL_NONE) {
+      mPagedView.clearScrollHint();
+      mScrollHintDir=DragController.SCROLL_NONE;
+    }
+  }
+}

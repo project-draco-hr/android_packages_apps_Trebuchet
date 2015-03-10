@@ -1,0 +1,9 @@
+{
+  if (!mPageChangingViews.isEmpty()) {
+    HashMap<View,Runnable> pendingViews=new HashMap<>(mPageChangingViews);
+    for (    Map.Entry<View,Runnable> e : pendingViews.entrySet()) {
+      e.getKey().animate().cancel();
+      e.getValue().run();
+    }
+  }
+}

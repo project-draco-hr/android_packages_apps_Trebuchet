@@ -4,4 +4,12 @@
     mOnExitAlarm.setAlarm(ON_EXIT_CLOSE_DELAY);
   }
   mReorderAlarm.cancelAlarm();
+  if (ALLOW_FOLDER_SCROLL) {
+    mOnScrollHintAlarm.cancelAlarm();
+    mScrollPauseAlarm.cancelAlarm();
+    if (mScrollHintDir != DragController.SCROLL_NONE) {
+      mPagedView.clearScrollHint();
+      mScrollHintDir=DragController.SCROLL_NONE;
+    }
+  }
 }

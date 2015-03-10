@@ -1,15 +1,7 @@
 {
   int rank=getItemCount();
   int total=rank + 1;
-  if (rank < mMaxItemsPerPage) {
-    mFolder.rearrangeChildren(total);
-  }
- else {
-    setupContentDimensions(total);
-  }
-  if (getPageAt(getChildCount() - 1).getShortcutsAndWidgets().getChildCount() >= mMaxItemsPerPage) {
-    createAndAddNewPage();
-  }
+  mFolder.rearrangeChildren(total);
   setCurrentPage(getChildCount() - 1);
   return rank;
 }

@@ -1,12 +1,3 @@
 {
-  final float[] r=d.getVisualCenter(null);
-  r[0]-=getPaddingLeft();
-  r[1]-=getPaddingTop();
-  mTargetRank=mContent.findNearestArea((int)r[0],(int)r[1]);
-  if (mTargetRank != mPrevTargetRank) {
-    mReorderAlarm.cancelAlarm();
-    mReorderAlarm.setOnAlarmListener(mReorderAlarmListener);
-    mReorderAlarm.setAlarm(REORDER_DELAY);
-    mPrevTargetRank=mTargetRank;
-  }
+  onDragOver(d,REORDER_DELAY);
 }

@@ -1,6 +1,7 @@
 {
+  completePendingPageChanges();
   int delay=0;
-  float delayAmount=30;
+  float delayAmount=START_VIEW_REORDER_DELAY;
   int pageToAnimate=getNextPage();
   int pageT=target / mMaxItemsPerPage;
   int pagePosT=target % mMaxItemsPerPage;
@@ -84,7 +85,7 @@
     }
     if (page.animateChildToPosition(v,i % mGridCountX,i / mGridCountX,REORDER_ANIMATION_DURATION,delay,true,true)) {
       delay+=delayAmount;
-      delayAmount*=0.9;
+      delayAmount*=VIEW_REORDER_DELAY_FACTOR;
     }
   }
 }
