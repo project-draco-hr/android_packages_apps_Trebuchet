@@ -1,0 +1,6 @@
+{
+  if (mApps.getApps().get(position) == AlphabeticalAppsList.SECTION_BREAK_INFO) {
+    return SECTION_BREAK_VIEW_TYPE;
+  }
+  return ICON_VIEW_TYPE;
+}

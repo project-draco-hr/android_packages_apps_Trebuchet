@@ -3,14 +3,20 @@
   LauncherAppState app=LauncherAppState.getInstance();
   DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
   mLauncher=(Launcher)context;
+  mApps=new AlphabeticalAppsList(context);
   if (USE_LAYOUT == GRID_LAYOUT) {
-    mAppRowsAlgorithm=new SectionedAppsAlgorithm();
-    mAppsRowSize=grid.allAppsRowsSize;
+    mNumAppsPerRow=grid.appsViewNumCols;
+    AppsGridAdapter adapter=new AppsGridAdapter(context,mApps,mNumAppsPerRow,this,mLauncher,this);
+    mLayoutManager=adapter.getLayoutManager(context);
+    mItemDecoration=adapter.getItemDecoration();
+    mAdapter=adapter;
+    mContentMarginStart=adapter.getContentMarginStart();
   }
  else   if (USE_LAYOUT == LIST_LAYOUT) {
-    mAppRowsAlgorithm=new ListedAppsAlgorithm();
-    mAppsRowSize=1;
+    mNumAppsPerRow=1;
+    AppsListAdapter adapter=new AppsListAdapter(context,mApps,this,mLauncher,this);
+    mLayoutManager=adapter.getLayoutManager(context);
+    mAdapter=adapter;
   }
-  mAdapter=new AppsListAdapter(context,this,mLauncher,this);
-  mApps=new AlphabeticalAppList(this);
+  mApps.setAdapter(mAdapter);
 }

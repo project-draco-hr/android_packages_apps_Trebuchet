@@ -1,0 +1,22 @@
+{
+  AppInfo info=mApps.getApps().get(position);
+  if (info != AlphabeticalAppsList.SECTION_BREAK_INFO) {
+    ViewGroup content=(ViewGroup)holder.mContent;
+    String sectionDescription=mApps.getSectionNameForApp(info);
+    boolean showSectionHeader=true;
+    if (position > 0) {
+      AppInfo prevInfo=mApps.getApps().get(position - 1);
+      showSectionHeader=(prevInfo == AlphabeticalAppsList.SECTION_BREAK_INFO);
+    }
+    TextView tv=(TextView)content.findViewById(R.id.section);
+    if (showSectionHeader) {
+      tv.setText(sectionDescription);
+      tv.setVisibility(View.VISIBLE);
+    }
+ else {
+      tv.setVisibility(View.INVISIBLE);
+    }
+    BubbleTextView icon=(BubbleTextView)content.getChildAt(1);
+    icon.applyFromApplicationInfo(info);
+  }
+}

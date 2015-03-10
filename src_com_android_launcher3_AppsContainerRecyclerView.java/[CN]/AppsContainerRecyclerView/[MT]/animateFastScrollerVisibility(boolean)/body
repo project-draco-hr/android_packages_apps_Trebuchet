@@ -1,0 +1,5 @@
+{
+  ObjectAnimator anim=ObjectAnimator.ofFloat(this,"fastScrollerAlpha",visible ? 1f : 0f);
+  anim.setDuration(visible ? 200 : 150);
+  anim.start();
+}

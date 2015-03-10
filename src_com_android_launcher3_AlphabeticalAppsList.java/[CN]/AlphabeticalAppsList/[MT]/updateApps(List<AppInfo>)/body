@@ -1,0 +1,13 @@
+{
+  for (  AppInfo info : apps) {
+    int index=mApps.indexOf(info);
+    if (index != -1) {
+      mApps.set(index,info);
+      onAppsUpdated();
+      mAdapter.notifyItemChanged(index);
+    }
+ else {
+      addApp(info);
+    }
+  }
+}

@@ -8,6 +8,7 @@
   mIconSize=a.getDimensionPixelSize(R.styleable.BubbleTextView_iconSizeOverride,grid.allAppsIconSizePx);
   mIconPaddingSize=a.getDimensionPixelSize(R.styleable.BubbleTextView_iconPaddingOverride,grid.iconDrawablePaddingPx);
   mTextSize=a.getDimensionPixelSize(R.styleable.BubbleTextView_textSizeOverride,grid.allAppsIconTextSizePx);
+  mDeferShadowGenerationOnTouch=a.getBoolean(R.styleable.BubbleTextView_deferShadowGeneration,false);
   a.recycle();
   if (mCustomShadowsEnabled) {
     mBackground=getBackground();

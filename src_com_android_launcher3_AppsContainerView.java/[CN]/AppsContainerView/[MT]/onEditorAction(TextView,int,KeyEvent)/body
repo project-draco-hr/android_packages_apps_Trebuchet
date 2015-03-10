@@ -1,0 +1,14 @@
+{
+  if (ALLOW_SINGLE_APP_LAUNCH && actionId == EditorInfo.IME_ACTION_DONE) {
+    List<AppInfo> appsWithoutSections=mApps.getAppsWithoutSectionBreaks();
+    List<AppInfo> apps=mApps.getApps();
+    if (appsWithoutSections.size() == 1) {
+      mSearchBar.clearFocus();
+      mAppsListView.getChildAt(apps.indexOf(appsWithoutSections.get(0))).performClick();
+      InputMethodManager imm=(InputMethodManager)getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+      imm.hideSoftInputFromWindow(getWindowToken(),0);
+    }
+    return true;
+  }
+  return false;
+}

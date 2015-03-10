@@ -1,0 +1,17 @@
+{
+  Comparator<AppInfo> appNameComparator=LauncherModel.getAppNameComparator();
+  int index=Collections.binarySearch(mApps,info,appNameComparator);
+  if (index < 0) {
+    mApps.add(-(index + 1),info);
+    onAppsUpdated();
+    int sectionedIndex=mSectionedFilteredApps.indexOf(info);
+    int numAppsInSection=numAppsInSection(info);
+    if (numAppsInSection == 1) {
+      mAdapter.notifyItemInserted(sectionedIndex - 1);
+      mAdapter.notifyItemInserted(sectionedIndex - 1);
+    }
+ else {
+      mAdapter.notifyItemInserted(sectionedIndex);
+    }
+  }
+}

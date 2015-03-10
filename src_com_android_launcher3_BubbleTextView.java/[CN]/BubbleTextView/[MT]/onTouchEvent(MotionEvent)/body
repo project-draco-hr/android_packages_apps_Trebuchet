@@ -2,7 +2,7 @@
   boolean result=super.onTouchEvent(event);
 switch (event.getAction()) {
 case MotionEvent.ACTION_DOWN:
-    if (mPressedBackground == null) {
+    if (!mDeferShadowGenerationOnTouch && mPressedBackground == null) {
       mPressedBackground=mOutlineHelper.createMediumDropShadow(this);
     }
   mLongPressHelper.postCheckForLongPress();

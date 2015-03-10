@@ -1,0 +1,7 @@
+{
+  Collections.sort(apps,LauncherModel.getAppNameComparator());
+  mApps.clear();
+  mApps.addAll(apps);
+  onAppsUpdated();
+  mAdapter.notifyDataSetChanged();
+}
