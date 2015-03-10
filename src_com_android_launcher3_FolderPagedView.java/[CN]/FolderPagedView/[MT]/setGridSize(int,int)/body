@@ -1,8 +1,0 @@
-{
-  mGridCountX=countX;
-  mGridCountY=countY;
-  mFirstPage.setGridSize(mGridCountX,mGridCountY);
-  for (int i=getPageCount() - 1; i > 0; i--) {
-    getPageAt(i).setGridSize(mGridCountX,mGridCountY);
-  }
-}

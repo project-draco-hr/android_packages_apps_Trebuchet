@@ -8,7 +8,7 @@
     setupContentDimensions(total);
   }
   if (getPageAt(getChildCount() - 1).getShortcutsAndWidgets().getChildCount() >= mMaxItemsPerPage) {
-    addFullScreenPage(newCellLayout());
+    createAndAddNewPage();
   }
   setCurrentPage(getChildCount() - 1);
   return rank;

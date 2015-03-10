@@ -1,5 +1,5 @@
 {
-  int pageNo=updateItemXY(item,rank);
-  CellLayout page=getPageAt(pageNo);
-  return addNewView(item,page);
+  View icon=createNewView(item);
+  addViewForRank(createNewView(item),item,rank);
+  return icon;
 }
