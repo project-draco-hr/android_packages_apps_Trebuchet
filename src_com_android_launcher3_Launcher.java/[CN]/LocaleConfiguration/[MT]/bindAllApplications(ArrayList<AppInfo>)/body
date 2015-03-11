@@ -7,13 +7,13 @@
       mIntentsOnWorkspaceFromUpgradePath=null;
     }
     if (mAppsCustomizeContent != null) {
-      mAppsCustomizeContent.onPackagesUpdated(LauncherModel.getSortedWidgetsAndShortcuts(this));
+      mAppsCustomizeContent.onPackagesUpdated(LauncherModel.getSortedWidgetsAndShortcuts(this,false));
     }
   }
  else {
     if (mAppsCustomizeContent != null) {
       mAppsCustomizeContent.setApps(apps);
-      mAppsCustomizeContent.onPackagesUpdated(LauncherModel.getSortedWidgetsAndShortcuts(this));
+      mAppsCustomizeContent.onPackagesUpdated(LauncherModel.getSortedWidgetsAndShortcuts(this,false));
     }
   }
   if (mLauncherCallbacks != null) {

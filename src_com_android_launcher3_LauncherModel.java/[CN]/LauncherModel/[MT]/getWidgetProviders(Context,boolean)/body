@@ -1,6 +1,6 @@
 {
 synchronized (sBgLock) {
-    if (sBgWidgetProviders != null && !sWidgetProvidersDirty) {
+    if (sBgWidgetProviders != null && !refresh) {
       return new ArrayList<LauncherAppWidgetProviderInfo>(sBgWidgetProviders.values());
     }
     sBgWidgetProviders=new HashMap<ComponentName,LauncherAppWidgetProviderInfo>();
@@ -15,7 +15,6 @@ synchronized (sBgLock) {
       info=new LauncherAppWidgetProviderInfo(context,widget);
       sBgWidgetProviders.put(info.provider,info);
     }
-    sWidgetProvidersDirty=false;
     return new ArrayList<LauncherAppWidgetProviderInfo>(sBgWidgetProviders.values());
   }
 }
