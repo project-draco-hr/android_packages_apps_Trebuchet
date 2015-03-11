@@ -1,7 +1,7 @@
 {
 synchronized (sBgLock) {
     if (sBgWidgetProviders == null) {
-      getWidgetProviders(ctx);
+      getWidgetProviders(ctx,false);
     }
     return sBgWidgetProviders.get(name);
   }

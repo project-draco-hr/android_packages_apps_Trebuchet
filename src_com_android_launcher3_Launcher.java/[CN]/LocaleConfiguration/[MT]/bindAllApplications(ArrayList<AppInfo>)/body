@@ -3,7 +3,7 @@
     mAppsView.setApps(apps);
   }
   if (mAppsCustomizeContent != null) {
-    mAppsCustomizeContent.onPackagesUpdated(LauncherModel.getSortedWidgetsAndShortcuts(this));
+    mAppsCustomizeContent.onPackagesUpdated(LauncherModel.getSortedWidgetsAndShortcuts(this,false));
   }
   if (mLauncherCallbacks != null) {
     mLauncherCallbacks.bindAllApplications(apps);
