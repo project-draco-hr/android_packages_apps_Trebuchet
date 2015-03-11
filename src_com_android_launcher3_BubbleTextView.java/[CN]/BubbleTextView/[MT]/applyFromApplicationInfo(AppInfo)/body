@@ -5,4 +5,5 @@
     setContentDescription(info.contentDescription);
   }
   super.setTag(info);
+  verifyHighRes();
 }

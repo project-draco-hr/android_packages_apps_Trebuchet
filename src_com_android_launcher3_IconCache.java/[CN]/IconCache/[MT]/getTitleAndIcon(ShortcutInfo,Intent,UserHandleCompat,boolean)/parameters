@@ -1,0 +1,4 @@
+ShortcutInfo shortcutInfo
+Intent intent
+UserHandleCompat user
+boolean useLowResIcon

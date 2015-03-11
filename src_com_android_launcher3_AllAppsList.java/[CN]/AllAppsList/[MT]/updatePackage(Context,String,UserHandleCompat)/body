@@ -18,7 +18,7 @@
         add(new AppInfo(context,info,user,mIconCache));
       }
  else {
-        mIconCache.getTitleAndIcon(applicationInfo,info);
+        mIconCache.getTitleAndIcon(applicationInfo,info,true);
         modified.add(applicationInfo);
       }
     }

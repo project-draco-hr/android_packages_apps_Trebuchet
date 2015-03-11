@@ -1,0 +1,18 @@
+{
+  if (mIconLoadRequest != null) {
+    mIconLoadRequest.cancel();
+    mIconLoadRequest=null;
+  }
+  if (getTag() instanceof AppInfo) {
+    AppInfo info=(AppInfo)getTag();
+    if (info.usingLowResIcon) {
+      mIconLoadRequest=LauncherAppState.getInstance().getIconCache().updateIconInBackground(BubbleTextView.this,info);
+    }
+  }
+ else   if (getTag() instanceof ShortcutInfo) {
+    ShortcutInfo info=(ShortcutInfo)getTag();
+    if (info.usingLowResIcon) {
+      mIconLoadRequest=LauncherAppState.getInstance().getIconCache().updateIconInBackground(BubbleTextView.this,info);
+    }
+  }
+}

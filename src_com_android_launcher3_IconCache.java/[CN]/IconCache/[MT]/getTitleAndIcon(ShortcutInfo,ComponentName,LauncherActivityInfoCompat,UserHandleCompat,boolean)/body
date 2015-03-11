@@ -1,6 +1,0 @@
-{
-  CacheEntry entry=cacheLocked(component,info,user,usePkgIcon);
-  shortcutInfo.setIcon(entry.icon);
-  shortcutInfo.title=entry.title;
-  shortcutInfo.usingFallbackIcon=isDefaultIcon(entry.icon,user);
-}

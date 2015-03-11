@@ -6,10 +6,8 @@
   }
  catch (  PackageManager.NameNotFoundException e) {
   }
-  ContentValues values=new ContentValues();
+  ContentValues values=mIconDb.newContentValues(icon,label);
   values.put(IconDB.COLUMN_COMPONENT,componentName.flattenToString());
   values.put(IconDB.COLUMN_USER,userSerial);
-  values.put(IconDB.COLUMN_ICON,ItemInfo.flattenBitmap(icon));
-  values.put(IconDB.COLUMN_LABEL,label);
   mIconDb.getWritableDatabase().insertWithOnConflict(IconDB.TABLE_NAME,null,values,SQLiteDatabase.CONFLICT_REPLACE);
 }

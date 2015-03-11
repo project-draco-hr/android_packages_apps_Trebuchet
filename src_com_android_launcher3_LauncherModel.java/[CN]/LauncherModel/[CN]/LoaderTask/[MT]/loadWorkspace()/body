@@ -174,9 +174,11 @@ restored=false;
 Launcher.addDumpLog(TAG,"Invalid uri: " + intentDescription,true);
 continue;
 }
+container=c.getInt(containerIndex);
+boolean useLowResIcon=container >= 0 && c.getInt(rankIndex) >= FolderIcon.NUM_ITEMS_IN_PREVIEW;
 if (itemReplaced) {
 if (user.equals(UserHandleCompat.myUserHandle())) {
-info=getAppShortcutInfo(manager,intent,user,context,null,iconIndex,titleIndex,false);
+info=getAppShortcutInfo(manager,intent,user,context,null,iconIndex,titleIndex,false,useLowResIcon);
 }
  else {
 itemsToRemove.add(id);
@@ -186,7 +188,7 @@ continue;
  else if (restored) {
 if (user.equals(UserHandleCompat.myUserHandle())) {
 Launcher.addDumpLog(TAG,"constructing info for partially restored package",true);
-info=getRestoredItemInfo(c,titleIndex,intent,promiseType);
+info=getRestoredItemInfo(c,titleIndex,intent,promiseType,useLowResIcon);
 intent=getRestoredItemIntent(c,context,intent);
 }
  else {
@@ -195,7 +197,7 @@ continue;
 }
 }
  else if (itemType == LauncherSettings.Favorites.ITEM_TYPE_APPLICATION) {
-info=getAppShortcutInfo(manager,intent,user,context,c,iconIndex,titleIndex,allowMissingTarget);
+info=getAppShortcutInfo(manager,intent,user,context,c,iconIndex,titleIndex,allowMissingTarget,useLowResIcon);
 }
  else {
 info=getShortcutInfo(c,context,iconTypeIndex,iconPackageIndex,iconResourceIndex,iconIndex,titleIndex);
@@ -206,7 +208,6 @@ intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_
 if (info != null) {
 info.id=id;
 info.intent=intent;
-container=c.getInt(containerIndex);
 info.container=container;
 info.screenId=c.getInt(screenIndex);
 info.cellX=c.getInt(cellXIndex);

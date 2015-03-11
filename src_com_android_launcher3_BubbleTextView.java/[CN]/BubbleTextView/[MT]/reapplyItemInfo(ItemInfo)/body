@@ -1,0 +1,11 @@
+{
+  if (getTag() == info) {
+    mIconLoadRequest=null;
+    if (info instanceof AppInfo) {
+      applyFromApplicationInfo((AppInfo)info);
+    }
+ else     if (info instanceof ShortcutInfo) {
+      applyFromShortcutInfo((ShortcutInfo)info,LauncherAppState.getInstance().getIconCache(),false);
+    }
+  }
+}

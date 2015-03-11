@@ -1,0 +1,9 @@
+{
+  byte[] data=c.getBlob(iconIndex);
+  try {
+    return BitmapFactory.decodeByteArray(data,0,data.length);
+  }
+ catch (  Exception e) {
+    return null;
+  }
+}
