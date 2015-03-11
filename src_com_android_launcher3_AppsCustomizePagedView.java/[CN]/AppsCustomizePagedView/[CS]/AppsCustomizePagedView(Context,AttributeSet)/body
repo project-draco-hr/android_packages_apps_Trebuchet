@@ -2,10 +2,9 @@
   super(context,attrs);
   mLayoutInflater=LayoutInflater.from(context);
   mPackageManager=context.getPackageManager();
-  mApps=new ArrayList<AppInfo>();
-  mWidgets=new ArrayList<Object>();
+  mWidgets=new ArrayList<>();
   mIconCache=(LauncherAppState.getInstance()).getIconCache();
-  mRunningTasks=new ArrayList<AppsCustomizeAsyncTask>();
+  mRunningTasks=new ArrayList<>();
   TypedArray a=context.obtainStyledAttributes(attrs,R.styleable.AppsCustomizePagedView,0,0);
   mWidgetCountX=a.getInt(R.styleable.AppsCustomizePagedView_widgetCountX,2);
   mWidgetCountY=a.getInt(R.styleable.AppsCustomizePagedView_widgetCountY,2);

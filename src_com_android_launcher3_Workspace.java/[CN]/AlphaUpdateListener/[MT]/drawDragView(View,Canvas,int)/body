@@ -4,7 +4,7 @@
   boolean textVisible=false;
   destCanvas.save();
   if (v instanceof TextView) {
-    Drawable d=((TextView)v).getCompoundDrawables()[1];
+    Drawable d=getTextViewIcon((TextView)v);
     Rect bounds=getDrawableBounds(d);
     clipRect.set(0,0,bounds.width() + padding,bounds.height() + padding);
     destCanvas.translate(padding / 2 - bounds.left,padding / 2 - bounds.top);

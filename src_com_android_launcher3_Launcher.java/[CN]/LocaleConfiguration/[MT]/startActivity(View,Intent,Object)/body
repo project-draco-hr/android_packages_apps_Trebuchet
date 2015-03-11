@@ -16,12 +16,11 @@
         int left=0, top=0;
         int width=v.getMeasuredWidth(), height=v.getMeasuredHeight();
         if (v instanceof TextView) {
-          TextView tv=(TextView)v;
-          Drawable[] drawables=tv.getCompoundDrawables();
-          if (drawables != null && drawables[1] != null) {
-            Rect bounds=drawables[1].getBounds();
+          Drawable icon=Workspace.getTextViewIcon((TextView)v);
+          if (icon != null) {
+            Rect bounds=icon.getBounds();
             left=(width - bounds.width()) / 2;
-            top=tv.getPaddingTop();
+            top=v.getPaddingTop();
             width=bounds.width();
             height=bounds.height();
           }

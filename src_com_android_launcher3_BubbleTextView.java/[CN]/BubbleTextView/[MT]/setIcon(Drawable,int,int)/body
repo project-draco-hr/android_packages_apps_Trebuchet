@@ -1,0 +1,16 @@
+{
+  mIcon=icon;
+  if (iconSize != -1) {
+    mIcon.setBounds(0,0,iconSize,iconSize);
+  }
+  if (mLayoutHorizontal) {
+    setCompoundDrawablesRelative(mIcon,null,null,null);
+  }
+ else {
+    setCompoundDrawablesRelative(null,mIcon,null,null);
+  }
+  if (drawablePadding != -1) {
+    setCompoundDrawablePadding(drawablePadding);
+  }
+  return icon;
+}

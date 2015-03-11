@@ -5,8 +5,7 @@
   int bmpWidth=v.getMeasuredWidth();
   int bmpHeight=v.getMeasuredHeight();
   if (v instanceof TextView) {
-    TextView tv=(TextView)v;
-    Drawable d=tv.getCompoundDrawables()[1];
+    Drawable d=getTextViewIcon((TextView)v);
     Rect bounds=getDrawableBounds(d);
     bmpWidth=bounds.width();
     bmpHeight=bounds.height();

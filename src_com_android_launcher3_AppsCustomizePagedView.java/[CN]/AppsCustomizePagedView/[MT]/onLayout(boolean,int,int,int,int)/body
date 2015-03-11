@@ -1,7 +1,7 @@
 {
   super.onLayout(changed,l,t,r,b);
   if (!isDataReady()) {
-    if ((!mApps.isEmpty()) && !mWidgets.isEmpty()) {
+    if (!mWidgets.isEmpty()) {
       post(new Runnable(){
         public void run(){
           if (Utilities.isViewAttachedToWindow(AppsCustomizePagedView.this)) {

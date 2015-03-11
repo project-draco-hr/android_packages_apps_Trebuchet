@@ -1,0 +1,12 @@
+{
+  if (resetPageToZero) {
+    mAppsCustomizeTabHost.reset();
+  }
+  showAppsOrWidgets(animated,State.WIDGETS);
+  mAppsCustomizeTabHost.post(new Runnable(){
+    @Override public void run(){
+      mAppsCustomizeTabHost.requestFocus();
+    }
+  }
+);
+}

@@ -1,5 +1,5 @@
 {
-  if (!mLauncher.isAllAppsVisible() || mLauncher.getWorkspace().isSwitchingState() || !(v instanceof PagedViewWidget))   return;
+  if (!mLauncher.isWidgetsViewVisible() || mLauncher.getWorkspace().isSwitchingState() || !(v instanceof PagedViewWidget))   return;
   if (mWidgetInstructionToast != null) {
     mWidgetInstructionToast.cancel();
   }

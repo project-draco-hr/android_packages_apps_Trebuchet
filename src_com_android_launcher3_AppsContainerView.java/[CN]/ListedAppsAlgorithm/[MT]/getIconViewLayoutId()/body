@@ -1,0 +1,3 @@
+{
+  return R.layout.apps_list_row_icon_view;
+}

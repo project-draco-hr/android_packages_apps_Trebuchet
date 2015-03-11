@@ -1,0 +1,19 @@
+{
+  List<SectionedWidgetsRow> rows=new ArrayList<>();
+  LinkedHashMap<String,List<Object>> sections=computeSectionedApps(sortedWidgets);
+  for (  Map.Entry<String,List<Object>> sectionEntry : sections.entrySet()) {
+    String section=sectionEntry.getKey();
+    SectionedWidgetsRow row=new SectionedWidgetsRow(section);
+    List<Object> widgets=sectionEntry.getValue();
+    int numRows=(int)Math.ceil((float)widgets.size() / widgetsPerRow);
+    for (int i=0; i < numRows; i++) {
+      List<Object> widgetsInRow=new ArrayList<>();
+      int offset=i * widgetsPerRow;
+      for (int j=0; j < widgetsPerRow; j++) {
+        widgetsInRow.add(widgets.get(offset + j));
+      }
+      row.widgets.add(widgetsInRow);
+    }
+  }
+  return rows;
+}

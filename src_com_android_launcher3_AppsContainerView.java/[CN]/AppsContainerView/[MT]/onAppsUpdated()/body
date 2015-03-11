@@ -1,0 +1,4 @@
+{
+  List<AppsRow> rows=mAppRowsAlgorithm.computeAppRows(mApps.getApps(),mAppsRowSize);
+  mAdapter.setApps(rows,mAppsRowSize,mAppRowsAlgorithm);
+}

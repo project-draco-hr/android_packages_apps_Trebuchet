@@ -56,6 +56,7 @@
   mWorkspace.setup(dragController);
   dragController.addDragListener(mWorkspace);
   mSearchDropTargetBar=(SearchDropTargetBar)mDragLayer.findViewById(R.id.search_drop_target_bar);
+  mAppsView=(AppsContainerView)findViewById(R.id.apps_view);
   mAppsCustomizeTabHost=(AppsCustomizeTabHost)findViewById(R.id.apps_customize_pane);
   mAppsCustomizeContent=(AppsCustomizePagedView)mAppsCustomizeTabHost.findViewById(R.id.apps_customize_pane_content);
   mAppsCustomizeContent.setup(this,dragController);

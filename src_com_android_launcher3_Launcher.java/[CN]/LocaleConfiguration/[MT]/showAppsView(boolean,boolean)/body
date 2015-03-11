@@ -1,0 +1,6 @@
+{
+  if (resetListToTop) {
+    mAppsView.scrollToTop();
+  }
+  showAppsOrWidgets(animated,State.APPS);
+}

@@ -1,5 +1,5 @@
 {
-  if (!mLauncher.isAllAppsVisible()) {
+  if (!mLauncher.isAppsViewVisible()) {
     final Folder openFolder=getOpenFolder();
     if (openFolder != null) {
       openFolder.addFocusables(views,direction);

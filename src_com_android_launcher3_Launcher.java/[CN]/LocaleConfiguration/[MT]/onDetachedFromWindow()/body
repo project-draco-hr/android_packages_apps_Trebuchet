@@ -5,5 +5,5 @@
     unregisterReceiver(mReceiver);
     mAttached=false;
   }
-  updateRunning();
+  updateAutoAdvanceState();
 }

@@ -1,0 +1,3 @@
+List<AppsRow> apps
+int appsPerRow
+AppRowAlgorithm algo

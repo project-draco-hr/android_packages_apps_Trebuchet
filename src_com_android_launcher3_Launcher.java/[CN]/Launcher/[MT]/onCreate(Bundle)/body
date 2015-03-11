@@ -18,6 +18,7 @@
   mIconCache.flushInvalidIcons(grid);
   mDragController=new DragController(this);
   mInflater=getLayoutInflater();
+  mStateTransitionAnimation=new LauncherStateTransitionAnimation(this,this);
   mStats=new Stats(this);
   mAppWidgetManager=AppWidgetManagerCompat.getInstance(this);
   mAppWidgetHost=new LauncherAppWidgetHost(this,APPWIDGET_HOST_ID);

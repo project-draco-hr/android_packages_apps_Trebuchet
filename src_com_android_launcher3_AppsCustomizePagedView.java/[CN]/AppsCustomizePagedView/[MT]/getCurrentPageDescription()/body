@@ -2,11 +2,7 @@
   int page=(mNextPage != INVALID_PAGE) ? mNextPage : mCurrentPage;
   int stringId=R.string.default_scroll_format;
   int count=0;
-  if (mContentType == ContentType.Applications) {
-    stringId=R.string.apps_customize_apps_scroll_format;
-    count=mNumAppsPages;
-  }
- else   if (mContentType == ContentType.Widgets) {
+  if (mContentType == ContentType.Widgets) {
     stringId=R.string.apps_customize_widgets_scroll_format;
     count=mNumWidgetPages;
   }

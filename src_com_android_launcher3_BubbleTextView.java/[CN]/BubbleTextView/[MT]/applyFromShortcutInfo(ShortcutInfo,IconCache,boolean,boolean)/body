@@ -1,13 +1,8 @@
 {
   Bitmap b=info.getIcon(iconCache);
-  LauncherAppState app=LauncherAppState.getInstance();
   FastBitmapDrawable iconDrawable=Utilities.createIconDrawable(b);
   iconDrawable.setGhostModeEnabled(info.isDisabled != 0);
-  setCompoundDrawables(null,iconDrawable,null,null);
-  if (setDefaultPadding) {
-    DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
-    setCompoundDrawablePadding(grid.iconDrawablePaddingPx);
-  }
+  setIcon(iconDrawable,mIconSize,setDefaultPadding ? mIconPaddingSize : -1);
   if (info.contentDescription != null) {
     setContentDescription(info.contentDescription);
   }

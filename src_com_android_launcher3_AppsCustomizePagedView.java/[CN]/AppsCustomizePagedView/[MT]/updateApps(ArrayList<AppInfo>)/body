@@ -1,5 +1,0 @@
-{
-  removeAppsWithoutInvalidate(list);
-  addAppsWithoutInvalidate(list);
-  updatePageCountsAndInvalidateData();
-}

@@ -1,0 +1,16 @@
+{
+  super(context,attrs,defStyleAttr,defStyleRes);
+  LauncherAppState app=LauncherAppState.getInstance();
+  DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
+  mLauncher=(Launcher)context;
+  if (USE_LAYOUT == GRID_LAYOUT) {
+    mAppRowsAlgorithm=new SectionedAppsAlgorithm();
+    mAppsRowSize=grid.allAppsRowsSize;
+  }
+ else   if (USE_LAYOUT == LIST_LAYOUT) {
+    mAppRowsAlgorithm=new ListedAppsAlgorithm();
+    mAppsRowSize=1;
+  }
+  mAdapter=new AppsListAdapter(context,this,mLauncher,this);
+  mApps=new AlphabeticalAppList(this);
+}

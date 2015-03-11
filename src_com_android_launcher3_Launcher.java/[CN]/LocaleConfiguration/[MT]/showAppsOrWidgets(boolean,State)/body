@@ -1,0 +1,15 @@
+{
+  if (mState != State.WORKSPACE)   return;
+  if (toState != State.APPS && toState != State.WIDGETS)   return;
+  if (toState == State.APPS) {
+    mStateTransitionAnimation.startAnimationToAllApps(animated);
+  }
+ else {
+    mStateTransitionAnimation.startAnimationToWidgets(animated);
+  }
+  mState=toState;
+  mUserPresent=false;
+  updateAutoAdvanceState();
+  closeFolder();
+  getWindow().getDecorView().sendAccessibilityEvent(AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED);
+}

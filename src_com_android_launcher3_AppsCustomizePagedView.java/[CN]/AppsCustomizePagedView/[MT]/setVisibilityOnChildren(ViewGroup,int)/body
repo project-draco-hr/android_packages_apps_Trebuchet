@@ -1,6 +1,0 @@
-{
-  int childCount=layout.getChildCount();
-  for (int i=0; i < childCount; ++i) {
-    layout.getChildAt(i).setVisibility(visibility);
-  }
-}

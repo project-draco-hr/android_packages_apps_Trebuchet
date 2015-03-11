@@ -1,10 +1,10 @@
 {
   if (LOGD)   Log.d(TAG,"onClickAllAppsButton");
-  if (isAllAppsVisible()) {
+  if (isAppsViewVisible()) {
     showWorkspace(true);
   }
  else {
-    showAllApps(true,AppsCustomizePagedView.ContentType.Applications,false);
+    showAppsView(true,false);
   }
   if (mLauncherCallbacks != null) {
     mLauncherCallbacks.onClickAllAppsButton(v);

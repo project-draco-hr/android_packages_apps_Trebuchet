@@ -1,0 +1,20 @@
+{
+  final AppsCustomizeTabHost toView=mLauncher.getWidgetsView();
+  PrivateTransitionCallbacks cb=new PrivateTransitionCallbacks(){
+    @Override public void onRevealViewVisible(    View revealView,    View contentView,    View allAppsButtonView){
+      ((AppsCustomizePagedView)contentView).setPageBackgroundsVisible(false);
+      revealView.setBackground(mLauncher.getDrawable(R.drawable.quantum_panel_dark));
+    }
+    @Override public void onAnimationComplete(    View revealView,    View contentView,    View allAppsButtonView){
+      ((AppsCustomizePagedView)contentView).setPageBackgroundsVisible(true);
+    }
+    @Override public float getMaterialRevealViewFinalAlpha(    View revealView){
+      return 0.3f;
+    }
+    @Override public float getMaterialRevealViewFinalYDrift(    View revealView){
+      return revealView.getMeasuredHeight() / 2;
+    }
+  }
+;
+  startAnimationToOverlay(Workspace.State.OVERVIEW_HIDDEN,toView,toView.getContentView(),toView.getRevealView(),toView.getPageIndicators(),animated,cb);
+}

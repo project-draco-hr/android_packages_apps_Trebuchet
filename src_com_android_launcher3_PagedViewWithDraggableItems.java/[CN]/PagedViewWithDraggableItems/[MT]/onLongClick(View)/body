@@ -1,7 +1,7 @@
 {
   if (!v.isInTouchMode())   return false;
   if (mNextPage != INVALID_PAGE)   return false;
-  if (!mLauncher.isAllAppsVisible() || mLauncher.getWorkspace().isSwitchingState())   return false;
+  if (!mLauncher.isWidgetsViewVisible() || mLauncher.getWorkspace().isSwitchingState())   return false;
   if (!mLauncher.isDraggingEnabled())   return false;
   return beginDragging(v);
 }

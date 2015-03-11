@@ -1,11 +1,5 @@
 {
   if (index < 0)   return 0;
-  if (index < mApps.size()) {
-    int numItemsPerPage=mCellCountX * mCellCountY;
-    return (index / numItemsPerPage);
-  }
- else {
-    int numItemsPerPage=mWidgetCountX * mWidgetCountY;
-    return (index - mApps.size()) / numItemsPerPage;
-  }
+  int numItemsPerPage=mWidgetCountX * mWidgetCountY;
+  return index / numItemsPerPage;
 }

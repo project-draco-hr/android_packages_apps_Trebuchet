@@ -1,5 +1,5 @@
 {
-  if (mState != State.APPS_CUSTOMIZE_SPRING_LOADED)   return;
+  if (mState != State.APPS_SPRING_LOADED && mState != State.WIDGETS_SPRING_LOADED)   return;
   mHandler.postDelayed(new Runnable(){
     @Override public void run(){
       if (successfulDrop) {

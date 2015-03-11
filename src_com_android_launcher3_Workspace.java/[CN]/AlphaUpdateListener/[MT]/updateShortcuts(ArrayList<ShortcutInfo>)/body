@@ -5,7 +5,7 @@
       if (info instanceof ShortcutInfo && v instanceof BubbleTextView && updates.contains(info)) {
         ShortcutInfo si=(ShortcutInfo)info;
         BubbleTextView shortcut=(BubbleTextView)v;
-        boolean oldPromiseState=shortcut.getCompoundDrawables()[1] instanceof PreloadIconDrawable;
+        boolean oldPromiseState=getTextViewIcon(shortcut) instanceof PreloadIconDrawable;
         shortcut.applyFromShortcutInfo(si,mIconCache,true,si.isPromise() != oldPromiseState);
         if (parent != null) {
           parent.invalidate();
