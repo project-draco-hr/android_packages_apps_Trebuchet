@@ -1,0 +1,12 @@
+{
+  DeviceProfile grid=LauncherAppState.getInstance().getDynamicGrid().getDeviceProfile();
+  CellLayout page=new CellLayout(getContext());
+  page.setCellDimensions(grid.folderCellWidthPx,grid.folderCellHeightPx);
+  page.getShortcutsAndWidgets().setMotionEventSplittingEnabled(false);
+  page.setInvertIfRtl(true);
+  page.setGridSize(mGridCountX,mGridCountY);
+  LayoutParams lp=generateDefaultLayoutParams();
+  lp.isFullScreenPage=true;
+  addView(page,-1,lp);
+  return page;
+}

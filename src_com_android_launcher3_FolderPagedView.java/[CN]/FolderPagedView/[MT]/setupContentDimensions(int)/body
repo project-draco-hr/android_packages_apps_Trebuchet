@@ -7,8 +7,6 @@
     done=true;
   }
  else {
-    mGridCountX=mFirstPage.getCountX();
-    mGridCountY=mFirstPage.getCountY();
     done=false;
   }
   while (!done) {
@@ -31,5 +29,7 @@
     }
     done=mGridCountX == oldCountX && mGridCountY == oldCountY;
   }
-  setGridSize(mGridCountX,mGridCountY);
+  for (int i=getPageCount() - 1; i >= 0; i--) {
+    getPageAt(i).setGridSize(mGridCountX,mGridCountY);
+  }
 }

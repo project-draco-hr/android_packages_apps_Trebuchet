@@ -1,0 +1,3 @@
+ArrayList<View> list
+int itemCount
+boolean saveChanges
