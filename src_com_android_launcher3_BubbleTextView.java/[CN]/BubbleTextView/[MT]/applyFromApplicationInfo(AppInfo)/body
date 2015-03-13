@@ -4,5 +4,5 @@
   if (info.contentDescription != null) {
     setContentDescription(info.contentDescription);
   }
-  setTag(info);
+  super.setTag(info);
 }

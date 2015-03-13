@@ -1,14 +1,16 @@
 {
 switch (viewType) {
+case EMPTY_VIEW_TYPE:
+    return new ViewHolder(mLayoutInflater.inflate(R.layout.apps_empty_view,parent,false),false,true);
 case SECTION_BREAK_VIEW_TYPE:
-    return new ViewHolder(new View(parent.getContext()),true);
+  return new ViewHolder(new View(parent.getContext()),true,false);
 case ICON_VIEW_TYPE:
-  BubbleTextView icon=(BubbleTextView)mLayoutInflater.inflate(R.layout.apps_grid_row_icon_view,parent,false);
+BubbleTextView icon=(BubbleTextView)mLayoutInflater.inflate(R.layout.apps_grid_row_icon_view,parent,false);
 icon.setOnTouchListener(mTouchListener);
 icon.setOnClickListener(mIconClickListener);
 icon.setOnLongClickListener(mIconLongClickListener);
 icon.setFocusable(true);
-return new ViewHolder(icon,false);
+return new ViewHolder(icon,false,false);
 default :
 throw new RuntimeException("Unexpected view type");
 }

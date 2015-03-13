@@ -1,5 +1,8 @@
 {
-  if (mApps.getApps().get(position) == AlphabeticalAppsList.SECTION_BREAK_INFO) {
+  if (mApps.hasNoFilteredResults()) {
+    return EMPTY_VIEW_TYPE;
+  }
+ else   if (mApps.getApps().get(position) == AlphabeticalAppsList.SECTION_BREAK_INFO) {
     return SECTION_BREAK_VIEW_TYPE;
   }
   return ICON_VIEW_TYPE;

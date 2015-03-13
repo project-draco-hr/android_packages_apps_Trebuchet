@@ -1,5 +1,3 @@
 {
-  String title=info.title.toString();
-  String sectionName=mIndexer.getBucketLabel(mIndexer.getBucketIndex(title));
-  return sectionName;
+  return mIndexer.computeSectionName(info.title.toString().trim());
 }

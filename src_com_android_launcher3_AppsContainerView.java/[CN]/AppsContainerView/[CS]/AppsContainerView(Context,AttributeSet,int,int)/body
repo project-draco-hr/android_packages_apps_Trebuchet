@@ -2,11 +2,13 @@
   super(context,attrs,defStyleAttr,defStyleRes);
   LauncherAppState app=LauncherAppState.getInstance();
   DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
+  Resources res=context.getResources();
   mLauncher=(Launcher)context;
   mApps=new AlphabeticalAppsList(context);
   if (USE_LAYOUT == GRID_LAYOUT) {
     mNumAppsPerRow=grid.appsViewNumCols;
     AppsGridAdapter adapter=new AppsGridAdapter(context,mApps,mNumAppsPerRow,this,mLauncher,this);
+    adapter.setEmptySearchText(res.getString(R.string.loading_apps_message));
     mLayoutManager=adapter.getLayoutManager(context);
     mItemDecoration=adapter.getItemDecoration();
     mAdapter=adapter;
@@ -15,6 +17,7 @@
  else   if (USE_LAYOUT == LIST_LAYOUT) {
     mNumAppsPerRow=1;
     AppsListAdapter adapter=new AppsListAdapter(context,mApps,this,mLauncher,this);
+    adapter.setEmptySearchText(res.getString(R.string.loading_apps_message));
     mLayoutManager=adapter.getLayoutManager(context);
     mAdapter=adapter;
   }
