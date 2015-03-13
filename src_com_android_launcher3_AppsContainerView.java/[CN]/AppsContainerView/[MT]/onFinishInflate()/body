@@ -1,8 +1,25 @@
 {
-  mList=(ListView)findViewById(R.id.apps_list);
-  mList.setFastScrollEnabled(true);
-  mList.setFastScrollAlwaysVisible(true);
-  mList.setItemsCanFocus(true);
-  mList.setAdapter(mAdapter);
+  boolean isRtl=(getResources().getConfiguration().getLayoutDirection() == LAYOUT_DIRECTION_RTL);
+  if (USE_LAYOUT == GRID_LAYOUT) {
+    ((AppsGridAdapter)mAdapter).setRtl(isRtl);
+  }
+  mSearchBar=(EditText)findViewById(R.id.app_search_box);
+  mSearchBar.addTextChangedListener(this);
+  mSearchBar.setOnEditorActionListener(this);
+  mAppsListView=(AppsContainerRecyclerView)findViewById(R.id.apps_list_view);
+  mAppsListView.setApps(mApps);
+  mAppsListView.setNumAppsPerRow(mNumAppsPerRow);
+  mAppsListView.setLayoutManager(mLayoutManager);
+  mAppsListView.setAdapter(mAdapter);
+  mAppsListView.setHasFixedSize(true);
+  if (isRtl) {
+    mAppsListView.setPadding(mAppsListView.getPaddingLeft(),mAppsListView.getPaddingTop(),mAppsListView.getPaddingRight() + mContentMarginStart,mAppsListView.getPaddingBottom());
+  }
+ else {
+    mAppsListView.setPadding(mAppsListView.getPaddingLeft() + mContentMarginStart,mAppsListView.getPaddingTop(),mAppsListView.getPaddingRight(),mAppsListView.getPaddingBottom());
+  }
+  if (mItemDecoration != null) {
+    mAppsListView.addItemDecoration(mItemDecoration);
+  }
   mPadding.set(getPaddingLeft(),getPaddingTop(),getPaddingRight(),getPaddingBottom());
 }

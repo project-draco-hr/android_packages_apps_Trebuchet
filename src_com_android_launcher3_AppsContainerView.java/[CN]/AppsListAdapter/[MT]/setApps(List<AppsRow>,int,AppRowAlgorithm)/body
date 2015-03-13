@@ -1,7 +1,0 @@
-{
-  mAppsPerRow=appsPerRow;
-  mRowAlgorithm=algo;
-  mAppRows.clear();
-  mAppRows.addAll(apps);
-  notifyDataSetChanged();
-}

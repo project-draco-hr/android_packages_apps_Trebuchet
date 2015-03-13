@@ -1,3 +1,0 @@
-{
-  return R.layout.apps_grid_row_icon_view;
-}

@@ -1,0 +1,16 @@
+{
+  Resources res=context.getResources();
+  mApps=apps;
+  mAppsPerRow=appsPerRow;
+  mGridSizer=new GridSpanSizer();
+  mItemDecoration=new GridItemDecoration();
+  mLayoutInflater=LayoutInflater.from(context);
+  mTouchListener=touchListener;
+  mIconClickListener=iconClickListener;
+  mIconLongClickListener=iconLongClickListener;
+  mStartMargin=res.getDimensionPixelSize(R.dimen.apps_grid_view_start_margin);
+  mSectionTextPaint=new Paint();
+  mSectionTextPaint.setTextSize(res.getDimensionPixelSize(R.dimen.apps_view_section_text_size));
+  mSectionTextPaint.setColor(res.getColor(R.color.apps_view_section_text_color));
+  mSectionTextPaint.setAntiAlias(true);
+}

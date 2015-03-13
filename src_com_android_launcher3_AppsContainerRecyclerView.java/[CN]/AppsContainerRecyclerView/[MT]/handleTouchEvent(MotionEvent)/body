@@ -1,0 +1,43 @@
+{
+  ViewConfiguration config=ViewConfiguration.get(getContext());
+  int action=ev.getAction();
+  int x=(int)ev.getX();
+  int y=(int)ev.getY();
+switch (action) {
+case MotionEvent.ACTION_DOWN:
+    mDownX=mLastX=x;
+  mDownY=mLastY=y;
+stopScroll();
+break;
+case MotionEvent.ACTION_MOVE:
+boolean isRtl=(getResources().getConfiguration().getLayoutDirection() == LAYOUT_DIRECTION_RTL);
+boolean isInGutter;
+if (isRtl) {
+isInGutter=mDownX < mGutterSize;
+}
+ else {
+isInGutter=mDownX >= (getWidth() - mGutterSize);
+}
+if (!mDraggingFastScroller && isInGutter && Math.abs(y - mDownY) > config.getScaledTouchSlop()) {
+getParent().requestDisallowInterceptTouchEvent(true);
+mDraggingFastScroller=true;
+animateFastScrollerVisibility(true);
+}
+if (mDraggingFastScroller) {
+mLastX=x;
+mLastY=y;
+int top=getPaddingTop() + (mFastScrollerBg.getBounds().height() / 2);
+int bottom=getHeight() - getPaddingBottom() - (mFastScrollerBg.getBounds().height() / 2);
+float boundedY=(float)Math.max(top,Math.min(bottom,y));
+mFastScrollSectionName=scrollToPositionAtProgress((boundedY - top) / (bottom - top));
+invalidateFastScroller();
+}
+break;
+case MotionEvent.ACTION_UP:
+case MotionEvent.ACTION_CANCEL:
+mDraggingFastScroller=false;
+animateFastScrollerVisibility(false);
+break;
+}
+return mDraggingFastScroller;
+}

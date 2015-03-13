@@ -1,0 +1,25 @@
+{
+  List<AlphabeticalAppsList.SectionInfo> sections=mApps.getSections();
+  int rowCount=0;
+  for (  AlphabeticalAppsList.SectionInfo info : sections) {
+    int numRowsInSection=(int)Math.ceil((float)info.numAppsInSection / mNumAppsPerRow);
+    rowCount+=numRowsInSection;
+  }
+  int rowAtProgress=(int)(progress * rowCount);
+  int appIndex=0;
+  rowCount=0;
+  for (  AlphabeticalAppsList.SectionInfo info : sections) {
+    int numRowsInSection=(int)Math.ceil((float)info.numAppsInSection / mNumAppsPerRow);
+    if (rowCount + numRowsInSection > rowAtProgress) {
+      appIndex+=(rowAtProgress - rowCount) * mNumAppsPerRow;
+      break;
+    }
+    rowCount+=numRowsInSection;
+    appIndex+=info.numAppsInSection;
+  }
+  appIndex=Math.max(0,Math.min(mApps.getAppsWithoutSectionBreaks().size() - 1,appIndex));
+  AppInfo appInfo=mApps.getAppsWithoutSectionBreaks().get(appIndex);
+  int sectionedAppIndex=mApps.getApps().indexOf(appInfo);
+  scrollToPosition(sectionedAppIndex);
+  return mApps.getSectionNameForApp(appInfo);
+}

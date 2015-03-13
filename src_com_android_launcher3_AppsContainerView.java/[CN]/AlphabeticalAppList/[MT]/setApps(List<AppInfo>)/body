@@ -1,5 +1,0 @@
-{
-  Collections.sort(apps,LauncherModel.getAppNameComparator());
-  mApps=apps;
-  mCb.onAppsUpdated();
-}

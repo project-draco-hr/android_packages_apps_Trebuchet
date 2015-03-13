@@ -1,0 +1,11 @@
+{
+  int appIndex=mFilteredApps.indexOf(info);
+  int appCount=0;
+  for (  SectionInfo section : mSections) {
+    if (appCount + section.numAppsInSection > appIndex) {
+      return section.numAppsInSection;
+    }
+    appCount+=section.numAppsInSection;
+  }
+  return 1;
+}

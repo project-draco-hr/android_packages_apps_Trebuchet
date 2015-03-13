@@ -1,0 +1,8 @@
+{
+  if (toWorkspace) {
+    mSearchBar.setText("");
+  }
+ else {
+    mSearchBar.setFocusableInTouchMode(true);
+  }
+}

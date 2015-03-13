@@ -1,0 +1,3 @@
+{
+  mIndexer=new AlphabeticIndexCompat(context);
+}

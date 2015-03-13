@@ -1,0 +1,5 @@
+{
+  for (  AppInfo info : apps) {
+    addApp(info);
+  }
+}

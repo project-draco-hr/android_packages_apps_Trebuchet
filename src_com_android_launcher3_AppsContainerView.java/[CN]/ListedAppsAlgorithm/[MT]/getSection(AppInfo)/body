@@ -1,3 +1,0 @@
-{
-  return app.title.toString().substring(0,1).toLowerCase();
-}

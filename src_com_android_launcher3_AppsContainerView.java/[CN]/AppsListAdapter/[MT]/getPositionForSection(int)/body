@@ -1,9 +1,0 @@
-{
-  for (int i=0; i < mAppRows.size(); i++) {
-    AppsRow row=mAppRows.get(i);
-    if (row.sectionId == sectionIndex) {
-      return i;
-    }
-  }
-  return 0;
-}

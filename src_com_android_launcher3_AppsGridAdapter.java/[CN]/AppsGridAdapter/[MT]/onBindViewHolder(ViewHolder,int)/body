@@ -1,0 +1,7 @@
+{
+  AppInfo info=mApps.getApps().get(position);
+  if (info != AlphabeticalAppsList.SECTION_BREAK_INFO) {
+    BubbleTextView icon=(BubbleTextView)holder.mContent;
+    icon.applyFromApplicationInfo(info);
+  }
+}

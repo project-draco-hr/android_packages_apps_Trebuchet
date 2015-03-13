@@ -1,0 +1,5 @@
+{
+  mFilter=f;
+  onAppsUpdated();
+  mAdapter.notifyDataSetChanged();
+}

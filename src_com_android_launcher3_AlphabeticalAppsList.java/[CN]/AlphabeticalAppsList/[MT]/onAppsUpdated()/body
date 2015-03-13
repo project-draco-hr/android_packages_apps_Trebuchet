@@ -1,0 +1,22 @@
+{
+  mFilteredApps.clear();
+  for (  AppInfo info : mApps) {
+    if (mFilter == null || mFilter.retainApp(info)) {
+      mFilteredApps.add(info);
+    }
+  }
+  mSections.clear();
+  mSectionedFilteredApps.clear();
+  SectionInfo lastSectionInfo=null;
+  for (  AppInfo info : mFilteredApps) {
+    String sectionName=getSectionNameForApp(info);
+    if (lastSectionInfo == null || !lastSectionInfo.sectionName.equals(sectionName)) {
+      lastSectionInfo=new SectionInfo();
+      lastSectionInfo.sectionName=sectionName;
+      mSectionedFilteredApps.add(SECTION_BREAK_INFO);
+      mSections.add(lastSectionInfo);
+    }
+    lastSectionInfo.numAppsInSection++;
+    mSectionedFilteredApps.add(info);
+  }
+}
