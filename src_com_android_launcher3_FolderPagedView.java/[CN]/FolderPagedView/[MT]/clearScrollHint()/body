@@ -1,0 +1,5 @@
+{
+  if (mUnboundedScrollX != getScrollForPage(getNextPage())) {
+    snapToPage(getNextPage());
+  }
+}

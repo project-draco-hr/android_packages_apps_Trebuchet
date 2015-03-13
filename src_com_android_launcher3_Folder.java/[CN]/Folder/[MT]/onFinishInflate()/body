@@ -14,4 +14,7 @@
   int measureSpec=MeasureSpec.UNSPECIFIED;
   mFooter.measure(measureSpec,measureSpec);
   mFooterHeight=mFooter.getMeasuredHeight();
+  if (ALLOW_FOLDER_SCROLL) {
+    mPagedView=(FolderPagedView)mContent;
+  }
 }

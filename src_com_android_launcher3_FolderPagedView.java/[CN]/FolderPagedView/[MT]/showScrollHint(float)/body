@@ -1,0 +1,10 @@
+{
+  int hint=(int)(fraction * getWidth());
+  int scroll=getScrollForPage(getNextPage()) + hint;
+  int delta=scroll - mUnboundedScrollX;
+  if (delta != 0) {
+    mScroller.setInterpolator(new DecelerateInterpolator());
+    mScroller.startScroll(mUnboundedScrollX,0,delta,0,Folder.SCROLL_HINT_DURATION);
+    invalidate();
+  }
+}
