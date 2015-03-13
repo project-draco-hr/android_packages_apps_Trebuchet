@@ -1,0 +1,13 @@
+{
+  String sectionName=getBucketLabel(getBucketIndex(s));
+  if (sectionName.trim().isEmpty() && s.length() > 0) {
+    boolean startsWithDigit=Character.isDigit(s.charAt(0));
+    if (startsWithDigit) {
+      return "#";
+    }
+ else {
+      return "\u2022";
+    }
+  }
+  return sectionName;
+}

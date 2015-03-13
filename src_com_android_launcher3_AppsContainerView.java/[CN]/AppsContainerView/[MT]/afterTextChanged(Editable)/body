@@ -3,7 +3,13 @@
     mApps.setFilter(null);
   }
  else {
-    final AlphabeticIndexCompat indexer=mApps.getIndexer();
+    String formatStr=getResources().getString(R.string.apps_view_no_search_results);
+    if (USE_LAYOUT == GRID_LAYOUT) {
+      ((AppsGridAdapter)mAdapter).setEmptySearchText(String.format(formatStr,s.toString()));
+    }
+ else {
+      ((AppsListAdapter)mAdapter).setEmptySearchText(String.format(formatStr,s.toString()));
+    }
     final String filterText=s.toString().toLowerCase().replaceAll("\\s+","");
     mApps.setFilter(new AlphabeticalAppsList.Filter(){
       @Override public boolean retainApp(      AppInfo info){

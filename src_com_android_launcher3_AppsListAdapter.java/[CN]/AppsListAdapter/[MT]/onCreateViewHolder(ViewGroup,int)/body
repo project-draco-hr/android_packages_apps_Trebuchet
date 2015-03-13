@@ -1,9 +1,11 @@
 {
 switch (viewType) {
+case EMPTY_VIEW_TYPE:
+    return new ViewHolder(mLayoutInflater.inflate(R.layout.apps_empty_view,parent,false));
 case SECTION_BREAK_VIEW_TYPE:
-    return new ViewHolder(new View(parent.getContext()));
+  return new ViewHolder(new View(parent.getContext()));
 case ICON_VIEW_TYPE:
-  ViewGroup row=(ViewGroup)mLayoutInflater.inflate(R.layout.apps_list_row_view,parent,false);
+ViewGroup row=(ViewGroup)mLayoutInflater.inflate(R.layout.apps_list_row_view,parent,false);
 BubbleTextView icon=(BubbleTextView)mLayoutInflater.inflate(R.layout.apps_list_row_icon_view,row,false);
 LinearLayout.LayoutParams lp=new LinearLayout.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,1);
 lp.gravity=Gravity.CENTER_VERTICAL;

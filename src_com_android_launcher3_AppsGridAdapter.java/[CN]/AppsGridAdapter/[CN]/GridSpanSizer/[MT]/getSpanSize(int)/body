@@ -1,4 +1,7 @@
 {
+  if (mApps.hasNoFilteredResults()) {
+    return mAppsPerRow;
+  }
   AppInfo info=mApps.getApps().get(position);
   if (info == AlphabeticalAppsList.SECTION_BREAK_INFO) {
     return mAppsPerRow;

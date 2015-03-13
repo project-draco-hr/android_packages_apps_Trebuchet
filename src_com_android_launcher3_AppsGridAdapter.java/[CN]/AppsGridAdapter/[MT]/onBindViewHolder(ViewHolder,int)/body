@@ -1,7 +1,13 @@
 {
-  AppInfo info=mApps.getApps().get(position);
-  if (info != AlphabeticalAppsList.SECTION_BREAK_INFO) {
-    BubbleTextView icon=(BubbleTextView)holder.mContent;
-    icon.applyFromApplicationInfo(info);
-  }
+switch (holder.getItemViewType()) {
+case ICON_VIEW_TYPE:
+    AppInfo info=mApps.getApps().get(position);
+  BubbleTextView icon=(BubbleTextView)holder.mContent;
+icon.applyFromApplicationInfo(info);
+break;
+case EMPTY_VIEW_TYPE:
+TextView emptyViewText=(TextView)holder.mContent.findViewById(R.id.empty_text);
+emptyViewText.setText(mEmptySearchText);
+break;
+}
 }
