@@ -39,7 +39,8 @@
         if (backupWidgetCount < MAX_WIDGETS_PER_PASS) {
           if (DEBUG)           Log.d(TAG,"saving widget " + backupKey);
           previewLoader.setPreviewSize(spanX * profile.cellWidthPx,spanY * profile.cellHeightPx,widgetSpacingLayout);
-          writeRowToBackup(key,packWidget(dpi,previewLoader,mIconCache,provider),data);
+          UserHandleCompat user=UserHandleCompat.myUserHandle();
+          writeRowToBackup(key,packWidget(dpi,previewLoader,mIconCache,provider,user),data);
           mKeys.add(key);
           backupWidgetCount++;
         }

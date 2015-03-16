@@ -13,7 +13,7 @@
     Log.d(TAG,"bindAppWidget: " + item);
   }
   final Workspace workspace=mWorkspace;
-  LauncherAppWidgetProviderInfo appWidgetInfo=LauncherModel.getProviderInfo(this,item.providerName);
+  LauncherAppWidgetProviderInfo appWidgetInfo=LauncherModel.getProviderInfo(this,item.providerName,item.user);
   if (!mIsSafeModeEnabled && ((item.restoreStatus & LauncherAppWidgetInfo.FLAG_PROVIDER_NOT_READY) == 0) && ((item.restoreStatus & LauncherAppWidgetInfo.FLAG_ID_NOT_VALID) != 0)) {
     if (appWidgetInfo == null) {
       if (DEBUG_WIDGETS) {

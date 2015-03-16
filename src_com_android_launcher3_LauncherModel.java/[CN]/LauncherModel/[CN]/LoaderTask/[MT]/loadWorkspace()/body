@@ -59,6 +59,7 @@ synchronized (sBgLock) {
       LauncherAppWidgetInfo appWidgetInfo;
       int container;
       long id;
+      long serialNumber;
       Intent intent;
       UserHandleCompat user;
       while (!mStopped && c.moveToNext()) {
@@ -71,7 +72,7 @@ case LauncherSettings.Favorites.ITEM_TYPE_APPLICATION:
 case LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT:
             id=c.getLong(idIndex);
           intentDescription=c.getString(intentIndex);
-        long serialNumber=c.getInt(profileIdIndex);
+        serialNumber=c.getInt(profileIdIndex);
       user=mUserManager.getUserForSerialNumber(serialNumber);
     int promiseType=c.getInt(restoredIndex);
   int disabledState=0;
@@ -249,13 +250,14 @@ case LauncherSettings.Favorites.ITEM_TYPE_APPWIDGET:
 case LauncherSettings.Favorites.ITEM_TYPE_CUSTOM_APPWIDGET:
 boolean customWidget=itemType == LauncherSettings.Favorites.ITEM_TYPE_CUSTOM_APPWIDGET;
 int appWidgetId=c.getInt(appWidgetIdIndex);
+serialNumber=c.getLong(profileIdIndex);
 String savedProvider=c.getString(appWidgetProviderIndex);
 id=c.getLong(idIndex);
 final ComponentName component=ComponentName.unflattenFromString(savedProvider);
 final int restoreStatus=c.getInt(restoredIndex);
 final boolean isIdValid=(restoreStatus & LauncherAppWidgetInfo.FLAG_ID_NOT_VALID) == 0;
 final boolean wasProviderReady=(restoreStatus & LauncherAppWidgetInfo.FLAG_PROVIDER_NOT_READY) == 0;
-final LauncherAppWidgetProviderInfo provider=LauncherModel.getProviderInfo(context,ComponentName.unflattenFromString(savedProvider));
+final LauncherAppWidgetProviderInfo provider=LauncherModel.getProviderInfo(context,ComponentName.unflattenFromString(savedProvider),mUserManager.getUserForSerialNumber(serialNumber));
 final boolean isProviderReady=isValidProvider(provider);
 if (!isSafeMode && !customWidget && wasProviderReady&& !isProviderReady) {
 String log="Deleting widget that isn't installed anymore: " + "id=" + id + " appWidgetId="+ appWidgetId;
