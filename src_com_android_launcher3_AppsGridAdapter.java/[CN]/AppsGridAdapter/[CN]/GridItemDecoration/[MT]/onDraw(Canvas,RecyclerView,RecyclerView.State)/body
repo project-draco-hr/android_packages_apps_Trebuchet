@@ -10,10 +10,12 @@
           String section=mApps.getSectionNameForApp(info);
           mSectionTextPaint.getTextBounds(section,0,section.length(),mTmpBounds);
           if (mIsRtl) {
-            c.drawText(section,parent.getWidth() - mStartMargin + (mStartMargin - mTmpBounds.width()) / 2,child.getTop() + (2 * child.getPaddingTop()) + mTmpBounds.height(),mSectionTextPaint);
+            int left=parent.getWidth() - mPaddingStart - mStartMargin;
+            c.drawText(section,left + (mStartMargin - mTmpBounds.width()) / 2,child.getTop() + (2 * child.getPaddingTop()) + mTmpBounds.height(),mSectionTextPaint);
           }
  else {
-            c.drawText(section,(mStartMargin - mTmpBounds.width()) / 2,child.getTop() + (2 * child.getPaddingTop()) + mTmpBounds.height(),mSectionTextPaint);
+            int left=mPaddingStart;
+            c.drawText(section,left + (mStartMargin - mTmpBounds.width()) / 2,child.getTop() + (2 * child.getPaddingTop()) + mTmpBounds.height(),mSectionTextPaint);
           }
         }
       }
