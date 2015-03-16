@@ -1,5 +1,5 @@
 {
-  final LauncherAppWidgetProviderInfo info=LauncherModel.getProviderInfo(mContext,provider);
+  final LauncherAppWidgetProviderInfo info=LauncherModel.getProviderInfo(mContext,provider,user);
   Widget widget=new Widget();
   widget.provider=provider.flattenToShortString();
   widget.label=info.label;
