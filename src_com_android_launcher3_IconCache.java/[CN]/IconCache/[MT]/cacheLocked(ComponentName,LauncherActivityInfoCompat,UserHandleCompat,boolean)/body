@@ -1,5 +1,5 @@
 {
-  CacheKey cacheKey=new CacheKey(componentName,user);
+  ComponentKey cacheKey=new ComponentKey(componentName,user);
   CacheEntry entry=mCache.get(cacheKey);
   if (entry == null) {
     entry=new CacheEntry();

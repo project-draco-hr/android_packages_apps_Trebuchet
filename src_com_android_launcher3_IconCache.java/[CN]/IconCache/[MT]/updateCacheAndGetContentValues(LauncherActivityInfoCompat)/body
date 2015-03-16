@@ -3,7 +3,7 @@
   entry.icon=Utilities.createIconBitmap(app.getBadgedIcon(mIconDpi),mContext);
   entry.title=app.getLabel();
   entry.contentDescription=mUserManager.getBadgedLabelForUser(entry.title,app.getUser());
-  mCache.put(new CacheKey(app.getComponentName(),app.getUser()),entry);
+  mCache.put(new ComponentKey(app.getComponentName(),app.getUser()),entry);
   ContentValues values=new ContentValues();
   values.put(IconDB.COLUMN_ICON,ItemInfo.flattenBitmap(entry.icon));
   values.put(IconDB.COLUMN_LABEL,entry.title.toString());
