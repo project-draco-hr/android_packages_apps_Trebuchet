@@ -3,9 +3,10 @@
   if (e.getAction() == KeyEvent.ACTION_UP || !consume) {
     return consume;
   }
-  int orientation=v.getResources().getConfiguration().orientation;
+  LauncherAppState app=LauncherAppState.getInstance();
+  DeviceProfile profile=app.getDynamicGrid().getDeviceProfile();
   if (DEBUG) {
-    Log.v(TAG,String.format("Handle HOTSEAT BUTTONS keyevent=[%s] on hotseat buttons, orientation=%d",KeyEvent.keyCodeToString(keyCode),orientation));
+    Log.v(TAG,String.format("Handle HOTSEAT BUTTONS keyevent=[%s] on hotseat buttons, isVertical=%s",KeyEvent.keyCodeToString(keyCode),profile.isVerticalBarLayout()));
   }
   final ShortcutAndWidgetContainer hotseatParent=(ShortcutAndWidgetContainer)v.getParent();
   final CellLayout hotseatLayout=(CellLayout)hotseatParent.getParent();
@@ -16,25 +17,26 @@
   int countX=-1;
   int countY=-1;
   int iconIndex=findIndexOfView(hotseatParent,v);
+  int iconRank=((CellLayout.LayoutParams)hotseatLayout.getShortcutsAndWidgets().getChildAt(iconIndex).getLayoutParams()).cellX;
   final CellLayout iconLayout=(CellLayout)workspace.getChildAt(pageIndex);
   final ViewGroup iconParent=iconLayout.getShortcutsAndWidgets();
   ViewGroup parent=null;
   int[][] matrix=null;
-  if (keyCode == KeyEvent.KEYCODE_DPAD_UP && orientation == Configuration.ORIENTATION_PORTRAIT) {
-    matrix=FocusLogic.createSparseMatrix(iconLayout,hotseatLayout,orientation,hotseat.getAllAppsButtonRank(),true);
+  if (keyCode == KeyEvent.KEYCODE_DPAD_UP && !profile.isVerticalBarLayout()) {
+    matrix=FocusLogic.createSparseMatrix(iconLayout,hotseatLayout,true,hotseat.getAllAppsButtonRank(),iconRank == hotseat.getAllAppsButtonRank());
     iconIndex+=iconParent.getChildCount();
     countX=iconLayout.getCountX();
     countY=iconLayout.getCountY() + hotseatLayout.getCountY();
     parent=iconParent;
   }
- else   if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT && orientation == Configuration.ORIENTATION_LANDSCAPE) {
-    matrix=FocusLogic.createSparseMatrix(iconLayout,hotseatLayout,orientation,hotseat.getAllAppsButtonRank(),true);
+ else   if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT && profile.isVerticalBarLayout()) {
+    matrix=FocusLogic.createSparseMatrix(iconLayout,hotseatLayout,false,hotseat.getAllAppsButtonRank(),iconRank == hotseat.getAllAppsButtonRank());
     iconIndex+=iconParent.getChildCount();
     countX=iconLayout.getCountX() + hotseatLayout.getCountX();
     countY=iconLayout.getCountY();
     parent=iconParent;
   }
- else   if (keyCode == KeyEvent.KEYCODE_DPAD_RIGHT && orientation == Configuration.ORIENTATION_LANDSCAPE) {
+ else   if (keyCode == KeyEvent.KEYCODE_DPAD_RIGHT && profile.isVerticalBarLayout()) {
     keyCode=KeyEvent.KEYCODE_PAGE_DOWN;
   }
  else {
