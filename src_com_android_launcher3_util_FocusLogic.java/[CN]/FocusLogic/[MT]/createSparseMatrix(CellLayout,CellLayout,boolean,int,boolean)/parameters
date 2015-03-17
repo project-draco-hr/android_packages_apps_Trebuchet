@@ -1,5 +1,5 @@
 CellLayout iconLayout
 CellLayout hotseatLayout
-int orientation
+boolean isHorizontal
 int allappsiconRank
 boolean includeAllappsicon

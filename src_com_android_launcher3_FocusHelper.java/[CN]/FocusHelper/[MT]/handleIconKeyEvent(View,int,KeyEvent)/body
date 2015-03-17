@@ -3,9 +3,10 @@
   if (e.getAction() == KeyEvent.ACTION_UP || !consume) {
     return consume;
   }
-  int orientation=v.getResources().getConfiguration().orientation;
+  LauncherAppState app=LauncherAppState.getInstance();
+  DeviceProfile profile=app.getDynamicGrid().getDeviceProfile();
   if (DEBUG) {
-    Log.v(TAG,String.format("Handle WORKSPACE ICONS keyevent=[%s] orientation=%d",KeyEvent.keyCodeToString(keyCode),orientation));
+    Log.v(TAG,String.format("Handle WORKSPACE ICONS keyevent=[%s] isVerticalBar=%s",KeyEvent.keyCodeToString(keyCode),profile.isVerticalBarLayout()));
   }
   ShortcutAndWidgetContainer parent=(ShortcutAndWidgetContainer)v.getParent();
   CellLayout iconLayout=(CellLayout)parent.getParent();
@@ -21,12 +22,12 @@
   CellLayout hotseatLayout=(CellLayout)hotseat.getChildAt(0);
   ShortcutAndWidgetContainer hotseatParent=hotseatLayout.getShortcutsAndWidgets();
   int[][] matrix;
-  if (keyCode == KeyEvent.KEYCODE_DPAD_DOWN && orientation == Configuration.ORIENTATION_PORTRAIT) {
-    matrix=FocusLogic.createSparseMatrix(iconLayout,hotseatLayout,orientation,hotseat.getAllAppsButtonRank(),false);
+  if (keyCode == KeyEvent.KEYCODE_DPAD_DOWN && !profile.isVerticalBarLayout()) {
+    matrix=FocusLogic.createSparseMatrix(iconLayout,hotseatLayout,true,hotseat.getAllAppsButtonRank(),false);
     countY=countY + 1;
   }
- else   if (keyCode == KeyEvent.KEYCODE_DPAD_RIGHT && orientation == Configuration.ORIENTATION_LANDSCAPE) {
-    matrix=FocusLogic.createSparseMatrix(iconLayout,hotseatLayout,orientation,hotseat.getAllAppsButtonRank(),false);
+ else   if (keyCode == KeyEvent.KEYCODE_DPAD_RIGHT && profile.isVerticalBarLayout()) {
+    matrix=FocusLogic.createSparseMatrix(iconLayout,hotseatLayout,false,hotseat.getAllAppsButtonRank(),false);
     countX=countX + 1;
   }
  else   if (keyCode == KeyEvent.KEYCODE_DEL || keyCode == KeyEvent.KEYCODE_FORWARD_DEL) {
