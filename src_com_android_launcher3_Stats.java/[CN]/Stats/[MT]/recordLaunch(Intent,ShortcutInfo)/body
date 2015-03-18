@@ -7,33 +7,4 @@
     broadcastIntent.putExtra(EXTRA_CONTAINER,shortcut.container).putExtra(EXTRA_SCREEN,shortcut.screenId).putExtra(EXTRA_CELLX,shortcut.cellX).putExtra(EXTRA_CELLY,shortcut.cellY);
   }
   mLauncher.sendBroadcast(broadcastIntent,mLaunchBroadcastPermission);
-  incrementLaunch(flat);
-  if (FLUSH_IMMEDIATELY) {
-    saveStats();
-  }
-  if (LOCAL_LAUNCH_LOG && mLog != null) {
-    try {
-      mLog.writeInt(LOG_TAG_LAUNCH);
-      mLog.writeLong(System.currentTimeMillis());
-      if (shortcut == null) {
-        mLog.writeShort(0);
-        mLog.writeShort(0);
-        mLog.writeShort(0);
-        mLog.writeShort(0);
-      }
- else {
-        mLog.writeShort((short)shortcut.container);
-        mLog.writeShort((short)shortcut.screenId);
-        mLog.writeShort((short)shortcut.cellX);
-        mLog.writeShort((short)shortcut.cellY);
-      }
-      mLog.writeUTF(flat);
-      if (FLUSH_IMMEDIATELY) {
-        mLog.flush();
-      }
-    }
- catch (    IOException e) {
-      e.printStackTrace();
-    }
-  }
 }
