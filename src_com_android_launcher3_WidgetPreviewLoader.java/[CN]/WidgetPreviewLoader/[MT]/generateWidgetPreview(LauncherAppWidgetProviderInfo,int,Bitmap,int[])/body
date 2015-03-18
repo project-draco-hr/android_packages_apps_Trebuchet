@@ -1,0 +1,85 @@
+{
+  if (maxPreviewWidth < 0)   maxPreviewWidth=Integer.MAX_VALUE;
+  Drawable drawable=null;
+  if (info.previewImage != 0) {
+    drawable=mManager.loadPreview(info);
+    if (drawable != null) {
+      drawable=mutateOnMainThread(drawable);
+    }
+ else {
+      Log.w(TAG,"Can't load widget preview drawable 0x" + Integer.toHexString(info.previewImage) + " for provider: "+ info.provider);
+    }
+  }
+  final boolean widgetPreviewExists=(drawable != null);
+  final int spanX=info.spanX < 1 ? 1 : info.spanX;
+  final int spanY=info.spanY < 1 ? 1 : info.spanY;
+  int previewWidth;
+  int previewHeight;
+  Bitmap tileBitmap=null;
+  if (widgetPreviewExists) {
+    previewWidth=drawable.getIntrinsicWidth();
+    previewHeight=drawable.getIntrinsicHeight();
+  }
+ else {
+    tileBitmap=((BitmapDrawable)mContext.getResources().getDrawable(R.drawable.widget_tile)).getBitmap();
+    previewWidth=tileBitmap.getWidth() * spanX;
+    previewHeight=tileBitmap.getHeight() * spanY;
+  }
+  float scale=1f;
+  if (preScaledWidthOut != null) {
+    preScaledWidthOut[0]=previewWidth;
+  }
+  if (previewWidth > maxPreviewWidth) {
+    scale=maxPreviewWidth / (float)previewWidth;
+  }
+  if (scale != 1f) {
+    previewWidth=(int)(scale * previewWidth);
+    previewHeight=(int)(scale * previewHeight);
+  }
+  final Canvas c=new Canvas();
+  if (preview == null) {
+    preview=Bitmap.createBitmap(previewWidth,previewHeight,Config.ARGB_8888);
+    c.setBitmap(preview);
+  }
+ else {
+    c.setBitmap(preview);
+    c.drawColor(0,PorterDuff.Mode.CLEAR);
+  }
+  int x=(preview.getWidth() - previewWidth) / 2;
+  if (widgetPreviewExists) {
+    drawable.setBounds(x,0,x + previewWidth,previewHeight);
+    drawable.draw(c);
+  }
+ else {
+    final Paint p=new Paint();
+    p.setFilterBitmap(true);
+    final Rect src=new Rect(0,0,tileBitmap.getWidth(),tileBitmap.getHeight());
+    float tileW=scale * tileBitmap.getWidth();
+    float tileH=scale * tileBitmap.getHeight();
+    final RectF dst=new RectF(0,0,tileW,tileH);
+    float tx=x;
+    for (int i=0; i < spanX; i++, tx+=tileW) {
+      float ty=0;
+      for (int j=0; j < spanY; j++, ty+=tileH) {
+        dst.offsetTo(tx,ty);
+        c.drawBitmap(tileBitmap,src,dst,p);
+      }
+    }
+    int minOffset=(int)(mAppIconSize * WIDGET_PREVIEW_ICON_PADDING_PERCENTAGE);
+    int smallestSide=Math.min(previewWidth,previewHeight);
+    float iconScale=Math.min((float)smallestSide / (mAppIconSize + 2 * minOffset),scale);
+    try {
+      Drawable icon=mutateOnMainThread(mManager.loadIcon(info,mIconCache));
+      if (icon != null) {
+        int hoffset=(int)((tileW - mAppIconSize * iconScale) / 2) + x;
+        int yoffset=(int)((tileH - mAppIconSize * iconScale) / 2);
+        icon.setBounds(hoffset,yoffset,hoffset + (int)(mAppIconSize * iconScale),yoffset + (int)(mAppIconSize * iconScale));
+        icon.draw(c);
+      }
+    }
+ catch (    Resources.NotFoundException e) {
+    }
+    c.setBitmap(null);
+  }
+  return mManager.getBadgeBitmap(info,preview);
+}

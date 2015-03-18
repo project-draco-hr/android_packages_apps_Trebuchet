@@ -9,7 +9,6 @@
   mWidgetCountX=a.getInt(R.styleable.AppsCustomizePagedView_widgetCountX,2);
   mWidgetCountY=a.getInt(R.styleable.AppsCustomizePagedView_widgetCountY,2);
   a.recycle();
-  mWidgetSpacingLayout=new PagedViewCellLayout(getContext());
   mFadeInAdjacentScreens=false;
   if (getImportantForAccessibility() == View.IMPORTANT_FOR_ACCESSIBILITY_AUTO) {
     setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_YES);

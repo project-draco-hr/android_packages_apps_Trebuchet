@@ -21,11 +21,9 @@
     int[] size=mLauncher.getWorkspace().estimateItemSize(spanX,spanY,createWidgetInfo,true);
     FastBitmapDrawable previewDrawable=(FastBitmapDrawable)image.getDrawable();
     float minScale=1.25f;
-    int maxWidth, maxHeight;
-    maxWidth=Math.min((int)(previewDrawable.getIntrinsicWidth() * minScale),size[0]);
-    maxHeight=Math.min((int)(previewDrawable.getIntrinsicHeight() * minScale),size[1]);
+    int maxWidth=Math.min((int)(previewDrawable.getIntrinsicWidth() * minScale),size[0]);
     int[] previewSizeBeforeScale=new int[1];
-    preview=getWidgetPreviewLoader().generateWidgetPreview(createWidgetInfo.info,spanX,spanY,maxWidth,maxHeight,null,previewSizeBeforeScale);
+    preview=getWidgetPreviewLoader().generateWidgetPreview(createWidgetInfo.info,maxWidth,null,previewSizeBeforeScale);
     int previewWidthInAppsCustomize=Math.min(previewSizeBeforeScale[0],getWidgetPreviewLoader().maxWidthForWidgetPreview(spanX));
     scale=previewWidthInAppsCustomize / (float)preview.getWidth();
     if (previewWidthInAppsCustomize < previewDrawable.getIntrinsicWidth()) {

@@ -3,6 +3,7 @@
   DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
   mContext=context;
   mAppIconSize=grid.iconSizePx;
+  mCellWidth=grid.cellWidthPx;
   mIconCache=app.getIconCache();
   mManager=AppWidgetManagerCompat.getInstance(context);
   mDb=app.getWidgetPreviewCacheDb();
