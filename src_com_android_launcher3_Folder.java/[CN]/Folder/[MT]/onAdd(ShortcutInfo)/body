@@ -1,6 +1,6 @@
 {
-  mItemsInvalidated=true;
   if (mSuppressOnAdd)   return;
   mContent.createAndAddViewForRank(item,mContent.allocateRankForNewItem(item));
+  mItemsInvalidated=true;
   LauncherModel.addOrMoveItemInDatabase(mLauncher,item,mInfo.id,0,item.cellX,item.cellY);
 }
