@@ -24,12 +24,6 @@ synchronized (mUnusedBitmaps) {
         unusedBitmap=candidate;
       }
     }
-    if (unusedBitmap != null) {
-      final Canvas c=mCachedAppWidgetPreviewCanvas.get();
-      c.setBitmap(unusedBitmap);
-      c.drawColor(0,PorterDuff.Mode.CLEAR);
-      c.setBitmap(null);
-    }
   }
   if (unusedBitmap == null) {
     unusedBitmap=Bitmap.createBitmap(mPreviewBitmapWidth,mPreviewBitmapHeight,Bitmap.Config.ARGB_8888);

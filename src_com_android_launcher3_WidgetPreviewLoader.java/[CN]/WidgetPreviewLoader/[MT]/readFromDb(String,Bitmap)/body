@@ -19,7 +19,7 @@ catch (  SQLiteCantOpenDatabaseException e) {
     result.moveToFirst();
     byte[] blob=result.getBlob(0);
     result.close();
-    final BitmapFactory.Options opts=mCachedBitmapFactoryOptions.get();
+    final BitmapFactory.Options opts=new BitmapFactory.Options();
     opts.inBitmap=b;
     opts.inSampleSize=1;
     try {

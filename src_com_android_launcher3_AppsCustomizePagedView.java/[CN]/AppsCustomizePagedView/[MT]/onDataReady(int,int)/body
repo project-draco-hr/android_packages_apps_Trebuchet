@@ -2,9 +2,6 @@
   updatePageCounts();
   mContentWidth=getMeasuredWidth() - getPaddingLeft() - getPaddingRight();
   mContentHeight=getMeasuredHeight() - getPaddingTop() - getPaddingBottom();
-  int widthSpec=MeasureSpec.makeMeasureSpec(mContentWidth,MeasureSpec.AT_MOST);
-  int heightSpec=MeasureSpec.makeMeasureSpec(mContentHeight,MeasureSpec.AT_MOST);
-  mWidgetSpacingLayout.measure(widthSpec,heightSpec);
   final boolean hostIsTransitioning=getTabHost().isInTransition();
   int page=getPageForComponent(mSaveInstanceStateItemIndex);
   invalidatePageData(Math.max(0,page),hostIsTransitioning);
