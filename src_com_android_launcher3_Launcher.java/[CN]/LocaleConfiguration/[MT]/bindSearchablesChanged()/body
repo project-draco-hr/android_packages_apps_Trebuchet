@@ -6,5 +6,5 @@
     mSearchDropTargetBar.removeView(mQsb);
     mQsb=null;
   }
-  getOrCreateQsbBar();
+  mSearchDropTargetBar.setQsbSearchBar(getOrCreateQsbBar());
 }
