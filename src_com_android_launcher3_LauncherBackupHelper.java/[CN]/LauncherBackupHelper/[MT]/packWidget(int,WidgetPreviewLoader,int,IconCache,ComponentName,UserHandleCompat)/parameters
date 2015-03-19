@@ -1,0 +1,6 @@
+int dpi
+WidgetPreviewLoader previewLoader
+int previewWidth
+IconCache iconCache
+ComponentName provider
+UserHandleCompat user

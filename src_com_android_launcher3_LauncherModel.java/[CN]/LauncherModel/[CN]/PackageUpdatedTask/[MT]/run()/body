@@ -30,7 +30,7 @@ for (int i=0; i < N; i++) {
 if (DEBUG_LOADERS) Log.d(TAG,"mAllAppsList.updatePackage " + packages[i]);
 mIconCache.updateIconsForPkg(packages[i],mUser);
 mBgAllAppsList.updatePackage(context,packages[i],mUser);
-WidgetPreviewLoader.removePackageFromDb(mApp.getWidgetPreviewCacheDb(),packages[i]);
+mApp.getWidgetCache().removePackage(packages[i],mUser);
 }
 break;
 case OP_REMOVE:
@@ -49,7 +49,7 @@ case OP_UNAVAILABLE:
 for (int i=0; i < N; i++) {
 if (DEBUG_LOADERS) Log.d(TAG,"mAllAppsList.removePackage " + packages[i]);
 mBgAllAppsList.removePackage(packages[i],mUser);
-WidgetPreviewLoader.removePackageFromDb(mApp.getWidgetPreviewCacheDb(),packages[i]);
+mApp.getWidgetCache().removePackage(packages[i],mUser);
 }
 break;
 }

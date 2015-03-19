@@ -1,7 +1,7 @@
 {
   disablePagedViewAnimations();
   removeAllViews();
-  cancelAllTasks();
+  cancelAllTasks(true);
   Context context=getContext();
   if (mContentType == ContentType.Widgets) {
     for (int j=0; j < mNumWidgetPages; ++j) {

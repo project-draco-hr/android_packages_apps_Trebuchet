@@ -50,32 +50,7 @@
     lp.setGravity(Gravity.TOP | Gravity.START);
     layout.addView(widget,lp);
   }
-  layout.setOnLayoutListener(new Runnable(){
-    public void run(){
-      int maxPreviewWidth=cellWidth;
-      int maxPreviewHeight=cellHeight;
-      if (layout.getChildCount() > 0) {
-        PagedViewWidget w=(PagedViewWidget)layout.getChildAt(0);
-        int[] maxSize=w.getPreviewSize();
-        maxPreviewWidth=maxSize[0];
-        maxPreviewHeight=maxSize[1];
-      }
-      getWidgetPreviewLoader().setPreviewSize(maxPreviewWidth,maxPreviewHeight);
-      if (immediate) {
-        AsyncTaskPageData data=new AsyncTaskPageData(page,items,maxPreviewWidth,maxPreviewHeight,null,null,getWidgetPreviewLoader());
-        loadWidgetPreviewsInBackground(null,data);
-        onSyncWidgetPageItems(data,immediate);
-      }
- else {
-        if (mInTransition) {
-          mDeferredPrepareLoadWidgetPreviewsTasks.add(this);
-        }
- else {
-          prepareLoadWidgetPreviewsTask(page,items,maxPreviewWidth,maxPreviewHeight,mWidgetCountX);
-        }
-      }
-      layout.setOnLayoutListener(null);
-    }
+  if (immediate && !mInTransition) {
+    loadPreviewsForPage(page);
   }
-);
 }

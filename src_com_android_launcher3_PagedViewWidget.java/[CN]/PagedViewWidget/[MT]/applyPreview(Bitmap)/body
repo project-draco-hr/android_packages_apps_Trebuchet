@@ -1,0 +1,15 @@
+{
+  FastBitmapDrawable preview=new FastBitmapDrawable(bitmap);
+  final PagedViewWidgetImageView image=(PagedViewWidgetImageView)findViewById(R.id.widget_preview);
+  if (preview != null) {
+    image.mAllowRequestLayout=false;
+    image.setImageDrawable(preview);
+    if (mIsAppWidget) {
+      int[] imageSize=getPreviewSize();
+      int centerAmount=(imageSize[0] - preview.getIntrinsicWidth()) / 2;
+      image.setPadding(mOriginalImagePadding.left + centerAmount,mOriginalImagePadding.top,mOriginalImagePadding.right,mOriginalImagePadding.bottom);
+    }
+    image.setAlpha(1f);
+    image.mAllowRequestLayout=true;
+  }
+}

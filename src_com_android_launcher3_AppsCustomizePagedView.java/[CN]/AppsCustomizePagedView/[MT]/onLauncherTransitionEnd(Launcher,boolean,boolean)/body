@@ -1,12 +1,7 @@
 {
   mInTransition=false;
-  for (  AsyncTaskPageData d : mDeferredSyncWidgetPageItems) {
-    onSyncWidgetPageItems(d,false);
-  }
-  mDeferredSyncWidgetPageItems.clear();
-  for (  Runnable r : mDeferredPrepareLoadWidgetPreviewsTasks) {
-    r.run();
-  }
-  mDeferredPrepareLoadWidgetPreviewsTasks.clear();
   mForceDrawAllChildrenNextFrame=!toWorkspace;
+  if (!toWorkspace) {
+    loadPreviewsForPage(getNextPage());
+  }
 }

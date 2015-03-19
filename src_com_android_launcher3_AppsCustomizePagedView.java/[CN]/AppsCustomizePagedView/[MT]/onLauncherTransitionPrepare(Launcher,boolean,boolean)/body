@@ -1,6 +1,6 @@
 {
   mInTransition=true;
   if (toWorkspace) {
-    cancelAllTasks();
+    cancelAllTasks(false);
   }
 }

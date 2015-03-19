@@ -1,0 +1,46 @@
+{
+  mDraggingWidget=true;
+  ImageView image=(ImageView)v.findViewById(R.id.widget_preview);
+  PendingAddItemInfo createItemInfo=(PendingAddItemInfo)v.getTag();
+  if (image.getDrawable() == null) {
+    mDraggingWidget=false;
+    return false;
+  }
+  Bitmap preview;
+  Bitmap outline;
+  float scale=1f;
+  Point previewPadding=null;
+  if (createItemInfo instanceof PendingAddWidgetInfo) {
+    if (mCreateWidgetInfo == null) {
+      return false;
+    }
+    PendingAddWidgetInfo createWidgetInfo=mCreateWidgetInfo;
+    createItemInfo=createWidgetInfo;
+    int[] size=mLauncher.getWorkspace().estimateItemSize(createWidgetInfo,true);
+    FastBitmapDrawable previewDrawable=(FastBitmapDrawable)image.getDrawable();
+    float minScale=1.25f;
+    int maxWidth=Math.min((int)(previewDrawable.getIntrinsicWidth() * minScale),size[0]);
+    int[] previewSizeBeforeScale=new int[1];
+    preview=getWidgetPreviewLoader().generateWidgetPreview(createWidgetInfo.info,maxWidth,null,previewSizeBeforeScale);
+    int previewWidthInAppsCustomize=Math.min(previewSizeBeforeScale[0],v.getActualItemWidth());
+    scale=previewWidthInAppsCustomize / (float)preview.getWidth();
+    if (previewWidthInAppsCustomize < previewDrawable.getIntrinsicWidth()) {
+      int padding=(previewDrawable.getIntrinsicWidth() - previewWidthInAppsCustomize) / 2;
+      previewPadding=new Point(padding,0);
+    }
+  }
+ else {
+    PendingAddShortcutInfo createShortcutInfo=(PendingAddShortcutInfo)v.getTag();
+    Drawable icon=mIconCache.getFullResIcon(createShortcutInfo.shortcutActivityInfo);
+    preview=Utilities.createIconBitmap(icon,mLauncher);
+    createItemInfo.spanX=createItemInfo.spanY=1;
+  }
+  boolean clipAlpha=!(createItemInfo instanceof PendingAddWidgetInfo && (((PendingAddWidgetInfo)createItemInfo).previewImage == 0));
+  outline=Bitmap.createScaledBitmap(preview,preview.getWidth(),preview.getHeight(),false);
+  mLauncher.lockScreenOrientation();
+  mLauncher.getWorkspace().onDragStartedWithItem(createItemInfo,outline,clipAlpha);
+  mDragController.startDrag(image,preview,this,createItemInfo,DragController.DRAG_ACTION_COPY,previewPadding,scale);
+  outline.recycle();
+  preview.recycle();
+  return true;
+}

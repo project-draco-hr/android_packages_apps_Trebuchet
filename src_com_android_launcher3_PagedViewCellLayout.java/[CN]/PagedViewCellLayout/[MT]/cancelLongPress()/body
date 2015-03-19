@@ -1,8 +1,0 @@
-{
-  super.cancelLongPress();
-  final int count=getChildCount();
-  for (int i=0; i < count; i++) {
-    final View child=getChildAt(i);
-    child.cancelLongPress();
-  }
-}

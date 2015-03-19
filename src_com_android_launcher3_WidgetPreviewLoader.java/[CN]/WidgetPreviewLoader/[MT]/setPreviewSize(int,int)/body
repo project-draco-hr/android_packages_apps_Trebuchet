@@ -1,5 +1,0 @@
-{
-  mPreviewBitmapWidth=previewWidth;
-  mPreviewBitmapHeight=previewHeight;
-  mSize=previewWidth + "x" + previewHeight;
-}
