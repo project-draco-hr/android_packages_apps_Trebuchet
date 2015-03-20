@@ -1,7 +1,7 @@
 {
-  int lastPage=getChildCount() - 1;
-  if (lastPage < 0) {
-    return 1;
+  int lastPageIndex=getChildCount() - 1;
+  if (lastPageIndex < 0) {
+    return 0;
   }
-  return getPageAt(lastPage).getShortcutsAndWidgets().getChildCount() + lastPage * mMaxItemsPerPage;
+  return getPageAt(lastPageIndex).getShortcutsAndWidgets().getChildCount() + lastPageIndex * mMaxItemsPerPage;
 }
