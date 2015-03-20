@@ -1,0 +1,5 @@
+String packageName
+int xmlResourceId
+Context context
+AppWidgetHost appWidgetHost
+LayoutParserCallback callback
