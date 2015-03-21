@@ -2,7 +2,7 @@
   BitmapRegionTileSource.ResourceBitmapSource bitmapSource=new BitmapRegionTileSource.ResourceBitmapSource(mResources,mResId,BitmapRegionTileSource.MAX_PREVIEW_SIZE);
   a.setCropViewTileSource(bitmapSource,false,false,new CropViewScaleProvider(){
     @Override public float getScale(    TileSource src){
-      Point wallpaperSize=BitmapUtils.getDefaultWallpaperSize(a.getResources(),a.getWindowManager());
+      Point wallpaperSize=WallpaperUtils.getDefaultWallpaperSize(a.getResources(),a.getWindowManager());
       RectF crop=Utils.getMaxCropRect(src.getImageWidth(),src.getImageHeight(),wallpaperSize.x,wallpaperSize.y,false);
       return wallpaperSize.x / crop.width();
     }

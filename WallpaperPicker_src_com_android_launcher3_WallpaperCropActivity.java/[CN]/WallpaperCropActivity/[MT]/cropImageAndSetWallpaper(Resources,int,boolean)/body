@@ -1,7 +1,7 @@
 {
   int rotation=BitmapUtils.getRotationFromExif(res,resId);
   Point inSize=mCropView.getSourceDimensions();
-  Point outSize=BitmapUtils.getDefaultWallpaperSize(getResources(),getWindowManager());
+  Point outSize=WallpaperUtils.getDefaultWallpaperSize(getResources(),getWindowManager());
   RectF crop=Utils.getMaxCropRect(inSize.x,inSize.y,outSize.x,outSize.y,false);
   Runnable onEndCrop=new Runnable(){
     public void run(){
