@@ -1,12 +1,12 @@
 {
-  if (requestCode == IMAGE_PICK && resultCode == RESULT_OK) {
+  if (requestCode == IMAGE_PICK && resultCode == Activity.RESULT_OK) {
     if (data != null && data.getData() != null) {
       Uri uri=data.getData();
       addTemporaryWallpaperTile(uri,false);
     }
   }
- else   if (requestCode == PICK_WALLPAPER_THIRD_PARTY_ACTIVITY && resultCode == RESULT_OK) {
-    setResult(RESULT_OK);
+ else   if (requestCode == PICK_WALLPAPER_THIRD_PARTY_ACTIVITY && resultCode == Activity.RESULT_OK) {
+    setResult(Activity.RESULT_OK);
     finish();
   }
 }

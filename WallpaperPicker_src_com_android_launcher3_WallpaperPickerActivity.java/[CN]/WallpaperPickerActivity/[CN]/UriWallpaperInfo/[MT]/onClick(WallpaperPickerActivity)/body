@@ -16,13 +16,13 @@
           ViewGroup parent=(ViewGroup)mView.getParent();
           if (parent != null) {
             parent.removeView(mView);
-            Toast.makeText(a,a.getString(R.string.image_load_fail),Toast.LENGTH_SHORT).show();
+            Toast.makeText(a.getContext(),R.string.image_load_fail,Toast.LENGTH_SHORT).show();
           }
         }
       }
     }
 ;
   }
-  mBitmapSource=new BitmapRegionTileSource.UriBitmapSource(a,mUri,BitmapRegionTileSource.MAX_PREVIEW_SIZE);
+  mBitmapSource=new BitmapRegionTileSource.UriBitmapSource(a.getContext(),mUri,BitmapRegionTileSource.MAX_PREVIEW_SIZE);
   a.setCropViewTileSource(mBitmapSource,true,false,null,onLoad);
 }

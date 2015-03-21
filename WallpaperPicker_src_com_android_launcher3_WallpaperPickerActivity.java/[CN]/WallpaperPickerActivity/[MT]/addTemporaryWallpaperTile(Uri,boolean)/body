@@ -5,7 +5,7 @@
   mWallpapersView.addView(pickedImageThumbnail,0);
   final ImageView image=(ImageView)pickedImageThumbnail.findViewById(R.id.wallpaper_image);
   final Point defaultSize=getDefaultThumbnailSize(this.getResources());
-  final Context context=this;
+  final Context context=getContext();
   new AsyncTask<Void,Bitmap,Bitmap>(){
     protected Bitmap doInBackground(    Void... args){
       try {

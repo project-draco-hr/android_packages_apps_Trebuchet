@@ -1,8 +1,8 @@
 {
-  new File(getFilesDir(),LauncherFiles.DEFAULT_WALLPAPER_THUMBNAIL_OLD).delete();
-  new File(getFilesDir(),LauncherFiles.DEFAULT_WALLPAPER_THUMBNAIL).delete();
+  new File(getContext().getFilesDir(),LauncherFiles.DEFAULT_WALLPAPER_THUMBNAIL_OLD).delete();
+  new File(getContext().getFilesDir(),LauncherFiles.DEFAULT_WALLPAPER_THUMBNAIL).delete();
   for (int i=Build.VERSION_CODES.JELLY_BEAN; i < Build.VERSION.SDK_INT; i++) {
-    new File(getFilesDir(),i + "_" + LauncherFiles.DEFAULT_WALLPAPER_THUMBNAIL).delete();
+    new File(getContext().getFilesDir(),i + "_" + LauncherFiles.DEFAULT_WALLPAPER_THUMBNAIL).delete();
   }
   return writeImageToFileAsJpeg(getDefaultThumbFile(),b);
 }
