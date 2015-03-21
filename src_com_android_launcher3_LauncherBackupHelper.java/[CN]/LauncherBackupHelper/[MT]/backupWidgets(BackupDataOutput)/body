@@ -5,7 +5,7 @@
     return;
   }
   final ContentResolver cr=mContext.getContentResolver();
-  final WidgetPreviewLoader previewLoader=new WidgetPreviewLoader(mContext);
+  final WidgetPreviewLoader previewLoader=appState.getWidgetCache();
   final int dpi=mContext.getResources().getDisplayMetrics().densityDpi;
   final DeviceProfile profile=appState.getDynamicGrid().getDeviceProfile();
   if (DEBUG)   Log.d(TAG,"cellWidthPx: " + profile.cellWidthPx);
@@ -18,7 +18,6 @@
       final long id=cursor.getLong(ID_INDEX);
       final String providerName=cursor.getString(APPWIDGET_PROVIDER_INDEX);
       final int spanX=cursor.getInt(SPANX_INDEX);
-      final int spanY=cursor.getInt(SPANY_INDEX);
       final ComponentName provider=ComponentName.unflattenFromString(providerName);
       Key key=null;
       String backupKey=null;
@@ -37,9 +36,8 @@
         if (DEBUG)         Log.d(TAG,"I can count this high: " + backupWidgetCount);
         if (backupWidgetCount < MAX_WIDGETS_PER_PASS) {
           if (DEBUG)           Log.d(TAG,"saving widget " + backupKey);
-          previewLoader.setPreviewSize(spanX * profile.cellWidthPx,spanY * profile.cellHeightPx);
           UserHandleCompat user=UserHandleCompat.myUserHandle();
-          writeRowToBackup(key,packWidget(dpi,previewLoader,mIconCache,provider,user),data);
+          writeRowToBackup(key,packWidget(dpi,previewLoader,spanX * profile.cellWidthPx,mIconCache,provider,user),data);
           mKeys.add(key);
           backupWidgetCount++;
         }

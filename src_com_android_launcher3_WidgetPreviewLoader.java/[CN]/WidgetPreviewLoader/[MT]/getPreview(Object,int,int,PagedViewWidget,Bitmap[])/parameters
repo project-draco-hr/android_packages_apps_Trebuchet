@@ -1,0 +1,5 @@
+Object o
+int previewWidth
+int previewHeight
+PagedViewWidget caller
+Bitmap[] immediateResult

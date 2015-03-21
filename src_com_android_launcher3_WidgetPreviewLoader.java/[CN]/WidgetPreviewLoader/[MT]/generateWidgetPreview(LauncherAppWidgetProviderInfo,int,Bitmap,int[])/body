@@ -53,6 +53,7 @@
  else {
     final Paint p=new Paint();
     p.setFilterBitmap(true);
+    int appIconSize=LauncherAppState.getInstance().getDynamicGrid().getDeviceProfile().iconSizePx;
     final Rect src=new Rect(0,0,tileBitmap.getWidth(),tileBitmap.getHeight());
     float tileW=scale * tileBitmap.getWidth();
     float tileH=scale * tileBitmap.getHeight();
@@ -65,15 +66,15 @@
         c.drawBitmap(tileBitmap,src,dst,p);
       }
     }
-    int minOffset=(int)(mAppIconSize * WIDGET_PREVIEW_ICON_PADDING_PERCENTAGE);
+    int minOffset=(int)(appIconSize * WIDGET_PREVIEW_ICON_PADDING_PERCENTAGE);
     int smallestSide=Math.min(previewWidth,previewHeight);
-    float iconScale=Math.min((float)smallestSide / (mAppIconSize + 2 * minOffset),scale);
+    float iconScale=Math.min((float)smallestSide / (appIconSize + 2 * minOffset),scale);
     try {
       Drawable icon=mutateOnMainThread(mManager.loadIcon(info,mIconCache));
       if (icon != null) {
-        int hoffset=(int)((tileW - mAppIconSize * iconScale) / 2) + x;
-        int yoffset=(int)((tileH - mAppIconSize * iconScale) / 2);
-        icon.setBounds(hoffset,yoffset,hoffset + (int)(mAppIconSize * iconScale),yoffset + (int)(mAppIconSize * iconScale));
+        int hoffset=(int)((tileW - appIconSize * iconScale) / 2) + x;
+        int yoffset=(int)((tileH - appIconSize * iconScale) / 2);
+        icon.setBounds(hoffset,yoffset,hoffset + (int)(appIconSize * iconScale),yoffset + (int)(appIconSize * iconScale));
         icon.draw(c);
       }
     }

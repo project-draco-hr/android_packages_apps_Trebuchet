@@ -1,0 +1,7 @@
+{
+  mKey=key;
+  mInfo=info;
+  mPreviewHeight=previewHeight;
+  mPreviewWidth=previewWidth;
+  mCaller=caller;
+}

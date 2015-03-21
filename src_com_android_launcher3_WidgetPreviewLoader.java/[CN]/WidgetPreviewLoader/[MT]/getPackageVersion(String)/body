@@ -1,0 +1,18 @@
+{
+synchronized (mPackageVersions) {
+    long[] versions=mPackageVersions.get(packageName);
+    if (versions == null) {
+      versions=new long[2];
+      try {
+        PackageInfo info=mContext.getPackageManager().getPackageInfo(packageName,0);
+        versions[0]=info.versionCode;
+        versions[1]=info.lastUpdateTime;
+      }
+ catch (      NameNotFoundException e) {
+        Log.e(TAG,"PackageInfo not found",e);
+      }
+      mPackageVersions.put(packageName,versions);
+    }
+    return versions;
+  }
+}

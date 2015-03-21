@@ -1,0 +1,10 @@
+{
+  if (o instanceof LauncherAppWidgetProviderInfo) {
+    LauncherAppWidgetProviderInfo info=(LauncherAppWidgetProviderInfo)o;
+    return new WidgetCacheKey(info.provider,mManager.getUser(info),size);
+  }
+ else {
+    ResolveInfo info=(ResolveInfo)o;
+    return new WidgetCacheKey(new ComponentName(info.activityInfo.packageName,info.activityInfo.name),UserHandleCompat.myUserHandle(),size);
+  }
+}

@@ -1,0 +1,27 @@
+{
+  final LauncherAppWidgetProviderInfo info=LauncherModel.getProviderInfo(mContext,provider,user);
+  Widget widget=new Widget();
+  widget.provider=provider.flattenToShortString();
+  widget.label=info.label;
+  widget.configure=info.configure != null;
+  if (info.icon != 0) {
+    widget.icon=new Resource();
+    Drawable fullResIcon=iconCache.getFullResIcon(provider.getPackageName(),info.icon);
+    Bitmap icon=Utilities.createIconBitmap(fullResIcon,mContext);
+    ByteArrayOutputStream os=new ByteArrayOutputStream();
+    if (icon.compress(IMAGE_FORMAT,IMAGE_COMPRESSION_QUALITY,os)) {
+      widget.icon.data=os.toByteArray();
+      widget.icon.dpi=dpi;
+    }
+  }
+  if (info.previewImage != 0) {
+    widget.preview=new Resource();
+    Bitmap preview=previewLoader.generateWidgetPreview(info,previewWidth,null);
+    ByteArrayOutputStream os=new ByteArrayOutputStream();
+    if (preview.compress(IMAGE_FORMAT,IMAGE_COMPRESSION_QUALITY,os)) {
+      widget.preview.data=os.toByteArray();
+      widget.preview.dpi=dpi;
+    }
+  }
+  return widget;
+}

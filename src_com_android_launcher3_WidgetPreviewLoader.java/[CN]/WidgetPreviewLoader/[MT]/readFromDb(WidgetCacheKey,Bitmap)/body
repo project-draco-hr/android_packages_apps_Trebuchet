@@ -1,0 +1,26 @@
+{
+  Cursor cursor=null;
+  try {
+    cursor=mDb.getReadableDatabase().query(CacheDb.TABLE_NAME,new String[]{CacheDb.COLUMN_PREVIEW_BITMAP},CacheDb.COLUMN_COMPONENT + " = ? AND " + CacheDb.COLUMN_USER+ " = ? AND "+ CacheDb.COLUMN_SIZE+ " = ?",new String[]{key.componentName.flattenToString(),Long.toString(mUserManager.getSerialNumberForUser(key.user)),key.size},null,null,null);
+    if (cursor.moveToNext()) {
+      byte[] blob=cursor.getBlob(0);
+      BitmapFactory.Options opts=new BitmapFactory.Options();
+      opts.inBitmap=recycle;
+      try {
+        return BitmapFactory.decodeByteArray(blob,0,blob.length,opts);
+      }
+ catch (      Exception e) {
+        return null;
+      }
+    }
+  }
+ catch (  SQLException e) {
+    Log.w(TAG,"Error loading preview from DB",e);
+  }
+ finally {
+    if (cursor != null) {
+      cursor.close();
+    }
+  }
+  return null;
+}

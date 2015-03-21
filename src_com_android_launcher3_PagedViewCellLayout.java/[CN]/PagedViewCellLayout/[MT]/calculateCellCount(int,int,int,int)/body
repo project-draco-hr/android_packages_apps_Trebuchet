@@ -1,5 +1,0 @@
-{
-  mCellCountX=Math.min(maxCellCountX,estimateCellHSpan(width));
-  mCellCountY=Math.min(maxCellCountY,estimateCellVSpan(height));
-  requestLayout();
-}

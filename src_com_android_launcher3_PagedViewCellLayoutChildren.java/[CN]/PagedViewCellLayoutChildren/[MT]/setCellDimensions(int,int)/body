@@ -1,5 +1,0 @@
-{
-  mCellWidth=width;
-  mCellHeight=height;
-  requestLayout();
-}

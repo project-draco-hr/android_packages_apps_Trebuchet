@@ -1,0 +1,13 @@
+{
+  if (mTask != null) {
+    mTask.cancel(true);
+  }
+  if (recycleImage) {
+synchronized (mLoadedPreviews) {
+      WeakReference<Bitmap> result=mLoadedPreviews.remove(mKey);
+      if (result != null && result.get() != null) {
+        mUnusedBitmaps.add(result.get());
+      }
+    }
+  }
+}

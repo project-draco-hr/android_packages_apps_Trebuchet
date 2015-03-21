@@ -1,7 +1,0 @@
-{
-  super(source);
-  this.cellX=source.cellX;
-  this.cellY=source.cellY;
-  this.cellHSpan=source.cellHSpan;
-  this.cellVSpan=source.cellVSpan;
-}

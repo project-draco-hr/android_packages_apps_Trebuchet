@@ -1,0 +1,7 @@
+{
+  mContext=context;
+  mIconCache=iconCache;
+  mManager=AppWidgetManagerCompat.getInstance(context);
+  mUserManager=UserManagerCompat.getInstance(context);
+  mDb=new CacheDb(context);
+}

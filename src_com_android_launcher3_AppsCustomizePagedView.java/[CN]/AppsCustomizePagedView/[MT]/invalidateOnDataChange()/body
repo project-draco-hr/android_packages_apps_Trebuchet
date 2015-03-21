@@ -3,7 +3,7 @@
     requestLayout();
   }
  else {
-    cancelAllTasks();
+    cancelAllTasks(false);
     invalidatePageData();
   }
 }

@@ -1,7 +1,7 @@
 {
   if (!super.beginDragging(v))   return false;
   if (v instanceof PagedViewWidget) {
-    if (!beginDraggingWidget(v)) {
+    if (!beginDraggingWidget((PagedViewWidget)v)) {
       return false;
     }
   }

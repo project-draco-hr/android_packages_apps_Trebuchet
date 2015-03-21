@@ -1,6 +1,6 @@
 {
   if (mWidgetPreviewLoader == null) {
-    mWidgetPreviewLoader=new WidgetPreviewLoader(mLauncher);
+    mWidgetPreviewLoader=LauncherAppState.getInstance().getWidgetCache();
   }
   return mWidgetPreviewLoader;
 }

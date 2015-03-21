@@ -1,4 +1,0 @@
-{
-  int maxWidth=maxWidthForWidgetPreview(info.spanX);
-  return generateWidgetPreview(info,maxWidth,preview,null);
-}

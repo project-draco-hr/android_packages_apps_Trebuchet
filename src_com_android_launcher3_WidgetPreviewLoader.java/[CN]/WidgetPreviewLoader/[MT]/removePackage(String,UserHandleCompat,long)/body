@@ -1,0 +1,25 @@
+{
+synchronized (mPackageVersions) {
+    mPackageVersions.remove(packageName);
+  }
+synchronized (mLoadedPreviews) {
+    Set<WidgetCacheKey> keysToRemove=new HashSet<>();
+    for (    WidgetCacheKey key : mLoadedPreviews.keySet()) {
+      if (key.componentName.getPackageName().equals(packageName) && key.user.equals(user)) {
+        keysToRemove.add(key);
+      }
+    }
+    for (    WidgetCacheKey key : keysToRemove) {
+      WeakReference<Bitmap> req=mLoadedPreviews.remove(key);
+      if (req != null && req.get() != null) {
+        mUnusedBitmaps.add(req.get());
+      }
+    }
+  }
+  try {
+    mDb.getWritableDatabase().delete(CacheDb.TABLE_NAME,CacheDb.COLUMN_PACKAGE + " = ? AND " + CacheDb.COLUMN_USER+ " = ?",new String[]{packageName,Long.toString(userSerial)});
+  }
+ catch (  SQLException e) {
+    Log.e(TAG,"Unable to delete items from DB",e);
+  }
+}

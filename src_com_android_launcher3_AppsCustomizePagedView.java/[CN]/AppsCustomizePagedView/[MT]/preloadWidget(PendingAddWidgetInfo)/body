@@ -29,7 +29,7 @@
       info.boundWidget=hostView;
       mWidgetCleanupState=WIDGET_INFLATED;
       hostView.setVisibility(INVISIBLE);
-      int[] unScaledSize=mLauncher.getWorkspace().estimateItemSize(info.spanX,info.spanY,info,false);
+      int[] unScaledSize=mLauncher.getWorkspace().estimateItemSize(info,false);
       DragLayer.LayoutParams lp=new DragLayer.LayoutParams(unScaledSize[0],unScaledSize[1]);
       lp.x=lp.y=0;
       lp.customPosition=true;
