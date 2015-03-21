@@ -17,7 +17,7 @@
       defaultHeight=maxDim;
     }
  else {
-      defaultWidth=Math.max((int)(minDim * WallpaperCropActivity.WALLPAPER_SCREENS_SPAN),maxDim);
+      defaultWidth=Math.max((int)(minDim * WALLPAPER_SCREENS_SPAN),maxDim);
       defaultHeight=maxDim;
     }
     sDefaultWallpaperSize=new Point(defaultWidth,defaultHeight);
