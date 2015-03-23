@@ -1,0 +1,4 @@
+{
+  IntentFilter intentFilter=new IntentFilter(STK_PACKAGE_INTENT_ACTION_NAME);
+  registerReceiver(appNameChangeReceiver,intentFilter);
+}
