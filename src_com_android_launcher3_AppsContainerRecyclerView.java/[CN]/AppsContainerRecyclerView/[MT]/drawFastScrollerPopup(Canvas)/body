@@ -1,0 +1,24 @@
+{
+  int x;
+  int y;
+  boolean isRtl=(getResources().getConfiguration().getLayoutDirection() == LAYOUT_DIRECTION_RTL);
+  if (mFastScrollAlpha > 0f) {
+    Rect bgBounds=mFastScrollerBg.getBounds();
+    if (isRtl) {
+      x=getPaddingLeft() + getScrollBarSize();
+    }
+ else {
+      x=getWidth() - getPaddingRight() - getScrollBarSize()- bgBounds.width();
+    }
+    y=mLastY - (int)(FAST_SCROLL_OVERLAY_Y_OFFSET_FACTOR * bgBounds.height());
+    y=Math.max(getPaddingTop(),Math.min(y,getHeight() - getPaddingBottom() - bgBounds.height()));
+    int restoreCount=canvas.save(Canvas.MATRIX_SAVE_FLAG);
+    canvas.translate(x,y);
+    mFastScrollerBg.setAlpha((int)(mFastScrollAlpha * 255));
+    mFastScrollerBg.draw(canvas);
+    mFastScrollTextPaint.setAlpha((int)(mFastScrollAlpha * 255));
+    mFastScrollTextPaint.getTextBounds(mFastScrollSectionName,0,mFastScrollSectionName.length(),mFastScrollTextBounds);
+    canvas.drawText(mFastScrollSectionName,(bgBounds.width() - mFastScrollTextBounds.width()) / 2,bgBounds.height() - (bgBounds.height() - mFastScrollTextBounds.height()) / 2,mFastScrollTextPaint);
+    canvas.restoreToCount(restoreCount);
+  }
+}

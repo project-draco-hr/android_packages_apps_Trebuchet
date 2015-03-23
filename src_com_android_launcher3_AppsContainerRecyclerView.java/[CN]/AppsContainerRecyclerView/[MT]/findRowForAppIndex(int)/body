@@ -1,0 +1,14 @@
+{
+  List<AlphabeticalAppsList.SectionInfo> sections=mApps.getSections();
+  int appIndex=0;
+  int rowCount=0;
+  for (  AlphabeticalAppsList.SectionInfo info : sections) {
+    int numRowsInSection=(int)Math.ceil((float)info.numAppsInSection / mNumAppsPerRow);
+    if (appIndex + info.numAppsInSection > position) {
+      return rowCount + ((position - appIndex) / mNumAppsPerRow);
+    }
+    appIndex+=info.numAppsInSection;
+    rowCount+=numRowsInSection;
+  }
+  return appIndex;
+}
