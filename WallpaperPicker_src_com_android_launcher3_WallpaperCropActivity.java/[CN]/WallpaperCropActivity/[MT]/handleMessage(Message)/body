@@ -31,7 +31,7 @@ synchronized (mReusableBitmaps) {
         throw securityException;
       }
     }
-    req.result=new BitmapRegionTileSource(this,req.src,mTempStorageForDecoding);
+    req.result=new BitmapRegionTileSource(getContext(),req.src,mTempStorageForDecoding);
     runOnUiThread(new Runnable(){
       @Override public void run(){
         if (req == mCurrentLoadRequest) {

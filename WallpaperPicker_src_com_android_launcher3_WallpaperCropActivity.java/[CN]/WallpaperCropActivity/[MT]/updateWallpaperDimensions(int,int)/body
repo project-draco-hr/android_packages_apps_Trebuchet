@@ -1,6 +1,6 @@
 {
   String spKey=LauncherFiles.WALLPAPER_CROP_PREFERENCES_KEY;
-  SharedPreferences sp=getSharedPreferences(spKey,Context.MODE_MULTI_PROCESS);
+  SharedPreferences sp=getContext().getSharedPreferences(spKey,Context.MODE_MULTI_PROCESS);
   SharedPreferences.Editor editor=sp.edit();
   if (width != 0 && height != 0) {
     editor.putInt(WALLPAPER_WIDTH_KEY,width);
@@ -11,5 +11,5 @@
     editor.remove(WALLPAPER_HEIGHT_KEY);
   }
   editor.commit();
-  WallpaperUtils.suggestWallpaperDimension(getResources(),sp,getWindowManager(),WallpaperManager.getInstance(this),true);
+  WallpaperUtils.suggestWallpaperDimension(getResources(),sp,getWindowManager(),WallpaperManager.getInstance(getContext()),true);
 }

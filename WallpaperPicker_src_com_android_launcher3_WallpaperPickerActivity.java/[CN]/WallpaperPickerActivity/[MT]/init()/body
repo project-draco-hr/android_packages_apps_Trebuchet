@@ -78,13 +78,13 @@
 ;
   ArrayList<WallpaperTileInfo> wallpapers=findBundledWallpapers();
   mWallpapersView=(LinearLayout)findViewById(R.id.wallpaper_list);
-  SimpleWallpapersAdapter ia=new SimpleWallpapersAdapter(this,wallpapers);
+  SimpleWallpapersAdapter ia=new SimpleWallpapersAdapter(getContext(),wallpapers);
   populateWallpapersFromAdapter(mWallpapersView,ia,false);
-  mSavedImages=new SavedWallpaperImages(this);
+  mSavedImages=new SavedWallpaperImages(getContext());
   mSavedImages.loadThumbnailsAndImageIdList();
   populateWallpapersFromAdapter(mWallpapersView,mSavedImages,true);
   final LinearLayout liveWallpapersView=(LinearLayout)findViewById(R.id.live_wallpaper_list);
-  final LiveWallpaperListAdapter a=new LiveWallpaperListAdapter(this);
+  final LiveWallpaperListAdapter a=new LiveWallpaperListAdapter(getContext());
   a.registerDataSetObserver(new DataSetObserver(){
     public void onChanged(){
       liveWallpapersView.removeAllViews();
@@ -95,7 +95,7 @@
   }
 );
   final LinearLayout thirdPartyWallpapersView=(LinearLayout)findViewById(R.id.third_party_wallpaper_list);
-  final ThirdPartyWallpaperPickerListAdapter ta=new ThirdPartyWallpaperPickerListAdapter(this);
+  final ThirdPartyWallpaperPickerListAdapter ta=new ThirdPartyWallpaperPickerListAdapter(getContext());
   populateWallpapersFromAdapter(thirdPartyWallpapersView,ta,false);
   LinearLayout masterWallpaperList=(LinearLayout)findViewById(R.id.master_wallpaper_list);
   FrameLayout pickImageTile=(FrameLayout)getLayoutInflater().inflate(R.layout.wallpaper_picker_image_picker_item,masterWallpaperList,false);

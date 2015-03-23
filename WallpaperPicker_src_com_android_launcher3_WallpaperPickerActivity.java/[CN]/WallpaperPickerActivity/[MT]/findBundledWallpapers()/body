@@ -1,5 +1,5 @@
 {
-  final PackageManager pm=getPackageManager();
+  final PackageManager pm=getContext().getPackageManager();
   final ArrayList<WallpaperTileInfo> bundled=new ArrayList<WallpaperTileInfo>(24);
   Partner partner=Partner.get(pm);
   if (partner != null) {
@@ -35,7 +35,7 @@
   Pair<ApplicationInfo,Integer> r=getWallpaperArrayResourceId();
   if (r != null) {
     try {
-      Resources wallpaperRes=getPackageManager().getResourcesForApplication(r.first);
+      Resources wallpaperRes=getContext().getPackageManager().getResourcesForApplication(r.first);
       addWallpapers(bundled,wallpaperRes,r.first.packageName,r.second);
     }
  catch (    PackageManager.NameNotFoundException e) {

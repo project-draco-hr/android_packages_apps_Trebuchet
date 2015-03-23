@@ -62,7 +62,7 @@
     }
   }
 ;
-  BitmapCropTask cropTask=new BitmapCropTask(this,uri,cropRect,cropRotation,outWidth,outHeight,true,false,onEndCrop);
+  BitmapCropTask cropTask=new BitmapCropTask(getContext(),uri,cropRect,cropRotation,outWidth,outHeight,true,false,onEndCrop);
   if (onBitmapCroppedHandler != null) {
     cropTask.setOnBitmapCropped(onBitmapCroppedHandler);
   }

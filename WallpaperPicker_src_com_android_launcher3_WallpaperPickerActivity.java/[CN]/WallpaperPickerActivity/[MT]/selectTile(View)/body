@@ -6,5 +6,5 @@
   mSelectedTile=v;
   v.setSelected(true);
   mSelectedIndex=mWallpapersView.indexOfChild(v);
-  v.announceForAccessibility(getString(R.string.announce_selection,v.getContentDescription()));
+  v.announceForAccessibility(getContext().getString(R.string.announce_selection,v.getContentDescription()));
 }

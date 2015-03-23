@@ -1,6 +1,6 @@
 {
   CropView c=a.getCropView();
-  Drawable defaultWallpaper=WallpaperManager.getInstance(a).getBuiltInDrawable(c.getWidth(),c.getHeight(),false,0.5f,0.5f);
+  Drawable defaultWallpaper=WallpaperManager.getInstance(a.getContext()).getBuiltInDrawable(c.getWidth(),c.getHeight(),false,0.5f,0.5f);
   if (defaultWallpaper == null) {
     Log.w(TAG,"Null default wallpaper encountered.");
     c.setTileSource(null,null);
@@ -15,6 +15,6 @@
     }
   }
 ;
-  req.result=new DrawableTileSource(a,defaultWallpaper,DrawableTileSource.MAX_PREVIEW_SIZE);
+  req.result=new DrawableTileSource(a.getContext(),defaultWallpaper,DrawableTileSource.MAX_PREVIEW_SIZE);
   a.onLoadRequestComplete(req,true);
 }
