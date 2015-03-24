@@ -10,15 +10,7 @@ case MotionEvent.ACTION_DOWN:
 stopScroll();
 break;
 case MotionEvent.ACTION_MOVE:
-boolean isRtl=(getResources().getConfiguration().getLayoutDirection() == LAYOUT_DIRECTION_RTL);
-boolean isInGutter;
-if (isRtl) {
-isInGutter=mDownX < mGutterSize;
-}
- else {
-isInGutter=mDownX >= (getWidth() - mGutterSize);
-}
-if (!mDraggingFastScroller && isInGutter && Math.abs(y - mDownY) > config.getScaledTouchSlop()) {
+if (!mDraggingFastScroller && isPointNearScrollbar(mDownX,mDownY) && Math.abs(y - mDownY) > config.getScaledTouchSlop()) {
 getParent().requestDisallowInterceptTouchEvent(true);
 mDraggingFastScroller=true;
 animateFastScrollerVisibility(true);

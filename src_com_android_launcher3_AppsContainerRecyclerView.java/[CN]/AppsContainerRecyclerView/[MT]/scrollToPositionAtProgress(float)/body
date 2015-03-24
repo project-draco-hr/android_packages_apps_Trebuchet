@@ -1,10 +1,6 @@
 {
   List<AlphabeticalAppsList.SectionInfo> sections=mApps.getSections();
-  int rowCount=0;
-  for (  AlphabeticalAppsList.SectionInfo info : sections) {
-    int numRowsInSection=(int)Math.ceil((float)info.numAppsInSection / mNumAppsPerRow);
-    rowCount+=numRowsInSection;
-  }
+  int rowCount=getNumRows();
   int rowAtProgress=(int)(progress * rowCount);
   int appIndex=0;
   rowCount=0;

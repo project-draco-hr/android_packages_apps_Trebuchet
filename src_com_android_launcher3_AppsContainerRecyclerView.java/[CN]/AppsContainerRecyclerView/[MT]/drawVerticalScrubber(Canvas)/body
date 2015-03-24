@@ -1,0 +1,8 @@
+{
+  updateVerticalScrollbarBounds();
+  int restoreCount=canvas.save(Canvas.MATRIX_SAVE_FLAG);
+  canvas.translate(mVerticalScrollbarBounds.left,mVerticalScrollbarBounds.top);
+  mScrollbar.setBounds(0,0,mScrollbarWidth,mVerticalScrollbarBounds.height());
+  mScrollbar.draw(canvas);
+  canvas.restoreToCount(restoreCount);
+}

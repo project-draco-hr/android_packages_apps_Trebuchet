@@ -1,0 +1,5 @@
+{
+  updateVerticalScrollbarBounds();
+  mVerticalScrollbarBounds.inset(mScrollbarInset,mScrollbarInset);
+  return mVerticalScrollbarBounds.contains(x,y);
+}
