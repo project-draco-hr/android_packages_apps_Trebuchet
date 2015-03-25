@@ -5,7 +5,7 @@
       AppsCustomizePagedView pagedView=((AppsCustomizePagedView)contentView);
       pagedView.stopScrolling();
       pagedView.setPageBackgroundsVisible(false);
-      revealView.setBackground(mLauncher.getDrawable(R.drawable.quantum_panel_dark));
+      revealView.setBackground(mLauncher.getResources().getDrawable(R.drawable.quantum_panel_dark));
       final View currentPage=pagedView.getPageAt(pagedView.getNextPage());
       int count=pagedView.getChildCount();
       for (int i=0; i < count; i++) {
