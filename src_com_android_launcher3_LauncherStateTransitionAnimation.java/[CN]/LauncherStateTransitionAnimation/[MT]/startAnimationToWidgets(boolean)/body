@@ -3,7 +3,7 @@
   PrivateTransitionCallbacks cb=new PrivateTransitionCallbacks(){
     @Override public void onRevealViewVisible(    View revealView,    View contentView,    View allAppsButtonView){
       ((AppsCustomizePagedView)contentView).setPageBackgroundsVisible(false);
-      revealView.setBackground(mLauncher.getDrawable(R.drawable.quantum_panel_dark));
+      revealView.setBackground(mLauncher.getResources().getDrawable(R.drawable.quantum_panel_dark));
     }
     @Override public void onAnimationComplete(    View revealView,    View contentView,    View allAppsButtonView){
       ((AppsCustomizePagedView)contentView).setPageBackgroundsVisible(true);

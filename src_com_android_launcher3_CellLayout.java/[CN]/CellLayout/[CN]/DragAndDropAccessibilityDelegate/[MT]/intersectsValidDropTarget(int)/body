@@ -1,8 +1,11 @@
 {
   LauncherAccessibilityDelegate delegate=LauncherAppState.getInstance().getAccessibilityDelegate();
-  LauncherAccessibilityDelegate.DragInfo dragInfo=delegate.getDragInfo();
+  if (delegate == null) {
+    return -1;
+  }
   int y=id % mCountY;
   int x=id / mCountY;
+  LauncherAccessibilityDelegate.DragInfo dragInfo=delegate.getDragInfo();
   if (dragInfo.dragType == DragType.WIDGET) {
     boolean fits=false;
     int spanX=dragInfo.info.spanX;

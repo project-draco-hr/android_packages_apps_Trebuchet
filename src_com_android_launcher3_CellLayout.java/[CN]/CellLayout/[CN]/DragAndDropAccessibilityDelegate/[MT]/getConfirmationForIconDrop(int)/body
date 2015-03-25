@@ -1,8 +1,11 @@
 {
   LauncherAccessibilityDelegate delegate=LauncherAppState.getInstance().getAccessibilityDelegate();
-  LauncherAccessibilityDelegate.DragInfo dragInfo=delegate.getDragInfo();
+  if (delegate == null) {
+    return "";
+  }
   int y=id % mCountY;
   int x=id / mCountY;
+  LauncherAccessibilityDelegate.DragInfo dragInfo=delegate.getDragInfo();
   Resources res=getContext().getResources();
   View child=getChildAt(x,y);
   if (child == null || child == dragInfo.item) {
