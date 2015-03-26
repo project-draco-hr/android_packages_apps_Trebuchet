@@ -1,8 +1,0 @@
-{
-  mUseUninstallQueue=false;
-  Iterator<PendingUninstallShortcutInfo> iter=mUninstallQueue.iterator();
-  while (iter.hasNext()) {
-    processUninstallShortcut(context,iter.next());
-    iter.remove();
-  }
-}
