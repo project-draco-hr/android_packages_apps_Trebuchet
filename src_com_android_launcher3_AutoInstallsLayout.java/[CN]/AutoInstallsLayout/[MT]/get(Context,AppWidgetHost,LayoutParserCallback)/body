@@ -3,12 +3,5 @@
   if (customizationApkInfo == null) {
     return null;
   }
-  String pkg=customizationApkInfo.first;
-  Resources res=customizationApkInfo.second;
-  int layoutId=res.getIdentifier(LAYOUT_RES,"xml",pkg);
-  if (layoutId == 0) {
-    Log.e(TAG,"Layout definition not found in package: " + pkg);
-    return null;
-  }
-  return new AutoInstallsLayout(context,appWidgetHost,callback,res,layoutId,TAG_WORKSPACE);
+  return get(context,customizationApkInfo.first,customizationApkInfo.second,appWidgetHost,callback);
 }
