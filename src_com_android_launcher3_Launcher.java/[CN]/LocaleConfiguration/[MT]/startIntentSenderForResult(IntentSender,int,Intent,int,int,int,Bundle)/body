@@ -1,0 +1,9 @@
+{
+  onStartForResult(requestCode);
+  try {
+    super.startIntentSenderForResult(intent,requestCode,fillInIntent,flagsMask,flagsValues,extraFlags,options);
+  }
+ catch (  IntentSender.SendIntentException e) {
+    throw new ActivityNotFoundException();
+  }
+}
