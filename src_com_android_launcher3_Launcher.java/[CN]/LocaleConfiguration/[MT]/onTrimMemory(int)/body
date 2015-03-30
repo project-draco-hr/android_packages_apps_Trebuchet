@@ -6,4 +6,7 @@
       mAppsCustomizeTabHost.trimMemory();
     }
   }
+  if (mLauncherCallbacks != null) {
+    mLauncherCallbacks.onTrimMemory(level);
+  }
 }
