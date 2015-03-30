@@ -20,6 +20,4 @@
   filter.addAction(SearchManager.INTENT_GLOBAL_SEARCH_ACTIVITY_CHANGED);
   filter.addAction(SearchManager.INTENT_ACTION_SEARCHABLES_CHANGED);
   sContext.registerReceiver(mModel,filter);
-  ContentResolver resolver=sContext.getContentResolver();
-  resolver.registerContentObserver(LauncherSettings.Favorites.CONTENT_URI,true,mFavoritesObserver);
 }

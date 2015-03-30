@@ -32,7 +32,7 @@
     showOutOfSpaceMessage(isHotseatLayout(layout));
     return;
   }
-  LauncherModel.addItemToDatabase(this,info,container,screenId,cellXY[0],cellXY[1],false);
+  LauncherModel.addItemToDatabase(this,info,container,screenId,cellXY[0],cellXY[1]);
   if (!mRestoring) {
     mWorkspace.addInScreen(view,container,screenId,cellXY[0],cellXY[1],1,1,isWorkspaceLocked());
   }

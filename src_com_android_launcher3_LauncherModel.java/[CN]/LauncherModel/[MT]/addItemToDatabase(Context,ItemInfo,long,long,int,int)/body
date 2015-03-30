@@ -16,7 +16,7 @@
   final StackTraceElement[] stackTrace=new Throwable().getStackTrace();
   Runnable r=new Runnable(){
     public void run(){
-      cr.insert(notify ? LauncherSettings.Favorites.CONTENT_URI : LauncherSettings.Favorites.CONTENT_URI_NO_NOTIFICATION,values);
+      cr.insert(LauncherSettings.Favorites.CONTENT_URI,values);
 synchronized (sBgLock) {
         checkItemInfoLocked(item.id,item,stackTrace);
         sBgItemsIdMap.put(item.id,item);

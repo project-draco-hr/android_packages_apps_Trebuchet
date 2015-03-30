@@ -40,7 +40,7 @@
   }
   long addedId=folderId;
   if (folderItems.size() < 2) {
-    Uri uri=Favorites.getContentUri(folderId,false);
+    Uri uri=Favorites.getContentUri(folderId);
     SqlArguments args=new SqlArguments(uri,null,null);
     mDb.delete(args.table,args.where,args.args);
     addedId=-1;

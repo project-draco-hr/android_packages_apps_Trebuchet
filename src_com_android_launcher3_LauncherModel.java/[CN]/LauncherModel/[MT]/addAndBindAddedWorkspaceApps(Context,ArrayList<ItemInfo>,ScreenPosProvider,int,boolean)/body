@@ -28,7 +28,7 @@ synchronized (sBgLock) {
  else {
             throw new RuntimeException("Unexpected info type");
           }
-          addItemToDatabase(context,shortcutInfo,LauncherSettings.Favorites.CONTAINER_DESKTOP,screenId,cordinates[0],cordinates[1],false);
+          addItemToDatabase(context,shortcutInfo,LauncherSettings.Favorites.CONTAINER_DESKTOP,screenId,cordinates[0],cordinates[1]);
           addedShortcutsFinal.add(shortcutInfo);
         }
       }

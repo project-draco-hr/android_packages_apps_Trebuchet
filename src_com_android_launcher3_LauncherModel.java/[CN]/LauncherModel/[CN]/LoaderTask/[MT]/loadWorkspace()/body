@@ -28,7 +28,7 @@ synchronized (sBgLock) {
     final HashSet<String> installingPkgs=PackageInstallerCompat.getInstance(mContext).updateAndGetActiveSessionCache();
     final ArrayList<Long> itemsToRemove=new ArrayList<Long>();
     final ArrayList<Long> restoredRows=new ArrayList<Long>();
-    final Uri contentUri=LauncherSettings.Favorites.CONTENT_URI_NO_NOTIFICATION;
+    final Uri contentUri=LauncherSettings.Favorites.CONTENT_URI;
     if (DEBUG_LOADERS)     Log.d(TAG,"loading model from " + contentUri);
     final Cursor c=contentResolver.query(contentUri,null,null,null,null);
     final HashMap<Long,ItemInfo[][]> occupied=new HashMap<Long,ItemInfo[][]>();
@@ -380,7 +380,7 @@ if (DEBUG_LOADERS) {
 Log.d(TAG,"Removed id = " + id);
 }
 try {
-client.delete(LauncherSettings.Favorites.getContentUri(id,false),null,null);
+client.delete(LauncherSettings.Favorites.getContentUri(id),null,null);
 }
  catch (RemoteException e) {
 Log.w(TAG,"Could not remove id = " + id);
@@ -397,7 +397,7 @@ selectionBuilder.append(TextUtils.join(", ",restoredRows));
 selectionBuilder.append(")");
 ContentValues values=new ContentValues();
 values.put(LauncherSettings.Favorites.RESTORED,0);
-updater.update(LauncherSettings.Favorites.CONTENT_URI_NO_NOTIFICATION,values,selectionBuilder.toString(),null);
+updater.update(LauncherSettings.Favorites.CONTENT_URI,values,selectionBuilder.toString(),null);
 }
  catch (RemoteException e) {
 Log.w(TAG,"Could not update restored rows");

@@ -13,7 +13,7 @@
   launcherInfo.minSpanX=info.minSpanX;
   launcherInfo.minSpanY=info.minSpanY;
   launcherInfo.user=mAppWidgetManager.getUser(appWidgetInfo);
-  LauncherModel.addItemToDatabase(this,launcherInfo,container,screenId,info.cellX,info.cellY,false);
+  LauncherModel.addItemToDatabase(this,launcherInfo,container,screenId,info.cellX,info.cellY);
   if (!mRestoring) {
     if (hostView == null) {
       launcherInfo.hostView=mAppWidgetHost.createView(this,appWidgetId,appWidgetInfo);

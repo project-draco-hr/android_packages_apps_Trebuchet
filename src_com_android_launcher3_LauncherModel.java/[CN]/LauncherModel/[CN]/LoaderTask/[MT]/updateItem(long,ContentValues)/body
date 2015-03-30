@@ -1,3 +1,3 @@
 {
-  mContext.getContentResolver().update(LauncherSettings.Favorites.CONTENT_URI_NO_NOTIFICATION,update,BaseColumns._ID + "= ?",new String[]{Long.toString(itemId)});
+  mContext.getContentResolver().update(LauncherSettings.Favorites.CONTENT_URI,update,BaseColumns._ID + "= ?",new String[]{Long.toString(itemId)});
 }
