@@ -1,4 +1,5 @@
 {
+  mIconDb.updateSystemStateString(mContext);
   long userSerial=mUserManager.getSerialNumberForUser(user);
   PackageManager pm=mContext.getPackageManager();
   HashMap<String,PackageInfo> pkgInfoMap=new HashMap<String,PackageInfo>();
@@ -9,11 +10,12 @@
   for (  LauncherActivityInfoCompat app : apps) {
     componentMap.put(app.getComponentName(),app);
   }
-  Cursor c=mIconDb.getReadableDatabase().query(IconDB.TABLE_NAME,new String[]{IconDB.COLUMN_ROWID,IconDB.COLUMN_COMPONENT,IconDB.COLUMN_LAST_UPDATED,IconDB.COLUMN_VERSION},IconDB.COLUMN_USER + " = ? ",new String[]{Long.toString(userSerial)},null,null,null);
+  Cursor c=mIconDb.getReadableDatabase().query(IconDB.TABLE_NAME,new String[]{IconDB.COLUMN_ROWID,IconDB.COLUMN_COMPONENT,IconDB.COLUMN_LAST_UPDATED,IconDB.COLUMN_VERSION,IconDB.COLUMN_SYSTEM_STATE},IconDB.COLUMN_USER + " = ? ",new String[]{Long.toString(userSerial)},null,null,null);
   final int indexComponent=c.getColumnIndex(IconDB.COLUMN_COMPONENT);
   final int indexLastUpdate=c.getColumnIndex(IconDB.COLUMN_LAST_UPDATED);
   final int indexVersion=c.getColumnIndex(IconDB.COLUMN_VERSION);
   final int rowIndex=c.getColumnIndex(IconDB.COLUMN_ROWID);
+  final int systemStateIndex=c.getColumnIndex(IconDB.COLUMN_SYSTEM_STATE);
   HashSet<Integer> itemsToRemove=new HashSet<Integer>();
   HashSet<String> updatedPackages=new HashSet<String>();
   while (c.moveToNext()) {
@@ -30,7 +32,7 @@
     long updateTime=c.getLong(indexLastUpdate);
     int version=c.getInt(indexVersion);
     LauncherActivityInfoCompat app=componentMap.remove(component);
-    if (version == info.versionCode && updateTime == info.lastUpdateTime) {
+    if (version == info.versionCode && updateTime == info.lastUpdateTime && TextUtils.equals(mIconDb.mSystemState,c.getString(systemStateIndex))) {
       continue;
     }
     if (app == null) {

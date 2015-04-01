@@ -1,0 +1,3 @@
+{
+  mSystemState=Locale.getDefault().toString() + "," + c.getResources().getConfiguration().mcc;
+}

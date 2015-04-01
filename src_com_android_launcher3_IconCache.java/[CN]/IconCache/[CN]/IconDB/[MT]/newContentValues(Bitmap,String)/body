@@ -1,7 +1,8 @@
 {
   ContentValues values=new ContentValues();
-  values.put(IconDB.COLUMN_ICON,Utilities.flattenBitmap(icon));
-  values.put(IconDB.COLUMN_ICON_LOW_RES,Utilities.flattenBitmap(Bitmap.createScaledBitmap(icon,icon.getWidth() / LOW_RES_SCALE_FACTOR,icon.getHeight() / LOW_RES_SCALE_FACTOR,true)));
-  values.put(IconDB.COLUMN_LABEL,label);
+  values.put(COLUMN_ICON,Utilities.flattenBitmap(icon));
+  values.put(COLUMN_ICON_LOW_RES,Utilities.flattenBitmap(Bitmap.createScaledBitmap(icon,icon.getWidth() / LOW_RES_SCALE_FACTOR,icon.getHeight() / LOW_RES_SCALE_FACTOR,true)));
+  values.put(COLUMN_LABEL,label);
+  values.put(COLUMN_SYSTEM_STATE,mSystemState);
   return values;
 }
