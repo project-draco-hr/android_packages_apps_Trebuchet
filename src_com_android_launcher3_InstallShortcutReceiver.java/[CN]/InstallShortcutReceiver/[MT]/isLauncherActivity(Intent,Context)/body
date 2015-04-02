@@ -1,0 +1,5 @@
+{
+  Intent data=new Intent().putExtra(Intent.EXTRA_SHORTCUT_INTENT,intent);
+  PendingInstallShortcutInfo info=new PendingInstallShortcutInfo(data,context);
+  return convertToLauncherActivityIfPossible(info).isLuncherActivity();
+}

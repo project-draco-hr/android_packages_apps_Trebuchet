@@ -75,6 +75,8 @@ break;
 }
 }
 case 23:
+convertShortcutsToLauncherActivities(db);
+case 24:
 {
 return;
 }

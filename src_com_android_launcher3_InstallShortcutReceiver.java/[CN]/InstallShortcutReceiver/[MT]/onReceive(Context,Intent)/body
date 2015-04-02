@@ -4,5 +4,6 @@
   }
   if (DBG)   Log.d(TAG,"Got INSTALL_SHORTCUT: " + data.toUri(0));
   PendingInstallShortcutInfo info=new PendingInstallShortcutInfo(data,context);
+  info=convertToLauncherActivityIfPossible(info);
   queuePendingShortcutInfo(info,context);
 }
