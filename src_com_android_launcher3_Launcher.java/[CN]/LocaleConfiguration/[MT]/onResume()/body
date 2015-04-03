@@ -55,6 +55,7 @@
     mWaitingForResume.setStayPressed(false);
   }
   getWorkspace().reinflateWidgetsIfNecessary();
+  reinflateQSBIfNecessary();
   InstallShortcutReceiver.disableAndFlushInstallQueue(this);
   if (DEBUG_RESUME_TIME) {
     Log.d(TAG,"Time spent in onResume: " + (System.currentTimeMillis() - startTime));
