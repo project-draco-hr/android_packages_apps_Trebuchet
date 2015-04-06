@@ -1,0 +1,7 @@
+{
+  CacheEntry entry=getEntryForPackageLocked(packageName,user,useLowResIcon);
+  appInfoOut.iconBitmap=entry.icon;
+  appInfoOut.title=entry.title;
+  appInfoOut.usingLowResIcon=entry.isLowResIcon;
+  appInfoOut.contentDescription=entry.contentDescription;
+}

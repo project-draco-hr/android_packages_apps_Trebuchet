@@ -52,7 +52,7 @@
     if (info == null) {
       continue;
     }
-    addIconToDB(app,info,userSerial);
+    addIconToDBAndMemCache(app,info,userSerial);
   }
   return updatedPackages;
 }

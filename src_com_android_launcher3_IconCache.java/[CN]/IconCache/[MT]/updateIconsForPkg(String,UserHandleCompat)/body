@@ -4,7 +4,7 @@
     PackageInfo info=mPackageManager.getPackageInfo(packageName,PackageManager.GET_UNINSTALLED_PACKAGES);
     long userSerial=mUserManager.getSerialNumberForUser(user);
     for (    LauncherActivityInfoCompat app : mLauncherApps.getActivityList(packageName,user)) {
-      addIconToDB(app,info,userSerial);
+      addIconToDBAndMemCache(app,info,userSerial);
     }
   }
  catch (  NameNotFoundException e) {
