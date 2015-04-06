@@ -1,13 +1,14 @@
 {
+  List<AlphabeticalAppsList.AdapterItem> items=mApps.getAdapterItems();
   for (int i=0; i < parent.getChildCount(); i++) {
     View child=parent.getChildAt(i);
     ViewHolder holder=(ViewHolder)parent.getChildViewHolder(child);
     if (holder != null) {
       GridLayoutManager.LayoutParams lp=(GridLayoutManager.LayoutParams)child.getLayoutParams();
       if (!holder.mIsSectionRow && !holder.mIsEmptyRow && !lp.isItemRemoved()) {
-        if (mApps.getApps().get(holder.getPosition() - 1) == AlphabeticalAppsList.SECTION_BREAK_INFO) {
-          AppInfo info=mApps.getApps().get(holder.getPosition());
-          String section=mApps.getSectionNameForApp(info);
+        if (items.get(holder.getAdapterPosition() - 1).isSectionHeader) {
+          AlphabeticalAppsList.AdapterItem item=items.get(holder.getAdapterPosition());
+          String section=item.sectionName;
           mSectionTextPaint.getTextBounds(section,0,section.length(),mTmpBounds);
           if (mIsRtl) {
             int left=parent.getWidth() - mPaddingStart - mStartMargin;

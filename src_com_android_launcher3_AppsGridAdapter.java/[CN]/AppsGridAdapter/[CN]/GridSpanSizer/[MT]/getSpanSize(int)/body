@@ -2,8 +2,7 @@
   if (mApps.hasNoFilteredResults()) {
     return mAppsPerRow;
   }
-  AppInfo info=mApps.getApps().get(position);
-  if (info == AlphabeticalAppsList.SECTION_BREAK_INFO) {
+  if (mApps.getAdapterItems().get(position).isSectionHeader) {
     return mAppsPerRow;
   }
  else {

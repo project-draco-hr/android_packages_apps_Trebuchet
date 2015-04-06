@@ -1,22 +1,22 @@
 {
   List<AlphabeticalAppsList.SectionInfo> sections=mApps.getSections();
-  int rowCount=getNumRows();
-  int rowAtProgress=(int)(progress * rowCount);
-  int appIndex=0;
-  rowCount=0;
-  for (  AlphabeticalAppsList.SectionInfo info : sections) {
-    int numRowsInSection=(int)Math.ceil((float)info.numAppsInSection / mNumAppsPerRow);
-    if (rowCount + numRowsInSection > rowAtProgress) {
+  if (sections.isEmpty()) {
+    return "";
+  }
+  int rowAtProgress=(int)(progress * getNumRows());
+  int rowCount=0;
+  AlphabeticalAppsList.SectionInfo lastSectionInfo=null;
+  for (  AlphabeticalAppsList.SectionInfo section : sections) {
+    int numRowsInSection=(int)Math.ceil((float)section.numAppsInSection / mNumAppsPerRow);
+    if (rowCount + numRowsInSection >= rowAtProgress) {
+      lastSectionInfo=section;
       break;
     }
     rowCount+=numRowsInSection;
-    appIndex+=info.numAppsInSection;
   }
-  appIndex=Math.max(0,Math.min(mApps.getAppsWithoutSectionBreaks().size() - 1,appIndex));
-  AppInfo appInfo=mApps.getAppsWithoutSectionBreaks().get(appIndex);
-  int sectionedAppIndex=mApps.getApps().indexOf(appInfo);
+  int position=mApps.getAdapterItems().indexOf(lastSectionInfo.firstAppItem);
   LinearLayoutManager layoutManager=(LinearLayoutManager)getLayoutManager();
   stopScroll();
-  layoutManager.scrollToPositionWithOffset(sectionedAppIndex,0);
-  return mApps.getSectionNameForApp(appInfo);
+  layoutManager.scrollToPositionWithOffset(position,0);
+  return mApps.getAdapterItems().get(position).sectionName;
 }

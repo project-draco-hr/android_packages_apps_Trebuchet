@@ -1,13 +1,18 @@
 {
   if (ALLOW_SINGLE_APP_LAUNCH && actionId == EditorInfo.IME_ACTION_DONE) {
-    List<AppInfo> appsWithoutSections=mApps.getAppsWithoutSectionBreaks();
-    List<AppInfo> apps=mApps.getApps();
-    if (appsWithoutSections.size() == 1) {
-      mAppsListView.getChildAt(apps.indexOf(appsWithoutSections.get(0))).performClick();
-      InputMethodManager imm=(InputMethodManager)getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-      imm.hideSoftInputFromWindow(getWindowToken(),0);
+    if (mApps.getSize() != 1) {
+      return false;
     }
-    return true;
+    List<AlphabeticalAppsList.AdapterItem> items=mApps.getAdapterItems();
+    for (int i=0; i < items.size(); i++) {
+      AlphabeticalAppsList.AdapterItem item=items.get(i);
+      if (!item.isSectionHeader) {
+        mAppsListView.getChildAt(i).performClick();
+        InputMethodManager imm=(InputMethodManager)getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(getWindowToken(),0);
+        return true;
+      }
+    }
   }
   return false;
 }
