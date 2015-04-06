@@ -1,0 +1,4 @@
+{
+  mUserSerialCache.clear();
+  return mAppNameComparator;
+}

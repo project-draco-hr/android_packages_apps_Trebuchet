@@ -1,6 +1,5 @@
 {
-  Comparator<AppInfo> appNameComparator=LauncherModel.getAppNameComparator();
-  int index=Collections.binarySearch(mApps,info,appNameComparator);
+  int index=Collections.binarySearch(mApps,info,mAppNameComparator.getComparator());
   if (index < 0) {
     mApps.add(-(index + 1),info);
     onAppsUpdated();
