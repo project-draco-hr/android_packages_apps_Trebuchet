@@ -1,0 +1,24 @@
+{
+  final Collator collator=Collator.getInstance();
+  mUserManager=UserManagerCompat.getInstance(context);
+  mAppNameComparator=new Comparator<AppInfo>(){
+    public final int compare(    AppInfo a,    AppInfo b){
+      int result=collator.compare(a.title.toString().trim(),b.title.toString().trim());
+      if (result == 0) {
+        result=a.componentName.compareTo(b.componentName);
+        if (result == 0) {
+          if (UserHandleCompat.myUserHandle().equals(a.user)) {
+            return -1;
+          }
+ else {
+            Long aUserSerial=getAndCacheUserSerial(a.user);
+            Long bUserSerial=getAndCacheUserSerial(b.user);
+            return aUserSerial.compareTo(bUserSerial);
+          }
+        }
+      }
+      return result;
+    }
+  }
+;
+}
