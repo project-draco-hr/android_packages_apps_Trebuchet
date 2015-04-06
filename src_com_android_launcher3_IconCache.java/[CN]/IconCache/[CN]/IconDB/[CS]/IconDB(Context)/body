@@ -1,3 +1,4 @@
 {
   super(context,LauncherFiles.APP_ICONS_DB,null,DB_VERSION);
+  updateSystemStateString(context);
 }
