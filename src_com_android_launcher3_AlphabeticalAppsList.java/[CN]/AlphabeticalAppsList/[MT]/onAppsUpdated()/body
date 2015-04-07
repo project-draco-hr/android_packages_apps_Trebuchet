@@ -1,22 +1,27 @@
 {
   mFilteredApps.clear();
-  for (  AppInfo info : mApps) {
-    if (mFilter == null || mFilter.retainApp(info)) {
-      mFilteredApps.add(info);
-    }
-  }
   mSections.clear();
   mSectionedFilteredApps.clear();
   SectionInfo lastSectionInfo=null;
-  for (  AppInfo info : mFilteredApps) {
-    String sectionName=getSectionNameForApp(info);
-    if (lastSectionInfo == null || !lastSectionInfo.sectionName.equals(sectionName)) {
-      lastSectionInfo=new SectionInfo();
-      lastSectionInfo.sectionName=sectionName;
-      mSectionedFilteredApps.add(SECTION_BREAK_INFO);
-      mSections.add(lastSectionInfo);
+  int position=0;
+  int appIndex=0;
+  for (  AppInfo info : mApps) {
+    String sectionName=mIndexer.computeSectionName(info.title.toString().trim());
+    if (mFilter != null && !mFilter.retainApp(info,sectionName)) {
+      continue;
     }
+    if (lastSectionInfo == null || !lastSectionInfo.sectionName.equals(sectionName)) {
+      lastSectionInfo=new SectionInfo(sectionName);
+      mSections.add(lastSectionInfo);
+      AdapterItem sectionItem=AdapterItem.asSection(position++,sectionName);
+      mSectionedFilteredApps.add(sectionItem);
+    }
+    AdapterItem appItem=AdapterItem.asApp(position++,sectionName,info,appIndex++);
     lastSectionInfo.numAppsInSection++;
-    mSectionedFilteredApps.add(info);
+    if (lastSectionInfo.firstAppItem == null) {
+      lastSectionInfo.firstAppItem=appItem;
+    }
+    mSectionedFilteredApps.add(appItem);
+    mFilteredApps.add(info);
   }
 }

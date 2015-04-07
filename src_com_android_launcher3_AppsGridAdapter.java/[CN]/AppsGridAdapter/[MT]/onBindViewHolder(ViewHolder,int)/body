@@ -1,7 +1,7 @@
 {
 switch (holder.getItemViewType()) {
 case ICON_VIEW_TYPE:
-    AppInfo info=mApps.getApps().get(position);
+    AppInfo info=mApps.getAdapterItems().get(position).appInfo;
   BubbleTextView icon=(BubbleTextView)holder.mContent;
 icon.applyFromApplicationInfo(info);
 break;

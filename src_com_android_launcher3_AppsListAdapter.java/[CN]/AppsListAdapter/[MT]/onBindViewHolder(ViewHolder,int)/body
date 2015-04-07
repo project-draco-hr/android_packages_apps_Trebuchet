@@ -1,13 +1,13 @@
 {
 switch (holder.getItemViewType()) {
 case ICON_VIEW_TYPE:
-    AppInfo info=mApps.getApps().get(position);
+    AlphabeticalAppsList.AdapterItem item=mApps.getAdapterItems().get(position);
   ViewGroup content=(ViewGroup)holder.mContent;
-String sectionDescription=mApps.getSectionNameForApp(info);
+String sectionDescription=item.sectionName;
 boolean showSectionHeader=true;
 if (position > 0) {
-AppInfo prevInfo=mApps.getApps().get(position - 1);
-showSectionHeader=(prevInfo == AlphabeticalAppsList.SECTION_BREAK_INFO);
+AlphabeticalAppsList.AdapterItem prevItem=mApps.getAdapterItems().get(position - 1);
+showSectionHeader=prevItem.isSectionHeader;
 }
 TextView tv=(TextView)content.findViewById(R.id.section);
 if (showSectionHeader) {
@@ -18,7 +18,7 @@ tv.setVisibility(View.VISIBLE);
 tv.setVisibility(View.INVISIBLE);
 }
 BubbleTextView icon=(BubbleTextView)content.getChildAt(1);
-icon.applyFromApplicationInfo(info);
+icon.applyFromApplicationInfo(item.appInfo);
 break;
 case EMPTY_VIEW_TYPE:
 TextView emptyViewText=(TextView)holder.mContent.findViewById(R.id.empty_text);

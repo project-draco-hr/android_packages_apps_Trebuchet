@@ -1,0 +1,9 @@
+{
+  AdapterItem item=new AdapterItem();
+  item.position=pos;
+  item.isSectionHeader=true;
+  item.sectionName=name;
+  item.appInfo=null;
+  item.appIndex=-1;
+  return item;
+}

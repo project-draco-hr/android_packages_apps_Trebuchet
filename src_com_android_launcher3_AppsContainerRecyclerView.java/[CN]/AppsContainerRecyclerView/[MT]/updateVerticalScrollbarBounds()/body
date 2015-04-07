@@ -1,11 +1,11 @@
 {
-  int x;
-  int y;
-  boolean isRtl=(getResources().getConfiguration().getLayoutDirection() == LAYOUT_DIRECTION_RTL);
-  if (mApps.getApps().isEmpty()) {
+  if (mApps.getAdapterItems().isEmpty()) {
     mVerticalScrollbarBounds.setEmpty();
     return;
   }
+  int x;
+  int y;
+  boolean isRtl=(getResources().getConfiguration().getLayoutDirection() == LAYOUT_DIRECTION_RTL);
   int rowIndex=-1;
   int rowTopOffset=-1;
   int rowHeight=-1;
@@ -13,12 +13,11 @@
   int childCount=getChildCount();
   for (int i=0; i < childCount; i++) {
     View child=getChildAt(i);
-    int position=getChildPosition(child);
+    int position=getChildAdapterPosition(child);
     if (position != NO_POSITION) {
-      AppInfo info=mApps.getApps().get(position);
-      if (info != AlphabeticalAppsList.SECTION_BREAK_INFO) {
-        int appIndex=mApps.getAppsWithoutSectionBreaks().indexOf(info);
-        rowIndex=findRowForAppIndex(appIndex);
+      AlphabeticalAppsList.AdapterItem item=mApps.getAdapterItems().get(position);
+      if (!item.isSectionHeader) {
+        rowIndex=findRowForAppIndex(item.appIndex);
         rowTopOffset=getLayoutManager().getDecoratedTop(child);
         rowHeight=child.getHeight();
         break;

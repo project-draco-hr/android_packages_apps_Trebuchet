@@ -1,0 +1,4 @@
+int pos
+String sectionName
+AppInfo appInfo
+int appIndex

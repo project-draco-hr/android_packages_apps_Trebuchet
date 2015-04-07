@@ -12,9 +12,8 @@
     }
     final String filterText=s.toString().toLowerCase().replaceAll("\\s+","");
     mApps.setFilter(new AlphabeticalAppsList.Filter(){
-      @Override public boolean retainApp(      AppInfo info){
+      @Override public boolean retainApp(      AppInfo info,      String sectionName){
         String title=info.title.toString();
-        String sectionName=mApps.getSectionNameForApp(info);
         return sectionName.toLowerCase().contains(filterText) || title.toLowerCase().replaceAll("\\s+","").contains(filterText);
       }
     }
