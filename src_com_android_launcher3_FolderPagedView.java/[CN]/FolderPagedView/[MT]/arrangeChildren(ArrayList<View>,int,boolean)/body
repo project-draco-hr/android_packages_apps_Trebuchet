@@ -61,7 +61,7 @@
   if (getPageCount() > 1) {
     mPageIndicator.setVisibility(View.VISIBLE);
     mSortButton.setVisibility(View.VISIBLE);
-    mFolder.mFolderName.setGravity(Gravity.START);
+    mFolder.mFolderName.setGravity(rtlLayout ? Gravity.RIGHT : Gravity.LEFT);
     setEnableOverscroll(true);
   }
  else {

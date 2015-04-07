@@ -1,0 +1,14 @@
+{
+  if (mScrollHintDir != direction) {
+    mPagedView.showScrollHint(direction);
+    mScrollHintDir=direction;
+  }
+  if (!mOnScrollHintAlarm.alarmPending() || mCurrentScrollDir != direction) {
+    mCurrentScrollDir=direction;
+    mOnScrollHintAlarm.cancelAlarm();
+    mOnScrollHintAlarm.setOnAlarmListener(new OnScrollHintListener(d));
+    mOnScrollHintAlarm.setAlarm(SCROLL_HINT_DURATION);
+    mReorderAlarm.cancelAlarm();
+    mTargetRank=mEmptyCellRank;
+  }
+}

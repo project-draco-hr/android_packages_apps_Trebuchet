@@ -8,4 +8,5 @@
   mMaxItemsPerPage=mMaxCountX * mMaxCountY;
   mInflater=LayoutInflater.from(context);
   mIconCache=app.getIconCache();
+  rtlLayout=getResources().getConfiguration().getLayoutDirection() == LayoutDirection.RTL;
 }
