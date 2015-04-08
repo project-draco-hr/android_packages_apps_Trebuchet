@@ -1,10 +1,11 @@
 {
   View parent=(View)child.getParent();
-  if (parent instanceof PagedView) {
-    child=((PagedView)parent).getPageAt(0);
-  }
   shift[0]+=child.getLeft();
   shift[1]+=child.getTop();
+  if (parent instanceof PagedView) {
+    PagedView page=(PagedView)parent;
+    shift[0]-=page.getScrollForPage(page.indexOfChild(child));
+  }
   if (parent != commonParent) {
     computeLocationRelativeToParentHelper(parent,commonParent,shift);
   }
