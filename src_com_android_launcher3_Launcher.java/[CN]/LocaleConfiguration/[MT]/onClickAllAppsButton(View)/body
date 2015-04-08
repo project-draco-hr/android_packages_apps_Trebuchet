@@ -6,7 +6,4 @@
  else {
     showAppsView(true,false);
   }
-  if (mLauncherCallbacks != null) {
-    mLauncherCallbacks.onClickAllAppsButton(v);
-  }
 }

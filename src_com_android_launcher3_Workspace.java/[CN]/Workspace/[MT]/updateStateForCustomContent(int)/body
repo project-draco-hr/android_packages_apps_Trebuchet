@@ -21,7 +21,9 @@
     cc.setVisibility(VISIBLE);
   }
   mLastCustomContentScrollProgress=progress;
-  mLauncher.getDragLayer().setBackgroundAlpha(progress * 0.8f);
+  if (mState == State.NORMAL) {
+    mLauncher.getDragLayer().setBackgroundAlpha(progress * 0.8f);
+  }
   if (mLauncher.getHotseat() != null) {
     mLauncher.getHotseat().setTranslationX(translationX);
   }

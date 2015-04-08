@@ -12,5 +12,5 @@
     }
   }
 ;
-  startAnimationToOverlay(Workspace.State.OVERVIEW_HIDDEN,toView,toView.getContentView(),toView.getRevealView(),null,animated,cb);
+  startAnimationToOverlay(Workspace.State.OVERVIEW_HIDDEN,toView,toView.getContentView(),toView.getRevealView(),animated,true,cb);
 }

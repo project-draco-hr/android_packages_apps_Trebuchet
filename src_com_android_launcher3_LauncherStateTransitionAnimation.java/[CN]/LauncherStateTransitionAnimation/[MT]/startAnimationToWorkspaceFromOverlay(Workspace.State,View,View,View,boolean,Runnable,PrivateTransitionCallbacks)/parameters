@@ -1,7 +1,7 @@
 Workspace.State toWorkspaceState
-View toView
+View fromView
 View contentView
 View revealView
-View pageIndicatorsView
 boolean animated
+Runnable onCompleteRunnable
 PrivateTransitionCallbacks pCb

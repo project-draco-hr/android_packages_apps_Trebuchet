@@ -1,6 +1,9 @@
 {
-  if (ev.getAction() == MotionEvent.ACTION_DOWN || ev.getAction() == MotionEvent.ACTION_MOVE) {
+switch (ev.getAction()) {
+case MotionEvent.ACTION_DOWN:
+case MotionEvent.ACTION_MOVE:
     mLastTouchDownPos.set((int)ev.getX(),(int)ev.getY());
-  }
-  return false;
+  break;
+}
+return false;
 }

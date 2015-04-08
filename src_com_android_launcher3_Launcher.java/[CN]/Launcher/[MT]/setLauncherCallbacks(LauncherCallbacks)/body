@@ -1,4 +1,13 @@
 {
   mLauncherCallbacks=callbacks;
+  mLauncherCallbacks.setLauncherAppsCallback(new Launcher.LauncherAppsCallbacks(){
+    @Override public void onAllAppsBoundsChanged(    Rect bounds){
+      mAppsView.setFixedBounds(Launcher.this,bounds);
+    }
+    @Override public void dismissAllApps(){
+      showWorkspace(true);
+    }
+  }
+);
   return true;
 }

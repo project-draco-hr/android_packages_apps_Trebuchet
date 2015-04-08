@@ -33,5 +33,5 @@
     }
   }
 ;
-  startAnimationToWorkspaceFromOverlay(toWorkspaceState,appsView,appsView.getContentView(),appsView.getRevealView(),null,animated,onCompleteRunnable,cb);
+  startAnimationToWorkspaceFromOverlay(toWorkspaceState,appsView,appsView.getContentView(),appsView.getRevealView(),animated,onCompleteRunnable,cb);
 }

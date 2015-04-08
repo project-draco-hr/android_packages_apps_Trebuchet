@@ -3,6 +3,8 @@
   LauncherAppState app=LauncherAppState.getInstance();
   DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
   Resources res=context.getResources();
+  mContainerInset=context.getResources().getDimensionPixelSize(R.dimen.apps_container_inset);
+  mFixedBoundsContainerInset=context.getResources().getDimensionPixelSize(R.dimen.apps_container_fixed_bounds_inset);
   mLauncher=(Launcher)context;
   mApps=new AlphabeticalAppsList(context);
   if (USE_LAYOUT == GRID_LAYOUT) {

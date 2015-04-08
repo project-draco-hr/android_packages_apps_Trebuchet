@@ -3,6 +3,9 @@
   if (toState != State.APPS && toState != State.WIDGETS)   return;
   if (toState == State.APPS) {
     mStateTransitionAnimation.startAnimationToAllApps(animated);
+    if (mLauncherCallbacks != null) {
+      mLauncherCallbacks.onAllAppsShown();
+    }
   }
  else {
     mStateTransitionAnimation.startAnimationToWidgets(animated);

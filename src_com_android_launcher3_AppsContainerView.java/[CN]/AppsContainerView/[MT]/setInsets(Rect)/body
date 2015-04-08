@@ -1,3 +1,4 @@
 {
-  setPadding(mPadding.left + insets.left,mPadding.top + insets.top,mPadding.right + insets.right,mPadding.bottom + insets.bottom);
+  mInsets.set(insets);
+  updatePaddings();
 }

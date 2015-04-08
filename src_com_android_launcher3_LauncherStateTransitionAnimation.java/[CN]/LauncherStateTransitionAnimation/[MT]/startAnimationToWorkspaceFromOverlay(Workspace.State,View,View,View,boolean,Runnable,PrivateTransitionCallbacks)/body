@@ -64,13 +64,6 @@
       itemsAlpha.setDuration(100);
       itemsAlpha.setInterpolator(decelerateInterpolator);
       mStateAnimation.play(itemsAlpha);
-      if (pageIndicatorsView != null) {
-        pageIndicatorsView.setAlpha(1f);
-        ObjectAnimator indicatorsAlpha=LauncherAnimUtils.ofFloat(pageIndicatorsView,"alpha",0f);
-        indicatorsAlpha.setDuration(revealDuration);
-        indicatorsAlpha.setInterpolator(new DecelerateInterpolator(1.5f));
-        mStateAnimation.play(indicatorsAlpha);
-      }
       if (material) {
         float finalRadius=pCb.getMaterialRevealViewStartFinalRadius();
         AnimatorListenerAdapter listener=pCb.getMaterialRevealViewAnimatorListener(revealView,allAppsButtonView);

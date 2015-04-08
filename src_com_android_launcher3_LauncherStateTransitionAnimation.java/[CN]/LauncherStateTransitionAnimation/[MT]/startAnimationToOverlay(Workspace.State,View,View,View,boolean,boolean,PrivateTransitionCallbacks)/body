@@ -40,12 +40,6 @@
     panelAlphaAndDrift.setInterpolator(new LogDecelerateInterpolator(100,0));
     layerViews.put(revealView,BUILD_AND_SET_LAYER);
     mStateAnimation.play(panelAlphaAndDrift);
-    if (pageIndicatorsView != null) {
-      pageIndicatorsView.setAlpha(0.01f);
-      ObjectAnimator indicatorsAlpha=ObjectAnimator.ofFloat(pageIndicatorsView,"alpha",1f);
-      indicatorsAlpha.setDuration(revealDuration);
-      mStateAnimation.play(indicatorsAlpha);
-    }
     contentView.setVisibility(View.VISIBLE);
     contentView.setAlpha(0f);
     contentView.setTranslationY(revealViewToYDrift);
@@ -82,7 +76,9 @@
             v.setLayerType(View.LAYER_TYPE_NONE,null);
           }
         }
-        mCb.onStateTransitionHideSearchBar();
+        if (hideSearchBar) {
+          mCb.onStateTransitionHideSearchBar();
+        }
         mStateAnimation=null;
       }
     }
@@ -123,7 +119,9 @@
     toView.setVisibility(View.VISIBLE);
     toView.bringToFront();
     contentView.setVisibility(View.VISIBLE);
-    mCb.onStateTransitionHideSearchBar();
+    if (hideSearchBar) {
+      mCb.onStateTransitionHideSearchBar();
+    }
     dispatchOnLauncherTransitionPrepare(fromView,animated,false);
     dispatchOnLauncherTransitionStart(fromView,animated,false);
     dispatchOnLauncherTransitionEnd(fromView,animated,false);
