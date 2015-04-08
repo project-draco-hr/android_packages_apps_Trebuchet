@@ -1,8 +1,0 @@
-{
-  for (int i=0; i < mPoolSize; i++) {
-    if (mPool[i] == instance) {
-      return true;
-    }
-  }
-  return false;
-}
