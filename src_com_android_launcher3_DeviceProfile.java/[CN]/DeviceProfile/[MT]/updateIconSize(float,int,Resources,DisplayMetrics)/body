@@ -39,5 +39,5 @@
   int appsContainerViewPx=res.getDimensionPixelSize(R.dimen.apps_container_width);
   int appsViewLeftMarginPx=res.getDimensionPixelSize(R.dimen.apps_grid_view_start_margin);
   int availableAppsWidthPx=(appsContainerViewPx > 0) ? appsContainerViewPx : availableWidthPx;
-  appsViewNumCols=(availableAppsWidthPx - appsViewLeftMarginPx) / (allAppsCellWidthPx + allAppsCellPaddingPx);
+  appsViewNumCols=(availableAppsWidthPx - appsViewLeftMarginPx) / (allAppsCellWidthPx + 2 * allAppsCellPaddingPx);
 }
