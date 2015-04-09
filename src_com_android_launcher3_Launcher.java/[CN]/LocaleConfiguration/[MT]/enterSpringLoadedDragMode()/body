@@ -1,4 +1,5 @@
 {
+  Log.d(TAG,String.format("enterSpringLoadedDragMode [mState=%s",mState.name()));
   if (mState == State.WORKSPACE || mState == State.APPS_SPRING_LOADED || mState == State.WIDGETS_SPRING_LOADED) {
     return;
   }

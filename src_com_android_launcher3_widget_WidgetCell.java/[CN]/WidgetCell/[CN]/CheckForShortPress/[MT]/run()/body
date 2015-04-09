@@ -1,0 +1,8 @@
+{
+  if (sShortpressTarget != null)   return;
+  if (mShortPressListener != null) {
+    mShortPressListener.onShortPress(WidgetCell.this);
+    sShortpressTarget=WidgetCell.this;
+  }
+  mShortPressTriggered=true;
+}

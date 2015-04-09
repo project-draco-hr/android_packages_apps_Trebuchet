@@ -1,11 +1,12 @@
 {
+  Log.d(TAG,"showWidgetsView:" + animated + " resetPageToZero:"+ resetPageToZero);
   if (resetPageToZero) {
-    mAppsCustomizeTabHost.reset();
+    mWidgetsView.scrollToTop();
   }
   showAppsOrWidgets(animated,State.WIDGETS);
-  mAppsCustomizeTabHost.post(new Runnable(){
+  mWidgetsView.post(new Runnable(){
     @Override public void run(){
-      mAppsCustomizeTabHost.requestFocus();
+      mWidgetsView.requestFocus();
     }
   }
 );

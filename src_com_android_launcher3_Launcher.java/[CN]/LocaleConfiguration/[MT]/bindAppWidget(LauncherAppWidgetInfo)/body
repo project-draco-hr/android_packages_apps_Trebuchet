@@ -27,7 +27,7 @@
     pendingInfo.spanY=item.spanY;
     pendingInfo.minSpanX=item.minSpanX;
     pendingInfo.minSpanY=item.minSpanY;
-    Bundle options=AppsCustomizePagedView.getDefaultOptionsForWidget(this,pendingInfo);
+    Bundle options=null;
     int newWidgetId=mAppWidgetHost.allocateAppWidgetId();
     boolean success=mAppWidgetManager.bindAppWidgetIdIfAllowed(newWidgetId,appWidgetInfo,options);
     if (!success) {

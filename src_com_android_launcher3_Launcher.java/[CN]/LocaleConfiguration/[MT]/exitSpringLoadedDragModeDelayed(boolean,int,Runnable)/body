@@ -3,7 +3,7 @@
   mHandler.postDelayed(new Runnable(){
     @Override public void run(){
       if (successfulDrop) {
-        mAppsCustomizeTabHost.setVisibility(View.GONE);
+        mWidgetsView.setVisibility(View.GONE);
         showWorkspace(true,onCompleteRunnable);
       }
  else {

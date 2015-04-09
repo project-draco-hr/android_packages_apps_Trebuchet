@@ -1,0 +1,9 @@
+{
+  mLayoutInflater=LayoutInflater.from(context);
+  mContext=context;
+  mTouchListener=touchListener;
+  mIconClickListener=iconClickListener;
+  mIconLongClickListener=iconLongClickListener;
+  mLauncher=launcher;
+  mIconCache=LauncherAppState.getInstance().getIconCache();
+}

@@ -1,0 +1,7 @@
+{
+  Log.d(TAG,String.format("onTouch [MotionEvent=%s]",ev));
+  if (ev.getAction() == MotionEvent.ACTION_DOWN || ev.getAction() == MotionEvent.ACTION_MOVE) {
+    mLastTouchDownPos.set((int)ev.getX(),(int)ev.getY());
+  }
+  return false;
+}

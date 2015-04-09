@@ -1,0 +1,3 @@
+{
+  return String.format("PendingAddShortcutInfo package=%s, name=%s",activityInfo.packageName,activityInfo.name);
+}

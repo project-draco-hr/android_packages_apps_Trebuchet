@@ -1,0 +1,9 @@
+{
+  removeShortPressCallback();
+  if (mShortPressTriggered) {
+    if (mShortPressListener != null) {
+      mShortPressListener.cleanUpShortPress(WidgetCell.this);
+    }
+    mShortPressTriggered=false;
+  }
+}

@@ -1,0 +1,9 @@
+{
+  super(context,attrs,defStyle);
+  final Resources r=context.getResources();
+  mDimensionsFormatString=r.getString(R.string.widget_dims_format);
+  mPresetPreviewSize=r.getDimensionPixelSize(R.dimen.widget_preview_size);
+  setWillNotDraw(false);
+  setClipToPadding(false);
+  setAccessibilityDelegate(LauncherAppState.getInstance().getAccessibilityDelegate());
+}

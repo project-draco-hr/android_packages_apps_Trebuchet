@@ -1,3 +1,0 @@
-{
-  return findViewById(R.id.apps_customize_page_indicator);
-}

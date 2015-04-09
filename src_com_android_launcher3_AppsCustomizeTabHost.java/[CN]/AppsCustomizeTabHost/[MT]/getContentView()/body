@@ -1,3 +1,0 @@
-{
-  return findViewById(R.id.apps_customize_pane_content);
-}

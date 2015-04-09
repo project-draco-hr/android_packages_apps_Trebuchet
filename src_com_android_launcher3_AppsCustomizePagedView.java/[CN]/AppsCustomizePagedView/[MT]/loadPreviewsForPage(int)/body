@@ -1,8 +1,0 @@
-{
-  final PagedViewGridLayout layout=(PagedViewGridLayout)getPageAt(page);
-  if (layout != null) {
-    for (int i=0; i < layout.getChildCount(); i++) {
-      ((PagedViewWidget)layout.getChildAt(i)).ensurePreview();
-    }
-  }
-}

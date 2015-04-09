@@ -1,0 +1,5 @@
+{
+  mAdapter=adapter;
+  mWidgetAndShortcutNameComparator=new WidgetAndShortcutNameComparator(context);
+  mIconCache=LauncherAppState.getInstance().getIconCache();
+}

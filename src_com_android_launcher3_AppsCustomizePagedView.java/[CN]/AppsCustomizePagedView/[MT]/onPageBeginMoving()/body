@@ -1,9 +1,0 @@
-{
-  super.onPageBeginMoving();
-  if (!mInTransition) {
-    getVisiblePages(sTempPosArray);
-    for (int i=sTempPosArray[0]; i <= sTempPosArray[1]; i++) {
-      loadPreviewsForPage(i);
-    }
-  }
-}

@@ -1,9 +1,0 @@
-{
-  if (!isDataReady()) {
-    requestLayout();
-  }
- else {
-    cancelAllTasks(false);
-    invalidatePageData();
-  }
-}

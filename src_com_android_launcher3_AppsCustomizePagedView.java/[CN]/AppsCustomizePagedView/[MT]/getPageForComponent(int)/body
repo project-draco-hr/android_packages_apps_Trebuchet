@@ -1,5 +1,0 @@
-{
-  if (index < 0)   return 0;
-  int numItemsPerPage=mWidgetCountX * mWidgetCountY;
-  return index / numItemsPerPage;
-}

@@ -1,7 +1,0 @@
-{
-  mInTransition=false;
-  mForceDrawAllChildrenNextFrame=!toWorkspace;
-  if (!toWorkspace) {
-    loadPreviewsForPage(getNextPage());
-  }
-}

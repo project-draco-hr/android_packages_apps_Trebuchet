@@ -1,3 +1,0 @@
-{
-  mNumWidgetPages=(int)Math.ceil(mWidgets.size() / (float)(mWidgetCountX * mWidgetCountY));
-}

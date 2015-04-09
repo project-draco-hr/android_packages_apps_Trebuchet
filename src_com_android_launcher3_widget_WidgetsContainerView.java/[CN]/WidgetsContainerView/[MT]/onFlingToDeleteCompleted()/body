@@ -1,0 +1,4 @@
+{
+  mLauncher.exitSpringLoadedDragModeDelayed(true,Launcher.EXIT_SPRINGLOADED_MODE_SHORT_TIMEOUT,null);
+  mLauncher.unlockScreenOrientation(false);
+}

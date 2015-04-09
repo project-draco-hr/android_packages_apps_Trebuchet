@@ -1,7 +1,0 @@
-{
-  if (mContentType != type || type == ContentType.Widgets) {
-    int page=(mContentType != type) ? 0 : getCurrentPage();
-    mContentType=type;
-    invalidatePageData(page,true);
-  }
-}

@@ -1,3 +1,0 @@
-{
-  return getTabTagForContentType(mPagedView.getContentType());
-}

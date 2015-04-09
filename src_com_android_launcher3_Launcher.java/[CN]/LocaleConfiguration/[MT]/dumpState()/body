@@ -7,8 +7,5 @@
   Log.d(TAG,"mSavedInstanceState=" + mSavedInstanceState);
   Log.d(TAG,"sFolders.size=" + sFolders.size());
   mModel.dumpState();
-  if (mAppsCustomizeContent != null) {
-    mAppsCustomizeContent.dumpState();
-  }
   Log.d(TAG,"END launcher3 dump state");
 }

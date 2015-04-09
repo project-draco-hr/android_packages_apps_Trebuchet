@@ -1,0 +1,4 @@
+{
+  super(context,null,0);
+  mAppName=appName;
+}

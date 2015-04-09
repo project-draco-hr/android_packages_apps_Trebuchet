@@ -19,15 +19,6 @@
     outState.putBoolean(RUNTIME_STATE_PENDING_FOLDER_RENAME,true);
     outState.putLong(RUNTIME_STATE_PENDING_FOLDER_RENAME_ID,mFolderInfo.id);
   }
-  if (mAppsCustomizeTabHost != null) {
-    AppsCustomizePagedView.ContentType type=mAppsCustomizeContent.getContentType();
-    String currentTabTag=mAppsCustomizeTabHost.getTabTagForContentType(type);
-    if (currentTabTag != null) {
-      outState.putString("apps_customize_currentTab",currentTabTag);
-    }
-    int currentIndex=mAppsCustomizeContent.getSaveInstanceStateIndex();
-    outState.putInt("apps_customize_currentIndex",currentIndex);
-  }
   outState.putSerializable(RUNTIME_STATE_VIEW_IDS,mItemIdToViewId);
   if (mLauncherCallbacks != null) {
     mLauncherCallbacks.onSaveInstanceState(outState);

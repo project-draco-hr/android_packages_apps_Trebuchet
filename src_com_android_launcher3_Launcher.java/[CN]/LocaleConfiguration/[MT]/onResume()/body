@@ -31,14 +31,8 @@
     if (DEBUG_RESUME_TIME) {
       startTimeCallbacks=System.currentTimeMillis();
     }
-    if (mAppsCustomizeContent != null) {
-      mAppsCustomizeContent.setBulkBind(true);
-    }
     for (int i=0; i < mBindOnResumeCallbacks.size(); i++) {
       mBindOnResumeCallbacks.get(i).run();
-    }
-    if (mAppsCustomizeContent != null) {
-      mAppsCustomizeContent.setBulkBind(false);
     }
     mBindOnResumeCallbacks.clear();
     if (DEBUG_RESUME_TIME) {

@@ -1,6 +1,0 @@
-{
-  final int count=getChildCount();
-  int windowSize=Math.min(count,sLookBehindPageCount + sLookAheadPageCount + 1);
-  int windowMinIndex=Math.max(Math.min(page - sLookBehindPageCount,count - windowSize),0);
-  return windowMinIndex;
-}

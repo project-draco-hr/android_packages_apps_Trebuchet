@@ -3,7 +3,7 @@
     mWidgetsAndShortcuts=widgetsAndShortcuts;
     return;
   }
-  if (mAppsCustomizeContent != null) {
-    mAppsCustomizeContent.onPackagesUpdated(widgetsAndShortcuts);
+  if (mWidgetsView != null) {
+    mWidgetsView.addWidgets(LauncherModel.getSortedWidgetsAndShortcuts(this,false),getPackageManager());
   }
 }

@@ -1,31 +1,6 @@
 {
-  AppsCustomizeTabHost widgetsView=mLauncher.getWidgetsView();
+  WidgetsContainerView widgetsView=mLauncher.getWidgetsView();
   PrivateTransitionCallbacks cb=new PrivateTransitionCallbacks(){
-    @Override public void onRevealViewVisible(    View revealView,    View contentView,    View allAppsButtonView){
-      AppsCustomizePagedView pagedView=((AppsCustomizePagedView)contentView);
-      pagedView.stopScrolling();
-      pagedView.setPageBackgroundsVisible(false);
-      revealView.setBackground(mLauncher.getResources().getDrawable(R.drawable.quantum_panel_dark));
-      final View currentPage=pagedView.getPageAt(pagedView.getNextPage());
-      int count=pagedView.getChildCount();
-      for (int i=0; i < count; i++) {
-        View child=pagedView.getChildAt(i);
-        if (child != currentPage) {
-          child.setVisibility(View.INVISIBLE);
-        }
-      }
-    }
-    @Override public void onAnimationComplete(    View revealView,    View contentView,    View allAppsButtonView){
-      AppsCustomizePagedView pagedView=((AppsCustomizePagedView)contentView);
-      pagedView.setPageBackgroundsVisible(true);
-      pagedView.setCurrentPage(pagedView.getNextPage());
-      pagedView.updateCurrentPageScroll();
-      int count=pagedView.getChildCount();
-      for (int i=0; i < count; i++) {
-        View child=pagedView.getChildAt(i);
-        child.setVisibility(View.VISIBLE);
-      }
-    }
     @Override public float getMaterialRevealViewFinalYDrift(    View revealView){
       return revealView.getMeasuredHeight() / 2;
     }
@@ -42,5 +17,5 @@
     }
   }
 ;
-  startAnimationToWorkspaceFromOverlay(toWorkspaceState,widgetsView,widgetsView.getContentView(),widgetsView.getRevealView(),widgetsView.getPageIndicators(),animated,onCompleteRunnable,cb);
+  startAnimationToWorkspaceFromOverlay(toWorkspaceState,widgetsView,widgetsView.getContentView(),widgetsView.getRevealView(),null,animated,onCompleteRunnable,cb);
 }

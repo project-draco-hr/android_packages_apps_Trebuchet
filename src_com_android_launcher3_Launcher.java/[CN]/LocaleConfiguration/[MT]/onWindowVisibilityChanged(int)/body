@@ -2,7 +2,6 @@
   mVisible=visibility == View.VISIBLE;
   updateAutoAdvanceState();
   if (mVisible) {
-    mAppsCustomizeTabHost.onWindowVisible();
     if (!mWorkspaceLoading) {
       final ViewTreeObserver observer=mWorkspace.getViewTreeObserver();
       observer.addOnDrawListener(new ViewTreeObserver.OnDrawListener(){

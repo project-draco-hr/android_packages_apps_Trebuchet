@@ -1,0 +1,10 @@
+{
+  if (DEBUG) {
+    Log.d(TAG,String.format("onLonglick [v=%s]",v));
+  }
+  if (!v.isInTouchMode())   return false;
+  if (!mLauncher.isWidgetsViewVisible() || mLauncher.getWorkspace().isSwitchingState())   return false;
+  Log.d(TAG,String.format("onLonglick dragging enabled?.",v));
+  if (!mLauncher.isDraggingEnabled())   return false;
+  return beginDragging(v);
+}

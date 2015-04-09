@@ -2,7 +2,7 @@
   boolean isVisible=true;
   boolean useUninstallLabel=isAllAppsApplication(source,info);
   boolean useDeleteLabel=!useUninstallLabel && source.supportsDeleteDropTarget();
-  if (!willAcceptDrop(info) || isAllAppsWidget(source,info)) {
+  if (!willAcceptDrop(info) || isWidget(source,info)) {
     isVisible=false;
   }
   if (useUninstallLabel) {

@@ -1,0 +1,5 @@
+Context context
+View.OnTouchListener touchListener
+View.OnClickListener iconClickListener
+View.OnLongClickListener iconLongClickListener
+Launcher launcher

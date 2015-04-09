@@ -1,0 +1,3 @@
+{
+  return String.format("PendingAddWidgetInfo package=%s, name=%s",componentName.getPackageName(),componentName.getShortClassName());
+}

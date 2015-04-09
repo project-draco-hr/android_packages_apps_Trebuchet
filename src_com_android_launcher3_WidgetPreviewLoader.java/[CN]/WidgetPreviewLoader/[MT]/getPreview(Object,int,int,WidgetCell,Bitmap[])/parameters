@@ -1,0 +1,5 @@
+Object o
+int previewWidth
+int previewHeight
+WidgetCell caller
+Bitmap[] immediateResult

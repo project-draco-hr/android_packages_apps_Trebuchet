@@ -60,40 +60,6 @@
       pageIndicator.setLayoutParams(lp);
     }
   }
-  AppsCustomizeTabHost host=(AppsCustomizeTabHost)launcher.findViewById(R.id.apps_customize_pane);
-  if (host != null) {
-    int pageIndicatorHeight=(int)(pageIndicatorHeightPx * Math.min(1f,(allAppsIconSizePx / DynamicGrid.DEFAULT_ICON_SIZE_PX)));
-    pageIndicator=host.findViewById(R.id.apps_customize_page_indicator);
-    if (pageIndicator != null) {
-      LinearLayout.LayoutParams lllp=(LinearLayout.LayoutParams)pageIndicator.getLayoutParams();
-      lllp.width=LayoutParams.WRAP_CONTENT;
-      lllp.height=pageIndicatorHeight;
-      pageIndicator.setLayoutParams(lllp);
-    }
-    AppsCustomizePagedView pagedView=(AppsCustomizePagedView)host.findViewById(R.id.apps_customize_pane_content);
-    FrameLayout fakePageContainer=(FrameLayout)host.findViewById(R.id.fake_page_container);
-    FrameLayout fakePage=(FrameLayout)host.findViewById(R.id.fake_page);
-    padding=new Rect();
-    if (pagedView != null) {
-      int paddingLR=(availableWidthPx - (allAppsCellWidthPx * allAppsNumCols)) / (2 * (allAppsNumCols + 1));
-      int paddingTB=(availableHeightPx - (allAppsCellHeightPx * allAppsNumRows)) / (2 * (allAppsNumRows + 1));
-      paddingLR=Math.min(paddingLR,(int)((paddingLR + paddingTB) * 0.75f));
-      paddingTB=Math.min(paddingTB,(int)((paddingLR + paddingTB) * 0.75f));
-      int maxAllAppsWidth=(allAppsNumCols * (allAppsCellWidthPx + 2 * paddingLR));
-      int gridPaddingLR=(availableWidthPx - maxAllAppsWidth) / 2;
-      if ((isTablet() || isLandscape) && gridPaddingLR > (allAppsCellWidthPx / 4)) {
-        padding.left=padding.right=gridPaddingLR;
-      }
-      padding.bottom=Math.max(0,pageIndicatorHeight - paddingTB);
-      pagedView.setWidgetsPageIndicatorPadding(pageIndicatorHeight);
-      fakePage.setBackground(res.getDrawable(R.drawable.quantum_panel));
-      int pagedFixedViewPadding=res.getDimensionPixelSize(R.dimen.apps_customize_horizontal_padding);
-      padding.left+=pagedFixedViewPadding;
-      padding.right+=pagedFixedViewPadding;
-      pagedView.setPadding(padding.left,padding.top,padding.right,padding.bottom);
-      fakePageContainer.setPadding(padding.left,padding.top,padding.right,padding.bottom);
-    }
-  }
   ViewGroup overviewMode=launcher.getOverviewPanel();
   if (overviewMode != null) {
     Rect r=getOverviewModeButtonBarRect();

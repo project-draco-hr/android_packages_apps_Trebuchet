@@ -1,8 +1,0 @@
-{
-  updatePageCounts();
-  mContentWidth=getMeasuredWidth() - getPaddingLeft() - getPaddingRight();
-  mContentHeight=getMeasuredHeight() - getPaddingTop() - getPaddingBottom();
-  final boolean hostIsTransitioning=getTabHost().isInTransition();
-  int page=getPageForComponent(mSaveInstanceStateItemIndex);
-  invalidatePageData(Math.max(0,page),hostIsTransitioning);
-}

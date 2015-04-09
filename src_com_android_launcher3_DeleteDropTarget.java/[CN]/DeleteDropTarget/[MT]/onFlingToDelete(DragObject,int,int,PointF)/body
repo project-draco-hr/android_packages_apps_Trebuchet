@@ -1,8 +1,9 @@
 {
-  final boolean isAllApps=d.dragSource instanceof AppsCustomizePagedView;
+  final boolean isWidgets=d.dragSource instanceof WidgetsContainerView;
+  final boolean isAllapps=d.dragSource instanceof AppsContainerView;
   d.dragView.setColor(0);
   d.dragView.updateInitialScaleToCurrentScale();
-  if (isAllApps) {
+  if (isWidgets || isAllapps) {
     resetHoverColor();
   }
   if (mFlingDeleteMode == MODE_FLING_DELETE_TO_TRASH) {
@@ -38,7 +39,7 @@
   deferCompleteDropIfUninstalling(d);
   Runnable onAnimationEndRunnable=new Runnable(){
     @Override public void run(){
-      if (!isAllApps) {
+      if (!isWidgets || !isAllapps) {
         mLauncher.exitSpringLoadedDragMode();
         completeDrop(d);
       }

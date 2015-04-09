@@ -1,0 +1,5 @@
+{
+  super.onAttachedToWindow();
+  TextView tv=(TextView)findViewById(R.id.widget_name);
+  tv.setText(mAppName);
+}

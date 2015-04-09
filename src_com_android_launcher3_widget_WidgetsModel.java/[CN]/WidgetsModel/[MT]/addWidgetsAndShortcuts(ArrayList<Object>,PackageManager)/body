@@ -1,0 +1,44 @@
+{
+  if (DEBUG) {
+    Log.d(TAG,"addWidgetsAndShortcuts, widgetsShortcuts#=" + widgetsShortcuts.size());
+  }
+  mPackageNames.clear();
+  mWidgetsList.clear();
+  for (  Object o : widgetsShortcuts) {
+    String packageName="";
+    if (o instanceof LauncherAppWidgetProviderInfo) {
+      LauncherAppWidgetProviderInfo widgetInfo=(LauncherAppWidgetProviderInfo)o;
+      packageName=widgetInfo.provider.getPackageName();
+    }
+ else     if (o instanceof ResolveInfo) {
+      ResolveInfo resolveInfo=(ResolveInfo)o;
+      packageName=resolveInfo.activityInfo.packageName;
+    }
+ else {
+      Log.e(TAG,String.format("addWidgetsAndShortcuts, nothing added for class=%s",o.getClass().toString()));
+    }
+    ArrayList<Object> widgetsShortcutsList=mWidgetsList.get(packageName);
+    if (widgetsShortcutsList != null) {
+      widgetsShortcutsList.add(o);
+    }
+ else {
+      widgetsShortcutsList=new ArrayList<Object>();
+      widgetsShortcutsList.add(o);
+      mWidgetsList.put(packageName,widgetsShortcutsList);
+      mPackageNames.add(packageName);
+    }
+  }
+  for (  String packageName : mPackageNames) {
+    PackageItemInfo pInfo=mPackageItemInfoList.get(packageName);
+    if (pInfo == null) {
+      pInfo=new PackageItemInfo();
+      mIconCache.getTitleAndIconForApp(packageName,UserHandleCompat.myUserHandle(),true,pInfo);
+      mPackageItemInfoList.put(packageName,pInfo);
+    }
+  }
+  sortPackageList();
+  for (  String packageName : mPackageNames) {
+    Collections.sort(mWidgetsList.get(packageName),mWidgetAndShortcutNameComparator);
+  }
+  mAdapter.notifyDataSetChanged();
+}

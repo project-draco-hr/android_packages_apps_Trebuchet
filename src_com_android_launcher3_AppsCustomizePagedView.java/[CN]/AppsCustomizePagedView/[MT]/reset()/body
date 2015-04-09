@@ -1,9 +1,0 @@
-{
-  mSaveInstanceStateItemIndex=-1;
-  if (mContentType != ContentType.Widgets) {
-    setContentType(ContentType.Widgets);
-  }
-  if (mCurrentPage != 0) {
-    invalidatePageData(0);
-  }
-}

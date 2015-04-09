@@ -1,0 +1,19 @@
+{
+  if (v instanceof WidgetCell) {
+    if (!beginDraggingWidget((WidgetCell)v)) {
+      return false;
+    }
+  }
+ else {
+    Log.e(TAG,"Unexpected dragging view: " + v);
+  }
+  postDelayed(new Runnable(){
+    @Override public void run(){
+      if (mLauncher.getDragController().isDragging()) {
+        mLauncher.enterSpringLoadedDragMode();
+      }
+    }
+  }
+,150);
+  return true;
+}

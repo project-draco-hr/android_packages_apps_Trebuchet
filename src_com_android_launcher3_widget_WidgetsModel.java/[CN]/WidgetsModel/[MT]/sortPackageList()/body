@@ -1,0 +1,10 @@
+{
+  Collections.sort(mPackageNames,new Comparator<String>(){
+    @Override public int compare(    String lhs,    String rhs){
+      String lhsTitle=mPackageItemInfoList.get(lhs).title.toString();
+      String rhsTitle=mPackageItemInfoList.get(rhs).title.toString();
+      return lhsTitle.compareTo(rhsTitle);
+    }
+  }
+);
+}

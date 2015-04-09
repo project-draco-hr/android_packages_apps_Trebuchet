@@ -31,14 +31,5 @@
     mFolderInfo=mModel.getFolderById(this,sFolders,id);
     mRestoring=true;
   }
-  if (mAppsCustomizeTabHost != null) {
-    String curTab=savedState.getString("apps_customize_currentTab");
-    if (curTab != null) {
-      mAppsCustomizeTabHost.setContentTypeImmediate(mAppsCustomizeTabHost.getContentTypeForTabTag(curTab));
-      mAppsCustomizeContent.loadAssociatedPages(mAppsCustomizeContent.getCurrentPage());
-    }
-    int currentIndex=savedState.getInt("apps_customize_currentIndex");
-    mAppsCustomizeContent.restorePageForIndex(currentIndex);
-  }
   mItemIdToViewId=(HashMap<Integer,Integer>)savedState.getSerializable(RUNTIME_STATE_VIEW_IDS);
 }
