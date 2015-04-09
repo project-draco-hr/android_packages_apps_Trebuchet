@@ -1,0 +1,6 @@
+{
+  finalizeWorkFolder();
+  if (!mHomescreenApps.isEmpty()) {
+    mModel.addAndBindAddedWorkspaceItems(mContext,mHomescreenApps);
+  }
+}

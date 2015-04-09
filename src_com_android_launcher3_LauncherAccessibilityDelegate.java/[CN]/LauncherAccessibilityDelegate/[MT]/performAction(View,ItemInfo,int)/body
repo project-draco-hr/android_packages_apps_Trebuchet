@@ -31,7 +31,7 @@
       addShortcuts.add(((AppInfo)item).makeShortcut());
       mLauncher.showWorkspace(true,new Runnable(){
         @Override public void run(){
-          mLauncher.getModel().addAndBindAddedWorkspaceApps(mLauncher,addShortcuts,screenProvider,0,true);
+          mLauncher.getModel().addAndBindAddedWorkspaceItems(mLauncher,addShortcuts,screenProvider,0,true);
           announceConfirmation(R.string.item_added_to_workspace);
         }
       }

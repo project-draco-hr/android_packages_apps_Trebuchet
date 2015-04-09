@@ -1,5 +1,5 @@
 {
-  addAndBindAddedWorkspaceApps(context,workspaceApps,new ScreenPosProvider(){
+  addAndBindAddedWorkspaceItems(context,workspaceApps,new ScreenPosProvider(){
     @Override public int getScreenIndex(    ArrayList<Long> screenIDs){
       return screenIDs.isEmpty() ? 0 : 1;
     }

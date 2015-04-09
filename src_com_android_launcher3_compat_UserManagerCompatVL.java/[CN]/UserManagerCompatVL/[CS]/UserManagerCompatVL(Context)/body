@@ -1,4 +1,5 @@
 {
   super(context);
   mPm=context.getPackageManager();
+  mContext=context;
 }

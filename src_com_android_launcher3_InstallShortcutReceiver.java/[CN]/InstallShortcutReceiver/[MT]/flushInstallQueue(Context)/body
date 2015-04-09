@@ -23,7 +23,7 @@
     }
     if (!addShortcuts.isEmpty()) {
       LauncherAppState app=LauncherAppState.getInstance();
-      app.getModel().addAndBindAddedWorkspaceApps(context,addShortcuts);
+      app.getModel().addAndBindAddedWorkspaceItems(context,addShortcuts);
     }
   }
 }

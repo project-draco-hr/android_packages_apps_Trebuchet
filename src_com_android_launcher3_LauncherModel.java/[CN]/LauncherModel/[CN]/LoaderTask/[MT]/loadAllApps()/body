@@ -52,18 +52,11 @@ synchronized (sBgLock) {
       LauncherActivityInfoCompat app=apps.get(i);
       mBgAllAppsList.add(new AppInfo(mContext,app,user,mIconCache));
     }
-    if (ADD_MANAGED_PROFILE_SHORTCUTS && !user.equals(UserHandleCompat.myUserHandle())) {
-      String shortcutsSetKey=INSTALLED_SHORTCUTS_SET_PREFIX + mUserManager.getSerialNumberForUser(user);
-      Set<String> packagesAdded=prefs.getStringSet(shortcutsSetKey,Collections.EMPTY_SET);
-      HashSet<String> newPackageSet=new HashSet<String>();
-      for (      LauncherActivityInfoCompat info : apps) {
-        String packageName=info.getComponentName().getPackageName();
-        if (!packagesAdded.contains(packageName) && !newPackageSet.contains(packageName)) {
-          InstallShortcutReceiver.queueInstallShortcut(info,mContext);
-        }
-        newPackageSet.add(packageName);
+    if (!user.equals(UserHandleCompat.myUserHandle())) {
+      ManagedProfileHeuristic heuristic=ManagedProfileHeuristic.get(mContext,user);
+      if (heuristic != null) {
+        heuristic.processUserApps(apps);
       }
-      prefs.edit().putStringSet(shortcutsSetKey,newPackageSet).commit();
     }
   }
   final ArrayList<AppInfo> added=mBgAllAppsList.added;
@@ -84,6 +77,7 @@ synchronized (sBgLock) {
     }
   }
 );
+  ManagedProfileHeuristic.processAllUsers(profiles,mContext);
   if (DEBUG_LOADERS) {
     Log.d(TAG,"Icons processed in " + (SystemClock.uptimeMillis() - loadTime) + "ms");
   }

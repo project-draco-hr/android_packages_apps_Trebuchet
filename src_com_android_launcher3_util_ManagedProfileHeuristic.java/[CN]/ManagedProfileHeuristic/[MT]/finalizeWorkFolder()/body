@@ -1,0 +1,37 @@
+{
+  if (mWorkFolderApps.isEmpty()) {
+    return;
+  }
+  String folderIdKey=USER_FOLDER_ID_PREFIX + mUserSerial;
+  if (mPrefs.contains(folderIdKey)) {
+    long folderId=mPrefs.getLong(folderIdKey,0);
+    final FolderInfo workFolder=mModel.findFolderById(folderId);
+    if (workFolder == null || !workFolder.hasOption(FolderInfo.FLAG_WORK_FOLDER)) {
+      mHomescreenApps.addAll(mWorkFolderApps);
+      return;
+    }
+    saveWorkFolderShortcuts(folderId,workFolder.contents.size());
+    final ArrayList<ItemInfo> shortcuts=mWorkFolderApps;
+    new MainThreadExecutor().execute(new Runnable(){
+      @Override public void run(){
+        for (        ItemInfo info : shortcuts) {
+          workFolder.add((ShortcutInfo)info);
+        }
+      }
+    }
+);
+  }
+ else {
+    final FolderInfo workFolder=new FolderInfo();
+    workFolder.title=mContext.getText(R.string.work_folder_name);
+    workFolder.setOption(FolderInfo.FLAG_WORK_FOLDER,true,null);
+    for (    ItemInfo info : mWorkFolderApps) {
+      workFolder.add((ShortcutInfo)info);
+    }
+    ArrayList<ItemInfo> itemList=new ArrayList<ItemInfo>(1);
+    itemList.add(workFolder);
+    mModel.addAndBindAddedWorkspaceItems(mContext,itemList);
+    mPrefs.edit().putLong(USER_FOLDER_ID_PREFIX + mUserSerial,workFolder.id).apply();
+    saveWorkFolderShortcuts(workFolder.id,0);
+  }
+}

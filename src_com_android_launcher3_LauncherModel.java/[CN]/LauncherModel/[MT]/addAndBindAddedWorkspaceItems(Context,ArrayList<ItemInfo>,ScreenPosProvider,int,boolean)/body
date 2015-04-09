@@ -10,7 +10,7 @@
       ArrayList<Long> workspaceScreens=loadWorkspaceScreensDb(context);
 synchronized (sBgLock) {
         for (        ItemInfo item : workspaceApps) {
-          if (!allowDuplicate) {
+          if (!allowDuplicate && item instanceof ShortcutInfo) {
             if (shortcutExists(context,item.title.toString(),item.getIntent(),item.user)) {
               continue;
             }
@@ -18,18 +18,18 @@ synchronized (sBgLock) {
           Pair<Long,int[]> coords=findSpaceForItem(context,preferredScreen,fallbackStartScreen,workspaceScreens,addedWorkspaceScreensFinal,1,1);
           long screenId=coords.first;
           int[] cordinates=coords.second;
-          ShortcutInfo shortcutInfo;
-          if (item instanceof ShortcutInfo) {
-            shortcutInfo=(ShortcutInfo)item;
+          ItemInfo itemInfo;
+          if (item instanceof ShortcutInfo || item instanceof FolderInfo) {
+            itemInfo=item;
           }
  else           if (item instanceof AppInfo) {
-            shortcutInfo=((AppInfo)item).makeShortcut();
+            itemInfo=((AppInfo)item).makeShortcut();
           }
  else {
             throw new RuntimeException("Unexpected info type");
           }
-          addItemToDatabase(context,shortcutInfo,LauncherSettings.Favorites.CONTAINER_DESKTOP,screenId,cordinates[0],cordinates[1]);
-          addedShortcutsFinal.add(shortcutInfo);
+          addItemToDatabase(context,itemInfo,LauncherSettings.Favorites.CONTAINER_DESKTOP,screenId,cordinates[0],cordinates[1]);
+          addedShortcutsFinal.add(itemInfo);
         }
       }
       updateWorkspaceScreenOrder(context,workspaceScreens);

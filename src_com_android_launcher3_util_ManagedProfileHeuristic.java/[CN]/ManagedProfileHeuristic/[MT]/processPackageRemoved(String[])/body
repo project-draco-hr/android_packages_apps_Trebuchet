@@ -1,0 +1,12 @@
+{
+  HashSet<String> packageSet=getPackageSet();
+  boolean packageRemoved=false;
+  for (  String packageName : packages) {
+    if (packageSet.remove(packageName)) {
+      packageRemoved=true;
+    }
+  }
+  if (packageRemoved) {
+    mPrefs.edit().putStringSet(mPackageSetKey,packageSet).apply();
+  }
+}

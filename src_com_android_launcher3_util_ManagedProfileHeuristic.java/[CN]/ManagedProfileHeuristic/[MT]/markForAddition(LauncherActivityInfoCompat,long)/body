@@ -1,0 +1,4 @@
+{
+  ArrayList<ItemInfo> targetList=(installTime <= mUserCreationTime + AUTO_ADD_TO_FOLDER_DURATION) ? mWorkFolderApps : mHomescreenApps;
+  targetList.add(ShortcutInfo.fromActivityInfo(info,mContext));
+}

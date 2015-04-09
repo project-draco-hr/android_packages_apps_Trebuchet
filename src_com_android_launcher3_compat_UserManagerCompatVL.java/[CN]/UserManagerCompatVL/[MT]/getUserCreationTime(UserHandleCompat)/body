@@ -1,0 +1,8 @@
+{
+  SharedPreferences prefs=mContext.getSharedPreferences(LauncherAppState.getSharedPreferencesKey(),Context.MODE_PRIVATE);
+  String key=USER_CREATION_TIME_KEY + getSerialNumberForUser(user);
+  if (!prefs.contains(key)) {
+    prefs.edit().putLong(key,System.currentTimeMillis()).apply();
+  }
+  return prefs.getLong(key,0);
+}

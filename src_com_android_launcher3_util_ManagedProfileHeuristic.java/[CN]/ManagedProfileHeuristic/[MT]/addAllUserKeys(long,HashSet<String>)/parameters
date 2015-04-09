@@ -1,0 +1,2 @@
+long userSerial
+HashSet<String> keysOut

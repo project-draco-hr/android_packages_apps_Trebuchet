@@ -1,0 +1,6 @@
+{
+  for (  ItemInfo info : mWorkFolderApps) {
+    info.rank=startingRank++;
+    LauncherModel.addItemToDatabase(mContext,info,workFolderId,0,0,0);
+  }
+}

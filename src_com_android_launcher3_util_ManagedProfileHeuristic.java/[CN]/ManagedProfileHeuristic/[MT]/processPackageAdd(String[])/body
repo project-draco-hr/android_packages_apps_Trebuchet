@@ -1,0 +1,22 @@
+{
+  mHomescreenApps=new ArrayList<ItemInfo>();
+  mWorkFolderApps=new ArrayList<ItemInfo>();
+  HashSet<String> packageSet=getPackageSet();
+  boolean newPackageAdded=false;
+  long installTime=System.currentTimeMillis();
+  LauncherAppsCompat launcherApps=LauncherAppsCompat.getInstance(mContext);
+  for (  String packageName : packages) {
+    if (!packageSet.contains(packageName)) {
+      packageSet.add(packageName);
+      newPackageAdded=true;
+      List<LauncherActivityInfoCompat> activities=launcherApps.getActivityList(packageName,mUser);
+      if (!activities.isEmpty()) {
+        markForAddition(activities.get(0),installTime);
+      }
+    }
+  }
+  if (newPackageAdded) {
+    mPrefs.edit().putStringSet(mPackageSetKey,packageSet).apply();
+    finalizeAdditions();
+  }
+}
