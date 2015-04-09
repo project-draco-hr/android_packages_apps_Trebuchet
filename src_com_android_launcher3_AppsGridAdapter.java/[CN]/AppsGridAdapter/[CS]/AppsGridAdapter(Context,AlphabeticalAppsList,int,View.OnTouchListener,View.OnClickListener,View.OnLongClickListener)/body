@@ -3,6 +3,8 @@
   mApps=apps;
   mAppsPerRow=appsPerRow;
   mGridSizer=new GridSpanSizer();
+  mGridLayoutMgr=new GridLayoutManager(context,appsPerRow,GridLayoutManager.VERTICAL,false);
+  mGridLayoutMgr.setSpanSizeLookup(mGridSizer);
   mItemDecoration=new GridItemDecoration();
   mLayoutInflater=LayoutInflater.from(context);
   mTouchListener=touchListener;

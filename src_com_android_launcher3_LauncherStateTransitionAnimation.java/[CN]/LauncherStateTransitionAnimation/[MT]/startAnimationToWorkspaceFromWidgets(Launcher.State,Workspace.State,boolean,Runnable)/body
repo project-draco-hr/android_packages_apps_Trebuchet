@@ -17,5 +17,5 @@
     }
   }
 ;
-  startAnimationToWorkspaceFromOverlay(toWorkspaceState,widgetsView,widgetsView.getContentView(),widgetsView.getRevealView(),null,animated,onCompleteRunnable,cb);
+  startAnimationToWorkspaceFromOverlay(toWorkspaceState,widgetsView,widgetsView.getContentView(),widgetsView.getRevealView(),animated,onCompleteRunnable,cb);
 }

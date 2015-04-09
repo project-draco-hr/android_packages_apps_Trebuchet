@@ -1,8 +1,10 @@
 {
-  if (toWorkspace) {
-    mSearchBar.setText("");
-  }
+  if (mSearchBar != null) {
+    if (toWorkspace) {
+      mSearchBar.setText("");
+    }
  else {
-    mSearchBar.setFocusableInTouchMode(true);
+      mSearchBar.setFocusableInTouchMode(true);
+    }
   }
 }

@@ -1,0 +1,4 @@
+{
+  mAppsPerRow=appsPerRow;
+  mGridLayoutMgr.setSpanCount(appsPerRow);
+}

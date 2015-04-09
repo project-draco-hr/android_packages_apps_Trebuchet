@@ -1,5 +1,3 @@
 {
-  GridLayoutManager layoutMgr=new GridLayoutManager(context,mAppsPerRow,GridLayoutManager.VERTICAL,false);
-  layoutMgr.setSpanSizeLookup(mGridSizer);
-  return layoutMgr;
+  return mGridLayoutMgr;
 }

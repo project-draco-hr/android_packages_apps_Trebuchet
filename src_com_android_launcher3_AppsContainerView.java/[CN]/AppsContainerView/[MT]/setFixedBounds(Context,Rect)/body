@@ -1,0 +1,16 @@
+{
+  if (!fixedBounds.isEmpty() && !fixedBounds.equals(mFixedBounds)) {
+    LauncherAppState app=LauncherAppState.getInstance();
+    DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
+    if (grid.updateAppsViewNumCols(context.getResources(),fixedBounds.width())) {
+      mNumAppsPerRow=grid.appsViewNumCols;
+      mAppsListView.setNumAppsPerRow(mNumAppsPerRow);
+      if (USE_LAYOUT == GRID_LAYOUT) {
+        ((AppsGridAdapter)mAdapter).setNumAppsPerRow(mNumAppsPerRow);
+      }
+    }
+    mFixedBounds.set(fixedBounds);
+  }
+  updateBackgrounds();
+  updatePaddings();
+}

@@ -1,5 +1,6 @@
 {
-  if (mState != State.WORKSPACE || mWorkspace.getState() != Workspace.State.NORMAL) {
+  boolean changed=mState != State.WORKSPACE || mWorkspace.getState() != Workspace.State.NORMAL;
+  if (changed) {
     boolean wasInSpringLoadedMode=(mState != State.WORKSPACE);
     mWorkspace.setVisibility(View.VISIBLE);
     mStateTransitionAnimation.startAnimationToWorkspace(mState,Workspace.State.NORMAL,animated,onCompleteRunnable);
@@ -13,6 +14,8 @@
   mState=State.WORKSPACE;
   mUserPresent=true;
   updateAutoAdvanceState();
-  getWindow().getDecorView().sendAccessibilityEvent(AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED);
-  onWorkspaceShown(animated);
+  if (changed) {
+    getWindow().getDecorView().sendAccessibilityEvent(AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED);
+    onWorkspaceShown(animated);
+  }
 }
