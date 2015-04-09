@@ -8,15 +8,13 @@
     }
 ;
   }
-  if (ALLOW_FOLDER_SCROLL) {
-    if (!mPagedView.rankOnCurrentPage(mEmptyCellRank)) {
-      mTargetRank=getTargetRank(d,null);
-      mReorderAlarmListener.onAlarm(mReorderAlarm);
-      mOnScrollHintAlarm.cancelAlarm();
-      mScrollPauseAlarm.cancelAlarm();
-    }
-    mPagedView.completePendingPageChanges();
+  if (!mContent.rankOnCurrentPage(mEmptyCellRank)) {
+    mTargetRank=getTargetRank(d,null);
+    mReorderAlarmListener.onAlarm(mReorderAlarm);
+    mOnScrollHintAlarm.cancelAlarm();
+    mScrollPauseAlarm.cancelAlarm();
   }
+  mContent.completePendingPageChanges();
   View currentDragView;
   ShortcutInfo si=mCurrentDragInfo;
   if (mIsExternalDrag) {

@@ -1,9 +1,15 @@
 {
-  mIsSorted=mFolder.mInfo.hasOption(FolderInfo.FLAG_ITEMS_SORTED);
+  mIsSorted=ALLOW_ITEM_SORTING && mFolder.mInfo.hasOption(FolderInfo.FLAG_ITEMS_SORTED);
   ArrayList<View> icons=new ArrayList<View>();
+  ArrayList<ShortcutInfo> extra=new ArrayList<ShortcutInfo>();
   for (  ShortcutInfo item : items) {
-    icons.add(createNewView(item));
+    if (!ALLOW_FOLDER_SCROLL && icons.size() >= mMaxItemsPerPage) {
+      extra.add(item);
+    }
+ else {
+      icons.add(createNewView(item));
+    }
   }
   arrangeChildren(icons,icons.size(),false);
-  return new ArrayList<ShortcutInfo>();
+  return extra;
 }

@@ -1,0 +1,5 @@
+{
+  int measureSpec=MeasureSpec.UNSPECIFIED;
+  mFooter.measure(measureSpec,measureSpec);
+  mFooterHeight=mFooter.getMeasuredHeight();
+}

@@ -1,7 +1,5 @@
 {
   mPrevTargetRank=-1;
   mOnExitAlarm.cancelAlarm();
-  if (ALLOW_FOLDER_SCROLL) {
-    mScrollAreaOffset=d.dragView.getDragRegionWidth() / 2 - d.xOffset;
-  }
+  mScrollAreaOffset=d.dragView.getDragRegionWidth() / 2 - d.xOffset;
 }
