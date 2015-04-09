@@ -1,7 +1,7 @@
 {
   int rank=getItemCount();
   ArrayList<View> views=new ArrayList<View>(mFolder.getItemsInReadingOrder());
-  if (mIsSorted) {
+  if (ALLOW_ITEM_SORTING && mIsSorted) {
     View tmp=new View(getContext());
     tmp.setTag(info);
     int index=Collections.binarySearch(views,tmp,new ViewComparator());

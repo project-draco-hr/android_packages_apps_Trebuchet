@@ -2,13 +2,13 @@
   mFolder=folder;
   mFocusIndicatorView=(FocusIndicatorView)folder.findViewById(R.id.focus_indicator);
   mKeyListener=new PagedFolderKeyEventListener(folder);
-  mSortButton=folder.findViewById(R.id.folder_sort);
-  mSortButton.setOnClickListener(new OnClickListener(){
-    @Override public void onClick(    View v){
-      onSortClicked();
-    }
-  }
-);
   mPageIndicator=folder.findViewById(R.id.folder_page_indicator);
-  mSortSwitch=(Switch)folder.findViewById(R.id.folder_sort_switch);
+  if (ALLOW_ITEM_SORTING) {
+    mSortButton.setOnClickListener(new OnClickListener(){
+      @Override public void onClick(      View v){
+        onSortClicked();
+      }
+    }
+);
+  }
 }

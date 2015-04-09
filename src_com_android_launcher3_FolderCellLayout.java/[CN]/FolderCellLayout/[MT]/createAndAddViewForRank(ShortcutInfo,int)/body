@@ -1,4 +1,0 @@
-{
-  updateItemXY(item,rank);
-  return addNewView(item);
-}

@@ -1,7 +1,7 @@
 {
   super.onFinishInflate();
   mContentWrapper=findViewById(R.id.folder_content_wrapper);
-  mContent=(FolderContent)findViewById(R.id.folder_content);
+  mContent=(FolderPagedView)findViewById(R.id.folder_content);
   mContent.setFolder(this);
   mFolderName=(FolderEditText)findViewById(R.id.folder_name);
   mFolderName.setFolder(this);
@@ -10,11 +10,6 @@
   mFolderName.setOnEditorActionListener(this);
   mFolderName.setSelectAllOnFocus(true);
   mFolderName.setInputType(mFolderName.getInputType() | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS | InputType.TYPE_TEXT_FLAG_CAP_WORDS);
-  mFooter=ALLOW_FOLDER_SCROLL ? findViewById(R.id.folder_footer) : mFolderName;
-  int measureSpec=MeasureSpec.UNSPECIFIED;
-  mFooter.measure(measureSpec,measureSpec);
-  mFooterHeight=mFooter.getMeasuredHeight();
-  if (ALLOW_FOLDER_SCROLL) {
-    mPagedView=(FolderPagedView)mContent;
-  }
+  mFooter=findViewById(R.id.folder_footer);
+  updateFooterHeight();
 }

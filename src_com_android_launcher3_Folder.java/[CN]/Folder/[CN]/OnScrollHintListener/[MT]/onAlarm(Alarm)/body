@@ -1,10 +1,10 @@
 {
   if (mCurrentScrollDir == DragController.SCROLL_LEFT) {
-    mPagedView.scrollLeft();
+    mContent.scrollLeft();
     mScrollHintDir=DragController.SCROLL_NONE;
   }
  else   if (mCurrentScrollDir == DragController.SCROLL_RIGHT) {
-    mPagedView.scrollRight();
+    mContent.scrollRight();
     mScrollHintDir=DragController.SCROLL_NONE;
   }
  else {

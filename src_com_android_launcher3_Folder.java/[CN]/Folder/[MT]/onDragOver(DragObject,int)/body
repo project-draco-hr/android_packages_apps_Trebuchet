@@ -1,5 +1,5 @@
 {
-  if (ALLOW_FOLDER_SCROLL && mScrollPauseAlarm.alarmPending()) {
+  if (mScrollPauseAlarm.alarmPending()) {
     return;
   }
   final float[] r=new float[2];
@@ -10,24 +10,21 @@
     mReorderAlarm.setAlarm(REORDER_DELAY);
     mPrevTargetRank=mTargetRank;
   }
-  if (!ALLOW_FOLDER_SCROLL) {
-    return;
-  }
   float x=r[0];
-  int currentPage=mPagedView.getNextPage();
-  float cellOverlap=mPagedView.getCurrentCellLayout().getCellWidth() * ICON_OVERSCROLL_WIDTH_FACTOR;
+  int currentPage=mContent.getNextPage();
+  float cellOverlap=mContent.getCurrentCellLayout().getCellWidth() * ICON_OVERSCROLL_WIDTH_FACTOR;
   boolean isOutsideLeftEdge=x < cellOverlap;
   boolean isOutsideRightEdge=x > (getWidth() - cellOverlap);
-  if (currentPage > 0 && (mPagedView.rtlLayout ? isOutsideRightEdge : isOutsideLeftEdge)) {
+  if (currentPage > 0 && (mContent.rtlLayout ? isOutsideRightEdge : isOutsideLeftEdge)) {
     showScrollHint(DragController.SCROLL_LEFT,d);
   }
- else   if (currentPage < (mPagedView.getPageCount() - 1) && (mPagedView.rtlLayout ? isOutsideLeftEdge : isOutsideRightEdge)) {
+ else   if (currentPage < (mContent.getPageCount() - 1) && (mContent.rtlLayout ? isOutsideLeftEdge : isOutsideRightEdge)) {
     showScrollHint(DragController.SCROLL_RIGHT,d);
   }
  else {
     mOnScrollHintAlarm.cancelAlarm();
     if (mScrollHintDir != DragController.SCROLL_NONE) {
-      mPagedView.clearScrollHint();
+      mContent.clearScrollHint();
       mScrollHintDir=DragController.SCROLL_NONE;
     }
   }

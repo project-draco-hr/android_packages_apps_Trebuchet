@@ -1,6 +1,6 @@
 {
   if (mScrollHintDir != direction) {
-    mPagedView.showScrollHint(direction);
+    mContent.showScrollHint(direction);
     mScrollHintDir=direction;
   }
   if (!mOnScrollHintAlarm.alarmPending() || mCurrentScrollDir != direction) {

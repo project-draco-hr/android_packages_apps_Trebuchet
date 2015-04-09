@@ -1,6 +1,0 @@
-{
-  item.rank=rank;
-  int countX=getCountX();
-  item.cellX=rank % countX;
-  item.cellY=rank / countX;
-}

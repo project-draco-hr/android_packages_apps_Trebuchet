@@ -14,8 +14,4 @@
   }
   mLauncher=(Launcher)context;
   setFocusableInTouchMode(true);
-  if (ALLOW_FOLDER_SCROLL) {
-    mOnScrollHintAlarm=new Alarm();
-    mScrollPauseAlarm=new Alarm();
-  }
 }

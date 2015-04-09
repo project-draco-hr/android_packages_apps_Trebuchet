@@ -1,10 +1,8 @@
 {
   if (!(getParent() instanceof DragLayer))   return;
-  if (ALLOW_FOLDER_SCROLL) {
-    mPagedView.completePendingPageChanges();
-    if (!(mDragInProgress && mPagedView.mIsSorted)) {
-      mPagedView.snapToPageImmediately(0);
-    }
+  mContent.completePendingPageChanges();
+  if (!(mDragInProgress && mContent.mIsSorted)) {
+    mContent.snapToPageImmediately(0);
   }
   Animator openFolderAnim=null;
   final Runnable onCompleteRunnable;
@@ -88,8 +86,6 @@
   if (mDragController.isDragging()) {
     mDragController.forceTouchMove();
   }
-  if (ALLOW_FOLDER_SCROLL) {
-    FolderPagedView pages=(FolderPagedView)mContent;
-    pages.verifyVisibleHighResIcons(pages.getNextPage());
-  }
+  FolderPagedView pages=(FolderPagedView)mContent;
+  pages.verifyVisibleHighResIcons(pages.getNextPage());
 }

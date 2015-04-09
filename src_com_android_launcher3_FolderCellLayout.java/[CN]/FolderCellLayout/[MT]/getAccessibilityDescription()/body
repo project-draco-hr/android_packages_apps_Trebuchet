@@ -1,3 +1,0 @@
-{
-  return String.format(getContext().getString(R.string.folder_opened),getCountX(),getCountY());
-}

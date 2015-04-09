@@ -3,10 +3,16 @@
   LauncherAppState app=LauncherAppState.getInstance();
   setDataIsReady();
   DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
-  mMaxCountX=Math.min((int)grid.numColumns,MAX_ITEMS_PER_PAGE);
-  mMaxCountY=Math.min((int)grid.numRows,MAX_ITEMS_PER_PAGE);
+  if (ALLOW_FOLDER_SCROLL) {
+    mMaxCountX=Math.min((int)grid.numColumns,MAX_ITEMS_PER_PAGE);
+    mMaxCountY=Math.min((int)grid.numRows,MAX_ITEMS_PER_PAGE);
+  }
+ else {
+    mMaxCountX=(int)grid.numColumns;
+    mMaxCountY=(int)grid.numRows;
+  }
   mMaxItemsPerPage=mMaxCountX * mMaxCountY;
   mInflater=LayoutInflater.from(context);
   mIconCache=app.getIconCache();
-  rtlLayout=getResources().getConfiguration().getLayoutDirection() == LayoutDirection.RTL;
+  rtlLayout=getResources().getConfiguration().getLayoutDirection() == LAYOUT_DIRECTION_RTL;
 }
