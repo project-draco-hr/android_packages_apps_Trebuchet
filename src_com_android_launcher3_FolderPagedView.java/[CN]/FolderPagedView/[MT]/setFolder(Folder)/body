@@ -4,11 +4,5 @@
   mKeyListener=new PagedFolderKeyEventListener(folder);
   mPageIndicator=folder.findViewById(R.id.folder_page_indicator);
   if (ALLOW_ITEM_SORTING) {
-    mSortButton.setOnClickListener(new OnClickListener(){
-      @Override public void onClick(      View v){
-        onSortClicked();
-      }
-    }
-);
   }
 }
