@@ -8,7 +8,7 @@
     mLauncherCallbacks.preOnResume();
   }
   super.onResume();
-  if (mOnResumeState == State.WORKSPACE || mOnResumeState == State.NONE) {
+  if (mOnResumeState == State.WORKSPACE) {
     showWorkspace(false);
   }
  else   if (mOnResumeState == State.APPS) {

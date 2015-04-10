@@ -3,19 +3,28 @@
   if (USE_LAYOUT == GRID_LAYOUT) {
     ((AppsGridAdapter)mAdapter).setRtl(isRtl);
   }
-  mSearchBar=(EditText)findViewById(R.id.app_search_box);
-  if (mSearchBar != null) {
-    mSearchBar.addTextChangedListener(this);
-    mSearchBar.setOnEditorActionListener(this);
+  mContentView=(LinearLayout)findViewById(R.id.apps_list);
+  mContentView.setOnFocusChangeListener(new View.OnFocusChangeListener(){
+    @Override public void onFocusChange(    View v,    boolean hasFocus){
+      if (v == mContentView && hasFocus) {
+        mAppsRecyclerView.requestFocus();
+      }
+    }
   }
-  mAppsListView=(AppsContainerRecyclerView)findViewById(R.id.apps_list_view);
-  mAppsListView.setApps(mApps);
-  mAppsListView.setNumAppsPerRow(mNumAppsPerRow);
-  mAppsListView.setLayoutManager(mLayoutManager);
-  mAppsListView.setAdapter(mAdapter);
-  mAppsListView.setHasFixedSize(true);
+);
+  mSearchBarView=(EditText)findViewById(R.id.app_search_box);
+  if (mSearchBarView != null) {
+    mSearchBarView.addTextChangedListener(this);
+    mSearchBarView.setOnEditorActionListener(this);
+  }
+  mAppsRecyclerView=(AppsContainerRecyclerView)findViewById(R.id.apps_list_view);
+  mAppsRecyclerView.setApps(mApps);
+  mAppsRecyclerView.setNumAppsPerRow(mNumAppsPerRow);
+  mAppsRecyclerView.setLayoutManager(mLayoutManager);
+  mAppsRecyclerView.setAdapter(mAdapter);
+  mAppsRecyclerView.setHasFixedSize(true);
   if (mItemDecoration != null) {
-    mAppsListView.addItemDecoration(mItemDecoration);
+    mAppsRecyclerView.addItemDecoration(mItemDecoration);
   }
   updateBackgrounds();
   updatePaddings();

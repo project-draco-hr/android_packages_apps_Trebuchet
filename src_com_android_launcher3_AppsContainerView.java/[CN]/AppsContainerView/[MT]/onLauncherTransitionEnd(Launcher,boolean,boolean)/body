@@ -1,10 +1,7 @@
 {
-  if (mSearchBar != null) {
+  if (mSearchBarView != null) {
     if (toWorkspace) {
-      mSearchBar.setText("");
-    }
- else {
-      mSearchBar.setFocusableInTouchMode(true);
+      mSearchBarView.setText("");
     }
   }
 }
