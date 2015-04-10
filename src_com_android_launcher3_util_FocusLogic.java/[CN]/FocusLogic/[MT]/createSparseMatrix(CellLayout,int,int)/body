@@ -1,6 +1,6 @@
 {
   ViewGroup iconParent=iconLayout.getShortcutsAndWidgets();
-  int[][] matrix=createFullMatrix(iconLayout.getCountX() + 1,iconLayout.getCountY(),false);
+  int[][] matrix=createFullMatrix(iconLayout.getCountX() + 1,iconLayout.getCountY());
   for (int i=0; i < iconParent.getChildCount(); i++) {
     int cx=((CellLayout.LayoutParams)iconParent.getChildAt(i).getLayoutParams()).cellX;
     int cy=((CellLayout.LayoutParams)iconParent.getChildAt(i).getLayoutParams()).cellY;

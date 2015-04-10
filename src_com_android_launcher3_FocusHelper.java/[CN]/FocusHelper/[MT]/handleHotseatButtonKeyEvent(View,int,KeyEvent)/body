@@ -15,7 +15,7 @@
   int pageCount=workspace.getChildCount();
   int countX=-1;
   int countY=-1;
-  int iconIndex=findIndexOfView(hotseatParent,v);
+  int iconIndex=hotseatParent.indexOfChild(v);
   int iconRank=((CellLayout.LayoutParams)hotseatLayout.getShortcutsAndWidgets().getChildAt(iconIndex).getLayoutParams()).cellX;
   final CellLayout iconLayout=(CellLayout)workspace.getChildAt(pageIndex);
   if (iconLayout == null) {

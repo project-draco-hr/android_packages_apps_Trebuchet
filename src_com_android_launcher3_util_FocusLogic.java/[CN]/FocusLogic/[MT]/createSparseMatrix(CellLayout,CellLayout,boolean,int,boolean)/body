@@ -10,7 +10,7 @@
     m=iconLayout.getCountX() + hotseatLayout.getCountX();
     n=iconLayout.getCountY();
   }
-  int[][] matrix=createFullMatrix(m,n,false);
+  int[][] matrix=createFullMatrix(m,n);
   for (int i=0; i < iconParent.getChildCount(); i++) {
     int cx=((CellLayout.LayoutParams)iconParent.getChildAt(i).getLayoutParams()).cellX;
     int cy=((CellLayout.LayoutParams)iconParent.getChildAt(i).getLayoutParams()).cellY;

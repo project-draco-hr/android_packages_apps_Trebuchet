@@ -1,12 +1,13 @@
 {
-  ViewGroup parent=layout.getShortcutsAndWidgets();
+  ShortcutAndWidgetContainer parent=layout.getShortcutsAndWidgets();
   final int m=layout.getCountX();
   final int n=layout.getCountY();
-  int[][] matrix=createFullMatrix(m,n,false);
+  final boolean invert=parent.invertLayoutHorizontally();
+  int[][] matrix=createFullMatrix(m,n);
   for (int i=0; i < parent.getChildCount(); i++) {
     int cx=((CellLayout.LayoutParams)parent.getChildAt(i).getLayoutParams()).cellX;
     int cy=((CellLayout.LayoutParams)parent.getChildAt(i).getLayoutParams()).cellY;
-    matrix[cx][cy]=i;
+    matrix[invert ? (m - cx - 1) : cx][cy]=i;
   }
   if (DEBUG) {
     printMatrix(matrix);
