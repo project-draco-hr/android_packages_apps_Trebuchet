@@ -1,17 +1,5 @@
 {
   super.onFinishInflate();
-  mOriginalTextColor=getTextColors();
-  Resources r=getResources();
-  mHoverColor=r.getColor(R.color.delete_target_hover_tint);
-  mUninstallDrawable=(TransitionDrawable)r.getDrawable(R.drawable.uninstall_target_selector);
-  mRemoveDrawable=(TransitionDrawable)r.getDrawable(R.drawable.remove_target_selector);
-  mRemoveDrawable.setCrossFadeEnabled(true);
-  mUninstallDrawable.setCrossFadeEnabled(true);
-  mCurrentDrawable=(TransitionDrawable)getCurrentDrawable();
-  int orientation=getResources().getConfiguration().orientation;
-  if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-    if (!LauncherAppState.getInstance().isScreenLarge()) {
-      setText("");
-    }
-  }
+  mHoverColor=getResources().getColor(R.color.delete_target_hover_tint);
+  setDrawable(R.drawable.remove_target_selector);
 }

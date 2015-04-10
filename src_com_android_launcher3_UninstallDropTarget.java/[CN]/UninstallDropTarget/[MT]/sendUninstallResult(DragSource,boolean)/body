@@ -1,0 +1,5 @@
+{
+  if (target instanceof UninstallSource) {
+    ((UninstallSource)target).onUninstallActivityReturned(result);
+  }
+}

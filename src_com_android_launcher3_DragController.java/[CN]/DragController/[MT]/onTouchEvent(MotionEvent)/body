@@ -28,7 +28,7 @@ handleMoveEvent(dragLayerX,dragLayerY);
 mHandler.removeCallbacks(mScrollRunnable);
 if (mDragging) {
 PointF vec=isFlingingToDelete(mDragObject.dragSource);
-if (!DeleteDropTarget.willAcceptDrop(mDragObject.dragInfo)) {
+if (!DeleteDropTarget.willAcceptDrop(mDragObject.dragSource,mDragObject.dragInfo)) {
 vec=null;
 }
 if (vec != null) {

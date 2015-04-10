@@ -1,6 +1,6 @@
 {
-  int width=mCurrentDrawable == null ? 0 : mCurrentDrawable.getIntrinsicWidth();
-  int height=mCurrentDrawable == null ? 0 : mCurrentDrawable.getIntrinsicHeight();
+  int width=mDrawable.getIntrinsicWidth();
+  int height=mDrawable.getIntrinsicHeight();
   final Rect to=getIconRect(d.dragView.getMeasuredWidth(),d.dragView.getMeasuredHeight(),width,height);
   final Rect from=new Rect();
   dragLayer.getViewRectRelativeToSelf(d.dragView,from);

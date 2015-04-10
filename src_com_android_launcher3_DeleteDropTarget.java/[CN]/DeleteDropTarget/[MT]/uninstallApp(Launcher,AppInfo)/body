@@ -1,3 +1,0 @@
-{
-  launcher.startApplicationUninstallActivity(info.componentName,info.flags,info.user);
-}

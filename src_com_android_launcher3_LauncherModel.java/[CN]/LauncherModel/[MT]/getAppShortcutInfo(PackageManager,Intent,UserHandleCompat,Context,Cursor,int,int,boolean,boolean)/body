@@ -31,5 +31,8 @@
   info.itemType=LauncherSettings.Favorites.ITEM_TYPE_APPLICATION;
   info.user=user;
   info.contentDescription=mUserManager.getBadgedLabelForUser(info.title.toString(),info.user);
+  if (lai != null) {
+    info.flags=AppInfo.initFlags(lai);
+  }
   return info;
 }

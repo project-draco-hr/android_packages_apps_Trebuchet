@@ -1,5 +1,0 @@
-{
-  startDetailsActivityForInfo(d.dragInfo,mLauncher);
-  d.deferDragViewCleanupPostAnimation=false;
-  return false;
-}

@@ -36,7 +36,6 @@
  else   if (mFlingDeleteMode == MODE_FLING_DELETE_ALONG_VECTOR) {
     updateCb=createFlingAlongVectorAnimatorListener(dragLayer,d,vel,startTime,duration,config);
   }
-  deferCompleteDropIfUninstalling(d);
   Runnable onAnimationEndRunnable=new Runnable(){
     @Override public void run(){
       if (!isWidgets || !isAllapps) {
