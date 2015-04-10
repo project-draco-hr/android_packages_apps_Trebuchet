@@ -1,0 +1,3 @@
+{
+  mPackageItemInfoList.put(packageName,infoOut);
+}
