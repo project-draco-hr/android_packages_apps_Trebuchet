@@ -3,8 +3,7 @@
   if (e.getAction() == KeyEvent.ACTION_UP || !consume) {
     return consume;
   }
-  LauncherAppState app=LauncherAppState.getInstance();
-  DeviceProfile profile=app.getDynamicGrid().getDeviceProfile();
+  DeviceProfile profile=LauncherAppState.getInstance().getDynamicGrid().getDeviceProfile();
   if (DEBUG) {
     Log.v(TAG,String.format("Handle HOTSEAT BUTTONS keyevent=[%s] on hotseat buttons, isVertical=%s",KeyEvent.keyCodeToString(keyCode),profile.isVerticalBarLayout()));
   }
