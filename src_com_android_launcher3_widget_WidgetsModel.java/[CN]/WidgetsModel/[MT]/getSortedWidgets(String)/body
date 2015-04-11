@@ -1,3 +1,0 @@
-{
-  return mWidgetsList.get(packageName);
-}

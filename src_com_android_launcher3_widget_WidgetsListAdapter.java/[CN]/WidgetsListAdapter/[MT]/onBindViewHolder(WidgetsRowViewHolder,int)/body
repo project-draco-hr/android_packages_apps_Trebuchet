@@ -1,9 +1,8 @@
 {
-  String packageName=mWidgetsModel.getPackageName(pos);
-  List<Object> infoList=mWidgetsModel.getSortedWidgets(packageName);
+  List<Object> infoList=mWidgetsModel.getSortedWidgets(pos);
   ViewGroup row=((ViewGroup)holder.getContent().findViewById(R.id.widgets_cell_list));
   if (DEBUG) {
-    Log.d(TAG,String.format("onBindViewHolder [pos=%d, packageName=%s, widget#=%d, row.getChildCount=%d]",pos,packageName,infoList.size(),row.getChildCount()));
+    Log.d(TAG,String.format("onBindViewHolder [pos=%d, widget#=%d, row.getChildCount=%d]",pos,infoList.size(),row.getChildCount()));
   }
   int diff=infoList.size() - row.getChildCount();
   if (diff > 0) {
@@ -21,17 +20,17 @@
       row.getChildAt(i).setVisibility(View.GONE);
     }
   }
-  PackageItemInfo infoOut=mWidgetsModel.getPackageItemInfo(packageName);
+  PackageItemInfo infoOut=mWidgetsModel.getPackageItemInfo(pos);
   if (infoOut.usingLowResIcon) {
-    mIconCache.getTitleAndIconForApp(packageName,UserHandleCompat.myUserHandle(),false,infoOut);
-    mWidgetsModel.setPackageItemInfo(packageName,infoOut);
+    mIconCache.getTitleAndIconForApp(infoOut.packageName,UserHandleCompat.myUserHandle(),false,infoOut);
   }
   ((TextView)holder.getContent().findViewById(R.id.section)).setText(infoOut.title);
   ImageView iv=(ImageView)holder.getContent().findViewById(R.id.section_image);
   iv.setImageBitmap(infoOut.iconBitmap);
   for (int i=0; i < infoList.size(); i++) {
     WidgetCell widget=(WidgetCell)row.getChildAt(i);
-    if (getWidgetPreviewLoader() == null || widget == null) {
+    widget.reset();
+    if (getWidgetPreviewLoader() == null) {
       return;
     }
     if (infoList.get(i) instanceof LauncherAppWidgetProviderInfo) {

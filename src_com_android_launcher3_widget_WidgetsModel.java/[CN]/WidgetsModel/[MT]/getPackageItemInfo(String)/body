@@ -1,3 +1,0 @@
-{
-  return mPackageItemInfoList.get(packageName);
-}

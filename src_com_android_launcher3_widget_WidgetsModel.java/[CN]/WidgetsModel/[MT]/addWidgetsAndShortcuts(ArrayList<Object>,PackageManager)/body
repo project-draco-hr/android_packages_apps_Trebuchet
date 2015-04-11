@@ -2,7 +2,7 @@
   if (DEBUG) {
     Log.d(TAG,"addWidgetsAndShortcuts, widgetsShortcuts#=" + widgetsShortcuts.size());
   }
-  mPackageNames.clear();
+  HashMap<String,PackageItemInfo> tmpPackageItemInfos=new HashMap<>();
   mWidgetsList.clear();
   for (  Object o : widgetsShortcuts) {
     String packageName="";
@@ -17,28 +17,24 @@
  else {
       Log.e(TAG,String.format("addWidgetsAndShortcuts, nothing added for class=%s",o.getClass().toString()));
     }
-    ArrayList<Object> widgetsShortcutsList=mWidgetsList.get(packageName);
+    PackageItemInfo pInfo=tmpPackageItemInfos.get(packageName);
+    ArrayList<Object> widgetsShortcutsList=mWidgetsList.get(pInfo);
     if (widgetsShortcutsList != null) {
       widgetsShortcutsList.add(o);
     }
  else {
       widgetsShortcutsList=new ArrayList<Object>();
       widgetsShortcutsList.add(o);
-      mWidgetsList.put(packageName,widgetsShortcutsList);
-      mPackageNames.add(packageName);
-    }
-  }
-  for (  String packageName : mPackageNames) {
-    PackageItemInfo pInfo=mPackageItemInfoList.get(packageName);
-    if (pInfo == null) {
-      pInfo=new PackageItemInfo();
+      pInfo=new PackageItemInfo(packageName);
       mIconCache.getTitleAndIconForApp(packageName,UserHandleCompat.myUserHandle(),true,pInfo);
-      mPackageItemInfoList.put(packageName,pInfo);
+      mWidgetsList.put(pInfo,widgetsShortcutsList);
+      tmpPackageItemInfos.put(packageName,pInfo);
+      mPackageItemInfos.add(pInfo);
     }
   }
-  sortPackageList();
-  for (  String packageName : mPackageNames) {
-    Collections.sort(mWidgetsList.get(packageName),mWidgetAndShortcutNameComparator);
+  sortPackageItemInfos();
+  for (  PackageItemInfo p : mPackageItemInfos) {
+    Collections.sort(mWidgetsList.get(p),mWidgetAndShortcutNameComparator);
   }
   mAdapter.notifyDataSetChanged();
 }
