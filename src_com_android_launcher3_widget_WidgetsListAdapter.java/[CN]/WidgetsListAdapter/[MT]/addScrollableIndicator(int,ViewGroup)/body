@@ -1,6 +1,0 @@
-{
-  if (contentSize > 2) {
-    ViewGroup indicator=(ViewGroup)parent.findViewById(R.id.scrollable_indicator);
-    indicator.setVisibility(View.VISIBLE);
-  }
-}

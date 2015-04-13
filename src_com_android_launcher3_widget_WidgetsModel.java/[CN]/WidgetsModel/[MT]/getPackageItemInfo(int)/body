@@ -1,0 +1,3 @@
+{
+  return mPackageItemInfos.get(pos);
+}

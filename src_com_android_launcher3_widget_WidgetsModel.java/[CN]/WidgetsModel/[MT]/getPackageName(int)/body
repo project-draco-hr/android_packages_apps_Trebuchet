@@ -1,3 +1,0 @@
-{
-  return mPackageNames.get(pos);
-}
