@@ -2,18 +2,25 @@
   if (DEBUG) {
     Log.v(TAG,String.format("handleKeyEvent START: cntX=%d, cntY=%d, iconIdx=%d, pageIdx=%d, pageCnt=%d",cntX,cntY,iconIdx,pageIndex,pageCount));
   }
+  DeviceProfile profile=LauncherAppState.getInstance().getDynamicGrid().getDeviceProfile();
   int newIndex=NOOP;
 switch (keyCode) {
 case KeyEvent.KEYCODE_DPAD_LEFT:
     newIndex=handleDpadHorizontal(iconIdx,cntX,cntY,map,-1);
-  if (newIndex == NOOP && pageIndex > 0) {
+  if (!profile.isLayoutRtl && newIndex == NOOP && pageIndex > 0) {
     newIndex=PREVIOUS_PAGE_RIGHT_COLUMN;
+  }
+ else   if (profile.isLayoutRtl && newIndex == NOOP && pageIndex < pageCount - 1) {
+    newIndex=NEXT_PAGE_RIGHT_COLUMN;
   }
 break;
 case KeyEvent.KEYCODE_DPAD_RIGHT:
 newIndex=handleDpadHorizontal(iconIdx,cntX,cntY,map,1);
-if (newIndex == NOOP && pageIndex < pageCount - 1) {
+if (!profile.isLayoutRtl && newIndex == NOOP && pageIndex < pageCount - 1) {
 newIndex=NEXT_PAGE_LEFT_COLUMN;
+}
+ else if (profile.isLayoutRtl && newIndex == NOOP && pageIndex > 0) {
+newIndex=PREVIOUS_PAGE_LEFT_COLUMN;
 }
 break;
 case KeyEvent.KEYCODE_DPAD_DOWN:
