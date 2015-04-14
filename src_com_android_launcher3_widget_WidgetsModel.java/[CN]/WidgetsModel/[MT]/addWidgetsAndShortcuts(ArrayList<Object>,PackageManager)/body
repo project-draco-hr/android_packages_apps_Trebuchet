@@ -4,6 +4,7 @@
   }
   HashMap<String,PackageItemInfo> tmpPackageItemInfos=new HashMap<>();
   mWidgetsList.clear();
+  mPackageItemInfos.clear();
   for (  Object o : widgetsShortcuts) {
     String packageName="";
     if (o instanceof LauncherAppWidgetProviderInfo) {
