@@ -15,8 +15,8 @@
   LayoutParams lp=(LayoutParams)getChildAt(startIndex).getLayoutParams();
   LayoutParams nextLp;
   int childLeft=offsetX + (lp.isFullScreenPage ? 0 : getPaddingLeft());
-  if (mPageScrolls == null || getChildCount() != mChildCountOnLastLayout) {
-    mPageScrolls=new int[getChildCount()];
+  if (mPageScrolls == null || childCount != mChildCountOnLastLayout) {
+    mPageScrolls=new int[childCount];
   }
   for (int i=startIndex; i != endIndex; i+=delta) {
     final View child=getPageAt(i);
@@ -55,18 +55,28 @@
       childLeft+=childWidth + pageGap;
     }
   }
-  if (mFirstLayout && mCurrentPage >= 0 && mCurrentPage < getChildCount()) {
+  if (mFirstLayout && mCurrentPage >= 0 && mCurrentPage < childCount) {
     updateCurrentPageScroll();
     mFirstLayout=false;
   }
-  if (childCount > 0) {
-    final int index=isLayoutRtl() ? 0 : childCount - 1;
-    mMaxScrollX=getScrollForPage(index);
+  final LayoutTransition transition=getLayoutTransition();
+  if (transition != null && transition.isRunning()) {
+    transition.addTransitionListener(new LayoutTransition.TransitionListener(){
+      @Override public void startTransition(      LayoutTransition transition,      ViewGroup container,      View view,      int transitionType){
+      }
+      @Override public void endTransition(      LayoutTransition transition,      ViewGroup container,      View view,      int transitionType){
+        if (!transition.isRunning()) {
+          transition.removeTransitionListener(this);
+          updateMaxScrollX();
+        }
+      }
+    }
+);
   }
  else {
-    mMaxScrollX=0;
+    updateMaxScrollX();
   }
-  if (mScroller.isFinished() && mChildCountOnLastLayout != getChildCount() && !mDeferringForDelete) {
+  if (mScroller.isFinished() && mChildCountOnLastLayout != childCount && !mDeferringForDelete) {
     if (mRestorePage != INVALID_RESTORE_PAGE) {
       setCurrentPage(mRestorePage);
       mRestorePage=INVALID_RESTORE_PAGE;
@@ -75,7 +85,7 @@
       setCurrentPage(getNextPage());
     }
   }
-  mChildCountOnLastLayout=getChildCount();
+  mChildCountOnLastLayout=childCount;
   if (isReordering(true)) {
     updateDragViewTranslationDuringDrag();
   }
