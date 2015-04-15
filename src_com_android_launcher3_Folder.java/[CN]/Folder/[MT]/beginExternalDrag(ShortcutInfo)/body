@@ -8,4 +8,5 @@
     mScrollPauseAlarm.cancelAlarm();
     mScrollPauseAlarm.setAlarm(SORTED_STICKY_REORDER_DELAY);
   }
+  mDragController.addDragListener(this);
 }

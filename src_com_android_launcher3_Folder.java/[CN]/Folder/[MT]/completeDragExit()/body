@@ -1,8 +1,13 @@
 {
-  mLauncher.closeFolder();
+  if (mInfo.opened) {
+    mLauncher.closeFolder();
+    mRearrangeOnClose=true;
+  }
+ else {
+    rearrangeChildren();
+  }
   mCurrentDragInfo=null;
   mCurrentDragView=null;
   mSuppressOnAdd=false;
-  mRearrangeOnClose=true;
   mIsExternalDrag=false;
 }
