@@ -49,7 +49,7 @@
         }
         return;
       }
-      mSetWallpaperButton.setEnabled(true);
+      setWallpaperButtonEnabled(true);
       WallpaperTileInfo info=(WallpaperTileInfo)v.getTag();
       if (info.isSelectable() && v.getVisibility() == View.VISIBLE) {
         selectTile(v);
