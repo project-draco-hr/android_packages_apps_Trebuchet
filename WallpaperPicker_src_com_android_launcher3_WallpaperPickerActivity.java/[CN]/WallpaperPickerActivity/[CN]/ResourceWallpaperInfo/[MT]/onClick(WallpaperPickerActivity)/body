@@ -1,5 +1,4 @@
 {
-  a.setWallpaperButtonEnabled(false);
   BitmapRegionTileSource.ResourceBitmapSource bitmapSource=new BitmapRegionTileSource.ResourceBitmapSource(mResources,mResId,BitmapRegionTileSource.MAX_PREVIEW_SIZE);
   a.setCropViewTileSource(bitmapSource,false,false,new CropViewScaleProvider(){
     @Override public float getScale(    TileSource src){
@@ -8,10 +7,5 @@
       return wallpaperSize.x / crop.width();
     }
   }
-,new Runnable(){
-    @Override public void run(){
-      a.setWallpaperButtonEnabled(true);
-    }
-  }
-);
+,null);
 }
