@@ -1,28 +1,20 @@
 {
-  final Runnable onLoad;
-  if (!mFirstClick) {
-    onLoad=null;
-  }
+  a.setWallpaperButtonEnabled(false);
+  final BitmapRegionTileSource.UriBitmapSource bitmapSource=new BitmapRegionTileSource.UriBitmapSource(a.getContext(),mUri,BitmapRegionTileSource.MAX_PREVIEW_SIZE);
+  a.setCropViewTileSource(bitmapSource,true,false,null,new Runnable(){
+    @Override public void run(){
+      if (bitmapSource.getLoadingState() == BitmapSource.State.LOADED) {
+        a.selectTile(mView);
+        a.setWallpaperButtonEnabled(true);
+      }
  else {
-    mFirstClick=false;
-    a.mSetWallpaperButton.setEnabled(false);
-    onLoad=new Runnable(){
-      public void run(){
-        if (mBitmapSource != null && mBitmapSource.getLoadingState() == BitmapSource.State.LOADED) {
-          a.selectTile(mView);
-          a.mSetWallpaperButton.setEnabled(true);
-        }
- else {
-          ViewGroup parent=(ViewGroup)mView.getParent();
-          if (parent != null) {
-            parent.removeView(mView);
-            Toast.makeText(a.getContext(),R.string.image_load_fail,Toast.LENGTH_SHORT).show();
-          }
+        ViewGroup parent=(ViewGroup)mView.getParent();
+        if (parent != null) {
+          parent.removeView(mView);
+          Toast.makeText(a.getContext(),R.string.image_load_fail,Toast.LENGTH_SHORT).show();
         }
       }
     }
-;
   }
-  mBitmapSource=new BitmapRegionTileSource.UriBitmapSource(a.getContext(),mUri,BitmapRegionTileSource.MAX_PREVIEW_SIZE);
-  a.setCropViewTileSource(mBitmapSource,true,false,null,onLoad);
+);
 }
