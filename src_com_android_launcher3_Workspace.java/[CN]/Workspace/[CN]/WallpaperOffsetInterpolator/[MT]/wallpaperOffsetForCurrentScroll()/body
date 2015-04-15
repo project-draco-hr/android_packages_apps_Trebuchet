@@ -1,5 +1,17 @@
 {
+  int numScrollingPages=getNumScreensExcludingEmptyAndCustom();
+  int parallaxPageSpan;
+  if (mWallpaperIsLiveWallpaper) {
+    parallaxPageSpan=numScrollingPages - 1;
+  }
+ else {
+    parallaxPageSpan=Math.max(MIN_PARALLAX_PAGE_SPAN,numScrollingPages - 1);
+  }
+  mNumPagesForWallpaperParallax=parallaxPageSpan;
   if (getChildCount() <= 1) {
+    if (isLayoutRtl()) {
+      return 1 - 1.0f / mNumPagesForWallpaperParallax;
+    }
     return 0;
   }
   int emptyExtraPages=numEmptyScreensToIgnore();
@@ -19,16 +31,9 @@
     int adjustedScroll=getScrollX() - firstPageScrollX - getLayoutTransitionOffsetForPage(0);
     float offset=Math.min(1,adjustedScroll / (float)scrollRange);
     offset=Math.max(0,offset);
-    int numScrollingPages=getNumScreensExcludingEmptyAndCustom();
-    int parallaxPageSpan;
-    if (mWallpaperIsLiveWallpaper) {
-      parallaxPageSpan=numScrollingPages - 1;
+    if (!mWallpaperIsLiveWallpaper && numScrollingPages < MIN_PARALLAX_PAGE_SPAN && isLayoutRtl()) {
+      return offset * (parallaxPageSpan - numScrollingPages + 1) / parallaxPageSpan;
     }
- else {
-      parallaxPageSpan=Math.max(MIN_PARALLAX_PAGE_SPAN,numScrollingPages - 1);
-    }
-    mNumPagesForWallpaperParallax=parallaxPageSpan;
-    int padding=isLayoutRtl() ? parallaxPageSpan - numScrollingPages + 1 : 0;
-    return offset * (padding + numScrollingPages - 1) / parallaxPageSpan;
+    return offset * (numScrollingPages - 1) / parallaxPageSpan;
   }
 }
