@@ -11,13 +11,16 @@
   final CellLayout hotseatLayout=(CellLayout)hotseatParent.getParent();
   Hotseat hotseat=(Hotseat)hotseatLayout.getParent();
   Workspace workspace=(Workspace)v.getRootView().findViewById(R.id.workspace);
-  int pageIndex=workspace.getCurrentPage();
+  int pageIndex=workspace.getNextPage();
   int pageCount=workspace.getChildCount();
   int countX=-1;
   int countY=-1;
   int iconIndex=findIndexOfView(hotseatParent,v);
   int iconRank=((CellLayout.LayoutParams)hotseatLayout.getShortcutsAndWidgets().getChildAt(iconIndex).getLayoutParams()).cellX;
   final CellLayout iconLayout=(CellLayout)workspace.getChildAt(pageIndex);
+  if (iconLayout == null) {
+    return consume;
+  }
   final ViewGroup iconParent=iconLayout.getShortcutsAndWidgets();
   ViewGroup parent=null;
   int[][] matrix=null;
