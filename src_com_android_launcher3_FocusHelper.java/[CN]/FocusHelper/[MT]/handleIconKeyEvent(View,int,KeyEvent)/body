@@ -53,6 +53,7 @@ newPageIndex=pageIndex + 1;
 }
 int row=FocusLogic.findRow(matrix,iconIndex);
 parent=getCellLayoutChildrenForIndex(workspace,newPageIndex);
+workspace.snapToPage(newPageIndex);
 if (parent != null) {
 iconLayout=(CellLayout)parent.getParent();
 matrix=FocusLogic.createSparseMatrix(iconLayout,iconLayout.getCountX(),row);
@@ -81,6 +82,7 @@ newPageIndex=pageIndex + 1;
 if (newIconIndex == FocusLogic.PREVIOUS_PAGE_LEFT_COLUMN) {
 newPageIndex=pageIndex - 1;
 }
+workspace.snapToPage(newPageIndex);
 row=FocusLogic.findRow(matrix,iconIndex);
 parent=getCellLayoutChildrenForIndex(workspace,newPageIndex);
 if (parent != null) {
