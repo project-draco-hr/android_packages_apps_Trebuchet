@@ -4,6 +4,9 @@
   if (parent != null) {
     FolderIcon fi=(FolderIcon)mWorkspace.getViewForTag(folder.mInfo);
     shrinkAndFadeInFolderIcon(fi);
+    if (fi != null) {
+      ((CellLayout.LayoutParams)fi.getLayoutParams()).canReorder=true;
+    }
   }
   folder.animateClosed();
   getDragLayer().sendAccessibilityEvent(AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED);
