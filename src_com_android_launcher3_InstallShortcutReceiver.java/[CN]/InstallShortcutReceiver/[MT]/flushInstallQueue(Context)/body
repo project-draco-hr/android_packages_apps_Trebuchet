@@ -16,10 +16,7 @@
           continue;
         }
       }
-      final boolean exists=LauncherModel.shortcutExists(context,pendingInfo.label,intent,pendingInfo.user);
-      if (!exists) {
-        addShortcuts.add(pendingInfo.getShortcutInfo());
-      }
+      addShortcuts.add(pendingInfo.getShortcutInfo());
     }
     if (!addShortcuts.isEmpty()) {
       LauncherAppState app=LauncherAppState.getInstance();

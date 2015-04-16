@@ -27,7 +27,7 @@
 );
     sPendingAddItem=null;
   }
-  PackageInstallerCompat.getInstance(this).onFinishBind();
+  InstallShortcutReceiver.disableAndFlushInstallQueue(this);
   if (mLauncherCallbacks != null) {
     mLauncherCallbacks.finishBindingItems(false);
   }

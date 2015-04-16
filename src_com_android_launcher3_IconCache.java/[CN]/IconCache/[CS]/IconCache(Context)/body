@@ -6,5 +6,5 @@
   mLauncherApps=LauncherAppsCompat.getInstance(mContext);
   mIconDpi=activityManager.getLauncherLargeIconDensity();
   mIconDb=new IconDB(context);
-  mWorkerHandler=new Handler(LauncherModel.sWorkerThread.getLooper());
+  mWorkerHandler=new Handler(LauncherModel.getWorkerLooper());
 }

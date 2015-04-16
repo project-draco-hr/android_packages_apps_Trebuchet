@@ -2,16 +2,6 @@
   mInstaller=context.getPackageManager().getPackageInstaller();
   LauncherAppState.setApplicationContext(context.getApplicationContext());
   mCache=LauncherAppState.getInstance().getIconCache();
-  mWorker=new Handler();
-  mResumed=false;
-  mBound=false;
+  mWorker=new Handler(LauncherModel.getWorkerLooper());
   mInstaller.registerSessionCallback(mCallback,mWorker);
-  mWorker.post(new Runnable(){
-    @Override public void run(){
-      for (      SessionInfo info : mInstaller.getAllSessions()) {
-        mPendingReplays.append(info.getSessionId(),info);
-      }
-    }
-  }
-);
 }

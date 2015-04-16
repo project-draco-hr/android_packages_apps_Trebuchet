@@ -1,6 +1,5 @@
 {
   InstallShortcutReceiver.enableInstallQueue();
-  PackageInstallerCompat.getInstance(this).onPause();
   super.onPause();
   mPaused=true;
   mDragController.cancelDrag();

@@ -1,0 +1,12 @@
+{
+  Runnable r=new Runnable(){
+    public void run(){
+      bindRestoreItemsChange(updates);
+    }
+  }
+;
+  if (waitUntilResume(r)) {
+    return;
+  }
+  mWorkspace.updateRestoreItems(updates);
+}

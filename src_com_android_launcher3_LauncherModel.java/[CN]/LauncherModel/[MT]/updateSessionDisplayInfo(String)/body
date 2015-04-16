@@ -1,0 +1,39 @@
+{
+  Runnable updateRunnable=new Runnable(){
+    @Override public void run(){
+synchronized (sBgLock) {
+        final ArrayList<ShortcutInfo> updates=new ArrayList<>();
+        final UserHandleCompat user=UserHandleCompat.myUserHandle();
+        for (        ItemInfo info : sBgItemsIdMap.values()) {
+          if (info instanceof ShortcutInfo) {
+            ShortcutInfo si=(ShortcutInfo)info;
+            ComponentName cn=si.getTargetComponent();
+            if (si.isPromise() && (cn != null) && packageName.equals(cn.getPackageName())) {
+              if (si.hasStatusFlag(ShortcutInfo.FLAG_AUTOINTALL_ICON)) {
+                mIconCache.getTitleAndIcon(si,si.promisedIntent,user,si.shouldUseLowResIcon());
+              }
+ else {
+                si.updateIcon(mIconCache);
+              }
+              updates.add(si);
+            }
+          }
+        }
+        if (!updates.isEmpty()) {
+          Runnable r=new Runnable(){
+            public void run(){
+              Callbacks callbacks=getCallback();
+              if (callbacks != null) {
+                callbacks.bindShortcutsChanged(updates,new ArrayList<ShortcutInfo>(),user);
+              }
+            }
+          }
+;
+          mHandler.post(r);
+        }
+      }
+    }
+  }
+;
+  runOnWorkerThread(updateRunnable);
+}

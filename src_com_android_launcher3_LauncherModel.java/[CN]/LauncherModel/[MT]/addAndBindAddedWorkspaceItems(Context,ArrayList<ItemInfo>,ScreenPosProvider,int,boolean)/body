@@ -11,7 +11,7 @@
 synchronized (sBgLock) {
         for (        ItemInfo item : workspaceApps) {
           if (!allowDuplicate && item instanceof ShortcutInfo) {
-            if (shortcutExists(context,item.title.toString(),item.getIntent(),item.user)) {
+            if (shortcutExists(context,item.getIntent(),item.user)) {
               continue;
             }
           }
