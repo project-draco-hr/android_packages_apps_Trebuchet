@@ -1,5 +1,5 @@
 {
-  mSearchBar.setVisibility(View.GONE);
+  mSearchBarView.setVisibility(View.GONE);
   updateBackgrounds();
   updatePaddings();
 }

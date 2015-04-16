@@ -4,7 +4,7 @@
     DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
     if (grid.updateAppsViewNumCols(context.getResources(),fixedBounds.width())) {
       mNumAppsPerRow=grid.appsViewNumCols;
-      mAppsListView.setNumAppsPerRow(mNumAppsPerRow);
+      mAppsRecyclerView.setNumAppsPerRow(mNumAppsPerRow);
       if (USE_LAYOUT == GRID_LAYOUT) {
         ((AppsGridAdapter)mAdapter).setNumAppsPerRow(mNumAppsPerRow);
       }
