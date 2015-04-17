@@ -1,0 +1,6 @@
+{
+  if (mLauncherCallbacks != null) {
+    return mLauncherCallbacks.overrideAllAppsSearch();
+  }
+  return false;
+}
