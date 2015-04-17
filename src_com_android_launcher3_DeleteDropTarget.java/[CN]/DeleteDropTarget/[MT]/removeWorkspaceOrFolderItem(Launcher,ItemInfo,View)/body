@@ -19,7 +19,7 @@
           return null;
         }
       }
-.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,(Void)null);
+.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
   }
  else {

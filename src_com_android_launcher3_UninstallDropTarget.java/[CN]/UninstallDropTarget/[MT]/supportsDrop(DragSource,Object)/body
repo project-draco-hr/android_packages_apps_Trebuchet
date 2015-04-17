@@ -1,0 +1,11 @@
+{
+  if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+    UserManager userManager=(UserManager)getContext().getSystemService(Context.USER_SERVICE);
+    Bundle restrictions=userManager.getUserRestrictions();
+    if (restrictions.getBoolean(UserManager.DISALLOW_APPS_CONTROL,false) || restrictions.getBoolean(UserManager.DISALLOW_UNINSTALL_APPS,false)) {
+      return false;
+    }
+  }
+  Pair<ComponentName,Integer> componentInfo=getAppInfoFlags(info);
+  return componentInfo != null && (componentInfo.second & AppInfo.DOWNLOADED_FLAG) != 0;
+}

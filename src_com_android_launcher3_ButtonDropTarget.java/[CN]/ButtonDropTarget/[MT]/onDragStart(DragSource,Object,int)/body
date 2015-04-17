@@ -1,2 +1,6 @@
 {
+  mActive=supportsDrop(source,info);
+  mDrawable.resetTransition();
+  setTextColor(mOriginalTextColor);
+  ((ViewGroup)getParent()).setVisibility(mActive ? View.VISIBLE : View.GONE);
 }

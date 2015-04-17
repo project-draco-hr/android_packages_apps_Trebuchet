@@ -1,0 +1,10 @@
+{
+  mDrawable=(TransitionDrawable)getCurrentDrawable();
+  if (mDrawable == null) {
+    mDrawable=(TransitionDrawable)getResources().getDrawable(resId);
+    setCompoundDrawablesRelativeWithIntrinsicBounds(mDrawable,null,null,null);
+  }
+  if (null != mDrawable) {
+    mDrawable.setCrossFadeEnabled(true);
+  }
+}

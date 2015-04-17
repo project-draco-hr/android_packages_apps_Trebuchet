@@ -3,8 +3,10 @@
   mDropTargetBar=findViewById(R.id.drag_target_bar);
   mInfoDropTarget=(ButtonDropTarget)mDropTargetBar.findViewById(R.id.info_target_text);
   mDeleteDropTarget=(ButtonDropTarget)mDropTargetBar.findViewById(R.id.delete_target_text);
+  mUninstallDropTarget=(ButtonDropTarget)mDropTargetBar.findViewById(R.id.uninstall_target_text);
   mInfoDropTarget.setSearchDropTargetBar(this);
   mDeleteDropTarget.setSearchDropTargetBar(this);
+  mUninstallDropTarget.setSearchDropTargetBar(this);
   mEnableDropDownDropTargets=getResources().getBoolean(R.bool.config_useDropTargetDownTransition);
   if (mEnableDropDownDropTargets) {
     LauncherAppState app=LauncherAppState.getInstance();

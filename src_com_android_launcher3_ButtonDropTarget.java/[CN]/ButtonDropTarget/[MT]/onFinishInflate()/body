@@ -1,0 +1,10 @@
+{
+  super.onFinishInflate();
+  mOriginalTextColor=getTextColors();
+  int orientation=getResources().getConfiguration().orientation;
+  if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+    if (!LauncherAppState.getInstance().isScreenLarge()) {
+      setText("");
+    }
+  }
+}
