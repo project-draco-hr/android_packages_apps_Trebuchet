@@ -1,0 +1,38 @@
+{
+  LauncherAppState app=LauncherAppState.getInstance();
+  DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
+switch (ev.getAction()) {
+case MotionEvent.ACTION_DOWN:
+    if (!mFixedBounds.isEmpty()) {
+      Rect tmpRect=new Rect(mFixedBounds);
+      tmpRect.inset(-grid.allAppsIconSizePx / 2,0);
+      if (ev.getX() < tmpRect.left || ev.getX() > tmpRect.right) {
+        mLastTouchDownPos.set((int)ev.getX(),(int)ev.getY());
+        return true;
+      }
+    }
+ else {
+      if (ev.getX() < getPaddingLeft() || ev.getX() > (getWidth() - getPaddingRight())) {
+        mLastTouchDownPos.set((int)ev.getX(),(int)ev.getY());
+        return true;
+      }
+    }
+  break;
+case MotionEvent.ACTION_UP:
+if (mLastTouchDownPos.x > -1) {
+  ViewConfiguration viewConfig=ViewConfiguration.get(getContext());
+  float dx=ev.getX() - mLastTouchDownPos.x;
+  float dy=ev.getY() - mLastTouchDownPos.y;
+  float distance=(float)Math.hypot(dx,dy);
+  if (distance < viewConfig.getScaledTouchSlop()) {
+    Launcher launcher=(Launcher)getContext();
+    launcher.showWorkspace(true);
+    return true;
+  }
+}
+case MotionEvent.ACTION_CANCEL:
+mLastTouchDownPos.set(-1,-1);
+break;
+}
+return false;
+}
