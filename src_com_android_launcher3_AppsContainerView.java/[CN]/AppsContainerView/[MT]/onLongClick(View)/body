@@ -2,7 +2,7 @@
   if (!v.isInTouchMode())   return false;
   if (!mLauncher.isAppsViewVisible() || mLauncher.getWorkspace().isSwitchingState())   return false;
   if (!mLauncher.isDraggingEnabled())   return false;
-  mLauncher.getWorkspace().beginDragShared(v,mLastTouchDownPos,this,false);
+  mLauncher.getWorkspace().beginDragShared(v,mLastTouchPos,this,false);
   postDelayed(new Runnable(){
     @Override public void run(){
       if (mLauncher.getDragController().isDragging()) {
