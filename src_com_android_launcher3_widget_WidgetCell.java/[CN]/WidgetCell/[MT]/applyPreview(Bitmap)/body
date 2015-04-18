@@ -12,7 +12,8 @@
       int centerAmount=(imageSize[0] - preview.getIntrinsicWidth()) / 2;
       image.setPadding(mOriginalImagePadding.left + centerAmount,mOriginalImagePadding.top,mOriginalImagePadding.right,mOriginalImagePadding.bottom);
     }
-    image.setAlpha(1f);
+    image.setAlpha(0f);
+    image.animate().alpha(1.0f).setDuration(FADE_IN_DURATION_MS);
     image.mAllowRequestLayout=true;
     image.requestLayout();
   }

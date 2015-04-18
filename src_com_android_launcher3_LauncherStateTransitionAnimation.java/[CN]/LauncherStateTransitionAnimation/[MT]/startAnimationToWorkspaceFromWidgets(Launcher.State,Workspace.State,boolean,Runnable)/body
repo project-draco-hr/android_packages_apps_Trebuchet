@@ -1,6 +1,10 @@
 {
-  WidgetsContainerView widgetsView=mLauncher.getWidgetsView();
+  final WidgetsContainerView widgetsView=mLauncher.getWidgetsView();
+  final Resources res=mLauncher.getResources();
   PrivateTransitionCallbacks cb=new PrivateTransitionCallbacks(){
+    @Override public void onRevealViewVisible(    View revealView,    View contentView,    View allAppsButtonView){
+      revealView.setBackground(res.getDrawable(R.drawable.quantum_panel_dark));
+    }
     @Override public float getMaterialRevealViewFinalYDrift(    View revealView){
       return revealView.getMeasuredHeight() / 2;
     }
