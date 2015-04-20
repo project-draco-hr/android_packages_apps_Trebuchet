@@ -2,17 +2,9 @@
   for (  AppInfo info : apps) {
     int removeIndex=findAppByComponent(mApps,info);
     if (removeIndex != -1) {
-      int sectionedIndex=mSectionedFilteredApps.indexOf(info);
-      int numAppsInSection=numAppsInSection(info);
       mApps.remove(removeIndex);
       onAppsUpdated();
-      if (numAppsInSection == 1) {
-        mAdapter.notifyItemRemoved(sectionedIndex - 1);
-        mAdapter.notifyItemRemoved(sectionedIndex - 1);
-      }
- else {
-        mAdapter.notifyItemRemoved(sectionedIndex);
-      }
+      mAdapter.notifyDataSetChanged();
     }
   }
 }
