@@ -1,5 +1,5 @@
 {
-  mLauncher.bindPackagesUpdated(LauncherModel.getSortedWidgetsAndShortcuts(mLauncher,true));
+  mLauncher.getModel().loadAndBindWidgetsAndShortcuts(mLauncher,mLauncher);
   for (  Runnable callback : mProviderChangeListeners) {
     callback.run();
   }

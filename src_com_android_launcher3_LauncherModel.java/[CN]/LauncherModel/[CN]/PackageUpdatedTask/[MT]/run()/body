@@ -234,16 +234,9 @@ callbacks.bindComponentsRemoved(removedPackageNames,removedApps,mUser,removeReas
 }
 );
 }
-final ArrayList<Object> widgetsAndShortcuts=getSortedWidgetsAndShortcuts(context,true);
-mHandler.post(new Runnable(){
-@Override public void run(){
-Callbacks cb=getCallback();
-if (callbacks == cb && cb != null) {
-callbacks.bindPackagesUpdated(widgetsAndShortcuts);
+if (Build.VERSION.SDK_INT < 17) {
+loadAndBindWidgetsAndShortcuts(context,callbacks);
 }
-}
-}
-);
 mHandler.post(new Runnable(){
 public void run(){
 Callbacks cb=getCallback();
