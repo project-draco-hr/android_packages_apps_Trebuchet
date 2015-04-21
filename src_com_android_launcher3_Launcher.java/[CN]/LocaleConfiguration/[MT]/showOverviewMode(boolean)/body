@@ -1,6 +1,6 @@
 {
   mWorkspace.setVisibility(View.VISIBLE);
-  mStateTransitionAnimation.startAnimationToWorkspace(mState,Workspace.State.OVERVIEW,animated,null);
+  mStateTransitionAnimation.startAnimationToWorkspace(mState,Workspace.State.OVERVIEW,WorkspaceStateTransitionAnimation.SCROLL_TO_CURRENT_PAGE,animated,null);
   mState=State.WORKSPACE;
   onWorkspaceShown(animated);
 }

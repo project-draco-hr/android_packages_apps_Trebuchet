@@ -1,3 +1,0 @@
-State state
-boolean animated
-HashMap<View,Integer> layerViews

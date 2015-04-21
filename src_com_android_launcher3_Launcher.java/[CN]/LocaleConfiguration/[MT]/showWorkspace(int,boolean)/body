@@ -1,0 +1,3 @@
+{
+  showWorkspace(snapToPage,animated,null,true);
+}

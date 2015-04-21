@@ -1,7 +1,0 @@
-{
-  if (isSwitchingState()) {
-    mCurrentScale=getScaleX();
-    setScaleX(mNewScale);
-    setScaleY(mNewScale);
-  }
-}

@@ -7,13 +7,13 @@
   }
   if (v instanceof Workspace) {
     if (mWorkspace.isInOverviewMode()) {
-      mWorkspace.exitOverviewMode(true);
+      showWorkspace(true);
     }
     return;
   }
   if (v instanceof CellLayout) {
     if (mWorkspace.isInOverviewMode()) {
-      mWorkspace.exitOverviewMode(mWorkspace.indexOfChild(v),true);
+      showWorkspace(mWorkspace.indexOfChild(v),true);
     }
   }
   Object tag=v.getTag();

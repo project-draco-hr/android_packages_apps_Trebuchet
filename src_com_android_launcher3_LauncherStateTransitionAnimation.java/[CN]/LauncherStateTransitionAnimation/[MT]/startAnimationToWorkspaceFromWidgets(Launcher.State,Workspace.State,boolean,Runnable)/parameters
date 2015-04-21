@@ -1,4 +1,0 @@
-Launcher.State fromState
-Workspace.State toWorkspaceState
-boolean animated
-Runnable onCompleteRunnable

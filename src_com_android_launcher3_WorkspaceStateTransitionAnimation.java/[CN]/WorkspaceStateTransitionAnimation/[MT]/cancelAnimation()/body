@@ -1,0 +1,4 @@
+{
+  cancelAnimator(mStateAnimator);
+  mStateAnimator=null;
+}
