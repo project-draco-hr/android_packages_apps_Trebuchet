@@ -1,0 +1,17 @@
+{
+  runOnWorkerThread(new Runnable(){
+    @Override public void run(){
+      final ArrayList<Object> list=getSortedWidgetsAndShortcuts(context,true);
+      mHandler.post(new Runnable(){
+        @Override public void run(){
+          Callbacks cb=getCallback();
+          if (callbacks == cb && cb != null) {
+            callbacks.bindPackagesUpdated(list);
+          }
+        }
+      }
+);
+    }
+  }
+);
+}
