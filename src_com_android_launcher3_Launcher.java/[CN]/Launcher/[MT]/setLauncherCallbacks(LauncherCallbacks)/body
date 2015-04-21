@@ -5,7 +5,7 @@
       mAppsView.setFixedBounds(Launcher.this,bounds);
     }
     @Override public void dismissAllApps(){
-      showWorkspace(true);
+      showWorkspace(WorkspaceStateTransitionAnimation.SCROLL_TO_CURRENT_PAGE,true,null,false);
     }
   }
 );

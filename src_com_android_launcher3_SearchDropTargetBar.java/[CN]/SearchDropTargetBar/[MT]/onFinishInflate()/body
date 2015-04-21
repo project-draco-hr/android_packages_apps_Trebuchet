@@ -7,17 +7,7 @@
   mInfoDropTarget.setSearchDropTargetBar(this);
   mDeleteDropTarget.setSearchDropTargetBar(this);
   mUninstallDropTarget.setSearchDropTargetBar(this);
-  mEnableDropDownDropTargets=getResources().getBoolean(R.bool.config_useDropTargetDownTransition);
-  if (mEnableDropDownDropTargets) {
-    LauncherAppState app=LauncherAppState.getInstance();
-    DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
-    mBarHeight=grid.searchBarSpaceHeightPx;
-    mDropTargetBar.setTranslationY(-mBarHeight);
-    mDropTargetBarAnim=LauncherAnimUtils.ofFloat(mDropTargetBar,"translationY",-mBarHeight,0f);
-  }
- else {
-    mDropTargetBar.setAlpha(0f);
-    mDropTargetBarAnim=LauncherAnimUtils.ofFloat(mDropTargetBar,"alpha",0f,1f);
-  }
-  setupAnimation(mDropTargetBarAnim,mDropTargetBar);
+  mDropTargetBar.setAlpha(0f);
+  mShowDropTargetBarAnim=LauncherAnimUtils.ofFloat(mDropTargetBar,"alpha",0f,1f);
+  setupAnimation(mShowDropTargetBarAnim,mDropTargetBar);
 }

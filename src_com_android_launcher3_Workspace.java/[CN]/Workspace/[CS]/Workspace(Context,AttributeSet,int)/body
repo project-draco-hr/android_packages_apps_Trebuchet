@@ -5,6 +5,7 @@
   mDragEnforcer=new DropTarget.DragEnforcer(context);
   setDataIsReady();
   mLauncher=(Launcher)context;
+  mStateTransitionAnimation=new WorkspaceStateTransitionAnimation(mLauncher,this);
   final Resources res=getResources();
   mWorkspaceFadeInAdjacentScreens=LauncherAppState.getInstance().getDynamicGrid().getDeviceProfile().shouldFadeAdjacentWorkspaceScreens();
   mFadeInAdjacentScreens=false;

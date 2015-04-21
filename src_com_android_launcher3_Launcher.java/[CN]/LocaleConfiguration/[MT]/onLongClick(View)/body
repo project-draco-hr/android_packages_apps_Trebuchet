@@ -4,7 +4,8 @@
   if (mState != State.WORKSPACE)   return false;
   if (v instanceof Workspace) {
     if (!mWorkspace.isInOverviewMode()) {
-      if (mWorkspace.enterOverviewMode()) {
+      if (!mWorkspace.isTouchActive()) {
+        showOverviewMode(true);
         mWorkspace.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS,HapticFeedbackConstants.FLAG_IGNORE_VIEW_SETTING);
         return true;
       }
@@ -33,7 +34,7 @@
         mWorkspace.startReordering(v);
       }
  else {
-        mWorkspace.enterOverviewMode();
+        showOverviewMode(true);
       }
     }
  else {

@@ -1,0 +1,25 @@
+{
+  final WidgetsContainerView widgetsView=mLauncher.getWidgetsView();
+  final Resources res=mLauncher.getResources();
+  PrivateTransitionCallbacks cb=new PrivateTransitionCallbacks(){
+    @Override public void onRevealViewVisible(    View revealView,    View contentView,    View allAppsButtonView){
+      revealView.setBackground(res.getDrawable(R.drawable.quantum_panel_dark));
+    }
+    @Override public float getMaterialRevealViewFinalYDrift(    View revealView){
+      return revealView.getMeasuredHeight() / 2;
+    }
+    @Override float getMaterialRevealViewFinalAlpha(    View revealView){
+      return 0.4f;
+    }
+    @Override public AnimatorListenerAdapter getMaterialRevealViewAnimatorListener(    final View revealView,    final View allAppsButtonView){
+      return new AnimatorListenerAdapter(){
+        public void onAnimationEnd(        Animator animation){
+          revealView.setVisibility(View.INVISIBLE);
+        }
+      }
+;
+    }
+  }
+;
+  startAnimationToWorkspaceFromOverlay(toWorkspaceState,toWorkspacePage,widgetsView,widgetsView.getContentView(),widgetsView.getRevealView(),animated,onCompleteRunnable,cb);
+}

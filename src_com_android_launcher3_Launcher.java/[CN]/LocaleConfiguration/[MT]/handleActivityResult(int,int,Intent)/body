@@ -21,7 +21,7 @@
   }
  else   if (requestCode == REQUEST_PICK_WALLPAPER) {
     if (resultCode == RESULT_OK && mWorkspace.isInOverviewMode()) {
-      mWorkspace.exitOverviewMode(false);
+      showWorkspace(false);
     }
     return;
   }

@@ -1,0 +1,6 @@
+{
+  if (animator != null) {
+    animator.setDuration(0);
+    animator.cancel();
+  }
+}
