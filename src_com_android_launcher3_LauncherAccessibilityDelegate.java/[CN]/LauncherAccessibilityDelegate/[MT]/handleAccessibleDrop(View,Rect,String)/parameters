@@ -1,3 +1,3 @@
-CellLayout targetContainer
+View clickedTarget
 Rect dropLocation
 String confirmation

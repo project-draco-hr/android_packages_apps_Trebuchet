@@ -2,4 +2,7 @@
   prepareStartAnimation(mDropTargetBar);
   mShowDropTargetBarAnim.reverse();
   showSearchBar(true);
+  if (mQSBSearchBar != null) {
+    mQSBSearchBar.setVisibility(View.VISIBLE);
+  }
 }

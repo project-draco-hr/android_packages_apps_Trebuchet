@@ -1,8 +1,7 @@
 {
-  Resources res=mLauncher.getResources();
   if (action == REMOVE) {
     if (DeleteDropTarget.removeWorkspaceOrFolderItem(mLauncher,item,host)) {
-      announceConfirmation(R.string.item_removed_from_workspace);
+      announceConfirmation(R.string.item_removed);
       return true;
     }
     return false;
@@ -12,9 +11,7 @@
     return true;
   }
  else   if (action == UNINSTALL) {
-    AppInfo info=(AppInfo)item;
-    mLauncher.startApplicationUninstallActivity(info.componentName,info.flags,info.user);
-    return true;
+    return UninstallDropTarget.startUninstallActivity(mLauncher,item);
   }
  else   if (action == MOVE) {
     beginAccessibleDrag(host,item);
