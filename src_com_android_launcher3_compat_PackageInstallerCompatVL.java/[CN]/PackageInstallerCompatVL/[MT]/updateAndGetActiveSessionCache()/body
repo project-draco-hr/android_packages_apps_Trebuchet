@@ -1,10 +1,11 @@
 {
-  HashSet<String> activePackages=new HashSet<String>();
+  HashMap<String,Integer> activePackages=new HashMap<>();
   UserHandleCompat user=UserHandleCompat.myUserHandle();
   for (  SessionInfo info : mInstaller.getAllSessions()) {
     addSessionInfoToCahce(info,user);
     if (info.getAppPackageName() != null) {
-      activePackages.add(info.getAppPackageName());
+      activePackages.put(info.getAppPackageName(),(int)(info.getProgress() * 100));
+      mActiveSessions.put(info.getSessionId(),info.getAppPackageName());
     }
   }
   return activePackages;

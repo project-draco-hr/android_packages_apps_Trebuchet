@@ -25,7 +25,7 @@
   }
 synchronized (sBgLock) {
     clearSBgDataStructures();
-    final HashSet<String> installingPkgs=PackageInstallerCompat.getInstance(mContext).updateAndGetActiveSessionCache();
+    final HashMap<String,Integer> installingPkgs=PackageInstallerCompat.getInstance(mContext).updateAndGetActiveSessionCache();
     final ArrayList<Long> itemsToRemove=new ArrayList<Long>();
     final ArrayList<Long> restoredRows=new ArrayList<Long>();
     final Uri contentUri=LauncherSettings.Favorites.CONTENT_URI;
@@ -120,7 +120,7 @@ if (validComponent) {
   Launcher.addDumpLog(TAG,"package not yet restored: " + cn,true);
   if ((promiseType & ShortcutInfo.FLAG_RESTORE_STARTED) != 0) {
   }
- else   if (installingPkgs.contains(cn.getPackageName())) {
+ else   if (installingPkgs.containsKey(cn.getPackageName())) {
     promiseType|=ShortcutInfo.FLAG_RESTORE_STARTED;
     ContentValues values=new ContentValues();
     values.put(LauncherSettings.Favorites.RESTORED,promiseType);
@@ -229,6 +229,18 @@ if (!checkItemPlacement(occupied,info)) {
 itemsToRemove.add(id);
 break;
 }
+if (restored) {
+ComponentName cn=info.getTargetComponent();
+if (cn != null) {
+Integer progress=installingPkgs.get(cn.getPackageName());
+if (progress != null) {
+info.setInstallProgress(progress);
+}
+ else {
+info.status&=~ShortcutInfo.FLAG_INSTALL_SESSION_ACTIVE;
+}
+}
+}
 switch (container) {
 case LauncherSettings.Favorites.CONTAINER_DESKTOP:
 case LauncherSettings.Favorites.CONTAINER_HOTSEAT:
@@ -321,9 +333,10 @@ appWidgetInfo.restoreStatus=status;
 Log.v(TAG,"Widget restore pending id=" + id + " appWidgetId="+ appWidgetId+ " status ="+ restoreStatus);
 appWidgetInfo=new LauncherAppWidgetInfo(appWidgetId,component);
 appWidgetInfo.restoreStatus=restoreStatus;
+Integer installProgress=installingPkgs.get(component.getPackageName());
 if ((restoreStatus & LauncherAppWidgetInfo.FLAG_RESTORE_STARTED) != 0) {
 }
- else if (installingPkgs.contains(component.getPackageName())) {
+ else if (installProgress != null) {
 appWidgetInfo.restoreStatus|=LauncherAppWidgetInfo.FLAG_RESTORE_STARTED;
 }
  else if (REMOVE_UNRESTORED_ICONS && !isSafeMode) {
@@ -331,6 +344,7 @@ Launcher.addDumpLog(TAG,"Unrestored widget removed: " + component,true);
 itemsToRemove.add(id);
 continue;
 }
+appWidgetInfo.installProgress=installProgress == null ? 0 : installProgress;
 }
 appWidgetInfo.id=id;
 appWidgetInfo.screenId=c.getInt(screenIndex);

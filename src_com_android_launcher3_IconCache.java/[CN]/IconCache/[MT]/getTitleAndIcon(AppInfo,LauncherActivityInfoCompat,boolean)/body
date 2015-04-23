@@ -1,7 +1,8 @@
 {
-  CacheEntry entry=cacheLocked(application.componentName,info,info == null ? application.user : info.getUser(),false,useLowResIcon);
+  UserHandleCompat user=info == null ? application.user : info.getUser();
+  CacheEntry entry=cacheLocked(application.componentName,info,user,false,useLowResIcon);
   application.title=entry.title;
-  application.iconBitmap=entry.icon;
+  application.iconBitmap=getNonNullIcon(entry,user);
   application.contentDescription=entry.contentDescription;
   application.usingLowResIcon=entry.isLowResIcon;
 }

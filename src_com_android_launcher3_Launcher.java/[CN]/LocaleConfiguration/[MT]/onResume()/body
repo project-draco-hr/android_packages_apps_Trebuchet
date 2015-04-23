@@ -50,7 +50,6 @@
   }
   getWorkspace().reinflateWidgetsIfNecessary();
   reinflateQSBIfNecessary();
-  InstallShortcutReceiver.disableAndFlushInstallQueue(this);
   if (DEBUG_RESUME_TIME) {
     Log.d(TAG,"Time spent in onResume: " + (System.currentTimeMillis() - startTime));
   }
@@ -61,7 +60,9 @@
   }
   mWorkspace.updateInteractionForState();
   mWorkspace.onResume();
-  PackageInstallerCompat.getInstance(this).onResume();
+  if (!isWorkspaceLoading()) {
+    InstallShortcutReceiver.disableAndFlushInstallQueue(this);
+  }
   if (mLauncherCallbacks != null) {
     mLauncherCallbacks.onResume();
   }

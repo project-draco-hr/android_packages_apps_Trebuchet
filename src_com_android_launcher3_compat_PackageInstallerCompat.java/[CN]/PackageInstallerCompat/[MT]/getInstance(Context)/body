@@ -5,9 +5,7 @@ synchronized (sInstanceLock) {
         sInstance=new PackageInstallerCompatVL(context);
       }
  else {
-        sInstance=new PackageInstallerCompatV16(context){
-        }
-;
+        sInstance=new PackageInstallerCompatV16();
       }
     }
     return sInstance;

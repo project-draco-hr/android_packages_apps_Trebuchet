@@ -1,4 +1,0 @@
-{
-  mResumed=true;
-  mWorker.post(this);
-}

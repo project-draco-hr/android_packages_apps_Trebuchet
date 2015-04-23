@@ -1,0 +1,31 @@
+{
+  final Intent intentWithPkg, intentWithoutPkg;
+  final String packageName;
+  if (intent.getComponent() != null) {
+    packageName=intent.getComponent().getPackageName();
+    if (intent.getPackage() != null) {
+      intentWithPkg=intent;
+      intentWithoutPkg=new Intent(intent).setPackage(null);
+    }
+ else {
+      intentWithPkg=new Intent(intent).setPackage(packageName);
+      intentWithoutPkg=intent;
+    }
+  }
+ else {
+    intentWithPkg=intent;
+    intentWithoutPkg=intent;
+    packageName=intent.getPackage();
+  }
+synchronized (sBgLock) {
+    for (    ItemInfo item : sBgItemsIdMap.values()) {
+      if (item instanceof ShortcutInfo) {
+        ShortcutInfo info=(ShortcutInfo)item;
+        if (intentWithPkg.equals(info.getIntent()) || intentWithoutPkg.equals(info.getIntent())) {
+          return true;
+        }
+      }
+    }
+  }
+  return false;
+}

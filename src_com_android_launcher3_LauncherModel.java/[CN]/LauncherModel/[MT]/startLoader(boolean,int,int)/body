@@ -1,4 +1,5 @@
 {
+  InstallShortcutReceiver.enableInstallQueue();
 synchronized (mLock) {
     if (DEBUG_LOADERS) {
       Log.d(TAG,"startLoader isLaunching=" + isLaunching);

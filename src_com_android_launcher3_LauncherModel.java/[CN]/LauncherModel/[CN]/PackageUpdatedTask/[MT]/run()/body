@@ -124,12 +124,12 @@ if (si.isPromise()) {
       si.promisedIntent=intent;
     }
   }
-  si.intent=si.promisedIntent;
-  si.promisedIntent=null;
-  si.status&=~ShortcutInfo.FLAG_RESTORED_ICON & ~ShortcutInfo.FLAG_AUTOINTALL_ICON & ~ShortcutInfo.FLAG_INSTALL_SESSION_ACTIVE;
   if (appInfo != null) {
     si.flags=appInfo.flags;
   }
+  si.intent=si.promisedIntent;
+  si.promisedIntent=null;
+  si.status=ShortcutInfo.DEFAULT;
   infoUpdated=true;
   si.updateIcon(mIconCache);
 }

@@ -1,0 +1,14 @@
+{
+  mapOverItems(MAP_RECURSE,new ItemOperator(){
+    @Override public boolean evaluate(    ItemInfo info,    View v,    View parent){
+      if (info instanceof ShortcutInfo && v instanceof BubbleTextView && updates.contains(info)) {
+        ((BubbleTextView)v).applyState(false);
+      }
+ else       if (v instanceof PendingAppWidgetHostView && info instanceof LauncherAppWidgetInfo && updates.contains(info)) {
+        ((PendingAppWidgetHostView)v).applyState();
+      }
+      return false;
+    }
+  }
+);
+}
