@@ -9,7 +9,6 @@
   mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
   final List<UserHandleCompat> profiles=mUserManager.getUserProfiles();
   mBgAllAppsList.clear();
-  SharedPreferences prefs=mContext.getSharedPreferences(LauncherAppState.getSharedPreferencesKey(),Context.MODE_PRIVATE);
   for (  UserHandleCompat user : profiles) {
     final long qiaTime=DEBUG_LOADERS ? SystemClock.uptimeMillis() : 0;
     List<LauncherActivityInfoCompat> apps=mLauncherApps.getActivityList(null,user);

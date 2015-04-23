@@ -5,6 +5,6 @@
 synchronized (mDeferredBindRunnables) {
     mDeferredBindRunnables.clear();
   }
-  mHandler.cancelAllRunnablesOfType(MAIN_THREAD_BINDING_RUNNABLE);
+  mHandler.cancelAll();
   unbindWorkspaceItemsOnMainThread();
 }

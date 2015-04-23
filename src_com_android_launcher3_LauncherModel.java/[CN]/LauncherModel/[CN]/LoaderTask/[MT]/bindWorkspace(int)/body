@@ -46,7 +46,7 @@ synchronized (sBgLock) {
     }
   }
 ;
-  runOnMainThread(r,MAIN_THREAD_BINDING_RUNNABLE);
+  runOnMainThread(r);
   bindWorkspaceScreens(oldCallbacks,orderedScreenIds);
   bindWorkspaceItems(oldCallbacks,currentWorkspaceItems,currentAppWidgets,currentFolders,null);
   if (isLoadingSynchronously) {
@@ -59,7 +59,7 @@ synchronized (sBgLock) {
       }
     }
 ;
-    runOnMainThread(r,MAIN_THREAD_BINDING_RUNNABLE);
+    runOnMainThread(r);
   }
 synchronized (mDeferredBindRunnables) {
     mDeferredBindRunnables.clear();
@@ -84,6 +84,6 @@ synchronized (mDeferredBindRunnables) {
     }
   }
  else {
-    runOnMainThread(r,MAIN_THREAD_BINDING_RUNNABLE);
+    runOnMainThread(r);
   }
 }

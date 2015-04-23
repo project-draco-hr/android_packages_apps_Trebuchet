@@ -19,7 +19,7 @@ synchronized (deferredBindRunnables) {
       }
     }
  else {
-      runOnMainThread(r,MAIN_THREAD_BINDING_RUNNABLE);
+      runOnMainThread(r);
     }
   }
   if (!folders.isEmpty()) {
@@ -38,7 +38,7 @@ synchronized (deferredBindRunnables) {
       }
     }
  else {
-      runOnMainThread(r,MAIN_THREAD_BINDING_RUNNABLE);
+      runOnMainThread(r);
     }
   }
   N=appWidgets.size();
@@ -57,7 +57,7 @@ synchronized (deferredBindRunnables) {
       deferredBindRunnables.add(r);
     }
  else {
-      runOnMainThread(r,MAIN_THREAD_BINDING_RUNNABLE);
+      runOnMainThread(r);
     }
   }
 }

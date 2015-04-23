@@ -6,7 +6,7 @@ synchronized (mDeferredBindRunnables) {
       mDeferredBindRunnables.clear();
     }
     for (    final Runnable r : deferredBindRunnables) {
-      mHandler.post(r,MAIN_THREAD_BINDING_RUNNABLE);
+      mHandler.post(r);
     }
   }
 }
