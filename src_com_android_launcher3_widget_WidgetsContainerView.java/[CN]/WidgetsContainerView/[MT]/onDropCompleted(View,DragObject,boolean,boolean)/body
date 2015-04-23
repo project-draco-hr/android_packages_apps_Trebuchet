@@ -20,4 +20,5 @@
     }
     d.deferDragViewCleanupPostAnimation=false;
   }
+  mWidgetHostViewLoader.finish(success);
 }

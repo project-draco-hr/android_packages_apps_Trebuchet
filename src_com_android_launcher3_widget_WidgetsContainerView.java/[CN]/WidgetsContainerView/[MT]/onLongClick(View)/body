@@ -6,5 +6,9 @@
   if (!mLauncher.isWidgetsViewVisible() || mLauncher.getWorkspace().isSwitchingState())   return false;
   Log.d(TAG,String.format("onLonglick dragging enabled?.",v));
   if (!mLauncher.isDraggingEnabled())   return false;
-  return beginDragging(v);
+  boolean status=beginDragging(v);
+  if (status) {
+    mWidgetHostViewLoader.load(v);
+  }
+  return status;
 }

@@ -1,0 +1,4 @@
+{
+  mLauncher=launcher;
+  mHandler=new Handler();
+}

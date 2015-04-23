@@ -1,8 +1,5 @@
 {
-  ImageView image=(ImageView)findViewById(R.id.widget_preview);
-  final TextView name=(TextView)findViewById(R.id.widget_name);
-  final TextView dims=(TextView)findViewById(R.id.widget_dims);
-  image.setImageDrawable(null);
-  name.setText(null);
-  dims.setText(null);
+  mWidgetImage.setImageDrawable(null);
+  mWidgetName.setText(null);
+  mWidgetDims.setText(null);
 }
