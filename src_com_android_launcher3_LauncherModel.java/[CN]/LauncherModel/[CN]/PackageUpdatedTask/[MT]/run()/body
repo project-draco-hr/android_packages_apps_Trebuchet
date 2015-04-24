@@ -91,7 +91,7 @@ final ArrayList<ShortcutInfo> removedShortcuts=new ArrayList<ShortcutInfo>();
 final ArrayList<LauncherAppWidgetInfo> widgets=new ArrayList<LauncherAppWidgetInfo>();
 HashSet<String> packageSet=new HashSet<String>(Arrays.asList(packages));
 synchronized (sBgLock) {
-for (ItemInfo info : sBgItemsIdMap.values()) {
+for (ItemInfo info : sBgItemsIdMap) {
 if (info instanceof ShortcutInfo && mUser.equals(info.user)) {
 ShortcutInfo si=(ShortcutInfo)info;
 boolean infoUpdated=false;

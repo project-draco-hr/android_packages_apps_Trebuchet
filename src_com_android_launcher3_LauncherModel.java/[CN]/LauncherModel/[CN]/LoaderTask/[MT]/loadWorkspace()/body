@@ -31,7 +31,7 @@ synchronized (sBgLock) {
     final Uri contentUri=LauncherSettings.Favorites.CONTENT_URI;
     if (DEBUG_LOADERS)     Log.d(TAG,"loading model from " + contentUri);
     final Cursor c=contentResolver.query(contentUri,null,null,null,null);
-    final HashMap<Long,ItemInfo[][]> occupied=new HashMap<Long,ItemInfo[][]>();
+    final LongArrayMap<ItemInfo[][]> occupied=new LongArrayMap<>();
     try {
       final int idIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites._ID);
       final int intentIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.INTENT);
@@ -432,7 +432,7 @@ context.registerReceiver(new AppsAvailabilityCheck(),new IntentFilter(StartupRec
 sBgWorkspaceScreens.addAll(loadWorkspaceScreensDb(mContext));
 Launcher.addDumpLog(TAG,"11683562 -   sBgWorkspaceScreens: " + TextUtils.join(", ",sBgWorkspaceScreens),true);
 ArrayList<Long> unusedScreens=new ArrayList<Long>(sBgWorkspaceScreens);
-for (ItemInfo item : sBgItemsIdMap.values()) {
+for (ItemInfo item : sBgItemsIdMap) {
 long screenId=item.screenId;
 if (item.container == LauncherSettings.Favorites.CONTAINER_DESKTOP && unusedScreens.contains(screenId)) {
 unusedScreens.remove(screenId);
@@ -449,14 +449,13 @@ Log.d(TAG,"workspace layout: ");
 int nScreens=occupied.size();
 for (int y=0; y < countY; y++) {
 String line="";
-Iterator<Long> iter=occupied.keySet().iterator();
-while (iter.hasNext()) {
-long screenId=iter.next();
+for (int i=0; i < nScreens; i++) {
+long screenId=occupied.keyAt(i);
 if (screenId > 0) {
 line+=" | ";
 }
+ItemInfo[][] screen=occupied.valueAt(i);
 for (int x=0; x < countX; x++) {
-ItemInfo[][] screen=occupied.get(screenId);
 if (x < screen.length && y < screen[x].length) {
 line+=(screen[x][y] != null) ? "#" : ".";
 }

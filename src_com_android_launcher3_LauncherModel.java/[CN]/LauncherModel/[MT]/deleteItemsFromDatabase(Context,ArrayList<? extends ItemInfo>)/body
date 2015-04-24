@@ -9,7 +9,7 @@ synchronized (sBgLock) {
 switch (item.itemType) {
 case LauncherSettings.Favorites.ITEM_TYPE_FOLDER:
             sBgFolders.remove(item.id);
-          for (          ItemInfo info : sBgItemsIdMap.values()) {
+          for (          ItemInfo info : sBgItemsIdMap) {
             if (info.container == item.id) {
               String msg="deleting a folder (" + item + ") which still "+ "contains items ("+ info+ ")";
               Log.e(TAG,msg);

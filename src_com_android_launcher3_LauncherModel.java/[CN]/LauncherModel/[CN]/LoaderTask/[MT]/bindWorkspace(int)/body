@@ -8,15 +8,15 @@
   }
   ArrayList<ItemInfo> workspaceItems=new ArrayList<ItemInfo>();
   ArrayList<LauncherAppWidgetInfo> appWidgets=new ArrayList<LauncherAppWidgetInfo>();
-  HashMap<Long,FolderInfo> folders=new HashMap<Long,FolderInfo>();
-  HashMap<Long,ItemInfo> itemsIdMap=new HashMap<Long,ItemInfo>();
   ArrayList<Long> orderedScreenIds=new ArrayList<Long>();
+  final LongArrayMap<FolderInfo> folders;
+  final LongArrayMap<ItemInfo> itemsIdMap;
 synchronized (sBgLock) {
     workspaceItems.addAll(sBgWorkspaceItems);
     appWidgets.addAll(sBgAppWidgets);
-    folders.putAll(sBgFolders);
-    itemsIdMap.putAll(sBgItemsIdMap);
     orderedScreenIds.addAll(sBgWorkspaceScreens);
+    folders=sBgFolders.clone();
+    itemsIdMap=sBgItemsIdMap.clone();
   }
   final boolean isLoadingSynchronously=synchronizeBindPage != PagedView.INVALID_RESTORE_PAGE;
   int currScreen=isLoadingSynchronously ? synchronizeBindPage : oldCallbacks.getCurrentWorkspaceScreen();
@@ -30,8 +30,8 @@ synchronized (sBgLock) {
   ArrayList<ItemInfo> otherWorkspaceItems=new ArrayList<ItemInfo>();
   ArrayList<LauncherAppWidgetInfo> currentAppWidgets=new ArrayList<LauncherAppWidgetInfo>();
   ArrayList<LauncherAppWidgetInfo> otherAppWidgets=new ArrayList<LauncherAppWidgetInfo>();
-  HashMap<Long,FolderInfo> currentFolders=new HashMap<Long,FolderInfo>();
-  HashMap<Long,FolderInfo> otherFolders=new HashMap<Long,FolderInfo>();
+  LongArrayMap<FolderInfo> currentFolders=new LongArrayMap<>();
+  LongArrayMap<FolderInfo> otherFolders=new LongArrayMap<>();
   filterCurrentWorkspaceItems(currentScreenId,workspaceItems,currentWorkspaceItems,otherWorkspaceItems);
   filterCurrentAppWidgets(currentScreenId,appWidgets,currentAppWidgets,otherAppWidgets);
   filterCurrentFolders(currentScreenId,itemsIdMap,folders,currentFolders,otherFolders);

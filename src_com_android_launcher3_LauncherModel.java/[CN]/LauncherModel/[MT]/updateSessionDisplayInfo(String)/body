@@ -4,7 +4,7 @@
 synchronized (sBgLock) {
         final ArrayList<ShortcutInfo> updates=new ArrayList<>();
         final UserHandleCompat user=UserHandleCompat.myUserHandle();
-        for (        ItemInfo info : sBgItemsIdMap.values()) {
+        for (        ItemInfo info : sBgItemsIdMap) {
           if (info instanceof ShortcutInfo) {
             ShortcutInfo si=(ShortcutInfo)info;
             ComponentName cn=si.getTargetComponent();

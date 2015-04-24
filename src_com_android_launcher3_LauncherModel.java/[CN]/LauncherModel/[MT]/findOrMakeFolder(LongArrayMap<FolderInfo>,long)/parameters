@@ -1,0 +1,2 @@
+LongArrayMap<FolderInfo> folders
+long id

@@ -6,7 +6,7 @@ synchronized (sBgLock) {
         if (installInfo.state == PackageInstallerCompat.STATUS_INSTALLED) {
           return;
         }
-        for (        ItemInfo info : sBgItemsIdMap.values()) {
+        for (        ItemInfo info : sBgItemsIdMap) {
           if (info instanceof ShortcutInfo) {
             ShortcutInfo si=(ShortcutInfo)info;
             ComponentName cn=si.getTargetComponent();

@@ -18,7 +18,7 @@
     packageName=intent.getPackage();
   }
 synchronized (sBgLock) {
-    for (    ItemInfo item : sBgItemsIdMap.values()) {
+    for (    ItemInfo item : sBgItemsIdMap) {
       if (item instanceof ShortcutInfo) {
         ShortcutInfo info=(ShortcutInfo)item;
         if (intentWithPkg.equals(info.getIntent()) || intentWithoutPkg.equals(info.getIntent())) {

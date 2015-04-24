@@ -1,7 +1,9 @@
 {
-  for (  long id : folders.keySet()) {
+  int total=folders.size();
+  for (int i=0; i < total; i++) {
+    long id=folders.keyAt(i);
+    FolderInfo folder=folders.valueAt(i);
     ItemInfo info=itemsIdMap.get(id);
-    FolderInfo folder=folders.get(id);
     if (info == null || folder == null)     continue;
     if (info.container == LauncherSettings.Favorites.CONTAINER_DESKTOP && info.screenId == currentScreenId) {
       currentScreenFolders.put(id,folder);

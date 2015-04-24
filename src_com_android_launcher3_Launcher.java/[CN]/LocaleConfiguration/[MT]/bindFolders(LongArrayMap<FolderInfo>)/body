@@ -8,6 +8,5 @@
   if (waitUntilResume(r)) {
     return;
   }
-  sFolders.clear();
-  sFolders.putAll(folders);
+  sFolders=folders.clone();
 }

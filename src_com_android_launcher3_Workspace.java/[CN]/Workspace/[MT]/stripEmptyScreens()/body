@@ -9,8 +9,10 @@
   }
   int currentPage=getNextPage();
   ArrayList<Long> removeScreens=new ArrayList<Long>();
-  for (  Long id : mWorkspaceScreens.keySet()) {
-    CellLayout cl=mWorkspaceScreens.get(id);
+  int total=mWorkspaceScreens.size();
+  for (int i=0; i < total; i++) {
+    long id=mWorkspaceScreens.keyAt(i);
+    CellLayout cl=mWorkspaceScreens.valueAt(i);
     if (id >= 0 && cl.getShortcutsAndWidgets().getChildCount() == 0) {
       removeScreens.add(id);
     }

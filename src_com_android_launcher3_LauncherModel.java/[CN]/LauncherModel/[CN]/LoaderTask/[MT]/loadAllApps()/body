@@ -23,7 +23,7 @@
     if (!updatedPackages.isEmpty()) {
       final ArrayList<ShortcutInfo> updates=new ArrayList<ShortcutInfo>();
 synchronized (sBgLock) {
-        for (        ItemInfo info : sBgItemsIdMap.values()) {
+        for (        ItemInfo info : sBgItemsIdMap) {
           if (info instanceof ShortcutInfo && user.equals(info.user) && info.itemType == LauncherSettings.Favorites.ITEM_TYPE_APPLICATION) {
             ShortcutInfo si=(ShortcutInfo)info;
             ComponentName cn=si.getTargetComponent();
