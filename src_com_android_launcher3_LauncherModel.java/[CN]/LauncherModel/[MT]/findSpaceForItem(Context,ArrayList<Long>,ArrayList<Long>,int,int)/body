@@ -1,5 +1,6 @@
 {
   LongSparseArray<ArrayList<ItemInfo>> screenItems=new LongSparseArray<>();
+  assertWorkspaceLoaded();
 synchronized (sBgLock) {
     for (    ItemInfo info : sBgItemsIdMap) {
       if (info.container == LauncherSettings.Favorites.CONTAINER_DESKTOP) {
