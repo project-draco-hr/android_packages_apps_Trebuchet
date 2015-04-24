@@ -1,0 +1,7 @@
+{
+  int cellX=id % mView.getCountX();
+  int cellY=id / mView.getCountX();
+  LauncherAccessibilityDelegate.DragInfo dragInfo=mDelegate.getDragInfo();
+  mView.cellToRect(cellX,cellY,dragInfo.info.spanX,dragInfo.info.spanY,mTempRect);
+  return mTempRect;
+}

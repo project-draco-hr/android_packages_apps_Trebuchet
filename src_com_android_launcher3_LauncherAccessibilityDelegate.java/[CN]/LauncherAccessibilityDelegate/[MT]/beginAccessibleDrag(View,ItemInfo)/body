@@ -13,6 +13,19 @@
   Rect pos=new Rect();
   mLauncher.getDragLayer().getDescendantRectRelativeToSelf(item,pos);
   mLauncher.getDragController().prepareAccessibleDrag(pos.centerX(),pos.centerY());
-  mLauncher.getWorkspace().enableAccessibleDrag(true);
-  mLauncher.getWorkspace().startDrag(cellInfo,true);
+  Workspace workspace=mLauncher.getWorkspace();
+  Folder folder=workspace.getOpenFolder();
+  if (folder != null) {
+    if (folder.getItemsInReadingOrder().contains(item)) {
+      mDragSource=folder;
+    }
+ else {
+      mLauncher.closeFolder();
+    }
+  }
+  if (mDragSource == null) {
+    mDragSource=workspace;
+  }
+  mDragSource.enableAccessibleDrag(true);
+  mDragSource.startDrag(cellInfo,true);
 }

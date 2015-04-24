@@ -1,0 +1,6 @@
+{
+  if (id == INVALID_ID) {
+    throw new IllegalArgumentException("Invalid virtual view id");
+  }
+  event.setContentDescription(mContext.getString(R.string.action_move_here));
+}

@@ -4,6 +4,7 @@
   mDragObject.x=coordinates[0];
   mDragObject.y=coordinates[1];
   checkTouchMove(dropTarget);
+  dropTarget.prepareAccessibilityDrop();
   drop(location[0],location[1]);
   endDrag();
 }

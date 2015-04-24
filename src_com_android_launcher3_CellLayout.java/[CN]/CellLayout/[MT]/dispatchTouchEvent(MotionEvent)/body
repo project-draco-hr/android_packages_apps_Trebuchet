@@ -1,7 +1,0 @@
-{
-  if (event.getAction() == MotionEvent.ACTION_DOWN) {
-    mDownX=(int)event.getX();
-    mDownY=(int)event.getY();
-  }
-  return super.dispatchTouchEvent(event);
-}

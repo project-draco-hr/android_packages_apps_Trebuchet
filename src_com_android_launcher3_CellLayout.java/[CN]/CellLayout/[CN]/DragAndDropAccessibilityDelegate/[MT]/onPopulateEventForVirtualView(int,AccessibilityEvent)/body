@@ -1,6 +1,0 @@
-{
-  if (id == ExploreByTouchHelper.INVALID_ID) {
-    throw new IllegalArgumentException("Invalid virtual view id");
-  }
-  event.setContentDescription("");
-}

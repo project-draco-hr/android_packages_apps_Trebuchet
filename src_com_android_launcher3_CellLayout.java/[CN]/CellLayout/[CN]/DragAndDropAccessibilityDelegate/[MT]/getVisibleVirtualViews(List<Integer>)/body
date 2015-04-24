@@ -1,8 +1,0 @@
-{
-  int nCells=mCountX * mCountY;
-  for (int i=0; i < nCells; i++) {
-    if (intersectsValidDropTarget(i) >= 0) {
-      virtualViews.add(i);
-    }
-  }
-}

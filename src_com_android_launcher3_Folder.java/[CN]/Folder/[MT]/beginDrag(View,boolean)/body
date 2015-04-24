@@ -1,0 +1,18 @@
+{
+  Object tag=v.getTag();
+  if (tag instanceof ShortcutInfo) {
+    ShortcutInfo item=(ShortcutInfo)tag;
+    if (!v.isInTouchMode()) {
+      return false;
+    }
+    mLauncher.getWorkspace().beginDragShared(v,new Point(),this,accessible);
+    mCurrentDragInfo=item;
+    mEmptyCellRank=item.rank;
+    mCurrentDragView=v;
+    mContent.removeItem(mCurrentDragView);
+    mInfo.remove(mCurrentDragInfo);
+    mDragInProgress=true;
+    mItemAddedBackToSelfViaIcon=false;
+  }
+  return true;
+}

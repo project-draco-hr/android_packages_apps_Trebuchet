@@ -1,7 +1,7 @@
 {
   for (int i=0; i < getChildCount(); i++) {
     CellLayout child=(CellLayout)getChildAt(i);
-    child.enableAccessibleDrag(enable);
+    child.enableAccessibleDrag(enable,CellLayout.WORKSPACE_ACCESSIBILITY_DRAG);
   }
   if (enable) {
     setOnClickListener(null);
@@ -10,5 +10,5 @@
     setOnClickListener(mLauncher);
   }
   mLauncher.getSearchBar().enableAccessibleDrag(enable);
-  mLauncher.getHotseat().getLayout().enableAccessibleDrag(enable);
+  mLauncher.getHotseat().getLayout().enableAccessibleDrag(enable,CellLayout.WORKSPACE_ACCESSIBILITY_DRAG);
 }
