@@ -1,3 +1,0 @@
-{
-  post(new IdleRunnable(runnable),type);
-}

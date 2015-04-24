@@ -1,5 +1,6 @@
 {
 synchronized (mLock) {
+    unbindItemInfosAndClearQueuedBindRunnables();
     mCallbacks=new WeakReference<Callbacks>(callbacks);
   }
 }
