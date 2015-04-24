@@ -1,5 +1,0 @@
-int originX
-int originY
-int spanX
-int spanY
-int[] result

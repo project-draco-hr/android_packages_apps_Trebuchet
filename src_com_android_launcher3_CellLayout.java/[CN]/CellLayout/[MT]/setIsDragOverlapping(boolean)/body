@@ -1,7 +1,6 @@
 {
   if (mIsDragOverlapping != isDragOverlapping) {
     mIsDragOverlapping=isDragOverlapping;
-    setUseActiveGlowBackground(mIsDragOverlapping);
     invalidate();
   }
 }

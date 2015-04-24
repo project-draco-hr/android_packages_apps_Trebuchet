@@ -1,3 +1,3 @@
 {
-  return findNearestVacantArea(pixelX,pixelY,minSpanX,minSpanY,spanX,spanY,null,result,resultSpan);
+  return findNearestArea(pixelX,pixelY,minSpanX,minSpanY,spanX,spanY,true,result,resultSpan);
 }

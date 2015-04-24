@@ -1,6 +1,5 @@
 {
   lazyInitTempRectStack();
-  markCellsAsUnoccupiedForView(ignoreView,occupied);
   pixelX-=(mCellWidth + mWidthGap) * (spanX - 1) / 2f;
   pixelY-=(mCellHeight + mHeightGap) * (spanY - 1) / 2f;
   final int[] bestXY=result != null ? result : new int[2];
@@ -19,7 +18,7 @@
       if (ignoreOccupied) {
         for (int i=0; i < minSpanX; i++) {
           for (int j=0; j < minSpanY; j++) {
-            if (occupied[x + i][y + j]) {
+            if (mOccupied[x + i][y + j]) {
               continue inner;
             }
           }
@@ -32,7 +31,7 @@
         while (!(hitMaxX && hitMaxY)) {
           if (incX && !hitMaxX) {
             for (int j=0; j < ySize; j++) {
-              if (x + xSize > countX - 1 || occupied[x + xSize][y + j]) {
+              if (x + xSize > countX - 1 || mOccupied[x + xSize][y + j]) {
                 hitMaxX=true;
               }
             }
@@ -42,7 +41,7 @@
           }
  else           if (!hitMaxY) {
             for (int i=0; i < xSize; i++) {
-              if (y + ySize > countY - 1 || occupied[x + i][y + ySize]) {
+              if (y + ySize > countY - 1 || mOccupied[x + i][y + ySize]) {
                 hitMaxY=true;
               }
             }
@@ -70,7 +69,7 @@
         }
       }
       validRegions.push(currentRect);
-      double distance=Math.sqrt(Math.pow(cellXY[0] - pixelX,2) + Math.pow(cellXY[1] - pixelY,2));
+      double distance=Math.hypot(cellXY[0] - pixelX,cellXY[1] - pixelY);
       if ((distance <= bestDistance && !contained) || currentRect.contains(bestRect)) {
         bestDistance=distance;
         bestXY[0]=x;
@@ -83,7 +82,6 @@
       }
     }
   }
-  markCellsAsOccupiedForView(ignoreView,occupied);
   if (bestDistance == Double.MAX_VALUE) {
     bestXY[0]=-1;
     bestXY[1]=-1;

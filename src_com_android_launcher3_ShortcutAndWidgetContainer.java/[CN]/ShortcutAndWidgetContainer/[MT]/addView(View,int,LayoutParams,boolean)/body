@@ -1,8 +1,0 @@
-{
-  if (!inLayout) {
-    addView(child,index,params);
-  }
- else {
-    addViewInLayout(child,index,params,false);
-  }
-}

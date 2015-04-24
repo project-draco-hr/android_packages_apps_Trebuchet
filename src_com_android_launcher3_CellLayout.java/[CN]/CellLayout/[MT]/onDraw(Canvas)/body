@@ -1,7 +1,7 @@
 {
   if (mDrawBackground && mBackgroundAlpha > 0.0f) {
     Drawable bg;
-    if (mUseActiveGlowBackground) {
+    if (mIsDragOverlapping) {
       bg=mActiveGlowBackground;
     }
  else {

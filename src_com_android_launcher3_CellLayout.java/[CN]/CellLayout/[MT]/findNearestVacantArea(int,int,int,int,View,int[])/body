@@ -1,3 +1,0 @@
-{
-  return findNearestArea(pixelX,pixelY,spanX,spanY,ignoreView,true,result);
-}

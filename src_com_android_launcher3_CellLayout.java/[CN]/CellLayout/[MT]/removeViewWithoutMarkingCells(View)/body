@@ -1,3 +1,0 @@
-{
-  mShortcutsAndWidgets.removeView(view);
-}
