@@ -1,5 +1,4 @@
 {
-  final ImageView i=(ImageView)findViewById(R.id.widget_preview);
   int[] maxSize=new int[2];
   maxSize[0]=mPresetPreviewSize;
   maxSize[1]=mPresetPreviewSize;

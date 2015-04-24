@@ -1,10 +1,5 @@
 {
-  if (recycleImage) {
-    final ImageView image=(ImageView)findViewById(R.id.widget_preview);
-    if (image != null) {
-      image.setImageDrawable(null);
-    }
-  }
+  mWidgetImage.setImageDrawable(null);
   if (mActiveRequest != null) {
     mActiveRequest.cancel(recycleImage);
     mActiveRequest=null;

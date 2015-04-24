@@ -1,9 +1,7 @@
 {
-  mDraggingWidget=true;
   ImageView image=(ImageView)v.findViewById(R.id.widget_preview);
   PendingAddItemInfo createItemInfo=(PendingAddItemInfo)v.getTag();
   if (image.getDrawable() == null) {
-    mDraggingWidget=false;
     return false;
   }
   Bitmap preview;

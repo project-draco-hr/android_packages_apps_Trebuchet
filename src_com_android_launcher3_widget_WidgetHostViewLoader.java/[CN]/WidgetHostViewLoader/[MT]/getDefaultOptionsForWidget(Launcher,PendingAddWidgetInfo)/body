@@ -1,0 +1,17 @@
+{
+  Bundle options=null;
+  Rect rect=new Rect();
+  if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+    AppWidgetResizeFrame.getWidgetSizeRanges(launcher,info.spanX,info.spanY,rect);
+    Rect padding=AppWidgetHostView.getDefaultPaddingForWidget(launcher,info.componentName,null);
+    float density=launcher.getResources().getDisplayMetrics().density;
+    int xPaddingDips=(int)((padding.left + padding.right) / density);
+    int yPaddingDips=(int)((padding.top + padding.bottom) / density);
+    options=new Bundle();
+    options.putInt(AppWidgetManager.OPTION_APPWIDGET_MIN_WIDTH,rect.left - xPaddingDips);
+    options.putInt(AppWidgetManager.OPTION_APPWIDGET_MIN_HEIGHT,rect.top - yPaddingDips);
+    options.putInt(AppWidgetManager.OPTION_APPWIDGET_MAX_WIDTH,rect.right - xPaddingDips);
+    options.putInt(AppWidgetManager.OPTION_APPWIDGET_MAX_HEIGHT,rect.bottom - yPaddingDips);
+  }
+  return options;
+}

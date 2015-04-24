@@ -2,11 +2,7 @@
   mIsAppWidget=false;
   mInfo=info;
   CharSequence label=info.loadLabel(pm);
-  final TextView name=(TextView)findViewById(R.id.widget_name);
-  name.setText(label);
-  final TextView dims=(TextView)findViewById(R.id.widget_dims);
-  if (dims != null) {
-    dims.setText(String.format(mDimensionsFormatString,1,1));
-  }
+  mWidgetName.setText(label);
+  mWidgetDims.setText(String.format(mDimensionsFormatString,1,1));
   mWidgetPreviewLoader=loader;
 }
