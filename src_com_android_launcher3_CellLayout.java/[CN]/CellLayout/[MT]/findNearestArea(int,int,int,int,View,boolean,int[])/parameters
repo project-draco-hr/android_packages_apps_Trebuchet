@@ -1,7 +1,0 @@
-int pixelX
-int pixelY
-int spanX
-int spanY
-View ignoreView
-boolean ignoreOccupied
-int[] result
