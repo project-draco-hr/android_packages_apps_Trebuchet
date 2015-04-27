@@ -3,10 +3,5 @@
   mEmptyCellRank=mContent.allocateRankForNewItem(item);
   mIsExternalDrag=true;
   mDragInProgress=true;
-  if (mContent.mIsSorted) {
-    mScrollPauseAlarm.setOnAlarmListener(null);
-    mScrollPauseAlarm.cancelAlarm();
-    mScrollPauseAlarm.setAlarm(SORTED_STICKY_REORDER_DELAY);
-  }
   mDragController.addDragListener(this);
 }

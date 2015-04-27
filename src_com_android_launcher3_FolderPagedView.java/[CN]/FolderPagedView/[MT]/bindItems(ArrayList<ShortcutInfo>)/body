@@ -1,5 +1,4 @@
 {
-  mIsSorted=ALLOW_ITEM_SORTING && mFolder.mInfo.hasOption(FolderInfo.FLAG_ITEMS_SORTED);
   ArrayList<View> icons=new ArrayList<View>();
   ArrayList<ShortcutInfo> extra=new ArrayList<ShortcutInfo>();
   for (  ShortcutInfo item : items) {

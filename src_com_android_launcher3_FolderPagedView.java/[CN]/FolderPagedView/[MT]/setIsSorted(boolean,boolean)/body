@@ -1,7 +1,0 @@
-{
-  mIsSorted=isSorted;
-  if (ALLOW_ITEM_SORTING) {
-    mSortSwitch.setChecked(isSorted);
-    mFolder.mInfo.setOption(FolderInfo.FLAG_ITEMS_SORTED,isSorted,saveChanges ? mFolder.mLauncher : null);
-  }
-}

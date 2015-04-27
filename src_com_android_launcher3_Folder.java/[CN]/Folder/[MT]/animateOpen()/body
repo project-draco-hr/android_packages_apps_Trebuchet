@@ -1,7 +1,7 @@
 {
   if (!(getParent() instanceof DragLayer))   return;
   mContent.completePendingPageChanges();
-  if (!(mDragInProgress && mContent.mIsSorted)) {
+  if (!mDragInProgress) {
     mContent.snapToPageImmediately(0);
   }
   Animator openFolderAnim=null;

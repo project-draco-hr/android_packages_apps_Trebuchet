@@ -3,6 +3,4 @@
   mFocusIndicatorView=(FocusIndicatorView)folder.findViewById(R.id.focus_indicator);
   mKeyListener=new PagedFolderKeyEventListener(folder);
   mPageIndicator=folder.findViewById(R.id.folder_page_indicator);
-  if (ALLOW_ITEM_SORTING) {
-  }
 }

@@ -3,14 +3,4 @@
   if (mFolder != null) {
     mFolder.updateTextViewFocus();
   }
-  if (ALLOW_ITEM_SORTING && mSortOperationPending && getNextPage() == 0) {
-    post(new Runnable(){
-      @Override public void run(){
-        if (mSortOperationPending) {
-          doSort();
-        }
-      }
-    }
-);
-  }
 }

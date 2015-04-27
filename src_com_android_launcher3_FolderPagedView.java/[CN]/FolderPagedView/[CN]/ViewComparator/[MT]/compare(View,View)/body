@@ -1,3 +1,0 @@
-{
-  return mCollator.compare(((ShortcutInfo)lhs.getTag()).title.toString(),((ShortcutInfo)rhs.getTag()).title.toString());
-}
