@@ -1,20 +1,22 @@
 {
   FrameLayout.LayoutParams lp;
-  Resources res=launcher.getResources();
   boolean hasVerticalBarLayout=isVerticalBarLayout();
   View searchBar=launcher.getSearchBar();
   lp=(FrameLayout.LayoutParams)searchBar.getLayoutParams();
   if (hasVerticalBarLayout) {
-    lp.gravity=Gravity.TOP | Gravity.LEFT;
+    lp.gravity=Gravity.LEFT;
     lp.width=searchBarSpaceHeightPx;
-    lp.height=LayoutParams.WRAP_CONTENT;
     LinearLayout targets=(LinearLayout)searchBar.findViewById(R.id.drag_target_bar);
     targets.setOrientation(LinearLayout.VERTICAL);
+    FrameLayout.LayoutParams targetsLp=(FrameLayout.LayoutParams)targets.getLayoutParams();
+    targetsLp.gravity=Gravity.TOP;
+    targetsLp.height=LayoutParams.WRAP_CONTENT;
   }
  else {
-    lp.gravity=Gravity.TOP | Gravity.CENTER_HORIZONTAL;
-    lp.width=searchBarSpaceWidthPx;
+    lp.gravity=Gravity.TOP;
     lp.height=searchBarSpaceHeightPx;
+    LinearLayout targets=(LinearLayout)searchBar.findViewById(R.id.drag_target_bar);
+    targets.getLayoutParams().width=searchBarSpaceWidthPx;
   }
   searchBar.setLayoutParams(lp);
   PagedView workspace=(PagedView)launcher.findViewById(R.id.workspace);
