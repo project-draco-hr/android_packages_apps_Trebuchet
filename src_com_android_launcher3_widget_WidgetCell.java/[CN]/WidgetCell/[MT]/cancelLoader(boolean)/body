@@ -1,5 +1,4 @@
 {
-  mWidgetImage.setImageDrawable(null);
   if (mActiveRequest != null) {
     mActiveRequest.cancel(recycleImage);
     mActiveRequest=null;
