@@ -1,6 +1,0 @@
-{
-  mWidgetImage.setImageDrawable(null);
-  mWidgetName.setText(null);
-  mWidgetDims.setText(null);
-  cancelLoader(false);
-}

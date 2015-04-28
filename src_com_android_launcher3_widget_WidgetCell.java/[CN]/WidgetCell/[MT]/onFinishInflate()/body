@@ -5,7 +5,6 @@
   mOriginalImagePadding.top=mWidgetImage.getPaddingTop();
   mOriginalImagePadding.right=mWidgetImage.getPaddingRight();
   mOriginalImagePadding.bottom=mWidgetImage.getPaddingBottom();
-  DeviceProfile profile=LauncherAppState.getInstance().getDynamicGrid().getDeviceProfile();
   mWidgetName=((TextView)findViewById(R.id.widget_name));
   mWidgetDims=((TextView)findViewById(R.id.widget_dims));
 }

@@ -1,0 +1,12 @@
+{
+  if (DEBUG) {
+    Log.d(TAG,"reset called on:" + mWidgetName.getText());
+  }
+  mWidgetImage.setImageDrawable(null);
+  mWidgetName.setText(null);
+  mWidgetDims.setText(null);
+  if (mActiveRequest != null) {
+    mActiveRequest.cleanup();
+    mActiveRequest=null;
+  }
+}

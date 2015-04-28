@@ -1,0 +1,12 @@
+{
+  if (mTask != null) {
+    mTask.cancel(true);
+  }
+  if (mTask.mBitmap == null) {
+    return;
+  }
+synchronized (mUnusedBitmaps) {
+    mUnusedBitmaps.add(mTask.mBitmap);
+  }
+  mTask.mBitmap=null;
+}

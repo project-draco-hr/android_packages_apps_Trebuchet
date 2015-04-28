@@ -23,7 +23,8 @@
   if (infoOut.usingLowResIcon) {
     mIconCache.getTitleAndIconForApp(infoOut.packageName,UserHandleCompat.myUserHandle(),false,infoOut);
   }
-  ((TextView)holder.getContent().findViewById(R.id.section)).setText(infoOut.title);
+  TextView tv=((TextView)holder.getContent().findViewById(R.id.section));
+  tv.setText(infoOut.title);
   ImageView iv=(ImageView)holder.getContent().findViewById(R.id.section_image);
   iv.setImageBitmap(infoOut.iconBitmap);
   for (int i=0; i < infoList.size(); i++) {

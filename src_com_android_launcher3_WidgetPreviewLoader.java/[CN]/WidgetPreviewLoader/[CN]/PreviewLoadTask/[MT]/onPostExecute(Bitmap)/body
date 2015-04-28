@@ -1,6 +1,4 @@
 {
-synchronized (mLoadedPreviews) {
-    mLoadedPreviews.put(mKey,new WeakReference<Bitmap>(result));
-  }
+  mBitmap=result;
   mCaller.applyPreview(result);
 }

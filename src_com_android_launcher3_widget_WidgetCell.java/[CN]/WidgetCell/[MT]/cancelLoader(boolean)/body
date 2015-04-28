@@ -1,6 +1,0 @@
-{
-  if (mActiveRequest != null) {
-    mActiveRequest.cancel(recycleImage);
-    mActiveRequest=null;
-  }
-}

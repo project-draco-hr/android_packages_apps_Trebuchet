@@ -1,6 +1,6 @@
 {
   if (DEBUG) {
-    Log.v(TAG,String.format("\nonCreateViewHolder, [widget#=%d]",viewType));
+    Log.v(TAG,"\nonCreateViewHolder");
   }
   ViewGroup container=(ViewGroup)mLayoutInflater.inflate(R.layout.widgets_list_row_view,parent,false);
   return new WidgetsRowViewHolder(container);

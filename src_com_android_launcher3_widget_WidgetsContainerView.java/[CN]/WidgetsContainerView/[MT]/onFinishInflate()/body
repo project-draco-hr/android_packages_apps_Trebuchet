@@ -5,6 +5,5 @@
   mView=(RecyclerView)findViewById(R.id.widgets_list_view);
   mView.setAdapter(mAdapter);
   mView.setLayoutManager(new LinearLayoutManager(getContext()));
-  mView.setItemViewCacheSize(WIDGET_CACHE_SIZE);
   mPadding.set(getPaddingLeft(),getPaddingTop(),getPaddingRight(),getPaddingBottom());
 }
