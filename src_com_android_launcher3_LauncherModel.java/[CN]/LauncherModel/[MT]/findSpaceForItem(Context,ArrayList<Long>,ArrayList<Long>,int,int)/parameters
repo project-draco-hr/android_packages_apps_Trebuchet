@@ -1,6 +1,4 @@
 Context context
-ScreenPosProvider preferredScreen
-int fallbackStartScreen
 ArrayList<Long> workspaceScreens
 ArrayList<Long> addedWorkspaceScreensFinal
 int spanX

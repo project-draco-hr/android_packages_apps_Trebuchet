@@ -1,6 +1,0 @@
-PendingAddItemInfo info
-long container
-long screenId
-int[] cell
-int spanX
-int spanY

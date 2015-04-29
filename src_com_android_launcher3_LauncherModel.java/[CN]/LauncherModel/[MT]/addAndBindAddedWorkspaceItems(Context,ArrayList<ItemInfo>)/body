@@ -1,8 +1,65 @@
 {
-  addAndBindAddedWorkspaceItems(context,workspaceApps,new ScreenPosProvider(){
-    @Override public int getScreenIndex(    ArrayList<Long> screenIDs){
-      return screenIDs.isEmpty() ? 0 : 1;
+  final Callbacks callbacks=getCallback();
+  if (workspaceApps.isEmpty()) {
+    return;
+  }
+  Runnable r=new Runnable(){
+    public void run(){
+      final ArrayList<ItemInfo> addedShortcutsFinal=new ArrayList<ItemInfo>();
+      final ArrayList<Long> addedWorkspaceScreensFinal=new ArrayList<Long>();
+      ArrayList<Long> workspaceScreens=loadWorkspaceScreensDb(context);
+synchronized (sBgLock) {
+        for (        ItemInfo item : workspaceApps) {
+          if (item instanceof ShortcutInfo) {
+            if (shortcutExists(context,item.getIntent(),item.user)) {
+              continue;
+            }
+          }
+          Pair<Long,int[]> coords=findSpaceForItem(context,workspaceScreens,addedWorkspaceScreensFinal,1,1);
+          long screenId=coords.first;
+          int[] cordinates=coords.second;
+          ItemInfo itemInfo;
+          if (item instanceof ShortcutInfo || item instanceof FolderInfo) {
+            itemInfo=item;
+          }
+ else           if (item instanceof AppInfo) {
+            itemInfo=((AppInfo)item).makeShortcut();
+          }
+ else {
+            throw new RuntimeException("Unexpected info type");
+          }
+          addItemToDatabase(context,itemInfo,LauncherSettings.Favorites.CONTAINER_DESKTOP,screenId,cordinates[0],cordinates[1]);
+          addedShortcutsFinal.add(itemInfo);
+        }
+      }
+      updateWorkspaceScreenOrder(context,workspaceScreens);
+      if (!addedShortcutsFinal.isEmpty()) {
+        runOnMainThread(new Runnable(){
+          public void run(){
+            Callbacks cb=getCallback();
+            if (callbacks == cb && cb != null) {
+              final ArrayList<ItemInfo> addAnimated=new ArrayList<ItemInfo>();
+              final ArrayList<ItemInfo> addNotAnimated=new ArrayList<ItemInfo>();
+              if (!addedShortcutsFinal.isEmpty()) {
+                ItemInfo info=addedShortcutsFinal.get(addedShortcutsFinal.size() - 1);
+                long lastScreenId=info.screenId;
+                for (                ItemInfo i : addedShortcutsFinal) {
+                  if (i.screenId == lastScreenId) {
+                    addAnimated.add(i);
+                  }
+ else {
+                    addNotAnimated.add(i);
+                  }
+                }
+              }
+              callbacks.bindAppsAdded(addedWorkspaceScreensFinal,addNotAnimated,addAnimated,null);
+            }
+          }
+        }
+);
+      }
     }
   }
-,1,false);
+;
+  runOnWorkerThread(r);
 }

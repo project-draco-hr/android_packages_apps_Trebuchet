@@ -1,0 +1,42 @@
+{
+  LongSparseArray<ArrayList<ItemInfo>> screenItems=new LongSparseArray<>();
+synchronized (sBgLock) {
+    for (    ItemInfo info : sBgItemsIdMap) {
+      if (info.container == LauncherSettings.Favorites.CONTAINER_DESKTOP) {
+        ArrayList<ItemInfo> items=screenItems.get(info.screenId);
+        if (items == null) {
+          items=new ArrayList<>();
+          screenItems.put(info.screenId,items);
+        }
+        items.add(info);
+      }
+    }
+  }
+  long screenId=0;
+  int[] cordinates=new int[2];
+  boolean found=false;
+  int screenCount=workspaceScreens.size();
+  int preferredScreenIndex=workspaceScreens.isEmpty() ? 0 : 1;
+  if (preferredScreenIndex < screenCount) {
+    screenId=workspaceScreens.get(preferredScreenIndex);
+    found=findNextAvailableIconSpaceInScreen(screenItems.get(screenId),cordinates,spanX,spanY);
+  }
+  if (!found) {
+    for (int screen=1; screen < screenCount; screen++) {
+      screenId=workspaceScreens.get(screen);
+      if (findNextAvailableIconSpaceInScreen(screenItems.get(screenId),cordinates,spanX,spanY)) {
+        found=true;
+        break;
+      }
+    }
+  }
+  if (!found) {
+    screenId=LauncherAppState.getLauncherProvider().generateNewScreenId();
+    workspaceScreens.add(screenId);
+    addedWorkspaceScreensFinal.add(screenId);
+    if (!findNextAvailableIconSpaceInScreen(screenItems.get(screenId),cordinates,spanX,spanY)) {
+      throw new RuntimeException("Can't find space to add the item");
+    }
+  }
+  return Pair.create(screenId,cordinates);
+}

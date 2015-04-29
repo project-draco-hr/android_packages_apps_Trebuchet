@@ -1,9 +1,0 @@
-{
-  showWorkspace(true,new Runnable(){
-    @Override public void run(){
-      mWorkspace.snapToPage(mWorkspace.getPageIndexForScreenId(screenId));
-      addPendingItem(info,container,screenId,cell,spanX,spanY);
-    }
-  }
-);
-}

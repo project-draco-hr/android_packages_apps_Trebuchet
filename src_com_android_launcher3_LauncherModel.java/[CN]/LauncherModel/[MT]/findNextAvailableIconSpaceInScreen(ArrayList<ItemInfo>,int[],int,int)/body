@@ -5,9 +5,11 @@
   final int yCount=(int)grid.numRows;
   boolean[][] occupied=new boolean[xCount][yCount];
   if (occupiedPos != null) {
-    for (    Rect r : occupiedPos) {
-      for (int x=r.left; 0 <= x && x < r.right && x < xCount; x++) {
-        for (int y=r.top; 0 <= y && y < r.bottom && y < yCount; y++) {
+    for (    ItemInfo r : occupiedPos) {
+      int right=r.cellX + r.spanX;
+      int bottom=r.cellY + r.spanY;
+      for (int x=r.cellX; 0 <= x && x < right && x < xCount; x++) {
+        for (int y=r.cellY; 0 <= y && y < bottom && y < yCount; y++) {
           occupied[x][y]=true;
         }
       }

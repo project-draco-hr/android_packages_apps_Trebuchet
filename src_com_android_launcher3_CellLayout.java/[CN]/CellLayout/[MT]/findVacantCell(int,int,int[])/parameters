@@ -1,0 +1,3 @@
+int spanX
+int spanY
+int[] outXY
