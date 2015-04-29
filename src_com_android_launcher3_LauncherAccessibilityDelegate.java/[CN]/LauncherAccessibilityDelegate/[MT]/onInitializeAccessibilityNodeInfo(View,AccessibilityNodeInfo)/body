@@ -16,6 +16,11 @@
     if (item.container >= 0) {
       info.addAction(mActions.get(MOVE_TO_WORKSPACE));
     }
+ else     if (item instanceof LauncherAppWidgetInfo) {
+      if (!getSupportedResizeActions(host,(LauncherAppWidgetInfo)item).isEmpty()) {
+        info.addAction(mActions.get(RESIZE));
+      }
+    }
   }
   if ((item instanceof AppInfo) || (item instanceof PendingAddItemInfo)) {
     info.addAction(mActions.get(ADD_TO_WORKSPACE));

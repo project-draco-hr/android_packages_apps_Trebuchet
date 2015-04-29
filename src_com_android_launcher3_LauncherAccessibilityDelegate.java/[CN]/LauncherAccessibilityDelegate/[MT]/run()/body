@@ -1,6 +1,2 @@
 {
-  ArrayList<ItemInfo> itemList=new ArrayList<>();
-  itemList.add(item);
-  mLauncher.bindItems(itemList,0,itemList.size(),true);
-  announceConfirmation(R.string.item_moved);
 }

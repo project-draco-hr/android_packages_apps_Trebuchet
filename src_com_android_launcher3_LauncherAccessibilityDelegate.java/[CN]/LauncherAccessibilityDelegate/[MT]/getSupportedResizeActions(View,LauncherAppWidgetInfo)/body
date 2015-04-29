@@ -1,0 +1,22 @@
+{
+  AppWidgetProviderInfo providerInfo=((LauncherAppWidgetHostView)host).getAppWidgetInfo();
+  ArrayList<Integer> actions=new ArrayList<>();
+  CellLayout layout=(CellLayout)host.getParent().getParent();
+  if ((providerInfo.resizeMode & AppWidgetProviderInfo.RESIZE_HORIZONTAL) != 0) {
+    if (layout.isRegionVacant(info.cellX + info.spanX,info.cellY,1,info.spanY) || layout.isRegionVacant(info.cellX - 1,info.cellY,1,info.spanY)) {
+      actions.add(R.string.action_increase_width);
+    }
+    if (info.spanX > info.minSpanX && info.spanX > 1) {
+      actions.add(R.string.action_decrease_width);
+    }
+  }
+  if ((providerInfo.resizeMode & AppWidgetProviderInfo.RESIZE_VERTICAL) != 0) {
+    if (layout.isRegionVacant(info.cellX,info.cellY + info.spanY,info.spanX,1) || layout.isRegionVacant(info.cellX,info.cellY - 1,info.spanX,1)) {
+      actions.add(R.string.action_increase_height);
+    }
+    if (info.spanY > info.minSpanY && info.spanY > 1) {
+      actions.add(R.string.action_decrease_height);
+    }
+  }
+  return actions;
+}
