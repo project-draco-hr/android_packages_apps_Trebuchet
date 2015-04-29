@@ -1,5 +1,11 @@
 {
   d.dragView.setColor(mHoverColor);
-  mDrawable.startTransition(mTransitionDuration);
-  setTextColor(mHoverColor);
+  if (Utilities.isLmpOrAbove()) {
+    mDrawable.startTransition(DragView.COLOR_CHANGE_DURATION);
+    animateTextColor(mHoverColor);
+  }
+ else {
+    mDrawable.startTransition(0);
+    setTextColor(mHoverColor);
+  }
 }

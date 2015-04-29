@@ -1,0 +1,8 @@
+{
+  if (mCurrentColorAnim != null) {
+    mCurrentColorAnim.cancel();
+  }
+  mCurrentColorAnim=ObjectAnimator.ofArgb(this,"textColor",targetColor);
+  mCurrentColorAnim.setDuration(DragView.COLOR_CHANGE_DURATION);
+  mCurrentColorAnim.start();
+}

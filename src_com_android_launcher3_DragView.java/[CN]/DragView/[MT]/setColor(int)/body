@@ -3,10 +3,26 @@
     mPaint=new Paint(Paint.FILTER_BITMAP_FLAG);
   }
   if (color != 0) {
-    mPaint.setColorFilter(new PorterDuffColorFilter(color,PorterDuff.Mode.SRC_ATOP));
+    ColorMatrix m1=new ColorMatrix();
+    m1.setSaturation(0);
+    ColorMatrix m2=new ColorMatrix();
+    m2.setScale(Color.red(color) / 255f,Color.green(color) / 255f,Color.blue(color) / 255f,Color.alpha(color) / 255f);
+    m1.postConcat(m2);
+    if (Utilities.isLmpOrAbove()) {
+      animateFilterTo(m1.getArray());
+    }
+ else {
+      mPaint.setColorFilter(new ColorMatrixColorFilter(m1));
+      invalidate();
+    }
   }
  else {
-    mPaint.setColorFilter(null);
+    if (!Utilities.isLmpOrAbove() || mCurrentFilter == null) {
+      mPaint.setColorFilter(null);
+      invalidate();
+    }
+ else {
+      animateFilterTo(new ColorMatrix().getArray());
+    }
   }
-  invalidate();
 }
