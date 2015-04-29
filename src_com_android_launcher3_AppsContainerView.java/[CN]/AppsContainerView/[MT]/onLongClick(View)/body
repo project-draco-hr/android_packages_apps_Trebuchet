@@ -3,13 +3,6 @@
   if (!mLauncher.isAppsViewVisible() || mLauncher.getWorkspace().isSwitchingState())   return false;
   if (!mLauncher.isDraggingEnabled())   return false;
   mLauncher.getWorkspace().beginDragShared(v,mLastTouchPos,this,false);
-  postDelayed(new Runnable(){
-    @Override public void run(){
-      if (mLauncher.getDragController().isDragging()) {
-        mLauncher.enterSpringLoadedDragMode();
-      }
-    }
-  }
-,150);
+  mLauncher.enterSpringLoadedDragMode();
   return false;
 }

@@ -8,7 +8,7 @@
   final HashMap<View,Integer> layerViews=new HashMap<>();
   boolean initialized=allAppsButtonView != null;
   cancelAnimation();
-  Animator workspaceAnim=mLauncher.getWorkspace().setStateWithAnimation(toWorkspaceState,toWorkspacePage,animated,layerViews);
+  Animator workspaceAnim=mLauncher.startWorkspaceStateChangeAnimation(toWorkspaceState,toWorkspacePage,animated,layerViews);
   if (animated && initialized) {
     mStateAnimation=LauncherAnimUtils.createAnimatorSet();
     if (workspaceAnim != null) {

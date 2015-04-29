@@ -2,10 +2,15 @@
   mLauncherCallbacks=callbacks;
   mLauncherCallbacks.setLauncherAppsCallback(new Launcher.LauncherAppsCallbacks(){
     @Override public void onAllAppsBoundsChanged(    Rect bounds){
+      if (LOGD) {
+        Log.d(TAG,"onAllAppsBoundsChanged(Rect): " + bounds);
+      }
       mAppsView.setFixedBounds(Launcher.this,bounds);
     }
     @Override public void dismissAllApps(){
-      showWorkspace(WorkspaceStateTransitionAnimation.SCROLL_TO_CURRENT_PAGE,true,null,false);
+      if (!mPaused) {
+        showWorkspace(WorkspaceStateTransitionAnimation.SCROLL_TO_CURRENT_PAGE,true,null,false);
+      }
     }
   }
 );

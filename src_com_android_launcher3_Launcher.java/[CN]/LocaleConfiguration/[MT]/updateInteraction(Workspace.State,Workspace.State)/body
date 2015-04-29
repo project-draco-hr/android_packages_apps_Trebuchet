@@ -1,0 +1,10 @@
+{
+  boolean fromStateWithoutOverlay=fromState != Workspace.State.NORMAL && fromState != Workspace.State.NORMAL_HIDDEN;
+  boolean toStateWithoutOverlay=toState != Workspace.State.NORMAL && toState != Workspace.State.NORMAL_HIDDEN;
+  if (toStateWithoutOverlay) {
+    onInteractionBegin();
+  }
+ else   if (fromStateWithoutOverlay) {
+    onInteractionEnd();
+  }
+}

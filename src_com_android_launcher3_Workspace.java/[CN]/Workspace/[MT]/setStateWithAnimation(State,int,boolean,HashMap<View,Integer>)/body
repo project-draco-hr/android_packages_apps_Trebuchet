@@ -1,7 +1,6 @@
 {
   Animator workspaceAnim=mStateTransitionAnimation.getAnimationToState(getState(),toState,toPage,animated,layerViews);
   mState=toState;
-  updateInteractionForState();
   updateAccessibilityFlags();
   return workspaceAnim;
 }

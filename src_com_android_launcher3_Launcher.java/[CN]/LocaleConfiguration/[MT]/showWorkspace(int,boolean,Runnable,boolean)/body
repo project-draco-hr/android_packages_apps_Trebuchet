@@ -16,6 +16,10 @@
   updateAutoAdvanceState();
   if (changed) {
     getWindow().getDecorView().sendAccessibilityEvent(AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED);
-    onWorkspaceShown(animated);
+    if (notifyLauncherCallbacks) {
+      if (mLauncherCallbacks != null) {
+        mLauncherCallbacks.onAllAppsHidden();
+      }
+    }
   }
 }

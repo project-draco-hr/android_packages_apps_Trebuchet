@@ -18,6 +18,11 @@
     showWidgetsView(false,false);
   }
   mOnResumeState=State.NONE;
+  if (mState == State.APPS) {
+    if (mLauncherCallbacks != null) {
+      mLauncherCallbacks.onAllAppsShown();
+    }
+  }
   setWorkspaceBackground(mState == State.WORKSPACE);
   mPaused=false;
   if (mRestoring || mOnResumeNeedsLoad) {
@@ -58,7 +63,7 @@
       mWorkspace.getCustomContentCallbacks().onShow(true);
     }
   }
-  mWorkspace.updateInteractionForState();
+  updateInteraction(Workspace.State.NORMAL,mWorkspace.getState());
   mWorkspace.onResume();
   if (!isWorkspaceLoading()) {
     InstallShortcutReceiver.disableAndFlushInstallQueue(this);
