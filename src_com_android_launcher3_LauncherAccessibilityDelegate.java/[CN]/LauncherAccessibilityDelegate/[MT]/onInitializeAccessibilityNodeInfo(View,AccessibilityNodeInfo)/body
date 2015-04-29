@@ -13,6 +13,9 @@
   }
   if ((item instanceof ShortcutInfo) || (item instanceof LauncherAppWidgetInfo) || (item instanceof FolderInfo)) {
     info.addAction(mActions.get(MOVE));
+    if (item.container >= 0) {
+      info.addAction(mActions.get(MOVE_TO_WORKSPACE));
+    }
   }
   if ((item instanceof AppInfo) || (item instanceof PendingAddItemInfo)) {
     info.addAction(mActions.get(ADD_TO_WORKSPACE));
