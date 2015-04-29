@@ -15,4 +15,5 @@
   mInflater=LayoutInflater.from(context);
   mIconCache=app.getIconCache();
   rtlLayout=getResources().getConfiguration().getLayoutDirection() == LAYOUT_DIRECTION_RTL;
+  setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_YES);
 }
