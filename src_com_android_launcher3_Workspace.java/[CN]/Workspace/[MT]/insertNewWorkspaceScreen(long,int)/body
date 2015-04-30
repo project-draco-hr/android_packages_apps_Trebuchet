@@ -11,7 +11,7 @@
   addView(newScreen,insertIndex);
   LauncherAccessibilityDelegate delegate=LauncherAppState.getInstance().getAccessibilityDelegate();
   if (delegate != null && delegate.isInAccessibleDrag()) {
-    newScreen.enableAccessibleDrag(true);
+    newScreen.enableAccessibleDrag(true,CellLayout.WORKSPACE_ACCESSIBILITY_DRAG);
   }
   return screenId;
 }

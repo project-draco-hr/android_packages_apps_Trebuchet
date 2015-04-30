@@ -1,3 +1,0 @@
-{
-  return nearestDropLocation(getViewIdAt(x,y));
-}

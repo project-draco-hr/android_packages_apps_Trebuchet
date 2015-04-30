@@ -7,7 +7,7 @@
   InstallShortcutReceiver.enableInstallQueue();
   post(new Runnable(){
     @Override public void run(){
-      if (mIsDragOccuring) {
+      if (mIsDragOccuring && mAddNewPageOnDrag) {
         mDeferRemoveExtraEmptyScreen=false;
         addExtraEmptyScreenOnDrag();
       }

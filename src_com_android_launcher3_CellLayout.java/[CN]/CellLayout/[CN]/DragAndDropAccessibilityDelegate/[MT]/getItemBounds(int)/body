@@ -1,9 +1,0 @@
-{
-  int cellY=id % mCountY;
-  int cellX=id / mCountY;
-  int x=getPaddingLeft() + (int)(cellX * (mCellWidth + mWidthGap));
-  int y=getPaddingTop() + (int)(cellY * (mCellHeight + mHeightGap));
-  Rect bounds=mTempRect;
-  bounds.set(x,y,x + mCellWidth,y + mCellHeight);
-  return bounds;
-}

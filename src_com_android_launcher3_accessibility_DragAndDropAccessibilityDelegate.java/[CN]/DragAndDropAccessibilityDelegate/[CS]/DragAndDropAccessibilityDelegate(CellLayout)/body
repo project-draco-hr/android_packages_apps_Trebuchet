@@ -1,0 +1,6 @@
+{
+  super(forView);
+  mView=forView;
+  mContext=mView.getContext();
+  mDelegate=LauncherAppState.getInstance().getAccessibilityDelegate();
+}
