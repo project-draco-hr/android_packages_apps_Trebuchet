@@ -1,4 +1,0 @@
-DragObject d
-int x
-int y
-PointF vel

@@ -1,0 +1,4 @@
+DragObject d
+PointF vel
+Rect iconRect
+DragLayer dragLayer

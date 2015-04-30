@@ -1,0 +1,18 @@
+{
+  mDragObject=d;
+  mUX=vel.x / 1000;
+  mUY=vel.y / 1000;
+  mIconRect=iconRect;
+  mDragLayer=dragLayer;
+  mFrom=new Rect();
+  dragLayer.getViewRectRelativeToSelf(d.dragView,mFrom);
+  float scale=d.dragView.getScaleX();
+  float xOffset=((scale - 1f) * d.dragView.getMeasuredWidth()) / 2f;
+  float yOffset=((scale - 1f) * d.dragView.getMeasuredHeight()) / 2f;
+  mFrom.left+=xOffset;
+  mFrom.right-=xOffset;
+  mFrom.top+=yOffset;
+  mFrom.bottom-=yOffset;
+  mDuration=initDuration();
+  mAnimationTimeFraction=((float)mDuration) / (mDuration + DRAG_END_DELAY);
+}

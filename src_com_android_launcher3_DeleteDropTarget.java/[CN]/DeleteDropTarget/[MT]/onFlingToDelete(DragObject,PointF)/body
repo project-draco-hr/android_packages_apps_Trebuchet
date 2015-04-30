@@ -1,0 +1,32 @@
+{
+  d.dragView.setColor(0);
+  d.dragView.updateInitialScaleToCurrentScale();
+  final DragLayer dragLayer=mLauncher.getDragLayer();
+  FlingAnimation fling=new FlingAnimation(d,vel,getIconRect(d.dragView.getMeasuredWidth(),d.dragView.getMeasuredHeight(),mDrawable.getIntrinsicWidth(),mDrawable.getIntrinsicHeight()),dragLayer);
+  final int duration=fling.getDuration();
+  final long startTime=AnimationUtils.currentAnimationTimeMillis();
+  final TimeInterpolator tInterpolator=new TimeInterpolator(){
+    private int mCount=-1;
+    private float mOffset=0f;
+    @Override public float getInterpolation(    float t){
+      if (mCount < 0) {
+        mCount++;
+      }
+ else       if (mCount == 0) {
+        mOffset=Math.min(0.5f,(float)(AnimationUtils.currentAnimationTimeMillis() - startTime) / duration);
+        mCount++;
+      }
+      return Math.min(1f,mOffset + t);
+    }
+  }
+;
+  Runnable onAnimationEndRunnable=new Runnable(){
+    @Override public void run(){
+      mLauncher.exitSpringLoadedDragMode();
+      completeDrop(d);
+      mLauncher.getDragController().onDeferredEndFling(d);
+    }
+  }
+;
+  dragLayer.animateView(d.dragView,fling,duration,tInterpolator,onAnimationEndRunnable,DragLayer.ANIMATION_END_DISAPPEAR,null);
+}
