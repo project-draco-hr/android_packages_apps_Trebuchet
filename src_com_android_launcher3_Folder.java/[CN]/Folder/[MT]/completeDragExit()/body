@@ -3,11 +3,11 @@
     mLauncher.closeFolder();
     mRearrangeOnClose=true;
   }
+ else   if (mState == STATE_ANIMATING) {
+    mRearrangeOnClose=true;
+  }
  else {
     rearrangeChildren();
+    clearDragInfo();
   }
-  mCurrentDragInfo=null;
-  mCurrentDragView=null;
-  mSuppressOnAdd=false;
-  mIsExternalDrag=false;
 }
