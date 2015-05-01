@@ -4,6 +4,11 @@
   }
   mView=(RecyclerView)findViewById(R.id.widgets_list_view);
   mView.setAdapter(mAdapter);
-  mView.setLayoutManager(new LinearLayoutManager(getContext()));
+  mView.setLayoutManager(new LinearLayoutManager(getContext()){
+    @Override protected int getExtraLayoutSpace(    State state){
+      return super.getExtraLayoutSpace(state) + WidgetsContainerView.this.getHeight() * PRELOAD_SCREEN_HEIGHT_MULTIPLE;
+    }
+  }
+);
   mPadding.set(getPaddingLeft(),getPaddingTop(),getPaddingRight(),getPaddingBottom());
 }
