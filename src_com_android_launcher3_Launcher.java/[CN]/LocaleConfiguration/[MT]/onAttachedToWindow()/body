@@ -3,8 +3,6 @@
   final IntentFilter filter=new IntentFilter();
   filter.addAction(Intent.ACTION_SCREEN_OFF);
   filter.addAction(Intent.ACTION_USER_PRESENT);
-  filter.addAction(LauncherAppsCompat.ACTION_MANAGED_PROFILE_ADDED);
-  filter.addAction(LauncherAppsCompat.ACTION_MANAGED_PROFILE_REMOVED);
   if (ENABLE_DEBUG_INTENTS) {
     filter.addAction(DebugIntents.DELETE_DATABASE);
     filter.addAction(DebugIntents.MIGRATE_DATABASE);
