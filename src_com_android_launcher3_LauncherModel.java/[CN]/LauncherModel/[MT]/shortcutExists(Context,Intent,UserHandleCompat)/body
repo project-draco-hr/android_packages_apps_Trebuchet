@@ -1,28 +1,31 @@
 {
-  final Intent intentWithPkg, intentWithoutPkg;
+  final String intentWithPkg, intentWithoutPkg;
   final String packageName;
   if (intent.getComponent() != null) {
     packageName=intent.getComponent().getPackageName();
     if (intent.getPackage() != null) {
-      intentWithPkg=intent;
-      intentWithoutPkg=new Intent(intent).setPackage(null);
+      intentWithPkg=intent.toUri(0);
+      intentWithoutPkg=new Intent(intent).setPackage(null).toUri(0);
     }
  else {
-      intentWithPkg=new Intent(intent).setPackage(packageName);
-      intentWithoutPkg=intent;
+      intentWithPkg=new Intent(intent).setPackage(packageName).toUri(0);
+      intentWithoutPkg=intent.toUri(0);
     }
   }
  else {
-    intentWithPkg=intent;
-    intentWithoutPkg=intent;
+    intentWithPkg=intent.toUri(0);
+    intentWithoutPkg=intent.toUri(0);
     packageName=intent.getPackage();
   }
 synchronized (sBgLock) {
     for (    ItemInfo item : sBgItemsIdMap) {
       if (item instanceof ShortcutInfo) {
         ShortcutInfo info=(ShortcutInfo)item;
-        if (intentWithPkg.equals(info.getIntent()) || intentWithoutPkg.equals(info.getIntent())) {
-          return true;
+        if (info.getIntent() != null && info.user.equals(user)) {
+          String s=info.getIntent().toUri(0);
+          if (intentWithPkg.equals(s) || intentWithoutPkg.equals(s)) {
+            return true;
+          }
         }
       }
     }
