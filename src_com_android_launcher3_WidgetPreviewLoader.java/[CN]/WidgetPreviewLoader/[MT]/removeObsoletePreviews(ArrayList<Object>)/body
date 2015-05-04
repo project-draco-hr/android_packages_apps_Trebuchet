@@ -1,7 +1,8 @@
 {
+  Assert.assertTrue(LauncherModel.sWorkerThread.getThreadId() == Process.myTid());
   LongSparseArray<UserHandleCompat> userIdCache=new LongSparseArray<>();
   LongSparseArray<HashSet<String>> validPackages=new LongSparseArray<>();
-  for (  Object obj : LauncherModel.getSortedWidgetsAndShortcuts(mContext,false)) {
+  for (  Object obj : list) {
     final UserHandleCompat user;
     final String pkg;
     if (obj instanceof ResolveInfo) {

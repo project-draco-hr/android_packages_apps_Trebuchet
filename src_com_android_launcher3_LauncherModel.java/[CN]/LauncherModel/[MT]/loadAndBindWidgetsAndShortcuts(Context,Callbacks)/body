@@ -1,16 +1,17 @@
 {
   runOnWorkerThread(new Runnable(){
     @Override public void run(){
-      final ArrayList<Object> list=getSortedWidgetsAndShortcuts(context,true);
+      final ArrayList<Object> list=getWidgetsAndShortcuts(context,true);
       mHandler.post(new Runnable(){
         @Override public void run(){
           Callbacks cb=getCallback();
           if (callbacks == cb && cb != null) {
-            callbacks.bindPackagesUpdated(list);
+            callbacks.bindAllPackages(list);
           }
         }
       }
 );
+      LauncherAppState.getInstance().getWidgetCache().removeObsoletePreviews(list);
     }
   }
 );

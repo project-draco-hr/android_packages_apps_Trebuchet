@@ -1,0 +1,10 @@
+{
+  if (waitUntilResume(mBindPackagesUpdatedRunnable,true)) {
+    mWidgetsAndShortcuts=widgetsAndShortcuts;
+    return;
+  }
+  if (mWidgetsView != null && widgetsAndShortcuts != null) {
+    mWidgetsView.addWidgets(widgetsAndShortcuts,getPackageManager());
+    mWidgetsAndShortcuts=null;
+  }
+}
