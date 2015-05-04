@@ -1,0 +1,18 @@
+{
+  if (mState == State.OVERVIEW) {
+    page.setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_YES);
+    page.getShortcutsAndWidgets().setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS);
+    page.setContentDescription(getPageDescription(pageNo));
+    if (mPagesAccessibilityDelegate == null) {
+      mPagesAccessibilityDelegate=new OverviewScreenAccessibilityDelegate(this);
+    }
+    page.setAccessibilityDelegate(mPagesAccessibilityDelegate);
+  }
+ else {
+    int accessible=mState == State.NORMAL ? IMPORTANT_FOR_ACCESSIBILITY_NO : IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS;
+    page.setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_NO);
+    page.getShortcutsAndWidgets().setImportantForAccessibility(accessible);
+    page.setContentDescription(null);
+    page.setAccessibilityDelegate(null);
+  }
+}

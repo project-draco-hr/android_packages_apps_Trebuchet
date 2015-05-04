@@ -1,6 +1,6 @@
 {
   AccessibilityManager am=(AccessibilityManager)mLauncher.getSystemService(Context.ACCESSIBILITY_SERVICE);
-  boolean accessibilityEnabled=am.isEnabled();
+  final boolean accessibilityEnabled=am.isEnabled();
   reinitializeAnimationArrays();
   cancelAnimation();
   if (animated) {
@@ -95,7 +95,7 @@
     }
   }
   final View searchBar=mLauncher.getOrCreateQsbBar();
-  final View overviewPanel=mLauncher.getOverviewPanel();
+  final ViewGroup overviewPanel=mLauncher.getOverviewPanel();
   final View hotseat=mLauncher.getHotseat();
   final View pageIndicator=mWorkspace.getPageIndicator();
   if (animated) {
@@ -187,6 +187,9 @@
     mStateAnimator.addListener(new AnimatorListenerAdapter(){
       @Override public void onAnimationEnd(      Animator animation){
         mStateAnimator=null;
+        if (accessibilityEnabled && overviewPanel.getVisibility() == View.VISIBLE) {
+          overviewPanel.getChildAt(0).performAccessibilityAction(AccessibilityNodeInfo.ACTION_ACCESSIBILITY_FOCUS,null);
+        }
       }
     }
 );
@@ -208,6 +211,9 @@
     mWorkspace.setScaleX(mNewScale);
     mWorkspace.setScaleY(mNewScale);
     mWorkspace.setTranslationY(finalWorkspaceTranslationY);
+    if (accessibilityEnabled && overviewPanel.getVisibility() == View.VISIBLE) {
+      overviewPanel.getChildAt(0).performAccessibilityAction(AccessibilityNodeInfo.ACTION_ACCESSIBILITY_FOCUS,null);
+    }
   }
   if (stateIsNormal) {
     animateBackgroundGradient(0f,animated);
