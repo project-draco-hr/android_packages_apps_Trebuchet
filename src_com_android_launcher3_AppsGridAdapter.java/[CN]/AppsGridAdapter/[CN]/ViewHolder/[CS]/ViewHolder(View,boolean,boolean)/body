@@ -1,6 +1,6 @@
 {
   super(v);
   mContent=v;
-  mIsSectionRow=isSectionRow;
+  mIsSectionHeader=isSectionHeader;
   mIsEmptyRow=isEmptyRow;
 }
