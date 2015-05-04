@@ -1,9 +1,0 @@
-{
-  if (waitUntilResume(mBindPackagesUpdatedRunnable,true)) {
-    mWidgetsAndShortcuts=widgetsAndShortcuts;
-    return;
-  }
-  if (mWidgetsView != null) {
-    mWidgetsView.addWidgets(LauncherModel.getSortedWidgetsAndShortcuts(this,false),getPackageManager());
-  }
-}

@@ -2,9 +2,6 @@
   if (mAppsView != null) {
     mAppsView.setApps(apps);
   }
-  if (mWidgetsView != null) {
-    mWidgetsView.addWidgets(LauncherModel.getSortedWidgetsAndShortcuts(this,false),getPackageManager());
-  }
   if (mLauncherCallbacks != null) {
     mLauncherCallbacks.bindAllApplications(apps);
   }

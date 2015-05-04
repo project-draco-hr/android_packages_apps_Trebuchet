@@ -21,7 +21,6 @@ synchronized (mLock) {
     waitForIdle();
     if (DEBUG_LOADERS)     Log.d(TAG,"step 2: loading all apps");
     loadAndBindAllApps();
-    LauncherAppState.getInstance().getWidgetCache().removeObsoletePreviews();
 synchronized (mLock) {
       android.os.Process.setThreadPriority(Process.THREAD_PRIORITY_DEFAULT);
     }
