@@ -1,7 +1,7 @@
 {
   runOnWorkerThread(new Runnable(){
     @Override public void run(){
-      final ArrayList<Object> list=getWidgetsAndShortcuts(context,true);
+      final ArrayList<Object> list=getWidgetsAndShortcuts(context,refresh);
       mHandler.post(new Runnable(){
         @Override public void run(){
           Callbacks cb=getCallback();

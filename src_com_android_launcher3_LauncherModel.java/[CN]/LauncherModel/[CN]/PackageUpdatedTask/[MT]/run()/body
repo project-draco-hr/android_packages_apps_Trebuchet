@@ -224,9 +224,7 @@ callbacks.bindComponentsRemoved(removedPackageNames,removedApps,mUser,removeReas
 }
 );
 }
-if (Build.VERSION.SDK_INT < 17) {
-loadAndBindWidgetsAndShortcuts(context,callbacks);
-}
+loadAndBindWidgetsAndShortcuts(context,callbacks,Build.VERSION.SDK_INT < 17);
 mHandler.post(new Runnable(){
 public void run(){
 Callbacks cb=getCallback();
