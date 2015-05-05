@@ -1,10 +1,8 @@
 {
   if (mState == State.APPS_SPRING_LOADED) {
-    mStateTransitionAnimation.startAnimationToAllApps(true);
-    mState=State.APPS;
+    showAppsView(true,false);
   }
  else   if (mState == State.WIDGETS_SPRING_LOADED) {
-    mStateTransitionAnimation.startAnimationToWidgets(true);
-    mState=State.WIDGETS;
+    showWidgetsView(true,false);
   }
 }

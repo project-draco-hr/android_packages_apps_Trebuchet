@@ -8,7 +8,7 @@
   final HashMap<View,Integer> layerViews=new HashMap<>();
   boolean initialized=allAppsButtonView != null;
   cancelAnimation();
-  Animator workspaceAnim=mLauncher.getWorkspace().setStateWithAnimation(toWorkspaceState,-1,animated,layerViews);
+  Animator workspaceAnim=mLauncher.startWorkspaceStateChangeAnimation(toWorkspaceState,-1,animated,layerViews);
   if (animated && initialized) {
     mStateAnimation=LauncherAnimUtils.createAnimatorSet();
     int width=revealView.getMeasuredWidth();
