@@ -1,3 +1,3 @@
 View v
-boolean isSectionRow
+boolean isSectionHeader
 boolean isEmptyRow
