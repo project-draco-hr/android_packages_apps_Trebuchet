@@ -11,6 +11,11 @@
     }
     mFixedBounds.set(fixedBounds);
   }
-  updateBackgrounds();
-  updatePaddings();
+  post(new Runnable(){
+    @Override public void run(){
+      updateBackgrounds();
+      updatePaddings();
+    }
+  }
+);
 }
