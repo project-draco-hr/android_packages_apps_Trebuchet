@@ -66,7 +66,7 @@ synchronized (sBgLock) {
       final Callbacks callbacks=tryGetCallbacks(oldCallbacks);
       if (callbacks != null) {
         callbacks.bindAllApplications(added);
-        loadAndBindWidgetsAndShortcuts(mContext,callbacks,true);
+        loadAndBindWidgetsAndShortcuts(mApp.getContext(),callbacks,true);
         if (DEBUG_LOADERS) {
           Log.d(TAG,"bound " + added.size() + " apps in "+ (SystemClock.uptimeMillis() - bindTime)+ "ms");
         }
