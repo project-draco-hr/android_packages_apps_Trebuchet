@@ -14,7 +14,7 @@
     totalDistance=Math.abs(getScrollForPage(adjacentPage) - getScrollForPage(page));
   }
   float scrollProgress=delta / (totalDistance * 1.0f);
-  scrollProgress=Math.min(scrollProgress,getMaxScrollProgress());
-  scrollProgress=Math.max(scrollProgress,-getMaxScrollProgress());
+  scrollProgress=Math.min(scrollProgress,MAX_SCROLL_PROGRESS);
+  scrollProgress=Math.max(scrollProgress,-MAX_SCROLL_PROGRESS);
   return scrollProgress;
 }

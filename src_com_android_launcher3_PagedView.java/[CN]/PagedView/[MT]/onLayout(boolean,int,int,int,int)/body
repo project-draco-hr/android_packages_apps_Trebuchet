@@ -1,5 +1,5 @@
 {
-  if (!mIsDataReady || getChildCount() == 0) {
+  if (getChildCount() == 0) {
     return;
   }
   if (DEBUG)   Log.d(TAG,"PagedView.onLayout()");
@@ -76,7 +76,7 @@
  else {
     updateMaxScrollX();
   }
-  if (mScroller.isFinished() && mChildCountOnLastLayout != childCount && !mDeferringForDelete) {
+  if (mScroller.isFinished() && mChildCountOnLastLayout != childCount) {
     if (mRestorePage != INVALID_RESTORE_PAGE) {
       setCurrentPage(mRestorePage);
       mRestorePage=INVALID_RESTORE_PAGE;

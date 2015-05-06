@@ -1,7 +1,6 @@
 {
   super(context,attrs);
   LauncherAppState app=LauncherAppState.getInstance();
-  setDataIsReady();
   DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
   if (ALLOW_FOLDER_SCROLL) {
     mMaxCountX=Math.min((int)grid.numColumns,MAX_ITEMS_PER_PAGE);

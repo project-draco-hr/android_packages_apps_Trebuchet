@@ -57,14 +57,12 @@ mParentDownMotionX=pt[0];
 mParentDownMotionY=pt[1];
 updateDragViewTranslationDuringDrag();
 final int dragViewIndex=indexOfChild(mDragView);
-boolean isHoveringOverDelete=isHoveringOverDeleteDropTarget((int)mParentDownMotionX,(int)mParentDownMotionY);
-setPageHoveringOverDeleteDropTarget(dragViewIndex,isHoveringOverDelete);
 if (DEBUG) Log.d(TAG,"mLastMotionX: " + mLastMotionX);
 if (DEBUG) Log.d(TAG,"mLastMotionY: " + mLastMotionY);
 if (DEBUG) Log.d(TAG,"mParentDownMotionX: " + mParentDownMotionX);
 if (DEBUG) Log.d(TAG,"mParentDownMotionY: " + mParentDownMotionY);
 final int pageUnderPointIndex=getNearestHoverOverPageIndex();
-if (pageUnderPointIndex > -1 && pageUnderPointIndex != indexOfChild(mDragView) && !isHoveringOverDelete) {
+if (pageUnderPointIndex > -1 && pageUnderPointIndex != indexOfChild(mDragView)) {
 mTempVisiblePagesRange[0]=0;
 mTempVisiblePagesRange[1]=getPageCount() - 1;
 getFreeScrollPageRange(mTempVisiblePagesRange);
@@ -92,9 +90,7 @@ anim.start();
 v.setTag(anim);
 }
 removeView(mDragView);
-onRemoveView(mDragView,false);
 addView(mDragView,pageUnderPointIndex);
-onAddView(mDragView,pageUnderPointIndex);
 mSidePageHoverIndex=-1;
 if (mPageIndicator != null) {
 mPageIndicator.setActiveMarker(getNextPage());
@@ -186,17 +182,6 @@ float[] pt=mapPointFromViewToParent(this,mLastMotionX,mLastMotionY);
 mParentDownMotionX=pt[0];
 mParentDownMotionY=pt[1];
 updateDragViewTranslationDuringDrag();
-boolean handledFling=false;
-if (!DISABLE_FLING_TO_DELETE) {
-PointF flingToDeleteVector=isFlingingToDelete();
-if (flingToDeleteVector != null) {
-onFlingToDelete(flingToDeleteVector);
-handledFling=true;
-}
-}
-if (!handledFling && isHoveringOverDeleteDropTarget((int)mParentDownMotionX,(int)mParentDownMotionY)) {
-onDropToDelete();
-}
 }
  else {
 if (!mCancelTap) {

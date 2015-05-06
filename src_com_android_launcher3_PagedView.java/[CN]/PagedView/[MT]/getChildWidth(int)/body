@@ -1,3 +1,0 @@
-{
-  return getPageAt(index).getMeasuredWidth();
-}
