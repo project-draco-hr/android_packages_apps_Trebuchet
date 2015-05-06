@@ -5,8 +5,6 @@
     Log.w(TAG,"LoaderTask running with no launcher (loadAllApps)");
     return;
   }
-  final Intent mainIntent=new Intent(Intent.ACTION_MAIN,null);
-  mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
   final List<UserHandleCompat> profiles=mUserManager.getUserProfiles();
   mBgAllAppsList.clear();
   for (  UserHandleCompat user : profiles) {
@@ -18,34 +16,6 @@
     }
     if (apps == null || apps.isEmpty()) {
       return;
-    }
-    HashSet<String> updatedPackages=mIconCache.updateDBIcons(user,apps);
-    if (!updatedPackages.isEmpty()) {
-      final ArrayList<ShortcutInfo> updates=new ArrayList<ShortcutInfo>();
-synchronized (sBgLock) {
-        for (        ItemInfo info : sBgItemsIdMap) {
-          if (info instanceof ShortcutInfo && user.equals(info.user) && info.itemType == LauncherSettings.Favorites.ITEM_TYPE_APPLICATION) {
-            ShortcutInfo si=(ShortcutInfo)info;
-            ComponentName cn=si.getTargetComponent();
-            if (cn != null && updatedPackages.contains(cn.getPackageName())) {
-              si.updateIcon(mIconCache);
-              updates.add(si);
-            }
-          }
-        }
-      }
-      if (!updates.isEmpty()) {
-        final UserHandleCompat userFinal=user;
-        mHandler.post(new Runnable(){
-          public void run(){
-            Callbacks cb=getCallback();
-            if (cb != null) {
-              cb.bindShortcutsChanged(updates,new ArrayList<ShortcutInfo>(),userFinal);
-            }
-          }
-        }
-);
-      }
     }
     for (int i=0; i < apps.size(); i++) {
       LauncherActivityInfoCompat app=apps.get(i);

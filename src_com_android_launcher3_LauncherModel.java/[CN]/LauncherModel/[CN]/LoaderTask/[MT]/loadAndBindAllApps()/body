@@ -4,6 +4,7 @@
   }
   if (!mAllAppsLoaded) {
     loadAllApps();
+    updateAllAppsIconsCache();
 synchronized (LoaderTask.this) {
       if (mStopped) {
         return;
