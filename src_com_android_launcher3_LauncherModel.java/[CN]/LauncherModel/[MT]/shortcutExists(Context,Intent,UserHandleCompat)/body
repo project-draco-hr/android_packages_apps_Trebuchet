@@ -1,4 +1,5 @@
 {
+  assertWorkspaceLoaded();
   final String intentWithPkg, intentWithoutPkg;
   final String packageName;
   if (intent.getComponent() != null) {

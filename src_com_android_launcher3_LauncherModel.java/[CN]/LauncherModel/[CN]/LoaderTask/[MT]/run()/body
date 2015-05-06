@@ -31,5 +31,6 @@ synchronized (mLock) {
       mLoaderTask=null;
     }
     mIsLoaderTaskRunning=false;
+    mHasLoaderCompletedOnce=true;
   }
 }

@@ -11,7 +11,7 @@
   mBgAllAppsList.clear();
   for (  UserHandleCompat user : profiles) {
     final long qiaTime=DEBUG_LOADERS ? SystemClock.uptimeMillis() : 0;
-    List<LauncherActivityInfoCompat> apps=mLauncherApps.getActivityList(null,user);
+    final List<LauncherActivityInfoCompat> apps=mLauncherApps.getActivityList(null,user);
     if (DEBUG_LOADERS) {
       Log.d(TAG,"getActivityList took " + (SystemClock.uptimeMillis() - qiaTime) + "ms for user "+ user);
       Log.d(TAG,"getActivityList got " + apps.size() + " apps for user "+ user);
@@ -51,11 +51,14 @@ synchronized (sBgLock) {
       LauncherActivityInfoCompat app=apps.get(i);
       mBgAllAppsList.add(new AppInfo(mContext,app,user,mIconCache));
     }
-    if (!user.equals(UserHandleCompat.myUserHandle())) {
-      ManagedProfileHeuristic heuristic=ManagedProfileHeuristic.get(mContext,user);
-      if (heuristic != null) {
-        heuristic.processUserApps(apps);
+    final ManagedProfileHeuristic heuristic=ManagedProfileHeuristic.get(mContext,user);
+    if (heuristic != null) {
+      runAfterBindCompletes(new Runnable(){
+        @Override public void run(){
+          heuristic.processUserApps(apps);
+        }
       }
+);
     }
   }
   final ArrayList<AppInfo> added=mBgAllAppsList.added;
