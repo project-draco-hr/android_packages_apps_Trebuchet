@@ -1,3 +1,6 @@
 {
-  return mItemDecoration;
+  if (!AppsContainerView.GRID_HIDE_SECTION_HEADERS) {
+    return mItemDecoration;
+  }
+  return null;
 }

@@ -1,10 +1,18 @@
 {
-  boolean fromStateWithoutOverlay=fromState != Workspace.State.NORMAL && fromState != Workspace.State.NORMAL_HIDDEN;
-  boolean toStateWithoutOverlay=toState != Workspace.State.NORMAL && toState != Workspace.State.NORMAL_HIDDEN;
-  if (toStateWithoutOverlay) {
+  boolean fromStateWithOverlay;
+  boolean toStateWithOverlay;
+  if (Launcher.DISABLE_ALL_APPS_SEARCH_INTEGRATION) {
+    fromStateWithOverlay=fromState != Workspace.State.NORMAL;
+    toStateWithOverlay=toState != Workspace.State.NORMAL;
+  }
+ else {
+    fromStateWithOverlay=fromState != Workspace.State.NORMAL && fromState != Workspace.State.NORMAL_HIDDEN;
+    toStateWithOverlay=toState != Workspace.State.NORMAL && toState != Workspace.State.NORMAL_HIDDEN;
+  }
+  if (toStateWithOverlay) {
     onInteractionBegin();
   }
- else   if (fromStateWithoutOverlay) {
+ else   if (fromStateWithOverlay) {
     onInteractionEnd();
   }
 }

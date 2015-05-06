@@ -8,8 +8,10 @@
       mAppsView.setFixedBounds(Launcher.this,bounds);
     }
     @Override public void dismissAllApps(){
-      if (!mPaused) {
-        showWorkspace(WorkspaceStateTransitionAnimation.SCROLL_TO_CURRENT_PAGE,true,null,false);
+      if (!DISABLE_ALL_APPS_SEARCH_INTEGRATION) {
+        if (!mPaused) {
+          showWorkspace(WorkspaceStateTransitionAnimation.SCROLL_TO_CURRENT_PAGE,true,null,false);
+        }
       }
     }
   }

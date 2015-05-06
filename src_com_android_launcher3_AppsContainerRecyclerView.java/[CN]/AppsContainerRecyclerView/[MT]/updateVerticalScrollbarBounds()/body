@@ -1,5 +1,6 @@
 {
-  if (mApps.getAdapterItems().isEmpty()) {
+  List<AlphabeticalAppsList.AdapterItem> items=mApps.getAdapterItems();
+  if (items.isEmpty()) {
     mVerticalScrollbarBounds.setEmpty();
     return;
   }
@@ -15,7 +16,7 @@
     View child=getChildAt(i);
     int position=getChildPosition(child);
     if (position != NO_POSITION) {
-      AlphabeticalAppsList.AdapterItem item=mApps.getAdapterItems().get(position);
+      AlphabeticalAppsList.AdapterItem item=items.get(position);
       if (!item.isSectionHeader) {
         rowIndex=findRowForAppIndex(item.appIndex);
         rowTopOffset=getLayoutManager().getDecoratedTop(child);

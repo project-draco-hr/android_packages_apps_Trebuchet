@@ -1,3 +1,4 @@
 {
   mDy=dy;
+  mScrollListenerProxy.onScrolled(recyclerView,dx,dy);
 }

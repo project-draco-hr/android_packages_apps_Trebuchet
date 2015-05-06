@@ -1,0 +1,5 @@
+{
+  mHeaderView.setVisibility(View.GONE);
+  updateBackgrounds();
+  updatePaddings();
+}

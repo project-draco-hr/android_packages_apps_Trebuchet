@@ -3,6 +3,7 @@
   if (sections.isEmpty()) {
     return "";
   }
+  List<AlphabeticalAppsList.AdapterItem> items=mApps.getAdapterItems();
   int rowAtProgress=(int)(progress * getNumRows());
   int rowCount=0;
   AlphabeticalAppsList.SectionInfo lastSectionInfo=null;
@@ -14,9 +15,9 @@
     }
     rowCount+=numRowsInSection;
   }
-  int position=mApps.getAdapterItems().indexOf(lastSectionInfo.firstAppItem);
+  int position=items.indexOf(lastSectionInfo.firstAppItem);
   LinearLayoutManager layoutManager=(LinearLayoutManager)getLayoutManager();
   stopScroll();
   layoutManager.scrollToPositionWithOffset(position,0);
-  return mApps.getAdapterItems().get(position).sectionName;
+  return lastSectionInfo.sectionName;
 }

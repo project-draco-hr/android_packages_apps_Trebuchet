@@ -10,7 +10,10 @@
   mTouchListener=touchListener;
   mIconClickListener=iconClickListener;
   mIconLongClickListener=iconLongClickListener;
-  mStartMargin=res.getDimensionPixelSize(R.dimen.apps_grid_view_start_margin);
+  if (!AppsContainerView.GRID_HIDE_SECTION_HEADERS) {
+    mStartMargin=res.getDimensionPixelSize(R.dimen.apps_grid_view_start_margin);
+    mSectionHeaderOffset=res.getDimensionPixelSize(R.dimen.apps_grid_section_y_offset);
+  }
   mPaddingStart=res.getDimensionPixelSize(R.dimen.apps_container_inset);
   mSectionTextPaint=new Paint();
   mSectionTextPaint.setTextSize(res.getDimensionPixelSize(R.dimen.apps_view_section_text_size));

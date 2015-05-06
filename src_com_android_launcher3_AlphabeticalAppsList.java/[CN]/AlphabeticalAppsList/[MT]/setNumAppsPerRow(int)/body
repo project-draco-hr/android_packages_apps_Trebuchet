@@ -1,0 +1,5 @@
+{
+  mNumAppsPerRow=numAppsPerRow;
+  mMaxAllowableMerges=(int)Math.ceil(numAppsPerRow / 2f);
+  onAppsUpdated();
+}

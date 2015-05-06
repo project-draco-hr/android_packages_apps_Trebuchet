@@ -1,3 +1,4 @@
 {
   mAppsRecyclerView.scrollToPosition(0);
+  mRecyclerViewScrollY=0;
 }

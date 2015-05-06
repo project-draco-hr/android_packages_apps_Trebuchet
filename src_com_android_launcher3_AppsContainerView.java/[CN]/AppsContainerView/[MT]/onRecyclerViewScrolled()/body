@@ -1,0 +1,8 @@
+{
+  if (DYNAMIC_HEADER_ELEVATION) {
+    int elevation=Math.min(mRecyclerViewScrollY,DynamicGrid.pxFromDp(HEADER_ELEVATION_DP,getContext().getResources().getDisplayMetrics()));
+    if (Float.compare(mHeaderView.getElevation(),elevation) != 0) {
+      mHeaderView.setElevation(elevation);
+    }
+  }
+}

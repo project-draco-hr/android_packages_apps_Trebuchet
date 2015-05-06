@@ -4,19 +4,24 @@
   }
  else {
     String formatStr=getResources().getString(R.string.apps_view_no_search_results);
-    if (USE_LAYOUT == GRID_LAYOUT) {
-      ((AppsGridAdapter)mAdapter).setEmptySearchText(String.format(formatStr,s.toString()));
-    }
- else {
-      ((AppsListAdapter)mAdapter).setEmptySearchText(String.format(formatStr,s.toString()));
-    }
+    mAdapter.setEmptySearchText(String.format(formatStr,s.toString()));
     final String filterText=s.toString().toLowerCase().replaceAll("\\s+","");
     mApps.setFilter(new AlphabeticalAppsList.Filter(){
       @Override public boolean retainApp(      AppInfo info,      String sectionName){
         String title=info.title.toString();
-        return sectionName.toLowerCase().contains(filterText) || title.toLowerCase().replaceAll("\\s+","").contains(filterText);
+        if (sectionName.toLowerCase().contains(filterText)) {
+          return true;
+        }
+        String[] words=title.toLowerCase().split("\\s+");
+        for (int i=0; i < words.length; i++) {
+          if (words[i].startsWith(filterText)) {
+            return true;
+          }
+        }
+        return false;
       }
     }
 );
   }
+  scrollToTop();
 }

@@ -1,9 +1,0 @@
-{
-  if (mApps.hasNoFilteredResults()) {
-    return EMPTY_VIEW_TYPE;
-  }
- else   if (mApps.getAdapterItems().get(position).isSectionHeader) {
-    return SECTION_BREAK_VIEW_TYPE;
-  }
-  return ICON_VIEW_TYPE;
-}

@@ -1,0 +1,28 @@
+{
+  if (animated) {
+    mSearchBarContainerView.animate().alpha(0f).setDuration(FADE_IN_DURATION).withLayer().withEndAction(new Runnable(){
+      @Override public void run(){
+        mSearchBarContainerView.setVisibility(View.INVISIBLE);
+        mSearchBarEditView.setText("");
+        mApps.setFilter(null);
+        if (returnFocusToRecyclerView) {
+          mAppsRecyclerView.requestFocus();
+        }
+        scrollToTop();
+      }
+    }
+);
+    mSearchButtonView.animate().alpha(1f).setDuration(FADE_OUT_DURATION).withLayer();
+  }
+ else {
+    mSearchBarContainerView.setVisibility(View.INVISIBLE);
+    mSearchBarEditView.setText("");
+    mApps.setFilter(null);
+    mSearchButtonView.setAlpha(1f);
+    if (returnFocusToRecyclerView) {
+      mAppsRecyclerView.requestFocus();
+    }
+    scrollToTop();
+  }
+  getInputMethodManager().hideSoftInputFromWindow(getWindowToken(),0);
+}

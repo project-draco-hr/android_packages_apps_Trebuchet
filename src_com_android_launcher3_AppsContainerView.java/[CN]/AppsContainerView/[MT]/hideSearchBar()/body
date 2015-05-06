@@ -1,5 +1,0 @@
-{
-  mSearchBarView.setVisibility(View.GONE);
-  updateBackgrounds();
-  updatePaddings();
-}

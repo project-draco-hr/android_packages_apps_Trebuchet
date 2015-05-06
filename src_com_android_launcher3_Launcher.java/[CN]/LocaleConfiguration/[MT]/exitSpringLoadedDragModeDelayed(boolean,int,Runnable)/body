@@ -1,7 +1,7 @@
 {
   if (mState != State.APPS_SPRING_LOADED && mState != State.WIDGETS_SPRING_LOADED)   return;
   if (successfulDrop) {
-    if (mLauncherCallbacks != null) {
+    if (!Launcher.DISABLE_ALL_APPS_SEARCH_INTEGRATION && mLauncherCallbacks != null) {
       mLauncherCallbacks.onAllAppsHidden();
     }
   }

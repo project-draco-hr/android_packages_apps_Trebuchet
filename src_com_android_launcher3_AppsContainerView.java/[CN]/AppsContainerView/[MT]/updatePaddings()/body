@@ -1,6 +1,6 @@
 {
   boolean isRtl=(getResources().getConfiguration().getLayoutDirection() == LAYOUT_DIRECTION_RTL);
-  boolean hasSearchBar=(mSearchBarView != null) && (mSearchBarView.getVisibility() == View.VISIBLE);
+  boolean hasSearchBar=(mSearchBarEditView != null) && (mSearchBarEditView.getVisibility() == View.VISIBLE);
   if (mFixedBounds.isEmpty()) {
     setPadding(mInsets.left,mContainerInset + mInsets.top,mInsets.right,mContainerInset + mInsets.bottom);
   }
@@ -15,7 +15,7 @@
     mAppsRecyclerView.setPadding(inset + mContentMarginStart,inset,inset,inset);
   }
   if (hasSearchBar) {
-    LinearLayout.LayoutParams lp=(LinearLayout.LayoutParams)mSearchBarView.getLayoutParams();
+    LinearLayout.LayoutParams lp=(LinearLayout.LayoutParams)mHeaderView.getLayoutParams();
     lp.leftMargin=lp.rightMargin=inset;
   }
 }

@@ -1,0 +1,12 @@
+{
+  mSearchBarContainerView.setVisibility(View.VISIBLE);
+  mSearchBarContainerView.setAlpha(0f);
+  mSearchBarContainerView.animate().alpha(1f).setDuration(FADE_IN_DURATION).withLayer().withEndAction(new Runnable(){
+    @Override public void run(){
+      mSearchBarEditView.requestFocus();
+      getInputMethodManager().showSoftInput(mSearchBarEditView,InputMethodManager.SHOW_IMPLICIT);
+    }
+  }
+);
+  mSearchButtonView.animate().alpha(0f).setDuration(FADE_OUT_DURATION).withLayer();
+}

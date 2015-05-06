@@ -1,8 +1,6 @@
 {
   boolean isRtl=(getResources().getConfiguration().getLayoutDirection() == LAYOUT_DIRECTION_RTL);
-  if (USE_LAYOUT == GRID_LAYOUT) {
-    ((AppsGridAdapter)mAdapter).setRtl(isRtl);
-  }
+  mAdapter.setRtl(isRtl);
   mContentView=(LinearLayout)findViewById(R.id.apps_list);
   mContentView.setOnFocusChangeListener(new View.OnFocusChangeListener(){
     @Override public void onFocusChange(    View v,    boolean hasFocus){
@@ -12,10 +10,19 @@
     }
   }
 );
-  mSearchBarView=(EditText)findViewById(R.id.app_search_box);
-  if (mSearchBarView != null) {
-    mSearchBarView.addTextChangedListener(this);
-    mSearchBarView.setOnEditorActionListener(this);
+  mHeaderView=findViewById(R.id.header);
+  mHeaderView.setOnClickListener(this);
+  if (Utilities.isLmpOrAbove() && !DYNAMIC_HEADER_ELEVATION) {
+    mHeaderView.setElevation(DynamicGrid.pxFromDp(HEADER_ELEVATION_DP,getContext().getResources().getDisplayMetrics()));
+  }
+  mSearchButtonView=mHeaderView.findViewById(R.id.search_button);
+  mSearchBarContainerView=findViewById(R.id.app_search_container);
+  mDismissSearchButtonView=mSearchBarContainerView.findViewById(R.id.dismiss_search_button);
+  mDismissSearchButtonView.setOnClickListener(this);
+  mSearchBarEditView=(EditText)findViewById(R.id.app_search_box);
+  if (mSearchBarEditView != null) {
+    mSearchBarEditView.addTextChangedListener(this);
+    mSearchBarEditView.setOnEditorActionListener(this);
   }
   mAppsRecyclerView=(AppsContainerRecyclerView)findViewById(R.id.apps_list_view);
   mAppsRecyclerView.setApps(mApps);
@@ -23,6 +30,15 @@
   mAppsRecyclerView.setLayoutManager(mLayoutManager);
   mAppsRecyclerView.setAdapter(mAdapter);
   mAppsRecyclerView.setHasFixedSize(true);
+  mAppsRecyclerView.setOnScrollListenerProxy(new RecyclerView.OnScrollListener(){
+    @Override public void onScrollStateChanged(    RecyclerView recyclerView,    int newState){
+    }
+    @Override public void onScrolled(    RecyclerView recyclerView,    int dx,    int dy){
+      mRecyclerViewScrollY+=dy;
+      onRecyclerViewScrolled();
+    }
+  }
+);
   if (mItemDecoration != null) {
     mAppsRecyclerView.addItemDecoration(mItemDecoration);
   }

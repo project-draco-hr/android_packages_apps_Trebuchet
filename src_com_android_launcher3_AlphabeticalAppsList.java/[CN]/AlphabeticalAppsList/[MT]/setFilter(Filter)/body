@@ -1,5 +1,7 @@
 {
-  mFilter=f;
-  onAppsUpdated();
-  mAdapter.notifyDataSetChanged();
+  if (mFilter != f) {
+    mFilter=f;
+    onAppsUpdated();
+    mAdapter.notifyDataSetChanged();
+  }
 }

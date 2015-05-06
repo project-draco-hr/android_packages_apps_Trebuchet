@@ -1,0 +1,8 @@
+{
+  if (v == mHeaderView) {
+    showSearchField();
+  }
+ else   if (v == mDismissSearchButtonView) {
+    hideSearchField(true,true);
+  }
+}

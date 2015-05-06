@@ -17,7 +17,7 @@
   if (changed) {
     getWindow().getDecorView().sendAccessibilityEvent(AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED);
     if (notifyLauncherCallbacks) {
-      if (mLauncherCallbacks != null) {
+      if (!Launcher.DISABLE_ALL_APPS_SEARCH_INTEGRATION && mLauncherCallbacks != null) {
         mLauncherCallbacks.onAllAppsHidden();
       }
     }

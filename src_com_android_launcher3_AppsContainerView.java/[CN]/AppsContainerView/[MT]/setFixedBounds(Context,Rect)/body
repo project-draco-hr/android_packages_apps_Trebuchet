@@ -5,11 +5,14 @@
     if (grid.updateAppsViewNumCols(context.getResources(),fixedBounds.width())) {
       mNumAppsPerRow=grid.appsViewNumCols;
       mAppsRecyclerView.setNumAppsPerRow(mNumAppsPerRow);
-      if (USE_LAYOUT == GRID_LAYOUT) {
-        ((AppsGridAdapter)mAdapter).setNumAppsPerRow(mNumAppsPerRow);
-      }
+      mAdapter.setNumAppsPerRow(mNumAppsPerRow);
+      mApps.setNumAppsPerRow(mNumAppsPerRow);
     }
     mFixedBounds.set(fixedBounds);
+    if (Launcher.DISABLE_ALL_APPS_SEARCH_INTEGRATION) {
+      mFixedBounds.top=mInsets.top;
+      mFixedBounds.bottom=getMeasuredHeight();
+    }
   }
   post(new Runnable(){
     @Override public void run(){

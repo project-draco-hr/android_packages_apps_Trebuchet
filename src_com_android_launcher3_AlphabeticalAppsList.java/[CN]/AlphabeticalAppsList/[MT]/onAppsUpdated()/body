@@ -14,7 +14,10 @@
       lastSectionInfo=new SectionInfo(sectionName);
       mSections.add(lastSectionInfo);
       AdapterItem sectionItem=AdapterItem.asSection(position++,sectionName);
-      mSectionedFilteredApps.add(sectionItem);
+      if (!AppsContainerView.GRID_HIDE_SECTION_HEADERS && !hasFilter()) {
+        lastSectionInfo.sectionItem=sectionItem;
+        mSectionedFilteredApps.add(sectionItem);
+      }
     }
     AdapterItem appItem=AdapterItem.asApp(position++,sectionName,info,appIndex++);
     lastSectionInfo.numAppsInSection++;
@@ -23,5 +26,40 @@
     }
     mSectionedFilteredApps.add(appItem);
     mFilteredApps.add(info);
+  }
+  if (AppsContainerView.GRID_MERGE_SECTIONS && !hasFilter()) {
+    int minNumAppsPerRow=(int)Math.ceil(mNumAppsPerRow / 2f);
+    int sectionAppCount=0;
+    for (int i=0; i < mSections.size(); i++) {
+      SectionInfo section=mSections.get(i);
+      String mergedSectionName=section.sectionName;
+      sectionAppCount=section.numAppsInSection;
+      int mergeCount=1;
+      while (0 < (sectionAppCount % mNumAppsPerRow) && (sectionAppCount % mNumAppsPerRow) < minNumAppsPerRow && (int)Math.ceil(sectionAppCount / mNumAppsPerRow) < MAX_ROWS_IN_MERGED_SECTION && (i + 1) < mSections.size()) {
+        SectionInfo nextSection=mSections.remove(i + 1);
+        if (AppsContainerView.GRID_MERGE_SECTION_HEADERS) {
+          mergedSectionName+=nextSection.sectionName;
+        }
+        mSectionedFilteredApps.remove(nextSection.sectionItem);
+        if (AppsContainerView.GRID_MERGE_SECTION_HEADERS) {
+          int pos=mSectionedFilteredApps.indexOf(section.firstAppItem);
+          for (int j=pos; j < (pos + section.numAppsInSection + nextSection.numAppsInSection); j++) {
+            AdapterItem item=mSectionedFilteredApps.get(j);
+            item.sectionName=mergedSectionName;
+          }
+        }
+        int pos=mSectionedFilteredApps.indexOf(nextSection.firstAppItem);
+        for (int j=pos; j < mSectionedFilteredApps.size(); j++) {
+          AdapterItem item=mSectionedFilteredApps.get(j);
+          item.position--;
+        }
+        section.numAppsInSection+=nextSection.numAppsInSection;
+        sectionAppCount+=nextSection.numAppsInSection;
+        mergeCount++;
+        if (mergeCount >= mMaxAllowableMerges) {
+          break;
+        }
+      }
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
-  if (mSearchBarView != null) {
+  if (mSearchBarEditView != null) {
     if (toWorkspace) {
-      mSearchBarView.setText("");
+      hideSearchField(false,false);
     }
   }
 }
