@@ -1,6 +1,6 @@
 {
   finalizeWorkFolder();
-  if (!mHomescreenApps.isEmpty()) {
+  if (addHomeScreenShortcuts && !mHomescreenApps.isEmpty()) {
     mModel.addAndBindAddedWorkspaceItems(mContext,mHomescreenApps);
   }
 }

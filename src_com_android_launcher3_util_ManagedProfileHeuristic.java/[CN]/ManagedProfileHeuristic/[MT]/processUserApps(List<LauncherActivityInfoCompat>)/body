@@ -1,7 +1,8 @@
 {
-  mHomescreenApps=new ArrayList<ItemInfo>();
-  mWorkFolderApps=new ArrayList<ItemInfo>();
-  HashSet<String> packageSet=getPackageSet();
+  mHomescreenApps=new ArrayList<>();
+  mWorkFolderApps=new ArrayList<>();
+  HashSet<String> packageSet=new HashSet<>();
+  final boolean userAppsExisted=getUserApps(packageSet);
   boolean newPackageAdded=false;
   for (  LauncherActivityInfoCompat info : apps) {
     String packageName=info.getComponentName().getPackageName();
@@ -19,6 +20,6 @@
   }
   if (newPackageAdded) {
     mPrefs.edit().putStringSet(mPackageSetKey,packageSet).apply();
-    finalizeAdditions();
+    finalizeAdditions(userAppsExisted);
   }
 }
