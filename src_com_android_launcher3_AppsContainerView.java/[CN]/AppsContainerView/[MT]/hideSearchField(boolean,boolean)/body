@@ -1,6 +1,6 @@
 {
   final boolean resetTextField=mSearchBarEditView.getText().toString().length() > 0;
-  final int translationX=DynamicGrid.pxFromDp(SEARCH_TRANSLATION_X_DP,getContext().getResources().getDisplayMetrics());
+  final int translationX=Utilities.pxFromDp(SEARCH_TRANSLATION_X_DP,getContext().getResources().getDisplayMetrics());
   if (animated) {
     mSearchBarContainerView.animate().alpha(0f).translationX(0).setDuration(FADE_IN_DURATION).withLayer().withEndAction(new Runnable(){
       @Override public void run(){

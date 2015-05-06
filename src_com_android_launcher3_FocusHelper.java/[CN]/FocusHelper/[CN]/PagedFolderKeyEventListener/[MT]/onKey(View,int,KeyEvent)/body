@@ -22,8 +22,9 @@
   final FolderPagedView pagedView=(FolderPagedView)cellLayout.getParent();
   final int pageIndex=pagedView.indexOfChild(cellLayout);
   final int pageCount=pagedView.getPageCount();
+  Launcher launcher=(Launcher)v.getContext();
   int[][] matrix=FocusLogic.createSparseMatrix(cellLayout);
-  int newIconIndex=FocusLogic.handleKeyEvent(keyCode,countX,countY,matrix,iconIndex,pageIndex,pageCount);
+  int newIconIndex=FocusLogic.handleKeyEvent(keyCode,countX,countY,matrix,iconIndex,pageIndex,pageCount,launcher.getDeviceProfile().isLayoutRtl);
   if (newIconIndex == FocusLogic.NOOP) {
     handleNoopKey(keyCode,v);
     return consume;

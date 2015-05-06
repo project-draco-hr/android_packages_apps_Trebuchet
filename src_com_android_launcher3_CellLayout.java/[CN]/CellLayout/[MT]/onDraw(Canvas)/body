@@ -43,8 +43,7 @@
     }
   }
   int previewOffset=FolderRingAnimator.sPreviewSize;
-  LauncherAppState app=LauncherAppState.getInstance();
-  DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
+  DeviceProfile grid=mLauncher.getDeviceProfile();
   for (int i=0; i < mFolderOuterRings.size(); i++) {
     FolderRingAnimator fra=mFolderOuterRings.get(i);
     Drawable d;

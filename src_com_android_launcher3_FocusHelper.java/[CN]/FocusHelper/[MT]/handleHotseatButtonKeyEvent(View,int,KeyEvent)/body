@@ -3,7 +3,7 @@
   if (e.getAction() == KeyEvent.ACTION_UP || !consume) {
     return consume;
   }
-  DeviceProfile profile=LauncherAppState.getInstance().getDynamicGrid().getDeviceProfile();
+  DeviceProfile profile=((Launcher)v.getContext()).getDeviceProfile();
   if (DEBUG) {
     Log.v(TAG,String.format("Handle HOTSEAT BUTTONS keyevent=[%s] on hotseat buttons, isVertical=%s",KeyEvent.keyCodeToString(keyCode),profile.isVerticalBarLayout()));
   }
@@ -47,7 +47,7 @@
     countY=hotseatLayout.getCountY();
     parent=hotseatParent;
   }
-  int newIconIndex=FocusLogic.handleKeyEvent(keyCode,countX,countY,matrix,iconIndex,pageIndex,pageCount);
+  int newIconIndex=FocusLogic.handleKeyEvent(keyCode,countX,countY,matrix,iconIndex,pageIndex,pageCount,profile.isLayoutRtl);
   View newIcon=null;
   if (newIconIndex == FocusLogic.NEXT_PAGE_FIRST_ITEM) {
     parent=getCellLayoutChildrenForIndex(workspace,pageIndex + 1);

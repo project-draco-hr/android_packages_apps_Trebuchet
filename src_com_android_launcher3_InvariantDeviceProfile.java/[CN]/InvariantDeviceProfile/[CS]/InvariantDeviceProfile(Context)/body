@@ -1,0 +1,39 @@
+{
+  WindowManager wm=(WindowManager)context.getSystemService(Context.WINDOW_SERVICE);
+  Display display=wm.getDefaultDisplay();
+  DisplayMetrics dm=new DisplayMetrics();
+  display.getMetrics(dm);
+  Point smallestSize=new Point();
+  Point largestSize=new Point();
+  display.getCurrentSizeRange(smallestSize,largestSize);
+  minWidthDps=Utilities.dpiFromPx(Math.min(smallestSize.x,smallestSize.y),dm);
+  minHeightDps=Utilities.dpiFromPx(Math.min(largestSize.x,largestSize.y),dm);
+  ArrayList<DeviceProfileQuery> points=new ArrayList<DeviceProfileQuery>();
+  for (  InvariantDeviceProfile p : sDeviceProfiles) {
+    points.add(new DeviceProfileQuery(p,0f));
+  }
+  InvariantDeviceProfile closestProfile=findClosestDeviceProfile(minWidthDps,minHeightDps,points);
+  numRows=closestProfile.numRows;
+  numColumns=closestProfile.numColumns;
+  numHotseatIcons=closestProfile.numHotseatIcons;
+  hotseatAllAppsRank=(int)(numHotseatIcons / 2);
+  defaultLayoutId=closestProfile.defaultLayoutId;
+  numFolderRows=closestProfile.numFolderRows;
+  numFolderColumns=closestProfile.numFolderColumns;
+  points.clear();
+  for (  InvariantDeviceProfile p : sDeviceProfiles) {
+    points.add(new DeviceProfileQuery(p,p.iconSize));
+  }
+  iconSize=invDistWeightedInterpolate(minWidthDps,minHeightDps,points);
+  points.clear();
+  for (  InvariantDeviceProfile p : sDeviceProfiles) {
+    points.add(new DeviceProfileQuery(p,p.iconTextSize));
+  }
+  iconTextSize=invDistWeightedInterpolate(minWidthDps,minHeightDps,points);
+  points.clear();
+  for (  InvariantDeviceProfile p : sDeviceProfiles) {
+    points.add(new DeviceProfileQuery(p,p.hotseatIconSize));
+  }
+  hotseatIconSize=invDistWeightedInterpolate(minWidthDps,minHeightDps,points);
+  applyPartnerDeviceProfileOverrides(context,dm);
+}

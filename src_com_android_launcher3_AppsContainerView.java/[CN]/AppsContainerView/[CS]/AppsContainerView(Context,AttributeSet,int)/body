@@ -1,11 +1,11 @@
 {
   super(context,attrs,defStyleAttr);
   LauncherAppState app=LauncherAppState.getInstance();
-  DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
   Resources res=context.getResources();
+  mLauncher=(Launcher)context;
+  DeviceProfile grid=mLauncher.getDeviceProfile();
   mContainerInset=context.getResources().getDimensionPixelSize(R.dimen.apps_container_inset);
   mPredictionBarHeight=grid.allAppsCellHeightPx + 2 * res.getDimensionPixelSize(R.dimen.apps_prediction_icon_top_bottom_padding);
-  mLauncher=(Launcher)context;
   mLayoutInflater=LayoutInflater.from(context);
   mNumAppsPerRow=grid.appsViewNumCols;
   mNumPredictedAppsPerRow=grid.appsViewNumPredictiveCols;

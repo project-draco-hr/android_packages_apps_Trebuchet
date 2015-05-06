@@ -2,9 +2,11 @@
   if (VERBOSE)   Log.v(TAG,"onBackup");
   Journal in=readJournal(oldState);
   if (!launcherIsReady()) {
+    dataChanged();
     writeJournal(newState,in);
     return;
   }
+  lazyInitAppState(true);
   Log.v(TAG,"lastBackupTime = " + in.t);
   mKeys.clear();
   applyJournal(in);

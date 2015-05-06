@@ -1,6 +1,6 @@
 {
   LauncherAppState app=LauncherAppState.getInstance();
-  DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
+  DeviceProfile grid=mLauncher.getDeviceProfile();
   int x=(int)ev.getX();
   int y=(int)ev.getY();
 switch (ev.getAction()) {

@@ -1,5 +1,6 @@
 {
   super(context,attrs,defStyleAttr);
+  mLauncher=(Launcher)context;
   Resources res=context.getResources();
   int fastScrollerSize=res.getDimensionPixelSize(R.dimen.apps_view_fast_scroll_popup_size);
   mScrollbar=res.getDrawable(R.drawable.apps_list_scrollbar_thumb);

@@ -22,7 +22,7 @@
       LauncherModel.deleteItemFromDatabase(this,item);
       return;
     }
-    PendingAddWidgetInfo pendingInfo=new PendingAddWidgetInfo(appWidgetInfo,null);
+    PendingAddWidgetInfo pendingInfo=new PendingAddWidgetInfo(this,appWidgetInfo,null);
     pendingInfo.spanX=item.spanX;
     pendingInfo.spanY=item.spanY;
     pendingInfo.minSpanX=item.minSpanX;

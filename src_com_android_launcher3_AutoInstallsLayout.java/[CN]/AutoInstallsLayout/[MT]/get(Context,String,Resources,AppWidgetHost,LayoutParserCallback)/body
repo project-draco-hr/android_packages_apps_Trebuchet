@@ -1,5 +1,5 @@
 {
-  DeviceProfile grid=LauncherAppState.getInstance().getDynamicGrid().getDeviceProfile();
+  InvariantDeviceProfile grid=LauncherAppState.getInstance().getInvariantDeviceProfile();
   String layoutName=String.format(Locale.ENGLISH,FORMATTED_LAYOUT_RES_WITH_HOSTEAT,(int)grid.numColumns,(int)grid.numRows,(int)grid.numHotseatIcons);
   int layoutId=targetRes.getIdentifier(layoutName,"xml",pkg);
   if (layoutId == 0) {

@@ -1,9 +1,0 @@
-Context context
-ArrayList<DeviceProfile> profiles
-float minWidth
-float minHeight
-int wPx
-int hPx
-int awPx
-int ahPx
-Resources res

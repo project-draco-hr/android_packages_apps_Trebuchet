@@ -1,0 +1,8 @@
+int keyCode
+int cntX
+int cntY
+int[][] map
+int iconIdx
+int pageIndex
+int pageCount
+boolean isRtl

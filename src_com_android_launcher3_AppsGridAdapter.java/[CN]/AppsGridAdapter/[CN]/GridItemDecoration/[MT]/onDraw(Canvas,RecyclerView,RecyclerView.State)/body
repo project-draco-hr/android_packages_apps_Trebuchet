@@ -2,7 +2,7 @@
   if (mApps.hasFilter()) {
     return;
   }
-  DeviceProfile grid=LauncherAppState.getInstance().getDynamicGrid().getDeviceProfile();
+  DeviceProfile grid=mLauncher.getDeviceProfile();
   List<AlphabeticalAppsList.AdapterItem> items=mApps.getAdapterItems();
   boolean hasDrawnPredictedAppsDivider=false;
   int childCount=parent.getChildCount();

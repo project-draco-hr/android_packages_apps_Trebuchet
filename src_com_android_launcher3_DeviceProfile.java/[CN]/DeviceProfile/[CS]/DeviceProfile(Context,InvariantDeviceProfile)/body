@@ -1,0 +1,10 @@
+{
+  WindowManager wm=(WindowManager)context.getSystemService(Context.WINDOW_SERVICE);
+  Display display=wm.getDefaultDisplay();
+  Point realSize=new Point();
+  display.getRealSize(realSize);
+  DisplayMetrics dm=new DisplayMetrics();
+  display.getMetrics(dm);
+  this.inv=inv;
+  init(context,realSize.x,realSize.y,dm.widthPixels,dm.heightPixels);
+}

@@ -4,8 +4,7 @@
   int width=getPaddingLeft() + getPaddingRight() + mContent.getDesiredWidth();
   int height=getFolderHeight();
   float scale=parent.getDescendantRectRelativeToSelf(mFolderIcon,sTempRect);
-  LauncherAppState app=LauncherAppState.getInstance();
-  DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
+  DeviceProfile grid=mLauncher.getDeviceProfile();
   int centerX=(int)(sTempRect.left + sTempRect.width() * scale / 2);
   int centerY=(int)(sTempRect.top + sTempRect.height() * scale / 2);
   int centeredLeft=centerX - width / 2;

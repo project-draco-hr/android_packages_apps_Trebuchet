@@ -16,8 +16,8 @@
       int height=(orientation != CellLayout.LANDSCAPE) ? Math.max(widthPx,heightPx) : Math.min(widthPx,heightPx);
       int paddingTop=searchBarBounds.bottom;
       int paddingBottom=hotseatBarHeightPx + pageIndicatorHeightPx;
-      int availableWidth=Math.max(0,width - (int)((numColumns * cellWidthPx) + (numColumns * gapScale * cellWidthPx)));
-      int availableHeight=Math.max(0,height - paddingTop - paddingBottom- (int)(2 * numRows * cellHeightPx));
+      int availableWidth=Math.max(0,width - (int)((inv.numColumns * cellWidthPx) + (inv.numColumns * gapScale * cellWidthPx)));
+      int availableHeight=Math.max(0,height - paddingTop - paddingBottom- (int)(2 * inv.numRows * cellHeightPx));
       padding.set(availableWidth / 2,paddingTop + availableHeight / 2,availableWidth / 2,paddingBottom + availableHeight / 2);
     }
  else {

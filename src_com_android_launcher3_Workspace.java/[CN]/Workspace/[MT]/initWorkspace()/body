@@ -1,7 +1,7 @@
 {
   mCurrentPage=mDefaultPage;
   LauncherAppState app=LauncherAppState.getInstance();
-  DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
+  DeviceProfile grid=mLauncher.getDeviceProfile();
   mIconCache=app.getIconCache();
   setWillNotDraw(false);
   setClipChildren(false);

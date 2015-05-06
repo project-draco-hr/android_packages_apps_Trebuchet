@@ -11,7 +11,7 @@
  else {
     if (isTablet()) {
       int width=(orientation == CellLayout.LANDSCAPE) ? Math.max(widthPx,heightPx) : Math.min(widthPx,heightPx);
-      int gap=(int)((width - 2 * edgeMarginPx - (numColumns * cellWidthPx)) / (2 * (numColumns + 1)));
+      int gap=(int)((width - 2 * edgeMarginPx - (inv.numColumns * cellWidthPx)) / (2 * (inv.numColumns + 1)));
       bounds.set(edgeMarginPx + gap,getSearchBarTopOffset(),availableWidthPx - (edgeMarginPx + gap),searchBarSpaceHeightPx);
     }
  else {

@@ -6,8 +6,4 @@
   previewImage=widget.getPreviewImage();
   initialLayout=widget.getWidgetLayout();
   resizeMode=widget.getResizeMode();
-  spanX=widget.getSpanX();
-  spanY=widget.getSpanY();
-  minSpanX=widget.getMinSpanX();
-  minSpanY=widget.getMinSpanY();
 }

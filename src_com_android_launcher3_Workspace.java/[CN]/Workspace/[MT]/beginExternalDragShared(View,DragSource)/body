@@ -1,6 +1,6 @@
 {
   LauncherAppState app=LauncherAppState.getInstance();
-  DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
+  DeviceProfile grid=mLauncher.getDeviceProfile();
   int iconSize=grid.iconSizePx;
   mLauncher.onDragStarted(child);
   AtomicInteger padding=new AtomicInteger(DRAG_BITMAP_PADDING);

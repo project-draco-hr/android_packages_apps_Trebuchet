@@ -5,8 +5,7 @@
     if (Looper.myLooper() != Looper.getMainLooper()) {
       throw new RuntimeException("FolderRingAnimator loading drawables on non-UI thread " + Thread.currentThread());
     }
-    LauncherAppState app=LauncherAppState.getInstance();
-    DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
+    DeviceProfile grid=launcher.getDeviceProfile();
     sPreviewSize=grid.folderIconSizePx;
     sPreviewPadding=res.getDimensionPixelSize(R.dimen.folder_preview_padding);
     sSharedOuterRingDrawable=res.getDrawable(R.drawable.portal_ring_outer_holo);

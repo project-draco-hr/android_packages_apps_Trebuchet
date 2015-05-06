@@ -1,7 +1,7 @@
 {
-  Resources r=mContext.getResources();
-  DeviceProfile profile=LauncherAppState.getInstance().getDynamicGrid().getDeviceProfile();
+  Resources r=mLauncher.getResources();
+  DeviceProfile profile=mLauncher.getDeviceProfile();
   if (profile.isLargeTablet || profile.isTablet) {
-    mIndent=DynamicGrid.pxFromDp(PRESET_INDENT_SIZE_TABLET,r.getDisplayMetrics());
+    mIndent=Utilities.pxFromDp(PRESET_INDENT_SIZE_TABLET,r.getDisplayMetrics());
   }
 }

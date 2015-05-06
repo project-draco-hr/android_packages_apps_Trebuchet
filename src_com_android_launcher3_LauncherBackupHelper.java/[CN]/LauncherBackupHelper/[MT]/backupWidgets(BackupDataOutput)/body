@@ -1,14 +1,7 @@
 {
-  final LauncherAppState appState=LauncherAppState.getInstanceNoCreate();
-  if (appState == null || !initializeIconCache()) {
-    Log.w(TAG,"Failed to get icon cache during restore");
-    return;
-  }
   final ContentResolver cr=mContext.getContentResolver();
-  final WidgetPreviewLoader previewLoader=appState.getWidgetCache();
+  final WidgetPreviewLoader previewLoader=mLauncherAppState.getWidgetCache();
   final int dpi=mContext.getResources().getDisplayMetrics().densityDpi;
-  final DeviceProfile profile=appState.getDynamicGrid().getDeviceProfile();
-  if (DEBUG)   Log.d(TAG,"cellWidthPx: " + profile.cellWidthPx);
   int backupWidgetCount=0;
   String where=Favorites.ITEM_TYPE + "=" + Favorites.ITEM_TYPE_APPWIDGET+ " AND "+ getUserSelectionArg();
   Cursor cursor=cr.query(Favorites.CONTENT_URI,FAVORITE_PROJECTION,where,null,null);
@@ -37,7 +30,7 @@
         if (backupWidgetCount < MAX_WIDGETS_PER_PASS) {
           if (DEBUG)           Log.d(TAG,"saving widget " + backupKey);
           UserHandleCompat user=UserHandleCompat.myUserHandle();
-          writeRowToBackup(key,packWidget(dpi,previewLoader,spanX * profile.cellWidthPx,mIconCache,provider,user),data);
+          writeRowToBackup(key,packWidget(dpi,previewLoader,mIconCache,provider,user),data);
           mKeys.add(key);
           backupWidgetCount++;
         }

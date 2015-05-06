@@ -1,6 +1,0 @@
-{
-  Rect padding=AppWidgetHostView.getDefaultPaddingForWidget(context,component,null);
-  int requiredWidth=minWidth + padding.left + padding.right;
-  int requiredHeight=minHeight + padding.top + padding.bottom;
-  return CellLayout.rectToCell(requiredWidth,requiredHeight,null);
-}

@@ -1,6 +1,5 @@
 {
-  LauncherAppState app=LauncherAppState.getInstance();
-  DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
+  DeviceProfile grid=mLauncher.getDeviceProfile();
   int widthSpecMode=MeasureSpec.getMode(widthMeasureSpec);
   int heightSpecMode=MeasureSpec.getMode(heightMeasureSpec);
   int widthSize=MeasureSpec.getSize(widthMeasureSpec);

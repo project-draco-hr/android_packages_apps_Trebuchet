@@ -23,7 +23,8 @@ synchronized (mUnusedBitmaps) {
   Bitmap preview=readFromDb(mKey,unusedBitmap,this);
   if (!isCancelled() && preview == null) {
     mVersions=getPackageVersion(mKey.componentName.getPackageName());
-    preview=generatePreview(mInfo,unusedBitmap,mPreviewWidth,mPreviewHeight);
+    Launcher launcher=(Launcher)mCaller.getContext();
+    preview=generatePreview(launcher,mInfo,unusedBitmap,mPreviewWidth,mPreviewHeight);
   }
   return preview;
 }

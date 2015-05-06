@@ -1,0 +1,15 @@
+{
+  if (mLauncherAppState != null) {
+    return;
+  }
+  if (noCreate) {
+    mLauncherAppState=LauncherAppState.getInstanceNoCreate();
+  }
+ else {
+    LauncherAppState.setApplicationContext(mContext);
+    mLauncherAppState=LauncherAppState.getInstance();
+  }
+  mIconCache=mLauncherAppState.getIconCache();
+  InvariantDeviceProfile profile=mLauncherAppState.getInvariantDeviceProfile();
+  mDeviceProfileData=initDeviceProfileData(profile);
+}

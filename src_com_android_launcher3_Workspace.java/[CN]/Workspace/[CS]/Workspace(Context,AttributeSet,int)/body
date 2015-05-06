@@ -5,11 +5,10 @@
   mLauncher=(Launcher)context;
   mStateTransitionAnimation=new WorkspaceStateTransitionAnimation(mLauncher,this);
   final Resources res=getResources();
-  mWorkspaceFadeInAdjacentScreens=LauncherAppState.getInstance().getDynamicGrid().getDeviceProfile().shouldFadeAdjacentWorkspaceScreens();
+  DeviceProfile grid=mLauncher.getDeviceProfile();
+  mWorkspaceFadeInAdjacentScreens=grid.shouldFadeAdjacentWorkspaceScreens();
   mFadeInAdjacentScreens=false;
   mWallpaperManager=WallpaperManager.getInstance(context);
-  LauncherAppState app=LauncherAppState.getInstance();
-  DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
   TypedArray a=context.obtainStyledAttributes(attrs,R.styleable.Workspace,defStyle,0);
   mSpringLoadedShrinkFactor=res.getInteger(R.integer.config_workspaceSpringLoadShrinkPercentage) / 100.0f;
   mOverviewModeShrinkFactor=grid.getOverviewModeScale();

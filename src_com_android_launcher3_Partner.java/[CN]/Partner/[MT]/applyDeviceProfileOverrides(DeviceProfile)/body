@@ -1,0 +1,22 @@
+{
+  int allAppsShortEdgeCount=-1;
+  int allAppsLongEdgeCount=-1;
+  try {
+    int resId=getResources().getIdentifier(RES_GRID_AA_SHORT_EDGE_COUNT,"integer",getPackageName());
+    if (resId > 0) {
+      allAppsShortEdgeCount=getResources().getInteger(resId);
+    }
+    resId=getResources().getIdentifier(RES_GRID_AA_LONG_EDGE_COUNT,"integer",getPackageName());
+    if (resId > 0) {
+      allAppsLongEdgeCount=getResources().getInteger(resId);
+    }
+  }
+ catch (  Resources.NotFoundException ex) {
+    Log.e(TAG,"Invalid Partner grid resource!",ex);
+    return;
+  }
+  if (allAppsShortEdgeCount > 0 && allAppsLongEdgeCount > 0) {
+    dp.allAppsShortEdgeCount=allAppsShortEdgeCount;
+    dp.allAppsLongEdgeCount=allAppsLongEdgeCount;
+  }
+}

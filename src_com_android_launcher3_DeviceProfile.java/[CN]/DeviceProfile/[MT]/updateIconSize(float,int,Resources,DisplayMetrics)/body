@@ -1,8 +1,8 @@
 {
-  iconSizePx=(int)(DynamicGrid.pxFromDp(iconSize,dm) * scale);
-  iconTextSizePx=(int)(DynamicGrid.pxFromSp(iconTextSize,dm) * scale);
+  iconSizePx=(int)(Utilities.pxFromDp(inv.iconSize,dm) * scale);
+  iconTextSizePx=(int)(Utilities.pxFromSp(inv.iconTextSize,dm) * scale);
   iconDrawablePaddingPx=drawablePadding;
-  hotseatIconSizePx=(int)(DynamicGrid.pxFromDp(hotseatIconSize,dm) * scale);
+  hotseatIconSizePx=(int)(Utilities.pxFromDp(inv.hotseatIconSize,dm) * scale);
   searchBarSpaceWidthPx=Math.min(widthPx,res.getDimensionPixelSize(R.dimen.dynamic_grid_search_bar_max_width));
   searchBarSpaceHeightPx=getSearchBarTopOffset() + res.getDimensionPixelSize(R.dimen.dynamic_grid_search_bar_height);
   Paint textPaint=new Paint();

@@ -3,17 +3,17 @@
   if (e.getAction() == KeyEvent.ACTION_UP || !consume) {
     return consume;
   }
-  LauncherAppState app=LauncherAppState.getInstance();
-  DeviceProfile profile=app.getDynamicGrid().getDeviceProfile();
+  Launcher launcher=(Launcher)v.getContext();
+  DeviceProfile profile=launcher.getDeviceProfile();
   if (DEBUG) {
     Log.v(TAG,String.format("Handle WORKSPACE ICONS keyevent=[%s] isVerticalBar=%s",KeyEvent.keyCodeToString(keyCode),profile.isVerticalBarLayout()));
   }
   ShortcutAndWidgetContainer parent=(ShortcutAndWidgetContainer)v.getParent();
   CellLayout iconLayout=(CellLayout)parent.getParent();
   final Workspace workspace=(Workspace)iconLayout.getParent();
-  final ViewGroup launcher=(ViewGroup)workspace.getParent();
-  final ViewGroup tabs=(ViewGroup)launcher.findViewById(R.id.search_drop_target_bar);
-  final Hotseat hotseat=(Hotseat)launcher.findViewById(R.id.hotseat);
+  final ViewGroup dragLayer=(ViewGroup)workspace.getParent();
+  final ViewGroup tabs=(ViewGroup)dragLayer.findViewById(R.id.search_drop_target_bar);
+  final Hotseat hotseat=(Hotseat)dragLayer.findViewById(R.id.hotseat);
   final int iconIndex=parent.indexOfChild(v);
   final int pageIndex=workspace.indexOfChild(iconLayout);
   final int pageCount=workspace.getChildCount();
@@ -37,7 +37,7 @@
  else {
     matrix=FocusLogic.createSparseMatrix(iconLayout);
   }
-  int newIconIndex=FocusLogic.handleKeyEvent(keyCode,countX,countY,matrix,iconIndex,pageIndex,pageCount);
+  int newIconIndex=FocusLogic.handleKeyEvent(keyCode,countX,countY,matrix,iconIndex,pageIndex,pageCount,profile.isLayoutRtl);
   View newIcon=null;
 switch (newIconIndex) {
 case FocusLogic.NOOP:
@@ -58,7 +58,7 @@ if (parent != null) {
 workspace.snapToPage(newPageIndex);
 iconLayout=(CellLayout)parent.getParent();
 matrix=FocusLogic.createSparseMatrix(iconLayout,iconLayout.getCountX(),row);
-newIconIndex=FocusLogic.handleKeyEvent(keyCode,countX + 1,countY,matrix,FocusLogic.PIVOT,newPageIndex,pageCount);
+newIconIndex=FocusLogic.handleKeyEvent(keyCode,countX + 1,countY,matrix,FocusLogic.PIVOT,newPageIndex,pageCount,profile.isLayoutRtl);
 newIcon=parent.getChildAt(newIconIndex);
 }
 break;
@@ -90,7 +90,7 @@ if (parent != null) {
 workspace.snapToPage(newPageIndex);
 iconLayout=(CellLayout)parent.getParent();
 matrix=FocusLogic.createSparseMatrix(iconLayout,-1,row);
-newIconIndex=FocusLogic.handleKeyEvent(keyCode,countX + 1,countY,matrix,FocusLogic.PIVOT,newPageIndex,pageCount);
+newIconIndex=FocusLogic.handleKeyEvent(keyCode,countX + 1,countY,matrix,FocusLogic.PIVOT,newPageIndex,pageCount,profile.isLayoutRtl);
 newIcon=parent.getChildAt(newIconIndex);
 }
 break;

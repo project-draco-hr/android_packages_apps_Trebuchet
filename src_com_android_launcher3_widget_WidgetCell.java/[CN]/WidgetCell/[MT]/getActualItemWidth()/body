@@ -1,6 +1,6 @@
 {
   ItemInfo info=(ItemInfo)getTag();
   int[] size=getPreviewSize();
-  int cellWidth=LauncherAppState.getInstance().getDynamicGrid().getDeviceProfile().cellWidthPx;
+  int cellWidth=mLauncher.getDeviceProfile().cellWidthPx;
   return Math.min(size[0],info.spanX * cellWidth);
 }

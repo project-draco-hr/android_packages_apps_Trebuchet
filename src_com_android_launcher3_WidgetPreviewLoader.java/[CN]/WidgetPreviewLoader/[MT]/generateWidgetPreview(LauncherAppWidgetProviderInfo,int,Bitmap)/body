@@ -1,4 +1,0 @@
-{
-  int maxWidth=Math.min(previewWidth,info.spanX * LauncherAppState.getInstance().getDynamicGrid().getDeviceProfile().cellWidthPx);
-  return generateWidgetPreview(info,maxWidth,preview,null);
-}

@@ -4,11 +4,5 @@
   p.setDataPosition(0);
   LauncherAppWidgetProviderInfo lawpi=new LauncherAppWidgetProviderInfo(p);
   p.recycle();
-  int[] minResizeSpan=Launcher.getMinSpanForWidget(context,lawpi);
-  int[] span=Launcher.getSpanForWidget(context,lawpi);
-  lawpi.spanX=span[0];
-  lawpi.spanY=span[1];
-  lawpi.minSpanX=minResizeSpan[0];
-  lawpi.minSpanY=minResizeSpan[1];
   return lawpi;
 }

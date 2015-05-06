@@ -3,7 +3,7 @@
   mView.setAdapter(mAdapter);
   mView.setLayoutManager(new LinearLayoutManager(getContext()){
     @Override protected int getExtraLayoutSpace(    State state){
-      DeviceProfile grid=LauncherAppState.getInstance().getDynamicGrid().getDeviceProfile();
+      DeviceProfile grid=mLauncher.getDeviceProfile();
       return super.getExtraLayoutSpace(state) + grid.availableHeightPx * PRELOAD_SCREEN_HEIGHT_MULTIPLE;
     }
   }

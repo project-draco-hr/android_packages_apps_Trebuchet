@@ -1,6 +1,5 @@
 {
   mLayoutInflater=LayoutInflater.from(context);
-  mContext=context;
   mIconClickListener=iconClickListener;
   mIconLongClickListener=iconLongClickListener;
   mLauncher=launcher;

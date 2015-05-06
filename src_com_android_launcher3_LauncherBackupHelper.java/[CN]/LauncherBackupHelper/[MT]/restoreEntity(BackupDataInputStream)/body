@@ -2,9 +2,7 @@
   if (!restoreSuccessful) {
     return;
   }
-  if (!initializeIconCache()) {
-    mIconCache=new IconCache(mContext);
-  }
+  lazyInitAppState(false);
   int dataSize=data.size();
   if (mBuffer.length < dataSize) {
     mBuffer=new byte[dataSize];

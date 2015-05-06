@@ -1,12 +1,12 @@
 {
   LauncherAppState app=LauncherAppState.getInstance();
-  DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
+  DeviceProfile grid=launcher.getDeviceProfile();
   Display display=launcher.getWindowManager().getDefaultDisplay();
   Point smallestSize=new Point();
   Point largestSize=new Point();
   display.getCurrentSizeRange(smallestSize,largestSize);
-  int countX=(int)grid.numColumns;
-  int countY=(int)grid.numRows;
+  int countX=(int)grid.inv.numColumns;
+  int countY=(int)grid.inv.numRows;
   if (orientation == CellLayout.LANDSCAPE) {
     if (mLandscapeCellLayoutMetrics == null) {
       Rect padding=grid.getWorkspacePadding(CellLayout.LANDSCAPE);

@@ -1,6 +1,6 @@
 {
   Collections.sort(mApps,mAppNameComparator.getAppInfoComparator());
-  Locale curLocale=mContext.getResources().getConfiguration().locale;
+  Locale curLocale=mLauncher.getResources().getConfiguration().locale;
   TreeMap<String,ArrayList<AppInfo>> sectionMap=null;
   boolean localeRequiresSectionSorting=curLocale.equals(Locale.SIMPLIFIED_CHINESE);
   if (localeRequiresSectionSorting) {

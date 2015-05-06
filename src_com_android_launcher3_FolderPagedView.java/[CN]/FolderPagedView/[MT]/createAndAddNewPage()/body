@@ -1,5 +1,5 @@
 {
-  DeviceProfile grid=LauncherAppState.getInstance().getDynamicGrid().getDeviceProfile();
+  DeviceProfile grid=((Launcher)getContext()).getDeviceProfile();
   CellLayout page=new CellLayout(getContext());
   page.setCellDimensions(grid.folderCellWidthPx,grid.folderCellHeightPx);
   page.getShortcutsAndWidgets().setMotionEventSplittingEnabled(false);

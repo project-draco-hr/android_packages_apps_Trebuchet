@@ -1,8 +1,8 @@
 {
   LauncherAppState app=LauncherAppState.getInstance();
-  DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
-  final int xCount=(int)grid.numColumns;
-  final int yCount=(int)grid.numRows;
+  InvariantDeviceProfile profile=app.getInvariantDeviceProfile();
+  final int xCount=(int)profile.numColumns;
+  final int yCount=(int)profile.numRows;
   boolean[][] occupied=new boolean[xCount][yCount];
   if (occupiedPos != null) {
     for (    ItemInfo r : occupiedPos) {

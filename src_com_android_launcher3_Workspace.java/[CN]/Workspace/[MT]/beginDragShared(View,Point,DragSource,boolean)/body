@@ -10,8 +10,7 @@
   float scale=mLauncher.getDragLayer().getLocationInDragLayer(child,mTempXY);
   int dragLayerX=Math.round(mTempXY[0] - (bmpWidth - scale * child.getWidth()) / 2);
   int dragLayerY=Math.round(mTempXY[1] - (bmpHeight - scale * bmpHeight) / 2 - padding.get() / 2);
-  LauncherAppState app=LauncherAppState.getInstance();
-  DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
+  DeviceProfile grid=mLauncher.getDeviceProfile();
   Point dragVisualizeOffset=null;
   Rect dragRect=null;
   if (child instanceof BubbleTextView) {

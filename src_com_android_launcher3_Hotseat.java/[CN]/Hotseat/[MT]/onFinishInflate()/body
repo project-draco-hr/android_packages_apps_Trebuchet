@@ -1,14 +1,13 @@
 {
   super.onFinishInflate();
-  LauncherAppState app=LauncherAppState.getInstance();
-  DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
-  mAllAppsButtonRank=grid.hotseatAllAppsRank;
+  DeviceProfile grid=mLauncher.getDeviceProfile();
+  mAllAppsButtonRank=grid.inv.hotseatAllAppsRank;
   mContent=(CellLayout)findViewById(R.id.layout);
   if (grid.isLandscape && !grid.isLargeTablet()) {
-    mContent.setGridSize(1,(int)grid.numHotseatIcons);
+    mContent.setGridSize(1,(int)grid.inv.numHotseatIcons);
   }
  else {
-    mContent.setGridSize((int)grid.numHotseatIcons,1);
+    mContent.setGridSize((int)grid.inv.numHotseatIcons,1);
   }
   mContent.setIsHotseat(true);
   resetLayout();

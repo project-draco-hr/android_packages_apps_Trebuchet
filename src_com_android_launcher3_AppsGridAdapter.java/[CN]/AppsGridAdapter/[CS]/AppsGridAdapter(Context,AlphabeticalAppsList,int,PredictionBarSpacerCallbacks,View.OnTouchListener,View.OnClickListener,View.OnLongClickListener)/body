@@ -7,7 +7,7 @@
   mGridSizer=new GridSpanSizer();
   mGridLayoutMgr=new GridLayoutManager(context,appsPerRow,GridLayoutManager.VERTICAL,false);
   mGridLayoutMgr.setSpanSizeLookup(mGridSizer);
-  mItemDecoration=new GridItemDecoration();
+  mItemDecoration=new GridItemDecoration(context);
   mLayoutInflater=LayoutInflater.from(context);
   mTouchListener=touchListener;
   mIconClickListener=iconClickListener;
@@ -20,7 +20,7 @@
   mSectionTextPaint.setColor(res.getColor(R.color.apps_view_section_text_color));
   mSectionTextPaint.setAntiAlias(true);
   mPredictedAppsDividerPaint=new Paint();
-  mPredictedAppsDividerPaint.setStrokeWidth(DynamicGrid.pxFromDp(1f,res.getDisplayMetrics()));
+  mPredictedAppsDividerPaint.setStrokeWidth(Utilities.pxFromDp(1f,res.getDisplayMetrics()));
   mPredictedAppsDividerPaint.setColor(0x1E000000);
   mPredictedAppsDividerPaint.setAntiAlias(true);
 }

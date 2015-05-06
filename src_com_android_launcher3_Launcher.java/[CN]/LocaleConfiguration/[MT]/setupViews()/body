@@ -11,7 +11,6 @@
   mDragLayer.setup(this,dragController);
   mHotseat=(Hotseat)findViewById(R.id.hotseat);
   if (mHotseat != null) {
-    mHotseat.setup(this);
     mHotseat.setOnLongClickListener(this);
   }
   mOverviewPanel=(ViewGroup)findViewById(R.id.overview_panel);

@@ -8,9 +8,9 @@
   final LauncherAppsCompat launcherApps=LauncherAppsCompat.getInstance(context);
   final boolean isSdCardReady=context.registerReceiver(null,new IntentFilter(StartupReceiver.SYSTEM_READY)) != null;
   LauncherAppState app=LauncherAppState.getInstance();
-  DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
-  int countX=(int)grid.numColumns;
-  int countY=(int)grid.numRows;
+  InvariantDeviceProfile profile=app.getInvariantDeviceProfile();
+  int countX=(int)profile.numColumns;
+  int countY=(int)profile.numRows;
   if ((mFlags & LOADER_FLAG_CLEAR_WORKSPACE) != 0) {
     Launcher.addDumpLog(TAG,"loadWorkspace: resetting launcher database",true);
     LauncherAppState.getLauncherProvider().deleteDatabase();
@@ -313,11 +313,6 @@ itemsToRemove.add(id);
  else {
 if (isProviderReady) {
 appWidgetInfo=new LauncherAppWidgetInfo(appWidgetId,provider.provider);
-if (!customWidget) {
-int[] minSpan=Launcher.getMinSpanForWidget(context,provider);
-appWidgetInfo.minSpanX=minSpan[0];
-appWidgetInfo.minSpanY=minSpan[1];
-}
 int status=restoreStatus;
 if (!wasProviderReady) {
 if (isIdValid) {
@@ -352,11 +347,6 @@ appWidgetInfo.cellX=c.getInt(cellXIndex);
 appWidgetInfo.cellY=c.getInt(cellYIndex);
 appWidgetInfo.spanX=c.getInt(spanXIndex);
 appWidgetInfo.spanY=c.getInt(spanYIndex);
-if (!customWidget) {
-int[] minSpan=Launcher.getMinSpanForWidget(context,provider);
-appWidgetInfo.minSpanX=minSpan[0];
-appWidgetInfo.minSpanY=minSpan[1];
-}
 container=c.getInt(containerIndex);
 if (container != LauncherSettings.Favorites.CONTAINER_DESKTOP && container != LauncherSettings.Favorites.CONTAINER_HOTSEAT) {
 Log.e(TAG,"Widget found where container != " + "CONTAINER_DESKTOP nor CONTAINER_HOTSEAT - ignoring!");
