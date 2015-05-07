@@ -25,4 +25,5 @@
  else {
     mHandler.post(r);
   }
+  loadAndBindWidgetsAndShortcuts(mApp.getContext(),tryGetCallbacks(oldCallbacks),false);
 }
