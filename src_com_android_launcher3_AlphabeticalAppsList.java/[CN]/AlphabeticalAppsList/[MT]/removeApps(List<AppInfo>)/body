@@ -3,8 +3,8 @@
     int removeIndex=findAppByComponent(mApps,info);
     if (removeIndex != -1) {
       mApps.remove(removeIndex);
-      onAppsUpdated();
-      mAdapter.notifyDataSetChanged();
     }
   }
+  onAppsUpdated();
+  mAdapter.notifyDataSetChanged();
 }
