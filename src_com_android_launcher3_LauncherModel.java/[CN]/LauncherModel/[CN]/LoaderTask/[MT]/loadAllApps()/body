@@ -39,7 +39,6 @@
       final Callbacks callbacks=tryGetCallbacks(oldCallbacks);
       if (callbacks != null) {
         callbacks.bindAllApplications(added);
-        loadAndBindWidgetsAndShortcuts(mApp.getContext(),callbacks,true);
         if (DEBUG_LOADERS) {
           Log.d(TAG,"bound " + added.size() + " apps in "+ (SystemClock.uptimeMillis() - bindTime)+ "ms");
         }
@@ -51,6 +50,7 @@
   }
 );
   ManagedProfileHeuristic.processAllUsers(profiles,mContext);
+  loadAndBindWidgetsAndShortcuts(mApp.getContext(),tryGetCallbacks(oldCallbacks),true);
   if (DEBUG_LOADERS) {
     Log.d(TAG,"Icons processed in " + (SystemClock.uptimeMillis() - loadTime) + "ms");
   }
