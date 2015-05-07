@@ -1,9 +1,7 @@
 {
   super(context,attrs,defStyle);
-  mContentIsRefreshable=false;
   mOutlineHelper=HolographicOutlineHelper.obtain(context);
   mDragEnforcer=new DropTarget.DragEnforcer(context);
-  setDataIsReady();
   mLauncher=(Launcher)context;
   mStateTransitionAnimation=new WorkspaceStateTransitionAnimation(mLauncher,this);
   final Resources res=getResources();

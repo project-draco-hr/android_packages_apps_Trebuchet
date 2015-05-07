@@ -13,10 +13,6 @@
     mCurrentPage=validateNewPage(mNextPage);
     mNextPage=INVALID_PAGE;
     notifyPageSwitchListener();
-    if (mDeferLoadAssociatedPagesUntilScrollCompletes) {
-      loadAssociatedPages(mCurrentPage);
-      mDeferLoadAssociatedPagesUntilScrollCompletes=false;
-    }
     if (mTouchState == TOUCH_STATE_REST) {
       pageEndMoving();
     }

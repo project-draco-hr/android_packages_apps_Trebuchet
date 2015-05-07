@@ -26,8 +26,7 @@
     resetAddInfo();
   }
   final boolean inHotseat=isHotseatLayout(v);
-  boolean allowLongPress=inHotseat || mWorkspace.allowLongPress();
-  if (allowLongPress && !mDragController.isDragging()) {
+  if (!mDragController.isDragging()) {
     if (itemUnderLongClick == null) {
       mWorkspace.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS,HapticFeedbackConstants.FLAG_IGNORE_VIEW_SETTING);
       if (mWorkspace.isInOverviewMode()) {

@@ -1,7 +1,0 @@
-{
-  super(context);
-  mFocusHandlerView=new FocusIndicatorView(context);
-  addView(mFocusHandlerView,0);
-  mFocusHandlerView.getLayoutParams().width=FocusIndicatorView.DEFAULT_LAYOUT_SIZE;
-  mFocusHandlerView.getLayoutParams().height=FocusIndicatorView.DEFAULT_LAYOUT_SIZE;
-}
