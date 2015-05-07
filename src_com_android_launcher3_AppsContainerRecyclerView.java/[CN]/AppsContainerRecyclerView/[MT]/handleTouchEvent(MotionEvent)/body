@@ -7,7 +7,9 @@ switch (action) {
 case MotionEvent.ACTION_DOWN:
     mDownX=mLastX=x;
   mDownY=mLastY=y;
-stopScroll();
+if ((Math.abs(mDy) < mDeltaThreshold && getScrollState() != RecyclerView.SCROLL_STATE_IDLE)) {
+  stopScroll();
+}
 break;
 case MotionEvent.ACTION_MOVE:
 if (!mDraggingFastScroller && isPointNearScrollbar(mDownX,mDownY) && Math.abs(y - mDownY) > config.getScaledTouchSlop()) {
