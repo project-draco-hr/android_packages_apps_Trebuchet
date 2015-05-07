@@ -34,6 +34,10 @@
     setTranslationY(transY);
     PropertyValuesHolder tx=PropertyValuesHolder.ofFloat("translationX",transX,0);
     PropertyValuesHolder ty=PropertyValuesHolder.ofFloat("translationY",transY,0);
+    Animator drift=LauncherAnimUtils.ofPropertyValuesHolder(this,tx,ty);
+    drift.setDuration(mMaterialExpandDuration);
+    drift.setStartDelay(mMaterialExpandStagger);
+    drift.setInterpolator(new LogDecelerateInterpolator(100,0));
     int rx=(int)Math.max(Math.max(width - getPivotX(),0),getPivotX());
     int ry=(int)Math.max(Math.max(height - getPivotY(),0),getPivotY());
     float radius=(float)Math.hypot(rx,ry);
@@ -51,18 +55,16 @@
     textAlpha.setDuration(mMaterialExpandDuration);
     textAlpha.setStartDelay(mMaterialExpandStagger);
     textAlpha.setInterpolator(new AccelerateInterpolator(1.5f));
-    Animator drift=LauncherAnimUtils.ofPropertyValuesHolder(this,tx,ty);
-    drift.setDuration(mMaterialExpandDuration);
-    drift.setStartDelay(mMaterialExpandStagger);
-    drift.setInterpolator(new LogDecelerateInterpolator(60,0));
     anim.play(drift);
     anim.play(iconsAlpha);
     anim.play(textAlpha);
     anim.play(reveal);
     openFolderAnim=anim;
     mContentWrapper.setLayerType(LAYER_TYPE_HARDWARE,null);
+    mFooter.setLayerType(LAYER_TYPE_HARDWARE,null);
     onCompleteRunnable=new Runnable(){
       @Override public void run(){
+        mContentWrapper.setLayerType(LAYER_TYPE_NONE,null);
         mContentWrapper.setLayerType(LAYER_TYPE_NONE,null);
       }
     }
