@@ -1,6 +1,0 @@
-{
-  int childCount=getChildCount();
-  for (int j=0; j < childCount; ++j) {
-    getChildAt(j).setOnKeyListener(null);
-  }
-}
