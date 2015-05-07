@@ -1,0 +1,7 @@
+{
+  log("Sending tracking event to handler: " + trackingEvent);
+  Message msg=new Message();
+  msg.what=MSG_STORE_EVENT;
+  msg.obj=trackingEvent;
+  sWriteHandler.sendMessage(msg);
+}

@@ -1,0 +1,16 @@
+{
+  if (TextUtils.isEmpty(trackingId)) {
+    throw new IllegalArgumentException("'trackingId' cannot be null or empty!");
+  }
+  if (TextUtils.isEmpty(category)) {
+    throw new IllegalArgumentException("'category' cannot be null or empty!");
+  }
+  if (TextUtils.isEmpty(action)) {
+    throw new IllegalArgumentException("'action' cannot be null or empty!");
+  }
+  Bundle bundle=new Bundle();
+  bundle.putString(KEY_EVENT_CATEGORY,category);
+  bundle.putString(KEY_EVENT_ACTION,action);
+  bundle.putString(KEY_TRACKING_ID,trackingId);
+  return bundle;
+}

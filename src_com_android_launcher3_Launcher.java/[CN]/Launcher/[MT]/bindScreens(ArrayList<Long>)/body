@@ -7,4 +7,6 @@
     mWorkspace.createCustomContentContainer();
     populateCustomContentContainer();
   }
+  LauncherModel.saveWidgetCount(this);
+  LauncherModel.savePageCount(this);
 }

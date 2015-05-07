@@ -1,4 +1,7 @@
 {
   removeWidgetToAutoAdvance(launcherInfo.hostView);
   launcherInfo.hostView=null;
+  AppWidgetProviderInfo info=mAppWidgetManager.getAppWidgetInfo(launcherInfo.appWidgetId);
+  String packageName=info.providerInfo.packageName;
+  LauncherApplication.getLauncherStats().sendWidgetRemoveEvent(packageName);
 }

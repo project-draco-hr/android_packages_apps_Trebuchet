@@ -1,0 +1,5 @@
+{
+  int pageCount=LauncherModel.sBgWorkspaceScreens.size();
+  SharedPreferences prefs=context.getSharedPreferences(LauncherAppState.getSharedPreferencesKey(),Context.MODE_PRIVATE);
+  prefs.edit().putInt(AggregationIntentService.PREF_KEY_PAGE_COUNT,pageCount).apply();
+}

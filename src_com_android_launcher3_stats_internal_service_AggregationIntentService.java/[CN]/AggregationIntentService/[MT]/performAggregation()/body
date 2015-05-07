@@ -1,0 +1,22 @@
+{
+  for (  TrackingEvent.Category category : TrackingEvent.Category.values()) {
+    List<TrackingEvent> eventList=mDatabaseHelper.getTrackingEventsByCategory(mInstanceId,category);
+    Logger.logd(TAG,"Event list size: " + eventList.size());
+    if (eventList.size() < 1) {
+      continue;
+    }
+    for (    ITrackingAction action : TRACKED_ACTIONS) {
+      try {
+        for (        Bundle bundle : action.createTrackingBundles(TRACKING_ID,category,eventList)) {
+          performTrackingCall(bundle);
+        }
+      }
+ catch (      NullPointerException e) {
+        Log.e(TAG,"NPE fetching bundle list!",e);
+      }
+catch (      IllegalArgumentException e) {
+        Log.e(TAG,"Illegal argument!",e);
+      }
+    }
+  }
+}

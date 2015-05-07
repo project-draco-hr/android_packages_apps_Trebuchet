@@ -30,6 +30,7 @@
 synchronized (sBgLock) {
         sBgWorkspaceScreens.clear();
         sBgWorkspaceScreens.addAll(screensCopy);
+        savePageCount(context);
       }
     }
   }

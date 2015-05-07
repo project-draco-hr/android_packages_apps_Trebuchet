@@ -1,0 +1,10 @@
+{
+  if (trackingEvent == null) {
+    throw new IllegalArgumentException("'trackingEvent' cannot be null!");
+  }
+  Logger.logd(TAG,"Event written to database: " + trackingEvent);
+  SQLiteDatabase db=getWritableDatabase();
+  ContentValues contentValues=trackingEvent.toContentValues();
+  db.insert(TrackingEventContract.EVENT_TABLE_NAME,null,contentValues);
+  db.close();
+}

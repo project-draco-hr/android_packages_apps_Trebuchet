@@ -1,0 +1,5 @@
+{
+  TrackingEvent trackingEvent=new TrackingEvent(TrackingEvent.Category.WALLPAPER_CHANGE);
+  trackingEvent.setMetaData(TrackingEvent.KEY_ORIGIN,origin);
+  sendStoreEventMessage(trackingEvent);
+}

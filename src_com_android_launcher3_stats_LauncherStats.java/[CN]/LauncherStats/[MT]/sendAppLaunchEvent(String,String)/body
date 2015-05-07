@@ -1,0 +1,12 @@
+{
+  if (TextUtils.isEmpty(origin)) {
+    throw new IllegalArgumentException("'origin' cannot be null!");
+  }
+  if (TextUtils.isEmpty(pkg)) {
+    throw new IllegalArgumentException("'pkg' cannot be null!");
+  }
+  TrackingEvent trackingEvent=new TrackingEvent(TrackingEvent.Category.APP_LAUNCH);
+  trackingEvent.setMetaData(TrackingEvent.KEY_ORIGIN,origin);
+  trackingEvent.setMetaData(TrackingEvent.KEY_PACKAGE,pkg);
+  sendStoreEventMessage(trackingEvent);
+}

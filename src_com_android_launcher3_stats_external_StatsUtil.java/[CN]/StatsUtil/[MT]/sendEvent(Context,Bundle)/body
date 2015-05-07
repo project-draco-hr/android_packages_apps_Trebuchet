@@ -1,0 +1,28 @@
+{
+  if (context == null) {
+    throw new IllegalArgumentException("'context' cannot be null!");
+  }
+  if (trackingBundle == null) {
+    throw new IllegalArgumentException("'trackingBundle' cannot be null!");
+  }
+  if (!isStatsCollectionEnabled(context)) {
+    Logger.logd(TAG,"Stats collection: DISABLED!");
+    return;
+  }
+  Logger.logd(TAG,"Stats collection: ENABLED!");
+  Intent newIntent=new Intent(ANALYTIC_INTENT);
+  if (!trackingBundle.containsKey(KEY_TRACKING_ID)) {
+    Logger.logd(TAG,"No tracking id in bundle");
+    return;
+  }
+ else {
+    if (trackingBundle.containsKey(TrackingBundle.KEY_EVENT_CATEGORY) && trackingBundle.containsKey(TrackingBundle.KEY_EVENT_ACTION)) {
+      Logger.logd(TAG,trackingBundle.toString());
+      newIntent.putExtras(trackingBundle);
+      context.sendBroadcast(newIntent);
+    }
+ else {
+      Logger.logd(TAG,"Not a valid tracking bundle");
+    }
+  }
+}

@@ -13,5 +13,7 @@
 ;
     completeAddAppWidget(appWidgetId,info.container,info.screenId,boundWidget,appWidgetInfo);
     mWorkspace.removeExtraEmptyScreenDelayed(true,onComplete,delay,false);
+    String packageName=appWidgetInfo.providerInfo.packageName;
+    LauncherApplication.getLauncherStats().sendWidgetAddEvent(packageName);
   }
 }

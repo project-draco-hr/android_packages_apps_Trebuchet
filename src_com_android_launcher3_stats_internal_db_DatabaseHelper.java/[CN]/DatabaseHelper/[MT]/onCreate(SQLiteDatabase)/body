@@ -1,0 +1,3 @@
+{
+  db.execSQL(TrackingEventContract.CREATE_EVENT_TABLE);
+}

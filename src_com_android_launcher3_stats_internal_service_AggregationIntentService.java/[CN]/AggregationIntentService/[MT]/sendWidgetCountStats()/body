@@ -1,0 +1,9 @@
+{
+  int widgetCount=mPrefs.getInt(PREF_KEY_WIDGET_COUNT,INVALID_COUNT);
+  if (widgetCount == INVALID_COUNT) {
+    return;
+  }
+  Bundle bundle=TrackingBundle.createTrackingBundle(TRACKING_ID,TrackingEvent.Category.WIDGET.name(),"count");
+  bundle.putString(TrackingEvent.KEY_VALUE,String.valueOf(widgetCount));
+  StatsUtil.sendEvent(this,bundle);
+}

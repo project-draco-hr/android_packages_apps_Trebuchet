@@ -1,0 +1,11 @@
+{
+  if (TextUtils.isEmpty(tag)) {
+    throw new IllegalArgumentException("'tag' cannot be empty!");
+  }
+  if (TextUtils.isEmpty(msg)) {
+    throw new IllegalArgumentException("'msg' cannot be empty!");
+  }
+  if (isDebugging()) {
+    Log.d(TAG,tag + " [ " + msg+ " ]");
+  }
+}

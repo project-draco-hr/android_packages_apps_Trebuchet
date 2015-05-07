@@ -1,0 +1,4 @@
+{
+  Bundle bundle=TrackingBundle.createTrackingBundle(trackingId,mCategory.name(),action.toString());
+  return bundle;
+}

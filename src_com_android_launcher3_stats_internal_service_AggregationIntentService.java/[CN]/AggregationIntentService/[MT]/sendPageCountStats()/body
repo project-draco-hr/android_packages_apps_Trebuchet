@@ -1,0 +1,9 @@
+{
+  int pageCount=mPrefs.getInt(PREF_KEY_PAGE_COUNT,INVALID_COUNT);
+  if (pageCount == INVALID_COUNT) {
+    return;
+  }
+  Bundle bundle=TrackingBundle.createTrackingBundle(TRACKING_ID,TrackingEvent.Category.HOMESCREEN_PAGE.name(),"count");
+  bundle.putString(TrackingEvent.KEY_VALUE,String.valueOf(pageCount));
+  StatsUtil.sendEvent(this,bundle);
+}

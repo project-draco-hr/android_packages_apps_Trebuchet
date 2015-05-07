@@ -1,0 +1,9 @@
+{
+  log("Handling store event: " + trackingEvent);
+  if (trackingEvent != null) {
+    sDatabaseHelper.writeEvent(trackingEvent);
+  }
+ else {
+    loge("Tracking event was null!");
+  }
+}

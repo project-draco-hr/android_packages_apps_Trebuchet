@@ -1,0 +1,6 @@
+{
+  if (category == null) {
+    throw new IllegalArgumentException("'category' cannot be null or empty!");
+  }
+  mCategory=category;
+}

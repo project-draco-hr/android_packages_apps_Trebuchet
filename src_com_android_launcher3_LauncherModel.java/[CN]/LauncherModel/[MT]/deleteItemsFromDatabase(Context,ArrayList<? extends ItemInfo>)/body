@@ -23,6 +23,7 @@ case LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT:
   break;
 case LauncherSettings.Favorites.ITEM_TYPE_APPWIDGET:
 sBgAppWidgets.remove((LauncherAppWidgetInfo)item);
+saveWidgetCount(context);
 break;
 }
 sBgItemsIdMap.remove(item.id);

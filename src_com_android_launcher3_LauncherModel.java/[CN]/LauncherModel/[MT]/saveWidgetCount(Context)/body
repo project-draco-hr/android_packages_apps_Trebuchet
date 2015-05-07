@@ -1,0 +1,5 @@
+{
+  int widgetCount=LauncherModel.sBgAppWidgets.size();
+  SharedPreferences prefs=context.getSharedPreferences(LauncherAppState.getSharedPreferencesKey(),Context.MODE_PRIVATE);
+  prefs.edit().putInt(AggregationIntentService.PREF_KEY_WIDGET_COUNT,widgetCount).apply();
+}

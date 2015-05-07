@@ -1,0 +1,15 @@
+{
+  if (!isTrebuchetDefaultLauncher()) {
+    unscheduleService();
+  }
+  String action=intent.getAction();
+  if (ACTION_AGGREGATE_AND_TRACK.equals(action)) {
+    mPrefs=getSharedPreferences(LauncherAppState.getSharedPreferencesKey(),Context.MODE_PRIVATE);
+    mPrefs.edit().putLong(KEY_LAST_TIME_RAN,System.currentTimeMillis()).apply();
+    mInstanceId=(int)System.currentTimeMillis();
+    mDatabaseHelper=DatabaseHelper.createInstance(this);
+    performAggregation();
+    deleteTrackingEventsForInstance();
+    handleNonEventMetrics();
+  }
+}

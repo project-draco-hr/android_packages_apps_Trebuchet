@@ -1,0 +1,5 @@
+{
+  super.onCreate();
+  sLauncherStats=LauncherStats.createInstance(this);
+  AggregationIntentService.scheduleService(this);
+}

@@ -1,0 +1,8 @@
+{
+  if (TextUtils.isEmpty(msg)) {
+    throw new IllegalArgumentException("'msg' cannot be null or empty!");
+  }
+  if (DEBUG) {
+    Log.d(TAG,msg);
+  }
+}

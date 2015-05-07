@@ -37,7 +37,8 @@ case LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT:
       break;
 case LauncherSettings.Favorites.ITEM_TYPE_APPWIDGET:
     sBgAppWidgets.add((LauncherAppWidgetInfo)item);
-  break;
+  saveWidgetCount(context);
+break;
 }
 }
 }

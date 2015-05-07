@@ -1,0 +1,5 @@
+{
+  TrackingEvent trackingEvent=new TrackingEvent(TrackingEvent.Category.SETTINGS_OPEN);
+  trackingEvent.setMetaData(TrackingEvent.KEY_ORIGIN,origin);
+  sendStoreEventMessage(trackingEvent);
+}

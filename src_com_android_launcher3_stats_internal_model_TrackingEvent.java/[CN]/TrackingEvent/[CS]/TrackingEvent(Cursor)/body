@@ -1,0 +1,20 @@
+{
+  if (cursor == null) {
+    throw new IllegalArgumentException("'cursor' cannot be null!");
+  }
+  mCategory=Category.valueOf(cursor.getString(cursor.getColumnIndex(TrackingEventContract.EVENT_COLUMN_CATEGORY)));
+  String metadata=cursor.getString(cursor.getColumnIndex(TrackingEventContract.EVENT_COLUMN_METADATA));
+  if (!TextUtils.isEmpty(metadata)) {
+    String[] parts=metadata.split(",");
+    for (    String part : parts) {
+      try {
+        String key=part.split("=")[0];
+        String val=part.split("=")[1];
+        mMetaData.put(key,val);
+      }
+ catch (      IndexOutOfBoundsException e) {
+        Log.w(TAG,e.getMessage(),e);
+      }
+    }
+  }
+}

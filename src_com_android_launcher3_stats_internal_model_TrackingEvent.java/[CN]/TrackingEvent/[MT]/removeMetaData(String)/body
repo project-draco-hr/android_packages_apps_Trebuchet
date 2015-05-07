@@ -1,0 +1,9 @@
+{
+  if (TextUtils.isEmpty(key)) {
+    throw new IllegalArgumentException("'key' cannot be null or empty!");
+  }
+  if (mMetaData.containsKey(key)) {
+    return mMetaData.remove(key);
+  }
+  return null;
+}

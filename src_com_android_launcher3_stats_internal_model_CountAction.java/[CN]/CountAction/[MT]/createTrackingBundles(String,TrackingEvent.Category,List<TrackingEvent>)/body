@@ -1,0 +1,22 @@
+{
+  Map<String,List<TrackingEvent>> eventPackageMap=new HashMap<String,List<TrackingEvent>>();
+  for (  TrackingEvent event : eventList) {
+    String pkg=event.getMetaData(TrackingEvent.KEY_PACKAGE);
+    pkg=(TextUtils.isEmpty(pkg)) ? trackingId : pkg;
+    if (!eventPackageMap.containsKey(pkg)) {
+      eventPackageMap.put(pkg,new ArrayList<TrackingEvent>());
+    }
+    eventPackageMap.get(pkg).add(event);
+  }
+  List<Bundle> bundleList=new ArrayList<Bundle>();
+  for (  Map.Entry<String,List<TrackingEvent>> entry : eventPackageMap.entrySet()) {
+    Bundle bundle=TrackingBundle.createTrackingBundle(trackingId,category.name(),TRACKING_ACTION);
+    bundle.putInt(TrackingBundle.KEY_METADATA_VALUE,entry.getValue().size());
+    String pkg=entry.getKey();
+    if (!pkg.equals(trackingId)) {
+      bundle.putString(TrackingBundle.KEY_METADATA_PACKAGE,pkg);
+    }
+    bundleList.add(bundle);
+  }
+  return bundleList;
+}

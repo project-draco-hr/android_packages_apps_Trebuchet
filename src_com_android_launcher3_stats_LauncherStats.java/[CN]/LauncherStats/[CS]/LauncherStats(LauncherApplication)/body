@@ -1,0 +1,9 @@
+{
+  if (application == null) {
+    throw new IllegalArgumentException("'application' cannot be null!");
+  }
+  mApplication=application;
+  sDatabaseHelper=new DatabaseHelper(application);
+  sHandlerThread.start();
+  sWriteHandler=new WriteHandler();
+}

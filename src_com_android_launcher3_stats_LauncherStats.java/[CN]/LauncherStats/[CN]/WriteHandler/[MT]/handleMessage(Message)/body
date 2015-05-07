@@ -1,0 +1,10 @@
+{
+  log("Handling message: " + msg.what);
+switch (msg.what) {
+case MSG_STORE_EVENT:
+    handleStoreEvent((TrackingEvent)msg.obj);
+  break;
+default :
+super.handleMessage(msg);
+}
+}

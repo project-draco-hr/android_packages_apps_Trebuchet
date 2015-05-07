@@ -1,0 +1,15 @@
+{
+  ContentValues contentValues=new ContentValues();
+  contentValues.put(TrackingEventContract.EVENT_COLUMN_CATEGORY,mCategory.name());
+  StringBuilder sb=new StringBuilder();
+  for (  String key : mMetaData.keySet()) {
+    sb.append(key).append("=").append(mMetaData.get(key)).append(",");
+  }
+  if (sb.length() > 0) {
+    String metadata=sb.toString();
+    metadata=metadata.substring(0,metadata.length() - 1);
+    Logger.logd(TAG,"MetaData: " + metadata);
+    contentValues.put(TrackingEventContract.EVENT_COLUMN_METADATA,metadata);
+  }
+  return contentValues;
+}

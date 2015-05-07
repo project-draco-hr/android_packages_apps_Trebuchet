@@ -1,0 +1,8 @@
+{
+  if (TextUtils.isEmpty(pkg)) {
+    throw new IllegalArgumentException("'pkg' cannot be null!");
+  }
+  TrackingEvent trackingEvent=new TrackingEvent(TrackingEvent.Category.WIDGET_REMOVE);
+  trackingEvent.setMetaData(TrackingEvent.KEY_PACKAGE,pkg);
+  sendStoreEventMessage(trackingEvent);
+}

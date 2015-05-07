@@ -1,0 +1,23 @@
+{
+  if (category == null) {
+    throw new IllegalArgumentException("'category' cannot be null!");
+  }
+  List<TrackingEvent> eventList=new ArrayList<TrackingEvent>();
+  SQLiteDatabase db=getWritableDatabase();
+  ContentValues contentValues=new ContentValues();
+  contentValues.put(TrackingEventContract.EVENT_COLUMN_INSTANCE,instanceId);
+  String whereClause=TrackingEventContract.EVENT_COLUMN_INSTANCE + " IS NULL AND " + TrackingEventContract.EVENT_COLUMN_CATEGORY+ " = ? ";
+  String[] whereArgs=new String[]{category.name()};
+  int cnt=db.update(TrackingEventContract.EVENT_TABLE_NAME,contentValues,whereClause,whereArgs);
+  if (cnt < 1) {
+    return eventList;
+  }
+  String selection=TrackingEventContract.EVENT_COLUMN_CATEGORY + " = ? AND " + TrackingEventContract.EVENT_COLUMN_INSTANCE+ " = ? ";
+  String[] selectionArgs=new String[]{category.name(),String.valueOf(instanceId)};
+  Cursor c=db.query(TrackingEventContract.EVENT_TABLE_NAME,null,selection,selectionArgs,null,null,null);
+  while (c != null && c.getCount() > 0 && c.moveToNext()) {
+    eventList.add(new TrackingEvent(c));
+  }
+  db.close();
+  return eventList;
+}

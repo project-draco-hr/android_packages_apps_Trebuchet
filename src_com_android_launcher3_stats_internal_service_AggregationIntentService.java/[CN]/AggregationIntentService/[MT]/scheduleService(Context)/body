@@ -1,0 +1,13 @@
+{
+  if (context == null) {
+    throw new IllegalArgumentException("'context' cannot be null!");
+  }
+  SharedPreferences prefs=PreferenceManager.getDefaultSharedPreferences(context);
+  long lastTimeRan=prefs.getLong(KEY_LAST_TIME_RAN,0);
+  Intent intent=new Intent(context,AggregationIntentService.class);
+  intent.setAction(ACTION_AGGREGATE_AND_TRACK);
+  PendingIntent pi=PendingIntent.getService(context,0,intent,PendingIntent.FLAG_UPDATE_CURRENT);
+  AlarmManager alarmManager=(AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
+  alarmManager.cancel(pi);
+  alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,lastTimeRan + ALARM_INTERVAL,ALARM_INTERVAL,pi);
+}
