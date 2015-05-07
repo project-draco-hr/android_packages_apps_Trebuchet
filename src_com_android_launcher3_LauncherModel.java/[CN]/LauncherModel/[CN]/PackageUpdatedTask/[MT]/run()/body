@@ -1,4 +1,7 @@
 {
+  if (!mHasLoaderCompletedOnce) {
+    return;
+  }
   final Context context=mApp.getContext();
   final String[] packages=mPackages;
   final int N=packages.length;
