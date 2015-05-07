@@ -2,7 +2,5 @@
   int index=Collections.binarySearch(mApps,info,mAppNameComparator.getComparator());
   if (index < 0) {
     mApps.add(-(index + 1),info);
-    onAppsUpdated();
-    mAdapter.notifyDataSetChanged();
   }
 }

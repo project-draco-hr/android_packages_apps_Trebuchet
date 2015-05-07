@@ -1,4 +1,5 @@
 {
+  Collections.sort(mApps,mAppNameComparator.getComparator());
   mFilteredApps.clear();
   mSections.clear();
   mSectionedFilteredApps.clear();

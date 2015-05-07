@@ -2,4 +2,6 @@
   for (  AppInfo info : apps) {
     addApp(info);
   }
+  onAppsUpdated();
+  mAdapter.notifyDataSetChanged();
 }
