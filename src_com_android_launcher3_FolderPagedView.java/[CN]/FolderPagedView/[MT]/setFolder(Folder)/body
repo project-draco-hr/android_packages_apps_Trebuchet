@@ -2,5 +2,5 @@
   mFolder=folder;
   mFocusIndicatorView=(FocusIndicatorView)folder.findViewById(R.id.focus_indicator);
   mKeyListener=new PagedFolderKeyEventListener(folder);
-  mPageIndicator=folder.findViewById(R.id.folder_page_indicator);
+  mPageIndicator=(PageIndicator)folder.findViewById(R.id.folder_page_indicator);
 }

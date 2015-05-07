@@ -51,9 +51,6 @@
     setCurrentPage(0);
   }
   setEnableOverscroll(getPageCount() > 1);
-  int indicatorVisibility=mPageIndicator.getVisibility();
   mPageIndicator.setVisibility(getPageCount() > 1 ? View.VISIBLE : View.GONE);
-  if (indicatorVisibility != mPageIndicator.getVisibility()) {
-    mFolder.updateFooterHeight();
-  }
+  mFolder.mFolderName.setGravity(getPageCount() > 1 ? Gravity.START : Gravity.CENTER_HORIZONTAL);
 }

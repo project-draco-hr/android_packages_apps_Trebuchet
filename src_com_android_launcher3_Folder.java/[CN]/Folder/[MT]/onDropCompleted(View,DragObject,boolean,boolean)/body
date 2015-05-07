@@ -45,4 +45,7 @@
   mCurrentDragView=null;
   mSuppressOnAdd=false;
   updateItemLocationsInDatabaseBatch();
+  if (getItemCount() <= mContent.itemsPerPage()) {
+    mInfo.setOption(FolderInfo.FLAG_MULTI_PAGE_ANIMATION,false,mLauncher);
+  }
 }

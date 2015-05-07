@@ -82,6 +82,27 @@
     }
   }
 );
+  if (mContent.getPageCount() > 1 && !mInfo.hasOption(FolderInfo.FLAG_MULTI_PAGE_ANIMATION)) {
+    int footerWidth=mContent.getDesiredWidth() - mFooter.getPaddingLeft() - mFooter.getPaddingRight();
+    float textWidth=mFolderName.getPaint().measureText(mFolderName.getText().toString());
+    mFolderName.setTranslationX((footerWidth - textWidth) / 2);
+    mContent.setMarkerScale(0);
+    final boolean updateAnimationFlag=!mDragInProgress;
+    openFolderAnim.addListener(new AnimatorListenerAdapter(){
+      @Override public void onAnimationEnd(      Animator animation){
+        mFolderName.animate().setDuration(FOOTER_ANIMATION_DURATION).translationX(0);
+        mContent.animateMarkers();
+        if (updateAnimationFlag) {
+          mInfo.setOption(FolderInfo.FLAG_MULTI_PAGE_ANIMATION,true,mLauncher);
+        }
+      }
+    }
+);
+  }
+ else {
+    mFolderName.setTranslationX(0);
+    mContent.setMarkerScale(1);
+  }
   openFolderAnim.start();
   if (mDragController.isDragging()) {
     mDragController.forceTouchMove();
