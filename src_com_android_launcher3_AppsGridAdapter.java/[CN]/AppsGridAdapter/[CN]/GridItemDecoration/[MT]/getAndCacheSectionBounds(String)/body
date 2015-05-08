@@ -1,8 +1,8 @@
 {
-  Point bounds=mCachedSectionBounds.get(sectionName);
+  PointF bounds=mCachedSectionBounds.get(sectionName);
   if (bounds == null) {
     mSectionTextPaint.getTextBounds(sectionName,0,sectionName.length(),mTmpBounds);
-    bounds=new Point(mTmpBounds.width(),mTmpBounds.height());
+    bounds=new PointF(mSectionTextPaint.measureText(sectionName),mTmpBounds.height());
     mCachedSectionBounds.put(sectionName,bounds);
   }
   return bounds;

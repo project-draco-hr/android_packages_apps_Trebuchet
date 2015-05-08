@@ -2,7 +2,8 @@
   AdapterItem item=new AdapterItem();
   item.position=pos;
   item.isSectionHeader=true;
-  item.sectionName=name;
+  item.sectionInfo=section;
+  item.sectionName=section.sectionName;
   item.appInfo=null;
   item.appIndex=-1;
   return item;

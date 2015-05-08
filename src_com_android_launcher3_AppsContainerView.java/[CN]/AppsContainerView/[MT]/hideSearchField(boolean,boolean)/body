@@ -1,28 +1,34 @@
 {
+  final boolean resetTextField=mSearchBarEditView.getText().toString().length() > 0;
+  final int translationX=DynamicGrid.pxFromDp(SEARCH_TRANSLATION_X_DP,getContext().getResources().getDisplayMetrics());
   if (animated) {
-    mSearchBarContainerView.animate().alpha(0f).setDuration(FADE_IN_DURATION).withLayer().withEndAction(new Runnable(){
+    mSearchBarContainerView.animate().alpha(0f).translationX(0).setDuration(FADE_IN_DURATION).withLayer().withEndAction(new Runnable(){
       @Override public void run(){
         mSearchBarContainerView.setVisibility(View.INVISIBLE);
-        mSearchBarEditView.setText("");
+        if (resetTextField) {
+          mSearchBarEditView.setText("");
+        }
         mApps.setFilter(null);
         if (returnFocusToRecyclerView) {
           mAppsRecyclerView.requestFocus();
         }
-        scrollToTop();
       }
     }
 );
-    mSearchButtonView.animate().alpha(1f).setDuration(FADE_OUT_DURATION).withLayer();
+    mSearchButtonView.setTranslationX(-translationX);
+    mSearchButtonView.animate().alpha(1f).translationX(0).setDuration(FADE_OUT_DURATION).withLayer();
   }
  else {
     mSearchBarContainerView.setVisibility(View.INVISIBLE);
-    mSearchBarEditView.setText("");
+    if (resetTextField) {
+      mSearchBarEditView.setText("");
+    }
     mApps.setFilter(null);
     mSearchButtonView.setAlpha(1f);
+    mSearchButtonView.setTranslationX(0f);
     if (returnFocusToRecyclerView) {
       mAppsRecyclerView.requestFocus();
     }
-    scrollToTop();
   }
   getInputMethodManager().hideSoftInputFromWindow(getWindowToken(),0);
 }

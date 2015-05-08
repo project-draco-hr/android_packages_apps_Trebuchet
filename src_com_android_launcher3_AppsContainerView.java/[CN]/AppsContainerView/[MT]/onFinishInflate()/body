@@ -19,10 +19,18 @@
   mSearchBarContainerView=findViewById(R.id.app_search_container);
   mDismissSearchButtonView=mSearchBarContainerView.findViewById(R.id.dismiss_search_button);
   mDismissSearchButtonView.setOnClickListener(this);
-  mSearchBarEditView=(EditText)findViewById(R.id.app_search_box);
+  mSearchBarEditView=(AppsContainerSearchEditTextView)findViewById(R.id.app_search_box);
   if (mSearchBarEditView != null) {
     mSearchBarEditView.addTextChangedListener(this);
     mSearchBarEditView.setOnEditorActionListener(this);
+    if (DISMISS_SEARCH_ON_BACK) {
+      mSearchBarEditView.setOnBackKeyListener(new AppsContainerSearchEditTextView.OnBackKeyListener(){
+        @Override public void onBackKey(){
+          hideSearchField(true,true);
+        }
+      }
+);
+    }
   }
   mAppsRecyclerView=(AppsContainerRecyclerView)findViewById(R.id.apps_list_view);
   mAppsRecyclerView.setApps(mApps);
