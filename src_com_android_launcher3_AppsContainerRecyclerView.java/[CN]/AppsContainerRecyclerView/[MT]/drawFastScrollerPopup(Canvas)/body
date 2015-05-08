@@ -18,7 +18,8 @@
     mFastScrollerBg.draw(canvas);
     mFastScrollTextPaint.setAlpha((int)(mFastScrollAlpha * 255));
     mFastScrollTextPaint.getTextBounds(mFastScrollSectionName,0,mFastScrollSectionName.length(),mFastScrollTextBounds);
-    canvas.drawText(mFastScrollSectionName,(bgBounds.width() - mFastScrollTextBounds.width()) / 2,bgBounds.height() - (bgBounds.height() - mFastScrollTextBounds.height()) / 2,mFastScrollTextPaint);
+    float textWidth=mFastScrollTextPaint.measureText(mFastScrollSectionName);
+    canvas.drawText(mFastScrollSectionName,(bgBounds.width() - textWidth) / 2,bgBounds.height() - (bgBounds.height() - mFastScrollTextBounds.height()) / 2,mFastScrollTextPaint);
     canvas.restoreToCount(restoreCount);
   }
 }

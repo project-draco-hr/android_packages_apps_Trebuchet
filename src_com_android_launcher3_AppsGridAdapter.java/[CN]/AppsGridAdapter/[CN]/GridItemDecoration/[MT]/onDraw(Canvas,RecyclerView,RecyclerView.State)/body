@@ -15,25 +15,24 @@
       AlphabeticalAppsList.AdapterItem item=items.get(pos);
       AlphabeticalAppsList.SectionInfo sectionInfo=item.sectionInfo;
       String lastSectionName=item.sectionName;
-      for (int j=item.sectionAppIndex; j < sectionInfo.numAppsInSection; j++, pos++) {
+      for (int j=item.sectionAppIndex; j < sectionInfo.numApps; j++, pos++) {
         AlphabeticalAppsList.AdapterItem nextItem=items.get(pos);
+        String sectionName=nextItem.sectionName;
         if (nextItem.sectionInfo != sectionInfo) {
           break;
         }
-        if (j > item.sectionAppIndex && nextItem.sectionName.equals(lastSectionName)) {
+        if (j > item.sectionAppIndex && sectionName.equals(lastSectionName)) {
           continue;
         }
-        getSectionLetters(nextItem.sectionName,mTmpSections,mTmpSectionBounds);
-        String sectionBegin=mTmpSections[0];
-        String sectionEnd=mTmpSections[1];
-        PointF sectionBeginBounds=mTmpSectionBounds[0];
-        PointF sectionEndBounds=mTmpSectionBounds[1];
-        int sectionBaseline=(int)(viewTopOffset + sectionBeginBounds.y);
+        PointF sectionBounds=getAndCacheSectionBounds(sectionName);
+        int sectionBaseline=(int)(viewTopOffset + sectionBounds.y);
         int x=mIsRtl ? parent.getWidth() - mPaddingStart - mStartMargin : mPaddingStart;
+        x+=(int)((mStartMargin - sectionBounds.x) / 2f);
         int y=child.getTop() + sectionBaseline;
         int appIndexInSection=items.get(pos).sectionAppIndex;
         int nextRowPos=Math.min(items.size() - 1,pos + mAppsPerRow - (appIndexInSection % mAppsPerRow));
-        boolean fixedToRow=!items.get(nextRowPos).sectionName.equals(nextItem.sectionName);
+        AlphabeticalAppsList.AdapterItem nextRowItem=items.get(nextRowPos);
+        boolean fixedToRow=!sectionName.equals(nextRowItem.sectionName);
         if (!fixedToRow) {
           y=Math.max(sectionBaseline,y);
         }
@@ -47,17 +46,12 @@
           }
           mSectionTextPaint.setAlpha(alpha);
         }
-        if (sectionEnd != null) {
-          c.drawText(sectionBegin + "/" + sectionEnd,x + (mStartMargin - sectionBeginBounds.x - sectionEndBounds.x) / 2,y,mSectionTextPaint);
-        }
- else {
-          c.drawText(sectionBegin,(int)(x + (mStartMargin / 2f) - (sectionBeginBounds.x / 2f)),y,mSectionTextPaint);
-        }
+        c.drawText(sectionName,x,y,mSectionTextPaint);
         lastSectionTop=y;
-        lastSectionHeight=(int)(sectionBeginBounds.y + mSectionHeaderOffset);
-        lastSectionName=nextItem.sectionName;
+        lastSectionHeight=(int)(sectionBounds.y + mSectionHeaderOffset);
+        lastSectionName=sectionName;
       }
-      i+=(sectionInfo.numAppsInSection - item.sectionAppIndex);
+      i+=(sectionInfo.numApps - item.sectionAppIndex);
     }
   }
 }

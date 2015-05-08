@@ -3,29 +3,34 @@
   mFilteredApps.clear();
   mSections.clear();
   mSectionedFilteredApps.clear();
+  mFastScrollerSections.clear();
   SectionInfo lastSectionInfo=null;
+  String lastSectionName=null;
+  FastScrollSectionInfo lastFastScrollerSectionInfo=null;
   int position=0;
   int appIndex=0;
-  int sectionAppIndex=0;
+  int numApps=mApps.size();
   for (  AppInfo info : mApps) {
     String sectionName=mIndexer.computeSectionName(info.title.toString().trim());
     if (mFilter != null && !mFilter.retainApp(info,sectionName)) {
       continue;
     }
-    if (lastSectionInfo == null || !lastSectionInfo.sectionName.equals(sectionName)) {
-      lastSectionInfo=new SectionInfo(sectionName);
-      sectionAppIndex=0;
+    if (lastSectionInfo == null || !sectionName.equals(lastSectionName)) {
+      lastSectionName=sectionName;
+      lastSectionInfo=new SectionInfo();
       mSections.add(lastSectionInfo);
-      AdapterItem sectionItem=AdapterItem.asSection(position++,lastSectionInfo);
+      lastFastScrollerSectionInfo=new FastScrollSectionInfo(sectionName,(float)appIndex / numApps);
+      mFastScrollerSections.add(lastFastScrollerSectionInfo);
+      AdapterItem sectionItem=AdapterItem.asSectionBreak(position++,lastSectionInfo);
       if (!AppsContainerView.GRID_HIDE_SECTION_HEADERS && !hasFilter()) {
-        lastSectionInfo.sectionItem=sectionItem;
+        lastSectionInfo.sectionBreakItem=sectionItem;
         mSectionedFilteredApps.add(sectionItem);
       }
     }
-    AdapterItem appItem=AdapterItem.asApp(position++,lastSectionInfo,sectionName,sectionAppIndex++,info,appIndex++);
-    lastSectionInfo.numAppsInSection++;
+    AdapterItem appItem=AdapterItem.asApp(position++,lastSectionInfo,sectionName,lastSectionInfo.numApps++,info,appIndex++);
     if (lastSectionInfo.firstAppItem == null) {
       lastSectionInfo.firstAppItem=appItem;
+      lastFastScrollerSectionInfo.appItem=appItem;
     }
     mSectionedFilteredApps.add(appItem);
     mFilteredApps.add(info);
@@ -35,35 +40,25 @@
     int sectionAppCount=0;
     for (int i=0; i < mSections.size(); i++) {
       SectionInfo section=mSections.get(i);
-      String mergedSectionName=section.sectionName;
-      sectionAppCount=section.numAppsInSection;
+      sectionAppCount=section.numApps;
       int mergeCount=1;
       while (0 < (sectionAppCount % mNumAppsPerRow) && (sectionAppCount % mNumAppsPerRow) < minNumAppsPerRow && (sectionAppCount / mNumAppsPerRow) < MAX_ROWS_IN_MERGED_SECTION && (i + 1) < mSections.size()) {
         SectionInfo nextSection=mSections.remove(i + 1);
-        if (AppsContainerView.GRID_MERGE_SECTION_HEADERS) {
-          mergedSectionName+=nextSection.sectionName;
-        }
-        mSectionedFilteredApps.remove(nextSection.sectionItem);
+        mSectionedFilteredApps.remove(nextSection.sectionBreakItem);
         int pos=mSectionedFilteredApps.indexOf(section.firstAppItem);
-        if (AppsContainerView.GRID_MERGE_SECTION_HEADERS) {
-          for (int j=pos; j < (pos + section.numAppsInSection + nextSection.numAppsInSection); j++) {
-            AdapterItem item=mSectionedFilteredApps.get(j);
-            item.sectionName=mergedSectionName;
-            item.sectionInfo=section;
-          }
-        }
-        for (int j=pos + section.numAppsInSection; j < (pos + section.numAppsInSection + nextSection.numAppsInSection); j++) {
+        int nextPos=pos + section.numApps;
+        for (int j=nextPos; j < (nextPos + nextSection.numApps); j++) {
           AdapterItem item=mSectionedFilteredApps.get(j);
           item.sectionInfo=section;
-          item.sectionAppIndex+=section.numAppsInSection;
+          item.sectionAppIndex+=section.numApps;
         }
         pos=mSectionedFilteredApps.indexOf(nextSection.firstAppItem);
         for (int j=pos; j < mSectionedFilteredApps.size(); j++) {
           AdapterItem item=mSectionedFilteredApps.get(j);
           item.position--;
         }
-        section.numAppsInSection+=nextSection.numAppsInSection;
-        sectionAppCount+=nextSection.numAppsInSection;
+        section.numApps+=nextSection.numApps;
+        sectionAppCount+=nextSection.numApps;
         mergeCount++;
         if (mergeCount >= mMaxAllowableMerges) {
           break;

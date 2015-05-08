@@ -2,7 +2,7 @@
   List<AlphabeticalAppsList.SectionInfo> sections=mApps.getSections();
   int rowCount=0;
   for (  AlphabeticalAppsList.SectionInfo info : sections) {
-    int numRowsInSection=(int)Math.ceil((float)info.numAppsInSection / mNumAppsPerRow);
+    int numRowsInSection=(int)Math.ceil((float)info.numApps / mNumAppsPerRow);
     rowCount+=numRowsInSection;
   }
   return rowCount;
