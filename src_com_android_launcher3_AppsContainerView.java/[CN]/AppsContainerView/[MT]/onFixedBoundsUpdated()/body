@@ -1,0 +1,10 @@
+{
+  LauncherAppState app=LauncherAppState.getInstance();
+  DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
+  if (grid.updateAppsViewNumCols(getContext().getResources(),mFixedBounds.width())) {
+    mNumAppsPerRow=grid.appsViewNumCols;
+    mAppsRecyclerView.setNumAppsPerRow(mNumAppsPerRow);
+    mAdapter.setNumAppsPerRow(mNumAppsPerRow);
+    mApps.setNumAppsPerRow(mNumAppsPerRow);
+  }
+}

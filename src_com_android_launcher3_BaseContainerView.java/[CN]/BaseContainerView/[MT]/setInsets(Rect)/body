@@ -1,5 +1,5 @@
 {
-  mHeaderView.setVisibility(View.GONE);
+  mInsets.set(insets);
   onUpdateBackgrounds();
   onUpdatePaddings();
 }

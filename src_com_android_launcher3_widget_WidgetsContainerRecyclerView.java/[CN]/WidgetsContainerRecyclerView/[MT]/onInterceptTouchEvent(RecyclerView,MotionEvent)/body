@@ -1,8 +1,0 @@
-{
-  if (ev.getAction() == MotionEvent.ACTION_DOWN) {
-    if ((Math.abs(mDy) < mDeltaThreshold && getScrollState() != RecyclerView.SCROLL_STATE_IDLE)) {
-      stopScroll();
-    }
-  }
-  return false;
-}

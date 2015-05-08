@@ -42,6 +42,6 @@
   if (mItemDecoration != null) {
     mAppsRecyclerView.addItemDecoration(mItemDecoration);
   }
-  updateBackgrounds();
-  updatePaddings();
+  onUpdateBackgrounds();
+  onUpdatePaddings();
 }

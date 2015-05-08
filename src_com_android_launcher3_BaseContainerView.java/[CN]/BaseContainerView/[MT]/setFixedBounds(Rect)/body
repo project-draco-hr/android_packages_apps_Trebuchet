@@ -1,0 +1,18 @@
+{
+  if (!fixedBounds.isEmpty() && !fixedBounds.equals(mFixedBounds)) {
+    mFixedBounds.set(fixedBounds);
+    if (Launcher.DISABLE_ALL_APPS_SEARCH_INTEGRATION) {
+      mFixedBounds.top=mInsets.top;
+      mFixedBounds.bottom=getMeasuredHeight();
+    }
+    mFixedBounds.inset(0,mFixedBoundsContainerInset);
+    onFixedBoundsUpdated();
+  }
+  post(new Runnable(){
+    @Override public void run(){
+      onUpdateBackgrounds();
+      onUpdatePaddings();
+    }
+  }
+);
+}

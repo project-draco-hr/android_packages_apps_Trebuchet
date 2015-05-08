@@ -1,0 +1,6 @@
+{
+  if (shouldStopScroll(ev)) {
+    stopScroll();
+  }
+  return false;
+}
