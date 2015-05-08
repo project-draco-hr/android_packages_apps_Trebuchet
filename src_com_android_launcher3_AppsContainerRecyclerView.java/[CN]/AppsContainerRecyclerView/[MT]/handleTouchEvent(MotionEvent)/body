@@ -7,7 +7,7 @@ switch (action) {
 case MotionEvent.ACTION_DOWN:
     mDownX=mLastX=x;
   mDownY=mLastY=y;
-if ((Math.abs(mDy) < mDeltaThreshold && getScrollState() != RecyclerView.SCROLL_STATE_IDLE)) {
+if (shouldStopScroll(ev)) {
   stopScroll();
 }
 break;

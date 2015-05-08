@@ -1,6 +1,3 @@
 {
   super(context,attrs,defStyleAttr);
-  mDeltaThreshold=getResources().getDisplayMetrics().density * SCROLL_DELTA_THRESHOLD;
-  ScrollListener listener=new ScrollListener();
-  setOnScrollListener(listener);
 }

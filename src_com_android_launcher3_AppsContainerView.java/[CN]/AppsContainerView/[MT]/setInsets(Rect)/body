@@ -1,4 +1,0 @@
-{
-  mInsets.set(insets);
-  updatePaddings();
-}

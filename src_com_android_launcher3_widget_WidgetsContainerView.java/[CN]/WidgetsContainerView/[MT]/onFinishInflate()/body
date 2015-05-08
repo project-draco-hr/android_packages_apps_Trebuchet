@@ -11,4 +11,5 @@
   }
 );
   mPadding.set(getPaddingLeft(),getPaddingTop(),getPaddingRight(),getPaddingBottom());
+  onUpdatePaddings();
 }

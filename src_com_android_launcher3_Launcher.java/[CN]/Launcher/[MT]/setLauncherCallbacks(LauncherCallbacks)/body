@@ -5,7 +5,8 @@
       if (LOGD) {
         Log.d(TAG,"onAllAppsBoundsChanged(Rect): " + bounds);
       }
-      mAppsView.setFixedBounds(Launcher.this,bounds);
+      mAppsView.setFixedBounds(bounds);
+      mWidgetsView.setFixedBounds(bounds);
     }
     @Override public void dismissAllApps(){
       if (!DISABLE_ALL_APPS_SEARCH_INTEGRATION) {
