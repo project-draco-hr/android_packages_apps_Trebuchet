@@ -1,0 +1,14 @@
+{
+  int pos=holder.getPosition();
+  AlphabeticalAppsList.AdapterItem item=items.get(pos);
+  if (holder.mIsEmptyRow) {
+    return false;
+  }
+  if (item.isSectionHeader) {
+    return false;
+  }
+  if (item.isPredictedApp) {
+    return false;
+  }
+  return (childIndex == 0) || (items.get(pos - 1).isSectionHeader && !item.isSectionHeader);
+}

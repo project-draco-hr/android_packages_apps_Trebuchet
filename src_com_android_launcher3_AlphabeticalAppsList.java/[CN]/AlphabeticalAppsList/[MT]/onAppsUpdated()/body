@@ -9,25 +9,43 @@
   FastScrollSectionInfo lastFastScrollerSectionInfo=null;
   int position=0;
   int appIndex=0;
-  int numApps=mApps.size();
-  for (  AppInfo info : mApps) {
-    String sectionName=mIndexer.computeSectionName(info.title);
+  List<AppInfo> allApps=new ArrayList<>();
+  int numPredictedApps=0;
+  if (mPredictedApps != null && !mPredictedApps.isEmpty() && !hasFilter()) {
+    for (    ComponentName cn : mPredictedApps) {
+      for (      AppInfo info : mApps) {
+        if (cn.equals(info.componentName)) {
+          allApps.add(info);
+          numPredictedApps++;
+          break;
+        }
+      }
+      if (numPredictedApps == mNumAppsPerRow) {
+        break;
+      }
+    }
+  }
+  allApps.addAll(mApps);
+  int numApps=allApps.size();
+  for (int i=0; i < numApps; i++) {
+    boolean isPredictedApp=i < numPredictedApps;
+    AppInfo info=allApps.get(i);
+    String sectionName=isPredictedApp ? "" : mIndexer.computeSectionName(info.title);
     if (mFilter != null && !mFilter.retainApp(info,sectionName)) {
       continue;
     }
-    if (lastSectionInfo == null || !sectionName.equals(lastSectionName)) {
+    if (lastSectionInfo == null || (!isPredictedApp && !sectionName.equals(lastSectionName))) {
       lastSectionName=sectionName;
       lastSectionInfo=new SectionInfo();
-      mSections.add(lastSectionInfo);
       lastFastScrollerSectionInfo=new FastScrollSectionInfo(sectionName,(float)appIndex / numApps);
+      mSections.add(lastSectionInfo);
       mFastScrollerSections.add(lastFastScrollerSectionInfo);
-      AdapterItem sectionItem=AdapterItem.asSectionBreak(position++,lastSectionInfo);
       if (!AppsContainerView.GRID_HIDE_SECTION_HEADERS && !hasFilter()) {
-        lastSectionInfo.sectionBreakItem=sectionItem;
+        AdapterItem sectionItem=AdapterItem.asSectionBreak(position++,lastSectionInfo);
         mSectionedFilteredApps.add(sectionItem);
       }
     }
-    AdapterItem appItem=AdapterItem.asApp(position++,lastSectionInfo,sectionName,lastSectionInfo.numApps++,info,appIndex++);
+    AdapterItem appItem=AdapterItem.asApp(position++,lastSectionInfo,sectionName,lastSectionInfo.numApps++,info,appIndex++,isPredictedApp);
     if (lastSectionInfo.firstAppItem == null) {
       lastSectionInfo.firstAppItem=appItem;
       lastFastScrollerSectionInfo.appItem=appItem;

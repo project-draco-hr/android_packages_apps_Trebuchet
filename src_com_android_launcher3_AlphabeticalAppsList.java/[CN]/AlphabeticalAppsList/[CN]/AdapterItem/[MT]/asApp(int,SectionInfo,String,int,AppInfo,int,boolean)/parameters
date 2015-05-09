@@ -4,3 +4,4 @@ String sectionName
 int sectionAppIndex
 AppInfo appInfo
 int appIndex
+boolean isPredictedApp

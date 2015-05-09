@@ -6,12 +6,9 @@
   if (holder == null) {
     return false;
   }
-  if (holder.mIsEmptyRow) {
-    return false;
-  }
   int pos=holder.getPosition();
-  if (pos <= 0 || pos >= items.size()) {
+  if (pos < 0 || pos >= items.size()) {
     return false;
   }
-  return (childIndex == 0) || (items.get(pos - 1).isSectionHeader && !items.get(pos).isSectionHeader);
+  return true;
 }

@@ -1,4 +1,3 @@
 ViewHolder holder
 View child
-int childIndex
 List<AlphabeticalAppsList.AdapterItem> items

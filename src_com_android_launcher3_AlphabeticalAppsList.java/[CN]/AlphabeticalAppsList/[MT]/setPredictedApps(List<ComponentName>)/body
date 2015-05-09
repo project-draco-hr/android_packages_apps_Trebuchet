@@ -1,0 +1,6 @@
+{
+  mPredictedApps.clear();
+  mPredictedApps.addAll(apps);
+  onAppsUpdated();
+  mAdapter.notifyDataSetChanged();
+}

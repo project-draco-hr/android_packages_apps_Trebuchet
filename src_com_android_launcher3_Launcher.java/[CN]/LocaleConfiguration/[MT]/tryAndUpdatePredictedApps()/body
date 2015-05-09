@@ -1,0 +1,8 @@
+{
+  if (mLauncherCallbacks != null) {
+    List<ComponentName> apps=mLauncherCallbacks.getPredictedApps();
+    if (!apps.isEmpty()) {
+      mAppsView.setPredictedApps(apps);
+    }
+  }
+}
