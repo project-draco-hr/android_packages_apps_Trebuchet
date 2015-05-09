@@ -1,7 +1,8 @@
 {
+  String s=Utilities.trim(cs);
   String sectionName=getBucketLabel(getBucketIndex(s));
-  if (sectionName.trim().isEmpty() && s.length() > 0) {
-    boolean startsWithDigit=Character.isDigit(Character.codePointAt(s.trim(),0));
+  if (Utilities.trim(sectionName).isEmpty() && s.length() > 0) {
+    boolean startsWithDigit=Character.isDigit(s.codePointAt(0));
     if (startsWithDigit) {
       return "#";
     }

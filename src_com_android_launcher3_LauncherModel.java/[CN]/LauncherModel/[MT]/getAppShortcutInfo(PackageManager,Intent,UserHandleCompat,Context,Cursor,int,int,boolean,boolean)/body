@@ -23,14 +23,14 @@
     info.setIcon(icon == null ? mIconCache.getDefaultIcon(user) : icon);
   }
   if (TextUtils.isEmpty(info.title) && c != null) {
-    info.title=c.getString(titleIndex);
+    info.title=Utilities.trim(c.getString(titleIndex));
   }
   if (info.title == null) {
     info.title=componentName.getClassName();
   }
   info.itemType=LauncherSettings.Favorites.ITEM_TYPE_APPLICATION;
   info.user=user;
-  info.contentDescription=mUserManager.getBadgedLabelForUser(info.title.toString(),info.user);
+  info.contentDescription=mUserManager.getBadgedLabelForUser(info.title,info.user);
   if (lai != null) {
     info.flags=AppInfo.initFlags(lai);
   }

@@ -5,18 +5,18 @@
   if ((promiseType & ShortcutInfo.FLAG_RESTORED_ICON) != 0) {
     String title=(cursor != null) ? cursor.getString(titleIndex) : null;
     if (!TextUtils.isEmpty(title)) {
-      info.title=title;
+      info.title=Utilities.trim(title);
     }
   }
  else   if ((promiseType & ShortcutInfo.FLAG_AUTOINTALL_ICON) != 0) {
     if (TextUtils.isEmpty(info.title)) {
-      info.title=(cursor != null) ? cursor.getString(titleIndex) : "";
+      info.title=(cursor != null) ? Utilities.trim(cursor.getString(titleIndex)) : "";
     }
   }
  else {
     throw new InvalidParameterException("Invalid restoreType " + promiseType);
   }
-  info.contentDescription=mUserManager.getBadgedLabelForUser(info.title.toString(),info.user);
+  info.contentDescription=mUserManager.getBadgedLabelForUser(info.title,info.user);
   info.itemType=LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT;
   info.promisedIntent=intent;
   info.status=promiseType;

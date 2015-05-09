@@ -3,7 +3,7 @@
   final ShortcutInfo info=new ShortcutInfo();
   info.user=UserHandleCompat.myUserHandle();
   info.itemType=LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT;
-  info.title=c.getString(titleIndex);
+  info.title=Utilities.trim(c.getString(titleIndex));
   int iconType=c.getInt(iconTypeIndex);
 switch (iconType) {
 case LauncherSettings.Favorites.ICON_TYPE_RESOURCE:

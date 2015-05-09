@@ -17,7 +17,7 @@
       return mContext.getString(R.string.create_folder_with,info.title);
     }
  else     if (info instanceof FolderInfo) {
-      if (TextUtils.isEmpty(info.title.toString().trim())) {
+      if (TextUtils.isEmpty(info.title)) {
         FolderInfo folder=(FolderInfo)info;
         ShortcutInfo firstItem=null;
         for (        ShortcutInfo shortcut : folder.contents) {

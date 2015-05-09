@@ -1,7 +1,7 @@
 {
   CacheEntry entry=cacheLocked(application.componentName,null,application.user,false,application.usingLowResIcon);
   if (entry.icon != null && !isDefaultIcon(entry.icon,application.user)) {
-    application.title=entry.title;
+    application.title=Utilities.trim(entry.title);
     application.iconBitmap=entry.icon;
     application.contentDescription=entry.contentDescription;
     application.usingLowResIcon=entry.isLowResIcon;

@@ -1,7 +1,7 @@
 {
   UserHandleCompat user=info == null ? application.user : info.getUser();
   CacheEntry entry=cacheLocked(application.componentName,info,user,false,useLowResIcon);
-  application.title=entry.title;
+  application.title=Utilities.trim(entry.title);
   application.iconBitmap=getNonNullIcon(entry,user);
   application.contentDescription=entry.contentDescription;
   application.usingLowResIcon=entry.isLowResIcon;
