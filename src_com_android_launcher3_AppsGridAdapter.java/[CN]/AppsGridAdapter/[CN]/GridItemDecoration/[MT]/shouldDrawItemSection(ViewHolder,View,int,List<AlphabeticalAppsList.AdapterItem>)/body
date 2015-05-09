@@ -10,11 +10,8 @@
     return false;
   }
   int pos=holder.getPosition();
-  if (pos < 0 || pos >= items.size()) {
+  if (pos <= 0 || pos >= items.size()) {
     return false;
   }
-  if (items.get(pos).isSectionHeader) {
-    return false;
-  }
-  return (childIndex == 0) || items.get(pos - 1).isSectionHeader && !items.get(pos).isSectionHeader || (!items.get(pos - 1).sectionName.equals(items.get(pos).sectionName));
+  return (childIndex == 0) || (items.get(pos - 1).isSectionHeader && !items.get(pos).isSectionHeader);
 }
