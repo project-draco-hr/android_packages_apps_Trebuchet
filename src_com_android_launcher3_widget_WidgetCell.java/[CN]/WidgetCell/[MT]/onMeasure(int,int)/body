@@ -1,0 +1,3 @@
+{
+  super.onMeasure(MeasureSpec.makeMeasureSpec(mSize,MeasureSpec.EXACTLY),MeasureSpec.makeMeasureSpec(mSize,MeasureSpec.EXACTLY));
+}

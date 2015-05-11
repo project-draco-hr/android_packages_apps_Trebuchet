@@ -3,5 +3,10 @@
     Log.v(TAG,"\nonCreateViewHolder");
   }
   ViewGroup container=(ViewGroup)mLayoutInflater.inflate(R.layout.widgets_list_row_view,parent,false);
+  WidgetRowView row=(WidgetRowView)container.findViewById(R.id.widget_row);
+  LinearLayout.LayoutParams lp=(LinearLayout.LayoutParams)row.getLayoutParams();
+  lp.setMarginStart(WidgetRowView.sIndent);
+  lp.height=WidgetRowView.sHeight;
+  row.setLayoutParams(lp);
   return new WidgetsRowViewHolder(container);
 }

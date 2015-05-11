@@ -11,6 +11,9 @@
       widget=(WidgetCell)mLayoutInflater.inflate(R.layout.widget_cell,row,false);
       widget.setOnClickListener(mIconClickListener);
       widget.setOnLongClickListener(mIconLongClickListener);
+      if (i == diff - 1) {
+        widget.setSeparator(false);
+      }
       row.addView(widget);
     }
   }

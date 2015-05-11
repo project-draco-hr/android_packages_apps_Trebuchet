@@ -1,0 +1,11 @@
+{
+  if (sHeight > 0) {
+    return;
+  }
+  Resources r=getResources();
+  DeviceProfile profile=LauncherAppState.getInstance().getDynamicGrid().getDeviceProfile();
+  if (profile.isLargeTablet || profile.isTablet) {
+    sIndent=DynamicGrid.pxFromDp(PRESET_INDENT_SIZE_TABLET,r.getDisplayMetrics());
+  }
+  sHeight=(int)(profile.cellWidthPx * HEIGHT_SCALE);
+}
