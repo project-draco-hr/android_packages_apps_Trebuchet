@@ -4,8 +4,8 @@
     DeviceProfile partnerDp=p.getDeviceProfileOverride(dm);
     if (partnerDp != null) {
       if (partnerDp.numRows > 0 && partnerDp.numColumns > 0) {
-        numRows=partnerDp.numRows;
-        numColumns=partnerDp.numColumns;
+        numRows=numFolderRows=partnerDp.numRows;
+        numColumns=numFolderColumns=partnerDp.numColumns;
       }
       if (partnerDp.allAppsShortEdgeCount > 0 && partnerDp.allAppsLongEdgeCount > 0) {
         allAppsShortEdgeCount=partnerDp.allAppsShortEdgeCount;

@@ -7,6 +7,8 @@
   minHeightDps=h;
   numRows=r;
   numColumns=c;
+  numFolderRows=fr;
+  numFolderColumns=fc;
   iconSize=is;
   iconTextSize=its;
   numHotseatIcons=hs;
