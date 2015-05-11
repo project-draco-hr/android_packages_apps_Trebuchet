@@ -1,3 +1,3 @@
 {
-  return createShortcut(R.layout.application,(ViewGroup)mWorkspace.getChildAt(mWorkspace.getCurrentPage()),info);
+  return createShortcut((ViewGroup)mWorkspace.getChildAt(mWorkspace.getCurrentPage()),info);
 }

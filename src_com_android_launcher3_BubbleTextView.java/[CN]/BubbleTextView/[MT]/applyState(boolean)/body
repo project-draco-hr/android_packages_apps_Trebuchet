@@ -10,7 +10,7 @@
       }
  else {
         preloadDrawable=new PreloadIconDrawable(mIcon,getPreloaderTheme());
-        setIcon(preloadDrawable,mIconSize,-1);
+        setIcon(preloadDrawable,mIconSize);
       }
       preloadDrawable.setLevel(progressLevel);
       if (promiseStateChanged) {

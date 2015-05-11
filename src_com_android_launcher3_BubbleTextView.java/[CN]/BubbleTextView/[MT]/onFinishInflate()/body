@@ -1,4 +1,0 @@
-{
-  super.onFinishInflate();
-  setTextSize(TypedValue.COMPLEX_UNIT_PX,mTextSize);
-}

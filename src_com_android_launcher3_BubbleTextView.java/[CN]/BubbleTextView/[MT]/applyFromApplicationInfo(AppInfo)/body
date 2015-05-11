@@ -1,5 +1,5 @@
 {
-  setIcon(Utilities.createIconDrawable(info.iconBitmap),mIconSize,mIconPaddingSize);
+  setIcon(Utilities.createIconDrawable(info.iconBitmap),mIconSize);
   setText(info.title);
   if (info.contentDescription != null) {
     setContentDescription(info.contentDescription);
