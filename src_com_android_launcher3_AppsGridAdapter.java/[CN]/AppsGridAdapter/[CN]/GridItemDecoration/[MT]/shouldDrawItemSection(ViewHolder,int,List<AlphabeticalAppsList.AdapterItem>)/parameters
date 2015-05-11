@@ -1,0 +1,3 @@
+ViewHolder holder
+int childIndex
+List<AlphabeticalAppsList.AdapterItem> items

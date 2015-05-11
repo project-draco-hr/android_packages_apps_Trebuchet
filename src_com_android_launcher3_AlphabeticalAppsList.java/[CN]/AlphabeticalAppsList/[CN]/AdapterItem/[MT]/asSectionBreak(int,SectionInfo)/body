@@ -3,5 +3,6 @@
   item.position=pos;
   item.isSectionHeader=true;
   item.sectionInfo=section;
+  section.sectionBreakItem=item;
   return item;
 }

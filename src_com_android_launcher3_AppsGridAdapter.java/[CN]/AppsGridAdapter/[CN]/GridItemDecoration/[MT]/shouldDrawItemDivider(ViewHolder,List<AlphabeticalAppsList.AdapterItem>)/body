@@ -1,0 +1,4 @@
+{
+  int pos=holder.getPosition();
+  return items.get(pos).isPredictedApp;
+}

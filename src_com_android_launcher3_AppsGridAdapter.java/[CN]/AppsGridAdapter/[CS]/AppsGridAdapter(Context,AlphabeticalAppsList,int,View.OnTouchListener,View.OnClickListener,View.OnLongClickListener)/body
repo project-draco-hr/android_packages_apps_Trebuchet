@@ -19,4 +19,8 @@
   mSectionTextPaint.setTextSize(res.getDimensionPixelSize(R.dimen.apps_view_section_text_size));
   mSectionTextPaint.setColor(res.getColor(R.color.apps_view_section_text_color));
   mSectionTextPaint.setAntiAlias(true);
+  mPredictedAppsDividerPaint=new Paint();
+  mPredictedAppsDividerPaint.setStrokeWidth(DynamicGrid.pxFromDp(1.5f,res.getDisplayMetrics()));
+  mPredictedAppsDividerPaint.setColor(0x10000000);
+  mPredictedAppsDividerPaint.setAntiAlias(true);
 }

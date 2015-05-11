@@ -4,6 +4,6 @@
     showWorkspace(true);
   }
  else {
-    showAppsView(true,false);
+    showAppsView(true,false,true);
   }
 }

@@ -7,5 +7,6 @@
   item.sectionAppIndex=sectionAppIndex;
   item.appInfo=appInfo;
   item.appIndex=appIndex;
+  item.isPredictedApp=isPredictedApp;
   return item;
 }

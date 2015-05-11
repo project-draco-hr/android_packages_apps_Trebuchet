@@ -2,5 +2,8 @@
   if (resetListToTop) {
     mAppsView.scrollToTop();
   }
+  if (updatePredictedApps) {
+    tryAndUpdatePredictedApps();
+  }
   showAppsOrWidgets(animated,State.APPS);
 }
