@@ -12,7 +12,8 @@
     showWorkspace(false);
   }
  else   if (mOnResumeState == State.APPS) {
-    showAppsView(false,false,false);
+    boolean launchedFromApp=(mWaitingForResume != null);
+    showAppsView(false,false,!launchedFromApp);
   }
  else   if (mOnResumeState == State.WIDGETS) {
     showWidgetsView(false,false);

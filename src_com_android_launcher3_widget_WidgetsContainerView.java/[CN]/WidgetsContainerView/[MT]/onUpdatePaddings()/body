@@ -3,6 +3,6 @@
     setPadding(mPadding.left + mInsets.left,mPadding.top + mInsets.top,mPadding.right + mInsets.right,mPadding.bottom + mInsets.bottom);
   }
  else {
-    setPadding(mFixedBounds.left,mFixedBounds.top,getMeasuredWidth() - mFixedBounds.right,mInsets.bottom);
+    setPadding(mFixedBounds.left,mFixedBounds.top,getMeasuredWidth() - mFixedBounds.right,mFixedBounds.bottom);
   }
 }

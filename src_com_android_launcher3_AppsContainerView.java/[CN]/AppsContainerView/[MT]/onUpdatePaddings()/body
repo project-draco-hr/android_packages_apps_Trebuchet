@@ -5,14 +5,16 @@
     setPadding(mInsets.left,mContainerInset + mInsets.top,mInsets.right,mContainerInset + mInsets.bottom);
   }
  else {
-    setPadding(mFixedBounds.left,mFixedBounds.top,getMeasuredWidth() - mFixedBounds.right,mInsets.bottom);
+    setPadding(mFixedBounds.left,mFixedBounds.top,getMeasuredWidth() - mFixedBounds.right,mFixedBounds.bottom);
   }
+  DeviceProfile grid=LauncherAppState.getInstance().getDynamicGrid().getDeviceProfile();
+  int startMargin=grid.isPhone() ? mContentMarginStart : 0;
   int inset=mFixedBounds.isEmpty() ? mContainerInset : mFixedBoundsContainerInset;
   if (isRtl) {
-    mAppsRecyclerView.setPadding(inset,inset,inset + mContentMarginStart,inset);
+    mAppsRecyclerView.setPadding(inset,inset,inset + startMargin,inset);
   }
  else {
-    mAppsRecyclerView.setPadding(inset + mContentMarginStart,inset,inset,inset);
+    mAppsRecyclerView.setPadding(inset + startMargin,inset,inset,inset);
   }
   if (hasSearchBar) {
     LinearLayout.LayoutParams lp=(LinearLayout.LayoutParams)mHeaderView.getLayoutParams();

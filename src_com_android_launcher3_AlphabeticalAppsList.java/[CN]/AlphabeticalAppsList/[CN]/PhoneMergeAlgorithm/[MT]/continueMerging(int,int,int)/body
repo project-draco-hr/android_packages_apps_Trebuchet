@@ -1,0 +1,5 @@
+{
+  int rows=sectionAppCount / numAppsPerRow;
+  int cols=sectionAppCount % numAppsPerRow;
+  return (0 < cols && cols < mMinAppsPerRow) && rows < mMinRowsInMergedSection && mergeCount < mMaxAllowableMerges;
+}

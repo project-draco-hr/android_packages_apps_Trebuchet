@@ -1,0 +1,3 @@
+int sectionAppCount
+int numAppsPerRow
+int mergeCount

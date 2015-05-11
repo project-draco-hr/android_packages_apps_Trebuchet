@@ -2,6 +2,7 @@
   if (mApps.hasFilter()) {
     return;
   }
+  DeviceProfile grid=LauncherAppState.getInstance().getDynamicGrid().getDeviceProfile();
   List<AlphabeticalAppsList.AdapterItem> items=mApps.getAdapterItems();
   boolean hasDrawnPredictedAppDivider=false;
   int childCount=parent.getChildCount();
@@ -14,7 +15,6 @@
       continue;
     }
     if (shouldDrawItemDivider(holder,items) && !hasDrawnPredictedAppDivider) {
-      DeviceProfile grid=LauncherAppState.getInstance().getDynamicGrid().getDeviceProfile();
       int top=child.getTop() + child.getHeight();
       int left=parent.getPaddingLeft();
       int right=parent.getWidth() - parent.getPaddingRight();
@@ -22,7 +22,7 @@
       c.drawLine(left + iconInset,top,right - iconInset,top,mPredictedAppsDividerPaint);
       hasDrawnPredictedAppDivider=true;
     }
- else     if (shouldDrawItemSection(holder,i,items)) {
+ else     if (grid.isPhone() && shouldDrawItemSection(holder,i,items)) {
       int viewTopOffset=(2 * child.getPaddingTop());
       int pos=holder.getPosition();
       AlphabeticalAppsList.AdapterItem item=items.get(pos);
