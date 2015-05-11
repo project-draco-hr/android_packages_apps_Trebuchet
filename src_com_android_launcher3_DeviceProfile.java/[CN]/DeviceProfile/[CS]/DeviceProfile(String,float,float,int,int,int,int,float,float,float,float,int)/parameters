@@ -1,8 +1,10 @@
 String n
 float w
 float h
-float r
-float c
+int r
+int c
+int fr
+int fc
 float is
 float its
 float hs

@@ -23,6 +23,8 @@
   DeviceProfile closestProfile=findClosestDeviceProfile(minWidth,minHeight,points);
   numRows=closestProfile.numRows;
   numColumns=closestProfile.numColumns;
+  numFolderRows=closestProfile.numFolderRows;
+  numFolderColumns=closestProfile.numFolderColumns;
   numHotseatIcons=closestProfile.numHotseatIcons;
   hotseatAllAppsRank=(int)(numHotseatIcons / 2);
   defaultLayoutId=closestProfile.defaultLayoutId;
