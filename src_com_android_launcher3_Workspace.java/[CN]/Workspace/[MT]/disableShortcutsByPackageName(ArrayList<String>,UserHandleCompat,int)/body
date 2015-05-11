@@ -9,7 +9,7 @@
         if (user.equals(shortcutInfo.user) && cn != null && packageNames.contains(cn.getPackageName())) {
           shortcutInfo.isDisabled|=reason;
           BubbleTextView shortcut=(BubbleTextView)v;
-          shortcut.applyFromShortcutInfo(shortcutInfo,mIconCache,true,false);
+          shortcut.applyFromShortcutInfo(shortcutInfo,mIconCache,false);
           if (parent != null) {
             parent.invalidate();
           }
