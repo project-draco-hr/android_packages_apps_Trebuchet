@@ -138,7 +138,7 @@ if (si.isPromise()) {
 }
 if (appInfo != null && Intent.ACTION_MAIN.equals(si.intent.getAction()) && si.itemType == LauncherSettings.Favorites.ITEM_TYPE_APPLICATION) {
   si.updateIcon(mIconCache);
-  si.title=appInfo.title.toString();
+  si.title=Utilities.trim(appInfo.title);
   si.contentDescription=appInfo.contentDescription;
   infoUpdated=true;
 }

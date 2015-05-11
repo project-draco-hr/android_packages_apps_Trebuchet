@@ -11,7 +11,7 @@
   int appIndex=0;
   int numApps=mApps.size();
   for (  AppInfo info : mApps) {
-    String sectionName=mIndexer.computeSectionName(info.title.toString().trim());
+    String sectionName=mIndexer.computeSectionName(info.title);
     if (mFilter != null && !mFilter.retainApp(info,sectionName)) {
       continue;
     }

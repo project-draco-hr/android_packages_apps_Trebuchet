@@ -1,10 +1,10 @@
 {
   mFolderName.setHint(sHintText);
-  String newTitle=mFolderName.getText().toString();
+  CharSequence newTitle=mFolderName.getText();
   mInfo.setTitle(newTitle);
   LauncherModel.updateItemInDatabase(mLauncher,mInfo);
   if (commit) {
-    sendCustomAccessibilityEvent(AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED,String.format(getContext().getString(R.string.folder_renamed),newTitle));
+    sendCustomAccessibilityEvent(AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED,String.format(getContext().getString(R.string.folder_renamed),newTitle.toString()));
   }
   requestFocus();
   Selection.setSelection((Spannable)mFolderName.getText(),0,0);

@@ -3,7 +3,7 @@
   mUserManager=UserManagerCompat.getInstance(context);
   mAppNameComparator=new Comparator<AppInfo>(){
     public final int compare(    AppInfo a,    AppInfo b){
-      int result=collator.compare(a.title.toString().trim(),b.title.toString().trim());
+      int result=collator.compare(a.title.toString(),b.title.toString());
       if (result == 0) {
         result=a.componentName.compareTo(b.componentName);
         if (result == 0) {

@@ -1,7 +1,7 @@
 {
   this();
   this.intent=intent;
-  this.title=title;
+  this.title=Utilities.trim(title);
   this.contentDescription=contentDescription;
   mIcon=icon;
   this.user=user;

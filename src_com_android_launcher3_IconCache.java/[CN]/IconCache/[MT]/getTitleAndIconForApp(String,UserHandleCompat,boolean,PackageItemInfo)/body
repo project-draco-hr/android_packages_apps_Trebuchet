@@ -1,7 +1,7 @@
 {
   CacheEntry entry=getEntryForPackageLocked(packageName,user,useLowResIcon);
   infoOut.iconBitmap=getNonNullIcon(entry,user);
-  infoOut.title=entry.title;
+  infoOut.title=Utilities.trim(entry.title);
   infoOut.usingLowResIcon=entry.isLowResIcon;
   infoOut.contentDescription=entry.contentDescription;
 }

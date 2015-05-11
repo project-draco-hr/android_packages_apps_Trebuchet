@@ -1,7 +1,7 @@
 {
   final ShortcutInfo shortcut=new ShortcutInfo();
   shortcut.user=info.getUser();
-  shortcut.title=info.getLabel().toString();
+  shortcut.title=Utilities.trim(info.getLabel());
   shortcut.contentDescription=UserManagerCompat.getInstance(context).getBadgedLabelForUser(info.getLabel(),info.getUser());
   shortcut.customIcon=false;
   shortcut.intent=AppInfo.makeLaunchIntent(context,info,info.getUser());
