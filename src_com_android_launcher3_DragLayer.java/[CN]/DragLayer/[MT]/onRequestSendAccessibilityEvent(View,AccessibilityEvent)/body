@@ -4,6 +4,9 @@
     if (child == currentFolder) {
       return super.onRequestSendAccessibilityEvent(child,event);
     }
+    if (isInAccessibleDrag() && child instanceof SearchDropTargetBar) {
+      return super.onRequestSendAccessibilityEvent(child,event);
+    }
     return false;
   }
   return super.onRequestSendAccessibilityEvent(child,event);
