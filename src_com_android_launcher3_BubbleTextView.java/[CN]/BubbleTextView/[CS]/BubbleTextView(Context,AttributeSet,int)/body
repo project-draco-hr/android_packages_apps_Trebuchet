@@ -5,10 +5,17 @@
   TypedArray a=context.obtainStyledAttributes(attrs,R.styleable.BubbleTextView,defStyle,0);
   mCustomShadowsEnabled=a.getBoolean(R.styleable.BubbleTextView_customShadows,true);
   mLayoutHorizontal=a.getBoolean(R.styleable.BubbleTextView_layoutHorizontal,false);
-  mIconSize=a.getDimensionPixelSize(R.styleable.BubbleTextView_iconSizeOverride,grid.allAppsIconSizePx);
-  mIconPaddingSize=a.getDimensionPixelSize(R.styleable.BubbleTextView_iconPaddingOverride,grid.iconDrawablePaddingPx);
-  mTextSize=a.getDimensionPixelSize(R.styleable.BubbleTextView_textSizeOverride,grid.allAppsIconTextSizePx);
   mDeferShadowGenerationOnTouch=a.getBoolean(R.styleable.BubbleTextView_deferShadowGeneration,false);
+  int display=a.getInteger(R.styleable.BubbleTextView_iconDisplay,DISPLAY_WORKSPACE);
+  int defaultIconSize=grid.iconSizePx;
+  if (display == DISPLAY_WORKSPACE) {
+    setTextSize(grid.iconTextSizePx);
+  }
+ else   if (display == DISPLAY_ALL_APPS) {
+    setTextSize(grid.allAppsIconTextSizePx);
+    defaultIconSize=grid.allAppsIconSizePx;
+  }
+  mIconSize=a.getDimensionPixelSize(R.styleable.BubbleTextView_iconSizeOverride,defaultIconSize);
   a.recycle();
   if (mCustomShadowsEnabled) {
     mBackground=getBackground();

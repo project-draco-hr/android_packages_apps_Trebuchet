@@ -9,8 +9,5 @@
  else {
     setCompoundDrawablesRelative(null,mIcon,null,null);
   }
-  if (drawablePadding != -1) {
-    setCompoundDrawablePadding(drawablePadding);
-  }
   return icon;
 }

@@ -71,7 +71,7 @@ case LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT:
       if (info.container == NO_ID && info instanceof AppInfo) {
         info=((AppInfo)info).makeShortcut();
       }
-    view=mLauncher.createShortcut(R.layout.application,cellLayout,(ShortcutInfo)info);
+    view=mLauncher.createShortcut(cellLayout,(ShortcutInfo)info);
   break;
 case LauncherSettings.Favorites.ITEM_TYPE_FOLDER:
 view=FolderIcon.fromXml(R.layout.folder_icon,mLauncher,cellLayout,(FolderInfo)info,mIconCache);

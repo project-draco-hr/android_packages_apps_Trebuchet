@@ -10,12 +10,12 @@
   LauncherAppState.setApplicationContext(getApplicationContext());
   LauncherAppState app=LauncherAppState.getInstance();
   LauncherAppState.getLauncherProvider().setLauncherProviderChangeListener(this);
-  DeviceProfile grid=app.initDynamicGrid(this);
+  mDeviceProfile=app.initDynamicGrid(this);
   mSharedPrefs=getSharedPreferences(LauncherAppState.getSharedPreferencesKey(),Context.MODE_PRIVATE);
   mIsSafeModeEnabled=getPackageManager().isSafeMode();
   mModel=app.setLauncher(this);
   mIconCache=app.getIconCache();
-  mIconCache.flushInvalidIcons(grid);
+  mIconCache.flushInvalidIcons(mDeviceProfile);
   mDragController=new DragController(this);
   mInflater=getLayoutInflater();
   mStateTransitionAnimation=new LauncherStateTransitionAnimation(this,this);
@@ -30,7 +30,7 @@
   checkForLocaleChange();
   setContentView(R.layout.launcher);
   setupViews();
-  grid.layout(this);
+  mDeviceProfile.layout(this);
   registerContentObservers();
   lockAllApps();
   mSavedState=savedInstanceState;
