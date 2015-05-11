@@ -1,0 +1,9 @@
+{
+  if (mSize > 0) {
+    return;
+  }
+  DeviceProfile profile=LauncherAppState.getInstance().getDynamicGrid().getDeviceProfile();
+  mSize=(int)(profile.cellWidthPx * WIDTH_SCALE);
+  mPresetPreviewSize=(int)(profile.cellWidthPx * WIDTH_SCALE * PREVIEW_SCALE);
+  mDividerWidth=getResources().getDimensionPixelSize(R.dimen.widget_row_divider);
+}

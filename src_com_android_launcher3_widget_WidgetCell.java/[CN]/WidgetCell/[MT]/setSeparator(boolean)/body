@@ -1,0 +1,6 @@
+{
+  LinearLayout.LayoutParams lp=(LinearLayout.LayoutParams)getLayoutParams();
+  lp.setMarginEnd(enable ? mDividerWidth : 0);
+  setLayoutParams(lp);
+  requestLayout();
+}
