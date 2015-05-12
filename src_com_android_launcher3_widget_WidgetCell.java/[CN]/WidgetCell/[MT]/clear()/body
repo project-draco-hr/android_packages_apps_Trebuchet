@@ -5,7 +5,6 @@
   mWidgetImage.setImageDrawable(null);
   mWidgetName.setText(null);
   mWidgetDims.setText(null);
-  setSeparator(true);
   if (mActiveRequest != null) {
     mActiveRequest.cleanup();
     mActiveRequest=null;

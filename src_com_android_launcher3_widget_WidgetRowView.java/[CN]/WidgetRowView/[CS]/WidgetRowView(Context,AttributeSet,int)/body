@@ -1,7 +1,0 @@
-{
-  super(context,attrs,defStyle);
-  setContainerHeight();
-  setWillNotDraw(false);
-  setClipToPadding(false);
-  setAccessibilityDelegate(LauncherAppState.getInstance().getAccessibilityDelegate());
-}

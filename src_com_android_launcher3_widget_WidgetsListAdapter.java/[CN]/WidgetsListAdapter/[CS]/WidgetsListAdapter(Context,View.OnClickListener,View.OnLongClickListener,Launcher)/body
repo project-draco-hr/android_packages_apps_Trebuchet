@@ -5,4 +5,5 @@
   mIconLongClickListener=iconLongClickListener;
   mLauncher=launcher;
   mIconCache=LauncherAppState.getInstance().getIconCache();
+  setContainerHeight();
 }
