@@ -77,6 +77,8 @@ break;
 case 23:
 convertShortcutsToLauncherActivities(db);
 case 24:
+ManagedProfileHeuristic.markExistingUsersForNoFolderCreation(mContext);
+case 25:
 {
 return;
 }

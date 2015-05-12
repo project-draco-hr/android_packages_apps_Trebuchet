@@ -13,4 +13,5 @@
   }
   mMaxItemId=initializeMaxItemId(db);
   setFlagEmptyDbCreated();
+  ManagedProfileHeuristic.processAllUsers(Collections.EMPTY_LIST,mContext);
 }
