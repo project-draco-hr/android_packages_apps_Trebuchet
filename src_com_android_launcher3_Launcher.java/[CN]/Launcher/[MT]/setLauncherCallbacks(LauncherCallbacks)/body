@@ -17,5 +17,26 @@
     }
   }
 );
+  mLauncherCallbacks.setLauncherSearchCallback(new Launcher.LauncherSearchCallbacks(){
+    private boolean mImportanceStored=false;
+    private int mWorkspaceImportanceForAccessibility=View.IMPORTANT_FOR_ACCESSIBILITY_AUTO;
+    private int mHotseatImportanceForAccessibility=View.IMPORTANT_FOR_ACCESSIBILITY_AUTO;
+    @Override public void onSearchOverlayOpened(){
+      if (mImportanceStored) {
+        return;
+      }
+      mWorkspaceImportanceForAccessibility=mWorkspace.getImportantForAccessibility();
+      mHotseatImportanceForAccessibility=mHotseat.getImportantForAccessibility();
+      mWorkspace.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS);
+      mHotseat.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS);
+      mImportanceStored=true;
+    }
+    @Override public void onSearchOverlayClosed(){
+      mWorkspace.setImportantForAccessibility(mWorkspaceImportanceForAccessibility);
+      mHotseat.setImportantForAccessibility(mHotseatImportanceForAccessibility);
+      mImportanceStored=false;
+    }
+  }
+);
   return true;
 }
