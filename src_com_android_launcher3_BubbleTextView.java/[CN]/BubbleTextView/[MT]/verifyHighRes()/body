@@ -15,4 +15,10 @@
       mIconLoadRequest=LauncherAppState.getInstance().getIconCache().updateIconInBackground(BubbleTextView.this,info);
     }
   }
+ else   if (getTag() instanceof PackageItemInfo) {
+    PackageItemInfo info=(PackageItemInfo)getTag();
+    if (info.usingLowResIcon) {
+      mIconLoadRequest=LauncherAppState.getInstance().getIconCache().updateIconInBackground(BubbleTextView.this,info);
+    }
+  }
 }
