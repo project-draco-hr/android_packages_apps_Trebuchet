@@ -26,7 +26,10 @@
     if (DISMISS_SEARCH_ON_BACK) {
       mSearchBarEditView.setOnBackKeyListener(new AppsContainerSearchEditTextView.OnBackKeyListener(){
         @Override public void onBackKey(){
-          hideSearchField(true,true);
+          String query=Utilities.trim(mSearchBarEditView.getEditableText().toString());
+          if (query.isEmpty() || mApps.hasNoFilteredResults()) {
+            hideSearchField(true,true);
+          }
         }
       }
 );

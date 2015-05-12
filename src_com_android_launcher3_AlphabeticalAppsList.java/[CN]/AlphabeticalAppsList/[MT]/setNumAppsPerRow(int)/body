@@ -1,5 +1,11 @@
 {
   mNumAppsPerRow=numAppsPerRow;
-  mMaxAllowableMerges=(int)Math.ceil(numAppsPerRow / 2f);
+  DeviceProfile grid=LauncherAppState.getInstance().getDynamicGrid().getDeviceProfile();
+  if (grid.isPhone()) {
+    mMergeAlgorithm=new PhoneMergeAlgorithm((int)Math.ceil(numAppsPerRow / 2f),MIN_ROWS_IN_MERGED_SECTION_PHONE,MAX_NUM_MERGES_PHONE);
+  }
+ else {
+    mMergeAlgorithm=new TabletMergeAlgorithm();
+  }
   onAppsUpdated();
 }

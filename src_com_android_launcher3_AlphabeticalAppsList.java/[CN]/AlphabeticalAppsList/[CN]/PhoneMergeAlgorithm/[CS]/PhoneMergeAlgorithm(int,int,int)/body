@@ -1,0 +1,5 @@
+{
+  mMinAppsPerRow=minAppsPerRow;
+  mMinRowsInMergedSection=minRowsInMergedSection;
+  mMaxAllowableMerges=maxNumMerges;
+}
