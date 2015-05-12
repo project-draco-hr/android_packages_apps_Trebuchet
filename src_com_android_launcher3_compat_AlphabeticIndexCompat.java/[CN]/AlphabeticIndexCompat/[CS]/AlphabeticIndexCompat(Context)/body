@@ -10,12 +10,18 @@
     mGetBucketLabelMethod=clazz.getDeclaredMethod("getBucketLabel",int.class);
     mAlphabeticIndex=ctor.newInstance(curLocale);
     try {
-      if (!curLocale.getLanguage().equals(new Locale("en").getLanguage())) {
+      if (!curLocale.getLanguage().equals(Locale.ENGLISH.getLanguage())) {
         mAddLabelsMethod.invoke(mAlphabeticIndex,Locale.ENGLISH);
       }
     }
  catch (    Exception e) {
       e.printStackTrace();
+    }
+    if (curLocale.getLanguage().equals(Locale.JAPANESE.getLanguage())) {
+      mDefaultMiscLabel="\u4ed6";
+    }
+ else {
+      mDefaultMiscLabel=MID_DOT;
     }
     mHasValidAlphabeticIndex=true;
   }

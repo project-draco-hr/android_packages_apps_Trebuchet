@@ -3,12 +3,7 @@
     return mAppsPerRow;
   }
   if (mApps.getAdapterItems().get(position).isSectionHeader) {
-    if (AppsContainerView.GRID_HIDE_SECTION_HEADERS) {
-      return 0;
-    }
- else {
-      return mAppsPerRow;
-    }
+    return mAppsPerRow;
   }
  else {
     return 1;

@@ -2,12 +2,19 @@
   String s=Utilities.trim(cs);
   String sectionName=getBucketLabel(getBucketIndex(s));
   if (Utilities.trim(sectionName).isEmpty() && s.length() > 0) {
-    boolean startsWithDigit=Character.isDigit(s.codePointAt(0));
+    int c=s.codePointAt(0);
+    boolean startsWithDigit=Character.isDigit(c);
     if (startsWithDigit) {
       return "#";
     }
  else {
-      return "\u2022";
+      boolean startsWithLetter=Character.isLetter(c);
+      if (startsWithLetter) {
+        return mDefaultMiscLabel;
+      }
+ else {
+        return MID_DOT;
+      }
     }
   }
   return sectionName;

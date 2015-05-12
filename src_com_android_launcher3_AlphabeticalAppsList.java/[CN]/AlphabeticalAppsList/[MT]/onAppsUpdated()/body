@@ -1,5 +1,33 @@
 {
-  Collections.sort(mApps,mAppNameComparator.getComparator());
+  Collections.sort(mApps,mAppNameComparator.getAppInfoComparator());
+  Locale curLocale=mContext.getResources().getConfiguration().locale;
+  TreeMap<String,ArrayList<AppInfo>> sectionMap=null;
+  boolean localeRequiresSectionSorting=curLocale.equals(Locale.SIMPLIFIED_CHINESE);
+  if (localeRequiresSectionSorting) {
+    sectionMap=new TreeMap<>(mAppNameComparator.getSectionNameComparator());
+    for (    AppInfo info : mApps) {
+      String sectionName=mCachedSectionNames.get(info.title);
+      if (sectionName == null) {
+        sectionName=mIndexer.computeSectionName(info.title);
+        mCachedSectionNames.put(info.title,sectionName);
+      }
+      ArrayList<AppInfo> sectionApps=sectionMap.get(sectionName);
+      if (sectionApps == null) {
+        sectionApps=new ArrayList<>();
+        sectionMap.put(sectionName,sectionApps);
+      }
+      sectionApps.add(info);
+    }
+  }
+ else {
+    for (    AppInfo info : mApps) {
+      String sectionName=mCachedSectionNames.get(info.title);
+      if (sectionName == null) {
+        sectionName=mIndexer.computeSectionName(info.title);
+        mCachedSectionNames.put(info.title,sectionName);
+      }
+    }
+  }
   mFilteredApps.clear();
   mSections.clear();
   mSectionedFilteredApps.clear();
@@ -25,19 +53,19 @@
       }
     }
   }
-  allApps.addAll(mApps);
+  if (localeRequiresSectionSorting) {
+    for (    Map.Entry<String,ArrayList<AppInfo>> entry : sectionMap.entrySet()) {
+      allApps.addAll(entry.getValue());
+    }
+  }
+ else {
+    allApps.addAll(mApps);
+  }
   int numApps=allApps.size();
   for (int i=0; i < numApps; i++) {
     boolean isPredictedApp=i < numPredictedApps;
     AppInfo info=allApps.get(i);
-    String sectionName="";
-    if (!isPredictedApp) {
-      sectionName=mCachedSectionNames.get(info.title);
-      if (sectionName == null) {
-        sectionName=mIndexer.computeSectionName(info.title);
-        mCachedSectionNames.put(info.title,sectionName);
-      }
-    }
+    String sectionName=isPredictedApp ? "" : mCachedSectionNames.get(info.title);
     if (mFilter != null && !mFilter.retainApp(info,sectionName)) {
       continue;
     }
@@ -47,7 +75,7 @@
       lastFastScrollerSectionInfo=new FastScrollSectionInfo(sectionName,(float)appIndex / numApps);
       mSections.add(lastSectionInfo);
       mFastScrollerSections.add(lastFastScrollerSectionInfo);
-      if (!AppsContainerView.GRID_HIDE_SECTION_HEADERS && !hasFilter()) {
+      if (!hasFilter()) {
         AdapterItem sectionItem=AdapterItem.asSectionBreak(position++,lastSectionInfo);
         mSectionedFilteredApps.add(sectionItem);
       }
