@@ -13,4 +13,5 @@
   mScrollbarMinHeight=res.getDimensionPixelSize(R.dimen.apps_view_fast_scroll_bar_min_height);
   mScrollbarInset=res.getDimensionPixelSize(R.dimen.apps_view_fast_scroll_scrubber_touch_inset);
   setFastScrollerAlpha(getFastScrollerAlpha());
+  setOverScrollMode(View.OVER_SCROLL_NEVER);
 }

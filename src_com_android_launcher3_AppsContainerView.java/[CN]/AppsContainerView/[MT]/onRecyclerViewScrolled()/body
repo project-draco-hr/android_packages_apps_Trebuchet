@@ -1,8 +1,11 @@
 {
-  if (DYNAMIC_HEADER_ELEVATION) {
-    int elevation=Math.min(mRecyclerViewScrollY,DynamicGrid.pxFromDp(HEADER_ELEVATION_DP,getContext().getResources().getDisplayMetrics()));
-    if (Float.compare(mHeaderView.getElevation(),elevation) != 0) {
-      mHeaderView.setElevation(elevation);
+  if (DYNAMIC_HEADER_ELEVATION && Utilities.isLmpOrAbove()) {
+    int elevation=DynamicGrid.pxFromDp(HEADER_ELEVATION_DP,getContext().getResources().getDisplayMetrics());
+    int scrollToElevation=DynamicGrid.pxFromDp(HEADER_SCROLL_TO_ELEVATION_DP,getContext().getResources().getDisplayMetrics());
+    float elevationPct=(float)Math.min(mRecyclerViewScrollY,scrollToElevation) / scrollToElevation;
+    float newElevation=elevation * elevationPct;
+    if (Float.compare(mHeaderView.getElevation(),newElevation) != 0) {
+      mHeaderView.setElevation(newElevation);
     }
   }
 }

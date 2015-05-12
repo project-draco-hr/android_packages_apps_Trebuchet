@@ -14,5 +14,12 @@
   LinearLayoutManager layoutManager=(LinearLayoutManager)getLayoutManager();
   stopScroll();
   layoutManager.scrollToPositionWithOffset(lastScrollSection.appItem.position,0);
+  List<AlphabeticalAppsList.AdapterItem> items=mApps.getAdapterItems();
+  getCurScrollState(mScrollPosState,items);
+  if (mScrollPosState.rowIndex != -1) {
+    int rowIndex=findRowForAppIndex(mScrollPosState.rowFirstAppIndex);
+    int y=(rowIndex * mScrollPosState.rowHeight) - mScrollPosState.rowTopOffset;
+    updateScrollY(y);
+  }
   return lastScrollSection.sectionName;
 }

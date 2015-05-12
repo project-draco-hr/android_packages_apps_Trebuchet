@@ -1,6 +1,5 @@
 {
-  mDy=dy;
-  mScrollY+=dy;
+  mScrollY=scrollY;
   if (mScrollToListener != null) {
     mScrollToListener.onScrolledTo(0,mScrollY);
   }

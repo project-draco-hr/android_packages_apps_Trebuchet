@@ -1,0 +1,4 @@
+{
+  scrollToPosition(0);
+  updateScrollY(0);
+}

@@ -11,10 +11,10 @@
   int startMargin=grid.isPhone() ? mContentMarginStart : 0;
   int inset=mFixedBounds.isEmpty() ? mContainerInset : mFixedBoundsContainerInset;
   if (isRtl) {
-    mAppsRecyclerView.setPadding(inset,inset,inset + startMargin,inset);
+    mAppsRecyclerView.setPadding(inset + mAppsRecyclerView.getScrollbarWidth(),inset,inset + startMargin,inset);
   }
  else {
-    mAppsRecyclerView.setPadding(inset + startMargin,inset,inset,inset);
+    mAppsRecyclerView.setPadding(inset + startMargin,inset,inset + mAppsRecyclerView.getScrollbarWidth(),inset);
   }
   if (hasSearchBar) {
     LinearLayout.LayoutParams lp=(LinearLayout.LayoutParams)mHeaderView.getLayoutParams();

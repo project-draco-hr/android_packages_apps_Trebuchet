@@ -41,11 +41,9 @@
   mAppsRecyclerView.setLayoutManager(mLayoutManager);
   mAppsRecyclerView.setAdapter(mAdapter);
   mAppsRecyclerView.setHasFixedSize(true);
-  mAppsRecyclerView.setOnScrollListenerProxy(new RecyclerView.OnScrollListener(){
-    @Override public void onScrollStateChanged(    RecyclerView recyclerView,    int newState){
-    }
-    @Override public void onScrolled(    RecyclerView recyclerView,    int dx,    int dy){
-      mRecyclerViewScrollY+=dy;
+  mAppsRecyclerView.setOnScrollListenerProxy(new BaseContainerRecyclerView.OnScrollToListener(){
+    @Override public void onScrolledTo(    int x,    int y){
+      mRecyclerViewScrollY=y;
       onRecyclerViewScrolled();
     }
   }

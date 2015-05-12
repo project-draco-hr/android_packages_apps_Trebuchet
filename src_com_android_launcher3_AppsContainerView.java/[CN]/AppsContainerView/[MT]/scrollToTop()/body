@@ -1,4 +1,3 @@
 {
-  mAppsRecyclerView.scrollToPosition(0);
-  mRecyclerViewScrollY=0;
+  mAppsRecyclerView.scrollToTop();
 }
