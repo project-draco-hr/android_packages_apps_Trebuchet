@@ -24,9 +24,6 @@
  else {
     mBackground=null;
   }
-  if (mLayoutHorizontal) {
-    setGravity(Gravity.CENTER_VERTICAL);
-  }
   mLongPressHelper=new CheckLongPressHelper(this);
   mOutlineHelper=HolographicOutlineHelper.obtain(getContext());
   if (mCustomShadowsEnabled) {

@@ -7,5 +7,8 @@
  else     if (info instanceof ShortcutInfo) {
       applyFromShortcutInfo((ShortcutInfo)info,LauncherAppState.getInstance().getIconCache());
     }
+ else     if (info instanceof PackageItemInfo) {
+      applyFromPackageItemInfo((PackageItemInfo)info);
+    }
   }
 }
