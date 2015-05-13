@@ -52,7 +52,7 @@
  else       if (nextLp != null && nextLp.isFullScreenPage) {
         pageGap=getPaddingRight();
       }
-      childLeft+=childWidth + pageGap;
+      childLeft+=childWidth + pageGap + (lp.isFullScreenPage ? 0 : (getPaddingLeft() + getPaddingRight()));
     }
   }
   if (mFirstLayout && mCurrentPage >= 0 && mCurrentPage < childCount) {
