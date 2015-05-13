@@ -11,5 +11,7 @@
   mFolderName.setSelectAllOnFocus(true);
   mFolderName.setInputType(mFolderName.getInputType() | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS | InputType.TYPE_TEXT_FLAG_CAP_WORDS);
   mFooter=findViewById(R.id.folder_footer);
-  updateFooterHeight();
+  int measureSpec=MeasureSpec.UNSPECIFIED;
+  mFooter.measure(measureSpec,measureSpec);
+  mFooterHeight=mFooter.getMeasuredHeight();
 }

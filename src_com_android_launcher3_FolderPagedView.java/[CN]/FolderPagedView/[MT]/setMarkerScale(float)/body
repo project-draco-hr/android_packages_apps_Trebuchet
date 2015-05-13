@@ -1,0 +1,9 @@
+{
+  int count=mPageIndicator.getChildCount();
+  for (int i=0; i < count; i++) {
+    View marker=mPageIndicator.getChildAt(i);
+    marker.animate().cancel();
+    marker.setScaleX(scale);
+    marker.setScaleY(scale);
+  }
+}

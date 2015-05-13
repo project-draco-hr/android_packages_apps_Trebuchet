@@ -1,0 +1,7 @@
+{
+  int count=mPageIndicator.getChildCount();
+  OvershootInterpolator interpolator=new OvershootInterpolator(4);
+  for (int i=0; i < count; i++) {
+    mPageIndicator.getChildAt(i).animate().scaleX(1).scaleY(1).setInterpolator(interpolator).setDuration(Folder.FOOTER_ANIMATION_DURATION).setStartDelay(PAGE_INDICATOR_ANIMATION_DELAY * i);
+  }
+}
