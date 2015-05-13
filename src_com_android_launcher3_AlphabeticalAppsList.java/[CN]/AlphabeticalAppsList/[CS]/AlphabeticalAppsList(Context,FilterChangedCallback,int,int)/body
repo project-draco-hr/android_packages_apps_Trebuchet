@@ -1,0 +1,7 @@
+{
+  mContext=context;
+  mIndexer=new AlphabeticIndexCompat(context);
+  mAppNameComparator=new AppNameComparator(context);
+  mFilterChangedCallback=cb;
+  setNumAppsPerRow(numAppsPerRow,numPredictedAppsPerRow);
+}

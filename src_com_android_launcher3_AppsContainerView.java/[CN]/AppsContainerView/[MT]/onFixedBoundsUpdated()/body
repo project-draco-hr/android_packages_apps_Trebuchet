@@ -3,8 +3,9 @@
   DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
   if (grid.updateAppsViewNumCols(getContext().getResources(),mFixedBounds.width())) {
     mNumAppsPerRow=grid.appsViewNumCols;
-    mAppsRecyclerView.setNumAppsPerRow(mNumAppsPerRow);
+    mNumPredictedAppsPerRow=grid.appsViewNumPredictiveCols;
+    mAppsRecyclerView.setNumAppsPerRow(mNumAppsPerRow,mNumPredictedAppsPerRow);
     mAdapter.setNumAppsPerRow(mNumAppsPerRow);
-    mApps.setNumAppsPerRow(mNumAppsPerRow);
+    mApps.setNumAppsPerRow(mNumAppsPerRow,mNumPredictedAppsPerRow);
   }
 }

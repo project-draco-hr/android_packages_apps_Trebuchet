@@ -1,5 +1,33 @@
 {
   Collections.sort(mApps,mAppNameComparator.getAppInfoComparator());
+  mFilteredApps.clear();
+  mSections.clear();
+  mSectionedFilteredApps.clear();
+  mFastScrollerSections.clear();
+  SectionInfo lastSectionInfo=null;
+  String lastSectionName=null;
+  FastScrollSectionInfo lastFastScrollerSectionInfo=null;
+  int position=0;
+  int appIndex=0;
+  List<AppInfo> allApps=new ArrayList<>();
+  mPredictedApps.clear();
+  if (mPredictedAppComponents != null && !mPredictedAppComponents.isEmpty() && !hasFilter()) {
+    for (    ComponentName cn : mPredictedAppComponents) {
+      for (      AppInfo info : mApps) {
+        if (cn.equals(info.componentName)) {
+          mPredictedApps.add(info);
+          break;
+        }
+      }
+      if (mPredictedApps.size() == mNumPredictedAppsPerRow) {
+        break;
+      }
+    }
+    if (!mPredictedApps.isEmpty()) {
+      AdapterItem sectionItem=AdapterItem.asPredictionBarSpacer(position++);
+      mSectionedFilteredApps.add(sectionItem);
+    }
+  }
   Locale curLocale=mContext.getResources().getConfiguration().locale;
   TreeMap<String,ArrayList<AppInfo>> sectionMap=null;
   boolean localeRequiresSectionSorting=curLocale.equals(Locale.SIMPLIFIED_CHINESE);
@@ -18,6 +46,9 @@
       }
       sectionApps.add(info);
     }
+    for (    Map.Entry<String,ArrayList<AppInfo>> entry : sectionMap.entrySet()) {
+      allApps.addAll(entry.getValue());
+    }
   }
  else {
     for (    AppInfo info : mApps) {
@@ -27,49 +58,16 @@
         mCachedSectionNames.put(info.title,sectionName);
       }
     }
-  }
-  mFilteredApps.clear();
-  mSections.clear();
-  mSectionedFilteredApps.clear();
-  mFastScrollerSections.clear();
-  SectionInfo lastSectionInfo=null;
-  String lastSectionName=null;
-  FastScrollSectionInfo lastFastScrollerSectionInfo=null;
-  int position=0;
-  int appIndex=0;
-  List<AppInfo> allApps=new ArrayList<>();
-  int numPredictedApps=0;
-  if (mPredictedApps != null && !mPredictedApps.isEmpty() && !hasFilter()) {
-    for (    ComponentName cn : mPredictedApps) {
-      for (      AppInfo info : mApps) {
-        if (cn.equals(info.componentName)) {
-          allApps.add(info);
-          numPredictedApps++;
-          break;
-        }
-      }
-      if (numPredictedApps == mNumAppsPerRow) {
-        break;
-      }
-    }
-  }
-  if (localeRequiresSectionSorting) {
-    for (    Map.Entry<String,ArrayList<AppInfo>> entry : sectionMap.entrySet()) {
-      allApps.addAll(entry.getValue());
-    }
-  }
- else {
     allApps.addAll(mApps);
   }
   int numApps=allApps.size();
   for (int i=0; i < numApps; i++) {
-    boolean isPredictedApp=i < numPredictedApps;
     AppInfo info=allApps.get(i);
-    String sectionName=isPredictedApp ? "" : mCachedSectionNames.get(info.title);
+    String sectionName=mCachedSectionNames.get(info.title);
     if (mFilter != null && !mFilter.retainApp(info,sectionName)) {
       continue;
     }
-    if (lastSectionInfo == null || (!isPredictedApp && !sectionName.equals(lastSectionName))) {
+    if (lastSectionInfo == null || !sectionName.equals(lastSectionName)) {
       lastSectionName=sectionName;
       lastSectionInfo=new SectionInfo();
       lastFastScrollerSectionInfo=new FastScrollSectionInfo(sectionName,(float)appIndex / numApps);
@@ -80,7 +78,7 @@
         mSectionedFilteredApps.add(sectionItem);
       }
     }
-    AdapterItem appItem=AdapterItem.asApp(position++,lastSectionInfo,sectionName,lastSectionInfo.numApps++,info,appIndex++,isPredictedApp);
+    AdapterItem appItem=AdapterItem.asApp(position++,lastSectionInfo,sectionName,lastSectionInfo.numApps++,info,appIndex++);
     if (lastSectionInfo.firstAppItem == null) {
       lastSectionInfo.firstAppItem=appItem;
       lastFastScrollerSectionInfo.appItem=appItem;
@@ -88,34 +86,5 @@
     mSectionedFilteredApps.add(appItem);
     mFilteredApps.add(info);
   }
-  if (AppsContainerView.GRID_MERGE_SECTIONS && !hasFilter()) {
-    int sectionAppCount=0;
-    for (int i=0; i < mSections.size(); i++) {
-      SectionInfo section=mSections.get(i);
-      sectionAppCount=section.numApps;
-      int mergeCount=1;
-      while (mMergeAlgorithm.continueMerging(sectionAppCount,mNumAppsPerRow,mergeCount) && (i + 1) < mSections.size()) {
-        SectionInfo nextSection=mSections.remove(i + 1);
-        mSectionedFilteredApps.remove(nextSection.sectionBreakItem);
-        int pos=mSectionedFilteredApps.indexOf(section.firstAppItem);
-        int nextPos=pos + section.numApps;
-        for (int j=nextPos; j < (nextPos + nextSection.numApps); j++) {
-          AdapterItem item=mSectionedFilteredApps.get(j);
-          item.sectionInfo=section;
-          item.sectionAppIndex+=section.numApps;
-        }
-        pos=mSectionedFilteredApps.indexOf(nextSection.firstAppItem);
-        for (int j=pos; j < mSectionedFilteredApps.size(); j++) {
-          AdapterItem item=mSectionedFilteredApps.get(j);
-          item.position--;
-        }
-        section.numApps+=nextSection.numApps;
-        sectionAppCount+=nextSection.numApps;
-        if (DEBUG) {
-          Log.d(TAG,"Merging: " + nextSection.firstAppItem.sectionName + " to "+ section.firstAppItem.sectionName+ " mergedNumRows: "+ (sectionAppCount / mNumAppsPerRow));
-        }
-        mergeCount++;
-      }
-    }
-  }
+  mergeSections();
 }

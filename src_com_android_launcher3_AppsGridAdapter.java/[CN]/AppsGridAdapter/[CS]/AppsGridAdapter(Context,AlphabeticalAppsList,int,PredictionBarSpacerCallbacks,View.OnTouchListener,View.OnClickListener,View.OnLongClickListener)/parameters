@@ -1,0 +1,7 @@
+Context context
+AlphabeticalAppsList apps
+int appsPerRow
+PredictionBarSpacerCallbacks pbCb
+View.OnTouchListener touchListener
+View.OnClickListener iconClickListener
+View.OnLongClickListener iconLongClickListener

@@ -1,7 +1,7 @@
 {
   boolean isRtl=(getResources().getConfiguration().getLayoutDirection() == LAYOUT_DIRECTION_RTL);
   mAdapter.setRtl(isRtl);
-  mContentView=(LinearLayout)findViewById(R.id.apps_list);
+  mContentView=(FrameLayout)findViewById(R.id.apps_list);
   mContentView.setOnFocusChangeListener(new View.OnFocusChangeListener(){
     @Override public void onFocusChange(    View v,    boolean hasFocus){
       if (v == mContentView && hasFocus) {
@@ -15,6 +15,9 @@
   if (Utilities.isLmpOrAbove() && !DYNAMIC_HEADER_ELEVATION) {
     mHeaderView.setElevation(DynamicGrid.pxFromDp(HEADER_ELEVATION_DP,getContext().getResources().getDisplayMetrics()));
   }
+  mPredictionBarView=(ViewGroup)findViewById(R.id.prediction_bar);
+  FrameLayout.LayoutParams lp=(FrameLayout.LayoutParams)mPredictionBarView.getLayoutParams();
+  lp.height=mPredictionBarHeight;
   mSearchButtonView=mHeaderView.findViewById(R.id.search_button);
   mSearchBarContainerView=findViewById(R.id.app_search_container);
   mDismissSearchButtonView=mSearchBarContainerView.findViewById(R.id.dismiss_search_button);
@@ -37,7 +40,8 @@
   }
   mAppsRecyclerView=(AppsContainerRecyclerView)findViewById(R.id.apps_list_view);
   mAppsRecyclerView.setApps(mApps);
-  mAppsRecyclerView.setNumAppsPerRow(mNumAppsPerRow);
+  mAppsRecyclerView.setNumAppsPerRow(mNumAppsPerRow,mNumPredictedAppsPerRow);
+  mAppsRecyclerView.setPredictionBarHeight(mPredictionBarHeight);
   mAppsRecyclerView.setLayoutManager(mLayoutManager);
   mAppsRecyclerView.setAdapter(mAdapter);
   mAppsRecyclerView.setHasFixedSize(true);

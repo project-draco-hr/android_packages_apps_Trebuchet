@@ -1,0 +1,4 @@
+{
+  mNumAppsPerRow=numAppsPerRow;
+  mNumPredictedAppsPerRow=numPredictedAppsPerRow;
+}
