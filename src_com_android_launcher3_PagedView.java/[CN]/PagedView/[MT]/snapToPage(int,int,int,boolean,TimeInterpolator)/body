@@ -5,7 +5,6 @@
   if (focusedChild != null && whichPage != mCurrentPage && focusedChild == getPageAt(mCurrentPage)) {
     focusedChild.clearFocus();
   }
-  sendScrollAccessibilityEvent();
   pageBeginMoving();
   awakenScrollBars(duration);
   if (immediate) {
