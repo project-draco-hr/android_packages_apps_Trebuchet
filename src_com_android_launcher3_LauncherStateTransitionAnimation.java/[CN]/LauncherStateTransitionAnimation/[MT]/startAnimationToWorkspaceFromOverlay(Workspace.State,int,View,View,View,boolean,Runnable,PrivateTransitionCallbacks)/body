@@ -108,11 +108,12 @@
         if (mStateAnimation != stateAnimation)         return;
         dispatchOnLauncherTransitionStart(fromView,animated,false);
         dispatchOnLauncherTransitionStart(toView,animated,false);
+        boolean isLmpOrAbove=Utilities.isLmpOrAbove();
         for (        View v : layerViews.keySet()) {
           if (layerViews.get(v) == BUILD_AND_SET_LAYER) {
             v.setLayerType(View.LAYER_TYPE_HARDWARE,null);
           }
-          if (Utilities.isLmpOrAbove()) {
+          if (isLmpOrAbove && Utilities.isViewAttachedToWindow(v)) {
             v.buildLayer();
           }
         }
