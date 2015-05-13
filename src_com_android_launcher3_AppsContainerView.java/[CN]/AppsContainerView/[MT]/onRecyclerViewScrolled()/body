@@ -8,8 +8,5 @@
       mHeaderView.setElevation(newElevation);
     }
   }
-  if (mRecyclerViewScrollY < 0) {
-    new Throwable().printStackTrace();
-  }
   mPredictionBarView.setTranslationY(-mRecyclerViewScrollY + mAppsRecyclerView.getPaddingTop());
 }
