@@ -1,5 +1,4 @@
 {
-  stateOut.rowFirstAppIndex=-1;
   stateOut.rowIndex=-1;
   stateOut.rowTopOffset=-1;
   stateOut.rowHeight=-1;
@@ -9,8 +8,7 @@
     int position=getChildPosition(child);
     if (position != NO_POSITION) {
       AlphabeticalAppsList.AdapterItem item=items.get(position);
-      if (!item.isSectionHeader) {
-        stateOut.rowFirstAppIndex=item.appIndex;
+      if (item.viewType == AppsGridAdapter.ICON_VIEW_TYPE) {
         stateOut.rowIndex=findRowForAppIndex(item.appIndex);
         stateOut.rowTopOffset=getLayoutManager().getDecoratedTop(child);
         stateOut.rowHeight=child.getHeight();

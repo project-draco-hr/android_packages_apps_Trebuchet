@@ -2,7 +2,7 @@
   if (mApps.hasNoFilteredResults()) {
     return mAppsPerRow;
   }
-  if (mApps.getAdapterItems().get(position).isSectionHeader) {
+  if (mApps.getAdapterItems().get(position).viewType != AppsGridAdapter.ICON_VIEW_TYPE) {
     return mAppsPerRow;
   }
  else {

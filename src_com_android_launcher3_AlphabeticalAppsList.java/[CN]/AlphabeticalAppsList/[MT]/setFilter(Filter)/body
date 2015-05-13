@@ -3,5 +3,8 @@
     mFilter=f;
     onAppsUpdated();
     mAdapter.notifyDataSetChanged();
+    if (mFilterChangedCallback != null) {
+      mFilterChangedCallback.onFilterChanged();
+    }
   }
 }

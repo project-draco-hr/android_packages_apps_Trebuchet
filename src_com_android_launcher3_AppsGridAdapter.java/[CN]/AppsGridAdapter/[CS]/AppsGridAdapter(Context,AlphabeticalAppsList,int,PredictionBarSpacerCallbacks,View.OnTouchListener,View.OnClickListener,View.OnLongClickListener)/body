@@ -1,0 +1,26 @@
+{
+  Resources res=context.getResources();
+  mHandler=new Handler();
+  mApps=apps;
+  mAppsPerRow=appsPerRow;
+  mPredictionBarCb=pbCb;
+  mGridSizer=new GridSpanSizer();
+  mGridLayoutMgr=new GridLayoutManager(context,appsPerRow,GridLayoutManager.VERTICAL,false);
+  mGridLayoutMgr.setSpanSizeLookup(mGridSizer);
+  mItemDecoration=new GridItemDecoration();
+  mLayoutInflater=LayoutInflater.from(context);
+  mTouchListener=touchListener;
+  mIconClickListener=iconClickListener;
+  mIconLongClickListener=iconLongClickListener;
+  mStartMargin=res.getDimensionPixelSize(R.dimen.apps_grid_view_start_margin);
+  mSectionHeaderOffset=res.getDimensionPixelSize(R.dimen.apps_grid_section_y_offset);
+  mPaddingStart=res.getDimensionPixelSize(R.dimen.apps_container_inset);
+  mSectionTextPaint=new Paint();
+  mSectionTextPaint.setTextSize(res.getDimensionPixelSize(R.dimen.apps_view_section_text_size));
+  mSectionTextPaint.setColor(res.getColor(R.color.apps_view_section_text_color));
+  mSectionTextPaint.setAntiAlias(true);
+  mPredictedAppsDividerPaint=new Paint();
+  mPredictedAppsDividerPaint.setStrokeWidth(DynamicGrid.pxFromDp(1f,res.getDisplayMetrics()));
+  mPredictedAppsDividerPaint.setColor(0x1E000000);
+  mPredictedAppsDividerPaint.setAntiAlias(true);
+}

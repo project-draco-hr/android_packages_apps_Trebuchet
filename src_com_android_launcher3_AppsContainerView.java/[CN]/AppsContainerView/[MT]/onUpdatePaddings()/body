@@ -17,7 +17,12 @@
     mAppsRecyclerView.setPadding(inset + startMargin,inset,inset + mAppsRecyclerView.getScrollbarWidth(),inset);
   }
   if (hasSearchBar) {
-    LinearLayout.LayoutParams lp=(LinearLayout.LayoutParams)mHeaderView.getLayoutParams();
+    FrameLayout.LayoutParams lp=(FrameLayout.LayoutParams)mHeaderView.getLayoutParams();
     lp.leftMargin=lp.rightMargin=inset;
+    mHeaderView.requestLayout();
   }
+  FrameLayout.LayoutParams lp=(FrameLayout.LayoutParams)mPredictionBarView.getLayoutParams();
+  lp.leftMargin=inset + mAppsRecyclerView.getScrollbarWidth();
+  lp.rightMargin=inset + mAppsRecyclerView.getScrollbarWidth();
+  mPredictionBarView.requestLayout();
 }

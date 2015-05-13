@@ -3,6 +3,18 @@
   if (fastScrollSections.isEmpty()) {
     return "";
   }
+  LinearLayoutManager layoutManager=(LinearLayoutManager)getLayoutManager();
+  stopScroll();
+  float predictionBarFraction=0f;
+  if (mPredictionBarHeight > 0) {
+    predictionBarFraction=(float)mNumPredictedAppsPerRow / mApps.getSize();
+    if (touchFraction <= predictionBarFraction) {
+      layoutManager.scrollToPositionWithOffset(0,0);
+      updateScrollY(0);
+      return "";
+    }
+  }
+  touchFraction=(touchFraction - predictionBarFraction) * (1f / (1f - predictionBarFraction));
   AlphabeticalAppsList.FastScrollSectionInfo lastScrollSection=fastScrollSections.get(0);
   for (int i=1; i < fastScrollSections.size(); i++) {
     AlphabeticalAppsList.FastScrollSectionInfo scrollSection=fastScrollSections.get(i);
@@ -11,15 +23,12 @@
     }
     lastScrollSection=scrollSection;
   }
-  LinearLayoutManager layoutManager=(LinearLayoutManager)getLayoutManager();
-  stopScroll();
-  layoutManager.scrollToPositionWithOffset(lastScrollSection.appItem.position,0);
   List<AlphabeticalAppsList.AdapterItem> items=mApps.getAdapterItems();
   getCurScrollState(mScrollPosState,items);
   if (mScrollPosState.rowIndex != -1) {
-    int rowIndex=findRowForAppIndex(mScrollPosState.rowFirstAppIndex);
-    int y=(rowIndex * mScrollPosState.rowHeight) - mScrollPosState.rowTopOffset;
-    updateScrollY(y);
+    int scrollY=getPaddingTop() + (mScrollPosState.rowIndex * mScrollPosState.rowHeight) + mPredictionBarHeight - mScrollPosState.rowTopOffset;
+    updateScrollY(scrollY);
   }
+  layoutManager.scrollToPositionWithOffset(lastScrollSection.appItem.position,0);
   return lastScrollSection.sectionName;
 }

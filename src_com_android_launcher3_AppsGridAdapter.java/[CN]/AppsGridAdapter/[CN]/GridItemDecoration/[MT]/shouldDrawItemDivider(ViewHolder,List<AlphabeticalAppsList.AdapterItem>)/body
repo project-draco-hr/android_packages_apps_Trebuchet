@@ -1,4 +1,4 @@
 {
   int pos=holder.getPosition();
-  return items.get(pos).isPredictedApp;
+  return items.get(pos).viewType == AppsGridAdapter.PREDICTION_BAR_SPACER_TYPE;
 }

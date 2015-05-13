@@ -11,7 +11,7 @@
   getCurScrollState(mScrollPosState,items);
   if (mScrollPosState.rowIndex != -1) {
     int height=getHeight() - getPaddingTop() - getPaddingBottom();
-    int totalScrollHeight=rowCount * mScrollPosState.rowHeight;
+    int totalScrollHeight=rowCount * mScrollPosState.rowHeight + mPredictionBarHeight;
     if (totalScrollHeight > height) {
       int scrollbarHeight=Math.max(mScrollbarMinHeight,(int)(height / ((float)totalScrollHeight / height)));
       if (isRtl) {
@@ -22,7 +22,7 @@
       }
       int availableY=totalScrollHeight - height;
       int availableScrollY=height - scrollbarHeight;
-      y=(mScrollPosState.rowIndex * mScrollPosState.rowHeight) - mScrollPosState.rowTopOffset;
+      y=(mScrollPosState.rowIndex * mScrollPosState.rowHeight) + mPredictionBarHeight - mScrollPosState.rowTopOffset;
       y=getPaddingTop() + (int)(((float)(getPaddingTop() + y) / availableY) * availableScrollY);
       mVerticalScrollbarBounds.set(x,y,x + mScrollbarWidth,y + scrollbarHeight);
       return;

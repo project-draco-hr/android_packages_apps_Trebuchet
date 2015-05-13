@@ -20,7 +20,7 @@
   folderBackgroundOffset=-edgeMarginPx;
   folderIconSizePx=iconSizePx + 2 * -folderBackgroundOffset;
   allAppsCellWidthPx=allAppsIconSizePx;
-  allAppsCellHeightPx=allAppsIconSizePx + drawablePadding + iconTextSizePx;
+  allAppsCellHeightPx=allAppsIconSizePx + drawablePadding + allAppsIconTextSizePx;
   int maxLongEdgeCellCount=res.getInteger(R.integer.config_dynamic_grid_max_long_edge_cell_count);
   int maxShortEdgeCellCount=res.getInteger(R.integer.config_dynamic_grid_max_short_edge_cell_count);
   int minEdgeCellCount=res.getInteger(R.integer.config_dynamic_grid_min_edge_cell_count);

@@ -1,0 +1,11 @@
+{
+  AdapterItem item=new AdapterItem();
+  item.viewType=AppsGridAdapter.ICON_VIEW_TYPE;
+  item.position=pos;
+  item.sectionInfo=section;
+  item.sectionName=sectionName;
+  item.sectionAppIndex=sectionAppIndex;
+  item.appInfo=appInfo;
+  item.appIndex=appIndex;
+  return item;
+}
