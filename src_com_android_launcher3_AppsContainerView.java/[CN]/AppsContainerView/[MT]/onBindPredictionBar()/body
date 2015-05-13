@@ -11,9 +11,6 @@
     }
  else {
       icon=(BubbleTextView)mLayoutInflater.inflate(R.layout.apps_prediction_bar_icon_view,mPredictionBarView,false);
-      icon.setOnTouchListener(this);
-      icon.setOnClickListener(mLauncher);
-      icon.setOnLongClickListener(this);
       icon.setFocusable(true);
       mPredictionBarView.addView(icon);
     }

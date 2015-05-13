@@ -1,0 +1,6 @@
+{
+  if (mPredictionIconCheckForLongPress != null) {
+    mPredictionIconCheckForLongPress.cancelLongPress();
+  }
+  super.requestDisallowInterceptTouchEvent(disallowIntercept);
+}

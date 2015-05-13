@@ -1,0 +1,13 @@
+{
+  int[] coord={x,y};
+  Rect hitRect=new Rect();
+  Utilities.mapCoordInSelfToDescendent(mPredictionBarView,this,coord);
+  for (int i=0; i < mPredictionBarView.getChildCount(); i++) {
+    View child=mPredictionBarView.getChildAt(i);
+    child.getHitRect(hitRect);
+    if (hitRect.contains(coord[0],coord[1])) {
+      return child;
+    }
+  }
+  return null;
+}

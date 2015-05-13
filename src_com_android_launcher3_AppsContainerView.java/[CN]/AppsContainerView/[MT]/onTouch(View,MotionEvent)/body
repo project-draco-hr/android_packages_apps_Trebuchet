@@ -2,7 +2,7 @@
 switch (ev.getAction()) {
 case MotionEvent.ACTION_DOWN:
 case MotionEvent.ACTION_MOVE:
-    mLastTouchPos.set((int)ev.getX(),(int)ev.getY());
+    mIconLastTouchPos.set((int)ev.getX(),(int)ev.getY());
   break;
 }
 return false;
