@@ -6,7 +6,8 @@
   mView.setAdapter(mAdapter);
   mView.setLayoutManager(new LinearLayoutManager(getContext()){
     @Override protected int getExtraLayoutSpace(    State state){
-      return super.getExtraLayoutSpace(state) + WidgetsContainerView.this.getHeight() * PRELOAD_SCREEN_HEIGHT_MULTIPLE;
+      DeviceProfile grid=LauncherAppState.getInstance().getDynamicGrid().getDeviceProfile();
+      return super.getExtraLayoutSpace(state) + grid.availableHeightPx * PRELOAD_SCREEN_HEIGHT_MULTIPLE;
     }
   }
 );
