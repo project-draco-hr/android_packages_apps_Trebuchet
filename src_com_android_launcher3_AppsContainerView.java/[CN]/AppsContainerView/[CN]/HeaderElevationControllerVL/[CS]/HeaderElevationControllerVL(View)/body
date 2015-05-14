@@ -1,0 +1,6 @@
+{
+  mHeader=header;
+  Resources res=header.getContext().getResources();
+  mMaxElevation=res.getDimension(R.dimen.all_apps_header_max_elevation);
+  mScrollToElevation=res.getDimension(R.dimen.all_apps_header_scroll_to_elevation);
+}

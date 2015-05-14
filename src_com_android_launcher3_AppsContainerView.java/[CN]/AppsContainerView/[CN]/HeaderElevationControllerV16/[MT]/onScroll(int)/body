@@ -1,0 +1,4 @@
+{
+  float elevationPct=(float)Math.min(scrollY,mScrollToElevation) / mScrollToElevation;
+  mShadow.setAlpha(elevationPct);
+}
