@@ -1,0 +1,20 @@
+{
+  if (mFastScrollAlpha > 0f && !mFastScrollSectionName.isEmpty()) {
+    int x;
+    int y;
+    boolean isRtl=Utilities.isRtl(getResources());
+    Rect bgBounds=mFastScrollerBg.getBounds();
+    if (isRtl) {
+      x=mBackgroundPadding.left + getScrollBarSize();
+    }
+ else {
+      x=getWidth() - getPaddingRight() - getScrollBarSize()- bgBounds.width();
+    }
+    y=mLastY - (int)(FAST_SCROLL_OVERLAY_Y_OFFSET_FACTOR * bgBounds.height());
+    y=Math.max(getPaddingTop(),Math.min(y,getHeight() - getPaddingBottom() - bgBounds.height()));
+    mFastScrollerBounds.set(x,y,x + bgBounds.width(),y + bgBounds.height());
+  }
+ else {
+    mFastScrollerBounds.setEmpty();
+  }
+}

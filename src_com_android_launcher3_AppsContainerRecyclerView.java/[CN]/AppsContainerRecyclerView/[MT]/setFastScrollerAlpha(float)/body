@@ -1,4 +1,4 @@
 {
   mFastScrollAlpha=alpha;
-  invalidateFastScroller();
+  invalidateFastScroller(mFastScrollerBounds);
 }
