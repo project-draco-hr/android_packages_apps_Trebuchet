@@ -5,7 +5,12 @@
   ViewGroup container=(ViewGroup)mLayoutInflater.inflate(R.layout.widgets_list_row_view,parent,false);
   LinearLayout cellList=(LinearLayout)container.findViewById(R.id.widgets_cell_list);
   MarginLayoutParams lp=(MarginLayoutParams)cellList.getLayoutParams();
-  lp.setMarginStart(mIndent);
+  if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+    lp.setMarginStart(mIndent);
+  }
+ else {
+    lp.leftMargin=mIndent;
+  }
   cellList.setLayoutParams(lp);
   return new WidgetsRowViewHolder(container);
 }

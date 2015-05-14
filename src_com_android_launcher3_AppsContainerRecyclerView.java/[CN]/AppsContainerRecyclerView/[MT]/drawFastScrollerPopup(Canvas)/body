@@ -2,7 +2,7 @@
   if (mFastScrollAlpha > 0f && !mFastScrollSectionName.isEmpty()) {
     int x;
     int y;
-    boolean isRtl=(getResources().getConfiguration().getLayoutDirection() == LAYOUT_DIRECTION_RTL);
+    boolean isRtl=Utilities.isRtl(getResources());
     Rect bgBounds=mFastScrollerBg.getBounds();
     if (isRtl) {
       x=mBackgroundPadding.left + getScrollBarSize();

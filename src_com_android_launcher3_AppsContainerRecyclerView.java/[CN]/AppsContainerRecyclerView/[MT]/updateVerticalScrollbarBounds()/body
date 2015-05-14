@@ -6,7 +6,7 @@
   }
   int x;
   int y;
-  boolean isRtl=(getResources().getConfiguration().getLayoutDirection() == LAYOUT_DIRECTION_RTL);
+  boolean isRtl=Utilities.isRtl(getResources());
   int rowCount=getNumRows();
   getCurScrollState(mScrollPosState,items);
   if (mScrollPosState.rowIndex != -1) {

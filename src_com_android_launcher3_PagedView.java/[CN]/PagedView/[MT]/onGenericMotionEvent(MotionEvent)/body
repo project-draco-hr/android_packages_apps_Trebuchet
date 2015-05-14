@@ -14,7 +14,7 @@ case MotionEvent.ACTION_SCROLL:
           hscroll=event.getAxisValue(MotionEvent.AXIS_HSCROLL);
         }
         if (hscroll != 0 || vscroll != 0) {
-          boolean isForwardScroll=isLayoutRtl() ? (hscroll < 0 || vscroll < 0) : (hscroll > 0 || vscroll > 0);
+          boolean isForwardScroll=mIsRtl ? (hscroll < 0 || vscroll < 0) : (hscroll > 0 || vscroll > 0);
           if (isForwardScroll) {
             scrollRight();
           }

@@ -1,7 +1,7 @@
 {
   int childCount=getChildCount();
   if (childCount > 0) {
-    final int index=isLayoutRtl() ? 0 : childCount - 1;
+    final int index=mIsRtl ? 0 : childCount - 1;
     mMaxScrollX=getScrollForPage(index);
   }
  else {

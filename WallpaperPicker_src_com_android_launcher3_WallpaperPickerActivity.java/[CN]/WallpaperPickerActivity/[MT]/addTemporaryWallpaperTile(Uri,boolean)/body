@@ -13,7 +13,7 @@
         return createThumbnail(defaultSize,context,uri,null,null,0,rotation,false);
       }
  catch (      SecurityException securityException) {
-        if (isDestroyed()) {
+        if (isActivityDestroyed()) {
           cancel(false);
         }
  else {

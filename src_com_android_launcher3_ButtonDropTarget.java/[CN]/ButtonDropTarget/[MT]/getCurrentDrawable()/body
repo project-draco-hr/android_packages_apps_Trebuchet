@@ -1,5 +1,5 @@
 {
-  Drawable[] drawables=getCompoundDrawablesRelative();
+  Drawable[] drawables=getCompoundDrawables();
   for (int i=0; i < drawables.length; ++i) {
     if (drawables[i] != null) {
       return drawables[i];

@@ -1,0 +1,3 @@
+{
+  return (Folder)LayoutInflater.from(launcher).inflate(R.layout.user_folder,launcher.getDragLayer(),false);
+}

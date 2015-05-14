@@ -7,7 +7,7 @@
     float scrollRange=getScrollForPage(index + 1) - getScrollForPage(index);
     translationX=scrollRange - scrollDelta;
     progress=(scrollRange - scrollDelta) / scrollRange;
-    if (isLayoutRtl()) {
+    if (mIsRtl) {
       translationX=Math.min(0,translationX);
     }
  else {

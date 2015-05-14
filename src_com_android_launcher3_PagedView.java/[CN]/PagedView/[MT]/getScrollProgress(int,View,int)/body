@@ -4,7 +4,7 @@
   int count=getChildCount();
   final int totalDistance;
   int adjacentPage=page + 1;
-  if ((delta < 0 && !isLayoutRtl()) || (delta > 0 && isLayoutRtl())) {
+  if ((delta < 0 && !mIsRtl) || (delta > 0 && mIsRtl)) {
     adjacentPage=page - 1;
   }
   if (adjacentPage < 0 || adjacentPage > count - 1) {

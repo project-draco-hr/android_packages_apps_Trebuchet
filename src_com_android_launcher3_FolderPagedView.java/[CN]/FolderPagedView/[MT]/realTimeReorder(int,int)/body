@@ -67,7 +67,7 @@
           }
         }
 ;
-        v.animate().translationXBy((direction > 0 ^ rtlLayout) ? -v.getWidth() : v.getWidth()).setDuration(REORDER_ANIMATION_DURATION).setStartDelay(0).withEndAction(endAction);
+        v.animate().translationXBy((direction > 0 ^ mIsRtl) ? -v.getWidth() : v.getWidth()).setDuration(REORDER_ANIMATION_DURATION).setStartDelay(0).withEndAction(endAction);
         mPendingAnimations.put(v,endAction);
       }
     }

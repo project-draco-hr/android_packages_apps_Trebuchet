@@ -1,5 +1,5 @@
 {
-  if (isLayoutRtl()) {
+  if (mIsRtl) {
     return (x > (getViewportOffsetX() + getViewportWidth() - getPaddingRight() - mPageSpacing));
   }
   return (x < getViewportOffsetX() + getPaddingLeft() + mPageSpacing);

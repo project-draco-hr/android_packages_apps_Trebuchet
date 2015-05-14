@@ -1,5 +1,5 @@
 {
-  if (mWallpaperScrollContainer.getLayoutDirection() == View.LAYOUT_DIRECTION_RTL) {
+  if (Utilities.isRtl(getResources())) {
     final ViewTreeObserver observer=mWallpaperScrollContainer.getViewTreeObserver();
     observer.addOnGlobalLayoutListener(new OnGlobalLayoutListener(){
       public void onGlobalLayout(){
