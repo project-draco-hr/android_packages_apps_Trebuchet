@@ -129,9 +129,8 @@ if (Math.abs(deltaX) > pageWidth * RETURN_TO_ORIGINAL_PAGE_THRESHOLD && Math.sig
 returnToOriginalPage=true;
 }
 int finalPage;
-final boolean isRtl=isLayoutRtl();
-boolean isDeltaXLeft=isRtl ? deltaX > 0 : deltaX < 0;
-boolean isVelocityXLeft=isRtl ? velocityX > 0 : velocityX < 0;
+boolean isDeltaXLeft=mIsRtl ? deltaX > 0 : deltaX < 0;
+boolean isVelocityXLeft=mIsRtl ? velocityX > 0 : velocityX < 0;
 if (((isSignificantMove && !isDeltaXLeft && !isFling) || (isFling && !isVelocityXLeft)) && mCurrentPage > 0) {
 finalPage=returnToOriginalPage ? mCurrentPage : mCurrentPage - 1;
 snapToPageWithVelocity(finalPage,velocityX);

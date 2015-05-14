@@ -1,5 +1,5 @@
 {
-  boolean isRtl=(getResources().getConfiguration().getLayoutDirection() == LAYOUT_DIRECTION_RTL);
+  boolean isRtl=Utilities.isRtl(getResources());
   mAdapter.setRtl(isRtl);
   mContentView=(FrameLayout)findViewById(R.id.apps_list);
   mContentView.setOnFocusChangeListener(new View.OnFocusChangeListener(){

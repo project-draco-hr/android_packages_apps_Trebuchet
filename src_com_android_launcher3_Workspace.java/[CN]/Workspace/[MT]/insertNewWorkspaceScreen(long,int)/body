@@ -2,7 +2,7 @@
   if (mWorkspaceScreens.containsKey(screenId)) {
     throw new RuntimeException("Screen id " + screenId + " already exists!");
   }
-  CellLayout newScreen=(CellLayout)mLauncher.getLayoutInflater().inflate(R.layout.workspace_screen,null);
+  CellLayout newScreen=(CellLayout)mLauncher.getLayoutInflater().inflate(R.layout.workspace_screen,this,false);
   newScreen.setOnLongClickListener(mLongClickListener);
   newScreen.setOnClickListener(mLauncher);
   newScreen.setSoundEffectsEnabled(false);

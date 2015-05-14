@@ -10,7 +10,7 @@
     cancelCurrentPageLongPress();
   }
   boolean passRightSwipesToCustomContent=(mTouchDownTime - mCustomContentShowTime) > CUSTOM_CONTENT_GESTURE_DELAY;
-  boolean swipeInIgnoreDirection=isLayoutRtl() ? deltaX < 0 : deltaX > 0;
+  boolean swipeInIgnoreDirection=mIsRtl ? deltaX < 0 : deltaX > 0;
   boolean onCustomContentScreen=getScreenIdForPageIndex(getCurrentPage()) == CUSTOM_CONTENT_SCREEN_ID;
   if (swipeInIgnoreDirection && onCustomContentScreen && passRightSwipesToCustomContent) {
     return;

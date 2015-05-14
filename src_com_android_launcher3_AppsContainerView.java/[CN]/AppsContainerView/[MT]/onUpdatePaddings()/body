@@ -1,5 +1,5 @@
 {
-  boolean isRtl=(getResources().getConfiguration().getLayoutDirection() == LAYOUT_DIRECTION_RTL);
+  boolean isRtl=Utilities.isRtl(getResources());
   boolean hasSearchBar=(mSearchBarEditView != null) && (mSearchBarEditView.getVisibility() == View.VISIBLE);
   if (mFixedBounds.isEmpty()) {
     setPadding(mInsets.left,mContainerInset + mInsets.top,mInsets.right,mContainerInset + mInsets.bottom);

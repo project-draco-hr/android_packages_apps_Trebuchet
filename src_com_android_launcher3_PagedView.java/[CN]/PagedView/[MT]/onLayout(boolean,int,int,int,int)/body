@@ -7,10 +7,9 @@
   int offsetX=getViewportOffsetX();
   int offsetY=getViewportOffsetY();
   mViewport.offset(offsetX,offsetY);
-  final boolean isRtl=isLayoutRtl();
-  final int startIndex=isRtl ? childCount - 1 : 0;
-  final int endIndex=isRtl ? -1 : childCount;
-  final int delta=isRtl ? -1 : 1;
+  final int startIndex=mIsRtl ? childCount - 1 : 0;
+  final int endIndex=mIsRtl ? -1 : childCount;
+  final int delta=mIsRtl ? -1 : 1;
   int verticalPadding=getPaddingTop() + getPaddingBottom();
   LayoutParams lp=(LayoutParams)getChildAt(startIndex).getLayoutParams();
   LayoutParams nextLp;

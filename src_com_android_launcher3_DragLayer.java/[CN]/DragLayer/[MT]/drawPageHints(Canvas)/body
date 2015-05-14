@@ -5,9 +5,8 @@
     Rect childRect=new Rect();
     getDescendantRectRelativeToSelf(workspace.getChildAt(workspace.getChildCount() - 1),childRect);
     int page=workspace.getNextPage();
-    final boolean isRtl=isLayoutRtl();
-    CellLayout leftPage=(CellLayout)workspace.getChildAt(isRtl ? page + 1 : page - 1);
-    CellLayout rightPage=(CellLayout)workspace.getChildAt(isRtl ? page - 1 : page + 1);
+    CellLayout leftPage=(CellLayout)workspace.getChildAt(mIsRtl ? page + 1 : page - 1);
+    CellLayout rightPage=(CellLayout)workspace.getChildAt(mIsRtl ? page - 1 : page + 1);
     if (leftPage != null && leftPage.isDragTarget()) {
       Drawable left=mInScrollArea && leftPage.getIsDragOverlapping() ? mLeftHoverDrawableActive : mLeftHoverDrawable;
       left.setBounds(0,childRect.top,left.getIntrinsicWidth(),childRect.bottom);

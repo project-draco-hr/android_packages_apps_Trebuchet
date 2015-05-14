@@ -15,10 +15,10 @@
   float cellOverlap=mContent.getCurrentCellLayout().getCellWidth() * ICON_OVERSCROLL_WIDTH_FACTOR;
   boolean isOutsideLeftEdge=x < cellOverlap;
   boolean isOutsideRightEdge=x > (getWidth() - cellOverlap);
-  if (currentPage > 0 && (mContent.rtlLayout ? isOutsideRightEdge : isOutsideLeftEdge)) {
+  if (currentPage > 0 && (mContent.mIsRtl ? isOutsideRightEdge : isOutsideLeftEdge)) {
     showScrollHint(DragController.SCROLL_LEFT,d);
   }
- else   if (currentPage < (mContent.getPageCount() - 1) && (mContent.rtlLayout ? isOutsideLeftEdge : isOutsideRightEdge)) {
+ else   if (currentPage < (mContent.getPageCount() - 1) && (mContent.mIsRtl ? isOutsideLeftEdge : isOutsideRightEdge)) {
     showScrollHint(DragController.SCROLL_RIGHT,d);
   }
  else {

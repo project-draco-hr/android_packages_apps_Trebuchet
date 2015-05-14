@@ -7,4 +7,5 @@
   mRightHoverDrawable=res.getDrawable(R.drawable.page_hover_right);
   mLeftHoverDrawableActive=res.getDrawable(R.drawable.page_hover_left_active);
   mRightHoverDrawableActive=res.getDrawable(R.drawable.page_hover_right_active);
+  mIsRtl=Utilities.isRtl(res);
 }

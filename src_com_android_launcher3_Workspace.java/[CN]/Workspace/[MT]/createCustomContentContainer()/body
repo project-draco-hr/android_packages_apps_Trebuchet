@@ -1,5 +1,5 @@
 {
-  CellLayout customScreen=(CellLayout)mLauncher.getLayoutInflater().inflate(R.layout.workspace_screen,null);
+  CellLayout customScreen=(CellLayout)mLauncher.getLayoutInflater().inflate(R.layout.workspace_screen,this,false);
   customScreen.disableBackground();
   customScreen.disableDragTarget();
   mWorkspaceScreens.put(CUSTOM_CONTENT_SCREEN_ID,customScreen);

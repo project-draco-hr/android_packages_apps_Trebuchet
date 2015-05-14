@@ -6,5 +6,6 @@
   mPageIndicatorViewId=a.getResourceId(R.styleable.PagedView_pageIndicator,-1);
   a.recycle();
   setHapticFeedbackEnabled(false);
+  mIsRtl=Utilities.isRtl(getResources());
   init();
 }

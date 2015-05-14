@@ -1,5 +1,4 @@
 {
-  final boolean isRtl=isLayoutRtl();
   super.screenScrolled(screenCenter);
   updatePageAlphaValues(screenCenter);
   updateStateForCustomContent(screenCenter);
@@ -10,7 +9,7 @@
     final int lowerIndex=0;
     final int upperIndex=getChildCount() - 1;
     final boolean isLeftPage=mOverScrollX < 0;
-    index=(!isRtl && isLeftPage) || (isRtl && !isLeftPage) ? lowerIndex : upperIndex;
+    index=(!mIsRtl && isLeftPage) || (mIsRtl && !isLeftPage) ? lowerIndex : upperIndex;
     CellLayout cl=(CellLayout)getChildAt(index);
     float effect=Math.abs(mOverScrollEffect);
     cl.setOverScrollAmount(Math.abs(effect),isLeftPage);

@@ -24,7 +24,7 @@ synchronized (mReusableBitmaps) {
 );
     }
  catch (    SecurityException securityException) {
-      if (isDestroyed()) {
+      if (isActivityDestroyed()) {
         return true;
       }
  else {
