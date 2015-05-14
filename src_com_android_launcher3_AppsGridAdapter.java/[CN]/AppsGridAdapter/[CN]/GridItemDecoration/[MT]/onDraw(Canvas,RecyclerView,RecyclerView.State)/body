@@ -15,9 +15,8 @@
       continue;
     }
     if (shouldDrawItemDivider(holder,items) && !hasDrawnPredictedAppsDivider) {
-      parent.getBackground().getPadding(mTmpBounds);
       int top=child.getTop() + child.getHeight();
-      c.drawLine(mTmpBounds.left,top,parent.getWidth() - mTmpBounds.right,top,mPredictedAppsDividerPaint);
+      c.drawLine(mBackgroundPadding.left,top,parent.getWidth() - mBackgroundPadding.right,top,mPredictedAppsDividerPaint);
       hasDrawnPredictedAppsDivider=true;
     }
  else     if (grid.isPhone() && shouldDrawItemSection(holder,i,items)) {
