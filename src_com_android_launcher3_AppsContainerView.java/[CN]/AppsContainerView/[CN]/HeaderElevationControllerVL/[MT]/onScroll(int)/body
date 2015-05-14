@@ -1,0 +1,7 @@
+{
+  float elevationPct=(float)Math.min(scrollY,mScrollToElevation) / mScrollToElevation;
+  float newElevation=mMaxElevation * elevationPct;
+  if (Float.compare(mHeader.getElevation(),newElevation) != 0) {
+    mHeader.setElevation(newElevation);
+  }
+}

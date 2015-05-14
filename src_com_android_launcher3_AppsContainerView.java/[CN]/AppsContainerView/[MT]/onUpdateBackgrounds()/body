@@ -1,6 +1,7 @@
 {
   int inset=mFixedBounds.isEmpty() ? mContainerInset : mFixedBoundsContainerInset;
-  boolean hasSearchBar=(mSearchBarEditView != null) && (mSearchBarEditView.getVisibility() == View.VISIBLE);
-  mAppsRecyclerView.setBackground(new InsetDrawable(getContext().getResources().getDrawable(hasSearchBar ? R.drawable.apps_list_search_bg : R.drawable.quantum_panel_shape),inset,0,inset,0));
-  getRevealView().setBackground(new InsetDrawable(getContext().getResources().getDrawable(R.drawable.quantum_panel_shape),inset,0,inset,0));
+  InsetDrawable background=new InsetDrawable(getContext().getResources().getDrawable(R.drawable.quantum_panel_shape),inset,0,inset,0);
+  mContentView.setBackground(background);
+  mAppsRecyclerView.updateBackgroundPadding(background);
+  getRevealView().setBackground(background.getConstantState().newDrawable());
 }

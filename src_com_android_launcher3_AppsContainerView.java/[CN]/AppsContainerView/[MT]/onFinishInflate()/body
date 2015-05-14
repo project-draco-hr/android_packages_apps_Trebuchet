@@ -12,8 +12,9 @@
 );
   mHeaderView=findViewById(R.id.header);
   mHeaderView.setOnClickListener(this);
-  if (Utilities.isLmpOrAbove() && !DYNAMIC_HEADER_ELEVATION) {
-    mHeaderView.setElevation(DynamicGrid.pxFromDp(HEADER_ELEVATION_DP,getContext().getResources().getDisplayMetrics()));
+  mElevationController=Utilities.isLmpOrAbove() ? new HeaderElevationControllerVL(mHeaderView) : new HeaderElevationControllerV16(mHeaderView);
+  if (!DYNAMIC_HEADER_ELEVATION) {
+    mElevationController.onScroll(getResources().getDimensionPixelSize(R.dimen.all_apps_header_scroll_to_elevation));
   }
   mPredictionBarView=(ViewGroup)findViewById(R.id.prediction_bar);
   FrameLayout.LayoutParams lp=(FrameLayout.LayoutParams)mPredictionBarView.getLayoutParams();

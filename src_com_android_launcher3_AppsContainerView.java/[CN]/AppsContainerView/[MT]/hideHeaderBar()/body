@@ -1,5 +1,6 @@
 {
   mHeaderView.setVisibility(View.GONE);
+  mElevationController.disable();
   onUpdateBackgrounds();
   onUpdatePaddings();
 }

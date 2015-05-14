@@ -1,0 +1,10 @@
+{
+  Resources res=header.getContext().getResources();
+  mScrollToElevation=res.getDimension(R.dimen.all_apps_header_scroll_to_elevation);
+  mShadow=new View(header.getContext());
+  mShadow.setBackground(new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM,new int[]{0x44000000,0x00000000}));
+  mShadow.setAlpha(0);
+  FrameLayout.LayoutParams lp=new FrameLayout.LayoutParams(LayoutParams.MATCH_PARENT,res.getDimensionPixelSize(R.dimen.all_apps_header_shadow_height));
+  lp.topMargin=((FrameLayout.LayoutParams)header.getLayoutParams()).height;
+  ((ViewGroup)header.getParent()).addView(mShadow,lp);
+}

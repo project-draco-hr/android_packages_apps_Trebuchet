@@ -1,4 +1,3 @@
 {
-  super.setBackground(background);
   background.getPadding(mBackgroundPadding);
 }
