@@ -6,7 +6,7 @@
   LinearLayoutManager layoutManager=(LinearLayoutManager)getLayoutManager();
   stopScroll();
   float predictionBarFraction=0f;
-  if (mPredictionBarHeight > 0) {
+  if (!mApps.getPredictedApps().isEmpty()) {
     predictionBarFraction=(float)mNumPredictedAppsPerRow / mApps.getSize();
     if (touchFraction <= predictionBarFraction) {
       layoutManager.scrollToPositionWithOffset(0,0);

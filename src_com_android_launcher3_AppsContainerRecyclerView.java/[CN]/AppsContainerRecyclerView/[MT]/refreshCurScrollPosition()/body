@@ -2,7 +2,8 @@
   List<AlphabeticalAppsList.AdapterItem> items=mApps.getAdapterItems();
   getCurScrollState(mScrollPosState,items);
   if (mScrollPosState.rowIndex != -1) {
-    int scrollY=getPaddingTop() + (mScrollPosState.rowIndex * mScrollPosState.rowHeight) + mPredictionBarHeight - mScrollPosState.rowTopOffset;
+    int predictionBarHeight=mApps.getPredictedApps().isEmpty() ? 0 : mPredictionBarHeight;
+    int scrollY=getPaddingTop() + (mScrollPosState.rowIndex * mScrollPosState.rowHeight) + predictionBarHeight - mScrollPosState.rowTopOffset;
     updateScrollY(scrollY);
   }
 }
