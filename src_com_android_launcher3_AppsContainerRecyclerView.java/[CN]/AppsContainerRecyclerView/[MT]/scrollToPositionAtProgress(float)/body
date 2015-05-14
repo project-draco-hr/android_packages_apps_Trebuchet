@@ -23,12 +23,7 @@
     }
     lastScrollSection=scrollSection;
   }
-  List<AlphabeticalAppsList.AdapterItem> items=mApps.getAdapterItems();
-  getCurScrollState(mScrollPosState,items);
-  if (mScrollPosState.rowIndex != -1) {
-    int scrollY=getPaddingTop() + (mScrollPosState.rowIndex * mScrollPosState.rowHeight) + mPredictionBarHeight - mScrollPosState.rowTopOffset;
-    updateScrollY(scrollY);
-  }
+  refreshCurScrollPosition();
   layoutManager.scrollToPositionWithOffset(lastScrollSection.appItem.position,0);
   return lastScrollSection.sectionName;
 }
