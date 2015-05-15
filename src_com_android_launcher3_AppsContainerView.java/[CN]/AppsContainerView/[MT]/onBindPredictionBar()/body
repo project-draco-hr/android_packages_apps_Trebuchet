@@ -1,7 +1,5 @@
 {
-  if (!updatePredictionBarVisibility()) {
-    return;
-  }
+  updatePredictionBarVisibility();
   List<AppInfo> predictedApps=mApps.getPredictedApps();
   int childCount=mPredictionBarView.getChildCount();
   for (int i=0; i < mNumPredictedAppsPerRow; i++) {

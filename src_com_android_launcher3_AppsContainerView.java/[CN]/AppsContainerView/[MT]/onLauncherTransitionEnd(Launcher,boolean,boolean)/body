@@ -4,4 +4,8 @@
       hideSearchField(false,false);
     }
   }
+  if (toWorkspace) {
+    getViewTreeObserver().removeOnPreDrawListener(this);
+    mLastRecyclerViewScrollPos=-1;
+  }
 }

@@ -3,7 +3,7 @@
   getCurScrollState(mScrollPosState,items);
   if (mScrollPosState.rowIndex != -1) {
     int predictionBarHeight=mApps.getPredictedApps().isEmpty() ? 0 : mPredictionBarHeight;
-    int scrollY=getPaddingTop() + (mScrollPosState.rowIndex * mScrollPosState.rowHeight) + predictionBarHeight - mScrollPosState.rowTopOffset;
-    updateScrollY(scrollY);
+    return getPaddingTop() + (mScrollPosState.rowIndex * mScrollPosState.rowHeight) + predictionBarHeight - mScrollPosState.rowTopOffset;
   }
+  return 0;
 }

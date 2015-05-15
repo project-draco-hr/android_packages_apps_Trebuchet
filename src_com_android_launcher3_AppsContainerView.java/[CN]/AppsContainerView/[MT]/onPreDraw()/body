@@ -1,0 +1,4 @@
+{
+  synchronizeToRecyclerViewScrollPosition(mAppsRecyclerView.getScrollPosition());
+  return true;
+}

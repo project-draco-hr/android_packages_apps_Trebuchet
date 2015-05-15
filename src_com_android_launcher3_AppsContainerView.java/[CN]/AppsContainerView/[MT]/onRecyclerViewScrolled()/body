@@ -1,6 +1,0 @@
-{
-  if (DYNAMIC_HEADER_ELEVATION) {
-    mElevationController.onScroll(mRecyclerViewScrollY);
-  }
-  mPredictionBarView.setTranslationY(-mRecyclerViewScrollY + mAppsRecyclerView.getPaddingTop());
-}

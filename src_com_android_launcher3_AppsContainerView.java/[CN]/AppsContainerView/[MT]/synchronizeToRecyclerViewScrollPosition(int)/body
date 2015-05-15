@@ -1,0 +1,9 @@
+{
+  if (mLastRecyclerViewScrollPos != scrollY) {
+    mLastRecyclerViewScrollPos=scrollY;
+    if (DYNAMIC_HEADER_ELEVATION) {
+      mElevationController.onScroll(scrollY);
+    }
+    mPredictionBarView.setTranslationY(-scrollY + mAppsRecyclerView.getPaddingTop());
+  }
+}

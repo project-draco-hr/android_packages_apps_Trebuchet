@@ -10,7 +10,6 @@
     predictionBarFraction=(float)mNumPredictedAppsPerRow / mApps.getSize();
     if (touchFraction <= predictionBarFraction) {
       layoutManager.scrollToPositionWithOffset(0,0);
-      updateScrollY(0);
       return "";
     }
   }
@@ -23,7 +22,6 @@
     }
     lastScrollSection=scrollSection;
   }
-  refreshCurScrollPosition();
   layoutManager.scrollToPositionWithOffset(lastScrollSection.appItem.position,0);
   return lastScrollSection.sectionName;
 }
