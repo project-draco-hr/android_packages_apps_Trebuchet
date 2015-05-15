@@ -1,0 +1,4 @@
+{
+  setAlpha(0);
+  animate().alpha(1).setDuration(FastBitmapDrawable.CLICK_FEEDBACK_DURATION).setInterpolator(FastBitmapDrawable.CLICK_FEEDBACK_INTERPOLATOR).start();
+}

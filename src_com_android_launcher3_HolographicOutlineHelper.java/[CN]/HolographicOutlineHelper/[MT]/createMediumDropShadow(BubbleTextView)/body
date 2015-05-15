@@ -1,28 +1,25 @@
 {
-  final Bitmap result=Bitmap.createBitmap(view.getWidth() + shadowBitmapPadding + shadowBitmapPadding,view.getHeight() + shadowBitmapPadding + shadowBitmapPadding+ mShadowOffset,Bitmap.Config.ARGB_8888);
-  mCanvas.setBitmap(result);
-  final Rect clipRect=sTempRect;
-  view.getDrawingRect(sTempRect);
-  clipRect.bottom=view.getExtendedPaddingTop() - (int)BubbleTextView.PADDING_V + view.getLayout().getLineTop(0);
-  mCanvas.save();
-  mCanvas.scale(view.getScaleX(),view.getScaleY(),view.getWidth() / 2 + shadowBitmapPadding,view.getHeight() / 2 + shadowBitmapPadding);
-  mCanvas.translate(-view.getScrollX() + shadowBitmapPadding,-view.getScrollY() + shadowBitmapPadding);
-  mCanvas.clipRect(clipRect,Op.REPLACE);
-  view.draw(mCanvas);
-  mCanvas.restore();
-  int[] blurOffst=new int[2];
-  mBlurPaint.setMaskFilter(mShaowBlurMaskFilter);
-  Bitmap blurBitmap=result.extractAlpha(mBlurPaint,blurOffst);
-  mCanvas.save();
-  mCanvas.drawColor(Color.TRANSPARENT,PorterDuff.Mode.CLEAR);
-  mCanvas.translate(blurOffst[0],blurOffst[1]);
-  mDrawPaint.setColor(Color.BLACK);
-  mDrawPaint.setAlpha(30);
-  mCanvas.drawBitmap(blurBitmap,0,0,mDrawPaint);
-  mDrawPaint.setAlpha(60);
-  mCanvas.drawBitmap(blurBitmap,0,mShadowOffset,mDrawPaint);
+  Drawable icon=view.getIcon();
+  Rect rect=icon.getBounds();
+  int bitmapWidth=(int)(rect.width() * view.getScaleX());
+  int bitmapHeight=(int)(rect.height() * view.getScaleY());
+  int key=(bitmapWidth << 16) | bitmapHeight;
+  Bitmap cache=mBitmapCache.get(key);
+  if (cache == null) {
+    cache=Bitmap.createBitmap(bitmapWidth,bitmapHeight,Bitmap.Config.ARGB_8888);
+    mCanvas.setBitmap(cache);
+    mBitmapCache.put(key,cache);
+  }
+ else {
+    mCanvas.setBitmap(cache);
+    mCanvas.drawColor(Color.TRANSPARENT,PorterDuff.Mode.CLEAR);
+  }
+  mCanvas.save(Canvas.MATRIX_SAVE_FLAG);
+  mCanvas.scale(view.getScaleX(),view.getScaleY());
+  mCanvas.translate(-rect.left,-rect.top);
+  icon.draw(mCanvas);
   mCanvas.restore();
   mCanvas.setBitmap(null);
-  blurBitmap.recycle();
-  return result;
+  mBlurPaint.setMaskFilter(mShadowBlurMaskFilter);
+  return cache.extractAlpha(mBlurPaint,null);
 }

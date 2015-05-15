@@ -75,7 +75,7 @@
   mForegroundRect=new Rect();
   mShortcutsAndWidgets=new ShortcutAndWidgetContainer(context);
   mShortcutsAndWidgets.setCellDimensions(mCellWidth,mCellHeight,mWidthGap,mHeightGap,mCountX,mCountY);
-  mTouchFeedbackView=new FastBitmapView(context);
-  addView(mTouchFeedbackView,(int)(grid.cellWidthPx * 1.5),(int)(grid.cellHeightPx * 1.5));
+  mTouchFeedbackView=new ClickShadowView(context);
+  addView(mTouchFeedbackView);
   addView(mShortcutsAndWidgets);
 }
