@@ -7,8 +7,8 @@
     mWidgetImage.setMaxWidth(maxWidth);
   }
   mWidgetName.setText(AppWidgetManagerCompat.getInstance(getContext()).loadLabel(info));
-  int hSpan=Math.min(info.spanX,(int)grid.numColumns);
-  int vSpan=Math.min(info.spanY,(int)grid.numRows);
+  int hSpan=Math.min(info.spanX,grid.numColumns);
+  int vSpan=Math.min(info.spanY,grid.numRows);
   mWidgetDims.setText(String.format(mDimensionsFormatString,hSpan,vSpan));
   mWidgetPreviewLoader=loader;
 }
