@@ -5,8 +5,9 @@
   final Resources res=mContext.getResources();
   final int badgeSize=res.getDimensionPixelSize(R.dimen.profile_badge_size);
   final int badgeMargin=res.getDimensionPixelSize(R.dimen.profile_badge_margin);
+  final int badgeMinTop=res.getDimensionPixelSize(R.dimen.profile_badge_minimum_top);
   final Rect badgeLocation=new Rect(0,0,badgeSize,badgeSize);
-  final int top=bitmap.getHeight() - badgeSize - badgeMargin;
+  final int top=Math.max(imageHeight - badgeSize - badgeMargin,badgeMinTop);
   if (res.getConfiguration().getLayoutDirection() == View.LAYOUT_DIRECTION_RTL) {
     badgeLocation.offset(badgeMargin,top);
   }

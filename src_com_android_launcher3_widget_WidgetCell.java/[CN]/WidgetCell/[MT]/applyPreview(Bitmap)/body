@@ -1,17 +1,13 @@
 {
   FastBitmapDrawable preview=new FastBitmapDrawable(bitmap);
-  if (DEBUG) {
-    Log.d(TAG,String.format("[tag=%s] applyPreview preview: %s",getTagToString(),preview));
-  }
   if (preview != null) {
     mWidgetImage.setImageDrawable(preview);
     if (mIsAppWidget) {
       int[] imageSize=getPreviewSize();
       int centerAmount=(imageSize[0] - preview.getIntrinsicWidth()) / 2;
-      mWidgetImage.setPadding(mOriginalImagePadding.left + centerAmount,mOriginalImagePadding.top,mOriginalImagePadding.right,mOriginalImagePadding.bottom);
+      mWidgetImage.setPadding(mOrigImgPadding.left + centerAmount,mOrigImgPadding.top,mOrigImgPadding.right,mOrigImgPadding.bottom);
     }
     mWidgetImage.setAlpha(0f);
     mWidgetImage.animate().alpha(1.0f).setDuration(FADE_IN_DURATION_MS);
-    mWidgetImage.requestLayout();
   }
 }

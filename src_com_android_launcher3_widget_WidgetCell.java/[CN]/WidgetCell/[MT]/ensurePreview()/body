@@ -6,10 +6,6 @@
   if (DEBUG) {
     Log.d(TAG,String.format("[tag=%s] ensurePreview (%d, %d):",getTagToString(),size[0],size[1]));
   }
-  if (size[0] <= 0 || size[1] <= 0) {
-    addOnLayoutChangeListener(this);
-    return;
-  }
   Bitmap[] immediateResult=new Bitmap[1];
   mActiveRequest=mWidgetPreviewLoader.getPreview(mInfo,size[0],size[1],this,immediateResult);
   if (immediateResult[0] != null) {
