@@ -1,6 +1,10 @@
 {
-  if (mState != State.WORKSPACE)   return;
-  if (toState != State.APPS && toState != State.WIDGETS)   return;
+  if (mState != State.WORKSPACE && mState != State.APPS_SPRING_LOADED && mState != State.WIDGETS_SPRING_LOADED) {
+    return false;
+  }
+  if (toState != State.APPS && toState != State.WIDGETS) {
+    return false;
+  }
   if (toState == State.APPS) {
     mStateTransitionAnimation.startAnimationToAllApps(animated);
     if (!Launcher.DISABLE_ALL_APPS_SEARCH_INTEGRATION && mLauncherCallbacks != null) {
@@ -15,4 +19,5 @@
   updateAutoAdvanceState();
   closeFolder();
   getWindow().getDecorView().sendAccessibilityEvent(AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED);
+  return true;
 }
