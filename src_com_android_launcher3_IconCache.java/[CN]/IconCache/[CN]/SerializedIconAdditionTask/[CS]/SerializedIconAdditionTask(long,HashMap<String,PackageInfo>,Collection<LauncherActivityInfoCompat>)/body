@@ -1,0 +1,6 @@
+{
+  mUserSerial=userSerial;
+  mPkgInfoMap=pkgInfoMap;
+  mAppsToAdd=new Stack<LauncherActivityInfoCompat>();
+  mAppsToAdd.addAll(appsToAdd);
+}

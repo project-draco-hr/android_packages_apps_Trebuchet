@@ -1,5 +1,4 @@
 {
-  ContentValues values=updateCacheAndGetContentValues(app);
+  ContentValues values=updateCacheAndGetContentValues(app,false);
   addIconToDB(values,app.getComponentName(),info,userSerial);
-  values.put(IconDB.COLUMN_COMPONENT,app.getComponentName().flattenToString());
 }

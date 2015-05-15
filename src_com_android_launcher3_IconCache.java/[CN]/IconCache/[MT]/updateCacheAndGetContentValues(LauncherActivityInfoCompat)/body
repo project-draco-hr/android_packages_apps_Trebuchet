@@ -1,8 +1,0 @@
-{
-  CacheEntry entry=new CacheEntry();
-  entry.icon=Utilities.createIconBitmap(app.getBadgedIcon(mIconDpi),mContext);
-  entry.title=app.getLabel();
-  entry.contentDescription=mUserManager.getBadgedLabelForUser(entry.title,app.getUser());
-  mCache.put(new ComponentKey(app.getComponentName(),app.getUser()),entry);
-  return mIconDb.newContentValues(entry.icon,entry.title.toString());
-}

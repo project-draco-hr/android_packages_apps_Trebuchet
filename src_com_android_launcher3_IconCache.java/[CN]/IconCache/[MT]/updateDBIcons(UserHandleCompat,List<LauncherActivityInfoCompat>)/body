@@ -39,7 +39,7 @@
       itemsToRemove.add(c.getInt(rowIndex));
       continue;
     }
-    ContentValues values=updateCacheAndGetContentValues(app);
+    ContentValues values=updateCacheAndGetContentValues(app,true);
     mIconDb.getWritableDatabase().update(IconDB.TABLE_NAME,values,IconDB.COLUMN_COMPONENT + " = ? AND " + IconDB.COLUMN_USER+ " = ?",new String[]{cn,Long.toString(userSerial)});
     updatedPackages.add(component.getPackageName());
   }
@@ -47,12 +47,8 @@
   if (!itemsToRemove.isEmpty()) {
     mIconDb.getWritableDatabase().delete(IconDB.TABLE_NAME,IconDB.COLUMN_ROWID + " IN ( " + TextUtils.join(", ",itemsToRemove)+ " )",null);
   }
-  for (  LauncherActivityInfoCompat app : componentMap.values()) {
-    PackageInfo info=pkgInfoMap.get(app.getComponentName().getPackageName());
-    if (info == null) {
-      continue;
-    }
-    addIconToDBAndMemCache(app,info,userSerial);
+  if (!componentMap.isEmpty()) {
+    mWorkerHandler.post(new SerializedIconAdditionTask(userSerial,pkgInfoMap,componentMap.values()));
   }
   return updatedPackages;
 }

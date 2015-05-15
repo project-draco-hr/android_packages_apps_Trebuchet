@@ -1,0 +1,3 @@
+long userSerial
+HashMap<String,PackageInfo> pkgInfoMap
+Collection<LauncherActivityInfoCompat> appsToAdd
