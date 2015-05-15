@@ -3,5 +3,6 @@
   InsetDrawable background=new InsetDrawable(getContext().getResources().getDrawable(R.drawable.quantum_panel_shape),inset,0,inset,0);
   mContentView.setBackground(background);
   mAppsRecyclerView.updateBackgroundPadding(background);
+  mAdapter.updateBackgroundPadding(background);
   getRevealView().setBackground(background.getConstantState().newDrawable());
 }
