@@ -6,8 +6,6 @@
   page.setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_NO);
   page.setInvertIfRtl(true);
   page.setGridSize(mGridCountX,mGridCountY);
-  LayoutParams lp=generateDefaultLayoutParams();
-  lp.isFullScreenPage=true;
-  addView(page,-1,lp);
+  addView(page,-1,generateDefaultLayoutParams());
   return page;
 }
