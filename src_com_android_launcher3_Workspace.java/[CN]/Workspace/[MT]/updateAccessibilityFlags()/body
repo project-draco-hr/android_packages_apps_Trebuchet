@@ -4,15 +4,9 @@
     for (int i=numCustomPages(); i < total; i++) {
       updateAccessibilityFlags((CellLayout)getPageAt(i),i);
     }
-    if (mState == State.NORMAL) {
-      setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_NO);
-    }
- else {
-      setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_YES);
-    }
   }
  else {
-    int accessible=mState == State.NORMAL ? IMPORTANT_FOR_ACCESSIBILITY_NO : IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS;
+    int accessible=mState == State.NORMAL ? IMPORTANT_FOR_ACCESSIBILITY_AUTO : IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS;
     setImportantForAccessibility(accessible);
   }
 }
