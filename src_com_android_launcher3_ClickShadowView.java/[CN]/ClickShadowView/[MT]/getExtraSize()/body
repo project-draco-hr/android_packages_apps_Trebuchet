@@ -1,0 +1,3 @@
+{
+  return (int)(SHADOW_SIZE_FACTOR * mShadowPadding);
+}
