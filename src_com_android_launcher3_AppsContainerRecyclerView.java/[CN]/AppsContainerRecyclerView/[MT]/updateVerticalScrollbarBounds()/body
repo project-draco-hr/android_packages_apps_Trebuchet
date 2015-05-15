@@ -7,7 +7,6 @@
   int x;
   int y;
   int predictionBarHeight=mApps.getPredictedApps().isEmpty() ? 0 : mPredictionBarHeight;
-  boolean isRtl=Utilities.isRtl(getResources());
   int rowCount=getNumRows();
   getCurScrollState(mScrollPosState,items);
   if (mScrollPosState.rowIndex != -1) {
@@ -15,7 +14,7 @@
     int totalScrollHeight=rowCount * mScrollPosState.rowHeight + predictionBarHeight;
     if (totalScrollHeight > height) {
       int scrollbarHeight=Math.max(mScrollbarMinHeight,(int)(height / ((float)totalScrollHeight / height)));
-      if (isRtl) {
+      if (Utilities.isRtl(getResources())) {
         x=mBackgroundPadding.left;
       }
  else {
