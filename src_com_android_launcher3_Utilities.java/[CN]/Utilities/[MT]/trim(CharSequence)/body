@@ -1,4 +1,7 @@
 {
+  if (s == null) {
+    return null;
+  }
   Matcher m=sTrimPattern.matcher(s);
   return m.replaceAll("$1");
 }
