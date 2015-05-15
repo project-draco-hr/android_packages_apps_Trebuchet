@@ -5,26 +5,28 @@
   int y=(int)ev.getY();
 switch (ev.getAction()) {
 case MotionEvent.ACTION_DOWN:
-    mPredictionIconTouchDownPos.set(x,y);
-  mPredictionIconUnderTouch=findPredictedAppAtCoordinate(x,y);
-if (mPredictionIconUnderTouch != null) {
-  mPredictionIconCheckForLongPress=new CheckLongPressHelper(mPredictionIconUnderTouch,this);
-  mPredictionIconCheckForLongPress.postCheckForLongPress();
-}
-if (!mFixedBounds.isEmpty()) {
-Rect tmpRect=new Rect(mFixedBounds);
-tmpRect.inset(-grid.allAppsIconSizePx / 2,0);
-if (ev.getX() < tmpRect.left || ev.getX() > tmpRect.right) {
-  mBoundsCheckLastTouchDownPos.set(x,y);
-  return true;
-}
-}
+    if (mPredictionBarView != null && mPredictionBarView.getVisibility() == View.VISIBLE) {
+      mPredictionIconTouchDownPos.set(x,y);
+      mPredictionIconUnderTouch=findPredictedAppAtCoordinate(x,y);
+      if (mPredictionIconUnderTouch != null) {
+        mPredictionIconCheckForLongPress=new CheckLongPressHelper(mPredictionIconUnderTouch,this);
+        mPredictionIconCheckForLongPress.postCheckForLongPress();
+      }
+    }
+  if (!mFixedBounds.isEmpty()) {
+    Rect tmpRect=new Rect(mFixedBounds);
+    tmpRect.inset(-grid.allAppsIconSizePx / 2,0);
+    if (ev.getX() < tmpRect.left || ev.getX() > tmpRect.right) {
+      mBoundsCheckLastTouchDownPos.set(x,y);
+      return true;
+    }
+  }
  else {
-if (ev.getX() < getPaddingLeft() || ev.getX() > (getWidth() - getPaddingRight())) {
-  mBoundsCheckLastTouchDownPos.set(x,y);
-  return true;
-}
-}
+    if (ev.getX() < getPaddingLeft() || ev.getX() > (getWidth() - getPaddingRight())) {
+      mBoundsCheckLastTouchDownPos.set(x,y);
+      return true;
+    }
+  }
 break;
 case MotionEvent.ACTION_UP:
 if (mBoundsCheckLastTouchDownPos.x > -1) {
@@ -33,9 +35,9 @@ float dx=ev.getX() - mBoundsCheckLastTouchDownPos.x;
 float dy=ev.getY() - mBoundsCheckLastTouchDownPos.y;
 float distance=(float)Math.hypot(dx,dy);
 if (distance < viewConfig.getScaledTouchSlop()) {
-Launcher launcher=(Launcher)getContext();
-launcher.showWorkspace(true);
-return true;
+  Launcher launcher=(Launcher)getContext();
+  launcher.showWorkspace(true);
+  return true;
 }
 }
 if (mPredictionIconUnderTouch != null && !mPredictionIconCheckForLongPress.hasPerformedLongPress()) {
