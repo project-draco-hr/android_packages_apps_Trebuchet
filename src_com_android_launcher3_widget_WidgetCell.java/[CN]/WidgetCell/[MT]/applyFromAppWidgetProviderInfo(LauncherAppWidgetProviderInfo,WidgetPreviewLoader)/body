@@ -1,11 +1,7 @@
 {
   LauncherAppState app=LauncherAppState.getInstance();
   DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
-  mIsAppWidget=true;
   mInfo=info;
-  if (maxWidth > -1) {
-    mWidgetImage.setMaxWidth(maxWidth);
-  }
   mWidgetName.setText(AppWidgetManagerCompat.getInstance(getContext()).loadLabel(info));
   int hSpan=Math.min(info.spanX,grid.numColumns);
   int vSpan=Math.min(info.spanY,grid.numRows);

@@ -1,6 +1,6 @@
 {
-  canvas.save();
-  canvas.clipRect(getScrollX() + getPaddingLeft(),getScrollY() + getPaddingTop(),getScrollX() + getRight() - getLeft() - getPaddingRight(),getScrollY() + getBottom() - getTop() - getPaddingBottom());
-  super.onDraw(canvas);
-  canvas.restore();
+  if (mBitmap != null) {
+    updateDstRectF();
+    canvas.drawBitmap(mBitmap,null,mDstRectF,mPaint);
+  }
 }

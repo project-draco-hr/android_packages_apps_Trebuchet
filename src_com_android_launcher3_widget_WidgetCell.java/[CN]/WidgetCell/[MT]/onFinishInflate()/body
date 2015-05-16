@@ -1,10 +1,6 @@
 {
   super.onFinishInflate();
-  mWidgetImage=(ImageView)findViewById(R.id.widget_preview);
-  mOrigImgPadding.left=mWidgetImage.getPaddingLeft();
-  mOrigImgPadding.top=mWidgetImage.getPaddingTop();
-  mOrigImgPadding.right=mWidgetImage.getPaddingRight();
-  mOrigImgPadding.bottom=mWidgetImage.getPaddingBottom();
+  mWidgetImage=(WidgetImageView)findViewById(R.id.widget_preview);
   mWidgetName=((TextView)findViewById(R.id.widget_name));
   mWidgetDims=((TextView)findViewById(R.id.widget_dims));
 }

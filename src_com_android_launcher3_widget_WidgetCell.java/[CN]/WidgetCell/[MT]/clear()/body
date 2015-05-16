@@ -3,7 +3,7 @@
     Log.d(TAG,"reset called on:" + mWidgetName.getText());
   }
   mWidgetImage.animate().cancel();
-  mWidgetImage.setImageDrawable(null);
+  mWidgetImage.setBitmap(null);
   mWidgetName.setText(null);
   mWidgetDims.setText(null);
   if (mActiveRequest != null) {

@@ -34,7 +34,7 @@
       LauncherAppWidgetProviderInfo info=(LauncherAppWidgetProviderInfo)infoList.get(i);
       PendingAddWidgetInfo pawi=new PendingAddWidgetInfo(info,null);
       widget.setTag(pawi);
-      widget.applyFromAppWidgetProviderInfo(info,-1,mWidgetPreviewLoader);
+      widget.applyFromAppWidgetProviderInfo(info,mWidgetPreviewLoader);
     }
  else     if (infoList.get(i) instanceof ResolveInfo) {
       ResolveInfo info=(ResolveInfo)infoList.get(i);
