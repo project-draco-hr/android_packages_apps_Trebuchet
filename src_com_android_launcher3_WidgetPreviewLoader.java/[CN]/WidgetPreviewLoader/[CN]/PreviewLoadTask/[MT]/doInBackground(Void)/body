@@ -1,6 +1,9 @@
 {
   Bitmap unusedBitmap=null;
 synchronized (mUnusedBitmaps) {
+    if (isCancelled()) {
+      return null;
+    }
     for (    Bitmap candidate : mUnusedBitmaps) {
       if (candidate != null && candidate.isMutable() && candidate.getWidth() == mPreviewWidth && candidate.getHeight() == mPreviewHeight) {
         unusedBitmap=candidate;
@@ -15,15 +18,12 @@ synchronized (mUnusedBitmaps) {
     }
   }
   if (isCancelled()) {
-    return null;
+    return unusedBitmap;
   }
-  Bitmap preview=readFromDb(mKey,unusedBitmap);
+  Bitmap preview=readFromDb(mKey,unusedBitmap,this);
   if (!isCancelled() && preview == null) {
-    long[] versions=getPackageVersion(mKey.componentName.getPackageName());
+    mVersions=getPackageVersion(mKey.componentName.getPackageName());
     preview=generatePreview(mInfo,unusedBitmap,mPreviewWidth,mPreviewHeight);
-    if (!isCancelled()) {
-      writeToDb(mKey,versions,preview);
-    }
   }
   return preview;
 }

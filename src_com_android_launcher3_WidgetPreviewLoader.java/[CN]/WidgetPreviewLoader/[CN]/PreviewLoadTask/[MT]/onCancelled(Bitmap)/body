@@ -1,0 +1,7 @@
+{
+  if (preview != null) {
+synchronized (mUnusedBitmaps) {
+      mUnusedBitmaps.add(preview);
+    }
+  }
+}
