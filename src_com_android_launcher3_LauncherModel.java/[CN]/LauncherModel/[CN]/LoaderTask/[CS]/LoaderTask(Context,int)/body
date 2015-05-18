@@ -1,5 +1,4 @@
 {
   mContext=context;
-  mIsLaunching=isLaunching;
   mFlags=flags;
 }

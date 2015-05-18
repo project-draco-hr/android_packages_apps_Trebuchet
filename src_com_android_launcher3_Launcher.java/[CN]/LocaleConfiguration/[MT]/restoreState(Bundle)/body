@@ -25,11 +25,5 @@
     setWaitingForResult(true);
     mRestoring=true;
   }
-  boolean renameFolder=savedState.getBoolean(RUNTIME_STATE_PENDING_FOLDER_RENAME,false);
-  if (renameFolder) {
-    long id=savedState.getLong(RUNTIME_STATE_PENDING_FOLDER_RENAME_ID);
-    mFolderInfo=mModel.getFolderById(this,sFolders,id);
-    mRestoring=true;
-  }
   mItemIdToViewId=(HashMap<Integer,Integer>)savedState.getSerializable(RUNTIME_STATE_VIEW_IDS);
 }

@@ -1,6 +1,6 @@
 {
   if (mPaused) {
-    Log.i(TAG,"setLoadOnResume");
+    if (LOGD)     Log.d(TAG,"setLoadOnResume");
     mOnResumeNeedsLoad=true;
     return true;
   }

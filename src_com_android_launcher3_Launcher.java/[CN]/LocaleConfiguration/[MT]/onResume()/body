@@ -30,7 +30,7 @@
   mPaused=false;
   if (mRestoring || mOnResumeNeedsLoad) {
     setWorkspaceLoading(true);
-    mModel.startLoader(true,PagedView.INVALID_RESTORE_PAGE);
+    mModel.startLoader(PagedView.INVALID_RESTORE_PAGE);
     mRestoring=false;
     mOnResumeNeedsLoad=false;
   }

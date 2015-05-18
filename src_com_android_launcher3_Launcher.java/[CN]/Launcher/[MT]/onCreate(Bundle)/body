@@ -40,10 +40,10 @@
   }
   if (!mRestoring) {
     if (DISABLE_SYNCHRONOUS_BINDING_CURRENT_PAGE) {
-      mModel.startLoader(true,PagedView.INVALID_RESTORE_PAGE);
+      mModel.startLoader(PagedView.INVALID_RESTORE_PAGE);
     }
  else {
-      mModel.startLoader(true,mWorkspace.getRestorePage());
+      mModel.startLoader(mWorkspace.getRestorePage());
     }
   }
   mDefaultKeySsb=new SpannableStringBuilder();

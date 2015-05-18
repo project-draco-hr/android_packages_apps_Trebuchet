@@ -1,3 +1,2 @@
-boolean isLaunching
 int synchronousBindPage
 int loadFlags

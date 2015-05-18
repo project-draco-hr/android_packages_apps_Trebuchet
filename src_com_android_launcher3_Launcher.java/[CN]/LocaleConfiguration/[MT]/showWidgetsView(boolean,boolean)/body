@@ -1,5 +1,5 @@
 {
-  Log.d(TAG,"showWidgetsView:" + animated + " resetPageToZero:"+ resetPageToZero);
+  if (LOGD)   Log.d(TAG,"showWidgetsView:" + animated + " resetPageToZero:"+ resetPageToZero);
   if (resetPageToZero) {
     mWidgetsView.scrollToTop();
   }

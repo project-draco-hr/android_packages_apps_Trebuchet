@@ -15,10 +15,6 @@
     outState.putParcelable(RUNTIME_STATE_PENDING_ADD_WIDGET_INFO,mPendingAddWidgetInfo);
     outState.putInt(RUNTIME_STATE_PENDING_ADD_WIDGET_ID,mPendingAddWidgetId);
   }
-  if (mFolderInfo != null && mWaitingForResult) {
-    outState.putBoolean(RUNTIME_STATE_PENDING_FOLDER_RENAME,true);
-    outState.putLong(RUNTIME_STATE_PENDING_FOLDER_RENAME_ID,mFolderInfo.id);
-  }
   outState.putSerializable(RUNTIME_STATE_VIEW_IDS,mItemIdToViewId);
   if (mLauncherCallbacks != null) {
     mLauncherCallbacks.onSaveInstanceState(outState);
