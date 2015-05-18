@@ -1,5 +1,8 @@
 {
 synchronized (mLock) {
+    if (mStopped) {
+      return;
+    }
     mIsLoaderTaskRunning=true;
   }
   keep_running: {

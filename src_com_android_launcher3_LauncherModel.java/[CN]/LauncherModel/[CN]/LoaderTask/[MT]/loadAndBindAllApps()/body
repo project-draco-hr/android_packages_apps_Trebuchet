@@ -4,6 +4,11 @@
   }
   if (!mAllAppsLoaded) {
     loadAllApps();
+synchronized (LoaderTask.this) {
+      if (mStopped) {
+        return;
+      }
+    }
     updateAllAppsIconsCache();
 synchronized (LoaderTask.this) {
       if (mStopped) {

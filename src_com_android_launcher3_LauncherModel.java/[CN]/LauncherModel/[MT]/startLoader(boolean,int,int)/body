@@ -8,9 +8,9 @@ synchronized (mDeferredBindRunnables) {
       mDeferredBindRunnables.clear();
     }
     if (mCallbacks != null && mCallbacks.get() != null) {
-      isLaunching=isLaunching || stopLoaderLocked();
+      isLaunching=stopLoaderLocked() || isLaunching;
       mLoaderTask=new LoaderTask(mApp.getContext(),isLaunching,loadFlags);
-      if (synchronousBindPage != PagedView.INVALID_RESTORE_PAGE && mAllAppsLoaded && mWorkspaceLoaded) {
+      if (synchronousBindPage != PagedView.INVALID_RESTORE_PAGE && mAllAppsLoaded && mWorkspaceLoaded && !mIsLoaderTaskRunning) {
         mLoaderTask.runBindSynchronousPage(synchronousBindPage);
       }
  else {
