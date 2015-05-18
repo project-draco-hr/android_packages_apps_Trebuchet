@@ -1,6 +1,6 @@
 {
   a.setWallpaperButtonEnabled(false);
-  BitmapRegionTileSource.ResourceBitmapSource bitmapSource=new BitmapRegionTileSource.ResourceBitmapSource(mResources,mResId,BitmapRegionTileSource.MAX_PREVIEW_SIZE);
+  BitmapRegionTileSource.ResourceBitmapSource bitmapSource=new BitmapRegionTileSource.ResourceBitmapSource(mResources,mResId);
   a.setCropViewTileSource(bitmapSource,false,false,new CropViewScaleProvider(){
     @Override public float getScale(    TileSource src){
       Point wallpaperSize=WallpaperUtils.getDefaultWallpaperSize(a.getResources(),a.getWindowManager());

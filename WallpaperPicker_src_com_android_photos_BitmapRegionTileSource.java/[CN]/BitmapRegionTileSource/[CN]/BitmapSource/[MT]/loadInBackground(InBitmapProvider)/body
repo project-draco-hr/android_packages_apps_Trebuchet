@@ -14,34 +14,40 @@
  else {
     int width=mDecoder.getWidth();
     int height=mDecoder.getHeight();
-    if (mPreviewSize != 0) {
-      BitmapFactory.Options opts=new BitmapFactory.Options();
-      opts.inPreferredConfig=Bitmap.Config.ARGB_8888;
-      opts.inPreferQualityOverSpeed=true;
-      float scale=(float)mPreviewSize / Math.max(width,height);
-      opts.inSampleSize=BitmapUtils.computeSampleSizeLarger(scale);
-      opts.inJustDecodeBounds=false;
-      opts.inMutable=true;
-      if (bitmapProvider != null) {
-        int expectedPixles=(width / opts.inSampleSize) * (height / opts.inSampleSize);
-        Bitmap reusableBitmap=bitmapProvider.forPixelCount(expectedPixles);
-        if (reusableBitmap != null) {
-          opts.inBitmap=reusableBitmap;
-          try {
-            mPreview=loadPreviewBitmap(opts);
-          }
- catch (          IllegalArgumentException e) {
-            Log.d(TAG,"Unable to reusage bitmap",e);
-            opts.inBitmap=null;
-            mPreview=null;
-          }
+    BitmapFactory.Options opts=new BitmapFactory.Options();
+    opts.inPreferredConfig=Bitmap.Config.ARGB_8888;
+    opts.inPreferQualityOverSpeed=true;
+    float scale=(float)MAX_PREVIEW_SIZE / Math.max(width,height);
+    opts.inSampleSize=BitmapUtils.computeSampleSizeLarger(scale);
+    opts.inJustDecodeBounds=false;
+    opts.inMutable=true;
+    if (bitmapProvider != null) {
+      int expectedPixles=(width / opts.inSampleSize) * (height / opts.inSampleSize);
+      Bitmap reusableBitmap=bitmapProvider.forPixelCount(expectedPixles);
+      if (reusableBitmap != null) {
+        opts.inBitmap=reusableBitmap;
+        try {
+          mPreview=loadPreviewBitmap(opts);
+        }
+ catch (        IllegalArgumentException e) {
+          Log.d(TAG,"Unable to reusage bitmap",e);
+          opts.inBitmap=null;
+          mPreview=null;
         }
       }
-      if (mPreview == null) {
-        mPreview=loadPreviewBitmap(opts);
-      }
     }
-    mState=State.LOADED;
+    if (mPreview == null) {
+      mPreview=loadPreviewBitmap(opts);
+    }
+    try {
+      GLUtils.getInternalFormat(mPreview);
+      GLUtils.getType(mPreview);
+      mState=State.LOADED;
+    }
+ catch (    IllegalArgumentException e) {
+      Log.d(TAG,"Image cannot be rendered on a GL surface",e);
+      mState=State.ERROR_LOADING;
+    }
     return true;
   }
 }

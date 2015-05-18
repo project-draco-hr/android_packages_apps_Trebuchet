@@ -1,3 +1,0 @@
-{
-  mPreviewSize=Math.min(previewSize,MAX_PREVIEW_SIZE);
-}

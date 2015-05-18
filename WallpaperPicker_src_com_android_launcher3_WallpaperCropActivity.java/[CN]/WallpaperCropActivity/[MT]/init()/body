@@ -19,7 +19,7 @@
   }
 );
   mSetWallpaperButton=findViewById(R.id.set_wallpaper_button);
-  final BitmapRegionTileSource.UriBitmapSource bitmapSource=new BitmapRegionTileSource.UriBitmapSource(getContext(),imageUri,1024);
+  final BitmapRegionTileSource.UriBitmapSource bitmapSource=new BitmapRegionTileSource.UriBitmapSource(getContext(),imageUri);
   mSetWallpaperButton.setEnabled(false);
   Runnable onLoad=new Runnable(){
     public void run(){

@@ -1,6 +1,6 @@
 {
   a.setWallpaperButtonEnabled(false);
-  BitmapRegionTileSource.UriBitmapSource bitmapSource=new BitmapRegionTileSource.UriBitmapSource(a.getContext(),Uri.fromFile(mFile),1024);
+  BitmapRegionTileSource.UriBitmapSource bitmapSource=new BitmapRegionTileSource.UriBitmapSource(a.getContext(),Uri.fromFile(mFile));
   a.setCropViewTileSource(bitmapSource,false,true,null,new Runnable(){
     @Override public void run(){
       a.setWallpaperButtonEnabled(true);

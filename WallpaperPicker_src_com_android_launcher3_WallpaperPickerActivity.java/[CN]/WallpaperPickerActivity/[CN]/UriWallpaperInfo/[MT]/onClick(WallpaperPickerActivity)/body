@@ -1,6 +1,6 @@
 {
   a.setWallpaperButtonEnabled(false);
-  final BitmapRegionTileSource.UriBitmapSource bitmapSource=new BitmapRegionTileSource.UriBitmapSource(a.getContext(),mUri,BitmapRegionTileSource.MAX_PREVIEW_SIZE);
+  final BitmapRegionTileSource.UriBitmapSource bitmapSource=new BitmapRegionTileSource.UriBitmapSource(a.getContext(),mUri);
   a.setCropViewTileSource(bitmapSource,true,false,null,new Runnable(){
     @Override public void run(){
       if (bitmapSource.getLoadingState() == BitmapSource.State.LOADED) {

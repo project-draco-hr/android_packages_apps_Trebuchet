@@ -1,5 +1,4 @@
 {
-  super(previewSize);
   mContext=context;
   mUri=uri;
 }
