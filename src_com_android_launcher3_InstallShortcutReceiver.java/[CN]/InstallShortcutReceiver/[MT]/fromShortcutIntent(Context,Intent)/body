@@ -1,0 +1,9 @@
+{
+  PendingInstallShortcutInfo info=new PendingInstallShortcutInfo(data,context);
+  if (info.launchIntent == null || info.label == null) {
+    if (DBG)     Log.e(TAG,"Invalid install shortcut intent");
+    return null;
+  }
+  info=convertToLauncherActivityIfPossible(info);
+  return info.getShortcutInfo();
+}

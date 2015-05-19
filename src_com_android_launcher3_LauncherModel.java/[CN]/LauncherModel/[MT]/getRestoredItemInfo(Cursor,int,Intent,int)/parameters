@@ -2,4 +2,3 @@ Cursor cursor
 int titleIndex
 Intent intent
 int promiseType
-boolean useLowResIcon

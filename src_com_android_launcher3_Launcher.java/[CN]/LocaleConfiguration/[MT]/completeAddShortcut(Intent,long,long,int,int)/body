@@ -2,12 +2,12 @@
   int[] cellXY=mTmpAddItemCellCoordinates;
   int[] touchXY=mPendingAddInfo.dropPos;
   CellLayout layout=getCellLayout(container,screenId);
-  boolean foundCellSpan=false;
-  ShortcutInfo info=mModel.infoFromShortcutIntent(this,data);
+  ShortcutInfo info=InstallShortcutReceiver.fromShortcutIntent(this,data);
   if (info == null) {
     return;
   }
   final View view=createShortcut(info);
+  boolean foundCellSpan=false;
   if (cellX >= 0 && cellY >= 0) {
     cellXY[0]=cellX;
     cellXY[1]=cellY;

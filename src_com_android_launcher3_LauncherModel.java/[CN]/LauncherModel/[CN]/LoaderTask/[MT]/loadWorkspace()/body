@@ -193,7 +193,7 @@ continue;
  else if (restored) {
 if (user.equals(UserHandleCompat.myUserHandle())) {
 Launcher.addDumpLog(TAG,"constructing info for partially restored package",true);
-info=getRestoredItemInfo(c,titleIndex,intent,promiseType,useLowResIcon);
+info=getRestoredItemInfo(c,titleIndex,intent,promiseType);
 intent=getRestoredItemIntent(c,context,intent);
 }
  else {
