@@ -3,9 +3,6 @@
   if (am.isEnabled()) {
     if (mCurrentPage != getNextPage()) {
       AccessibilityEvent ev=AccessibilityEvent.obtain(AccessibilityEvent.TYPE_VIEW_SCROLLED);
-      ev.setItemCount(getChildCount());
-      ev.setFromIndex(getNextPage());
-      ev.setToIndex(getNextPage());
       sendAccessibilityEventUnchecked(ev);
     }
   }
