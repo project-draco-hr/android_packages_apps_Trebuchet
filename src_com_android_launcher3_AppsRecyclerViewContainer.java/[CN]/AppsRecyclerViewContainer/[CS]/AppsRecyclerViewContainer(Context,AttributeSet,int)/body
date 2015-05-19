@@ -1,0 +1,8 @@
+{
+  super(context,attrs,defStyleAttr);
+  LauncherAppState app=LauncherAppState.getInstance();
+  DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
+  mTouchFeedbackView=new ClickShadowView(context);
+  int size=grid.allAppsIconSizePx + mTouchFeedbackView.getExtraSize();
+  addView(mTouchFeedbackView,size,size);
+}
