@@ -33,7 +33,7 @@
       mPackageItemInfos.add(pInfo);
     }
   }
-  sortPackageItemInfos();
+  Collections.sort(mPackageItemInfos,mAppNameComparator);
   for (  PackageItemInfo p : mPackageItemInfos) {
     Collections.sort(mWidgetsList.get(p),mWidgetAndShortcutNameComparator);
   }

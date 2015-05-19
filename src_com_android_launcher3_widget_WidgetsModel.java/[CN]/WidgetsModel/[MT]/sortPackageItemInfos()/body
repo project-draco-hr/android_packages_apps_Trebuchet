@@ -1,8 +1,0 @@
-{
-  Collections.sort(mPackageItemInfos,new Comparator<PackageItemInfo>(){
-    @Override public int compare(    PackageItemInfo lhs,    PackageItemInfo rhs){
-      return lhs.title.toString().compareTo(rhs.title.toString());
-    }
-  }
-);
-}

@@ -1,11 +1,13 @@
 {
   mCollator=Collator.getInstance();
   mUserManager=UserManagerCompat.getInstance(context);
-  mAppInfoComparator=new Comparator<AppInfo>(){
-    public final int compare(    AppInfo a,    AppInfo b){
+  mAppInfoComparator=new Comparator<ItemInfo>(){
+    public final int compare(    ItemInfo a,    ItemInfo b){
       int result=compareTitles(a.title.toString(),b.title.toString());
-      if (result == 0) {
-        result=a.componentName.compareTo(b.componentName);
+      if (result == 0 && a instanceof AppInfo && b instanceof AppInfo) {
+        AppInfo aAppInfo=(AppInfo)a;
+        AppInfo bAppInfo=(AppInfo)b;
+        result=aAppInfo.componentName.compareTo(bAppInfo.componentName);
         if (result == 0) {
           if (UserHandleCompat.myUserHandle().equals(a.user)) {
             return -1;
