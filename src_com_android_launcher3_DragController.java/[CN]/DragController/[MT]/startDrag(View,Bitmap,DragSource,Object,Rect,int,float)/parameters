@@ -2,6 +2,6 @@ View v
 Bitmap bmp
 DragSource source
 Object dragInfo
+Rect viewImageBounds
 int dragAction
-Point extraPadding
 float initialDragViewScale

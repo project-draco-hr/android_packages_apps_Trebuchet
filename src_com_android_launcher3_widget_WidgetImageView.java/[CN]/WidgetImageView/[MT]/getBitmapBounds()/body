@@ -1,0 +1,6 @@
+{
+  updateDstRectF();
+  Rect rect=new Rect();
+  mDstRectF.round(rect);
+  return rect;
+}

@@ -1,5 +1,4 @@
 {
-  mIsAppWidget=false;
   mInfo=info;
   CharSequence label=info.loadLabel(pm);
   mWidgetName.setText(label);

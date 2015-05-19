@@ -1,27 +1,29 @@
 {
-  ImageView image=(ImageView)v.findViewById(R.id.widget_preview);
+  WidgetImageView image=(WidgetImageView)v.findViewById(R.id.widget_preview);
   PendingAddItemInfo createItemInfo=(PendingAddItemInfo)v.getTag();
-  if (image.getDrawable() == null) {
+  if (image.getBitmap() == null) {
     return false;
   }
   Bitmap preview;
-  Bitmap outline;
   float scale=1f;
-  Point previewPadding=null;
+  final Rect bounds=image.getBitmapBounds();
   if (createItemInfo instanceof PendingAddWidgetInfo) {
     PendingAddWidgetInfo createWidgetInfo=(PendingAddWidgetInfo)createItemInfo;
     int[] size=mLauncher.getWorkspace().estimateItemSize(createWidgetInfo,true);
-    FastBitmapDrawable previewDrawable=(FastBitmapDrawable)image.getDrawable();
+    Bitmap icon=image.getBitmap();
     float minScale=1.25f;
-    int maxWidth=Math.min((int)(previewDrawable.getIntrinsicWidth() * minScale),size[0]);
+    int maxWidth=Math.min((int)(icon.getWidth() * minScale),size[0]);
     int[] previewSizeBeforeScale=new int[1];
     preview=getWidgetPreviewLoader().generateWidgetPreview(createWidgetInfo.info,maxWidth,null,previewSizeBeforeScale);
-    int previewWidthInAppsCustomize=Math.min(previewSizeBeforeScale[0],v.getActualItemWidth());
-    scale=previewWidthInAppsCustomize / (float)preview.getWidth();
-    if (previewWidthInAppsCustomize < previewDrawable.getIntrinsicWidth()) {
-      int padding=(previewDrawable.getIntrinsicWidth() - previewWidthInAppsCustomize) / 2;
-      previewPadding=new Point(padding,0);
+    if (previewSizeBeforeScale[0] < icon.getWidth()) {
+      int padding=(icon.getWidth() - previewSizeBeforeScale[0]) / 2;
+      if (icon.getWidth() > image.getWidth()) {
+        padding=padding * image.getWidth() / icon.getWidth();
+      }
+      bounds.left+=padding;
+      bounds.right-=padding;
     }
+    scale=bounds.width() / (float)preview.getWidth();
   }
  else {
     PendingAddShortcutInfo createShortcutInfo=(PendingAddShortcutInfo)v.getTag();
@@ -30,11 +32,9 @@
     createItemInfo.spanX=createItemInfo.spanY=1;
   }
   boolean clipAlpha=!(createItemInfo instanceof PendingAddWidgetInfo && (((PendingAddWidgetInfo)createItemInfo).previewImage == 0));
-  outline=Bitmap.createScaledBitmap(preview,preview.getWidth(),preview.getHeight(),false);
   mLauncher.lockScreenOrientation();
-  mLauncher.getWorkspace().onDragStartedWithItem(createItemInfo,outline,clipAlpha);
-  mDragController.startDrag(image,preview,this,createItemInfo,DragController.DRAG_ACTION_COPY,previewPadding,scale);
-  outline.recycle();
+  mLauncher.getWorkspace().onDragStartedWithItem(createItemInfo,preview,clipAlpha);
+  mDragController.startDrag(image,preview,this,createItemInfo,bounds,DragController.DRAG_ACTION_COPY,scale);
   preview.recycle();
   return true;
 }

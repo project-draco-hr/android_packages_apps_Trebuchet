@@ -1,12 +1,6 @@
 {
-  FastBitmapDrawable preview=new FastBitmapDrawable(bitmap);
-  if (preview != null) {
-    mWidgetImage.setImageDrawable(preview);
-    if (mIsAppWidget) {
-      int[] imageSize=getPreviewSize();
-      int centerAmount=(imageSize[0] - preview.getIntrinsicWidth()) / 2;
-      mWidgetImage.setPadding(mOrigImgPadding.left + centerAmount,mOrigImgPadding.top,mOrigImgPadding.right,mOrigImgPadding.bottom);
-    }
+  if (bitmap != null) {
+    mWidgetImage.setBitmap(bitmap);
     mWidgetImage.setAlpha(0f);
     mWidgetImage.animate().alpha(1.0f).setDuration(FADE_IN_DURATION_MS);
   }
