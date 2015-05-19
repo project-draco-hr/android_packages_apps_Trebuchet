@@ -1,4 +1,4 @@
 {
-  getWidgetSizeRanges(launcher,spanX,spanY,mTmpRect);
-  widgetView.updateAppWidgetSize(null,mTmpRect.left,mTmpRect.top,mTmpRect.right,mTmpRect.bottom);
+  getWidgetSizeRanges(launcher,spanX,spanY,sTmpRect);
+  widgetView.updateAppWidgetSize(null,sTmpRect.left,sTmpRect.top,sTmpRect.right,sTmpRect.bottom);
 }
