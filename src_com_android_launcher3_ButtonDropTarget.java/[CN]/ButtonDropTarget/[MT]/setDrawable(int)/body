@@ -1,15 +1,10 @@
 {
-  mDrawable=(TransitionDrawable)getCurrentDrawable();
-  if (mDrawable == null) {
-    mDrawable=(TransitionDrawable)getResources().getDrawable(resId);
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-      setCompoundDrawablesRelativeWithIntrinsicBounds(mDrawable,null,null,null);
-    }
- else {
-      setCompoundDrawablesWithIntrinsicBounds(mDrawable,null,null,null);
-    }
+  mDrawable=(TransitionDrawable)getResources().getDrawable(resId);
+  mDrawable.setCrossFadeEnabled(true);
+  if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+    setCompoundDrawablesRelativeWithIntrinsicBounds(mDrawable,null,null,null);
   }
-  if (null != mDrawable) {
-    mDrawable.setCrossFadeEnabled(true);
+ else {
+    setCompoundDrawablesWithIntrinsicBounds(mDrawable,null,null,null);
   }
 }
