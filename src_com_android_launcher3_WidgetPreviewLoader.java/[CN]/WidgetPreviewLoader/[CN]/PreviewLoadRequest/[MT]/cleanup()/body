@@ -2,11 +2,10 @@
   if (mTask != null) {
     mTask.cancel(true);
   }
-  if (mTask.mBitmap == null) {
-    return;
-  }
+  if (mTask.mBitmapToRecycle != null) {
 synchronized (mUnusedBitmaps) {
-    mUnusedBitmaps.add(mTask.mBitmap);
+      mUnusedBitmaps.add(mTask.mBitmapToRecycle);
+    }
+    mTask.mBitmapToRecycle=null;
   }
-  mTask.mBitmap=null;
 }
