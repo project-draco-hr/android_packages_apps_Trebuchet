@@ -21,8 +21,5 @@
   setCurrentDropLayout(null);
   setCurrentDragOverlappingLayout(null);
   mSpringLoadedDragController.cancel();
-  if (!mIsPageMoving) {
-    hideOutlines();
-  }
   mLauncher.getDragLayer().hidePageHints();
 }

@@ -1,9 +1,0 @@
-{
-  if (!workspaceInModalState() && !mIsSwitchingState) {
-    if (mChildrenOutlineFadeOutAnimation != null)     mChildrenOutlineFadeOutAnimation.cancel();
-    if (mChildrenOutlineFadeInAnimation != null)     mChildrenOutlineFadeInAnimation.cancel();
-    mChildrenOutlineFadeInAnimation=LauncherAnimUtils.ofFloat(this,"childrenOutlineAlpha",1.0f);
-    mChildrenOutlineFadeInAnimation.setDuration(CHILDREN_OUTLINE_FADE_IN_DURATION);
-    mChildrenOutlineFadeInAnimation.start();
-  }
-}

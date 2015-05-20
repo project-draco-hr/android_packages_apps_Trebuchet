@@ -3,7 +3,6 @@
   updateChildrenLayersEnabled(false);
   mLauncher.lockScreenOrientation();
   mLauncher.onInteractionBegin();
-  setChildrenBackgroundAlphaMultipliers(1f);
   InstallShortcutReceiver.enableInstallQueue();
   post(new Runnable(){
     @Override public void run(){

@@ -1,6 +1,0 @@
-{
-  for (int i=0; i < getChildCount(); i++) {
-    CellLayout child=(CellLayout)getChildAt(i);
-    child.setBackgroundAlphaMultiplier(a);
-  }
-}
