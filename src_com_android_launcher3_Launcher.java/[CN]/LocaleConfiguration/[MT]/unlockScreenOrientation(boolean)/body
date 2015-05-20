@@ -1,5 +1,5 @@
 {
-  if (Utilities.isRotationEnabled(this)) {
+  if (mRotationEnabled) {
     if (immediate) {
       setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
     }

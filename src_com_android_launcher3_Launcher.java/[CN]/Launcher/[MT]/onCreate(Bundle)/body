@@ -50,6 +50,12 @@
   Selection.setSelection(mDefaultKeySsb,0);
   IntentFilter filter=new IntentFilter(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
   registerReceiver(mCloseSystemDialogsReceiver,filter);
+  mRotationEnabled=Utilities.isRotationAllowedForDevice(getApplicationContext());
+  if (!mRotationEnabled) {
+    getSharedPreferences(LauncherFiles.ROTATION_PREF_FILE,Context.MODE_MULTI_PROCESS).registerOnSharedPreferenceChangeListener(mSettingsObserver);
+    mPreferenceObserverRegistered=true;
+    mRotationEnabled=Utilities.isAllowRotationPrefEnabled(getApplicationContext());
+  }
   unlockScreenOrientation(true);
   if (mLauncherCallbacks != null) {
     mLauncherCallbacks.onCreate(savedInstanceState);
