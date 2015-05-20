@@ -1,5 +1,8 @@
 {
-  if (mDrawBackground && mBackgroundAlpha > 0.0f) {
+  if (!mIsDragTarget) {
+    return;
+  }
+  if (mBackgroundAlpha > 0.0f) {
     Drawable bg;
     if (mIsDragOverlapping) {
       bg=mActiveGlowBackground;
@@ -7,7 +10,7 @@
  else {
       bg=mNormalBackground;
     }
-    bg.setAlpha((int)(mBackgroundAlpha * mBackgroundAlphaMultiplier * 255));
+    bg.setAlpha((int)(mBackgroundAlpha * 255));
     bg.setBounds(mBackgroundRect);
     bg.draw(canvas);
   }
