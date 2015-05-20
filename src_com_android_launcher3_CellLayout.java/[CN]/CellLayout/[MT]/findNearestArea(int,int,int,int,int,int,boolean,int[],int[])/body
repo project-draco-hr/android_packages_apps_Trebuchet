@@ -57,7 +57,7 @@
         hitMaxX=xSize >= spanX;
         hitMaxY=ySize >= spanY;
       }
-      final int[] cellXY=mTmpXY;
+      final int[] cellXY=mTmpPoint;
       cellToCenterPoint(x,y,cellXY);
       Rect currentRect=mTempRectStack.pop();
       currentRect.set(x,y,x + xSize,y + ySize);

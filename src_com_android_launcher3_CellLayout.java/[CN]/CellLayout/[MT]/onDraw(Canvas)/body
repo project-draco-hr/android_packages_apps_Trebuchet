@@ -3,16 +3,7 @@
     return;
   }
   if (mBackgroundAlpha > 0.0f) {
-    Drawable bg;
-    if (mIsDragOverlapping) {
-      bg=mActiveGlowBackground;
-    }
- else {
-      bg=mNormalBackground;
-    }
-    bg.setAlpha((int)(mBackgroundAlpha * 255));
-    bg.setBounds(mBackgroundRect);
-    bg.draw(canvas);
+    mBackground.draw(canvas);
   }
   final Paint paint=mDragOutlinePaint;
   for (int i=0; i < mDragOutlines.length; i++) {

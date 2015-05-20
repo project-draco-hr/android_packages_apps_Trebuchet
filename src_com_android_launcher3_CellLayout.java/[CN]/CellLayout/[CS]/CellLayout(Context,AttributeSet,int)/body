@@ -21,14 +21,11 @@
   setAlwaysDrawnWithCacheEnabled(false);
   final Resources res=getResources();
   mHotseatScale=(float)grid.hotseatIconSizePx / grid.iconSizePx;
-  mNormalBackground=res.getDrawable(R.drawable.screenpanel);
-  mActiveGlowBackground=res.getDrawable(R.drawable.screenpanel_hover);
+  mBackground=(TransitionDrawable)res.getDrawable(R.drawable.bg_screenpanel);
+  mBackground.setCallback(this);
   mOverScrollLeft=res.getDrawable(R.drawable.overscroll_glow_left);
   mOverScrollRight=res.getDrawable(R.drawable.overscroll_glow_right);
-  mForegroundPadding=res.getDimensionPixelSize(R.dimen.workspace_overscroll_drawable_padding);
   mReorderPreviewAnimationMagnitude=(REORDER_PREVIEW_MAGNITUDE * grid.iconSizePx);
-  mNormalBackground.setFilterBitmap(true);
-  mActiveGlowBackground.setFilterBitmap(true);
   mEaseOutInterpolator=new DecelerateInterpolator(2.5f);
   mDragCell[0]=mDragCell[1]=-1;
   for (int i=0; i < mDragOutlines.length; i++) {
@@ -70,8 +67,6 @@
 );
     mDragOutlineAnims[i]=anim;
   }
-  mBackgroundRect=new Rect();
-  mForegroundRect=new Rect();
   mShortcutsAndWidgets=new ShortcutAndWidgetContainer(context);
   mShortcutsAndWidgets.setCellDimensions(mCellWidth,mCellHeight,mWidthGap,mHeightGap,mCountX,mCountY);
   mTouchFeedbackView=new ClickShadowView(context);

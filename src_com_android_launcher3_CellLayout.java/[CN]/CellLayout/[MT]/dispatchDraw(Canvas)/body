@@ -1,7 +1,6 @@
 {
   super.dispatchDraw(canvas);
   if (mForegroundAlpha > 0) {
-    mOverScrollForegroundDrawable.setBounds(mForegroundRect);
     mOverScrollForegroundDrawable.draw(canvas);
   }
 }

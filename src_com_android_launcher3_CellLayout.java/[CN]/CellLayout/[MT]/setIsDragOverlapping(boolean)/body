@@ -1,6 +1,12 @@
 {
   if (mIsDragOverlapping != isDragOverlapping) {
     mIsDragOverlapping=isDragOverlapping;
+    if (mIsDragOverlapping) {
+      mBackground.startTransition(BACKGROUND_ACTIVATE_DURATION);
+    }
+ else {
+      mBackground.reverseTransition(BACKGROUND_ACTIVATE_DURATION);
+    }
     invalidate();
   }
 }
