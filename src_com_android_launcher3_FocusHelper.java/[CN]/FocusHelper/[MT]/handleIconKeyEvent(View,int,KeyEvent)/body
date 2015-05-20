@@ -23,11 +23,11 @@
   ShortcutAndWidgetContainer hotseatParent=hotseatLayout.getShortcutsAndWidgets();
   int[][] matrix;
   if (keyCode == KeyEvent.KEYCODE_DPAD_DOWN && !profile.isVerticalBarLayout()) {
-    matrix=FocusLogic.createSparseMatrix(iconLayout,hotseatLayout,true,hotseat.getAllAppsButtonRank(),false);
+    matrix=FocusLogic.createSparseMatrix(iconLayout,hotseatLayout,true,hotseat.getAllAppsButtonRank(),!hotseat.hasIcons());
     countY=countY + 1;
   }
  else   if (keyCode == KeyEvent.KEYCODE_DPAD_RIGHT && profile.isVerticalBarLayout()) {
-    matrix=FocusLogic.createSparseMatrix(iconLayout,hotseatLayout,false,hotseat.getAllAppsButtonRank(),false);
+    matrix=FocusLogic.createSparseMatrix(iconLayout,hotseatLayout,false,hotseat.getAllAppsButtonRank(),!hotseat.hasIcons());
     countX=countX + 1;
   }
  else   if (keyCode == KeyEvent.KEYCODE_DEL || keyCode == KeyEvent.KEYCODE_FORWARD_DEL) {

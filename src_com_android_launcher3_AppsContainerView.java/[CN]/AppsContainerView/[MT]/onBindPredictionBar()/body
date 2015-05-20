@@ -22,4 +22,8 @@
       icon.setVisibility(View.INVISIBLE);
     }
   }
+  if (mFocusPredictionBarOnFirstBind) {
+    mFocusPredictionBarOnFirstBind=false;
+    mPredictionBarView.requestFocus();
+  }
 }
