@@ -1,5 +1,8 @@
 {
   Drawable icon=view.getIcon();
+  if (icon == null) {
+    return null;
+  }
   Rect rect=icon.getBounds();
   int bitmapWidth=(int)(rect.width() * view.getScaleX());
   int bitmapHeight=(int)(rect.height() * view.getScaleY());
