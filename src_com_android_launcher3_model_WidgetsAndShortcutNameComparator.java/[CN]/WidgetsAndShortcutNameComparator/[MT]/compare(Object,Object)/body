@@ -14,16 +14,13 @@
     labelB=(b instanceof LauncherAppWidgetProviderInfo) ? Utilities.trim(mManager.loadLabel((LauncherAppWidgetProviderInfo)b)) : Utilities.trim(((ResolveInfo)b).loadLabel(mPackageManager));
     mLabelCache.put(b,labelB);
   }
-  int result=mCollator.compare(labelA,labelB);
-  if (result == 0 && a instanceof AppWidgetProviderInfo && b instanceof AppWidgetProviderInfo) {
-    AppWidgetProviderInfo aInfo=(AppWidgetProviderInfo)a;
-    AppWidgetProviderInfo bInfo=(AppWidgetProviderInfo)b;
-    if (aInfo.getProfile().equals(android.os.Process.myUserHandle())) {
-      return -1;
-    }
- else     if (bInfo.getProfile().equals(android.os.Process.myUserHandle())) {
-      return 1;
-    }
+  boolean aWorkProfile=(a instanceof LauncherAppWidgetProviderInfo) && !mMainHandle.equals(mManager.getUser((LauncherAppWidgetProviderInfo)a));
+  boolean bWorkProfile=(b instanceof LauncherAppWidgetProviderInfo) && !mMainHandle.equals(mManager.getUser((LauncherAppWidgetProviderInfo)b));
+  if (aWorkProfile && !bWorkProfile) {
+    return 1;
   }
-  return result;
+  if (!aWorkProfile && bWorkProfile) {
+    return -1;
+  }
+  return mCollator.compare(labelA,labelB);
 }
