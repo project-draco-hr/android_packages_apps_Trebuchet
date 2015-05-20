@@ -2,19 +2,17 @@
   if (mShowPageHints) {
     Workspace workspace=mLauncher.getWorkspace();
     int width=getMeasuredWidth();
-    Rect childRect=new Rect();
-    getDescendantRectRelativeToSelf(workspace.getChildAt(workspace.getChildCount() - 1),childRect);
     int page=workspace.getNextPage();
     CellLayout leftPage=(CellLayout)workspace.getChildAt(mIsRtl ? page + 1 : page - 1);
     CellLayout rightPage=(CellLayout)workspace.getChildAt(mIsRtl ? page - 1 : page + 1);
     if (leftPage != null && leftPage.isDragTarget()) {
       Drawable left=mInScrollArea && leftPage.getIsDragOverlapping() ? mLeftHoverDrawableActive : mLeftHoverDrawable;
-      left.setBounds(0,childRect.top,left.getIntrinsicWidth(),childRect.bottom);
+      left.setBounds(0,mScrollChildPosition.top,left.getIntrinsicWidth(),mScrollChildPosition.bottom);
       left.draw(canvas);
     }
     if (rightPage != null && rightPage.isDragTarget()) {
       Drawable right=mInScrollArea && rightPage.getIsDragOverlapping() ? mRightHoverDrawableActive : mRightHoverDrawable;
-      right.setBounds(width - right.getIntrinsicWidth(),childRect.top,width,childRect.bottom);
+      right.setBounds(width - right.getIntrinsicWidth(),mScrollChildPosition.top,width,mScrollChildPosition.bottom);
       right.draw(canvas);
     }
   }
