@@ -1,7 +1,6 @@
 {
   for (  AppInfo info : apps) {
-    addApp(info);
+    mApps.add(info);
   }
   onAppsUpdated();
-  mAdapter.notifyDataSetChanged();
 }

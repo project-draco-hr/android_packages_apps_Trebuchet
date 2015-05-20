@@ -7,17 +7,17 @@
       int mergeCount=1;
       while (mMergeAlgorithm.continueMerging(sectionAppCount,mNumAppsPerRow,mergeCount) && (i + 1) < mSections.size()) {
         SectionInfo nextSection=mSections.remove(i + 1);
-        mSectionedFilteredApps.remove(nextSection.sectionBreakItem);
-        int pos=mSectionedFilteredApps.indexOf(section.firstAppItem);
+        mAdapterItems.remove(nextSection.sectionBreakItem);
+        int pos=mAdapterItems.indexOf(section.firstAppItem);
         int nextPos=pos + section.numApps;
         for (int j=nextPos; j < (nextPos + nextSection.numApps); j++) {
-          AdapterItem item=mSectionedFilteredApps.get(j);
+          AdapterItem item=mAdapterItems.get(j);
           item.sectionInfo=section;
           item.sectionAppIndex+=section.numApps;
         }
-        pos=mSectionedFilteredApps.indexOf(nextSection.firstAppItem);
-        for (int j=pos; j < mSectionedFilteredApps.size(); j++) {
-          AdapterItem item=mSectionedFilteredApps.get(j);
+        pos=mAdapterItems.indexOf(nextSection.firstAppItem);
+        for (int j=pos; j < mAdapterItems.size(); j++) {
+          AdapterItem item=mAdapterItems.get(j);
           item.position--;
         }
         section.numApps+=nextSection.numApps;

@@ -1,44 +1,12 @@
 {
   Collections.sort(mApps,mAppNameComparator.getAppInfoComparator());
-  mFilteredApps.clear();
-  mSections.clear();
-  mSectionedFilteredApps.clear();
-  mFastScrollerSections.clear();
-  SectionInfo lastSectionInfo=null;
-  String lastSectionName=null;
-  FastScrollSectionInfo lastFastScrollerSectionInfo=null;
-  int position=0;
-  int appIndex=0;
-  List<AppInfo> allApps=new ArrayList<>();
-  mPredictedApps.clear();
-  if (mPredictedAppComponents != null && !mPredictedAppComponents.isEmpty() && !hasFilter()) {
-    for (    ComponentName cn : mPredictedAppComponents) {
-      for (      AppInfo info : mApps) {
-        if (cn.equals(info.componentName)) {
-          mPredictedApps.add(info);
-          break;
-        }
-      }
-      if (mPredictedApps.size() == mNumPredictedAppsPerRow) {
-        break;
-      }
-    }
-    if (!mPredictedApps.isEmpty()) {
-      AdapterItem sectionItem=AdapterItem.asPredictionBarSpacer(position++);
-      mSectionedFilteredApps.add(sectionItem);
-    }
-  }
   Locale curLocale=mContext.getResources().getConfiguration().locale;
   TreeMap<String,ArrayList<AppInfo>> sectionMap=null;
   boolean localeRequiresSectionSorting=curLocale.equals(Locale.SIMPLIFIED_CHINESE);
   if (localeRequiresSectionSorting) {
     sectionMap=new TreeMap<>(mAppNameComparator.getSectionNameComparator());
     for (    AppInfo info : mApps) {
-      String sectionName=mCachedSectionNames.get(info.title);
-      if (sectionName == null) {
-        sectionName=mIndexer.computeSectionName(info.title);
-        mCachedSectionNames.put(info.title,sectionName);
-      }
+      String sectionName=getAndUpdateCachedSectionName(info.title);
       ArrayList<AppInfo> sectionApps=sectionMap.get(sectionName);
       if (sectionApps == null) {
         sectionApps=new ArrayList<>();
@@ -46,45 +14,16 @@
       }
       sectionApps.add(info);
     }
+    List<AppInfo> allApps=new ArrayList<>(mApps.size());
     for (    Map.Entry<String,ArrayList<AppInfo>> entry : sectionMap.entrySet()) {
       allApps.addAll(entry.getValue());
     }
+    mApps=allApps;
   }
  else {
     for (    AppInfo info : mApps) {
-      String sectionName=mCachedSectionNames.get(info.title);
-      if (sectionName == null) {
-        sectionName=mIndexer.computeSectionName(info.title);
-        mCachedSectionNames.put(info.title,sectionName);
-      }
+      getAndUpdateCachedSectionName(info.title);
     }
-    allApps.addAll(mApps);
   }
-  int numApps=allApps.size();
-  for (int i=0; i < numApps; i++) {
-    AppInfo info=allApps.get(i);
-    String sectionName=mCachedSectionNames.get(info.title);
-    if (mFilter != null && !mFilter.retainApp(info,sectionName)) {
-      continue;
-    }
-    if (lastSectionInfo == null || !sectionName.equals(lastSectionName)) {
-      lastSectionName=sectionName;
-      lastSectionInfo=new SectionInfo();
-      lastFastScrollerSectionInfo=new FastScrollSectionInfo(sectionName,(float)appIndex / numApps);
-      mSections.add(lastSectionInfo);
-      mFastScrollerSections.add(lastFastScrollerSectionInfo);
-      if (!hasFilter()) {
-        AdapterItem sectionItem=AdapterItem.asSectionBreak(position++,lastSectionInfo);
-        mSectionedFilteredApps.add(sectionItem);
-      }
-    }
-    AdapterItem appItem=AdapterItem.asApp(position++,lastSectionInfo,sectionName,lastSectionInfo.numApps++,info,appIndex++);
-    if (lastSectionInfo.firstAppItem == null) {
-      lastSectionInfo.firstAppItem=appItem;
-      lastFastScrollerSectionInfo.appItem=appItem;
-    }
-    mSectionedFilteredApps.add(appItem);
-    mFilteredApps.add(info);
-  }
-  mergeSections();
+  updateAdapterItems();
 }

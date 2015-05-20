@@ -1,4 +1,4 @@
 Context context
-FilterChangedCallback cb
+AdapterChangedCallback auCb
 int numAppsPerRow
 int numPredictedAppsPerRow

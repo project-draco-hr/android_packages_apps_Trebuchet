@@ -1,0 +1,62 @@
+{
+  SectionInfo lastSectionInfo=null;
+  String lastSectionName=null;
+  FastScrollSectionInfo lastFastScrollerSectionInfo=null;
+  int position=0;
+  int appIndex=0;
+  mFilteredApps.clear();
+  mFastScrollerSections.clear();
+  mAdapterItems.clear();
+  mSections.clear();
+  mPredictedApps.clear();
+  if (mPredictedAppComponents != null && !mPredictedAppComponents.isEmpty() && !hasFilter()) {
+    for (    ComponentName cn : mPredictedAppComponents) {
+      for (      AppInfo info : mApps) {
+        if (cn.equals(info.componentName)) {
+          mPredictedApps.add(info);
+          break;
+        }
+      }
+      if (mPredictedApps.size() == mNumPredictedAppsPerRow) {
+        break;
+      }
+    }
+    if (!mPredictedApps.isEmpty()) {
+      AdapterItem sectionItem=AdapterItem.asPredictionBarSpacer(position++);
+      mAdapterItems.add(sectionItem);
+    }
+  }
+  int numApps=mApps.size();
+  for (int i=0; i < numApps; i++) {
+    AppInfo info=mApps.get(i);
+    String sectionName=getAndUpdateCachedSectionName(info.title);
+    if (mFilter != null && !mFilter.retainApp(info,sectionName)) {
+      continue;
+    }
+    if (lastSectionInfo == null || !sectionName.equals(lastSectionName)) {
+      lastSectionName=sectionName;
+      lastSectionInfo=new SectionInfo();
+      lastFastScrollerSectionInfo=new FastScrollSectionInfo(sectionName,(float)appIndex / numApps);
+      mSections.add(lastSectionInfo);
+      mFastScrollerSections.add(lastFastScrollerSectionInfo);
+      if (!hasFilter()) {
+        AdapterItem sectionItem=AdapterItem.asSectionBreak(position++,lastSectionInfo);
+        mAdapterItems.add(sectionItem);
+      }
+    }
+    AdapterItem appItem=AdapterItem.asApp(position++,lastSectionInfo,sectionName,lastSectionInfo.numApps++,info,appIndex++);
+    if (lastSectionInfo.firstAppItem == null) {
+      lastSectionInfo.firstAppItem=appItem;
+      lastFastScrollerSectionInfo.appItem=appItem;
+    }
+    mAdapterItems.add(appItem);
+    mFilteredApps.add(info);
+  }
+  mergeSections();
+  if (mAdapter != null) {
+    mAdapter.notifyDataSetChanged();
+  }
+  if (mAdapterChangedCallback != null) {
+    mAdapterChangedCallback.onAdapterItemsChanged();
+  }
+}

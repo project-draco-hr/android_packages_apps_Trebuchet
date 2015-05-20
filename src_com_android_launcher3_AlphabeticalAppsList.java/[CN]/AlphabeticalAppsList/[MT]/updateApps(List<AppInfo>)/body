@@ -5,9 +5,8 @@
       mApps.set(index,info);
     }
  else {
-      addApp(info);
+      mApps.add(info);
     }
   }
   onAppsUpdated();
-  mAdapter.notifyDataSetChanged();
 }

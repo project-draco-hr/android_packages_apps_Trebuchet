@@ -6,5 +6,4 @@
     }
   }
   onAppsUpdated();
-  mAdapter.notifyDataSetChanged();
 }
