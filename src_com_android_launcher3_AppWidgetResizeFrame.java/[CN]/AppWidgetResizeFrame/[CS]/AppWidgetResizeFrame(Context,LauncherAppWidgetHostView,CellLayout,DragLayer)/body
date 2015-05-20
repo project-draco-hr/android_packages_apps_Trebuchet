@@ -8,38 +8,39 @@
   mDragLayer=dragLayer;
   mMinHSpan=info.minSpanX;
   mMinVSpan=info.minSpanY;
-  setBackgroundResource(R.drawable.widget_resize_frame_holo);
+  setBackgroundResource(R.drawable.widget_resize_shadow);
+  setForeground(getResources().getDrawable(R.drawable.widget_resize_frame));
   setPadding(0,0,0,0);
+  final int handleMargin=getResources().getDimensionPixelSize(R.dimen.widget_handle_margin);
   LayoutParams lp;
   mLeftHandle=new ImageView(context);
-  mLeftHandle.setImageResource(R.drawable.widget_resize_handle_left);
+  mLeftHandle.setImageResource(R.drawable.ic_widget_resize_handle);
   lp=new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT,Gravity.LEFT | Gravity.CENTER_VERTICAL);
+  lp.leftMargin=handleMargin;
   addView(mLeftHandle,lp);
   mRightHandle=new ImageView(context);
-  mRightHandle.setImageResource(R.drawable.widget_resize_handle_right);
+  mRightHandle.setImageResource(R.drawable.ic_widget_resize_handle);
   lp=new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT,Gravity.RIGHT | Gravity.CENTER_VERTICAL);
+  lp.rightMargin=handleMargin;
   addView(mRightHandle,lp);
   mTopHandle=new ImageView(context);
-  mTopHandle.setImageResource(R.drawable.widget_resize_handle_top);
+  mTopHandle.setImageResource(R.drawable.ic_widget_resize_handle);
   lp=new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT,Gravity.CENTER_HORIZONTAL | Gravity.TOP);
+  lp.topMargin=handleMargin;
   addView(mTopHandle,lp);
   mBottomHandle=new ImageView(context);
-  mBottomHandle.setImageResource(R.drawable.widget_resize_handle_bottom);
+  mBottomHandle.setImageResource(R.drawable.ic_widget_resize_handle);
   lp=new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT,Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM);
+  lp.bottomMargin=handleMargin;
   addView(mBottomHandle,lp);
-  Rect p=new Rect(0,0,0,0);
   if (!info.isCustomWidget) {
-    p=AppWidgetHostView.getDefaultPaddingForWidget(context,widgetView.getAppWidgetInfo().provider,null);
+    mWidgetPadding=AppWidgetHostView.getDefaultPaddingForWidget(context,widgetView.getAppWidgetInfo().provider,null);
   }
  else {
     Resources r=context.getResources();
     int padding=r.getDimensionPixelSize(R.dimen.default_widget_padding);
-    p.set(padding,padding,padding,padding);
+    mWidgetPadding=new Rect(padding,padding,padding,padding);
   }
-  mWidgetPaddingLeft=p.left;
-  mWidgetPaddingTop=p.top;
-  mWidgetPaddingRight=p.right;
-  mWidgetPaddingBottom=p.bottom;
   if (mResizeMode == AppWidgetProviderInfo.RESIZE_HORIZONTAL) {
     mTopHandle.setVisibility(GONE);
     mBottomHandle.setVisibility(GONE);
@@ -48,8 +49,7 @@
     mLeftHandle.setVisibility(GONE);
     mRightHandle.setVisibility(GONE);
   }
-  final float density=mLauncher.getResources().getDisplayMetrics().density;
-  mBackgroundPadding=(int)Math.ceil(density * BACKGROUND_PADDING);
+  mBackgroundPadding=getResources().getDimensionPixelSize(R.dimen.resize_frame_background_padding);
   mTouchTargetWidth=2 * mBackgroundPadding;
   mCellLayout.markCellsAsUnoccupiedForView(mWidgetView);
 }
