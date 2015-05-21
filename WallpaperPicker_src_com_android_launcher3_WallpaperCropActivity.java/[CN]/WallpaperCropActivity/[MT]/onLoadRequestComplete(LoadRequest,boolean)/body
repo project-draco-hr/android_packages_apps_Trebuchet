@@ -18,4 +18,5 @@
   if (req.postExecute != null) {
     req.postExecute.run();
   }
+  mProgressView.setVisibility(View.GONE);
 }
