@@ -1,0 +1,4 @@
+{
+  mAdapter.setWidgetsModel(model);
+  mAdapter.notifyDataSetChanged();
+}

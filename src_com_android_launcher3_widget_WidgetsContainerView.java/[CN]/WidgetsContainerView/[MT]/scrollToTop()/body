@@ -1,6 +1,3 @@
 {
   mView.scrollToPosition(0);
-  if (DEBUG) {
-    Log.d(TAG,String.format("scrollToTop, [widgets size=%d]",mWidgets.getPackageSize()));
-  }
 }

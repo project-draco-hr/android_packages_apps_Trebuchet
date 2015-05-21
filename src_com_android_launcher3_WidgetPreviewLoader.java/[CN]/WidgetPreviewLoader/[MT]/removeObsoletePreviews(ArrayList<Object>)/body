@@ -1,5 +1,5 @@
 {
-  Assert.assertTrue(LauncherModel.sWorkerThread.getThreadId() == Process.myTid());
+  Utilities.assertWorkerThread();
   LongSparseArray<UserHandleCompat> userIdCache=new LongSparseArray<>();
   LongSparseArray<HashSet<String>> validPackages=new LongSparseArray<>();
   for (  Object obj : list) {

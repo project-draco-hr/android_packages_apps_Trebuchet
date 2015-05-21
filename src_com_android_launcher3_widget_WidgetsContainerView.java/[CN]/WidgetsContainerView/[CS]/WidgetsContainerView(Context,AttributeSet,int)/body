@@ -4,8 +4,6 @@
   mDragController=mLauncher.getDragController();
   mWidgetHostViewLoader=new WidgetHostViewLoader(mLauncher);
   mAdapter=new WidgetsListAdapter(context,this,this,mLauncher);
-  mWidgets=new WidgetsModel(context,mAdapter);
-  mAdapter.setWidgetsModel(mWidgets);
   mIconCache=(LauncherAppState.getInstance()).getIconCache();
   if (DEBUG) {
     Log.d(TAG,"WidgetsContainerView constructor");
