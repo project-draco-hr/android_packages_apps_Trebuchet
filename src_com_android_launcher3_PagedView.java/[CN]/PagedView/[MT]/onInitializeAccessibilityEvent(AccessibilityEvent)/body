@@ -1,4 +1,4 @@
 {
   super.onInitializeAccessibilityEvent(event);
-  event.setScrollable(true);
+  event.setScrollable(getPageCount() > 1);
 }

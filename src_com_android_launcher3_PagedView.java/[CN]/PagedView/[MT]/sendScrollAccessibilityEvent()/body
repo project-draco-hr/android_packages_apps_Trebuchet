@@ -3,6 +3,11 @@
   if (am.isEnabled()) {
     if (mCurrentPage != getNextPage()) {
       AccessibilityEvent ev=AccessibilityEvent.obtain(AccessibilityEvent.TYPE_VIEW_SCROLLED);
+      ev.setScrollable(true);
+      ev.setScrollX(getScrollX());
+      ev.setScrollY(getScrollY());
+      ev.setMaxScrollX(mMaxScrollX);
+      ev.setMaxScrollY(0);
       sendAccessibilityEventUnchecked(ev);
     }
   }
