@@ -9,7 +9,7 @@ synchronized (LoaderTask.this) {
         return;
       }
     }
-    updateAllAppsIconsCache();
+    mIconCache.updateDbIcons();
 synchronized (LoaderTask.this) {
       if (mStopped) {
         return;
