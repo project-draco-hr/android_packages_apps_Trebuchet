@@ -1,10 +1,9 @@
 {
   if (Utilities.isLmpOrAbove()) {
-    mDrawable.reverseTransition(DragView.COLOR_CHANGE_DURATION);
     animateTextColor(mOriginalTextColor.getDefaultColor());
   }
  else {
-    mDrawable.resetTransition();
+    mDrawable.setColorFilter(null);
     setTextColor(mOriginalTextColor);
   }
 }
