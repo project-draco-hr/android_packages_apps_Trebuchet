@@ -21,6 +21,7 @@
     LauncherClings.synchonouslyMarkFirstRunClingDismissed(this);
     if (mHelper.restoredBackupVersion <= 2) {
       LauncherAppState.getLauncherProvider().updateFolderItemsRank();
+      LauncherAppState.getLauncherProvider().convertShortcutsToLauncherActivities();
     }
   }
  else {

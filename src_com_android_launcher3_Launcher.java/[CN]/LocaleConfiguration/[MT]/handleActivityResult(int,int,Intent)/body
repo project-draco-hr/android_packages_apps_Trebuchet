@@ -25,7 +25,7 @@
     }
     return;
   }
-  boolean isWidgetDrop=(requestCode == REQUEST_PICK_APPWIDGET || requestCode == REQUEST_CREATE_APPWIDGET || requestCode == REQUEST_CREATE_SHORTCUT);
+  boolean isWidgetDrop=(requestCode == REQUEST_PICK_APPWIDGET || requestCode == REQUEST_CREATE_APPWIDGET);
   final boolean workspaceLocked=isWorkspaceLocked();
   if (isWidgetDrop) {
     final int appWidgetId;
