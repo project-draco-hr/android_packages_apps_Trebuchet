@@ -1,6 +1,5 @@
 {
-  mDrawable=(TransitionDrawable)getResources().getDrawable(resId);
-  mDrawable.setCrossFadeEnabled(true);
+  mDrawable=getResources().getDrawable(resId);
   if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
     setCompoundDrawablesRelativeWithIntrinsicBounds(mDrawable,null,null,null);
   }

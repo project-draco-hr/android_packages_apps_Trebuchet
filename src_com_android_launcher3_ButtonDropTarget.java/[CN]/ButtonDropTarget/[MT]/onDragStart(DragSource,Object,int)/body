@@ -1,6 +1,6 @@
 {
   mActive=supportsDrop(source,info);
-  mDrawable.resetTransition();
+  mDrawable.setColorFilter(null);
   if (mCurrentColorAnim != null) {
     mCurrentColorAnim.cancel();
     mCurrentColorAnim=null;

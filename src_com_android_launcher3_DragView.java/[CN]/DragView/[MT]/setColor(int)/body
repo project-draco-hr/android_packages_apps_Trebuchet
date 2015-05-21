@@ -6,7 +6,7 @@
     ColorMatrix m1=new ColorMatrix();
     m1.setSaturation(0);
     ColorMatrix m2=new ColorMatrix();
-    m2.setScale(Color.red(color) / 255f,Color.green(color) / 255f,Color.blue(color) / 255f,Color.alpha(color) / 255f);
+    setColorScale(color,m2);
     m1.postConcat(m2);
     if (Utilities.isLmpOrAbove()) {
       animateFilterTo(m1.getArray());

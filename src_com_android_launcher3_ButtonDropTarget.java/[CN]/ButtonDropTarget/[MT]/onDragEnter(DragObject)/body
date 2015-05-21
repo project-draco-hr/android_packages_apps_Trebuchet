@@ -1,11 +1,14 @@
 {
   d.dragView.setColor(mHoverColor);
   if (Utilities.isLmpOrAbove()) {
-    mDrawable.startTransition(DragView.COLOR_CHANGE_DURATION);
     animateTextColor(mHoverColor);
   }
  else {
-    mDrawable.startTransition(0);
+    if (mCurrentFilter == null) {
+      mCurrentFilter=new ColorMatrix();
+    }
+    DragView.setColorScale(mHoverColor,mCurrentFilter);
+    mDrawable.setColorFilter(new ColorMatrixColorFilter(mCurrentFilter));
     setTextColor(mHoverColor);
   }
 }
