@@ -260,7 +260,7 @@ break;
 case LauncherSettings.Favorites.ITEM_TYPE_FOLDER:
 id=c.getLong(idIndex);
 FolderInfo folderInfo=findOrMakeFolder(sBgFolders,id);
-folderInfo.title=Utilities.trim(c.getString(titleIndex));
+folderInfo.title=c.getString(titleIndex);
 folderInfo.id=id;
 container=c.getInt(containerIndex);
 folderInfo.container=container;

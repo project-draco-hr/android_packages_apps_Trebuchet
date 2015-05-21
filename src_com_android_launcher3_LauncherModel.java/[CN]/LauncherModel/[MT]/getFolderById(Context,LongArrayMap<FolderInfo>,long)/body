@@ -16,7 +16,7 @@ case LauncherSettings.Favorites.ITEM_TYPE_FOLDER:
         folderInfo=findOrMakeFolder(folderList,id);
       break;
   }
-  folderInfo.title=Utilities.trim(c.getString(titleIndex));
+  folderInfo.title=c.getString(titleIndex);
   folderInfo.id=id;
   folderInfo.container=c.getInt(containerIndex);
   folderInfo.screenId=c.getInt(screenIndex);
