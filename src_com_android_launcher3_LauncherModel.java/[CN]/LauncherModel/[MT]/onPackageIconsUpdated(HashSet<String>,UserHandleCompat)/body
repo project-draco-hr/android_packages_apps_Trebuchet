@@ -1,0 +1,41 @@
+{
+  final Callbacks callbacks=getCallback();
+  final ArrayList<AppInfo> updatedApps=new ArrayList<>();
+  final ArrayList<ShortcutInfo> updatedShortcuts=new ArrayList<>();
+synchronized (sBgLock) {
+    for (    ItemInfo info : sBgItemsIdMap) {
+      if (info instanceof ShortcutInfo && user.equals(info.user) && info.itemType == LauncherSettings.Favorites.ITEM_TYPE_APPLICATION) {
+        ShortcutInfo si=(ShortcutInfo)info;
+        ComponentName cn=si.getTargetComponent();
+        if (cn != null && updatedPackages.contains(cn.getPackageName())) {
+          si.updateIcon(mIconCache);
+          updatedShortcuts.add(si);
+        }
+      }
+    }
+    mBgAllAppsList.updateIconsAndLabels(updatedPackages,user,updatedApps);
+  }
+  if (!updatedShortcuts.isEmpty()) {
+    final UserHandleCompat userFinal=user;
+    mHandler.post(new Runnable(){
+      public void run(){
+        Callbacks cb=getCallback();
+        if (cb != null && callbacks == cb) {
+          cb.bindShortcutsChanged(updatedShortcuts,new ArrayList<ShortcutInfo>(),userFinal);
+        }
+      }
+    }
+);
+  }
+  if (!updatedApps.isEmpty()) {
+    mHandler.post(new Runnable(){
+      public void run(){
+        Callbacks cb=getCallback();
+        if (cb != null && callbacks == cb) {
+          cb.bindAppsUpdated(updatedApps);
+        }
+      }
+    }
+);
+  }
+}

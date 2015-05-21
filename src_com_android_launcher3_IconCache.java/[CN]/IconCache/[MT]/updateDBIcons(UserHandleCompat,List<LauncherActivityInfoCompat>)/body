@@ -1,5 +1,4 @@
 {
-  mIconDb.updateSystemStateString(mContext);
   long userSerial=mUserManager.getSerialNumberForUser(user);
   PackageManager pm=mContext.getPackageManager();
   HashMap<String,PackageInfo> pkgInfoMap=new HashMap<String,PackageInfo>();
@@ -17,7 +16,7 @@
   final int rowIndex=c.getColumnIndex(IconDB.COLUMN_ROWID);
   final int systemStateIndex=c.getColumnIndex(IconDB.COLUMN_SYSTEM_STATE);
   HashSet<Integer> itemsToRemove=new HashSet<Integer>();
-  HashSet<String> updatedPackages=new HashSet<String>();
+  Stack<LauncherActivityInfoCompat> appsToUpdate=new Stack<>();
   while (c.moveToNext()) {
     String cn=c.getString(indexComponent);
     ComponentName component=ComponentName.unflattenFromString(cn);
@@ -37,18 +36,18 @@
     }
     if (app == null) {
       itemsToRemove.add(c.getInt(rowIndex));
-      continue;
     }
-    ContentValues values=updateCacheAndGetContentValues(app,true);
-    mIconDb.getWritableDatabase().update(IconDB.TABLE_NAME,values,IconDB.COLUMN_COMPONENT + " = ? AND " + IconDB.COLUMN_USER+ " = ?",new String[]{cn,Long.toString(userSerial)});
-    updatedPackages.add(component.getPackageName());
+ else {
+      appsToUpdate.add(app);
+    }
   }
   c.close();
   if (!itemsToRemove.isEmpty()) {
     mIconDb.getWritableDatabase().delete(IconDB.TABLE_NAME,IconDB.COLUMN_ROWID + " IN ( " + TextUtils.join(", ",itemsToRemove)+ " )",null);
   }
-  if (!componentMap.isEmpty()) {
-    mWorkerHandler.post(new SerializedIconAdditionTask(userSerial,pkgInfoMap,componentMap.values()));
+  if (!componentMap.isEmpty() || !appsToUpdate.isEmpty()) {
+    Stack<LauncherActivityInfoCompat> appsToAdd=new Stack<>();
+    appsToAdd.addAll(componentMap.values());
+    new SerializedIconUpdateTask(userSerial,pkgInfoMap,appsToAdd,appsToUpdate).scheduleNext();
   }
-  return updatedPackages;
 }
