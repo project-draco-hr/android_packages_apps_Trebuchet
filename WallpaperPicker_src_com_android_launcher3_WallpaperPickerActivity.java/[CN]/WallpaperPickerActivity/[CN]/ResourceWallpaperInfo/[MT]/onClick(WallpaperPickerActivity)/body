@@ -1,6 +1,6 @@
 {
   a.setWallpaperButtonEnabled(false);
-  BitmapRegionTileSource.ResourceBitmapSource bitmapSource=new BitmapRegionTileSource.ResourceBitmapSource(mResources,mResId);
+  final BitmapRegionTileSource.ResourceBitmapSource bitmapSource=new BitmapRegionTileSource.ResourceBitmapSource(mResources,mResId);
   a.setCropViewTileSource(bitmapSource,false,false,new CropViewScaleProvider(){
     @Override public float getScale(    TileSource src){
       Point wallpaperSize=WallpaperUtils.getDefaultWallpaperSize(a.getResources(),a.getWindowManager());
@@ -10,7 +10,9 @@
   }
 ,new Runnable(){
     @Override public void run(){
-      a.setWallpaperButtonEnabled(true);
+      if (bitmapSource.getLoadingState() == BitmapSource.State.LOADED) {
+        a.setWallpaperButtonEnabled(true);
+      }
     }
   }
 );

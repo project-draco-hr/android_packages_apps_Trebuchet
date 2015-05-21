@@ -1,9 +1,11 @@
 {
   a.setWallpaperButtonEnabled(false);
-  BitmapRegionTileSource.UriBitmapSource bitmapSource=new BitmapRegionTileSource.UriBitmapSource(a.getContext(),Uri.fromFile(mFile));
+  final BitmapRegionTileSource.UriBitmapSource bitmapSource=new BitmapRegionTileSource.UriBitmapSource(a.getContext(),Uri.fromFile(mFile));
   a.setCropViewTileSource(bitmapSource,false,true,null,new Runnable(){
     @Override public void run(){
-      a.setWallpaperButtonEnabled(true);
+      if (bitmapSource.getLoadingState() == BitmapSource.State.LOADED) {
+        a.setWallpaperButtonEnabled(true);
+      }
     }
   }
 );
