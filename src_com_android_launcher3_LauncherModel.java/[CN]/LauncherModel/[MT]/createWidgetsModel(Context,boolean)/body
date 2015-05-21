@@ -4,5 +4,7 @@
   widgetsAndShortcuts.addAll(getWidgetProviders(context,refresh));
   Intent shortcutsIntent=new Intent(Intent.ACTION_CREATE_SHORTCUT);
   widgetsAndShortcuts.addAll(packageManager.queryIntentActivities(shortcutsIntent,0));
-  return widgetsAndShortcuts;
+  WidgetsModel model=new WidgetsModel(context);
+  model.addWidgetsAndShortcuts(widgetsAndShortcuts);
+  return model;
 }

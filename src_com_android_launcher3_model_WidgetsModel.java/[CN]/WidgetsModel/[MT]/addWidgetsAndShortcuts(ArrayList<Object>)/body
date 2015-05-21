@@ -1,11 +1,13 @@
 {
+  Utilities.assertWorkerThread();
+  mRawList=rawWidgetsShortcuts;
   if (DEBUG) {
-    Log.d(TAG,"addWidgetsAndShortcuts, widgetsShortcuts#=" + widgetsShortcuts.size());
+    Log.d(TAG,"addWidgetsAndShortcuts, widgetsShortcuts#=" + rawWidgetsShortcuts.size());
   }
   HashMap<String,PackageItemInfo> tmpPackageItemInfos=new HashMap<>();
   mWidgetsList.clear();
   mPackageItemInfos.clear();
-  for (  Object o : widgetsShortcuts) {
+  for (  Object o : rawWidgetsShortcuts) {
     String packageName="";
     if (o instanceof LauncherAppWidgetProviderInfo) {
       LauncherAppWidgetProviderInfo widgetInfo=(LauncherAppWidgetProviderInfo)o;
@@ -37,5 +39,4 @@
   for (  PackageItemInfo p : mPackageItemInfos) {
     Collections.sort(mWidgetsList.get(p),mWidgetAndShortcutNameComparator);
   }
-  mAdapter.notifyDataSetChanged();
 }
