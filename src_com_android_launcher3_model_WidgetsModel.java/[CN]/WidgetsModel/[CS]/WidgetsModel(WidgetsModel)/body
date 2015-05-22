@@ -1,0 +1,7 @@
+{
+  mPackageItemInfos=(ArrayList<PackageItemInfo>)model.mPackageItemInfos.clone();
+  mWidgetsList=(HashMap<PackageItemInfo,ArrayList<Object>>)model.mWidgetsList.clone();
+  mWidgetAndShortcutNameComparator=model.mWidgetAndShortcutNameComparator;
+  mAppNameComparator=model.mAppNameComparator;
+  mIconCache=model.mIconCache;
+}

@@ -2,5 +2,4 @@
   mWidgetAndShortcutNameComparator=new WidgetsAndShortcutNameComparator(context);
   mAppNameComparator=(new AppNameComparator(context)).getAppInfoComparator();
   mIconCache=LauncherAppState.getInstance().getIconCache();
-  mWorkerHandler=new Handler(LauncherModel.getWorkerLooper());
 }
