@@ -55,7 +55,7 @@
   mWorkspace.setup(dragController);
   dragController.addDragListener(mWorkspace);
   mSearchDropTargetBar=(SearchDropTargetBar)mDragLayer.findViewById(R.id.search_drop_target_bar);
-  mAppsView=(AppsContainerView)findViewById(R.id.apps_view);
+  mAppsView=(AllAppsContainerView)findViewById(R.id.apps_view);
   if (isAllAppsSearchOverridden()) {
     mAppsView.hideHeaderBar();
   }

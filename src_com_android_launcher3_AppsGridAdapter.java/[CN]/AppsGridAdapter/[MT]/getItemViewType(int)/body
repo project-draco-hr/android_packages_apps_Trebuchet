@@ -1,7 +1,0 @@
-{
-  if (mApps.hasNoFilteredResults()) {
-    return EMPTY_VIEW_TYPE;
-  }
-  AlphabeticalAppsList.AdapterItem item=mApps.getAdapterItems().get(position);
-  return item.viewType;
-}

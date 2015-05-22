@@ -1,0 +1,29 @@
+{
+  updatePredictionBarVisibility();
+  List<AppInfo> predictedApps=mApps.getPredictedApps();
+  int childCount=mPredictionBarView.getChildCount();
+  for (int i=0; i < mNumPredictedAppsPerRow; i++) {
+    BubbleTextView icon;
+    if (i < childCount) {
+      icon=(BubbleTextView)mPredictionBarView.getChildAt(i);
+    }
+ else {
+      icon=(BubbleTextView)mLayoutInflater.inflate(R.layout.all_apps_prediction_bar_icon,mPredictionBarView,false);
+      icon.setFocusable(true);
+      mPredictionBarView.addView(icon);
+    }
+    if (i < predictedApps.size()) {
+      if (icon.getVisibility() != View.VISIBLE) {
+        icon.setVisibility(View.VISIBLE);
+      }
+      icon.applyFromApplicationInfo(predictedApps.get(i));
+    }
+ else {
+      icon.setVisibility(View.INVISIBLE);
+    }
+  }
+  if (mFocusPredictionBarOnFirstBind) {
+    mFocusPredictionBarOnFirstBind=false;
+    mPredictionBarView.requestFocus();
+  }
+}

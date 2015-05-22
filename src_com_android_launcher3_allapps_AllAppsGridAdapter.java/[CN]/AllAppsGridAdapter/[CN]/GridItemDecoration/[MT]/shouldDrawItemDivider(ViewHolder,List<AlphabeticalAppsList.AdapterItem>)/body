@@ -1,0 +1,4 @@
+{
+  int pos=holder.getPosition();
+  return items.get(pos).viewType == AllAppsGridAdapter.PREDICTION_BAR_SPACER_TYPE;
+}

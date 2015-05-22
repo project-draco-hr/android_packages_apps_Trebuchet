@@ -1,5 +1,5 @@
 {
-  AppsContainerView appsView=mLauncher.getAppsView();
+  AllAppsContainerView appsView=mLauncher.getAppsView();
   PrivateTransitionCallbacks cb=new PrivateTransitionCallbacks(){
     int[] mAllAppsToPanelDelta;
     @Override public void onRevealViewVisible(    View revealView,    View contentView,    View allAppsButtonView){

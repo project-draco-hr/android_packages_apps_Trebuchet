@@ -19,8 +19,5 @@
   folderCellHeightPx=cellHeightPx + edgeMarginPx;
   folderBackgroundOffset=-edgeMarginPx;
   folderIconSizePx=iconSizePx + 2 * -folderBackgroundOffset;
-  allAppsCellWidthPx=allAppsIconSizePx;
-  allAppsCellHeightPx=allAppsIconSizePx + drawablePadding + allAppsIconTextSizePx;
-  int appsContainerViewWidthPx=res.getDimensionPixelSize(R.dimen.apps_container_width);
-  updateAppsViewNumCols(res,appsContainerViewWidthPx);
+  updateAppsViewNumCols(res,0);
 }

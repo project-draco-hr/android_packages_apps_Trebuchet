@@ -1,0 +1,18 @@
+{
+  super(context,attrs,defStyleAttr);
+  mLauncher=(Launcher)context;
+  Resources res=context.getResources();
+  int fastScrollerSize=res.getDimensionPixelSize(R.dimen.all_apps_fast_scroll_popup_size);
+  mScrollbar=res.getDrawable(R.drawable.all_apps_scrollbar_thumb);
+  mFastScrollerBg=res.getDrawable(R.drawable.all_apps_fastscroll_bg);
+  mFastScrollerBg.setBounds(0,0,fastScrollerSize,fastScrollerSize);
+  mFastScrollTextPaint=new Paint();
+  mFastScrollTextPaint.setColor(Color.WHITE);
+  mFastScrollTextPaint.setAntiAlias(true);
+  mFastScrollTextPaint.setTextSize(res.getDimensionPixelSize(R.dimen.all_apps_fast_scroll_text_size));
+  mScrollbarWidth=res.getDimensionPixelSize(R.dimen.all_apps_fast_scroll_bar_width);
+  mScrollbarMinHeight=res.getDimensionPixelSize(R.dimen.all_apps_fast_scroll_bar_min_height);
+  mScrollbarInset=res.getDimensionPixelSize(R.dimen.all_apps_fast_scroll_scrubber_touch_inset);
+  setFastScrollerAlpha(getFastScrollerAlpha());
+  setOverScrollMode(View.OVER_SCROLL_NEVER);
+}

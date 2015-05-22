@@ -1,6 +1,0 @@
-{
-  AdapterItem item=new AdapterItem();
-  item.viewType=AppsGridAdapter.PREDICTION_BAR_SPACER_TYPE;
-  item.position=pos;
-  return item;
-}

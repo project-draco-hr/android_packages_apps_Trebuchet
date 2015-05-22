@@ -1,5 +1,5 @@
 {
-  BubbleTextView favorite=(BubbleTextView)mInflater.inflate(R.layout.application,parent,false);
+  BubbleTextView favorite=(BubbleTextView)mInflater.inflate(R.layout.app_icon,parent,false);
   favorite.applyFromShortcutInfo(info,mIconCache);
   favorite.setCompoundDrawablePadding(mDeviceProfile.iconDrawablePaddingPx);
   favorite.setOnClickListener(this);

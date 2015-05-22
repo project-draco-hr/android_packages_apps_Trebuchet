@@ -1,8 +1,8 @@
 {
   final Resources res=mLauncher.getResources();
   final boolean material=Utilities.isLmpOrAbove();
-  final int revealDuration=res.getInteger(R.integer.config_appsCustomizeRevealTime);
-  final int itemsAlphaStagger=res.getInteger(R.integer.config_appsCustomizeItemsAlphaStagger);
+  final int revealDuration=res.getInteger(R.integer.config_overlayRevealTime);
+  final int itemsAlphaStagger=res.getInteger(R.integer.config_overlayItemsAlphaStagger);
   final View allAppsButtonView=mLauncher.getAllAppsButton();
   final View fromView=mLauncher.getWorkspace();
   final HashMap<View,Integer> layerViews=new HashMap<>();

@@ -1,8 +1,0 @@
-{
-  AdapterItem item=new AdapterItem();
-  item.viewType=AppsGridAdapter.SECTION_BREAK_VIEW_TYPE;
-  item.position=pos;
-  item.sectionInfo=section;
-  section.sectionBreakItem=item;
-  return item;
-}

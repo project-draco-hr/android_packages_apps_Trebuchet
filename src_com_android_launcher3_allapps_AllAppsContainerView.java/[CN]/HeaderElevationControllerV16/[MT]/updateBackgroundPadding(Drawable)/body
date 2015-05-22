@@ -1,0 +1,7 @@
+{
+  bg.getPadding(mTmpRect);
+  FrameLayout.LayoutParams lp=(FrameLayout.LayoutParams)mShadow.getLayoutParams();
+  lp.leftMargin=mTmpRect.left;
+  lp.rightMargin=mTmpRect.right;
+  mShadow.requestLayout();
+}
