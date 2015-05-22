@@ -1,9 +1,8 @@
 {
-  LauncherAppState app=LauncherAppState.getInstance();
   DeviceProfile grid=launcher.getDeviceProfile();
-  Rect padding=grid.getWorkspacePadding(grid.isLandscape ? CellLayout.LANDSCAPE : CellLayout.PORTRAIT);
-  int parentWidth=grid.calculateCellWidth(grid.widthPx - padding.left - padding.right,(int)grid.inv.numColumns);
-  int parentHeight=grid.calculateCellHeight(grid.heightPx - padding.top - padding.bottom,(int)grid.inv.numRows);
+  Rect padding=grid.getWorkspacePadding(Utilities.isRtl(launcher.getResources()));
+  int parentWidth=DeviceProfile.calculateCellWidth(grid.widthPx - padding.left - padding.right,(int)grid.inv.numColumns);
+  int parentHeight=DeviceProfile.calculateCellHeight(grid.heightPx - padding.top - padding.bottom,(int)grid.inv.numRows);
   int smallerSize=Math.min(parentWidth,parentHeight);
   int spanX=(int)Math.ceil(width / (float)smallerSize);
   int spanY=(int)Math.ceil(height / (float)smallerSize);

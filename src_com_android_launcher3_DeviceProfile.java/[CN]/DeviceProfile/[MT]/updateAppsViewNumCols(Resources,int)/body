@@ -2,7 +2,7 @@
   int appsViewLeftMarginPx=res.getDimensionPixelSize(R.dimen.apps_grid_view_start_margin);
   int availableAppsWidthPx=(containerWidth > 0) ? containerWidth : availableWidthPx;
   int numAppsCols=(availableAppsWidthPx - appsViewLeftMarginPx) / (allAppsCellWidthPx + 2 * allAppsCellPaddingPx);
-  int numPredictiveAppCols=isPhone() ? 4 : numAppsCols;
+  int numPredictiveAppCols=isPhone ? 4 : numAppsCols;
   if ((numAppsCols != appsViewNumCols) || (numPredictiveAppCols != appsViewNumPredictiveCols)) {
     appsViewNumCols=numAppsCols;
     appsViewNumPredictiveCols=numPredictiveAppCols;

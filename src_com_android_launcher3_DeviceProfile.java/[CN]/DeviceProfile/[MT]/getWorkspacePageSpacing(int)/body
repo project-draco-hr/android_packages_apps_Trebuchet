@@ -1,8 +1,0 @@
-{
-  if ((orientation == CellLayout.LANDSCAPE && transposeLayoutWithOrientation) || isLargeTablet()) {
-    return defaultPageSpacingPx;
-  }
- else {
-    return Math.max(defaultPageSpacingPx,2 * getWorkspacePadding().left);
-  }
-}

@@ -1,6 +1,0 @@
-{
-  Partner p=Partner.get(ctx.getPackageManager());
-  if (p != null) {
-    p.applyDeviceProfileOverrides(this);
-  }
-}

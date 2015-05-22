@@ -5,7 +5,6 @@
   mTempPt[0]=x;
   mTempPt[1]=y;
   mLauncher.getDragLayer().getDescendantCoordRelativeToSelf(this,mTempPt,true);
-  LauncherAppState app=LauncherAppState.getInstance();
   DeviceProfile grid=mLauncher.getDeviceProfile();
   r=grid.getHotseatRect();
   if (r.contains(mTempPt[0],mTempPt[1])) {

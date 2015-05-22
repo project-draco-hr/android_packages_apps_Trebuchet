@@ -1,5 +1,5 @@
 {
-  if (isTablet() && !isVerticalBarLayout()) {
+  if (isTablet && !isVerticalBarLayout()) {
     return 4 * edgeMarginPx;
   }
  else {

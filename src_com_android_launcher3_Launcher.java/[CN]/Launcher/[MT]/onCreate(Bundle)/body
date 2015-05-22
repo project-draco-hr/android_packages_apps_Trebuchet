@@ -10,8 +10,8 @@
   LauncherAppState.setApplicationContext(getApplicationContext());
   LauncherAppState app=LauncherAppState.getInstance();
   LauncherAppState.getLauncherProvider().setLauncherProviderChangeListener(this);
-  mDeviceProfile=new DeviceProfile(this,app.getInvariantDeviceProfile());
-  mDeviceProfile.addCallback(LauncherAppState.getInstance());
+  mDeviceProfile=getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE ? app.getInvariantDeviceProfile().landscapeProfile : app.getInvariantDeviceProfile().portraitProfile;
+  Utilities.setIconSize(mDeviceProfile.iconSizePx);
   mSharedPrefs=getSharedPreferences(LauncherAppState.getSharedPreferencesKey(),Context.MODE_PRIVATE);
   mIsSafeModeEnabled=getPackageManager().isSafeMode();
   mModel=app.setLauncher(this);

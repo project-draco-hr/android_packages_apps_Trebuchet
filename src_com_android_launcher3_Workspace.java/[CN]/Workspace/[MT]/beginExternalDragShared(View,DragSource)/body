@@ -1,5 +1,4 @@
 {
-  LauncherAppState app=LauncherAppState.getInstance();
   DeviceProfile grid=mLauncher.getDeviceProfile();
   int iconSize=grid.iconSizePx;
   mLauncher.onDragStarted(child);

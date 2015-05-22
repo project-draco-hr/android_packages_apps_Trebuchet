@@ -21,21 +21,6 @@
   folderIconSizePx=iconSizePx + 2 * -folderBackgroundOffset;
   allAppsCellWidthPx=allAppsIconSizePx;
   allAppsCellHeightPx=allAppsIconSizePx + drawablePadding + allAppsIconTextSizePx;
-  int maxLongEdgeCellCount=res.getInteger(R.integer.config_dynamic_grid_max_long_edge_cell_count);
-  int maxShortEdgeCellCount=res.getInteger(R.integer.config_dynamic_grid_max_short_edge_cell_count);
-  int minEdgeCellCount=res.getInteger(R.integer.config_dynamic_grid_min_edge_cell_count);
-  int maxRows=(isLandscape ? maxShortEdgeCellCount : maxLongEdgeCellCount);
-  int maxCols=(isLandscape ? maxLongEdgeCellCount : maxShortEdgeCellCount);
-  if (allAppsShortEdgeCount > 0 && allAppsLongEdgeCount > 0) {
-    allAppsNumRows=isLandscape ? allAppsShortEdgeCount : allAppsLongEdgeCount;
-    allAppsNumCols=isLandscape ? allAppsLongEdgeCount : allAppsShortEdgeCount;
-  }
- else {
-    allAppsNumRows=(availableHeightPx - pageIndicatorHeightPx) / (allAppsCellHeightPx + allAppsCellPaddingPx);
-    allAppsNumRows=Math.max(minEdgeCellCount,Math.min(maxRows,allAppsNumRows));
-    allAppsNumCols=(availableWidthPx) / (allAppsCellWidthPx + allAppsCellPaddingPx);
-    allAppsNumCols=Math.max(minEdgeCellCount,Math.min(maxCols,allAppsNumCols));
-  }
   int appsContainerViewWidthPx=res.getDimensionPixelSize(R.dimen.apps_container_width);
   updateAppsViewNumCols(res,appsContainerViewWidthPx);
 }

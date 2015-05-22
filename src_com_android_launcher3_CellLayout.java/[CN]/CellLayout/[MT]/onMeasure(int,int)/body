@@ -1,5 +1,4 @@
 {
-  DeviceProfile grid=mLauncher.getDeviceProfile();
   int widthSpecMode=MeasureSpec.getMode(widthMeasureSpec);
   int heightSpecMode=MeasureSpec.getMode(heightMeasureSpec);
   int widthSize=MeasureSpec.getSize(widthMeasureSpec);
@@ -7,8 +6,8 @@
   int childWidthSize=widthSize - (getPaddingLeft() + getPaddingRight());
   int childHeightSize=heightSize - (getPaddingTop() + getPaddingBottom());
   if (mFixedCellWidth < 0 || mFixedCellHeight < 0) {
-    int cw=grid.calculateCellWidth(childWidthSize,mCountX);
-    int ch=grid.calculateCellHeight(childHeightSize,mCountY);
+    int cw=DeviceProfile.calculateCellWidth(childWidthSize,mCountX);
+    int ch=DeviceProfile.calculateCellHeight(childHeightSize,mCountY);
     if (cw != mCellWidth || ch != mCellHeight) {
       mCellWidth=cw;
       mCellHeight=ch;

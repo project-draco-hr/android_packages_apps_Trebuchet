@@ -1,4 +1,0 @@
-{
-  Rect p=getWorkspacePadding();
-  return availableHeightPx - p.top - p.bottom;
-}

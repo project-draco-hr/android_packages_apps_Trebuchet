@@ -1,6 +1,7 @@
 {
   FrameLayout.LayoutParams lp;
   boolean hasVerticalBarLayout=isVerticalBarLayout();
+  final boolean isLayoutRtl=Utilities.isRtl(launcher.getResources());
   View searchBar=launcher.getSearchBar();
   lp=(FrameLayout.LayoutParams)searchBar.getLayoutParams();
   if (hasVerticalBarLayout) {
@@ -22,11 +23,10 @@
   PagedView workspace=(PagedView)launcher.findViewById(R.id.workspace);
   lp=(FrameLayout.LayoutParams)workspace.getLayoutParams();
   lp.gravity=Gravity.CENTER;
-  int orientation=isLandscape ? CellLayout.LANDSCAPE : CellLayout.PORTRAIT;
-  Rect padding=getWorkspacePadding(orientation);
+  Rect padding=getWorkspacePadding(isLayoutRtl);
   workspace.setLayoutParams(lp);
   workspace.setPadding(padding.left,padding.top,padding.right,padding.bottom);
-  workspace.setPageSpacing(getWorkspacePageSpacing(orientation));
+  workspace.setPageSpacing(getWorkspacePageSpacing(isLayoutRtl));
   View hotseat=launcher.findViewById(R.id.hotseat);
   lp=(FrameLayout.LayoutParams)hotseat.getLayoutParams();
   if (hasVerticalBarLayout) {
@@ -35,7 +35,7 @@
     lp.height=LayoutParams.MATCH_PARENT;
     hotseat.findViewById(R.id.layout).setPadding(0,2 * edgeMarginPx,0,2 * edgeMarginPx);
   }
- else   if (isTablet()) {
+ else   if (isTablet) {
     lp.gravity=Gravity.BOTTOM;
     lp.width=LayoutParams.MATCH_PARENT;
     lp.height=hotseatBarHeightPx;

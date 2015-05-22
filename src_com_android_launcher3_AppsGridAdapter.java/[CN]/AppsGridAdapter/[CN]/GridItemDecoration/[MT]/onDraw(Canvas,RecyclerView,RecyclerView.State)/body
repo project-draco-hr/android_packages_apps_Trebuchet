@@ -19,7 +19,7 @@
       c.drawLine(mBackgroundPadding.left,top,parent.getWidth() - mBackgroundPadding.right,top,mPredictedAppsDividerPaint);
       hasDrawnPredictedAppsDivider=true;
     }
- else     if (grid.isPhone() && shouldDrawItemSection(holder,i,items)) {
+ else     if (grid.isPhone && shouldDrawItemSection(holder,i,items)) {
       int viewTopOffset=(2 * child.getPaddingTop());
       int pos=holder.getPosition();
       AlphabeticalAppsList.AdapterItem item=items.get(pos);

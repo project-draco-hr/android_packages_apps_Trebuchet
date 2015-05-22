@@ -1,0 +1,28 @@
+{
+  Rect searchBarBounds=getSearchBarBounds(isLayoutRtl);
+  Rect padding=new Rect();
+  if (isLandscape && transposeLayoutWithOrientation) {
+    if (isLayoutRtl) {
+      padding.set(hotseatBarHeightPx,edgeMarginPx,searchBarBounds.width(),edgeMarginPx);
+    }
+ else {
+      padding.set(searchBarBounds.width(),edgeMarginPx,hotseatBarHeightPx,edgeMarginPx);
+    }
+  }
+ else {
+    if (isTablet) {
+      float gapScale=1f + (dragViewScale - 1f) / 2f;
+      int width=isLandscape ? Math.max(widthPx,heightPx) : Math.min(widthPx,heightPx);
+      int height=isLandscape ? Math.max(widthPx,heightPx) : Math.min(widthPx,heightPx);
+      int paddingTop=searchBarBounds.bottom;
+      int paddingBottom=hotseatBarHeightPx + pageIndicatorHeightPx;
+      int availableWidth=Math.max(0,width - (int)((inv.numColumns * cellWidthPx) + (inv.numColumns * gapScale * cellWidthPx)));
+      int availableHeight=Math.max(0,height - paddingTop - paddingBottom- (int)(2 * inv.numRows * cellHeightPx));
+      padding.set(availableWidth / 2,paddingTop + availableHeight / 2,availableWidth / 2,paddingBottom + availableHeight / 2);
+    }
+ else {
+      padding.set(desiredWorkspaceLeftRightMarginPx - defaultWidgetPadding.left,searchBarBounds.bottom,desiredWorkspaceLeftRightMarginPx - defaultWidgetPadding.right,hotseatBarHeightPx + pageIndicatorHeightPx);
+    }
+  }
+  return padding;
+}

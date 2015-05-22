@@ -47,7 +47,7 @@
     countY=hotseatLayout.getCountY();
     parent=hotseatParent;
   }
-  int newIconIndex=FocusLogic.handleKeyEvent(keyCode,countX,countY,matrix,iconIndex,pageIndex,pageCount,profile.isLayoutRtl);
+  int newIconIndex=FocusLogic.handleKeyEvent(keyCode,countX,countY,matrix,iconIndex,pageIndex,pageCount,Utilities.isRtl(v.getResources()));
   View newIcon=null;
   if (newIconIndex == FocusLogic.NEXT_PAGE_FIRST_ITEM) {
     parent=getCellLayoutChildrenForIndex(workspace,pageIndex + 1);

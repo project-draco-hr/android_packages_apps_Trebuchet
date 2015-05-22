@@ -18,7 +18,7 @@
   mLauncher.getWorkspace().resetFinalScrollForPageChange(currentPage);
   int left=Math.min(Math.max(bounds.left,centeredLeft),bounds.left + bounds.width() - width);
   int top=Math.min(Math.max(bounds.top,centeredTop),bounds.top + bounds.height() - height);
-  if (grid.isPhone() && (grid.availableWidthPx - width) < grid.iconSizePx) {
+  if (grid.isPhone && (grid.availableWidthPx - width) < grid.iconSizePx) {
     left=(grid.availableWidthPx - width) / 2;
   }
  else   if (width >= bounds.width()) {

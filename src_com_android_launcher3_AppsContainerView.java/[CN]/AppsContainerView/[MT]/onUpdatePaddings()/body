@@ -9,7 +9,7 @@
     setPadding(mFixedBounds.left,mFixedBounds.top,getMeasuredWidth() - mFixedBounds.right,mFixedBounds.bottom);
   }
   DeviceProfile grid=mLauncher.getDeviceProfile();
-  int startMargin=grid.isPhone() ? mContentMarginStart : 0;
+  int startMargin=grid.isPhone ? mContentMarginStart : 0;
   int inset=mFixedBounds.isEmpty() ? mContainerInset : mFixedBoundsContainerInset;
   if (isRtl) {
     mAppsRecyclerView.setPadding(inset + mAppsRecyclerView.getScrollbarWidth(),inset,inset + startMargin,inset);

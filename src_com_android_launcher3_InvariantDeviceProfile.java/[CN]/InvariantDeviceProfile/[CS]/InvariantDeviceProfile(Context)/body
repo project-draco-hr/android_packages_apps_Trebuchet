@@ -36,4 +36,10 @@
   }
   hotseatIconSize=invDistWeightedInterpolate(minWidthDps,minHeightDps,points);
   applyPartnerDeviceProfileOverrides(context,dm);
+  Point realSize=new Point();
+  display.getRealSize(realSize);
+  int smallSide=Math.min(realSize.x,realSize.y);
+  int largeSide=Math.max(realSize.x,realSize.y);
+  landscapeProfile=new DeviceProfile(context,this,smallestSize,largestSize,largeSide,smallSide,true);
+  portraitProfile=new DeviceProfile(context,this,smallestSize,largestSize,smallSide,largeSide,false);
 }

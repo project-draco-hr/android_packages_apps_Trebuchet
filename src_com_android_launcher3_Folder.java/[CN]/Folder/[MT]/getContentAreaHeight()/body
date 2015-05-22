@@ -1,6 +1,6 @@
 {
   DeviceProfile grid=mLauncher.getDeviceProfile();
-  Rect workspacePadding=grid.getWorkspacePadding(grid.isLandscape ? CellLayout.LANDSCAPE : CellLayout.PORTRAIT);
+  Rect workspacePadding=grid.getWorkspacePadding(mContent.mIsRtl);
   int maxContentAreaHeight=grid.availableHeightPx - workspacePadding.top - workspacePadding.bottom- mFooterHeight;
   int height=Math.min(maxContentAreaHeight,mContent.getDesiredHeight());
   return Math.max(height,MIN_CONTENT_DIMEN);
