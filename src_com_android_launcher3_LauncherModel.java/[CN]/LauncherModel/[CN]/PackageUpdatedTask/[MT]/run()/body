@@ -100,7 +100,7 @@ ShortcutInfo si=(ShortcutInfo)info;
 boolean infoUpdated=false;
 boolean shortcutUpdated=false;
 if ((si.iconResource != null) && packageSet.contains(si.iconResource.packageName)) {
-Bitmap icon=Utilities.createIconBitmap(si.iconResource.packageName,si.iconResource.resourceName,mIconCache,context);
+Bitmap icon=Utilities.createIconBitmap(si.iconResource.packageName,si.iconResource.resourceName,context);
 if (icon != null) {
   si.setIcon(icon);
   si.usingFallbackIcon=false;

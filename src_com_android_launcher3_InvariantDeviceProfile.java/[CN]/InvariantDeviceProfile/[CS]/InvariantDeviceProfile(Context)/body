@@ -19,8 +19,10 @@
   numFolderRows=closestProfile.numFolderRows;
   numFolderColumns=closestProfile.numFolderColumns;
   iconSize=interpolatedDeviceProfileOut.iconSize;
+  iconBitmapSize=Utilities.pxFromDp(iconSize,dm);
   iconTextSize=interpolatedDeviceProfileOut.iconTextSize;
   hotseatIconSize=interpolatedDeviceProfileOut.hotseatIconSize;
+  fillResIconDpi=getLauncherIconDensity(iconBitmapSize);
   applyPartnerDeviceProfileOverrides(context,dm);
   Point realSize=new Point();
   display.getRealSize(realSize);

@@ -17,7 +17,7 @@
     Parcelable extra=data.getParcelableExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE);
     if (extra instanceof ShortcutIconResource) {
       iconResource=(ShortcutIconResource)extra;
-      icon=Utilities.createIconBitmap(iconResource.packageName,iconResource.resourceName,mIconCache,context);
+      icon=Utilities.createIconBitmap(iconResource.packageName,iconResource.resourceName,context);
     }
   }
   final ShortcutInfo info=new ShortcutInfo();

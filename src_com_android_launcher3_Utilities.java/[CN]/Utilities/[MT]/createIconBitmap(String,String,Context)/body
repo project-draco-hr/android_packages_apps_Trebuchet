@@ -4,7 +4,7 @@
     Resources resources=packageManager.getResourcesForApplication(packageName);
     if (resources != null) {
       final int id=resources.getIdentifier(resourceName,null,null);
-      return createIconBitmap(resources.getDrawableForDensity(id,cache.getFullResIconDpi()),context);
+      return createIconBitmap(resources.getDrawableForDensity(id,LauncherAppState.getInstance().getInvariantDeviceProfile().fillResIconDpi),context);
     }
   }
  catch (  Exception e) {

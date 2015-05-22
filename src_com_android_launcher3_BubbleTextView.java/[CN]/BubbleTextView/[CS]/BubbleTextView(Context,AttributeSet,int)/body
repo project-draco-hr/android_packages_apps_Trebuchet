@@ -1,7 +1,7 @@
 {
   super(context,attrs,defStyle);
-  LauncherAppState app=LauncherAppState.getInstance();
-  DeviceProfile grid=((Launcher)context).getDeviceProfile();
+  mLauncher=(Launcher)context;
+  DeviceProfile grid=mLauncher.getDeviceProfile();
   TypedArray a=context.obtainStyledAttributes(attrs,R.styleable.BubbleTextView,defStyle,0);
   mCustomShadowsEnabled=a.getBoolean(R.styleable.BubbleTextView_customShadows,true);
   mLayoutHorizontal=a.getBoolean(R.styleable.BubbleTextView_layoutHorizontal,false);

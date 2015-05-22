@@ -30,6 +30,7 @@
     Drawable icon=mIconCache.getFullResIcon(createShortcutInfo.activityInfo);
     preview=Utilities.createIconBitmap(icon,mLauncher);
     createItemInfo.spanX=createItemInfo.spanY=1;
+    scale=((float)mLauncher.getDeviceProfile().iconSizePx) / preview.getWidth();
   }
   boolean clipAlpha=!(createItemInfo instanceof PendingAddWidgetInfo && (((PendingAddWidgetInfo)createItemInfo).previewImage == 0));
   mLauncher.lockScreenOrientation();

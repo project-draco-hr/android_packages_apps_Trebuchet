@@ -1,10 +1,8 @@
 {
 synchronized (sCanvas) {
-    if (sIconWidth == -1) {
-      initStatics(context);
-    }
-    int width=sIconWidth;
-    int height=sIconHeight;
+    final int iconBitmapSize=getIconBitmapSize();
+    int width=iconBitmapSize;
+    int height=iconBitmapSize;
     if (icon instanceof PaintDrawable) {
       PaintDrawable painter=(PaintDrawable)icon;
       painter.setIntrinsicWidth(width);
@@ -28,8 +26,8 @@ synchronized (sCanvas) {
         width=(int)(height * ratio);
       }
     }
-    int textureWidth=sIconWidth;
-    int textureHeight=sIconHeight;
+    int textureWidth=iconBitmapSize;
+    int textureHeight=iconBitmapSize;
     final Bitmap bitmap=Bitmap.createBitmap(textureWidth,textureHeight,Bitmap.Config.ARGB_8888);
     final Canvas canvas=sCanvas;
     canvas.setBitmap(bitmap);

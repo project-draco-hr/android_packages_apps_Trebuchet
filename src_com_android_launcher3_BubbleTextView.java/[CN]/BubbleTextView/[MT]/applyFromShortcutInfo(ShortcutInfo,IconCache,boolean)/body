@@ -1,6 +1,6 @@
 {
   Bitmap b=info.getIcon(iconCache);
-  FastBitmapDrawable iconDrawable=Utilities.createIconDrawable(b);
+  FastBitmapDrawable iconDrawable=mLauncher.createIconDrawable(b);
   iconDrawable.setGhostModeEnabled(info.isDisabled != 0);
   setIcon(iconDrawable,mIconSize);
   if (info.contentDescription != null) {

@@ -10,7 +10,7 @@ case LauncherSettings.Favorites.ICON_TYPE_RESOURCE:
     String packageName=c.getString(iconPackageIndex);
   String resourceName=c.getString(iconResourceIndex);
 info.customIcon=false;
-icon=Utilities.createIconBitmap(packageName,resourceName,mIconCache,context);
+icon=Utilities.createIconBitmap(packageName,resourceName,context);
 if (icon == null) {
 icon=Utilities.createIconBitmap(c,iconIndex,context);
 }
