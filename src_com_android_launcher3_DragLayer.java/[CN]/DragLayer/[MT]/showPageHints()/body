@@ -1,6 +1,6 @@
 {
   mShowPageHints=true;
   Workspace workspace=mLauncher.getWorkspace();
-  getDescendantRectRelativeToSelf(workspace.getChildAt(workspace.getChildCount() - 1),mScrollChildPosition);
+  getDescendantRectRelativeToSelf(workspace.getChildAt(workspace.numCustomPages()),mScrollChildPosition);
   invalidate();
 }

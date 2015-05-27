@@ -1,4 +1,7 @@
 {
+  if (ENFORCE_DRAG_EVENT_ORDER) {
+    enfoceDragParity("onDragEnd",0,0);
+  }
   if (!mDeferRemoveExtraEmptyScreen) {
     removeExtraEmptyScreen(true,mDragSourceInternal != null);
   }

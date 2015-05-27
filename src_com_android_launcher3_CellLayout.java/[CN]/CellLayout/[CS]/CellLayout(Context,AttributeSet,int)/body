@@ -1,6 +1,5 @@
 {
   super(context,attrs,defStyle);
-  mDragEnforcer=new DropTarget.DragEnforcer(context);
   setWillNotDraw(false);
   setClipToPadding(false);
   mLauncher=(Launcher)context;

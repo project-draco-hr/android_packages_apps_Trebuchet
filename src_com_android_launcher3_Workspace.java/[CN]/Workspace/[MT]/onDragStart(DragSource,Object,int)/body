@@ -1,16 +1,14 @@
 {
+  if (ENFORCE_DRAG_EVENT_ORDER) {
+    enfoceDragParity("onDragStart",0,0);
+  }
   mIsDragOccuring=true;
   updateChildrenLayersEnabled(false);
   mLauncher.lockScreenOrientation();
   mLauncher.onInteractionBegin();
   InstallShortcutReceiver.enableInstallQueue();
-  post(new Runnable(){
-    @Override public void run(){
-      if (mIsDragOccuring && mAddNewPageOnDrag) {
-        mDeferRemoveExtraEmptyScreen=false;
-        addExtraEmptyScreenOnDrag();
-      }
-    }
+  if (mAddNewPageOnDrag) {
+    mDeferRemoveExtraEmptyScreen=false;
+    addExtraEmptyScreenOnDrag();
   }
-);
 }

@@ -1,5 +1,7 @@
 {
-  mDragEnforcer.onDragExit();
+  if (ENFORCE_DRAG_EVENT_ORDER) {
+    enfoceDragParity("onDragExit",-1,0);
+  }
   if (mInScrollArea) {
     if (isPageMoving()) {
       mDropToLayout=(CellLayout)getPageAt(getNextPage());

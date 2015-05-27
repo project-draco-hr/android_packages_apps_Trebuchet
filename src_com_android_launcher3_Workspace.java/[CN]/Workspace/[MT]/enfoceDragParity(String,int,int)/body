@@ -1,0 +1,6 @@
+{
+  enfoceDragParity(this,event,update,expectedValue);
+  for (int i=0; i < getChildCount(); i++) {
+    enfoceDragParity(getChildAt(i),event,update,expectedValue);
+  }
+}

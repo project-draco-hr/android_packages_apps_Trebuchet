@@ -7,13 +7,8 @@
  else {
     Log.e(TAG,"Unexpected dragging view: " + v);
   }
-  postDelayed(new Runnable(){
-    @Override public void run(){
-      if (mLauncher.getDragController().isDragging()) {
-        mLauncher.enterSpringLoadedDragMode();
-      }
-    }
+  if (mLauncher.getDragController().isDragging()) {
+    mLauncher.enterSpringLoadedDragMode();
   }
-,SPRING_MODE_DELAY_MS);
   return true;
 }
