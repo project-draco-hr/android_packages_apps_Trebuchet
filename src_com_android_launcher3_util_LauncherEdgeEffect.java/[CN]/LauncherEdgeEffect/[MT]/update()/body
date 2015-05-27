@@ -1,0 +1,36 @@
+{
+  final long time=AnimationUtils.currentAnimationTimeMillis();
+  final float t=Math.min((time - mStartTime) / mDuration,1.f);
+  final float interp=mInterpolator.getInterpolation(t);
+  mGlowAlpha=mGlowAlphaStart + (mGlowAlphaFinish - mGlowAlphaStart) * interp;
+  mGlowScaleY=mGlowScaleYStart + (mGlowScaleYFinish - mGlowScaleYStart) * interp;
+  mDisplacement=(mDisplacement + mTargetDisplacement) / 2;
+  if (t >= 1.f - EPSILON) {
+switch (mState) {
+case STATE_ABSORB:
+      mState=STATE_RECEDE;
+    mStartTime=AnimationUtils.currentAnimationTimeMillis();
+  mDuration=RECEDE_TIME;
+mGlowAlphaStart=mGlowAlpha;
+mGlowScaleYStart=mGlowScaleY;
+mGlowAlphaFinish=0.f;
+mGlowScaleYFinish=0.f;
+break;
+case STATE_PULL:
+mState=STATE_PULL_DECAY;
+mStartTime=AnimationUtils.currentAnimationTimeMillis();
+mDuration=PULL_DECAY_TIME;
+mGlowAlphaStart=mGlowAlpha;
+mGlowScaleYStart=mGlowScaleY;
+mGlowAlphaFinish=0.f;
+mGlowScaleYFinish=0.f;
+break;
+case STATE_PULL_DECAY:
+mState=STATE_RECEDE;
+break;
+case STATE_RECEDE:
+mState=STATE_IDLE;
+break;
+}
+}
+}

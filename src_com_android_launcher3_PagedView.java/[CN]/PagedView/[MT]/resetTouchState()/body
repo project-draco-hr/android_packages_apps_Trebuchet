@@ -4,4 +4,6 @@
   mCancelTap=false;
   mTouchState=TOUCH_STATE_REST;
   mActivePointerId=INVALID_POINTER;
+  mEdgeGlowLeft.onRelease();
+  mEdgeGlowRight.onRelease();
 }

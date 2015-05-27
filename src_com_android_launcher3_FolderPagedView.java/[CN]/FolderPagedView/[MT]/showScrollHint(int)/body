@@ -2,10 +2,10 @@
   float fraction=(direction == DragController.SCROLL_LEFT) ^ mIsRtl ? -SCROLL_HINT_FRACTION : SCROLL_HINT_FRACTION;
   int hint=(int)(fraction * getWidth());
   int scroll=getScrollForPage(getNextPage()) + hint;
-  int delta=scroll - mUnboundedScrollX;
+  int delta=scroll - getScrollX();
   if (delta != 0) {
     mScroller.setInterpolator(new DecelerateInterpolator());
-    mScroller.startScroll(mUnboundedScrollX,0,delta,0,Folder.SCROLL_HINT_DURATION);
+    mScroller.startScroll(getScrollX(),0,delta,0,Folder.SCROLL_HINT_DURATION);
     invalidate();
   }
 }

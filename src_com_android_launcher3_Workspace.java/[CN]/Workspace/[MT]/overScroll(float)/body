@@ -16,10 +16,6 @@
   }
  else   if (shouldOverScroll) {
     dampedOverScroll(amount);
-    mOverScrollEffect=acceleratedOverFactor(amount);
-  }
- else {
-    mOverScrollEffect=0;
   }
   if (shouldZeroOverlay) {
     mLauncherOverlay.onScrollChange(0,mIsRtl);

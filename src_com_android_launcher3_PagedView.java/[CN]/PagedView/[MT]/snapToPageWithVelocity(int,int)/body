@@ -2,10 +2,10 @@
   whichPage=validateNewPage(whichPage);
   int halfScreenSize=getViewportWidth() / 2;
   final int newX=getScrollForPage(whichPage);
-  int delta=newX - mUnboundedScrollX;
+  int delta=newX - getScrollX();
   int duration=0;
-  if (Math.abs(velocity) < mMinFlingVelocity || isInOverScroll()) {
-    snapToPage(whichPage,getPageSnapDuration());
+  if (Math.abs(velocity) < mMinFlingVelocity) {
+    snapToPage(whichPage,PAGE_SNAP_ANIMATION_DURATION);
     return;
   }
   float distanceRatio=Math.min(1f,1.0f * Math.abs(delta) / (2 * halfScreenSize));

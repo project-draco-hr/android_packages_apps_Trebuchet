@@ -1,0 +1,4 @@
+{
+  mEdgeGlowLeft.setColor(color);
+  mEdgeGlowRight.setColor(color);
+}

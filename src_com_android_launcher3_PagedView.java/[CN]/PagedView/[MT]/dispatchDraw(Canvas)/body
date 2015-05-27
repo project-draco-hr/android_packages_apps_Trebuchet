@@ -2,7 +2,7 @@
   final int pageCount=getChildCount();
   if (pageCount > 0) {
     int halfScreenSize=getViewportWidth() / 2;
-    int screenCenter=mOverScrollX + halfScreenSize;
+    int screenCenter=getScrollX() + halfScreenSize;
     if (screenCenter != mLastScreenCenter || mForceScreenScrolled) {
       mForceScreenScrolled=false;
       screenScrolled(screenCenter);

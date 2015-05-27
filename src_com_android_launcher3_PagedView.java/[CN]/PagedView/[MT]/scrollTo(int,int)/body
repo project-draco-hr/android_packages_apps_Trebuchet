@@ -6,11 +6,10 @@
     x=Math.min(x,mFreeScrollMaxScrollX);
     x=Math.max(x,mFreeScrollMinScrollX);
   }
-  mUnboundedScrollX=x;
   boolean isXBeforeFirstPage=mIsRtl ? (x > mMaxScrollX) : (x < 0);
   boolean isXAfterLastPage=mIsRtl ? (x < 0) : (x > mMaxScrollX);
   if (isXBeforeFirstPage) {
-    super.scrollTo(0,y);
+    super.scrollTo(mIsRtl ? mMaxScrollX : 0,y);
     if (mAllowOverScroll) {
       mWasInOverscroll=true;
       if (mIsRtl) {
@@ -22,7 +21,7 @@
     }
   }
  else   if (isXAfterLastPage) {
-    super.scrollTo(mMaxScrollX,y);
+    super.scrollTo(mIsRtl ? 0 : mMaxScrollX,y);
     if (mAllowOverScroll) {
       mWasInOverscroll=true;
       if (mIsRtl) {
@@ -38,7 +37,6 @@
       overScroll(0);
       mWasInOverscroll=false;
     }
-    mOverScrollX=x;
     super.scrollTo(x,y);
   }
   mTouchX=x;
