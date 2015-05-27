@@ -1,7 +1,5 @@
 {
-  Animator anim=ViewAnimationUtils.createCircularReveal(view,centerX,centerY,startRadius,endRadius);
-  if (anim instanceof ValueAnimator) {
-    new FirstFrameAnimatorHelper((ValueAnimator)anim,view);
-  }
+  ValueAnimator anim=UiThreadCircularReveal.createCircularReveal(view,centerX,centerY,startRadius,endRadius);
+  new FirstFrameAnimatorHelper(anim,view);
   return anim;
 }

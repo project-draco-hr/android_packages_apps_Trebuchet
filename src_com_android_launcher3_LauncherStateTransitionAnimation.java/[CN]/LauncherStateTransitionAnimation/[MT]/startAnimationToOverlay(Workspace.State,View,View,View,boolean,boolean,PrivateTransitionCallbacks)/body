@@ -57,7 +57,7 @@
     if (material) {
       float startRadius=pCb.getMaterialRevealViewStartFinalRadius();
       AnimatorListenerAdapter listener=pCb.getMaterialRevealViewAnimatorListener(revealView,allAppsButtonView);
-      Animator reveal=ViewAnimationUtils.createCircularReveal(revealView,width / 2,height / 2,startRadius,revealRadius);
+      Animator reveal=UiThreadCircularReveal.createCircularReveal(revealView,width / 2,height / 2,startRadius,revealRadius);
       reveal.setDuration(revealDuration);
       reveal.setInterpolator(new LogDecelerateInterpolator(100,0));
       if (listener != null) {
