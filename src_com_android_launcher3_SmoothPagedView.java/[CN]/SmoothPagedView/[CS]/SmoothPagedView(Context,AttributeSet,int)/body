@@ -1,5 +1,0 @@
-{
-  super(context,attrs,defStyle);
-  mUsePagingTouchSlop=false;
-  mDeferScrollUpdate=mScrollMode != X_LARGE_MODE;
-}

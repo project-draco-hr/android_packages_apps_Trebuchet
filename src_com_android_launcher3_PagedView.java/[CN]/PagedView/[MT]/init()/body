@@ -5,7 +5,6 @@
   mCenterPagesVertically=true;
   final ViewConfiguration configuration=ViewConfiguration.get(getContext());
   mTouchSlop=configuration.getScaledPagingTouchSlop();
-  mPagingTouchSlop=configuration.getScaledPagingTouchSlop();
   mMaximumVelocity=configuration.getScaledMaximumFlingVelocity();
   mDensity=getResources().getDisplayMetrics().density;
   mFlingThresholdVelocity=(int)(FLING_THRESHOLD_VELOCITY * mDensity);

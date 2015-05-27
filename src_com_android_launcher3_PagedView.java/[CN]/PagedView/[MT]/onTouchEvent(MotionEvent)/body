@@ -35,13 +35,7 @@ mTotalMotionX+=Math.abs(deltaX);
 if (Math.abs(deltaX) >= 1.0f) {
 mTouchX+=deltaX;
 mSmoothingTime=System.nanoTime() / NANOTIME_DIV;
-if (!mDeferScrollUpdate) {
 scrollBy((int)deltaX,0);
-if (DEBUG) Log.d(TAG,"onTouchEvent().Scrolling: " + deltaX);
-}
- else {
-invalidate();
-}
 mLastMotionX=x;
 mLastMotionXRemainder=deltaX - (int)deltaX;
 }
