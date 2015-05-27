@@ -26,7 +26,7 @@
       }
     }
   }
-  setWorkspaceBackground(mState == State.WORKSPACE ? WORKSPACE_BACKGROUND_TRANSPARENT : WORKSPACE_BACKGROUND_GRADIENT);
+  setWorkspaceBackground(mState == State.WORKSPACE ? WORKSPACE_BACKGROUND_GRADIENT : WORKSPACE_BACKGROUND_TRANSPARENT);
   mPaused=false;
   if (mRestoring || mOnResumeNeedsLoad) {
     setWorkspaceLoading(true);
