@@ -27,7 +27,6 @@
   if (PROFILE_STARTUP) {
     android.os.Debug.startMethodTracing(Environment.getExternalStorageDirectory() + "/launcher");
   }
-  checkForLocaleChange();
   setContentView(R.layout.launcher);
   setupViews();
   mDeviceProfile.layout(this);
