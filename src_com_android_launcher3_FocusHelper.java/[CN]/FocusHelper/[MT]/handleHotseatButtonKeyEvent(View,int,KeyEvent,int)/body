@@ -33,6 +33,9 @@ final Workspace workspace=(Workspace)v.getRootView().findViewById(R.id.workspace
 if (workspace != null) {
 int pageIndex=workspace.getCurrentPage();
 CellLayout topLayout=(CellLayout)workspace.getChildAt(pageIndex);
+if (topLayout == null) {
+return wasHandled;
+}
 ShortcutAndWidgetContainer children=topLayout.getShortcutsAndWidgets();
 final View newIcon=getIconInDirection(layout,children,-1,1);
 if (newIcon != null) {
