@@ -4,7 +4,7 @@
   CacheEntry entry=mCache.get(cacheKey);
   if (entry == null || (entry.isLowResIcon && !useLowResIcon)) {
     entry=new CacheEntry();
-    mCache.put(cacheKey,entry);
+    boolean entryUpdated=true;
     if (!getEntryFromDB(cn,user,entry,useLowResIcon)) {
       try {
         PackageInfo info=mPackageManager.getPackageInfo(packageName,0);
@@ -22,7 +22,11 @@
       }
  catch (      NameNotFoundException e) {
         if (DEBUG)         Log.d(TAG,"Application not installed " + packageName);
+        entryUpdated=false;
       }
+    }
+    if (entryUpdated) {
+      mCache.put(cacheKey,entry);
     }
   }
   return entry;
