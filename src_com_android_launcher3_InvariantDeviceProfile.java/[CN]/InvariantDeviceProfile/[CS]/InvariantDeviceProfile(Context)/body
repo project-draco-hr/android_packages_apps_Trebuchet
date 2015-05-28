@@ -8,11 +8,9 @@
   display.getCurrentSizeRange(smallestSize,largestSize);
   minWidthDps=Utilities.dpiFromPx(Math.min(smallestSize.x,smallestSize.y),dm);
   minHeightDps=Utilities.dpiFromPx(Math.min(largestSize.x,largestSize.y),dm);
-  ArrayList<DeviceProfileQuery> points=new ArrayList<DeviceProfileQuery>();
-  for (  InvariantDeviceProfile p : sDeviceProfiles) {
-    points.add(new DeviceProfileQuery(p,0f));
-  }
-  InvariantDeviceProfile closestProfile=findClosestDeviceProfile(minWidthDps,minHeightDps,points);
+  ArrayList<InvariantDeviceProfile> closestProfiles=findClosestDeviceProfiles(minWidthDps,minHeightDps,getPredefinedDeviceProfiles());
+  InvariantDeviceProfile interpolatedDeviceProfileOut=invDistWeightedInterpolate(minWidthDps,minHeightDps,closestProfiles);
+  InvariantDeviceProfile closestProfile=closestProfiles.get(0);
   numRows=closestProfile.numRows;
   numColumns=closestProfile.numColumns;
   numHotseatIcons=closestProfile.numHotseatIcons;
@@ -20,21 +18,9 @@
   defaultLayoutId=closestProfile.defaultLayoutId;
   numFolderRows=closestProfile.numFolderRows;
   numFolderColumns=closestProfile.numFolderColumns;
-  points.clear();
-  for (  InvariantDeviceProfile p : sDeviceProfiles) {
-    points.add(new DeviceProfileQuery(p,p.iconSize));
-  }
-  iconSize=invDistWeightedInterpolate(minWidthDps,minHeightDps,points);
-  points.clear();
-  for (  InvariantDeviceProfile p : sDeviceProfiles) {
-    points.add(new DeviceProfileQuery(p,p.iconTextSize));
-  }
-  iconTextSize=invDistWeightedInterpolate(minWidthDps,minHeightDps,points);
-  points.clear();
-  for (  InvariantDeviceProfile p : sDeviceProfiles) {
-    points.add(new DeviceProfileQuery(p,p.hotseatIconSize));
-  }
-  hotseatIconSize=invDistWeightedInterpolate(minWidthDps,minHeightDps,points);
+  iconSize=interpolatedDeviceProfileOut.iconSize;
+  iconTextSize=interpolatedDeviceProfileOut.iconTextSize;
+  hotseatIconSize=interpolatedDeviceProfileOut.hotseatIconSize;
   applyPartnerDeviceProfileOverrides(context,dm);
   Point realSize=new Point();
   display.getRealSize(realSize);

@@ -1,0 +1,12 @@
+{
+  if (!android.os.Build.DEVICE.equals("hammerhead")) {
+    return;
+  }
+  assertEquals(mInvariantProfile.numRows,4);
+  assertEquals(mInvariantProfile.numColumns,4);
+  assertEquals((int)mInvariantProfile.numHotseatIcons,5);
+  DeviceProfile landscapeProfile=mInvariantProfile.landscapeProfile;
+  DeviceProfile portraitProfile=mInvariantProfile.portraitProfile;
+  assertEquals(portraitProfile.allAppsNumCols,3);
+  assertEquals(landscapeProfile.allAppsNumCols,5);
+}
