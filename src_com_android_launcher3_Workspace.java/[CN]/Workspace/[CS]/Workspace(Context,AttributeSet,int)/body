@@ -17,5 +17,4 @@
   setHapticFeedbackEnabled(false);
   initWorkspace();
   setMotionEventSplittingEnabled(true);
-  setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_YES);
 }
