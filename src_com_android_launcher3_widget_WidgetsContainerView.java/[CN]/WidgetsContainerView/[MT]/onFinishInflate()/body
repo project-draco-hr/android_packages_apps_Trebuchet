@@ -1,5 +1,5 @@
 {
-  mView=(RecyclerView)findViewById(R.id.widgets_list_view);
+  mView=(WidgetsRecyclerView)findViewById(R.id.widgets_list_view);
   mView.setAdapter(mAdapter);
   mView.setLayoutManager(new LinearLayoutManager(getContext()){
     @Override protected int getExtraLayoutSpace(    State state){

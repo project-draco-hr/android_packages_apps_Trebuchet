@@ -1,0 +1,12 @@
+{
+  int rowCount=mWidgets.getPackageSize();
+  if (rowCount == 0) {
+    verticalScrollbarBounds.setEmpty();
+    return;
+  }
+  int x, y;
+  getCurScrollState(scrollPosState);
+  if (scrollPosState.rowIndex < 0) {
+    verticalScrollbarBounds.setEmpty();
+  }
+}

@@ -1,0 +1,9 @@
+{
+  stateOut.rowIndex=-1;
+  stateOut.rowTopOffset=-1;
+  stateOut.rowHeight=-1;
+  int rowCount=mWidgets.getPackageSize();
+  if (rowCount == 0) {
+    return;
+  }
+}

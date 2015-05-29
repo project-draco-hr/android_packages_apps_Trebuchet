@@ -1,6 +1,3 @@
 {
-  if (shouldStopScroll(ev)) {
-    stopScroll();
-  }
-  return false;
+  return handleTouchEvent(ev);
 }

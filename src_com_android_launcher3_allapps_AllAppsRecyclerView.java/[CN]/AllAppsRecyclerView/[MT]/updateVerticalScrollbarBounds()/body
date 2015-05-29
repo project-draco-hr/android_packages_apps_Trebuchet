@@ -1,32 +1,31 @@
 {
   List<AlphabeticalAppsList.AdapterItem> items=mApps.getAdapterItems();
   if (items.isEmpty()) {
-    mVerticalScrollbarBounds.setEmpty();
+    verticalScrollbarBounds.setEmpty();
     return;
   }
-  int x;
-  int y;
+  int x, y;
   int predictionBarHeight=mApps.getPredictedApps().isEmpty() ? 0 : mPredictionBarHeight;
   int rowCount=getNumRows();
-  getCurScrollState(mScrollPosState,items);
-  if (mScrollPosState.rowIndex != -1) {
+  getCurScrollState(scrollPosState,items);
+  if (scrollPosState.rowIndex != -1) {
     int height=getHeight() - getPaddingTop() - getPaddingBottom();
-    int totalScrollHeight=rowCount * mScrollPosState.rowHeight + predictionBarHeight;
+    int totalScrollHeight=rowCount * scrollPosState.rowHeight + predictionBarHeight;
     if (totalScrollHeight > height) {
       int scrollbarHeight=Math.max(mScrollbarMinHeight,(int)(height / ((float)totalScrollHeight / height)));
       if (Utilities.isRtl(getResources())) {
         x=mBackgroundPadding.left;
       }
  else {
-        x=getWidth() - mBackgroundPadding.right - mScrollbarWidth;
+        x=getWidth() - mBackgroundPadding.right - getScrollbarWidth();
       }
       int availableY=totalScrollHeight - height;
       int availableScrollY=height - scrollbarHeight;
-      y=(mScrollPosState.rowIndex * mScrollPosState.rowHeight) + predictionBarHeight - mScrollPosState.rowTopOffset;
+      y=(scrollPosState.rowIndex * scrollPosState.rowHeight) + predictionBarHeight - scrollPosState.rowTopOffset;
       y=getPaddingTop() + (int)(((float)(getPaddingTop() + y) / availableY) * availableScrollY);
-      mVerticalScrollbarBounds.set(x,y,x + mScrollbarWidth,y + scrollbarHeight);
+      verticalScrollbarBounds.set(x,y,x + getScrollbarWidth(),y + scrollbarHeight);
       return;
     }
   }
-  mVerticalScrollbarBounds.setEmpty();
+  verticalScrollbarBounds.setEmpty();
 }
