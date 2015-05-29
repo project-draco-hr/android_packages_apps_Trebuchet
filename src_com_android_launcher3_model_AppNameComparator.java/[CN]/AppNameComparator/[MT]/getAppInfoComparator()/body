@@ -1,4 +1,4 @@
 {
-  mUserSerialCache.clear();
+  mAppInfoComparator.clearUserCache();
   return mAppInfoComparator;
 }

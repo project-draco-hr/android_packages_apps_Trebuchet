@@ -1,6 +1,5 @@
 {
   super(context,attrs,defStyleAttr);
-  LauncherAppState app=LauncherAppState.getInstance();
   Resources res=context.getResources();
   mLauncher=(Launcher)context;
   DeviceProfile grid=mLauncher.getDeviceProfile();
@@ -19,4 +18,5 @@
   mItemDecoration=mAdapter.getItemDecoration();
   mContentMarginStart=mAdapter.getContentMarginStart();
   mApps.setAdapter(mAdapter);
+  mSearchManager=mApps.newSimpleAppSearchManager();
 }

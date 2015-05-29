@@ -15,6 +15,9 @@
         }
       }
     }
+    @Override public void setSearchManager(    AppSearchManager manager){
+      mAppsView.setSearchManager(manager);
+    }
   }
 );
   mLauncherCallbacks.setLauncherSearchCallback(new Launcher.LauncherSearchCallbacks(){

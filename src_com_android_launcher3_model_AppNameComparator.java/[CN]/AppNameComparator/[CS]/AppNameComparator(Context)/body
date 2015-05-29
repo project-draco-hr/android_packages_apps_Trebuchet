@@ -1,22 +1,14 @@
 {
   mCollator=Collator.getInstance();
-  mUserManager=UserManagerCompat.getInstance(context);
-  mAppInfoComparator=new Comparator<ItemInfo>(){
-    public final int compare(    ItemInfo a,    ItemInfo b){
+  mAppInfoComparator=new AbstractUserComparator<ItemInfo>(context){
+    @Override public final int compare(    ItemInfo a,    ItemInfo b){
       int result=compareTitles(a.title.toString(),b.title.toString());
       if (result == 0 && a instanceof AppInfo && b instanceof AppInfo) {
         AppInfo aAppInfo=(AppInfo)a;
         AppInfo bAppInfo=(AppInfo)b;
         result=aAppInfo.componentName.compareTo(bAppInfo.componentName);
         if (result == 0) {
-          if (UserHandleCompat.myUserHandle().equals(a.user)) {
-            return -1;
-          }
- else {
-            Long aUserSerial=getAndCacheUserSerial(a.user);
-            Long bUserSerial=getAndCacheUserSerial(b.user);
-            return aUserSerial.compareTo(bUserSerial);
-          }
+          return super.compare(a,b);
         }
       }
       return result;

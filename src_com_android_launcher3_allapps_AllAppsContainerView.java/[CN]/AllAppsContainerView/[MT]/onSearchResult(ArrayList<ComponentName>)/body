@@ -1,0 +1,5 @@
+{
+  if (apps != null) {
+    mApps.setOrderedFilter(apps);
+  }
+}

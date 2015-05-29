@@ -1,5 +1,4 @@
 {
-  LauncherAppState app=LauncherAppState.getInstance();
   DeviceProfile grid=mLauncher.getDeviceProfile();
   int x=(int)ev.getX();
   int y=(int)ev.getY();

@@ -18,7 +18,8 @@
     for (    Map.Entry<String,ArrayList<AppInfo>> entry : sectionMap.entrySet()) {
       allApps.addAll(entry.getValue());
     }
-    mApps=allApps;
+    mApps.clear();
+    mApps.addAll(allApps);
   }
  else {
     for (    AppInfo info : mApps) {

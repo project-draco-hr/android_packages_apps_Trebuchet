@@ -1,4 +1,5 @@
 {
+  mSearchManager.cancel(true);
   final boolean resetTextField=mSearchBarEditView.getText().toString().length() > 0;
   final int translationX=Utilities.pxFromDp(SEARCH_TRANSLATION_X_DP,getContext().getResources().getDisplayMetrics());
   if (animated) {
@@ -8,7 +9,7 @@
         if (resetTextField) {
           mSearchBarEditView.setText("");
         }
-        mApps.setFilter(null);
+        mApps.setOrderedFilter(null);
         if (returnFocusToRecyclerView) {
           mAppsRecyclerView.requestFocus();
         }
@@ -23,7 +24,7 @@
     if (resetTextField) {
       mSearchBarEditView.setText("");
     }
-    mApps.setFilter(null);
+    mApps.setOrderedFilter(null);
     mSearchButtonView.setAlpha(1f);
     mSearchButtonView.setTranslationX(0f);
     if (returnFocusToRecyclerView) {

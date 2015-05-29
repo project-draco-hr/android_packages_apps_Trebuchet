@@ -1,0 +1,4 @@
+{
+  mApps=apps;
+  mResultHandler=new Handler();
+}

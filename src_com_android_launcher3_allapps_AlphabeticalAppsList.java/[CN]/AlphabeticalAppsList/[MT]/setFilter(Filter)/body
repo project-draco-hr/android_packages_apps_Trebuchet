@@ -1,6 +1,0 @@
-{
-  if (mFilter != f) {
-    mFilter=f;
-    updateAdapterItems();
-  }
-}

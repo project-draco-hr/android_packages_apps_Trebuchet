@@ -1,4 +1,5 @@
 {
+  mSearchManager.connect();
   final int translationX=Utilities.pxFromDp(SEARCH_TRANSLATION_X_DP,getContext().getResources().getDisplayMetrics());
   mSearchBarContainerView.setVisibility(View.VISIBLE);
   mSearchBarContainerView.setAlpha(0f);
