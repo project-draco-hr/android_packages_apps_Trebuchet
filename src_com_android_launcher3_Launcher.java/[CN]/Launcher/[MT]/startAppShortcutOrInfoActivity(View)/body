@@ -17,7 +17,7 @@
     throw new IllegalArgumentException("Input must be a Shortcut or AppInfo");
   }
   boolean success=startActivitySafely(v,intent,tag);
-  mStats.recordLaunch(intent,shortcut);
+  mStats.recordLaunch(v,intent,shortcut);
   if (success && v instanceof BubbleTextView) {
     mWaitingForResume=(BubbleTextView)v;
     mWaitingForResume.setStayPressed(true);
