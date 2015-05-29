@@ -1,5 +1,5 @@
 {
-  Partner p=Partner.get(ctx.getPackageManager());
+  Partner p=Partner.get(context.getPackageManager());
   if (p != null) {
     p.applyInvariantDeviceProfileOverrides(this,dm);
   }

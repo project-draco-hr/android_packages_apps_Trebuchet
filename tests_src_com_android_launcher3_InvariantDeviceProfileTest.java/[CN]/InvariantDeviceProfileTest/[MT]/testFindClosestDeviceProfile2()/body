@@ -1,0 +1,6 @@
+{
+  for (  InvariantDeviceProfile idf : mPredefinedDeviceProfiles) {
+    ArrayList<InvariantDeviceProfile> closestProfiles=mInvariantProfile.findClosestDeviceProfiles(idf.minWidthDps,idf.minHeightDps,mPredefinedDeviceProfiles);
+    assertTrue(closestProfiles.get(0).equals(idf));
+  }
+}
