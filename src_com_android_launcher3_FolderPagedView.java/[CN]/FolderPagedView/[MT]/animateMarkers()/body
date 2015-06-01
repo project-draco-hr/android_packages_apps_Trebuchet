@@ -1,7 +1,7 @@
 {
   int count=mPageIndicator.getChildCount();
-  OvershootInterpolator interpolator=new OvershootInterpolator(4);
+  Interpolator interpolator=new OvershootInterpolator(PAGE_INDICATOR_OVERSHOOT_TENSION);
   for (int i=0; i < count; i++) {
-    mPageIndicator.getChildAt(i).animate().scaleX(1).scaleY(1).setInterpolator(interpolator).setDuration(Folder.FOOTER_ANIMATION_DURATION).setStartDelay(PAGE_INDICATOR_ANIMATION_DELAY * i);
+    mPageIndicator.getChildAt(i).animate().scaleX(1).scaleY(1).setInterpolator(interpolator).setDuration(PAGE_INDICATOR_ANIMATION_DURATION).setStartDelay(PAGE_INDICATOR_ANIMATION_STAGGERED_DELAY * i + PAGE_INDICATOR_ANIMATION_START_DELAY);
   }
 }
