@@ -1,12 +1,13 @@
 {
   if (AllAppsContainerView.GRID_MERGE_SECTIONS && !hasFilter()) {
     int sectionAppCount=0;
-    for (int i=0; i < mSections.size(); i++) {
+    for (int i=0; i < mSections.size() - 1; i++) {
       SectionInfo section=mSections.get(i);
+      SectionInfo nextSection=mSections.get(i + 1);
       sectionAppCount=section.numApps;
       int mergeCount=1;
-      while (mMergeAlgorithm.continueMerging(sectionAppCount,mNumAppsPerRow,mergeCount) && (i + 1) < mSections.size()) {
-        SectionInfo nextSection=mSections.remove(i + 1);
+      while (mMergeAlgorithm.continueMerging(section,nextSection,sectionAppCount,mNumAppsPerRow,mergeCount)) {
+        nextSection=mSections.remove(i + 1);
         mAdapterItems.remove(nextSection.sectionBreakItem);
         int pos=mAdapterItems.indexOf(section.firstAppItem);
         int nextPos=pos + section.numApps;
