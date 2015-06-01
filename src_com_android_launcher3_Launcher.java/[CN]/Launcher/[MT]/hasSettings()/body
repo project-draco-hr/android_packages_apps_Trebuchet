@@ -2,5 +2,7 @@
   if (mLauncherCallbacks != null) {
     return mLauncherCallbacks.hasSettings();
   }
-  return false;
+ else {
+    return !Utilities.isRotationAllowedForDevice(this);
+  }
 }

@@ -3,4 +3,7 @@
   if (mLauncherCallbacks != null) {
     mLauncherCallbacks.onClickSettingsButton(v);
   }
+ else {
+    showSettingsActivity();
+  }
 }

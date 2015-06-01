@@ -1,0 +1,5 @@
+{
+  SharedPreferences sharedPrefs=context.getSharedPreferences(LauncherFiles.ROTATION_PREF_FILE,Context.MODE_MULTI_PROCESS);
+  boolean allowRotationPref=sharedPrefs.getBoolean(ALLOW_ROTATION_PREFERENCE_KEY,false);
+  return sForceEnableRotation || allowRotationPref;
+}
