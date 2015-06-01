@@ -5,7 +5,7 @@
       SectionInfo section=mSections.get(i);
       sectionAppCount=section.numApps;
       int mergeCount=1;
-      while (mMergeAlgorithm.continueMerging(sectionAppCount,mNumAppsPerRow,mergeCount,section,mSections.get(i + 1)) && (i + 1) < mSections.size()) {
+      while (mMergeAlgorithm.continueMerging(sectionAppCount,mNumAppsPerRow,mergeCount) && (i + 1) < mSections.size()) {
         SectionInfo nextSection=mSections.remove(i + 1);
         mAdapterItems.remove(nextSection.sectionBreakItem);
         int pos=mAdapterItems.indexOf(section.firstAppItem);
