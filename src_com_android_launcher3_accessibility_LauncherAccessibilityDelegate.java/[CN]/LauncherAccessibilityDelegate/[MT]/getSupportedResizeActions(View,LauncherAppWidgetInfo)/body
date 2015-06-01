@@ -1,6 +1,9 @@
 {
-  AppWidgetProviderInfo providerInfo=((LauncherAppWidgetHostView)host).getAppWidgetInfo();
   ArrayList<Integer> actions=new ArrayList<>();
+  AppWidgetProviderInfo providerInfo=((LauncherAppWidgetHostView)host).getAppWidgetInfo();
+  if (providerInfo == null) {
+    return actions;
+  }
   CellLayout layout=(CellLayout)host.getParent().getParent();
   if ((providerInfo.resizeMode & AppWidgetProviderInfo.RESIZE_HORIZONTAL) != 0) {
     if (layout.isRegionVacant(info.cellX + info.spanX,info.cellY,1,info.spanY) || layout.isRegionVacant(info.cellX - 1,info.cellY,1,info.spanY)) {
