@@ -9,6 +9,7 @@
   numColumns=c;
   numFolderRows=fr;
   numFolderColumns=fc;
+  minAllAppsPredictionColumns=maapc;
   iconSize=is;
   iconTextSize=its;
   numHotseatIcons=hs;

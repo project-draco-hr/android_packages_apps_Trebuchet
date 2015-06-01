@@ -2,8 +2,8 @@
   super(context,attrs);
   LauncherAppState app=LauncherAppState.getInstance();
   InvariantDeviceProfile profile=app.getInvariantDeviceProfile();
-  mMaxCountX=(int)profile.numFolderColumns;
-  mMaxCountY=(int)profile.numFolderRows;
+  mMaxCountX=profile.numFolderColumns;
+  mMaxCountY=profile.numFolderRows;
   mMaxItemsPerPage=mMaxCountX * mMaxCountY;
   mInflater=LayoutInflater.from(context);
   mIconCache=app.getIconCache();

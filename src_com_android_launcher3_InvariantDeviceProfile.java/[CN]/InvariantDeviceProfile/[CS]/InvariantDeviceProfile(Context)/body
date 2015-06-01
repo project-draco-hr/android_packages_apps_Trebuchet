@@ -18,6 +18,7 @@
   defaultLayoutId=closestProfile.defaultLayoutId;
   numFolderRows=closestProfile.numFolderRows;
   numFolderColumns=closestProfile.numFolderColumns;
+  minAllAppsPredictionColumns=closestProfile.minAllAppsPredictionColumns;
   iconSize=interpolatedDeviceProfileOut.iconSize;
   iconBitmapSize=Utilities.pxFromDp(iconSize,dm);
   iconTextSize=interpolatedDeviceProfileOut.iconTextSize;

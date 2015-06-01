@@ -23,4 +23,5 @@
   mPredictedAppsDividerPaint.setStrokeWidth(Utilities.pxFromDp(1f,res.getDisplayMetrics()));
   mPredictedAppsDividerPaint.setColor(0x1E000000);
   mPredictedAppsDividerPaint.setAntiAlias(true);
+  mPredictionBarBottomPadding=res.getDimensionPixelSize(R.dimen.all_apps_prediction_bar_bottom_padding);
 }
