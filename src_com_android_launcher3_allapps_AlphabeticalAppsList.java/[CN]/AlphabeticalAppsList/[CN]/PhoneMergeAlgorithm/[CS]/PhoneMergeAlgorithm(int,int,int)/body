@@ -2,4 +2,5 @@
   mMinAppsPerRow=minAppsPerRow;
   mMinRowsInMergedSection=minRowsInMergedSection;
   mMaxAllowableMerges=maxNumMerges;
+  mAsciiEncoder=StandardCharsets.US_ASCII.newEncoder();
 }
