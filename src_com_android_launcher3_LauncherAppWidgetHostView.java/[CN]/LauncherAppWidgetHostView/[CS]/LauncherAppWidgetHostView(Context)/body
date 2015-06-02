@@ -2,6 +2,7 @@
   super(context);
   mContext=context;
   mLongPressHelper=new CheckLongPressHelper(this);
+  mStylusEventHelper=new StylusEventHelper(this);
   mInflater=(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
   mDragLayer=((Launcher)context).getDragLayer();
   setAccessibilityDelegate(LauncherAppState.getInstance().getAccessibilityDelegate());
