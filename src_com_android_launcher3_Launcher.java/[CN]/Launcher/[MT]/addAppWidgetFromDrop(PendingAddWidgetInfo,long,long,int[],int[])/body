@@ -18,6 +18,7 @@
   if (hostView != null) {
     appWidgetId=hostView.getAppWidgetId();
     addAppWidgetImpl(appWidgetId,info,hostView,info.info);
+    info.boundWidget=null;
   }
  else {
     appWidgetId=getAppWidgetHost().allocateAppWidgetId();

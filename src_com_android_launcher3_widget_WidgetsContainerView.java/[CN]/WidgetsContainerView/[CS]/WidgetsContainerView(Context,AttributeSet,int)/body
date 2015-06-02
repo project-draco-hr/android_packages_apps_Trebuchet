@@ -2,7 +2,6 @@
   super(context,attrs,defStyleAttr);
   mLauncher=(Launcher)context;
   mDragController=mLauncher.getDragController();
-  mWidgetHostViewLoader=new WidgetHostViewLoader(mLauncher);
   mAdapter=new WidgetsListAdapter(context,this,this,mLauncher);
   mIconCache=(LauncherAppState.getInstance()).getIconCache();
   if (DEBUG) {

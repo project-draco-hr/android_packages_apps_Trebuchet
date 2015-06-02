@@ -1,44 +1,41 @@
 {
-  final LauncherAppWidgetProviderInfo pInfo=info.info;
-  final Bundle options=pInfo.isCustomWidget ? null : getDefaultOptionsForWidget(mLauncher,info);
-  if (pInfo.configure != null) {
-    info.bindOptions=options;
+  final LauncherAppWidgetProviderInfo pInfo=mInfo.info;
+  if (pInfo.isCustomWidget) {
     return false;
   }
-  setState(WIDGET_PRELOAD_PENDING);
+  final Bundle options=getDefaultOptionsForWidget(mLauncher,mInfo);
+  if (pInfo.configure != null) {
+    mInfo.bindOptions=options;
+    return false;
+  }
   mBindWidgetRunnable=new Runnable(){
     @Override public void run(){
-      if (pInfo.isCustomWidget) {
-        setState(WIDGET_BOUND);
-        return;
-      }
       mWidgetLoadingId=mLauncher.getAppWidgetHost().allocateAppWidgetId();
       if (AppWidgetManagerCompat.getInstance(mLauncher).bindAppWidgetIdIfAllowed(mWidgetLoadingId,pInfo,options)) {
-        setState(WIDGET_BOUND);
+        mHandler.post(mInflateWidgetRunnable);
       }
     }
   }
 ;
-  mHandler.post(mBindWidgetRunnable);
   mInflateWidgetRunnable=new Runnable(){
     @Override public void run(){
-      if (mState != WIDGET_BOUND) {
+      if (mWidgetLoadingId == -1) {
         return;
       }
       AppWidgetHostView hostView=mLauncher.getAppWidgetHost().createView((Context)mLauncher,mWidgetLoadingId,pInfo);
-      info.boundWidget=hostView;
-      setState(WIDGET_INFLATED);
+      mInfo.boundWidget=hostView;
+      mWidgetLoadingId=-1;
       hostView.setVisibility(View.INVISIBLE);
-      int[] unScaledSize=mLauncher.getWorkspace().estimateItemSize(info,false);
+      int[] unScaledSize=mLauncher.getWorkspace().estimateItemSize(mInfo,false);
       DragLayer.LayoutParams lp=new DragLayer.LayoutParams(unScaledSize[0],unScaledSize[1]);
       lp.x=lp.y=0;
       lp.customPosition=true;
       hostView.setLayoutParams(lp);
       mLauncher.getDragLayer().addView(hostView);
-      v.setTag(info);
+      mView.setTag(mInfo);
     }
   }
 ;
-  mHandler.post(mInflateWidgetRunnable);
+  mHandler.post(mBindWidgetRunnable);
   return true;
 }

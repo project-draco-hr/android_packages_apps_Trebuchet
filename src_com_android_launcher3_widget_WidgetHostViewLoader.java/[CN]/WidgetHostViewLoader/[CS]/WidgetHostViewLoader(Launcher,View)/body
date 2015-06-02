@@ -1,0 +1,6 @@
+{
+  mLauncher=launcher;
+  mHandler=new Handler();
+  mView=view;
+  mInfo=(PendingAddWidgetInfo)view.getTag();
+}
