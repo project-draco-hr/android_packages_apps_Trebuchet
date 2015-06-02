@@ -2,6 +2,7 @@
   super(context,attrs,defStyle);
   final Resources r=context.getResources();
   mLauncher=(Launcher)context;
+  mStylusEventHelper=new StylusEventHelper(this);
   mDimensionsFormatString=r.getString(R.string.widget_dims_format);
   setContainerWidth();
   setWillNotDraw(false);
