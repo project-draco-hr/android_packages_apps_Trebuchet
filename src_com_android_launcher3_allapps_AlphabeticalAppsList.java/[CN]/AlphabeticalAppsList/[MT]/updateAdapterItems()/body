@@ -8,6 +8,14 @@
   mFastScrollerSections.clear();
   mAdapterItems.clear();
   mSections.clear();
+  if (DEBUG_PREDICTIONS) {
+    if (mPredictedAppComponents.isEmpty() && !mApps.isEmpty()) {
+      mPredictedAppComponents.add(mApps.get(0).componentName);
+      mPredictedAppComponents.add(mApps.get(0).componentName);
+      mPredictedAppComponents.add(mApps.get(0).componentName);
+      mPredictedAppComponents.add(mApps.get(0).componentName);
+    }
+  }
   mPredictedApps.clear();
   if (mPredictedAppComponents != null && !mPredictedAppComponents.isEmpty() && !hasFilter()) {
     for (    ComponentName cn : mPredictedAppComponents) {

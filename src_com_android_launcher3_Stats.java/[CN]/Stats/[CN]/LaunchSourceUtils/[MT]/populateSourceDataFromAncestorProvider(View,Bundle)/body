@@ -1,0 +1,20 @@
+{
+  if (v == null) {
+    return;
+  }
+  Stats.LaunchSourceProvider provider=null;
+  ViewParent parent=v.getParent();
+  while (parent != null && parent instanceof View) {
+    if (parent instanceof Stats.LaunchSourceProvider) {
+      provider=(Stats.LaunchSourceProvider)parent;
+      break;
+    }
+    parent=parent.getParent();
+  }
+  if (provider != null) {
+    provider.fillInLaunchSourceData(sourceData);
+  }
+ else   if (LauncherAppState.isDogfoodBuild()) {
+    throw new RuntimeException("Expected LaunchSourceProvider");
+  }
+}
