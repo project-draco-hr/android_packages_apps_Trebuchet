@@ -1,6 +1,6 @@
 {
   super.onCreate(savedInstanceState);
-  getPreferenceManager().setSharedPreferencesMode(Context.MODE_PRIVATE);
+  getPreferenceManager().setSharedPreferencesMode(Context.MODE_MULTI_PROCESS);
   getPreferenceManager().setSharedPreferencesName(LauncherFiles.ROTATION_PREF_FILE);
   addPreferencesFromResource(R.xml.launcher_preferences);
 }

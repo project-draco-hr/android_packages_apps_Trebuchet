@@ -1,8 +1,8 @@
 {
   super.onDestroy();
-  if (mPreferenceObserverRegistered) {
-    getSharedPreferences(LauncherFiles.ROTATION_PREF_FILE,Context.MODE_MULTI_PROCESS).unregisterOnSharedPreferenceChangeListener(mSettingsObserver);
-    mPreferenceObserverRegistered=false;
+  if (mScreenOrientationSettingReceiverRegistered) {
+    unregisterReceiver(mScreenOrientationSettingReceiver);
+    mScreenOrientationSettingReceiverRegistered=false;
   }
   mHandler.removeMessages(ADVANCE_MSG);
   mHandler.removeMessages(0);

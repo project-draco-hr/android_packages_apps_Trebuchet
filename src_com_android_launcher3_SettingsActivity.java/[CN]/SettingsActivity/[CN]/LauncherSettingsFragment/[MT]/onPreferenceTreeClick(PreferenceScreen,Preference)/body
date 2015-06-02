@@ -1,0 +1,8 @@
+{
+  boolean allowRotation=getPreferenceManager().getSharedPreferences().getBoolean(Utilities.ALLOW_ROTATION_PREFERENCE_KEY,false);
+  Intent rotationSetting=new Intent(Utilities.SCREEN_ROTATION_SETTING_INTENT);
+  String launchBroadcastPermission=getResources().getString(R.string.receive_update_orientation_broadcasts_permission);
+  rotationSetting.putExtra(Utilities.SCREEN_ROTATION_SETTING_EXTRA,allowRotation);
+  getActivity().sendBroadcast(rotationSetting,launchBroadcastPermission);
+  return true;
+}
