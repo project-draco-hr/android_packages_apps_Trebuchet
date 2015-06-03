@@ -30,7 +30,7 @@
   View hotseat=launcher.findViewById(R.id.hotseat);
   lp=(FrameLayout.LayoutParams)hotseat.getLayoutParams();
   if (hasVerticalBarLayout) {
-    lp.gravity=Gravity.END;
+    lp.gravity=Gravity.RIGHT;
     lp.width=hotseatBarHeightPx;
     lp.height=LayoutParams.MATCH_PARENT;
     hotseat.findViewById(R.id.layout).setPadding(0,2 * edgeMarginPx,0,2 * edgeMarginPx);
