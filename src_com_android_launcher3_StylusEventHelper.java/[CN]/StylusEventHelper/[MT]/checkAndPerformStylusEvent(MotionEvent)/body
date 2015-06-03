@@ -1,0 +1,32 @@
+{
+  final float slop=ViewConfiguration.get(mView.getContext()).getScaledTouchSlop();
+  if (!mView.isLongClickable()) {
+    return false;
+  }
+  final boolean stylusButtonPressed=isStylusButtonPressed(event);
+switch (event.getAction()) {
+case MotionEvent.ACTION_DOWN:
+    mIsButtonPressed=false;
+  if (stylusButtonPressed && mView.performLongClick()) {
+    mIsButtonPressed=true;
+    return true;
+  }
+break;
+case MotionEvent.ACTION_MOVE:
+if (Utilities.pointInView(mView,event.getX(),event.getY(),slop)) {
+if (!mIsButtonPressed && stylusButtonPressed && mView.performLongClick()) {
+  mIsButtonPressed=true;
+  return true;
+}
+ else if (mIsButtonPressed && !stylusButtonPressed) {
+  mIsButtonPressed=false;
+}
+}
+break;
+case MotionEvent.ACTION_UP:
+case MotionEvent.ACTION_CANCEL:
+mIsButtonPressed=false;
+break;
+}
+return false;
+}

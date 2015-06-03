@@ -68,6 +68,7 @@
   }
   mShortcutsAndWidgets=new ShortcutAndWidgetContainer(context);
   mShortcutsAndWidgets.setCellDimensions(mCellWidth,mCellHeight,mWidthGap,mHeightGap,mCountX,mCountY);
+  mStylusEventHelper=new StylusEventHelper(this);
   mTouchFeedbackView=new ClickShadowView(context);
   addView(mTouchFeedbackView);
   addView(mShortcutsAndWidgets);

@@ -1,11 +1,17 @@
 {
   boolean result=super.onTouchEvent(event);
+  if (mStylusEventHelper.checkAndPerformStylusEvent(event)) {
+    mLongPressHelper.cancelLongPress();
+    result=true;
+  }
 switch (event.getAction()) {
 case MotionEvent.ACTION_DOWN:
     if (!mDeferShadowGenerationOnTouch && mPressedBackground == null) {
       mPressedBackground=mOutlineHelper.createMediumDropShadow(this);
     }
-  mLongPressHelper.postCheckForLongPress();
+  if (!mStylusEventHelper.inStylusButtonPressed()) {
+    mLongPressHelper.postCheckForLongPress();
+  }
 break;
 case MotionEvent.ACTION_CANCEL:
 case MotionEvent.ACTION_UP:
