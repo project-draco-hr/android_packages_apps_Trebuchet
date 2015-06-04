@@ -13,7 +13,6 @@
   mFastScrollTextPaint.setAntiAlias(true);
   mFastScrollTextPaint.setTextSize(res.getDimensionPixelSize(R.dimen.all_apps_fast_scroll_text_size));
   mScrollbarWidth=res.getDimensionPixelSize(R.dimen.all_apps_fast_scroll_bar_width);
-  mScrollbarMinHeight=res.getDimensionPixelSize(R.dimen.all_apps_fast_scroll_bar_min_height);
   mScrollbarInset=res.getDimensionPixelSize(R.dimen.all_apps_fast_scroll_scrubber_touch_inset);
   setFastScrollerAlpha(mFastScrollAlpha);
   setOverScrollMode(View.OVER_SCROLL_NEVER);

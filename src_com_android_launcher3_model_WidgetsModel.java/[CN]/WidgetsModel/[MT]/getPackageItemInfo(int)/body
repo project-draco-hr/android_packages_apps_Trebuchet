@@ -1,3 +1,6 @@
 {
+  if (pos >= mPackageItemInfos.size() || pos < 0) {
+    return null;
+  }
   return mPackageItemInfos.get(pos);
 }
