@@ -1,5 +1,5 @@
 {
-  ComponentName cn=new ComponentName(packageName,EMPTY_CLASS_NAME);
+  ComponentName cn=new ComponentName(packageName,packageName + EMPTY_CLASS_NAME);
   ComponentKey cacheKey=new ComponentKey(cn,user);
   CacheEntry entry=mCache.get(cacheKey);
   if (entry == null || (entry.isLowResIcon && !useLowResIcon)) {

@@ -22,6 +22,7 @@
     ComponentName component=ComponentName.unflattenFromString(cn);
     PackageInfo info=pkgInfoMap.get(component.getPackageName());
     if (info == null) {
+      remove(component,user);
       itemsToRemove.add(c.getInt(rowIndex));
       continue;
     }
@@ -35,6 +36,7 @@
       continue;
     }
     if (app == null) {
+      remove(component,user);
       itemsToRemove.add(c.getInt(rowIndex));
     }
  else {

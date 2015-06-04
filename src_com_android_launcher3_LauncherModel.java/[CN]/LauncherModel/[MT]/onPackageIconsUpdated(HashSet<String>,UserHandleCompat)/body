@@ -38,4 +38,5 @@ synchronized (sBgLock) {
     }
 );
   }
+  loadAndBindWidgetsAndShortcuts(mApp.getContext(),callbacks,false);
 }
