@@ -30,6 +30,7 @@
       widgetsShortcutsList.add(o);
       pInfo=new PackageItemInfo(packageName);
       mIconCache.getTitleAndIconForApp(packageName,UserHandleCompat.myUserHandle(),true,pInfo);
+      pInfo.titleSectionName=mIndexer.computeSectionName(pInfo.title);
       mWidgetsList.put(pInfo,widgetsShortcutsList);
       tmpPackageItemInfos.put(packageName,pInfo);
       mPackageItemInfos.add(pInfo);

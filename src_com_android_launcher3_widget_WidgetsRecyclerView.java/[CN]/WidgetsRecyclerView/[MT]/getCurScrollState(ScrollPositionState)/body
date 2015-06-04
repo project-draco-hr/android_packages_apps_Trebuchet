@@ -6,4 +6,9 @@
   if (rowCount == 0) {
     return;
   }
+  View child=getChildAt(0);
+  int position=getChildPosition(child);
+  stateOut.rowIndex=position;
+  stateOut.rowTopOffset=getLayoutManager().getDecoratedTop(child);
+  stateOut.rowHeight=child.getHeight();
 }

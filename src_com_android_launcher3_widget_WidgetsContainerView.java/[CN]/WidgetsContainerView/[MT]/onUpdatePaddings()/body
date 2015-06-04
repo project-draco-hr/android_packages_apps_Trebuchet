@@ -5,4 +5,6 @@
  else {
     setPadding(mFixedBounds.left,mFixedBounds.top,getMeasuredWidth() - mFixedBounds.right,mFixedBounds.bottom);
   }
+  int inset=mFixedBounds.isEmpty() ? mView.getScrollbarWidth() : mFixedBoundsContainerInset;
+  mView.setPadding(inset + mView.getScrollbarWidth(),inset,inset,inset);
 }

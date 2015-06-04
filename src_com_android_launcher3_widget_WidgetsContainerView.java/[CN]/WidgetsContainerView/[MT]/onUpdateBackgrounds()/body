@@ -1,0 +1,6 @@
+{
+  InsetDrawable background;
+  int inset=mFixedBounds.isEmpty() ? mView.getScrollbarWidth() : mFixedBoundsContainerInset;
+  background=new InsetDrawable(getContext().getResources().getDrawable(R.drawable.quantum_panel_shape),inset,0,inset,0);
+  mView.updateBackgroundPadding(background);
+}
