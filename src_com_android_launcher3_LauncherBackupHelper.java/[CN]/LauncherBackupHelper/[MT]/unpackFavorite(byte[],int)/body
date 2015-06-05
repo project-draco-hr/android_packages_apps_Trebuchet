@@ -29,7 +29,7 @@
   UserHandleCompat myUserHandle=UserHandleCompat.myUserHandle();
   long userSerialNumber=UserManagerCompat.getInstance(mContext).getSerialNumberForUser(myUserHandle);
   values.put(LauncherSettings.Favorites.PROFILE_ID,userSerialNumber);
-  DeviceProfieData currentProfile=getDeviceProfieData();
+  DeviceProfieData currentProfile=mDeviceProfileData;
   if (favorite.itemType == Favorites.ITEM_TYPE_APPWIDGET) {
     if (!TextUtils.isEmpty(favorite.appWidgetProvider)) {
       values.put(Favorites.APPWIDGET_PROVIDER,favorite.appWidgetProvider);

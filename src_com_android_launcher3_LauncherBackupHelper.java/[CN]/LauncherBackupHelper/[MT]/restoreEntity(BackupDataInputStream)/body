@@ -2,7 +2,11 @@
   if (!restoreSuccessful) {
     return;
   }
-  lazyInitAppState(false);
+  if (mDeviceProfileData == null) {
+    InvariantDeviceProfile profile=new InvariantDeviceProfile(mContext);
+    mDeviceProfileData=initDeviceProfileData(profile);
+    mIconCache=new IconCache(mContext,profile);
+  }
   int dataSize=data.size();
   if (mBuffer.length < dataSize) {
     mBuffer=new byte[dataSize];
