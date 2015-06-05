@@ -5,6 +5,7 @@ int r
 int c
 int fr
 int fc
+int maapc
 float is
 float its
 float hs

@@ -15,7 +15,7 @@
       continue;
     }
     if (shouldDrawItemDivider(holder,items) && !hasDrawnPredictedAppsDivider) {
-      int top=child.getTop() + child.getHeight();
+      int top=child.getTop() + child.getHeight() - mPredictionBarBottomPadding / 2;
       c.drawLine(mBackgroundPadding.left,top,parent.getWidth() - mBackgroundPadding.right,top,mPredictedAppsDividerPaint);
       hasDrawnPredictedAppsDivider=true;
     }
