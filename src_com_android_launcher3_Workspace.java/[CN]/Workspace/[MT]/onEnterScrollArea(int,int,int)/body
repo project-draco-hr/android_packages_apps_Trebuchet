@@ -1,5 +1,5 @@
 {
-  boolean isPortrait=!LauncherAppState.isScreenLandscape(getContext());
+  boolean isPortrait=!mLauncher.getDeviceProfile().isLandscape;
   if (mLauncher.getHotseat() != null && isPortrait) {
     Rect r=new Rect();
     mLauncher.getHotseat().getHitRect(r);
