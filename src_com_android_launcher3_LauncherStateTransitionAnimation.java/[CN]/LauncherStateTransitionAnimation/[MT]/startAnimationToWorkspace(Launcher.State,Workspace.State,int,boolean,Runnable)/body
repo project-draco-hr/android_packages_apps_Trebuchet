@@ -3,9 +3,9 @@
     Log.e(TAG,"Unexpected call to startAnimationToWorkspace");
   }
   if (fromState == Launcher.State.APPS || fromState == Launcher.State.APPS_SPRING_LOADED) {
-    startAnimationToWorkspaceFromAllApps(fromState,toWorkspaceState,toWorkspacePage,animated,onCompleteRunnable);
+    startAnimationToWorkspaceFromAllApps(toWorkspaceState,toWorkspacePage,animated,onCompleteRunnable);
   }
  else {
-    startAnimationToWorkspaceFromWidgets(fromState,toWorkspaceState,toWorkspacePage,animated,onCompleteRunnable);
+    startAnimationToWorkspaceFromWidgets(toWorkspaceState,toWorkspacePage,animated,onCompleteRunnable);
   }
 }

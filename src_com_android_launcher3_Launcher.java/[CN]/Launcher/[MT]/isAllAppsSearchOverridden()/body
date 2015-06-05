@@ -1,9 +1,0 @@
-{
-  if (DISABLE_ALL_APPS_SEARCH_INTEGRATION) {
-    return false;
-  }
-  if (mLauncherCallbacks != null) {
-    return mLauncherCallbacks.overrideAllAppsSearch();
-  }
-  return false;
-}

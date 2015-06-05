@@ -2,7 +2,7 @@
   stateOut.rowIndex=-1;
   stateOut.rowTopOffset=-1;
   stateOut.rowHeight=-1;
-  if (items.isEmpty()) {
+  if (items.isEmpty() || mNumAppsPerRow == 0) {
     return;
   }
   int childCount=getChildCount();

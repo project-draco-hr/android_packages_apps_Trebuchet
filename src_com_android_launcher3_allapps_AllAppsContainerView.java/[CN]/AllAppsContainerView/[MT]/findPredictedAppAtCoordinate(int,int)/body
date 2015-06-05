@@ -1,9 +1,9 @@
 {
   Rect hitRect=new Rect();
   int[] coord={x,y};
-  Utilities.mapCoordInSelfToDescendent(mHeaderView,this,coord);
-  mHeaderView.getHitRect(hitRect);
-  if (hitRect.contains(coord[0],coord[1])) {
+  Utilities.mapCoordInSelfToDescendent(mAppsRecyclerView,this,coord);
+  mAppsRecyclerView.getHitRect(hitRect);
+  if (!hitRect.contains(coord[0],coord[1])) {
     return null;
   }
   coord[0]=x;

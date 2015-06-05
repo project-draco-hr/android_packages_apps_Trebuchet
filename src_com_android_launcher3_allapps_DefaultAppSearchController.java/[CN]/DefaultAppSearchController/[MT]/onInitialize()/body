@@ -1,0 +1,3 @@
+{
+  mSearchManager=new DefaultAppSearchAlgorithm(mApps.getApps());
+}

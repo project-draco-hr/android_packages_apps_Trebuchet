@@ -1,11 +1,7 @@
 {
-  if (mSearchBarEditView != null) {
-    if (toWorkspace) {
-      hideSearchField(false,false);
-    }
-  }
   if (toWorkspace) {
     getViewTreeObserver().removeOnPreDrawListener(this);
     mLastRecyclerViewScrollPos=-1;
+    mSearchBarController.reset();
   }
 }

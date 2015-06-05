@@ -1,4 +1,0 @@
-{
-  getAnimation(fromState,toState,toPage,animated,layerViews);
-  return mStateAnimator;
-}

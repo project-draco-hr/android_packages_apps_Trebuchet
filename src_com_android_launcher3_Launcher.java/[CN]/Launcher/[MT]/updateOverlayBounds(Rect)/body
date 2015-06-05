@@ -1,0 +1,4 @@
+{
+  mAppsView.setSearchBarBounds(newBounds);
+  mWidgetsView.setSearchBarBounds(newBounds);
+}

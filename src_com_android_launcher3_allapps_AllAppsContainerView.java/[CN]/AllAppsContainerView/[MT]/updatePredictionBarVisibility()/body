@@ -1,5 +1,5 @@
 {
-  boolean showPredictionBar=!mApps.getPredictedApps().isEmpty() && (!mApps.hasFilter() || mSearchBarEditView.getEditableText().toString().isEmpty());
+  boolean showPredictionBar=!mApps.getPredictedApps().isEmpty() && (!mApps.hasFilter() || mSearchBarController.shouldShowPredictionBar());
   if (showPredictionBar) {
     mPredictionBarView.setVisibility(View.VISIBLE);
   }

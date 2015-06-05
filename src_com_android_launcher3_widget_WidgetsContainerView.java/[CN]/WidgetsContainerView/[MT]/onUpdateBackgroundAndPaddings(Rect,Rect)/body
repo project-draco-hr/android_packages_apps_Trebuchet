@@ -1,0 +1,7 @@
+{
+  mContent.setPadding(0,padding.top,0,padding.bottom);
+  InsetDrawable background=new InsetDrawable(getResources().getDrawable(R.drawable.quantum_panel_shape_dark),padding.left,0,padding.right,0);
+  mView.setBackground(background);
+  getRevealView().setBackground(background.getConstantState().newDrawable());
+  mView.updateBackgroundPadding(padding);
+}

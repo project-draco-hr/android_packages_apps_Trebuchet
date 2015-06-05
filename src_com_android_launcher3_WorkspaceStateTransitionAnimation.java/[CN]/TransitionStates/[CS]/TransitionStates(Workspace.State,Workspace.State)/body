@@ -1,0 +1,17 @@
+{
+  oldStateIsNormal=(fromState == Workspace.State.NORMAL);
+  oldStateIsSpringLoaded=(fromState == Workspace.State.SPRING_LOADED);
+  oldStateIsNormalHidden=(fromState == Workspace.State.NORMAL_HIDDEN);
+  oldStateIsOverviewHidden=(fromState == Workspace.State.OVERVIEW_HIDDEN);
+  oldStateIsOverview=(fromState == Workspace.State.OVERVIEW);
+  stateIsNormal=(toState == Workspace.State.NORMAL);
+  stateIsSpringLoaded=(toState == Workspace.State.SPRING_LOADED);
+  stateIsNormalHidden=(toState == Workspace.State.NORMAL_HIDDEN);
+  stateIsOverviewHidden=(toState == Workspace.State.OVERVIEW_HIDDEN);
+  stateIsOverview=(toState == Workspace.State.OVERVIEW);
+  workspaceToOverview=(oldStateIsNormal && stateIsOverview);
+  workspaceToAllApps=(oldStateIsNormal && stateIsNormalHidden);
+  overviewToWorkspace=(oldStateIsOverview && stateIsNormal);
+  overviewToAllApps=(oldStateIsOverview && stateIsOverviewHidden);
+  allAppsToWorkspace=(stateIsNormalHidden && stateIsNormal);
+}

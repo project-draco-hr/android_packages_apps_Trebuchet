@@ -1,0 +1,43 @@
+{
+  final View searchBar=mLauncher.getOrCreateQsbBar();
+  if (searchBar != null) {
+    final boolean searchBarWillBeShown=states.stateIsNormal;
+    final float finalSearchBarAlpha=searchBarWillBeShown ? 1f : 0f;
+    if (animated) {
+      if (hasOverlaySearchBar) {
+        mStateAnimator.addListener(new AnimatorListenerAdapter(){
+          @Override public void onAnimationStart(          Animator animation){
+            if (searchBarWillBeShown) {
+              searchBar.setAlpha(finalSearchBarAlpha);
+              AlphaUpdateListener.updateVisibility(searchBar,accessibilityEnabled);
+            }
+          }
+          @Override public void onAnimationEnd(          Animator animation){
+            if (!searchBarWillBeShown) {
+              searchBar.setAlpha(finalSearchBarAlpha);
+              AlphaUpdateListener.updateVisibility(searchBar,accessibilityEnabled);
+            }
+          }
+        }
+);
+      }
+ else {
+        LauncherViewPropertyAnimator searchBarAlpha=new LauncherViewPropertyAnimator(searchBar).alpha(finalSearchBarAlpha);
+        searchBarAlpha.addListener(new AlphaUpdateListener(searchBar,accessibilityEnabled));
+        searchBar.setLayerType(View.LAYER_TYPE_HARDWARE,null);
+        if (layerViews != null) {
+          layerViews.put(searchBar,LauncherStateTransitionAnimation.BUILD_AND_SET_LAYER);
+        }
+ else {
+          searchBarAlpha.withLayer();
+        }
+        searchBarAlpha.setDuration(duration);
+        mStateAnimator.play(searchBarAlpha);
+      }
+    }
+ else {
+      searchBar.setAlpha(finalSearchBarAlpha);
+      AlphaUpdateListener.updateVisibility(searchBar,accessibilityEnabled);
+    }
+  }
+}

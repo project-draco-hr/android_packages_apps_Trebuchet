@@ -19,5 +19,4 @@
   folderCellHeightPx=cellHeightPx + edgeMarginPx;
   folderBackgroundOffset=-edgeMarginPx;
   folderIconSizePx=iconSizePx + 2 * -folderBackgroundOffset;
-  updateAppsViewNumCols(res,0);
 }

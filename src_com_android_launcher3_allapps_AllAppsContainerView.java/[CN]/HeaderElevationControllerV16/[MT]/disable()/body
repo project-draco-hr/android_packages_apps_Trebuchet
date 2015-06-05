@@ -1,6 +1,0 @@
-{
-  ViewGroup parent=(ViewGroup)mShadow.getParent();
-  if (parent != null) {
-    parent.removeView(mShadow);
-  }
-}

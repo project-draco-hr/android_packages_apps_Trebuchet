@@ -1,4 +1,0 @@
-{
-  mSearchManager.cancel(true);
-  mSearchManager=searchManager;
-}

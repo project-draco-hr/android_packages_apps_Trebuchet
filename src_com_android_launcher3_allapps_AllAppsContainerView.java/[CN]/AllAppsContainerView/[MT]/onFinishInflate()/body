@@ -1,10 +1,11 @@
 {
+  super.onFinishInflate();
   boolean isRtl=Utilities.isRtl(getResources());
   mAdapter.setRtl(isRtl);
-  mContentView=(FrameLayout)findViewById(R.id.apps_list);
-  mContentView.setOnFocusChangeListener(new View.OnFocusChangeListener(){
+  mContent=findViewById(R.id.content);
+  View.OnFocusChangeListener focusProxyListener=new View.OnFocusChangeListener(){
     @Override public void onFocusChange(    View v,    boolean hasFocus){
-      if (v == mContentView && hasFocus) {
+      if (hasFocus) {
         if (!mApps.getPredictedApps().isEmpty()) {
           if (mPredictionBarView.getChildCount() == 0) {
             mFocusPredictionBarOnFirstBind=true;
@@ -19,39 +20,14 @@
       }
     }
   }
-);
-  mHeaderView=findViewById(R.id.header);
-  mHeaderView.setOnClickListener(this);
-  mElevationController=Utilities.isLmpOrAbove() ? new HeaderElevationControllerVL(mHeaderView) : new HeaderElevationControllerV16(mHeaderView);
-  if (!DYNAMIC_HEADER_ELEVATION) {
-    mElevationController.onScroll(getResources().getDimensionPixelSize(R.dimen.all_apps_header_scroll_to_elevation));
-  }
-  mPredictionBarView=(ViewGroup)findViewById(R.id.prediction_bar);
-  FrameLayout.LayoutParams lp=(FrameLayout.LayoutParams)mPredictionBarView.getLayoutParams();
-  lp.height=mPredictionBarHeight;
-  mSearchButtonView=mHeaderView.findViewById(R.id.search_button);
-  mSearchBarContainerView=findViewById(R.id.app_search_container);
-  mDismissSearchButtonView=mSearchBarContainerView.findViewById(R.id.dismiss_search_button);
-  mDismissSearchButtonView.setOnClickListener(this);
-  mSearchBarEditView=(AllAppsSearchEditView)findViewById(R.id.apps_search_box);
-  if (mSearchBarEditView != null) {
-    mSearchBarEditView.addTextChangedListener(this);
-    mSearchBarEditView.setOnEditorActionListener(this);
-    if (DISMISS_SEARCH_ON_BACK) {
-      mSearchBarEditView.setOnBackKeyListener(new AllAppsSearchEditView.OnBackKeyListener(){
-        @Override public void onBackKey(){
-          String query=Utilities.trim(mSearchBarEditView.getEditableText().toString());
-          if (query.isEmpty() || mApps.hasNoFilteredResults()) {
-            hideSearchField(true,true);
-          }
-        }
-      }
-);
-    }
-  }
-  mAppsRecyclerView=(AllAppsRecyclerView)findViewById(R.id.apps_list_view);
+;
+  mSearchBarContainerView=(ViewGroup)findViewById(R.id.search_box_container);
+  mSearchBarContainerView.setOnFocusChangeListener(focusProxyListener);
+  mContainerView=findViewById(R.id.all_apps_container);
+  mContainerView.setOnFocusChangeListener(focusProxyListener);
+  mRevealView=findViewById(R.id.all_apps_reveal);
+  mAppsRecyclerView=(AllAppsRecyclerView)findViewById(R.id.collection);
   mAppsRecyclerView.setApps(mApps);
-  mAppsRecyclerView.setNumAppsPerRow(mNumAppsPerRow,mNumPredictedAppsPerRow);
   mAppsRecyclerView.setPredictionBarHeight(mPredictionBarHeight);
   mAppsRecyclerView.setLayoutManager(mLayoutManager);
   mAppsRecyclerView.setAdapter(mAdapter);
@@ -59,6 +35,8 @@
   if (mItemDecoration != null) {
     mAppsRecyclerView.addItemDecoration(mItemDecoration);
   }
-  onUpdateBackgrounds();
-  onUpdatePaddings();
+  mPredictionBarView=(ViewGroup)findViewById(R.id.prediction_bar);
+  FrameLayout.LayoutParams lp=(FrameLayout.LayoutParams)mPredictionBarView.getLayoutParams();
+  lp.height=mPredictionBarHeight;
+  updateBackgroundAndPaddings();
 }

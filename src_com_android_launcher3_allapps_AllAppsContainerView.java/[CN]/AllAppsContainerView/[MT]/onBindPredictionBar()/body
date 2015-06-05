@@ -1,6 +1,9 @@
 {
   updatePredictionBarVisibility();
   List<AppInfo> predictedApps=mApps.getPredictedApps();
+  while (mPredictionBarView.getChildCount() > mNumPredictedAppsPerRow) {
+    mPredictionBarView.removeViewAt(mPredictionBarView.getChildCount() - 1);
+  }
   int childCount=mPredictionBarView.getChildCount();
   for (int i=0; i < mNumPredictedAppsPerRow; i++) {
     BubbleTextView icon;

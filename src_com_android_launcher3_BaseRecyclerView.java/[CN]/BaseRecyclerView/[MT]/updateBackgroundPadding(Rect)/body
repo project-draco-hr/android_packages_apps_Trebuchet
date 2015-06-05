@@ -1,0 +1,3 @@
+{
+  mBackgroundPadding.set(padding);
+}

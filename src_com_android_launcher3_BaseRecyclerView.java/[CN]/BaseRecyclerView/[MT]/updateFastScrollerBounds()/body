@@ -4,10 +4,10 @@
     int y;
     Rect bgBounds=mFastScrollerBg.getBounds();
     if (Utilities.isRtl(getResources())) {
-      x=mBackgroundPadding.left + getScrollBarSize();
+      x=mBackgroundPadding.left + (2 * getScrollbarWidth());
     }
  else {
-      x=getWidth() - getPaddingRight() - getScrollBarSize()- bgBounds.width();
+      x=getWidth() - mBackgroundPadding.right - (2 * getScrollbarWidth())- bgBounds.width();
     }
     y=mLastY - (int)(FAST_SCROLL_OVERLAY_Y_OFFSET_FACTOR * bgBounds.height());
     y=Math.max(getPaddingTop(),Math.min(y,getHeight() - getPaddingBottom() - bgBounds.height()));

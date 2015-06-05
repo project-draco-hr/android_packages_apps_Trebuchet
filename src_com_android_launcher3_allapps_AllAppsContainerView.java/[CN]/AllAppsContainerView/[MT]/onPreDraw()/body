@@ -1,4 +1,6 @@
 {
-  synchronizeToRecyclerViewScrollPosition(mAppsRecyclerView.getScrollPosition());
+  if (mNumAppsPerRow > 0) {
+    synchronizeToRecyclerViewScrollPosition(mAppsRecyclerView.getScrollPosition());
+  }
   return true;
 }

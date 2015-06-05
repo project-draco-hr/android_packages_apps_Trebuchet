@@ -1,6 +1,11 @@
 {
-  if (mApps.hasFilter()) {
+  if (mApps.hasFilter() || mAppsPerRow == 0) {
     return;
+  }
+  if (DEBUG_SECTION_MARGIN) {
+    Paint p=new Paint();
+    p.setColor(0x33ff0000);
+    c.drawRect(mBackgroundPadding.left,0,mBackgroundPadding.left + mStartMargin,parent.getMeasuredHeight(),p);
   }
   DeviceProfile grid=mLauncher.getDeviceProfile();
   List<AlphabeticalAppsList.AdapterItem> items=mApps.getAdapterItems();
@@ -36,7 +41,7 @@
         }
         PointF sectionBounds=getAndCacheSectionBounds(sectionName);
         int sectionBaseline=(int)(viewTopOffset + sectionBounds.y);
-        int x=mIsRtl ? parent.getWidth() - mPaddingStart - mStartMargin : mPaddingStart;
+        int x=mIsRtl ? parent.getWidth() - mBackgroundPadding.left - mStartMargin : mBackgroundPadding.left;
         x+=(int)((mStartMargin - sectionBounds.x) / 2f);
         int y=child.getTop() + sectionBaseline;
         int appIndexInSection=items.get(pos).sectionAppIndex;

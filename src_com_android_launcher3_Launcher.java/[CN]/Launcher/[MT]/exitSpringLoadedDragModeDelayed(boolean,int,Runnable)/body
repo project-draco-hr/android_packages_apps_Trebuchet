@@ -1,10 +1,5 @@
 {
   if (mState != State.APPS_SPRING_LOADED && mState != State.WIDGETS_SPRING_LOADED)   return;
-  if (successfulDrop) {
-    if (!Launcher.DISABLE_ALL_APPS_SEARCH_INTEGRATION && mLauncherCallbacks != null) {
-      mLauncherCallbacks.onAllAppsHidden();
-    }
-  }
   mHandler.postDelayed(new Runnable(){
     @Override public void run(){
       if (successfulDrop) {
