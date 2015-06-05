@@ -1,3 +1,3 @@
 {
-  return hasVerticalHotseat() ? (mContent.getCountY() - (rank + 1)) : 0;
+  return mHasVerticalHotseat ? (mContent.getCountY() - (rank + 1)) : 0;
 }

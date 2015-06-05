@@ -25,14 +25,14 @@
   ViewGroup parent=null;
   int[][] matrix=null;
   if (keyCode == KeyEvent.KEYCODE_DPAD_UP && !profile.isVerticalBarLayout()) {
-    matrix=FocusLogic.createSparseMatrix(iconLayout,hotseatLayout,true,hotseat.getAllAppsButtonRank(),iconRank == hotseat.getAllAppsButtonRank());
+    matrix=FocusLogic.createSparseMatrix(iconLayout,hotseatLayout,true,profile.inv.hotseatAllAppsRank,iconRank == profile.inv.hotseatAllAppsRank);
     iconIndex+=iconParent.getChildCount();
     countX=iconLayout.getCountX();
     countY=iconLayout.getCountY() + hotseatLayout.getCountY();
     parent=iconParent;
   }
  else   if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT && profile.isVerticalBarLayout()) {
-    matrix=FocusLogic.createSparseMatrix(iconLayout,hotseatLayout,false,hotseat.getAllAppsButtonRank(),iconRank == hotseat.getAllAppsButtonRank());
+    matrix=FocusLogic.createSparseMatrix(iconLayout,hotseatLayout,false,profile.inv.hotseatAllAppsRank,iconRank == profile.inv.hotseatAllAppsRank);
     iconIndex+=iconParent.getChildCount();
     countX=iconLayout.getCountX() + hotseatLayout.getCountX();
     countY=iconLayout.getCountY();

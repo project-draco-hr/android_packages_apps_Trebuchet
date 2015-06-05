@@ -1,7 +1,5 @@
 {
   super(context,attrs,defStyle);
-  Resources r=context.getResources();
-  mTransposeLayoutWithOrientation=r.getBoolean(R.bool.hotseat_transpose_layout_with_orientation);
-  mIsLandscape=context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
   mLauncher=(Launcher)context;
+  mHasVerticalHotseat=mLauncher.getDeviceProfile().isVerticalBarLayout();
 }

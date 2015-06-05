@@ -7,7 +7,6 @@
     MemoryTracker.startTrackingMe(sContext,"L");
   }
   mIsScreenLarge=isScreenLarge(sContext.getResources());
-  mScreenDensity=sContext.getResources().getDisplayMetrics().density;
   mInvariantDeviceProfile=new InvariantDeviceProfile(sContext);
   mIconCache=new IconCache(sContext,mInvariantDeviceProfile);
   mWidgetCache=new WidgetPreviewLoader(sContext,mInvariantDeviceProfile,mIconCache);

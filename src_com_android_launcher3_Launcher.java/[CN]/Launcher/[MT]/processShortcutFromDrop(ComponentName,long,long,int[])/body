@@ -9,5 +9,5 @@
   }
   Intent createShortcutIntent=new Intent(Intent.ACTION_CREATE_SHORTCUT);
   createShortcutIntent.setComponent(componentName);
-  processShortcut(createShortcutIntent);
+  Utilities.startActivityForResultSafely(this,createShortcutIntent,REQUEST_CREATE_SHORTCUT);
 }

@@ -1,5 +1,4 @@
 {
-  Launcher.addDumpLog(TAG,"11683562 - loadWorkspace()",true);
   final long t=DEBUG_LOADERS ? SystemClock.uptimeMillis() : 0;
   final Context context=mContext;
   final ContentResolver contentResolver=context.getContentResolver();
