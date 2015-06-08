@@ -1,4 +1,0 @@
-{
-  super.onTerminate();
-  LauncherAppState.getInstance().onTerminate();
-}
