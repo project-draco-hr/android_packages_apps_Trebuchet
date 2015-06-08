@@ -28,4 +28,7 @@
   }
   mDragSource.enableAccessibleDrag(true);
   mDragSource.startDrag(cellInfo,true);
+  if (mLauncher.getDragController().isDragging()) {
+    mLauncher.getDragController().addDragListener(this);
+  }
 }

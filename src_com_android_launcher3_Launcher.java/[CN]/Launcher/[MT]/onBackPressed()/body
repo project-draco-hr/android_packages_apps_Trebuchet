@@ -2,8 +2,8 @@
   if (mLauncherCallbacks != null && mLauncherCallbacks.handleBackPressed()) {
     return;
   }
-  LauncherAccessibilityDelegate delegate=LauncherAppState.getInstance().getAccessibilityDelegate();
-  if (delegate != null && delegate.onBackPressed()) {
+  if (mDragController.isDragging()) {
+    mDragController.cancelDrag();
     return;
   }
   if (isAppsViewVisible()) {

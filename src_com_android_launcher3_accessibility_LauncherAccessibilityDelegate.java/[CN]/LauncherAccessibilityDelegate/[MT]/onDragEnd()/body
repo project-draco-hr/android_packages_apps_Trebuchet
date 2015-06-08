@@ -1,4 +1,5 @@
 {
+  mLauncher.getDragController().removeDragListener(this);
   mDragInfo=null;
   if (mDragSource != null) {
     mDragSource.enableAccessibleDrag(false);
