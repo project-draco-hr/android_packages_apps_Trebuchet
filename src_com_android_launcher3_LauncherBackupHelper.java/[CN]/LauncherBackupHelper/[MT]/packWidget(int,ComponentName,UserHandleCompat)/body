@@ -6,7 +6,7 @@
   widget.configure=info.configure != null;
   if (info.icon != 0) {
     widget.icon=new Resource();
-    Drawable fullResIcon=iconCache.getFullResIcon(provider.getPackageName(),info.icon);
+    Drawable fullResIcon=mIconCache.getFullResIcon(provider.getPackageName(),info.icon);
     Bitmap icon=Utilities.createIconBitmap(fullResIcon,mContext);
     widget.icon.data=Utilities.flattenBitmap(icon);
     widget.icon.dpi=dpi;

@@ -6,7 +6,11 @@
     writeJournal(newState,in);
     return;
   }
-  lazyInitAppState(true);
+  if (mDeviceProfileData == null) {
+    LauncherAppState app=LauncherAppState.getInstance();
+    mDeviceProfileData=initDeviceProfileData(app.getInvariantDeviceProfile());
+    mIconCache=app.getIconCache();
+  }
   Log.v(TAG,"lastBackupTime = " + in.t);
   mKeys.clear();
   applyJournal(in);
@@ -29,7 +33,7 @@
     }
     mExistingKeys.clear();
     if (!mBackupDataWasUpdated) {
-      mBackupDataWasUpdated=(in.profile == null) || !Arrays.equals(DeviceProfieData.toByteArray(in.profile),DeviceProfieData.toByteArray(getDeviceProfieData())) || (in.backupVersion != BACKUP_VERSION)|| (in.appVersion != getAppVersion());
+      mBackupDataWasUpdated=(in.profile == null) || !Arrays.equals(DeviceProfieData.toByteArray(in.profile),DeviceProfieData.toByteArray(mDeviceProfileData)) || (in.backupVersion != BACKUP_VERSION)|| (in.appVersion != getAppVersion());
     }
     if (mBackupDataWasUpdated) {
       mLastBackupRestoreTime=newBackupTime;

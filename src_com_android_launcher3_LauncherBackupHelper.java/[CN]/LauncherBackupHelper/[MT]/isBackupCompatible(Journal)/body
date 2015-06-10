@@ -1,5 +1,5 @@
 {
-  DeviceProfieData currentProfile=getDeviceProfieData();
+  DeviceProfieData currentProfile=mDeviceProfileData;
   DeviceProfieData oldProfile=oldState.profile;
   if (oldProfile == null || oldProfile.desktopCols == 0) {
     return true;

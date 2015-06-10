@@ -1,6 +1,5 @@
 {
   final ContentResolver cr=mContext.getContentResolver();
-  final WidgetPreviewLoader previewLoader=mLauncherAppState.getWidgetCache();
   final int dpi=mContext.getResources().getDisplayMetrics().densityDpi;
   int backupWidgetCount=0;
   String where=Favorites.ITEM_TYPE + "=" + Favorites.ITEM_TYPE_APPWIDGET+ " AND "+ getUserSelectionArg();
@@ -10,7 +9,6 @@
     while (cursor.moveToNext()) {
       final long id=cursor.getLong(ID_INDEX);
       final String providerName=cursor.getString(APPWIDGET_PROVIDER_INDEX);
-      final int spanX=cursor.getInt(SPANX_INDEX);
       final ComponentName provider=ComponentName.unflattenFromString(providerName);
       Key key=null;
       String backupKey=null;
@@ -30,7 +28,7 @@
         if (backupWidgetCount < MAX_WIDGETS_PER_PASS) {
           if (DEBUG)           Log.d(TAG,"saving widget " + backupKey);
           UserHandleCompat user=UserHandleCompat.myUserHandle();
-          writeRowToBackup(key,packWidget(dpi,previewLoader,mIconCache,provider,user),data);
+          writeRowToBackup(key,packWidget(dpi,provider,user),data);
           mKeys.add(key);
           backupWidgetCount++;
         }
