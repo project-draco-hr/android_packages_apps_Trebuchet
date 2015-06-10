@@ -1,7 +1,7 @@
 {
   List<UserHandle> users=mUserManager.getUserProfiles();
   if (users == null) {
-    return Collections.EMPTY_LIST;
+    return Collections.emptyList();
   }
   ArrayList<UserHandleCompat> compatUsers=new ArrayList<UserHandleCompat>(users.size());
   for (  UserHandle user : users) {
