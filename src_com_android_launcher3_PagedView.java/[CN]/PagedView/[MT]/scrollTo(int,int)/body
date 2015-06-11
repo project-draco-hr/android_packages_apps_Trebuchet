@@ -1,5 +1,8 @@
 {
   if (mFreeScroll) {
+    if (!mScroller.isFinished() && (x > mFreeScrollMaxScrollX || x < mFreeScrollMinScrollX)) {
+      forceFinishScroller();
+    }
     x=Math.min(x,mFreeScrollMaxScrollX);
     x=Math.max(x,mFreeScrollMinScrollX);
   }
