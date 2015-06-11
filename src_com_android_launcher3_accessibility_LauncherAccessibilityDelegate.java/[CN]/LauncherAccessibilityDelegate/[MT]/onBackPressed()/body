@@ -1,7 +1,0 @@
-{
-  if (isInAccessibleDrag()) {
-    cancelAccessibleDrag();
-    return true;
-  }
-  return false;
-}
