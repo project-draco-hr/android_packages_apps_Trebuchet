@@ -50,9 +50,6 @@
   registerReceiver(mCloseSystemDialogsReceiver,filter);
   mRotationEnabled=Utilities.isRotationAllowedForDevice(getApplicationContext());
   if (!mRotationEnabled) {
-    String updateOrientationBroadcastPermission=getResources().getString(R.string.receive_update_orientation_broadcasts_permission);
-    registerReceiver(mScreenOrientationSettingReceiver,new IntentFilter(Utilities.SCREEN_ROTATION_SETTING_INTENT),updateOrientationBroadcastPermission,null);
-    mScreenOrientationSettingReceiverRegistered=true;
     mRotationEnabled=Utilities.isAllowRotationPrefEnabled(getApplicationContext());
   }
   setOrientation();
