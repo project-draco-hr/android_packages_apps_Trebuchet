@@ -5,11 +5,11 @@
   if (DEBUG_SECTION_MARGIN) {
     Paint p=new Paint();
     p.setColor(0x33ff0000);
-    c.drawRect(mBackgroundPadding.left,0,mBackgroundPadding.left + mStartMargin,parent.getMeasuredHeight(),p);
+    c.drawRect(mBackgroundPadding.left,0,mBackgroundPadding.left + mSectionNamesMargin,parent.getMeasuredHeight(),p);
   }
-  DeviceProfile grid=mLauncher.getDeviceProfile();
   List<AlphabeticalAppsList.AdapterItem> items=mApps.getAdapterItems();
   boolean hasDrawnPredictedAppsDivider=false;
+  boolean showSectionNames=mSectionNamesMargin > 0;
   int childCount=parent.getChildCount();
   int lastSectionTop=0;
   int lastSectionHeight=0;
@@ -24,7 +24,7 @@
       c.drawLine(mBackgroundPadding.left,top,parent.getWidth() - mBackgroundPadding.right,top,mPredictedAppsDividerPaint);
       hasDrawnPredictedAppsDivider=true;
     }
- else     if (grid.isPhone && shouldDrawItemSection(holder,i,items)) {
+ else     if (showSectionNames && shouldDrawItemSection(holder,i,items)) {
       int viewTopOffset=(2 * child.getPaddingTop());
       int pos=holder.getPosition();
       AlphabeticalAppsList.AdapterItem item=items.get(pos);
@@ -41,8 +41,8 @@
         }
         PointF sectionBounds=getAndCacheSectionBounds(sectionName);
         int sectionBaseline=(int)(viewTopOffset + sectionBounds.y);
-        int x=mIsRtl ? parent.getWidth() - mBackgroundPadding.left - mStartMargin : mBackgroundPadding.left;
-        x+=(int)((mStartMargin - sectionBounds.x) / 2f);
+        int x=mIsRtl ? parent.getWidth() - mBackgroundPadding.left - mSectionNamesMargin : mBackgroundPadding.left;
+        x+=(int)((mSectionNamesMargin - sectionBounds.x) / 2f);
         int y=child.getTop() + sectionBaseline;
         int appIndexInSection=items.get(pos).sectionAppIndex;
         int nextRowPos=Math.min(items.size() - 1,pos + mAppsPerRow - (appIndexInSection % mAppsPerRow));

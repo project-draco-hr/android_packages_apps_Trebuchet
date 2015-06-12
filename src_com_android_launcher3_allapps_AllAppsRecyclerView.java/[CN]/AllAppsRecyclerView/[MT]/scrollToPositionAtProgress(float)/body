@@ -22,6 +22,9 @@
     }
     lastScrollSection=scrollSection;
   }
-  layoutManager.scrollToPositionWithOffset(lastScrollSection.appItem.position,0);
+  if (mLastFastscrollPosition != lastScrollSection.appItem.position) {
+    mLastFastscrollPosition=lastScrollSection.appItem.position;
+    layoutManager.scrollToPositionWithOffset(lastScrollSection.appItem.position,0);
+  }
   return lastScrollSection.sectionName;
 }

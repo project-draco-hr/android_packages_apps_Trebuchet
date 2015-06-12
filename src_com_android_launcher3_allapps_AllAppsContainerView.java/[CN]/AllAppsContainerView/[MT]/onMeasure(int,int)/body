@@ -5,9 +5,11 @@
   if (mNumAppsPerRow != grid.allAppsNumCols || mNumPredictedAppsPerRow != grid.allAppsNumPredictiveCols) {
     mNumAppsPerRow=grid.allAppsNumCols;
     mNumPredictedAppsPerRow=grid.allAppsNumPredictiveCols;
+    boolean mergeSectionsFully=mSectionNamesMargin == 0 || !grid.isPhone;
+    AlphabeticalAppsList.MergeAlgorithm mergeAlgorithm=mergeSectionsFully ? new FullMergeAlgorithm() : new SimpleSectionMergeAlgorithm((int)Math.ceil(mNumAppsPerRow / 2f),MIN_ROWS_IN_MERGED_SECTION_PHONE,MAX_NUM_MERGES_PHONE);
     mAppsRecyclerView.setNumAppsPerRow(mNumAppsPerRow,mNumPredictedAppsPerRow);
     mAdapter.setNumAppsPerRow(mNumAppsPerRow);
-    mApps.setNumAppsPerRow(mNumAppsPerRow,mNumPredictedAppsPerRow);
+    mApps.setNumAppsPerRow(mNumAppsPerRow,mNumPredictedAppsPerRow,mergeAlgorithm);
   }
   super.onMeasure(widthMeasureSpec,heightMeasureSpec);
 }

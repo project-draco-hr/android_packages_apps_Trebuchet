@@ -5,6 +5,7 @@
   mLayoutInflater=LayoutInflater.from(context);
   DeviceProfile grid=mLauncher.getDeviceProfile();
   mPredictionBarHeight=(int)(grid.allAppsIconSizePx + grid.iconDrawablePaddingOriginalPx + Utilities.calculateTextHeight(grid.allAppsIconTextSizePx)+ 2 * res.getDimensionPixelSize(R.dimen.all_apps_icon_top_bottom_padding) + 2 * res.getDimensionPixelSize(R.dimen.all_apps_prediction_bar_top_bottom_padding));
+  mSectionNamesMargin=res.getDimensionPixelSize(R.dimen.all_apps_grid_view_start_margin);
   mApps=new AlphabeticalAppsList(context);
   mApps.setAdapterChangedCallback(this);
   mAdapter=new AllAppsGridAdapter(context,mApps,this,this,mLauncher,this);
