@@ -1,9 +1,5 @@
 {
   super.onDestroy();
-  if (mScreenOrientationSettingReceiverRegistered) {
-    unregisterReceiver(mScreenOrientationSettingReceiver);
-    mScreenOrientationSettingReceiverRegistered=false;
-  }
   mHandler.removeMessages(ADVANCE_MSG);
   mHandler.removeMessages(0);
   mWorkspace.removeCallbacks(mBuildLayersRunnable);
