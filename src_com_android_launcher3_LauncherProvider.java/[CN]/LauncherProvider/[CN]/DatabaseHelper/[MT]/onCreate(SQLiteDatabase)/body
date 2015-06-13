@@ -9,9 +9,9 @@
   addWorkspacesTable(db);
   if (mAppWidgetHost != null) {
     mAppWidgetHost.deleteHost();
-    sendAppWidgetResetNotify();
+    LauncherAppState.getLauncherProvider().notifyAppWidgetHostReset();
   }
   mMaxItemId=initializeMaxItemId(db);
   setFlagEmptyDbCreated();
-  ManagedProfileHeuristic.processAllUsers(Collections.EMPTY_LIST,mContext);
+  ManagedProfileHeuristic.processAllUsers(Collections.<UserHandleCompat>emptyList(),mContext);
 }

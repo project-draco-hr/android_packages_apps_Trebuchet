@@ -1,4 +1,0 @@
-{
-  final ContentResolver resolver=mContext.getContentResolver();
-  resolver.notifyChange(CONTENT_APPWIDGET_RESET_URI,null);
-}

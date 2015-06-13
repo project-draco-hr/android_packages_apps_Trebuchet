@@ -1,4 +1,5 @@
 {
+  getLauncherProvider().setLauncherProviderChangeListener(launcher);
   mModel.initialize(launcher);
   mAccessibilityDelegate=((launcher != null) && Utilities.isLmpOrAbove()) ? new LauncherAccessibilityDelegate(launcher) : null;
   return mModel;

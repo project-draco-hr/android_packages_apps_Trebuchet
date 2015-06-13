@@ -1,0 +1,10 @@
+{
+  new MainThreadExecutor().execute(new Runnable(){
+    @Override public void run(){
+      if (mListener != null) {
+        mListener.onAppWidgetHostReset();
+      }
+    }
+  }
+);
+}

@@ -17,7 +17,6 @@
   mAppWidgetHost=null;
   mWidgetsToAdvance.clear();
   TextKeyListener.getInstance().release();
-  getContentResolver().unregisterContentObserver(mWidgetObserver);
   unregisterReceiver(mCloseSystemDialogsReceiver);
   mDragLayer.clearAllResizeFrames();
   ((ViewGroup)mWorkspace.getParent()).removeAllViews();

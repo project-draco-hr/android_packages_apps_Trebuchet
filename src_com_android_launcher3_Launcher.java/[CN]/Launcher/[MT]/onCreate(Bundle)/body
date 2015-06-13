@@ -9,7 +9,6 @@
   super.onCreate(savedInstanceState);
   LauncherAppState.setApplicationContext(getApplicationContext());
   LauncherAppState app=LauncherAppState.getInstance();
-  LauncherAppState.getLauncherProvider().setLauncherProviderChangeListener(this);
   mDeviceProfile=getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE ? app.getInvariantDeviceProfile().landscapeProfile : app.getInvariantDeviceProfile().portraitProfile;
   mSharedPrefs=getSharedPreferences(LauncherAppState.getSharedPreferencesKey(),Context.MODE_PRIVATE);
   mIsSafeModeEnabled=getPackageManager().isSafeMode();
@@ -29,7 +28,6 @@
   setContentView(R.layout.launcher);
   setupViews();
   mDeviceProfile.layout(this);
-  registerContentObservers();
   lockAllApps();
   mSavedState=savedInstanceState;
   restoreState(mSavedState);
