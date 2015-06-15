@@ -1,4 +1,4 @@
 {
-  removeViewAt(index);
+  removeMarkerForView(index);
   super.removeViewAt(index);
 }
