@@ -1,5 +1,0 @@
-{
-  SharedPreferences sharedPrefs=context.getSharedPreferences(LauncherAppState.getSharedPreferencesKey(),Context.MODE_PRIVATE);
-  boolean allowRotationPref=sharedPrefs.getBoolean(ALLOW_ROTATION_PREFERENCE_KEY,false);
-  return sForceEnableRotation || allowRotationPref;
-}

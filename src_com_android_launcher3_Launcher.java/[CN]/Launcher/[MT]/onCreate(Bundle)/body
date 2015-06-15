@@ -50,7 +50,7 @@
   registerReceiver(mCloseSystemDialogsReceiver,filter);
   mRotationEnabled=Utilities.isRotationAllowedForDevice(getApplicationContext());
   if (!mRotationEnabled) {
-    mRotationEnabled=Utilities.isAllowRotationPrefEnabled(getApplicationContext());
+    mRotationEnabled=Utilities.isAllowRotationPrefEnabled(getApplicationContext(),false);
   }
   setOrientation();
   if (mLauncherCallbacks != null) {
