@@ -1,4 +1,5 @@
 {
+  mContent=findViewById(R.id.content);
   mView=(WidgetsRecyclerView)findViewById(R.id.widgets_list_view);
   mView.setAdapter(mAdapter);
   mView.setLayoutManager(new LinearLayoutManager(getContext()){
@@ -9,5 +10,4 @@
   }
 );
   mPadding.set(getPaddingLeft(),getPaddingTop(),getPaddingRight(),getPaddingBottom());
-  onUpdatePaddings();
 }

@@ -3,7 +3,6 @@
   final Resources res=mLauncher.getResources();
   PrivateTransitionCallbacks cb=new PrivateTransitionCallbacks(){
     @Override public void onRevealViewVisible(    View revealView,    View contentView,    View allAppsButtonView){
-      revealView.setBackground(res.getDrawable(R.drawable.quantum_panel_dark));
     }
     @Override public float getMaterialRevealViewFinalAlpha(    View revealView){
       return 0.3f;
@@ -13,5 +12,5 @@
     }
   }
 ;
-  startAnimationToOverlay(Workspace.State.OVERVIEW_HIDDEN,toView,toView.getContentView(),toView.getRevealView(),animated,true,cb);
+  startAnimationToOverlay(Workspace.State.OVERVIEW_HIDDEN,toView,toView.getContentView(),toView.getRevealView(),null,animated,true,cb);
 }

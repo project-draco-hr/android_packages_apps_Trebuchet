@@ -1,0 +1,8 @@
+{
+  if (v == mSearchView) {
+    showSearchField();
+  }
+ else   if (v == mDismissSearchButtonView) {
+    hideSearchField(true,mFocusRecyclerViewRunnable);
+  }
+}

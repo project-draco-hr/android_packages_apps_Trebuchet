@@ -1,0 +1,17 @@
+{
+  Rect padding;
+  Rect searchBarBounds=new Rect(mSearchBarBounds);
+  if (mSearchBarBounds.isEmpty()) {
+    padding=new Rect(mInsets.left + mContainerBoundsInset,(mHasSearchBar ? 0 : (mInsets.top + mContainerBoundsInset)),mInsets.right + mContainerBoundsInset,mInsets.bottom + mContainerBoundsInset);
+    searchBarBounds.set(mInsets.left + mContainerBoundsInset,mInsets.top + mContainerBoundsInset,getMeasuredWidth() - (mInsets.right + mContainerBoundsInset),0);
+  }
+ else {
+    padding=new Rect(mSearchBarBounds.left,(mHasSearchBar ? 0 : (mInsets.top + mContainerBoundsInset)),getMeasuredWidth() - mSearchBarBounds.right,mInsets.bottom + mContainerBoundsInset);
+  }
+  if (!padding.equals(mContentPadding) || !searchBarBounds.equals(mSearchBarBounds)) {
+    mContentPadding.set(padding);
+    mContentBounds.set(padding.left,padding.top,getMeasuredWidth() - padding.right,getMeasuredHeight() - padding.bottom);
+    mSearchBarBounds.set(searchBarBounds);
+    onUpdateBackgroundAndPaddings(mSearchBarBounds,padding);
+  }
+}

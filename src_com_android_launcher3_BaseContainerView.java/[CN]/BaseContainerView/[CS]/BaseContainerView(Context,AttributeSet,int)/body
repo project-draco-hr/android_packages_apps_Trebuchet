@@ -1,4 +1,4 @@
 {
   super(context,attrs,defStyleAttr);
-  mFixedBoundsContainerInset=context.getResources().getDimensionPixelSize(R.dimen.container_fixed_bounds_inset);
+  mContainerBoundsInset=getResources().getDimensionPixelSize(R.dimen.container_bounds_inset);
 }

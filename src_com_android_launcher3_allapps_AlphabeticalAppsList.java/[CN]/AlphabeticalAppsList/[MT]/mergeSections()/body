@@ -1,4 +1,7 @@
 {
+  if (mNumAppsPerRow == 0) {
+    return;
+  }
   if (AllAppsContainerView.GRID_MERGE_SECTIONS && !hasFilter()) {
     int sectionAppCount=0;
     for (int i=0; i < mSections.size() - 1; i++) {

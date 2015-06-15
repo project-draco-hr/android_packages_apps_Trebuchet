@@ -1,13 +1,9 @@
 {
   int appsViewLeftMarginPx=res.getDimensionPixelSize(R.dimen.all_apps_grid_view_start_margin);
   int allAppsCellWidthGap=res.getDimensionPixelSize(R.dimen.all_apps_icon_width_gap);
-  int availableAppsWidthPx=(containerWidth > 0) ? containerWidth : availableWidthPx;
+  int availableAppsWidthPx=(recyclerViewWidth > 0) ? recyclerViewWidth : availableWidthPx;
   int numAppsCols=(availableAppsWidthPx - appsViewLeftMarginPx) / (allAppsIconSizePx + allAppsCellWidthGap);
   int numPredictiveAppCols=Math.max(inv.minAllAppsPredictionColumns,numAppsCols);
-  if ((numAppsCols != allAppsNumCols) || (numPredictiveAppCols != allAppsNumPredictiveCols)) {
-    allAppsNumCols=numAppsCols;
-    allAppsNumPredictiveCols=numPredictiveAppCols;
-    return true;
-  }
-  return false;
+  allAppsNumCols=numAppsCols;
+  allAppsNumPredictiveCols=numPredictiveAppCols;
 }

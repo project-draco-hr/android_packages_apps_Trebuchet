@@ -1,0 +1,13 @@
+{
+  int availableWidth=!mContentBounds.isEmpty() ? mContentBounds.width() : MeasureSpec.getSize(widthMeasureSpec);
+  DeviceProfile grid=mLauncher.getDeviceProfile();
+  grid.updateAppsViewNumCols(getResources(),availableWidth);
+  if (mNumAppsPerRow != grid.allAppsNumCols || mNumPredictedAppsPerRow != grid.allAppsNumPredictiveCols) {
+    mNumAppsPerRow=grid.allAppsNumCols;
+    mNumPredictedAppsPerRow=grid.allAppsNumPredictiveCols;
+    mAppsRecyclerView.setNumAppsPerRow(mNumAppsPerRow,mNumPredictedAppsPerRow);
+    mAdapter.setNumAppsPerRow(mNumAppsPerRow);
+    mApps.setNumAppsPerRow(mNumAppsPerRow,mNumPredictedAppsPerRow);
+  }
+  super.onMeasure(widthMeasureSpec,heightMeasureSpec);
+}

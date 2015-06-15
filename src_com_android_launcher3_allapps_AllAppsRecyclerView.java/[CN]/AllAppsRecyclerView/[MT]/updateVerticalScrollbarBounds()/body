@@ -1,6 +1,6 @@
 {
   List<AlphabeticalAppsList.AdapterItem> items=mApps.getAdapterItems();
-  if (items.isEmpty()) {
+  if (items.isEmpty() || mNumAppsPerRow == 0) {
     verticalScrollbarBounds.setEmpty();
     return;
   }
@@ -12,7 +12,7 @@
     int height=getHeight() - getPaddingTop() - getPaddingBottom();
     int totalScrollHeight=rowCount * scrollPosState.rowHeight + predictionBarHeight;
     if (totalScrollHeight > height) {
-      int scrollbarHeight=Math.max(mScrollbarMinHeight,(int)(height / ((float)totalScrollHeight / height)));
+      int scrollbarHeight=(int)(height / ((float)totalScrollHeight / height));
       if (Utilities.isRtl(getResources())) {
         x=mBackgroundPadding.left;
       }

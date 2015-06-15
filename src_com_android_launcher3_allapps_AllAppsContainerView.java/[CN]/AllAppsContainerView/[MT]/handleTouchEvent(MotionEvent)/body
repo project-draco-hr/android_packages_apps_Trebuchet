@@ -12,8 +12,8 @@ case MotionEvent.ACTION_DOWN:
         mPredictionIconCheckForLongPress.postCheckForLongPress();
       }
     }
-  if (!mFixedBounds.isEmpty()) {
-    Rect tmpRect=new Rect(mFixedBounds);
+  if (!mContentBounds.isEmpty()) {
+    Rect tmpRect=new Rect(mContentBounds);
     tmpRect.inset(-grid.allAppsIconSizePx / 2,0);
     if (ev.getX() < tmpRect.left || ev.getX() > tmpRect.right) {
       mBoundsCheckLastTouchDownPos.set(x,y);

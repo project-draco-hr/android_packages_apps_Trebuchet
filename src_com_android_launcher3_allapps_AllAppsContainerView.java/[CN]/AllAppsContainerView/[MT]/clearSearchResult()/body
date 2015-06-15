@@ -1,0 +1,6 @@
+{
+  mApps.setOrderedFilter(null);
+  mSearchQueryBuilder.clear();
+  mSearchQueryBuilder.clearSpans();
+  Selection.setSelection(mSearchQueryBuilder,0);
+}

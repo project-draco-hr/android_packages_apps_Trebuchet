@@ -1,0 +1,21 @@
+{
+  if (!ALLOW_SINGLE_APP_LAUNCH) {
+    return false;
+  }
+  if (actionId != EditorInfo.IME_ACTION_DONE) {
+    return false;
+  }
+  if (mApps.getSize() != 1) {
+    return false;
+  }
+  List<AlphabeticalAppsList.AdapterItem> items=mApps.getAdapterItems();
+  for (int i=0; i < items.size(); i++) {
+    AlphabeticalAppsList.AdapterItem item=items.get(i);
+    if (item.viewType == AllAppsGridAdapter.ICON_VIEW_TYPE) {
+      mAppsRecyclerView.getChildAt(i).performClick();
+      mInputMethodManager.hideSoftInputFromWindow(mContainerView.getWindowToken(),0);
+      return true;
+    }
+  }
+  return false;
+}

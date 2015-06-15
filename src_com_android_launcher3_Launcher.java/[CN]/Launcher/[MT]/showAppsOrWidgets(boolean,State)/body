@@ -6,10 +6,7 @@
     return false;
   }
   if (toState == State.APPS) {
-    mStateTransitionAnimation.startAnimationToAllApps(animated);
-    if (!Launcher.DISABLE_ALL_APPS_SEARCH_INTEGRATION && mLauncherCallbacks != null) {
-      mLauncherCallbacks.onAllAppsShown();
-    }
+    mStateTransitionAnimation.startAnimationToAllApps(mState,animated);
   }
  else {
     mStateTransitionAnimation.startAnimationToWidgets(animated);

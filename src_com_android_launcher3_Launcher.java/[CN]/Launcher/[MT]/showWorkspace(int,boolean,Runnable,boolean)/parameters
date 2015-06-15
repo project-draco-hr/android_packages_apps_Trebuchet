@@ -1,4 +1,0 @@
-int snapToPage
-boolean animated
-Runnable onCompleteRunnable
-boolean notifyLauncherCallbacks

@@ -8,5 +8,5 @@
   }
   mNumAppsPerRow=numAppsPerRow;
   mNumPredictedAppsPerRow=numPredictedAppsPerRow;
-  onAppsUpdated();
+  updateAdapterItems();
 }

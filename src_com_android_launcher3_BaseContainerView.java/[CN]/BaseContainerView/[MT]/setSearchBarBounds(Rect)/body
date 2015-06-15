@@ -1,0 +1,9 @@
+{
+  mSearchBarBounds.set(bounds);
+  post(new Runnable(){
+    @Override public void run(){
+      updateBackgroundAndPaddings();
+    }
+  }
+);
+}

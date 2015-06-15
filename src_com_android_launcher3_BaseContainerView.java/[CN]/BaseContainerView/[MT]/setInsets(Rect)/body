@@ -1,5 +1,4 @@
 {
   mInsets.set(insets);
-  onUpdateBackgrounds();
-  onUpdatePaddings();
+  updateBackgroundAndPaddings();
 }

@@ -1,25 +1,5 @@
 {
   mLauncherCallbacks=callbacks;
-  mLauncherCallbacks.setLauncherAppsCallback(new Launcher.LauncherAppsCallbacks(){
-    @Override public void onAllAppsBoundsChanged(    Rect bounds){
-      if (LOGD) {
-        Log.d(TAG,"onAllAppsBoundsChanged(Rect): " + bounds);
-      }
-      mAppsView.setFixedBounds(bounds);
-      mWidgetsView.setFixedBounds(bounds);
-    }
-    @Override public void dismissAllApps(){
-      if (!DISABLE_ALL_APPS_SEARCH_INTEGRATION) {
-        if (!mPaused) {
-          showWorkspace(WorkspaceStateTransitionAnimation.SCROLL_TO_CURRENT_PAGE,true,null,false);
-        }
-      }
-    }
-    @Override public void setSearchManager(    AppSearchManager manager){
-      mAppsView.setSearchManager(manager);
-    }
-  }
-);
   mLauncherCallbacks.setLauncherSearchCallback(new Launcher.LauncherSearchCallbacks(){
     private boolean mImportanceStored=false;
     private int mWorkspaceImportanceForAccessibility=View.IMPORTANT_FOR_ACCESSIBILITY_AUTO;

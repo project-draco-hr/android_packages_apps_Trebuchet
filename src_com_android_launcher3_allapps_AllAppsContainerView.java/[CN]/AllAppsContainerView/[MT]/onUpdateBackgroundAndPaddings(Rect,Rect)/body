@@ -1,0 +1,34 @@
+{
+  boolean isRtl=Utilities.isRtl(getResources());
+  InsetDrawable background=new InsetDrawable(getResources().getDrawable(R.drawable.quantum_panel_shape),padding.left,0,padding.right,0);
+  mContainerView.setBackground(background);
+  mRevealView.setBackground(background.getConstantState().newDrawable());
+  mAppsRecyclerView.updateBackgroundPadding(padding);
+  mAdapter.updateBackgroundPadding(padding);
+  mContent.setPadding(0,padding.top,0,padding.bottom);
+  mContainerView.setPadding(0,0,0,0);
+  DeviceProfile grid=mLauncher.getDeviceProfile();
+  int startMargin=grid.isPhone ? getResources().getDimensionPixelSize(R.dimen.all_apps_grid_view_start_margin) : mAppsRecyclerView.getScrollbarWidth();
+  if (isRtl) {
+    mAppsRecyclerView.setPadding(padding.left + mAppsRecyclerView.getScrollbarWidth(),0,padding.right + startMargin,0);
+  }
+ else {
+    mAppsRecyclerView.setPadding(padding.left + startMargin,0,padding.right + mAppsRecyclerView.getScrollbarWidth(),0);
+  }
+  if (mSearchBarView != null) {
+    Rect backgroundPadding=new Rect();
+    if (mSearchBarView.getBackground() != null) {
+      mSearchBarView.getBackground().getPadding(backgroundPadding);
+    }
+    LinearLayout.LayoutParams lp=(LinearLayout.LayoutParams)mSearchBarContainerView.getLayoutParams();
+    lp.leftMargin=searchBarBounds.left - backgroundPadding.left;
+    lp.topMargin=searchBarBounds.top - backgroundPadding.top;
+    lp.rightMargin=(getMeasuredWidth() - searchBarBounds.right) - backgroundPadding.right;
+    mSearchBarContainerView.requestLayout();
+  }
+  mPredictionBarView=(ViewGroup)findViewById(R.id.prediction_bar);
+  FrameLayout.LayoutParams lp=(FrameLayout.LayoutParams)mPredictionBarView.getLayoutParams();
+  lp.leftMargin=padding.left + mAppsRecyclerView.getScrollbarWidth();
+  lp.rightMargin=padding.right + mAppsRecyclerView.getScrollbarWidth();
+  mPredictionBarView.requestLayout();
+}
