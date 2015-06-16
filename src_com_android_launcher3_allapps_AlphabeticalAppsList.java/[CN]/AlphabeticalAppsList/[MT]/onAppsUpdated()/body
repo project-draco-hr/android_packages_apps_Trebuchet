@@ -1,4 +1,6 @@
 {
+  mApps.clear();
+  mApps.addAll(mComponentToAppMap.values());
   Collections.sort(mApps,mAppNameComparator.getAppInfoComparator());
   Locale curLocale=mLauncher.getResources().getConfiguration().locale;
   TreeMap<String,ArrayList<AppInfo>> sectionMap=null;

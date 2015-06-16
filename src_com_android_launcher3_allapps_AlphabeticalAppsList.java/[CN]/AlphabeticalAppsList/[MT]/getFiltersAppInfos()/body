@@ -2,29 +2,12 @@
   if (mSearchResults == null) {
     return mApps;
   }
-  int total=mSearchResults.size();
-  final HashMap<ComponentName,Integer> sortOrder=new HashMap<>(total);
-  for (int i=0; i < total; i++) {
-    sortOrder.put(mSearchResults.get(i),i);
-  }
   ArrayList<AppInfo> result=new ArrayList<>();
-  for (  AppInfo info : mApps) {
-    if (sortOrder.containsKey(info.componentName)) {
-      result.add(info);
+  for (  ComponentKey key : mSearchResults) {
+    AppInfo match=mComponentToAppMap.get(key);
+    if (match != null) {
+      result.add(match);
     }
   }
-  Collections.sort(result,new AbstractUserComparator<AppInfo>(LauncherAppState.getInstance().getContext()){
-    @Override public int compare(    AppInfo lhs,    AppInfo rhs){
-      Integer indexA=sortOrder.get(lhs.componentName);
-      int result=indexA.compareTo(sortOrder.get(rhs.componentName));
-      if (result == 0) {
-        return super.compare(lhs,rhs);
-      }
- else {
-        return result;
-      }
-    }
-  }
-);
   return result;
 }

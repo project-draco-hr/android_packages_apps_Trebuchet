@@ -1,6 +1,3 @@
 {
-  for (  AppInfo info : apps) {
-    mApps.add(info);
-  }
-  onAppsUpdated();
+  updateApps(apps);
 }

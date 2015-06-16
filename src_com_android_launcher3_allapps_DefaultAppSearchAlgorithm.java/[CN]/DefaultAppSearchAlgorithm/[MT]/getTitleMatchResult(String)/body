@@ -1,0 +1,11 @@
+{
+  final String queryTextLower=query.toLowerCase();
+  final String[] queryWords=SPLIT_PATTERN.split(queryTextLower);
+  final ArrayList<ComponentKey> result=new ArrayList<>();
+  for (  AppInfo info : mApps) {
+    if (matches(info,queryWords)) {
+      result.add(info.toComponentKey());
+    }
+  }
+  return result;
+}

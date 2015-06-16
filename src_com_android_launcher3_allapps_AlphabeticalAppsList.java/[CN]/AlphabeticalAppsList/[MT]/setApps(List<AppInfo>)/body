@@ -1,5 +1,4 @@
 {
-  mApps.clear();
-  mApps.addAll(apps);
-  onAppsUpdated();
+  mComponentToAppMap.clear();
+  addApps(apps);
 }
