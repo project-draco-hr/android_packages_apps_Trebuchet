@@ -6,4 +6,5 @@
     SQLiteDatabase.deleteDatabase(dbFile);
   }
   mOpenHelper=new DatabaseHelper(getContext());
+  mOpenHelper.mListener=mListener;
 }
