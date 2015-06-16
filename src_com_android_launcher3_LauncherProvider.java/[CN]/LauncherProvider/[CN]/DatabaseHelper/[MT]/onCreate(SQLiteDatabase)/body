@@ -9,7 +9,14 @@
   addWorkspacesTable(db);
   if (mAppWidgetHost != null) {
     mAppWidgetHost.deleteHost();
-    LauncherAppState.getLauncherProvider().notifyAppWidgetHostReset();
+    new MainThreadExecutor().execute(new Runnable(){
+      @Override public void run(){
+        if (mListener != null) {
+          mListener.onAppWidgetHostReset();
+        }
+      }
+    }
+);
   }
   mMaxItemId=initializeMaxItemId(db);
   setFlagEmptyDbCreated();
