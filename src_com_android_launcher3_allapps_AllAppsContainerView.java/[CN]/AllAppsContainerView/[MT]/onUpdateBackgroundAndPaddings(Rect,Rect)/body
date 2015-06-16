@@ -7,13 +7,12 @@
   mAdapter.updateBackgroundPadding(padding);
   mContent.setPadding(0,padding.top,0,padding.bottom);
   mContainerView.setPadding(0,0,0,0);
-  DeviceProfile grid=mLauncher.getDeviceProfile();
-  int startMargin=grid.isPhone ? getResources().getDimensionPixelSize(R.dimen.all_apps_grid_view_start_margin) : mAppsRecyclerView.getScrollbarWidth();
+  int startInset=Math.max(mSectionNamesMargin,mAppsRecyclerView.getScrollbarWidth());
   if (isRtl) {
-    mAppsRecyclerView.setPadding(padding.left + mAppsRecyclerView.getScrollbarWidth(),0,padding.right + startMargin,0);
+    mAppsRecyclerView.setPadding(padding.left + mAppsRecyclerView.getScrollbarWidth(),0,padding.right + startInset,0);
   }
  else {
-    mAppsRecyclerView.setPadding(padding.left + startMargin,0,padding.right + mAppsRecyclerView.getScrollbarWidth(),0);
+    mAppsRecyclerView.setPadding(padding.left + startInset,0,padding.right + mAppsRecyclerView.getScrollbarWidth(),0);
   }
   if (mSearchBarView != null) {
     Rect backgroundPadding=new Rect();

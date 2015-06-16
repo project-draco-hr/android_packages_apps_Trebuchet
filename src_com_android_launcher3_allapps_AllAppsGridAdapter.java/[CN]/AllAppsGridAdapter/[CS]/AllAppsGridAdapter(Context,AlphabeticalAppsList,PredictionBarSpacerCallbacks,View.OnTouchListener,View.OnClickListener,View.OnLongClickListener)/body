@@ -6,12 +6,12 @@
   mGridSizer=new GridSpanSizer();
   mGridLayoutMgr=new GridLayoutManager(context,1,GridLayoutManager.VERTICAL,false);
   mGridLayoutMgr.setSpanSizeLookup(mGridSizer);
-  mItemDecoration=new GridItemDecoration(context);
+  mItemDecoration=new GridItemDecoration();
   mLayoutInflater=LayoutInflater.from(context);
   mTouchListener=touchListener;
   mIconClickListener=iconClickListener;
   mIconLongClickListener=iconLongClickListener;
-  mStartMargin=res.getDimensionPixelSize(R.dimen.all_apps_grid_view_start_margin);
+  mSectionNamesMargin=res.getDimensionPixelSize(R.dimen.all_apps_grid_view_start_margin);
   mSectionHeaderOffset=res.getDimensionPixelSize(R.dimen.all_apps_grid_section_y_offset);
   mSectionTextPaint=new Paint();
   mSectionTextPaint.setTextSize(res.getDimensionPixelSize(R.dimen.all_apps_grid_section_text_size));
