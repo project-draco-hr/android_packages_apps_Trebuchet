@@ -35,17 +35,17 @@
     if (!mPredictedApps.isEmpty()) {
       AdapterItem sectionItem=AdapterItem.asPredictionBarSpacer(position++);
       mAdapterItems.add(sectionItem);
+      lastFastScrollerSectionInfo=new FastScrollSectionInfo("");
+      lastFastScrollerSectionInfo.fastScrollToItem=sectionItem;
+      mFastScrollerSections.add(lastFastScrollerSectionInfo);
     }
   }
-  List<AppInfo> apps=getFiltersAppInfos();
-  int numApps=apps.size();
-  for (int i=0; i < numApps; i++) {
-    AppInfo info=apps.get(i);
+  for (  AppInfo info : getFiltersAppInfos()) {
     String sectionName=getAndUpdateCachedSectionName(info.title);
     if (lastSectionInfo == null || !sectionName.equals(lastSectionName)) {
       lastSectionName=sectionName;
       lastSectionInfo=new SectionInfo();
-      lastFastScrollerSectionInfo=new FastScrollSectionInfo(sectionName,(float)appIndex / numApps);
+      lastFastScrollerSectionInfo=new FastScrollSectionInfo(sectionName);
       mSections.add(lastSectionInfo);
       mFastScrollerSections.add(lastFastScrollerSectionInfo);
       if (!hasFilter()) {
@@ -56,12 +56,45 @@
     AdapterItem appItem=AdapterItem.asApp(position++,lastSectionInfo,sectionName,lastSectionInfo.numApps++,info,appIndex++);
     if (lastSectionInfo.firstAppItem == null) {
       lastSectionInfo.firstAppItem=appItem;
-      lastFastScrollerSectionInfo.appItem=appItem;
+      lastFastScrollerSectionInfo.fastScrollToItem=appItem;
     }
     mAdapterItems.add(appItem);
     mFilteredApps.add(info);
   }
   mergeSections();
+  if (mNumAppsPerRow != 0) {
+    int numAppsInSection=0;
+    int numAppsInRow=0;
+    int rowIndex=-1;
+    for (    AdapterItem item : mAdapterItems) {
+      item.rowIndex=0;
+      if (item.viewType == AllAppsGridAdapter.SECTION_BREAK_VIEW_TYPE) {
+        numAppsInSection=0;
+      }
+ else       if (item.viewType == AllAppsGridAdapter.ICON_VIEW_TYPE) {
+        if (numAppsInSection % mNumAppsPerRow == 0) {
+          numAppsInRow=0;
+          rowIndex++;
+        }
+        item.rowIndex=rowIndex;
+        item.rowAppIndex=numAppsInRow;
+        numAppsInSection++;
+        numAppsInRow++;
+      }
+    }
+    mNumAppRowsInAdapter=rowIndex + 1;
+    float rowFraction=1f / (mNumAppRowsInAdapter + (mPredictedApps.isEmpty() ? 0 : 1));
+    float initialOffset=mPredictedApps.isEmpty() ? 0 : rowFraction;
+    for (    FastScrollSectionInfo info : mFastScrollerSections) {
+      AdapterItem item=info.fastScrollToItem;
+      if (item.viewType != AllAppsGridAdapter.ICON_VIEW_TYPE) {
+        info.touchFraction=0f;
+        continue;
+      }
+      float subRowFraction=item.rowAppIndex * (rowFraction / mNumAppsPerRow);
+      info.touchFraction=initialOffset + item.rowIndex * rowFraction + subRowFraction;
+    }
+  }
   if (mAdapter != null) {
     mAdapter.notifyDataSetChanged();
   }
