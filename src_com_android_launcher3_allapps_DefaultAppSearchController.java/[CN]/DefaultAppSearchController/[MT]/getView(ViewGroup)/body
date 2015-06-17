@@ -1,4 +1,5 @@
 {
+  mSearchManager=new DefaultAppSearchAlgorithm(mApps.getApps());
   LayoutInflater inflater=LayoutInflater.from(parent.getContext());
   mSearchView=inflater.inflate(R.layout.all_apps_search_bar,parent,false);
   mSearchView.setOnClickListener(this);
