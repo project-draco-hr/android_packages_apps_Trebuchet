@@ -1,6 +1,7 @@
 {
   mWidgetAndShortcutNameComparator=new WidgetsAndShortcutNameComparator(context);
   mAppNameComparator=(new AppNameComparator(context)).getAppInfoComparator();
-  mIconCache=LauncherAppState.getInstance().getIconCache();
+  mIconCache=iconCache;
+  mAppFilter=appFilter;
   mIndexer=new AlphabeticIndexCompat(context);
 }
