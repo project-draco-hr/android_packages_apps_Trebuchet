@@ -10,19 +10,22 @@
   mSections.clear();
   if (DEBUG_PREDICTIONS) {
     if (mPredictedAppComponents.isEmpty() && !mApps.isEmpty()) {
-      mPredictedAppComponents.add(mApps.get(0).componentName);
-      mPredictedAppComponents.add(mApps.get(0).componentName);
-      mPredictedAppComponents.add(mApps.get(0).componentName);
-      mPredictedAppComponents.add(mApps.get(0).componentName);
+      mPredictedAppComponents.add(new ComponentKey(mApps.get(0).componentName,UserHandleCompat.myUserHandle()));
+      mPredictedAppComponents.add(new ComponentKey(mApps.get(0).componentName,UserHandleCompat.myUserHandle()));
+      mPredictedAppComponents.add(new ComponentKey(mApps.get(0).componentName,UserHandleCompat.myUserHandle()));
+      mPredictedAppComponents.add(new ComponentKey(mApps.get(0).componentName,UserHandleCompat.myUserHandle()));
     }
   }
   mPredictedApps.clear();
   if (mPredictedAppComponents != null && !mPredictedAppComponents.isEmpty() && !hasFilter()) {
-    for (    ComponentName cn : mPredictedAppComponents) {
-      for (      AppInfo info : mApps) {
-        if (cn.equals(info.componentName)) {
-          mPredictedApps.add(info);
-          break;
+    for (    ComponentKey ck : mPredictedAppComponents) {
+      AppInfo info=mComponentToAppMap.get(ck);
+      if (info != null) {
+        mPredictedApps.add(info);
+      }
+ else {
+        if (LauncherAppState.isDogfoodBuild()) {
+          Log.e(TAG,"Predicted app not found: " + ck.flattenToString(mLauncher));
         }
       }
       if (mPredictedApps.size() == mNumPredictedAppsPerRow) {
