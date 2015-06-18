@@ -1,6 +1,6 @@
 {
   mWorkerHandler.removeCallbacksAndMessages(ICON_UPDATE_TOKEN);
-  mIconDb.updateSystemStateString(mContext);
+  mIconDb.updateSystemStateString();
   for (  UserHandleCompat user : mUserManager.getUserProfiles()) {
     final List<LauncherActivityInfoCompat> apps=mLauncherApps.getActivityList(null,user);
     if (apps == null || apps.isEmpty()) {

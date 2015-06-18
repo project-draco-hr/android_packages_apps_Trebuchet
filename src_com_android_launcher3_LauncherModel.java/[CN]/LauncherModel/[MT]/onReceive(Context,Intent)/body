@@ -4,14 +4,6 @@
   if (Intent.ACTION_LOCALE_CHANGED.equals(action)) {
     forceReload();
   }
- else   if (Intent.ACTION_CONFIGURATION_CHANGED.equals(action)) {
-    Configuration currentConfig=context.getResources().getConfiguration();
-    if (mPreviousConfigMcc != currentConfig.mcc) {
-      Log.d(TAG,"Reload apps on config change. curr_mcc:" + currentConfig.mcc + " prevmcc:"+ mPreviousConfigMcc);
-      forceReload();
-    }
-    mPreviousConfigMcc=currentConfig.mcc;
-  }
  else   if (SearchManager.INTENT_GLOBAL_SEARCH_ACTIVITY_CHANGED.equals(action) || SearchManager.INTENT_ACTION_SEARCHABLES_CHANGED.equals(action)) {
     Callbacks callbacks=getCallback();
     if (callbacks != null) {
