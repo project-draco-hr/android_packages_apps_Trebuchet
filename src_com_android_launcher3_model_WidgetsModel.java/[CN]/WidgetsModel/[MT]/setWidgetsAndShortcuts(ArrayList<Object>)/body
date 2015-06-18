@@ -9,16 +9,24 @@
   mPackageItemInfos.clear();
   for (  Object o : rawWidgetsShortcuts) {
     String packageName="";
+    ComponentName componentName=null;
     if (o instanceof LauncherAppWidgetProviderInfo) {
       LauncherAppWidgetProviderInfo widgetInfo=(LauncherAppWidgetProviderInfo)o;
+      componentName=widgetInfo.provider;
       packageName=widgetInfo.provider.getPackageName();
     }
  else     if (o instanceof ResolveInfo) {
       ResolveInfo resolveInfo=(ResolveInfo)o;
+      componentName=new ComponentName(resolveInfo.activityInfo.packageName,resolveInfo.activityInfo.name);
       packageName=resolveInfo.activityInfo.packageName;
     }
- else {
-      Log.e(TAG,String.format("addWidgetsAndShortcuts, nothing added for class=%s",o.getClass().toString()));
+    if (componentName == null) {
+      Log.e(TAG,String.format("Widget cannot be set for class=%s",o.getClass().toString()));
+      continue;
+    }
+    if (mAppFilter != null && !mAppFilter.shouldShowApp(componentName)) {
+      Log.d(TAG,String.format("%s is filtered and not added to the widget tray.",packageName));
+      continue;
     }
     PackageItemInfo pInfo=tmpPackageItemInfos.get(packageName);
     ArrayList<Object> widgetsShortcutsList=mWidgetsList.get(pInfo);
