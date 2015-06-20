@@ -1,8 +1,7 @@
 {
-  cancelAnimator(mBackgroundFadeInAnimation);
-  cancelAnimator(mBackgroundFadeOutAnimation);
   final DragLayer dragLayer=mLauncher.getDragLayer();
   final float startAlpha=dragLayer.getBackgroundAlpha();
+  float finalAlpha=states.stateIsNormal ? 0 : mWorkspaceScrimAlpha;
   if (finalAlpha != startAlpha) {
     if (animated) {
       mBackgroundFadeOutAnimation=LauncherAnimUtils.ofFloat(mWorkspace,startAlpha,finalAlpha);
@@ -13,8 +12,8 @@
       }
 );
       mBackgroundFadeOutAnimation.setInterpolator(new DecelerateInterpolator(1.5f));
-      mBackgroundFadeOutAnimation.setDuration(BACKGROUND_FADE_OUT_DURATION);
-      mBackgroundFadeOutAnimation.start();
+      mBackgroundFadeOutAnimation.setDuration(duration);
+      mStateAnimator.play(mBackgroundFadeOutAnimation);
     }
  else {
       dragLayer.setBackgroundAlpha(finalAlpha);

@@ -163,10 +163,4 @@
       overviewPanel.getChildAt(0).performAccessibilityAction(AccessibilityNodeInfo.ACTION_ACCESSIBILITY_FOCUS,null);
     }
   }
-  if (states.stateIsNormal) {
-    animateBackgroundGradient(0f,animated);
-  }
- else {
-    animateBackgroundGradient(mWorkspaceScrimAlpha,animated);
-  }
 }
