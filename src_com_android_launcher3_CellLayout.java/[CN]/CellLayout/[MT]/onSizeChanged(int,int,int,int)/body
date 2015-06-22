@@ -2,6 +2,4 @@
   super.onSizeChanged(w,h,oldw,oldh);
   mBackground.getPadding(mTempRect);
   mBackground.setBounds(-mTempRect.left,-mTempRect.top,w + mTempRect.right,h + mTempRect.bottom);
-  mOverScrollLeft.setBounds(0,0,w,h);
-  mOverScrollRight.setBounds(0,0,w,h);
 }

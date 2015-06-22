@@ -9,4 +9,5 @@
   mIconCache=app.getIconCache();
   mIsRtl=Utilities.isRtl(getResources());
   setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_YES);
+  setEdgeGlowColor(getResources().getColor(R.color.folder_edge_effect_color));
 }

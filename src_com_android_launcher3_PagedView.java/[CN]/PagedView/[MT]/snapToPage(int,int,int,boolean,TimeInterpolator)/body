@@ -22,7 +22,7 @@
  else {
     mScroller.setInterpolator(mDefaultInterpolator);
   }
-  mScroller.startScroll(mUnboundedScrollX,0,delta,0,duration);
+  mScroller.startScroll(getScrollX(),0,delta,0,duration);
   updatePageIndicator();
   if (immediate) {
     computeScroll();
