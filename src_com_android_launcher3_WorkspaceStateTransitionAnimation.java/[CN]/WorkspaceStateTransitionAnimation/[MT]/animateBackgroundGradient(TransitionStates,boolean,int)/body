@@ -4,16 +4,16 @@
   float finalAlpha=states.stateIsNormal ? 0 : mWorkspaceScrimAlpha;
   if (finalAlpha != startAlpha) {
     if (animated) {
-      mBackgroundFadeOutAnimation=LauncherAnimUtils.ofFloat(mWorkspace,startAlpha,finalAlpha);
-      mBackgroundFadeOutAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener(){
-        public void onAnimationUpdate(        ValueAnimator animation){
+      ValueAnimator bgFadeOutAnimation=LauncherAnimUtils.ofFloat(mWorkspace,startAlpha,finalAlpha);
+      bgFadeOutAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener(){
+        @Override public void onAnimationUpdate(        ValueAnimator animation){
           dragLayer.setBackgroundAlpha(((Float)animation.getAnimatedValue()).floatValue());
         }
       }
 );
-      mBackgroundFadeOutAnimation.setInterpolator(new DecelerateInterpolator(1.5f));
-      mBackgroundFadeOutAnimation.setDuration(duration);
-      mStateAnimator.play(mBackgroundFadeOutAnimation);
+      bgFadeOutAnimation.setInterpolator(new DecelerateInterpolator(1.5f));
+      bgFadeOutAnimation.setDuration(duration);
+      mStateAnimator.play(bgFadeOutAnimation);
     }
  else {
       dragLayer.setBackgroundAlpha(finalAlpha);
