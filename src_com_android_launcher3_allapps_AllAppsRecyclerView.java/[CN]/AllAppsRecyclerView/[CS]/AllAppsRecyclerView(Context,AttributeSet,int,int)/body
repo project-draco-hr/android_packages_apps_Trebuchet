@@ -1,5 +1,5 @@
 {
   super(context,attrs,defStyleAttr);
-  mLauncher=(Launcher)context;
-  setOverScrollMode(View.OVER_SCROLL_NEVER);
+  ContextThemeWrapper ctx=(ContextThemeWrapper)context;
+  mLauncher=(Launcher)ctx.getBaseContext();
 }

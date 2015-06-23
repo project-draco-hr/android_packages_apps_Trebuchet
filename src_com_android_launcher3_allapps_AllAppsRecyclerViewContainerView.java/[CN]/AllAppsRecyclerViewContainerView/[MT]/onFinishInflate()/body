@@ -1,0 +1,4 @@
+{
+  super.onFinishInflate();
+  mPredictionBarView=findViewById(R.id.prediction_bar);
+}
