@@ -1,4 +1,7 @@
 {
-  cancelAnimator(mStateAnimator);
+  if (mStateAnimator != null) {
+    mStateAnimator.setDuration(0);
+    mStateAnimator.cancel();
+  }
   mStateAnimator=null;
 }
