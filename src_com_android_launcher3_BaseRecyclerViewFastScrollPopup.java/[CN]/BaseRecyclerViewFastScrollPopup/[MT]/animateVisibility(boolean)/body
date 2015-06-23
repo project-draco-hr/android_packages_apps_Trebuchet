@@ -1,0 +1,11 @@
+{
+  if (mVisible != visible) {
+    mVisible=visible;
+    if (mAlphaAnimator != null) {
+      mAlphaAnimator.cancel();
+    }
+    mAlphaAnimator=ObjectAnimator.ofFloat(this,"alpha",visible ? 1f : 0f);
+    mAlphaAnimator.setDuration(visible ? 200 : 150);
+    mAlphaAnimator.start();
+  }
+}

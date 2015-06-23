@@ -1,4 +1,0 @@
-{
-  mFastScrollAlpha=alpha;
-  invalidateFastScroller(mFastScrollerBounds);
-}

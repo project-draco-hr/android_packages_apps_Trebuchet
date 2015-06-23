@@ -30,5 +30,10 @@
   if (mCustomShadowsEnabled) {
     setShadowLayer(SHADOW_LARGE_RADIUS,0.0f,SHADOW_Y_OFFSET,SHADOW_LARGE_COLOUR);
   }
+  if (mFastScrollMode == FAST_SCROLL_FOCUS_MODE_DRAW_CIRCLE_BG) {
+    mFastScrollFocusBgPaint=new Paint();
+    mFastScrollFocusBgPaint.setAntiAlias(true);
+    mFastScrollFocusBgPaint.setColor(getResources().getColor(R.color.container_fastscroll_thumb_active_color));
+  }
   setAccessibilityDelegate(LauncherAppState.getInstance().getAccessibilityDelegate());
 }

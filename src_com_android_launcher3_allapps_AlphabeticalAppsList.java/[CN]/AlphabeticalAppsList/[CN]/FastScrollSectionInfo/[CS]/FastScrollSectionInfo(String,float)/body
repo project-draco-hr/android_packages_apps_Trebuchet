@@ -1,4 +1,0 @@
-{
-  this.sectionName=sectionName;
-  this.appRangeFraction=appRangeFraction;
-}

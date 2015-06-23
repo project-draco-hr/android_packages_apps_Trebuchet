@@ -1,0 +1,10 @@
+{
+  AlphabeticalAppsList.AdapterItem item=mApps.getAdapterItems().get(position);
+  if (item.viewType == AllAppsGridAdapter.ICON_VIEW_TYPE) {
+    int predictionBarHeight=mApps.getPredictedApps().isEmpty() ? 0 : mPredictionBarHeight;
+    return getPaddingTop() + predictionBarHeight + item.rowIndex * rowHeight;
+  }
+ else {
+    return 0;
+  }
+}

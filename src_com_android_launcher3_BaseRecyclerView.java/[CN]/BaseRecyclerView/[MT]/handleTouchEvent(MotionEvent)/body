@@ -1,5 +1,4 @@
 {
-  ViewConfiguration config=ViewConfiguration.get(getContext());
   int action=ev.getAction();
   int x=(int)ev.getX();
   int y=(int)ev.getY();
@@ -10,30 +9,17 @@ case MotionEvent.ACTION_DOWN:
 if (shouldStopScroll(ev)) {
   stopScroll();
 }
+mScrollbar.handleTouchEvent(ev,mDownX,mDownY,mLastY);
 break;
 case MotionEvent.ACTION_MOVE:
-if (!mDraggingFastScroller && isPointNearScrollbar(mDownX,mDownY) && Math.abs(y - mDownY) > config.getScaledTouchSlop()) {
-getParent().requestDisallowInterceptTouchEvent(true);
-mDraggingFastScroller=true;
-animateFastScrollerVisibility(true);
-}
-if (mDraggingFastScroller) {
 mLastY=y;
-int top=getPaddingTop() + (mFastScrollerBg.getBounds().height() / 2);
-int bottom=getHeight() - getPaddingBottom() - (mFastScrollerBg.getBounds().height() / 2);
-float boundedY=(float)Math.max(top,Math.min(bottom,y));
-mFastScrollSectionName=scrollToPositionAtProgress((boundedY - top) / (bottom - top));
-mTmpFastScrollerInvalidateRect.set(mFastScrollerBounds);
-updateFastScrollerBounds();
-mTmpFastScrollerInvalidateRect.union(mFastScrollerBounds);
-invalidateFastScroller(mTmpFastScrollerInvalidateRect);
-}
+mScrollbar.handleTouchEvent(ev,mDownX,mDownY,mLastY);
 break;
 case MotionEvent.ACTION_UP:
 case MotionEvent.ACTION_CANCEL:
-mDraggingFastScroller=false;
-animateFastScrollerVisibility(false);
+onFastScrollCompleted();
+mScrollbar.handleTouchEvent(ev,mDownX,mDownY,mLastY);
 break;
 }
-return mDraggingFastScroller;
+return mScrollbar.isDragging();
 }

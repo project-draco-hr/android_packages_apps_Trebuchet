@@ -1,30 +1,52 @@
 {
-  List<AlphabeticalAppsList.FastScrollSectionInfo> fastScrollSections=mApps.getFastScrollerSections();
-  if (fastScrollSections.isEmpty()) {
+  int rowCount=mApps.getNumAppRows();
+  if (rowCount == 0) {
     return "";
   }
-  LinearLayoutManager layoutManager=(LinearLayoutManager)getLayoutManager();
   stopScroll();
-  float predictionBarFraction=0f;
-  if (!mApps.getPredictedApps().isEmpty()) {
-    predictionBarFraction=(float)mNumPredictedAppsPerRow / mApps.getSize();
-    if (touchFraction <= predictionBarFraction) {
-      layoutManager.scrollToPositionWithOffset(0,0);
-      return "";
+  List<AlphabeticalAppsList.FastScrollSectionInfo> fastScrollSections=mApps.getFastScrollerSections();
+  AlphabeticalAppsList.FastScrollSectionInfo lastInfo=fastScrollSections.get(0);
+  if (mScrollBarMode == FAST_SCROLL_BAR_MODE_DISTRIBUTE_BY_ROW) {
+    for (int i=1; i < fastScrollSections.size(); i++) {
+      AlphabeticalAppsList.FastScrollSectionInfo info=fastScrollSections.get(i);
+      if (info.touchFraction > touchFraction) {
+        break;
+      }
+      lastInfo=info;
     }
   }
-  touchFraction=(touchFraction - predictionBarFraction) * (1f / (1f - predictionBarFraction));
-  AlphabeticalAppsList.FastScrollSectionInfo lastScrollSection=fastScrollSections.get(0);
-  for (int i=1; i < fastScrollSections.size(); i++) {
-    AlphabeticalAppsList.FastScrollSectionInfo scrollSection=fastScrollSections.get(i);
-    if (lastScrollSection.appRangeFraction <= touchFraction && touchFraction < scrollSection.appRangeFraction) {
-      break;
+ else   if (mScrollBarMode == FAST_SCROLL_BAR_MODE_DISTRIBUTE_BY_SECTIONS) {
+    lastInfo=fastScrollSections.get((int)(touchFraction * (fastScrollSections.size() - 1)));
+  }
+ else {
+    throw new RuntimeException("Unexpected scroll bar mode");
+  }
+  getCurScrollState(mScrollPosState,mApps.getAdapterItems());
+  int predictionBarHeight=mApps.getPredictedApps().isEmpty() ? 0 : mPredictionBarHeight;
+  int availableScrollHeight=getAvailableScrollHeight(rowCount,mScrollPosState.rowHeight,predictionBarHeight);
+  LinearLayoutManager layoutManager=(LinearLayoutManager)getLayoutManager();
+  if (mFastScrollMode == FAST_SCROLL_MODE_FREE_SCROLL) {
+    layoutManager.scrollToPositionWithOffset(0,(int)-(availableScrollHeight * touchFraction));
+  }
+  if (mPrevFastScrollFocusedPosition != lastInfo.fastScrollToItem.position) {
+    mPrevFastScrollFocusedPosition=lastInfo.fastScrollToItem.position;
+    if (mLastFastScrollFocusedView != null) {
+      mLastFastScrollFocusedView.setFastScrollFocused(false,true);
+      mLastFastScrollFocusedView=null;
     }
-    lastScrollSection=scrollSection;
+    if (mFastScrollMode == FAST_SCROLL_MODE_JUMP_TO_FIRST_ICON) {
+      smoothSnapToPosition(mPrevFastScrollFocusedPosition,mScrollPosState);
+    }
+ else     if (mFastScrollMode == FAST_SCROLL_MODE_FREE_SCROLL) {
+      final ViewHolder vh=findViewHolderForPosition(mPrevFastScrollFocusedPosition);
+      if (vh != null && vh.itemView instanceof BaseRecyclerViewFastScrollBar.FastScrollFocusableView) {
+        mLastFastScrollFocusedView=(BaseRecyclerViewFastScrollBar.FastScrollFocusableView)vh.itemView;
+        mLastFastScrollFocusedView.setFastScrollFocused(true,true);
+      }
+    }
+ else {
+      throw new RuntimeException("Unexpected fast scroll mode");
+    }
   }
-  if (mLastFastscrollPosition != lastScrollSection.appItem.position) {
-    mLastFastscrollPosition=lastScrollSection.appItem.position;
-    layoutManager.scrollToPositionWithOffset(lastScrollSection.appItem.position,0);
-  }
-  return lastScrollSection.sectionName;
+  return lastInfo.sectionName;
 }

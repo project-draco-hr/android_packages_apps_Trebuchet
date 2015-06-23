@@ -4,7 +4,7 @@
   mLauncher=(Launcher)context;
   mLayoutInflater=LayoutInflater.from(context);
   DeviceProfile grid=mLauncher.getDeviceProfile();
-  mPredictionBarHeight=(int)(grid.allAppsIconSizePx + grid.iconDrawablePaddingOriginalPx + Utilities.calculateTextHeight(grid.allAppsIconTextSizePx)+ 2 * res.getDimensionPixelSize(R.dimen.all_apps_icon_top_bottom_padding) + 2 * res.getDimensionPixelSize(R.dimen.all_apps_prediction_bar_top_bottom_padding));
+  mPredictionBarHeight=(int)(grid.allAppsIconSizePx + grid.iconDrawablePaddingOriginalPx + Utilities.calculateTextHeight(grid.allAppsIconTextSizePx)+ 2 * res.getDimensionPixelSize(R.dimen.all_apps_icon_top_bottom_padding) + res.getDimensionPixelSize(R.dimen.all_apps_prediction_bar_top_padding) + res.getDimensionPixelSize(R.dimen.all_apps_prediction_bar_bottom_padding));
   mSectionNamesMargin=res.getDimensionPixelSize(R.dimen.all_apps_grid_view_start_margin);
   mApps=new AlphabeticalAppsList(context);
   mApps.setAdapterChangedCallback(this);
@@ -14,6 +14,7 @@
   mApps.setAdapter(mAdapter);
   mLayoutManager=mAdapter.getLayoutManager();
   mItemDecoration=mAdapter.getItemDecoration();
+  mRecyclerViewTopBottomPadding=res.getDimensionPixelSize(R.dimen.all_apps_list_top_bottom_padding);
   mSearchQueryBuilder=new SpannableStringBuilder();
   Selection.setSelection(mSearchQueryBuilder,0);
 }

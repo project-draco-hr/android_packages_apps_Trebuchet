@@ -1,4 +1,5 @@
 {
   super(context,attrs,defStyleAttr);
   mLauncher=(Launcher)context;
+  setOverScrollMode(View.OVER_SCROLL_NEVER);
 }

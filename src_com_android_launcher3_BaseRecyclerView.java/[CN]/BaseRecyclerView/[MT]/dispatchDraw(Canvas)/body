@@ -1,5 +1,5 @@
 {
   super.dispatchDraw(canvas);
-  drawVerticalScrubber(canvas);
-  drawFastScrollerPopup(canvas);
+  onUpdateScrollbar();
+  mScrollbar.draw(canvas);
 }
