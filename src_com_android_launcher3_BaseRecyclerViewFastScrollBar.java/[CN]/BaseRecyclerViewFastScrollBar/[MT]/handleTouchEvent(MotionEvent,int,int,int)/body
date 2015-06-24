@@ -28,10 +28,12 @@ mRv.invalidate(mPopup.updateFastScrollerBounds(mRv,lastY));
 break;
 case MotionEvent.ACTION_UP:
 case MotionEvent.ACTION_CANCEL:
-mIsDragging=false;
 mTouchOffset=0;
+if (mIsDragging) {
+mIsDragging=false;
 mPopup.animateVisibility(false);
 animateScrollbar(false);
+}
 break;
 }
 }
