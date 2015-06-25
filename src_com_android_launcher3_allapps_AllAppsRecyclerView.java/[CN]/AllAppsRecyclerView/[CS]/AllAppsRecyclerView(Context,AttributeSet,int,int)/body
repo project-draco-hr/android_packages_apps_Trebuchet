@@ -1,5 +1,3 @@
 {
   super(context,attrs,defStyleAttr);
-  ContextThemeWrapper ctx=(ContextThemeWrapper)context;
-  mLauncher=(Launcher)ctx.getBaseContext();
 }
