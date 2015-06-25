@@ -1,0 +1,13 @@
+{
+  if (user == null) {
+    user=UserHandleCompat.myUserHandle();
+  }
+  long serialNumber=UserManagerCompat.getInstance(this).getSerialNumberForUser(user);
+  appLaunchIntent.putExtra(AppInfo.EXTRA_PROFILE,serialNumber);
+  LauncherAppsCompat launcherApps=LauncherAppsCompat.getInstance(this);
+  LauncherActivityInfoCompat activityInfo=launcherApps.resolveActivity(appLaunchIntent,user);
+  if (activityInfo == null) {
+    return null;
+  }
+  return new AppInfo(this,activityInfo,user,mIconCache);
+}
