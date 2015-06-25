@@ -1,16 +1,22 @@
 {
   final ShortcutInfo info=new ShortcutInfo();
   info.user=UserHandleCompat.myUserHandle();
-  mIconCache.getTitleAndIcon(info,intent,info.user,false);
+  Bitmap icon=iconInfo.loadIcon(c,info,context);
+  if (icon == null) {
+    mIconCache.getTitleAndIcon(info,intent,info.user,false);
+  }
+ else {
+    info.setIcon(icon);
+  }
   if ((promiseType & ShortcutInfo.FLAG_RESTORED_ICON) != 0) {
-    String title=(cursor != null) ? cursor.getString(titleIndex) : null;
+    String title=(c != null) ? c.getString(titleIndex) : null;
     if (!TextUtils.isEmpty(title)) {
       info.title=Utilities.trim(title);
     }
   }
  else   if ((promiseType & ShortcutInfo.FLAG_AUTOINTALL_ICON) != 0) {
     if (TextUtils.isEmpty(info.title)) {
-      info.title=(cursor != null) ? Utilities.trim(cursor.getString(titleIndex)) : "";
+      info.title=(c != null) ? Utilities.trim(c.getString(titleIndex)) : "";
     }
   }
  else {

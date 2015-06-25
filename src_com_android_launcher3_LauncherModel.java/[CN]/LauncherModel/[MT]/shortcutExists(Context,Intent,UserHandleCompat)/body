@@ -1,9 +1,8 @@
 {
   assertWorkspaceLoaded();
   final String intentWithPkg, intentWithoutPkg;
-  final String packageName;
   if (intent.getComponent() != null) {
-    packageName=intent.getComponent().getPackageName();
+    String packageName=intent.getComponent().getPackageName();
     if (intent.getPackage() != null) {
       intentWithPkg=intent.toUri(0);
       intentWithoutPkg=new Intent(intent).setPackage(null).toUri(0);
@@ -16,14 +15,14 @@
  else {
     intentWithPkg=intent.toUri(0);
     intentWithoutPkg=intent.toUri(0);
-    packageName=intent.getPackage();
   }
 synchronized (sBgLock) {
     for (    ItemInfo item : sBgItemsIdMap) {
       if (item instanceof ShortcutInfo) {
         ShortcutInfo info=(ShortcutInfo)item;
-        if (info.getIntent() != null && info.user.equals(user)) {
-          String s=info.getIntent().toUri(0);
+        Intent targetIntent=info.promisedIntent == null ? info.intent : info.promisedIntent;
+        if (targetIntent != null && info.user.equals(user)) {
+          String s=targetIntent.toUri(0);
           if (intentWithPkg.equals(s) || intentWithoutPkg.equals(s)) {
             return true;
           }

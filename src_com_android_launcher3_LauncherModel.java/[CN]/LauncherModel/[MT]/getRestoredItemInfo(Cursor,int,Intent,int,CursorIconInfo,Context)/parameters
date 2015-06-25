@@ -1,0 +1,6 @@
+Cursor c
+int titleIndex
+Intent intent
+int promiseType
+CursorIconInfo iconInfo
+Context context

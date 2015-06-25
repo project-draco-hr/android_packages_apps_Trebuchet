@@ -6,6 +6,6 @@
     if (apps == null || apps.isEmpty()) {
       return;
     }
-    updateDBIcons(user,apps);
+    updateDBIcons(user,apps,UserHandleCompat.myUserHandle().equals(user) ? ignorePackagesForMainUser : Collections.<String>emptySet());
   }
 }

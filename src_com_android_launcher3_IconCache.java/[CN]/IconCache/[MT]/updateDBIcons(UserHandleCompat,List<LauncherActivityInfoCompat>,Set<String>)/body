@@ -22,8 +22,10 @@
     ComponentName component=ComponentName.unflattenFromString(cn);
     PackageInfo info=pkgInfoMap.get(component.getPackageName());
     if (info == null) {
-      remove(component,user);
-      itemsToRemove.add(c.getInt(rowIndex));
+      if (!ignorePackages.contains(component.getPackageName())) {
+        remove(component,user);
+        itemsToRemove.add(c.getInt(rowIndex));
+      }
       continue;
     }
     if ((info.applicationInfo.flags & ApplicationInfo.FLAG_IS_DATA_ONLY) != 0) {

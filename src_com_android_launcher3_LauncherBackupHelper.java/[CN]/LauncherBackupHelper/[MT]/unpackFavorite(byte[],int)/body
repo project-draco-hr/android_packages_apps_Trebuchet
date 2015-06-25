@@ -8,12 +8,12 @@
   values.put(Favorites.CELLY,favorite.cellY);
   values.put(Favorites.SPANX,favorite.spanX);
   values.put(Favorites.SPANY,favorite.spanY);
-  values.put(Favorites.ICON_TYPE,favorite.iconType);
-  if (favorite.iconType == Favorites.ICON_TYPE_RESOURCE) {
-    values.put(Favorites.ICON_PACKAGE,favorite.iconPackage);
-    values.put(Favorites.ICON_RESOURCE,favorite.iconResource);
-  }
-  if (favorite.iconType == Favorites.ICON_TYPE_BITMAP) {
+  if (favorite.itemType == Favorites.ITEM_TYPE_SHORTCUT) {
+    values.put(Favorites.ICON_TYPE,favorite.iconType);
+    if (favorite.iconType == Favorites.ICON_TYPE_RESOURCE) {
+      values.put(Favorites.ICON_PACKAGE,favorite.iconPackage);
+      values.put(Favorites.ICON_RESOURCE,favorite.iconResource);
+    }
     values.put(Favorites.ICON,favorite.icon);
   }
   if (!TextUtils.isEmpty(favorite.title)) {

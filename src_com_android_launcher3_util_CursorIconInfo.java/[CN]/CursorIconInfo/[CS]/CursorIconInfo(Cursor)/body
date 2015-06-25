@@ -1,0 +1,6 @@
+{
+  iconTypeIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.ICON_TYPE);
+  iconIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.ICON);
+  iconPackageIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.ICON_PACKAGE);
+  iconResourceIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.ICON_RESOURCE);
+}

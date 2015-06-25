@@ -1,2 +1,3 @@
 UserHandleCompat user
 List<LauncherActivityInfoCompat> apps
+Set<String> ignorePackages
