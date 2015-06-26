@@ -1,3 +1,10 @@
 {
-  return createAppDragInfo(appLaunchIntent,UserHandleCompat.myUserHandle());
+  UserHandleCompat user=null;
+  if (Utilities.isLmpOrAbove()) {
+    UserHandle userHandle=appLaunchIntent.getParcelableExtra(Intent.EXTRA_USER);
+    if (userHandle != null) {
+      user=UserHandleCompat.fromUser(userHandle);
+    }
+  }
+  return createAppDragInfo(appLaunchIntent,user);
 }

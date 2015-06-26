@@ -2,10 +2,8 @@
   if (user == null) {
     user=UserHandleCompat.myUserHandle();
   }
-  long serialNumber=UserManagerCompat.getInstance(this).getSerialNumberForUser(user);
-  appLaunchIntent.putExtra(AppInfo.EXTRA_PROFILE,serialNumber);
   LauncherAppsCompat launcherApps=LauncherAppsCompat.getInstance(this);
-  LauncherActivityInfoCompat activityInfo=launcherApps.resolveActivity(appLaunchIntent,user);
+  LauncherActivityInfoCompat activityInfo=launcherApps.resolveActivity(intent,user);
   if (activityInfo == null) {
     return null;
   }
