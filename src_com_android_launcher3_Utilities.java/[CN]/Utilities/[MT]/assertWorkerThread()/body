@@ -1,5 +1,5 @@
 {
-  if (LauncherAppState.isDogfoodBuild()) {
-    Assert.assertTrue(LauncherModel.sWorkerThread.getThreadId() == Process.myTid());
+  if (LauncherAppState.isDogfoodBuild() && (LauncherModel.sWorkerThread.getThreadId() != Process.myTid())) {
+    throw new IllegalStateException();
   }
 }
