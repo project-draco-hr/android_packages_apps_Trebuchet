@@ -35,10 +35,6 @@ synchronized (sBgLock) {
       final int idIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites._ID);
       final int intentIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.INTENT);
       final int titleIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.TITLE);
-      final int iconTypeIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.ICON_TYPE);
-      final int iconIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.ICON);
-      final int iconPackageIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.ICON_PACKAGE);
-      final int iconResourceIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.ICON_RESOURCE);
       final int containerIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.CONTAINER);
       final int itemTypeIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.ITEM_TYPE);
       final int appWidgetIdIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.APPWIDGET_ID);
@@ -52,6 +48,7 @@ synchronized (sBgLock) {
       final int restoredIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.RESTORED);
       final int profileIdIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.PROFILE_ID);
       final int optionsIndex=c.getColumnIndexOrThrow(LauncherSettings.Favorites.OPTIONS);
+      final CursorIconInfo cursorIconInfo=new CursorIconInfo(c);
       final LongSparseArray<UserHandleCompat> allUsers=new LongSparseArray<>();
       for (      UserHandleCompat user : mUserManager.getUserProfiles()) {
         allUsers.put(mUserManager.getSerialNumberForUser(user),user);
@@ -182,7 +179,7 @@ continue;
 boolean useLowResIcon=container >= 0 && c.getInt(rankIndex) >= FolderIcon.NUM_ITEMS_IN_PREVIEW;
 if (itemReplaced) {
 if (user.equals(UserHandleCompat.myUserHandle())) {
-info=getAppShortcutInfo(manager,intent,user,context,null,iconIndex,titleIndex,false,useLowResIcon);
+info=getAppShortcutInfo(manager,intent,user,context,null,cursorIconInfo.iconIndex,titleIndex,false,useLowResIcon);
 }
  else {
 itemsToRemove.add(id);
@@ -192,7 +189,7 @@ continue;
  else if (restored) {
 if (user.equals(UserHandleCompat.myUserHandle())) {
 Launcher.addDumpLog(TAG,"constructing info for partially restored package",true);
-info=getRestoredItemInfo(c,titleIndex,intent,promiseType);
+info=getRestoredItemInfo(c,titleIndex,intent,promiseType,cursorIconInfo,context);
 intent=getRestoredItemIntent(c,context,intent);
 }
  else {
@@ -201,10 +198,10 @@ continue;
 }
 }
  else if (itemType == LauncherSettings.Favorites.ITEM_TYPE_APPLICATION) {
-info=getAppShortcutInfo(manager,intent,user,context,c,iconIndex,titleIndex,allowMissingTarget,useLowResIcon);
+info=getAppShortcutInfo(manager,intent,user,context,c,cursorIconInfo.iconIndex,titleIndex,allowMissingTarget,useLowResIcon);
 }
  else {
-info=getShortcutInfo(c,context,iconTypeIndex,iconPackageIndex,iconResourceIndex,iconIndex,titleIndex);
+info=getShortcutInfo(c,context,titleIndex,cursorIconInfo);
 if (intent.getAction() != null && intent.getCategories() != null && intent.getAction().equals(Intent.ACTION_MAIN) && intent.getCategories().contains(Intent.CATEGORY_LAUNCHER)) {
 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
 }
@@ -220,6 +217,9 @@ info.rank=c.getInt(rankIndex);
 info.spanX=1;
 info.spanY=1;
 info.intent.putExtra(ItemInfo.EXTRA_PROFILE,serialNumber);
+if (info.promisedIntent != null) {
+info.promisedIntent.putExtra(ItemInfo.EXTRA_PROFILE,serialNumber);
+}
 info.isDisabled=disabledState;
 if (isSafeMode && !Utilities.isSystemApp(context,intent)) {
 info.isDisabled|=ShortcutInfo.FLAG_DISABLED_SAFEMODE;
