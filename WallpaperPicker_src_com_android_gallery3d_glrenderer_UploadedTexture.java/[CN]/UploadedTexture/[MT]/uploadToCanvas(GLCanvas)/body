@@ -8,7 +8,7 @@
       int height=bHeight + mBorder * 2;
       int texWidth=getTextureWidth();
       int texHeight=getTextureHeight();
-      assertTrue(bWidth <= texWidth && bHeight <= texHeight);
+      Utils.assertTrue(bWidth <= texWidth && bHeight <= texHeight);
       mId=canvas.getGLId().generateTexture();
       canvas.setTextureParameters(this);
       if (bWidth == texWidth && bHeight == texHeight) {
