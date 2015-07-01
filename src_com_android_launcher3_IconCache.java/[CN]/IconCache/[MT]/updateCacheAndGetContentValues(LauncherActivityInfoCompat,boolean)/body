@@ -14,5 +14,5 @@
   entry.title=app.getLabel();
   entry.contentDescription=mUserManager.getBadgedLabelForUser(entry.title,app.getUser());
   mCache.put(new ComponentKey(app.getComponentName(),app.getUser()),entry);
-  return mIconDb.newContentValues(entry.icon,entry.title.toString());
+  return newContentValues(entry.icon,entry.title.toString(),mActivityBgColor);
 }

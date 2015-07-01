@@ -2,7 +2,7 @@
   Cursor c=mIconDb.getReadableDatabase().query(IconDB.TABLE_NAME,new String[]{lowRes ? IconDB.COLUMN_ICON_LOW_RES : IconDB.COLUMN_ICON,IconDB.COLUMN_LABEL},IconDB.COLUMN_COMPONENT + " = ? AND " + IconDB.COLUMN_USER+ " = ?",new String[]{component.flattenToString(),Long.toString(mUserManager.getSerialNumberForUser(user))},null,null,null);
   try {
     if (c.moveToNext()) {
-      entry.icon=loadIconNoResize(c,0);
+      entry.icon=loadIconNoResize(c,0,lowRes ? mLowResOptions : null);
       entry.isLowResIcon=lowRes;
       entry.title=c.getString(1);
       if (entry.title == null) {
