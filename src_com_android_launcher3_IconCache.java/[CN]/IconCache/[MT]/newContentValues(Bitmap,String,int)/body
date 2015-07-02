@@ -1,0 +1,22 @@
+{
+  ContentValues values=new ContentValues();
+  values.put(IconDB.COLUMN_ICON,Utilities.flattenBitmap(icon));
+  values.put(IconDB.COLUMN_LABEL,label);
+  values.put(IconDB.COLUMN_SYSTEM_STATE,mSystemState);
+  if (lowResBackgroundColor == Color.TRANSPARENT) {
+    values.put(IconDB.COLUMN_ICON_LOW_RES,Utilities.flattenBitmap(Bitmap.createScaledBitmap(icon,icon.getWidth() / LOW_RES_SCALE_FACTOR,icon.getHeight() / LOW_RES_SCALE_FACTOR,true)));
+  }
+ else {
+synchronized (this) {
+      if (mLowResBitmap == null) {
+        mLowResBitmap=Bitmap.createBitmap(icon.getWidth() / LOW_RES_SCALE_FACTOR,icon.getHeight() / LOW_RES_SCALE_FACTOR,Bitmap.Config.RGB_565);
+        mLowResCanvas=new Canvas(mLowResBitmap);
+        mLowResPaint=new Paint(Paint.FILTER_BITMAP_FLAG | Paint.ANTI_ALIAS_FLAG);
+      }
+      mLowResCanvas.drawColor(lowResBackgroundColor);
+      mLowResCanvas.drawBitmap(icon,new Rect(0,0,icon.getWidth(),icon.getHeight()),new Rect(0,0,mLowResBitmap.getWidth(),mLowResBitmap.getHeight()),mLowResPaint);
+      values.put(IconDB.COLUMN_ICON_LOW_RES,Utilities.flattenBitmap(mLowResBitmap));
+    }
+  }
+  return values;
+}

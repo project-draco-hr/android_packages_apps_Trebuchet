@@ -17,7 +17,7 @@
         entry.title=appInfo.loadLabel(mPackageManager);
         entry.contentDescription=mUserManager.getBadgedLabelForUser(entry.title,user);
         entry.isLowResIcon=false;
-        ContentValues values=mIconDb.newContentValues(entry.icon,entry.title.toString());
+        ContentValues values=newContentValues(entry.icon,entry.title.toString(),mPackageBgColor);
         addIconToDB(values,cn,info,mUserManager.getSerialNumberForUser(user));
       }
  catch (      NameNotFoundException e) {

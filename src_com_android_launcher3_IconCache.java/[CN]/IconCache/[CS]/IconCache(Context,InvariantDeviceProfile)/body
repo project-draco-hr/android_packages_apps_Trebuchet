@@ -6,4 +6,9 @@
   mIconDpi=inv.fillResIconDpi;
   mIconDb=new IconDB(context);
   mWorkerHandler=new Handler(LauncherModel.getWorkerLooper());
+  mActivityBgColor=context.getResources().getColor(R.color.quantum_panel_bg_color);
+  mPackageBgColor=context.getResources().getColor(R.color.quantum_panel_bg_color_dark);
+  mLowResOptions=new BitmapFactory.Options();
+  mLowResOptions.inPreferredConfig=Bitmap.Config.RGB_565;
+  updateSystemStateString();
 }
