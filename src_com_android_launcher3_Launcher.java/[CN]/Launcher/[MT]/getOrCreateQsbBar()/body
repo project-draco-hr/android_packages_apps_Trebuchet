@@ -24,6 +24,7 @@
       }
       sp.edit().putInt(QSB_WIDGET_ID,widgetId).putString(QSB_WIDGET_PROVIDER,searchProvider.provider.flattenToString()).commit();
     }
+    mAppWidgetHost.setQsbWidgetId(widgetId);
     if (widgetId != -1) {
       mQsb=mAppWidgetHost.createView(this,widgetId,searchProvider);
       mQsb.updateAppWidgetOptions(opts);
