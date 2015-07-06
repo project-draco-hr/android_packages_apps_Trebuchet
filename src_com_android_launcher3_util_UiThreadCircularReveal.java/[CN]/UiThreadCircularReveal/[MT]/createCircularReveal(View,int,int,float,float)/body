@@ -1,34 +1,3 @@
 {
-  ValueAnimator va=ValueAnimator.ofFloat(0f,1f);
-  final View revealView=v;
-  final RevealOutlineProvider outlineProvider=new RevealOutlineProvider(x,y,r0,r1);
-  final ViewOutlineProvider originalProvider=revealView.getOutlineProvider();
-  final float elevation=v.getElevation();
-  va.addListener(new AnimatorListenerAdapter(){
-    public void onAnimationStart(    Animator animation){
-      revealView.setOutlineProvider(outlineProvider);
-      revealView.setClipToOutline(true);
-      revealView.setTranslationZ(-elevation);
-    }
-    public void onAnimationEnd(    Animator animation){
-      revealView.setOutlineProvider(originalProvider);
-      revealView.setClipToOutline(false);
-      revealView.setTranslationZ(0);
-    }
-  }
-);
-  va.addUpdateListener(new AnimatorUpdateListener(){
-    @Override public void onAnimationUpdate(    ValueAnimator arg0){
-      float progress=arg0.getAnimatedFraction();
-      outlineProvider.setProgress(progress);
-      if (Utilities.isLmpMR1OrAbove()) {
-        revealView.invalidateOutline();
-      }
- else {
-        revealView.invalidate();
-      }
-    }
-  }
-);
-  return va;
+  return createCircularReveal(v,x,y,r0,r1,ViewOutlineProvider.BACKGROUND);
 }
