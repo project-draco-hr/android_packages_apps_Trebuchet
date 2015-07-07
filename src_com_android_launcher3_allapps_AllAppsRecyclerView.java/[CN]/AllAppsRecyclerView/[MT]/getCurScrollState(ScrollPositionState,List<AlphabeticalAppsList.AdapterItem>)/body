@@ -11,7 +11,7 @@
     int position=getChildPosition(child);
     if (position != NO_POSITION) {
       AlphabeticalAppsList.AdapterItem item=items.get(position);
-      if (item.viewType == AllAppsGridAdapter.ICON_VIEW_TYPE) {
+      if (item.viewType == AllAppsGridAdapter.ICON_VIEW_TYPE || item.viewType == AllAppsGridAdapter.PREDICTION_ICON_VIEW_TYPE) {
         stateOut.rowIndex=item.rowIndex;
         stateOut.rowTopOffset=getLayoutManager().getDecoratedTop(child);
         stateOut.rowHeight=child.getHeight();

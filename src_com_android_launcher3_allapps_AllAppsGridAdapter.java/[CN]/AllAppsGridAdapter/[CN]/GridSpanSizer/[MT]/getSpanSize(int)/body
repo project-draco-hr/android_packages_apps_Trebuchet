@@ -2,10 +2,11 @@
   if (mApps.hasNoFilteredResults()) {
     return mAppsPerRow;
   }
-  if (mApps.getAdapterItems().get(position).viewType != AllAppsGridAdapter.ICON_VIEW_TYPE) {
-    return mAppsPerRow;
-  }
- else {
+switch (mApps.getAdapterItems().get(position).viewType) {
+case AllAppsGridAdapter.ICON_VIEW_TYPE:
+case AllAppsGridAdapter.PREDICTION_ICON_VIEW_TYPE:
     return 1;
-  }
+default :
+  return mAppsPerRow;
+}
 }

@@ -1,3 +1,6 @@
 {
+  if (section.firstAppItem.viewType != AllAppsGridAdapter.ICON_VIEW_TYPE) {
+    return false;
+  }
   return true;
 }

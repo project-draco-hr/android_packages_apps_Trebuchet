@@ -1,6 +1,5 @@
 Context context
 AlphabeticalAppsList apps
-PredictionBarSpacerCallbacks pbCb
 View.OnTouchListener touchListener
 View.OnClickListener iconClickListener
 View.OnLongClickListener iconLongClickListener

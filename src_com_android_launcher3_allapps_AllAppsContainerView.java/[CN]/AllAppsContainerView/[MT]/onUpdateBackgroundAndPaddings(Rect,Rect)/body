@@ -28,9 +28,4 @@
     lp.rightMargin=(getMeasuredWidth() - searchBarBounds.right) - backgroundPadding.right;
     mSearchBarContainerView.requestLayout();
   }
-  mPredictionBarView=(ViewGroup)findViewById(R.id.prediction_bar);
-  FrameLayout.LayoutParams lp=(FrameLayout.LayoutParams)mPredictionBarView.getLayoutParams();
-  lp.leftMargin=padding.left + mAppsRecyclerView.getMaxScrollbarWidth();
-  lp.rightMargin=padding.right + mAppsRecyclerView.getMaxScrollbarWidth();
-  mPredictionBarView.requestLayout();
 }

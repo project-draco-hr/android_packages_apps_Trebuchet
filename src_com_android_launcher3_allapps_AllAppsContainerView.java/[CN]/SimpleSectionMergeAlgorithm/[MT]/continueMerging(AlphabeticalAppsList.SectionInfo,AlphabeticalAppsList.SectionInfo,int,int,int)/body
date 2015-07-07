@@ -1,4 +1,7 @@
 {
+  if (section.firstAppItem.viewType != AllAppsGridAdapter.ICON_VIEW_TYPE) {
+    return false;
+  }
   int rows=sectionAppCount / numAppsPerRow;
   int cols=sectionAppCount % numAppsPerRow;
   boolean isCrossScript=false;

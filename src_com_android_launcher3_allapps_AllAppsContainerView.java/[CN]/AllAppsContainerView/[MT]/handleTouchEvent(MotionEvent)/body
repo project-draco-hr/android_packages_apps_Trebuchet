@@ -4,64 +4,35 @@
   int y=(int)ev.getY();
 switch (ev.getAction()) {
 case MotionEvent.ACTION_DOWN:
-    if (mPredictionBarView != null && mPredictionBarView.getVisibility() == View.VISIBLE) {
-      mPredictionIconTouchDownPos.set(x,y);
-      mPredictionIconUnderTouch=findPredictedAppAtCoordinate(x,y);
-      if (mPredictionIconUnderTouch != null) {
-        mPredictionIconCheckForLongPress=new CheckLongPressHelper(mPredictionIconUnderTouch,this);
-        mPredictionIconCheckForLongPress.postCheckForLongPress();
+    if (!mContentBounds.isEmpty()) {
+      Rect tmpRect=new Rect(mContentBounds);
+      tmpRect.inset(-grid.allAppsIconSizePx / 2,0);
+      if (ev.getX() < tmpRect.left || ev.getX() > tmpRect.right) {
+        mBoundsCheckLastTouchDownPos.set(x,y);
+        return true;
       }
     }
-  if (!mContentBounds.isEmpty()) {
-    Rect tmpRect=new Rect(mContentBounds);
-    tmpRect.inset(-grid.allAppsIconSizePx / 2,0);
-    if (ev.getX() < tmpRect.left || ev.getX() > tmpRect.right) {
-      mBoundsCheckLastTouchDownPos.set(x,y);
-      return true;
-    }
-  }
  else {
-    if (ev.getX() < getPaddingLeft() || ev.getX() > (getWidth() - getPaddingRight())) {
-      mBoundsCheckLastTouchDownPos.set(x,y);
-      return true;
+      if (ev.getX() < getPaddingLeft() || ev.getX() > (getWidth() - getPaddingRight())) {
+        mBoundsCheckLastTouchDownPos.set(x,y);
+        return true;
+      }
     }
-  }
-break;
-case MotionEvent.ACTION_MOVE:
-if (mPredictionIconUnderTouch != null) {
-float dist=(float)Math.hypot(x - mPredictionIconTouchDownPos.x,y - mPredictionIconTouchDownPos.y);
-if (dist > ViewConfiguration.get(getContext()).getScaledTouchSlop()) {
-  if (mPredictionIconCheckForLongPress != null) {
-    mPredictionIconCheckForLongPress.cancelLongPress();
-  }
-  mPredictionIconCheckForLongPress=null;
-  mPredictionIconUnderTouch=null;
-}
-}
-break;
+  break;
 case MotionEvent.ACTION_UP:
 if (mBoundsCheckLastTouchDownPos.x > -1) {
-ViewConfiguration viewConfig=ViewConfiguration.get(getContext());
-float dx=ev.getX() - mBoundsCheckLastTouchDownPos.x;
-float dy=ev.getY() - mBoundsCheckLastTouchDownPos.y;
-float distance=(float)Math.hypot(dx,dy);
-if (distance < viewConfig.getScaledTouchSlop()) {
-Launcher launcher=(Launcher)getContext();
-launcher.showWorkspace(true);
-return true;
-}
-}
-if (mPredictionIconUnderTouch != null && !mPredictionIconCheckForLongPress.hasPerformedLongPress()) {
-mLauncher.onClick(mPredictionIconUnderTouch);
+  ViewConfiguration viewConfig=ViewConfiguration.get(getContext());
+  float dx=ev.getX() - mBoundsCheckLastTouchDownPos.x;
+  float dy=ev.getY() - mBoundsCheckLastTouchDownPos.y;
+  float distance=(float)Math.hypot(dx,dy);
+  if (distance < viewConfig.getScaledTouchSlop()) {
+    Launcher launcher=(Launcher)getContext();
+    launcher.showWorkspace(true);
+    return true;
+  }
 }
 case MotionEvent.ACTION_CANCEL:
 mBoundsCheckLastTouchDownPos.set(-1,-1);
-mPredictionIconTouchDownPos.set(-1,-1);
-if (mPredictionIconCheckForLongPress != null) {
-mPredictionIconCheckForLongPress.cancelLongPress();
-mPredictionIconCheckForLongPress=null;
-}
-mPredictionIconUnderTouch=null;
 break;
 }
 return false;

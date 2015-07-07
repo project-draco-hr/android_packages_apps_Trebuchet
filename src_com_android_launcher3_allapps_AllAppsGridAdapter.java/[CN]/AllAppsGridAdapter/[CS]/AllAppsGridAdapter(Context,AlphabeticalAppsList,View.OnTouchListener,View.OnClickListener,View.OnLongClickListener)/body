@@ -1,8 +1,6 @@
 {
   Resources res=context.getResources();
-  mHandler=new Handler();
   mApps=apps;
-  mPredictionBarCb=pbCb;
   mGridSizer=new GridSpanSizer();
   mGridLayoutMgr=new GridLayoutManager(context,1,GridLayoutManager.VERTICAL,false);
   mGridLayoutMgr.setSpanSizeLookup(mGridSizer);
@@ -21,5 +19,5 @@
   mPredictedAppsDividerPaint.setStrokeWidth(Utilities.pxFromDp(1f,res.getDisplayMetrics()));
   mPredictedAppsDividerPaint.setColor(0x1E000000);
   mPredictedAppsDividerPaint.setAntiAlias(true);
-  mPredictionBarBottomPadding=res.getDimensionPixelSize(R.dimen.all_apps_prediction_bar_bottom_padding);
+  mPredictionBarDividerOffset=(-res.getDimensionPixelSize(R.dimen.all_apps_prediction_icon_bottom_padding) + res.getDimensionPixelSize(R.dimen.all_apps_icon_top_bottom_padding)) / 2;
 }

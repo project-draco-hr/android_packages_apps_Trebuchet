@@ -1,7 +1,5 @@
 {
   if (toWorkspace) {
-    getViewTreeObserver().removeOnPreDrawListener(this);
-    mLastRecyclerViewScrollPos=-1;
     mSearchBarController.reset();
   }
 }
