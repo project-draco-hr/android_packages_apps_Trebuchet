@@ -1,7 +1,7 @@
 {
   mInfo=info;
   ArrayList<ShortcutInfo> children=info.contents;
-  Collections.sort(children,Utilities.RANK_COMPARATOR);
+  Collections.sort(children,ITEM_POS_COMPARATOR);
   ArrayList<ShortcutInfo> overflow=mContent.bindItems(children);
   for (  ShortcutInfo item : overflow) {
     mInfo.remove(item);
