@@ -10,6 +10,5 @@
     mScrollbar.setScrollbarThumbOffset(-1,-1);
     return;
   }
-  int predictionBarHeight=mApps.getPredictedApps().isEmpty() ? 0 : mPredictionBarHeight;
-  synchronizeScrollBarThumbOffsetToViewScroll(mScrollPosState,rowCount,predictionBarHeight);
+  synchronizeScrollBarThumbOffsetToViewScroll(mScrollPosState,rowCount,0);
 }

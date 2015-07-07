@@ -1,5 +1,2 @@
 {
-  if (!toWorkspace) {
-    getViewTreeObserver().addOnPreDrawListener(this);
-  }
 }

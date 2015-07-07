@@ -22,8 +22,7 @@
     throw new RuntimeException("Unexpected scroll bar mode");
   }
   getCurScrollState(mScrollPosState,mApps.getAdapterItems());
-  int predictionBarHeight=mApps.getPredictedApps().isEmpty() ? 0 : mPredictionBarHeight;
-  int availableScrollHeight=getAvailableScrollHeight(rowCount,mScrollPosState.rowHeight,predictionBarHeight);
+  int availableScrollHeight=getAvailableScrollHeight(rowCount,mScrollPosState.rowHeight,0);
   LinearLayoutManager layoutManager=(LinearLayoutManager)getLayoutManager();
   if (mFastScrollMode == FAST_SCROLL_MODE_FREE_SCROLL) {
     layoutManager.scrollToPositionWithOffset(0,(int)-(availableScrollHeight * touchFraction));

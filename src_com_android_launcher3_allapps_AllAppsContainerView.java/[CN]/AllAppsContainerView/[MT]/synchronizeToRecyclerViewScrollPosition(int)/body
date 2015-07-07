@@ -1,6 +1,0 @@
-{
-  if (mLastRecyclerViewScrollPos != scrollY) {
-    mLastRecyclerViewScrollPos=scrollY;
-    mPredictionBarView.setTranslationY(-scrollY + mAppsRecyclerView.getPaddingTop());
-  }
-}

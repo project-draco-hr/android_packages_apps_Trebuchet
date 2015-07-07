@@ -33,11 +33,21 @@
       }
     }
     if (!mPredictedApps.isEmpty()) {
-      AdapterItem sectionItem=AdapterItem.asPredictionBarSpacer(position++);
-      mAdapterItems.add(sectionItem);
+      lastSectionInfo=new SectionInfo();
       lastFastScrollerSectionInfo=new FastScrollSectionInfo("");
-      lastFastScrollerSectionInfo.fastScrollToItem=sectionItem;
+      AdapterItem sectionItem=AdapterItem.asSectionBreak(position++,lastSectionInfo);
+      mSections.add(lastSectionInfo);
       mFastScrollerSections.add(lastFastScrollerSectionInfo);
+      mAdapterItems.add(sectionItem);
+      for (      AppInfo info : mPredictedApps) {
+        AdapterItem appItem=AdapterItem.asPredictedApp(position++,lastSectionInfo,"",lastSectionInfo.numApps++,info,appIndex++);
+        if (lastSectionInfo.firstAppItem == null) {
+          lastSectionInfo.firstAppItem=appItem;
+          lastFastScrollerSectionInfo.fastScrollToItem=appItem;
+        }
+        mAdapterItems.add(appItem);
+        mFilteredApps.add(info);
+      }
     }
   }
   for (  AppInfo info : getFiltersAppInfos()) {
@@ -71,7 +81,7 @@
       if (item.viewType == AllAppsGridAdapter.SECTION_BREAK_VIEW_TYPE) {
         numAppsInSection=0;
       }
- else       if (item.viewType == AllAppsGridAdapter.ICON_VIEW_TYPE) {
+ else       if (item.viewType == AllAppsGridAdapter.ICON_VIEW_TYPE || item.viewType == AllAppsGridAdapter.PREDICTION_ICON_VIEW_TYPE) {
         if (numAppsInSection % mNumAppsPerRow == 0) {
           numAppsInRow=0;
           rowIndex++;
@@ -83,22 +93,18 @@
       }
     }
     mNumAppRowsInAdapter=rowIndex + 1;
-    float rowFraction=1f / (mNumAppRowsInAdapter + (mPredictedApps.isEmpty() ? 0 : 1));
-    float initialOffset=mPredictedApps.isEmpty() ? 0 : rowFraction;
+    float rowFraction=1f / mNumAppRowsInAdapter;
     for (    FastScrollSectionInfo info : mFastScrollerSections) {
       AdapterItem item=info.fastScrollToItem;
-      if (item.viewType != AllAppsGridAdapter.ICON_VIEW_TYPE) {
+      if (item.viewType != AllAppsGridAdapter.ICON_VIEW_TYPE && item.viewType != AllAppsGridAdapter.PREDICTION_ICON_VIEW_TYPE) {
         info.touchFraction=0f;
         continue;
       }
       float subRowFraction=item.rowAppIndex * (rowFraction / mNumAppsPerRow);
-      info.touchFraction=initialOffset + item.rowIndex * rowFraction + subRowFraction;
+      info.touchFraction=item.rowIndex * rowFraction + subRowFraction;
     }
   }
   if (mAdapter != null) {
     mAdapter.notifyDataSetChanged();
-  }
-  if (mAdapterChangedCallback != null) {
-    mAdapterChangedCallback.onAdapterItemsChanged();
   }
 }

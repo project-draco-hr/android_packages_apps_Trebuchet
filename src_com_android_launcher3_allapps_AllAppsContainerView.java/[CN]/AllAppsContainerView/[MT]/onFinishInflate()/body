@@ -6,17 +6,7 @@
   View.OnFocusChangeListener focusProxyListener=new View.OnFocusChangeListener(){
     @Override public void onFocusChange(    View v,    boolean hasFocus){
       if (hasFocus) {
-        if (!mApps.getPredictedApps().isEmpty()) {
-          if (mPredictionBarView.getChildCount() == 0) {
-            mFocusPredictionBarOnFirstBind=true;
-          }
- else {
-            mPredictionBarView.requestFocus();
-          }
-        }
- else {
-          mAppsRecyclerView.requestFocus();
-        }
+        mAppsRecyclerView.requestFocus();
       }
     }
   }
@@ -28,15 +18,11 @@
   mRevealView=findViewById(R.id.all_apps_reveal);
   mAppsRecyclerView=(AllAppsRecyclerView)findViewById(R.id.apps_list_view);
   mAppsRecyclerView.setApps(mApps);
-  mAppsRecyclerView.setPredictionBarHeight(mPredictionBarHeight);
   mAppsRecyclerView.setLayoutManager(mLayoutManager);
   mAppsRecyclerView.setAdapter(mAdapter);
   mAppsRecyclerView.setHasFixedSize(true);
   if (mItemDecoration != null) {
     mAppsRecyclerView.addItemDecoration(mItemDecoration);
   }
-  mPredictionBarView=(ViewGroup)findViewById(R.id.prediction_bar);
-  FrameLayout.LayoutParams lp=(FrameLayout.LayoutParams)mPredictionBarView.getLayoutParams();
-  lp.height=mPredictionBarHeight;
   updateBackgroundAndPaddings();
 }
