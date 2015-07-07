@@ -1,5 +1,5 @@
 {
-  Animator workspaceAnim=mStateTransitionAnimation.getAnimationToState(getState(),toState,toPage,animated,hasOverlaySearchBar,layerViews);
+  Animator workspaceAnim=mStateTransitionAnimation.getAnimationToState(mState,toState,toPage,animated,hasOverlaySearchBar,layerViews);
   mState=toState;
   updateAccessibilityFlags();
   return workspaceAnim;
