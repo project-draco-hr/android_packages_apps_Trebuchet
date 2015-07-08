@@ -54,10 +54,6 @@
       childLeft+=childWidth + pageGap + getChildGap();
     }
   }
-  if (mFirstLayout && mCurrentPage >= 0 && mCurrentPage < childCount) {
-    updateCurrentPageScroll();
-    mFirstLayout=false;
-  }
   final LayoutTransition transition=getLayoutTransition();
   if (transition != null && transition.isRunning()) {
     transition.addTransitionListener(new LayoutTransition.TransitionListener(){
@@ -74,6 +70,10 @@
   }
  else {
     updateMaxScrollX();
+  }
+  if (mFirstLayout && mCurrentPage >= 0 && mCurrentPage < childCount) {
+    updateCurrentPageScroll();
+    mFirstLayout=false;
   }
   if (mScroller.isFinished() && mChildCountOnLastLayout != childCount) {
     if (mRestorePage != INVALID_RESTORE_PAGE) {
