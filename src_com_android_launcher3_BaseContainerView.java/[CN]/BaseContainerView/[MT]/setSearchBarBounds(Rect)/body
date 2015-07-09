@@ -1,5 +1,8 @@
 {
-  mSearchBarBounds.set(bounds);
+  if (LauncherAppState.isDogfoodBuild() && !isValidSearchBarBounds(bounds)) {
+    Log.e(TAG,"Invalid search bar bounds: " + bounds);
+  }
+  mFixedSearchBarBounds.set(bounds);
   post(new Runnable(){
     @Override public void run(){
       updateBackgroundAndPaddings();

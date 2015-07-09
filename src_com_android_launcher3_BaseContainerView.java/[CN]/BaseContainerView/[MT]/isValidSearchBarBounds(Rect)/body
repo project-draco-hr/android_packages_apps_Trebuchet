@@ -1,0 +1,3 @@
+{
+  return !searchBarBounds.isEmpty() && searchBarBounds.right <= getMeasuredWidth() && searchBarBounds.bottom <= getMeasuredHeight();
+}
