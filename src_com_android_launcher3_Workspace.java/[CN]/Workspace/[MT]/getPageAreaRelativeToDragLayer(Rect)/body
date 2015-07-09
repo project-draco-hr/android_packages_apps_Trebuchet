@@ -1,0 +1,11 @@
+{
+  CellLayout child=(CellLayout)getChildAt(getNextPage());
+  if (child == null) {
+    return;
+  }
+  ShortcutAndWidgetContainer boundingLayout=child.getShortcutsAndWidgets();
+  mTempXY[0]=getViewportOffsetX() + getPaddingLeft() + boundingLayout.getLeft();
+  mTempXY[1]=child.getTop() + boundingLayout.getTop();
+  float scale=mLauncher.getDragLayer().getDescendantCoordRelativeToSelf(this,mTempXY);
+  outArea.set(mTempXY[0],mTempXY[1],(int)(mTempXY[0] + scale * boundingLayout.getMeasuredWidth()),(int)(mTempXY[1] + scale * boundingLayout.getMeasuredHeight()));
+}
