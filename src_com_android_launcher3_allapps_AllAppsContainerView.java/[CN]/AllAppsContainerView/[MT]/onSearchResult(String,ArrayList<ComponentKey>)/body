@@ -1,12 +1,7 @@
 {
   if (apps != null) {
-    if (apps.isEmpty()) {
-      String formatStr=getResources().getString(R.string.all_apps_no_search_results);
-      mAdapter.setEmptySearchText(String.format(formatStr,query));
-    }
- else {
-      mAppsRecyclerView.scrollToTop();
-    }
     mApps.setOrderedFilter(apps);
+    mAdapter.setLastSearchQuery(query);
+    mAppsRecyclerView.scrollToTop();
   }
 }

@@ -4,8 +4,7 @@
   mLauncher=(Launcher)context;
   mSectionNamesMargin=res.getDimensionPixelSize(R.dimen.all_apps_grid_view_start_margin);
   mApps=new AlphabeticalAppsList(context);
-  mAdapter=new AllAppsGridAdapter(context,mApps,this,mLauncher,this);
-  mAdapter.setEmptySearchText(res.getString(R.string.all_apps_loading_message));
+  mAdapter=new AllAppsGridAdapter(mLauncher,mApps,this,mLauncher,this);
   mApps.setAdapter(mAdapter);
   mLayoutManager=mAdapter.getLayoutManager();
   mItemDecoration=mAdapter.getItemDecoration();

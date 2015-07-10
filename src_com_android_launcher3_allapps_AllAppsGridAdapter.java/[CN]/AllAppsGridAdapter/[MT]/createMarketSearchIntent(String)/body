@@ -1,0 +1,6 @@
+{
+  Uri marketSearchUri=Uri.parse("market://search").buildUpon().appendQueryParameter("q",query).build();
+  Intent marketSearchIntent=new Intent(Intent.ACTION_VIEW);
+  marketSearchIntent.setData(marketSearchUri);
+  return marketSearchIntent;
+}

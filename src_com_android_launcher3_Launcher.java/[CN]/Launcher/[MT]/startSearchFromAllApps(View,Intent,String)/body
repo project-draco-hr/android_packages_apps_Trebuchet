@@ -1,0 +1,6 @@
+{
+  if (mLauncherCallbacks != null && mLauncherCallbacks.startSearchFromAllApps(searchQuery)) {
+    return;
+  }
+  startActivitySafely(v,searchIntent,null);
+}
