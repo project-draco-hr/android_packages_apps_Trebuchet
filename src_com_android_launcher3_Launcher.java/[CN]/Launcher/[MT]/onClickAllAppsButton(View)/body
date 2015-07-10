@@ -1,9 +1,6 @@
 {
   if (LOGD)   Log.d(TAG,"onClickAllAppsButton");
-  if (isAppsViewVisible()) {
-    showWorkspace(true);
-  }
- else {
-    showAppsView(true,false,true);
+  if (!isAppsViewVisible()) {
+    showAppsView(true,false,true,false);
   }
 }

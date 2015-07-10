@@ -78,7 +78,6 @@
         dispatchOnLauncherTransitionEnd(fromView,animated,false);
         dispatchOnLauncherTransitionEnd(toView,animated,false);
         revealView.setVisibility(View.INVISIBLE);
-        pCb.onAnimationComplete(revealView,contentView,allAppsButtonView);
         for (        View v : layerViews.keySet()) {
           if (layerViews.get(v) == BUILD_AND_SET_LAYER) {
             v.setLayerType(View.LAYER_TYPE_NONE,null);
@@ -88,6 +87,7 @@
           mCb.onStateTransitionHideSearchBar();
         }
         mStateAnimation=null;
+        pCb.onTransitionComplete();
       }
     }
 );
@@ -137,5 +137,6 @@
     dispatchOnLauncherTransitionPrepare(toView,animated,false);
     dispatchOnLauncherTransitionStart(toView,animated,false);
     dispatchOnLauncherTransitionEnd(toView,animated,false);
+    pCb.onTransitionComplete();
   }
 }

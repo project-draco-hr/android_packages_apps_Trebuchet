@@ -96,7 +96,6 @@
         if (onCompleteRunnable != null) {
           onCompleteRunnable.run();
         }
-        pCb.onAnimationComplete(revealView,contentView,allAppsButtonView);
         for (        View v : layerViews.keySet()) {
           if (layerViews.get(v) == BUILD_AND_SET_LAYER) {
             v.setLayerType(View.LAYER_TYPE_NONE,null);
@@ -111,6 +110,7 @@
           overlaySearchBarView.setAlpha(1f);
         }
         mStateAnimation=null;
+        pCb.onTransitionComplete();
       }
     }
 );
@@ -143,6 +143,7 @@
     dispatchOnLauncherTransitionPrepare(toView,animated,true);
     dispatchOnLauncherTransitionStart(toView,animated,true);
     dispatchOnLauncherTransitionEnd(toView,animated,true);
+    pCb.onTransitionComplete();
     if (onCompleteRunnable != null) {
       onCompleteRunnable.run();
     }

@@ -3,7 +3,7 @@
   if (resetPageToZero) {
     mWidgetsView.scrollToTop();
   }
-  showAppsOrWidgets(animated,State.WIDGETS);
+  showAppsOrWidgets(State.WIDGETS,animated,false);
   mWidgetsView.post(new Runnable(){
     @Override public void run(){
       mWidgetsView.requestFocus();

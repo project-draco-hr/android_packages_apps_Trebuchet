@@ -2,6 +2,10 @@
   if (!isDraggingEnabled())   return false;
   if (isWorkspaceLocked())   return false;
   if (mState != State.WORKSPACE)   return false;
+  if (v == mAllAppsButton) {
+    onLongClickAllAppsButton(v);
+    return true;
+  }
   if (v instanceof Workspace) {
     if (!mWorkspace.isInOverviewMode()) {
       if (!mWorkspace.isTouchActive()) {

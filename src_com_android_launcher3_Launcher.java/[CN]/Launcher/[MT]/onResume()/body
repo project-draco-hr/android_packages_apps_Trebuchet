@@ -13,7 +13,7 @@
   }
  else   if (mOnResumeState == State.APPS) {
     boolean launchedFromApp=(mWaitingForResume != null);
-    showAppsView(false,false,!launchedFromApp);
+    showAppsView(false,false,!launchedFromApp,false);
   }
  else   if (mOnResumeState == State.WIDGETS) {
     showWidgetsView(false,false);

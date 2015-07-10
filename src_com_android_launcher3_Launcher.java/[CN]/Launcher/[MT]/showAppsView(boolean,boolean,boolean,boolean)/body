@@ -5,5 +5,5 @@
   if (updatePredictedApps) {
     tryAndUpdatePredictedApps();
   }
-  showAppsOrWidgets(animated,State.APPS);
+  showAppsOrWidgets(State.APPS,animated,focusSearchBar);
 }

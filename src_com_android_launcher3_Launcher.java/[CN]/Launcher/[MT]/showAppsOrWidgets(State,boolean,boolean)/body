@@ -6,7 +6,7 @@
     return false;
   }
   if (toState == State.APPS) {
-    mStateTransitionAnimation.startAnimationToAllApps(mState,animated);
+    mStateTransitionAnimation.startAnimationToAllApps(animated,focusSearchBar);
   }
  else {
     mStateTransitionAnimation.startAnimationToWidgets(animated);

@@ -29,6 +29,11 @@
       }
 ;
     }
+    @Override void onTransitionComplete(){
+      if (startSearchAfterTransition) {
+        toView.startAppsSearch();
+      }
+    }
   }
 ;
   startAnimationToOverlay(Workspace.State.NORMAL_HIDDEN,toView,toView.getContentView(),toView.getRevealView(),toView.getSearchBarView(),animated,true,cb);
