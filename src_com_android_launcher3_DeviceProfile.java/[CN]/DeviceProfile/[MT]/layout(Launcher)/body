@@ -64,14 +64,14 @@
   }
   ViewGroup overviewMode=launcher.getOverviewPanel();
   if (overviewMode != null) {
-    Rect r=getOverviewModeButtonBarRect();
+    int overviewButtonBarHeight=getOverviewModeButtonBarHeight();
     lp=(FrameLayout.LayoutParams)overviewMode.getLayoutParams();
     lp.gravity=Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM;
     int visibleChildCount=getVisibleChildCount(overviewMode);
     int totalItemWidth=visibleChildCount * overviewModeBarItemWidthPx;
     int maxWidth=totalItemWidth + (visibleChildCount - 1) * overviewModeBarSpacerWidthPx;
     lp.width=Math.min(availableWidthPx,maxWidth);
-    lp.height=r.height();
+    lp.height=overviewButtonBarHeight;
     overviewMode.setLayoutParams(lp);
     if (lp.width > totalItemWidth && visibleChildCount > 1) {
       int margin=(lp.width - totalItemWidth) / (visibleChildCount - 1);
