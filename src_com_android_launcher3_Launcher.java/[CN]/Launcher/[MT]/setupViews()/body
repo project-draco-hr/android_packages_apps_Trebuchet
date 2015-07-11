@@ -14,8 +14,8 @@
     mHotseat.setOnLongClickListener(this);
   }
   mOverviewPanel=(ViewGroup)findViewById(R.id.overview_panel);
-  View widgetButton=findViewById(R.id.widget_button);
-  widgetButton.setOnClickListener(new OnClickListener(){
+  mWidgetsButton=findViewById(R.id.widget_button);
+  mWidgetsButton.setOnClickListener(new OnClickListener(){
     @Override public void onClick(    View arg0){
       if (!mWorkspace.isSwitchingState()) {
         onClickAddWidgetButton(arg0);
@@ -23,7 +23,7 @@
     }
   }
 );
-  widgetButton.setOnTouchListener(getHapticFeedbackTouchListener());
+  mWidgetsButton.setOnTouchListener(getHapticFeedbackTouchListener());
   View wallpaperButton=findViewById(R.id.wallpaper_button);
   wallpaperButton.setOnClickListener(new OnClickListener(){
     @Override public void onClick(    View arg0){

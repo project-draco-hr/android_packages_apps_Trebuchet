@@ -3,10 +3,9 @@
   final boolean material=Utilities.isLmpOrAbove();
   final int revealDuration=res.getInteger(R.integer.config_overlayRevealTime);
   final int itemsAlphaStagger=res.getInteger(R.integer.config_overlayItemsAlphaStagger);
-  final View allAppsButtonView=mLauncher.getAllAppsButton();
   final View fromView=mLauncher.getWorkspace();
   final HashMap<View,Integer> layerViews=new HashMap<>();
-  boolean initialized=allAppsButtonView != null;
+  boolean initialized=buttonView != null;
   cancelAnimation();
   Animator workspaceAnim=mLauncher.startWorkspaceStateChangeAnimation(toWorkspaceState,-1,animated,overlaySearchBarView != null,layerViews);
   if (animated && initialized) {
@@ -18,14 +17,14 @@
     revealView.setAlpha(0f);
     revealView.setTranslationY(0f);
     revealView.setTranslationX(0f);
-    pCb.onRevealViewVisible(revealView,contentView,allAppsButtonView);
     final float revealViewToAlpha;
     final float revealViewToXDrift;
     final float revealViewToYDrift;
     if (material) {
+      int[] buttonViewToPanelDelta=Utilities.getCenterDeltaInScreenSpace(revealView,buttonView,null);
       revealViewToAlpha=pCb.getMaterialRevealViewFinalAlpha(revealView);
-      revealViewToYDrift=pCb.getMaterialRevealViewFinalYDrift(revealView);
-      revealViewToXDrift=pCb.getMaterialRevealViewFinalXDrift(revealView);
+      revealViewToYDrift=buttonViewToPanelDelta[1];
+      revealViewToXDrift=buttonViewToPanelDelta[0];
     }
  else {
       revealViewToAlpha=0f;
@@ -64,7 +63,7 @@
     mStateAnimation.play(itemsAlpha);
     if (material) {
       float startRadius=pCb.getMaterialRevealViewStartFinalRadius();
-      AnimatorListenerAdapter listener=pCb.getMaterialRevealViewAnimatorListener(revealView,allAppsButtonView);
+      AnimatorListenerAdapter listener=pCb.getMaterialRevealViewAnimatorListener(revealView,buttonView);
       Animator reveal=UiThreadCircularReveal.createCircularReveal(revealView,width / 2,height / 2,startRadius,revealRadius);
       reveal.setDuration(revealDuration);
       reveal.setInterpolator(new LogDecelerateInterpolator(100,0));

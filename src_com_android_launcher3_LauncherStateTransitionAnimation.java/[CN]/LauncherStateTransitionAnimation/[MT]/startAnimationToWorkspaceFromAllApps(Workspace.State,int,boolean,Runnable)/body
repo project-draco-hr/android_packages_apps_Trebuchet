@@ -2,15 +2,6 @@
   AllAppsContainerView appsView=mLauncher.getAppsView();
   PrivateTransitionCallbacks cb=new PrivateTransitionCallbacks(){
     int[] mAllAppsToPanelDelta;
-    @Override public void onRevealViewVisible(    View revealView,    View contentView,    View allAppsButtonView){
-      mAllAppsToPanelDelta=Utilities.getCenterDeltaInScreenSpace(revealView,allAppsButtonView,null);
-    }
-    @Override public float getMaterialRevealViewFinalXDrift(    View revealView){
-      return mAllAppsToPanelDelta[0];
-    }
-    @Override public float getMaterialRevealViewFinalYDrift(    View revealView){
-      return mAllAppsToPanelDelta[1];
-    }
     @Override float getMaterialRevealViewFinalAlpha(    View revealView){
       return 1f;
     }
@@ -33,5 +24,5 @@
     }
   }
 ;
-  startAnimationToWorkspaceFromOverlay(toWorkspaceState,toWorkspacePage,appsView,appsView.getContentView(),appsView.getRevealView(),appsView.getSearchBarView(),animated,onCompleteRunnable,cb);
+  startAnimationToWorkspaceFromOverlay(toWorkspaceState,toWorkspacePage,mLauncher.getAllAppsButton(),appsView,appsView.getContentView(),appsView.getRevealView(),appsView.getSearchBarView(),animated,onCompleteRunnable,cb);
 }

@@ -1,8 +1,10 @@
 Workspace.State toWorkspaceState
-View toView
+int toWorkspacePage
+View buttonView
+View fromView
 View contentView
 View revealView
 View overlaySearchBarView
 boolean animated
-boolean hideSearchBar
+Runnable onCompleteRunnable
 PrivateTransitionCallbacks pCb

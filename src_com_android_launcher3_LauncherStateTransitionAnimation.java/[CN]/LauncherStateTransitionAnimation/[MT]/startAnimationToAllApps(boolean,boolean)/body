@@ -1,18 +1,9 @@
 {
   final AllAppsContainerView toView=mLauncher.getAppsView();
+  final View buttonView=mLauncher.getAllAppsButton();
   PrivateTransitionCallbacks cb=new PrivateTransitionCallbacks(){
-    private int[] mAllAppsToPanelDelta;
-    @Override public void onRevealViewVisible(    View revealView,    View contentView,    View allAppsButtonView){
-      mAllAppsToPanelDelta=Utilities.getCenterDeltaInScreenSpace(revealView,allAppsButtonView,null);
-    }
     @Override public float getMaterialRevealViewFinalAlpha(    View revealView){
       return 1f;
-    }
-    @Override public float getMaterialRevealViewFinalXDrift(    View revealView){
-      return mAllAppsToPanelDelta[0];
-    }
-    @Override public float getMaterialRevealViewFinalYDrift(    View revealView){
-      return mAllAppsToPanelDelta[1];
     }
     @Override public float getMaterialRevealViewStartFinalRadius(){
       int allAppsButtonSize=mLauncher.getDeviceProfile().allAppsButtonVisualSize;
@@ -36,5 +27,5 @@
     }
   }
 ;
-  startAnimationToOverlay(Workspace.State.NORMAL_HIDDEN,toView,toView.getContentView(),toView.getRevealView(),toView.getSearchBarView(),animated,true,cb);
+  startAnimationToOverlay(Workspace.State.NORMAL_HIDDEN,buttonView,toView,toView.getContentView(),toView.getRevealView(),toView.getSearchBarView(),animated,true,cb);
 }
