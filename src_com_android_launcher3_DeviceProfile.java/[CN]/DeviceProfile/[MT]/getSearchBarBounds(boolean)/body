@@ -10,7 +10,7 @@
   }
  else {
     if (isTablet) {
-      int width=isLandscape ? Math.max(widthPx,heightPx) : Math.min(widthPx,heightPx);
+      int width=getCurrentWidth();
       int gap=(int)((width - 2 * edgeMarginPx - (inv.numColumns * cellWidthPx)) / (2 * (inv.numColumns + 1)));
       bounds.set(edgeMarginPx + gap,getSearchBarTopOffset(),availableWidthPx - (edgeMarginPx + gap),searchBarSpaceHeightPx);
     }

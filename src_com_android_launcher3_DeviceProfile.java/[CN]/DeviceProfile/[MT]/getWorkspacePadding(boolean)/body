@@ -12,8 +12,8 @@
  else {
     if (isTablet) {
       float gapScale=1f + (dragViewScale - 1f) / 2f;
-      int width=isLandscape ? Math.max(widthPx,heightPx) : Math.min(widthPx,heightPx);
-      int height=isLandscape ? Math.max(widthPx,heightPx) : Math.min(widthPx,heightPx);
+      int width=getCurrentWidth();
+      int height=getCurrentHeight();
       int paddingTop=searchBarBounds.bottom;
       int paddingBottom=hotseatBarHeightPx + pageIndicatorHeightPx;
       int availableWidth=Math.max(0,width - (int)((inv.numColumns * cellWidthPx) + (inv.numColumns * gapScale * cellWidthPx)));
