@@ -23,7 +23,7 @@
     throw new InvalidParameterException("Invalid restoreType " + promiseType);
   }
   info.contentDescription=mUserManager.getBadgedLabelForUser(info.title,info.user);
-  info.itemType=LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT;
+  info.itemType=itemType;
   info.promisedIntent=intent;
   info.status=promiseType;
   return info;
