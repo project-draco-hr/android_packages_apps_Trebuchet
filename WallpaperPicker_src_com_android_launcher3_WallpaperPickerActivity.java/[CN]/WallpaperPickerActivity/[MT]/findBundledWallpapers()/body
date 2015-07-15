@@ -1,34 +1,40 @@
 {
   final PackageManager pm=getContext().getPackageManager();
   final ArrayList<WallpaperTileInfo> bundled=new ArrayList<WallpaperTileInfo>(24);
-  Partner partner=Partner.get(pm);
-  if (partner != null) {
-    final Resources partnerRes=partner.getResources();
-    final int resId=partnerRes.getIdentifier(Partner.RES_WALLPAPERS,"array",partner.getPackageName());
-    if (resId != 0) {
-      addWallpapers(bundled,partnerRes,partner.getPackageName(),resId);
-    }
-    File systemDir=partner.getWallpaperDirectory();
-    if (systemDir != null && systemDir.isDirectory()) {
-      for (      File file : systemDir.listFiles()) {
-        if (!file.isFile()) {
-          continue;
+  List<Partner> partners=Partner.getAllPartners(pm);
+  boolean hideDefault=false;
+  if (partners != null) {
+    for (    Partner partner : partners) {
+      final Resources partnerRes=partner.getResources();
+      final int resId=partnerRes.getIdentifier(Partner.RES_WALLPAPERS,"array",partner.getPackageName());
+      if (resId != 0) {
+        addWallpapers(bundled,partnerRes,partner.getPackageName(),resId);
+      }
+      File systemDir=partner.getWallpaperDirectory();
+      if (systemDir != null && systemDir.isDirectory()) {
+        for (        File file : systemDir.listFiles()) {
+          if (!file.isFile()) {
+            continue;
+          }
+          String name=file.getName();
+          int dotPos=name.lastIndexOf('.');
+          String extension="";
+          if (dotPos >= -1) {
+            extension=name.substring(dotPos);
+            name=name.substring(0,dotPos);
+          }
+          if (name.endsWith("_small")) {
+            continue;
+          }
+          File thumbnail=new File(systemDir,name + "_small" + extension);
+          Bitmap thumb=BitmapFactory.decodeFile(thumbnail.getAbsolutePath());
+          if (thumb != null) {
+            bundled.add(new FileWallpaperInfo(file,new BitmapDrawable(thumb)));
+          }
         }
-        String name=file.getName();
-        int dotPos=name.lastIndexOf('.');
-        String extension="";
-        if (dotPos >= -1) {
-          extension=name.substring(dotPos);
-          name=name.substring(0,dotPos);
-        }
-        if (name.endsWith("_small")) {
-          continue;
-        }
-        File thumbnail=new File(systemDir,name + "_small" + extension);
-        Bitmap thumb=BitmapFactory.decodeFile(thumbnail.getAbsolutePath());
-        if (thumb != null) {
-          bundled.add(new FileWallpaperInfo(file,new BitmapDrawable(thumb)));
-        }
+      }
+      if (partner.hideDefaultWallpaper()) {
+        hideDefault=true;
       }
     }
   }
@@ -41,7 +47,7 @@
  catch (    PackageManager.NameNotFoundException e) {
     }
   }
-  if (partner == null || !partner.hideDefaultWallpaper()) {
+  if (!hideDefault) {
     WallpaperTileInfo defaultWallpaperInfo=Utilities.ATLEAST_KITKAT ? getDefaultWallpaper() : getPreKKDefaultWallpaperInfo();
     if (defaultWallpaperInfo != null) {
       bundled.add(0,defaultWallpaperInfo);

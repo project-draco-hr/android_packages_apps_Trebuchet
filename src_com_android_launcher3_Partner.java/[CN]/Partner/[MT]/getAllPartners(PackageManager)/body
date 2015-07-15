@@ -1,0 +1,10 @@
+{
+  if (!sSearched) {
+    List<Pair<String,Resources>> apkInfos=Utilities.findSystemApks(ACTION_PARTNER_CUSTOMIZATION,pm);
+    for (    Pair<String,Resources> apkInfo : apkInfos) {
+      sPartners.add(new Partner(apkInfo.first,apkInfo.second));
+    }
+    sSearched=true;
+  }
+  return sPartners;
+}
