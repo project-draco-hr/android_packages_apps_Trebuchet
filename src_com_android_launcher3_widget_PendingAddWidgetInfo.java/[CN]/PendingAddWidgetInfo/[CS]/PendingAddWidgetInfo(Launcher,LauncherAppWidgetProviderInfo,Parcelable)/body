@@ -6,6 +6,7 @@
     itemType=LauncherSettings.Favorites.ITEM_TYPE_APPWIDGET;
   }
   this.info=i;
+  user=AppWidgetManagerCompat.getInstance(launcher).getUser(i);
   componentName=i.provider;
   minWidth=i.minWidth;
   minHeight=i.minHeight;
