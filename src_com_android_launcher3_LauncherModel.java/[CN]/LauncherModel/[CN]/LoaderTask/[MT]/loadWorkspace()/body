@@ -251,13 +251,18 @@ case LauncherSettings.Favorites.ITEM_TYPE_CUSTOM_APPWIDGET:
 boolean customWidget=itemType == LauncherSettings.Favorites.ITEM_TYPE_CUSTOM_APPWIDGET;
 int appWidgetId=c.getInt(appWidgetIdIndex);
 serialNumber=c.getLong(profileIdIndex);
+user=mUserManager.getUserForSerialNumber(serialNumber);
+if (user == null) {
+itemsToRemove.add(id);
+continue;
+}
 String savedProvider=c.getString(appWidgetProviderIndex);
 id=c.getLong(idIndex);
 final ComponentName component=ComponentName.unflattenFromString(savedProvider);
 final int restoreStatus=c.getInt(restoredIndex);
 final boolean isIdValid=(restoreStatus & LauncherAppWidgetInfo.FLAG_ID_NOT_VALID) == 0;
 final boolean wasProviderReady=(restoreStatus & LauncherAppWidgetInfo.FLAG_PROVIDER_NOT_READY) == 0;
-final LauncherAppWidgetProviderInfo provider=LauncherModel.getProviderInfo(context,ComponentName.unflattenFromString(savedProvider),mUserManager.getUserForSerialNumber(serialNumber));
+final LauncherAppWidgetProviderInfo provider=LauncherModel.getProviderInfo(context,ComponentName.unflattenFromString(savedProvider),user);
 final boolean isProviderReady=isValidProvider(provider);
 if (!isSafeMode && !customWidget && wasProviderReady&& !isProviderReady) {
 String log="Deleting widget that isn't installed anymore: " + "id=" + id + " appWidgetId="+ appWidgetId;
@@ -305,6 +310,7 @@ appWidgetInfo.cellX=c.getInt(cellXIndex);
 appWidgetInfo.cellY=c.getInt(cellYIndex);
 appWidgetInfo.spanX=c.getInt(spanXIndex);
 appWidgetInfo.spanY=c.getInt(spanYIndex);
+appWidgetInfo.user=user;
 if (!customWidget) {
 int[] minSpan=Launcher.getMinSpanForWidget(context,provider);
 appWidgetInfo.minSpanX=minSpan[0];
