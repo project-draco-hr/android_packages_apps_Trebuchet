@@ -30,7 +30,7 @@
  else {
         Log.w(TAG,"empty intent on appwidget: " + id);
       }
-      if (mExistingKeys.contains(backupKey)) {
+      if (mExistingKeys.contains(backupKey) && restoredBackupVersion >= BACKUP_VERSION) {
         if (DEBUG)         Log.d(TAG,"already saved widget " + backupKey);
         mKeys.add(key);
       }

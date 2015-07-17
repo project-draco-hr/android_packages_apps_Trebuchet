@@ -21,7 +21,6 @@
       MessageNano.mergeFrom(journal,readCheckedBytes(mBuffer,dataSize));
       applyJournal(journal);
       restoreSuccessful=isBackupCompatible(journal);
-      restoredBackupVersion=journal.backupVersion;
       return;
     }
     if (!mExistingKeys.isEmpty() && !mExistingKeys.contains(backupKey)) {

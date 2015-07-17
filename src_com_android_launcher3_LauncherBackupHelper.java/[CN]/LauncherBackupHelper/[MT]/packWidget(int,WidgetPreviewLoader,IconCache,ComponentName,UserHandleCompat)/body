@@ -23,5 +23,7 @@
       widget.preview.dpi=dpi;
     }
   }
+  widget.minSpanX=(info.resizeMode & LauncherAppWidgetProviderInfo.RESIZE_HORIZONTAL) != 0 ? info.minSpanX : -1;
+  widget.minSpanY=(info.resizeMode & LauncherAppWidgetProviderInfo.RESIZE_VERTICAL) != 0 ? info.minSpanY : -1;
   return widget;
 }
