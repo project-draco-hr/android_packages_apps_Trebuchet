@@ -4,6 +4,10 @@
   final Intent intent;
   if (tag instanceof ShortcutInfo) {
     shortcut=(ShortcutInfo)tag;
+    if (shortcut.isDisabled == 1) {
+      Toast.makeText(this,R.string.app_not_available,Toast.LENGTH_SHORT).show();
+      return;
+    }
     intent=shortcut.intent;
     int[] pos=new int[2];
     v.getLocationOnScreen(pos);

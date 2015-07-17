@@ -1,0 +1,6 @@
+{
+  if (waitUntilResume(mBindPackagesUpdatedRunnable,true)) {
+    mWidgetsAndShortcuts=widgetsAndShortcuts;
+    return;
+  }
+}

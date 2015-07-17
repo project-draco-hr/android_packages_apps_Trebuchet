@@ -1,0 +1,36 @@
+{
+  ViewGroup layout=parent.getShortcutsAndWidgets();
+  int childCount=layout.getChildCount();
+  for (int i=0; i < childCount; ++i) {
+    View view=layout.getChildAt(i);
+    if (view instanceof BubbleTextView) {
+      ItemInfo info=(ItemInfo)view.getTag();
+      if (info instanceof ShortcutInfo) {
+        Intent intent=info.getIntent();
+        ComponentName cn=intent != null ? intent.getComponent() : null;
+        for (        ItemInfo itemInfo : appInfos) {
+          AppInfo appInfo=(AppInfo)itemInfo;
+          if (cn != null && cn.getPackageName().equals(appInfo.componentName.getPackageName())) {
+            ShortcutInfo shortcut=(ShortcutInfo)info;
+            if (shortcut.isDisabled == 1) {
+              shortcut.isDisabled=0;
+              ((BubbleTextView)view).applyFromShortcutInfo(shortcut,mIconCache,true);
+            }
+          }
+        }
+      }
+    }
+ else     if (view instanceof FolderIcon) {
+      final Folder folder=((FolderIcon)view).getFolder();
+      final FolderPagedView folderPagedView=(FolderPagedView)folder.getContent();
+      final int N=folderPagedView.getItemCount();
+      for (int page=0; page < N; page++) {
+        final CellLayout cellLayout=folderPagedView.getPageAt(page);
+        if (cellLayout != null) {
+          updateAvailabeItemsInCellLayout(cellLayout,appInfos);
+        }
+      }
+      folder.invalidate();
+    }
+  }
+}

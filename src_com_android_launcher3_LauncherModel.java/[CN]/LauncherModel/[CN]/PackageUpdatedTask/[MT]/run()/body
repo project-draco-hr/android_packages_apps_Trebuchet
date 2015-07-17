@@ -5,6 +5,7 @@
   final Context context=mApp.getContext();
   final String[] packages=mPackages;
   final int N=packages.length;
+  final ArrayList<String> unavailable=new ArrayList<String>();
 switch (mOp) {
 case OP_ADD:
 {
@@ -43,6 +44,9 @@ for (int i=0; i < N; i++) {
 if (DEBUG_LOADERS) Log.d(TAG,"mAllAppsList.removePackage " + packages[i]);
 mBgAllAppsList.removePackage(packages[i],mUser);
 mApp.getWidgetCache().removePackage(packages[i],mUser);
+if (mOp == OP_UNAVAILABLE) {
+unavailable.add(packages[i]);
+}
 }
 break;
 }
@@ -68,10 +72,21 @@ return;
 }
 final HashMap<ComponentName,AppInfo> addedOrUpdatedApps=new HashMap<ComponentName,AppInfo>();
 if (added != null) {
+final ArrayList<ItemInfo> addedInfos=new ArrayList<ItemInfo>(added);
 addAppsToAllApps(context,added);
 for (AppInfo ai : added) {
 addedOrUpdatedApps.put(ai.componentName,ai);
 }
+mHandler.post(new Runnable(){
+public void run(){
+Callbacks cb=mCallbacks != null ? mCallbacks.get() : null;
+if (callbacks == cb && cb != null) {
+if (DEBUG_LOADERS) Log.d(TAG,"bindComponentsAvailable: " + addedInfos.size());
+callbacks.bindComponentsAvailable(addedInfos);
+}
+}
+}
+);
 }
 if (modified != null) {
 final ArrayList<AppInfo> modifiedFinal=modified;
@@ -206,6 +221,16 @@ if (!removedPackageNames.isEmpty() || !removedApps.isEmpty()) {
 final int removeReason;
 if (mOp == OP_UNAVAILABLE) {
 removeReason=ShortcutInfo.FLAG_DISABLED_NOT_AVAILABLE;
+mHandler.post(new Runnable(){
+public void run(){
+Callbacks cb=mCallbacks != null ? mCallbacks.get() : null;
+if (callbacks == cb && cb != null) {
+if (DEBUG_LOADERS) Log.d(TAG,"bindComponentsUnavailable: " + removedApps.size());
+callbacks.bindComponentsUnavailable(unavailable,removedApps);
+}
+}
+}
+);
 }
  else {
 for (String pn : removedPackageNames) {
@@ -218,6 +243,18 @@ deleteItemsFromDatabase(context,infos);
 removeReason=0;
 }
 InstallShortcutReceiver.removeFromInstallQueue(context,removedPackageNames,mUser);
+if (mOp == OP_UNAVAILABLE) {
+mHandler.post(new Runnable(){
+public void run(){
+Callbacks cb=mCallbacks != null ? mCallbacks.get() : null;
+if (callbacks == cb && cb != null) {
+callbacks.bindComponentsUnavailable(unavailable,removedApps);
+}
+}
+}
+);
+}
+ else {
 mHandler.post(new Runnable(){
 public void run(){
 Callbacks cb=getCallback();
@@ -227,6 +264,7 @@ callbacks.bindComponentsRemoved(removedPackageNames,removedApps,mUser,removeReas
 }
 }
 );
+}
 }
 if (mOp == OP_ADD || mOp == OP_REMOVE || mOp == OP_UPDATE) {
 boolean needToRefresh=!mUser.equals(UserHandleCompat.myUserHandle());

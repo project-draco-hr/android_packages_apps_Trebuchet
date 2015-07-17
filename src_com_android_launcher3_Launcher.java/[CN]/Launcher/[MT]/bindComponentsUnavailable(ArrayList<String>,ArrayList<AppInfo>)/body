@@ -1,0 +1,11 @@
+{
+  if (!packageNames.isEmpty()) {
+    mWorkspace.updateUnavailableItemsByPackageName(packageNames);
+  }
+  HashSet<ComponentName> cns=new HashSet<>();
+  for (  AppInfo appInfo : appInfos) {
+    cns.add(appInfo.componentName);
+  }
+  mDragController.onAppsRemoved(packageNames,cns);
+  mAppsView.removeApps(appInfos);
+}

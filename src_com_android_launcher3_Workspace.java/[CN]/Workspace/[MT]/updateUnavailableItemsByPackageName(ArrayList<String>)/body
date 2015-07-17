@@ -1,0 +1,6 @@
+{
+  ArrayList<CellLayout> cellLayouts=getWorkspaceAndHotseatCellLayouts();
+  for (  CellLayout layoutParent : cellLayouts) {
+    updateUnvailableItemsInCellLayout(layoutParent,packages);
+  }
+}
