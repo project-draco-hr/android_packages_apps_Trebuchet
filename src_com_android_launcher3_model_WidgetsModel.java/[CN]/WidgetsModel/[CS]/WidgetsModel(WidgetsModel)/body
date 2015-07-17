@@ -1,4 +1,5 @@
 {
+  mAppWidgetMgr=model.mAppWidgetMgr;
   mPackageItemInfos=(ArrayList<PackageItemInfo>)model.mPackageItemInfos.clone();
   mWidgetsList=(HashMap<PackageItemInfo,ArrayList<Object>>)model.mWidgetsList.clone();
   mRawList=(ArrayList<Object>)model.mRawList.clone();
