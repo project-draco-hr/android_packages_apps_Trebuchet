@@ -19,7 +19,7 @@
   if (hasData && mHelper.restoreSuccessful) {
     LauncherAppState.getLauncherProvider().clearFlagEmptyDbCreated();
     LauncherClings.synchonouslyMarkFirstRunClingDismissed(this);
-    if (mHelper.restoredBackupVersion <= 2) {
+    if (mHelper.restoredBackupVersion <= 3) {
       LauncherAppState.getLauncherProvider().updateFolderItemsRank();
       LauncherAppState.getLauncherProvider().convertShortcutsToLauncherActivities();
     }
