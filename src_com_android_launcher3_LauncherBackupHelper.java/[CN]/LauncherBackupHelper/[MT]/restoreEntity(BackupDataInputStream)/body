@@ -3,9 +3,9 @@
     return;
   }
   if (mDeviceProfileData == null) {
-    InvariantDeviceProfile profile=new InvariantDeviceProfile(mContext);
-    mDeviceProfileData=initDeviceProfileData(profile);
-    mIconCache=new IconCache(mContext,profile);
+    mIdp=new InvariantDeviceProfile(mContext);
+    mDeviceProfileData=initDeviceProfileData(mIdp);
+    mIconCache=new IconCache(mContext,mIdp);
   }
   int dataSize=data.size();
   if (mBuffer.length < dataSize) {
@@ -26,7 +26,6 @@
       MessageNano.mergeFrom(journal,readCheckedBytes(mBuffer,dataSize));
       applyJournal(journal);
       restoreSuccessful=isBackupCompatible(journal);
-      restoredBackupVersion=journal.backupVersion;
       return;
     }
     if (!mExistingKeys.isEmpty() && !mExistingKeys.contains(backupKey)) {

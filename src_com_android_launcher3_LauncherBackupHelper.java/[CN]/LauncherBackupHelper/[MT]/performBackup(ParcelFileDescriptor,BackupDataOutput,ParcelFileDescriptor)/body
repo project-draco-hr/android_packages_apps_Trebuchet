@@ -8,7 +8,8 @@
   }
   if (mDeviceProfileData == null) {
     LauncherAppState app=LauncherAppState.getInstance();
-    mDeviceProfileData=initDeviceProfileData(app.getInvariantDeviceProfile());
+    mIdp=app.getInvariantDeviceProfile();
+    mDeviceProfileData=initDeviceProfileData(mIdp);
     mIconCache=app.getIconCache();
   }
   Log.v(TAG,"lastBackupTime = " + in.t);
