@@ -1,5 +1,8 @@
 {
   Favorite favorite=unpackProto(new Favorite(),buffer,dataSize);
+  if (favorite.container == Favorites.CONTAINER_HOTSEAT) {
+    favorite.screen+=mHotseatShift;
+  }
   ContentValues values=new ContentValues();
   values.put(Favorites._ID,favorite.id);
   values.put(Favorites.SCREEN,favorite.screen);
