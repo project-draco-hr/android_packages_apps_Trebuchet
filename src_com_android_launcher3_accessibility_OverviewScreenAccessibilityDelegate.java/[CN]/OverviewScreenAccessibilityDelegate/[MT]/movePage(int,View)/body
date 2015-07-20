@@ -1,0 +1,9 @@
+{
+  mWorkspace.onStartReordering();
+  mWorkspace.removeView(view);
+  mWorkspace.addView(view,finalIndex);
+  mWorkspace.onEndReordering();
+  mWorkspace.announceForAccessibility(mWorkspace.getContext().getText(R.string.screen_moved));
+  mWorkspace.updateAccessibilityFlags();
+  view.performAccessibilityAction(AccessibilityNodeInfo.ACTION_ACCESSIBILITY_FOCUS,null);
+}

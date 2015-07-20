@@ -1,4 +1,0 @@
-{
-  a.setWallpaperStripYOffset(insets.bottom);
-  return true;
-}

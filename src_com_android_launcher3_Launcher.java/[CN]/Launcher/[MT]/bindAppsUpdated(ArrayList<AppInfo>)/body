@@ -1,0 +1,14 @@
+{
+  Runnable r=new Runnable(){
+    public void run(){
+      bindAppsUpdated(apps);
+    }
+  }
+;
+  if (waitUntilResume(r)) {
+    return;
+  }
+  if (mAppsView != null) {
+    mAppsView.updateApps(apps);
+  }
+}

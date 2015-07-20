@@ -8,30 +8,15 @@
   favorite.spanX=c.getInt(SPANX_INDEX);
   favorite.spanY=c.getInt(SPANY_INDEX);
   favorite.iconType=c.getInt(ICON_TYPE_INDEX);
-  if (favorite.iconType == Favorites.ICON_TYPE_RESOURCE) {
-    String iconPackage=c.getString(ICON_PACKAGE_INDEX);
-    if (!TextUtils.isEmpty(iconPackage)) {
-      favorite.iconPackage=iconPackage;
-    }
-    String iconResource=c.getString(ICON_RESOURCE_INDEX);
-    if (!TextUtils.isEmpty(iconResource)) {
-      favorite.iconResource=iconResource;
-    }
-  }
-  if (favorite.iconType == Favorites.ICON_TYPE_BITMAP) {
-    byte[] blob=c.getBlob(ICON_INDEX);
-    if (blob != null && blob.length > 0) {
-      favorite.icon=blob;
-    }
-  }
   String title=c.getString(TITLE_INDEX);
   if (!TextUtils.isEmpty(title)) {
     favorite.title=title;
   }
   String intentDescription=c.getString(INTENT_INDEX);
+  Intent intent=null;
   if (!TextUtils.isEmpty(intentDescription)) {
     try {
-      Intent intent=Intent.parseUri(intentDescription,0);
+      intent=Intent.parseUri(intentDescription,0);
       intent.removeExtra(ItemInfo.EXTRA_PROFILE);
       favorite.intent=intent.toUri(0);
     }
@@ -45,6 +30,47 @@
     String appWidgetProvider=c.getString(APPWIDGET_PROVIDER_INDEX);
     if (!TextUtils.isEmpty(appWidgetProvider)) {
       favorite.appWidgetProvider=appWidgetProvider;
+    }
+  }
+ else   if (favorite.itemType == Favorites.ITEM_TYPE_SHORTCUT) {
+    if (favorite.iconType == Favorites.ICON_TYPE_RESOURCE) {
+      String iconPackage=c.getString(ICON_PACKAGE_INDEX);
+      if (!TextUtils.isEmpty(iconPackage)) {
+        favorite.iconPackage=iconPackage;
+      }
+      String iconResource=c.getString(ICON_RESOURCE_INDEX);
+      if (!TextUtils.isEmpty(iconResource)) {
+        favorite.iconResource=iconResource;
+      }
+    }
+    byte[] blob=c.getBlob(ICON_INDEX);
+    if (blob != null && blob.length > 0) {
+      favorite.icon=blob;
+    }
+  }
+  if (isReplaceableHotseatItem(favorite)) {
+    if (intent != null && intent.getComponent() != null) {
+      PackageManager pm=mContext.getPackageManager();
+      ActivityInfo activity=null;
+      ;
+      try {
+        activity=pm.getActivityInfo(intent.getComponent(),0);
+      }
+ catch (      NameNotFoundException e) {
+        Log.e(TAG,"Target not found",e);
+      }
+      if (activity == null) {
+        return favorite;
+      }
+      for (int i=0; i < mItemTypeMatchers.length; i++) {
+        if (mItemTypeMatchers[i] == null) {
+          mItemTypeMatchers[i]=new ItemTypeMatcher(CommonAppTypeParser.getResourceForItemType(i));
+        }
+        if (mItemTypeMatchers[i].matches(activity,pm)) {
+          favorite.targetType=i;
+          break;
+        }
+      }
     }
   }
   return favorite;

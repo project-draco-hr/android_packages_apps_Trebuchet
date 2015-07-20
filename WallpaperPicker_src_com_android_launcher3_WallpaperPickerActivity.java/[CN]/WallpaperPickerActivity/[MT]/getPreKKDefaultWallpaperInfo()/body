@@ -11,8 +11,8 @@
  else {
     Resources res=getResources();
     Point defaultThumbSize=getDefaultThumbnailSize(res);
-    int rotation=WallpaperCropActivity.getRotationFromExif(res,resId);
-    thumb=createThumbnail(defaultThumbSize,this,null,null,sysRes,resId,rotation,false);
+    int rotation=BitmapUtils.getRotationFromExif(res,resId);
+    thumb=createThumbnail(defaultThumbSize,getContext(),null,null,sysRes,resId,rotation,false);
     if (thumb != null) {
       defaultWallpaperExists=saveDefaultWallpaperThumb(thumb);
     }

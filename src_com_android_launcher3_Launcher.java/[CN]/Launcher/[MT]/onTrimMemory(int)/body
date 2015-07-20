@@ -1,0 +1,9 @@
+{
+  super.onTrimMemory(level);
+  if (level >= ComponentCallbacks2.TRIM_MEMORY_UI_HIDDEN) {
+    SQLiteDatabase.releaseMemory();
+  }
+  if (mLauncherCallbacks != null) {
+    mLauncherCallbacks.onTrimMemory(level);
+  }
+}

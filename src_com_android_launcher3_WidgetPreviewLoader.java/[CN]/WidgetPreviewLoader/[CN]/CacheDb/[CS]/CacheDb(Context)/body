@@ -1,4 +1,3 @@
 {
-  super(context,new File(context.getCacheDir(),LauncherFiles.WIDGET_PREVIEWS_DB).getPath(),null,DB_VERSION);
-  mContext=context;
+  super(context,LauncherFiles.WIDGET_PREVIEWS_DB,null,DB_VERSION);
 }

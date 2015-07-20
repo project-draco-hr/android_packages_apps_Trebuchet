@@ -1,0 +1,6 @@
+{
+  if (getTag() instanceof PendingAddWidgetInfo || getTag() instanceof PendingAddShortcutInfo) {
+    return getTag().toString();
+  }
+  return "";
+}

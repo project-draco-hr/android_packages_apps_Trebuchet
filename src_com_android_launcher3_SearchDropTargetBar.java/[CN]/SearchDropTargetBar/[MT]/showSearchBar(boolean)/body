@@ -1,16 +1,12 @@
 {
-  boolean needToCancelOngoingAnimation=mQSBSearchBarAnim.isRunning() && !animated;
-  if (!mIsSearchBarHidden && !needToCancelOngoingAnimation)   return;
+  if (!mIsSearchBarHidden)   return;
   if (animated) {
     prepareStartAnimation(mQSBSearchBar);
-    mQSBSearchBarAnim.reverse();
+    mHideSearchBarAnim.reverse();
   }
  else {
-    mQSBSearchBarAnim.cancel();
-    if (mQSBSearchBar != null && mEnableDropDownDropTargets) {
-      mQSBSearchBar.setTranslationY(0);
-    }
- else     if (mQSBSearchBar != null) {
+    mHideSearchBarAnim.cancel();
+    if (mQSBSearchBar != null) {
       mQSBSearchBar.setAlpha(1f);
     }
   }

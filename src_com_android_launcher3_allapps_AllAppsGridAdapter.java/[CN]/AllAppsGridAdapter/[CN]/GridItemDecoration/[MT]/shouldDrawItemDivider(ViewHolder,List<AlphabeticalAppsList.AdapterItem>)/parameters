@@ -1,0 +1,2 @@
+ViewHolder holder
+List<AlphabeticalAppsList.AdapterItem> items

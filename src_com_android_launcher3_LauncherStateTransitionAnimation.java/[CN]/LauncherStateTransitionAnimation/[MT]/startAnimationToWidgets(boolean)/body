@@ -1,0 +1,11 @@
+{
+  final WidgetsContainerView toView=mLauncher.getWidgetsView();
+  final View buttonView=mLauncher.getWidgetsButton();
+  PrivateTransitionCallbacks cb=new PrivateTransitionCallbacks(){
+    @Override public float getMaterialRevealViewFinalAlpha(    View revealView){
+      return 0.3f;
+    }
+  }
+;
+  startAnimationToOverlay(Workspace.State.OVERVIEW_HIDDEN,buttonView,toView,toView.getContentView(),toView.getRevealView(),null,animated,true,cb);
+}

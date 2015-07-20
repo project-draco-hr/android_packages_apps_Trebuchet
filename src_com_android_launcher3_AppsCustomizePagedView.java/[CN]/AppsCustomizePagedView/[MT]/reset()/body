@@ -1,9 +1,0 @@
-{
-  mSaveInstanceStateItemIndex=-1;
-  if (mContentType != ContentType.Applications) {
-    setContentType(ContentType.Applications);
-  }
-  if (mCurrentPage != 0) {
-    invalidatePageData(0);
-  }
-}

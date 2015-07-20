@@ -5,6 +5,6 @@
   CellLayout cl=((CellLayout)child);
   cl.setOnInterceptTouchListener(this);
   cl.setClickable(true);
-  cl.setImportantForAccessibility(ViewCompat.IMPORTANT_FOR_ACCESSIBILITY_NO);
+  cl.setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_NO);
   super.onChildViewAdded(parent,child);
 }

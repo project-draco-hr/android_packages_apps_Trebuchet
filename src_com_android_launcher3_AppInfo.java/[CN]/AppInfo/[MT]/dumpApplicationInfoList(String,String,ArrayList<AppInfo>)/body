@@ -1,6 +1,6 @@
 {
   Log.d(tag,label + " size=" + list.size());
   for (  AppInfo info : list) {
-    Log.d(tag,"   title=\"" + info.title + "\" iconBitmap="+ info.iconBitmap+ " firstInstallTime="+ info.firstInstallTime);
+    Log.d(tag,"   title=\"" + info.title + "\" iconBitmap="+ info.iconBitmap+ " firstInstallTime="+ info.firstInstallTime+ " componentName="+ info.componentName.getPackageName());
   }
 }

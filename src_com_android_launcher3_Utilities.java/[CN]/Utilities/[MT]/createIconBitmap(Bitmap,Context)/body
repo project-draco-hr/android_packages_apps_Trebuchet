@@ -1,10 +1,6 @@
 {
-synchronized (sCanvas) {
-    if (sIconWidth == -1) {
-      initStatics(context);
-    }
-  }
-  if (sIconWidth == icon.getWidth() && sIconHeight == icon.getHeight()) {
+  final int iconBitmapSize=getIconBitmapSize();
+  if (iconBitmapSize == icon.getWidth() && iconBitmapSize == icon.getHeight()) {
     return icon;
   }
   return createIconBitmap(new BitmapDrawable(context.getResources(),icon),context);

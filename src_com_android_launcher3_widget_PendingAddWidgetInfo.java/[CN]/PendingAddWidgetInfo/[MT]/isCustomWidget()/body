@@ -1,0 +1,3 @@
+{
+  return itemType == LauncherSettings.Favorites.ITEM_TYPE_CUSTOM_APPWIDGET;
+}

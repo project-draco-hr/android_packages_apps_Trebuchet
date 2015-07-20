@@ -1,0 +1,41 @@
+{
+  WidgetImageView image=(WidgetImageView)v.findViewById(R.id.widget_preview);
+  PendingAddItemInfo createItemInfo=(PendingAddItemInfo)v.getTag();
+  if (image.getBitmap() == null) {
+    return false;
+  }
+  Bitmap preview;
+  float scale=1f;
+  final Rect bounds=image.getBitmapBounds();
+  if (createItemInfo instanceof PendingAddWidgetInfo) {
+    PendingAddWidgetInfo createWidgetInfo=(PendingAddWidgetInfo)createItemInfo;
+    int[] size=mLauncher.getWorkspace().estimateItemSize(createWidgetInfo,true);
+    Bitmap icon=image.getBitmap();
+    float minScale=1.25f;
+    int maxWidth=Math.min((int)(icon.getWidth() * minScale),size[0]);
+    int[] previewSizeBeforeScale=new int[1];
+    preview=getWidgetPreviewLoader().generateWidgetPreview(mLauncher,createWidgetInfo.info,maxWidth,null,previewSizeBeforeScale);
+    if (previewSizeBeforeScale[0] < icon.getWidth()) {
+      int padding=(icon.getWidth() - previewSizeBeforeScale[0]) / 2;
+      if (icon.getWidth() > image.getWidth()) {
+        padding=padding * image.getWidth() / icon.getWidth();
+      }
+      bounds.left+=padding;
+      bounds.right-=padding;
+    }
+    scale=bounds.width() / (float)preview.getWidth();
+  }
+ else {
+    PendingAddShortcutInfo createShortcutInfo=(PendingAddShortcutInfo)v.getTag();
+    Drawable icon=mIconCache.getFullResIcon(createShortcutInfo.activityInfo);
+    preview=Utilities.createIconBitmap(icon,mLauncher);
+    createItemInfo.spanX=createItemInfo.spanY=1;
+    scale=((float)mLauncher.getDeviceProfile().iconSizePx) / preview.getWidth();
+  }
+  boolean clipAlpha=!(createItemInfo instanceof PendingAddWidgetInfo && (((PendingAddWidgetInfo)createItemInfo).previewImage == 0));
+  mLauncher.lockScreenOrientation();
+  mLauncher.getWorkspace().onDragStartedWithItem(createItemInfo,preview,clipAlpha);
+  mDragController.startDrag(image,preview,this,createItemInfo,bounds,DragController.DRAG_ACTION_COPY,scale);
+  preview.recycle();
+  return true;
+}

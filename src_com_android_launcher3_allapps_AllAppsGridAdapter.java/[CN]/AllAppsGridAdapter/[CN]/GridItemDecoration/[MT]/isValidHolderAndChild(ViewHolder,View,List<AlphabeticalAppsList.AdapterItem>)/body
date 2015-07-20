@@ -1,0 +1,14 @@
+{
+  GridLayoutManager.LayoutParams lp=(GridLayoutManager.LayoutParams)child.getLayoutParams();
+  if (lp.isItemRemoved()) {
+    return false;
+  }
+  if (holder == null) {
+    return false;
+  }
+  int pos=holder.getPosition();
+  if (pos < 0 || pos >= items.size()) {
+    return false;
+  }
+  return true;
+}

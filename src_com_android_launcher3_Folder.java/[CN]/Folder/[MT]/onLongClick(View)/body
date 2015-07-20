@@ -1,20 +1,4 @@
 {
   if (!mLauncher.isDraggingEnabled())   return true;
-  Object tag=v.getTag();
-  if (tag instanceof ShortcutInfo) {
-    ShortcutInfo item=(ShortcutInfo)tag;
-    if (!v.isInTouchMode()) {
-      return false;
-    }
-    mLauncher.getWorkspace().beginDragShared(v,this);
-    mCurrentDragInfo=item;
-    mEmptyCell[0]=item.cellX;
-    mEmptyCell[1]=item.cellY;
-    mCurrentDragView=v;
-    mContent.removeView(mCurrentDragView);
-    mInfo.remove(mCurrentDragInfo);
-    mDragInProgress=true;
-    mItemAddedBackToSelfViaIcon=false;
-  }
-  return true;
+  return beginDrag(v,false);
 }

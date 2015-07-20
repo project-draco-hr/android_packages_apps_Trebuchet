@@ -1,0 +1,8 @@
+{
+  if ((isLandscape && transposeLayoutWithOrientation) || isLargeTablet) {
+    return defaultPageSpacingPx;
+  }
+ else {
+    return Math.max(defaultPageSpacingPx,2 * getWorkspacePadding(isLayoutRtl).left);
+  }
+}

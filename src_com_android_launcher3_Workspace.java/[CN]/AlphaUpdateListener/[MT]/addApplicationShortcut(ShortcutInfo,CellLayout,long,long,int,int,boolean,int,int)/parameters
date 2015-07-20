@@ -1,9 +1,0 @@
-ShortcutInfo info
-CellLayout target
-long container
-long screenId
-int cellX
-int cellY
-boolean insertAtFirst
-int intersectX
-int intersectY

@@ -1,0 +1,15 @@
+{
+  super.onAttachedToWindow();
+  final IntentFilter filter=new IntentFilter();
+  filter.addAction(Intent.ACTION_SCREEN_OFF);
+  filter.addAction(Intent.ACTION_USER_PRESENT);
+  if (ENABLE_DEBUG_INTENTS) {
+    filter.addAction(DebugIntents.DELETE_DATABASE);
+    filter.addAction(DebugIntents.MIGRATE_DATABASE);
+  }
+  registerReceiver(mReceiver,filter);
+  FirstFrameAnimatorHelper.initializeDrawListener(getWindow().getDecorView());
+  setupTransparentSystemBarsForLmp();
+  mAttached=true;
+  mVisible=true;
+}

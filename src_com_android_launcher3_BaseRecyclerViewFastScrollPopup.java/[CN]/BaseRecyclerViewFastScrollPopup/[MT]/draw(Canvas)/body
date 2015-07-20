@@ -1,0 +1,14 @@
+{
+  if (isVisible()) {
+    int restoreCount=c.save(Canvas.MATRIX_SAVE_FLAG);
+    c.translate(mBgBounds.left,mBgBounds.top);
+    mTmpRect.set(mBgBounds);
+    mTmpRect.offsetTo(0,0);
+    mBg.setBounds(mTmpRect);
+    mBg.setAlpha((int)(mAlpha * 255));
+    mBg.draw(c);
+    mTextPaint.setAlpha((int)(mAlpha * 255));
+    c.drawText(mSectionName,(mBgBounds.width() - mTextBounds.width()) / 2,mBgBounds.height() - (mBgBounds.height() - mTextBounds.height()) / 2,mTextPaint);
+    c.restoreToCount(restoreCount);
+  }
+}

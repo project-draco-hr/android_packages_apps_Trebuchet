@@ -12,6 +12,7 @@
   values.put(LauncherSettings.Favorites.CONTAINER,item.container);
   values.put(LauncherSettings.Favorites.CELLX,item.cellX);
   values.put(LauncherSettings.Favorites.CELLY,item.cellY);
+  values.put(LauncherSettings.Favorites.RANK,item.rank);
   values.put(LauncherSettings.Favorites.SCREEN,item.screenId);
   updateItemInDatabaseHelper(context,values,item,"moveItemInDatabase");
 }

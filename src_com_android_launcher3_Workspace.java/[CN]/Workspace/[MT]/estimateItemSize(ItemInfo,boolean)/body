@@ -1,0 +1,19 @@
+{
+  int[] size=new int[2];
+  if (getChildCount() > 0) {
+    CellLayout cl=(CellLayout)getChildAt(numCustomPages());
+    Rect r=estimateItemPosition(cl,itemInfo,0,0,itemInfo.spanX,itemInfo.spanY);
+    size[0]=r.width();
+    size[1]=r.height();
+    if (springLoaded) {
+      size[0]*=mSpringLoadedShrinkFactor;
+      size[1]*=mSpringLoadedShrinkFactor;
+    }
+    return size;
+  }
+ else {
+    size[0]=Integer.MAX_VALUE;
+    size[1]=Integer.MAX_VALUE;
+    return size;
+  }
+}

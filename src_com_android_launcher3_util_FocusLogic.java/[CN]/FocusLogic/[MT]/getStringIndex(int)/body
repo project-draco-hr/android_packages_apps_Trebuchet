@@ -1,0 +1,22 @@
+{
+switch (index) {
+case NOOP:
+    return "NOOP";
+case PREVIOUS_PAGE_FIRST_ITEM:
+  return "PREVIOUS_PAGE_FIRST";
+case PREVIOUS_PAGE_LAST_ITEM:
+return "PREVIOUS_PAGE_LAST";
+case PREVIOUS_PAGE_RIGHT_COLUMN:
+return "PREVIOUS_PAGE_RIGHT_COLUMN";
+case CURRENT_PAGE_FIRST_ITEM:
+return "CURRENT_PAGE_FIRST";
+case CURRENT_PAGE_LAST_ITEM:
+return "CURRENT_PAGE_LAST";
+case NEXT_PAGE_FIRST_ITEM:
+return "NEXT_PAGE_FIRST";
+case NEXT_PAGE_LEFT_COLUMN:
+return "NEXT_PAGE_LEFT_COLUMN";
+default :
+return Integer.toString(index);
+}
+}

@@ -1,0 +1,10 @@
+{
+  if (icon == null || background == null) {
+    mTouchFeedbackView.setBitmap(null);
+    mTouchFeedbackView.animate().cancel();
+  }
+ else   if (mTouchFeedbackView.setBitmap(background)) {
+    mTouchFeedbackView.alignWithIconView(icon,(ViewGroup)icon.getParent());
+    mTouchFeedbackView.animateShadow();
+  }
+}

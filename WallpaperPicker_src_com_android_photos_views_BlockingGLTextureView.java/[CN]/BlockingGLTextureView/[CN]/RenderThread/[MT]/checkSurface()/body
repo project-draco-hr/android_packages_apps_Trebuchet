@@ -1,5 +1,0 @@
-{
-  if (mSurface == null) {
-    throw new IllegalArgumentException("surface is null!");
-  }
-}

@@ -1,0 +1,33 @@
+{
+  if (item instanceof ShortcutInfo) {
+    LauncherModel.deleteItemFromDatabase(launcher,item);
+  }
+ else   if (item instanceof FolderInfo) {
+    FolderInfo folder=(FolderInfo)item;
+    launcher.removeFolder(folder);
+    LauncherModel.deleteFolderContentsFromDatabase(launcher,folder);
+  }
+ else   if (item instanceof LauncherAppWidgetInfo) {
+    final LauncherAppWidgetInfo widget=(LauncherAppWidgetInfo)item;
+    launcher.removeAppWidget(widget);
+    LauncherModel.deleteItemFromDatabase(launcher,widget);
+    final LauncherAppWidgetHost appWidgetHost=launcher.getAppWidgetHost();
+    if (appWidgetHost != null && !widget.isCustomWidget() && widget.isWidgetIdValid()) {
+      new AsyncTask<Void,Void,Void>(){
+        public Void doInBackground(        Void... args){
+          appWidgetHost.deleteAppWidgetId(widget.appWidgetId);
+          return null;
+        }
+      }
+.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+    }
+  }
+ else {
+    return false;
+  }
+  if (view != null) {
+    launcher.getWorkspace().removeWorkspaceItem(view);
+    launcher.getWorkspace().stripEmptyScreens();
+  }
+  return true;
+}

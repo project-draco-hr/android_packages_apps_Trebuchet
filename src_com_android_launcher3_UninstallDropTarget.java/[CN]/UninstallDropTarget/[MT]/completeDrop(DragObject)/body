@@ -1,0 +1,18 @@
+{
+  final Pair<ComponentName,Integer> componentInfo=getAppInfoFlags(d.dragInfo);
+  final UserHandleCompat user=((ItemInfo)d.dragInfo).user;
+  if (startUninstallActivity(mLauncher,d.dragInfo)) {
+    final Runnable checkIfUninstallWasSuccess=new Runnable(){
+      @Override public void run(){
+        String packageName=componentInfo.first.getPackageName();
+        boolean uninstallSuccessful=!AllAppsList.packageHasActivities(getContext(),packageName,user);
+        sendUninstallResult(d.dragSource,uninstallSuccessful);
+      }
+    }
+;
+    mLauncher.addOnResumeCallback(checkIfUninstallWasSuccess);
+  }
+ else {
+    sendUninstallResult(d.dragSource,false);
+  }
+}

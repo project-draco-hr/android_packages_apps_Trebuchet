@@ -1,0 +1,11 @@
+{
+  if (states.workspaceToAllApps || states.overviewToAllApps) {
+    return mAllAppsTransitionTime;
+  }
+ else   if (states.workspaceToOverview || states.overviewToWorkspace) {
+    return mOverviewTransitionTime;
+  }
+ else {
+    return mOverlayTransitionTime;
+  }
+}

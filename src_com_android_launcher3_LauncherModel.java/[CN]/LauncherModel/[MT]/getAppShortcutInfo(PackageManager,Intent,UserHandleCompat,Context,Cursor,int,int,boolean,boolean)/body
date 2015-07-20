@@ -1,0 +1,38 @@
+{
+  if (user == null) {
+    Log.d(TAG,"Null user found in getShortcutInfo");
+    return null;
+  }
+  ComponentName componentName=intent.getComponent();
+  if (componentName == null) {
+    Log.d(TAG,"Missing component found in getShortcutInfo: " + componentName);
+    return null;
+  }
+  Intent newIntent=new Intent(intent.getAction(),null);
+  newIntent.addCategory(Intent.CATEGORY_LAUNCHER);
+  newIntent.setComponent(componentName);
+  LauncherActivityInfoCompat lai=mLauncherApps.resolveActivity(newIntent,user);
+  if ((lai == null) && !allowMissingTarget) {
+    Log.d(TAG,"Missing activity found in getShortcutInfo: " + componentName);
+    return null;
+  }
+  final ShortcutInfo info=new ShortcutInfo();
+  mIconCache.getTitleAndIcon(info,componentName,lai,user,false,useLowResIcon);
+  if (mIconCache.isDefaultIcon(info.getIcon(mIconCache),user) && c != null) {
+    Bitmap icon=Utilities.createIconBitmap(c,iconIndex,context);
+    info.setIcon(icon == null ? mIconCache.getDefaultIcon(user) : icon);
+  }
+  if (TextUtils.isEmpty(info.title) && c != null) {
+    info.title=Utilities.trim(c.getString(titleIndex));
+  }
+  if (info.title == null) {
+    info.title=componentName.getClassName();
+  }
+  info.itemType=LauncherSettings.Favorites.ITEM_TYPE_APPLICATION;
+  info.user=user;
+  info.contentDescription=mUserManager.getBadgedLabelForUser(info.title,info.user);
+  if (lai != null) {
+    info.flags=AppInfo.initFlags(lai);
+  }
+  return info;
+}

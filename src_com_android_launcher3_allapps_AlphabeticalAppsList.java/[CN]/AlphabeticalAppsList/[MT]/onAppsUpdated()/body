@@ -1,0 +1,32 @@
+{
+  mApps.clear();
+  mApps.addAll(mComponentToAppMap.values());
+  Collections.sort(mApps,mAppNameComparator.getAppInfoComparator());
+  Locale curLocale=mLauncher.getResources().getConfiguration().locale;
+  TreeMap<String,ArrayList<AppInfo>> sectionMap=null;
+  boolean localeRequiresSectionSorting=curLocale.equals(Locale.SIMPLIFIED_CHINESE);
+  if (localeRequiresSectionSorting) {
+    sectionMap=new TreeMap<>(mAppNameComparator.getSectionNameComparator());
+    for (    AppInfo info : mApps) {
+      String sectionName=getAndUpdateCachedSectionName(info.title);
+      ArrayList<AppInfo> sectionApps=sectionMap.get(sectionName);
+      if (sectionApps == null) {
+        sectionApps=new ArrayList<>();
+        sectionMap.put(sectionName,sectionApps);
+      }
+      sectionApps.add(info);
+    }
+    List<AppInfo> allApps=new ArrayList<>(mApps.size());
+    for (    Map.Entry<String,ArrayList<AppInfo>> entry : sectionMap.entrySet()) {
+      allApps.addAll(entry.getValue());
+    }
+    mApps.clear();
+    mApps.addAll(allApps);
+  }
+ else {
+    for (    AppInfo info : mApps) {
+      getAndUpdateCachedSectionName(info.title);
+    }
+  }
+  updateAdapterItems();
+}

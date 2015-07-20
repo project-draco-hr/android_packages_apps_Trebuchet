@@ -1,7 +1,7 @@
 {
   try {
     f.createNewFile();
-    FileOutputStream thumbFileStream=openFileOutput(f.getName(),Context.MODE_PRIVATE);
+    FileOutputStream thumbFileStream=getContext().openFileOutput(f.getName(),Context.MODE_PRIVATE);
     b.compress(Bitmap.CompressFormat.JPEG,95,thumbFileStream);
     thumbFileStream.close();
     return true;

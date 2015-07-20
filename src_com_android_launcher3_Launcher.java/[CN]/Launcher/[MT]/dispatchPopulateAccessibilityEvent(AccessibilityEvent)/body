@@ -1,0 +1,18 @@
+{
+  final boolean result=super.dispatchPopulateAccessibilityEvent(event);
+  final List<CharSequence> text=event.getText();
+  text.clear();
+  if (mState == State.APPS) {
+    text.add(getString(R.string.all_apps_button_label));
+  }
+ else   if (mState == State.WIDGETS) {
+    text.add(getString(R.string.widget_button_text));
+  }
+ else   if (mWorkspace != null) {
+    text.add(mWorkspace.getCurrentPageDescription());
+  }
+ else {
+    text.add(getString(R.string.all_apps_home_button_label));
+  }
+  return result;
+}

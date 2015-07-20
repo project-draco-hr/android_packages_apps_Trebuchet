@@ -1,0 +1,5 @@
+{
+  iconSize+=p.iconSize;
+  iconTextSize+=p.iconTextSize;
+  hotseatIconSize+=p.hotseatIconSize;
+}

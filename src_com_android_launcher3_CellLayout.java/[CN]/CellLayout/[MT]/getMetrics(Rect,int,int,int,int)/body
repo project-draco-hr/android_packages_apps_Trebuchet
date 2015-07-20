@@ -1,5 +1,0 @@
-{
-  LauncherAppState app=LauncherAppState.getInstance();
-  DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
-  metrics.set(grid.calculateCellWidth(paddedMeasureWidth,countX),grid.calculateCellHeight(paddedMeasureHeight,countY),0,0);
-}

@@ -1,0 +1,57 @@
+{
+  long userSerial=mUserManager.getSerialNumberForUser(user);
+  PackageManager pm=mContext.getPackageManager();
+  HashMap<String,PackageInfo> pkgInfoMap=new HashMap<String,PackageInfo>();
+  for (  PackageInfo info : pm.getInstalledPackages(PackageManager.GET_UNINSTALLED_PACKAGES)) {
+    pkgInfoMap.put(info.packageName,info);
+  }
+  HashMap<ComponentName,LauncherActivityInfoCompat> componentMap=new HashMap<>();
+  for (  LauncherActivityInfoCompat app : apps) {
+    componentMap.put(app.getComponentName(),app);
+  }
+  Cursor c=mIconDb.getReadableDatabase().query(IconDB.TABLE_NAME,new String[]{IconDB.COLUMN_ROWID,IconDB.COLUMN_COMPONENT,IconDB.COLUMN_LAST_UPDATED,IconDB.COLUMN_VERSION,IconDB.COLUMN_SYSTEM_STATE},IconDB.COLUMN_USER + " = ? ",new String[]{Long.toString(userSerial)},null,null,null);
+  final int indexComponent=c.getColumnIndex(IconDB.COLUMN_COMPONENT);
+  final int indexLastUpdate=c.getColumnIndex(IconDB.COLUMN_LAST_UPDATED);
+  final int indexVersion=c.getColumnIndex(IconDB.COLUMN_VERSION);
+  final int rowIndex=c.getColumnIndex(IconDB.COLUMN_ROWID);
+  final int systemStateIndex=c.getColumnIndex(IconDB.COLUMN_SYSTEM_STATE);
+  HashSet<Integer> itemsToRemove=new HashSet<Integer>();
+  Stack<LauncherActivityInfoCompat> appsToUpdate=new Stack<>();
+  while (c.moveToNext()) {
+    String cn=c.getString(indexComponent);
+    ComponentName component=ComponentName.unflattenFromString(cn);
+    PackageInfo info=pkgInfoMap.get(component.getPackageName());
+    if (info == null) {
+      if (!ignorePackages.contains(component.getPackageName())) {
+        remove(component,user);
+        itemsToRemove.add(c.getInt(rowIndex));
+      }
+      continue;
+    }
+    if ((info.applicationInfo.flags & ApplicationInfo.FLAG_IS_DATA_ONLY) != 0) {
+      continue;
+    }
+    long updateTime=c.getLong(indexLastUpdate);
+    int version=c.getInt(indexVersion);
+    LauncherActivityInfoCompat app=componentMap.remove(component);
+    if (version == info.versionCode && updateTime == info.lastUpdateTime && TextUtils.equals(mSystemState,c.getString(systemStateIndex))) {
+      continue;
+    }
+    if (app == null) {
+      remove(component,user);
+      itemsToRemove.add(c.getInt(rowIndex));
+    }
+ else {
+      appsToUpdate.add(app);
+    }
+  }
+  c.close();
+  if (!itemsToRemove.isEmpty()) {
+    mIconDb.getWritableDatabase().delete(IconDB.TABLE_NAME,Utilities.createDbSelectionQuery(IconDB.COLUMN_ROWID,itemsToRemove),null);
+  }
+  if (!componentMap.isEmpty() || !appsToUpdate.isEmpty()) {
+    Stack<LauncherActivityInfoCompat> appsToAdd=new Stack<>();
+    appsToAdd.addAll(componentMap.values());
+    new SerializedIconUpdateTask(userSerial,pkgInfoMap,appsToAdd,appsToUpdate).scheduleNext();
+  }
+}

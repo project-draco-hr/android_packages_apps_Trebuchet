@@ -1,3 +1,0 @@
-{
-  mPagedView.onLauncherTransitionStart(l,animated,toWorkspace);
-}

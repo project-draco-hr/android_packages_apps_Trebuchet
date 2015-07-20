@@ -1,0 +1,27 @@
+{
+  Workspace workspace=mLauncher.getWorkspace();
+  ArrayList<Long> workspaceScreens=workspace.getScreenOrder();
+  long screenId;
+  int screenIndex=workspace.getCurrentPage();
+  screenId=workspaceScreens.get(screenIndex);
+  CellLayout layout=(CellLayout)workspace.getPageAt(screenIndex);
+  boolean found=layout.findCellForSpan(outCoordinates,info.spanX,info.spanY);
+  screenIndex=workspace.hasCustomContent() ? 1 : 0;
+  while (!found && screenIndex < workspaceScreens.size()) {
+    screenId=workspaceScreens.get(screenIndex);
+    layout=(CellLayout)workspace.getPageAt(screenIndex);
+    found=layout.findCellForSpan(outCoordinates,info.spanX,info.spanY);
+    screenIndex++;
+  }
+  if (found) {
+    return screenId;
+  }
+  workspace.addExtraEmptyScreen();
+  screenId=workspace.commitExtraEmptyScreen();
+  layout=workspace.getScreenWithId(screenId);
+  found=layout.findCellForSpan(outCoordinates,info.spanX,info.spanY);
+  if (!found) {
+    Log.wtf(TAG,"Not enough space on an empty screen");
+  }
+  return screenId;
+}

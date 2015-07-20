@@ -1,0 +1,13 @@
+{
+  if (mHasValidAlphabeticIndex) {
+    try {
+      mSetMaxLabelCountMethod.invoke(mAlphabeticIndex,count);
+    }
+ catch (    Exception e) {
+      e.printStackTrace();
+    }
+  }
+ else {
+    super.setMaxLabelCount(count);
+  }
+}

@@ -1,0 +1,14 @@
+{
+  mLauncher.getDragController().removeDragListener(this);
+  mHandler.removeCallbacks(mBindWidgetRunnable);
+  mHandler.removeCallbacks(mInflateWidgetRunnable);
+  if (mWidgetLoadingId != -1) {
+    mLauncher.getAppWidgetHost().deleteAppWidgetId(mWidgetLoadingId);
+    mWidgetLoadingId=-1;
+  }
+  if (mInfo.boundWidget != null) {
+    mLauncher.getDragLayer().removeView(mInfo.boundWidget);
+    mLauncher.getAppWidgetHost().deleteAppWidgetId(mInfo.boundWidget.getAppWidgetId());
+    mInfo.boundWidget=null;
+  }
+}

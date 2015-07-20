@@ -1,0 +1,6 @@
+{
+  if (mReorderAlarm.alarmPending()) {
+    mReorderAlarm.cancelAlarm();
+    mReorderAlarmListener.onAlarm(mReorderAlarm);
+  }
+}

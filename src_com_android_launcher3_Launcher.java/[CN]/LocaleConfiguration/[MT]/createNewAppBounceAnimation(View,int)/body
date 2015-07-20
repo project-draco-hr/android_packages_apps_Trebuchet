@@ -1,7 +1,0 @@
-{
-  ValueAnimator bounceAnim=LauncherAnimUtils.ofPropertyValuesHolder(v,PropertyValuesHolder.ofFloat("alpha",1f),PropertyValuesHolder.ofFloat("scaleX",1f),PropertyValuesHolder.ofFloat("scaleY",1f));
-  bounceAnim.setDuration(InstallShortcutReceiver.NEW_SHORTCUT_BOUNCE_DURATION);
-  bounceAnim.setStartDelay(i * InstallShortcutReceiver.NEW_SHORTCUT_STAGGER_DELAY);
-  bounceAnim.setInterpolator(new SmoothPagedView.OvershootInterpolator());
-  return bounceAnim;
-}

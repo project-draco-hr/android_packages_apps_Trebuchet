@@ -1,0 +1,18 @@
+{
+  if (hs % 2 == 0) {
+    throw new RuntimeException("All Device Profiles must have an odd number of hotseat spaces");
+  }
+  name=n;
+  minWidthDps=w;
+  minHeightDps=h;
+  numRows=r;
+  numColumns=c;
+  numFolderRows=fr;
+  numFolderColumns=fc;
+  minAllAppsPredictionColumns=maapc;
+  iconSize=is;
+  iconTextSize=its;
+  numHotseatIcons=hs;
+  hotseatIconSize=his;
+  defaultLayoutId=dlId;
+}

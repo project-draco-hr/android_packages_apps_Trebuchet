@@ -1,6 +1,6 @@
 {
   final long itemId=item.id;
-  final Uri uri=LauncherSettings.Favorites.getContentUri(itemId,false);
+  final Uri uri=LauncherSettings.Favorites.getContentUri(itemId);
   final ContentResolver cr=context.getContentResolver();
   final StackTraceElement[] stackTrace=new Throwable().getStackTrace();
   Runnable r=new Runnable(){

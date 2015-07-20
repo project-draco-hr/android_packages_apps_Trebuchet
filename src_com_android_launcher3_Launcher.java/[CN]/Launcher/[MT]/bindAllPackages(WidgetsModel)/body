@@ -1,0 +1,10 @@
+{
+  if (waitUntilResume(mBindPackagesUpdatedRunnable,true)) {
+    mWidgetsModel=model;
+    return;
+  }
+  if (mWidgetsView != null && model != null) {
+    mWidgetsView.addWidgets(model);
+    mWidgetsModel=null;
+  }
+}

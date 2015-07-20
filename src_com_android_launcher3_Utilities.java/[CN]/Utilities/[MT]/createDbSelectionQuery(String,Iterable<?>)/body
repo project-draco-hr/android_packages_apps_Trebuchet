@@ -1,0 +1,3 @@
+{
+  return String.format(Locale.ENGLISH,"%s IN (%s)",columnName,TextUtils.join(", ",values));
+}

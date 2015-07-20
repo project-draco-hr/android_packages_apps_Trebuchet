@@ -1,6 +1,5 @@
 {
-  final LauncherAppState app=LauncherAppState.getInstance();
-  final DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
+  final DeviceProfile grid=mLauncher.getDeviceProfile();
   final int cellWidth=mCellWidth;
   final int cellHeight=mCellHeight;
   CellLayout.LayoutParams lp=(CellLayout.LayoutParams)child.getLayoutParams();

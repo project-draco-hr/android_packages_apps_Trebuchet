@@ -1,51 +1,48 @@
 {
+  if (!mHasLoaderCompletedOnce) {
+    return;
+  }
   final Context context=mApp.getContext();
   final String[] packages=mPackages;
   final int N=packages.length;
 switch (mOp) {
 case OP_ADD:
-    for (int i=0; i < N; i++) {
-      if (DEBUG_LOADERS)       Log.d(TAG,"mAllAppsList.addPackage " + packages[i]);
-      mIconCache.remove(packages[i],mUser);
-      mBgAllAppsList.addPackage(context,packages[i],mUser);
-    }
-  if (ADD_MANAGED_PROFILE_SHORTCUTS && !UserHandleCompat.myUserHandle().equals(mUser)) {
-    SharedPreferences prefs=context.getSharedPreferences(LauncherAppState.getSharedPreferencesKey(),Context.MODE_PRIVATE);
-    String shortcutsSetKey=INSTALLED_SHORTCUTS_SET_PREFIX + mUserManager.getSerialNumberForUser(mUser);
-    Set<String> shortcutSet=new HashSet<String>(prefs.getStringSet(shortcutsSetKey,Collections.EMPTY_SET));
-    for (int i=0; i < N; i++) {
-      if (!shortcutSet.contains(packages[i])) {
-        shortcutSet.add(packages[i]);
-        List<LauncherActivityInfoCompat> activities=mLauncherApps.getActivityList(packages[i],mUser);
-        if (activities != null && !activities.isEmpty()) {
-          InstallShortcutReceiver.queueInstallShortcut(activities.get(0),context);
-        }
+{
+      for (int i=0; i < N; i++) {
+        if (DEBUG_LOADERS)         Log.d(TAG,"mAllAppsList.addPackage " + packages[i]);
+        mIconCache.updateIconsForPkg(packages[i],mUser);
+        mBgAllAppsList.addPackage(context,packages[i],mUser);
       }
+      ManagedProfileHeuristic heuristic=ManagedProfileHeuristic.get(context,mUser);
+      if (heuristic != null) {
+        heuristic.processPackageAdd(mPackages);
+      }
+      break;
     }
-    prefs.edit().putStringSet(shortcutsSetKey,shortcutSet).commit();
+case OP_UPDATE:
+  for (int i=0; i < N; i++) {
+    if (DEBUG_LOADERS)     Log.d(TAG,"mAllAppsList.updatePackage " + packages[i]);
+    mIconCache.updateIconsForPkg(packages[i],mUser);
+    mBgAllAppsList.updatePackage(context,packages[i],mUser);
+    mApp.getWidgetCache().removePackage(packages[i],mUser);
   }
 break;
-case OP_UPDATE:
-for (int i=0; i < N; i++) {
-if (DEBUG_LOADERS) Log.d(TAG,"mAllAppsList.updatePackage " + packages[i]);
-mBgAllAppsList.updatePackage(context,packages[i],mUser);
-WidgetPreviewLoader.removePackageFromDb(mApp.getWidgetPreviewCacheDb(),packages[i]);
-}
-break;
 case OP_REMOVE:
-if (ADD_MANAGED_PROFILE_SHORTCUTS && !UserHandleCompat.myUserHandle().equals(mUser)) {
-SharedPreferences prefs=context.getSharedPreferences(LauncherAppState.getSharedPreferencesKey(),Context.MODE_PRIVATE);
-String shortcutsSetKey=INSTALLED_SHORTCUTS_SET_PREFIX + mUserManager.getSerialNumberForUser(mUser);
-HashSet<String> shortcutSet=new HashSet<String>(prefs.getStringSet(shortcutsSetKey,Collections.EMPTY_SET));
-shortcutSet.removeAll(Arrays.asList(mPackages));
-prefs.edit().putStringSet(shortcutsSetKey,shortcutSet).commit();
+{
+ManagedProfileHeuristic heuristic=ManagedProfileHeuristic.get(context,mUser);
+if (heuristic != null) {
+  heuristic.processPackageRemoved(mPackages);
+}
+for (int i=0; i < N; i++) {
+  if (DEBUG_LOADERS)   Log.d(TAG,"mAllAppsList.removePackage " + packages[i]);
+  mIconCache.removeIconsForPkg(packages[i],mUser);
+}
 }
 case OP_UNAVAILABLE:
-boolean clearCache=mOp == OP_REMOVE;
 for (int i=0; i < N; i++) {
 if (DEBUG_LOADERS) Log.d(TAG,"mAllAppsList.removePackage " + packages[i]);
-mBgAllAppsList.removePackage(packages[i],mUser,clearCache);
-WidgetPreviewLoader.removePackageFromDb(mApp.getWidgetPreviewCacheDb(),packages[i]);
+mBgAllAppsList.removePackage(packages[i],mUser);
+mApp.getWidgetCache().removePackage(packages[i],mUser);
 }
 break;
 }
@@ -71,13 +68,7 @@ return;
 }
 final HashMap<ComponentName,AppInfo> addedOrUpdatedApps=new HashMap<ComponentName,AppInfo>();
 if (added != null) {
-if (LauncherAppState.isDisableAllApps()) {
-final ArrayList<ItemInfo> addedInfos=new ArrayList<ItemInfo>(added);
-addAndBindAddedWorkspaceApps(context,addedInfos);
-}
- else {
 addAppsToAllApps(context,added);
-}
 for (AppInfo ai : added) {
 addedOrUpdatedApps.put(ai.componentName,ai);
 }
@@ -103,55 +94,57 @@ final ArrayList<ShortcutInfo> removedShortcuts=new ArrayList<ShortcutInfo>();
 final ArrayList<LauncherAppWidgetInfo> widgets=new ArrayList<LauncherAppWidgetInfo>();
 HashSet<String> packageSet=new HashSet<String>(Arrays.asList(packages));
 synchronized (sBgLock) {
-for (ItemInfo info : sBgItemsIdMap.values()) {
+for (ItemInfo info : sBgItemsIdMap) {
 if (info instanceof ShortcutInfo && mUser.equals(info.user)) {
 ShortcutInfo si=(ShortcutInfo)info;
 boolean infoUpdated=false;
 boolean shortcutUpdated=false;
 if ((si.iconResource != null) && packageSet.contains(si.iconResource.packageName)) {
-Bitmap icon=Utilities.createIconBitmap(si.iconResource.packageName,si.iconResource.resourceName,mIconCache,context);
+Bitmap icon=Utilities.createIconBitmap(si.iconResource.packageName,si.iconResource.resourceName,context);
 if (icon != null) {
-si.setIcon(icon);
-si.usingFallbackIcon=false;
-infoUpdated=true;
+  si.setIcon(icon);
+  si.usingFallbackIcon=false;
+  infoUpdated=true;
 }
 }
 ComponentName cn=si.getTargetComponent();
 if (cn != null && packageSet.contains(cn.getPackageName())) {
 AppInfo appInfo=addedOrUpdatedApps.get(cn);
 if (si.isPromise()) {
-mIconCache.deletePreloadedIcon(cn,mUser);
-if (si.hasStatusFlag(ShortcutInfo.FLAG_AUTOINTALL_ICON)) {
-PackageManager pm=context.getPackageManager();
-ResolveInfo matched=pm.resolveActivity(new Intent(Intent.ACTION_MAIN).setComponent(cn).addCategory(Intent.CATEGORY_LAUNCHER),PackageManager.MATCH_DEFAULT_ONLY);
-if (matched == null) {
-Intent intent=pm.getLaunchIntentForPackage(cn.getPackageName());
-if (intent != null) {
-  cn=intent.getComponent();
-  appInfo=addedOrUpdatedApps.get(cn);
-}
-if ((intent == null) || (appInfo == null)) {
-  removedShortcuts.add(si);
-  continue;
-}
-si.promisedIntent=intent;
-}
-}
-si.intent=si.promisedIntent;
-si.promisedIntent=null;
-si.status&=~ShortcutInfo.FLAG_RESTORED_ICON & ~ShortcutInfo.FLAG_AUTOINTALL_ICON & ~ShortcutInfo.FLAG_INSTALL_SESSION_ACTIVE;
-infoUpdated=true;
-si.updateIcon(mIconCache);
+  if (si.hasStatusFlag(ShortcutInfo.FLAG_AUTOINTALL_ICON)) {
+    PackageManager pm=context.getPackageManager();
+    ResolveInfo matched=pm.resolveActivity(new Intent(Intent.ACTION_MAIN).setComponent(cn).addCategory(Intent.CATEGORY_LAUNCHER),PackageManager.MATCH_DEFAULT_ONLY);
+    if (matched == null) {
+      Intent intent=pm.getLaunchIntentForPackage(cn.getPackageName());
+      if (intent != null) {
+        cn=intent.getComponent();
+        appInfo=addedOrUpdatedApps.get(cn);
+      }
+      if ((intent == null) || (appInfo == null)) {
+        removedShortcuts.add(si);
+        continue;
+      }
+      si.promisedIntent=intent;
+    }
+  }
+  if (appInfo != null) {
+    si.flags=appInfo.flags;
+  }
+  si.intent=si.promisedIntent;
+  si.promisedIntent=null;
+  si.status=ShortcutInfo.DEFAULT;
+  infoUpdated=true;
+  si.updateIcon(mIconCache);
 }
 if (appInfo != null && Intent.ACTION_MAIN.equals(si.intent.getAction()) && si.itemType == LauncherSettings.Favorites.ITEM_TYPE_APPLICATION) {
-si.updateIcon(mIconCache);
-si.title=appInfo.title.toString();
-si.contentDescription=appInfo.contentDescription;
-infoUpdated=true;
+  si.updateIcon(mIconCache);
+  si.title=Utilities.trim(appInfo.title);
+  si.contentDescription=appInfo.contentDescription;
+  infoUpdated=true;
 }
 if ((si.isDisabled & ShortcutInfo.FLAG_DISABLED_NOT_AVAILABLE) != 0) {
-si.isDisabled&=~ShortcutInfo.FLAG_DISABLED_NOT_AVAILABLE;
-shortcutUpdated=true;
+  si.isDisabled&=~ShortcutInfo.FLAG_DISABLED_NOT_AVAILABLE;
+  shortcutUpdated=true;
 }
 }
 if (infoUpdated || shortcutUpdated) {
@@ -234,16 +227,7 @@ callbacks.bindComponentsRemoved(removedPackageNames,removedApps,mUser,removeReas
 }
 );
 }
-final ArrayList<Object> widgetsAndShortcuts=getSortedWidgetsAndShortcuts(context);
-mHandler.post(new Runnable(){
-@Override public void run(){
-Callbacks cb=getCallback();
-if (callbacks == cb && cb != null) {
-callbacks.bindPackagesUpdated(widgetsAndShortcuts);
-}
-}
-}
-);
+loadAndBindWidgetsAndShortcuts(context,callbacks,Build.VERSION.SDK_INT < 17);
 mHandler.post(new Runnable(){
 public void run(){
 Callbacks cb=getCallback();

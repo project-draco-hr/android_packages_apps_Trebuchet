@@ -1,6 +1,5 @@
 {
-  boolean isInOverscroll=mOverScrollX < 0 || mOverScrollX > mMaxScrollX;
-  if (mWorkspaceFadeInAdjacentScreens && !workspaceInModalState() && !mIsSwitchingState&& !isInOverscroll) {
+  if (mWorkspaceFadeInAdjacentScreens && !workspaceInModalState() && !mIsSwitchingState) {
     for (int i=numCustomPages(); i < getChildCount(); i++) {
       CellLayout child=(CellLayout)getChildAt(i);
       if (child != null) {

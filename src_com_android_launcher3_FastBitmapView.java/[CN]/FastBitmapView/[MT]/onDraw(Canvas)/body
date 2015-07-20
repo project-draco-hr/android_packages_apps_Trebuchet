@@ -1,5 +1,0 @@
-{
-  if (mBitmap != null) {
-    canvas.drawBitmap(mBitmap,0,0,mPaint);
-  }
-}

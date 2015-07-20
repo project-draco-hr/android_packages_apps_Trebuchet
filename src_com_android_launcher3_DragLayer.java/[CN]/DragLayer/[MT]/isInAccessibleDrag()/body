@@ -1,0 +1,4 @@
+{
+  LauncherAccessibilityDelegate delegate=LauncherAppState.getInstance().getAccessibilityDelegate();
+  return delegate != null && delegate.isInAccessibleDrag();
+}

@@ -1,0 +1,12 @@
+{
+  if (LOGD)   Log.d(TAG,"onClickAddWidgetButton");
+  if (mIsSafeModeEnabled) {
+    Toast.makeText(this,R.string.safemode_widget_error,Toast.LENGTH_SHORT).show();
+  }
+ else {
+    showWidgetsView(true,true);
+    if (mLauncherCallbacks != null) {
+      mLauncherCallbacks.onClickAddWidgetButton(view);
+    }
+  }
+}

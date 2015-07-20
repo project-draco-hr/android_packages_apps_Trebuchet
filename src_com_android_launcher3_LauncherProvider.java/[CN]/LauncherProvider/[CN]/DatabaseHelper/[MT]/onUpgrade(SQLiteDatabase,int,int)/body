@@ -1,130 +1,89 @@
 {
   if (LOGD)   Log.d(TAG,"onUpgrade triggered: " + oldVersion);
-  int version=oldVersion;
-  if (version < 3) {
-    db.beginTransaction();
-    try {
-      db.execSQL("ALTER TABLE favorites " + "ADD COLUMN appWidgetId INTEGER NOT NULL DEFAULT -1;");
-      db.setTransactionSuccessful();
-      version=3;
+switch (oldVersion) {
+case 12:
+{
+      mMaxScreenId=0;
+      addWorkspacesTable(db);
     }
- catch (    SQLException ex) {
-      Log.e(TAG,ex.getMessage(),ex);
-    }
- finally {
-      db.endTransaction();
-    }
-    if (version == 3) {
-      convertWidgets(db);
-    }
-  }
-  if (version < 4) {
-    version=4;
-  }
-  if (version < 6) {
-    db.beginTransaction();
-    try {
-      db.execSQL("UPDATE favorites SET screen=(screen + 1);");
-      db.setTransactionSuccessful();
-    }
- catch (    SQLException ex) {
-      Log.e(TAG,ex.getMessage(),ex);
-    }
- finally {
-      db.endTransaction();
-    }
-    if (updateContactsShortcuts(db)) {
-      version=6;
-    }
-  }
-  if (version < 7) {
-    convertWidgets(db);
-    version=7;
-  }
-  if (version < 8) {
-    normalizeIcons(db);
-    version=8;
-  }
-  if (version < 9) {
-    if (mMaxItemId == -1) {
-      mMaxItemId=initializeMaxItemId(db);
-    }
-    loadFavorites(db,new DefaultLayoutParser(mContext,mAppWidgetHost,this,mContext.getResources(),R.xml.update_workspace));
-    version=9;
-  }
-  if (version < 12) {
-    updateContactsShortcuts(db);
-    version=12;
-  }
-  if (version < 13) {
-    mMaxScreenId=0;
-    sJustLoadedFromOldDb=true;
-    addWorkspacesTable(db);
-    version=13;
-  }
-  if (version < 14) {
+case 13:
+{
     db.beginTransaction();
     try {
       db.execSQL("ALTER TABLE favorites " + "ADD COLUMN appWidgetProvider TEXT;");
       db.setTransactionSuccessful();
-      version=14;
     }
  catch (    SQLException ex) {
       Log.e(TAG,ex.getMessage(),ex);
+      break;
     }
  finally {
       db.endTransaction();
     }
   }
-  if (version < 15) {
-    db.beginTransaction();
-    try {
-      db.execSQL("ALTER TABLE favorites " + "ADD COLUMN modified INTEGER NOT NULL DEFAULT 0;");
-      db.execSQL("ALTER TABLE workspaceScreens " + "ADD COLUMN modified INTEGER NOT NULL DEFAULT 0;");
-      db.setTransactionSuccessful();
-      version=15;
-    }
- catch (    SQLException ex) {
-      Log.e(TAG,ex.getMessage(),ex);
-    }
+case 14:
+{
+  db.beginTransaction();
+  try {
+    db.execSQL("ALTER TABLE favorites " + "ADD COLUMN modified INTEGER NOT NULL DEFAULT 0;");
+    db.execSQL("ALTER TABLE workspaceScreens " + "ADD COLUMN modified INTEGER NOT NULL DEFAULT 0;");
+    db.setTransactionSuccessful();
+  }
+ catch (  SQLException ex) {
+    Log.e(TAG,ex.getMessage(),ex);
+    break;
+  }
  finally {
-      db.endTransaction();
-    }
+    db.endTransaction();
   }
-  if (version < 16) {
-    db.beginTransaction();
-    try {
-      db.execSQL("ALTER TABLE favorites " + "ADD COLUMN restored INTEGER NOT NULL DEFAULT 0;");
-      db.setTransactionSuccessful();
-      version=16;
-    }
- catch (    SQLException ex) {
-      Log.e(TAG,ex.getMessage(),ex);
-    }
- finally {
-      db.endTransaction();
-    }
-  }
-  if (version < 17) {
-    LauncherClings.synchonouslyMarkFirstRunClingDismissed(mContext);
-    version=17;
-  }
-  if (version < 18) {
-    version=18;
-  }
-  if (version < 19) {
-    removeOrphanedItems(db);
-    version=19;
-  }
-  if (version < 20) {
-    if (addProfileColumn(db)) {
-      version=20;
-    }
-  }
-  if (version != DATABASE_VERSION) {
-    Log.w(TAG,"Destroying all old data.");
-    db.execSQL("DROP TABLE IF EXISTS " + TABLE_FAVORITES);
-    db.execSQL("DROP TABLE IF EXISTS " + TABLE_WORKSPACE_SCREENS);
-    onCreate(db);
-  }
+}
+case 15:
+{
+if (!addIntegerColumn(db,Favorites.RESTORED,0)) {
+  break;
+}
+}
+case 16:
+{
+LauncherClings.synchonouslyMarkFirstRunClingDismissed(mContext);
+}
+case 17:
+{
+}
+case 18:
+{
+removeOrphanedItems(db);
+}
+case 19:
+{
+if (!addProfileColumn(db)) {
+break;
+}
+}
+case 20:
+if (!updateFolderItemsRank(db,true)) {
+break;
+}
+case 21:
+if (!recreateWorkspaceTable(db)) {
+break;
+}
+case 22:
+{
+if (!addIntegerColumn(db,Favorites.OPTIONS,0)) {
+break;
+}
+}
+case 23:
+case 24:
+ManagedProfileHeuristic.markExistingUsersForNoFolderCreation(mContext);
+case 25:
+convertShortcutsToLauncherActivities(db);
+case 26:
+{
+return;
+}
+}
+Log.w(TAG,"Destroying all old data.");
+createEmptyDB(db);
 }

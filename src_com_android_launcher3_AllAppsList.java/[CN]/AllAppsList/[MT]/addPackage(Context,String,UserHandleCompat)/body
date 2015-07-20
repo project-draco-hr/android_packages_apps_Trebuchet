@@ -2,6 +2,6 @@
   final LauncherAppsCompat launcherApps=LauncherAppsCompat.getInstance(context);
   final List<LauncherActivityInfoCompat> matches=launcherApps.getActivityList(packageName,user);
   for (  LauncherActivityInfoCompat info : matches) {
-    add(new AppInfo(context,info,user,mIconCache,null));
+    add(new AppInfo(context,info,user,mIconCache));
   }
 }

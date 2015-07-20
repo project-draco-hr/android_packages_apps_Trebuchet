@@ -1,7 +1,0 @@
-{
-  mLongPressHelper=new CheckLongPressHelper(this);
-  mOutlineHelper=HolographicOutlineHelper.obtain(getContext());
-  if (mCustomShadowsEnabled) {
-    setShadowLayer(SHADOW_LARGE_RADIUS,0.0f,SHADOW_Y_OFFSET,SHADOW_LARGE_COLOUR);
-  }
-}

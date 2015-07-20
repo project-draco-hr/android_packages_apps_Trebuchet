@@ -1,5 +1,4 @@
 {
-  Launcher.addDumpLog(TAG,"11683562 - convertFinalScreenToEmptyScreenIfNecessary()",true);
   if (mLauncher.isWorkspaceLoading()) {
     Launcher.addDumpLog(TAG,"    - workspace loading, skip",true);
     return;
@@ -14,6 +13,5 @@
     mWorkspaceScreens.put(EXTRA_EMPTY_SCREEN_ID,finalScreen);
     mScreenOrder.add(EXTRA_EMPTY_SCREEN_ID);
     mLauncher.getModel().updateWorkspaceScreenOrder(mLauncher,mScreenOrder);
-    Launcher.addDumpLog(TAG,"11683562 -   extra empty screen: " + finalScreenId,true);
   }
 }

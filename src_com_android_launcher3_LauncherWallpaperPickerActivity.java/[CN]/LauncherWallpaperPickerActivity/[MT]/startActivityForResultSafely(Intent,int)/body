@@ -1,3 +1,0 @@
-{
-  Utilities.startActivityForResultSafely(this,intent,requestCode);
-}

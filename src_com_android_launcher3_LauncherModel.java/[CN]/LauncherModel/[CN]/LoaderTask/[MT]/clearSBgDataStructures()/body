@@ -4,7 +4,6 @@ synchronized (sBgLock) {
     sBgAppWidgets.clear();
     sBgFolders.clear();
     sBgItemsIdMap.clear();
-    sBgDbIconCache.clear();
     sBgWorkspaceScreens.clear();
   }
 }

@@ -1,0 +1,3 @@
+HashSet<String> packages
+UserHandleCompat user
+ArrayList<AppInfo> outUpdates

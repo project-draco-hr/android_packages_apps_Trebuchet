@@ -1,5 +1,0 @@
-{
-  if (Utilities.isRotationEnabled(this)) {
-    setRequestedOrientation(mapConfigurationOriActivityInfoOri(getResources().getConfiguration().orientation));
-  }
-}

@@ -1,0 +1,7 @@
+{
+  mLayoutInflater=LayoutInflater.from(context);
+  mIconClickListener=iconClickListener;
+  mIconLongClickListener=iconLongClickListener;
+  mLauncher=launcher;
+  setContainerHeight();
+}

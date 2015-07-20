@@ -1,17 +1,5 @@
 {
-  db.beginTransaction();
-  try {
-    UserManagerCompat userManager=UserManagerCompat.getInstance(mContext);
-    long userSerialNumber=userManager.getSerialNumberForUser(UserHandleCompat.myUserHandle());
-    db.execSQL("ALTER TABLE favorites " + "ADD COLUMN profileId INTEGER DEFAULT " + userSerialNumber + ";");
-    db.setTransactionSuccessful();
-  }
- catch (  SQLException ex) {
-    Log.e(TAG,ex.getMessage(),ex);
-    return false;
-  }
- finally {
-    db.endTransaction();
-  }
-  return true;
+  UserManagerCompat userManager=UserManagerCompat.getInstance(mContext);
+  long userSerialNumber=userManager.getSerialNumberForUser(UserHandleCompat.myUserHandle());
+  return addIntegerColumn(db,Favorites.PROFILE_ID,userSerialNumber);
 }

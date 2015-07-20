@@ -1,6 +1,0 @@
-{
-  if (mLauncherCallbacks != null) {
-    return mLauncherCallbacks.hasSettings();
-  }
-  return false;
-}

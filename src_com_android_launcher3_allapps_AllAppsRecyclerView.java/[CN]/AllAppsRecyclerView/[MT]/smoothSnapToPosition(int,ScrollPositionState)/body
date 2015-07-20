@@ -1,0 +1,11 @@
+{
+  removeCallbacks(mSmoothSnapNextFrameRunnable);
+  int curScrollY=getPaddingTop() + (scrollPosState.rowIndex * scrollPosState.rowHeight) - scrollPosState.rowTopOffset;
+  int newScrollY=getScrollAtPosition(position,scrollPosState.rowHeight);
+  int numFrames=mFastScrollFrames.length;
+  for (int i=0; i < numFrames; i++) {
+    mFastScrollFrames[i]=(newScrollY - curScrollY) / numFrames;
+  }
+  mFastScrollFrameIndex=0;
+  postOnAnimation(mSmoothSnapNextFrameRunnable);
+}

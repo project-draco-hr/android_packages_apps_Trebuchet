@@ -1,0 +1,31 @@
+{
+  boolean isRtl=Utilities.isRtl(getResources());
+  InsetDrawable background=new InsetDrawable(getResources().getDrawable(R.drawable.quantum_panel_shape),padding.left,0,padding.right,0);
+  Rect bgPadding=new Rect();
+  background.getPadding(bgPadding);
+  mContainerView.setBackground(background);
+  mRevealView.setBackground(background.getConstantState().newDrawable());
+  mAppsRecyclerView.updateBackgroundPadding(bgPadding);
+  mAdapter.updateBackgroundPadding(bgPadding);
+  mContent.setPadding(0,padding.top,0,padding.bottom);
+  mContainerView.setPadding(0,0,0,0);
+  int startInset=Math.max(mSectionNamesMargin,mAppsRecyclerView.getMaxScrollbarWidth());
+  int topBottomPadding=mRecyclerViewTopBottomPadding;
+  if (isRtl) {
+    mAppsRecyclerView.setPadding(padding.left + mAppsRecyclerView.getMaxScrollbarWidth(),topBottomPadding,padding.right + startInset,topBottomPadding);
+  }
+ else {
+    mAppsRecyclerView.setPadding(padding.left + startInset,topBottomPadding,padding.right + mAppsRecyclerView.getMaxScrollbarWidth(),topBottomPadding);
+  }
+  if (mSearchBarView != null) {
+    Rect backgroundPadding=new Rect();
+    if (mSearchBarView.getBackground() != null) {
+      mSearchBarView.getBackground().getPadding(backgroundPadding);
+    }
+    LinearLayout.LayoutParams lp=(LinearLayout.LayoutParams)mSearchBarContainerView.getLayoutParams();
+    lp.leftMargin=searchBarBounds.left - backgroundPadding.left;
+    lp.topMargin=searchBarBounds.top - backgroundPadding.top;
+    lp.rightMargin=(getMeasuredWidth() - searchBarBounds.right) - backgroundPadding.right;
+    mSearchBarContainerView.requestLayout();
+  }
+}

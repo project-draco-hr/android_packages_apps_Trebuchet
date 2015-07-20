@@ -1,0 +1,40 @@
+{
+  db.beginTransaction();
+  try {
+    Cursor c=db.query(TABLE_WORKSPACE_SCREENS,new String[]{LauncherSettings.WorkspaceScreens._ID},null,null,null,null,LauncherSettings.WorkspaceScreens.SCREEN_RANK);
+    ArrayList<Long> sortedIDs=new ArrayList<Long>();
+    long maxId=0;
+    try {
+      while (c.moveToNext()) {
+        Long id=c.getLong(0);
+        if (!sortedIDs.contains(id)) {
+          sortedIDs.add(id);
+          maxId=Math.max(maxId,id);
+        }
+      }
+    }
+  finally {
+      c.close();
+    }
+    db.execSQL("DROP TABLE IF EXISTS " + TABLE_WORKSPACE_SCREENS);
+    addWorkspacesTable(db);
+    int total=sortedIDs.size();
+    for (int i=0; i < total; i++) {
+      ContentValues values=new ContentValues();
+      values.put(LauncherSettings.WorkspaceScreens._ID,sortedIDs.get(i));
+      values.put(LauncherSettings.WorkspaceScreens.SCREEN_RANK,i);
+      addModifiedTime(values);
+      db.insertOrThrow(TABLE_WORKSPACE_SCREENS,null,values);
+    }
+    db.setTransactionSuccessful();
+    mMaxScreenId=maxId;
+  }
+ catch (  SQLException ex) {
+    Log.e(TAG,ex.getMessage(),ex);
+    return false;
+  }
+ finally {
+    db.endTransaction();
+  }
+  return true;
+}

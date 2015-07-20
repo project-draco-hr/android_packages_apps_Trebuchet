@@ -1,0 +1,5 @@
+{
+  if (mSearchDropTargetBar != null) {
+    mSearchDropTargetBar.hideSearchBar(false);
+  }
+}

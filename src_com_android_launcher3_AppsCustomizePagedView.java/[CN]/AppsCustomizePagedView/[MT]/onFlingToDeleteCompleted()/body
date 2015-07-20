@@ -1,5 +1,0 @@
-{
-  endDragging(null,true,true);
-  cleanupWidgetPreloading(false);
-  mDraggingWidget=false;
-}

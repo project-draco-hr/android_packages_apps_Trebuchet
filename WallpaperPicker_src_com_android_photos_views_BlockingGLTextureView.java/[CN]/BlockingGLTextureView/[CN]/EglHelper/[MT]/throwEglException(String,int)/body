@@ -1,4 +1,0 @@
-{
-  String message=formatEglError(function,error);
-  throw new RuntimeException(message);
-}

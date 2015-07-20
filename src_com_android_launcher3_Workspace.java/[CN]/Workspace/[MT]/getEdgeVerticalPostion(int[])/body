@@ -1,0 +1,5 @@
+{
+  View child=getChildAt(getPageCount() - 1);
+  pos[0]=child.getTop();
+  pos[1]=child.getBottom();
+}

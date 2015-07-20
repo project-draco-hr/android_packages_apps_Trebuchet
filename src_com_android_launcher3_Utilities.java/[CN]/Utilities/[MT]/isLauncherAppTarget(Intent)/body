@@ -1,0 +1,14 @@
+{
+  if (launchIntent != null && Intent.ACTION_MAIN.equals(launchIntent.getAction()) && launchIntent.getComponent() != null && launchIntent.getCategories() != null && launchIntent.getCategories().size() == 1 && launchIntent.hasCategory(Intent.CATEGORY_LAUNCHER) && TextUtils.isEmpty(launchIntent.getDataString())) {
+    Bundle extras=launchIntent.getExtras();
+    if (extras == null) {
+      return true;
+    }
+ else {
+      Set<String> keys=extras.keySet();
+      return keys.size() == 1 && keys.contains(ItemInfo.EXTRA_PROFILE);
+    }
+  }
+  ;
+  return false;
+}

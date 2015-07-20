@@ -1,3 +1,11 @@
 {
+  if (appWidgetId == mQsbWidgetId) {
+    return new LauncherAppWidgetHostView(context){
+      @Override protected View getErrorView(){
+        return new View(getContext());
+      }
+    }
+;
+  }
   return new LauncherAppWidgetHostView(context);
 }

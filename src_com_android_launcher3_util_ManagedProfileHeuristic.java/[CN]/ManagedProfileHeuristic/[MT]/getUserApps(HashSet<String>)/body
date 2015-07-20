@@ -1,0 +1,10 @@
+{
+  Set<String> userApps=mPrefs.getStringSet(mPackageSetKey,null);
+  if (userApps == null) {
+    return false;
+  }
+ else {
+    outExistingApps.addAll(userApps);
+    return true;
+  }
+}

@@ -1,6 +1,0 @@
-int x
-int y
-int xOffset
-int yOffset
-DragView dragView
-float[] recycle

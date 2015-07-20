@@ -1,3 +1,0 @@
-{
-  Utilities.startActivityForResultSafely(this,intent,REQUEST_CREATE_SHORTCUT);
-}

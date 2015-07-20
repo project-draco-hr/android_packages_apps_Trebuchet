@@ -1,0 +1,6 @@
+{
+  if (info.isCustomWidget) {
+    return UserHandleCompat.myUserHandle();
+  }
+  return UserHandleCompat.fromUser(info.getProfile());
+}

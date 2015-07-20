@@ -1,8 +1,5 @@
 {
   String spKey=LauncherAppState.getSharedPreferencesKey();
   SharedPreferences sp=mContext.getSharedPreferences(spKey,Context.MODE_PRIVATE);
-  SharedPreferences.Editor editor=sp.edit();
-  editor.putBoolean(EMPTY_DATABASE_CREATED,true);
-  editor.putBoolean(UPGRADED_FROM_OLD_DATABASE,false);
-  editor.commit();
+  sp.edit().putBoolean(EMPTY_DATABASE_CREATED,true).commit();
 }

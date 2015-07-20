@@ -5,12 +5,14 @@
     return;
   }
   @SuppressWarnings("unchecked") final ArrayList<AppInfo> list=(ArrayList<AppInfo>)mBgAllAppsList.data.clone();
+  final WidgetsModel widgetList=mBgWidgetsModel.clone();
   Runnable r=new Runnable(){
     public void run(){
       final long t=SystemClock.uptimeMillis();
       final Callbacks callbacks=tryGetCallbacks(oldCallbacks);
       if (callbacks != null) {
         callbacks.bindAllApplications(list);
+        callbacks.bindAllPackages(widgetList);
       }
       if (DEBUG_LOADERS) {
         Log.d(TAG,"bound all " + list.size() + " apps from cache in "+ (SystemClock.uptimeMillis() - t)+ "ms");

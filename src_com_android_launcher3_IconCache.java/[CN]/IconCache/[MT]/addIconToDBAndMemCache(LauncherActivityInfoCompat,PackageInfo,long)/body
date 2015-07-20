@@ -1,0 +1,4 @@
+{
+  ContentValues values=updateCacheAndGetContentValues(app,false);
+  addIconToDB(values,app.getComponentName(),info,userSerial);
+}

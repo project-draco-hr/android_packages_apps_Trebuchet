@@ -1,4 +1,0 @@
-{
-  super(context,attrs);
-  a=(WallpaperPickerActivity)context;
-}

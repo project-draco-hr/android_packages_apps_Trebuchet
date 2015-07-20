@@ -1,0 +1,3 @@
+{
+  return BUCKETS.substring(index,index + 1);
+}

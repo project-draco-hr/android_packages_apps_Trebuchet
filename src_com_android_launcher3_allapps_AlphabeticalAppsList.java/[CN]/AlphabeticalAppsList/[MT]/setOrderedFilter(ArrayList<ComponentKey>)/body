@@ -1,0 +1,6 @@
+{
+  if (mSearchResults != f) {
+    mSearchResults=f;
+    updateAdapterItems();
+  }
+}

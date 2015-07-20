@@ -1,9 +1,0 @@
-int pixelX
-int pixelY
-int minSpanX
-int minSpanY
-int spanX
-int spanY
-View ignoreView
-int[] result
-int[] resultSpan

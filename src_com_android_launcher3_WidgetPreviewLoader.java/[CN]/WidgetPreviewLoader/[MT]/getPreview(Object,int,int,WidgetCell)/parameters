@@ -1,0 +1,4 @@
+Object o
+int previewWidth
+int previewHeight
+WidgetCell caller

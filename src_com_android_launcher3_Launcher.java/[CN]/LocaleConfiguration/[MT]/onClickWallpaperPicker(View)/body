@@ -1,9 +1,0 @@
-{
-  if (LOGD)   Log.d(TAG,"onClickWallpaperPicker");
-  final Intent pickWallpaper=new Intent(Intent.ACTION_SET_WALLPAPER);
-  pickWallpaper.setComponent(getWallpaperPickerComponent());
-  startActivityForResult(pickWallpaper,REQUEST_PICK_WALLPAPER);
-  if (mLauncherCallbacks != null) {
-    mLauncherCallbacks.onClickWallpaperPicker(v);
-  }
-}

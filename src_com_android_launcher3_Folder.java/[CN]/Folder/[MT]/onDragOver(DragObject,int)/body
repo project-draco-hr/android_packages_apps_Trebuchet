@@ -1,0 +1,31 @@
+{
+  if (mScrollPauseAlarm.alarmPending()) {
+    return;
+  }
+  final float[] r=new float[2];
+  mTargetRank=getTargetRank(d,r);
+  if (mTargetRank != mPrevTargetRank) {
+    mReorderAlarm.cancelAlarm();
+    mReorderAlarm.setOnAlarmListener(mReorderAlarmListener);
+    mReorderAlarm.setAlarm(REORDER_DELAY);
+    mPrevTargetRank=mTargetRank;
+  }
+  float x=r[0];
+  int currentPage=mContent.getNextPage();
+  float cellOverlap=mContent.getCurrentCellLayout().getCellWidth() * ICON_OVERSCROLL_WIDTH_FACTOR;
+  boolean isOutsideLeftEdge=x < cellOverlap;
+  boolean isOutsideRightEdge=x > (getWidth() - cellOverlap);
+  if (currentPage > 0 && (mContent.mIsRtl ? isOutsideRightEdge : isOutsideLeftEdge)) {
+    showScrollHint(DragController.SCROLL_LEFT,d);
+  }
+ else   if (currentPage < (mContent.getPageCount() - 1) && (mContent.mIsRtl ? isOutsideLeftEdge : isOutsideRightEdge)) {
+    showScrollHint(DragController.SCROLL_RIGHT,d);
+  }
+ else {
+    mOnScrollHintAlarm.cancelAlarm();
+    if (mScrollHintDir != DragController.SCROLL_NONE) {
+      mContent.clearScrollHint();
+      mScrollHintDir=DragController.SCROLL_NONE;
+    }
+  }
+}

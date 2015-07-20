@@ -1,0 +1,8 @@
+{
+  int nCells=mView.getCountX() * mView.getCountY();
+  for (int i=0; i < nCells; i++) {
+    if (intersectsValidDropTarget(i) == i) {
+      virtualViews.add(i);
+    }
+  }
+}

@@ -1,12 +1,12 @@
 {
   final DragLayer.LayoutParams lp=(DragLayer.LayoutParams)getLayoutParams();
-  int newWidth=mWidgetView.getWidth() + 2 * mBackgroundPadding - mWidgetPaddingLeft - mWidgetPaddingRight;
-  int newHeight=mWidgetView.getHeight() + 2 * mBackgroundPadding - mWidgetPaddingTop - mWidgetPaddingBottom;
+  int newWidth=mWidgetView.getWidth() + 2 * mBackgroundPadding - mWidgetPadding.left - mWidgetPadding.right;
+  int newHeight=mWidgetView.getHeight() + 2 * mBackgroundPadding - mWidgetPadding.top - mWidgetPadding.bottom;
   mTmpPt[0]=mWidgetView.getLeft();
   mTmpPt[1]=mWidgetView.getTop();
   mDragLayer.getDescendantCoordRelativeToSelf(mCellLayout.getShortcutsAndWidgets(),mTmpPt);
-  int newX=mTmpPt[0] - mBackgroundPadding + mWidgetPaddingLeft;
-  int newY=mTmpPt[1] - mBackgroundPadding + mWidgetPaddingTop;
+  int newX=mTmpPt[0] - mBackgroundPadding + mWidgetPadding.left;
+  int newY=mTmpPt[1] - mBackgroundPadding + mWidgetPadding.top;
   if (newY < 0) {
     mTopTouchRegionAdjustment=-newY;
   }

@@ -1,5 +1,9 @@
 {
   boolean result=super.onTouchEvent(event);
+  if (mStylusEventHelper.checkAndPerformStylusEvent(event)) {
+    mLongPressHelper.cancelLongPress();
+    return true;
+  }
 switch (event.getAction()) {
 case MotionEvent.ACTION_DOWN:
     mLongPressHelper.postCheckForLongPress();

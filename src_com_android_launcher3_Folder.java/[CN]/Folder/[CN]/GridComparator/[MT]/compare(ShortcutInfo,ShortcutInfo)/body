@@ -1,5 +1,0 @@
-{
-  int lhIndex=lhs.cellY * mNumCols + lhs.cellX;
-  int rhIndex=rhs.cellY * mNumCols + rhs.cellX;
-  return (lhIndex - rhIndex);
-}

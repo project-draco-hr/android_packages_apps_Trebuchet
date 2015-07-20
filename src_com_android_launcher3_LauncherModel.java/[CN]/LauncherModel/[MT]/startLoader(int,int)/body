@@ -1,0 +1,19 @@
+{
+  InstallShortcutReceiver.enableInstallQueue();
+synchronized (mLock) {
+synchronized (mDeferredBindRunnables) {
+      mDeferredBindRunnables.clear();
+    }
+    if (mCallbacks != null && mCallbacks.get() != null) {
+      stopLoaderLocked();
+      mLoaderTask=new LoaderTask(mApp.getContext(),loadFlags);
+      if (synchronousBindPage != PagedView.INVALID_RESTORE_PAGE && mAllAppsLoaded && mWorkspaceLoaded && !mIsLoaderTaskRunning) {
+        mLoaderTask.runBindSynchronousPage(synchronousBindPage);
+      }
+ else {
+        sWorkerThread.setPriority(Thread.NORM_PRIORITY);
+        sWorker.post(mLoaderTask);
+      }
+    }
+  }
+}

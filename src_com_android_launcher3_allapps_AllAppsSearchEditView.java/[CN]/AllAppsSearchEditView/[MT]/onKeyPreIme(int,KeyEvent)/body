@@ -1,0 +1,9 @@
+{
+  if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
+    if (mBackKeyListener != null) {
+      mBackKeyListener.onBackKey();
+    }
+    return false;
+  }
+  return super.onKeyPreIme(keyCode,event);
+}

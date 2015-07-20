@@ -1,5 +1,5 @@
 {
-  if (mInterceptTouchListener != null && mInterceptTouchListener.onTouch(this,ev)) {
+  if (mUseTouchHelper || (mInterceptTouchListener != null && mInterceptTouchListener.onTouch(this,ev))) {
     return true;
   }
   return false;

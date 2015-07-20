@@ -1,0 +1,6 @@
+{
+  if (mApps.hasNoFilteredResults()) {
+    return 1;
+  }
+  return mApps.getAdapterItems().size();
+}

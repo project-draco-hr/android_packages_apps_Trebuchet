@@ -1,6 +1,0 @@
-{
-  mManager=AppWidgetManagerCompat.getInstance(context);
-  mPackageManager=context.getPackageManager();
-  mLabelCache=new HashMap<Object,String>();
-  mCollator=Collator.getInstance();
-}

@@ -1,0 +1,22 @@
+{
+  if (mWorkspace.getChildCount() > 0) {
+    outState.putInt(RUNTIME_STATE_CURRENT_SCREEN,mWorkspace.getCurrentPageOffsetFromCustomContent());
+  }
+  super.onSaveInstanceState(outState);
+  outState.putInt(RUNTIME_STATE,mState.ordinal());
+  closeFolder();
+  if (mPendingAddInfo.container != ItemInfo.NO_ID && mPendingAddInfo.screenId > -1 && mWaitingForResult) {
+    outState.putLong(RUNTIME_STATE_PENDING_ADD_CONTAINER,mPendingAddInfo.container);
+    outState.putLong(RUNTIME_STATE_PENDING_ADD_SCREEN,mPendingAddInfo.screenId);
+    outState.putInt(RUNTIME_STATE_PENDING_ADD_CELL_X,mPendingAddInfo.cellX);
+    outState.putInt(RUNTIME_STATE_PENDING_ADD_CELL_Y,mPendingAddInfo.cellY);
+    outState.putInt(RUNTIME_STATE_PENDING_ADD_SPAN_X,mPendingAddInfo.spanX);
+    outState.putInt(RUNTIME_STATE_PENDING_ADD_SPAN_Y,mPendingAddInfo.spanY);
+    outState.putParcelable(RUNTIME_STATE_PENDING_ADD_WIDGET_INFO,mPendingAddWidgetInfo);
+    outState.putInt(RUNTIME_STATE_PENDING_ADD_WIDGET_ID,mPendingAddWidgetId);
+  }
+  outState.putSerializable(RUNTIME_STATE_VIEW_IDS,mItemIdToViewId);
+  if (mLauncherCallbacks != null) {
+    mLauncherCallbacks.onSaveInstanceState(outState);
+  }
+}

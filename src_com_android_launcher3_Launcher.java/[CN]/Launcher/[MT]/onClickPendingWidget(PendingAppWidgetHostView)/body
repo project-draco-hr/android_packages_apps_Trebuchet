@@ -1,0 +1,30 @@
+{
+  if (mIsSafeModeEnabled) {
+    Toast.makeText(this,R.string.safemode_widget_error,Toast.LENGTH_SHORT).show();
+    return;
+  }
+  final LauncherAppWidgetInfo info=(LauncherAppWidgetInfo)v.getTag();
+  if (v.isReadyForClickSetup()) {
+    int widgetId=info.appWidgetId;
+    AppWidgetProviderInfo appWidgetInfo=mAppWidgetManager.getAppWidgetInfo(widgetId);
+    if (appWidgetInfo != null) {
+      mPendingAddWidgetInfo=LauncherAppWidgetProviderInfo.fromProviderInfo(this,appWidgetInfo);
+      mPendingAddInfo.copyFrom(info);
+      mPendingAddWidgetId=widgetId;
+      AppWidgetManagerCompat.getInstance(this).startConfigActivity(appWidgetInfo,info.appWidgetId,this,mAppWidgetHost,REQUEST_RECONFIGURE_APPWIDGET);
+    }
+  }
+ else   if (info.installProgress < 0) {
+    final String packageName=info.providerName.getPackageName();
+    showBrokenAppInstallDialog(packageName,new DialogInterface.OnClickListener(){
+      public void onClick(      DialogInterface dialog,      int id){
+        startActivitySafely(v,LauncherModel.getMarketIntent(packageName),info);
+      }
+    }
+);
+  }
+ else {
+    final String packageName=info.providerName.getPackageName();
+    startActivitySafely(v,LauncherModel.getMarketIntent(packageName),info);
+  }
+}

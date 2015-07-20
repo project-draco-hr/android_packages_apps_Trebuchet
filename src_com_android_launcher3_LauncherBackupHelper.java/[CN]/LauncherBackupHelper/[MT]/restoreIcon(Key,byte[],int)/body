@@ -10,5 +10,5 @@
     Log.w(TAG,"failed to unpack icon for " + key.name);
   }
   if (VERBOSE)   Log.v(TAG,"saving restored icon as: " + key.name);
-  IconCache.preloadIcon(mContext,ComponentName.unflattenFromString(key.name),icon,res.dpi);
+  mIconCache.preloadIcon(ComponentName.unflattenFromString(key.name),icon,res.dpi,"",mUserSerial);
 }

@@ -1,3 +1,10 @@
 {
   v.setOnLongClickListener(mLongClickListener);
+  final StylusEventHelper stylusEventHelper=new StylusEventHelper(v);
+  v.setOnTouchListener(new View.OnTouchListener(){
+    @Override public boolean onTouch(    View view,    MotionEvent event){
+      return stylusEventHelper.checkAndPerformStylusEvent(event);
+    }
+  }
+);
 }

@@ -1,0 +1,8 @@
+{
+  if (!v.isInTouchMode())   return false;
+  if (!mLauncher.isAppsViewVisible() || mLauncher.getWorkspace().isSwitchingState())   return false;
+  if (!mLauncher.isDraggingEnabled())   return false;
+  mLauncher.getWorkspace().beginDragShared(v,mIconLastTouchPos,this,false);
+  mLauncher.enterSpringLoadedDragMode();
+  return false;
+}

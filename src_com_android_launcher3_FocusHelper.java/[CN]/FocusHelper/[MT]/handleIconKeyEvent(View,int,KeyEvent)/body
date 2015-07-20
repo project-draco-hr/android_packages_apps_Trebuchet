@@ -1,157 +1,117 @@
 {
-  ShortcutAndWidgetContainer parent=(ShortcutAndWidgetContainer)v.getParent();
-  final CellLayout layout=(CellLayout)parent.getParent();
-  final Workspace workspace=(Workspace)layout.getParent();
-  final ViewGroup launcher=(ViewGroup)workspace.getParent();
-  final ViewGroup tabs=(ViewGroup)launcher.findViewById(R.id.search_drop_target_bar);
-  final ViewGroup hotseat=(ViewGroup)launcher.findViewById(R.id.hotseat);
-  int pageIndex=workspace.indexOfChild(layout);
-  int pageCount=workspace.getChildCount();
-  final int action=e.getAction();
-  final boolean handleKeyEvent=(action != KeyEvent.ACTION_UP);
-  boolean wasHandled=false;
-switch (keyCode) {
-case KeyEvent.KEYCODE_DPAD_LEFT:
-    if (handleKeyEvent) {
-      View newIcon=getIconInDirection(layout,parent,v,-1);
-      if (newIcon != null) {
-        newIcon.requestFocus();
-        v.playSoundEffect(SoundEffectConstants.NAVIGATION_LEFT);
-      }
- else {
-        if (pageIndex > 0) {
-          parent=getCellLayoutChildrenForIndex(workspace,pageIndex - 1);
-          newIcon=getIconInDirection(layout,parent,parent.getChildCount(),-1);
-          if (newIcon != null) {
-            newIcon.requestFocus();
-          }
- else {
-            workspace.snapToPage(pageIndex - 1);
-          }
-          v.playSoundEffect(SoundEffectConstants.NAVIGATION_LEFT);
-        }
-      }
-    }
-  wasHandled=true;
-break;
-case KeyEvent.KEYCODE_DPAD_RIGHT:
-if (handleKeyEvent) {
-View newIcon=getIconInDirection(layout,parent,v,1);
-if (newIcon != null) {
-  newIcon.requestFocus();
-  v.playSoundEffect(SoundEffectConstants.NAVIGATION_RIGHT);
-}
- else {
-  if (pageIndex < (pageCount - 1)) {
-    parent=getCellLayoutChildrenForIndex(workspace,pageIndex + 1);
-    newIcon=getIconInDirection(layout,parent,-1,1);
-    if (newIcon != null) {
-      newIcon.requestFocus();
-    }
- else {
-      workspace.snapToPage(pageIndex + 1);
-    }
-    v.playSoundEffect(SoundEffectConstants.NAVIGATION_RIGHT);
+  boolean consume=FocusLogic.shouldConsume(keyCode);
+  if (e.getAction() == KeyEvent.ACTION_UP || !consume) {
+    return consume;
   }
-}
-}
-wasHandled=true;
-break;
-case KeyEvent.KEYCODE_DPAD_UP:
-if (handleKeyEvent) {
-View newIcon=getClosestIconOnLine(layout,parent,v,-1);
-if (newIcon != null) {
-newIcon.requestFocus();
-wasHandled=true;
-}
+  Launcher launcher=(Launcher)v.getContext();
+  DeviceProfile profile=launcher.getDeviceProfile();
+  if (DEBUG) {
+    Log.v(TAG,String.format("Handle WORKSPACE ICONS keyevent=[%s] isVerticalBar=%s",KeyEvent.keyCodeToString(keyCode),profile.isVerticalBarLayout()));
+  }
+  ShortcutAndWidgetContainer parent=(ShortcutAndWidgetContainer)v.getParent();
+  CellLayout iconLayout=(CellLayout)parent.getParent();
+  final Workspace workspace=(Workspace)iconLayout.getParent();
+  final ViewGroup dragLayer=(ViewGroup)workspace.getParent();
+  final ViewGroup tabs=(ViewGroup)dragLayer.findViewById(R.id.search_drop_target_bar);
+  final Hotseat hotseat=(Hotseat)dragLayer.findViewById(R.id.hotseat);
+  final int iconIndex=parent.indexOfChild(v);
+  final int pageIndex=workspace.indexOfChild(iconLayout);
+  final int pageCount=workspace.getChildCount();
+  int countX=iconLayout.getCountX();
+  int countY=iconLayout.getCountY();
+  CellLayout hotseatLayout=(CellLayout)hotseat.getChildAt(0);
+  ShortcutAndWidgetContainer hotseatParent=hotseatLayout.getShortcutsAndWidgets();
+  int[][] matrix;
+  if (keyCode == KeyEvent.KEYCODE_DPAD_DOWN && !profile.isVerticalBarLayout()) {
+    matrix=FocusLogic.createSparseMatrix(iconLayout,hotseatLayout,true,profile.inv.hotseatAllAppsRank,!hotseat.hasIcons());
+    countY=countY + 1;
+  }
+ else   if (keyCode == KeyEvent.KEYCODE_DPAD_RIGHT && profile.isVerticalBarLayout()) {
+    matrix=FocusLogic.createSparseMatrix(iconLayout,hotseatLayout,false,profile.inv.hotseatAllAppsRank,!hotseat.hasIcons());
+    countX=countX + 1;
+  }
+ else   if (keyCode == KeyEvent.KEYCODE_DEL || keyCode == KeyEvent.KEYCODE_FORWARD_DEL) {
+    workspace.removeWorkspaceItem(v);
+    return consume;
+  }
  else {
-tabs.requestFocus();
+    matrix=FocusLogic.createSparseMatrix(iconLayout);
+  }
+  int newIconIndex=FocusLogic.handleKeyEvent(keyCode,countX,countY,matrix,iconIndex,pageIndex,pageCount,Utilities.isRtl(v.getResources()));
+  View newIcon=null;
+switch (newIconIndex) {
+case FocusLogic.NOOP:
+    if (keyCode == KeyEvent.KEYCODE_DPAD_UP) {
+      newIcon=tabs;
+    }
+  break;
+case FocusLogic.PREVIOUS_PAGE_RIGHT_COLUMN:
+case FocusLogic.NEXT_PAGE_RIGHT_COLUMN:
+int newPageIndex=pageIndex - 1;
+if (newIconIndex == FocusLogic.NEXT_PAGE_RIGHT_COLUMN) {
+newPageIndex=pageIndex + 1;
 }
-v.playSoundEffect(SoundEffectConstants.NAVIGATION_UP);
+int row=((CellLayout.LayoutParams)v.getLayoutParams()).cellY;
+parent=getCellLayoutChildrenForIndex(workspace,newPageIndex);
+workspace.snapToPage(newPageIndex);
+if (parent != null) {
+workspace.snapToPage(newPageIndex);
+iconLayout=(CellLayout)parent.getParent();
+matrix=FocusLogic.createSparseMatrix(iconLayout,iconLayout.getCountX(),row);
+newIconIndex=FocusLogic.handleKeyEvent(keyCode,countX + 1,countY,matrix,FocusLogic.PIVOT,newPageIndex,pageCount,Utilities.isRtl(v.getResources()));
+newIcon=parent.getChildAt(newIconIndex);
 }
 break;
-case KeyEvent.KEYCODE_DPAD_DOWN:
-if (handleKeyEvent) {
-View newIcon=getClosestIconOnLine(layout,parent,v,1);
-if (newIcon != null) {
-newIcon.requestFocus();
-v.playSoundEffect(SoundEffectConstants.NAVIGATION_DOWN);
-wasHandled=true;
-}
- else if (hotseat != null) {
-hotseat.requestFocus();
-v.playSoundEffect(SoundEffectConstants.NAVIGATION_DOWN);
-}
-}
-break;
-case KeyEvent.KEYCODE_PAGE_UP:
-if (handleKeyEvent) {
-if (pageIndex > 0) {
+case FocusLogic.PREVIOUS_PAGE_FIRST_ITEM:
 parent=getCellLayoutChildrenForIndex(workspace,pageIndex - 1);
-View newIcon=getIconInDirection(layout,parent,-1,1);
-if (newIcon != null) {
-newIcon.requestFocus();
-}
- else {
+newIcon=parent.getChildAt(0);
 workspace.snapToPage(pageIndex - 1);
-}
-v.playSoundEffect(SoundEffectConstants.NAVIGATION_UP);
-}
- else {
-View newIcon=getIconInDirection(layout,parent,-1,1);
-if (newIcon != null) {
-newIcon.requestFocus();
-v.playSoundEffect(SoundEffectConstants.NAVIGATION_UP);
-}
-}
-}
-wasHandled=true;
 break;
-case KeyEvent.KEYCODE_PAGE_DOWN:
-if (handleKeyEvent) {
-if (pageIndex < (pageCount - 1)) {
+case FocusLogic.PREVIOUS_PAGE_LAST_ITEM:
+parent=getCellLayoutChildrenForIndex(workspace,pageIndex - 1);
+newIcon=parent.getChildAt(parent.getChildCount() - 1);
+workspace.snapToPage(pageIndex - 1);
+break;
+case FocusLogic.NEXT_PAGE_FIRST_ITEM:
 parent=getCellLayoutChildrenForIndex(workspace,pageIndex + 1);
-View newIcon=getIconInDirection(layout,parent,-1,1);
-if (newIcon != null) {
-newIcon.requestFocus();
-}
- else {
+newIcon=parent.getChildAt(0);
 workspace.snapToPage(pageIndex + 1);
-}
-v.playSoundEffect(SoundEffectConstants.NAVIGATION_DOWN);
-}
- else {
-View newIcon=getIconInDirection(layout,parent,parent.getChildCount(),-1);
-if (newIcon != null) {
-newIcon.requestFocus();
-v.playSoundEffect(SoundEffectConstants.NAVIGATION_DOWN);
-}
-}
-}
-wasHandled=true;
 break;
-case KeyEvent.KEYCODE_MOVE_HOME:
-if (handleKeyEvent) {
-View newIcon=getIconInDirection(layout,parent,-1,1);
-if (newIcon != null) {
-newIcon.requestFocus();
-v.playSoundEffect(SoundEffectConstants.NAVIGATION_UP);
+case FocusLogic.NEXT_PAGE_LEFT_COLUMN:
+case FocusLogic.PREVIOUS_PAGE_LEFT_COLUMN:
+newPageIndex=pageIndex + 1;
+if (newIconIndex == FocusLogic.PREVIOUS_PAGE_LEFT_COLUMN) {
+newPageIndex=pageIndex - 1;
 }
+workspace.snapToPage(newPageIndex);
+row=((CellLayout.LayoutParams)v.getLayoutParams()).cellY;
+parent=getCellLayoutChildrenForIndex(workspace,newPageIndex);
+if (parent != null) {
+workspace.snapToPage(newPageIndex);
+iconLayout=(CellLayout)parent.getParent();
+matrix=FocusLogic.createSparseMatrix(iconLayout,-1,row);
+newIconIndex=FocusLogic.handleKeyEvent(keyCode,countX + 1,countY,matrix,FocusLogic.PIVOT,newPageIndex,pageCount,Utilities.isRtl(v.getResources()));
+newIcon=parent.getChildAt(newIconIndex);
 }
-wasHandled=true;
 break;
-case KeyEvent.KEYCODE_MOVE_END:
-if (handleKeyEvent) {
-View newIcon=getIconInDirection(layout,parent,parent.getChildCount(),-1);
-if (newIcon != null) {
-newIcon.requestFocus();
-v.playSoundEffect(SoundEffectConstants.NAVIGATION_DOWN);
-}
-}
-wasHandled=true;
+case FocusLogic.CURRENT_PAGE_FIRST_ITEM:
+newIcon=parent.getChildAt(0);
+break;
+case FocusLogic.CURRENT_PAGE_LAST_ITEM:
+newIcon=parent.getChildAt(parent.getChildCount() - 1);
 break;
 default :
+if (0 <= newIconIndex && newIconIndex < parent.getChildCount()) {
+newIcon=parent.getChildAt(newIconIndex);
+}
+ else if (parent.getChildCount() <= newIconIndex && newIconIndex < parent.getChildCount() + hotseatParent.getChildCount()) {
+newIcon=hotseatParent.getChildAt(newIconIndex - parent.getChildCount());
+}
 break;
 }
-return wasHandled;
+if (newIcon != null) {
+newIcon.requestFocus();
+playSoundEffect(keyCode,v);
+}
+return consume;
 }

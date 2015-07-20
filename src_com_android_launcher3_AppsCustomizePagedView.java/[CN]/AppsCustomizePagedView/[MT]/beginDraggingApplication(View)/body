@@ -1,3 +1,0 @@
-{
-  mLauncher.getWorkspace().beginDragShared(v,this);
-}

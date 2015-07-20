@@ -1,5 +1,0 @@
-Context context
-LauncherActivityInfoCompat info
-UserHandleCompat user
-IconCache iconCache
-HashMap<Object,CharSequence> labelCache

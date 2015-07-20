@@ -1,0 +1,40 @@
+{
+  ArrayList<LauncherAppWidgetProviderInfo> results=new ArrayList<LauncherAppWidgetProviderInfo>();
+  try {
+synchronized (sBgLock) {
+      if (sBgWidgetProviders == null || refresh) {
+        HashMap<ComponentKey,LauncherAppWidgetProviderInfo> tmpWidgetProviders=new HashMap<>();
+        AppWidgetManagerCompat wm=AppWidgetManagerCompat.getInstance(context);
+        LauncherAppWidgetProviderInfo info;
+        List<AppWidgetProviderInfo> widgets=wm.getAllProviders();
+        for (        AppWidgetProviderInfo pInfo : widgets) {
+          info=LauncherAppWidgetProviderInfo.fromProviderInfo(context,pInfo);
+          UserHandleCompat user=wm.getUser(info);
+          tmpWidgetProviders.put(new ComponentKey(info.provider,user),info);
+        }
+        Collection<CustomAppWidget> customWidgets=Launcher.getCustomAppWidgets().values();
+        for (        CustomAppWidget widget : customWidgets) {
+          info=new LauncherAppWidgetProviderInfo(context,widget);
+          UserHandleCompat user=wm.getUser(info);
+          tmpWidgetProviders.put(new ComponentKey(info.provider,user),info);
+        }
+        sBgWidgetProviders=tmpWidgetProviders;
+      }
+      results.addAll(sBgWidgetProviders.values());
+      return results;
+    }
+  }
+ catch (  Exception e) {
+    if (e.getCause() instanceof TransactionTooLargeException) {
+synchronized (sBgLock) {
+        if (sBgWidgetProviders != null) {
+          results.addAll(sBgWidgetProviders.values());
+        }
+        return results;
+      }
+    }
+ else {
+      throw e;
+    }
+  }
+}

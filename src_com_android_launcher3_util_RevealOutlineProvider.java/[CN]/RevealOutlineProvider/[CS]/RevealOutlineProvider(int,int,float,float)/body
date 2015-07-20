@@ -1,0 +1,7 @@
+{
+  mCenterX=x;
+  mCenterY=y;
+  mRadius0=r0;
+  mRadius1=r1;
+  mOval=new Rect();
+}

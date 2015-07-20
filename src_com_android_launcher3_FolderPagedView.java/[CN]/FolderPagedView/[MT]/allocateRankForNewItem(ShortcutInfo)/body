@@ -1,0 +1,8 @@
+{
+  int rank=getItemCount();
+  ArrayList<View> views=new ArrayList<View>(mFolder.getItemsInReadingOrder());
+  views.add(rank,null);
+  arrangeChildren(views,views.size(),false);
+  setCurrentPage(rank / mMaxItemsPerPage);
+  return rank;
+}

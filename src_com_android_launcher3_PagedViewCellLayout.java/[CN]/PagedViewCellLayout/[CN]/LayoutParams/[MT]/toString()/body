@@ -1,3 +1,0 @@
-{
-  return "(" + this.cellX + ", "+ this.cellY+ ", "+ this.cellHSpan+ ", "+ this.cellVSpan+ ")";
-}

@@ -1,0 +1,70 @@
+{
+  long startTime=0;
+  if (DEBUG_RESUME_TIME) {
+    startTime=System.currentTimeMillis();
+    Log.v(TAG,"Launcher.onResume()");
+  }
+  if (mLauncherCallbacks != null) {
+    mLauncherCallbacks.preOnResume();
+  }
+  super.onResume();
+  if (mOnResumeState == State.WORKSPACE) {
+    showWorkspace(false);
+  }
+ else   if (mOnResumeState == State.APPS) {
+    boolean launchedFromApp=(mWaitingForResume != null);
+    showAppsView(false,false,!launchedFromApp,false);
+  }
+ else   if (mOnResumeState == State.WIDGETS) {
+    showWidgetsView(false,false);
+  }
+  mOnResumeState=State.NONE;
+  setWorkspaceBackground(mState == State.WORKSPACE ? WORKSPACE_BACKGROUND_GRADIENT : WORKSPACE_BACKGROUND_TRANSPARENT);
+  mPaused=false;
+  if (mRestoring || mOnResumeNeedsLoad) {
+    setWorkspaceLoading(true);
+    mModel.startLoader(PagedView.INVALID_RESTORE_PAGE);
+    mRestoring=false;
+    mOnResumeNeedsLoad=false;
+  }
+  if (mBindOnResumeCallbacks.size() > 0) {
+    long startTimeCallbacks=0;
+    if (DEBUG_RESUME_TIME) {
+      startTimeCallbacks=System.currentTimeMillis();
+    }
+    for (int i=0; i < mBindOnResumeCallbacks.size(); i++) {
+      mBindOnResumeCallbacks.get(i).run();
+    }
+    mBindOnResumeCallbacks.clear();
+    if (DEBUG_RESUME_TIME) {
+      Log.d(TAG,"Time spent processing callbacks in onResume: " + (System.currentTimeMillis() - startTimeCallbacks));
+    }
+  }
+  if (mOnResumeCallbacks.size() > 0) {
+    for (int i=0; i < mOnResumeCallbacks.size(); i++) {
+      mOnResumeCallbacks.get(i).run();
+    }
+    mOnResumeCallbacks.clear();
+  }
+  if (mWaitingForResume != null) {
+    mWaitingForResume.setStayPressed(false);
+  }
+  getWorkspace().reinflateWidgetsIfNecessary();
+  reinflateQSBIfNecessary();
+  if (DEBUG_RESUME_TIME) {
+    Log.d(TAG,"Time spent in onResume: " + (System.currentTimeMillis() - startTime));
+  }
+  if (mWorkspace.getCustomContentCallbacks() != null) {
+    if (mWorkspace.isOnOrMovingToCustomContent()) {
+      mWorkspace.getCustomContentCallbacks().onShow(true);
+    }
+  }
+  updateInteraction(Workspace.State.NORMAL,mWorkspace.getState());
+  mWorkspace.onResume();
+  if (!isWorkspaceLoading()) {
+    InstallShortcutReceiver.disableAndFlushInstallQueue(this);
+  }
+  if (mLauncherCallbacks != null) {
+    mLauncherCallbacks.onResume();
+  }
+}

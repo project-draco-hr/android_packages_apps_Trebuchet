@@ -1,0 +1,51 @@
+{
+  if (!isDraggingEnabled())   return false;
+  if (isWorkspaceLocked())   return false;
+  if (mState != State.WORKSPACE)   return false;
+  if (v == mAllAppsButton) {
+    onLongClickAllAppsButton(v);
+    return true;
+  }
+  if (v instanceof Workspace) {
+    if (!mWorkspace.isInOverviewMode()) {
+      if (!mWorkspace.isTouchActive()) {
+        showOverviewMode(true);
+        mWorkspace.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS,HapticFeedbackConstants.FLAG_IGNORE_VIEW_SETTING);
+        return true;
+      }
+ else {
+        return false;
+      }
+    }
+ else {
+      return false;
+    }
+  }
+  CellLayout.CellInfo longClickCellInfo=null;
+  View itemUnderLongClick=null;
+  if (v.getTag() instanceof ItemInfo) {
+    ItemInfo info=(ItemInfo)v.getTag();
+    longClickCellInfo=new CellLayout.CellInfo(v,info);
+    itemUnderLongClick=longClickCellInfo.cell;
+    resetAddInfo();
+  }
+  final boolean inHotseat=isHotseatLayout(v);
+  if (!mDragController.isDragging()) {
+    if (itemUnderLongClick == null) {
+      mWorkspace.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS,HapticFeedbackConstants.FLAG_IGNORE_VIEW_SETTING);
+      if (mWorkspace.isInOverviewMode()) {
+        mWorkspace.startReordering(v);
+      }
+ else {
+        showOverviewMode(true);
+      }
+    }
+ else {
+      final boolean isAllAppsButton=inHotseat && isAllAppsButtonRank(mHotseat.getOrderInHotseat(longClickCellInfo.cellX,longClickCellInfo.cellY));
+      if (!(itemUnderLongClick instanceof Folder || isAllAppsButton)) {
+        mWorkspace.startDrag(longClickCellInfo);
+      }
+    }
+  }
+  return true;
+}

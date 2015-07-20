@@ -1,6 +1,0 @@
-{
-  super.onFinishInflate();
-  LauncherAppState app=LauncherAppState.getInstance();
-  DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
-  setPadding(grid.edgeMarginPx,2 * grid.edgeMarginPx,grid.edgeMarginPx,2 * grid.edgeMarginPx);
-}

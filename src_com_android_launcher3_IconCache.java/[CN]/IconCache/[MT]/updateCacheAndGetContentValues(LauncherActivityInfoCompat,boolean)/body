@@ -1,0 +1,18 @@
+{
+  final ComponentKey key=new ComponentKey(app.getComponentName(),app.getUser());
+  CacheEntry entry=null;
+  if (!replaceExisting) {
+    entry=mCache.get(key);
+    if (entry == null || entry.isLowResIcon || entry.icon == null) {
+      entry=null;
+    }
+  }
+  if (entry == null) {
+    entry=new CacheEntry();
+    entry.icon=Utilities.createIconBitmap(app.getBadgedIcon(mIconDpi),mContext);
+  }
+  entry.title=app.getLabel();
+  entry.contentDescription=mUserManager.getBadgedLabelForUser(entry.title,app.getUser());
+  mCache.put(new ComponentKey(app.getComponentName(),app.getUser()),entry);
+  return newContentValues(entry.icon,entry.title.toString(),mActivityBgColor);
+}

@@ -1,0 +1,3 @@
+{
+  return getPageCount() > 0 ? (getPageAt(0).getDesiredHeight() + getPaddingTop() + getPaddingBottom()) : 0;
+}

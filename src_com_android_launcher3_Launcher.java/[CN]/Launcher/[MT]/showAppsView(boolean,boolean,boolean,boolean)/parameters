@@ -1,0 +1,4 @@
+boolean animated
+boolean resetListToTop
+boolean updatePredictedApps
+boolean focusSearchBar

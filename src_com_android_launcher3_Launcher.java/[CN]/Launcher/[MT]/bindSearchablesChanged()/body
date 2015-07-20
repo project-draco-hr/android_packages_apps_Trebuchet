@@ -1,0 +1,10 @@
+{
+  if (mSearchDropTargetBar == null) {
+    return;
+  }
+  if (mQsb != null) {
+    mSearchDropTargetBar.removeView(mQsb);
+    mQsb=null;
+  }
+  mSearchDropTargetBar.setQsbSearchBar(getOrCreateQsbBar());
+}

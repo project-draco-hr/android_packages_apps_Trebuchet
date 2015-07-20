@@ -1,3 +1,0 @@
-{
-  mRenderThread.setSize(width,height);
-}

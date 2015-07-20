@@ -1,0 +1,7 @@
+{
+  ViewGroup row=((ViewGroup)holder.getContent().findViewById(R.id.widgets_cell_list));
+  for (int i=0; i < row.getChildCount(); i++) {
+    WidgetCell widget=(WidgetCell)row.getChildAt(i);
+    widget.clear();
+  }
+}

@@ -1,0 +1,3 @@
+{
+  startLoader(synchronousBindPage,LOADER_FLAG_NONE);
+}

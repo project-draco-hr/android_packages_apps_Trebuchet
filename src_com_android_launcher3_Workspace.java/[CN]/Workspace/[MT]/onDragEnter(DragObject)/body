@@ -1,0 +1,14 @@
+{
+  if (ENFORCE_DRAG_EVENT_ORDER) {
+    enfoceDragParity("onDragEnter",1,1);
+  }
+  mCreateUserFolderOnDrop=false;
+  mAddToExistingFolderOnDrop=false;
+  mDropToLayout=null;
+  CellLayout layout=getCurrentDropLayout();
+  setCurrentDropLayout(layout);
+  setCurrentDragOverlappingLayout(layout);
+  if (!workspaceInModalState()) {
+    mLauncher.getDragLayer().showPageHints();
+  }
+}

@@ -4,6 +4,7 @@
   for (int i=0; i < list.size(); i++) {
     View v=list.get(i);
     ItemInfo info=(ItemInfo)v.getTag();
+    info.rank=i;
     items.add(info);
   }
   LauncherModel.moveItemsInDatabase(mLauncher,items,mInfo.id,0);

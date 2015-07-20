@@ -1,0 +1,12 @@
+{
+  if (preview != null) {
+    mWorkerHandler.post(new Runnable(){
+      @Override public void run(){
+synchronized (mUnusedBitmaps) {
+          mUnusedBitmaps.add(preview);
+        }
+      }
+    }
+);
+  }
+}

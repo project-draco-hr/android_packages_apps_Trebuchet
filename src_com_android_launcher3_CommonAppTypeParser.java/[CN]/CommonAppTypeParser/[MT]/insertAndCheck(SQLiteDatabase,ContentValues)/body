@@ -1,0 +1,8 @@
+{
+  parsedValues=values;
+  values.put(Favorites.ICON_TYPE,(Integer)null);
+  values.put(Favorites.ICON_PACKAGE,(String)null);
+  values.put(Favorites.ICON_RESOURCE,(String)null);
+  values.put(Favorites.ICON,(byte[])null);
+  return 1;
+}

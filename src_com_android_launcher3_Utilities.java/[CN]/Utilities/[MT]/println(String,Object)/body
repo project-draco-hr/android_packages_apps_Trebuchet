@@ -1,0 +1,16 @@
+{
+  StringBuilder b=new StringBuilder();
+  b.append(key);
+  b.append(": ");
+  boolean isFirstArgument=true;
+  for (  Object arg : args) {
+    if (isFirstArgument) {
+      isFirstArgument=false;
+    }
+ else {
+      b.append(", ");
+    }
+    b.append(arg);
+  }
+  System.out.println(b.toString());
+}

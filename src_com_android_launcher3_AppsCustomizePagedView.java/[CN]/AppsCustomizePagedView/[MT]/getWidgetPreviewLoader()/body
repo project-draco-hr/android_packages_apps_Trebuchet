@@ -1,6 +1,0 @@
-{
-  if (mWidgetPreviewLoader == null) {
-    mWidgetPreviewLoader=new WidgetPreviewLoader(mLauncher);
-  }
-  return mWidgetPreviewLoader;
-}

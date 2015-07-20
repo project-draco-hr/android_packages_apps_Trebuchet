@@ -1,0 +1,10 @@
+{
+  mContext=context;
+  mUser=user;
+  mModel=LauncherAppState.getInstance().getModel();
+  UserManagerCompat userManager=UserManagerCompat.getInstance(context);
+  mUserSerial=userManager.getSerialNumberForUser(user);
+  mUserCreationTime=userManager.getUserCreationTime(user);
+  mPackageSetKey=INSTALLED_PACKAGES_PREFIX + mUserSerial;
+  mPrefs=mContext.getSharedPreferences(LauncherFiles.MANAGED_USER_PREFERENCES_KEY,Context.MODE_PRIVATE);
+}

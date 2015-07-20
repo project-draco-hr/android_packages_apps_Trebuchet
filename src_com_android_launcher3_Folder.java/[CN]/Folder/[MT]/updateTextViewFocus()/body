@@ -1,6 +1,5 @@
 {
-  View lastChild=getItemAt(getItemCount() - 1);
-  getItemAt(getItemCount() - 1);
+  View lastChild=mContent.getLastItem();
   if (lastChild != null) {
     mFolderName.setNextFocusDownId(lastChild.getId());
     mFolderName.setNextFocusRightId(lastChild.getId());

@@ -2,6 +2,6 @@
   SqlArguments args=new SqlArguments(uri,selection,selectionArgs);
   SQLiteDatabase db=mOpenHelper.getWritableDatabase();
   int count=db.delete(args.table,args.where,args.args);
-  if (count > 0)   sendNotify(uri);
+  if (count > 0)   notifyListeners();
   return count;
 }

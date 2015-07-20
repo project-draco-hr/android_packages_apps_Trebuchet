@@ -1,9 +1,9 @@
 {
   new AsyncTask<Void,Void,Void>(){
     public Void doInBackground(    Void... args){
-      String spKey=WallpaperCropActivity.getSharedPreferencesKey();
+      String spKey=LauncherFiles.WALLPAPER_CROP_PREFERENCES_KEY;
       SharedPreferences sp=mLauncher.getSharedPreferences(spKey,Context.MODE_MULTI_PROCESS);
-      LauncherWallpaperPickerActivity.suggestWallpaperDimension(mLauncher.getResources(),sp,mLauncher.getWindowManager(),mWallpaperManager,mLauncher.overrideWallpaperDimensions());
+      WallpaperUtils.suggestWallpaperDimension(mLauncher.getResources(),sp,mLauncher.getWindowManager(),mWallpaperManager,mLauncher.overrideWallpaperDimensions());
       return null;
     }
   }

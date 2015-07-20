@@ -1,6 +1,0 @@
-{
-  CacheEntry entry=cacheLocked(application.componentName,info,labelCache,info.getUser(),false);
-  application.title=entry.title;
-  application.iconBitmap=entry.icon;
-  application.contentDescription=entry.contentDescription;
-}

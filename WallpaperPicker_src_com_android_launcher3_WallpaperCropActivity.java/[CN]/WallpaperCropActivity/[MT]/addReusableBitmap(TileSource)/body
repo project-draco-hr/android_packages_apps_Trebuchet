@@ -1,0 +1,10 @@
+{
+synchronized (mReusableBitmaps) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT && src instanceof BitmapRegionTileSource) {
+      Bitmap preview=((BitmapRegionTileSource)src).getBitmap();
+      if (preview != null && preview.isMutable()) {
+        mReusableBitmaps.add(preview);
+      }
+    }
+  }
+}

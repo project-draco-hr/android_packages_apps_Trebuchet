@@ -1,0 +1,10 @@
+{
+  mLauncher=launcher;
+  mActions.put(REMOVE,new AccessibilityAction(REMOVE,launcher.getText(R.string.delete_target_label)));
+  mActions.put(INFO,new AccessibilityAction(INFO,launcher.getText(R.string.info_target_label)));
+  mActions.put(UNINSTALL,new AccessibilityAction(UNINSTALL,launcher.getText(R.string.delete_target_uninstall_label)));
+  mActions.put(ADD_TO_WORKSPACE,new AccessibilityAction(ADD_TO_WORKSPACE,launcher.getText(R.string.action_add_to_workspace)));
+  mActions.put(MOVE,new AccessibilityAction(MOVE,launcher.getText(R.string.action_move)));
+  mActions.put(MOVE_TO_WORKSPACE,new AccessibilityAction(MOVE_TO_WORKSPACE,launcher.getText(R.string.action_move_to_workspace)));
+  mActions.put(RESIZE,new AccessibilityAction(RESIZE,launcher.getText(R.string.action_resize)));
+}

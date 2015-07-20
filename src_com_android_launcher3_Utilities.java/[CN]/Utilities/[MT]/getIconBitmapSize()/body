@@ -1,0 +1,3 @@
+{
+  return LauncherAppState.getInstance().getInvariantDeviceProfile().iconBitmapSize;
+}

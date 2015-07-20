@@ -1,0 +1,4 @@
+{
+  mComponentToAppMap.clear();
+  addApps(apps);
+}

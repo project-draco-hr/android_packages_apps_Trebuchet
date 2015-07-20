@@ -1,0 +1,19 @@
+{
+  final LoadRequest req=new LoadRequest();
+  req.moveToLeft=moveToLeft;
+  req.src=bitmapSource;
+  req.touchEnabled=touchEnabled;
+  req.postExecute=postExecute;
+  req.scaleProvider=scaleProvider;
+  mCurrentLoadRequest=req;
+  mLoaderHandler.removeMessages(MSG_LOAD_IMAGE);
+  Message.obtain(mLoaderHandler,MSG_LOAD_IMAGE,req).sendToTarget();
+  mProgressView.postDelayed(new Runnable(){
+    public void run(){
+      if (mCurrentLoadRequest == req) {
+        mProgressView.setVisibility(View.VISIBLE);
+      }
+    }
+  }
+,1000);
+}

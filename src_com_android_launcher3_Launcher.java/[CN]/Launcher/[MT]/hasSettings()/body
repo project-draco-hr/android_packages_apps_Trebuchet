@@ -1,0 +1,8 @@
+{
+  if (mLauncherCallbacks != null) {
+    return mLauncherCallbacks.hasSettings();
+  }
+ else {
+    return !Utilities.isRotationAllowedForDevice(this);
+  }
+}

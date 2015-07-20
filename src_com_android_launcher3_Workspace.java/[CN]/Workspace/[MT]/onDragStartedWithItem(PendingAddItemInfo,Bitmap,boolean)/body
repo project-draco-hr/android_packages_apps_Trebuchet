@@ -1,4 +1,4 @@
 {
-  int[] size=estimateItemSize(info.spanX,info.spanY,info,false);
+  int[] size=estimateItemSize(info,false);
   mDragOutline=createDragOutline(b,DRAG_BITMAP_PADDING,size[0],size[1],clipAlpha);
 }

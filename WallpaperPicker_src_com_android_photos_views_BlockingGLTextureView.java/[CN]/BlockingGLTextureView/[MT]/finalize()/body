@@ -1,8 +1,0 @@
-{
-  try {
-    destroy();
-  }
- catch (  Throwable t) {
-  }
-  super.finalize();
-}

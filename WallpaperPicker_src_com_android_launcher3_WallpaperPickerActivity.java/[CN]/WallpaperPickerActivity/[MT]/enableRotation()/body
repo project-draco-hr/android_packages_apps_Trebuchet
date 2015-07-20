@@ -1,0 +1,4 @@
+{
+  if (Utilities.isRotationAllowedForDevice(getContext()))   return true;
+  return Utilities.isAllowRotationPrefEnabled(getApplicationContext(),true);
+}

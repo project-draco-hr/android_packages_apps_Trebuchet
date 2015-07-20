@@ -1,0 +1,63 @@
+{
+  final boolean postOnMainThread=(deferredBindRunnables != null);
+  int N=workspaceItems.size();
+  for (int i=0; i < N; i+=ITEMS_CHUNK) {
+    final int start=i;
+    final int chunkSize=(i + ITEMS_CHUNK <= N) ? ITEMS_CHUNK : (N - i);
+    final Runnable r=new Runnable(){
+      @Override public void run(){
+        Callbacks callbacks=tryGetCallbacks(oldCallbacks);
+        if (callbacks != null) {
+          callbacks.bindItems(workspaceItems,start,start + chunkSize,false);
+        }
+      }
+    }
+;
+    if (postOnMainThread) {
+synchronized (deferredBindRunnables) {
+        deferredBindRunnables.add(r);
+      }
+    }
+ else {
+      runOnMainThread(r);
+    }
+  }
+  if (!folders.isEmpty()) {
+    final Runnable r=new Runnable(){
+      public void run(){
+        Callbacks callbacks=tryGetCallbacks(oldCallbacks);
+        if (callbacks != null) {
+          callbacks.bindFolders(folders);
+        }
+      }
+    }
+;
+    if (postOnMainThread) {
+synchronized (deferredBindRunnables) {
+        deferredBindRunnables.add(r);
+      }
+    }
+ else {
+      runOnMainThread(r);
+    }
+  }
+  N=appWidgets.size();
+  for (int i=0; i < N; i++) {
+    final LauncherAppWidgetInfo widget=appWidgets.get(i);
+    final Runnable r=new Runnable(){
+      public void run(){
+        Callbacks callbacks=tryGetCallbacks(oldCallbacks);
+        if (callbacks != null) {
+          callbacks.bindAppWidget(widget);
+        }
+      }
+    }
+;
+    if (postOnMainThread) {
+      deferredBindRunnables.add(r);
+    }
+ else {
+      runOnMainThread(r);
+    }
+  }
+}

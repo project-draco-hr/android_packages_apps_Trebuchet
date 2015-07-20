@@ -1,6 +1,7 @@
 {
   super();
-  this.mActivityInfo=info.activityInfo;
+  mResolveInfo=info;
+  mActivityInfo=info.activityInfo;
   mComponentName=new ComponentName(mActivityInfo.packageName,mActivityInfo.name);
   mPm=context.getPackageManager();
 }

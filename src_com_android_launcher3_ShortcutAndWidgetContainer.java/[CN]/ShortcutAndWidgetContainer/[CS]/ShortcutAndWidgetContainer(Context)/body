@@ -1,4 +1,5 @@
 {
   super(context);
+  mLauncher=(Launcher)context;
   mWallpaperManager=WallpaperManager.getInstance(context);
 }

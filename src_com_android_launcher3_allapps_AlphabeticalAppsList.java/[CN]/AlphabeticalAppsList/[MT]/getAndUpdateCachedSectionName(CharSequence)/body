@@ -1,0 +1,8 @@
+{
+  String sectionName=mCachedSectionNames.get(title);
+  if (sectionName == null) {
+    sectionName=mIndexer.computeSectionName(title);
+    mCachedSectionNames.put(title,sectionName);
+  }
+  return sectionName;
+}

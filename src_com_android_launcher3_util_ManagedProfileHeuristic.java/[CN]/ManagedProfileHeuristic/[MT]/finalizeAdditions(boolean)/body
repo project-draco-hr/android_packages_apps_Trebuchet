@@ -1,0 +1,6 @@
+{
+  finalizeWorkFolder();
+  if (addHomeScreenShortcuts && !mHomescreenApps.isEmpty()) {
+    mModel.addAndBindAddedWorkspaceItems(mContext,mHomescreenApps);
+  }
+}

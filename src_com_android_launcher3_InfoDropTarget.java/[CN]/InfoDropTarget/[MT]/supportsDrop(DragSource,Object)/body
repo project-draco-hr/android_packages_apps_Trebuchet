@@ -1,0 +1,3 @@
+{
+  return source.supportsAppInfoDropTarget() && supportsDrop(getContext(),info);
+}

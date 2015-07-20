@@ -1,0 +1,7 @@
+{
+  mInfo=info;
+  CharSequence label=info.loadLabel(pm);
+  mWidgetName.setText(label);
+  mWidgetDims.setText(String.format(mDimensionsFormatString,1,1));
+  mWidgetPreviewLoader=loader;
+}

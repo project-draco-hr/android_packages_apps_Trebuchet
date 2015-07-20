@@ -1,3 +1,9 @@
 {
-  d.dragView.setColor(0);
+  if (!d.dragComplete) {
+    d.dragView.setColor(0);
+    resetHoverColor();
+  }
+ else {
+    d.dragView.setColor(mHoverColor);
+  }
 }

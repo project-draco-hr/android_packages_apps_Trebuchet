@@ -1,0 +1,4 @@
+String packageName
+UserHandleCompat user
+boolean useLowResIcon
+PackageItemInfo infoOut

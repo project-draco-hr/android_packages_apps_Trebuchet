@@ -1,7 +1,21 @@
 {
   super(context,attrs,defStyle);
+  mLauncher=(Launcher)context;
+  DeviceProfile grid=mLauncher.getDeviceProfile();
   TypedArray a=context.obtainStyledAttributes(attrs,R.styleable.BubbleTextView,defStyle,0);
   mCustomShadowsEnabled=a.getBoolean(R.styleable.BubbleTextView_customShadows,true);
+  mLayoutHorizontal=a.getBoolean(R.styleable.BubbleTextView_layoutHorizontal,false);
+  mDeferShadowGenerationOnTouch=a.getBoolean(R.styleable.BubbleTextView_deferShadowGeneration,false);
+  int display=a.getInteger(R.styleable.BubbleTextView_iconDisplay,DISPLAY_WORKSPACE);
+  int defaultIconSize=grid.iconSizePx;
+  if (display == DISPLAY_WORKSPACE) {
+    setTextSize(TypedValue.COMPLEX_UNIT_PX,grid.iconTextSizePx);
+  }
+ else   if (display == DISPLAY_ALL_APPS) {
+    setTextSize(TypedValue.COMPLEX_UNIT_PX,grid.allAppsIconTextSizePx);
+    defaultIconSize=grid.allAppsIconSizePx;
+  }
+  mIconSize=a.getDimensionPixelSize(R.styleable.BubbleTextView_iconSizeOverride,defaultIconSize);
   a.recycle();
   if (mCustomShadowsEnabled) {
     mBackground=getBackground();
@@ -10,5 +24,16 @@
  else {
     mBackground=null;
   }
-  init();
+  mLongPressHelper=new CheckLongPressHelper(this);
+  mStylusEventHelper=new StylusEventHelper(this);
+  mOutlineHelper=HolographicOutlineHelper.obtain(getContext());
+  if (mCustomShadowsEnabled) {
+    setShadowLayer(SHADOW_LARGE_RADIUS,0.0f,SHADOW_Y_OFFSET,SHADOW_LARGE_COLOUR);
+  }
+  if (mFastScrollMode == FAST_SCROLL_FOCUS_MODE_DRAW_CIRCLE_BG) {
+    mFastScrollFocusBgPaint=new Paint();
+    mFastScrollFocusBgPaint.setAntiAlias(true);
+    mFastScrollFocusBgPaint.setColor(getResources().getColor(R.color.container_fastscroll_thumb_active_color));
+  }
+  setAccessibilityDelegate(LauncherAppState.getInstance().getAccessibilityDelegate());
 }

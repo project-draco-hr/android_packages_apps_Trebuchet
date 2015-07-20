@@ -1,0 +1,4 @@
+{
+  DeviceProfile grid=mLauncher.getDeviceProfile();
+  return (float)grid.allAppsIconSizePx / grid.iconSizePx;
+}

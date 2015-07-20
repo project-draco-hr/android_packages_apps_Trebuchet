@@ -1,0 +1,24 @@
+{
+  mCollator=Collator.getInstance();
+  mAppInfoComparator=new AbstractUserComparator<ItemInfo>(context){
+    @Override public final int compare(    ItemInfo a,    ItemInfo b){
+      int result=compareTitles(a.title.toString(),b.title.toString());
+      if (result == 0 && a instanceof AppInfo && b instanceof AppInfo) {
+        AppInfo aAppInfo=(AppInfo)a;
+        AppInfo bAppInfo=(AppInfo)b;
+        result=aAppInfo.componentName.compareTo(bAppInfo.componentName);
+        if (result == 0) {
+          return super.compare(a,b);
+        }
+      }
+      return result;
+    }
+  }
+;
+  mSectionNameComparator=new Comparator<String>(){
+    @Override public int compare(    String o1,    String o2){
+      return compareTitles(o1,o2);
+    }
+  }
+;
+}

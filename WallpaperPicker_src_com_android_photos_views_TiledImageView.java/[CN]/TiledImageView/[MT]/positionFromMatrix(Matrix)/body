@@ -1,7 +1,4 @@
 {
-  if (!IS_SUPPORTED) {
-    return;
-  }
   if (mRenderer.source != null) {
     final int rotation=mRenderer.source.getRotation();
     final boolean swap=!(rotation % 180 == 0);

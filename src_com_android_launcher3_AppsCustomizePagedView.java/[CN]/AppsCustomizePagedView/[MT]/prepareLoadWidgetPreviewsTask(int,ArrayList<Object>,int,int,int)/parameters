@@ -1,5 +1,0 @@
-int page
-ArrayList<Object> widgets
-int cellWidth
-int cellHeight
-int cellCountX

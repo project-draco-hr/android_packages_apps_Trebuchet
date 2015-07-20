@@ -1,0 +1,18 @@
+{
+switch (type) {
+case Favorite.TARGET_PHONE:
+    return R.xml.app_target_phone;
+case Favorite.TARGET_MESSENGER:
+  return R.xml.app_target_messenger;
+case Favorite.TARGET_EMAIL:
+return R.xml.app_target_email;
+case Favorite.TARGET_BROWSER:
+return R.xml.app_target_browser;
+case Favorite.TARGET_GALLERY:
+return R.xml.app_target_gallery;
+case Favorite.TARGET_CAMERA:
+return R.xml.app_target_camera;
+default :
+return 0;
+}
+}

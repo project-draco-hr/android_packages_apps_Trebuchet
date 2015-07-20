@@ -3,7 +3,10 @@
   SharedPreferences sp=getContext().getSharedPreferences(spKey,Context.MODE_PRIVATE);
   if (sp.getBoolean(EMPTY_DATABASE_CREATED,false)) {
     Log.d(TAG,"loading default workspace");
-    AutoInstallsLayout loader=AutoInstallsLayout.get(getContext(),mOpenHelper.mAppWidgetHost,mOpenHelper);
+    AutoInstallsLayout loader=createWorkspaceLoaderFromAppRestriction();
+    if (loader == null) {
+      loader=AutoInstallsLayout.get(getContext(),mOpenHelper.mAppWidgetHost,mOpenHelper);
+    }
     if (loader == null) {
       final Partner partner=Partner.get(getContext().getPackageManager());
       if (partner != null && partner.hasDefaultLayout()) {
@@ -18,6 +21,7 @@
     if (loader == null) {
       loader=getDefaultLayoutParser();
     }
+    createEmptyDB();
     if ((mOpenHelper.loadFavorites(mOpenHelper.getWritableDatabase(),loader) <= 0) && usingExternallyProvidedLayout) {
       createEmptyDB();
       mOpenHelper.loadFavorites(mOpenHelper.getWritableDatabase(),getDefaultLayoutParser());

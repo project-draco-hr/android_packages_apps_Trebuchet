@@ -1,0 +1,30 @@
+{
+  final ShortcutInfo info=new ShortcutInfo();
+  info.user=UserHandleCompat.myUserHandle();
+  Bitmap icon=iconInfo.loadIcon(c,info,context);
+  if (icon == null) {
+    mIconCache.getTitleAndIcon(info,intent,info.user,false);
+  }
+ else {
+    info.setIcon(icon);
+  }
+  if ((promiseType & ShortcutInfo.FLAG_RESTORED_ICON) != 0) {
+    String title=(c != null) ? c.getString(titleIndex) : null;
+    if (!TextUtils.isEmpty(title)) {
+      info.title=Utilities.trim(title);
+    }
+  }
+ else   if ((promiseType & ShortcutInfo.FLAG_AUTOINTALL_ICON) != 0) {
+    if (TextUtils.isEmpty(info.title)) {
+      info.title=(c != null) ? Utilities.trim(c.getString(titleIndex)) : "";
+    }
+  }
+ else {
+    throw new InvalidParameterException("Invalid restoreType " + promiseType);
+  }
+  info.contentDescription=mUserManager.getBadgedLabelForUser(info.title,info.user);
+  info.itemType=itemType;
+  info.promisedIntent=intent;
+  info.status=promiseType;
+  return info;
+}

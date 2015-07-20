@@ -1,0 +1,9 @@
+{
+  float leftShift=view.getLeft() + viewParent.getLeft() - getLeft();
+  float topShift=view.getTop() + viewParent.getTop() - getTop();
+  int iconWidth=view.getRight() - view.getLeft();
+  int iconHSpace=iconWidth - view.getCompoundPaddingRight() - view.getCompoundPaddingLeft();
+  float drawableWidth=view.getIcon().getBounds().width();
+  setTranslationX(leftShift + viewParent.getTranslationX() + view.getCompoundPaddingLeft() * view.getScaleX() + (iconHSpace - drawableWidth) * view.getScaleX() / 2 + iconWidth * (1 - view.getScaleX()) / 2 - mShadowPadding);
+  setTranslationY(topShift + viewParent.getTranslationY() + view.getPaddingTop() * view.getScaleY() + view.getHeight() * (1 - view.getScaleY()) / 2 - mShadowPadding);
+}

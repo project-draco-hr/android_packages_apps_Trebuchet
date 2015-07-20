@@ -1,0 +1,25 @@
+{
+  int action=ev.getAction();
+  int x=(int)ev.getX();
+  int y=(int)ev.getY();
+switch (action) {
+case MotionEvent.ACTION_DOWN:
+    mDownX=x;
+  mDownY=mLastY=y;
+if (shouldStopScroll(ev)) {
+  stopScroll();
+}
+mScrollbar.handleTouchEvent(ev,mDownX,mDownY,mLastY);
+break;
+case MotionEvent.ACTION_MOVE:
+mLastY=y;
+mScrollbar.handleTouchEvent(ev,mDownX,mDownY,mLastY);
+break;
+case MotionEvent.ACTION_UP:
+case MotionEvent.ACTION_CANCEL:
+onFastScrollCompleted();
+mScrollbar.handleTouchEvent(ev,mDownX,mDownY,mLastY);
+break;
+}
+return mScrollbar.isDragging();
+}

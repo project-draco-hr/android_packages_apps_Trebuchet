@@ -1,4 +1,0 @@
-{
-  mBound=true;
-  mWorker.post(this);
-}

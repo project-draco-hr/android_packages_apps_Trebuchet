@@ -3,8 +3,7 @@
   if (error) {
     throw new IllegalStateException("DROP_IN_ANIMATION_DURATION must be greater than " + "INITIAL_ITEM_ANIMATION_DURATION, as sequencing of adding first two items " + "is dependent on this");
   }
-  LauncherAppState app=LauncherAppState.getInstance();
-  DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
+  DeviceProfile grid=launcher.getDeviceProfile();
   FolderIcon icon=(FolderIcon)LayoutInflater.from(launcher).inflate(resId,group,false);
   icon.setClipToPadding(false);
   icon.mFolderName=(BubbleTextView)icon.findViewById(R.id.folder_icon_name);

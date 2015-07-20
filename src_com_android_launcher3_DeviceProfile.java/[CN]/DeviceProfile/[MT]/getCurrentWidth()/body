@@ -1,0 +1,3 @@
+{
+  return isLandscape ? Math.max(widthPx,heightPx) : Math.min(widthPx,heightPx);
+}

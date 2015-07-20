@@ -1,0 +1,3 @@
+{
+  mApps.setApps(apps);
+}

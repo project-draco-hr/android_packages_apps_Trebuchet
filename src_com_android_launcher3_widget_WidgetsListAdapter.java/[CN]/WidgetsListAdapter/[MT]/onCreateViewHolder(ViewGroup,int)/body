@@ -1,0 +1,14 @@
+{
+  if (DEBUG) {
+    Log.v(TAG,"\nonCreateViewHolder");
+  }
+  ViewGroup container=(ViewGroup)mLayoutInflater.inflate(R.layout.widgets_list_row_view,parent,false);
+  LinearLayout cellList=(LinearLayout)container.findViewById(R.id.widgets_cell_list);
+  if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+    cellList.setPaddingRelative(mIndent,0,1,0);
+  }
+ else {
+    cellList.setPadding(mIndent,0,1,0);
+  }
+  return new WidgetsRowViewHolder(container);
+}

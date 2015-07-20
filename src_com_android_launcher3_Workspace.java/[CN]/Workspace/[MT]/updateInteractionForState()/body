@@ -1,8 +1,0 @@
-{
-  if (mState != State.NORMAL) {
-    mLauncher.onInteractionBegin();
-  }
- else {
-    mLauncher.onInteractionEnd();
-  }
-}

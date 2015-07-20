@@ -1,8 +1,0 @@
-{
-  if (pageIndex >= 0) {
-    CellLayout cl=(CellLayout)getChildAt(pageIndex);
-    setScrollX(mSavedScrollX);
-    cl.setTranslationX(mSavedTranslationX);
-    cl.setRotationY(mSavedRotationY);
-  }
-}

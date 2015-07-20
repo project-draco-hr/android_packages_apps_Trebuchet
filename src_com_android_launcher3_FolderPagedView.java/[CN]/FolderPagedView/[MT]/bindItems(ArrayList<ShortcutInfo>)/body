@@ -1,0 +1,14 @@
+{
+  ArrayList<View> icons=new ArrayList<View>();
+  ArrayList<ShortcutInfo> extra=new ArrayList<ShortcutInfo>();
+  for (  ShortcutInfo item : items) {
+    if (!ALLOW_FOLDER_SCROLL && icons.size() >= mMaxItemsPerPage) {
+      extra.add(item);
+    }
+ else {
+      icons.add(createNewView(item));
+    }
+  }
+  arrangeChildren(icons,icons.size(),false);
+  return extra;
+}

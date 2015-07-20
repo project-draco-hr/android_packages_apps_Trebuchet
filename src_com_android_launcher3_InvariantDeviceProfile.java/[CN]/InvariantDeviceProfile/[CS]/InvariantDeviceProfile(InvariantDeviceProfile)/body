@@ -1,0 +1,3 @@
+{
+  this(p.name,p.minWidthDps,p.minHeightDps,p.numRows,p.numColumns,p.numFolderRows,p.numFolderColumns,p.minAllAppsPredictionColumns,p.iconSize,p.iconTextSize,p.numHotseatIcons,p.hotseatIconSize,p.defaultLayoutId);
+}

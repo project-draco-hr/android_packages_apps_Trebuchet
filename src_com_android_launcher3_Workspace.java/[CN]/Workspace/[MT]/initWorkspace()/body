@@ -1,8 +1,7 @@
 {
   mCurrentPage=mDefaultPage;
-  Launcher.setScreen(mCurrentPage);
   LauncherAppState app=LauncherAppState.getInstance();
-  DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
+  DeviceProfile grid=mLauncher.getDeviceProfile();
   mIconCache=app.getIconCache();
   setWillNotDraw(false);
   setClipChildren(false);
@@ -14,6 +13,6 @@
   Display display=mLauncher.getWindowManager().getDefaultDisplay();
   display.getSize(mDisplaySize);
   mMaxDistanceForFolderCreation=(0.55f * grid.iconSizePx);
-  mFlingThresholdVelocity=(int)(FLING_THRESHOLD_VELOCITY * mDensity);
   setWallpaperDimension();
+  setEdgeGlowColor(getResources().getColor(R.color.workspace_edge_effect_color));
 }

@@ -5,7 +5,6 @@
   if (focusedChild != null && whichPage != mCurrentPage && focusedChild == getPageAt(mCurrentPage)) {
     focusedChild.clearFocus();
   }
-  sendScrollAccessibilityEvent();
   pageBeginMoving();
   awakenScrollBars(duration);
   if (immediate) {
@@ -23,12 +22,11 @@
  else {
     mScroller.setInterpolator(mDefaultInterpolator);
   }
-  mScroller.startScroll(mUnboundedScrollX,0,delta,0,duration);
+  mScroller.startScroll(getScrollX(),0,delta,0,duration);
   updatePageIndicator();
   if (immediate) {
     computeScroll();
   }
-  mDeferLoadAssociatedPagesUntilScrollCompletes=true;
   mForceScreenScrolled=true;
   invalidate();
 }

@@ -1,6 +1,5 @@
 {
-  LauncherAppState app=LauncherAppState.getInstance();
-  DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
+  DeviceProfile grid=mLauncher.getDeviceProfile();
   Rect overviewBar=grid.getOverviewModeButtonBarRect();
   int availableHeight=getViewportHeight();
   int scaledHeight=(int)(mOverviewModeShrinkFactor * getNormalChildHeight());

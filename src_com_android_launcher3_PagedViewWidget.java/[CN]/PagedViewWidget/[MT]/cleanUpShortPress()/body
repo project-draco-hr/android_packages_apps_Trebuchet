@@ -1,9 +1,0 @@
-{
-  removeShortPressCallback();
-  if (mShortPressTriggered) {
-    if (mShortPressListener != null) {
-      mShortPressListener.cleanUpShortPress(PagedViewWidget.this);
-    }
-    mShortPressTriggered=false;
-  }
-}

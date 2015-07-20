@@ -1,0 +1,9 @@
+int pixelX
+int pixelY
+int minSpanX
+int minSpanY
+int spanX
+int spanY
+boolean ignoreOccupied
+int[] result
+int[] resultSpan

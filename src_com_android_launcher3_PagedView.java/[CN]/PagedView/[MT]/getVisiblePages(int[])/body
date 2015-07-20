@@ -1,6 +1,6 @@
 {
   final int pageCount=getChildCount();
-  mTmpIntPoint[0]=mTmpIntPoint[1]=0;
+  sTmpIntPoint[0]=sTmpIntPoint[1]=0;
   range[0]=-1;
   range[1]=-1;
   if (pageCount > 0) {
@@ -9,9 +9,9 @@
     int count=getChildCount();
     for (int i=0; i < count; i++) {
       View currPage=getPageAt(i);
-      mTmpIntPoint[0]=0;
-      Utilities.getDescendantCoordRelativeToParent(currPage,this,mTmpIntPoint,false);
-      if (mTmpIntPoint[0] > viewportWidth) {
+      sTmpIntPoint[0]=0;
+      Utilities.getDescendantCoordRelativeToParent(currPage,this,sTmpIntPoint,false);
+      if (sTmpIntPoint[0] > viewportWidth) {
         if (range[0] == -1) {
           continue;
         }
@@ -19,9 +19,9 @@
           break;
         }
       }
-      mTmpIntPoint[0]=currPage.getMeasuredWidth();
-      Utilities.getDescendantCoordRelativeToParent(currPage,this,mTmpIntPoint,false);
-      if (mTmpIntPoint[0] < 0) {
+      sTmpIntPoint[0]=currPage.getMeasuredWidth();
+      Utilities.getDescendantCoordRelativeToParent(currPage,this,sTmpIntPoint,false);
+      if (sTmpIntPoint[0] < 0) {
         if (range[0] == -1) {
           continue;
         }

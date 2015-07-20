@@ -1,0 +1,3 @@
+{
+  return AppWidgetProviderInfo.RESIZE_BOTH;
+}

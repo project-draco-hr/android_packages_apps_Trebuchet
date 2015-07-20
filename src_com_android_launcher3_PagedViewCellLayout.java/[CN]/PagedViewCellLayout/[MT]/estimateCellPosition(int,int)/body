@@ -1,3 +1,0 @@
-{
-  return new int[]{getPaddingLeft() + (x * mCellWidth) + (x * mWidthGap)+ (mCellWidth / 2),getPaddingTop() + (y * mCellHeight) + (y * mHeightGap)+ (mCellHeight / 2)};
-}

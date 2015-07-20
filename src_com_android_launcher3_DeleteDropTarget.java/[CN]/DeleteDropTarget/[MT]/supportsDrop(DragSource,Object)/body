@@ -1,0 +1,3 @@
+{
+  return source.supportsDeleteDropTarget() && supportsDrop(info);
+}

@@ -6,7 +6,6 @@
  else {
     view=convertView;
   }
-  setWallpaperItemPaddingToZero((FrameLayout)view);
   ImageView image=(ImageView)view.findViewById(R.id.wallpaper_image);
   if (thumb != null) {
     image.setImageDrawable(thumb);

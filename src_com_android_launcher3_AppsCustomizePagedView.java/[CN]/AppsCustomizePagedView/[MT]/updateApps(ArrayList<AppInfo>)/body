@@ -1,7 +1,0 @@
-{
-  if (!LauncherAppState.isDisableAllApps()) {
-    removeAppsWithoutInvalidate(list);
-    addAppsWithoutInvalidate(list);
-    updatePageCountsAndInvalidateData();
-  }
-}

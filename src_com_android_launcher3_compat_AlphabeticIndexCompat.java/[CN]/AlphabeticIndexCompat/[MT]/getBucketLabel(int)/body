@@ -1,0 +1,11 @@
+{
+  if (mHasValidAlphabeticIndex) {
+    try {
+      return (String)mGetBucketLabelMethod.invoke(mAlphabeticIndex,index);
+    }
+ catch (    Exception e) {
+      e.printStackTrace();
+    }
+  }
+  return super.getBucketLabel(index);
+}

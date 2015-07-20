@@ -1,0 +1,3 @@
+{
+  return entry.icon == null ? getDefaultIcon(user) : entry.icon;
+}

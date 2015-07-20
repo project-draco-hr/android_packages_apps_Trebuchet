@@ -1,0 +1,6 @@
+{
+  int[] maxSize=new int[2];
+  maxSize[0]=mPresetPreviewSize;
+  maxSize[1]=mPresetPreviewSize;
+  return maxSize;
+}

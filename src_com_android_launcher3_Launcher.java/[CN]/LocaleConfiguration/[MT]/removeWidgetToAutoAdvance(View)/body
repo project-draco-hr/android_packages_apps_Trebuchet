@@ -1,6 +1,0 @@
-{
-  if (mWidgetsToAdvance.containsKey(hostView)) {
-    mWidgetsToAdvance.remove(hostView);
-    updateRunning();
-  }
-}

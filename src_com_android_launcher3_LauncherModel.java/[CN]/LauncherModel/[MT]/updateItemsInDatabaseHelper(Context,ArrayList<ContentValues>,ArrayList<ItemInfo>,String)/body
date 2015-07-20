@@ -8,7 +8,7 @@
       for (int i=0; i < count; i++) {
         ItemInfo item=items.get(i);
         final long itemId=item.id;
-        final Uri uri=LauncherSettings.Favorites.getContentUri(itemId,false);
+        final Uri uri=LauncherSettings.Favorites.getContentUri(itemId);
         ContentValues values=valuesList.get(i);
         ops.add(ContentProviderOperation.newUpdate(uri).withValues(values).build());
         updateItemArrays(item,itemId,stackTrace);

@@ -1,3 +1,0 @@
-{
-  return (getLayoutDirection() == LAYOUT_DIRECTION_RTL);
-}

@@ -1,6 +1,4 @@
 {
-  Launcher.addDumpLog(TAG,"11683562 - updateWorkspaceScreenOrder()",true);
-  Launcher.addDumpLog(TAG,"11683562 -   screens: " + TextUtils.join(", ",screens),true);
   final ArrayList<Long> screensCopy=new ArrayList<Long>(screens);
   final ContentResolver cr=context.getContentResolver();
   final Uri uri=LauncherSettings.WorkspaceScreens.CONTENT_URI;
