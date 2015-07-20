@@ -11,6 +11,7 @@
   values.put(Favorites.CELLY,favorite.cellY);
   values.put(Favorites.SPANX,favorite.spanX);
   values.put(Favorites.SPANY,favorite.spanY);
+  values.put(Favorites.RANK,favorite.rank);
   if (favorite.itemType == Favorites.ITEM_TYPE_SHORTCUT) {
     values.put(Favorites.ICON_TYPE,favorite.iconType);
     if (favorite.iconType == Favorites.ICON_TYPE_RESOURCE) {
