@@ -3,3 +3,4 @@ Bitmap icon
 int dpi
 String label
 long userSerial
+InvariantDeviceProfile idp
