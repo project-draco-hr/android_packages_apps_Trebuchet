@@ -7,9 +7,11 @@
   boolean isHotsetCompatible=false;
   if (currentProfile.allappsRank >= oldProfile.hotseatCount) {
     isHotsetCompatible=true;
+    mHotseatShift=0;
   }
-  if ((currentProfile.hotseatCount >= oldProfile.hotseatCount) && (currentProfile.allappsRank == oldProfile.allappsRank)) {
+  if ((currentProfile.allappsRank >= oldProfile.allappsRank) && ((currentProfile.hotseatCount - currentProfile.allappsRank) >= (oldProfile.hotseatCount - oldProfile.allappsRank))) {
     isHotsetCompatible=true;
+    mHotseatShift=currentProfile.allappsRank - oldProfile.allappsRank;
   }
   return isHotsetCompatible && (currentProfile.desktopCols >= oldProfile.desktopCols) && (currentProfile.desktopRows >= oldProfile.desktopRows);
 }
