@@ -157,7 +157,7 @@ updateItemInDatabase(context,si);
  else if (info instanceof LauncherAppWidgetInfo) {
 LauncherAppWidgetInfo widgetInfo=(LauncherAppWidgetInfo)info;
 if (mUser.equals(widgetInfo.user) && widgetInfo.hasRestoreFlag(LauncherAppWidgetInfo.FLAG_PROVIDER_NOT_READY) && packageSet.contains(widgetInfo.providerName.getPackageName())) {
-widgetInfo.restoreStatus&=~LauncherAppWidgetInfo.FLAG_PROVIDER_NOT_READY;
+widgetInfo.restoreStatus&=~LauncherAppWidgetInfo.FLAG_PROVIDER_NOT_READY & ~LauncherAppWidgetInfo.FLAG_RESTORE_STARTED;
 widgets.add(widgetInfo);
 updateItemInDatabase(context,widgetInfo);
 }

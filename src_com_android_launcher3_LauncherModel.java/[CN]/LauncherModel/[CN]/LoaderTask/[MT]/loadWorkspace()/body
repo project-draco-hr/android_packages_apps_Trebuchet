@@ -311,7 +311,7 @@ itemsToRemove.add(id);
  else {
 if (isProviderReady) {
 appWidgetInfo=new LauncherAppWidgetInfo(appWidgetId,provider.provider);
-int status=restoreStatus;
+int status=restoreStatus & ~LauncherAppWidgetInfo.FLAG_RESTORE_STARTED;
 if (!wasProviderReady) {
 if (isIdValid) {
 status=LauncherAppWidgetInfo.RESTORE_COMPLETED;
