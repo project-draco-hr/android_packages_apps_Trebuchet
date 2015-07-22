@@ -1,0 +1,3 @@
+{
+  mContext.getContentResolver().update(LauncherSettings.Favorites.CONTENT_URI,update,BaseColumns._ID + "= ?",new String[]{Long.toString(itemId)});
+}

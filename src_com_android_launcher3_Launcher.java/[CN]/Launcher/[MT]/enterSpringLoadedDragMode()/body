@@ -1,0 +1,8 @@
+{
+  if (LOGD)   Log.d(TAG,String.format("enterSpringLoadedDragMode [mState=%s",mState.name()));
+  if (mState == State.WORKSPACE || mState == State.APPS_SPRING_LOADED || mState == State.WIDGETS_SPRING_LOADED) {
+    return;
+  }
+  mStateTransitionAnimation.startAnimationToWorkspace(mState,Workspace.State.SPRING_LOADED,WorkspaceStateTransitionAnimation.SCROLL_TO_CURRENT_PAGE,true,null);
+  mState=isAppsViewVisible() ? State.APPS_SPRING_LOADED : State.WIDGETS_SPRING_LOADED;
+}

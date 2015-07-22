@@ -8,7 +8,7 @@
   boolean hasData;
   try {
     super.onRestore(data,appVersionCode,newState);
-    final Cursor c=getContentResolver().query(LauncherSettings.Favorites.CONTENT_URI_NO_NOTIFICATION,null,null,null,null);
+    final Cursor c=getContentResolver().query(LauncherSettings.Favorites.CONTENT_URI,null,null,null,null);
     hasData=c.moveToNext();
     c.close();
   }
@@ -19,6 +19,10 @@
   if (hasData && mHelper.restoreSuccessful) {
     LauncherAppState.getLauncherProvider().clearFlagEmptyDbCreated();
     LauncherClings.synchonouslyMarkFirstRunClingDismissed(this);
+    if (mHelper.restoredBackupVersion <= 3) {
+      LauncherAppState.getLauncherProvider().updateFolderItemsRank();
+      LauncherAppState.getLauncherProvider().convertShortcutsToLauncherActivities();
+    }
   }
  else {
     if (VERBOSE)     Log.v(TAG,"Nothing was restored, clearing DB");

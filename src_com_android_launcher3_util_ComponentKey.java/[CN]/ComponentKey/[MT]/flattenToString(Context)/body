@@ -1,0 +1,3 @@
+{
+  return componentName.flattenToString() + "#" + UserManagerCompat.getInstance(context).getSerialNumberForUser(user);
+}

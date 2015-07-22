@@ -1,7 +1,0 @@
-{
-  if (surface != null) {
-    checkRenderer();
-  }
-  mSurface=surface;
-  exec(CHANGE_SURFACE);
-}

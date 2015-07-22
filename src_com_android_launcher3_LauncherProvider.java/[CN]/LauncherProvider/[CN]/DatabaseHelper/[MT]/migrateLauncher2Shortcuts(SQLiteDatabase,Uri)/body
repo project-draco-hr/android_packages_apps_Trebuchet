@@ -30,10 +30,10 @@
         int curX=0;
         int curY=0;
         final LauncherAppState app=LauncherAppState.getInstance();
-        final DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
-        final int width=(int)grid.numColumns;
-        final int height=(int)grid.numRows;
-        final int hotseatWidth=(int)grid.numHotseatIcons;
+        final InvariantDeviceProfile profile=app.getInvariantDeviceProfile();
+        final int width=(int)profile.numColumns;
+        final int height=(int)profile.numRows;
+        final int hotseatWidth=(int)profile.numHotseatIcons;
         final HashSet<String> seenIntents=new HashSet<String>(c.getCount());
         final ArrayList<ContentValues> shortcuts=new ArrayList<ContentValues>();
         final ArrayList<ContentValues> folders=new ArrayList<ContentValues>();
@@ -133,7 +133,7 @@
         for (int idx=0; idx < N; idx++) {
           int hotseatX=hotseat.keyAt(idx);
           ContentValues values=hotseat.valueAt(idx);
-          if (hotseatX == grid.hotseatAllAppsRank) {
+          if (hotseatX == profile.hotseatAllAppsRank) {
             while (++hotseatX < hotseatWidth) {
               if (hotseat.get(hotseatX) == null) {
                 values.put(LauncherSettings.Favorites.SCREEN,hotseatX);
@@ -197,6 +197,7 @@
   finally {
           db.endTransaction();
         }
+        updateFolderItemsRank(db,false);
       }
     }
   finally {

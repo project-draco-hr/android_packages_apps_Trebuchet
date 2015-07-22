@@ -1,6 +1,0 @@
-{
-  getPagedViewScrollShift(v,sTempShift);
-  v.getLocationInWindow(sTempPos);
-  pos[0]=sTempPos[0] + sTempShift[0];
-  pos[1]=sTempPos[1] + sTempShift[1];
-}

@@ -1,8 +1,0 @@
-Context context
-Resources resources
-int minWidthPx
-int minHeightPx
-int widthPx
-int heightPx
-int awPx
-int ahPx

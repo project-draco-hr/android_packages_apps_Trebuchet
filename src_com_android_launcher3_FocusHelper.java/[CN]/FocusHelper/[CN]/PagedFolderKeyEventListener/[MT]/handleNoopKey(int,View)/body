@@ -1,0 +1,6 @@
+{
+  if (keyCode == KeyEvent.KEYCODE_DPAD_DOWN) {
+    mFolder.mFolderName.requestFocus();
+    playSoundEffect(keyCode,v);
+  }
+}

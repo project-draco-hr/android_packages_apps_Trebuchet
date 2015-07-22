@@ -1,0 +1,3 @@
+{
+  onPerformActionForVirtualView(getFocusedVirtualView(),AccessibilityNodeInfoCompat.ACTION_CLICK,null);
+}

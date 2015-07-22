@@ -1,7 +1,0 @@
-{
-  if (getVisibility() == VISIBLE) {
-    mContent.setVisibility(VISIBLE);
-    mPagedView.loadAssociatedPages(mPagedView.getCurrentPage(),true);
-    mPagedView.loadAssociatedPages(mPagedView.getCurrentPage());
-  }
-}

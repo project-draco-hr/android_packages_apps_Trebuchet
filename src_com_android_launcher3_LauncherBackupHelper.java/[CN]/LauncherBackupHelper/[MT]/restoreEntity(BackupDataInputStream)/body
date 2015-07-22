@@ -2,6 +2,11 @@
   if (!restoreSuccessful) {
     return;
   }
+  if (mDeviceProfileData == null) {
+    mIdp=new InvariantDeviceProfile(mContext);
+    mDeviceProfileData=initDeviceProfileData(mIdp);
+    mIconCache=new IconCache(mContext,mIdp);
+  }
   int dataSize=data.size();
   if (mBuffer.length < dataSize) {
     mBuffer=new byte[dataSize];

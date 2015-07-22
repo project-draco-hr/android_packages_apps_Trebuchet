@@ -1,9 +1,7 @@
 {
-  if (mBackground != null && mBackgroundAlpha > 0.0f) {
+  if (mBackgroundAlpha > 0.0f) {
     int alpha=(int)(mBackgroundAlpha * 255);
-    mBackground.setAlpha(alpha);
-    mBackground.setBounds(0,0,getMeasuredWidth(),getMeasuredHeight());
-    mBackground.draw(canvas);
+    canvas.drawColor((alpha << 24) | SCRIM_COLOR);
   }
   super.dispatchDraw(canvas);
 }

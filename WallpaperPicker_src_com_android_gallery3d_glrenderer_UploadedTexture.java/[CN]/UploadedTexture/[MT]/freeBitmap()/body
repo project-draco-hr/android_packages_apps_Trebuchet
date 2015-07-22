@@ -1,5 +1,5 @@
 {
-  Assert.assertTrue(mBitmap != null);
+  Utils.assertTrue(mBitmap != null);
   onFreeBitmap(mBitmap);
   mBitmap=null;
 }

@@ -3,9 +3,14 @@
   if (!stayPressed) {
     mPressedBackground=null;
   }
-  if (getParent() instanceof ShortcutAndWidgetContainer) {
-    CellLayout layout=(CellLayout)getParent().getParent();
-    layout.setPressedIcon(this,mPressedBackground,mOutlineHelper.shadowBitmapPadding);
+ else {
+    if (mPressedBackground == null) {
+      mPressedBackground=mOutlineHelper.createMediumDropShadow(this);
+    }
+  }
+  ViewParent parent=getParent();
+  if (parent != null && parent.getParent() instanceof BubbleTextShadowHandler) {
+    ((BubbleTextShadowHandler)parent.getParent()).setPressedIcon(this,mPressedBackground);
   }
   updateIconState();
 }

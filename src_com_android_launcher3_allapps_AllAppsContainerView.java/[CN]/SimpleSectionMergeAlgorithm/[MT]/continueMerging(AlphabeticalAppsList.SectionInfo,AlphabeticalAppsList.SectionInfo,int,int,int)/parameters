@@ -1,0 +1,5 @@
+AlphabeticalAppsList.SectionInfo section
+AlphabeticalAppsList.SectionInfo withSection
+int sectionAppCount
+int numAppsPerRow
+int mergeCount

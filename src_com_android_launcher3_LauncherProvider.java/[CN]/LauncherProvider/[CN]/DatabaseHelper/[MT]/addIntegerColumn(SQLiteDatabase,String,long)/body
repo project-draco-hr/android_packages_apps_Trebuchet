@@ -1,0 +1,15 @@
+{
+  db.beginTransaction();
+  try {
+    db.execSQL("ALTER TABLE favorites ADD COLUMN " + columnName + " INTEGER NOT NULL DEFAULT "+ defaultValue+ ";");
+    db.setTransactionSuccessful();
+  }
+ catch (  SQLException ex) {
+    Log.e(TAG,ex.getMessage(),ex);
+    return false;
+  }
+ finally {
+    db.endTransaction();
+  }
+  return true;
+}

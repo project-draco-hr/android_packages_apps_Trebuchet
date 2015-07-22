@@ -1,0 +1,5 @@
+{
+  if (getScrollX() != getScrollForPage(getNextPage())) {
+    snapToPage(getNextPage());
+  }
+}

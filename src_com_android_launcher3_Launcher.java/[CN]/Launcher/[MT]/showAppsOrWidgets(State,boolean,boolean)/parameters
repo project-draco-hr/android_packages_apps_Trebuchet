@@ -1,0 +1,3 @@
+State toState
+boolean animated
+boolean focusSearchBar

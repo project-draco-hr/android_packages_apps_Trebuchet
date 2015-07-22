@@ -1,0 +1,15 @@
+{
+  if (mState != State.APPS_SPRING_LOADED && mState != State.WIDGETS_SPRING_LOADED)   return;
+  mHandler.postDelayed(new Runnable(){
+    @Override public void run(){
+      if (successfulDrop) {
+        mWidgetsView.setVisibility(View.GONE);
+        showWorkspace(true,onCompleteRunnable);
+      }
+ else {
+        exitSpringLoadedDragMode();
+      }
+    }
+  }
+,delay);
+}

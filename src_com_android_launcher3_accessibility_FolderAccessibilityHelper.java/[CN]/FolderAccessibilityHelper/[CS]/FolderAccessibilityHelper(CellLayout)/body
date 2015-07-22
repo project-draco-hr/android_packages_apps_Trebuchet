@@ -1,0 +1,6 @@
+{
+  super(layout);
+  mParent=(FolderPagedView)layout.getParent();
+  int index=mParent.indexOfChild(layout);
+  mStartPosition=index * layout.getCountX() * layout.getCountY();
+}

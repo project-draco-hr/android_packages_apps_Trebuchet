@@ -1,0 +1,6 @@
+{
+  if (isCustomWidget) {
+    return "WidgetProviderInfo(" + provider + ")";
+  }
+  return String.format("WidgetProviderInfo provider:%s package:%s short:%s label:%s",provider.toString(),provider.getPackageName(),provider.getShortClassName(),getLabel(pm));
+}

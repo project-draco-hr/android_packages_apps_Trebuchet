@@ -1,0 +1,6 @@
+{
+  if (Utilities.isLmpOrAbove() && !UserHandleCompat.myUserHandle().equals(user)) {
+    return new ManagedProfileHeuristic(context,user);
+  }
+  return null;
+}

@@ -1,0 +1,7 @@
+{
+  if (hasCustomContent() && getNextPage() == 0) {
+    return mCustomContentDescription;
+  }
+  int page=(mNextPage != INVALID_PAGE) ? mNextPage : mCurrentPage;
+  return getPageDescription(page);
+}

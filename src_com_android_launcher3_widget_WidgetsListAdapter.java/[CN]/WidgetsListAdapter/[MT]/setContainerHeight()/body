@@ -1,0 +1,7 @@
+{
+  Resources r=mLauncher.getResources();
+  DeviceProfile profile=mLauncher.getDeviceProfile();
+  if (profile.isLargeTablet || profile.isTablet) {
+    mIndent=Utilities.pxFromDp(PRESET_INDENT_SIZE_TABLET,r.getDisplayMetrics());
+  }
+}

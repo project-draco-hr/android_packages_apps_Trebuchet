@@ -1,0 +1,12 @@
+{
+  InvariantDeviceProfile p1=mPredefinedDeviceProfiles.get(7);
+  InvariantDeviceProfile p2=mPredefinedDeviceProfiles.get(8);
+  ArrayList<PointF> pts=createInterpolatedPoints(new PointF(p1.minWidthDps,p1.minHeightDps),new PointF(p2.minWidthDps,p2.minHeightDps),20f);
+  for (int i=0; i < pts.size(); i++) {
+    ArrayList<InvariantDeviceProfile> closestProfiles=mInvariantProfile.findClosestDeviceProfiles(pts.get(i).x,pts.get(i).y,mPredefinedDeviceProfiles);
+    InvariantDeviceProfile result=mInvariantProfile.invDistWeightedInterpolate(pts.get(i).x,pts.get(i).y,closestProfiles);
+    if (DEBUG) {
+      Log.d(TAG,String.format("width x height = (%f, %f)] iconSize = %f",pts.get(i).x,pts.get(i).y,result.iconSize));
+    }
+  }
+}

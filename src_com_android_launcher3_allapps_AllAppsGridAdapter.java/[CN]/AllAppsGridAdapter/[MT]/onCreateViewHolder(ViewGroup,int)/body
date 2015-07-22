@@ -1,0 +1,30 @@
+{
+switch (viewType) {
+case EMPTY_SEARCH_VIEW_TYPE:
+    return new ViewHolder(mLayoutInflater.inflate(R.layout.all_apps_empty_search,parent,false));
+case SECTION_BREAK_VIEW_TYPE:
+  return new ViewHolder(new View(parent.getContext()));
+case ICON_VIEW_TYPE:
+{
+  BubbleTextView icon=(BubbleTextView)mLayoutInflater.inflate(R.layout.all_apps_icon,parent,false);
+  icon.setOnTouchListener(mTouchListener);
+  icon.setOnClickListener(mIconClickListener);
+  icon.setOnLongClickListener(mIconLongClickListener);
+  icon.setLongPressTimeout(ViewConfiguration.get(parent.getContext()).getLongPressTimeout());
+  icon.setFocusable(true);
+  return new ViewHolder(icon);
+}
+case PREDICTION_ICON_VIEW_TYPE:
+{
+BubbleTextView icon=(BubbleTextView)mLayoutInflater.inflate(R.layout.all_apps_prediction_bar_icon,parent,false);
+icon.setOnTouchListener(mTouchListener);
+icon.setOnClickListener(mIconClickListener);
+icon.setOnLongClickListener(mIconLongClickListener);
+icon.setLongPressTimeout(ViewConfiguration.get(parent.getContext()).getLongPressTimeout());
+icon.setFocusable(true);
+return new ViewHolder(icon);
+}
+default :
+throw new RuntimeException("Unexpected view type");
+}
+}

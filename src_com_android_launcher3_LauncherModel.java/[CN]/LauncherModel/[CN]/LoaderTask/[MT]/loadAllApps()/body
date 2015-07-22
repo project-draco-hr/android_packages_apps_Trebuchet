@@ -5,14 +5,11 @@
     Log.w(TAG,"LoaderTask running with no launcher (loadAllApps)");
     return;
   }
-  final Intent mainIntent=new Intent(Intent.ACTION_MAIN,null);
-  mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
   final List<UserHandleCompat> profiles=mUserManager.getUserProfiles();
   mBgAllAppsList.clear();
-  SharedPreferences prefs=mContext.getSharedPreferences(LauncherAppState.getSharedPreferencesKey(),Context.MODE_PRIVATE);
   for (  UserHandleCompat user : profiles) {
     final long qiaTime=DEBUG_LOADERS ? SystemClock.uptimeMillis() : 0;
-    List<LauncherActivityInfoCompat> apps=mLauncherApps.getActivityList(null,user);
+    final List<LauncherActivityInfoCompat> apps=mLauncherApps.getActivityList(null,user);
     if (DEBUG_LOADERS) {
       Log.d(TAG,"getActivityList took " + (SystemClock.uptimeMillis() - qiaTime) + "ms for user "+ user);
       Log.d(TAG,"getActivityList got " + apps.size() + " apps for user "+ user);
@@ -20,27 +17,18 @@
     if (apps == null || apps.isEmpty()) {
       return;
     }
-    final long sortTime=DEBUG_LOADERS ? SystemClock.uptimeMillis() : 0;
-    Collections.sort(apps,new LauncherModel.ShortcutNameComparator(mLabelCache));
-    if (DEBUG_LOADERS) {
-      Log.d(TAG,"sort took " + (SystemClock.uptimeMillis() - sortTime) + "ms");
-    }
     for (int i=0; i < apps.size(); i++) {
       LauncherActivityInfoCompat app=apps.get(i);
-      mBgAllAppsList.add(new AppInfo(mContext,app,user,mIconCache,mLabelCache));
+      mBgAllAppsList.add(new AppInfo(mContext,app,user,mIconCache));
     }
-    if (ADD_MANAGED_PROFILE_SHORTCUTS && !user.equals(UserHandleCompat.myUserHandle())) {
-      String shortcutsSetKey=INSTALLED_SHORTCUTS_SET_PREFIX + mUserManager.getSerialNumberForUser(user);
-      Set<String> packagesAdded=prefs.getStringSet(shortcutsSetKey,Collections.EMPTY_SET);
-      HashSet<String> newPackageSet=new HashSet<String>();
-      for (      LauncherActivityInfoCompat info : apps) {
-        String packageName=info.getComponentName().getPackageName();
-        if (!packagesAdded.contains(packageName) && !newPackageSet.contains(packageName)) {
-          InstallShortcutReceiver.queueInstallShortcut(info,mContext);
+    final ManagedProfileHeuristic heuristic=ManagedProfileHeuristic.get(mContext,user);
+    if (heuristic != null) {
+      runAfterBindCompletes(new Runnable(){
+        @Override public void run(){
+          heuristic.processUserApps(apps);
         }
-        newPackageSet.add(packageName);
       }
-      prefs.edit().putStringSet(shortcutsSetKey,newPackageSet).commit();
+);
     }
   }
   final ArrayList<AppInfo> added=mBgAllAppsList.added;
@@ -61,6 +49,8 @@
     }
   }
 );
+  ManagedProfileHeuristic.processAllUsers(profiles,mContext);
+  loadAndBindWidgetsAndShortcuts(mApp.getContext(),tryGetCallbacks(oldCallbacks),true);
   if (DEBUG_LOADERS) {
     Log.d(TAG,"Icons processed in " + (SystemClock.uptimeMillis() - loadTime) + "ms");
   }

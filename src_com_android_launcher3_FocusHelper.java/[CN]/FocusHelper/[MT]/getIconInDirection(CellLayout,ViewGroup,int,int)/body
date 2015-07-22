@@ -1,4 +1,0 @@
-{
-  final ArrayList<View> views=getCellLayoutChildrenSortedSpatially(layout,parent);
-  return findIndexOfIcon(views,i,delta);
-}

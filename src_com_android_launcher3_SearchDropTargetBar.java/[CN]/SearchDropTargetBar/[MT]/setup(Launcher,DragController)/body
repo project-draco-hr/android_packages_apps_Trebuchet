@@ -1,10 +1,13 @@
 {
   dragController.addDragListener(this);
+  dragController.setFlingToDeleteDropTarget(mDeleteDropTarget);
   dragController.addDragListener(mInfoDropTarget);
   dragController.addDragListener(mDeleteDropTarget);
+  dragController.addDragListener(mUninstallDropTarget);
   dragController.addDropTarget(mInfoDropTarget);
   dragController.addDropTarget(mDeleteDropTarget);
-  dragController.setFlingToDeleteDropTarget(mDeleteDropTarget);
+  dragController.addDropTarget(mUninstallDropTarget);
   mInfoDropTarget.setLauncher(launcher);
   mDeleteDropTarget.setLauncher(launcher);
+  mUninstallDropTarget.setLauncher(launcher);
 }

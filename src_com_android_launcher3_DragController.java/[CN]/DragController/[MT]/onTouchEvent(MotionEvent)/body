@@ -1,5 +1,5 @@
 {
-  if (!mDragging) {
+  if (!mDragging || mIsAccessibleDrag) {
     return false;
   }
   acquireVelocityTrackerAndAddMovement(ev);
@@ -28,7 +28,7 @@ handleMoveEvent(dragLayerX,dragLayerY);
 mHandler.removeCallbacks(mScrollRunnable);
 if (mDragging) {
 PointF vec=isFlingingToDelete(mDragObject.dragSource);
-if (!DeleteDropTarget.willAcceptDrop(mDragObject.dragInfo)) {
+if (!DeleteDropTarget.supportsDrop(mDragObject.dragInfo)) {
 vec=null;
 }
 if (vec != null) {

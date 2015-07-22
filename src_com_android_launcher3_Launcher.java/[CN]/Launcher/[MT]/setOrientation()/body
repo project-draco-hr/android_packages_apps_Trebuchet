@@ -1,0 +1,8 @@
+{
+  if (mRotationEnabled) {
+    unlockScreenOrientation(true);
+  }
+ else {
+    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
+  }
+}

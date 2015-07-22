@@ -1,26 +1,10 @@
 {
   mLauncher=launcher;
   mLaunchBroadcastPermission=launcher.getResources().getString(R.string.receive_launch_broadcasts_permission);
-  loadStats();
-  if (LOCAL_LAUNCH_LOG) {
-    try {
-      mLog=new DataOutputStream(mLauncher.openFileOutput(LauncherFiles.LAUNCHES_LOG,Context.MODE_APPEND));
-      mLog.writeInt(LOG_TAG_VERSION);
-      mLog.writeInt(LOG_VERSION);
-    }
- catch (    FileNotFoundException e) {
-      Log.e(TAG,"unable to create stats log: " + e);
-      mLog=null;
-    }
-catch (    IOException e) {
-      Log.e(TAG,"unable to write to stats log: " + e);
-      mLog=null;
-    }
-  }
   if (DEBUG_BROADCASTS) {
     launcher.registerReceiver(new BroadcastReceiver(){
       @Override public void onReceive(      Context context,      Intent intent){
-        android.util.Log.v("Stats","got broadcast: " + intent + " for launched intent: "+ intent.getStringExtra(EXTRA_INTENT));
+        Log.v("Stats","got broadcast: " + intent + " for launched intent: "+ intent.getStringExtra(EXTRA_INTENT));
       }
     }
 ,new IntentFilter(ACTION_LAUNCH),mLaunchBroadcastPermission,null);

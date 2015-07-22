@@ -1,5 +1,0 @@
-Context context
-String name
-Intent launchIntent
-int firstScreenIndex
-ArrayList<Long> workspaceScreens

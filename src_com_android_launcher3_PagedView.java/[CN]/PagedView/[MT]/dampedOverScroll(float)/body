@@ -1,19 +1,14 @@
 {
   int screenSize=getViewportWidth();
   float f=(amount / screenSize);
-  if (f == 0)   return;
-  f=f / (Math.abs(f)) * (overScrollInfluenceCurve(Math.abs(f)));
-  if (Math.abs(f) >= 1) {
-    f/=Math.abs(f);
+  if (f < 0) {
+    mEdgeGlowLeft.onPull(-f);
   }
-  int overScrollAmount=(int)Math.round(OVERSCROLL_DAMP_FACTOR * f * screenSize);
-  if (amount < 0) {
-    mOverScrollX=overScrollAmount;
-    super.scrollTo(mOverScrollX,getScrollY());
+ else   if (f > 0) {
+    mEdgeGlowRight.onPull(f);
   }
  else {
-    mOverScrollX=mMaxScrollX + overScrollAmount;
-    super.scrollTo(mOverScrollX,getScrollY());
+    return;
   }
   invalidate();
 }

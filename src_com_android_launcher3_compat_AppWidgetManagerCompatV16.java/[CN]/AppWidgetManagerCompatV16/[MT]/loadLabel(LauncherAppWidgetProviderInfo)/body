@@ -1,0 +1,3 @@
+{
+  return Utilities.trim(info.label);
+}

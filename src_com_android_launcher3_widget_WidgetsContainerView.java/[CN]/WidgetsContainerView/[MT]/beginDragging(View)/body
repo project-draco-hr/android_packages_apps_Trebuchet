@@ -1,0 +1,14 @@
+{
+  if (v instanceof WidgetCell) {
+    if (!beginDraggingWidget((WidgetCell)v)) {
+      return false;
+    }
+  }
+ else {
+    Log.e(TAG,"Unexpected dragging view: " + v);
+  }
+  if (mLauncher.getDragController().isDragging()) {
+    mLauncher.enterSpringLoadedDragMode();
+  }
+  return true;
+}

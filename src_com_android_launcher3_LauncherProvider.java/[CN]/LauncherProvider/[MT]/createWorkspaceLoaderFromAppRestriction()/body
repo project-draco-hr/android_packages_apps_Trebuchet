@@ -1,0 +1,23 @@
+{
+  if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR2) {
+    return null;
+  }
+  Context ctx=getContext();
+  UserManager um=(UserManager)ctx.getSystemService(Context.USER_SERVICE);
+  Bundle bundle=um.getApplicationRestrictions(ctx.getPackageName());
+  if (bundle == null) {
+    return null;
+  }
+  String packageName=bundle.getString(RESTRICTION_PACKAGE_NAME);
+  if (packageName != null) {
+    try {
+      Resources targetResources=ctx.getPackageManager().getResourcesForApplication(packageName);
+      return AutoInstallsLayout.get(ctx,packageName,targetResources,mOpenHelper.mAppWidgetHost,mOpenHelper);
+    }
+ catch (    NameNotFoundException e) {
+      Log.e(TAG,"Target package for restricted profile not found",e);
+      return null;
+    }
+  }
+  return null;
+}

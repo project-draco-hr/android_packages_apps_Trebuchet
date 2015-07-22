@@ -1,2 +1,19 @@
 {
+  final DragLayer dragLayer=mLauncher.getDragLayer();
+  final Rect from=new Rect();
+  dragLayer.getViewRectRelativeToSelf(d.dragView,from);
+  int width=mDrawable.getIntrinsicWidth();
+  int height=mDrawable.getIntrinsicHeight();
+  final Rect to=getIconRect(d.dragView.getMeasuredWidth(),d.dragView.getMeasuredHeight(),width,height);
+  final float scale=(float)to.width() / from.width();
+  mSearchDropTargetBar.deferOnDragEnd();
+  Runnable onAnimationEndRunnable=new Runnable(){
+    @Override public void run(){
+      completeDrop(d);
+      mSearchDropTargetBar.onDragEnd();
+      mLauncher.exitSpringLoadedDragModeDelayed(true,0,null);
+    }
+  }
+;
+  dragLayer.animateView(d.dragView,from,to,scale,1f,1f,0.1f,0.1f,DRAG_VIEW_DROP_DURATION,new DecelerateInterpolator(2),new LinearInterpolator(),onAnimationEndRunnable,DragLayer.ANIMATION_END_DISAPPEAR,null);
 }

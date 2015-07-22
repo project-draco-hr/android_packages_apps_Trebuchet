@@ -1,0 +1,22 @@
+{
+  mCaller.applyPreview(preview);
+  if (mVersions != null) {
+    mWorkerHandler.post(new Runnable(){
+      @Override public void run(){
+        if (!isCancelled()) {
+          writeToDb(mKey,mVersions,preview);
+          mBitmapToRecycle=preview;
+        }
+ else {
+synchronized (mUnusedBitmaps) {
+            mUnusedBitmaps.add(preview);
+          }
+        }
+      }
+    }
+);
+  }
+ else {
+    mBitmapToRecycle=preview;
+  }
+}

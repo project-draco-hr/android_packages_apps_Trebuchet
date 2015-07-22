@@ -1,0 +1,3 @@
+{
+  target.setScale(Color.red(color) / 255f,Color.green(color) / 255f,Color.blue(color) / 255f,Color.alpha(color) / 255f);
+}

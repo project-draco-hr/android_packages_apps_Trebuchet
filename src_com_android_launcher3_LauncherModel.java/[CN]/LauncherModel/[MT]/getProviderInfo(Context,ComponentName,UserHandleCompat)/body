@@ -1,0 +1,8 @@
+{
+synchronized (sBgLock) {
+    if (sBgWidgetProviders == null) {
+      getWidgetProviders(ctx,false);
+    }
+    return sBgWidgetProviders.get(new ComponentKey(name,user));
+  }
+}

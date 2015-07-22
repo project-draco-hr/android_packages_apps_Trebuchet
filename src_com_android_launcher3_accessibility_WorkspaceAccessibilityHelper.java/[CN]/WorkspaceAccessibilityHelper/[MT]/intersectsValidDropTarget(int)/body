@@ -1,0 +1,49 @@
+{
+  int mCountX=mView.getCountX();
+  int mCountY=mView.getCountY();
+  int x=id % mCountX;
+  int y=id / mCountX;
+  LauncherAccessibilityDelegate.DragInfo dragInfo=mDelegate.getDragInfo();
+  if (dragInfo.dragType == DragType.WIDGET && mView.isHotseat()) {
+    return INVALID_POSITION;
+  }
+  if (dragInfo.dragType == DragType.WIDGET) {
+    boolean fits=false;
+    int spanX=dragInfo.info.spanX;
+    int spanY=dragInfo.info.spanY;
+    for (int m=0; m < spanX; m++) {
+      for (int n=0; n < spanY; n++) {
+        fits=true;
+        int x0=x - m;
+        int y0=y - n;
+        if (x0 < 0 || y0 < 0)         continue;
+        for (int i=x0; i < x0 + spanX; i++) {
+          if (!fits)           break;
+          for (int j=y0; j < y0 + spanY; j++) {
+            if (i >= mCountX || j >= mCountY || mView.isOccupied(i,j)) {
+              fits=false;
+              break;
+            }
+          }
+        }
+        if (fits) {
+          return x0 + mCountX * y0;
+        }
+      }
+    }
+    return INVALID_POSITION;
+  }
+ else {
+    View child=mView.getChildAt(x,y);
+    if (child == null || child == dragInfo.item) {
+      return id;
+    }
+ else     if (dragInfo.dragType != DragType.FOLDER) {
+      ItemInfo info=(ItemInfo)child.getTag();
+      if (info instanceof AppInfo || info instanceof FolderInfo || info instanceof ShortcutInfo) {
+        return id;
+      }
+    }
+    return INVALID_POSITION;
+  }
+}

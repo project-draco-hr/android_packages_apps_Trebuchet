@@ -1,0 +1,6 @@
+{
+  pos[0]=pos[1]=0;
+  computeLocationRelativeToParentHelper(v,parent,pos);
+  pos[0]+=(1 - v.getScaleX()) * v.getWidth() / 2;
+  pos[1]+=(1 - v.getScaleY()) * v.getHeight() / 2;
+}

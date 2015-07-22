@@ -1,0 +1,6 @@
+{
+  Bundle extras=new Bundle();
+  extras.putBoolean(LauncherSettings.Settings.EXTRA_VALUE,(Boolean)newValue);
+  getActivity().getContentResolver().call(LauncherSettings.Settings.CONTENT_URI,LauncherSettings.Settings.METHOD_SET_BOOLEAN,preference.getKey(),extras);
+  return true;
+}

@@ -1,18 +1,14 @@
 {
   AccessibilityManager am=(AccessibilityManager)getContext().getSystemService(Context.ACCESSIBILITY_SERVICE);
   if (am.isEnabled()) {
-    AccessibilityEvent ev=AccessibilityEvent.obtain(AccessibilityEvent.TYPE_VIEW_SCROLLED);
-    ev.setItemCount(getChildCount());
-    ev.setFromIndex(mCurrentPage);
-    ev.setToIndex(getNextPage());
-    final int action;
-    if (getNextPage() >= mCurrentPage) {
-      action=AccessibilityNodeInfo.ACTION_SCROLL_FORWARD;
+    if (mCurrentPage != getNextPage()) {
+      AccessibilityEvent ev=AccessibilityEvent.obtain(AccessibilityEvent.TYPE_VIEW_SCROLLED);
+      ev.setScrollable(true);
+      ev.setScrollX(getScrollX());
+      ev.setScrollY(getScrollY());
+      ev.setMaxScrollX(mMaxScrollX);
+      ev.setMaxScrollY(0);
+      sendAccessibilityEventUnchecked(ev);
     }
- else {
-      action=AccessibilityNodeInfo.ACTION_SCROLL_BACKWARD;
-    }
-    ev.setAction(action);
-    sendAccessibilityEventUnchecked(ev);
   }
 }

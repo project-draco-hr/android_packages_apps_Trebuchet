@@ -1,8 +1,0 @@
-{
-  if (mState == State.APPS_CUSTOMIZE_SPRING_LOADED) {
-    final boolean animated=true;
-    final boolean springLoaded=true;
-    showAppsCustomizeHelper(animated,springLoaded);
-    mState=State.APPS_CUSTOMIZE;
-  }
-}

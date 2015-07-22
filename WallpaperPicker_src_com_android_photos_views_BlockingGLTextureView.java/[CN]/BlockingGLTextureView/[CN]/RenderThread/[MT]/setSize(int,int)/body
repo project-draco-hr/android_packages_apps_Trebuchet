@@ -1,7 +1,0 @@
-{
-  checkRenderer();
-  checkSurface();
-  mWidth=width;
-  mHeight=height;
-  exec(RESIZE_SURFACE);
-}

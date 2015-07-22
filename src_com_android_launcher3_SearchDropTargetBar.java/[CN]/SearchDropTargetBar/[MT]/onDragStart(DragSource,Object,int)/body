@@ -1,8 +1,3 @@
 {
-  prepareStartAnimation(mDropTargetBar);
-  mDropTargetBarAnim.start();
-  if (!mIsSearchBarHidden) {
-    prepareStartAnimation(mQSBSearchBar);
-    mQSBSearchBarAnim.start();
-  }
+  showDeleteTarget();
 }

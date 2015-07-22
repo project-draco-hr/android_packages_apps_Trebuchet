@@ -1,7 +1,0 @@
-View v
-Bitmap bmp
-DragSource source
-Object dragInfo
-int dragAction
-Point extraPadding
-float initialDragViewScale

@@ -1,5 +1,0 @@
-{
-  page=p;
-  threadPriority=Process.THREAD_PRIORITY_DEFAULT;
-  dataType=ty;
-}

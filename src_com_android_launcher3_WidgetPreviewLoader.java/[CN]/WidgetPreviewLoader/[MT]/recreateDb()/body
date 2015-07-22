@@ -1,5 +1,0 @@
-{
-  LauncherAppState app=LauncherAppState.getInstance();
-  app.recreateWidgetPreviewDb();
-  mDb=app.getWidgetPreviewCacheDb();
-}

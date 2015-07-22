@@ -1,0 +1,6 @@
+{
+  if (v instanceof LauncherTransitionable) {
+    ((LauncherTransitionable)v).onLauncherTransitionStart(mLauncher,animated,toWorkspace);
+  }
+  dispatchOnLauncherTransitionStep(v,0f);
+}

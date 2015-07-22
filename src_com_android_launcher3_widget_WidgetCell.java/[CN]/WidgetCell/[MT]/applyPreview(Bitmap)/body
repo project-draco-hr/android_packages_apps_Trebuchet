@@ -1,0 +1,8 @@
+{
+  if (bitmap != null) {
+    mWidgetImage.setBitmap(bitmap);
+    mWidgetImage.setAlpha(0f);
+    ViewPropertyAnimator anim=mWidgetImage.animate();
+    anim.alpha(1.0f).setDuration(FADE_IN_DURATION_MS);
+  }
+}

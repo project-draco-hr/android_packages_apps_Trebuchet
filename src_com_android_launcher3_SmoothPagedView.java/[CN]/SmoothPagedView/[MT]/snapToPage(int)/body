@@ -1,8 +1,0 @@
-{
-  if (mScrollMode == X_LARGE_MODE) {
-    super.snapToPage(whichPage);
-  }
- else {
-    snapToPageWithVelocity(whichPage,0,false);
-  }
-}

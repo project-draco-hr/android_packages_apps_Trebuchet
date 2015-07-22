@@ -1,6 +1,0 @@
-{
-  if (mWidgetPreviewCacheDb != null) {
-    mWidgetPreviewCacheDb.close();
-  }
-  mWidgetPreviewCacheDb=new WidgetPreviewLoader.CacheDb(sContext);
-}

@@ -1,7 +1,7 @@
 {
   final String packageName=getResources().getResourcePackageName(R.array.wallpapers);
   try {
-    ApplicationInfo info=getPackageManager().getApplicationInfo(packageName,0);
+    ApplicationInfo info=getContext().getPackageManager().getApplicationInfo(packageName,0);
     return new Pair<ApplicationInfo,Integer>(info,R.array.wallpapers);
   }
  catch (  PackageManager.NameNotFoundException e) {

@@ -1,0 +1,3 @@
+{
+  return getSpanForWidget(info.provider,info.minWidth,info.minHeight);
+}

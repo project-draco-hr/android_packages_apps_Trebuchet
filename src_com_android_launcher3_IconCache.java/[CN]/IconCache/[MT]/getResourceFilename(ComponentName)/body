@@ -1,5 +1,0 @@
-{
-  String resourceName=component.flattenToShortString();
-  String filename=resourceName.replace(File.separatorChar,'_');
-  return RESOURCE_FILE_PREFIX + filename;
-}

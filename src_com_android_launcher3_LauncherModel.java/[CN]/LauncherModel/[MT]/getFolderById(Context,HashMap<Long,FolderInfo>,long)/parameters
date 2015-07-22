@@ -1,3 +1,0 @@
-Context context
-HashMap<Long,FolderInfo> folderList
-long id

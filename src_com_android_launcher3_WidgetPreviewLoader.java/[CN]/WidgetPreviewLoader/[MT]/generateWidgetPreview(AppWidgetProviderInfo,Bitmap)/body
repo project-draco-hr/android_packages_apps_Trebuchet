@@ -1,6 +1,0 @@
-{
-  int[] cellSpans=Launcher.getSpanForWidget(mContext,info);
-  int maxWidth=maxWidthForWidgetPreview(cellSpans[0]);
-  int maxHeight=maxHeightForWidgetPreview(cellSpans[1]);
-  return generateWidgetPreview(info,cellSpans[0],cellSpans[1],maxWidth,maxHeight,preview,null);
-}

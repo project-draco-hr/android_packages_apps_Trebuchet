@@ -1,0 +1,8 @@
+{
+  super.onFinishInflate();
+  mOriginalTextColor=getTextColors();
+  DeviceProfile grid=((Launcher)getContext()).getDeviceProfile();
+  if (grid.isVerticalBarLayout()) {
+    setText("");
+  }
+}

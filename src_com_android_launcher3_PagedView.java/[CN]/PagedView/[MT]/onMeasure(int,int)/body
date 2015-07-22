@@ -1,5 +1,5 @@
 {
-  if (!mIsDataReady || getChildCount() == 0) {
+  if (getChildCount() == 0) {
     super.onMeasure(widthMeasureSpec,heightMeasureSpec);
     return;
   }
@@ -76,13 +76,6 @@
       final int childHeightMeasureSpec=MeasureSpec.makeMeasureSpec(childHeight,childHeightMode);
       child.measure(childWidthMeasureSpec,childHeightMeasureSpec);
     }
-  }
-  if (mSpacePagesAutomatically) {
-    int spacing=(getViewportWidth() - mInsets.left - mInsets.right- referenceChildWidth) / 2;
-    if (spacing >= 0) {
-      setPageSpacing(spacing);
-    }
-    mSpacePagesAutomatically=false;
   }
   setMeasuredDimension(scaledWidthSize,scaledHeightSize);
 }

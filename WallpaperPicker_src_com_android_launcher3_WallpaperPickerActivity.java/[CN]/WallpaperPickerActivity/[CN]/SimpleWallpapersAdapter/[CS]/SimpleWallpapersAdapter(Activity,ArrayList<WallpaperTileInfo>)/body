@@ -1,4 +1,0 @@
-{
-  super(activity,R.layout.wallpaper_picker_item,wallpapers);
-  mLayoutInflater=activity.getLayoutInflater();
-}

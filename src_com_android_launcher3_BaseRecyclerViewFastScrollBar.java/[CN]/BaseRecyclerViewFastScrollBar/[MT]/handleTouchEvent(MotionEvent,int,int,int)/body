@@ -1,0 +1,39 @@
+{
+  ViewConfiguration config=ViewConfiguration.get(mRv.getContext());
+  int action=ev.getAction();
+  int y=(int)ev.getY();
+switch (action) {
+case MotionEvent.ACTION_DOWN:
+    if (isNearPoint(downX,downY)) {
+      mTouchOffset=downY - mThumbOffset.y;
+    }
+  break;
+case MotionEvent.ACTION_MOVE:
+if (!mIsDragging && isNearPoint(downX,downY) && Math.abs(y - downY) > config.getScaledTouchSlop()) {
+  mRv.getParent().requestDisallowInterceptTouchEvent(true);
+  mIsDragging=true;
+  mTouchOffset+=(lastY - downY);
+  mPopup.animateVisibility(true);
+  animateScrollbar(true);
+}
+if (mIsDragging) {
+int top=mRv.getBackgroundPadding().top;
+int bottom=mRv.getHeight() - mRv.getBackgroundPadding().bottom - mThumbHeight;
+float boundedY=(float)Math.max(top,Math.min(bottom,y - mTouchOffset));
+String sectionName=mRv.scrollToPositionAtProgress((boundedY - top) / (bottom - top));
+mPopup.setSectionName(sectionName);
+mPopup.animateVisibility(!sectionName.isEmpty());
+mRv.invalidate(mPopup.updateFastScrollerBounds(mRv,lastY));
+}
+break;
+case MotionEvent.ACTION_UP:
+case MotionEvent.ACTION_CANCEL:
+mTouchOffset=0;
+if (mIsDragging) {
+mIsDragging=false;
+mPopup.animateVisibility(false);
+animateScrollbar(false);
+}
+break;
+}
+}

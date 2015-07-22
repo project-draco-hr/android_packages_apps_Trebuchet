@@ -1,18 +1,14 @@
 {
+  if (ENFORCE_DRAG_EVENT_ORDER) {
+    enfoceDragParity("onDragStart",0,0);
+  }
   mIsDragOccuring=true;
   updateChildrenLayersEnabled(false);
   mLauncher.lockScreenOrientation();
   mLauncher.onInteractionBegin();
-  setChildrenBackgroundAlphaMultipliers(1f);
   InstallShortcutReceiver.enableInstallQueue();
-  UninstallShortcutReceiver.enableUninstallQueue();
-  post(new Runnable(){
-    @Override public void run(){
-      if (mIsDragOccuring) {
-        mDeferRemoveExtraEmptyScreen=false;
-        addExtraEmptyScreenOnDrag();
-      }
-    }
+  if (mAddNewPageOnDrag) {
+    mDeferRemoveExtraEmptyScreen=false;
+    addExtraEmptyScreenOnDrag();
   }
-);
 }

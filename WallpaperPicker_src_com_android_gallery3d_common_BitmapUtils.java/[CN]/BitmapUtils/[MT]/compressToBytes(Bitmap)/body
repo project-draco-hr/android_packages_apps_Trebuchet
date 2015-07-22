@@ -1,3 +1,0 @@
-{
-  return compressToBytes(bitmap,DEFAULT_JPEG_QUALITY);
-}

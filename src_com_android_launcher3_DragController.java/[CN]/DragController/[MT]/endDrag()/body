@@ -1,6 +1,7 @@
 {
   if (mDragging) {
     mDragging=false;
+    mIsAccessibleDrag=false;
     clearScrollRunnable();
     boolean isDeferred=false;
     if (mDragObject.dragView != null) {
@@ -11,7 +12,7 @@
       mDragObject.dragView=null;
     }
     if (!isDeferred) {
-      for (      DragListener listener : mListeners) {
+      for (      DragListener listener : new ArrayList<>(mListeners)) {
         listener.onDragEnd();
       }
     }

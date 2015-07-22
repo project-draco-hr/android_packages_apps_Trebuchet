@@ -1,3 +1,0 @@
-{
-  return FocusHelper.handleFolderKeyEvent(v,keyCode,event);
-}

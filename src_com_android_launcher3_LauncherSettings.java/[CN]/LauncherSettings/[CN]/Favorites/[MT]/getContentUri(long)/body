@@ -1,0 +1,3 @@
+{
+  return Uri.parse("content://" + ProviderConfig.AUTHORITY + "/"+ TABLE_NAME+ "/"+ id);
+}

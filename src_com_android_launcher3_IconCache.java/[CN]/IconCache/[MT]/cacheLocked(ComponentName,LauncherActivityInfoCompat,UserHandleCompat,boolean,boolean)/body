@@ -1,0 +1,33 @@
+{
+  ComponentKey cacheKey=new ComponentKey(componentName,user);
+  CacheEntry entry=mCache.get(cacheKey);
+  if (entry == null || (entry.isLowResIcon && !useLowResIcon)) {
+    entry=new CacheEntry();
+    mCache.put(cacheKey,entry);
+    if (!getEntryFromDB(componentName,user,entry,useLowResIcon)) {
+      if (info != null) {
+        entry.icon=Utilities.createIconBitmap(info.getBadgedIcon(mIconDpi),mContext);
+      }
+ else {
+        if (usePackageIcon) {
+          CacheEntry packageEntry=getEntryForPackageLocked(componentName.getPackageName(),user,false);
+          if (packageEntry != null) {
+            if (DEBUG)             Log.d(TAG,"using package default icon for " + componentName.toShortString());
+            entry.icon=packageEntry.icon;
+            entry.title=packageEntry.title;
+            entry.contentDescription=packageEntry.contentDescription;
+          }
+        }
+        if (entry.icon == null) {
+          if (DEBUG)           Log.d(TAG,"using default icon for " + componentName.toShortString());
+          entry.icon=getDefaultIcon(user);
+        }
+      }
+    }
+    if (TextUtils.isEmpty(entry.title) && info != null) {
+      entry.title=info.getLabel();
+      entry.contentDescription=mUserManager.getBadgedLabelForUser(entry.title,user);
+    }
+  }
+  return entry;
+}

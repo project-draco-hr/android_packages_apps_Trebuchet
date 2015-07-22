@@ -1,0 +1,3 @@
+{
+  return (flag & ShortcutInfo.FLAG_RESTORED_APP_TYPE) >> RESTORE_FLAG_BIT_SHIFT;
+}

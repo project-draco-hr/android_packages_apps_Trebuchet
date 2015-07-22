@@ -1,0 +1,18 @@
+{
+  mIcon=icon;
+  if (iconSize != -1) {
+    mIcon.setBounds(0,0,iconSize,iconSize);
+  }
+  if (mLayoutHorizontal) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+      setCompoundDrawablesRelative(mIcon,null,null,null);
+    }
+ else {
+      setCompoundDrawables(mIcon,null,null,null);
+    }
+  }
+ else {
+    setCompoundDrawables(null,mIcon,null,null);
+  }
+  return icon;
+}

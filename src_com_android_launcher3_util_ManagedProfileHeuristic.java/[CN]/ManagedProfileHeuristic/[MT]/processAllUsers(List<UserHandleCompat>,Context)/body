@@ -1,0 +1,18 @@
+{
+  if (!Utilities.isLmpOrAbove()) {
+    return;
+  }
+  UserManagerCompat userManager=UserManagerCompat.getInstance(context);
+  HashSet<String> validKeys=new HashSet<String>();
+  for (  UserHandleCompat user : users) {
+    addAllUserKeys(userManager.getSerialNumberForUser(user),validKeys);
+  }
+  SharedPreferences prefs=context.getSharedPreferences(LauncherFiles.MANAGED_USER_PREFERENCES_KEY,Context.MODE_PRIVATE);
+  SharedPreferences.Editor editor=prefs.edit();
+  for (  String key : prefs.getAll().keySet()) {
+    if (!validKeys.contains(key)) {
+      editor.remove(key);
+    }
+  }
+  editor.apply();
+}

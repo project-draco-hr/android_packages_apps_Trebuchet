@@ -1,0 +1,16 @@
+{
+  if (mTask != null) {
+    mTask.cancel(true);
+  }
+  if (mTask.mBitmapToRecycle != null) {
+    mWorkerHandler.post(new Runnable(){
+      @Override public void run(){
+synchronized (mUnusedBitmaps) {
+          mUnusedBitmaps.add(mTask.mBitmapToRecycle);
+        }
+        mTask.mBitmapToRecycle=null;
+      }
+    }
+);
+  }
+}

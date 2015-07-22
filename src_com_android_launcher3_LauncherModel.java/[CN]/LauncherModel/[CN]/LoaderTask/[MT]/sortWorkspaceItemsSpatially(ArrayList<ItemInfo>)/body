@@ -1,10 +1,10 @@
 {
   final LauncherAppState app=LauncherAppState.getInstance();
-  final DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
+  final InvariantDeviceProfile profile=app.getInvariantDeviceProfile();
   Collections.sort(workspaceItems,new Comparator<ItemInfo>(){
     @Override public int compare(    ItemInfo lhs,    ItemInfo rhs){
-      int cellCountX=(int)grid.numColumns;
-      int cellCountY=(int)grid.numRows;
+      int cellCountX=(int)profile.numColumns;
+      int cellCountY=(int)profile.numRows;
       int screenOffset=cellCountX * cellCountY;
       int containerOffset=screenOffset * (Launcher.SCREEN_COUNT + 1);
       long lr=(lhs.container * containerOffset + lhs.screenId * screenOffset + lhs.cellY * cellCountX + lhs.cellX);

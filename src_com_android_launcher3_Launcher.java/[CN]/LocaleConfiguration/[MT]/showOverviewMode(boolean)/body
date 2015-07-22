@@ -1,6 +1,0 @@
-{
-  mWorkspace.setVisibility(View.VISIBLE);
-  hideAppsCustomizeHelper(Workspace.State.OVERVIEW,animated,false,null);
-  mState=State.WORKSPACE;
-  onWorkspaceShown(animated);
-}

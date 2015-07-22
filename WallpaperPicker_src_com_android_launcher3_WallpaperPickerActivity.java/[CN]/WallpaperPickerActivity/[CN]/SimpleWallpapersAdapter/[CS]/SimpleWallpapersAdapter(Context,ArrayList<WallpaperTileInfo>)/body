@@ -1,0 +1,4 @@
+{
+  super(context,R.layout.wallpaper_picker_item,wallpapers);
+  mLayoutInflater=LayoutInflater.from(context);
+}

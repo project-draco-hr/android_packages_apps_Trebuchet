@@ -1,6 +1,4 @@
 {
-  LauncherAppState app=LauncherAppState.getInstance();
-  DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
   int widthSpecMode=MeasureSpec.getMode(widthMeasureSpec);
   int heightSpecMode=MeasureSpec.getMode(heightMeasureSpec);
   int widthSize=MeasureSpec.getSize(widthMeasureSpec);
@@ -8,8 +6,8 @@
   int childWidthSize=widthSize - (getPaddingLeft() + getPaddingRight());
   int childHeightSize=heightSize - (getPaddingTop() + getPaddingBottom());
   if (mFixedCellWidth < 0 || mFixedCellHeight < 0) {
-    int cw=grid.calculateCellWidth(childWidthSize,mCountX);
-    int ch=grid.calculateCellHeight(childHeightSize,mCountY);
+    int cw=DeviceProfile.calculateCellWidth(childWidthSize,mCountX);
+    int ch=DeviceProfile.calculateCellHeight(childHeightSize,mCountY);
     if (cw != mCellWidth || ch != mCellHeight) {
       mCellWidth=cw;
       mCellHeight=ch;
@@ -40,17 +38,10 @@
     mWidthGap=mOriginalWidthGap;
     mHeightGap=mOriginalHeightGap;
   }
-  int count=getChildCount();
-  int maxWidth=0;
-  int maxHeight=0;
-  for (int i=0; i < count; i++) {
-    View child=getChildAt(i);
-    int childWidthMeasureSpec=MeasureSpec.makeMeasureSpec(newWidth,MeasureSpec.EXACTLY);
-    int childheightMeasureSpec=MeasureSpec.makeMeasureSpec(newHeight,MeasureSpec.EXACTLY);
-    child.measure(childWidthMeasureSpec,childheightMeasureSpec);
-    maxWidth=Math.max(maxWidth,child.getMeasuredWidth());
-    maxHeight=Math.max(maxHeight,child.getMeasuredHeight());
-  }
+  mTouchFeedbackView.measure(MeasureSpec.makeMeasureSpec(mCellWidth + mTouchFeedbackView.getExtraSize(),MeasureSpec.EXACTLY),MeasureSpec.makeMeasureSpec(mCellHeight + mTouchFeedbackView.getExtraSize(),MeasureSpec.EXACTLY));
+  mShortcutsAndWidgets.measure(MeasureSpec.makeMeasureSpec(newWidth,MeasureSpec.EXACTLY),MeasureSpec.makeMeasureSpec(newHeight,MeasureSpec.EXACTLY));
+  int maxWidth=mShortcutsAndWidgets.getMeasuredWidth();
+  int maxHeight=mShortcutsAndWidgets.getMeasuredHeight();
   if (mFixedWidth > 0 && mFixedHeight > 0) {
     setMeasuredDimension(maxWidth,maxHeight);
   }

@@ -1,0 +1,5 @@
+{
+  AdapterItem item=asApp(pos,section,sectionName,sectionAppIndex,appInfo,appIndex);
+  item.viewType=AllAppsGridAdapter.PREDICTION_ICON_VIEW_TYPE;
+  return item;
+}

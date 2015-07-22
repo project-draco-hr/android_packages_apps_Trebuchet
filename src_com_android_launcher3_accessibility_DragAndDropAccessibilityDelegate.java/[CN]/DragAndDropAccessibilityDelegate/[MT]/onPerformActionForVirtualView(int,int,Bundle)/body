@@ -1,0 +1,8 @@
+{
+  if (action == AccessibilityNodeInfoCompat.ACTION_CLICK && viewId != INVALID_ID) {
+    String confirmation=getConfirmationForIconDrop(viewId);
+    mDelegate.handleAccessibleDrop(mView,getItemBounds(viewId),confirmation);
+    return true;
+  }
+  return false;
+}

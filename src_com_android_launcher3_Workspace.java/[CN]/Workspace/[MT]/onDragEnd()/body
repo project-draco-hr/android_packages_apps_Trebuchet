@@ -1,4 +1,7 @@
 {
+  if (ENFORCE_DRAG_EVENT_ORDER) {
+    enfoceDragParity("onDragEnd",0,0);
+  }
   if (!mDeferRemoveExtraEmptyScreen) {
     removeExtraEmptyScreen(true,mDragSourceInternal != null);
   }
@@ -6,7 +9,6 @@
   updateChildrenLayersEnabled(false);
   mLauncher.unlockScreenOrientation(false);
   InstallShortcutReceiver.disableAndFlushInstallQueue(getContext());
-  UninstallShortcutReceiver.disableAndFlushUninstallQueue(getContext());
   mDragSourceInternal=null;
   mLauncher.onInteractionEnd();
 }

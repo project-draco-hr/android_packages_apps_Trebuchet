@@ -1,0 +1,6 @@
+{
+  if (isCustomWidget) {
+    return Utilities.trim(label);
+  }
+  return super.loadLabel(packageManager);
+}

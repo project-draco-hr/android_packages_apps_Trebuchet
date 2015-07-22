@@ -1,0 +1,6 @@
+{
+  if (mIsExternalDrag && mDragInProgress) {
+    completeDragExit();
+  }
+  mDragController.removeDragListener(this);
+}

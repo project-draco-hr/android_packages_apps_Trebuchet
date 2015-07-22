@@ -1,7 +1,6 @@
 {
   whichPage=validateNewPage(whichPage);
   int newX=getScrollForPage(whichPage);
-  final int sX=mUnboundedScrollX;
-  final int delta=newX - sX;
+  final int delta=newX - getScrollX();
   snapToPage(whichPage,delta,duration,immediate,interpolator);
 }

@@ -1,4 +1,0 @@
-{
-  mRenderThread.setSurface(surface);
-  mRenderThread.setSize(width,height);
-}

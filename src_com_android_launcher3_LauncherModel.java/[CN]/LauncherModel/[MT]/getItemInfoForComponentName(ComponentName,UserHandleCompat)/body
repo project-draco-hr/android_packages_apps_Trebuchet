@@ -10,5 +10,5 @@
     }
   }
 ;
-  return filterItemInfos(sBgItemsIdMap.values(),filter);
+  return filterItemInfos(sBgItemsIdMap,filter);
 }

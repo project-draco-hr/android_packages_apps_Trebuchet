@@ -1,0 +1,22 @@
+{
+  Rect bounds=new Rect();
+  if (isLandscape && transposeLayoutWithOrientation) {
+    if (isLayoutRtl) {
+      bounds.set(availableWidthPx - searchBarSpaceHeightPx,edgeMarginPx,availableWidthPx,availableHeightPx - edgeMarginPx);
+    }
+ else {
+      bounds.set(0,edgeMarginPx,searchBarSpaceHeightPx,availableHeightPx - edgeMarginPx);
+    }
+  }
+ else {
+    if (isTablet) {
+      int width=getCurrentWidth();
+      int gap=(int)((width - 2 * edgeMarginPx - (inv.numColumns * cellWidthPx)) / (2 * (inv.numColumns + 1)));
+      bounds.set(edgeMarginPx + gap,getSearchBarTopOffset(),availableWidthPx - (edgeMarginPx + gap),searchBarSpaceHeightPx);
+    }
+ else {
+      bounds.set(desiredWorkspaceLeftRightMarginPx - defaultWidgetPadding.left,getSearchBarTopOffset(),availableWidthPx - (desiredWorkspaceLeftRightMarginPx - defaultWidgetPadding.right),searchBarSpaceHeightPx);
+    }
+  }
+  return bounds;
+}

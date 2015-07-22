@@ -1,0 +1,3 @@
+{
+  beginDragShared(child,new Point(),source,accessible);
+}

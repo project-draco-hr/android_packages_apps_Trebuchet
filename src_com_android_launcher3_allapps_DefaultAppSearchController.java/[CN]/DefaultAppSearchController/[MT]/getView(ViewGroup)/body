@@ -1,0 +1,22 @@
+{
+  LayoutInflater inflater=LayoutInflater.from(parent.getContext());
+  mSearchView=inflater.inflate(R.layout.all_apps_search_bar,parent,false);
+  mSearchView.setOnClickListener(this);
+  mSearchButtonView=mSearchView.findViewById(R.id.search_button);
+  mSearchBarContainerView=mSearchView.findViewById(R.id.search_container);
+  mDismissSearchButtonView=mSearchBarContainerView.findViewById(R.id.dismiss_search_button);
+  mDismissSearchButtonView.setOnClickListener(this);
+  mSearchBarEditView=(AllAppsSearchEditView)mSearchBarContainerView.findViewById(R.id.search_box_input);
+  mSearchBarEditView.addTextChangedListener(this);
+  mSearchBarEditView.setOnEditorActionListener(this);
+  mSearchBarEditView.setOnBackKeyListener(new AllAppsSearchEditView.OnBackKeyListener(){
+    @Override public void onBackKey(){
+      String query=Utilities.trim(mSearchBarEditView.getEditableText().toString());
+      if (query.isEmpty() || mApps.hasNoFilteredResults()) {
+        hideSearchField(true,mFocusRecyclerViewRunnable);
+      }
+    }
+  }
+);
+  return mSearchView;
+}

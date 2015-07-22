@@ -1,0 +1,3 @@
+{
+  return mPreview instanceof BitmapTexture ? ((BitmapTexture)mPreview).getBitmap() : null;
+}

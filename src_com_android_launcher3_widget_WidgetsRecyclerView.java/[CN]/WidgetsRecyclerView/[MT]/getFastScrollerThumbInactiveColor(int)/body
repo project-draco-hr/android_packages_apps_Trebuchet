@@ -1,0 +1,3 @@
+{
+  return getResources().getColor(R.color.widgets_view_fastscroll_thumb_inactive_color);
+}

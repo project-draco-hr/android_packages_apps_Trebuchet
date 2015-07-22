@@ -1,0 +1,4 @@
+{
+  mUserManager=UserManagerCompat.getInstance(context);
+  mMyUser=UserHandleCompat.myUserHandle();
+}

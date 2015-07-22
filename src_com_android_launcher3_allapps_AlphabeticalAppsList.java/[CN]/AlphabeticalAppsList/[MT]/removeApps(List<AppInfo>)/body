@@ -1,0 +1,6 @@
+{
+  for (  AppInfo app : apps) {
+    mComponentToAppMap.remove(app.toComponentKey());
+  }
+  onAppsUpdated();
+}

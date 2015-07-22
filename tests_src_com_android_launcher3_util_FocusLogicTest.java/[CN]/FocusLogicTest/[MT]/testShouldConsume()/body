@@ -1,0 +1,12 @@
+{
+  assertTrue(FocusLogic.shouldConsume(KeyEvent.KEYCODE_DPAD_LEFT));
+  assertTrue(FocusLogic.shouldConsume(KeyEvent.KEYCODE_DPAD_RIGHT));
+  assertTrue(FocusLogic.shouldConsume(KeyEvent.KEYCODE_DPAD_UP));
+  assertTrue(FocusLogic.shouldConsume(KeyEvent.KEYCODE_DPAD_DOWN));
+  assertTrue(FocusLogic.shouldConsume(KeyEvent.KEYCODE_MOVE_HOME));
+  assertTrue(FocusLogic.shouldConsume(KeyEvent.KEYCODE_MOVE_END));
+  assertTrue(FocusLogic.shouldConsume(KeyEvent.KEYCODE_PAGE_UP));
+  assertTrue(FocusLogic.shouldConsume(KeyEvent.KEYCODE_PAGE_DOWN));
+  assertTrue(FocusLogic.shouldConsume(KeyEvent.KEYCODE_DEL));
+  assertTrue(FocusLogic.shouldConsume(KeyEvent.KEYCODE_FORWARD_DEL));
+}

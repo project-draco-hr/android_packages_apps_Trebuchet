@@ -1,0 +1,31 @@
+{
+  int numRows=-1;
+  int numColumns=-1;
+  float iconSize=-1;
+  try {
+    int resId=getResources().getIdentifier(RES_GRID_NUM_ROWS,"integer",getPackageName());
+    if (resId > 0) {
+      numRows=getResources().getInteger(resId);
+    }
+    resId=getResources().getIdentifier(RES_GRID_NUM_COLUMNS,"integer",getPackageName());
+    if (resId > 0) {
+      numColumns=getResources().getInteger(resId);
+    }
+    resId=getResources().getIdentifier(RES_GRID_ICON_SIZE_DP,"dimen",getPackageName());
+    if (resId > 0) {
+      int px=getResources().getDimensionPixelSize(resId);
+      iconSize=Utilities.dpiFromPx(px,dm);
+    }
+  }
+ catch (  Resources.NotFoundException ex) {
+    Log.e(TAG,"Invalid Partner grid resource!",ex);
+    return;
+  }
+  if (numRows > 0 && numColumns > 0) {
+    inv.numRows=numRows;
+    inv.numColumns=numColumns;
+  }
+  if (iconSize > 0) {
+    inv.iconSize=iconSize;
+  }
+}

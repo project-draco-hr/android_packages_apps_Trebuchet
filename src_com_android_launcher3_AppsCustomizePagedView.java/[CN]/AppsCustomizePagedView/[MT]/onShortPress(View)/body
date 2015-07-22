@@ -1,7 +1,0 @@
-{
-  if (mCreateWidgetInfo != null) {
-    cleanupWidgetPreloading(false);
-  }
-  mCreateWidgetInfo=new PendingAddWidgetInfo((PendingAddWidgetInfo)v.getTag());
-  preloadWidget(mCreateWidgetInfo);
-}

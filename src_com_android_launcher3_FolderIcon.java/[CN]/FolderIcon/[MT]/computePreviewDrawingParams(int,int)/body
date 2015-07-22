@@ -1,7 +1,6 @@
 {
   if (mIntrinsicIconSize != drawableSize || mTotalWidth != totalSize) {
-    LauncherAppState app=LauncherAppState.getInstance();
-    DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
+    DeviceProfile grid=mLauncher.getDeviceProfile();
     mIntrinsicIconSize=drawableSize;
     mTotalWidth=totalSize;
     final int previewSize=mPreviewBackground.getLayoutParams().height;

@@ -1,5 +1,0 @@
-{
-  if (params.length != 1)   return null;
-  params[0].doInBackgroundCallback.run(this,params[0]);
-  return params[0];
-}

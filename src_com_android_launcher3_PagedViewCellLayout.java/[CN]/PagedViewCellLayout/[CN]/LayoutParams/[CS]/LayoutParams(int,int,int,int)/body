@@ -1,7 +1,0 @@
-{
-  super(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT);
-  this.cellX=cellX;
-  this.cellY=cellY;
-  this.cellHSpan=cellHSpan;
-  this.cellVSpan=cellVSpan;
-}

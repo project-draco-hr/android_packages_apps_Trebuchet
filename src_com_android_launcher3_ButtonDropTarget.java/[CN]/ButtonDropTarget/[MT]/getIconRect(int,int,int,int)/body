@@ -6,7 +6,7 @@
   final int height=drawableHeight;
   final int left;
   final int right;
-  if (isRtl()) {
+  if (Utilities.isRtl(getResources())) {
     right=to.right - getPaddingRight();
     left=right - width;
   }

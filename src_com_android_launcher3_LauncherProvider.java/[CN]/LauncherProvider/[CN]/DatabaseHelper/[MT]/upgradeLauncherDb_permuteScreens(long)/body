@@ -1,8 +1,0 @@
-{
-  if (screen >= 2) {
-    return screen - 2;
-  }
- else {
-    return screen + 3;
-  }
-}

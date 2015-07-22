@@ -1,0 +1,7 @@
+{
+  super(context);
+  mPaint=new Paint(Paint.FILTER_BITMAP_FLAG);
+  mPaint.setColor(Color.BLACK);
+  mShadowPadding=getResources().getDimension(R.dimen.blur_size_click_shadow);
+  mShadowOffset=getResources().getDimension(R.dimen.click_shadow_high_shift);
+}

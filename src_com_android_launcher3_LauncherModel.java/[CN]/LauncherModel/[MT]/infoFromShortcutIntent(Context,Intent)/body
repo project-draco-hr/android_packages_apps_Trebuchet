@@ -17,7 +17,7 @@
     Parcelable extra=data.getParcelableExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE);
     if (extra instanceof ShortcutIconResource) {
       iconResource=(ShortcutIconResource)extra;
-      icon=Utilities.createIconBitmap(iconResource.packageName,iconResource.resourceName,mIconCache,context);
+      icon=Utilities.createIconBitmap(iconResource.packageName,iconResource.resourceName,context);
     }
   }
   final ShortcutInfo info=new ShortcutInfo();
@@ -27,8 +27,8 @@
     info.usingFallbackIcon=true;
   }
   info.setIcon(icon);
-  info.title=name;
-  info.contentDescription=mUserManager.getBadgedLabelForUser(info.title.toString(),info.user);
+  info.title=Utilities.trim(name);
+  info.contentDescription=mUserManager.getBadgedLabelForUser(info.title,info.user);
   info.intent=intent;
   info.customIcon=customIcon;
   info.iconResource=iconResource;

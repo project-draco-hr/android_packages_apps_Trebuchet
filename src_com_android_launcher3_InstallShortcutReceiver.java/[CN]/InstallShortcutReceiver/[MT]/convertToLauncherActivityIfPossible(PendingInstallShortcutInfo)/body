@@ -1,0 +1,15 @@
+{
+  if (original.isLuncherActivity()) {
+    return original;
+  }
+  if (!Utilities.isLauncherAppTarget(original.launchIntent) || !original.user.equals(UserHandleCompat.myUserHandle())) {
+    return original;
+  }
+  PackageManager pm=original.mContext.getPackageManager();
+  ResolveInfo info=pm.resolveActivity(original.launchIntent,0);
+  if (info == null) {
+    return original;
+  }
+  LauncherActivityInfoCompat launcherInfo=LauncherActivityInfoCompat.fromResolveInfo(info,original.mContext);
+  return new PendingInstallShortcutInfo(launcherInfo,original.mContext);
+}

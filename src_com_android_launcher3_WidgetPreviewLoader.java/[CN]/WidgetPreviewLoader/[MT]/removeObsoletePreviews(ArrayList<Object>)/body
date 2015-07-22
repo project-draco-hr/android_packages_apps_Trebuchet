@@ -1,0 +1,72 @@
+{
+  Utilities.assertWorkerThread();
+  LongSparseArray<UserHandleCompat> userIdCache=new LongSparseArray<>();
+  LongSparseArray<HashSet<String>> validPackages=new LongSparseArray<>();
+  for (  Object obj : list) {
+    final UserHandleCompat user;
+    final String pkg;
+    if (obj instanceof ResolveInfo) {
+      user=UserHandleCompat.myUserHandle();
+      pkg=((ResolveInfo)obj).activityInfo.packageName;
+    }
+ else {
+      LauncherAppWidgetProviderInfo info=(LauncherAppWidgetProviderInfo)obj;
+      user=mManager.getUser(info);
+      pkg=info.provider.getPackageName();
+    }
+    int userIdIndex=userIdCache.indexOfValue(user);
+    final long userId;
+    if (userIdIndex < 0) {
+      userId=mUserManager.getSerialNumberForUser(user);
+      userIdCache.put(userId,user);
+    }
+ else {
+      userId=userIdCache.keyAt(userIdIndex);
+    }
+    HashSet<String> packages=validPackages.get(userId);
+    if (packages == null) {
+      packages=new HashSet<>();
+      validPackages.put(userId,packages);
+    }
+    packages.add(pkg);
+  }
+  LongSparseArray<HashSet<String>> packagesToDelete=new LongSparseArray<>();
+  Cursor c=null;
+  try {
+    c=mDb.getReadableDatabase().query(CacheDb.TABLE_NAME,new String[]{CacheDb.COLUMN_USER,CacheDb.COLUMN_PACKAGE,CacheDb.COLUMN_LAST_UPDATED,CacheDb.COLUMN_VERSION},null,null,null,null,null);
+    while (c.moveToNext()) {
+      long userId=c.getLong(0);
+      String pkg=c.getString(1);
+      long lastUpdated=c.getLong(2);
+      long version=c.getLong(3);
+      HashSet<String> packages=validPackages.get(userId);
+      if (packages != null && packages.contains(pkg)) {
+        long[] versions=getPackageVersion(pkg);
+        if (versions[0] == version && versions[1] == lastUpdated) {
+          continue;
+        }
+      }
+      packages=packagesToDelete.get(userId);
+      if (packages == null) {
+        packages=new HashSet<>();
+        packagesToDelete.put(userId,packages);
+      }
+      packages.add(pkg);
+    }
+    for (int i=0; i < packagesToDelete.size(); i++) {
+      long userId=packagesToDelete.keyAt(i);
+      UserHandleCompat user=mUserManager.getUserForSerialNumber(userId);
+      for (      String pkg : packagesToDelete.valueAt(i)) {
+        removePackage(pkg,user,userId);
+      }
+    }
+  }
+ catch (  SQLException e) {
+    Log.e(TAG,"Error updatating widget previews",e);
+  }
+ finally {
+    if (c != null) {
+      c.close();
+    }
+  }
+}

@@ -1,12 +1,10 @@
 {
-  Pair<Runnable,Integer> p;
   Runnable r;
 synchronized (mQueue) {
     if (mQueue.size() == 0) {
       return;
     }
-    p=mQueue.removeFirst();
-    r=p.first;
+    r=mQueue.removeFirst();
   }
   r.run();
 synchronized (mQueue) {

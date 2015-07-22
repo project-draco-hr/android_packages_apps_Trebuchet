@@ -1,0 +1,34 @@
+{
+  Runnable r=new Runnable(){
+    public void run(){
+      finishBindingItems();
+    }
+  }
+;
+  if (waitUntilResume(r)) {
+    return;
+  }
+  if (mSavedState != null) {
+    if (!mWorkspace.hasFocus()) {
+      mWorkspace.getChildAt(mWorkspace.getCurrentPage()).requestFocus();
+    }
+    mSavedState=null;
+  }
+  mWorkspace.restoreInstanceStateForRemainingPages();
+  setWorkspaceLoading(false);
+  sendLoadingCompleteBroadcastIfNecessary();
+  if (sPendingAddItem != null) {
+    final long screenId=completeAdd(sPendingAddItem);
+    mWorkspace.post(new Runnable(){
+      @Override public void run(){
+        mWorkspace.snapToScreenId(screenId);
+      }
+    }
+);
+    sPendingAddItem=null;
+  }
+  InstallShortcutReceiver.disableAndFlushInstallQueue(this);
+  if (mLauncherCallbacks != null) {
+    mLauncherCallbacks.finishBindingItems(false);
+  }
+}

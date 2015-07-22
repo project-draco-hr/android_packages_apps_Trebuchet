@@ -1,0 +1,8 @@
+{
+  if (b != mBitmap) {
+    mBitmap=b;
+    invalidate();
+    return true;
+  }
+  return false;
+}

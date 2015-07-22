@@ -1,0 +1,8 @@
+{
+  for (  AppInfo info : data) {
+    if (info.user.equals(user) && packages.contains(info.componentName.getPackageName())) {
+      mIconCache.updateTitleAndIcon(info);
+      outUpdates.add(info);
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  intent=new Intent(intent);
+  intent.setSourceBounds(null);
+  final String flat=intent.toUri(0);
+  Intent broadcastIntent=new Intent(ACTION_LAUNCH).putExtra(EXTRA_INTENT,flat);
+  if (shortcut != null) {
+    broadcastIntent.putExtra(EXTRA_CONTAINER,shortcut.container).putExtra(EXTRA_SCREEN,shortcut.screenId).putExtra(EXTRA_CELLX,shortcut.cellX).putExtra(EXTRA_CELLY,shortcut.cellY);
+  }
+  Bundle sourceExtras=LaunchSourceUtils.createSourceData();
+  LaunchSourceUtils.populateSourceDataFromAncestorProvider(v,sourceExtras);
+  broadcastIntent.putExtra(EXTRA_SOURCE,sourceExtras);
+  mLauncher.sendBroadcast(broadcastIntent,mLaunchBroadcastPermission);
+}

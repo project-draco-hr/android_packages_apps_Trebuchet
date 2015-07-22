@@ -7,7 +7,7 @@
     float scrollRange=getScrollForPage(index + 1) - getScrollForPage(index);
     translationX=scrollRange - scrollDelta;
     progress=(scrollRange - scrollDelta) / scrollRange;
-    if (isLayoutRtl()) {
+    if (mIsRtl) {
       translationX=Math.min(0,translationX);
     }
  else {
@@ -21,7 +21,9 @@
     cc.setVisibility(VISIBLE);
   }
   mLastCustomContentScrollProgress=progress;
-  mLauncher.getDragLayer().setBackgroundAlpha(progress * 0.8f);
+  if (mState == State.NORMAL) {
+    mLauncher.getDragLayer().setBackgroundAlpha(progress == 1 ? 0 : progress * 0.8f);
+  }
   if (mLauncher.getHotseat() != null) {
     mLauncher.getHotseat().setTranslationX(translationX);
   }

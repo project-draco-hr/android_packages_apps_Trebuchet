@@ -1,0 +1,13 @@
+{
+  final int newRow=((CellLayout.LayoutParams)oldView.getLayoutParams()).cellY;
+  int column=(edgeColumn == NEXT_PAGE_LEFT_COLUMN) ^ nextPage.invertLayoutHorizontally() ? 0 : (((CellLayout)nextPage.getParent()).getCountX() - 1);
+  for (; column >= 0; column--) {
+    for (int row=newRow; row >= 0; row--) {
+      View newView=nextPage.getChildAt(column,row);
+      if (newView != null) {
+        return newView;
+      }
+    }
+  }
+  return null;
+}

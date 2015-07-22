@@ -1,4 +1,0 @@
-{
-  super.screenScrolled(screenCenter);
-  enableHwLayersOnVisiblePages();
-}

@@ -13,7 +13,7 @@
     info.spanX=info.spanY=1;
     return;
   }
-  int[] spans=rectToCell(minWidth,minHeight,null);
+  int[] spans=rectToCell(mLauncher,minWidth,minHeight,null);
   info.spanX=spans[0];
   info.spanY=spans[1];
 }

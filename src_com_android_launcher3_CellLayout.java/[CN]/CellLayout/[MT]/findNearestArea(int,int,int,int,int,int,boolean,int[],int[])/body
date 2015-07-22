@@ -1,0 +1,91 @@
+{
+  lazyInitTempRectStack();
+  pixelX-=(mCellWidth + mWidthGap) * (spanX - 1) / 2f;
+  pixelY-=(mCellHeight + mHeightGap) * (spanY - 1) / 2f;
+  final int[] bestXY=result != null ? result : new int[2];
+  double bestDistance=Double.MAX_VALUE;
+  final Rect bestRect=new Rect(-1,-1,-1,-1);
+  final Stack<Rect> validRegions=new Stack<Rect>();
+  final int countX=mCountX;
+  final int countY=mCountY;
+  if (minSpanX <= 0 || minSpanY <= 0 || spanX <= 0 || spanY <= 0 || spanX < minSpanX || spanY < minSpanY) {
+    return bestXY;
+  }
+  for (int y=0; y < countY - (minSpanY - 1); y++) {
+    inner:     for (int x=0; x < countX - (minSpanX - 1); x++) {
+      int ySize=-1;
+      int xSize=-1;
+      if (ignoreOccupied) {
+        for (int i=0; i < minSpanX; i++) {
+          for (int j=0; j < minSpanY; j++) {
+            if (mOccupied[x + i][y + j]) {
+              continue inner;
+            }
+          }
+        }
+        xSize=minSpanX;
+        ySize=minSpanY;
+        boolean incX=true;
+        boolean hitMaxX=xSize >= spanX;
+        boolean hitMaxY=ySize >= spanY;
+        while (!(hitMaxX && hitMaxY)) {
+          if (incX && !hitMaxX) {
+            for (int j=0; j < ySize; j++) {
+              if (x + xSize > countX - 1 || mOccupied[x + xSize][y + j]) {
+                hitMaxX=true;
+              }
+            }
+            if (!hitMaxX) {
+              xSize++;
+            }
+          }
+ else           if (!hitMaxY) {
+            for (int i=0; i < xSize; i++) {
+              if (y + ySize > countY - 1 || mOccupied[x + i][y + ySize]) {
+                hitMaxY=true;
+              }
+            }
+            if (!hitMaxY) {
+              ySize++;
+            }
+          }
+          hitMaxX|=xSize >= spanX;
+          hitMaxY|=ySize >= spanY;
+          incX=!incX;
+        }
+        incX=true;
+        hitMaxX=xSize >= spanX;
+        hitMaxY=ySize >= spanY;
+      }
+      final int[] cellXY=mTmpPoint;
+      cellToCenterPoint(x,y,cellXY);
+      Rect currentRect=mTempRectStack.pop();
+      currentRect.set(x,y,x + xSize,y + ySize);
+      boolean contained=false;
+      for (      Rect r : validRegions) {
+        if (r.contains(currentRect)) {
+          contained=true;
+          break;
+        }
+      }
+      validRegions.push(currentRect);
+      double distance=Math.hypot(cellXY[0] - pixelX,cellXY[1] - pixelY);
+      if ((distance <= bestDistance && !contained) || currentRect.contains(bestRect)) {
+        bestDistance=distance;
+        bestXY[0]=x;
+        bestXY[1]=y;
+        if (resultSpan != null) {
+          resultSpan[0]=xSize;
+          resultSpan[1]=ySize;
+        }
+        bestRect.set(currentRect);
+      }
+    }
+  }
+  if (bestDistance == Double.MAX_VALUE) {
+    bestXY[0]=-1;
+    bestXY[1]=-1;
+  }
+  recycleTempRects(validRegions);
+  return bestXY;
+}

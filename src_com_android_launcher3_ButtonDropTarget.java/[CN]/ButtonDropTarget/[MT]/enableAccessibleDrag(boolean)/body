@@ -1,0 +1,3 @@
+{
+  setOnClickListener(enable ? this : null);
+}

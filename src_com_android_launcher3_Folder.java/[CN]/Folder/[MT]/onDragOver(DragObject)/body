@@ -1,30 +1,3 @@
 {
-  final DragView dragView=d.dragView;
-  final int scrollOffset=mScrollView.getScrollY();
-  final float[] r=getDragViewVisualCenter(d.x,d.y,d.xOffset,d.yOffset,dragView,null);
-  r[0]-=getPaddingLeft();
-  r[1]-=getPaddingTop();
-  final long downTime=SystemClock.uptimeMillis();
-  final MotionEvent translatedEv=MotionEvent.obtain(downTime,downTime,MotionEvent.ACTION_MOVE,d.x,d.y,0);
-  if (!mAutoScrollHelper.isEnabled()) {
-    mAutoScrollHelper.setEnabled(true);
-  }
-  final boolean handled=mAutoScrollHelper.onTouch(this,translatedEv);
-  translatedEv.recycle();
-  if (handled) {
-    mReorderAlarm.cancelAlarm();
-  }
- else {
-    mTargetCell=mContent.findNearestArea((int)r[0],(int)r[1] + scrollOffset,1,1,mTargetCell);
-    if (isLayoutRtl()) {
-      mTargetCell[0]=mContent.getCountX() - mTargetCell[0] - 1;
-    }
-    if (mTargetCell[0] != mPreviousTargetCell[0] || mTargetCell[1] != mPreviousTargetCell[1]) {
-      mReorderAlarm.cancelAlarm();
-      mReorderAlarm.setOnAlarmListener(mReorderAlarmListener);
-      mReorderAlarm.setAlarm(REORDER_DELAY);
-      mPreviousTargetCell[0]=mTargetCell[0];
-      mPreviousTargetCell[1]=mTargetCell[1];
-    }
-  }
+  onDragOver(d,REORDER_DELAY);
 }

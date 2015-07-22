@@ -1,3 +1,0 @@
-{
-  return (mState == State.APPS_CUSTOMIZE) || (mOnResumeState == State.APPS_CUSTOMIZE);
-}

@@ -1,0 +1,8 @@
+{
+  Parcel p=Parcel.obtain();
+  info.writeToParcel(p,0);
+  p.setDataPosition(0);
+  LauncherAppWidgetProviderInfo lawpi=new LauncherAppWidgetProviderInfo(p);
+  p.recycle();
+  return lawpi;
+}

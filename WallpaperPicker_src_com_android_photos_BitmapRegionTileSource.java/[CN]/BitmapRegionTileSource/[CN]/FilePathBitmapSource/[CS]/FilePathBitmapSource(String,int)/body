@@ -1,4 +1,0 @@
-{
-  super(previewSize);
-  mPath=path;
-}

@@ -2,9 +2,6 @@
   int offset=getMeasuredWidth() - getPaddingLeft() - getPaddingRight()- (mCountX * mCellWidth);
   int left=getPaddingLeft() + (int)Math.ceil(offset / 2f);
   int top=getPaddingTop();
-  int count=getChildCount();
-  for (int i=0; i < count; i++) {
-    View child=getChildAt(i);
-    child.layout(left,top,left + r - l,top + b - t);
-  }
+  mTouchFeedbackView.layout(left,top,left + mTouchFeedbackView.getMeasuredWidth(),top + mTouchFeedbackView.getMeasuredHeight());
+  mShortcutsAndWidgets.layout(left,top,left + r - l,top + b - t);
 }

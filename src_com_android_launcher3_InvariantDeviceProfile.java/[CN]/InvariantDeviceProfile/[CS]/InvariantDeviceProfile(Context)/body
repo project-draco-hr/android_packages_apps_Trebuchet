@@ -1,0 +1,34 @@
+{
+  WindowManager wm=(WindowManager)context.getSystemService(Context.WINDOW_SERVICE);
+  Display display=wm.getDefaultDisplay();
+  DisplayMetrics dm=new DisplayMetrics();
+  display.getMetrics(dm);
+  Point smallestSize=new Point();
+  Point largestSize=new Point();
+  display.getCurrentSizeRange(smallestSize,largestSize);
+  minWidthDps=Utilities.dpiFromPx(Math.min(smallestSize.x,smallestSize.y),dm);
+  minHeightDps=Utilities.dpiFromPx(Math.min(largestSize.x,largestSize.y),dm);
+  ArrayList<InvariantDeviceProfile> closestProfiles=findClosestDeviceProfiles(minWidthDps,minHeightDps,getPredefinedDeviceProfiles());
+  InvariantDeviceProfile interpolatedDeviceProfileOut=invDistWeightedInterpolate(minWidthDps,minHeightDps,closestProfiles);
+  InvariantDeviceProfile closestProfile=closestProfiles.get(0);
+  numRows=closestProfile.numRows;
+  numColumns=closestProfile.numColumns;
+  numHotseatIcons=closestProfile.numHotseatIcons;
+  hotseatAllAppsRank=(int)(numHotseatIcons / 2);
+  defaultLayoutId=closestProfile.defaultLayoutId;
+  numFolderRows=closestProfile.numFolderRows;
+  numFolderColumns=closestProfile.numFolderColumns;
+  minAllAppsPredictionColumns=closestProfile.minAllAppsPredictionColumns;
+  iconSize=interpolatedDeviceProfileOut.iconSize;
+  iconBitmapSize=Utilities.pxFromDp(iconSize,dm);
+  iconTextSize=interpolatedDeviceProfileOut.iconTextSize;
+  hotseatIconSize=interpolatedDeviceProfileOut.hotseatIconSize;
+  fillResIconDpi=getLauncherIconDensity(iconBitmapSize);
+  applyPartnerDeviceProfileOverrides(context,dm);
+  Point realSize=new Point();
+  display.getRealSize(realSize);
+  int smallSide=Math.min(realSize.x,realSize.y);
+  int largeSide=Math.max(realSize.x,realSize.y);
+  landscapeProfile=new DeviceProfile(context,this,smallestSize,largestSize,largeSide,smallSide,true);
+  portraitProfile=new DeviceProfile(context,this,smallestSize,largestSize,smallSide,largeSide,false);
+}

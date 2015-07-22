@@ -1,0 +1,3 @@
+{
+  return usingLowResIcon && container >= 0 && rank >= FolderIcon.NUM_ITEMS_IN_PREVIEW;
+}

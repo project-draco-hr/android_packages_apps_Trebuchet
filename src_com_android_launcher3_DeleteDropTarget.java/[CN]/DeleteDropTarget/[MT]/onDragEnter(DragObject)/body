@@ -1,4 +1,0 @@
-{
-  super.onDragEnter(d);
-  setHoverColor();
-}

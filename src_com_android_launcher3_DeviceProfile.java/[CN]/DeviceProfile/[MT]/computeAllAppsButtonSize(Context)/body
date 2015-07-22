@@ -1,6 +1,5 @@
 {
   Resources res=context.getResources();
   float padding=res.getInteger(R.integer.config_allAppsButtonPaddingPercent) / 100f;
-  LauncherAppState app=LauncherAppState.getInstance();
   allAppsButtonVisualSize=(int)(hotseatIconSizePx * (1 - padding));
 }

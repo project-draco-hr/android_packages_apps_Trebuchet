@@ -6,5 +6,4 @@
  else {
     super.setTextColor(res.getColor(android.R.color.transparent));
   }
-  mIsTextVisible=visible;
 }

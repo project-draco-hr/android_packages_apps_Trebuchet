@@ -1,4 +1,0 @@
-{
-  AppWidgetProviderInfo searchProvider=Utilities.getSearchWidgetProvider(mContext);
-  return (searchProvider == null) ? null : searchProvider.provider;
-}

@@ -1,0 +1,4 @@
+View target
+DropTarget.DragObject d
+boolean isFlingToDelete
+boolean success

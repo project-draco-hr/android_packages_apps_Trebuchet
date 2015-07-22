@@ -1,6 +1,6 @@
 {
   if (mScroller.computeScrollOffset()) {
-    if (getScrollX() != mScroller.getCurrX() || getScrollY() != mScroller.getCurrY() || mOverScrollX != mScroller.getCurrX()) {
+    if (getScrollX() != mScroller.getCurrX() || getScrollY() != mScroller.getCurrY()) {
       float scaleX=mFreeScroll ? getScaleX() : 1f;
       int scrollX=(int)(mScroller.getCurrX() * (1 / scaleX));
       scrollTo(scrollX,mScroller.getCurrY());
@@ -13,10 +13,6 @@
     mCurrentPage=validateNewPage(mNextPage);
     mNextPage=INVALID_PAGE;
     notifyPageSwitchListener();
-    if (mDeferLoadAssociatedPagesUntilScrollCompletes) {
-      loadAssociatedPages(mCurrentPage);
-      mDeferLoadAssociatedPagesUntilScrollCompletes=false;
-    }
     if (mTouchState == TOUCH_STATE_REST) {
       pageEndMoving();
     }

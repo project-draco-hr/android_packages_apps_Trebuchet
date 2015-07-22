@@ -1,0 +1,3 @@
+{
+  return mContent.getShortcutsAndWidgets().getChildCount() > 1;
+}

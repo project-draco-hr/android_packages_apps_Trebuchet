@@ -1,5 +1,0 @@
-{
-  UserManagerCompat userManager=UserManagerCompat.getInstance(this);
-  CharSequence contentDescription=userManager.getBadgedLabelForUser(caption,user);
-  return new ShortcutInfo(shortcutIntent,caption,contentDescription,icon,user);
-}

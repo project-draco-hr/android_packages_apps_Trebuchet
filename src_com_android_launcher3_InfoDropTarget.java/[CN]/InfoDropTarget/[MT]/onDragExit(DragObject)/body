@@ -1,7 +1,0 @@
-{
-  super.onDragExit(d);
-  if (!d.dragComplete) {
-    mDrawable.resetTransition();
-    setTextColor(mOriginalTextColor);
-  }
-}

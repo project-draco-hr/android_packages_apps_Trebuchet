@@ -1,0 +1,4 @@
+{
+  recycle=d.getVisualCenter(recycle);
+  return mContent.findNearestArea((int)recycle[0] - getPaddingLeft(),(int)recycle[1] - getPaddingTop());
+}

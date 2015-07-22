@@ -1,0 +1,3 @@
+{
+  mIntents=xml_res == 0 ? new ArrayList<Intent>() : parseIntents(xml_res);
+}

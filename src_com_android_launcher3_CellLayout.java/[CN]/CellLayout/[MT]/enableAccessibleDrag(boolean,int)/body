@@ -1,0 +1,24 @@
+{
+  mUseTouchHelper=enable;
+  if (!enable) {
+    ViewCompat.setAccessibilityDelegate(this,null);
+    setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_NO);
+    getShortcutsAndWidgets().setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_NO);
+    setOnClickListener(mLauncher);
+  }
+ else {
+    if (dragType == WORKSPACE_ACCESSIBILITY_DRAG && !(mTouchHelper instanceof WorkspaceAccessibilityHelper)) {
+      mTouchHelper=new WorkspaceAccessibilityHelper(this);
+    }
+ else     if (dragType == FOLDER_ACCESSIBILITY_DRAG && !(mTouchHelper instanceof FolderAccessibilityHelper)) {
+      mTouchHelper=new FolderAccessibilityHelper(this);
+    }
+    ViewCompat.setAccessibilityDelegate(this,mTouchHelper);
+    setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_YES);
+    getShortcutsAndWidgets().setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_YES);
+    setOnClickListener(mTouchHelper);
+  }
+  if (getParent() != null) {
+    getParent().notifySubtreeAccessibilityStateChanged(this,this,AccessibilityEvent.CONTENT_CHANGE_TYPE_SUBTREE);
+  }
+}

@@ -1,5 +1,0 @@
-{
-  mState=state;
-  updateInteractionForState();
-  updateAccessibilityFlags();
-}

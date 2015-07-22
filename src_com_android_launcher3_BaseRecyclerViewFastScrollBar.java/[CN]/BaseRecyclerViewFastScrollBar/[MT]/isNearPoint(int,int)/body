@@ -1,0 +1,5 @@
+{
+  mTmpRect.set(mThumbOffset.x,mThumbOffset.y,mThumbOffset.x + mThumbWidth,mThumbOffset.y + mThumbHeight);
+  mTmpRect.inset(mTouchInset,mTouchInset);
+  return mTmpRect.contains(x,y);
+}

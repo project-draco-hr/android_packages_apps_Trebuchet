@@ -1,0 +1,4 @@
+{
+  mAppInfoComparator.clearUserCache();
+  return mAppInfoComparator;
+}

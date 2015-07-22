@@ -1,0 +1,25 @@
+{
+  ArrayList<Intent> intents=new ArrayList<Intent>();
+  XmlResourceParser parser=mContext.getResources().getXml(xml_res);
+  try {
+    DefaultLayoutParser.beginDocument(parser,DefaultLayoutParser.TAG_RESOLVE);
+    final int depth=parser.getDepth();
+    int type;
+    while (((type=parser.next()) != XmlPullParser.END_TAG || parser.getDepth() > depth) && type != XmlPullParser.END_DOCUMENT) {
+      if (type != XmlPullParser.START_TAG) {
+        continue;
+      }
+ else       if (DefaultLayoutParser.TAG_FAVORITE.equals(parser.getName())) {
+        final String uri=DefaultLayoutParser.getAttributeValue(parser,DefaultLayoutParser.ATTR_URI);
+        intents.add(Intent.parseUri(uri,0));
+      }
+    }
+  }
+ catch (  URISyntaxException|XmlPullParserException|IOException e) {
+    Log.e(TAG,"Unable to parse " + xml_res,e);
+  }
+ finally {
+    parser.close();
+  }
+  return intents;
+}
