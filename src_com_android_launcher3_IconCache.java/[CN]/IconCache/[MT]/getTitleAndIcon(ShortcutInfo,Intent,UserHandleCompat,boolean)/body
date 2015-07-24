@@ -4,12 +4,10 @@
     shortcutInfo.setIcon(getDefaultIcon(user));
     shortcutInfo.title="";
     shortcutInfo.usingFallbackIcon=true;
+    shortcutInfo.usingLowResIcon=false;
   }
  else {
-    LauncherActivityInfoCompat launcherActInfo=mLauncherApps.resolveActivity(intent,user);
-    CacheEntry entry=cacheLocked(component,launcherActInfo,null,user,usePkgIcon);
-    shortcutInfo.setIcon(entry.icon);
-    shortcutInfo.title=entry.title;
-    shortcutInfo.usingFallbackIcon=isDefaultIcon(entry.icon,user);
+    LauncherActivityInfoCompat info=mLauncherApps.resolveActivity(intent,user);
+    getTitleAndIcon(shortcutInfo,component,info,user,true,useLowResIcon);
   }
 }

@@ -1,4 +1,4 @@
 {
-  int defaultLayout=LauncherAppState.getInstance().getDynamicGrid().getDeviceProfile().defaultLayoutId;
+  int defaultLayout=LauncherAppState.getInstance().getInvariantDeviceProfile().defaultLayoutId;
   return new DefaultLayoutParser(getContext(),mOpenHelper.mAppWidgetHost,mOpenHelper,getContext().getResources(),defaultLayout);
 }

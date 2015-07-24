@@ -1,0 +1,25 @@
+{
+  if (mCurrentColorAnim != null) {
+    mCurrentColorAnim.cancel();
+  }
+  mCurrentColorAnim=new AnimatorSet();
+  mCurrentColorAnim.setDuration(DragView.COLOR_CHANGE_DURATION);
+  if (mSrcFilter == null) {
+    mSrcFilter=new ColorMatrix();
+    mDstFilter=new ColorMatrix();
+    mCurrentFilter=new ColorMatrix();
+  }
+  DragView.setColorScale(getTextColor(),mSrcFilter);
+  DragView.setColorScale(targetColor,mDstFilter);
+  ValueAnimator anim1=ValueAnimator.ofObject(new FloatArrayEvaluator(mCurrentFilter.getArray()),mSrcFilter.getArray(),mDstFilter.getArray());
+  anim1.addUpdateListener(new AnimatorUpdateListener(){
+    @Override public void onAnimationUpdate(    ValueAnimator animation){
+      mDrawable.setColorFilter(new ColorMatrixColorFilter(mCurrentFilter));
+      invalidate();
+    }
+  }
+);
+  mCurrentColorAnim.play(anim1);
+  mCurrentColorAnim.play(ObjectAnimator.ofArgb(this,"textColor",targetColor));
+  mCurrentColorAnim.start();
+}

@@ -1,5 +1,5 @@
 {
-  mInflater=(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+  mInflater=LayoutInflater.from(context);
   mPackageManager=context.getPackageManager();
   mIconSize=context.getResources().getDimensionPixelSize(R.dimen.wallpaperItemIconSize);
   final PackageManager pm=mPackageManager;

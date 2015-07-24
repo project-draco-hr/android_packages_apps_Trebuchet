@@ -1,0 +1,12 @@
+{
+  if (waitUntilResume(mBindAllApplicationsRunnable,true)) {
+    mTmpAppsList=apps;
+    return;
+  }
+  if (mAppsView != null) {
+    mAppsView.setApps(apps);
+  }
+  if (mLauncherCallbacks != null) {
+    mLauncherCallbacks.bindAllApplications(apps);
+  }
+}

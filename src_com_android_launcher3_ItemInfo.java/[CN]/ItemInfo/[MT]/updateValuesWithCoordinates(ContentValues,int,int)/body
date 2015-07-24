@@ -1,4 +1,0 @@
-{
-  values.put(LauncherSettings.Favorites.CELLX,cellX);
-  values.put(LauncherSettings.Favorites.CELLY,cellY);
-}

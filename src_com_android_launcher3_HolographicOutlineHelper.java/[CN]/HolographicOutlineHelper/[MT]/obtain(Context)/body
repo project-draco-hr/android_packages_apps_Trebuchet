@@ -1,6 +1,6 @@
 {
-  if (INSTANCE == null) {
-    INSTANCE=new HolographicOutlineHelper(context);
+  if (sInstance == null) {
+    sInstance=new HolographicOutlineHelper(context);
   }
-  return INSTANCE;
+  return sInstance;
 }

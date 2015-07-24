@@ -1,0 +1,11 @@
+{
+  HashSet<ComponentKey> forDeletion=new HashSet<ComponentKey>();
+  for (  ComponentKey key : mCache.keySet()) {
+    if (key.componentName.getPackageName().equals(packageName) && key.user.equals(user)) {
+      forDeletion.add(key);
+    }
+  }
+  for (  ComponentKey condemned : forDeletion) {
+    mCache.remove(condemned);
+  }
+}

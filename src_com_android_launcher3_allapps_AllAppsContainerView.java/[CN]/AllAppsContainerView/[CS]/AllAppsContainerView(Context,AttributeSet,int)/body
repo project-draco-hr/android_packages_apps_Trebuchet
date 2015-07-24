@@ -1,0 +1,15 @@
+{
+  super(context,attrs,defStyleAttr);
+  Resources res=context.getResources();
+  mLauncher=(Launcher)context;
+  mSectionNamesMargin=res.getDimensionPixelSize(R.dimen.all_apps_grid_view_start_margin);
+  mApps=new AlphabeticalAppsList(context);
+  mAdapter=new AllAppsGridAdapter(context,mApps,this,mLauncher,this);
+  mAdapter.setEmptySearchText(res.getString(R.string.all_apps_loading_message));
+  mApps.setAdapter(mAdapter);
+  mLayoutManager=mAdapter.getLayoutManager();
+  mItemDecoration=mAdapter.getItemDecoration();
+  mRecyclerViewTopBottomPadding=res.getDimensionPixelSize(R.dimen.all_apps_list_top_bottom_padding);
+  mSearchQueryBuilder=new SpannableStringBuilder();
+  Selection.setSelection(mSearchQueryBuilder,0);
+}

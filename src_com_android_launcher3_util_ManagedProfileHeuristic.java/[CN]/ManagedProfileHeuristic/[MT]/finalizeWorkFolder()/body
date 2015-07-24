@@ -1,0 +1,43 @@
+{
+  if (mWorkFolderApps.isEmpty()) {
+    return;
+  }
+  Collections.sort(mWorkFolderApps,new Comparator<ShortcutInfo>(){
+    @Override public int compare(    ShortcutInfo lhs,    ShortcutInfo rhs){
+      return Long.compare(lhs.firstInstallTime,rhs.firstInstallTime);
+    }
+  }
+);
+  String folderIdKey=USER_FOLDER_ID_PREFIX + mUserSerial;
+  if (mPrefs.contains(folderIdKey)) {
+    long folderId=mPrefs.getLong(folderIdKey,0);
+    final FolderInfo workFolder=mModel.findFolderById(folderId);
+    if (workFolder == null || !workFolder.hasOption(FolderInfo.FLAG_WORK_FOLDER)) {
+      mHomescreenApps.addAll(mWorkFolderApps);
+      return;
+    }
+    saveWorkFolderShortcuts(folderId,workFolder.contents.size());
+    final ArrayList<ShortcutInfo> shortcuts=mWorkFolderApps;
+    new MainThreadExecutor().execute(new Runnable(){
+      @Override public void run(){
+        for (        ShortcutInfo info : shortcuts) {
+          workFolder.add(info);
+        }
+      }
+    }
+);
+  }
+ else {
+    final FolderInfo workFolder=new FolderInfo();
+    workFolder.title=mContext.getText(R.string.work_folder_name);
+    workFolder.setOption(FolderInfo.FLAG_WORK_FOLDER,true,null);
+    for (    ShortcutInfo info : mWorkFolderApps) {
+      workFolder.add(info);
+    }
+    ArrayList<ItemInfo> itemList=new ArrayList<ItemInfo>(1);
+    itemList.add(workFolder);
+    mModel.addAndBindAddedWorkspaceItems(mContext,itemList);
+    mPrefs.edit().putLong(USER_FOLDER_ID_PREFIX + mUserSerial,workFolder.id).apply();
+    saveWorkFolderShortcuts(workFolder.id,0);
+  }
+}

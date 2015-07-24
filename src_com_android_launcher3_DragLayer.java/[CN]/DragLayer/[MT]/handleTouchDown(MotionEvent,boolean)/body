@@ -25,10 +25,16 @@
         return true;
       }
     }
-    getDescendantRectRelativeToSelf(currentFolder,hitRect);
     if (!isEventOverFolder(currentFolder,ev)) {
-      mLauncher.closeFolder();
-      return true;
+      if (isInAccessibleDrag()) {
+        if (!isEventOverDropTargetBar(ev)) {
+          return true;
+        }
+      }
+ else {
+        mLauncher.closeFolder();
+        return true;
+      }
     }
   }
   return false;

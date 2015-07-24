@@ -1,0 +1,15 @@
+{
+  float sY=-mFrom.bottom;
+  float d=mUY * mUY + 2 * sY * MAX_ACCELERATION;
+  if (d >= 0) {
+    mAY=MAX_ACCELERATION;
+  }
+ else {
+    d=0;
+    mAY=mUY * mUY / (2 * -sY);
+  }
+  double t=(-mUY - Math.sqrt(d)) / mAY;
+  float sX=-mFrom.exactCenterX() + mIconRect.exactCenterX();
+  mAX=(float)((sX - t * mUX) * 2 / (t * t));
+  return (int)Math.round(t);
+}

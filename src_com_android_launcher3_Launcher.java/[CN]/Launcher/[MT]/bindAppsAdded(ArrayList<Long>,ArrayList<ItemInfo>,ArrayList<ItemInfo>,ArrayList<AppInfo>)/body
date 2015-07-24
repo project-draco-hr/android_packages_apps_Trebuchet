@@ -1,0 +1,24 @@
+{
+  Runnable r=new Runnable(){
+    public void run(){
+      bindAppsAdded(newScreens,addNotAnimated,addAnimated,addedApps);
+    }
+  }
+;
+  if (waitUntilResume(r)) {
+    return;
+  }
+  if (newScreens != null) {
+    bindAddScreens(newScreens);
+  }
+  if (addNotAnimated != null && !addNotAnimated.isEmpty()) {
+    bindItems(addNotAnimated,0,addNotAnimated.size(),false);
+  }
+  if (addAnimated != null && !addAnimated.isEmpty()) {
+    bindItems(addAnimated,0,addAnimated.size(),true);
+  }
+  mWorkspace.removeExtraEmptyScreen(false,false);
+  if (addedApps != null && mAppsView != null) {
+    mAppsView.addApps(addedApps);
+  }
+}

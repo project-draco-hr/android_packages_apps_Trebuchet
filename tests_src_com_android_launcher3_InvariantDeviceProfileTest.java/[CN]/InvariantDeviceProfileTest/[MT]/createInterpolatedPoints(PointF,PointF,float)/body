@@ -1,0 +1,9 @@
+{
+  ArrayList<PointF> result=new ArrayList<PointF>();
+  result.add(a);
+  for (float i=1; i < numPts; i=i + 1.0f) {
+    result.add(new PointF((b.x * i + a.x * (numPts - i)) / numPts,(b.y * i + a.y * (numPts - i)) / numPts));
+  }
+  result.add(b);
+  return result;
+}

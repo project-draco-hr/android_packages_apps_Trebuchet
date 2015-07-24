@@ -1,5 +1,0 @@
-{
-  super(previewSize);
-  mRes=res;
-  mResId=resId;
-}

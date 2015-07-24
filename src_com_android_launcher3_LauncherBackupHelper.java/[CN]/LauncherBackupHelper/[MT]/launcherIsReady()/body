@@ -5,8 +5,7 @@
     return false;
   }
   cursor.close();
-  if (!initializeIconCache()) {
-    dataChanged();
+  if (LauncherAppState.getInstanceNoCreate() == null) {
     return false;
   }
   return true;

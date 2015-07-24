@@ -1,0 +1,11 @@
+{
+  int pagePos=rank % mMaxItemsPerPage;
+  int pageNo=rank / mMaxItemsPerPage;
+  item.rank=rank;
+  item.cellX=pagePos % mGridCountX;
+  item.cellY=pagePos / mGridCountX;
+  CellLayout.LayoutParams lp=(CellLayout.LayoutParams)view.getLayoutParams();
+  lp.cellX=item.cellX;
+  lp.cellY=item.cellY;
+  getPageAt(pageNo).addViewToCellLayout(view,-1,mFolder.mLauncher.getViewIdForItem(item),lp,true);
+}

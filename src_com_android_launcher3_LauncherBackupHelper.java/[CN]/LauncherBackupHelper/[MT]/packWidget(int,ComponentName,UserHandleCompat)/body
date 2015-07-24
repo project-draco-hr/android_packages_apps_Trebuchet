@@ -1,0 +1,18 @@
+{
+  final LauncherAppWidgetProviderInfo info=LauncherModel.getProviderInfo(mContext,provider,user);
+  Widget widget=new Widget();
+  widget.provider=provider.flattenToShortString();
+  widget.label=info.label;
+  widget.configure=info.configure != null;
+  if (info.icon != 0) {
+    widget.icon=new Resource();
+    Drawable fullResIcon=mIconCache.getFullResIcon(provider.getPackageName(),info.icon);
+    Bitmap icon=Utilities.createIconBitmap(fullResIcon,mContext);
+    widget.icon.data=Utilities.flattenBitmap(icon);
+    widget.icon.dpi=dpi;
+  }
+  int[] minSpans=CellLayout.rectToCell(mIdp.portraitProfile,mContext,info.minResizeWidth,info.minResizeHeight,null);
+  widget.minSpanX=(info.resizeMode & LauncherAppWidgetProviderInfo.RESIZE_HORIZONTAL) != 0 ? minSpans[0] : -1;
+  widget.minSpanY=(info.resizeMode & LauncherAppWidgetProviderInfo.RESIZE_VERTICAL) != 0 ? minSpans[1] : -1;
+  return widget;
+}

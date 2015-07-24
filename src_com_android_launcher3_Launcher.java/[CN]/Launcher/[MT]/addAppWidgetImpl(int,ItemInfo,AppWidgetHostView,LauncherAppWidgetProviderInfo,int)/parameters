@@ -1,0 +1,5 @@
+int appWidgetId
+ItemInfo info
+AppWidgetHostView boundWidget
+LauncherAppWidgetProviderInfo appWidgetInfo
+int delay

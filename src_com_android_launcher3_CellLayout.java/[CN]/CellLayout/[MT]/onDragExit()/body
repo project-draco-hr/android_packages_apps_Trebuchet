@@ -1,5 +1,4 @@
 {
-  mDragEnforcer.onDragExit();
   if (mDragging) {
     mDragging=false;
   }

@@ -1,0 +1,40 @@
+{
+  ViewGroup iconParent=iconLayout.getShortcutsAndWidgets();
+  ViewGroup hotseatParent=hotseatLayout.getShortcutsAndWidgets();
+  int m, n;
+  if (isHorizontal) {
+    m=iconLayout.getCountX();
+    n=iconLayout.getCountY() + hotseatLayout.getCountY();
+  }
+ else {
+    m=iconLayout.getCountX() + hotseatLayout.getCountX();
+    n=iconLayout.getCountY();
+  }
+  int[][] matrix=createFullMatrix(m,n);
+  for (int i=0; i < iconParent.getChildCount(); i++) {
+    int cx=((CellLayout.LayoutParams)iconParent.getChildAt(i).getLayoutParams()).cellX;
+    int cy=((CellLayout.LayoutParams)iconParent.getChildAt(i).getLayoutParams()).cellY;
+    matrix[cx][cy]=i;
+  }
+  for (int i=hotseatParent.getChildCount() - 1; i >= (includeAllappsicon ? 0 : 1); i--) {
+    int delta=0;
+    if (isHorizontal) {
+      int cx=((CellLayout.LayoutParams)hotseatParent.getChildAt(i).getLayoutParams()).cellX;
+      if ((includeAllappsicon && cx >= allappsiconRank) || (!includeAllappsicon && cx > allappsiconRank)) {
+        delta=-1;
+      }
+      matrix[cx + delta][iconLayout.getCountY()]=iconParent.getChildCount() + i;
+    }
+ else {
+      int cy=((CellLayout.LayoutParams)hotseatParent.getChildAt(i).getLayoutParams()).cellY;
+      if ((includeAllappsicon && cy >= allappsiconRank) || (!includeAllappsicon && cy > allappsiconRank)) {
+        delta=-1;
+      }
+      matrix[iconLayout.getCountX()][cy + delta]=iconParent.getChildCount() + i;
+    }
+  }
+  if (DEBUG) {
+    printMatrix(matrix);
+  }
+  return matrix;
+}

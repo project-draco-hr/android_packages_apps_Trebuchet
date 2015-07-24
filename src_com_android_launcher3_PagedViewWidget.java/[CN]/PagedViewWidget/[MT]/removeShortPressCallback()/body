@@ -1,5 +1,0 @@
-{
-  if (mPendingCheckForShortPress != null) {
-    removeCallbacks(mPendingCheckForShortPress);
-  }
-}

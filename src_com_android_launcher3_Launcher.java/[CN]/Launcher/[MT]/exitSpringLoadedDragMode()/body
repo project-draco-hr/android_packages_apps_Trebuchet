@@ -1,0 +1,8 @@
+{
+  if (mState == State.APPS_SPRING_LOADED) {
+    showAppsView(true,false,false,false);
+  }
+ else   if (mState == State.WIDGETS_SPRING_LOADED) {
+    showWidgetsView(true,false);
+  }
+}

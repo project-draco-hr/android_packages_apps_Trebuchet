@@ -1,0 +1,8 @@
+{
+  if (pageIndex > 0) {
+    return PREVIOUS_PAGE_FIRST_ITEM;
+  }
+ else {
+    return CURRENT_PAGE_FIRST_ITEM;
+  }
+}

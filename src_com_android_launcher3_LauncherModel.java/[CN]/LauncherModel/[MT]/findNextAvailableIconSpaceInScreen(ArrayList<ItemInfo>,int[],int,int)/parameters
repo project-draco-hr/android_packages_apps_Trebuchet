@@ -1,0 +1,4 @@
+ArrayList<ItemInfo> occupiedPos
+int[] xy
+int spanX
+int spanY

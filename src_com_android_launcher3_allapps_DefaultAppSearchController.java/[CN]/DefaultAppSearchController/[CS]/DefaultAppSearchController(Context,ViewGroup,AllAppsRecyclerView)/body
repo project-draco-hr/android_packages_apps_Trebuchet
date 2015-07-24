@@ -1,0 +1,6 @@
+{
+  mContext=context;
+  mInputMethodManager=(InputMethodManager)mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
+  mContainerView=containerView;
+  mAppsRecyclerView=appsRecyclerView;
+}

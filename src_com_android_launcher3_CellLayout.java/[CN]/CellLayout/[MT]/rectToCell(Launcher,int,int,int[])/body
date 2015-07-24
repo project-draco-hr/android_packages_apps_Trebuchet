@@ -1,0 +1,3 @@
+{
+  return rectToCell(launcher.getDeviceProfile(),launcher,width,height,result);
+}

@@ -1,4 +1,0 @@
-SQLiteDatabase db
-Uri uri
-ContentValuesCallback cb
-boolean deleteRows

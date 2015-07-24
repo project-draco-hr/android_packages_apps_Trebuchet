@@ -1,5 +1,11 @@
 {
   if (!mCustomShadowsEnabled) {
+    if (mFastScrollMode == FAST_SCROLL_FOCUS_MODE_DRAW_CIRCLE_BG && mFastScrollFocusFraction > 0f) {
+      DeviceProfile grid=mLauncher.getDeviceProfile();
+      int iconCenterX=getScrollX() + (getWidth() / 2);
+      int iconCenterY=getScrollY() + getPaddingTop() + (grid.iconSizePx / 2);
+      canvas.drawCircle(iconCenterX,iconCenterY,mFastScrollFocusFraction * (getWidth() / 2),mFastScrollFocusBgPaint);
+    }
     super.draw(canvas);
     return;
   }

@@ -1,6 +1,7 @@
 {
   setContentView(R.layout.wallpaper_cropper);
   mCropView=(CropView)findViewById(R.id.cropView);
+  mProgressView=findViewById(R.id.loading);
   Intent cropIntent=getIntent();
   final Uri imageUri=cropIntent.getData();
   if (imageUri == null) {
@@ -18,12 +19,12 @@
   }
 );
   mSetWallpaperButton=findViewById(R.id.set_wallpaper_button);
-  final BitmapRegionTileSource.UriBitmapSource bitmapSource=new BitmapRegionTileSource.UriBitmapSource(this,imageUri,1024);
+  final BitmapRegionTileSource.UriBitmapSource bitmapSource=new BitmapRegionTileSource.UriBitmapSource(getContext(),imageUri);
   mSetWallpaperButton.setEnabled(false);
   Runnable onLoad=new Runnable(){
     public void run(){
       if (bitmapSource.getLoadingState() != BitmapSource.State.LOADED) {
-        Toast.makeText(WallpaperCropActivity.this,getString(R.string.wallpaper_load_fail),Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(),R.string.wallpaper_load_fail,Toast.LENGTH_LONG).show();
         finish();
       }
  else {
@@ -32,5 +33,5 @@
     }
   }
 ;
-  setCropViewTileSource(bitmapSource,true,false,onLoad);
+  setCropViewTileSource(bitmapSource,true,false,null,onLoad);
 }

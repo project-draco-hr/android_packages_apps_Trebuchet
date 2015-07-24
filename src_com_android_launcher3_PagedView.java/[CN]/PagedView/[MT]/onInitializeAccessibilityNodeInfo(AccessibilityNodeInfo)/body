@@ -7,4 +7,9 @@
   if (getCurrentPage() > 0) {
     info.addAction(AccessibilityNodeInfo.ACTION_SCROLL_BACKWARD);
   }
+  info.setClassName(getClass().getName());
+  info.setLongClickable(false);
+  if (Utilities.isLmpOrAbove()) {
+    info.removeAction(AccessibilityNodeInfo.AccessibilityAction.ACTION_LONG_CLICK);
+  }
 }

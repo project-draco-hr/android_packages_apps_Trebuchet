@@ -1,0 +1,5 @@
+{
+  prepareStartAnimation(mDropTargetBar);
+  mShowDropTargetBarAnim.start();
+  hideSearchBar(true);
+}

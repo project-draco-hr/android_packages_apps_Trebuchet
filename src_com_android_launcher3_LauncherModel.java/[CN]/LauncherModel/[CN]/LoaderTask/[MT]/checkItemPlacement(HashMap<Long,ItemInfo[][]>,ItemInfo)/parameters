@@ -1,2 +1,0 @@
-HashMap<Long,ItemInfo[][]> occupied
-ItemInfo item

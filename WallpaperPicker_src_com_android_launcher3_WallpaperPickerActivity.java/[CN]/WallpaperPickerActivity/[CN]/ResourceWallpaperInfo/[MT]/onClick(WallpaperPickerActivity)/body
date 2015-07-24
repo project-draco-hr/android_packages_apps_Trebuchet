@@ -1,12 +1,19 @@
 {
-  BitmapRegionTileSource.ResourceBitmapSource bitmapSource=new BitmapRegionTileSource.ResourceBitmapSource(mResources,mResId,BitmapRegionTileSource.MAX_PREVIEW_SIZE);
-  bitmapSource.loadInBackground();
-  BitmapRegionTileSource source=new BitmapRegionTileSource(a,bitmapSource);
-  CropView v=a.getCropView();
-  v.setTileSource(source,null);
-  Point wallpaperSize=WallpaperCropActivity.getDefaultWallpaperSize(a.getResources(),a.getWindowManager());
-  RectF crop=WallpaperCropActivity.getMaxCropRect(source.getImageWidth(),source.getImageHeight(),wallpaperSize.x,wallpaperSize.y,false);
-  v.setScale(wallpaperSize.x / crop.width());
-  v.setTouchEnabled(false);
-  a.setSystemWallpaperVisiblity(false);
+  a.setWallpaperButtonEnabled(false);
+  final BitmapRegionTileSource.ResourceBitmapSource bitmapSource=new BitmapRegionTileSource.ResourceBitmapSource(mResources,mResId);
+  a.setCropViewTileSource(bitmapSource,false,false,new CropViewScaleProvider(){
+    @Override public float getScale(    TileSource src){
+      Point wallpaperSize=WallpaperUtils.getDefaultWallpaperSize(a.getResources(),a.getWindowManager());
+      RectF crop=Utils.getMaxCropRect(src.getImageWidth(),src.getImageHeight(),wallpaperSize.x,wallpaperSize.y,false);
+      return wallpaperSize.x / crop.width();
+    }
+  }
+,new Runnable(){
+    @Override public void run(){
+      if (bitmapSource.getLoadingState() == BitmapSource.State.LOADED) {
+        a.setWallpaperButtonEnabled(true);
+      }
+    }
+  }
+);
 }

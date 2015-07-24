@@ -1,0 +1,6 @@
+View v
+int x
+int y
+float r0
+float r1
+ViewOutlineProvider originalProvider

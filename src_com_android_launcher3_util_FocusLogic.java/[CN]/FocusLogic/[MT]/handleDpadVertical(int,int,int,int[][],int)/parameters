@@ -1,0 +1,5 @@
+int iconIndex
+int cntX
+int cntY
+int[][] matrix
+int increment

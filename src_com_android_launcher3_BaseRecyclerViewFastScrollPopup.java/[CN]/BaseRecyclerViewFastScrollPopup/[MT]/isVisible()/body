@@ -1,0 +1,3 @@
+{
+  return (mAlpha > 0f) && (mSectionName != null);
+}

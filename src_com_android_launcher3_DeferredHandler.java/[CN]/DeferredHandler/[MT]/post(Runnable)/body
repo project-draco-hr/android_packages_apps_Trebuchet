@@ -1,3 +1,8 @@
 {
-  post(runnable,0);
+synchronized (mQueue) {
+    mQueue.add(runnable);
+    if (mQueue.size() == 1) {
+      scheduleNextLocked();
+    }
+  }
 }

@@ -1,0 +1,5 @@
+BitmapSource bitmapSource
+boolean touchEnabled
+boolean moveToLeft
+CropViewScaleProvider scaleProvider
+Runnable postExecute

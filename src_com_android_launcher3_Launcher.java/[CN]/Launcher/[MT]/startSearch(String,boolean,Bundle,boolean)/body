@@ -1,0 +1,18 @@
+{
+  if (initialQuery == null) {
+    initialQuery=getTypedText();
+  }
+  if (appSearchData == null) {
+    appSearchData=new Bundle();
+    appSearchData.putString("source","launcher-search");
+  }
+  Rect sourceBounds=new Rect();
+  if (mSearchDropTargetBar != null) {
+    sourceBounds=mSearchDropTargetBar.getSearchBarBounds();
+  }
+  boolean clearTextImmediately=startSearch(initialQuery,selectInitialQuery,appSearchData,sourceBounds);
+  if (clearTextImmediately) {
+    clearTypedText();
+  }
+  showWorkspace(true);
+}

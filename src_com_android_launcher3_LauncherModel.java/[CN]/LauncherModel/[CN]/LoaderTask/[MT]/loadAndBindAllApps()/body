@@ -8,6 +8,12 @@ synchronized (LoaderTask.this) {
       if (mStopped) {
         return;
       }
+    }
+    updateIconCache();
+synchronized (LoaderTask.this) {
+      if (mStopped) {
+        return;
+      }
       mAllAppsLoaded=true;
     }
   }

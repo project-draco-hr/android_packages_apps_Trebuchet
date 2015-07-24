@@ -1,0 +1,22 @@
+{
+  final DragLayer dragLayer=mLauncher.getDragLayer();
+  final float startAlpha=dragLayer.getBackgroundAlpha();
+  float finalAlpha=states.stateIsNormal ? 0 : mWorkspaceScrimAlpha;
+  if (finalAlpha != startAlpha) {
+    if (animated) {
+      ValueAnimator bgFadeOutAnimation=LauncherAnimUtils.ofFloat(mWorkspace,startAlpha,finalAlpha);
+      bgFadeOutAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener(){
+        @Override public void onAnimationUpdate(        ValueAnimator animation){
+          dragLayer.setBackgroundAlpha(((Float)animation.getAnimatedValue()).floatValue());
+        }
+      }
+);
+      bgFadeOutAnimation.setInterpolator(new DecelerateInterpolator(1.5f));
+      bgFadeOutAnimation.setDuration(duration);
+      mStateAnimator.play(bgFadeOutAnimation);
+    }
+ else {
+      dragLayer.setBackgroundAlpha(finalAlpha);
+    }
+  }
+}

@@ -1,0 +1,5 @@
+SectionInfo section
+SectionInfo withSection
+int sectionAppCount
+int numAppsPerRow
+int mergeCount

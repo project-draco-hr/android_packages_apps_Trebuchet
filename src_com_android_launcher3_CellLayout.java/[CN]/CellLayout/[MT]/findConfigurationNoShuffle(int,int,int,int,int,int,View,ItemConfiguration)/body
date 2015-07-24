@@ -1,7 +1,7 @@
 {
   int[] result=new int[2];
   int[] resultSpan=new int[2];
-  findNearestVacantArea(pixelX,pixelY,minSpanX,minSpanY,spanX,spanY,null,result,resultSpan);
+  findNearestVacantArea(pixelX,pixelY,minSpanX,minSpanY,spanX,spanY,result,resultSpan);
   if (result[0] >= 0 && result[1] >= 0) {
     copyCurrentStateToSolution(solution,false);
     solution.dragViewX=result[0];

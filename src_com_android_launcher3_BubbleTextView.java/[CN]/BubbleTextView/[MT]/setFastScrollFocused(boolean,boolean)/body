@@ -1,0 +1,25 @@
+{
+  if (mFastScrollMode == FAST_SCROLL_FOCUS_MODE_NONE) {
+    return;
+  }
+  if (mFastScrollFocused != focused) {
+    mFastScrollFocused=focused;
+    if (animated) {
+      if (mFastScrollFocusAnimator != null) {
+        mFastScrollFocusAnimator.cancel();
+      }
+      mFastScrollFocusAnimator=ObjectAnimator.ofFloat(this,"fastScrollFocus",focused ? 1f : 0f);
+      if (focused) {
+        mFastScrollFocusAnimator.setInterpolator(new DecelerateInterpolator());
+      }
+ else {
+        mFastScrollFocusAnimator.setInterpolator(new AccelerateInterpolator());
+      }
+      mFastScrollFocusAnimator.setDuration(focused ? FAST_SCROLL_FOCUS_FADE_IN_DURATION : FAST_SCROLL_FOCUS_FADE_OUT_DURATION);
+      mFastScrollFocusAnimator.start();
+    }
+ else {
+      mFastScrollFocusFraction=focused ? 1f : 0f;
+    }
+  }
+}

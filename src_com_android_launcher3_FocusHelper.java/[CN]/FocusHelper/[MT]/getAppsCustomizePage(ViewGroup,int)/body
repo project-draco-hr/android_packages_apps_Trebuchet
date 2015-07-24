@@ -1,7 +1,0 @@
-{
-  ViewGroup page=(ViewGroup)((PagedView)container).getPageAt(index);
-  if (page instanceof CellLayout) {
-    page=((CellLayout)page).getShortcutsAndWidgets();
-  }
-  return page;
-}

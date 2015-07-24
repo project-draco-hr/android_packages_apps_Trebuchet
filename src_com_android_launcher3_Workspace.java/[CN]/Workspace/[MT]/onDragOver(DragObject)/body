@@ -1,0 +1,90 @@
+{
+  if (mInScrollArea || !transitionStateShouldAllowDrop())   return;
+  Rect r=new Rect();
+  CellLayout layout=null;
+  ItemInfo item=(ItemInfo)d.dragInfo;
+  if (item == null) {
+    if (LauncherAppState.isDogfoodBuild()) {
+      throw new NullPointerException("DragObject has null info");
+    }
+    return;
+  }
+  if (item.spanX < 0 || item.spanY < 0)   throw new RuntimeException("Improper spans found");
+  mDragViewVisualCenter=d.getVisualCenter(mDragViewVisualCenter);
+  final View child=(mDragInfo == null) ? null : mDragInfo.cell;
+  if (workspaceInModalState()) {
+    if (mLauncher.getHotseat() != null && !isExternalDragWidget(d)) {
+      if (isPointInSelfOverHotseat(d.x,d.y,r)) {
+        layout=mLauncher.getHotseat().getLayout();
+      }
+    }
+    if (layout == null) {
+      layout=findMatchingPageForDragOver(d.dragView,d.x,d.y,false);
+    }
+    if (layout != mDragTargetLayout) {
+      setCurrentDropLayout(layout);
+      setCurrentDragOverlappingLayout(layout);
+      boolean isInSpringLoadedMode=(mState == State.SPRING_LOADED);
+      if (isInSpringLoadedMode) {
+        if (mLauncher.isHotseatLayout(layout)) {
+          mSpringLoadedDragController.cancel();
+        }
+ else {
+          mSpringLoadedDragController.setAlarm(mDragTargetLayout);
+        }
+      }
+    }
+  }
+ else {
+    if (mLauncher.getHotseat() != null && !isDragWidget(d)) {
+      if (isPointInSelfOverHotseat(d.x,d.y,r)) {
+        layout=mLauncher.getHotseat().getLayout();
+      }
+    }
+    if (layout == null) {
+      layout=getCurrentDropLayout();
+    }
+    if (layout != mDragTargetLayout) {
+      setCurrentDropLayout(layout);
+      setCurrentDragOverlappingLayout(layout);
+    }
+  }
+  if (mDragTargetLayout != null) {
+    if (mLauncher.isHotseatLayout(mDragTargetLayout)) {
+      mapPointFromSelfToHotseatLayout(mLauncher.getHotseat(),mDragViewVisualCenter);
+    }
+ else {
+      mapPointFromSelfToChild(mDragTargetLayout,mDragViewVisualCenter,null);
+    }
+    ItemInfo info=(ItemInfo)d.dragInfo;
+    int minSpanX=item.spanX;
+    int minSpanY=item.spanY;
+    if (item.minSpanX > 0 && item.minSpanY > 0) {
+      minSpanX=item.minSpanX;
+      minSpanY=item.minSpanY;
+    }
+    mTargetCell=findNearestArea((int)mDragViewVisualCenter[0],(int)mDragViewVisualCenter[1],minSpanX,minSpanY,mDragTargetLayout,mTargetCell);
+    int reorderX=mTargetCell[0];
+    int reorderY=mTargetCell[1];
+    setCurrentDropOverCell(mTargetCell[0],mTargetCell[1]);
+    float targetCellDistance=mDragTargetLayout.getDistanceFromCell(mDragViewVisualCenter[0],mDragViewVisualCenter[1],mTargetCell);
+    final View dragOverView=mDragTargetLayout.getChildAt(mTargetCell[0],mTargetCell[1]);
+    manageFolderFeedback(info,mDragTargetLayout,mTargetCell,targetCellDistance,dragOverView,d.accessibleDrag);
+    boolean nearestDropOccupied=mDragTargetLayout.isNearestDropLocationOccupied((int)mDragViewVisualCenter[0],(int)mDragViewVisualCenter[1],item.spanX,item.spanY,child,mTargetCell);
+    if (!nearestDropOccupied) {
+      mDragTargetLayout.visualizeDropLocation(child,mDragOutline,(int)mDragViewVisualCenter[0],(int)mDragViewVisualCenter[1],mTargetCell[0],mTargetCell[1],item.spanX,item.spanY,false,d.dragView.getDragVisualizeOffset(),d.dragView.getDragRegion());
+    }
+ else     if ((mDragMode == DRAG_MODE_NONE || mDragMode == DRAG_MODE_REORDER) && !mReorderAlarm.alarmPending() && (mLastReorderX != reorderX || mLastReorderY != reorderY)) {
+      int[] resultSpan=new int[2];
+      mDragTargetLayout.performReorder((int)mDragViewVisualCenter[0],(int)mDragViewVisualCenter[1],minSpanX,minSpanY,item.spanX,item.spanY,child,mTargetCell,resultSpan,CellLayout.MODE_SHOW_REORDER_HINT);
+      ReorderAlarmListener listener=new ReorderAlarmListener(mDragViewVisualCenter,minSpanX,minSpanY,item.spanX,item.spanY,d.dragView,child);
+      mReorderAlarm.setOnAlarmListener(listener);
+      mReorderAlarm.setAlarm(REORDER_TIMEOUT);
+    }
+    if (mDragMode == DRAG_MODE_CREATE_FOLDER || mDragMode == DRAG_MODE_ADD_TO_FOLDER || !nearestDropOccupied) {
+      if (mDragTargetLayout != null) {
+        mDragTargetLayout.revertTempState();
+      }
+    }
+  }
+}

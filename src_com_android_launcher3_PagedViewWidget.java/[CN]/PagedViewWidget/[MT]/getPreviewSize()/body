@@ -1,7 +1,0 @@
-{
-  final ImageView i=(ImageView)findViewById(R.id.widget_preview);
-  int[] maxSize=new int[2];
-  maxSize[0]=i.getWidth() - mOriginalImagePadding.left - mOriginalImagePadding.right;
-  maxSize[1]=i.getHeight() - mOriginalImagePadding.top;
-  return maxSize;
-}

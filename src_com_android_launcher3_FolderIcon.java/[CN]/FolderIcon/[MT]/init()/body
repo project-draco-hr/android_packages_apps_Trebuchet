@@ -1,3 +1,5 @@
 {
   mLongPressHelper=new CheckLongPressHelper(this);
+  mStylusEventHelper=new StylusEventHelper(this);
+  setAccessibilityDelegate(LauncherAppState.getInstance().getAccessibilityDelegate());
 }

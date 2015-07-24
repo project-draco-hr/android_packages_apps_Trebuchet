@@ -1,7 +1,0 @@
-{
-  if (info == null || component == null) {
-    return null;
-  }
-  CacheEntry entry=cacheLocked(component,info,labelCache,info.getUser(),false);
-  return entry.icon;
-}

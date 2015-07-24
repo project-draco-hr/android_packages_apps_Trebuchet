@@ -1,0 +1,29 @@
+{
+  if (savedState == null) {
+    return;
+  }
+  State state=intToState(savedState.getInt(RUNTIME_STATE,State.WORKSPACE.ordinal()));
+  if (state == State.APPS || state == State.WIDGETS) {
+    mOnResumeState=state;
+  }
+  int currentScreen=savedState.getInt(RUNTIME_STATE_CURRENT_SCREEN,PagedView.INVALID_RESTORE_PAGE);
+  if (currentScreen != PagedView.INVALID_RESTORE_PAGE) {
+    mWorkspace.setRestorePage(currentScreen);
+  }
+  final long pendingAddContainer=savedState.getLong(RUNTIME_STATE_PENDING_ADD_CONTAINER,-1);
+  final long pendingAddScreen=savedState.getLong(RUNTIME_STATE_PENDING_ADD_SCREEN,-1);
+  if (pendingAddContainer != ItemInfo.NO_ID && pendingAddScreen > -1) {
+    mPendingAddInfo.container=pendingAddContainer;
+    mPendingAddInfo.screenId=pendingAddScreen;
+    mPendingAddInfo.cellX=savedState.getInt(RUNTIME_STATE_PENDING_ADD_CELL_X);
+    mPendingAddInfo.cellY=savedState.getInt(RUNTIME_STATE_PENDING_ADD_CELL_Y);
+    mPendingAddInfo.spanX=savedState.getInt(RUNTIME_STATE_PENDING_ADD_SPAN_X);
+    mPendingAddInfo.spanY=savedState.getInt(RUNTIME_STATE_PENDING_ADD_SPAN_Y);
+    AppWidgetProviderInfo info=savedState.getParcelable(RUNTIME_STATE_PENDING_ADD_WIDGET_INFO);
+    mPendingAddWidgetInfo=info == null ? null : LauncherAppWidgetProviderInfo.fromProviderInfo(this,info);
+    mPendingAddWidgetId=savedState.getInt(RUNTIME_STATE_PENDING_ADD_WIDGET_ID);
+    setWaitingForResult(true);
+    mRestoring=true;
+  }
+  mItemIdToViewId=(HashMap<Integer,Integer>)savedState.getSerializable(RUNTIME_STATE_VIEW_IDS);
+}

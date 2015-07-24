@@ -1,0 +1,5 @@
+{
+  mLauncher=(Launcher)context;
+  mIndexer=new AlphabeticIndexCompat(context);
+  mAppNameComparator=new AppNameComparator(context);
+}

@@ -1,0 +1,6 @@
+{
+  if (mModel.isCurrentCallbacks(this)) {
+    mModel.stopLoader();
+  }
+  return Boolean.TRUE;
+}

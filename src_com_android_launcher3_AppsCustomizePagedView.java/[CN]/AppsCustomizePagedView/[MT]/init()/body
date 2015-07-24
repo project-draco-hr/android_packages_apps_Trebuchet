@@ -1,7 +1,0 @@
-{
-  super.init();
-  mCenterPagesVertically=false;
-  Context context=getContext();
-  Resources r=context.getResources();
-  setDragSlopeThreshold(r.getInteger(R.integer.config_appsCustomizeDragSlopeThreshold) / 100f);
-}

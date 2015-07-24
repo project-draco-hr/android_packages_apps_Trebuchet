@@ -1,0 +1,8 @@
+{
+  if (x < 0 || y < 0 || x > mView.getMeasuredWidth() || y > mView.getMeasuredHeight()) {
+    return INVALID_ID;
+  }
+  mView.pointToCellExact((int)x,(int)y,sTempArray);
+  int id=sTempArray[0] + sTempArray[1] * mView.getCountX();
+  return intersectsValidDropTarget(id);
+}

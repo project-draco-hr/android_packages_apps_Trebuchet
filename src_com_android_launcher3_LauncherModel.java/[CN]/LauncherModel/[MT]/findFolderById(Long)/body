@@ -1,0 +1,5 @@
+{
+synchronized (sBgLock) {
+    return sBgFolders.get(folderId);
+  }
+}

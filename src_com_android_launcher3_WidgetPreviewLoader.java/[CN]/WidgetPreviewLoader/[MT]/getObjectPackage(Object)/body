@@ -1,9 +1,0 @@
-{
-  if (o instanceof AppWidgetProviderInfo) {
-    return ((AppWidgetProviderInfo)o).provider.getPackageName();
-  }
- else {
-    ResolveInfo info=(ResolveInfo)o;
-    return info.activityInfo.packageName;
-  }
-}

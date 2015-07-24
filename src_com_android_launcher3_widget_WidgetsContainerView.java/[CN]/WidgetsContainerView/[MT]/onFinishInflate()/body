@@ -1,0 +1,13 @@
+{
+  mContent=findViewById(R.id.content);
+  mView=(WidgetsRecyclerView)findViewById(R.id.widgets_list_view);
+  mView.setAdapter(mAdapter);
+  mView.setLayoutManager(new LinearLayoutManager(getContext()){
+    @Override protected int getExtraLayoutSpace(    State state){
+      DeviceProfile grid=mLauncher.getDeviceProfile();
+      return super.getExtraLayoutSpace(state) + grid.availableHeightPx * PRELOAD_SCREEN_HEIGHT_MULTIPLE;
+    }
+  }
+);
+  mPadding.set(getPaddingLeft(),getPaddingTop(),getPaddingRight(),getPaddingBottom());
+}

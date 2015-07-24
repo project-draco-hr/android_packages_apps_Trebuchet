@@ -1,0 +1,3 @@
+{
+  return favorite.container == Favorites.CONTAINER_HOTSEAT && favorite.intent != null && (favorite.itemType == Favorites.ITEM_TYPE_APPLICATION || favorite.itemType == Favorites.ITEM_TYPE_SHORTCUT);
+}

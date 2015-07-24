@@ -1,0 +1,4 @@
+MotionEvent ev
+int downX
+int downY
+int lastY

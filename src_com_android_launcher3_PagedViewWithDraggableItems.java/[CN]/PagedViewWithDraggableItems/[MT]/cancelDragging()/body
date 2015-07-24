@@ -1,5 +1,0 @@
-{
-  mIsDragging=false;
-  mLastTouchedItem=null;
-  mIsDragEnabled=false;
-}

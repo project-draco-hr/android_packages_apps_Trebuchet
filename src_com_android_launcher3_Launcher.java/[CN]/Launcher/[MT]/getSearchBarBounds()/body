@@ -1,0 +1,3 @@
+{
+  return mDeviceProfile.getSearchBarBounds(Utilities.isRtl(getResources()));
+}

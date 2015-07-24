@@ -1,0 +1,34 @@
+{
+  mDragInfo=new DragInfo();
+  mDragInfo.info=info;
+  mDragInfo.item=item;
+  mDragInfo.dragType=DragType.ICON;
+  if (info instanceof FolderInfo) {
+    mDragInfo.dragType=DragType.FOLDER;
+  }
+ else   if (info instanceof LauncherAppWidgetInfo) {
+    mDragInfo.dragType=DragType.WIDGET;
+  }
+  CellLayout.CellInfo cellInfo=new CellLayout.CellInfo(item,info);
+  Rect pos=new Rect();
+  mLauncher.getDragLayer().getDescendantRectRelativeToSelf(item,pos);
+  mLauncher.getDragController().prepareAccessibleDrag(pos.centerX(),pos.centerY());
+  Workspace workspace=mLauncher.getWorkspace();
+  Folder folder=workspace.getOpenFolder();
+  if (folder != null) {
+    if (folder.getItemsInReadingOrder().contains(item)) {
+      mDragSource=folder;
+    }
+ else {
+      mLauncher.closeFolder();
+    }
+  }
+  if (mDragSource == null) {
+    mDragSource=workspace;
+  }
+  mDragSource.enableAccessibleDrag(true);
+  mDragSource.startDrag(cellInfo,true);
+  if (mLauncher.getDragController().isDragging()) {
+    mLauncher.getDragController().addDragListener(this);
+  }
+}

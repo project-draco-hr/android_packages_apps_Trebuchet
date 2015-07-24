@@ -1,0 +1,6 @@
+ItemInfo info
+CellLayout targetLayout
+int[] targetCell
+float distance
+View dragOverView
+boolean accessibleDrag

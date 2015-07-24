@@ -1,0 +1,6 @@
+{
+  if (mBitmap != null) {
+    updateDstRectF();
+    canvas.drawBitmap(mBitmap,null,mDstRectF,mPaint);
+  }
+}

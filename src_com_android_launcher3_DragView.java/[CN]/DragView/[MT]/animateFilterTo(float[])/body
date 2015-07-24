@@ -1,0 +1,17 @@
+{
+  float[] oldFilter=mCurrentFilter == null ? new ColorMatrix().getArray() : mCurrentFilter;
+  mCurrentFilter=Arrays.copyOf(oldFilter,oldFilter.length);
+  if (mFilterAnimator != null) {
+    mFilterAnimator.cancel();
+  }
+  mFilterAnimator=ValueAnimator.ofObject(new FloatArrayEvaluator(mCurrentFilter),oldFilter,targetFilter);
+  mFilterAnimator.setDuration(COLOR_CHANGE_DURATION);
+  mFilterAnimator.addUpdateListener(new AnimatorUpdateListener(){
+    @Override public void onAnimationUpdate(    ValueAnimator animation){
+      mPaint.setColorFilter(new ColorMatrixColorFilter(mCurrentFilter));
+      invalidate();
+    }
+  }
+);
+  mFilterAnimator.start();
+}

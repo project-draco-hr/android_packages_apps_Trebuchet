@@ -1,9 +1,0 @@
-{
-  if (isFlingToDelete || !success || (target != mLauncher.getWorkspace() && !(target instanceof DeleteDropTarget) && !(target instanceof Folder))) {
-    mLauncher.exitSpringLoadedDragModeDelayed(true,Launcher.EXIT_SPRINGLOADED_MODE_SHORT_TIMEOUT,null);
-    mLauncher.unlockScreenOrientation(false);
-  }
- else {
-    mLauncher.unlockScreenOrientation(false);
-  }
-}

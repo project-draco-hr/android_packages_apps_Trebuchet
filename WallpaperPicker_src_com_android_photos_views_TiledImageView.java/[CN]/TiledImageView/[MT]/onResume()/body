@@ -1,8 +1,3 @@
 {
-  if (!IS_SUPPORTED) {
-    return;
-  }
-  if (!USE_TEXTURE_VIEW) {
-    mGLSurfaceView.onResume();
-  }
+  mGLSurfaceView.onResume();
 }

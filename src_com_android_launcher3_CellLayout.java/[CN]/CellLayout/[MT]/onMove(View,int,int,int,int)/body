@@ -1,4 +1,0 @@
-{
-  markCellsAsUnoccupiedForView(view);
-  markCellsForView(newCellX,newCellY,newSpanX,newSpanY,mOccupied,true);
-}

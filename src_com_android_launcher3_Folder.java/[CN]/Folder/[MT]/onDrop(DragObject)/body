@@ -8,24 +8,26 @@
     }
 ;
   }
+  if (!mContent.rankOnCurrentPage(mEmptyCellRank)) {
+    mTargetRank=getTargetRank(d,null);
+    mReorderAlarmListener.onAlarm(mReorderAlarm);
+    mOnScrollHintAlarm.cancelAlarm();
+    mScrollPauseAlarm.cancelAlarm();
+  }
+  mContent.completePendingPageChanges();
   View currentDragView;
   ShortcutInfo si=mCurrentDragInfo;
   if (mIsExternalDrag) {
-    si.cellX=mEmptyCell[0];
-    si.cellY=mEmptyCell[1];
+    currentDragView=mContent.createAndAddViewForRank(si,mEmptyCellRank);
     LauncherModel.addOrMoveItemInDatabase(mLauncher,si,mInfo.id,0,si.cellX,si.cellY);
     if (d.dragSource != this) {
       updateItemLocationsInDatabaseBatch();
     }
     mIsExternalDrag=false;
-    currentDragView=createAndAddShortcut(si);
   }
  else {
     currentDragView=mCurrentDragView;
-    CellLayout.LayoutParams lp=(CellLayout.LayoutParams)currentDragView.getLayoutParams();
-    si.cellX=lp.cellX=mEmptyCell[0];
-    si.cellX=lp.cellY=mEmptyCell[1];
-    mContent.addViewToCellLayout(currentDragView,-1,(int)si.id,lp,true);
+    mContent.addViewForRank(currentDragView,si,mEmptyCellRank);
   }
   if (d.dragView.hasDrawn()) {
     float scaleX=getScaleX();
@@ -41,9 +43,13 @@
     currentDragView.setVisibility(VISIBLE);
   }
   mItemsInvalidated=true;
-  setupContentDimensions(getItemCount());
+  rearrangeChildren();
   mSuppressOnAdd=true;
   mInfo.add(si);
   mSuppressOnAdd=false;
   mCurrentDragInfo=null;
+  mDragInProgress=false;
+  if (mContent.getPageCount() > 1) {
+    mInfo.setOption(FolderInfo.FLAG_MULTI_PAGE_ANIMATION,true,mLauncher);
+  }
 }

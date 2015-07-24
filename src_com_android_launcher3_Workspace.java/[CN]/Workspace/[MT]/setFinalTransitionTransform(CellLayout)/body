@@ -1,0 +1,7 @@
+{
+  if (isSwitchingState()) {
+    mCurrentScale=getScaleX();
+    setScaleX(mStateTransitionAnimation.getFinalScale());
+    setScaleY(mStateTransitionAnimation.getFinalScale());
+  }
+}

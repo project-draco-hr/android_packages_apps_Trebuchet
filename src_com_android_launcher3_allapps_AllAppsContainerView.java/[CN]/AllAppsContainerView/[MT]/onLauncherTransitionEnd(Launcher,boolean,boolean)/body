@@ -1,0 +1,5 @@
+{
+  if (toWorkspace) {
+    mSearchBarController.reset();
+  }
+}

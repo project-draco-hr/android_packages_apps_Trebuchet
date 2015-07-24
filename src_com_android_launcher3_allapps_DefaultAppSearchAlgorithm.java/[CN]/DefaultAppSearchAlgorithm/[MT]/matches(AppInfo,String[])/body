@@ -1,0 +1,17 @@
+{
+  String title=info.title.toString();
+  String[] words=SPLIT_PATTERN.split(title.toLowerCase());
+  for (int qi=0; qi < queryWords.length; qi++) {
+    boolean foundMatch=false;
+    for (int i=0; i < words.length; i++) {
+      if (words[i].startsWith(queryWords[qi])) {
+        foundMatch=true;
+        break;
+      }
+    }
+    if (!foundMatch) {
+      return false;
+    }
+  }
+  return true;
+}

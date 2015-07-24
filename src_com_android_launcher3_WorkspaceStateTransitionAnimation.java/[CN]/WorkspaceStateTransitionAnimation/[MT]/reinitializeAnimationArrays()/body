@@ -1,0 +1,8 @@
+{
+  final int childCount=mWorkspace.getChildCount();
+  if (mLastChildCount == childCount)   return;
+  mOldBackgroundAlphas=new float[childCount];
+  mOldAlphas=new float[childCount];
+  mNewBackgroundAlphas=new float[childCount];
+  mNewAlphas=new float[childCount];
+}

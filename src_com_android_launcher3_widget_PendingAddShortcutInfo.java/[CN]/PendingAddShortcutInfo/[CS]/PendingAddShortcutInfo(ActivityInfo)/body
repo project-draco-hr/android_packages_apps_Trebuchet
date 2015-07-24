@@ -1,0 +1,5 @@
+{
+  this.activityInfo=activityInfo;
+  componentName=new ComponentName(activityInfo.packageName,activityInfo.name);
+  itemType=LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT;
+}

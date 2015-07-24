@@ -1,6 +1,0 @@
-{
-  canvas.save();
-  canvas.clipRect(getScrollX() + getPaddingLeft(),getScrollY() + getPaddingTop(),getScrollX() + getRight() - getLeft() - getPaddingRight(),getScrollY() + getBottom() - getTop() - getPaddingBottom());
-  super.onDraw(canvas);
-  canvas.restore();
-}

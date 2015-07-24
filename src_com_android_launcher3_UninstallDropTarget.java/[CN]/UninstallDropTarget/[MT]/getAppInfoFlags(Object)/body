@@ -1,0 +1,14 @@
+{
+  if (item instanceof AppInfo) {
+    AppInfo info=(AppInfo)item;
+    return Pair.create(info.componentName,info.flags);
+  }
+ else   if (item instanceof ShortcutInfo) {
+    ShortcutInfo info=(ShortcutInfo)item;
+    ComponentName component=info.getTargetComponent();
+    if (info.itemType == LauncherSettings.BaseLauncherColumns.ITEM_TYPE_APPLICATION && component != null) {
+      return Pair.create(component,info.flags);
+    }
+  }
+  return null;
+}

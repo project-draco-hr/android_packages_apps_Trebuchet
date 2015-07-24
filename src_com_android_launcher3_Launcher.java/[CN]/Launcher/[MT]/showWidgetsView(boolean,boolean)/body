@@ -1,0 +1,13 @@
+{
+  if (LOGD)   Log.d(TAG,"showWidgetsView:" + animated + " resetPageToZero:"+ resetPageToZero);
+  if (resetPageToZero) {
+    mWidgetsView.scrollToTop();
+  }
+  showAppsOrWidgets(State.WIDGETS,animated,false);
+  mWidgetsView.post(new Runnable(){
+    @Override public void run(){
+      mWidgetsView.requestFocus();
+    }
+  }
+);
+}

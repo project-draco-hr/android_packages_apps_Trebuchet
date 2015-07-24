@@ -1,5 +1,4 @@
 {
-  Launcher.addDumpLog(TAG,"11683562 - removeExtraEmptyScreen()",true);
   if (mLauncher.isWorkspaceLoading()) {
     Launcher.addDumpLog(TAG,"    - workspace loading, skip",true);
     return;
@@ -21,6 +20,7 @@
       fadeAndRemoveEmptyScreen(SNAP_OFF_EMPTY_SCREEN_DURATION,FADE_EMPTY_SCREEN_DURATION,onComplete,stripEmptyScreens);
     }
  else {
+      snapToPage(getNextPage(),0);
       fadeAndRemoveEmptyScreen(0,FADE_EMPTY_SCREEN_DURATION,onComplete,stripEmptyScreens);
     }
     return;

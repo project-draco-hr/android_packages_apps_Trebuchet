@@ -21,7 +21,7 @@
   rotateMatrix.mapPoints(rotatedBounds);
   rotatedBounds[0]=Math.abs(rotatedBounds[0]);
   rotatedBounds[1]=Math.abs(rotatedBounds[1]);
-  RectF cropRect=WallpaperCropActivity.getMaxCropRect((int)rotatedBounds[0],(int)rotatedBounds[1],width,height,leftAligned);
+  RectF cropRect=Utils.getMaxCropRect((int)rotatedBounds[0],(int)rotatedBounds[1],width,height,leftAligned);
   cropTask.setCropBounds(cropRect);
   if (cropTask.cropBitmap()) {
     return cropTask.getCroppedBitmap();

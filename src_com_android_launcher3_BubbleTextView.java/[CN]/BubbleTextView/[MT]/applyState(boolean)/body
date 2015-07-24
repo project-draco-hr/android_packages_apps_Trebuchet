@@ -3,16 +3,14 @@
     ShortcutInfo info=(ShortcutInfo)getTag();
     final boolean isPromise=info.isPromise();
     final int progressLevel=isPromise ? ((info.hasStatusFlag(ShortcutInfo.FLAG_INSTALL_SESSION_ACTIVE) ? info.getInstallProgress() : 0)) : 100;
-    Drawable[] drawables=getCompoundDrawables();
-    Drawable top=drawables[1];
-    if (top != null) {
+    if (mIcon != null) {
       final PreloadIconDrawable preloadDrawable;
-      if (top instanceof PreloadIconDrawable) {
-        preloadDrawable=(PreloadIconDrawable)top;
+      if (mIcon instanceof PreloadIconDrawable) {
+        preloadDrawable=(PreloadIconDrawable)mIcon;
       }
  else {
-        preloadDrawable=new PreloadIconDrawable(top,getPreloaderTheme());
-        setCompoundDrawables(drawables[0],preloadDrawable,drawables[2],drawables[3]);
+        preloadDrawable=new PreloadIconDrawable(mIcon,getPreloaderTheme());
+        setIcon(preloadDrawable,mIconSize);
       }
       preloadDrawable.setLevel(progressLevel);
       if (promiseStateChanged) {

@@ -1,16 +1,16 @@
 {
-  iconSizePx=(int)(DynamicGrid.pxFromDp(iconSize,dm) * scale);
-  iconTextSizePx=(int)(DynamicGrid.pxFromSp(iconTextSize,dm) * scale);
+  iconSizePx=(int)(Utilities.pxFromDp(inv.iconSize,dm) * scale);
+  iconTextSizePx=(int)(Utilities.pxFromSp(inv.iconTextSize,dm) * scale);
   iconDrawablePaddingPx=drawablePadding;
-  hotseatIconSizePx=(int)(DynamicGrid.pxFromDp(hotseatIconSize,dm) * scale);
-  searchBarSpaceWidthPx=Math.min(widthPx,resources.getDimensionPixelSize(R.dimen.dynamic_grid_search_bar_max_width));
-  searchBarSpaceHeightPx=getSearchBarTopOffset() + resources.getDimensionPixelSize(R.dimen.dynamic_grid_search_bar_height);
+  hotseatIconSizePx=(int)(Utilities.pxFromDp(inv.hotseatIconSize,dm) * scale);
+  searchBarSpaceWidthPx=Math.min(widthPx,res.getDimensionPixelSize(R.dimen.dynamic_grid_search_bar_max_width));
+  searchBarSpaceHeightPx=getSearchBarTopOffset() + res.getDimensionPixelSize(R.dimen.dynamic_grid_search_bar_height);
   Paint textPaint=new Paint();
   textPaint.setTextSize(iconTextSizePx);
   FontMetrics fm=textPaint.getFontMetrics();
   cellWidthPx=iconSizePx;
   cellHeightPx=iconSizePx + iconDrawablePaddingPx + (int)Math.ceil(fm.bottom - fm.top);
-  final float scaleDps=resources.getDimensionPixelSize(R.dimen.dragViewScale);
+  final float scaleDps=res.getDimensionPixelSize(R.dimen.dragViewScale);
   dragViewScale=(iconSizePx + scaleDps) / iconSizePx;
   hotseatBarHeightPx=iconSizePx + 4 * edgeMarginPx;
   hotseatCellWidthPx=iconSizePx;
@@ -19,21 +19,4 @@
   folderCellHeightPx=cellHeightPx + edgeMarginPx;
   folderBackgroundOffset=-edgeMarginPx;
   folderIconSizePx=iconSizePx + 2 * -folderBackgroundOffset;
-  allAppsCellWidthPx=allAppsIconSizePx;
-  allAppsCellHeightPx=allAppsIconSizePx + drawablePadding + iconTextSizePx;
-  int maxLongEdgeCellCount=resources.getInteger(R.integer.config_dynamic_grid_max_long_edge_cell_count);
-  int maxShortEdgeCellCount=resources.getInteger(R.integer.config_dynamic_grid_max_short_edge_cell_count);
-  int minEdgeCellCount=resources.getInteger(R.integer.config_dynamic_grid_min_edge_cell_count);
-  int maxRows=(isLandscape ? maxShortEdgeCellCount : maxLongEdgeCellCount);
-  int maxCols=(isLandscape ? maxLongEdgeCellCount : maxShortEdgeCellCount);
-  if (allAppsShortEdgeCount > 0 && allAppsLongEdgeCount > 0) {
-    allAppsNumRows=isLandscape ? allAppsShortEdgeCount : allAppsLongEdgeCount;
-    allAppsNumCols=isLandscape ? allAppsLongEdgeCount : allAppsShortEdgeCount;
-  }
- else {
-    allAppsNumRows=(availableHeightPx - pageIndicatorHeightPx) / (allAppsCellHeightPx + allAppsCellPaddingPx);
-    allAppsNumRows=Math.max(minEdgeCellCount,Math.min(maxRows,allAppsNumRows));
-    allAppsNumCols=(availableWidthPx) / (allAppsCellWidthPx + allAppsCellPaddingPx);
-    allAppsNumCols=Math.max(minEdgeCellCount,Math.min(maxCols,allAppsNumCols));
-  }
 }

@@ -1,0 +1,8 @@
+{
+  if (mBitmap != null) {
+    mPaint.setAlpha(SHADOW_LOW_ALPHA);
+    canvas.drawBitmap(mBitmap,0,0,mPaint);
+    mPaint.setAlpha(SHADOW_HIGH_ALPHA);
+    canvas.drawBitmap(mBitmap,0,mShadowOffset,mPaint);
+  }
+}

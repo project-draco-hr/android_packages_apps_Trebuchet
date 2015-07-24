@@ -1,0 +1,5 @@
+Callbacks oldCallbacks
+ArrayList<ItemInfo> workspaceItems
+ArrayList<LauncherAppWidgetInfo> appWidgets
+LongArrayMap<FolderInfo> folders
+ArrayList<Runnable> deferredBindRunnables

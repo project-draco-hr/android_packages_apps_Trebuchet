@@ -1,0 +1,26 @@
+{
+  boolean isPortrait=!mLauncher.getDeviceProfile().isLandscape;
+  if (mLauncher.getHotseat() != null && isPortrait) {
+    Rect r=new Rect();
+    mLauncher.getHotseat().getHitRect(r);
+    if (r.contains(x,y)) {
+      return false;
+    }
+  }
+  boolean result=false;
+  if (!workspaceInModalState() && !mIsSwitchingState && getOpenFolder() == null) {
+    mInScrollArea=true;
+    final int page=getNextPage() + (direction == DragController.SCROLL_LEFT ? -1 : 1);
+    setCurrentDropLayout(null);
+    if (0 <= page && page < getChildCount()) {
+      if (getScreenIdForPageIndex(page) == CUSTOM_CONTENT_SCREEN_ID) {
+        return false;
+      }
+      CellLayout layout=(CellLayout)getChildAt(page);
+      setCurrentDragOverlappingLayout(layout);
+      invalidate();
+      result=true;
+    }
+  }
+  return result;
+}

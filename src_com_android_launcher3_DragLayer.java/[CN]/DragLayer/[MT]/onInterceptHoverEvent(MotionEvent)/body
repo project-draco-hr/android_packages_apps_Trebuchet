@@ -10,11 +10,11 @@
     AccessibilityManager accessibilityManager=(AccessibilityManager)getContext().getSystemService(Context.ACCESSIBILITY_SERVICE);
     if (accessibilityManager.isTouchExplorationEnabled()) {
       final int action=ev.getAction();
-      boolean isOverFolder;
+      boolean isOverFolderOrSearchBar;
 switch (action) {
 case MotionEvent.ACTION_HOVER_ENTER:
-        isOverFolder=isEventOverFolder(currentFolder,ev);
-      if (!isOverFolder) {
+        isOverFolderOrSearchBar=isEventOverFolder(currentFolder,ev) || (isInAccessibleDrag() && isEventOverDropTargetBar(ev));
+      if (!isOverFolderOrSearchBar) {
         sendTapOutsideFolderAccessibilityEvent(currentFolder.isEditingName());
         mHoverPointClosesFolder=true;
         return true;
@@ -22,13 +22,13 @@ case MotionEvent.ACTION_HOVER_ENTER:
     mHoverPointClosesFolder=false;
   break;
 case MotionEvent.ACTION_HOVER_MOVE:
-isOverFolder=isEventOverFolder(currentFolder,ev);
-if (!isOverFolder && !mHoverPointClosesFolder) {
+isOverFolderOrSearchBar=isEventOverFolder(currentFolder,ev) || (isInAccessibleDrag() && isEventOverDropTargetBar(ev));
+if (!isOverFolderOrSearchBar && !mHoverPointClosesFolder) {
 sendTapOutsideFolderAccessibilityEvent(currentFolder.isEditingName());
 mHoverPointClosesFolder=true;
 return true;
 }
- else if (!isOverFolder) {
+ else if (!isOverFolderOrSearchBar) {
 return true;
 }
 mHoverPointClosesFolder=false;

@@ -1,0 +1,16 @@
+{
+  if (!changedInfo.isEmpty()) {
+    DeferredWidgetRefresh widgetRefresh=new DeferredWidgetRefresh(changedInfo,mLauncher.getAppWidgetHost());
+    if (LauncherModel.getProviderInfo(getContext(),changedInfo.get(0).providerName,changedInfo.get(0).user) != null) {
+      widgetRefresh.run();
+    }
+ else {
+      for (      LauncherAppWidgetInfo info : changedInfo) {
+        if (info.hostView instanceof PendingAppWidgetHostView) {
+          info.installProgress=100;
+          ((PendingAppWidgetHostView)info.hostView).applyState();
+        }
+      }
+    }
+  }
+}

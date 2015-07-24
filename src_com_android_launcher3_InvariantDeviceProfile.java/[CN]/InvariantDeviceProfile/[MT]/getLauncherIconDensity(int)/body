@@ -1,0 +1,11 @@
+{
+  int[] densityBuckets=new int[]{DisplayMetrics.DENSITY_LOW,DisplayMetrics.DENSITY_MEDIUM,DisplayMetrics.DENSITY_TV,DisplayMetrics.DENSITY_HIGH,DisplayMetrics.DENSITY_XHIGH,DisplayMetrics.DENSITY_XXHIGH,DisplayMetrics.DENSITY_XXXHIGH};
+  int density=DisplayMetrics.DENSITY_XXXHIGH;
+  for (int i=densityBuckets.length - 1; i >= 0; i--) {
+    float expectedSize=ICON_SIZE_DEFINED_IN_APP_DP * densityBuckets[i] / DisplayMetrics.DENSITY_DEFAULT;
+    if (expectedSize >= requiredSize) {
+      density=densityBuckets[i];
+    }
+  }
+  return density;
+}

@@ -1,9 +1,0 @@
-{
-  if (tag.equals(APPS_TAB_TAG)) {
-    return AppsCustomizePagedView.ContentType.Applications;
-  }
- else   if (tag.equals(WIDGETS_TAB_TAG)) {
-    return AppsCustomizePagedView.ContentType.Widgets;
-  }
-  return AppsCustomizePagedView.ContentType.Applications;
-}

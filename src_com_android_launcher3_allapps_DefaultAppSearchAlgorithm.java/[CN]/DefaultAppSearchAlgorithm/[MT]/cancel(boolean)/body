@@ -1,0 +1,5 @@
+{
+  if (interruptActiveRequests) {
+    mResultHandler.removeCallbacksAndMessages(null);
+  }
+}

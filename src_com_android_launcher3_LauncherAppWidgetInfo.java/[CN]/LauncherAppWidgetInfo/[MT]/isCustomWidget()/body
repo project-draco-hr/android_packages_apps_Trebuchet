@@ -1,0 +1,3 @@
+{
+  return appWidgetId == CUSTOM_WIDGET_ID;
+}

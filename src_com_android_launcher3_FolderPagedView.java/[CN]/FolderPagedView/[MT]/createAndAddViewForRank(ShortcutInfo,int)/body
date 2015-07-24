@@ -1,0 +1,5 @@
+{
+  View icon=createNewView(item);
+  addViewForRank(icon,item,rank);
+  return icon;
+}

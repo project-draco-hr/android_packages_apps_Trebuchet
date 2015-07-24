@@ -1,16 +1,11 @@
 {
   mQSBSearchBar=qsb;
   if (mQSBSearchBar != null) {
-    if (mEnableDropDownDropTargets) {
-      mQSBSearchBarAnim=LauncherAnimUtils.ofFloat(mQSBSearchBar,"translationY",0,-mBarHeight);
-    }
- else {
-      mQSBSearchBarAnim=LauncherAnimUtils.ofFloat(mQSBSearchBar,"alpha",1f,0f);
-    }
-    setupAnimation(mQSBSearchBarAnim,mQSBSearchBar);
+    mHideSearchBarAnim=LauncherAnimUtils.ofFloat(mQSBSearchBar,"alpha",1f,0f);
+    setupAnimation(mHideSearchBarAnim,mQSBSearchBar);
   }
  else {
-    mQSBSearchBarAnim=ValueAnimator.ofFloat(0,0);
-    mQSBSearchBarAnim.setDuration(sTransitionInDuration);
+    mHideSearchBarAnim=ValueAnimator.ofFloat(0,0);
+    mHideSearchBarAnim.setDuration(TRANSITION_DURATION);
   }
 }

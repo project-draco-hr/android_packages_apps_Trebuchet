@@ -1,0 +1,5 @@
+{
+  mPaint.setAntiAlias(true);
+  mPaint.setStyle(Paint.Style.FILL);
+  mInterpolator=new DecelerateInterpolator();
+}

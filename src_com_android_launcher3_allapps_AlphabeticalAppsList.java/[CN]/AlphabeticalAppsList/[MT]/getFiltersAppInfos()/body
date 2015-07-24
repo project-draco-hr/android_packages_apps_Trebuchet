@@ -1,0 +1,13 @@
+{
+  if (mSearchResults == null) {
+    return mApps;
+  }
+  ArrayList<AppInfo> result=new ArrayList<>();
+  for (  ComponentKey key : mSearchResults) {
+    AppInfo match=mComponentToAppMap.get(key);
+    if (match != null) {
+      result.add(match);
+    }
+  }
+  return result;
+}

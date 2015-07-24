@@ -1,0 +1,25 @@
+{
+  mHomescreenApps=new ArrayList<>();
+  mWorkFolderApps=new ArrayList<>();
+  HashSet<String> packageSet=new HashSet<>();
+  final boolean userAppsExisted=getUserApps(packageSet);
+  boolean newPackageAdded=false;
+  for (  LauncherActivityInfoCompat info : apps) {
+    String packageName=info.getComponentName().getPackageName();
+    if (!packageSet.contains(packageName)) {
+      packageSet.add(packageName);
+      newPackageAdded=true;
+      try {
+        PackageInfo pkgInfo=mContext.getPackageManager().getPackageInfo(packageName,PackageManager.GET_UNINSTALLED_PACKAGES);
+        markForAddition(info,pkgInfo.firstInstallTime);
+      }
+ catch (      NameNotFoundException e) {
+        Log.e(TAG,"Unknown package " + packageName,e);
+      }
+    }
+  }
+  if (newPackageAdded) {
+    mPrefs.edit().putStringSet(mPackageSetKey,packageSet).apply();
+    finalizeAdditions(userAppsExisted);
+  }
+}

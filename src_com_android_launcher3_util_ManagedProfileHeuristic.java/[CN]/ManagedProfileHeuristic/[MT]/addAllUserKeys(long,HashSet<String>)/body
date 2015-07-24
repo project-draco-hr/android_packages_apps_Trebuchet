@@ -1,0 +1,4 @@
+{
+  keysOut.add(INSTALLED_PACKAGES_PREFIX + userSerial);
+  keysOut.add(USER_FOLDER_ID_PREFIX + userSerial);
+}

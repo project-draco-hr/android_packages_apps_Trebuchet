@@ -1,0 +1,3 @@
+Cursor c
+int iconIndex
+BitmapFactory.Options options

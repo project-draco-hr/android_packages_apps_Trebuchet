@@ -1,0 +1,6 @@
+{
+  if (d.dragSource instanceof UninstallSource) {
+    ((UninstallSource)d.dragSource).deferCompleteDropAfterUninstallActivity();
+  }
+  super.onDrop(d);
+}

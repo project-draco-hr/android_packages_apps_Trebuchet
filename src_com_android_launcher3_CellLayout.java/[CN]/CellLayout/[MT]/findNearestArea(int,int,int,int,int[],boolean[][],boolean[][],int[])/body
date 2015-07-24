@@ -13,7 +13,7 @@
           }
         }
       }
-      float distance=(float)Math.sqrt((x - cellX) * (x - cellX) + (y - cellY) * (y - cellY));
+      float distance=(float)Math.hypot(x - cellX,y - cellY);
       int[] curDirection=mTmpPoint;
       computeDirectionVector(x - cellX,y - cellY,curDirection);
       int curDirectionScore=direction[0] * curDirection[0] + direction[1] * curDirection[1];

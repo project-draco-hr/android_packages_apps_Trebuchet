@@ -1,0 +1,8 @@
+{
+  if (Utilities.ALLOW_ROTATION_PREFERENCE_KEY.equals(settings)) {
+    mRotationEnabled=value;
+    if (!waitUntilResume(mUpdateOrientationRunnable,true)) {
+      mUpdateOrientationRunnable.run();
+    }
+  }
+}

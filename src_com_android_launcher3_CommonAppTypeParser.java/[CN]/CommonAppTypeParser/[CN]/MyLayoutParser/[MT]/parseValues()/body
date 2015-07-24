@@ -1,0 +1,11 @@
+{
+  XmlResourceParser parser=mSourceRes.getXml(mLayoutId);
+  try {
+    beginDocument(parser,mRootTag);
+    new ResolveParser().parseAndAdd(parser);
+  }
+ catch (  IOException|XmlPullParserException e) {
+    Log.e(TAG,"Unable to parse default app info",e);
+  }
+  parser.close();
+}

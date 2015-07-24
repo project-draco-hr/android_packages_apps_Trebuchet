@@ -1,6 +1,8 @@
 {
   final Context context=getContext();
+  StrictMode.ThreadPolicy oldPolicy=StrictMode.allowThreadDiskWrites();
   mOpenHelper=new DatabaseHelper(context);
+  StrictMode.setThreadPolicy(oldPolicy);
   LauncherAppState.setLauncherProvider(this);
   return true;
 }

@@ -1,0 +1,3 @@
+TransitionStates states
+boolean animated
+int duration

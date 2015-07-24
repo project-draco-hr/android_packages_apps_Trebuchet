@@ -7,18 +7,14 @@
     }
   }
 ;
-  if (!mDeferringForDelete) {
-    mPostReorderingPreZoomInRunnable=new Runnable(){
-      public void run(){
-        onCompleteRunnable.run();
-        enableFreeScroll();
-      }
+  mPostReorderingPreZoomInRunnable=new Runnable(){
+    public void run(){
+      onCompleteRunnable.run();
+      enableFreeScroll();
     }
+  }
 ;
-    mPostReorderingPreZoomInRemainingAnimationCount=NUM_ANIMATIONS_RUNNING_BEFORE_ZOOM_OUT;
-    snapToPage(indexOfChild(mDragView),0);
-    animateDragViewToOriginalPosition();
-  }
- else {
-  }
+  mPostReorderingPreZoomInRemainingAnimationCount=NUM_ANIMATIONS_RUNNING_BEFORE_ZOOM_OUT;
+  snapToPage(indexOfChild(mDragView),0);
+  animateDragViewToOriginalPosition();
 }

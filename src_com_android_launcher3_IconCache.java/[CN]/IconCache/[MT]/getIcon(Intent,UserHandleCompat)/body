@@ -4,6 +4,6 @@
     return getDefaultIcon(user);
   }
   LauncherActivityInfoCompat launcherActInfo=mLauncherApps.resolveActivity(intent,user);
-  CacheEntry entry=cacheLocked(component,launcherActInfo,null,user,true);
+  CacheEntry entry=cacheLocked(component,launcherActInfo,user,true,false);
   return entry.icon;
 }

@@ -1,9 +1,0 @@
-{
-  if (waitUntilResume(mBindPackagesUpdatedRunnable,true)) {
-    mWidgetsAndShortcuts=widgetsAndShortcuts;
-    return;
-  }
-  if (mAppsCustomizeContent != null) {
-    mAppsCustomizeContent.onPackagesUpdated(widgetsAndShortcuts);
-  }
-}

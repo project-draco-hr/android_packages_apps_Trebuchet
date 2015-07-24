@@ -1,0 +1,9 @@
+{
+  InvariantDeviceProfile profile=LauncherAppState.getInstance().getInvariantDeviceProfile();
+  mInfo=info;
+  mWidgetName.setText(AppWidgetManagerCompat.getInstance(getContext()).loadLabel(info));
+  int hSpan=Math.min(info.getSpanX(mLauncher),profile.numColumns);
+  int vSpan=Math.min(info.getSpanY(mLauncher),profile.numRows);
+  mWidgetDims.setText(String.format(mDimensionsFormatString,hSpan,vSpan));
+  mWidgetPreviewLoader=loader;
+}

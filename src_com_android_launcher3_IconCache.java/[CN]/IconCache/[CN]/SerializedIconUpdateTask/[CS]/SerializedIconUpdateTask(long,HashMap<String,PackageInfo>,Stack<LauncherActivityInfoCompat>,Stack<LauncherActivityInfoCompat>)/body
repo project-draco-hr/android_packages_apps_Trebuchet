@@ -1,0 +1,6 @@
+{
+  mUserSerial=userSerial;
+  mPkgInfoMap=pkgInfoMap;
+  mAppsToAdd=appsToAdd;
+  mAppsToUpdate=appsToUpdate;
+}

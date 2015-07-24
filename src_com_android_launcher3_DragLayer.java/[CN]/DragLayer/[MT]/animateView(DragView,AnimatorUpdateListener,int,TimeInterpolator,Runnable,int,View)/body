@@ -1,6 +1,5 @@
 {
   if (mDropAnim != null)   mDropAnim.cancel();
-  if (mFadeOutAnim != null)   mFadeOutAnim.cancel();
   mDropView=view;
   mDropView.cancelAnimation();
   mDropView.resetLayoutParams();
@@ -22,11 +21,8 @@ switch (animationEndStyle) {
 case ANIMATION_END_DISAPPEAR:
         clearAnimatedView();
       break;
-case ANIMATION_END_FADE_OUT:
-    fadeOutDragView();
-  break;
 case ANIMATION_END_REMAIN_VISIBLE:
-break;
+    break;
 }
 }
 }

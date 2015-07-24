@@ -1,6 +1,0 @@
-{
-  if (launchIntent != null && Intent.ACTION_MAIN.equals(launchIntent.getAction()) && launchIntent.getComponent() != null && launchIntent.getCategories() != null && launchIntent.getCategories().size() == 1 && launchIntent.hasCategory(Intent.CATEGORY_LAUNCHER) && launchIntent.getExtras() == null && TextUtils.isEmpty(launchIntent.getDataString())) {
-    return false;
-  }
-  return true;
-}

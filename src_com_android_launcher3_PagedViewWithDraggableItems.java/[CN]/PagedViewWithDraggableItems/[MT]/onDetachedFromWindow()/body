@@ -1,4 +1,0 @@
-{
-  cancelDragging();
-  super.onDetachedFromWindow();
-}

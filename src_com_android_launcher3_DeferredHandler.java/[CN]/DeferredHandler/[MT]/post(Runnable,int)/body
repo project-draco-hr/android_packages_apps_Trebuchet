@@ -1,8 +1,0 @@
-{
-synchronized (mQueue) {
-    mQueue.add(new Pair<Runnable,Integer>(runnable,type));
-    if (mQueue.size() == 1) {
-      scheduleNextLocked();
-    }
-  }
-}

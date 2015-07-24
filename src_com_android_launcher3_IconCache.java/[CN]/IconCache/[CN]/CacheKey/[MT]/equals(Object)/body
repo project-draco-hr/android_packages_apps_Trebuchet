@@ -1,4 +1,0 @@
-{
-  CacheKey other=(CacheKey)o;
-  return other.componentName.equals(componentName) && other.user.equals(user);
-}

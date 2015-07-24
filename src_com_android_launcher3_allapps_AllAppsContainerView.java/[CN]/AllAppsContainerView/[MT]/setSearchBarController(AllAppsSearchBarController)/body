@@ -1,0 +1,13 @@
+{
+  if (mSearchBarController != null) {
+    throw new RuntimeException("Expected search bar controller to only be set once");
+  }
+  mSearchBarController=searchController;
+  mSearchBarController.initialize(mApps,this);
+  View searchBarView=searchController.getView(mSearchBarContainerView);
+  mSearchBarContainerView.addView(searchBarView);
+  mSearchBarContainerView.setVisibility(View.VISIBLE);
+  mSearchBarView=searchBarView;
+  setHasSearchBar();
+  updateBackgroundAndPaddings();
+}

@@ -1,0 +1,7 @@
+{
+  float d=dist(x0,y0,x1,y1);
+  if (Float.compare(d,0f) == 0) {
+    return Float.POSITIVE_INFINITY;
+  }
+  return (float)(WEIGHT_EFFICIENT / Math.pow(d,pow));
+}

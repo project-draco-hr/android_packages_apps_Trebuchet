@@ -1,0 +1,10 @@
+{
+  if (mSpanX < 0 || mSpanY < 0 || mMinSpanX < 0 || mMinSpanY < 0) {
+    int[] minResizeSpan=launcher.getMinSpanForWidget(this);
+    int[] span=launcher.getSpanForWidget(this);
+    mSpanX=span[0];
+    mSpanY=span[1];
+    mMinSpanX=minResizeSpan[0];
+    mMinSpanY=minResizeSpan[1];
+  }
+}

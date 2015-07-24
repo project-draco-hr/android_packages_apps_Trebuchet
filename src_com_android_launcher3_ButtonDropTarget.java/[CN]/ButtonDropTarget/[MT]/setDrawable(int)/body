@@ -1,0 +1,9 @@
+{
+  mDrawable=getResources().getDrawable(resId);
+  if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+    setCompoundDrawablesRelativeWithIntrinsicBounds(mDrawable,null,null,null);
+  }
+ else {
+    setCompoundDrawablesWithIntrinsicBounds(mDrawable,null,null,null);
+  }
+}

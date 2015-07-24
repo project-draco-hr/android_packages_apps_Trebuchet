@@ -1,9 +1,0 @@
-{
-  if (app == null) {
-    mReplayPending=true;
-    if (DEBUG)     Log.d(TAG,"app is null, delaying send");
-  }
- else {
-    app.setPackageState(updates);
-  }
-}

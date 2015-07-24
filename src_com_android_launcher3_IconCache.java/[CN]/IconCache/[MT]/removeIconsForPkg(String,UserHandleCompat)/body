@@ -1,0 +1,5 @@
+{
+  removeFromMemCacheLocked(packageName,user);
+  long userSerial=mUserManager.getSerialNumberForUser(user);
+  mIconDb.getWritableDatabase().delete(IconDB.TABLE_NAME,IconDB.COLUMN_COMPONENT + " LIKE ? AND " + IconDB.COLUMN_USER+ " = ?",new String[]{packageName + "/%",Long.toString(userSerial)});
+}

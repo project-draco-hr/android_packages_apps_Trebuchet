@@ -1,5 +1,0 @@
-{
-  mDynamicGrid=createDynamicGrid(context,mDynamicGrid);
-  mDynamicGrid.getDeviceProfile().addCallback(this);
-  return mDynamicGrid.getDeviceProfile();
-}

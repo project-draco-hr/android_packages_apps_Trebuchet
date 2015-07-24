@@ -1,6 +1,0 @@
-{
-  mUseQueue=false;
-  if (mFinishedBind) {
-    replayUpdates();
-  }
-}

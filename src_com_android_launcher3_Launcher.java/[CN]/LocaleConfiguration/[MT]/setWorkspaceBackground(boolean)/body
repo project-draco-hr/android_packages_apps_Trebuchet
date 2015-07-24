@@ -1,3 +1,0 @@
-{
-  mLauncherView.setBackground(workspace ? mWorkspaceBackgroundDrawable : null);
-}

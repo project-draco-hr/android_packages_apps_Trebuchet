@@ -1,0 +1,9 @@
+{
+  this.componentName=info.getComponentName();
+  this.container=ItemInfo.NO_ID;
+  flags=initFlags(info);
+  firstInstallTime=info.getFirstInstallTime();
+  iconCache.getTitleAndIcon(this,info,true);
+  intent=makeLaunchIntent(context,info,user);
+  this.user=user;
+}

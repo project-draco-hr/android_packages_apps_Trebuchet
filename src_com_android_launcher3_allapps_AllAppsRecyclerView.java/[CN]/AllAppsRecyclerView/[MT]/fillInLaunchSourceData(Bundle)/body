@@ -1,0 +1,9 @@
+{
+  sourceData.putString(Stats.SOURCE_EXTRA_CONTAINER,Stats.CONTAINER_ALL_APPS);
+  if (mApps.hasFilter()) {
+    sourceData.putString(Stats.SOURCE_EXTRA_SUB_CONTAINER,Stats.SUB_CONTAINER_ALL_APPS_SEARCH);
+  }
+ else {
+    sourceData.putString(Stats.SOURCE_EXTRA_SUB_CONTAINER,Stats.SUB_CONTAINER_ALL_APPS_A_Z);
+  }
+}

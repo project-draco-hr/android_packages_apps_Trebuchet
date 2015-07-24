@@ -1,0 +1,13 @@
+{
+  float scale=1f;
+  int drawablePadding=iconDrawablePaddingOriginalPx;
+  updateIconSize(1f,drawablePadding,res,dm);
+  float usedHeight=(cellHeightPx * inv.numRows);
+  Rect workspacePadding=getWorkspacePadding(false);
+  int maxHeight=(availableHeightPx - workspacePadding.top - workspacePadding.bottom);
+  if (usedHeight > maxHeight) {
+    scale=maxHeight / usedHeight;
+    drawablePadding=0;
+  }
+  updateIconSize(scale,drawablePadding,res,dm);
+}

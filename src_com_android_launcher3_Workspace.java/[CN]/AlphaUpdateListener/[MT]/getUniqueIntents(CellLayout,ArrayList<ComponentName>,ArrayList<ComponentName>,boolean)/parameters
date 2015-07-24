@@ -1,4 +1,0 @@
-CellLayout cl
-ArrayList<ComponentName> uniqueIntents
-ArrayList<ComponentName> duplicates
-boolean stripDuplicates

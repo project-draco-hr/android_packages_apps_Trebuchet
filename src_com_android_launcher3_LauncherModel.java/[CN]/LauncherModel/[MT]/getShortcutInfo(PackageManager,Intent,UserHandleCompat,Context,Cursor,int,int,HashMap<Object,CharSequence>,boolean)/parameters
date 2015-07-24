@@ -1,9 +1,0 @@
-PackageManager manager
-Intent intent
-UserHandleCompat user
-Context context
-Cursor c
-int iconIndex
-int titleIndex
-HashMap<Object,CharSequence> labelCache
-boolean allowMissingTarget

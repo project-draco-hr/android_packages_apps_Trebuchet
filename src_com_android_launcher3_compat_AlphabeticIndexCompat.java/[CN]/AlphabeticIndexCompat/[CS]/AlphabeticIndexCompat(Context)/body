@@ -1,0 +1,31 @@
+{
+  super();
+  try {
+    Locale curLocale=context.getResources().getConfiguration().locale;
+    Class clazz=Class.forName("libcore.icu.AlphabeticIndex");
+    Constructor ctor=clazz.getConstructor(Locale.class);
+    mAddLabelsMethod=clazz.getDeclaredMethod("addLabels",Locale.class);
+    mSetMaxLabelCountMethod=clazz.getDeclaredMethod("setMaxLabelCount",int.class);
+    mGetBucketIndexMethod=clazz.getDeclaredMethod("getBucketIndex",String.class);
+    mGetBucketLabelMethod=clazz.getDeclaredMethod("getBucketLabel",int.class);
+    mAlphabeticIndex=ctor.newInstance(curLocale);
+    try {
+      if (!curLocale.getLanguage().equals(Locale.ENGLISH.getLanguage())) {
+        mAddLabelsMethod.invoke(mAlphabeticIndex,Locale.ENGLISH);
+      }
+    }
+ catch (    Exception e) {
+      e.printStackTrace();
+    }
+    if (curLocale.getLanguage().equals(Locale.JAPANESE.getLanguage())) {
+      mDefaultMiscLabel="\u4ed6";
+    }
+ else {
+      mDefaultMiscLabel=MID_DOT;
+    }
+    mHasValidAlphabeticIndex=true;
+  }
+ catch (  Exception e) {
+    mHasValidAlphabeticIndex=false;
+  }
+}

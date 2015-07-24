@@ -1,0 +1,7 @@
+{
+  if (!sectionName.equals(mSectionName)) {
+    mSectionName=sectionName;
+    mTextPaint.getTextBounds(sectionName,0,sectionName.length(),mTextBounds);
+    mTextBounds.right=(int)(mTextBounds.left + mTextPaint.measureText(sectionName));
+  }
+}

@@ -1,0 +1,6 @@
+{
+  if (LOGD)   Log.d(TAG,"onClickAllAppsButton");
+  if (!isAppsViewVisible()) {
+    showAppsView(true,false,true,false);
+  }
+}

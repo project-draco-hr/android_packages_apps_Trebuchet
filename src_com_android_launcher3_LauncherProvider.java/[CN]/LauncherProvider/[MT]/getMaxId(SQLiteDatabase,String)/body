@@ -1,0 +1,14 @@
+{
+  Cursor c=db.rawQuery("SELECT MAX(_id) FROM " + table,null);
+  long id=-1;
+  if (c != null && c.moveToNext()) {
+    id=c.getLong(0);
+  }
+  if (c != null) {
+    c.close();
+  }
+  if (id == -1) {
+    throw new RuntimeException("Error: could not query max id in " + table);
+  }
+  return id;
+}

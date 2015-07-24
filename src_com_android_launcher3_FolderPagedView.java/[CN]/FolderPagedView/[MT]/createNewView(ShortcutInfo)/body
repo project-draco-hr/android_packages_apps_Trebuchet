@@ -1,0 +1,10 @@
+{
+  final BubbleTextView textView=(BubbleTextView)mInflater.inflate(R.layout.folder_application,null,false);
+  textView.applyFromShortcutInfo(item,mIconCache);
+  textView.setOnClickListener(mFolder);
+  textView.setOnLongClickListener(mFolder);
+  textView.setOnFocusChangeListener(mFocusIndicatorView);
+  textView.setOnKeyListener(mKeyListener);
+  textView.setLayoutParams(new CellLayout.LayoutParams(item.cellX,item.cellY,item.spanX,item.spanY));
+  return textView;
+}

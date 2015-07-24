@@ -1,0 +1,15 @@
+{
+  int rowCount=mWidgets.getPackageSize();
+  if (rowCount == 0) {
+    return "";
+  }
+  stopScroll();
+  getCurScrollState(mScrollPosState);
+  float pos=rowCount * touchFraction;
+  int availableScrollHeight=getAvailableScrollHeight(rowCount,mScrollPosState.rowHeight,0);
+  LinearLayoutManager layoutManager=((LinearLayoutManager)getLayoutManager());
+  layoutManager.scrollToPositionWithOffset(0,(int)-(availableScrollHeight * touchFraction));
+  int posInt=(int)((touchFraction == 1) ? pos - 1 : pos);
+  PackageItemInfo p=mWidgets.getPackageItemInfo(posInt);
+  return p.titleSectionName;
+}

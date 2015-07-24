@@ -1,0 +1,10 @@
+{
+  super.onInitializeAccessibilityNodeInfo(host,info);
+  int index=mWorkspace.indexOfChild(host);
+  if (index < mWorkspace.getChildCount() - 1) {
+    info.addAction(mActions.get(MOVE_FORWARD));
+  }
+  if (index > mWorkspace.numCustomPages()) {
+    info.addAction(mActions.get(MOVE_BACKWARD));
+  }
+}

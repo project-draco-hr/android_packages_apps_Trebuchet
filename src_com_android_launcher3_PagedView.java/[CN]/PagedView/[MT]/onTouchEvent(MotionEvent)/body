@@ -1,7 +1,4 @@
 {
-  if (DISABLE_TOUCH_INTERACTION) {
-    return false;
-  }
   super.onTouchEvent(ev);
   if (getChildCount() <= 0)   return super.onTouchEvent(ev);
   acquireVelocityTrackerAndAddMovement(ev);
@@ -35,13 +32,7 @@ mTotalMotionX+=Math.abs(deltaX);
 if (Math.abs(deltaX) >= 1.0f) {
 mTouchX+=deltaX;
 mSmoothingTime=System.nanoTime() / NANOTIME_DIV;
-if (!mDeferScrollUpdate) {
 scrollBy((int)deltaX,0);
-if (DEBUG) Log.d(TAG,"onTouchEvent().Scrolling: " + deltaX);
-}
- else {
-invalidate();
-}
 mLastMotionX=x;
 mLastMotionXRemainder=deltaX - (int)deltaX;
 }
@@ -57,14 +48,12 @@ mParentDownMotionX=pt[0];
 mParentDownMotionY=pt[1];
 updateDragViewTranslationDuringDrag();
 final int dragViewIndex=indexOfChild(mDragView);
-boolean isHoveringOverDelete=isHoveringOverDeleteDropTarget((int)mParentDownMotionX,(int)mParentDownMotionY);
-setPageHoveringOverDeleteDropTarget(dragViewIndex,isHoveringOverDelete);
 if (DEBUG) Log.d(TAG,"mLastMotionX: " + mLastMotionX);
 if (DEBUG) Log.d(TAG,"mLastMotionY: " + mLastMotionY);
 if (DEBUG) Log.d(TAG,"mParentDownMotionX: " + mParentDownMotionX);
 if (DEBUG) Log.d(TAG,"mParentDownMotionY: " + mParentDownMotionY);
 final int pageUnderPointIndex=getNearestHoverOverPageIndex();
-if (pageUnderPointIndex > -1 && pageUnderPointIndex != indexOfChild(mDragView) && !isHoveringOverDelete) {
+if (pageUnderPointIndex > -1 && pageUnderPointIndex != indexOfChild(mDragView)) {
 mTempVisiblePagesRange[0]=0;
 mTempVisiblePagesRange[1]=getPageCount() - 1;
 getFreeScrollPageRange(mTempVisiblePagesRange);
@@ -92,9 +81,7 @@ anim.start();
 v.setTag(anim);
 }
 removeView(mDragView);
-onRemoveView(mDragView,false);
 addView(mDragView,pageUnderPointIndex);
-onAddView(mDragView,pageUnderPointIndex);
 mSidePageHoverIndex=-1;
 if (mPageIndicator != null) {
 mPageIndicator.setActiveMarker(getNextPage());
@@ -133,9 +120,8 @@ if (Math.abs(deltaX) > pageWidth * RETURN_TO_ORIGINAL_PAGE_THRESHOLD && Math.sig
 returnToOriginalPage=true;
 }
 int finalPage;
-final boolean isRtl=isLayoutRtl();
-boolean isDeltaXLeft=isRtl ? deltaX > 0 : deltaX < 0;
-boolean isVelocityXLeft=isRtl ? velocityX > 0 : velocityX < 0;
+boolean isDeltaXLeft=mIsRtl ? deltaX > 0 : deltaX < 0;
+boolean isVelocityXLeft=mIsRtl ? velocityX > 0 : velocityX < 0;
 if (((isSignificantMove && !isDeltaXLeft && !isFling) || (isFling && !isVelocityXLeft)) && mCurrentPage > 0) {
 finalPage=returnToOriginalPage ? mCurrentPage : mCurrentPage - 1;
 snapToPageWithVelocity(finalPage,velocityX);
@@ -186,17 +172,6 @@ float[] pt=mapPointFromViewToParent(this,mLastMotionX,mLastMotionY);
 mParentDownMotionX=pt[0];
 mParentDownMotionY=pt[1];
 updateDragViewTranslationDuringDrag();
-boolean handledFling=false;
-if (!DISABLE_FLING_TO_DELETE) {
-PointF flingToDeleteVector=isFlingingToDelete();
-if (flingToDeleteVector != null) {
-onFlingToDelete(flingToDeleteVector);
-handledFling=true;
-}
-}
-if (!handledFling && isHoveringOverDeleteDropTarget((int)mParentDownMotionX,(int)mParentDownMotionY)) {
-onDropToDelete();
-}
 }
  else {
 if (!mCancelTap) {

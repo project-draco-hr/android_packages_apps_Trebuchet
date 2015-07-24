@@ -1,6 +1,6 @@
 {
 synchronized (mLock) {
-    final Long lpid=new Long(pid);
+    final Long lpid=Long.valueOf(pid);
     if (mPids.contains(lpid))     return;
     mPids.add(lpid);
     updatePidsArrayL();

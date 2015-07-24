@@ -1,0 +1,7 @@
+{
+  Bundle sourceData=new Bundle();
+  sourceData.putString(SOURCE_EXTRA_CONTAINER,CONTAINER_HOMESCREEN);
+  sourceData.putInt(SOURCE_EXTRA_CONTAINER_PAGE,0);
+  sourceData.putInt(SOURCE_EXTRA_SUB_CONTAINER_PAGE,0);
+  return sourceData;
+}

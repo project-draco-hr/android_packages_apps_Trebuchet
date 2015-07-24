@@ -1,0 +1,3 @@
+String packageName
+String resourceName
+Context context

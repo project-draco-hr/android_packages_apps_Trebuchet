@@ -1,3 +1,0 @@
-{
-  return isDragSourceWorkspaceOrFolder(d) && (d.dragInfo instanceof LauncherAppWidgetInfo);
-}

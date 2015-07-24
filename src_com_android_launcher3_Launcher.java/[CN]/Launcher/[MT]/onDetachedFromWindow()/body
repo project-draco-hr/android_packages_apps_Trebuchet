@@ -1,0 +1,9 @@
+{
+  super.onDetachedFromWindow();
+  mVisible=false;
+  if (mAttached) {
+    unregisterReceiver(mReceiver);
+    mAttached=false;
+  }
+  updateAutoAdvanceState();
+}

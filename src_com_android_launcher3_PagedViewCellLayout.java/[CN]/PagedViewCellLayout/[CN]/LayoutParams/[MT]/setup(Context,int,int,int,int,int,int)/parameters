@@ -1,7 +1,0 @@
-Context context
-int cellWidth
-int cellHeight
-int widthGap
-int heightGap
-int hStartPadding
-int vStartPadding

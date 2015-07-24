@@ -1,0 +1,19 @@
+{
+  LauncherAppState app=LauncherAppState.getInstance();
+  InvariantDeviceProfile profile=app.getInvariantDeviceProfile();
+  final int xCount=(int)profile.numColumns;
+  final int yCount=(int)profile.numRows;
+  boolean[][] occupied=new boolean[xCount][yCount];
+  if (occupiedPos != null) {
+    for (    ItemInfo r : occupiedPos) {
+      int right=r.cellX + r.spanX;
+      int bottom=r.cellY + r.spanY;
+      for (int x=r.cellX; 0 <= x && x < right && x < xCount; x++) {
+        for (int y=r.cellY; 0 <= y && y < bottom && y < yCount; y++) {
+          occupied[x][y]=true;
+        }
+      }
+    }
+  }
+  return Utilities.findVacantCell(xy,spanX,spanY,xCount,yCount,occupied);
+}

@@ -1,6 +1,0 @@
-{
-  Rect workspacePadding=getWorkspacePadding();
-  Rect overviewBar=getOverviewModeButtonBarRect();
-  int pageSpace=availableHeightPx - workspacePadding.top - workspacePadding.bottom;
-  return (overviewModeScaleFactor * (pageSpace - overviewBar.height())) / pageSpace;
-}

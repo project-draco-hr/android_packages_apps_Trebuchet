@@ -1,5 +1,0 @@
-{
-  super();
-  addLevel(0,0,d);
-  setLevel(0);
-}

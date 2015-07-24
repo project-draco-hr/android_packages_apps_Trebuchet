@@ -1,5 +1,5 @@
 {
-  if (!mLauncher.isAllAppsVisible()) {
+  if (!mLauncher.isAppsViewVisible()) {
     final Folder openFolder=getOpenFolder();
     if (openFolder != null) {
       return openFolder.requestFocus(direction,previouslyFocusedRect);

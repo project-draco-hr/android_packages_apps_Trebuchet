@@ -1,0 +1,5 @@
+{
+  mPredictedAppComponents.clear();
+  mPredictedAppComponents.addAll(apps);
+  onAppsUpdated();
+}

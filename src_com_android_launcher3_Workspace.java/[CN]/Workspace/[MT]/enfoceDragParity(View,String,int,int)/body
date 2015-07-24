@@ -1,0 +1,9 @@
+{
+  Object tag=v.getTag(R.id.drag_event_parity);
+  int value=tag == null ? 0 : (Integer)tag;
+  value+=update;
+  v.setTag(R.id.drag_event_parity,value);
+  if (value != expectedValue) {
+    Log.e(TAG,event + ": Drag contract violated: " + value);
+  }
+}

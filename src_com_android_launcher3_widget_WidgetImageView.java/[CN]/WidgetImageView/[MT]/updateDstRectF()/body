@@ -1,0 +1,9 @@
+{
+  if (mBitmap.getWidth() > getWidth()) {
+    float scale=((float)getWidth()) / mBitmap.getWidth();
+    mDstRectF.set(0,0,getWidth(),scale * mBitmap.getHeight());
+  }
+ else {
+    mDstRectF.set((getWidth() - mBitmap.getWidth()) * 0.5f,0,(getWidth() + mBitmap.getWidth()) * 0.5f,mBitmap.getHeight());
+  }
+}

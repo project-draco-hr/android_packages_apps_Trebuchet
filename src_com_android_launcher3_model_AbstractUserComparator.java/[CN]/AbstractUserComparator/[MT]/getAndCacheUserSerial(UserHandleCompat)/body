@@ -1,0 +1,8 @@
+{
+  Long userSerial=mUserSerialCache.get(user);
+  if (userSerial == null) {
+    userSerial=mUserManager.getSerialNumberForUser(user);
+    mUserSerialCache.put(user,userSerial);
+  }
+  return userSerial;
+}

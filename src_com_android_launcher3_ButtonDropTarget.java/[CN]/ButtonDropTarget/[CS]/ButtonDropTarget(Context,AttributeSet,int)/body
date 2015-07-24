@@ -1,6 +1,4 @@
 {
   super(context,attrs,defStyle);
-  Resources r=getResources();
-  mTransitionDuration=r.getInteger(R.integer.config_dropTargetBgTransitionDuration);
-  mBottomDragPadding=r.getDimensionPixelSize(R.dimen.drop_target_drag_padding);
+  mBottomDragPadding=getResources().getDimensionPixelSize(R.dimen.drop_target_drag_padding);
 }

@@ -3,6 +3,6 @@
   addModifiedTime(values);
   SQLiteDatabase db=mOpenHelper.getWritableDatabase();
   int count=db.update(args.table,values,args.where,args.args);
-  if (count > 0)   sendNotify(uri);
+  if (count > 0)   notifyListeners();
   return count;
 }

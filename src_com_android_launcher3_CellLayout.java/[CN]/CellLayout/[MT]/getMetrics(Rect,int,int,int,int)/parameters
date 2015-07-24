@@ -1,5 +1,0 @@
-Rect metrics
-int paddedMeasureWidth
-int paddedMeasureHeight
-int countX
-int countY

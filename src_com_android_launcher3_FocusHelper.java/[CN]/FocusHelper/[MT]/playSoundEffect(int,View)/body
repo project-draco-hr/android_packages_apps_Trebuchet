@@ -1,0 +1,22 @@
+{
+switch (keyCode) {
+case KeyEvent.KEYCODE_DPAD_LEFT:
+    v.playSoundEffect(SoundEffectConstants.NAVIGATION_LEFT);
+  break;
+case KeyEvent.KEYCODE_DPAD_RIGHT:
+v.playSoundEffect(SoundEffectConstants.NAVIGATION_RIGHT);
+break;
+case KeyEvent.KEYCODE_DPAD_DOWN:
+case KeyEvent.KEYCODE_PAGE_DOWN:
+case KeyEvent.KEYCODE_MOVE_END:
+v.playSoundEffect(SoundEffectConstants.NAVIGATION_DOWN);
+break;
+case KeyEvent.KEYCODE_DPAD_UP:
+case KeyEvent.KEYCODE_PAGE_UP:
+case KeyEvent.KEYCODE_MOVE_HOME:
+v.playSoundEffect(SoundEffectConstants.NAVIGATION_UP);
+break;
+default :
+break;
+}
+}

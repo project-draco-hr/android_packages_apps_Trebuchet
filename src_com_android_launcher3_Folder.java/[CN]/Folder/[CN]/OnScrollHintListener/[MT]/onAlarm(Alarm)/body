@@ -1,0 +1,16 @@
+{
+  if (mCurrentScrollDir == DragController.SCROLL_LEFT) {
+    mContent.scrollLeft();
+    mScrollHintDir=DragController.SCROLL_NONE;
+  }
+ else   if (mCurrentScrollDir == DragController.SCROLL_RIGHT) {
+    mContent.scrollRight();
+    mScrollHintDir=DragController.SCROLL_NONE;
+  }
+ else {
+    return;
+  }
+  mCurrentScrollDir=DragController.SCROLL_NONE;
+  mScrollPauseAlarm.setOnAlarmListener(new OnScrollFinishedListener(mDragObject));
+  mScrollPauseAlarm.setAlarm(DragController.RESCROLL_DELAY);
+}

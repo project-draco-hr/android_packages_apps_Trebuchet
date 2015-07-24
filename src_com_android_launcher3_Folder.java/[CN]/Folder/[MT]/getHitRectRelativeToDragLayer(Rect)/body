@@ -1,3 +1,5 @@
 {
   getHitRect(outRect);
+  outRect.left-=mScrollAreaOffset;
+  outRect.right+=mScrollAreaOffset;
 }

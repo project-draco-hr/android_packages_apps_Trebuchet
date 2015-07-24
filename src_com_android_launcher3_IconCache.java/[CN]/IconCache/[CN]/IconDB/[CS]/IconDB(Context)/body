@@ -1,0 +1,3 @@
+{
+  super(context,LauncherFiles.APP_ICONS_DB,null,DB_VERSION);
+}

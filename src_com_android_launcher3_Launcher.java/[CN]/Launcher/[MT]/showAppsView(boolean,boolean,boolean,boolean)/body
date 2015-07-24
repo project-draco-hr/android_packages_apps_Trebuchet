@@ -1,0 +1,9 @@
+{
+  if (resetListToTop) {
+    mAppsView.scrollToTop();
+  }
+  if (updatePredictedApps) {
+    tryAndUpdatePredictedApps();
+  }
+  showAppsOrWidgets(State.APPS,animated,focusSearchBar);
+}

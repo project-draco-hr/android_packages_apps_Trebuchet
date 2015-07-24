@@ -2,6 +2,9 @@
   Folder currentFolder=mLauncher.getWorkspace().getOpenFolder();
   if (currentFolder != null) {
     childrenForAccessibility.add(currentFolder);
+    if (isInAccessibleDrag()) {
+      childrenForAccessibility.add(mLauncher.getSearchBar());
+    }
   }
  else {
     super.addChildrenForAccessibility(childrenForAccessibility);

@@ -1,0 +1,49 @@
+{
+  if (msg.what == MSG_LOAD_IMAGE) {
+    final LoadRequest req=(LoadRequest)msg.obj;
+    try {
+      req.src.loadInBackground(new InBitmapProvider(){
+        @Override public Bitmap forPixelCount(        int count){
+          Bitmap bitmapToReuse=null;
+synchronized (mReusableBitmaps) {
+            int currentBitmapSize=Integer.MAX_VALUE;
+            for (            Bitmap b : mReusableBitmaps) {
+              int bitmapSize=b.getWidth() * b.getHeight();
+              if ((bitmapSize >= count) && (bitmapSize < currentBitmapSize)) {
+                bitmapToReuse=b;
+                currentBitmapSize=bitmapSize;
+              }
+            }
+            if (bitmapToReuse != null) {
+              mReusableBitmaps.remove(bitmapToReuse);
+            }
+          }
+          return bitmapToReuse;
+        }
+      }
+);
+    }
+ catch (    SecurityException securityException) {
+      if (isActivityDestroyed()) {
+        return true;
+      }
+ else {
+        throw securityException;
+      }
+    }
+    req.result=new BitmapRegionTileSource(getContext(),req.src,mTempStorageForDecoding);
+    runOnUiThread(new Runnable(){
+      @Override public void run(){
+        if (req == mCurrentLoadRequest) {
+          onLoadRequestComplete(req,req.src.getLoadingState() == BitmapSource.State.LOADED);
+        }
+ else {
+          addReusableBitmap(req.result);
+        }
+      }
+    }
+);
+    return true;
+  }
+  return false;
+}

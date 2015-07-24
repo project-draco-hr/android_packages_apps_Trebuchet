@@ -3,5 +3,5 @@
   if (mPendingCheckForLongPress == null) {
     mPendingCheckForLongPress=new CheckForLongPress();
   }
-  mView.postDelayed(mPendingCheckForLongPress,LauncherAppState.getInstance().getLongPressTimeout());
+  mView.postDelayed(mPendingCheckForLongPress,mLongPressTimeout);
 }

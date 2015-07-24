@@ -1,5 +1,4 @@
 {
-  Launcher.addDumpLog(TAG,"11683562 - stripEmptyScreens()",true);
   if (mLauncher.isWorkspaceLoading()) {
     Launcher.addDumpLog(TAG,"    - workspace loading, skip",true);
     return;
@@ -10,8 +9,10 @@
   }
   int currentPage=getNextPage();
   ArrayList<Long> removeScreens=new ArrayList<Long>();
-  for (  Long id : mWorkspaceScreens.keySet()) {
-    CellLayout cl=mWorkspaceScreens.get(id);
+  int total=mWorkspaceScreens.size();
+  for (int i=0; i < total; i++) {
+    long id=mWorkspaceScreens.keyAt(i);
+    CellLayout cl=mWorkspaceScreens.valueAt(i);
     if (id >= 0 && cl.getShortcutsAndWidgets().getChildCount() == 0) {
       removeScreens.add(id);
     }
@@ -19,7 +20,6 @@
   int minScreens=1 + numCustomPages();
   int pageShift=0;
   for (  Long id : removeScreens) {
-    Launcher.addDumpLog(TAG,"11683562 -   removing id: " + id,true);
     CellLayout cl=mWorkspaceScreens.get(id);
     mWorkspaceScreens.remove(id);
     mScreenOrder.remove(id);

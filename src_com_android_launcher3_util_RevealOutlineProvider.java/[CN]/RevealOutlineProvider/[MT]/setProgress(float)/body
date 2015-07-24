@@ -1,0 +1,7 @@
+{
+  mCurrentRadius=(int)((1 - progress) * mRadius0 + progress * mRadius1);
+  mOval.left=mCenterX - mCurrentRadius;
+  mOval.top=mCenterY - mCurrentRadius;
+  mOval.right=mCenterX + mCurrentRadius;
+  mOval.bottom=mCenterY + mCurrentRadius;
+}

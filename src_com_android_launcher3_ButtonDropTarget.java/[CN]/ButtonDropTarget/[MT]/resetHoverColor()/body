@@ -1,0 +1,9 @@
+{
+  if (Utilities.isLmpOrAbove()) {
+    animateTextColor(mOriginalTextColor.getDefaultColor());
+  }
+ else {
+    mDrawable.setColorFilter(null);
+    setTextColor(mOriginalTextColor);
+  }
+}
