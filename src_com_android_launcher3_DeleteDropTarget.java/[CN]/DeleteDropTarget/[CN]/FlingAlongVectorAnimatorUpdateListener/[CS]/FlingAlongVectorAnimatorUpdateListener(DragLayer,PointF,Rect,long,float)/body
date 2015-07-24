@@ -1,7 +1,0 @@
-{
-  mDragLayer=dragLayer;
-  mVelocity=vel;
-  mFrom=from;
-  mPrevTime=startTime;
-  mFriction=1f - (dragLayer.getResources().getDisplayMetrics().density * friction);
-}

@@ -1,7 +1,7 @@
 {
-  mTmpPoint[0]=x - v.getLeft();
-  mTmpPoint[1]=y - v.getTop();
-  v.getMatrix().invert(mTmpInvMatrix);
-  mTmpInvMatrix.mapPoints(mTmpPoint);
-  return mTmpPoint;
+  sTmpPoint[0]=x - v.getLeft();
+  sTmpPoint[1]=y - v.getTop();
+  v.getMatrix().invert(sTmpInvMatrix);
+  sTmpInvMatrix.mapPoints(sTmpPoint);
+  return sTmpPoint;
 }

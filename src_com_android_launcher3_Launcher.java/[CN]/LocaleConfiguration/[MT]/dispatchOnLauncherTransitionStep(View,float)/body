@@ -1,5 +1,0 @@
-{
-  if (v instanceof LauncherTransitionable) {
-    ((LauncherTransitionable)v).onLauncherTransitionStep(this,t);
-  }
-}

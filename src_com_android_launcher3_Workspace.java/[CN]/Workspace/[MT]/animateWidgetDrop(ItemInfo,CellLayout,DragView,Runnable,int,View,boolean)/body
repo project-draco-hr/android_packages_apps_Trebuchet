@@ -1,0 +1,48 @@
+{
+  Rect from=new Rect();
+  mLauncher.getDragLayer().getViewRectRelativeToSelf(dragView,from);
+  int[] finalPos=new int[2];
+  float scaleXY[]=new float[2];
+  boolean scalePreview=!(info instanceof PendingAddShortcutInfo);
+  getFinalPositionForDropAnimation(finalPos,scaleXY,dragView,cellLayout,info,mTargetCell,external,scalePreview);
+  Resources res=mLauncher.getResources();
+  final int duration=res.getInteger(R.integer.config_dropAnimMaxDuration) - 200;
+  if (finalView instanceof AppWidgetHostView && external) {
+    mLauncher.getDragLayer().removeView(finalView);
+  }
+  boolean isWidget=info.itemType == LauncherSettings.Favorites.ITEM_TYPE_APPWIDGET || info.itemType == LauncherSettings.Favorites.ITEM_TYPE_CUSTOM_APPWIDGET;
+  if ((animationType == ANIMATE_INTO_POSITION_AND_RESIZE || external) && finalView != null) {
+    Bitmap crossFadeBitmap=createWidgetBitmap(info,finalView);
+    dragView.setCrossFadeBitmap(crossFadeBitmap);
+    dragView.crossFade((int)(duration * 0.8f));
+  }
+ else   if (isWidget && external) {
+    scaleXY[0]=scaleXY[1]=Math.min(scaleXY[0],scaleXY[1]);
+  }
+  DragLayer dragLayer=mLauncher.getDragLayer();
+  if (animationType == CANCEL_TWO_STAGE_WIDGET_DROP_ANIMATION) {
+    mLauncher.getDragLayer().animateViewIntoPosition(dragView,finalPos,0f,0.1f,0.1f,DragLayer.ANIMATION_END_DISAPPEAR,onCompleteRunnable,duration);
+  }
+ else {
+    int endStyle;
+    if (animationType == ANIMATE_INTO_POSITION_AND_REMAIN) {
+      endStyle=DragLayer.ANIMATION_END_REMAIN_VISIBLE;
+    }
+ else {
+      endStyle=DragLayer.ANIMATION_END_DISAPPEAR;
+      ;
+    }
+    Runnable onComplete=new Runnable(){
+      @Override public void run(){
+        if (finalView != null) {
+          finalView.setVisibility(VISIBLE);
+        }
+        if (onCompleteRunnable != null) {
+          onCompleteRunnable.run();
+        }
+      }
+    }
+;
+    dragLayer.animateViewIntoPosition(dragView,from.left,from.top,finalPos[0],finalPos[1],1,1,1,scaleXY[0],scaleXY[1],onComplete,endStyle,duration,this);
+  }
+}

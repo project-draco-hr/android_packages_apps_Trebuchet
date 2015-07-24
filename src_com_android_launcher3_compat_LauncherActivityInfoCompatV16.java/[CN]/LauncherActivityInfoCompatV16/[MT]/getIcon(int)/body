@@ -1,24 +1,21 @@
 {
-  Drawable d=null;
-  if (mActivityInfo.getIconResource() != 0) {
-    Resources resources;
+  int iconRes=mResolveInfo.getIconResource();
+  Resources resources=null;
+  Drawable icon=null;
+  if (density != 0 && iconRes != 0) {
     try {
-      resources=mPm.getResourcesForApplication(mActivityInfo.packageName);
+      resources=mPm.getResourcesForApplication(mActivityInfo.applicationInfo);
+      icon=resources.getDrawableForDensity(iconRes,density);
     }
- catch (    PackageManager.NameNotFoundException e) {
-      resources=null;
-    }
-    if (resources != null) {
-      try {
-        d=resources.getDrawableForDensity(mActivityInfo.getIconResource(),density);
-      }
- catch (      Resources.NotFoundException e) {
-      }
+ catch (    NameNotFoundException|Resources.NotFoundException exc) {
     }
   }
-  if (d == null) {
-    Resources resources=Resources.getSystem();
-    d=resources.getDrawableForDensity(android.R.mipmap.sym_def_app_icon,density);
+  if (icon == null) {
+    icon=mResolveInfo.loadIcon(mPm);
   }
-  return d;
+  if (icon == null) {
+    resources=Resources.getSystem();
+    icon=resources.getDrawableForDensity(android.R.mipmap.sym_def_app_icon,density);
+  }
+  return icon;
 }

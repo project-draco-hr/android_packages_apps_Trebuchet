@@ -1,0 +1,25 @@
+{
+  if (!mAppsToUpdate.isEmpty()) {
+    LauncherActivityInfoCompat app=mAppsToUpdate.pop();
+    String cn=app.getComponentName().flattenToString();
+    ContentValues values=updateCacheAndGetContentValues(app,true);
+    mIconDb.getWritableDatabase().update(IconDB.TABLE_NAME,values,IconDB.COLUMN_COMPONENT + " = ? AND " + IconDB.COLUMN_USER+ " = ?",new String[]{cn,Long.toString(mUserSerial)});
+    mUpdatedPackages.add(app.getComponentName().getPackageName());
+    if (mAppsToUpdate.isEmpty() && !mUpdatedPackages.isEmpty()) {
+      LauncherAppState.getInstance().getModel().onPackageIconsUpdated(mUpdatedPackages,mUserManager.getUserForSerialNumber(mUserSerial));
+    }
+    scheduleNext();
+  }
+ else   if (!mAppsToAdd.isEmpty()) {
+    LauncherActivityInfoCompat app=mAppsToAdd.pop();
+    PackageInfo info=mPkgInfoMap.get(app.getComponentName().getPackageName());
+    if (info != null) {
+synchronized (IconCache.this) {
+        addIconToDBAndMemCache(app,info,mUserSerial);
+      }
+    }
+    if (!mAppsToAdd.isEmpty()) {
+      scheduleNext();
+    }
+  }
+}

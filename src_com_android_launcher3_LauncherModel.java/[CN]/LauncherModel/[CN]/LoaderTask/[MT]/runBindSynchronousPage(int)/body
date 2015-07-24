@@ -11,6 +11,6 @@ synchronized (mLock) {
     }
   }
   mHandler.flush();
-  bindWorkspace(synchronousBindPage,false);
+  bindWorkspace(synchronousBindPage);
   onlyBindAllApps();
 }

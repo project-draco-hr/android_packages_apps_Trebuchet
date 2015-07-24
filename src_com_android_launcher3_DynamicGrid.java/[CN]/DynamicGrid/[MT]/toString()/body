@@ -1,3 +1,0 @@
-{
-  return "-------- DYNAMIC GRID ------- \n" + "Wd: " + mProfile.minWidthDps + ", Hd: "+ mProfile.minHeightDps+ ", W: "+ mProfile.widthPx+ ", H: "+ mProfile.heightPx+ " [r: "+ mProfile.numRows+ ", c: "+ mProfile.numColumns+ ", is: "+ mProfile.iconSizePx+ ", its: "+ mProfile.iconTextSizePx+ ", cw: "+ mProfile.cellWidthPx+ ", ch: "+ mProfile.cellHeightPx+ ", hc: "+ mProfile.numHotseatIcons+ ", his: "+ mProfile.hotseatIconSizePx+ "]";
-}

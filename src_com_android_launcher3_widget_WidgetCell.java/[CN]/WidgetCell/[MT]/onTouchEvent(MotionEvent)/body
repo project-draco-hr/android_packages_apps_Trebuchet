@@ -1,0 +1,7 @@
+{
+  boolean handled=super.onTouchEvent(ev);
+  if (mStylusEventHelper.checkAndPerformStylusEvent(ev)) {
+    return true;
+  }
+  return handled;
+}

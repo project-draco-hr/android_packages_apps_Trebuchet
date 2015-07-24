@@ -1,0 +1,18 @@
+{
+  final HashSet<ShortcutInfo> updates=new HashSet<ShortcutInfo>(shortcuts);
+  mapOverItems(MAP_RECURSE,new ItemOperator(){
+    @Override public boolean evaluate(    ItemInfo info,    View v,    View parent){
+      if (info instanceof ShortcutInfo && v instanceof BubbleTextView && updates.contains(info)) {
+        ShortcutInfo si=(ShortcutInfo)info;
+        BubbleTextView shortcut=(BubbleTextView)v;
+        boolean oldPromiseState=getTextViewIcon(shortcut) instanceof PreloadIconDrawable;
+        shortcut.applyFromShortcutInfo(si,mIconCache,si.isPromise() != oldPromiseState);
+        if (parent != null) {
+          parent.invalidate();
+        }
+      }
+      return false;
+    }
+  }
+);
+}

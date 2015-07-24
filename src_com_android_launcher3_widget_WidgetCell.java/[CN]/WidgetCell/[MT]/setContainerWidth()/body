@@ -1,0 +1,5 @@
+{
+  DeviceProfile profile=mLauncher.getDeviceProfile();
+  cellSize=(int)(profile.cellWidthPx * WIDTH_SCALE);
+  mPresetPreviewSize=(int)(cellSize * PREVIEW_SCALE);
+}

@@ -1,0 +1,3 @@
+{
+  super(context,appWidgetHost,callback,sourceRes,layoutId,rootTag,hotseatAllAppsRank);
+}

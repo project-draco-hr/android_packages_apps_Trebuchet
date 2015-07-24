@@ -1,8 +1,7 @@
 {
-  boolean isRtl=isLayoutRtl();
-  boolean shouldOverScroll=(amount <= 0 && (!hasCustomContent() || isRtl)) || (amount >= 0 && (!hasCustomContent() || !isRtl));
-  boolean shouldScrollOverlay=mLauncherOverlay != null && ((amount <= 0 && !isRtl) || (amount >= 0 && isRtl));
-  boolean shouldZeroOverlay=mLauncherOverlay != null && mLastOverlaySroll != 0 && ((amount >= 0 && !isRtl) || (amount <= 0 && isRtl));
+  boolean shouldOverScroll=(amount <= 0 && (!hasCustomContent() || mIsRtl)) || (amount >= 0 && (!hasCustomContent() || !mIsRtl));
+  boolean shouldScrollOverlay=mLauncherOverlay != null && ((amount <= 0 && !mIsRtl) || (amount >= 0 && mIsRtl));
+  boolean shouldZeroOverlay=mLauncherOverlay != null && mLastOverlaySroll != 0 && ((amount >= 0 && !mIsRtl) || (amount <= 0 && mIsRtl));
   if (shouldScrollOverlay) {
     if (!mStartedSendingScrollEvents && mScrollInteractionBegan) {
       mStartedSendingScrollEvents=true;
@@ -13,16 +12,12 @@
     float f=(amount / screenSize);
     int progress=(int)Math.abs((f * 100));
     mLastOverlaySroll=progress;
-    mLauncherOverlay.onScrollChange(progress,isRtl);
+    mLauncherOverlay.onScrollChange(progress,mIsRtl);
   }
  else   if (shouldOverScroll) {
     dampedOverScroll(amount);
-    mOverScrollEffect=acceleratedOverFactor(amount);
-  }
- else {
-    mOverScrollEffect=0;
   }
   if (shouldZeroOverlay) {
-    mLauncherOverlay.onScrollChange(0,isRtl);
+    mLauncherOverlay.onScrollChange(0,mIsRtl);
   }
 }

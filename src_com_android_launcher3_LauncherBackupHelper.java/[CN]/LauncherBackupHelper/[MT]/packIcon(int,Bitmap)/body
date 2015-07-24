@@ -1,9 +1,6 @@
 {
   Resource res=new Resource();
   res.dpi=dpi;
-  ByteArrayOutputStream os=new ByteArrayOutputStream();
-  if (icon.compress(IMAGE_FORMAT,IMAGE_COMPRESSION_QUALITY,os)) {
-    res.data=os.toByteArray();
-  }
+  res.data=Utilities.flattenBitmap(icon);
   return res;
 }

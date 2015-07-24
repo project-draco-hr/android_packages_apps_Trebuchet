@@ -6,4 +6,5 @@
   mVelocityTracker=VelocityTracker.obtain();
   float density=r.getDisplayMetrics().density;
   mFlingToDeleteThresholdVelocity=(int)(r.getInteger(R.integer.config_flingToDeleteMinVelocity) * density);
+  mIsRtl=Utilities.isRtl(r);
 }

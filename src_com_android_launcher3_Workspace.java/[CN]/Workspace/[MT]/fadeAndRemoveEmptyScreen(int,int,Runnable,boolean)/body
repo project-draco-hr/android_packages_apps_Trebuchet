@@ -1,5 +1,4 @@
 {
-  Launcher.addDumpLog(TAG,"11683562 - fadeAndRemoveEmptyScreen()",true);
   PropertyValuesHolder alpha=PropertyValuesHolder.ofFloat("alpha",0f);
   PropertyValuesHolder bgAlpha=PropertyValuesHolder.ofFloat("backgroundAlpha",0f);
   final CellLayout cl=mWorkspaceScreens.get(EXTRA_EMPTY_SCREEN_ID);

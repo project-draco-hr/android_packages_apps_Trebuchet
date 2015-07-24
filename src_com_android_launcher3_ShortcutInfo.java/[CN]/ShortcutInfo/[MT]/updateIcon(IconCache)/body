@@ -1,4 +1,5 @@
 {
-  mIcon=iconCache.getIcon(promisedIntent != null ? promisedIntent : intent,user);
-  usingFallbackIcon=iconCache.isDefaultIcon(mIcon,user);
+  if (itemType == Favorites.ITEM_TYPE_APPLICATION) {
+    iconCache.getTitleAndIcon(this,promisedIntent != null ? promisedIntent : intent,user,shouldUseLowResIcon());
+  }
 }

@@ -4,6 +4,7 @@
   values.put(LauncherSettings.BaseLauncherColumns.TITLE,titleStr);
   String uri=promisedIntent != null ? promisedIntent.toUri(0) : (intent != null ? intent.toUri(0) : null);
   values.put(LauncherSettings.BaseLauncherColumns.INTENT,uri);
+  values.put(LauncherSettings.Favorites.RESTORED,status);
   if (customIcon) {
     values.put(LauncherSettings.BaseLauncherColumns.ICON_TYPE,LauncherSettings.BaseLauncherColumns.ICON_TYPE_BITMAP);
     writeBitmap(values,mIcon);
@@ -12,8 +13,8 @@
     if (!usingFallbackIcon) {
       writeBitmap(values,mIcon);
     }
-    values.put(LauncherSettings.BaseLauncherColumns.ICON_TYPE,LauncherSettings.BaseLauncherColumns.ICON_TYPE_RESOURCE);
     if (iconResource != null) {
+      values.put(LauncherSettings.BaseLauncherColumns.ICON_TYPE,LauncherSettings.BaseLauncherColumns.ICON_TYPE_RESOURCE);
       values.put(LauncherSettings.BaseLauncherColumns.ICON_PACKAGE,iconResource.packageName);
       values.put(LauncherSettings.BaseLauncherColumns.ICON_RESOURCE,iconResource.resourceName);
     }

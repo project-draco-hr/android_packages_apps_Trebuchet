@@ -8,5 +8,5 @@
     }
   }
 ;
-  runOnMainThread(r,MAIN_THREAD_BINDING_RUNNABLE);
+  runOnMainThread(r);
 }

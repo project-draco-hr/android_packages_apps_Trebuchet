@@ -9,7 +9,7 @@
  else {
     Resources res=getResources();
     Point defaultThumbSize=getDefaultThumbnailSize(res);
-    Drawable wallpaperDrawable=WallpaperManager.getInstance(this).getBuiltInDrawable(defaultThumbSize.x,defaultThumbSize.y,true,0.5f,0.5f);
+    Drawable wallpaperDrawable=WallpaperManager.getInstance(getContext()).getBuiltInDrawable(defaultThumbSize.x,defaultThumbSize.y,true,0.5f,0.5f);
     if (wallpaperDrawable != null) {
       thumb=Bitmap.createBitmap(defaultThumbSize.x,defaultThumbSize.y,Bitmap.Config.ARGB_8888);
       Canvas c=new Canvas(thumb);

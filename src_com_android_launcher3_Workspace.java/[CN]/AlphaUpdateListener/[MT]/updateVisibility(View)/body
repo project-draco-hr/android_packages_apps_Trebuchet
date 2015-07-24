@@ -1,9 +1,0 @@
-{
-  int invisibleState=sAccessibilityEnabled ? GONE : INVISIBLE;
-  if (view.getAlpha() < ALPHA_CUTOFF_THRESHOLD && view.getVisibility() != invisibleState) {
-    view.setVisibility(invisibleState);
-  }
- else   if (view.getAlpha() > ALPHA_CUTOFF_THRESHOLD && view.getVisibility() != VISIBLE) {
-    view.setVisibility(VISIBLE);
-  }
-}

@@ -1,8 +1,0 @@
-{
-  if (mScrollMode == X_LARGE_MODE) {
-    super.snapToDestination();
-  }
- else {
-    snapToPageWithVelocity(getPageNearestToCenterOfScreen(),0);
-  }
-}

@@ -1,0 +1,3 @@
+{
+  return mDuration + DRAG_END_DELAY;
+}

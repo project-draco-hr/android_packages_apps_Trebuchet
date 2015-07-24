@@ -3,13 +3,13 @@
   Runnable r=new Runnable(){
     public void run(){
       for (      ItemInfo item : items) {
-        final Uri uri=LauncherSettings.Favorites.getContentUri(item.id,false);
+        final Uri uri=LauncherSettings.Favorites.getContentUri(item.id);
         cr.delete(uri,null,null);
 synchronized (sBgLock) {
 switch (item.itemType) {
 case LauncherSettings.Favorites.ITEM_TYPE_FOLDER:
             sBgFolders.remove(item.id);
-          for (          ItemInfo info : sBgItemsIdMap.values()) {
+          for (          ItemInfo info : sBgItemsIdMap) {
             if (info.container == item.id) {
               String msg="deleting a folder (" + item + ") which still "+ "contains items ("+ info+ ")";
               Log.e(TAG,msg);
@@ -26,7 +26,6 @@ sBgAppWidgets.remove((LauncherAppWidgetInfo)item);
 break;
 }
 sBgItemsIdMap.remove(item.id);
-sBgDbIconCache.remove(item);
 }
 }
 }

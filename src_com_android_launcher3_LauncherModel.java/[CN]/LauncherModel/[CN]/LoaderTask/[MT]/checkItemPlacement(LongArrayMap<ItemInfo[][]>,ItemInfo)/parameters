@@ -1,0 +1,2 @@
+LongArrayMap<ItemInfo[][]> occupied
+ItemInfo item

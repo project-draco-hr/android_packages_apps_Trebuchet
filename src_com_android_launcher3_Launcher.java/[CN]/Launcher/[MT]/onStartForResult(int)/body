@@ -1,0 +1,5 @@
+{
+  if (requestCode >= 0) {
+    setWaitingForResult(true);
+  }
+}

@@ -1,3 +1,0 @@
-{
-  return findVacantCell(vacant,spanX,spanY,mCountX,mCountY,mOccupied);
-}

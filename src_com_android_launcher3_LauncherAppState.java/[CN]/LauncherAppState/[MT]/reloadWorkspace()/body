@@ -1,0 +1,4 @@
+{
+  mModel.resetLoadedState(false,true);
+  mModel.startLoaderFromBackground();
+}

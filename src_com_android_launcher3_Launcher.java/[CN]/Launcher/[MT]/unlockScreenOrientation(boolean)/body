@@ -1,0 +1,15 @@
+{
+  if (mRotationEnabled) {
+    if (immediate) {
+      setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+    }
+ else {
+      mHandler.postDelayed(new Runnable(){
+        public void run(){
+          setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+        }
+      }
+,mRestoreScreenOrientationDelay);
+    }
+  }
+}

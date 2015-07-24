@@ -1,0 +1,3 @@
+{
+  LauncherAppState.getInstance().getAccessibilityDelegate().handleAccessibleDrop(this,null,getAccessibilityDropConfirmation());
+}

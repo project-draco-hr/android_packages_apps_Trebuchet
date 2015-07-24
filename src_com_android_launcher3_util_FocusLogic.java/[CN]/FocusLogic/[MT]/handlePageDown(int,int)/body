@@ -1,0 +1,6 @@
+{
+  if (pageIndex < pageCount - 1) {
+    return NEXT_PAGE_FIRST_ITEM;
+  }
+  return CURRENT_PAGE_LAST_ITEM;
+}

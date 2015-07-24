@@ -1,0 +1,7 @@
+Context context
+InvariantDeviceProfile inv
+Point minSize
+Point maxSize
+int width
+int height
+boolean isLandscape

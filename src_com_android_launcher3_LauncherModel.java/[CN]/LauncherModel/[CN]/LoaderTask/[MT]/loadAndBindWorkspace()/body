@@ -3,16 +3,14 @@
   if (DEBUG_LOADERS) {
     Log.d(TAG,"loadAndBindWorkspace mWorkspaceLoaded=" + mWorkspaceLoaded);
   }
-  boolean isUpgradePath=false;
   if (!mWorkspaceLoaded) {
-    isUpgradePath=loadWorkspace();
+    loadWorkspace();
 synchronized (LoaderTask.this) {
       if (mStopped) {
-        return isUpgradePath;
+        return;
       }
       mWorkspaceLoaded=true;
     }
   }
-  bindWorkspace(-1,isUpgradePath);
-  return isUpgradePath;
+  bindWorkspace(-1);
 }

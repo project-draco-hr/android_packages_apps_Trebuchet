@@ -1,0 +1,10 @@
+{
+  if (mPaused) {
+    if (LOGD)     Log.d(TAG,"setLoadOnResume");
+    mOnResumeNeedsLoad=true;
+    return true;
+  }
+ else {
+    return false;
+  }
+}

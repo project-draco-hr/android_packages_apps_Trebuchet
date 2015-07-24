@@ -1,0 +1,16 @@
+{
+switch (info.itemType) {
+case LauncherSettings.Favorites.ITEM_TYPE_CUSTOM_APPWIDGET:
+case LauncherSettings.Favorites.ITEM_TYPE_APPWIDGET:
+    int span[]=new int[2];
+  span[0]=spanX;
+span[1]=spanY;
+addAppWidgetFromDrop((PendingAddWidgetInfo)info,container,screenId,cell,span);
+break;
+case LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT:
+processShortcutFromDrop(info.componentName,container,screenId,cell);
+break;
+default :
+throw new IllegalStateException("Unknown item type: " + info.itemType);
+}
+}

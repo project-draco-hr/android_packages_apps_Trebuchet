@@ -14,6 +14,7 @@
   values.put(LauncherSettings.Favorites.CONTAINER,item.container);
   values.put(LauncherSettings.Favorites.CELLX,item.cellX);
   values.put(LauncherSettings.Favorites.CELLY,item.cellY);
+  values.put(LauncherSettings.Favorites.RANK,item.rank);
   values.put(LauncherSettings.Favorites.SPANX,item.spanX);
   values.put(LauncherSettings.Favorites.SPANY,item.spanY);
   values.put(LauncherSettings.Favorites.SCREEN,item.screenId);

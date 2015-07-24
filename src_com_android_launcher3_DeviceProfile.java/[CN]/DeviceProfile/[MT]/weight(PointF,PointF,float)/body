@@ -1,7 +1,0 @@
-{
-  float d=dist(a,b);
-  if (d == 0f) {
-    return Float.POSITIVE_INFINITY;
-  }
-  return (float)(1f / Math.pow(d,pow));
-}

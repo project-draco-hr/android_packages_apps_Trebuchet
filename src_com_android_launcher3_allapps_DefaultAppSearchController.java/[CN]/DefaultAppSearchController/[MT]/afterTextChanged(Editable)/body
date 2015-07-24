@@ -1,0 +1,11 @@
+{
+  String query=s.toString();
+  if (query.isEmpty()) {
+    mSearchManager.cancel(true);
+    mCb.clearSearchResult();
+  }
+ else {
+    mSearchManager.cancel(false);
+    mSearchManager.doSearch(query,mCb);
+  }
+}

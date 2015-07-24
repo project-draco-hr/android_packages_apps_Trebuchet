@@ -1,0 +1,5 @@
+{
+  mTrackPaint.setAlpha(alpha);
+  mInvalidateRect.set(mThumbOffset.x,0,mThumbOffset.x + mThumbWidth,mRv.getHeight());
+  mRv.invalidate(mInvalidateRect);
+}

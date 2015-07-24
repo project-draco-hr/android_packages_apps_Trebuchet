@@ -1,15 +1,9 @@
 {
-  if (mDrawBackground && mBackgroundAlpha > 0.0f) {
-    Drawable bg;
-    if (mUseActiveGlowBackground) {
-      bg=mActiveGlowBackground;
-    }
- else {
-      bg=mNormalBackground;
-    }
-    bg.setAlpha((int)(mBackgroundAlpha * mBackgroundAlphaMultiplier * 255));
-    bg.setBounds(mBackgroundRect);
-    bg.draw(canvas);
+  if (!mIsDragTarget) {
+    return;
+  }
+  if (mBackgroundAlpha > 0.0f) {
+    mBackground.draw(canvas);
   }
   final Paint paint=mDragOutlinePaint;
   for (int i=0; i < mDragOutlines.length; i++) {
@@ -40,8 +34,7 @@
     }
   }
   int previewOffset=FolderRingAnimator.sPreviewSize;
-  LauncherAppState app=LauncherAppState.getInstance();
-  DeviceProfile grid=app.getDynamicGrid().getDeviceProfile();
+  DeviceProfile grid=mLauncher.getDeviceProfile();
   for (int i=0; i < mFolderOuterRings.size(); i++) {
     FolderRingAnimator fra=mFolderOuterRings.get(i);
     Drawable d;

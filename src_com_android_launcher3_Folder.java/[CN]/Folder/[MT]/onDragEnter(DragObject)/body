@@ -1,5 +1,5 @@
 {
-  mPreviousTargetCell[0]=-1;
-  mPreviousTargetCell[1]=-1;
+  mPrevTargetRank=-1;
   mOnExitAlarm.cancelAlarm();
+  mScrollAreaOffset=d.dragView.getDragRegionWidth() / 2 - d.xOffset;
 }

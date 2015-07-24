@@ -1,0 +1,34 @@
+{
+  assertWorkspaceLoaded();
+  final String intentWithPkg, intentWithoutPkg;
+  if (intent.getComponent() != null) {
+    String packageName=intent.getComponent().getPackageName();
+    if (intent.getPackage() != null) {
+      intentWithPkg=intent.toUri(0);
+      intentWithoutPkg=new Intent(intent).setPackage(null).toUri(0);
+    }
+ else {
+      intentWithPkg=new Intent(intent).setPackage(packageName).toUri(0);
+      intentWithoutPkg=intent.toUri(0);
+    }
+  }
+ else {
+    intentWithPkg=intent.toUri(0);
+    intentWithoutPkg=intent.toUri(0);
+  }
+synchronized (sBgLock) {
+    for (    ItemInfo item : sBgItemsIdMap) {
+      if (item instanceof ShortcutInfo) {
+        ShortcutInfo info=(ShortcutInfo)item;
+        Intent targetIntent=info.promisedIntent == null ? info.intent : info.promisedIntent;
+        if (targetIntent != null && info.user.equals(user)) {
+          String s=targetIntent.toUri(0);
+          if (intentWithPkg.equals(s) || intentWithoutPkg.equals(s)) {
+            return true;
+          }
+        }
+      }
+    }
+  }
+  return false;
+}

@@ -1,11 +1,10 @@
 {
-  final float scale=LauncherAppState.getInstance().getScreenDensity();
-  mMediumOuterBlurMaskFilter=new BlurMaskFilter(scale * 2.0f,BlurMaskFilter.Blur.OUTER);
-  mThinOuterBlurMaskFilter=new BlurMaskFilter(scale * 1.0f,BlurMaskFilter.Blur.OUTER);
-  mMediumInnerBlurMaskFilter=new BlurMaskFilter(scale * 2.0f,BlurMaskFilter.Blur.NORMAL);
-  mShaowBlurMaskFilter=new BlurMaskFilter(scale * 4.0f,BlurMaskFilter.Blur.NORMAL);
-  mShadowOffset=(int)(scale * 2.0f);
-  shadowBitmapPadding=(int)(scale * 4.0f);
+  Resources res=context.getResources();
+  float mediumBlur=res.getDimension(R.dimen.blur_size_medium_outline);
+  mMediumOuterBlurMaskFilter=new BlurMaskFilter(mediumBlur,BlurMaskFilter.Blur.OUTER);
+  mMediumInnerBlurMaskFilter=new BlurMaskFilter(mediumBlur,BlurMaskFilter.Blur.NORMAL);
+  mThinOuterBlurMaskFilter=new BlurMaskFilter(res.getDimension(R.dimen.blur_size_thin_outline),BlurMaskFilter.Blur.OUTER);
+  mShadowBlurMaskFilter=new BlurMaskFilter(res.getDimension(R.dimen.blur_size_click_shadow),BlurMaskFilter.Blur.NORMAL);
   mDrawPaint.setFilterBitmap(true);
   mDrawPaint.setAntiAlias(true);
   mBlurPaint.setFilterBitmap(true);

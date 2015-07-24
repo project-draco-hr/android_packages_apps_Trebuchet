@@ -1,0 +1,7 @@
+View v
+Bitmap bmp
+DragSource source
+Object dragInfo
+Rect viewImageBounds
+int dragAction
+float initialDragViewScale

@@ -1,9 +1,0 @@
-{
-  mInsets.set(insets);
-  LayoutParams flp=(LayoutParams)mContent.getLayoutParams();
-  flp.topMargin=insets.top;
-  flp.bottomMargin=insets.bottom;
-  flp.leftMargin=insets.left;
-  flp.rightMargin=insets.right;
-  mContent.setLayoutParams(flp);
-}

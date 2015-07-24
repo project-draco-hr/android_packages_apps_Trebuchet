@@ -1,0 +1,10 @@
+{
+  if (isLoadingWorkspace() || !mHasLoaderCompletedOnce) {
+synchronized (mBindCompleteRunnables) {
+      mBindCompleteRunnables.add(r);
+    }
+  }
+ else {
+    runOnWorkerThread(r);
+  }
+}

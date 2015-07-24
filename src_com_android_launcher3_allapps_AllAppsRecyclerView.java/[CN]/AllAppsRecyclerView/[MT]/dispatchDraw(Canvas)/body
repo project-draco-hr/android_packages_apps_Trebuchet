@@ -1,0 +1,4 @@
+{
+  canvas.clipRect(mBackgroundPadding.left,mBackgroundPadding.top,getWidth() - mBackgroundPadding.right,getHeight() - mBackgroundPadding.bottom);
+  super.dispatchDraw(canvas);
+}

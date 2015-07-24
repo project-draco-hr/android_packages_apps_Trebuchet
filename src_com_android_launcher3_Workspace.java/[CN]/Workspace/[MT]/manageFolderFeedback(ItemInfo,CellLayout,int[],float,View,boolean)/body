@@ -1,0 +1,31 @@
+{
+  boolean userFolderPending=willCreateUserFolder(info,targetLayout,targetCell,distance,false);
+  if (mDragMode == DRAG_MODE_NONE && userFolderPending && !mFolderCreationAlarm.alarmPending()) {
+    FolderCreationAlarmListener listener=new FolderCreationAlarmListener(targetLayout,targetCell[0],targetCell[1]);
+    if (!accessibleDrag) {
+      mFolderCreationAlarm.setOnAlarmListener(listener);
+      mFolderCreationAlarm.setAlarm(FOLDER_CREATION_TIMEOUT);
+    }
+ else {
+      listener.onAlarm(mFolderCreationAlarm);
+    }
+    return;
+  }
+  boolean willAddToFolder=willAddToExistingUserFolder(info,targetLayout,targetCell,distance);
+  if (willAddToFolder && mDragMode == DRAG_MODE_NONE) {
+    mDragOverFolderIcon=((FolderIcon)dragOverView);
+    mDragOverFolderIcon.onDragEnter(info);
+    if (targetLayout != null) {
+      targetLayout.clearDragOutlines();
+    }
+    setDragMode(DRAG_MODE_ADD_TO_FOLDER);
+    return;
+  }
+  if (mDragMode == DRAG_MODE_ADD_TO_FOLDER && !willAddToFolder) {
+    setDragMode(DRAG_MODE_NONE);
+  }
+  if (mDragMode == DRAG_MODE_CREATE_FOLDER && !userFolderPending) {
+    setDragMode(DRAG_MODE_NONE);
+  }
+  return;
+}

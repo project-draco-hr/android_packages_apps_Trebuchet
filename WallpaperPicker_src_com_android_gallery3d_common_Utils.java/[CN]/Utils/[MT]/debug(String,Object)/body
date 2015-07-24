@@ -1,3 +1,0 @@
-{
-  Log.v(DEBUG_TAG,String.format(message,args));
-}

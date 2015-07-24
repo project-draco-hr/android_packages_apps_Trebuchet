@@ -2,18 +2,16 @@
   final ContentResolver cr=context.getContentResolver();
   Runnable r=new Runnable(){
     public void run(){
-      cr.delete(LauncherSettings.Favorites.getContentUri(info.id,false),null,null);
+      cr.delete(LauncherSettings.Favorites.getContentUri(info.id),null,null);
 synchronized (sBgLock) {
         sBgItemsIdMap.remove(info.id);
         sBgFolders.remove(info.id);
-        sBgDbIconCache.remove(info);
         sBgWorkspaceItems.remove(info);
       }
-      cr.delete(LauncherSettings.Favorites.CONTENT_URI_NO_NOTIFICATION,LauncherSettings.Favorites.CONTAINER + "=" + info.id,null);
+      cr.delete(LauncherSettings.Favorites.CONTENT_URI,LauncherSettings.Favorites.CONTAINER + "=" + info.id,null);
 synchronized (sBgLock) {
         for (        ItemInfo childInfo : info.contents) {
           sBgItemsIdMap.remove(childInfo.id);
-          sBgDbIconCache.remove(childInfo);
         }
       }
     }

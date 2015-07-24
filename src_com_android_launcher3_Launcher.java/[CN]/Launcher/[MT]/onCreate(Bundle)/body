@@ -9,15 +9,14 @@
   super.onCreate(savedInstanceState);
   LauncherAppState.setApplicationContext(getApplicationContext());
   LauncherAppState app=LauncherAppState.getInstance();
-  LauncherAppState.getLauncherProvider().setLauncherProviderChangeListener(this);
-  DeviceProfile grid=app.initDynamicGrid(this);
+  mDeviceProfile=getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE ? app.getInvariantDeviceProfile().landscapeProfile : app.getInvariantDeviceProfile().portraitProfile;
   mSharedPrefs=getSharedPreferences(LauncherAppState.getSharedPreferencesKey(),Context.MODE_PRIVATE);
   mIsSafeModeEnabled=getPackageManager().isSafeMode();
   mModel=app.setLauncher(this);
   mIconCache=app.getIconCache();
-  mIconCache.flushInvalidIcons(grid);
   mDragController=new DragController(this);
   mInflater=getLayoutInflater();
+  mStateTransitionAnimation=new LauncherStateTransitionAnimation(this,this);
   mStats=new Stats(this);
   mAppWidgetManager=AppWidgetManagerCompat.getInstance(this);
   mAppWidgetHost=new LauncherAppWidgetHost(this,APPWIDGET_HOST_ID);
@@ -26,11 +25,9 @@
   if (PROFILE_STARTUP) {
     android.os.Debug.startMethodTracing(Environment.getExternalStorageDirectory() + "/launcher");
   }
-  checkForLocaleChange();
   setContentView(R.layout.launcher);
   setupViews();
-  grid.layout(this);
-  registerContentObservers();
+  mDeviceProfile.layout(this);
   lockAllApps();
   mSavedState=savedInstanceState;
   restoreState(mSavedState);
@@ -39,17 +36,21 @@
   }
   if (!mRestoring) {
     if (DISABLE_SYNCHRONOUS_BINDING_CURRENT_PAGE) {
-      mModel.startLoader(true,PagedView.INVALID_RESTORE_PAGE);
+      mModel.startLoader(PagedView.INVALID_RESTORE_PAGE);
     }
  else {
-      mModel.startLoader(true,mWorkspace.getRestorePage());
+      mModel.startLoader(mWorkspace.getRestorePage());
     }
   }
   mDefaultKeySsb=new SpannableStringBuilder();
   Selection.setSelection(mDefaultKeySsb,0);
   IntentFilter filter=new IntentFilter(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
   registerReceiver(mCloseSystemDialogsReceiver,filter);
-  unlockScreenOrientation(true);
+  mRotationEnabled=Utilities.isRotationAllowedForDevice(getApplicationContext());
+  if (!mRotationEnabled) {
+    mRotationEnabled=Utilities.isAllowRotationPrefEnabled(getApplicationContext(),false);
+  }
+  setOrientation();
   if (mLauncherCallbacks != null) {
     mLauncherCallbacks.onCreate(savedInstanceState);
     if (mLauncherCallbacks.hasLauncherOverlay()) {

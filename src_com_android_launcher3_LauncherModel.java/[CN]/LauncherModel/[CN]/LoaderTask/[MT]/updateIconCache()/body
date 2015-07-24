@@ -1,0 +1,20 @@
+{
+  HashSet<String> packagesToIgnore=new HashSet<>();
+synchronized (sBgLock) {
+    for (    ItemInfo info : sBgItemsIdMap) {
+      if (info instanceof ShortcutInfo) {
+        ShortcutInfo si=(ShortcutInfo)info;
+        if (si.isPromise() && si.getTargetComponent() != null) {
+          packagesToIgnore.add(si.getTargetComponent().getPackageName());
+        }
+      }
+ else       if (info instanceof LauncherAppWidgetInfo) {
+        LauncherAppWidgetInfo lawi=(LauncherAppWidgetInfo)info;
+        if (lawi.hasRestoreFlag(LauncherAppWidgetInfo.FLAG_PROVIDER_NOT_READY)) {
+          packagesToIgnore.add(lawi.providerName.getPackageName());
+        }
+      }
+    }
+  }
+  mIconCache.updateDbIcons(packagesToIgnore);
+}

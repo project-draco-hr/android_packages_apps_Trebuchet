@@ -1,5 +1,0 @@
-{
-  super("RenderThread");
-  mRenderer=renderer;
-  start();
-}

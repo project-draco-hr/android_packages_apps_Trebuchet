@@ -1,0 +1,14 @@
+{
+  float t=animation.getAnimatedFraction();
+  if (t > mAnimationTimeFraction) {
+    t=1;
+  }
+ else {
+    t=t / mAnimationTimeFraction;
+  }
+  final DragView dragView=(DragView)mDragLayer.getAnimatedView();
+  final float time=t * mDuration;
+  dragView.setTranslationX(time * mUX + mFrom.left + mAX * time * time / 2);
+  dragView.setTranslationY(time * mUY + mFrom.top + mAY * time * time / 2);
+  dragView.setAlpha(1f - mAlphaInterpolator.getInterpolation(t));
+}

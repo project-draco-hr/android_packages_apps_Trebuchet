@@ -1,0 +1,16 @@
+{
+  if (getTag() == info) {
+    mIconLoadRequest=null;
+    mDisableRelayout=true;
+    if (info instanceof AppInfo) {
+      applyFromApplicationInfo((AppInfo)info);
+    }
+ else     if (info instanceof ShortcutInfo) {
+      applyFromShortcutInfo((ShortcutInfo)info,LauncherAppState.getInstance().getIconCache());
+    }
+ else     if (info instanceof PackageItemInfo) {
+      applyFromPackageItemInfo((PackageItemInfo)info);
+    }
+    mDisableRelayout=false;
+  }
+}

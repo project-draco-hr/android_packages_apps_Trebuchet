@@ -10,7 +10,7 @@
   }
   if (mIcon != null) {
     if (mDisabledForSafeMode) {
-      FastBitmapDrawable disabledIcon=Utilities.createIconDrawable(mIcon);
+      FastBitmapDrawable disabledIcon=mLauncher.createIconDrawable(mIcon);
       disabledIcon.setGhostModeEnabled(true);
       mCenterDrawable=disabledIcon;
       mTopCornerDrawable=null;
@@ -24,7 +24,7 @@
         sPreloaderTheme=getResources().newTheme();
         sPreloaderTheme.applyStyle(R.style.PreloadIcon,true);
       }
-      FastBitmapDrawable drawable=Utilities.createIconDrawable(mIcon);
+      FastBitmapDrawable drawable=mLauncher.createIconDrawable(mIcon);
       mCenterDrawable=new PreloadIconDrawable(drawable,sPreloaderTheme);
       mCenterDrawable.setCallback(this);
       mTopCornerDrawable=null;

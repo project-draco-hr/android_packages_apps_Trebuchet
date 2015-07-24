@@ -1,4 +1,0 @@
-{
-  mUseQueue=true;
-  if (DEBUG)   Log.d(TAG,"updates paused");
-}

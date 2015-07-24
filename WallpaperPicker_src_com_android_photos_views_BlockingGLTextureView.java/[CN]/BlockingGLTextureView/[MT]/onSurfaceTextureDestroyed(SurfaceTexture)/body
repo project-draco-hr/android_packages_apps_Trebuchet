@@ -1,6 +1,0 @@
-{
-  if (mRenderThread != null) {
-    mRenderThread.setSurface(null);
-  }
-  return false;
-}

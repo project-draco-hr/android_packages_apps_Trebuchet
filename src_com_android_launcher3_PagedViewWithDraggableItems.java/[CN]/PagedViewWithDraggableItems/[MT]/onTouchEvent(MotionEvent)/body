@@ -1,4 +1,0 @@
-{
-  handleTouchEvent(ev);
-  return super.onTouchEvent(ev);
-}

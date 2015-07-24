@@ -1,0 +1,10 @@
+{
+  if (mThumbOffset.x < 0 || mThumbOffset.y < 0) {
+    return;
+  }
+  if (mTrackPaint.getAlpha() > 0) {
+    canvas.drawRect(mThumbOffset.x,0,mThumbOffset.x + mThumbWidth,mRv.getHeight(),mTrackPaint);
+  }
+  canvas.drawRect(mThumbOffset.x,mThumbOffset.y,mThumbOffset.x + mThumbWidth,mThumbOffset.y + mThumbHeight,mThumbPaint);
+  mPopup.draw(canvas);
+}

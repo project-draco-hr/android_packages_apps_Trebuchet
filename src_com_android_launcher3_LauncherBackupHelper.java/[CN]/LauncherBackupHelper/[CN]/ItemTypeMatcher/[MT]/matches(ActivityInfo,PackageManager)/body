@@ -1,0 +1,10 @@
+{
+  for (  Intent intent : mIntents) {
+    intent.setPackage(activity.packageName);
+    ResolveInfo info=pm.resolveActivity(intent,0);
+    if (info != null && (info.activityInfo.name.equals(activity.name) || info.activityInfo.name.equals(activity.targetActivity))) {
+      return true;
+    }
+  }
+  return false;
+}

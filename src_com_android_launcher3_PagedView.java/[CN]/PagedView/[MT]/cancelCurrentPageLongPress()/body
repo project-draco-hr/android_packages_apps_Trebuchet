@@ -1,8 +1,6 @@
 {
-  if (mAllowLongPress) {
-    final View currentPage=getPageAt(mCurrentPage);
-    if (currentPage != null) {
-      currentPage.cancelLongPress();
-    }
+  final View currentPage=getPageAt(mCurrentPage);
+  if (currentPage != null) {
+    currentPage.cancelLongPress();
   }
 }

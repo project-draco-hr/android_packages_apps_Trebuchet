@@ -1,0 +1,4 @@
+int xPos
+int yPos
+int countX
+int countY

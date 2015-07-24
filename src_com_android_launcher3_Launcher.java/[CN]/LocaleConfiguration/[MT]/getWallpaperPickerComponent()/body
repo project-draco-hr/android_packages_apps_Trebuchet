@@ -1,6 +1,0 @@
-{
-  if (mLauncherCallbacks != null) {
-    return mLauncherCallbacks.getWallpaperPickerComponent();
-  }
-  return new ComponentName(getPackageName(),LauncherWallpaperPickerActivity.class.getName());
-}

@@ -1,3 +1,14 @@
 {
-  applyFromShortcutInfo(info,iconCache,setDefaultPadding,false);
+  Bitmap b=info.getIcon(iconCache);
+  FastBitmapDrawable iconDrawable=mLauncher.createIconDrawable(b);
+  iconDrawable.setGhostModeEnabled(info.isDisabled != 0);
+  setIcon(iconDrawable,mIconSize);
+  if (info.contentDescription != null) {
+    setContentDescription(info.contentDescription);
+  }
+  setText(info.title);
+  setTag(info);
+  if (promiseStateChanged || info.isPromise()) {
+    applyState(promiseStateChanged);
+  }
 }

@@ -1,0 +1,6 @@
+{
+  iconSize*=w;
+  iconTextSize*=w;
+  hotseatIconSize*=w;
+  return this;
+}

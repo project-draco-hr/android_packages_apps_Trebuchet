@@ -1,6 +1,0 @@
-{
-  if (mCellCountX > 0) {
-    return mCellCountX * mCellWidth + (mCellCountX - 1) * Math.max(0,mWidthGap);
-  }
-  return 0;
-}

@@ -1,3 +1,0 @@
-{
-  return getChangeStateAnimation(state,animated,delay,snapPage,null);
-}

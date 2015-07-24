@@ -1,8 +1,0 @@
-{
-  if (mContentType == ContentType.Widgets) {
-    syncWidgetPageItems(page,immediate);
-  }
- else {
-    syncAppsPageItems(page,immediate);
-  }
-}

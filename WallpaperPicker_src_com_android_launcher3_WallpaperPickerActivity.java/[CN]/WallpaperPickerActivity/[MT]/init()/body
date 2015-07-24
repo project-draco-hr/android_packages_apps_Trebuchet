@@ -2,20 +2,21 @@
   setContentView(R.layout.wallpaper_picker);
   mCropView=(CropView)findViewById(R.id.cropView);
   mCropView.setVisibility(View.INVISIBLE);
-  mWallpaperStrip=findViewById(R.id.wallpaper_strip);
+  mProgressView=findViewById(R.id.loading);
+  mWallpaperScrollContainer=(HorizontalScrollView)findViewById(R.id.wallpaper_scroll_container);
   mCropView.setTouchCallback(new CropView.TouchCallback(){
     ViewPropertyAnimator mAnim;
     @Override public void onTouchDown(){
       if (mAnim != null) {
         mAnim.cancel();
       }
-      if (mWallpaperStrip.getAlpha() == 1f) {
+      if (mWallpaperScrollContainer.getAlpha() == 1f) {
         mIgnoreNextTap=true;
       }
-      mAnim=mWallpaperStrip.animate();
+      mAnim=mWallpaperScrollContainer.animate();
       mAnim.alpha(0f).setDuration(150).withEndAction(new Runnable(){
         public void run(){
-          mWallpaperStrip.setVisibility(View.INVISIBLE);
+          mWallpaperScrollContainer.setVisibility(View.INVISIBLE);
         }
       }
 );
@@ -32,8 +33,8 @@
         if (mAnim != null) {
           mAnim.cancel();
         }
-        mWallpaperStrip.setVisibility(View.VISIBLE);
-        mAnim=mWallpaperStrip.animate();
+        mWallpaperScrollContainer.setVisibility(View.VISIBLE);
+        mAnim=mWallpaperScrollContainer.animate();
         mAnim.alpha(1f).setDuration(150).setInterpolator(new DecelerateInterpolator(0.75f));
         mAnim.start();
       }
@@ -48,7 +49,7 @@
         }
         return;
       }
-      mSetWallpaperButton.setEnabled(true);
+      setWallpaperButtonEnabled(true);
       WallpaperTileInfo info=(WallpaperTileInfo)v.getTag();
       if (info.isSelectable() && v.getVisibility() == View.VISIBLE) {
         selectTile(v);
@@ -77,13 +78,13 @@
 ;
   ArrayList<WallpaperTileInfo> wallpapers=findBundledWallpapers();
   mWallpapersView=(LinearLayout)findViewById(R.id.wallpaper_list);
-  SimpleWallpapersAdapter ia=new SimpleWallpapersAdapter(this,wallpapers);
+  SimpleWallpapersAdapter ia=new SimpleWallpapersAdapter(getContext(),wallpapers);
   populateWallpapersFromAdapter(mWallpapersView,ia,false);
-  mSavedImages=new SavedWallpaperImages(this);
+  mSavedImages=new SavedWallpaperImages(getContext());
   mSavedImages.loadThumbnailsAndImageIdList();
   populateWallpapersFromAdapter(mWallpapersView,mSavedImages,true);
   final LinearLayout liveWallpapersView=(LinearLayout)findViewById(R.id.live_wallpaper_list);
-  final LiveWallpaperListAdapter a=new LiveWallpaperListAdapter(this);
+  final LiveWallpaperListAdapter a=new LiveWallpaperListAdapter(getContext());
   a.registerDataSetObserver(new DataSetObserver(){
     public void onChanged(){
       liveWallpapersView.removeAllViews();
@@ -94,16 +95,15 @@
   }
 );
   final LinearLayout thirdPartyWallpapersView=(LinearLayout)findViewById(R.id.third_party_wallpaper_list);
-  final ThirdPartyWallpaperPickerListAdapter ta=new ThirdPartyWallpaperPickerListAdapter(this);
+  final ThirdPartyWallpaperPickerListAdapter ta=new ThirdPartyWallpaperPickerListAdapter(getContext());
   populateWallpapersFromAdapter(thirdPartyWallpapersView,ta,false);
   LinearLayout masterWallpaperList=(LinearLayout)findViewById(R.id.master_wallpaper_list);
   FrameLayout pickImageTile=(FrameLayout)getLayoutInflater().inflate(R.layout.wallpaper_picker_image_picker_item,masterWallpaperList,false);
-  setWallpaperItemPaddingToZero(pickImageTile);
   masterWallpaperList.addView(pickImageTile,0);
   Bitmap lastPhoto=getThumbnailOfLastPhoto();
   if (lastPhoto != null) {
     ImageView galleryThumbnailBg=(ImageView)pickImageTile.findViewById(R.id.wallpaper_image);
-    galleryThumbnailBg.setImageBitmap(getThumbnailOfLastPhoto());
+    galleryThumbnailBg.setImageBitmap(lastPhoto);
     int colorOverlay=getResources().getColor(R.color.wallpaper_picker_translucent_gray);
     galleryThumbnailBg.setColorFilter(colorOverlay,PorterDuff.Mode.SRC_ATOP);
   }

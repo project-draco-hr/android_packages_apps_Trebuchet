@@ -1,4 +1,0 @@
-{
-  PagedViewCellLayout.LayoutParams lp=(PagedViewCellLayout.LayoutParams)child.getLayoutParams();
-  lp.isDragging=true;
-}

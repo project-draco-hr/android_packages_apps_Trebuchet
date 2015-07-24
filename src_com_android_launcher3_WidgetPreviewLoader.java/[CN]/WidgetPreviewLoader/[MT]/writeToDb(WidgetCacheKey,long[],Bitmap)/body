@@ -1,0 +1,16 @@
+{
+  ContentValues values=new ContentValues();
+  values.put(CacheDb.COLUMN_COMPONENT,key.componentName.flattenToShortString());
+  values.put(CacheDb.COLUMN_USER,mUserManager.getSerialNumberForUser(key.user));
+  values.put(CacheDb.COLUMN_SIZE,key.size);
+  values.put(CacheDb.COLUMN_PACKAGE,key.componentName.getPackageName());
+  values.put(CacheDb.COLUMN_VERSION,versions[0]);
+  values.put(CacheDb.COLUMN_LAST_UPDATED,versions[1]);
+  values.put(CacheDb.COLUMN_PREVIEW_BITMAP,Utilities.flattenBitmap(preview));
+  try {
+    mDb.getWritableDatabase().insertWithOnConflict(CacheDb.TABLE_NAME,null,values,SQLiteDatabase.CONFLICT_REPLACE);
+  }
+ catch (  SQLException e) {
+    Log.e(TAG,"Error saving image to DB",e);
+  }
+}

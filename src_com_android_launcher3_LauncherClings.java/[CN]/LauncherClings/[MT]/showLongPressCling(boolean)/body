@@ -3,7 +3,7 @@
   View cling=mInflater.inflate(R.layout.longpress_cling,root,false);
   cling.setOnLongClickListener(new OnLongClickListener(){
     @Override public boolean onLongClick(    View v){
-      mLauncher.getWorkspace().enterOverviewMode();
+      mLauncher.showOverviewMode(true);
       dismissLongPressCling();
       return true;
     }

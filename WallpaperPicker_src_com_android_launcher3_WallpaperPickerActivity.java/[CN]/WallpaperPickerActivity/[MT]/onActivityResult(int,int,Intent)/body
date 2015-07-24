@@ -1,22 +1,12 @@
 {
-  if (requestCode == IMAGE_PICK && resultCode == RESULT_OK) {
+  if (requestCode == IMAGE_PICK && resultCode == Activity.RESULT_OK) {
     if (data != null && data.getData() != null) {
       Uri uri=data.getData();
       addTemporaryWallpaperTile(uri,false);
     }
   }
- else   if (requestCode == PICK_WALLPAPER_THIRD_PARTY_ACTIVITY) {
-    setResult(RESULT_OK);
+ else   if (requestCode == PICK_WALLPAPER_THIRD_PARTY_ACTIVITY && resultCode == Activity.RESULT_OK) {
+    setResult(Activity.RESULT_OK);
     finish();
-  }
- else   if (requestCode == PICK_LIVE_WALLPAPER) {
-    WallpaperManager wm=WallpaperManager.getInstance(this);
-    final WallpaperInfo oldLiveWallpaper=mLiveWallpaperInfoOnPickerLaunch;
-    final WallpaperInfo clickedWallpaper=mLastClickedLiveWallpaperInfo;
-    WallpaperInfo newLiveWallpaper=wm.getWallpaperInfo();
-    if (newLiveWallpaper != null && (oldLiveWallpaper == null || !oldLiveWallpaper.getComponent().equals(newLiveWallpaper.getComponent()) || clickedWallpaper.getComponent().equals(oldLiveWallpaper.getComponent()))) {
-      setResult(RESULT_OK);
-      finish();
-    }
   }
 }

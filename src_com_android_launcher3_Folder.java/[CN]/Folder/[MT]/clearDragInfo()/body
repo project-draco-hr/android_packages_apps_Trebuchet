@@ -1,0 +1,6 @@
+{
+  mCurrentDragInfo=null;
+  mCurrentDragView=null;
+  mSuppressOnAdd=false;
+  mIsExternalDrag=false;
+}

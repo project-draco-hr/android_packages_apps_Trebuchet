@@ -1,7 +1,0 @@
-{
-  if (LauncherAppState.isDisableAllApps() && isWorkspaceOrFolderApplication(d)) {
-    ShortcutInfo shortcut=(ShortcutInfo)d.dragInfo;
-    return !InstallShortcutReceiver.isValidShortcutLaunchIntent(shortcut.intent);
-  }
-  return false;
-}

@@ -1,0 +1,5 @@
+{
+  final Pair<ComponentName,Integer> componentInfo=getAppInfoFlags(info);
+  final UserHandleCompat user=((ItemInfo)info).user;
+  return launcher.startApplicationUninstallActivity(componentInfo.first,componentInfo.second,user);
+}

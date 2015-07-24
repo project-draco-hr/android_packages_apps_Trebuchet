@@ -1,0 +1,5 @@
+{
+  if (mLauncherCallbacks != null) {
+    mLauncherCallbacks.onRequestPermissionsResult(requestCode,permissions,grantResults);
+  }
+}

@@ -1,0 +1,3 @@
+{
+  applyFromShortcutInfo(info,iconCache,false);
+}

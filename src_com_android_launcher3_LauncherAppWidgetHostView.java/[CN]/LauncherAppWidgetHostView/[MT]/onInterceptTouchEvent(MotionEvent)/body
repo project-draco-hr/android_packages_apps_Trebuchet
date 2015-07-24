@@ -6,10 +6,16 @@
     mLongPressHelper.cancelLongPress();
     return true;
   }
+  if (mStylusEventHelper.checkAndPerformStylusEvent(ev)) {
+    mLongPressHelper.cancelLongPress();
+    return true;
+  }
 switch (ev.getAction()) {
 case MotionEvent.ACTION_DOWN:
 {
-      mLongPressHelper.postCheckForLongPress();
+      if (!mStylusEventHelper.inStylusButtonPressed()) {
+        mLongPressHelper.postCheckForLongPress();
+      }
       mDragLayer.setTouchCompleteListener(this);
       break;
     }

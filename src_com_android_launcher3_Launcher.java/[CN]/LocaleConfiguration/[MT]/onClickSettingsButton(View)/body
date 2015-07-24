@@ -1,6 +1,0 @@
-{
-  if (LOGD)   Log.d(TAG,"onClickSettingsButton");
-  if (mLauncherCallbacks != null) {
-    mLauncherCallbacks.onClickSettingsButton(v);
-  }
-}

@@ -1,0 +1,5 @@
+{
+  mMotionDownX=x;
+  mMotionDownY=y;
+  mLastDropTarget=null;
+}

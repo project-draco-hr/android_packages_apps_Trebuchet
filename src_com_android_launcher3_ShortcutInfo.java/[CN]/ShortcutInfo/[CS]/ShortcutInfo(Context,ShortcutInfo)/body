@@ -1,6 +1,6 @@
 {
   super(info);
-  title=info.title.toString();
+  title=Utilities.trim(info.title);
   intent=new Intent(info.intent);
   if (info.iconResource != null) {
     iconResource=new Intent.ShortcutIconResource();

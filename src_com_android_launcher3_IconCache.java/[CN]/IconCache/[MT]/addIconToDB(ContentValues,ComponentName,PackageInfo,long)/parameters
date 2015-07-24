@@ -1,0 +1,4 @@
+ContentValues values
+ComponentName key
+PackageInfo info
+long userSerial

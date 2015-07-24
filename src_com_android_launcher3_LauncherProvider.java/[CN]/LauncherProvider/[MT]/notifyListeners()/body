@@ -1,0 +1,6 @@
+{
+  LauncherBackupAgentHelper.dataChanged(getContext());
+  if (mListener != null) {
+    mListener.onLauncherProviderChange();
+  }
+}

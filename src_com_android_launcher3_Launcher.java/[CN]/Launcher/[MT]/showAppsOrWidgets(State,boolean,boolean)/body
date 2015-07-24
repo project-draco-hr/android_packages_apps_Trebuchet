@@ -1,0 +1,20 @@
+{
+  if (mState != State.WORKSPACE && mState != State.APPS_SPRING_LOADED && mState != State.WIDGETS_SPRING_LOADED) {
+    return false;
+  }
+  if (toState != State.APPS && toState != State.WIDGETS) {
+    return false;
+  }
+  if (toState == State.APPS) {
+    mStateTransitionAnimation.startAnimationToAllApps(animated,focusSearchBar);
+  }
+ else {
+    mStateTransitionAnimation.startAnimationToWidgets(animated);
+  }
+  mState=toState;
+  mUserPresent=false;
+  updateAutoAdvanceState();
+  closeFolder();
+  getWindow().getDecorView().sendAccessibilityEvent(AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED);
+  return true;
+}

@@ -1,0 +1,8 @@
+{
+  super.onFastScrollCompleted();
+  if (mLastFastScrollFocusedView != null) {
+    mLastFastScrollFocusedView.setFastScrollFocused(false,true);
+    mLastFastScrollFocusedView=null;
+  }
+  mPrevFastScrollFocusedPosition=-1;
+}

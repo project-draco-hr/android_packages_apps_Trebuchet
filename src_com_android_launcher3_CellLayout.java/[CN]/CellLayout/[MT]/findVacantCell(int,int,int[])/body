@@ -1,0 +1,3 @@
+{
+  return Utilities.findVacantCell(outXY,spanX,spanY,mCountX,mCountY,mOccupied);
+}

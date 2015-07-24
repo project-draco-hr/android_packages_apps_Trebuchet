@@ -1,8 +1,13 @@
 {
-  mAutoScrollHelper.setEnabled(false);
   if (!d.dragComplete) {
     mOnExitAlarm.setOnAlarmListener(mOnExitAlarmListener);
     mOnExitAlarm.setAlarm(ON_EXIT_CLOSE_DELAY);
   }
   mReorderAlarm.cancelAlarm();
+  mOnScrollHintAlarm.cancelAlarm();
+  mScrollPauseAlarm.cancelAlarm();
+  if (mScrollHintDir != DragController.SCROLL_NONE) {
+    mContent.clearScrollHint();
+    mScrollHintDir=DragController.SCROLL_NONE;
+  }
 }

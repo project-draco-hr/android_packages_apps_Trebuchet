@@ -1,6 +1,6 @@
 {
   if (mPageIndicator != null) {
-    mPageIndicator.removeAllMarkers(mAllowPagedViewAnimations);
+    mPageIndicator.removeAllMarkers(true);
   }
   super.removeAllViewsInLayout();
 }

@@ -1,0 +1,30 @@
+{
+  super.onDestroy();
+  mHandler.removeMessages(ADVANCE_MSG);
+  mHandler.removeMessages(0);
+  mWorkspace.removeCallbacks(mBuildLayersRunnable);
+  LauncherAppState app=(LauncherAppState.getInstance());
+  if (mModel.isCurrentCallbacks(this)) {
+    mModel.stopLoader();
+    app.setLauncher(null);
+  }
+  try {
+    mAppWidgetHost.stopListening();
+  }
+ catch (  NullPointerException ex) {
+    Log.w(TAG,"problem while stopping AppWidgetHost during Launcher destruction",ex);
+  }
+  mAppWidgetHost=null;
+  mWidgetsToAdvance.clear();
+  TextKeyListener.getInstance().release();
+  unregisterReceiver(mCloseSystemDialogsReceiver);
+  mDragLayer.clearAllResizeFrames();
+  ((ViewGroup)mWorkspace.getParent()).removeAllViews();
+  mWorkspace.removeAllWorkspaceScreens();
+  mWorkspace=null;
+  mDragController=null;
+  LauncherAnimUtils.onDestroyActivity();
+  if (mLauncherCallbacks != null) {
+    mLauncherCallbacks.onDestroy();
+  }
+}

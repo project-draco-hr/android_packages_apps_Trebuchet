@@ -1,9 +1,4 @@
 {
-  if (!initializeIconCache()) {
-    dataChanged();
-    if (DEBUG)     Log.d(TAG,"Launcher is not initialized, delaying icon backup");
-    return;
-  }
   final ContentResolver cr=mContext.getContentResolver();
   final int dpi=mContext.getResources().getDisplayMetrics().densityDpi;
   final UserHandleCompat myUserHandle=UserHandleCompat.myUserHandle();

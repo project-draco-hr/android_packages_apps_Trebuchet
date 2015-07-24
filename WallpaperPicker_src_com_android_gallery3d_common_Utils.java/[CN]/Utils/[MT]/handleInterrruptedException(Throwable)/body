@@ -1,7 +1,0 @@
-{
-  if (e instanceof InterruptedIOException || e instanceof InterruptedException) {
-    Thread.currentThread().interrupt();
-    return true;
-  }
-  return false;
-}

@@ -1,5 +1,5 @@
 {
-  if (!mIsDataReady || getChildCount() == 0) {
+  if (getChildCount() == 0) {
     return;
   }
   if (DEBUG)   Log.d(TAG,"PagedView.onLayout()");
@@ -7,16 +7,15 @@
   int offsetX=getViewportOffsetX();
   int offsetY=getViewportOffsetY();
   mViewport.offset(offsetX,offsetY);
-  final boolean isRtl=isLayoutRtl();
-  final int startIndex=isRtl ? childCount - 1 : 0;
-  final int endIndex=isRtl ? -1 : childCount;
-  final int delta=isRtl ? -1 : 1;
+  final int startIndex=mIsRtl ? childCount - 1 : 0;
+  final int endIndex=mIsRtl ? -1 : childCount;
+  final int delta=mIsRtl ? -1 : 1;
   int verticalPadding=getPaddingTop() + getPaddingBottom();
   LayoutParams lp=(LayoutParams)getChildAt(startIndex).getLayoutParams();
   LayoutParams nextLp;
   int childLeft=offsetX + (lp.isFullScreenPage ? 0 : getPaddingLeft());
-  if (mPageScrolls == null || getChildCount() != mChildCountOnLastLayout) {
-    mPageScrolls=new int[getChildCount()];
+  if (mPageScrolls == null || childCount != mChildCountOnLastLayout) {
+    mPageScrolls=new int[childCount];
   }
   for (int i=startIndex; i != endIndex; i+=delta) {
     final View child=getPageAt(i);
@@ -52,21 +51,31 @@
  else       if (nextLp != null && nextLp.isFullScreenPage) {
         pageGap=getPaddingRight();
       }
-      childLeft+=childWidth + pageGap;
+      childLeft+=childWidth + pageGap + getChildGap();
     }
   }
-  if (mFirstLayout && mCurrentPage >= 0 && mCurrentPage < getChildCount()) {
+  final LayoutTransition transition=getLayoutTransition();
+  if (transition != null && transition.isRunning()) {
+    transition.addTransitionListener(new LayoutTransition.TransitionListener(){
+      @Override public void startTransition(      LayoutTransition transition,      ViewGroup container,      View view,      int transitionType){
+      }
+      @Override public void endTransition(      LayoutTransition transition,      ViewGroup container,      View view,      int transitionType){
+        if (!transition.isRunning()) {
+          transition.removeTransitionListener(this);
+          updateMaxScrollX();
+        }
+      }
+    }
+);
+  }
+ else {
+    updateMaxScrollX();
+  }
+  if (mFirstLayout && mCurrentPage >= 0 && mCurrentPage < childCount) {
     updateCurrentPageScroll();
     mFirstLayout=false;
   }
-  if (childCount > 0) {
-    final int index=isLayoutRtl() ? 0 : childCount - 1;
-    mMaxScrollX=getScrollForPage(index);
-  }
- else {
-    mMaxScrollX=0;
-  }
-  if (mScroller.isFinished() && mChildCountOnLastLayout != getChildCount() && !mDeferringForDelete) {
+  if (mScroller.isFinished() && mChildCountOnLastLayout != childCount) {
     if (mRestorePage != INVALID_RESTORE_PAGE) {
       setCurrentPage(mRestorePage);
       mRestorePage=INVALID_RESTORE_PAGE;
@@ -75,7 +84,7 @@
       setCurrentPage(getNextPage());
     }
   }
-  mChildCountOnLastLayout=getChildCount();
+  mChildCountOnLastLayout=childCount;
   if (isReordering(true)) {
     updateDragViewTranslationDuringDrag();
   }

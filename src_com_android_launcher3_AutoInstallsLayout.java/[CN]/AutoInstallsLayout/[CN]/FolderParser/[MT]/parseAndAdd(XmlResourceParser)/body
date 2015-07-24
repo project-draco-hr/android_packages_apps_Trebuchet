@@ -21,17 +21,20 @@
   ArrayList<Long> folderItems=new ArrayList<Long>();
   int type;
   int folderDepth=parser.getDepth();
+  int rank=0;
   while ((type=parser.next()) != XmlPullParser.END_TAG || parser.getDepth() > folderDepth) {
     if (type != XmlPullParser.START_TAG) {
       continue;
     }
     mValues.clear();
     mValues.put(Favorites.CONTAINER,folderId);
+    mValues.put(Favorites.RANK,rank);
     TagParser tagParser=mFolderElements.get(parser.getName());
     if (tagParser != null) {
       final long id=tagParser.parseAndAdd(parser);
       if (id >= 0) {
         folderItems.add(id);
+        rank++;
       }
     }
  else {
@@ -40,7 +43,7 @@
   }
   long addedId=folderId;
   if (folderItems.size() < 2) {
-    Uri uri=Favorites.getContentUri(folderId,false);
+    Uri uri=Favorites.getContentUri(folderId);
     SqlArguments args=new SqlArguments(uri,null,null);
     mDb.delete(args.table,args.where,args.args);
     addedId=-1;

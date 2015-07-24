@@ -1,11 +1,6 @@
 {
-  boolean isLaunching=false;
   LoaderTask oldTask=mLoaderTask;
   if (oldTask != null) {
-    if (oldTask.isLaunching()) {
-      isLaunching=true;
-    }
     oldTask.stopLocked();
   }
-  return isLaunching;
 }

@@ -1,0 +1,61 @@
+{
+  intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+  try {
+    boolean useLaunchAnimation=(v != null) && !intent.hasExtra(INTENT_EXTRA_IGNORE_LAUNCH_ANIMATION);
+    LauncherAppsCompat launcherApps=LauncherAppsCompat.getInstance(this);
+    UserManagerCompat userManager=UserManagerCompat.getInstance(this);
+    UserHandleCompat user=null;
+    if (intent.hasExtra(AppInfo.EXTRA_PROFILE)) {
+      long serialNumber=intent.getLongExtra(AppInfo.EXTRA_PROFILE,-1);
+      user=userManager.getUserForSerialNumber(serialNumber);
+    }
+    Bundle optsBundle=null;
+    if (useLaunchAnimation) {
+      ActivityOptions opts=null;
+      if (sClipRevealMethod != null) {
+        int left=0, top=0;
+        int width=v.getMeasuredWidth(), height=v.getMeasuredHeight();
+        if (v instanceof TextView) {
+          Drawable icon=Workspace.getTextViewIcon((TextView)v);
+          if (icon != null) {
+            Rect bounds=icon.getBounds();
+            left=(width - bounds.width()) / 2;
+            top=v.getPaddingTop();
+            width=bounds.width();
+            height=bounds.height();
+          }
+        }
+        try {
+          opts=(ActivityOptions)sClipRevealMethod.invoke(null,v,left,top,width,height);
+        }
+ catch (        IllegalAccessException e) {
+          Log.d(TAG,"Could not call makeClipRevealAnimation: " + e);
+          sClipRevealMethod=null;
+        }
+catch (        InvocationTargetException e) {
+          Log.d(TAG,"Could not call makeClipRevealAnimation: " + e);
+          sClipRevealMethod=null;
+        }
+      }
+      if (opts == null && !Utilities.isLmpOrAbove()) {
+        opts=ActivityOptions.makeScaleUpAnimation(v,0,0,v.getMeasuredWidth(),v.getMeasuredHeight());
+      }
+ else       if (opts == null && Utilities.isLmpMR1()) {
+        opts=ActivityOptions.makeCustomAnimation(this,R.anim.task_open_enter,R.anim.no_anim);
+      }
+      optsBundle=opts != null ? opts.toBundle() : null;
+    }
+    if (user == null || user.equals(UserHandleCompat.myUserHandle())) {
+      startActivity(intent,optsBundle);
+    }
+ else {
+      launcherApps.startActivityForProfile(intent.getComponent(),user,intent.getSourceBounds(),optsBundle);
+    }
+    return true;
+  }
+ catch (  SecurityException e) {
+    Toast.makeText(this,R.string.activity_not_found,Toast.LENGTH_SHORT).show();
+    Log.e(TAG,"Launcher does not have the permission to launch " + intent + ". Make sure to create a MAIN intent-filter for the corresponding activity "+ "or use the exported attribute for this activity. "+ "tag="+ tag+ " intent="+ intent,e);
+  }
+  return false;
+}

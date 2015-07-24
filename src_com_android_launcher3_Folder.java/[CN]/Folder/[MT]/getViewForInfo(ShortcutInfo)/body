@@ -1,11 +1,8 @@
 {
-  for (int j=0; j < mContent.getCountY(); j++) {
-    for (int i=0; i < mContent.getCountX(); i++) {
-      View v=mContent.getChildAt(i,j);
-      if (v.getTag() == item) {
-        return v;
-      }
+  return mContent.iterateOverItems(new ItemOperator(){
+    @Override public boolean evaluate(    ItemInfo info,    View view,    View parent){
+      return info == item;
     }
   }
-  return null;
+);
 }

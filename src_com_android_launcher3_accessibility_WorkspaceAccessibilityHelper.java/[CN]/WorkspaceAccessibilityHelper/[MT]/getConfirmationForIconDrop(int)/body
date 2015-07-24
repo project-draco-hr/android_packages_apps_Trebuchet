@@ -1,0 +1,19 @@
+{
+  int x=id % mView.getCountX();
+  int y=id / mView.getCountX();
+  LauncherAccessibilityDelegate.DragInfo dragInfo=mDelegate.getDragInfo();
+  View child=mView.getChildAt(x,y);
+  if (child == null || child == dragInfo.item) {
+    return mContext.getString(R.string.item_moved);
+  }
+ else {
+    ItemInfo info=(ItemInfo)child.getTag();
+    if (info instanceof AppInfo || info instanceof ShortcutInfo) {
+      return mContext.getString(R.string.folder_created);
+    }
+ else     if (info instanceof FolderInfo) {
+      return mContext.getString(R.string.added_to_folder);
+    }
+  }
+  return "";
+}

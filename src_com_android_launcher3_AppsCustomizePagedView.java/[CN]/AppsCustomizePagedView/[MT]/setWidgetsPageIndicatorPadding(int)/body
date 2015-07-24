@@ -1,3 +1,0 @@
-{
-  setPadding(getPaddingLeft(),getPaddingTop(),getPaddingRight(),pageIndicatorHeight);
-}

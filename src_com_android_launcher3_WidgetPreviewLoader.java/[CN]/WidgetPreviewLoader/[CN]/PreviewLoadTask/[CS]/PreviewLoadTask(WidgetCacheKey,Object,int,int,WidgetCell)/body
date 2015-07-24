@@ -1,0 +1,10 @@
+{
+  mKey=key;
+  mInfo=info;
+  mPreviewHeight=previewHeight;
+  mPreviewWidth=previewWidth;
+  mCaller=caller;
+  if (DEBUG) {
+    Log.d(TAG,String.format("%s, %s, %d, %d",mKey,mInfo,mPreviewHeight,mPreviewWidth));
+  }
+}

@@ -1,0 +1,32 @@
+{
+  LauncherAppState app=LauncherAppState.getInstance();
+  InvariantDeviceProfile inv=app.getInvariantDeviceProfile();
+  Display display=launcher.getWindowManager().getDefaultDisplay();
+  Point smallestSize=new Point();
+  Point largestSize=new Point();
+  display.getCurrentSizeRange(smallestSize,largestSize);
+  int countX=(int)inv.numColumns;
+  int countY=(int)inv.numRows;
+  boolean isLayoutRtl=Utilities.isRtl(launcher.getResources());
+  if (orientation == CellLayout.LANDSCAPE) {
+    if (mLandscapeCellLayoutMetrics == null) {
+      Rect padding=inv.landscapeProfile.getWorkspacePadding(isLayoutRtl);
+      int width=largestSize.x - padding.left - padding.right;
+      int height=smallestSize.y - padding.top - padding.bottom;
+      mLandscapeCellLayoutMetrics=new Rect();
+      mLandscapeCellLayoutMetrics.set(DeviceProfile.calculateCellWidth(width,countX),DeviceProfile.calculateCellHeight(height,countY),0,0);
+    }
+    return mLandscapeCellLayoutMetrics;
+  }
+ else   if (orientation == CellLayout.PORTRAIT) {
+    if (mPortraitCellLayoutMetrics == null) {
+      Rect padding=inv.portraitProfile.getWorkspacePadding(isLayoutRtl);
+      int width=smallestSize.x - padding.left - padding.right;
+      int height=largestSize.y - padding.top - padding.bottom;
+      mPortraitCellLayoutMetrics=new Rect();
+      mPortraitCellLayoutMetrics.set(DeviceProfile.calculateCellWidth(width,countX),DeviceProfile.calculateCellHeight(height,countY),0,0);
+    }
+    return mPortraitCellLayoutMetrics;
+  }
+  return null;
+}

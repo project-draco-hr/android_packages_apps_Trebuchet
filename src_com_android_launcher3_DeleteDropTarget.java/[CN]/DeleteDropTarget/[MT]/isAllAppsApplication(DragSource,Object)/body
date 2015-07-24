@@ -1,3 +1,0 @@
-{
-  return source.supportsAppInfoDropTarget() && (info instanceof AppInfo);
-}

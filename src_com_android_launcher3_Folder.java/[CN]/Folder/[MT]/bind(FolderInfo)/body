@@ -1,24 +1,19 @@
 {
   mInfo=info;
   ArrayList<ShortcutInfo> children=info.contents;
-  ArrayList<ShortcutInfo> overflow=new ArrayList<ShortcutInfo>();
-  setupContentForNumItems(children.size());
-  placeInReadingOrder(children);
-  int count=0;
-  for (int i=0; i < children.size(); i++) {
-    ShortcutInfo child=(ShortcutInfo)children.get(i);
-    if (createAndAddShortcut(child) == null) {
-      overflow.add(child);
-    }
- else {
-      count++;
-    }
-  }
-  setupContentForNumItems(count);
+  Collections.sort(children,ITEM_POS_COMPARATOR);
+  ArrayList<ShortcutInfo> overflow=mContent.bindItems(children);
   for (  ShortcutInfo item : overflow) {
     mInfo.remove(item);
     LauncherModel.deleteItemFromDatabase(mLauncher,item);
   }
+  DragLayer.LayoutParams lp=(DragLayer.LayoutParams)getLayoutParams();
+  if (lp == null) {
+    lp=new DragLayer.LayoutParams(0,0);
+    lp.customPosition=true;
+    setLayoutParams(lp);
+  }
+  centerAboutIcon();
   mItemsInvalidated=true;
   updateTextViewFocus();
   mInfo.addListener(this);
@@ -28,7 +23,6 @@
  else {
     mFolderName.setText("");
   }
-  updateItemLocationsInDatabase();
   mFolderIcon.post(new Runnable(){
     public void run(){
       if (getItemCount() <= 1) {

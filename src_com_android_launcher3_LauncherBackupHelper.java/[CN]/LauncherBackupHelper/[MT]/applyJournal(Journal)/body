@@ -6,4 +6,5 @@
       mExistingKeys.add(keyToBackupKey(key));
     }
   }
+  restoredBackupVersion=journal.backupVersion;
 }

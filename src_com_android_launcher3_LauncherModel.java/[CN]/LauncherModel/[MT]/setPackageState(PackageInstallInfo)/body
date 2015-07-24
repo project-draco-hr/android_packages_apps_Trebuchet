@@ -1,0 +1,45 @@
+{
+  Runnable updateRunnable=new Runnable(){
+    @Override public void run(){
+synchronized (sBgLock) {
+        final HashSet<ItemInfo> updates=new HashSet<>();
+        if (installInfo.state == PackageInstallerCompat.STATUS_INSTALLED) {
+          return;
+        }
+        for (        ItemInfo info : sBgItemsIdMap) {
+          if (info instanceof ShortcutInfo) {
+            ShortcutInfo si=(ShortcutInfo)info;
+            ComponentName cn=si.getTargetComponent();
+            if (si.isPromise() && (cn != null) && installInfo.packageName.equals(cn.getPackageName())) {
+              si.setInstallProgress(installInfo.progress);
+              if (installInfo.state == PackageInstallerCompat.STATUS_FAILED) {
+                si.status&=~ShortcutInfo.FLAG_INSTALL_SESSION_ACTIVE;
+              }
+              updates.add(si);
+            }
+          }
+        }
+        for (        LauncherAppWidgetInfo widget : sBgAppWidgets) {
+          if (widget.providerName.getPackageName().equals(installInfo.packageName)) {
+            widget.installProgress=installInfo.progress;
+            updates.add(widget);
+          }
+        }
+        if (!updates.isEmpty()) {
+          Runnable r=new Runnable(){
+            public void run(){
+              Callbacks callbacks=getCallback();
+              if (callbacks != null) {
+                callbacks.bindRestoreItemsChange(updates);
+              }
+            }
+          }
+;
+          mHandler.post(r);
+        }
+      }
+    }
+  }
+;
+  runOnWorkerThread(updateRunnable);
+}

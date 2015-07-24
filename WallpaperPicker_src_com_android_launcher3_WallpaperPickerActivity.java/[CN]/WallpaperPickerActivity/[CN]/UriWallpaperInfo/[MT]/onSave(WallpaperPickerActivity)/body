@@ -1,6 +1,6 @@
 {
   boolean finishActivityWhenDone=true;
-  OnBitmapCroppedHandler h=new OnBitmapCroppedHandler(){
+  BitmapCropTask.OnBitmapCroppedHandler h=new BitmapCropTask.OnBitmapCroppedHandler(){
     public void onBitmapCropped(    byte[] imageBytes){
       Point thumbSize=getDefaultThumbnailSize(a.getResources());
       Bitmap thumb=createThumbnail(thumbSize,null,null,imageBytes,null,0,0,true);

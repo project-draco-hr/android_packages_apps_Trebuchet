@@ -1,7 +1,5 @@
 {
   super.onSizeChanged(w,h,oldw,oldh);
-  Rect padding=new Rect();
-  mNormalBackground.getPadding(padding);
-  mBackgroundRect.set(-padding.left,-padding.top,w + padding.right,h + padding.bottom);
-  mForegroundRect.set(mForegroundPadding,mForegroundPadding,w - mForegroundPadding,h - mForegroundPadding);
+  mBackground.getPadding(mTempRect);
+  mBackground.setBounds(-mTempRect.left,-mTempRect.top,w + mTempRect.right,h + mTempRect.bottom);
 }

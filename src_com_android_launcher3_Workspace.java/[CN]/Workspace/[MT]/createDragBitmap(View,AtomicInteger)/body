@@ -1,0 +1,17 @@
+{
+  Bitmap b;
+  int padding=expectedPadding.get();
+  if (v instanceof TextView) {
+    Drawable d=getTextViewIcon((TextView)v);
+    Rect bounds=getDrawableBounds(d);
+    b=Bitmap.createBitmap(bounds.width() + padding,bounds.height() + padding,Bitmap.Config.ARGB_8888);
+    expectedPadding.set(padding - bounds.left - bounds.top);
+  }
+ else {
+    b=Bitmap.createBitmap(v.getWidth() + padding,v.getHeight() + padding,Bitmap.Config.ARGB_8888);
+  }
+  mCanvas.setBitmap(b);
+  drawDragView(v,mCanvas,padding);
+  mCanvas.setBitmap(null);
+  return b;
+}

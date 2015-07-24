@@ -1,8 +1,0 @@
-{
-  int page=(mNextPage != INVALID_PAGE) ? mNextPage : mCurrentPage;
-  int delta=numCustomPages();
-  if (hasCustomContent() && getNextPage() == 0) {
-    return mCustomContentDescription;
-  }
-  return String.format(getContext().getString(R.string.workspace_scroll_format),page + 1 - delta,getChildCount() - delta);
-}

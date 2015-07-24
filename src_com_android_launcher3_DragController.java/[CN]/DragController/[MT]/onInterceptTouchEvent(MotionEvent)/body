@@ -3,6 +3,9 @@
   if (debug) {
     Log.d(Launcher.TAG,"DragController.onInterceptTouchEvent " + ev + " mDragging="+ mDragging);
   }
+  if (mIsAccessibleDrag) {
+    return false;
+  }
   acquireVelocityTrackerAndAddMovement(ev);
   final int action=ev.getAction();
   final int[] dragLayerPos=getClampedDragLayerPos(ev.getX(),ev.getY());
@@ -20,7 +23,7 @@ case MotionEvent.ACTION_UP:
 mLastTouchUpTime=System.currentTimeMillis();
 if (mDragging) {
 PointF vec=isFlingingToDelete(mDragObject.dragSource);
-if (!DeleteDropTarget.willAcceptDrop(mDragObject.dragInfo)) {
+if (!DeleteDropTarget.supportsDrop(mDragObject.dragInfo)) {
 vec=null;
 }
 if (vec != null) {

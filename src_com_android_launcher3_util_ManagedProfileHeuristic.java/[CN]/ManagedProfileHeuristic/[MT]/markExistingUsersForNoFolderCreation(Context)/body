@@ -1,0 +1,17 @@
+{
+  UserManagerCompat userManager=UserManagerCompat.getInstance(context);
+  UserHandleCompat myUser=UserHandleCompat.myUserHandle();
+  SharedPreferences prefs=null;
+  for (  UserHandleCompat user : userManager.getUserProfiles()) {
+    if (myUser.equals(user)) {
+      continue;
+    }
+    if (prefs == null) {
+      prefs=context.getSharedPreferences(LauncherFiles.MANAGED_USER_PREFERENCES_KEY,Context.MODE_PRIVATE);
+    }
+    String folderIdKey=USER_FOLDER_ID_PREFIX + userManager.getSerialNumberForUser(user);
+    if (!prefs.contains(folderIdKey)) {
+      prefs.edit().putLong(folderIdKey,ItemInfo.NO_ID).apply();
+    }
+  }
+}

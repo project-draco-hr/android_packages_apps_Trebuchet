@@ -4,6 +4,7 @@
   cellY=info.cellY;
   spanX=info.spanX;
   spanY=info.spanY;
+  rank=info.rank;
   screenId=info.screenId;
   itemType=info.itemType;
   container=info.container;

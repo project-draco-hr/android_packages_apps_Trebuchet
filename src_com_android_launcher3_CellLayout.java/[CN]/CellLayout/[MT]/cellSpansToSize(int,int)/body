@@ -1,6 +1,0 @@
-{
-  int[] size=new int[2];
-  size[0]=hSpans * mCellWidth + (hSpans - 1) * mWidthGap;
-  size[1]=vSpans * mCellHeight + (vSpans - 1) * mHeightGap;
-  return size;
-}

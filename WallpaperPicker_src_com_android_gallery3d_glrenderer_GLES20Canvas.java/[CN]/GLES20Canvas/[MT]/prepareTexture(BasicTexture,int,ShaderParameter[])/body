@@ -1,4 +1,5 @@
 {
+  deleteRecycledResources();
   GLES20.glUseProgram(program);
   checkError();
   enableBlending(!texture.isOpaque() || getAlpha() < OPAQUE_ALPHA);

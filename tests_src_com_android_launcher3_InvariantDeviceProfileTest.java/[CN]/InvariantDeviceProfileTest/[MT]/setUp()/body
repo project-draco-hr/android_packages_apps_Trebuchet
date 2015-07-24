@@ -1,0 +1,5 @@
+{
+  super.setUp();
+  mInvariantProfile=new InvariantDeviceProfile(getContext());
+  mPredefinedDeviceProfiles=mInvariantProfile.getPredefinedDeviceProfiles();
+}

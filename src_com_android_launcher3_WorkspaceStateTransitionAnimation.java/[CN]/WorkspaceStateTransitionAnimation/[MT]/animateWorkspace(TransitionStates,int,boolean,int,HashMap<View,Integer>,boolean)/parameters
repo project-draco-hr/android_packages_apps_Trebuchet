@@ -1,0 +1,6 @@
+TransitionStates states
+int toPage
+boolean animated
+int duration
+HashMap<View,Integer> layerViews
+boolean accessibilityEnabled

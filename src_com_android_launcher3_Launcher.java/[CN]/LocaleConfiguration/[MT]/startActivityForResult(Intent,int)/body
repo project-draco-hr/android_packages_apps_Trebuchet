@@ -1,6 +1,0 @@
-{
-  if (requestCode >= 0) {
-    setWaitingForResult(true);
-  }
-  super.startActivityForResult(intent,requestCode);
-}

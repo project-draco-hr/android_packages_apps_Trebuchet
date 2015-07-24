@@ -1,0 +1,5 @@
+long currentScreenId
+LongArrayMap<ItemInfo> itemsIdMap
+LongArrayMap<FolderInfo> folders
+LongArrayMap<FolderInfo> currentScreenFolders
+LongArrayMap<FolderInfo> otherScreenFolders

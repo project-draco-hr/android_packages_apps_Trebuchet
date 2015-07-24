@@ -1,0 +1,3 @@
+{
+  return String.format(getContext().getString(R.string.folder_opened),mGridCountX,mGridCountY);
+}

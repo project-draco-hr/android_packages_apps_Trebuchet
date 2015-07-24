@@ -1,0 +1,13 @@
+{
+  HashSet<String> packageSet=new HashSet<String>();
+  getUserApps(packageSet);
+  boolean packageRemoved=false;
+  for (  String packageName : packages) {
+    if (packageSet.remove(packageName)) {
+      packageRemoved=true;
+    }
+  }
+  if (packageRemoved) {
+    mPrefs.edit().putStringSet(mPackageSetKey,packageSet).apply();
+  }
+}

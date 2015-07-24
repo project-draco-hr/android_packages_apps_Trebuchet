@@ -1,0 +1,27 @@
+{
+  if (ENFORCE_DRAG_EVENT_ORDER) {
+    enfoceDragParity("onDragExit",-1,0);
+  }
+  if (mInScrollArea) {
+    if (isPageMoving()) {
+      mDropToLayout=(CellLayout)getPageAt(getNextPage());
+    }
+ else {
+      mDropToLayout=mDragOverlappingLayout;
+    }
+  }
+ else {
+    mDropToLayout=mDragTargetLayout;
+  }
+  if (mDragMode == DRAG_MODE_CREATE_FOLDER) {
+    mCreateUserFolderOnDrop=true;
+  }
+ else   if (mDragMode == DRAG_MODE_ADD_TO_FOLDER) {
+    mAddToExistingFolderOnDrop=true;
+  }
+  onResetScrollArea();
+  setCurrentDropLayout(null);
+  setCurrentDragOverlappingLayout(null);
+  mSpringLoadedDragController.cancel();
+  mLauncher.getDragLayer().hidePageHints();
+}

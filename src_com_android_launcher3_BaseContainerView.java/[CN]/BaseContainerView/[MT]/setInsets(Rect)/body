@@ -1,0 +1,4 @@
+{
+  mInsets.set(insets);
+  updateBackgroundAndPaddings();
+}

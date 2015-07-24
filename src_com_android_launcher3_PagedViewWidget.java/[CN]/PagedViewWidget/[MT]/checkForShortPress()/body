@@ -1,7 +1,0 @@
-{
-  if (sShortpressTarget != null)   return;
-  if (mPendingCheckForShortPress == null) {
-    mPendingCheckForShortPress=new CheckForShortPress();
-  }
-  postDelayed(mPendingCheckForShortPress,120);
-}

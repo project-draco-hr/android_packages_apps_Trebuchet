@@ -1,5 +1,0 @@
-{
-  if (mimeType == null)   return false;
-  mimeType=mimeType.toLowerCase();
-  return mimeType.equals("image/jpeg");
-}

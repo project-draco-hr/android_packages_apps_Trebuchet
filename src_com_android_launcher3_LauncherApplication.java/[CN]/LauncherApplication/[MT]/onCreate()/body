@@ -1,5 +1,0 @@
-{
-  super.onCreate();
-  LauncherAppState.setApplicationContext(this);
-  LauncherAppState.getInstance();
-}

@@ -1,0 +1,6 @@
+{
+  for (  AppInfo app : apps) {
+    mComponentToAppMap.put(app.toComponentKey(),app);
+  }
+  onAppsUpdated();
+}

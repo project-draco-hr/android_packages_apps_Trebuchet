@@ -1,0 +1,11 @@
+{
+synchronized (mPackageVersions) {
+    mPackageVersions.remove(packageName);
+  }
+  try {
+    mDb.getWritableDatabase().delete(CacheDb.TABLE_NAME,CacheDb.COLUMN_PACKAGE + " = ? AND " + CacheDb.COLUMN_USER+ " = ?",new String[]{packageName,Long.toString(userSerial)});
+  }
+ catch (  SQLException e) {
+    Log.e(TAG,"Unable to delete items from DB",e);
+  }
+}

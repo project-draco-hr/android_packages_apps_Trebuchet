@@ -8,10 +8,6 @@
     while (iter.hasNext()) {
       final PendingInstallShortcutInfo pendingInfo=iter.next();
       final Intent intent=pendingInfo.launchIntent;
-      if (LauncherAppState.isDisableAllApps() && !isValidShortcutLaunchIntent(intent)) {
-        if (DBG)         Log.d(TAG,"Ignoring shortcut with launchIntent:" + intent);
-        continue;
-      }
       String packageName=pendingInfo.getTargetPackage();
       if (!TextUtils.isEmpty(packageName)) {
         UserHandleCompat myUserHandle=UserHandleCompat.myUserHandle();
@@ -20,14 +16,11 @@
           continue;
         }
       }
-      final boolean exists=LauncherModel.shortcutExists(context,pendingInfo.label,intent,pendingInfo.user);
-      if (!exists) {
-        addShortcuts.add(pendingInfo.getShortcutInfo());
-      }
+      addShortcuts.add(pendingInfo.getShortcutInfo());
     }
     if (!addShortcuts.isEmpty()) {
       LauncherAppState app=LauncherAppState.getInstance();
-      app.getModel().addAndBindAddedWorkspaceApps(context,addShortcuts);
+      app.getModel().addAndBindAddedWorkspaceItems(context,addShortcuts);
     }
   }
 }

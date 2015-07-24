@@ -1,3 +1,0 @@
-{
-  return createShortcutDragInfo(shortcutIntent,caption,icon,UserHandleCompat.myUserHandle());
-}

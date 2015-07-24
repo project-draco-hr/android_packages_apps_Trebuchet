@@ -1,5 +1,0 @@
-{
-  super(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT);
-  cellHSpan=1;
-  cellVSpan=1;
-}

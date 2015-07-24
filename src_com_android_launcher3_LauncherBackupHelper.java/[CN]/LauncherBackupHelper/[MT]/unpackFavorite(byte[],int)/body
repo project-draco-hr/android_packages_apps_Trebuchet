@@ -8,12 +8,12 @@
   values.put(Favorites.CELLY,favorite.cellY);
   values.put(Favorites.SPANX,favorite.spanX);
   values.put(Favorites.SPANY,favorite.spanY);
-  values.put(Favorites.ICON_TYPE,favorite.iconType);
-  if (favorite.iconType == Favorites.ICON_TYPE_RESOURCE) {
-    values.put(Favorites.ICON_PACKAGE,favorite.iconPackage);
-    values.put(Favorites.ICON_RESOURCE,favorite.iconResource);
-  }
-  if (favorite.iconType == Favorites.ICON_TYPE_BITMAP) {
+  if (favorite.itemType == Favorites.ITEM_TYPE_SHORTCUT) {
+    values.put(Favorites.ICON_TYPE,favorite.iconType);
+    if (favorite.iconType == Favorites.ICON_TYPE_RESOURCE) {
+      values.put(Favorites.ICON_PACKAGE,favorite.iconPackage);
+      values.put(Favorites.ICON_RESOURCE,favorite.iconResource);
+    }
     values.put(Favorites.ICON,favorite.icon);
   }
   if (!TextUtils.isEmpty(favorite.title)) {
@@ -29,7 +29,7 @@
   UserHandleCompat myUserHandle=UserHandleCompat.myUserHandle();
   long userSerialNumber=UserManagerCompat.getInstance(mContext).getSerialNumberForUser(myUserHandle);
   values.put(LauncherSettings.Favorites.PROFILE_ID,userSerialNumber);
-  DeviceProfieData currentProfile=getDeviceProfieData();
+  DeviceProfieData currentProfile=mDeviceProfileData;
   if (favorite.itemType == Favorites.ITEM_TYPE_APPWIDGET) {
     if (!TextUtils.isEmpty(favorite.appWidgetProvider)) {
       values.put(Favorites.APPWIDGET_PROVIDER,favorite.appWidgetProvider);
@@ -42,7 +42,13 @@
     }
   }
  else {
-    values.put(LauncherSettings.Favorites.RESTORED,1);
+    if (isReplaceableHotseatItem(favorite) && favorite.targetType != Favorite.TARGET_NONE && favorite.targetType < CommonAppTypeParser.SUPPORTED_TYPE_COUNT) {
+      Log.e(TAG,"Added item type flag");
+      values.put(LauncherSettings.Favorites.RESTORED,1 | CommonAppTypeParser.encodeItemTypeToFlag(favorite.targetType));
+    }
+ else {
+      values.put(LauncherSettings.Favorites.RESTORED,1);
+    }
     if (favorite.container == Favorites.CONTAINER_HOTSEAT) {
       if ((favorite.screen >= currentProfile.hotseatCount) || (favorite.screen == currentProfile.allappsRank)) {
         restoreSuccessful=false;

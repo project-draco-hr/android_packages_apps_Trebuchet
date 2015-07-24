@@ -1,0 +1,5 @@
+{
+  super.onFinishInflate();
+  mHoverColor=getResources().getColor(R.color.uninstall_target_hover_tint);
+  setDrawable(R.drawable.ic_uninstall_launcher);
+}

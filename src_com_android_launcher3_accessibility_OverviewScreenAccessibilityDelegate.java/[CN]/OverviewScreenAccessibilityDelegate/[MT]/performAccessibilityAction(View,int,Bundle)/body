@@ -1,0 +1,17 @@
+{
+  if (host != null) {
+    if (action == AccessibilityNodeInfo.ACTION_ACCESSIBILITY_FOCUS) {
+      int index=mWorkspace.indexOfChild(host);
+      mWorkspace.setCurrentPage(index);
+    }
+ else     if (action == MOVE_FORWARD) {
+      movePage(mWorkspace.indexOfChild(host) + 1,host);
+      return true;
+    }
+ else     if (action == MOVE_BACKWARD) {
+      movePage(mWorkspace.indexOfChild(host) - 1,host);
+      return true;
+    }
+  }
+  return super.performAccessibilityAction(host,action,args);
+}

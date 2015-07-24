@@ -1,0 +1,9 @@
+{
+  int pageIndex=getNextPage();
+  CellLayout page=getPageAt(pageIndex);
+  page.findNearestArea(pixelX,pixelY,1,1,sTempPosArray);
+  if (mFolder.isLayoutRtl()) {
+    sTempPosArray[0]=page.getCountX() - sTempPosArray[0] - 1;
+  }
+  return Math.min(mAllocatedContentSize - 1,pageIndex * mMaxItemsPerPage + sTempPosArray[1] * mGridCountX + sTempPosArray[0]);
+}

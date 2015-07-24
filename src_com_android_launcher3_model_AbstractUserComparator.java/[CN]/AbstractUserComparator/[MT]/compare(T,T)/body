@@ -1,0 +1,10 @@
+{
+  if (mMyUser.equals(lhs.user)) {
+    return -1;
+  }
+ else {
+    Long aUserSerial=getAndCacheUserSerial(lhs.user);
+    Long bUserSerial=getAndCacheUserSerial(rhs.user);
+    return aUserSerial.compareTo(bUserSerial);
+  }
+}

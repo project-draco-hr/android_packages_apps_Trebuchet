@@ -1,5 +1,0 @@
-{
-  if (mRenderer == null) {
-    throw new IllegalArgumentException("Renderer is null!");
-  }
-}
