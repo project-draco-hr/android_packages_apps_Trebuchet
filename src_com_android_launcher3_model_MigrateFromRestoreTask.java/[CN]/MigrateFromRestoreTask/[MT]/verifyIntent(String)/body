@@ -1,0 +1,9 @@
+{
+  Intent intent=Intent.parseUri(intentStr,0);
+  if (intent.getComponent() != null) {
+    verifyPackage(intent.getComponent().getPackageName());
+  }
+ else   if (intent.getPackage() != null) {
+    verifyPackage(intent.getPackage());
+  }
+}

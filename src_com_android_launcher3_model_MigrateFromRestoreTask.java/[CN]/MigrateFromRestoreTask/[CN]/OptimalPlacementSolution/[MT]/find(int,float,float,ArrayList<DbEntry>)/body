@@ -1,0 +1,112 @@
+{
+  if ((weightLoss >= lowestWeightLoss) || ((weightLoss == lowestWeightLoss) && (moveCost >= lowestMoveCost))) {
+    return;
+  }
+ else   if (index >= itemsToPlace.size()) {
+    lowestWeightLoss=weightLoss;
+    lowestMoveCost=moveCost;
+    finalPlacedItems=deepCopy(itemsPlaced);
+    return;
+  }
+  DbEntry me=itemsToPlace.get(index);
+  int myX=me.cellX;
+  int myY=me.cellY;
+  ArrayList<DbEntry> itemsIncludingMe=new ArrayList<>(itemsPlaced.size() + 1);
+  itemsIncludingMe.addAll(itemsPlaced);
+  itemsIncludingMe.add(me);
+  if (me.spanX > 1 || me.spanY > 1) {
+    int myW=me.spanX;
+    int myH=me.spanY;
+    for (int y=0; y < mTrgY; y++) {
+      for (int x=0; x < mTrgX; x++) {
+        float newMoveCost=moveCost;
+        if (x != myX) {
+          me.cellX=x;
+          newMoveCost++;
+        }
+        if (y != myY) {
+          me.cellY=y;
+          newMoveCost++;
+        }
+        if (ignoreMove) {
+          newMoveCost=moveCost;
+        }
+        if (isVacant(occupied,x,y,myW,myH)) {
+          markCells(occupied,me,true);
+          find(index + 1,weightLoss,newMoveCost,itemsIncludingMe);
+          markCells(occupied,me,false);
+        }
+        if (myW > me.minSpanX && isVacant(occupied,x,y,myW - 1,myH)) {
+          me.spanX--;
+          markCells(occupied,me,true);
+          find(index + 1,weightLoss,newMoveCost + 1,itemsIncludingMe);
+          markCells(occupied,me,false);
+          me.spanX++;
+        }
+        if (myH > me.minSpanY && isVacant(occupied,x,y,myW,myH - 1)) {
+          me.spanY--;
+          markCells(occupied,me,true);
+          find(index + 1,weightLoss,newMoveCost + 1,itemsIncludingMe);
+          markCells(occupied,me,false);
+          me.spanY++;
+        }
+        if (myH > me.minSpanY && myW > me.minSpanX && isVacant(occupied,x,y,myW - 1,myH - 1)) {
+          me.spanX--;
+          me.spanY--;
+          markCells(occupied,me,true);
+          find(index + 1,weightLoss,newMoveCost + 2,itemsIncludingMe);
+          markCells(occupied,me,false);
+          me.spanX++;
+          me.spanY++;
+        }
+        me.cellX=myX;
+        me.cellY=myY;
+      }
+    }
+    find(index + 1,weightLoss + me.weight,moveCost,itemsPlaced);
+  }
+ else {
+    int newDistance=Integer.MAX_VALUE;
+    int newX=Integer.MAX_VALUE, newY=Integer.MAX_VALUE;
+    for (int y=0; y < mTrgY; y++) {
+      for (int x=0; x < mTrgX; x++) {
+        if (!occupied[x][y]) {
+          int dist=ignoreMove ? 0 : ((me.cellX - x) * (me.cellX - x) + (me.cellY - y) * (me.cellY - y));
+          if (dist < newDistance) {
+            newX=x;
+            newY=y;
+            newDistance=dist;
+          }
+        }
+      }
+    }
+    if (newX < mTrgX && newY < mTrgY) {
+      float newMoveCost=moveCost;
+      if (newX != myX) {
+        me.cellX=newX;
+        newMoveCost++;
+      }
+      if (newY != myY) {
+        me.cellY=newY;
+        newMoveCost++;
+      }
+      if (ignoreMove) {
+        newMoveCost=moveCost;
+      }
+      markCells(occupied,me,true);
+      find(index + 1,weightLoss,newMoveCost,itemsIncludingMe);
+      markCells(occupied,me,false);
+      me.cellX=myX;
+      me.cellY=myY;
+      if (index + 1 < itemsToPlace.size() && itemsToPlace.get(index + 1).weight >= me.weight && !ignoreMove) {
+        find(index + 1,weightLoss + me.weight,moveCost,itemsPlaced);
+      }
+    }
+ else {
+      for (int i=index + 1; i < itemsToPlace.size(); i++) {
+        weightLoss+=itemsToPlace.get(i).weight;
+      }
+      find(itemsToPlace.size(),weightLoss + me.weight,moveCost,itemsPlaced);
+    }
+  }
+}

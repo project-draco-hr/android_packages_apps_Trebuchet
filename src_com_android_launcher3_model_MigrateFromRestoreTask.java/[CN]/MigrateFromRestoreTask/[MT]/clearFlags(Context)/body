@@ -1,0 +1,3 @@
+{
+  prefs(context).edit().remove(KEY_MIGRATION_SOURCE_SIZE).remove(KEY_MIGRATION_WIDGET_MINSIZE).commit();
+}

@@ -1,0 +1,7 @@
+{
+  values.put(LauncherSettings.Favorites.SCREEN,screenId);
+  values.put(LauncherSettings.Favorites.CELLX,cellX);
+  values.put(LauncherSettings.Favorites.CELLY,cellY);
+  values.put(LauncherSettings.Favorites.SPANX,spanX);
+  values.put(LauncherSettings.Favorites.SPANY,spanY);
+}

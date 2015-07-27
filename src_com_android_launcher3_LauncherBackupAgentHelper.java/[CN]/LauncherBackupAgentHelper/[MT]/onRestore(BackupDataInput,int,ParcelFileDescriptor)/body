@@ -22,6 +22,9 @@
     if (mHelper.restoredBackupVersion <= 3) {
       LauncherAppState.getLauncherProvider().updateFolderItemsRank();
     }
+    if (mHelper.shouldAttemptWorkspaceMigration()) {
+      MigrateFromRestoreTask.markForMigration(getApplicationContext(),(int)mHelper.migrationCompatibleProfileData.desktopCols,(int)mHelper.migrationCompatibleProfileData.desktopRows,mHelper.widgetSizes);
+    }
     LauncherAppState.getLauncherProvider().convertShortcutsToLauncherActivities();
   }
  else {

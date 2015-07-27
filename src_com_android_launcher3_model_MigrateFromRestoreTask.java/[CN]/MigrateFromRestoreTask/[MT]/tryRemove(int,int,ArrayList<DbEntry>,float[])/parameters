@@ -1,0 +1,4 @@
+int col
+int row
+ArrayList<DbEntry> items
+float[] outLoss

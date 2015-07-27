@@ -1,0 +1,7 @@
+{
+  ArrayList<DbEntry> dup=new ArrayList<DbEntry>(src.size());
+  for (  DbEntry e : src) {
+    dup.add(e.copy());
+  }
+  return dup;
+}

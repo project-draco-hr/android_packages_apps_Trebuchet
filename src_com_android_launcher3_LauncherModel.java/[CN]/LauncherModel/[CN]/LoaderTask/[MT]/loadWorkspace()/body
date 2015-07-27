@@ -10,6 +10,17 @@
   InvariantDeviceProfile profile=app.getInvariantDeviceProfile();
   int countX=(int)profile.numColumns;
   int countY=(int)profile.numRows;
+  if (MigrateFromRestoreTask.shouldRunTask(mContext)) {
+    try {
+      MigrateFromRestoreTask task=new MigrateFromRestoreTask(mContext);
+      MigrateFromRestoreTask.clearFlags(mContext);
+      task.execute();
+    }
+ catch (    Exception e) {
+      Log.e(TAG,"Error during grid migration",e);
+      mFlags=mFlags | LOADER_FLAG_CLEAR_WORKSPACE;
+    }
+  }
   if ((mFlags & LOADER_FLAG_CLEAR_WORKSPACE) != 0) {
     Launcher.addDumpLog(TAG,"loadWorkspace: resetting launcher database",true);
     LauncherAppState.getLauncherProvider().deleteDatabase();

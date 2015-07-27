@@ -1,0 +1,3 @@
+{
+  return org.cellX == cellX && org.cellY == cellY && org.spanX == spanX && org.spanY == spanY && org.screenId == screenId;
+}

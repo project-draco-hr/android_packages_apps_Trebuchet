@@ -12,4 +12,5 @@
       mIconCache.preloadIcon(ComponentName.unflattenFromString(widget.provider),icon,widget.icon.dpi,widget.label,mUserSerial,mIdp);
     }
   }
+  widgetSizes.add(widget.provider + "#" + widget.minSpanX+ ","+ widget.minSpanY);
 }
