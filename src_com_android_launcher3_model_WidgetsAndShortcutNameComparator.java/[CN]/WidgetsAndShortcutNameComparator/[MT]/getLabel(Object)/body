@@ -1,0 +1,10 @@
+{
+  if (o instanceof LauncherAppWidgetProviderInfo) {
+    LauncherAppWidgetProviderInfo widgetInfo=(LauncherAppWidgetProviderInfo)o;
+    return Utilities.trim(mManager.loadLabel(widgetInfo));
+  }
+ else {
+    ResolveInfo shortcutInfo=(ResolveInfo)o;
+    return Utilities.trim(shortcutInfo.loadLabel(mPackageManager));
+  }
+}
