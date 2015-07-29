@@ -409,6 +409,19 @@ sBgFolders.remove(folderId);
 sBgItemsIdMap.remove(folderId);
 }
 }
+for (FolderInfo folder : sBgFolders) {
+Collections.sort(folder.contents,Folder.ITEM_POS_COMPARATOR);
+int pos=0;
+for (ShortcutInfo info : folder.contents) {
+if (info.usingLowResIcon) {
+info.updateIcon(mIconCache,false);
+}
+pos++;
+if (pos >= FolderIcon.NUM_ITEMS_IN_PREVIEW) {
+break;
+}
+}
+}
 if (restoredRows.size() > 0) {
 ContentValues values=new ContentValues();
 values.put(LauncherSettings.Favorites.RESTORED,0);
