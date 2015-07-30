@@ -21,8 +21,8 @@
     LauncherClings.synchonouslyMarkFirstRunClingDismissed(this);
     if (mHelper.restoredBackupVersion <= 3) {
       LauncherAppState.getLauncherProvider().updateFolderItemsRank();
-      LauncherAppState.getLauncherProvider().convertShortcutsToLauncherActivities();
     }
+    LauncherAppState.getLauncherProvider().convertShortcutsToLauncherActivities();
   }
  else {
     if (VERBOSE)     Log.v(TAG,"Nothing was restored, clearing DB");
