@@ -1,0 +1,7 @@
+{
+  super.onInitializeAccessibilityEvent(event);
+  if (mApps.hasNoFilteredResults()) {
+    final AccessibilityRecordCompat record=AccessibilityEventCompat.asRecord(event);
+    record.setItemCount(0);
+  }
+}

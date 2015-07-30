@@ -1,0 +1,8 @@
+{
+  if (mApps.hasNoFilteredResults()) {
+    return 0;
+  }
+ else {
+    return super.getRowCountForAccessibility(recycler,state);
+  }
+}
