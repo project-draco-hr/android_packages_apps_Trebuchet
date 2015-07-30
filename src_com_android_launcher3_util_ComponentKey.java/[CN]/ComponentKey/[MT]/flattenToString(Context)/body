@@ -1,3 +1,7 @@
 {
-  return componentName.flattenToString() + "#" + UserManagerCompat.getInstance(context).getSerialNumberForUser(user);
+  String flattened=componentName.flattenToString();
+  if (user != null) {
+    flattened+="#" + UserManagerCompat.getInstance(context).getSerialNumberForUser(user);
+  }
+  return flattened;
 }
