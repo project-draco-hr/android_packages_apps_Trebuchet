@@ -2,7 +2,7 @@
   Resources res=context.getResources();
   mApps=apps;
   mGridSizer=new GridSpanSizer();
-  mGridLayoutMgr=new GridLayoutManager(context,1,GridLayoutManager.VERTICAL,false);
+  mGridLayoutMgr=new AppsGridLayoutManager(context);
   mGridLayoutMgr.setSpanSizeLookup(mGridSizer);
   mItemDecoration=new GridItemDecoration();
   mLayoutInflater=LayoutInflater.from(context);
