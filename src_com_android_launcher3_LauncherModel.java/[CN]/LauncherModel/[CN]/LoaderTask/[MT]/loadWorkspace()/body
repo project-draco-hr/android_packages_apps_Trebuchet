@@ -11,6 +11,8 @@
   int countX=(int)profile.numColumns;
   int countY=(int)profile.numRows;
   if (MigrateFromRestoreTask.shouldRunTask(mContext)) {
+    long migrationStartTime=System.currentTimeMillis();
+    Log.v(TAG,"Starting workspace migration after restore");
     try {
       MigrateFromRestoreTask task=new MigrateFromRestoreTask(mContext);
       MigrateFromRestoreTask.clearFlags(mContext);
@@ -20,6 +22,7 @@
       Log.e(TAG,"Error during grid migration",e);
       mFlags=mFlags | LOADER_FLAG_CLEAR_WORKSPACE;
     }
+    Log.v(TAG,"Workspace migration completed in " + (System.currentTimeMillis() - migrationStartTime));
   }
   if ((mFlags & LOADER_FLAG_CLEAR_WORKSPACE) != 0) {
     Launcher.addDumpLog(TAG,"loadWorkspace: resetting launcher database",true);
