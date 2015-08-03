@@ -1,4 +1,3 @@
 {
-  int[] minSpans=CellLayout.rectToCell(idp.portraitProfile,context,minResizeWidth,minResizeHeight,null);
-  return new Point((resizeMode & RESIZE_HORIZONTAL) != 0 ? minSpans[0] : -1,(resizeMode & RESIZE_VERTICAL) != 0 ? minSpans[1] : -1);
+  return new Point((resizeMode & RESIZE_HORIZONTAL) != 0 ? minSpanX : -1,(resizeMode & RESIZE_VERTICAL) != 0 ? minSpanY : -1);
 }

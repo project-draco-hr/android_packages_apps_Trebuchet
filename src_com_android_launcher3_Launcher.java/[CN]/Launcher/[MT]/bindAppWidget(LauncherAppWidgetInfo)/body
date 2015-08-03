@@ -49,6 +49,8 @@
       Log.d(TAG,"bindAppWidget: id=" + item.appWidgetId + " belongs to component "+ appWidgetInfo.provider);
     }
     item.hostView=mAppWidgetHost.createView(this,appWidgetId,appWidgetInfo);
+    item.minSpanX=appWidgetInfo.minSpanX;
+    item.minSpanY=appWidgetInfo.minSpanY;
   }
  else {
     appWidgetInfo=null;
