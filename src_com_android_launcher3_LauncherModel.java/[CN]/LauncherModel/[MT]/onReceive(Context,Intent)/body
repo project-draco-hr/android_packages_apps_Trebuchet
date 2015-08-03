@@ -4,10 +4,10 @@
   if (Intent.ACTION_LOCALE_CHANGED.equals(action)) {
     forceReload();
   }
- else   if (SearchManager.INTENT_GLOBAL_SEARCH_ACTIVITY_CHANGED.equals(action) || SearchManager.INTENT_ACTION_SEARCHABLES_CHANGED.equals(action)) {
+ else   if (SearchManager.INTENT_GLOBAL_SEARCH_ACTIVITY_CHANGED.equals(action)) {
     Callbacks callbacks=getCallback();
     if (callbacks != null) {
-      callbacks.bindSearchablesChanged();
+      callbacks.bindSearchProviderChanged();
     }
   }
  else   if (LauncherAppsCompat.ACTION_MANAGED_PROFILE_ADDED.equals(action) || LauncherAppsCompat.ACTION_MANAGED_PROFILE_REMOVED.equals(action)) {
