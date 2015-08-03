@@ -1,0 +1,6 @@
+{
+  Workspace.State fromState=mWorkspace.getState();
+  Animator anim=mWorkspace.setStateWithAnimation(toState,toPage,animated,layerViews);
+  updateInteraction(fromState,toState);
+  return anim;
+}

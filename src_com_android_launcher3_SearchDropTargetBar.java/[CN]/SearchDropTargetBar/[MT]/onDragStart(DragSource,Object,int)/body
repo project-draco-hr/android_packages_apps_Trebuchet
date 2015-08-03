@@ -1,3 +1,3 @@
 {
-  showDeleteTarget();
+  animateToState(State.DROP_TARGET,DEFAULT_DRAG_FADE_DURATION);
 }

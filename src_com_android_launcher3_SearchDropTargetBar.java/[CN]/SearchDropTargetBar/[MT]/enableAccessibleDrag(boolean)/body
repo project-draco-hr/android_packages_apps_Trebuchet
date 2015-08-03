@@ -1,6 +1,6 @@
 {
-  if (mQSBSearchBar != null) {
-    mQSBSearchBar.setVisibility(enable ? View.GONE : View.VISIBLE);
+  if (mQSB != null) {
+    mQSB.setVisibility(enable ? View.GONE : View.VISIBLE);
   }
   mInfoDropTarget.enableAccessibleDrag(enable);
   mDeleteDropTarget.enableAccessibleDrag(enable);

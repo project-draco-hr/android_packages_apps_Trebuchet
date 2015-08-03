@@ -1,5 +1,0 @@
-{
-  if (v != null) {
-    v.setLayerType(View.LAYER_TYPE_HARDWARE,null);
-  }
-}

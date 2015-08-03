@@ -1,11 +1,23 @@
 {
-  mQSBSearchBar=qsb;
-  if (mQSBSearchBar != null) {
-    mHideSearchBarAnim=LauncherAnimUtils.ofFloat(mQSBSearchBar,"alpha",1f,0f);
-    setupAnimation(mHideSearchBarAnim,mQSBSearchBar);
+  mQSB=qsb;
+  if (mQSB != null) {
+    mQSBSearchBarAnimator=new LauncherViewPropertyAnimator(mQSB);
+    mQSBSearchBarAnimator.setInterpolator(sAccelerateInterpolator);
+    mQSBSearchBarAnimator.addListener(new AnimatorListenerAdapter(){
+      @Override public void onAnimationStart(      Animator animation){
+        if (mQSB != null) {
+          mQSB.setVisibility(View.VISIBLE);
+        }
+      }
+      @Override public void onAnimationEnd(      Animator animation){
+        if (mQSB != null) {
+          AlphaUpdateListener.updateVisibility(mQSB,mAccessibilityEnabled);
+        }
+      }
+    }
+);
   }
  else {
-    mHideSearchBarAnim=ValueAnimator.ofFloat(0,0);
-    mHideSearchBarAnim.setDuration(TRANSITION_DURATION);
+    mQSBSearchBarAnimator=null;
   }
 }
