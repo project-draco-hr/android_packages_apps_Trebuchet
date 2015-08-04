@@ -1,3 +1,9 @@
 {
+synchronized (this) {
+    if (mUsers != null) {
+      int index=mUsers.indexOfValue(user);
+      return (index >= 0) ? mUsers.keyAt(index) : 0;
+    }
+  }
   return mUserManager.getSerialNumberForUser(user.getUser());
 }

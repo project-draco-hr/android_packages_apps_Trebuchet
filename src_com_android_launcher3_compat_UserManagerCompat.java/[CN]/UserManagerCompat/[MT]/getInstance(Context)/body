@@ -1,11 +1,16 @@
 {
-  if (Utilities.isLmpOrAbove()) {
-    return new UserManagerCompatVL(context);
-  }
- else   if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-    return new UserManagerCompatV17(context);
-  }
+synchronized (sInstanceLock) {
+    if (sInstance == null) {
+      if (Utilities.isLmpOrAbove()) {
+        sInstance=new UserManagerCompatVL(context.getApplicationContext());
+      }
+ else       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+        sInstance=new UserManagerCompatV17(context.getApplicationContext());
+      }
  else {
-    return new UserManagerCompatV16();
+        sInstance=new UserManagerCompatV16();
+      }
+    }
+    return sInstance;
   }
 }

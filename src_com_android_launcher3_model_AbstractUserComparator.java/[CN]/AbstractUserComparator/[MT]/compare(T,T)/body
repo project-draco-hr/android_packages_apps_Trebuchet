@@ -3,8 +3,8 @@
     return -1;
   }
  else {
-    Long aUserSerial=getAndCacheUserSerial(lhs.user);
-    Long bUserSerial=getAndCacheUserSerial(rhs.user);
+    Long aUserSerial=mUserManager.getSerialNumberForUser(lhs.user);
+    Long bUserSerial=mUserManager.getSerialNumberForUser(rhs.user);
     return aUserSerial.compareTo(bUserSerial);
   }
 }
