@@ -1,0 +1,7 @@
+{
+synchronized (this) {
+    mUsers=new LongArrayMap<UserHandleCompat>();
+    UserHandleCompat myUser=UserHandleCompat.myUserHandle();
+    mUsers.put(mUserManager.getSerialNumberForUser(myUser.getUser()),myUser);
+  }
+}

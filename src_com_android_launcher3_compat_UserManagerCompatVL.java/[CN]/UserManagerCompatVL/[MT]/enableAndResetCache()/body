@@ -1,0 +1,11 @@
+{
+synchronized (this) {
+    mUsers=new LongArrayMap<UserHandleCompat>();
+    List<UserHandle> users=mUserManager.getUserProfiles();
+    if (users != null) {
+      for (      UserHandle user : users) {
+        mUsers.put(mUserManager.getSerialNumberForUser(user),UserHandleCompat.fromUser(user));
+      }
+    }
+  }
+}
