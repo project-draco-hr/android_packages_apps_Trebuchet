@@ -1,6 +1,6 @@
 {
   if (!mDeferOnDragEnd) {
-    hideDeleteTarget();
+    animateToState(State.SEARCH_BAR,DEFAULT_DRAG_FADE_DURATION);
   }
  else {
     mDeferOnDragEnd=false;

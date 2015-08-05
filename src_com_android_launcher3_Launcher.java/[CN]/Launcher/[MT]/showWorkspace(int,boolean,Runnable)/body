@@ -1,12 +1,8 @@
 {
   boolean changed=mState != State.WORKSPACE || mWorkspace.getState() != Workspace.State.NORMAL;
   if (changed) {
-    boolean wasInSpringLoadedMode=(mState != State.WORKSPACE);
     mWorkspace.setVisibility(View.VISIBLE);
-    mStateTransitionAnimation.startAnimationToWorkspace(mState,Workspace.State.NORMAL,snapToPage,animated,onCompleteRunnable);
-    if (mSearchDropTargetBar != null) {
-      mSearchDropTargetBar.showSearchBar(animated && wasInSpringLoadedMode);
-    }
+    mStateTransitionAnimation.startAnimationToWorkspace(mState,mWorkspace.getState(),Workspace.State.NORMAL,snapToPage,animated,onCompleteRunnable);
     if (mAllAppsButton != null) {
       mAllAppsButton.requestFocus();
     }

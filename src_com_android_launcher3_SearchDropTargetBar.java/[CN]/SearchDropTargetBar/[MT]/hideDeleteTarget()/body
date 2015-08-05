@@ -1,5 +1,0 @@
-{
-  prepareStartAnimation(mDropTargetBar);
-  mShowDropTargetBarAnim.reverse();
-  showSearchBar(true);
-}

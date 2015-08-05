@@ -1,0 +1,4 @@
+{
+  mSearchBarAlpha=sbAlpha;
+  mDropTargetBarAlpha=dtbAlpha;
+}

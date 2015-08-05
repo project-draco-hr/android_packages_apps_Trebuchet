@@ -1,0 +1,9 @@
+{
+  AccessibilityManager am=(AccessibilityManager)mLauncher.getSystemService(Context.ACCESSIBILITY_SERVICE);
+  final boolean accessibilityEnabled=am.isEnabled();
+  TransitionStates states=new TransitionStates(fromState,toState);
+  int workspaceDuration=getAnimationDuration(states);
+  animateWorkspace(states,toPage,animated,workspaceDuration,layerViews,accessibilityEnabled);
+  animateBackgroundGradient(states,animated,BACKGROUND_FADE_OUT_DURATION);
+  return mStateAnimator;
+}
