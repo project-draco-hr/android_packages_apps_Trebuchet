@@ -2,9 +2,7 @@
 synchronized (this) {
     if (mUsers != null) {
       List<UserHandleCompat> users=new ArrayList<>();
-      for (      UserHandleCompat user : mUsers) {
-        users.add(user);
-      }
+      users.addAll(mUserToSerialMap.keySet());
       return users;
     }
   }
