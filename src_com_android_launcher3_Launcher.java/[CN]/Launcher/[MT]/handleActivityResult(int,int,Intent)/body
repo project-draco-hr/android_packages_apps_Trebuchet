@@ -16,6 +16,7 @@
     }
  else     if (resultCode == RESULT_OK) {
       addAppWidgetImpl(appWidgetId,mPendingAddInfo,null,mPendingAddWidgetInfo,ON_ACTIVITY_RESULT_ANIMATION_DELAY);
+      getOrCreateQsbBar();
     }
     return;
   }
