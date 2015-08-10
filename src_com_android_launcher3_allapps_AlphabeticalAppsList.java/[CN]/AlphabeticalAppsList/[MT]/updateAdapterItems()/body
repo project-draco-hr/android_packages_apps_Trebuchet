@@ -71,6 +71,15 @@
     mAdapterItems.add(appItem);
     mFilteredApps.add(info);
   }
+  if (hasFilter()) {
+    if (hasNoFilteredResults()) {
+      mAdapterItems.add(AdapterItem.asEmptySearch(position++));
+    }
+ else {
+      mAdapterItems.add(AdapterItem.asDivider(position++));
+    }
+    mAdapterItems.add(AdapterItem.asMarketSearch(position++));
+  }
   mergeSections();
   if (mNumAppsPerRow != 0) {
     int numAppsInSection=0;

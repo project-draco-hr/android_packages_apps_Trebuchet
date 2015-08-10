@@ -1,4 +1,4 @@
-Context context
+Launcher launcher
 AlphabeticalAppsList apps
 View.OnTouchListener touchListener
 View.OnClickListener iconClickListener

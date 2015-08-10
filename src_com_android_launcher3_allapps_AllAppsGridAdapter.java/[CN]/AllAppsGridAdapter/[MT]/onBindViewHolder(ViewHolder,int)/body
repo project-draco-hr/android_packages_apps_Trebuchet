@@ -15,8 +15,19 @@ case PREDICTION_ICON_VIEW_TYPE:
     break;
   }
 case EMPTY_SEARCH_VIEW_TYPE:
-TextView emptyViewText=(TextView)holder.mContent.findViewById(R.id.empty_text);
-emptyViewText.setText(mEmptySearchText);
+TextView emptyViewText=(TextView)holder.mContent;
+emptyViewText.setText(mEmptySearchMessage);
+break;
+case SEARCH_MARKET_VIEW_TYPE:
+View searchView=holder.mContent;
+if (mMarketSearchIntent != null) {
+searchView.setVisibility(View.VISIBLE);
+searchView.setContentDescription(mMarketSearchMessage);
+((TextView)searchView.findViewById(R.id.search_market_text)).setText(mMarketSearchMessage);
+}
+ else {
+searchView.setVisibility(View.GONE);
+}
 break;
 }
 }
