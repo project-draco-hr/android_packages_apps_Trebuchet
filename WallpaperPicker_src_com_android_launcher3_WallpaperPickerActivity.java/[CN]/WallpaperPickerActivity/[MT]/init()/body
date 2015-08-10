@@ -136,6 +136,8 @@
   actionBar.getCustomView().setOnClickListener(new View.OnClickListener(){
     @Override public void onClick(    View v){
       if (mSelectedTile != null) {
+        mWallpaperStrip.setVisibility(View.GONE);
+        actionBar.hide();
         WallpaperTileInfo info=(WallpaperTileInfo)mSelectedTile.getTag();
         info.onSave(WallpaperPickerActivity.this);
       }
