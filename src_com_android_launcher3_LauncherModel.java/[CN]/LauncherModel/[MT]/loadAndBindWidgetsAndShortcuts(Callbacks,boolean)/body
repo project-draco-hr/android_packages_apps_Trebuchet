@@ -1,7 +1,7 @@
 {
   runOnWorkerThread(new Runnable(){
     @Override public void run(){
-      updateWidgetsModel(context,refresh);
+      updateWidgetsModel(refresh);
       final WidgetsModel model=mBgWidgetsModel.clone();
       mHandler.post(new Runnable(){
         @Override public void run(){

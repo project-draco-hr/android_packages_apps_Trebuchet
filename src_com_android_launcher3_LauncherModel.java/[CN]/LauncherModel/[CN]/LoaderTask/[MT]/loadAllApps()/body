@@ -50,7 +50,7 @@
   }
 );
   ManagedProfileHeuristic.processAllUsers(profiles,mContext);
-  loadAndBindWidgetsAndShortcuts(mApp.getContext(),tryGetCallbacks(oldCallbacks),true);
+  loadAndBindWidgetsAndShortcuts(tryGetCallbacks(oldCallbacks),true);
   if (DEBUG_LOADERS) {
     Log.d(TAG,"Icons processed in " + (SystemClock.uptimeMillis() - loadTime) + "ms");
   }
