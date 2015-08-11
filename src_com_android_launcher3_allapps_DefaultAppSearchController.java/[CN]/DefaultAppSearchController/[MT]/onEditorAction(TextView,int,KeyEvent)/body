@@ -2,7 +2,7 @@
   if (!ALLOW_SINGLE_APP_LAUNCH) {
     return false;
   }
-  if (actionId != EditorInfo.IME_ACTION_DONE) {
+  if (actionId != EditorInfo.IME_ACTION_SEARCH) {
     return false;
   }
   if (mApps.getNumFilteredApps() > 1) {
