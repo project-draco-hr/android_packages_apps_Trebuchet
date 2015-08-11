@@ -19,7 +19,7 @@
   if ((currentProfile.desktopCols >= oldProfile.desktopCols) && (currentProfile.desktopRows >= oldProfile.desktopRows)) {
     return true;
   }
-  if ((oldProfile.desktopCols - currentProfile.desktopCols <= 1) && (oldProfile.desktopRows - currentProfile.desktopRows <= 1)) {
+  if (MigrateFromRestoreTask.ENABLED && (oldProfile.desktopCols - currentProfile.desktopCols <= 1) && (oldProfile.desktopRows - currentProfile.desktopRows <= 1)) {
     migrationCompatibleProfileData=initDeviceProfileData(mIdp);
     migrationCompatibleProfileData.desktopCols=oldProfile.desktopCols;
     migrationCompatibleProfileData.desktopRows=oldProfile.desktopRows;
