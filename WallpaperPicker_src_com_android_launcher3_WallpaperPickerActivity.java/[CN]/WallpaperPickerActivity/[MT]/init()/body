@@ -135,7 +135,7 @@
   actionBar.setCustomView(R.layout.actionbar_set_wallpaper);
   actionBar.getCustomView().setOnClickListener(new View.OnClickListener(){
     @Override public void onClick(    View v){
-      if (mSelectedTile != null) {
+      if (mSelectedTile != null && mCropView.getTileSource() != null) {
         mWallpaperStrip.setVisibility(View.GONE);
         actionBar.hide();
         WallpaperTileInfo info=(WallpaperTileInfo)mSelectedTile.getTag();
