@@ -1,6 +1,0 @@
-{
-  if (event.getKeyCode() == android.view.KeyEvent.KEYCODE_BACK) {
-    mFolder.doneEditingFolderName(true);
-  }
-  return super.onKeyPreIme(keyCode,event);
-}
