@@ -1,0 +1,8 @@
+{
+  if (Binder.getCallingPid() != Process.myPid()) {
+    LauncherAppState app=LauncherAppState.getInstanceNoCreate();
+    if (app != null) {
+      app.reloadWorkspace();
+    }
+  }
+}

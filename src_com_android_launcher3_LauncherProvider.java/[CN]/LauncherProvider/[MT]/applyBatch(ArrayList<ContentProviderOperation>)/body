@@ -4,6 +4,7 @@
   try {
     ContentProviderResult[] result=super.applyBatch(operations);
     db.setTransactionSuccessful();
+    reloadLauncherIfExternal();
     return result;
   }
   finally {
