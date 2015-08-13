@@ -16,5 +16,6 @@
     db.endTransaction();
   }
   notifyListeners();
+  reloadLauncherIfExternal();
   return values.length;
 }
