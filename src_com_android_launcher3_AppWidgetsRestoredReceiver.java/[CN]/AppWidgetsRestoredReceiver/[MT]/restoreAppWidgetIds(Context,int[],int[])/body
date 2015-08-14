@@ -7,7 +7,7 @@
     final AppWidgetProviderInfo provider=widgets.getAppWidgetInfo(newWidgetIds[i]);
     final int state;
     if (LauncherModel.isValidProvider(provider)) {
-      state=LauncherAppWidgetInfo.RESTORE_COMPLETED;
+      state=LauncherAppWidgetInfo.FLAG_UI_NOT_READY;
     }
  else {
       state=LauncherAppWidgetInfo.FLAG_PROVIDER_NOT_READY;

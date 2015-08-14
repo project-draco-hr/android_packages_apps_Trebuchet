@@ -328,7 +328,7 @@ appWidgetInfo=new LauncherAppWidgetInfo(appWidgetId,provider.provider);
 int status=restoreStatus & ~LauncherAppWidgetInfo.FLAG_RESTORE_STARTED;
 if (!wasProviderReady) {
 if (isIdValid) {
-status=LauncherAppWidgetInfo.RESTORE_COMPLETED;
+status=LauncherAppWidgetInfo.FLAG_UI_NOT_READY;
 }
  else {
 status&=~LauncherAppWidgetInfo.FLAG_PROVIDER_NOT_READY;
