@@ -1,0 +1,51 @@
+{
+  DeviceProfile grid=mLauncher.getDeviceProfile();
+  int paddingTop=getPaddingTop();
+  int paddingBottom=getPaddingBottom();
+  int paddingLeft=getPaddingLeft();
+  int paddingRight=getPaddingRight();
+  int minPadding=getResources().getDimensionPixelSize(R.dimen.pending_widget_min_padding);
+  int availableWidth=getWidth() - paddingLeft - paddingRight- 2 * minPadding;
+  int availableHeight=getHeight() - paddingTop - paddingBottom- 2 * minPadding;
+  if (mSettingIconDrawable == null) {
+    int outset=(mCenterDrawable instanceof PreloadIconDrawable) ? ((PreloadIconDrawable)mCenterDrawable).getOutset() : 0;
+    int maxSize=grid.iconSizePx + 2 * outset;
+    int size=Math.min(maxSize,Math.min(availableWidth,availableHeight));
+    mRect.set(0,0,size,size);
+    mRect.inset(outset,outset);
+    mRect.offsetTo((getWidth() - mRect.width()) / 2,(getHeight() - mRect.height()) / 2);
+    mCenterDrawable.setBounds(mRect);
+  }
+ else {
+    float iconSize=Math.min(availableWidth,availableHeight);
+    float settingIconScaleFactor=1 + SETUP_ICON_SIZE_FACTOR * 2;
+    int maxSize=Math.max(availableWidth,availableHeight);
+    if (iconSize * settingIconScaleFactor > maxSize) {
+      iconSize=maxSize / settingIconScaleFactor;
+    }
+    int actualIconSize=(int)Math.min(iconSize,grid.iconSizePx);
+    mSetupTextLayout=new StaticLayout(getResources().getText(R.string.gadget_setup_text),mPaint,availableWidth,Layout.Alignment.ALIGN_CENTER,1,0,true);
+    int textHeight=mSetupTextLayout.getHeight();
+    float minHeightWithText=textHeight + actualIconSize * settingIconScaleFactor + grid.iconDrawablePaddingPx;
+    int iconTop;
+    if (minHeightWithText < availableHeight) {
+      iconTop=(getHeight() - textHeight - grid.iconDrawablePaddingPx- actualIconSize) / 2;
+    }
+ else {
+      iconTop=(getHeight() - actualIconSize) / 2;
+      mSetupTextLayout=null;
+    }
+    mRect.set(0,0,actualIconSize,actualIconSize);
+    mRect.offset((getWidth() - actualIconSize) / 2,iconTop);
+    mCenterDrawable.setBounds(mRect);
+    mRect.left=paddingLeft + minPadding;
+    mRect.right=mRect.left + (int)(SETUP_ICON_SIZE_FACTOR * actualIconSize);
+    mRect.top=paddingTop + minPadding;
+    mRect.bottom=mRect.top + (int)(SETUP_ICON_SIZE_FACTOR * actualIconSize);
+    mSettingIconDrawable.setBounds(mRect);
+    if (mSetupTextLayout != null) {
+      mRect.left=paddingLeft + minPadding;
+      mRect.top=mCenterDrawable.getBounds().bottom + grid.iconDrawablePaddingPx;
+    }
+  }
+}

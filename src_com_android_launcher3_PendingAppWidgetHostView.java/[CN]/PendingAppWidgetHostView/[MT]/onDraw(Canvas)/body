@@ -2,59 +2,18 @@
   if (mCenterDrawable == null) {
     return;
   }
-  DeviceProfile grid=mLauncher.getDeviceProfile();
-  if (mTopCornerDrawable == null) {
-    if (mDrawableSizeChanged) {
-      int outset=(mCenterDrawable instanceof PreloadIconDrawable) ? ((PreloadIconDrawable)mCenterDrawable).getOutset() : 0;
-      int maxSize=grid.iconSizePx + 2 * outset;
-      int size=Math.min(maxSize,Math.min(getWidth() - getPaddingLeft() - getPaddingRight(),getHeight() - getPaddingTop() - getPaddingBottom()));
-      mRect.set(0,0,size,size);
-      mRect.inset(outset,outset);
-      mRect.offsetTo((getWidth() - mRect.width()) / 2,(getHeight() - mRect.height()) / 2);
-      mCenterDrawable.setBounds(mRect);
-      mDrawableSizeChanged=false;
-    }
-    mCenterDrawable.draw(canvas);
+  if (mDrawableSizeChanged) {
+    updateDrawableBounds();
+    mDrawableSizeChanged=false;
   }
- else {
-    if (mDrawableSizeChanged) {
-      int iconSize=grid.iconSizePx;
-      int paddingTop=getPaddingTop();
-      int paddingBottom=getPaddingBottom();
-      int paddingLeft=getPaddingLeft();
-      int paddingRight=getPaddingRight();
-      int availableWidth=getWidth() - paddingLeft - paddingRight;
-      int availableHeight=getHeight() - paddingTop - paddingBottom;
-      mSetupTextLayout=new StaticLayout(getResources().getText(R.string.gadget_setup_text),mPaint,availableWidth,Layout.Alignment.ALIGN_CENTER,1,0,true);
-      if (mSetupTextLayout.getLineCount() == 1) {
-        int size=Math.min(iconSize,Math.min(availableWidth,availableHeight - mSetupTextLayout.getHeight()));
-        mRect.set(0,0,size,size);
-        mRect.offsetTo((getWidth() - mRect.width()) / 2,(getHeight() - mRect.height() - mSetupTextLayout.getHeight()- grid.iconDrawablePaddingPx) / 2);
-        mTopCornerDrawable.setBounds(mRect);
-        mRect.left=paddingLeft;
-        mRect.top=mRect.bottom + grid.iconDrawablePaddingPx;
-      }
- else {
-        mSetupTextLayout=null;
-        int size=Math.min(iconSize,Math.min(getWidth() - paddingLeft - paddingRight,getHeight() - paddingTop - paddingBottom));
-        mRect.set(0,0,size,size);
-        mRect.offsetTo((getWidth() - mRect.width()) / 2,(getHeight() - mRect.height()) / 2);
-        mCenterDrawable.setBounds(mRect);
-        size=Math.min(size / 2,Math.max(mRect.top - paddingTop,mRect.left - paddingLeft));
-        mTopCornerDrawable.setBounds(paddingLeft,paddingTop,paddingLeft + size,paddingTop + size);
-      }
-      mDrawableSizeChanged=false;
-    }
-    if (mSetupTextLayout == null) {
-      mCenterDrawable.draw(canvas);
-      mTopCornerDrawable.draw(canvas);
-    }
- else {
-      canvas.save();
-      canvas.translate(mRect.left,mRect.top);
-      mSetupTextLayout.draw(canvas);
-      canvas.restore();
-      mTopCornerDrawable.draw(canvas);
-    }
+  mCenterDrawable.draw(canvas);
+  if (mSettingIconDrawable != null) {
+    mSettingIconDrawable.draw(canvas);
+  }
+  if (mSetupTextLayout != null) {
+    canvas.save();
+    canvas.translate(mRect.left,mRect.top);
+    mSetupTextLayout.draw(canvas);
+    canvas.restore();
   }
 }
