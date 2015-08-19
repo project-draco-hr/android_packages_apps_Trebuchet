@@ -1,3 +1,4 @@
 {
   mDy=dy;
+  onUpdateScrollbar(dy);
 }
