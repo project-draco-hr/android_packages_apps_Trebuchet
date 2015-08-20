@@ -2,8 +2,9 @@
   if (mThumbOffset.x == x && mThumbOffset.y == y) {
     return;
   }
-  mInvalidateRect.set(mThumbOffset.x,0,mThumbOffset.x + mThumbWidth,mRv.getHeight());
+  mInvalidateRect.set(mThumbOffset.x - mThumbCurvature,mThumbOffset.y,mThumbOffset.x + mThumbWidth,mThumbOffset.y + mThumbHeight);
   mThumbOffset.set(x,y);
-  mInvalidateRect.union(new Rect(mThumbOffset.x,0,mThumbOffset.x + mThumbWidth,mRv.getHeight()));
+  updateThumbPath();
+  mInvalidateRect.union(mThumbOffset.x - mThumbCurvature,mThumbOffset.y,mThumbOffset.x + mThumbWidth,mThumbOffset.y + mThumbHeight);
   mRv.invalidate(mInvalidateRect);
 }

@@ -1,0 +1,7 @@
+{
+  mInvalidateRect.set(mThumbOffset.x - mThumbCurvature,0,mThumbOffset.x + mThumbWidth,mRv.getHeight());
+  mTrackWidth=width;
+  updateThumbPath();
+  mInvalidateRect.union(mThumbOffset.x - mThumbCurvature,0,mThumbOffset.x + mThumbWidth,mRv.getHeight());
+  mRv.invalidate(mInvalidateRect);
+}
