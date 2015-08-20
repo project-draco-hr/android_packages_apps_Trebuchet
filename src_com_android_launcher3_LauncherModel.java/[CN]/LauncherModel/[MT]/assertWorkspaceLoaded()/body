@@ -1,5 +1,9 @@
 {
-  if (LauncherAppState.isDogfoodBuild() && (isLoadingWorkspace() || !mHasLoaderCompletedOnce)) {
-    throw new RuntimeException("Trying to add shortcut while loader is running");
+  if (LauncherAppState.isDogfoodBuild()) {
+synchronized (mLock) {
+      if (!mHasLoaderCompletedOnce || (mLoaderTask != null && mLoaderTask.mIsLoadingAndBindingWorkspace)) {
+        throw new RuntimeException("Trying to add shortcut while loader is running");
+      }
+    }
   }
 }
