@@ -2,6 +2,7 @@
   stateOut.rowIndex=-1;
   stateOut.rowTopOffset=-1;
   stateOut.rowHeight=-1;
+  List<AlphabeticalAppsList.AdapterItem> items=mApps.getAdapterItems();
   if (items.isEmpty() || mNumAppsPerRow == 0) {
     return;
   }
