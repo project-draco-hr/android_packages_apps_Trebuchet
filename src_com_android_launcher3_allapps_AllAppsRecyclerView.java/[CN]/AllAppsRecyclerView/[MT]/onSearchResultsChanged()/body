@@ -1,0 +1,15 @@
+{
+  scrollToTop();
+  if (mApps.hasNoFilteredResults()) {
+    if (mEmptySearchBackground == null) {
+      mEmptySearchBackground=new AllAppsBackgroundDrawable(getContext());
+      mEmptySearchBackground.setAlpha(0);
+      mEmptySearchBackground.setCallback(this);
+      updateEmptySearchBackgroundBounds();
+    }
+    mEmptySearchBackground.animateBgAlpha(1f,150);
+  }
+ else   if (mEmptySearchBackground != null) {
+    mEmptySearchBackground.setBgAlpha(0f);
+  }
+}

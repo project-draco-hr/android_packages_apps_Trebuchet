@@ -1,0 +1,9 @@
+{
+  int finalAlphaI=(int)(finalAlpha * 255f);
+  if (getAlpha() != finalAlphaI) {
+    mBackgroundAnim=cancelAnimator(mBackgroundAnim);
+    mBackgroundAnim=ObjectAnimator.ofInt(this,"alpha",finalAlphaI);
+    mBackgroundAnim.setDuration(duration);
+    mBackgroundAnim.start();
+  }
+}

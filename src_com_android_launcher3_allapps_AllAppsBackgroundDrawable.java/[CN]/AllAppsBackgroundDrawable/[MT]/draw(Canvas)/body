@@ -1,0 +1,6 @@
+{
+  mHand.draw(canvas);
+  for (int i=0; i < mIcons.length; i++) {
+    mIcons[i].draw(canvas);
+  }
+}

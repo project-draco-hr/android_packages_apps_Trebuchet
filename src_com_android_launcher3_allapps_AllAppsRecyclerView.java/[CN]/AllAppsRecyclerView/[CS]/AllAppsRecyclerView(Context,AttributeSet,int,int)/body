@@ -1,4 +1,6 @@
 {
   super(context,attrs,defStyleAttr);
+  Resources res=getResources();
   mScrollbar.setDetachThumbOnFastScroll();
+  mEmptySearchBackgroundTopOffset=res.getDimensionPixelSize(R.dimen.all_apps_empty_search_bg_top_offset);
 }

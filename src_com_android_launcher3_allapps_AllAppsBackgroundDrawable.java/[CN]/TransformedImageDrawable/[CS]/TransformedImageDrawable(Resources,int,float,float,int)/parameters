@@ -1,0 +1,5 @@
+Resources res
+int resourceId
+float xPct
+float yPct
+int gravity
