@@ -33,7 +33,14 @@
       int thumbScrollY=mScrollbar.getThumbOffset().y;
       int diffScrollY=scrollBarY - thumbScrollY;
       if (diffScrollY * dy > 0f) {
-        thumbScrollY+=dy < 0 ? Math.max(dy,diffScrollY) : Math.min(dy,diffScrollY);
+        if (dy < 0) {
+          int offset=(int)((dy * thumbScrollY) / (float)scrollBarY);
+          thumbScrollY+=Math.max(offset,diffScrollY);
+        }
+ else {
+          int offset=(int)((dy * (availableScrollBarHeight - thumbScrollY)) / (float)(availableScrollBarHeight - scrollBarY));
+          thumbScrollY+=Math.min(offset,diffScrollY);
+        }
         thumbScrollY=Math.max(0,Math.min(availableScrollBarHeight,thumbScrollY));
         mScrollbar.setThumbOffset(scrollBarX,thumbScrollY);
         if (scrollBarY == thumbScrollY) {
