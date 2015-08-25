@@ -4,6 +4,7 @@
       public void run(){
         cling.setVisibility(View.GONE);
         mLauncher.getSharedPrefs().edit().putBoolean(flag,true).apply();
+        mIsVisible=false;
         if (postAnimationCb != null) {
           postAnimationCb.run();
         }

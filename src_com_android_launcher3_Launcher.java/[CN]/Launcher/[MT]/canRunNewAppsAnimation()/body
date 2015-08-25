@@ -1,4 +1,4 @@
 {
   long diff=System.currentTimeMillis() - mDragController.getLastGestureUpTime();
-  return diff > (NEW_APPS_ANIMATION_INACTIVE_TIMEOUT_SECONDS * 1000);
+  return diff > (NEW_APPS_ANIMATION_INACTIVE_TIMEOUT_SECONDS * 1000) && (mClings == null || !mClings.isVisible());
 }
