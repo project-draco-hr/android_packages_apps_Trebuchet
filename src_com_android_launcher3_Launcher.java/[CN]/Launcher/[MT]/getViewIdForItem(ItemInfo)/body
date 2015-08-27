@@ -1,3 +1,9 @@
 {
-  return getViewIdForItemId((int)info.id);
+  int itemId=(int)info.id;
+  if (mItemIdToViewId.containsKey(itemId)) {
+    return mItemIdToViewId.get(itemId);
+  }
+  int viewId=generateViewId();
+  mItemIdToViewId.put(itemId,viewId);
+  return viewId;
 }

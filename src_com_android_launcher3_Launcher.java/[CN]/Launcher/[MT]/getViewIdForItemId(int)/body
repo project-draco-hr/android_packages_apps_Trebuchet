@@ -1,8 +1,0 @@
-{
-  if (mItemIdToViewId.containsKey(itemId)) {
-    return mItemIdToViewId.get(itemId);
-  }
-  int viewId=generateViewId();
-  mItemIdToViewId.put(itemId,viewId);
-  return viewId;
-}
