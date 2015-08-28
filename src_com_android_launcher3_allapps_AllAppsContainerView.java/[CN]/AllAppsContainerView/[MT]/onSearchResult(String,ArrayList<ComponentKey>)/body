@@ -2,6 +2,6 @@
   if (apps != null) {
     mApps.setOrderedFilter(apps);
     mAdapter.setLastSearchQuery(query);
-    mAppsRecyclerView.scrollToTop();
+    mAppsRecyclerView.onSearchResultsChanged();
   }
 }

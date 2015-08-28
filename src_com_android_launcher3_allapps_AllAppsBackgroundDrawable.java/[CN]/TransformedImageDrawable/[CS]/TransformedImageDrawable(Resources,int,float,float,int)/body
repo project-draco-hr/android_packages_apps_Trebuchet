@@ -1,0 +1,6 @@
+{
+  mImage=res.getDrawable(resourceId);
+  mXPercent=xPct;
+  mYPercent=yPct;
+  mGravity=gravity;
+}
