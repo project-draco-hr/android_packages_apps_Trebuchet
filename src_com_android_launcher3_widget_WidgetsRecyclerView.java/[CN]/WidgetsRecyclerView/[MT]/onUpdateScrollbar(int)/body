@@ -1,4 +1,7 @@
 {
+  if (mWidgets == null) {
+    return;
+  }
   int rowCount=mWidgets.getPackageSize();
   if (rowCount == 0) {
     mScrollbar.setThumbOffset(-1,-1);
