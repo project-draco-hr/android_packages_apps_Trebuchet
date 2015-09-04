@@ -8,8 +8,8 @@
   final boolean isSdCardReady=context.registerReceiver(null,new IntentFilter(StartupReceiver.SYSTEM_READY)) != null;
   LauncherAppState app=LauncherAppState.getInstance();
   InvariantDeviceProfile profile=app.getInvariantDeviceProfile();
-  int countX=(int)profile.numColumns;
-  int countY=(int)profile.numRows;
+  int countX=profile.numColumns;
+  int countY=profile.numRows;
   if (MigrateFromRestoreTask.ENABLED && MigrateFromRestoreTask.shouldRunTask(mContext)) {
     long migrationStartTime=System.currentTimeMillis();
     Log.v(TAG,"Starting workspace migration after restore");
@@ -39,6 +39,7 @@
 synchronized (sBgLock) {
     clearSBgDataStructures();
     final HashMap<String,Integer> installingPkgs=PackageInstallerCompat.getInstance(mContext).updateAndGetActiveSessionCache();
+    sBgWorkspaceScreens.addAll(loadWorkspaceScreensDb(mContext));
     final ArrayList<Long> itemsToRemove=new ArrayList<Long>();
     final ArrayList<Long> restoredRows=new ArrayList<Long>();
     final Uri contentUri=LauncherSettings.Favorites.CONTENT_URI;
@@ -188,6 +189,7 @@ restored=false;
 }
  catch (URISyntaxException e) {
 Launcher.addDumpLog(TAG,"Invalid uri: " + intentDescription,true);
+itemsToRemove.add(id);
 continue;
 }
 boolean useLowResIcon=container >= 0 && c.getInt(rankIndex) >= FolderIcon.NUM_ITEMS_IN_PREVIEW;
@@ -238,7 +240,7 @@ info.isDisabled=disabledState;
 if (isSafeMode && !Utilities.isSystemApp(context,intent)) {
 info.isDisabled|=ShortcutInfo.FLAG_DISABLED_SAFEMODE;
 }
-if (!checkItemPlacement(occupied,info)) {
+if (!checkItemPlacement(occupied,info,sBgWorkspaceScreens)) {
 itemsToRemove.add(id);
 break;
 }
@@ -282,7 +284,7 @@ folderInfo.cellY=c.getInt(cellYIndex);
 folderInfo.spanX=1;
 folderInfo.spanY=1;
 folderInfo.options=c.getInt(optionsIndex);
-if (!checkItemPlacement(occupied,folderInfo)) {
+if (!checkItemPlacement(occupied,folderInfo,sBgWorkspaceScreens)) {
 itemsToRemove.add(id);
 break;
 }
@@ -362,10 +364,11 @@ appWidgetInfo.spanY=c.getInt(spanYIndex);
 appWidgetInfo.user=user;
 if (container != LauncherSettings.Favorites.CONTAINER_DESKTOP && container != LauncherSettings.Favorites.CONTAINER_HOTSEAT) {
 Log.e(TAG,"Widget found where container != " + "CONTAINER_DESKTOP nor CONTAINER_HOTSEAT - ignoring!");
+itemsToRemove.add(id);
 continue;
 }
 appWidgetInfo.container=container;
-if (!checkItemPlacement(occupied,appWidgetInfo)) {
+if (!checkItemPlacement(occupied,appWidgetInfo,sBgWorkspaceScreens)) {
 itemsToRemove.add(id);
 break;
 }
@@ -430,7 +433,6 @@ contentResolver.update(LauncherSettings.Favorites.CONTENT_URI,values,Utilities.c
 if (!isSdCardReady && !sPendingPackages.isEmpty()) {
 context.registerReceiver(new AppsAvailabilityCheck(),new IntentFilter(StartupReceiver.SYSTEM_READY),null,sWorker);
 }
-sBgWorkspaceScreens.addAll(loadWorkspaceScreensDb(mContext));
 ArrayList<Long> unusedScreens=new ArrayList<Long>(sBgWorkspaceScreens);
 for (ItemInfo item : sBgItemsIdMap) {
 long screenId=item.screenId;
