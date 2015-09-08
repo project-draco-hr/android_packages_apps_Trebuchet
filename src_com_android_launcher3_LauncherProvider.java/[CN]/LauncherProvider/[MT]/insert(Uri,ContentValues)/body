@@ -11,6 +11,18 @@
   if (rowId < 0)   return null;
   uri=ContentUris.withAppendedId(uri,rowId);
   notifyListeners();
-  reloadLauncherIfExternal();
+  if (Utilities.ATLEAST_MARSHMALLOW) {
+    reloadLauncherIfExternal();
+  }
+ else {
+    LauncherAppState app=LauncherAppState.getInstanceNoCreate();
+    if (app != null && "true".equals(uri.getQueryParameter("isExternalAdd"))) {
+      app.reloadWorkspace();
+    }
+    String notify=uri.getQueryParameter("notify");
+    if (notify == null || "true".equals(notify)) {
+      getContext().getContentResolver().notifyChange(uri,null);
+    }
+  }
   return uri;
 }
