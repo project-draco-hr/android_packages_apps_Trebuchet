@@ -2,5 +2,5 @@
   if (mWorkspace != null)   mWorkspace.setAlpha(1f);
   if (mHotseat != null)   mHotseat.setAlpha(1f);
   if (mPageIndicators != null)   mPageIndicators.setAlpha(1f);
-  if (mSearchDropTargetBar != null)   mSearchDropTargetBar.showSearchBar(false);
+  if (mSearchDropTargetBar != null)   mSearchDropTargetBar.animateToState(SearchDropTargetBar.State.SEARCH_BAR,0);
 }

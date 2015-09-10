@@ -1,0 +1,5 @@
+{
+  mTempValues.clear();
+  item.addToContentValues(mTempValues);
+  mUpdateOperations.add(ContentProviderOperation.newUpdate(LauncherSettings.Favorites.getContentUri(item.id)).withValues(mTempValues).build());
+}

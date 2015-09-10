@@ -1,0 +1,5 @@
+{
+  if (!mValidPackages.contains(packageName)) {
+    throw new Exception("Package not available");
+  }
+}

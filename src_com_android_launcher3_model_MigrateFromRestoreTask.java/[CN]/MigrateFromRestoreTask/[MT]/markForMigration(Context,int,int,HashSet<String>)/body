@@ -1,0 +1,3 @@
+{
+  prefs(context).edit().putString(KEY_MIGRATION_SOURCE_SIZE,srcX + "," + srcY).putStringSet(KEY_MIGRATION_WIDGET_MINSIZE,widgets).apply();
+}

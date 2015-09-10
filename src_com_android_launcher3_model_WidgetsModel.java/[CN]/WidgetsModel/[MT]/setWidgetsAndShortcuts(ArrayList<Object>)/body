@@ -7,15 +7,27 @@
   HashMap<String,PackageItemInfo> tmpPackageItemInfos=new HashMap<>();
   mWidgetsList.clear();
   mPackageItemInfos.clear();
+  mWidgetAndShortcutNameComparator.reset();
+  InvariantDeviceProfile idp=LauncherAppState.getInstance().getInvariantDeviceProfile();
   for (  Object o : rawWidgetsShortcuts) {
     String packageName="";
     UserHandleCompat userHandle=null;
     ComponentName componentName=null;
     if (o instanceof LauncherAppWidgetProviderInfo) {
       LauncherAppWidgetProviderInfo widgetInfo=(LauncherAppWidgetProviderInfo)o;
-      componentName=widgetInfo.provider;
-      packageName=widgetInfo.provider.getPackageName();
-      userHandle=mAppWidgetMgr.getUser(widgetInfo);
+      int minSpanX=Math.min(widgetInfo.spanX,widgetInfo.minSpanX);
+      int minSpanY=Math.min(widgetInfo.spanY,widgetInfo.minSpanY);
+      if (minSpanX <= (int)idp.numColumns && minSpanY <= (int)idp.numRows) {
+        componentName=widgetInfo.provider;
+        packageName=widgetInfo.provider.getPackageName();
+        userHandle=mAppWidgetMgr.getUser(widgetInfo);
+      }
+ else {
+        if (DEBUG) {
+          Log.d(TAG,String.format("Widget %s : (%d X %d) can't fit on this device",widgetInfo.provider,minSpanX,minSpanY));
+        }
+        continue;
+      }
     }
  else     if (o instanceof ResolveInfo) {
       ResolveInfo resolveInfo=(ResolveInfo)o;
@@ -39,7 +51,7 @@
       widgetsShortcutsList.add(o);
     }
  else {
-      widgetsShortcutsList=new ArrayList<Object>();
+      widgetsShortcutsList=new ArrayList<>();
       widgetsShortcutsList.add(o);
       pInfo=new PackageItemInfo(packageName);
       mIconCache.getTitleAndIconForApp(packageName,userHandle,true,pInfo);

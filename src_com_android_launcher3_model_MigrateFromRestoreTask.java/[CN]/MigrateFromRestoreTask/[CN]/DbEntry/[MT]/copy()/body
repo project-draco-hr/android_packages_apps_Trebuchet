@@ -1,0 +1,8 @@
+{
+  DbEntry entry=new DbEntry();
+  entry.copyFrom(this);
+  entry.weight=weight;
+  entry.minSpanX=minSpanX;
+  entry.minSpanY=minSpanY;
+  return entry;
+}

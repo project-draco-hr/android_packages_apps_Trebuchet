@@ -1,3 +1,6 @@
 {
+  if (mScrollbar.isThumbDetached()) {
+    mScrollbar.reattachThumbToScroll();
+  }
   scrollToPosition(0);
 }

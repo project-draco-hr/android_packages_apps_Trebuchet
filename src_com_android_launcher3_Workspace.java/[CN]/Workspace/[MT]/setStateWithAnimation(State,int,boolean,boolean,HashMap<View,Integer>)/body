@@ -1,6 +1,0 @@
-{
-  Animator workspaceAnim=mStateTransitionAnimation.getAnimationToState(mState,toState,toPage,animated,hasOverlaySearchBar,layerViews);
-  mState=toState;
-  updateAccessibilityFlags();
-  return workspaceAnim;
-}

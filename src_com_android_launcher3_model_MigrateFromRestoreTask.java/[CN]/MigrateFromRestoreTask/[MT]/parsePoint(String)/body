@@ -1,0 +1,4 @@
+{
+  String[] split=point.split(",");
+  return new Point(Integer.parseInt(split[0]),Integer.parseInt(split[1]));
+}

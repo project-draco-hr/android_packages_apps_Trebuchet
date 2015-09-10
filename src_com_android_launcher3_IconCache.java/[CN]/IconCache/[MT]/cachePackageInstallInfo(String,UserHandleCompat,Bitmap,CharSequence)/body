@@ -1,6 +1,11 @@
 {
   removeFromMemCacheLocked(packageName,user);
-  CacheEntry entry=getEntryForPackageLocked(packageName,user,false);
+  ComponentKey cacheKey=getPackageKey(packageName,user);
+  CacheEntry entry=mCache.get(cacheKey);
+  if (entry == null) {
+    entry=new CacheEntry();
+    mCache.put(cacheKey,entry);
+  }
   if (!TextUtils.isEmpty(title)) {
     entry.title=title;
   }

@@ -1,0 +1,9 @@
+{
+  int color=Utilities.findDominantColorByHue(mIcon,20);
+  float[] hsv=new float[3];
+  Color.colorToHSV(color,hsv);
+  hsv[1]=Math.min(hsv[1],MIN_SATUNATION);
+  hsv[2]=1;
+  color=Color.HSVToColor(hsv);
+  mSettingIconDrawable.setColorFilter(color,PorterDuff.Mode.SRC_IN);
+}

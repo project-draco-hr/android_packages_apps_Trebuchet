@@ -1,7 +1,4 @@
 {
-  if (mApps.hasNoFilteredResults()) {
-    return mAppsPerRow;
-  }
 switch (mApps.getAdapterItems().get(position).viewType) {
 case AllAppsGridAdapter.ICON_VIEW_TYPE:
 case AllAppsGridAdapter.PREDICTION_ICON_VIEW_TYPE:

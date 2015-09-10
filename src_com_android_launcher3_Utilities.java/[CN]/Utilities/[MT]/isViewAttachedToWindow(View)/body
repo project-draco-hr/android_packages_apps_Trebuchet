@@ -1,5 +1,5 @@
 {
-  if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+  if (ATLEAST_KITKAT) {
     return v.isAttachedToWindow();
   }
  else {

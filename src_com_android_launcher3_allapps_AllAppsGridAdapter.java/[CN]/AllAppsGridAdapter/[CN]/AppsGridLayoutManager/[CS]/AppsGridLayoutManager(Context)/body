@@ -1,0 +1,3 @@
+{
+  super(context,1,GridLayoutManager.VERTICAL,false);
+}

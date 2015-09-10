@@ -71,10 +71,18 @@ synchronized (mDeferredBindRunnables) {
       if (callbacks != null) {
         callbacks.finishBindingItems();
       }
+      mIsLoadingAndBindingWorkspace=false;
+      if (!mBindCompleteRunnables.isEmpty()) {
+synchronized (mBindCompleteRunnables) {
+          for (          final Runnable r : mBindCompleteRunnables) {
+            runOnWorkerThread(r);
+          }
+          mBindCompleteRunnables.clear();
+        }
+      }
       if (DEBUG_LOADERS) {
         Log.d(TAG,"bound workspace in " + (SystemClock.uptimeMillis() - t) + "ms");
       }
-      mIsLoadingAndBindingWorkspace=false;
     }
   }
 ;

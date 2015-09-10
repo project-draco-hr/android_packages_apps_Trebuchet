@@ -1,0 +1,3 @@
+boolean[][] occupied
+ArrayList<DbEntry> itemsToPlace
+boolean ignoreMove

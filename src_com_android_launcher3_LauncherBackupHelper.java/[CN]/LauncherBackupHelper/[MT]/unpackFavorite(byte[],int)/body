@@ -1,5 +1,8 @@
 {
   Favorite favorite=unpackProto(new Favorite(),buffer,dataSize);
+  if (favorite.container == Favorites.CONTAINER_HOTSEAT) {
+    favorite.screen+=mHotseatShift;
+  }
   ContentValues values=new ContentValues();
   values.put(Favorites._ID,favorite.id);
   values.put(Favorites.SCREEN,favorite.screen);
@@ -8,6 +11,7 @@
   values.put(Favorites.CELLY,favorite.cellY);
   values.put(Favorites.SPANX,favorite.spanX);
   values.put(Favorites.SPANY,favorite.spanY);
+  values.put(Favorites.RANK,favorite.rank);
   if (favorite.itemType == Favorites.ITEM_TYPE_SHORTCUT) {
     values.put(Favorites.ICON_TYPE,favorite.iconType);
     if (favorite.iconType == Favorites.ICON_TYPE_RESOURCE) {
@@ -29,7 +33,7 @@
   UserHandleCompat myUserHandle=UserHandleCompat.myUserHandle();
   long userSerialNumber=UserManagerCompat.getInstance(mContext).getSerialNumberForUser(myUserHandle);
   values.put(LauncherSettings.Favorites.PROFILE_ID,userSerialNumber);
-  DeviceProfieData currentProfile=mDeviceProfileData;
+  DeviceProfieData currentProfile=migrationCompatibleProfileData == null ? mDeviceProfileData : migrationCompatibleProfileData;
   if (favorite.itemType == Favorites.ITEM_TYPE_APPWIDGET) {
     if (!TextUtils.isEmpty(favorite.appWidgetProvider)) {
       values.put(Favorites.APPWIDGET_PROVIDER,favorite.appWidgetProvider);

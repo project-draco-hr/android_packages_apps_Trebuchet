@@ -3,7 +3,7 @@
   if (currentFolder != null) {
     childrenForAccessibility.add(currentFolder);
     if (isInAccessibleDrag()) {
-      childrenForAccessibility.add(mLauncher.getSearchBar());
+      childrenForAccessibility.add(mLauncher.getSearchDropTargetBar());
     }
   }
  else {

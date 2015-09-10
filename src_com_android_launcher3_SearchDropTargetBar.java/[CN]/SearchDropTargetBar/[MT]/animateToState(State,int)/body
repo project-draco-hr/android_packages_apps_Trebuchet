@@ -1,0 +1,9 @@
+{
+  if (mState != newState) {
+    mState=newState;
+    AccessibilityManager am=(AccessibilityManager)getContext().getSystemService(Context.ACCESSIBILITY_SERVICE);
+    mAccessibilityEnabled=am.isEnabled();
+    animateViewAlpha(mQSBSearchBarAnimator,mQSB,newState.getSearchBarAlpha(),duration);
+    animateViewAlpha(mDropTargetBarAnimator,mDropTargetBar,newState.getDropTargetBarAlpha(),duration);
+  }
+}

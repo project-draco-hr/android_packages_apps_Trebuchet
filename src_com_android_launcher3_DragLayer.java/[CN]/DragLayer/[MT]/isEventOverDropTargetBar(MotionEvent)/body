@@ -1,5 +1,5 @@
 {
-  getDescendantRectRelativeToSelf(mLauncher.getSearchBar(),mHitRect);
+  getDescendantRectRelativeToSelf(mLauncher.getSearchDropTargetBar(),mHitRect);
   if (mHitRect.contains((int)ev.getX(),(int)ev.getY())) {
     return true;
   }

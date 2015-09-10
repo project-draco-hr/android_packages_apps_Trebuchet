@@ -8,6 +8,17 @@
   mDeleteDropTarget.setSearchDropTargetBar(this);
   mUninstallDropTarget.setSearchDropTargetBar(this);
   mDropTargetBar.setAlpha(0f);
-  mShowDropTargetBarAnim=LauncherAnimUtils.ofFloat(mDropTargetBar,"alpha",0f,1f);
-  setupAnimation(mShowDropTargetBarAnim,mDropTargetBar);
+  mDropTargetBarAnimator=new LauncherViewPropertyAnimator(mDropTargetBar);
+  mDropTargetBarAnimator.setInterpolator(sAccelerateInterpolator);
+  mDropTargetBarAnimator.addListener(new AnimatorListenerAdapter(){
+    @Override public void onAnimationStart(    Animator animation){
+      mDropTargetBar.setVisibility(View.VISIBLE);
+    }
+    @Override public void onAnimationEnd(    Animator animation){
+      if (mDropTargetBar != null) {
+        AlphaUpdateListener.updateVisibility(mDropTargetBar,mAccessibilityEnabled);
+      }
+    }
+  }
+);
 }

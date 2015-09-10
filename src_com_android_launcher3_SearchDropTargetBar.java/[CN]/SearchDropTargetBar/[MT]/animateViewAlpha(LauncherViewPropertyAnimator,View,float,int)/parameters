@@ -1,0 +1,4 @@
+LauncherViewPropertyAnimator animator
+View v
+float alpha
+int duration

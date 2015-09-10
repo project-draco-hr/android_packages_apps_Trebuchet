@@ -1,7 +1,7 @@
 {
   mManager=AppWidgetManagerCompat.getInstance(context);
   mPackageManager=context.getPackageManager();
-  mLabelCache=new HashMap<Object,String>();
+  mLabelCache=new HashMap<>();
   mCollator=Collator.getInstance();
   mMainHandle=UserHandleCompat.myUserHandle();
 }

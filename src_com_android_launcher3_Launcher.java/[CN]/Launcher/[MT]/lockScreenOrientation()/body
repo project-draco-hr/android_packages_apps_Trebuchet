@@ -1,10 +1,10 @@
 {
   if (mRotationEnabled) {
-    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR2) {
-      setRequestedOrientation(mapConfigurationOriActivityInfoOri(getResources().getConfiguration().orientation));
+    if (Utilities.ATLEAST_JB_MR2) {
+      setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
     }
  else {
-      setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
+      setRequestedOrientation(mapConfigurationOriActivityInfoOri(getResources().getConfiguration().orientation));
     }
   }
 }

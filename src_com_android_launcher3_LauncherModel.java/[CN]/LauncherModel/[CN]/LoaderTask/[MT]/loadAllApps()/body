@@ -23,9 +23,22 @@
     }
     final ManagedProfileHeuristic heuristic=ManagedProfileHeuristic.get(mContext,user);
     if (heuristic != null) {
-      runAfterBindCompletes(new Runnable(){
+      final Runnable r=new Runnable(){
         @Override public void run(){
           heuristic.processUserApps(apps);
+        }
+      }
+;
+      runOnMainThread(new Runnable(){
+        @Override public void run(){
+          if (mIsLoadingAndBindingWorkspace) {
+synchronized (mBindCompleteRunnables) {
+              mBindCompleteRunnables.add(r);
+            }
+          }
+ else {
+            runOnWorkerThread(r);
+          }
         }
       }
 );
@@ -50,7 +63,7 @@
   }
 );
   ManagedProfileHeuristic.processAllUsers(profiles,mContext);
-  loadAndBindWidgetsAndShortcuts(mApp.getContext(),tryGetCallbacks(oldCallbacks),true);
+  loadAndBindWidgetsAndShortcuts(tryGetCallbacks(oldCallbacks),true);
   if (DEBUG_LOADERS) {
     Log.d(TAG,"Icons processed in " + (SystemClock.uptimeMillis() - loadTime) + "ms");
   }

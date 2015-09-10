@@ -1,15 +1,10 @@
 {
-  if (DISABLE_CLINGS) {
-    return false;
-  }
   if (ActivityManager.isRunningInTestHarness())   return false;
   final AccessibilityManager a11yManager=(AccessibilityManager)mLauncher.getSystemService(Launcher.ACCESSIBILITY_SERVICE);
   if (a11yManager.isTouchExplorationEnabled()) {
     return false;
   }
-  boolean supportsLimitedUsers=android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN_MR2;
-  Account[] accounts=AccountManager.get(mLauncher).getAccounts();
-  if (supportsLimitedUsers && accounts.length == 0) {
+  if (Utilities.ATLEAST_JB_MR2) {
     UserManager um=(UserManager)mLauncher.getSystemService(Context.USER_SERVICE);
     Bundle restrictions=um.getUserRestrictions();
     if (restrictions.getBoolean(UserManager.DISALLOW_MODIFY_ACCOUNTS,false)) {

@@ -1,4 +1,4 @@
 {
-  if (LOGD)   Log.d(TAG,"Skipping invalid <favorite> with no component");
+  Log.w(TAG,"Skipping invalid <favorite> with no component");
   return -1;
 }
