@@ -1,0 +1,11 @@
+{
+  if (o instanceof LauncherAppWidgetProviderInfo) {
+    LauncherAppWidgetProviderInfo widgetInfo=(LauncherAppWidgetProviderInfo)o;
+    return new ComponentKey(widgetInfo.provider,mManager.getUser(widgetInfo));
+  }
+ else {
+    ResolveInfo shortcutInfo=(ResolveInfo)o;
+    ComponentName cn=new ComponentName(shortcutInfo.activityInfo.packageName,shortcutInfo.activityInfo.name);
+    return new ComponentKey(cn,UserHandleCompat.myUserHandle());
+  }
+}

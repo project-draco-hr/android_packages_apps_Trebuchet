@@ -1,3 +1,9 @@
 {
+synchronized (this) {
+    if (mUserToSerialMap != null) {
+      Long serial=mUserToSerialMap.get(user);
+      return serial == null ? 0 : serial;
+    }
+  }
   return mUserManager.getSerialNumberForUser(user.getUser());
 }

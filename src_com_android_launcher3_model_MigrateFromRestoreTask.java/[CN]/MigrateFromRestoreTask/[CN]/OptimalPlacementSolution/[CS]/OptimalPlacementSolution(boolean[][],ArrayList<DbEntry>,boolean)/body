@@ -1,0 +1,6 @@
+{
+  this.occupied=occupied;
+  this.itemsToPlace=itemsToPlace;
+  this.ignoreMove=ignoreMove;
+  Collections.sort(this.itemsToPlace);
+}

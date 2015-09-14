@@ -1,0 +1,7 @@
+{
+  mHand.setAlpha(alpha);
+  for (int i=0; i < mIcons.length; i++) {
+    mIcons[i].setAlpha(alpha);
+  }
+  invalidateSelf();
+}

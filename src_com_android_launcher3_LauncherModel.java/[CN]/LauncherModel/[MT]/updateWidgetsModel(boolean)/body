@@ -1,0 +1,8 @@
+{
+  PackageManager packageManager=mApp.getContext().getPackageManager();
+  final ArrayList<Object> widgetsAndShortcuts=new ArrayList<Object>();
+  widgetsAndShortcuts.addAll(getWidgetProviders(mApp.getContext(),refresh));
+  Intent shortcutsIntent=new Intent(Intent.ACTION_CREATE_SHORTCUT);
+  widgetsAndShortcuts.addAll(packageManager.queryIntentActivities(shortcutsIntent,0));
+  mBgWidgetsModel.setWidgetsAndShortcuts(widgetsAndShortcuts);
+}

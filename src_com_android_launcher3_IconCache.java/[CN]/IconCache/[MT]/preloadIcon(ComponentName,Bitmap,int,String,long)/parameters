@@ -1,5 +1,0 @@
-ComponentName componentName
-Bitmap icon
-int dpi
-String label
-long userSerial

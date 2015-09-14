@@ -1,4 +1,3 @@
 {
   mTarget=target;
-  mListeners=new ArrayList<Animator.AnimatorListener>();
 }

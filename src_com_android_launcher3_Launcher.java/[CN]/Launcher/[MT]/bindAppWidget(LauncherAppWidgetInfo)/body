@@ -14,7 +14,7 @@
   }
   final Workspace workspace=mWorkspace;
   LauncherAppWidgetProviderInfo appWidgetInfo=LauncherModel.getProviderInfo(this,item.providerName,item.user);
-  if (!mIsSafeModeEnabled && ((item.restoreStatus & LauncherAppWidgetInfo.FLAG_PROVIDER_NOT_READY) == 0) && ((item.restoreStatus & LauncherAppWidgetInfo.FLAG_ID_NOT_VALID) != 0)) {
+  if (!mIsSafeModeEnabled && ((item.restoreStatus & LauncherAppWidgetInfo.FLAG_PROVIDER_NOT_READY) == 0) && (item.restoreStatus != LauncherAppWidgetInfo.RESTORE_COMPLETED)) {
     if (appWidgetInfo == null) {
       if (DEBUG_WIDGETS) {
         Log.d(TAG,"Removing restored widget: id=" + item.appWidgetId + " belongs to component "+ item.providerName+ ", as the povider is null");
@@ -22,26 +22,32 @@
       LauncherModel.deleteItemFromDatabase(this,item);
       return;
     }
-    PendingAddWidgetInfo pendingInfo=new PendingAddWidgetInfo(this,appWidgetInfo,null);
-    pendingInfo.spanX=item.spanX;
-    pendingInfo.spanY=item.spanY;
-    pendingInfo.minSpanX=item.minSpanX;
-    pendingInfo.minSpanY=item.minSpanY;
-    Bundle options=null;
-    WidgetHostViewLoader.getDefaultOptionsForWidget(this,pendingInfo);
-    int newWidgetId=mAppWidgetHost.allocateAppWidgetId();
-    boolean success=mAppWidgetManager.bindAppWidgetIdIfAllowed(newWidgetId,appWidgetInfo,options);
-    if (!success) {
-      mAppWidgetHost.deleteAppWidgetId(newWidgetId);
-      if (DEBUG_WIDGETS) {
-        Log.d(TAG,"Removing restored widget: id=" + item.appWidgetId + " belongs to component "+ item.providerName+ ", as the launcher is unable to bing a new widget id");
+    if ((item.restoreStatus & LauncherAppWidgetInfo.FLAG_ID_NOT_VALID) != 0) {
+      PendingAddWidgetInfo pendingInfo=new PendingAddWidgetInfo(this,appWidgetInfo,null);
+      pendingInfo.spanX=item.spanX;
+      pendingInfo.spanY=item.spanY;
+      pendingInfo.minSpanX=item.minSpanX;
+      pendingInfo.minSpanY=item.minSpanY;
+      Bundle options=null;
+      WidgetHostViewLoader.getDefaultOptionsForWidget(this,pendingInfo);
+      int newWidgetId=mAppWidgetHost.allocateAppWidgetId();
+      boolean success=mAppWidgetManager.bindAppWidgetIdIfAllowed(newWidgetId,appWidgetInfo,options);
+      if (!success) {
+        mAppWidgetHost.deleteAppWidgetId(newWidgetId);
+        if (DEBUG_WIDGETS) {
+          Log.d(TAG,"Removing restored widget: id=" + item.appWidgetId + " belongs to component "+ item.providerName+ ", as the launcher is unable to bing a new widget id");
+        }
+        LauncherModel.deleteItemFromDatabase(this,item);
+        return;
       }
-      LauncherModel.deleteItemFromDatabase(this,item);
-      return;
+      item.appWidgetId=newWidgetId;
+      item.restoreStatus=(appWidgetInfo.configure == null) ? LauncherAppWidgetInfo.RESTORE_COMPLETED : LauncherAppWidgetInfo.FLAG_UI_NOT_READY;
+      LauncherModel.updateItemInDatabase(this,item);
     }
-    item.appWidgetId=newWidgetId;
-    item.restoreStatus=(appWidgetInfo.configure == null) ? LauncherAppWidgetInfo.RESTORE_COMPLETED : LauncherAppWidgetInfo.FLAG_UI_NOT_READY;
-    LauncherModel.updateItemInDatabase(this,item);
+ else     if (((item.restoreStatus & LauncherAppWidgetInfo.FLAG_UI_NOT_READY) != 0) && (appWidgetInfo.configure == null)) {
+      item.restoreStatus=LauncherAppWidgetInfo.RESTORE_COMPLETED;
+      LauncherModel.updateItemInDatabase(this,item);
+    }
   }
   if (!mIsSafeModeEnabled && item.restoreStatus == LauncherAppWidgetInfo.RESTORE_COMPLETED) {
     final int appWidgetId=item.appWidgetId;
@@ -49,6 +55,8 @@
       Log.d(TAG,"bindAppWidget: id=" + item.appWidgetId + " belongs to component "+ appWidgetInfo.provider);
     }
     item.hostView=mAppWidgetHost.createView(this,appWidgetId,appWidgetInfo);
+    item.minSpanX=appWidgetInfo.minSpanX;
+    item.minSpanY=appWidgetInfo.minSpanY;
   }
  else {
     appWidgetInfo=null;

@@ -10,7 +10,7 @@
   mWallpaperManager=WallpaperManager.getInstance(context);
   TypedArray a=context.obtainStyledAttributes(attrs,R.styleable.Workspace,defStyle,0);
   mSpringLoadedShrinkFactor=res.getInteger(R.integer.config_workspaceSpringLoadShrinkPercentage) / 100.0f;
-  mOverviewModeShrinkFactor=grid.getOverviewModeScale(mIsRtl);
+  mOverviewModeShrinkFactor=res.getInteger(R.integer.config_workspaceOverviewShrinkPercentage) / 100f;
   mOriginalDefaultPage=mDefaultPage=a.getInt(R.styleable.Workspace_defaultScreen,1);
   a.recycle();
   setOnHierarchyChangeListener(this);

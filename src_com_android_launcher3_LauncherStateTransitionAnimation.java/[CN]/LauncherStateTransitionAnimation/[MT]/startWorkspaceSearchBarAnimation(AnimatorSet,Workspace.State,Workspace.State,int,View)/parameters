@@ -1,0 +1,5 @@
+AnimatorSet animation
+Workspace.State fromWorkspaceState
+Workspace.State toWorkspaceState
+int duration
+View overlaySearchBar

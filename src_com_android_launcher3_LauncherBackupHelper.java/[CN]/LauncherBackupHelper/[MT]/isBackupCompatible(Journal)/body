@@ -4,12 +4,26 @@
   if (oldProfile == null || oldProfile.desktopCols == 0) {
     return true;
   }
-  boolean isHotsetCompatible=false;
+  boolean isHotseatCompatible=false;
   if (currentProfile.allappsRank >= oldProfile.hotseatCount) {
-    isHotsetCompatible=true;
+    isHotseatCompatible=true;
+    mHotseatShift=0;
   }
-  if ((currentProfile.hotseatCount >= oldProfile.hotseatCount) && (currentProfile.allappsRank == oldProfile.allappsRank)) {
-    isHotsetCompatible=true;
+  if ((currentProfile.allappsRank >= oldProfile.allappsRank) && ((currentProfile.hotseatCount - currentProfile.allappsRank) >= (oldProfile.hotseatCount - oldProfile.allappsRank))) {
+    isHotseatCompatible=true;
+    mHotseatShift=currentProfile.allappsRank - oldProfile.allappsRank;
   }
-  return isHotsetCompatible && (currentProfile.desktopCols >= oldProfile.desktopCols) && (currentProfile.desktopRows >= oldProfile.desktopRows);
+  if (!isHotseatCompatible) {
+    return false;
+  }
+  if ((currentProfile.desktopCols >= oldProfile.desktopCols) && (currentProfile.desktopRows >= oldProfile.desktopRows)) {
+    return true;
+  }
+  if (MigrateFromRestoreTask.ENABLED && (oldProfile.desktopCols - currentProfile.desktopCols <= 1) && (oldProfile.desktopRows - currentProfile.desktopRows <= 1)) {
+    migrationCompatibleProfileData=initDeviceProfileData(mIdp);
+    migrationCompatibleProfileData.desktopCols=oldProfile.desktopCols;
+    migrationCompatibleProfileData.desktopRows=oldProfile.desktopRows;
+    return true;
+  }
+  return false;
 }

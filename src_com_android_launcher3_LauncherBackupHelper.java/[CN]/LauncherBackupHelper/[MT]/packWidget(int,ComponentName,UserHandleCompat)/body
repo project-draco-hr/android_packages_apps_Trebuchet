@@ -11,8 +11,8 @@
     widget.icon.data=Utilities.flattenBitmap(icon);
     widget.icon.dpi=dpi;
   }
-  int[] minSpans=CellLayout.rectToCell(mIdp.portraitProfile,mContext,info.minResizeWidth,info.minResizeHeight,null);
-  widget.minSpanX=(info.resizeMode & LauncherAppWidgetProviderInfo.RESIZE_HORIZONTAL) != 0 ? minSpans[0] : -1;
-  widget.minSpanY=(info.resizeMode & LauncherAppWidgetProviderInfo.RESIZE_VERTICAL) != 0 ? minSpans[1] : -1;
+  Point spans=info.getMinSpans(mIdp,mContext);
+  widget.minSpanX=spans.x;
+  widget.minSpanY=spans.y;
   return widget;
 }

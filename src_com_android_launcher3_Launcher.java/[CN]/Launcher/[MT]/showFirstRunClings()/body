@@ -1,6 +1,7 @@
 {
   LauncherClings launcherClings=new LauncherClings(this);
   if (launcherClings.shouldShowFirstRunOrMigrationClings()) {
+    mClings=launcherClings;
     if (mModel.canMigrateFromOldLauncherDb(this)) {
       launcherClings.showMigrationCling();
     }

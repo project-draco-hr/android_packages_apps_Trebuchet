@@ -6,10 +6,10 @@
     return false;
   }
   if (toState == State.APPS) {
-    mStateTransitionAnimation.startAnimationToAllApps(animated,focusSearchBar);
+    mStateTransitionAnimation.startAnimationToAllApps(mWorkspace.getState(),animated,focusSearchBar);
   }
  else {
-    mStateTransitionAnimation.startAnimationToWidgets(animated);
+    mStateTransitionAnimation.startAnimationToWidgets(mWorkspace.getState(),animated);
   }
   mState=toState;
   mUserPresent=false;

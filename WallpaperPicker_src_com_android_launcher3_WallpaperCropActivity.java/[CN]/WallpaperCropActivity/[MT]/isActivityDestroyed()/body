@@ -1,3 +1,3 @@
 {
-  return (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) && isDestroyed();
+  return Utilities.ATLEAST_JB_MR1 && isDestroyed();
 }

@@ -1,9 +1,13 @@
 {
   DeviceProfile grid=mLauncher.getDeviceProfile();
-  Rect overviewBar=grid.getOverviewModeButtonBarRect();
-  int availableHeight=getViewportHeight();
+  Rect workspacePadding=grid.getWorkspacePadding(Utilities.isRtl(getResources()));
+  int overviewButtonBarHeight=grid.getOverviewModeButtonBarHeight();
   int scaledHeight=(int)(mOverviewModeShrinkFactor * getNormalChildHeight());
-  int offsetFromTopEdge=(availableHeight - scaledHeight) / 2;
-  int offsetToCenterInOverview=(availableHeight - mInsets.top - overviewBar.height()- scaledHeight) / 2;
-  return -offsetFromTopEdge + mInsets.top + offsetToCenterInOverview;
+  int workspaceTop=mInsets.top + workspacePadding.top;
+  int workspaceBottom=getViewportHeight() - mInsets.bottom - workspacePadding.bottom;
+  int overviewTop=mInsets.top;
+  int overviewBottom=getViewportHeight() - mInsets.bottom - overviewButtonBarHeight;
+  int workspaceOffsetTopEdge=workspaceTop + ((workspaceBottom - workspaceTop) - scaledHeight) / 2;
+  int overviewOffsetTopEdge=overviewTop + (overviewBottom - overviewTop - scaledHeight) / 2;
+  return -workspaceOffsetTopEdge + overviewOffsetTopEdge;
 }

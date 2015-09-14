@@ -1,0 +1,5 @@
+{
+  int c=canvas.save(Canvas.MATRIX_SAVE_FLAG);
+  mImage.draw(canvas);
+  canvas.restoreToCount(c);
+}

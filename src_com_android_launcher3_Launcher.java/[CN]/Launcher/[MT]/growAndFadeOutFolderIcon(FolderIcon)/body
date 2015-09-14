@@ -12,7 +12,7 @@
   copyFolderIconToImage(fi);
   fi.setVisibility(View.INVISIBLE);
   ObjectAnimator oa=LauncherAnimUtils.ofPropertyValuesHolder(mFolderIconImageView,alpha,scaleX,scaleY);
-  if (Utilities.isLmpOrAbove()) {
+  if (Utilities.ATLEAST_LOLLIPOP) {
     oa.setInterpolator(new LogDecelerateInterpolator(100,0));
   }
   oa.setDuration(getResources().getInteger(R.integer.config_folderExpandDuration));

@@ -1,9 +1,0 @@
-Workspace.State toWorkspaceState
-View buttonView
-View toView
-View contentView
-View revealView
-View overlaySearchBarView
-boolean animated
-boolean hideSearchBar
-PrivateTransitionCallbacks pCb

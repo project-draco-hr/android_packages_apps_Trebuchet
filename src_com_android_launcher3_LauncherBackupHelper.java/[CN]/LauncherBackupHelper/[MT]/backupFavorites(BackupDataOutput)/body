@@ -9,7 +9,7 @@
       Key key=getKey(Key.FAVORITE,id);
       mKeys.add(key);
       final String backupKey=keyToBackupKey(key);
-      if (!mExistingKeys.contains(backupKey) || updateTime >= mLastBackupRestoreTime) {
+      if (!mExistingKeys.contains(backupKey) || updateTime >= mLastBackupRestoreTime || restoredBackupVersion < 4) {
         writeRowToBackup(key,packFavorite(cursor),data);
       }
  else {

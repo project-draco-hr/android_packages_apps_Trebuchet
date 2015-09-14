@@ -1,0 +1,3 @@
+boolean[][] occupied
+DbEntry item
+boolean val

@@ -1,0 +1,17 @@
+{
+  mContext=context;
+  SharedPreferences prefs=prefs(context);
+  Point sourceSize=parsePoint(prefs.getString(KEY_MIGRATION_SOURCE_SIZE,""));
+  mSrcX=sourceSize.x;
+  mSrcY=sourceSize.y;
+  mWidgetMinSize=new HashMap<String,Point>();
+  for (  String s : prefs.getStringSet(KEY_MIGRATION_WIDGET_MINSIZE,Collections.<String>emptySet())) {
+    String[] parts=s.split("#");
+    mWidgetMinSize.put(parts[0],parsePoint(parts[1]));
+  }
+  mIdp=LauncherAppState.getInstance().getInvariantDeviceProfile();
+  mTrgX=mIdp.numColumns;
+  mTrgY=mIdp.numRows;
+  mShouldRemoveX=mTrgX < mSrcX;
+  mShouldRemoveY=mTrgY < mSrcY;
+}

@@ -4,7 +4,7 @@
   if (entry == null || (entry.isLowResIcon && !useLowResIcon)) {
     entry=new CacheEntry();
     mCache.put(cacheKey,entry);
-    if (!getEntryFromDB(componentName,user,entry,useLowResIcon)) {
+    if (!getEntryFromDB(cacheKey,entry,useLowResIcon)) {
       if (info != null) {
         entry.icon=Utilities.createIconBitmap(info.getBadgedIcon(mIconDpi),mContext);
       }

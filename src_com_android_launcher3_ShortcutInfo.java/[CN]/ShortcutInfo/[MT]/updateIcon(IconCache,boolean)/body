@@ -1,0 +1,5 @@
+{
+  if (itemType == Favorites.ITEM_TYPE_APPLICATION) {
+    iconCache.getTitleAndIcon(this,promisedIntent != null ? promisedIntent : intent,user,useLowRes);
+  }
+}

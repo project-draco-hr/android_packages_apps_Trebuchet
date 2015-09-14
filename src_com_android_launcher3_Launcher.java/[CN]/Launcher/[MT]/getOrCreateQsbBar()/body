@@ -27,6 +27,7 @@
     mAppWidgetHost.setQsbWidgetId(widgetId);
     if (widgetId != -1) {
       mQsb=mAppWidgetHost.createView(this,widgetId,searchProvider);
+      mQsb.setId(R.id.qsb_widget);
       mQsb.updateAppWidgetOptions(opts);
       mQsb.setPadding(0,0,0,0);
       mSearchDropTargetBar.addView(mQsb);

@@ -1,0 +1,30 @@
+{
+  Resources res=launcher.getResources();
+  mLauncher=launcher;
+  mApps=apps;
+  mEmptySearchMessage=res.getString(R.string.all_apps_loading_message);
+  mGridSizer=new GridSpanSizer();
+  mGridLayoutMgr=new AppsGridLayoutManager(launcher);
+  mGridLayoutMgr.setSpanSizeLookup(mGridSizer);
+  mItemDecoration=new GridItemDecoration();
+  mLayoutInflater=LayoutInflater.from(launcher);
+  mTouchListener=touchListener;
+  mIconClickListener=iconClickListener;
+  mIconLongClickListener=iconLongClickListener;
+  mSectionNamesMargin=res.getDimensionPixelSize(R.dimen.all_apps_grid_view_start_margin);
+  mSectionHeaderOffset=res.getDimensionPixelSize(R.dimen.all_apps_grid_section_y_offset);
+  mSectionTextPaint=new Paint();
+  mSectionTextPaint.setTextSize(res.getDimensionPixelSize(R.dimen.all_apps_grid_section_text_size));
+  mSectionTextPaint.setColor(res.getColor(R.color.all_apps_grid_section_text_color));
+  mSectionTextPaint.setAntiAlias(true);
+  mPredictedAppsDividerPaint=new Paint();
+  mPredictedAppsDividerPaint.setStrokeWidth(Utilities.pxFromDp(1f,res.getDisplayMetrics()));
+  mPredictedAppsDividerPaint.setColor(0x1E000000);
+  mPredictedAppsDividerPaint.setAntiAlias(true);
+  mPredictionBarDividerOffset=(-res.getDimensionPixelSize(R.dimen.all_apps_prediction_icon_bottom_padding) + res.getDimensionPixelSize(R.dimen.all_apps_icon_top_bottom_padding)) / 2;
+  PackageManager pm=launcher.getPackageManager();
+  ResolveInfo marketInfo=pm.resolveActivity(createMarketSearchIntent(""),PackageManager.MATCH_DEFAULT_ONLY);
+  if (marketInfo != null) {
+    mMarketAppName=marketInfo.loadLabel(pm).toString();
+  }
+}

@@ -1,0 +1,3 @@
+{
+  return context.getSharedPreferences(LauncherAppState.getSharedPreferencesKey(),Context.MODE_PRIVATE);
+}

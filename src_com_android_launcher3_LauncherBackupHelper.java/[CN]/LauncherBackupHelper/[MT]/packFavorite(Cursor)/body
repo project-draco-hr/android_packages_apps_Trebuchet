@@ -8,6 +8,7 @@
   favorite.spanX=c.getInt(SPANX_INDEX);
   favorite.spanY=c.getInt(SPANY_INDEX);
   favorite.iconType=c.getInt(ICON_TYPE_INDEX);
+  favorite.rank=c.getInt(RANK_INDEX);
   String title=c.getString(TITLE_INDEX);
   if (!TextUtils.isEmpty(title)) {
     favorite.title=title;
