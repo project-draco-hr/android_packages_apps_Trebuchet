@@ -1,4 +1,11 @@
 {
+synchronized (this) {
+    if (mUsers != null) {
+      List<UserHandleCompat> users=new ArrayList<>();
+      users.addAll(mUserToSerialMap.keySet());
+      return users;
+    }
+  }
   List<UserHandle> users=mUserManager.getUserProfiles();
   if (users == null) {
     return Collections.emptyList();

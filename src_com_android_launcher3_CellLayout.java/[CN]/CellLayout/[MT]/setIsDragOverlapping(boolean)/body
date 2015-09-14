@@ -5,7 +5,12 @@
       mBackground.startTransition(BACKGROUND_ACTIVATE_DURATION);
     }
  else {
-      mBackground.reverseTransition(BACKGROUND_ACTIVATE_DURATION);
+      if (mBackgroundAlpha > 0f) {
+        mBackground.reverseTransition(BACKGROUND_ACTIVATE_DURATION);
+      }
+ else {
+        mBackground.resetTransition();
+      }
     }
     invalidate();
   }

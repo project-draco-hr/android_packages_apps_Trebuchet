@@ -1,0 +1,4 @@
+State toState
+int toPage
+boolean animated
+HashMap<View,Integer> layerViews

@@ -1,0 +1,9 @@
+{
+  mThumbCurvature=mThumbMaxWidth - mThumbWidth;
+  mThumbPath.reset();
+  mThumbPath.moveTo(mThumbOffset.x + mThumbWidth,mThumbOffset.y);
+  mThumbPath.lineTo(mThumbOffset.x + mThumbWidth,mThumbOffset.y + mThumbHeight);
+  mThumbPath.lineTo(mThumbOffset.x,mThumbOffset.y + mThumbHeight);
+  mThumbPath.cubicTo(mThumbOffset.x,mThumbOffset.y + mThumbHeight,mThumbOffset.x - mThumbCurvature,mThumbOffset.y + mThumbHeight / 2,mThumbOffset.x,mThumbOffset.y);
+  mThumbPath.close();
+}

@@ -1,0 +1,7 @@
+{
+  for (int i=item.cellX; i < (item.cellX + item.spanX); i++) {
+    for (int j=item.cellY; j < (item.cellY + item.spanY); j++) {
+      occupied[i][j]=val;
+    }
+  }
+}

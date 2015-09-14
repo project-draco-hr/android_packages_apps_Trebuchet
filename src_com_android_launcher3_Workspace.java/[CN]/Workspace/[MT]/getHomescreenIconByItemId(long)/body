@@ -1,0 +1,8 @@
+{
+  return getFirstMatch(new ItemOperator(){
+    @Override public boolean evaluate(    ItemInfo info,    View v,    View parent){
+      return info != null && info.id == id;
+    }
+  }
+);
+}

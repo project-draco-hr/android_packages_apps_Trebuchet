@@ -1,0 +1,59 @@
+{
+  mEntryToRemove=new ArrayList<>();
+  mCarryOver=new ArrayList<>();
+  mUpdateOperations=new ArrayList<>();
+  mValidPackages=new HashSet<>();
+  for (  PackageInfo info : mContext.getPackageManager().getInstalledPackages(0)) {
+    mValidPackages.add(info.packageName);
+  }
+  mValidPackages.addAll(PackageInstallerCompat.getInstance(mContext).updateAndGetActiveSessionCache().keySet());
+  ArrayList<Long> allScreens=LauncherModel.loadWorkspaceScreensDb(mContext);
+  if (allScreens.isEmpty()) {
+    throw new Exception("Unable to get workspace screens");
+  }
+  for (  long screenId : allScreens) {
+    if (DEBUG) {
+      Log.d(TAG,"Migrating " + screenId);
+    }
+    migrateScreen(screenId);
+  }
+  if (!mCarryOver.isEmpty()) {
+    LongArrayMap<DbEntry> itemMap=new LongArrayMap<>();
+    for (    DbEntry e : mCarryOver) {
+      itemMap.put(e.id,e);
+    }
+    do {
+      OptimalPlacementSolution placement=new OptimalPlacementSolution(new boolean[mTrgX][mTrgY],deepCopy(mCarryOver),true);
+      placement.find();
+      if (placement.finalPlacedItems.size() > 0) {
+        long newScreenId=LauncherAppState.getLauncherProvider().generateNewScreenId();
+        allScreens.add(newScreenId);
+        for (        DbEntry item : placement.finalPlacedItems) {
+          if (!mCarryOver.remove(itemMap.get(item.id))) {
+            throw new Exception("Unable to find matching items");
+          }
+          item.screenId=newScreenId;
+          update(item);
+        }
+      }
+ else {
+        throw new Exception("None of the items can be placed on an empty screen");
+      }
+    }
+ while (!mCarryOver.isEmpty());
+    LauncherAppState.getInstance().getModel().updateWorkspaceScreenOrder(mContext,allScreens);
+  }
+  mContext.getContentResolver().applyBatch(LauncherProvider.AUTHORITY,mUpdateOperations);
+  if (!mEntryToRemove.isEmpty()) {
+    if (DEBUG) {
+      Log.d(TAG,"Removing items: " + TextUtils.join(", ",mEntryToRemove));
+    }
+    mContext.getContentResolver().delete(LauncherSettings.Favorites.CONTENT_URI,Utilities.createDbSelectionQuery(LauncherSettings.Favorites._ID,mEntryToRemove),null);
+  }
+  final Cursor c=mContext.getContentResolver().query(LauncherSettings.Favorites.CONTENT_URI,null,null,null,null);
+  boolean hasData=c.moveToNext();
+  c.close();
+  if (!hasData) {
+    throw new Exception("Removed every thing during grid resize");
+  }
+}

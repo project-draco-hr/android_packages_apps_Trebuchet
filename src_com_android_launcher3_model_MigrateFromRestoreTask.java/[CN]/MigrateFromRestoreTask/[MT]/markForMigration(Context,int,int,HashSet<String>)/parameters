@@ -1,0 +1,4 @@
+Context context
+int srcX
+int srcY
+HashSet<String> widgets

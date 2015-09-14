@@ -1,0 +1,10 @@
+{
+  if (mThumbOffset.x == x && mThumbOffset.y == y) {
+    return;
+  }
+  mInvalidateRect.set(mThumbOffset.x - mThumbCurvature,mThumbOffset.y,mThumbOffset.x + mThumbWidth,mThumbOffset.y + mThumbHeight);
+  mThumbOffset.set(x,y);
+  updateThumbPath();
+  mInvalidateRect.union(mThumbOffset.x - mThumbCurvature,mThumbOffset.y,mThumbOffset.x + mThumbWidth,mThumbOffset.y + mThumbHeight);
+  mRv.invalidate(mInvalidateRect);
+}

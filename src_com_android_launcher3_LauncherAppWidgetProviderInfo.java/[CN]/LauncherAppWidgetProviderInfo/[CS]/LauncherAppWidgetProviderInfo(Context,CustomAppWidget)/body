@@ -6,4 +6,5 @@
   previewImage=widget.getPreviewImage();
   initialLayout=widget.getWidgetLayout();
   resizeMode=widget.getResizeMode();
+  initSpans();
 }

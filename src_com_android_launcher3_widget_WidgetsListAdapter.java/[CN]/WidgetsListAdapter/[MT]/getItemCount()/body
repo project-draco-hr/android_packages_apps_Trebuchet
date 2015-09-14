@@ -1,3 +1,6 @@
 {
+  if (mWidgetsModel == null) {
+    return 0;
+  }
   return mWidgetsModel.getPackageSize();
 }

@@ -1,0 +1,11 @@
+{
+  if (toWorkspaceState != Workspace.State.NORMAL && toWorkspaceState != Workspace.State.SPRING_LOADED && toWorkspaceState != Workspace.State.OVERVIEW) {
+    Log.e(TAG,"Unexpected call to startAnimationToWorkspace");
+  }
+  if (fromState == Launcher.State.APPS || fromState == Launcher.State.APPS_SPRING_LOADED) {
+    startAnimationToWorkspaceFromAllApps(fromWorkspaceState,toWorkspaceState,toWorkspacePage,animated,onCompleteRunnable);
+  }
+ else {
+    startAnimationToWorkspaceFromWidgets(fromWorkspaceState,toWorkspaceState,toWorkspacePage,animated,onCompleteRunnable);
+  }
+}

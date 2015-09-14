@@ -1,0 +1,4 @@
+int index
+float weightLoss
+float moveCost
+ArrayList<DbEntry> itemsPlaced

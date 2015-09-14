@@ -1,4 +1,5 @@
 {
+  mIsVisible=true;
   ViewGroup root=(ViewGroup)mLauncher.findViewById(R.id.launcher);
   View cling=mInflater.inflate(R.layout.longpress_cling,root,false);
   cling.setOnLongClickListener(new OnLongClickListener(){

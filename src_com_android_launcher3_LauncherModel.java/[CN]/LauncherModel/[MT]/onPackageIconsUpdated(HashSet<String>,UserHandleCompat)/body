@@ -38,5 +38,5 @@ synchronized (sBgLock) {
     }
 );
   }
-  loadAndBindWidgetsAndShortcuts(mApp.getContext(),callbacks,false);
+  loadAndBindWidgetsAndShortcuts(callbacks,false);
 }

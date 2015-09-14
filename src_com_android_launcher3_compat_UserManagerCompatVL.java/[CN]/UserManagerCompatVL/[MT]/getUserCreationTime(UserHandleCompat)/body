@@ -1,4 +1,7 @@
 {
+  if (Utilities.ATLEAST_MARSHMALLOW) {
+    return mUserManager.getUserCreationTime(user.getUser());
+  }
   SharedPreferences prefs=mContext.getSharedPreferences(LauncherAppState.getSharedPreferencesKey(),Context.MODE_PRIVATE);
   String key=USER_CREATION_TIME_KEY + getSerialNumberForUser(user);
   if (!prefs.contains(key)) {

@@ -1,0 +1,12 @@
+{
+  if (x + w > mTrgX)   return false;
+  if (y + h > mTrgY)   return false;
+  for (int i=0; i < w; i++) {
+    for (int j=0; j < h; j++) {
+      if (occupied[i + x][j + y]) {
+        return false;
+      }
+    }
+  }
+  return true;
+}

@@ -9,7 +9,7 @@
   }
   info.setClassName(getClass().getName());
   info.setLongClickable(false);
-  if (Utilities.isLmpOrAbove()) {
+  if (Utilities.ATLEAST_LOLLIPOP) {
     info.removeAction(AccessibilityNodeInfo.AccessibilityAction.ACTION_LONG_CLICK);
   }
 }

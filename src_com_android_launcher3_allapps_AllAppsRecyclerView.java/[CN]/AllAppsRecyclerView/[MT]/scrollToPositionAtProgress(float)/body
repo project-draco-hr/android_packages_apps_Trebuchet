@@ -21,8 +21,8 @@
  else {
     throw new RuntimeException("Unexpected scroll bar mode");
   }
-  getCurScrollState(mScrollPosState,mApps.getAdapterItems());
-  int availableScrollHeight=getAvailableScrollHeight(rowCount,mScrollPosState.rowHeight,0);
+  getCurScrollState(mScrollPosState);
+  int availableScrollHeight=getAvailableScrollHeight(rowCount,mScrollPosState.rowHeight);
   LinearLayoutManager layoutManager=(LinearLayoutManager)getLayoutManager();
   if (mFastScrollMode == FAST_SCROLL_MODE_FREE_SCROLL) {
     layoutManager.scrollToPositionWithOffset(0,(int)-(availableScrollHeight * touchFraction));

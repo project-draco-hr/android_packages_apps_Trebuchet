@@ -1,6 +1,0 @@
-TransitionStates states
-boolean animated
-int duration
-boolean hasOverlaySearchBar
-HashMap<View,Integer> layerViews
-boolean accessibilityEnabled

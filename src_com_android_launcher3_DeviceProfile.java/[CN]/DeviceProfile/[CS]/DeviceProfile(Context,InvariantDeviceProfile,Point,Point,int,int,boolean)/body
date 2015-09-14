@@ -18,7 +18,6 @@
   overviewModeBarItemWidthPx=res.getDimensionPixelSize(R.dimen.dynamic_grid_overview_bar_item_width);
   overviewModeBarSpacerWidthPx=res.getDimensionPixelSize(R.dimen.dynamic_grid_overview_bar_spacer_width);
   overviewModeIconZoneRatio=res.getInteger(R.integer.config_dynamic_grid_overview_icon_zone_percentage) / 100f;
-  overviewModeScaleFactor=res.getInteger(R.integer.config_dynamic_grid_overview_scale_percentage) / 100f;
   iconDrawablePaddingOriginalPx=res.getDimensionPixelSize(R.dimen.dynamic_grid_icon_drawable_padding);
   allAppsIconTextSizePx=Utilities.pxFromDp(inv.iconTextSize,dm);
   allAppsIconSizePx=Utilities.pxFromDp(inv.iconSize,dm);

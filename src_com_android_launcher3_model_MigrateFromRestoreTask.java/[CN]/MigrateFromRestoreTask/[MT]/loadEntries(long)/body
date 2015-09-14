@@ -1,0 +1,73 @@
+{
+  Cursor c=mContext.getContentResolver().query(LauncherSettings.Favorites.CONTENT_URI,new String[]{Favorites._ID,Favorites.ITEM_TYPE,Favorites.CELLX,Favorites.CELLY,Favorites.SPANX,Favorites.SPANY,Favorites.INTENT,Favorites.APPWIDGET_PROVIDER},Favorites.CONTAINER + " = " + Favorites.CONTAINER_DESKTOP+ " AND "+ Favorites.SCREEN+ " = "+ screen,null,null,null);
+  final int indexId=c.getColumnIndexOrThrow(Favorites._ID);
+  final int indexItemType=c.getColumnIndexOrThrow(Favorites.ITEM_TYPE);
+  final int indexCellX=c.getColumnIndexOrThrow(Favorites.CELLX);
+  final int indexCellY=c.getColumnIndexOrThrow(Favorites.CELLY);
+  final int indexSpanX=c.getColumnIndexOrThrow(Favorites.SPANX);
+  final int indexSpanY=c.getColumnIndexOrThrow(Favorites.SPANY);
+  final int indexIntent=c.getColumnIndexOrThrow(Favorites.INTENT);
+  final int indexAppWidgetProvider=c.getColumnIndexOrThrow(Favorites.APPWIDGET_PROVIDER);
+  ArrayList<DbEntry> entries=new ArrayList<>();
+  while (c.moveToNext()) {
+    DbEntry entry=new DbEntry();
+    entry.id=c.getLong(indexId);
+    entry.itemType=c.getInt(indexItemType);
+    entry.cellX=c.getInt(indexCellX);
+    entry.cellY=c.getInt(indexCellY);
+    entry.spanX=c.getInt(indexSpanX);
+    entry.spanY=c.getInt(indexSpanY);
+    entry.screenId=screen;
+    try {
+switch (entry.itemType) {
+case Favorites.ITEM_TYPE_SHORTCUT:
+case Favorites.ITEM_TYPE_APPLICATION:
+{
+          verifyIntent(c.getString(indexIntent));
+          entry.weight=entry.itemType == Favorites.ITEM_TYPE_SHORTCUT ? WT_SHORTCUT : WT_APPLICATION;
+          break;
+        }
+case Favorites.ITEM_TYPE_APPWIDGET:
+{
+        String provider=c.getString(indexAppWidgetProvider);
+        ComponentName cn=ComponentName.unflattenFromString(provider);
+        verifyPackage(cn.getPackageName());
+        entry.weight=Math.max(WT_WIDGET_MIN,WT_WIDGET_FACTOR * entry.spanX * entry.spanY);
+        LauncherAppWidgetProviderInfo pInfo=LauncherModel.getProviderInfo(mContext,cn,UserHandleCompat.myUserHandle());
+        Point spans=pInfo == null ? mWidgetMinSize.get(provider) : pInfo.getMinSpans(mIdp,mContext);
+        if (spans != null) {
+          entry.minSpanX=spans.x > 0 ? spans.x : entry.spanX;
+          entry.minSpanY=spans.y > 0 ? spans.y : entry.spanY;
+        }
+ else {
+          entry.minSpanX=entry.minSpanY=2;
+        }
+        if (entry.minSpanX > mTrgX || entry.minSpanY > mTrgY) {
+          throw new Exception("Widget can't be resized down to fit the grid");
+        }
+        break;
+      }
+case Favorites.ITEM_TYPE_FOLDER:
+{
+      int total=getFolderItemsCount(entry.id);
+      if (total == 0) {
+        throw new Exception("Folder is empty");
+      }
+      entry.weight=WT_FOLDER_FACTOR * total;
+      break;
+    }
+default :
+  throw new Exception("Invalid item type");
+}
+}
+ catch (Exception e) {
+if (DEBUG) {
+Log.d(TAG,"Removing item " + entry.id,e);
+}
+mEntryToRemove.add(entry.id);
+continue;
+}
+entries.add(entry);
+}
+return entries;
+}

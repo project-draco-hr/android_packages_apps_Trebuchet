@@ -1,0 +1,6 @@
+{
+  AdapterItem item=new AdapterItem();
+  item.viewType=AllAppsGridAdapter.EMPTY_SEARCH_VIEW_TYPE;
+  item.position=pos;
+  return item;
+}

@@ -1,6 +1,0 @@
-{
-  int visibleHeight=getHeight() - mBackgroundPadding.top - mBackgroundPadding.bottom;
-  int scrollHeight=getPaddingTop() + yOffset + rowCount * rowHeight + getPaddingBottom();
-  int availableScrollHeight=scrollHeight - visibleHeight;
-  return availableScrollHeight;
-}

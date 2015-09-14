@@ -3,13 +3,16 @@
   mPopup=new BaseRecyclerViewFastScrollPopup(rv,res);
   mTrackPaint=new Paint();
   mTrackPaint.setColor(rv.getFastScrollerTrackColor(Color.BLACK));
-  mTrackPaint.setAlpha(0);
+  mTrackPaint.setAlpha(MAX_TRACK_ALPHA);
   mThumbInactiveColor=rv.getFastScrollerThumbInactiveColor(res.getColor(R.color.container_fastscroll_thumb_inactive_color));
   mThumbActiveColor=res.getColor(R.color.container_fastscroll_thumb_active_color);
   mThumbPaint=new Paint();
+  mThumbPaint.setAntiAlias(true);
   mThumbPaint.setColor(mThumbInactiveColor);
+  mThumbPaint.setStyle(Paint.Style.FILL);
   mThumbWidth=mThumbMinWidth=res.getDimensionPixelSize(R.dimen.container_fastscroll_thumb_min_width);
   mThumbMaxWidth=res.getDimensionPixelSize(R.dimen.container_fastscroll_thumb_max_width);
   mThumbHeight=res.getDimensionPixelSize(R.dimen.container_fastscroll_thumb_height);
+  mThumbCurvature=mThumbMaxWidth - mThumbMinWidth;
   mTouchInset=res.getDimensionPixelSize(R.dimen.container_fastscroll_thumb_touch_inset);
 }

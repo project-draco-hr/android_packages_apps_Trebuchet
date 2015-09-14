@@ -2,18 +2,21 @@
   if (mScrollbarAnimator != null) {
     mScrollbarAnimator.cancel();
   }
-  ObjectAnimator trackAlphaAnim=ObjectAnimator.ofInt(this,"trackAlpha",isScrolling ? MAX_TRACK_ALPHA : 0);
-  ObjectAnimator thumbWidthAnim=ObjectAnimator.ofInt(this,"width",isScrolling ? mThumbMaxWidth : mThumbMinWidth);
-  ValueAnimator colorAnimation=ValueAnimator.ofObject(new ArgbEvaluator(),mThumbPaint.getColor(),isScrolling ? mThumbActiveColor : mThumbInactiveColor);
-  colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener(){
-    @Override public void onAnimationUpdate(    ValueAnimator animator){
-      mThumbPaint.setColor((Integer)animator.getAnimatedValue());
-      mRv.invalidate(mThumbOffset.x,mThumbOffset.y,mThumbOffset.x + mThumbWidth,mThumbOffset.y + mThumbHeight);
-    }
-  }
-);
   mScrollbarAnimator=new AnimatorSet();
-  mScrollbarAnimator.playTogether(trackAlphaAnim,thumbWidthAnim,colorAnimation);
+  ObjectAnimator trackWidthAnim=ObjectAnimator.ofInt(this,"trackWidth",isScrolling ? mThumbMaxWidth : mThumbMinWidth);
+  ObjectAnimator thumbWidthAnim=ObjectAnimator.ofInt(this,"thumbWidth",isScrolling ? mThumbMaxWidth : mThumbMinWidth);
+  mScrollbarAnimator.playTogether(trackWidthAnim,thumbWidthAnim);
+  if (mThumbActiveColor != mThumbInactiveColor) {
+    ValueAnimator colorAnimation=ValueAnimator.ofObject(new ArgbEvaluator(),mThumbPaint.getColor(),isScrolling ? mThumbActiveColor : mThumbInactiveColor);
+    colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener(){
+      @Override public void onAnimationUpdate(      ValueAnimator animator){
+        mThumbPaint.setColor((Integer)animator.getAnimatedValue());
+        mRv.invalidate(mThumbOffset.x,mThumbOffset.y,mThumbOffset.x + mThumbWidth,mThumbOffset.y + mThumbHeight);
+      }
+    }
+);
+    mScrollbarAnimator.play(colorAnimation);
+  }
   mScrollbarAnimator.setDuration(SCROLL_BAR_VIS_DURATION);
   mScrollbarAnimator.start();
 }
