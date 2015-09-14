@@ -1,4 +1,5 @@
 {
+  mIsVisible=true;
   mLauncher.hideWorkspaceSearchAndHotseat();
   ViewGroup root=(ViewGroup)mLauncher.findViewById(R.id.launcher);
   View inflated=mInflater.inflate(R.layout.migration_cling,root);

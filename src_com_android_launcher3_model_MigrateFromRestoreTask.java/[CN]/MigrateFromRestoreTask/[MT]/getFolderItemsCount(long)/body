@@ -1,0 +1,14 @@
+{
+  Cursor c=mContext.getContentResolver().query(LauncherSettings.Favorites.CONTENT_URI,new String[]{Favorites._ID,Favorites.INTENT},Favorites.CONTAINER + " = " + folderId,null,null,null);
+  int total=0;
+  while (c.moveToNext()) {
+    try {
+      verifyIntent(c.getString(1));
+      total++;
+    }
+ catch (    Exception e) {
+      mEntryToRemove.add(c.getLong(0));
+    }
+  }
+  return total;
+}

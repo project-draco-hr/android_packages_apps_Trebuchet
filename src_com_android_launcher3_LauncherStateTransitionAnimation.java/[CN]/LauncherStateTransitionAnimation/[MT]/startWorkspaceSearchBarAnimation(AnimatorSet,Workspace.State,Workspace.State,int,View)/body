@@ -1,0 +1,22 @@
+{
+  final SearchDropTargetBar.State toSearchBarState=toWorkspaceState.getSearchDropTargetBarState();
+  if (overlaySearchBar != null) {
+    if ((toWorkspaceState == Workspace.State.NORMAL) && (fromWorkspaceState == Workspace.State.NORMAL_HIDDEN)) {
+      mLauncher.getSearchDropTargetBar().animateToState(toSearchBarState,0);
+    }
+ else     if (fromWorkspaceState == Workspace.State.NORMAL) {
+      animation.addListener(new AnimatorListenerAdapter(){
+        @Override public void onAnimationEnd(        Animator animation){
+          mLauncher.getSearchDropTargetBar().animateToState(toSearchBarState,0);
+        }
+      }
+);
+    }
+ else {
+      mLauncher.getSearchDropTargetBar().animateToState(toSearchBarState,duration);
+    }
+  }
+ else {
+    mLauncher.getSearchDropTargetBar().animateToState(toSearchBarState,duration);
+  }
+}

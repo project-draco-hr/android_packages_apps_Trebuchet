@@ -18,7 +18,7 @@
       return addShortcut(info.loadLabel(mPackageManager).toString(),intent,Favorites.ITEM_TYPE_APPLICATION);
     }
  catch (    PackageManager.NameNotFoundException e) {
-      if (LOGD)       Log.w(TAG,"Unable to add favorite: " + packageName + "/"+ className,e);
+      Log.e(TAG,"Unable to add favorite: " + packageName + "/"+ className,e);
     }
     return -1;
   }

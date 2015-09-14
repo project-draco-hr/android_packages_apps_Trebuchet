@@ -1,0 +1,5 @@
+{
+  super.onInitializeAccessibilityEvent(event);
+  final AccessibilityRecordCompat record=AccessibilityEventCompat.asRecord(event);
+  record.setItemCount(mApps.getNumFilteredApps());
+}

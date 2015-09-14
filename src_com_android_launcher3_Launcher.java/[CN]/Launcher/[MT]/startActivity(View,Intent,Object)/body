@@ -12,7 +12,7 @@
     Bundle optsBundle=null;
     if (useLaunchAnimation) {
       ActivityOptions opts=null;
-      if (sClipRevealMethod != null) {
+      if (Utilities.ATLEAST_MARSHMALLOW) {
         int left=0, top=0;
         int width=v.getMeasuredWidth(), height=v.getMeasuredHeight();
         if (v instanceof TextView) {
@@ -25,22 +25,12 @@
             height=bounds.height();
           }
         }
-        try {
-          opts=(ActivityOptions)sClipRevealMethod.invoke(null,v,left,top,width,height);
-        }
- catch (        IllegalAccessException e) {
-          Log.d(TAG,"Could not call makeClipRevealAnimation: " + e);
-          sClipRevealMethod=null;
-        }
-catch (        InvocationTargetException e) {
-          Log.d(TAG,"Could not call makeClipRevealAnimation: " + e);
-          sClipRevealMethod=null;
-        }
+        opts=ActivityOptions.makeClipRevealAnimation(v,left,top,width,height);
       }
-      if (opts == null && !Utilities.isLmpOrAbove()) {
+ else       if (!Utilities.ATLEAST_LOLLIPOP) {
         opts=ActivityOptions.makeScaleUpAnimation(v,0,0,v.getMeasuredWidth(),v.getMeasuredHeight());
       }
- else       if (opts == null && Utilities.isLmpMR1()) {
+ else       if (Utilities.ATLEAST_LOLLIPOP_MR1) {
         opts=ActivityOptions.makeCustomAnimation(this,R.anim.task_open_enter,R.anim.no_anim);
       }
       optsBundle=opts != null ? opts.toBundle() : null;

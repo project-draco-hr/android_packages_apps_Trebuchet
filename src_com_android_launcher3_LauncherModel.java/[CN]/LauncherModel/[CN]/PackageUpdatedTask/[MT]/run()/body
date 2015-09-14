@@ -157,7 +157,8 @@ updateItemInDatabase(context,si);
  else if (info instanceof LauncherAppWidgetInfo) {
 LauncherAppWidgetInfo widgetInfo=(LauncherAppWidgetInfo)info;
 if (mUser.equals(widgetInfo.user) && widgetInfo.hasRestoreFlag(LauncherAppWidgetInfo.FLAG_PROVIDER_NOT_READY) && packageSet.contains(widgetInfo.providerName.getPackageName())) {
-widgetInfo.restoreStatus&=~LauncherAppWidgetInfo.FLAG_PROVIDER_NOT_READY;
+widgetInfo.restoreStatus&=~LauncherAppWidgetInfo.FLAG_PROVIDER_NOT_READY & ~LauncherAppWidgetInfo.FLAG_RESTORE_STARTED;
+widgetInfo.restoreStatus|=LauncherAppWidgetInfo.FLAG_UI_NOT_READY;
 widgets.add(widgetInfo);
 updateItemInDatabase(context,widgetInfo);
 }
@@ -227,7 +228,25 @@ callbacks.bindComponentsRemoved(removedPackageNames,removedApps,mUser,removeReas
 }
 );
 }
-loadAndBindWidgetsAndShortcuts(context,callbacks,Build.VERSION.SDK_INT < 17);
+if (mOp == OP_ADD || mOp == OP_REMOVE || mOp == OP_UPDATE) {
+boolean needToRefresh=!mUser.equals(UserHandleCompat.myUserHandle());
+synchronized (sBgLock) {
+if (sBgWidgetProviders != null) {
+HashSet<String> pkgSet=new HashSet<>();
+Collections.addAll(pkgSet,mPackages);
+for (ComponentKey key : sBgWidgetProviders.keySet()) {
+needToRefresh|=key.user.equals(mUser) && pkgSet.contains(key.componentName.getPackageName());
+}
+}
+}
+if (!needToRefresh && mOp != OP_REMOVE) {
+PackageManager pm=context.getPackageManager();
+for (String pkg : mPackages) {
+needToRefresh|=!pm.queryBroadcastReceivers(new Intent(AppWidgetManager.ACTION_APPWIDGET_UPDATE).setPackage(pkg),0).isEmpty();
+}
+}
+loadAndBindWidgetsAndShortcuts(callbacks,needToRefresh);
+}
 mHandler.post(new Runnable(){
 public void run(){
 Callbacks cb=getCallback();

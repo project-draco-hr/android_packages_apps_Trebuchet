@@ -9,7 +9,7 @@
   }
   registerReceiver(mReceiver,filter);
   FirstFrameAnimatorHelper.initializeDrawListener(getWindow().getDecorView());
-  setupTransparentSystemBarsForLmp();
+  setupTransparentSystemBarsForLollipop();
   mAttached=true;
   mVisible=true;
 }

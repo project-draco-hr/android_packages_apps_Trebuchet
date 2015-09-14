@@ -3,8 +3,14 @@
   mContentWrapper=findViewById(R.id.folder_content_wrapper);
   mContent=(FolderPagedView)findViewById(R.id.folder_content);
   mContent.setFolder(this);
-  mFolderName=(FolderEditText)findViewById(R.id.folder_name);
-  mFolderName.setFolder(this);
+  mFolderName=(ExtendedEditText)findViewById(R.id.folder_name);
+  mFolderName.setOnBackKeyListener(new ExtendedEditText.OnBackKeyListener(){
+    @Override public boolean onBackKey(){
+      doneEditingFolderName(true);
+      return false;
+    }
+  }
+);
   mFolderName.setOnFocusChangeListener(this);
   mFolderName.setCustomSelectionActionModeCallback(mActionModeCallback);
   mFolderName.setOnEditorActionListener(this);

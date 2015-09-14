@@ -3,5 +3,6 @@
   SQLiteDatabase db=mOpenHelper.getWritableDatabase();
   int count=db.delete(args.table,args.where,args.args);
   if (count > 0)   notifyListeners();
+  reloadLauncherIfExternal();
   return count;
 }

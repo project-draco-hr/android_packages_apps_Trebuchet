@@ -1,0 +1,13 @@
+{
+  LauncherAppState app=LauncherAppState.getInstance();
+  InvariantDeviceProfile idp=app.getInvariantDeviceProfile();
+  Rect paddingLand=idp.landscapeProfile.getWorkspacePadding(false);
+  Rect paddingPort=idp.portraitProfile.getWorkspacePadding(false);
+  float smallestCellWidth=DeviceProfile.calculateCellWidth(Math.min(idp.landscapeProfile.widthPx - paddingLand.left - paddingLand.right,idp.portraitProfile.widthPx - paddingPort.left - paddingPort.right),idp.numColumns);
+  float smallestCellHeight=DeviceProfile.calculateCellWidth(Math.min(idp.landscapeProfile.heightPx - paddingLand.top - paddingLand.bottom,idp.portraitProfile.heightPx - paddingPort.top - paddingPort.bottom),idp.numRows);
+  Rect widgetPadding=AppWidgetHostView.getDefaultPaddingForWidget(app.getContext(),provider,null);
+  spanX=Math.max(1,(int)Math.ceil((minWidth + widgetPadding.left + widgetPadding.right) / smallestCellWidth));
+  spanY=Math.max(1,(int)Math.ceil((minHeight + widgetPadding.top + widgetPadding.bottom) / smallestCellHeight));
+  minSpanX=Math.max(1,(int)Math.ceil((minResizeWidth + widgetPadding.left + widgetPadding.right) / smallestCellWidth));
+  minSpanY=Math.max(1,(int)Math.ceil((minResizeHeight + widgetPadding.top + widgetPadding.bottom) / smallestCellHeight));
+}

@@ -1,6 +1,6 @@
 {
   UserHandleCompat user=null;
-  if (Utilities.isLmpOrAbove()) {
+  if (Utilities.ATLEAST_LOLLIPOP) {
     UserHandle userHandle=appLaunchIntent.getParcelableExtra(Intent.EXTRA_USER);
     if (userHandle != null) {
       user=UserHandleCompat.fromUser(userHandle);

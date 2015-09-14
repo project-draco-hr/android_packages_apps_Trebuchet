@@ -1,0 +1,58 @@
+{
+  List<AlphabeticalAppsList.AdapterItem> items=mApps.getAdapterItems();
+  if (items.isEmpty() || mNumAppsPerRow == 0) {
+    mScrollbar.setThumbOffset(-1,-1);
+    return;
+  }
+  int rowCount=mApps.getNumAppRows();
+  getCurScrollState(mScrollPosState);
+  if (mScrollPosState.rowIndex < 0) {
+    mScrollbar.setThumbOffset(-1,-1);
+    return;
+  }
+  int availableScrollBarHeight=getAvailableScrollBarHeight();
+  int availableScrollHeight=getAvailableScrollHeight(mApps.getNumAppRows(),mScrollPosState.rowHeight);
+  if (availableScrollHeight <= 0) {
+    mScrollbar.setThumbOffset(-1,-1);
+    return;
+  }
+  int scrollY=getPaddingTop() + (mScrollPosState.rowIndex * mScrollPosState.rowHeight) - mScrollPosState.rowTopOffset;
+  int scrollBarY=mBackgroundPadding.top + (int)(((float)scrollY / availableScrollHeight) * availableScrollBarHeight);
+  if (mScrollbar.isThumbDetached()) {
+    int scrollBarX;
+    if (Utilities.isRtl(getResources())) {
+      scrollBarX=mBackgroundPadding.left;
+    }
+ else {
+      scrollBarX=getWidth() - mBackgroundPadding.right - mScrollbar.getThumbWidth();
+    }
+    if (mScrollbar.isDraggingThumb()) {
+      mScrollbar.setThumbOffset(scrollBarX,(int)mScrollbar.getLastTouchY());
+    }
+ else {
+      int thumbScrollY=mScrollbar.getThumbOffset().y;
+      int diffScrollY=scrollBarY - thumbScrollY;
+      if (diffScrollY * dy > 0f) {
+        if (dy < 0) {
+          int offset=(int)((dy * thumbScrollY) / (float)scrollBarY);
+          thumbScrollY+=Math.max(offset,diffScrollY);
+        }
+ else {
+          int offset=(int)((dy * (availableScrollBarHeight - thumbScrollY)) / (float)(availableScrollBarHeight - scrollBarY));
+          thumbScrollY+=Math.min(offset,diffScrollY);
+        }
+        thumbScrollY=Math.max(0,Math.min(availableScrollBarHeight,thumbScrollY));
+        mScrollbar.setThumbOffset(scrollBarX,thumbScrollY);
+        if (scrollBarY == thumbScrollY) {
+          mScrollbar.reattachThumbToScroll();
+        }
+      }
+ else {
+        mScrollbar.setThumbOffset(scrollBarX,thumbScrollY);
+      }
+    }
+  }
+ else {
+    synchronizeScrollBarThumbOffsetToViewScroll(mScrollPosState,rowCount);
+  }
+}

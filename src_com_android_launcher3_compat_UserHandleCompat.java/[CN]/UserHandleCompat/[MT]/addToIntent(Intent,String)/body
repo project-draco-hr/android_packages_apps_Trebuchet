@@ -1,5 +1,5 @@
 {
-  if (Utilities.isLmpOrAbove() && mUser != null) {
+  if (Utilities.ATLEAST_LOLLIPOP && mUser != null) {
     intent.putExtra(name,mUser);
   }
 }

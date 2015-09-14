@@ -1,3 +1,8 @@
 {
+synchronized (this) {
+    if (mUsers != null) {
+      return mUsers.get(serialNumber);
+    }
+  }
   return UserHandleCompat.fromUser(mUserManager.getUserForSerialNumber(serialNumber));
 }

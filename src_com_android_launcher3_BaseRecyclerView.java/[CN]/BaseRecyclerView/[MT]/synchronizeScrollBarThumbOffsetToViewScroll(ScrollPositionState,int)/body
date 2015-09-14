@@ -1,0 +1,18 @@
+{
+  int availableScrollBarHeight=getAvailableScrollBarHeight();
+  int availableScrollHeight=getAvailableScrollHeight(rowCount,scrollPosState.rowHeight);
+  if (availableScrollHeight <= 0) {
+    mScrollbar.setThumbOffset(-1,-1);
+    return;
+  }
+  int scrollY=getPaddingTop() + (scrollPosState.rowIndex * scrollPosState.rowHeight) - scrollPosState.rowTopOffset;
+  int scrollBarY=mBackgroundPadding.top + (int)(((float)scrollY / availableScrollHeight) * availableScrollBarHeight);
+  int scrollBarX;
+  if (Utilities.isRtl(getResources())) {
+    scrollBarX=mBackgroundPadding.left;
+  }
+ else {
+    scrollBarX=getWidth() - mBackgroundPadding.right - mScrollbar.getThumbWidth();
+  }
+  mScrollbar.setThumbOffset(scrollBarX,scrollBarY);
+}

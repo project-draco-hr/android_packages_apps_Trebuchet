@@ -1,6 +1,0 @@
-{
-  prepareStartAnimation(mDropTargetBar);
-  mShowDropTargetBarAnim.reverse();
-  prepareStartAnimation(mQSBSearchBar);
-  mHideSearchBarAnim.reverse();
-}

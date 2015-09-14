@@ -1,0 +1,7 @@
+{
+  if (mEmptySearchBackground != null && mEmptySearchBackground.getAlpha() > 0) {
+    c.clipRect(mBackgroundPadding.left,mBackgroundPadding.top,getWidth() - mBackgroundPadding.right,getHeight() - mBackgroundPadding.bottom);
+    mEmptySearchBackground.draw(c);
+  }
+  super.onDraw(c);
+}

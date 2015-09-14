@@ -1,5 +1,0 @@
-{
-  int zoneHeight=(int)(overviewModeIconZoneRatio * availableHeightPx);
-  zoneHeight=Math.min(overviewModeMaxIconZoneHeightPx,Math.max(overviewModeMinIconZoneHeightPx,zoneHeight));
-  return new Rect(0,availableHeightPx - zoneHeight,0,availableHeightPx);
-}

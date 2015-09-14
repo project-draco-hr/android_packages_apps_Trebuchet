@@ -1,13 +1,13 @@
 {
-  ComponentName cn=new ComponentName(packageName,packageName + EMPTY_CLASS_NAME);
-  ComponentKey cacheKey=new ComponentKey(cn,user);
+  ComponentKey cacheKey=getPackageKey(packageName,user);
   CacheEntry entry=mCache.get(cacheKey);
   if (entry == null || (entry.isLowResIcon && !useLowResIcon)) {
     entry=new CacheEntry();
     boolean entryUpdated=true;
-    if (!getEntryFromDB(cn,user,entry,useLowResIcon)) {
+    if (!getEntryFromDB(cacheKey,entry,useLowResIcon)) {
       try {
-        PackageInfo info=mPackageManager.getPackageInfo(packageName,0);
+        int flags=UserHandleCompat.myUserHandle().equals(user) ? 0 : PackageManager.GET_UNINSTALLED_PACKAGES;
+        PackageInfo info=mPackageManager.getPackageInfo(packageName,flags);
         ApplicationInfo appInfo=info.applicationInfo;
         if (appInfo == null) {
           throw new NameNotFoundException("ApplicationInfo is null");
@@ -18,7 +18,7 @@
         entry.contentDescription=mUserManager.getBadgedLabelForUser(entry.title,user);
         entry.isLowResIcon=false;
         ContentValues values=newContentValues(entry.icon,entry.title.toString(),mPackageBgColor);
-        addIconToDB(values,cn,info,mUserManager.getSerialNumberForUser(user));
+        addIconToDB(values,cacheKey.componentName,info,mUserManager.getSerialNumberForUser(user));
       }
  catch (      NameNotFoundException e) {
         if (DEBUG)         Log.d(TAG,"Application not installed " + packageName);

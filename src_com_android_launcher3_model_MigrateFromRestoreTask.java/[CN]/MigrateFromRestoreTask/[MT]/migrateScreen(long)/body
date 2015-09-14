@@ -1,0 +1,59 @@
+{
+  ArrayList<DbEntry> items=loadEntries(screenId);
+  int removedCol=Integer.MAX_VALUE;
+  int removedRow=Integer.MAX_VALUE;
+  float removeWt=Float.MAX_VALUE;
+  float moveWt=Float.MAX_VALUE;
+  float[] outLoss=new float[2];
+  ArrayList<DbEntry> finalItems=null;
+  for (int x=0; x < mSrcX; x++) {
+    for (int y=0; y < mSrcY; y++) {
+      ArrayList<DbEntry> itemsOnScreen=tryRemove(x,y,deepCopy(items),outLoss);
+      if ((outLoss[0] < removeWt) || ((outLoss[0] == removeWt) && (outLoss[1] < moveWt))) {
+        removeWt=outLoss[0];
+        moveWt=outLoss[1];
+        removedCol=mShouldRemoveX ? x : removedCol;
+        removedRow=mShouldRemoveY ? y : removedRow;
+        finalItems=itemsOnScreen;
+      }
+      if (!mShouldRemoveY) {
+        break;
+      }
+    }
+    if (!mShouldRemoveX) {
+      break;
+    }
+  }
+  if (DEBUG) {
+    Log.d(TAG,String.format("Removing row %d, column %d on screen %d",removedRow,removedCol,screenId));
+  }
+  LongArrayMap<DbEntry> itemMap=new LongArrayMap<>();
+  for (  DbEntry e : deepCopy(items)) {
+    itemMap.put(e.id,e);
+  }
+  for (  DbEntry item : finalItems) {
+    DbEntry org=itemMap.get(item.id);
+    itemMap.remove(item.id);
+    if (!item.columnsSame(org)) {
+      update(item);
+    }
+  }
+  for (  DbEntry item : itemMap) {
+    mCarryOver.add(item);
+  }
+  if (!mCarryOver.isEmpty() && removeWt == 0) {
+    boolean[][] occupied=new boolean[mTrgX][mTrgY];
+    for (    DbEntry item : finalItems) {
+      markCells(occupied,item,true);
+    }
+    OptimalPlacementSolution placement=new OptimalPlacementSolution(occupied,deepCopy(mCarryOver),true);
+    placement.find();
+    if (placement.lowestWeightLoss == 0) {
+      for (      DbEntry item : placement.finalPlacedItems) {
+        item.screenId=screenId;
+        update(item);
+      }
+      mCarryOver.clear();
+    }
+  }
+}

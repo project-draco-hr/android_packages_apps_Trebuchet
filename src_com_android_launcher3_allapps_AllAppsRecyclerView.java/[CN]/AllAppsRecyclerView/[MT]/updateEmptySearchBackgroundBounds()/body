@@ -1,0 +1,8 @@
+{
+  if (mEmptySearchBackground == null) {
+    return;
+  }
+  int x=(getMeasuredWidth() - mEmptySearchBackground.getIntrinsicWidth()) / 2;
+  int y=mEmptySearchBackgroundTopOffset;
+  mEmptySearchBackground.setBounds(x,y,x + mEmptySearchBackground.getIntrinsicWidth(),y + mEmptySearchBackground.getIntrinsicHeight());
+}

@@ -1,0 +1,2 @@
+boolean[][] occupied
+ArrayList<DbEntry> itemsToPlace

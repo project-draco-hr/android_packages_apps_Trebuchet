@@ -1,6 +1,6 @@
 {
   d.dragView.setColor(mHoverColor);
-  if (Utilities.isLmpOrAbove()) {
+  if (Utilities.ATLEAST_LOLLIPOP) {
     animateTextColor(mHoverColor);
   }
  else {

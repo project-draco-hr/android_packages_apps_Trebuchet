@@ -1,12 +1,12 @@
 {
-  if (mQSBSearchBar != null) {
+  if (mQSB != null) {
     final int[] pos=new int[2];
-    mQSBSearchBar.getLocationOnScreen(pos);
+    mQSB.getLocationOnScreen(pos);
     final Rect rect=new Rect();
     rect.left=pos[0];
     rect.top=pos[1];
-    rect.right=pos[0] + mQSBSearchBar.getWidth();
-    rect.bottom=pos[1] + mQSBSearchBar.getHeight();
+    rect.right=pos[0] + mQSB.getWidth();
+    rect.bottom=pos[1] + mQSB.getHeight();
     return rect;
   }
  else {

@@ -17,6 +17,7 @@
       removeScreens.add(id);
     }
   }
+  LauncherAccessibilityDelegate delegate=LauncherAppState.getInstance().getAccessibilityDelegate();
   int minScreens=1 + numCustomPages();
   int pageShift=0;
   for (  Long id : removeScreens) {
@@ -26,6 +27,9 @@
     if (getChildCount() > minScreens) {
       if (indexOfChild(cl) < currentPage) {
         pageShift++;
+      }
+      if (delegate != null && delegate.isInAccessibleDrag()) {
+        cl.enableAccessibleDrag(false,CellLayout.WORKSPACE_ACCESSIBILITY_DRAG);
       }
       removeView(cl);
     }

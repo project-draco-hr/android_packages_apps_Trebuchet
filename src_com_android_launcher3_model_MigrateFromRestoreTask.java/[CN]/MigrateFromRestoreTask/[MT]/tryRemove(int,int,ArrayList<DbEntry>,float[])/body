@@ -1,0 +1,26 @@
+{
+  boolean[][] occupied=new boolean[mTrgX][mTrgY];
+  col=mShouldRemoveX ? col : Integer.MAX_VALUE;
+  row=mShouldRemoveY ? row : Integer.MAX_VALUE;
+  ArrayList<DbEntry> finalItems=new ArrayList<>();
+  ArrayList<DbEntry> removedItems=new ArrayList<>();
+  for (  DbEntry item : items) {
+    if ((item.cellX <= col && (item.spanX + item.cellX) > col) || (item.cellY <= row && (item.spanY + item.cellY) > row)) {
+      removedItems.add(item);
+      if (item.cellX >= col)       item.cellX--;
+      if (item.cellY >= row)       item.cellY--;
+    }
+ else {
+      if (item.cellX > col)       item.cellX--;
+      if (item.cellY > row)       item.cellY--;
+      finalItems.add(item);
+      markCells(occupied,item,true);
+    }
+  }
+  OptimalPlacementSolution placement=new OptimalPlacementSolution(occupied,removedItems);
+  placement.find();
+  finalItems.addAll(placement.finalPlacedItems);
+  outLoss[0]=placement.lowestWeightLoss;
+  outLoss[1]=placement.lowestMoveCost;
+  return finalItems;
+}

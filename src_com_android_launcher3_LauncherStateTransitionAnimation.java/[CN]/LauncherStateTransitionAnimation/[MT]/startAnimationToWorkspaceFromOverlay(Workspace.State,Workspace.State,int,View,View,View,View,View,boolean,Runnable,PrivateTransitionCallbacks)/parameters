@@ -1,0 +1,11 @@
+Workspace.State fromWorkspaceState
+Workspace.State toWorkspaceState
+int toWorkspacePage
+View buttonView
+View fromView
+View contentView
+View revealView
+View overlaySearchBarView
+boolean animated
+Runnable onCompleteRunnable
+PrivateTransitionCallbacks pCb

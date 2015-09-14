@@ -4,5 +4,6 @@
   SQLiteDatabase db=mOpenHelper.getWritableDatabase();
   int count=db.update(args.table,values,args.where,args.args);
   if (count > 0)   notifyListeners();
+  reloadLauncherIfExternal();
   return count;
 }

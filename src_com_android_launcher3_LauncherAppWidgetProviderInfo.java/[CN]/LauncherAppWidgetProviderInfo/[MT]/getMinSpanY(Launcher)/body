@@ -1,4 +1,0 @@
-{
-  lazyLoadSpans(launcher);
-  return mMinSpanY;
-}
