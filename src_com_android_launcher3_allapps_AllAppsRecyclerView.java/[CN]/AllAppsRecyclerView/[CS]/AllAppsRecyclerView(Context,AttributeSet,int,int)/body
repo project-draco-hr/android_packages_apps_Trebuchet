@@ -5,4 +5,5 @@
     mScrollbar.setDetachThumbOnFastScroll();
   }
   mEmptySearchBackgroundTopOffset=res.getDimensionPixelSize(R.dimen.all_apps_empty_search_bg_top_offset);
+  addOnScrollListener(new FocusScrollListener());
 }

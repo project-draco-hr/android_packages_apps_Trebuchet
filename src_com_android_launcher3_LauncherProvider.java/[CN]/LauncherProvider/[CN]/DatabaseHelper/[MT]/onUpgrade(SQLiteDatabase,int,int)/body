@@ -115,7 +115,20 @@ migrateLauncherFavorite(db,"com.android.dialer","com.cyngn.dialer","com.android.
 migrateLauncherFavorite(db,"com.android.mms","com.android.messaging","com.android.mms.ui.ConversationList","com.android.messaging.ui.conversationlist.ConversationListActivity");
 migrateLauncherFavorite(db,"com.android.camera2","org.cyanogenmod.snap","com.android.camera.CameraLauncher","com.android.camera.CameraLauncher");
 migrateLauncherFavorite(db,"org.cyanogenmod.snap","com.android.camera2","com.android.camera.CameraLauncher","com.android.camera.CameraLauncher");
+}
+case 28:
+{
+db.beginTransaction();
+try {
+db.execSQL("ALTER TABLE favorites " + "ADD COLUMN subType INTEGER DEFAULT 0;");
+db.setTransactionSuccessful();
+db.endTransaction();
 return;
+}
+ catch (SQLException ex) {
+Log.e(TAG,ex.getMessage(),ex);
+db.endTransaction();
+}
 }
 }
 Log.w(TAG,"Destroying all old data.");

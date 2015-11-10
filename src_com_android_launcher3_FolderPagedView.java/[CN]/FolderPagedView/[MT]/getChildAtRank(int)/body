@@ -1,0 +1,13 @@
+{
+  int pagePos=rank % mMaxItemsPerPage;
+  int pageNo=rank / mMaxItemsPerPage;
+  int cellX=pagePos % mGridCountX;
+  int cellY=pagePos / mGridCountX;
+  CellLayout page=getPageAt(pageNo);
+  if (page != null) {
+    return page.getChildAt(cellX,cellY);
+  }
+ else {
+    return null;
+  }
+}

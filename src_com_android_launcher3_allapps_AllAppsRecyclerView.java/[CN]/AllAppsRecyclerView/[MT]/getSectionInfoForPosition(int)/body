@@ -1,9 +1,0 @@
-{
-  List<AlphabeticalAppsList.SectionInfo> sections=mApps.getSections();
-  for (  AlphabeticalAppsList.SectionInfo section : sections) {
-    if (section.firstAppItem.position == position) {
-      return section;
-    }
-  }
-  return null;
-}

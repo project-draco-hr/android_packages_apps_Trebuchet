@@ -1,0 +1,6 @@
+{
+  AdapterItem item=new AdapterItem();
+  item.viewType=AllAppsGridAdapter.CUSTOM_PREDICTED_APPS_FOOTER_VIEW_TYPE;
+  item.position=pos;
+  return item;
+}

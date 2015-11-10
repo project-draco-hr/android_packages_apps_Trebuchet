@@ -1,0 +1,9 @@
+{
+switch (newState) {
+case SCROLL_STATE_IDLE:
+    if (mFastScrollDragging) {
+      setSectionFastScrollFocused(mPrevFastScrollFocusedPosition);
+      setSectionFastScrollDimmed(mPrevFastScrollFocusedPosition,false,true);
+    }
+}
+}

@@ -1,8 +1,7 @@
 {
-  return mContent.iterateOverItems(new ItemOperator(){
-    @Override public boolean evaluate(    ItemInfo info,    View view,    View parent){
-      return info == item;
-    }
+  View v=mContent.getChildAtRank(item.rank);
+  if (v != null && v.getTag() == item) {
+    return v;
   }
-);
+  return null;
 }

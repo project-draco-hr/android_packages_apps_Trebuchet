@@ -6,4 +6,5 @@
   Bundle extras=new Bundle();
   extras.putBoolean(LauncherSettings.Settings.EXTRA_VALUE,!current);
   mContext.getContentResolver().call(LauncherSettings.Settings.CONTENT_URI,LauncherSettings.Settings.METHOD_SET_BOOLEAN,key,extras);
+  return !current;
 }

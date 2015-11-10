@@ -3,7 +3,6 @@
   mContentWrapper=findViewById(R.id.folder_content_wrapper);
   mContent=(FolderPagedView)findViewById(R.id.folder_content);
   mContent.setFolder(this);
-  int measureSpec=MeasureSpec.UNSPECIFIED;
   mFolderName=(ExtendedEditText)findViewById(R.id.folder_name);
   mFolderName.setOnBackKeyListener(new ExtendedEditText.OnBackKeyListener(){
     @Override public boolean onBackKey(){
@@ -22,10 +21,6 @@
     mFolderName.setVisibility(View.GONE);
   }
   mFolderLock=(ImageView)findViewById(R.id.folder_lock);
-  mFolderLock.measure(measureSpec,measureSpec);
   mFolderLock.setOnClickListener(this);
-  mFolderLockHeight=mFolderLock.getMeasuredHeight();
   mFooter=findViewById(R.id.folder_footer);
-  mFooter.measure(measureSpec,measureSpec);
-  mFooterHeight=mFooter.getMeasuredHeight();
 }

@@ -1,6 +1,0 @@
-{
-  mNumAppsPerRow=numAppsPerRow;
-  mNumPredictedAppsPerRow=numPredictedAppsPerRow;
-  mMergeAlgorithm=mergeAlgorithm;
-  updateAdapterItems();
-}

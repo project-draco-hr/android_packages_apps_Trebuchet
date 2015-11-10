@@ -1,0 +1,10 @@
+{
+  int width=getMeasuredWidth();
+  int height=getMeasuredHeight();
+  if (width <= 0 && height <= 0) {
+    measure(MeasureSpec.UNSPECIFIED,MeasureSpec.UNSPECIFIED);
+    width=getMeasuredWidth();
+    height=getMeasuredHeight();
+  }
+  calculatePivot(width,height);
+}

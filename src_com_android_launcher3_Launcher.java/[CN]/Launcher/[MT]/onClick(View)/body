@@ -29,9 +29,10 @@
     onClickAllAppsButton(v);
   }
  else   if (tag instanceof AppInfo) {
+    AppInfo info=(AppInfo)tag;
     startAppShortcutOrInfoActivity(v);
-    LauncherApplication.getLauncherStats().sendAppLaunchEvent(LauncherStats.ORIGIN_APPDRAWER,((AppInfo)tag).componentName.getPackageName());
-    String packageName=((AppInfo)tag).getIntent().getComponent().getPackageName();
+    LauncherApplication.getLauncherStats().sendAppLaunchEvent(LauncherStats.ORIGIN_APPDRAWER,info.componentName.getPackageName());
+    String packageName=info.getIntent().getComponent().getPackageName();
     if (LauncherStats.SETTINGS_PACKAGE_NAME.equals(packageName)) {
       LauncherApplication.getLauncherStats().sendSettingsOpenedEvent(LauncherStats.ORIGIN_APPDRAWER);
     }

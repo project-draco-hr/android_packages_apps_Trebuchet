@@ -1,0 +1,8 @@
+{
+  if (o != null && o instanceof AppInfo) {
+    return componentName.equals(((AppInfo)o).componentName);
+  }
+ else {
+    return false;
+  }
+}

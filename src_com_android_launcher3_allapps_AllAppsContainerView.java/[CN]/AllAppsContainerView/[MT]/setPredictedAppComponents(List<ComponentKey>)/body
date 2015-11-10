@@ -1,0 +1,4 @@
+{
+  mApps.setPredictedAppComponents(apps);
+  updateScrubber();
+}

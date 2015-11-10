@@ -1,0 +1,3 @@
+{
+  return super.getAvailableScrollHeight(rowCount,rowHeight) + getAdditionalScrollHeight(mApps.getAdapterItems().size());
+}

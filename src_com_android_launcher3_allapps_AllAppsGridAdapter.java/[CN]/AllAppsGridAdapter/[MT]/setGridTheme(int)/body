@@ -1,7 +1,8 @@
 {
   mGridTheme=gridTheme;
   int sectionTextColorId=mGridTheme == AllAppsContainerView.GRID_THEME_DARK ? R.color.all_apps_grid_section_text_color_dark : R.color.all_apps_grid_section_text_color;
-  mSectionTextPaint.setColor(mLauncher.getResources().getColor(sectionTextColorId));
-  Resources res=mLauncher.getResources();
-  mAllAppsTextColor=mGridTheme == AllAppsContainerView.GRID_THEME_DARK ? res.getColor(R.color.quantum_panel_text_color_dark) : res.getColor(R.color.quantum_panel_text_color);
+  mSectionTextPaint.setColor(mLauncher.getColor(sectionTextColorId));
+  mAllAppsTextColor=mGridTheme == AllAppsContainerView.GRID_THEME_DARK ? mLauncher.getColor(R.color.quantum_panel_text_color_dark) : mLauncher.getColor(R.color.quantum_panel_text_color);
+  int mPredictedAppsDividerColorId=mGridTheme == AllAppsContainerView.GRID_THEME_DARK ? R.color.drawer_divider_dark : R.color.drawer_divider_light;
+  mPredictedAppsDividerPaint.setColor(mLauncher.getColor(mPredictedAppsDividerColorId));
 }

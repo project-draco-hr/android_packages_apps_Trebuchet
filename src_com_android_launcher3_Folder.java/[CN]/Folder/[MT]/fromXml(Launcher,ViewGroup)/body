@@ -1,0 +1,3 @@
+{
+  return (Folder)launcher.getLayoutInflater().inflate(R.layout.user_folder,root,false);
+}

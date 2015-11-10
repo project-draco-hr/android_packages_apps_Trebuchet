@@ -68,7 +68,7 @@
         workspaceItems.remove(i);
         folders.remove(Long.valueOf(item.id));
       }
- else       if (folder.contents.size() == 0) {
+ else       if (folder.contents.size() == 0 && !folder.isRemote()) {
         LauncherModel.deleteFolderContentsFromDatabase(mContext,folder);
         workspaceItems.remove(i);
         folders.remove(Long.valueOf(item.id));

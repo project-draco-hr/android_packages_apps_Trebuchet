@@ -3,4 +3,5 @@
   values.put(LauncherSettings.Favorites.TITLE,title.toString());
   values.put(LauncherSettings.Favorites.OPTIONS,options);
   values.put(LauncherSettings.Favorites.HIDDEN,hidden ? 1 : 0);
+  values.put(LauncherSettings.BaseLauncherColumns.SUBTYPE,subType);
 }

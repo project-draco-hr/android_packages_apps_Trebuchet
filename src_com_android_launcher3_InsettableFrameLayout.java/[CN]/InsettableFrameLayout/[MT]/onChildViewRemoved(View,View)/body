@@ -1,2 +1,3 @@
 {
+  setFrameLayoutChildInsets(child,new Rect(),mInsets);
 }

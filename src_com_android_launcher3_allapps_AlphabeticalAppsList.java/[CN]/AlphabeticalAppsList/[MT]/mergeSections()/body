@@ -1,35 +1,15 @@
 {
-  if (mMergeAlgorithm == null || mNumAppsPerRow == 0) {
+  if (!mMergeSections || mNumAppsPerRow == 0 || hasFilter()) {
     return;
   }
-  if (!hasFilter()) {
-    int sectionAppCount=0;
-    for (int i=0; i < mSections.size() - 1; i++) {
-      SectionInfo section=mSections.get(i);
-      sectionAppCount=section.numApps;
-      int mergeCount=1;
-      while (i < (mSections.size() - 1) && mMergeAlgorithm.continueMerging(section,mSections.get(i + 1),sectionAppCount,mNumAppsPerRow,mergeCount)) {
-        SectionInfo nextSection=mSections.remove(i + 1);
-        mAdapterItems.remove(nextSection.sectionBreakItem);
-        int pos=mAdapterItems.indexOf(section.firstAppItem);
-        int nextPos=pos + section.numApps;
-        for (int j=nextPos; j < (nextPos + nextSection.numApps); j++) {
-          AdapterItem item=mAdapterItems.get(j);
-          item.sectionInfo=section;
-          item.sectionAppIndex+=section.numApps;
-        }
-        pos=mAdapterItems.indexOf(nextSection.firstAppItem);
-        for (int j=pos; j < mAdapterItems.size(); j++) {
-          AdapterItem item=mAdapterItems.get(j);
-          item.position--;
-        }
-        section.numApps+=nextSection.numApps;
-        sectionAppCount+=nextSection.numApps;
-        if (DEBUG) {
-          Log.d(TAG,"Merging: " + nextSection.firstAppItem.sectionName + " to "+ section.firstAppItem.sectionName+ " mergedNumRows: "+ (sectionAppCount / mNumAppsPerRow));
-        }
-        mergeCount++;
-      }
+  Iterator<AdapterItem> iter=mAdapterItems.iterator();
+  int positionShift=0;
+  while (iter.hasNext()) {
+    AdapterItem item=iter.next();
+    item.position-=positionShift;
+    if (item.viewType == AllAppsGridAdapter.SECTION_BREAK_VIEW_TYPE) {
+      iter.remove();
+      positionShift++;
     }
   }
 }

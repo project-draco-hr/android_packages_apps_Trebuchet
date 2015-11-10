@@ -11,7 +11,7 @@
   final AnimatorSet anim=LauncherAnimUtils.createAnimatorSet();
   final Collection<Animator> bounceAnims=new ArrayList<Animator>();
   final boolean animateIcons=forceAnimateIcons && canRunNewAppsAnimation();
-  Workspace workspace=mWorkspace;
+  final Workspace workspace=mWorkspace;
   long newShortcutsScreenId=-1;
   for (int i=start; i < end; i++) {
     final ItemInfo item=shortcuts.get(i);
@@ -41,6 +41,9 @@ case LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT:
 break;
 case LauncherSettings.Favorites.ITEM_TYPE_FOLDER:
 view=FolderIcon.fromXml(R.layout.folder_icon,this,(ViewGroup)workspace.getChildAt(workspace.getCurrentPage()),(FolderInfo)item,mIconCache);
+if (view == null) {
+continue;
+}
 ((FolderIcon)view).setTextVisible(!mHideIconLabels);
 break;
 default :

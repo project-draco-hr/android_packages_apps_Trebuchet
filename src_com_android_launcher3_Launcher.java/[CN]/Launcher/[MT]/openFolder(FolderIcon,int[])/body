@@ -22,7 +22,7 @@
     Log.w(TAG,"Opening folder (" + folder + ") which already has a parent ("+ folder.getParent()+ ").");
     return;
   }
-  folder.animateOpen(getWorkspace(),folderTouch);
+  folder.animateOpen();
   folder.sendAccessibilityEvent(AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED);
   getDragLayer().sendAccessibilityEvent(AccessibilityEvent.TYPE_WINDOW_CONTENT_CHANGED);
 }

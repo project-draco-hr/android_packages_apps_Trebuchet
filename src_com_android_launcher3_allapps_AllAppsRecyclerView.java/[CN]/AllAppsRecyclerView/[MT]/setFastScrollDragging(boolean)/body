@@ -1,3 +1,4 @@
 {
   ((AllAppsGridAdapter)getAdapter()).setIconsDimmed(dragging);
+  mFastScrollDragging=dragging;
 }

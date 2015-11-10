@@ -19,6 +19,13 @@
   mAppWidgetManager=AppWidgetManagerCompat.getInstance(this);
   mAppWidgetHost=new LauncherAppWidgetHost(this,APPWIDGET_HOST_ID);
   mAppWidgetHost.startListening();
+  if (sRemoteFolderManager == null) {
+    sRemoteFolderManager=new RemoteFolderManager(this);
+  }
+ else {
+    sRemoteFolderManager.onRecreateLauncher(this);
+  }
+  mRemoteDrawerEnabled=SettingsProvider.getBoolean(this,null,R.bool.preferences_interface_homescreen_remote_folder_default);
   mPaused=false;
   if (PROFILE_STARTUP) {
     android.os.Debug.startMethodTracing(Environment.getExternalStorageDirectory() + "/launcher");

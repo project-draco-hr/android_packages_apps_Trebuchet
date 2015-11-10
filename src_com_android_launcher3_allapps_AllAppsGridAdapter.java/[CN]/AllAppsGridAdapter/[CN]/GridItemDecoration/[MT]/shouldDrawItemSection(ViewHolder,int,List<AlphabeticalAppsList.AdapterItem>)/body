@@ -1,8 +1,0 @@
-{
-  int pos=holder.getPosition();
-  AlphabeticalAppsList.AdapterItem item=items.get(pos);
-  if (item.viewType != AllAppsGridAdapter.ICON_VIEW_TYPE) {
-    return false;
-  }
-  return (childIndex == 0) || (items.get(pos - 1).viewType == AllAppsGridAdapter.SECTION_BREAK_VIEW_TYPE);
-}

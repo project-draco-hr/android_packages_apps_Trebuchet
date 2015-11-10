@@ -1,4 +1,5 @@
 {
+  mFolderIcon.destroyDrawingCache();
   mFolderIcon.buildDrawingCache(true);
   Bitmap fakeFolderIcon=Bitmap.createBitmap(mFolderIcon.getDrawingCache());
   View fakeFolderIconView=mLauncher.findViewById(R.id.reveal_fake_folder_icon);

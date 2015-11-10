@@ -1,19 +1,19 @@
 {
   super.dispatchDraw(canvas);
   if (mFolder == null)   return;
-  if (mFolder.getItemCount() == 0 && !mAnimating)   return;
+  if (mFolder.getItemCount() == 0 && !mAnimating && !mInfo.isRemote())   return;
   ArrayList<View> items=mFolder.getItemsInReadingOrder();
   Drawable d;
   TextView v;
   if (mAnimating) {
     computePreviewDrawingParams(mAnimParams.drawable);
   }
- else {
+ else   if (!items.isEmpty()) {
     v=(TextView)items.get(0);
     d=getTopDrawable(v);
-    computePreviewDrawingParams(d);
+    if (d != null)     computePreviewDrawingParams(d);
   }
-  int nItemsInPreview=Math.min(items.size(),NUM_ITEMS_IN_PREVIEW);
+  int ntemsInPreview=Math.min(items.size(),NUM_ITEMS_IN_PREVIEW);
   View folderLock=findViewById(R.id.folder_lock_image);
   folderLock.setVisibility(mInfo.hidden ? VISIBLE : INVISIBLE);
   View appView=findViewById(R.id.app_0);
@@ -28,15 +28,20 @@
     return;
   }
   if (!mAnimating) {
-    for (int i=NUM_ITEMS_IN_PREVIEW; i >= 0; i--) {
+    for (int i=0; i < NUM_ITEMS_IN_PREVIEW; i++) {
       d=null;
-      if (i < items.size()) {
+      if (mInfo.isRemote()) {
+        d=mLauncher.getRemoteFolderManager().getFolderIconDrawable(items,i);
+      }
+ else       if (i < items.size()) {
         v=(TextView)items.get(i);
         if (!mHiddenItems.contains(v.getTag())) {
           d=getTopDrawable(v);
-          mParams=computePreviewItemDrawingParams(i,mParams);
-          mParams.drawable=d;
         }
+      }
+      if (d != null) {
+        mParams=computePreviewItemDrawingParams(i,mParams);
+        mParams.drawable=d;
       }
       ImageView appIcon=null;
 switch (i) {

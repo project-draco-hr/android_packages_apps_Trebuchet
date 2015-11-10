@@ -1,0 +1,5 @@
+{
+  int offset=mCustomPredictedAppsHeaderHeight;
+  if (rowIndex > 0)   offset+=mCustomPredictedAppsFooterHeight;
+  return offset;
+}

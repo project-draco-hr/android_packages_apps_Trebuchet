@@ -23,10 +23,11 @@
   mPredictedAppsDividerPaint.setStrokeWidth(Utilities.pxFromDp(1f,res.getDisplayMetrics()));
   mPredictedAppsDividerPaint.setColor(0x1E000000);
   mPredictedAppsDividerPaint.setAntiAlias(true);
-  mPredictionBarDividerOffset=(-res.getDimensionPixelSize(R.dimen.all_apps_prediction_icon_bottom_padding) + res.getDimensionPixelSize(R.dimen.all_apps_icon_top_bottom_padding)) / 2;
+  mPredictionBarDividerOffset=res.getDimensionPixelSize(R.dimen.all_apps_prediction_bar_divider_offset);
   PackageManager pm=launcher.getPackageManager();
   ResolveInfo marketInfo=pm.resolveActivity(createMarketSearchIntent(""),PackageManager.MATCH_DEFAULT_ONLY);
   if (marketInfo != null) {
     mMarketAppName=marketInfo.loadLabel(pm).toString();
   }
+  mRemoteFolderManager=launcher.getRemoteFolderManager();
 }

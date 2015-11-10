@@ -1,0 +1,8 @@
+{
+  if (!mCustomPredictedAppsEnabled) {
+    throw new IllegalStateException("Unable to set predicted apps directly when adapter " + "is not set to accept a custom predicted apps list.");
+  }
+  mPredictedApps.clear();
+  mPredictedApps.addAll(apps);
+  updateAdapterItems();
+}

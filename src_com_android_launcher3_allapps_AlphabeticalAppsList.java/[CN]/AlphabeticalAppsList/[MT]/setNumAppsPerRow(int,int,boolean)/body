@@ -1,0 +1,6 @@
+{
+  mNumAppsPerRow=numAppsPerRow;
+  mNumPredictedAppsPerRow=numPredictedAppsPerRow;
+  mMergeSections=mergeSections;
+  updateAdapterItems();
+}

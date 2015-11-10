@@ -1,0 +1,7 @@
+{
+  Object tag=v.getTag(R.id.fast_scroll_focus_applicator_tag);
+  if (tag != null) {
+    return (FastScrollFocusApplicator)tag;
+  }
+  return null;
+}

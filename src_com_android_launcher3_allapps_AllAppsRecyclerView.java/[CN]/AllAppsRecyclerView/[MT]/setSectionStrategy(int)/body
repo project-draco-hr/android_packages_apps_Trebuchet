@@ -1,4 +1,3 @@
 {
   mSectionStrategy=sectionStrategy;
-  mFocusSection=mSectionStrategy == AllAppsContainerView.SECTION_STRATEGY_RAGGED;
 }

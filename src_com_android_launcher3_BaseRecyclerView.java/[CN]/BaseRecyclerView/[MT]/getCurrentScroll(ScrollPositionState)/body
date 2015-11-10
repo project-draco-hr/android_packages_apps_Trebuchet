@@ -1,0 +1,3 @@
+{
+  return getPaddingTop() + (scrollPosState.rowIndex * scrollPosState.rowHeight) - scrollPosState.rowTopOffset;
+}

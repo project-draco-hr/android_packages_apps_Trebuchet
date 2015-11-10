@@ -1,0 +1,4 @@
+{
+  FastScrollFocusApplicator applicator=new FastScrollFocusApplicator(v,mode);
+  v.setTag(R.id.fast_scroll_focus_applicator_tag,applicator);
+}

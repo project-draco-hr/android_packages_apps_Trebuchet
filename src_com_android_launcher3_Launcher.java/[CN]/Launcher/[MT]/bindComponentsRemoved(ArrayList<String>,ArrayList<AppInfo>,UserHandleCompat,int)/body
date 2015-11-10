@@ -13,7 +13,7 @@
     for (    AppInfo info : appInfos) {
       removedComponents.add(info.componentName);
     }
-    if (!packageNames.isEmpty()) {
+    if (packageNames != null && !packageNames.isEmpty()) {
       mWorkspace.removeItemsByPackageName(packageNames,user);
     }
     if (!removedComponents.isEmpty()) {

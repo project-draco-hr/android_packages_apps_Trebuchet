@@ -1,3 +1,0 @@
-{
-  return getPaddingTop() + getPaddingBottom() + contentAreaHeight+ mFooterHeight;
-}

@@ -1,12 +1,18 @@
 {
-  Bitmap b=info.getIcon(iconCache);
-  if (b.getWidth() > mIconSize || b.getHeight() > mIconSize) {
-    b=Bitmap.createScaledBitmap(b,mIconSize,mIconSize,false);
-    info.setIcon(b);
-    info.updateIcon(iconCache);
+  Drawable iconDrawable;
+  if (info.customDrawable != null) {
+    iconDrawable=info.customDrawable;
   }
-  FastBitmapDrawable iconDrawable=mLauncher.createIconDrawable(b);
-  iconDrawable.setGhostModeEnabled(info.isDisabled != 0);
+ else {
+    Bitmap b=info.getIcon(iconCache);
+    if (b.getWidth() > mIconSize || b.getHeight() > mIconSize) {
+      b=Bitmap.createScaledBitmap(b,mIconSize,mIconSize,false);
+      info.setIcon(b);
+      info.updateIcon(iconCache);
+    }
+    iconDrawable=mLauncher.createIconDrawable(b);
+    ((FastBitmapDrawable)iconDrawable).setGhostModeEnabled(info.isDisabled != 0);
+  }
   setIcon(iconDrawable,mIconSize);
   if (info.contentDescription != null) {
     setContentDescription(info.contentDescription);

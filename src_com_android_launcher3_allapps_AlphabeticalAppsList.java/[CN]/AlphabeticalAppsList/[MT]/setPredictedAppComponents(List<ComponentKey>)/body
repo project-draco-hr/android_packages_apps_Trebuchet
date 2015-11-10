@@ -1,0 +1,8 @@
+{
+  if (!mCustomPredictedAppsEnabled) {
+    throw new IllegalStateException("Unable to set predicted app components when adapter " + "is set to accept a custom predicted apps list.");
+  }
+  mPredictedAppComponents.clear();
+  mPredictedAppComponents.addAll(apps);
+  onAppsUpdated();
+}

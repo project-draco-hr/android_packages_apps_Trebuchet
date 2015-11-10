@@ -14,6 +14,7 @@ case ICON_VIEW_TYPE:
     icon.setOnLongClickListener(mIconLongClickListener);
     icon.setLongPressTimeout(ViewConfiguration.get(parent.getContext()).getLongPressTimeout());
     icon.setFocusable(true);
+    FastScrollFocusApplicator.createApplicator(icon,FastScrollFocusable.FAST_SCROLL_FOCUS_DIMMABLE | FastScrollFocusable.FAST_SCROLL_FOCUS_SCALABLE);
     return new ViewHolder(icon);
   }
 case PREDICTION_ICON_VIEW_TYPE:
@@ -27,7 +28,10 @@ case PREDICTION_ICON_VIEW_TYPE:
   icon.setOnLongClickListener(mIconLongClickListener);
   icon.setLongPressTimeout(ViewConfiguration.get(parent.getContext()).getLongPressTimeout());
   icon.setFocusable(true);
-  return new ViewHolder(icon);
+  FastScrollFocusApplicator.createApplicator(icon,FastScrollFocusable.FAST_SCROLL_FOCUS_DIMMABLE | FastScrollFocusable.FAST_SCROLL_FOCUS_SCALABLE);
+  ViewHolder holder=new ViewHolder(icon);
+  mRemoteFolderManager.onCreateViewHolder(holder,viewType);
+  return holder;
 }
 case EMPTY_SEARCH_VIEW_TYPE:
 return new ViewHolder(mLayoutInflater.inflate(R.layout.all_apps_empty_search,parent,false));
@@ -42,6 +46,21 @@ mLauncher.startSearchFromAllApps(v,mMarketSearchIntent,mLastSearchQuery);
 }
 );
 return new ViewHolder(searchMarketView);
+case CUSTOM_PREDICTED_APPS_HEADER_VIEW_TYPE:
+{
+View v=mLayoutInflater.inflate(R.layout.custom_predicted_apps_header,parent,false);
+FastScrollFocusApplicator.createApplicator(v,FastScrollFocusable.FAST_SCROLL_FOCUS_DIMMABLE);
+ViewHolder holder=new ViewHolder(v);
+mRemoteFolderManager.onCreateViewHolder(holder,viewType);
+return holder;
+}
+case CUSTOM_PREDICTED_APPS_FOOTER_VIEW_TYPE:
+{
+View v=mLayoutInflater.inflate(R.layout.custom_predicted_apps_footer,parent,false);
+ViewHolder holder=new ViewHolder(v);
+mRemoteFolderManager.onCreateViewHolder(holder,viewType);
+return holder;
+}
 default :
 throw new RuntimeException("Unexpected view type");
 }

@@ -1,0 +1,134 @@
+{
+  if (!(getParent() instanceof DragLayer))   return;
+  mContent.completePendingPageChanges();
+  if (!mDragInProgress) {
+    mContent.snapToPageImmediately(0);
+  }
+  Animator openFolderAnim=null;
+  final Runnable onCompleteRunnable;
+  if (!Utilities.ATLEAST_LOLLIPOP) {
+    positionAndSizeAsIcon();
+    calculatePivot();
+    PropertyValuesHolder alpha=PropertyValuesHolder.ofFloat("alpha",1);
+    PropertyValuesHolder scaleX=PropertyValuesHolder.ofFloat("scaleX",1.0f);
+    PropertyValuesHolder scaleY=PropertyValuesHolder.ofFloat("scaleY",1.0f);
+    final ObjectAnimator oa=LauncherAnimUtils.ofPropertyValuesHolder(this,alpha,scaleX,scaleY);
+    oa.setDuration(mExpandDuration);
+    openFolderAnim=oa;
+    setLayerType(LAYER_TYPE_HARDWARE,null);
+    onCompleteRunnable=new Runnable(){
+      @Override public void run(){
+        setLayerType(LAYER_TYPE_NONE,null);
+      }
+    }
+;
+  }
+ else {
+    calculatePivot();
+    AnimatorSet anim=LauncherAnimUtils.createAnimatorSet();
+    int width=getMeasuredWidth();
+    int height=getMeasuredHeight();
+    float transX=-0.075f * (width / 2 - getPivotX());
+    float transY=-0.075f * (height / 2 - getPivotY());
+    setTranslationX(transX);
+    setTranslationY(transY);
+    PropertyValuesHolder tx=PropertyValuesHolder.ofFloat("translationX",transX,0);
+    PropertyValuesHolder ty=PropertyValuesHolder.ofFloat("translationY",transY,0);
+    Animator drift=ObjectAnimator.ofPropertyValuesHolder(this,tx,ty);
+    drift.setDuration(mMaterialExpandDuration);
+    drift.setStartDelay(mMaterialExpandStagger);
+    drift.setInterpolator(new LogDecelerateInterpolator(60,0));
+    int rx=(int)Math.max(Math.max(width - getPivotX(),0),getPivotX());
+    int ry=(int)Math.max(Math.max(height - getPivotY(),0),getPivotY());
+    float radius=(float)Math.hypot(rx,ry);
+    Animator reveal=UiThreadCircularReveal.createCircularReveal(this,(int)getPivotX(),(int)getPivotY(),0,radius);
+    reveal.setDuration(mMaterialExpandDuration);
+    reveal.setInterpolator(new LogDecelerateInterpolator(100,0));
+    mContentWrapper.setAlpha(0f);
+    Animator iconsAlpha=ObjectAnimator.ofFloat(mContentWrapper,"alpha",0f,1f);
+    iconsAlpha.setDuration(mMaterialExpandDuration);
+    iconsAlpha.setStartDelay(mMaterialExpandStagger);
+    iconsAlpha.setInterpolator(new AccelerateInterpolator(1.5f));
+    mFooter.setAlpha(0f);
+    Animator textAlpha=ObjectAnimator.ofFloat(mFooter,"alpha",0f,1f);
+    textAlpha.setDuration(mMaterialExpandDuration);
+    textAlpha.setStartDelay(mMaterialExpandStagger);
+    textAlpha.setInterpolator(new AccelerateInterpolator(1.5f));
+    prepareFakeFolderIcon();
+    float iconTransY=getResources().getInteger(R.integer.folder_icon_translate_y_dist);
+    final View fakeFolderIconView=mLauncher.findViewById(R.id.reveal_fake_folder_icon);
+    float baseIconTranslationY=fakeFolderIconView.getTranslationY();
+    PropertyValuesHolder iconty=PropertyValuesHolder.ofFloat("translationY",baseIconTranslationY,baseIconTranslationY + iconTransY);
+    PropertyValuesHolder iconAlpha=PropertyValuesHolder.ofFloat("alpha",1f,0f);
+    Animator fakeFolderIcon=LauncherAnimUtils.ofPropertyValuesHolder(fakeFolderIconView,iconty,iconAlpha);
+    fakeFolderIcon.setDuration(mMaterialExpandDuration);
+    fakeFolderIcon.setInterpolator(new AccelerateInterpolator(1.5f));
+    fakeFolderIcon.addListener(new AnimatorListenerAdapter(){
+      @Override public void onAnimationStart(      Animator animation){
+        mFolderIcon.setAlpha(0);
+        fakeFolderIconView.setVisibility(View.VISIBLE);
+      }
+      @Override public void onAnimationEnd(      Animator animation){
+        fakeFolderIconView.setVisibility(View.INVISIBLE);
+      }
+    }
+);
+    prepareReveal();
+    anim.play(drift);
+    anim.play(iconsAlpha);
+    anim.play(textAlpha);
+    anim.play(reveal);
+    openFolderAnim=anim;
+    mContentWrapper.setLayerType(LAYER_TYPE_HARDWARE,null);
+    mFooter.setLayerType(LAYER_TYPE_HARDWARE,null);
+    onCompleteRunnable=new Runnable(){
+      @Override public void run(){
+        mContentWrapper.setLayerType(LAYER_TYPE_NONE,null);
+      }
+    }
+;
+  }
+  openFolderAnim.addListener(new AnimatorListenerAdapter(){
+    @Override public void onAnimationStart(    Animator animation){
+      sendCustomAccessibilityEvent(AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED,mContent.getAccessibilityDescription());
+      hideWorkspace();
+      mState=STATE_ANIMATING;
+    }
+    @Override public void onAnimationEnd(    Animator animation){
+      mState=STATE_OPEN;
+      if (onCompleteRunnable != null) {
+        onCompleteRunnable.run();
+      }
+      mContent.setFocusOnFirstChild();
+    }
+  }
+);
+  if (mContent.getPageCount() > 1 && !mInfo.hasOption(FolderInfo.FLAG_MULTI_PAGE_ANIMATION)) {
+    int footerWidth=mContent.getDesiredWidth() - mFooter.getPaddingLeft() - mFooter.getPaddingRight();
+    float textWidth=mFolderName.getPaint().measureText(mFolderName.getText().toString());
+    float translation=(footerWidth - textWidth) / 2;
+    mFolderName.setTranslationX(mContent.mIsRtl ? -translation : translation);
+    mContent.setMarkerScale(0);
+    final boolean updateAnimationFlag=!mDragInProgress;
+    openFolderAnim.addListener(new AnimatorListenerAdapter(){
+      @Override public void onAnimationEnd(      Animator animation){
+        mFolderName.animate().setDuration(FOLDER_NAME_ANIMATION_DURATION).translationX(0).setInterpolator(Utilities.ATLEAST_LOLLIPOP ? AnimationUtils.loadInterpolator(mLauncher,android.R.interpolator.fast_out_slow_in) : new LogDecelerateInterpolator(100,0));
+        mContent.animateMarkers();
+        if (updateAnimationFlag) {
+          mInfo.setOption(FolderInfo.FLAG_MULTI_PAGE_ANIMATION,true,mLauncher);
+        }
+      }
+    }
+);
+  }
+ else {
+    mFolderName.setTranslationX(0);
+    mContent.setMarkerScale(1);
+  }
+  openFolderAnim.start();
+  if (mDragController.isDragging()) {
+    mDragController.forceTouchMove();
+  }
+  FolderPagedView pages=(FolderPagedView)mContent;
+  pages.verifyVisibleHighResIcons(pages.getNextPage());
+}

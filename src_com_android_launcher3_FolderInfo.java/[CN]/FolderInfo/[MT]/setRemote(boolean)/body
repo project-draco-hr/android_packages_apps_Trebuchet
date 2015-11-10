@@ -1,0 +1,8 @@
+{
+  if (remote) {
+    subType|=REMOTE_SUBTYPE;
+  }
+ else {
+    subType&=~REMOTE_SUBTYPE;
+  }
+}

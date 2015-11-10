@@ -23,49 +23,46 @@
       int top=child.getTop() + child.getHeight() + mPredictionBarDividerOffset;
       c.drawLine(mBackgroundPadding.left,top,parent.getWidth() - mBackgroundPadding.right,top,mPredictedAppsDividerPaint);
       hasDrawnPredictedAppsDivider=true;
+      if (!mApps.mCustomPredictedAppsEnabled)       continue;
     }
- else     if (showSectionNames && shouldDrawItemSection(holder,i,items)) {
+    if (showSectionNames && shouldDrawItemSection(holder,items)) {
       int viewTopOffset=(2 * child.getPaddingTop());
       int pos=holder.getPosition();
       AlphabeticalAppsList.AdapterItem item=items.get(pos);
       AlphabeticalAppsList.SectionInfo sectionInfo=item.sectionInfo;
       String lastSectionName=item.sectionName;
-      for (int j=item.sectionAppIndex; j < sectionInfo.numApps; j++, pos++) {
-        AlphabeticalAppsList.AdapterItem nextItem=items.get(pos);
-        String sectionName=nextItem.sectionName;
-        if (nextItem.sectionInfo != sectionInfo) {
-          break;
-        }
-        if (j > item.sectionAppIndex && sectionName.equals(lastSectionName)) {
-          continue;
-        }
-        PointF sectionBounds=getAndCacheSectionBounds(sectionName);
-        int sectionBaseline=(int)(viewTopOffset + sectionBounds.y);
-        int x=mIsRtl ? parent.getWidth() - mBackgroundPadding.left - mSectionNamesMargin : mBackgroundPadding.left;
-        x+=(int)((mSectionNamesMargin - sectionBounds.x) / 2f);
-        int y=child.getTop() + sectionBaseline;
+      PointF sectionBounds=getAndCacheSectionBounds(lastSectionName);
+      int sectionBaseline=(int)(viewTopOffset + sectionBounds.y);
+      int x=mIsRtl ? parent.getWidth() - mBackgroundPadding.left - mSectionNamesMargin : mBackgroundPadding.left;
+      x+=(int)((mSectionNamesMargin - sectionBounds.x) / 2f);
+      int y;
+      boolean fixedToRow=false;
+      if (item.viewType == PREDICTION_ICON_VIEW_TYPE) {
+        y=child.getTop() - (int)mSectionTextPaint.getTextSize() / 2;
+      }
+ else {
+        y=child.getTop() + sectionBaseline;
         int appIndexInSection=items.get(pos).sectionAppIndex;
         int nextRowPos=Math.min(items.size() - 1,pos + mAppsPerRow - (appIndexInSection % mAppsPerRow));
         AlphabeticalAppsList.AdapterItem nextRowItem=items.get(nextRowPos);
-        boolean fixedToRow=!sectionName.equals(nextRowItem.sectionName);
+        fixedToRow=!lastSectionName.equals(nextRowItem.sectionName);
         if (!fixedToRow) {
           y=Math.max(sectionBaseline,y);
         }
         if (lastSectionHeight > 0 && y <= (lastSectionTop + lastSectionHeight)) {
           y+=lastSectionTop - y + lastSectionHeight;
         }
-        if (FADE_OUT_SECTIONS) {
-          int alpha=255;
-          if (fixedToRow) {
-            alpha=Math.min(255,(int)(255 * (Math.max(0,y) / (float)sectionBaseline)));
-          }
-          mSectionTextPaint.setAlpha(alpha);
-        }
-        c.drawText(sectionName,x,y,mSectionTextPaint);
-        lastSectionTop=y;
-        lastSectionHeight=(int)(sectionBounds.y + mSectionHeaderOffset);
-        lastSectionName=sectionName;
       }
+      if (FADE_OUT_SECTIONS) {
+        int alpha=255;
+        if (fixedToRow) {
+          alpha=Math.min(255,(int)(255 * (Math.max(0,y) / (float)sectionBaseline)));
+        }
+        mSectionTextPaint.setAlpha(alpha);
+      }
+      c.drawText(lastSectionName,x,y,mSectionTextPaint);
+      lastSectionTop=y;
+      lastSectionHeight=(int)(sectionBounds.y + mSectionHeaderOffset);
       i+=(sectionInfo.numApps - item.sectionAppIndex);
     }
   }

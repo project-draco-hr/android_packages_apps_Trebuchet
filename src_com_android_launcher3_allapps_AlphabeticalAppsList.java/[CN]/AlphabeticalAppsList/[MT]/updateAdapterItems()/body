@@ -16,37 +16,59 @@
       mPredictedAppComponents.add(new ComponentKey(mApps.get(0).componentName,UserHandleCompat.myUserHandle()));
     }
   }
-  mPredictedApps.clear();
-  if (mPredictedAppComponents != null && !mPredictedAppComponents.isEmpty() && !hasFilter()) {
-    for (    ComponentKey ck : mPredictedAppComponents) {
-      AppInfo info=mComponentToAppMap.get(ck);
-      if (info != null) {
-        mPredictedApps.add(info);
-      }
+  boolean hasPredictedApps;
+  if (mNumPredictedAppsPerRow == 0) {
+    hasPredictedApps=false;
+  }
+ else   if (mCustomPredictedAppsEnabled) {
+    hasPredictedApps=!mPredictedApps.isEmpty();
+  }
  else {
-        if (LauncherAppState.isDogfoodBuild()) {
-          Log.e(TAG,"Predicted app not found: " + ck.flattenToString(mLauncher));
+    mPredictedApps.clear();
+    hasPredictedApps=mPredictedAppComponents != null && !mPredictedAppComponents.isEmpty();
+  }
+  if (hasPredictedApps && !hasFilter()) {
+    if (!mCustomPredictedAppsEnabled) {
+      for (      ComponentKey ck : mPredictedAppComponents) {
+        AppInfo info=mComponentToAppMap.get(ck);
+        if (info != null) {
+          mPredictedApps.add(info);
+        }
+ else {
+          if (LauncherAppState.isDogfoodBuild()) {
+            Log.e(TAG,"Predicted app not found: " + ck.flattenToString(mLauncher));
+          }
+        }
+        if (mPredictedApps.size() == mNumPredictedAppsPerRow) {
+          break;
         }
       }
-      if (mPredictedApps.size() == mNumPredictedAppsPerRow) {
-        break;
+    }
+ else {
+      if (mPredictedApps.size() > mNumPredictedAppsPerRow) {
+        mPredictedApps.subList(mNumAppsPerRow,mPredictedApps.size()).clear();
       }
     }
     if (!mPredictedApps.isEmpty()) {
       lastSectionInfo=new SectionInfo();
-      lastFastScrollerSectionInfo=new FastScrollSectionInfo("");
+      String text=mCustomPredictedAppsEnabled ? CUSTOM_PREDICTIONS_SCRUBBER : " ";
+      lastFastScrollerSectionInfo=new FastScrollSectionInfo(text,lastSectionInfo);
       AdapterItem sectionItem=AdapterItem.asSectionBreak(position++,lastSectionInfo);
       mSections.add(lastSectionInfo);
       mFastScrollerSections.add(lastFastScrollerSectionInfo);
       mAdapterItems.add(sectionItem);
       for (      AppInfo info : mPredictedApps) {
-        AdapterItem appItem=AdapterItem.asPredictedApp(position++,lastSectionInfo,"",lastSectionInfo.numApps++,info,appIndex++);
+        text=mCustomPredictedAppsEnabled ? CUSTOM_PREDICTIONS_HEADER : " ";
+        AdapterItem appItem=AdapterItem.asPredictedApp(position++,lastSectionInfo,text,lastSectionInfo.numApps++,info,appIndex++);
         if (lastSectionInfo.firstAppItem == null) {
           lastSectionInfo.firstAppItem=appItem;
           lastFastScrollerSectionInfo.fastScrollToItem=appItem;
         }
         mAdapterItems.add(appItem);
         mFilteredApps.add(info);
+      }
+      if (mCustomPredictedAppsEnabled) {
+        position=mLauncher.getRemoteFolderManager().onUpdateAdapterItems(mAdapterItems,lastFastScrollerSectionInfo,lastSectionInfo,position);
       }
     }
   }
@@ -59,7 +81,7 @@
     if (lastSectionInfo == null || !sectionName.equals(lastSectionName)) {
       lastSectionName=sectionName;
       lastSectionInfo=new SectionInfo();
-      lastFastScrollerSectionInfo=new FastScrollSectionInfo(sectionName);
+      lastFastScrollerSectionInfo=new FastScrollSectionInfo(sectionName,lastSectionInfo);
       mSections.add(lastSectionInfo);
       mFastScrollerSections.add(lastFastScrollerSectionInfo);
       if (!hasFilter()) {
@@ -111,7 +133,7 @@ case FAST_SCROLL_FRACTION_DISTRIBUTE_BY_ROWS_FRACTION:
       float rowFraction=1f / mNumAppRowsInAdapter;
     for (    FastScrollSectionInfo info : mFastScrollerSections) {
       AdapterItem item=info.fastScrollToItem;
-      if (item.viewType != AllAppsGridAdapter.ICON_VIEW_TYPE && item.viewType != AllAppsGridAdapter.PREDICTION_ICON_VIEW_TYPE) {
+      if (item.viewType != AllAppsGridAdapter.ICON_VIEW_TYPE && item.viewType != AllAppsGridAdapter.PREDICTION_ICON_VIEW_TYPE && item.viewType != AllAppsGridAdapter.CUSTOM_PREDICTED_APPS_HEADER_VIEW_TYPE) {
         info.touchFraction=0f;
         continue;
       }
@@ -124,7 +146,7 @@ float perSectionTouchFraction=1f / mFastScrollerSections.size();
 float cumulativeTouchFraction=0f;
 for (FastScrollSectionInfo info : mFastScrollerSections) {
 AdapterItem item=info.fastScrollToItem;
-if (item.viewType != AllAppsGridAdapter.ICON_VIEW_TYPE && item.viewType != AllAppsGridAdapter.PREDICTION_ICON_VIEW_TYPE) {
+if (item.viewType != AllAppsGridAdapter.ICON_VIEW_TYPE && item.viewType != AllAppsGridAdapter.PREDICTION_ICON_VIEW_TYPE && item.viewType != AllAppsGridAdapter.CUSTOM_PREDICTED_APPS_HEADER_VIEW_TYPE) {
 info.touchFraction=0f;
 continue;
 }

@@ -20,5 +20,6 @@
   mWorkspace.removeExtraEmptyScreen(false,false);
   if (addedApps != null && mAppsView != null) {
     mAppsView.addApps(addedApps);
+    sRemoteFolderManager.onBindAddApps(addedApps);
   }
 }

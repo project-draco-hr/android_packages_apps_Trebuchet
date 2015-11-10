@@ -8,4 +8,5 @@
   mAppsView.addApps(addedApps);
   tryAndUpdatePredictedApps();
   mAppsView.reset();
+  sRemoteFolderManager.onReloadAppDrawer();
 }

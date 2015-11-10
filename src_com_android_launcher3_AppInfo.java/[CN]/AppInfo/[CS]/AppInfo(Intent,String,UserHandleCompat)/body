@@ -1,0 +1,7 @@
+{
+  this.componentName=intent.getComponent();
+  this.container=ItemInfo.NO_ID;
+  this.intent=intent;
+  this.title=title;
+  this.user=user;
+}

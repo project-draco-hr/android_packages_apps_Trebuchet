@@ -14,7 +14,7 @@
       AlphabeticalAppsList.AdapterItem item=items.get(position);
       if (item.viewType == AllAppsGridAdapter.ICON_VIEW_TYPE || item.viewType == AllAppsGridAdapter.PREDICTION_ICON_VIEW_TYPE) {
         stateOut.rowIndex=item.rowIndex;
-        stateOut.rowTopOffset=getLayoutManager().getDecoratedTop(child);
+        stateOut.rowTopOffset=getLayoutManager().getDecoratedTop(child) - getAdditionalScrollHeight(stateOut.rowIndex);
         stateOut.rowHeight=child.getHeight();
         break;
       }

@@ -6,4 +6,5 @@
     tryAndUpdatePredictedApps();
   }
   showAppsOrWidgets(State.APPS,animated,focusSearchBar);
+  sRemoteFolderManager.onAppDrawerOpened();
 }

@@ -1,4 +1,7 @@
 {
+  if (getTag() instanceof ItemInfo && ((ItemInfo)getTag()).customDrawable != null) {
+    return;
+  }
   if (mIconLoadRequest != null) {
     mIconLoadRequest.cancel();
     mIconLoadRequest=null;

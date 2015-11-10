@@ -1,0 +1,11 @@
+{
+  mItemsInvalidated=true;
+  if (items == null) {
+    mContent.removeAllItems();
+  }
+ else {
+    for (    ShortcutInfo item : items) {
+      mContent.removeItem(getViewForInfo(item));
+    }
+  }
+}

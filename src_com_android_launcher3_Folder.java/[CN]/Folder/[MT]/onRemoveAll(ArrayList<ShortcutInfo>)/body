@@ -1,0 +1,13 @@
+{
+  removeViewsForItems(items);
+  if (mState == STATE_ANIMATING) {
+    mRearrangeOnClose=true;
+  }
+ else {
+    rearrangeChildren();
+  }
+  if (mInfo.contents.isEmpty()) {
+    mLauncher.closeFolder(this);
+  }
+  replaceFolderWithFinalItem();
+}

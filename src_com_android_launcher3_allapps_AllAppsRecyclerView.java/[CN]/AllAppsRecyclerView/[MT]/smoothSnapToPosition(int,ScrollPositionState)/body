@@ -1,6 +1,6 @@
 {
   removeCallbacks(mSmoothSnapNextFrameRunnable);
-  int curScrollY=getPaddingTop() + (scrollPosState.rowIndex * scrollPosState.rowHeight) - scrollPosState.rowTopOffset;
+  int curScrollY=getCurrentScroll(scrollPosState);
   int newScrollY=getScrollAtPosition(position,scrollPosState.rowHeight);
   int numFrames=mFastScrollFrames.length;
   for (int i=0; i < numFrames; i++) {

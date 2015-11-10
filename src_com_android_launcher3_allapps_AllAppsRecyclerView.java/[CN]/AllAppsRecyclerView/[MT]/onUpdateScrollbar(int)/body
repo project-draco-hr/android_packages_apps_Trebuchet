@@ -19,7 +19,7 @@
     mScrollbar.setThumbOffset(-1,-1);
     return;
   }
-  int scrollY=getPaddingTop() + (mScrollPosState.rowIndex * mScrollPosState.rowHeight) - mScrollPosState.rowTopOffset;
+  int scrollY=getCurrentScroll(mScrollPosState);
   int scrollBarY=mBackgroundPadding.top + (int)(((float)scrollY / availableScrollHeight) * availableScrollBarHeight);
   if (mScrollbar.isThumbDetached()) {
     int scrollBarX;

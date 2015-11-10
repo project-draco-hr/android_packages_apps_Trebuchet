@@ -1,5 +1,12 @@
 {
-  setIcon(mLauncher.createIconDrawable(info.iconBitmap),mIconSize);
+  Drawable iconDrawable;
+  if (info.customDrawable != null) {
+    iconDrawable=info.customDrawable;
+  }
+ else {
+    iconDrawable=mLauncher.createIconDrawable(info.iconBitmap);
+  }
+  setIcon(iconDrawable,mIconSize);
   setText(info.title);
   if (info.contentDescription != null) {
     setContentDescription(info.contentDescription);

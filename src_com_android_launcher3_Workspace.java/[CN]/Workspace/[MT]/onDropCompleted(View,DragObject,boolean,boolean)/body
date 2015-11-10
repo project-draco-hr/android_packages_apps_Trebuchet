@@ -9,6 +9,9 @@
 ;
     return;
   }
+  if (mDragInfo != null) {
+    ((CellLayout.LayoutParams)mDragInfo.cell.getLayoutParams()).useTmpCoords=false;
+  }
   boolean beingCalledAfterUninstall=mDeferredAction != null;
   if (success && !(beingCalledAfterUninstall && !mUninstallSuccessful)) {
     if (target != this && mDragInfo != null) {

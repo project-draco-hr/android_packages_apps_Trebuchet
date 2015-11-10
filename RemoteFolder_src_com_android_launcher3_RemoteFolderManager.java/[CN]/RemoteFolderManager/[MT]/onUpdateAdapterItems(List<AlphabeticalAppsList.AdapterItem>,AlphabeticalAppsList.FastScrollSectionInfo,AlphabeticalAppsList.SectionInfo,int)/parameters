@@ -1,0 +1,4 @@
+List<AlphabeticalAppsList.AdapterItem> items
+AlphabeticalAppsList.FastScrollSectionInfo fastScrollInfo
+AlphabeticalAppsList.SectionInfo sectionInfo
+int position

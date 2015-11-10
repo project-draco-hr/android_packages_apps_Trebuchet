@@ -1,0 +1,3 @@
+{
+  return ((AllAppsGridAdapter)getAdapter()).getCustomPredictedAppsOffset(rowIndex);
+}

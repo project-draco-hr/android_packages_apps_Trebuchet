@@ -1,0 +1,5 @@
+{
+  FastScrollFocusable focusable=getFromView(v);
+  if (focusable == null)   return;
+  focusable.setFastScrollFocused(focused,animated);
+}

@@ -1,0 +1,16 @@
+{
+  if (getChildCount() == 0) {
+    super.onMeasure(widthMeasureSpec,heightMeasureSpec);
+  }
+ else {
+    View page=null;
+    for (int i=0; i < getChildCount(); i++) {
+      page=getChildAt(i);
+      page.measure(widthMeasureSpec,heightMeasureSpec);
+    }
+    int width=getPaddingLeft() + page.getMeasuredWidth() + getPaddingRight();
+    int height=getPaddingTop() + page.getMeasuredHeight() + getPaddingBottom();
+    mViewport.set(0,0,width,height);
+    setMeasuredDimension(width,height);
+  }
+}

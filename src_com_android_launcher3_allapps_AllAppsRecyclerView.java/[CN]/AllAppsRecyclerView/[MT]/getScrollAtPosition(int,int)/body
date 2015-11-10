@@ -2,6 +2,7 @@
   AlphabeticalAppsList.AdapterItem item=mApps.getAdapterItems().get(position);
   if (item.viewType == AllAppsGridAdapter.ICON_VIEW_TYPE || item.viewType == AllAppsGridAdapter.PREDICTION_ICON_VIEW_TYPE) {
     int offset=item.rowIndex > 0 ? getPaddingTop() : 0;
+    offset+=((AllAppsGridAdapter)getAdapter()).getCustomPredictedAppsOffset(item.rowIndex);
     return offset + item.rowIndex * rowHeight;
   }
  else {

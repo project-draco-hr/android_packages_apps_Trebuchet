@@ -1,8 +1,10 @@
 {
-  if (mLauncherCallbacks != null) {
-    List<ComponentKey> apps=mLauncherCallbacks.getPredictedApps();
-    if (apps != null) {
-      mAppsView.setPredictedApps(apps);
+  if (!mRemoteDrawerEnabled) {
+    if (mLauncherCallbacks != null) {
+      List<ComponentKey> apps=mLauncherCallbacks.getPredictedApps();
+      if (apps != null) {
+        mAppsView.setPredictedAppComponents(apps);
+      }
     }
   }
 }

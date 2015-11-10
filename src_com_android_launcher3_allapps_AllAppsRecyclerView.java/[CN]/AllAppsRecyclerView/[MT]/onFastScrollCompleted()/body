@@ -1,12 +1,6 @@
 {
   super.onFastScrollCompleted();
-  if (mFocusSection) {
-    clearSectionFocusedItems();
-  }
- else   if (mLastFastScrollFocusedView != null) {
-    mLastFastScrollFocusedView.setFastScrollFocused(false,true);
-    mLastFastScrollFocusedView=null;
-  }
+  clearSectionFocusedItems();
   mPrevFastScrollFocusedPosition=-1;
   mPrevFastScrollFocusedSection=null;
 }

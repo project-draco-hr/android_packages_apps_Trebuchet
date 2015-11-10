@@ -1,0 +1,7 @@
+{
+  View v=getViewForInfo(info);
+  if (v != null & v instanceof BubbleTextView) {
+    ((BubbleTextView)v).reapplyItemInfo(info);
+    mItemsInvalidated=true;
+  }
+}

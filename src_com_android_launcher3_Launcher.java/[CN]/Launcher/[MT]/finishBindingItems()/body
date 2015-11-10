@@ -32,4 +32,5 @@
     mLauncherCallbacks.finishBindingItems(false);
   }
   mWorkspace.stripEmptyScreens();
+  sRemoteFolderManager.bindFinished();
 }

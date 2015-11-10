@@ -19,7 +19,9 @@
   ShortcutInfo si=mCurrentDragInfo;
   if (mIsExternalDrag) {
     currentDragView=mContent.createAndAddViewForRank(si,mEmptyCellRank);
-    LauncherModel.addOrMoveItemInDatabase(mLauncher,si,mInfo.id,0,si.cellX,si.cellY);
+    if (shouldUpdateContentsInDatabase()) {
+      LauncherModel.addOrMoveItemInDatabase(mLauncher,si,mInfo.id,0,si.cellX,si.cellY);
+    }
     if (d.dragSource != this) {
       updateItemLocationsInDatabaseBatch();
     }

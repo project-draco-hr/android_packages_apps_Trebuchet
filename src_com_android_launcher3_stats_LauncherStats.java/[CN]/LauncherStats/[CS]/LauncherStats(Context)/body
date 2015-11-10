@@ -1,0 +1,9 @@
+{
+  if (context == null) {
+    throw new IllegalArgumentException("'context' cannot be null!");
+  }
+  sDatabaseHelper=new DatabaseHelper(context);
+  sHandlerThread=new WriteHandlerThread();
+  sHandlerThread.start();
+  sWriteHandler=new WriteHandler();
+}

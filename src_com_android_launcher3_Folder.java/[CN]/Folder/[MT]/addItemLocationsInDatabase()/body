@@ -1,4 +1,5 @@
 {
+  if (!shouldUpdateContentsInDatabase())   return;
   ArrayList<View> list=getItemsInReadingOrder();
   for (int i=0; i < list.size(); i++) {
     View v=list.get(i);
