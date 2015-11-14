@@ -1,0 +1,13 @@
+{
+  List<AlphabeticalAppsList.FastScrollSectionInfo> scrollSectionInfos=mApps.getFastScrollerSections();
+  if (scrollSectionInfos != null) {
+    for (int i=0; i < scrollSectionInfos.size(); i++) {
+      AlphabeticalAppsList.FastScrollSectionInfo info=scrollSectionInfos.get(i);
+      if (info.sectionName.equals(sectionName)) {
+        scrollToPositionAtProgress(info.touchFraction);
+        return info.sectionName;
+      }
+    }
+  }
+  return null;
+}

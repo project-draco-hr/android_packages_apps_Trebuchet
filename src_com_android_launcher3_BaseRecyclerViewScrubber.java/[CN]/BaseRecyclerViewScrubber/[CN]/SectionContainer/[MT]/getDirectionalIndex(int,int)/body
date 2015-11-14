@@ -1,0 +1,21 @@
+{
+  if (!showLetters() || size() == 0 || mSections.get(curIdx,mIsRtl).getHighlight()) {
+    return curIdx;
+  }
+  if (prevIdx < curIdx) {
+    if (mIsRtl) {
+      return mSections.get(curIdx).getPreviousIndex();
+    }
+ else {
+      return mSections.get(curIdx).getNextIndex();
+    }
+  }
+ else {
+    if (mIsRtl) {
+      return mSections.get(curIdx).getNextIndex();
+    }
+ else {
+      return mSections.get(curIdx).getPreviousIndex();
+    }
+  }
+}

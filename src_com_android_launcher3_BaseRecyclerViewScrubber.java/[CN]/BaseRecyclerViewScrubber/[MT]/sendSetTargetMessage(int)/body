@@ -1,0 +1,6 @@
+{
+  Message msg=mUiHandler.obtainMessage(MSG_SET_TARGET);
+  msg.what=MSG_SET_TARGET;
+  msg.arg1=adapterIndex;
+  mUiHandler.sendMessage(msg);
+}

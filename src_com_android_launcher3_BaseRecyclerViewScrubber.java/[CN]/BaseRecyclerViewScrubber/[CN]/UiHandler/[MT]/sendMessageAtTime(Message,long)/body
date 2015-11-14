@@ -1,0 +1,9 @@
+{
+  if (msg == null) {
+    throw new IllegalArgumentException("'msg' cannot be null!");
+  }
+  if (hasMessages(msg.what)) {
+    removeMessages(msg.what);
+  }
+  return super.sendMessageAtTime(msg,uptimeMillis);
+}

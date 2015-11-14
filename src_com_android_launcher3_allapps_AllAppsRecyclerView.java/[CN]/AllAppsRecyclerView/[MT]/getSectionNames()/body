@@ -1,0 +1,12 @@
+{
+  List<AlphabeticalAppsList.FastScrollSectionInfo> scrollSectionInfos=mApps.getFastScrollerSections();
+  if (scrollSectionInfos != null) {
+    String[] sectionNames=new String[scrollSectionInfos.size()];
+    for (int i=0; i < scrollSectionInfos.size(); i++) {
+      AlphabeticalAppsList.FastScrollSectionInfo info=scrollSectionInfos.get(i);
+      sectionNames[i]=info.sectionName;
+    }
+    return sectionNames;
+  }
+  return new String[0];
+}

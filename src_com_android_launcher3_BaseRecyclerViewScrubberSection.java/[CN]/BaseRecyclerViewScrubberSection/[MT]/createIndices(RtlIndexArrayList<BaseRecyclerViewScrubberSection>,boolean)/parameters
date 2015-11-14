@@ -1,0 +1,2 @@
+RtlIndexArrayList<BaseRecyclerViewScrubberSection> sections
+boolean isRtl

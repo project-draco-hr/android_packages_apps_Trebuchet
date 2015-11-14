@@ -1,0 +1,3 @@
+{
+  ((AllAppsGridAdapter)getAdapter()).setIconsDimmed(dragging);
+}

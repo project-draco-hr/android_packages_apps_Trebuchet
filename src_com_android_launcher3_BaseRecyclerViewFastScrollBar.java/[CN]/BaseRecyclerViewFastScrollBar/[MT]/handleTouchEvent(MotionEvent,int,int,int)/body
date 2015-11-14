@@ -13,6 +13,7 @@ mIgnoreDragGesture|=Math.abs(y - downY) > config.getScaledPagingTouchSlop();
 if (!mIsDragging && !mIgnoreDragGesture && isNearThumb(downX,lastY)&& Math.abs(y - downY) > config.getScaledTouchSlop()) {
 mRv.getParent().requestDisallowInterceptTouchEvent(true);
 mIsDragging=true;
+mRv.setFastScrollDragging(mIsDragging);
 if (mCanThumbDetach) {
   mIsThumbDetached=true;
 }
@@ -38,6 +39,7 @@ mLastTouchY=0;
 mIgnoreDragGesture=false;
 if (mIsDragging) {
 mIsDragging=false;
+mRv.setFastScrollDragging(mIsDragging);
 mPopup.animateVisibility(false);
 animateScrollbar(false);
 }

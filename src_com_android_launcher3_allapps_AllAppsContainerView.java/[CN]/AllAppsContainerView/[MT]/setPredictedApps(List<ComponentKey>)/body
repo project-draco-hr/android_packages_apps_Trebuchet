@@ -1,3 +1,4 @@
 {
   mApps.setPredictedApps(apps);
+  updateScrubber();
 }

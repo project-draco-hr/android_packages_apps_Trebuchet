@@ -1,7 +1,6 @@
 {
   super(context,attrs,defStyleAttr);
   mDeltaThreshold=getResources().getDisplayMetrics().density * SCROLL_DELTA_THRESHOLD_DP;
-  mScrollbar=new BaseRecyclerViewFastScrollBar(this,getResources());
   ScrollListener listener=new ScrollListener();
   setOnScrollListener(listener);
 }

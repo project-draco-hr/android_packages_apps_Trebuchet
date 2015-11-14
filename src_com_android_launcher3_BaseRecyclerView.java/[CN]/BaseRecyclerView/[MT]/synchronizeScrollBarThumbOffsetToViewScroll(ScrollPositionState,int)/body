@@ -1,4 +1,7 @@
 {
+  if (!mUseScrollbar) {
+    return;
+  }
   int availableScrollBarHeight=getAvailableScrollBarHeight();
   int availableScrollHeight=getAvailableScrollHeight(rowCount,scrollPosState.rowHeight);
   if (availableScrollHeight <= 0) {

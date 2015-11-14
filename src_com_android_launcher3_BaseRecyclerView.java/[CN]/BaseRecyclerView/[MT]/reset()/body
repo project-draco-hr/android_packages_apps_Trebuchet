@@ -1,3 +1,5 @@
 {
-  mScrollbar.reattachThumbToScroll();
+  if (mUseScrollbar) {
+    mScrollbar.reattachThumbToScroll();
+  }
 }

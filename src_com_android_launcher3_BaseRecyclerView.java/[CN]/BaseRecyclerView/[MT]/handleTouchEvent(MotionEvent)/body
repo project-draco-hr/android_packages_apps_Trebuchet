@@ -9,17 +9,26 @@ case MotionEvent.ACTION_DOWN:
 if (shouldStopScroll(ev)) {
   stopScroll();
 }
+if (mScrollbar != null) {
 mScrollbar.handleTouchEvent(ev,mDownX,mDownY,mLastY);
+}
 break;
 case MotionEvent.ACTION_MOVE:
 mLastY=y;
+if (mScrollbar != null) {
 mScrollbar.handleTouchEvent(ev,mDownX,mDownY,mLastY);
+}
 break;
 case MotionEvent.ACTION_UP:
 case MotionEvent.ACTION_CANCEL:
 onFastScrollCompleted();
+if (mScrollbar != null) {
 mScrollbar.handleTouchEvent(ev,mDownX,mDownY,mLastY);
+}
 break;
 }
+if (mUseScrollbar) {
 return mScrollbar.isDraggingThumb();
+}
+return false;
 }

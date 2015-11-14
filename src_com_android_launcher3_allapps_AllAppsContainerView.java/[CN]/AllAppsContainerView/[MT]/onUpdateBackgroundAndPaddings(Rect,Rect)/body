@@ -1,6 +1,7 @@
 {
   boolean isRtl=Utilities.isRtl(getResources());
-  InsetDrawable background=new InsetDrawable(getResources().getDrawable(R.drawable.quantum_panel_shape),padding.left,0,padding.right,0);
+  int bgRes=mGridTheme == GRID_THEME_DARK ? R.drawable.quantum_panel_shape_dark : R.drawable.quantum_panel_shape;
+  InsetDrawable background=new InsetDrawable(getResources().getDrawable(bgRes),padding.left,0,padding.right,0);
   Rect bgPadding=new Rect();
   background.getPadding(bgPadding);
   mContainerView.setBackground(background);
@@ -11,11 +12,18 @@
   mContainerView.setPadding(0,0,0,0);
   int startInset=Math.max(mSectionNamesMargin,mAppsRecyclerView.getMaxScrollbarWidth());
   int topBottomPadding=mRecyclerViewTopBottomPadding;
+  final boolean useScubber=userScrubber();
   if (isRtl) {
-    mAppsRecyclerView.setPadding(padding.left + mAppsRecyclerView.getMaxScrollbarWidth(),topBottomPadding,padding.right + startInset,topBottomPadding);
+    mAppsRecyclerView.setPadding(padding.left + mAppsRecyclerView.getMaxScrollbarWidth(),topBottomPadding,padding.right + startInset,useScubber ? mScrubberHeight + topBottomPadding : topBottomPadding);
+    if (useScubber) {
+      mScrubberContainerView.setPadding(padding.left + mAppsRecyclerView.getMaxScrollbarWidth(),0,padding.right,0);
+    }
   }
  else {
-    mAppsRecyclerView.setPadding(padding.left + startInset,topBottomPadding,padding.right + mAppsRecyclerView.getMaxScrollbarWidth(),topBottomPadding);
+    mAppsRecyclerView.setPadding(padding.left + startInset,topBottomPadding,padding.right + mAppsRecyclerView.getMaxScrollbarWidth(),useScubber ? mScrubberHeight + topBottomPadding : topBottomPadding);
+    if (useScubber) {
+      mScrubberContainerView.setPadding(padding.left,0,padding.right + mAppsRecyclerView.getMaxScrollbarWidth(),0);
+    }
   }
   if (mSearchBarView != null) {
     Rect backgroundPadding=new Rect();

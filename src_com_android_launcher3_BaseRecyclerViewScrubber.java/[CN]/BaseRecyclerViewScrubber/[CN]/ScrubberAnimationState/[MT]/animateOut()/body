@@ -1,0 +1,11 @@
+{
+  if (mScrubberIndicator == null) {
+    return;
+  }
+  mScrubberIndicator.animate().alpha(SCRUBBER_ALPHA_START).scaleX(SCRUBBER_SCALE_START).scaleY(SCRUBBER_SCALE_START).setStartDelay(SCRUBBER_DISPLAY_DELAY_OUT).setDuration(SCRUBBER_DISPLAY_DURATION_OUT).setListener(new AnimatorListenerAdapter(){
+    @Override public void onAnimationEnd(    Animator animation){
+      mScrubberIndicator.setVisibility(View.INVISIBLE);
+    }
+  }
+);
+}

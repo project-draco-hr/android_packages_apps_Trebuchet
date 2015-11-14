@@ -28,8 +28,18 @@
     layoutManager.scrollToPositionWithOffset(0,(int)-(availableScrollHeight * touchFraction));
   }
   if (mPrevFastScrollFocusedPosition != lastInfo.fastScrollToItem.position) {
+    if (mFocusSection) {
+      setSectionFastScrollDimmed(mPrevFastScrollFocusedPosition,true,true);
+    }
+ else     if (mLastFastScrollFocusedView != null) {
+      mLastFastScrollFocusedView.setFastScrollDimmed(true,true);
+    }
     mPrevFastScrollFocusedPosition=lastInfo.fastScrollToItem.position;
-    if (mLastFastScrollFocusedView != null) {
+    mPrevFastScrollFocusedSection=getSectionInfoForPosition(lastInfo.fastScrollToItem.position);
+    if (mFocusSection) {
+      clearSectionFocusedItems();
+    }
+ else     if (mLastFastScrollFocusedView != null) {
       mLastFastScrollFocusedView.setFastScrollFocused(false,true);
       mLastFastScrollFocusedView=null;
     }
@@ -37,10 +47,15 @@
       smoothSnapToPosition(mPrevFastScrollFocusedPosition,mScrollPosState);
     }
  else     if (mFastScrollMode == FAST_SCROLL_MODE_FREE_SCROLL) {
-      final ViewHolder vh=findViewHolderForPosition(mPrevFastScrollFocusedPosition);
-      if (vh != null && vh.itemView instanceof BaseRecyclerViewFastScrollBar.FastScrollFocusableView) {
-        mLastFastScrollFocusedView=(BaseRecyclerViewFastScrollBar.FastScrollFocusableView)vh.itemView;
-        mLastFastScrollFocusedView.setFastScrollFocused(true,true);
+      if (mFocusSection) {
+        setSectionFastScrollFocused(mPrevFastScrollFocusedPosition);
+      }
+ else {
+        final ViewHolder vh=findViewHolderForPosition(mPrevFastScrollFocusedPosition);
+        if (vh != null && vh.itemView instanceof BaseRecyclerViewFastScrollBar.FastScrollFocusableView) {
+          mLastFastScrollFocusedView=(BaseRecyclerViewFastScrollBar.FastScrollFocusableView)vh.itemView;
+          mLastFastScrollFocusedView.setFastScrollFocused(true,true);
+        }
       }
     }
  else {

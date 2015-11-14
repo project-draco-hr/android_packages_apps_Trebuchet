@@ -1,0 +1,5 @@
+{
+  super.onRtlPropertiesChanged(layoutDirection);
+  mIsRtl=Utilities.isRtl(getResources());
+  updateSections();
+}

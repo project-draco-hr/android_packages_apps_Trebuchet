@@ -1,0 +1,16 @@
+{
+  if (mScrubberIndicator != null) {
+    int directionalIndex=mSectionContainer.getDirectionalIndex(lastIndex,index);
+    String sectionText=mSectionContainer.getSectionName(directionalIndex,mIsRtl);
+    float translateX=(index * width) / (float)mSectionContainer.size();
+    if (mSectionContainer.showLetters()) {
+      translateX=mScrubberText.getPositionOfSection(index);
+    }
+    translateX-=mScrubberIndicator.getMeasuredWidth() / 2;
+    if (mIsRtl) {
+      translateX=-translateX;
+    }
+    mScrubberIndicator.setTranslationX(translateX);
+    mScrubberIndicator.setText(sectionText);
+  }
+}

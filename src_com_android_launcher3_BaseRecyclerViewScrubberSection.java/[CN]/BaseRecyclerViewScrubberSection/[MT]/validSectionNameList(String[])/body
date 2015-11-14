@@ -1,0 +1,45 @@
+{
+  int numCustomSections=0;
+  int previousAlphaIndex=-1;
+  boolean foundAlphaSections=false;
+  for (  String s : sectionNames) {
+    if (TextUtils.isEmpty(s)) {
+      numCustomSections++;
+      continue;
+    }
+    if (s.length() > 1) {
+      Log.w(TAG,"Found section " + s + " with length: "+ s.length());
+      return false;
+    }
+    int alphaIndex=ALPHA_LETTERS.indexOf(s);
+    if (alphaIndex >= 0) {
+      if (previousAlphaIndex != -1) {
+        if (previousAlphaIndex >= alphaIndex) {
+          Log.w(TAG,"Found letter index " + previousAlphaIndex + " which is greater than "+ alphaIndex);
+          return false;
+        }
+      }
+      if (foundAlphaSections && previousAlphaIndex == -1) {
+        Log.w(TAG,"Found alpha letters twice");
+        return false;
+      }
+      previousAlphaIndex=alphaIndex;
+      foundAlphaSections=true;
+    }
+ else {
+      numCustomSections++;
+      previousAlphaIndex=-1;
+    }
+  }
+  final int listSize=foundAlphaSections ? numCustomSections + ALPHA_LETTERS.length() : numCustomSections;
+  if (numCustomSections <= MAX_NUMBER_CUSTOM_SECTIONS || listSize <= MAX_SECTIONS) {
+    return true;
+  }
+  if (numCustomSections > MAX_NUMBER_CUSTOM_SECTIONS) {
+    Log.w(TAG,"Found " + numCustomSections + "# custom sections when "+ MAX_NUMBER_CUSTOM_SECTIONS+ " is allowed!");
+  }
+ else   if (listSize > MAX_SECTIONS) {
+    Log.w(TAG,"Found " + listSize + " sections when "+ MAX_SECTIONS+ " is allowed!");
+  }
+  return false;
+}

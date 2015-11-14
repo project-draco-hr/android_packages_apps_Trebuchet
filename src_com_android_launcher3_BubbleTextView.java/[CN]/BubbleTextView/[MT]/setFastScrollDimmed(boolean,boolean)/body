@@ -1,0 +1,18 @@
+{
+  if (mFastScrollMode == FAST_SCROLL_FOCUS_MODE_NONE) {
+    return;
+  }
+  if (!animated) {
+    mFastScrollDimmed=dimmed;
+    setAlpha(dimmed ? 0.4f : 1f);
+  }
+ else   if (mFastScrollDimmed != dimmed) {
+    mFastScrollDimmed=dimmed;
+    if (mFastScrollDimAnimator != null) {
+      mFastScrollDimAnimator.cancel();
+    }
+    mFastScrollDimAnimator=ObjectAnimator.ofFloat(this,View.ALPHA,dimmed ? 0.4f : 1f);
+    mFastScrollDimAnimator.setDuration(dimmed ? FAST_SCROLL_FOCUS_FADE_IN_DURATION : FAST_SCROLL_FOCUS_FADE_OUT_DURATION);
+    mFastScrollDimAnimator.start();
+  }
+}

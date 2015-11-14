@@ -1,0 +1,12 @@
+{
+  mTouchingTrack=touching;
+  if (mScrubberIndicator != null) {
+    if (mTouchingTrack) {
+      animateIn();
+    }
+ else     if (!mAnimatingIn) {
+      animateOut();
+    }
+    mBaseRecyclerView.setFastScrollDragging(mTouchingTrack);
+  }
+}

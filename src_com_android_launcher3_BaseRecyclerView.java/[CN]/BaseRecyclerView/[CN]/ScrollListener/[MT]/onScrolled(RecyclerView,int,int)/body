@@ -1,4 +1,6 @@
 {
   mDy=dy;
-  onUpdateScrollbar(dy);
+  if (mUseScrollbar) {
+    onUpdateScrollbar(dy);
+  }
 }

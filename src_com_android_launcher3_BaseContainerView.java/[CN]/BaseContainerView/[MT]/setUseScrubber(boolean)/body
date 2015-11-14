@@ -1,0 +1,24 @@
+{
+  mUseScrubber=use;
+  if (use) {
+    ViewStub stub=(ViewStub)findViewById(R.id.scrubber_container_stub);
+    mScrubberContainerView=stub.inflate();
+    if (mScrubberContainerView == null) {
+      throw new IllegalStateException("Layout must contain an id: R.id.scrubber_container");
+    }
+    mScrubber=(BaseRecyclerViewScrubber)mScrubberContainerView.findViewById(R.id.base_scrubber);
+    BaseRecyclerView recyclerView=getRecyclerView();
+    if (recyclerView != null) {
+      mScrubber.setRecycler(recyclerView);
+      mScrubber.setScrubberIndicator((TextView)mScrubberContainerView.findViewById(R.id.scrubberIndicator));
+      mScrubber.updateSections();
+    }
+  }
+ else {
+    removeView(mScrubberContainerView);
+    BaseRecyclerView recyclerView=getRecyclerView();
+    if (recyclerView != null) {
+      recyclerView.setUseScrollbar(true);
+    }
+  }
+}

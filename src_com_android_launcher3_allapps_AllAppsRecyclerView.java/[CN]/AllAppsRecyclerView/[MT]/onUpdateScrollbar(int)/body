@@ -1,4 +1,7 @@
 {
+  if (!mUseScrollbar) {
+    return;
+  }
   List<AlphabeticalAppsList.AdapterItem> items=mApps.getAdapterItems();
   if (items.isEmpty() || mNumAppsPerRow == 0) {
     mScrollbar.setThumbOffset(-1,-1);

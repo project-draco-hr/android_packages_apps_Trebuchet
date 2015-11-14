@@ -1,0 +1,6 @@
+{
+  if (!showLetters() || size() == 0) {
+    return curIdx;
+  }
+  return mSections.get(getDirectionalIndex(prevIdx,curIdx),mIsRtl).getAdapterIndex();
+}

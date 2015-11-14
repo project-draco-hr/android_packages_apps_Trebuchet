@@ -1,0 +1,17 @@
+{
+  mPositions=null;
+  if (sections == null || sections.size() == 0) {
+    setText("");
+    return;
+  }
+  Resources r=getContext().getResources();
+  int highlightColor=r.getColor(R.color.app_scrubber_highlight_color);
+  int grayColor=r.getColor(R.color.app_scrubber_gray_color);
+  SpannableStringBuilder builder=new SpannableStringBuilder();
+  for (  HighlightedText highlightText : sections) {
+    SpannableString spannable=new SpannableString(highlightText.mText.substring(0,1));
+    spannable.setSpan(new ForegroundColorSpan(highlightText.mHighlight ? highlightColor : grayColor),0,spannable.length(),0);
+    builder.append(spannable);
+  }
+  setText(builder);
+}

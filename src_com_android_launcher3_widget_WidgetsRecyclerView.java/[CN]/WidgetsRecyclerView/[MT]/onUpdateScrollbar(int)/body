@@ -4,12 +4,16 @@
   }
   int rowCount=mWidgets.getPackageSize();
   if (rowCount == 0) {
-    mScrollbar.setThumbOffset(-1,-1);
+    if (mUseScrollbar) {
+      mScrollbar.setThumbOffset(-1,-1);
+    }
     return;
   }
   getCurScrollState(mScrollPosState);
   if (mScrollPosState.rowIndex < 0) {
-    mScrollbar.setThumbOffset(-1,-1);
+    if (mUseScrollbar) {
+      mScrollbar.setThumbOffset(-1,-1);
+    }
     return;
   }
   synchronizeScrollBarThumbOffsetToViewScroll(mScrollPosState,rowCount);

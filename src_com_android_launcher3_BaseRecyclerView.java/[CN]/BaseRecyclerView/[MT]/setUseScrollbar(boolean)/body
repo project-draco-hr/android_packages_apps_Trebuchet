@@ -1,0 +1,10 @@
+{
+  mUseScrollbar=useScrollbar;
+  if (useScrollbar) {
+    mScrollbar=new BaseRecyclerViewFastScrollBar(this,getResources());
+  }
+ else {
+    mScrollbar=null;
+  }
+  invalidate();
+}

@@ -1,6 +1,8 @@
 {
-  if (mScrollbar.isThumbDetached()) {
-    mScrollbar.reattachThumbToScroll();
+  if (mUseScrollbar) {
+    if (mScrollbar.isThumbDetached()) {
+      mScrollbar.reattachThumbToScroll();
+    }
   }
   scrollToPosition(0);
 }

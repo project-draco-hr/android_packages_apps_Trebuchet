@@ -1,0 +1,6 @@
+{
+  if (!isReady()) {
+    return;
+  }
+  progressChanged(seekBar,index,fromUser);
+}

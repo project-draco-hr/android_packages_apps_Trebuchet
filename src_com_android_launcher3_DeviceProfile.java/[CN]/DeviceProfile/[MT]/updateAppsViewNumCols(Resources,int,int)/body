@@ -1,0 +1,9 @@
+{
+  int appsViewLeftMarginPx=gridStrategy == AllAppsContainerView.SECTION_STRATEGY_GRID ? res.getDimensionPixelSize(R.dimen.all_apps_grid_view_start_margin) : res.getDimensionPixelSize(R.dimen.all_apps_grid_view_start_margin_with_sections);
+  int allAppsCellWidthGap=gridStrategy == AllAppsContainerView.SECTION_STRATEGY_GRID ? res.getDimensionPixelSize(R.dimen.all_apps_icon_width_gap) : res.getDimensionPixelSize(R.dimen.all_apps_icon_width_gap_with_sections);
+  int availableAppsWidthPx=(recyclerViewWidth > 0) ? recyclerViewWidth : availableWidthPx;
+  int numAppsCols=(availableAppsWidthPx - appsViewLeftMarginPx) / (allAppsIconSizePx + allAppsCellWidthGap);
+  int numPredictiveAppCols=Math.max(inv.minAllAppsPredictionColumns,numAppsCols);
+  allAppsNumCols=numAppsCols;
+  allAppsNumPredictiveCols=numPredictiveAppCols;
+}

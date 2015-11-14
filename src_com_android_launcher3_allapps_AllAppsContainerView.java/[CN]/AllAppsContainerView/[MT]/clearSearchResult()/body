@@ -1,6 +1,12 @@
 {
   mApps.setOrderedFilter(null);
   mAppsRecyclerView.onSearchResultsChanged();
+  if (mLastGridTheme != -1 && mLastGridTheme != GRID_THEME_LIGHT) {
+    mGridTheme=mLastGridTheme;
+    updateBackgroundAndPaddings(true);
+    mAdapter.setGridTheme(mGridTheme);
+    mLastGridTheme=-1;
+  }
   mSearchQueryBuilder.clear();
   mSearchQueryBuilder.clearSpans();
   Selection.setSelection(mSearchQueryBuilder,0);

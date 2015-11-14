@@ -1,0 +1,3 @@
+{
+  scrubberText.setSections(BaseRecyclerViewScrubberSection.getHighlightText(mSections));
+}

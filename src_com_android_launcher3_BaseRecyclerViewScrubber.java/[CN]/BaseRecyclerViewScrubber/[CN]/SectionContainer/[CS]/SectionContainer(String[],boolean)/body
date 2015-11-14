@@ -1,0 +1,14 @@
+{
+  mIsRtl=isRtl;
+  mSections=BaseRecyclerViewScrubberSection.createSections(sections,isRtl);
+  mSectionNames=sections;
+  if (isRtl) {
+    final int N=mSectionNames.length;
+    for (int i=0; i < N / 2; i++) {
+      String temp=mSectionNames[i];
+      mSectionNames[i]=mSectionNames[N - i - 1];
+      mSectionNames[N - i - 1]=temp;
+    }
+    Collections.reverse(mSections);
+  }
+}

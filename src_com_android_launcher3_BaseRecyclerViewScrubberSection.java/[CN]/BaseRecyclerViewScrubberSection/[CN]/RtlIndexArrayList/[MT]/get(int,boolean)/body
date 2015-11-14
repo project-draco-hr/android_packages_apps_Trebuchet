@@ -1,0 +1,6 @@
+{
+  if (isRtl) {
+    index=size() - 1 - index;
+  }
+  return super.get(index);
+}

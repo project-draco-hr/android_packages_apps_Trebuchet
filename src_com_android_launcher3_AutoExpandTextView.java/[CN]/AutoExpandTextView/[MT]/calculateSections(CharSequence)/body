@@ -1,0 +1,11 @@
+{
+  mPositions=new float[text.length()];
+  for (int i=0; i < text.length(); i++) {
+    if (i == 0) {
+      mPositions[0]=mPaint.measureText(text,0,1) / 2;
+    }
+ else {
+      mPositions[i]=mPaint.measureText(text,i,i + 1) + mPositions[i - 1];
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  for (int i=0; i < sections.size(); i++) {
+    if (sections.get(i,isRtl).getHighlight()) {
+      return i;
+    }
+  }
+  return INVALID_INDEX;
+}

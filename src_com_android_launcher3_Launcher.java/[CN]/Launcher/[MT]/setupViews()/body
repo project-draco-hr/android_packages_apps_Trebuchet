@@ -63,6 +63,10 @@
  else {
     mAppsView.setSearchBarController(mAppsView.newDefaultAppSearchController());
   }
+  mAppsView.setUseScrubber(mUseScrubber);
+  mAppsView.setSectionStrategy(AllAppsContainerView.SECTION_STRATEGY_RAGGED);
+  mAppsView.setGridTheme(AllAppsContainerView.GRID_THEME_DARK);
+  mWidgetsView.setUseScrubber(false);
   dragController.setDragScoller(mWorkspace);
   dragController.setScrollView(mDragLayer);
   dragController.setMoveTarget(mWorkspace);

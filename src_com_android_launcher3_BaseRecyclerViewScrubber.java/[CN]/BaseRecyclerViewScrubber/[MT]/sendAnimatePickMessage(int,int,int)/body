@@ -1,0 +1,8 @@
+{
+  Message msg=mUiHandler.obtainMessage(MSG_ANIMATE_PICK);
+  msg.what=MSG_ANIMATE_PICK;
+  msg.arg1=index;
+  msg.arg2=width;
+  msg.obj=lastIndex;
+  mUiHandler.sendMessage(msg);
+}

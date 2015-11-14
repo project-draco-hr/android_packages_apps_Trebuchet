@@ -1,0 +1,6 @@
+CharSequence text
+TextPaint paint
+float targetWidth
+float low
+float high
+float precision

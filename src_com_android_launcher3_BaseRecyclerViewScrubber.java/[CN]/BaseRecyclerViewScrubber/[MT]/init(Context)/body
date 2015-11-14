@@ -1,0 +1,9 @@
+{
+  mIsRtl=Utilities.isRtl(context.getResources());
+  LayoutInflater.from(context).inflate(R.layout.scrub_layout,this);
+  mTransparentDrawable=new ColorDrawable(Color.TRANSPARENT);
+  mScrubberAnimationState=new ScrubberAnimationState();
+  mSeekBar=(SeekBar)findViewById(R.id.scrubber);
+  mScrubberText=(AutoExpandTextView)findViewById(R.id.scrubberText);
+  mSeekBar.setOnSeekBarChangeListener(mScrubberAnimationState);
+}

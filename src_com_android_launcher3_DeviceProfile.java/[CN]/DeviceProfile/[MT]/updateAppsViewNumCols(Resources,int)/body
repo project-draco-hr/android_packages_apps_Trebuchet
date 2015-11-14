@@ -1,9 +1,0 @@
-{
-  int appsViewLeftMarginPx=res.getDimensionPixelSize(R.dimen.all_apps_grid_view_start_margin);
-  int allAppsCellWidthGap=res.getDimensionPixelSize(R.dimen.all_apps_icon_width_gap);
-  int availableAppsWidthPx=(recyclerViewWidth > 0) ? recyclerViewWidth : availableWidthPx;
-  int numAppsCols=(availableAppsWidthPx - appsViewLeftMarginPx) / (allAppsIconSizePx + allAppsCellWidthGap);
-  int numPredictiveAppCols=Math.max(inv.minAllAppsPredictionColumns,numAppsCols);
-  allAppsNumCols=numAppsCols;
-  allAppsNumPredictiveCols=numPredictiveAppCols;
-}

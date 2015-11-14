@@ -1,0 +1,6 @@
+{
+  if (size() == 0) {
+    return null;
+  }
+  return showLetters() ? mSections.get(idx,isRtl).getText() : mSectionNames[idx];
+}

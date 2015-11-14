@@ -1,0 +1,5 @@
+{
+  mHighlightedText=new AutoExpandTextView.HighlightedText(text,highlight);
+  mAdapterIndex=idx;
+  mPreviousValidIndex=mNextValidIndex=idx;
+}

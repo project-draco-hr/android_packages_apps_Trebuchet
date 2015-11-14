@@ -1,0 +1,8 @@
+{
+  final int N=mLastFastScrollFocusedViews.size();
+  for (int i=0; i < N; i++) {
+    BaseRecyclerViewFastScrollBar.FastScrollFocusableView view=mLastFastScrollFocusedViews.get(i);
+    view.setFastScrollFocused(false,true);
+  }
+  mLastFastScrollFocusedViews.clear();
+}

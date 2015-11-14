@@ -1,5 +1,8 @@
 {
-  int visibleHeight=getHeight() - mBackgroundPadding.top - mBackgroundPadding.bottom;
-  int availableScrollBarHeight=visibleHeight - mScrollbar.getThumbHeight();
-  return availableScrollBarHeight;
+  if (mUseScrollbar) {
+    int visibleHeight=getHeight() - mBackgroundPadding.top - mBackgroundPadding.bottom;
+    int availableScrollBarHeight=visibleHeight - mScrollbar.getThumbHeight();
+    return availableScrollBarHeight;
+  }
+  return 0;
 }

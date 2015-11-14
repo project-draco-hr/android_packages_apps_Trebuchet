@@ -2,9 +2,9 @@
   super(context,attrs,defStyleAttr);
   Resources res=context.getResources();
   mLauncher=(Launcher)context;
-  mSectionNamesMargin=res.getDimensionPixelSize(R.dimen.all_apps_grid_view_start_margin);
+  mSectionNamesMargin=mSectionStrategy == SECTION_STRATEGY_GRID ? res.getDimensionPixelSize(R.dimen.all_apps_grid_view_start_margin) : res.getDimensionPixelSize(R.dimen.all_apps_grid_view_start_margin_with_sections);
   mApps=new AlphabeticalAppsList(context);
-  mAdapter=new AllAppsGridAdapter(mLauncher,mApps,this,mLauncher,this);
+  mAdapter=new AllAppsGridAdapter(mLauncher,mApps,this,mLauncher,this,mSectionStrategy,mGridTheme);
   mApps.setAdapter(mAdapter);
   mLayoutManager=mAdapter.getLayoutManager();
   mItemDecoration=mAdapter.getItemDecoration();

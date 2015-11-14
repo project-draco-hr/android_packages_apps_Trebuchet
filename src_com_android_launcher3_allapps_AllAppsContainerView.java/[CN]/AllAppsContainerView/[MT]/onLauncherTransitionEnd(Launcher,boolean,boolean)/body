@@ -1,6 +1,8 @@
 {
   if (toWorkspace) {
-    mSearchBarController.reset();
+    if (hasSearchBar()) {
+      mSearchBarController.reset();
+    }
     mAppsRecyclerView.reset();
   }
 }

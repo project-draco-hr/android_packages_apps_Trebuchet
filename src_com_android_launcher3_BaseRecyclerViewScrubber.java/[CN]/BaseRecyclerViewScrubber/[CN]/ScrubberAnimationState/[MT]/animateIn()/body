@@ -1,0 +1,22 @@
+{
+  if (mScrubberIndicator == null) {
+    return;
+  }
+  mScrubberIndicator.animate().cancel();
+  mScrubberIndicator.setPivotX(mScrubberIndicator.getMeasuredWidth() / 2);
+  mScrubberIndicator.setPivotY(mScrubberIndicator.getMeasuredHeight() * 0.9f);
+  mScrubberIndicator.setAlpha(SCRUBBER_ALPHA_START);
+  mScrubberIndicator.setScaleX(SCRUBBER_SCALE_START);
+  mScrubberIndicator.setScaleY(SCRUBBER_SCALE_START);
+  mScrubberIndicator.setVisibility(View.VISIBLE);
+  mAnimatingIn=true;
+  mScrubberIndicator.animate().alpha(SCRUBBER_ALPHA_END).scaleX(SCRUBBER_SCALE_END).scaleY(SCRUBBER_SCALE_END).setStartDelay(SCRUBBER_DISPLAY_DELAY_IN).setDuration(SCRUBBER_DISPLAY_DURATION_IN).setListener(new AnimatorListenerAdapter(){
+    @Override public void onAnimationEnd(    Animator animation){
+      mAnimatingIn=false;
+      if (!mTouchingTrack) {
+        animateOut();
+      }
+    }
+  }
+).start();
+}

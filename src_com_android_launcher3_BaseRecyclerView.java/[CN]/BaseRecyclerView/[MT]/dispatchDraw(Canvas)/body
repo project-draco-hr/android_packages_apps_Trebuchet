@@ -1,5 +1,7 @@
 {
   super.dispatchDraw(canvas);
-  onUpdateScrollbar(0);
-  mScrollbar.draw(canvas);
+  if (mUseScrollbar) {
+    onUpdateScrollbar(0);
+    mScrollbar.draw(canvas);
+  }
 }

@@ -1,11 +1,11 @@
 {
   int availableWidth=!mContentBounds.isEmpty() ? mContentBounds.width() : MeasureSpec.getSize(widthMeasureSpec);
   DeviceProfile grid=mLauncher.getDeviceProfile();
-  grid.updateAppsViewNumCols(getResources(),availableWidth);
+  grid.updateAppsViewNumCols(getResources(),availableWidth,mSectionStrategy);
   if (mNumAppsPerRow != grid.allAppsNumCols || mNumPredictedAppsPerRow != grid.allAppsNumPredictiveCols) {
     mNumAppsPerRow=grid.allAppsNumCols;
     mNumPredictedAppsPerRow=grid.allAppsNumPredictiveCols;
-    boolean mergeSectionsFully=mSectionNamesMargin == 0 || !grid.isPhone;
+    boolean mergeSectionsFully=mSectionStrategy == SECTION_STRATEGY_GRID;
     AlphabeticalAppsList.MergeAlgorithm mergeAlgorithm=mergeSectionsFully ? new FullMergeAlgorithm() : new SimpleSectionMergeAlgorithm((int)Math.ceil(mNumAppsPerRow / 2f),MIN_ROWS_IN_MERGED_SECTION_PHONE,MAX_NUM_MERGES_PHONE);
     mAppsRecyclerView.setNumAppsPerRow(grid,mNumAppsPerRow);
     mAdapter.setNumAppsPerRow(mNumAppsPerRow);

@@ -1,4 +1,5 @@
 {
   super(context,attrs,defStyleAttr);
   mContainerBoundsInset=getResources().getDimensionPixelSize(R.dimen.container_bounds_inset);
+  mScrubberHeight=getResources().getDimensionPixelSize(R.dimen.scrubber_height);
 }

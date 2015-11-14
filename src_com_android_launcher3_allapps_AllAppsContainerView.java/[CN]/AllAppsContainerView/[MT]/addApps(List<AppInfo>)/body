@@ -1,3 +1,4 @@
 {
   mApps.addApps(apps);
+  updateScrubber();
 }

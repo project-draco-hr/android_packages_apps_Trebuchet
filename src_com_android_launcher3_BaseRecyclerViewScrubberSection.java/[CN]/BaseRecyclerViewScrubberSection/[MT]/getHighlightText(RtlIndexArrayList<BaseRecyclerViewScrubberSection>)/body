@@ -1,0 +1,10 @@
+{
+  if (sections == null) {
+    return null;
+  }
+  ArrayList<AutoExpandTextView.HighlightedText> highlights=new ArrayList<>(sections.size());
+  for (  BaseRecyclerViewScrubberSection section : sections) {
+    highlights.add(section.mHighlightedText);
+  }
+  return highlights;
+}

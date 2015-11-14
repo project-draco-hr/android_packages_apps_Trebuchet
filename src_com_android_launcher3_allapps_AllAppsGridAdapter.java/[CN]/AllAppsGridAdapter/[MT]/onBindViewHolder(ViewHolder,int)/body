@@ -4,13 +4,18 @@ case ICON_VIEW_TYPE:
 {
       AppInfo info=mApps.getAdapterItems().get(position).appInfo;
       BubbleTextView icon=(BubbleTextView)holder.mContent;
+      icon.setIconSize(mIconSize);
+      icon.setTextColor(mAllAppsTextColor);
       icon.applyFromApplicationInfo(info);
+      icon.setFastScrollDimmed(mIconsDimmed,!mIconsDimmed);
       break;
     }
 case PREDICTION_ICON_VIEW_TYPE:
 {
     AppInfo info=mApps.getAdapterItems().get(position).appInfo;
     BubbleTextView icon=(BubbleTextView)holder.mContent;
+    icon.setIconSize(mIconSize);
+    icon.setTextColor(mAllAppsTextColor);
     icon.applyFromApplicationInfo(info);
     break;
   }

@@ -1,0 +1,7 @@
+Launcher launcher
+AlphabeticalAppsList apps
+View.OnTouchListener touchListener
+View.OnClickListener iconClickListener
+View.OnLongClickListener iconLongClickListener
+int sectionStrategy
+int gridTheme

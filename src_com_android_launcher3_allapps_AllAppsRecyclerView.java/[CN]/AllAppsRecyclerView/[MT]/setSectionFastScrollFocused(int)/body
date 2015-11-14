@@ -1,0 +1,13 @@
+{
+  if (mPrevFastScrollFocusedSection != null) {
+    for (int i=0; i < mPrevFastScrollFocusedSection.numApps; i++) {
+      int sectionPosition=position + i;
+      final ViewHolder vh=findViewHolderForAdapterPosition(sectionPosition);
+      if (vh != null && vh.itemView instanceof BaseRecyclerViewFastScrollBar.FastScrollFocusableView) {
+        final BaseRecyclerViewFastScrollBar.FastScrollFocusableView view=(BaseRecyclerViewFastScrollBar.FastScrollFocusableView)vh.itemView;
+        view.setFastScrollFocused(true,true);
+        mLastFastScrollFocusedViews.add(view);
+      }
+    }
+  }
+}

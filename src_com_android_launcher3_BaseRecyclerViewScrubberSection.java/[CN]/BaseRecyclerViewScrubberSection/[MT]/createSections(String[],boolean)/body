@@ -1,0 +1,27 @@
+{
+  if (!validSectionNameList(sectionNames)) {
+    return null;
+  }
+  HashMap<Integer,Integer> foundAlphaLetters=new HashMap<>();
+  RtlIndexArrayList<BaseRecyclerViewScrubberSection> sections=new RtlIndexArrayList<>(sectionNames.length);
+  boolean inAlphaLetterSection=false;
+  for (int i=0; i < sectionNames.length; i++) {
+    int alphaLetterIndex=TextUtils.isEmpty(sectionNames[i]) ? -1 : ALPHA_LETTERS.indexOf(sectionNames[i]);
+    if (alphaLetterIndex >= 0) {
+      foundAlphaLetters.put(alphaLetterIndex,i);
+      inAlphaLetterSection=true;
+    }
+ else {
+      if (inAlphaLetterSection) {
+        addAlphaLetters(sections,foundAlphaLetters);
+        inAlphaLetterSection=false;
+      }
+      sections.add(new BaseRecyclerViewScrubberSection(sectionNames[i],true,i));
+    }
+  }
+  if (inAlphaLetterSection) {
+    addAlphaLetters(sections,foundAlphaLetters);
+  }
+  BaseRecyclerViewScrubberSection.createIndices(sections,isRtl);
+  return sections;
+}

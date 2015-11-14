@@ -1,0 +1,16 @@
+{
+switch (msg.what) {
+case MSG_SET_TARGET:
+    int adapterIndex=msg.arg1;
+  performSetTarget(adapterIndex);
+break;
+case MSG_ANIMATE_PICK:
+int index=msg.arg1;
+int width=msg.arg2;
+int lastIndex=(Integer)msg.obj;
+performAnimatePickMessage(index,width,lastIndex);
+break;
+default :
+super.handleMessage(msg);
+}
+}

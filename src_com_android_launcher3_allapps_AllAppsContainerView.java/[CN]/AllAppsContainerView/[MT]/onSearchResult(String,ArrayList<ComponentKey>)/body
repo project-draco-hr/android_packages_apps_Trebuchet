@@ -1,6 +1,12 @@
 {
   if (apps != null) {
     mApps.setOrderedFilter(apps);
+    if (mGridTheme != GRID_THEME_LIGHT) {
+      mLastGridTheme=mGridTheme;
+      mGridTheme=GRID_THEME_LIGHT;
+      updateBackgroundAndPaddings(true);
+      mAdapter.setGridTheme(mGridTheme);
+    }
     mAdapter.setLastSearchQuery(query);
     mAppsRecyclerView.onSearchResultsChanged();
   }

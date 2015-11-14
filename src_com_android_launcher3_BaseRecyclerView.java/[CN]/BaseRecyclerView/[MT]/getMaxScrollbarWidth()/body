@@ -1,3 +1,6 @@
 {
-  return mScrollbar.getThumbMaxWidth();
+  if (mUseScrollbar) {
+    return mScrollbar.getThumbMaxWidth();
+  }
+  return 0;
 }

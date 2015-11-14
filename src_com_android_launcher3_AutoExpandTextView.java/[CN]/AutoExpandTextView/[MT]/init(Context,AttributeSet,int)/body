@@ -1,0 +1,9 @@
+{
+  float precision=PRECISION;
+  if (attrs != null) {
+    TypedArray ta=context.obtainStyledAttributes(attrs,R.styleable.AutofitTextView,defStyle,0);
+    precision=ta.getFloat(R.styleable.AutofitTextView_precision,precision);
+  }
+  mPaint=new TextPaint();
+  setPrecision(precision);
+}

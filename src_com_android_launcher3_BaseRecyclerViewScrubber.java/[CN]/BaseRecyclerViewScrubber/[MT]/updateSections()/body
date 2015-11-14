@@ -1,0 +1,9 @@
+{
+  if (mBaseRecyclerView != null) {
+    mSectionContainer=new SectionContainer(mBaseRecyclerView.getSectionNames(),mIsRtl);
+    mSectionContainer.initializeScrubberText(mScrubberText);
+    mSeekBar.setMax(mSectionContainer.size() - 1);
+    Drawable d=mSectionContainer.showLetters() ? mTransparentDrawable : getContext().getResources().getDrawable(R.drawable.seek_back);
+    ((ViewGroup)mSeekBar.getParent()).setBackground(d);
+  }
+}

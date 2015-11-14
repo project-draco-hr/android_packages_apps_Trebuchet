@@ -1,0 +1,6 @@
+{
+  sendAnimatePickMessage(index,seekBar.getWidth(),mLastIndex);
+  int adapterIndex=mSectionContainer.getDirectionalIndex(mLastIndex,index);
+  sendSetTargetMessage(adapterIndex);
+  mLastIndex=index;
+}

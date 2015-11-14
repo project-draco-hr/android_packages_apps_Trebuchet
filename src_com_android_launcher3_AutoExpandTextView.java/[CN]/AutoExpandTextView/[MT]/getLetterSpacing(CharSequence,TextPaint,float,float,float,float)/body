@@ -1,0 +1,22 @@
+{
+  float mid=(low + high) / 2.0f;
+  paint.setLetterSpacing(mid);
+  float measuredWidth=paint.measureText(text,0,text.length());
+  if (high - low < precision) {
+    if (measuredWidth < targetWidth) {
+      return mid;
+    }
+ else {
+      return low;
+    }
+  }
+ else   if (measuredWidth > targetWidth) {
+    return getLetterSpacing(text,paint,targetWidth,low,mid,precision);
+  }
+ else   if (measuredWidth < targetWidth) {
+    return getLetterSpacing(text,paint,targetWidth,mid,high,precision);
+  }
+ else {
+    return mid;
+  }
+}

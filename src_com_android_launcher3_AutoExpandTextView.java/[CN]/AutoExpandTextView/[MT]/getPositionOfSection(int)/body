@@ -1,0 +1,6 @@
+{
+  if (mPositions == null || position >= mPositions.length) {
+    return 0;
+  }
+  return mPositions[position];
+}

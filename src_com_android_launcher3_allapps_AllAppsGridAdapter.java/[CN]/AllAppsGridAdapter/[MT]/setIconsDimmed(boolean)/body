@@ -1,0 +1,6 @@
+{
+  if (mIconsDimmed != iconsDimmed) {
+    mIconsDimmed=iconsDimmed;
+    notifyDataSetChanged();
+  }
+}

@@ -1,0 +1,7 @@
+{
+  for (int i=0; i < ALPHA_LETTERS.length(); i++) {
+    boolean highlighted=foundAlphaLetters.containsKey(i);
+    int index=highlighted ? foundAlphaLetters.get(i) : BaseRecyclerViewScrubberSection.INVALID_INDEX;
+    sections.add(new BaseRecyclerViewScrubberSection(ALPHA_LETTERS.substring(i,i + 1),highlighted,index));
+  }
+}
