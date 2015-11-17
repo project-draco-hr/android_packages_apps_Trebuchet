@@ -11,11 +11,11 @@
   icon.mFolderName.setCompoundDrawablePadding(0);
   FrameLayout.LayoutParams lp=(FrameLayout.LayoutParams)icon.mFolderName.getLayoutParams();
   lp.topMargin=grid.iconSizePx + grid.iconDrawablePaddingPx;
-  icon.mPreviewBackground=(ImageView)icon.findViewById(R.id.preview_background);
+  icon.mPreviewBackground=icon.findViewById(R.id.preview_background);
   lp=(FrameLayout.LayoutParams)icon.mPreviewBackground.getLayoutParams();
-  lp.topMargin=grid.folderBackgroundOffset;
-  lp.width=grid.folderIconSizePx;
-  lp.height=grid.folderIconSizePx;
+  lp.width=grid.iconSizePx;
+  lp.height=grid.iconSizePx;
+  icon.mPreviewBackground.setLayoutParams(lp);
   icon.setTag(folderInfo);
   icon.setOnClickListener(launcher);
   icon.mInfo=folderInfo;
@@ -29,5 +29,44 @@
   icon.mFolderRingAnimator=new FolderRingAnimator(launcher,icon);
   folderInfo.addListener(icon);
   icon.setOnFocusChangeListener(launcher.mFocusHandler);
-  return icon;
+  icon.setDrawingCacheEnabled(true);
+  int padding=grid.iconSizePx / 8;
+  int smallIconSize=(int)(padding * 2.75);
+  for (int i=NUM_ITEMS_IN_PREVIEW; i >= 0; i--) {
+    ImageView appIcon=null;
+    int marginLeft=0, marginRight=0, marginTop=0, marginBottom=0;
+switch (i) {
+case 0:
+      appIcon=(ImageView)icon.findViewById(R.id.app_0);
+    marginLeft=padding;
+  marginTop=padding;
+break;
+case 1:
+appIcon=(ImageView)icon.findViewById(R.id.app_1);
+marginTop=padding;
+marginRight=padding;
+break;
+case 2:
+appIcon=(ImageView)icon.findViewById(R.id.app_2);
+marginBottom=padding;
+marginLeft=padding;
+break;
+case 3:
+appIcon=(ImageView)icon.findViewById(R.id.app_3);
+marginBottom=padding;
+marginRight=padding;
+break;
+}
+if (appIcon != null) {
+RelativeLayout.LayoutParams layoutParams=(RelativeLayout.LayoutParams)appIcon.getLayoutParams();
+layoutParams.width=smallIconSize;
+layoutParams.height=smallIconSize;
+layoutParams.leftMargin=marginLeft;
+layoutParams.rightMargin=marginRight;
+layoutParams.topMargin=marginTop;
+layoutParams.bottomMargin=marginBottom;
+appIcon.setLayoutParams(layoutParams);
+}
+}
+return icon;
 }

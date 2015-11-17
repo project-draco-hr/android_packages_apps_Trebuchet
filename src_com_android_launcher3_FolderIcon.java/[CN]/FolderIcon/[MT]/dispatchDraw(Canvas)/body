@@ -15,17 +15,37 @@
   }
   int nItemsInPreview=Math.min(items.size(),NUM_ITEMS_IN_PREVIEW);
   if (!mAnimating) {
-    for (int i=nItemsInPreview - 1; i >= 0; i--) {
-      v=(TextView)items.get(i);
-      if (!mHiddenItems.contains(v.getTag())) {
-        d=getTopDrawable(v);
-        mParams=computePreviewItemDrawingParams(i,mParams);
-        mParams.drawable=d;
-        drawPreviewItem(canvas,mParams);
+    for (int i=NUM_ITEMS_IN_PREVIEW; i >= 0; i--) {
+      d=null;
+      if (i < items.size()) {
+        v=(TextView)items.get(i);
+        if (!mHiddenItems.contains(v.getTag())) {
+          d=getTopDrawable(v);
+          mParams=computePreviewItemDrawingParams(i,mParams);
+          mParams.drawable=d;
+        }
       }
-    }
-  }
+      ImageView appIcon=null;
+switch (i) {
+case 0:
+        appIcon=(ImageView)findViewById(R.id.app_0);
+      break;
+case 1:
+    appIcon=(ImageView)findViewById(R.id.app_1);
+  break;
+case 2:
+appIcon=(ImageView)findViewById(R.id.app_2);
+break;
+case 3:
+appIcon=(ImageView)findViewById(R.id.app_3);
+break;
+}
+if (appIcon != null) {
+appIcon.setImageDrawable(d);
+}
+}
+}
  else {
-    drawPreviewItem(canvas,mAnimParams);
-  }
+drawPreviewItem(canvas,mAnimParams);
+}
 }

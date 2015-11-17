@@ -9,17 +9,15 @@
   int centerY=(int)(sTempRect.top + sTempRect.height() * scale / 2);
   int centeredLeft=centerX - width / 2;
   int centeredTop=centerY - height / 2;
-  mLauncher.getWorkspace().getPageAreaRelativeToDragLayer(sTempRect);
-  int left=Math.min(Math.max(sTempRect.left,centeredLeft),sTempRect.left + sTempRect.width() - width);
-  int top=Math.min(Math.max(sTempRect.top,centeredTop),sTempRect.top + sTempRect.height() - height);
-  if (grid.isPhone && (grid.availableWidthPx - width) < grid.iconSizePx) {
-    left=(grid.availableWidthPx - width) / 2;
-  }
- else   if (width >= sTempRect.width()) {
-    left=sTempRect.left + (sTempRect.width() - width) / 2;
-  }
-  if (height >= sTempRect.height()) {
-    top=sTempRect.top + (sTempRect.height() - height) / 2;
+  int currentPage=mLauncher.getWorkspace().getNextPage();
+  CellLayout currentLayout=(CellLayout)mLauncher.getWorkspace().getChildAt(currentPage);
+  ShortcutAndWidgetContainer boundingLayout=currentLayout.getShortcutsAndWidgets();
+  Rect bounds=new Rect();
+  parent.getDescendantRectRelativeToSelf(boundingLayout,bounds);
+  int left=(grid.availableWidthPx - width) / 2;
+  int top=(int)(bounds.top + (bounds.height() * 1.15) - height);
+  if (width >= bounds.width()) {
+    left=bounds.left + (bounds.width() - width) / 2;
   }
   int folderPivotX=width / 2 + (centeredLeft - left);
   int folderPivotY=height / 2 + (centeredTop - top);

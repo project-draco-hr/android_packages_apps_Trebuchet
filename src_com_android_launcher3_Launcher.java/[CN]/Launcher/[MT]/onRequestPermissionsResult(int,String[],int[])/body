@@ -1,4 +1,19 @@
 {
+  if (requestCode == REQUEST_PERMISSION_CALL_PHONE && sPendingAddItem != null && sPendingAddItem.requestCode == REQUEST_PERMISSION_CALL_PHONE) {
+    View v=null;
+    CellLayout layout=getCellLayout(sPendingAddItem.container,sPendingAddItem.screenId);
+    if (layout != null) {
+      v=layout.getChildAt(sPendingAddItem.cellX,sPendingAddItem.cellY);
+    }
+    Intent intent=sPendingAddItem.intent;
+    sPendingAddItem=null;
+    if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+      startActivity(v,intent,null);
+    }
+ else {
+      Toast.makeText(this,getString(R.string.msg_no_phone_permission,getString(R.string.app_name)),Toast.LENGTH_SHORT).show();
+    }
+  }
   if (mLauncherCallbacks != null) {
     mLauncherCallbacks.onRequestPermissionsResult(requestCode,permissions,grantResults);
   }

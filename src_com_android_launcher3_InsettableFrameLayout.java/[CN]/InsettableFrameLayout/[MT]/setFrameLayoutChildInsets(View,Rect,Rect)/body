@@ -4,10 +4,14 @@
     ((Insettable)child).setInsets(newInsets);
   }
  else   if (!lp.ignoreInsets) {
-    lp.topMargin+=(newInsets.top - oldInsets.top);
+    if (!lp.ignoreTopInsets) {
+      lp.topMargin+=(newInsets.top - oldInsets.top);
+    }
     lp.leftMargin+=(newInsets.left - oldInsets.left);
     lp.rightMargin+=(newInsets.right - oldInsets.right);
-    lp.bottomMargin+=(newInsets.bottom - oldInsets.bottom);
+    if (!lp.ignoreBottomInsets) {
+      lp.bottomMargin+=(newInsets.bottom - oldInsets.bottom);
+    }
   }
   child.setLayoutParams(lp);
 }

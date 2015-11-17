@@ -6,13 +6,16 @@
   FolderIcon folderIcon=(FolderIcon)v;
   final FolderInfo info=folderIcon.getFolderInfo();
   Folder openFolder=mWorkspace.getFolderForTag(info);
+  int[] folderTouchXY=new int[2];
+  v.getLocationOnScreen(folderTouchXY);
+  int[] folderTouchXYOffset={folderTouchXY[0] + v.getWidth() / 2,folderTouchXY[1] + v.getHeight() / 2};
   if (info.opened && openFolder == null) {
     Log.d(TAG,"Folder info marked as open, but associated folder is not open. Screen: " + info.screenId + " ("+ info.cellX+ ", "+ info.cellY+ ")");
     info.opened=false;
   }
   if (!info.opened && !folderIcon.getFolder().isDestroyed()) {
     closeFolder();
-    openFolder(folderIcon);
+    openFolder(folderIcon,folderTouchXYOffset);
   }
  else {
     int folderScreen;
@@ -21,7 +24,7 @@
       closeFolder(openFolder);
       if (folderScreen != mWorkspace.getCurrentPage()) {
         closeFolder();
-        openFolder(folderIcon);
+        openFolder(folderIcon,folderTouchXYOffset);
       }
     }
   }

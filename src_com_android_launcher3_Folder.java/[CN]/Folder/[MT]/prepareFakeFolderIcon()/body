@@ -1,0 +1,17 @@
+{
+  mFolderIcon.buildDrawingCache(true);
+  Bitmap fakeFolderIcon=Bitmap.createBitmap(mFolderIcon.getDrawingCache());
+  View fakeFolderIconView=mLauncher.findViewById(R.id.reveal_fake_folder_icon);
+  FrameLayout.LayoutParams flp=(FrameLayout.LayoutParams)fakeFolderIconView.getLayoutParams();
+  Rect rect=new Rect();
+  mFolderIcon.getGlobalVisibleRect(rect);
+  flp.height=rect.height();
+  flp.width=rect.width();
+  fakeFolderIconView.setLayoutParams(flp);
+  int[] folderIconXY=new int[2];
+  mFolderIcon.getLocationOnScreen(folderIconXY);
+  fakeFolderIconView.setX(folderIconXY[0]);
+  fakeFolderIconView.setY(folderIconXY[1]);
+  fakeFolderIconView.setBackground(new BitmapDrawable(null,fakeFolderIcon));
+  fakeFolderIconView.setVisibility(View.INVISIBLE);
+}

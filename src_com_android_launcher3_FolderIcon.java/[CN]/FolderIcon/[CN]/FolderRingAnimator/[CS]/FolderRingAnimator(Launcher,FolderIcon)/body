@@ -6,11 +6,11 @@
       throw new RuntimeException("FolderRingAnimator loading drawables on non-UI thread " + Thread.currentThread());
     }
     DeviceProfile grid=launcher.getDeviceProfile();
-    sPreviewSize=grid.folderIconSizePx;
+    sPreviewSize=grid.iconSizePx;
     sPreviewPadding=res.getDimensionPixelSize(R.dimen.folder_preview_padding);
-    sSharedOuterRingDrawable=res.getDrawable(R.drawable.portal_ring_outer);
-    sSharedInnerRingDrawable=res.getDrawable(R.drawable.portal_ring_inner_nolip);
-    sSharedFolderLeaveBehind=res.getDrawable(R.drawable.portal_ring_rest);
+    sSharedOuterRingDrawable=res.getDrawable(R.drawable.folder_fill_highlight);
+    sSharedInnerRingDrawable=null;
+    sSharedFolderLeaveBehind=res.getDrawable(R.drawable.folder_bg);
     sStaticValuesDirty=false;
   }
 }

@@ -1,5 +1,8 @@
 {
   Folder folder=folderIcon.getFolder();
+  if (folder.getState() == Folder.STATE_ANIMATING) {
+    return;
+  }
   Folder openFolder=mWorkspace != null ? mWorkspace.getOpenFolder() : null;
   if (openFolder != null && openFolder != folder) {
     closeFolder();
@@ -14,8 +17,7 @@
  else {
     Log.w(TAG,"Opening folder (" + folder + ") which already has a parent ("+ folder.getParent()+ ").");
   }
-  folder.animateOpen();
-  growAndFadeOutFolderIcon(folderIcon);
+  folder.animateOpen(getWorkspace(),folderTouch);
   folder.sendAccessibilityEvent(AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED);
   getDragLayer().sendAccessibilityEvent(AccessibilityEvent.TYPE_WINDOW_CONTENT_CHANGED);
 }

@@ -3,4 +3,8 @@
   setScaleY(1f);
   setAlpha(1f);
   mState=STATE_SMALL;
+  View reveal=mLauncher.findViewById(R.id.reveal_fake_page_container);
+  reveal.setVisibility(View.VISIBLE);
+  View revealFolderIcon=mLauncher.findViewById(R.id.reveal_fake_folder_icon);
+  revealFolderIcon.setVisibility(View.INVISIBLE);
 }

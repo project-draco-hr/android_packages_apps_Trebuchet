@@ -24,7 +24,6 @@
 ;
   }
  else {
-    prepareReveal();
     centerAboutIcon();
     AnimatorSet anim=LauncherAnimUtils.createAnimatorSet();
     int width=getPaddingLeft() + getPaddingRight() + mContent.getDesiredWidth();
@@ -38,7 +37,7 @@
     Animator drift=ObjectAnimator.ofPropertyValuesHolder(this,tx,ty);
     drift.setDuration(mMaterialExpandDuration);
     drift.setStartDelay(mMaterialExpandStagger);
-    drift.setInterpolator(new LogDecelerateInterpolator(100,0));
+    drift.setInterpolator(new LogDecelerateInterpolator(60,0));
     int rx=(int)Math.max(Math.max(width - getPivotX(),0),getPivotX());
     int ry=(int)Math.max(Math.max(height - getPivotY(),0),getPivotY());
     float radius=(float)Math.hypot(rx,ry);
@@ -55,6 +54,26 @@
     textAlpha.setDuration(mMaterialExpandDuration);
     textAlpha.setStartDelay(mMaterialExpandStagger);
     textAlpha.setInterpolator(new AccelerateInterpolator(1.5f));
+    prepareFakeFolderIcon();
+    float iconTransY=getResources().getInteger(R.integer.folder_icon_translate_y_dist);
+    final View fakeFolderIconView=mLauncher.findViewById(R.id.reveal_fake_folder_icon);
+    float baseIconTranslationY=fakeFolderIconView.getTranslationY();
+    PropertyValuesHolder iconty=PropertyValuesHolder.ofFloat("translationY",baseIconTranslationY,baseIconTranslationY + iconTransY);
+    PropertyValuesHolder iconAlpha=PropertyValuesHolder.ofFloat("alpha",1f,0f);
+    Animator fakeFolderIcon=LauncherAnimUtils.ofPropertyValuesHolder(fakeFolderIconView,iconty,iconAlpha);
+    fakeFolderIcon.setDuration(mMaterialExpandDuration);
+    fakeFolderIcon.setInterpolator(new AccelerateInterpolator(1.5f));
+    fakeFolderIcon.addListener(new AnimatorListenerAdapter(){
+      @Override public void onAnimationStart(      Animator animation){
+        mFolderIcon.setAlpha(0);
+        fakeFolderIconView.setVisibility(View.VISIBLE);
+      }
+      @Override public void onAnimationEnd(      Animator animation){
+        fakeFolderIconView.setVisibility(View.INVISIBLE);
+      }
+    }
+);
+    prepareReveal();
     anim.play(drift);
     anim.play(iconsAlpha);
     anim.play(textAlpha);
@@ -65,7 +84,6 @@
     onCompleteRunnable=new Runnable(){
       @Override public void run(){
         mContentWrapper.setLayerType(LAYER_TYPE_NONE,null);
-        mContentWrapper.setLayerType(LAYER_TYPE_NONE,null);
       }
     }
 ;
@@ -73,6 +91,7 @@
   openFolderAnim.addListener(new AnimatorListenerAdapter(){
     @Override public void onAnimationStart(    Animator animation){
       sendCustomAccessibilityEvent(AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED,mContent.getAccessibilityDescription());
+      hideWorkspace();
       mState=STATE_ANIMATING;
     }
     @Override public void onAnimationEnd(    Animator animation){

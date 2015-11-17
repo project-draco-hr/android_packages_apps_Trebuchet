@@ -1,0 +1,8 @@
+{
+  mSavedWidgetsVisibilityState=mLauncher.getWidgetsView().getVisibility();
+  mLauncher.getWidgetsView().setVisibility(INVISIBLE);
+  mLauncher.getWorkspace().setVisibility(INVISIBLE);
+  mLauncher.getHotseat().setVisibility(INVISIBLE);
+  mLauncher.getSearchDropTargetBar().setVisibility(INVISIBLE);
+  mLauncher.getPageIndicator().setVisibility(INVISIBLE);
+}

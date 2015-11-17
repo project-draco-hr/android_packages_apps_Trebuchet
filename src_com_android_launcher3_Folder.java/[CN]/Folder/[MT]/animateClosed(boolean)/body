@@ -1,0 +1,71 @@
+{
+  if (!(getParent() instanceof DragLayer))   return;
+  AnimatorSet anim=LauncherAnimUtils.createAnimatorSet();
+  PropertyValuesHolder alpha=PropertyValuesHolder.ofFloat("alpha",0f);
+  float transY=getResources().getInteger(R.integer.folder_translate_y_dist);
+  PropertyValuesHolder translationY=PropertyValuesHolder.ofFloat("translationY",0f,transY);
+  setLayerType(LAYER_TYPE_HARDWARE,null);
+  float animatorDurationScale=Settings.Global.getFloat(getContext().getContentResolver(),Settings.Global.ANIMATOR_DURATION_SCALE,1);
+  ObjectAnimator oa;
+  if (mPowerManager.isPowerSaveMode() || animatorDurationScale < 0.01f) {
+    oa=LauncherAnimUtils.ofPropertyValuesHolder(this,translationY);
+    setAlpha(0f);
+  }
+ else {
+    oa=LauncherAnimUtils.ofPropertyValuesHolder(this,alpha,translationY);
+  }
+  oa.setDuration(mMaterialExpandDuration);
+  oa.setInterpolator(new LogDecelerateInterpolator(60,0));
+  anim.play(oa);
+  Animator reverseRevealAnim=null;
+  Animator fakeFolderIconAnim=null;
+  if (animate) {
+    prepareFakeFolderIcon();
+    float iconTransY=getResources().getInteger(R.integer.folder_icon_translate_y_dist);
+    final View fakeFolderIconView=mLauncher.findViewById(R.id.reveal_fake_folder_icon);
+    float baseIconTranslationY=fakeFolderIconView.getTranslationY();
+    PropertyValuesHolder iconty=PropertyValuesHolder.ofFloat("translationY",baseIconTranslationY + iconTransY,baseIconTranslationY);
+    PropertyValuesHolder iconAlpha=PropertyValuesHolder.ofFloat("alpha",0f,1f);
+    fakeFolderIconAnim=LauncherAnimUtils.ofPropertyValuesHolder(fakeFolderIconView,iconty,iconAlpha);
+    fakeFolderIconAnim.setDuration(mMaterialExpandDuration);
+    fakeFolderIconAnim.setInterpolator(new DecelerateInterpolator(2f));
+    fakeFolderIconAnim.addListener(new AnimatorListenerAdapter(){
+      @Override public void onAnimationStart(      Animator animation){
+        mFolderIcon.setAlpha(0);
+        fakeFolderIconView.setVisibility(View.VISIBLE);
+      }
+      @Override public void onAnimationEnd(      Animator animation){
+        fakeFolderIconView.setVisibility(View.INVISIBLE);
+        mFolderIcon.setAlpha(1);
+        View revealView=mLauncher.findViewById(R.id.reveal_fake_page_container);
+        revealView.setVisibility(View.INVISIBLE);
+      }
+    }
+);
+  }
+ else {
+    View revealView=mLauncher.findViewById(R.id.reveal_fake_page_container);
+    revealView.setVisibility(View.INVISIBLE);
+    mFolderIcon.setAlpha(1);
+  }
+  if (reverseRevealAnim != null) {
+    anim.play(reverseRevealAnim);
+  }
+  if (fakeFolderIconAnim != null) {
+    anim.play(fakeFolderIconAnim);
+  }
+  anim.addListener(new AnimatorListenerAdapter(){
+    @Override public void onAnimationStart(    Animator animation){
+      sendCustomAccessibilityEvent(AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED,getContext().getString(R.string.folder_closed));
+      unHideWorkspace();
+      mState=STATE_ANIMATING;
+    }
+    @Override public void onAnimationEnd(    Animator animation){
+      onCloseComplete();
+      setLayerType(LAYER_TYPE_NONE,null);
+      mState=STATE_SMALL;
+    }
+  }
+);
+  anim.start();
+}

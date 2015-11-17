@@ -1,0 +1,12 @@
+{
+  folder.getInfo().opened=false;
+  ViewGroup parent=(ViewGroup)folder.getParent().getParent();
+  if (parent != null) {
+    FolderIcon fi=(FolderIcon)mWorkspace.getViewForTag(folder.mInfo);
+    if (fi != null) {
+      ((CellLayout.LayoutParams)fi.getLayoutParams()).canReorder=true;
+    }
+  }
+  folder.animateClosed(animate);
+  getDragLayer().sendAccessibilityEvent(AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED);
+}

@@ -12,6 +12,6 @@
     mBaselineIconSize=(int)(mIntrinsicIconSize * mBaselineIconScale);
     mMaxPerspectiveShift=mBaselineIconSize * PERSPECTIVE_SHIFT_FACTOR;
     mPreviewOffsetX=(mTotalWidth - mAvailableSpaceInPreview) / 2;
-    mPreviewOffsetY=previewPadding + grid.folderBackgroundOffset;
+    mPreviewOffsetY=grid.folderBackgroundOffset;
   }
 }

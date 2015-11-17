@@ -2,6 +2,7 @@
   super(context,attrs);
   setAlwaysDrawnWithCacheEnabled(false);
   mInputMethodManager=(InputMethodManager)getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+  mPowerManager=(PowerManager)context.getSystemService(Context.POWER_SERVICE);
   Resources res=getResources();
   mExpandDuration=res.getInteger(R.integer.config_folderExpandDuration);
   mMaterialExpandDuration=res.getInteger(R.integer.config_materialFolderExpandDuration);
