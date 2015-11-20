@@ -1,0 +1,5 @@
+{
+  View view=convertView != null ? convertView : newHeaderView(mContext,partition,cursor,parent);
+  bindHeaderView(view,partition,cursor);
+  return view;
+}

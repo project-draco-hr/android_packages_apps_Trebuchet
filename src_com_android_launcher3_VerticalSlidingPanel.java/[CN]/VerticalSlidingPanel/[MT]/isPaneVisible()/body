@@ -1,0 +1,7 @@
+{
+  if (getChildCount() < 2) {
+    return false;
+  }
+  View slidingPane=getChildAt(1);
+  return slidingPane.getVisibility() == View.VISIBLE;
+}

@@ -9,11 +9,9 @@
   super.onCreate(savedInstanceState);
   LauncherAppState.setApplicationContext(getApplicationContext());
   LauncherAppState app=LauncherAppState.getInstance();
-  mDeviceProfile=getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE ? app.getInvariantDeviceProfile().landscapeProfile : app.getInvariantDeviceProfile().portraitProfile;
+  initializeDeviceProfile(app);
   mSharedPrefs=getSharedPreferences(LauncherAppState.getSharedPreferencesKey(),Context.MODE_PRIVATE);
   mIsSafeModeEnabled=getPackageManager().isSafeMode();
-  mModel=app.setLauncher(this);
-  mIconCache=app.getIconCache();
   mDragController=new DragController(this);
   mInflater=getLayoutInflater();
   mStateTransitionAnimation=new LauncherStateTransitionAnimation(this);

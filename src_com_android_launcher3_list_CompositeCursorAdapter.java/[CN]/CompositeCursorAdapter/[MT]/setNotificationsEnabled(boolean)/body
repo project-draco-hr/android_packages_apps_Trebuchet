@@ -1,0 +1,6 @@
+{
+  mNotificationsEnabled=flag;
+  if (flag && mNotificationNeeded) {
+    notifyDataSetChanged();
+  }
+}

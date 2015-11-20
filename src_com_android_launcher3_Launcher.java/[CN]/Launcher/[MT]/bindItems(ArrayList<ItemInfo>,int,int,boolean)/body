@@ -41,6 +41,7 @@ case LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT:
 break;
 case LauncherSettings.Favorites.ITEM_TYPE_FOLDER:
 view=FolderIcon.fromXml(R.layout.folder_icon,this,(ViewGroup)workspace.getChildAt(workspace.getCurrentPage()),(FolderInfo)item,mIconCache);
+((FolderIcon)view).setTextVisible(!mHideIconLabels);
 break;
 default :
 throw new RuntimeException("Invalid Item Type");

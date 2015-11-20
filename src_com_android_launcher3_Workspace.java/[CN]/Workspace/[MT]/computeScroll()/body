@@ -1,4 +1,4 @@
 {
   super.computeScroll();
-  mWallpaperOffset.syncWithScroll();
+  if (mScrollWallpaper)   mWallpaperOffset.syncWithScroll();
 }

@@ -1,0 +1,53 @@
+{
+  TextView text=(TextView)v.findViewById(R.id.item_name);
+  Configuration config=mLauncher.getResources().getConfiguration();
+  if (config.getLayoutDirection() == View.LAYOUT_DIRECTION_RTL) {
+    text.setGravity(Gravity.RIGHT);
+  }
+  String title=cursor.getString(1);
+  text.setText(title);
+  v.setTag(new SettingsPosition(partition,position));
+  Resources res=mLauncher.getResources();
+  boolean current=false;
+  String state="";
+switch (partition) {
+case OverviewSettingsPanel.HOME_SETTINGS_POSITION:
+switch (position) {
+case 1:
+      current=SettingsProvider.getBoolean(mContext,SettingsProvider.SETTINGS_UI_HOMESCREEN_HIDE_ICON_LABELS,R.bool.preferences_interface_homescreen_hide_icon_labels_default);
+    state=current ? res.getString(R.string.icon_labels_hide) : res.getString(R.string.icon_labels_show);
+  ((TextView)v.findViewById(R.id.item_state)).setText(state);
+break;
+case 2:
+current=SettingsProvider.getBoolean(mContext,SettingsProvider.SETTINGS_UI_HOMESCREEN_SCROLLING_WALLPAPER_SCROLL,R.bool.preferences_interface_homescreen_scrolling_wallpaper_scroll_default);
+state=current ? res.getString(R.string.setting_state_on) : res.getString(R.string.setting_state_off);
+((TextView)v.findViewById(R.id.item_state)).setText(state);
+break;
+default :
+((TextView)v.findViewById(R.id.item_state)).setText("");
+}
+break;
+case OverviewSettingsPanel.DRAWER_SETTINGS_POSITION:
+switch (position) {
+case 0:
+current=SettingsProvider.getBoolean(mContext,SettingsProvider.SETTINGS_UI_DRAWER_HIDE_ICON_LABELS,R.bool.preferences_interface_drawer_hide_icon_labels_default);
+state=current ? res.getString(R.string.icon_labels_hide) : res.getString(R.string.icon_labels_show);
+((TextView)v.findViewById(R.id.item_state)).setText(state);
+break;
+default :
+((TextView)v.findViewById(R.id.item_state)).setText("");
+}
+break;
+default :
+switch (position) {
+case 0:
+current=SettingsProvider.getBoolean(mContext,SettingsProvider.SETTINGS_UI_GENERAL_ICONS_LARGE,R.bool.preferences_interface_general_icons_large_default);
+state=current ? res.getString(R.string.setting_state_on) : res.getString(R.string.setting_state_off);
+((TextView)v.findViewById(R.id.item_state)).setText(state);
+break;
+default :
+((TextView)v.findViewById(R.id.item_state)).setText("");
+}
+}
+v.setOnClickListener(mSettingsItemListener);
+}

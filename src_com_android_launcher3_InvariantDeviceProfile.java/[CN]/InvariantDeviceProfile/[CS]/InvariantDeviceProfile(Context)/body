@@ -8,7 +8,7 @@
   display.getCurrentSizeRange(smallestSize,largestSize);
   minWidthDps=Utilities.dpiFromPx(Math.min(smallestSize.x,smallestSize.y),dm);
   minHeightDps=Utilities.dpiFromPx(Math.min(largestSize.x,largestSize.y),dm);
-  ArrayList<InvariantDeviceProfile> closestProfiles=findClosestDeviceProfiles(minWidthDps,minHeightDps,getPredefinedDeviceProfiles());
+  ArrayList<InvariantDeviceProfile> closestProfiles=findClosestDeviceProfiles(minWidthDps,minHeightDps,getPredefinedDeviceProfiles(context));
   InvariantDeviceProfile interpolatedDeviceProfileOut=invDistWeightedInterpolate(minWidthDps,minHeightDps,closestProfiles);
   InvariantDeviceProfile closestProfile=closestProfiles.get(0);
   numRows=closestProfile.numRows;

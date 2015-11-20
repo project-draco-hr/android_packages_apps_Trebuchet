@@ -1,0 +1,8 @@
+{
+  if (mPinnedPartitionHeadersEnabled) {
+    return getPartitionCount();
+  }
+ else {
+    return 0;
+  }
+}

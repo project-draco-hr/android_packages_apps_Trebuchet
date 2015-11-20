@@ -1,0 +1,6 @@
+{
+  super.onFinishInflate();
+  if (mDragViewResId != -1) {
+    mDragView=findViewById(mDragViewResId);
+  }
+}

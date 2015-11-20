@@ -1,0 +1,4 @@
+{
+  mPartitions.get(partitionIndex).hasHeader=flag;
+  invalidate();
+}

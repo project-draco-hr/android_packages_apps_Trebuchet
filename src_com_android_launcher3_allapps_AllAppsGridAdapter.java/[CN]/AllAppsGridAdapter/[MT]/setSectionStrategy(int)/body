@@ -2,5 +2,4 @@
   Resources res=mLauncher.getResources();
   mSectionStrategy=sectionStrategy;
   mSectionNamesMargin=mSectionStrategy == AllAppsContainerView.SECTION_STRATEGY_GRID ? res.getDimensionPixelSize(R.dimen.all_apps_grid_view_start_margin) : res.getDimensionPixelSize(R.dimen.all_apps_grid_view_start_margin_with_sections);
-  mIconSize=mSectionStrategy == AllAppsContainerView.SECTION_STRATEGY_GRID ? res.getDimensionPixelSize(R.dimen.all_apps_icon_size_grid) : res.getDimensionPixelSize(R.dimen.all_apps_icon_size_ragged);
 }

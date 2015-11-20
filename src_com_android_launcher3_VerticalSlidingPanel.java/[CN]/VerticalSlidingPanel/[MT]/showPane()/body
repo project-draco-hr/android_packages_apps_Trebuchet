@@ -1,0 +1,21 @@
+{
+  if (getChildCount() < 2) {
+    return;
+  }
+  final View slidingPane=getChildAt(1);
+  mAnimation=new TranslateAnimation(0,0,(mIsSlidingUp ? 1 : -1) * getPanelHeight(),0);
+  mAnimation.setDuration(400);
+  mAnimation.setAnimationListener(new Animation.AnimationListener(){
+    @Override public void onAnimationStart(    Animation animation){
+      slidingPane.setVisibility(View.VISIBLE);
+    }
+    @Override public void onAnimationEnd(    Animation animation){
+      requestLayout();
+      mAnimation=null;
+    }
+    @Override public void onAnimationRepeat(    Animation animation){
+    }
+  }
+);
+  slidingPane.startAnimation(mAnimation);
+}

@@ -1,0 +1,4 @@
+{
+  mPanelHeight=val;
+  requestLayout();
+}

@@ -1,0 +1,6 @@
+{
+  if (mSlideableView != null) {
+    return mIsSlidingUp ? getMeasuredHeight() - getPaddingBottom() - mSlideableView.getMeasuredHeight() : getPaddingTop();
+  }
+  return getMeasuredHeight() - getPaddingBottom();
+}

@@ -1,0 +1,4 @@
+{
+  this.showIfEmpty=showIfEmpty;
+  this.hasHeader=hasHeader;
+}

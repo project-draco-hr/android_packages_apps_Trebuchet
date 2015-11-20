@@ -1,0 +1,43 @@
+{
+  long currentTime=mAnimating ? System.currentTimeMillis() : 0;
+  int top=0;
+  int bottom=getBottom();
+  boolean hasVisibleHeaders=false;
+  for (int i=0; i < mSize; i++) {
+    PinnedHeader header=mHeaders[i];
+    if (header.visible) {
+      hasVisibleHeaders=true;
+      if (header.state == BOTTOM && header.y < bottom) {
+        bottom=header.y;
+      }
+ else       if (header.state == TOP || header.state == FADING) {
+        int newTop=header.y + header.height;
+        if (newTop > top) {
+          top=newTop;
+        }
+      }
+    }
+  }
+  if (hasVisibleHeaders) {
+    canvas.save();
+    mClipRect.set(0,top,getWidth(),bottom);
+    canvas.clipRect(mClipRect);
+  }
+  super.dispatchDraw(canvas);
+  if (hasVisibleHeaders) {
+    canvas.restore();
+    for (int i=mSize; --i >= 0; ) {
+      PinnedHeader header=mHeaders[i];
+      if (header.visible && (header.state == TOP || header.state == FADING)) {
+        drawHeader(canvas,header,currentTime);
+      }
+    }
+    for (int i=0; i < mSize; i++) {
+      PinnedHeader header=mHeaders[i];
+      if (header.visible && header.state == BOTTOM) {
+        drawHeader(canvas,header,currentTime);
+      }
+    }
+  }
+  invalidateIfAnimating();
+}

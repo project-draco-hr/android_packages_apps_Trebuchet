@@ -1,0 +1,9 @@
+{
+  for (int i=mSize; --i >= 0; ) {
+    PinnedHeader header=mHeaders[i];
+    if (header.visible && header.state == TOP) {
+      return header.y + header.height;
+    }
+  }
+  return 0;
+}

@@ -1,0 +1,18 @@
+{
+  if (mCacheValid) {
+    return;
+  }
+  mCount=0;
+  for (  Partition partition : mPartitions) {
+    Cursor cursor=partition.cursor;
+    int count=cursor != null ? cursor.getCount() : 0;
+    if (partition.hasHeader) {
+      if (count != 0 || partition.showIfEmpty) {
+        count++;
+      }
+    }
+    partition.count=count;
+    mCount+=count;
+  }
+  mCacheValid=true;
+}

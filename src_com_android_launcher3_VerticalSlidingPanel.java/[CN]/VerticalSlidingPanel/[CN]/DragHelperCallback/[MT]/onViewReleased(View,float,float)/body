@@ -1,0 +1,26 @@
+{
+  int top=mIsSlidingUp ? getSlidingTop() : getSlidingTop() - mSlideRange;
+  if (mAnchorPoint != 0) {
+    int anchoredTop;
+    float anchorOffset;
+    if (mIsSlidingUp) {
+      anchoredTop=(int)(mAnchorPoint * mSlideRange);
+      anchorOffset=(float)anchoredTop / (float)mSlideRange;
+    }
+ else {
+      anchoredTop=mPanelHeight - (int)(mAnchorPoint * mSlideRange);
+      anchorOffset=(float)(mPanelHeight - anchoredTop) / (float)mSlideRange;
+    }
+    if (yvel > 0 || (yvel == 0 && mSlideOffset >= (1f + anchorOffset) / 2)) {
+      top+=mSlideRange;
+    }
+ else     if (yvel == 0 && mSlideOffset < (1f + anchorOffset) / 2 && mSlideOffset >= anchorOffset / 2) {
+      top+=mSlideRange * mAnchorPoint;
+    }
+  }
+ else   if (yvel > 0 || (yvel == 0 && mSlideOffset > 0.5f)) {
+    top+=mSlideRange;
+  }
+  mDragHelper.settleCapturedViewAt(releasedChild.getLeft(),top);
+  invalidate();
+}

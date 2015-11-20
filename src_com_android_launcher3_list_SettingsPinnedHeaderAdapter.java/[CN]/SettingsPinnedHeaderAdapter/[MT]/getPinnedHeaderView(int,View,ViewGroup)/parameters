@@ -1,0 +1,3 @@
+int viewIndex
+View convertView
+ViewGroup parent

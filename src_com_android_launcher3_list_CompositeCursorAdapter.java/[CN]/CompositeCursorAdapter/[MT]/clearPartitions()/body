@@ -1,0 +1,7 @@
+{
+  for (  Partition partition : mPartitions) {
+    partition.cursor=null;
+  }
+  invalidate();
+  notifyDataSetChanged();
+}

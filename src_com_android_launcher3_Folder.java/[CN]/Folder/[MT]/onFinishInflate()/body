@@ -16,6 +16,10 @@
   mFolderName.setOnEditorActionListener(this);
   mFolderName.setSelectAllOnFocus(true);
   mFolderName.setInputType(mFolderName.getInputType() | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS | InputType.TYPE_TEXT_FLAG_CAP_WORDS);
+  boolean hideLabels=SettingsProvider.getBoolean(mLauncher,SettingsProvider.SETTINGS_UI_HOMESCREEN_HIDE_ICON_LABELS,R.bool.preferences_interface_homescreen_hide_icon_labels_default);
+  if (hideLabels) {
+    mFolderName.setVisibility(View.GONE);
+  }
   mFooter=findViewById(R.id.folder_footer);
   int measureSpec=MeasureSpec.UNSPECIFIED;
   mFooter.measure(measureSpec,measureSpec);

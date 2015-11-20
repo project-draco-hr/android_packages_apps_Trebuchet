@@ -1,0 +1,4 @@
+{
+  mCoveredFadeColor=color;
+  invalidate();
+}

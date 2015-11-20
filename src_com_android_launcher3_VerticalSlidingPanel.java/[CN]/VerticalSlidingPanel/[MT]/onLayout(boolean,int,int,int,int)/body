@@ -1,0 +1,48 @@
+{
+  final int paddingLeft=getPaddingLeft();
+  final int paddingTop=getPaddingTop();
+  final int slidingTop=getSlidingTop();
+  final int childCount=getChildCount();
+  if (mFirstLayout) {
+switch (mSlideState) {
+case EXPANDED:
+      mSlideOffset=mCanSlide ? 0.f : 1.f;
+    break;
+case ANCHORED:
+  mSlideOffset=mCanSlide ? mAnchorPoint : 1.f;
+break;
+default :
+mSlideOffset=1.f;
+break;
+}
+}
+for (int i=0; i < childCount; i++) {
+final View child=getChildAt(i);
+if (child.getVisibility() == GONE) {
+continue;
+}
+final LayoutParams lp=(LayoutParams)child.getLayoutParams();
+final int childHeight=child.getMeasuredHeight();
+if (lp.slideable) {
+mSlideRange=childHeight - mPanelHeight;
+}
+int childTop;
+if (mIsSlidingUp) {
+childTop=lp.slideable ? slidingTop + (int)(mSlideRange * mSlideOffset) : paddingTop;
+}
+ else {
+childTop=lp.slideable ? slidingTop - (int)(mSlideRange * mSlideOffset) : paddingTop;
+if (!lp.slideable && !mOverlayContent) {
+childTop+=mPanelHeight;
+}
+}
+final int childBottom=childTop + childHeight;
+final int childLeft=paddingLeft;
+final int childRight=childLeft + child.getMeasuredWidth();
+child.layout(childLeft,childTop,childRight,childBottom);
+}
+if (mFirstLayout) {
+updateObscuredViewVisibility();
+}
+mFirstLayout=false;
+}

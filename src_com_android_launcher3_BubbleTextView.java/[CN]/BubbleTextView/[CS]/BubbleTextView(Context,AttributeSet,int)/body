@@ -15,6 +15,10 @@
     setTextSize(TypedValue.COMPLEX_UNIT_PX,grid.allAppsIconTextSizePx);
     defaultIconSize=grid.allAppsIconSizePx;
   }
+  boolean useCompactDrawer=SettingsProvider.getBoolean(context,SettingsProvider.SETTINGS_UI_DRAWER_COMPACT,R.bool.preferences_interface_drawer_compact_default);
+  if (!useCompactDrawer) {
+    defaultIconSize=getResources().getDimensionPixelSize(R.dimen.all_apps_icon_size_ragged);
+  }
   mIconSize=a.getDimensionPixelSize(R.styleable.BubbleTextView_iconSizeOverride,defaultIconSize);
   a.recycle();
   if (mCustomShadowsEnabled) {

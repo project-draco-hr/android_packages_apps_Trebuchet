@@ -1,0 +1,21 @@
+{
+  ensurePinnedHeaderLayout(viewIndex);
+  View child=getChildAt(position - getFirstVisiblePosition());
+  if (child == null)   return;
+  PinnedHeader header=mHeaders[viewIndex];
+  header.visible=true;
+  header.state=FADING;
+  header.alpha=MAX_ALPHA;
+  header.animating=false;
+  int top=getTotalTopPinnedHeaderHeight();
+  header.y=top;
+  if (fade) {
+    int bottom=child.getBottom() - top;
+    int headerHeight=header.height;
+    if (bottom < headerHeight) {
+      int portion=bottom - headerHeight;
+      header.alpha=MAX_ALPHA * (headerHeight + portion) / headerHeight;
+      header.y=top + portion;
+    }
+  }
+}

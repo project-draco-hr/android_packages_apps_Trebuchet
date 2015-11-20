@@ -1,0 +1,5 @@
+{
+  mAnimatedArrow.setBackgroundResource(R.drawable.transition_arrow);
+  AnimationDrawable frameAnimation=(AnimationDrawable)mAnimatedArrow.getBackground();
+  frameAnimation.start();
+}

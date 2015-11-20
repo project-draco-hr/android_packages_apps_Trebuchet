@@ -1,0 +1,16 @@
+{
+  PinnedHeader header=mHeaders[viewIndex];
+  if (header.visible && (animate || header.animating) && header.state == BOTTOM) {
+    header.sourceY=header.y;
+    if (!header.animating) {
+      header.visible=true;
+      header.targetY=getBottom() + header.height;
+    }
+    header.animating=true;
+    header.targetTime=mAnimationTargetTime;
+    header.targetVisible=false;
+  }
+ else {
+    header.visible=false;
+  }
+}

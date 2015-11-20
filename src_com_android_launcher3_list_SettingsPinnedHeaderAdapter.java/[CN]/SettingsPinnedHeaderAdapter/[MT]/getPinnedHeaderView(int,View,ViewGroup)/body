@@ -1,0 +1,8 @@
+{
+  LayoutInflater inflater=LayoutInflater.from(getContext());
+  View view=inflater.inflate(R.layout.settings_pane_list_header,parent,false);
+  view.setFocusable(false);
+  view.setEnabled(false);
+  bindHeaderView(view,viewIndex,null);
+  return view;
+}

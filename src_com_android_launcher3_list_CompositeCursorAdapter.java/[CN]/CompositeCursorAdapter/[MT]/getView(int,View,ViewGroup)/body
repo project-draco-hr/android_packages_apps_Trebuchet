@@ -1,0 +1,29 @@
+{
+  ensureCacheValid();
+  int start=0;
+  for (int i=0, n=mPartitions.size(); i < n; i++) {
+    int end=start + mPartitions.get(i).count;
+    if (position >= start && position < end) {
+      int offset=position - start;
+      if (mPartitions.get(i).hasHeader) {
+        offset--;
+      }
+      View view;
+      if (offset == -1) {
+        view=getHeaderView(i,mPartitions.get(i).cursor,convertView,parent);
+      }
+ else {
+        if (!mPartitions.get(i).cursor.moveToPosition(offset)) {
+          throw new IllegalStateException("Couldn't move cursor to position " + offset);
+        }
+        view=getView(i,mPartitions.get(i).cursor,offset,convertView,parent);
+      }
+      if (view == null) {
+        throw new NullPointerException("View should not be null, partition: " + i + " position: "+ offset);
+      }
+      return view;
+    }
+    start=end;
+  }
+  throw new ArrayIndexOutOfBoundsException(position);
+}

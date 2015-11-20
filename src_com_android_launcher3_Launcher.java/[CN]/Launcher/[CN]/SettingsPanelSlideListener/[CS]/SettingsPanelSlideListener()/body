@@ -1,0 +1,4 @@
+{
+  super();
+  mAnimatedArrow=(ImageView)mOverviewPanel.findViewById(R.id.settings_drag_arrow);
+}

@@ -1,0 +1,23 @@
+{
+  if (hasHeader(partition)) {
+    View view=null;
+    if (convertView != null) {
+      Integer headerType=(Integer)convertView.getTag();
+      if (headerType != null && headerType == PARTITION_HEADER_TYPE) {
+        view=convertView;
+      }
+    }
+    if (view == null) {
+      view=newHeaderView(getContext(),partition,null,parent);
+      view.setTag(PARTITION_HEADER_TYPE);
+      view.setFocusable(false);
+      view.setEnabled(false);
+    }
+    bindHeaderView(view,partition,getCursor(partition));
+    view.setLayoutDirection(parent.getLayoutDirection());
+    return view;
+  }
+ else {
+    return null;
+  }
+}

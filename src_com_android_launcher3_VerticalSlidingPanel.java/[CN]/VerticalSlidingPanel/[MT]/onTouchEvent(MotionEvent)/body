@@ -1,0 +1,44 @@
+{
+  if (!mCanSlide || !mIsSlidingEnabled || mAnimation != null) {
+    return super.onTouchEvent(ev);
+  }
+  mDragHelper.processTouchEvent(ev);
+  final int action=ev.getAction();
+  boolean wantTouchEvents=true;
+switch (action & MotionEventCompat.ACTION_MASK) {
+case MotionEvent.ACTION_DOWN:
+{
+      final float x=ev.getX();
+      final float y=ev.getY();
+      if (mSlideState == SlideState.COLLAPSED) {
+        if (y < mSlideableView.getTop()) {
+          return false;
+        }
+      }
+      mInitialMotionX=x;
+      mInitialMotionY=y;
+      break;
+    }
+case MotionEvent.ACTION_UP:
+{
+    final float x=ev.getX();
+    final float y=ev.getY();
+    final float dx=x - mInitialMotionX;
+    final float dy=y - mInitialMotionY;
+    final int slop=mDragHelper.getTouchSlop();
+    View dragView=mDragView != null ? mDragView : mSlideableView;
+    if (dx * dx + dy * dy < slop * slop && isDragViewUnder((int)x,(int)y)) {
+      dragView.playSoundEffect(SoundEffectConstants.CLICK);
+      if (!isExpanded() && !isAnchored()) {
+        expandPane(mAnchorPoint);
+      }
+ else {
+        collapsePane();
+      }
+      break;
+    }
+    break;
+  }
+}
+return wantTouchEvents;
+}

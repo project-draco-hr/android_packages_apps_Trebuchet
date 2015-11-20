@@ -1,0 +1,8 @@
+{
+  ensurePinnedHeaderLayout(viewIndex);
+  PinnedHeader header=mHeaders[viewIndex];
+  header.visible=true;
+  header.y=y;
+  header.state=TOP;
+  header.animating=false;
+}

@@ -1,0 +1,4 @@
+{
+  ensureCacheValid();
+  return mCount;
+}

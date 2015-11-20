@@ -1,0 +1,3 @@
+{
+  return getPinnedPartitionHeadersEnabled() && hasHeader(partition) && !isPartitionEmpty(partition);
+}

@@ -1,0 +1,4 @@
+{
+  ensurePinnedHeaderLayout(viewIndex);
+  return mHeaders[viewIndex].view.getHeight();
+}

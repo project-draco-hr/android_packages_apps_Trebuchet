@@ -1,0 +1,21 @@
+{
+  ensureCacheValid();
+  int start=0;
+  for (int i=0, n=mPartitions.size(); i < n; i++) {
+    int end=start + mPartitions.get(i).count;
+    if (position >= start && position < end) {
+      int offset=position - start;
+      if (mPartitions.get(i).hasHeader) {
+        offset--;
+      }
+      if (offset == -1) {
+        return IGNORE_ITEM_VIEW_TYPE;
+      }
+ else {
+        return getItemViewType(i,offset);
+      }
+    }
+    start=end;
+  }
+  throw new ArrayIndexOutOfBoundsException(position);
+}

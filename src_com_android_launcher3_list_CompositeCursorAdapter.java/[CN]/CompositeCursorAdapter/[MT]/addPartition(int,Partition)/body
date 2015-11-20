@@ -1,0 +1,5 @@
+{
+  mPartitions.add(location,partition);
+  invalidate();
+  notifyDataSetChanged();
+}

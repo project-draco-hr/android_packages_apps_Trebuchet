@@ -1,0 +1,3 @@
+{
+  addPartition(new Partition(showIfEmpty,hasHeader));
+}

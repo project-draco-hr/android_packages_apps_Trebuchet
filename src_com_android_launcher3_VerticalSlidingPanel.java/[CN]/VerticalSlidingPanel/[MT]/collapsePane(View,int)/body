@@ -1,0 +1,6 @@
+{
+  if (mFirstLayout || smoothSlideTo(1.f,initialVelocity)) {
+    return true;
+  }
+  return false;
+}

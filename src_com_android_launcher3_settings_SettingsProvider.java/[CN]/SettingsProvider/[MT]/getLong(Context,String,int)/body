@@ -1,0 +1,3 @@
+{
+  return getLongCustomDefault(context,key,context.getResources().getInteger(resource));
+}

@@ -1,0 +1,23 @@
+{
+  int anchoredTop=(int)(mAnchorPoint * mSlideRange);
+  if (mDragHelper.getViewDragState() == ViewDragHelper.STATE_IDLE) {
+    if (mSlideOffset == 0) {
+      if (mSlideState != SlideState.EXPANDED) {
+        updateObscuredViewVisibility();
+        dispatchOnPanelExpanded(mSlideableView);
+        mSlideState=SlideState.EXPANDED;
+      }
+    }
+ else     if (mSlideOffset == (float)anchoredTop / (float)mSlideRange) {
+      if (mSlideState != SlideState.ANCHORED) {
+        updateObscuredViewVisibility();
+        dispatchOnPanelAnchored(mSlideableView);
+        mSlideState=SlideState.ANCHORED;
+      }
+    }
+ else     if (mSlideState != SlideState.COLLAPSED) {
+      dispatchOnPanelCollapsed(mSlideableView);
+      mSlideState=SlideState.COLLAPSED;
+    }
+  }
+}

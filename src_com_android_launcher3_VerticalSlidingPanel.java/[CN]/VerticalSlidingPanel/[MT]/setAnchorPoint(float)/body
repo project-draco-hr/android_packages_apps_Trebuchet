@@ -1,0 +1,3 @@
+{
+  if (anchorPoint > 0 && anchorPoint < 1)   mAnchorPoint=anchorPoint;
+}

@@ -1,0 +1,5 @@
+{
+  super.onLayout(changed,l,t,r,b);
+  mHeaderPaddingStart=getPaddingStart();
+  mHeaderWidth=r - l - mHeaderPaddingStart- getPaddingEnd();
+}

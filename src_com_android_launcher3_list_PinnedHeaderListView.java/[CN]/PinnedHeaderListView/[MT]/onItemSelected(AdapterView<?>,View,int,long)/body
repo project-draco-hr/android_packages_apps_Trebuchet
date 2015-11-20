@@ -1,0 +1,29 @@
+{
+  int height=getHeight();
+  int windowTop=0;
+  int windowBottom=height;
+  for (int i=0; i < mSize; i++) {
+    PinnedHeader header=mHeaders[i];
+    if (header.visible) {
+      if (header.state == TOP) {
+        windowTop=header.y + header.height;
+      }
+ else       if (header.state == BOTTOM) {
+        windowBottom=header.y;
+        break;
+      }
+    }
+  }
+  View selectedView=getSelectedView();
+  if (selectedView != null) {
+    if (selectedView.getTop() < windowTop) {
+      setSelectionFromTop(position,windowTop);
+    }
+ else     if (selectedView.getBottom() > windowBottom) {
+      setSelectionFromTop(position,windowBottom - selectedView.getHeight());
+    }
+  }
+  if (mOnItemSelectedListener != null) {
+    mOnItemSelectedListener.onItemSelected(parent,view,position,id);
+  }
+}

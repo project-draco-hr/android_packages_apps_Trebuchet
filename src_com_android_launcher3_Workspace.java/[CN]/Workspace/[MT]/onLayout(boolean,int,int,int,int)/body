@@ -1,5 +1,5 @@
 {
-  if (mFirstLayout && mCurrentPage >= 0 && mCurrentPage < getChildCount()) {
+  if (mFirstLayout && mCurrentPage >= 0 && mCurrentPage < getChildCount() && mScrollWallpaper) {
     mWallpaperOffset.syncWithScroll();
     mWallpaperOffset.jumpToFinal();
   }

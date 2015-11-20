@@ -1,0 +1,4 @@
+{
+  mHideIconLabels=SettingsProvider.getBoolean(mLauncher,SettingsProvider.SETTINGS_UI_HOMESCREEN_HIDE_ICON_LABELS,R.bool.preferences_interface_homescreen_hide_icon_labels_default);
+  setScrollingWallpaper();
+}

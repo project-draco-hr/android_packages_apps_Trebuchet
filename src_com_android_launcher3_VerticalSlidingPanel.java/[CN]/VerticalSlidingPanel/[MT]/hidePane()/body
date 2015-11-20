@@ -1,0 +1,20 @@
+{
+  if (mSlideableView == null) {
+    return;
+  }
+  mAnimation=new TranslateAnimation(0,0,0,(mIsSlidingUp ? 1 : -1) * getPanelHeight());
+  mAnimation.setDuration(500);
+  mAnimation.setAnimationListener(new Animation.AnimationListener(){
+    @Override public void onAnimationStart(    Animation animation){
+    }
+    @Override public void onAnimationEnd(    Animation animation){
+      mSlideableView.setVisibility(View.GONE);
+      requestLayout();
+      mAnimation=null;
+    }
+    @Override public void onAnimationRepeat(    Animation animation){
+    }
+  }
+);
+  mSlideableView.startAnimation(mAnimation);
+}

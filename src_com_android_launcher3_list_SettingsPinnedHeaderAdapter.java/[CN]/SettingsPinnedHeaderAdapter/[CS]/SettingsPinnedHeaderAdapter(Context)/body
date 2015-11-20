@@ -1,0 +1,5 @@
+{
+  super(context);
+  mLauncher=(Launcher)context;
+  mContext=context;
+}

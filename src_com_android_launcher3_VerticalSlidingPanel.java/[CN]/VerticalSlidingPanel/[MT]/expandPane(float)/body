@@ -1,0 +1,6 @@
+{
+  if (!isPaneVisible()) {
+    showPane();
+  }
+  return expandPane(mSlideableView,0,mSlideOffset);
+}

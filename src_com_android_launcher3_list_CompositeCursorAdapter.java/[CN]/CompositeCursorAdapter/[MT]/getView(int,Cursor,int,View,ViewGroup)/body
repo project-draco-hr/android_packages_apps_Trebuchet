@@ -1,0 +1,11 @@
+{
+  View view;
+  if (convertView != null) {
+    view=convertView;
+  }
+ else {
+    view=newView(mContext,partition,cursor,position,parent);
+  }
+  bindView(view,partition,cursor,position);
+  return view;
+}

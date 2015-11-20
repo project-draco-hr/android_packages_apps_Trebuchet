@@ -1,0 +1,4 @@
+{
+  LayoutInflater inflater=LayoutInflater.from(context);
+  return inflater.inflate(R.layout.settings_pane_list_item,null);
+}

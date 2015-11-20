@@ -1,0 +1,48 @@
+{
+  final int action=MotionEventCompat.getActionMasked(ev);
+  if (mAnimation != null || !mCanSlide || !mIsSlidingEnabled || (mIsUnableToDrag && action != MotionEvent.ACTION_DOWN)) {
+    mDragHelper.cancel();
+    return super.onInterceptTouchEvent(ev);
+  }
+  if (action == MotionEvent.ACTION_CANCEL || action == MotionEvent.ACTION_UP) {
+    mDragHelper.cancel();
+    return false;
+  }
+  final float x=ev.getX();
+  final float y=ev.getY();
+  boolean interceptTap=false;
+switch (action) {
+case MotionEvent.ACTION_DOWN:
+{
+      mIsUnableToDrag=false;
+      mInitialMotionX=x;
+      mInitialMotionY=y;
+      if (isDragViewUnder((int)x,(int)y) && !mIsUsingDragViewTouchEvents) {
+        interceptTap=true;
+      }
+      break;
+    }
+case MotionEvent.ACTION_MOVE:
+{
+    final float adx=Math.abs(x - mInitialMotionX);
+    final float ady=Math.abs(y - mInitialMotionY);
+    final int dragSlop=mDragHelper.getTouchSlop();
+    if (mIsUsingDragViewTouchEvents) {
+      if (adx > mScrollTouchSlop && ady < mScrollTouchSlop) {
+        return super.onInterceptTouchEvent(ev);
+      }
+ else       if (ady > mScrollTouchSlop) {
+        interceptTap=isDragViewUnder((int)x,(int)y);
+      }
+    }
+    if ((ady > dragSlop && adx > ady) || !isDragViewUnder((int)x,(int)y)) {
+      mDragHelper.cancel();
+      mIsUnableToDrag=true;
+      return false;
+    }
+    break;
+  }
+}
+final boolean interceptForDrag=mDragHelper.shouldInterceptTouchEvent(ev);
+return interceptForDrag;
+}

@@ -1,11 +1,14 @@
 {
+  boolean hideIconLabels=SettingsProvider.getBoolean(mLauncher,SettingsProvider.SETTINGS_UI_DRAWER_HIDE_ICON_LABELS,R.bool.preferences_interface_drawer_hide_icon_labels_default);
 switch (holder.getItemViewType()) {
 case ICON_VIEW_TYPE:
 {
       AppInfo info=mApps.getAdapterItems().get(position).appInfo;
       BubbleTextView icon=(BubbleTextView)holder.mContent;
-      icon.setIconSize(mIconSize);
       icon.setTextColor(mAllAppsTextColor);
+      if (hideIconLabels) {
+        icon.setTextVisibility(!hideIconLabels);
+      }
       icon.applyFromApplicationInfo(info);
       icon.setFastScrollDimmed(mIconsDimmed,!mIconsDimmed);
       break;
@@ -14,8 +17,10 @@ case PREDICTION_ICON_VIEW_TYPE:
 {
     AppInfo info=mApps.getAdapterItems().get(position).appInfo;
     BubbleTextView icon=(BubbleTextView)holder.mContent;
-    icon.setIconSize(mIconSize);
     icon.setTextColor(mAllAppsTextColor);
+    if (hideIconLabels) {
+      icon.setTextVisibility(!hideIconLabels);
+    }
     icon.applyFromApplicationInfo(info);
     break;
   }

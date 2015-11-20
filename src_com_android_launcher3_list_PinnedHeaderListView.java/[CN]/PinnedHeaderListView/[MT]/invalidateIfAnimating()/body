@@ -1,0 +1,10 @@
+{
+  mAnimating=false;
+  for (int i=0; i < mSize; i++) {
+    if (mHeaders[i].animating) {
+      mAnimating=true;
+      invalidate();
+      return;
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  final int topBound;
+  final int bottomBound;
+  if (mIsSlidingUp) {
+    topBound=getSlidingTop();
+    bottomBound=topBound + mSlideRange;
+  }
+ else {
+    bottomBound=getPaddingTop();
+    topBound=bottomBound - mSlideRange;
+  }
+  return Math.min(Math.max(top,topBound),bottomBound);
+}

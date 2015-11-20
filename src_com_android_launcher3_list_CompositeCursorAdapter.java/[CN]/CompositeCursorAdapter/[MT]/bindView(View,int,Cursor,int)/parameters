@@ -1,0 +1,4 @@
+View v
+int partition
+Cursor cursor
+int position

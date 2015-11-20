@@ -1,0 +1,33 @@
+{
+  if (!getPinnedPartitionHeadersEnabled()) {
+    return;
+  }
+  int size=getPartitionCount();
+  boolean unCached=false;
+  if (mHeaderVisibility == null || mHeaderVisibility.length != size) {
+    mHeaderVisibility=new boolean[size];
+    unCached=true;
+  }
+  for (int i=0; i < size; i++) {
+    boolean visible=isPinnedPartitionHeaderVisible(i);
+    mHeaderVisibility[i]=visible;
+    if (!visible) {
+      listView.setHeaderInvisible(i,true);
+    }
+  }
+  int headerViewsCount=listView.getHeaderViewsCount();
+  int topHeaderHeight=0;
+  for (int i=0; i < size; i++) {
+    if (mHeaderVisibility[i]) {
+      int position=listView.getPositionAt(topHeaderHeight) - headerViewsCount;
+      int partition=getPartitionForPosition(position);
+      if (i > partition) {
+        break;
+      }
+      if (!unCached) {
+        listView.setHeaderPinnedAtTop(i,topHeaderHeight,false);
+        topHeaderHeight+=listView.getPinnedHeaderHeight(i);
+      }
+    }
+  }
+}

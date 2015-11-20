@@ -1,0 +1,9 @@
+{
+  if (mHeaderTouched) {
+    if (ev.getAction() == MotionEvent.ACTION_UP) {
+      mHeaderTouched=false;
+    }
+    return true;
+  }
+  return super.onTouchEvent(ev);
+}

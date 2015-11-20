@@ -75,6 +75,7 @@ case LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT:
   break;
 case LauncherSettings.Favorites.ITEM_TYPE_FOLDER:
 view=FolderIcon.fromXml(R.layout.folder_icon,mLauncher,cellLayout,(FolderInfo)info,mIconCache);
+((FolderIcon)view).setTextVisible(!mHideIconLabels);
 break;
 default :
 throw new IllegalStateException("Unknown item type: " + info.itemType);

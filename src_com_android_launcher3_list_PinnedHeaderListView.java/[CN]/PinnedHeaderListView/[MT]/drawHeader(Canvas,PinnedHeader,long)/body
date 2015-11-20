@@ -1,0 +1,24 @@
+{
+  if (header.animating) {
+    int timeLeft=(int)(header.targetTime - currentTime);
+    if (timeLeft <= 0) {
+      header.y=header.targetY;
+      header.visible=header.targetVisible;
+      header.animating=false;
+    }
+ else {
+      header.y=header.targetY + (header.sourceY - header.targetY) * timeLeft / mAnimationDuration;
+    }
+  }
+  if (header.visible) {
+    View view=header.view;
+    int saveCount=canvas.save();
+    canvas.translate(isLayoutRtl() ? getWidth() - mHeaderPaddingStart - mHeaderWidth : mHeaderPaddingStart,header.y);
+    if (header.state == FADING) {
+      mBounds.set(0,0,mHeaderWidth,view.getHeight());
+      canvas.saveLayerAlpha(mBounds,header.alpha,Canvas.ALL_SAVE_FLAG);
+    }
+    view.draw(canvas);
+    canvas.restoreToCount(saveCount);
+  }
+}

@@ -1,7 +1,9 @@
 {
   mFolderName.setHint(sHintText);
   String newTitle=mFolderName.getText().toString();
-  mInfo.setTitle(newTitle);
+  if (!SettingsProvider.getBoolean(mLauncher,SettingsProvider.SETTINGS_UI_HOMESCREEN_HIDE_ICON_LABELS,R.bool.preferences_interface_homescreen_hide_icon_labels_default)) {
+    mInfo.setTitle(newTitle);
+  }
   LauncherModel.updateItemInDatabase(mLauncher,mInfo);
   if (commit) {
     sendCustomAccessibilityEvent(AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED,String.format(getContext().getString(R.string.folder_renamed),newTitle));

@@ -1,0 +1,28 @@
+{
+  if (mAdapter != null) {
+    int count=mAdapter.getPinnedHeaderCount();
+    if (count != mSize) {
+      mSize=count;
+      if (mHeaders == null) {
+        mHeaders=new PinnedHeader[mSize];
+      }
+ else       if (mHeaders.length < mSize) {
+        PinnedHeader[] headers=mHeaders;
+        mHeaders=new PinnedHeader[mSize];
+        System.arraycopy(headers,0,mHeaders,0,headers.length);
+      }
+    }
+    for (int i=0; i < mSize; i++) {
+      if (mHeaders[i] == null) {
+        mHeaders[i]=new PinnedHeader();
+      }
+      mHeaders[i].view=mAdapter.getPinnedHeaderView(i,mHeaders[i].view,this);
+    }
+    mAnimationTargetTime=System.currentTimeMillis() + mAnimationDuration;
+    mAdapter.configurePinnedHeaders(this);
+    invalidateIfAnimating();
+  }
+  if (mOnScrollListener != null) {
+    mOnScrollListener.onScroll(this,firstVisibleItem,visibleItemCount,totalItemCount);
+  }
+}

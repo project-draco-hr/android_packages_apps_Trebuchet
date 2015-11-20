@@ -4,6 +4,9 @@
   textView.setOnClickListener(mFolder);
   textView.setOnLongClickListener(mFolder);
   textView.setOnFocusChangeListener(mFocusIndicatorView);
+  if (SettingsProvider.getBoolean(mFolder.mLauncher,SettingsProvider.SETTINGS_UI_HOMESCREEN_HIDE_ICON_LABELS,R.bool.preferences_interface_homescreen_hide_icon_labels_default)) {
+    textView.setTextVisibility(false);
+  }
   textView.setOnKeyListener(mKeyListener);
   textView.setLayoutParams(new CellLayout.LayoutParams(item.cellX,item.cellY,item.spanX,item.spanY));
   return textView;

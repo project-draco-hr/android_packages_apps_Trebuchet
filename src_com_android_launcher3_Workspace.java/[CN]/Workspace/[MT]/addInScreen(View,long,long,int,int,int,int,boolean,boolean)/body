@@ -1,4 +1,5 @@
 {
+  reloadSettings();
   if (container == LauncherSettings.Favorites.CONTAINER_DESKTOP) {
     if (getScreenWithId(screenId) == null) {
       Log.e(TAG,"Skipping child, screenId " + screenId + " not found");
@@ -26,7 +27,10 @@
   }
  else {
     if (child instanceof FolderIcon) {
-      ((FolderIcon)child).setTextVisible(true);
+      ((FolderIcon)child).setTextVisible(!mHideIconLabels);
+    }
+ else     if (child instanceof BubbleTextView) {
+      ((BubbleTextView)child).setTextVisibility(!mHideIconLabels);
     }
     layout=getScreenWithId(screenId);
     child.setOnKeyListener(new IconKeyEventListener());

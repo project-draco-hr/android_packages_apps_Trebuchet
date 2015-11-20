@@ -1,0 +1,9 @@
+{
+  Cursor cursor=mPartitions.get(partitionIndex).cursor;
+  if (cursor != null && !cursor.isClosed()) {
+    cursor.close();
+  }
+  mPartitions.remove(partitionIndex);
+  invalidate();
+  notifyDataSetChanged();
+}

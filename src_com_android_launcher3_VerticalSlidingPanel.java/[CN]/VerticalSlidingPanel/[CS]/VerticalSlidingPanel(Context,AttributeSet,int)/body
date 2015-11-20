@@ -1,0 +1,53 @@
+{
+  super(context,attrs,defStyle);
+  if (attrs != null) {
+    TypedArray defAttrs=context.obtainStyledAttributes(attrs,DEFAULT_ATTRS);
+    if (defAttrs != null) {
+      int gravity=defAttrs.getInt(0,Gravity.NO_GRAVITY);
+      if (gravity != Gravity.TOP && gravity != Gravity.BOTTOM) {
+        throw new IllegalArgumentException("gravity must be set to either top or bottom");
+      }
+      mIsSlidingUp=gravity == Gravity.BOTTOM;
+    }
+    defAttrs.recycle();
+    TypedArray ta=context.obtainStyledAttributes(attrs,R.styleable.VerticalSlidingPanel);
+    if (ta != null) {
+      mPanelHeight=ta.getDimensionPixelSize(R.styleable.VerticalSlidingPanel_panelHeight,-1);
+      mShadowHeight=ta.getDimensionPixelSize(R.styleable.VerticalSlidingPanel_shadowHeight,-1);
+      mParallaxOffset=ta.getDimensionPixelSize(R.styleable.VerticalSlidingPanel_parallaxOffset,-1);
+      mMinFlingVelocity=ta.getInt(R.styleable.VerticalSlidingPanel_flingVelocity,DEFAULT_MIN_FLING_VELOCITY);
+      mCoveredFadeColor=ta.getColor(R.styleable.VerticalSlidingPanel_fadeColor,DEFAULT_FADE_COLOR);
+      mDragViewResId=ta.getResourceId(R.styleable.VerticalSlidingPanel_dragView,-1);
+      mOverlayContent=ta.getBoolean(R.styleable.VerticalSlidingPanel_overlay,DEFAULT_OVERLAY_FLAG);
+    }
+    ta.recycle();
+  }
+  final float density=context.getResources().getDisplayMetrics().density;
+  if (mPanelHeight == -1) {
+    mPanelHeight=(int)(DEFAULT_PANEL_HEIGHT * density + 0.5f);
+  }
+  if (mShadowHeight == -1) {
+    mShadowHeight=(int)(DEFAULT_SHADOW_HEIGHT * density + 0.5f);
+  }
+  if (mParallaxOffset == -1) {
+    mParallaxOffset=(int)(DEFAULT_PARALLAX_OFFSET * density);
+  }
+  if (mShadowHeight > 0) {
+    if (mIsSlidingUp) {
+      mShadowDrawable=getResources().getDrawable(R.drawable.above_shadow,context.getTheme());
+    }
+ else {
+      mShadowDrawable=getResources().getDrawable(R.drawable.below_shadow,context.getTheme());
+    }
+  }
+ else {
+    mShadowDrawable=null;
+  }
+  setWillNotDraw(false);
+  mDragHelper=ViewDragHelper.create(this,0.5f,new DragHelperCallback());
+  mDragHelper.setMinVelocity(mMinFlingVelocity * density);
+  mCanSlide=true;
+  mIsSlidingEnabled=true;
+  ViewConfiguration vc=ViewConfiguration.get(context);
+  mScrollTouchSlop=vc.getScaledTouchSlop();
+}

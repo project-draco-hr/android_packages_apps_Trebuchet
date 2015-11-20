@@ -1,0 +1,11 @@
+{
+  do {
+    int position=pointToPosition(getPaddingLeft() + 1,y);
+    if (position != -1) {
+      return position;
+    }
+    y--;
+  }
+ while (y > 0);
+  return 0;
+}

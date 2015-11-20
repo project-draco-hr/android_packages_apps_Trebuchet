@@ -1,0 +1,4 @@
+{
+  int offset=(int)(mParallaxOffset * (1 - mSlideOffset));
+  return mIsSlidingUp ? -offset : offset;
+}

@@ -1,0 +1,13 @@
+{
+  if (!mCanSlide) {
+    return false;
+  }
+  final int topBound=getSlidingTop();
+  int y=mIsSlidingUp ? (int)(topBound + slideOffset * mSlideRange) : (int)(topBound - slideOffset * mSlideRange);
+  if (mDragHelper.smoothSlideViewTo(mSlideableView,mSlideableView.getLeft(),y)) {
+    setAllChildrenVisible();
+    ViewCompat.postInvalidateOnAnimation(this);
+    return true;
+  }
+  return false;
+}

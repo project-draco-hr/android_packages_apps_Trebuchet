@@ -1,0 +1,3 @@
+{
+  return collapsePane(mSlideableView,0);
+}

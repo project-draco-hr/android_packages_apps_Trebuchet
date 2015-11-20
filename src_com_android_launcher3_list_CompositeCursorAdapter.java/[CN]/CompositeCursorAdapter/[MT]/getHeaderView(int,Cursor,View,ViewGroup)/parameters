@@ -1,0 +1,4 @@
+int partition
+Cursor cursor
+View convertView
+ViewGroup parent

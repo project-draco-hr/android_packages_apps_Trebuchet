@@ -14,7 +14,6 @@
   mSectionStrategy=sectionStrategy;
   mGridTheme=gridTheme;
   mSectionNamesMargin=mSectionStrategy == AllAppsContainerView.SECTION_STRATEGY_GRID ? res.getDimensionPixelSize(R.dimen.all_apps_grid_view_start_margin) : res.getDimensionPixelSize(R.dimen.all_apps_grid_view_start_margin_with_sections);
-  mIconSize=mSectionStrategy == AllAppsContainerView.SECTION_STRATEGY_GRID ? res.getDimensionPixelSize(R.dimen.all_apps_icon_size_grid) : res.getDimensionPixelSize(R.dimen.all_apps_icon_size_ragged);
   mAllAppsTextColor=mGridTheme == AllAppsContainerView.GRID_THEME_DARK ? res.getColor(R.color.quantum_panel_text_color_dark) : res.getColor(R.color.quantum_panel_text_color);
   mSectionHeaderOffset=res.getDimensionPixelSize(R.dimen.all_apps_grid_section_y_offset);
   mSectionTextPaint=new Paint();

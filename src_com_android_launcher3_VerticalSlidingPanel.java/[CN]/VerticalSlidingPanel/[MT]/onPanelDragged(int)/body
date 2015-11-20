@@ -1,0 +1,14 @@
+{
+  final int topBound=getSlidingTop();
+  mSlideOffset=mIsSlidingUp ? (float)(newTop - topBound) / mSlideRange : (float)(topBound - newTop) / mSlideRange;
+  dispatchOnPanelSlide(mSlideableView);
+  if (mParallaxOffset > 0) {
+    int mainViewOffset=getCurrentParallaxOffset();
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+      mMainView.setTranslationY(mainViewOffset);
+    }
+ else {
+      mMainView.animate().translationY(mainViewOffset);
+    }
+  }
+}

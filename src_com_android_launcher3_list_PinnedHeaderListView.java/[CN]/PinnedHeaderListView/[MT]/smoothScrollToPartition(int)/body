@@ -1,0 +1,15 @@
+{
+  final int position=mAdapter.getScrollPositionForHeader(partition);
+  if (position == -1) {
+    return false;
+  }
+  int offset=0;
+  for (int i=0; i < partition; i++) {
+    PinnedHeader header=mHeaders[i];
+    if (header.visible) {
+      offset+=header.height;
+    }
+  }
+  smoothScrollToPositionFromTop(position + getHeaderViewsCount(),offset,DEFAULT_SMOOTH_SCROLL_DURATION);
+  return true;
+}

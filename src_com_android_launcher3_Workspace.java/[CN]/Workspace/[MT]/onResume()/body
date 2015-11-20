@@ -5,6 +5,7 @@
       getPageIndicator().setOnClickListener(listener);
     }
   }
+  setScrollingWallpaper();
   if (LauncherAppState.getInstance().hasWallpaperChangedSinceLastCheck()) {
     setWallpaperDimension();
   }
