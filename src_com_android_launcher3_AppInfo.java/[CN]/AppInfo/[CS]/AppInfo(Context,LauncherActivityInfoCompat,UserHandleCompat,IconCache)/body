@@ -3,7 +3,7 @@
   this.container=ItemInfo.NO_ID;
   flags=initFlags(info);
   firstInstallTime=info.getFirstInstallTime();
-  iconCache.getTitleAndIcon(this,info,true);
+  iconCache.getTitleAndIcon(this,info,false);
   intent=makeLaunchIntent(context,info,user);
   this.user=user;
 }
