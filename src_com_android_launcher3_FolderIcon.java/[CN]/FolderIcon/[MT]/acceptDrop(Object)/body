@@ -1,4 +1,7 @@
 {
   final ItemInfo item=(ItemInfo)dragInfo;
+  if (mInfo.hidden) {
+    return false;
+  }
   return !mFolder.isDestroyed() && willAcceptItem(item);
 }

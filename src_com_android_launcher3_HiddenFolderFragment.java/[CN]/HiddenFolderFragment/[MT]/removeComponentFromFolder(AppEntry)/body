@@ -1,0 +1,13 @@
+{
+  ShortcutInfo info;
+  if (app.componentName != null) {
+    info=mLauncher.mHiddenFolderIcon.getFolder().getShortcutForComponent(app.componentName);
+  }
+ else {
+    info=mLauncher.mHiddenFolderIcon.getFolder().getShortcutForPosition(app.position);
+  }
+  mLauncher.mHiddenFolderIcon.getFolderInfo().remove(info);
+  mAppEntries.remove(app);
+  mAppsAdapter.remove(app);
+  mAppsAdapter.notifyDataSetInvalidated();
+}

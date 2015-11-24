@@ -1,0 +1,31 @@
+{
+  final AppViewHolder viewHolder;
+  if (convertView == null) {
+    convertView=mInflator.inflate(R.layout.hidden_folder_apps_list_item,parent,false);
+    viewHolder=new AppViewHolder(convertView,position);
+    convertView.setTag(viewHolder);
+  }
+ else {
+    viewHolder=(AppViewHolder)convertView.getTag();
+  }
+  final AppEntry app=getItem(position);
+  viewHolder.title.setText(app.title);
+  Drawable icon=null;
+  if (app.componentName != null) {
+    icon=mIcons.get(app.componentName.getPackageName());
+  }
+  viewHolder.icon.setImageDrawable(icon != null ? icon : mDefaultImg);
+  viewHolder.remove.setOnClickListener(new OnClickListener(){
+    @Override public void onClick(    View v){
+      removeComponentFromFolder(app);
+    }
+  }
+);
+  convertView.setOnClickListener(new OnClickListener(){
+    @Override public void onClick(    View v){
+      saveHiddenFolderStatus(position);
+    }
+  }
+);
+  return convertView;
+}

@@ -69,4 +69,13 @@
     mLauncherCallbacks.onResume();
   }
   reloadLauncherIfNeeded();
+  Fragment f1=getFragmentManager().findFragmentByTag(HiddenFolderFragment.HIDDEN_FOLDER_FRAGMENT);
+  if (f1 != null && !mHiddenFolderAuth) {
+    mHiddenFolderFragment.saveHiddenFolderStatus(-1);
+    FragmentTransaction fragmentTransaction=getFragmentManager().beginTransaction();
+    fragmentTransaction.remove(mHiddenFolderFragment).commit();
+  }
+ else {
+    mHiddenFolderAuth=false;
+  }
 }

@@ -1,0 +1,22 @@
+{
+  super.notifyDataSetChanged();
+  List<AppEntry> newApps=new ArrayList<AppEntry>(getCount());
+  List<AppEntry> oldApps=new ArrayList<AppEntry>(getCount());
+  for (int i=0; i < getCount(); i++) {
+    AppEntry app=getItem(i);
+    if (mApps.contains(app)) {
+      oldApps.add(app);
+    }
+ else {
+      newApps.add(app);
+    }
+  }
+  if (newApps.size() > 0) {
+    new LoadIconsTask().execute(newApps.toArray(new AppEntry[]{}));
+    newApps.addAll(oldApps);
+    mApps=newApps;
+  }
+ else {
+    mApps=oldApps;
+  }
+}

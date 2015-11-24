@@ -1,4 +1,8 @@
 {
   final int itemType=item.itemType;
-  return ((itemType == LauncherSettings.Favorites.ITEM_TYPE_APPLICATION || itemType == LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT) && !mFolder.isFull() && item != mInfo && !mInfo.opened);
+  boolean hidden=false;
+  if (item instanceof FolderInfo) {
+    hidden=((FolderInfo)item).hidden;
+  }
+  return ((itemType == LauncherSettings.Favorites.ITEM_TYPE_APPLICATION || itemType == LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT || itemType == LauncherSettings.Favorites.ITEM_TYPE_FOLDER) && !mFolder.isFull() && item != mInfo && !mInfo.opened && !hidden);
 }

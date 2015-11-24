@@ -8,6 +8,10 @@
     closeFolder();
   }
   FolderInfo info=folder.mInfo;
+  if (info.hidden) {
+    folder.startHiddenFolderManager();
+    return;
+  }
   info.opened=true;
   ((CellLayout.LayoutParams)folderIcon.getLayoutParams()).canReorder=false;
   if (folder.getParent() == null) {

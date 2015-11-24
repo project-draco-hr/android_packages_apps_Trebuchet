@@ -80,6 +80,8 @@ ManagedProfileHeuristic.markExistingUsersForNoFolderCreation(mContext);
 case 25:
 convertShortcutsToLauncherActivities(db);
 case 26:
+addIntegerColumn(db,"hidden",0);
+case 27:
 {
 return;
 }

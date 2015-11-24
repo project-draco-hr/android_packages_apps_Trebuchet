@@ -1,0 +1,5 @@
+{
+  Bundle bundle=new Bundle();
+  bundle.putBoolean(HiddenFolderFragment.HIDDEN_FOLDER_STATUS,mInfo.hidden);
+  mLauncher.validateLockForHiddenFolders(bundle,mFolderIcon);
+}

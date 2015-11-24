@@ -17,18 +17,5 @@
   mItemsInvalidated=true;
   updateTextViewFocus();
   mInfo.addListener(this);
-  if (!sDefaultFolderName.contentEquals(mInfo.title)) {
-    mFolderName.setText(mInfo.title);
-  }
- else {
-    mFolderName.setText("");
-  }
-  mFolderIcon.post(new Runnable(){
-    public void run(){
-      if (getItemCount() <= 1) {
-        replaceFolderWithFinalItem();
-      }
-    }
-  }
-);
+  setFolderName();
 }

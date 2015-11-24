@@ -1,0 +1,9 @@
+{
+  ArrayList<AppEntry> apps=new ArrayList<AppEntry>();
+  int pos=0;
+  for (  Pair<ComponentName,CharSequence> item : items) {
+    apps.add(new AppEntry(item.first,item.second,pos));
+    pos++;
+  }
+  return apps;
+}
