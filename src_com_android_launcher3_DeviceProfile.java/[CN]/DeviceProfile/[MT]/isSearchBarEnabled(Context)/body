@@ -1,0 +1,13 @@
+{
+  boolean searchActivityExists=Utilities.searchActivityExists(context);
+  boolean isSearchEnabled=SettingsProvider.getBoolean(context,SettingsProvider.SETTINGS_UI_HOMESCREEN_SEARCH,R.bool.preferences_interface_homescreen_search_default);
+  if (searchActivityExists) {
+    return isSearchEnabled;
+  }
+ else {
+    if (isSearchEnabled) {
+      SettingsProvider.putBoolean(context,SettingsProvider.SETTINGS_UI_HOMESCREEN_SEARCH,false);
+    }
+    return false;
+  }
+}

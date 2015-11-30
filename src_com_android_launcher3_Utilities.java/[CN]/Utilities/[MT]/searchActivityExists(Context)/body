@@ -1,0 +1,5 @@
+{
+  final SearchManager searchManager=(SearchManager)context.getSystemService(Context.SEARCH_SERVICE);
+  ComponentName globalSearchActivity=searchManager.getGlobalSearchActivity();
+  return globalSearchActivity != null;
+}

@@ -1,4 +1,5 @@
 {
+  mLauncher=launcher;
   dragController.addDragListener(this);
   dragController.setFlingToDeleteDropTarget(mDeleteDropTarget);
   dragController.addDragListener(mInfoDropTarget);

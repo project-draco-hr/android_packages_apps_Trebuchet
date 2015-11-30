@@ -1,0 +1,6 @@
+{
+  if (mLauncher != null) {
+    return mLauncher.getDeviceProfile().searchBarVisible;
+  }
+  return true;
+}

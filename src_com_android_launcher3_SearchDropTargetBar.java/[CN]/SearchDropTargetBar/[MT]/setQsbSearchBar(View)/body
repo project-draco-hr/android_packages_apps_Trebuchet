@@ -1,16 +1,24 @@
 {
+  float alpha=1f;
+  int visibility=View.VISIBLE;
+  if (mQSB != null) {
+    alpha=mQSB.getAlpha();
+    visibility=mQSB.getVisibility();
+  }
   mQSB=qsb;
   if (mQSB != null) {
+    mQSB.setAlpha(alpha);
+    mQSB.setVisibility(visibility);
     mQSBSearchBarAnimator=new LauncherViewPropertyAnimator(mQSB);
     mQSBSearchBarAnimator.setInterpolator(sAccelerateInterpolator);
     mQSBSearchBarAnimator.addListener(new AnimatorListenerAdapter(){
       @Override public void onAnimationStart(      Animator animation){
-        if (mQSB != null) {
+        if (mQSB != null && isSearchBarVisible()) {
           mQSB.setVisibility(View.VISIBLE);
         }
       }
       @Override public void onAnimationEnd(      Animator animation){
-        if (mQSB != null) {
+        if (mQSB != null && isSearchBarVisible()) {
           AlphaUpdateListener.updateVisibility(mQSB,mAccessibilityEnabled);
         }
       }

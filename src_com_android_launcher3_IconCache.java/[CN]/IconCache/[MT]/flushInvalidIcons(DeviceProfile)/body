@@ -1,0 +1,9 @@
+{
+  Iterator<Map.Entry<ComponentKey,CacheEntry>> it=mCache.entrySet().iterator();
+  while (it.hasNext()) {
+    final CacheEntry e=it.next().getValue();
+    if ((e.icon != null) && (e.icon.getWidth() < deviceProfile.iconSizePx || e.icon.getHeight() < deviceProfile.iconSizePx)) {
+      it.remove();
+    }
+  }
+}

@@ -4,6 +4,7 @@
     startTime=System.currentTimeMillis();
   }
   super.onNewIntent(intent);
+  reloadLauncherIfNeeded();
   Folder openFolder=mWorkspace.getOpenFolder();
   boolean alreadyOnHome=mHasFocus && ((intent.getFlags() & Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT) != Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
   boolean isActionMain=Intent.ACTION_MAIN.equals(intent.getAction());

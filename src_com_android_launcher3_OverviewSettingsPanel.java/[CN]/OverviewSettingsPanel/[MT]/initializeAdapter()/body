@@ -5,7 +5,7 @@
   String[] headers=new String[]{res.getString(R.string.home_screen_settings),res.getString(R.string.drawer_settings),res.getString(R.string.app_settings)};
   String[] values=new String[]{res.getString(R.string.home_screen_search_text),res.getString(R.string.icon_labels),res.getString(R.string.scrolling_wallpaper),res.getString(R.string.grid_size_text)};
   String[] valuesDrawer=new String[]{res.getString(R.string.icon_labels)};
-  String[] valuesApp=new String[]{res.getString(R.string.larger_icons_text),res.getString(R.string.protected_app_settings)};
+  String[] valuesApp=new String[]{res.getString(R.string.larger_icons_text)};
   mSettingsAdapter=new SettingsPinnedHeaderAdapter(mLauncher);
   mSettingsAdapter.setHeaders(headers);
   mSettingsAdapter.addPartition(false,true);

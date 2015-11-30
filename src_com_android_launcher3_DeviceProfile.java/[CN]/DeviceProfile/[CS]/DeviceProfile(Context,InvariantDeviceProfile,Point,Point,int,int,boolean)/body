@@ -33,4 +33,7 @@
   }
   updateAvailableDimensions(dm,res);
   computeAllAppsButtonSize(context);
+  searchBarVisible=isSearchBarEnabled(context);
+  searchBarSpaceWidthPx=Math.min(searchBarSpaceWidthPx,widthPx);
+  searchBarSpaceHeightPx=2 * edgeMarginPx + (searchBarVisible ? searchBarSpaceHeightPx - getSearchBarTopOffset() : 3 * edgeMarginPx);
 }

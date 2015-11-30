@@ -1,10 +1,11 @@
 {
+  mSearchDropTargetBar.setupQsb(this);
   LauncherAppState app=LauncherAppState.getInstance();
   app.initInvariantDeviceProfile();
   initializeDeviceProfile(app);
   mDeviceProfile.layout(this);
   mModel.resetLoadedState(true,true);
-  mModel.startLoader(mWorkspace.getRestorePage(),LauncherModel.LOADER_FLAG_NONE);
+  mModel.startLoader(page,LauncherModel.LOADER_FLAG_NONE);
   mWorkspace.updateCustomContentVisibility();
   mAppsView.reset();
 }

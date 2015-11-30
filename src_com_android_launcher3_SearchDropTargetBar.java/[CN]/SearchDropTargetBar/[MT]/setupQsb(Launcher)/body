@@ -1,0 +1,4 @@
+{
+  mLauncher=launcher;
+  mQSB=launcher.getOrCreateQsbBar();
+}

@@ -1,0 +1,30 @@
+{
+  searchBarVisible=isSearchBarEnabled(launcher);
+  View searchBar=launcher.getSearchDropTargetBar();
+  FrameLayout.LayoutParams lp=(FrameLayout.LayoutParams)searchBar.getLayoutParams();
+  if (hasVerticalBarLayout) {
+    searchBarSpaceHeightPx=searchBarVisible ? searchBarSpaceHeightPx : searchBarSpaceHeightPx + 5 * edgeMarginPx;
+    lp.gravity=Gravity.LEFT;
+    lp.width=searchBarSpaceHeightPx;
+    LinearLayout targets=(LinearLayout)searchBar.findViewById(R.id.drag_target_bar);
+    targets.setOrientation(LinearLayout.VERTICAL);
+    FrameLayout.LayoutParams targetsLp=(FrameLayout.LayoutParams)targets.getLayoutParams();
+    targetsLp.gravity=Gravity.TOP;
+    targetsLp.height=LayoutParams.WRAP_CONTENT;
+  }
+ else {
+    lp.gravity=Gravity.TOP;
+    lp.height=searchBarSpaceHeightPx;
+    LinearLayout targets=(LinearLayout)searchBar.findViewById(R.id.drag_target_bar);
+    targets.getLayoutParams().width=searchBarSpaceWidthPx;
+  }
+  searchBar.setLayoutParams(lp);
+  View qsbBar=launcher.getOrCreateQsbBar();
+  if (qsbBar != null) {
+    qsbBar.setVisibility(searchBarVisible ? View.VISIBLE : View.GONE);
+    LayoutParams vglp=qsbBar.getLayoutParams();
+    vglp.width=LayoutParams.MATCH_PARENT;
+    vglp.height=LayoutParams.MATCH_PARENT;
+    qsbBar.setLayoutParams(vglp);
+  }
+}

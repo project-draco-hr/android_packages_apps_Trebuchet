@@ -1,8 +1,8 @@
 {
   if (isTablet && !isVerticalBarLayout()) {
-    return 4 * edgeMarginPx;
+    return searchBarVisible ? 4 * edgeMarginPx : 0;
   }
  else {
-    return 2 * edgeMarginPx;
+    return searchBarVisible ? 2 * edgeMarginPx : 0;
   }
 }

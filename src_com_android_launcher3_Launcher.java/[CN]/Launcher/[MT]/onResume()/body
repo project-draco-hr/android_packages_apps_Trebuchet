@@ -68,4 +68,5 @@
   if (mLauncherCallbacks != null) {
     mLauncherCallbacks.onResume();
   }
+  reloadLauncherIfNeeded();
 }

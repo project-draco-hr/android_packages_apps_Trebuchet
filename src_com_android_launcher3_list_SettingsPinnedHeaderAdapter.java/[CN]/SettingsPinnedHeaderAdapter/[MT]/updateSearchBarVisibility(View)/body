@@ -1,0 +1,10 @@
+{
+  boolean isSearchEnabled=SettingsProvider.getBoolean(mContext,SettingsProvider.SETTINGS_UI_HOMESCREEN_SEARCH,R.bool.preferences_interface_homescreen_search_default);
+  if (!isSearchEnabled) {
+    if (!Utilities.searchActivityExists(mContext)) {
+      Toast.makeText(mContext,mContext.getString(R.string.search_activity_not_found),Toast.LENGTH_SHORT).show();
+      return;
+    }
+  }
+  onSettingsBooleanChanged(v,SettingsProvider.SETTINGS_UI_HOMESCREEN_SEARCH,R.bool.preferences_interface_homescreen_search_default);
+}

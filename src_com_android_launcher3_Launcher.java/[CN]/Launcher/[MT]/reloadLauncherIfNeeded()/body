@@ -1,0 +1,8 @@
+{
+  if (mReloadLauncher) {
+    reloadLauncher(mWorkspace.getCurrentPage());
+    mReloadLauncher=false;
+    return true;
+  }
+  return false;
+}
