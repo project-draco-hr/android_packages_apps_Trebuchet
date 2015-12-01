@@ -1,7 +1,0 @@
-{
-  Resources res=getResources();
-  mSectionStrategy=sectionStrategy;
-  mSectionNamesMargin=mSectionStrategy == SECTION_STRATEGY_GRID ? res.getDimensionPixelSize(R.dimen.all_apps_grid_view_start_margin) : res.getDimensionPixelSize(R.dimen.all_apps_grid_view_start_margin_with_sections);
-  mAdapter.setSectionStrategy(mSectionStrategy);
-  mAppsRecyclerView.setSectionStrategy(mSectionStrategy);
-}

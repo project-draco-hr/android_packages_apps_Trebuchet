@@ -18,12 +18,14 @@
   mRevealView=findViewById(R.id.all_apps_reveal);
   mAppsRecyclerView=(AllAppsRecyclerView)findViewById(R.id.apps_list_view);
   mAppsRecyclerView.setApps(mApps);
-  mAppsRecyclerView.setSectionStrategy(mSectionStrategy);
   mAppsRecyclerView.setLayoutManager(mLayoutManager);
   mAppsRecyclerView.setAdapter(mAdapter);
   mAppsRecyclerView.setHasFixedSize(true);
   if (mItemDecoration != null) {
     mAppsRecyclerView.addItemDecoration(mItemDecoration);
   }
+  setScroller();
+  updateGridTheme();
+  updateSectionStrategy();
   updateBackgroundAndPaddings();
 }

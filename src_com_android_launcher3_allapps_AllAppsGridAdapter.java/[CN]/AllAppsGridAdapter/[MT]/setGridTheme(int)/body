@@ -3,5 +3,5 @@
   int sectionTextColorId=mGridTheme == AllAppsContainerView.GRID_THEME_DARK ? R.color.all_apps_grid_section_text_color_dark : R.color.all_apps_grid_section_text_color;
   mSectionTextPaint.setColor(mLauncher.getResources().getColor(sectionTextColorId));
   Resources res=mLauncher.getResources();
-  mAllAppsTextColor=mGridTheme == AllAppsContainerView.GRID_THEME_DARK ? res.getColor(R.color.all_apps_grid_section_text_color_dark) : res.getColor(R.color.all_apps_grid_section_text_color);
+  mAllAppsTextColor=mGridTheme == AllAppsContainerView.GRID_THEME_DARK ? res.getColor(R.color.quantum_panel_text_color_dark) : res.getColor(R.color.quantum_panel_text_color);
 }

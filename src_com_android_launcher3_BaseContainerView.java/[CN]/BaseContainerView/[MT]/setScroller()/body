@@ -1,6 +1,8 @@
 {
-  mUseScrubber=use;
-  if (use) {
+  Context context=getContext();
+  boolean useHorizontalScroller=SettingsProvider.getBoolean(context,SettingsProvider.SETTINGS_UI_USE_HORIZONTAL_SCRUBBER,R.bool.preferences_interface_use_horizontal_scrubber_default);
+  mUseScrubber=useHorizontalScroller;
+  if (mUseScrubber) {
     ViewStub stub=(ViewStub)findViewById(R.id.scrubber_container_stub);
     mScrubberContainerView=stub.inflate();
     if (mScrubberContainerView == null) {

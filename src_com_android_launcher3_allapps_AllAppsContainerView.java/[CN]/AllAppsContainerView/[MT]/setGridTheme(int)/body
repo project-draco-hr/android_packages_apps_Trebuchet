@@ -1,5 +1,0 @@
-{
-  mGridTheme=gridTheme;
-  mAdapter.setGridTheme(mGridTheme);
-  updateBackgroundAndPaddings(true);
-}

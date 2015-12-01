@@ -12,7 +12,7 @@
   mContainerView.setPadding(0,0,0,0);
   int startInset=Math.max(mSectionNamesMargin,mAppsRecyclerView.getMaxScrollbarWidth());
   int topBottomPadding=mRecyclerViewTopBottomPadding;
-  final boolean useScubber=userScrubber();
+  final boolean useScubber=useScrubber();
   if (isRtl) {
     mAppsRecyclerView.setPadding(padding.left + mAppsRecyclerView.getMaxScrollbarWidth(),topBottomPadding,padding.right + startInset,useScubber ? mScrubberHeight + topBottomPadding : topBottomPadding);
     if (useScubber) {

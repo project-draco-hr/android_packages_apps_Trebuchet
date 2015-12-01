@@ -1,0 +1,9 @@
+{
+  Context context=getContext();
+  Resources res=context.getResources();
+  boolean useCompactGrid=SettingsProvider.getBoolean(context,SettingsProvider.SETTINGS_UI_DRAWER_STYLE_USE_COMPACT,R.bool.preferences_interface_drawer_compact_default);
+  mSectionStrategy=useCompactGrid ? SECTION_STRATEGY_GRID : SECTION_STRATEGY_RAGGED;
+  mSectionNamesMargin=useCompactGrid ? res.getDimensionPixelSize(R.dimen.all_apps_grid_view_start_margin) : res.getDimensionPixelSize(R.dimen.all_apps_grid_view_start_margin_with_sections);
+  mAdapter.setSectionStrategy(mSectionStrategy);
+  mAppsRecyclerView.setSectionStrategy(mSectionStrategy);
+}

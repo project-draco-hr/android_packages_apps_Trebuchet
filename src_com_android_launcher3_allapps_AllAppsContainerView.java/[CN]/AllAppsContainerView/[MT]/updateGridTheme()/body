@@ -1,0 +1,7 @@
+{
+  Context context=getContext();
+  boolean useDarkColor=SettingsProvider.getBoolean(context,SettingsProvider.SETTINGS_UI_DRAWER_DARK,R.bool.preferences_interface_drawer_dark_default);
+  mGridTheme=useDarkColor ? GRID_THEME_DARK : GRID_THEME_LIGHT;
+  mAdapter.setGridTheme(mGridTheme);
+  updateBackgroundAndPaddings(true);
+}
