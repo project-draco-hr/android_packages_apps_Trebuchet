@@ -5,7 +5,8 @@
   initializeDeviceProfile(app);
   mDeviceProfile.layout(this);
   mModel.resetLoadedState(true,true);
-  mModel.startLoader(page,LauncherModel.LOADER_FLAG_NONE);
+  int flag=mResizeGridRequired ? LauncherModel.LOADER_FLAG_RESIZE_GRID : LauncherModel.LOADER_FLAG_NONE;
+  mModel.startLoader(page,flag);
   mWorkspace.updateCustomContentVisibility();
   mAppsView.reset();
 }

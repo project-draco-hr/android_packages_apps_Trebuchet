@@ -1,0 +1,33 @@
+{
+  mDialog=new Dialog(getActivity());
+  mDialog.setTitle(getResources().getString(R.string.preferences_interface_homescreen_custom));
+  mDialog.setContentView(R.layout.custom_grid_size_dialog);
+  NumberPicker nPRows=(NumberPicker)mDialog.findViewById(R.id.custom_rows);
+  NumberPicker nPColumns=(NumberPicker)mDialog.findViewById(R.id.custom_columns);
+  InvariantDeviceProfile grid=getInvariantDeviceProfile();
+  int rows=grid.numRowsBase;
+  int columns=grid.numColumnsBase;
+  nPRows.setMinValue(Math.max(MIN_DYNAMIC_GRID_ROWS,rows - InvariantDeviceProfile.GRID_SIZE_MIN));
+  nPRows.setMaxValue(rows + InvariantDeviceProfile.GRID_SIZE_MAX);
+  nPRows.setValue(mCustomGridRows);
+  nPRows.setWrapSelectorWheel(false);
+  nPRows.setOnValueChangedListener(this);
+  nPRows.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
+  nPColumns.setMinValue(Math.max(MIN_DYNAMIC_GRID_COLUMNS,columns - InvariantDeviceProfile.GRID_SIZE_MIN));
+  nPColumns.setMaxValue(columns + InvariantDeviceProfile.GRID_SIZE_MAX);
+  nPColumns.setValue(mCustomGridColumns);
+  nPColumns.setWrapSelectorWheel(false);
+  nPColumns.setOnValueChangedListener(this);
+  nPColumns.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
+  Button button=(Button)mDialog.findViewById(R.id.dialog_confirm_button);
+  button.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      if (mDialog != null) {
+        mDialog.dismiss();
+      }
+    }
+  }
+);
+  mDialog.setOnDismissListener(this);
+  mDialog.show();
+}

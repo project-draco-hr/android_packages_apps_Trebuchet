@@ -1,0 +1,5 @@
+{
+  mRows=rows;
+  mColumns=columns;
+  invalidate();
+}

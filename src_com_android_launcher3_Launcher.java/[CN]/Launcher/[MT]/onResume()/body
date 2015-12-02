@@ -68,6 +68,10 @@
   if (mLauncherCallbacks != null) {
     mLauncherCallbacks.onResume();
   }
+  Fragment gridFragment=getFragmentManager().findFragmentByTag(DynamicGridSizeFragment.DYNAMIC_GRID_SIZE_FRAGMENT);
+  if (gridFragment != null) {
+    mDynamicGridSizeFragment.setSize();
+  }
   reloadLauncherIfNeeded();
   Fragment f1=getFragmentManager().findFragmentByTag(HiddenFolderFragment.HIDDEN_FOLDER_FRAGMENT);
   if (f1 != null && !mHiddenFolderAuth) {

@@ -19,6 +19,27 @@
   numFolderRows=closestProfile.numFolderRows;
   numFolderColumns=closestProfile.numFolderColumns;
   minAllAppsPredictionColumns=closestProfile.minAllAppsPredictionColumns;
+  numRowsBase=numRows;
+  int gridResize=SettingsProvider.getIntCustomDefault(context,SettingsProvider.SETTINGS_UI_DYNAMIC_GRID_SIZE,0);
+  if (GridSize.getModeForValue(gridResize) != GridSize.Custom) {
+    numRows+=gridResize;
+  }
+ else {
+    int iTempNumberOfRows=SettingsProvider.getIntCustomDefault(context,SettingsProvider.SETTINGS_UI_HOMESCREEN_ROWS,numRows);
+    if (iTempNumberOfRows > 0) {
+      numRows=iTempNumberOfRows;
+    }
+  }
+  numColumnsBase=numColumns;
+  if (GridSize.getModeForValue(gridResize) != GridSize.Custom) {
+    numColumns+=gridResize;
+  }
+ else {
+    int iTempNumberOfColumns=SettingsProvider.getIntCustomDefault(context,SettingsProvider.SETTINGS_UI_HOMESCREEN_COLUMNS,numColumns);
+    if (iTempNumberOfColumns > 0) {
+      numColumns=iTempNumberOfColumns;
+    }
+  }
   iconSize=interpolatedDeviceProfileOut.iconSize;
   iconBitmapSize=Utilities.pxFromDp(iconSize,dm);
   iconTextSize=interpolatedDeviceProfileOut.iconTextSize;

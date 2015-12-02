@@ -1,0 +1,8 @@
+{
+  final int n=getChildCount();
+  for (int i=0; i < n; i++) {
+    final View child=getChildAt(i);
+    setLinearLayoutChildInsets(child,insets,mInsets);
+  }
+  mInsets.set(insets);
+}

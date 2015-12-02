@@ -1,0 +1,15 @@
+{
+  float width=getWidth() - getPaddingLeft() - getPaddingRight();
+  float height=getHeight() - getPaddingTop() - getPaddingBottom();
+  float xOffset=getPaddingLeft();
+  float yOffset=getPaddingTop();
+  canvas.drawColor(mBackgroundColor);
+  for (int i=1; i < mRows; i++) {
+    float yPos=yOffset + height / mRows * i;
+    canvas.drawLine(xOffset,yPos,xOffset + width,yPos,mForegroundPaint);
+  }
+  for (int j=1; j < mColumns; j++) {
+    float xPos=xOffset + width / mColumns * j;
+    canvas.drawLine(xPos,yOffset,xPos,yOffset + height,mForegroundPaint);
+  }
+}

@@ -1,0 +1,4 @@
+{
+  LauncherAppState app=LauncherAppState.getInstance();
+  return app.getInvariantDeviceProfile();
+}

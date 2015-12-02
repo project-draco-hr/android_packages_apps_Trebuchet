@@ -1,0 +1,12 @@
+{
+switch (value) {
+case 1:
+    return Cozy;
+case 2:
+  return Condensed;
+case 3:
+return Custom;
+default :
+return Comfortable;
+}
+}

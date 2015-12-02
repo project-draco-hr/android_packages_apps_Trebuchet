@@ -1,3 +1,4 @@
 LongArrayMap<ItemInfo[][]> occupied
 ItemInfo item
 ArrayList<Long> workspaceScreens
+boolean shouldResizeAndUpdateDB

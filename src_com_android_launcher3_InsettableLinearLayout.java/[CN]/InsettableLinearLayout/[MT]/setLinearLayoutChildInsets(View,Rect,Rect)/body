@@ -1,0 +1,17 @@
+{
+  final LayoutParams lp=(LayoutParams)child.getLayoutParams();
+  if (child instanceof Insettable) {
+    ((Insettable)child).setInsets(newInsets);
+  }
+ else   if (!lp.ignoreInsets) {
+    if (!lp.ignoreTopInsets) {
+      lp.topMargin+=(newInsets.top - oldInsets.top);
+    }
+    lp.leftMargin+=(newInsets.left - oldInsets.left);
+    lp.rightMargin+=(newInsets.right - oldInsets.right);
+    if (!lp.ignoreBottomInsets) {
+      lp.bottomMargin+=(newInsets.bottom - oldInsets.bottom);
+    }
+  }
+  child.setLayoutParams(lp);
+}

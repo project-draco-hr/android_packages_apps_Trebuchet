@@ -1,0 +1,30 @@
+{
+  if (convertView == null) {
+    LayoutInflater inflater=(LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    convertView=inflater.inflate(R.layout.settings_pane_list_item,parent,false);
+  }
+  TextView textView=(TextView)convertView.findViewById(R.id.item_name);
+  Configuration config=getResources().getConfiguration();
+  if (config.getLayoutDirection() == View.LAYOUT_DIRECTION_RTL) {
+    textView.setGravity(Gravity.RIGHT);
+  }
+  if (position == mCurrentSize.getValue()) {
+    if (mCurrentSelection != null) {
+      setCleared(mCurrentSelection);
+    }
+    mCurrentSelection=convertView;
+    setSelected(mCurrentSelection);
+  }
+  if (position == InvariantDeviceProfile.GridSize.Custom.getValue()) {
+    InvariantDeviceProfile grid=getInvariantDeviceProfile();
+    int rows=SettingsProvider.getIntCustomDefault(getActivity(),SettingsProvider.SETTINGS_UI_HOMESCREEN_ROWS,grid.numRowsBase);
+    int columns=SettingsProvider.getIntCustomDefault(getActivity(),SettingsProvider.SETTINGS_UI_HOMESCREEN_COLUMNS,grid.numColumnsBase);
+    textView.setText(mContext.getString(mTitleResIds[position],rows,columns));
+  }
+ else {
+    textView.setText(mTitleResIds[position]);
+  }
+  convertView.setOnClickListener(mSettingsItemListener);
+  convertView.setTag(position);
+  return convertView;
+}

@@ -1,0 +1,8 @@
+{
+  super(c,attrs);
+  TypedArray a=c.obtainStyledAttributes(attrs,R.styleable.InsettableLinearLayout_Layout);
+  ignoreInsets=a.getBoolean(R.styleable.InsettableLinearLayout_Layout_layout_ignoreInsets,false);
+  ignoreTopInsets=a.getBoolean(R.styleable.InsettableLinearLayout_Layout_layout_ignoreTopInsets,false);
+  ignoreBottomInsets=a.getBoolean(R.styleable.InsettableLinearLayout_Layout_layout_ignoreBottomInsets,false);
+  a.recycle();
+}

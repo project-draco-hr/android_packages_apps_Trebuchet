@@ -1,0 +1,4 @@
+{
+  mReloadLauncher=true;
+  mResizeGridRequired=shouldResizeGrid;
+}

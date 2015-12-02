@@ -1,0 +1,3 @@
+{
+  setLinearLayoutChildInsets(child,mInsets,new Rect());
+}

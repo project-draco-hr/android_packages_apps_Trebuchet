@@ -16,6 +16,7 @@
   mOverviewPanel=(ViewGroup)findViewById(R.id.overview_panel);
   mOverviewSettingsPanel=new OverviewSettingsPanel(this);
   mOverviewSettingsPanel.initializeAdapter();
+  mDarkPanel=mOverviewPanel.findViewById(R.id.dark_panel);
   mWidgetsButton=findViewById(R.id.widget_button);
   mWidgetsButton.setOnClickListener(new OnClickListener(){
     @Override public void onClick(    View arg0){

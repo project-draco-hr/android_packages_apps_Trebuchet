@@ -1,0 +1,6 @@
+{
+  SettingsProvider.putInt(getActivity(),SettingsProvider.SETTINGS_UI_HOMESCREEN_ROWS,mCustomGridRows);
+  SettingsProvider.putInt(getActivity(),SettingsProvider.SETTINGS_UI_HOMESCREEN_COLUMNS,mCustomGridColumns);
+  mAdapter.notifyDataSetInvalidated();
+  mDynamicGrid.setMetrics(mCustomGridRows,mCustomGridColumns);
+}

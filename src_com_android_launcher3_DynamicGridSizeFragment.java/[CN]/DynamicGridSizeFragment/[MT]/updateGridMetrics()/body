@@ -1,0 +1,9 @@
+{
+  if (mCurrentSize == InvariantDeviceProfile.GridSize.Custom) {
+    mDynamicGrid.setMetrics(mCustomGridRows,mCustomGridColumns);
+  }
+ else {
+    InvariantDeviceProfile grid=getInvariantDeviceProfile();
+    mDynamicGrid.setMetrics(grid.numRowsBase + mCurrentSize.getValue(),grid.numColumnsBase + mCurrentSize.getValue());
+  }
+}

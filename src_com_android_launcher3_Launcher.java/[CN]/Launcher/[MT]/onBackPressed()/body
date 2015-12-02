@@ -19,7 +19,13 @@
     showOverviewMode(true);
   }
  else   if (mWorkspace.isInOverviewMode()) {
-    showWorkspace(true);
+    Fragment gridFragment=getFragmentManager().findFragmentByTag(DynamicGridSizeFragment.DYNAMIC_GRID_SIZE_FRAGMENT);
+    if (gridFragment != null) {
+      mDynamicGridSizeFragment.setSize();
+    }
+ else {
+      showWorkspace(true);
+    }
   }
  else   if (mWorkspace.getOpenFolder() != null) {
     Folder openFolder=mWorkspace.getOpenFolder();

@@ -10,6 +10,7 @@
   InvariantDeviceProfile profile=app.getInvariantDeviceProfile();
   int countX=profile.numColumns;
   int countY=profile.numRows;
+  boolean shouldResize=((mFlags & LOADER_FLAG_RESIZE_GRID) != 0);
   if (MigrateFromRestoreTask.ENABLED && MigrateFromRestoreTask.shouldRunTask(mContext)) {
     long migrationStartTime=System.currentTimeMillis();
     Log.v(TAG,"Starting workspace migration after restore");
@@ -240,7 +241,7 @@ info.isDisabled=disabledState;
 if (isSafeMode && !Utilities.isSystemApp(context,intent)) {
 info.isDisabled|=ShortcutInfo.FLAG_DISABLED_SAFEMODE;
 }
-if (!checkItemPlacement(occupied,info,sBgWorkspaceScreens)) {
+if (!checkItemPlacement(occupied,info,sBgWorkspaceScreens,shouldResize)) {
 itemsToRemove.add(id);
 break;
 }
@@ -284,7 +285,7 @@ folderInfo.cellY=c.getInt(cellYIndex);
 folderInfo.spanX=1;
 folderInfo.spanY=1;
 folderInfo.options=c.getInt(optionsIndex);
-if (!checkItemPlacement(occupied,folderInfo,sBgWorkspaceScreens)) {
+if (!checkItemPlacement(occupied,folderInfo,sBgWorkspaceScreens,shouldResize)) {
 itemsToRemove.add(id);
 break;
 }
@@ -368,7 +369,7 @@ itemsToRemove.add(id);
 continue;
 }
 appWidgetInfo.container=container;
-if (!checkItemPlacement(occupied,appWidgetInfo,sBgWorkspaceScreens)) {
+if (!checkItemPlacement(occupied,appWidgetInfo,sBgWorkspaceScreens,shouldResize)) {
 itemsToRemove.add(id);
 break;
 }
@@ -443,6 +444,14 @@ unusedScreens.remove(screenId);
 if (unusedScreens.size() != 0) {
 sBgWorkspaceScreens.removeAll(unusedScreens);
 updateWorkspaceScreenOrder(context,sBgWorkspaceScreens);
+}
+if (shouldResize) {
+for (ItemInfo info : sBgWorkspaceItems) {
+if (info != null && info.requiresDbUpdate) {
+info.requiresDbUpdate=false;
+LauncherModel.modifyItemInDatabase(mContext,info,info.container,info.screenId,info.cellX,info.cellY,info.spanX,info.spanY);
+}
+}
 }
 if (DEBUG_LOADERS) {
 Log.d(TAG,"loaded workspace in " + (SystemClock.uptimeMillis() - t) + "ms");

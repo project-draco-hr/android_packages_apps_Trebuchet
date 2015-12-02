@@ -1,0 +1,8 @@
+{
+  if (picker.getId() == R.id.custom_rows) {
+    mCustomGridRows=newVal;
+  }
+ else   if (picker.getId() == R.id.custom_columns) {
+    mCustomGridColumns=newVal;
+  }
+}

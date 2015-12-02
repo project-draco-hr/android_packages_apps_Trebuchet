@@ -1,0 +1,7 @@
+{
+  super(context,attrs);
+  Resources res=context.getResources();
+  mForegroundPaint=new Paint();
+  mForegroundPaint.setColor(res.getColor(R.color.dynamic_grid_preview_foreground));
+  mBackgroundColor=res.getColor(R.color.dynamic_grid_preview_background);
+}

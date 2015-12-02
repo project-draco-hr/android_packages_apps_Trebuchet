@@ -1,0 +1,29 @@
+{
+  if (enter) {
+    DisplayMetrics displaymetrics=new DisplayMetrics();
+    getActivity().getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
+    int width=displaymetrics.widthPixels;
+    Configuration config=getResources().getConfiguration();
+    final ObjectAnimator anim;
+    if (config.getLayoutDirection() == View.LAYOUT_DIRECTION_RTL) {
+      anim=ObjectAnimator.ofFloat(this,"translationX",-width,0);
+    }
+ else {
+      anim=ObjectAnimator.ofFloat(this,"translationX",width,0);
+    }
+    final View darkPanel=((Launcher)getActivity()).getDarkPanel();
+    darkPanel.setVisibility(View.VISIBLE);
+    ObjectAnimator anim2=ObjectAnimator.ofFloat(darkPanel,"alpha",0.0f,0.3f);
+    anim2.start();
+    anim.addListener(new AnimatorListenerAdapter(){
+      @Override public void onAnimationEnd(      Animator animation){
+        darkPanel.setVisibility(View.GONE);
+      }
+    }
+);
+    return anim;
+  }
+ else {
+    return super.onCreateAnimator(transit,enter,nextAnim);
+  }
+}

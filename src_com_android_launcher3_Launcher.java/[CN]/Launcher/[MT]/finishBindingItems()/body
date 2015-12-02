@@ -31,4 +31,7 @@
   if (mLauncherCallbacks != null) {
     mLauncherCallbacks.finishBindingItems(false);
   }
+  if (mWorkspace.isInOverviewMode()) {
+    reloadLauncherIfNeeded();
+  }
 }

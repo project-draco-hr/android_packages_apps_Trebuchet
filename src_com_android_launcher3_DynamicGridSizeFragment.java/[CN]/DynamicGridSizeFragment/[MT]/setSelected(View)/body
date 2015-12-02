@@ -1,0 +1,5 @@
+{
+  v.setBackgroundColor(Color.WHITE);
+  TextView t=(TextView)v.findViewById(R.id.item_name);
+  t.setTextColor(getResources().getColor(R.color.settings_bg_color));
+}

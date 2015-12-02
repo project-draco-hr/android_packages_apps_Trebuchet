@@ -28,6 +28,9 @@ current=SettingsProvider.getBoolean(mContext,SettingsProvider.SETTINGS_UI_HOMESC
 state=current ? res.getString(R.string.setting_state_on) : res.getString(R.string.setting_state_off);
 ((TextView)v.findViewById(R.id.item_state)).setText(state);
 break;
+case 3:
+updateDynamicGridSizeSettingsItem(v);
+break;
 default :
 ((TextView)v.findViewById(R.id.item_state)).setText("");
 }

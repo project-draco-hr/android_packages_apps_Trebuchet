@@ -1,0 +1,29 @@
+{
+  int gridSize=SettingsProvider.getIntCustomDefault(this,SettingsProvider.SETTINGS_UI_DYNAMIC_GRID_SIZE,0);
+  boolean customValuesChanged=false;
+  if (gridSize == size.getValue() && size == InvariantDeviceProfile.GridSize.Custom) {
+    int tempRows=SettingsProvider.getIntCustomDefault(this,SettingsProvider.SETTINGS_UI_HOMESCREEN_ROWS,mDeviceProfile.inv.numRows);
+    int tempColumns=SettingsProvider.getIntCustomDefault(this,SettingsProvider.SETTINGS_UI_HOMESCREEN_COLUMNS,mDeviceProfile.inv.numColumns);
+    if (tempColumns != mDeviceProfile.inv.numColumns || tempRows != mDeviceProfile.inv.numRows) {
+      customValuesChanged=true;
+    }
+  }
+  if (gridSize != size.getValue() || customValuesChanged) {
+    SettingsProvider.putInt(this,SettingsProvider.SETTINGS_UI_DYNAMIC_GRID_SIZE,size.getValue());
+    setReloadLauncher(true);
+  }
+  mOverviewSettingsPanel.notifyDataSetInvalidated();
+  FragmentTransaction fragmentTransaction=getFragmentManager().beginTransaction();
+  Configuration config=getResources().getConfiguration();
+  if (config.getLayoutDirection() == View.LAYOUT_DIRECTION_RTL) {
+    fragmentTransaction.setCustomAnimations(0,R.anim.exit_out_left);
+  }
+ else {
+    fragmentTransaction.setCustomAnimations(0,R.anim.exit_out_right);
+  }
+  fragmentTransaction.remove(mDynamicGridSizeFragment).commit();
+  mDarkPanel.setVisibility(View.VISIBLE);
+  ObjectAnimator anim=ObjectAnimator.ofFloat(mDarkPanel,"alpha",0.3f,0.0f);
+  anim.start();
+  anim.addListener(mAnimatorListener);
+}
