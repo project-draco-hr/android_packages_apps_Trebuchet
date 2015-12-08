@@ -1,0 +1,13 @@
+{
+  try {
+    Cursor c=db.rawQuery("SELECT rank FROM favorites;",null);
+    if (c != null) {
+      c.close();
+    }
+  }
+ catch (  SQLException ex) {
+    Log.e(TAG,ex.getMessage(),ex);
+    return addIntegerColumn(db,Favorites.RANK,0);
+  }
+  return true;
+}

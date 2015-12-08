@@ -1,0 +1,10 @@
+{
+  PackageManager packageManager=context.getPackageManager();
+  try {
+    PackageInfo pi=packageManager.getPackageInfo(pkg,0);
+    return pi.applicationInfo.enabled;
+  }
+ catch (  PackageManager.NameNotFoundException e) {
+    return false;
+  }
+}
