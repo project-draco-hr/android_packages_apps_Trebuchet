@@ -1,5 +1,4 @@
 {
-  reloadLauncherIfNeeded();
   boolean changed=mState != State.WORKSPACE || mWorkspace.getState() != Workspace.State.NORMAL;
   if (changed) {
     mWorkspace.setVisibility(View.VISIBLE);

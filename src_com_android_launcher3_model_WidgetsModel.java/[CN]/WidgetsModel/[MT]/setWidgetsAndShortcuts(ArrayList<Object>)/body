@@ -9,6 +9,7 @@
   mPackageItemInfos.clear();
   mWidgetAndShortcutNameComparator.reset();
   InvariantDeviceProfile idp=LauncherAppState.getInstance().getInvariantDeviceProfile();
+  ProtectedComponentsHelper.updateProtectedComponentsLists(mContext);
   for (  Object o : rawWidgetsShortcuts) {
     String packageName="";
     UserHandleCompat userHandle=null;
@@ -48,12 +49,18 @@
     PackageItemInfo pInfo=tmpPackageItemInfos.get(packageName);
     ArrayList<Object> widgetsShortcutsList=mWidgetsList.get(pInfo);
     if (widgetsShortcutsList != null) {
+      if (pInfo != null && ProtectedComponentsHelper.isProtectedPackage(pInfo.flags,packageName)) {
+        continue;
+      }
       widgetsShortcutsList.add(o);
     }
  else {
+      pInfo=new PackageItemInfo(packageName);
+      if (ProtectedComponentsHelper.isProtectedPackage(pInfo.flags,packageName)) {
+        continue;
+      }
       widgetsShortcutsList=new ArrayList<>();
       widgetsShortcutsList.add(o);
-      pInfo=new PackageItemInfo(packageName);
       mIconCache.getTitleAndIconForApp(packageName,userHandle,true,pInfo);
       pInfo.titleSectionName=mIndexer.computeSectionName(pInfo.title);
       mWidgetsList.put(pInfo,widgetsShortcutsList);

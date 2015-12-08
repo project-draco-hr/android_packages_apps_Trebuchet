@@ -1,0 +1,3 @@
+ArrayList<ItemInfo> workspaceItems
+ArrayList<LauncherAppWidgetInfo> appWidgets
+LongArrayMap<FolderInfo> folders

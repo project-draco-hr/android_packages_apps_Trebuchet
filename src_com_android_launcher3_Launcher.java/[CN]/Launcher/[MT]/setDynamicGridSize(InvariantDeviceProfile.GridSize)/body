@@ -10,7 +10,7 @@
   }
   if (gridSize != size.getValue() || customValuesChanged) {
     SettingsProvider.putInt(this,SettingsProvider.SETTINGS_UI_DYNAMIC_GRID_SIZE,size.getValue());
-    setReloadLauncher(true);
+    reloadLauncher(false,true);
   }
   mOverviewSettingsPanel.notifyDataSetInvalidated();
   FragmentTransaction fragmentTransaction=getFragmentManager().beginTransaction();

@@ -1,4 +1,5 @@
 {
+  mContext=context;
   mAppWidgetMgr=AppWidgetManagerCompat.getInstance(context);
   mWidgetAndShortcutNameComparator=new WidgetsAndShortcutNameComparator(context);
   mAppNameComparator=(new AppNameComparator(context)).getAppInfoComparator();

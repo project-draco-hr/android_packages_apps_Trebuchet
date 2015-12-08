@@ -1,5 +1,4 @@
 {
-  reloadLauncherIfNeeded();
   mWorkspace.setVisibility(View.VISIBLE);
   mStateTransitionAnimation.startAnimationToWorkspace(mState,mWorkspace.getState(),Workspace.State.OVERVIEW,WorkspaceStateTransitionAnimation.SCROLL_TO_CURRENT_PAGE,animated,null);
   mState=State.WORKSPACE;

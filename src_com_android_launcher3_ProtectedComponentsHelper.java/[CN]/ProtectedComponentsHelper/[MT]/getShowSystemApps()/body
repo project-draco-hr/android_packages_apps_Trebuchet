@@ -1,0 +1,3 @@
+{
+  return (sFilterApps & FILTER_APPS_SYSTEM_FLAG) != 0;
+}

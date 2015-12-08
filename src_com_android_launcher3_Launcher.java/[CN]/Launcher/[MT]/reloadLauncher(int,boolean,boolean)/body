@@ -1,12 +1,15 @@
 {
-  mSearchDropTargetBar.setupQsb(this);
   LauncherAppState app=LauncherAppState.getInstance();
   app.initInvariantDeviceProfile();
   initializeDeviceProfile(app);
   mDeviceProfile.layout(this);
   mModel.resetLoadedState(true,true);
-  int flag=mResizeGridRequired ? LauncherModel.LOADER_FLAG_RESIZE_GRID : LauncherModel.LOADER_FLAG_NONE;
+  int flag=resizeGrid ? LauncherModel.LOADER_FLAG_RESIZE_GRID : LauncherModel.LOADER_FLAG_NONE;
   mModel.startLoader(page,flag);
   mWorkspace.updateCustomContentVisibility();
-  mAppsView.reset();
+  mSearchDropTargetBar.setupQsb(this);
+  mSearchDropTargetBar.setVisibility(View.INVISIBLE);
+  if (reloadAppDrawer) {
+    reloadAppDrawer();
+  }
 }

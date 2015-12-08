@@ -1,0 +1,88 @@
+{
+  ArrayList<ComponentName> mHiddenApps=new ArrayList<ComponentName>();
+  ArrayList<String> mHiddenAppsPackages=new ArrayList<String>();
+  Context context=mApp.getContext();
+  String protectedComponents=CMSettings.Secure.getString(context.getContentResolver(),CMSettings.Secure.PROTECTED_COMPONENTS);
+  protectedComponents=protectedComponents == null ? "" : protectedComponents;
+  String[] flattened=protectedComponents.split("\\|");
+  for (  String flat : flattened) {
+    ComponentName cmp=ComponentName.unflattenFromString(flat);
+    if (cmp != null) {
+      mHiddenApps.add(cmp);
+      mHiddenAppsPackages.add(cmp.getPackageName());
+    }
+  }
+  int N=workspaceItems.size() - 1;
+  for (int i=N; i >= 0; i--) {
+    final ItemInfo item=workspaceItems.get(i);
+    if (item instanceof ShortcutInfo) {
+      ShortcutInfo shortcut=(ShortcutInfo)item;
+      if (shortcut.intent != null && shortcut.intent.getComponent() != null) {
+        if (mHiddenApps.contains(shortcut.intent.getComponent())) {
+          LauncherModel.deleteItemFromDatabase(mContext,shortcut);
+          workspaceItems.remove(i);
+        }
+      }
+    }
+ else {
+      final FolderInfo folder=(FolderInfo)item;
+      List<ShortcutInfo> shortcuts=folder.contents;
+      int NN=shortcuts.size() - 1;
+      for (int j=NN; j >= 0; j--) {
+        final ShortcutInfo sci=shortcuts.get(j);
+        if (sci.intent != null && sci.intent.getComponent() != null) {
+          if (!folder.hidden) {
+            if (mHiddenApps.contains(sci.intent.getComponent())) {
+              LauncherModel.deleteItemFromDatabase(mContext,sci);
+              Runnable r=new Runnable(){
+                public void run(){
+                  folder.remove(sci);
+                }
+              }
+;
+              runOnMainThread(r);
+            }
+          }
+ else {
+            if (!mHiddenApps.contains(sci.intent.getComponent())) {
+              LauncherModel.deleteItemFromDatabase(mContext,sci);
+              Runnable r=new Runnable(){
+                public void run(){
+                  folder.remove(sci);
+                }
+              }
+;
+              runOnMainThread(r);
+            }
+          }
+        }
+      }
+      if (folder.contents.size() == 1 && !folder.hidden) {
+        ShortcutInfo finalItem=folder.contents.get(0);
+        finalItem.container=folder.container;
+        LauncherModel.deleteItemFromDatabase(mContext,folder);
+        if (!mHiddenApps.contains(finalItem.intent.getComponent())) {
+          LauncherModel.addOrMoveItemInDatabase(mContext,finalItem,folder.container,folder.screenId,folder.cellX,folder.cellY);
+          workspaceItems.add(finalItem);
+        }
+        workspaceItems.remove(i);
+        folders.remove(Long.valueOf(item.id));
+      }
+ else       if (folder.contents.size() == 0) {
+        LauncherModel.deleteFolderContentsFromDatabase(mContext,folder);
+        workspaceItems.remove(i);
+        folders.remove(Long.valueOf(item.id));
+      }
+    }
+  }
+  N=appWidgets.size() - 1;
+  for (int i=N; i >= 0; i--) {
+    final LauncherAppWidgetInfo item=appWidgets.get(i);
+    if (item.providerName != null) {
+      if (mHiddenAppsPackages.contains(item.providerName.getPackageName())) {
+        LauncherModel.deleteItemFromDatabase(mContext,item);
+        appWidgets.remove(i);
+      }
+    }
+  }
+}

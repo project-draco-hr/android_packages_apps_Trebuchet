@@ -1,0 +1,3 @@
+int page
+boolean resizeGrid
+boolean reloadAppDrawer

@@ -1,0 +1,4 @@
+{
+  boolean system=isSystemFlag(flags);
+  return sProtectedApps.contains(componentName) || (system && !getShowSystemApps()) || (!system && !getShowDownloadedApps());
+}

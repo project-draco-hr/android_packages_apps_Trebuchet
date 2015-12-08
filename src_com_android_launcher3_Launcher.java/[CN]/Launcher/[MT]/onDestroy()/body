@@ -27,4 +27,5 @@
   if (mLauncherCallbacks != null) {
     mLauncherCallbacks.onDestroy();
   }
+  unregisterReceiver(protectedAppsChangedReceiver);
 }

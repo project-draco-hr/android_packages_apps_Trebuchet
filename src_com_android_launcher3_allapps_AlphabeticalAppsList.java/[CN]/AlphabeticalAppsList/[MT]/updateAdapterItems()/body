@@ -50,7 +50,11 @@
       }
     }
   }
+  ProtectedComponentsHelper.updateProtectedComponentsLists(mLauncher);
   for (  AppInfo info : getFiltersAppInfos()) {
+    if (ProtectedComponentsHelper.isProtectedApp(info.flags,info.componentName)) {
+      continue;
+    }
     String sectionName=getAndUpdateCachedSectionName(info.title);
     if (lastSectionInfo == null || !sectionName.equals(lastSectionName)) {
       lastSectionName=sectionName;

@@ -1,0 +1,14 @@
+{
+  String protectedComponents=CMSettings.Secure.getString(context.getContentResolver(),CMSettings.Secure.PROTECTED_COMPONENTS);
+  protectedComponents=protectedComponents == null ? "" : protectedComponents;
+  String[] flattened=protectedComponents.split("\\|");
+  sProtectedApps=new ArrayList<ComponentName>(flattened.length);
+  sProtectedPackages=new ArrayList<String>(flattened.length);
+  for (  String flat : flattened) {
+    ComponentName cmp=ComponentName.unflattenFromString(flat);
+    if (cmp != null) {
+      sProtectedApps.add(cmp);
+      sProtectedPackages.add(cmp.getPackageName());
+    }
+  }
+}
