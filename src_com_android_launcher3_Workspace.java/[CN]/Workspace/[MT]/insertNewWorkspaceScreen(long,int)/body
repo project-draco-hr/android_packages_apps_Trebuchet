@@ -9,6 +9,10 @@
   mWorkspaceScreens.put(screenId,newScreen);
   mScreenOrder.add(insertIndex,screenId);
   addView(newScreen,insertIndex);
+  if (getDefaultScreenId() == screenId) {
+    int defaultPage=getPageIndexForScreenId(screenId);
+    moveToScreen(defaultPage,false);
+  }
   LauncherAccessibilityDelegate delegate=LauncherAppState.getInstance().getAccessibilityDelegate();
   if (delegate != null && delegate.isInAccessibleDrag()) {
     newScreen.enableAccessibleDrag(true,CellLayout.WORKSPACE_ACCESSIBILITY_DRAG);

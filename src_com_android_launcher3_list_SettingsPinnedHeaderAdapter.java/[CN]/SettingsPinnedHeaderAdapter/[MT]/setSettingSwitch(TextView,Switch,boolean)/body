@@ -1,0 +1,5 @@
+{
+  settingSwitch.setChecked(isChecked);
+  settingSwitch.setVisibility(View.VISIBLE);
+  stateView.setVisibility(View.INVISIBLE);
+}

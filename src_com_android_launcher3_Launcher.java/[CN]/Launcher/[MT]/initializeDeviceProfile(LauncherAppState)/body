@@ -1,6 +1,7 @@
 {
   mDeviceProfile=getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE ? app.getInvariantDeviceProfile().landscapeProfile : app.getInvariantDeviceProfile().portraitProfile;
   mHideIconLabels=SettingsProvider.getBoolean(this,SettingsProvider.SETTINGS_UI_HOMESCREEN_HIDE_ICON_LABELS,R.bool.preferences_interface_homescreen_hide_icon_labels_default);
+  mDefaultScreenId=SettingsProvider.getLongCustomDefault(this,SettingsProvider.SETTINGS_UI_HOMESCREEN_DEFAULT_SCREEN_ID,1);
   mModel=app.setLauncher(this);
   mIconCache=app.getIconCache();
   mIconCache.flushInvalidIcons(mDeviceProfile);

@@ -1,0 +1,6 @@
+{
+  if (mOverviewPanel != null) {
+    View defaultPageButton=mOverviewPanel.findViewById(R.id.default_screen_button);
+    defaultPageButton.setActivated(mWorkspace.getScreenIdForPageIndex(mWorkspace.getPageNearestToCenterOfScreen()) == mDefaultScreenId);
+  }
+}

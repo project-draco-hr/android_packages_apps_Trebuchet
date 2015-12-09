@@ -11,4 +11,5 @@
   }
   mLauncher.getModel().updateWorkspaceScreenOrder(mLauncher,mScreenOrder);
   enableLayoutTransitions();
+  mLauncher.updateDefaultScreenButton();
 }

@@ -1,3 +1,7 @@
 {
   if (LOGD)   Log.d(TAG,"onClickDefaultScreenButton");
+  if (!mWorkspace.isInOverviewMode())   return;
+  mDefaultScreenId=mWorkspace.getScreenIdForPageIndex(mWorkspace.getPageNearestToCenterOfScreen());
+  updateDefaultScreenButton();
+  SettingsProvider.get(this).edit().putLong(SettingsProvider.SETTINGS_UI_HOMESCREEN_DEFAULT_SCREEN_ID,mDefaultScreenId).commit();
 }

@@ -8,7 +8,6 @@
   mModel.startLoader(page,flag);
   mWorkspace.updateCustomContentVisibility();
   mSearchDropTargetBar.setupQsb(this);
-  mSearchDropTargetBar.setVisibility(View.INVISIBLE);
   if (reloadAppDrawer) {
     reloadAppDrawer();
   }

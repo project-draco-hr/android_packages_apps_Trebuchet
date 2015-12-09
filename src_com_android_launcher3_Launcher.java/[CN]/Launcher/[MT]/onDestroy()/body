@@ -28,4 +28,5 @@
     mLauncherCallbacks.onDestroy();
   }
   unregisterReceiver(protectedAppsChangedReceiver);
+  unregisterReceiver(searchBarVisibilityChangedReceiver);
 }

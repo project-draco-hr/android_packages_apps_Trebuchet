@@ -1,0 +1,4 @@
+{
+  settingSwitch.setVisibility(View.INVISIBLE);
+  stateView.setVisibility(View.INVISIBLE);
+}

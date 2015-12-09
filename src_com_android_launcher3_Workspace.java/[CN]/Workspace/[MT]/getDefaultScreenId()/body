@@ -1,0 +1,3 @@
+{
+  return SettingsProvider.getLongCustomDefault(mLauncher,SettingsProvider.SETTINGS_UI_HOMESCREEN_DEFAULT_SCREEN_ID,1);
+}

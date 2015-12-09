@@ -1,4 +1,7 @@
 {
   super.computeScroll();
   if (mScrollWallpaper)   mWallpaperOffset.syncWithScroll();
+  if (isInOverviewMode() && !isReordering(true)) {
+    mLauncher.updateDefaultScreenButton();
+  }
 }

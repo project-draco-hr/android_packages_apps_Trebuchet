@@ -2,6 +2,5 @@
   boolean current=SettingsProvider.getBoolean(mContext,key,res);
   SettingsProvider.putBoolean(mContext,key,!current);
   SettingsProvider.putBoolean(mContext,SettingsProvider.SETTINGS_CHANGED,true);
-  String state=current ? mLauncher.getResources().getString(R.string.setting_state_off) : mLauncher.getResources().getString(R.string.setting_state_on);
-  ((TextView)v.findViewById(R.id.item_state)).setText(state);
+  ((Switch)v.findViewById(R.id.setting_switch)).setChecked(!current);
 }
