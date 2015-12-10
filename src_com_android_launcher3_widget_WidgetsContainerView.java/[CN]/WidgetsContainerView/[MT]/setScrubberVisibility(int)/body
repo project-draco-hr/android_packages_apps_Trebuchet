@@ -1,0 +1,5 @@
+{
+  if (mScrubberContainerView != null) {
+    mScrubberContainerView.setVisibility(visibility);
+  }
+}

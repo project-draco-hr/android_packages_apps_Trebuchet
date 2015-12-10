@@ -10,4 +10,6 @@
   }
 );
   mPadding.set(getPaddingLeft(),getPaddingTop(),getPaddingRight(),getPaddingBottom());
+  setScroller();
+  updateBackgroundAndPaddings();
 }

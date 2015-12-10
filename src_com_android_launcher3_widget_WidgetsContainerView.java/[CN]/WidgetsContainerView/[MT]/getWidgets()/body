@@ -1,0 +1,6 @@
+{
+  if (mView != null) {
+    return mView.getWidgets();
+  }
+  return null;
+}

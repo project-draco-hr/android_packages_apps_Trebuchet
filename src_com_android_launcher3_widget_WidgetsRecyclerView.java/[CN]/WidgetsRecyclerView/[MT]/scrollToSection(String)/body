@@ -1,3 +1,18 @@
 {
+  if (mWidgets == null) {
+    return "";
+  }
+  int rowCount=mWidgets.getPackageSize();
+  if (rowCount == 0) {
+    return "";
+  }
+  for (int i=0; i < rowCount; i++) {
+    PackageItemInfo packageItemInfo=mWidgets.getPackageItemInfo(i);
+    if (packageItemInfo != null && !TextUtils.isEmpty(packageItemInfo.titleSectionName) && packageItemInfo.titleSectionName.equals(sectionName)) {
+      LinearLayoutManager layoutManager=((LinearLayoutManager)getLayoutManager());
+      layoutManager.smoothScrollToPosition(this,null,i);
+      return packageItemInfo.titleSectionName;
+    }
+  }
   return null;
 }

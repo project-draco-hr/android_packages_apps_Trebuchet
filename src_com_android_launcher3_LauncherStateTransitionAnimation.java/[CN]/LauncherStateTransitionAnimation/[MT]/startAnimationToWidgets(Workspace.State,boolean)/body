@@ -5,6 +5,9 @@
     @Override public float getMaterialRevealViewFinalAlpha(    View revealView){
       return 0.3f;
     }
+    @Override void onTransitionComplete(){
+      toView.setScrubberVisibility(View.VISIBLE);
+    }
   }
 ;
   mCurrentAnimation=startAnimationToOverlay(fromWorkspaceState,Workspace.State.OVERVIEW_HIDDEN,buttonView,toView,toView.getContentView(),toView.getRevealView(),null,animated,cb);

@@ -1,5 +1,6 @@
 {
   final WidgetsContainerView widgetsView=mLauncher.getWidgetsView();
+  widgetsView.setScrubberVisibility(View.INVISIBLE);
   PrivateTransitionCallbacks cb=new PrivateTransitionCallbacks(){
     @Override float getMaterialRevealViewFinalAlpha(    View revealView){
       return 0.3f;

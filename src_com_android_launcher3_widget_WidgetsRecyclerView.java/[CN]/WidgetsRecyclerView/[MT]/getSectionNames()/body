@@ -1,3 +1,16 @@
 {
-  return new String[0];
+  if (mWidgets == null) {
+    return new String[0];
+  }
+  final int N=mWidgets.getPackageSize();
+  ArrayList<String> sections=new ArrayList<>();
+  String lastLetter=null;
+  for (int i=0; i < N; i++) {
+    final String titleSectionName=mWidgets.getPackageItemInfo(i).titleSectionName;
+    if (!TextUtils.isEmpty(titleSectionName) && !titleSectionName.equals(lastLetter)) {
+      lastLetter=titleSectionName;
+      sections.add(titleSectionName);
+    }
+  }
+  return sections.toArray(new String[sections.size()]);
 }
