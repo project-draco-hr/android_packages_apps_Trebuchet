@@ -4,12 +4,7 @@
   mAppsView=(AllAppsContainerView)LayoutInflater.from(this).inflate(R.layout.all_apps,mDragLayer,false);
   mDragLayer.addView(mAppsView,mDragLayer.getChildCount() - 1);
   mAppsView.setVisibility(View.INVISIBLE);
-  if (mLauncherCallbacks != null && mLauncherCallbacks.getAllAppsSearchBarController() != null) {
-    mAppsView.setSearchBarController(mLauncherCallbacks.getAllAppsSearchBarController());
-  }
- else {
-    mAppsView.setSearchBarController(mAppsView.newDefaultAppSearchController());
-  }
+  setupSearchBar(this);
   mAppsView.addApps(addedApps);
   tryAndUpdatePredictedApps();
   mAppsView.reset();

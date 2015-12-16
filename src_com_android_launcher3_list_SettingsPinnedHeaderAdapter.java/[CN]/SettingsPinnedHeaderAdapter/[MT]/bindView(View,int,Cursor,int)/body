@@ -58,6 +58,10 @@ current=SettingsProvider.getBoolean(mContext,SettingsProvider.SETTINGS_UI_USE_HO
 state=current ? res.getString(R.string.fast_scroller_type_horizontal) : res.getString(R.string.fast_scroller_type_vertical);
 setStateText(stateView,settingSwitch,state);
 break;
+case 4:
+current=SettingsProvider.getBoolean(mContext,SettingsProvider.SETTINGS_UI_DRAWER_SEARCH,R.bool.preferences_interface_drawer_search_default);
+setSettingSwitch(stateView,settingSwitch,current);
+break;
 default :
 hideStates(stateView,settingSwitch);
 }

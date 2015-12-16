@@ -1,0 +1,11 @@
+{
+  boolean isDrawerSearchBarEnabled=SettingsProvider.getBoolean(context,SettingsProvider.SETTINGS_UI_DRAWER_SEARCH,R.bool.preferences_interface_homescreen_search_default);
+  if (mLauncherCallbacks != null && mLauncherCallbacks.getAllAppsSearchBarController() != null) {
+    mAppsView.setSearchBarController(mLauncherCallbacks.getAllAppsSearchBarController());
+  }
+ else {
+    mAppsView.setSearchBarController(mAppsView.newDefaultAppSearchController());
+  }
+  mAppsView.setHasSearchBar(isDrawerSearchBarEnabled);
+  mAppsView.setSearchBarContainerViewVisibility(isDrawerSearchBarEnabled ? View.VISIBLE : View.GONE);
+}

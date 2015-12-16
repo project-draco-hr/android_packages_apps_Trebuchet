@@ -8,6 +8,6 @@
   mSearchBarContainerView.addView(searchBarView);
   mSearchBarContainerView.setVisibility(View.VISIBLE);
   mSearchBarView=searchBarView;
-  setHasSearchBar();
+  setHasSearchBar(true);
   updateBackgroundAndPaddings();
 }

@@ -88,12 +88,7 @@
   mSearchDropTargetBar=(SearchDropTargetBar)mDragLayer.findViewById(R.id.search_drop_target_bar);
   mAppsView=(AllAppsContainerView)findViewById(R.id.apps_view);
   mWidgetsView=(WidgetsContainerView)findViewById(R.id.widgets_view);
-  if (mLauncherCallbacks != null && mLauncherCallbacks.getAllAppsSearchBarController() != null) {
-    mAppsView.setSearchBarController(mLauncherCallbacks.getAllAppsSearchBarController());
-  }
- else {
-    mAppsView.setSearchBarController(mAppsView.newDefaultAppSearchController());
-  }
+  setupSearchBar(this);
   dragController.setDragScoller(mWorkspace);
   dragController.setScrollView(mDragLayer);
   dragController.setMoveTarget(mWorkspace);
