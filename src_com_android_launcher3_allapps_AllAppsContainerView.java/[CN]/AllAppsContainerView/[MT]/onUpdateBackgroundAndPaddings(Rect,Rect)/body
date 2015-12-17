@@ -12,16 +12,16 @@
   mContainerView.setPadding(0,0,0,0);
   int startInset=Math.max(mSectionNamesMargin,mAppsRecyclerView.getMaxScrollbarWidth());
   int topBottomPadding=mRecyclerViewTopBottomPadding;
-  final boolean useScubber=useScrubber();
+  final boolean useScrollerScrubber=useScroller() && useScrubber();
   if (isRtl) {
-    mAppsRecyclerView.setPadding(padding.left + mAppsRecyclerView.getMaxScrollbarWidth(),topBottomPadding,padding.right + startInset,useScubber ? mScrubberHeight + topBottomPadding : topBottomPadding);
-    if (useScubber) {
+    mAppsRecyclerView.setPadding(padding.left + mAppsRecyclerView.getMaxScrollbarWidth(),topBottomPadding,padding.right + startInset,useScrollerScrubber ? mScrubberHeight + topBottomPadding : topBottomPadding);
+    if (useScrollerScrubber) {
       mScrubberContainerView.setPadding(padding.left + mAppsRecyclerView.getMaxScrollbarWidth(),0,padding.right,0);
     }
   }
  else {
-    mAppsRecyclerView.setPadding(padding.left + startInset,topBottomPadding,padding.right + mAppsRecyclerView.getMaxScrollbarWidth(),useScubber ? mScrubberHeight + topBottomPadding : topBottomPadding);
-    if (useScubber) {
+    mAppsRecyclerView.setPadding(padding.left + startInset,topBottomPadding,padding.right + mAppsRecyclerView.getMaxScrollbarWidth(),useScrollerScrubber ? mScrubberHeight + topBottomPadding : topBottomPadding);
+    if (useScrollerScrubber) {
       mScrubberContainerView.setPadding(padding.left,0,padding.right + mAppsRecyclerView.getMaxScrollbarWidth(),0);
     }
   }
