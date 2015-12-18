@@ -4,5 +4,5 @@
   mDefaultScreenId=SettingsProvider.getLongCustomDefault(this,SettingsProvider.SETTINGS_UI_HOMESCREEN_DEFAULT_SCREEN_ID,1);
   mModel=app.setLauncher(this);
   mIconCache=app.getIconCache();
-  mIconCache.flushInvalidIcons(mDeviceProfile);
+  mIconCache.flush();
 }
