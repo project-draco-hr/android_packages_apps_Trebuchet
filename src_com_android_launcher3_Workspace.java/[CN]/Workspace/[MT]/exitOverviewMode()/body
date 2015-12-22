@@ -1,0 +1,4 @@
+{
+  ((OverviewPanel)mLauncher.getOverviewPanel()).collapsePane();
+  reloadSettings();
+}

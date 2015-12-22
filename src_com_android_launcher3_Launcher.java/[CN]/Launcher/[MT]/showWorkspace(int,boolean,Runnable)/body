@@ -1,6 +1,9 @@
 {
   boolean changed=mState != State.WORKSPACE || mWorkspace.getState() != Workspace.State.NORMAL;
   if (changed) {
+    if (mWorkspace.isInOverviewMode()) {
+      mWorkspace.exitOverviewMode();
+    }
     mWorkspace.setVisibility(View.VISIBLE);
     mStateTransitionAnimation.startAnimationToWorkspace(mState,mWorkspace.getState(),Workspace.State.NORMAL,snapToPage,animated,onCompleteRunnable);
     if (mAllAppsButton != null) {

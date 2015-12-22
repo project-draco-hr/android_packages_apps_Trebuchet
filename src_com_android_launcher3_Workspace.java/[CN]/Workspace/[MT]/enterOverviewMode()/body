@@ -1,0 +1,7 @@
+{
+  if (mTouchState != TOUCH_STATE_REST) {
+    return false;
+  }
+  enableOverviewMode();
+  return true;
+}
