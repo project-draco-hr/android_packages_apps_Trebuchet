@@ -1,0 +1,5 @@
+SQLiteDatabase db
+String originalPackageName
+String newPackageName
+String originalClassName
+String newClassName

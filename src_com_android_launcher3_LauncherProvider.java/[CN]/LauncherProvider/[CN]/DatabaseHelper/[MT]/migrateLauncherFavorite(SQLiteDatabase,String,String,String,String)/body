@@ -1,10 +1,7 @@
 {
-  if (!Utilities.isPackageInstalled(mContext,"com.cyngn.dialer")) {
+  if (!Utilities.isPackageInstalled(mContext,newPackageName)) {
     return;
   }
-  final String cyngnDialer="com.cyngn.dialer";
-  final String aospDialer="com.android.dialer";
-  final String dialtactsClass="com.android.dialer.DialtactsActivity";
   final String selectWhere=buildOrWhereString(Favorites.ITEM_TYPE,new int[]{Favorites.ITEM_TYPE_SHORTCUT,Favorites.ITEM_TYPE_APPLICATION});
   Cursor c=null;
   db.beginTransaction();
@@ -19,8 +16,8 @@
           final Intent intent=Intent.parseUri(intentUri,0);
           final ComponentName componentName=intent.getComponent();
           final Set<String> categories=intent.getCategories();
-          if (Intent.ACTION_MAIN.equals(intent.getAction()) && componentName != null && aospDialer.equals(componentName.getPackageName()) && dialtactsClass.equals(componentName.getClassName()) && categories != null && categories.contains(Intent.CATEGORY_LAUNCHER)) {
-            final ComponentName newName=new ComponentName(cyngnDialer,componentName.getClassName());
+          if (Intent.ACTION_MAIN.equals(intent.getAction()) && componentName != null && originalPackageName.equals(componentName.getPackageName()) && originalClassName.equals(componentName.getClassName()) && categories != null && categories.contains(Intent.CATEGORY_LAUNCHER)) {
+            final ComponentName newName=new ComponentName(newPackageName,newClassName);
             intent.setComponent(newName);
             final ContentValues values=new ContentValues();
             values.put(Favorites.INTENT,intent.toUri(0));
@@ -32,17 +29,17 @@
           }
         }
  catch (        RuntimeException ex) {
-          Log.e(TAG,"Problem moving Dialtacts activity",ex);
+          Log.e(TAG,"Problem moving " + originalClassName + " activity",ex);
         }
 catch (        URISyntaxException e) {
-          Log.e(TAG,"Problem moving Dialtacts activity",e);
+          Log.e(TAG,"Problem moving " + originalClassName + " activity",e);
         }
       }
     }
     db.setTransactionSuccessful();
   }
  catch (  SQLException ex) {
-    Log.w(TAG,"Problem while upgrading dialtacts icon",ex);
+    Log.w(TAG,"Problem while upgrading " + originalClassName + " icon",ex);
   }
  finally {
     db.endTransaction();
