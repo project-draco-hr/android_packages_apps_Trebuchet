@@ -4,6 +4,6 @@
     mLauncherCallbacks.onClickSettingsButton(v);
   }
  else {
-    startActivity(new Intent(this,SettingsActivity.class));
+    startSettings();
   }
 }

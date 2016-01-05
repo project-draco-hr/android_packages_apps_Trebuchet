@@ -1,5 +1,5 @@
 {
-  if (Utilities.ALLOW_ROTATION_PREFERENCE_KEY.equals(settings)) {
+  if (SettingsProvider.SETTINGS_UI_ALLOW_ROTATION.equals(settings)) {
     mRotationEnabled=value;
     if (!waitUntilResume(mUpdateOrientationRunnable,true)) {
       mUpdateOrientationRunnable.run();
