@@ -1,0 +1,6 @@
+{
+  super.onVisibilityChanged(changedView,visibility);
+  if (mPanelSlideListener != null && visibility == VISIBLE) {
+    mPanelSlideListener.onPanelShown(changedView);
+  }
+}
