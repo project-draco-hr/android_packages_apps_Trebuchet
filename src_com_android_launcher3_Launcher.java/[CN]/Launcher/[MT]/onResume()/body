@@ -14,6 +14,7 @@
  else   if (mOnResumeState == State.APPS) {
     boolean launchedFromApp=(mWaitingForResume != null);
     showAppsView(false,false,!launchedFromApp,false);
+    mWorkspace.setVisibility(View.INVISIBLE);
   }
  else   if (mOnResumeState == State.WIDGETS) {
     showWidgetsView(false,false);
