@@ -1,11 +1,17 @@
 {
-  boolean isDrawerSearchBarEnabled=SettingsProvider.getBoolean(context,SettingsProvider.SETTINGS_UI_DRAWER_SEARCH,R.bool.preferences_interface_homescreen_search_default);
-  if (mLauncherCallbacks != null && mLauncherCallbacks.getAllAppsSearchBarController() != null) {
-    mAppsView.setSearchBarController(mLauncherCallbacks.getAllAppsSearchBarController());
+  mIsDrawerSearchBarEnabled=SettingsProvider.getBoolean(context,SettingsProvider.SETTINGS_UI_DRAWER_SEARCH,R.bool.preferences_interface_homescreen_search_default);
+  if (mIsDrawerSearchBarEnabled) {
+    if (mLauncherCallbacks != null && mLauncherCallbacks.getAllAppsSearchBarController() != null) {
+      mAppsView.setSearchBarController(mLauncherCallbacks.getAllAppsSearchBarController());
+    }
+ else {
+      mAppsView.setSearchBarController(mAppsView.newDefaultAppSearchController());
+    }
   }
  else {
-    mAppsView.setSearchBarController(mAppsView.newDefaultAppSearchController());
+    mAppsView.setSearchBarController(null);
+    mAppsView.setHasSearchBar(mIsDrawerSearchBarEnabled);
+    mAppsView.setSearchBarContainerViewVisibility(mIsDrawerSearchBarEnabled ? View.VISIBLE : View.GONE);
+    mAppsView.updateBackgroundAndPaddings();
   }
-  mAppsView.setHasSearchBar(isDrawerSearchBarEnabled);
-  mAppsView.setSearchBarContainerViewVisibility(isDrawerSearchBarEnabled ? View.VISIBLE : View.GONE);
 }

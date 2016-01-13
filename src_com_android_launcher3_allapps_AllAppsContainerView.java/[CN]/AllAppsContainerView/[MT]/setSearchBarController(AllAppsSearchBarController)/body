@@ -1,4 +1,8 @@
 {
+  if (searchController == null) {
+    mSearchBarController=null;
+    return;
+  }
   if (mSearchBarController != null) {
     throw new RuntimeException("Expected search bar controller to only be set once");
   }
