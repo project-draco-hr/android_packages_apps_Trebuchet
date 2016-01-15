@@ -1,5 +1,5 @@
 {
-  if (!mSearchBarController.isSearchFieldFocused() && event.getAction() == KeyEvent.ACTION_DOWN) {
+  if (mSearchBarController != null && !mSearchBarController.isSearchFieldFocused() && event.getAction() == KeyEvent.ACTION_DOWN) {
     final int unicodeChar=event.getUnicodeChar();
     final boolean isKeyNotWhitespace=unicodeChar > 0 && !Character.isWhitespace(unicodeChar) && !Character.isSpaceChar(unicodeChar);
     if (isKeyNotWhitespace) {
