@@ -3,7 +3,7 @@
   View searchBar=launcher.getSearchDropTargetBar();
   FrameLayout.LayoutParams lp=(FrameLayout.LayoutParams)searchBar.getLayoutParams();
   if (hasVerticalBarLayout) {
-    searchBarSpaceHeightPx=searchBarVisible ? searchBarSpaceHeightPx : searchBarSpaceHeightPx + 5 * edgeMarginPx;
+    searchBarSpaceHeightPx=searchBarVisible ? searchBarSpaceHeightPx : defaultSearchBarSpaceHeightPx + 5 * edgeMarginPx;
     lp.gravity=Gravity.LEFT;
     lp.width=searchBarSpaceHeightPx;
     LinearLayout targets=(LinearLayout)searchBar.findViewById(R.id.drag_target_bar);

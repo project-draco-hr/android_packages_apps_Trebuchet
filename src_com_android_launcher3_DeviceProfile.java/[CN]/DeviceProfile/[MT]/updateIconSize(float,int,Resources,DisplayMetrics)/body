@@ -4,7 +4,8 @@
   iconDrawablePaddingPx=drawablePadding;
   hotseatIconSizePx=(int)(Utilities.pxFromDp(inv.hotseatIconSize,dm) * scale);
   searchBarSpaceWidthPx=Math.min(widthPx,res.getDimensionPixelSize(R.dimen.dynamic_grid_search_bar_max_width));
-  searchBarSpaceHeightPx=getSearchBarTopOffset() + res.getDimensionPixelSize(R.dimen.dynamic_grid_search_bar_height);
+  defaultSearchBarSpaceHeightPx=getSearchBarTopOffset() + res.getDimensionPixelSize(R.dimen.dynamic_grid_search_bar_height);
+  searchBarSpaceHeightPx=defaultSearchBarSpaceHeightPx;
   Paint textPaint=new Paint();
   textPaint.setTextSize(iconTextSizePx);
   FontMetrics fm=textPaint.getFontMetrics();

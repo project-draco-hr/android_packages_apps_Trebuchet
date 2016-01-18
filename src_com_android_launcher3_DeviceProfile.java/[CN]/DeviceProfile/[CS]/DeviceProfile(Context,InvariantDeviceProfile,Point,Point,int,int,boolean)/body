@@ -35,5 +35,6 @@
   computeAllAppsButtonSize(context);
   searchBarVisible=isSearchBarEnabled(context);
   searchBarSpaceWidthPx=Math.min(searchBarSpaceWidthPx,widthPx);
-  searchBarSpaceHeightPx=2 * edgeMarginPx + (searchBarVisible ? searchBarSpaceHeightPx - getSearchBarTopOffset() : 3 * edgeMarginPx);
+  defaultSearchBarSpaceHeightPx=getSearchBarTopOffset() + res.getDimensionPixelSize(R.dimen.dynamic_grid_search_bar_height);
+  searchBarSpaceHeightPx=2 * edgeMarginPx + (searchBarVisible ? defaultSearchBarSpaceHeightPx - getSearchBarTopOffset() : 3 * edgeMarginPx);
 }
