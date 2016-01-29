@@ -1,4 +1,5 @@
 {
+  boolean mRemoteDrawerEnabled=SettingsProvider.getBoolean(this,SettingsProvider.SETTINGS_UI_DRAWER_REMOTE_APPS,R.bool.preferences_interface_drawer_remote_apps_default);
   if (!mRemoteDrawerEnabled) {
     if (mLauncherCallbacks != null) {
       List<ComponentKey> apps=mLauncherCallbacks.getPredictedApps();
