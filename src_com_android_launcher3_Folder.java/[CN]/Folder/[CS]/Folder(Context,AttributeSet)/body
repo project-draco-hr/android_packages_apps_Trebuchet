@@ -1,6 +1,7 @@
 {
   super(context,attrs);
   setAlwaysDrawnWithCacheEnabled(false);
+  mHandler=new Handler();
   mInputMethodManager=(InputMethodManager)getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
   mPowerManager=(PowerManager)context.getSystemService(Context.POWER_SERVICE);
   Resources res=getResources();

@@ -25,7 +25,6 @@
     if (d.dragSource != this) {
       updateItemLocationsInDatabaseBatch();
     }
-    mIsExternalDrag=false;
   }
  else {
     currentDragView=mCurrentDragView;
@@ -53,5 +52,14 @@
   mDragInProgress=false;
   if (mContent.getPageCount() > 1) {
     mInfo.setOption(FolderInfo.FLAG_MULTI_PAGE_ANIMATION,true,mLauncher);
+  }
+  if (mIsExternalDrag) {
+    mHandler.postDelayed(new Runnable(){
+      @Override public void run(){
+        mLauncher.closeFolder(Folder.this);
+      }
+    }
+,100);
+    mIsExternalDrag=false;
   }
 }
