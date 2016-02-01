@@ -1,2 +1,2 @@
 ArrayList<String> values
-Resources res
+Context context
