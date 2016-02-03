@@ -30,7 +30,7 @@ current=SettingsProvider.getBoolean(mContext,SettingsProvider.SETTINGS_UI_HOMESC
 setSettingSwitch(stateView,settingSwitch,current);
 break;
 case 3:
-updateDynamicGridSizeSettingsItem(v);
+updateDynamicGridSizeSettingsItem(stateView,settingSwitch);
 break;
 case 4:
 current=SettingsProvider.getBoolean(mContext,SettingsProvider.SETTINGS_UI_HOMESCREEN_REMOTE_FOLDER,R.bool.preferences_interface_homescreen_remote_folder_default);

@@ -17,5 +17,5 @@ int columns=SettingsProvider.getIntCustomDefault(mLauncher,SettingsProvider.SETT
 state=rows + " " + "\u00d7"+ " "+ columns;
 break;
 }
-((TextView)v.findViewById(R.id.item_state)).setText(state);
+setStateText(stateView,settingSwitch,state);
 }
