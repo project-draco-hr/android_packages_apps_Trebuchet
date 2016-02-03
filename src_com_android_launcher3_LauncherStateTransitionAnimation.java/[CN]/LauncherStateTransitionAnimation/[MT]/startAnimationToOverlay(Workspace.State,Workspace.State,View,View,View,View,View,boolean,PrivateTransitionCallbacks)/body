@@ -49,6 +49,9 @@
       animation.play(searchBarAlpha);
     }
     contentView.setVisibility(View.VISIBLE);
+    final Drawable contentBackground=contentView.getBackground();
+    final int alpha=contentBackground.getAlpha();
+    contentBackground.setAlpha(0);
     contentView.setAlpha(0f);
     contentView.setTranslationY(revealViewToYDrift);
     layerViews.put(contentView,BUILD_AND_SET_LAYER);
@@ -78,6 +81,7 @@
         dispatchOnLauncherTransitionEnd(fromView,animated,false);
         dispatchOnLauncherTransitionEnd(toView,animated,false);
         revealView.setVisibility(View.INVISIBLE);
+        contentBackground.setAlpha(alpha);
         for (        View v : layerViews.keySet()) {
           if (layerViews.get(v) == BUILD_AND_SET_LAYER) {
             v.setLayerType(View.LAYER_TYPE_NONE,null);

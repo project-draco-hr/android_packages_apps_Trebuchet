@@ -14,10 +14,13 @@
     if (workspaceAnim != null) {
       animation.play(workspaceAnim);
     }
+    final Drawable contentBackground=contentView.getBackground();
+    final int alpha=contentBackground.getAlpha();
     if (fromView.getVisibility() == View.VISIBLE) {
       int width=revealView.getMeasuredWidth();
       int height=revealView.getMeasuredHeight();
       float revealRadius=(float)Math.hypot(width / 2,height / 2);
+      contentBackground.setAlpha(0);
       revealView.setVisibility(View.VISIBLE);
       revealView.setAlpha(1f);
       revealView.setTranslationY(0);
@@ -105,6 +108,7 @@
           contentView.setTranslationX(0);
           contentView.setTranslationY(0);
           contentView.setAlpha(1);
+          contentBackground.setAlpha(alpha);
         }
         if (overlaySearchBarView != null) {
           overlaySearchBarView.setAlpha(1f);
