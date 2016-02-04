@@ -1,4 +1,4 @@
 {
   mView=v;
-  mFastScrollMode=mode;
+  mFastScrollMode=mode & ~FAST_SCROLL_FOCUS_SCALABLE;
 }
