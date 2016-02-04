@@ -1,7 +1,7 @@
 {
   super.onPrepareOptionsMenu(menu);
   if (!isOnCustomContent()) {
-    closeFolder();
+    closeFolder(false);
     mWorkspace.exitWidgetResizeMode();
     if (!mWorkspace.isInOverviewMode()) {
       showOverviewMode(true);

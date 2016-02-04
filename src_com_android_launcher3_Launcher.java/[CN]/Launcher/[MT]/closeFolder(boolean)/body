@@ -1,0 +1,9 @@
+{
+  Folder folder=mWorkspace != null ? mWorkspace.getOpenFolder() : null;
+  if (folder != null) {
+    if (folder.isEditingName()) {
+      folder.dismissEditingName();
+    }
+    closeFolder(folder,animate);
+  }
+}
