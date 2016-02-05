@@ -50,6 +50,10 @@
   Selection.setSelection(mDefaultKeySsb,0);
   IntentFilter filter=new IntentFilter(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
   registerReceiver(mCloseSystemDialogsReceiver,filter);
+  filter=new IntentFilter(NetworkConnectionReceiver.INTENT_ACTION);
+  registerReceiver(mConnectionReceiver,filter);
+  filter=new IntentFilter(DeviceUnlockedReceiver.INTENT_ACTION);
+  registerReceiver(mDeviceUnlockedReceiver,filter);
   mRotationEnabled=Utilities.isRotationAllowedForDevice(getApplicationContext());
   if (!mRotationEnabled) {
     mRotationEnabled=Utilities.isAllowRotationPrefEnabled(getApplicationContext(),false);

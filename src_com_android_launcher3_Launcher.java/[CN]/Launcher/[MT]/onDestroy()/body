@@ -18,6 +18,8 @@
   mWidgetsToAdvance.clear();
   TextKeyListener.getInstance().release();
   unregisterReceiver(mCloseSystemDialogsReceiver);
+  unregisterReceiver(mConnectionReceiver);
+  unregisterReceiver(mDeviceUnlockedReceiver);
   mDragLayer.clearAllResizeFrames();
   ((ViewGroup)mWorkspace.getParent()).removeAllViews();
   mWorkspace.removeAllWorkspaceScreens();

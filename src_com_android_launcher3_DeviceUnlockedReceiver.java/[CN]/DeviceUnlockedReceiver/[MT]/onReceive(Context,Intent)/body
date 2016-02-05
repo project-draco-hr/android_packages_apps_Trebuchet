@@ -1,0 +1,6 @@
+{
+  if (!intent.getAction().equals(INTENT_ACTION))   return;
+  for (  DeviceUnlockedListener listener : mListeners) {
+    listener.onDeviceUnlocked();
+  }
+}

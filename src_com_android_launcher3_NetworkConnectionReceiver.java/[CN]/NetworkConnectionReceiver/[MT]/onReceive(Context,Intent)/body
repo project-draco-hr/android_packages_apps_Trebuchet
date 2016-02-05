@@ -1,0 +1,12 @@
+{
+  if (!intent.getAction().equals(INTENT_ACTION))   return;
+  boolean connected=Utilities.isNetworkConnected(context);
+  for (  NetworkStateChangeListener listener : mListeners) {
+    if (connected) {
+      listener.onNetworkConnected();
+    }
+ else {
+      listener.onNetworkDisconnected();
+    }
+  }
+}
