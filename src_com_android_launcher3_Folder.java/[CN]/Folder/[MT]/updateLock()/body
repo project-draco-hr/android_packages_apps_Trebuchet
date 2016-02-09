@@ -1,0 +1,5 @@
+{
+  if (mInfo != null) {
+    mFolderLock.setImageResource(mInfo.hidden ? R.drawable.folder_locked : R.drawable.folder_unlocked);
+  }
+}

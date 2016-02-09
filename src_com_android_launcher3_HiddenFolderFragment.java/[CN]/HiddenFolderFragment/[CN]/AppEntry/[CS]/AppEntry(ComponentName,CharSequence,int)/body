@@ -1,5 +1,0 @@
-{
-  this.componentName=component;
-  this.title=title;
-  this.position=position;
-}

@@ -1,5 +1,10 @@
 {
-  folder.getInfo().opened=false;
+  final FolderInfo info=folder.getInfo();
+  info.opened=false;
+  if (info.hidden) {
+    mHiddenFolderAuth=false;
+    mHiddenFolderIcon=null;
+  }
   ViewGroup parent=(ViewGroup)folder.getParent().getParent();
   if (parent != null) {
     FolderIcon fi=(FolderIcon)mWorkspace.getViewForTag(folder.mInfo);

@@ -8,8 +8,8 @@
     closeFolder();
   }
   FolderInfo info=folder.mInfo;
-  if (info.hidden) {
-    folder.startHiddenFolderManager();
+  if (info.hidden && !mHiddenFolderAuth) {
+    folder.startHiddenFolderManager(REQUEST_OPEN_PROTECTED_FOLDER);
     return;
   }
   info.opened=true;

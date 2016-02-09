@@ -4,7 +4,9 @@
   }
   super.onSaveInstanceState(outState);
   outState.putInt(RUNTIME_STATE,mState.ordinal());
-  closeFolder();
+  if (mHiddenFolderIcon == null) {
+    closeFolder();
+  }
   if (mPendingAddInfo.container != ItemInfo.NO_ID && mPendingAddInfo.screenId > -1 && mWaitingForResult) {
     outState.putLong(RUNTIME_STATE_PENDING_ADD_CONTAINER,mPendingAddInfo.container);
     outState.putLong(RUNTIME_STATE_PENDING_ADD_SCREEN,mPendingAddInfo.screenId);

@@ -6,12 +6,6 @@
     mDragController.cancelDrag();
     return;
   }
-  Fragment f1=getFragmentManager().findFragmentByTag(HiddenFolderFragment.HIDDEN_FOLDER_FRAGMENT);
-  if (f1 != null) {
-    mHiddenFolderFragment.saveHiddenFolderStatus(-1);
-    FragmentTransaction fragmentTransaction=getFragmentManager().beginTransaction();
-    fragmentTransaction.remove(mHiddenFolderFragment).commit();
-  }
   if (isAppsViewVisible()) {
     showWorkspace(true);
   }

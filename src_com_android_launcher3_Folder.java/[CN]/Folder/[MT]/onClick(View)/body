@@ -4,6 +4,6 @@
     mLauncher.onClick(v);
   }
   if (v.getId() == R.id.folder_lock) {
-    startHiddenFolderManager();
+    startHiddenFolderManager(mInfo.hidden ? Launcher.REQUEST_UNPROTECT_FOLDER : Launcher.REQUEST_PROTECT_FOLDER);
   }
 }

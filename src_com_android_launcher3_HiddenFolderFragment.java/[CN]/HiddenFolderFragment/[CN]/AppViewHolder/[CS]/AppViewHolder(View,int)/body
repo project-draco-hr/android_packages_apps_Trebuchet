@@ -1,6 +1,0 @@
-{
-  icon=(ImageView)parentView.findViewById(R.id.icon);
-  remove=(ImageView)parentView.findViewById(R.id.remove);
-  title=(TextView)parentView.findViewById(R.id.title);
-  this.position=position;
-}

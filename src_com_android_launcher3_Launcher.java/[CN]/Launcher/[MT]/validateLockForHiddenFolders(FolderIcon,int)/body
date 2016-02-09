@@ -1,0 +1,7 @@
+{
+  mHiddenFolderIcon=info;
+  Intent lockPatternActivity=new Intent();
+  lockPatternActivity.setClassName("com.android.settings","com.android.settings.applications.LockPatternActivity");
+  startActivityForResult(lockPatternActivity,action);
+  mHiddenFolderAuth=false;
+}

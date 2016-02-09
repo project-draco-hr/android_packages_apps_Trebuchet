@@ -1,5 +1,0 @@
-{
-  InputMethodManager mInputMethodManager=(InputMethodManager)mLauncher.getSystemService(Context.INPUT_METHOD_SERVICE);
-  mInputMethodManager.hideSoftInputFromWindow(v.getWindowToken(),0);
-  mListView.requestFocus();
-}

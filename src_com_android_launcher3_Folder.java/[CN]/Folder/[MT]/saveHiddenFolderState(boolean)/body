@@ -1,0 +1,7 @@
+{
+  mInfo.hidden=protect;
+  modifyProtectedApps(protect);
+  LauncherModel.updateItemInDatabase(mLauncher,mInfo);
+  mLauncher.mModel.flushWorkerThread();
+  rebind(mInfo);
+}

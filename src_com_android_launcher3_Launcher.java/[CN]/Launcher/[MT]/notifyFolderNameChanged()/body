@@ -1,0 +1,4 @@
+{
+  mModel.resetLoadedState(true,true);
+  mModel.startLoader(mWorkspace.getCurrentPage(),LauncherModel.LOADER_FLAG_NONE);
+}

@@ -1,7 +1,0 @@
-{
-  super(context,textViewResourceId);
-  mApps=new ArrayList<AppEntry>();
-  mInflator=LayoutInflater.from(context);
-  mDefaultImg=context.getResources().getDrawable(android.R.mipmap.sym_def_app_icon);
-  mIcons=new ConcurrentHashMap<String,Drawable>();
-}

@@ -36,6 +36,13 @@
       }
       mScrollPauseAlarm.cancelAlarm();
       completeDragExit();
+      if (successfulDrop) {
+        ShortcutInfo info=(ShortcutInfo)d.dragInfo;
+        Intent intent=info.getIntent();
+        if (intent != null && mInfo.hidden) {
+          removeProtectedApp(intent.getComponent());
+        }
+      }
     }
   }
   mDeleteFolderOnDropCompleted=false;

@@ -11,4 +11,5 @@
   requestFocus();
   Selection.setSelection((Spannable)mFolderName.getText(),0,0);
   mIsEditingName=false;
+  mLauncher.notifyFolderNameChanged();
 }

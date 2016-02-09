@@ -1,13 +1,9 @@
 {
   ArrayList<ComponentName> components=new ArrayList<>();
-  for (  Pair<ComponentName,CharSequence> item : getComponents()) {
-    if (item.first != null) {
-      components.add(item.first);
-    }
-  }
+  components.add(componentName);
   Intent intent=new Intent();
   intent.setAction(ACTION_PROTECTED);
-  intent.putExtra(EXTRA_PROTECTED_STATE,!protect);
+  intent.putExtra(EXTRA_PROTECTED_STATE,true);
   intent.putExtra(EXTRA_PROTECTED_COMPONENTS,components);
   mLauncher.sendBroadcast(intent);
 }

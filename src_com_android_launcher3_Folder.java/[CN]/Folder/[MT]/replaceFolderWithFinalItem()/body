@@ -3,7 +3,7 @@
     @Override public void run(){
       CellLayout cellLayout=mLauncher.getCellLayout(mInfo.container,mInfo.screenId);
       View child=null;
-      if (getItemCount() == 1) {
+      if (!mInfo.hidden && getItemCount() == 1) {
         ShortcutInfo finalItem=mInfo.contents.get(0);
         child=mLauncher.createShortcut(cellLayout,finalItem);
         LauncherModel.addOrMoveItemInDatabase(mLauncher,finalItem,mInfo.container,mInfo.screenId,mInfo.cellX,mInfo.cellY);

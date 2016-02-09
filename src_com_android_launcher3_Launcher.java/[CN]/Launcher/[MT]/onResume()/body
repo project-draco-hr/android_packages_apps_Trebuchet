@@ -73,13 +73,4 @@
   if (gridFragment != null) {
     mDynamicGridSizeFragment.setSize();
   }
-  Fragment hiddenFolderFragment=getFragmentManager().findFragmentByTag(HiddenFolderFragment.HIDDEN_FOLDER_FRAGMENT);
-  if (hiddenFolderFragment != null && !mHiddenFolderAuth) {
-    mHiddenFolderFragment.saveHiddenFolderStatus(-1);
-    FragmentTransaction fragmentTransaction=getFragmentManager().beginTransaction();
-    fragmentTransaction.remove(mHiddenFolderFragment).commit();
-  }
- else {
-    mHiddenFolderAuth=false;
-  }
 }
