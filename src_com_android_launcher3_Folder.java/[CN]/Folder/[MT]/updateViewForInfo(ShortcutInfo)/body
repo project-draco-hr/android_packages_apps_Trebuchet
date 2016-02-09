@@ -3,5 +3,7 @@
   if (v != null & v instanceof BubbleTextView) {
     ((BubbleTextView)v).reapplyItemInfo(info);
     mItemsInvalidated=true;
+    return true;
   }
+  return false;
 }

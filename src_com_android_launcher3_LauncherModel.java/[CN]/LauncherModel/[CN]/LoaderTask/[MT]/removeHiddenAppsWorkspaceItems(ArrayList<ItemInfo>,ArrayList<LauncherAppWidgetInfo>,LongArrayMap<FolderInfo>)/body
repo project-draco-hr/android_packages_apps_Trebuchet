@@ -61,7 +61,7 @@
         ShortcutInfo finalItem=folder.contents.get(0);
         finalItem.container=folder.container;
         LauncherModel.deleteItemFromDatabase(mContext,folder);
-        if (!mHiddenApps.contains(finalItem.intent.getComponent())) {
+        if (!mHiddenApps.contains(finalItem.intent.getComponent()) && !folder.isRemote()) {
           LauncherModel.addOrMoveItemInDatabase(mContext,finalItem,folder.container,folder.screenId,folder.cellX,folder.cellY);
           workspaceItems.add(finalItem);
         }
