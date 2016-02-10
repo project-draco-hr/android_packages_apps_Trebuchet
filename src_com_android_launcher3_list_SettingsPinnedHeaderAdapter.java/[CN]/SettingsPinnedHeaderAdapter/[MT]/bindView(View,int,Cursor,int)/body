@@ -22,8 +22,7 @@ case 0:
   break;
 case 1:
 current=SettingsProvider.getBoolean(mContext,SettingsProvider.SETTINGS_UI_HOMESCREEN_HIDE_ICON_LABELS,R.bool.preferences_interface_homescreen_hide_icon_labels_default);
-state=current ? res.getString(R.string.icon_labels_hide) : res.getString(R.string.icon_labels_show);
-setStateText(stateView,settingSwitch,state);
+setSettingSwitch(stateView,settingSwitch,!current);
 break;
 case 2:
 current=SettingsProvider.getBoolean(mContext,SettingsProvider.SETTINGS_UI_HOMESCREEN_SCROLLING_WALLPAPER_SCROLL,R.bool.preferences_interface_homescreen_scrolling_wallpaper_scroll_default);
@@ -48,8 +47,7 @@ case OverviewSettingsPanel.DRAWER_SETTINGS_POSITION:
 switch (position) {
 case 0:
 current=SettingsProvider.getBoolean(mContext,SettingsProvider.SETTINGS_UI_DRAWER_HIDE_ICON_LABELS,R.bool.preferences_interface_drawer_hide_icon_labels_default);
-state=current ? res.getString(R.string.icon_labels_hide) : res.getString(R.string.icon_labels_show);
-setStateText(stateView,settingSwitch,state);
+setSettingSwitch(stateView,settingSwitch,!current);
 break;
 case 1:
 current=SettingsProvider.getBoolean(mContext,SettingsProvider.SETTINGS_UI_DRAWER_STYLE_USE_COMPACT,R.bool.preferences_interface_drawer_compact_default);
