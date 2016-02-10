@@ -1,7 +1,7 @@
 {
   Resources res=mLauncher.getResources();
   ArrayList<String> values=new ArrayList<String>(Arrays.asList(new String[]{res.getString(R.string.home_screen_search_text),res.getString(R.string.icon_labels),res.getString(R.string.scrolling_wallpaper),res.getString(R.string.grid_size_text)}));
-  RemoteFolderManager.onInitializeSettingsAdapter(values,mLauncher);
+  RemoteFolderManager.onInitializeHomeSettings(values,mLauncher);
   String[] valuesArr=new String[values.size()];
   values.toArray(valuesArr);
   return valuesArr;
