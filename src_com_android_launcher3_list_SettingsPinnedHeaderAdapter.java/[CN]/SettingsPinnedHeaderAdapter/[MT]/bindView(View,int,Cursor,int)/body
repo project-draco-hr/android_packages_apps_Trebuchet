@@ -32,6 +32,10 @@ case 3:
 updateDynamicGridSizeSettingsItem(stateView,settingSwitch);
 break;
 case 4:
+current=SettingsProvider.getBoolean(mContext,SettingsProvider.SETTINGS_UI_ALLOW_ROTATION,R.bool.preferences_interface_allow_rotation);
+setSettingSwitch(stateView,settingSwitch,current);
+break;
+case 5:
 current=SettingsProvider.getBoolean(mContext,SettingsProvider.SETTINGS_UI_HOMESCREEN_REMOTE_FOLDER,R.bool.preferences_interface_homescreen_remote_folder_default);
 setSettingSwitch(stateView,settingSwitch,current);
 break;
@@ -80,10 +84,6 @@ case OverviewSettingsPanel.APP_SETTINGS_POSITION:
 switch (position) {
 case 0:
 current=SettingsProvider.getBoolean(mContext,SettingsProvider.SETTINGS_UI_GENERAL_ICONS_LARGE,R.bool.preferences_interface_general_icons_large_default);
-setSettingSwitch(stateView,settingSwitch,current);
-break;
-case 2:
-current=SettingsProvider.getBoolean(mContext,SettingsProvider.SETTINGS_UI_ALLOW_ROTATION,R.bool.preferences_interface_allow_rotation);
 setSettingSwitch(stateView,settingSwitch,current);
 break;
 default :
