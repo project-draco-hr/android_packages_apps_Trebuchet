@@ -1,9 +1,0 @@
-{
-  Intent settings;
-  settings=new Intent(android.provider.Settings.ACTION_SETTINGS);
-  startActivity(settings);
-  LauncherApplication.getLauncherStats().sendSettingsOpenedEvent(LauncherStats.ORIGIN_TREB_LONGPRESS);
-  if (mWorkspace.isInOverviewMode()) {
-    mWorkspace.exitOverviewMode();
-  }
-}

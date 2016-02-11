@@ -4,6 +4,11 @@
     mLauncherCallbacks.onClickSettingsButton(v);
   }
  else {
-    startSettings();
+    if (mOverviewPanel.isExpanded()) {
+      mOverviewPanel.collapsePane();
+    }
+ else {
+      mOverviewPanel.expandPane();
+    }
   }
 }

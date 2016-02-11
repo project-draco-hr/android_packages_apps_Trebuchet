@@ -2,4 +2,5 @@
   mAnimatedArrow.setBackgroundResource(R.drawable.transition_arrow);
   AnimationDrawable frameAnimation=(AnimationDrawable)mAnimatedArrow.getBackground();
   frameAnimation.start();
+  LauncherApplication.getLauncherStats().sendSettingsOpenedEvent(LauncherStats.ORIGIN_TREB_LONGPRESS);
 }
