@@ -1,0 +1,5 @@
+{
+  boolean newValue=SettingsProvider.changeBoolean(mContext,key,res);
+  ((Switch)v.findViewById(R.id.setting_switch)).setChecked(invert != newValue);
+  return newValue;
+}

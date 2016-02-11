@@ -1,0 +1,4 @@
+{
+  boolean val=context.getResources().getBoolean(res);
+  putBoolean(context,key,val);
+}

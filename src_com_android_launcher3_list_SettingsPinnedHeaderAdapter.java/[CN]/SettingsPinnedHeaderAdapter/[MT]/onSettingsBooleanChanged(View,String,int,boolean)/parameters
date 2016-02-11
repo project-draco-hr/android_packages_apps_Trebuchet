@@ -1,3 +1,4 @@
 View v
 String key
 int res
+boolean invert

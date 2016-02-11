@@ -6,7 +6,7 @@
       return;
     }
   }
-  onSettingsBooleanChanged(v,SettingsProvider.SETTINGS_UI_HOMESCREEN_SEARCH,R.bool.preferences_interface_homescreen_search_default);
+  onSettingsBooleanChanged(v,SettingsProvider.SETTINGS_UI_HOMESCREEN_SEARCH,R.bool.preferences_interface_homescreen_search_default,false);
   Intent intent=new Intent(ACTION_SEARCH_BAR_VISIBILITY_CHANGED);
   mContext.sendBroadcast(intent);
 }

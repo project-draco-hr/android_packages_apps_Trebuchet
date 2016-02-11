@@ -1,0 +1,5 @@
+{
+  boolean newValue=SettingsProvider.changeBoolean(mContext,key,defRes);
+  int state=newValue ? trueRes : falseRes;
+  ((TextView)v.findViewById(R.id.item_state)).setText(state);
+}

@@ -1,0 +1,6 @@
+{
+  boolean def=context.getResources().getBoolean(defaultRes);
+  boolean val=!SettingsProvider.getBooleanCustomDefault(context,key,def);
+  putBoolean(context,key,val);
+  return val;
+}

@@ -1,0 +1,5 @@
+View v
+String key
+int defRes
+int trueRes
+int falseRes

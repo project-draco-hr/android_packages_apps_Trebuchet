@@ -1,7 +1,0 @@
-{
-  boolean current=SettingsProvider.getBoolean(mContext,key,res);
-  SettingsProvider.putBoolean(mContext,key,!current);
-  SettingsProvider.putBoolean(mContext,SettingsProvider.SETTINGS_CHANGED,true);
-  String state=current ? mLauncher.getResources().getString(R.string.app_drawer_style_sections) : mLauncher.getResources().getString(R.string.app_drawer_style_compact);
-  ((TextView)v.findViewById(R.id.item_state)).setText(state);
-}
