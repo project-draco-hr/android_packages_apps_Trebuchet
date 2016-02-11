@@ -1,6 +1,7 @@
 {
   FragmentManager fragmentManager=getFragmentManager();
   FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
+  lockScreenOrientation();
   mDynamicGridSizeFragment=new DynamicGridSizeFragment();
   fragmentTransaction.replace(R.id.launcher,mDynamicGridSizeFragment,DynamicGridSizeFragment.DYNAMIC_GRID_SIZE_FRAGMENT);
   fragmentTransaction.commit();

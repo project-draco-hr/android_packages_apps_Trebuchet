@@ -23,6 +23,7 @@
     fragmentTransaction.setCustomAnimations(0,R.anim.exit_out_right);
   }
   fragmentTransaction.remove(mDynamicGridSizeFragment).commit();
+  unlockScreenOrientation(true);
   mDarkPanel.setVisibility(View.VISIBLE);
   ObjectAnimator anim=ObjectAnimator.ofFloat(mDarkPanel,"alpha",0.3f,0.0f);
   anim.start();

@@ -72,5 +72,6 @@
   Fragment gridFragment=getFragmentManager().findFragmentByTag(DynamicGridSizeFragment.DYNAMIC_GRID_SIZE_FRAGMENT);
   if (gridFragment != null) {
     mDynamicGridSizeFragment.setSize();
+    unlockScreenOrientation(true);
   }
 }
