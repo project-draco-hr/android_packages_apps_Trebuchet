@@ -12,4 +12,8 @@
     mLauncher.getRemoteFolderManager().onMeasureDrawer(mNumPredictedAppsPerRow);
   }
   super.onMeasure(widthMeasureSpec,heightMeasureSpec);
+  if (mReloadDrawer) {
+    updateBackgroundAndPaddings(true);
+    mReloadDrawer=false;
+  }
 }

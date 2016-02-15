@@ -1,4 +1,6 @@
 {
+  mReloadDrawer=true;
   List<AppInfo> apps=mApps.getApps();
   updateApps(apps);
+  requestLayout();
 }
