@@ -3,7 +3,6 @@
   info.opened=false;
   if (info.hidden) {
     mHiddenFolderAuth=false;
-    mHiddenFolderIcon=null;
   }
   ViewGroup parent=(ViewGroup)folder.getParent().getParent();
   if (parent != null) {
@@ -12,6 +11,8 @@
       ((CellLayout.LayoutParams)fi.getLayoutParams()).canReorder=true;
     }
   }
-  folder.animateClosed(animate);
+  folder.animateClosed(mHiddenFolderLockStateChanged ? false : animate);
   getDragLayer().sendAccessibilityEvent(AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED);
+  mHiddenFolderIcon=null;
+  mHiddenFolderLockStateChanged=false;
 }

@@ -41,6 +41,7 @@
     mHiddenFolderAuth=resultCode == RESULT_OK;
     if (mHiddenFolderIcon != null && mHiddenFolderAuth) {
       mHiddenFolderIcon.getFolder().saveHiddenFolderState(true);
+      mHiddenFolderLockStateChanged=true;
     }
  else {
       mHiddenFolderAuth=false;
@@ -50,6 +51,7 @@
     mHiddenFolderAuth=resultCode == RESULT_OK;
     if (mHiddenFolderIcon != null && mHiddenFolderAuth) {
       mHiddenFolderIcon.getFolder().saveHiddenFolderState(false);
+      mHiddenFolderLockStateChanged=true;
     }
  else {
       mHiddenFolderAuth=false;
