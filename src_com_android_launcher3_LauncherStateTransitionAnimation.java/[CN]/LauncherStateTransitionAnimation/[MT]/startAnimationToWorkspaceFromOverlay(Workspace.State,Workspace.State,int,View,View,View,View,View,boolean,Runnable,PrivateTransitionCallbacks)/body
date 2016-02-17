@@ -2,6 +2,7 @@
   final AnimatorSet animation=LauncherAnimUtils.createAnimatorSet();
   final Resources res=mLauncher.getResources();
   final boolean material=Utilities.ATLEAST_LOLLIPOP;
+  final boolean doReveal=!((mLauncher.mState == Launcher.State.APPS || mLauncher.mState == Launcher.State.WIDGETS) && toWorkspaceState == Workspace.State.OVERVIEW);
   final int revealDuration=res.getInteger(R.integer.config_overlayRevealTime);
   final int itemsAlphaStagger=res.getInteger(R.integer.config_overlayItemsAlphaStagger);
   final View toView=mLauncher.getWorkspace();
@@ -16,7 +17,7 @@
     }
     final Drawable contentBackground=contentView.getBackground();
     final int alpha=contentBackground.getAlpha();
-    if (fromView.getVisibility() == View.VISIBLE) {
+    if (doReveal && fromView.getVisibility() == View.VISIBLE) {
       int width=revealView.getMeasuredWidth();
       int height=revealView.getMeasuredHeight();
       float revealRadius=(float)Math.hypot(width / 2,height / 2);
@@ -90,6 +91,9 @@
       }
       dispatchOnLauncherTransitionPrepare(fromView,animated,true);
       dispatchOnLauncherTransitionPrepare(toView,animated,true);
+    }
+ else {
+      fromView.setVisibility(View.GONE);
     }
     animation.addListener(new AnimatorListenerAdapter(){
       @Override public void onAnimationEnd(      Animator animation){
