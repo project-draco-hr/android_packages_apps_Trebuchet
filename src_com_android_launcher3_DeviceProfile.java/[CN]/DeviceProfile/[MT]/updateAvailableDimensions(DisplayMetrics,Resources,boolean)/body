@@ -5,6 +5,9 @@
   float usedHeight=(cellHeightPx * inv.numRows);
   Rect workspacePadding=getWorkspacePadding(false);
   int maxHeight=(availableHeightPx - workspacePadding.top - workspacePadding.bottom);
+  if (!isLandscape) {
+    maxHeight-=(hotseatBarHeightPx + searchBarSpaceHeightPx);
+  }
   if (usedHeight > maxHeight) {
     scale=maxHeight / usedHeight;
     drawablePadding=0;

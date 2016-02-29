@@ -1,2 +1,3 @@
 DisplayMetrics dm
 Resources res
+boolean isLandscape

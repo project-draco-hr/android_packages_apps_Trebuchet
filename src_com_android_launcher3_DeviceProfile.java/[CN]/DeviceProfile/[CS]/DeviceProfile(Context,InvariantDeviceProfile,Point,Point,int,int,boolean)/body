@@ -31,7 +31,7 @@
     availableWidthPx=minSize.x;
     availableHeightPx=maxSize.y;
   }
-  updateAvailableDimensions(dm,res);
+  updateAvailableDimensions(dm,res,isLandscape);
   computeAllAppsButtonSize(context);
   searchBarVisible=isSearchBarEnabled(context);
   searchBarSpaceWidthPx=Math.min(searchBarSpaceWidthPx,widthPx);
