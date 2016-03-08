@@ -1,5 +1,7 @@
 {
   boolean hideIconLabels=SettingsProvider.getBoolean(mLauncher,SettingsProvider.SETTINGS_UI_DRAWER_HIDE_ICON_LABELS,R.bool.preferences_interface_drawer_hide_icon_labels_default);
+  FastScrollFocusApplicator.setFastScrollDimmed(holder.mContent,false,false);
+  FastScrollFocusApplicator.setFastScrollFocused(holder.mContent,false,false);
 switch (holder.getItemViewType()) {
 case ICON_VIEW_TYPE:
 {
@@ -10,7 +12,7 @@ case ICON_VIEW_TYPE:
         icon.setTextVisibility(!hideIconLabels);
       }
       icon.applyFromApplicationInfo(info);
-      FastScrollFocusApplicator.setFastScrollDimmed(icon,mIconsDimmed,!mIconsDimmed);
+      FastScrollFocusApplicator.setFastScrollDimmed(icon,shouldDimPosition(position),!mIconsDimmed);
       FastScrollFocusApplicator.setFastScrollFocused(icon,false,!mIconsDimmed);
       break;
     }
@@ -23,7 +25,7 @@ case PREDICTION_ICON_VIEW_TYPE:
       icon.setTextVisibility(!hideIconLabels);
     }
     icon.applyFromApplicationInfo(info);
-    FastScrollFocusApplicator.setFastScrollDimmed(icon,mIconsDimmed,!mIconsDimmed);
+    FastScrollFocusApplicator.setFastScrollDimmed(icon,shouldDimPosition(position),!mIconsDimmed);
     FastScrollFocusApplicator.setFastScrollFocused(icon,false,!mIconsDimmed);
     mRemoteFolderManager.onBindViewHolder(holder,info);
     break;
@@ -49,7 +51,7 @@ case CUSTOM_PREDICTED_APPS_HEADER_VIEW_TYPE:
 {
 TextView title=(TextView)holder.mContent.findViewById(R.id.title);
 title.setTextColor(mAllAppsTextColor);
-FastScrollFocusApplicator.setFastScrollDimmed(holder.mContent,mIconsDimmed,!mIconsDimmed);
+FastScrollFocusApplicator.setFastScrollDimmed(holder.mContent,shouldDimPosition(position),!mIconsDimmed);
 FastScrollFocusApplicator.setFastScrollFocused(holder.mContent,false,!mIconsDimmed);
 ViewGroup.MarginLayoutParams lp=(ViewGroup.MarginLayoutParams)holder.mContent.getLayoutParams();
 mCustomPredictedAppsHeaderHeight=holder.mContent.getHeight() + lp.topMargin + lp.bottomMargin;

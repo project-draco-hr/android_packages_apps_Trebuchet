@@ -8,5 +8,8 @@
       animateOut();
     }
     mBaseRecyclerView.setFastScrollDragging(mTouchingTrack);
+    if (mTouchingTrack) {
+      mBaseRecyclerView.setPreviousSectionFastScrollFocused();
+    }
   }
 }

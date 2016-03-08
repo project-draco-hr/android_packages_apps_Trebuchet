@@ -1,0 +1,8 @@
+{
+  if (mFocusedSection != null && mIconsDimmed) {
+    if (position >= mFocusedSection.firstAppItem.position && position < mFocusedSection.firstAppItem.position + mFocusedSection.numApps) {
+      return false;
+    }
+  }
+  return mIconsDimmed;
+}

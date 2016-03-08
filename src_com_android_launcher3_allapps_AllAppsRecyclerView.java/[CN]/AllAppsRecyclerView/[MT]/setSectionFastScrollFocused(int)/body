@@ -1,5 +1,6 @@
 {
   if (mPrevFastScrollFocusedSection != null) {
+    ((AllAppsGridAdapter)getAdapter()).setFocusedSection(mPrevFastScrollFocusedSection);
     int size=mPrevFastScrollFocusedSection.numApps + mPrevFastScrollFocusedSection.numOtherViews;
     for (int i=0; i < size; i++) {
       int sectionPosition=position + i;
