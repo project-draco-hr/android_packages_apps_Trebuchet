@@ -242,7 +242,10 @@ needToRefresh|=key.user.equals(mUser) && pkgSet.contains(key.componentName.getPa
 if (!needToRefresh && mOp != OP_REMOVE) {
 PackageManager pm=context.getPackageManager();
 for (String pkg : mPackages) {
-needToRefresh|=!pm.queryBroadcastReceivers(new Intent(AppWidgetManager.ACTION_APPWIDGET_UPDATE).setPackage(pkg),0).isEmpty();
+List<ResolveInfo> resolveInfos=pm.queryBroadcastReceivers(new Intent(AppWidgetManager.ACTION_APPWIDGET_UPDATE).setPackage(pkg),0);
+if (resolveInfos != null) {
+needToRefresh|=!resolveInfos.isEmpty();
+}
 }
 }
 loadAndBindWidgetsAndShortcuts(callbacks,needToRefresh);
