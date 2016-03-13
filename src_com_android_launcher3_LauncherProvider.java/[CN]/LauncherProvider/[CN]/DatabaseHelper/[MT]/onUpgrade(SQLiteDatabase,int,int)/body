@@ -113,6 +113,8 @@ migrateLauncherFavorite(db,"com.android.dialer","com.cyngn.dialer","com.android.
 migrateLauncherFavorite(db,"com.android.mms","com.android.messaging","com.android.mms.ui.ConversationList","com.android.messaging.ui.conversationlist.ConversationListActivity");
 migrateLauncherFavorite(db,"com.android.camera2","org.cyanogenmod.snap","com.android.camera.CameraLauncher","com.android.camera.CameraLauncher");
 migrateLauncherFavorite(db,"org.cyanogenmod.snap","com.android.camera2","com.android.camera.CameraLauncher","com.android.camera.CameraLauncher");
+migrateLauncherFavorite(db,"org.cyanogenmod.gello.browser","com.android.browser","com.android.browser.BrowserActivity","com.android.browser.BrowserActivity");
+migrateLauncherFavorite(db,"com.android.browser","org.cyanogenmod.gello.browser","com.android.browser.BrowserActivity","com.android.browser.BrowserActivity");
 }
 case 28:
 {
