@@ -92,15 +92,13 @@ if (!recreateWorkspaceTable(db)) {
 break;
 }
 case 22:
-{
+case 23:
 if (!addIntegerColumn(db,Favorites.OPTIONS,0)) {
 break;
 }
 if (!ensureRankColumn(db) || !updateFolderItemsRank(db,false)) {
 break;
 }
-}
-case 23:
 case 24:
 ManagedProfileHeuristic.markExistingUsersForNoFolderCreation(mContext);
 case 25:
@@ -118,17 +116,10 @@ migrateLauncherFavorite(db,"org.cyanogenmod.snap","com.android.camera2","com.and
 }
 case 28:
 {
-db.beginTransaction();
-try {
-db.execSQL("ALTER TABLE favorites " + "ADD COLUMN subType INTEGER DEFAULT 0;");
-db.setTransactionSuccessful();
-db.endTransaction();
+if (!ensureSubTypeColumn(db)) {
+break;
+}
 return;
-}
- catch (SQLException ex) {
-Log.e(TAG,ex.getMessage(),ex);
-db.endTransaction();
-}
 }
 }
 Log.w(TAG,"Destroying all old data.");
