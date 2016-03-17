@@ -1,0 +1,3 @@
+ITrackingAction action
+TrackingEvent.Category category
+List<TrackingEvent> eventList

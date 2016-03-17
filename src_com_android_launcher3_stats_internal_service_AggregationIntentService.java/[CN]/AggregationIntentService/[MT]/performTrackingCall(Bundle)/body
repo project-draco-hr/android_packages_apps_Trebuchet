@@ -1,3 +1,0 @@
-{
-  StatsUtil.sendEvent(this,bundle);
-}

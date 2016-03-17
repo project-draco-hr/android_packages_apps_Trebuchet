@@ -5,17 +5,12 @@
     if (eventList.size() < 1) {
       continue;
     }
-    for (    ITrackingAction action : TRACKED_ACTIONS) {
-      try {
-        for (        Bundle bundle : action.createTrackingBundles(TRACKING_ID,category,eventList)) {
-          performTrackingCall(bundle);
-        }
-      }
- catch (      NullPointerException e) {
-        Log.e(TAG,"NPE fetching bundle list!",e);
-      }
-catch (      IllegalArgumentException e) {
-        Log.e(TAG,"Illegal argument!",e);
+    if (category == TrackingEvent.Category.REMOTE_FOLDER) {
+      performTrackingCall(new RemoteFolderAction(),category,eventList);
+    }
+ else {
+      for (      ITrackingAction action : TRACKED_ACTIONS) {
+        performTrackingCall(action,category,eventList);
       }
     }
   }

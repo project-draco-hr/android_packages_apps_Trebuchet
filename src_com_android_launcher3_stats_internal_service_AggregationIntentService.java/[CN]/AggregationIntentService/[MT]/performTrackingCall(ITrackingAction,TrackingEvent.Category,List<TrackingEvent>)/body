@@ -1,0 +1,13 @@
+{
+  try {
+    for (    Bundle bundle : action.createTrackingBundles(TRACKING_ID,category,eventList)) {
+      StatsUtil.sendEvent(this,bundle);
+    }
+  }
+ catch (  NullPointerException e) {
+    Log.e(TAG,"NPE fetching bundle list!",e);
+  }
+catch (  IllegalArgumentException e) {
+    Log.e(TAG,"Illegal argument!",e);
+  }
+}
