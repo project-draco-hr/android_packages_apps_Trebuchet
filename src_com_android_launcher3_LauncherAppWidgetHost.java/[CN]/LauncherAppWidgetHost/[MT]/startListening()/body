@@ -3,10 +3,6 @@
     super.startListening();
   }
  catch (  Exception e) {
-    if (e.getCause() instanceof TransactionTooLargeException) {
-    }
- else {
-      throw new RuntimeException(e);
-    }
+    Log.e("LauncherAppWidgetHost","Error binding to IAppWidgetService",e);
   }
 }

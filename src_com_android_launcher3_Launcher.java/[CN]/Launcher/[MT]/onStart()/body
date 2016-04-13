@@ -4,4 +4,5 @@
   if (mLauncherCallbacks != null) {
     mLauncherCallbacks.onStart();
   }
+  onAppWidgetHostReset();
 }
