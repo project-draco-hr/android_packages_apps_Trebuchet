@@ -121,6 +121,10 @@ case 28:
 if (!ensureSubTypeColumn(db)) {
 break;
 }
+}
+case 29:
+{
+migrateLauncherFavorite(db,"com.cyngn.dialer","com.android.dialer","com.android.dialer.DialtactsActivity","com.android.dialer.DialtactsActivity");
 return;
 }
 }
