@@ -1,5 +1,0 @@
-{
-  if (mClient.isConnected()) {
-    AnalyticsServices.AnalyticsApi.sendEvent(mClient,event);
-  }
-}

@@ -1,7 +1,5 @@
 {
   super.onCreate();
-  mClient=new AmbientApiClient.Builder(this).addApi(AnalyticsServices.API).build();
-  mClient.connect();
   sLauncherStats=LauncherStats.getInstance(this);
   AggregationIntentService.scheduleService(this);
 }
