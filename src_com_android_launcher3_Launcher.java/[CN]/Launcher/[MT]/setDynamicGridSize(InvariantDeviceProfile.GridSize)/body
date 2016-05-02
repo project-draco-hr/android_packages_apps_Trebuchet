@@ -1,4 +1,5 @@
 {
+  if (size == null)   return;
   int gridSize=SettingsProvider.getIntCustomDefault(this,SettingsProvider.SETTINGS_UI_DYNAMIC_GRID_SIZE,0);
   boolean customValuesChanged=false;
   if (gridSize == size.getValue() && size == InvariantDeviceProfile.GridSize.Custom) {
