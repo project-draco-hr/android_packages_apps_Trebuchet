@@ -14,7 +14,7 @@
     float minScale=1.25f;
     int maxWidth=Math.min((int)(icon.getWidth() * minScale),size[0]);
     int[] previewSizeBeforeScale=new int[1];
-    preview=getWidgetPreviewLoader().generateWidgetPreview(mLauncher,createWidgetInfo.info,maxWidth,null,previewSizeBeforeScale);
+    preview=getWidgetPreviewLoader().generateWidgetPreview(mLauncher,createWidgetInfo.info,maxWidth,null,previewSizeBeforeScale,null);
     if (previewSizeBeforeScale[0] < icon.getWidth()) {
       int padding=(icon.getWidth() - previewSizeBeforeScale[0]) / 2;
       if (icon.getWidth() > image.getWidth()) {

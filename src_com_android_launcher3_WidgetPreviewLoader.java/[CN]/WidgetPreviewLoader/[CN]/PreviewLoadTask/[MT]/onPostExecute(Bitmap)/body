@@ -1,22 +1,12 @@
 {
-  mCaller.applyPreview(preview);
-  if (mVersions != null) {
-    mWorkerHandler.post(new Runnable(){
-      @Override public void run(){
-        if (!isCancelled()) {
-          writeToDb(mKey,mVersions,preview);
-          mBitmapToRecycle=preview;
-        }
- else {
-synchronized (mUnusedBitmaps) {
-            mUnusedBitmaps.add(preview);
-          }
-        }
-      }
-    }
-);
+  if (isCancelled())   return;
+  if (preview == null) {
+    PreviewLoadRequest request=mCaller.getActiveRequest();
+    if (request == null || request.mLoadTask != this)     return;
+    request.mGenerateTask=new PreviewGenerateTask(mKey,mInfo,mPreviewWidth,mPreviewHeight,mCaller,mUnusedBitmap);
+    request.mGenerateTask.execute();
   }
  else {
-    mBitmapToRecycle=preview;
+    applyPreviewIfActive(this,mCaller,preview);
   }
 }

@@ -1,8 +1,0 @@
-{
-  if (info instanceof LauncherAppWidgetProviderInfo) {
-    return generateWidgetPreview(launcher,(LauncherAppWidgetProviderInfo)info,previewWidth,recycle,null);
-  }
- else {
-    return generateShortcutPreview(launcher,(ResolveInfo)info,previewWidth,previewHeight,recycle);
-  }
-}

@@ -1,5 +1,5 @@
-Launcher launcher
+WidgetCacheKey key
 Object info
-Bitmap recycle
 int previewWidth
 int previewHeight
+WidgetCell caller

@@ -1,6 +1,6 @@
 {
   ContentValues values=new ContentValues();
-  values.put(CacheDb.COLUMN_COMPONENT,key.componentName.flattenToShortString());
+  values.put(CacheDb.COLUMN_COMPONENT,key.componentName.flattenToString());
   values.put(CacheDb.COLUMN_USER,mUserManager.getSerialNumberForUser(key.user));
   values.put(CacheDb.COLUMN_SIZE,key.size);
   values.put(CacheDb.COLUMN_PACKAGE,key.componentName.getPackageName());

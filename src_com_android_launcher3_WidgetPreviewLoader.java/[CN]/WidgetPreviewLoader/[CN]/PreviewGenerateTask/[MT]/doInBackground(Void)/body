@@ -1,0 +1,7 @@
+{
+  if (isCancelled())   return null;
+  mVersions=getPackageVersion(mKey.componentName.getPackageName());
+  Launcher launcher=(Launcher)mCaller.getContext();
+  if (isCancelled())   return null;
+  return generatePreview(launcher,mInfo,mUnusedBitmap,mPreviewWidth,mPreviewHeight,this);
+}

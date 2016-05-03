@@ -1,4 +1,5 @@
 {
+  if (task != null && task.isCancelled())   return null;
   final Canvas c=new Canvas();
   if (preview == null) {
     preview=Bitmap.createBitmap(maxWidth,maxHeight,Config.ARGB_8888);
@@ -11,6 +12,7 @@
     c.setBitmap(preview);
     c.drawColor(0,PorterDuff.Mode.CLEAR);
   }
+  if (task != null && task.isCancelled())   return null;
   Drawable icon=mutateOnMainThread(mIconCache.getFullResIcon(info.activityInfo));
   icon.setFilterBitmap(true);
   ColorMatrix colorMatrix=new ColorMatrix();
@@ -24,6 +26,7 @@
   int scaledIconWidth=(maxWidth - paddingLeft - paddingRight);
   icon.setBounds(paddingLeft,paddingTop,paddingLeft + scaledIconWidth,paddingTop + scaledIconWidth);
   icon.draw(c);
+  if (task != null && task.isCancelled())   return null;
   int appIconSize=launcher.getDeviceProfile().iconSizePx;
   icon.setAlpha(255);
   icon.setColorFilter(null);

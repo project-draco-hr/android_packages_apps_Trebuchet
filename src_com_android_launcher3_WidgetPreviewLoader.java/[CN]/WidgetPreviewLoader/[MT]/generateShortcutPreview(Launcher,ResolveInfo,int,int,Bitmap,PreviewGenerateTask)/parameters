@@ -3,3 +3,4 @@ ResolveInfo info
 int maxWidth
 int maxHeight
 Bitmap preview
+PreviewGenerateTask task

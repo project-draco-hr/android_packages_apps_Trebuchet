@@ -1,6 +1,6 @@
 {
   if (mActiveRequest != null) {
-    return;
+    mActiveRequest.cleanup();
   }
   int[] size=getPreviewSize();
   if (DEBUG) {

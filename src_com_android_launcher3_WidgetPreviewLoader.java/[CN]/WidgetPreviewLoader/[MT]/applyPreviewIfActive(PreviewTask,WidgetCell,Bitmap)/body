@@ -1,0 +1,6 @@
+{
+  PreviewLoadRequest request=caller.getActiveRequest();
+  if (request != null && (request.mLoadTask == task || request.mGenerateTask == task)) {
+    caller.applyPreview(preview);
+  }
+}

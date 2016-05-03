@@ -1,28 +1,17 @@
 {
-  Bitmap unusedBitmap=null;
-  if (isCancelled()) {
-    return null;
-  }
+  if (isCancelled())   return null;
 synchronized (mUnusedBitmaps) {
     for (    Bitmap candidate : mUnusedBitmaps) {
       if (candidate != null && candidate.isMutable() && candidate.getWidth() == mPreviewWidth && candidate.getHeight() == mPreviewHeight) {
-        unusedBitmap=candidate;
-        mUnusedBitmaps.remove(unusedBitmap);
+        mUnusedBitmap=candidate;
+        mUnusedBitmaps.remove(mUnusedBitmap);
         break;
       }
     }
   }
-  if (unusedBitmap == null) {
-    unusedBitmap=Bitmap.createBitmap(mPreviewWidth,mPreviewHeight,Config.ARGB_8888);
+  if (mUnusedBitmap == null) {
+    mUnusedBitmap=Bitmap.createBitmap(mPreviewWidth,mPreviewHeight,Config.ARGB_8888);
   }
-  if (isCancelled()) {
-    return unusedBitmap;
-  }
-  Bitmap preview=readFromDb(mKey,unusedBitmap,this);
-  if (!isCancelled() && preview == null) {
-    mVersions=getPackageVersion(mKey.componentName.getPackageName());
-    Launcher launcher=(Launcher)mCaller.getContext();
-    preview=generatePreview(launcher,mInfo,unusedBitmap,mPreviewWidth,mPreviewHeight);
-  }
-  return preview;
+  if (isCancelled())   return null;
+  return readFromDb(mKey,mUnusedBitmap,this);
 }

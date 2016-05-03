@@ -1,0 +1,6 @@
+WidgetCacheKey key
+Object info
+int previewWidth
+int previewHeight
+WidgetCell caller
+Bitmap unusedBitmap
