@@ -1,10 +1,9 @@
 {
   super.onCreate(savedInstanceState);
-  mLoaderThread=new HandlerThread("wallpaper_loader");
-  mLoaderThread.start();
-  mLoaderHandler=new Handler(mLoaderThread.getLooper(),this);
-  init();
-  if (!enableRotation()) {
-    setRequestedOrientation(Configuration.ORIENTATION_PORTRAIT);
+  if (!hasStoragePermissions()) {
+    requestStoragePermissions();
+  }
+ else {
+    load();
   }
 }
