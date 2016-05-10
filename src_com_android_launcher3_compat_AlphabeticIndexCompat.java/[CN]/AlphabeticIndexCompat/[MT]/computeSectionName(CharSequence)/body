@@ -1,20 +1,25 @@
 {
   String s=Utilities.trim(cs);
   String sectionName=getBucketLabel(getBucketIndex(s));
-  if (Utilities.trim(sectionName).isEmpty() && s.length() > 0) {
-    int c=s.codePointAt(0);
-    boolean startsWithDigit=Character.isDigit(c);
-    if (startsWithDigit) {
-      return "#";
+  if (Utilities.trim(sectionName).isEmpty()) {
+    if (s.length() > 0) {
+      int c=s.codePointAt(0);
+      boolean startsWithDigit=Character.isDigit(c);
+      if (startsWithDigit) {
+        return "#";
+      }
+ else {
+        boolean startsWithLetter=Character.isLetter(c);
+        if (startsWithLetter) {
+          return mDefaultMiscLabel;
+        }
+ else {
+          return MID_DOT;
+        }
+      }
     }
  else {
-      boolean startsWithLetter=Character.isLetter(c);
-      if (startsWithLetter) {
-        return mDefaultMiscLabel;
-      }
- else {
-        return MID_DOT;
-      }
+      return MID_DOT;
     }
   }
   return sectionName;
