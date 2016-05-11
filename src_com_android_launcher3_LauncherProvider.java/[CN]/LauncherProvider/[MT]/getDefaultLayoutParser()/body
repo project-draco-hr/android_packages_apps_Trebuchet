@@ -1,4 +1,33 @@
 {
+  String mcc=SystemProperties.get(MCC_PROP_NAME);
+  Resources customResources=null;
+  if (!TextUtils.isEmpty(mcc)) {
+    if (LOGD)     Log.d(TAG,"mcc: " + mcc);
+    Configuration tempConfiguration=new Configuration(getContext().getResources().getConfiguration());
+    boolean shouldUseTempConfig=false;
+    try {
+      tempConfiguration.mcc=Integer.parseInt(mcc);
+      shouldUseTempConfig=true;
+    }
+ catch (    NumberFormatException e) {
+      Log.e(TAG,"Unable to parse mcc",e);
+    }
+    if (shouldUseTempConfig) {
+      String publicSrcDir=null;
+      try {
+        String packageName=getContext().getPackageName();
+        publicSrcDir=getContext().getPackageManager().getApplicationInfo(packageName,0).publicSourceDir;
+      }
+ catch (      PackageManager.NameNotFoundException e) {
+        Log.e(TAG,"Failed getting source dir",e);
+      }
+      AssetManager assetManager=new AssetManager();
+      if (!TextUtils.isEmpty(publicSrcDir)) {
+        assetManager.addAssetPath(publicSrcDir);
+      }
+      customResources=new Resources(assetManager,new DisplayMetrics(),tempConfiguration);
+    }
+  }
   int defaultLayout=LauncherAppState.getInstance().getInvariantDeviceProfile().defaultLayoutId;
-  return new DefaultLayoutParser(getContext(),mOpenHelper.mAppWidgetHost,mOpenHelper,getContext().getResources(),defaultLayout);
+  return new DefaultLayoutParser(getContext(),mOpenHelper.mAppWidgetHost,mOpenHelper,customResources != null ? customResources : getContext().getResources(),defaultLayout);
 }
