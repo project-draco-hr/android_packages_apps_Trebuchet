@@ -33,4 +33,5 @@
   }
   mWorkspace.stripEmptyScreens();
   sRemoteFolderManager.bindFinished();
+  bindSearchProviderChanged();
 }
