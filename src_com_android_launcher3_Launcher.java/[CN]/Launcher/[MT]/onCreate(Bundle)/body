@@ -29,6 +29,7 @@
     android.os.Debug.startMethodTracing(Environment.getExternalStorageDirectory() + "/launcher");
   }
   setContentView(R.layout.launcher);
+  updateHiddenMenuOption();
   setupViews();
   mDeviceProfile.layout(this);
   lockAllApps();

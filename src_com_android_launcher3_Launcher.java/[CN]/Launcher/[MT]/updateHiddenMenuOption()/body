@@ -1,0 +1,10 @@
+{
+  boolean option=SystemProperties.getBoolean(PROPERTY_SHOW_TREB_HIDDEN,false);
+  if (option == mIsHiddenMenuOptionEnabled) {
+    return false;
+  }
+ else {
+    mIsHiddenMenuOptionEnabled=option;
+    return true;
+  }
+}

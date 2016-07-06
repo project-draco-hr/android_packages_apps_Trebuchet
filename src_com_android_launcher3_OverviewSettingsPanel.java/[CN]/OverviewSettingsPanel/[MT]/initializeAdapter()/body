@@ -3,7 +3,13 @@
   mListView.setOverScrollMode(ListView.OVER_SCROLL_NEVER);
   Resources res=mLauncher.getResources();
   String[] headers=new String[]{res.getString(R.string.home_screen_settings),res.getString(R.string.drawer_settings),res.getString(R.string.app_settings)};
-  String[] valuesApp=new String[]{res.getString(R.string.larger_icons_text),res.getString(R.string.protected_app_settings)};
+  String[] valuesApp=null;
+  if (mLauncher.getIsHiddenMenuOptionEnabled() == false) {
+    valuesApp=new String[]{res.getString(R.string.larger_icons_text),res.getString(R.string.protected_app_settings)};
+  }
+ else {
+    valuesApp=new String[]{res.getString(R.string.larger_icons_text),res.getString(R.string.protected_app_settings),res.getString(R.string.export_workspace_layout)};
+  }
   mSettingsAdapter=new SettingsPinnedHeaderAdapter(mLauncher);
   mSettingsAdapter.setHeaders(headers);
   mSettingsAdapter.addPartition(false,true);

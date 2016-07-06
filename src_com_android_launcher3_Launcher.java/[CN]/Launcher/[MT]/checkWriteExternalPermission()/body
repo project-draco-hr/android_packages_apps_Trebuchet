@@ -1,0 +1,9 @@
+{
+  int result=ContextCompat.checkSelfPermission(this,Manifest.permission.WRITE_EXTERNAL_STORAGE);
+  if (result == PackageManager.PERMISSION_GRANTED) {
+    return true;
+  }
+ else {
+    return false;
+  }
+}

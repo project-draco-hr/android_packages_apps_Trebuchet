@@ -1,0 +1,6 @@
+{
+  if (mExportedLauncherDB != null && mExportedLauncherDB.exists()) {
+    mExportedLauncherDB.delete();
+  }
+  mExportedLauncherDB=null;
+}

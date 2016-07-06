@@ -14,6 +14,15 @@
       Toast.makeText(this,getString(R.string.msg_no_phone_permission,getString(R.string.app_name)),Toast.LENGTH_SHORT).show();
     }
   }
+ else   if (requestCode == PERMISSION_REQUEST_CODE_EXPORT_DB) {
+    if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+      exportDBFile();
+      emailExportedFile();
+    }
+ else {
+      Toast.makeText(this,getString(R.string.export_db_could_not) + ". " + getString(R.string.storage_permission_denied),Toast.LENGTH_LONG).show();
+    }
+  }
   if (mLauncherCallbacks != null) {
     mLauncherCallbacks.onRequestPermissionsResult(requestCode,permissions,grantResults);
   }

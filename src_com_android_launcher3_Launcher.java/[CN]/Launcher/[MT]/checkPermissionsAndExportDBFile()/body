@@ -1,0 +1,8 @@
+{
+  if (checkWriteExternalPermission() == false) {
+    requestWriteExternalPermission();
+  }
+ else {
+    exportDBFile();
+  }
+}

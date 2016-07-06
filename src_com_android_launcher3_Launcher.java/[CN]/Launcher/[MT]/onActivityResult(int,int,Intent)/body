@@ -1,5 +1,10 @@
 {
-  handleActivityResult(requestCode,resultCode,data);
+  if (requestCode == EMAIL_DB_FILE_CODE) {
+    deleteExportedLauncerDB();
+  }
+ else {
+    handleActivityResult(requestCode,resultCode,data);
+  }
   if (mLauncherCallbacks != null) {
     mLauncherCallbacks.onActivityResult(requestCode,resultCode,data);
   }
